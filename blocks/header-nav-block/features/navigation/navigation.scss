@@ -1,0 +1,42 @@
+.news-theme-navigation {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px grey;
+
+  * {
+    font-family: $theme-nav-font;
+  }
+
+  .nav-search, .nav-sections {
+    background-color: $theme-nav-color;
+    margin: 0 5px;
+    height: 80%;
+    border: 0;
+    border-radius: 5%;
+
+    > img {
+      fill: white;
+    }
+  }
+
+  .nav-sections {
+    display: flex;
+    align-items: center;
+    
+    > span, > img {
+      flex: 0;
+    }
+
+    > span {
+      color: white;
+      font-size: 14px;
+      padding: 0 8px;
+    }
+  }
+
+  > img {
+    flex: 1;
+    height: 90%;
+  }
+}

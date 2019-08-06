@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "blocks/*",
+    "components/*"
+  ],
+  "version": "independent"
+}

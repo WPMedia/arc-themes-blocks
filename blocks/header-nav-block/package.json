@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "homepage": "",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
@@ -13,9 +13,7 @@
     "access": "restricted"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "devDependencies": {
-    "eslint": "^6.1.0"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
   }
 }

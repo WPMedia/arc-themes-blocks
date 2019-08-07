@@ -7,7 +7,9 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
-    "features"
+    "features",
+    "chains",
+    "layouts"
   ],
   "publishConfig": {
     "access": "restricted"

@@ -90,7 +90,7 @@ Knowing the quirks of publishing a subpackage of this monorepo to a registry is 
 A few key things to know:
 
 * This repo manages each package version _independently_ meaning you'll need to know the right semver choice for each version change.
-* If you want to publish one of our subpackages and there's another subpackage in the repo that has committed changes, you will be _required_ to publish a new version of those other patches. So do not start a `lerna publish` unless you are in a place where you can publish all of those other unpublished subpackages.
+* If you want to publish one of our subpackages and there's another subpackage in the repo that has committed and unpublished changes, you will be _required_ to publish a new version of those other subpackages. So do not start a `lerna publish` unless you are in a place where you can publish all of those other unpublished subpackages.
 * You'll need to specify the name of the package scope in the `name` field of the `package.json` order for the package to be published for that scope.
 
 ## License

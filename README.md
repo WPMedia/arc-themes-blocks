@@ -38,7 +38,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
 ```json
 {
   "name": "@arc-test-org/header-nav-block",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -59,10 +59,11 @@ The structure of blocks is largely incompatible with what lerna generates in thi
 }
 ```
 
-Note two things here:
+Note three things here:
 
-1. The `files` consists of three directories: `features`, `chains`, and `layouts`. These are the three types of components blocks currently support. You'll want to delete the `lib` and `__tests__` directories from your repo as well as the `files` list.
-2. There is a `lint` script in the `scripts`. This script is run with `npx lerna run lint` at the root although it can also be run with `npm run lint` if the package root is your working directory.
+1. The initial version is set to `0.0.0`. This is because on your initial commit you are going to choose the first version you want to publish. Otherwise, it will default to `1.0.0` and then you'll need to bump up the package version no matter what once you publish.
+2. The `files` consists of three directories: `features`, `chains`, and `layouts`. These are the three types of components blocks currently support. You'll want to delete the `lib` and `__tests__` directories from your repo as well as the `files` list.
+3. There is a `lint` script in the `scripts`. This script is run with `npx lerna run lint` at the root although it can also be run with `npm run lint` if the package root is your working directory.
 
 ### Installing `node_modules`
 

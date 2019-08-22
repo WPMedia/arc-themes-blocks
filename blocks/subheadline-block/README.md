@@ -1,9 +1,9 @@
-# `@arc-test-org/headline-block`
+# `@arc-test-org/subheadline-block`
 
-Fusion News Theme headline block
+Fusion News Theme sub-headline block
 
 ## Usage
 
 ```
-const headlineBlock = require('@arc-test-org/headline-block');
+const headlineBlock = require('@arc-test-org/subheadline-block');
 ```

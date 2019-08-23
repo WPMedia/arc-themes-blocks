@@ -19,6 +19,12 @@ $ npx lerna list
 # lerna prints a list of all packages in our monorepo
 ```
 
+### Testing a package
+
+As of writing, current pattern is to write your unit tests alongside the files you're testing. If you're testing `default.jsx`, your tests would be in the same directory in a file called `default.test.jsx`.
+
+We're using Jest as our test runner and Enzyme as our testing tool for testing React components. Not only will you have the standard Jest assertion available to you. You'll also have all of assertion matchers provided by [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme).
+
 ### Creating a new package
 
 #### New block

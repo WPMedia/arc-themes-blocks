@@ -24,6 +24,7 @@ module.exports = {
     'jsx-a11y'
   ],
   rules: {
+    'global-require': 'off',
     'no-underscore-dangle': ['error', { allow: ['_website', '_id'] }],
     'import/no-extraneous-dependencies': 'off', // This might be fine. It's worth looking into at the very least.
     'import/no-unresolved': [2, { ignore: ['react', '^fusion:.+$'] }],

@@ -6,11 +6,10 @@ import './subheadline.scss';
 const SubHeadline = ({ customFields }) => {
   const { globalContent: content } = useComponentContext();
   const { includeSubHeadline = true } = customFields;
+
   return (
-    includeSubHeadline && (
-      <h2 className="sub-headline">
-        {(content && content.subheadlines && content.subheadlines.basic) || ''}
-      </h2>
+    (includeSubHeadline && content && content.subheadlines && content.subheadlines.basic) && (
+      <h2 className="sub-headline" dangerouslySetInnerHTML={{ _html: content.subheadlines.basic }} />
     )
   );
 };

@@ -6,11 +6,10 @@ import './headline.scss';
 const Headline = ({ customFields }) => {
   const { globalContent: content } = useComponentContext();
   const { includeHeadline = true } = customFields;
+
   return (
-    includeHeadline && (
-    <h1 className="headline">
-      {(content && content.headlines && content.headlines.basic) || ''}
-    </h1>
+    (includeHeadline && content && content.headlines && content.headlines.basic) && (
+      <h1 className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} />
     )
   );
 };

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import './subheadline.scss';
 
 const SubHeadline = ({ customFields }) => {
-  const componentContext = useComponentContext();
-  const content = componentContext.globalContent;
+  const { globalContent: content } = useComponentContext();
   const { includeSubHeadline = true } = customFields;
   return (
     includeSubHeadline && (

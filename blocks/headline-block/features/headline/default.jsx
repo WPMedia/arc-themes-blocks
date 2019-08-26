@@ -6,7 +6,7 @@ import './headline.scss';
 const Headline = ({ customFields }) => {
   const componentContext = useComponentContext();
   const content = componentContext.globalContent;
-  const { includeHeadline } = customFields;
+  const { includeHeadline = true } = customFields;
   return (
     includeHeadline && (
     <h1 className="headline">

@@ -6,7 +6,7 @@ import './subheadline.scss';
 const SubHeadline = ({ customFields }) => {
   const componentContext = useComponentContext();
   const content = componentContext.globalContent;
-  const { includeSubHeadline } = customFields;
+  const { includeSubHeadline = true } = customFields;
   return (
     includeSubHeadline && (
       <h2 className="sub-headline">

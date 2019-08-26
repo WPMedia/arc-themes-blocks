@@ -1,9 +1,25 @@
-import React, { Component } from 'react';
-import Theme from 'fusion:themes';
+import React from 'react';
+import { useComponentContext } from 'fusion:context';
+import PropTypes from 'prop-types';
 import './headline.scss';
 
-export default ({children}) => {
-  return  (
-    <h1 className="headline">{children}</h1>
+const Headline = ({ customFields }) => {
+  const componentContext = useComponentContext();
+  const content = componentContext.globalContent;
+  const { includeHeadline } = customFields;
+  return (
+    includeHeadline && (
+    <h1 className="headline">
+      {(content && content.headlines && content.headlines.basic) || ''}
+    </h1>
+    )
   );
 };
+
+Headline.propTypes = {
+  customFields: PropTypes.shape({
+    includeHeadline: PropTypes.bool,
+  }),
+};
+
+export default Headline;

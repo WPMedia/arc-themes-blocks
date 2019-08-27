@@ -3,7 +3,7 @@ const { shallow } = require('enzyme');
 
 jest.mock('fusion:themes', () => ({}));
 
-describe('the header navigation feature', () => {
+describe('the header navigation feature for the default output type', () => {
   it('should be a nav element', () => {
     const { default: Navigation } = require('./default');
     const wrapper = shallow(<Navigation />);

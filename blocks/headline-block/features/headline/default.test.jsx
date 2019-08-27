@@ -1,7 +1,7 @@
 const React = require('react');
 const { shallow } = require('enzyme');
 
-describe('the headline feature', () => {
+describe('the headline feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();
   });

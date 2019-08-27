@@ -8,8 +8,8 @@ const SubHeadline = ({ customFields }) => {
   const { includeSubHeadline = true } = customFields;
 
   return (
-    (includeSubHeadline && content && content.subheadlines && content.subheadlines.basic) && (
-      <h2 className="sub-headline" dangerouslySetInnerHTML={{ _html: content.subheadlines.basic }} />
+    !!(includeSubHeadline && content && content.subheadlines && content.subheadlines.basic) && (
+      <h2 className="sub-headline" dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
     )
   );
 };

@@ -8,7 +8,7 @@ const Headline = ({ customFields }) => {
   const { includeHeadline = true } = customFields;
 
   return (
-    (includeHeadline && content && content.headlines && content.headlines.basic) && (
+    !!(includeHeadline && content && content.headlines && content.headlines.basic) && (
       <h1 className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} />
     )
   );

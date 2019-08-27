@@ -15,7 +15,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   plugins: [
@@ -31,6 +31,7 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/prop-types': 'off', // We will want to be more granular with this I assume.
     'react/require-default-props': 'off', // We will also want to have some rules around this. Whitelisting certain props for example
+    'react/no-danger': 'off',
     //For list of a11y definitions for this see: https://github.com/evcohen/eslint-plugin-jsx-a11y
     'jsx-a11y/accessible-emoji': 2,
     'jsx-a11y/alt-text': 2,

@@ -6,6 +6,7 @@ module.exports = {
         ['module-resolver', {
           alias: {
             'fusion:themes': './jest/mocks/themes.js',
+            'fusion:context': './jest/mocks/context.js',
           },
         }],
       ],

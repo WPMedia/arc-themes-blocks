@@ -6,10 +6,6 @@ module.exports = {
     // Jest doesn't have an option to ignore those errors.
   ],
   coverageDirectory: '<rootDir>/coverage',
-  coveragePathIgnorePatterns: [
-    '/node_modules/',
-    '**/*.svg',
-  ],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -17,4 +13,10 @@ module.exports = {
       lines: 80,
     },
   },
+  collectCoverageFrom: [
+    '**/(features|chains|layouts|output-types)/**/*.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/images/*.svg',
+  ],
 };

@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import htmlparser from 'htmlparser2';
-import HtmlSafe from '../../../../_shared/partials/html-safe';
+import HtmlSafe from '../shared/html-safe';
 
 class EmbedWrapper extends PureComponent {
   constructor(props) {

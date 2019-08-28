@@ -17,5 +17,9 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "htmlparser2": "^3.10.1",
+    "sanitize-html": "^1.18.2"
   }
 }

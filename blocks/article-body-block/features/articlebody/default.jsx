@@ -3,16 +3,18 @@
 /* eslint-disable react/no-typos */
 import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
+import Theme from 'fusion:themes';
 import PropTypes from 'prop-types';
 import './articlebody.scss';
 import Body from './render';
+
 
 @Consumer
 class ArticleBody extends Component {
   render() {
     const { globalContent: content, customFields } = this.props;
     return (
-      <Body data={content} params={customFields} />
+      <Body data={content} params={customFields} correctionTitle={Theme.correctionTitle} />
     );
   }
 }

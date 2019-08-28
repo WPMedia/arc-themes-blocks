@@ -11,7 +11,7 @@ import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 
 const Body = ({ className, data: items, ...props }) => {
-  const { params } = props;
+  const { params, correctionTitle } = props;
   const {
     inheritGlobalContent,
   } = params;
@@ -103,8 +103,10 @@ const Body = ({ className, data: items, ...props }) => {
       case 'correction': {
         return (item.text && item.text.length > 0) ? (
           <Fragment key={key}>
-            <p className="correction">{item.text}</p>
-            <hr />
+            <section className="correction">
+              <h3>{correctionTitle}</h3>
+              {item.text}
+            </section>
           </Fragment>
         ) : null;
       }

@@ -7,7 +7,6 @@ export default ({ element }) => {
 
   return (
     <blockquote
-      className="blockquote"
       cite={element.citation && element.citation.content}
       dangerouslySetInnerHTML={{ __html: quote }}
     />

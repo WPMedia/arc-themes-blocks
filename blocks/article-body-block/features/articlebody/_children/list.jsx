@@ -1,5 +1,5 @@
 import React from 'react';
-import unescapeHtml from '../../../../_shared/arc/unescape-html';
+import unescapeHtml from '../shared/unescape-html';
 
 const List = (props) => {
   const { listType, listItems } = props;

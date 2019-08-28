@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Heading = ({ element }) => {
   const defaultHeaderLevel = 2;
   const HeadingLevel = `h${element.level ? element.level : defaultHeaderLevel}`;

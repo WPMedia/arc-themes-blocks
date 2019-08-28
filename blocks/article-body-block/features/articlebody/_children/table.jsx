@@ -1,5 +1,5 @@
 import React from 'react';
-import unescapeHtml from '../../../../_shared/arc/unescape-html';
+import unescapeHtml from '../shared/unescape-html';
 
 const Table = ({ element }) => {
   const { header, rows } = element;

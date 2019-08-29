@@ -1,8 +1,8 @@
 {
   "name": "@arc-test-org/date-block",
   "version": "1.0.0",
-  "description": "Fusion News Theme header nav block",
-  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
+  "description": "Fusion News Theme date block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",

@@ -1,11 +1,9 @@
 # `@arc-test-org/date-block`
 
-> TODO: description
+Fusion News Theme date block
 
 ## Usage
 
 ```
 const dateBlock = require('@arc-test-org/date-block');
-
-// TODO: DEMONSTRATE API
 ```

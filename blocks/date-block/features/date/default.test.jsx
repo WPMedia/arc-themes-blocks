@@ -7,11 +7,9 @@ describe('Given the display time from ANS, it should convert to the proper timez
   it('should return proper long form with correctly converted timezone', () => {
     const { default: ArticleDate } = require('./default');
     const display_date = '2019-08-11T16:45:33.209Z';
-    const globalContent = {
-        display_date
-    };
-
-    const wrapper = render(<ArticleDate globalContent={globalContent} />);
+    const globalContent = { display_date };
+    const customFields = { blockDisplay: true }
+    const wrapper = render(<ArticleDate globalContent={globalContent} customFields={customFields} />);
 
     const testDate = new Date(display_date)
       .toLocaleString("default", {
@@ -31,11 +29,10 @@ describe('Given the display time from ANS, it should convert to the proper timez
   it('should return a blank string if the display_time is an invalid timestring', () => {
     const { default: ArticleDate } = require('./default');
     const display_date = 'invalid time string';
-    const globalContent = {
-        display_date
-    };
+    const globalContent = { display_date };
+    const customFields = { blockDisplay: true }
 
-    const wrapper = render(<ArticleDate globalContent={globalContent} />);
+    const wrapper = render(<ArticleDate globalContent={globalContent} customFields={customFields} />);
 
     expect(wrapper.text()).toEqual('');
   });

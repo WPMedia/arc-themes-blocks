@@ -1,4 +1,11 @@
-.date {
-    color: grey;
+.date-inline {
+    color: $theme-date-font-color;
     font-family: $theme-date-font-family;
+    display: inline;
+}
+
+.date-inline {
+    color: $theme-date-font-color;
+    font-family: $theme-date-font-family;
+    display: block;
 }

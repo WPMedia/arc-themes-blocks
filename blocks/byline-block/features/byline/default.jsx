@@ -66,7 +66,7 @@ class ArticleByline extends Component {
             bylineString = `${bylineString}${authors[i]}, `;
           }
 
-          // Add last two authors in Oxford comma style
+          // Add last two authors in without using comma
           bylineString = `${bylineString}${authors[numAuthors - 2]} and ${authors[numAuthors - 1]}</p>`;
         }
 

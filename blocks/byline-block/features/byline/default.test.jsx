@@ -1,5 +1,5 @@
 const React = require('react');
-const { shallow, render } = require('enzyme');
+const { shallow } = require('enzyme');
 
 jest.mock('fusion:themes', () => ({}));
 

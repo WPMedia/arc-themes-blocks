@@ -44,29 +44,36 @@ class ArticleByline extends Component {
     const numAuthors = authors.length;
 
     // This will be an innerHTML to accommodate potential multiple anchor tags within the section
-    let bylineString = '<p> By ';
+    // Leave it empty so that if there's no author with listed name it would just return blank string
+    let bylineString = '';
 
     // Depending on how many authors there are, change style accordingly
     switch (numAuthors) {
       case 1: {
-        bylineString += `${authors[0]} </p>`;
+        bylineString += `<p> By ${authors[0]} </p>`;
         break;
       }
       case 2: {
-        bylineString = `${authors[0]} and ${authors[1]}</p>`;
+        bylineString = `<p> By ${authors[0]} and ${authors[1]}</p>`;
         break;
       }
       default: {
-        // Iterate through each of the authors until the last two
-        for (let i = 0; i < numAuthors - 2; i += 1) {
-          bylineString = `${bylineString}${authors[i]}, `;
+        if (numAuthors > 2) {
+          bylineString = '<p> By ';
+
+          // Iterate through each of the authors until the last two
+          for (let i = 0; i < numAuthors - 2; i += 1) {
+            bylineString = `${bylineString}${authors[i]}, `;
+          }
+
+          // Add last two authors in Oxford comma style
+          bylineString = `${bylineString}${authors[numAuthors - 2]} and ${authors[numAuthors - 1]}</p>`;
         }
 
-        // Add last two authors in Oxford comma style
-        bylineString = `${bylineString}${authors[numAuthors - 2]} and ${authors[numAuthors - 1]}</p>`;
         break;
       }
     }
+
     return (
       // eslint-disable-next-line react/no-danger
       <section className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />

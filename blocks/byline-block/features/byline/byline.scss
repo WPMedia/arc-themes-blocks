@@ -1,9 +1,9 @@
 .byline {
   p {
-    color: gray;
+    color: $theme-byline-font-color;
   }
   a {
-    color: gray;
+    color: $theme-byline-font-color;
     text-decoration: none;
    }
    a:hover {

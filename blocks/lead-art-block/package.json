@@ -15,7 +15,7 @@
     "access": "restricted"
   },
   "dependencies": {
-    "@arc-test-org/image": "^1.0.2",
+    "@arc-test-org/image": "^1.0.5",
     "@arc-test-org/lightbox": "^1.0.4"
   },
   "scripts": {

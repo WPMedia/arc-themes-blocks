@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import Lightbox from '@arc-test-org/lightbox';
-import Image from '@arc-test-org/image';
+import Image from '@arc-test-org/image/lib/image';
 import './leadart.scss';
 import fullScreenLogo from './images/full-screen.svg';
 

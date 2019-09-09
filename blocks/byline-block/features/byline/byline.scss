@@ -1,0 +1,12 @@
+.byline {
+  p {
+    color: $theme-byline-font-color;
+  }
+  a {
+    color: $theme-byline-font-color;
+    text-decoration: none;
+   }
+   a:hover {
+    text-decoration:underline;
+   }
+}

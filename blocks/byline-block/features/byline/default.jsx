@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
 import './byline.scss';
@@ -10,7 +8,7 @@ class ArticleByline extends Component {
     super(props);
 
     // Inherit global content
-    const { globalContent: content } = this.props;
+    const { globalContent: content } = props;
     const { credits } = content;
 
     this.state = {
@@ -28,14 +26,10 @@ class ArticleByline extends Component {
         const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
 
         // If the author has a url to their bio page, return an anchor tag to the bio.
-        // If not, just return the string.
+        // If not, just return the string. Those without name will not be included in the byline
         if (hasName) {
           return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
         }
-
-        // Debugging in case they do not have a name.
-        // Those without name will not be included in the byline
-        console.log(`The author id ${author._id} does not have a name`);
       }
 
       return null;
@@ -44,7 +38,7 @@ class ArticleByline extends Component {
     const numAuthors = authors.length;
 
     // This will be an innerHTML to accommodate potential multiple anchor tags within the section
-    // Leave it empty so that if there's no author with listed name it would just return blank string
+    // Leave it empty so that if there's no author with listed name it would just return '' string
     let bylineString = '';
 
     // Depending on how many authors there are, change style accordingly

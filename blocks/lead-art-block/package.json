@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/lead-art-block",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -15,8 +15,8 @@
     "access": "restricted"
   },
   "dependencies": {
-    "@arc-test-org/lightbox": "^1.0.4",
-    "@arc-test-org/image": "^1.0.2"
+    "@arc-test-org/image": "^1.0.2",
+    "@arc-test-org/lightbox": "^1.0.4"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

@@ -1,3 +1,7 @@
+$mobile-breakpoint: 480px;
+$tablet-breakpoint: 700px;
+
+
 .lead-art-wrapper {
     width: 100%;
     height: auto;
@@ -15,9 +19,20 @@
     }
 
     figcaption{
-        color:#7F8C8D;
-        font-size: 14px;
-        line-height: 20px;
+        font-family: $theme-lead-art-font-family;
+        font-size: $theme-lead-art-font-size; //14px;
+        line-height: $theme-lead-art-line-height; //20px;
+        color: $theme-lead-art-color; //#7F8C8D
+
+        @media screen and (max-width: $mobile-breakpoint){
+            font-size: $theme-lead-art-font-size-mobile;
+            line-height: $theme-lead-art-line-height-mobile;
+        }
+
+        @media screen and (max-width: $tablet-breakpoint) {
+            font-size: $theme-lead-art-font-size-tablet;
+            line-height: $theme-lead-art-line-height-tablet;
+        }
     }
 
     button.lead-art-fullscreen {

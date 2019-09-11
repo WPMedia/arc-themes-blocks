@@ -14,6 +14,6 @@ export default () => (
       <span>Sections</span>
       <img src={navHamburger} alt="Navigation bar sections" />
     </button>
-    <img src={Theme.navLogo || placeholderLogo} alt={Theme.navLogoAlt || 'Navigation bar logo'} />
+    <img src={Theme.primaryLogo || placeholderLogo} alt={Theme.primaryLogoAlt || 'Navigation bar logo'} />
   </nav>
 );

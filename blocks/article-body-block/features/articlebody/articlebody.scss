@@ -2,10 +2,10 @@ $mobile-breakpoint: 480px;
 $tablet-breakpoint: 700px;
 
 .article-body{
-  font-family: $theme-article-body-font-family;
-  font-size: $theme-article-body-font-size;
-  line-height: $theme-article-body-line-height;
-  color: $theme-article-body-color;
+  font-family: $theme-secondary-font-family;
+  font-size: 18px;
+  color:  #000A12;
+  line-height:  24px;
   margin: 1em;
 
   h1, h2, h3, h4, h5, h6, p, ol, ul, blockquote, table, .correction, div, section, article{
@@ -13,72 +13,72 @@ $tablet-breakpoint: 700px;
   }
 
   @media screen and (max-width: $mobile-breakpoint){
-    font-size: $theme-article-body-font-size-mobile;
-    line-height: $theme-article-body-line-height-mobile;
+    font-size: 18px;
+    line-height: 24px;
   }
 
   @media screen and (max-width: $tablet-breakpoint) {
-    font-size: $theme-article-body-font-size-tablet;
-    line-height: $theme-article-body-line-height-tablet;
+    font-size: 18px;
+    line-height: 24px;
   }
 
   h1, h2, h3, h4, h5, h6{
     font-family: $theme-primary-font-family;
-    font-size: $theme-article-body-h1-font-size;
-    color: $theme-article-body-h1-font-color;
-    font-style: $theme-article-body-h1-font-style;
-    text-decoration: $theme-article-body-h1-text-decoration;
-    line-height: $theme-article-body-h1-line-height;
-    text-transform: $theme-article-body-h1-text-transform;
-    font-weight: $theme-article-body-h1-font-weight;
+    font-size:  20px;
+    color:  #000A12;
+    font-style:  normal;
+    text-decoration:  none;
+    line-height:  27px;
+    text-transform:  capitalize;
+    font-weight:  bold;
 
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-h1-font-size-mobile;
-      line-height: $theme-article-body-h1-line-height-mobile;
+      font-size: 20px;
+      line-height: 27px;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-h1-font-size-tablet;
-      line-height: $theme-article-body-h1-line-height-tablet;
+      font-size: 20px;
+      line-height: 27px;
     }
   }
 
 
   p{
-    font-family: $theme-article-body-paragraph-font-family;
-    font-size: $theme-article-body-paragraph-font-size;
-    color: $theme-article-body-paragraph-font-color;
-    line-height: $theme-article-body-paragraph-line-height;
-    font-weight: $theme-article-body-paragraph-font-weight;
+    font-family: $theme-secondary-font-family;
+    font-size:  18px;
+    color:  #000A12;
+    text-decoration:  none;
+    line-height:  24px;
+    font-weight:  normal;
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-paragraph-font-size-mobile;
-      line-height: $theme-article-body-paragraph-line-height-mobile;
+      font-size: 18px;
+      line-height: 24px;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-paragraph-font-size-tablet;
-      line-height: $theme-article-body-paragraph-line-height-tablet;
+      font-size: 18px;
+      line-height: 24px;
     }
   }
 
   a{
-    font-family: $theme-article-body-a-font-family;
-    font-size: $theme-article-body-a-font-size;
-    color: $theme-article-body-a-font-color;
-    text-decoration: $theme-article-body-a-text-decoration;
-    line-height: $theme-article-body-a-line-height;
-    font-weight: $theme-article-body-a-font-weight;
+    font-size:  inherit;
+    color:  #000A12;
+    text-decoration:  underline;
+    line-height:  inherit;
+    font-weight:  normal;
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-a-font-size-mobile;
-      line-height: $theme-article-body-a-line-height-mobile;
+      font-size: inherit;
+      line-height: inherit;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-a-font-size-tablet;
-      line-height: $theme-article-body-a-line-height-tablet;
+      font-size: inherit;
+      line-height: inherit;
     }
     //TODO: Design needs to provide visited and hover values
     /**
@@ -103,43 +103,46 @@ $tablet-breakpoint: 700px;
   }
 
   ul {
-    font-family: $theme-article-body-ul-font-family;
-    font-size: $theme-article-body-ul-font-size;
-    list-style: $theme-article-body-ul-list-style;
-    font-weight: $theme-article-body-ul-font-weight;
+    font-family: $theme-secondary-font-family;
+    font-size:  18px;
+    line-height:  24px;
+    list-style:  disc;
+    font-weight:  normal;
 
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-ul-font-size-mobile;
-      line-height: $theme-article-body-ul-line-height-mobile;
+      font-size: 18px;
+      line-height: 24px;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-ul-font-size-tablet;
-      line-height: $theme-article-body-ul-line-height-tablet;
+      font-size: 18px;
+      line-height: 24px;
     }
   }
 
   ol {
-    font-family: $theme-article-body-ol-font-family;
-    font-size: $theme-article-body-ol-font-size;
-    list-style: $theme-article-body-ol-list-style;
-    font-weight: $theme-article-body-ol-font-weight;
+    font-family: $theme-secondary-font-family;
+    font-size:  18px;
+    line-height: 24px;
+    list-style:  decimal;
+    font-weight:  normal;
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-ol-font-size-mobile;
-      line-height: $theme-article-body-ol-line-height-mobile;
+      font-size: 18px;
+      line-height: 24px;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-ol-font-size-tablet;
-      line-height: $theme-article-body-ol-line-height-tablet;
+      font-size: 18px;
+      line-height: 24px;
     }
   }
 
   .correction {
-    font-style: $theme-article-body-correction-font-style;
-    color: $theme-article-body-correction-color;
+    color:  #7F8C8D;
+    font-style:  Italic;
+    font-weight:  normal;
     box-shadow: inset 0 -1px 0 0 #B8C1CB;
     section{
       padding-bottom: 10px;
@@ -156,91 +159,92 @@ $tablet-breakpoint: 700px;
   }
 
   figcaption {
-    font-family: $theme-article-body-figcaption-font-family;
-    color: $theme-article-body-figcaption-color;
-    font-size: $theme-article-body-figcaption-font-size;
-    line-height: $theme-article-body-figcaption-line-height;
-    font-style: $theme-article-body-figcaption-font-style;
-    font-weight: $theme-article-body-figcaption-font-weight;
+    font-family: $theme-primary-font-family;
+    color:  #B8C1CB;
+    font-size:  14px;
+    line-height:  14px;
+    font-style:  normal;
+    font-weight:  normal;
 
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: $theme-article-body-figcaption-font-size-mobile;
-      line-height: $theme-article-body-figcaption-line-height-mobile;
+      font-size: 14px;
+      line-height: 14px;
 
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: $theme-article-body-figcaption-font-size-tablet;
-      line-height: $theme-article-body-figcaption-line-height-tablet;
+      font-size: 14px;
+      line-height: 14px;
     }
   }
 
   table {
-    font-family: $theme-article-body-table-font-family;
-    width:$theme-article-body-table-width;
-    margin: $theme-article-body-table-margin;
-    color: $theme-article-body-table-color;
+    font-family: $theme-primary-font-family;
+    width:  100%;
+    margin:  20px 0;;
+    color: #778F9B;
 
     @media screen and (max-width: $mobile-breakpoint){
-      width:$theme-article-body-table-width-mobile;
-      margin: $theme-article-body-table-margin-mobile;
+      width:  100%;
+      margin:  20px 0;;
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      width:$theme-article-body-table-width-tablet;
-      margin: $theme-article-body-table-margin-tablet;
+      width:  100%;
+      margin:  20px 0;;
     }
 
     &, th, td {
-      border-left: $theme-article-body-table-border-left;
-      border-right: $theme-article-body-table-border-right;
-      border-top: $theme-article-body-table-border-top;
-      border-bottom: $theme-article-body-table-border-bottom;
+      border-left:  1px solid #DDE2E8;
+      border-right:  1px solid #DDE2E8;
+      border-top:  1px solid #DDE2E8;
+      border-bottom:  1px solid #DDE2E8;
       border-collapse: collapse;
     }
 
     th, td {
-      padding: $theme-article-body-table-cell-padding;
+      padding:  5px 10px;
+      text-align:  center;
 
       @media screen and (max-width: $mobile-breakpoint){
-        padding: $theme-article-body-table-cell-padding-mobile;
+        padding: 5px 10px;
       }
 
       @media screen and (max-width: $tablet-breakpoint) {
-        padding: $theme-article-body-table-cell-padding-tablet;
+        padding: 5px 10px;
       }
     }
 
     td{
-      font-size: $theme-article-body-table-cell-font-size;
-      font-style: $theme-article-body-table-cell-font-style;
-      font-weight: $theme-article-body-table-cell-font-weight;
+      font-size: 17px;
+      font-style: normal;
+      font-weight: normal;
 
       @media screen and (max-width: $mobile-breakpoint){
-        font-size: $theme-article-body-table-cell-font-size-mobile;
-        white-space: $theme-article-body-table-cell-white-space-mobile;
+        font-size: 17px;
+        white-space: normal;
       }
 
       @media screen and (max-width: $tablet-breakpoint) {
-        font-size: $theme-article-body-table-cell-font-size-tablet;
-        white-space: $theme-article-body-table-cell-white-space-tablet;
+        font-size: 17px;
+        white-space: normal;
       }
     }
 
     th{
-      font-size: $theme-article-body-table-head-font-size;
-      font-style: $theme-article-body-table-head-font-style;
-      font-weight: $theme-article-body-table-head-font-weight;
-      white-space: $theme-article-body-table-head-white-space;
+      font-size: 17px;
+      font-style: normal;
+      font-weight: normal;
+      white-space: nowrap;
 
       @media screen and (max-width: $mobile-breakpoint){
-        font-size: $theme-article-body-table-head-font-size-mobile;
-        white-space: $theme-article-body-table-head-white-space-mobile;
+        font-size: 17px;
+        white-space: normal;
       }
 
       @media screen and (max-width: $tablet-breakpoint) {
-        font-size: $theme-article-body-table-head-font-size-tablet;
-        white-space: $theme-article-body-table-head-white-space-tablet;
+        font-size: 17px;
+        white-space: normal;
       }
     }
   }
@@ -249,24 +253,24 @@ $tablet-breakpoint: 700px;
     padding: 20px 0;
     box-shadow: inset 0 -5px 0 0 #B8C1CB, inset 0 5px 0 0 #B8C1CB;
     text-align: center;
-    font-family: $theme-article-body-blockquote-font-family;
-    color: $theme-article-body-blockquote-color;
-    font-size: $theme-article-body-blockquote-font-size;
-    line-height: $theme-article-body-blockquote-line-height;
-    font-weight: $theme-article-body-blockquote-font-weight;
-    font-style: $theme-article-body-blockquote-font-style;
+    font-family:$theme-secondary-font-family;
+    color:  #000A12;
+    font-size:  24px;
+    line-height:  34px;
+    font-weight:  bold;
+    font-style:  italic;
   }
 
   blockquote.pullquote{
     padding: 20px 0 20px 25px;
     box-shadow: inset 5px 0 0 0 #1F2D3D;
     text-align: left;
-    font-family: $theme-article-body-pullquote-font-family;
-    color: $theme-article-body-pullquote-color;
-    font-size: $theme-article-body-pullquote-font-size;
-    line-height: $theme-article-body-pullquote-line-height;
-    font-weight: $theme-article-body-pullquote-font-weight;
-    font-style: $theme-article-body-pullquote-font-style;
+    font-family:$theme-secondary-font-family;
+    color:  #000A12;
+    font-size:  18px;
+    line-height:  21px;
+    font-weight:  normal;
+    font-style:  italic;
   }
 
 

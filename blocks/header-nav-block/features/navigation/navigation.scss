@@ -5,11 +5,11 @@
   border-bottom: 1px grey;
 
   * {
-    font-family: $theme-nav-font;
+    font-family:  $theme-primary-font-family;
   }
 
   .nav-search, .nav-sections {
-    background-color: $theme-nav-color;
+    background-color: $theme-primary-color;
     margin: 0 5px;
     height: 80%;
     border: 0;
@@ -23,7 +23,7 @@
   .nav-sections {
     display: flex;
     align-items: center;
-    
+
     > span, > img {
       flex: 0;
     }

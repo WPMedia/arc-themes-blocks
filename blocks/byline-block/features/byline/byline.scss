@@ -1,9 +1,11 @@
 .byline {
+  font-size: 16px;
+  line-height: 22px;
   p {
-    color: $theme-byline-font-color;
+    color: #000A12;
   }
   a {
-    color: $theme-byline-font-color;
+    color: #000A12;
     text-decoration: none;
    }
    a:hover {

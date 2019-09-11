@@ -60,7 +60,7 @@ describe('the header navigation feature for the default output type', () => {
   describe('the navigation bar image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
       it('should make the src of the logo the provided image', () => {
-        jest.mock('fusion:themes', () => ({ navLogo: 'my-nav-logo.svg' }));
+        jest.mock('fusion:themes', () => ({ primaryLogo: 'my-nav-logo.svg' }));
         const { default: Navigation } = require('./default');
         const wrapper = shallow(<Navigation />);
 
@@ -80,7 +80,7 @@ describe('the header navigation feature for the default output type', () => {
 
     describe('when the theme manifest provides alt text', () => {
       it('should make the alt text of the logo the provided text', () => {
-        jest.mock('fusion:themes', () => ({ navLogoAlt: 'my alt text' }));
+        jest.mock('fusion:themes', () => ({ primaryLogoAlt: 'my alt text' }));
         const { default: Navigation } = require('./default');
         const wrapper = shallow(<Navigation />);
 

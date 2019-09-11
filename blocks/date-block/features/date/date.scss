@@ -1,11 +1,15 @@
 .date-inline {
-    color: $theme-date-font-color;
-    font-family: $theme-date-font-family;
+    color: #7F8C8D;
+    font-family: $theme-primary-font-family;
+    font-size: 16px;
+    line-height: 22px;
     display: inline;
 }
 
 .date-block {
-    color: $theme-date-font-color;
-    font-family: $theme-date-font-family;
+    color: #7F8C8D;
+    font-family: $theme-primary-font-family;
+    font-size: 16px;
+    line-height: 22px;
     display: block;
 }

@@ -1,7 +1,20 @@
+$mobile-breakpoint: 480px;
+$tablet-breakpoint: 700px;
+
 h2.sub-headline{
-  font-family: $theme-sub-headline-font-family;
-  font-size: $theme-sub-headline-font-size;
-  color: $theme-sub-headline-font-color;
-  text-decoration: $theme-sub-headline-text-decoration;
-  line-height: $theme-sub-headline-line-height;
+  font-family: $theme-primary-font-family;
+  font-size: 24px;
+  color: #7F8C8D;
+  text-decoration: none;
+  line-height: 32px;
+
+  @media screen and (max-width: $mobile-breakpoint){
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  @media screen and (max-width: $tablet-breakpoint) {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }

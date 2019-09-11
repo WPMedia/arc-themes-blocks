@@ -35,6 +35,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
+    "@arc-test-org/theme-block": "file:blocks/theme-block",
     "@arc-test-org/article-body-block": "file:blocks/article-body-block",
     "@arc-test-org/header-nav-block": "file:blocks/header-nav-block",
     "@arc-test-org/headline-block": "file:blocks/headline-block",

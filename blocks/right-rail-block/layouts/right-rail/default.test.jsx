@@ -1,6 +1,6 @@
 const React = require('react');
 const { shallow } = require('enzyme');
-const { default: RightRailLayout } = require('./right-rail');
+const { default: RightRailLayout } = require('./default');
 
 describe('the right rail layout for the default output type', () => {
   it('should place the child nodes into the right places', () => {

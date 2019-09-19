@@ -1,109 +1,82 @@
-/* eslint-disable */
-// TODO fix linting errors
+/* eslint react/destructuring-assignment: "off", react/no-unused-prop-types: "off" */
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import htmlparser from 'htmlparser2';
+import HtmlSafe from '../shared/html-safe';
 
-//TODO: The css classes referenced here need to be defined...
+class EmbedWrapper extends PureComponent {
+  constructor(props) {
+    super(props);
+    if (!props.src) {
+      // don't have a defined endpoint so we need to parse the html
+      let inScript = false;
+      let src = '';
+      let script = '';
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import EmbedContainer from 'react-oembed-container';
+      const parser = new htmlparser.Parser({
+        onopentag(tag, attribs) {
+          if (tag !== 'script') return;
+          ({ src } = attribs);
+          if (!src) inScript = true;
+        },
+        ontext(text) {
+          if (!inScript) return;
+          script = text;
+        },
+        onclosetag(tag) {
+          if (tag !== 'script') return;
+          inScript = false;
+        },
+      });
 
-const Oembed = ({ element, content, isAmp, isLeadArt, metaValue }) => {
-  // Need to put this in a function outside return so we can do switching logic
-  const output = () => {
-    if(isAmp){
-      switch (element.subtype) {
-        case 'tweet':
-        case 'twitter':
-          const searchTerm = 'status/';
-          const tweetid = element.raw_oembed._id.substring(element.raw_oembed._id.indexOf(searchTerm) + searchTerm.length);
-          return (
-            <div className={`oembed | margin_centered oembed-${element.subtype} ${responsiveClass} flex-container-row\ 
-justify_center`}>
-              <amp-twitter
-                width='300'
-                height='300'
-                layout='responsive'
-                data-tweetid={tweetid}
-              />
-            </div>
-          )
-        case 'instagram':
-          return (
-            <amp-instagram
-              data-shortcode={shortCode}
-              data-captioned
-              layout='responsive'
-              width='1'
-              height='1'
-            />
-          );
-        case 'youtube':
-          const decodedURL = element.raw_oembed._id.replace('%3D', '=');
-          const videoID = decodedURL.split('v=')[1];
-          return (
-            <amp-youtube
-              width='1.7'
-              height='1'
-              layout='responsive'
-              data-videoid={videoID}
-            />
-          )
-        case 'facebook':
-          return (
-            <amp-facebook
-              width={element.raw_oembed.width}
-              height='310'
-              layout='responsive'
-              data-href={element.raw_oembed.url}
-            />
-          );
-        case 'vimeo':
-          return (
-            <amp-vimeo
-              width='1.7'
-              height='1'
-              layout='responsive'
-              data-videoid={element.raw_oembed.video_id}
-            />
-          );
-        default:
-          return (
-            <EmbedContainer markup={element.raw_oembed.html}>
-              <div dangerouslySetInnerHTML={{__html: element.raw_oembed.html}} />
-            </EmbedContainer>
-          )
-      }
+      parser.write(this.props.html);
+      parser.end();
+      if (src) this.scriptSrc = src;
+      if (script) this.scriptText = script;
+    }
+  }
+
+  componentDidMount() {
+    const src = this.props.src || this.scriptSrc;
+    if (src) {
+      // if the endpoint is more than 1024 char, something is wrong
+      const type = `src-${src}`.substring(0, 1024);
+      if (window[type]) return;
+      window[type] = true;
     }
 
-    return (
-      <EmbedContainer markup={element.raw_oembed.html}>
-        <div dangerouslySetInnerHTML={{__html: element.raw_oembed.html}} />
-      </EmbedContainer>
-    )
-  };
+    if (this.scriptText) {
+      const scriptWithCode = document.createElement('script');
+      scriptWithCode.text = this.scriptText;
+      document.getElementsByTagName('body')[0].appendChild(scriptWithCode);
+    }
 
-  // If element is a subtype of youtube or vimeo, and this is not an AMP page, add responsive video classes
-  const responsiveClass = (['youtube', 'vimeo'].indexOf(element.subtype) !== -1 && !isAmp) ? 'responsive-embed-16x9 relative' : '';
-  const marginClasses = !isLeadArt && !isAmp ? 'margin_top_md margin_bottom_md' : '';
-  const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses}`;
-  const outputElement = output();
-
-  if (typeof outputElement === 'string') {
-    return <div className={cssClasses} dangerouslySetInnerHTML={{ __html: outputElement }} />
+    if (src) {
+      const scriptWithUri = document.createElement('script');
+      scriptWithUri.async = true;
+      scriptWithUri.src = src;
+      document.getElementsByTagName('body')[0].appendChild(scriptWithUri);
+    }
   }
-  return (
-    <div className={cssClasses}>
-      {outputElement}
-    </div>
-  )
-};
 
-Oembed.propTypes = {
+  render() {
+    if (this.props.render) return this.props.render();
+    return (
+      <HtmlSafe
+        compType="div"
+        className="width_full center_align"
+        content={this.props.html}
+        allowedAttributes={false}
+      />
+    );
+  }
+}
+
+EmbedWrapper.propTypes = {
+  html: PropTypes.string,
+  src: PropTypes.string,
+  render: PropTypes.func,
   element: PropTypes.object,
-  isAmp: PropTypes.bool,
-  isLeadArt: PropTypes.bool,
-  content: PropTypes.object,
-  metaValue: PropTypes.func
 };
 
-export default Oembed
+export default EmbedWrapper;

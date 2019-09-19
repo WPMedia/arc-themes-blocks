@@ -5,16 +5,15 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import EmbedWrapper from './embed-wrapper'
-
+import EmbedContainer from 'react-oembed-container';
 
 const Oembed = ({ element, content, isAmp, isLeadArt, metaValue }) => {
   // Need to put this in a function outside return so we can do switching logic
   const output = () => {
-    switch (element.subtype) {
-      case 'tweet':
-      case 'twitter':
-        if (isAmp) {
+    if(isAmp){
+      switch (element.subtype) {
+        case 'tweet':
+        case 'twitter':
           const searchTerm = 'status/';
           const tweetid = element.raw_oembed._id.substring(element.raw_oembed._id.indexOf(searchTerm) + searchTerm.length);
           return (
@@ -28,10 +27,7 @@ justify_center`}>
               />
             </div>
           )
-        }
-        return <EmbedWrapper html={element.raw_oembed.html} src="https://platform.twitter.com/widgets.js" />;
-      case 'instagram':
-        if (isAmp)
+        case 'instagram':
           return (
             <amp-instagram
               data-shortcode={shortCode}
@@ -41,9 +37,7 @@ justify_center`}>
               height='1'
             />
           );
-        return <EmbedWrapper html={element.raw_oembed.html} src="https://www.instagram.com/embed.js" />;
-      case 'youtube':
-        if (isAmp) {
+        case 'youtube':
           const decodedURL = element.raw_oembed._id.replace('%3D', '=');
           const videoID = decodedURL.split('v=')[1];
           return (
@@ -54,11 +48,7 @@ justify_center`}>
               data-videoid={videoID}
             />
           )
-        }
-        return element.raw_oembed.html
-          .replace(/src\s*=\s*"(.+?)"/, (matches, src) => `src="${src}${src.indexOf('?') !== -1 ? '&' : '?'}enablejsapi=1"`);
-      case 'facebook':
-        if (isAmp)
+        case 'facebook':
           return (
             <amp-facebook
               width={element.raw_oembed.width}
@@ -67,11 +57,7 @@ justify_center`}>
               data-href={element.raw_oembed.url}
             />
           );
-        return <EmbedWrapper html={element.raw_oembed.html} src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&amp;version=v3.3" />;
-      case 'facebook-video':
-        return <EmbedWrapper html={element.raw_oembed.html} src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&amp;version=v3.3" />;
-      case 'vimeo':
-        if (isAmp)
+        case 'vimeo':
           return (
             <amp-vimeo
               width='1.7'
@@ -80,9 +66,20 @@ justify_center`}>
               data-videoid={element.raw_oembed.video_id}
             />
           );
-      default:
-        return <EmbedWrapper html={element.raw_oembed.html} />
+        default:
+          return (
+            <EmbedContainer markup={element.raw_oembed.html}>
+              <div dangerouslySetInnerHTML={{__html: element.raw_oembed.html}} />
+            </EmbedContainer>
+          )
+      }
     }
+
+    return (
+      <EmbedContainer markup={element.raw_oembed.html}>
+        <div dangerouslySetInnerHTML={{__html: element.raw_oembed.html}} />
+      </EmbedContainer>
+    )
   };
 
   // If element is a subtype of youtube or vimeo, and this is not an AMP page, add responsive video classes

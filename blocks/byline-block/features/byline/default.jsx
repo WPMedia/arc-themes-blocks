@@ -21,15 +21,25 @@ class ArticleByline extends Component {
     const { by } = credits;
 
     const authors = by.map((author) => {
+      // Only include authors in the byline
       if (author.type === 'author') {
-        const hasName = Object.prototype.hasOwnProperty.call(author, 'name');
+        const { additional_properties: additionalProperties } = author;
+
+        // This is where the actual byline is stored
+        const { original } = additionalProperties;
+
+        const hasByline = Object.prototype.hasOwnProperty.call(original, 'byline');
         const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
 
         // If the author has a url to their bio page, return an anchor tag to the bio.
-        // If not, just return the string. Those without name will not be included in the byline
-        if (hasName) {
-          return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
+        // If not, just return the string.
+        if (hasByline) {
+          return (hasURL) ? `<a href="${author.url}">${original.byline}</a>` : original.byline;
         }
+
+        // It shouldn't get to this point since byline is a mandatory field,
+        // but use name if byline info is not included
+        return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
       }
 
       return null;

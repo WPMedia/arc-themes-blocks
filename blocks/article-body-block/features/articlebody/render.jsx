@@ -36,7 +36,9 @@ const Body = ({ className, data: items, ...props }) => {
           url, subtitle, caption, width, height, credits,
         } = item;
 
-        const creditSection = credits.by.map(creditItem => (
+        const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
+
+        const creditSection = hasCredit ? credits.by.map(creditItem => (
           <p key={key}>
             {creditItem.name}
             &nbsp;|&nbsp;
@@ -46,7 +48,8 @@ const Body = ({ className, data: items, ...props }) => {
             &nbsp;|&nbsp;
             {creditItem.byline}
           </p>
-        ));
+        ))
+          : null;
 
         return (url && url.length > 0) ? (
           <figure key={key}>

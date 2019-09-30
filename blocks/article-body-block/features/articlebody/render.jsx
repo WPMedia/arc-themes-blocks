@@ -48,8 +48,7 @@ const Body = ({ className, data: items, ...props }) => {
             &nbsp;|&nbsp;
             {creditItem.byline}
           </p>
-        ))
-          : null;
+        )) : null;
 
         return (url && url.length > 0) ? (
           <figure key={key}>

@@ -20,5 +20,6 @@
   },
   "dependencies": {
     "react-oembed-container": "^0.3.0"
-  }
+  },
+  "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
 }

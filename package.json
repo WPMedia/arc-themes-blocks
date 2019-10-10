@@ -40,6 +40,7 @@
     "@arc-test-org/headline-block": "file:blocks/headline-block",
     "@arc-test-org/subheadline-block": "file:blocks/subheadline-block",
     "@arc-test-org/date-block": "file:blocks/date-block",
-    "@arc-test-org/lead-art-block": "file:blocks/lead-art-block"
+    "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
+    "@arc-test-org/sample-output-block": "file:blocks/sample-output-block"
   }
 }

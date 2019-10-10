@@ -1,8 +1,6 @@
 const React = require('react');
 const { render } = require('enzyme');
 
-jest.mock('fusion:themes', () => ({}));
-
 describe('Given the display time from ANS, it should convert to the proper timezone format we want', () => {
   it('should return proper long form with correctly converted timezone', () => {
     const { default: ArticleDate } = require('./default');

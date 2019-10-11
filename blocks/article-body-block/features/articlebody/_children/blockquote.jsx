@@ -8,7 +8,7 @@ export default ({ element }) => {
   contentElements.forEach((paragraph) => {
     if (paragraph.type === 'text'
       && Object.prototype.hasOwnProperty.call(paragraph, 'content')) {
-      blockQuote.push(<p>{ paragraph.content }</p>);
+      blockQuote.push(<p key={paragraph.id}>{ paragraph.content }</p>);
     }
   });
 

@@ -24,7 +24,7 @@ class ArticleDate extends Component {
         month: 'long',
         hour: 'numeric',
         minute: 'numeric',
-        timeZone: (TIMEZONE) || 'America/New_York', // Default to EST if no timezone is provided in env
+        timeZone: (TIMEZONE) || undefined, // If no timezone is defined, let it use the default value
         timeZoneName: 'short',
       }).format(new Date(dateString))
         .replace(/(,)(.*?)(,)/, '$1$2 at')

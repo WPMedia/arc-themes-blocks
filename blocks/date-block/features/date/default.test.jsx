@@ -15,7 +15,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
       month: 'long',
       hour: 'numeric',
       minute: 'numeric',
-      timeZone: 'America/Chicago', // Default to EST if no timezone is provided in env
+      timeZone: 'America/Chicago',
       timeZoneName: 'short',
     }).format(new Date(display_date))
       .replace(/(,)(.*?)(,)/, '$1$2 at')

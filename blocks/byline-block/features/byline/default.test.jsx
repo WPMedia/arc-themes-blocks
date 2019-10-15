@@ -1,8 +1,6 @@
 const React = require('react');
 const { shallow } = require('enzyme');
 
-jest.mock('fusion:themes', () => ({}));
-
 describe('Given the display time from ANS, it should convert to the proper timezone format we want', () => {
   it('should return one author', () => {
     const { default: ArticleByline } = require('./default');

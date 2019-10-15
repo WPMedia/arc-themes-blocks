@@ -1,5 +1,5 @@
 import React from 'react';
-import { getThemeStyle } from 'fusion:themes';
+import getThemeStyle from 'fusion:themes';
 
 import navHamburger from './images/hamburger.svg';
 import navSearch from './images/search.svg';

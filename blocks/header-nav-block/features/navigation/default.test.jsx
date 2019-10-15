@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { getThemeStyle } from 'fusion:themes';
+import getThemeStyle from 'fusion:themes';
 import Navigation from './default';
 
-jest.mock('fusion:themes', () => ({ getThemeStyle: jest.fn(() => ({})) }));
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('the header navigation feature for the default output type', () => {
   it('should be a nav element', () => {

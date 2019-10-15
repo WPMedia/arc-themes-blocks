@@ -1,3 +1,1 @@
-export default {
-  getThemeStyle: jest.fn(),
-};
+export default jest.fn();

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default ({ element }) => {
-  const { content_elements: contentElements } = element;
+  const { content_elements: contentElements = [] } = element;
 
   // Add to the block quote component if the paragraph is a text and has content
   const blockQuote = [];

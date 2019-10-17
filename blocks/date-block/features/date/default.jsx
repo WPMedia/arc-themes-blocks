@@ -10,10 +10,9 @@ class ArticleDate extends Component {
     super(props);
 
     // Inherit global content
-    const { globalContent: content, customFields } = this.props;
+    const { globalContent: content } = this.props;
 
     const { display_date: dateString } = content;
-    const { blockDisplay } = customFields;
 
     // Convert the time to browser's local time using the ECMAScript Internationalization API
     // Browser support found here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
@@ -32,25 +31,17 @@ class ArticleDate extends Component {
         .replace('AM', 'a.m.')
       : '';
 
-    this.state = { displayDate, blockDisplay };
+    this.state = { displayDate };
   }
 
   render() {
-    const { displayDate, blockDisplay } = this.state;
-    const displayType = blockDisplay ? 'block' : 'inline';
-
+    const { displayDate } = this.state;
     return (
-      <time key={displayDate} className={`date-${displayType}`} dateTime={displayDate}>
+      <time key={displayDate} className="date" dateTime={displayDate}>
         {displayDate}
       </time>
     );
   }
 }
-ArticleDate.propTypes = {
-  customFields: PropTypes.shape({
-    // eslint-disable-next-line react/no-typos
-    blockDisplay: PropTypes.boolean,
-  }),
-};
 
 export default ArticleDate;

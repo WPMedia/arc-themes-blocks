@@ -6,8 +6,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const { default: ArticleDate } = require('./default');
     const display_date = '2019-08-11T16:45:33.209Z';
     const globalContent = { display_date };
-    const customFields = { blockDisplay: true }
-    const wrapper = render(<ArticleDate globalContent={globalContent} customFields={customFields} />);
+    const wrapper = render(<ArticleDate globalContent={globalContent} />);
 
     const testDate = new Intl.DateTimeFormat('en', {
       year: 'numeric',
@@ -29,9 +28,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const { default: ArticleDate } = require('./default');
     const display_date = 'invalid time string';
     const globalContent = { display_date };
-    const customFields = { blockDisplay: true }
 
-    const wrapper = render(<ArticleDate globalContent={globalContent} customFields={customFields} />);
+    const wrapper = render(<ArticleDate globalContent={globalContent} />);
 
     expect(wrapper.text()).toEqual('');
   });

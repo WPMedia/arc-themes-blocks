@@ -1,13 +1,19 @@
 import React from 'react';
 import { useComponentContext } from 'fusion:context';
+import getThemeStyle from 'fusion:themes';
 import './subheadline.scss';
+import styled from 'styled-components';
 
-const SubHeadline = () => {
+const SubheadH2 = styled.h2`
+  font-family: ${props => props.primaryFont};
+`;
+
+const SubHeadline = ({ arcSite }) => {
   const { globalContent: content } = useComponentContext();
 
   return (
     !!(content && content.subheadlines && content.subheadlines.basic) && (
-      <h2 className="sub-headline" dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
+      <SubheadH2 className="sub-headline" primaryFont={getThemeStyle(arcSite)['primary-font-family']} dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
     )
   );
 };

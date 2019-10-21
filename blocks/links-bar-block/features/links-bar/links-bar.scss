@@ -1,137 +1,27 @@
-$header-height: 100px;
-$nav-bar-height: 60px;
-
-$break-small: 600px;
-$break-medium: 800px;
-$break-large: 1000px;
-
-.nav-bar {
-  width: 100%;
-  min-width: $break-small;
-  background: $light-blue;
-  height: $nav-bar-height;
+.links-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  display: flex;
   justify-content: center;
-
-  .nav-menu {
-    display: flex;
-    flex: 1;
-    justify-content: space-evenly;
-    flex-direction: row;
-    height: $nav-bar-height;
-
-    li {
-      width: auto;
-      height: 100%;
-      &.social {
-        display: flex;
-        flex-direction: row;
-        a {
-          padding: 15px;
-        }
-      }
-
-      &.more {
-        display: none;
-        @media all and (max-width: $break-large){
-          display: flex;
-          overflow: hidden;
-          align-items: center;
-          height: 100%;
-          color: $black;
-          text-align: center;
-          text-decoration: none;
-        }
-      }
-
-      // Divide up the menu sections into three, and depending on the
-      // width of the browser, hide/show the menu items accordingly to prevent
-      // overflow
-      &.col-first {
-        @media all and (max-width: $break-small) {
-          display: none;
-        }
-      }
-
-      &.col-middle {
-        @media all and (max-width: $break-medium) {
-          display: none;
-        }
-      }
-
-      &.col-last {
-        @media all and (max-width: $break-large) {
-          display: none;
-        }
-      }
-
-
-      // TODO: Define some elements to go under the "More" section
-      // TODO: Define the elements that will toggle to visible when it disappears from min-width
-
-      //padding: 14px 16px;
-      a {
-        display: flex;
-        overflow: hidden;
-        align-items: center;
-        height: 100%;
-        color: $black;
-        text-align: center;
-        text-decoration: none;
-      }
-    }
-  }
-}
-
-.header {
-  top: 0;
-  left: 0;
+  box-shadow: inset 0 -1px 0 0 #B8C1CB;
   width: 100%;
-  min-width: $break-small;
 
-  display: flex;
-  justify-content: space-between;
-  height: $header-height;
-  align-items: center;
-  background: $dark-blue;
+  .links-menu {
+    margin: 5px 15px;
+    padding: 8px 0px;
 
-  // Divide up the header into three sections - for evenly distributed items
-  // Left section will contain the hamburger menu
-  .left-header {
-    display: flex;
-    width: 30%;
-    justify-content: left;
+    a {
+      color: #1F2D3D;	
+      font-family: $theme-primary-font-family;	
+      font-size: 14px;
+      font-weight: bold; 
 
-    button {
-      padding: 10px;
-      background-color: transparent;
-      border-color: transparent;
+      height: 100%;
+      line-height: 14px;
+      margin: 8px 0px;
+
+      text-align: center;
+      text-decoration: none;
     }
   }
-
-  // Center will contain the logo
-  .center-nav-bar {
-  }
-
-  // Right will contain user info and possibly the search item
-  .right-header {
-    display: flex;
-    width: 30%;
-    justify-content: flex-end;
-
-    button {
-      padding: 10px;
-      background-color: transparent;
-      border-color: transparent;
-    }
-  }
-
-  //@include breakpoint(desktop) {
-  //  padding: 0;
-  //}
-}
-
-.page-header {
-  min-height: 160px;
 }

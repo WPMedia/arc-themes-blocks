@@ -8,10 +8,15 @@ describe('the links bar feature for the default output type', () => {
 
   beforeEach(() => {
     jest.mock('fusion:context', () => ({
-      useAppContext: jest.fn(() => ({
+      useFusionContext: jest.fn(() => ({
         arcSite: 'the-sun',
+        id: 'testId',
       })),
     }));
+  });
+
+  it('should be a nav element', () => {
+    const { default: LinksBar } = require('./default');
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({
         children: [
@@ -26,19 +31,41 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-  });
-
-  it('should be a nav element', () => {
-    const { default: LinksBar } = require('./default');
-    const wrapper = shallow(<LinksBar />);
+    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
 
     expect(wrapper.at(0).type()).toBe('nav');
   });
 
   it('should contain the equal number of links between input and output', () => {
     const { default: LinksBar } = require('./default');
-    const wrapper = shallow(<LinksBar />);
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [
+          {
+            _id: 'id_1',
+            name: 'test link 1',
+          },
+          {
+            _id: 'id_2',
+            name: 'test link 2',
+          },
+        ],
+      })),
+    }));
+    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
 
-    expect(wrapper.find('nav > div > ul > li')).toHaveLength(2);
+    expect(wrapper.find('nav > span')).toHaveLength(2);
+  });
+
+  it('should have no menu item if no content is returned', () => {
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [],
+      })),
+    }));
+    const { default: LinksBar } = require('./default');
+    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
+
+    expect(wrapper.find('nav > span')).toHaveLength(0);
   });
 });

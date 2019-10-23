@@ -19,7 +19,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "react-oembed-container": "^0.3.0"
+    "react-oembed-container": "^0.3.0",
+    "styled-components": "^4.4.0"
   },
   "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
 }

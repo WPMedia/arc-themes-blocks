@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
 import { useComponentContext } from 'fusion:context';
 import SubHeadline from './default';
@@ -35,6 +35,12 @@ describe('the subheadline feature for the default output type', () => {
       const wrapper = shallow(<SubHeadline />);
 
       expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'subheadline for our story' });
+    });
+
+    it('should set a styled components class on the rendered h2', () => {
+      const wrapper = mount(<SubHeadline />);
+
+      expect(wrapper.find('h2').hasClass(/sc-/)).toBe(true);
     });
   });
 

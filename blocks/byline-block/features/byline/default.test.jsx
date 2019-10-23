@@ -1,11 +1,14 @@
 const React = require('react');
 const { shallow } = require('enzyme');
 
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
 describe('Given the display time from ANS, it should convert to the proper timezone format we want', () => {
   it('should return one author', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
+        type: 'author',
         name: 'SangHee Kim',
         url: '/author/sanghee-kim',
       }],
@@ -14,7 +17,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.text()).toEqual('By SangHee Kim');
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a> </p>' });
   });
 
   it('should return two authors', () => {
@@ -22,9 +25,11 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const credits = {
       by: [
         {
+          type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
         },
@@ -34,7 +39,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.text()).toEqual('By SangHee Kim and Sara Carothers');
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
   });
 
   it('should return three authors, oxford comma', () => {
@@ -42,12 +47,15 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const credits = {
       by: [
         {
+          type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
         },
@@ -57,7 +65,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.text()).toEqual('By SangHee Kim, Joe Grosspitsch and Brent Miller');
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a> and <a href="/author/brent-miller">Brent Miller</a></p>' });
   });
 
   it('should return four authors, oxford comma', () => {
@@ -65,15 +73,19 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const credits = {
       by: [
         {
+          type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
         }, {
+          type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
         },
@@ -83,7 +95,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.text()).toEqual('By SangHee Kim, Joe Grosspitsch, Brent Miller and Sara Carothers');
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
   });
 
   it('should return no author (no name provided for any of the authors)', () => {
@@ -91,10 +103,13 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const credits = {
       by: [
         {
+          type: 'author',
           url: '/author/sanghee-kim',
         }, {
+          type: 'author',
           url: '/author/joe-grosspietsch',
         }, {
+          type: 'author',
           url: '/author/brent-miller',
         },
       ],
@@ -103,6 +118,6 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.text()).toEqual('');
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '' });
   });
 });

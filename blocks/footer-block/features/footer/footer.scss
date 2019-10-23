@@ -1,0 +1,30 @@
+footer {
+  width: 100%;
+  display: inline-flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 25px;
+
+  @media all and (max-width: 600px) {
+      display: block;
+  }
+
+  .footer-section {
+      margin: 0px 15px;
+      font-family: $theme-primary-font-family;
+      font-size: 14px;
+      > .footer-header {
+          font-weight: bold;
+      }
+      
+      > .footer-item {
+          margin: 8px 0px;
+          
+          > a {
+              text-decoration: none;
+              color: #7F8C8D;
+          }
+      }
+  }
+}

@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@arc-test-org/image": "^1.0.5",
-    "@arc-test-org/lightbox": "^1.0.4"
+    "@arc-test-org/lightbox": "^1.0.4",
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

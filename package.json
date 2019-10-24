@@ -30,7 +30,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
-    "lerna": "^3.16.4",
+    "lerna": "^3.18.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

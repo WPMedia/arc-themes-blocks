@@ -17,5 +17,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "styled-components": "^4.4.0"
   }
 }

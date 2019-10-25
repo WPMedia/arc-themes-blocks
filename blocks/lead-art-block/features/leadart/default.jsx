@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
+import getThemeStyle from 'fusion:themes';
+import styled from 'styled-components';
 import Lightbox from '@arc-test-org/lightbox';
 import Image from '@arc-test-org/image/lib/image';
 import './leadart.scss';
 import fullScreenLogo from './images/full-screen.svg';
+
+const LeadArtWrapperDiv = styled.div`
+  figcaption {
+    font-family: ${props => props.primaryFont};
+  }
+`;
+
+const LeadArtWrapperFigure = styled.figure`
+  figcaption {
+    font-family: ${props => props.primaryFont};
+  }
+`;
 
 /**
  * @file LeadArt is a React Class Component
@@ -31,6 +45,8 @@ class LeadArt extends Component {
     const {
       enableZoom, isOpen, buttonPosition, buttonLabel, showCredit, content,
     } = this.state;
+
+    const { arcSite } = this.props;
 
     const style = {
       background: `url(${fullScreenLogo}) no-repeat center`,
@@ -73,13 +89,13 @@ class LeadArt extends Component {
         }
 
         return (
-          <div className="lead-art-wrapper">
+          <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
             <div
               className="innerContent"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
-          </div>
+          </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
@@ -114,7 +130,7 @@ class LeadArt extends Component {
 
 
         return (
-          <figure className="lead-art-wrapper">
+          <LeadArtWrapperFigure className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
             <Image
               url={lead_art.url}
               alt={lead_art.alt_text}
@@ -128,7 +144,7 @@ class LeadArt extends Component {
             {lightbox}
             {caption}
 
-          </figure>
+          </LeadArtWrapperFigure>
         );
       }
       return null;

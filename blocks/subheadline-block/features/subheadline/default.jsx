@@ -1,5 +1,5 @@
 import React from 'react';
-import { useComponentContext } from 'fusion:context';
+import { useAppContext, useComponentContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import './subheadline.scss';
 import styled from 'styled-components';
@@ -8,7 +8,8 @@ const SubheadH2 = styled.h2`
   font-family: ${props => props.primaryFont};
 `;
 
-const SubHeadline = ({ arcSite }) => {
+const SubHeadline = () => {
+  const { arcSite } = useAppContext();
   const { globalContent: content } = useComponentContext();
 
   return (

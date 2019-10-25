@@ -13,6 +13,9 @@ jest.mock('fusion:context', () => ({
       },
     },
   })),
+  useAppContext: jest.fn(() => ({
+    arcSite: 'not-real',
+  })),
 }));
 
 describe('the subheadline feature for the default output type', () => {

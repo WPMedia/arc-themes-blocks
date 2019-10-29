@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 // A payload with 4 columns and 11 column items
 const mockPayload = {
@@ -86,6 +86,8 @@ const mockPayload = {
   ],
 };
 
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
 describe('the footer feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();
@@ -112,24 +114,24 @@ describe('the footer feature for the default output type', () => {
 
   it('should have 4 column headers', () => {
     const { default: Footer } = require('./default');
-    const wrapper = shallow(<Footer />);
+    const wrapper = mount(<Footer />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (mockPayload)),
     }));
 
-    expect(wrapper.find('footer > ul > section')).toHaveLength(4);
+    expect(wrapper.find('ul > section')).toHaveLength(4);
   });
 
   it('should have 11 column items', () => {
     const { default: Footer } = require('./default');
-    const wrapper = shallow(<Footer />);
+    const wrapper = mount(<Footer />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (mockPayload)),
     }));
 
-    expect(wrapper.find('footer > ul > li')).toHaveLength(11);
+    expect(wrapper.find('ul > li')).toHaveLength(11);
   });
 
   it('should have empty column when empty payload is given', () => {

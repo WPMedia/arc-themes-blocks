@@ -165,6 +165,8 @@ const ArticleBodyChain = ({ children }) => {
   // Here, the keys represent the child of the chain, and the values represent their positions
   //  in the article body.
   Object.keys(parsedElementPlacement).forEach((element) => {
+    // subtract one here - looks like the client will put in {3:2} to denote placing third child to second position
+    // so we need to account for the index starting from 0.
     const elementNum = +element - 1;
     // Check to make sure the element is not over the number of content elements/paragraphs
     // and make sure that the specified child exists
@@ -176,7 +178,6 @@ const ArticleBodyChain = ({ children }) => {
 
       // Once an empty position is found, place the corresponding chain component child
       articleBody[elementPosition] = children[elementNum];
-      console.log(children[elementNum]);
     }
   });
 

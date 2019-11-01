@@ -1,5 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('the links bar feature for the default output type', () => {
   afterEach(() => {
@@ -52,9 +54,9 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
+    const wrapper = mount(<LinksBar customFields={{ hierarchy: 'links' }} />);
 
-    expect(wrapper.find('nav > span')).toHaveLength(2);
+    expect(wrapper.find('span.links-menu')).toHaveLength(2);
   });
 
   it('should have no menu item if no content is returned', () => {

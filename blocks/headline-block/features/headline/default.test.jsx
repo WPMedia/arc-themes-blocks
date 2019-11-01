@@ -1,5 +1,7 @@
 const React = require('react');
-const { shallow } = require('enzyme');
+const { shallow, mount } = require('enzyme');
+
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('the headline feature for the default output type', () => {
   afterEach(() => {
@@ -9,22 +11,23 @@ describe('the headline feature for the default output type', () => {
   describe('when headline content from globalContent is present', () => {
     beforeEach(() => {
       jest.mock('fusion:context', () => ({
-        useComponentContext: jest.fn(() => ({
+        useFusionContext: jest.fn(() => ({
           globalContent: {
             headlines: {
               basic: 'headline for our story',
             },
           },
+          arcSite: 'not-real',
         })),
       }));
     });
 
     it('should render an h1', () => {
       const { default: Headline } = require('./default');
-      const wrapper = shallow(<Headline />);
+      const wrapper = mount(<Headline />);
 
-      expect(wrapper.at(0).type()).toBe('h1');
-      expect(wrapper.at(0).hasClass('headline')).toBe(true);
+      expect(wrapper.find('h1')).toHaveClassName('headline');
+      expect(wrapper.find('h1').hasClass(/sc-/)).toBe(true);
     });
 
     it('should dangerously set the innerHTML to the headline content', () => {
@@ -38,7 +41,7 @@ describe('the headline feature for the default output type', () => {
   describe('when headline content from globalContent is NOT present', () => {
     beforeEach(() => {
       jest.mock('fusion:context', () => ({
-        useComponentContext: jest.fn(() => ({
+        useFusionContext: jest.fn(() => ({
           globalContent: {},
         })),
       }));

@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import styled from 'styled-components';
 
 import List from './articlebody/_children/list';
 import Header from './articlebody/_children/heading';
@@ -9,6 +11,7 @@ import Oembed from './articlebody/_children/oembed';
 import Blockquote from './articlebody/_children/blockquote';
 import Pullquote from './articlebody/_children/pullquote';
 import Table from './articlebody/_children/table';
+import './article-body.scss';
 
 function parseArticleItem(item, index, arcSite) {
   const {
@@ -94,7 +97,7 @@ function parseArticleItem(item, index, arcSite) {
     }
 
     case 'correction': {
-      const { correctionTitle } = getThemeStyle(arcSite);
+      const { correctionTitle } = getProperties(arcSite);
       return (item.text && item.text.length > 0) ? (
         <Fragment key={key}>
           <section className="correction">
@@ -145,6 +148,16 @@ function parseArticleItem(item, index, arcSite) {
   }
 }
 
+const ArticleBody = styled.article`
+  font-family: ${props => props.secondaryFont};
+  h1, h2, h3, h4, h5, h6, figcaption, table {
+    font-family: ${props => props.primaryFont};
+  }
+  p, ol, ul, blockquote.pullquote p, blockquote {
+    font-family: ${props => props.secondaryFont};
+  }
+`;
+
 const ArticleBodyChain = ({ children }) => {
   const { globalContent: items, customFields, arcSite } = useFusionContext();
   const { elementPlacement } = customFields;
@@ -165,8 +178,6 @@ const ArticleBodyChain = ({ children }) => {
   // Here, the keys represent the child of the chain, and the values represent their positions
   //  in the article body.
   Object.keys(parsedElementPlacement).forEach((element) => {
-    // subtract one here - looks like the client will put in {3:2} to denote placing third child to second position
-    // so we need to account for the index starting from 0.
     const elementNum = +element - 1;
     // Check to make sure the element is not over the number of content elements/paragraphs
     // and make sure that the specified child exists
@@ -197,9 +208,13 @@ const ArticleBodyChain = ({ children }) => {
   });
 
   return (
-    <article className="article-body">
+    <ArticleBody
+      className="article-body"
+      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+    >
       { articleBody }
-    </article>
+    </ArticleBody>
   );
 };
 

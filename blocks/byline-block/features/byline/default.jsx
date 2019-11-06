@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
+import getThemeStyle from 'fusion:themes';
+
 import './byline.scss';
+
+const BylineSection = styled.section`
+    font-family: ${props => props.primaryFont};
+`;
 
 @Consumer
 class ArticleByline extends Component {
@@ -10,6 +17,7 @@ class ArticleByline extends Component {
     // Inherit global content
     const { globalContent: content } = props;
     const { credits } = content;
+    this.arcSite = props.arcSite;
 
     this.state = {
       credits,
@@ -23,27 +31,30 @@ class ArticleByline extends Component {
     const authors = by.map((author) => {
       // Only include authors in the byline
       if (author.type === 'author') {
-        const { additional_properties: additionalProperties } = author;
+        const { additional_properties: additionalProperties = {} } = author;
 
         // This is where the actual byline is stored
-        const { original } = additionalProperties;
+        const { original = {} } = additionalProperties;
 
         const hasByline = Object.prototype.hasOwnProperty.call(original, 'byline');
+        const hasName = Object.prototype.hasOwnProperty.call(author, 'name');
         const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
 
         // If the author has a url to their bio page, return an anchor tag to the bio.
         // If not, just return the string.
         if (hasByline) {
-          return (hasURL) ? `<a href="${author.url}">${original.byline}</a>` : original.byline;
+          return (hasURL && original.byline) ? `<a href="${author.url}">${original.byline}</a>` : original.byline;
         }
 
         // It shouldn't get to this point since byline is a mandatory field,
         // but use name if byline info is not included
-        return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
+        if (hasName) {
+          return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
+        }
       }
 
       return null;
-    });
+    }).filter(byline => byline);
 
     const numAuthors = authors.length;
 
@@ -80,7 +91,7 @@ class ArticleByline extends Component {
 
     return (
       // eslint-disable-next-line react/no-danger
-      <section className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
+      <BylineSection primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
     );
   }
 }

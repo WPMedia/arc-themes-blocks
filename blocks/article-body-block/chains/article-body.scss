@@ -1,0 +1,270 @@
+$mobile-breakpoint: 480px;
+$tablet-breakpoint: 700px;
+
+.article-body{
+  font-size: 18px;
+  color:  #000A12;
+  line-height:  24px;
+  margin: 1em;
+
+  h1, h2, h3, h4, h5, h6, p, ol, ul, blockquote, table, .correction, div, section, article{
+    margin: 20px 0;
+  }
+
+  @media screen and (max-width: $mobile-breakpoint){
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  @media screen and (max-width: $tablet-breakpoint) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    font-size:  20px;
+    color:  #000A12;
+    font-style:  normal;
+    text-decoration:  none;
+    line-height:  27px;
+    text-transform:  capitalize;
+    font-weight:  bold;
+
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: 20px;
+      line-height: 27px;
+    }
+  }
+
+
+  p{
+    font-size:  18px;
+    color:  #000A12;
+    text-decoration:  none;
+    line-height:  24px;
+    font-weight:  normal;
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  a{
+    font-size:  inherit;
+    color:  #000A12;
+    text-decoration:  underline;
+    line-height:  inherit;
+    font-weight:  normal;
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: inherit;
+      line-height: inherit;
+    }
+    //TODO: Design needs to provide visited and hover values
+    /**
+    &:visited{
+      color: $theme-article-body-a-visited-font-color;
+      text-decoration: $theme-article-body-a-visited-text-decoration;
+      line-height: $theme-article-body-a-visited-line-height;
+      display: $theme-article-body-a-visited-display;
+      border: $theme-article-body-a-visited-border;
+      padding: $theme-article-body-a-visited-padding;
+    }
+
+    &:hover{
+      color: $theme-article-body-a-hover-font-color;
+      text-decoration: $theme-article-body-a-hover-text-decoration;
+      line-height: $theme-article-body-a-hover-line-height;
+      display: $theme-article-body-a-hover-display;
+      border: $theme-article-body-a-hover-border;
+      padding: $theme-article-body-a-padding-padding;
+    }
+    ***/
+  }
+
+  ul {
+    font-size:  18px;
+    line-height:  24px;
+    list-style:  disc;
+    font-weight:  normal;
+
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  ol {
+    font-size:  18px;
+    line-height: 24px;
+    list-style:  decimal;
+    font-weight:  normal;
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+
+  .correction {
+    color:  #7F8C8D;
+    font-style:  Italic;
+    font-weight:  normal;
+    box-shadow: inset 0 -1px 0 0 #B8C1CB;
+    section{
+      padding-bottom: 10px;
+
+      h3{
+        text-transform: uppercase;
+        font-style: italic;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 24px;
+        color: #000A12;
+      }
+    }
+  }
+
+  figcaption {
+    color:  #B8C1CB;
+    font-size:  14px;
+    line-height:  14px;
+    font-style:  normal;
+    font-weight:  normal;
+
+    @media screen and (max-width: $mobile-breakpoint){
+      font-size: 14px;
+      line-height: 14px;
+
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+
+  table {
+    width:  100%;
+    margin:  20px 0;;
+    color: #778F9B;
+
+    @media screen and (max-width: $mobile-breakpoint){
+      width:  100%;
+      margin:  20px 0;;
+    }
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      width:  100%;
+      margin:  20px 0;;
+    }
+
+    &, th, td {
+      border-left:  1px solid #DDE2E8;
+      border-right:  1px solid #DDE2E8;
+      border-top:  1px solid #DDE2E8;
+      border-bottom:  1px solid #DDE2E8;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding:  5px 10px;
+      text-align:  center;
+
+      @media screen and (max-width: $mobile-breakpoint){
+        padding: 5px 10px;
+      }
+
+      @media screen and (max-width: $tablet-breakpoint) {
+        padding: 5px 10px;
+      }
+    }
+
+    td{
+      font-size: 17px;
+      font-style: normal;
+      font-weight: normal;
+
+      @media screen and (max-width: $mobile-breakpoint){
+        font-size: 17px;
+        white-space: normal;
+      }
+
+      @media screen and (max-width: $tablet-breakpoint) {
+        font-size: 17px;
+        white-space: normal;
+      }
+    }
+
+    th{
+      font-size: 17px;
+      font-style: normal;
+      font-weight: normal;
+      white-space: nowrap;
+
+      @media screen and (max-width: $mobile-breakpoint){
+        font-size: 17px;
+        white-space: normal;
+      }
+
+      @media screen and (max-width: $tablet-breakpoint) {
+        font-size: 17px;
+        white-space: normal;
+      }
+    }
+  }
+
+  blockquote.pullquote{
+    p{
+      text-align: center;
+      color:  #000A12;
+      font-size:  24px;
+      line-height:  34px;
+      font-weight:  bold;
+      font-style:  italic;
+    }
+    padding: 20px 0;
+    box-shadow: inset 0 -5px 0 0 #B8C1CB, inset 0 5px 0 0 #B8C1CB;
+  }
+
+  blockquote{
+    padding: 20px 0 20px 25px;
+    box-shadow: inset 5px 0 0 0 #1F2D3D;
+    text-align: left;
+    color:  #000A12;
+    font-size:  18px;
+    line-height:  21px;
+    font-weight:  normal;
+    font-style:  italic;
+  }
+
+
+}

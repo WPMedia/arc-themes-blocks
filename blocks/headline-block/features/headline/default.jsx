@@ -1,13 +1,19 @@
 import React from 'react';
-import { useComponentContext } from 'fusion:context';
+import styled from 'styled-components';
+import { useFusionContext } from 'fusion:context';
+import getThemeStyle from 'fusion:themes';
 import './headline.scss';
 
+const HeadlineHeader = styled.h1`
+  font-family: ${props => props.secondaryFont};
+`;
+
 const Headline = () => {
-  const { globalContent: content } = useComponentContext();
+  const { globalContent: content, arcSite } = useFusionContext();
 
   return (
     !!(content && content.headlines && content.headlines.basic) && (
-      <h1 className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} />
+      <HeadlineHeader className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} secondaryFont={getThemeStyle(arcSite)['secondary-font-family']} />
     )
   );
 };

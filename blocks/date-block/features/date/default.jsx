@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
+import getThemeStyle from 'fusion:themes';
 import { TIMEZONE } from 'fusion:environment';
-import PropTypes from 'prop-types';
 import './date.scss';
+
+const StyledTime = styled.time`
+  font-family: ${props => props.primaryFont};
+`;
 
 @Consumer
 class ArticleDate extends Component {
@@ -36,10 +41,11 @@ class ArticleDate extends Component {
 
   render() {
     const { displayDate } = this.state;
+    const { arcSite } = this.props;
     return (
-      <time key={displayDate} className="date" dateTime={displayDate}>
+      <StyledTime key={displayDate} className="date" dateTime={displayDate} primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
         {displayDate}
-      </time>
+      </StyledTime>
     );
   }
 }

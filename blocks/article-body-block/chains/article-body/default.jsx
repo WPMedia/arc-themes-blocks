@@ -5,12 +5,12 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import styled from 'styled-components';
 
-import List from './articlebody/_children/list';
-import Header from './articlebody/_children/heading';
-import Oembed from './articlebody/_children/oembed';
-import Blockquote from './articlebody/_children/blockquote';
-import Pullquote from './articlebody/_children/pullquote';
-import Table from './articlebody/_children/table';
+import List from './_children/list';
+import Header from './_children/heading';
+import Oembed from './_children/oembed';
+import Blockquote from './_children/blockquote';
+import Pullquote from './_children/pullquote';
+import Table from './_children/table';
 import './article-body.scss';
 
 function parseArticleItem(item, index, arcSite) {
@@ -160,6 +160,7 @@ const ArticleBody = styled.article`
 
 const ArticleBodyChain = ({ children }) => {
   const { globalContent: items, customFields, arcSite } = useFusionContext();
+  console.log(useFusionContext());
   const { elementPlacement } = customFields;
   let parsedElementPlacement;
   try {

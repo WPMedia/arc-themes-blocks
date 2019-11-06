@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/site-hierarchy-content-block",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",

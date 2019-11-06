@@ -4,12 +4,7 @@
   align-items: center;
   border-bottom: 1px grey;
 
-  * {
-    font-family:  $theme-primary-font-family;
-  }
-
   .nav-search, .nav-sections {
-    background-color: $theme-primary-color;
     margin: 0 5px;
     height: 80%;
     border: 0;

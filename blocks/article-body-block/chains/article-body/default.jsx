@@ -160,7 +160,6 @@ const ArticleBody = styled.article`
 
 const ArticleBodyChain = ({ children }) => {
   const { globalContent: items, customFields, arcSite } = useFusionContext();
-  console.log(useFusionContext());
   const { elementPlacement } = customFields;
   let parsedElementPlacement;
   try {

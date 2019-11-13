@@ -1,0 +1,17 @@
+.tags-holder {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.tags {
+  padding: .2rem;
+  min-width: 5rem;
+  flex-basis: 5rem;
+  border-radius: 50px;
+  margin: 0 .5rem;
+  text-decoration: none;
+  text-align: center;
+}

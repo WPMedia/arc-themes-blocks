@@ -11,6 +11,7 @@ import Oembed from './_children/oembed';
 import Blockquote from './_children/blockquote';
 import Pullquote from './_children/pullquote';
 import Table from './_children/table';
+import Tags from './_children/tags;'
 
 const BodyArticle = styled.article`
   font-family: ${props => props.secondaryFont};
@@ -168,13 +169,16 @@ const Body = ({ className, data: items, ...props }) => {
   });
 
   return (
-    <BodyArticle
-      className="article-body"
-      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-    >
-      { sections }
-    </BodyArticle>
+    <>
+      <BodyArticle
+        className="article-body"
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+      >
+        { sections }
+      </BodyArticle>
+      <Tags />
+    </>
   );
 };
 

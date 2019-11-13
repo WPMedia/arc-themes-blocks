@@ -34,7 +34,7 @@ const SampleOutputType = ({
     </head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58927291-1" />
     <script>{googleAnalytics()}</script>
-    <body>
+    <body className="bmiller_20001">
       <div id="fusion-app">
         {children}
       </div>

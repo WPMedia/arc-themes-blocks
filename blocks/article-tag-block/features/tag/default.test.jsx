@@ -33,13 +33,6 @@ describe('Given that the global content has a property called taxonomy which con
 
   it('should return one parent container for tags', () => {
     const { default: ArticleTags } = require('./default.jsx');
-    mount(<ArticleTags />);
-    expect(mockFunction).toHaveBeenCalled();
-    expect(mockFunction).toHaveReturnedWith(mockReturnData)
-  });
-
-  it('should return one parent container for tags', () => {
-    const { default: ArticleTags } = require('./default.jsx');
     const wrapper = mount(<ArticleTags />);
     expect(wrapper.children().find('.tags-holder').length).toEqual(1);
   });

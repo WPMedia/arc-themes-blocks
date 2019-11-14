@@ -90,7 +90,7 @@ describe('Given that the global content has a property called taxonomy which con
   });
 });
 
-describe('Given that the global content does not have a property called taxonomy, it does not render anything', () => {
+describe('Given that the global content has a property called taxonomy which contains an empty tags array, it should not render anything', () => {
   afterEach(() => {
     jest.resetModules();
   });
@@ -108,14 +108,14 @@ describe('Given that the global content does not have a property called taxonomy
     }));
   });
 
-  it('should return tags with correct href', () => {
+  it('should not render anything', () => {
     const { default: ArticleTags } = require('./default.jsx');
     const wrapper = mount(<ArticleTags />);
     expect(wrapper.children().find('.tags-holder').length).toEqual(0);
   });
 });
 
-describe('Given that the global content has a property called taxonomy which contains an empty tags array, it should not render anything', () => {
+describe('Given that the global content does not have a property called taxonomy, it should not render anything', () => {
   afterEach(() => {
     jest.resetModules();
   });
@@ -129,7 +129,7 @@ describe('Given that the global content has a property called taxonomy which con
     }));
   });
 
-  it('should return tags with correct href', () => {
+  it('should not render anything', () => {
     const { default: ArticleTags } = require('./default.jsx');
     const wrapper = mount(<ArticleTags />);
     expect(wrapper.children().find('.tags-holder').length).toEqual(0);

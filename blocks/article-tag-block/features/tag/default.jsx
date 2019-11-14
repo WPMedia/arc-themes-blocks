@@ -27,5 +27,4 @@ const ArticleTags = () => {
   ) : '';
 };
 
-
 export default ArticleTags;

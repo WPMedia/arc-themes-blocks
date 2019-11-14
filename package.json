@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@arc-test-org/article-body-block": "file:blocks/article-body-block",
+    "@arc-test-org/article-tag-block": "file:blocks/article-tag-block",
     "@arc-test-org/header-nav-block": "file:blocks/header-nav-block",
     "@arc-test-org/headline-block": "file:blocks/headline-block",
     "@arc-test-org/subheadline-block": "file:blocks/subheadline-block",

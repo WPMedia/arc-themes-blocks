@@ -13,6 +13,7 @@ const Tags = styled.a`
 const ArticleTags = () => {
   const { arcSite, globalContent: content } = useFusionContext();
   const { 'primary-color': primaryColor, 'primary-font': primaryFont } = getThemeStyle(arcSite);
+  const defaultBackgroundColor = '#14689A';
   const { taxonomy: { tags = [] } = {} } = content;
   
   return tags.length ? (
@@ -20,7 +21,7 @@ const ArticleTags = () => {
       {
         tags.map((tag, i) => {
           const slug = tag.slug || '#';
-          return <Tags key={`${slug}-${i}`} className="tags" href={slug} primaryColor={primaryColor} primaryFont={primaryFont}>{tag.text}</Tags>
+          return <Tags key={`${slug}-${i}`} className="tags" href={slug} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>
       })
       }
     </div>

@@ -102,4 +102,74 @@ describe('When the share bar is shown', () => {
     const wrapper = mount(<ShareBar />);
     expect(wrapper.find('div.shareBar').children()).toHaveLength(0);
   });
+
+  it('should open a new window when facebook button is clicked', () => {
+    const { default: ShareBar } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        customFields: {
+          email: false,
+          facebook: true,
+          pinterest: false,
+          twitter: false,
+          linkedIn: false,
+        },
+        globalContent: {
+          headlines: {
+            basic: 'sample headline',
+          },
+          website_url: '/2019/07/15/global-kitchen-sink-article/',
+        },
+      })),
+    }));
+
+    getProperties.mockImplementation(() => ({
+      websiteDomain: 'https://www.thesun.com/',
+      websiteName: 'The Sun',
+    }));
+
+    window.open = jest.fn();
+
+    const wrapper = mount(<ShareBar />);
+    wrapper.find({ title: 'facebook' }).simulate('click');
+    expect(window.location.origin).toEqual('http://localhost');
+    expect(window.open).toBeCalled();
+  });
+
+  it('should work with a keypress', () => {
+    const { default: ShareBar } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        customFields: {
+          email: false,
+          facebook: true,
+          pinterest: false,
+          twitter: false,
+          linkedIn: false,
+        },
+        globalContent: {
+          headlines: {
+            basic: 'sample headline',
+          },
+          website_url: '/2019/07/15/global-kitchen-sink-article/',
+        },
+      })),
+    }));
+
+    getProperties.mockImplementation(() => ({
+      websiteDomain: 'https://www.thesun.com/',
+      websiteName: 'The Sun',
+    }));
+
+    window.open = jest.fn();
+
+    const wrapper = mount(<ShareBar />);
+    wrapper.find({ title: 'facebook' }).simulate('keyPress');
+    expect(window.location.origin).toEqual('http://localhost');
+    expect(window.open).toBeCalled();
+  });
 });

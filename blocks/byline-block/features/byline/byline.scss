@@ -1,6 +1,7 @@
 .byline {
   font-size: 16px;
   line-height: 22px;
+  font-family: <%= secondaryFontFamily %>;
   p {
     color: #000A12;
   }

@@ -13,7 +13,6 @@ module.exports = {
             'fusion:context': './jest/mocks/context.js',
             'fusion:consumer': './jest/mocks/consumer.js',
             'fusion:environment': './jest/mocks/environment.js',
-            'fusion:properties': './jest/mocks/properties.js',
           },
         }],
       ],

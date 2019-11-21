@@ -4,7 +4,12 @@
   align-items: center;
   border-bottom: 1px grey;
 
+  * {
+    font-family: <%= primaryFontFamily %>;
+  }
+
   .nav-search, .nav-sections {
+    background-color: <%= primaryColor %>;
     margin: 0 5px;
     height: 80%;
     border: 0;

@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 
 import './byline.scss';
-
-const BylineSection = styled.section`
-    font-family: ${props => props.primaryFont};
-`;
 
 @Consumer
 class ArticleByline extends Component {
@@ -90,7 +85,7 @@ class ArticleByline extends Component {
 
     return (
       // eslint-disable-next-line react/no-danger
-      <BylineSection primaryFont="Georgia, Times, serif" className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
+      <section className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
     );
   }
 }

@@ -3,7 +3,7 @@
 /* eslint-disable react/no-typos */
 import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
-import getProperties from 'fusion:properties';
+import getThemeStyle from 'fusion:themes';
 import PropTypes from 'prop-types';
 import './articlebody.scss';
 import Body from './render';
@@ -16,8 +16,7 @@ class ArticleBody extends Component {
       <Body
         data={content}
         params={customFields}
-        correctionTitle={getProperties(arcSite).correctionTitle}
-        arcSite={arcSite}
+        correctionTitle={getThemeStyle(arcSite).correctionTitle}
       />
     );
   }

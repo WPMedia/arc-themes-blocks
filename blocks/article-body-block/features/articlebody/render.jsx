@@ -3,7 +3,6 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -11,20 +10,8 @@ import Blockquote from './_children/blockquote';
 import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 
-const BodyArticle = styled.article`
-  font-family: ${props => props.secondaryFont};
-
-  h1, h2, h3, h4, h5, h6, figcaption, table {
-    font-family: ${props => props.primaryFont};
-  }
-
-  p, ol, ul, blockquote.pullquote p, blockquote {
-    font-family: ${props => props.secondaryFont};
-  }
-`;
-
 const Body = ({ className, data: items, ...props }) => {
-  const { params, correctionTitle, arcSite } = props;
+  const { params, correctionTitle } = props;
   const {
     inheritGlobalContent,
   } = params;
@@ -167,14 +154,9 @@ const Body = ({ className, data: items, ...props }) => {
   });
 
   return (
-    <BodyArticle
-      className="article-body"
-      primaryFont="Georgia, Times, serif"
-      secondaryFont="Tahoma,Verdana,Segoe,sans-serif"
-
-    >
+    <article className="article-body">
       { sections }
-    </BodyArticle>
+    </article>
   );
 };
 

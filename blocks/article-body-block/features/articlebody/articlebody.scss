@@ -2,6 +2,7 @@ $mobile-breakpoint: 480px;
 $tablet-breakpoint: 700px;
 
 .article-body{
+  font-family: $theme-secondary-font-family;
   font-size: 18px;
   color:  #000A12;
   line-height:  24px;
@@ -22,6 +23,7 @@ $tablet-breakpoint: 700px;
   }
 
   h1, h2, h3, h4, h5, h6{
+    font-family: $theme-primary-font-family;
     font-size:  20px;
     color:  #000A12;
     font-style:  normal;
@@ -44,6 +46,7 @@ $tablet-breakpoint: 700px;
 
 
   p{
+    font-family: $theme-secondary-font-family;
     font-size:  18px;
     color:  #000A12;
     text-decoration:  none;
@@ -100,6 +103,7 @@ $tablet-breakpoint: 700px;
   }
 
   ul {
+    font-family: $theme-secondary-font-family;
     font-size:  18px;
     line-height:  24px;
     list-style:  disc;
@@ -118,6 +122,7 @@ $tablet-breakpoint: 700px;
   }
 
   ol {
+    font-family: $theme-secondary-font-family;
     font-size:  18px;
     line-height: 24px;
     list-style:  decimal;
@@ -154,6 +159,7 @@ $tablet-breakpoint: 700px;
   }
 
   figcaption {
+    font-family: $theme-primary-font-family;
     color:  #B8C1CB;
     font-size:  14px;
     line-height:  14px;
@@ -173,6 +179,7 @@ $tablet-breakpoint: 700px;
   }
 
   table {
+    font-family: $theme-primary-font-family;
     width:  100%;
     margin:  20px 0;;
     color: #778F9B;
@@ -245,6 +252,7 @@ $tablet-breakpoint: 700px;
   blockquote.pullquote{
     p{
       text-align: center;
+      font-family:$theme-secondary-font-family;
       color:  #000A12;
       font-size:  24px;
       line-height:  34px;
@@ -259,10 +267,13 @@ $tablet-breakpoint: 700px;
     padding: 20px 0 20px 25px;
     box-shadow: inset 5px 0 0 0 #1F2D3D;
     text-align: left;
+    font-family:$theme-secondary-font-family;
     color:  #000A12;
     font-size:  18px;
     line-height:  21px;
     font-weight:  normal;
     font-style:  italic;
   }
+
+
 }

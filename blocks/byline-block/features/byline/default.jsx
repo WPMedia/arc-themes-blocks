@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-import getThemeStyle from 'fusion:themes';
 
 import './byline.scss';
 
@@ -91,7 +90,7 @@ class ArticleByline extends Component {
 
     return (
       // eslint-disable-next-line react/no-danger
-      <BylineSection primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
+      <BylineSection primaryFont="Georgia, Times, serif" className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
     );
   }
 }

@@ -4,7 +4,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -170,8 +169,9 @@ const Body = ({ className, data: items, ...props }) => {
   return (
     <BodyArticle
       className="article-body"
-      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+      primaryFont="Georgia, Times, serif"
+      secondaryFont="Tahoma,Verdana,Segoe,sans-serif"
+
     >
       { sections }
     </BodyArticle>

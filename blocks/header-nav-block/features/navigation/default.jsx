@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import getThemeStyle from 'fusion:themes';
 
 import navHamburger from './images/hamburger.svg';
 import navSearch from './images/search.svg';
@@ -21,10 +20,10 @@ const NavButton = styled.button`
 
 export default () => {
   const { arcSite } = useAppContext();
-  const primaryColor = getThemeStyle(arcSite)['primary-color'];
+  const primaryColor = "lime";
 
   return (
-    <StyledNav className="news-theme-navigation" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+    <StyledNav className="news-theme-navigation" primaryFont="Georgia, Times, serif">
       <NavButton className="nav-search" type="button" primaryColor={primaryColor}><img src={navSearch} alt="Navigation bar search" /></NavButton>
       <NavButton className="nav-sections" type="button" primaryColor={primaryColor}>
         <span>Sections</span>

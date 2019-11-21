@@ -15,7 +15,6 @@ class ArticleBody extends Component {
       <Body
         data={content}
         params={customFields}
-        correctionTitle={getThemeStyle(arcSite).correctionTitle}
       />
     );
   }

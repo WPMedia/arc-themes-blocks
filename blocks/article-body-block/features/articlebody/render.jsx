@@ -77,7 +77,6 @@ const Body = ({ className, data: items, ...props }) => {
               <span>{caption}</span>
               {creditSection}
             </figcaption>
-            <hr />
           </figure>
         ) : null;
       }
@@ -85,13 +84,15 @@ const Body = ({ className, data: items, ...props }) => {
       case 'interstitial_link': {
         const { url } = item;
         if (!(url && content)) return null;
-
+        const beforeContent = '[&nbsp;';
+        const afterContent = '&nbsp;]';
         return (url && url.length > 0) ? (
           <Fragment key={key}>
-            <p>
+            <p className="interstitial_link">
+              <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
               <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
+              <span dangerouslySetInnerHTML={{ __html: afterContent }} />
             </p>
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -100,7 +101,6 @@ const Body = ({ className, data: items, ...props }) => {
         return (content && content.length > 0) ? (
           <Fragment key={key}>
             <div dangerouslySetInnerHTML={{ __html: content }} />
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -111,7 +111,6 @@ const Body = ({ className, data: items, ...props }) => {
         return (listItems && listItems.length > 0) ? (
           <Fragment key={key}>
             <List listType={listType} listItems={listItems} />
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -120,8 +119,8 @@ const Body = ({ className, data: items, ...props }) => {
         return (item.text && item.text.length > 0) ? (
           <Fragment key={key}>
             <section className="correction">
-              <h3>{correctionTitle}</h3>
-              {item.text}
+              <h6>{item.correction_type || 'Correction'}</h6>
+              <div>{item.text}</div>
             </section>
           </Fragment>
         ) : null;

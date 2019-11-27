@@ -1,20 +1,7 @@
 $mobile-breakpoint: 480px;
 $tablet-breakpoint: 700px;
 
+
 h1.headline{
-  font-weight: bold;
-  font-size: 40px;
-  color: #000A12;
-  text-decoration: none;
-  line-height: 53px;
 
-  @media screen and (max-width: $mobile-breakpoint){
-    font-size: 28px;
-    line-height: 37px;
-  }
-
-  @media screen and (max-width: $tablet-breakpoint) {
-    font-size: 14px;
-    line-height: 20px;
-  }
 }

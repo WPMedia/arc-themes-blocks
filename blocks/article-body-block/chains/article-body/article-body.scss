@@ -2,54 +2,10 @@ $mobile-breakpoint: 480px;
 $tablet-breakpoint: 700px;
 
 .article-body{
-  font-size: 18px;
-  color:  #000A12;
-  line-height:  24px;
-  margin: 1em;
-
-  h1, h2, h3, h4, h5, h6, p, ol, ul, blockquote, table, .correction, div, section, article{
-    margin: 20px 0;
-  }
-
-  @media screen and (max-width: $mobile-breakpoint){
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  @media screen and (max-width: $tablet-breakpoint) {
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  h1, h2, h3, h4, h5, h6{
-    font-size:  20px;
-    color:  #000A12;
-    font-style:  normal;
-    text-decoration:  none;
-    line-height:  27px;
-    text-transform:  capitalize;
-    font-weight:  bold;
+  color: $ui-dark-secondary-color;
 
 
-    @media screen and (max-width: $mobile-breakpoint){
-      font-size: 20px;
-      line-height: 27px;
-    }
-
-    @media screen and (max-width: $tablet-breakpoint) {
-      font-size: 20px;
-      line-height: 27px;
-    }
-  }
-
-
-  p{
-    font-size:  18px;
-    color:  #000A12;
-    text-decoration:  none;
-    line-height:  24px;
-    font-weight:  normal;
-
+  /***
     @media screen and (max-width: $mobile-breakpoint){
       font-size: 18px;
       line-height: 24px;
@@ -59,116 +15,79 @@ $tablet-breakpoint: 700px;
       font-size: 18px;
       line-height: 24px;
     }
+  ***/
+
+  p, ul, ol {
+    font-size: calculateRem(20px);
+    line-height: calculateRem(40px);
+    letter-spacing: 0.1px;
+    margin: map-get($spacers, 'sm') 0;
   }
 
-  a{
-    font-size:  inherit;
-    color:  #000A12;
-    text-decoration:  underline;
-    line-height:  inherit;
-    font-weight:  normal;
-
-    @media screen and (max-width: $mobile-breakpoint){
-      font-size: inherit;
-      line-height: inherit;
-    }
-
-    @media screen and (max-width: $tablet-breakpoint) {
-      font-size: inherit;
-      line-height: inherit;
-    }
-    //TODO: Design needs to provide visited and hover values
-    /**
-    &:visited{
-      color: $theme-article-body-a-visited-font-color;
-      text-decoration: $theme-article-body-a-visited-text-decoration;
-      line-height: $theme-article-body-a-visited-line-height;
-      display: $theme-article-body-a-visited-display;
-      border: $theme-article-body-a-visited-border;
-      padding: $theme-article-body-a-visited-padding;
-    }
-
-    &:hover{
-      color: $theme-article-body-a-hover-font-color;
-      text-decoration: $theme-article-body-a-hover-text-decoration;
-      line-height: $theme-article-body-a-hover-line-height;
-      display: $theme-article-body-a-hover-display;
-      border: $theme-article-body-a-hover-border;
-      padding: $theme-article-body-a-padding-padding;
-    }
-    ***/
+  figure{
+    margin: 0;
   }
 
   ul {
-    font-size:  18px;
-    line-height:  24px;
-    list-style:  disc;
-    font-weight:  normal;
-
-
-    @media screen and (max-width: $mobile-breakpoint){
-      font-size: 18px;
-      line-height: 24px;
-    }
-
-    @media screen and (max-width: $tablet-breakpoint) {
-      font-size: 18px;
-      line-height: 24px;
-    }
+    list-style-type: disc;
+    list-style-position: inside;
   }
-
   ol {
-    font-size:  18px;
-    line-height: 24px;
-    list-style:  decimal;
-    font-weight:  normal;
-
-    @media screen and (max-width: $mobile-breakpoint){
-      font-size: 18px;
-      line-height: 24px;
-    }
-
-    @media screen and (max-width: $tablet-breakpoint) {
-      font-size: 18px;
-      line-height: 24px;
-    }
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+  ul ul, ol ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: map-get($spacers, 'sm');
+  }
+  ol ol, ul ol {
+    list-style-type: lower-latin;
+    list-style-position: inside;
+    margin-left: map-get($spacers, 'sm');
   }
 
   .correction {
-    color:  #7F8C8D;
-    font-style:  Italic;
-    font-weight:  normal;
-    box-shadow: inset 0 -1px 0 0 #B8C1CB;
-    section{
-      padding-bottom: 10px;
+    margin-bottom: map-get($spacers, 'sm');
+    padding: map-get($spacers, 'sm') 0;
+    box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
 
-      h3{
-        text-transform: uppercase;
-        font-style: italic;
-        font-size: 18px;
-        font-weight: bold;
-        line-height: 24px;
-        color: #000A12;
-      }
+    div, p{
+      color:  darken( $ui-light-secondary-color, 20% );
+      font-size: calculateRem(18px);
+      line-height: calculateRem(24px);
+      font-style:  italic;
+      font-weight:  normal;
+      margin: 0;
+      display: inline;
+    }
+
+    h6{
+      text-transform: uppercase;
+      font-style: italic;
     }
   }
 
-  figcaption {
-    color:  #B8C1CB;
-    font-size:  14px;
-    line-height:  14px;
+  figcaption, figcaption p {
+    color:  darken( $ui-light-secondary-color, 20% );
+    font-size:  calculateRem(14px);
+    line-height:  calculateRem(20px);
     font-style:  normal;
     font-weight:  normal;
 
+    p{
+      display: inline;
+      margin:0;
+    }
     @media screen and (max-width: $mobile-breakpoint){
-      font-size: 14px;
-      line-height: 14px;
+      font-size:  calculateRem(14px);
+      line-height:  calculateRem(20px);
 
     }
 
     @media screen and (max-width: $tablet-breakpoint) {
-      font-size: 14px;
-      line-height: 14px;
+      font-size:  calculateRem(14px);
+      line-height:  calculateRem(20px);
     }
   }
 
@@ -243,28 +162,47 @@ $tablet-breakpoint: 700px;
   }
 
   blockquote.pullquote{
+    text-align: center;
+    font-size:  calculateRem(26px);
+    line-height:  calculateRem(32px);
+    font-weight:  bold;
+    font-style:  italic;
     p{
       text-align: center;
-      color:  #000A12;
-      font-size:  24px;
-      line-height:  34px;
+      font-size:  calculateRem(26px);
+      line-height:  calculateRem(32px);
       font-weight:  bold;
       font-style:  italic;
     }
-    padding: 20px 0;
-    box-shadow: inset 0 -5px 0 0 #B8C1CB, inset 0 5px 0 0 #B8C1CB;
+    padding: map-get($spacers, 'md') 0;
+    box-shadow: inset 0 -5px 0 0 $ui-light-secondary-color, inset 0 5px 0 0 $ui-light-secondary-color;
   }
 
   blockquote{
-    padding: 20px 0 20px 25px;
     box-shadow: inset 5px 0 0 0 #1F2D3D;
+    padding: 0 0 0 map-get($spacers, 'md');
     text-align: left;
-    color:  #000A12;
-    font-size:  18px;
-    line-height:  21px;
+    margin: 0;
+    font-size:  calculateRem(18px);
+    line-height:  calculateRem(32px);
     font-weight:  normal;
     font-style:  italic;
+
+    p{
+      font-size:  calculateRem(18px);
+      line-height:  calculateRem(32px);
+      font-weight:  normal;
+      font-style:  italic;
+    }
   }
 
+  .interstitial_link{
+    font-style: italic;
+    a{
+      color: $primary-color;
+      text-decoration: underline;
+    }
+
+  }
 
 }

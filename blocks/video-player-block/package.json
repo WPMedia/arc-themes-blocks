@@ -19,6 +19,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   }
 }

@@ -25,6 +25,7 @@ const SampleOutputType = ({
   <html lang="en">
     <head>
       <title>Fusion Article</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <MetaTags />
       <Libs />
       <CssLinks />

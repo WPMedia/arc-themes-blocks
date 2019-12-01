@@ -53,7 +53,7 @@ const Body = ({ className, data: items, ...props }) => {
         const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
 
         const creditSection = hasCredit ? credits.by.map(creditItem => (
-          <p key={key}>
+          <span key={key}>
             {creditItem.name}
             &nbsp;|&nbsp;
             {creditItem.type}
@@ -61,7 +61,7 @@ const Body = ({ className, data: items, ...props }) => {
             {creditItem.version}
             &nbsp;|&nbsp;
             {creditItem.byline}
-          </p>
+          </span>
         )) : null;
 
         return (url && url.length > 0) ? (

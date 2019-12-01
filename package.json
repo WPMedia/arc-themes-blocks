@@ -36,12 +36,13 @@
   },
   "dependencies": {
     "@arc-test-org/article-body-block": "file:blocks/article-body-block",
+    "@arc-test-org/article-tag-block": "file:blocks/article-tag-block",
     "@arc-test-org/header-nav-block": "file:blocks/header-nav-block",
     "@arc-test-org/headline-block": "file:blocks/headline-block",
     "@arc-test-org/subheadline-block": "file:blocks/subheadline-block",
     "@arc-test-org/date-block": "file:blocks/date-block",
     "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
     "@arc-test-org/default-output-block": "file:blocks/default-output-block",
-    "@arc-test-org/news-theme-css": "^1.0.7"
+    "@arc-test-org/news-theme-css": "^1.1.1"
   }
 }

@@ -8,25 +8,25 @@ const RightRailLayout = ({ children }) => (
     <main>
       <div className="container">
         <div className="row">
-          <div className="col-sm-12 section-padding">
+          <div className="col-sm-xl-12 section-padding">
             {children[1]}
           </div>
         </div>
 
 
         <div className="row">
-          <div className="col-md-8 col-sm-12 section-padding">
+          <div className="col-sm-12 col-md-xl-8 section-padding">
             {/* Main Content Area */}
             {children[2]}
           </div>
-          <aside className="col-md-4 col-sm-12 section-padding">
+          <aside className="col-sm-12 col-md-xl-4 section-padding">
             {/* Right Rail Content Area */}
             {children[3]}
           </aside>
         </div>
 
         <div className="row">
-          <div className="col-sm-12 section-padding">
+          <div className="col-sm-xl-12 section-padding">
             {children[4]}
           </div>
         </div>

@@ -1,8 +1,8 @@
 {
-  "name": "@arc-test-org/article-body-block",
-  "version": "1.1.11",
-  "description": "Fusion News Theme article body block",
-  "author": "Brent Miller <brent.miller@washport.com>",
+  "name": "@arc-test-org/share-bar-block",
+  "version": "0.1.2",
+  "description": "Fusion News Theme share bar block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -19,8 +19,6 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
-  },
-  "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
+  }
 }

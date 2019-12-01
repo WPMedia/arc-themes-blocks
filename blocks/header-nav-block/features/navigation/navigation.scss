@@ -50,11 +50,11 @@
     align-items: center;
 
     img{
-      height: 32px;
+      height: 24px;
       width:auto;
 
-      @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
-        height: 24px;
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        height: 32px;
       }
     }
   }

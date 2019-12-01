@@ -11,7 +11,7 @@ import Oembed from './_children/oembed';
 import Blockquote from './_children/blockquote';
 import Pullquote from './_children/pullquote';
 import Table from './_children/table';
-import './article-body.scss';
+
 
 function parseArticleItem(item, index, arcSite) {
   const {
@@ -33,7 +33,7 @@ function parseArticleItem(item, index, arcSite) {
       const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
 
       const creditSection = hasCredit ? credits.by.map(creditItem => (
-        <p key={key}>
+        <span key={key}>
           {creditItem.name}
           &nbsp;|&nbsp;
           {creditItem.type}
@@ -41,7 +41,7 @@ function parseArticleItem(item, index, arcSite) {
           {creditItem.version}
           &nbsp;|&nbsp;
           {creditItem.byline}
-        </p>
+        </span>
       )) : null;
 
       return (url && url.length > 0) ? (

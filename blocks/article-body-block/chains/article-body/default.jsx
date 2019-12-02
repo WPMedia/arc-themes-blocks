@@ -4,7 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import styled from 'styled-components';
-
+import VideoPlayer from '@arc-test-org/video-player-block';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -138,6 +138,10 @@ function parseArticleItem(item, index, arcSite) {
             <Blockquote element={item} />
           );
       }
+    case 'video':
+      return (
+        <VideoPlayer _html={item.embed_html} isChildComponent />
+      );
     default:
       return (
         <p key={key}>

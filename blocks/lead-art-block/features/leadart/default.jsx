@@ -5,6 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import Lightbox from '@arc-test-org/lightbox';
 import Image from '@arc-test-org/image/lib/image';
+import VideoPlayer from '@arc-test-org/video-player-block';
 import './leadart.scss';
 import fullScreenLogo from './images/full-screen.svg';
 
@@ -97,6 +98,8 @@ class LeadArt extends Component {
             {lightbox}
           </LeadArtWrapperDiv>
         );
+      } if (lead_art.type === 'video') {
+        return <VideoPlayer _html={lead_art.embed_html} isChildComponent />;
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (

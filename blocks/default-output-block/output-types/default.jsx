@@ -1,4 +1,5 @@
 import React from 'react';
+import { playerRoot, videoOrg } from 'fusion:environment';
 
 import './styles/test.scss';
 
@@ -14,6 +15,9 @@ const googleAnalytics = () => {
 
   gtag('config', 'UA-58927291-1');
 };
+
+const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
+const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const SampleOutputType = ({
   children,
@@ -34,6 +38,13 @@ const SampleOutputType = ({
     </head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58927291-1" />
     <script>{googleAnalytics()}</script>
+    <script
+      src={powaBoot}
+      async
+      data-powa-script
+      data-loaded-via="powa-manifest"
+    />
+    <link rel="preload" as="script" href={powaDrive} />
     <body className="bmiller_20001">
       <div id="fusion-app">
         {children}

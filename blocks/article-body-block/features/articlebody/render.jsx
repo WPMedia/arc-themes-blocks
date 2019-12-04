@@ -84,14 +84,12 @@ const Body = ({ className, data: items, ...props }) => {
       case 'interstitial_link': {
         const { url } = item;
         if (!(url && content)) return null;
-        const beforeContent = '[&nbsp;';
-        const afterContent = '&nbsp;]';
         return (url && url.length > 0) ? (
           <Fragment key={key}>
             <p className="interstitial_link">
-              <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
+              [&nbsp;
               <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
-              <span dangerouslySetInnerHTML={{ __html: afterContent }} />
+              &nbsp;]
             </p>
           </Fragment>
         ) : null;

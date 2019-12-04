@@ -5,7 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import './headline.scss';
 
 const HeadlineHeader = styled.h1`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${props => props.primaryFont};
 `;
 
 const Headline = () => {
@@ -13,7 +13,7 @@ const Headline = () => {
 
   return (
     !!(content && content.headlines && content.headlines.basic) && (
-      <HeadlineHeader className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} secondaryFont={getThemeStyle(arcSite)['secondary-font-family']} />
+      <HeadlineHeader className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} primaryFont={getThemeStyle(arcSite)['primary-font-family']} />
     )
   );
 };

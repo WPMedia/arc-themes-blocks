@@ -6,6 +6,7 @@ import getThemeStyle from 'fusion:themes';
 
 import navHamburger from './images/hamburger.svg';
 import navSearch from './images/search.svg';
+import navUser from './images/user.svg';
 import placeholderLogo from './images/arc-placeholder-logo.svg';
 import './navigation.scss';
 
@@ -24,13 +25,19 @@ export default () => {
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
 
   return (
-    <StyledNav className="news-theme-navigation" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
-      <NavButton className="nav-search" type="button" primaryColor={primaryColor}><img src={navSearch} alt="Navigation bar search" /></NavButton>
-      <NavButton className="nav-sections" type="button" primaryColor={primaryColor}>
+    <StyledNav className="news-theme-navigation" primaryFont={getThemeStyle(arcSite)['secondary-font-family']}>
+      <button className="nav-search border" type="button"><img src={navSearch} alt="Navigation bar search" /></button>
+      <button className="nav-sections border" type="button">
         <span>Sections</span>
         <img src={navHamburger} alt="Navigation bar sections" />
+      </button>
+      <div className="logo">
+        <img src={getProperties(arcSite).primaryLogo || placeholderLogo} alt={getProperties(arcSite).primaryLogoAlt || 'Navigation bar logo'} />
+      </div>
+      <NavButton className="nav-sections" type="button" primaryColor={primaryColor}>
+        <span>Sign In</span>
+        <img src={navUser} alt="Navigation bar sections" />
       </NavButton>
-      <img src={getProperties(arcSite).primaryLogo || placeholderLogo} alt={getProperties(arcSite).primaryLogoAlt || 'Navigation bar logo'} />
     </StyledNav>
   );
 };

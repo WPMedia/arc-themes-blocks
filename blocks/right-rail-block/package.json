@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/right-rail-block",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Fusion themes block containing a right-rail layout.",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -19,6 +19,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@arc-test-org/news-theme-css": "^1.1.0",
     "styled-components": "^4.4.0"
   }
 }

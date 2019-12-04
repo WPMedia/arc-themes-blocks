@@ -1,14 +1,26 @@
 .news-theme-navigation {
-  height: 50px;
+  height: 54px;
   display: flex;
   align-items: center;
-  border-bottom: 1px grey;
+  background-color: $ui-dark-secondary-color;
+
+  padding-left: map-get($spacers, 'sm');
+  padding-right: map-get($spacers, 'sm');
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    padding: map-get($spacers, 'xxs');
+  }
 
   .nav-search, .nav-sections {
     margin: 0 5px;
-    height: 80%;
+    height: 32px;
     border: 0;
-    border-radius: 5%;
+    white-space: nowrap;
+
+    &.border{
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 2px;
+      background-color: transparent;
+    }
 
     > img {
       fill: white;
@@ -30,8 +42,20 @@
     }
   }
 
-  > img {
+  > div {
     flex: 1;
-    height: 90%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+      height: 24px;
+      width:auto;
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        height: 32px;
+      }
+    }
   }
 }

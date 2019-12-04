@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import PropTypes from 'prop-types';
-import './articlebody.scss';
 import Body from './render';
 
 @Consumer

@@ -14,7 +14,7 @@ const SubHeadline = () => {
 
   return (
     !!(content && content.subheadlines && content.subheadlines.basic) && (
-      <SubheadH2 className="sub-headline" primaryFont={getThemeStyle(arcSite)['primary-font-family']} dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
+      <SubheadH2 className="h4-primary sub-headline" primaryFont={getThemeStyle(arcSite)['primary-font-family']} dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
     )
   );
 };

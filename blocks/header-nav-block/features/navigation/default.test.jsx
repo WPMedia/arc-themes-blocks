@@ -20,15 +20,13 @@ describe('the header navigation feature for the default output type', () => {
   it('should contain two buttons', () => {
     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('button')).toHaveLength(2);
-    expect(wrapper.find('button.nav-search').hasClass(/sc-/)).toBe(true);
-    expect(wrapper.find('button.nav-sections').hasClass(/sc-/)).toBe(true);
+    expect(wrapper.find('button')).toHaveLength(3);
   });
 
   it('should contain a logo image', () => {
     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('nav > img')).toHaveLength(1);
+    expect(wrapper.find('div > img')).toHaveLength(1);
   });
 
   describe('the search button', () => {
@@ -45,19 +43,7 @@ describe('the header navigation feature for the default output type', () => {
     });
   });
 
-  describe('the sections button', () => {
-    it('should contain a span with "Sections" text', () => {
-      const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('button.nav-sections > span')).toHaveText('Sections');
-    });
-
-    it('should contain a image that imports the hamburger icon', () => {
-      const wrapper = mount(<Navigation />);
-
-      expect(wrapper.find('button.nav-sections > img')).toHaveProp('src', 'hamburger.svg');
-    });
-  });
 
   describe('the navigation bar image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
@@ -65,7 +51,7 @@ describe('the header navigation feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('nav > img')).toHaveProp('src', 'my-nav-logo.svg');
+        expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
       });
     });
 
@@ -74,7 +60,7 @@ describe('the header navigation feature for the default output type', () => {
         getProperties.mockImplementation(() => ({}));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('nav > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
+        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
       });
     });
 
@@ -83,7 +69,7 @@ describe('the header navigation feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('nav > img')).toHaveProp('alt', 'my alt text');
+        expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
       });
     });
 
@@ -92,7 +78,7 @@ describe('the header navigation feature for the default output type', () => {
         getProperties.mockImplementation(() => ({}));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('nav > img')).toHaveProp('alt', 'Navigation bar logo');
+        expect(wrapper.find('div > img')).toHaveProp('alt', 'Navigation bar logo');
       });
     });
   });

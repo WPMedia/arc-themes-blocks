@@ -1,0 +1,26 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+#fusion-app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  main {
+    flex-grow: 1;
+  }
+
+  .section-padding{
+    padding: map-get($spacers, 'sm');
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      padding: map-get($spacers, 'md');
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      padding: map-get($spacers, 'ld');
+    }
+  }
+}

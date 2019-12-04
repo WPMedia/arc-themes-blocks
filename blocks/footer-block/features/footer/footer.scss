@@ -1,25 +1,24 @@
 footer {
-  width: 100%;
-  display: inline-flex;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin-top: 25px;
-
-  @media all and (max-width: 600px) {
-      display: block;
-  }
-
+  width:100%;
   .footer-section {
-      margin: 0px 15px;
+    justify-self: left;
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      justify-self: left;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+      justify-self: center;
+    }
+
+
       font-size: 14px;
-      > .footer-header {
+      .footer-header {
           font-weight: bold;
       }
-      
-      > .footer-item {
-          margin: 8px 0px;
-          
+
+      .footer-item {
+          margin: map-get($spacers, 'xs') 0;
+
           > a {
               text-decoration: none;
               color: #7F8C8D;

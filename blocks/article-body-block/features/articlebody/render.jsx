@@ -53,7 +53,7 @@ const Body = ({ className, data: items, ...props }) => {
         const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
 
         const creditSection = hasCredit ? credits.by.map(creditItem => (
-          <p key={key}>
+          <span key={key}>
             {creditItem.name}
             &nbsp;|&nbsp;
             {creditItem.type}
@@ -61,7 +61,7 @@ const Body = ({ className, data: items, ...props }) => {
             {creditItem.version}
             &nbsp;|&nbsp;
             {creditItem.byline}
-          </p>
+          </span>
         )) : null;
 
         return (url && url.length > 0) ? (
@@ -77,7 +77,6 @@ const Body = ({ className, data: items, ...props }) => {
               <span>{caption}</span>
               {creditSection}
             </figcaption>
-            <hr />
           </figure>
         ) : null;
       }
@@ -85,13 +84,13 @@ const Body = ({ className, data: items, ...props }) => {
       case 'interstitial_link': {
         const { url } = item;
         if (!(url && content)) return null;
-
         return (url && url.length > 0) ? (
           <Fragment key={key}>
-            <p>
+            <p className="interstitial_link">
+              [&nbsp;
               <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
+              &nbsp;]
             </p>
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -100,7 +99,6 @@ const Body = ({ className, data: items, ...props }) => {
         return (content && content.length > 0) ? (
           <Fragment key={key}>
             <div dangerouslySetInnerHTML={{ __html: content }} />
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -111,7 +109,6 @@ const Body = ({ className, data: items, ...props }) => {
         return (listItems && listItems.length > 0) ? (
           <Fragment key={key}>
             <List listType={listType} listItems={listItems} />
-            <hr />
           </Fragment>
         ) : null;
       }
@@ -120,8 +117,8 @@ const Body = ({ className, data: items, ...props }) => {
         return (item.text && item.text.length > 0) ? (
           <Fragment key={key}>
             <section className="correction">
-              <h3>{correctionTitle}</h3>
-              {item.text}
+              <h6>{item.correction_type || 'Correction'}</h6>
+              <div>{item.text}</div>
             </section>
           </Fragment>
         ) : null;

@@ -20,7 +20,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "^6.1.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.14.1",
@@ -42,6 +42,7 @@
     "@arc-test-org/subheadline-block": "file:blocks/subheadline-block",
     "@arc-test-org/date-block": "file:blocks/date-block",
     "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
-    "@arc-test-org/default-output-block": "file:blocks/default-output-block"
+    "@arc-test-org/default-output-block": "file:blocks/default-output-block",
+    "@arc-test-org/news-theme-css": "^1.1.1"
   }
 }

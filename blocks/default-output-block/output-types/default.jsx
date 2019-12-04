@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './styles/test.scss';
-
 const googleAnalytics = () => {
   if (typeof window === 'undefined') {
     return;
@@ -27,6 +25,7 @@ const SampleOutputType = ({
   <html lang="en">
     <head>
       <title>Fusion Article</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <MetaTags />
       <Libs />
       <CssLinks />
@@ -34,7 +33,7 @@ const SampleOutputType = ({
     </head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58927291-1" />
     <script>{googleAnalytics()}</script>
-    <body className="bmiller_20001">
+    <body className="Test-x-2011">
       <div id="fusion-app">
         {children}
       </div>

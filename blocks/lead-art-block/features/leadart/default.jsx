@@ -34,8 +34,7 @@ class LeadArt extends Component {
     this.state = {
       isOpen: false,
       enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel,
-      buttonPosition: customFields.buttonPosition || 'bottom-right',
+      buttonLabel: customFields.buttonLabel || 'Full Screen',
       showCredit: customFields.showCredit || false,
       content,
     };
@@ -47,11 +46,6 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite } = this.props;
-
-    const style = {
-      background: `url(${fullScreenLogo}) no-repeat center`,
-    };
-
 
     if (content.promo_items && content.promo_items.lead_art) {
       // eslint-disable-next-line camelcase
@@ -68,14 +62,6 @@ class LeadArt extends Component {
           );
           lightbox = (
             <React.Fragment>
-              <button
-                type="button"
-                style={style}
-                onClick={() => this.setState({ isOpen: true })}
-                className={`lead-art-fullscreen ${buttonPosition}`}
-                title={buttonLabel}
-                aria-label={buttonLabel}
-              />
               {isOpen && (
                 <Lightbox
                   mainSrc={mainContent}
@@ -101,14 +87,6 @@ class LeadArt extends Component {
         if (buttonPosition !== 'hidden') {
           lightbox = (
             <React.Fragment>
-              <button
-                type="button"
-                style={style}
-                onClick={() => this.setState({ isOpen: true })}
-                className={`lead-art-fullscreen ${buttonPosition}`}
-                title={buttonLabel}
-                aria-label={buttonLabel}
-              />
               {isOpen && (
                 <Lightbox
                   mainSrc={lead_art.url}
@@ -124,13 +102,28 @@ class LeadArt extends Component {
 
         if (lead_art.caption && lead_art.caption.length > 0) {
           caption = (
-            <figcaption>{lead_art.caption}</figcaption>
+            <figcaption>
+              {lead_art.caption}
+            </figcaption>
           );
         }
 
 
         return (
           <LeadArtWrapperFigure className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+            <button
+              type="button"
+              className="btn-full-screen"
+              onClick={() => this.setState({ isOpen: true })}
+            >
+              <img
+                src={fullScreenLogo}
+                title={buttonLabel}
+                alt={buttonLabel}
+                aria-label={buttonLabel}
+              />
+              {buttonLabel}
+            </button>
             <Image
               url={lead_art.url}
               alt={lead_art.alt_text}
@@ -156,15 +149,13 @@ class LeadArt extends Component {
 LeadArt.defaultProps = {
   customFields: {
     enableZoom: false,
-    buttonLabel: 'View Full Screen',
-    buttonPosition: 'bottom-left',
+    buttonLabel: 'Full Screen',
     showCredit: false,
   },
 };
 
 LeadArt.propTypes = {
   customFields: PropTypes.shape({
-    buttonPosition: PropTypes.oneOf(['bottom-left', 'bottom-right', 'top-left', 'top-right', 'hidden']),
     buttonLabel: PropTypes.string,
     enableZoom: PropTypes.bool,
     showCredit: PropTypes.bool,

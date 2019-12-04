@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import './byline.scss';
 
 const BylineSection = styled.section`
-    font-family: ${props => props.primaryFont};
+    font-family: ${props => props.secondaryFont};
 `;
 
 @Consumer

@@ -193,7 +193,10 @@ const ArticleBodyChain = ({ children }) => {
   // Iterate through the content element array and place each subsequent
   //  content elements into the array. Skip if the place is taken
   let paragraphPosition = 0;
-  items.content_elements.forEach((item, index) => {
+  const { content_elements: contentElements, location } = items;
+  const firstParagraph = contentElements.find(elements => elements.type === 'text');
+  firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
+  contentElements.forEach((item, index) => {
     const articleElement = parseArticleItem(item, index, arcSite);
 
     // If there's already an element at the specified article body position, skip

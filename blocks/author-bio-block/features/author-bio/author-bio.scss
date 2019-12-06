@@ -3,13 +3,16 @@
   flex-direction: row;
   a {
     text-decoration: none;
+    margin: 0;
   }
 
   img {
     margin: 7px;
     width: 84px;
     height: 84px;
+    border-radius: 100%;
   }
+
   .descriptions {
     margin: 7px;
     display: flex;
@@ -20,39 +23,37 @@
       flex-direction: row;
   
       a {
-        background-color: #2980B9;
         text-decoration: none;
-        height: 30px;
-        width: 112px;
-        border-radius: 4px;
-        margin-right: 10px;
-        margin-top: 5px;
+        height: 24px;
+        width: 24px;
+        margin-right: 8px;
+        margin-top: 9px;
         text-align: center;
-  
-        span {
-          color: white;
-          text-align: center;
-          font-weight: bold;
-          font-size: 14px;
-        }
-        img {
-          width: 1.2rem;
-          height: 1.2rem;
-          fill: white;
-          vertical-align: middle
-        }
       }
     }
   }
 
   h2 {
-    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin: 5px 0px;
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+      font-size: 18px;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: 14px;
+    }
   }
 
   p {
-    margin-bottom: 5px;
+    margin: 5px 0px;
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+      line-height: 32px;
+      font-size: 18px;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      line-height: 24px;
+      font-size: 14px;
+    }
   }
   
 }

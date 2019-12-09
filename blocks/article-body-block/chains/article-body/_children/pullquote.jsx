@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default ({ element }) => {
-  const { content_elements: contentElements = [] } = element;
+  const { content_elements: contentElements = [], citation = {} } = element;
 
   // Add to the block quote component if the paragraph is a text and has content
   const pullQuote = [];
@@ -11,6 +11,14 @@ export default ({ element }) => {
       pullQuote.push(<p key={paragraph.id}>{ paragraph.content }</p>);
     }
   });
+  if (citation.type === 'text') {
+    pullQuote.push(
+      <span className="citation-text">
+        &mdash;
+        {citation.content}
+      </span>,
+    );
+  }
 
   return (
     <blockquote

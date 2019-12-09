@@ -15,14 +15,14 @@ const ArticleTags = () => {
   const { 'primary-color': primaryColor, 'primary-font': primaryFont } = getThemeStyle(arcSite);
   const defaultBackgroundColor = '#14689A';
   const { taxonomy: { tags = [] } = {} } = content;
-  
+
   return tags.length ? (
     <div className="tags-holder">
       {
-        tags.map((tag, i) => {
+        tags.map((tag) => {
           const slug = tag.slug || '#';
-          return <Tags key={`${slug}-${i}`} className="tags" href={slug} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>
-      })
+          return <Tags key={slug} className="tags" href={slug} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
+        })
       }
     </div>
   ) : '';

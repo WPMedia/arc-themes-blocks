@@ -1,7 +1,7 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-describe('unit tests for type table', () => {
+describe('the article body Table component', () => {
   const tableData = {
     _id: '5RGNUWD3RBAOXG6DJKLZSTUM5Q',
     type: 'table',
@@ -99,5 +99,12 @@ describe('unit tests for type table', () => {
       <Table element={tableData} />,
     );
     expect(wrapper.find(Table)).toHaveLength(1);
+    expect(wrapper.find('thead')).toHaveLength(1);
+    expect(wrapper.find('thead').find('tr').childAt(0).html()).toMatch('<th>Column 1</th>');
+    expect(wrapper.find('thead').find('tr').childAt(1).html()).toMatch('<th>Column 2</th>');
+    expect(wrapper.find('tbody')).toHaveLength(1);
+    expect(wrapper.find('tbody').children()).toHaveLength(4);
+    expect(wrapper.find('tbody').childAt(0).childAt(0).html()).toMatch('<td>Row 1</td>');
+    expect(wrapper.find('tbody').childAt(0).childAt(1).html()).toMatch('<td><b>Bold</b></td>');
   });
 });

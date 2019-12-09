@@ -1,7 +1,7 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-describe('tests for pullquote', () => {
+describe('the article body Pullquote component', () => {
   it('should not render a pullquote when it is not provided with the necessary data', () => {
     const pullquote = {
       _id: '44CZ46VGIBBOZAZH4OXB4ND4U4',
@@ -63,5 +63,7 @@ describe('tests for pullquote', () => {
     const { default: Pullquote } = require('./pullquote');
     const wrapper = mount(<Pullquote element={pullquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
+    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A pull quote is for pulling out an individual quote from your story, to highlight it to the reader.</p>');
+    expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Pull quotes can have multiple paragraphs.</p>');
   });
 });

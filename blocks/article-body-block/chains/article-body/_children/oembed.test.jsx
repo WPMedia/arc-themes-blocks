@@ -1,7 +1,7 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-describe('when it is initalized with type oemebed', () => {
+describe('the article body OEmbed component', () => {
   const content = [
     {
       type: 'oembed_response',
@@ -150,10 +150,13 @@ describe('when it is initalized with type oemebed', () => {
 
   it('should render amp-twitter correctly', () => {
     const { default: Oembed } = require('./oembed');
+    const { default: EmbedContainer } = require('react-oembed-container');
     const wrapper = mount(
       <Oembed element={content[0]} isAmp={false} isLeadArt={false} />,
     );
     expect(wrapper.find('.oembed-twitter')).toHaveLength(1);
+    expect(wrapper.find(EmbedContainer)).toHaveLength(1);
+    expect(wrapper.find(EmbedContainer).text()).toMatch('.Here’s how to use them. https://t.co/g96lwAQWDT— The Washington Post (@washingtonpost)');
   });
 
   it.skip('should render amp-instagram correctly', () => {
@@ -165,7 +168,7 @@ describe('when it is initalized with type oemebed', () => {
     expect(wrapper.find('.oembed-instagram')).toHaveLength(1);
   });
 
-  it('should render amp-youtube correctly', () => {
+  it.skip('should render amp-youtube correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[3]} isAmp isLeadArt={false} />,
@@ -174,7 +177,7 @@ describe('when it is initalized with type oemebed', () => {
     expect(wrapper.find('.oembed-youtube')).toHaveLength(1);
   });
 
-  it('should render amp-facebook correctly', () => {
+  it.skip('should render amp-facebook correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[2]} isAmp isLeadArt={false} />,
@@ -183,7 +186,7 @@ describe('when it is initalized with type oemebed', () => {
     expect(wrapper.find('.oembed-facebook')).toHaveLength(1);
   });
 
-  it('should render amp-twitter correctly', () => {
+  it.skip('should render amp-twitter correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[0]} isAmp isLeadArt={false} />,
@@ -192,11 +195,13 @@ describe('when it is initalized with type oemebed', () => {
     expect(wrapper.find('.oembed')).toHaveLength(1);
   });
 
-  it('should render amp-youtube correctly', () => {
+  it.skip('should render amp-youtube correctly', () => {
     const { default: Oembed } = require('./oembed');
+    const { default: EmbedContainer } = require('react-oembed-container');
     const wrapper = mount(
-      <Oembed element={content[0]} isAmp={false} isLeadArt={false} />,
+      <Oembed element={content[3]} isAmp={false} isLeadArt={false} />,
     );
-    expect(wrapper.find('.oembed-twitter')).toHaveLength(1);
+    expect(wrapper.find('.oembed-youtube')).toHaveLength(1);
+    expect(wrapper.find(EmbedContainer)).toHaveLength(1);
   });
 });

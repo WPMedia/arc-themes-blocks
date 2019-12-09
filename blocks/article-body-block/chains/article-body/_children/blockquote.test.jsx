@@ -1,7 +1,7 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-describe('tests for blockquote', () => {
+describe('the article body Blockquote component', () => {
   it('should not render a blockquote when it is not provided with the necessary data', () => {
     const blockquote = {
       _id: '44CZ46VGIBBOZAZ23H4OXB4ND4U4',
@@ -70,5 +70,7 @@ describe('tests for blockquote', () => {
     const { default: Blockquote } = require('./blockquote');
     const wrapper = mount(<Blockquote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
+    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
+    expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.</p>');
   });
 });

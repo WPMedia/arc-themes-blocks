@@ -88,7 +88,6 @@ justify_center`}>
   const marginClasses = !isLeadArt && !isAmp ? 'margin_top_md margin_bottom_md' : '';
   const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses}`;
   const outputElement = output();
-  
   if (typeof outputElement === 'string') {
     return <div className={cssClasses} dangerouslySetInnerHTML={{ __html: outputElement }} />
   }

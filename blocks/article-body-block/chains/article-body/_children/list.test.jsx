@@ -1,7 +1,7 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-describe('list', () => {
+describe('the article body List component', () => {
   it('should render unordered list correctly', () => {
     const listContent = {
       type: 'list',
@@ -45,6 +45,8 @@ describe('list', () => {
     const { default: List } = require('./list');
     const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
     expect(wrapper.find('ul').length).toBe(1);
+    expect(wrapper.find('ul').childAt(0).html()).toMatch('<li>Indented under 2</li>');
+    expect(wrapper.find('ul').childAt(1).html()).toMatch('<li>Another thing indented under 2</li>');
   });
 
   it('should render ordered list correctly', () => {
@@ -90,6 +92,8 @@ describe('list', () => {
     const { default: List } = require('./list');
     const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
     expect(wrapper.find('ol').length).toBe(1);
+    expect(wrapper.find('ol').childAt(0).html()).toMatch('<li>Indented under 2</li>');
+    expect(wrapper.find('ol').childAt(1).html()).toMatch('<li>Another thing indented under 2</li>');
   });
 
   it('should render nested list correctly', () => {
@@ -138,7 +142,7 @@ describe('list', () => {
         },
         {
           type: 'text',
-          content: 'Another thing indented under 2',
+          content: 'Another thing indented under 3',
           _id: 'UG52XTXHHRDN5KUPKCGTKE4NMM',
           additional_properties: {
             comments: [
@@ -160,5 +164,9 @@ describe('list', () => {
     expect(wrapper.find('ol').length).toBe(1);
     expect(wrapper.children().find('ul').length).toBe(1);
     expect(wrapper.children().find('li').length).toBe(3);
+    expect(wrapper.find('ul').childAt(0).type()).toEqual('li');
+    expect(wrapper.find('ul').childAt(0).html()).toMatch('<li>Indented under 2</li>');
+    expect(wrapper.find('ul').childAt(1).html()).toMatch('<li>Another thing indented under 2</li>');
+    expect(wrapper.find('ol').childAt(1).html()).toMatch('<li>Another thing indented under 3</li>');
   });
 });

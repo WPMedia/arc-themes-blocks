@@ -49,28 +49,28 @@ const AuthorBio = () => {
               case 'linkedin':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <LinkedIn fill={getThemeStyle(arcSite)['primary-color']} />
+                    <LinkedIn fill={getThemeStyle(arcSite)['primary-color']} title="LinkedIn" desc="Connect on LinkedIn" />
                   </a>
                 );
                 break;
               case 'twitter':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Twitter fill={getThemeStyle(arcSite)['primary-color']} />
+                    <Twitter fill={getThemeStyle(arcSite)['primary-color']} title="Twitter" desc="Connect on Twitter" />
                   </a>
                 );
                 break;
               case 'instagram':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Instagram fill={getThemeStyle(arcSite)['primary-color']} />
+                    <Instagram fill={getThemeStyle(arcSite)['primary-color']} title="Instagram" desc="Connect on Instagram" />
                   </a>
                 );
                 break;
               default:
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Envelope fill={getThemeStyle(arcSite)['primary-color']} />
+                    <Envelope fill={getThemeStyle(arcSite)['primary-color']} title="Email" desc="Send an email" />
                   </a>
                 );
             }

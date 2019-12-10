@@ -85,7 +85,7 @@ class LeadArt extends Component {
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer _html={lead_art.embed_html} isChildComponent />;
+        return <VideoPlayer embedMarkup={lead_art.embed_html} />;
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (

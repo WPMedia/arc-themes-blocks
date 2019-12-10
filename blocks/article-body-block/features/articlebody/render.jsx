@@ -157,7 +157,7 @@ const Body = ({ className, data: items, ...props }) => {
         }
       case 'video':
         return (
-          <VideoPlayer _html={item.embed_html} isChildComponent />
+          <VideoPlayer embedMarkup={item.embed_html} />
         );
       default:
         return (

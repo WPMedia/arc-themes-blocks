@@ -49,7 +49,7 @@ const VideoPlayer = (props) => {
   });
 
   return (
-    <EmbedContainer markup={embedHTML} id={id}>
+    <EmbedContainer markup={embedHTML}>
       <div id={videoRef.current} dangerouslySetInnerHTML={{ __html: embedHTML }} />
     </EmbedContainer>
   );

@@ -19,7 +19,7 @@ const VideoPlayer = (props) => {
 
   // eslint-disable-next-line react/destructuring-assignment
   if (!inheritGlobalContent) {
-    const content = useContent({
+    const { embed_html: fetchedEmbedMarkup = '' } = useContent({
       source: 'content-api',
       query: {
         website_url: websiteURL,

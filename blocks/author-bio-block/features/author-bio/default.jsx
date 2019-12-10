@@ -3,10 +3,10 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 
-import envelop from './images/envelope.svg';
-import instagram from './images/instagram.svg'
-import linkedin from './images/linkedin.svg';
-import twitter from './images/twitter.svg';
+import Envelope from './images/envelope';
+import Instagram from './images/instagram';
+import LinkedIn from './images/linkedin';
+import Twitter from './images/twitter';
 import './author-bio.scss';
 
 /*
@@ -49,32 +49,28 @@ const AuthorBio = () => {
               case 'linkedin':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <span>Connect</span>
-                    <img src={linkedin} alt="Connect on LinkedIn" />
+                    <LinkedIn fill={getThemeStyle(arcSite)['primary-color']} />
                   </a>
                 );
                 break;
               case 'twitter':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <span>Follow</span>
-                    <img src={twitter} alt="Follow Twitter profile" />
+                    <Twitter fill={getThemeStyle(arcSite)['primary-color']} />
                   </a>
                 );
                 break;
               case 'instagram':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <span>Follow</span>
-                    <img src={instagram} alt="Follow Instagram profile" />
+                    <Instagram fill={getThemeStyle(arcSite)['primary-color']} />
                   </a>
                 );
                 break;
               default:
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <span>Contact</span>
-                    <img src={envelop} alt="Contact Author" />
+                    <Envelope fill={getThemeStyle(arcSite)['primary-color']} />
                   </a>
                 );
             }

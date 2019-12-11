@@ -5,6 +5,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import VideoPlayer from '@arc-test-org/video-player-block';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -154,6 +155,10 @@ const Body = ({ className, data: items, ...props }) => {
               <Blockquote element={item} />
             );
         }
+      case 'video':
+        return (
+          <VideoPlayer embedMarkup={item.embed_html} />
+        );
       default:
         return (
           <p key={key}>

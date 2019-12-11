@@ -1,8 +1,8 @@
 {
-  "name": "@arc-test-org/lead-art-block",
-  "version": "1.2.0",
-  "description": "Fusion News Theme lead art block",
-  "author": "Brent Miller <brent.miller@washport.com>",
+  "name": "@arc-test-org/video-player-block",
+  "version": "0.0.5",
+  "description": "Fusion News Theme video player block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -14,14 +14,12 @@
   "publishConfig": {
     "access": "restricted"
   },
-  "dependencies": {
-    "@arc-test-org/image": "^1.0.5",
-    "@arc-test-org/lightbox": "^1.0.4",
-    "@arc-test-org/video-player-block": "0.0.2",
-    "styled-components": "^4.4.0"
-  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "react-oembed-container": "^0.3.0",
+    "styled-components": "^4.4.0"
   }
 }

@@ -1,11 +1,10 @@
-# `@arc-test-org/-block`
+# `@arc-test-org/overline-block`
 
-> TODO: description
+Fusion News Theme overline block
 
 ## Usage
 
 ```
-const Block = require('@arc-test-org/-block');
+const overlineBlock = require('@arc-test-org/overline-block');
 
-// TODO: DEMONSTRATE API
 ```

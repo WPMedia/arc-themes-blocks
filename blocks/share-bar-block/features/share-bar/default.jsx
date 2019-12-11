@@ -12,7 +12,7 @@ import twitterLogo from './images/twitter.svg';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties
-  const location = (window.location.hostname === 'localhost') ? 'localhost' : websiteDomain;
+  const location = (window && window.location.hostname === 'localhost') ? 'localhost' : websiteDomain;
   const encodedUrl = encodeURI(`${location}${websiteUrl}`);
 
   switch (social) {

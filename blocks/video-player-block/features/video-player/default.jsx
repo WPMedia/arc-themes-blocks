@@ -39,7 +39,7 @@ const VideoPlayer = (props) => {
     .replace('powa', 'powa-skip');
 
   useEffect(() => {
-    const powaEl = document.getElementById(videoRef.current).firstElementChild;
+    const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
 
     if (powaEl) {
       powaEl.classList.remove('powa-skip');
@@ -50,7 +50,7 @@ const VideoPlayer = (props) => {
 
   return (
     <EmbedContainer markup={embedHTML}>
-      <div id={videoRef.current} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+      <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
     </EmbedContainer>
   );
 };

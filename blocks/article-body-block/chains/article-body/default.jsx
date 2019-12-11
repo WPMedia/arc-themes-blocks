@@ -27,7 +27,7 @@ function parseArticleItem(item, index, arcSite) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, width, height, credits,
+        url, subtitle, caption, width, height, credits, alt_text
       } = item;
 
       const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
@@ -48,7 +48,7 @@ function parseArticleItem(item, index, arcSite) {
         <figure key={key}>
           <img
             src={url}
-            alt={subtitle}
+            alt={alt_text}
             label={subtitle}
             width={width}
             height={height}

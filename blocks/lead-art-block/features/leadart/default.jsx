@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Lightbox from '@arc-test-org/lightbox';
 import Image from '@arc-test-org/image/lib/image';
 import VideoPlayer from '@arc-test-org/video-player-block';
+import { Gallery } from '@arc-test-org/engine-theme-sdk';
 import './leadart.scss';
 import fullScreenLogo from './images/full-screen.svg';
 
@@ -142,6 +143,8 @@ class LeadArt extends Component {
 
           </LeadArtWrapperFigure>
         );
+      } if (lead_art.type === 'gallery') {
+        return <Gallery galleryElements={lead_art.content_elements} />;
       }
       return null;
     }

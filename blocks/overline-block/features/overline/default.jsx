@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useComponentContext, useAppContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import './overline.scss';
 
@@ -11,8 +11,7 @@ const StyledLink = styled.a`
 `;
 
 const Overline = () => {
-  const { arcSite } = useAppContext();
-  const { globalContent: content } = useComponentContext();
+  const { globalContent: content, arcSite } = useFusionContext();
 
   return (
     !!(
@@ -25,13 +24,11 @@ const Overline = () => {
         href={content.websites[arcSite].website_section._id}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
-        dangerouslySetInnerHTML={{
-          __html: content.websites[arcSite].website_section.name,
-        }}
-      />
+      >
+        {content.websites[arcSite].website_section.name}
+      </StyledLink>
     )
   );
-
 };
 
 export default Overline;

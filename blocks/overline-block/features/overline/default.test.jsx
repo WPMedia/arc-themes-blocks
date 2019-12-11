@@ -1,11 +1,12 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { useComponentContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import Overline from './default';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
-  useComponentContext: jest.fn(() => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'site',
     globalContent: {
       websites: {
         site: {
@@ -16,9 +17,6 @@ jest.mock('fusion:context', () => ({
         },
       },
     },
-  })),
-  useAppContext: jest.fn(() => ({
-    arcSite: 'site',
   })),
 }));
 
@@ -34,7 +32,7 @@ describe('overline feature for default output type', () => {
     it('should dangerously set the inner HTML to the overline content', () => {
       const wrapper = shallow(<Overline />);
 
-      expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'News' });
+      expect(wrapper.text()).toMatch('News');
     });
 
     it('should set a styled component class on the rendered a', () => {
@@ -52,7 +50,7 @@ describe('overline feature for default output type', () => {
 
   describe('when headline content from globalContent is NOT present', () => {
     beforeEach(() => {
-      useComponentContext.mockImplementation(() => ({}));
+      useFusionContext.mockImplementation(() => ({}));
     });
 
     it('should not render anything', () => {

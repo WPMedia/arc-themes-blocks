@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import styled from 'styled-components';
 import VideoPlayer from '@arc-test-org/video-player-block';
+import { Gallery } from '@arc-test-org/engine-theme-sdk';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -13,7 +13,7 @@ import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 
 
-function parseArticleItem(item, index, arcSite) {
+function parseArticleItem(item, index) {
   const {
     _id: key = index, type, content,
   } = item;
@@ -140,6 +140,8 @@ function parseArticleItem(item, index, arcSite) {
       return (
         <VideoPlayer embedMarkup={item.embed_html} />
       );
+    case 'gallery':
+      return <Gallery galleryElements={item.content_elements} />;
     default:
       return (
         <p key={key}>

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import VideoPlayer from '@arc-test-org/video-player-block';
+import { Gallery } from '@arc-test-org/engine-theme-sdk';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -155,6 +156,8 @@ const Body = ({ className, data: items, ...props }) => {
               <Blockquote element={item} />
             );
         }
+      case 'gallery':
+        return <Gallery galleryElements={item.content_elements} />;
       case 'video':
         return (
           <VideoPlayer embedMarkup={item.embed_html} />

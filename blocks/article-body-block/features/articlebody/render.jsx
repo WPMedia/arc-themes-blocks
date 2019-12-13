@@ -49,7 +49,7 @@ const Body = ({ className, data: items, ...props }) => {
       }
       case 'image': {
         const {
-          url, subtitle, caption, width, height, credits,
+          url, subtitle, caption, width, height, credits, alt_text
         } = item;
 
         const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
@@ -70,7 +70,7 @@ const Body = ({ className, data: items, ...props }) => {
           <figure key={key}>
             <img
               src={url}
-              alt={subtitle}
+              alt={alt_text}
               label={subtitle}
               width={width}
               height={height}

@@ -1,83 +1,61 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-describe('the gallery block', () => {
-  describe('when there is an array of content elements present', () => {
-    it('should load content from global content', () => {
-      jest.mock('fusion:context', () => ({
-        useAppContext: jest.fn(() => ({
-          globalContent: {
-            content_elements: [
-              {
-                caption: 'my cool caption',
-                subtitle: 'my cool subtitle',
-              },
-            ],
-          },
-        })),
-      }));
+jest.mock('./_children/global-content', () => class GlobalContentGallery {});
+jest.mock('./_children/custom-content', () => class CustomContentGallery {});
+jest.mock('prop-types', () => ({
+  bool: true,
+  shape: () => {},
+  contentConfig: () => {},
+}));
 
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
-        Gallery: (props, children) => (<div {...props}>{ children }</div>),
-      }));
+describe('the gallery feature block', () => {
 
+  describe('when it is configured to inherit global content', () => {
+    it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
-
-      const wrapper = shallow(<GalleryFeature />);
-      expect(wrapper.find('Gallery').props()).toStrictEqual(
-        {
-          galleryElements: [
-            {
-              caption: 'my cool caption',
-              subtitle: 'my cool subtitle',
-            },
-          ],
-        },
-      );
+      GalleryFeature.propTypes = undefined;
+      
+      const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+    });
+  });
+  
+  describe('when it is configured to NOT inherit global content', () => {
+    it('should render the global content gallery', () => {
+      const { default: GalleryFeature } = require('./default');
+      GalleryFeature.propTypes = undefined;
+      
+      const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />);
+      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+    });
+    
+    it('should pass the content config for fetching the gallery', () => {
+      const { default: GalleryFeature } = require('./default');
+      GalleryFeature.propTypes = undefined;
+      
+      const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />);
+      expect(wrapper.props()).toStrictEqual({ contentConfig: {}});
     });
   });
 
-  describe('when there is no array of content elements', () => {
-    it('should load content from global content', () => {
-      jest.mock('fusion:context', () => ({
-        useAppContext: jest.fn(() => ({
-          globalContent: {},
-        })),
-      }));
-
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
-        Gallery: (props, children) => (<div {...props}>{ children }</div>),
-      }));
-
+  describe('when customfields is empty', () => {
+    it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
-
-      const wrapper = shallow(<GalleryFeature />);
-      expect(wrapper.find('Gallery').props()).toStrictEqual(
-        {
-          galleryElements: [],
-        },
-      );
+      GalleryFeature.propTypes = undefined;
+      
+      const wrapper = shallow(<GalleryFeature customFields={{}} />);
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
 
-  describe('when there is no global content object', () => {
-    it('should load content from global content', () => {
-      jest.mock('fusion:context', () => ({
-        useAppContext: jest.fn(() => ({})),
-      }));
-
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
-        Gallery: (props, children) => (<div {...props}>{ children }</div>),
-      }));
-
+  describe('when customfields is missing', () => {
+    it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
-
-      const wrapper = shallow(<GalleryFeature />);
-      expect(wrapper.find('Gallery').props()).toStrictEqual(
-        {
-          galleryElements: [],
-        },
-      );
+      GalleryFeature.propTypes = undefined;
+      
+      const wrapper = shallow(<GalleryFeature customFields={undefined} />);
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
 });

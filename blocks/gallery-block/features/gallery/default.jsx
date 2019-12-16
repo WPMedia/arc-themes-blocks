@@ -1,11 +1,28 @@
 import React from 'react';
-import { useAppContext } from 'fusion:context';
-import { Gallery } from '@arc-test-org/engine-theme-sdk';
+import PropTypes from 'prop-types';
+import GlobalContentGallery from './_children/global-content';
+import CustomContentGallery from './_children/custom-content';
 
-const GalleryFeature = () => {
-  const { globalContent: { content_elements: contentElements = [] } = {} } = useAppContext();
+const GalleryFeature = (
+  {
+    customFields: {
+      inheritGlobalContent = true,
+      galleryContentConfig,
+    } = {},
+  } = {},
+) => {
+  if (inheritGlobalContent) {
+    return <GlobalContentGallery />;
+  }
 
-  return <Gallery galleryElements={contentElements} />;
+  return <CustomContentGallery contentConfig={galleryContentConfig} />;
+};
+
+GalleryFeature.propTypes = {
+  customFields: PropTypes.shape({
+    inheritGlobalContent: PropTypes.bool,
+    galleryContentConfig: PropTypes.contentConfig(),
+  }),
 };
 
 export default GalleryFeature;

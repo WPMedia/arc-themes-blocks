@@ -49,9 +49,9 @@ class LeadArt extends Component {
 
     const { arcSite } = this.props;
 
-    if (content.promo_items && content.promo_items.lead_art) {
+    if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       // eslint-disable-next-line camelcase
-      const { lead_art } = content.promo_items;
+      const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
       let lightbox = null;
       let caption = null;
 

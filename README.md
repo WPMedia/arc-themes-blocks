@@ -99,6 +99,24 @@ A few key things to know:
 * If you want to publish one of our subpackages and there's another subpackage in the repo that has committed and unpublished changes, you will be _required_ to publish a new version of those other subpackages. So do not start a `lerna publish` unless you are in a place where you can publish all of those other unpublished subpackages.
 * You'll need to specify the name of the package scope in the `name` field of the `package.json` order for the package to be published for that scope.
 
+### Deploying a block
+
+Once we have completed our new block and merged it to master, we want to get it ready for QA.
+To do this there is a few steps we need to follow.
+
+Notes:
+* Before deploying a block, we should make sure it works properly when tested locally.
+* Our pull request to merge our new block must have been reviewed by at least one person.
+* Both blocks and bundles repo should have a .npmrc file with the same token.
+
+1. On Fusion-News-Theme (bundles repo) pull from master, update `blocks.json` with your new block (f.e. "@arc-test-org/overline-block"), and commit to master with the change.
+2. Run `npx fusion zip` to generate the bundle zip file under /dist.
+3. Once the zip file has be generated, go Pagebuilder Editor on [Core Components](https://corecomponents.arcpublishing.com).
+4. Under Pagebuilder editor go to Deployer and upload your zipped bundle with the name `blocks-$month-$day-$version`.
+5. There can only be four builds running concurrently, so you will need to select one of them and terminate it to leave room for your uploaded build. 
+6. Once your build has uploaded, we will select it and deploy it and use the latest version (f.e. `2.3.8-hydraterc.0`), or ask for the most recent version if it's not being displayed and enter it under "Other".
+7. Once we have deployed our build, it will show up under running, but will have a grey circle on the left. We will then select our build and promote it to make sure it's live and your new block shows in the Pagebuilder editor.
+
 ## License
 
 TODO

@@ -17,7 +17,7 @@ Testing: Unit tests are written to cover this block
 const AuthorBioStyled = styled.section`
   font-family: ${props => props.secondaryFont};
   h2 {
-    font-family: ${props => props.primaryFont};
+    font-family: ${props => props.secondaryFont};
     color: ${props => props.primaryFontColor};
   }
   button {

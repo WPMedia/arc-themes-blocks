@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import VideoPlayer from '@arc-test-org/video-player-block';
-import { Gallery } from '@arc-test-org/engine-theme-sdk';
+import { Gallery, ImageMetadata } from '@arc-test-org/engine-theme-sdk';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -52,20 +52,6 @@ const Body = ({ className, data: items, ...props }) => {
           url, subtitle, caption, width, height, credits, alt_text
         } = item;
 
-        const hasCredit = Object.prototype.hasOwnProperty.call(credits, 'by');
-
-        const creditSection = hasCredit ? credits.by.map(creditItem => (
-          <span key={key}>
-            {creditItem.name}
-            &nbsp;|&nbsp;
-            {creditItem.type}
-            &nbsp;|&nbsp;
-            {creditItem.version}
-            &nbsp;|&nbsp;
-            {creditItem.byline}
-          </span>
-        )) : null;
-
         return (url && url.length > 0) ? (
           <figure key={key}>
             <img
@@ -77,7 +63,7 @@ const Body = ({ className, data: items, ...props }) => {
             />
             <figcaption>
               <span>{caption}</span>
-              {creditSection}
+              <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
             </figcaption>
           </figure>
         ) : null;

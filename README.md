@@ -107,14 +107,14 @@ To do this there is a few steps we need to follow.
 Notes:
 * Before deploying a block, we should make sure it works properly when tested locally.
 * Our pull request to merge our new block must have been reviewed by at least one person.
-* Both blocks and bundles repo should have a .npmrc file with the same token.
+* Both blocks and bundles repos should have a .npmrc file with the same token.
 
-1. On Fusion-News-Theme (bundles repo) pull from master, update `blocks.json` with your new block (f.e. "@arc-test-org/overline-block"), and commit to master with the change.
+1. On Fusion-News-Theme (bundles repo) we will pull from master, update `blocks.json` with our new block (f.e. "@arc-test-org/overline-block"), and commit to master with the change.
 2. Run `npx fusion zip` to generate the bundle zip file under /dist.
 3. Once the zip file has be generated, go Pagebuilder Editor on [Core Components](https://corecomponents.arcpublishing.com).
 4. Under Pagebuilder editor go to Deployer and upload your zipped bundle with the name `blocks-$month-$day-$version`.
-5. There can only be four builds running concurrently, so you will need to select one of them and terminate it to leave room for your uploaded build. 
-6. Once your build has uploaded, we will select it and deploy it and use the latest version (f.e. `2.3.8-hydraterc.0`), or ask for the most recent version if it's not being displayed and enter it under "Other".
+5. There can only be four builds running concurrently, so we will need to select one of them and terminate it to leave room for your uploaded build. 
+6. Once the new build has uploaded, we will select it and deploy it and use the latest version (f.e. `2.3.8-hydraterc.0`), or ask for the most recent version if it's not being displayed and enter it under "Other".
 7. Once we have deployed our build, it will show up under running, but will have a grey circle on the left. We will then select our build and promote it to make sure it's live and your new block shows in the Pagebuilder editor.
 
 ## License

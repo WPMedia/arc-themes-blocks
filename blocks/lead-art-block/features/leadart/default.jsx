@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Lightbox from '@arc-test-org/lightbox';
 import Image from '@arc-test-org/image/lib/image';
 import VideoPlayer from '@arc-test-org/video-player-block';
-import { Gallery } from '@arc-test-org/engine-theme-sdk';
+import { Gallery, ImageMetadata } from '@arc-test-org/engine-theme-sdk';
 import './leadart.scss';
 import fullScreenLogo from './images/full-screen.svg';
 
@@ -104,14 +104,13 @@ class LeadArt extends Component {
           );
         }
 
-        if (lead_art.caption && lead_art.caption.length > 0) {
-          caption = (
-            <figcaption>
-              {lead_art.caption}
-            </figcaption>
-          );
-        }
-
+        caption = (
+          <ImageMetadata
+            subtitle={lead_art.subtitle}
+            caption={lead_art.caption}
+            credits={lead_art.credits}
+          />
+        );
 
         return (
           <LeadArtWrapperFigure className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
@@ -139,7 +138,11 @@ class LeadArt extends Component {
               largeHeight={0}
             />
             {lightbox}
-            {caption}
+            {caption && (
+              <figcaption>
+                { caption }
+              </figcaption>
+            )}
 
           </LeadArtWrapperFigure>
         );

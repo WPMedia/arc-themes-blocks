@@ -12,7 +12,8 @@ import twitterLogo from './images/twitter.svg';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties
-  const location = (window && window.location.hostname === 'localhost') ? 'localhost' : websiteDomain;
+  const location = (window && window.location.hostname === 'localhost')
+    ? 'https://corecomponents-the-gazette-prod.cdn.arcpublishing.com' : websiteDomain;
   const encodedUrl = encodeURI(`${location}${websiteUrl}`);
 
   switch (social) {
@@ -47,9 +48,8 @@ const share = {
     window.open(url, 'share_linkedin', windowFeatures);
   },
   email: (url, title, websiteName) => {
-    const encodedTitle = encodeURIComponent(title);
     const windowFeatures = 'width=830, height=460, scrollbars=no';
-    const mailUrl = `mailto:?subject=${encodedTitle}-${websiteName}&body=${url}`;
+    const mailUrl = `mailto:?subject=${title}-${websiteName}&body=${url}`;
     window.open(mailUrl, 'send_email', windowFeatures);
   },
 };

@@ -18,7 +18,7 @@ const AuthorBioStyled = styled.section`
   font-family: ${props => props.secondaryFont};
   h2 {
     font-family: ${props => props.secondaryFont};
-    color: ${props => props.primaryFontColor};
+    color: ${props => props.primaryColor};
   }
   button {
     font-family: ${props => props.primaryFont};

@@ -1,5 +1,5 @@
 .shareBar {
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 200px;
   display: flex;
@@ -9,6 +9,10 @@
   padding-top: 10px;
   padding-bottom: 10px;
   width: 44px;
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    visibility: hidden;
+  }
 
   .shareButton {
     background: none!important;

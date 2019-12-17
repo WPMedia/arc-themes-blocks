@@ -23,4 +23,13 @@ html, body {
       padding: map-get($spacers, 'ld');
     }
   }
+
+  .main-section {
+    border-right: 1px $ui-medium-light-secondary-color solid;
+  }
+
+  .fullwidth1-section {
+    border-bottom: 1px $ui-medium-light-secondary-color solid;
+  }
+
 }

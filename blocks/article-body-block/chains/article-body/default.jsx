@@ -22,7 +22,7 @@ function parseArticleItem(item, index) {
   switch (type) {
     case 'text': {
       return (content && content.length > 0) ? (
-        <p key={key} dangerouslySetInnerHTML={{ __html: content }} />
+        <p className="body-paragraph" key={key} dangerouslySetInnerHTML={{ __html: content }} />
       ) : null;
     }
     case 'image': {
@@ -40,7 +40,6 @@ function parseArticleItem(item, index) {
             height={height}
           />
           <figcaption>
-            <span>{caption}</span>
             <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
           </figcaption>
         </figure>
@@ -54,7 +53,7 @@ function parseArticleItem(item, index) {
       const afterContent = '&nbsp;]';
       return (url && url.length > 0) ? (
         <Fragment key={key}>
-          <p className="interstitial_link">
+          <p className="interstitial-link">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
             <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
@@ -143,7 +142,7 @@ const ArticleBody = styled.article`
   h1, h2, h3, h4, h5, h6, figcaption, table {
     font-family: ${props => props.primaryFont};
   }
-  p, ol, ul, blockquote.pullquote p, blockquote {
+  .body-paragraph, .interstitial-link, ol, ul, blockquote p, blockquote {
     font-family: ${props => props.secondaryFont};
   }
 `;

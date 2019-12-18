@@ -23,10 +23,16 @@ const Table = ({ element }) => {
 
 
   return (
-    <table>
-      <tr>{tableHeaders}</tr>
-      {tableRows}
-    </table>
+    <div className="table-wrapper">
+      <table>
+        <thead>
+          <tr>{tableHeaders}</tr>
+        </thead>
+        <tbody>
+          {tableRows}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

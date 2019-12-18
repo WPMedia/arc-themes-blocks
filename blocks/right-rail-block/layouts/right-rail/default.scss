@@ -8,8 +8,16 @@ html, body {
   min-height: 100vh;
   flex-direction: column;
 
+  header{
+    position: fixed;
+    top: 0;
+    left:0;
+    right:0;
+    z-index: 134217725 !important;
+  }
   main {
     flex-grow: 1;
+    padding-top: 54px;
   }
 
   .section-padding{
@@ -25,11 +33,16 @@ html, body {
   }
 
   .main-section {
-    border-right: 1px $ui-medium-light-secondary-color solid;
+    padding: 0 1.5rem 0 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      border-right: 1px $ui-medium-light-secondary-color solid;
+    }
   }
 
   .fullwidth1-section {
+    padding: 1.5rem 0;
     border-bottom: 1px $ui-medium-light-secondary-color solid;
+    border-top: 1px $ui-medium-light-secondary-color solid;
   }
 
 }

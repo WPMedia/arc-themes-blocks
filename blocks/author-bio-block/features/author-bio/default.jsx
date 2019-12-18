@@ -14,9 +14,9 @@ Testing: Unit tests are written to cover this block
 */
 
 const AuthorBioStyled = styled.section`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${props => props.primaryFont};
   .authorName {
-    font-family: ${props => props.secondaryFont};
+    font-family: ${props => props.primaryFont};
     color: ${props => props.primaryColor};
   }
   button {
@@ -113,7 +113,6 @@ const AuthorBio = () => {
     <AuthorBioStyled
       className="author-bio"
       primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
       primaryColor={getThemeStyle(arcSite)['primary-color']}
     >
       {authors}

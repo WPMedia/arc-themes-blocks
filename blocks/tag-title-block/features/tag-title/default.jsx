@@ -6,7 +6,6 @@ import './tag-title.scss';
 
 const StyledName = styled.h1`
   font-family: ${props => props.primaryFont};
-  font-weight: bold;
 `;
 
 const StyledDescription = styled.p`

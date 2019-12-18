@@ -15,6 +15,7 @@ export default ({ element }) => {
     pullQuote.push(
       <span className="citation-text">
         &mdash;
+        &nbsp;
         {citation.content}
       </span>,
     );

@@ -15,6 +15,7 @@ export default ({ element }) => {
     blockQuote.push(
       <span className="citation-text">
         &mdash;
+        &nbsp;
         {citation.content}
       </span>,
     );

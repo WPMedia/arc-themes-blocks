@@ -27,14 +27,14 @@ function parseArticleItem(item, index) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, width, height, credits, alt_text
+        url, subtitle, caption, width, height, credits, alt_text: altText,
       } = item;
 
       return (url && url.length > 0) ? (
         <figure key={key}>
           <img
             src={url}
-            alt={alt_text}
+            alt={altText}
             label={subtitle}
             width={width}
             height={height}
@@ -186,7 +186,9 @@ const ArticleBodyChain = ({ children }) => {
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
   const firstParagraph = contentElements.find(elements => elements.type === 'text');
-  firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
+  if (!firstParagraph.content.startsWith(`${location} &mdash;`)) {
+    firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
+  }
   contentElements.forEach((item, index) => {
     const articleElement = parseArticleItem(item, index, arcSite);
 

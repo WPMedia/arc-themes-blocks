@@ -33,7 +33,7 @@
     }
   }
 
-  h2 {
+  .authorName {
     font-weight: bold;
     margin: 5px 0px;
     @media screen and (min-width: map-get($grid-breakpoints, 'sm')){

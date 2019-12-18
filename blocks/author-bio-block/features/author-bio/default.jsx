@@ -13,10 +13,9 @@ import './author-bio.scss';
 Testing: Unit tests are written to cover this block
 */
 
-
 const AuthorBioStyled = styled.section`
   font-family: ${props => props.secondaryFont};
-  h2 {
+  .authorName {
     font-family: ${props => props.secondaryFont};
     color: ${props => props.primaryColor};
   }
@@ -85,7 +84,7 @@ const AuthorBio = () => {
         : null;
 
       // Make the name a hyperlink if a url to the bio page is provided
-      const authorName = (original.byline) ? <h2>{original.byline}</h2> : undefined;
+      const authorName = (original.byline) ? <h2 className="authorName">{original.byline}</h2> : undefined;
       const authorNameWithHyperlink = (author.url)
         ? <a href={author.url}>{authorName}</a> : undefined;
 
@@ -115,7 +114,7 @@ const AuthorBio = () => {
       className="author-bio"
       primaryFont={getThemeStyle(arcSite)['primary-font-family']}
       secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-      primaryFontColor={getThemeStyle(arcSite)['primary-font-color']}
+      primaryColor={getThemeStyle(arcSite)['primary-color']}
     >
       {authors}
     </AuthorBioStyled>

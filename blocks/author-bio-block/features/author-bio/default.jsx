@@ -99,10 +99,10 @@ const AuthorBio = () => {
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
               {(author.description) ? <p>{author.description}</p> : null}
+              <section className="socialButtons">
+                {socialLinks}
+              </section>
             </section>
-          </section>
-          <section className="socialButtons">
-            {socialLinks}
           </section>
         </section>
       ));

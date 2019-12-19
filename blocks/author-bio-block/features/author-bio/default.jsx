@@ -90,17 +90,19 @@ const AuthorBio = () => {
 
       authorList.push((
         <section key={(author.name) ? author.name : ''} className="authors">
-          {
-            (author.image)
-              ? <img src={author.image.url} alt={(author.image.alt_text || author.name)} />
-              : null
-          }
-          <section className="descriptions">
-            {authorNameWithHyperlink || authorName}
-            {(author.description) ? <p>{author.description}</p> : null}
-            <section className="socialButtons">
-              {socialLinks}
+          <section className="author">
+            {
+              (author.image)
+                ? <img src={author.image.url} alt={(author.image.alt_text || author.name)} />
+                : null
+            }
+            <section className="descriptions">
+              {authorNameWithHyperlink || authorName}
+              {(author.description) ? <p>{author.description}</p> : null}
             </section>
+          </section>
+          <section className="socialButtons">
+            {socialLinks}
           </section>
         </section>
       ));

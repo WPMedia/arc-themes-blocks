@@ -1,0 +1,10 @@
+h1.tag-name {
+    color: $ui-primary-font-color;
+    margin-bottom: map-get($spacers, 'xs');
+}
+
+p.tag-description {
+    color: $ui-dark-primary-color;
+    font-size: calculateRem(16px);
+    margin-bottom: map-get($spacers, 'xs');
+}

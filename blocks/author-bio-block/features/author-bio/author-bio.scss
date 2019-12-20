@@ -1,6 +1,22 @@
+.author-bio {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+    margin-top: 24px;
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    margin-top: 16px;
+  }
+
+  margin-bottom: 24px;
+}
 .authors {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  .author {
+    display: flex;
+    flex-direction: row;
+  }
+
   a {
     text-decoration: none;
     margin: 0;
@@ -14,20 +30,20 @@
   }
 
   .descriptions {
-    margin: 7px;
+    margin-left: 7px;
     display: flex;
     flex-direction: column;
 
     .socialButtons {
+      margin-top: 24px;
       display: flex;
       flex-direction: row;
-  
+
       a {
         text-decoration: none;
         height: 24px;
         width: 24px;
-        margin-right: 8px;
-        margin-top: 9px;
+        margin-right: 7px;
         text-align: center;
       }
     }

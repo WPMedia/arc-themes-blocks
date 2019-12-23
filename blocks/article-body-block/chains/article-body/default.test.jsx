@@ -1179,8 +1179,8 @@ describe('article-body chain', () => {
       expect(wrapper.find('figure').length).toEqual(1);
       expect(wrapper.find('figure').find('img').length).toEqual(1);
       expect(wrapper.find('figure').find('figcaption').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').text()).toMatch('Brett Danielsen');
+      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(2);
+      expect(wrapper.find('figure').find('figcaption').childAt(1).text()).toMatch('Brett Danielsen');
     });
     it('should not render image with figcaption and author', () => {
       jest.mock('fusion:context', () => ({

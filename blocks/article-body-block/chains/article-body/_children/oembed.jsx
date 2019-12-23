@@ -29,15 +29,22 @@ justify_center`}>
             </div>
           )
         case 'instagram':
-          return (
-            <amp-instagram
-              data-shortcode={shortCode}
-              data-captioned
-              layout='responsive'
-              width='1'
-              height='1'
-            />
-          );
+          const instaRegex = /(https?:\/\/(www\.)?)?instagram\.com\/p\/(\w*([-'])?(\w*)?)/;
+          const instaId =
+          element.raw_oembed && element.raw_oembed.html && element.raw_oembed.html.match(instaRegex);
+          if (instaId && instaId[3]) {
+            return (
+              <amp-instagram
+                data-shortcode={instaId[3]}
+                data-captioned
+                width='1'
+                height='1'
+                layout='responsive'
+              />
+            );
+          }
+          return null;
+
         case 'youtube':
           const decodedURL = element.raw_oembed._id.replace('%3D', '=');
           const videoID = decodedURL.split('v=')[1];

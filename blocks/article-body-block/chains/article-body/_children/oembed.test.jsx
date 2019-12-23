@@ -159,7 +159,7 @@ describe('the article body OEmbed component', () => {
     expect(wrapper.find(EmbedContainer).text()).toMatch('.Here’s how to use them. https://t.co/g96lwAQWDT— The Washington Post (@washingtonpost)');
   });
 
-  it.skip('should render amp-instagram correctly', () => {
+  it('should render amp-instagram correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[1]} isAmp isLeadArt={false} />,
@@ -168,7 +168,7 @@ describe('the article body OEmbed component', () => {
     expect(wrapper.find('.oembed-instagram')).toHaveLength(1);
   });
 
-  it.skip('should render amp-youtube correctly', () => {
+  it('should render amp-youtube correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[3]} isAmp isLeadArt={false} />,
@@ -177,7 +177,7 @@ describe('the article body OEmbed component', () => {
     expect(wrapper.find('.oembed-youtube')).toHaveLength(1);
   });
 
-  it.skip('should render amp-facebook correctly', () => {
+  it('should render amp-facebook correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[2]} isAmp isLeadArt={false} />,
@@ -186,7 +186,7 @@ describe('the article body OEmbed component', () => {
     expect(wrapper.find('.oembed-facebook')).toHaveLength(1);
   });
 
-  it.skip('should render amp-twitter correctly', () => {
+  it('should render amp-twitter correctly', () => {
     const { default: Oembed } = require('./oembed');
     const wrapper = mount(
       <Oembed element={content[0]} isAmp isLeadArt={false} />,
@@ -195,7 +195,7 @@ describe('the article body OEmbed component', () => {
     expect(wrapper.find('.oembed')).toHaveLength(1);
   });
 
-  it.skip('should render amp-youtube correctly', () => {
+  it('should render amp-youtube correctly', () => {
     const { default: Oembed } = require('./oembed');
     const { default: EmbedContainer } = require('react-oembed-container');
     const wrapper = mount(

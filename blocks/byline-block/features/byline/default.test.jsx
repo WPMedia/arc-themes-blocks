@@ -180,6 +180,6 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
 
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim Byline</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch Byline</a>, <a href="/author/brent-miller">Brent Miller Byline</a> and <a href="/author/sara-carothers">Sara Lynn Carothers</a></p>' });
+    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
   });
 });

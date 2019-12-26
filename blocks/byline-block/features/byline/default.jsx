@@ -12,11 +12,13 @@ class ArticleByline extends Component {
 
     // Inherit global content
     const { globalContent: content = {} } = this.props;
+    // If Global Content Exists, set the component state to credts destructured from global content
     if (Object.keys(content).length) {
       const { credits } = content;
       this.state = {
         credits,
       };
+    // If globalContent is an empty object then set the state to credits destructured from props
     } else {
       const { story } = this.props;
       const { credits } = story;
@@ -57,6 +59,7 @@ class ArticleByline extends Component {
     // Leave it empty so that if there's no author with listed name it would just return '' string
     let bylineString = '';
     if (numAuthors) {
+      // If there is a nameClass and a byClass recieved from props
       if (nameClass && byClass) {
         bylineString = `<p class=${nameClass}> <span class=${byClass}>By</span> `;
       } else {

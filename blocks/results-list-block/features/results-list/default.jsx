@@ -16,10 +16,10 @@ class ResultsList extends Component {
   constructor(props) {
     super(props);
     this.state = { resultList: {} };
-    this.fetchStories = this.fetchStories.bind(this);
     this.fetchStories();
   }
 
+  // This is used to fetch data and set the state of the component to the fetched data
   fetchStories() {
     const { customFields: { resultListSchema } } = this.props;
     const { contentService, contentConfigValues } = resultListSchema;
@@ -31,6 +31,7 @@ class ResultsList extends Component {
     });
   }
 
+  // Section to render headline
   renderHeadline(headline) {
     const { listType = 'default' } = this.props;
     switch (listType) {
@@ -41,6 +42,7 @@ class ResultsList extends Component {
     }
   }
 
+  // section to control description text
   renderDescription(description) {
     const { listType = 'default' } = this.props;
     switch (listType) {
@@ -52,9 +54,11 @@ class ResultsList extends Component {
     }
   }
 
+  // Section to render byLine(Author Names) and date
   renderBylineAndDate(element, date, showSeperator) {
     const { listType = 'default' } = this.props;
     switch (listType) {
+      // A simple list does not contain a description text
       case 'simple':
         return null;
       case 'default':
@@ -62,6 +66,7 @@ class ResultsList extends Component {
         return (
           <>
             <Byline story={element} nameClass="nameStyles" byClass="byClass" />
+            {/* The Seperator will only be shown if there is atleast one author name */}
             { showSeperator && <p className="dot-separator">&#9679;</p> }
             <span className="story-date">{new Date(Date.parse(date)).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </>

@@ -6,11 +6,10 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import './byline.scss';
 
-console.log(styled);
-
 const BylineSection = styled.section`
   font-family: ${props => props.secondaryFont};
 `;
+
 @Consumer
 class ArticleByline extends Component {
   constructor(props) {

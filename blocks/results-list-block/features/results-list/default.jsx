@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import Byline from '@arc-test-org/byline-block';
+import ArticleDate from '@arc-test-org/date-block';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
 import './results-list.scss';
 
 function extractImage(promo) {
@@ -11,10 +14,19 @@ function extractImage(promo) {
   return null;
 }
 
+const HeadlineText = styled.div`
+  font-family: ${props => props.primaryFont};
+`;
+
+const DescriptionText = styled.div`
+  font-family: ${props => props.secondaryFont};
+`;
+
 @Consumer
 class ResultsList extends Component {
   constructor(props) {
     super(props);
+    this.arcSite = props.arcSite;
     this.state = { resultList: {} };
     this.fetchStories();
   }
@@ -38,7 +50,7 @@ class ResultsList extends Component {
       case 'simple':
       case 'default':
       default:
-        return <div className="headline-text">{headline}</div>;
+        return <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>;
     }
   }
 
@@ -50,7 +62,7 @@ class ResultsList extends Component {
         return null;
       case 'default':
       default:
-        return <div className="description-text">{description}</div>;
+        return <DescriptionText secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="description-text">{description}</DescriptionText>;
     }
   }
 
@@ -68,7 +80,7 @@ class ResultsList extends Component {
             <Byline story={element} nameClass="nameStyles" byClass="byClass" />
             {/* The Seperator will only be shown if there is atleast one author name */}
             { showSeperator && <p className="dot-separator">&#9679;</p> }
-            <span className="story-date">{new Date(Date.parse(date)).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <ArticleDate classNames="story-date" date={date} />
           </>
         );
     }
@@ -83,7 +95,7 @@ class ResultsList extends Component {
           const {
             description: { basic: descriptionText } = {},
             headlines: { basic: headlineText } = {},
-            publish_date: publishDate,
+            display_date: displayDate,
             credits: { by } = {},
           } = element;
           const showSeperator = by.length !== 0;
@@ -106,7 +118,7 @@ class ResultsList extends Component {
                     { this.renderDescription(descriptionText) }
                   </div>
                   <div className="author-date">
-                    { this.renderBylineAndDate(element, publishDate, showSeperator) }
+                    { this.renderBylineAndDate(element, displayDate, showSeperator) }
                   </div>
                 </div>
               </a>

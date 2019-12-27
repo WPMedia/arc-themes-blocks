@@ -1,9 +1,17 @@
+// import mockstyled from 'styled-components';
+
 const React = require('react');
-const { mount } = require('enzyme');
+const { shallow } = require('enzyme');
 
 const { default: mockData } = require('./mock-data');
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
+jest.mock('styled-components', () => ({
+  section: jest.fn(),
+  time: jest.fn(),
+  div: jest.fn(),
+}));
 
 const mockReturnData = mockData;
 
@@ -19,10 +27,13 @@ describe('Given the story-feed-list data, it should render a list of stories', (
       shape: jest.fn(),
       contentConfig: jest.fn(),
       customFields: jest.fn(),
+      instanceOf: jest.fn(),
+      oneOfType: jest.fn(),
+      isRequired: jest.fn(),
     }));
 
 
-    const wrapper = mount(<ResultsList customFields={customFields} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);

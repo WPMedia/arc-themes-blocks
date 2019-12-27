@@ -1,26 +1,34 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
 import './byline.scss';
 
+console.log(styled);
+
+const BylineSection = styled.section`
+  font-family: ${props => props.secondaryFont};
+`;
 @Consumer
 class ArticleByline extends Component {
   constructor(props) {
     super(props);
 
+    this.arcSite = props.arcSite;
     // Inherit global content
-    const { globalContent: content = {} } = this.props;
-    // If Global Content Exists, set the component state to credts destructured from global content
-    if (Object.keys(content).length) {
+    const { globalContent: content = {}, story } = props;
+    // If Global Content Exists and it has no story prop,
+    // set the component state to credts destructured from global content
+    if (Object.keys(content).length && !story) {
       const { credits } = content;
       this.state = {
         credits,
       };
-    // If globalContent is an empty object then set the state to credits destructured from props
+    // If globalContent is an empty object or if it has a story prop passed to it
+    // Set the state to credits destructured from story props
     } else {
-      const { story } = this.props;
       const { credits } = story;
       this.state = {
         credits,
@@ -43,11 +51,7 @@ class ArticleByline extends Component {
         if (hasName) {
           return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
         }
-
-        // Debugging in case they do not have a name.
         // Those without name will not be included in the byline
-        // eslint-disable-next-line no-console
-        console.log(`The author id ${author._id} does not have a name`);
       }
 
       return null;
@@ -59,7 +63,7 @@ class ArticleByline extends Component {
     // Leave it empty so that if there's no author with listed name it would just return '' string
     let bylineString = '';
     if (numAuthors) {
-      // If there is a nameClass and a byClass recieved from props
+      // If there is a nameClass and a byClass received from props
       if (nameClass && byClass) {
         bylineString = `<p class=${nameClass}> <span class=${byClass}>By</span> `;
       } else {
@@ -92,7 +96,7 @@ class ArticleByline extends Component {
     }
     return (
       // eslint-disable-next-line react/no-danger
-      <section className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
+      <BylineSection primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="byline" dangerouslySetInnerHTML={{ __html: `${bylineString}` }} />
     );
   }
 }

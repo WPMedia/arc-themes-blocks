@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "styled-components": "^4.4.0",
-    "@arc-test-org/byline-block": "^0.2.0"
+    "@arc-test-org/byline-block": "^0.2.0",
+    "@arc-test-org/date-block": "^1.2.0"
   },
   "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
 }

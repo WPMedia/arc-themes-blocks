@@ -19,7 +19,7 @@ class ArticleByline extends Component {
     // Inherit global content
     const { globalContent: content = {}, story } = props;
     // If Global Content Exists and it has no story prop,
-    // set the component state to credts destructured from global content
+    // set the component state to credits destructured from global content
     if (Object.keys(content).length && !story) {
       const { credits } = content;
       this.state = {

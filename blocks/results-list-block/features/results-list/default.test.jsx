@@ -11,7 +11,11 @@ jest.mock('styled-components', () => ({
   section: jest.fn(),
   time: jest.fn(),
   div: jest.fn(),
+  h2: jest.fn(),
+  p: jest.fn(),
 }));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 const mockReturnData = mockData;
 

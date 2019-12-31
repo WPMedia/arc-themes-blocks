@@ -5,6 +5,7 @@ import Byline from '@arc-test-org/byline-block';
 import ArticleDate from '@arc-test-org/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 import './results-list.scss';
 
 function extractImage(promo) {
@@ -14,11 +15,11 @@ function extractImage(promo) {
   return null;
 }
 
-const HeadlineText = styled.div`
+const HeadlineText = styled.h2`
   font-family: ${props => props.primaryFont};
 `;
 
-const DescriptionText = styled.div`
+const DescriptionText = styled.p`
   font-family: ${props => props.secondaryFont};
 `;
 
@@ -43,14 +44,31 @@ class ResultsList extends Component {
     });
   }
 
+  constructHref(websiteUrl) {
+    const { arcSite } = this.props;
+    const {
+      websiteDomain,
+    } = getProperties(arcSite);
+    return (window && window.location.hostname === 'localhost')
+      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
+  }
+
   // Section to render headline
-  renderHeadline(headline) {
+  renderHeadline(headline, websiteUrl) {
     const { listType = 'default' } = this.props;
     switch (listType) {
       case 'simple':
       case 'default':
       default:
-        return <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>;
+        return (
+          <a
+            href={this.constructHref(websiteUrl)}
+            title={headline}
+            className="list-anchor"
+          >
+            <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>
+          </a>
+        );
     }
   }
 
@@ -97,12 +115,13 @@ class ResultsList extends Component {
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
             credits: { by } = {},
+            website_url: websiteUrl,
           } = element;
           const showSeperator = by.length !== 0;
           return (
             <div className={`list-item ${classNames}`} key={`result-card-${element.canonical_url}`}>
               <a
-                href={element.canonical_url}
+                href={this.constructHref(websiteUrl)}
                 title={headlineText}
                 className="list-anchor"
               >
@@ -112,16 +131,16 @@ class ResultsList extends Component {
                     alt={headlineText}
                   />
                 ) : <div className="image-placeholder" />}
-                <div className={descriptionText ? 'headline-description' : 'headline-description headline-description-spacing'}>
-                  <div>
-                    { this.renderHeadline(headlineText) }
-                    { this.renderDescription(descriptionText) }
-                  </div>
-                  <div className="author-date">
-                    { this.renderBylineAndDate(element, displayDate, showSeperator) }
-                  </div>
-                </div>
               </a>
+              <div className={descriptionText ? 'headline-description' : 'headline-description headline-description-spacing'}>
+                <div>
+                  { this.renderHeadline(headlineText, websiteUrl) }
+                  { this.renderDescription(descriptionText) }
+                </div>
+                <div className="author-date">
+                  { this.renderBylineAndDate(element, displayDate, showSeperator) }
+                </div>
+              </div>
             </div>
           );
         })}

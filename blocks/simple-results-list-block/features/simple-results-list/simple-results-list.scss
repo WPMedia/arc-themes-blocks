@@ -1,0 +1,37 @@
+.simple-results-list-container {
+  .simple-list-title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #191919;
+  }
+  
+  .list-item-simple {
+    box-shadow: inset 0 -1px 0 0 #B8C1CB;
+    .simple-list-anchor {
+      display: flex;
+      text-decoration: none;
+    }
+
+    .headline-text {
+      color: #191919;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: normal;
+      margin: 16px 14px 18.2px 0;
+    }
+    
+    .simple-list-photo,
+    .image-placeholder-sm {
+      height: 74px;
+      width: 108px;
+      margin: 16px 20px 17px 0;
+    }
+
+    .image-placeholder-sm  {
+      min-height: 74px;
+      min-width: 108px;
+      background-color: #DFE4EA;
+    }
+  }
+}

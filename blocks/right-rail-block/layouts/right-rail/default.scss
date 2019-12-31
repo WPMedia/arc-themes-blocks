@@ -7,6 +7,7 @@ html, body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  align-items: center;
 
   header{
     position: fixed;
@@ -20,6 +21,28 @@ html, body {
     padding-top: 54px;
   }
 
+  .fullwidth1-section {
+    padding: map-get($spacers, 'lg') 0;
+    border-bottom: 1px $ui-medium-light-secondary-color solid;
+    border-top: 1px $ui-medium-light-secondary-color solid;
+  }
+
+
+  .left-article-section {
+    padding: 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      padding: 0 map-get($spacers, 'lg') 0 0;
+      border-right: 1px $ui-medium-light-secondary-color solid;
+    }
+  }
+
+  .right-article-section {
+    padding: 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      padding: 0 0 0 map-get($spacers, 'lg');
+    }
+  }
+
   .section-padding{
     padding: map-get($spacers, 'sm');
 
@@ -30,19 +53,6 @@ html, body {
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       padding: map-get($spacers, 'ld');
     }
-  }
-
-  .main-section {
-    padding: 0 1.5rem 0 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      border-right: 1px $ui-medium-light-secondary-color solid;
-    }
-  }
-
-  .fullwidth1-section {
-    padding: 1.5rem 0;
-    border-bottom: 1px $ui-medium-light-secondary-color solid;
-    border-top: 1px $ui-medium-light-secondary-color solid;
   }
 
 }

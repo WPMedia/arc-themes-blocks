@@ -3,6 +3,7 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import EmbedContainer from 'react-oembed-container';
+import './default.scss';
 
 const VideoPlayer = (props) => {
   const {
@@ -49,9 +50,11 @@ const VideoPlayer = (props) => {
   });
 
   return (
-    <EmbedContainer markup={embedHTML}>
-      <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-    </EmbedContainer>
+    <div className="embed-video">
+      <EmbedContainer markup={embedHTML}>
+        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+      </EmbedContainer>
+    </div>
   );
 };
 

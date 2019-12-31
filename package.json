@@ -43,7 +43,7 @@
     "@arc-test-org/date-block": "file:blocks/date-block",
     "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
     "@arc-test-org/default-output-block": "file:blocks/default-output-block",
-    "@arc-test-org/news-theme-css": "^1.1.7",
+    "@arc-test-org/news-theme-css": "^1.2.0",
     "@arc-test-org/engine-theme-sdk": "^0.2.8"
   }
 }

@@ -65,11 +65,12 @@ class SimpleResultsList extends Component {
         {contentElements && contentElements.length && contentElements.map((element) => {
           const {
             headlines: { basic: headlineText } = {},
+            website_url: websiteUrl,
           } = element;
           return (
             <div className="list-item-simple" key={`result-card-${element.canonical_url}`}>
               <a
-                href={this.constructHref()}
+                href={this.constructHref(websiteUrl)}
                 title={headlineText}
                 className="simple-list-anchor"
               >

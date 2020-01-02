@@ -1,28 +1,30 @@
 footer {
-  width:100%;
+  width: 100%;
+
   .footer-section {
     justify-self: left;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       justify-self: left;
     }
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       justify-self: center;
     }
 
+    font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
 
-      font-size: 14px;
-      .footer-header {
-          font-weight: bold;
+    .footer-header {
+      font-weight: bold;
+    }
+
+    .footer-item {
+      margin: map-get($spacers, 'xs') 0;
+
+      > a {
+        text-decoration: none;
+        color: #7F8C8D;
       }
-
-      .footer-item {
-          margin: map-get($spacers, 'xs') 0;
-
-          > a {
-              text-decoration: none;
-              color: #7F8C8D;
-          }
-      }
+    }
   }
 }

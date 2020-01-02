@@ -14,9 +14,10 @@ html, body {
     top: 0;
     left:0;
     right:0;
-    z-index: 134217725 !important;
+    z-index: 999;
+    height:54px;
   }
-  main {
+  .main {
     flex-grow: 1;
     padding-top: 54px;
   }

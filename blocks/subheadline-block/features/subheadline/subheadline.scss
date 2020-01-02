@@ -2,4 +2,11 @@
   margin-top: calculateRem(12px);
   color: $ui-primary-font-color;
   font-weight: normal;
+
+  font-size: calculateRem(19px);
+  line-height: calculateRem(24px);
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    font-size: calculateRem(26px);
+    line-height: calculateRem(32px);
+  }
 }

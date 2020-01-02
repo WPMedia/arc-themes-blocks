@@ -5,7 +5,7 @@ import './default.scss';
 const RightRailLayout = ({ children }) => (
   <>
     <header>{children[0]}</header>
-    <main>
+    <section role="main" className="main">
       <div className="container">
         <div className="row">
           <div className="col-sm-xl-12  fullwidth1-section">
@@ -35,7 +35,7 @@ const RightRailLayout = ({ children }) => (
 
       </div>
 
-    </main>
+    </section>
     <footer>{children[5]}</footer>
   </>
 );

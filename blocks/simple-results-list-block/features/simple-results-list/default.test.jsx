@@ -1,5 +1,3 @@
-// import mockstyled from 'styled-components';
-
 const React = require('react');
 const { shallow } = require('enzyme');
 
@@ -11,6 +9,8 @@ jest.mock('styled-components', () => ({
   div: jest.fn(),
   h2: jest.fn(),
 }));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 const mockReturnData = mockData;
 

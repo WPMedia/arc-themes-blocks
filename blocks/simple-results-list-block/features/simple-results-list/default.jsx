@@ -3,6 +3,7 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 import './simple-results-list.scss';
 
 function extractImage(promo) {
@@ -29,6 +30,15 @@ class SimpleResultsList extends Component {
     this.fetchStories();
   }
 
+  constructHref(websiteUrl) {
+    const { arcSite } = this.props;
+    const {
+      websiteDomain,
+    } = getProperties(arcSite);
+    return (window && window.location.hostname === 'localhost')
+      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
+  }
+
   // This is used to fetch data and set the state of the component to the fetched data
   fetchStories() {
     const { customFields: { resultListSchema } } = this.props;
@@ -43,13 +53,7 @@ class SimpleResultsList extends Component {
 
   // Section to render headline
   renderHeadline(headline) {
-    const { listType = 'default' } = this.props;
-    switch (listType) {
-      case 'simple':
-      case 'default':
-      default:
-        return <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>;
-    }
+    return <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>;
   }
 
   render() {
@@ -65,7 +69,7 @@ class SimpleResultsList extends Component {
           return (
             <div className="list-item-simple" key={`result-card-${element.canonical_url}`}>
               <a
-                href={element.canonical_url}
+                href={this.constructHref()}
                 title={headlineText}
                 className="simple-list-anchor"
               >

@@ -38,6 +38,7 @@
       margin-top: map-get($spacers, 'md');
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
 
       a {
         text-decoration: none;

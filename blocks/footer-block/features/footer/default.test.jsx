@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import getProperties from 'fusion:properties';
 
 // A payload with 4 columns and 11 column items
 const mockPayload = {
@@ -87,6 +88,7 @@ const mockPayload = {
 };
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 describe('the footer feature for the default output type', () => {
   afterEach(() => {
@@ -137,6 +139,7 @@ describe('the footer feature for the default output type', () => {
   it('should have empty column when empty payload is given', () => {
     const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
+    getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({})),
@@ -148,6 +151,7 @@ describe('the footer feature for the default output type', () => {
   it('should have empty column without error when undefined payload is given', () => {
     const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
+    getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (undefined)),

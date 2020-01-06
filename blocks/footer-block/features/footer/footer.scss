@@ -1,5 +1,89 @@
 footer {
   width:100%;
+  .section-separator {
+    border-bottom: 1px solid #babdc2
+  }
+
+  .copyright {
+    font-family: $theme-primary-font-family;
+    text-align: center;
+    font-size: calculateRem(14px);
+    color: #7F8C8D;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      margin-top: map-get($spacers, 'md');
+      margin-bottom: map-get($spacers, 'md');
+    }
+  }
+
+  .primaryLogo {
+    text-align: center;
+  }
+
+  .footer-row {
+    display: table;
+    width: 100%;
+    border-spacing: map-get($spacers, 'xs'); 
+  }
+
+  .footer-column {
+    text-align: center;
+    display: table-cell;
+  }
+
+  .userButtons {
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      padding-top: map-get($spacers, 'md');
+      padding-bottom: map-get($spacers, 'md');
+    }
+  }
+
+  .facebookBtn {
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #2980B9;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .twitterBtn {
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #2980B9;
+    border-right: none;
+  }
+
+  .rssBtn {
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #2980B9;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .subscribeBtn {
+    font-weight: bold;
+    color: #2980B9;
+    background-color: #fff;
+    width: calculateRem(100px);
+    padding: calculateRem(10px) calculateRem(0px) calculateRem(10px) calculateRem(0px);
+    border: 1px solid #2980B9;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  .signInBtn {
+    font-weight: bold;
+    color: #2980B9;
+    background-color: #fff;
+    width: calculateRem(100px);
+    padding: calculateRem(10px) calculateRem(0px) calculateRem(10px) calculateRem(0px);
+    border: 1px solid #2980B9;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
   .footer-section {
     justify-self: left;
 
@@ -24,5 +108,6 @@ footer {
               color: #7F8C8D;
           }
       }
+
   }
 }

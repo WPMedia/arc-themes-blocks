@@ -4,9 +4,9 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import Facebook from './images/facebook';
-import Twitter from './images/twitter';
-import RSS from './images/rss';
+import facebook from './images/facebook.svg';
+import twitter from './images/twitter.svg';
+import rss from './images/rss.svg';
 import placeholderLogo from './images/arc-placeholder-logo.svg';
 
 import './footer.scss';
@@ -30,47 +30,67 @@ const BlocksFooter = () => {
     },
   });
   const footerColumns = (content && content.children) ? content.children : [];
+
+  const copyright = (
+    <p className="copyright" style={{ width: '100%' }}>
+      {getProperties(arcSite).copyrightText}
+    </p>
+  );
+
   const socialButtons = (
     <div className="footer-column">
-      <button
-        title="facebook"
-        type="button"
-        className="facebookBtn"
-        onClick={() => window.open('https://www.facebook.com/', '_blank')}
-      >
-        <Facebook
-          fill={getThemeStyle(arcSite)['primary-color']}
-          title="Facebook"
-          desc="Connect on Twitter"
-        />
-      </button>
-      <button
-        title="twitter"
-        type="button"
-        className="twitterBtn"
-        onClick={() => window.open('https://twitter.com/', '_blank')}
-      >
-        <Twitter
-          fill={getThemeStyle(arcSite)['primary-color']}
-          title="Twitter"
-          desc="Follow on Twitter"
-        />
-      </button>
-      <button
-        title="twitter"
-        type="button"
-        className="rssBtn"
-        onClick={() => window.open(websiteUrl, '_blank')}
-      >
-        <RSS
-          fill={getThemeStyle(arcSite)['primary-color']}
-          title="RSS"
-          desc="RSS"
-        />
-      </button>
+      {
+        (getProperties(arcSite).facebookPage)
+          ? (
+            <button
+              title="facebook"
+              type="button"
+              className="facebookBtn"
+              onClick={
+                () => window.open(`https://www.facebook.com/${getProperties(arcSite).facebookPage}`, '_blank')
+              }
+            >
+              <img src={facebook} alt="facebook" />
+            </button>
+          )
+          : ''
+      }
+      {
+        (getProperties(arcSite).twitterUsername)
+          ? (
+            <button
+              title="twitter"
+              type="button"
+              className="twitterBtn"
+              onClick={
+                () => window.open(`https://twitter.com/${getProperties(arcSite).twitterUsername}`, '_blank')
+              }
+            >
+              <img src={twitter} alt="twitter" />
+            </button>
+          )
+          : ''
+      }
+      {
+        (getProperties(arcSite).rssUrl)
+          ? (
+            <button
+              title="rss"
+              type="button"
+              className="rssBtn"
+              onClick={
+                () => window.open(getProperties(arcSite).rssUrl, '_blank')
+              }
+            >
+              <img src={rss} alt="rss" />
+            </button>
+          )
+          : ''
+      }
     </div>
   );
 
+  /* Placeholder buttons for maintaining layout */
   const userButtons = (
     <div className="footer-column userButtons">
       {
@@ -107,12 +127,9 @@ const BlocksFooter = () => {
               {socialButtons}
               <div className="footer-column">
                 {
+                  /* If large screen, show copyright over border */
                   (window.innerWidth > 500)
-                    ? (
-                      <p className="copyright" style={{ width: '100%' }}>
-                        Copyright 2020 The Arc Intelligencer
-                      </p>
-                    )
+                    ? copyright
                     : ''
                 }
               </div>
@@ -122,13 +139,10 @@ const BlocksFooter = () => {
         </div>
         <div>
           {
+            /* If small screen, show copyright under border */
             (window.innerWidth > 500)
               ? ''
-              : (
-                <p className="copyright" style={{ width: '100%' }}>
-                  Copyright 2020 The Arc Intelligencer
-                </p>
-              )
+              : copyright
           }
         </div>
         <div className="row">

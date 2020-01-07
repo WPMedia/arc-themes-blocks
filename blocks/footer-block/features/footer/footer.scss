@@ -26,11 +26,17 @@ footer {
   }
 
   .footer-column {
-    text-align: center;
-    display: table-cell;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: table-cell;
+      text-align: center;
+      width: 100%
+    }
+    display: inline-block;
+    width: 33.3%;
   }
 
   .userButtons {
+    text-align: right;
     @media screen and (max-width: map-get($grid-breakpoints, 'md')){
       padding-top: map-get($spacers, 'md');
       padding-bottom: map-get($spacers, 'md');
@@ -39,26 +45,26 @@ footer {
 
   .facebookBtn {
     background-color: #fff;
-    padding: 5px;
+    padding: calculateRem(5px);
     border: 1px solid #2980B9;
     border-right: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: calculateRem(5px);
+    border-bottom-left-radius: calculateRem(5px);
   }
 
   .twitterBtn {
     background-color: #fff;
-    padding: 5px;
+    padding: calculateRem(5px);
     border: 1px solid #2980B9;
     border-right: none;
   }
 
   .rssBtn {
     background-color: #fff;
-    padding: 5px;
+    padding: calculateRem(5px);
     border: 1px solid #2980B9;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: calculateRem(5px);
+    border-bottom-right-radius: calculateRem(5px);
   }
 
   .subscribeBtn {
@@ -66,11 +72,11 @@ footer {
     color: #2980B9;
     background-color: #fff;
     width: calculateRem(100px);
-    padding: calculateRem(10px) calculateRem(0px) calculateRem(10px) calculateRem(0px);
+    padding: calculateRem(10px) 0 calculateRem(10px) 0;
     border: 1px solid #2980B9;
     border-right: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: calculateRem(5px);
+    border-bottom-left-radius: calculateRem(5px);
   }
 
   .signInBtn {
@@ -78,10 +84,10 @@ footer {
     color: #2980B9;
     background-color: #fff;
     width: calculateRem(100px);
-    padding: calculateRem(10px) calculateRem(0px) calculateRem(10px) calculateRem(0px);
+    padding: calculateRem(10px) 0 calculateRem(10px) 0;
     border: 1px solid #2980B9;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: calculateRem(5px);
+    border-bottom-right-radius: calculateRem(5px);
   }
 
   .footer-section {

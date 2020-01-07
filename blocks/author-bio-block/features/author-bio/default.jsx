@@ -92,7 +92,7 @@ const AuthorBio = () => {
         <section key={(author.name) ? author.name : ''} className="authors">
           <section className="author">
             {
-              (author.image)
+              (author.image && author.image.url)
                 ? <img src={author.image.url} alt={(author.image.alt_text || author.name)} />
                 : null
             }

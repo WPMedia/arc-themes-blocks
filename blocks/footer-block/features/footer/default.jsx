@@ -4,8 +4,9 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import facebookLogo from './images/facebook.svg';
-import twitterLogo from './images/twitter.svg';
+import Facebook from './images/facebook';
+import Twitter from './images/twitter';
+import RSS from './images/rss';
 import placeholderLogo from './images/arc-placeholder-logo.svg';
 
 import './footer.scss';
@@ -13,11 +14,6 @@ import './footer.scss';
 const FooterSection = styled.ul`
   font-family: ${props => props.primaryFont};
 `;
-
-const logos = {
-  facebook: facebookLogo,
-  twitter: twitterLogo,
-};
 
 const BlocksFooter = () => {
   const {
@@ -42,7 +38,11 @@ const BlocksFooter = () => {
         className="facebookBtn"
         onClick={() => window.open('https://www.facebook.com/', '_blank')}
       >
-        <img src={logos.facebook} alt="facebook" />
+        <Facebook
+          fill={getThemeStyle(arcSite)['primary-color']}
+          title="Facebook"
+          desc="Connect on Twitter"
+        />
       </button>
       <button
         title="twitter"
@@ -50,7 +50,11 @@ const BlocksFooter = () => {
         className="twitterBtn"
         onClick={() => window.open('https://twitter.com/', '_blank')}
       >
-        <img src={logos.twitter} alt="twitter" />
+        <Twitter
+          fill={getThemeStyle(arcSite)['primary-color']}
+          title="Twitter"
+          desc="Follow on Twitter"
+        />
       </button>
       <button
         title="twitter"
@@ -58,7 +62,11 @@ const BlocksFooter = () => {
         className="rssBtn"
         onClick={() => window.open(websiteUrl, '_blank')}
       >
-        <img src={logos.twitter} alt="twitter" />
+        <RSS
+          fill={getThemeStyle(arcSite)['primary-color']}
+          title="RSS"
+          desc="RSS"
+        />
       </button>
     </div>
   );
@@ -98,13 +106,15 @@ const BlocksFooter = () => {
             <div className="footer-row">
               {socialButtons}
               <div className="footer-column">
-                <p className="copyright">
-                  {
-                    (window.innerWidth > 500)
-                      ? 'Copyright 2020 The Arc Intelligencer'
-                      : ''
-                  }
-                </p>
+                {
+                  (window.innerWidth > 500)
+                    ? (
+                      <p className="copyright" style={{ width: '100%' }}>
+                        Copyright 2020 The Arc Intelligencer
+                      </p>
+                    )
+                    : ''
+                }
               </div>
               {userButtons}
             </div>
@@ -145,7 +155,7 @@ const BlocksFooter = () => {
         <div className="primaryLogo">
           <img
             src={getProperties(arcSite).primaryLogo || placeholderLogo}
-            alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
+            alt={getProperties(arcSite).primaryLogoAlt || 'Navigation bar logo'}
           />
         </div>
       </div>

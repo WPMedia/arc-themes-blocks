@@ -139,7 +139,6 @@ describe('the footer feature for the default output type', () => {
   it('should have empty column when empty payload is given', () => {
     const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
-    getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({})),
@@ -151,7 +150,6 @@ describe('the footer feature for the default output type', () => {
   it('should have empty column without error when undefined payload is given', () => {
     const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
-    getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (undefined)),

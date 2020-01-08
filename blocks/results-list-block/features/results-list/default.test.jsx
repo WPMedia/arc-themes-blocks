@@ -25,7 +25,7 @@ jest.mock('prop-types', () => ({
 }));
 
 describe('The story-feed-list', () => {
-  it('exists', () => {
+  it('should render a list of stories', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',

@@ -10,7 +10,7 @@ import './results-list.scss';
 
 function extractImage(promo) {
   if (promo && promo.basic && promo.basic.type === 'image') {
-    return `${promo.basic.url}`;
+    return promo.basic.url;
   }
   return null;
 }

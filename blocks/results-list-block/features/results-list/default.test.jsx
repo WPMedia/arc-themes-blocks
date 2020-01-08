@@ -24,7 +24,7 @@ jest.mock('prop-types', () => ({
   customFields: () => {},
 }));
 
-describe('Given the story-feed-list data, it should render a list of stories', () => {
+describe('The story-feed-list', () => {
   it('exists', () => {
     const listContentConfig = {
       contentConfigValues: {
@@ -64,28 +64,28 @@ describe('Given the story-feed-list data, it should render a list of stories', (
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
-      it('has one parent wrapper', () => {
+      it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
       });
 
-      it('renders one list item as its child', () => {
+      it('should render one list item as its child', () => {
         expect(wrapper.find('.results-list-container').children().length).toEqual(1);
         expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
         expect(wrapper.find('.list-item').length).toEqual(1);
       });
 
-      it('renders one list item as its child', () => {
+      it('should render one list item as its child', () => {
         expect(wrapper.find('.results-list-container').children().length).toEqual(1);
         expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
         expect(wrapper.find('.list-item').length).toEqual(1);
       });
 
-      it('renders one image wrapped in an anchor tag', () => {
+      it('should render one image wrapped in an anchor tag', () => {
         expect(wrapper.find('.list-item').find('.list-anchor').length).toEqual(2);
         expect(wrapper.find('.list-item').find('.list-anchor').find('img').length).toEqual(1);
       });
 
-      it('renders an anchor and an image with the correct url', () => {
+      it('should render an anchor and an image with the correct url', () => {
         expect(wrapper.find('.list-item').find('.list-anchor').at(0).find('a')
           .prop('href')).toEqual('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com//arts/2019/12/18/article-with-a-youtube-embed-in-it/');
       });
@@ -160,7 +160,7 @@ describe('Given the story-feed-list data, it should render a list of stories', (
     });
   });
 
-  describe('render one list item correctly when byline is missing', () => {
+  describe('render one list item correctly when list of authors is missing', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',

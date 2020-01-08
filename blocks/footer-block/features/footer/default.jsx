@@ -16,12 +16,8 @@ const FooterSection = styled.ul`
 `;
 
 const BlocksFooter = () => {
-  const {
-    globalContent: {
-      website_url: websiteUrl = '',
-    } = {},
-    arcSite,
-  } = useFusionContext();
+  const { arcSite } = useFusionContext();
+
   const content = useContent({
     source: 'site-navigation',
     query: {
@@ -29,6 +25,7 @@ const BlocksFooter = () => {
       hierarchy: 'footer',
     },
   });
+
   const footerColumns = (content && content.children) ? content.children : [];
 
   const copyright = (
@@ -169,7 +166,7 @@ const BlocksFooter = () => {
         <div className="primaryLogo">
           <img
             src={getProperties(arcSite).primaryLogo || placeholderLogo}
-            alt={getProperties(arcSite).primaryLogoAlt || 'Navigation bar logo'}
+            alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
           />
         </div>
       </div>

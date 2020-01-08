@@ -9,10 +9,7 @@ import getProperties from 'fusion:properties';
 import './results-list.scss';
 
 function extractImage(promo) {
-  if (promo && promo.basic && promo.basic.type === 'image') {
-    return promo.basic.url;
-  }
-  return null;
+  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
 
 const HeadlineText = styled.h2`

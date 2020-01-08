@@ -28,12 +28,6 @@ const Footer = () => {
 
   const footerColumns = (content && content.children) ? content.children : [];
 
-  const copyright = (
-    <p className="copyright" style={{ width: '100%' }}>
-      {getProperties(arcSite).copyrightText}
-    </p>
-  );
-
   const socialButtons = (
     <div className="footer-column">
       {
@@ -90,28 +84,20 @@ const Footer = () => {
   /* Placeholder buttons for maintaining layout */
   const userButtons = (
     <div className="footer-column userButtons">
-      {
-        (window.innerWidth > 500)
-          ? (
-            <>
-              <button
-                type="button"
-                className="subscribeBtn"
-                onClick={() => alert('clicked')}
-              >
-                Subscribe
-              </button>
-              <button
-                type="button"
-                className="signInBtn"
-                onClick={() => alert('clicked')}
-              >
-                Sign In
-              </button>
-            </>
-          )
-          : null
-      }
+      <button
+        type="button"
+        className="subscribeBtn"
+        onClick={() => alert('clicked')}
+      >
+        Subscribe
+      </button>
+      <button
+        type="button"
+        className="signInBtn"
+        onClick={() => alert('clicked')}
+      >
+        Sign In
+      </button>
     </div>
   );
 
@@ -123,24 +109,20 @@ const Footer = () => {
             <div className="footer-row">
               {socialButtons}
               <div className="footer-column">
-                {
-                  /* If large screen, show copyright over border */
-                  (window.innerWidth > 500)
-                    ? copyright
-                    : ''
-                }
+                {/* If large screen, show copyright over border */}
+                <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
+                  {getProperties(arcSite).copyrightText}
+                </p>
               </div>
               {userButtons}
             </div>
           </section>
         </div>
         <div>
-          {
-            /* If small screen, show copyright under border */
-            (window.innerWidth > 500)
-              ? ''
-              : copyright
-          }
+          {/* If small screen, show copyright under border */}
+          <p className="copyright" id="copyright-bottom" style={{ width: '100%' }}>
+            {getProperties(arcSite).copyrightText}
+          </p>
         </div>
         <div className="row">
           {/* The columns are 2D arrays of columns x column items. Iterate through both */}

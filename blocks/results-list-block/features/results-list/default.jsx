@@ -32,10 +32,9 @@ class ResultsList extends Component {
     this.fetchStories();
   }
 
-  // This is used to fetch data and set the state of the component to the fetched data
   fetchStories() {
-    const { customFields: { resultListSchema } } = this.props;
-    const { contentService, contentConfigValues } = resultListSchema;
+    const { customFields: { listContentConfig } } = this.props;
+    const { contentService, contentConfigValues } = listContentConfig;
     this.fetchContent({
       resultList: {
         source: contentService,
@@ -53,59 +52,7 @@ class ResultsList extends Component {
       ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
   }
 
-  // Section to render headline
-  renderHeadline(headline, websiteUrl) {
-    const { listType = 'default' } = this.props;
-    switch (listType) {
-      case 'simple':
-      case 'default':
-      default:
-        return (
-          <a
-            href={this.constructHref(websiteUrl)}
-            title={headline}
-            className="list-anchor"
-          >
-            <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>
-          </a>
-        );
-    }
-  }
-
-  // section to control description text
-  renderDescription(description) {
-    const { listType = 'default' } = this.props;
-    switch (listType) {
-      case 'simple':
-        return null;
-      case 'default':
-      default:
-        return <DescriptionText secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="description-text">{description}</DescriptionText>;
-    }
-  }
-
-  // Section to render byLine(Author Names) and date
-  renderBylineAndDate(element, date, showSeperator) {
-    const { listType = 'default' } = this.props;
-    switch (listType) {
-      // A simple list does not contain a description text
-      case 'simple':
-        return null;
-      case 'default':
-      default:
-        return (
-          <>
-            <Byline story={element} nameClass="nameStyles" byClass="byClass" />
-            {/* The Seperator will only be shown if there is atleast one author name */}
-            { showSeperator && <p className="dot-separator">&#9679;</p> }
-            <ArticleDate classNames="story-date" date={date} />
-          </>
-        );
-    }
-  }
-
   render() {
-    const { classNames } = this.props;
     const { resultList: { content_elements: contentElements = [] } } = this.state;
     return (
       <div className="results-list-container">
@@ -117,9 +64,9 @@ class ResultsList extends Component {
             credits: { by } = {},
             website_url: websiteUrl,
           } = element;
-          const showSeperator = by.length !== 0;
+          const showSeparator = by && by.length !== 0;
           return (
-            <div className={`list-item ${classNames}`} key={`result-card-${element.canonical_url}`}>
+            <div className="list-item" key={`result-card-${element.canonical_url}`}>
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
@@ -134,11 +81,20 @@ class ResultsList extends Component {
               </a>
               <div className={descriptionText ? 'headline-description' : 'headline-description headline-description-spacing'}>
                 <div>
-                  { this.renderHeadline(headlineText, websiteUrl) }
-                  { this.renderDescription(descriptionText) }
+                  <a
+                    href={this.constructHref(websiteUrl)}
+                    title={headlineText}
+                    className="list-anchor"
+                  >
+                    <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
+                  </a>
+                  <DescriptionText secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="description-text">{descriptionText}</DescriptionText>
                 </div>
                 <div className="author-date">
-                  { this.renderBylineAndDate(element, displayDate, showSeperator) }
+                  <Byline story={element} stylesFor="list" />
+                  {/* The Separator will only be shown if there is atleast one author name */}
+                  { showSeparator && <p className="dot-separator">&#9679;</p> }
+                  <ArticleDate classNames="story-date" date={displayDate} />
                 </div>
               </div>
             </div>
@@ -151,10 +107,8 @@ class ResultsList extends Component {
 
 ResultsList.propTypes = {
   customFields: PropTypes.shape({
-    resultListSchema: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed'),
   }),
-  listType: PropTypes.string,
-  classNames: PropTypes.string,
 };
 
 export default ResultsList;

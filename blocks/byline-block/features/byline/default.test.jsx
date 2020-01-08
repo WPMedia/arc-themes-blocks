@@ -1,5 +1,5 @@
 const React = require('react');
-const { shallow } = require('enzyme');
+const { mount } = require('enzyme');
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
@@ -15,9 +15,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a> </p>' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>' });
   });
 
   it('should return two authors', () => {
@@ -37,9 +36,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
   it('should return three authors, oxford comma', () => {
@@ -63,9 +61,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a> and <a href="/author/brent-miller">Brent Miller</a></p>' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a> and <a href="/author/brent-miller">Brent Miller</a>' });
   });
 
   it('should return four authors, oxford comma', () => {
@@ -93,9 +90,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
   it('should return no author (no byline provided for any of the authors)', () => {
@@ -128,9 +124,8 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' ' });
   });
 
   it('should return 4 authors complete with url and bylines', () => {
@@ -178,8 +173,7 @@ describe('Given the display time from ANS, it should convert to the proper timez
     };
     const globalContent = { credits };
 
-    const wrapper = shallow(<ArticleByline globalContent={globalContent} />);
-
-    expect(wrapper.prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<p> By <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a></p>' });
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 });

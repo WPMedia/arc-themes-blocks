@@ -19,9 +19,9 @@ const ArticleTags = () => {
   return tags.length ? (
     <div className="tags-holder">
       {
-        tags.map((tag) => {
+        tags.map((tag, index) => {
           const slug = tag.slug || '#';
-          return <Tags key={slug} className="tags" href={slug} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
+          return <Tags key={index} className="tags" href={slug} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
         })
       }
     </div>

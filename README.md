@@ -49,7 +49,14 @@ At this time, local development will be easiest if you first create the feature 
 Test your bundle locally by running the command `npm run start:admin:theme-dev` in the root of the fusion directory. This will also import any existing blocks as defined in the bundle's blocks.json as well so you can see them working alongside your feature.
 
 #### 3. Design QA
-When a feature is tested and working and now need a Design QA before it is deployed, commit all the changes to the branch and tell Brandon the name of the branch. He can then pull the branch down from the bundle and run it locally so that he can test the design specs as well. Make sure to tell him what kind of data and content configuration he needs to run the feature correctly as well.
+When you’re done with the feature initially (when you think you’ve covered what’s on the ticket), and the ticket is labeled for Design QA, go through the following so that the designer can check off on the designs:
+1. Create a draft PR with your branch on the bundle repo
+2. On that PR, put in all the information that’s needed to recreate what you’ve been testing with, as well as the link to the JIRA ticket
+3. Send the link to the draft PR to the designer, move the ticket to the Design QA column
+4. The designer will then git checkout that bundle repo branch, test the designs, and leave comments on that draft PR with any changes needed
+5. Make edits to the code as necessary, push to the PR
+6. Repeat steps 4 and 5 until Design QA is done
+7. Move the feature into the blocks by following the next step, create the PR for it, and put the ticket to Code Review
 
 #### 4. Creating/Setting up a new block
 If we wanted to create a new block for our theme called `new-footer-block` the command we'd run with lerna would look something like this.

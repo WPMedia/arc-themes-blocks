@@ -3,7 +3,15 @@
     height: auto;
     position: relative;
     display: block;
-    margin: 0 0 map-get($spacers, 'sm');
+    margin: 0 0 map-get($spacers, 'lg');
+
+    figcaption {
+        margin-top:map-get($spacers, 'xs');
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        margin-bottom: map-get($spacers, 'md');
+    }
 
     .btn-full-screen{
         background-color: transparent;

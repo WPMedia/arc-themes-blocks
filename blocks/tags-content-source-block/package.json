@@ -1,13 +1,13 @@
 {
-  "name": "@arc-test-org/default-output-block",
-  "version": "1.2.8",
-  "description": "Fusion News Theme default output type",
-  "author": "Brent Miller <brent.miller@washport.com>",
+  "name": "@arc-test-org/tags-content-source-block",
+  "version": "0.0.1",
+  "description": "Fusion News Theme tags API content source block",
+  "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
-    "output-types"
+    "sources"
   ],
   "publishConfig": {
     "access": "restricted"
@@ -15,9 +15,5 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
-  },
-  "dependencies": {
-    "@arc-test-org/news-theme-css": "^1.2.2",
-    "styled-components": "^4.4.0"
   }
 }

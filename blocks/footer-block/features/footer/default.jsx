@@ -15,7 +15,7 @@ const FooterSection = styled.ul`
   font-family: ${props => props.primaryFont};
 `;
 
-const BlocksFooter = () => {
+const Footer = () => {
   const { arcSite } = useFusionContext();
 
   const content = useContent({
@@ -174,4 +174,4 @@ const BlocksFooter = () => {
   );
 };
 
-export default BlocksFooter;
+export default Footer;

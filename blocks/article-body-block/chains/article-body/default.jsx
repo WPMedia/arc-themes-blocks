@@ -27,14 +27,14 @@ function parseArticleItem(item, index) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, width, height, credits, alt_text
+        url, subtitle, caption, width, height, credits, alt_text: altText,
       } = item;
 
       return (url && url.length > 0) ? (
         <figure key={key}>
           <img
             src={url}
-            alt={alt_text}
+            alt={altText}
             label={subtitle}
             width={width}
             height={height}
@@ -148,14 +148,8 @@ const ArticleBody = styled.article`
 `;
 
 const ArticleBodyChain = ({ children }) => {
-  const { globalContent: items, customFields, arcSite } = useFusionContext();
-  const { elementPlacement } = customFields;
-  let parsedElementPlacement;
-  try {
-    parsedElementPlacement = JSON.parse(elementPlacement);
-  } catch (err) {
-    parsedElementPlacement = false;
-  }
+  const { globalContent: items, customFields = {}, arcSite } = useFusionContext();
+  const { elementPlacement = {} } = customFields;
 
   // Get the current length of the article's content elements
   // This will be used as a check to make sure the placements don't go over the
@@ -166,11 +160,11 @@ const ArticleBodyChain = ({ children }) => {
 
   // Here, the keys represent the child of the chain, and the values represent their positions
   //  in the article body.
-  Object.keys(parsedElementPlacement).forEach((element) => {
+  Object.keys(elementPlacement).forEach((element) => {
     const elementNum = +element - 1;
     // Check to make sure the element is not over the number of content elements/paragraphs
     // and make sure that the specified child exists
-    let elementPosition = +parsedElementPlacement[element];
+    let elementPosition = +elementPlacement[element];
     if (elementPosition <= articleElementLength && children[elementNum]) {
       // Check if there is already another element occupying the space.
       // Loop until you find an empty position to place the element in the article body
@@ -186,7 +180,9 @@ const ArticleBodyChain = ({ children }) => {
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
   const firstParagraph = contentElements.find(elements => elements.type === 'text');
-  firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
+  if (!firstParagraph.content.indexOf(`${location} &mdash;`) === 0) {
+    firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
+  }
   contentElements.forEach((item, index) => {
     const articleElement = parseArticleItem(item, index, arcSite);
 
@@ -212,7 +208,7 @@ const ArticleBodyChain = ({ children }) => {
 
 ArticleBodyChain.propTypes = {
   customFields: PropTypes.shape({
-    elementPlacement: PropTypes.string,
+    elementPlacement: PropTypes.kvp,
   }),
 };
 

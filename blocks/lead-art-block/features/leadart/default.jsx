@@ -40,6 +40,18 @@ class LeadArt extends Component {
       showCredit: customFields.showCredit || false,
       content,
     };
+
+    this.imgRef = React.createRef();
+  }
+
+  lightboxImgHandler() {
+    const imgParentElm = this.imgRef.current;
+    const imgElm = imgParentElm.querySelector('img')
+    console.log('Here is the imgElm: ', imgElm);
+    if (imgElm) {
+      return imgElm.dataset.lightbox;
+    }
+    return '';
   }
 
   render() {
@@ -93,7 +105,7 @@ class LeadArt extends Component {
             <React.Fragment>
               {isOpen && (
                 <Lightbox
-                  mainSrc={lead_art.url}
+                  mainSrc={this.lightboxImgHandler()}
                   onCloseRequest={() => this.setState({ isOpen: false })}
                   showImageCaption={showCredit}
                   imageCaption={lead_art.caption}
@@ -113,13 +125,17 @@ class LeadArt extends Component {
         );
 
         return (
-          <LeadArtWrapperFigure className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+          <LeadArtWrapperFigure
+            className="lead-art-wrapper"
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          >
             <button
               type="button"
               className="btn-full-screen"
               onClick={() => this.setState({ isOpen: true })}
             >
               <img
+                className="ui-img"
                 src={fullScreenLogo}
                 title={buttonLabel}
                 alt={buttonLabel}
@@ -127,16 +143,20 @@ class LeadArt extends Component {
               />
               {buttonLabel}
             </button>
-            <Image
-              url={lead_art.url}
-              alt={lead_art.alt_text}
-              smallWidth={800}
-              smallHeight={0}
-              mediumWidth={800}
-              mediumHeight={0}
-              largeWidth={800}
-              largeHeight={0}
-            />
+            <div ref={this.imgRef}>
+              <Image
+                url={lead_art.url}
+                alt={lead_art.alt_text}
+                smallWidth={800}
+                smallHeight={0}
+                mediumWidth={800}
+                mediumHeight={0}
+                largeWidth={800}
+                largeHeight={0}
+                lightBoxWidth={1600}
+                lightBoxHeight={0}
+              />
+            </div>
             {lightbox}
             {caption && (
               <figcaption>

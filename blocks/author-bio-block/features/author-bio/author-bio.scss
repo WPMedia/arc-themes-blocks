@@ -35,7 +35,7 @@
     flex-direction: column;
 
     .socialButtons {
-      margin-top: map-get($spacers, 'md');
+      margin-top: map-get($spacers, 'xs');
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;

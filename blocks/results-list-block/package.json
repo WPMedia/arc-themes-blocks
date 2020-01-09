@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/results-list-block",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fusion News Theme results list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,8 +19,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/byline-block": "^0.2.2",
-    "@arc-test-org/date-block": "^1.2.2",
+    "@arc-test-org/byline-block": "^0.2.3",
+    "@arc-test-org/date-block": "^1.2.3",
     "styled-components": "^4.4.0"
   },
   "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"

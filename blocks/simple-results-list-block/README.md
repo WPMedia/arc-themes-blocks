@@ -1,5 +1,5 @@
 # `@arc-test-org/simple-results-list-block`
-Byline block for Fusion News Theme
+Simple results list block for Fusion News Theme
 
 ## Usage
 It Expects the user to configure the feed content.

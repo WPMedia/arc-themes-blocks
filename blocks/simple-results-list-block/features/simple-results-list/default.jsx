@@ -73,9 +73,7 @@ class SimpleResultsList extends Component {
                   />
                 ) : <div className="image-placeholder-sm" />}
                 <div className="headline-description">
-                  <div>
-                    <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
-                  </div>
+                  <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
                 </div>
               </a>
             </div>

@@ -3,25 +3,24 @@ const { shallow } = require('enzyme');
 
 const { default: mockData } = require('./mock-data');
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 jest.mock('styled-components', () => ({
   div: jest.fn(),
   h2: jest.fn(),
 }));
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => jest.fn(() => ({})));
 
-const mockReturnData = mockData;
+
+jest.mock('prop-types', () => ({
+  shape: jest.fn(),
+  contentConfig: jest.fn(),
+  customFields: jest.fn(),
+}));
 
 describe('The @arc-test-org simple-results-list-block', () => {
   describe('render a list of simple-list-items', () => {
-    jest.mock('prop-types', () => ({
-      shape: jest.fn(),
-      contentConfig: jest.fn(),
-      customFields: jest.fn(),
-    }));
-
     it('should render list item with headline and image', () => {
       const { default: SimpleList } = require('./default');
       const listContentConfig = {
@@ -34,7 +33,7 @@ describe('The @arc-test-org simple-results-list-block', () => {
         contentService: 'story-feed-query',
       };
       const customFields = { listContentConfig };
-      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
       const wrapper = shallow(<SimpleList customFields={customFields} />);
       wrapper.setState({ resultList: mockData }, () => {
@@ -64,7 +63,7 @@ describe('The @arc-test-org simple-results-list-block', () => {
         contentService: 'story-feed-query',
       };
       const customFields = { listContentConfig };
-      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
       const wrapper = shallow(<SimpleList customFields={customFields} />);
       wrapper.setState({ resultList: mockData }, () => {

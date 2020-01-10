@@ -34,10 +34,9 @@ const Footer = () => {
         (getProperties(arcSite).facebookPage)
           ? (
             <a
-              title="facebook"
-              type="button"
+              title="Facebook page"
               className="facebookBtn"
-              target="blank"
+              target="_blank"
               href={getProperties(arcSite).facebookPage}
             >
               <img src={facebook} alt="facebook" />
@@ -49,10 +48,9 @@ const Footer = () => {
         (getProperties(arcSite).twitterUsername)
           ? (
             <a
-              title="twitter"
-              type="button"
+              title="Twitter feed"
               className="twitterBtn"
-              target="blank"
+              target="_blank"
               href={getProperties(arcSite).twitterUsername}
             >
               <img src={twitter} alt="twitter" />
@@ -64,10 +62,9 @@ const Footer = () => {
         (getProperties(arcSite).rssUrl)
           ? (
             <a
-              title="rss"
-              type="button"
+              title="RSS feed"
               className="rssBtn"
-              target="blank"
+              target="_blank"
               href={getProperties(arcSite).rssUrl}
             >
               <img src={rss} alt="rss" />

@@ -56,8 +56,11 @@ footer {
   }
 
   .facebookBtn {
+    > img {
+      vertical-align: middle;
+    }
     background-color: #fff;
-    padding: calculateRem(5px);
+    padding: map-get($spacers, 'xs');
     border: 1px solid #2980B9;
     border-right: none;
     border-top-left-radius: calculateRem(5px);
@@ -65,15 +68,21 @@ footer {
   }
 
   .twitterBtn {
+    > img {
+      vertical-align: middle;
+    }
     background-color: #fff;
-    padding: calculateRem(5px);
+    padding: map-get($spacers, 'xs');
     border: 1px solid #2980B9;
     border-right: none;
   }
 
   .rssBtn {
+    > img {
+      vertical-align: middle;
+    }
     background-color: #fff;
-    padding: calculateRem(5px);
+    padding: map-get($spacers, 'xs');
     border: 1px solid #2980B9;
     border-top-right-radius: calculateRem(5px);
     border-bottom-right-radius: calculateRem(5px);
@@ -111,27 +120,27 @@ footer {
   .footer-section {
     justify-self: left;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       justify-self: left;
     }
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
       justify-self: center;
     }
 
-    font-size: calculateRem(16px);
-    line-height: calculateRem(24px);
 
-    .footer-header {
-      font-weight: bold;
-    }
-
-    .footer-item {
-      margin: map-get($spacers, 'xs') 0;
-
-      > a {
-        text-decoration: none;
-        color: #7F8C8D;
+      font-size: 14px;
+      .footer-header {
+          font-weight: bold;
       }
-    }
+
+      .footer-item {
+          margin: map-get($spacers, 'xs') 0;
+
+          > a {
+              text-decoration: none;
+              color: #7F8C8D;
+          }
+      }
+
   }
 }

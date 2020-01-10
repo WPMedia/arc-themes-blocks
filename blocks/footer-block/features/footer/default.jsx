@@ -33,48 +33,45 @@ const Footer = () => {
       {
         (getProperties(arcSite).facebookPage)
           ? (
-            <button
+            <a
               title="facebook"
               type="button"
               className="facebookBtn"
-              onClick={
-                () => window.open(`https://www.facebook.com/${getProperties(arcSite).facebookPage}`, '_blank')
-              }
+              target="blank"
+              href={getProperties(arcSite).facebookPage}
             >
               <img src={facebook} alt="facebook" />
-            </button>
+            </a>
           )
           : ''
       }
       {
         (getProperties(arcSite).twitterUsername)
           ? (
-            <button
+            <a
               title="twitter"
               type="button"
               className="twitterBtn"
-              onClick={
-                () => window.open(`https://twitter.com/${getProperties(arcSite).twitterUsername}`, '_blank')
-              }
+              target="blank"
+              href={getProperties(arcSite).twitterUsername}
             >
               <img src={twitter} alt="twitter" />
-            </button>
+            </a>
           )
           : ''
       }
       {
         (getProperties(arcSite).rssUrl)
           ? (
-            <button
+            <a
               title="rss"
               type="button"
               className="rssBtn"
-              onClick={
-                () => window.open(getProperties(arcSite).rssUrl, '_blank')
-              }
+              target="blank"
+              href={getProperties(arcSite).rssUrl}
             >
               <img src={rss} alt="rss" />
-            </button>
+            </a>
           )
           : ''
       }

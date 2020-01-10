@@ -7,10 +7,7 @@ import getProperties from 'fusion:properties';
 import './simple-results-list.scss';
 
 function extractImage(promo) {
-  if (promo && promo.basic && promo.basic.type === 'image') {
-    return `${promo.basic.url}`;
-  }
-  return null;
+  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
 
 const HeadlineText = styled.h2`
@@ -39,21 +36,15 @@ class SimpleResultsList extends Component {
       ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
   }
 
-  // This is used to fetch data and set the state of the component to the fetched data
   fetchStories() {
-    const { customFields: { resultListSchema } } = this.props;
-    const { contentService, contentConfigValues } = resultListSchema;
+    const { customFields: { listContentConfig } } = this.props;
+    const { contentService, contentConfigValues } = listContentConfig;
     this.fetchContent({
       resultList: {
         source: contentService,
         query: contentConfigValues,
       },
     });
-  }
-
-  // Section to render headline
-  renderHeadline(headline) {
-    return <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headline}</HeadlineText>;
   }
 
   render() {
@@ -76,14 +67,14 @@ class SimpleResultsList extends Component {
               >
                 {extractImage(element.promo_items) ? (
                   <img
-                    className="simple-list-photo"
+                    className="simple-list-image"
                     src={extractImage(element.promo_items)}
                     alt={headlineText}
                   />
                 ) : <div className="image-placeholder-sm" />}
                 <div className="headline-description">
                   <div>
-                    { this.renderHeadline(headlineText) }
+                    <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
                   </div>
                 </div>
               </a>
@@ -97,7 +88,7 @@ class SimpleResultsList extends Component {
 
 SimpleResultsList.propTypes = {
   customFields: PropTypes.shape({
-    resultListSchema: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed'),
     title: PropTypes.string,
   }),
 };

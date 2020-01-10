@@ -1,0 +1,25 @@
+{
+  "name": "@arc-test-org/numbered-list-block",
+  "version": "1.0.1",
+  "description": "Fusion News Theme numbered results list block",
+  "author": "Rohit Gande <rohit.gande@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features",
+    "chains",
+    "layouts"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "@arc-test-org/byline-block": "^0.2.3"
+  },
+  "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
+}

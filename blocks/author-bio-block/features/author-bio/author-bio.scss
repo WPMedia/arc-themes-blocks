@@ -1,33 +1,50 @@
+.author-bio {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+    margin-top: map-get($spacers, 'md');
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    margin-top: map-get($spacers, 'sm');
+  }
+
+  margin-bottom: map-get($spacers, 'md');
+}
 .authors {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  .author {
+    display: flex;
+    flex-direction: row;
+  }
+
   a {
     text-decoration: none;
     margin: 0;
   }
 
   img {
-    margin: 7px;
-    width: 84px;
-    height: 84px;
+    margin: map-get($spacers, 'xs');
+    width: calculateRem(84px);
+    height: calculateRem(84px);
     border-radius: 100%;
   }
 
   .descriptions {
-    margin: 7px;
+    margin: map-get($spacers, 'xs');
     display: flex;
     flex-direction: column;
 
     .socialButtons {
+      margin-top: map-get($spacers, 'xs');
       display: flex;
       flex-direction: row;
-  
+      flex-wrap: wrap;
+
       a {
         text-decoration: none;
-        height: 24px;
-        width: 24px;
-        margin-right: 8px;
-        margin-top: 9px;
+        height: map-get($spacers, 'md');
+        width: map-get($spacers, 'md');
+        margin-right: map-get($spacers, 'xs');
         text-align: center;
       }
     }
@@ -35,25 +52,25 @@
 
   .authorName {
     font-weight: bold;
-    margin: 5px 0px;
+    margin: map-get($spacers, 'xxs') 0;
     @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
-      font-size: 18px;
+      font-size: calculateRem(18px);
     }
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      font-size: 14px;
+      font-size: calculateRem(14px);
     }
   }
 
   p {
-    margin: 5px 0px;
+    margin: map-get($spacers, 'xxs') 0;
     @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
-      line-height: 32px;
-      font-size: 18px;
+      line-height: calculateRem(32px);
+      font-size: calculateRem(18px);
     }
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      line-height: 24px;
-      font-size: 14px;
+      line-height: calculateRem(24px);
+      font-size: calculateRem(14px);
     }
   }
-  
+
 }

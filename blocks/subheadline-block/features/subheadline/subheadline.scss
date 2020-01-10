@@ -1,5 +1,12 @@
-.sub-headline{
+.h4-primary.sub-headline{
   margin-top: calculateRem(12px);
-  color: $ui-light-secondary-color;
+  color: $ui-primary-font-color;
   font-weight: normal;
+
+  font-size: calculateRem(19px);
+  line-height: calculateRem(24px);
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    font-size: calculateRem(26px);
+    line-height: calculateRem(32px);
+  }
 }

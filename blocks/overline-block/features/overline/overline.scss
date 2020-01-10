@@ -1,5 +1,7 @@
 a.overline {
     color: $ui-primary-font-color;
     display: inline-block;
-    margin-bottom: calculateRem(12px);
+    padding-bottom: map-get($spacers, 'sm');
+    font-size: calculateRem(20px);
+    line-height: calculateRem(24px);
 }

@@ -148,14 +148,8 @@ const ArticleBody = styled.article`
 `;
 
 const ArticleBodyChain = ({ children }) => {
-  const { globalContent: items, customFields, arcSite } = useFusionContext();
-  const { elementPlacement } = customFields;
-  let parsedElementPlacement;
-  try {
-    parsedElementPlacement = JSON.parse(elementPlacement);
-  } catch (err) {
-    parsedElementPlacement = false;
-  }
+  const { globalContent: items, customFields = {}, arcSite } = useFusionContext();
+  const { elementPlacement = {} } = customFields;
 
   // Get the current length of the article's content elements
   // This will be used as a check to make sure the placements don't go over the
@@ -166,11 +160,11 @@ const ArticleBodyChain = ({ children }) => {
 
   // Here, the keys represent the child of the chain, and the values represent their positions
   //  in the article body.
-  Object.keys(parsedElementPlacement).forEach((element) => {
+  Object.keys(elementPlacement).forEach((element) => {
     const elementNum = +element - 1;
     // Check to make sure the element is not over the number of content elements/paragraphs
     // and make sure that the specified child exists
-    let elementPosition = +parsedElementPlacement[element];
+    let elementPosition = +elementPlacement[element];
     if (elementPosition <= articleElementLength && children[elementNum]) {
       // Check if there is already another element occupying the space.
       // Loop until you find an empty position to place the element in the article body
@@ -214,7 +208,7 @@ const ArticleBodyChain = ({ children }) => {
 
 ArticleBodyChain.propTypes = {
   customFields: PropTypes.shape({
-    elementPlacement: PropTypes.string,
+    elementPlacement: PropTypes.kvp,
   }),
 };
 

@@ -1,30 +1,30 @@
-const React = require('react');
-const { mount } = require('enzyme');
-
-
+import React from 'react';
+import { mount } from 'enzyme';
 
 describe('the article tag block', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+  jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
   describe('when the global content has an array of tags in its taxonomy', () => {
     const mockReturnData = {
       arcSite: 'the-sun',
       globalContent: {
         taxonomy: {
-            tags: [{
-              description: "dogs",
-              slug: "dogs slug",
-              text: "dogs text"
+          tags: [{
+            description: 'dogs',
+            slug: 'dogs slug',
+            text: 'dogs text',
           }, {
-            description: "cats",
-            slug: "cats slug",
-            text: "cats text"
-          }]
+            description: 'cats',
+            slug: 'cats slug',
+            text: 'cats text',
+          }],
         },
-      }
-    }
-    const mockFunction = jest.fn().mockReturnValue(mockReturnData)
-    
+      },
+    };
+
+    const mockFunction = jest.fn().mockReturnValue(mockReturnData);
+
     afterEach(() => {
       jest.resetModules();
     });
@@ -50,8 +50,8 @@ describe('the article tag block', () => {
     it('should render tags with their correct href', () => {
       const { default: ArticleTags } = require('./default.jsx');
       const wrapper = mount(<ArticleTags />);
-      expect(wrapper.children().find('a').at(0).props().href).toBe('dogs slug');
-      expect(wrapper.children().find('a').at(1).props().href).toBe('cats slug');
+      expect(wrapper.children().find('a').at(0).props().href).toBe('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/tags/dogs%20slug');
+      expect(wrapper.children().find('a').at(1).props().href).toBe('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/tags/cats%20slug');
     });
   });
 
@@ -66,15 +66,15 @@ describe('the article tag block', () => {
           arcSite: 'the-sun',
           globalContent: {
             taxonomy: {
-                tags: [{
-                  description: "dogs",
-                  text: "dogs text"
+              tags: [{
+                description: 'dogs',
+                text: 'dogs text',
               }, {
-                description: "cats",
-                text: "cats text"
-              }]
+                description: 'cats',
+                text: 'cats text',
+              }],
             },
-          }
+          },
         })),
       }));
     });
@@ -98,9 +98,9 @@ describe('the article tag block', () => {
           arcSite: 'the-sun',
           globalContent: {
             taxonomy: {
-                tags: []
+              tags: [],
             },
-          }
+          },
         })),
       }));
     });
@@ -121,7 +121,7 @@ describe('the article tag block', () => {
       jest.mock('fusion:context', () => ({
         useFusionContext: jest.fn(() => ({
           arcSite: 'the-sun',
-          globalContent: { }
+          globalContent: { },
         })),
       }));
     });

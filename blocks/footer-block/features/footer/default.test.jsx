@@ -206,7 +206,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ copyrightText: 'my copyright text' }));
         const wrapper = shallow(<Footer />);
 
-        expect((wrapper.find('p.copyright')).text()).toStrictEqual('my copyright text');
+        expect((wrapper.find('#copyright-top')).text()).toStrictEqual('my copyright text');
       });
     });
 
@@ -215,7 +215,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ }));
         const wrapper = shallow(<Footer />);
 
-        expect((wrapper.find('p.copyright')).text()).toStrictEqual('');
+        expect((wrapper.find('#copyright-top')).text()).toStrictEqual('');
       });
     });
   });

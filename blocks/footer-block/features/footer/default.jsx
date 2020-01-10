@@ -29,17 +29,17 @@ const Footer = () => {
   const footerColumns = (content && content.children) ? content.children : [];
 
   const socialButtons = (
-    <div className="footer-column">
+    <>
       {
         (getProperties(arcSite).facebookPage)
           ? (
             <a
+              id="facebook-link"
               title="Facebook page"
-              className="facebookBtn"
               target="_blank"
               href={getProperties(arcSite).facebookPage}
             >
-              <img src={facebook} alt="facebook" />
+              <img src={facebook} alt="Facebook page" />
             </a>
           )
           : ''
@@ -48,12 +48,12 @@ const Footer = () => {
         (getProperties(arcSite).twitterUsername)
           ? (
             <a
+              id="twitter-link"
               title="Twitter feed"
-              className="twitterBtn"
               target="_blank"
               href={getProperties(arcSite).twitterUsername}
             >
-              <img src={twitter} alt="twitter" />
+              <img src={twitter} alt="Twitter feed" />
             </a>
           )
           : ''
@@ -62,17 +62,17 @@ const Footer = () => {
         (getProperties(arcSite).rssUrl)
           ? (
             <a
+              id="rss-link"
               title="RSS feed"
-              className="rssBtn"
               target="_blank"
               href={getProperties(arcSite).rssUrl}
             >
-              <img src={rss} alt="rss" />
+              <img src={rss} alt="RSS feed" />
             </a>
           )
           : ''
       }
-    </div>
+    </>
   );
 
   /* Placeholder buttons for maintaining layout */
@@ -101,7 +101,11 @@ const Footer = () => {
         <div className="section-separator">
           <section className="footer-header">
             <div className="footer-row">
-              {socialButtons}
+              <div className="footer-column">
+                <div className="socialBtn-container">
+                  {socialButtons}
+                </div>
+              </div>
               <div className="footer-column">
                 {/* If large screen, show copyright over border */}
                 <p className="copyright" id="copyright-top" style={{ width: '100%' }}>

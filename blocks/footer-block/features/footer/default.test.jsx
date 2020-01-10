@@ -226,13 +226,13 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ facebookPage: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.facebookBtn')).toHaveLength(1);
+        expect(wrapper.find('#facebook-link')).toHaveLength(1);
       });
 
       it('should open a new window when facebook button is clicked', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('a.facebookBtn').simulate('click');
+        wrapper.find('#facebook-link').simulate('click');
 
         expect(window.location.origin).toEqual('http://localhost');
       });
@@ -243,7 +243,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ facebookPage: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.facebookBtn')).toHaveLength(0);
+        expect(wrapper.find('#facebook-link')).toHaveLength(0);
       });
     });
 
@@ -252,13 +252,13 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.twitterBtn')).toHaveLength(1);
+        expect(wrapper.find('#twitter-link')).toHaveLength(1);
       });
 
       it('should open a new window when twitter button is clicked', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('a.twitterBtn').simulate('click');
+        wrapper.find('#twitter-link').simulate('click');
 
         expect(window.location.origin).toEqual('http://localhost');
       });
@@ -269,7 +269,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.twitterBtn')).toHaveLength(0);
+        expect(wrapper.find('#twitter-link')).toHaveLength(0);
       });
     });
 
@@ -278,13 +278,13 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ rssUrl: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.rssBtn')).toHaveLength(1);
+        expect(wrapper.find('#rss-link')).toHaveLength(1);
       });
 
       it('should open a new window when rss button is clicked', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('a.rssBtn').simulate('click');
+        wrapper.find('#rss-link').simulate('click');
 
         expect(window.location.origin).toEqual('http://localhost');
       });
@@ -295,7 +295,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ rssUrl: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('a.rssBtn')).toHaveLength(0);
+        expect(wrapper.find('#rss-link')).toHaveLength(0);
       });
     });
   });

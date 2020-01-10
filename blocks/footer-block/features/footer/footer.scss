@@ -55,37 +55,23 @@ footer {
     }
   }
 
-  .facebookBtn {
-    > img {
-      vertical-align: middle;
+  .socialBtn-container {
+    > a {
+      border: 1px solid #1B6FA6;
+      padding: calculateRem(12px) calculateRem(5px) 0 calculateRem(5px);
     }
-    background-color: #fff;
-    padding: map-get($spacers, 'xs');
-    border: 1px solid #2980B9;
-    border-right: none;
-    border-top-left-radius: calculateRem(5px);
-    border-bottom-left-radius: calculateRem(5px);
-  }
-
-  .twitterBtn {
-    > img {
-      vertical-align: middle;
+    > a:first-child{
+      border-top-left-radius: calculateRem(5px);
+      border-bottom-left-radius: calculateRem(5px);
     }
-    background-color: #fff;
-    padding: map-get($spacers, 'xs');
-    border: 1px solid #2980B9;
-    border-right: none;
-  }
-
-  .rssBtn {
-    > img {
-      vertical-align: middle;
+    > a:last-child{
+      border-top-right-radius: calculateRem(5px);
+      border-bottom-right-radius: calculateRem(5px);
     }
-    background-color: #fff;
-    padding: map-get($spacers, 'xs');
-    border: 1px solid #2980B9;
-    border-top-right-radius: calculateRem(5px);
-    border-bottom-right-radius: calculateRem(5px);
+    > a:not(:first-child){
+      border-left: none
+    }
+    display: inline; 
   }
 
   .subscribeBtn {
@@ -93,11 +79,11 @@ footer {
       display: none;
     }
     font-weight: bold;
-    color: #2980B9;
+    color: #1B6FA6;
     background-color: #fff;
     width: calculateRem(100px);
     padding: calculateRem(10px) 0 calculateRem(10px) 0;
-    border: 1px solid #2980B9;
+    border: 1px solid #1B6FA6;
     border-right: none;
     border-top-left-radius: calculateRem(5px);
     border-bottom-left-radius: calculateRem(5px);
@@ -108,11 +94,11 @@ footer {
       display: none;
     }
     font-weight: bold;
-    color: #2980B9;
+    color: #1B6FA6;
     background-color: #fff;
     width: calculateRem(100px);
     padding: calculateRem(10px) 0 calculateRem(10px) 0;
-    border: 1px solid #2980B9;
+    border: 1px solid #1B6FA6;
     border-top-right-radius: calculateRem(5px);
     border-bottom-right-radius: calculateRem(5px);
   }
@@ -127,20 +113,18 @@ footer {
       justify-self: center;
     }
 
+    font-size: 14px;
+    .footer-header {
+        font-weight: bold;
+    }
 
-      font-size: 14px;
-      .footer-header {
-          font-weight: bold;
-      }
+    .footer-item {
+        margin: map-get($spacers, 'xs') 0;
 
-      .footer-item {
-          margin: map-get($spacers, 'xs') 0;
-
-          > a {
-              text-decoration: none;
-              color: #7F8C8D;
-          }
-      }
-
+        > a {
+            text-decoration: none;
+            color: #7F8C8D;
+        }
+    }
   }
 }

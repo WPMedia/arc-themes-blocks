@@ -34,7 +34,6 @@ const Footer = () => {
         (getProperties(arcSite).facebookPage)
           ? (
             <a
-              id="facebook-link"
               title="Facebook page"
               target="_blank"
               href={getProperties(arcSite).facebookPage}
@@ -48,7 +47,6 @@ const Footer = () => {
         (getProperties(arcSite).twitterUsername)
           ? (
             <a
-              id="twitter-link"
               title="Twitter feed"
               target="_blank"
               href={getProperties(arcSite).twitterUsername}
@@ -62,7 +60,6 @@ const Footer = () => {
         (getProperties(arcSite).rssUrl)
           ? (
             <a
-              id="rss-link"
               title="RSS feed"
               target="_blank"
               href={getProperties(arcSite).rssUrl}
@@ -75,44 +72,23 @@ const Footer = () => {
     </>
   );
 
-  /* Placeholder buttons for maintaining layout */
-  const userButtons = (
-    <div className="footer-column userButtons">
-      <button
-        type="button"
-        className="subscribeBtn"
-        onClick={() => alert('clicked')}
-      >
-        Subscribe
-      </button>
-      <button
-        type="button"
-        className="signInBtn"
-        onClick={() => alert('clicked')}
-      >
-        Sign In
-      </button>
-    </div>
-  );
-
   return (
     <footer>
       <div className="container">
         <div className="section-separator">
           <section className="footer-header">
             <div className="footer-row">
-              <div className="footer-column">
+              <div className="social-column">
                 <div className="socialBtn-container">
                   {socialButtons}
                 </div>
               </div>
-              <div className="footer-column">
+              <div className="copyright-column">
                 {/* If large screen, show copyright over border */}
                 <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
                   {getProperties(arcSite).copyrightText}
                 </p>
               </div>
-              {userButtons}
             </div>
           </section>
         </div>

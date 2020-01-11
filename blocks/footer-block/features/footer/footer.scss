@@ -37,70 +37,44 @@ footer {
     border-spacing: map-get($spacers, 'xs'); 
   }
 
-  .footer-column {
+  .social-column {
     @media screen and (max-width: map-get($grid-breakpoints, 'md')){
       display: table-cell;
       text-align: center;
       width: 100%
     }
     display: inline-block;
-    width: 33.3%;
+    width: 16.6%;
   }
 
-  .userButtons {
-    text-align: right;
+  .copyright-column {
     @media screen and (max-width: map-get($grid-breakpoints, 'md')){
-      padding-top: map-get($spacers, 'md');
-      padding-bottom: map-get($spacers, 'md');
+      display: table-cell;
+      text-align: center;
+      width: 100%
     }
+    display: inline-block;
+    text-align: center;
+    width: 66.6%;
   }
 
   .socialBtn-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: calculateRem(5px);
+    border: 1px solid $primary-color;
     > a {
-      border: 1px solid #1B6FA6;
-      padding: calculateRem(12px) calculateRem(5px) 0 calculateRem(5px);
+      align-self: center;
+      display: inline-block;
+      flex: auto;
+      padding: map-get($spacers, 'xs') map-get($spacers, 'xs') 0 map-get($spacers, 'xs');
+      border-right: 1px solid $primary-color;
+  
+      &:last-child {
+        border-right: none;
+      }
     }
-    > a:first-child{
-      border-top-left-radius: calculateRem(5px);
-      border-bottom-left-radius: calculateRem(5px);
-    }
-    > a:last-child{
-      border-top-right-radius: calculateRem(5px);
-      border-bottom-right-radius: calculateRem(5px);
-    }
-    > a:not(:first-child){
-      border-left: none
-    }
-    display: inline; 
-  }
-
-  .subscribeBtn {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
-      display: none;
-    }
-    font-weight: bold;
-    color: #1B6FA6;
-    background-color: #fff;
-    width: calculateRem(100px);
-    padding: calculateRem(10px) 0 calculateRem(10px) 0;
-    border: 1px solid #1B6FA6;
-    border-right: none;
-    border-top-left-radius: calculateRem(5px);
-    border-bottom-left-radius: calculateRem(5px);
-  }
-
-  .signInBtn {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
-      display: none;
-    }
-    font-weight: bold;
-    color: #1B6FA6;
-    background-color: #fff;
-    width: calculateRem(100px);
-    padding: calculateRem(10px) 0 calculateRem(10px) 0;
-    border: 1px solid #1B6FA6;
-    border-top-right-radius: calculateRem(5px);
-    border-bottom-right-radius: calculateRem(5px);
   }
 
   .footer-section {

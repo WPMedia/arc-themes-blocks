@@ -226,15 +226,14 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ facebookPage: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#facebook-link')).toHaveLength(1);
+        expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(1);
       });
 
-      it('should open a new window when facebook button is clicked', () => {
+      it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('#facebook-link').simulate('click');
 
-        expect(window.location.origin).toEqual('http://localhost');
+        expect((wrapper.find({ title: 'Facebook page' }).prop('href'))).toEqual('thesun');
       });
     });
 
@@ -243,7 +242,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ facebookPage: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#facebook-link')).toHaveLength(0);
+        expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(0);
       });
     });
 
@@ -252,15 +251,14 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#twitter-link')).toHaveLength(1);
+        expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(1);
       });
 
-      it('should open a new window when twitter button is clicked', () => {
+      it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('#twitter-link').simulate('click');
 
-        expect(window.location.origin).toEqual('http://localhost');
+        expect((wrapper.find({ title: 'Twitter feed' }).prop('href'))).toEqual('thesun');
       });
     });
 
@@ -269,7 +267,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#twitter-link')).toHaveLength(0);
+        expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(0);
       });
     });
 
@@ -278,15 +276,14 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ rssUrl: 'thesun' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#rss-link')).toHaveLength(1);
+        expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(1);
       });
 
-      it('should open a new window when rss button is clicked', () => {
+      it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer />);
-        wrapper.find('#rss-link').simulate('click');
 
-        expect(window.location.origin).toEqual('http://localhost');
+        expect((wrapper.find({ title: 'RSS feed' }).prop('href'))).toEqual('thesun');
       });
     });
 
@@ -295,7 +292,7 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({ rssUrl: '' }));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('#rss-link')).toHaveLength(0);
+        expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(0);
       });
     });
   });

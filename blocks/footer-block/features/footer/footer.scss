@@ -1,30 +1,104 @@
 footer {
-  width: 100%;
+  width:100%;
+  .section-separator {
+    border-bottom: 1px solid #babdc2
+  }
+
+  .copyright {
+    font-family: $theme-primary-font-family;
+    text-align: center;
+    font-size: calculateRem(14px);
+    color: #7F8C8D;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      margin-top: map-get($spacers, 'md');
+      margin-bottom: map-get($spacers, 'md');
+    }
+  }
+
+  #copyright-top {
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: none;
+    }
+  }
+
+  #copyright-bottom {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+      display: none;
+    }
+  }
+
+  .primaryLogo {
+    text-align: center;
+  }
+
+  .footer-row {
+    display: table;
+    width: 100%;
+    border-spacing: map-get($spacers, 'xs'); 
+  }
+
+  .social-column {
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: table-cell;
+      text-align: center;
+      width: 100%
+    }
+    display: inline-block;
+    width: 16.6%;
+  }
+
+  .copyright-column {
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: table-cell;
+      text-align: center;
+      width: 100%
+    }
+    display: inline-block;
+    text-align: center;
+    width: 66.6%;
+  }
+
+  .socialBtn-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: calculateRem(5px);
+    border: 1px solid $primary-color;
+    > a {
+      align-self: center;
+      display: inline-block;
+      flex: auto;
+      padding: map-get($spacers, 'xs') map-get($spacers, 'xs') 0 map-get($spacers, 'xs');
+      border-right: 1px solid $primary-color;
+  
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
 
   .footer-section {
     justify-self: left;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       justify-self: left;
     }
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
       justify-self: center;
     }
 
-    font-size: calculateRem(16px);
-    line-height: calculateRem(24px);
-
+    font-size: 14px;
     .footer-header {
-      font-weight: bold;
+        font-weight: bold;
     }
 
     .footer-item {
-      margin: map-get($spacers, 'xs') 0;
+        margin: map-get($spacers, 'xs') 0;
 
-      > a {
-        text-decoration: none;
-        color: #7F8C8D;
-      }
+        > a {
+            text-decoration: none;
+            color: #7F8C8D;
+        }
     }
   }
 }

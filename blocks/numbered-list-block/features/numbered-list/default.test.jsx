@@ -22,7 +22,7 @@ jest.mock('prop-types', () => ({
 describe('The @arc-test-org numbered-list-block', () => {
   describe('render a list of numbered-list-items', () => {
     it('should render list item with headline, image and a number', () => {
-      const { default: SimpleList } = require('./default');
+      const { default: NumberedList } = require('./default');
       const listContentConfig = {
         contentConfigValues:
         {
@@ -33,9 +33,9 @@ describe('The @arc-test-org numbered-list-block', () => {
         contentService: 'story-feed-query',
       };
       const customFields = { listContentConfig };
-      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
+      NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<SimpleList customFields={customFields} />);
+      const wrapper = shallow(<NumberedList customFields={customFields} />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
@@ -55,7 +55,7 @@ describe('The @arc-test-org numbered-list-block', () => {
     });
 
     it('should render a place holder image', () => {
-      const { default: SimpleList } = require('./default');
+      const { default: NumberedList } = require('./default');
       const listContentConfig = {
         contentConfigValues:
         {
@@ -66,9 +66,9 @@ describe('The @arc-test-org numbered-list-block', () => {
         contentService: 'story-feed-query',
       };
       const customFields = { listContentConfig };
-      SimpleList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
+      NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<SimpleList customFields={customFields} />);
+      const wrapper = shallow(<NumberedList customFields={customFields} />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);

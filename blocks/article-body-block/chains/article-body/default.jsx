@@ -179,7 +179,6 @@ const ArticleBodyChain = ({ children }) => {
   //  content elements into the array. Skip if the place is taken
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
-  debugger;
   const firstParagraph = contentElements.find(elements => elements.type === 'text');
   if (!(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
     firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;

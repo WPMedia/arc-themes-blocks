@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@arc-test-org/news-theme-css": "^1.2.4",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "dom-parser": "^0.1.6",
+    "thumbor-lite": "^0.1.6"
   }
 }

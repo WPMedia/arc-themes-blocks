@@ -58,12 +58,12 @@ class NumberedList extends Component {
           } = element;
           return (
             <div className="numbered-list-item" key={`result-card-${element.canonical_url}`} type="1">
-              <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
                 className="headline-list-anchor"
               >
+                <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
                 <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
               </a>
               <a

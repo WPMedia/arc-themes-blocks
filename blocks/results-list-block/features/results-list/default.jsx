@@ -6,6 +6,7 @@ import ArticleDate from '@arc-test-org/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import './results-list.scss';
 
 function extractImage(promo) {
@@ -45,15 +46,15 @@ class ResultsList extends Component {
     const {
       websiteDomain,
     } = getProperties(arcSite);
-    return (window && window.location.hostname === 'localhost')
+    return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
       ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="results-list-container">
-        {contentElements && contentElements.length && contentElements.map((element) => {
+        {contentElements && contentElements.length > 0 && contentElements.map((element) => {
           const {
             description: { basic: descriptionText } = {},
             headlines: { basic: headlineText } = {},
@@ -70,9 +71,15 @@ class ResultsList extends Component {
                 className="list-anchor"
               >
                 {extractImage(element.promo_items) ? (
-                  <img
-                    src={extractImage(element.promo_items)}
+                  <Image
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    smallWidth={160}
+                    smallHeight={0}
+                    mediumWidth={240}
+                    mediumHeight={0}
+                    largeWidth={320}
+                    largeHeight={0}
                   />
                 ) : <div className="image-placeholder" />}
               </a>

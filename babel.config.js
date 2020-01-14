@@ -14,6 +14,7 @@ module.exports = {
             'fusion:consumer': './jest/mocks/consumer.js',
             'fusion:environment': './jest/mocks/environment.js',
             'fusion:properties': './jest/mocks/properties.js',
+            'fusion:static': './jest/mocks/static.js',
           },
         }],
       ],

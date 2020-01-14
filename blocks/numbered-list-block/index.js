@@ -1,3 +1,3 @@
-import ResultsList from './features/results-list/default';
+import NumberedList from './features/numbered-list/default';
 
-export default ResultsList;
+export default NumberedList;

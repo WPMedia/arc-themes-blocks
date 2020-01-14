@@ -17,7 +17,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/news-theme-css": "^1.2.4",
+    "@arc-test-org/news-theme-css": "^1.2.6",
     "styled-components": "^4.4.0"
   }
 }

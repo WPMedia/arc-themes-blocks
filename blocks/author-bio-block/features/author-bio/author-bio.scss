@@ -53,11 +53,11 @@
   .authorName {
     font-weight: bold;
     margin: map-get($spacers, 'xxs') 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
-      font-size: calculateRem(18px);
-    }
+    font-size: calculateRem(18px);
+    line-height: calculateRem(32px);
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       font-size: calculateRem(14px);
+      line-height: calculateRem(24px);
     }
   }
 

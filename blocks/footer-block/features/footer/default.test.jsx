@@ -1,5 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import getProperties from 'fusion:properties';
+import Footer from './default';
 
 // A payload with 4 columns and 11 column items
 const mockPayload = {
@@ -87,6 +89,14 @@ const mockPayload = {
 };
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({})),
+}));
+
+jest.mock('fusion:content', () => ({
+  useContent: jest.fn(() => (mockPayload)),
+}));
 
 describe('the footer feature for the default output type', () => {
   afterEach(() => {
@@ -103,17 +113,16 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should be a footer element', () => {
-    const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (mockPayload)),
     }));
+
     expect(wrapper.at(0).type()).toBe('footer');
   });
 
   it('should have 4 column headers', () => {
-    const { default: Footer } = require('./default');
     const wrapper = mount(<Footer />);
 
     jest.mock('fusion:content', () => ({
@@ -124,7 +133,6 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have 11 column items', () => {
-    const { default: Footer } = require('./default');
     const wrapper = mount(<Footer />);
 
     jest.mock('fusion:content', () => ({
@@ -135,7 +143,6 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column when empty payload is given', () => {
-    const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
 
     jest.mock('fusion:content', () => ({
@@ -146,7 +153,6 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column without error when undefined payload is given', () => {
-    const { default: Footer } = require('./default');
     const wrapper = shallow(<Footer />);
 
     jest.mock('fusion:content', () => ({
@@ -154,5 +160,140 @@ describe('the footer feature for the default output type', () => {
     }));
 
     expect(wrapper.find('footer > ul')).toHaveLength(0);
+  });
+
+  describe('the footer image/logo', () => {
+    describe('when the theme manifest provides a logo url', () => {
+      it('should make the src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
+      });
+    });
+
+    describe('when the theme does not provide a logo url', () => {
+      it('should make the src of the logo the placeholder image', () => {
+        getProperties.mockImplementation(() => ({}));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
+      });
+    });
+  });
+
+  describe('when the theme manifest provides alt text', () => {
+    it('should make the alt text of the logo the provided text', () => {
+      getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
+      const wrapper = mount(<Footer />);
+
+      expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+    });
+  });
+
+  describe('when the theme manifest does not provide alt text', () => {
+    it('should make the alt text of the logo the default text', () => {
+      getProperties.mockImplementation(() => ({}));
+      const wrapper = mount(<Footer />);
+
+      expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+    });
+  });
+
+  describe('the copyright text', () => {
+    describe('when copyright text is provided', () => {
+      it('should show copyright text', () => {
+        getProperties.mockImplementation(() => ({ copyrightText: 'my copyright text' }));
+        const wrapper = shallow(<Footer />);
+
+        expect((wrapper.find('#copyright-top')).text()).toStrictEqual('my copyright text');
+      });
+    });
+
+    describe('when copyright text is not provided', () => {
+      it('should not show copyright text', () => {
+        getProperties.mockImplementation(() => ({ }));
+        const wrapper = shallow(<Footer />);
+
+        expect((wrapper.find('#copyright-top')).text()).toStrictEqual('');
+      });
+    });
+  });
+
+  describe('the social media buttons', () => {
+    describe('when a facebook page is provided', () => {
+      it('should show a facebook button', () => {
+        getProperties.mockImplementation(() => ({ facebookPage: 'thesun' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(1);
+      });
+
+      it('should have a href prop with the proper url', () => {
+        window.open = jest.fn();
+        const wrapper = mount(<Footer />);
+
+        expect((wrapper.find({ title: 'Facebook page' }).prop('href'))).toEqual('thesun');
+      });
+    });
+
+    describe('when a facebook page is not provided', () => {
+      it('should not show a facebook button', () => {
+        getProperties.mockImplementation(() => ({ facebookPage: '' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(0);
+      });
+    });
+
+    describe('when a twitter username is provided', () => {
+      it('should show a twitter button', () => {
+        getProperties.mockImplementation(() => ({ twitterUsername: 'thesun' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(1);
+      });
+
+      it('should have a href prop with the proper url', () => {
+        window.open = jest.fn();
+        const wrapper = mount(<Footer />);
+
+        expect((wrapper.find({ title: 'Twitter feed' }).prop('href'))).toEqual('thesun');
+      });
+    });
+
+    describe('when a twitter username is not provided', () => {
+      it('should not show a twitter button', () => {
+        getProperties.mockImplementation(() => ({ twitterUsername: '' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(0);
+      });
+    });
+
+    describe('when a rss link is provided', () => {
+      it('should show a rss button', () => {
+        getProperties.mockImplementation(() => ({ rssUrl: 'thesun' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(1);
+      });
+
+      it('should have a href prop with the proper url', () => {
+        window.open = jest.fn();
+        const wrapper = mount(<Footer />);
+
+        expect((wrapper.find({ title: 'RSS feed' }).prop('href'))).toEqual('thesun');
+      });
+    });
+
+    describe('when a rss link is not provided', () => {
+      it('should not show a rss button', () => {
+        getProperties.mockImplementation(() => ({ rssUrl: '' }));
+        const wrapper = mount(<Footer />);
+
+        expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(0);
+      });
+    });
   });
 });

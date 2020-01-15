@@ -65,11 +65,13 @@ const SampleOutputType = ({
   const { websiteName } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let metaDataTags = null;
+
   const metaData = {
     'page-type': pageType,
     title: websiteName,
     ogTitle: websiteName,
   };
+
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
       // eslint-disable-line global-require,@typescript-eslint/no-var-requires

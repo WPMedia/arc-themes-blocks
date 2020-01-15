@@ -12,7 +12,7 @@ import twitterLogo from './images/twitter.svg';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties
-  const location = (window && window.location.hostname === 'localhost')
+  const location = (typeof window !== 'undefined' && window.location.hostname === 'localhost')
     ? 'https://corecomponents-the-gazette-prod.cdn.arcpublishing.com' : websiteDomain;
   const encodedUrl = encodeURI(`${location}${websiteUrl}`);
 

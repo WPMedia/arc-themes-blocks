@@ -65,38 +65,56 @@ const SampleOutputType = ({
   const { websiteName } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let metaDataTags = null;
-  let metaData = {
+  const metaData = {
     'page-type': pageType,
     title: websiteName,
-    description: '',
-    keywords: '',
     ogTitle: websiteName,
-    ogImage: '',
-    ogImageAlt: '',
   };
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
       // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
-      metaData = {
-        'page-type': pageType,
-        title: metaValue('title') || gc.headlines.basic || websiteName,
-        description: metaValue('description') || gc.description.basic || '',
-        keywords: (metaValue('keywords') || gc.taxonomy.seo_keywords || gc.taxonomy.tags || []).join(','),
-        ogTitle: metaValue('og:title') || gc.headlines.basic || websiteName,
-        ogImage: getImgURL(metaValue, 'og:image', gc),
-        ogImageAlt: getImgAlt(metaValue, 'og:image:alt', gc),
-      };
+      metaData.title = metaValue('title') || gc.headlines.basic || websiteName;
+      metaData.description = metaValue('description') || gc.description.basic || null;
+      metaData.ogTitle = metaValue('og:title') || gc.headlines.basic || websiteName;
+      metaData.ogImage = getImgURL(metaValue, 'og:image', gc);
+      metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
+
+      // Keywords could be comma delimited string or array of string or an array of objects
+      if (metaValue('keywords')) {
+        metaData.keywords = metaValue('keywords');
+      } else if (typeof gc.taxonomy.seo_keywords !== 'undefined'
+        && gc.taxonomy.seo_keywords !== null) {
+        metaData.keywords = gc.taxonomy.seo_keywords.join(',');
+      } else if (typeof gc.taxonomy.tags !== 'undefined'
+        && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
+        metaData.keywords = [];
+        gc.taxonomy.tags.forEach((item) => {
+          if (item.slug) metaData.keywords.push(item.slug);
+        });
+      } else {
+        metaData.keywords = null;
+      }
 
       metaDataTags = (
         <>
           <title>{metaData.title}</title>
-          <meta name="description" content={metaData.description} />
-          <meta name="keywords" content={metaData.keywords} />
+          { metaData.description
+            && <meta name="description" content={metaData.description} />
+          }
+          { metaData.keywords
+          && <meta name="keywords" content={metaData.keywords} />
+          }
+
           <meta property="og:title" content={metaData.ogTitle} />
-          <meta property="og:image" content={metaData.ogImage} />
-          <meta property="og:image:alt" content={metaData.ogImageAlt} />
+
+          { metaData.ogImage
+          && <meta property="og:image" content={metaData.ogImage} />
+          }
+          { metaData.ogImageAlt
+          && <meta property="og:image:alt" content={metaData.ogImageAlt} />
+          }
           {pageType === 'article' && (
             <meta name="robots" content="noarchive" />
           )}
@@ -110,7 +128,6 @@ const SampleOutputType = ({
   return (
     <html lang="en">
       <head>
-        <title>Fusion Article</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {metaDataTags}
         {customMetaTags}

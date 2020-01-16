@@ -74,12 +74,12 @@ class ResultsList extends Component {
                   <Image
                     url={extractImage(element.promo_items)}
                     alt={headlineText}
-                    smallWidth={160}
-                    smallHeight={0}
-                    mediumWidth={240}
-                    mediumHeight={0}
-                    largeWidth={320}
-                    largeHeight={0}
+                    smallWidth={274}
+                    smallHeight={148}
+                    mediumWidth={274}
+                    mediumHeight={148}
+                    largeWidth={274}
+                    largeHeight={148}
                   />
                 ) : <div className="image-placeholder" />}
               </a>

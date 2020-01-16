@@ -3,6 +3,7 @@ module.exports = {
   env: {
     test: {
       plugins: [
+        'transform-react-remove-prop-types',
         ['@babel/plugin-proposal-decorators', {
           legacy: true,
         }],

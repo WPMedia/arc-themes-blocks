@@ -6,44 +6,21 @@ import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('styled-components', () => ({
-  __esModule: true,
-  default: {
-    section: () => jest.fn((props, children) => <section {...props}>{ children }</section>),
-    time: () => jest.fn((props, children) => <time {...props}>{ children }</time>),
-    div: () => jest.fn((props, children) => <div {...props}>{ children }</div>),
-    h2: () => jest.fn((props, children) => <h2 {...props}>{ children }</h2>),
-    p: () => jest.fn((props, children) => <p {...props}>{ children }</p>),
-    span: () => jest.fn((props, children) => <span {...props}>{ children }</span>),
-  },
-}));
-
-jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => jest.fn(() => ({})));
-// jest.mock('fusion:static', () => jest.fn((props, children) => <div {...props}>{children}</div>));
 
 jest.mock('@arc-test-org/byline-block', () => ({
   __esModule: true,
-  default: jest.fn((props, children) => <div {...props}>{children}</div>),
+  default: function Byline(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 jest.mock('@arc-test-org/date-block', () => ({
   __esModule: true,
-  default: jest.fn((props, children) => <div {...props}>{children}</div>),
+  default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   __esModule: true,
-  Image: jest.fn(() => <div />),
-}));
-
-jest.mock('prop-types', () => ({
-  __esModule: true,
-  default: {
-    shape: () => () => {},
-    contentConfig: () => { },
-    customFields: () => { },
-  },
+  Image: () => <div />,
 }));
 
 describe('The story-feed-list', () => {
@@ -84,9 +61,7 @@ describe('The story-feed-list', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
     const wrapper = shallow(<ResultsList customFields={customFields} />);
     wrapper.setState({ resultList: oneListItem }, () => {
-      // wrapper.update();
-
-      it.only('should have one parent wrapper', () => {
+      it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
       });
 

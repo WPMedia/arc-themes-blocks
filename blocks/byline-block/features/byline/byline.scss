@@ -1,11 +1,7 @@
 .byline {
-  &, a, p{
-    font-size: calculateRem(18px);
-    line-height: calculateRem(32px);
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      font-size: calculateRem(20px);
-      line-height: calculateRem(40px);
-    }
+  &, a, span{
+    font-size: calculateRem(14px);
+    line-height: calculateRem(16px);
   }
   a {
     color: $ui-primary-font-color;

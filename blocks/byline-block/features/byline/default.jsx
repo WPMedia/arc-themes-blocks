@@ -8,7 +8,7 @@ import './byline.scss';
 const BylineSection = styled.section`
   font-family: ${props => props.secondaryFont};
   ${({ stylesFor }) => stylesFor === 'list' && `
-    line-height: 14px;
+    display: inline;
 `}
 `;
 
@@ -16,7 +16,6 @@ const BylineSection = styled.section`
 const By = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #3B3B3B;
-    font-size: 14px;
     margin-right: 4px;
   `}
 `;
@@ -25,7 +24,6 @@ const By = styled.span`
 const BylineNames = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #434343;
-    font-size: 14px;
   `}
 `;
 

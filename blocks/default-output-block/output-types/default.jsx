@@ -77,7 +77,13 @@ const SampleOutputType = ({
       // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
-      metaData.title = metaValue('title') || gc.headlines.basic || websiteName;
+      if (metaValue('title')) {
+        metaData.title = `${metaValue('title')} – ${websiteName}`;
+      } else if (gc.headlines.basic) {
+        metaData.title = `${gc.headlines.basic} – ${websiteName}`;
+      } else {
+        metaData.title = websiteName;
+      }
       metaData.description = metaValue('description') || gc.description.basic || null;
       metaData.ogTitle = metaValue('og:title') || gc.headlines.basic || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc);

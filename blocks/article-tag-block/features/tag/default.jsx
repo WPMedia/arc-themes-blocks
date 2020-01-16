@@ -19,7 +19,7 @@ const ArticleTags = () => {
   const {
     websiteDomain,
   } = getProperties(arcSite);
-  const location = (window && window.location.hostname === 'localhost')
+  const location = (typeof window !== 'undefined' && window.location.hostname === 'localhost')
     ? 'https://corecomponents-the-gazette-prod.cdn.arcpublishing.com' : websiteDomain;
 
   return tags.length ? (

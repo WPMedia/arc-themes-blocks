@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/default-output-block",
-  "version": "1.2.9",
+  "version": "1.2.13",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -17,7 +17,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/news-theme-css": "^1.2.3",
-    "styled-components": "^4.4.0"
+    "@arc-test-org/news-theme-css": "^1.2.6",
+    "dom-parser": "^0.1.6",
+    "styled-components": "^4.4.0",
+    "thumbor-lite": "^0.1.6"
   }
 }

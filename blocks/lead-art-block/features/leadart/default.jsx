@@ -47,7 +47,6 @@ class LeadArt extends Component {
   lightboxImgHandler() {
     const imgParentElm = this.imgRef.current;
     const imgElm = imgParentElm.querySelector('img')
-    console.log('Here is the imgElm: ', imgElm);
     if (imgElm) {
       return imgElm.dataset.lightbox;
     }

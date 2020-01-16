@@ -81,7 +81,7 @@ footer {
     height: 24px;
     width: auto;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       height: 32px;
     }
   }

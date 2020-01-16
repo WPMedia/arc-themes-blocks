@@ -19,7 +19,7 @@ jest.mock('prop-types', () => ({
   customFields: jest.fn(),
 }));
 
-describe('The @arc-test-org numbered-list-block', () => {
+describe('The numbered-list-block', () => {
   describe('render a list of numbered-list-items', () => {
     it('should render list item with headline, image and a number', () => {
       const { default: NumberedList } = require('./default');

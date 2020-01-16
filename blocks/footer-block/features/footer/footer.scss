@@ -77,9 +77,9 @@ footer {
     }
   }
 
-  .logo {
+  .footer-logo {
     height: 24px;
-    width:auto;
+    width: auto;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       height: 32px;

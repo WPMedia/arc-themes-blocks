@@ -123,7 +123,7 @@ const Footer = () => {
           <img
             src={getProperties(arcSite).primaryLogo || placeholderLogo}
             alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
-            className="logo"
+            className="footer-logo"
           />
         </div>
       </div>

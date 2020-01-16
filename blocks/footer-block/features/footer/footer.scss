@@ -77,6 +77,15 @@ footer {
     }
   }
 
+  .logo {
+    height: 24px;
+    width:auto;
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      height: 32px;
+    }
+  }
+
   .footer-section {
     justify-self: left;
 

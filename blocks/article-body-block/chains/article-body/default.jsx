@@ -4,7 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import VideoPlayer from '@arc-test-org/video-player-block';
-import { Gallery, ImageMetadata } from '@arc-test-org/engine-theme-sdk';
+import { Gallery, ImageMetadata, Image } from '@arc-test-org/engine-theme-sdk';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -27,17 +27,20 @@ function parseArticleItem(item, index) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, width, height, credits, alt_text: altText,
+        url, subtitle, caption, credits, alt_text: altText,
       } = item;
 
       return (url && url.length > 0) ? (
         <figure key={key}>
-          <img
-            src={url}
+          <Image
+            url={url}
             alt={altText}
-            label={subtitle}
-            width={width}
-            height={height}
+            smallWidth={768}
+            smallHeight={0}
+            mediumWidth={1024}
+            mediumHeight={0}
+            largeWidth={1440}
+            largeHeight={0}
           />
           <figcaption>
             <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
@@ -208,6 +211,7 @@ const ArticleBodyChain = ({ children }) => {
 
 ArticleBodyChain.propTypes = {
   customFields: PropTypes.shape({
+    // eslint-disable-next-line react/no-typos
     elementPlacement: PropTypes.kvp.tag({
       label: 'Ad placement',
       group: 'Inline ads',

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 
 import Envelope from './images/envelope';
 import Instagram from './images/instagram';
@@ -93,7 +94,18 @@ const AuthorBio = () => {
           <section className="author">
             {
               (author.image && author.image.url)
-                ? <img src={author.image.url} alt={(author.image.alt_text || author.name)} />
+                ? (
+                  <Image
+                    url={author.image.url}
+                    alt={(author.image.alt_text || author.name)}
+                    smallWidth={84}
+                    smallHeight={0}
+                    mediumWidth={84}
+                    mediumHeight={0}
+                    largeWidth={84}
+                    largeHeight={0}
+                  />
+                )
                 : null
             }
             <section className="descriptions">

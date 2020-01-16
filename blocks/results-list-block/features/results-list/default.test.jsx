@@ -1,27 +1,26 @@
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
+/* eslint-disable prefer-arrow-callback */
 import React from 'react';
 import { shallow } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
 
-jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('styled-components', () => ({
-  section: jest.fn(),
-  time: jest.fn(),
-  div: jest.fn(),
-  h2: jest.fn(),
-  p: jest.fn(),
-  span: jest.fn(),
-}));
-
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
-
 const mockReturnData = mockData;
 
-jest.mock('prop-types', () => ({
-  shape: () => {},
-  contentConfig: () => {},
-  customFields: () => {},
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
+jest.mock('fusion:properties', () => jest.fn(() => ({})));
+
+jest.mock('@arc-test-org/byline-block', () => ({
+  __esModule: true,
+  default: function Byline(props, children) { return <div {...props}>{children}</div>; },
+}));
+
+jest.mock('@arc-test-org/date-block', () => ({
+  __esModule: true,
+  default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
+}));
+
+jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+  __esModule: true,
+  Image: () => <div />,
 }));
 
 describe('The story-feed-list', () => {
@@ -62,8 +61,6 @@ describe('The story-feed-list', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
     const wrapper = shallow(<ResultsList customFields={customFields} />);
     wrapper.setState({ resultList: oneListItem }, () => {
-      wrapper.update();
-
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
       });
@@ -82,7 +79,7 @@ describe('The story-feed-list', () => {
 
       it('should render one image wrapped in an anchor tag', () => {
         expect(wrapper.find('.list-item').find('.list-anchor').length).toEqual(2);
-        expect(wrapper.find('.list-item').find('.list-anchor').find('img').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.list-anchor').find('Image').length).toEqual(1);
       });
 
       it('should render an anchor and an image with the correct url', () => {
@@ -109,7 +106,7 @@ describe('The story-feed-list', () => {
       });
 
       it('should render a byline', () => {
-        expect(wrapper.find('.list-item').find('.author-date').find(Byline).length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.author-date').find('Byline').length).toEqual(1);
       });
 
       it('should render a seperator', () => {
@@ -117,7 +114,7 @@ describe('The story-feed-list', () => {
       });
 
       it('should render a publish date', () => {
-        expect(wrapper.find('.list-item').find('.author-date').find(ArticleDate).length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.author-date').find('ArticleDate').length).toEqual(1);
       });
     });
   });

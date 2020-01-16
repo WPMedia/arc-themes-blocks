@@ -15,14 +15,17 @@ class ArticleDate extends Component {
     super(props);
 
     // Inherit global content
-    const { globalContent: content, date } = this.props;
-
-    const { display_date: globalDateString } = content;
+    const {
+      globalContent: {
+        display_date: globalDateString,
+      } = {},
+      date,
+    } = this.props;
     // Set dateString to date from globalContent
     // if it exists and date prop has not been passed to it
     // If it has a date prop then set dateString to the
     // date recieved from prop instead of the date from globalContent
-    const dateString = globalDateString && !date ? globalDateString : date;
+    const dateString = date || globalDateString;
     // Convert the time to browser's local time using the ECMAScript Internationalization API
     // Browser support found here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
     const displayDate = (dateString && Date.parse(dateString)) // check if it's a valid time string

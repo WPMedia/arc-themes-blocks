@@ -3,6 +3,7 @@ module.exports = {
   env: {
     test: {
       plugins: [
+        'transform-react-remove-prop-types',
         ['@babel/plugin-proposal-decorators', {
           legacy: true,
         }],
@@ -14,6 +15,7 @@ module.exports = {
             'fusion:consumer': './jest/mocks/consumer.js',
             'fusion:environment': './jest/mocks/environment.js',
             'fusion:properties': './jest/mocks/properties.js',
+            'fusion:static': './jest/mocks/static.js',
           },
         }],
       ],

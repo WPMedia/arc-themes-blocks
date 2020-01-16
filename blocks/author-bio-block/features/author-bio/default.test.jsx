@@ -1,7 +1,10 @@
 const React = require('react');
-const { mount } = require('enzyme');
+const { shallow, mount } = require('enzyme');
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+  Image: () => <div />,
+}));
 
 describe('Given the list of author(s) from the article', () => {
   it("should show one author's bio", () => {
@@ -219,9 +222,9 @@ describe('Given the list of author(s) from the article', () => {
         },
       })),
     }));
-    const wrapper = mount(<AuthorBio />);
-    expect(wrapper.find('img')).toHaveLength(1);
-    expect(wrapper.find('img').prop('src')).toEqual('https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg');
+    const wrapper = shallow(<AuthorBio />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('url')).toEqual('https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg');
   });
 
   it('should not have an author image element if there is no author image url', () => {

@@ -9,9 +9,9 @@ describe('the author api content source block', () => {
 
   describe('when a slug is provided', () => {
     it('should build the correct url', () => {
-      const url = contentSource.resolve({ slug: 'dogs' });
+      const url = contentSource.resolve({ slug: 'sara-carothers' });
 
-      expect(url).toEqual('/tags/v2/slugs?slugs=dogs');
+      expect(url).toEqual('/author/v2/author-service?slug=sara-carothers');
     });
   });
 
@@ -19,7 +19,7 @@ describe('the author api content source block', () => {
     it('should not build a url with a slug', () => {
       const url = contentSource.resolve({ slug: '' });
 
-      expect(url).toEqual('/author/v2/author-service?slug');
+      expect(url).toEqual('/author/v2/author-service?slug=');
     });
   });
 

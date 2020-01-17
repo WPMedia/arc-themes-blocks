@@ -6,12 +6,12 @@
   .list-anchor {
     text-decoration: none;
     height: calculateRem(148.26px);
-    width: calculateRem(274px);
+    flex: 0 0 calculateRem(274px);
     overflow-y: hidden;
 
     img, .image-placeholder {
       width: 100%;
-      height: auto;
+      height: 100%;
       vertical-align: middle;
       display: inline-block;
       position: relative;

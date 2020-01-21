@@ -32,7 +32,7 @@
     align-items: center;
 
     > span, > img {
-      flex: 0;
+      flex: 1 0 auto;
     }
 
     > span {
@@ -43,7 +43,7 @@
   }
 
   > div {
-    flex: 1;
+    flex: 1 0 auto;
     text-align: center;
     display: flex;
     justify-content: center;

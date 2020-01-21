@@ -41,4 +41,6 @@ const TagTitle = () => {
   );
 };
 
+TagTitle.label = 'Tag Title - Arc Block';
+
 export default TagTitle;

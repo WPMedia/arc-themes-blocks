@@ -105,6 +105,7 @@ const ShareBar = () => {
   );
 };
 
+ShareBar.label = 'Share Bar – Arc Block';
 
 ShareBar.propTypes = {
   customFields: PropTypes.shape({

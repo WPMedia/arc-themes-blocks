@@ -36,6 +36,7 @@ const Footer = () => {
             <a
               title="Facebook page"
               target="_blank"
+              rel="noopener noreferrer"
               href={getProperties(arcSite).facebookPage}
             >
               <img src={facebook} alt="Facebook page" />
@@ -49,6 +50,7 @@ const Footer = () => {
             <a
               title="Twitter feed"
               target="_blank"
+              rel="noopener noreferrer"
               href={getProperties(arcSite).twitterUsername}
             >
               <img src={twitter} alt="Twitter feed" />
@@ -62,6 +64,7 @@ const Footer = () => {
             <a
               title="RSS feed"
               target="_blank"
+              rel="noopener noreferrer"
               href={getProperties(arcSite).rssUrl}
             >
               <img src={rss} alt="RSS feed" />
@@ -130,5 +133,7 @@ const Footer = () => {
     </footer>
   );
 };
+
+Footer.label = 'Footer – Arc Block';
 
 export default Footer;

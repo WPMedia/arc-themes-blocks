@@ -46,7 +46,7 @@ class LeadArt extends Component {
 
   lightboxImgHandler() {
     const imgParentElm = this.imgRef.current;
-    const imgElm = imgParentElm.querySelector('img')
+    const imgElm = imgParentElm.querySelector('img');
     if (imgElm) {
       return imgElm.dataset.lightbox;
     }
@@ -173,6 +173,8 @@ class LeadArt extends Component {
     return null;
   }
 }
+
+LeadArt.label = 'Lead Art – Arc Block';
 
 LeadArt.defaultProps = {
   customFields: {

@@ -1,8 +1,4 @@
 .byline {
-  &, a, span {
-    font-size: calculateRem(14px);
-    line-height: calculateRem(16px);
-  }
   a {
     color: $ui-primary-font-color;
     text-decoration: none;

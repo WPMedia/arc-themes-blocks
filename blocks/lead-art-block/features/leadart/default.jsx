@@ -176,6 +176,8 @@ class LeadArt extends Component {
   }
 }
 
+LeadArt.label = 'Lead Art – Arc Block';
+
 LeadArt.defaultProps = {
   customFields: {
     enableZoom: false,

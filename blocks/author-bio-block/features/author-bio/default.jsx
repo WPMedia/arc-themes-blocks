@@ -134,4 +134,6 @@ const AuthorBio = () => {
   );
 };
 
+AuthorBio.label = 'Short Author Bio – Arc Block';
+
 export default AuthorBio;

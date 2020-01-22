@@ -62,14 +62,18 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName } = getProperties(arcSite);
+  const { websiteName, twitterSite } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let metaDataTags = null;
+  let twitterTags = null;
 
   const metaData = {
     'page-type': pageType,
     title: websiteName,
     ogTitle: websiteName,
+    ogSiteName: websiteName,
+    twitterSite: twitterSite ? `@${twitterSite}` : null,
+    twitterCard: 'summary_large_image',
   };
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
@@ -129,6 +133,20 @@ const SampleOutputType = ({
       );
     }
   }
+  // Twitter meta tags go on all pages
+  twitterTags = (
+    <>
+      { metaData.ogSiteName
+      && <meta property="og:site_name" content={metaData.ogSiteName} />
+      }
+      { metaData.twitterSite
+      && <meta property="twitter:site" content={metaData.twitterSite} />
+      }
+      { metaData.twitterCard
+      && <meta property="twitter:card" content={metaData.twitterCard} />
+      }
+    </>
+  );
 
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
   const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
@@ -140,6 +158,7 @@ const SampleOutputType = ({
         <title>{metaData.title}</title>
         {metaDataTags}
         {customMetaTags}
+        {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
         {
           /** polyfill.io has browser detection and will not load the feature

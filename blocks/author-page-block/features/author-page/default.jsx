@@ -17,6 +17,9 @@ const StyledAuthorContent = styled.div`
   .author-title {
     font-family: ${props => props.primaryFont};
   }
+  .author-bio {
+    font-family: ${props => props.primaryFont};
+  }
 `;
 
 const logos = {
@@ -44,13 +47,13 @@ const AuthorPage = () => {
         <div className="image-container">
           <img
             src="https://via.placeholder.com/250"
-            className="image"
+            className="author-image"
             alt="Author image"
           />
         </div>
         <div>
           <StyledAuthorContent
-            className="content"
+            className="author-content"
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}
           >
@@ -63,7 +66,7 @@ const AuthorPage = () => {
         </div>
 
         <div className="social-container">
-          <div className="social">
+          <div className="social-items">
             <p className="social-column"><b>Connect</b></p>
             {
               icons.map(logo => (

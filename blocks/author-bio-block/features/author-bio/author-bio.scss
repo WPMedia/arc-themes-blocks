@@ -30,6 +30,9 @@
   }
 
   .descriptions {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      width:100%; //For IE 11
+    }
     margin: map-get($spacers, 'xs');
     display: flex;
     flex-direction: column;

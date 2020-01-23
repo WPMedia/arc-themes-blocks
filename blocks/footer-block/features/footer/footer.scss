@@ -1,5 +1,16 @@
 footer {
   width:100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  //Fix for IE 11 and non grid browsers
+  .legacy-footer-row{
+    justify-content: space-around;
+    @supports (display: grid){
+      justify-content: initial;
+    }
+  }
+
   .section-separator {
     border-bottom: 1px solid #babdc2
   }
@@ -34,7 +45,7 @@ footer {
   .footer-row {
     display: table;
     width: 100%;
-    border-spacing: map-get($spacers, 'xs'); 
+    border-spacing: map-get($spacers, 'xs');
   }
 
   .social-column {
@@ -70,7 +81,7 @@ footer {
       flex: auto;
       padding: map-get($spacers, 'xs') map-get($spacers, 'xs') 0 map-get($spacers, 'xs');
       border-right: 1px solid $primary-color;
-  
+
       &:last-child {
         border-right: none;
       }

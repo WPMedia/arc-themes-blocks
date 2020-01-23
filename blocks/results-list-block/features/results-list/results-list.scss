@@ -3,11 +3,28 @@
   padding: 11px 13px 19px 0;
   display: flex;
 
+  flex-wrap: wrap; //mobile fix
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    flex-wrap: nowrap;
+  }
+
   .list-anchor {
     text-decoration: none;
     height: 148px;
     width: 274px;
     overflow-y: hidden;
+
+    margin-bottom: map-get($spacers, 'sm');
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      margin-bottom: 0;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      flex: 0 0 auto; //IE 11
+    }
+
 
     img, .image-placeholder {
       width: 100%;
@@ -29,7 +46,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 30.72px;
+    margin-left: 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      margin-left: 30.72px;
+    }
+
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      flex: 0 1 100%; //IE 11
+    }
+
 
     .headline-text, .description-text {
       color: #191919;
@@ -51,6 +77,11 @@
     .author-date {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        flex-wrap: nowrap;
+      }
 
       .dot-separator {
         color: #3B3B3B;
@@ -59,7 +90,7 @@
         line-height: 14px;
         margin: 0 1rem;
       }
-  
+
       .story-date {
         color: #3B3B3B;
         font-size: 14px;

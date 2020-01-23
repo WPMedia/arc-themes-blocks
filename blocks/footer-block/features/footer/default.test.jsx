@@ -112,15 +112,6 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
-  it('should be a footer element', () => {
-    const wrapper = shallow(<Footer />);
-
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
-
-    expect(wrapper.at(0).type()).toBe('footer');
-  });
 
   it('should have 4 column headers', () => {
     const wrapper = mount(<Footer />);

@@ -18,4 +18,6 @@ const Headline = () => {
   );
 };
 
+Headline.label = 'Headline – Arc Block';
+
 export default Headline;

@@ -107,7 +107,6 @@ const SampleOutputType = ({
 
       metaDataTags = (
         <>
-          <title>{metaData.title}</title>
           { metaData.description
             && <meta name="description" content={metaData.description} />
           }
@@ -132,13 +131,22 @@ const SampleOutputType = ({
   }
 
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
+  const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
 
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{metaData.title}</title>
         {metaDataTags}
         {customMetaTags}
+        <script dangerouslySetInnerHTML={{ __html: ieTest }} />
+        {
+          /** polyfill.io has browser detection and will not load the feature
+           *  if the browser already supports it.
+           */
+        }
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes" />
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
@@ -152,12 +160,11 @@ const SampleOutputType = ({
         data-loaded-via="powa-manifest"
       />
       <link rel="preload" as="script" href={powaDrive} />
-      <body className="bmiller_20001">
+      <body>
         <div id="fusion-app">
           {children}
         </div>
         <Fusion />
-
         <script type="text/javascript" src={deployment(`${contextPath}/resources/js/yall.min.js`)} />
         <script type="text/javascript" src={deployment(`${contextPath}/resources/js/image-lazy.js`)} />
       </body>

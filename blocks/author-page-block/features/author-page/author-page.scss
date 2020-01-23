@@ -1,0 +1,46 @@
+.image-container {
+  float: left;
+  width: 30%;
+  margin-top: 31px;
+  margin-right: 32px;
+}
+
+.author-image {
+  max-height: 169px;
+  width: auto;
+  border-radius: 100px;
+}
+
+.author-content { 
+  display: inline-block;
+  width: 64%;
+}
+
+.author-name {
+  margin-top: 31px;
+  margin-bottom: 9px;
+}
+
+.author-title {
+  margin-bottom: 11px;
+}
+
+.social-container {
+  margin-top: 10px;
+  padding: 18px 0 16px 0;
+  border-top: 1px $ui-medium-light-secondary-color solid;
+  border-bottom: 1px $ui-medium-light-secondary-color solid;
+}
+
+.social-items {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-column {
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 44px;
+}
+

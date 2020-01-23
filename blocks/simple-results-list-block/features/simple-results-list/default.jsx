@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import './simple-results-list.scss';
 
 function extractImage(promo) {
@@ -66,10 +67,15 @@ class SimpleResultsList extends Component {
                 className="simple-list-anchor"
               >
                 {extractImage(element.promo_items) ? (
-                  <img
-                    className="simple-list-image"
-                    src={extractImage(element.promo_items)}
+                  <Image
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    smallWidth={108}
+                    smallHeight={74}
+                    mediumWidth={108}
+                    mediumHeight={74}
+                    largeWidth={108}
+                    largeHeight={74}
                   />
                 ) : <div className="image-placeholder-sm" />}
                 <div className="headline-description">

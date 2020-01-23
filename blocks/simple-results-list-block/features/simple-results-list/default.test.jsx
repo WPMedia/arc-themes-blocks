@@ -19,6 +19,11 @@ jest.mock('prop-types', () => ({
   customFields: jest.fn(),
 }));
 
+jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+  __esModule: true,
+  Image: () => <div />,
+}));
+
 describe('The @arc-test-org simple-results-list-block', () => {
   describe('render a list of simple-list-items', () => {
     it('should render list item with headline and image', () => {
@@ -41,10 +46,10 @@ describe('The @arc-test-org simple-results-list-block', () => {
         expect(wrapper.find('.simple-results-list-container').length).toEqual(1);
         expect(wrapper.find('.simple-results-list-container').childAt(0).type()).toEqual('div');
         expect(wrapper.find('.simple-results-list-container').childAt(0).find('.simple-list-anchor').length).toEqual(1);
-        expect(wrapper.find('.simple-results-list-container').childAt(0).find('.simple-list-anchor').find('.simple-list-image').length)
+        expect(wrapper.find('.simple-results-list-container').childAt(0).find('.simple-list-anchor').find('Image').length)
           .toEqual(1);
-        expect(wrapper.find('.simple-results-list-container').childAt(0).find('.simple-list-anchor').find('.simple-list-image'))
-          .toHaveProp('src', 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg');
+        expect(wrapper.find('.simple-results-list-container').childAt(0).find('.simple-list-anchor').find('Image'))
+          .toHaveProp('url', 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg');
         expect(wrapper.find('.simple-results-list-container').childAt(0).find('.headline-description').length).toEqual(1);
         expect(wrapper.find('.simple-results-list-container').childAt(0).find('.headline-description').find('.headline-text')
           .text()).toEqual('Article with only promo_items.basic');

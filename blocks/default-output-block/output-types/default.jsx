@@ -64,7 +64,8 @@ const SampleOutputType = ({
   const { globalContent: gc, arcSite } = useFusionContext();
   const { websiteName, twitterSite } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
-  let metaDataTags = null;
+  let storyMetaDataTags = null;
+  let tagMetaDataTags = null;
   let twitterTags = null;
 
   const metaData = {
@@ -109,7 +110,7 @@ const SampleOutputType = ({
         metaData.keywords = null;
       }
 
-      metaDataTags = (
+      storyMetaDataTags = (
         <>
           { metaData.description
             && <meta name="description" content={metaData.description} />
@@ -132,6 +133,26 @@ const SampleOutputType = ({
         </>
       );
     }
+  } else if (pageType === 'tag') {
+    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
+    metaData.description = metaValue('description') || payload.description || null;
+    metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    if (metaData.ogTitle === '') {
+      metaData.title = websiteName;
+      metaData.ogTitle = websiteName;
+    } else {
+      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
+      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    tagMetaDataTags = (
+      <>
+        { metaData.description
+        && <meta name="description" content={metaData.description} />
+        }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
   }
   // Twitter meta tags go on all pages
   twitterTags = (
@@ -156,7 +177,8 @@ const SampleOutputType = ({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{metaData.title}</title>
-        {metaDataTags}
+        {storyMetaDataTags}
+        {tagMetaDataTags}
         {customMetaTags}
         {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

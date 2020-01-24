@@ -9,25 +9,27 @@ jest.mock('fusion:context', () => ({
     globalContent: {
       authors: [
         {
-          _id: 'saracarothers',
-          firstName: 'Sara',
-          lastName: 'Carothers',
-          secondLastName: '',
-          byline: 'Sara Lynn Carothers',
+          _id: 'janedoe',
+          firstName: 'Jane',
+          lastName: 'Doe',
+          secondLastName: 'Deo',
+          byline: 'Jane Da Doe',
           role: 'Senior Product Manager',
           image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
-          email: '',
+          email: 'jane@doe.com',
+          facebook: 'https://facebook.com/janedoe',
           affiliations: '',
           education: [],
           awards: [],
           books: [],
           podcasts: [],
-          twitter: 'https://twitter.com/sLcarothers',
-          bio_page: '/author/sara-carothers/',
-          bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
-          longBio: 'Sara Carothers is a senior product manager for Arc Publishing. She works on Arc Themes and PageBuilder Fusion. This is a long bio. \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n',
-          slug: 'sara-carothers',
-          instagram: 'https://www.instagram.com/scarothers/',
+          rss: 'somersslink',
+          twitter: 'https://twitter.com/janedoe',
+          bio_page: '/author/jane doe/',
+          bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
+          longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
+          slug: 'jane-doe',
+          instagram: 'https://www.instagram.com/janedoe/',
           native_app_rendering: false,
           fuzzy_match: false,
           contributor: false,
@@ -51,148 +53,188 @@ describe('the full author bio block', () => {
       expect(wrapper.find('h1')).toHaveClassName('author-name');
     });
 
-    // it('should render a h4', () => {
-    //   const wrapper = mount(<FullAuthorBio />);
+    it('should render a h4', () => {
+      const wrapper = mount(<FullAuthorBio />);
 
-    //   expect(wrapper.find('h4')).toHaveClassName('author-title');
-    // });
+      expect(wrapper.find('h4')).toHaveClassName('author-title');
+    });
 
-    // it('should render a p', () => {
-    //   const wrapper = mount(<FullAuthorBio />);
+    it('should render a p', () => {
+      const wrapper = mount(<FullAuthorBio />);
 
-    //   expect(wrapper.find('p')).toHaveClassName('author-bio');
-    // });
+      expect(wrapper.find('.author-content > p')).toHaveClassName('author-bio');
+    });
 
-    // it('should render a photo', () => {
-    //   const wrapper = mount(<FullAuthorBio />);
+    it('should render a photo', () => {
+      const wrapper = mount(<FullAuthorBio />);
 
-    //   expect(wrapper.find('img')).toHaveClassName('author-image');
-    // });
+      expect(wrapper.find('img')).toHaveClassName('author-image');
+    });
   });
 
-  // describe('when the fields from globalContent are NOT present', () => {
-  //   beforeEach(() => {
-  //     useFusionContext.mockImplementation(() => ({
-  //       arcSite: 'no-site',
-  //       globalContent: {},
-  //     }));
-  //   });
-  //   it('should NOT render anything', () => {
-  //     const wrapper = mount(<FullAuthorBio />);
+  describe('when there is no long bio', () => {
+    beforeEach(() => {
+      useFusionContext.mockImplementation(() => ({
+        arcSite: 'no-site',
+        globalContent: {
+          authors: [
+            {
+              _id: 'janedoe',
+              firstName: 'Jane',
+              lastName: 'Doe',
+              byline: 'Jane Da Doe',
+              role: 'Senior Product Manager',
+              image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              email: 'jane@doe.com',
+              facebook: 'https://facebook.com/janedoe',
+              rss: 'somersslink',
+              twitter: 'https://twitter.com/janedoe',
+              bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
+              instagram: 'https://www.instagram.com/janedoe/',
+            },
+          ],
+        },
+      }));
+    });
 
-  //     expect(wrapper).toBeEmptyRender();
-  //   });
-  // });
+    it('should render a short bio', () => {
+      const wrapper = mount(<FullAuthorBio />);
 
-  // describe('the social media icons', () => {
-  //   describe('when the twitter link is present', () => {
-  //     it('should render a twitter icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+      expect(wrapper.find('.author-content > p')).toHaveClassName('author-bio');
+    });
+  });
 
-  //       expect(wrapper.find({ title: 'Twitter' })).toHaveLength(1);
-  //     });
+  describe('the social media icons', () => {
+    describe('when the twitter link is present', () => {
+      it('should render a twitter icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //     it('should have a twitter url', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#twitter')).toHaveLength(1);
+      });
 
-  //       expect((wrapper.find({ title: 'Twitter' }).prop('href'))).toEqual('thesun');
-  //     });
-  //   });
+      it('should have a twitter url', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the instagram link is present', () => {
-  //     it('should render an instagram icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect((wrapper.find('#twitter').prop('href'))).toEqual('https://twitter.com/janedoe');
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Instagram' })).toHaveLength(1);
-  //     });
+    describe('when the instagram link is present', () => {
+      it('should render an instagram icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //     it('should have an instagram url', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#instagram')).toHaveLength(1);
+      });
 
-  //       expect((wrapper.find({ title: 'Instagram' }).prop('href'))).toEqual('thesun');
-  //     });
-  //   });
+      it('should have an instagram url', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the facebook link is present', () => {
-  //     it('should render a facebook icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect((wrapper.find('#instagram').prop('href'))).toEqual('https://www.instagram.com/janedoe/');
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Facebook' })).toHaveLength(1);
-  //     });
+    describe('when the facebook link is present', () => {
+      it('should render a facebook icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //     it('should have a facebook url', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#facebook')).toHaveLength(1);
+      });
 
-  //       expect((wrapper.find({ title: 'Facebook' }).prop('href'))).toEqual('thesun');
-  //     });
-  //   });
+      it('should have a facebook url', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the email link is present', () => {
-  //     it('should render an email icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect((wrapper.find('#facebook').prop('href'))).toEqual('https://facebook.com/janedoe');
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Email' })).toHaveLength(1);
-  //     });
+    describe('when the email link is present', () => {
+      it('should render an email icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //     it('should have a mailto link', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#email')).toHaveLength(1);
+      });
 
-  //       expect((wrapper.find({ title: 'Facebook' }).prop('href'))).toEqual('mailto:');
-  //     });
-  //   });
+      it('should have a mailto link', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the RSS link is present', () => {
-  //     it('should render a RSS icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect((wrapper.find('#email').prop('href'))).toEqual('mailto:jane@doe.com');
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'RSS' })).toHaveLength(1);
-  //     });
+    describe('when the RSS link is present', () => {
+      it('should render a RSS icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //     it('should have a RSS url', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#rss')).toHaveLength(1);
+      });
 
-  //       expect((wrapper.find({ title: 'RSS' }).prop('href'))).toEqual('thesun');
-  //     });
-  //   });
+      it('should have a RSS url', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the twitter link is not present', () => {
-  //     it('should not render a twitter icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect((wrapper.find('#rss').prop('href'))).toEqual('somersslink');
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Twitter' })).toHaveLength(0);
-  //     });
-  //   });
+    describe('when the twitter link is not present', () => {
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({
+          arcSite: 'no-site',
+          globalContent: {},
+        }));
+      });
+      it('should not render a twitter icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the instagram link is not present', () => {
-  //     it('should not render an instagram icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#twitter')).toHaveLength(0);
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Instagram' })).toHaveLength(0);
-  //     });
-  //   });
+    describe('when the instagram link is not present', () => {
+      it('should not render an instagram icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the facebook link is not present', () => {
-  //     it('should not render a facebook icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#instagram')).toHaveLength(0);
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Facebook' })).toHaveLength(0);
-  //     });
-  //   });
+    describe('when the facebook link is not present', () => {
+      it('should not render a facebook icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the email link is not present', () => {
-  //     it('should not render an email icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#facebook')).toHaveLength(0);
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'Email' })).toHaveLength(0);
-  //     });
-  //   });
+    describe('when the email link is not present', () => {
+      it('should not render an email icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
 
-  //   describe('when the RSS link is not present', () => {
-  //     it('should not render a RSS icon', () => {
-  //       const wrapper = mount(<FullAuthorBio />);
+        expect(wrapper.find('#email')).toHaveLength(0);
+      });
+    });
 
-  //       expect(wrapper.find({ title: 'RSS' })).toHaveLength(0);
-  //     });
-  //   });
-  // });
+    describe('when the RSS link is not present', () => {
+      it('should not render a RSS icon', () => {
+        const wrapper = mount(<FullAuthorBio />);
+
+        expect(wrapper.find('#rss')).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('when the fields from globalContent are NOT present', () => {
+    it('should NOT render anything', () => {
+      const wrapper = mount(<FullAuthorBio />);
+
+      expect(wrapper).toBeEmptyRender();
+    });
+  });
+
+  describe('when there are no authors', () => {
+    it('should NOT render anything', () => {
+      const wrapper = mount(<FullAuthorBio />);
+
+      expect(wrapper).toBeEmptyRender();
+    });
+  });
 });

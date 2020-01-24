@@ -117,6 +117,8 @@ class ArticleByline extends Component {
   }
 }
 
+ArticleByline.label = 'Byline – Arc Block';
+
 ArticleByline.propTypes = {
   story: PropTypes.object,
   stylesFor: PropTypes.string,

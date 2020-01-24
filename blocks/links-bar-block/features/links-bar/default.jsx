@@ -37,6 +37,8 @@ const LinksBar = ({ customFields: { hierarchy } }) => {
   );
 };
 
+LinksBar.label = 'Links Bar – Arc Block';
+
 LinksBar.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,

@@ -3,11 +3,28 @@
   padding: map-get($spacers, 'xs') map-get($spacers, 'sm') map-get($spacers, 'sm') 0;
   display: flex;
 
+  flex-wrap: wrap; //mobile fix
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    flex-wrap: nowrap;
+  }
+
   .list-anchor {
     text-decoration: none;
     height: calculateRem(148.26px);
     flex: 0 0 calculateRem(274px);
     overflow-y: hidden;
+
+    margin-bottom: map-get($spacers, 'sm');
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      margin-bottom: 0;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      flex: 0 0 auto; //IE 11
+    }
+
 
     img, .image-placeholder {
       width: 100%;
@@ -21,8 +38,8 @@
     }
   }
 
-  .image-placeholder {
-    background-color: #DFE4EA;
+  .numbered-list-placeholder {
+    background-color: #dfe4ea;
   }
 
   .headline-description {
@@ -56,7 +73,7 @@
         line-height: calculateRem(16px);
         margin: 0 map-get($spacers, 'xs');
       }
-  
+
       .story-date {
         color: #3B3B3B;
         font-size: calculateRem(14px);

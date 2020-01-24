@@ -1,8 +1,8 @@
 .image-container {
   float: left;
   width: 30%;
-  margin-top: 31px;
-  margin-right: 32px;
+  margin-top: map-get($spacers, 'lg');
+  margin-right: map-get($spacers, 'md');
 }
 
 .author-image {
@@ -17,17 +17,17 @@
 }
 
 .author-name {
-  margin-top: 31px;
-  margin-bottom: 9px;
+  margin-top: map-get($spacers, 'lg');
+  margin-bottom: map-get($spacers, 'xs');
 }
 
 .author-title {
-  margin-bottom: 11px;
+  margin-bottom: map-get($spacers, 'xs');
 }
 
 .social-container {
-  margin-top: 10px;
-  padding: 18px 0 16px 0;
+  margin-top: map-get($spacers, 'xs');
+  padding: calculateRem(18px) 0 calculateRem(16px) 0;
   border-top: 1px $ui-medium-light-secondary-color solid;
   border-bottom: 1px $ui-medium-light-secondary-color solid;
 }
@@ -35,12 +35,11 @@
 .social-items {
   width: 50%;
   display: flex;
-  justify-content: space-between;
 }
 
 .social-column {
   display: inline-block;
-  font-size: 16px;
-  margin-right: 44px;
+  font-size: calculateRem(16px);
+  margin-right: map-get($spacers, 'xl')
 }
 

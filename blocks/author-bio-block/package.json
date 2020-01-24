@@ -19,7 +19,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.3.4",
+    "@arc-test-org/engine-theme-sdk": "^0.4.2",
     "styled-components": "^4.4.0"
   }
 }

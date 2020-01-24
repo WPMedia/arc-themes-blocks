@@ -1,7 +1,7 @@
 {
-  "name": "@arc-test-org/author-page-block",
+  "name": "@arc-test-org/full-author-bio-block",
   "version": "0.1.0",
-  "description": "Fusion News Theme author page block",
+  "description": "Fusion News Theme full author bio block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "license": "UNLICENSED",

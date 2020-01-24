@@ -1,6 +1,6 @@
 .list-item {
   box-shadow: inset 0 -1px 0 0 #B8C1CB;
-  padding: 11px 13px 19px 0;
+  padding: map-get($spacers, 'xs') map-get($spacers, 'sm') map-get($spacers, 'sm') 0;
   display: flex;
 
   flex-wrap: wrap; //mobile fix
@@ -11,8 +11,8 @@
 
   .list-anchor {
     text-decoration: none;
-    height: 148px;
-    width: 274px;
+    height: calculateRem(148.26px);
+    flex: 0 0 calculateRem(274px);
     overflow-y: hidden;
 
     margin-bottom: map-get($spacers, 'sm');
@@ -28,7 +28,7 @@
 
     img, .image-placeholder {
       width: 100%;
-      height: auto;
+      height: 100%;
       vertical-align: middle;
       display: inline-block;
       position: relative;
@@ -45,70 +45,41 @@
   .headline-description {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-left: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      margin-left: 30.72px;
-    }
-
-
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      flex: 0 1 100%; //IE 11
-    }
-
-
-    .headline-text, .description-text {
+    margin-left: map-get($spacers, 'lg');
+    .headline-text,
+    .description-text {
       color: #191919;
     }
 
     .headline-text {
-      font-size: 26px;
+      font-size: calculateRem(26px);
       font-weight: bold;
-      line-height: 32px;
-      margin-bottom: 6px;
+      line-height: calculateRem(32px);
+      margin-bottom: map-get($spacers, 'xs');
     }
 
     .description-text {
-      font-size: 16px;
-      line-height: 24px;
-      margin-bottom: 15px;
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
+      margin-bottom: map-get($spacers, 'sm');
     }
 
     .author-date {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-        flex-wrap: nowrap;
-      }
-
       .dot-separator {
+        display: inline-block;
         color: #3B3B3B;
         font-family: Tahoma;
-        font-size: 0.8rem;
-        line-height: 14px;
-        margin: 0 1rem;
+        font-size: calculateRem(14px);
+        line-height: calculateRem(16px);
+        margin: 0 map-get($spacers, 'xs');
       }
 
       .story-date {
         color: #3B3B3B;
-        font-size: 14px;
-        line-height: 14px;
+        font-size: calculateRem(14px);
+        line-height: calculateRem(16px);
+        display: inline;
       }
-    }
-
-    .nameStyles {
-      color: #434343;
-      font-size: 14px;
-      line-height: 14px;
-    }
-
-    .byClass {
-      color: #3B3B3B;
-      font-size: 14px;
-      line-height: 14px;
-      margin-right: 4px;
     }
   }
 

@@ -4,11 +4,11 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
 import './share-bar.scss';
-import envelopeLogo from './images/envelope.svg';
-import facebookLogo from './images/facebook.svg';
-import linkedinLogo from './images/linkedin.svg';
-import pinterestLogo from './images/pinterest.svg';
-import twitterLogo from './images/twitter.svg';
+import EnvelopeIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/EnvelopeIcon';
+import FacebookIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FacebookIcon';
+import LinkedInAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/LinkedInAltIcon';
+import PinterestAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/PinterestAltIcon';
+import TwitterIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties
@@ -54,13 +54,21 @@ const share = {
   },
 };
 
-const logos = {
-  email: envelopeLogo,
-  facebook: facebookLogo,
-  linkedIn: linkedinLogo,
-  pinterest: pinterestLogo,
-  twitter: twitterLogo,
-};
+function getLogoComponent(type) {
+  switch (type) {
+    case 'facebook':
+      return <FacebookIcon description="Facebook icon" fill="#4267B2" />;
+    case 'linkedIn':
+      return <LinkedInAltIcon description="LinkedIn icon" fill="#2867B2" />;
+    case 'pinterest':
+      return <PinterestAltIcon description="Pinterest icon" fill="#BD081C" />;
+    case 'twitter':
+      return <TwitterIcon description="Twitter icon" fill="#1DA1F2" />;
+    default:
+    case 'email':
+      return <EnvelopeIcon description="Email icon" fill="#C72A22" />;
+  }
+}
 
 const ShareBar = () => {
   const {
@@ -92,7 +100,7 @@ const ShareBar = () => {
           onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
           onKeyPress={() => share[social](encodedUrl, encodedTitle, websiteName)}
         >
-          <img src={logos[social]} alt={social} />
+          { getLogoComponent(social) }
         </button>
       ));
     }

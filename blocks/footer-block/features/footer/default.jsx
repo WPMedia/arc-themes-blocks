@@ -4,10 +4,10 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import facebook from './images/facebook.svg';
-import twitter from './images/twitter.svg';
-import rss from './images/rss.svg';
-import placeholderLogo from './images/arc-placeholder-logo.svg';
+import FacebookAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
+import TwitterIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
+import RssIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/RssIcon';
+import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
 
 import './footer.scss';
 
@@ -39,7 +39,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href={getProperties(arcSite).facebookPage}
             >
-              <img src={facebook} alt="Facebook page" />
+              <FacebookAltIcon fill="#2980B9" />
             </a>
           )
           : ''
@@ -53,7 +53,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href={getProperties(arcSite).twitterUsername}
             >
-              <img src={twitter} alt="Twitter feed" />
+              <TwitterIcon fill="#2980B9" />
             </a>
           )
           : ''
@@ -67,7 +67,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               href={getProperties(arcSite).rssUrl}
             >
-              <img src={rss} alt="RSS feed" />
+              <RssIcon fill="#2980B9" />
             </a>
           )
           : ''
@@ -122,11 +122,17 @@ const Footer = () => {
         })}
       </div>
       <div className="primaryLogo">
-        <img
-          src={getProperties(arcSite).primaryLogo || placeholderLogo}
-          alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
-          className="footer-logo"
-        />
+        {
+          getProperties(arcSite).primaryLogo
+            ? (
+              <img
+                src={getProperties(arcSite).primaryLogo}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
+                className="footer-logo"
+              />
+            )
+            : <ArcLogo />
+        }
       </div>
     </div>
   );

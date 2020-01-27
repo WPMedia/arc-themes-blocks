@@ -34,7 +34,7 @@ jest.mock('fusion:context', () => ({
           fuzzy_match: false,
           contributor: false,
           status: true,
-          last_updated_date: '2019-11-22T23:15:45.348Z',
+          last_updated_date: '2019-01-24T23:15:45.348Z',
           type: 'author',
         },
       ],

@@ -22,5 +22,4 @@ describe('the author api content source block', () => {
       expect(url).toEqual('/author/v2/author-service?slug=');
     });
   });
-
 });

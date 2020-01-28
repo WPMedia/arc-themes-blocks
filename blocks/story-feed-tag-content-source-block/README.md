@@ -1,11 +1,7 @@
 # `@arc-test-org/story-feed-tag-content-source-block`
 
-> TODO: description
+Content source block for story feed queries by tag.
 
 ## Usage
 
-```
-const storyFeedTagContentSourceBlock = require('@arc-test-org/story-feed-tag-content-source-block');
-
-// TODO: DEMONSTRATE API
-```
+See documentation [here](https://github.com/wapopartners/core-components/tree/dev/packages/content-source_story-feed_tag-v4).

@@ -1,11 +1,9 @@
 # `@arc-test-org/content-api-source-block`
 
-> TODO: description
+Content source block for Content API queries.
 
 ## Usage
 
-```
-const contentApiSourceBlock = require('@arc-test-org/content-api-source-block');
+### Fields
 
-// TODO: DEMONSTRATE API
-```
+* `website_url`: The canonical URL path for the content requested from the Content API.

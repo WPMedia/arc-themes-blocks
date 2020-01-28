@@ -1,11 +1,7 @@
 # `@arc-test-org/story-feed-author-content-source-block`
 
-> TODO: description
+Content source block for story feed queries by author.
 
 ## Usage
 
-```
-const storyFeedAuthorContentSourceBlock = require('@arc-test-org/story-feed-author-content-source-block');
-
-// TODO: DEMONSTRATE API
-```
+See documentation [here](https://github.com/wapopartners/core-components/tree/dev/packages/content-source_story-feed_author-v4).

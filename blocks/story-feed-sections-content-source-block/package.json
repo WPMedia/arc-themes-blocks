@@ -1,7 +1,7 @@
 {
-  "name": "@arc-test-org/story-feed-query-content-source-block",
+  "name": "@arc-test-org/story-feed-sections-content-source-block",
   "version": "0.0.0",
-  "description": "Content source block for story feed queries by Elasticsearch queries",
+  "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
@@ -15,5 +15,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
+  },
+  "dependencies": {
+    "@arc-core-components/content-source_story-feed_sections-v4": "^1.0.6-beta.0"
   }
 }

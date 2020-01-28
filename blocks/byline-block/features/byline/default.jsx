@@ -7,8 +7,13 @@ import './byline.scss';
 
 const BylineSection = styled.section`
   font-family: ${props => props.secondaryFont};
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  color: #191919;
   ${({ stylesFor }) => stylesFor === 'list' && `
-    line-height: 14px;
+    display: inline;
+    font-size: .875rem;
+    line-height: 1rem;
 `}
 `;
 
@@ -16,8 +21,7 @@ const BylineSection = styled.section`
 const By = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #3B3B3B;
-    font-size: 14px;
-    margin-right: 4px;
+    margin-right: .25rem;
   `}
 `;
 
@@ -25,7 +29,6 @@ const By = styled.span`
 const BylineNames = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #434343;
-    font-size: 14px;
   `}
 `;
 
@@ -113,6 +116,8 @@ class ArticleByline extends Component {
     );
   }
 }
+
+ArticleByline.label = 'Byline – Arc Block';
 
 ArticleByline.propTypes = {
   story: PropTypes.object,

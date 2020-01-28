@@ -20,7 +20,8 @@ const NavButton = styled.button`
   background-color: ${props => props.primaryColor};
 `;
 
-export default () => {
+
+const HeaderNav = () => {
   const { arcSite } = useAppContext();
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
 
@@ -41,3 +42,7 @@ export default () => {
     </StyledNav>
   );
 };
+
+HeaderNav.label = 'Navigation – Arc Block';
+
+export default HeaderNav;

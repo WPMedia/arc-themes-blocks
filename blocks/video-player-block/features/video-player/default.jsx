@@ -65,5 +65,6 @@ VideoPlayer.propTypes = {
   }),
 };
 
+VideoPlayer.label = 'Video Center Player - Arc Block';
 
 export default VideoPlayer;

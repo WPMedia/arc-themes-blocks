@@ -220,5 +220,6 @@ ArticleBodyChain.propTypes = {
   }),
 };
 
+ArticleBodyChain.label = 'Article Body – Arc Block';
 
 export default ArticleBodyChain;

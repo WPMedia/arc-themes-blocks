@@ -11,4 +11,7 @@ module.exports = {
   moduleNameMapper: {
     '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!@arc-test-org)',
+  ],
 };

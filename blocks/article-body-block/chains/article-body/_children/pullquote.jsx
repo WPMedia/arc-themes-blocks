@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import React from 'react';
 
 export default ({ element }) => {

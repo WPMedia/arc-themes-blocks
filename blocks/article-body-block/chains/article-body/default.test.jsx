@@ -44,7 +44,7 @@ describe('article-body chain', () => {
           },
           arcSite: 'the-sun',
           customFields: {
-            elementPlacement: '{ "1": "2", "2": "1" }',
+            elementPlacement: { 1: 2, 2: 1 },
           },
         })),
       }));
@@ -56,6 +56,7 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
+      console.log(wrapper.debug());
       expect(wrapper.find('article.article-body')).toHaveLength(1);
       expect(wrapper.find('article.article-body').find('div')).toHaveLength(2);
     });
@@ -1075,6 +1076,16 @@ describe('article-body chain', () => {
   describe('Render image correctly', () => {
     it('should render image with figcaption and author', () => {
       jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
         useFusionContext: jest.fn(() => ({
           globalContent: {
             _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
@@ -1177,10 +1188,14 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('figure').length).toEqual(1);
-      expect(wrapper.find('figure').find('img').length).toEqual(1);
+      expect(wrapper.find('figure').find('Image').length).toEqual(1);
       expect(wrapper.find('figure').find('figcaption').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(2);
-      expect(wrapper.find('figure').find('figcaption').childAt(1).text()).toMatch('Brett Danielsen');
+      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(1);
+      expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(1);
+      expect(wrapper.find('figure').find('figcaption').find('p').find('.title').length).toEqual(1);
+      expect(wrapper.find('figure').find('figcaption').find('p').text()).toMatch("Australia surf trip Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.  (Brett Danielsen/Death to Stock Photo)");
+      expect(wrapper.find('figure').find('figcaption').find('p').find('.title')
+        .text()).toMatch('Australia surf trip ');
     });
     it('should not render image with figcaption and author', () => {
       jest.mock('fusion:context', () => ({

@@ -1,12 +1,23 @@
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: 'commonjs',
+      },
+    ],
+    '@babel/preset-react'],
   env: {
     test: {
       plugins: [
         'transform-react-remove-prop-types',
-        ['@babel/plugin-proposal-decorators', {
-          legacy: true,
-        }],
+        [
+          '@babel/plugin-proposal-decorators',
+          {
+            legacy: true,
+          },
+        ],
+        '@babel/plugin-proposal-class-properties',
         ['module-resolver', {
           alias: {
             'fusion:themes': './jest/mocks/themes.js',

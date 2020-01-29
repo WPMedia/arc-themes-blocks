@@ -16,12 +16,13 @@
 
   .list-anchor-image {
     text-decoration: none;
+    flex: 0 0 25%;
+    max-height: 71px;
+    min-height: 71px;
     img,
     .numbered-list-placeholder {
-      max-height: 71px;
-      min-height: 71px;
-      max-width: 105px;
-      min-width: 105px;
+      width: 100%;
+      height: 100%;
     }
   }
 

@@ -35,7 +35,7 @@ footer {
   }
 
   #copyright-bottom {
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       display: none;
     }
   }

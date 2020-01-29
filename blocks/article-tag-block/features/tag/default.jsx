@@ -35,4 +35,6 @@ const ArticleTags = () => {
   ) : '';
 };
 
+ArticleTags.label = 'Tags Bar – Arc Block';
+
 export default ArticleTags;

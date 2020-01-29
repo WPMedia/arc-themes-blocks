@@ -109,6 +109,8 @@ class ResultsList extends Component {
   }
 }
 
+ResultsList.label = 'Results List – Arc Block';
+
 ResultsList.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed'),

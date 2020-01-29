@@ -8,7 +8,8 @@ import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@arc-test-org/engine-theme-sdk';
 import './leadart.scss';
-import fullScreenLogo from './images/full-screen.svg';
+import FullscreenIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -46,7 +47,7 @@ class LeadArt extends Component {
 
   lightboxImgHandler() {
     const imgParentElm = this.imgRef.current;
-    const imgElm = imgParentElm.querySelector('img')
+    const imgElm = imgParentElm.querySelector('img');
     if (imgElm) {
       return imgElm.dataset.lightbox;
     }
@@ -133,13 +134,7 @@ class LeadArt extends Component {
               className="btn-full-screen"
               onClick={() => this.setState({ isOpen: true })}
             >
-              <img
-                className="ui-img"
-                src={fullScreenLogo}
-                title={buttonLabel}
-                alt={buttonLabel}
-                aria-label={buttonLabel}
-              />
+              <FullscreenIcon width="100%" height="100%" fill="#6B6B6B" />
               {buttonLabel}
             </button>
             <div ref={this.imgRef}>
@@ -173,6 +168,8 @@ class LeadArt extends Component {
     return null;
   }
 }
+
+LeadArt.label = 'Lead Art – Arc Block';
 
 LeadArt.defaultProps = {
   customFields: {

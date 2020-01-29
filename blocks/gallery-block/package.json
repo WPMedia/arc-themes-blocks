@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/gallery-block",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "description": "Fusion News Theme gallery block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,6 +19,6 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.3.6"
+    "@arc-test-org/engine-theme-sdk": "^0.4.2"
   }
 }

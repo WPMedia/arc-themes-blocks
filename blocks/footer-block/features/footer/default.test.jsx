@@ -98,7 +98,7 @@ jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockPayload)),
 }));
 
-describe('the footer feature for the default output type', () => {
+describe.only('the footer feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();
   });
@@ -112,15 +112,6 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
-  it('should be a footer element', () => {
-    const wrapper = shallow(<Footer />);
-
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
-
-    expect(wrapper.at(0).type()).toBe('footer');
-  });
 
   it('should have 4 column headers', () => {
     const wrapper = mount(<Footer />);
@@ -170,6 +161,24 @@ describe('the footer feature for the default output type', () => {
 
         expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
       });
+
+      describe('when the theme manifest provides alt text', () => {
+        it('should make the alt text of the logo the provided text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg', primaryLogoAlt: 'my alt text' }));
+          const wrapper = mount(<Footer />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+        });
+      });
+
+      describe('when the theme manifest does not provide alt text', () => {
+        it('should make the alt text of the logo the default text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+          const wrapper = mount(<Footer />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+        });
+      });
     });
 
     describe('when the theme does not provide a logo url', () => {
@@ -177,26 +186,8 @@ describe('the footer feature for the default output type', () => {
         getProperties.mockImplementation(() => ({}));
         const wrapper = mount(<Footer />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
+        expect(wrapper.find('div.primaryLogo > ArcLogo')).toHaveLength(1);
       });
-    });
-  });
-
-  describe('when the theme manifest provides alt text', () => {
-    it('should make the alt text of the logo the provided text', () => {
-      getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
-      const wrapper = mount(<Footer />);
-
-      expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
-    });
-  });
-
-  describe('when the theme manifest does not provide alt text', () => {
-    it('should make the alt text of the logo the default text', () => {
-      getProperties.mockImplementation(() => ({}));
-      const wrapper = mount(<Footer />);
-
-      expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
     });
   });
 

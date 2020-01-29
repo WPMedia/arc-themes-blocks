@@ -25,4 +25,6 @@ GalleryFeature.propTypes = {
   }),
 };
 
+GalleryFeature.label = 'Gallery – Arc Block';
+
 export default GalleryFeature;

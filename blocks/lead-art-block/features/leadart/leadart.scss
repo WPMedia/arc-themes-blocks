@@ -34,12 +34,11 @@
         padding-left: 0;
         cursor: pointer;
 
-        img{
-            display: inline;
-            width: 18px;
-            height: auto;
-            margin-right: map-get($spacers, 'xxs');
+        svg{
+            height: 1rem;
+            width: 1rem;
             fill: $ui-medium-primary-color;
+            margin-right: 4px;
         }
     }
 

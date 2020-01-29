@@ -1,4 +1,9 @@
 .image-container {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    text-align: center;
+    float: none;
+    width: 100%;
+  }
   float: left;
   width: 30%;
   margin-top: map-get($spacers, 'lg');
@@ -12,11 +17,17 @@
 }
 
 .author-content { 
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    width: 100%;
+  }
   display: inline-block;
   width: 64%;
 }
 
 .author-name {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    margin-top: map-get($spacers, 'sm');
+  }
   margin-top: map-get($spacers, 'lg');
   margin-bottom: map-get($spacers, 'xs');
 }
@@ -26,6 +37,11 @@
 }
 
 .social-container {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    padding: calculateRem(7px) 0 calculateRem(7px) 0;
+    text-align: center;
+  }
+  text-align: center;
   margin-top: map-get($spacers, 'xs');
   padding: calculateRem(18px) 0 calculateRem(16px) 0;
   border-top: 1px $ui-medium-light-secondary-color solid;
@@ -33,13 +49,38 @@
 }
 
 .social-items {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    width: 100%;
+    display: block;
+  }
   width: 50%;
   display: flex;
 }
 
 .social-column {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    margin-right: map-get($spacers, 'lg');
+  }
+  @media screen and (max-width: 40rem){
+    margin-right: map-get($spacers, 'md');
+  }
   display: inline-block;
   font-size: calculateRem(16px);
-  margin-right: map-get($spacers, 'xl')
+  margin-right: map-get($spacers, 'xl');
 }
 
+#connect-top {
+  @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+    display: none;
+  }
+  margin-right: 0;
+  margin-bottom: calculateRem(13px);
+}
+
+#connect-bottom {
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    > b {
+      display: none;
+    }
+  }
+}

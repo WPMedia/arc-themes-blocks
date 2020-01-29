@@ -27,8 +27,25 @@ const logos = {
   twitter: <Twitter title="Follow on Twitter" alt="twitter" />,
   facebook: <Facebook title="Connect on Facebook" alt="facebook" />,
   instagram: <Instagram title="Follow on Instagram" alt="instagram" />,
-  rss: <Rss title="RSS feed" alt="rss" />,
+  rss: <Rss title="Rss feed" alt="rss" />,
 };
+
+function constructUrl(type, field) {
+  switch (type) {
+    case 'email':
+      return `mailto:${field}`;
+    case 'twitter':
+      return `https://twitter.com/${field}`;
+    case 'facebook':
+      return field;
+    case 'instagram':
+      return `https://instagram.com/${field}`;
+    case 'rss':
+      return field;
+    default:
+      return field;
+  }
+}
 
 const FullAuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
@@ -80,19 +97,20 @@ const FullAuthorBio = () => {
         </div>
 
         <div className="social-container">
+          <p className="social-column" id="connect-top">
+            <b>Connect</b>
+          </p>
           <div className="social-items">
-            <p className="social-column"><b>Connect</b></p>
+            <p className="social-column" id="connect-bottom">
+              <b>Connect</b>
+            </p>
             {
               socials.map(item => (
                 <a
                   className="social-column"
                   key={item}
                   id={item}
-                  href={
-                    (item === 'email')
-                      ? `mailto:${content.authors[0][item]}`
-                      : content.authors[0][item]
-                  }
+                  href={constructUrl(item, content.authors[0][item])}
                 >
                   {logos[item]}
                 </a>
@@ -104,5 +122,7 @@ const FullAuthorBio = () => {
     )
   );
 };
+
+FullAuthorBio.label = 'FullAuthorBio – Arc Block';
 
 export default FullAuthorBio;

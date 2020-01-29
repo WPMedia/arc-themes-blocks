@@ -24,12 +24,12 @@ jest.mock('fusion:context', () => ({
           books: [],
           podcasts: [],
           rss: 'somersslink',
-          twitter: 'https://twitter.com/janedoe',
+          twitter: 'janedoe',
           bio_page: '/author/jane doe/',
           bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
           longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
           slug: 'jane-doe',
-          instagram: 'https://www.instagram.com/janedoe/',
+          instagram: 'janedoe',
           native_app_rendering: false,
           fuzzy_match: false,
           contributor: false,
@@ -88,9 +88,9 @@ describe('the full author bio block', () => {
               email: 'jane@doe.com',
               facebook: 'https://facebook.com/janedoe',
               rss: 'somersslink',
-              twitter: 'https://twitter.com/janedoe',
+              twitter: 'janedoe',
               bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
-              instagram: 'https://www.instagram.com/janedoe/',
+              instagram: 'janedoe',
             },
           ],
         },
@@ -129,7 +129,7 @@ describe('the full author bio block', () => {
       it('should have an instagram url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#instagram').prop('href'))).toEqual('https://www.instagram.com/janedoe/');
+        expect((wrapper.find('#instagram').prop('href'))).toEqual('https://instagram.com/janedoe');
       });
     });
 

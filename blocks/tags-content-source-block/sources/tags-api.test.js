@@ -1,4 +1,4 @@
-import contentSource from './tags-content-source';
+import contentSource from './tags-api';
 
 describe('the tags content source block', () => {
   it('should use the proper param types', () => {

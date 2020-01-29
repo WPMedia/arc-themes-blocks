@@ -31,4 +31,6 @@ const Overline = () => {
   );
 };
 
+Overline.label = 'Overline – Arc Block';
+
 export default Overline;

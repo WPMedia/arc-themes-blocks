@@ -19,4 +19,6 @@ const SubHeadline = () => {
   );
 };
 
+SubHeadline.label = 'Subheadline – Arc Block';
+
 export default SubHeadline;

@@ -16,11 +16,11 @@ const RightRailLayout = ({ children }) => (
 
 
         <div className="row">
-          <div className="col-sm-12 col-md-xl-8 left-article-section">
+          <div className="col-sm-12 col-md-xl-8 left-article-section ie-flex-100-percent-sm">
             {/* Main Content Area */}
             {children[2]}
           </div>
-          <aside className="col-sm-12 col-md-xl-4 right-article-section">
+          <aside className="col-sm-12 col-md-xl-4 right-article-section ie-flex-100-percent-sm">
             {/* Right Rail Content Area */}
             {children[3]}
           </aside>

@@ -1,3 +1,4 @@
+$btn-size: 32px;
 $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
 $section-bg: #3B3B3B;
@@ -5,7 +6,7 @@ $submenu-link-color: #7F8C8D;
 
 .nav-btn {
   border: 0;
-  height: 32px;
+  height: $btn-size;
   margin: 0 5px;
   outline: none;
   position: relative;
@@ -55,9 +56,9 @@ $submenu-link-color: #7F8C8D;
 
   &.open {
     input {
-      height: 24px;
+      height: $btn-size;
       padding: 4px;
-      padding-right: 32px;
+      padding-right: $btn-size;
       width: 200px;
     }
 

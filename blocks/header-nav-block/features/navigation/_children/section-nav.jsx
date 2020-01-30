@@ -2,27 +2,40 @@ import React, { Fragment } from 'react'
 
 function hasChildren (node) { return node.children && node.children.length > 0 }
 
+function parseLinkData (node) {
+  if (node.node_type === 'section') {
+    return {
+      text: node.name,
+      url: node._id
+    }
+  } else if (node.node_type === 'link') {
+    return {
+      text: node.display_name,
+      url: node.url
+    }
+  }
+}
 // TODO: check for _id and name properties before using
 
-const SectionItem = ({ section }) => {
+const SectionItem = ({ item }) => {
+  const { text = '', url = '' } = parseLinkData(item)
   return (
     <li>
-      <a href={section._id} title={section.name}>{section.name}{hasChildren(section) && <span className='submenu-caret'>&#8250;</span>}</a>
-      {hasChildren(section) &&
-        <SubSectionMenu items={section.children} />
+      <a href={url} title={text}>{text}{hasChildren(item) && <span className='submenu-caret'>&#8250;</span>}</a>
+      {hasChildren(item) &&
+        <SubSectionMenu items={item.children} />
       }
     </li>
   )
 }
 
 const SubSectionMenu = ({ items }) => {
-  return (
-    <ul className='subsection-menu'>
-      {items.map((child, idx) =>
-        <li key={idx}><a href={child._id} title={child.name}>{child.name}</a></li>
-      )}
-    </ul>
-  )
+  const itemsList = items.map((item) => {
+    const { text = '', url = '' } = parseLinkData(item)
+    return (<li key={item._id}><a href={url} title={text}>{text}</a></li>)
+  })
+
+  return (<ul className='subsection-menu'>{itemsList}</ul>)
 }
 
 export default ({ children = [], sections = [] }) => {
@@ -32,8 +45,8 @@ export default ({ children = [], sections = [] }) => {
     <Fragment>
       {children}
       <ul className='section-menu'>
-        {active.map((section, idx) =>
-          <SectionItem key={idx} section={section} />
+        {active.map((item) =>
+          <SectionItem key={item._id} item={item} />
         )}
       </ul>
     </Fragment>

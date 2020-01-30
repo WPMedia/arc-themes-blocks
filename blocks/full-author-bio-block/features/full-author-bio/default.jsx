@@ -30,7 +30,6 @@ const logos = {
   facebook: <FacebookIcon fill="$ui-medium-primary-color" title="Connect on Facebook" description="Facebook" alt="facebook" />,
   instagram: <InstagramIcon fill="$ui-medium-primary-color" title="Follow on Instagram" description="Instagram" alt="instagram" />,
   rss: <RssIcon fill="$ui-medium-primary-color" title="Rss feed" description="Rss" alt="rss" />,
-  
 };
 
 function constructUrl(type, field) {

@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import Envelope from './images/envelope';
-import Twitter from './images/twitter';
-import Facebook from './images/facebook';
-import Instagram from './images/instagram';
-import Rss from './images/rss';
+import {
+  EnvelopeIcon,
+  TwitterIcon,
+  FacebookIcon,
+  InstagramIcon,
+  RssIcon,
+} from '@arc-test-org/engine-theme-sdk';
 import './full-author-bio.scss';
 
 const StyledAuthorContent = styled.div`
@@ -23,11 +25,12 @@ const StyledAuthorContent = styled.div`
 `;
 
 const logos = {
-  email: <Envelope title="Email" alt="email" />,
-  twitter: <Twitter title="Follow on Twitter" alt="twitter" />,
-  facebook: <Facebook title="Connect on Facebook" alt="facebook" />,
-  instagram: <Instagram title="Follow on Instagram" alt="instagram" />,
-  rss: <Rss title="Rss feed" alt="rss" />,
+  email: <EnvelopeIcon fill="$ui-medium-primary-color" title="Email" description="Email" alt="email" />,
+  twitter: <TwitterIcon fill="$ui-medium-primary-color" title="Follow on Twitter" description="Twitter" alt="twitter" />,
+  facebook: <FacebookIcon fill="$ui-medium-primary-color" title="Connect on Facebook" description="Facebook" alt="facebook" />,
+  instagram: <InstagramIcon fill="$ui-medium-primary-color" title="Follow on Instagram" description="Instagram" alt="instagram" />,
+  rss: <RssIcon fill="$ui-medium-primary-color" title="Rss feed" description="Rss" alt="rss" />,
+  
 };
 
 function constructUrl(type, field) {
@@ -53,12 +56,7 @@ const FullAuthorBio = () => {
   const socials = [];
   if (content.authors) {
     Object.keys(content.authors[0]).forEach((item) => {
-      if ((item === 'facebook'
-        || item === 'instagram'
-        || item === 'email'
-        || item === 'twitter'
-        || item === 'rss'
-      ) && item.length > 0) {
+      if (Object.keys(logos).includes(item)) {
         socials.push(item);
       }
     });
@@ -69,18 +67,18 @@ const FullAuthorBio = () => {
       content
       && content.authors
       && content.authors[0]
-      && content.authors[0].byline
-      && content.authors[0].role
-      && (content.authors[0].bio || content.authors[0].longBio)
-      && content.authors[0].image
     ) && (
       <>
         <div className="image-container">
-          <img
-            src={content.authors[0].image}
-            className="author-image"
-            alt="Author photo"
-          />
+          {
+            (content.authors[0].image) && (
+              <img
+                src={content.authors[0].image}
+                className="author-image"
+                alt="Author photo"
+              />
+            )
+          }
         </div>
         <div>
           <StyledAuthorContent
@@ -88,28 +86,39 @@ const FullAuthorBio = () => {
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}
           >
-            <h1 className="author-name">{content.authors[0].byline}</h1>
-            <h4 className="author-title">{content.authors[0].role}</h4>
-            <p className="author-bio">
-              {content.authors[0].longBio || content.authors[0].bio}
-            </p>
+            {
+              (content.authors[0].byline) && (
+                <h1 className="author-name">{content.authors[0].byline}</h1>
+              )
+            }
+            {
+              (content.authors[0].role) && (
+                <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
+              )
+            }
+            {
+              (content.authors[0].bio || content.authors[0].longBio) && (
+                <p className="author-bio">
+                  {content.authors[0].longBio || content.authors[0].bio}
+                </p>
+              )
+            }
           </StyledAuthorContent>
         </div>
 
         <div className="social-container">
-          <p className="social-column" id="connect-top">
+          <p className="social-column connect-top">
             <b>Connect</b>
           </p>
           <div className="social-items">
-            <p className="social-column" id="connect-bottom">
+            <p className="social-column connect-bottom">
               <b>Connect</b>
             </p>
             {
               socials.map(item => (
                 <a
-                  className="social-column"
+                  className={`social-column ${item}`}
                   key={item}
-                  id={item}
                   href={constructUrl(item, content.authors[0][item])}
                 >
                   {logos[item]}

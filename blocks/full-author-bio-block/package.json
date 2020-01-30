@@ -20,6 +20,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
+  "dependencies": {
+    "@arc-test-org/engine-theme-sdk": "^0.4.3",
+    "styled-components": "^4.4.0"
+  },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   }

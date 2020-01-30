@@ -69,16 +69,16 @@
   margin-right: map-get($spacers, 'xl');
 }
 
-#connect-top {
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+.connect-top {
+  @media screen and (min-width: 50rem){
     display: none;
   }
   margin-right: 0;
   margin-bottom: calculateRem(13px);
 }
 
-#connect-bottom {
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+.connect-bottom {
+  @media screen and (max-width: 50rem){
     > b {
       display: none;
     }

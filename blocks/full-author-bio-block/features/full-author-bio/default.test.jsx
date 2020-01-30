@@ -56,7 +56,7 @@ describe('the full author bio block', () => {
     it('should render a h4', () => {
       const wrapper = mount(<FullAuthorBio />);
 
-      expect(wrapper.find('h4')).toHaveClassName('author-title');
+      expect(wrapper.find('h2')).toHaveClassName('author-title');
     });
 
     it('should render a p', () => {
@@ -109,13 +109,13 @@ describe('the full author bio block', () => {
       it('should render a twitter icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#twitter')).toHaveLength(1);
+        expect(wrapper.find('.twitter')).toHaveLength(1);
       });
 
       it('should have a twitter url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#twitter').prop('href'))).toEqual('https://twitter.com/janedoe');
+        expect((wrapper.find('.twitter').prop('href'))).toEqual('https://twitter.com/janedoe');
       });
     });
 
@@ -123,13 +123,13 @@ describe('the full author bio block', () => {
       it('should render an instagram icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#instagram')).toHaveLength(1);
+        expect(wrapper.find('.instagram')).toHaveLength(1);
       });
 
       it('should have an instagram url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#instagram').prop('href'))).toEqual('https://instagram.com/janedoe');
+        expect((wrapper.find('.instagram').prop('href'))).toEqual('https://instagram.com/janedoe');
       });
     });
 
@@ -137,13 +137,13 @@ describe('the full author bio block', () => {
       it('should render a facebook icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#facebook')).toHaveLength(1);
+        expect(wrapper.find('.facebook')).toHaveLength(1);
       });
 
       it('should have a facebook url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#facebook').prop('href'))).toEqual('https://facebook.com/janedoe');
+        expect((wrapper.find('.facebook').prop('href'))).toEqual('https://facebook.com/janedoe');
       });
     });
 
@@ -151,13 +151,13 @@ describe('the full author bio block', () => {
       it('should render an email icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#email')).toHaveLength(1);
+        expect(wrapper.find('.email')).toHaveLength(1);
       });
 
       it('should have a mailto link', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#email').prop('href'))).toEqual('mailto:jane@doe.com');
+        expect((wrapper.find('.email').prop('href'))).toEqual('mailto:jane@doe.com');
       });
     });
 
@@ -165,13 +165,13 @@ describe('the full author bio block', () => {
       it('should render a RSS icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#rss')).toHaveLength(1);
+        expect(wrapper.find('.rss')).toHaveLength(1);
       });
 
       it('should have a RSS url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('#rss').prop('href'))).toEqual('somersslink');
+        expect((wrapper.find('.rss').prop('href'))).toEqual('somersslink');
       });
     });
 
@@ -185,7 +185,7 @@ describe('the full author bio block', () => {
       it('should not render a twitter icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#twitter')).toHaveLength(0);
+        expect(wrapper.find('.twitter')).toHaveLength(0);
       });
     });
 
@@ -193,7 +193,7 @@ describe('the full author bio block', () => {
       it('should not render an instagram icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#instagram')).toHaveLength(0);
+        expect(wrapper.find('.instagram')).toHaveLength(0);
       });
     });
 
@@ -201,7 +201,7 @@ describe('the full author bio block', () => {
       it('should not render a facebook icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#facebook')).toHaveLength(0);
+        expect(wrapper.find('.facebook')).toHaveLength(0);
       });
     });
 
@@ -209,7 +209,7 @@ describe('the full author bio block', () => {
       it('should not render an email icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#email')).toHaveLength(0);
+        expect(wrapper.find('.email')).toHaveLength(0);
       });
     });
 
@@ -217,7 +217,7 @@ describe('the full author bio block', () => {
       it('should not render a RSS icon', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect(wrapper.find('#rss')).toHaveLength(0);
+        expect(wrapper.find('.rss')).toHaveLength(0);
       });
     });
   });

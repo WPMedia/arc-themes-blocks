@@ -29,13 +29,13 @@ footer {
   }
 
   #copyright-top {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: 50rem){
       display: none;
     }
   }
 
   #copyright-bottom {
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: 50rem){
       display: none;
     }
   }

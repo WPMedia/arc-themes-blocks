@@ -53,34 +53,67 @@ describe('overline feature for default output type', () => {
     })
   })
 
-  describe('when label content from globalContent is present and set to display', () => {
-    beforeEach(() => {
-      const labelObj = {
-        label: { basic: { display: true, text: 'EXCLUSIVE', url: '/exclusive' } }
-      }
-      const contextObjWithLabel = Object.assign(
-        {},
-        mockContextObj,
-        {
-          globalContent: {
-            ...labelObj,
-            ...mockContextObj.globalContent
-          }
+  describe('when label content from globalContent is present', () => {
+    describe('when label.basic.display is true', () => {
+      beforeEach(() => {
+        const labelObj = {
+          label: { basic: { display: true, text: 'EXCLUSIVE', url: '/exclusive' } }
         }
-      )
-      useFusionContext.mockImplementation(() => contextObjWithLabel)
+        const contextObjWithLabel = Object.assign(
+          {},
+          mockContextObj,
+          {
+            globalContent: {
+              ...labelObj,
+              ...mockContextObj.globalContent
+            }
+          }
+        )
+        useFusionContext.mockImplementation(() => contextObjWithLabel)
+      })
+
+      it('should display the label name instead of the website section name', () => {
+        const wrapper = shallow(<Overline />)
+
+        expect(wrapper.text()).toMatch('EXCLUSIVE')
+      })
+
+      it('should render the href of the label instead of the website section', () => {
+        const wrapper = shallow(<Overline />)
+
+        expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive')
+      })
     })
 
-    it('should display the label name instead of the website section name', () => {
-      const wrapper = shallow(<Overline />)
+    describe('when label.basic.display is NOT true', () => {
+      beforeEach(() => {
+        const labelObj = {
+          label: { basic: { display: false, text: 'EXCLUSIVE', url: '/exclusive' } }
+        }
+        const contextObjWithLabel = Object.assign(
+          {},
+          mockContextObj,
+          {
+            globalContent: {
+              ...labelObj,
+              ...mockContextObj.globalContent
+            }
+          }
+        )
+        useFusionContext.mockImplementation(() => contextObjWithLabel)
+      })
 
-      expect(wrapper.text()).toMatch('EXCLUSIVE')
-    })
+      it('should dangerously set the inner HTML to the website_section content', () => {
+        const wrapper = shallow(<Overline />)
 
-    it('should render the href of the label instead of the website section', () => {
-      const wrapper = shallow(<Overline />)
+        expect(wrapper.text()).toMatch('News')
+      })
 
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive')
+      it('should have the href of the website_section _id', () => {
+        const wrapper = shallow(<Overline />)
+
+        expect(wrapper.at(0).prop('href')).toStrictEqual('/news')
+      })
     })
   })
 

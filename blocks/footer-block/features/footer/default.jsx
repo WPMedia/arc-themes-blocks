@@ -19,7 +19,7 @@ const Footer = () => {
   const { arcSite } = useFusionContext();
 
   const content = useContent({
-    source: 'site-navigation',
+    source: 'site-service-hierarchy',
     query: {
       site: arcSite,
       hierarchy: 'footer',

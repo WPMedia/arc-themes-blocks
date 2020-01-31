@@ -231,13 +231,13 @@ to follow:
 
 Your .env file should look something like this:
 
-	FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
-	THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
-	CONTENT_BASE=[get from dev]
-	CONTEXT_PATH=pf
-	DEFAULT_ARC_SITE=the-sun
-	resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
-	resizerKey=[get the key from a dev]
+        FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
+        THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
+        CONTENT_BASE=[get from dev]
+        CONTEXT_PATH=pf
+        DEFAULT_ARC_SITE=the-sun
+        resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
+        resizerKey=[get the key from a dev]
 
 **FUSION\_REPO** should point to your local repo of fusion-news-theme and
 the **THEMES\_BLOCKS\_REPO** should point to the /blocks directory of your
@@ -249,15 +249,15 @@ local fusion-news-theme-blocks repo.
     extend the .env file to look like this:
 
 
-    FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
-    THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
-    THEMES_ENGINE_SDK_REPO=/Users/millerb/work/engine-theme-sdk
-    THEMES_ENGINE_SDK_NAME=@arc-test-org/engine-theme-sdk
-    CONTENT_BASE=[get from dev]
-    CONTEXT_PATH=pf
-    DEFAULT_ARC_SITE=the-sun
-    resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
-    resizerKey=[get the key from a dev]
+        FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
+        THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
+        THEMES_ENGINE_SDK_REPO=/Users/millerb/work/engine-theme-sdk
+        THEMES_ENGINE_SDK_NAME=@arc-test-org/engine-theme-sdk
+        CONTENT_BASE=[get from dev]
+        CONTEXT_PATH=pf
+        DEFAULT_ARC_SITE=the-sun
+        resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
+        resizerKey=[get the key from a dev]
 
 **THEMES\_ENGINE\_SDK\_REPO** should point to your local repo of
 engine-theme-sdk and **THEMES\_ENGINE\_SDK\_NAME** is the NPM package name

@@ -210,8 +210,38 @@ then follow these procedures:
 file that gives you access to the private NPM repo. Reach out to a team
 member to get this.
 
+##Developing Custom Blocks for use with Themes
+In addition to using platform-built and maintained Arc Blocks to construct your site in 
+PageBuilder, you can also build Custom Blocks that are custom to your website. 
+The process is similar to developing features on Fusion – 
+you'll build components in the components directory 
+(https://staging.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/intro.md?version=2.4). 
+However, you can utilize the Theme CSS and SDK components within your Custom Block, 
+so that it has the same look-and-feel as the rest of the Theme website.
+
+* To leverage the CSS Framework, you do not need to do anything.  Fusion will automatically inject
+it into your source files when `cssImport`, `cssFramework` and `sassVariableOverrides` (as they should be) are defined
+in your `blocks.json` file
+
+* To leverage the components in `engine-theme-sdk`, simply add `@arc-test-org/engine-theme-sdk` 
+as a dependency in `packages.json` and import in your files like any other 3rd party package. 
+
+* If you plan on creating a custom default output-type, you must remove `@arc-test-org/default-output-block` 
+from the blocks list in `blocks.json` to prevent a Fusion error because of the name collision.
+
+* When developing locally and you want to run your feature pack, please see the next section.
+
 ## Local Development Process
 
+### Basic Local Development
+
+If you are only creating custom components for a specific client and/or only using published
+packages of `@arc-test-org/engine-theme-sdk`, `@arc-test-org/fusion-news-theme-blocks`, and 
+`@arc-test-org/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
+If however your are actively developing for engine-theme-sdk, fusion-news-theme-blocks and 
+news-theme-css, see the next section for a more advanced options.
+
+### Advanced Local Development
 
 There are 4 main repos that are actively being developed on and three of
 them are NPM packages. As you can imagine, a proper local dev
@@ -219,9 +249,31 @@ environment is paramount. We certainly don't want to have to publish an
 untested, incomplete block in fusion-news-theme-blocks just to see how
 it looks and behaves on Fusion! We are currently wrapping up development
 on providing npm link functionality for themes through the Fusion CLI.
-We anticpate this to be ready by the time your are ready for
-development. If however, it is not, we have a current solution for you
-to follow:
+We anticipate this to be ready by the time your are ready for
+development. Below are the instructions for setting this up. If however, this feature is not 
+working at the time you read this or not meeting your needs for a specific issue,
+please see the next classic dev environment.
+
+#### NPM Link Local Development Instructions
+1) Add `FUSION_RELEASE=2.4.1-localDevTest.39` (or whatever the version of fusion this will be included in) and 
+`THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` 
+on the bundle so everything installs properly as well
+
+2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@arc-test-org/engine-theme-sdk"`, `"cssFramework": "@arc-test-org/news-theme-css"` 
+are in blocks.json.
+
+3) At the root of the bundle, `run sudo npm run link:blocks` (sudo is required because npm link needs write access). 
+This will batch link all of the listed blocks in blocks.json into the bundle
+
+4) After linking is done, `run npx fusion start-theme` at the root of the bundle
+
+5) Fusion will start up the bundle as normal. Once it fully boots up and the local editor is loaded, go to the blocks 
+and make a change and save, and observe that the change is reflected on the local editor.
+
+Note: It also looks like the webpack watch now requires more CPUs (in testing with Jason Young, who went from 2 - 4 
+CPUs) - otherwise the real-time webpack watch might not work.
+
+#### Classic Local Development Instructions
 
 1)  Clone the Fusion repo:` git clone git@github.com:WPMedia/fusion.git`
 
@@ -266,3 +318,6 @@ so Fusion will now to exclude it from the npm install procedures.
 
 6)  Then run this command to start Fusion: `npm run
     start:admin:theme-and-engine-dev`
+    
+7) The major disadvantage of the classic development environment is that every change in either `fusion-news-theme-blocks`
+or `engine-theme-sdk` will require you stop and restart Fusion.

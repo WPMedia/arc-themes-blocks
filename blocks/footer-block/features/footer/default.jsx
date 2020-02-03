@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -15,15 +16,17 @@ const FooterSection = styled.ul`
   font-family: ${props => props.primaryFont};
 `;
 
-const Footer = () => {
+const Footer = ({ customFields: { navigationConfig } }) => {
   const { arcSite } = useFusionContext();
 
   const content = useContent({
-    source: 'site-service-hierarchy',
-    query: {
-      site: arcSite,
-      hierarchy: 'footer',
-    },
+    source: navigationConfig.contentService,
+    query: Object.assign(
+      {
+        hierarchy: 'footer',
+      },
+      navigationConfig.contentConfigValues,
+    ),
   });
 
   const footerColumns = (content && content.children) ? content.children : [];
@@ -136,6 +139,12 @@ const Footer = () => {
       </div>
     </div>
   );
+};
+
+Footer.propTypes = {
+  customFields: PropTypes.shape({
+    navigationConfig: PropTypes.contentConfig('navigation-hierarchy'),
+  }),
 };
 
 Footer.label = 'Footer – Arc Block';

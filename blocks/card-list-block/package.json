@@ -1,0 +1,29 @@
+{
+  "name": "@arc-test-org/card-list-block",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "beltrancaliz <beltran@payble.net>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "license": "ISC",
+  "main": "lib/card-list-block.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  }
+}

@@ -10,6 +10,7 @@ import EmbedContainer from 'react-oembed-container';
 const Oembed = ({ element, content, isAmp, isLeadArt, metaValue }) => {
   // Need to put this in a function outside return so we can do switching logic
   const output = () => {
+    /* istanbul ignore if  */
     if(isAmp){
       switch (element.subtype) {
         case 'tweet':
@@ -28,15 +29,22 @@ justify_center`}>
             </div>
           )
         case 'instagram':
-          return (
-            <amp-instagram
-              data-shortcode={shortCode}
-              data-captioned
-              layout='responsive'
-              width='1'
-              height='1'
-            />
-          );
+          const instaRegex = /(https?:\/\/(www\.)?)?instagram\.com\/p\/(\w*([-'])?(\w*)?)/;
+          const instaId =
+          element.raw_oembed && element.raw_oembed.html && element.raw_oembed.html.match(instaRegex);
+          if (instaId && instaId[3]) {
+            return (
+              <amp-instagram
+                data-shortcode={instaId[3]}
+                data-captioned
+                width='1'
+                height='1'
+                layout='responsive'
+              />
+            );
+          }
+          return null;
+
         case 'youtube':
           const decodedURL = element.raw_oembed._id.replace('%3D', '=');
           const videoID = decodedURL.split('v=')[1];
@@ -87,7 +95,6 @@ justify_center`}>
   const marginClasses = !isLeadArt && !isAmp ? 'margin_top_md margin_bottom_md' : '';
   const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses}`;
   const outputElement = output();
-
   if (typeof outputElement === 'string') {
     return <div className={cssClasses} dangerouslySetInnerHTML={{ __html: outputElement }} />
   }

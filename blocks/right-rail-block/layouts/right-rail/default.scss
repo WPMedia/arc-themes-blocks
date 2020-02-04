@@ -47,9 +47,6 @@ html, body {
 
   .right-article-section {
     padding: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      padding: 0 0 0 map-get($spacers, 'lg');
-    }
   }
 
   .section-padding{

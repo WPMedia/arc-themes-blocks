@@ -29,15 +29,16 @@ footer {
   }
 
   #copyright-top {
-    @media screen and (max-width: 50rem){
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
       display: none;
     }
   }
 
   #copyright-bottom {
-    @media screen and (min-width: 50rem){
-      display: none;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: block;
     }
+    display: none;
   }
 
   .primaryLogo {

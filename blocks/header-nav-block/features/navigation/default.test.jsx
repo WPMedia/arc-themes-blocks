@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
 import Navigation from './default';
 
@@ -18,32 +18,30 @@ describe('the header navigation feature for the default output type', () => {
   });
 
   it('should contain two buttons', () => {
-    const wrapper = mount(<Navigation />);
+    const wrapper = shallow(<Navigation />);
 
-    expect(wrapper.find('button')).toHaveLength(3);
+    expect(wrapper.find('button')).toHaveLength(2);
   });
 
   it('should contain a logo image', () => {
-    const wrapper = mount(<Navigation />);
+    const wrapper = shallow(<Navigation />);
 
-    expect(wrapper.find('div > img')).toHaveLength(1);
+    expect(wrapper.find('div.logo > ArcLogo')).toHaveLength(1);
   });
 
   describe('the search button', () => {
-    it('should have an image that imports the search icon', () => {
+    it('should use the SearchIcon component', () => {
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('button.nav-search > img')).toHaveProp('src', 'search.svg');
+      expect(wrapper.find('button.nav-search > SearchIcon')).toHaveLength(1);
     });
 
-    it('should have the default alt text', () => {
+    it('should have the correct fill', () => {
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('button.nav-search > img')).toHaveProp('alt', 'Navigation bar search');
+      expect(wrapper.find('button.nav-search > SearchIcon')).toHaveProp('fill', 'white');
     });
   });
-
-
 
   describe('the navigation bar image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
@@ -53,32 +51,33 @@ describe('the header navigation feature for the default output type', () => {
 
         expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
       });
+
+
+      describe('when the theme manifest provides alt text', () => {
+        it('should make the alt text of the logo the provided text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg', primaryLogoAlt: 'my alt text' }));
+          const wrapper = mount(<Navigation />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+        });
+      });
+
+      describe('when the theme manifest does not provide alt text', () => {
+        it('should make the alt text of the logo the default text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+          const wrapper = mount(<Navigation />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'Navigation bar logo');
+        });
+      });
     });
 
     describe('when the theme does not provide a logo url', () => {
       it('should make the src of the logo the placeholder image', () => {
         getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(<Navigation />);
+        const wrapper = shallow(<Navigation />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
-      });
-    });
-
-    describe('when the theme manifest provides alt text', () => {
-      it('should make the alt text of the logo the provided text', () => {
-        getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
-        const wrapper = mount(<Navigation />);
-
-        expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
-      });
-    });
-
-    describe('when the theme manifest does not provide alt text', () => {
-      it('should make the alt text of the logo the default text', () => {
-        getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(<Navigation />);
-
-        expect(wrapper.find('div > img')).toHaveProp('alt', 'Navigation bar logo');
+        expect(wrapper.find('div.logo > ArcLogo')).toHaveLength(1);
       });
     });
   });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import getProperties from 'fusion:properties';
+import { useContent } from 'fusion:content';
 import Footer from './default';
 
 // A payload with 4 columns and 11 column items
@@ -112,9 +113,8 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
-
   it('should have 4 column headers', () => {
-    const wrapper = mount(<Footer />);
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (mockPayload)),
@@ -124,7 +124,7 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have 11 column items', () => {
-    const wrapper = mount(<Footer />);
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (mockPayload)),
@@ -134,7 +134,7 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column when empty payload is given', () => {
-    const wrapper = shallow(<Footer />);
+    const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({})),
@@ -144,7 +144,7 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column without error when undefined payload is given', () => {
-    const wrapper = shallow(<Footer />);
+    const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (undefined)),
@@ -153,41 +153,66 @@ describe('the footer feature for the default output type', () => {
     expect(wrapper.find('footer > ul')).toHaveLength(0);
   });
 
+  describe('the content source configuration', () => {
+    it('should have a default set of query values', () => {
+      shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: {} } }} />);
+
+      expect(useContent).toHaveBeenCalledWith({
+        query: {
+          hierarchy: 'footer',
+        },
+        source: 'footer-service',
+      });
+    });
+
+    it('should overwrite those values with configured values', () => {
+      shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: { hierarchy: 'not-a-footer', extraval: 11111 } } }} />);
+
+      expect(useContent).toHaveBeenCalledWith({
+        query: {
+          hierarchy: 'not-a-footer',
+          extraval: 11111,
+        },
+        source: 'footer-service',
+      });
+    });
+  });
+
   describe('the footer image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
       it('should make the src of the logo the provided image', () => {
         getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
+      });
+
+      describe('when the theme manifest provides alt text', () => {
+        it('should make the alt text of the logo the provided text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg', primaryLogoAlt: 'my alt text' }));
+          const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+        });
+      });
+
+      describe('when the theme manifest does not provide alt text', () => {
+        it('should make the alt text of the logo the default text', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+          const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+        });
       });
     });
 
     describe('when the theme does not provide a logo url', () => {
       it('should make the src of the logo the placeholder image', () => {
         getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
+        expect(wrapper.find('div.primaryLogo > ArcLogo')).toHaveLength(1);
       });
-    });
-  });
-
-  describe('when the theme manifest provides alt text', () => {
-    it('should make the alt text of the logo the provided text', () => {
-      getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
-      const wrapper = mount(<Footer />);
-
-      expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
-    });
-  });
-
-  describe('when the theme manifest does not provide alt text', () => {
-    it('should make the alt text of the logo the default text', () => {
-      getProperties.mockImplementation(() => ({}));
-      const wrapper = mount(<Footer />);
-
-      expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
     });
   });
 
@@ -195,7 +220,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is provided', () => {
       it('should show copyright text', () => {
         getProperties.mockImplementation(() => ({ copyrightText: 'my copyright text' }));
-        const wrapper = shallow(<Footer />);
+        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('my copyright text');
       });
@@ -204,7 +229,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is not provided', () => {
       it('should not show copyright text', () => {
         getProperties.mockImplementation(() => ({ }));
-        const wrapper = shallow(<Footer />);
+        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('');
       });
@@ -215,14 +240,14 @@ describe('the footer feature for the default output type', () => {
     describe('when a facebook page is provided', () => {
       it('should show a facebook button', () => {
         getProperties.mockImplementation(() => ({ facebookPage: 'thesun' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(1);
       });
 
       it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find({ title: 'Facebook page' }).prop('href'))).toEqual('thesun');
       });
@@ -231,7 +256,7 @@ describe('the footer feature for the default output type', () => {
     describe('when a facebook page is not provided', () => {
       it('should not show a facebook button', () => {
         getProperties.mockImplementation(() => ({ facebookPage: '' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(0);
       });
@@ -240,14 +265,14 @@ describe('the footer feature for the default output type', () => {
     describe('when a twitter username is provided', () => {
       it('should show a twitter button', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: 'thesun' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(1);
       });
 
       it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find({ title: 'Twitter feed' }).prop('href'))).toEqual('thesun');
       });
@@ -256,7 +281,7 @@ describe('the footer feature for the default output type', () => {
     describe('when a twitter username is not provided', () => {
       it('should not show a twitter button', () => {
         getProperties.mockImplementation(() => ({ twitterUsername: '' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(0);
       });
@@ -265,14 +290,14 @@ describe('the footer feature for the default output type', () => {
     describe('when a rss link is provided', () => {
       it('should show a rss button', () => {
         getProperties.mockImplementation(() => ({ rssUrl: 'thesun' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(1);
       });
 
       it('should have a href prop with the proper url', () => {
         window.open = jest.fn();
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find({ title: 'RSS feed' }).prop('href'))).toEqual('thesun');
       });
@@ -281,7 +306,7 @@ describe('the footer feature for the default output type', () => {
     describe('when a rss link is not provided', () => {
       it('should not show a rss button', () => {
         getProperties.mockImplementation(() => ({ rssUrl: '' }));
-        const wrapper = mount(<Footer />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(0);
       });

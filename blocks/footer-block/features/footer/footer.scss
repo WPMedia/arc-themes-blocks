@@ -12,10 +12,12 @@ footer {
   }
 
   .section-separator {
-    border-bottom: 1px solid #babdc2
+    border-top: 1px solid #babdc2;
+    border-bottom: 1px solid #babdc2;
   }
 
   .copyright {
+    vertical-align: middle;
     font-family: $theme-primary-font-family;
     text-align: center;
     font-size: calculateRem(14px);
@@ -27,13 +29,13 @@ footer {
   }
 
   #copyright-top {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: 50rem){
       display: none;
     }
   }
 
   #copyright-bottom {
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+    @media screen and (min-width: 50rem){
       display: none;
     }
   }
@@ -54,6 +56,7 @@ footer {
       text-align: center;
       width: 100%
     }
+    vertical-align: middle;
     display: inline-block;
     width: 16.6%;
   }
@@ -75,6 +78,7 @@ footer {
     justify-content: space-between;
     border-radius: calculateRem(5px);
     border: 1px solid $primary-color;
+    margin-left: -(map-get($spacers, 'xs'));
     > a {
       align-self: center;
       display: inline-block;

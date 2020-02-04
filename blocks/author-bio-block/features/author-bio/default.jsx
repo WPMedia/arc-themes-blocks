@@ -2,12 +2,14 @@ import React, { Fragment } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import {
+  Image,
+  EnvelopeIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  TwitterIcon,
+} from '@arc-test-org/engine-theme-sdk';
 
-import Envelope from './images/envelope';
-import Instagram from './images/instagram';
-import LinkedIn from './images/linkedin';
-import Twitter from './images/twitter';
 import './author-bio.scss';
 
 /*
@@ -49,28 +51,28 @@ const AuthorBio = () => {
               case 'linkedin':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <LinkedIn fill={getThemeStyle(arcSite)['primary-color']} title="LinkedIn" desc="Connect on LinkedIn" />
+                    <LinkedInIcon fill={getThemeStyle(arcSite)['primary-color']} title="LinkedIn" description="Connect on LinkedIn" />
                   </a>
                 );
                 break;
               case 'twitter':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Twitter fill={getThemeStyle(arcSite)['primary-color']} title="Twitter" desc="Connect on Twitter" />
+                    <TwitterIcon fill={getThemeStyle(arcSite)['primary-color']} title="Twitter" description="Connect on Twitter" />
                   </a>
                 );
                 break;
               case 'instagram':
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Instagram fill={getThemeStyle(arcSite)['primary-color']} title="Instagram" desc="Connect on Instagram" />
+                    <InstagramIcon fill={getThemeStyle(arcSite)['primary-color']} title="Instagram" description="Connect on Instagram" />
                   </a>
                 );
                 break;
               default:
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
-                    <Envelope fill={getThemeStyle(arcSite)['primary-color']} title="Email" desc="Send an email" />
+                    <EnvelopeIcon fill={getThemeStyle(arcSite)['primary-color']} title="Email" description="Send an email" />
                   </a>
                 );
             }

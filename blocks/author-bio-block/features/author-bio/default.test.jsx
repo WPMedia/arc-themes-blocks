@@ -4,6 +4,10 @@ const { shallow, mount } = require('enzyme');
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   Image: () => <div />,
+  EnvelopeIcon: () => <svg />,
+  LinkedInIcon: () => <svg />,
+  InstagramIcon: () => <svg />,
+  TwitterIcon: () => <svg />,
 }));
 
 describe('Given the list of author(s) from the article', () => {

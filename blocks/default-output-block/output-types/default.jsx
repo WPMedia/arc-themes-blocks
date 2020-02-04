@@ -62,14 +62,19 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName } = getProperties(arcSite);
+  const { websiteName, twitterSite } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
-  let metaDataTags = null;
+  let storyMetaDataTags = null;
+  let tagMetaDataTags = null;
+  let twitterTags = null;
 
   const metaData = {
     'page-type': pageType,
     title: websiteName,
     ogTitle: websiteName,
+    ogSiteName: websiteName,
+    twitterSite: twitterSite ? `@${twitterSite}` : null,
+    twitterCard: 'summary_large_image',
   };
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
@@ -105,7 +110,7 @@ const SampleOutputType = ({
         metaData.keywords = null;
       }
 
-      metaDataTags = (
+      storyMetaDataTags = (
         <>
           { metaData.description
             && <meta name="description" content={metaData.description} />
@@ -128,7 +133,41 @@ const SampleOutputType = ({
         </>
       );
     }
+  } else if (pageType === 'tag') {
+    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
+    metaData.description = metaValue('description') || payload.description || null;
+    metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    if (metaData.ogTitle === '') {
+      metaData.title = websiteName;
+      metaData.ogTitle = websiteName;
+    } else {
+      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
+      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    tagMetaDataTags = (
+      <>
+        { metaData.description
+        && <meta name="description" content={metaData.description} />
+        }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
   }
+  // Twitter meta tags go on all pages
+  twitterTags = (
+    <>
+      { metaData.ogSiteName
+      && <meta property="og:site_name" content={metaData.ogSiteName} />
+      }
+      { metaData.twitterSite
+      && <meta property="twitter:site" content={metaData.twitterSite} />
+      }
+      { metaData.twitterCard
+      && <meta property="twitter:card" content={metaData.twitterCard} />
+      }
+    </>
+  );
 
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
   const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
@@ -138,8 +177,10 @@ const SampleOutputType = ({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{metaData.title}</title>
-        {metaDataTags}
+        {storyMetaDataTags}
+        {tagMetaDataTags}
         {customMetaTags}
+        {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
         {
           /** polyfill.io has browser detection and will not load the feature

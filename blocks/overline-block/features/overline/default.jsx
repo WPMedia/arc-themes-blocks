@@ -10,36 +10,38 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-function _get (obj, ...args) {
-  return args.reduce((obj, level) => obj && obj[level], obj)
-}
-
 const Overline = () => {
-  const { globalContent: content, arcSite } = useFusionContext();
+  const { globalContent: content = {}, arcSite } = useFusionContext();
 
-  const shouldUseLabel = !!_get(content, 'label', 'basic', 'display')
+  const {
+    display: labelDisplay,
+    url: labelUrl,
+    text: labelText,
+  } = (content.label && content.label.basic) || {};
+  const shouldUseLabel = !!(labelDisplay);
 
-  const labelText = _get(content, 'label', 'basic', 'text')
-  const labelUrl = _get(content, 'label', 'basic', 'url')
+  const {
+    _id: sectionUrl,
+    name: sectionText,
+  } = (content.websites
+    && content.websites[arcSite]
+    && content.websites[arcSite].website_section) || {};
 
-  const sectionText = _get(content, 'websites', arcSite, 'website_section', 'name')
-  const sectionUrl = _get(content, 'websites', arcSite, 'website_section', '_id')
-
-  const [text, url] = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl]
+  const [text, url] = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
 
   return text
     ? (
       <StyledLink
         href={url}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className='overline'
+        className="overline"
       >
         {text}
       </StyledLink>
     )
-    : null
-}
+    : null;
+};
 
-Overline.label = 'Overline – Arc Block'
+Overline.label = 'Overline – Arc Block';
 
-export default Overline
+export default Overline;

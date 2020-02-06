@@ -11,9 +11,9 @@
 }
 
 .author-image {
-  max-height: 169px;
+  max-height: 180px;
   width: auto;
-  border-radius: 100px;
+  border-radius: 100%;
 }
 
 .author-content {
@@ -38,49 +38,73 @@
 
 .social-container {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')){
-    padding: calculateRem(7px) 0 calculateRem(7px) 0;
+    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
     text-align: center;
+    justify-content: flex-start;
   }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   text-align: center;
   margin-top: map-get($spacers, 'xs');
-  padding: calculateRem(18px) 0 calculateRem(16px) 0;
+  padding: map-get($spacers, 'md') 0 map-get($spacers, 'md') 0;
   border-top: 1px $ui-medium-light-secondary-color solid;
   border-bottom: 1px $ui-medium-light-secondary-color solid;
 }
 
 .social-items {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')){
-    width: 100%;
-    display: block;
+    justify-content: center;
   }
-  width: 50%;
+  flex: 1 0 200px;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .social-column {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')){
-    margin-right: map-get($spacers, 'lg');
+    margin: 0 map-get($spacers, 'xs');
   }
-  @media screen and (max-width: 40rem){
-    margin-right: map-get($spacers, 'md');
-  }
-  display: inline-block;
-  font-size: calculateRem(16px);
-  margin-right: map-get($spacers, 'xl');
-}
+  flex: 0 0 40px;
+  height: 40px;
+  margin: 0 0 0 map-get($spacers, 'xs');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-.connect-top {
-  @media screen and (min-width: 50rem){
-    display: none;
-  }
-  margin-right: 0;
-  margin-bottom: calculateRem(13px);
-}
+  svg {
+    display: block;
+    width: 24px;
+    height: auto;
+    margin: 0 auto;
 
-.connect-bottom {
-  @media screen and (max-width: 50rem){
-    > b {
-      display: none;
+    path {
+      fill: rgba($ui-medium-primary-color,1);
+      transition: all 0.2s ease-in-out;
     }
   }
+
+  &:hover {
+    svg {
+
+      path {
+        fill: rgba($ui-medium-primary-color,0.8);
+      }
+    }
+  }
+}
+
+.connect-label {
+  @media screen and (max-width: map-get($grid-breakpoints, 'lg')){
+    flex: 0 0 100%;
+    text-align: center;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 0 200px;
+  text-align: left;
 }

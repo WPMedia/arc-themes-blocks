@@ -107,13 +107,10 @@ const FullAuthorBio = () => {
         </div>
 
         <div className="social-container">
-          <p className="social-column connect-top">
-            <b>Connect</b>
+          <p className="connect-label">
+            <strong>Connect</strong>
           </p>
           <div className="social-items">
-            <p className="social-column connect-bottom">
-              <b>Connect</b>
-            </p>
             {
               socials.map(item => (
                 <a

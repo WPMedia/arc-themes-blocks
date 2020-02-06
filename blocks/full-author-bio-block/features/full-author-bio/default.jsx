@@ -20,7 +20,7 @@ const StyledAuthorContent = styled.div`
     font-family: ${props => props.primaryFont};
   }
   .author-bio {
-    font-family: ${props => props.primaryFont};
+    font-family: ${props => props.secondaryFont};
   }
 `;
 
@@ -83,6 +83,7 @@ const FullAuthorBio = () => {
           <StyledAuthorContent
             className="author-content"
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}
           >
             {

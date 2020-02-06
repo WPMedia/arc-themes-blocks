@@ -25,11 +25,11 @@ const StyledAuthorContent = styled.div`
 `;
 
 const logos = {
-  email: <EnvelopeIcon fill="$ui-medium-primary-color" title="Email" description="Email" alt="email" />,
-  twitter: <TwitterIcon fill="$ui-medium-primary-color" title="Follow on Twitter" description="Twitter" alt="twitter" />,
-  facebook: <FacebookIcon fill="$ui-medium-primary-color" title="Connect on Facebook" description="Facebook" alt="facebook" />,
-  instagram: <InstagramIcon fill="$ui-medium-primary-color" title="Follow on Instagram" description="Instagram" alt="instagram" />,
-  rss: <RssIcon fill="$ui-medium-primary-color" title="Rss feed" description="Rss" alt="rss" />,
+  email: <EnvelopeIcon title="Email" description="Email" alt="email" />,
+  twitter: <TwitterIcon title="Follow on Twitter" description="Twitter" alt="twitter" />,
+  facebook: <FacebookIcon title="Connect on Facebook" description="Facebook" alt="facebook" />,
+  instagram: <InstagramIcon title="Follow on Instagram" description="Instagram" alt="instagram" />,
+  rss: <RssIcon title="Rss feed" description="Rss" alt="rss" />,
 };
 
 function constructUrl(type, field) {

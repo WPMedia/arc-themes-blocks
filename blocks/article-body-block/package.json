@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/article-body-block",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@arc-test-org/engine-theme-sdk": "^0.4.2",
-    "@arc-test-org/video-player-block": "^0.1.0",
+    "@arc-test-org/video-player-block": "^0.1.1",
     "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   },

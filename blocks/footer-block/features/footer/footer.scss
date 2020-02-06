@@ -35,9 +35,10 @@ footer {
   }
 
   #copyright-bottom {
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      display: none;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+      display: block;
     }
+    display: none;
   }
 
   .primaryLogo {

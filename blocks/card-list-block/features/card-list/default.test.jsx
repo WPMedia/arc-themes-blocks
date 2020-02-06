@@ -1,8 +1,12 @@
-/* eslint-disable prefer-arrow-callback */
 import React from 'react';
 import { shallow } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
-import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
+import mockData,
+{
+  oneListItem,
+  LineItemWithOutDescription,
+  withoutByline,
+} from './mock-data';
 
 const mockReturnData = mockData;
 
@@ -50,15 +54,15 @@ describe('The story-feed-list', () => {
         size: '1',
       },
       contentService: 'story-feed-query',
-
     };
     const title = 'Test Title';
     const customFields = { listContentConfig, title };
-
     const { default: CardList } = require('./default');
+
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
     const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+
     wrapper.setState({ cardList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.card-list-container').length).toEqual(1);
@@ -84,6 +88,10 @@ describe('The story-feed-list', () => {
       it('should render an anchor and an image with the correct url', () => {
         expect(wrapper.find('.list-item-simple').find('.list-anchor').at(0).find('a')
           .prop('href')).toEqual('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/arts/2019/12/18/article-with-a-youtube-embed-in-it/');
+      });
+
+      it('should render an anchor and an image with alt text', () => {
+        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('img').prop('alt')).toEqual('Article with a YouTube embed in it');
       });
 
       it('should render an overline', () => {
@@ -131,10 +139,11 @@ describe('The story-feed-list', () => {
     };
     const title = 'Test Title';
     const customFields = { listContentConfig, title };
-
     const { default: CardList } = require('./default');
+
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(LineItemWithOutDescription);
     const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+
     wrapper.setState({ cardList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -164,10 +173,11 @@ describe('The story-feed-list', () => {
       contentService: 'story-feed-query',
     };
     const customFields = { listContentConfig };
-
     const { default: CardList } = require('./default');
+
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
     const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+
     wrapper.setState({ cardList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {

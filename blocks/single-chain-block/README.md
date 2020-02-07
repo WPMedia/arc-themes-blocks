@@ -5,5 +5,5 @@ Fusion News Theme single-chain block
 ## Usage
 
 ```
-const articleBodyBlock = require('@arc-test-org/single-chain-block');
+const singleChainBlock = require('@arc-test-org/single-chain-block');
 ```

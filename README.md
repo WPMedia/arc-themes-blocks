@@ -149,7 +149,7 @@ Notes:
 * Both blocks and bundles repos should have a .npmrc file with the same token.
 
 1. On Fusion-News-Theme (bundles repo) we will pull from master, update `blocks.json` with our new block (f.e. "@arc-test-org/overline-block"), and commit to master with the change.
-2. Run `npx fusion zip` to generate the bundle zip file under /dist.
+2. Run `npx fusion zip` to generate the bundle zip file under /dist. (**Warning**: Make sure to set `useLocal: false` in the bundle repo's `bundle.json` before running `npx fusion zip`. Otherwise, you will see an error when you preview.)
 3. Once the zip file has be generated, go Pagebuilder Editor on [Core Components](https://corecomponents.arcpublishing.com).
 4. Under Pagebuilder editor go to Deployer and upload your zipped bundle with the name `blocks-$month-$day-$version`.
 5. There can only be four builds running concurrently, so we will need to select one of them and terminate it to leave room for your uploaded build. 

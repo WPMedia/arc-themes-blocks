@@ -1,8 +1,7 @@
-'use strict'
-import React from 'react'
+import React from 'react';
 
-const SingleChain = ({ children }) => <>{children}</>
+const SingleChain = ({ children }) => <>{children}</>;
 
-SingleChain.label = 'Single Chain – Arc Block'
+SingleChain.label = 'Single Chain – Arc Block';
 
-export default SingleChain
+export default SingleChain;

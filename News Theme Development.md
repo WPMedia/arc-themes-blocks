@@ -203,8 +203,8 @@ then follow these procedures:
     your branch on GitHub.
 3.  Request a PR review.
 4.  When the PR is approved, merge into master.
-5.  Next build using npx fusion zip and deploy to the core components
-    environment for testing.
+5.  Next build using `npx fusion zip` and deploy to the core components
+    environment for testing. (**Warning**: Make sure to set `useLocal: false` in the bundle repo's `bundle.json` before running `npx fusion zip`. Otherwise, you will see an error when you preview.)
 
 **Note:** When running or creating a build bundle, you will need a .npmrc
 file that gives you access to the private NPM repo. Reach out to a team

@@ -1,5 +1,5 @@
 .image-container {
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+  @media screen and (max-width: map-get($grid-breakpoints, 'lg')){
     text-align: center;
     float: none;
     width: 100%;

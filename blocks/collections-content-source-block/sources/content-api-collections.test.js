@@ -1,4 +1,4 @@
-import contentSource from './collections-api';
+import contentSource from './content-api-collections';
 
 describe('the collections content source block', () => {
   it('should use the proper param types', () => {

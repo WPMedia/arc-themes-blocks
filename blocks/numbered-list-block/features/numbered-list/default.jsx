@@ -23,7 +23,7 @@ class NumberedList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { resultList: {} };
+    this.state = {};
     this.fetchStories();
   }
 
@@ -43,12 +43,12 @@ class NumberedList extends Component {
     const {
       websiteDomain,
     } = getProperties(arcSite);
-    return (window && window.location.hostname === 'localhost')
+    return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
       ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
         {contentElements && contentElements.length && contentElements.map((element, i) => {

@@ -3,8 +3,13 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components",
-    "test": "jest",
+    "test": "jest --silent",
     "test:coverage": "jest --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:coverage"
+    }
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",

@@ -3,9 +3,18 @@
   .sm-promo-headline {
     font-size: calculateRem(14px);
     line-height: calculateRem(20px);
+    margin:0;
+    padding: 0;
+    color:$ui-primary-font-color;
+    font-weight: normal;
+    text-decoration: none;
   }
   img{
     max-width: 100%;
     height:auto;
+  }
+
+  .no-image-padding {
+    padding-bottom: map-get($spacers, 'xs');
   }
 }

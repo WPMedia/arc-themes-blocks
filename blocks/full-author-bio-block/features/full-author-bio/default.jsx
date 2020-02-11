@@ -20,16 +20,16 @@ const StyledAuthorContent = styled.div`
     font-family: ${props => props.primaryFont};
   }
   .author-bio {
-    font-family: ${props => props.primaryFont};
+    font-family: ${props => props.secondaryFont};
   }
 `;
 
 const logos = {
-  email: <EnvelopeIcon fill="$ui-medium-primary-color" title="Email" description="Email" alt="email" />,
-  twitter: <TwitterIcon fill="$ui-medium-primary-color" title="Follow on Twitter" description="Twitter" alt="twitter" />,
-  facebook: <FacebookIcon fill="$ui-medium-primary-color" title="Connect on Facebook" description="Facebook" alt="facebook" />,
-  instagram: <InstagramIcon fill="$ui-medium-primary-color" title="Follow on Instagram" description="Instagram" alt="instagram" />,
-  rss: <RssIcon fill="$ui-medium-primary-color" title="Rss feed" description="Rss" alt="rss" />,
+  email: <EnvelopeIcon title="Email" description="Email" alt="email" />,
+  twitter: <TwitterIcon title="Follow on Twitter" description="Twitter" alt="twitter" />,
+  facebook: <FacebookIcon title="Connect on Facebook" description="Facebook" alt="facebook" />,
+  instagram: <InstagramIcon title="Follow on Instagram" description="Instagram" alt="instagram" />,
+  rss: <RssIcon title="Rss feed" description="Rss" alt="rss" />,
 };
 
 function constructUrl(type, field) {
@@ -83,6 +83,7 @@ const FullAuthorBio = () => {
           <StyledAuthorContent
             className="author-content"
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}
           >
             {
@@ -106,13 +107,10 @@ const FullAuthorBio = () => {
         </div>
 
         <div className="social-container">
-          <p className="social-column connect-top">
-            <b>Connect</b>
+          <p className="connect-label">
+            <strong>Connect</strong>
           </p>
           <div className="social-items">
-            <p className="social-column connect-bottom">
-              <b>Connect</b>
-            </p>
             {
               socials.map(item => (
                 <a

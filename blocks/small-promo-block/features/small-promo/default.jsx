@@ -1,40 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useEditableContent } from 'fusion:content';
-import { useComponentContext } from 'fusion:context';
+import { useEditableContent, useContent } from 'fusion:content';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 import './small-promo.scss';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 
+const HeadlineText = styled.h1`
+  font-family: ${props => props.primaryFont};
+`;
 
-const SmallPromo = ({ customFields }) => {
-  // Receive global content
-  const { globalContent: content } = useComponentContext();
-
-  // Retrieve two functions from the useEditableContent hook
+const SmallPromo = ({ customFields, arcSite }) => {
   const { editableContent } = useEditableContent();
 
-  const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12';
+  const content = useContent({
+    source: customFields.itemContentConfig.contentService,
+    query: customFields.itemContentConfig.contentConfigValues,
+  }) || null;
 
-  return (
-    <div className="container-fluid small-promo">
+  const buildHref = (websiteUrl) => {
+    const {
+      websiteDomain,
+    } = getProperties(arcSite);
+    return `${websiteDomain}/${websiteUrl}`;
+  };
+
+  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+
+  const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
+
+  return content && (
+    <article className="container-fluid small-promo">
       <div className="row">
         {customFields.showHeadline
-          && (
+        && (
           <div className={headlineClass}>
-            <div className="sm-promo-headline" {...editableContent(content, 'headlines.basic')}>
-              {content && content.headlines ? content.headlines.basic : ''}
-            </div>
+            <a
+              href={buildHref(content.website_url)}
+              className="sm-promo-headline"
+              title={content && content.headlines ? content.headlines.basic : ''}
+            >
+              <HeadlineText
+                primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                className="sm-promo-headline"
+                {...editableContent(content, 'headlines.basic')}
+              >
+                {content && content.headlines ? content.headlines.basic : ''}
+              </HeadlineText>
+            </a>
           </div>
-          )
+        )
         }
         {customFields.showImage
         && (
           <div className="col-sm-xl-4">
-            <img src="https://loremflickr.com/300/200" alt="headline" />
+            <a
+              href={buildHref(content.website_url)}
+              title={content && content.headlines ? content.headlines.basic : ''}
+            >
+              <Image
+                url={customFields.imageOverrideURL
+                  ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                alt={content && content.headlines ? content.headlines.basic : ''}
+                smallWidth={800}
+                smallHeight={0}
+                mediumWidth={800}
+                mediumHeight={0}
+                largeWidth={800}
+                largeHeight={0}
+              />
+            </a>
           </div>
         )
         }
       </div>
-    </div>
+    </article>
   );
 };
 

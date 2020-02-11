@@ -255,7 +255,7 @@ working at the time you read this or not meeting your needs for a specific issue
 please see the next classic dev environment.
 
 #### NPM Link Local Development Instructions
-1) Add `FUSION_RELEASE=2.4.1-localDevTest.39` (or whatever the version of fusion this will be included in) and 
+1) Add `FUSION_RELEASE=2.4.1-localContentSupport.9` (or whatever the version of fusion this will be included in) and 
 `THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` 
 on the bundle so everything installs properly as well
 

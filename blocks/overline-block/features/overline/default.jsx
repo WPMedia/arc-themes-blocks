@@ -11,24 +11,35 @@ const StyledLink = styled.a`
 `;
 
 const Overline = () => {
-  const { globalContent: content, arcSite } = useFusionContext();
+  const { globalContent: content = {}, arcSite } = useFusionContext();
 
-  return (
-    !!(
-      content
-      && content.websites[arcSite].website_section
-      && content.websites[arcSite].website_section.name
-      && content.websites[arcSite].website_section._id
-    ) && (
+  const {
+    display: labelDisplay,
+    url: labelUrl,
+    text: labelText,
+  } = (content.label && content.label.basic) || {};
+  const shouldUseLabel = !!(labelDisplay);
+
+  const {
+    _id: sectionUrl,
+    name: sectionText,
+  } = (content.websites
+    && content.websites[arcSite]
+    && content.websites[arcSite].website_section) || {};
+
+  const [text, url] = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
+
+  return text
+    ? (
       <StyledLink
-        href={content.websites[arcSite].website_section._id}
+        href={url}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
       >
-        {content.websites[arcSite].website_section.name}
+        {text}
       </StyledLink>
     )
-  );
+    : null;
 };
 
 Overline.label = 'Overline – Arc Block';

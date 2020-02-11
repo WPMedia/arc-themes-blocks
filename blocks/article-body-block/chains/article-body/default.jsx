@@ -157,7 +157,7 @@ const ArticleBodyChain = ({ children }) => {
   // Get the current length of the article's content elements
   // This will be used as a check to make sure the placements don't go over the
   //  total number of elements.
-  const articleElementLength = items.content_elements.length;
+  const articleElementLength = items && items.content_elements && items.content_elements.length;
 
   const articleBody = [];
 
@@ -183,7 +183,7 @@ const ArticleBodyChain = ({ children }) => {
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
   const firstParagraph = contentElements.find(elements => elements.type === 'text');
-  if (!(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
+  if (firstParagraph && firstParagraph.content && !(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
     firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
   }
   contentElements.forEach((item, index) => {

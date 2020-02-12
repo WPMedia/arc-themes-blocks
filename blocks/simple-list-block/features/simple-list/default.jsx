@@ -4,12 +4,10 @@ import { useContent } from 'fusion:content';
 import './simple-list.scss';
 
 // components import start
-// todo: remove this image and import bc base img tag
-// import { Image } from '@arc-test-org/engine-theme-sdk';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-// components import end
 import getThemeStyle from 'fusion:themes';
+// components import end
 
 // helpers start
 const getContentConfig = (propsObject) => {

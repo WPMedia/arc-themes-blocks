@@ -1,13 +1,13 @@
 .list-container {
-  padding: 12px 0 16.7px 0;
+  padding: 0 0 map-get($spacers, 'md') 0;
 
   .list-title {
-    font-size: 20px;
+    font-size: calculateRem(20px);
     font-weight: bold;
-    line-height: 24px;
+    line-height: calculateRem(24px);
     color: $ui-dark-secondary-color;
   }
-  
+
   .list-item-simple {
     box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
     padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
@@ -17,10 +17,10 @@
 
     .headline-text {
       color: $ui-dark-secondary-color;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
       font-weight: normal;
-      margin: 16px 14px 18.2px 0;
+      margin: 16px 14px 16px 0;
     }
 
     .simple-list-image-container {
@@ -33,7 +33,7 @@
         object-fit: cover;
       }
       .simple-list-placeholder {
-        background-color: $ui-light-secondary-color;
+        background-color: #dfe4ea;
         width: 100%;
         height: auto;
         min-height: 72px;
@@ -42,11 +42,11 @@
 
     .simple-list-headline-anchor {
       flex: 3;
-      padding-left: 10px;
-  
+      padding-left: calculateRem(16px);
+
       .simple-list-headline-text {
-        font-size: 16px;
-        line-height: 24px;
+        font-size: calculateRem(16px);
+        line-height: calculateRem(24px);
         color: $ui-dark-secondary-color;
         font-weight: normal;
         overflow: hidden;
@@ -56,4 +56,3 @@
     }
   }
 }
-

@@ -1,10 +1,10 @@
 .simple-results-list-container {
-  padding: 12px 0 16.7px 0;
+  padding: calculateRem(16px) 0;
   .simple-list-title {
-    font-size: 20px;
+    font-size: calculateRem(20px);
     font-weight: bold;
-    line-height: 24px;
-    color: #191919;
+    line-height: calculateRem(24px);
+    color: $ui-dark-secondary-color;
   }
 
   .list-item-simple {
@@ -14,29 +14,31 @@
       text-decoration: none;
     }
 
+    .headline-description {
+      padding: calculateRem(16px) 0;
+    }
     .headline-text {
-      color: #191919;
-      font-size: 16px;
-      line-height: 24px;
+      color: $ui-dark-secondary-color;
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
       font-weight: normal;
-      margin: 16px 14px 18.2px 0;
     }
 
     .simple-list-image,
     .image-placeholder-sm {
       height: 74px;
       width: 108px;
-      margin: 16px 20px 17px 0;
+      padding: calculateRem(16px) 0;
     }
 
     .image-container {
       flex: 0 0 25%;
-      margin: 16px 20px 17px 0;
-      height: 74px;
+      padding: calculateRem(16px) calculateRem(20px) calculateRem(16px) 0;
+      
       .image-placeholder-sm,
       img {
         width: 100%;
-        height: 100%;
+        height: auto;
       }
     }
   }

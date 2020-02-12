@@ -6,9 +6,12 @@ const params = {
 };
 
 const resolve = (key = {}) => {
-  const site = key['arc-site'];
   const {
-    _id, content_alias: contentAlias, from, size,
+    'arc-site': site,
+    _id,
+    content_alias: contentAlias,
+    from,
+    size,
   } = key;
   return `content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${size}` : ''}&published=true`;
 };

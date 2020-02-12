@@ -1,5 +1,5 @@
 .simple-results-list-container {
-  padding: calculateRem(16px) 0;
+  padding: 0 0 calculateRem(16px) 0;
   .simple-list-title {
     font-size: calculateRem(20px);
     font-weight: bold;
@@ -32,9 +32,9 @@
     }
 
     .image-container {
-      flex: 0 0 25%;
+      flex: 0 0 30%;
       padding: calculateRem(16px) calculateRem(20px) calculateRem(16px) 0;
-      
+
       .image-placeholder-sm,
       img {
         width: 100%;

@@ -11,62 +11,36 @@ const StyledTitle = styled.h1`
 
 const StyledLink = styled.a`
   font-family: ${props => props.primaryFont};
-  text-decoration: none
+  text-decoration: none;
 `;
 
 const SectionTitle = () => {
-  const { globalContent: content = {}, arcSite } = useFusionContext();
-  const title = 'Section Title';
-  const children = [
-    {
-      id: 1,
-      url: 'url',
-      name: 'Subsection',
-    },
-    {
-      id: 2,
-      url: 'url',
-      name: 'Subsection',
-    },
-    {
-      id: 3,
-      url: 'url',
-      name: 'Subsection',
-    },
-  ];
-  // const {
-  //   titles: title,
-  //   children: links,
-  // } = (content.websites
-  //   && content.websites[arcSite]
-  //   && content.websites[arcSite].website_section) || {};
+  const { globalContent: content, arcSite } = useFusionContext();
 
-  return title
-    ? (
-      <>
-        <StyledTitle
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="section-title"
-        >
-          {title}
-        </StyledTitle>
-        <div className="section-container">
-          {
-            children && (children.map(tag => (
-              <StyledLink
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                className="section-tag"
-                href={tag.url}
-                key={tag.id}
-              >
-                {"Sub-section\t•  "}
-              </StyledLink>
-            )))
-          }
-        </div>
-      </>
-    )
-    : null;
+  return content && content.name && (
+    <>
+      <StyledTitle
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        className="section-title"
+      >
+        {content.name}
+      </StyledTitle>
+      <div className="section-container">
+        {
+           content.children && content.children.length > 0
+           && (content.children.map((child, index) => (
+             <StyledLink
+               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+               href={child._id}
+               key={child.id}
+             >
+               {`${child.name}  ${(content.children.length !== index + 1) ? '\u00a0 • \u00a0' : ''}  `}
+             </StyledLink>
+           )))
+        }
+      </div>
+    </>
+  );
 };
 
 SectionTitle.label = 'Section Title – Arc Block';

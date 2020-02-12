@@ -1,8 +1,6 @@
-h1.overline {
+h1.section-title {
   color: $ui-primary-font-color;
   display: block;
-  // padding-bottom: map-get($spacers, 'xs');
-  font-size: calculateRem(20px);
 }
 
 .section-container {
@@ -11,6 +9,5 @@ h1.overline {
     color: $ui-primary-font-color;
   }
   margin-top: map-get($spacers, 'sm');
-  // display: flex;
 }
 

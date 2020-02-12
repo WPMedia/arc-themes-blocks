@@ -67,8 +67,8 @@ const StoryItem = (props) => {
       </div>
       {itemTitle !== ''
         ? (
-          <div primaryFont={primaryFont} className="simple-list-headline-anchor">
-            <Title className="simple-list-headline-text">
+          <div className="simple-list-headline-anchor">
+            <Title primaryFont={primaryFont} className="simple-list-headline-text">
               {itemTitle}
             </Title>
           </div>

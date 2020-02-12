@@ -4,7 +4,8 @@ import { useContent } from 'fusion:content';
 import './simple-list.scss';
 
 // components import start
-import { Image } from '@arc-test-org/engine-theme-sdk';
+// todo: remove this image and import bc base img tag
+// import { Image } from '@arc-test-org/engine-theme-sdk';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 // components import end
@@ -28,8 +29,8 @@ const StoryItem = (props) => {
         {
           imageURL !== ''
             ? (
-              <Image
-                url={imageURL}
+              <img
+                src={imageURL}
                 alt={itemTitle}
                 className="simple-list-img"
               />
@@ -120,7 +121,10 @@ const SimpleList = (props) => {
       query: contentConfigValues,
     });
 
-    listItems = [...rawQueryResponse.content_elements.map(unserializeStory)];
+    if (rawQueryResponse
+      && rawQueryResponse.content_elements && rawQueryResponse.content_elements.length > 0) {
+      listItems = [...rawQueryResponse.content_elements.map(unserializeStory)];
+    }
   }
 
   return (

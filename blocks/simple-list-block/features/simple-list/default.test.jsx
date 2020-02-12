@@ -1,41 +1,36 @@
 import getThemeStyle from 'fusion:themes';
 import SimpleList, {
-  StoryItem, StoryItemContainer, StoryItemList, ListTitle,
+  StoryItem,
+  StoryItemContainer,
+  StoryItemList,
+  ListTitle
 } from './default';
 
 const React = require('react');
 const { mount } = require('enzyme');
 
-
 describe('Story item', () => {
   it('renders title if title provided', () => {
     const testText = 'Man Bites Dog';
-    const wrapper = mount(
-      <StoryItem itemTitle={testText} />,
-    );
+    const wrapper = mount(<StoryItem itemTitle={testText} />);
 
     expect(wrapper.text()).toBe(testText);
   });
   it('renders placeholder if no props provided', () => {
-    const wrapper = mount(
-      <StoryItem />,
-    );
+    const wrapper = mount(<StoryItem />);
 
     expect(wrapper.find('.simple-list-placeholder').length).toBe(1);
   });
   it('renders no title if no title provided', () => {
-    const wrapper = mount(
-      <StoryItem />,
-    );
+    const wrapper = mount(<StoryItem />);
 
     expect(wrapper.text()).toBe('');
   });
   it('renders an image when you pass one in', () => {
-    const imageURL = 'https://en.wikipedia.org/wiki/The_Washington_Post#/media/File:Washington_Post_building.jpg';
+    const imageURL =
+      'https://en.wikipedia.org/wiki/The_Washington_Post#/media/File:Washington_Post_building.jpg';
 
-    const wrapper = mount(
-      <StoryItem imageURL={imageURL} />,
-    );
+    const wrapper = mount(<StoryItem imageURL={imageURL} />);
     expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
     expect(wrapper.find('.simple-list-img').length).toBe(1);
   });
@@ -49,12 +44,10 @@ describe('Story item container', () => {
     const font = 'Arial';
 
     getThemeStyle.mockImplementation(() => ({
-      'primary-font-family': font,
+      'primary-font-family': font
     }));
 
-    const wrapper = mount(
-      <StoryItemContainer />,
-    );
+    const wrapper = mount(<StoryItemContainer />);
 
     expect(wrapper.children().props().primaryFont).toBe(font);
   });
@@ -63,21 +56,24 @@ describe('Story item container', () => {
       arcSite: 'arc',
       itemTitle: 'title',
       imageURL: 'url',
-      id: 'kdjflk',
+      id: 'kdjflk'
     };
     getThemeStyle.mockImplementation(() => ({}));
 
-
     const wrapper = mount(
-      <StoryItemContainer {...props} />,
+      <StoryItemContainer
+        arcSite={props.arcSite}
+        itemTitle={props.itemTitle}
+        imageURL={props.imageURL}
+        id={props.id}
+      />
     );
 
     const newProps = {
       itemTitle: props.itemTitle,
       id: props.id,
       primaryFont: '',
-      imageURL: props.imageURL,
-
+      imageURL: props.imageURL
     };
 
     expect(wrapper.children().props()).toStrictEqual(newProps);
@@ -88,16 +84,14 @@ describe('StoryItemList', () => {
   it('creates as many items as given', () => {
     const listItems = [
       {
-        id: 'kdfj',
+        id: 'kdfj'
       },
       {
-        id: 'ff',
-      },
+        id: 'ff'
+      }
     ];
 
-    const wrapper = mount(
-      <StoryItemList listItems={listItems} />,
-    );
+    const wrapper = mount(<StoryItemList listItems={listItems} />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(listItems.length);
   });
@@ -113,21 +107,17 @@ describe('List title', () => {
     const font = 'Arial';
 
     getThemeStyle.mockImplementation(() => ({
-      'primary-font-family': font,
+      'primary-font-family': font
     }));
 
-    const wrapper = mount(
-      <ListTitle />,
-    );
+    const wrapper = mount(<ListTitle />);
 
     expect(wrapper.children().props().primaryFont).toBe(font);
   });
   it('Passes down primary font default', () => {
     getThemeStyle.mockImplementation(() => ({}));
 
-    const wrapper = mount(
-      <ListTitle />,
-    );
+    const wrapper = mount(<ListTitle />);
 
     expect(wrapper.children().props().primaryFont).toBe('');
   });
@@ -140,21 +130,25 @@ const mockOutput = {
         basic: {
           type: {
             image: {
-              url: 'something.jpg',
-            },
-          },
-        },
+              url: 'something.jpg'
+            }
+          }
+        }
       },
       headlines: {
-        basic: 'Video Test', mobile: '', native: '', print: '', tablet: '',
+        basic: 'Video Test',
+        mobile: '',
+        native: '',
+        print: '',
+        tablet: ''
       },
-      _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ',
-    },
-  ],
+      _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ'
+    }
+  ]
 };
 
 jest.mock('fusion:content', () => ({
-  useContent: jest.fn(() => mockOutput),
+  useContent: jest.fn(() => mockOutput)
 }));
 describe('Simple list', () => {
   describe('when no content service provided', () => {
@@ -162,19 +156,15 @@ describe('Simple list', () => {
       const testText = 'List Over Here';
 
       const customFields = {
-        title: testText,
+        title: testText
       };
 
-      const wrapper = mount(
-        <SimpleList customFields={customFields} />,
-      );
+      const wrapper = mount(<SimpleList customFields={customFields} />);
 
       expect(wrapper.text()).toBe(testText);
     });
     it('should show no title if there is no title provided', () => {
-      const wrapper = mount(
-        <SimpleList />,
-      );
+      const wrapper = mount(<SimpleList />);
 
       expect(wrapper.text()).toBe('');
     });
@@ -185,14 +175,12 @@ describe('Simple list', () => {
         listContentConfig: {
           contentService: 'something',
           contentConfigValues: {
-            query: '',
-          },
-        },
+            query: ''
+          }
+        }
       };
 
-      const wrapper = mount(
-        <SimpleList customFields={customFields} />,
-      );
+      const wrapper = mount(<SimpleList customFields={customFields} />);
 
       expect(wrapper.find('.list-item-simple').length).toBe(1);
     });

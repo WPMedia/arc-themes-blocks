@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -10,7 +11,7 @@ import getThemeStyle from 'fusion:themes';
 // components import end
 
 // helpers start
-const getContentConfig = (propsObject) => {
+const getContentConfig = propsObject => {
   if ('customFields' in propsObject) {
     const { customFields } = propsObject;
 
@@ -19,7 +20,8 @@ const getContentConfig = (propsObject) => {
       if ('contentService' in listContentConfig) {
         const { contentService, contentConfigValues } = listContentConfig;
         return {
-          contentService, contentConfigValues,
+          contentService,
+          contentConfigValues
         };
       }
     }
@@ -27,16 +29,20 @@ const getContentConfig = (propsObject) => {
 
   return {
     contentService: '',
-    contentConfigValues: {},
+    contentConfigValues: {}
   };
 };
 
-const extractImage = storyObject => storyObject.promo_items && storyObject.promo_items.basic && storyObject.promo_items.basic.type === 'image' && storyObject.promo_items.basic.url;
+const extractImage = storyObject =>
+  storyObject.promo_items &&
+  storyObject.promo_items.basic &&
+  storyObject.promo_items.basic.type === 'image' &&
+  storyObject.promo_items.basic.url;
 
 const unserializeStory = storyObject => ({
   id: storyObject._id,
   itemTitle: storyObject.headlines.basic,
-  imageURL: extractImage(storyObject) || '',
+  imageURL: extractImage(storyObject) || ''
 });
 
 // helpers end
@@ -45,35 +51,28 @@ const Title = styled.h2`
   font-family: ${props => props.primaryFont};
 `;
 
-const StoryItem = (props) => {
-  const {
-    itemTitle = '', imageURL = '', id = '', primaryFont = '',
-  } = props;
+const StoryItem = props => {
+  const { itemTitle = '', imageURL = '', id = '', primaryFont = '' } = props;
 
   return (
     <div key={id} className="list-item-simple">
       <div className="simple-list-image-container">
-        {
-          imageURL !== ''
-            ? (
-              <img
-                src={imageURL}
-                alt={itemTitle}
-                className="simple-list-img"
-              />
-            )
-            : <div className="simple-list-placeholder" />
-        }
+        {imageURL !== '' ? (
+          <img src={imageURL} alt={itemTitle} className="simple-list-img" />
+        ) : (
+          <div className="simple-list-placeholder" />
+        )}
       </div>
-      {itemTitle !== ''
-        ? (
-          <div className="simple-list-headline-anchor">
-            <Title primaryFont={primaryFont} className="simple-list-headline-text">
-              {itemTitle}
-            </Title>
-          </div>
-        )
-        : null}
+      {itemTitle !== '' ? (
+        <div className="simple-list-headline-anchor">
+          <Title
+            primaryFont={primaryFont}
+            className="simple-list-headline-text"
+          >
+            {itemTitle}
+          </Title>
+        </div>
+      ) : null}
     </div>
   );
 };
@@ -81,17 +80,23 @@ const StoryItem = (props) => {
 @Consumer
 class StoryItemContainer extends Component {
   render() {
-    const {
-      arcSite = '', itemTitle = '', imageURL = '', id = '',
-    } = this.props;
+    const { arcSite = '', itemTitle = '', imageURL = '', id = '' } = this.props;
 
     const themeStyle = getThemeStyle(arcSite);
 
-    const primaryFont = themeStyle && themeStyle['primary-font-family'] ? themeStyle['primary-font-family'] : '';
+    const primaryFont =
+      themeStyle && themeStyle['primary-font-family']
+        ? themeStyle['primary-font-family']
+        : '';
 
     return (
       <>
-        <StoryItem primaryFont={primaryFont} itemTitle={itemTitle} imageURL={imageURL} id={id} />
+        <StoryItem
+          primaryFont={primaryFont}
+          itemTitle={itemTitle}
+          imageURL={imageURL}
+          id={id}
+        />
       </>
     );
   }
@@ -100,41 +105,45 @@ class StoryItemContainer extends Component {
 // need to provide unique id for react stability reasons
 const StoryItemList = ({ listItems = [] }) => (
   <>
-    {
-      listItems.map(({ id, itemTitle = '', imageURL = '' }) => (
-        <StoryItemContainer key={id} id={id} itemTitle={itemTitle} imageURL={imageURL} />
-      ))
-    }
+    {listItems.map(({ id, itemTitle = '', imageURL = '' }) => (
+      <StoryItemContainer
+        key={id}
+        id={id}
+        itemTitle={itemTitle}
+        imageURL={imageURL}
+      />
+    ))}
   </>
 );
 
 @Consumer
 class ListTitle extends Component {
   render() {
-    const {
-      arcSite,
-      title,
-    } = this.props;
+    const { arcSite, title } = this.props;
 
     const themeStyle = getThemeStyle(arcSite);
 
-    const primaryFont = themeStyle && themeStyle['primary-font-family'] ? themeStyle['primary-font-family'] : '';
+    const primaryFont =
+      themeStyle && themeStyle['primary-font-family']
+        ? themeStyle['primary-font-family']
+        : '';
 
     return (
       <>
-        <Title className="list-title" primaryFont={primaryFont}>{title}</Title>
+        <Title className="list-title" primaryFont={primaryFont}>
+          {title}
+        </Title>
       </>
     );
   }
 }
 // components end
 
-const SimpleList = (props) => {
+const SimpleList = props => {
   // id seems to be generated by the engine
   const { customFields = {}, id = '' } = props;
 
   const { title = '' } = customFields;
-
 
   const { contentService, contentConfigValues } = getContentConfig(props);
 
@@ -144,11 +153,14 @@ const SimpleList = (props) => {
   if (contentService !== '') {
     const rawQueryResponse = useContent({
       source: contentService,
-      query: contentConfigValues,
+      query: contentConfigValues
     });
 
-    if (rawQueryResponse
-      && rawQueryResponse.content_elements && rawQueryResponse.content_elements.length > 0) {
+    if (
+      rawQueryResponse &&
+      rawQueryResponse.content_elements &&
+      rawQueryResponse.content_elements.length > 0
+    ) {
       listItems = [...rawQueryResponse.content_elements.map(unserializeStory)];
     }
   }
@@ -164,19 +176,15 @@ const SimpleList = (props) => {
 SimpleList.propTypes = {
   customFields: PropTypes.shape({
     title: PropTypes.string.tag({ label: 'Title' }),
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag({ label: 'Display Content Info' }),
-  }),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag({
+      label: 'Display Content Info'
+    })
+  })
 };
-
 
 SimpleList.label = 'Simple List – Arc Block';
 
 // helper components
-export {
-  StoryItem,
-  StoryItemContainer,
-  StoryItemList,
-  ListTitle,
-};
+export { StoryItem, StoryItemContainer, StoryItemList, ListTitle };
 
 export default SimpleList;

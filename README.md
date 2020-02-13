@@ -40,7 +40,7 @@ as well as `.npmrc` file with
 ```sh
 //registry.npmjs.org/:_authToken=<authToken>
 ```
-Both CONTENT_BASE username/password and .npmrc authToken can be given by your teammate.
+Both CONTENT_BASE username/password and .npmrc authToken can be given by your teammate. For more information on access tokens in PageBuilder, see the [documentation](https://redirector.arcpublishing.com/alc/arc-products/pagebuilder/fusion/user-documentation/pagebuilder-engine-how-access-tokens-work-in-pagebuilder/#How-are-access-tokens-used-in-PageBuilder-Engine). The CONTENT_BASE credentials may also be accessible through {your arc id}.arcpublishing.com/developer/access/tokens.
 
 #### 1. Creating the Feature
 At this time, local development will be easiest if you first create the feature in the bundle itself rather than part of this blocks repo, because local development using the variable `useLocal` in `blocks.json` will force you to restart fusion with each change. Follow the recipe [here](https://github.com/WPMedia/fusion/blob/master/documentation/recipes/creating-feature-component.md) if you need a refresher on how to do so.

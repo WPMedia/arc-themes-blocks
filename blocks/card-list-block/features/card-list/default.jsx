@@ -51,7 +51,7 @@ class CardList extends React.Component {
   render() {
     const { customFields: { title } = {} } = this.props;
     const { cardList: { content_elements: contentElements = [] } } = this.state;
-    const showSeparator = (
+    const showSeparator = !!(
       contentElements[0]
       && contentElements[0].credits
       && contentElements[0].credits.by
@@ -59,9 +59,7 @@ class CardList extends React.Component {
     );
 
     return (
-      (contentElements
-        && contentElements
-        && contentElements.length > 0
+      (contentElements.length > 0
         && (
           <div className="card-list-container">
             <div className="simple-results-list-container">
@@ -121,9 +119,7 @@ class CardList extends React.Component {
                 </a>
               </div>
               {
-                contentElements
-                && contentElements.length > 0
-                && contentElements.map((element) => {
+                contentElements.slice(1).map((element) => {
                   const {
                     headlines: { basic: headlineText } = {},
                     website_url: websiteUrl,
@@ -152,12 +148,14 @@ class CardList extends React.Component {
                         className="list-anchor-image"
                       >
                         {
-                          extractImage(element.promo_items) ? (
-                            <img
-                              src={extractImage(element.promo_items)}
-                              alt={headlineText}
-                            />
-                          ) : <div className="card-list-placeholder" />
+                          extractImage(element.promo_items)
+                            ? (
+                              <img
+                                src={extractImage(element.promo_items)}
+                                alt={headlineText}
+                              />
+                            )
+                            : <div className="card-list-placeholder" />
                         }
                       </a>
                     </div>

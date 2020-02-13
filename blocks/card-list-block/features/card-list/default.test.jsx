@@ -4,7 +4,6 @@ import getThemeStyle from 'fusion:themes';
 import mockData,
 {
   oneListItem,
-  LineItemWithOutDescription,
   withoutByline,
 } from './mock-data';
 
@@ -41,7 +40,7 @@ describe('The story-feed-list', () => {
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
-      expect(wrapper.find('.card-list-item').length).toEqual(28);
+      expect(wrapper.find('.card-list-item').length).toEqual(27);
       expect(wrapper.find('.simple-results-list-container').childAt(0).hasClass('list-item-simple')).toEqual(true);
     });
   });
@@ -141,24 +140,24 @@ describe('The story-feed-list', () => {
     const customFields = { listContentConfig, title };
     const { default: CardList } = require('./default');
 
-    CardList.prototype.fetchContent = jest.fn().mockReturnValue(LineItemWithOutDescription);
+    CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
     const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
 
-    wrapper.setState({ cardList: LineItemWithOutDescription }, () => {
+    wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
         expect(wrapper.find('.card-list-container').length).toEqual(1);
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.card-list-item').length).toEqual(1);
+        expect(wrapper.find('.card-list-item').length).toEqual(27);
       });
 
       it('should render a headline', () => {
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').length).toEqual(1);
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(1);
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text')
-          .text()).toEqual('Article with a YouTube embed in it');
+        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').length).toEqual(27);
+        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
+        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
+          .text()).toEqual('Jon’s Prod Story');
       });
     });
   });

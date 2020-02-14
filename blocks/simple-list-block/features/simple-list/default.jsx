@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import Title from './_children/title';
 import StoryItem from './_children/story-item';
-import Title from './shared/title';
 import './simple-list.scss';
 
 // helpers start
@@ -38,33 +38,18 @@ const SimpleList = (props) => {
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
 
-  // set defualt value for list items
-  let listItems = [];
-
-  if (contentService !== '') {
-    const rawQueryResponse = useContent({
-      source: contentService,
-      query: contentConfigValues,
-    });
-
-    if (
-      rawQueryResponse
-      && rawQueryResponse.content_elements
-      && rawQueryResponse.content_elements.length > 0
-    ) {
-      listItems = [...rawQueryResponse.content_elements.map(unserializeStory)];
-    }
-  }
+  const { content_elements: contentElements = [] } = useContent({
+    source: contentService,
+    query: contentConfigValues,
+  }) || {};
 
   return (
     <div key={id} className="list-container">
-      {title.length > 0 ? (
-        <Title className="list-title" primaryFont={primaryFont}>
-          {title}
-        </Title>
-      ) : null}
-      {listItems.length > 0
-        ? listItems.map(({ id: listItemId, itemTitle, imageURL }) => (
+      <Title className="list-title" primaryFont={primaryFont}>
+        {title}
+      </Title>
+      {
+        contentElements.map(unserializeStory).map(({ id: listItemId, itemTitle, imageURL }) => (
           <StoryItem
             key={listItemId}
             id={listItemId}
@@ -73,7 +58,7 @@ const SimpleList = (props) => {
             primaryFont={primaryFont}
           />
         ))
-        : null}
+      }
     </div>
   );
 };

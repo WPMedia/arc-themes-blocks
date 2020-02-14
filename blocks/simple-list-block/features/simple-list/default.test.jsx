@@ -24,8 +24,9 @@ const mockOutput = {
     },
     {
       headlines: {
-        baasic: 'Title',
+        basic: 'Title',
       },
+      _id: 'kdfjkdjfkldjf',
     },
   ],
 };
@@ -72,12 +73,12 @@ describe('Simple list', () => {
 
       const wrapper = mount(<SimpleList customFields={customFields} />);
 
-      expect(wrapper.text()).toBe(testText);
+      expect(wrapper.find('h2.list-title').text()).toBe(testText);
     });
     it('should show no title if there is no title provided', () => {
       const wrapper = mount(<SimpleList />);
 
-      expect(wrapper.text()).toBe('');
+      expect(wrapper.find('h2.list-title').text()).toBe('');
     });
   });
   describe('when content service is provided', () => {

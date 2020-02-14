@@ -1,5 +1,6 @@
 import React from 'react';
-import Title from '../shared/title';
+import { Image } from '@arc-test-org/engine-theme-sdk';
+import Title from './title';
 
 const StoryItem = (props) => {
   const {
@@ -10,7 +11,18 @@ const StoryItem = (props) => {
     <div key={id} className="list-item-simple">
       <div className="simple-list-image-container">
         {imageURL !== '' ? (
-          <img src={imageURL} alt={itemTitle} className="simple-list-img" />
+          <Image
+            url={imageURL}
+            alt={itemTitle}
+            // used this from simple results list
+            smallWidth={274}
+            smallHeight={148}
+            mediumWidth={274}
+            mediumHeight={148}
+            largeWidth={274}
+            largeHeight={148}
+            className="simple-list-img"
+          />
         ) : (
           <div className="simple-list-placeholder" />
         )}

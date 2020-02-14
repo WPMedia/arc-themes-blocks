@@ -32,7 +32,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
 
   return content && (
     <article className="container-fluid small-promo">
-      <div className="row">
+      <div className="row sm-promo-padding-btm">
         {customFields.showHeadline
         && (
           <div className={headlineClass}>

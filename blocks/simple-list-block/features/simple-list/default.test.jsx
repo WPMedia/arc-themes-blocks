@@ -1,162 +1,73 @@
 import getThemeStyle from 'fusion:themes';
-import SimpleList, {
-  StoryItem,
-  StoryItemContainer,
-  StoryItemList,
-  ListTitle
-} from './default';
+import SimpleList from './default';
 
 const React = require('react');
 const { mount } = require('enzyme');
-
-describe('Story item', () => {
-  it('renders title if title provided', () => {
-    const testText = 'Man Bites Dog';
-    const wrapper = mount(<StoryItem itemTitle={testText} />);
-
-    expect(wrapper.text()).toBe(testText);
-  });
-  it('renders placeholder if no props provided', () => {
-    const wrapper = mount(<StoryItem />);
-
-    expect(wrapper.find('.simple-list-placeholder').length).toBe(1);
-  });
-  it('renders no title if no title provided', () => {
-    const wrapper = mount(<StoryItem />);
-
-    expect(wrapper.text()).toBe('');
-  });
-  it('renders an image when you pass one in', () => {
-    const imageURL =
-      'https://en.wikipedia.org/wiki/The_Washington_Post#/media/File:Washington_Post_building.jpg';
-
-    const wrapper = mount(<StoryItem imageURL={imageURL} />);
-    expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
-    expect(wrapper.find('.simple-list-img').length).toBe(1);
-  });
-});
-
-describe('Story item container', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-  it('gets font family from properties with arc site', () => {
-    const font = 'Arial';
-
-    getThemeStyle.mockImplementation(() => ({
-      'primary-font-family': font
-    }));
-
-    const wrapper = mount(<StoryItemContainer />);
-
-    expect(wrapper.children().props().primaryFont).toBe(font);
-  });
-  it('passes props through component', () => {
-    const props = {
-      arcSite: 'arc',
-      itemTitle: 'title',
-      imageURL: 'url',
-      id: 'kdjflk'
-    };
-    getThemeStyle.mockImplementation(() => ({}));
-
-    const wrapper = mount(
-      <StoryItemContainer
-        arcSite={props.arcSite}
-        itemTitle={props.itemTitle}
-        imageURL={props.imageURL}
-        id={props.id}
-      />
-    );
-
-    const newProps = {
-      itemTitle: props.itemTitle,
-      id: props.id,
-      primaryFont: '',
-      imageURL: props.imageURL
-    };
-
-    expect(wrapper.children().props()).toStrictEqual(newProps);
-  });
-});
-
-describe('StoryItemList', () => {
-  it('creates as many items as given', () => {
-    const listItems = [
-      {
-        id: 'kdfj'
-      },
-      {
-        id: 'ff'
-      }
-    ];
-
-    const wrapper = mount(<StoryItemList listItems={listItems} />);
-
-    expect(wrapper.find('.list-item-simple').length).toBe(listItems.length);
-  });
-  it('renders null if no items given', () => {
-    const wrapper = mount(<StoryItemList />);
-    expect(wrapper.text()).toBe('');
-    expect(wrapper.html()).toBe(null);
-  });
-});
-
-describe('List title', () => {
-  it('Passes down primary font', () => {
-    const font = 'Arial';
-
-    getThemeStyle.mockImplementation(() => ({
-      'primary-font-family': font
-    }));
-
-    const wrapper = mount(<ListTitle />);
-
-    expect(wrapper.children().props().primaryFont).toBe(font);
-  });
-  it('Passes down primary font default', () => {
-    getThemeStyle.mockImplementation(() => ({}));
-
-    const wrapper = mount(<ListTitle />);
-
-    expect(wrapper.children().props().primaryFont).toBe('');
-  });
-});
 
 const mockOutput = {
   content_elements: [
     {
       promo_items: {
         basic: {
-          type: {
-            image: {
-              url: 'something.jpg'
-            }
-          }
-        }
+          type: 'image',
+          url: 'something.jpg',
+        },
       },
       headlines: {
         basic: 'Video Test',
         mobile: '',
         native: '',
         print: '',
-        tablet: ''
+        tablet: '',
       },
-      _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ'
-    }
-  ]
+      _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ',
+    },
+    {
+      headlines: {
+        baasic: 'Title',
+      },
+    },
+  ],
 };
 
 jest.mock('fusion:content', () => ({
-  useContent: jest.fn(() => mockOutput)
+  useContent: jest.fn(() => mockOutput),
 }));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    globalContent: {
+      _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+      type: 'story',
+      version: '0.10.2',
+      content_elements: [
+        {
+          _id: 'L57RVT4465HMBKL5T26NBBFBNI',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1563473120767,
+          },
+          content:
+            'This is a test article that has all kinds of different element types in it. You should see each element type appear below the bolded text.',
+        },
+      ],
+    },
+    arcSite: 'the-sun',
+    customFields: {
+      elementPlacement: { 1: 2, 2: 1 },
+    },
+  })),
+}));
+getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
+
 describe('Simple list', () => {
   describe('when no content service provided', () => {
     it('should show title if there is a title provided', () => {
       const testText = 'List Over Here';
 
       const customFields = {
-        title: testText
+        title: testText,
       };
 
       const wrapper = mount(<SimpleList customFields={customFields} />);
@@ -170,19 +81,19 @@ describe('Simple list', () => {
     });
   });
   describe('when content service is provided', () => {
-    it('should try to fetch an array of data', () => {
+    it('should fetch an array of data', () => {
       const customFields = {
         listContentConfig: {
           contentService: 'something',
           contentConfigValues: {
-            query: ''
-          }
-        }
+            query: '',
+          },
+        },
       };
 
       const wrapper = mount(<SimpleList customFields={customFields} />);
 
-      expect(wrapper.find('.list-item-simple').length).toBe(1);
+      expect(wrapper.find('.list-item-simple').length).toBe(2);
     });
   });
 });

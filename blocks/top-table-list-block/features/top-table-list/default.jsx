@@ -53,13 +53,13 @@ const StoryItemStyles = styled.div`
 `;
 
 const StyledLink = styled.a`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
 
 const Title = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: normal;
   margin: 16px 14px 16px 0;
   overflow: hidden;
@@ -67,7 +67,7 @@ const Title = styled.h2`
 `;
 
 const DescriptionText = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 // styles end
 
@@ -81,8 +81,8 @@ const SMALL = 'SMALL';
 // helpers start
 
 // via https://stackoverflow.com/a/32108184
-const checkObjectEmpty = obj => Object.keys(obj).length === 0 && obj.constructor === Object;
-const getContentConfig = propsObject => {
+const checkObjectEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+const getContentConfig = (propsObject) => {
   if ('customFields' in propsObject) {
     const { customFields } = propsObject;
 
@@ -92,7 +92,7 @@ const getContentConfig = propsObject => {
         const { contentService, contentConfigValues } = listContentConfig;
         return {
           contentService,
-          contentConfigValues
+          contentConfigValues,
         };
       }
     }
@@ -100,17 +100,16 @@ const getContentConfig = propsObject => {
 
   return {
     contentService: '',
-    contentConfigValues: {}
+    contentConfigValues: {},
   };
 };
 
-const extractImage = storyObject =>
-  storyObject.promo_items &&
-  storyObject.promo_items.basic &&
-  storyObject.promo_items.basic.type === 'image' &&
-  storyObject.promo_items.basic.url;
+const extractImage = (storyObject) => storyObject.promo_items
+  && storyObject.promo_items.basic
+  && storyObject.promo_items.basic.type === 'image'
+  && storyObject.promo_items.basic.url;
 
-const unserializeStory = storyObject => ({
+const unserializeStory = (storyObject) => ({
   id: storyObject._id,
   itemTitle: storyObject.headlines.basic || '',
   imageURL: extractImage(storyObject) || '',
@@ -118,7 +117,7 @@ const unserializeStory = storyObject => ({
   description: storyObject.description.basic || '',
   by: storyObject.credits.by || [],
   websiteURL: storyObject.website_url || '',
-  element: storyObject
+  element: storyObject,
 });
 // or at least refactor to only give it what it needs
 // todo: refactor byline to make it reusable so don't have to do this drilling element
@@ -126,7 +125,7 @@ const unserializeStory = storyObject => ({
 // helpers end
 // components start
 
-const VerticalOverlineImageStoryItem = props => {
+const VerticalOverlineImageStoryItem = (props) => {
   const {
     constructedURL,
     itemTitle,
@@ -137,7 +136,7 @@ const VerticalOverlineImageStoryItem = props => {
     element,
     displayDate,
     overlineURL,
-    overlineText
+    overlineText,
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
@@ -194,7 +193,7 @@ const VerticalOverlineImageStoryItem = props => {
   );
 };
 
-const HorizontalOverlineImageStoryItem = props => {
+const HorizontalOverlineImageStoryItem = (props) => {
   const {
     constructedURL,
     itemTitle,
@@ -205,7 +204,7 @@ const HorizontalOverlineImageStoryItem = props => {
     element,
     displayDate,
     overlineURL,
-    overlineText
+    overlineText,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -262,8 +261,10 @@ const HorizontalOverlineImageStoryItem = props => {
 };
 
 // via simple list StoryItem
-const ItemTitleWithRightImage = props => {
-  const { itemTitle = '', imageURL = '', id = '', primaryFont = '' } = props;
+const ItemTitleWithRightImage = (props) => {
+  const {
+    itemTitle = '', imageURL = '', id = '', primaryFont = '',
+  } = props;
 
   return (
     <StoryItemStyles key={id} className="top-table-list-item-simple">
@@ -286,7 +287,7 @@ const ItemTitleWithRightImage = props => {
 };
 
 // via results list
-const MedListItem = props => {
+const MedListItem = (props) => {
   const {
     constructedURL,
     itemTitle,
@@ -295,7 +296,7 @@ const MedListItem = props => {
     primaryFont,
     by,
     element,
-    displayDate
+    displayDate,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -344,7 +345,7 @@ const MedListItem = props => {
   );
 };
 
-const StoryItem = props => {
+const StoryItem = (props) => {
   const {
     itemTitle = '',
     imageURL = '',
@@ -357,7 +358,7 @@ const StoryItem = props => {
     element,
     displayDate,
     overlineText = '',
-    overlineURL = ''
+    overlineURL = '',
   } = props;
 
   // don't want these to re-render if latter unless story size changes
@@ -435,16 +436,14 @@ class StoryItemContainer extends Component {
   getOverlineData() {
     const { arcSite, globalContent = {} } = this.props;
 
-    const { display: labelDisplay, url: labelUrl, text: labelText } =
-      (globalContent.label && globalContent.label.basic) || {};
+    const { display: labelDisplay, url: labelUrl, text: labelText } = (globalContent.label && globalContent.label.basic) || {};
 
     const shouldUseLabel = !!labelDisplay;
 
-    const { _id: sectionUrl, name: sectionText } =
-      (globalContent.websites &&
-        globalContent.websites[arcSite] &&
-        globalContent.websites[arcSite].website_section) ||
-      {};
+    const { _id: sectionUrl, name: sectionText } = (globalContent.websites
+        && globalContent.websites[arcSite]
+        && globalContent.websites[arcSite].website_section)
+      || {};
 
     const [overlineText, overlineURL] = shouldUseLabel
       ? [labelText, labelUrl]
@@ -470,7 +469,7 @@ class StoryItemContainer extends Component {
       description,
       by,
       element,
-      storySize
+      storySize,
     } = this.props;
 
     const constructedURL = this.constructHref();
@@ -499,41 +498,42 @@ class StoryItemContainer extends Component {
   }
 }
 
-const StoryItemList = ({ listItems, storyTypeArray }) =>
-  listItems.map((itemObject, index) => {
-    const {
-      id,
-      itemTitle = '',
-      imageURL = '',
-      displayDate = '',
-      description = '',
-      by = [],
-      websiteURL = '',
-      element = {}
-    } = itemObject;
+const StoryItemList = ({ listItems, storyTypeArray }) => listItems.map((itemObject, index) => {
+  const {
+    id,
+    itemTitle = '',
+    imageURL = '',
+    displayDate = '',
+    description = '',
+    by = [],
+    websiteURL = '',
+    element = {},
+  } = itemObject;
 
-    return (
-      <Fragment key={id}>
-        <StoryItemContainer
-          id={id}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
-          displayDate={displayDate}
-          description={description}
-          by={by}
-          websiteURL={websiteURL}
-          element={element}
+  return (
+    <Fragment key={id}>
+      <StoryItemContainer
+        id={id}
+        itemTitle={itemTitle}
+        imageURL={imageURL}
+        displayDate={displayDate}
+        description={description}
+        by={by}
+        websiteURL={websiteURL}
+        element={element}
           // determine which type of small
-          storySize={storyTypeArray[index]}
-        />
-      </Fragment>
-    );
-  });
+        storySize={storyTypeArray[index]}
+      />
+    </Fragment>
+  );
+});
 
 // components end
-const TopTableList = props => {
+const TopTableList = (props) => {
   const { customFields = {}, id = '' } = props;
-  const { extraLarge = 0, large = 0, medium = 0, small = 0 } = customFields;
+  const {
+    extraLarge = 0, large = 0, medium = 0, small = 0,
+  } = customFields;
   const { contentService, contentConfigValues } = getContentConfig(props);
 
   const storyListLength = extraLarge + large + medium + small;
@@ -545,14 +545,14 @@ const TopTableList = props => {
   if (storyListLength > 0) {
     // stub items for previewing
     listItems = [...new Array(storyListLength)].map((_obj, i) => ({
-      id: i
+      id: i,
     }));
 
     storyTypeArray = [
       ...new Array(extraLarge).fill(EXTRA_LARGE),
       ...new Array(large).fill(LARGE),
       ...new Array(medium).fill(MEDIUM),
-      ...new Array(small).fill(SMALL)
+      ...new Array(small).fill(SMALL),
     ];
 
     // set defualt value for list items
@@ -560,12 +560,12 @@ const TopTableList = props => {
       const rawQueryResponse = useContent({
         source: contentService,
         // QUESTION: will I want to worry about calling more content than will even display?
-        query: contentConfigValues
+        query: contentConfigValues,
       });
       if (
-        rawQueryResponse &&
-        rawQueryResponse.content_elements &&
-        rawQueryResponse.content_elements.length > 0
+        rawQueryResponse
+        && rawQueryResponse.content_elements
+        && rawQueryResponse.content_elements.length > 0
       ) {
         listItems = [...rawQueryResponse.content_elements.map(unserializeStory)];
       }
@@ -581,7 +581,7 @@ const TopTableList = props => {
   );
 };
 
-const generateLabelString = size => `Number of ${size} Stories`;
+const generateLabelString = (size) => `Number of ${size} Stories`;
 TopTableList.propTypes = {
   customFields: PropTypes.shape({
     // todo: add extra label 'Input numbers below to customize how your story list displays'
@@ -591,8 +591,8 @@ TopTableList.propTypes = {
     large: PropTypes.number.tag({ label: generateLabelString('Large'), default: 0 }),
     medium: PropTypes.number.tag({ label: generateLabelString('Medium'), default: 0 }),
     small: PropTypes.number.tag({ label: generateLabelString('Small'), default: 0 }),
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag({ label: 'Display Content Info' })
-  })
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag({ label: 'Display Content Info' }),
+  }),
 };
 
 TopTableList.label = 'Top Table List – Arc Block';

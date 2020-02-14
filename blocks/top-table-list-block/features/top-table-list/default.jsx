@@ -141,12 +141,17 @@ const VerticalOverlineImageStoryItem = props => {
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
-    <div className="list-item vertical-list-item" key={`result-card-${itemTitle}`}>
+    <div className="list-item" key={`result-card-${itemTitle}`}>
       {overlineText ? (
         <StyledLink href={overlineURL} className="overline">
           {overlineText}
         </StyledLink>
       ) : null}
+      <a href={constructedURL} title={itemTitle} className="list-anchor ">
+        <Title primaryFont={primaryFont} className="top-table-list-extra-large-title">
+          {itemTitle}
+        </Title>
+      </a>
       <a href={constructedURL} title={itemTitle} className="list-anchor">
         {imageURL !== '' ? (
           <Image
@@ -174,9 +179,6 @@ const VerticalOverlineImageStoryItem = props => {
         }
       >
         <div>
-          <a href={constructedURL} title={itemTitle} className="list-anchor">
-            <Title primaryFont={primaryFont}>{itemTitle}</Title>
-          </a>
           <DescriptionText secondaryFont={primaryFont} className="description-text">
             {descriptionText}
           </DescriptionText>

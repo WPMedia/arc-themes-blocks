@@ -25,7 +25,7 @@
 
     .simple-list-image-container {
       display: flex;
-      flex: 0 0 25%;
+      flex: 0 0 14%;
 
       .simple-list-img {
         width: 100%;
@@ -34,9 +34,6 @@
       }
       .simple-list-placeholder {
         background-color: #dfe4ea;
-        width: 100%;
-        height: auto;
-        min-height: 72px;
       }
     }
 

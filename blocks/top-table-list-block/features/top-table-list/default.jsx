@@ -436,7 +436,11 @@ class StoryItemContainer extends Component {
   getOverlineData() {
     const { arcSite, globalContent = {} } = this.props;
 
-    const { display: labelDisplay, url: labelUrl, text: labelText } = (globalContent.label && globalContent.label.basic) || {};
+    const {
+      display: labelDisplay,
+      url: labelUrl,
+      text: labelText,
+    } = (globalContent.label && globalContent.label.basic) || {};
 
     const shouldUseLabel = !!labelDisplay;
 

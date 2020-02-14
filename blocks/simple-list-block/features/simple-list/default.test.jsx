@@ -63,38 +63,34 @@ jest.mock('fusion:context', () => ({
 getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
 
 describe('Simple list', () => {
-  describe('when no content service provided', () => {
-    it('should show title if there is a title provided', () => {
-      const testText = 'List Over Here';
+  it('should show title if there is a title provided', () => {
+    const testText = 'List Over Here';
 
-      const customFields = {
-        title: testText,
-      };
+    const customFields = {
+      title: testText,
+    };
 
-      const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList customFields={customFields} />);
 
-      expect(wrapper.find('h2.list-title').text()).toBe(testText);
-    });
-    it('should show no title if there is no title provided', () => {
-      const wrapper = mount(<SimpleList />);
-
-      expect(wrapper.find('h2.list-title').text()).toBe('');
-    });
+    expect(wrapper.find('h2.list-title').text()).toBe(testText);
   });
-  describe('when content service is provided', () => {
-    it('should fetch an array of data', () => {
-      const customFields = {
-        listContentConfig: {
-          contentService: 'something',
-          contentConfigValues: {
-            query: '',
-          },
+  it('should show no title if there is no title provided', () => {
+    const wrapper = mount(<SimpleList />);
+
+    expect(wrapper.find('h2.list-title').text()).toBe('');
+  });
+  it('should fetch an array of data when content service is provided', () => {
+    const customFields = {
+      listContentConfig: {
+        contentService: 'something',
+        contentConfigValues: {
+          query: '',
         },
-      };
+      },
+    };
 
-      const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList customFields={customFields} />);
 
-      expect(wrapper.find('.list-item-simple').length).toBe(2);
-    });
+    expect(wrapper.find('.list-item-simple').length).toBe(2);
   });
 });

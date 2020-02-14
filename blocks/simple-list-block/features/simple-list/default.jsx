@@ -11,27 +11,12 @@ import getThemeStyle from 'fusion:themes';
 // components import end
 
 // helpers start
-const getContentConfig = propsObject => {
-  if ('customFields' in propsObject) {
-    const { customFields } = propsObject;
-
-    if ('listContentConfig' in customFields) {
-      const { listContentConfig } = customFields;
-      if ('contentService' in listContentConfig) {
-        const { contentService, contentConfigValues } = listContentConfig;
-        return {
-          contentService,
-          contentConfigValues
-        };
-      }
-    }
-  }
-
-  return {
-    contentService: '',
-    contentConfigValues: {}
-  };
-};
+const getContentConfig = ({
+  customFields: { listContentConfig: { contentService = '', contentConfigValues = {} } = {} } = {},
+}) => ({
+  contentService,
+  contentConfigValues,
+});
 
 const extractImage = storyObject =>
   storyObject.promo_items &&
@@ -42,7 +27,7 @@ const extractImage = storyObject =>
 const unserializeStory = storyObject => ({
   id: storyObject._id,
   itemTitle: storyObject.headlines.basic,
-  imageURL: extractImage(storyObject) || ''
+  imageURL: extractImage(storyObject) || '',
 });
 
 // helpers end
@@ -65,10 +50,7 @@ const StoryItem = props => {
       </div>
       {itemTitle !== '' ? (
         <div className="simple-list-headline-anchor">
-          <Title
-            primaryFont={primaryFont}
-            className="simple-list-headline-text"
-          >
+          <Title primaryFont={primaryFont} className="simple-list-headline-text">
             {itemTitle}
           </Title>
         </div>
@@ -85,18 +67,11 @@ class StoryItemContainer extends Component {
     const themeStyle = getThemeStyle(arcSite);
 
     const primaryFont =
-      themeStyle && themeStyle['primary-font-family']
-        ? themeStyle['primary-font-family']
-        : '';
+      themeStyle && themeStyle['primary-font-family'] ? themeStyle['primary-font-family'] : '';
 
     return (
       <>
-        <StoryItem
-          primaryFont={primaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
-          id={id}
-        />
+        <StoryItem primaryFont={primaryFont} itemTitle={itemTitle} imageURL={imageURL} id={id} />
       </>
     );
   }
@@ -106,12 +81,7 @@ class StoryItemContainer extends Component {
 const StoryItemList = ({ listItems = [] }) => (
   <>
     {listItems.map(({ id, itemTitle = '', imageURL = '' }) => (
-      <StoryItemContainer
-        key={id}
-        id={id}
-        itemTitle={itemTitle}
-        imageURL={imageURL}
-      />
+      <StoryItemContainer key={id} id={id} itemTitle={itemTitle} imageURL={imageURL} />
     ))}
   </>
 );
@@ -124,9 +94,7 @@ class ListTitle extends Component {
     const themeStyle = getThemeStyle(arcSite);
 
     const primaryFont =
-      themeStyle && themeStyle['primary-font-family']
-        ? themeStyle['primary-font-family']
-        : '';
+      themeStyle && themeStyle['primary-font-family'] ? themeStyle['primary-font-family'] : '';
 
     return (
       <>
@@ -153,7 +121,7 @@ const SimpleList = props => {
   if (contentService !== '') {
     const rawQueryResponse = useContent({
       source: contentService,
-      query: contentConfigValues
+      query: contentConfigValues,
     });
 
     if (
@@ -177,9 +145,9 @@ SimpleList.propTypes = {
   customFields: PropTypes.shape({
     title: PropTypes.string.tag({ label: 'Title' }),
     listContentConfig: PropTypes.contentConfig('ans-feed').tag({
-      label: 'Display Content Info'
-    })
-  })
+      label: 'Display Content Info',
+    }),
+  }),
 };
 
 SimpleList.label = 'Simple List – Arc Block';

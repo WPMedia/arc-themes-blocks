@@ -1,0 +1,10 @@
+.vertical-list-item {
+  flex-direction: column;
+}
+
+.top-table-extra-large-image-placeholder {
+  // height via mocks
+  // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
+  min-height: calculateRem(1062px);
+  background-color: #dfe4ea;
+}

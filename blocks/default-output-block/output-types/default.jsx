@@ -66,6 +66,7 @@ const SampleOutputType = ({
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
+  let authorMetaDataTags = null;
   let twitterTags = null;
 
   const metaData = {
@@ -133,6 +134,27 @@ const SampleOutputType = ({
         </>
       );
     }
+  } else if (pageType === 'author') {
+    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
+    metaData.description = metaValue('description') || payload.description || null;
+    metaData.ogTitle = metaValue('og:title') || payload.name || '';
+    if (metaData.ogTitle === '') {
+      metaData.title = websiteName;
+      metaData.ogTitle = websiteName;
+    } else {
+      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
+      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    authorMetaDataTags = (
+      <>
+        {
+          metaData.description
+          && <meta name="description" content={metaData.description} />
+        }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
   } else if (pageType === 'tag') {
     const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
     metaData.description = metaValue('description') || payload.description || null;
@@ -179,6 +201,7 @@ const SampleOutputType = ({
         <title>{metaData.title}</title>
         {storyMetaDataTags}
         {tagMetaDataTags}
+        {authorMetaDataTags}
         {customMetaTags}
         {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

@@ -1,7 +1,7 @@
 {
-  "name": "@arc-test-org/full-author-bio-block",
-  "version": "0.2.1",
-  "description": "Fusion News Theme full author bio block",
+  "name": "@arc-test-org/card-list-block",
+  "version": "0.1.1",
+  "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "license": "UNLICENSED",
@@ -21,7 +21,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.4.3",
+    "@arc-test-org/byline-block": "^0.3.1",
+    "@arc-test-org/date-block": "^1.4.0",
+    "@arc-test-org/engine-theme-sdk": "^0.4.2",
     "styled-components": "^4.4.0"
   },
   "bugs": {

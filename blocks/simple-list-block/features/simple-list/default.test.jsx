@@ -62,6 +62,8 @@ jest.mock('fusion:context', () => ({
 }));
 getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({ websiteDomain: '' }))));
+
 describe('Simple list', () => {
   it('should show title if there is a title provided', () => {
     const testText = 'List Over Here';

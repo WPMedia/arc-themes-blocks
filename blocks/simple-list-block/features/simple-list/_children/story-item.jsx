@@ -4,12 +4,19 @@ import Title from './title';
 
 const StoryItem = (props) => {
   const {
-    itemTitle = '', imageURL = '', id = '', primaryFont = '',
+    itemTitle = '', imageURL = '', id = '', primaryFont = '', websiteURL, websiteDomain,
   } = props;
+
+  const location = (typeof window !== 'undefined' && window.location.hostname === 'localhost')
+    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}` : `${websiteDomain}/${websiteURL}`;
 
   return (
     <div key={id} className="list-item-simple">
-      <div className="simple-list-image-container">
+      <a
+        href={location}
+        title={itemTitle}
+        className="simple-list-anchor"
+      >
         {imageURL !== '' ? (
           <Image
             url={imageURL}
@@ -26,14 +33,19 @@ const StoryItem = (props) => {
         ) : (
           <div className="simple-list-placeholder" />
         )}
-      </div>
+      </a>
       {itemTitle !== '' ? (
-        <div className="simple-list-headline-anchor">
+        <a
+          className="simple-list-headline-anchor"
+          href={location}
+          title={itemTitle}
+        >
           <Title primaryFont={primaryFont} className="simple-list-headline-text">
             {itemTitle}
           </Title>
-        </div>
+        </a>
       ) : null}
+
     </div>
   );
 };

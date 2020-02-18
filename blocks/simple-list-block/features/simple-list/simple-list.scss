@@ -14,16 +14,8 @@
     display: flex;
     justify-content: space-between;
     min-height: 72px;
-
-    .headline-text {
-      color: $ui-dark-secondary-color;
-      font-size: calculateRem(16px);
-      line-height: calculateRem(24px);
-      font-weight: normal;
-      margin: 16px 14px 16px 0;
-    }
-
-    .simple-list-image-container {
+    .simple-list-anchor {
+      text-decoration: none;
       display: flex;
       flex: 0 0 14%;
 
@@ -40,7 +32,7 @@
     .simple-list-headline-anchor {
       flex: 3;
       padding-left: calculateRem(16px);
-
+      text-decoration: none;
       .simple-list-headline-text {
         font-size: calculateRem(16px);
         line-height: calculateRem(24px);

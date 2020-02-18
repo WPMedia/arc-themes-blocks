@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 import Title from './_children/title';
 import StoryItem from './_children/story-item';
 import './simple-list.scss';
@@ -18,6 +19,7 @@ const unserializeStory = (storyObject) => ({
   id: storyObject._id,
   itemTitle: storyObject.headlines.basic,
   imageURL: extractImage(storyObject) || '',
+  websiteURL: storyObject.website_url || '',
 });
 
 // helpers end
@@ -36,6 +38,10 @@ const SimpleList = (props) => {
 
   const { arcSite } = useFusionContext();
 
+  const {
+    websiteDomain,
+  } = getProperties(arcSite);
+
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
 
   const { content_elements: contentElements = [] } = useContent({
@@ -49,13 +55,17 @@ const SimpleList = (props) => {
         {title}
       </Title>
       {
-        contentElements.map(unserializeStory).map(({ id: listItemId, itemTitle, imageURL }) => (
+        contentElements.map(unserializeStory).map(({
+          id: listItemId, itemTitle, imageURL, websiteURL,
+        }) => (
           <StoryItem
             key={listItemId}
             id={listItemId}
             itemTitle={itemTitle}
             imageURL={imageURL}
             primaryFont={primaryFont}
+            websiteURL={websiteURL}
+            websiteDomain={websiteDomain}
           />
         ))
       }

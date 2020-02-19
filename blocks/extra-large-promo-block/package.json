@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/extra-large-promo-block",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fusion News Theme Extra Large Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,8 +19,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "styled-components": "^4.4.0",
     "@arc-test-org/byline-block": "^0.3.1",
-    "@arc-test-org/date-block": "^1.4.0"
+    "@arc-test-org/date-block": "^1.4.0",
+    "styled-components": "^4.4.0"
   }
 }

@@ -4,11 +4,17 @@ import Title from './title';
 
 const StoryItem = (props) => {
   const {
-    itemTitle = '', imageURL = '', id = '', primaryFont = '', websiteURL, websiteDomain,
+    itemTitle = '',
+    imageURL = '',
+    id = '',
+    primaryFont = '',
+    websiteURL,
+    websiteDomain,
   } = props;
 
-  const location = (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}` : `${websiteDomain}/${websiteURL}`;
+  const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}`
+    : `${websiteDomain}/${websiteURL}`;
 
   return (
     <div key={id} className="list-item-simple">

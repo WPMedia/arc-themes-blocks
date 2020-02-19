@@ -1,21 +1,34 @@
-.medium-promo {
+.large-promo {
   box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
 
-  .med-promo-padding-bottom {
+  .lg-promo-padding-bottom {
     padding-bottom: map-get($spacers, 'xs');
   }
 
-  .md-promo-headline {
+  a.overline {
+    color: $ui-primary-font-color;
+    display: inline-block;
+    padding-bottom: map-get($spacers, 'sm');
     font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(16px);
+      line-height: calculateRem(22px);
+    }
+  }
+
+  .lg-promo-headline {
+    font-size: calculateRem(22px);
     line-height: calculateRem(24px);
     color: $ui-primary-font-color;
     font-weight: bold;
     text-decoration: none;
-    margin-bottom: map-get($spacers, 'xxs');
+    margin-bottom: map-get($spacers, 'xs');
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      font-size: calculateRem(24px);
-      line-height: calculateRem(34px);
+      font-size: calculateRem(26px);
+      line-height: calculateRem(32px);
     }
   }
 
@@ -23,7 +36,7 @@
     font-size: calculateRem(18px);
     line-height: calculateRem(32px);
     color: $ui-primary-font-color;
-    margin-bottom: map-get($spacers, 'xxs');
+    margin-bottom: map-get($spacers, 'xs');
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
       font-size: calculateRem(16px);

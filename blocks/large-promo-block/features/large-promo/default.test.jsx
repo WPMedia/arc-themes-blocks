@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import MediumPromo from './default';
+import LargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
 
@@ -24,7 +24,7 @@ const config = {
   showImage: true,
 };
 
-describe('the medium promo feature', () => {
+describe('the large promo feature', () => {
   afterEach(() => {
     jest.resetModules();
   });
@@ -39,23 +39,23 @@ describe('the medium promo feature', () => {
   });
 
   it('should have 1 container fluid class', () => {
-    const wrapper = mount(<MediumPromo customFields={config} />);
+    const wrapper = mount(<LargePromo customFields={config} />);
     expect(wrapper.find('.container-fluid')).toHaveLength(1);
   });
 
   it('should have two link elements by default', () => {
-    const wrapper = mount(<MediumPromo customFields={config} />);
+    const wrapper = mount(<LargePromo customFields={config} />);
     expect(wrapper.find('a')).toHaveLength(2);
   });
 
   it('should have one img when show image is true', () => {
-    const wrapper = mount(<MediumPromo customFields={config} />);
+    const wrapper = mount(<LargePromo customFields={config} />);
     expect(wrapper.find('Image')).toHaveLength(1);
   });
 
-  it('Headline div should have class .col-sm-xl-8 when show image is true', () => {
-    const wrapper = mount(<MediumPromo customFields={config} />);
-    expect(wrapper.find('.col-md-xl-8')).toHaveLength(1);
+  it('Headline div should have class .col-md-xl-6 when show image is true', () => {
+    const wrapper = mount(<LargePromo customFields={config} />);
+    expect(wrapper.find('.col-md-xl-6')).toHaveLength(2);
   });
 
   it('should have no Image when show image is false', () => {
@@ -64,7 +64,7 @@ describe('the medium promo feature', () => {
       showHeadline: true,
       showImage: false,
     };
-    const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
+    const wrapper = mount(<LargePromo customFields={noImgConfig} />);
     expect(wrapper.find('Image')).toHaveLength(0);
   });
 
@@ -74,7 +74,7 @@ describe('the medium promo feature', () => {
       showHeadline: true,
       showImage: false,
     };
-    const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
+    const wrapper = mount(<LargePromo customFields={noImgConfig} />);
     expect(wrapper.find('.col-sm-xl-12')).toHaveLength(1);
   });
 
@@ -84,7 +84,7 @@ describe('the medium promo feature', () => {
       showHeadline: false,
       showImage: true,
     };
-    const wrapper = mount(<MediumPromo customFields={noHeadlineConfig} />);
+    const wrapper = mount(<LargePromo customFields={noHeadlineConfig} />);
     expect(wrapper.find('a')).toHaveLength(1);
   });
 });

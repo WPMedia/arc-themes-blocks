@@ -1,7 +1,8 @@
-# `@arc-test-org/small-promo-block`
+# `@arc-test-org/large-promo-block`
 
-Block containing a small promo component.
+Block containing a large promo component.
 
 ## Usage
 
 Configuration (including content) is handled through proptypes in the PB editor
+

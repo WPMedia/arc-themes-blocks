@@ -9,6 +9,7 @@ jest.mock('prop-types', () => ({
   contentConfig: () => {},
 }));
 
+
 describe('the gallery feature block', () => {
   describe('when it is configured to inherit global content', () => {
     it('should render the global content gallery', () => {

@@ -141,12 +141,12 @@ function parseArticleItem(item, index) {
 }
 
 const ArticleBody = styled.article`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
   h1, h2, h3, h4, h5, h6, figcaption, table {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
   .body-paragraph, .interstitial-link, ol, ul, blockquote p, blockquote {
-    font-family: ${props => props.secondaryFont};
+    font-family: ${(props) => props.secondaryFont};
   }
 `;
 
@@ -182,7 +182,7 @@ const ArticleBodyChain = ({ children }) => {
   //  content elements into the array. Skip if the place is taken
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
-  const firstParagraph = contentElements.find(elements => elements.type === 'text');
+  const firstParagraph = contentElements.find((elements) => elements.type === 'text');
   if (firstParagraph && firstParagraph.content && !(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
     firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
   }

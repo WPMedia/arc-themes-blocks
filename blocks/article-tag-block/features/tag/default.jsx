@@ -6,8 +6,8 @@ import getProperties from 'fusion:properties';
 import './tags.scss';
 
 const Tags = styled.a`
-  font-family:  ${props => props.primaryFont};
-  background-color:  ${props => props.primaryColor};
+  font-family:  ${(props) => props.primaryFont};
+  background-color:  ${(props) => props.primaryColor};
 `;
 
 

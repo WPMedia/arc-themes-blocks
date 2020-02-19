@@ -13,9 +13,10 @@ const HtmlSafe = ({
   const defaultAllowedTags = sanitizeHtml.defaults.allowedTags.concat(['h1',
     'h2',
     'amp-iframe', 'style']);
-  const defaultAllowedAttrs = Object.assign({},
-    sanitizeHtml.defaults.allowedAttributes,
-    { '*': ['data-*'] });
+  const defaultAllowedAttrs = {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    '*': ['data-*'],
+  };
 
   const cleanContent = sanitizeHtml(content, {
     allowedTags: allowedTags == null ? defaultAllowedTags : allowedTags,

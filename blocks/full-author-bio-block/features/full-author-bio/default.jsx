@@ -12,15 +12,15 @@ import {
 import './full-author-bio.scss';
 
 const StyledAuthorContent = styled.div`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   .author-name {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
   .author-title {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
   .author-bio {
-    font-family: ${props => props.secondaryFont};
+    font-family: ${(props) => props.secondaryFont};
   }
 `;
 
@@ -112,7 +112,7 @@ const FullAuthorBio = () => {
           </p>
           <div className="social-items">
             {
-              socials.map(item => (
+              socials.map((item) => (
                 <a
                   className={`social-column ${item}`}
                   key={item}

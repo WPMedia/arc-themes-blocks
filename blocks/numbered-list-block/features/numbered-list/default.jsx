@@ -11,11 +11,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Number = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 @Consumer

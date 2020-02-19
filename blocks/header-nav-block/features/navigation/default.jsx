@@ -12,12 +12,12 @@ import './navigation.scss';
 
 const StyledNav = styled.nav`
   * {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
 const NavButton = styled.button`
-  background-color: ${props => props.primaryColor};
+  background-color: ${(props) => props.primaryColor};
 `;
 
 

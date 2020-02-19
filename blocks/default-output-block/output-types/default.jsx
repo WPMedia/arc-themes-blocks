@@ -27,7 +27,7 @@ const getCustomMetaData = (metaHTMLString) => {
     const DomParser = require('dom-parser');
     customMetaData = new DomParser().parseFromString(metaHTMLString)
       .getElementsByTagName('META')
-      .map(metaNode => ({
+      .map((metaNode) => ({
         metaName: metaNode.getAttribute('name'),
         metaValue: (metaNode.getAttribute('value') || metaNode.getAttribute('content')),
       }));
@@ -38,7 +38,7 @@ const getCustomMetaData = (metaHTMLString) => {
 const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
   const metaHTMLString = ReactDOMServer.renderToString(<MetaTags />);
   const customMetaData = getCustomMetaData(metaHTMLString)
-    .filter(metaObj => !metaData[metaObj.metaName]);
+    .filter((metaObj) => !metaData[metaObj.metaName]);
   return (
     <>
       {customMetaData.length > 0 && customMetaData.map((metaObj, i) => (
@@ -113,20 +113,16 @@ const SampleOutputType = ({
       storyMetaDataTags = (
         <>
           { metaData.description
-            && <meta name="description" content={metaData.description} />
-          }
+            && <meta name="description" content={metaData.description} />}
           { metaData.keywords
-          && <meta name="keywords" content={metaData.keywords} />
-          }
+          && <meta name="keywords" content={metaData.keywords} />}
 
           <meta property="og:title" content={metaData.ogTitle} />
 
           { metaData.ogImage
-          && <meta property="og:image" content={metaData.ogImage} />
-          }
+          && <meta property="og:image" content={metaData.ogImage} />}
           { metaData.ogImageAlt
-          && <meta property="og:image:alt" content={metaData.ogImageAlt} />
-          }
+          && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
           {pageType === 'article' && (
             <meta name="robots" content="noarchive" />
           )}
@@ -148,8 +144,7 @@ const SampleOutputType = ({
     tagMetaDataTags = (
       <>
         { metaData.description
-        && <meta name="description" content={metaData.description} />
-        }
+        && <meta name="description" content={metaData.description} />}
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -158,14 +153,11 @@ const SampleOutputType = ({
   twitterTags = (
     <>
       { metaData.ogSiteName
-      && <meta property="og:site_name" content={metaData.ogSiteName} />
-      }
+      && <meta property="og:site_name" content={metaData.ogSiteName} />}
       { metaData.twitterSite
-      && <meta property="twitter:site" content={metaData.twitterSite} />
-      }
+      && <meta property="twitter:site" content={metaData.twitterSite} />}
       { metaData.twitterCard
-      && <meta property="twitter:card" content={metaData.twitterCard} />
-      }
+      && <meta property="twitter:card" content={metaData.twitterCard} />}
     </>
   );
 

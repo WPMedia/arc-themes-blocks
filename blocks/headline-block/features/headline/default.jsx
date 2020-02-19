@@ -5,7 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import './headline.scss';
 
 const HeadlineHeader = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Headline = () => {

@@ -1,0 +1,13 @@
+h1.section-title {
+  color: $ui-primary-font-color;
+  display: block;
+}
+
+.section-container {
+  > a {
+    font-size: 14px;
+    color: $ui-primary-font-color;
+  }
+  margin-top: map-get($spacers, 'sm');
+}
+

@@ -9,6 +9,7 @@ const resolve = (key = {}) => {
 };
 
 export default {
+  schemaName: 'ans-item',
   params,
   resolve,
 };

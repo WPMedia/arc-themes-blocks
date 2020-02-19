@@ -49,6 +49,10 @@
     "@arc-test-org/date-block": "file:blocks/date-block",
     "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
     "@arc-test-org/default-output-block": "file:blocks/default-output-block",
+    "@arc-test-org/small-promo": "file:blocks/small-promo-block",
+    "@arc-test-org/medium-promo": "file:blocks/medium-promo-block",
+    "@arc-test-org/large-promo": "file:blocks/large-promo-block",
+    "@arc-test-org/extra-large-promo": "file:blocks/extra-large-promo-block",
     "@arc-test-org/news-theme-css": "^1.4.2",
     "@arc-test-org/engine-theme-sdk": "^0.4.2"
   },

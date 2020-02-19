@@ -54,7 +54,7 @@
     "@arc-test-org/large-promo": "file:blocks/large-promo-block",
     "@arc-test-org/extra-large-promo": "file:blocks/extra-large-promo-block",
     "@arc-test-org/news-theme-css": "^1.4.2",
-    "@arc-test-org/engine-theme-sdk": "^0.4.2"
+    "@arc-test-org/engine-theme-sdk": "^0.5.1"
   },
   "jest": {
     "transformIgnorePatterns": [

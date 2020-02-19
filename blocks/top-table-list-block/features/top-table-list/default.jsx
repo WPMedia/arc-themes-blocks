@@ -27,11 +27,11 @@ const extractImage = (storyObject) => storyObject.promo_items
 
 const unserializeStory = (storyObject) => ({
   id: storyObject._id,
-  itemTitle: storyObject.headlines.basic || '',
+  itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
   imageURL: extractImage(storyObject) || '',
   displayDate: storyObject.display_date || '',
-  description: storyObject.description.basic || '',
-  by: storyObject.credits.by || [],
+  description: (storyObject.description && storyObject.description.basic) || '',
+  by: (storyObject.credits && storyObject.credits.by) || [],
   websiteURL: storyObject.website_url || '',
   element: storyObject,
 });

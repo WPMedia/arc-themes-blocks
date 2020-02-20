@@ -8,6 +8,14 @@ jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   LinkedInIcon: () => <svg />,
   InstagramIcon: () => <svg />,
   TwitterIcon: () => <svg />,
+  FacebookIcon: () => <svg />,
+  RedditIcon: () => <svg />,
+  YoutubeIcon: () => <svg />,
+  MediumIcon: () => <svg />,
+  TumblrIcon: () => <svg />,
+  PinterestIcon: () => <svg />,
+  SnapchatIcon: () => <svg />,
+  WhatsAppIcon: () => <svg />,
 }));
 
 describe('Given the list of author(s) from the article', () => {
@@ -265,5 +273,92 @@ describe('Given the list of author(s) from the article', () => {
     }));
     const wrapper = mount(<AuthorBio />);
     expect(wrapper.find('img')).toHaveLength(0);
+  });
+
+  it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss not the mail fallback', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+                { site: 'facebook', url: 'https://www.thefacebook.com' },
+                { site: 'reddit', url: 'httsp://reddit.com' },
+                { site: 'youtube', url: 'httsp://youtube.com' },
+                { site: 'medium', url: 'httsp://medium.com' },
+                { site: 'tumblr', url: 'httsp://tumblr.com' },
+                { site: 'pinterest', url: 'httsp://pinterest.com' },
+                { site: 'snapchat', url: 'httsp://snapchat.com' },
+                { site: 'whatsapp', url: 'httsp://whatsapp.com' },
+                { site: 'linkedin', url: 'httsp://whatsapp.com' },
+                { site: 'something new', url: 'https://default.com' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(12);
+
+    // will need to check for svg class?
+    // could look for title description
+  });
+  it('should return no links if no social links provided', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(0);
   });
 });

@@ -24,7 +24,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const showSeparator = by && by.length !== 0;
 
   return (
-    <div className="list-item" id={id} key={`result-card-${itemTitle}`}>
+    <div key={id} className="list-item">
       <a href={constructedURL} title={itemTitle} className="list-anchor">
         {imageURL !== '' ? (
           <Image

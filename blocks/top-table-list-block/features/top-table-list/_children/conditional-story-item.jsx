@@ -26,8 +26,6 @@ const ConditionalStoryItem = (props) => {
     overlineURL = '',
   } = props;
 
-  const sizeBasedId = `item-${storySize}-${id}`;
-
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
     case EXTRA_LARGE:
@@ -36,7 +34,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={sizeBasedId}
+          id={id}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
           by={by}
@@ -52,7 +50,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={sizeBasedId}
+          id={id}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
           by={by}
@@ -68,10 +66,10 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={sizeBasedId}
+          id={id}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
-          by={sizeBasedId}
+          by={by}
           element={element}
           displayDate={displayDate}
         />
@@ -82,7 +80,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={sizeBasedId}
+          id={id}
         />
       );
     default:

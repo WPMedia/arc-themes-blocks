@@ -22,7 +22,7 @@ const MediumListItem = (props) => {
   const showSeparator = by && by.length !== 0;
 
   return (
-    <div className="list-item" key={`result-card-${itemTitle}`} id={id}>
+    <div className="list-item" key={id}>
       <a href={constructedURL} title={itemTitle} className="list-anchor">
         {imageURL !== '' ? (
           <Image

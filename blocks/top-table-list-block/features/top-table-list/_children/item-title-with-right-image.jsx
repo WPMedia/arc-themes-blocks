@@ -40,7 +40,7 @@ const ItemTitleWithRightImage = (props) => {
   } = props;
 
   return (
-    <StoryItemStyles key={id} id={id} className="top-table-list-item-simple">
+    <StoryItemStyles key={id} className="top-table-list-item-simple">
       {itemTitle !== '' ? (
         <div className="simple-list-headline-anchor">
           <Title primaryFont={primaryFont} className="simple-list-headline-text">

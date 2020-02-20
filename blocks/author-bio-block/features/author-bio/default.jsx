@@ -8,6 +8,14 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
+  FacebookIcon,
+  RedditIcon,
+  YoutubeIcon,
+  MediumIcon,
+  TumblrIcon,
+  PinterestIcon,
+  SnapchatIcon,
+  WhatsAppIcon,
 } from '@arc-test-org/engine-theme-sdk';
 
 import './author-bio.scss';
@@ -69,12 +77,69 @@ const AuthorBio = () => {
                   </a>
                 );
                 break;
+              case 'facebook':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <FacebookIcon fill={getThemeStyle(arcSite)['primary-color']} title="Facebook" description="Connect on Facebook" />
+                  </a>
+                );
+                break;
+              case 'reddit':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <RedditIcon fill={getThemeStyle(arcSite)['primary-color']} title="Reddit" description="Connect on Reddit" />
+                  </a>
+                );
+                break;
+              case 'youtube':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener" id="link-social-youtube">
+                    <YoutubeIcon fill={getThemeStyle(arcSite)['primary-color']} title="YouTube" description="Connect on YouTube" />
+                  </a>
+                );
+                break;
+              case 'medium':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <MediumIcon fill={getThemeStyle(arcSite)['primary-color']} title="Medium" description="Connect on Medium" />
+                  </a>
+                );
+                break;
+              case 'tumblr':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <TumblrIcon fill={getThemeStyle(arcSite)['primary-color']} title="Tumblr" description="Connect on Tumblr" />
+                  </a>
+                );
+                break;
+              case 'pinterest':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <PinterestIcon fill={getThemeStyle(arcSite)['primary-color']} title="Pinterest" description="Connect on Pinterest" />
+                  </a>
+                );
+                break;
+              case 'snapchat':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <SnapchatIcon fill={getThemeStyle(arcSite)['primary-color']} title="Snapchat" description="Connect on Snapchat" />
+                  </a>
+                );
+                break;
+              case 'whatsapp':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <WhatsAppIcon fill={getThemeStyle(arcSite)['primary-color']} title="WhatsApp" description="Connect on WhatsApp" />
+                  </a>
+                );
+                break;
               default:
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
                     <EnvelopeIcon fill={getThemeStyle(arcSite)['primary-color']} title="Email" description="Send an email" />
                   </a>
                 );
+                break;
             }
             result.push((
               <Fragment key={socialLink.site}>

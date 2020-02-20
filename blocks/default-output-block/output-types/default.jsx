@@ -22,7 +22,6 @@ const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const getCustomMetaData = (metaHTMLString) => {
   let customMetaData = null;
-  // eslint-disable-line global-require,@typescript-eslint/no-var-requires
   if (typeof window === 'undefined') {
     const DomParser = require('dom-parser');
     customMetaData = new DomParser().parseFromString(metaHTMLString)
@@ -79,7 +78,6 @@ const SampleOutputType = ({
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
-      // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
       if (metaValue('title')) {

@@ -1,6 +1,8 @@
+// eslint-disable-next-line max-classes-per-file
 import React from 'react';
 import { shallow } from 'enzyme';
 
+// two classes for testing purposes
 jest.mock('./_children/global-content', () => class GlobalContentGallery {});
 jest.mock('./_children/custom-content', () => class CustomContentGallery {});
 jest.mock('prop-types', () => ({
@@ -23,13 +25,17 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
 
-      const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />);
+      const wrapper = shallow(
+        <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
+      );
       expect(wrapper.is('CustomContentGallery')).toBeTruthy();
     });
 
     it('should pass the content config for fetching the gallery', () => {
       const { default: GalleryFeature } = require('./default');
-      const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />);
+      const wrapper = shallow(
+        <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
+      );
       expect(wrapper.props()).toStrictEqual({ contentConfig: {} });
     });
   });

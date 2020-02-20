@@ -19,10 +19,11 @@ const VerticalOverlineImageStoryItem = (props) => {
     displayDate,
     overlineURL,
     overlineText,
+    id,
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
-    <div className="list-item list-item-vertical" key={`result-card-${itemTitle}`}>
+    <div className="list-item list-item-vertical" id={id} key={`result-card-${itemTitle}`}>
       {overlineText ? (
         <StyledLink href={overlineURL} className="overline">
           {overlineText}

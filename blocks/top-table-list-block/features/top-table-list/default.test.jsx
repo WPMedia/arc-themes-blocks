@@ -37,14 +37,9 @@ describe('top table list', () => {
 
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
-    // jest.mock('fusion:properties', () => ({
-    //   websiteDomain: '',
-    // }));
-
     const wrapper = mount(
       <TopTableList />,
     );
-    // should show placeholder?
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
   it('renders one content item with complete data', () => {
@@ -78,7 +73,6 @@ describe('top table list', () => {
       <TopTableList />,
     );
 
-    // should also show not the placeholder image
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
 });

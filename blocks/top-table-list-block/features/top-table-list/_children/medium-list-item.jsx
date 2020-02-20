@@ -17,11 +17,12 @@ const MediumListItem = (props) => {
     by,
     element,
     displayDate,
+    id,
   } = props;
   const showSeparator = by && by.length !== 0;
 
   return (
-    <div className="list-item" key={`result-card-${itemTitle}`}>
+    <div className="list-item" key={`result-card-${itemTitle}`} id={id}>
       <a href={constructedURL} title={itemTitle} className="list-anchor">
         {imageURL !== '' ? (
           <Image

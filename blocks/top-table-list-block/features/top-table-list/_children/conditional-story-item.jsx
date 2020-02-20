@@ -14,17 +14,19 @@ const ConditionalStoryItem = (props) => {
   const {
     itemTitle = '',
     imageURL = '',
-    id = '',
+    id,
     storySize,
     primaryFont = '',
-    constructedURL,
-    descriptionText,
-    by,
-    element,
-    displayDate,
+    constructedURL = '',
+    descriptionText = '',
+    by = [],
+    element = {},
+    displayDate = '',
     overlineText = '',
     overlineURL = '',
   } = props;
+
+  const sizeBasedId = `item-${storySize}-${id}`;
 
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -34,7 +36,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={id}
+          id={sizeBasedId}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
           by={by}
@@ -50,7 +52,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={id}
+          id={sizeBasedId}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
           by={by}
@@ -66,10 +68,10 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={id}
+          id={sizeBasedId}
           constructedURL={constructedURL}
           descriptionText={descriptionText}
-          by={by}
+          by={sizeBasedId}
           element={element}
           displayDate={displayDate}
         />
@@ -80,7 +82,7 @@ const ConditionalStoryItem = (props) => {
           primaryFont={primaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
-          id={id}
+          id={sizeBasedId}
         />
       );
     default:

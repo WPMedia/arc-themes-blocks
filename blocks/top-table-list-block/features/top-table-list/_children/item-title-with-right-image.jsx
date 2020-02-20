@@ -36,11 +36,11 @@ const StoryItemStyles = styled.div`
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle = '', imageURL = '', id = '', primaryFont = '',
+    itemTitle, imageURL, id, primaryFont,
   } = props;
 
   return (
-    <StoryItemStyles key={id} className="top-table-list-item-simple">
+    <StoryItemStyles key={id} id={id} className="top-table-list-item-simple">
       {itemTitle !== '' ? (
         <div className="simple-list-headline-anchor">
           <Title primaryFont={primaryFont} className="simple-list-headline-text">

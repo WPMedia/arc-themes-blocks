@@ -66,13 +66,6 @@ describe('The story-feed-list', () => {
       });
 
       it('should render one list item as its child', () => {
-        expect(wrapper.find('.results-list-container').children().length).toEqual(1);
-        expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
-        expect(wrapper.find('.list-item').length).toEqual(1);
-      });
-
-      it('should render one list item as its child', () => {
-        expect(wrapper.find('.results-list-container').children().length).toEqual(1);
         expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
         expect(wrapper.find('.list-item').length).toEqual(1);
       });

@@ -9,7 +9,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test:coverage"
+      "pre-commit": "npm run test:coverage",
+      "pre-push": "npm run lint"
     }
   },
   "devDependencies": {

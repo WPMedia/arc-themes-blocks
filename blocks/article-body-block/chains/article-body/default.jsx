@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
@@ -59,7 +58,7 @@ function parseArticleItem(item, index) {
         <Fragment key={key}>
           <p className="interstitial-link">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
-            <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
+            <a href={url} aria-label="Open related story" dangerouslySetInnerHTML={{ __html: content }} />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
           </p>
         </Fragment>

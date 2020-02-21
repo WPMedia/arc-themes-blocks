@@ -8,6 +8,10 @@ Fusion News Theme double-chain block
 const doubleChainBlock = require('@arc-test-org/double-chain-block');
 ```
 
+## Parameters 
+
+Takes in a number of how many items to be put in column one. The rest go in column two. Negative numbers here will yield nothing.
+
 ## Key features
 
 - Places features within the Double Chain within two columns. 

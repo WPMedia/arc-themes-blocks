@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import styled from 'styled-components';
 import { useAppContext } from 'fusion:context';
@@ -28,7 +27,7 @@ const HeaderNav = () => {
 
   return (
     <StyledNav className="news-theme-navigation" primaryFont={getThemeStyle(arcSite)['secondary-font-family']}>
-      <button className="nav-search border" type="button"><SearchIcon fill="white" /></button>
+      <button className="nav-search border" type="button" aria-label="Search"><SearchIcon fill="white" /></button>
       <button className="nav-sections border" type="button">
         <span>Sections</span>
         <HamburgerMenuIcon fill="white" />

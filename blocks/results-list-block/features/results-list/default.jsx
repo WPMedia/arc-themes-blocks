@@ -35,7 +35,7 @@ class ResultsList extends Component {
     const { contentService, contentConfigValues } = listContentConfig;
     if (moreStories) {
       let value = parseInt(contentConfigValues.size, 10);
-      value += value;
+      value += 15;
       contentConfigValues.size = value.toString();
     }
     this.fetchContent({
@@ -137,7 +137,7 @@ class ResultsList extends Component {
                 See More
                 {' '}
                 <span className="visuallyHidden">
-                  See more stories about this topic
+                  stories about this topic
                 </span>
               </button>
             </div>

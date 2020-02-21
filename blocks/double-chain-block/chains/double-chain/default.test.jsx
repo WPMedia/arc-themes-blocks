@@ -1,7 +1,6 @@
+import React from 'react';
+import { shallow } from 'enzyme';
 import DoubleChain from './default';
-
-const React = require('react');
-const { shallow } = require('enzyme');
 
 describe('double chain', () => {
   const Comp1 = () => <div>1</div>;

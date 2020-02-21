@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import DoubleChain from './default';
 
-describe('double chain', () => {
+describe('the double chain block', () => {
+  beforeEach(() => {
   const Comp1 = () => <div>1</div>;
   const Comp2 = () => <div>2</div>;
   const Comp3 = () => <div>3</div>;

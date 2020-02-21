@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import unescapeHtml from '../shared/unescape-html';
 
 const Table = ({ element }) => {
   const { header, rows } = element;
 
-  const tableHeaders = header.map(headerItem => (
+  const tableHeaders = header.map((headerItem) => (
     <th
       key={headerItem._id}
       dangerouslySetInnerHTML={{ __html: unescapeHtml(headerItem.content) }}
@@ -12,7 +13,7 @@ const Table = ({ element }) => {
   ));
 
   const tableRows = rows.map((row) => {
-    const cells = row.map(item => (
+    const cells = row.map((item) => (
       <td
         key={item._id}
         dangerouslySetInnerHTML={{ __html: unescapeHtml(item.content) }}

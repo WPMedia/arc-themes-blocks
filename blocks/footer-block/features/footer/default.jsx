@@ -13,7 +13,7 @@ import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
 import './footer.scss';
 
 const FooterSection = styled.ul`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Footer = ({ customFields: { navigationConfig } }) => {
@@ -21,12 +21,10 @@ const Footer = ({ customFields: { navigationConfig } }) => {
 
   const content = useContent({
     source: navigationConfig.contentService,
-    query: Object.assign(
-      {
-        hierarchy: 'footer',
-      },
-      navigationConfig.contentConfigValues,
-    ),
+    query: {
+      hierarchy: 'footer',
+      ...navigationConfig.contentConfigValues,
+    },
   });
 
   const footerColumns = (content && content.children) ? content.children : [];
@@ -106,7 +104,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
       <div className="row legacy-footer-row">
         {/* The columns are 2D arrays of columns x column items. Iterate through both */}
         {footerColumns.map((column) => {
-          const columnItems = (column.children) ? column.children.map(item => (
+          const columnItems = (column.children) ? column.children.map((item) => (
             <li className="footer-item" key={item._id}>
               <a href={item.url}>{item.display_name}</a>
             </li>

@@ -5,11 +5,11 @@ import getThemeStyle from 'fusion:themes';
 import './tag-title.scss';
 
 const StyledName = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const StyledDescription = styled.p`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const TagTitle = () => {

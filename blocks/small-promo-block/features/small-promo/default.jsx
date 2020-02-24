@@ -9,7 +9,7 @@ import './small-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const SmallPromo = ({ customFields, arcSite }) => {

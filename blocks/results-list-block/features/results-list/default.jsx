@@ -30,10 +30,10 @@ class ResultsList extends Component {
     this.fetchStories(false);
   }
 
-  fetchStories(moreStories) {
+  fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
-    if (moreStories) {
+    if (additionalStoryAmount) {
       let value = parseInt(contentConfigValues.size, 10);
       value += 15;
       contentConfigValues.size = value.toString();

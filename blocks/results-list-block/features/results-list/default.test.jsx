@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback */
+/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';

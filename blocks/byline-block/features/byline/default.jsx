@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import './byline.scss';
 
 const BylineSection = styled.section`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
   font-size: 1.25rem;
   line-height: 2.5rem;
   color: #191919;
@@ -79,7 +79,7 @@ class ArticleByline extends Component {
       return null;
     });
 
-    const numAuthors = authors.length && authors.every(element => element !== null)
+    const numAuthors = authors.length && authors.every((element) => element !== null)
       ? authors.length : 0;
     // This will be an innerHTML to accommodate potential multiple anchor tags within the section
     // Leave it empty so that if there's no author with listed name it would just return '' string

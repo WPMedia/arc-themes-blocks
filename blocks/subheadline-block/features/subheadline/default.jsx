@@ -5,7 +5,7 @@ import './subheadline.scss';
 import styled from 'styled-components';
 
 const SubheadH2 = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const SubHeadline = () => {

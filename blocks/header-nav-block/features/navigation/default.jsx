@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import styled from 'styled-components';
 import { useAppContext } from 'fusion:context';
@@ -12,12 +13,12 @@ import './navigation.scss';
 
 const StyledNav = styled.nav`
   * {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
 const NavButton = styled.button`
-  background-color: ${props => props.primaryColor};
+  background-color: ${(props) => props.primaryColor};
 `;
 
 

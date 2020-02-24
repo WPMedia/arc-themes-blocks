@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -8,7 +9,7 @@ import './small-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const SmallPromo = ({ customFields, arcSite }) => {
@@ -26,7 +27,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
     return `${websiteDomain}/${websiteUrl}`;
   };
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
@@ -50,8 +51,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
               </HeadlineText>
             </a>
           </div>
-        )
-        }
+        )}
         {customFields.showImage
         && (
           <div className="col-sm-xl-4">
@@ -72,8 +72,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
               />
             </a>
           </div>
-        )
-        }
+        )}
       </div>
     </article>
   );

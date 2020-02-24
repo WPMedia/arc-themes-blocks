@@ -13,13 +13,13 @@ import FullscreenIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/ic
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
 const LeadArtWrapperFigure = styled.figure`
   figcaption {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
@@ -70,12 +70,12 @@ class LeadArt extends Component {
       if (lead_art.type === 'raw_html') {
         if (buttonPosition !== 'hidden') {
           const mainContent = (
-            <React.Fragment>
+            <>
               <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-            </React.Fragment>
+            </>
           );
           lightbox = (
-            <React.Fragment>
+            <>
               {isOpen && (
                 <Lightbox
                   mainSrc={mainContent}
@@ -84,7 +84,7 @@ class LeadArt extends Component {
                   enableZoom={enableZoom}
                 />
               )}
-            </React.Fragment>
+            </>
           );
         }
 
@@ -102,7 +102,7 @@ class LeadArt extends Component {
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
-            <React.Fragment>
+            <>
               {isOpen && (
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
@@ -112,7 +112,7 @@ class LeadArt extends Component {
                   enableZoom={enableZoom}
                 />
               )}
-            </React.Fragment>
+            </>
           );
         }
 

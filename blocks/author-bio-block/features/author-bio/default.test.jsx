@@ -321,11 +321,8 @@ describe('Given the list of author(s) from the article', () => {
 
     const socialButtonsContainer = wrapper.find('section.socialButtons');
     expect(socialButtonsContainer.children()).toHaveLength(12);
-
-    // will need to check for svg class?
-    // could look for title description
   });
-  it('should return no links if no social links provided', () => {
+  it('should show null if no social link objects, with url and title, are provided', () => {
     const { default: AuthorBio } = require('./default');
 
     jest.mock('fusion:context', () => ({

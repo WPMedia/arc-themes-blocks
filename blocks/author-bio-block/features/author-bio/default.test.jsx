@@ -1,13 +1,21 @@
-const React = require('react');
-const { shallow, mount } = require('enzyme');
+import React from 'react';
+import { shallow, mount } from 'enzyme';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   Image: () => <div />,
-  EnvelopeIcon: () => <svg />,
-  LinkedInIcon: () => <svg />,
-  InstagramIcon: () => <svg />,
-  TwitterIcon: () => <svg />,
+  EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,
+  LinkedInIcon: () => <svg>LinkedInIcon</svg>,
+  InstagramIcon: () => <svg>InstagramIcon</svg>,
+  TwitterIcon: () => <svg>TwitterIcon</svg>,
+  FacebookIcon: () => <svg>FacebookIcon</svg>,
+  RedditIcon: () => <svg>RedditIcon</svg>,
+  YoutubeIcon: () => <svg>YoutubeIcon</svg>,
+  MediumIcon: () => <svg>MediumIcon</svg>,
+  TumblrIcon: () => <svg>TumblrIcon</svg>,
+  PinterestIcon: () => <svg>PinterestIcon</svg>,
+  SnapchatIcon: () => <svg>SnapchatIcon</svg>,
+  WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
 }));
 
 describe('Given the list of author(s) from the article', () => {
@@ -265,5 +273,166 @@ describe('Given the list of author(s) from the article', () => {
     }));
     const wrapper = mount(<AuthorBio />);
     expect(wrapper.find('img')).toHaveLength(0);
+  });
+
+  it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss not the mail fallback', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+                { site: 'facebook', url: 'https://www.thefacebook.com' },
+                { site: 'reddit', url: 'httsp://reddit.com' },
+                { site: 'youtube', url: 'httsp://youtube.com' },
+                { site: 'medium', url: 'httsp://medium.com' },
+                { site: 'tumblr', url: 'httsp://tumblr.com' },
+                { site: 'pinterest', url: 'httsp://pinterest.com' },
+                { site: 'snapchat', url: 'httsp://snapchat.com' },
+                { site: 'whatsapp', url: 'httsp://whatsapp.com' },
+                { site: 'linkedin', url: 'httsp://whatsapp.com' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(11);
+  });
+  it('should show null if no social link objects, with url and title, are provided', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(0);
+  });
+
+  it('a snapchat social object does not render the default envelope icon but its correct snap one', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'snapchat', url: 'httsp://snapchat.com' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(1);
+
+    expect(socialButtonsContainer.text()).toBe('SnapchatIcon');
+  });
+
+  it('an unrecognized social media title renders an envelope icon', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'Something Gamechanging', url: 'httsp://tiktiktoktoktok.com' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.children()).toHaveLength(1);
+
+    expect(socialButtonsContainer.text()).toBe('EnvelopeIcon');
   });
 });

@@ -5,7 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import './overline.scss';
 
 const StyledLink = styled.a`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;

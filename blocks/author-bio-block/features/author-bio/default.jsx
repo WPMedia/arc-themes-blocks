@@ -25,13 +25,13 @@ Testing: Unit tests are written to cover this block
 */
 
 const AuthorBioStyled = styled.section`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   .authorName {
-    font-family: ${props => props.primaryFont};
-    color: ${props => props.primaryColor};
+    font-family: ${(props) => props.primaryFont};
+    color: ${(props) => props.primaryColor};
   }
   button {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 

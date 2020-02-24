@@ -55,16 +55,13 @@ describe('overline feature for default output type', () => {
         const labelObj = {
           label: { basic: { display: true, text: 'EXCLUSIVE', url: '/exclusive' } },
         };
-        const contextObjWithLabel = Object.assign(
-          {},
-          mockContextObj,
-          {
-            globalContent: {
-              ...labelObj,
-              ...mockContextObj.globalContent,
-            },
+        const contextObjWithLabel = {
+          ...mockContextObj,
+          globalContent: {
+            ...labelObj,
+            ...mockContextObj.globalContent,
           },
-        );
+        };
         useFusionContext.mockImplementation(() => contextObjWithLabel);
       });
 
@@ -86,16 +83,14 @@ describe('overline feature for default output type', () => {
         const labelObj = {
           label: { basic: { display: false, text: 'EXCLUSIVE', url: '/exclusive' } },
         };
-        const contextObjWithLabel = Object.assign(
-          {},
-          mockContextObj,
-          {
-            globalContent: {
-              ...labelObj,
-              ...mockContextObj.globalContent,
-            },
+        const contextObjWithLabel = {
+
+          ...mockContextObj,
+          globalContent: {
+            ...labelObj,
+            ...mockContextObj.globalContent,
           },
-        );
+        };
         useFusionContext.mockImplementation(() => contextObjWithLabel);
       });
 

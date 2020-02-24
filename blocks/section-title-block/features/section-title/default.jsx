@@ -5,12 +5,12 @@ import getThemeStyle from 'fusion:themes';
 import './section-title.scss';
 
 const StyledTitle = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
 `;
 
 const StyledLink = styled.a`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   text-decoration: none;
 `;
 

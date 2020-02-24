@@ -1,0 +1,22 @@
+{
+  "name": "@arc-test-org/top-table-list-block",
+  "version": "0.1.1",
+  "description": "Top Table List – Arc Block",
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "dependencies": {
+    "styled-components": "^4.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  }
+}

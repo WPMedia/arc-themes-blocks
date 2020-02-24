@@ -12,12 +12,12 @@ import './navigation.scss';
 
 const StyledNav = styled.nav`
   * {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
 const NavButton = styled.button`
-  background-color: ${props => props.primaryColor};
+  background-color: ${(props) => props.primaryColor};
 `;
 
 
@@ -27,7 +27,7 @@ const HeaderNav = () => {
 
   return (
     <StyledNav className="news-theme-navigation" primaryFont={getThemeStyle(arcSite)['secondary-font-family']}>
-      <button className="nav-search border" type="button"><SearchIcon fill="white" /></button>
+      <button className="nav-search border" type="button" aria-label="Search"><SearchIcon fill="white" /></button>
       <button className="nav-sections border" type="button">
         <span>Sections</span>
         <HamburgerMenuIcon fill="white" />

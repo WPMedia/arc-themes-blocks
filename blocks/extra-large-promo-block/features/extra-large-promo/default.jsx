@@ -54,7 +54,7 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
   const overlineText = (content.label && content.label.basic && content.label.basic.text)
     || '';
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {

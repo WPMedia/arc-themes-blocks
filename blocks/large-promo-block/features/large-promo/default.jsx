@@ -54,7 +54,7 @@ const LargePromo = ({ customFields, arcSite }) => {
   const overlineText = (content.label && content.label.basic && content.label.basic.text)
     || '';
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 

@@ -27,7 +27,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
     return `${websiteDomain}/${websiteUrl}`;
   };
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 

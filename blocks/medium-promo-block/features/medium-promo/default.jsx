@@ -41,7 +41,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
     && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 

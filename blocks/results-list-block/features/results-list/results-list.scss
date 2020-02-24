@@ -88,3 +88,24 @@
     justify-content: flex-start;
   }
 }
+
+.see-more {
+  text-align: center;
+  margin-top: map-get($spacers, 'xl');
+  margin-bottom: map-get($spacers, 'xl');
+  > button {
+    width: 213px;
+    height: 48px;
+  }
+  .visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+}

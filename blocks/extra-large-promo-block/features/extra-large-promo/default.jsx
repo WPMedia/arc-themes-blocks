@@ -11,15 +11,15 @@ import './extra-large-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
-  font-family: ${(props) => props.primaryFont};
+  font-family: ${props => props.primaryFont};
 `;
 
 const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
+  font-family: ${props => props.secondaryFont};
 `;
 
 const OverlineLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
+  font-family: ${props => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
@@ -54,7 +54,7 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
   const overlineText = (content.label && content.label.basic && content.label.basic.text)
     || '';
 
-  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {

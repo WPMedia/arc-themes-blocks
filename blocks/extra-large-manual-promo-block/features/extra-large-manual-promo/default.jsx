@@ -7,30 +7,29 @@ import './extra-large-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const DescriptionText = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 const OverlineLink = styled.a`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
 
 const OverlineHeader = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
 
-const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
-  return customFields.linkURL ? (
-    <article className="container-fluid xl-large-promo">
-      <div className="row xl-promo-padding-bottom">
-        {(customFields.showHeadline || customFields.showDescription
+const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkURL ? (
+  <article className="container-fluid xl-large-promo">
+    <div className="row xl-promo-padding-bottom">
+      {(customFields.showHeadline || customFields.showDescription
           || customFields.showOverline)
         && (
           <div className="col-sm-xl-12 flex-col">
@@ -97,10 +96,9 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
             )}
           </div>
         )}
-      </div>
-    </article>
-  ) : null;
-};
+    </div>
+  </article>
+) : null);
 
 ExtraLargeManualPromo.propTypes = {
   customFields: PropTypes.shape({

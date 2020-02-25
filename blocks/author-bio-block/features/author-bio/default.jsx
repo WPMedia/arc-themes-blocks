@@ -16,6 +16,7 @@ import {
   PinterestIcon,
   SnapchatIcon,
   WhatsAppIcon,
+  SoundCloudIcon,
 } from '@arc-test-org/engine-theme-sdk';
 
 import './author-bio.scss';

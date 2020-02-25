@@ -193,7 +193,8 @@ const AuthorBio = () => {
             }
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
-              {(author.description) ? <p>{author.description}</p> : null}
+              {/* there will always be a description via conditional on 52 */}
+              <p>{author.description}</p>
               <section className="socialButtons">
                 {socialLinks}
               </section>

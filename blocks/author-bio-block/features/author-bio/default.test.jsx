@@ -435,4 +435,117 @@ describe('Given the list of author(s) from the article', () => {
 
     expect(socialButtonsContainer.text()).toBe('EnvelopeIcon');
   });
+
+  it('should fallback gracefully if author name does not exist and not render authorName link', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: '',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+    expect(wrapper.find('.authorName').length).toBe(0);
+  });
+  it('finds an author name if url exists', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              url: 'https://google.com',
+              image: {
+                url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: '',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const targetAuthorLink = wrapper.find('.descriptions > a');
+    expect(targetAuthorLink.length).toBe(1);
+    expect(targetAuthorLink.html()).toBe('<a href="https://google.com"></a>');
+  });
+
+  it('handles no author name or description', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: '',
+              description: 'desc',
+              url: 'https://google.com',
+              image: {
+                url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: '',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    expect(wrapper.find('.authors').length).toBe(1);
+  });
 });

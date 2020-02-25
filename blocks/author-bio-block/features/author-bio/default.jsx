@@ -17,6 +17,7 @@ import {
   SnapchatIcon,
   WhatsAppIcon,
   SoundCloudIcon,
+  RssIcon,
 } from '@arc-test-org/engine-theme-sdk';
 
 import './author-bio.scss';
@@ -131,6 +132,20 @@ const AuthorBio = () => {
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
                     <WhatsAppIcon fill={getThemeStyle(arcSite)['primary-color']} title="WhatsApp" description="Connect on WhatsApp" />
+                  </a>
+                );
+                break;
+              case 'soundcloud':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <SoundCloudIcon fill={getThemeStyle(arcSite)['primary-color']} title="SoundCloud" description="Listen on SoundCloud" />
+                  </a>
+                );
+                break;
+              case 'rss':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <RssIcon fill={getThemeStyle(arcSite)['primary-color']} title="RSS" description="Subscribe to RSS feed" />
                   </a>
                 );
                 break;

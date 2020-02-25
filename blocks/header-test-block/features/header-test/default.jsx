@@ -27,8 +27,12 @@ class HeaderTest extends React.Component {
         return [36, 40];
       case 'Large':
         return [30, 32];
+      case 'Medium':
+        return [26, 32];
+      case 'Small':
+        return [20, 24];
       default:
-        return { fontSize: 12, lineHeight: 10 };
+        return [26, 32];
     }
   }
 

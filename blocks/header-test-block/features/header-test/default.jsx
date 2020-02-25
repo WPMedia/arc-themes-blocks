@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-import { useFusionContext, useContent } from 'fusion:context';
-import getThemeStyle from 'fusion:themes';
 import './header.scss';
 
 const StyledHeader = styled.h1`

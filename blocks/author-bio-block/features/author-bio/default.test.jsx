@@ -16,6 +16,9 @@ jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   PinterestIcon: () => <svg>PinterestIcon</svg>,
   SnapchatIcon: () => <svg>SnapchatIcon</svg>,
   WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
+  SoundCloudIcon: () => <svg>SoundCloudIcon</svg>,
+  RssIcon: () => <svg>RssIcon</svg>,
+
 }));
 
 describe('Given the list of author(s) from the article', () => {
@@ -275,7 +278,7 @@ describe('Given the list of author(s) from the article', () => {
     expect(wrapper.find('img')).toHaveLength(0);
   });
 
-  it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss not the mail fallback', () => {
+  it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss, soundcloud not the mail fallback', () => {
     const { default: AuthorBio } = require('./default');
 
     jest.mock('fusion:context', () => ({
@@ -302,14 +305,16 @@ describe('Given the list of author(s) from the article', () => {
                 { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
                 { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
                 { site: 'facebook', url: 'https://www.thefacebook.com' },
-                { site: 'reddit', url: 'httsp://reddit.com' },
-                { site: 'youtube', url: 'httsp://youtube.com' },
-                { site: 'medium', url: 'httsp://medium.com' },
-                { site: 'tumblr', url: 'httsp://tumblr.com' },
-                { site: 'pinterest', url: 'httsp://pinterest.com' },
-                { site: 'snapchat', url: 'httsp://snapchat.com' },
-                { site: 'whatsapp', url: 'httsp://whatsapp.com' },
-                { site: 'linkedin', url: 'httsp://whatsapp.com' },
+                { site: 'reddit', url: 'https://reddit.com' },
+                { site: 'youtube', url: 'https://youtube.com' },
+                { site: 'medium', url: 'https://medium.com' },
+                { site: 'tumblr', url: 'https://tumblr.com' },
+                { site: 'pinterest', url: 'https://pinterest.com' },
+                { site: 'snapchat', url: 'https://snapchat.com' },
+                { site: 'whatsapp', url: 'https://whatsapp.com' },
+                { site: 'linkedin', url: 'https://whatsapp.com' },
+                { site: 'rss', url: 'rss feed' },
+                { site: 'soundcloud', url: 'https://soundcloud.com' },
               ],
             }],
           },
@@ -319,7 +324,10 @@ describe('Given the list of author(s) from the article', () => {
     const wrapper = mount(<AuthorBio />);
 
     const socialButtonsContainer = wrapper.find('section.socialButtons');
-    expect(socialButtonsContainer.children()).toHaveLength(11);
+    expect(socialButtonsContainer.children()).toHaveLength(13);
+
+    // envelope icon is the default we want to avoid
+    expect(socialButtonsContainer.text().includes('EnvelopeIcon')).toBe(false);
   });
   it('should show null if no social link objects, with url and title, are provided', () => {
     const { default: AuthorBio } = require('./default');
@@ -382,7 +390,7 @@ describe('Given the list of author(s) from the article', () => {
                 },
               },
               social_links: [
-                { site: 'snapchat', url: 'httsp://snapchat.com' },
+                { site: 'snapchat', url: 'https://snapchat.com' },
               ],
             }],
           },
@@ -421,7 +429,7 @@ describe('Given the list of author(s) from the article', () => {
                 },
               },
               social_links: [
-                { site: 'Something Gamechanging', url: 'httsp://tiktiktoktoktok.com' },
+                { site: 'Something Gamechanging', url: 'https://tiktiktoktoktok.com' },
               ],
             }],
           },

@@ -23,56 +23,48 @@ const VerticalOverlineImageStoryItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
-    <div className="list-item list-item-vertical" key={id}>
-      {overlineText ? (
-        <StyledLink href={overlineURL} className="overline">
-          {overlineText}
-        </StyledLink>
-      ) : null}
-      <a href={constructedURL} title={itemTitle} className="list-anchor">
-        <Title primaryFont={primaryFont} className="top-table-list-extra-large-title">
-          {itemTitle}
-        </Title>
-      </a>
-      <a href={constructedURL} title={itemTitle} className="list-anchor">
-        {imageURL !== '' ? (
-          <Image
-            url={imageURL}
-            // todo: get the proper alt tag for this image
-            alt={itemTitle}
-            smallWidth={274}
-            smallHeight={148}
-            mediumWidth={274}
-            mediumHeight={148}
-            // xl size via invision
-            // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
-            largeWidth={797}
-            largeHeight={1062}
-          />
-        ) : (
-          <div className="top-table-extra-large-image-placeholder" />
-        )}
-      </a>
-      <div
-        className={
-          descriptionText
-            ? 'headline-description'
-            : 'headline-description headline-description-spacing'
-        }
-      >
-        <div>
+    <article className="container-fluid xl-large-promo" key={id}>
+      <div className="row xl-promo-padding-bottom">
+        <div className="col-sm-xl-12 flex-col">
+          {overlineText ? (
+            <StyledLink href={overlineURL} className="overline">
+              {overlineText}
+            </StyledLink>
+          ) : null}
+          <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
+            <Title primaryFont={primaryFont} className="xl-promo-headline">
+              {itemTitle}
+            </Title>
+          </a>
+          <a href={constructedURL} title={itemTitle}>
+            {imageURL !== '' ? (
+              <Image
+                url={imageURL}
+                // todo: get the proper alt tag for this image
+                alt={itemTitle}
+                smallWidth={274}
+                smallHeight={148}
+                mediumWidth={274}
+                mediumHeight={148}
+                // xl size via invision
+                // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
+                largeWidth={797}
+                largeHeight={1062}
+              />
+            ) : null}
+          </a>
           <DescriptionText secondaryFont={primaryFont} className="description-text">
             {descriptionText}
           </DescriptionText>
-        </div>
-        <div className="author-date">
-          {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
-          {/* The Separator will only be shown if there is atleast one author name */}
-          {showSeparator && <p className="dot-separator">&#9679;</p>}
-          <ArticleDate classNames="story-date" date={displayDate} />
+          <div className="article-meta">
+            {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
+            {/* The Separator will only be shown if there is atleast one author name */}
+            {showSeparator && <p className="dot-separator">&#9679;</p>}
+            <ArticleDate date={displayDate} />
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

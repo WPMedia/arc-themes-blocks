@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading,import/no-unresolved */
+/* eslint-disable import/no-unresolved */
 import source from '@arc-core-components/content-source_story-feed_sections-v4';
 
 export default source;

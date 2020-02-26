@@ -27,12 +27,17 @@ class ResultsList extends Component {
     super(props);
     this.arcSite = props.arcSite;
     this.state = { resultList: {} };
-    this.fetchStories();
+    this.fetchStories(false);
   }
 
-  fetchStories() {
+  fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
+    if (additionalStoryAmount) {
+      let value = parseInt(contentConfigValues.size, 10);
+      value += 15;
+      contentConfigValues.size = value.toString();
+    }
     this.fetchContent({
       resultList: {
         source: contentService,
@@ -47,7 +52,8 @@ class ResultsList extends Component {
       websiteDomain,
     } = getProperties(arcSite);
     return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
+      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}`
+      : `${websiteDomain}/${websiteUrl}`;
   }
 
   render() {
@@ -83,20 +89,36 @@ class ResultsList extends Component {
                   />
                 ) : <div className="image-placeholder" />}
               </a>
-              <div className={descriptionText ? 'headline-description' : 'headline-description headline-description-spacing'}>
+              <div
+                className={
+                  descriptionText
+                    ? 'headline-description'
+                    : 'headline-description headline-description-spacing'
+                }
+              >
                 <div>
                   <a
                     href={this.constructHref(websiteUrl)}
                     title={headlineText}
                     className="list-anchor"
                   >
-                    <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
+                    <HeadlineText
+                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      className="headline-text"
+                    >
+                      {headlineText}
+                    </HeadlineText>
                   </a>
-                  <DescriptionText secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="description-text">{descriptionText}</DescriptionText>
+                  <DescriptionText
+                    secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                    className="description-text"
+                  >
+                    {descriptionText}
+                  </DescriptionText>
                 </div>
                 <div className="author-date">
                   <Byline story={element} stylesFor="list" />
-                  {/* The Separator will only be shown if there is atleast one author name */}
+                  {/* The Separator will only be shown if there is at least one author name */}
                   { showSeparator && <p className="dot-separator">&#9679;</p> }
                   <ArticleDate classNames="story-date" date={displayDate} />
                 </div>
@@ -104,6 +126,23 @@ class ResultsList extends Component {
             </div>
           );
         })}
+        {
+          contentElements && contentElements.length > 0 && (
+            <div className="see-more">
+              <button
+                type="button"
+                onClick={() => this.fetchStories(true)}
+                className="btn btn-sm"
+              >
+                See More
+                {' '}
+                <span className="visuallyHidden">
+                  stories about this topic
+                </span>
+              </button>
+            </div>
+          )
+        }
       </div>
     );
   }

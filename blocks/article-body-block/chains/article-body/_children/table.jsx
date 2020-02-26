@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import unescapeHtml from '../shared/unescape-html';
 
@@ -9,6 +8,7 @@ const Table = ({ element }) => {
     <th
       key={headerItem._id}
       dangerouslySetInnerHTML={{ __html: unescapeHtml(headerItem.content) }}
+      aria-label="See content for column"
     />
   ));
 

@@ -3,6 +3,9 @@
   "version": "0.1.1",
   "description": "Fusion News Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
+  "contributors": [
+    "Jack Howard <jack.howard@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -14,6 +17,6 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx sources"
   }
 }

@@ -7,7 +7,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import Byline from '@arc-test-org/byline-block';
 import ArticleDate from '@arc-test-org/date-block';
-import './medium-promo.scss';
+import '@arc-test-org/shared-styles-block/features/shared-styles/_medium-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`

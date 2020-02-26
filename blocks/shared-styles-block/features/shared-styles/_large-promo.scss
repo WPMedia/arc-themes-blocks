@@ -5,7 +5,7 @@
     padding-bottom: map-get($spacers, 'xs');
   }
 
-  a.overline {
+  .overline {
     color: $ui-primary-font-color;
     display: inline-block;
     padding-bottom: map-get($spacers, 'sm');

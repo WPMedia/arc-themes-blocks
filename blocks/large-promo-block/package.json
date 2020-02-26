@@ -19,6 +19,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@arc-test-org/shared-styles-block": "^0.0.1",
     "@arc-test-org/byline-block": "^0.3.2",
     "@arc-test-org/date-block": "^1.4.1",
     "@arc-test-org/engine-theme-sdk": "^0.5.1",

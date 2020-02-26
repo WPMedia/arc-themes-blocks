@@ -51,6 +51,7 @@ describe('medium list item', () => {
     const displayDate = '';
     const id = 'test';
 
+    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(<MediumListItem
       imageURL={imageURL}
       constructedURL={constructedURL}

@@ -1,11 +1,16 @@
 # `@arc-test-org/header-block`
 
-> TODO: description
+Fusion News Theme header block
 
 ## Usage
 
 ```
 const headerBlock = require('@arc-test-org/header-block');
+```
 
-// TODO: DEMONSTRATE API
+## Custom Fields
+
+```
+text: string
+size: ('Extra Large', 'Large', 'Medium', 'Small')
 ```

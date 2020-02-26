@@ -32,6 +32,7 @@ describe('item title with right image block', () => {
     const id = 'test';
     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
+    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(
       <ItemTitleWithRightImage
         imageURL={imageURL}

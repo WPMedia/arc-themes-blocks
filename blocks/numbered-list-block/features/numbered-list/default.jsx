@@ -76,10 +76,10 @@ class NumberedList extends Component {
                   <Image
                     url={extractImage(element.promo_items)}
                     alt={headlineText}
-                    smallWidth={274}
-                    smallHeight={210}
-                    mediumWidth={274}
-                    mediumHeight={210}
+                    smallWidth={105}
+                    smallHeight={71}
+                    mediumWidth={105}
+                    mediumHeight={71}
                     largeWidth={274}
                     largeHeight={210}
                   />
@@ -98,5 +98,7 @@ NumberedList.propTypes = {
     listContentConfig: PropTypes.contentConfig('ans-feed'),
   }),
 };
+
+NumberedList.label = 'Numbered List – Arc Block';
 
 export default NumberedList;

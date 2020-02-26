@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/shared-styles-block",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Fusion News Theme Shared Styles block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -14,8 +14,5 @@
   "publishConfig": {
     "access": "restricted"
   },
-  "scripts": {
-  },
-  "dependencies": {
-  }
+  "scripts": {}
 }

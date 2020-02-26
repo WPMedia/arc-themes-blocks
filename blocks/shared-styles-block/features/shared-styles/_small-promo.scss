@@ -1,0 +1,26 @@
+.small-promo {
+  box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+
+  .sm-promo-headline {
+    font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
+    margin: 0;
+    padding: 0 map-get($spacers, 'xxs') 0 0;
+    color: $ui-primary-font-color;
+    font-weight: normal;
+    text-decoration: none;
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      padding: 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sm-promo-padding-btm {
+    padding-bottom: map-get($spacers, 'xs');
+  }
+}

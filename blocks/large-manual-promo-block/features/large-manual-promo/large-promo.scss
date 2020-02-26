@@ -1,0 +1,82 @@
+.large-promo {
+  box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+
+  .lg-promo-padding-bottom {
+    padding-bottom: map-get($spacers, 'xs');
+  }
+
+  .overline {
+    color: $ui-primary-font-color;
+    display: inline-block;
+    padding-bottom: map-get($spacers, 'sm');
+    font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(16px);
+      line-height: calculateRem(22px);
+    }
+  }
+
+  .lg-promo-headline {
+    font-size: calculateRem(22px);
+    line-height: calculateRem(24px);
+    color: $ui-primary-font-color;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: map-get($spacers, 'xs');
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(26px);
+      line-height: calculateRem(32px);
+    }
+  }
+
+  p{
+    font-size: calculateRem(18px);
+    line-height: calculateRem(32px);
+    color: $ui-primary-font-color;
+    margin-bottom: map-get($spacers, 'xs');
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .article-meta {
+    span, .date{
+      color: $ui-primary-font-color;
+      font-size: calculateRem(14px);
+      line-height: calculateRem(16px);
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        font-size: calculateRem(14px);
+        line-height: calculateRem(14px);
+      }
+    }
+    .dot-separator {
+      display: inline-block;
+      font-size: calculateRem(14px);
+      line-height: calculateRem(16px);
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        font-size: calculateRem(14px);
+        line-height: calculateRem(14px);
+      }
+      color: $ui-primary-font-color;
+      margin: 0 map-get($spacers, 'xs');
+      position: relative;
+      top: calculateRem(-2px);
+    }
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+}

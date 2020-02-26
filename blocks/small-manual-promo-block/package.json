@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/small-manual-promo-block",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Fusion News Theme Small Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,8 +19,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/shared-styles-block": "^0.0.1",
     "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "@arc-test-org/shared-styles-block": "^0.0.2",
     "styled-components": "^4.4.0"
   }
 }

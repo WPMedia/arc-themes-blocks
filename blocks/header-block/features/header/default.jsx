@@ -48,7 +48,7 @@ class Header extends React.Component {
           >
             {text}
           </ExtraLargeHeader>
-        )
+        );
       case 'Large':
         return (
           <LargeHeader
@@ -57,7 +57,7 @@ class Header extends React.Component {
           >
             {text}
           </LargeHeader>
-        )
+        );
       case 'Medium':
         return (
           <MediumHeader
@@ -66,7 +66,7 @@ class Header extends React.Component {
           >
             {text}
           </MediumHeader>
-        )
+        );
       case 'Small':
         return (
           <SmallHeader
@@ -75,7 +75,7 @@ class Header extends React.Component {
           >
             {text}
           </SmallHeader>
-        )
+        );
       default:
         return (
           <MediumHeader
@@ -84,7 +84,7 @@ class Header extends React.Component {
           >
             {text}
           </MediumHeader>
-        )
+        );
     }
   }
 

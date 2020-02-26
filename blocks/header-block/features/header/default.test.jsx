@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';

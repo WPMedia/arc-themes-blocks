@@ -4,15 +4,14 @@ describe('the unpublished content source block', () => {
   it('should use the proper param types', () => {
     expect(contentSource.params).toEqual({
       _id: 'text',
-      website: 'text',
     });
   });
 
-  describe('when an id and website are provided', () => {
+  describe('when an id is provided', () => {
     it('should build the correct url', () => {
-      const url = contentSource.resolve({ _id: 'test', website: 'the-sun' });
+      const url = contentSource.resolve({ _id: 'test', 'arc-site': 'bbbbb-ccccc' });
 
-      expect(url).toEqual('content/v4?_id=test&website=the-sun&published=false');
+      expect(url).toEqual('content/v4?_id=test&website=bbbbb-ccccc&published=false');
     });
   });
 

@@ -1,0 +1,26 @@
+{
+  "name": "@arc-test-org/medium-manual-promo-block",
+  "version": "0.0.8",
+  "description": "Fusion News Theme Medium Manual Promo block",
+  "author": "Brent Miller <brent.miller@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features",
+    "chains",
+    "layouts"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "@arc-test-org/shared-styles": "^0.0.4",
+    "styled-components": "^4.4.0"
+  }
+}

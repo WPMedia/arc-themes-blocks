@@ -22,47 +22,43 @@ const MediumListItem = (props) => {
   const showSeparator = by && by.length !== 0;
 
   return (
-    <div className="list-item" key={id}>
-      <a href={constructedURL} title={itemTitle} className="list-anchor">
-        {imageURL !== '' ? (
-          <Image
-            url={imageURL}
-            // todo: get the proper alt tag for this image
-            alt={itemTitle}
-            smallWidth={274}
-            smallHeight={148}
-            mediumWidth={274}
-            mediumHeight={148}
-            largeWidth={274}
-            largeHeight={148}
-          />
-        ) : (
-          <div className="top-table-med-image-placeholder" />
-        )}
-      </a>
-      <div
-        className={
-          descriptionText
-            ? 'headline-description'
-            : 'headline-description headline-description-spacing'
-        }
-      >
-        <div>
-          <a href={constructedURL} title={itemTitle} className="list-anchor">
-            <Title primaryFont={primaryFont}>{itemTitle}</Title>
+    <article className="container-fluid medium-promo" key={id}>
+      <div className="row med-promo-padding-bottom">
+        <div className="col-sm-12 col-md-xl-4">
+          <a href={constructedURL} title={itemTitle}>
+            {imageURL !== '' ? (
+              <Image
+                url={imageURL}
+                // todo: get the proper alt tag for this image
+                alt={itemTitle}
+                smallWidth={275}
+                smallHeight={0}
+                mediumWidth={275}
+                mediumHeight={0}
+                largeWidth={275}
+                largeHeight={0}
+              />
+            ) : null}
           </a>
+        </div>
+        <div className="col-sm-12 col-md-xl-8 flex-col">
+          {itemTitle !== '' ? (
+            <a href={constructedURL} title={itemTitle} className="md-promo-headline">
+              <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
+            </a>
+          ) : null}
           <DescriptionText secondaryFont={primaryFont} className="description-text">
             {descriptionText}
           </DescriptionText>
-        </div>
-        <div className="author-date">
-          {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
-          {/* The Separator will only be shown if there is atleast one author name */}
-          {showSeparator && <p className="dot-separator">&#9679;</p>}
-          <ArticleDate classNames="story-date" date={displayDate} />
+          <div className="article-meta">
+            {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
+            {/* The Separator will only be shown if there is atleast one author name */}
+            {showSeparator && <p className="dot-separator">&#9679;</p>}
+            <ArticleDate date={displayDate} />
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

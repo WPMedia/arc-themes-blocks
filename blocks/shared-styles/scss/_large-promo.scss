@@ -1,43 +1,42 @@
-.xl-large-promo {
+.large-promo {
   box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
 
-  .xl-promo-padding-bottom {
+  .lg-promo-padding-bottom {
     padding-bottom: map-get($spacers, 'xs');
   }
 
-  a.overline {
+
+  .overline {
     color: $ui-primary-font-color;
-    display: block;
-    width:100%;
-    text-align: center;
+    display: inline-block;
     padding-bottom: map-get($spacers, 'sm');
     font-size: calculateRem(16px);
-    line-height: calculateRem(22px);
+    line-height: calculateRem(24px);
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(16px);
+      line-height: calculateRem(22px);
+    }
   }
 
-  .xl-promo-headline {
-    display: block;
-    width: 100%;
-    text-align:center;
-    font-size: calculateRem(32px);
-    line-height: calculateRem(36px);
+  .lg-promo-headline {
+    font-size: calculateRem(22px);
+    line-height: calculateRem(24px);
     color: $ui-primary-font-color;
     font-weight: bold;
     text-decoration: none;
-    margin-bottom: map-get($spacers, 'md');
+    margin-bottom: map-get($spacers, 'xs');
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      font-size: calculateRem(52px);
-      line-height: calculateRem(56px);
-      margin-bottom: map-get($spacers, 'sm');
+      font-size: calculateRem(26px);
+      line-height: calculateRem(32px);
     }
   }
 
   p{
-    font-size: calculateRem(16px);
+    font-size: calculateRem(18px);
     line-height: calculateRem(32px);
     color: $ui-primary-font-color;
-    margin-top: map-get($spacers, 'xs');
     margin-bottom: map-get($spacers, 'xs');
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')){
@@ -55,17 +54,21 @@
     span, .date{
       color: $ui-primary-font-color;
       font-size: calculateRem(14px);
-      line-height: calculateRem(14px);
+      line-height: calculateRem(16px);
 
       @media screen and (min-width: map-get($grid-breakpoints, 'md')){
         font-size: calculateRem(14px);
-        line-height: calculateRem(16px);
+        line-height: calculateRem(14px);
       }
     }
     .dot-separator {
       display: inline-block;
       font-size: calculateRem(14px);
-      line-height: calculateRem(14px);
+      line-height: calculateRem(16px);
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        font-size: calculateRem(14px);
+        line-height: calculateRem(14px);
+      }
       color: $ui-primary-font-color;
       margin: 0 map-get($spacers, 'xs');
       position: relative;

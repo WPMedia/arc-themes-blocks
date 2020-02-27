@@ -129,9 +129,9 @@ const SampleOutputType = ({
       );
     }
   } else if (pageType === 'author') {
-    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
-    metaData.description = metaValue('description') || payload.authors[0].bio || null;
-    metaData.ogTitle = metaValue('og:title') || payload.authors[0].byline || '';
+    const author = (gc.authors && gc.authors.length) ? gc.authors[0] : {};
+    metaData.description = metaValue('description') || author.bio || null;
+    metaData.ogTitle = metaValue('og:title') || author.byline || '';
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
       metaData.ogTitle = websiteName;

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import './numbered-list.scss';
 
 function extractImage(promo) {
@@ -72,9 +73,15 @@ class NumberedList extends Component {
                 className="list-anchor-image"
               >
                 {extractImage(element.promo_items) ? (
-                  <img
-                    src={extractImage(element.promo_items)}
+                  <Image
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    smallWidth={105}
+                    smallHeight={71}
+                    mediumWidth={105}
+                    mediumHeight={71}
+                    largeWidth={274}
+                    largeHeight={210}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>
@@ -91,5 +98,7 @@ NumberedList.propTypes = {
     listContentConfig: PropTypes.contentConfig('ans-feed'),
   }),
 };
+
+NumberedList.label = 'Numbered List – Arc Block';
 
 export default NumberedList;

@@ -36,8 +36,8 @@ const VerticalOverlineImageStoryItem = (props) => {
               {itemTitle}
             </Title>
           </a>
-          <a href={constructedURL} title={itemTitle}>
-            {imageURL !== '' ? (
+          {imageURL !== '' ? (
+            <a href={constructedURL} title={itemTitle}>
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image
@@ -51,8 +51,8 @@ const VerticalOverlineImageStoryItem = (props) => {
                 largeWidth={797}
                 largeHeight={1062}
               />
-            ) : null}
-          </a>
+            </a>
+          ) : null}
           <DescriptionText secondaryFont={primaryFont} className="description-text">
             {descriptionText}
           </DescriptionText>

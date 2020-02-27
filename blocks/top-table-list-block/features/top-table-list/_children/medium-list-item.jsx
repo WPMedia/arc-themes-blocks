@@ -42,9 +42,11 @@ const MediumListItem = (props) => {
           </a>
         </div>
         <div className="col-sm-12 col-md-xl-8 flex-col">
-          <a href={constructedURL} title={itemTitle} className="md-promo-headline">
-            <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
-          </a>
+          {itemTitle !== '' ? (
+            <a href={constructedURL} title={itemTitle} className="md-promo-headline">
+              <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
+            </a>
+          ) : null}
           <DescriptionText secondaryFont={primaryFont} className="description-text">
             {descriptionText}
           </DescriptionText>

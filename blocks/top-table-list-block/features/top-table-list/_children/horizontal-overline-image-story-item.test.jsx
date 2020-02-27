@@ -73,8 +73,8 @@ describe('horizontal overline image story item', () => {
       />,
     );
 
-    // shows placeholder
-    // expect(wrapper.find('.top-table-large-image-placeholder').length).toBe(1);
+    // Should be no img present
+    expect(wrapper.find('img').length).toBe(0);
 
     // does not find overline
     expect(wrapper.find('a.overline').length).toBe(0);

@@ -13,7 +13,7 @@
     "access": "restricted"
   },
   "dependencies": {
-    "@arc-test-org/shared-styles-block": "^0.0.3",
+    "@arc-test-org/shared-styles": "^0.0.3",
     "styled-components": "^4.4.0"
   },
   "scripts": {

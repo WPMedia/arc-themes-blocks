@@ -27,8 +27,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     <article key={id} className="container-fluid large-promo">
       <div className="row lg-promo-padding-bottom">
         <div className="col-sm-12 col-md-xl-6">
-          <a href={constructedURL} title={itemTitle} className="list-anchor">
-            {imageURL !== '' ? (
+          {imageURL !== '' ? (
+            <a href={constructedURL} title={itemTitle} className="list-anchor">
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image
@@ -42,10 +42,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 largeWidth={377}
                 largeHeight={272}
               />
-            ) : (
-              <div className="top-table-large-image-placeholder" />
-            )}
-          </a>
+            </a>
+          ) : null}
         </div>
         <div className="col-sm-12 col-md-xl-6 flex-col">
           <div>

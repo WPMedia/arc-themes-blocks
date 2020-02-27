@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import '@arc-test-org/shared-styles-block/features/shared-styles/_medium-promo.scss';
+import '@arc-test-org/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`

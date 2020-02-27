@@ -1,5 +1,6 @@
 export default {
-  resolve({ _id, 'arc-site': arcSite }) {
+  resolve(contentOptions) {
+    const { _id, 'arc-site': arcSite } = contentOptions
     return `content/v4?_id=${_id}&website=${arcSite}&published=false`;
   },
   params: {

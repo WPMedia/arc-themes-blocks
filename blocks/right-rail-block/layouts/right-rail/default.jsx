@@ -46,4 +46,6 @@ RightRailLayout.propTypes = {
 
 RightRailLayout.sections = ['navigation', 'fullwidth1', 'main', 'rightrail', 'fullwidth2', 'footer'];
 
+RightRailLayout.label = 'Right Rail – Arc Layout';
+
 export default RightRailLayout;

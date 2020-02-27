@@ -1,5 +1,8 @@
 {
-  "name": "root",
+  "name": "fusion-news-theme-blocks",
+  "publishConfig": { 
+    "registry": "https://npm.pkg.github.com/" 
+  },
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",

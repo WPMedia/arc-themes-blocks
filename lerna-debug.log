@@ -92,6 +92,6 @@
 41 silly rimrafDir /Users/millerb/work/fusion-news-theme-blocks/blocks/headline-block/node_modules
 42 info clean removing /Users/millerb/work/fusion-news-theme-blocks/blocks/htmlbox-block/node_modules
 43 silly rimrafDir /Users/millerb/work/fusion-news-theme-blocks/blocks/htmlbox-block/node_modules
-44 error Error: Command failed: /Users/millerb/.nvm/versions/node/v11.14.0/bin/node /Users/millerb/work/fusion-news-theme-blocks/node_modules/rimraf/bin.js --no-glob /Users/millerb/work/fusion-news-theme-blocks/blocks/article-body-block/node_modules/
+44 error Error: Command failed: /Users/millerb/.nvm/versions/node/v11.14.0/bin/node /Users/millerb/work/fusion-news-theme-blocks/node_modules/rimraf/bin.js --no-glob /Users/millerb/work/fusion-news-theme-blocks/blocks/author-bio-block/node_modules/
 44 error     at makeError (/Users/millerb/work/fusion-news-theme-blocks/node_modules/execa/index.js:174:9)
 44 error     at Promise.all.then.arr (/Users/millerb/work/fusion-news-theme-blocks/node_modules/execa/index.js:278:16)

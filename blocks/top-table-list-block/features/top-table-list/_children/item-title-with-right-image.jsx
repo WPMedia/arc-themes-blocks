@@ -1,62 +1,41 @@
-import styled from 'styled-components';
 import React from 'react';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import Title from './title';
-
-const StoryItemStyles = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  min-height: 72px;
-  width: 100%;
-
-  .simple-list-image-container {
-    display: flex;
-    flex: 0 0 25%;
-
-    .simple-list-img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    .simple-list-placeholder {
-      background-color: #dfe4ea;
-      width: 100%;
-      height: auto;
-      min-height: 72px;
-    }
-  }
-
-  .simple-list-headline-anchor {
-    flex: 3;
-
-    .simple-list-headline-text {
-      max-height: 72px;
-    }
-  }
-`;
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle, imageURL, id, primaryFont,
+    itemTitle, imageURL, id, primaryFont, constructedURL,
   } = props;
-
   return (
-    <StoryItemStyles key={id} className="top-table-list-item-simple">
-      {itemTitle !== '' ? (
-        <div className="simple-list-headline-anchor">
-          <Title primaryFont={primaryFont} className="simple-list-headline-text">
-            {itemTitle}
-          </Title>
+    <article key={id} className="container-fluid small-promo">
+      <div className="row sm-promo-padding-btm">
+        {itemTitle !== '' ? (
+          <div className="col-sm-xl-8">
+            <a href={constructedURL} title={itemTitle} className="sm-promo-headline">
+              <Title primaryFont={primaryFont} className="sm-promo-headline">
+                {itemTitle}
+              </Title>
+            </a>
+          </div>
+        ) : null}
+        <div className="col-sm-xl-4">
+          {imageURL !== '' ? (
+            <a href={constructedURL} title={itemTitle}>
+              <Image
+                url={imageURL}
+                alt={itemTitle}
+                smallWidth={275}
+                smallHeight={0}
+                mediumWidth={275}
+                mediumHeight={0}
+                largeWidth={400}
+                largeHeight={0}
+              />
+            </a>
+          ) : null}
         </div>
-      ) : null}
-      <div className="simple-list-image-container">
-        {imageURL !== '' ? (
-          <img src={imageURL} alt={itemTitle} className="simple-list-img" />
-        ) : (
-          <div className="simple-list-placeholder" />
-        )}
       </div>
-    </StoryItemStyles>
+    </article>
   );
 };
-
 export default ItemTitleWithRightImage;

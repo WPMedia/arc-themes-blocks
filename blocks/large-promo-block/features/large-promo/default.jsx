@@ -7,7 +7,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import Byline from '@arc-test-org/byline-block';
 import ArticleDate from '@arc-test-org/date-block';
-import '@arc-test-org/shared-styles-block/features/shared-styles/_large-promo.scss';
+import '@arc-test-org/shared-styles/scss/_large-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
@@ -149,12 +149,12 @@ const LargePromo = ({ customFields, arcSite }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                smallWidth={800}
-                smallHeight={0}
-                mediumWidth={800}
-                mediumHeight={0}
-                largeWidth={800}
-                largeHeight={0}
+                smallWidth={274}
+                smallHeight={148}
+                mediumWidth={274}
+                mediumHeight={148}
+                largeWidth={377}
+                largeHeight={272}
               />
             </a>
           </div>

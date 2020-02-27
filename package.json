@@ -59,7 +59,7 @@
     "@arc-test-org/numbered-list-block": "file:blocks/numbered-list-block",
     "@arc-test-org/results-list-block": "file:blocks/results-list-block",
     "@arc-test-org/simple-results-list-block": "file:blocks/simple-results-list-block",
-    "@arc-test-org/shared-styles-block": "file:blocks/shared-styles-block",
+    "@arc-test-org/shared-styles": "file:blocks/shared-styles",
     "@arc-test-org/small-promo-block": "file:blocks/small-promo-block",
     "@arc-test-org/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@arc-test-org/subheadline-block": "file:blocks/subheadline-block"

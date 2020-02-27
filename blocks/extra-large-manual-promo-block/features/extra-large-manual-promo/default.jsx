@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import '@arc-test-org/shared-styles-block/features/shared-styles/_extra-large-promo.scss';
+import '@arc-test-org/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@arc-test-org/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
@@ -76,9 +76,9 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
                 <Image
                   url={customFields.imageURL}
                   alt={customFields.headline}
-                  smallWidth={800}
+                  smallWidth={400}
                   smallHeight={0}
-                  mediumWidth={800}
+                  mediumWidth={600}
                   mediumHeight={0}
                   largeWidth={800}
                   largeHeight={0}

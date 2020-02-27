@@ -11,11 +11,10 @@ import {
 } from './shared/storySizeConstants';
 
 // start styles
-import './top-table-list-styles.scss';
-import './results-list.scss';
-import './overline.scss';
-import './top-table-list-large-styles.scss';
-import './top-table-list-extra-large-styles.scss';
+import '@arc-test-org/shared-styles/scss/_small-promo.scss';
+import '@arc-test-org/shared-styles/scss/_medium-promo.scss';
+import '@arc-test-org/shared-styles/scss/_large-promo.scss';
+import '@arc-test-org/shared-styles/scss/_extra-large-promo.scss';
 import StoryItemContainer from './_children/story-item-container';
 // styles end
 

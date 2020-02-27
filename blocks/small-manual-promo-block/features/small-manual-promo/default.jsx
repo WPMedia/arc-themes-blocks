@@ -43,11 +43,11 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
               <Image
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                smallWidth={800}
+                smallWidth={275}
                 smallHeight={0}
-                mediumWidth={800}
+                mediumWidth={275}
                 mediumHeight={0}
-                largeWidth={800}
+                largeWidth={400}
                 largeHeight={0}
               />
             </a>

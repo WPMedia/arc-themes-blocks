@@ -152,9 +152,9 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
                   url={customFields.imageOverrideURL
                     ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                   alt={content && content.headlines ? content.headlines.basic : ''}
-                  smallWidth={800}
+                  smallWidth={400}
                   smallHeight={0}
-                  mediumWidth={800}
+                  mediumWidth={600}
                   mediumHeight={0}
                   largeWidth={800}
                   largeHeight={0}

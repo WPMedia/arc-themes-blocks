@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
@@ -19,8 +20,17 @@ const ItemTitleWithRightImage = (props) => {
         ) : null}
         <div className="col-sm-xl-4">
           {imageURL !== '' ? (
-            <a href={constructedURL} title={itemTitle} className="list-anchor">
-              <img src={imageURL} alt={itemTitle} />
+            <a href={constructedURL} title={itemTitle}>
+              <Image
+                url={imageURL}
+                alt={itemTitle}
+                smallWidth={275}
+                smallHeight={0}
+                mediumWidth={275}
+                mediumHeight={0}
+                largeWidth={400}
+                largeHeight={0}
+              />
             </a>
           ) : null}
         </div>

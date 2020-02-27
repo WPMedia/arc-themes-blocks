@@ -28,7 +28,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
       <div className="row lg-promo-padding-bottom">
         <div className="col-sm-12 col-md-xl-6">
           {imageURL !== '' ? (
-            <a href={constructedURL} title={itemTitle} className="list-anchor">
+            <a href={constructedURL} title={itemTitle}>
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image

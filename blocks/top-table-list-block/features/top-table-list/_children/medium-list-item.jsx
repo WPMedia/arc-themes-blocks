@@ -25,18 +25,18 @@ const MediumListItem = (props) => {
     <article className="container-fluid medium-promo" key={id}>
       <div className="row med-promo-padding-bottom">
         <div className="col-sm-12 col-md-xl-4">
-          <a href={constructedURL} title={itemTitle} className="list-anchor">
+          <a href={constructedURL} title={itemTitle}>
             {imageURL !== '' ? (
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
-                smallWidth={274}
-                smallHeight={148}
-                mediumWidth={274}
-                mediumHeight={148}
-                largeWidth={274}
-                largeHeight={148}
+                smallWidth={275}
+                smallHeight={0}
+                mediumWidth={275}
+                mediumHeight={0}
+                largeWidth={275}
+                largeHeight={0}
               />
             ) : null}
           </a>

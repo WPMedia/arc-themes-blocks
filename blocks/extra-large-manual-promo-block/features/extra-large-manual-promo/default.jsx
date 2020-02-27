@@ -76,9 +76,9 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
                 <Image
                   url={customFields.imageURL}
                   alt={customFields.headline}
-                  smallWidth={800}
+                  smallWidth={400}
                   smallHeight={0}
-                  mediumWidth={800}
+                  mediumWidth={600}
                   mediumHeight={0}
                   largeWidth={800}
                   largeHeight={0}

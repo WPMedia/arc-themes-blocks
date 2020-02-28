@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading, import/no-unresolved */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -80,6 +79,12 @@ const SmallPromo = ({ customFields, arcSite }) => {
 
 SmallPromo.propTypes = {
   customFields: PropTypes.shape({
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     showHeadline: PropTypes.bool.tag(
       {
         name: 'Show headline',
@@ -98,9 +103,7 @@ SmallPromo.propTypes = {
       name: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
-
 };
 
 SmallPromo.label = 'Small Promo – Arc Block';

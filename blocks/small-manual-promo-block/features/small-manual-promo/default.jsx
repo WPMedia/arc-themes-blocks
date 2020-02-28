@@ -61,6 +61,18 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
 
 SmallManualPromo.propTypes = {
   customFields: PropTypes.shape({
+    headline: PropTypes.string.tag({
+      name: 'Headline',
+      group: 'Configure Content',
+    }),
+    imageURL: PropTypes.string.tag({
+      name: 'Image URL',
+      group: 'Configure Content',
+    }),
+    linkURL: PropTypes.string.tag({
+      name: 'Link URL',
+      group: 'Configure Content',
+    }),
     showHeadline: PropTypes.bool.tag(
       {
         name: 'Show headline',
@@ -75,20 +87,7 @@ SmallManualPromo.propTypes = {
         group: 'Show promo elements',
       },
     ),
-    headline: PropTypes.string.tag({
-      name: 'Headline',
-      group: 'Content',
-    }),
-    imageURL: PropTypes.string.tag({
-      name: 'Image URL',
-      group: 'Content',
-    }),
-    linkURL: PropTypes.string.tag({
-      name: 'Link URL',
-      group: 'Content',
-    }),
   }),
-
 };
 
 SmallManualPromo.label = 'Small Manual Promo – Arc Block';

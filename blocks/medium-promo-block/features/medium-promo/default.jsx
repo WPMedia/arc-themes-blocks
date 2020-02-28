@@ -147,6 +147,12 @@ const MediumPromo = ({ customFields, arcSite }) => {
 
 MediumPromo.propTypes = {
   customFields: PropTypes.shape({
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     showHeadline: PropTypes.bool.tag(
       {
         name: 'Show headline',
@@ -186,9 +192,7 @@ MediumPromo.propTypes = {
       name: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
-
 };
 
 MediumPromo.label = 'Medium Promo – Arc Block';

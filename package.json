@@ -3,6 +3,11 @@
   "publishConfig": { 
     "registry": "https://npm.pkg.github.com/" 
   },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/article-body-block"
+  },
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",

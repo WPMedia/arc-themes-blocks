@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/header-nav-block",
+  "name": "@wpmedia/header-nav-block",
   "version": "1.4.3",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/header-nav-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

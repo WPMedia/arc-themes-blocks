@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/subheadline-block",
+  "name": "@wpmedia/subheadline-block",
   "version": "1.3.1",
   "description": "Fusion News Theme sub-headline block",
   "author": "Brent Miller <brent.miller@washport.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/subheadline-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/default-output-block",
+  "name": "@wpmedia/default-output-block",
   "version": "1.2.24",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
@@ -10,7 +10,13 @@
     "output-types"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/default-output-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

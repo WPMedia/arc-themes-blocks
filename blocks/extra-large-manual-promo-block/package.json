@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/extra-large-manual-promo-block",
+  "name": "@wpmedia/extra-large-manual-promo-block",
   "version": "0.0.8",
   "description": "Fusion News Theme Extra Large Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/extra-large-manual-promo-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

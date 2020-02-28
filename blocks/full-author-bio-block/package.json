@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/full-author-bio-block",
+  "name": "@wpmedia/full-author-bio-block",
   "version": "0.2.4",
   "description": "Fusion News Theme full author bio block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
@@ -10,11 +10,13 @@
     "features"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/full-author-bio-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

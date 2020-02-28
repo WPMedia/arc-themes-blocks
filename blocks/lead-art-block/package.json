@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/lead-art-block",
+  "name": "@wpmedia/lead-art-block",
   "version": "1.5.5",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/lead-art-block"
   },
   "dependencies": {
     "@arc-test-org/engine-theme-sdk": "^0.5.1",

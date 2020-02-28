@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/gallery-block",
+  "name": "@wpmedia/gallery-block",
   "version": "0.2.5",
   "description": "Fusion News Theme gallery block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/gallery-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

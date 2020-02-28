@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/simple-list-block",
+  "name": "@wpmedia/simple-list-block",
   "version": "1.0.1",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
@@ -10,7 +10,13 @@
     "features"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/simple-list-block"
   },
   "dependencies": {
     "@arc-test-org/engine-theme-sdk": "^0.3.6",

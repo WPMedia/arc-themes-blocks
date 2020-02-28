@@ -73,7 +73,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
 
 ```json
 {
-  "name": "@arc-test-org/header-nav-block",
+  "name": "@wpmedia/header-nav-block",
   "version": "0.0.0",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",

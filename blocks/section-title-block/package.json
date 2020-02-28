@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/section-title-block",
+  "name": "@wpmedia/section-title-block",
   "version": "0.1.2",
   "description": "Fusion News Theme section title block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
@@ -10,11 +10,13 @@
     "features"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/section-title-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

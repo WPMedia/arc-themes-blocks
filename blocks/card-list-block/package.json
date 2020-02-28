@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/card-list-block",
+  "name": "@wpmedia/card-list-block",
   "version": "0.1.4",
   "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
@@ -10,11 +10,13 @@
     "features"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/card-list-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

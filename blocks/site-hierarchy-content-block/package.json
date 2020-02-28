@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/site-hierarchy-content-block",
+  "name": "@wpmedia/site-hierarchy-content-block",
   "version": "2.0.0",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
@@ -17,11 +17,13 @@
     "sources"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/site-hierarchy-content-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

@@ -1,5 +1,5 @@
 {
-  "name": "@arc-test-org/article-body-block",
+  "name": "@wpmedia/article-body-block",
   "version": "1.5.6",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washport.com>",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry":"https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/article-body-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

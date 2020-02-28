@@ -1,0 +1,47 @@
+.list-container {
+  padding: 0 0 map-get($spacers, 'md') 0;
+
+  .list-title {
+    font-size: calculateRem(20px);
+    font-weight: bold;
+    line-height: calculateRem(24px);
+    color: $ui-dark-secondary-color;
+  }
+
+  .list-item-simple {
+    box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
+    display: flex;
+    justify-content: space-between;
+    min-height: 72px;
+    .simple-list-anchor {
+      text-decoration: none;
+      display: flex;
+      flex: 0 0 14%;
+
+      .simple-list-img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+      .simple-list-placeholder {
+        background-color: #dfe4ea;
+      }
+    }
+
+    .simple-list-headline-anchor {
+      flex: 3;
+      padding-left: calculateRem(16px);
+      text-decoration: none;
+      .simple-list-headline-text {
+        font-size: calculateRem(16px);
+        line-height: calculateRem(24px);
+        color: $ui-dark-secondary-color;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 72px;
+      }
+    }
+  }
+}

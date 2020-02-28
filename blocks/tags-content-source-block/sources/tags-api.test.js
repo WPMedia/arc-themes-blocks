@@ -22,5 +22,4 @@ describe('the tags content source block', () => {
       expect(url).toEqual('/tags/v2/slugs?slugs=');
     });
   });
-
 });

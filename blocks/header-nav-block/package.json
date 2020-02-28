@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/header-nav-block",
-  "version": "1.4.0",
+  "version": "1.4.3",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,7 +19,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.4.0",
+    "@arc-test-org/engine-theme-sdk": "^0.5.1",
     "styled-components": "^4.4.0"
   }
 }

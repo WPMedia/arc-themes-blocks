@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { Image } from '@arc-test-org/engine-theme-sdk';
 import './numbered-list.scss';
 
 function extractImage(promo) {
@@ -11,11 +12,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Number = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 @Consumer
@@ -23,7 +24,7 @@ class NumberedList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { resultList: {} };
+    this.state = {};
     this.fetchStories();
   }
 
@@ -43,12 +44,12 @@ class NumberedList extends Component {
     const {
       websiteDomain,
     } = getProperties(arcSite);
-    return (window && window.location.hostname === 'localhost')
+    return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
       ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
         {contentElements && contentElements.length && contentElements.map((element, i) => {
@@ -72,9 +73,15 @@ class NumberedList extends Component {
                 className="list-anchor-image"
               >
                 {extractImage(element.promo_items) ? (
-                  <img
-                    src={extractImage(element.promo_items)}
+                  <Image
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    smallWidth={105}
+                    smallHeight={71}
+                    mediumWidth={105}
+                    mediumHeight={71}
+                    largeWidth={274}
+                    largeHeight={210}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>
@@ -91,5 +98,7 @@ NumberedList.propTypes = {
     listContentConfig: PropTypes.contentConfig('ans-feed'),
   }),
 };
+
+NumberedList.label = 'Numbered List – Arc Block';
 
 export default NumberedList;

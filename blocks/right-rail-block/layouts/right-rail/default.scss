@@ -9,7 +9,7 @@ html, body {
   flex-direction: column;
   align-items: center;
 
-  header{
+  header {
     position: fixed;
     top: 0;
     left:0;
@@ -21,25 +21,24 @@ html, body {
     flex-grow: 1;
     padding-top: 54px;
     padding-bottom: calculateRem(64px);
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding-bottom: calculateRem(80px);
     }
   }
 
-  .fullwidth1-section {
+  .fullwidth-section {
     padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
     border-bottom: 1px $ui-medium-light-secondary-color solid;
     border-top: 1px $ui-medium-light-secondary-color solid;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: map-get($spacers, 'lg') 0;
     }
   }
 
-
   .left-article-section {
     padding: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: 0 map-get($spacers, 'lg') 0 0;
       border-right: 1px $ui-medium-light-secondary-color solid;
     }
@@ -47,15 +46,12 @@ html, body {
 
   .right-article-section {
     padding: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      padding: 0 0 0 map-get($spacers, 'lg');
-    }
   }
 
   .section-padding{
     padding: map-get($spacers, 'sm');
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: map-get($spacers, 'md');
     }
 

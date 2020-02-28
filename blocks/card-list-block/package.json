@@ -1,0 +1,32 @@
+{
+  "name": "@arc-test-org/card-list-block",
+  "version": "0.1.5",
+  "description": "Fusion themes card list block.",
+  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "@arc-test-org/byline-block": "^0.3.2",
+    "@arc-test-org/date-block": "^1.4.1",
+    "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "styled-components": "^4.4.0"
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  }
+}

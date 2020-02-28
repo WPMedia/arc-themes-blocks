@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading,import/no-unresolved */
+/* istanbul ignore file */
 import React from 'react';
 import PropTypes from 'prop-types';
 import sanitizeHtml from 'sanitize-html';
@@ -12,9 +14,10 @@ const HtmlSafe = ({
   const defaultAllowedTags = sanitizeHtml.defaults.allowedTags.concat(['h1',
     'h2',
     'amp-iframe', 'style']);
-  const defaultAllowedAttrs = Object.assign({},
-    sanitizeHtml.defaults.allowedAttributes,
-    { '*': ['data-*'] });
+  const defaultAllowedAttrs = {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    '*': ['data-*'],
+  };
 
   const cleanContent = sanitizeHtml(content, {
     allowedTags: allowedTags == null ? defaultAllowedTags : allowedTags,

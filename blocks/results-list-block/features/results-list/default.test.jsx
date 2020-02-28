@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback */
+/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
@@ -28,7 +28,7 @@ describe('The story-feed-list', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',
-        query: 'type:story',
+        query: 'type: story',
         size: '30',
       },
       contentService: 'story-feed-query',
@@ -50,7 +50,7 @@ describe('The story-feed-list', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',
-        query: 'type:story',
+        query: 'type: story',
         size: '1',
       },
       contentService: 'story-feed-query',
@@ -66,13 +66,6 @@ describe('The story-feed-list', () => {
       });
 
       it('should render one list item as its child', () => {
-        expect(wrapper.find('.results-list-container').children().length).toEqual(1);
-        expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
-        expect(wrapper.find('.list-item').length).toEqual(1);
-      });
-
-      it('should render one list item as its child', () => {
-        expect(wrapper.find('.results-list-container').children().length).toEqual(1);
         expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
         expect(wrapper.find('.list-item').length).toEqual(1);
       });
@@ -109,7 +102,7 @@ describe('The story-feed-list', () => {
         expect(wrapper.find('.list-item').find('.author-date').find('Byline').length).toEqual(1);
       });
 
-      it('should render a seperator', () => {
+      it('should render a separator', () => {
         expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(1);
       });
 
@@ -119,11 +112,11 @@ describe('The story-feed-list', () => {
     });
   });
 
-  describe('render one list item correctly when description is missing', () => {
+  describe('renders one list item correctly when description is missing', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',
-        query: 'type:story',
+        query: 'type: story',
         size: '1',
       },
       contentService: 'story-feed-query',
@@ -157,12 +150,12 @@ describe('The story-feed-list', () => {
     });
   });
 
-  describe('render one list item correctly when list of authors is missing', () => {
+  describe('renders one list item correctly when list of authors is missing', () => {
     const listContentConfig = {
       contentConfigValues: {
         offset: '0',
-        query: 'type:story',
-        size: '1',
+        query: 'type: story',
+        size: '5',
       },
       contentService: 'story-feed-query',
     };
@@ -177,8 +170,39 @@ describe('The story-feed-list', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
       });
 
-      it('should render a seperator', () => {
+      it('should render a separator', () => {
         expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(0);
+      });
+    });
+  });
+
+  describe('renders a button to display more stories', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    const wrapper = shallow(<ResultsList customFields={customFields} />);
+    wrapper.setState({ resultList: mockData }, () => {
+      wrapper.update();
+      it('should render a button to display more stories', () => {
+        expect(wrapper.find('button').length).toEqual(1);
+      });
+
+      it('should have invisible text for accessibility purposes', () => {
+        expect(wrapper.find('button').text()).toEqual('See More stories about this topic');
+      });
+
+      it('should call fetchContent when clicked', () => {
+        expect(ResultsList.prototype.fetchContent.mock.calls.length).toEqual(1);
+        wrapper.find('button').simulate('click');
+        expect(ResultsList.prototype.fetchContent.mock.calls.length).toEqual(2);
       });
     });
   });

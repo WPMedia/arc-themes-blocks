@@ -22,12 +22,11 @@ const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const getCustomMetaData = (metaHTMLString) => {
   let customMetaData = null;
-  // eslint-disable-line global-require,@typescript-eslint/no-var-requires
   if (typeof window === 'undefined') {
     const DomParser = require('dom-parser');
     customMetaData = new DomParser().parseFromString(metaHTMLString)
       .getElementsByTagName('META')
-      .map(metaNode => ({
+      .map((metaNode) => ({
         metaName: metaNode.getAttribute('name'),
         metaValue: (metaNode.getAttribute('value') || metaNode.getAttribute('content')),
       }));
@@ -38,7 +37,7 @@ const getCustomMetaData = (metaHTMLString) => {
 const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
   const metaHTMLString = ReactDOMServer.renderToString(<MetaTags />);
   const customMetaData = getCustomMetaData(metaHTMLString)
-    .filter(metaObj => !metaData[metaObj.metaName]);
+    .filter((metaObj) => !metaData[metaObj.metaName]);
   return (
     <>
       {customMetaData.length > 0 && customMetaData.map((metaObj, i) => (
@@ -66,6 +65,7 @@ const SampleOutputType = ({
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
+  let authorMetaDataTags = null;
   let twitterTags = null;
 
   const metaData = {
@@ -79,7 +79,6 @@ const SampleOutputType = ({
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
-      // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
       if (metaValue('title')) {
@@ -113,26 +112,43 @@ const SampleOutputType = ({
       storyMetaDataTags = (
         <>
           { metaData.description
-            && <meta name="description" content={metaData.description} />
-          }
+            && <meta name="description" content={metaData.description} />}
           { metaData.keywords
-          && <meta name="keywords" content={metaData.keywords} />
-          }
+          && <meta name="keywords" content={metaData.keywords} />}
 
           <meta property="og:title" content={metaData.ogTitle} />
 
           { metaData.ogImage
-          && <meta property="og:image" content={metaData.ogImage} />
-          }
+          && <meta property="og:image" content={metaData.ogImage} />}
           { metaData.ogImageAlt
-          && <meta property="og:image:alt" content={metaData.ogImageAlt} />
-          }
+          && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
           {pageType === 'article' && (
             <meta name="robots" content="noarchive" />
           )}
         </>
       );
     }
+  } else if (pageType === 'author') {
+    const author = (gc.authors && gc.authors.length) ? gc.authors[0] : {};
+    metaData.description = metaValue('description') || author.bio || null;
+    metaData.ogTitle = metaValue('og:title') || author.byline || '';
+    if (metaData.ogTitle === '') {
+      metaData.title = websiteName;
+      metaData.ogTitle = websiteName;
+    } else {
+      metaData.title = `${metaData.ogTitle} - ${websiteName}`;
+      metaData.ogTitle = `${metaData.ogTitle} - ${websiteName}`;
+    }
+
+    authorMetaDataTags = (
+      <>
+        {
+          metaData.description
+          && <meta name="description" content={metaData.description} />
+        }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
   } else if (pageType === 'tag') {
     const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
     metaData.description = metaValue('description') || payload.description || null;
@@ -148,8 +164,7 @@ const SampleOutputType = ({
     tagMetaDataTags = (
       <>
         { metaData.description
-        && <meta name="description" content={metaData.description} />
-        }
+        && <meta name="description" content={metaData.description} />}
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -158,14 +173,11 @@ const SampleOutputType = ({
   twitterTags = (
     <>
       { metaData.ogSiteName
-      && <meta property="og:site_name" content={metaData.ogSiteName} />
-      }
+      && <meta property="og:site_name" content={metaData.ogSiteName} />}
       { metaData.twitterSite
-      && <meta property="twitter:site" content={metaData.twitterSite} />
-      }
+      && <meta property="twitter:site" content={metaData.twitterSite} />}
       { metaData.twitterCard
-      && <meta property="twitter:card" content={metaData.twitterCard} />
-      }
+      && <meta property="twitter:card" content={metaData.twitterCard} />}
     </>
   );
 
@@ -179,6 +191,7 @@ const SampleOutputType = ({
         <title>{metaData.title}</title>
         {storyMetaDataTags}
         {tagMetaDataTags}
+        {authorMetaDataTags}
         {customMetaTags}
         {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

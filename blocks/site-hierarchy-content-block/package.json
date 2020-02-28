@@ -1,8 +1,11 @@
 {
   "name": "@arc-test-org/site-hierarchy-content-block",
-  "version": "0.1.2",
+  "version": "2.0.1",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
+  "contributors": [
+    "Jack Howard <jack.howard@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -22,7 +25,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx sources"
   },
   "dependencies": {
     "styled-components": "^4.4.0"

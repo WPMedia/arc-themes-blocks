@@ -8,6 +8,16 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
+  FacebookIcon,
+  RedditIcon,
+  YoutubeIcon,
+  MediumIcon,
+  TumblrIcon,
+  PinterestIcon,
+  SnapchatIcon,
+  WhatsAppIcon,
+  SoundCloudIcon,
+  RssIcon,
 } from '@arc-test-org/engine-theme-sdk';
 
 import './author-bio.scss';
@@ -17,13 +27,13 @@ Testing: Unit tests are written to cover this block
 */
 
 const AuthorBioStyled = styled.section`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   .authorName {
-    font-family: ${props => props.primaryFont};
-    color: ${props => props.primaryColor};
+    font-family: ${(props) => props.primaryFont};
+    color: ${(props) => props.primaryColor};
   }
   button {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
@@ -69,12 +79,83 @@ const AuthorBio = () => {
                   </a>
                 );
                 break;
+              case 'facebook':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <FacebookIcon fill={getThemeStyle(arcSite)['primary-color']} title="Facebook" description="Connect on Facebook" />
+                  </a>
+                );
+                break;
+              case 'reddit':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <RedditIcon fill={getThemeStyle(arcSite)['primary-color']} title="Reddit" description="Connect on Reddit" />
+                  </a>
+                );
+                break;
+              case 'youtube':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener" id="link-social-youtube">
+                    <YoutubeIcon fill={getThemeStyle(arcSite)['primary-color']} title="YouTube" description="Connect on YouTube" />
+                  </a>
+                );
+                break;
+              case 'medium':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <MediumIcon fill={getThemeStyle(arcSite)['primary-color']} title="Medium" description="Connect on Medium" />
+                  </a>
+                );
+                break;
+              case 'tumblr':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <TumblrIcon fill={getThemeStyle(arcSite)['primary-color']} title="Tumblr" description="Connect on Tumblr" />
+                  </a>
+                );
+                break;
+              case 'pinterest':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <PinterestIcon fill={getThemeStyle(arcSite)['primary-color']} title="Pinterest" description="Connect on Pinterest" />
+                  </a>
+                );
+                break;
+              case 'snapchat':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <SnapchatIcon fill={getThemeStyle(arcSite)['primary-color']} title="Snapchat" description="Connect on Snapchat" />
+                  </a>
+                );
+                break;
+              case 'whatsapp':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <WhatsAppIcon fill={getThemeStyle(arcSite)['primary-color']} title="WhatsApp" description="Connect on WhatsApp" />
+                  </a>
+                );
+                break;
+              case 'soundcloud':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <SoundCloudIcon fill={getThemeStyle(arcSite)['primary-color']} title="SoundCloud" description="Listen on SoundCloud" />
+                  </a>
+                );
+                break;
+              case 'rss':
+                socialButton = (
+                  <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
+                    <RssIcon fill={getThemeStyle(arcSite)['primary-color']} title="RSS" description="Subscribe to RSS feed" />
+                  </a>
+                );
+                break;
               default:
                 socialButton = (
                   <a href={socialLink.url} target="_blank" rel="noreferrer noopener">
                     <EnvelopeIcon fill={getThemeStyle(arcSite)['primary-color']} title="Email" description="Send an email" />
                   </a>
                 );
+                break;
             }
             result.push((
               <Fragment key={socialLink.site}>
@@ -112,7 +193,8 @@ const AuthorBio = () => {
             }
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
-              {(author.description) ? <p>{author.description}</p> : null}
+              {/* there will always be a description via conditional on 52 */}
+              <p>{author.description}</p>
               <section className="socialButtons">
                 {socialLinks}
               </section>

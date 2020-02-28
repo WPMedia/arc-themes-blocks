@@ -1,37 +1,45 @@
 .simple-results-list-container {
+  padding: 0 0 calculateRem(16px) 0;
   .simple-list-title {
-    font-size: 20px;
+    font-size: calculateRem(20px);
     font-weight: bold;
-    line-height: 24px;
-    color: #191919;
+    line-height: calculateRem(24px);
+    color: $ui-dark-secondary-color;
   }
-  
+
   .list-item-simple {
-    box-shadow: inset 0 -1px 0 0 #B8C1CB;
+    box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
     .simple-list-anchor {
       display: flex;
       text-decoration: none;
     }
 
-    .headline-text {
-      color: #191919;
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: normal;
-      margin: 16px 14px 18.2px 0;
+    .headline-description {
+      padding: calculateRem(16px) 0;
     }
-    
+    .headline-text {
+      color: $ui-dark-secondary-color;
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
+      font-weight: normal;
+    }
+
     .simple-list-image,
     .image-placeholder-sm {
       height: 74px;
       width: 108px;
-      margin: 16px 20px 17px 0;
+      padding: calculateRem(16px) 0;
     }
 
-    .image-placeholder-sm  {
-      min-height: 74px;
-      min-width: 108px;
-      background-color: #DFE4EA;
+    .image-container {
+      flex: 0 0 30%;
+      padding: calculateRem(16px) calculateRem(20px) calculateRem(16px) 0;
+
+      .image-placeholder-sm,
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 }

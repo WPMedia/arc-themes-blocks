@@ -12,11 +12,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Title = styled.div`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 @Consumer
@@ -66,18 +66,20 @@ class SimpleResultsList extends Component {
                 title={headlineText}
                 className="simple-list-anchor"
               >
-                {extractImage(element.promo_items) ? (
-                  <Image
-                    url={extractImage(element.promo_items)}
-                    alt={headlineText}
-                    smallWidth={108}
-                    smallHeight={74}
-                    mediumWidth={108}
-                    mediumHeight={74}
-                    largeWidth={108}
-                    largeHeight={74}
-                  />
-                ) : <div className="image-placeholder-sm" />}
+                <div className="image-container">
+                  {extractImage(element.promo_items) ? (
+                    <Image
+                      url={extractImage(element.promo_items)}
+                      alt={headlineText}
+                      smallWidth={108}
+                      smallHeight={74}
+                      mediumWidth={108}
+                      mediumHeight={74}
+                      largeWidth={108}
+                      largeHeight={74}
+                    />
+                  ) : <div className="image-placeholder-sm" />}
+                </div>
                 <div className="headline-description">
                   <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
                 </div>

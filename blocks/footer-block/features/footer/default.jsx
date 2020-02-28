@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -12,17 +13,17 @@ import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
 import './footer.scss';
 
 const FooterSection = styled.ul`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
-const Footer = () => {
+const Footer = ({ customFields: { navigationConfig } }) => {
   const { arcSite } = useFusionContext();
 
   const content = useContent({
-    source: 'site-navigation',
+    source: navigationConfig.contentService,
     query: {
-      site: arcSite,
       hierarchy: 'footer',
+      ...navigationConfig.contentConfigValues,
     },
   });
 
@@ -103,7 +104,7 @@ const Footer = () => {
       <div className="row legacy-footer-row">
         {/* The columns are 2D arrays of columns x column items. Iterate through both */}
         {footerColumns.map((column) => {
-          const columnItems = (column.children) ? column.children.map(item => (
+          const columnItems = (column.children) ? column.children.map((item) => (
             <li className="footer-item" key={item._id}>
               <a href={item.url}>{item.display_name}</a>
             </li>
@@ -136,6 +137,12 @@ const Footer = () => {
       </div>
     </div>
   );
+};
+
+Footer.propTypes = {
+  customFields: PropTypes.shape({
+    navigationConfig: PropTypes.contentConfig('navigation-hierarchy'),
+  }),
 };
 
 Footer.label = 'Footer – Arc Block';

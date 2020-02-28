@@ -147,49 +147,37 @@ const MediumPromo = ({ customFields, arcSite }) => {
 
 MediumPromo.propTypes = {
   customFields: PropTypes.shape({
-    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
-      {
-        group: 'Configure Content',
-        label: 'Display Content Info',
-      },
-    ),
-    showHeadline: PropTypes.bool.tag(
-      {
-        name: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        name: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        name: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showByline: PropTypes.bool.tag(
-      {
-        name: 'Show byline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDate: PropTypes.bool.tag(
-      {
-        name: 'Show date',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showByline: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDate: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
   }),

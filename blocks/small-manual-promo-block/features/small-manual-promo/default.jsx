@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -62,31 +61,27 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
 SmallManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
-      name: 'Headline',
+      label: 'Headline',
       group: 'Configure Content',
     }),
     imageURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Configure Content',
     }),
     linkURL: PropTypes.string.tag({
-      name: 'Link URL',
+      label: 'Link URL',
       group: 'Configure Content',
     }),
-    showHeadline: PropTypes.bool.tag(
-      {
-        name: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        name: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
 };
 

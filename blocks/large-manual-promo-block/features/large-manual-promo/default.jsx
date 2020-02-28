@@ -110,59 +110,50 @@ const LargeManualPromo = ({ customFields, arcSite }) => {
 LargeManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
-      name: 'Headline',
+      label: 'Headline',
       group: 'Configure Content',
     }),
     description: PropTypes.string.tag({
-      name: 'Description',
+      label: 'Description',
       group: 'Configure Content',
     }),
     overline: PropTypes.string.tag({
-      name: 'Overline',
+      label: 'Overline',
       group: 'Configure Content',
     }),
     overlineURL: PropTypes.string.tag({
-      name: 'Overline URL',
+      label: 'Overline URL',
       group: 'Configure Content',
     }),
     imageURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Configure Content',
     }),
     linkURL: PropTypes.string.tag({
-      name: 'Link URL',
+      label: 'Link URL',
       group: 'Configure Content',
     }),
-    showOverline: PropTypes.bool.tag(
-      {
-        name: 'Show overline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showHeadline: PropTypes.bool.tag(
-      {
-        name: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        name: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        name: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    showOverline: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
-
 };
 
 LargeManualPromo.label = 'Large Manual Promo – Arc Block';

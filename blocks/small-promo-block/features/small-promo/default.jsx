@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -87,20 +88,20 @@ SmallPromo.propTypes = {
     ),
     showHeadline: PropTypes.bool.tag(
       {
-        name: 'Show headline',
+        label: 'Show headline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showImage: PropTypes.bool.tag(
       {
-        name: 'Show image',
+        label: 'Show image',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
   }),

@@ -183,48 +183,48 @@ ExtraLargePromo.propTypes = {
     ),
     showOverline: PropTypes.bool.tag(
       {
-        name: 'Show overline',
+        label: 'Show overline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showHeadline: PropTypes.bool.tag(
       {
-        name: 'Show headline',
+        label: 'Show headline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showImage: PropTypes.bool.tag(
       {
-        name: 'Show image',
+        label: 'Show image',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showDescription: PropTypes.bool.tag(
       {
-        name: 'Show description',
+        label: 'Show description',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showByline: PropTypes.bool.tag(
       {
-        name: 'Show byline',
+        label: 'Show byline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showDate: PropTypes.bool.tag(
       {
-        name: 'Show date',
+        label: 'Show date',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
   }),

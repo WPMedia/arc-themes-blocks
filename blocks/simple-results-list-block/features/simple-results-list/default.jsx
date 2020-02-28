@@ -94,7 +94,12 @@ class SimpleResultsList extends Component {
 
 SimpleResultsList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     title: PropTypes.string,
   }),
 };

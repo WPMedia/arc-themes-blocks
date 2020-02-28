@@ -77,45 +77,44 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
 
 MediumManualPromo.propTypes = {
   customFields: PropTypes.shape({
+    headline: PropTypes.string.tag({
+      label: 'Headline',
+      group: 'Configure Content',
+    }),
+    description: PropTypes.string.tag({
+      label: 'Description',
+      group: 'Configure Content',
+    }),
+    imageURL: PropTypes.string.tag({
+      label: 'Image URL',
+      group: 'Configure Content',
+    }),
+    linkURL: PropTypes.string.tag({
+      label: 'Link URL',
+      group: 'Configure Content',
+    }),
     showHeadline: PropTypes.bool.tag(
       {
-        name: 'Show headline',
+        label: 'Show headline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showImage: PropTypes.bool.tag(
       {
-        name: 'Show image',
+        label: 'Show image',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showDescription: PropTypes.bool.tag(
       {
-        name: 'Show description',
+        label: 'Show description',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
-    headline: PropTypes.string.tag({
-      name: 'Headline',
-      group: 'Content',
-    }),
-    description: PropTypes.string.tag({
-      name: 'Description',
-      group: 'Content',
-    }),
-    imageURL: PropTypes.string.tag({
-      name: 'Image URL',
-      group: 'Content',
-    }),
-    linkURL: PropTypes.string.tag({
-      name: 'Link URL',
-      group: 'Content',
-    }),
   }),
-
 };
 
 MediumManualPromo.label = 'Medium Manual Promo – Arc Block';

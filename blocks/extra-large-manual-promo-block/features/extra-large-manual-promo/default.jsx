@@ -103,6 +103,30 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
 
 ExtraLargeManualPromo.propTypes = {
   customFields: PropTypes.shape({
+    headline: PropTypes.string.tag({
+      name: 'Headline',
+      group: 'Configure Content',
+    }),
+    description: PropTypes.string.tag({
+      name: 'Description',
+      group: 'Configure Content',
+    }),
+    overline: PropTypes.string.tag({
+      name: 'Overline',
+      group: 'Configure Content',
+    }),
+    overlineURL: PropTypes.string.tag({
+      name: 'Overline URL',
+      group: 'Configure Content',
+    }),
+    imageURL: PropTypes.string.tag({
+      name: 'Image URL',
+      group: 'Configure Content',
+    }),
+    linkURL: PropTypes.string.tag({
+      name: 'Link URL',
+      group: 'Configure Content',
+    }),
     showOverline: PropTypes.bool.tag(
       {
         name: 'Show overline',
@@ -131,32 +155,7 @@ ExtraLargeManualPromo.propTypes = {
         group: 'Show promo elements',
       },
     ),
-    headline: PropTypes.string.tag({
-      name: 'Headline',
-      group: 'Content',
-    }),
-    description: PropTypes.string.tag({
-      name: 'Description',
-      group: 'Content',
-    }),
-    overline: PropTypes.string.tag({
-      name: 'Overline',
-      group: 'Content',
-    }),
-    overlineURL: PropTypes.string.tag({
-      name: 'Overline URL',
-      group: 'Content',
-    }),
-    imageURL: PropTypes.string.tag({
-      name: 'Image URL',
-      group: 'Content',
-    }),
-    linkURL: PropTypes.string.tag({
-      name: 'Link URL',
-      group: 'Content',
-    }),
   }),
-
 };
 
 ExtraLargeManualPromo.label = 'Extra Large Manual Promo – Arc Block';

@@ -179,6 +179,12 @@ const LargePromo = ({ customFields, arcSite }) => {
 
 LargePromo.propTypes = {
   customFields: PropTypes.shape({
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     showOverline: PropTypes.bool.tag(
       {
         name: 'Show overline',
@@ -225,7 +231,6 @@ LargePromo.propTypes = {
       name: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
 
 };

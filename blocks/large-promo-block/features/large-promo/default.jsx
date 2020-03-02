@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading, import/no-unresolved */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/card-list-block",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -10,11 +10,11 @@
     "features"
   ],
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/",
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/card-list-block"
   },

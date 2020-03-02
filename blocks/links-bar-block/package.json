@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/links-bar-block",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Fusion News Theme links bar block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -12,11 +12,11 @@
     "layouts"
   ],
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/",
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/links-bar-block"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/collections-content-source-block",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fusion News Theme collections content API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,11 +10,11 @@
     "sources"
   ],
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/",
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/collections-content-source-block"
   },

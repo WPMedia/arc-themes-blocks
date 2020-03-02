@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-author-content-source-block",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Content source block for story feed queries by author",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,11 +10,11 @@
     "sources"
   ],
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/",
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/story-feed-author-content-source-block"
   },

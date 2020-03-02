@@ -24,5 +24,6 @@
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_tag-v4": "^1.0.6-beta.0"
-  }
+  },
+  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
 }

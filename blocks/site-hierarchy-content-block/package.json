@@ -31,5 +31,6 @@
   },
   "dependencies": {
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
 }

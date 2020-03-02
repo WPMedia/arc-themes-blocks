@@ -27,5 +27,6 @@
     "dom-parser": "^0.1.6",
     "styled-components": "^4.4.0",
     "thumbor-lite": "^0.1.6"
-  }
+  },
+  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
 }

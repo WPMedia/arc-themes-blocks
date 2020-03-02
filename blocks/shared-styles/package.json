@@ -12,5 +12,6 @@
   "publishConfig": {
     "access": "restricted"
   },
-  "scripts": {}
+  "scripts": {},
+  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
 }

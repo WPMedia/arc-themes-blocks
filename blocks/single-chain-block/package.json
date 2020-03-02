@@ -21,5 +21,6 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
-  }
+  },
+  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
 }

@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading, import/no-unresolved */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -119,11 +119,11 @@ const MediumPromo = ({ customFields, arcSite }) => {
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
                 smallWidth={275}
-                smallHeight={0}
+                smallHeight={154.69}
                 mediumWidth={275}
-                mediumHeight={0}
+                mediumHeight={154.69}
                 largeWidth={400}
-                largeHeight={0}
+                largeHeight={225}
               />
             </a>
           </div>

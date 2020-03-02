@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -32,11 +31,11 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageURL}
                 alt={customFields.headline}
                 smallWidth={275}
-                smallHeight={0}
+                smallHeight={154.69}
                 mediumWidth={275}
-                mediumHeight={0}
-                largeWidth={275}
-                largeHeight={0}
+                mediumHeight={154.69}
+                largeWidth={400}
+                largeHeight={225}
               />
             </a>
           </div>

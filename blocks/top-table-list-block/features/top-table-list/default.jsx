@@ -104,11 +104,16 @@ const TopTableList = (props) => {
 
 TopTableList.propTypes = {
   customFields: PropTypes.shape({
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     extraLarge: PropTypes.number.tag({ label: generateLabelString('Extra Large'), default: 0 }),
     large: PropTypes.number.tag({ label: generateLabelString('Large'), default: 0 }),
     medium: PropTypes.number.tag({ label: generateLabelString('Medium'), default: 0 }),
     small: PropTypes.number.tag({ label: generateLabelString('Small'), default: 0 }),
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag({ label: 'Display Content Info' }),
   }),
 };
 

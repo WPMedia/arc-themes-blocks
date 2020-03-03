@@ -1,22 +1,22 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import HamburgerMenuIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import UserIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/UserIcon';
+import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
-
-import navHamburger from './images/hamburger.svg';
-import navUser from './images/user.svg';
-import placeholderLogo from './images/arc-placeholder-logo.svg';
 
 import './navigation.scss';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
+const iconSize = 16;
 const navHeight = '56px';
 const navZIdx = 9;
 const sectionZIdx = navZIdx - 1;
@@ -27,18 +27,18 @@ background-color: #000;
 height: ${navHeight};
 z-index: ${navZIdx};
   * {
-    font-family: ${props => props.font};
+    font-family: ${(props) => props.font};
   }
 `;
 const StyledSectionDrawer = styled.div`
-  font-family: ${props => props.font};
+  font-family: ${(props) => props.font};
   position: fixed;
   top: ${navHeight};
   z-index: ${sectionZIdx};
 `;
 
 const NavButton = styled.button`
-  background-color: ${props => props.bgColor || '#000'};
+  background-color: ${(props) => props.bgColor || '#000'};
 `;
 
 /* Main Component */
@@ -55,7 +55,7 @@ const Nav = (props) => {
   const { customFields: { hierarchy, showSignIn } = {} } = props;
 
   const mainContent = useContent({
-    source: 'site-navigation',
+    source: 'site-service-hierarchy',
     query: {
       site: arcSite,
       hierarchy,
@@ -80,19 +80,23 @@ const Nav = (props) => {
   });
 
   return (
-    <Fragment>
+    <>
       <StyledNav id="main-nav" className="news-theme-navigation" font={primaryFont}>
 
         <div className="nav-left">
-          <SearchBox />
+          <SearchBox iconSize={20} />
           <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className="nav-btn nav-sections-btn border transparent" type="button">
             <span>Sections</span>
-            <img src={navHamburger} alt="Navigation bar sections" />
+            <HamburgerMenuIcon fill="white" height={iconSize} width={iconSize} />
           </button>
         </div>
 
         <div className="nav-logo">
-          <a href="/" title={primaryLogoAlt}><img src={primaryLogo || placeholderLogo} alt={primaryLogoAlt || 'Navigation bar logo'} /></a>
+          <a href="/" title={primaryLogoAlt}>
+            {primaryLogo
+              ? <img src={primaryLogo} alt={primaryLogoAlt || 'Navigation bar logo'} />
+              : <ArcLogo />}
+          </a>
         </div>
 
         <div className="nav-right">
@@ -100,10 +104,9 @@ const Nav = (props) => {
             && (
             <NavButton className="nav-btn nav-sections-btn" type="button" bgColor={primaryColor}>
               <span>Sign In</span>
-              <img src={navUser} alt="Navigation bar sections" />
+              <UserIcon fill="white" height={iconSize} width={iconSize} />
             </NavButton>
-            )
-          }
+            )}
         </div>
       </StyledNav>
 
@@ -114,7 +117,7 @@ const Nav = (props) => {
       </StyledSectionDrawer>
 
       {isSectionDrawerOpen ? <div id="overlay" role="dialog" onKeyDown={handleEscKey} onClick={() => setSectionDrawerOpen(false)} /> : null}
-    </Fragment>
+    </>
   );
 };
 

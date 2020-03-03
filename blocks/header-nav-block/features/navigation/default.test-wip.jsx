@@ -1,86 +1,86 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import getProperties from 'fusion:properties';
-import Navigation from './default';
+// import React from 'react';
+// import { mount } from 'enzyme';
+// import getProperties from 'fusion:properties';
+// import Navigation from './default';
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-jest.mock('fusion:context', () => ({
-  useAppContext: jest.fn(() => ({})),
-}));
-jest.mock('fusion:content', () => ({
-  useContent: jest.fn(() => ({})),
-}));
+// jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+// jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+// jest.mock('fusion:context', () => ({
+//   useAppContext: jest.fn(() => ({})),
+// }));
+// jest.mock('fusion:content', () => ({
+//   useContent: jest.fn(() => ({})),
+// }));
 
-describe('the header navigation feature for the default output type', () => {
-  it('should be a nav element', () => {
-    const wrapper = mount(<Navigation />);
+// describe('the header navigation feature for the default output type', () => {
+//   it('should be a nav element', () => {
+//     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('nav').hasClass('news-theme-navigation')).toBe(true);
-    expect(wrapper.find('nav').hasClass(/sc-/)).toBe(true);
-  });
+//     expect(wrapper.find('nav').hasClass('news-theme-navigation')).toBe(true);
+//     expect(wrapper.find('nav').hasClass(/sc-/)).toBe(true);
+//   });
 
-  it('should contain two buttons', () => {
-    const wrapper = mount(<Navigation />);
+//   it('should contain two buttons', () => {
+//     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('button')).toHaveLength(3);
-  });
+//     expect(wrapper.find('button')).toHaveLength(3);
+//   });
 
-  it('should contain a logo image', () => {
-    const wrapper = mount(<Navigation />);
+//   it('should contain a logo image', () => {
+//     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('div.nav-logo > a > img')).toHaveLength(1);
-  });
+//     expect(wrapper.find('div.nav-logo > a > img')).toHaveLength(1);
+//   });
 
-  describe('the search button', () => {
-    it('should have an image that imports the search icon', () => {
-      const wrapper = mount(<Navigation />);
+//   describe('the search button', () => {
+//     it('should have an image that imports the search icon', () => {
+//       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('button.nav-search > img')).toHaveProp('src', 'search.svg');
-    });
+//       expect(wrapper.find('button.nav-search > img')).toHaveProp('src', 'search.svg');
+//     });
 
-    it('should have the default alt text', () => {
-      const wrapper = mount(<Navigation />);
+//     it('should have the default alt text', () => {
+//       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('button.nav-search > img')).toHaveProp('alt', 'Navigation bar search');
-    });
-  });
+//       expect(wrapper.find('button.nav-search > img')).toHaveProp('alt', 'Navigation bar search');
+//     });
+//   });
 
-  describe('the navigation bar image/logo', () => {
-    describe('when the theme manifest provides a logo url', () => {
-      it('should make the src of the logo the provided image', () => {
-        getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
-        const wrapper = mount(<Navigation />);
+//   describe('the navigation bar image/logo', () => {
+//     describe('when the theme manifest provides a logo url', () => {
+//       it('should make the src of the logo the provided image', () => {
+//         getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+//         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
-      });
-    });
+//         expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
+//       });
+//     });
 
-    describe('when the theme does not provide a logo url', () => {
-      it('should make the src of the logo the placeholder image', () => {
-        getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(<Navigation />);
+//     describe('when the theme does not provide a logo url', () => {
+//       it('should make the src of the logo the placeholder image', () => {
+//         getProperties.mockImplementation(() => ({}));
+//         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
-      });
-    });
+//         expect(wrapper.find('div > img')).toHaveProp('src', 'arc-placeholder-logo.svg');
+//       });
+//     });
 
-    describe('when the theme manifest provides alt text', () => {
-      it('should make the alt text of the logo the provided text', () => {
-        getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
-        const wrapper = mount(<Navigation />);
+//     describe('when the theme manifest provides alt text', () => {
+//       it('should make the alt text of the logo the provided text', () => {
+//         getProperties.mockImplementation(() => ({ primaryLogoAlt: 'my alt text' }));
+//         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
-      });
-    });
+//         expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+//       });
+//     });
 
-    describe('when the theme manifest does not provide alt text', () => {
-      it('should make the alt text of the logo the default text', () => {
-        getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(<Navigation />);
+//     describe('when the theme manifest does not provide alt text', () => {
+//       it('should make the alt text of the logo the default text', () => {
+//         getProperties.mockImplementation(() => ({}));
+//         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div > img')).toHaveProp('alt', 'Navigation bar logo');
-      });
-    });
-  });
-});
+//         expect(wrapper.find('div > img')).toHaveProp('alt', 'Navigation bar logo');
+//       });
+//     });
+//   });
+// });

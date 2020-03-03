@@ -3,8 +3,11 @@ $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
+$nav-search-border-color: #5c6364;
+$overlay-color: #2a2a2a;
 $overlay-z-index: 2;
 $section-bg: #3B3B3B;
+$section-width: 315px;
 $submenu-link-color: #7F8C8D;
 
 .nav-btn {
@@ -138,13 +141,9 @@ $submenu-link-color: #7F8C8D;
       img {
         height: auto;
         max-height: 30px;
+        min-width: 30px;
         width: auto;
       }
-    }
-
-    img {
-      height: 16px;
-      width: 16px;
     }
   }
 }
@@ -155,14 +154,14 @@ $submenu-link-color: #7F8C8D;
   flex-direction: column;
   left: 0;
   transition: transform 300ms ease-in-out;
-  width: 315px;
+  width: $section-width;
 
   &.open {
     transform: translate(0px, 0px);
   }
 
   &.closed {
-    transform: translate(-315px, 0px);
+    transform: translate(-$section-width, 0px);
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -186,7 +185,7 @@ $submenu-link-color: #7F8C8D;
   }
 
   .nav-search {
-    border-bottom: $border-width solid #5c6364;
+    border-bottom: $border-width solid $nav-search-border-color;
     padding-bottom: 16px;
     margin: 16px 20px 0;
 
@@ -212,7 +211,7 @@ $submenu-link-color: #7F8C8D;
 
       a {
         align-items: center;
-        color: #fff;
+        color: white;
         flex: 1;
         justify-content: space-between;
         padding: 14px 0;
@@ -232,11 +231,6 @@ $submenu-link-color: #7F8C8D;
         }
       }
     }
-
-    .submenu-caret {
-      color: $border-color-dull;
-      font-size: 1.2em;
-    }
   }
 
   .subsection-container {
@@ -247,7 +241,7 @@ $submenu-link-color: #7F8C8D;
 
     .arrow-left {
       border-bottom: $arrow-size solid transparent;
-      border-right: $arrow-size solid #fff;
+      border-right: $arrow-size solid white;
       border-top: $arrow-size solid transparent;
       height: 0;
       left: -$arrow-size;
@@ -259,7 +253,7 @@ $submenu-link-color: #7F8C8D;
   }
 
   ul.subsection-menu {
-    background: #fff;
+    background: white;
     border-radius: 2px;
     box-shadow: 0px 0px 20px 0 rgba(42, 42, 42, 0.5);
     left: 0;
@@ -294,7 +288,7 @@ $submenu-link-color: #7F8C8D;
 }
 
 #overlay {
-  background: #2a2a2a;
+  background: $overlay-color;
   height: 100%;
   left: 0;
   opacity: 0.5;

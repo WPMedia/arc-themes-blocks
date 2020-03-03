@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import NavSearchIcon from './search-icon';
+import SearchIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
-export default ({ alwaysOpen = false }) => {
+export default ({ alwaysOpen = false, iconSize = 16 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const searchInput = useRef(null);
 
@@ -29,7 +29,7 @@ export default ({ alwaysOpen = false }) => {
     <div className={`nav-search ${isSearchBarOpen && 'open'}`}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} type="text" placeholder="Search" />
       <button onMouseDown={handleSearchBtnMousedown} className={btnClassNames} type="button">
-        <NavSearchIcon fillColor={isSearchBarOpen ? '#666666' : 'white'} />
+        <SearchIcon fill={isSearchBarOpen ? '#666666' : 'white'} height={iconSize} width={iconSize} />
       </button>
     </div>
   );

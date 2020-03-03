@@ -32,9 +32,9 @@ const MediumListItem = (props) => {
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
                 smallWidth={275}
-                smallHeight={154.69}
+                smallHeight={155}
                 mediumWidth={275}
-                mediumHeight={154.69}
+                mediumHeight={155}
                 largeWidth={400}
                 largeHeight={225}
               />

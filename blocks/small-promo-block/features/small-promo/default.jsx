@@ -64,11 +64,11 @@ const SmallPromo = ({ customFields, arcSite }) => {
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
                 smallWidth={275}
-                smallHeight={183.33}
+                smallHeight={183}
                 mediumWidth={275}
-                mediumHeight={183.33}
+                mediumHeight={183}
                 largeWidth={400}
-                largeHeight={266.67}
+                largeHeight={267}
               />
             </a>
           </div>

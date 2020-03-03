@@ -21,29 +21,81 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
+let oldList;
+let myList;
+
 @Consumer
 class ResultsList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { resultList: {} };
+    this.state = { resultList: {}, seeMoreBtn: true };
     this.fetchStories(false);
   }
+
 
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
+
     if (additionalStoryAmount) {
-      let value = parseInt(contentConfigValues.size, 10);
-      value += 15;
-      contentConfigValues.size = value.toString();
+      // Detect content service type
+      let value;
+      switch (listContentConfig.contentService) {
+        case 'story-feed-author':
+          value = parseInt(contentConfigValues.feedSize, 10);
+          value += 15;
+          contentConfigValues.feedSize = value.toString();
+          break;
+        case 'story-feed-query':
+          value = parseInt(contentConfigValues.size, 10);
+          contentConfigValues.offset = (oldList.next).toString();
+          value += oldList.next;
+          // contentConfigValues.size = value.toString();
+          break;
+        case 'story-feed-sections':
+          value = parseInt(contentConfigValues.feedSize, 10);
+          value += 15;
+          contentConfigValues.feedSize = value.toString();
+          break;
+        case 'story-feed-tag':
+          value = parseInt(contentConfigValues.feedSize, 10);
+          value += 15;
+          contentConfigValues.feedSize = value.toString();
+          break;
+        default:
+          break;
+      }
+      // console.log('results', resultList, 'value', value, 'next', resultList.next, 'offset', contentConfigValues.offset);
+      // let _this = this;
+      this.fetchContent({
+        resultList: {
+          source: contentService,
+          query: contentConfigValues,
+          transform(data) {
+            if (data) {
+              oldList.content_elements = oldList.content_elements.concat(data.content_elements);
+              oldList.next = data.next;
+            }
+            return oldList;
+          },
+        },
+      });
+      // Hide button if no additional stories
+      if (value >= oldList.count) {
+        this.setState({
+          seeMoreBtn: false,
+        });
+      }
+    } else {
+      this.fetchContent({
+        resultList: {
+          source: contentService,
+          query: contentConfigValues,
+        },
+      });
+      oldList = this.state.resultList;
     }
-    this.fetchContent({
-      resultList: {
-        source: contentService,
-        query: contentConfigValues,
-      },
-    });
   }
 
   constructHref(websiteUrl) {
@@ -57,7 +109,7 @@ class ResultsList extends Component {
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {}, seeMoreBtn } = this.state;
     return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
@@ -127,7 +179,7 @@ class ResultsList extends Component {
           );
         })}
         {
-          contentElements && contentElements.length > 0 && (
+          !!(contentElements && contentElements.length > 0 && seeMoreBtn) && (
             <div className="see-more">
               <button
                 type="button"

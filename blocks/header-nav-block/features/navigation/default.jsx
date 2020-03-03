@@ -1,25 +1,25 @@
-import React, { Fragment, useState } from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { useContent } from 'fusion:content'
-import { useAppContext } from 'fusion:context'
-import getProperties from 'fusion:properties'
-import getThemeStyle from 'fusion:themes'
-import SectionNav from './_children/section-nav'
-import SearchBox from './_children/search-box'
+import React, { Fragment, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useContent } from 'fusion:content';
+import { useAppContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getThemeStyle from 'fusion:themes';
+import SectionNav from './_children/section-nav';
+import SearchBox from './_children/search-box';
 
-import navHamburger from './images/hamburger.svg'
-import navUser from './images/user.svg'
-import placeholderLogo from './images/arc-placeholder-logo.svg'
+import navHamburger from './images/hamburger.svg';
+import navUser from './images/user.svg';
+import placeholderLogo from './images/arc-placeholder-logo.svg';
 
-import './navigation.scss'
+import './navigation.scss';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
-const navHeight = '56px'
-const navZIdx = 9
-const sectionZIdx = navZIdx - 1
+const navHeight = '56px';
+const navZIdx = 9;
+const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
@@ -29,85 +29,100 @@ z-index: ${navZIdx};
   * {
     font-family: ${props => props.font};
   }
-`
+`;
 const StyledSectionDrawer = styled.div`
   font-family: ${props => props.font};
   position: fixed;
   top: ${navHeight};
   z-index: ${sectionZIdx};
-`
+`;
 
 const NavButton = styled.button`
   background-color: ${props => props.bgColor || '#000'};
-`
+`;
 
 /* Main Component */
-const Nav = ({ customFields = {} }) => {
-  const { arcSite } = useAppContext()
+const Nav = (props) => {
+  const { arcSite } = useAppContext();
 
-  const { primaryLogo, primaryLogoAlt } = getProperties(arcSite)
+  const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
 
   const {
     'primary-color': primaryColor = '#000',
-    'primary-font-family': primaryFont
-  } = getThemeStyle(arcSite)
+    'primary-font-family': primaryFont,
+  } = getThemeStyle(arcSite);
 
-  const { hierarchy, showSignIn } = customFields
+  const { customFields: { hierarchy, showSignIn } = {} } = props;
 
   const mainContent = useContent({
     source: 'site-navigation',
     query: {
       site: arcSite,
-      hierarchy
+      hierarchy,
+    },
+  });
+
+  const sections = (mainContent && mainContent.children) ? mainContent.children : [];
+
+  const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
+
+  const handleEscKey = (event) => {
+    if (event.keyCode === 27) {
+      setSectionDrawerOpen(false);
     }
-  })
+  };
 
-  const sections = (mainContent && mainContent.children) ? mainContent.children : []
-
-  const [ isSectionDrawerOpen, setSectionDrawerOpen ] = useState(false)
+  useEffect(() => {
+    window.addEventListener('keydown', handleEscKey, true);
+    return () => {
+      window.removeEventListener('keydown', handleEscKey);
+    };
+  });
 
   return (
     <Fragment>
-      <StyledNav id='news-theme-navigation' font={primaryFont}>
+      <StyledNav id="main-nav" className="news-theme-navigation" font={primaryFont}>
 
-        <div className='nav-left'>
+        <div className="nav-left">
           <SearchBox />
-          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className='nav-btn nav-sections-btn border transparent' type='button'>
+          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className="nav-btn nav-sections-btn border transparent" type="button">
             <span>Sections</span>
-            <img src={navHamburger} alt='Navigation bar sections' />
+            <img src={navHamburger} alt="Navigation bar sections" />
           </button>
         </div>
 
-        <div className='nav-logo'>
-          <a href='/' title={primaryLogoAlt}><img src={primaryLogo || placeholderLogo} alt={primaryLogoAlt || 'Navigation bar logo'} /></a>
+        <div className="nav-logo">
+          <a href="/" title={primaryLogoAlt}><img src={primaryLogo || placeholderLogo} alt={primaryLogoAlt || 'Navigation bar logo'} /></a>
         </div>
 
-        <div className='nav-right'>
-          {showSignIn &&
-            <NavButton className='nav-btn nav-sections-btn' type='button' bgColor={primaryColor}>
+        <div className="nav-right">
+          {showSignIn
+            && (
+            <NavButton className="nav-btn nav-sections-btn" type="button" bgColor={primaryColor}>
               <span>Sign In</span>
-              <img src={navUser} alt='Navigation bar sections' />
+              <img src={navUser} alt="Navigation bar sections" />
             </NavButton>
+            )
           }
         </div>
       </StyledNav>
 
-      <StyledSectionDrawer id='sections' className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
+      <StyledSectionDrawer id="sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
         <SectionNav sections={sections}>
           <SearchBox alwaysOpen />
         </SectionNav>
       </StyledSectionDrawer>
 
-      {isSectionDrawerOpen ? <div id='overlay' onClick={() => setSectionDrawerOpen(false)} /> : null}
+      {isSectionDrawerOpen ? <div id="overlay" role="dialog" onKeyDown={handleEscKey} onClick={() => setSectionDrawerOpen(false)} /> : null}
     </Fragment>
-  )
-}
+  );
+};
 
 Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,
-    showSignIn: PropTypes.bool
-  })
-}
+    showSignIn: PropTypes.bool,
+  }),
+};
 
-export default Nav
+export default Nav;

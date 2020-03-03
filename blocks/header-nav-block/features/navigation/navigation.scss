@@ -1,19 +1,21 @@
-$btn-size: 32px;
+$arrow-size: calculateRem(10px);
 $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
+$border-width: 1px;
+$btn-size: calculateRem(32px);
+$overlay-z-index: 2;
 $section-bg: #3B3B3B;
 $submenu-link-color: #7F8C8D;
 
 .nav-btn {
   border: 0;
   height: $btn-size;
-  margin: 0 5px;
   outline: none;
   position: relative;
   white-space: nowrap;
 
   &.border {
-    border: 1px solid $border-color-dull;
+    border: $border-width solid $border-color-dull;
     transition: border 100ms linear;
   }
 
@@ -25,7 +27,7 @@ $submenu-link-color: #7F8C8D;
     outline: none;
 
     &.border {
-      border: 1px solid $border-color-bright;
+      border: $border-width solid $border-color-bright;
     }
   }
 
@@ -37,6 +39,11 @@ $submenu-link-color: #7F8C8D;
 .nav-sections-btn {
   align-items: center;
   display: flex;
+  margin-left: 10px;
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    margin: 0;
+  }
 
   > span, > img {
     flex: 0;
@@ -44,8 +51,9 @@ $submenu-link-color: #7F8C8D;
 
   > span {
     color: white;
-    font-size: 14px;
-    padding: 0 8px;
+    font-weight: bold;
+    font-size: calculateRem(14px);
+    padding-right: 8px;
   }
 }
 
@@ -64,7 +72,6 @@ $submenu-link-color: #7F8C8D;
 
     button {
       border: 0;
-      border-left: 1px solid #ccc;
       margin: 0;
       position: absolute;
       right: 0;
@@ -81,25 +88,18 @@ $submenu-link-color: #7F8C8D;
     outline: none;
     padding: 0;
     transition: all .25s cubic-bezier(.49,.37,.45,.71);
-    width: 0px;
+    width: 0;
   }
 }
 
-#news-theme-navigation {
+#main-nav.news-theme-navigation {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 0 20px;
   position: relative;
-  // background-color: $ui-dark-secondary-color;
 
-  // padding-left: map-get($spacers, 'sm');
-  // padding-right: map-get($spacers, 'sm');
-  // @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-  //   padding: map-get($spacers, 'xxs');
-  // }
-
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     .nav-search, .nav-sections-btn span {
       display: none;
     }
@@ -145,20 +145,16 @@ $submenu-link-color: #7F8C8D;
     img {
       height: 16px;
       width: 16px;
-
-      // @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      //   height: 32px;
-      // }
     }
   }
 }
 
 #sections {
   background: $section-bg;
-  bottom: 0px;
+  bottom: 0;
   flex-direction: column;
-  left: 0px;
-  transition: transform 500ms cubic-bezier(0.565, 1.65, 0.765, 0.88) 0s;
+  left: 0;
+  transition: transform 300ms ease-in-out;
   width: 315px;
 
   &.open {
@@ -169,13 +165,19 @@ $submenu-link-color: #7F8C8D;
     transform: translate(-315px, 0px);
   }
 
-  @media screen and (min-width: 600px){
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     .nav-search {
       display: none;
     }
 
     ul.section-menu > li a {
-      padding: 12px 0px;
+      padding: 12px 0;
+    }
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    .submenu-caret, .subsection-container {
+      display: none;
     }
   }
 
@@ -184,9 +186,9 @@ $submenu-link-color: #7F8C8D;
   }
 
   .nav-search {
-    border-bottom: 1px solid $border-color-dull;
+    border-bottom: $border-width solid #5c6364;
     padding-bottom: 16px;
-    margin: 16px 10px 0px;
+    margin: 16px 20px 0;
 
     input {
       flex: 1;
@@ -199,12 +201,13 @@ $submenu-link-color: #7F8C8D;
   }
 
   ul.section-menu {
-    padding: 0px;
+    padding: 0;
 
     > li {
+      font-size: 14px;
       font-weight: bold;
       list-style: none;
-      padding: 0px 20px;
+      padding: 0 20px;
       position: relative;
 
       a {
@@ -212,16 +215,20 @@ $submenu-link-color: #7F8C8D;
         color: #fff;
         flex: 1;
         justify-content: space-between;
-        padding: 14px 0px;
+        padding: 14px 0;
         text-decoration: none;
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          padding: 12px 0;
+        }
       }
 
       &:hover {
         background: darken($section-bg, 20%);
 
-        ul.subsection-menu {
-          visibility: visible;
+        .subsection-container {
           opacity: 1;
+          visibility: visible;
         }
       }
     }
@@ -232,27 +239,55 @@ $submenu-link-color: #7F8C8D;
     }
   }
 
+  .subsection-container {
+    opacity: 0;
+    position: relative;
+    transition: visibility 0s, opacity 250ms step-end 200ms;
+    visibility: hidden;
+
+    .arrow-left {
+      border-bottom: $arrow-size solid transparent;
+      border-right: $arrow-size solid #fff;
+      border-top: $arrow-size solid transparent;
+      height: 0;
+      left: -$arrow-size;
+      position: absolute;
+      top: 15px;
+      width: 0;
+      z-index: ($overlay-z-index + 2);
+    }
+  }
+
   ul.subsection-menu {
     background: #fff;
     border-radius: 2px;
-    box-shadow: 0 0 16px 0 rgba(42,42,42,0.5);
-    left: 240px;
+    box-shadow: 0px 0px 20px 0 rgba(42, 42, 42, 0.5);
+    left: 0;
     list-style: none;
     margin: 0;
-    opacity: 0;
-    padding: 5px 10px;
+    padding: 24px;
     position: absolute;
     top: 0;
-    transition: visibility 0s, opacity 250ms step-end 200ms;
-    visibility: hidden;
     width: 200px;
-    z-index: 999;
+    z-index: ($overlay-z-index + 1);
 
-    > li > a {
-      color: $submenu-link-color;
+    > li {
 
-      &:hover {
-        color: darken($submenu-link-color, 20%)
+      > a {
+        color: $submenu-link-color;
+        padding: 8px 0;
+
+        &:hover {
+          color: darken($submenu-link-color, 20%);
+        }
+      }
+
+      &:first-of-type > a {
+        padding-top: 0;
+      }
+
+      &:last-of-type > a {
+        padding-bottom: 0;
       }
     }
   }
@@ -261,10 +296,10 @@ $submenu-link-color: #7F8C8D;
 #overlay {
   background: #2a2a2a;
   height: 100%;
-  top: 0px;
-  left: 0px;
+  left: 0;
   opacity: 0.5;
   position: fixed;
+  top: 0;
   width: 100%;
-  z-index: 6;
+  z-index: $overlay-z-index;
 }

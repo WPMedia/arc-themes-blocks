@@ -174,7 +174,12 @@ CardList.label = 'Card List – Arc Block';
 
 CardList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     title: PropTypes.string,
   }),
 };

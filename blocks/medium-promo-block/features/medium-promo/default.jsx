@@ -119,11 +119,11 @@ const MediumPromo = ({ customFields, arcSite }) => {
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
                 smallWidth={275}
-                smallHeight={0}
+                smallHeight={155}
                 mediumWidth={275}
-                mediumHeight={0}
+                mediumHeight={155}
                 largeWidth={400}
-                largeHeight={0}
+                largeHeight={225}
               />
             </a>
           </div>
@@ -147,48 +147,40 @@ const MediumPromo = ({ customFields, arcSite }) => {
 
 MediumPromo.propTypes = {
   customFields: PropTypes.shape({
-    showHeadline: PropTypes.bool.tag(
-      {
-        name: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        name: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        name: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showByline: PropTypes.bool.tag(
-      {
-        name: 'Show byline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDate: PropTypes.bool.tag(
-      {
-        name: 'Show date',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showByline: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDate: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
-
 };
 
 MediumPromo.label = 'Medium Promo – Arc Block';

@@ -141,7 +141,10 @@ const Footer = ({ customFields: { navigationConfig } }) => {
 
 Footer.propTypes = {
   customFields: PropTypes.shape({
-    navigationConfig: PropTypes.contentConfig('navigation-hierarchy'),
+    navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
+      group: 'Configure Content',
+      label: 'Navigation',
+    }),
   }),
 };
 

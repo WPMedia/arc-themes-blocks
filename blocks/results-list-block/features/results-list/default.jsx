@@ -21,8 +21,7 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-let oldList;
-let myList;
+let storedList;
 
 @Consumer
 class ResultsList extends Component {
@@ -32,7 +31,6 @@ class ResultsList extends Component {
     this.state = { resultList: {}, seeMoreBtn: true };
     this.fetchStories(false);
   }
-
 
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
@@ -49,8 +47,8 @@ class ResultsList extends Component {
           break;
         case 'story-feed-query':
           value = parseInt(contentConfigValues.size, 10);
-          contentConfigValues.offset = (oldList.next).toString();
-          value += oldList.next;
+          contentConfigValues.offset = (storedList.next).toString();
+          value += storedList.next;
           // contentConfigValues.size = value.toString();
           break;
         case 'story-feed-sections':
@@ -66,23 +64,22 @@ class ResultsList extends Component {
         default:
           break;
       }
-      // console.log('results', resultList, 'value', value, 'next', resultList.next, 'offset', contentConfigValues.offset);
-      // let _this = this;
       this.fetchContent({
         resultList: {
           source: contentService,
           query: contentConfigValues,
           transform(data) {
             if (data) {
-              oldList.content_elements = oldList.content_elements.concat(data.content_elements);
-              oldList.next = data.next;
+              const combinedList = storedList.content_elements.concat(data.content_elements);
+              storedList.content_elements = combinedList;
+              storedList.next = data.next;
             }
-            return oldList;
+            return storedList;
           },
         },
       });
       // Hide button if no additional stories
-      if (value >= oldList.count) {
+      if (value >= storedList.count) {
         this.setState({
           seeMoreBtn: false,
         });
@@ -94,7 +91,8 @@ class ResultsList extends Component {
           query: contentConfigValues,
         },
       });
-      oldList = this.state.resultList;
+      const { resultList } = this.state;
+      storedList = resultList;
     }
   }
 

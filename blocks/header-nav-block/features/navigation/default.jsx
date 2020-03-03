@@ -110,7 +110,7 @@ const Nav = (props) => {
         </div>
       </StyledNav>
 
-      <StyledSectionDrawer id="sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
+      <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
         <SectionNav sections={sections}>
           <SearchBox alwaysOpen />
         </SectionNav>

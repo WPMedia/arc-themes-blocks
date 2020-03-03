@@ -19,7 +19,7 @@
   "dependencies": {
     "@arc-test-org/byline-block": "^0.3.2",
     "@arc-test-org/date-block": "^1.4.1",
-    "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "@arc-test-org/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },
   "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"

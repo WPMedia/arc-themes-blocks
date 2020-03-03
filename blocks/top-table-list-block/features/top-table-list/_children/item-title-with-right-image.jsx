@@ -25,11 +25,11 @@ const ItemTitleWithRightImage = (props) => {
                 url={imageURL}
                 alt={itemTitle}
                 smallWidth={275}
-                smallHeight={0}
+                smallHeight={183.33}
                 mediumWidth={275}
-                mediumHeight={0}
+                mediumHeight={183.33}
                 largeWidth={400}
-                largeHeight={0}
+                largeHeight={266.67}
               />
             </a>
           ) : null}

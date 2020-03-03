@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -78,11 +77,11 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   smallWidth={400}
-                  smallHeight={0}
+                  smallHeight={300}
                   mediumWidth={600}
-                  mediumHeight={0}
+                  mediumHeight={450}
                   largeWidth={800}
-                  largeHeight={0}
+                  largeHeight={600}
                 />
               </a>
             )}

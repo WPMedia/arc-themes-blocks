@@ -1,4 +1,3 @@
-// dup with full author
 function constructSocialURL(type, field) {
   switch (type) {
     case 'email':
@@ -26,7 +25,7 @@ function constructSocialURL(type, field) {
       // https://medium.com/@dan_abramov
       return `https://medium.com/${field}`;
     case 'tumblr':
-      // john green https://fishingboatproceeds.tumblr.com
+      // john green https://fishingboatproceeds.tumblr.com/
       return `https://${field}.tumblr.com`;
     case 'pinterest':
       return `https://www.pinterest.com/${field}/`;

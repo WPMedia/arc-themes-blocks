@@ -27,7 +27,7 @@ module.exports = {
     'global-require': 'off',
     'no-underscore-dangle': ['error', { allow: ['_website', '_id'] }],
     'import/no-extraneous-dependencies': 'off', // This might be fine. It's worth looking into at the very least.
-    'import/no-unresolved': [2, { ignore: ['react', '^fusion:.+$', '@arc-core-components/.+$'] }],
+    'import/no-unresolved': [2, { ignore: ['react', '^fusion:.+$', '^@arc-test-org/.+$', '^@arc-core-components/.+$'] }],
     'react/forbid-prop-types': 'off',
     'react/prop-types': 'off', // We will want to be more granular with this I assume.
     'react/require-default-props': 'off', // We will also want to have some rules around this. Whitelisting certain props for example

@@ -1,5 +1,6 @@
 export default {
-  resolve({ hierarchy, 'arc-site': arcSite }) {
+  resolve(resolveParams) {
+    const { hierarchy, 'arc-site': arcSite } = resolveParams;
     return `/site/v3/navigation/${arcSite}${hierarchy ? `?hierarchy=${hierarchy}` : ''}`;
   },
   schemaName: 'navigation-hierarchy',

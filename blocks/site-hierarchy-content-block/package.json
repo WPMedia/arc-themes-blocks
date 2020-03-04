@@ -1,6 +1,6 @@
 {
   "name": "@arc-test-org/site-hierarchy-content-block",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [

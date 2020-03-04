@@ -181,13 +181,13 @@ describe('The story-feed-list', () => {
       contentConfigValues: {
         offset: '0',
         query: 'type: story',
-        size: '15',
+        size: '30',
       },
       contentService: 'story-feed-query',
     };
     const customFields = { listContentConfig };
     const { default: ResultsList } = require('./default');
-    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
     const wrapper = shallow(<ResultsList customFields={customFields} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
@@ -200,9 +200,9 @@ describe('The story-feed-list', () => {
       });
 
       it('should call fetchContent when clicked', () => {
-        expect(ResultsList.prototype.fetchContent.mock.calls.length).toEqual(1);
-        // wrapper.find('button').simulate('click');
-        // expect(ResultsList.prototype.fetchContent.mock.calls.length).toEqual(2);
+        expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+        wrapper.find('button').simulate('click');
+        expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
       });
     });
   });

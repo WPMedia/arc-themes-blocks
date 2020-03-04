@@ -20,8 +20,13 @@ const GalleryFeature = (
 
 GalleryFeature.propTypes = {
   customFields: PropTypes.shape({
-    inheritGlobalContent: PropTypes.bool,
-    galleryContentConfig: PropTypes.contentConfig(),
+    galleryContentConfig: PropTypes.contentConfig().tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    inheritGlobalContent: PropTypes.bool.tag({
+      group: 'Configure Content',
+    }),
   }),
 };
 

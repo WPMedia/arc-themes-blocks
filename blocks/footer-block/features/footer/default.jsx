@@ -52,7 +52,6 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               title="Twitter feed"
               target="_blank"
               rel="noopener noreferrer"
-              // https://twitter.com/jack
               href={`https://twitter.com/${getProperties(arcSite).twitterUsername}`}
             >
               <TwitterIcon fill="#2980B9" />

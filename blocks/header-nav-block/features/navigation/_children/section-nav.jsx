@@ -18,7 +18,6 @@ function parseLinkData(node) {
 
   return {};
 }
-// TODO: check for _id and name properties before using
 
 const SectionItem = ({ item }) => {
   const { text = '', url = '' } = parseLinkData(item);

@@ -21,68 +21,72 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-let storedList;
-
 @Consumer
 class ResultsList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { resultList: {}, seeMoreBtn: true };
+    this.state = {
+      storedList: {},
+      resultList: {},
+      seeMore: true,
+    };
     this.fetchStories(false);
   }
 
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
+    const { storedList } = this.state;
 
     if (additionalStoryAmount) {
-      // Detect content service type
-      let value;
-      switch (listContentConfig.contentService) {
-        case 'story-feed-author':
-          value = parseInt(contentConfigValues.feedSize, 10);
-          value += 15;
-          contentConfigValues.feedSize = value.toString();
-          break;
-        case 'story-feed-query':
-          value = parseInt(contentConfigValues.size, 10);
-          contentConfigValues.offset = (storedList.next).toString();
-          value += storedList.next;
-          // contentConfigValues.size = value.toString();
-          break;
-        case 'story-feed-sections':
-          value = parseInt(contentConfigValues.feedSize, 10);
-          value += 15;
-          contentConfigValues.feedSize = value.toString();
-          break;
-        case 'story-feed-tag':
-          value = parseInt(contentConfigValues.feedSize, 10);
-          value += 15;
-          contentConfigValues.feedSize = value.toString();
-          break;
-        default:
-          break;
-      }
-      this.fetchContent({
-        resultList: {
-          source: contentService,
-          query: contentConfigValues,
-          transform(data) {
-            if (data) {
-              const combinedList = storedList.content_elements.concat(data.content_elements);
-              storedList.content_elements = combinedList;
-              storedList.next = data.next;
-            }
-            return storedList;
+      // Check for next value
+      if (storedList.next) {
+        // Determine content service type
+        let value;
+        switch (listContentConfig.contentService) {
+          case 'story-feed-author':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-query':
+            value = parseInt(contentConfigValues.size, 10);
+            contentConfigValues.offset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-sections':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-tag':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          default:
+            break;
+        }
+        this.fetchContent({
+          resultList: {
+            source: contentService,
+            query: contentConfigValues,
+            transform(data) {
+              if (data) {
+                // Add new data to previous list
+                const combinedList = storedList.content_elements.concat(data.content_elements);
+                storedList.content_elements = combinedList;
+                storedList.next = data.next;
+              }
+              return storedList;
+            },
           },
-        },
-      });
-      // Hide button if no additional stories
-      if (value >= storedList.count) {
-        this.setState({
-          seeMoreBtn: false,
         });
+        // Hide button if no more stories to load
+        if (value >= storedList.count) {
+          this.state.seeMore = false;
+        }
       }
     } else {
       this.fetchContent({
@@ -92,7 +96,14 @@ class ResultsList extends Component {
         },
       });
       const { resultList } = this.state;
-      storedList = resultList;
+      this.state.storedList = resultList;
+      // Check if there are available stories
+      if (resultList.content_elements) {
+        // Hide button if no additional stories from initial content
+        if (resultList.content_elements.length >= resultList.count) {
+          this.state.seeMore = false;
+        }
+      }
     }
   }
 
@@ -107,7 +118,7 @@ class ResultsList extends Component {
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } = {}, seeMoreBtn } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
@@ -177,7 +188,7 @@ class ResultsList extends Component {
           );
         })}
         {
-          !!(contentElements && contentElements.length > 0 && seeMoreBtn) && (
+          !!(contentElements && contentElements.length > 0 && seeMore) && (
             <div className="see-more">
               <button
                 type="button"
@@ -202,12 +213,7 @@ ResultsList.label = 'Results List – Arc Block';
 
 ResultsList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
-      {
-        group: 'Configure Content',
-        label: 'Display Content Info',
-      },
-    ),
+    listContentConfig: PropTypes.contentConfig('ans-feed'),
   }),
 };
 

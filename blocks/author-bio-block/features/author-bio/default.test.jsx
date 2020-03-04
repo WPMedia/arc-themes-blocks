@@ -18,7 +18,6 @@ jest.mock('@arc-test-org/engine-theme-sdk', () => ({
   WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
   SoundCloudIcon: () => <svg>SoundCloudIcon</svg>,
   RssIcon: () => <svg>RssIcon</svg>,
-
 }));
 
 describe('Given the list of author(s) from the article', () => {
@@ -555,5 +554,43 @@ describe('Given the list of author(s) from the article', () => {
     const wrapper = mount(<AuthorBio />);
 
     expect(wrapper.find('.authors').length).toBe(1);
+  });
+
+  it('it should show email link with malito email', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              image: {
+                url: '',
+              },
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [
+                { site: 'email', url: 'bernstein@washpost.com' },
+              ],
+            }],
+          },
+        },
+      })),
+    }));
+    const wrapper = mount(<AuthorBio />);
+
+    const socialButtonsContainer = wrapper.find('section.socialButtons');
+    expect(socialButtonsContainer.find('a').props().href).toBe('mailto:bernstein@washpost.com');
+    expect(socialButtonsContainer.children()).toHaveLength(1);
   });
 });

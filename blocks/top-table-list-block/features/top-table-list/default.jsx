@@ -94,6 +94,7 @@ const TopTableList = (props) => {
               element={element}
               storySize={storyTypeArray[index]}
               primaryFont={primaryFont}
+              key={itemId}
             />
           );
         })

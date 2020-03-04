@@ -274,7 +274,7 @@ describe('the footer feature for the default output type', () => {
         window.open = jest.fn();
         const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-        expect((wrapper.find({ title: 'Twitter feed' }).prop('href'))).toEqual('thesun');
+        expect((wrapper.find({ title: 'Twitter feed' }).prop('href'))).toEqual('https://twitter.com/thesun');
       });
     });
 

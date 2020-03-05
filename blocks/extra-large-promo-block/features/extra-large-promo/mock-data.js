@@ -257,9 +257,12 @@ export default {
         },
       'the-sun':
         {
-          website_section: [Object],
+          website_section: {
+            _id: '/the-sun',
+            name: 'the-sun',
+          },
           website_url:
-            '/news/2020/01/30/august-may-feel-like-washingtons-hottest-month-but-its-not/',
+              '/news/2020/01/30/august-may-feel-like-washingtons-hottest-month-but-its-not/',
         },
       washpost:
         {

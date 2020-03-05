@@ -24,6 +24,14 @@ const config = {
   showImage: true,
 };
 
+const mockFusionContext = {
+  arcSite: 'the-sun',
+};
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockFusionContext),
+}));
+
 describe('the extra large promo feature', () => {
   afterEach(() => {
     jest.resetModules();
@@ -31,10 +39,7 @@ describe('the extra large promo feature', () => {
 
   beforeEach(() => {
     jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        id: 'testId',
-      })),
+      useFusionContext: jest.fn(() => mockFusionContext),
     }));
   });
 

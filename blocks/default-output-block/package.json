@@ -3,6 +3,9 @@
   "version": "1.2.24",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
+  "contributors": [
+    "Jack Howard <jack.howard@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -14,7 +17,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
     "@arc-test-org/news-theme-css": "^1.4.2",

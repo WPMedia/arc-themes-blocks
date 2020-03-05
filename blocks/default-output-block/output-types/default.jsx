@@ -48,6 +48,10 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
   );
 };
 
+const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((scriptString) => (
+  <script dangerouslySetInnerHTML={{ __html: scriptString }} />
+));
+
 
 const SampleOutputType = ({
   children,
@@ -61,7 +65,7 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName, twitterSite } = getProperties(arcSite);
+  const { websiteName, twitterSite, dangerouslyInjectJS } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
@@ -201,6 +205,7 @@ const SampleOutputType = ({
            */
         }
         <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes" />
+        {injectStringScriptArray(dangerouslyInjectJS)}
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/large-manual-promo-block",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Fusion News Theme Large Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^0.5.2",
-    "@wpmedia/shared-styles": "^0.0.6",
+    "@wpmedia/shared-styles": "^0.0.7",
     "styled-components": "^4.4.0"
   },
   "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"

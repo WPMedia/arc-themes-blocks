@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/results-list-block",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Fusion News Theme results list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "contributors": [
@@ -26,8 +26,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "^0.3.4",
-    "@wpmedia/date-block": "^1.4.3",
+    "@wpmedia/byline-block": "^0.3.5",
+    "@wpmedia/date-block": "^1.4.4",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   }

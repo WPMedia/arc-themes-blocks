@@ -4,8 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import ArticleDate from '@arc-test-org/date-block';
-import Byline from '@arc-test-org/byline-block';
+import ArticleDate from '@wpmedia/date-block';
+import Byline from '@wpmedia/byline-block';
 import './card-list.scss';
 
 function extractImage(promo) {

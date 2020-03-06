@@ -5,10 +5,10 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
-import '@arc-test-org/shared-styles/scss/_medium-promo.scss';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import Byline from '@wpmedia/byline-block';
+import ArticleDate from '@wpmedia/date-block';
+import '@wpmedia/shared-styles/scss/_medium-promo.scss';
+import { Image } from '@wpmedia/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};

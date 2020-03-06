@@ -8,17 +8,17 @@ const mockReturnData = mockData;
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => jest.fn(() => ({})));
 
-jest.mock('@arc-test-org/byline-block', () => ({
+jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
   default: function Byline(props, children) { return <div {...props}>{children}</div>; },
 }));
 
-jest.mock('@arc-test-org/date-block', () => ({
+jest.mock('@wpmedia/date-block', () => ({
   __esModule: true,
   default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
 }));
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   Image: () => <div />,
 }));

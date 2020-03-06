@@ -8,7 +8,7 @@ import {
   FacebookIcon,
   InstagramIcon,
   RssIcon,
-} from '@arc-test-org/engine-theme-sdk';
+} from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
 
 const StyledAuthorContent = styled.div`

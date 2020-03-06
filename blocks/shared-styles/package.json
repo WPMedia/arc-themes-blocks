@@ -10,8 +10,14 @@
     "scss"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/shared-styles"
+  },
   "scripts": {},
-  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

@@ -1,4 +1,4 @@
-# `@arc-test-org/simple-list-block`
+# `@wpmedia/simple-list-block`
 
 Fusion News Theme Simple List block is a dynamically-sized list with items of a title and image. The list itself also has a title.
 
@@ -9,7 +9,7 @@ As a Themes customer, I can place a Simple List Block on my PageBuilder pages an
 ## Usage
 
 ```
-const simpleListBlock = require('@arc-test-org/simple-list-block');
+const simpleListBlock = require('@wpmedia/simple-list-block');
 ```
 
 ## Parameters

@@ -1,10 +1,10 @@
-# `@arc-test-org/top-table-list-block`
+# `@wpmedia/top-table-list-block`
 
 Fusion News Theme top table list block
 
 ## Usage
 
 ```
-const topTableListBlock = require('@arc-test-org/top-table-list-block');
+const topTableListBlock = require('@wpmedia/top-table-list-block');
 
 ```

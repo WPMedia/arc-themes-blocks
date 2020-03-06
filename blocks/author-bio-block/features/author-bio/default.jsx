@@ -18,7 +18,7 @@ import {
   WhatsAppIcon,
   SoundCloudIcon,
   RssIcon,
-} from '@arc-test-org/engine-theme-sdk';
+} from '@wpmedia/engine-theme-sdk';
 
 import './author-bio.scss';
 

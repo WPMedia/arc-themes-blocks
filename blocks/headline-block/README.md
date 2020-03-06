@@ -1,9 +1,9 @@
-# `@arc-test-org/headline-block`
+# `@wpmedia/headline-block`
 
 Fusion News Theme headline block
 
 ## Usage
 
 ```
-const headlineBlock = require('@arc-test-org/headline-block');
+const headlineBlock = require('@wpmedia/headline-block');
 ```

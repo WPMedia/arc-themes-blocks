@@ -26,8 +26,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

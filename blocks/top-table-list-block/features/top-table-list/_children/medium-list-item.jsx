@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image } from '@arc-test-org/engine-theme-sdk';
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import Byline from '@wpmedia/byline-block';
+import ArticleDate from '@wpmedia/date-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';

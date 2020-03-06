@@ -23,10 +23,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/news-theme-css": "^1.4.2",
+    "@wpmedia/news-theme-css": "^1.4.4",
     "dom-parser": "^0.1.6",
     "styled-components": "^4.4.0",
     "thumbor-lite": "^0.1.6"
   },
-  "gitHead": "f9ec465461aec854ca1107978ec9613b6ec7d1df"
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

@@ -169,7 +169,7 @@ purpose:
 
 | **Property**   |  **Description** |
 |---|---|
-| **org** |  The organization name of the NPM repo. Used internally by Fusion i.e. "@arc-test-org/" |
+| **org** |  The organization name of the NPM repo. Used internally by Fusion i.e. "@wpmedia/" |
 |  **useLocal**   | true \| false. Used in local development (see the local dev section below). This will soon be replaced by a more conventual npm link process, so this property will eventually be removed.  |
 | **blocks**   |  This array lists all the blocks that are to be made available to the site. Any block that is in the fusion-news-theme-blocks repo, but not listed here will not be available and will also not be included in the client bundle. |
 | **cssFramework**    |  The CSS framework package being used. For News theme, it is the news-theme-css package. |
@@ -223,10 +223,10 @@ so that it has the same look-and-feel as the rest of the Theme website.
 it into your source files when `cssImport`, `cssFramework` and `sassVariableOverrides` (as they should be) are defined
 in your `blocks.json` file
 
-* To leverage the components in `engine-theme-sdk`, simply add `@arc-test-org/engine-theme-sdk` 
+* To leverage the components in `engine-theme-sdk`, simply add `@wpmedia/engine-theme-sdk` 
 as a dependency in `packages.json` and import in your files like any other 3rd party package. 
 
-* If you plan on creating a custom default output-type, you must remove `@arc-test-org/default-output-block` 
+* If you plan on creating a custom default output-type, you must remove `@wpmedia/default-output-block` 
 from the blocks list in `blocks.json` to prevent a Fusion error because of the name collision.
 
 * When developing locally and you want to run your feature pack, please see the next section.
@@ -236,8 +236,8 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 ### Basic Local Development
 
 If you are only creating custom components for a specific client and/or only using published
-packages of `@arc-test-org/engine-theme-sdk`, `@arc-test-org/fusion-news-theme-blocks`, and 
-`@arc-test-org/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
+packages of `@wpmedia/engine-theme-sdk`, `@wpmedia/fusion-news-theme-blocks`, and 
+`@wpmedia/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
 If however your are actively developing for engine-theme-sdk, fusion-news-theme-blocks and 
 news-theme-css, see the next section for a more advanced options.
 
@@ -259,7 +259,7 @@ please see the next classic dev environment.
 `THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` 
 on the bundle so everything installs properly as well
 
-2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@arc-test-org/engine-theme-sdk"`, `"cssFramework": "@arc-test-org/news-theme-css"` 
+2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@wpmedia/engine-theme-sdk"`, `"cssFramework": "@wpmedia/news-theme-css"` 
 are in blocks.json.
 
 3) At the root of the bundle, `run sudo npm run link:blocks` (sudo is required because npm link needs write access). 
@@ -304,7 +304,7 @@ local fusion-news-theme-blocks repo.
         FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
         THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
         THEMES_ENGINE_SDK_REPO=/Users/millerb/work/engine-theme-sdk
-        THEMES_ENGINE_SDK_NAME=@arc-test-org/engine-theme-sdk
+        THEMES_ENGINE_SDK_NAME=@wpmedia/engine-theme-sdk
         CONTENT_BASE=[get from dev]
         CONTEXT_PATH=pf
         DEFAULT_ARC_SITE=the-sun

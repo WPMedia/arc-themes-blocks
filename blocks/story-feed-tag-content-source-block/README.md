@@ -1,4 +1,4 @@
-# `@arc-test-org/story-feed-tag-content-source-block`
+# `@wpmedia/story-feed-tag-content-source-block`
 
 Content source block for story feed queries by tag.
 

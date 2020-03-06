@@ -1,9 +1,9 @@
-# `@arc-test-org/subheadline-block`
+# `@wpmedia/subheadline-block`
 
 Fusion News Theme sub-headline block
 
 ## Usage
 
 ```
-const headlineBlock = require('@arc-test-org/subheadline-block');
+const headlineBlock = require('@wpmedia/subheadline-block');
 ```

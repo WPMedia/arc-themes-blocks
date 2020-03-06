@@ -19,12 +19,12 @@ jest.mock('prop-types', () => ({
   customFields: jest.fn(),
 }));
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   Image: () => <div />,
 }));
 
-describe('The @arc-test-org simple-results-list-block', () => {
+describe('The @wpmedia simple-results-list-block', () => {
   describe('render a list of simple-list-items', () => {
     it('should render list item with headline and image', () => {
       const { default: SimpleList } = require('./default');

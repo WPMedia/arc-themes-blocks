@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,
 }));
 const { default: mockData } = require('./mock-data');

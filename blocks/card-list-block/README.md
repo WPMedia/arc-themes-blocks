@@ -1,11 +1,11 @@
-# `@arc-test-org/card-list-block`
+# `@wpmedia/card-list-block`
 
 Fusion News Theme card list block
 
 ## Usage
 
 ```
-const cardListBlock = require('@arc-test-org/card-list-block');
+const cardListBlock = require('@wpmedia/card-list-block');
 ```
 
 It expects the user to configure its content source.

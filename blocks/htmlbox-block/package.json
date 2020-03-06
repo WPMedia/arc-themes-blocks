@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/htmlbox-block",
-  "version": "0.2.1",
+  "name": "@wpmedia/htmlbox-block",
+  "version": "0.2.5",
   "description": "Fusion News Theme HTMLBox block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -12,7 +12,13 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/htmlbox-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
@@ -20,5 +26,6 @@
   },
   "dependencies": {
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

@@ -17,7 +17,7 @@ import {
   SnapchatIcon,
   WhatsAppIcon,
   SoundCloudIcon,
-} from '@arc-test-org/engine-theme-sdk';
+} from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
 import constructSocialURL from './shared/constructSocialURL';
 

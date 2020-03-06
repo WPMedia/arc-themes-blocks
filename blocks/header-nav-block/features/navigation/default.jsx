@@ -4,10 +4,10 @@ import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 
-import HamburgerMenuIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
-import SearchIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/SearchIcon';
-import UserIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/UserIcon';
-import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
+import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
+import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 import './navigation.scss';
 
 const StyledNav = styled.nav`

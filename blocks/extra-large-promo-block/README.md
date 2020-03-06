@@ -1,4 +1,4 @@
-# `@arc-test-org/extra-large-promo-block`
+# `@wpmedia/extra-large-promo-block`
 
 Block containing an extra large promo component.
 

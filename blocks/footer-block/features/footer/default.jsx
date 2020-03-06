@@ -5,10 +5,10 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import FacebookAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
-import TwitterIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
-import RssIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/RssIcon';
-import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
+import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
+import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
+import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon';
+import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 
 import './footer.scss';
 

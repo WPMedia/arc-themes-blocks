@@ -62,7 +62,7 @@ When you’re done with the feature initially (when you think you’ve covered w
 If we wanted to create a new block for our theme called `new-footer-block` the command we'd run with lerna would look something like this.
 
 ```sh
-npx lerna create @arc-test-org/new-footer-block blocks/new-footer-block
+npx lerna create @wpmedia/new-footer-block blocks/new-footer-block
 ```
 
 The CLI will go through a bunch of questions, can accept all of them for now because we're going to replace most of what it'll generate. In fact the above command can be run with a `--yes` arg to just accept the default for each prompt automatically.
@@ -73,7 +73,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
 
 ```json
 {
-  "name": "@arc-test-org/header-nav-block",
+  "name": "@wpmedia/header-nav-block",
   "version": "0.0.0",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
@@ -161,7 +161,7 @@ Notes:
 * Our pull request to merge our new block must have been reviewed by at least one person.
 * Both blocks and bundles repos should have a .npmrc file with the same token.
 
-1. On Fusion-News-Theme (bundles repo) we will pull from master, update `blocks.json` with our new block (f.e. "@arc-test-org/overline-block"), and commit to master with the change.
+1. On Fusion-News-Theme (bundles repo) we will pull from master, update `blocks.json` with our new block (f.e. "@wpmedia/overline-block"), and commit to master with the change.
 2. Run `npx fusion zip` to generate the bundle zip file under /dist.
 3. Once the zip file has be generated, go Pagebuilder Editor on [Core Components](https://corecomponents.arcpublishing.com).
 4. Under Pagebuilder editor go to Deployer and upload your zipped bundle with the name `blocks-$month-$day-$version`.

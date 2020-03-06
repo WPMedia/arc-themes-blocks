@@ -1,4 +1,4 @@
-# `@arc-test-org/shared-styles`
+# `@wpmedia/shared-styles`
 
 Block containing shared styles (sass file partials).
 

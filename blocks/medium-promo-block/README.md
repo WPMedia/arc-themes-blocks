@@ -1,4 +1,4 @@
-# `@arc-test-org/medium-promo-block`
+# `@wpmedia/medium-promo-block`
 
 Block containing a medium promo component.
 

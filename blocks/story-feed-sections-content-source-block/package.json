@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/story-feed-sections-content-source-block",
-  "version": "0.1.5",
+  "name": "@wpmedia/story-feed-sections-content-source-block",
+  "version": "0.1.7",
   "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,7 +10,13 @@
     "sources"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/story-feed-sections-content-source-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
@@ -18,6 +24,7 @@
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_sections-v4": "^1.0.6-beta.0",
-    "@arc-test-org/story-feed-tag-content-source-block": "file:../story-feed-tag-content-source-block"
-  }
+    "@wpmedia/story-feed-tag-content-source-block": "file:../story-feed-tag-content-source-block"
+  },
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/triple-chain-block",
-  "version": "0.1.0",
+  "name": "@wpmedia/triple-chain-block",
+  "version": "0.1.4",
   "description": "Triple Chain – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,10 +10,17 @@
     "chains"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/triple-chain-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx chains"
-  }
+  },
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

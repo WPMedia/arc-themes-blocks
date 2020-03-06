@@ -4,11 +4,11 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
 import './share-bar.scss';
-import EnvelopeIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/EnvelopeIcon';
-import FacebookIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FacebookIcon';
-import LinkedInAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/LinkedInAltIcon';
-import PinterestAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/PinterestAltIcon';
-import TwitterIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
+import EnvelopeIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/EnvelopeIcon';
+import FacebookIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookIcon';
+import LinkedInAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/LinkedInAltIcon';
+import PinterestAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/PinterestAltIcon';
+import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties

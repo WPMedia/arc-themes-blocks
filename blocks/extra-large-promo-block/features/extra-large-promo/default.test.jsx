@@ -4,7 +4,7 @@ import ExtraLargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

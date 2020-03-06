@@ -23,8 +23,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "^0.3.2",
-    "@wpmedia/date-block": "^1.4.1",
+    "@wpmedia/byline-block": "^0.3.4",
+    "@wpmedia/date-block": "^1.4.3",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },

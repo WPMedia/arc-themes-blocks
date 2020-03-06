@@ -24,12 +24,15 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const btnClassNames = `nav-btn transparent ${!isSearchBarOpen && 'border'}`;
+  const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
+  const btnClassNames = `nav-btn transparent${!isSearchBarOpen ? ' border' : ''}`;
+  const iconFill = isSearchBarOpen ? '#666666' : 'white';
+
   return (
-    <div className={`nav-search ${isSearchBarOpen && 'open'}`}>
+    <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} type="text" placeholder="Search" />
-      <button onMouseDown={handleSearchBtnMousedown} className={btnClassNames} type="button">
-        <SearchIcon fill={isSearchBarOpen ? '#666666' : 'white'} height={iconSize} width={iconSize} />
+      <button className={btnClassNames} onMouseDown={handleSearchBtnMousedown} type="button">
+        <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>
     </div>
   );

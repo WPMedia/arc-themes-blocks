@@ -22,7 +22,7 @@ function parseLinkData(node) {
 const SectionItem = ({ item }) => {
   const { text = '', url = '' } = parseLinkData(item);
   return (
-    <li>
+    <li className="section-item">
       <a href={url} title={text}>
         {text}
         {hasChildren(item) && <span className="submenu-caret"><ChevronRight fill="rgba(255, 255, 255, 0.5)" height={12} width={12} /></span>}
@@ -35,7 +35,7 @@ const SectionItem = ({ item }) => {
 const SubSectionMenu = ({ items }) => {
   const itemsList = items.map((item) => {
     const { text = '', url = '' } = parseLinkData(item);
-    return (<li key={item._id}><a href={url} title={text}>{text}</a></li>);
+    return (<li className="subsection-item" key={item._id}><a href={url} title={text}>{text}</a></li>);
   });
 
   return (

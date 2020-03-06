@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import Navigation from './default';
+import SearchBox from './_children/search-box';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -19,28 +20,16 @@ describe('the header navigation feature for the default output type', () => {
     expect(wrapper.find('nav').hasClass('news-theme-navigation')).toBe(true);
   });
 
-  it('should render a search input in the top navbar', () => {
+  it('should render a SearchBox component in the top navbar', () => {
     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('.nav-left .nav-search > input')).toHaveLength(1);
+    expect(wrapper.find('.nav-left').find(SearchBox)).toHaveLength(1);
   });
 
-  it('should render a search input in the side navbar', () => {
+  it('should render a SearchBox component in the side navbar', () => {
     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('#nav-sections .nav-search > input')).toHaveLength(1);
-  });
-
-  it('should render a search button in the top navbar', () => {
-    const wrapper = mount(<Navigation />);
-
-    expect(wrapper.find('.nav-left .nav-search button')).toHaveLength(1);
-  });
-
-  it('should render a search button in the side navbar', () => {
-    const wrapper = mount(<Navigation />);
-
-    expect(wrapper.find('#nav-sections .nav-search button')).toHaveLength(1);
+    expect(wrapper.find('#nav-sections').find(SearchBox)).toHaveLength(1);
   });
 
   describe('when the showSignIn customField is set to true', () => {

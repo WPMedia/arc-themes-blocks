@@ -1,6 +1,35 @@
 # News Theme Developers Guide
 **Note:** *This is a living document.  Please check back for updates.  Also, comments are very much appreciated to make this documentation better!*
 
+## Setup
+All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions.
+
+To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
+```
+@arc-test-org:registry=https://registry.npmjs.org/
+@wpmedia:registry=https://npm.pkg.github.com/
+...
+@<org name>:registry=<url to registry>
+...
+//registry.npmjs.org/:_authToken=<npm auth token>
+//npm.pkg.github.com/:_authToken=<your personal access token>
+...
+//<url to registry>/:authToken=<auth token>
+...
+```
+
+Note that for GitHub, you will have to provide your own personal access token for it to be able to properly find and install your GitHub packages. Please follow the instructions on these documentation to generate your GitHub token:
+[Configuring your local authentication with npm](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages)
+[Creating Auth Tokens (HTTPS)](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+[Enable SSO for Auth Tokens](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on)
+[Authorizing SSH Keys](https://help.github.com/en/github/authenticating-to-github/authorizing-an-ssh-key-for-use-with-saml-single-sign-on)
+
+The Token you create on `Creating Auth Tokens (HTTPS)` will be the token you'll have to put in your `.npmrc` file. Please create a read-only token as well - when deploying, please switch this token to this one.
+
+Finally, log into npm with `npm login --registry=https://npm.pkg.github.com`.  The username will be your GitHub username, email will be your public email address, and the password will be the token that you've created above. This will be a one-time action as long as you don't log out. Please look at [this documentation](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) for further details.
+
+TODO: So that we don't have to have personal GitHub tokens out in the wild, we'll have to set up GitHub Actions to use GitHub Token: https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token
+
 ## Introduction
 
 

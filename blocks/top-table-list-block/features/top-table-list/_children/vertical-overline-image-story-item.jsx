@@ -43,13 +43,11 @@ const VerticalOverlineImageStoryItem = (props) => {
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
                 smallWidth={400}
-                smallHeight={0}
+                smallHeight={300}
                 mediumWidth={600}
-                mediumHeight={0}
-                // xl size via invision
-                // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
+                mediumHeight={450}
                 largeWidth={800}
-                largeHeight={0}
+                largeHeight={600}
               />
             </a>
           ) : null}

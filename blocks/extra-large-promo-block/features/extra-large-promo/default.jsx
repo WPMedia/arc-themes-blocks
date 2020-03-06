@@ -153,11 +153,11 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
                     ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                   alt={content && content.headlines ? content.headlines.basic : ''}
                   smallWidth={400}
-                  smallHeight={0}
+                  smallHeight={300}
                   mediumWidth={600}
-                  mediumHeight={0}
+                  mediumHeight={450}
                   largeWidth={800}
-                  largeHeight={0}
+                  largeHeight={600}
                 />
               </a>
             )}
@@ -175,55 +175,59 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
 
 ExtraLargePromo.propTypes = {
   customFields: PropTypes.shape({
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     showOverline: PropTypes.bool.tag(
       {
-        name: 'Show overline',
+        label: 'Show overline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showHeadline: PropTypes.bool.tag(
       {
-        name: 'Show headline',
+        label: 'Show headline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showImage: PropTypes.bool.tag(
       {
-        name: 'Show image',
+        label: 'Show image',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showDescription: PropTypes.bool.tag(
       {
-        name: 'Show description',
+        label: 'Show description',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showByline: PropTypes.bool.tag(
       {
-        name: 'Show byline',
+        label: 'Show byline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showDate: PropTypes.bool.tag(
       {
-        name: 'Show date',
+        label: 'Show date',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
-
 };
 
 ExtraLargePromo.label = 'Extra Large Promo – Arc Block';

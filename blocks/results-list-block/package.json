@@ -3,6 +3,9 @@
   "version": "1.4.2",
   "description": "Fusion News Theme results list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
+  "contributors": [
+    "Beltran Caliz <beltran.caliz@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -27,6 +30,5 @@
     "@wpmedia/date-block": "^1.4.3",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
-  },
-  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
+  }
 }

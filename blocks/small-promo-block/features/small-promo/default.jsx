@@ -64,11 +64,11 @@ const SmallPromo = ({ customFields, arcSite }) => {
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
                 smallWidth={275}
-                smallHeight={0}
+                smallHeight={183}
                 mediumWidth={275}
-                mediumHeight={0}
+                mediumHeight={183}
                 largeWidth={400}
-                largeHeight={0}
+                largeHeight={267}
               />
             </a>
           </div>
@@ -80,27 +80,31 @@ const SmallPromo = ({ customFields, arcSite }) => {
 
 SmallPromo.propTypes = {
   customFields: PropTypes.shape({
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     showHeadline: PropTypes.bool.tag(
       {
-        name: 'Show headline',
+        label: 'Show headline',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     showImage: PropTypes.bool.tag(
       {
-        name: 'Show image',
+        label: 'Show image',
         defaultValue: true,
         group: 'Show promo elements',
       },
     ),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
-
 };
 
 SmallPromo.label = 'Small Promo – Arc Block';

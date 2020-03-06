@@ -4,3 +4,4 @@ coverage
 .npmrc
 **/.DS_Store
 .vscode/*
+*.log

@@ -8,8 +8,18 @@ import {
   FacebookIcon,
   InstagramIcon,
   RssIcon,
+  RedditIcon,
+  LinkedInIcon,
+  YoutubeIcon,
+  MediumIcon,
+  TumblrIcon,
+  PinterestIcon,
+  SnapchatIcon,
+  WhatsAppIcon,
+  SoundCloudIcon,
 } from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
+import constructSocialURL from './shared/constructSocialURL';
 
 const StyledAuthorContent = styled.div`
   font-family: ${(props) => props.primaryFont};
@@ -30,24 +40,43 @@ const logos = {
   facebook: <FacebookIcon title="Connect on Facebook" description="Facebook" alt="facebook" />,
   instagram: <InstagramIcon title="Follow on Instagram" description="Instagram" alt="instagram" />,
   rss: <RssIcon title="Rss feed" description="Rss" alt="rss" />,
+  linkedin: <LinkedInIcon
+    title="LinkedIn"
+    description="Connect on LinkedIn"
+  />,
+  reddit: <RedditIcon
+    title="Reddit"
+    description="Connect on Reddit"
+  />,
+  youtube: <YoutubeIcon
+    title="YouTube"
+    description="Connect on YouTube"
+  />,
+  medium: <MediumIcon
+    title="Medium"
+    description="Connect on Medium"
+  />,
+  tumblr: <TumblrIcon
+    title="Tumblr"
+    description="Connect on Tumblr"
+  />,
+  pinterest: <PinterestIcon
+    title="Pinterest"
+    description="Connect on Pinterest"
+  />,
+  snapchat: <SnapchatIcon
+    title="Snapchat"
+    description="Connect on Snapchat"
+  />,
+  whatsapp: <WhatsAppIcon
+    title="WhatsApp"
+    description="Connect on WhatsApp"
+  />,
+  soundcloud: <SoundCloudIcon
+    title="SoundCloud"
+    description="Listen on SoundCloud"
+  />,
 };
-
-function constructUrl(type, field) {
-  switch (type) {
-    case 'email':
-      return `mailto:${field}`;
-    case 'twitter':
-      return `https://twitter.com/${field}`;
-    case 'facebook':
-      return field;
-    case 'instagram':
-      return `https://instagram.com/${field}`;
-    case 'rss':
-      return field;
-    default:
-      return field;
-  }
-}
 
 const FullAuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
@@ -116,7 +145,7 @@ const FullAuthorBio = () => {
                 <a
                   className={`social-column ${item}`}
                   key={item}
-                  href={constructUrl(item, content.authors[0][item])}
+                  href={constructSocialURL(item, content.authors[0][item])}
                 >
                   {logos[item]}
                 </a>

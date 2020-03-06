@@ -95,7 +95,12 @@ class NumberedList extends Component {
 
 NumberedList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
   }),
 };
 

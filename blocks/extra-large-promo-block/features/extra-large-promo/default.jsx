@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
@@ -24,7 +25,8 @@ const OverlineLink = styled.a`
   text-decoration: none;
 `;
 
-const ExtraLargePromo = ({ customFields, arcSite }) => {
+const ExtraLargePromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
@@ -38,6 +40,7 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
     } = getProperties(arcSite);
     return `${websiteDomain}/${websiteUrl}`;
   };
+  const { website_section: websiteSection } = content.websites[arcSite];
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
@@ -48,10 +51,13 @@ const ExtraLargePromo = ({ customFields, arcSite }) => {
   const dateText = content && content.display_date ? content.display_date : null;
 
   const overlineDisplay = (content.label && content.label.basic && content.label.basic.display)
-  || false;
+    || (content.websites && content.websites[arcSite] && websiteSection)
+    || false;
   const overlineUrl = (content.label && content.label.basic && content.label.basic.url)
+    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection._id)
     || '';
   const overlineText = (content.label && content.label.basic && content.label.basic.text)
+    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection.name)
     || '';
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;

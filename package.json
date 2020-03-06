@@ -65,7 +65,6 @@
     "@wpmedia/news-theme-css": "^1.4.4",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
-    "@wpmedia/simple-results-list-block": "file:blocks/simple-results-list-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",

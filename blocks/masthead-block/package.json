@@ -1,0 +1,22 @@
+{
+  "name": "@wpmedia/masthead-block",
+  "version": "0.0.0",
+  "description": "Masthead – Arc Block",
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "dependencies": {
+    "styled-components": "^5.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  }
+}

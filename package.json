@@ -1,10 +1,10 @@
 {
   "name": "fusion-news-theme-blocks",
-  "publishConfig": { 
-    "registry": "https://npm.pkg.github.com/" 
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
-  "repository" : {
-    "type" : "git",
+  "repository": {
+    "type": "git",
     "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/article-body-block"
   },

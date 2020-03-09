@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/lead-art-block",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^0.5.2",
-    "@wpmedia/video-player-block": "^0.1.7",
+    "@wpmedia/video-player-block": "^0.1.8",
     "styled-components": "^4.4.0"
   },
   "scripts": {

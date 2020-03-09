@@ -1,11 +1,11 @@
-# `@arc-test-org/collections-content-source-block`
+# `@wpmedia/collections-content-source-block`
 
 Fusion News Theme content API collections content source block
 
 ## Usage
 
 ```
-const collectionsContentSourceBlock = require('@arc-test-org/collections-content-source-block');
+const collectionsContentSourceBlock = require('@wpmedia/collections-content-source-block');
 ```
 
 ## Example input

@@ -4,7 +4,7 @@ import ExtraLargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -24,6 +24,14 @@ const config = {
   showImage: true,
 };
 
+const mockFusionContext = {
+  arcSite: 'the-sun',
+};
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockFusionContext),
+}));
+
 describe('the extra large promo feature', () => {
   afterEach(() => {
     jest.resetModules();
@@ -31,10 +39,7 @@ describe('the extra large promo feature', () => {
 
   beforeEach(() => {
     jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        id: 'testId',
-      })),
+      useFusionContext: jest.fn(() => mockFusionContext),
     }));
   });
 

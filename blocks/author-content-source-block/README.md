@@ -1,11 +1,11 @@
-# `@arc-test-org/author-content-source-block`
+# `@wpmedia/author-content-source-block`
 
 Fusion News Theme author API content source block
 
 ## Usage
 
 ```
-const authorContentSourceBlock = require('@arc-test-org/author-content-source-block');
+const authorContentSourceBlock = require('@wpmedia/author-content-source-block');
 ```
 
 ## Example input

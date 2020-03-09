@@ -1,11 +1,11 @@
-# `@arc-test-org/triple-chain-block`
+# `@wpmedia/triple-chain-block`
 
 Fusion News Theme triple-chain block. Utilizes bootstrap's three column approach on anything but small size.
 
 ## Usage
 
 ```
-const tripleChainBlock = require('@arc-test-org/triple-chain-block');
+const tripleChainBlock = require('@wpmedia/triple-chain-block');
 ```
 
 ## Parameters 

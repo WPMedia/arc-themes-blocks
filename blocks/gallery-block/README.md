@@ -1,4 +1,4 @@
-# `@arc-test-org/gallery-block`
+# `@wpmedia/gallery-block`
 
 Block containing a gallery that reads in a gallery from a content source.
 

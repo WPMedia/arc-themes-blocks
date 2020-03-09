@@ -1,4 +1,4 @@
-# `@arc-test-org/subheadline-block`
+# `@wpmedia/subheadline-block`
 
 Fusion News Theme video player block
 

@@ -1,0 +1,19 @@
+{
+  "name": "@wpmedia/search-content-source-block",
+  "version": "0.1.0",
+  "description": "Fusion News Theme search API content source block",
+  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "sources"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx sources"
+  }
+}

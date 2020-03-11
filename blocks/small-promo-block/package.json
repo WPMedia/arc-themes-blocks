@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/small-promo-block",
-  "version": "0.0.15",
+  "version": "0.0.18",
   "description": "Fusion News Theme Small Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -29,5 +29,5 @@
     "@wpmedia/shared-styles": "^0.0.8",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

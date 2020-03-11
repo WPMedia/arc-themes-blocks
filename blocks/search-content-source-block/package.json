@@ -15,5 +15,10 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/search-content-source-block"
   }
 }

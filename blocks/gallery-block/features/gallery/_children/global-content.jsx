@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
-import { Gallery } from '@arc-test-org/engine-theme-sdk';
+import { Gallery } from '@wpmedia/engine-theme-sdk';
 
 const GlobalContentGallery = () => {
   const { globalContent: { content_elements: contentElements = [] } = {} } = useAppContext();

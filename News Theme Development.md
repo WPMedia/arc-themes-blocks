@@ -1,6 +1,35 @@
 # News Theme Developers Guide
 **Note:** *This is a living document.  Please check back for updates.  Also, comments are very much appreciated to make this documentation better!*
 
+## Setup
+All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions.
+
+To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
+```
+@arc-test-org:registry=https://registry.npmjs.org/
+@wpmedia:registry=https://npm.pkg.github.com/
+...
+@<org name>:registry=<url to registry>
+...
+//registry.npmjs.org/:_authToken=<npm auth token>
+//npm.pkg.github.com/:_authToken=<your personal access token>
+...
+//<url to registry>/:authToken=<auth token>
+...
+```
+
+Note that for GitHub, you will have to provide your own personal access token for it to be able to properly find and install your GitHub packages. Please follow the instructions on these documentation to generate your GitHub token:
+[Configuring your local authentication with npm](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages)
+[Creating Auth Tokens (HTTPS)](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+[Enable SSO for Auth Tokens](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on)
+[Authorizing SSH Keys](https://help.github.com/en/github/authenticating-to-github/authorizing-an-ssh-key-for-use-with-saml-single-sign-on)
+
+The Token you create on `Creating Auth Tokens (HTTPS)` will be the token you'll have to put in your `.npmrc` file. Please create a read-only token as well - when deploying, please switch this token to this one.
+
+Finally, log into npm with `npm login --registry=https://npm.pkg.github.com`.  The username will be your GitHub username, email will be your public email address, and the password will be the token that you've created above. This will be a one-time action as long as you don't log out. Please look at [this documentation](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) for further details.
+
+TODO: So that we don't have to have personal GitHub tokens out in the wild, we'll have to set up GitHub Actions to use GitHub Token: https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token
+
 ## Introduction
 
 
@@ -169,7 +198,7 @@ purpose:
 
 | **Property**   |  **Description** |
 |---|---|
-| **org** |  The organization name of the NPM repo. Used internally by Fusion i.e. "@arc-test-org/" |
+| **org** |  The organization name of the NPM repo. Used internally by Fusion i.e. "@wpmedia/" |
 |  **useLocal**   | true \| false. Used in local development (see the local dev section below). This will soon be replaced by a more conventual npm link process, so this property will eventually be removed.  |
 | **blocks**   |  This array lists all the blocks that are to be made available to the site. Any block that is in the fusion-news-theme-blocks repo, but not listed here will not be available and will also not be included in the client bundle. |
 | **cssFramework**    |  The CSS framework package being used. For News theme, it is the news-theme-css package. |
@@ -223,10 +252,10 @@ so that it has the same look-and-feel as the rest of the Theme website.
 it into your source files when `cssImport`, `cssFramework` and `sassVariableOverrides` (as they should be) are defined
 in your `blocks.json` file
 
-* To leverage the components in `engine-theme-sdk`, simply add `@arc-test-org/engine-theme-sdk` 
+* To leverage the components in `engine-theme-sdk`, simply add `@wpmedia/engine-theme-sdk` 
 as a dependency in `packages.json` and import in your files like any other 3rd party package. 
 
-* If you plan on creating a custom default output-type, you must remove `@arc-test-org/default-output-block` 
+* If you plan on creating a custom default output-type, you must remove `@wpmedia/default-output-block` 
 from the blocks list in `blocks.json` to prevent a Fusion error because of the name collision.
 
 * When developing locally and you want to run your feature pack, please see the next section.
@@ -236,8 +265,8 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 ### Basic Local Development
 
 If you are only creating custom components for a specific client and/or only using published
-packages of `@arc-test-org/engine-theme-sdk`, `@arc-test-org/fusion-news-theme-blocks`, and 
-`@arc-test-org/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
+packages of `@wpmedia/engine-theme-sdk`, `@wpmedia/fusion-news-theme-blocks`, and 
+`@wpmedia/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
 If however your are actively developing for engine-theme-sdk, fusion-news-theme-blocks and 
 news-theme-css, see the next section for a more advanced options.
 
@@ -259,7 +288,7 @@ please see the next classic dev environment.
 `THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` 
 on the bundle so everything installs properly as well
 
-2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@arc-test-org/engine-theme-sdk"`, `"cssFramework": "@arc-test-org/news-theme-css"` 
+2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@wpmedia/engine-theme-sdk"`, `"cssFramework": "@wpmedia/news-theme-css"` 
 are in blocks.json.
 
 3) At the root of the bundle, `run sudo npm run link:blocks` (sudo is required because npm link needs write access). 
@@ -304,7 +333,7 @@ local fusion-news-theme-blocks repo.
         FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
         THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
         THEMES_ENGINE_SDK_REPO=/Users/millerb/work/engine-theme-sdk
-        THEMES_ENGINE_SDK_NAME=@arc-test-org/engine-theme-sdk
+        THEMES_ENGINE_SDK_NAME=@wpmedia/engine-theme-sdk
         CONTENT_BASE=[get from dev]
         CONTEXT_PATH=pf
         DEFAULT_ARC_SITE=the-sun

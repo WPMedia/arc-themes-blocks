@@ -1,4 +1,4 @@
-# `@arc-test-org/htmlbox-block`
+# `@wpmedia/htmlbox-block`
 HTML Box for block for Fusion News Theme
 
 ## Usage

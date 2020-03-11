@@ -1,11 +1,11 @@
-# `@arc-test-org/section-title-block`
+# `@wpmedia/section-title-block`
 
 Fusion News Theme section title block
 
 ## Usage
 
 ```
-const sectionTitleBlock = require('@arc-test-org/section-title-block');
+const sectionTitleBlock = require('@wpmedia/section-title-block');
 ```
 
 ## Example input

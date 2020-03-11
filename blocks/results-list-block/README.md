@@ -1,4 +1,4 @@
-# `@arc-test-org/results-list-block`
+# `@wpmedia/results-list-block`
 Results List block for Fusion News Theme
 
 ## Usage

@@ -1,4 +1,4 @@
-# `@arc-test-org/numbered-list-block`
+# `@wpmedia/numbered-list-block`
 Numbered List block for Fusion News Theme
 
 ## Usage

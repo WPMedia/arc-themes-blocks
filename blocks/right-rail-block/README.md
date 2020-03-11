@@ -1,11 +1,11 @@
-# `@arc-test-org/right-rail-block`
+# `@wpmedia/right-rail-block`
 
 > TODO: description
 
 ## Usage
 
 ```js
-const rightRailBlock = require('@arc-test-org/right-rail-block');
+const rightRailBlock = require('@wpmedia/right-rail-block');
 
 // TODO: DEMONSTRATE API
 ```

@@ -1,4 +1,4 @@
-# `@arc-test-org/article-tag-block`
+# `@wpmedia/article-tag-block`
 
 Fusion News Article Tags block
 

@@ -18,7 +18,7 @@ describe('the global content gallery', () => {
         })),
       }));
 
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+      jest.mock('@wpmedia/engine-theme-sdk', () => ({
         Gallery: (props, children) => (<div {...props}>{ children }</div>),
       }));
 
@@ -46,7 +46,7 @@ describe('the global content gallery', () => {
         })),
       }));
 
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+      jest.mock('@wpmedia/engine-theme-sdk', () => ({
         Gallery: (props, children) => (<div {...props}>{ children }</div>),
       }));
 
@@ -67,7 +67,7 @@ describe('the global content gallery', () => {
         useAppContext: jest.fn(() => ({})),
       }));
 
-      jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+      jest.mock('@wpmedia/engine-theme-sdk', () => ({
         Gallery: (props, children) => (<div {...props}>{ children }</div>),
       }));
 

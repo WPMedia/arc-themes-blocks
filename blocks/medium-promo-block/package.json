@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/medium-promo-block",
-  "version": "0.0.12",
+  "name": "@wpmedia/medium-promo-block",
+  "version": "0.0.15",
   "description": "Fusion News Theme Medium Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -12,17 +12,24 @@
     "layouts"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/medium-promo-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/byline-block": "^0.3.2",
-    "@arc-test-org/date-block": "^1.4.1",
-    "@arc-test-org/engine-theme-sdk": "^0.5.2",
-    "@arc-test-org/shared-styles": "^0.0.4",
+    "@wpmedia/byline-block": "^0.3.6",
+    "@wpmedia/date-block": "^1.4.5",
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/shared-styles": "^0.0.8",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

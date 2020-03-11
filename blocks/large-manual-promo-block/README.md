@@ -1,4 +1,4 @@
-# `@arc-test-org/large-manual-promo-block`
+# `@wpmedia/large-manual-promo-block`
 
 Block containing a large manual promo component.
 

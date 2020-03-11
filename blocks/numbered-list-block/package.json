@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/numbered-list-block",
-  "version": "2.0.2",
+  "name": "@wpmedia/numbered-list-block",
+  "version": "2.0.4",
   "description": "Fusion News Theme numbered list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -13,15 +13,21 @@
     "features"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/numbered-list-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "55bd4cdd19d344173727847d4e696978d12f386b"
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

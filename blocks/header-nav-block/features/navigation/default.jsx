@@ -5,12 +5,11 @@ import { useContent } from 'fusion:content';
 import { useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import HamburgerMenuIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
-import UserIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/UserIcon';
-import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
+import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
+import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
-
 import './navigation.scss';
 
 /* Global Constants */

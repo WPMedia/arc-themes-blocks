@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/story-feed-query-content-source-block",
-  "version": "0.1.2",
+  "name": "@wpmedia/story-feed-query-content-source-block",
+  "version": "0.1.6",
   "description": "Content source block for story feed queries by Elasticsearch queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,10 +10,17 @@
     "sources"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/story-feed-query-content-source-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
-  }
+  },
+  "gitHead": "a3257c85b8399e2b6d28a308cb707f75f49f9f76"
 }

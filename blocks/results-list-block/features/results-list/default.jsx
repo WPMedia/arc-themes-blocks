@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
+import Byline from '@wpmedia/byline-block';
+import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import './results-list.scss';
 
 function extractImage(promo) {

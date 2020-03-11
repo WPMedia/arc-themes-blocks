@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
-import VideoPlayer from '@arc-test-org/video-player-block';
+import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
-} from '@arc-test-org/engine-theme-sdk';
+} from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
-import FullscreenIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
 
 const LeadArtWrapperDiv = styled.div`

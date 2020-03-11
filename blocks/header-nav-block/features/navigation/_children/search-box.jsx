@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import SearchIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
 export default ({ alwaysOpen = false, iconSize = 16 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);

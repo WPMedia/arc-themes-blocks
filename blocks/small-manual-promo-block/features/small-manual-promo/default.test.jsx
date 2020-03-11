@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SmallManualPromo from './default';
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

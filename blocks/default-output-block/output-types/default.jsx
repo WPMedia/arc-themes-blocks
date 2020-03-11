@@ -65,7 +65,7 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName, twitterSite, dangerouslyInjectJS } = getProperties(arcSite);
+  const { websiteName, twitterSite, dangerouslyInjectJS = [] } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;

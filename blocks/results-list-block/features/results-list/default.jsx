@@ -45,21 +45,13 @@ class ResultsList extends Component {
         // Determine content service type
         let value;
         switch (listContentConfig.contentService) {
-          case 'story-feed-author':
-            value = parseInt(contentConfigValues.feedSize, 10);
-            contentConfigValues.feedOffset = (storedList.next).toString();
-            value += storedList.next;
-            break;
           case 'story-feed-query':
             value = parseInt(contentConfigValues.size, 10);
             contentConfigValues.offset = (storedList.next).toString();
             value += storedList.next;
             break;
+          case 'story-feed-author':
           case 'story-feed-sections':
-            value = parseInt(contentConfigValues.feedSize, 10);
-            contentConfigValues.feedOffset = (storedList.next).toString();
-            value += storedList.next;
-            break;
           case 'story-feed-tag':
             value = parseInt(contentConfigValues.feedSize, 10);
             contentConfigValues.feedOffset = (storedList.next).toString();

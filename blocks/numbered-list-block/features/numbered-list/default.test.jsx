@@ -1,6 +1,9 @@
-const React = require('react');
-const { shallow } = require('enzyme');
+import React from 'react';
+import { shallow } from 'enzyme';
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="test" />,
+}));
 const { default: mockData } = require('./mock-data');
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
@@ -45,10 +48,10 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').length).toEqual(1);
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').find('.headline-text')).toHaveLength(1);
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('img').length)
+        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('Image').length)
           .toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('img'))
-          .toHaveProp('src', 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg');
+        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('Image'))
+          .toHaveProp('url', 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg');
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Article with only promo_items.basic');
       });

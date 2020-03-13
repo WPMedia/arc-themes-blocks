@@ -22,12 +22,11 @@ const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const getCustomMetaData = (metaHTMLString) => {
   let customMetaData = null;
-  // eslint-disable-line global-require,@typescript-eslint/no-var-requires
   if (typeof window === 'undefined') {
     const DomParser = require('dom-parser');
     customMetaData = new DomParser().parseFromString(metaHTMLString)
       .getElementsByTagName('META')
-      .map(metaNode => ({
+      .map((metaNode) => ({
         metaName: metaNode.getAttribute('name'),
         metaValue: (metaNode.getAttribute('value') || metaNode.getAttribute('content')),
       }));
@@ -38,7 +37,7 @@ const getCustomMetaData = (metaHTMLString) => {
 const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
   const metaHTMLString = ReactDOMServer.renderToString(<MetaTags />);
   const customMetaData = getCustomMetaData(metaHTMLString)
-    .filter(metaObj => !metaData[metaObj.metaName]);
+    .filter((metaObj) => !metaData[metaObj.metaName]);
   return (
     <>
       {customMetaData.length > 0 && customMetaData.map((metaObj, i) => (
@@ -48,6 +47,10 @@ const generateCustomMetaTags = (metaData, MetaTag, MetaTags) => {
     </>
   );
 };
+
+const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((scriptString) => (
+  <script dangerouslySetInnerHTML={{ __html: scriptString }} />
+));
 
 
 const SampleOutputType = ({
@@ -62,7 +65,7 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName, twitterSite } = getProperties(arcSite);
+  const { websiteName, twitterSite, dangerouslyInjectJS = [] } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
@@ -80,7 +83,6 @@ const SampleOutputType = ({
 
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
-      // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
       if (metaValue('title')) {
@@ -114,20 +116,16 @@ const SampleOutputType = ({
       storyMetaDataTags = (
         <>
           { metaData.description
-            && <meta name="description" content={metaData.description} />
-          }
+            && <meta name="description" content={metaData.description} />}
           { metaData.keywords
-          && <meta name="keywords" content={metaData.keywords} />
-          }
+          && <meta name="keywords" content={metaData.keywords} />}
 
           <meta property="og:title" content={metaData.ogTitle} />
 
           { metaData.ogImage
-          && <meta property="og:image" content={metaData.ogImage} />
-          }
+          && <meta property="og:image" content={metaData.ogImage} />}
           { metaData.ogImageAlt
-          && <meta property="og:image:alt" content={metaData.ogImageAlt} />
-          }
+          && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
           {pageType === 'article' && (
             <meta name="robots" content="noarchive" />
           )}
@@ -135,9 +133,9 @@ const SampleOutputType = ({
       );
     }
   } else if (pageType === 'author') {
-    const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
-    metaData.description = metaValue('description') || payload.authors[0].bio || null;
-    metaData.ogTitle = metaValue('og:title') || payload.authors[0].byline || '';
+    const author = (gc.authors && gc.authors.length) ? gc.authors[0] : {};
+    metaData.description = metaValue('description') || author.bio || null;
+    metaData.ogTitle = metaValue('og:title') || author.byline || '';
     if (metaData.ogTitle === '') {
       metaData.title = websiteName;
       metaData.ogTitle = websiteName;
@@ -170,8 +168,7 @@ const SampleOutputType = ({
     tagMetaDataTags = (
       <>
         { metaData.description
-        && <meta name="description" content={metaData.description} />
-        }
+        && <meta name="description" content={metaData.description} />}
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -180,14 +177,11 @@ const SampleOutputType = ({
   twitterTags = (
     <>
       { metaData.ogSiteName
-      && <meta property="og:site_name" content={metaData.ogSiteName} />
-      }
+      && <meta property="og:site_name" content={metaData.ogSiteName} />}
       { metaData.twitterSite
-      && <meta property="twitter:site" content={metaData.twitterSite} />
-      }
+      && <meta property="twitter:site" content={metaData.twitterSite} />}
       { metaData.twitterCard
-      && <meta property="twitter:card" content={metaData.twitterCard} />
-      }
+      && <meta property="twitter:card" content={metaData.twitterCard} />}
     </>
   );
 
@@ -211,6 +205,7 @@ const SampleOutputType = ({
            */
         }
         <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes" />
+        {injectStringScriptArray(dangerouslyInjectJS)}
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />

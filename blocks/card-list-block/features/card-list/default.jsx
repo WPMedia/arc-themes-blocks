@@ -4,8 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import ArticleDate from '@arc-test-org/date-block';
-import Byline from '@arc-test-org/byline-block';
+import ArticleDate from '@wpmedia/date-block';
+import Byline from '@wpmedia/byline-block';
 import './card-list.scss';
 
 function extractImage(promo) {
@@ -13,11 +13,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Title = styled.div`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 @Consumer
@@ -174,7 +174,12 @@ CardList.label = 'Card List – Arc Block';
 
 CardList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
     title: PropTypes.string,
   }),
 };

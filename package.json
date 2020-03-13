@@ -1,14 +1,23 @@
 {
-  "name": "root",
+  "name": "fusion-news-theme-blocks",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/article-body-block"
+  },
   "private": true,
   "scripts": {
-    "lint": "eslint --ext js --ext jsx blocks components",
+    "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
+    "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test:coverage"
+      "pre-commit": "npm run test:coverage && npm run lint"
     }
   },
   "devDependencies": {
@@ -23,11 +32,12 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.6.0",
-    "eslint-config-airbnb": "^17.1.1",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.14.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.4.0",
     "husky": "^3.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
@@ -37,29 +47,33 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@arc-test-org/article-body-block": "file:blocks/article-body-block",
-    "@arc-test-org/byline-block": "file:blocks/byline-block",
-    "@arc-test-org/results-list-block": "file:blocks/results-list-block",
-    "@arc-test-org/numbered-list-block": "file:blocks/numbered-list-block",
-    "@arc-test-org/article-tag-block": "file:blocks/article-tag-block",
-    "@arc-test-org/simple-results-list-block": "file:blocks/simple-results-list-block",
-    "@arc-test-org/header-nav-block": "file:blocks/header-nav-block",
-    "@arc-test-org/headline-block": "file:blocks/headline-block",
-    "@arc-test-org/subheadline-block": "file:blocks/subheadline-block",
-    "@arc-test-org/date-block": "file:blocks/date-block",
-    "@arc-test-org/lead-art-block": "file:blocks/lead-art-block",
-    "@arc-test-org/default-output-block": "file:blocks/default-output-block",
-    "@arc-test-org/small-promo": "file:blocks/small-promo-block",
-    "@arc-test-org/medium-promo": "file:blocks/medium-promo-block",
-    "@arc-test-org/large-promo": "file:blocks/large-promo-block",
-    "@arc-test-org/extra-large-promo": "file:blocks/extra-large-promo-block",
-    "@arc-test-org/news-theme-css": "^1.4.2",
-    "@arc-test-org/engine-theme-sdk": "^0.5.1"
+    "@wpmedia/article-body-block": "file:blocks/article-body-block",
+    "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
+    "@wpmedia/byline-block": "file:blocks/byline-block",
+    "@wpmedia/date-block": "file:blocks/date-block",
+    "@wpmedia/default-output-block": "file:blocks/default-output-block",
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
+    "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
+    "@wpmedia/header-nav-block": "file:blocks/header-nav-block",
+    "@wpmedia/headline-block": "file:blocks/headline-block",
+    "@wpmedia/large-promo-block": "file:blocks/large-promo-block",
+    "@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
+    "@wpmedia/lead-art-block": "file:blocks/lead-art-block",
+    "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
+    "@wpmedia/medium-manual-promo-block": "file:blocks/medium-manual-promo-block",
+    "@wpmedia/news-theme-css": "^1.4.4",
+    "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
+    "@wpmedia/results-list-block": "file:blocks/results-list-block",
+    "@wpmedia/shared-styles": "file:blocks/shared-styles",
+    "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
+    "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
   },
   "jest": {
     "transformIgnorePatterns": [
-      "//node_modules/(?!@arc-test-org/.*-block).*/",
-      "//node_modules/(?!(@arc-test-org)).*/"
+      "//node_modules/(?!@wpmedia/.*-block).*/",
+      "//node_modules/(?!(@wpmedia)).*/"
     ]
   }
 }

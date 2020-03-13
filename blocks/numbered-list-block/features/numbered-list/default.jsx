@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 
 function extractImage(promo) {
@@ -11,11 +12,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Number = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 @Consumer
@@ -72,9 +73,15 @@ class NumberedList extends Component {
                 className="list-anchor-image"
               >
                 {extractImage(element.promo_items) ? (
-                  <img
-                    src={extractImage(element.promo_items)}
+                  <Image
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    smallWidth={105}
+                    smallHeight={71}
+                    mediumWidth={105}
+                    mediumHeight={71}
+                    largeWidth={274}
+                    largeHeight={210}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>
@@ -88,8 +95,15 @@ class NumberedList extends Component {
 
 NumberedList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
+      {
+        group: 'Configure Content',
+        label: 'Display Content Info',
+      },
+    ),
   }),
 };
+
+NumberedList.label = 'Numbered List – Arc Block';
 
 export default NumberedList;

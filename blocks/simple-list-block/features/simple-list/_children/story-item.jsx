@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import Title from './title';
 
 const StoryItem = (props) => {

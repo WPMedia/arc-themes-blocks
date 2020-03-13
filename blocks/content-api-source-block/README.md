@@ -1,4 +1,4 @@
-# `@arc-test-org/content-api-source-block`
+# `@wpmedia/content-api-source-block`
 
 Content source block for Content API queries, used for retrieving stories from the content API.
 

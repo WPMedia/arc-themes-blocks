@@ -3,7 +3,6 @@ import { resizerURL, resizerKey } from 'fusion:environment';
 export const getImgURL = (metaValue, metaType = 'og:image', globalContent) => {
   const buildURL = (_url) => {
     if (typeof window === 'undefined') {
-      // eslint-disable-line global-require,@typescript-eslint/no-var-requires
       const Thumbor = require('thumbor-lite');
       const thumbor = new Thumbor(resizerKey, resizerURL);
       let imgSrc = _url.replace(/^http[s]?:\/\//, '')

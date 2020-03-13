@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
+import Byline from '@wpmedia/byline-block';
+import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import './results-list.scss';
 
 function extractImage(promo) {
@@ -14,11 +14,11 @@ function extractImage(promo) {
 }
 
 const HeadlineText = styled.h2`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const DescriptionText = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 @Consumer
@@ -26,19 +26,85 @@ class ResultsList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { resultList: {} };
-    this.fetchStories();
+    this.state = {
+      storedList: {},
+      resultList: {},
+      seeMore: true,
+    };
+    this.fetchStories(false);
   }
 
-  fetchStories() {
+  fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
-    this.fetchContent({
-      resultList: {
-        source: contentService,
-        query: contentConfigValues,
-      },
-    });
+    const { storedList } = this.state;
+
+    if (additionalStoryAmount) {
+      // Check for next value
+      if (storedList.next) {
+        // Determine content service type
+        let value;
+        switch (listContentConfig.contentService) {
+          case 'story-feed-author':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-query':
+            value = parseInt(contentConfigValues.size, 10);
+            contentConfigValues.offset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-sections':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          case 'story-feed-tag':
+            value = parseInt(contentConfigValues.feedSize, 10);
+            contentConfigValues.feedOffset = (storedList.next).toString();
+            value += storedList.next;
+            break;
+          default:
+            break;
+        }
+        this.fetchContent({
+          resultList: {
+            source: contentService,
+            query: contentConfigValues,
+            transform(data) {
+              if (data) {
+                // Add new data to previous list
+                const combinedList = storedList.content_elements.concat(data.content_elements);
+                storedList.content_elements = combinedList;
+                storedList.next = data.next;
+              }
+              return storedList;
+            },
+          },
+        });
+        // Hide button if no more stories to load
+        if (value >= storedList.count) {
+          this.state.seeMore = false;
+        }
+      }
+    } else {
+      this.fetchContent({
+        resultList: {
+          source: contentService,
+          query: contentConfigValues,
+        },
+      });
+      const { resultList } = this.state;
+      this.state.storedList = resultList;
+      // Check if there are available stories
+      if (resultList.content_elements) {
+        // Hide button if no additional stories from initial content
+        if (resultList.content_elements.length >= resultList.count) {
+          this.state.seeMore = false;
+        }
+      }
+    }
   }
 
   constructHref(websiteUrl) {
@@ -47,11 +113,12 @@ class ResultsList extends Component {
       websiteDomain,
     } = getProperties(arcSite);
     return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
+      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}`
+      : `${websiteDomain}/${websiteUrl}`;
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
+    const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
@@ -83,20 +150,36 @@ class ResultsList extends Component {
                   />
                 ) : <div className="image-placeholder" />}
               </a>
-              <div className={descriptionText ? 'headline-description' : 'headline-description headline-description-spacing'}>
+              <div
+                className={
+                  descriptionText
+                    ? 'headline-description'
+                    : 'headline-description headline-description-spacing'
+                }
+              >
                 <div>
                   <a
                     href={this.constructHref(websiteUrl)}
                     title={headlineText}
                     className="list-anchor"
                   >
-                    <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
+                    <HeadlineText
+                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      className="headline-text"
+                    >
+                      {headlineText}
+                    </HeadlineText>
                   </a>
-                  <DescriptionText secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="description-text">{descriptionText}</DescriptionText>
+                  <DescriptionText
+                    secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                    className="description-text"
+                  >
+                    {descriptionText}
+                  </DescriptionText>
                 </div>
                 <div className="author-date">
                   <Byline story={element} stylesFor="list" />
-                  {/* The Separator will only be shown if there is atleast one author name */}
+                  {/* The Separator will only be shown if there is at least one author name */}
                   { showSeparator && <p className="dot-separator">&#9679;</p> }
                   <ArticleDate classNames="story-date" date={displayDate} />
                 </div>
@@ -104,6 +187,23 @@ class ResultsList extends Component {
             </div>
           );
         })}
+        {
+          !!(contentElements && contentElements.length > 0 && seeMore) && (
+            <div className="see-more">
+              <button
+                type="button"
+                onClick={() => this.fetchStories(true)}
+                className="btn btn-sm"
+              >
+                See More
+                {' '}
+                <span className="visuallyHidden">
+                  stories about this topic
+                </span>
+              </button>
+            </div>
+          )
+        }
       </div>
     );
   }

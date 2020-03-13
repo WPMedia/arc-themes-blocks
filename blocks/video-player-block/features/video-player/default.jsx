@@ -60,8 +60,13 @@ const VideoPlayer = (props) => {
 
 VideoPlayer.propTypes = {
   customFields: PropTypes.shape({
-    inheritGlobalContent: PropTypes.bool,
-    websiteURL: PropTypes.string,
+    websiteURL: PropTypes.string.tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    inheritGlobalContent: PropTypes.bool.tag({
+      group: 'Configure Content',
+    }),
   }),
 };
 

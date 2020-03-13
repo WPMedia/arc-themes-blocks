@@ -1,8 +1,11 @@
 {
-  "name": "@arc-test-org/default-output-block",
-  "version": "1.2.22",
+  "name": "@wpmedia/default-output-block",
+  "version": "1.2.31",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
+  "contributors": [
+    "Jack Howard <jack.howard@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
@@ -10,16 +13,23 @@
     "output-types"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/default-output-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
-    "@arc-test-org/news-theme-css": "^1.4.2",
+    "@wpmedia/news-theme-css": "^1.4.4",
     "dom-parser": "^0.1.6",
     "styled-components": "^4.4.0",
     "thumbor-lite": "^0.1.6"
-  }
+  },
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/tag-title-block",
-  "version": "0.2.1",
+  "name": "@wpmedia/tag-title-block",
+  "version": "0.2.9",
   "description": "Fusion themes block containing a tag title block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -10,11 +10,13 @@
     "features"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/tag-title-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
@@ -22,5 +24,6 @@
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  }
+  },
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

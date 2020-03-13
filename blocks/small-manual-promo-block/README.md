@@ -1,0 +1,7 @@
+# `@wpmedia/small-manual-promo-block`
+
+Block containing a small manual promo component.
+
+## Usage
+
+Configuration (including content) is handled through proptypes in the PB editor

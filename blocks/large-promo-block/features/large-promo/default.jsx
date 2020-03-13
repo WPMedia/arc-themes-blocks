@@ -1,29 +1,33 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import Byline from '@arc-test-org/byline-block';
-import ArticleDate from '@arc-test-org/date-block';
-import './large-promo.scss';
-import { Image } from '@arc-test-org/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import Byline from '@wpmedia/byline-block';
+import ArticleDate from '@wpmedia/date-block';
+import '@wpmedia/shared-styles/scss/_large-promo.scss';
+import { Image } from '@wpmedia/engine-theme-sdk';
 
 const HeadlineText = styled.h1`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const DescriptionText = styled.p`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
 `;
 
 const OverlineLink = styled.a`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
 
-const LargePromo = ({ customFields, arcSite }) => {
+
+const LargePromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
@@ -37,6 +41,7 @@ const LargePromo = ({ customFields, arcSite }) => {
     } = getProperties(arcSite);
     return `${websiteDomain}/${websiteUrl}`;
   };
+  const { website_section: websiteSection } = content.websites[arcSite];
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
@@ -47,13 +52,16 @@ const LargePromo = ({ customFields, arcSite }) => {
   const dateText = content && content.display_date ? content.display_date : null;
 
   const overlineDisplay = (content.label && content.label.basic && content.label.basic.display)
-  || false;
+    || (content.websites && content.websites[arcSite] && websiteSection)
+    || false;
   const overlineUrl = (content.label && content.label.basic && content.label.basic.url)
+    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection._id)
     || '';
   const overlineText = (content.label && content.label.basic && content.label.basic.text)
+    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection.name)
     || '';
 
-  const extractImage = promo => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
@@ -148,17 +156,16 @@ const LargePromo = ({ customFields, arcSite }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                smallWidth={800}
-                smallHeight={0}
-                mediumWidth={800}
-                mediumHeight={0}
-                largeWidth={800}
-                largeHeight={0}
+                smallWidth={274}
+                smallHeight={148}
+                mediumWidth={274}
+                mediumHeight={148}
+                largeWidth={377}
+                largeHeight={272}
               />
             </a>
           </div>
-        )
-        }
+        )}
         {(customFields.showHeadline || customFields.showDescription
           || customFields.showByline || customFields.showDate)
         && (
@@ -171,8 +178,7 @@ const LargePromo = ({ customFields, arcSite }) => {
               {dateTmpl()}
             </div>
           </div>
-        )
-        }
+        )}
       </div>
     </article>
   );
@@ -180,53 +186,44 @@ const LargePromo = ({ customFields, arcSite }) => {
 
 LargePromo.propTypes = {
   customFields: PropTypes.shape({
-    showOverline: PropTypes.bool.tag(
-      {
-        name: 'Show overline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showHeadline: PropTypes.bool.tag(
-      {
-        name: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        name: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        name: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showByline: PropTypes.bool.tag(
-      {
-        name: 'Show byline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDate: PropTypes.bool.tag(
-      {
-        name: 'Show date',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    showOverline: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showByline: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDate: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     imageOverrideURL: PropTypes.string.tag({
-      name: 'Image URL',
+      label: 'Image URL',
       group: 'Image',
     }),
-    itemContentConfig: PropTypes.contentConfig('ans-item'),
   }),
 
 };

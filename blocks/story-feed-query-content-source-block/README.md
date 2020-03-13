@@ -1,4 +1,4 @@
-# `@arc-test-org/story-feed-query-content-source-block`
+# `@wpmedia/story-feed-query-content-source-block`
 
 Content source block for story feed queries by Elasticsearch queries.
 

@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/single-chain-block",
-  "version": "0.2.1",
+  "name": "@wpmedia/single-chain-block",
+  "version": "0.2.8",
   "description": "Single Chain – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,10 +10,17 @@
     "chains"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/single-chain-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
-  }
+  },
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

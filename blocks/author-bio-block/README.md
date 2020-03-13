@@ -1,4 +1,4 @@
-# `@arc-test-org/author-bio-block`
+# `@wpmedia/author-bio-block`
 Author Short Biography block for Fusion News Theme
 
 ## Usage

@@ -1,4 +1,4 @@
-# `@arc-test-org/byline-block`
+# `@wpmedia/byline-block`
 Byline block for Fusion News Theme
 
 ## Usage

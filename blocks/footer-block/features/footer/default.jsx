@@ -5,15 +5,15 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import FacebookAltIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
-import TwitterIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
-import RssIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/RssIcon';
-import ArcLogo from '@arc-test-org/engine-theme-sdk/dist/es/components/ArcLogo';
+import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
+import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
+import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon';
+import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 
 import './footer.scss';
 
 const FooterSection = styled.ul`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const Footer = ({ customFields: { navigationConfig } }) => {
@@ -21,12 +21,10 @@ const Footer = ({ customFields: { navigationConfig } }) => {
 
   const content = useContent({
     source: navigationConfig.contentService,
-    query: Object.assign(
-      {
-        hierarchy: 'footer',
-      },
-      navigationConfig.contentConfigValues,
-    ),
+    query: {
+      hierarchy: 'footer',
+      ...navigationConfig.contentConfigValues,
+    },
   });
 
   const footerColumns = (content && content.children) ? content.children : [];
@@ -54,7 +52,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               title="Twitter feed"
               target="_blank"
               rel="noopener noreferrer"
-              href={getProperties(arcSite).twitterUsername}
+              href={`https://twitter.com/${getProperties(arcSite).twitterUsername}`}
             >
               <TwitterIcon fill="#2980B9" />
             </a>
@@ -106,7 +104,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
       <div className="row legacy-footer-row">
         {/* The columns are 2D arrays of columns x column items. Iterate through both */}
         {footerColumns.map((column) => {
-          const columnItems = (column.children) ? column.children.map(item => (
+          const columnItems = (column.children) ? column.children.map((item) => (
             <li className="footer-item" key={item._id}>
               <a href={item.url}>{item.display_name}</a>
             </li>
@@ -143,7 +141,10 @@ const Footer = ({ customFields: { navigationConfig } }) => {
 
 Footer.propTypes = {
   customFields: PropTypes.shape({
-    navigationConfig: PropTypes.contentConfig('navigation-hierarchy'),
+    navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
+      group: 'Configure Content',
+      label: 'Navigation',
+    }),
   }),
 };
 

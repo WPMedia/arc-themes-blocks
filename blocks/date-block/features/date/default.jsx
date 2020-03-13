@@ -6,7 +6,7 @@ import { TIMEZONE } from 'fusion:environment';
 import './date.scss';
 
 const StyledTime = styled.time`
-  font-family: ${props => props.primaryFont};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 @Consumer

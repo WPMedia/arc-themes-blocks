@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/tags-content-source-block",
-  "version": "0.0.5",
+  "name": "@wpmedia/tags-content-source-block",
+  "version": "0.0.13",
   "description": "Fusion News Theme tags API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,10 +10,17 @@
     "sources"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/tags-content-source-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
-  }
+  },
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

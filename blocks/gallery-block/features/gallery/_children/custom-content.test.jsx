@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -12,7 +13,7 @@ jest.mock('fusion:content', () => ({
   })),
 }));
 
-jest.mock('@arc-test-org/engine-theme-sdk', () => ({
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Gallery: (props, children) => <div {...props}>{ children }</div>,
 }));
 

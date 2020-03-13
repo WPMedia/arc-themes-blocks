@@ -129,7 +129,7 @@ describe('the full author bio block', () => {
       it('should have an instagram url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('.instagram').prop('href'))).toEqual('https://instagram.com/janedoe');
+        expect((wrapper.find('.instagram').prop('href'))).toEqual('https://www.instagram.com/janedoe/');
       });
     });
 

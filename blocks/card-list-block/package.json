@@ -1,6 +1,6 @@
 {
-  "name": "@arc-test-org/card-list-block",
-  "version": "0.1.2",
+  "name": "@wpmedia/card-list-block",
+  "version": "0.1.13",
   "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -10,23 +10,26 @@
     "features"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git"
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/card-list-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-test-org/byline-block": "^0.3.1",
-    "@arc-test-org/date-block": "^1.4.0",
-    "@arc-test-org/engine-theme-sdk": "^0.5.1",
+    "@wpmedia/byline-block": "^0.3.9",
+    "@wpmedia/date-block": "^1.4.8",
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  }
+  },
+  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

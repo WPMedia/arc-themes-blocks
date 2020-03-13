@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
-import VideoPlayer from '@arc-test-org/video-player-block';
+import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
-} from '@arc-test-org/engine-theme-sdk';
+} from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
-import FullscreenIcon from '@arc-test-org/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
 const LeadArtWrapperFigure = styled.figure`
   figcaption {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
 `;
 
@@ -70,12 +70,12 @@ class LeadArt extends Component {
       if (lead_art.type === 'raw_html') {
         if (buttonPosition !== 'hidden') {
           const mainContent = (
-            <React.Fragment>
+            <>
               <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-            </React.Fragment>
+            </>
           );
           lightbox = (
-            <React.Fragment>
+            <>
               {isOpen && (
                 <Lightbox
                   mainSrc={mainContent}
@@ -84,7 +84,7 @@ class LeadArt extends Component {
                   enableZoom={enableZoom}
                 />
               )}
-            </React.Fragment>
+            </>
           );
         }
 
@@ -102,7 +102,7 @@ class LeadArt extends Component {
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
-            <React.Fragment>
+            <>
               {isOpen && (
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
@@ -112,7 +112,7 @@ class LeadArt extends Component {
                   enableZoom={enableZoom}
                 />
               )}
-            </React.Fragment>
+            </>
           );
         }
 

@@ -1,11 +1,11 @@
-# `@arc-test-org/article-body-block`
+# `@wpmedia/article-body-block`
 
 Fusion News Theme article-body block
 
 ## Usage
 
 ```
-const articleBodyBlock = require('@arc-test-org/article-body-block');
+const articleBodyBlock = require('@wpmedia/article-body-block');
 ```
 # Example ANS Schema:
 ```

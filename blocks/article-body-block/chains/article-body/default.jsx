@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
-import VideoPlayer from '@arc-test-org/video-player-block';
-import { Gallery, ImageMetadata, Image } from '@arc-test-org/engine-theme-sdk';
+import VideoPlayer from '@wpmedia/video-player-block';
+import { Gallery, ImageMetadata, Image } from '@wpmedia/engine-theme-sdk';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -58,7 +58,7 @@ function parseArticleItem(item, index) {
         <Fragment key={key}>
           <p className="interstitial-link">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
-            <a href={url} dangerouslySetInnerHTML={{ __html: content }} />
+            <a href={url} aria-label="Open related story" dangerouslySetInnerHTML={{ __html: content }} />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
           </p>
         </Fragment>
@@ -141,12 +141,12 @@ function parseArticleItem(item, index) {
 }
 
 const ArticleBody = styled.article`
-  font-family: ${props => props.secondaryFont};
+  font-family: ${(props) => props.secondaryFont};
   h1, h2, h3, h4, h5, h6, figcaption, table {
-    font-family: ${props => props.primaryFont};
+    font-family: ${(props) => props.primaryFont};
   }
   .body-paragraph, .interstitial-link, ol, ul, blockquote p, blockquote {
-    font-family: ${props => props.secondaryFont};
+    font-family: ${(props) => props.secondaryFont};
   }
 `;
 
@@ -182,7 +182,7 @@ const ArticleBodyChain = ({ children }) => {
   //  content elements into the array. Skip if the place is taken
   let paragraphPosition = 0;
   const { content_elements: contentElements, location } = items;
-  const firstParagraph = contentElements.find(elements => elements.type === 'text');
+  const firstParagraph = contentElements.find((elements) => elements.type === 'text');
   if (firstParagraph && firstParagraph.content && !(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
     firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
   }

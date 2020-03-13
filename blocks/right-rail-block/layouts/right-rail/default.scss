@@ -21,6 +21,8 @@ html, body {
     flex-grow: 1;
     padding-top: 54px;
     padding-bottom: calculateRem(64px);
+    width: 100%;
+
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding-bottom: calculateRem(80px);
     }

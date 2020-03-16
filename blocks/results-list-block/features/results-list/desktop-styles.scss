@@ -13,19 +13,19 @@
         font-weight: bold;
         line-height: calculateRem(32px);
         margin-bottom: map-get($spacers, 'xs');
-        justify-content: flex-end;
       }
   
       .description-text {
         font-size: calculateRem(16px);
         line-height: calculateRem(24px);
         margin-bottom: map-get($spacers, 'xs');
-        justify-content: flex-start;
       }
   
       .results-list--author-date {
         font-size: calculateRem(10px);
         line-height: calculateRem(16px);
+        display: flex;
+        justify-content: flex-end;
   
         .dot-separator {
           display: inline-block;

@@ -27,34 +27,54 @@ class SearchResultsList extends Component {
     super(props);
     this.arcSite = props.arcSite;
     this.state = {
+      storedList: {},
       resultList: {},
       value: '',
-      page: 0
+      page: 1,
     };
   }
 
-  fetchStories() {
+  fetchStories(additionalStoryAmount) {
     const { customFields: { searchContentConfig } } = this.props;
-    // this.state.page += 1
-    // const { contentService, contentConfigValues } = listContentConfig;
-    console.log('before', searchContentConfig.contentConfigValues.query, this.state.value);
-    searchContentConfig.contentConfigValues.query = this.state.value;
-    // searchContentConfig.contentConfigValues.query = this.state.page
+    const { value, storedList } = this.state;
 
-    this.fetchContent({
-      resultList: {
-        source: searchContentConfig.contentService,
-        query: searchContentConfig.contentConfigValues,
-      },
-    });
-
-
-    console.log('after', searchContentConfig.contentConfigValues.query);
-    setTimeout(() => {
-      console.log('result', this.state.resultList);
-    }, 1000);
-    
-    console.log('within', searchContentConfig.contentService, searchContentConfig.contentConfigValues);
+    searchContentConfig.contentConfigValues.query = value;
+    if (additionalStoryAmount) {
+      this.state.page += 1;
+      const { page } = this.state;
+      searchContentConfig.contentConfigValues.page = page.toString();
+      this.fetchContent({
+        resultList: {
+          source: searchContentConfig.contentService,
+          query: searchContentConfig.contentConfigValues,
+          transform(results) {
+            if (results) {
+              // Add new data to previous list
+              const combinedData = storedList.data.concat(results.data);
+              storedList.data = combinedData;
+              storedList.metadata = results.metadata;
+            }
+            return storedList;
+          },
+        },
+      });
+    } else {
+      this.state.page = 1;
+      searchContentConfig.contentConfigValues.page = '1';
+      this.fetchContent({
+        resultList: {
+          source: searchContentConfig.contentService,
+          query: searchContentConfig.contentConfigValues,
+          transform(results) {
+            if (results) {
+              storedList.data = results.data;
+              storedList.metadata = results.metadata;
+            }
+            return results;
+          },
+        },
+      });
+    }
   }
 
   constructHref(websiteUrl) {
@@ -69,13 +89,30 @@ class SearchResultsList extends Component {
 
 
   render() {
-    const { resultList: { data, metadata: { total_hits: totalHits } = {} } = {}, value } = this.state;
+    const {
+      resultList: {
+        data,
+        metadata: { total_hits: totalHits } = {},
+      } = {},
+      value,
+    } = this.state;
     return (
       <div>
         <div className="search-container">
           <form action="/action_page.php" style={{ display: 'flex' }}>
-            <input type="text" placeholder="&#xF002; Search Query." className="search-bar" onChange={(evt) => this.setState({ value: evt.target.value })} />
-            <button type="button" className="btn btn-sm" onClick={() => this.fetchStories()}>Submit</button>
+            <input
+              type="text"
+              placeholder="&#xF002; Search Query."
+              className="search-bar"
+              onChange={(evt) => this.setState({ value: evt.target.value })}
+            />
+            <button
+              type="button"
+              className="btn btn-sm"
+              onClick={() => this.fetchStories(false)}
+            >
+              Submit
+            </button>
           </form>
           {
             data && (
@@ -153,7 +190,24 @@ class SearchResultsList extends Component {
                 </div>
               );
             })
-        }
+          }
+          {
+            !!(data && data.length > 0 && data.length < totalHits) && (
+              <div className="see-more">
+                <button
+                  type="button"
+                  onClick={() => this.fetchStories(true)}
+                  className="btn btn-sm"
+                >
+                  See More
+                  {' '}
+                  <span className="visuallyHidden">
+                    stories about this topic
+                  </span>
+                </button>
+              </div>
+            )
+          }
         </div>
       </div>
     );
@@ -162,11 +216,6 @@ class SearchResultsList extends Component {
 
 SearchResultsList.label = 'Search Results List – Arc Block';
 
-// SearchResultsList.propTypes = {
-//   customFields: PropTypes.shape({
-//     listContentConfig: PropTypes.contentConfig('ans-feed'),
-//   }),
-// };
 SearchResultsList.propTypes = {
   customFields: PropTypes.shape({
     searchContentConfig: PropTypes.contentConfig().tag({

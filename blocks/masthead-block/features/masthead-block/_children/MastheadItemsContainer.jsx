@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import rem from 'polished/lib/helpers/rem';
 
 const MastheadItemsContainer = styled.div`
   display: flex;
@@ -13,8 +12,6 @@ const MastheadItemsContainer = styled.div`
     padding-top: 5px;
 
     > p {
-      font-size: ${rem('14px')};
-      line-height: ${rem('16px')};
       font-family: ${(props) => props.primaryFont};
       margin: 0;
       color: #191919;

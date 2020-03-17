@@ -1,4 +1,7 @@
 .search-container {
+  > div {
+    display: flex;
+  }
   text-align: center;
   margin-bottom: 20px;
   padding-bottom: 30px;
@@ -31,7 +34,6 @@ input {
   margin-left: -0.2%;
   height: 48px;
 }
-
 
 .search-results-text {
   text-align: left;

@@ -31,6 +31,7 @@ class SearchResultsList extends Component {
       resultList: {},
       value: '',
       page: 1,
+      searchTerm: '',
     };
   }
 
@@ -39,6 +40,7 @@ class SearchResultsList extends Component {
     const { value, storedList } = this.state;
 
     searchContentConfig.contentConfigValues.query = value;
+    // If 'See More' button is pressed
     if (additionalStoryAmount) {
       this.state.page += 1;
       const { page } = this.state;
@@ -67,6 +69,7 @@ class SearchResultsList extends Component {
           query: searchContentConfig.contentConfigValues,
           transform(results) {
             if (results) {
+              // Initializes storedList
               storedList.data = results.data;
               storedList.metadata = results.metadata;
             }
@@ -75,6 +78,7 @@ class SearchResultsList extends Component {
         },
       });
     }
+    this.state.searchTerm = value;
   }
 
   constructHref(websiteUrl) {
@@ -94,12 +98,12 @@ class SearchResultsList extends Component {
         data,
         metadata: { total_hits: totalHits } = {},
       } = {},
-      value,
+      searchTerm,
     } = this.state;
     return (
       <div>
         <div className="search-container">
-          <form action="/action_page.php" style={{ display: 'flex' }}>
+          <div>
             <input
               type="text"
               placeholder="&#xF002; Search Query."
@@ -111,13 +115,13 @@ class SearchResultsList extends Component {
               className="btn btn-sm"
               onClick={() => this.fetchStories(false)}
             >
-              Submit
+              Search
             </button>
-          </form>
+          </div>
           {
             data && (
               <p className="search-results-text">
-                {`${totalHits} Results for “${value}”`}
+                {`${totalHits} Results for “${searchTerm}”`}
               </p>
             )
           }

@@ -2,8 +2,8 @@
   .list-item {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: auto;
     column-gap: map-get($spacers, 'lg');
+    grid-template-rows: auto minmax(0, 1fr); 
     grid-template-areas: 
       "image headline"
       "image description";
@@ -25,7 +25,6 @@
         font-size: calculateRem(10px);
         line-height: calculateRem(16px);
         display: flex;
-        justify-content: flex-end;
   
         .dot-separator {
           display: inline-block;

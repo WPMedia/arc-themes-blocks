@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-sections-content-source-block",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_sections-v4": "^1.0.6-beta.0",
-    "@wpmedia/story-feed-tag-content-source-block": "^0.1.9"
+    "@wpmedia/story-feed-tag-content-source-block": "^0.1.10"
   },
   "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

@@ -1,3 +1,6 @@
+.results-list-container{
+  @include block-margin-bottom;
+}
 .results-list--image-container {
   grid-area: image;
 }

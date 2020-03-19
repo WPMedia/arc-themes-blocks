@@ -106,7 +106,7 @@ class SearchResultsList extends Component {
           <div>
             <input
               type="text"
-              placeholder="&#xF002;   Search Query."
+              placeholder="&#xF002;   Enter your search terms here"
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />

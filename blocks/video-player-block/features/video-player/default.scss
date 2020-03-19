@@ -1,7 +1,6 @@
 .embed-video{
-  margin:0 0 map-get($spacers, 'md');
-
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-    margin:0 0 map-get($spacers, 'lg');
-  }
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  @include block-margin-bottom
 }

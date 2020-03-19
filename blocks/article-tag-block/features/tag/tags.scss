@@ -7,6 +7,7 @@
   align-items: center;
   align-content: center;
   box-shadow: inset 0 -1px 0 0 #B8C1CB, inset 0 1px 0 0 #B8C1CB;
+  @include block-margin-bottom;
 }
 
 .tags {

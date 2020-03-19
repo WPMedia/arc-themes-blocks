@@ -93,7 +93,7 @@ justify_center`}>
   // If element is a subtype of youtube or vimeo, and this is not an AMP page, add responsive video classes
   const responsiveClass = (['youtube', 'vimeo'].indexOf(element.subtype) !== -1 && !isAmp) ? 'embed-responsive embed-responsive-16by9' : '';
   const marginClasses = !isLeadArt && !isAmp ? 'margin_top_md margin_bottom_md' : '';
-  const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses}`;
+  const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses} block-margin-bottom`;
   const outputElement = output();
   if (typeof outputElement === 'string') {
     return <div className={cssClasses} dangerouslySetInnerHTML={{ __html: outputElement }} />

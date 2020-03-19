@@ -40,7 +40,7 @@ html, body {
 
   .left-article-section {
     padding: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       padding: 0 map-get($spacers, 'lg') 0 0;
       border-right: 1px $ui-medium-light-secondary-color solid;
     }

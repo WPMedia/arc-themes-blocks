@@ -5,16 +5,17 @@
   justify-content: space-evenly;
   box-shadow: inset 0 -1px 0 0 #B8C1CB;
   width: 100%;
+  @include block-margin-bottom;
 
   .links-menu {
     margin: 5px 15px;
     padding: 8px 0px;
 
     a {
-      color: #1F2D3D;	
-      font-family: $theme-primary-font-family;	
+      color: #1F2D3D;
+      font-family: $theme-primary-font-family;
       font-size: 14px;
-      font-weight: bold; 
+      font-weight: bold;
 
       height: 100%;
       line-height: 14px;

@@ -1,0 +1,255 @@
+.image-metadata .title {
+  font-weight: bold;
+}
+
+.article-body-wrapper {
+  color: $ui-dark-secondary-color;
+  margin-top: map-get($spacers, 'lg');
+
+
+  & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
+    @include block-margin-bottom;
+  }
+
+  ul, ol{
+    font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
+    letter-spacing: 0.1px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+  }
+
+  p {
+    font-size: calculateRem(18px);
+    line-height: calculateRem(32px);
+    letter-spacing: 0.1px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(20px);
+      line-height: calculateRem(40px);
+    }
+  }
+
+  figure {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+
+    p {
+      font-size: calculateRem(14px);
+      color: #7F8C8D;
+      margin: 8px 0;
+      line-height: 1rem;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+
+  ul ul, ol ul {
+    list-style-type: circle;
+    list-style-position: inside;
+    margin-left: map-get($spacers, 'sm');
+  }
+
+  ol ol, ul ol {
+    list-style-type: lower-latin;
+    list-style-position: inside;
+    margin-left: map-get($spacers, 'sm');
+  }
+
+  ol ol, ul ol, ol ul, ul ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  li{
+    margin: 0;
+    font-size: calculateRem(18px);
+    line-height: calculateRem(32px);
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      margin: 0;
+      font-size: calculateRem(20px);
+      line-height: calculateRem(40px);
+    }
+  }
+
+  .correction {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+
+    padding: map-get($spacers, 'sm') 0;
+    box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+
+    div, p {
+      color: $ui-medium-primary-color;
+      font-size: calculateRem(18px);
+      line-height: calculateRem(24px);
+      font-style: italic;
+      font-weight: normal;
+      margin: 0;
+      display: inline;
+    }
+
+    h6 {
+      text-transform: uppercase;
+      font-style: italic;
+    }
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+
+    table {
+      width: 100%;
+      color: $ui-primary-font-color;
+      border: 1px solid #C8C8C8;
+      border-collapse: collapse;
+
+      thead {
+        border: 2px solid #C8C8C8;
+        background-color: #EEEEEE;
+      }
+
+      th {
+        white-space: nowrap;
+      }
+
+      th, td {
+        border: 1px solid #C8C8C8;
+        padding: map-get($spacers, 'xxs') map-get($spacers, 'xs');
+        text-align: center;
+      }
+
+      td {
+        font-size: calculateRem(17px);
+        font-style: normal;
+        font-weight: normal;
+      }
+
+      th {
+        font-size: calculateRem(17px);
+        font-style: normal;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  blockquote.pullquote {
+    text-align: center;
+    font-size: calculateRem(19px);
+    line-height: calculateRem(24px);
+    font-weight: bold;
+    font-style: italic;
+    padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      font-size: calculateRem(26px);
+      line-height: calculateRem(32px);
+    }
+
+    p {
+      text-align: center;
+      font-size: calculateRem(19px);
+      line-height: calculateRem(24px);
+      margin-bottom: calculateRem(24px);
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        font-size: calculateRem(26px);
+        line-height: calculateRem(32px);
+      }
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    .citation-text {
+      text-align: center;
+      font-family: $primary-font-family;
+      font-size: calculateRem(18px);
+      line-height: calculateRem(32px);
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        font-size: calculateRem(16px);
+        line-height: calculateRem(24px);
+      }
+    }
+
+    box-shadow: inset 0 -5px 0 0 $ui-light-secondary-color, inset 0 5px 0 0 $ui-light-secondary-color;
+  }
+
+  blockquote {
+    box-shadow: inset 5px 0 0 0 #1F2D3D;
+    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') map-get($spacers, 'md');
+    text-align: left;
+    font-size: calculateRem(18px);
+    line-height: calculateRem(32px);
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
+    font-weight: normal;
+    font-style: italic;
+
+    p {
+      @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+        line-height: calculateRem(32px);
+      }
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        line-height: calculateRem(32px);
+      }
+      font-size: calculateRem(18px);
+      font-weight: normal;
+      font-style: italic;
+      margin-bottom: calculateRem(24px);
+    }
+
+    .citation-text {
+      font-family: $primary-font-family;
+      font-weight: normal;
+      display: block;
+      text-align: left;
+      color: #191919;
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
+      font-style: normal;
+    }
+  }
+
+  .interstitial_link {
+    font-style: italic;
+    display: block;
+    margin: 0 0 map-get($spacers, 'md');
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+      margin-bottom: map-get($spacers, 'lg');
+    }
+    a {
+      color: $primary-color;
+      text-decoration: underline;
+    }
+
+  }
+
+}

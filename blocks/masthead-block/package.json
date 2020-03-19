@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/masthead-block",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "description": "Masthead – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -24,5 +24,6 @@
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/masthead-block"
-  }
+  },
+  "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
 }

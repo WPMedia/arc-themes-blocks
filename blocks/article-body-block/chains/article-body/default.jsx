@@ -11,6 +11,7 @@ import Oembed from './_children/oembed';
 import Blockquote from './_children/blockquote';
 import Pullquote from './_children/pullquote';
 import Table from './_children/table';
+import './_articlebody.scss';
 
 
 function parseArticleItem(item, index) {
@@ -56,7 +57,7 @@ function parseArticleItem(item, index) {
       const afterContent = '&nbsp;]';
       return (url && url.length > 0) ? (
         <Fragment key={key}>
-          <p className="interstitial-link">
+          <p className="interstitial-link block-margin-bottom">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
             <a href={url} aria-label="Open related story" dangerouslySetInnerHTML={{ __html: content }} />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
@@ -68,7 +69,7 @@ function parseArticleItem(item, index) {
     case 'raw_html': {
       return (content && content.length > 0) ? (
         <Fragment key={key}>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div className="block-margin-bottom" dangerouslySetInnerHTML={{ __html: content }} />
         </Fragment>
       ) : null;
     }
@@ -126,10 +127,16 @@ function parseArticleItem(item, index) {
       }
     case 'video':
       return (
-        <VideoPlayer embedMarkup={item.embed_html} />
+        <section className="block-margin-bottom">
+          <VideoPlayer embedMarkup={item.embed_html} />
+        </section>
       );
     case 'gallery':
-      return <Gallery galleryElements={item.content_elements} />;
+      return (
+        <section className="block-margin-bottom">
+          <Gallery galleryElements={item.content_elements} />
+        </section>
+      );
     default:
       return (
         <p key={key}>
@@ -200,7 +207,7 @@ const ArticleBodyChain = ({ children }) => {
 
   return (
     <ArticleBody
-      className="article-body"
+      className="article-body-wrapper"
       primaryFont={getThemeStyle(arcSite)['primary-font-family']}
       secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
     >

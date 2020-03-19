@@ -25,6 +25,7 @@
   "dependencies": {
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "latest"
+    "@wpmedia/engine-theme-sdk": "latest",
+    "styled-components": "^4.4.0"
   }
 }

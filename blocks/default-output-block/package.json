@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/default-output-block",
-  "version": "1.2.31",
+  "version": "1.3.4",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [
@@ -31,5 +31,5 @@
     "styled-components": "^4.4.0",
     "thumbor-lite": "^0.1.6"
   },
-  "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
+  "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
 }

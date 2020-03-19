@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/top-table-list-block",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,8 +19,8 @@
     "directory": "blocks/top-table-list-block"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "^0.4.2",
-    "@wpmedia/date-block": "^1.5.2",
+    "@wpmedia/byline-block": "^0.4.3",
+    "@wpmedia/date-block": "^1.5.3",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "@wpmedia/shared-styles": "^0.0.8",
     "styled-components": "^4.4.0"

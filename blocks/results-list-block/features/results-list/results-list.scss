@@ -1,3 +1,6 @@
+.results-list-container{
+  @include block-margin-bottom;
+}
 .list-item {
   box-shadow: inset 0 -1px 0 0 $ui-light-primary-color;
   padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;

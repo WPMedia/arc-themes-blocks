@@ -28,6 +28,7 @@ describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./default');
     SearchResultsList.prototype.fetchStories = jest.fn();
+    SearchResultsList.prototype.onChange = jest.fn();
     const wrapper = shallow(<SearchResultsList />);
     wrapper.setState({ resultList: mockData, searchTerm: 'test' }, () => {
       wrapper.update();
@@ -38,6 +39,15 @@ describe('The search results list', () => {
 
       it('should show the total number of hits', () => {
         expect(wrapper.find('.search-results-text').text()).toEqual('50 Results for “test”');
+      });
+
+      it('should set a search term', () => {
+        expect(wrapper.state('searchTerm')).toEqual('test');
+      });
+
+      it("onChange param is the same value as the input element's value property", () => {
+        wrapper.find('input').simulate('change', { target: { value: 'term' } });
+        expect(wrapper.state('value')).toEqual('term');
       });
 
       describe('renders a search button', () => {

@@ -12,8 +12,6 @@ const MastheadItemsContainer = styled.div`
     padding-top: 5px;
 
     > p {
-      font-size: 14px;
-      line-height: 16px;
       font-family: ${(props) => props.primaryFont};
       margin: 0;
       color: #191919;

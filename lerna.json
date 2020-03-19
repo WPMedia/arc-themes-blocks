@@ -3,5 +3,10 @@
     "blocks/*",
     "components/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "ignoreChanges": [
+    "**/node_modules/**",
+    "**/package.json",
+    "**/package-lock.json"
+  ]
 }

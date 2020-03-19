@@ -9,6 +9,8 @@ import StyledLink from './_children/StyledLink';
 import GenericDivider from './_children/GenericDivider';
 import HeaderContainerHideMobile from './_children/HeaderContainerHideMobile';
 
+import './masthead-block.scss';
+
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
@@ -37,14 +39,14 @@ const Masthead = (props) => {
       }
       <MastheadItemsContainer primaryFont={primaryFont}>
         <div>
-          {showDate && <p>{showLocalMonthDateYear(new Date())}</p>}
+          {showDate && <p className="masthead-block--text">{showLocalMonthDateYear(new Date())}</p>}
         </div>
         <div>
-          {tagLine && <p>{tagLine}</p>}
+          {tagLine && <p className="masthead-block--text">{tagLine}</p>}
         </div>
         <div>
           {promoLinkURL && promoLinkText && (
-          <StyledLink primaryFont={primaryFont} href={promoLinkURL}>
+          <StyledLink primaryFont={primaryFont} href={promoLinkURL} className="masthead-block--text">
             {promoLinkText}
           </StyledLink>
           )}

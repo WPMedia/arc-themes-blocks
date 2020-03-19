@@ -1,0 +1,45 @@
+@media screen and (max-width: map-get($grid-breakpoints, 'lg')){
+  .list-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 12px;
+    grid-template-areas:
+      "headline image"
+      "description description";
+
+      .description-text {
+        font-size: calculateRem(18px);
+        line-height: calculateRem(32px);
+        margin-bottom: map-get($spacers, 'xs');
+      }
+
+      .headline-text {
+        font-size: calculateRem(16px);
+        font-weight: bold;
+        line-height: calculateRem(24px);
+        margin-bottom: map-get($spacers, 'xs');      
+      }
+
+      .results-list--author-date {
+        font-size: calculateRem(14px);
+        line-height: calculateRem(16px);
+        display: flex;
+  
+        .dot-separator {
+          display: inline-block;
+          color: $ui-dark-secondary-color;
+          margin: 0 map-get($spacers, 'xs');
+          position: relative;
+          top: calculateRem(-2px);
+        }
+  
+        .story-date {
+          font-size: calculateRem(14px);
+          line-height: calculateRem(16px);
+          display: inline;
+          color: $ui-dark-secondary-color;
+        }
+      }
+  }
+}

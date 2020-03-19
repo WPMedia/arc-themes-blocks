@@ -7,7 +7,10 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
+
 import './results-list.scss';
+import './desktop-styles.scss';
+import './mobile-styles.scss';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -45,21 +48,13 @@ class ResultsList extends Component {
         // Determine content service type
         let value;
         switch (listContentConfig.contentService) {
-          case 'story-feed-author':
-            value = parseInt(contentConfigValues.feedSize, 10);
-            contentConfigValues.feedOffset = (storedList.next).toString();
-            value += storedList.next;
-            break;
           case 'story-feed-query':
             value = parseInt(contentConfigValues.size, 10);
             contentConfigValues.offset = (storedList.next).toString();
             value += storedList.next;
             break;
+          case 'story-feed-author':
           case 'story-feed-sections':
-            value = parseInt(contentConfigValues.feedSize, 10);
-            contentConfigValues.feedOffset = (storedList.next).toString();
-            value += storedList.next;
-            break;
           case 'story-feed-tag':
             value = parseInt(contentConfigValues.feedSize, 10);
             contentConfigValues.feedOffset = (storedList.next).toString();
@@ -130,54 +125,57 @@ class ResultsList extends Component {
             website_url: websiteUrl,
           } = element;
           const showSeparator = by && by.length !== 0;
+
+          const constructedURL = this.constructHref(websiteUrl);
           return (
             <div className="list-item" key={`result-card-${element.canonical_url}`}>
-              <a
-                href={this.constructHref(websiteUrl)}
-                title={headlineText}
-                className="list-anchor"
-              >
-                {extractImage(element.promo_items) ? (
-                  <Image
-                    url={extractImage(element.promo_items)}
-                    alt={headlineText}
-                    smallWidth={274}
-                    smallHeight={148}
-                    mediumWidth={274}
-                    mediumHeight={148}
-                    largeWidth={274}
-                    largeHeight={148}
-                  />
-                ) : <div className="image-placeholder" />}
-              </a>
-              <div
-                className={
-                  descriptionText
-                    ? 'headline-description'
-                    : 'headline-description headline-description-spacing'
-                }
-              >
-                <div>
+              <div className="results-list--image-container">
+                <a
+                  href={constructedURL}
+                  title={headlineText}
+                >
+                  {extractImage(element.promo_items) ? (
+                    <Image
+                      url={extractImage(element.promo_items)}
+                      alt={headlineText}
+                      smallWidth={158}
+                      smallHeight={103}
+                      mediumWidth={274}
+                      mediumHeight={148}
+                      largeWidth={274}
+                      largeHeight={148}
+                    />
+                  ) : <div className="image-placeholder" />}
+                </a>
+              </div>
+              <div className="results-list--headline-container">
+                <a
+                  href={constructedURL}
+                  title={headlineText}
+                >
+                  <HeadlineText
+                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                    className="headline-text"
+                  >
+                    {headlineText}
+                  </HeadlineText>
+                </a>
+              </div>
+              <div className="results-list--description-author-container">
+                {descriptionText && (
                   <a
-                    href={this.constructHref(websiteUrl)}
+                    href={constructedURL}
                     title={headlineText}
-                    className="list-anchor"
                   >
-                    <HeadlineText
-                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                      className="headline-text"
+                    <DescriptionText
+                      secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                      className="description-text"
                     >
-                      {headlineText}
-                    </HeadlineText>
+                      {descriptionText}
+                    </DescriptionText>
                   </a>
-                  <DescriptionText
-                    secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
-                    className="description-text"
-                  >
-                    {descriptionText}
-                  </DescriptionText>
-                </div>
-                <div className="author-date">
+                )}
+                <div className="results-list--author-date">
                   <Byline story={element} stylesFor="list" />
                   {/* The Separator will only be shown if there is at least one author name */}
                   { showSeparator && <p className="dot-separator">&#9679;</p> }

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import './search-results-list.scss';
 
 function extractImage(promo) {
@@ -104,9 +105,12 @@ class SearchResultsList extends Component {
       <div>
         <div className="search-container">
           <div>
+            <div className="search-icon-container">
+              <SearchIcon fill="#979797" />
+            </div>
             <input
               type="text"
-              placeholder="&#xF002;   Enter your search terms here"
+              placeholder="Enter your search terms here"
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />

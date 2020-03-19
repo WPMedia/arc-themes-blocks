@@ -1,0 +1,28 @@
+.alert-bar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: red;
+  width: 100%;
+  height: 56px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  a {
+    color: white;	
+    font-family: $theme-primary-font-family;	
+    font-size: 16px;
+    font-weight: bold; 
+
+    height: 100%;
+    line-height: 16px;
+
+    text-align: center;
+    text-decoration: none;
+  }
+  button {
+    background: none!important;
+    border: none;
+  }
+}

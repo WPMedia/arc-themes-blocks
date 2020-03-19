@@ -1,16 +1,15 @@
 {
-  "name": "@wpmedia/default-output-block",
-  "version": "1.2.31",
-  "description": "Fusion News Theme default output type",
-  "author": "Brent Miller <brent.miller@washport.com>",
-  "contributors": [
-    "Jack Howard <jack.howard@washpost.com>"
-  ],
+  "name": "@wpmedia/alert-bar-block",
+  "version": "0.0.1",
+  "description": "Fusion News Theme alert bar block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
-    "output-types"
+    "features",
+    "chains",
+    "layouts"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -19,17 +18,15 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
-    "directory": "blocks/default-output-block"
+    "directory": "blocks/links-bar-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx output-types"
+    "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "^1.4.6",
-    "dom-parser": "^0.1.6",
-    "styled-components": "^4.4.0",
-    "thumbor-lite": "^0.1.6"
+    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "styled-components": "^4.4.0"
   },
   "gitHead": "a6caa4ac81dc2c47de8da78c4f7d9ccae306ac40"
 }

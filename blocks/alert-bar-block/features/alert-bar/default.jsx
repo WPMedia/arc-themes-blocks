@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 
@@ -13,52 +12,81 @@ const AlertBarSpan = styled.span`
     font-family: ${(props) => props.primaryFont};
   }
 `;
+@Consumer
+class AlertBar extends Component {
+  constructor(props) {
+    super(props);
+    const { arcSite, customFields = {} } = this.props;
+    let { refreshIntervals } = customFields;
 
-const AlertBar = () => {
-  const { arcSite = '', customFields: { refreshIntervals } = {} } = useFusionContext();
-  const { content_elements: elements = {} } = useContent({
-    source: 'alert-bar-collections',
-    query: {
-      site: arcSite,
-    },
-  });
-  const [visible, setVisibility] = useState(true);
+    // It should be at minimum 30 seconds to make sure it doesn't overwhelm the content API
+    refreshIntervals = (refreshIntervals && refreshIntervals >= 30) ? refreshIntervals : 30;
+    this.state = {
+      arcSite,
+      refreshIntervals,
+      visible: true,
+      uniqueId: new Date(),
+    };
 
-  // The content source will always return an array with one story in it
-  const article = elements[0];
-  const { websites = {} } = article;
-  const { website_url: websiteURL = '' } = websites[arcSite];
+    const { fetched } = this.getContent({
+      sourceName: 'alert-bar-collections',
+      query: {
+        site: arcSite,
+      },
+    });
+    fetched.then((content) => {
+      console.log(content);
+      this.state.content = content;
+    });
+  }
 
-  // Refresh this component by assigning new keys to the encompassing component
-  // every interval seconds
-  useEffect(() => {
-    setInterval(() => {
-      useContent({
-        source: 'alert-bar-collections',
+  componentDidMount() {
+    const { refreshIntervals = 30, arcSite } = this.state;
+
+    // The content source will always return an array with one story in it
+    window.setInterval(() => {
+      const { fetched } = this.getContent({
+        sourceName: 'alert-bar-collections',
         query: {
           site: arcSite,
         },
       });
-    }, (refreshIntervals ? refreshIntervals * 1000 : 30000));
-  }, []);
+      fetched.then((content) => {
+        this.setState({ content });
+      });
+    }, (refreshIntervals * 1000));
+  }
 
+  render() {
+    const {
+      content = {},
+      uniqueId = '',
+      arcSite = '',
+      visible = false,
+    } = this.state;
+    console.log(content);
+    const { content_elements: elements = [] } = content;
+    const article = elements[0] ? elements[0] : {};
+    const { websites = {}, headlines = {} } = article;
+    const { website_url: websiteURL = '' } = websites[arcSite];
 
-  return (
-    (visible
-      ? (
-        <nav className="alert-bar">
-          <AlertBarSpan primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
-            <a href={websiteURL} className="article-link">{article.headlines.basic}</a>
-          </AlertBarSpan>
-          <button type="button" onClick={() => setVisibility(false)}>
-            <CloseIcon className="close" fill="white" />
-          </button>
-        </nav>
+    return (
+      (visible
+        ? (
+          <nav key={uniqueId} className="alert-bar">
+            <AlertBarSpan primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+              <a href={websiteURL} className="article-link">{headlines.basic}</a>
+            </AlertBarSpan>
+            <button type="button" onClick={this.setState({ visible: false })}>
+              <CloseIcon className="close" fill="white" />
+            </button>
+          </nav>
+        )
+        : null
       )
-      : null
-    )
-  );
-};
+    );
+  }
+}
 
 AlertBar.label = 'Alert Bar – Arc Block';
 
@@ -66,7 +94,7 @@ AlertBar.propTypes = {
   customFields: PropTypes.shape({
     refreshIntervals: PropTypes.number.isRequired.tag({
       label: 'Refresh Intervals (in seconds)',
-      description: 'This is the frequency at which this feature will refresh. Default is 30 seconds.',
+      description: 'This is the frequency at which this feature will refresh. Default and minimum is 30 seconds.',
       default: 30,
     }),
   }),

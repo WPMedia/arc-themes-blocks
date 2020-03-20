@@ -224,8 +224,6 @@ const SampleOutputType = ({
           {children}
         </div>
         <Fusion />
-        <script type="text/javascript" src={deployment(`${contextPath}/resources/js/yall.min.js`)} />
-        <script type="text/javascript" src={deployment(`${contextPath}/resources/js/image-lazy.js`)} />
       </body>
     </html>
   );

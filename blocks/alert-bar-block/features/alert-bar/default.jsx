@@ -35,8 +35,7 @@ class AlertBar extends Component {
       },
     });
     fetched.then((content) => {
-      console.log(content);
-      this.state.content = content;
+      this.setState({ content });
     });
   }
 
@@ -68,7 +67,7 @@ class AlertBar extends Component {
     const { content_elements: elements = [] } = content;
     const article = elements[0] ? elements[0] : {};
     const { websites = {}, headlines = {} } = article;
-    const { website_url: websiteURL = '' } = websites[arcSite];
+    const { website_url: websiteURL = '' } = websites[arcSite] ? websites[arcSite] : {};
 
     return (
       (visible

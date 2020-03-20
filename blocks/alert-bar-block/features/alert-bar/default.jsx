@@ -21,26 +21,31 @@ class AlertBar extends Component {
 
     // It should be at minimum 30 seconds to make sure it doesn't overwhelm the content API
     refreshIntervals = (refreshIntervals && refreshIntervals >= 30) ? refreshIntervals : 30;
-    this.state = {
-      arcSite,
-      refreshIntervals,
-      visible: true,
-      uniqueId: new Date(),
-    };
 
-    const { fetched } = this.getContent({
+    const { cached, fetched } = this.getContent({
       sourceName: 'alert-bar-collections',
       query: {
         site: arcSite,
       },
     });
+
+    this.state = {
+      content: cached,
+      arcSite,
+      refreshIntervals,
+      visible: true,
+    };
     fetched.then((content) => {
       this.setState({ content });
     });
   }
 
   componentDidMount() {
-    const { refreshIntervals = 30, arcSite } = this.state;
+    let { refreshIntervals = 30 } = this.state;
+    const { arcSite } = this.state;
+    // refreshIntervals should always be at least 30 so it doesn't overwhelm the calls to
+    // the content api.
+    refreshIntervals = (refreshIntervals < 30) ? 30 : refreshIntervals;
 
     // The content source will always return an array with one story in it
     window.setInterval(() => {
@@ -59,11 +64,10 @@ class AlertBar extends Component {
   render() {
     const {
       content = {},
-      uniqueId = '',
       arcSite = '',
       visible = false,
     } = this.state;
-    console.log(content);
+
     const { content_elements: elements = [] } = content;
     const article = elements[0] ? elements[0] : {};
     const { websites = {}, headlines = {} } = article;
@@ -72,11 +76,11 @@ class AlertBar extends Component {
     return (
       (visible
         ? (
-          <nav key={uniqueId} className="alert-bar">
+          <nav className="alert-bar">
             <AlertBarSpan primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
               <a href={websiteURL} className="article-link">{headlines.basic}</a>
             </AlertBarSpan>
-            <button type="button" onClick={this.setState({ visible: false })}>
+            <button type="button" onClick={() => this.setState({ visible: false })}>
               <CloseIcon className="close" fill="white" />
             </button>
           </nav>

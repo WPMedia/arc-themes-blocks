@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/results-list-block",
-  "version": "1.4.9",
+  "version": "1.5.4",
   "description": "Fusion News Theme results list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "contributors": [
@@ -27,9 +27,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "^0.3.9",
-    "@wpmedia/date-block": "^1.4.8",
+    "@wpmedia/byline-block": "^0.4.4",
+    "@wpmedia/date-block": "^1.5.4",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
 }

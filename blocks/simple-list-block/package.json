@@ -19,7 +19,7 @@
     "directory": "blocks/simple-list-block"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/engine-theme-sdk": "^1.0.0",
     "styled-components": "^4.4.0"
   },
   "scripts": {

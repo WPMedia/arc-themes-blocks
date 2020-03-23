@@ -4,6 +4,7 @@ describe('the site-service-hierarchy content source block', () => {
   it('should use the proper param types', () => {
     expect(contentSource.params).toEqual({
       hierarchy: 'text',
+      sectionId: 'text',
     });
   });
 
@@ -16,6 +17,6 @@ describe('the site-service-hierarchy content source block', () => {
   it('when a hierarchy is NOT provided it should build a url without it', () => {
     const url = contentSource.resolve({ 'arc-site': 'bbbbb-ccccc' });
 
-    expect(url).toEqual('/site/v3/navigation/bbbbb-ccccc');
+    expect(url).toEqual('/site/v3/navigation/bbbbb-ccccc?');
   });
 });

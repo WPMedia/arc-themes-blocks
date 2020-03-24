@@ -47,6 +47,7 @@
     "react-dom": "^16.13.0"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.4",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
     "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
     "@wpmedia/byline-block": "file:blocks/byline-block",
@@ -62,7 +63,6 @@
     "@wpmedia/lead-art-block": "file:blocks/lead-art-block",
     "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
     "@wpmedia/medium-manual-promo-block": "file:blocks/medium-manual-promo-block",
-    "@wpmedia/news-theme-css": "^1.4.4",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",

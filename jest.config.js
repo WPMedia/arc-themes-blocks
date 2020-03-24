@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   collectCoverageFrom: [
-    '**/(features|chains|layouts|output-types)/**/*.{js,jsx}',
+    '**/(features|chains|layouts|sources|output-types)/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/images/*.svg',

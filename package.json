@@ -43,8 +43,8 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
     "lerna": "^3.18.3",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "@wpmedia/article-body-block": "file:blocks/article-body-block",

@@ -21,5 +21,6 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx chains"
-  }
+  },
+  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
 }

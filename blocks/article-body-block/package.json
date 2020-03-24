@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-body-block",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -25,10 +25,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^1.0.0",
-    "@wpmedia/video-player-block": "^1.0.1",
+    "@wpmedia/engine-theme-sdk": "latest",
+    "@wpmedia/video-player-block": "latest",
     "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
+  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
 }

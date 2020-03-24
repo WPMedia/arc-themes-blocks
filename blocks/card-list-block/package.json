@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/card-list-block",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -23,8 +23,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "^1.0.0",
-    "@wpmedia/date-block": "^2.0.0",
+    "@wpmedia/byline-block": "^1.0.1",
+    "@wpmedia/date-block": "^2.0.1",
     "@wpmedia/engine-theme-sdk": "^1.0.0",
     "styled-components": "^4.4.0"
   },

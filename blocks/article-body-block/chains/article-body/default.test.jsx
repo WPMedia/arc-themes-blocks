@@ -56,8 +56,8 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('article.article-body')).toHaveLength(1);
-      expect(wrapper.find('article.article-body').find('div')).toHaveLength(2);
+      expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(2);
     });
   });
 
@@ -120,8 +120,8 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('article.article-body')).toHaveLength(1);
-      expect(wrapper.find('article.article-body').find('div')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(1);
     });
   });
 
@@ -184,7 +184,7 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('article.article-body').children()).toHaveLength(3);
+      expect(wrapper.find('article.article-body-wrapper').children()).toHaveLength(3);
     });
   });
 
@@ -222,7 +222,7 @@ describe('article-body chain', () => {
     it('should render a paragraph with "This element did not match with the elements that are currently implemented:&nbsp;"', () => {
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(<ArticleBodyChain><div>1</div></ArticleBodyChain>);
-      expect(wrapper.find('article.article-body').find('p').text()).toMatch('This element did not match with the elements that are currently implemented:');
+      expect(wrapper.find('article.article-body-wrapper').find('p').text()).toMatch('This element did not match with the elements that are currently implemented:');
     });
   });
 
@@ -342,8 +342,8 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('article.article-body').find(Pullquote)).toHaveLength(1);
-      expect(wrapper.find('article.article-body').find(Blockquote)).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find(Pullquote)).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find(Blockquote)).toHaveLength(1);
     });
   });
 

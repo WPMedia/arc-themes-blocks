@@ -1,91 +1,34 @@
+.results-list-container{
+  @include block-margin-bottom;
+}
+.results-list--image-container {
+  grid-area: image;
+}
+.results-list--headline-container {
+  grid-area: headline;
+}
+.results-list--description-author-container {
+  grid-area: description;
+}
+
 .list-item {
   box-shadow: inset 0 -1px 0 0 $ui-light-primary-color;
   padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
-  display: flex;
-  flex-wrap: wrap; //mobile fix
 
-  @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
-    flex-wrap: nowrap;
-  }
-
-  .list-anchor {
+  a {
     text-decoration: none;
-    flex: 0 0 100%;
-    overflow-y: hidden;
-    margin-bottom: map-get($spacers, 'sm');
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
-      margin-bottom: 0;
-      flex: 0 0 36.5%; // mimics the grid column width
-    }
-
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      flex: 0 0 auto; //IE 11
-    }
-
-
-    img, .image-placeholder {
-      width: 100%;
-      height: auto;
-    }
-    .image-placeholder {
-      min-height: calculateRem(140px);
-    }
   }
 
-  .numbered-list-placeholder {
-    background-color: #dfe4ea;
+  a, h2, p {
+    color: $ui-dark-secondary-color;
   }
 
-  .headline-description {
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
-      margin-left: map-get($spacers, 'lg');
-    }
-
-    .headline-text,
-    .description-text {
-      color: $ui-dark-secondary-color;
-    }
-
-    .headline-text {
-      font-size: calculateRem(26px);
-      font-weight: bold;
-      line-height: calculateRem(32px);
-      margin-bottom: map-get($spacers, 'xs');
-    }
-
-    .description-text {
-      font-size: calculateRem(16px);
-      line-height: calculateRem(24px);
-      margin-bottom: map-get($spacers, 'xs');
-    }
-
-    .author-date {
-      font-size: calculateRem(10px);
-      line-height: calculateRem(16px);
-
-      .dot-separator {
-        display: inline-block;
-        color: $ui-dark-secondary-color;
-        margin: 0 map-get($spacers, 'xs');
-        position: relative;
-        top: calculateRem(-2px);
-      }
-
-      .story-date {
-        color: $ui-dark-secondary-color;
-        font-size: calculateRem(14px);
-        line-height: calculateRem(16px);
-        display: inline;
-      }
-    }
+  img, .image-placeholder {
+    width: 100%;
+    height: auto;
   }
-
-  .headline-description-spacing {
-    justify-content: flex-start;
+  .image-placeholder {
+    min-height: calculateRem(140px);
   }
 }
 

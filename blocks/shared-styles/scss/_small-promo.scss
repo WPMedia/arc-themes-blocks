@@ -1,5 +1,6 @@
 .small-promo {
   box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+  @include block-margin-bottom;
 
   .sm-promo-headline {
     font-size: calculateRem(16px);

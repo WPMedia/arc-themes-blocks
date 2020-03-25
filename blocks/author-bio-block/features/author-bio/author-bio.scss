@@ -6,7 +6,7 @@
     margin-top: map-get($spacers, 'sm');
   }
 
-  margin-bottom: map-get($spacers, 'md');
+  @include block-margin-bottom;
 }
 .authors {
   display: flex;

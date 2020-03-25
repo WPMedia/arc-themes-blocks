@@ -43,8 +43,8 @@
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
     "lerna": "^3.18.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -52,22 +52,22 @@
     "@wpmedia/byline-block": "file:blocks/byline-block",
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
-    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/header-nav-block": "file:blocks/header-nav-block",
     "@wpmedia/headline-block": "file:blocks/headline-block",
-    "@wpmedia/large-promo-block": "file:blocks/large-promo-block",
     "@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
+    "@wpmedia/large-promo-block": "file:blocks/large-promo-block",
     "@wpmedia/lead-art-block": "file:blocks/lead-art-block",
-    "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
     "@wpmedia/medium-manual-promo-block": "file:blocks/medium-manual-promo-block",
-    "@wpmedia/news-theme-css": "^1.4.4",
+    "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
-    "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
+    "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
     "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
   },
   "jest": {

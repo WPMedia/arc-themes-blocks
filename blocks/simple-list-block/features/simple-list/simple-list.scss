@@ -1,5 +1,8 @@
 .list-container {
-  padding: 0 0 map-get($spacers, 'md') 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  @include block-margin-bottom;
 
   .list-title {
     font-size: calculateRem(20px);

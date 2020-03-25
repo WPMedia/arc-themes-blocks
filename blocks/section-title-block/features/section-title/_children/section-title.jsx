@@ -23,28 +23,30 @@ const SectionTitle = (props) => {
   );
 
   return (
-    <>
-      <StyledTitle
-        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className="section-title"
-      >
-        {content.name}
-      </StyledTitle>
-      <div className="section-container">
-        {
-           !!(content.children && content.children.length > 0)
-           && (content.children.map((child, index) => (
-             <StyledLink
-               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-               href={child._id}
-               key={child.id}
-             >
-               {`${child.name}${(content.children.length !== index + 1 && showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
-             </StyledLink>
-           )))
-        }
-      </div>
-    </>
+    !!(content && content.name) && (
+      <>
+        <StyledTitle
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          className="section-title"
+        >
+          {content.name}
+        </StyledTitle>
+        <div className="section-container">
+          {
+            !!(content.children && content.children.length > 0)
+            && (content.children.map((child, index) => (
+              <StyledLink
+                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                href={child._id}
+                key={child.id}
+              >
+                {`${child.name}${(content.children.length !== index + 1 && showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+              </StyledLink>
+            )))
+          }
+        </div>
+      </>
+    )
   );
 };
 

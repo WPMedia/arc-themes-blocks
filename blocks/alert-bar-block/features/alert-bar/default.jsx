@@ -41,11 +41,8 @@ class AlertBar extends Component {
   }
 
   componentDidMount() {
-    let { refreshIntervals = 30 } = this.state;
+    const { refreshIntervals } = this.state;
     const { arcSite } = this.state;
-    // refreshIntervals should always be at least 30 so it doesn't overwhelm the calls to
-    // the content api.
-    refreshIntervals = (refreshIntervals < 30) ? 30 : refreshIntervals;
 
     // The content source will always return an array with one story in it
     window.setInterval(() => {

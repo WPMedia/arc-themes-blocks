@@ -33,7 +33,7 @@
   font-size: 16px;
   font-weight: bold;
   line-height: 24px;
-  color: $ui-dark-gray;
+  color: $ui-primary-font-color;
   padding: 12px 0 0px 16px;
 }
 
@@ -41,7 +41,7 @@
   font-size: 26px;
   font-weight: bold;
   line-height: 32px;
-  color: $ui-dark-gray;
+  color: $ui-primary-font-color;
   padding: 10px 18px 0 16px;
 }
 
@@ -50,7 +50,7 @@
 
   .dot-separator {
     display: inline-block;
-    color: $ui-dark-gray;
+    color: $ui-primary-font-color;
     font-size: calculateRem(14px);
     line-height: calculateRem(16px);
     margin: 0 map-get($spacers, 'xs');
@@ -60,7 +60,7 @@
   }
 
   .story-date {
-    color: $ui-dark-gray;
+    color: $ui-primary-font-color;
     font-size: calculateRem(14px);
     line-height: calculateRem(16px);
     display: inline;
@@ -115,6 +115,7 @@
       font-size: 16px;
       line-height: 24px;
       color: $ui-primary-font-color;
+      @include link-color-active-hover($ui-primary-font-color);
       font-weight: normal;
     }
   }

@@ -17,6 +17,11 @@
 
   a {
     text-decoration: none;
+    color: $ui-primary-font-color;
+    @include link-color-active-hover($ui-primary-font-color);
+    & * {
+      @include link-color-active-hover($ui-primary-font-color);
+    }
   }
 
   a, h2, p {

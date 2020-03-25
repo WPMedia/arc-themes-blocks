@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/simple-list-block",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -19,8 +19,8 @@
     "directory": "blocks/simple-list-block"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/engine-theme-sdk": "latest",
+    "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
   },
   "scripts": {

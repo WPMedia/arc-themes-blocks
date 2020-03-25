@@ -46,6 +46,8 @@ class AlertBar extends Component {
 
     // The content source will always return an array with one story in it
     window.setInterval(() => {
+      // Use getContent instead of fetchContent because it will otherwise only
+      // return cached contents, as of March 25.
       const { fetched } = this.getContent({
         sourceName: 'alert-bar-collections',
         query: {

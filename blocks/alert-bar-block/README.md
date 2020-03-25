@@ -1,6 +1,7 @@
 # `@wpmedia/alert-bar-block`
+This is the alert bar block that feeds from the `alert-bar-content-source-block`. It will refresh every 30 seconds by default, but the content source will return cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals.
 
-
+Example ANS schema that will be returned from the content source:
 ```js
 { _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
    type: 'collection',

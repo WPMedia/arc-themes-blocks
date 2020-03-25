@@ -25,6 +25,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/video-player-block": "latest",
     "react-oembed-container": "^0.3.0",

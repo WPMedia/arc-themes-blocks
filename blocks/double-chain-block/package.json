@@ -21,6 +21,9 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/double-chain-block"
   },
+  "dependencies": {
+    "@wpmedia/news-theme-css": "latest"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx chains"

@@ -19,6 +19,7 @@
     "directory": "blocks/top-table-list-block"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
     "@wpmedia/engine-theme-sdk": "latest",

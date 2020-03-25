@@ -14,6 +14,7 @@
     "access": "restricted"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "latest",
     "styled-components": "^5.0.1"
   },
   "scripts": {

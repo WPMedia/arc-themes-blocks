@@ -21,6 +21,7 @@
     "directory": "blocks/lead-art-block"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/video-player-block": "latest",
     "styled-components": "^4.4.0"

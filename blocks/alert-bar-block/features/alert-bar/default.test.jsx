@@ -1,73 +1,68 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-
-describe('the links bar feature for the default output type', () => {
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
+describe('the alert bar feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();
   });
 
-  beforeEach(() => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        id: 'testId',
-      })),
-    }));
+  it('should render the alert bar with link and headline if collection returns a story', () => {
+    const { default: AlertBar } = require('./default');
+    const customFields = {
+      refreshIntervals: 30,
+    };
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    function getContent() {
+      return new Promise((resolve) => {
+        resolve(content);
+      });
+    }
+    const fetched = getContent();
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched,
+    });
+    const wrapper = mount(<AlertBar customFields={customFields} arcSite="the-sun" />);
+    expect(wrapper.find('.alert-bar')).toHaveLength(1);
+    expect(wrapper.find('.alert-bar').children().find('a').props().href).toBe('/2019/12/02/baby-panda-born-at-the-zoo/');
+    expect(wrapper.find('.alert-bar').children().find('a').props().children).toBe('This is a test headline');
   });
 
-  it('should be a nav element', () => {
-    const { default: LinksBar } = require('./default');
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [
-          {
-            _id: 'id_1',
-            name: 'test link 1',
-          },
-          {
-            _id: 'id_2',
-            name: 'test link 2',
-          },
-        ],
-      })),
-    }));
-    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
+  it('should not render the alert bar if there is no story', () => {
+    const { default: AlertBar } = require('./default');
+    const customFields = {
+      refreshIntervals: 30,
+    };
+    const content = {};
 
-    expect(wrapper.at(0).type()).toBe('nav');
-  });
-
-  it('should contain the equal number of links between input and output', () => {
-    const { default: LinksBar } = require('./default');
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [
-          {
-            _id: 'id_1',
-            name: 'test link 1',
-          },
-          {
-            _id: 'id_2',
-            name: 'test link 2',
-          },
-        ],
-      })),
-    }));
-    const wrapper = mount(<LinksBar customFields={{ hierarchy: 'links' }} />);
-
-    expect(wrapper.find('span.links-menu')).toHaveLength(2);
-  });
-
-  it('should have no menu item if no content is returned', () => {
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [],
-      })),
-    }));
-    const { default: LinksBar } = require('./default');
-    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
-
-    expect(wrapper.find('nav > span')).toHaveLength(0);
+    function getContent() {
+      return new Promise((resolve) => {
+        resolve(content);
+      });
+    }
+    const fetched = getContent();
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched,
+    });
+    const wrapper = mount(<AlertBar customFields={customFields} arcSite="the-sun" />);
+    expect(wrapper.find('.alert-bar')).toHaveLength(0);
   });
 });

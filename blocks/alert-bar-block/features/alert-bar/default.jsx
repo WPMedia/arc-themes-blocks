@@ -33,7 +33,7 @@ class AlertBar extends Component {
       content: cached,
       arcSite,
       refreshIntervals,
-      visible: true,
+      visible: false,
     };
     fetched.then((content) => {
       this.setState({ content });
@@ -65,10 +65,13 @@ class AlertBar extends Component {
     const {
       content = {},
       arcSite = '',
-      visible = false,
     } = this.state;
-
+    let { visible } = this.state;
     const { content_elements: elements = [] } = content;
+    if (content && content.content_elements && content.content_elements.length > 0) {
+      visible = true;
+    }
+
     const article = elements[0] ? elements[0] : {};
     const { websites = {}, headlines = {} } = article;
     const { website_url: websiteURL = '' } = websites[arcSite] ? websites[arcSite] : {};

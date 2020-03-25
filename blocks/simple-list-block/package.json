@@ -19,6 +19,7 @@
     "directory": "blocks/simple-list-block"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.6",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "styled-components": "^4.4.0"
   },

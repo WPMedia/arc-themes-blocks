@@ -25,6 +25,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.6",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
     "@wpmedia/shared-styles": "^0.0.8",
     "styled-components": "^4.4.0"

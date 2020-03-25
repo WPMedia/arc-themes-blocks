@@ -47,7 +47,7 @@
     "react-dom": "^16.13.0"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "^2.0.5",
+    "@wpmedia/news-theme-css": "^2.0.6",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
     "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
     "@wpmedia/byline-block": "file:blocks/byline-block",

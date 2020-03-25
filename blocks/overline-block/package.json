@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
+  "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.6"
+  },
   "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
 }

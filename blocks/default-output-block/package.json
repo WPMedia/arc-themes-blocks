@@ -26,7 +26,7 @@
     "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "^2.0.5",
+    "@wpmedia/news-theme-css": "^2.0.6",
     "dom-parser": "^0.1.6",
     "styled-components": "^4.4.0",
     "thumbor-lite": "^0.1.6"

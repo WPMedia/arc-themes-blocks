@@ -22,5 +22,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
+  "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.6"
+  },
   "gitHead": "15273ca799485726a1a83c47b34e02b5e24d9f9d"
 }

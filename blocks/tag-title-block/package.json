@@ -22,6 +22,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
+  "dependencies": {
+    "@wpmedia/news-theme-css": "^2.0.6"
+  },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },

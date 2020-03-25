@@ -1,67 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { shallow } from 'enzyme';
-
-const mockNestedChildren = {
-  _id: '/',
-  name: 'Section Title',
-  children: [
-    {
-      _id: '/news',
-      _website: 'The Washington Post',
-      privilege: 'News',
-      name: 'News',
-      order: {
-        default: 1002,
-      },
-      ancestors: {
-        default: ['/'],
-      },
-      inactive: false,
-      children: [
-        {
-          _id: '/sports-news',
-          _website: 'The Washington Post',
-          privilege: 'News',
-          name: 'Sports',
-          order: {
-            default: 1002,
-          },
-          ancestors: {
-            default: ['/'],
-          },
-          inactive: false,
-        },
-        {
-          _id: '/political-news',
-          _website: 'The Washington Post',
-          privilege: 'News',
-          name: 'Politics',
-          order: {
-            default: 1002,
-          },
-          ancestors: {
-            default: ['/'],
-          },
-          inactive: false,
-        },
-        {
-          _id: '/global-news',
-          _website: 'The Washington Post',
-          privilege: 'News',
-          name: 'Global',
-          order: {
-            default: 1002,
-          },
-          ancestors: {
-            default: ['/'],
-          },
-          inactive: false,
-        },
-      ],
-    },
-  ],
-};
+import { mockNestedChildren } from './mock-data';
 
 describe('the global content section title', () => {
   describe('when there is an array of children present', () => {

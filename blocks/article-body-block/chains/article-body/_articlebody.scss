@@ -3,9 +3,12 @@
 }
 
 .article-body-wrapper {
-  color: $ui-dark-secondary-color;
+  color: $ui-primary-font-color;
   margin-top: map-get($spacers, 'lg');
 
+  a, a *{
+    @include link-color-active-hover($ui-primary-font-color);
+  }
 
   & > h1, & > h2, & > h3, & > h4, & > h5, & > h6 {
     @include block-margin-bottom;
@@ -95,10 +98,10 @@
     @include block-margin-bottom;
 
     padding: map-get($spacers, 'sm') 0;
-    box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+    box-shadow: inset 0 -1px 0 0 $ui-light-gray;
 
     div, p {
-      color: $ui-medium-primary-color;
+      color: $ui-medium-gray;
       font-size: calculateRem(18px);
       line-height: calculateRem(24px);
       font-style: italic;
@@ -123,11 +126,11 @@
     table {
       width: 100%;
       color: $ui-primary-font-color;
-      border: 1px solid #C8C8C8;
+      border: 1px solid $border-rule-color;
       border-collapse: collapse;
 
       thead {
-        border: 2px solid #C8C8C8;
+        border: 2px solid $border-rule-color;
         background-color: #EEEEEE;
       }
 
@@ -136,7 +139,7 @@
       }
 
       th, td {
-        border: 1px solid #C8C8C8;
+        border: 1px solid $border-rule-color;
         padding: map-get($spacers, 'xxs') map-get($spacers, 'xs');
         text-align: center;
       }
@@ -197,7 +200,7 @@
       }
     }
 
-    box-shadow: inset 0 -5px 0 0 $ui-light-secondary-color, inset 0 5px 0 0 $ui-light-secondary-color;
+    box-shadow: inset 0 -5px 0 0 $ui-light-gray, inset 0 5px 0 0 $ui-light-gray;
   }
 
   blockquote {
@@ -231,14 +234,14 @@
       font-weight: normal;
       display: block;
       text-align: left;
-      color: #191919;
+      color: $ui-primary-font-color;
       font-size: calculateRem(16px);
       line-height: calculateRem(24px);
       font-style: normal;
     }
   }
 
-  .interstitial_link {
+  .interstitial-link {
     font-style: italic;
     display: block;
     margin: 0 0 map-get($spacers, 'md');
@@ -246,8 +249,14 @@
       margin-bottom: map-get($spacers, 'lg');
     }
     a {
-      color: $primary-color;
-      text-decoration: underline;
+      color: $ui-primary-font-color;
+      text-decoration: none;
+      border-bottom: 1px solid rgba($link-color, 0.5);
+
+      &:active, &:hover{
+        color: $link-color;
+        border-bottom: 1px solid rgba($link-color, 1.0);
+      }
     }
 
   }

@@ -185,7 +185,7 @@ to the private NPM repo. Reach out to a team member to get this.
 
 `git checkout master`
 
-`git fetch`
+`git fetch --all`
 
 `git pull origin master`
 

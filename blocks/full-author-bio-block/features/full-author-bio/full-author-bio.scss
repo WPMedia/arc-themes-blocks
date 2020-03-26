@@ -49,8 +49,8 @@
   text-align: center;
   margin-top: map-get($spacers, 'xs');
   padding: map-get($spacers, 'md') 0 map-get($spacers, 'md') 0;
-  border-top: 1px $ui-medium-light-secondary-color solid;
-  border-bottom: 1px $ui-medium-light-secondary-color solid;
+  border-top: 1px solid $border-rule-color;
+  border-bottom: 1px solid $border-rule-color;
 }
 
 .social-items {
@@ -82,7 +82,7 @@
     margin: 0 auto;
 
     path {
-      fill: rgba($ui-medium-primary-color,1);
+      fill: rgba($ui-medium-gray,1);
       transition: all 0.2s ease-in-out;
     }
   }
@@ -91,7 +91,7 @@
     svg {
 
       path {
-        fill: rgba($ui-medium-primary-color,0.8);
+        fill: rgba($ui-medium-gray,0.8);
       }
     }
   }

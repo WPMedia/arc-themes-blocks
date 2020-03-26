@@ -1,5 +1,6 @@
 a.overline {
     color: $ui-primary-font-color;
+    @include link-color-active-hover($ui-primary-font-color);
     display: inline-block;
     padding-bottom: map-get($spacers, 'sm');
     font-size: calculateRem(20px);

@@ -24,6 +24,7 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     overlineText = '',
     overlineURL = '',
+    smallStoryCounter,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -81,6 +82,7 @@ const ConditionalStoryItem = (props) => {
           imageURL={imageURL}
           id={id}
           constructedURL={constructedURL}
+          smallStoryCounter={smallStoryCounter}
         />
       );
     default:

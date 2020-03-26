@@ -15,6 +15,7 @@ import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
+import './default.scss';
 import StoryItemContainer from './_children/story-item-container';
 // styles end
 
@@ -62,6 +63,8 @@ const TopTableList = (props) => {
     ...new Array(small).fill(SMALL),
   ];
 
+  let smallStoryCounter = 0;
+
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
     query: contentConfigValues,
@@ -71,6 +74,9 @@ const TopTableList = (props) => {
     <div key={id} className="top-table-list-container">
       {
         contentElements.map(unserializeStory).map((itemObject, index) => {
+          if (storyTypeArray[index] === SMALL) {
+            smallStoryCounter += 1;
+          }
           const {
             id: itemId,
             itemTitle,
@@ -93,6 +99,7 @@ const TopTableList = (props) => {
               websiteURL={websiteURL}
               element={element}
               storySize={storyTypeArray[index]}
+              smallStoryCounter={smallStoryCounter}
               primaryFont={primaryFont}
               key={itemId}
             />

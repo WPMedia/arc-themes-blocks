@@ -4,13 +4,15 @@ import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle, imageURL, id, primaryFont, constructedURL,
+    itemTitle, imageURL, id, primaryFont, constructedURL, smallStoryCounter,
   } = props;
+  console.error('Here is smallStoryCounter', smallStoryCounter);
+
   return (
-    <article key={id} className="container-fluid small-promo">
+    <article key={id} className={`container-fluid small-promo ${(smallStoryCounter % 2) !== 0 ? 'first' : 'second'} `}>
       <div className="row sm-promo-padding-btm">
         {itemTitle !== '' ? (
-          <div className="col-sm-xl-8">
+          <div className="col-sm-8 col-md-xl-8">
             <a href={constructedURL} title={itemTitle} className="sm-promo-headline">
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
@@ -18,7 +20,7 @@ const ItemTitleWithRightImage = (props) => {
             </a>
           </div>
         ) : null}
-        <div className="col-sm-xl-4">
+        <div className="col-sm-4 col-md-xl-4">
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image

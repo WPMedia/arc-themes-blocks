@@ -11,9 +11,9 @@ jest.mock('prop-types', () => ({
   contentConfig: () => {},
 }));
 
-describe('the gallery feature block', () => {
+describe('the section title feature block', () => {
   describe('when it is configured to inherit global content', () => {
-    it('should render the global content gallery', () => {
+    it('should render the global content section title', () => {
       const { default: SectionTitleContainer } = require('./default');
       const wrapper = shallow(
         <SectionTitleContainer customFields={{ inheritGlobalContent: true }} />,
@@ -23,7 +23,7 @@ describe('the gallery feature block', () => {
   });
 
   describe('when it is configured to NOT inherit global content', () => {
-    it('should render the global content gallery', () => {
+    it('should render the global content section title', () => {
       const { default: SectionTitleContainer } = require('./default');
 
       const wrapper = shallow(
@@ -34,7 +34,7 @@ describe('the gallery feature block', () => {
       expect(wrapper.is('CustomContentSectionTitle')).toBeTruthy();
     });
 
-    it('should pass the content config for fetching the gallery', () => {
+    it('should pass the content config for fetching the section title', () => {
       const { default: SectionTitleContainer } = require('./default');
       const wrapper = shallow(
         <SectionTitleContainer
@@ -45,16 +45,16 @@ describe('the gallery feature block', () => {
     });
   });
 
-  describe('when customfields is empty', () => {
-    it('should render the global content gallery', () => {
+  describe('when customFields is empty', () => {
+    it('should render the global content section title', () => {
       const { default: SectionTitleContainer } = require('./default');
       const wrapper = shallow(<SectionTitleContainer customFields={{}} />);
       expect(wrapper.is('GlobalContentSectionTitle')).toBeTruthy();
     });
   });
 
-  describe('when customfields is missing', () => {
-    it('should render the global content gallery', () => {
+  describe('when customFields is missing', () => {
+    it('should render the global content section title', () => {
       const { default: SectionTitleContainer } = require('./default');
       const wrapper = shallow(<SectionTitleContainer customFields={undefined} />);
       expect(wrapper.is('GlobalContentSectionTitle')).toBeTruthy();

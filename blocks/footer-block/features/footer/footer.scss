@@ -48,7 +48,7 @@ footer {
   .footer-row {
     display: table;
     width: 100%;
-    border-spacing: map-get($spacers, 'xs');
+    padding: map-get($spacers, 'xs') 0;
   }
 
   .social-column {
@@ -80,15 +80,26 @@ footer {
     border-radius: calculateRem(5px);
     border: 1px solid $primary-color;
     margin-left: -(map-get($spacers, 'xs'));
-    > a {
+  
+    a {
       align-self: center;
       display: inline-block;
       flex: auto;
-      padding: map-get($spacers, 'xs') map-get($spacers, 'xs') 0 map-get($spacers, 'xs');
+      padding: map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs');
       border-right: 1px solid $primary-color;
 
       &:last-child {
         border-right: none;
+      }
+
+      svg path {
+        fill: $primary-color;
+      }
+
+      &:hover {
+        svg path {
+          fill: $primary-color;
+        }
       }
     }
   }

@@ -6,8 +6,6 @@ const ItemTitleWithRightImage = (props) => {
   const {
     itemTitle, imageURL, id, primaryFont, constructedURL, smallStoryCounter,
   } = props;
-  console.error('Here is smallStoryCounter', smallStoryCounter);
-
   return (
     <article key={id} className={`container-fluid small-promo ${(smallStoryCounter % 2) !== 0 ? 'first' : 'second'} `}>
       <div className="row sm-promo-padding-btm">

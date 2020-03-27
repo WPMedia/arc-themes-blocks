@@ -7,6 +7,7 @@
   align-items: center;
   align-content: center;
   box-shadow: inset 0 -1px 0 0 #B8C1CB, inset 0 1px 0 0 #B8C1CB;
+  @include block-margin-bottom;
 }
 
 .tags {
@@ -21,7 +22,10 @@
   text-decoration: none;
   color: #fff;
   padding: 0 0.9375rem;
-
+  &:hover, &:active{
+    color:#fff;
+    background-color: lighten($primary-color, 20%);;
+  }
   @media screen and (min-width: map-get($grid-breakpoints, 'md')){
     line-height: .875rem;
   }

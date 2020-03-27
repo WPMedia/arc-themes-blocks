@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/search-content-source-block",
-  "version": "0.1.0",
+  "version": "1.0.3",
   "description": "Fusion News Theme search API content source block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -10,10 +10,17 @@
     "sources"
   ],
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
     "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/search-content-source-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
-  }
+  },
+  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
 }

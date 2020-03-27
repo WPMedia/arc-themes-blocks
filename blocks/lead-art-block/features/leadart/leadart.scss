@@ -3,7 +3,10 @@
     height: auto;
     position: relative;
     display: block;
-    margin: 0 0 map-get($spacers, 'lg');
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    @include block-margin-bottom;
 
     figcaption {
         margin-top:map-get($spacers, 'xs');
@@ -20,9 +23,6 @@
         }
     }
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-        margin-bottom: map-get($spacers, 'md');
-    }
 
     .btn-full-screen{
         background-color: transparent;
@@ -37,7 +37,7 @@
         svg{
             height: 1rem;
             width: 1rem;
-            fill: $ui-medium-primary-color;
+            fill: $ui-medium-gray;
             margin-right: 4px;
         }
     }

@@ -30,8 +30,8 @@ html, body {
 
   .fullwidth-section {
     padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
-    border-bottom: 1px $ui-medium-light-secondary-color solid;
-    border-top: 1px $ui-medium-light-secondary-color solid;
+    border-bottom: 1px solid $border-rule-color;
+    border-top: 1px solid $border-rule-color;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: map-get($spacers, 'lg') 0;
@@ -40,9 +40,9 @@ html, body {
 
   .left-article-section {
     padding: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       padding: 0 map-get($spacers, 'lg') 0 0;
-      border-right: 1px $ui-medium-light-secondary-color solid;
+      border-right: 1px solid $border-rule-color;
     }
   }
 

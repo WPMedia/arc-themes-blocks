@@ -178,6 +178,33 @@ For more information, see the repo's read me:
 Note: When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.
 
+#### How To Publish 
+
+1. Get approval for your pr on your feature branch
+2. Make sure you're up to date with the latest master
+
+`git checkout master`
+
+`git fetch --all`
+
+`git pull origin master`
+
+`git checkout {feature branch name}`
+
+`git merge master`
+
+3. Check what's from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
+
+`npx lerna changed`
+
+4. Publish. Make sure to iterate through versions as necessary. We're not planning on following independent versioning. You should always be using the latest dependencies of our own blocks (eg, using "latest", not a particular version of own of our blocks)
+
+`npx lerna publish`
+
+5. Commit the version bumps. 
+6. Push the update to your feature branch
+7. Merge feature branch into master
+
 ### fusion-news-theme
 
 
@@ -350,3 +377,76 @@ so Fusion will now to exclude it from the npm install procedures.
     
 7) The major disadvantage of the classic development environment is that every change in either `fusion-news-theme-blocks`
 or `engine-theme-sdk` will require you stop and restart Fusion.
+
+
+## Troubleshooting Dependencies
+
+### Finding Your Bearings
+
+#### Check you're in top-level directory
+`pwd`
+-> /Users/user/sites/fusion-news-theme-blocks
+
+#### Ensure you have latest version
+`git branch`
+-> should highlight with * master
+
+if not,
+`git checkout master`
+
+fetch latest
+`git fetch`
+
+pull those, updating your files
+`git pull`
+
+### Clearing House 
+
+Ensure all node modules are cleared: 
+
+#### Delete lingering top-level modules
+`rm -rf node_modules/`
+- should be a bit of a delay if they're there
+- also will autocomplete if they're there and you press tab after `nod`
+
+#### Clear out blocks level deps
+
+`npx lerna clean`
+- Deletes blocks' node modules
+- Press y to confirm removing node modules
+
+#### Install top-level
+`npm i`
+- Installs from top-level `package.json`
+
+#### **DOM-PARSER NOT FOUND**
+- That's something in default output type (so SangHee) that needs to be installed
+`cd blocks/default-output-block`
+`npm i`
+- installs dom parser and others required to run using linking workflow
+
+### See what's there
+
+#### Check top-level deps
+
+`npm ls react`
+- Checks which version of react installed
+- if there's issues with intersections, you'll see it there
+- Search github for the version error, usually common 
+
+### Check published requirements
+`npm view @wpmedia/video-player-block`
+- Will show address and version
+
+`npm view @wpmedia/video-player-block` 
+- Will show latest version, more concise
+
+### Open Questions
+
+- Why do we need top-level local file dependencies at all
+  - Hoisting up the dependencies is something lerna does, but that yarn workspaces could help
+- What license.md should we have?
+- What about versioning block dependencies? Using `latest` may just be easiest for depending on other blocks
+
+### Resources 
+https://explainshell.com/

@@ -49,7 +49,6 @@ class StoryItemContainer extends Component {
       element,
       storySize,
       primaryFont,
-      smallStoryCounter,
     } = this.props;
 
     const constructedURL = this.constructHref();
@@ -71,7 +70,6 @@ class StoryItemContainer extends Component {
           element={element}
           overlineText={overlineText}
           overlineURL={overlineURL}
-          smallStoryCounter={smallStoryCounter}
         />
       </>
     );

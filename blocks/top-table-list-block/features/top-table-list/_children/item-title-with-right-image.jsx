@@ -4,10 +4,10 @@ import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle, imageURL, id, primaryFont, constructedURL, smallStoryCounter,
+    itemTitle, imageURL, id, primaryFont, constructedURL,
   } = props;
   return (
-    <article key={id} className={`container-fluid small-promo ${(smallStoryCounter % 2) !== 0 ? 'first' : 'second'} `}>
+    <article key={id} className="container-fluid small-promo">
       <div className="row sm-promo-padding-btm">
         {itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">

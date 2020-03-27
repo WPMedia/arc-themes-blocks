@@ -136,6 +136,10 @@ class ResultsList extends Component {
                 >
                   {extractImage(element.promo_items) ? (
                     <Image
+                      storyObject={element}
+                      // could proabbly deduce this from below
+                      targetAspectRatio="4:3"
+                      // probably won't need this from url v
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}

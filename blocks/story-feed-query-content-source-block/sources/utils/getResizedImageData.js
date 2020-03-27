@@ -121,6 +121,7 @@ const resizePromoItems = (promoItems, breakpoints, resizer) => {
     if ((key === 'type' && promoItem === 'image') || key === 'url') {
       output.resized_params = resizeImage(promoItems, breakpoints, resizer);
       output.url = promoItems.url;
+      output.type = 'image';
     } else {
       output[key] = promoItem;
     }

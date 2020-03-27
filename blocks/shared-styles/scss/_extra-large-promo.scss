@@ -1,13 +1,15 @@
 .xl-large-promo {
-  box-shadow: inset 0 -1px 0 0 $ui-light-secondary-color;
+  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
+  color: $ui-primary-font-color;
   @include block-margin-bottom;
 
   .xl-promo-padding-bottom {
     padding-bottom: map-get($spacers, 'xs');
   }
-
-  .overline {
+  a{
     color: $ui-primary-font-color;
+  }
+  .overline {
     display: block;
     width:100%;
     text-align: center;
@@ -22,7 +24,6 @@
     text-align:center;
     font-size: calculateRem(32px);
     line-height: calculateRem(36px);
-    color: $ui-primary-font-color;
     font-weight: bold;
     text-decoration: none;
     margin-bottom: map-get($spacers, 'md');
@@ -37,7 +38,6 @@
   p{
     font-size: calculateRem(16px);
     line-height: calculateRem(32px);
-    color: $ui-primary-font-color;
     margin-top: map-get($spacers, 'xs');
     margin-bottom: map-get($spacers, 'xs');
 
@@ -54,7 +54,6 @@
 
   .article-meta {
     span, .date{
-      color: $ui-primary-font-color;
       font-size: calculateRem(14px);
       line-height: calculateRem(14px);
 

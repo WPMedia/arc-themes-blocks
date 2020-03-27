@@ -10,7 +10,7 @@ const ItemTitleWithRightImage = (props) => {
     <article key={id} className="container-fluid small-promo">
       <div className="row sm-promo-padding-btm">
         {itemTitle !== '' ? (
-          <div className="col-sm-xl-8">
+          <div className="col-sm-8 col-md-xl-8">
             <a href={constructedURL} title={itemTitle} className="sm-promo-headline">
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
@@ -18,7 +18,7 @@ const ItemTitleWithRightImage = (props) => {
             </a>
           </div>
         ) : null}
-        <div className="col-sm-xl-4">
+        <div className="col-sm-4 col-md-xl-4">
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image

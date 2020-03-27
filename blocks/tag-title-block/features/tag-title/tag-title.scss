@@ -4,7 +4,7 @@ h1.tag-name {
 }
 
 p.tag-description {
-    color: $ui-dark-primary-color;
+    color: $ui-dark-gray;
     font-size: calculateRem(16px);
     margin-bottom: map-get($spacers, 'xs');
 }

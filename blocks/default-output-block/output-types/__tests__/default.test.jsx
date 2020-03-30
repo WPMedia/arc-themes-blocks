@@ -173,4 +173,22 @@ describe('the default output type', () => {
       expect(wrapper.find("meta[name='robots']").length).toBe(0);
     });
   });
+
+  describe('when an author page type is provided', () => {
+    it('should have a title tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('author')} />);
+      expect(wrapper.find('title').childAt(0).text()).toEqual('author - The Sun');
+    });
+
+    it('should have an author description meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('author')} />);
+      expect(wrapper.find("meta[name='description']").props().content).toBe('author');
+    });
+
+
+    it('should have an author og:title meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('author')} />);
+      expect(wrapper.find("meta[property='og:title']").props().content).toBe('author - The Sun');
+    });
+  });
 });

@@ -99,4 +99,41 @@ describe('the default output type', () => {
       expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
     });
   });
+
+  describe('when the a video page type is provided', () => {
+    it('should have a title tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find('title').childAt(0).text()).toEqual('video – The Sun');
+    });
+
+    it('should have a video description meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[name='description']").props().content).toBe('video');
+    });
+
+    it('should have a video keywords meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[name='keywords']").props().content).toBe('video');
+    });
+
+    it('should have a video og:title meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[property='og:title']").props().content).toBe('video');
+    });
+
+    it('should have a video og:image meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/video');
+    });
+
+    it('should have a video og:image:alt meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('video');
+    });
+
+    it('should not have an robots meta tag', () => {
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
+      expect(wrapper.find("meta[name='robots']").length).toBe(0);
+    });
+  });
 });

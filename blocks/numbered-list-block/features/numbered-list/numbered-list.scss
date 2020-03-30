@@ -41,6 +41,7 @@
     text-decoration: none;
     margin-right: calculateRem(16px);
     color: $ui-primary-font-color;
+    @include link-color-active-hover($ui-primary-font-color);
 
     .headline-text {
       font-size: calculateRem(16px);

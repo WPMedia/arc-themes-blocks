@@ -26,6 +26,8 @@
   img, .image-placeholder {
     width: 100%;
     height: auto;
+    // doesn't work on ie 11, looks like it'll stretch past natural width
+    max-width: max-content;
   }
   .image-placeholder {
     min-height: calculateRem(140px);

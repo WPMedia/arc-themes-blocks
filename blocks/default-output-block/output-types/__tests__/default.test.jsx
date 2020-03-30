@@ -7,6 +7,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 import DefaultOutputType from '../default';
 
 jest.mock('fusion:context', () => ({
@@ -152,17 +153,94 @@ describe('the default output type', () => {
   });
 
   describe('when an author page type is provided', () => {
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('author')} />);
-    it('should have a title tag', () => {
-      expect(wrapper.find('title').childAt(0).text()).toEqual('author - The Sun');
+    describe('when global content is provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'author';
+        }
+        return null;
+      };
+
+      afterEach(() => {
+        jest.resetModules();
+      });
+
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({
+          globalContent: {
+            authors: [
+              {
+                byline: 'John Doe',
+                bio: 'John Doe is an author',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        }));
+      });
+
+      it('should have a title tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find('title').childAt(0).text()).toEqual('John Doe - The Sun');
+      });
+
+      it('should have an author description meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='description']").props().content).toBe('John Doe is an author');
+      });
+
+      it('should have an author og:title meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('John Doe - The Sun');
+      });
     });
 
-    it('should have an author description meta tag', () => {
-      expect(wrapper.find("meta[name='description']").props().content).toBe('author');
+    describe('when global content is not provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'author';
+        }
+        return null;
+      };
+
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('The Sun');
+      });
+
+      it('should have an author og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
+      });
     });
 
-    it('should have an author og:title meta tag', () => {
-      expect(wrapper.find("meta[property='og:title']").props().content).toBe('author - The Sun');
+    describe('when custom tags are provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'author';
+        }
+        if (prop === 'description') {
+          return 'this is a custom description';
+        }
+        if (prop === 'og:title') {
+          return 'this is a custom og:title';
+        }
+        return null;
+      };
+
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom og:title - The Sun');
+      });
+
+      it('should have an author description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a custom description');
+      });
+
+      it('should have an author og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title - The Sun');
+      });
     });
   });
 

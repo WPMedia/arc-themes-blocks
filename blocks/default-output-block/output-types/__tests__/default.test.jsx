@@ -161,7 +161,6 @@ describe('the default output type', () => {
       expect(wrapper.find("meta[name='description']").props().content).toBe('author');
     });
 
-
     it('should have an author og:title meta tag', () => {
       expect(wrapper.find("meta[property='og:title']").props().content).toBe('author - The Sun');
     });
@@ -177,9 +176,23 @@ describe('the default output type', () => {
       expect(wrapper.find("meta[name='description']").props().content).toBe('tag');
     });
 
-
     it('should have an author og:title meta tag', () => {
       expect(wrapper.find("meta[property='og:title']").props().content).toBe('tag - The Sun');
+    });
+  });
+
+  describe('renders twitter tags', () => {
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('tag')} />);
+    it('should have a twitter:card meta tag', () => {
+      expect(wrapper.find("meta[property='og:site_name']").props().content).toBe('The Sun');
+    });
+
+    it('should have a twitter:site meta tag', () => {
+      expect(wrapper.find("meta[property='twitter:site']").props().content).toBe('@https://www.twitter.com/the-sun');
+    });
+
+    it('should have a twitter:card meta tag', () => {
+      expect(wrapper.find("meta[property='twitter:card']").props().content).toBe('summary_large_image');
     });
   });
 });

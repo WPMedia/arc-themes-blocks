@@ -23,23 +23,28 @@ const DEFAULT_BREAKPOINTS_ARRAY = [
     device: 'desktop',
     width: 992,
   },
-  {
-    device: 'widescreen',
-    width: 1200,
-  },
 ];
 
+// just targeting results list
 const ASPECT_RATIOS = [
-  '1:1',
   '3:2',
   '4:3',
-  '16:9',
+
+];
+
+const IMAGE_WIDTHS = [
+  158,
+  274,
 ];
 
 describe('get resized image data helper on the server-side', () => {
   it('returns data passed in if window is undefined', () => {
     getProperties.mockImplementation(() => (
-      { breakpoints: DEFAULT_BREAKPOINTS_ARRAY, aspectRatios: ASPECT_RATIOS }));
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+      }));
 
     const dataWithResizedImages = getResizedImageData(mockStoryFeedData);
 
@@ -49,11 +54,16 @@ describe('get resized image data helper on the server-side', () => {
       .basic
       .resized_params;
 
-    const flattenedObjectBreakpoints = Object.assign({}, ...resizedParams);
+    const paramKeys = Object.keys(resizedParams);
 
-    const paramKeys = Object.keys(flattenedObjectBreakpoints);
+    const filterValues = Object.values(resizedParams);
 
-    const filterValues = Object.values(flattenedObjectBreakpoints);
+    // if the same resizer key is used this won't change
+    expect(filterValues).toEqual([
+      '/B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:format(jpg):quality(70)/',
+      '/RwaE87wvO3wFs17iLXhecTl2hhQ=filters:format(jpg):quality(70)/',
+      '/CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:format(jpg):quality(70)/',
+      '/6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:format(jpg):quality(70)/']);
 
     // make sure none of them undefined
     // {
@@ -65,6 +75,11 @@ describe('get resized image data helper on the server-side', () => {
     const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
     expect(allValidFilterValues).toEqual(true);
 
-    expect(paramKeys).toEqual(['420x420', '420x280', '420x315', '420x236', '768x768', '768x512', '768x576', '768x432', '992x992', '992x661', '992x744', '992x558', '1200x1200', '1200x800', '1200x900', '1200x675', '420x420|mobile', '420x280|mobile', '420x315|mobile', '420x236|mobile']);
+    expect(paramKeys).toEqual([
+      '158x105',
+      '158x119',
+      '274x183',
+      '274x206',
+    ]);
   });
 });

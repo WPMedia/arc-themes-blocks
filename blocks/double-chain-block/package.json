@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/double-chain-block",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Double Chain – Arc Block",
   "author": "Luke Mason <luke.mason@washpost.com>",
   "contributors": [
@@ -20,6 +20,9 @@
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/double-chain-block"
+  },
+  "dependencies": {
+    "@wpmedia/news-theme-css": "latest"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

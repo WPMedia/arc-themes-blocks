@@ -15,6 +15,7 @@ import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
+import './default.scss';
 import StoryItemContainer from './_children/story-item-container';
 // styles end
 

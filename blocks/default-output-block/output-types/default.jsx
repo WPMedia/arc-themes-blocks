@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { playerRoot, videoOrg } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import './default.scss';
 
 const googleAnalytics = () => {
   if (typeof window === 'undefined') {

@@ -1,166 +1,63 @@
+// eslint-disable-next-line max-classes-per-file
 import React from 'react';
-import { mount } from 'enzyme';
-import { useFusionContext } from 'fusion:context';
-import SectionTitle from './default';
+import { shallow } from 'enzyme';
 
-const mockTwoSection = {
-  arcSite: 'site',
-  globalContent: {
-    _id: '/',
-    name: 'Section Title',
-    children: [
-      {
-        _id: '/news',
-        _website: 'The Washington Post',
-        privilege: 'News',
-        name: 'News',
-        order: {
-          default: 1002,
-        },
-        ancestors: {
-          default: ['/'],
-        },
-        inactive: false,
-        children: [],
-      },
-      {
-        _id: '/sports',
-        _website: 'The Washington Post',
-        privilege: 'Sports',
-        name: 'Sports',
-        order: {
-          default: 1002,
-        },
-        ancestors: {
-          default: ['/'],
-        },
-        inactive: false,
-        children: [],
-      },
-    ],
-  },
-};
-
-const mockOneSection = {
-  arcSite: 'site',
-  globalContent: {
-    _id: '/',
-    name: 'Section Title',
-    children: [
-      {
-        _id: '/news',
-        _website: 'The Washington Post',
-        privilege: 'News',
-        name: 'News',
-        order: {
-          default: 1002,
-        },
-        ancestors: {
-          default: ['/'],
-        },
-        inactive: false,
-        children: [],
-      },
-    ],
-  },
-};
-
-const mockNoChildren = {
-  arcSite: 'site',
-  globalContent: {
-    _id: '/',
-    name: 'Section Title',
-    children: [],
-  },
-};
-
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => mockTwoSection),
+// two classes for testing purposes
+jest.mock('./_children/global-content', () => class GlobalContentSectionTitle {});
+jest.mock('./_children/custom-content', () => class CustomContentSectionTitle {});
+jest.mock('prop-types', () => ({
+  bool: true,
+  shape: () => {},
+  contentConfig: () => {},
 }));
 
-describe('the section title block', () => {
-  describe('when content from globalContent is present', () => {
-    it('should render a title', () => {
-      const wrapper = mount(<SectionTitle />);
-
-      expect(wrapper.find('h1')).toHaveClassName('section-title');
-    });
-
-    it('should set a styled component class on the rendered h1', () => {
-      const wrapper = mount(<SectionTitle />);
-
-      expect(wrapper.find('h1').hasClass(/sc-/)).toBe(true);
-    });
-
-    it('should render sub-section links', () => {
-      const wrapper = mount(<SectionTitle />);
-
-      expect(wrapper.find('.section-container').length).toEqual(1);
-      expect(wrapper.find('a').length).toEqual(2);
-    });
-
-    describe('the sub-section links', () => {
-      it('should render the correct section name', () => {
-        const wrapper = mount(<SectionTitle />);
-
-        expect(wrapper.find('.section-container').childAt(0).text()).toEqual('News    •    ');
-      });
-
-      it('should have the correct href', () => {
-        const wrapper = mount(<SectionTitle />);
-
-        expect(wrapper.find('.section-container').childAt(0).prop('href')).toEqual('/news');
-      });
-
-      it('should have a last element without a separator', () => {
-        const wrapper = mount(<SectionTitle />);
-
-        expect(wrapper.find('.section-container').childAt(1).text()).toEqual('Sports');
-      });
-
-      it('should set a styled component class on the rendered a', () => {
-        const wrapper = mount(<SectionTitle />);
-
-        expect(wrapper.find('a').at(1).hasClass(/sc-/)).toBe(true);
-      });
-
-      describe('when there is only one sub-section', () => {
-        beforeEach(() => {
-          useFusionContext.mockImplementation(() => mockOneSection);
-        });
-
-        it('should not have a separator', () => {
-          const wrapper = mount(<SectionTitle />);
-
-          expect(wrapper.find('.section-container').childAt(0).text()).toEqual('News');
-        });
-      });
-
-      describe('when there are no children in content', () => {
-        beforeEach(() => {
-          useFusionContext.mockImplementation(() => mockNoChildren);
-        });
-
-        it('should not render any children', () => {
-          const wrapper = mount(<SectionTitle />);
-
-          expect(wrapper.find('a').length).toEqual(0);
-        });
-      });
+describe('the section title feature block', () => {
+  describe('when it is configured to inherit global content', () => {
+    it('should render the global content section title', () => {
+      const { default: SectionTitleContainer } = require('./default');
+      const wrapper = shallow(
+        <SectionTitleContainer customFields={{ inheritGlobalContent: true }} />,
+      );
+      expect(wrapper.is('GlobalContentSectionTitle')).toBeTruthy();
     });
   });
 
+  describe('when it is configured to NOT inherit global content', () => {
+    it('should render the global content section title', () => {
+      const { default: SectionTitleContainer } = require('./default');
 
-  describe('when content from globalContent is NOT present', () => {
-    beforeEach(() => {
-      useFusionContext.mockImplementation(() => ({}));
+      const wrapper = shallow(
+        <SectionTitleContainer
+          customFields={{ inheritGlobalContent: false, sectionContentConfig: {} }}
+        />,
+      );
+      expect(wrapper.is('CustomContentSectionTitle')).toBeTruthy();
     });
 
-    it('should not render anything', () => {
-      const wrapper = mount(<SectionTitle />);
+    it('should pass the content config for fetching the section title', () => {
+      const { default: SectionTitleContainer } = require('./default');
+      const wrapper = shallow(
+        <SectionTitleContainer
+          customFields={{ inheritGlobalContent: false, sectionContentConfig: {} }}
+        />,
+      );
+      expect(wrapper.props()).toStrictEqual({ contentConfig: {} });
+    });
+  });
 
-      expect(wrapper).toBeEmptyRender();
+  describe('when customFields is empty', () => {
+    it('should render the global content section title', () => {
+      const { default: SectionTitleContainer } = require('./default');
+      const wrapper = shallow(<SectionTitleContainer customFields={{}} />);
+      expect(wrapper.is('GlobalContentSectionTitle')).toBeTruthy();
+    });
+  });
+
+  describe('when customFields is missing', () => {
+    it('should render the global content section title', () => {
+      const { default: SectionTitleContainer } = require('./default');
+      const wrapper = shallow(<SectionTitleContainer customFields={undefined} />);
+      expect(wrapper.is('GlobalContentSectionTitle')).toBeTruthy();
     });
   });
 });

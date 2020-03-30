@@ -5,12 +5,12 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
   const getResizerParam = (originalUrl, breakpoint, format) => {
     if (typeof window === 'undefined') {
       const Thumbor = require('thumbor-lite');
+      // this is height and width of the target image
       const { height, width } = breakpoint;
 
       if (!height && !width) throw new Error('Height and Width required');
 
       const thumbor = new Thumbor(resizerKey, resizerUrl);
-      /* ToDo: Refactor to use device name (mobile) instead of width */
       const thumborParam = thumbor
         .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
         .filter(`format(${format})`)
@@ -27,76 +27,68 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
     return undefined;
   };
 
-  const getBreakpointDimensionsForAspectRatios = (
-    selectedAspectRatio, dimensionsOnly, maxWidth,
-  ) => {
+  // input: none
+  // if only [420] (int) and ['1:1'], aspect ratio
+  // output: array of strings for ['420x420']
+  const getBreakpointDimensionsForAspectRatios = () => {
     // consider adding window.devicePixelRatio for * scale
-    let output = { devices: [] };
-    const filteredDimensions = [];
+    const widthsAndAspectRatios = [];
     const siteProperties = getProperties();
     const {
       aspectRatios,
-      breakpoints,
+      imageWidths,
     } = siteProperties;
-    breakpoints.forEach((breakpoint) => {
-      const dimensions = [];
-      const breakpointWidth = breakpoint.width;
-      const isMaxSize = maxWidth ? maxWidth <= breakpointWidth : true;
+    imageWidths.forEach((imageWidth) => {
+      const breakpointWidth = imageWidth;
       aspectRatios.forEach((aspectRatio) => {
-        if (((aspectRatio === selectedAspectRatio || !selectedAspectRatio)) && isMaxSize) {
-          const aspectRatioDimensions = aspectRatio.split(':');
-          const widthDivisor = aspectRatioDimensions[0];
-          const heightDivisor = aspectRatioDimensions[1];
-          const scaledHeight = Math.round((breakpointWidth / widthDivisor) * heightDivisor);
-          const dimension = `${breakpointWidth}x${scaledHeight}`;
-          if (dimensionsOnly) {
-            filteredDimensions.push(dimension);
-          } else {
-            dimensions.push({
-              [aspectRatio]: dimension,
-            });
-          }
-        }
+        const aspectRatioDimensions = aspectRatio.split(':');
+        // get width by splitting the 400x400 string
+        const widthDivisor = aspectRatioDimensions[0];
+        const heightDivisor = aspectRatioDimensions[1];
+        const scaledHeight = Math.round((breakpointWidth / widthDivisor) * heightDivisor);
+        const dimension = `${breakpointWidth}x${scaledHeight}`;
+        widthsAndAspectRatios.push(dimension);
       });
-      if (!dimensionsOnly && isMaxSize) {
-        output.devices.push({ [breakpoint.device]: dimensions });
-      }
     });
-    if (dimensionsOnly) {
-      output = [];
-      output.push(filteredDimensions);
-    }
-    return output;
+    return widthsAndAspectRatios;
   };
 
+  /*
+takes the dimensions and
+{
+         '158x105':
+           '/XmvUfw5XeP2vy73eIemjjWvUcTE=filters:format(webp):quality(70)/' ,
+        '274x183':
+         '/eacPxZZDbWfB6iQNyKFtKx-33ho=filters:format(webp):quality(70)/' ,
+        '158x105':
+         '/lFOUx-Y28BEF-DdIYSkmafVhq20=filters:format(jpg):quality(70)/' ,
+        '274x183':
+           '/hfZg-QUBEET7FzIhxQQddvAcz7c=filters:format(jpg):quality(70)/'
+
+  */
   const getResizerParams = (originalUrl) => {
-    const output = [];
-    const getParamsByFormat = (device, format, array) => {
+    const output = {};
+    const getParamsByFormat = (format, previousOutput) => {
       const breakpointAspectRatios = getBreakpointDimensionsForAspectRatios();
-      breakpointAspectRatios.devices.forEach((aspectRatios) => {
-        const aspectRatioValues = Object.values(aspectRatios)[0];
-        const breakPointDevice = Object.keys(aspectRatios)[0];
-        if (breakPointDevice === device || !device) {
-          return aspectRatioValues.forEach((aspectRatioValue) => {
-            /* Ensure new breakpoints are present in GraphQL filters */
-            const dimensions = Object.values(aspectRatioValue)[0].split('x');
-            const aspectRatioWidth = dimensions[0];
-            const aspectRatioHeight = dimensions[1];
-            array.push({
-              [`${dimensions.join('x')}${device ? `|${device}` : ''}`]:
-                getResizerParam(originalUrl,
-                  { width: aspectRatioWidth, height: aspectRatioHeight },
-                  format),
-            });
-          });
-        }
-        return undefined;
+      breakpointAspectRatios.forEach((aspectRatioValue) => {
+        const dimensions = aspectRatioValue;
+        const [aspectRatioWidth, aspectRatioHeight] = dimensions.split('x');
+
+        // eslint-disable-next-line no-param-reassign
+        previousOutput[aspectRatioValue] = getResizerParam(
+          originalUrl,
+          {
+            width: aspectRatioWidth,
+            height: aspectRatioHeight,
+          },
+          format,
+        );
       });
-      return array;
+      return previousOutput;
     };
-    getParamsByFormat(undefined, 'webp', output);
-    /* ToDo: Fix this to be format only */
-    getParamsByFormat('mobile', 'jpg', output);
+    // todo: use webp for next gen images spike
+    // getParamsByFormat('webp', output);
+    getParamsByFormat('jpg', output);
     return output;
   };
 
@@ -106,12 +98,12 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
   };
 };
 
-const resizeImage = (image, breakpoints, resizer) => {
+const resizeImage = (image, imageWidths, resizer) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
-  return resizer.getResizerParams(image.url, breakpoints);
+  return resizer.getResizerParams(image.url, imageWidths);
 };
 
 const resizePromoItems = (promoItems, breakpoints, resizer) => {
@@ -144,17 +136,21 @@ const getResizedImageParams = (data, option, filterQuality) => {
           if (contentElement.type === 'image') {
             contentElement.resized_params = resizeImage(
               contentElement,
-              option.breakpoints,
+              // designate widths not the width of the screen
+              // this is not going to be 100 percent images always
+              option.imageWidths,
               resizer,
             );
           }
-          if (contentElement.promo_items && contentElement.promo_items.basic) {
-            contentElement.promo_items.basic = resizePromoItems(
-              contentElement.promo_items.basic,
-              option.breakpoints,
-              resizer,
-            );
-          }
+          // not totally sure the reason for two here for different structure
+          // commented out for now
+          // if (contentElement.promo_items && contentElement.promo_items.basic) {
+          //   contentElement.promo_items.basic = resizePromoItems(
+          //     contentElement.promo_items.basic,
+          //     option.breakpoints,
+          //     resizer,
+          //   );
+          // }
           return contentElement;
         },
       );
@@ -187,7 +183,7 @@ const getResizedImageParams = (data, option, filterQuality) => {
 // see mock data for example
 // optional filter quality for reducing quality of pics
 const getResizedImageData = (data, filterQuality = 70) => {
-  const { breakpoints } = getProperties();
+  const { breakpoints, imageWidths } = getProperties();
   const resizerKey = RESIZER_SECRET_KEY;
   const resizerUrl = RESIZER_URL;
 
@@ -195,6 +191,7 @@ const getResizedImageData = (data, filterQuality = 70) => {
     resizerSecret: resizerKey,
     resizerUrl,
     breakpoints,
+    imageWidths,
   }, filterQuality);
 };
 

@@ -128,7 +128,7 @@ describe('the default output type', () => {
         expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
       });
 
-      it('should have an robots meta tag', () => {
+      it('should have a robots meta tag', () => {
         const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
         expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
       });
@@ -167,42 +167,227 @@ describe('the default output type', () => {
         expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
       });
 
-      it('should have an robots meta tag', () => {
+      it('should have a robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
+      });
+    });
+
+    describe('when custom tags are provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'article';
+        }
+        if (prop === 'description') {
+          return 'this is a custom description';
+        }
+        if (prop === 'title') {
+          return 'this is a custom title';
+        }
+        if (prop === 'og:title') {
+          return 'this is a custom og:title';
+        }
+        if (prop === 'keywords') {
+          return 'custom-keyword1,custom-keyword2';
+        }
+        return null;
+      };
+
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title – The Sun');
+      });
+
+      it('should have an article description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a custom description');
+      });
+
+      it('should have an article keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('custom-keyword1,custom-keyword2');
+      });
+
+      it('should have an article og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title');
+      });
+
+      it('should not have an article og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should not have an article og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should have a robots meta tag', () => {
         expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
       });
     });
   });
 
   describe('when a video page type is provided', () => {
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('video')} />);
-    it('should have a title tag', () => {
-      expect(wrapper.find('title').childAt(0).text()).toEqual('video – The Sun');
+    describe('when global content is provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'video';
+        }
+        return null;
+      };
+
+      afterEach(() => {
+        jest.resetModules();
+      });
+
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({
+          globalContent: {
+            description: {
+              basic: 'this is a video description',
+            },
+            headlines: {
+              basic: 'this is a video headline',
+            },
+            taxonomy: {
+              seo_keywords: [
+                'keyword1',
+                'keyword2',
+              ],
+            },
+            promo_items: {
+              basic: {
+                url: 'awesome-url',
+                alt_text: 'alt text',
+              },
+            },
+          },
+          arcSite: 'the-sun',
+        }));
+      });
+
+      it('should have a title tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a video headline – The Sun');
+      });
+
+      it('should have a video description meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a video description');
+      });
+
+      it('should have a video keywords meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('keyword1,keyword2');
+      });
+
+      it('should have a video og:title meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a video headline');
+      });
+
+      it('should have a video og:image meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+      });
+
+      it('should have a video og:image:alt meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
+      });
+
+      it('should not have a robots meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
 
-    it('should have a video description meta tag', () => {
-      expect(wrapper.find("meta[name='description']").props().content).toBe('video');
+    describe('when global content is not provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'video';
+        }
+        return null;
+      };
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('The Sun');
+      });
+
+      it('should not have a video description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").length).toBe(0);
+      });
+
+      it('should not have a video keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+      });
+
+      it('should have a video og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
+      });
+
+      it('should have a video og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should not have a video og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should not have a robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
 
-    it('should have a video keywords meta tag', () => {
-      expect(wrapper.find("meta[name='keywords']").props().content).toBe('video');
-    });
+    describe('when custom tags are provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'video';
+        }
+        if (prop === 'description') {
+          return 'this is a custom description';
+        }
+        if (prop === 'title') {
+          return 'this is a custom title';
+        }
+        if (prop === 'og:title') {
+          return 'this is a custom og:title';
+        }
+        if (prop === 'keywords') {
+          return 'custom-keyword1,custom-keyword2';
+        }
+        return null;
+      };
 
-    it('should have a video og:title meta tag', () => {
-      expect(wrapper.find("meta[property='og:title']").props().content).toBe('video');
-    });
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
-    it('should have a video og:image meta tag', () => {
-      expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/video');
-    });
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title – The Sun');
+      });
 
-    it('should have a video og:image:alt meta tag', () => {
-      expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('video');
-    });
+      it('should not have a video description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a custom description');
+      });
 
-    it('should not have an robots meta tag', () => {
-      expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      it('should not have a video keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('custom-keyword1,custom-keyword2');
+      });
+
+      it('should have a video og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title');
+      });
+
+      it('should have a video og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should not have a video og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should not have a robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
   });
+
 
   describe('when a gallery page type is provided', () => {
     const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('gallery')} />);
@@ -230,7 +415,7 @@ describe('the default output type', () => {
       expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('gallery');
     });
 
-    it('should not have an robots meta tag', () => {
+    it('should not have a robots meta tag', () => {
       expect(wrapper.find("meta[name='robots']").length).toBe(0);
     });
   });

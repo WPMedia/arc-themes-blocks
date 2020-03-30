@@ -134,7 +134,6 @@ const SampleOutputType = ({
       );
     }
   } else if (pageType === 'author') {
-    console.log(gc);
     const author = (gc.authors && gc.authors.length) ? gc.authors[0] : {};
     metaData.description = metaValue('description') || author.bio || null;
     metaData.ogTitle = metaValue('og:title') || author.byline || '';

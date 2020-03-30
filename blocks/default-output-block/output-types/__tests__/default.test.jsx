@@ -60,33 +60,116 @@ describe('the default output type', () => {
   });
 
   describe('when an article page type is provided', () => {
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
-    it('should have a title tag', () => {
-      expect(wrapper.find('title').childAt(0).text()).toEqual('article – The Sun');
+    describe('when global content is provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'article';
+        }
+        return null;
+      };
+
+      afterEach(() => {
+        jest.resetModules();
+      });
+
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({
+          globalContent: {
+            description: {
+              basic: 'this is a description',
+            },
+            headlines: {
+              basic: 'this is a headline',
+            },
+            taxonomy: {
+              seo_keywords: [
+                'keyword1',
+                'keyword2',
+              ],
+            },
+            promo_items: {
+              basic: {
+                url: 'awesome-url',
+                alt_text: 'alt text',
+              },
+            },
+          },
+          arcSite: 'the-sun',
+        }));
+      });
+
+      it('should have a title tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a headline – The Sun');
+      });
+
+      it('should have an article description meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a description');
+      });
+
+      it('should have an article keywords meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('keyword1,keyword2');
+      });
+
+      it('should have an article og:title meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a headline');
+      });
+
+      it('should have an article og:image meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+      });
+
+      it('should have an article og:image:alt meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
+      });
+
+      it('should have an robots meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
+      });
     });
 
-    it('should have an article description meta tag', () => {
-      expect(wrapper.find("meta[name='description']").props().content).toBe('article');
-    });
+    describe('when global content is not provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'article';
+        }
+        return null;
+      };
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
-    it('should have an article keywords meta tag', () => {
-      expect(wrapper.find("meta[name='keywords']").props().content).toBe('article');
-    });
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('The Sun');
+      });
 
-    it('should have an article og:title meta tag', () => {
-      expect(wrapper.find("meta[property='og:title']").props().content).toBe('article');
-    });
+      it('should not have an article description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").length).toBe(0);
+      });
 
-    it('should have an article og:image meta tag', () => {
-      expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/article');
-    });
+      it('should not have an article keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+      });
 
-    it('should have an article og:image:alt meta tag', () => {
-      expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('article');
-    });
+      it('should have an article og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
+      });
 
-    it('should have an robots meta tag', () => {
-      expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
+      it('should not have an article og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should not have an article og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should have an robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
+      });
     });
   });
 
@@ -202,7 +285,6 @@ describe('the default output type', () => {
         }
         return null;
       };
-
       const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
       it('should have a title tag', () => {

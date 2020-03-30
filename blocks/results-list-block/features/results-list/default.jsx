@@ -6,15 +6,30 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { Image } from '@wpmedia/engine-theme-sdk';
+// bring this back after poc
+// import { Image } from '@wpmedia/engine-theme-sdk';
 
 import './results-list.scss';
 import './desktop-styles.scss';
 import './mobile-styles.scss';
+import DynamicImage from './_children/dynamic-image';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
+
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  // eslint-disable-next-line camelcase
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    // eslint-disable-next-line camelcase
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -135,19 +150,16 @@ class ResultsList extends Component {
                   title={headlineText}
                 >
                   {extractImage(element.promo_items) ? (
-                    <Image
-                      storyObject={element}
-                      // could proabbly deduce this from below
-                      targetAspectRatio="4:3"
-                      // probably won't need this from url v
+                    <DynamicImage
+                      resizedImageParams={extractResizedParams(element)}
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
-                      smallHeight={103}
+                      smallHeight={105}
                       mediumWidth={274}
                       mediumHeight={148}
                       largeWidth={274}
-                      largeHeight={148}
+                      largeHeight={206}
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

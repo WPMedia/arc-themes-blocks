@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/site-hierarchy-content-block",
-  "version": "3.1.5",
+  "version": "3.1.6",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [

@@ -16,3 +16,4 @@ Takes in a number of how many items to be put in column one, two, and three. The
 
 - Places features within the quad Chain within three equal columns. 
 - PageBuilder editor can configure how many features are placed in each column within the chain. 
+

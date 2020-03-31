@@ -86,6 +86,10 @@ describe('the default output type', () => {
                 'keyword1',
                 'keyword2',
               ],
+              tags: [
+                'tag1',
+                'tag2',
+              ],
             },
             promo_items: {
               basic: {
@@ -131,6 +135,49 @@ describe('the default output type', () => {
       it('should have a robots meta tag', () => {
         const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
         expect(wrapper.find("meta[name='robots']").props().content).toBe('noarchive');
+      });
+
+      describe('when no keywords are provided but tags are provided', () => {
+        afterEach(() => {
+          jest.resetModules();
+        });
+
+        beforeEach(() => {
+          useFusionContext.mockImplementation(() => ({
+            globalContent: {
+              description: {
+                basic: 'this is a description',
+              },
+              headlines: {
+                basic: 'this is a headline',
+              },
+              taxonomy: {
+                tags: [
+                  {
+                    slug: 'tag1',
+                  },
+                  {
+                    slug: 'tag2',
+                  },
+                ],
+              },
+              promo_items: {
+                basic: {
+                  url: 'awesome-url',
+                  alt_text: 'alt text',
+                },
+              },
+            },
+            arcSite: 'the-sun',
+          }));
+        });
+
+        it('should have tags instead of keywords', () => {
+          const wrapper = shallow(
+            <DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />,
+          );
+          expect(wrapper.find("meta[name='keywords']").props().content).toEqual(['tag1', 'tag2']);
+        });
       });
     });
 

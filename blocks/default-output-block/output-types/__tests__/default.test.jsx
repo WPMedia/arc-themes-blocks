@@ -191,8 +191,8 @@ describe('the default output type', () => {
         }
         return null;
       };
-
       const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+
       it('should have a title tag', () => {
         expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title – The Sun');
       });
@@ -355,7 +355,6 @@ describe('the default output type', () => {
         }
         return null;
       };
-
       const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
       it('should have a title tag', () => {
@@ -390,33 +389,166 @@ describe('the default output type', () => {
 
 
   describe('when a gallery page type is provided', () => {
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('gallery')} />);
-    it('should have a title tag', () => {
-      expect(wrapper.find('title').childAt(0).text()).toEqual('gallery – The Sun');
+    describe('when global content is provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'gallery';
+        }
+        return null;
+      };
+
+      afterEach(() => {
+        jest.resetModules();
+      });
+
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({
+          globalContent: {
+            description: {
+              basic: 'this is a gallery description',
+            },
+            headlines: {
+              basic: 'this is a gallery headline',
+            },
+            taxonomy: {
+              seo_keywords: [
+                'keyword1',
+                'keyword2',
+              ],
+            },
+            promo_items: {
+              basic: {
+                url: 'awesome-url',
+                alt_text: 'alt text',
+              },
+            },
+          },
+          arcSite: 'the-sun',
+        }));
+      });
+
+      it('should have a title tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a gallery headline – The Sun');
+      });
+
+      it('should have a gallery description meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a gallery description');
+      });
+
+      it('should have a gallery keywords meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('keyword1,keyword2');
+      });
+
+      it('should have a gallery og:title meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a gallery headline');
+      });
+
+      it('should have a gallery og:image meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+      });
+
+      it('should have a gallery og:image:alt meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('alt text');
+      });
+
+      it('should not have a robots meta tag', () => {
+        const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
 
-    it('should have a video description meta tag', () => {
-      expect(wrapper.find("meta[name='description']").props().content).toBe('gallery');
+    describe('when global content is not provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'gallery';
+        }
+        return null;
+      };
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
+
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('The Sun');
+      });
+
+      it('should have a gallery description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").length).toBe(0);
+      });
+
+      it('should have a gallery keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").length).toBe(0);
+      });
+
+      it('should have a gallery og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('The Sun');
+      });
+
+      it('should have a gallery og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should have a gallery og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should not have a robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
 
-    it('should have a video keywords meta tag', () => {
-      expect(wrapper.find("meta[name='keywords']").props().content).toBe('gallery');
-    });
+    describe('when custom tags are provided', () => {
+      const metaValue = (prop) => {
+        if (prop === 'page-type') {
+          return 'gallery';
+        }
+        if (prop === 'description') {
+          return 'this is a custom description';
+        }
+        if (prop === 'title') {
+          return 'this is a custom title';
+        }
+        if (prop === 'og:title') {
+          return 'this is a custom og:title';
+        }
+        if (prop === 'keywords') {
+          return 'custom-keyword1,custom-keyword2';
+        }
+        return null;
+      };
+      const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
-    it('should have a video og:title meta tag', () => {
-      expect(wrapper.find("meta[property='og:title']").props().content).toBe('gallery');
-    });
+      it('should have a title tag', () => {
+        expect(wrapper.find('title').childAt(0).text()).toEqual('this is a custom title – The Sun');
+      });
 
-    it('should have a video og:image meta tag', () => {
-      expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/gallery');
-    });
+      it('should have a gallery description meta tag', () => {
+        expect(wrapper.find("meta[name='description']").props().content).toBe('this is a custom description');
+      });
 
-    it('should have a video og:image:alt meta tag', () => {
-      expect(wrapper.find("meta[property='og:image:alt']").props().content).toBe('gallery');
-    });
+      it('should have a gallery keywords meta tag', () => {
+        expect(wrapper.find("meta[name='keywords']").props().content).toBe('custom-keyword1,custom-keyword2');
+      });
 
-    it('should not have a robots meta tag', () => {
-      expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      it('should have a gallery og:title meta tag', () => {
+        expect(wrapper.find("meta[property='og:title']").props().content).toBe('this is a custom og:title');
+      });
+
+      it('should have a gallery og:image meta tag', () => {
+        expect(wrapper.find("meta[property='og:image']").length).toBe(0);
+      });
+
+      it('should have a gallery og:image:alt meta tag', () => {
+        expect(wrapper.find("meta[property='og:image:alt']").length).toBe(0);
+      });
+
+      it('should not have a robots meta tag', () => {
+        expect(wrapper.find("meta[name='robots']").length).toBe(0);
+      });
     });
   });
 
@@ -494,7 +626,6 @@ describe('the default output type', () => {
         }
         return null;
       };
-
       const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
 
       it('should have a title tag', () => {

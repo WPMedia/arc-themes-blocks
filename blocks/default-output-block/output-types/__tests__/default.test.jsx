@@ -51,7 +51,7 @@ describe('the default output type', () => {
     });
 
     it('should have script tags', () => {
-      expect(wrapper.find('script').length).toBe(7);
+      expect(wrapper.find('script').length).toBe(5);
     });
 
     it('should have link tags', () => {
@@ -124,7 +124,7 @@ describe('the default output type', () => {
 
       it('should have an article og:image meta tag', () => {
         const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
-        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
 
       it('should have an article og:image:alt meta tag', () => {
@@ -331,7 +331,7 @@ describe('the default output type', () => {
 
       it('should have a video og:image meta tag', () => {
         const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
-        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
 
       it('should have a video og:image:alt meta tag', () => {
@@ -496,7 +496,7 @@ describe('the default output type', () => {
 
       it('should have a gallery og:image meta tag', () => {
         const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={metaValue} />);
-        expect(wrapper.find("meta[property='og:image']").props().content).toBe('undefined/unsafe/1200x630/awesome-url');
+        expect(wrapper.find("meta[property='og:image']").props().content).toBe('https://fake.cdn.com/resizer/l_1yxKdAU0rtnyaww9LofnGAFkw=/1200x630/awesome-url');
       });
 
       it('should have a gallery og:image:alt meta tag', () => {

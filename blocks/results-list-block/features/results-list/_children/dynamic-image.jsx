@@ -1,6 +1,8 @@
 import React from 'react';
 import getSourceImageBreakpoints from './getSourceImageBreakpoints';
 
+const isEmptyObject = (obj) => typeof obj !== 'undefined' && Object.keys(obj).length === 0 && obj.constructor === Object;
+
 const DynamicImage = (props) => {
   const {
     resizedImageParams,
@@ -34,7 +36,8 @@ const DynamicImage = (props) => {
 
   return (
     <picture>
-      {getSourceImageBreakpoints(targetDimensionsPerBreakpoint, resizedImageParams, url, alt)}
+      {!isEmptyObject(resizedImageParams)
+        && getSourceImageBreakpoints(targetDimensionsPerBreakpoint, resizedImageParams, url, alt)}
     </picture>
   );
 };

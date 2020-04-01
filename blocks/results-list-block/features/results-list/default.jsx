@@ -5,7 +5,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
+import getProperties, { resizerURL } from 'fusion:properties';
 // bring this back after poc
 // import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -160,6 +160,10 @@ class ResultsList extends Component {
                       mediumHeight={148}
                       largeWidth={274}
                       largeHeight={206}
+                      // resizer url can just be passed in
+                      // if it's just a variable we can do this
+                      // keep engine theme sdk unaware of this
+                      resizerURL={resizerURL}
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

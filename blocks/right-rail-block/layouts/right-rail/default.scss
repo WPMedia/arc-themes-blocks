@@ -30,8 +30,15 @@ html, body {
 
   .fullwidth-section {
     padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
-    border-bottom: 1px solid $border-rule-color;
-    border-top: 1px solid $border-rule-color;
+
+    &.horizontal-borders {
+      border-bottom: 1px solid $border-rule-color;
+      border-top: 1px solid $border-rule-color;
+
+      &:empty {
+        border: none;
+      }
+    }
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: map-get($spacers, 'lg') 0;

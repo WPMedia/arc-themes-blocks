@@ -73,7 +73,7 @@ class AlertBar extends Component {
 
     const article = elements[0] || {};
     const { websites = {}, headlines = {} } = article;
-    const { website_url: websiteURL = '' } = websites[arcSite] ? websites[arcSite] : {};
+    const { website_url: websiteURL = '' } = websites[arcSite] || {};
 
     return (
       (visible

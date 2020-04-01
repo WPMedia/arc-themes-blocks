@@ -19,4 +19,5 @@ const resolve = (key = {}) => {
 export default {
   params,
   resolve,
+  schemaName: 'ans-feed',
 };

@@ -6,7 +6,7 @@
  */
 
 import getProperties from 'fusion:properties';
-import getResizedImageData from './getResizedImageData';
+import { getResizedImageData } from '../story-feed-query';
 import mockStoryFeedData from './mockStoryFeedData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8

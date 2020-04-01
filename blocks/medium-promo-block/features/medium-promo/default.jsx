@@ -26,13 +26,6 @@ const MediumPromo = ({ customFields, arcSite }) => {
     query: customFields.itemContentConfig.contentConfigValues,
   }) || null;
 
-  const buildHref = (websiteUrl) => {
-    const {
-      websiteDomain,
-    } = getProperties(arcSite);
-    return `${websiteDomain}/${websiteUrl}`;
-  };
-
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
@@ -49,7 +42,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
     if (customFields.showHeadline && headlineText) {
       return (
         <a
-          href={buildHref(content.website_url)}
+          href={content.website_url}
           className="md-promo-headline"
           title={content && content.headlines ? content.headlines.basic : ''}
         >
@@ -111,7 +104,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
         && (
           <div className="col-sm-12 col-md-xl-4">
             <a
-              href={buildHref(content.website_url)}
+              href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
               <Image

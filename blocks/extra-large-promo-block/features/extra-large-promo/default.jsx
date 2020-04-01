@@ -34,12 +34,6 @@ const ExtraLargePromo = ({ customFields }) => {
     query: customFields.itemContentConfig.contentConfigValues,
   }) || null;
 
-  const buildHref = (websiteUrl) => {
-    const {
-      websiteDomain,
-    } = getProperties(arcSite);
-    return `${websiteDomain}/${websiteUrl}`;
-  };
   const { website_section: websiteSection } = content.websites[arcSite];
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
@@ -84,7 +78,7 @@ const ExtraLargePromo = ({ customFields }) => {
     if (customFields.showHeadline && headlineText) {
       return (
         <a
-          href={buildHref(content.website_url)}
+          href={content.website_url}
           className="xl-promo-headline"
           title={content && content.headlines ? content.headlines.basic : ''}
         >
@@ -151,7 +145,7 @@ const ExtraLargePromo = ({ customFields }) => {
             {customFields.showImage
             && (
               <a
-                href={buildHref(content.website_url)}
+                href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
                 <Image

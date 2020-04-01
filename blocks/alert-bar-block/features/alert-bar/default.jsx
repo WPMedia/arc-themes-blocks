@@ -65,7 +65,7 @@ class AlertBar extends Component {
       content = {},
       arcSite = '',
     } = this.state;
-    let { visible } = this.state;
+    const visible = content?.content_elements?.length && this.state.visible;
     const { content_elements: elements = [] } = content;
     if (content && content.content_elements && content.content_elements.length > 0) {
       visible = true;

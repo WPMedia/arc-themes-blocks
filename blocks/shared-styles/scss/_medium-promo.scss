@@ -6,7 +6,7 @@
     color: $ui-primary-font-color;
   }
   .med-promo-padding-bottom {
-    padding-bottom: map-get($spacers, 'xs');
+    padding-bottom: map-get($spacers, 'md');
   }
   .md-promo-headline {
     font-size: calculateRem(16px);

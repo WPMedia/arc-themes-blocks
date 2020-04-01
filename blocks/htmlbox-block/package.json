@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/htmlbox-block",
-  "version": "1.0.3",
+  "version": "1.0.8",
   "description": "Fusion News Theme HTMLBox block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -28,5 +28,5 @@
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
+  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
 }

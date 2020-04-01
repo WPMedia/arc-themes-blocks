@@ -20,13 +20,6 @@ const SmallPromo = ({ customFields, arcSite }) => {
     query: customFields.itemContentConfig.contentConfigValues,
   }) || null;
 
-  const buildHref = (websiteUrl) => {
-    const {
-      websiteDomain,
-    } = getProperties(arcSite);
-    return `${websiteDomain}/${websiteUrl}`;
-  };
-
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
@@ -38,7 +31,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
         && (
           <div className={headlineClass}>
             <a
-              href={buildHref(content.website_url)}
+              href={content.website_url}
               className="sm-promo-headline"
               title={content && content.headlines ? content.headlines.basic : ''}
             >
@@ -56,7 +49,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
         && (
           <div className="col-sm-xl-4">
             <a
-              href={buildHref(content.website_url)}
+              href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
               <Image

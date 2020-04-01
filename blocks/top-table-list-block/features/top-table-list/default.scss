@@ -1,0 +1,26 @@
+.top-table-list-container {
+  .small-promo {
+    display:block;
+    .col-md-xl-4 {
+      text-align: right;
+    }
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      display:inline-block;
+      width: calc((100% - #{map-get($spacers, 'md')}) / 2);
+    }
+    &:nth-child(odd) {
+      margin-right: 0;
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+          margin-right: map-get($spacers, 'md');
+      }
+    }
+    .row {
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+        grid-column-gap: 0;
+        img {
+          max-width: 90%;
+        }
+      }
+    }
+  }
+}

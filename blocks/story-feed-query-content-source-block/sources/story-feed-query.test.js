@@ -1,5 +1,5 @@
 import storyQuery from './story-feed-query';
-import mockStoryFeedData from './utils/mockStoryFeedData';
+import mockStoryFeedData from './mockStoryFeedData';
 
 describe('the story feed query block', () => {
   it('should use the proper param types', () => {

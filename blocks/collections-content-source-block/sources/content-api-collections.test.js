@@ -10,6 +10,10 @@ describe('the collections content source block', () => {
     });
   });
 
+  it('should be associated with the ans-feed schema', () => {
+    expect(contentSource.schemaName).toEqual('ans-feed');
+  });
+
   describe('when an id and website are provided', () => {
     it('should build the correct url', () => {
       const url = contentSource.resolve({

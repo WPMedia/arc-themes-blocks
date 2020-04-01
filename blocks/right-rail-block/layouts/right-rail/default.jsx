@@ -8,7 +8,7 @@ const RightRailLayout = ({ children }) => (
     <section role="main" className="main">
       <div className="container">
         <div className="row">
-          <div className="col-sm-xl-12 fullwidth-section">
+          <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
             {/* Full Width 1 Content Area */}
             {children[1]}
           </div>

@@ -9,7 +9,7 @@ describe('the story feed query block', () => {
     });
   });
 
-  it('should use the proper param types', () => {
+  it('should be associated with the ans-feed schema', () => {
     expect(storyQuery.schemaName).toEqual('ans-feed');
   });
 

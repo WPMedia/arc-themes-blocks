@@ -71,6 +71,7 @@ const SampleOutputType = ({
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
   let authorMetaDataTags = null;
+  let searchMetaDataTags = null;
   let twitterTags = null;
 
   const metaData = {
@@ -167,6 +168,15 @@ const SampleOutputType = ({
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
+  } else if (pageType === 'search') {
+    metaData.title = `Search - ${websiteName}`;
+    metaData.ogTitle = `Search - ${websiteName}`;
+
+    searchMetaDataTags = (
+      <>
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
   } else if (pageType === 'tag') {
     const payload = (gc.Payload && gc.Payload.length) ? gc.Payload[0] : {};
     metaData.description = metaValue('description') || payload.description || null;
@@ -210,6 +220,7 @@ const SampleOutputType = ({
         {storyMetaDataTags}
         {tagMetaDataTags}
         {authorMetaDataTags}
+        {searchMetaDataTags}
         {customMetaTags}
         {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

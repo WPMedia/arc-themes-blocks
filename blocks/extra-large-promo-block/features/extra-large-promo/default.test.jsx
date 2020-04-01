@@ -53,6 +53,18 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('a')).toHaveLength(2);
   });
 
+  it('should link the headline to the current site website_url ANS property', () => {
+    const url = mockData.websites['the-sun'].website_url;
+    const wrapper = mount(<ExtraLargePromo customFields={config} />);
+    expect(wrapper.find('a.xl-promo-headline')).toHaveProp('href', url);
+  });
+
+  it('should link the image to the current site website_url ANS property', () => {
+    const url = mockData.websites['the-sun'].website_url;
+    const wrapper = mount(<ExtraLargePromo customFields={config} />);
+    expect(wrapper.find('a').at(1)).toHaveProp('href', url);
+  });
+
   it('should have one img when show image is true', () => {
     const wrapper = mount(<ExtraLargePromo customFields={config} />);
     expect(wrapper.find('Image')).toHaveLength(1);

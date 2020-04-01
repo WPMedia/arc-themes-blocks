@@ -17,7 +17,7 @@ class AlertBar extends Component {
   constructor(props) {
     super(props);
     const { arcSite, customFields = {} } = this.props;
-    let { refreshIntervals } = customFields;
+    const refreshIntervals = Math.max(customFields.refreshIntervals, 30);
 
     // It should be at minimum 30 seconds to make sure it doesn't overwhelm the content API
     refreshIntervals = (refreshIntervals && refreshIntervals >= 30) ? refreshIntervals : 30;

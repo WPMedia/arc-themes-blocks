@@ -4,7 +4,7 @@
   @include block-margin-bottom;
 
   .xl-promo-padding-bottom {
-    padding-bottom: map-get($spacers, 'xs');
+    padding-bottom: map-get($spacers, 'md');
   }
   a{
     color: $ui-primary-font-color;

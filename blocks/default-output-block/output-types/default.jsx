@@ -86,31 +86,44 @@ const SampleOutputType = ({
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
+      let description = null;
+      let headline = null;
+
+      if (gc && gc.description && gc.headlines) {
+        description = gc.description.basic;
+        headline = gc.headlines.basic;
+      }
 
       if (metaValue('title')) {
         metaData.title = `${metaValue('title')} – ${websiteName}`;
-      } else if (gc.headlines.basic) {
-        metaData.title = `${gc.headlines.basic} – ${websiteName}`;
+      } else if (headline) {
+        metaData.title = `${headline} – ${websiteName}`;
       } else {
         metaData.title = websiteName;
       }
-      metaData.description = metaValue('description') || gc.description.basic || null;
-      metaData.ogTitle = metaValue('og:title') || gc.headlines.basic || websiteName;
+      metaData.description = metaValue('description') || description || null;
+      metaData.ogTitle = metaValue('og:title') || headline || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc);
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
 
       // Keywords could be comma delimited string or array of string or an array of objects
       if (metaValue('keywords')) {
         metaData.keywords = metaValue('keywords');
-      } else if (typeof gc.taxonomy.seo_keywords !== 'undefined'
-        && gc.taxonomy.seo_keywords !== null) {
-        metaData.keywords = gc.taxonomy.seo_keywords.join(',');
-      } else if (typeof gc.taxonomy.tags !== 'undefined'
-        && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
-        metaData.keywords = [];
-        gc.taxonomy.tags.forEach((item) => {
-          if (item.slug) metaData.keywords.push(item.slug);
-        });
+      } else if (gc && gc.taxonomy && gc.taxonomy.seo_keywords) {
+        if (
+          typeof gc.taxonomy.seo_keywords !== 'undefined'
+            && gc.taxonomy.seo_keywords !== null
+        ) {
+          metaData.keywords = gc.taxonomy.seo_keywords.join(',');
+        }
+      } else if (gc && gc.taxonomy && gc.taxonomy.tags) {
+        if (typeof gc.taxonomy.tags !== 'undefined'
+          && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
+          metaData.keywords = [];
+          gc.taxonomy.tags.forEach((item) => {
+            if (item.slug) metaData.keywords.push(item.slug);
+          });
+        }
       } else {
         metaData.keywords = null;
       }

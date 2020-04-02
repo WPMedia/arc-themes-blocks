@@ -34,7 +34,7 @@ const SectionTitle = (props) => {
         </StyledTitle>
         <div className="section-container">
           {
-            (content.children)
+            !!(content.children && content.children.length > 0)
             && (content.children.map((child, index) => (
               <StyledLink
                 primaryFont={getThemeStyle(arcSite)['primary-font-family']}

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/subheadline-block",
-  "version": "2.0.3",
+  "version": "2.0.10",
   "description": "Fusion News Theme sub-headline block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -28,5 +28,5 @@
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
+  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
 }

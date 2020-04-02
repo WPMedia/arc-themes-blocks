@@ -37,6 +37,7 @@
       padding-left: calculateRem(16px);
       text-decoration: none;
       color: $ui-primary-font-color;
+      @include link-color-active-hover($ui-primary-font-color);
       .simple-list-headline-text {
         font-size: calculateRem(16px);
         line-height: calculateRem(24px);

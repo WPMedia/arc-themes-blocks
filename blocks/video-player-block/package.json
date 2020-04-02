@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/video-player-block",
-  "version": "1.0.3",
+  "version": "1.0.10",
   "description": "Fusion News Theme video player block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -29,5 +29,5 @@
     "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
+  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
 }

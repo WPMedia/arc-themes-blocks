@@ -4,6 +4,8 @@ This is the lerna-managed monorepo for the blocks that make up the Fusion News T
 
 This monorepo is a collection of packages for blocks and SDK components, but they are all versioned separately for now so that they can be patched separately.
 
+**if you're looking for local news theme block development, go to news theme development markdown doc**
+
 ## Instructions
 
 Lerna requires some setup and know-how, so be sure to read the instructions below to prevent any hiccups/accidents/incidents.

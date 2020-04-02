@@ -71,6 +71,7 @@ const SampleOutputType = ({
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
   let authorMetaDataTags = null;
+  let searchMetaDataTags = null;
   let twitterTags = null;
 
   const metaData = {
@@ -85,31 +86,44 @@ const SampleOutputType = ({
   if (pageType === 'article' || pageType === 'video' || pageType === 'gallery') {
     if (typeof window === 'undefined') {
       const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
+      let description = null;
+      let headline = null;
+
+      if (gc && gc.description && gc.headlines) {
+        description = gc.description.basic;
+        headline = gc.headlines.basic;
+      }
 
       if (metaValue('title')) {
         metaData.title = `${metaValue('title')} – ${websiteName}`;
-      } else if (gc.headlines.basic) {
-        metaData.title = `${gc.headlines.basic} – ${websiteName}`;
+      } else if (headline) {
+        metaData.title = `${headline} – ${websiteName}`;
       } else {
         metaData.title = websiteName;
       }
-      metaData.description = metaValue('description') || gc.description.basic || null;
-      metaData.ogTitle = metaValue('og:title') || gc.headlines.basic || websiteName;
+      metaData.description = metaValue('description') || description || null;
+      metaData.ogTitle = metaValue('og:title') || headline || websiteName;
       metaData.ogImage = getImgURL(metaValue, 'og:image', gc);
       metaData.ogImageAlt = getImgAlt(metaValue, 'og:image:alt', gc);
 
       // Keywords could be comma delimited string or array of string or an array of objects
       if (metaValue('keywords')) {
         metaData.keywords = metaValue('keywords');
-      } else if (typeof gc.taxonomy.seo_keywords !== 'undefined'
-        && gc.taxonomy.seo_keywords !== null) {
-        metaData.keywords = gc.taxonomy.seo_keywords.join(',');
-      } else if (typeof gc.taxonomy.tags !== 'undefined'
-        && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
-        metaData.keywords = [];
-        gc.taxonomy.tags.forEach((item) => {
-          if (item.slug) metaData.keywords.push(item.slug);
-        });
+      } else if (gc && gc.taxonomy && gc.taxonomy.seo_keywords) {
+        if (
+          typeof gc.taxonomy.seo_keywords !== 'undefined'
+            && gc.taxonomy.seo_keywords !== null
+        ) {
+          metaData.keywords = gc.taxonomy.seo_keywords.join(',');
+        }
+      } else if (gc && gc.taxonomy && gc.taxonomy.tags) {
+        if (typeof gc.taxonomy.tags !== 'undefined'
+          && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
+          metaData.keywords = [];
+          gc.taxonomy.tags.forEach((item) => {
+            if (item.slug) metaData.keywords.push(item.slug);
+          });
+        }
       } else {
         metaData.keywords = null;
       }
@@ -151,6 +165,15 @@ const SampleOutputType = ({
           metaData.description
           && <meta name="description" content={metaData.description} />
         }
+        <meta property="og:title" content={metaData.ogTitle} />
+      </>
+    );
+  } else if (pageType === 'search') {
+    metaData.title = `Search - ${websiteName}`;
+    metaData.ogTitle = `Search - ${websiteName}`;
+
+    searchMetaDataTags = (
+      <>
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -197,6 +220,7 @@ const SampleOutputType = ({
         {storyMetaDataTags}
         {tagMetaDataTags}
         {authorMetaDataTags}
+        {searchMetaDataTags}
         {customMetaTags}
         {twitterTags}
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
@@ -225,8 +249,6 @@ const SampleOutputType = ({
           {children}
         </div>
         <Fusion />
-        <script type="text/javascript" src={deployment(`${contextPath}/resources/js/yall.min.js`)} />
-        <script type="text/javascript" src={deployment(`${contextPath}/resources/js/image-lazy.js`)} />
       </body>
     </html>
   );

@@ -9,8 +9,8 @@
   justify-content: space-between;
 
   .list-item-number {
-    flex: 0 0 calculateRem(20px);
-    color: $ui-primary-font-color;
+    flex: 0 0 calculateRem(40px);
+    color: $ui-dark-secondary-color;
     font-size: calculateRem(20px);
     font-weight: bold;
     line-height: calculateRem(24px);
@@ -41,6 +41,7 @@
     text-decoration: none;
     margin-right: calculateRem(16px);
     color: $ui-primary-font-color;
+    @include link-color-active-hover($ui-primary-font-color);
 
     .headline-text {
       font-size: calculateRem(16px);

@@ -24,7 +24,7 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
         && (
           <div className="col-sm-xl-4">
             <a
-              href={customFields.imageURL}
+              href={customFields.linkURL}
               title={customFields.headline}
             >
               <Image

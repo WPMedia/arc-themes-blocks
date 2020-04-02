@@ -1,4 +1,5 @@
 import storyQuery from './story-feed-query';
+import mockStoryFeedData from './mockStoryFeedData';
 
 describe('the story feed query block', () => {
   it('should use the proper param types', () => {
@@ -9,7 +10,7 @@ describe('the story feed query block', () => {
     });
   });
 
-  it('should use the proper param types', () => {
+  it('should be associated with the ans-feed schema', () => {
     expect(storyQuery.schemaName).toEqual('ans-feed');
   });
 
@@ -39,5 +40,12 @@ describe('the story feed query block', () => {
 
   describe('the arc site param', () => {
     expect(storyQuery.resolve({ 'arc-site': 'my-other-site' })).toEqual('/content/v4/search/published?q=*&website=my-other-site&size=8&from=0&sort=display_date:desc');
+  });
+
+  describe('story feed transform', () => {
+    it('returns whatever is passed in on the client-side', () => {
+      // on the client-side return whatever is passed in
+      expect(storyQuery.transform(mockStoryFeedData)).toEqual(mockStoryFeedData);
+    });
   });
 });

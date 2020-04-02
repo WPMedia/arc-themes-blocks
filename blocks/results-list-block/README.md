@@ -6,6 +6,7 @@ Results List block for Fusion News Theme
 ```
 const resultsBlock = require('@wpmedia/results-list-block');
 
+
 ```
 
 It expects the user to configure its content source.

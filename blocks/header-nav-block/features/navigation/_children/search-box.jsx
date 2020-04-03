@@ -23,6 +23,11 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
     }
   };
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    window.location.href = `/search/${searchInput.current.value}`;
+  };
+
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
   const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
   const btnClassNames = `nav-btn transparent${!isSearchBarOpen ? ' border' : ''}`;
@@ -31,7 +36,7 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
   return (
     <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} type="text" placeholder="Search" />
-      <button className={btnClassNames} onMouseDown={handleSearchBtnMousedown} type="button">
+      <button className={btnClassNames} onClick={handleClick} onMouseDown={handleSearchBtnMousedown} type="button">
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>
     </div>

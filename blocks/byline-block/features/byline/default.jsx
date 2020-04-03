@@ -37,33 +37,22 @@ const BylineNames = styled.span`
 class ArticleByline extends Component {
   constructor(props) {
     super(props);
+    const {
+      globalContent, story, arcSite,
+    } = props;
 
-    this.arcSite = props.arcSite;
-    // Inherit global content
-    const { globalContent: content = {}, story } = props;
-    // If Global Content Exists and it has no story prop,
-    // set the component state to credits destructured from global content
-    if (Object.keys(content).length && !story) {
-      const { credits } = content;
-      this.state = {
-        credits,
-      };
-    // If globalContent is an empty object or if it has a story prop passed to it
-    // Set the state to credits destructured from story props
-    } else {
-      const { credits } = story;
-      this.state = {
-        credits,
-      };
-    }
+    // empty arr is truthy
+    this.state = {
+      by: story?.credits?.by || globalContent?.credits?.by || [],
+      arcSite: arcSite || '',
+    };
   }
 
   render() {
     const { stylesFor } = this.props;
-    const { credits } = this.state;
-    const { by } = credits;
+    const { by, arcSite } = this.state;
 
-    const authors = by.length && by.map((author) => {
+    const authors = by.length > 0 && by.map((author) => {
       if (author.type === 'author') {
         const hasName = Object.prototype.hasOwnProperty.call(author, 'name');
         const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
@@ -83,6 +72,7 @@ class ArticleByline extends Component {
       ? authors.length : 0;
     // This will be an innerHTML to accommodate potential multiple anchor tags within the section
     // Leave it empty so that if there's no author with listed name it would just return '' string
+    // note: default is empty string with one space
     let bylineString = ' ';
 
     // Depending on how many authors there are, change style accordingly
@@ -108,8 +98,15 @@ class ArticleByline extends Component {
         }
       }
     }
+
+    // note: default is empty string with one space
+    // would not want to return 'by' all by itself unless it's by Anonymous ;)
+    if (bylineString === ' ') {
+      return null;
+    }
+
     return (
-      <BylineSection primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="byline" stylesFor={stylesFor}>
+      <BylineSection primaryFont={getThemeStyle(arcSite)['primary-font-family']} className="byline" stylesFor={stylesFor}>
         <By stylesFor={stylesFor}>By</By>
         <BylineNames dangerouslySetInnerHTML={{ __html: `${bylineString}` }} stylesFor={stylesFor} />
       </BylineSection>

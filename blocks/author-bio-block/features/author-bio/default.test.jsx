@@ -593,4 +593,25 @@ describe('Given the list of author(s) from the article', () => {
     expect(socialButtonsContainer.find('a').props().href).toBe('mailto:bernstein@washpost.com');
     expect(socialButtonsContainer.children()).toHaveLength(1);
   });
+  it('should not throw by undefined error if empty global content object', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({ globalContent: {} })),
+    }));
+    const { default: AuthorBio } = require('./default');
+
+    expect(() => {
+      mount(<AuthorBio />);
+    }).not.toThrow((TypeError("Cannot read property 'by' of undefined")));
+  });
+
+  it('should return null if empty global content object', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({ globalContent: {} })),
+    }));
+    const { default: AuthorBio } = require('./default');
+
+
+    const wrapper = mount(<AuthorBio />);
+    expect(wrapper).toBeEmptyRender();
+  });
 });

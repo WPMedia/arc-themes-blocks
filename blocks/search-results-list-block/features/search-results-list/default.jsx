@@ -11,7 +11,7 @@ const SearchResultsListContainer = (
   } = {},
 ) => {
   if (inheritGlobalContent) {
-    console.log('using gc');
+    // console.log('using gc');
     return <GlobalContentSearch />;
   }
 

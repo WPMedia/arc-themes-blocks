@@ -1,8 +1,7 @@
 /* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
-import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
-import SearchSearchResultsList from './default';
+import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
 
 const mockReturnData = mockData;
 
@@ -26,7 +25,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 
 describe('The search results list', () => {
   describe('renders a search bar', () => {
-    const { default: SearchResultsList } = require('./default');
+    const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
     const wrapper = shallow(<SearchResultsList />);
@@ -66,8 +65,8 @@ describe('The search results list', () => {
   });
 
   it('should render a list of stories', () => {
-    const { default: SearchResultsList } = require('./default');
-    SearchSearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    const { default: SearchResultsList } = require('./custom-content');
+    SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
     const wrapper = shallow(<SearchResultsList />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
@@ -78,7 +77,7 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly', () => {
-    const { default: SearchResultsList } = require('./default');
+    const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
     const wrapper = shallow(<SearchResultsList />);
     wrapper.setState({ resultList: oneListItem }, () => {
@@ -134,7 +133,7 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly when description is missing', () => {
-    const { default: SearchResultsList } = require('./default');
+    const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn()
       .mockReturnValue(LineItemWithOutDescription);
     const wrapper = shallow(<SearchResultsList />);
@@ -163,7 +162,7 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly when list of authors is missing', () => {
-    const { default: SearchResultsList } = require('./default');
+    const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
     const wrapper = shallow(<SearchResultsList />);
     wrapper.setState({ resultList: withoutByline }, () => {
@@ -179,7 +178,7 @@ describe('The search results list', () => {
   });
 
   describe('renders a button to display more stories', () => {
-    const { default: SearchResultsList } = require('./default');
+    const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
     const wrapper = shallow(<SearchResultsList />);
     wrapper.setState({ resultList: mockData }, () => {

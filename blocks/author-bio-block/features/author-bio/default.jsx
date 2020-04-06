@@ -40,8 +40,8 @@ const AuthorBioStyled = styled.section`
 
 const AuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
-  const { credits } = content;
-  const { by } = credits;
+  const { credits = {} } = content;
+  const { by = [] } = credits;
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
@@ -270,6 +270,10 @@ const AuthorBio = () => {
 
     return authorList;
   }, []);
+
+  if (authors.length === 0) {
+    return null;
+  }
 
   return (
     <AuthorBioStyled

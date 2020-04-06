@@ -1,6 +1,7 @@
 node_modules
 .idea
 coverage
+__snapshots__
 .npmrc
 **/.DS_Store
 .vscode/*

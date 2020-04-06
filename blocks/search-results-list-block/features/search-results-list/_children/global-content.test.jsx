@@ -76,26 +76,11 @@ describe('The search results list', () => {
       expect(wrapper.find('.search-results-text').text()).toEqual('50 Results for “test”');
     });
 
-    // it('should set a search term', () => {
-    //   expect(wrapper.state('searchTerm')).toEqual('test');
-    // });
-
-    // it("onChange param is the same value as the input element's value property", () => {
-    //   wrapper.find('input').simulate('change', { target: { value: 'term' } });
-    //   expect(wrapper.state('value')).toEqual('term');
-    // });
-
     describe('renders a search button', () => {
       it('should render a search button to search for results', () => {
         expect(wrapper.find('button').at(0).length).toEqual(1);
         expect(wrapper.find('button').at(0).text()).toEqual('Search');
       });
-
-      // it('should call fetchContent when clicked', () => {
-      //   expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(0);
-      //   wrapper.find('button').at(0).simulate('click');
-      //   expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-      // });
     });
   });
 
@@ -211,11 +196,5 @@ describe('The search results list', () => {
     it('should have invisible text for accessibility purposes', () => {
       expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
     });
-
-    // it('should call fetchContent when clicked', () => {
-    //   expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-    //   (wrapper.find('.see-more')).childAt(0).simulate('click');
-    //   expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
-    // });
   });
 });

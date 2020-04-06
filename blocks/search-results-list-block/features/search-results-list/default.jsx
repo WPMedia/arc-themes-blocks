@@ -11,7 +11,6 @@ const SearchResultsListContainer = (
   } = {},
 ) => {
   if (inheritGlobalContent) {
-    // console.log('using gc');
     return <GlobalContentSearch />;
   }
 
@@ -19,7 +18,7 @@ const SearchResultsListContainer = (
 };
 
 
-SearchResultsListContainer.label = 'Search Results ListYee – Arc Block';
+SearchResultsListContainer.label = 'Search Results List – Arc Block';
 
 SearchResultsListContainer.propTypes = {
   customFields: PropTypes.shape({

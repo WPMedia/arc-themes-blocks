@@ -9,7 +9,8 @@
   padding-left: 18px;
   padding-right: 18px;
 
-  a {
+  .article-link {
+    display: inline-flex;
     color: white;	
     font-family: $theme-primary-font-family;	
     font-size: 16px;
@@ -18,6 +19,7 @@
     height: 100%;
     line-height: 16px;
 
+    align-items: center;
     text-align: center;
     text-decoration: none;
   }
@@ -25,5 +27,6 @@
     background: none!important;
     border: none;
     cursor: pointer;
+    margin-right: 20px;
   }
 }

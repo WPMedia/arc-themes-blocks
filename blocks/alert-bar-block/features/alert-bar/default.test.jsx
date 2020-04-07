@@ -10,7 +10,7 @@ describe('the alert bar feature for the default output type', () => {
   it('should render the alert bar with link and headline if collection returns a story', () => {
     const { default: AlertBar } = require('./default');
     const customFields = {
-      refreshIntervals: 30,
+      refreshIntervals: 120,
     };
     const content = {
       _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
@@ -48,7 +48,7 @@ describe('the alert bar feature for the default output type', () => {
   it('should not render the alert bar if there is no story', () => {
     const { default: AlertBar } = require('./default');
     const customFields = {
-      refreshIntervals: 30,
+      refreshIntervals: 120,
     };
     const content = {};
 

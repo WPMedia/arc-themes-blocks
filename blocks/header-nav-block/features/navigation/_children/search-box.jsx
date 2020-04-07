@@ -10,10 +10,10 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
     const el = searchInput.current;
     if (shouldSearchOpen) {
       el.focus();
-      // Wait for open animation to finish
+      // Wait for open searchbar animation to finish
       setTimeout(() => {
         disabledBtn = false;
-      }, 500);
+      }, 1000);
     } else {
       el.blur();
     }
@@ -35,6 +35,13 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
     }
   };
 
+  const handleKey = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      window.location.href = `/search/${searchInput.current.value}`;
+    }
+  };
+
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
   const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
   const btnClassNames = `nav-btn transparent${!isSearchBarOpen ? ' border' : ''}`;
@@ -42,7 +49,7 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
 
   return (
     <div className={navClassNames}>
-      <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} type="text" placeholder="Search" />
+      <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder="Search" />
       <button className={btnClassNames} onClick={handleClick} onMouseDown={handleSearchBtnMousedown} type="button">
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>

@@ -4,11 +4,16 @@ import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/Searc
 export default ({ alwaysOpen = false, iconSize = 16 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const searchInput = useRef(null);
+  let disabledBtn = true;
 
   useEffect(() => {
     const el = searchInput.current;
     if (shouldSearchOpen) {
       el.focus();
+      // Wait for open animation to finish
+      setTimeout(() => {
+        disabledBtn = false;
+      }, 500);
     } else {
       el.blur();
     }
@@ -24,8 +29,10 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
   };
 
   const handleClick = (event) => {
-    event.preventDefault();
-    window.location.href = `/search/${searchInput.current.value}`;
+    if (!disabledBtn) {
+      event.preventDefault();
+      window.location.href = `/search/${searchInput.current.value}`;
+    }
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;

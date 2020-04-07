@@ -1,7 +1,15 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('@wpmedia/news-theme-css', () => ({
+  lightenDarkenColor: () => 'blue',
+}));
+
+jest.mock('fusion:themes', () => (jest.fn(() => ({
+  'primary-color': 'blue',
+}))));
+
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,

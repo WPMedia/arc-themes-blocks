@@ -218,8 +218,6 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
 
-      console.log(wrapper.debug());
-
       expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
       expect(wrapper.find('article.article-body-wrapper').find('span')).toHaveLength(1);
       expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(0);

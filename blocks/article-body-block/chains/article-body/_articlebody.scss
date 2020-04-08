@@ -39,6 +39,19 @@
     }
   }
 
+  .gallery {
+    .image-metadata{
+      font-size: calculateRem(14px);
+      color: $image-caption-rule-color;
+      margin: 8px 0;
+      line-height: calculateRem(24px);
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+        line-height: calculateRem(20px);
+      }
+    }
+  }
+
   figure {
     margin-top: 0;
     margin-right: 0;
@@ -47,7 +60,7 @@
 
     p {
       font-size: calculateRem(14px);
-      color: #7F8C8D;
+      color: $image-caption-rule-color;
       margin: 8px 0;
       line-height: 1rem;
     }

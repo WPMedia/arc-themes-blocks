@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { LinkBackgroundHover } from '@wpmedia/news-theme-css/js/styled/linkHovers';
 import './tags.scss';
 
-const Tags = styled.a`
+const Tags = styled(LinkBackgroundHover)`
   font-family:  ${(props) => props.primaryFont};
   background-color:  ${(props) => props.primaryColor};
 `;
-
 
 const ArticleTags = () => {
   const { arcSite, globalContent: content } = useFusionContext();

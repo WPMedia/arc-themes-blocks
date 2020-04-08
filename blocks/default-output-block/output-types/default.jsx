@@ -78,50 +78,29 @@ const SampleOutputType = ({
     switch (websiteName) {
       case 'Arc Demo 1':
         return (
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family='Work Sans'"
-          />
+          <link href="https://fonts.googleapis.com/css?family=Work Sans" rel="stylesheet" />
         );
       case 'Arc Demo 2':
         return (
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family='Ezcar'"
-          />
+          <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet" />
         );
       case 'Arc Demo 3':
         return (
           <>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family='Open Sans'"
-            />
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family='Merriweather'"
-            />
+            <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" />
           </>
         );
       case 'Arc Demo 4':
         return (
           <>
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family='Merriweather'"
-            />
-            <link
-              rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family='Open Sans'"
-            />
+            <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" />
           </>
         );
       case 'Arc Demo 5':
         return (
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family='Space Mono'"
-          />
+          <link href="https://fonts.googleapis.com/css?family=Space Mono" rel="stylesheet" />
         );
       default:
         return '';
@@ -299,7 +278,7 @@ const SampleOutputType = ({
         data-loaded-via="powa-manifest"
       />
       <link rel="preload" as="script" href={powaDrive} />
-      {googleFonts}
+      {googleFonts()}
       <body>
         <div id="fusion-app">
           {children}

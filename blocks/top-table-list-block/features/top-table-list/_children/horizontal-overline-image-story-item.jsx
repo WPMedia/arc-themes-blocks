@@ -35,13 +35,13 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
+                // large aspect ratio 4:3
                 smallWidth={274}
-                smallHeight={148}
+                smallHeight={206}
                 mediumWidth={274}
-                mediumHeight={148}
-                // large size via invision
-                // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
+                mediumHeight={206}
                 largeWidth={377}
+                largeHeight={283}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
               />

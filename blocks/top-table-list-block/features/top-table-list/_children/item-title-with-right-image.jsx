@@ -5,7 +5,7 @@ import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle, imageURL, id, primaryFont, constructedURL,
+    itemTitle, imageURL, id, primaryFont, constructedURL, arcSite,
   } = props;
   return (
     <article key={id} className="container-fluid small-promo">
@@ -25,9 +25,10 @@ const ItemTitleWithRightImage = (props) => {
               <Image
                 url={imageURL}
                 alt={itemTitle}
-                smallWidth={275}
+                // small size aspect ratios 3:2
+                smallWidth={274}
                 smallHeight={183}
-                mediumWidth={275}
+                mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}

@@ -133,7 +133,7 @@ function parseArticleItem(item, index) {
       );
     case 'gallery':
       return (
-        <section className="block-margin-bottom">
+        <section className="block-margin-bottom gallery">
           <Gallery galleryElements={item.content_elements} />
         </section>
       );

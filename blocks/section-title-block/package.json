@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/section-title-block",
-  "version": "1.1.4",
+  "version": "1.1.7",
   "description": "Fusion News Theme section title block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -27,6 +27,5 @@
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  },
-  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
+  }
 }

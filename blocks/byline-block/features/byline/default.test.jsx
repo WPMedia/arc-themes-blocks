@@ -94,39 +94,6 @@ describe('Given the display time from ANS, it should convert to the proper timez
     expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
-  it('should return no author (no byline provided for any of the authors)', () => {
-    const { default: ArticleByline } = require('./default');
-    const credits = {
-      by: [
-        {
-          type: 'author',
-          url: '/author/sanghee-kim',
-          additional_properties: {
-            original: {
-            },
-          },
-        }, {
-          type: 'author',
-          url: '/author/joe-grosspietsch',
-          additional_properties: {
-            original: {
-            },
-          },
-        }, {
-          type: 'author',
-          url: '/author/brent-miller',
-          additional_properties: {
-            original: {
-            },
-          },
-        },
-      ],
-    };
-    const globalContent = { credits };
-
-    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' ' });
-  });
 
   it('should return 4 authors complete with url and bylines', () => {
     const { default: ArticleByline } = require('./default');
@@ -175,5 +142,27 @@ describe('Given the display time from ANS, it should convert to the proper timez
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
     expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
+  });
+
+  it('should not throw by undefined error if empty global content object', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({ globalContent: {} })),
+    }));
+    const { default: ArticleByline } = require('./default');
+
+
+    expect(() => {
+      mount(<ArticleByline />);
+    }).not.toThrow((TypeError("Cannot read property 'credits' of undefined")));
+  });
+
+  it('should return null if no authors found', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({ globalContent: {} })),
+    }));
+    const { default: ArticleByline } = require('./default');
+
+    const wrapper = mount(<ArticleByline />);
+    expect(wrapper).toBeEmptyRender();
   });
 });

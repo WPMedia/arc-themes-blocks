@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
+import { LinkSVGHover } from '@wpmedia/news-theme-css/js/styled/linkHovers';
 import {
   Image,
   EnvelopeIcon,
@@ -21,6 +22,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import constructSocialURL from './shared/constructSocialURL';
 
+
 import './author-bio.scss';
 
 /*
@@ -38,10 +40,12 @@ const AuthorBioStyled = styled.section`
   }
 `;
 
+const MediaLinksStyled = styled(LinkSVGHover)``;
+
 const AuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
-  const { credits } = content;
-  const { by } = credits;
+  const { credits = {} } = content;
+  const { by = [] } = credits;
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
@@ -52,9 +56,9 @@ const AuthorBio = () => {
     // Also check for their bio, which means that they are a staff
     if (
       author.description
-      && author.description.length > 0
-      && original.bio
-      && original.bio.length > 0
+            && author.description.length > 0
+            && original.bio
+            && original.bio.length > 0
     ) {
       // A loop to generate the list of social media links.
       // If no url is provided, then the social link will be skipped.
@@ -67,161 +71,162 @@ const AuthorBio = () => {
             switch (socialLink.site) {
               case 'linkedin':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <LinkedInIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="LinkedIn"
                       description="Connect on LinkedIn"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'twitter':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <TwitterIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Twitter"
                       description="Connect on Twitter"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'instagram':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <InstagramIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Instagram"
                       description="Connect on Instagram"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'facebook':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <FacebookIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Facebook"
                       description="Connect on Facebook"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'reddit':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <RedditIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Reddit"
                       description="Connect on Reddit"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'youtube':
                 socialButton = (
-                  <a
+                  <MediaLinksStyled
                     href={constructedURL}
                     target="_blank"
                     rel="noreferrer noopener"
                     id="link-social-youtube"
+                    primaryColor={getThemeStyle(arcSite)['primary-color']}
                   >
                     <YoutubeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="YouTube"
                       description="Connect on YouTube"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'medium':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <MediumIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Medium"
                       description="Connect on Medium"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'tumblr':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <TumblrIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Tumblr"
                       description="Connect on Tumblr"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'pinterest':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <PinterestIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Pinterest"
                       description="Connect on Pinterest"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'snapchat':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <SnapchatIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Snapchat"
                       description="Connect on Snapchat"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'whatsapp':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <WhatsAppIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="WhatsApp"
                       description="Connect on WhatsApp"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'soundcloud':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <SoundCloudIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="SoundCloud"
                       description="Listen on SoundCloud"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               case 'rss':
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <RssIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="RSS"
                       description="Subscribe to RSS feed"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
               default:
                 socialButton = (
-                  <a href={constructedURL} target="_blank" rel="noreferrer noopener">
+                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                     <EnvelopeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title="Email"
                       description="Send an email"
                     />
-                  </a>
+                  </MediaLinksStyled>
                 );
                 break;
             }
@@ -240,21 +245,21 @@ const AuthorBio = () => {
         <section key={(author.name) ? author.name : ''} className="authors">
           <section className="author">
             {
-              (author.image && author.image.url)
-                ? (
-                  <Image
-                    url={author.image.url}
-                    alt={(author.image.alt_text || author.name)}
-                    smallWidth={84}
-                    smallHeight={0}
-                    mediumWidth={84}
-                    mediumHeight={0}
-                    largeWidth={84}
-                    largeHeight={0}
-                  />
-                )
-                : null
-            }
+                            (author.image && author.image.url)
+                              ? (
+                                <Image
+                                  url={author.image.url}
+                                  alt={(author.image.alt_text || author.name)}
+                                  smallWidth={84}
+                                  smallHeight={0}
+                                  mediumWidth={84}
+                                  mediumHeight={0}
+                                  largeWidth={84}
+                                  largeHeight={0}
+                                />
+                              )
+                              : null
+                        }
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
               {/* there will always be a description via conditional on 52 */}
@@ -270,6 +275,10 @@ const AuthorBio = () => {
 
     return authorList;
   }, []);
+
+  if (authors.length === 0) {
+    return null;
+  }
 
   return (
     <AuthorBioStyled

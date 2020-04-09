@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/medium-manual-promo-block",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "Fusion News Theme Medium Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -29,6 +29,5 @@
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
-  },
-  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
+  }
 }

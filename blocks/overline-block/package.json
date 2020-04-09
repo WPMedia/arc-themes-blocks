@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/overline-block",
-  "version": "1.0.9",
+  "version": "1.0.12",
   "description": "Fusion themes block containing an overline block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -29,6 +29,5 @@
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  },
-  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
+  }
 }

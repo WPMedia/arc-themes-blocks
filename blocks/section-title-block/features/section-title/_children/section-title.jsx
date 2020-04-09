@@ -19,6 +19,7 @@ const SectionTitle = (props) => {
   const { arcSite } = useFusionContext();
   const showSeparator = !!(
     content
+    && content.children
     && content.children.length > 1
   );
 

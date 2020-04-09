@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/unpublished-content-source-block",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Fusion News Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "contributors": [
@@ -24,6 +24,5 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
-  },
-  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
+  }
 }

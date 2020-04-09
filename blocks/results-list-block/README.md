@@ -2,6 +2,13 @@
 Results List block for Fusion News Theme
 
 ## Usage
+
+```
+const resultsBlock = require('@wpmedia/results-list-block');
+
+
+```
+
 It expects the user to configure its content source.
 Displays a results list where each result card will have a description, headline, byline block and publish date. 
 Makes use of ByLine to display authors of each story and it is included as a dependency.

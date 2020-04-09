@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/full-author-bio-block",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Fusion News Theme full author bio block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -29,6 +29,5 @@
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  },
-  "gitHead": "40bfccf2513211c890df2b4a60fe0cb958b0801f"
+  }
 }

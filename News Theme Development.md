@@ -193,17 +193,16 @@ to the private NPM repo. Reach out to a team member to get this.
 
 `git merge master`
 
-3. Check what's from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
+3. Merge on github into master.
 
+4. From the master branch, check what's changed from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
+
+`npx lerna diff`
 `npx lerna changed`
 
-4. Publish. Make sure to iterate through versions as necessary. We're not planning on following independent versioning. You should always be using the latest dependencies of our own blocks (eg, using "latest", not a particular version of own of our blocks)
+5. Publish. Make sure to iterate through versions as necessary. We're not planning on following independent versioning. You should always be using the latest dependencies of our own blocks (eg, using "latest", not a particular version of own of our blocks)
 
 `npx lerna publish`
-
-5. Commit the version bumps. 
-6. Push the update to your feature branch
-7. Merge feature branch into master
 
 ### fusion-news-theme
 

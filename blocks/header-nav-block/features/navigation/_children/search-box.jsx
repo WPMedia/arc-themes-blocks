@@ -46,7 +46,7 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
   const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
   const btnClassNames = `nav-btn transparent${!isSearchBarOpen ? ' border' : ''}`;
   const iconFill = isSearchBarOpen ? '#666666' : 'white';
-  console.log('updated old');
+
   return (
     <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder="Search" />

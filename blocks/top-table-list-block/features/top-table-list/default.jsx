@@ -25,6 +25,19 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
 
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  // eslint-disable-next-line camelcase
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    // eslint-disable-next-line camelcase
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
+
 const unserializeStory = (storyObject) => ({
   id: storyObject._id,
   itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
@@ -34,6 +47,7 @@ const unserializeStory = (storyObject) => ({
   by: (storyObject.credits && storyObject.credits.by) || [],
   websiteURL: storyObject.website_url || '',
   element: storyObject,
+  resizedImageOptions: extractResizedParams(storyObject),
 });
 
 const generateLabelString = (size) => `Number of ${size} Stories`;

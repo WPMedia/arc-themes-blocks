@@ -22,6 +22,19 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  // eslint-disable-next-line camelcase
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    // eslint-disable-next-line camelcase
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
+
 @Consumer
 class SearchResultsList extends Component {
   constructor(props) {
@@ -151,6 +164,7 @@ class SearchResultsList extends Component {
                   >
                     {extractImage(element.promo_items) ? (
                       <Image
+                        resizedImageOptions={extractResizedParams(element)}
                         url={extractImage(element.promo_items)}
                         alt={headlineText}
                         // same aspect ratio as results list 16:9 by default

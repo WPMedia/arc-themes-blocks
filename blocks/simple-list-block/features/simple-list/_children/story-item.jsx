@@ -12,6 +12,7 @@ const StoryItem = (props) => {
     websiteURL,
     websiteDomain,
     arcSite,
+    resizedImageOptions,
   } = props;
 
   const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -27,6 +28,7 @@ const StoryItem = (props) => {
       >
         {imageURL !== '' ? (
           <Image
+            resizedImageOptions={resizedImageOptions}
             url={imageURL}
             alt={itemTitle}
             // used this from simple results list

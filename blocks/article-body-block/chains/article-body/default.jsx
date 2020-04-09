@@ -29,12 +29,18 @@ function parseArticleItem(item, index, arcSite) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, credits, alt_text: altText,
+        url,
+        subtitle,
+        caption,
+        credits,
+        alt_text: altText,
+        resized_params: resizedImageOptions = {},
       } = item;
 
       return (url && url.length > 0) ? (
         <figure key={key}>
           <Image
+            resizedImageOptions={resizedImageOptions}
             url={url}
             alt={altText}
             smallWidth={768}

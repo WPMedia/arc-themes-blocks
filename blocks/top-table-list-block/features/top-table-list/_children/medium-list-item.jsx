@@ -20,6 +20,7 @@ const MediumListItem = (props) => {
     displayDate,
     id,
     arcSite,
+    resizedImageOptions,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -30,6 +31,7 @@ const MediumListItem = (props) => {
           <a href={constructedURL} title={itemTitle}>
             {imageURL !== '' ? (
               <Image
+                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 // 16:9 aspect for medium

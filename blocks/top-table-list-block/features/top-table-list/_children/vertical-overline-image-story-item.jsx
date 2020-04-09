@@ -22,6 +22,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     overlineText,
     id,
     arcSite,
+    resizedImageOptions,
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
@@ -41,6 +42,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image
+                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}

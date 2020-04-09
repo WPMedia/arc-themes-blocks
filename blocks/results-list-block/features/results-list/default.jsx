@@ -5,7 +5,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties, { resizerURL } from 'fusion:properties';
+import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 import './results-list.scss';
@@ -126,6 +126,7 @@ class ResultsList extends Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
@@ -159,7 +160,8 @@ class ResultsList extends Component {
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
-                      resizerURL={resizerURL}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

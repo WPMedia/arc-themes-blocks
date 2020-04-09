@@ -2,6 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
+import getProperties from 'fusion:properties';
 import StyledLink from './styled-link';
 import Title from './title';
 import DescriptionText from './description-text';
@@ -20,6 +21,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     overlineURL,
     overlineText,
     id,
+    arcSite,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -40,7 +42,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 // large size via invision
                 // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
                 largeWidth={377}
-                largeHeight={272}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
               />
             </a>
           ) : null}

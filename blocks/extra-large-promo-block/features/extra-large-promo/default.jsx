@@ -158,6 +158,8 @@ const ExtraLargePromo = ({ customFields }) => {
                   mediumHeight={450}
                   largeWidth={800}
                   largeHeight={600}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
                 />
               </a>
             )}

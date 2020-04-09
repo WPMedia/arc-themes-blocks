@@ -50,6 +50,8 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
               />
             </a>
           </div>

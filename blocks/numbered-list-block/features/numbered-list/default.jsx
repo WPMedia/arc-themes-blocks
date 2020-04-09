@@ -49,6 +49,7 @@ class NumberedList extends Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -83,6 +84,8 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>

@@ -5,6 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import { Gallery, ImageMetadata, Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -14,7 +15,7 @@ import Table from './_children/table';
 import './_articlebody.scss';
 
 
-function parseArticleItem(item, index) {
+function parseArticleItem(item, index, arcSite) {
   const {
     _id: key = index, type, content,
   } = item;
@@ -42,6 +43,8 @@ function parseArticleItem(item, index) {
             mediumHeight={0}
             largeWidth={1440}
             largeHeight={0}
+            breakpoints={getProperties(arcSite)?.breakpoints}
+            resizerURL={getProperties(arcSite)?.resizerURL}
           />
           <figcaption>
             <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />

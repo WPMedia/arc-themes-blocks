@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -10,6 +11,7 @@ const StoryItem = (props) => {
     primaryFont = '',
     websiteURL,
     websiteDomain,
+    arcSite,
   } = props;
 
   const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -36,6 +38,8 @@ const StoryItem = (props) => {
             largeWidth={274}
             largeHeight={183}
             className="simple-list-img"
+            breakpoints={getProperties(arcSite)?.breakpoints}
+            resizerURL={getProperties(arcSite)?.resizerURL}
           />
         ) : (
           <div className="simple-list-placeholder" />

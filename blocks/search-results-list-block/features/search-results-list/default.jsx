@@ -94,6 +94,7 @@ class SearchResultsList extends Component {
 
 
   render() {
+    const { arcSite } = this.props;
     const {
       resultList: {
         data,
@@ -152,12 +153,15 @@ class SearchResultsList extends Component {
                       <Image
                         url={extractImage(element.promo_items)}
                         alt={headlineText}
-                        smallWidth={274}
-                        smallHeight={148}
+                        // same aspect ratio as results list 16:9 by default
+                        smallWidth={158}
+                        smallHeight={89}
                         mediumWidth={274}
-                        mediumHeight={148}
+                        mediumHeight={154}
                         largeWidth={274}
-                        largeHeight={148}
+                        largeHeight={154}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
                       />
                     ) : <div className="image-placeholder" />}
                   </a>

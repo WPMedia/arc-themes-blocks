@@ -2,6 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -18,6 +19,7 @@ const MediumListItem = (props) => {
     element,
     displayDate,
     id,
+    arcSite,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -38,6 +40,8 @@ const MediumListItem = (props) => {
                 mediumHeight={154}
                 largeWidth={400}
                 largeHeight={225}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
               />
             ) : null}
           </a>

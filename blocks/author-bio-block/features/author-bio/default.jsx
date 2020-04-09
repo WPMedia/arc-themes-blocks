@@ -19,6 +19,7 @@ import {
   SoundCloudIcon,
   RssIcon,
 } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import constructSocialURL from './shared/constructSocialURL';
 
 import './author-bio.scss';
@@ -251,6 +252,8 @@ const AuthorBio = () => {
                     mediumHeight={0}
                     largeWidth={84}
                     largeHeight={0}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
                   />
                 )
                 : null

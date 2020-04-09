@@ -15,6 +15,10 @@ const DescriptionText = styled.p`
 `;
 
 const MediumManualPromo = ({ customFields, arcSite }) => {
+  const {
+    breakpoints,
+    resizerURL,
+  } = getProperties(arcSite);
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
   return customFields.linkURL ? (
@@ -37,6 +41,8 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
                 mediumHeight={154}
                 largeWidth={400}
                 largeHeight={225}
+                breakpoints={breakpoints}
+                resizerURL={resizerURL}
               />
             </a>
           </div>

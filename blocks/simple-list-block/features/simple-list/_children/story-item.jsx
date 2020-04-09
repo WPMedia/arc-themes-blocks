@@ -28,12 +28,13 @@ const StoryItem = (props) => {
             url={imageURL}
             alt={itemTitle}
             // used this from simple results list
+            // small, including simple list, 3:2 aspect ratio
             smallWidth={274}
-            smallHeight={148}
+            smallHeight={183}
             mediumWidth={274}
-            mediumHeight={148}
+            mediumHeight={183}
             largeWidth={274}
-            largeHeight={148}
+            largeHeight={183}
             className="simple-list-img"
           />
         ) : (

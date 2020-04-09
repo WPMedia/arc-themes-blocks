@@ -6,13 +6,11 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties, { resizerURL } from 'fusion:properties';
-// bring this back after poc
-// import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 
 import './results-list.scss';
 import './desktop-styles.scss';
 import './mobile-styles.scss';
-import DynamicImage from './_children/dynamic-image';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -150,19 +148,17 @@ class ResultsList extends Component {
                   title={headlineText}
                 >
                   {extractImage(element.promo_items) ? (
-                    <DynamicImage
+                    <Image
+                      // results list is 16:9 by default
                       resizedImageParams={extractResizedParams(element)}
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
-                      smallHeight={105}
+                      smallHeight={89}
                       mediumWidth={274}
-                      mediumHeight={148}
+                      mediumHeight={154}
                       largeWidth={274}
-                      largeHeight={206}
-                      // resizer url can just be passed in
-                      // if it's just a variable we can do this
-                      // keep engine theme sdk unaware of this
+                      largeHeight={154}
                       resizerURL={resizerURL}
                     />
                   ) : <div className="image-placeholder" />}

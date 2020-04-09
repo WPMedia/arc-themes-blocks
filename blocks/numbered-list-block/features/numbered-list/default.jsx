@@ -76,12 +76,13 @@ class NumberedList extends Component {
                   <Image
                     url={extractImage(element.promo_items)}
                     alt={headlineText}
+                    // small, including numbered list, is 3:2 aspect ratio
                     smallWidth={105}
-                    smallHeight={71}
+                    smallHeight={70}
                     mediumWidth={105}
-                    mediumHeight={71}
+                    mediumHeight={70}
                     largeWidth={274}
-                    largeHeight={210}
+                    largeHeight={183}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>

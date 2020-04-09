@@ -30,11 +30,12 @@ const MediumListItem = (props) => {
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image
+                // 16:9 aspect for medium
                 alt={itemTitle}
-                smallWidth={275}
-                smallHeight={155}
-                mediumWidth={275}
-                mediumHeight={155}
+                smallWidth={274}
+                smallHeight={154}
+                mediumWidth={274}
+                mediumHeight={154}
                 largeWidth={400}
                 largeHeight={225}
               />

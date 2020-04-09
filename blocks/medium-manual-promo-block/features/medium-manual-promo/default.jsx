@@ -28,12 +28,13 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
               title={customFields.headline}
             >
               <Image
+                // medium is 16:9
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                smallWidth={275}
-                smallHeight={155}
-                mediumWidth={275}
-                mediumHeight={155}
+                smallWidth={274}
+                smallHeight={154}
+                mediumWidth={274}
+                mediumHeight={154}
                 largeWidth={400}
                 largeHeight={225}
               />

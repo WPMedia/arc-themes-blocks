@@ -56,9 +56,10 @@ const SmallPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                smallWidth={275}
+                // small should be 3:2 aspect ratio
+                smallWidth={274}
                 smallHeight={183}
-                mediumWidth={275}
+                mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}

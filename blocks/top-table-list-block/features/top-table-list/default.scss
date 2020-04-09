@@ -1,19 +1,37 @@
 .top-table-list-container {
+  &.box-shadow-bottom {
+    box-shadow: none;
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      box-shadow: inset 0 -1px 0 0 $ui-light-gray;
+    }
+  }
+  .small-promo, .medium-promo, .large-promo, .xl-large-promo{
+    margin-bottom: 0;
+  }
+
   .small-promo {
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      .row.sm-promo-padding-btm {
+        padding-top: 0;
+      }
+    }
     display:block;
     .col-md-xl-4 {
       text-align: right;
     }
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      box-shadow: none;
       display:inline-block;
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
     }
-    &:nth-child(odd) {
+
+    &:nth-child(even) {
       margin-right: 0;
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-          margin-right: map-get($spacers, 'md');
+        margin-right: map-get($spacers, 'md');
       }
     }
+
     .row {
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
         grid-column-gap: 0;

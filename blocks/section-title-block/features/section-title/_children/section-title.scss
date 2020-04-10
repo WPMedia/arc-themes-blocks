@@ -4,10 +4,11 @@ h1.section-title {
 }
 
 .section-container {
-  > a {
-    font-size: 14px;
-    color: $ui-primary-font-color;
-  }
   margin-top: map-get($spacers, 'sm');
+
+  > a {
+    color: $ui-primary-font-color;
+    font-size: 14px;
+  }
 }
 

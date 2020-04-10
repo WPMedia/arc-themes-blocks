@@ -71,7 +71,7 @@ class AlertBar extends Component {
     const { website_url: websiteURL = '' } = websites[arcSite] || {};
 
     return (
-      ((content?.content_elements?.length && visible) ? (
+      !!content?.content_elements?.length && visible && (
         <nav className="alert-bar">
           <AlertBarLink
             href={websiteURL}
@@ -85,7 +85,6 @@ class AlertBar extends Component {
           </button>
         </nav>
       )
-        : null)
     );
   }
 }

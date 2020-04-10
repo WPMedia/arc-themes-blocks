@@ -1,12 +1,15 @@
-.results-list-container{
+.results-list-container {
   @include block-margin-bottom;
 }
+
 .results-list--image-container {
   grid-area: image;
 }
+
 .results-list--headline-container {
   grid-area: headline;
 }
+
 .results-list--description-author-container {
   grid-area: description;
 }
@@ -16,37 +19,44 @@
   padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
 
   a {
-    text-decoration: none;
-    color: $ui-primary-font-color;
     @include link-color-active-hover($ui-primary-font-color);
+    color: $ui-primary-font-color;
+    text-decoration: none;
+
     & * {
       @include link-color-active-hover($ui-primary-font-color);
     }
   }
 
-  a, h2, p {
+  a,
+  h2,
+  p {
     color: $ui-primary-font-color;
   }
 
-  img, .image-placeholder {
-    width: 100%;
+  img,
+  .image-placeholder {
     height: auto;
     // doesn't work on ie 11, looks like it'll stretch past natural width
     max-width: max-content;
+    width: 100%;
   }
+
   .image-placeholder {
     min-height: calculateRem(140px);
   }
 }
 
 .see-more {
-  text-align: center;
-  margin-top: map-get($spacers, 'xl');
   margin-bottom: map-get($spacers, 'xl');
+  margin-top: map-get($spacers, 'xl');
+  text-align: center;
+
   > button {
-    width: 213px;
     height: 48px;
+    width: 213px;
   }
+
   .visuallyHidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -55,7 +65,7 @@
     overflow: hidden;
     padding: 0;
     position: absolute;
-    width: 1px;
     white-space: nowrap;
+    width: 1px;
   }
 }

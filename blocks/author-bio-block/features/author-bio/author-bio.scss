@@ -1,13 +1,14 @@
 .author-bio {
-  @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
     margin-top: map-get($spacers, 'md');
   }
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     margin-top: map-get($spacers, 'sm');
   }
 
   @include block-margin-bottom;
 }
+
 .authors {
   display: flex;
   flex-direction: column;
@@ -18,47 +19,47 @@
   }
 
   a {
-    text-decoration: none;
     margin: 0;
+    text-decoration: none;
   }
 
   img {
+    border-radius: 100%;
+    height: calculateRem(84px);
     margin: map-get($spacers, 'xs');
     width: calculateRem(84px);
-    height: calculateRem(84px);
-    border-radius: 100%;
   }
 
   .descriptions {
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      width:100%; //For IE 11
+      width: 100%; //For IE 11
     }
-    margin: map-get($spacers, 'xs');
     display: flex;
     flex-direction: column;
+    margin: map-get($spacers, 'xs');
 
     .socialButtons {
-      margin-top: map-get($spacers, 'xs');
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      margin-top: map-get($spacers, 'xs');
 
       a {
-        text-decoration: none;
         height: map-get($spacers, 'md');
-        width: map-get($spacers, 'md');
         margin-right: map-get($spacers, 'xs');
         text-align: center;
+        text-decoration: none;
+        width: map-get($spacers, 'md');
       }
     }
   }
 
   .authorName {
-    font-weight: bold;
-    margin: map-get($spacers, 'xxs') 0;
     font-size: calculateRem(18px);
+    font-weight: bold;
     line-height: calculateRem(32px);
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    margin: map-get($spacers, 'xxs') 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: calculateRem(14px);
       line-height: calculateRem(24px);
     }
@@ -66,13 +67,13 @@
 
   p {
     margin: map-get($spacers, 'xxs') 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'sm')){
-      line-height: calculateRem(32px);
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
       font-size: calculateRem(18px);
+      line-height: calculateRem(32px);
     }
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-      line-height: calculateRem(24px);
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: calculateRem(14px);
+      line-height: calculateRem(24px);
     }
   }
 

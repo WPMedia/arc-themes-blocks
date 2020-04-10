@@ -1,24 +1,24 @@
 .shareBar {
-  position: fixed;
-  left: 0px;
-  top: 200px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 5px;
-  padding-top: 10px;
+  left: 0;
   padding-bottom: 10px;
+  padding-top: 10px;
+  position: fixed;
+  top: 200px;
   width: 44px;
 
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     visibility: hidden;
   }
 
   .shareButton {
-    background: none!important;
+    background: none !important;
     border: none;
-    padding: 0!important;
     cursor: pointer;
-    margin: 5px 5px;
+    margin: 5px;
+    padding: 0 !important;
   }
 }

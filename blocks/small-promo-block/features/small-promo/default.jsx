@@ -16,15 +16,15 @@ const SmallPromo = ({ customFields, arcSite }) => {
   const { editableContent } = useEditableContent();
 
   const content = useContent({
-    source: customFields.itemContentConfig.contentService,
-    query: customFields.itemContentConfig.contentConfigValues,
+    source: customFields?.itemContentConfig?.contentService ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
   }) || null;
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
-  return content && (
+  return content ? (
     <article className="container-fluid small-promo">
       <div className="row sm-promo-padding-btm">
         {customFields.showHeadline
@@ -68,7 +68,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
         )}
       </div>
     </article>
-  );
+  ) : null;
 };
 
 SmallPromo.propTypes = {

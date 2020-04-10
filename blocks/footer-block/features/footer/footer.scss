@@ -1,41 +1,41 @@
 footer {
-  width:100%;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 
   //Fix for IE 11 and non grid browsers
-  .legacy-footer-row{
+  .legacy-footer-row {
     justify-content: space-around;
-    @supports (display: grid){
+    @supports (display: grid) {
       justify-content: initial;
     }
   }
 
   .section-separator {
-    border-top: 1px solid #babdc2;
     border-bottom: 1px solid #babdc2;
+    border-top: 1px solid #babdc2;
   }
 
   .copyright {
-    vertical-align: middle;
+    color: #7f8c8d;
     font-family: $theme-primary-font-family;
-    text-align: center;
     font-size: calculateRem(14px);
-    color: #7F8C8D;
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
-      margin-top: map-get($spacers, 'md');
+    text-align: center;
+    vertical-align: middle;
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       margin-bottom: map-get($spacers, 'md');
+      margin-top: map-get($spacers, 'md');
     }
   }
 
   #copyright-top {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       display: none;
     }
   }
 
   #copyright-bottom {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       display: block;
     }
     display: none;
@@ -47,26 +47,26 @@ footer {
 
   .footer-row {
     display: table;
-    width: 100%;
     padding: map-get($spacers, 'xs') 0;
+    width: 100%;
   }
 
   .social-column {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       display: table-cell;
       text-align: center;
-      width: 100%
+      width: 100%;
     }
-    vertical-align: middle;
     display: inline-block;
+    vertical-align: middle;
     width: 16.6%;
   }
 
   .copyright-column {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       display: table-cell;
       text-align: center;
-      width: 100%
+      width: 100%;
     }
     display: inline-block;
     text-align: center;
@@ -74,19 +74,19 @@ footer {
   }
 
   .socialBtn-container {
-    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    border-radius: calculateRem(5px);
     border: 1px solid $primary-color;
+    border-radius: calculateRem(5px);
+    display: inline-flex;
+    justify-content: space-between;
     margin-left: -(map-get($spacers, 'xs'));
   
     a {
       align-self: center;
+      border-right: 1px solid $primary-color;
       display: inline-block;
       flex: auto;
       padding: map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs');
-      border-right: 1px solid $primary-color;
 
       &:last-child {
         border-right: none;
@@ -114,27 +114,28 @@ footer {
   }
 
   .footer-section {
+
+    font-size: 14px;
     justify-self: left;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       justify-self: left;
     }
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')){
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       justify-self: center;
     }
 
-    font-size: 14px;
     .footer-header {
-        font-weight: bold;
+      font-weight: bold;
     }
 
     .footer-item {
-        margin: map-get($spacers, 'xs') 0;
+      margin: map-get($spacers, 'xs') 0;
 
-        > a {
-            text-decoration: none;
-            color: #7F8C8D;
-        }
+      > a {
+        color: #7f8c8d;
+        text-decoration: none;
+      }
     }
   }
 }

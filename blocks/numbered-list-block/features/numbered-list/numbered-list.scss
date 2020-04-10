@@ -4,13 +4,13 @@
 
 .numbered-list-item {
   box-shadow: inset 0 -1px 0 0 $ui-light-gray;
-  padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
   display: flex;
   justify-content: space-between;
+  padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
 
   .list-item-number {
-    flex: 0 0 calculateRem(40px);
     color: $ui-dark-secondary-color;
+    flex: 0 0 calculateRem(40px);
     font-size: calculateRem(20px);
     font-weight: bold;
     line-height: calculateRem(24px);
@@ -18,13 +18,13 @@
   }
 
   .list-anchor-image {
-    text-decoration: none;
     flex: 0 0 25%;
+    text-decoration: none;
 
     img,
     .numbered-list-placeholder {
-      width: 100%;
       height: auto;
+      width: 100%;
     }
 
     .numbered-list-placeholder {
@@ -33,20 +33,20 @@
   }
 
   .numbered-list-placeholder {
-    background-color: #DFE4EA;
+    background-color: #dfe4ea;
   }
 
   .headline-list-anchor {
-    display: flex;
-    text-decoration: none;
-    margin-right: calculateRem(16px);
-    color: $ui-primary-font-color;
     @include link-color-active-hover($ui-primary-font-color);
+    color: $ui-primary-font-color;
+    display: flex;
+    margin-right: calculateRem(16px);
+    text-decoration: none;
 
     .headline-text {
       font-size: calculateRem(16px);
-      line-height: calculateRem(24px);
       font-weight: normal;
+      line-height: calculateRem(24px);
     }
   }
 }

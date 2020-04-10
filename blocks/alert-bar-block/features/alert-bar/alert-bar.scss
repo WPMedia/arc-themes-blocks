@@ -11,6 +11,7 @@
 
   .article-link {
     display: inline-flex;
+    width: 80%;
     color: white;	
     font-family: $theme-primary-font-family;	
     font-size: 16px;
@@ -20,7 +21,7 @@
     line-height: 16px;
 
     align-items: center;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
   }
   button {

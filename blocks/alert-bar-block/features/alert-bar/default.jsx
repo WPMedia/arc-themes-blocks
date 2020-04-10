@@ -35,9 +35,8 @@ class AlertBar extends Component {
 
   componentDidMount() {
     const { arcSite } = this.props;
-
     // The content source will always return an array with one story in it
-    this.timerID = setInterval(() => {
+    this.timeID = window.setInterval(() => {
       // Use getContent instead of fetchContent because it will otherwise only
       // return cached contents, as of March 25.
       const { fetched } = this.getContent({
@@ -50,12 +49,16 @@ class AlertBar extends Component {
         const visible = content?.content_elements?.length > 0;
         this.setState({ content, visible });
       });
-    }, (this.getRefreshInterval()));
+    }, this.getRefreshInterval());
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeID);
   }
 
   getRefreshInterval() {
     // eslint-disable-next-line react/destructuring-assignment
-    const { refreshInterval } = this.props.customFields;
+    const { refreshInterval = 120 } = this.props.customFields;
     return Math.max(refreshInterval, 120) * 1000;
   }
 
@@ -94,7 +97,7 @@ AlertBar.propTypes = {
     refreshInterval: PropTypes.number.tag({
       label: 'Refresh Intervals (in seconds)',
       description: 'This is the frequency at which this feature will refresh. Default and minimum is 120 seconds.',
-      default: 120,
+      default: 120, // Leaving this here for now but it seems to not be applying the default value
     }),
   }),
 };

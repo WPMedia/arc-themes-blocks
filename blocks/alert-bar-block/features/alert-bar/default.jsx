@@ -57,8 +57,7 @@ class AlertBar extends Component {
   }
 
   getRefreshInterval() {
-    // eslint-disable-next-line react/destructuring-assignment
-    const { refreshInterval = 120 } = this.props.customFields;
+    const { refreshInterval = 120 } = this.props?.customFields;
     return Math.max(refreshInterval, 120) * 1000;
   }
 

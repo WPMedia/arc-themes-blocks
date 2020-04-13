@@ -14,8 +14,7 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
       // this is height and width of the target image
       const { height, width } = breakpoint;
 
-      // if (!height && !width) throw new Error('Height and Width required');
-
+      if (!height && !width) throw new Error('Height and Width required');
       const thumbor = new Thumbor(resizerKey, resizerUrl);
       const thumborParam = thumbor
         .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
@@ -106,7 +105,7 @@ takes the dimensions and
 
 const resizeImage = (image, imageWidths, resizer) => {
   if ((image.type && image.type !== 'image') || !image.url) {
-    // throw new Error('Not a valid image object');
+    throw new Error('Not a valid image object');
   }
 
   return resizer.getResizerParams(image.url, imageWidths);

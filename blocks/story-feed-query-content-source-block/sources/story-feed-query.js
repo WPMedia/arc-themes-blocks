@@ -122,7 +122,7 @@ const resizePromoItems = (promoItems, breakpoints, resizer) => {
 
 const getResizedImageParams = (data, option, filterQuality) => {
   if (!option.resizerSecret || !option.resizerUrl || !option.breakpoints) {
-    // throw new Error('Resizer URL, secret, and breakpoints are required.');
+    throw new Error('Not a valid image object');
   }
 
   const resizer = createResizer(option.resizerSecret, option.resizerUrl, filterQuality);

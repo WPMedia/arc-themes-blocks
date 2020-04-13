@@ -1,8 +1,8 @@
 {
   "name": "@wpmedia/right-rail-advanced-block",
-  "version": "1.2.0",
+  "version": "0.0.1",
   "description": "Fusion themes block containing an advanced right-rail layout.",
-  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
+  "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "license": "UNLICENSED",
   "main": "index.js",

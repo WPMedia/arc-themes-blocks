@@ -30,12 +30,13 @@ const ExtraLargePromo = ({ customFields }) => {
   const { editableContent } = useEditableContent();
 
   const content = useContent({
-    source: customFields.itemContentConfig.contentService,
-    query: customFields.itemContentConfig.contentConfigValues,
+    source: customFields?.itemContentConfig?.contentService ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
   }) || null;
 
-  const { website_section: websiteSection } = content.websites[arcSite];
-
+  const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
+    website_section: null,
+  };
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
@@ -43,15 +44,14 @@ const ExtraLargePromo = ({ customFields }) => {
   const byLineArray = (content && content.credits && content.credits.by
     && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
-
-  const overlineDisplay = (content.label && content.label.basic && content.label.basic.display)
-    || (content.websites && content.websites[arcSite] && websiteSection)
+  const overlineDisplay = (content?.label?.basic?.display ?? null)
+    || (content?.websites?.[arcSite] && websiteSection)
     || false;
-  const overlineUrl = (content.label && content.label.basic && content.label.basic.url)
-    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection._id)
+  const overlineUrl = (content?.label?.basic?.url ?? null)
+    || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
     || '';
-  const overlineText = (content.label && content.label.basic && content.label.basic.text)
-    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection.name)
+  const overlineText = (content?.label?.basic?.text ?? null)
+    || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
     || '';
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;

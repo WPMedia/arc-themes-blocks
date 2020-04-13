@@ -1,32 +1,28 @@
 .tags-holder {
+  @include block-margin-bottom;
+  align-content: center;
+  align-items: center;
+  box-shadow: inset 0 -1px 0 0 #b8c1cb, inset 0 1px 0 0 #b8c1cb;
   display: flex;
-  padding: 0.5rem 1rem 0.5rem 2.125rem;
-  min-height: 55px;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  align-content: center;
-  box-shadow: inset 0 -1px 0 0 #B8C1CB, inset 0 1px 0 0 #B8C1CB;
-  @include block-margin-bottom;
+  min-height: 55px;
+  padding: 0.5rem 1rem 0.5rem 2.125rem;
 }
 
 .tags {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 1.5rem;
-  margin: 0.5rem 0.5rem;
-  font-size: .75rem;
-  line-height: calculateRem(24px);
   border-radius: 10000px;
-  text-decoration: none;
   color: #fff;
+  display: flex;
+  font-size: 0.75rem;
+  height: 1.5rem;
+  justify-content: center;
+  line-height: calculateRem(24px);
+  margin: 0.5rem;
   padding: 0 0.9375rem;
-  &:hover, &:active{
-    color:#fff;
-    background-color: lighten($primary-color, 20%);;
-  }
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')){
-    line-height: .875rem;
+  text-decoration: none;
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    line-height: 0.875rem;
   }
 }

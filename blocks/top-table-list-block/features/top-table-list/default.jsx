@@ -83,7 +83,7 @@ const TopTableList = (props) => {
   }) || {};
 
   return (
-    <div key={id} className="top-table-list-container">
+    <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
       {
         contentElements.map(unserializeStory).map((itemObject, index) => {
           const {

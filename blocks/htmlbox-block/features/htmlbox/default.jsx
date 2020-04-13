@@ -15,7 +15,7 @@ HTMLBox.label = 'HTML Box – Arc Block';
 
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({
-    HTML: PropTypes.string,
+    HTML: PropTypes.richtext,
   }),
 };
 

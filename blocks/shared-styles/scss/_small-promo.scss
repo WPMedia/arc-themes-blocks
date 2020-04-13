@@ -9,27 +9,27 @@
   }
 
   .sm-promo-headline {
+    @include link-color-active-hover($ui-primary-font-color);
     font-size: calculateRem(16px);
+    font-weight: normal;
     line-height: calculateRem(24px);
     margin: 0;
     padding: 0 map-get($spacers, 'xxs') 0 0;
-    font-weight: normal;
     text-decoration: none;
-    @include link-color-active-hover($ui-primary-font-color);
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: 0;
     }
   }
 
   img {
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
   }
 
   .sm-promo-padding-btm {
-    padding-top: map-get($spacers, 'md');
-    padding-bottom: map-get($spacers, 'md');
-    margin-top: 0;
     margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: map-get($spacers, 'md');
+    padding-top: map-get($spacers, 'md');
   }
 }

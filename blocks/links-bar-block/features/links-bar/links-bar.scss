@@ -1,25 +1,25 @@
 .links-bar {
+  @include block-margin-bottom;
+  align-items: center;
+  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   display: inline-flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-evenly;
-  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   width: 100%;
-  @include block-margin-bottom;
 
   .links-menu {
     margin: 5px 15px;
-    padding: 8px 0px;
+    padding: 8px 0;
 
     a {
-      color: #1F2D3D;
+      color: #1f2d3d;
       font-family: $theme-primary-font-family;
       font-size: 14px;
       font-weight: bold;
 
       height: 100%;
       line-height: 14px;
-      margin: 8px 0px;
+      margin: 8px 0;
 
       text-align: center;
       text-decoration: none;

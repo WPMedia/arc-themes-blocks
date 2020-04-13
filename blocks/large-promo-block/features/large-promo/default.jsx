@@ -31,29 +31,29 @@ const LargePromo = ({ customFields }) => {
   const { editableContent } = useEditableContent();
 
   const content = useContent({
-    source: customFields.itemContentConfig.contentService,
-    query: customFields.itemContentConfig.contentConfigValues,
+    source: customFields?.itemContentConfig?.contentService ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
   }) || null;
 
-  const { website_section: websiteSection } = content.websites[arcSite];
-
+  const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
+    website_section: null,
+  };
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
-    && content.credits.by.length !== 0;
+      && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
-    && content.credits.by.length !== 0) ? content.credits.by : null;
+      && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
-
-  const overlineDisplay = (content.label && content.label.basic && content.label.basic.display)
-    || (content.websites && content.websites[arcSite] && websiteSection)
-    || false;
-  const overlineUrl = (content.label && content.label.basic && content.label.basic.url)
-    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection._id)
-    || '';
-  const overlineText = (content.label && content.label.basic && content.label.basic.text)
-    || (content.websites && content.websites[arcSite] && websiteSection && websiteSection.name)
-    || '';
+  const overlineDisplay = (content?.label?.basic?.display ?? null)
+      || (content?.websites?.[arcSite] && websiteSection)
+      || false;
+  const overlineUrl = (content?.label?.basic?.url ?? null)
+      || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
+      || '';
+  const overlineText = (content?.label?.basic?.text ?? null)
+      || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
+      || '';
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
@@ -136,7 +136,7 @@ const LargePromo = ({ customFields }) => {
     return null;
   };
 
-  return content && (
+  return content ? (
     <article className="container-fluid large-promo">
       <div className="row lg-promo-padding-bottom">
         {customFields.showImage
@@ -175,7 +175,7 @@ const LargePromo = ({ customFields }) => {
         )}
       </div>
     </article>
-  );
+  ) : null;
 };
 
 LargePromo.propTypes = {

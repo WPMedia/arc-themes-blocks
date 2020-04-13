@@ -1,0 +1,29 @@
+{
+  "name": "@wpmedia/alert-bar-block",
+  "version": "0.0.2",
+  "description": "Fusion News Theme alert bar block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/links-bar-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "@wpmedia/engine-theme-sdk": "latest",
+    "styled-components": "^4.4.0"
+  }
+}

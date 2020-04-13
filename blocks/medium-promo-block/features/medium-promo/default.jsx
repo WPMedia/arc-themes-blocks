@@ -22,16 +22,16 @@ const MediumPromo = ({ customFields, arcSite }) => {
   const { editableContent } = useEditableContent();
 
   const content = useContent({
-    source: customFields.itemContentConfig.contentService,
-    query: customFields.itemContentConfig.contentConfigValues,
+    source: customFields?.itemContentConfig?.contentService ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
   }) || null;
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
-    && content.credits.by.length !== 0;
+      && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
-    && content.credits.by.length !== 0) ? content.credits.by : null;
+      && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -97,7 +97,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
     return null;
   };
 
-  return content && (
+  return content ? (
     <article className="container-fluid medium-promo">
       <div className="row med-promo-padding-bottom">
         {customFields.showImage
@@ -135,7 +135,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
         )}
       </div>
     </article>
-  );
+  ) : null;
 };
 
 MediumPromo.propTypes = {

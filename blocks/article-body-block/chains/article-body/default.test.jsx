@@ -219,10 +219,10 @@ describe('article-body chain', () => {
       }));
     });
 
-    it('should render a paragraph with "This element did not match with the elements that are currently implemented:&nbsp;"', () => {
+    it('should render an empty string', () => {
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(<ArticleBodyChain><div>1</div></ArticleBodyChain>);
-      expect(wrapper.find('article.article-body-wrapper').find('p').text()).toMatch('This element did not match with the elements that are currently implemented:');
+      expect(wrapper.find('article.article-body-wrapper').text()).toMatch('');
     });
   });
 

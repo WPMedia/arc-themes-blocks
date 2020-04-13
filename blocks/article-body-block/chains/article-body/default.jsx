@@ -138,12 +138,7 @@ function parseArticleItem(item, index) {
         </section>
       );
     default:
-      return (
-        <p key={key}>
-          This element did not match with the elements that are currently implemented:&nbsp;
-          {type}
-        </p>
-      );
+      return '';
   }
 }
 

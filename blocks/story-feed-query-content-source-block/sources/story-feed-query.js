@@ -31,25 +31,24 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
   // output: array of strings for ['420x420']
   const getBreakpointDimensionsForAspectRatios = () => {
     // consider adding window.devicePixelRatio for * scale
-    const widthsAndAspectRatios = [];
     const siteProperties = getProperties();
     const {
       aspectRatios,
       imageWidths,
     } = siteProperties;
-    imageWidths.forEach((breakpointWidth) => {
-      aspectRatios.forEach((aspectRatio) => {
-        const aspectRatioDimensions = aspectRatio.split(':');
-        // get width by splitting the 400x400 string
-        const widthDivisor = aspectRatioDimensions[0];
-        const heightDivisor = aspectRatioDimensions[1];
-        const scaledHeight = Math.round((breakpointWidth / widthDivisor) * heightDivisor);
-        const dimension = `${breakpointWidth}x${scaledHeight}`;
-        widthsAndAspectRatios.push(dimension);
-      });
-    });
-    return widthsAndAspectRatios;
+    return aspectRatios.reduce((availableDimensions, aspectRatio) => {
+      const aspectRatioDimensions = aspectRatio.split(':');
+      // get width by splitting the 400x400 string
+      const widthDivisor = aspectRatioDimensions[0];
+      const heightDivisor = aspectRatioDimensions[1];
+      return availableDimensions.concat(imageWidths.map((width) => {
+        const scaledHeight = Math.round((width / widthDivisor) * heightDivisor);
+        const dimension = `${width}x${scaledHeight}`;
+        return dimension;
+      }));
+    }, []);
   };
+
 
   const getResizerParams = (originalUrl) => {
     const output = {};

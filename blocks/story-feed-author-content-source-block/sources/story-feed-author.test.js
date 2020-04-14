@@ -60,8 +60,8 @@ describe('get resized image data helper on the server-side', () => {
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
       '/B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:format(jpg):quality(70)/',
-      '/RwaE87wvO3wFs17iLXhecTl2hhQ=filters:format(jpg):quality(70)/',
       '/CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:format(jpg):quality(70)/',
+      '/RwaE87wvO3wFs17iLXhecTl2hhQ=filters:format(jpg):quality(70)/',
       '/6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:format(jpg):quality(70)/']);
 
     // {
@@ -75,8 +75,8 @@ describe('get resized image data helper on the server-side', () => {
 
     expect(paramKeys).toEqual([
       '158x105',
-      '158x119',
       '274x183',
+      '158x119',
       '274x206',
     ]);
   });

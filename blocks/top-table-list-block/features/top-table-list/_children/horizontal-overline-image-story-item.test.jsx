@@ -16,6 +16,12 @@ jest.mock('fusion:context', () => ({
   })),
 }));
 
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({
+    editableContent: {},
+  })),
+}));
+
 describe('horizontal overline image story item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   it('renders with the full required props', () => {

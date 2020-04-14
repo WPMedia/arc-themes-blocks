@@ -11,6 +11,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
+    "lint:styles": "stylelint '**/*.scss' --formatter verbose",
+    "lint:styles:fix": "npm run lint:styles -- --fix",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "test:coverage": "jest --coverage"
@@ -20,6 +22,7 @@
       "pre-commit": "npm run test:coverage && npm run lint"
     }
   },
+  "license": "UNLICENSED",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.4.4",
@@ -44,7 +47,9 @@
     "jest-enzyme": "^7.1.0",
     "lerna": "^3.18.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "stylelint": "^13.3.1",
+    "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "dependencies": {
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -68,7 +73,9 @@
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
-    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
+    "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
+    "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block"
   },
   "jest": {
     "transformIgnorePatterns": [

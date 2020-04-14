@@ -1,31 +1,32 @@
 .alert-bar {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
   background-color: red;
-  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
   height: 56px;
+  justify-content: space-between;
   padding-left: 18px;
   padding-right: 18px;
+  width: 100%;
 
   .article-link {
+
+    align-items: center;
+    color: white;
     display: inline-flex;
-    width: 80%;
-    color: white;	
-    font-family: $theme-primary-font-family;	
+    font-family: $theme-primary-font-family;
     font-size: 16px;
-    font-weight: bold; 
+    font-weight: bold;
 
     height: 100%;
     line-height: 16px;
-
-    align-items: center;
     text-align: left;
     text-decoration: none;
+    width: 80%;
   }
+
   button {
-    background: none!important;
+    background: none !important;
     border: none;
     cursor: pointer;
     margin-right: 20px;

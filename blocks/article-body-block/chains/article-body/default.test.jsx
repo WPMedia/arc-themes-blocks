@@ -21,7 +21,8 @@ describe('article-body chain', () => {
                   _id: 1563473120767,
                 },
                 content: 'This is a test article that has all kinds of different element types in it. You should see each element type appear below the bolded text.',
-              }, {
+              },
+              {
                 _id: 'E3ZIEEQTXBCWVFPN6DWSGAORE4',
                 type: 'text',
                 additional_properties: {
@@ -30,13 +31,24 @@ describe('article-body chain', () => {
                   _id: 1563473120768,
                 },
                 content: '<b>Text (two paragraphs with HTML)</b>',
-              }, {
+              },
+              {
                 _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S24',
                 type: 'text',
                 additional_properties: {
                   comments: [],
                   inline_comments: [],
                   _id: 1563473120769,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S25',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120770,
                 },
                 content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
               },
@@ -56,8 +68,159 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
+
       expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
       expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(2);
+    });
+    it('should not include ad features specified to be below the last or second-to-last paragraphs', () => {
+      jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              {
+                _id: 'L57RVT4465HMBKL5T26NBBFBNI',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120767,
+                },
+                content: 'This is a test article that has all kinds of different element types in it. You should see each element type appear below the bolded text.',
+              },
+              {
+                _id: 'E3ZIEEQTXBCWVFPN6DWSGAORE4',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120768,
+                },
+                content: '<b>Text (two paragraphs with HTML)</b>',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S24',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120769,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S25',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120770,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: {
+            elementPlacement: { 1: 3, 2: 4, 3: 2 },
+          },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(0);
+      expect(wrapper.find('article.article-body-wrapper').find('span')).toHaveLength(1);
+    });
+    it('should ignore non-text content elements when positioning ad features', () => {
+      jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              {
+                _id: 'L57RVT4465HMBKL5T26NBBFBNI',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120767,
+                },
+                content: 'This is a test article that has all kinds of different element types in it. You should see each element type appear below the bolded text.',
+              },
+              {
+                _id: 'E3ZIEEQTXBCWVFPN6DWSGAORE4',
+                type: 'header',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120768,
+                },
+                content: 'headerrr',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S23',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120769,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S24',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120769,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S25',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120770,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: {
+            elementPlacement: { 1: 3, 2: 4, 3: 2 },
+          },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find('span')).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find('div')).toHaveLength(0);
     });
   });
 
@@ -106,12 +269,12 @@ describe('article-body chain', () => {
           },
           arcSite: 'the-sun',
           customFields: {
-            elementPlacement: '{ "1": "2", "2": "4" }',
+            elementPlacement: { 1: 1, 2: 4 },
           },
         })),
       }));
     });
-    it('should ignore the child with posistion greater than contentElement.length', () => {
+    it('should ignore the child with position greater than contentElement.length', () => {
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
         <ArticleBodyChain>
@@ -219,10 +382,10 @@ describe('article-body chain', () => {
       }));
     });
 
-    it('should render a paragraph with "This element did not match with the elements that are currently implemented:&nbsp;"', () => {
+    it('should render an empty string', () => {
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(<ArticleBodyChain><div>1</div></ArticleBodyChain>);
-      expect(wrapper.find('article.article-body-wrapper').find('p').text()).toMatch('This element did not match with the elements that are currently implemented:');
+      expect(wrapper.find('article.article-body-wrapper').text()).toMatch('');
     });
   });
 

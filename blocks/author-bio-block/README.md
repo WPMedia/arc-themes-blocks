@@ -13,4 +13,8 @@ credits: {
 }
 ```
 
-If there is no description provided by the schema, then no author bio will be displayed - this means that they are not a staff writer.
+If there is no description provided by the schema, then no author bio will be displayed - this means that they are not a staff writer. If there is no credits or global content provided, no section tag at all will be rendered:
+
+```
+useFusionContext: ({ globalContent: {} }))
+```

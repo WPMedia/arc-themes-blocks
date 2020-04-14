@@ -12,17 +12,20 @@
     padding: 8px 0;
 
     a {
-      color: #1f2d3d;
+      @include link-color-active-hover($ui-primary-font-color);
       font-family: $theme-primary-font-family;
       font-size: 14px;
       font-weight: bold;
-
       height: 100%;
       line-height: 14px;
       margin: 8px 0;
-
       text-align: center;
       text-decoration: none;
+
+      &:hover {
+        
+      }
+      
     }
   }
 }

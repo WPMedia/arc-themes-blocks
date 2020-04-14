@@ -133,7 +133,7 @@ footer {
       margin: map-get($spacers, 'xs') 0;
 
       > a {
-        color: #7f8c8d;
+        color: $ui-medium-gray;
         text-decoration: none;
       }
     }

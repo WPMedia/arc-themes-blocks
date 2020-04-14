@@ -64,7 +64,6 @@ describe('get resized image data helper on the server-side', () => {
       '/CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:format(jpg):quality(70)/',
       '/6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:format(jpg):quality(70)/']);
 
-    // make sure none of them undefined
     // {
     // '420x315|mobile':
     // '/1QqmqwWQDKeiaT6bDVR31vyHK3k=filters:format(jpg):quality(70)/',

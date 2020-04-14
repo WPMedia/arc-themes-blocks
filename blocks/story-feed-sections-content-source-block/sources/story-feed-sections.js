@@ -58,19 +58,6 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
     return widthsAndAspectRatios;
   };
 
-  /*
-takes the dimensions and
-{
-         '158x105':
-           '/XmvUfw5XeP2vy73eIemjjWvUcTE=filters:format(webp):quality(70)/' ,
-        '274x183':
-         '/eacPxZZDbWfB6iQNyKFtKx-33ho=filters:format(webp):quality(70)/' ,
-        '158x105':
-         '/lFOUx-Y28BEF-DdIYSkmafVhq20=filters:format(jpg):quality(70)/' ,
-        '274x183':
-           '/hfZg-QUBEET7FzIhxQQddvAcz7c=filters:format(jpg):quality(70)/'
-
-  */
   const getResizerParams = (originalUrl) => {
     const output = {};
     const getParamsByFormat = (format, previousOutput) => {

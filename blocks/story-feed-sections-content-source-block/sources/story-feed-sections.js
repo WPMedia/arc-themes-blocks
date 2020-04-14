@@ -95,20 +95,20 @@ const resizeImage = (image, imageWidths, resizer) => {
   return resizer.getResizerParams(image.url, imageWidths);
 };
 
-const resizePromoItems = (promoItems, breakpoints, resizer) => {
-  const output = {};
-  Object.keys(promoItems).forEach((key) => {
+/* eslint-disable no-param-reassign */
+const resizePromoItems = (promoItems, breakpoints, resizer) => Object.keys(promoItems)
+  .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
     if ((key === 'type' && promoItem === 'image') || key === 'url') {
-      output.resized_params = resizeImage(promoItems, breakpoints, resizer);
-      output.url = promoItems.url;
-      output.type = 'image';
+      promoItemWithResizedImages.resized_params = resizeImage(promoItems, breakpoints, resizer);
+      promoItemWithResizedImages.url = promoItems.url;
+      promoItemWithResizedImages.type = 'image';
     } else {
-      output[key] = promoItem;
+      promoItemWithResizedImages[key] = promoItem;
     }
-  });
-  return output;
-};
+    return promoItemWithResizedImages;
+  }, {});
+/* eslint-enable no-param-reassign */
 
 const getResizedImageParams = (data, option, filterQuality) => {
   if (!option.resizerSecret || !option.resizerUrl || !option.breakpoints) {

@@ -43,8 +43,7 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
       aspectRatios,
       imageWidths,
     } = siteProperties;
-    imageWidths.forEach((imageWidth) => {
-      const breakpointWidth = imageWidth;
+    imageWidths.forEach((breakpointWidth) => {
       aspectRatios.forEach((aspectRatio) => {
         const aspectRatioDimensions = aspectRatio.split(':');
         // get width by splitting the 400x400 string

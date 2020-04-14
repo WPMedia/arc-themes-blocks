@@ -114,6 +114,8 @@ const getResizedImageParams = (data, option, filterQuality) => {
 
   /* eslint-disable no-param-reassign */
   const generateParams = (sourceData) => {
+    /*
+    path not taken based on current reqs
     if (sourceData && sourceData.content_elements) {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
@@ -139,6 +141,7 @@ const getResizedImageParams = (data, option, filterQuality) => {
         },
       );
     }
+    */
     if (sourceData && sourceData.promo_items && sourceData.promo_items.basic) {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,

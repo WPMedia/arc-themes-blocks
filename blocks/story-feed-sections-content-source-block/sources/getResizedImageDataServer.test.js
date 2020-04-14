@@ -6,8 +6,8 @@
  */
 
 import getProperties from 'fusion:properties';
-import { getResizedImageData } from './story-feed-query';
-import mockStoryFeedData from './mockStoryFeedData';
+import { getResizedImageData } from './story-feed-sections';
+import mockStoryFeedData from './mockStoryFeedSectionData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [

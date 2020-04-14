@@ -8,8 +8,7 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
       // this is height and width of the target image
       const { height, width } = breakpoint;
 
-      // if (!height && !width) throw new Error('Height and Width required');
-
+      if (!height && !width) throw new Error('Height and Width required');
       const thumbor = new Thumbor(resizerKey, resizerUrl);
       const thumborParam = thumbor
         .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
@@ -32,40 +31,25 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
   // output: array of strings for ['420x420']
   const getBreakpointDimensionsForAspectRatios = () => {
     // consider adding window.devicePixelRatio for * scale
-    const widthsAndAspectRatios = [];
     const siteProperties = getProperties();
     const {
       aspectRatios,
       imageWidths,
     } = siteProperties;
-    imageWidths.forEach((imageWidth) => {
-      const breakpointWidth = imageWidth;
-      aspectRatios.forEach((aspectRatio) => {
-        const aspectRatioDimensions = aspectRatio.split(':');
-        // get width by splitting the 400x400 string
-        const widthDivisor = aspectRatioDimensions[0];
-        const heightDivisor = aspectRatioDimensions[1];
-        const scaledHeight = Math.round((breakpointWidth / widthDivisor) * heightDivisor);
-        const dimension = `${breakpointWidth}x${scaledHeight}`;
-        widthsAndAspectRatios.push(dimension);
-      });
-    });
-    return widthsAndAspectRatios;
+    return aspectRatios.reduce((availableDimensions, aspectRatio) => {
+      const aspectRatioDimensions = aspectRatio.split(':');
+      // get width by splitting the 400x400 string
+      const widthDivisor = aspectRatioDimensions[0];
+      const heightDivisor = aspectRatioDimensions[1];
+      return availableDimensions.concat(imageWidths.map((width) => {
+        const scaledHeight = Math.round((width / widthDivisor) * heightDivisor);
+        const dimension = `${width}x${scaledHeight}`;
+        return dimension;
+      }));
+    }, []);
   };
 
-  /*
-takes the dimensions and
-{
-         '158x105':
-           '/XmvUfw5XeP2vy73eIemjjWvUcTE=filters:format(webp):quality(70)/' ,
-        '274x183':
-         '/eacPxZZDbWfB6iQNyKFtKx-33ho=filters:format(webp):quality(70)/' ,
-        '158x105':
-         '/lFOUx-Y28BEF-DdIYSkmafVhq20=filters:format(jpg):quality(70)/' ,
-        '274x183':
-           '/hfZg-QUBEET7FzIhxQQddvAcz7c=filters:format(jpg):quality(70)/'
 
-  */
   const getResizerParams = (originalUrl) => {
     const output = {};
     const getParamsByFormat = (format, previousOutput) => {
@@ -100,36 +84,38 @@ takes the dimensions and
 
 const resizeImage = (image, imageWidths, resizer) => {
   if ((image.type && image.type !== 'image') || !image.url) {
-    // throw new Error('Not a valid image object');
+    throw new Error('Not a valid image object');
   }
 
   return resizer.getResizerParams(image.url, imageWidths);
 };
 
-const resizePromoItems = (promoItems, breakpoints, resizer) => {
-  const output = {};
-  Object.keys(promoItems).forEach((key) => {
+/* eslint-disable no-param-reassign */
+const resizePromoItems = (promoItems, breakpoints, resizer) => Object.keys(promoItems)
+  .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
     if ((key === 'type' && promoItem === 'image') || key === 'url') {
-      output.resized_params = resizeImage(promoItems, breakpoints, resizer);
-      output.url = promoItems.url;
-      output.type = 'image';
+      promoItemWithResizedImages.resized_params = resizeImage(promoItems, breakpoints, resizer);
+      promoItemWithResizedImages.url = promoItems.url;
+      promoItemWithResizedImages.type = 'image';
     } else {
-      output[key] = promoItem;
+      promoItemWithResizedImages[key] = promoItem;
     }
-  });
-  return output;
-};
+    return promoItemWithResizedImages;
+  }, {});
+/* eslint-enable no-param-reassign */
 
 const getResizedImageParams = (data, option, filterQuality) => {
   if (!option.resizerSecret || !option.resizerUrl || !option.breakpoints) {
-    // throw new Error('Resizer URL, secret, and breakpoints are required.');
+    throw new Error('Not a valid image object');
   }
 
   const resizer = createResizer(option.resizerSecret, option.resizerUrl, filterQuality);
 
   /* eslint-disable no-param-reassign */
   const generateParams = (sourceData) => {
+    /*
+    path not taken based on current reqs
     if (sourceData && sourceData.content_elements) {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
@@ -155,6 +141,7 @@ const getResizedImageParams = (data, option, filterQuality) => {
         },
       );
     }
+    */
     if (sourceData && sourceData.promo_items && sourceData.promo_items.basic) {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,

@@ -70,8 +70,8 @@ describe('get resized image data helper on the client-side', () => {
 
     expect(paramKeys).toEqual([
       '158x105',
-      '158x119',
       '274x183',
+      '158x119',
       '274x206',
     ]);
   });

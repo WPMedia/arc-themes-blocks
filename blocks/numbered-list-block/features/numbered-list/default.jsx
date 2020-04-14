@@ -11,14 +11,6 @@ function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
 
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const Number = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 // todo: fix camelcase storyobject parsing
 const extractResizedParams = (storyObject) => {
   // eslint-disable-next-line camelcase
@@ -31,6 +23,14 @@ const extractResizedParams = (storyObject) => {
 
   return [];
 };
+
+const HeadlineText = styled.h2`
+  font-family: ${(props) => props.primaryFont};
+`;
+
+const Number = styled.p`
+  font-family: ${(props) => props.secondaryFont};
+`;
 
 @Consumer
 class NumberedList extends Component {

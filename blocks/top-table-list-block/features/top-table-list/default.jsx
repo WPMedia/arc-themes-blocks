@@ -53,7 +53,6 @@ const unserializeStory = (storyObject) => ({
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
 
-// components end
 const TopTableList = (props) => {
   const {
     customFields: {

@@ -127,4 +127,6 @@ Nav.propTypes = {
   }),
 };
 
+Nav.label = 'Navigation – Arc Block';
+
 export default Nav;

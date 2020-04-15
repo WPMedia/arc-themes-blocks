@@ -22,8 +22,6 @@ const ConditionalStoryItem = (props) => {
     by = [],
     element = {},
     displayDate = '',
-    overlineText = '',
-    overlineURL = '',
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -39,8 +37,6 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           displayDate={displayDate}
-          overlineText={overlineText}
-          overlineURL={overlineURL}
         />
       );
     case LARGE:
@@ -55,8 +51,6 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           displayDate={displayDate}
-          overlineText={overlineText}
-          overlineURL={overlineURL}
         />
       );
     case MEDIUM:

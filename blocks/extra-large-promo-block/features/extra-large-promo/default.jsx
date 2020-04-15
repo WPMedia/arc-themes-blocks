@@ -8,8 +8,9 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import Overline from '../../../overline-block/features/overline/default';
+import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -17,12 +18,6 @@ const HeadlineText = styled.h1`
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
-`;
-
-const OverlineLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
 `;
 
 const ExtraLargePromo = ({ customFields }) => {
@@ -60,14 +55,12 @@ const ExtraLargePromo = ({ customFields }) => {
     if (customFields.showOverline && overlineDisplay) {
       return (
         (
-          <OverlineLink
-            href={overlineUrl}
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          <Overline
+            customUrl={overlineUrl}
+            customText={overlineText}
             className="overline"
-            {...editableContent(content, 'content.label.basic.text')}
-          >
-            {overlineText}
-          </OverlineLink>
+            editable
+          />
         )
       );
     }
@@ -86,6 +79,7 @@ const ExtraLargePromo = ({ customFields }) => {
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
             className="xl-promo-headline"
             {...editableContent(content, 'headlines.basic')}
+            suppressContentEditableWarning
           >
             {headlineText}
           </HeadlineText>
@@ -102,6 +96,7 @@ const ExtraLargePromo = ({ customFields }) => {
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
           className="description-text"
           {...editableContent(content, 'description.basic')}
+          suppressContentEditableWarning
         >
           {descriptionText}
         </DescriptionText>

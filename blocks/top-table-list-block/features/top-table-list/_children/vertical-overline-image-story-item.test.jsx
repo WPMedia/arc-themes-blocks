@@ -1,6 +1,27 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+    globalContent: {
+      websites: {
+        'the-sun': {
+          website_section: {
+            name: 'News',
+          },
+        },
+      },
+    },
+  })),
+}));
+
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({
+    editableContent: {},
+  })),
+}));
+
 describe('vertical overline image story item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
@@ -13,8 +34,6 @@ describe('vertical overline image story item', () => {
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
-    const overlineURL = '';
-    const overlineText = 'overline';
     const id = 'test';
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
@@ -29,8 +48,6 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
-        overlineURL={overlineURL}
-        overlineText={overlineText}
         id={id}
       />,
     );
@@ -39,12 +56,18 @@ describe('vertical overline image story item', () => {
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
-    expect(wrapper.find('a.overline').text()).toBe(overlineText);
+    expect(wrapper.find('a.overline').text()).toBe('News');
 
     // does not find default spacing for headline descriptions
     expect(wrapper.find('.headline-description-spacing').length).toBe(0);
   });
   it('does not render image, overline and byline with empty props', () => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {},
+      })),
+    }));
     const imageURL = '';
     const constructedURL = 'url';
     const itemTitle = 'title';
@@ -53,8 +76,6 @@ describe('vertical overline image story item', () => {
     const by = [];
     const element = { };
     const displayDate = '';
-    const overlineURL = '';
-    const overlineText = '';
     const id = 'test';
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
@@ -69,8 +90,6 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
-        overlineURL={overlineURL}
-        overlineText={overlineText}
         id={id}
       />,
     );

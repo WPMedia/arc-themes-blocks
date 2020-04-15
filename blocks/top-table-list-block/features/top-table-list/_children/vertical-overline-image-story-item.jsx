@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import StyledLink from './styled-link';
+import Overline from '../../../../overline-block/features/overline/default';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -17,8 +17,6 @@ const VerticalOverlineImageStoryItem = (props) => {
     by,
     element,
     displayDate,
-    overlineURL,
-    overlineText,
     id,
   } = props;
   const showSeparator = by && by.length !== 0;
@@ -26,11 +24,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     <article className="container-fluid xl-large-promo" key={id}>
       <div className="row xl-promo-padding-bottom">
         <div className="col-sm-xl-12 flex-col">
-          {overlineText ? (
-            <StyledLink href={overlineURL} className="overline">
-              {overlineText}
-            </StyledLink>
-          ) : null}
+          <Overline className="overline" />
           <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
             <Title primaryFont={primaryFont} className="xl-promo-headline">
               {itemTitle}

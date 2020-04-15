@@ -10,6 +10,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import Overline from '../../../overline-block/features/overline/default';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -18,13 +19,6 @@ const HeadlineText = styled.h1`
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
-
-const OverlineLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
-
 
 const LargePromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
@@ -63,14 +57,12 @@ const LargePromo = ({ customFields }) => {
     if (customFields.showOverline && overlineDisplay) {
       return (
         (
-          <OverlineLink
-            href={overlineUrl}
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          <Overline
+            customUrl={overlineUrl}
+            customText={overlineText}
             className="overline"
-            {...editableContent(content, 'content.label.basic.text')}
-          >
-            {overlineText}
-          </OverlineLink>
+            editable
+          />
         )
       );
     }
@@ -89,6 +81,7 @@ const LargePromo = ({ customFields }) => {
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
             className="lg-promo-headline"
             {...editableContent(content, 'headlines.basic')}
+            suppressContentEditableWarning
           >
             {headlineText}
           </HeadlineText>
@@ -105,6 +98,7 @@ const LargePromo = ({ customFields }) => {
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
           className="description-text"
           {...editableContent(content, 'description.basic')}
+          suppressContentEditableWarning
         >
           {descriptionText}
         </DescriptionText>

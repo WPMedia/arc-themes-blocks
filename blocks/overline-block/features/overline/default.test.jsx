@@ -22,6 +22,12 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockContextObj),
 }));
 
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({
+    editableContent: {},
+  })),
+}));
+
 describe('overline feature for default output type', () => {
   describe('when website_section content from globalContent is present', () => {
     it('should render an a', () => {

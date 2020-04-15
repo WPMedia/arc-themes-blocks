@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import Overline from '../../../../overline-block/features/overline/default';
+import Overline from '@wpmedia/overline-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';

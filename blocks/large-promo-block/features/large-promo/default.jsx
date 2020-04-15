@@ -8,9 +8,9 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import '@wpmedia/shared-styles/scss/_large-promo.scss';
+import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import Overline from '../../../overline-block/features/overline/default';
+import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};

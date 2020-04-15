@@ -6,9 +6,9 @@ $btn-size: calculateRem(32px);
 $nav-search-border-color: #5c6364;
 $overlay-color: #2a2a2a;
 $overlay-z-index: 2;
-$section-bg: #3B3B3B;
+$section-bg: #3b3b3b;
 $section-width: 315px;
-$submenu-link-color: #7F8C8D;
+$submenu-link-color: #7f8c8d;
 
 .nav-btn {
   border: 0;
@@ -48,14 +48,15 @@ $submenu-link-color: #7F8C8D;
     margin: 0;
   }
 
-  > span, > img {
+  > span,
+  > img {
     flex: 0;
   }
 
   > span {
     color: white;
-    font-weight: bold;
     font-size: calculateRem(14px);
+    font-weight: bold;
     padding-right: 8px;
   }
 }
@@ -90,7 +91,7 @@ $submenu-link-color: #7F8C8D;
     margin: 0;
     outline: none;
     padding: 0;
-    transition: all .25s cubic-bezier(.49,.37,.45,.71);
+    transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
   }
 }
@@ -103,7 +104,8 @@ $submenu-link-color: #7F8C8D;
   position: relative;
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search, .nav-sections-btn span {
+    .nav-search,
+    .nav-sections-btn span {
       display: none;
     }
   }
@@ -121,10 +123,10 @@ $submenu-link-color: #7F8C8D;
   }
 
   > div {
-    text-align: center;
+    align-items: center;
     display: flex;
     flex: 1;
-    align-items: center;
+    text-align: center;
 
     &.nav-left {
       justify-content: flex-start;
@@ -157,11 +159,11 @@ $submenu-link-color: #7F8C8D;
   width: $section-width;
 
   &.open {
-    transform: translate(0px, 0px);
+    transform: translate(0, 0);
   }
 
   &.closed {
-    transform: translate(-$section-width, 0px);
+    transform: translate(-$section-width, 0);
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -175,7 +177,8 @@ $submenu-link-color: #7F8C8D;
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .submenu-caret, .subsection-container {
+    .submenu-caret,
+    .subsection-container {
       display: none;
     }
   }
@@ -186,15 +189,16 @@ $submenu-link-color: #7F8C8D;
 
   .nav-search {
     border-bottom: $border-width solid $nav-search-border-color;
-    padding-bottom: 16px;
     margin: 16px 20px 0;
+    padding-bottom: 16px;
 
     input {
       flex: 1;
     }
   }
 
-  ul.section-menu, ul.subsection-menu {
+  ul.section-menu,
+  ul.subsection-menu {
     flex: 1;
     flex-direction: column;
   }
@@ -255,7 +259,7 @@ $submenu-link-color: #7F8C8D;
   ul.subsection-menu {
     background: white;
     border-radius: 2px;
-    box-shadow: 0px 0px 20px 0 rgba(42, 42, 42, 0.5);
+    box-shadow: 0 0 20px 0 rgba(42, 42, 42, 0.5);
     left: 0;
     list-style: none;
     margin: 0;
@@ -266,7 +270,6 @@ $submenu-link-color: #7F8C8D;
     z-index: ($overlay-z-index + 1);
 
     > li {
-
       > a {
         color: $submenu-link-color;
         padding: 8px 0;

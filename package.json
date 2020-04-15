@@ -11,6 +11,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
+    "lint:styles": "stylelint '**/*.scss' --formatter verbose",
+    "lint:styles:fix": "npm run lint:styles -- --fix",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "test:coverage": "jest --coverage"
@@ -20,6 +22,7 @@
       "pre-commit": "npm run test:coverage && npm run lint"
     }
   },
+  "license": "UNLICENSED",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.4.4",
@@ -44,7 +47,9 @@
     "jest-enzyme": "^7.1.0",
     "lerna": "^3.18.3",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "stylelint": "^13.3.1",
+    "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "dependencies": {
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -53,22 +58,24 @@
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
     "@wpmedia/engine-theme-sdk": "latest",
-    "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
+    "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
     "@wpmedia/header-nav-block": "file:blocks/header-nav-block",
     "@wpmedia/headline-block": "file:blocks/headline-block",
     "@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
     "@wpmedia/large-promo-block": "file:blocks/large-promo-block",
     "@wpmedia/lead-art-block": "file:blocks/lead-art-block",
     "@wpmedia/medium-manual-promo-block": "file:blocks/medium-manual-promo-block",
-    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
+    "@wpmedia/news-theme-css": "latest",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
-    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
+    "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
+    "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block"
   },
   "jest": {
     "transformIgnorePatterns": [

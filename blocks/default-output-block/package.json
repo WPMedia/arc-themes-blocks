@@ -1,10 +1,11 @@
 {
   "name": "@wpmedia/default-output-block",
-  "version": "2.2.3",
+  "version": "2.2.5",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [
-    "Jack Howard <jack.howard@washpost.com>"
+    "Jack Howard <jack.howard@washpost.com>",
+    "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",

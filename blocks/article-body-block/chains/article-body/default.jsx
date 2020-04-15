@@ -133,17 +133,12 @@ function parseArticleItem(item, index) {
       );
     case 'gallery':
       return (
-        <section className="block-margin-bottom">
+        <section className="block-margin-bottom gallery">
           <Gallery galleryElements={item.content_elements} />
         </section>
       );
     default:
-      return (
-        <p key={key}>
-          This element did not match with the elements that are currently implemented:&nbsp;
-          {type}
-        </p>
-      );
+      return '';
   }
 }
 
@@ -158,52 +153,43 @@ const ArticleBody = styled.article`
 `;
 
 const ArticleBodyChain = ({ children }) => {
-  const { globalContent: items, customFields = {}, arcSite } = useFusionContext();
-  const { elementPlacement = {} } = customFields;
+  const { globalContent: items = {}, customFields = {}, arcSite } = useFusionContext();
+  const { content_elements: contentElements = [], location } = items;
+  const { elementPlacement: adPlacementConfigObj = {} } = customFields;
 
-  // Get the current length of the article's content elements
-  // This will be used as a check to make sure the placements don't go over the
-  //  total number of elements.
-  const articleElementLength = items && items.content_elements && items.content_elements.length;
+  const adPlacements = Object.keys(adPlacementConfigObj).map(
+    (key) => ({ feature: +key, paragraph: +adPlacementConfigObj[key] }),
+  );
 
-  const articleBody = [];
+  const paragraphTotal = contentElements.filter((element) => element.type === 'text').length;
 
-  // Here, the keys represent the child of the chain, and the values represent their positions
-  //  in the article body.
-  Object.keys(elementPlacement).forEach((element) => {
-    const elementNum = +element - 1;
-    // Check to make sure the element is not over the number of content elements/paragraphs
-    // and make sure that the specified child exists
-    let elementPosition = +elementPlacement[element];
-    if (elementPosition <= articleElementLength && children[elementNum]) {
-      // Check if there is already another element occupying the space.
-      // Loop until you find an empty position to place the element in the article body
-      while (articleBody[elementPosition]) elementPosition += 1;
+  let paragraphCounter = 0;
+  const articleBody = [].concat(...contentElements.map((contentElement, index) => {
+    if (contentElement.type === 'text') {
+      // Start at 1 since the ad configs use one-based array indexes
+      paragraphCounter += 1;
 
-      // Once an empty position is found, place the corresponding chain component child
-      articleBody[elementPosition] = children[elementNum];
+      const adsAfterParagraph = adPlacements.filter(
+        (placement) => placement.paragraph === paragraphCounter,
+      );
+
+      if (paragraphCounter === 1 && location && contentElement.content.indexOf(`${location} &mdash;`) !== 0) {
+        // eslint-disable-next-line no-param-reassign
+        contentElement.content = `${location} &mdash; ${contentElement.content}`;
+      }
+
+      // The ad features should follow the content element if they exist, but not if
+      // the current paragraph is the last or second-to-last paragraph.
+      if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
+        return [
+          parseArticleItem(contentElement, index, arcSite),
+          ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
+        ];
+      }
     }
-  });
 
-  // Iterate through the content element array and place each subsequent
-  //  content elements into the array. Skip if the place is taken
-  let paragraphPosition = 0;
-  const { content_elements: contentElements, location } = items;
-  const firstParagraph = contentElements.find((elements) => elements.type === 'text');
-  if (firstParagraph && firstParagraph.content && !(firstParagraph.content.indexOf(`${location} &mdash;`) === 0)) {
-    firstParagraph.content = location ? `${location} &mdash; ${firstParagraph.content}` : firstParagraph.content;
-  }
-  contentElements.forEach((item, index) => {
-    const articleElement = parseArticleItem(item, index, arcSite);
-
-    // If there's already an element at the specified article body position, skip
-    while (articleBody[paragraphPosition]) paragraphPosition += 1;
-
-    articleBody[paragraphPosition] = articleElement;
-
-    // Increment the position
-    paragraphPosition += 1;
-  });
+    return parseArticleItem(contentElement, index, arcSite);
+  }));
 
   return (
     <ArticleBody
@@ -218,11 +204,10 @@ const ArticleBodyChain = ({ children }) => {
 
 ArticleBodyChain.propTypes = {
   customFields: PropTypes.shape({
-    // eslint-disable-next-line react/no-typos
     elementPlacement: PropTypes.kvp.tag({
-      label: 'Ad placement',
+      label: 'Ad placements',
       group: 'Inline ads',
-      description: 'Place your inline article body ads in the article body chain. For each ad feature in the chain, fill in two values below: Field 1) The position of the ad within the chain and Field 2) the paragraph number that this ad should follow in the article body. For example, entering 1 and 3 would mean that the first ad in the article body chain will be placed after the third paragraph in the article.',
+      description: 'Places your inline article body ads in the article body chain. For each ad feature in the chain, fill in two values below: Field 1) The position of the ad within the chain and Field 2) the paragraph number that this ad should follow in the article body. For example, entering 1 and 3 would mean that the first ad in the article body chain will be placed after the third paragraph in the article.',
     }),
   }),
 };

@@ -5,19 +5,6 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import './default.scss';
 
-const googleAnalytics = () => {
-  if (typeof window === 'undefined') {
-    return;
-  }
-  window.dataLayer = window.dataLayer || [];
-  function gtag(...args) {
-    window.dataLayer.push(args);
-  }
-  gtag('js', new Date());
-
-  gtag('config', 'UA-58927291-1');
-};
-
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
 const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
@@ -66,7 +53,9 @@ const SampleOutputType = ({
   metaValue,
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
-  const { websiteName, twitterSite, dangerouslyInjectJS = [] } = getProperties(arcSite);
+  const {
+    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [],
+  } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
   let tagMetaDataTags = null;
@@ -152,7 +141,7 @@ const SampleOutputType = ({
         }
       } else if (gc && gc.taxonomy && gc.taxonomy.tags) {
         if (typeof gc.taxonomy.tags !== 'undefined'
-          && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
+            && gc.taxonomy.tags !== null && gc.taxonomy.tags.length) {
           metaData.keywords = [];
           gc.taxonomy.tags.forEach((item) => {
             if (item.slug) metaData.keywords.push(item.slug);
@@ -167,14 +156,14 @@ const SampleOutputType = ({
           { metaData.description
             && <meta name="description" content={metaData.description} />}
           { metaData.keywords
-          && <meta name="keywords" content={metaData.keywords} />}
+            && <meta name="keywords" content={metaData.keywords} />}
 
           <meta property="og:title" content={metaData.ogTitle} />
 
           { metaData.ogImage
-          && <meta property="og:image" content={metaData.ogImage} />}
+            && <meta property="og:image" content={metaData.ogImage} />}
           { metaData.ogImageAlt
-          && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
+            && <meta property="og:image:alt" content={metaData.ogImageAlt} />}
           {pageType === 'article' && (
             <meta name="robots" content="noarchive" />
           )}
@@ -196,9 +185,9 @@ const SampleOutputType = ({
     authorMetaDataTags = (
       <>
         {
-          metaData.description
-          && <meta name="description" content={metaData.description} />
-        }
+            metaData.description
+            && <meta name="description" content={metaData.description} />
+          }
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -226,7 +215,7 @@ const SampleOutputType = ({
     tagMetaDataTags = (
       <>
         { metaData.description
-        && <meta name="description" content={metaData.description} />}
+          && <meta name="description" content={metaData.description} />}
         <meta property="og:title" content={metaData.ogTitle} />
       </>
     );
@@ -235,21 +224,32 @@ const SampleOutputType = ({
   twitterTags = (
     <>
       { metaData.ogSiteName
-      && <meta property="og:site_name" content={metaData.ogSiteName} />}
+        && <meta property="og:site_name" content={metaData.ogSiteName} />}
       { metaData.twitterSite
-      && <meta property="twitter:site" content={metaData.twitterSite} />}
+        && <meta property="twitter:site" content={metaData.twitterSite} />}
       { metaData.twitterCard
-      && <meta property="twitter:card" content={metaData.twitterCard} />}
+        && <meta property="twitter:card" content={metaData.twitterCard} />}
     </>
   );
 
   const customMetaTags = generateCustomMetaTags(metaData, MetaTag, MetaTags);
   const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
+  const gaScript = `
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','${gtmID}');
+  `;
 
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {gtmID
+          ? (
+            <script dangerouslySetInnerHTML={{ __html: gaScript }} />
+          ) : null}
         <title>{metaData.title}</title>
         {storyMetaDataTags}
         {tagMetaDataTags}
@@ -270,7 +270,6 @@ const SampleOutputType = ({
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
       </head>
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58927291-1" />
-      <script>{googleAnalytics()}</script>
       <script
         src={powaBoot}
         async
@@ -280,6 +279,18 @@ const SampleOutputType = ({
       <link rel="preload" as="script" href={powaDrive} />
       {googleFonts()}
       <body>
+        {gtmID
+          ? (
+            <noscript>
+              <iframe
+                title="gtm"
+                src={`https://www.googletagmanager.com/ns.html?id=${gtmID}`}
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              />
+            </noscript>
+          ) : null}
         <div id="fusion-app">
           {children}
         </div>

@@ -51,7 +51,7 @@ describe('the default output type', () => {
     });
 
     it('should have script tags', () => {
-      expect(wrapper.find('script').length).toBe(5);
+      expect(wrapper.find('script').length).toBe(4);
     });
 
     it('should have link tags', () => {

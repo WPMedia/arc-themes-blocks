@@ -15,11 +15,14 @@ const AlertBarLink = styled.a`
 class AlertBar extends Component {
   constructor(props) {
     super(props);
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
     const { cached, fetched } = this.getContent({
-      sourceName: 'alert-bar-collections',
+      sourceName: 'content-api-collections',
       query: {
         site: arcSite,
+        _id: customFields?._id,
+        from: 0,
+        size: 1,
       },
     });
 
@@ -96,6 +99,10 @@ AlertBar.propTypes = {
       label: 'Refresh Intervals (in seconds)',
       description: 'This is the frequency at which this feature will refresh. Default and minimum is 120 seconds.',
       default: 120, // Leaving this here for now but it seems to not be applying the default value
+    }),
+    _id: PropTypes.string.tag({
+      label: 'Collections ID',
+      description: 'ID of the Collections to be fetched from',
     }),
   }),
 };

@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { framework } from '@wpmedia/news-theme-css/js/framework';
 import './default.scss';
 
 const RightRailAdvancedLayout = ({ children }) => {
-  const [width, setWidth] = React.useState(window.innerWidth);
-  const breakpoint = (parseFloat(framework.gridBreakpoints.lg.replace('rem', ''))
-      * framework.variables.defaultFontSize);
+  const [isDesktop, setIsDesktop] = useState(true);
 
-  React.useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleWindowResize);
-    // Return a function from the effect that removes the event listener
-    return () => window.removeEventListener('resize', handleWindowResize);
+  useEffect(() => {
+    let mounted = true;
+    const matchQuery = window.matchMedia(`(min-width: ${framework.gridBreakpoints.lg})`);
+    setIsDesktop(matchQuery.matches);
+
+    const onChange = (e) => {
+      if (mounted) {
+        setIsDesktop(e.matches);
+      }
+    };
+
+    matchQuery.addListener(onChange);
+
+    return () => {
+      mounted = false;
+      matchQuery.removeListener(onChange);
+    };
   }, []);
 
   const mobileTabletLayout = (
@@ -59,7 +69,7 @@ const RightRailAdvancedLayout = ({ children }) => {
               {children[1]}
             </div>
           </div>
-          {width < breakpoint ? mobileTabletLayout : desktopLayout}
+          {isDesktop ? desktopLayout : mobileTabletLayout }
           <div className="row">
             <div className="col-sm-xl-12 fullwidth-section">
               {/* Full Width 2 Content Area */}

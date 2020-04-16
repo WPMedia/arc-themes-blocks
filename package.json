@@ -69,6 +69,7 @@
     "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
+    "@wpmedia/overline-block": "file:blocks/overline-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",

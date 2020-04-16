@@ -79,7 +79,7 @@ const Nav = (props) => {
     };
   });
 
-  // Check if URL is absolute or base64
+  // Check if URL is absolute/base64
   if (primaryLogo && (primaryLogo.indexOf('http') > -1 || primaryLogo.indexOf('base64') > -1)) {
     primaryLogoPath = primaryLogo;
   } else {

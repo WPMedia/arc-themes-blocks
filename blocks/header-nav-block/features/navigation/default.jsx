@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
-import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
 import './navigation.scss';
@@ -43,8 +42,10 @@ const NavButton = styled.button`
 /* Main Component */
 const Nav = (props) => {
   const { arcSite } = useAppContext();
+  const { deployment, contextPath } = useFusionContext();
 
   const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+  let primaryLogoPath;
 
   const {
     'primary-color': primaryColor = '#000',
@@ -78,6 +79,13 @@ const Nav = (props) => {
     };
   });
 
+  // Check if URL is absolute or base64
+  if (primaryLogo && (primaryLogo.indexOf('http') > -1 || primaryLogo.indexOf('base64') > -1)) {
+    primaryLogoPath = primaryLogo;
+  } else {
+    primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
+  }
+
   return (
     <>
       <StyledNav id="main-nav" className="news-theme-navigation" font={primaryFont}>
@@ -93,8 +101,8 @@ const Nav = (props) => {
         <div className="nav-logo">
           <a href="/" title={primaryLogoAlt}>
             {primaryLogo
-              ? <img src={primaryLogo} alt={primaryLogoAlt || 'Navigation bar logo'} />
-              : <ArcLogo />}
+              ? <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />
+              : ''}
           </a>
         </div>
 

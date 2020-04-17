@@ -58,6 +58,7 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
                 href={customFields.linkURL}
                 className="xl-promo-headline"
                 title={customFields.headline}
+                target={customFields.newTab ? '_blank' : '_self'}
               >
                 <HeadlineText
                   primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -72,6 +73,7 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
               <a
                 href={customFields.linkURL}
                 title={customFields.headline}
+                target={customFields.newTab ? '_blank' : '_self'}
               >
                 <Image
                   url={customFields.imageURL}
@@ -124,6 +126,11 @@ ExtraLargeManualPromo.propTypes = {
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',
+      group: 'Configure Content',
+    }),
+    newTab: PropTypes.bool.tag({
+      label: 'Open in new tab',
+      defaultValue: false,
       group: 'Configure Content',
     }),
     showOverline: PropTypes.bool.tag(

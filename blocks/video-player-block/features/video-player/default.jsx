@@ -36,15 +36,12 @@ const VideoPlayer = (props) => {
 
   // Make sure that the player does not render until after component is mounted
   embedHTML = embedHTML.replace('<script', '<!--script')
-    .replace('script>', 'script-->')
-    .replace('powa', 'powa-skip');
+    .replace('script>', 'script-->');
 
   useEffect(() => {
     const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
 
     if (powaEl) {
-      powaEl.classList.remove('powa-skip');
-      powaEl.classList.add('powa');
       if (window.powaBoot) window.powaBoot();
     }
   });

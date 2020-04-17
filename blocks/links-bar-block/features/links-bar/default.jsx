@@ -13,7 +13,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const LinksBar = ({ customFields: { navigationConfig } }) => {
+const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
   const content = useContent({
     source: navigationConfig.contentService,
     query: {

@@ -7,7 +7,6 @@ import SearchBox from './_children/search-box';
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
-  useAppContext: jest.fn(() => ({})),
   useFusionContext: jest.fn(() => ({
     contextPath: 'pf',
     deployment: jest.fn(() => ({})).mockReturnValue('path/image.svg'),

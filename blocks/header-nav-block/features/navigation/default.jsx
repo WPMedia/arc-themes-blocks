@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
-import { useAppContext, useFusionContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
@@ -41,8 +41,7 @@ const NavButton = styled.button`
 
 /* Main Component */
 const Nav = (props) => {
-  const { arcSite } = useAppContext();
-  const { deployment, contextPath } = useFusionContext();
+  const { arcSite, deployment, contextPath } = useFusionContext();
 
   const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
   let primaryLogoPath;
@@ -100,9 +99,7 @@ const Nav = (props) => {
 
         <div className="nav-logo">
           <a href="/" title={primaryLogoAlt}>
-            {primaryLogo
-              ? <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />
-              : ''}
+            {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
           </a>
         </div>
 

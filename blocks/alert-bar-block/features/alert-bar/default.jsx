@@ -37,15 +37,18 @@ class AlertBar extends Component {
   }
 
   componentDidMount() {
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
     // The content source will always return an array with one story in it
     this.timeID = window.setInterval(() => {
       // Use getContent instead of fetchContent because it will otherwise only
       // return cached contents, as of March 25.
       const { fetched } = this.getContent({
-        sourceName: 'alert-bar-collections',
+        sourceName: 'content-api-collections',
         query: {
           site: arcSite,
+          _id: customFields?._id,
+          from: 0,
+          size: 1,
         },
       });
       fetched.then((content) => {

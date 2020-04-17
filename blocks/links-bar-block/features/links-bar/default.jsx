@@ -20,9 +20,7 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
       ...navigationConfig.contentConfigValues,
     },
   });
-  const context = useFusionContext();
-  const { id, arcSite } = context;
-
+  const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
 
   return (

@@ -13,17 +13,14 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const LinksBar = ({ customFields: { hierarchy } }) => {
-  const context = useFusionContext();
-  const { id, arcSite } = context;
+const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
   const content = useContent({
-    source: 'site-navigation',
+    source: navigationConfig.contentService,
     query: {
-      site: arcSite,
-      hierarchy,
+      ...navigationConfig.contentConfigValues,
     },
   });
-
+  const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
 
   return (
@@ -41,7 +38,10 @@ LinksBar.label = 'Links Bar – Arc Block';
 
 LinksBar.propTypes = {
   customFields: PropTypes.shape({
-    hierarchy: PropTypes.string,
+    navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
+      group: 'Configure Content',
+      label: 'Navigation',
+    }),
   }),
 };
 

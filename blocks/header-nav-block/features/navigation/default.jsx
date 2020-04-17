@@ -79,7 +79,7 @@ const Nav = (props) => {
   });
 
   // Check if URL is absolute/base64
-  if (primaryLogo && (primaryLogo.indexOf('http') > -1 || primaryLogo.indexOf('base64') > -1)) {
+  if (primaryLogo && (primaryLogo.startsWith('http') || primaryLogo.startsWith('data:image'))) {
     primaryLogoPath = primaryLogo;
   } else {
     primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);

@@ -93,6 +93,7 @@ class ResultsList extends Component {
       const { resultList } = this.state;
       this.state.storedList = resultList;
       // Check if there are available stories
+      // eslint-disable-next-line camelcase
       if (resultList?.content_elements) {
         // Hide button if no additional stories from initial content
         if (resultList.content_elements.length >= resultList.count) {

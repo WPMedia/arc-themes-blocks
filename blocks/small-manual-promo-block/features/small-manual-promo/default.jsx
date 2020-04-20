@@ -43,12 +43,15 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
               <Image
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                smallWidth={275}
+                // small should be 3:2 aspect ratio
+                smallWidth={274}
                 smallHeight={183}
-                mediumWidth={275}
+                mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
               />
             </a>
           </div>

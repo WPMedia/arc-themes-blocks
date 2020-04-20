@@ -20,6 +20,7 @@ import {
   SoundCloudIcon,
   RssIcon,
 } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import constructSocialURL from './shared/constructSocialURL';
 
 
@@ -245,21 +246,23 @@ const AuthorBio = () => {
         <section key={(author.name) ? author.name : ''} className="authors">
           <section className="author">
             {
-                            (author.image && author.image.url)
-                              ? (
-                                <Image
-                                  url={author.image.url}
-                                  alt={(author.image.alt_text || author.name)}
-                                  smallWidth={84}
-                                  smallHeight={0}
-                                  mediumWidth={84}
-                                  mediumHeight={0}
-                                  largeWidth={84}
-                                  largeHeight={0}
-                                />
-                              )
-                              : null
-                        }
+                (author.image && author.image.url)
+                  ? (
+                    <Image
+                      url={author.image.url}
+                      alt={(author.image.alt_text || author.name)}
+                      smallWidth={84}
+                      smallHeight={0}
+                      mediumWidth={84}
+                      mediumHeight={0}
+                      largeWidth={84}
+                      largeHeight={0}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                    />
+                  )
+                  : null
+            }
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
               {/* there will always be a description via conditional on 52 */}

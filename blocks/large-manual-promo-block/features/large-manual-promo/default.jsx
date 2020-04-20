@@ -42,12 +42,15 @@ const LargeManualPromo = ({ customFields, arcSite }) => {
               <Image
                 url={customFields.imageURL}
                 alt={customFields.headline}
+                // large promo has 4:3
                 smallWidth={274}
-                smallHeight={148}
+                smallHeight={206}
                 mediumWidth={274}
-                mediumHeight={148}
+                mediumHeight={206}
                 largeWidth={377}
-                largeHeight={272}
+                largeHeight={283}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
               />
             </a>
           </div>

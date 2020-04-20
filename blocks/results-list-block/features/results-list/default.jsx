@@ -12,6 +12,18 @@ import './results-list.scss';
 import './desktop-styles.scss';
 import './mobile-styles.scss';
 
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  // eslint-disable-next-line camelcase
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    // eslint-disable-next-line camelcase
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
@@ -114,6 +126,7 @@ class ResultsList extends Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
@@ -137,14 +150,18 @@ class ResultsList extends Component {
                 >
                   {extractImage(element.promo_items) ? (
                     <Image
+                      // results list is 16:9 by default
+                      resizedImageParams={extractResizedParams(element)}
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
-                      smallHeight={103}
+                      smallHeight={89}
                       mediumWidth={274}
-                      mediumHeight={148}
+                      mediumHeight={154}
                       largeWidth={274}
-                      largeHeight={148}
+                      largeHeight={154}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

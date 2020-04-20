@@ -6,4 +6,5 @@ export default {
     size: 'number',
     offset: 'number',
   },
+  transform: (data) => data,
 };

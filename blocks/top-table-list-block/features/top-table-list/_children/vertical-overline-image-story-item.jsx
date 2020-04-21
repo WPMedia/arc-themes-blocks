@@ -18,13 +18,21 @@ const VerticalOverlineImageStoryItem = (props) => {
     element,
     displayDate,
     id,
+    overlineURL,
+    overlineText,
   } = props;
   const showSeparator = by && by.length !== 0;
   return (
     <article className="container-fluid xl-large-promo" key={id}>
       <div className="row xl-promo-padding-bottom">
         <div className="col-sm-xl-12 flex-col">
-          <Overline className="overline" />
+          {overlineText ? (
+            <Overline
+              customText={overlineText}
+              customUrl={overlineURL}
+              className="overline"
+            />
+          ) : null}
           <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
             <Title primaryFont={primaryFont} className="xl-promo-headline">
               {itemTitle}

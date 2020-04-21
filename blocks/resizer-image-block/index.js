@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import getProperties from 'fusion:properties';
 import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
@@ -59,7 +60,6 @@ const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
         const dimensions = aspectRatioValue;
         const [aspectRatioWidth, aspectRatioHeight] = dimensions.split('x');
 
-        // eslint-disable-next-line no-param-reassign
         previousOutput[aspectRatioValue] = getResizerParam(
           originalUrl,
           {
@@ -91,7 +91,6 @@ const resizeImage = (image, resizer) => {
   return resizer.getResizerParams(image.url);
 };
 
-/* eslint-disable no-param-reassign */
 const resizePromoItems = (promoItems, resizer) => Object.keys(promoItems)
   .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
@@ -104,7 +103,6 @@ const resizePromoItems = (promoItems, resizer) => Object.keys(promoItems)
     }
     return promoItemWithResizedImages;
   }, {});
-/* eslint-enable no-param-reassign */
 
 const getResizedImageParams = (data, option, filterQuality) => {
   if (!option.resizerSecret || !option.resizerUrl) {
@@ -113,7 +111,6 @@ const getResizedImageParams = (data, option, filterQuality) => {
 
   const resizer = createResizer(option.resizerSecret, option.resizerUrl, filterQuality);
 
-  /* eslint-disable no-param-reassign */
   const generateParams = (sourceData) => {
     /*
     path not taken based on current reqs
@@ -151,7 +148,6 @@ const getResizedImageParams = (data, option, filterQuality) => {
     }
     return sourceData;
   };
-  /* eslint-enable no-param-reassign */
 
   if (data && data.count > 0) {
     data.content_elements.forEach((contentElement) => {

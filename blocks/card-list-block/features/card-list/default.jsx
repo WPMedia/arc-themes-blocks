@@ -3,7 +3,6 @@ import Consumer from 'fusion:consumer';
 import React from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import './card-list.scss';
@@ -27,14 +26,6 @@ class CardList extends React.Component {
     this.arcSite = props.arcSite;
     this.state = { cardList: {} };
     this.fetchStories();
-  }
-
-  constructHref(websiteUrl) {
-    const { arcSite } = this.props;
-    const { websiteDomain } = getProperties(arcSite);
-    return (window && window.location.hostname === 'localhost')
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com${websiteUrl}`
-      : `${websiteDomain}/${websiteUrl}`;
   }
 
   fetchStories() {
@@ -80,7 +71,7 @@ class CardList extends React.Component {
                 key={`result-card-${contentElements[0].canonical_url}`}
               >
                 <a
-                  href={this.constructHref(contentElements[0].website_url)}
+                  href={contentElements[0].website_url}
                   title={contentElements[0].headlines.basic}
                   className="list-anchor"
                 >
@@ -131,7 +122,7 @@ class CardList extends React.Component {
                       type="1"
                     >
                       <a
-                        href={this.constructHref(websiteUrl)}
+                        href={websiteUrl}
                         title={headlineText}
                         className="headline-list-anchor"
                       >
@@ -143,7 +134,7 @@ class CardList extends React.Component {
                         </HeadlineText>
                       </a>
                       <a
-                        href={this.constructHref(websiteUrl)}
+                        href={websiteUrl}
                         title={headlineText}
                         className="list-anchor-image"
                       >

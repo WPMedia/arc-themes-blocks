@@ -43,6 +43,28 @@ const AuthorBioStyled = styled.section`
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
+const renderAuthorInfo = (author, arcSite) => {
+  const { image: { url = '', alt_text: altText = '' }, image, name } = author;
+
+  return (
+    image && url
+      ? (
+        <Image
+          url={url}
+          alt={(altText || name)}
+          smallWidth={84}
+          smallHeight={0}
+          mediumWidth={84}
+          mediumHeight={0}
+          largeWidth={84}
+          largeHeight={0}
+          breakpoints={getProperties(arcSite)?.breakpoints}
+          resizerURL={getProperties(arcSite)?.resizerURL}
+        />
+      ) : null
+  );
+};
+
 const AuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
   const { credits = {} } = content;
@@ -245,24 +267,7 @@ const AuthorBio = () => {
       authorList.push((
         <section key={(author.name) ? author.name : ''} className="authors">
           <section className="author">
-            {
-                (author.image && author.image.url)
-                  ? (
-                    <Image
-                      url={author.image.url}
-                      alt={(author.image.alt_text || author.name)}
-                      smallWidth={84}
-                      smallHeight={0}
-                      mediumWidth={84}
-                      mediumHeight={0}
-                      largeWidth={84}
-                      largeHeight={0}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  )
-                  : null
-            }
+            {renderAuthorInfo(author, arcSite)}
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
               {/* there will always be a description via conditional on 52 */}

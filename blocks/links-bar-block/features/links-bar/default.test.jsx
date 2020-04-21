@@ -33,7 +33,7 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
+    const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
     expect(wrapper.at(0).type()).toBe('nav');
   });
@@ -54,7 +54,7 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-    const wrapper = mount(<LinksBar customFields={{ hierarchy: 'links' }} />);
+    const wrapper = mount(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
     expect(wrapper.find('span.links-menu')).toHaveLength(2);
   });
@@ -66,7 +66,7 @@ describe('the links bar feature for the default output type', () => {
       })),
     }));
     const { default: LinksBar } = require('./default');
-    const wrapper = shallow(<LinksBar customFields={{ hierarchy: 'links' }} />);
+    const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });

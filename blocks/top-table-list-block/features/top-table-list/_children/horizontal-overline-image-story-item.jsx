@@ -21,6 +21,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     id,
     arcSite,
     resizedImageOptions,
+    overlineURL,
+    overlineText,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -50,7 +52,13 @@ const HorizontalOverlineImageStoryItem = (props) => {
         </div>
         <div className="col-sm-12 col-md-xl-6 flex-col">
           <div>
-            <Overline className="overline" />
+            {overlineText ? (
+              <Overline
+                customText={overlineText}
+                customUrl={overlineURL}
+                className="overline"
+              />
+            ) : null}
             <a href={constructedURL} title={itemTitle} className="lg-promo-headline">
               <Title primaryFont={primaryFont} className="lg-promo-headline">{itemTitle}</Title>
             </a>

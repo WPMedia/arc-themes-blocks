@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
@@ -21,11 +22,9 @@ const Number = styled.p`
 
 // todo: fix camelcase storyobject parsing
 const extractResizedParams = (storyObject) => {
-  // eslint-disable-next-line camelcase
   const basicStoryObject = storyObject?.promo_items?.basic;
 
   if (basicStoryObject?.type === 'image') {
-    // eslint-disable-next-line camelcase
     return basicStoryObject?.resized_params;
   }
 

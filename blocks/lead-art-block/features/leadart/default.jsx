@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
@@ -62,7 +63,6 @@ class LeadArt extends Component {
     const { arcSite } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
-      // eslint-disable-next-line camelcase
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
       let lightbox = null;
       let caption = null;

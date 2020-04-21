@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
@@ -14,11 +15,9 @@ import './mobile-styles.scss';
 
 // todo: fix camelcase storyobject parsing
 const extractResizedParams = (storyObject) => {
-  // eslint-disable-next-line camelcase
   const basicStoryObject = storyObject?.promo_items?.basic;
 
   if (basicStoryObject?.type === 'image') {
-    // eslint-disable-next-line camelcase
     return basicStoryObject?.resized_params;
   }
 
@@ -105,7 +104,7 @@ class ResultsList extends Component {
       const { resultList } = this.state;
       this.state.storedList = resultList;
       // Check if there are available stories
-      // eslint-disable-next-line camelcase
+
       if (resultList?.content_elements) {
         // Hide button if no additional stories from initial content
         if (resultList.content_elements.length >= resultList.count) {

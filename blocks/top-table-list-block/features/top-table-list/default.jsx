@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -27,11 +28,9 @@ const extractImage = (storyObject) => storyObject.promo_items
 
 // todo: fix camelcase storyobject parsing
 const extractResizedParams = (storyObject) => {
-  // eslint-disable-next-line camelcase
   const basicStoryObject = storyObject?.promo_items?.basic;
 
   if (basicStoryObject?.type === 'image') {
-    // eslint-disable-next-line camelcase
     return basicStoryObject?.resized_params;
   }
 

@@ -3,7 +3,6 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 
@@ -39,15 +38,6 @@ class NumberedList extends Component {
     });
   }
 
-  constructHref(websiteUrl) {
-    const { arcSite } = this.props;
-    const {
-      websiteDomain,
-    } = getProperties(arcSite);
-    return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}` : `${websiteDomain}/${websiteUrl}`;
-  }
-
   render() {
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
@@ -56,11 +46,13 @@ class NumberedList extends Component {
           const {
             headlines: { basic: headlineText } = {},
             website_url: websiteUrl,
+            promo_items: promoItems,
+            canonical_url: canonicalUrl,
           } = element;
           return (
-            <div className="numbered-list-item" key={`result-card-${element.canonical_url}`} type="1">
+            <div className="numbered-list-item" key={`result-card-${canonicalUrl}`} type="1">
               <a
-                href={this.constructHref(websiteUrl)}
+                href={websiteUrl}
                 title={headlineText}
                 className="headline-list-anchor"
               >
@@ -68,13 +60,13 @@ class NumberedList extends Component {
                 <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
               </a>
               <a
-                href={this.constructHref(websiteUrl)}
+                href={websiteUrl}
                 title={headlineText}
                 className="list-anchor-image"
               >
-                {extractImage(element.promo_items) ? (
+                {extractImage(promoItems) ? (
                   <Image
-                    url={extractImage(element.promo_items)}
+                    url={extractImage(promoItems)}
                     alt={headlineText}
                     smallWidth={105}
                     smallHeight={71}

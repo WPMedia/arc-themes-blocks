@@ -9,17 +9,12 @@ const StoryItem = (props) => {
     id = '',
     primaryFont = '',
     websiteURL,
-    websiteDomain,
   } = props;
-
-  const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}`
-    : `${websiteDomain}/${websiteURL}`;
 
   return (
     <div key={id} className="list-item-simple">
       <a
-        href={location}
+        href={websiteURL}
         title={itemTitle}
         className="simple-list-anchor"
       >
@@ -43,7 +38,7 @@ const StoryItem = (props) => {
       {itemTitle !== '' ? (
         <a
           className="simple-list-headline-anchor"
-          href={location}
+          href={websiteURL}
           title={itemTitle}
         >
           <Title primaryFont={primaryFont} className="simple-list-headline-text">

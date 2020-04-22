@@ -33,7 +33,6 @@ html, body {
 
     &.horizontal-borders {
       border-bottom: 1px solid $border-rule-color;
-      border-top: 1px solid $border-rule-color;
 
       &:empty {
         border: none;

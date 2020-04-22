@@ -1,10 +1,12 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
   const {
-    itemTitle, imageURL, id, primaryFont, constructedURL,
+    itemTitle, imageURL, id, primaryFont, constructedURL, arcSite, resizedImageOptions,
   } = props;
   return (
     <article key={id} className="container-fluid small-promo">
@@ -22,14 +24,18 @@ const ItemTitleWithRightImage = (props) => {
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image
+                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 alt={itemTitle}
-                smallWidth={275}
+                // small size aspect ratios 3:2
+                smallWidth={274}
                 smallHeight={183}
-                mediumWidth={275}
+                mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
               />
             </a>
           ) : null}

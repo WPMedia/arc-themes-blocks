@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
@@ -153,6 +154,8 @@ const ExtraLargePromo = ({ customFields }) => {
                   mediumHeight={450}
                   largeWidth={800}
                   largeHeight={600}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={resizerURL}
                 />
               </a>
             )}

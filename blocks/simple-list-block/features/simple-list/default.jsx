@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -10,6 +11,17 @@ import './simple-list.scss';
 
 // helpers start
 
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
+
 const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic
   && storyObject.promo_items.basic.type === 'image'
@@ -20,6 +32,7 @@ const unserializeStory = (storyObject) => ({
   itemTitle: storyObject.headlines.basic,
   imageURL: extractImage(storyObject) || '',
   websiteURL: storyObject.website_url || '',
+  resizedImageOptions: extractResizedParams(storyObject),
 });
 
 // helpers end
@@ -56,7 +69,7 @@ const SimpleList = (props) => {
       </Title>
       {
         contentElements.map(unserializeStory).map(({
-          id: listItemId, itemTitle, imageURL, websiteURL,
+          id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
           <StoryItem
             key={listItemId}
@@ -66,6 +79,7 @@ const SimpleList = (props) => {
             primaryFont={primaryFont}
             websiteURL={websiteURL}
             websiteDomain={websiteDomain}
+            resizedImageOptions={resizedImageOptions}
           />
         ))
       }

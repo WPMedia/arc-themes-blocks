@@ -1,0 +1,34 @@
+{
+  "name": "@wpmedia/resizer-image-block",
+  "version": "1.1.0",
+  "description": "Takes a raw image url and uses thumbor to create resize urls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/resizer-image-block"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
+  },
+  "keywords": [
+    "thumbor",
+    "thumbor-lite",
+    "performance",
+    "responsive",
+    "images"
+  ],
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  },
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "dependencies": {
+    "thumbor-lite": "^0.1.8"
+  }
+}

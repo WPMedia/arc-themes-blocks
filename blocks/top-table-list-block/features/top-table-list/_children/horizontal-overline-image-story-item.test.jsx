@@ -26,15 +26,7 @@ const config = {
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
-    globalContent: {
-      websites: {
-        'the-sun': {
-          website_section: {
-            name: 'News',
-          },
-        },
-      },
-    },
+    globalContent: {},
   })),
 }));
 
@@ -103,8 +95,10 @@ describe('horizontal overline image story item', () => {
     const by = [];
     const element = {};
     const displayDate = '';
-    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const overlineURL = '';
+    const overlineText = '';
     const id = 'test';
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
 
     const wrapper = mount(
       <HorizontalOverlineImageStoryItem
@@ -116,6 +110,8 @@ describe('horizontal overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
+        overlineURL={overlineURL}
+        overlineText={overlineText}
         id={id}
         customFields={config}
       />,
@@ -126,6 +122,7 @@ describe('horizontal overline image story item', () => {
 
     // does not find overline
     expect(wrapper.find('a.overline').length).toBe(0);
+    expect(wrapper.props().overlineText).toBe('');
 
     // finds default spacing for headline descriptions
     // expect(wrapper.find('.headline-description-spacing').length).toBe(1);

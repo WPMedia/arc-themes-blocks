@@ -6,6 +6,29 @@ import ConditionalStoryItem from './conditional-story-item';
 
 @Consumer
 class StoryItemContainer extends Component {
+  // via overline component
+  getOverlineData() {
+    const { arcSite, element = {} } = this.props;
+
+    const {
+      display: labelDisplay,
+      url: labelUrl,
+      text: labelText,
+    } = (element.label && element.label.basic) || {};
+    const shouldUseLabel = !!(labelDisplay);
+
+    const {
+      _id: sectionUrl,
+      name: sectionText,
+    } = (element.websites
+      && element.websites[arcSite]
+      && element.websites[arcSite].website_section) || {};
+
+    const overlineContent = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
+
+    return overlineContent;
+  }
+
   constructHref() {
     const { arcSite, websiteURL } = this.props;
     const { websiteDomain } = getProperties(arcSite);
@@ -23,15 +46,12 @@ class StoryItemContainer extends Component {
       description,
       by,
       element,
-      overlineDisplay,
-      overlineUrl,
-      overlineText,
       storySize,
       primaryFont,
       customFields,
     } = this.props;
-
     const constructedURL = this.constructHref();
+    const [overlineText, overlineURL] = this.getOverlineData();
 
     return (
       <>
@@ -46,9 +66,8 @@ class StoryItemContainer extends Component {
           description={description}
           by={by}
           element={element}
-          overlineDisplay={overlineDisplay}
-          overlineUrl={overlineUrl}
           overlineText={overlineText}
+          overlineURL={overlineURL}
           customFields={customFields}
         />
       </>

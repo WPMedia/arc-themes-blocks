@@ -26,15 +26,7 @@ const config = {
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
-    globalContent: {
-      websites: {
-        'the-sun': {
-          website_section: {
-            name: 'News',
-          },
-        },
-      },
-    },
+    globalContent: {},
   })),
 }));
 
@@ -71,10 +63,10 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
+        overlineURL={overlineUrl}
+        overlineText={overlineText}
         id={id}
         overlineDisplay={overlineDisplay}
-        overlineUrl={overlineUrl}
-        overlineText={overlineText}
         customFields={config}
       />,
     );
@@ -83,7 +75,8 @@ describe('vertical overline image story item', () => {
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
-    expect(wrapper.find('a.overline').text()).toBe('News');
+    expect(wrapper.props().overlineText).toBe('News');
+    expect(wrapper.find('a.overline').text()).toBe(overlineText);
 
     // does not find default spacing for headline descriptions
     expect(wrapper.find('.headline-description-spacing').length).toBe(0);
@@ -103,6 +96,8 @@ describe('vertical overline image story item', () => {
     const by = [];
     const element = { };
     const displayDate = '';
+    const overlineURL = '';
+    const overlineText = '';
     const id = 'test';
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
@@ -117,6 +112,8 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
+        overlineURL={overlineURL}
+        overlineText={overlineText}
         id={id}
         customFields={config}
       />,
@@ -126,6 +123,7 @@ describe('vertical overline image story item', () => {
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(0);
+    expect(wrapper.props().overlineText).toBe('');
 
     // does not find default spacing for headline descriptions
     // expect(wrapper.find('.headline-description-spacing').length).toBe(1);

@@ -3,6 +3,8 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -21,6 +23,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     overlineText,
     displayDate,
     id,
+    arcSite,
+    resizedImageOptions,
     customFields,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
@@ -97,17 +101,19 @@ const HorizontalOverlineImageStoryItem = (props) => {
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image
+                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
+                // large aspect ratio 4:3
                 smallWidth={274}
-                smallHeight={148}
+                smallHeight={206}
                 mediumWidth={274}
-                mediumHeight={148}
-                // large size via invision
-                // https://washpost.invisionapp.com/d/main#/console/18639079/395708159/inspect
+                mediumHeight={206}
                 largeWidth={377}
-                largeHeight={272}
+                largeHeight={283}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
               />
             </a>
           ) : null}

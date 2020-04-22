@@ -115,7 +115,6 @@ class CustomSearchResultsList extends React.Component {
                 headlines: { basic: headlineText } = {},
                 display_date: displayDate,
                 credits: { by } = {},
-                website_url: websiteUrl,
                 canonical_url: canonicalUrl,
                 promo_items: promoItems,
               } = element;
@@ -123,7 +122,7 @@ class CustomSearchResultsList extends React.Component {
               return (
                 <div className="list-item" key={`result-card-${canonicalUrl}`}>
                   <a
-                    href={websiteUrl}
+                    href={canonicalUrl}
                     title={headlineText}
                     className="list-anchor"
                   >
@@ -149,7 +148,7 @@ class CustomSearchResultsList extends React.Component {
                   >
                     <div>
                       <a
-                        href={websiteUrl}
+                        href={canonicalUrl}
                         title={headlineText}
                         className="list-anchor"
                       >

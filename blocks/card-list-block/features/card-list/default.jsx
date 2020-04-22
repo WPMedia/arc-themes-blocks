@@ -41,7 +41,7 @@ class CardList extends React.Component {
 
   render() {
     const { customFields: { title } = {} } = this.props;
-    const { cardList: { content_elements: contentElements = [] } } = this.state;
+    const { cardList: { content_elements: contentElements = [] } = {} } = this.state;
     const showSeparator = !!(
       contentElements[0]
       && contentElements[0].credits

@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -119,7 +120,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
                 largeWidth={400}
                 largeHeight={225}
                 breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
+                resizerURL={resizerURL}
               />
             </a>
           </div>

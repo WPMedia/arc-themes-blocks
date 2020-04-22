@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -41,7 +42,7 @@ const StoryItem = (props) => {
             largeHeight={183}
             className="simple-list-img"
             breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={getProperties(arcSite)?.resizerURL}
+            resizerURL={resizerURL}
           />
         ) : (
           <div className="simple-list-placeholder" />

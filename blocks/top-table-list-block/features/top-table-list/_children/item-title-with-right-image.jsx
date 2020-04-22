@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {
@@ -34,7 +35,7 @@ const ItemTitleWithRightImage = (props) => {
                 largeWidth={400}
                 largeHeight={267}
                 breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
+                resizerURL={resizerURL}
               />
             </a>
           ) : null}

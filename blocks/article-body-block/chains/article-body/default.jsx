@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import { Gallery, ImageMetadata, Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -50,7 +51,7 @@ function parseArticleItem(item, index, arcSite) {
             largeWidth={1440}
             largeHeight={0}
             breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={getProperties(arcSite)?.resizerURL}
+            resizerURL={resizerURL}
           />
           <figcaption>
             <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />

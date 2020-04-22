@@ -21,6 +21,7 @@ import {
   RssIcon,
 } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import constructSocialURL from './shared/constructSocialURL';
 
 
@@ -59,7 +60,7 @@ const renderAuthorInfo = (author, arcSite) => {
           largeWidth={84}
           largeHeight={0}
           breakpoints={getProperties(arcSite)?.breakpoints}
-          resizerURL={getProperties(arcSite)?.resizerURL}
+          resizerURL={resizerURL}
         />
       ) : null
   );

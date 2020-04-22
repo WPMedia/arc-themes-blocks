@@ -7,6 +7,7 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 import './results-list.scss';
@@ -160,7 +161,7 @@ class ResultsList extends Component {
                       largeWidth={274}
                       largeHeight={154}
                       breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
+                      resizerURL={resizerURL}
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

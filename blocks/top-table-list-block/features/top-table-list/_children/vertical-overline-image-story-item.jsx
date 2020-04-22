@@ -4,6 +4,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -56,7 +57,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                 largeWidth={800}
                 largeHeight={600}
                 breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
+                resizerURL={resizerURL}
               />
             </a>
           ) : null}

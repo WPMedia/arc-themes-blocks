@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
@@ -9,7 +10,8 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
-
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -62,7 +64,6 @@ class LeadArt extends Component {
     const { arcSite } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
-      // eslint-disable-next-line camelcase
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
       let lightbox = null;
       let caption = null;
@@ -149,6 +150,8 @@ class LeadArt extends Component {
                 largeHeight={0}
                 lightBoxWidth={1600}
                 lightBoxHeight={0}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
               />
             </div>
             {lightbox}

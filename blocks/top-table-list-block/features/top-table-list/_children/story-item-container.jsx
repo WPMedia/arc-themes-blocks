@@ -23,8 +23,12 @@ class StoryItemContainer extends Component {
       description,
       by,
       element,
+      overlineDisplay,
+      overlineUrl,
+      overlineText,
       storySize,
       primaryFont,
+      customFields,
     } = this.props;
 
     const constructedURL = this.constructHref();
@@ -42,6 +46,10 @@ class StoryItemContainer extends Component {
           description={description}
           by={by}
           element={element}
+          overlineDisplay={overlineDisplay}
+          overlineUrl={overlineUrl}
+          overlineText={overlineText}
+          customFields={customFields}
         />
       </>
     );

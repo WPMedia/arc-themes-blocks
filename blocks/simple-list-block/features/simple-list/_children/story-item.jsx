@@ -10,6 +10,8 @@ const StoryItem = (props) => {
     primaryFont = '',
     websiteURL,
     websiteDomain,
+    showHeadline,
+    showImage,
   } = props;
 
   const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -18,29 +20,31 @@ const StoryItem = (props) => {
 
   return (
     <div key={id} className="list-item-simple">
-      <a
-        href={location}
-        title={itemTitle}
-        className="simple-list-anchor"
-      >
-        {imageURL !== '' ? (
-          <Image
-            url={imageURL}
-            alt={itemTitle}
+      {showImage ? (
+        <a
+          href={location}
+          title={itemTitle}
+          className="simple-list-anchor"
+        >
+          {imageURL !== '' ? (
+            <Image
+              url={imageURL}
+              alt={itemTitle}
             // used this from simple results list
-            smallWidth={274}
-            smallHeight={148}
-            mediumWidth={274}
-            mediumHeight={148}
-            largeWidth={274}
-            largeHeight={148}
-            className="simple-list-img"
-          />
-        ) : (
-          <div className="simple-list-placeholder" />
-        )}
-      </a>
-      {itemTitle !== '' ? (
+              smallWidth={274}
+              smallHeight={148}
+              mediumWidth={274}
+              mediumHeight={148}
+              largeWidth={274}
+              largeHeight={148}
+              className="simple-list-img"
+            />
+          ) : (
+            <div className="simple-list-placeholder" />
+          )}
+        </a>
+      ) : <div className="simple-list-placeholder" />}
+      {showHeadline && itemTitle !== '' ? (
         <a
           className="simple-list-headline-anchor"
           href={location}

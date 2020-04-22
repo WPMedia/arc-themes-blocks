@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
@@ -17,9 +39,7 @@ jest.mock('fusion:context', () => ({
 }));
 
 jest.mock('fusion:content', () => ({
-  useEditableContent: jest.fn(() => ({
-    editableContent: {},
-  })),
+  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
 }));
 
 describe('vertical overline image story item', () => {
@@ -35,6 +55,9 @@ describe('vertical overline image story item', () => {
     const element = { credits: { by: [] } };
     const displayDate = '';
     const id = 'test';
+    const overlineUrl = '/news';
+    const overlineText = 'News';
+    const overlineDisplay = true;
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
@@ -49,6 +72,10 @@ describe('vertical overline image story item', () => {
         element={element}
         displayDate={displayDate}
         id={id}
+        overlineDisplay={overlineDisplay}
+        overlineUrl={overlineUrl}
+        overlineText={overlineText}
+        customFields={config}
       />,
     );
     // doesn't show placeholder
@@ -91,6 +118,7 @@ describe('vertical overline image story item', () => {
         element={element}
         displayDate={displayDate}
         id={id}
+        customFields={config}
       />,
     );
     // No img should be present

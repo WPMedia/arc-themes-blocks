@@ -21,7 +21,11 @@ const ConditionalStoryItem = (props) => {
     descriptionText = '',
     by = [],
     element = {},
+    overlineDisplay,
+    overlineUrl,
+    overlineText,
     displayDate = '',
+    customFields,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -36,7 +40,11 @@ const ConditionalStoryItem = (props) => {
           descriptionText={descriptionText}
           by={by}
           element={element}
+          overlineDisplay={overlineDisplay}
+          overlineUrl={overlineUrl}
+          overlineText={overlineText}
           displayDate={displayDate}
+          customFields={customFields}
         />
       );
     case LARGE:
@@ -50,7 +58,11 @@ const ConditionalStoryItem = (props) => {
           descriptionText={descriptionText}
           by={by}
           element={element}
+          overlineDisplay={overlineDisplay}
+          overlineUrl={overlineUrl}
+          overlineText={overlineText}
           displayDate={displayDate}
+          customFields={customFields}
         />
       );
     case MEDIUM:
@@ -65,6 +77,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           displayDate={displayDate}
+          customFields={customFields}
         />
       );
     case SMALL:
@@ -75,6 +88,7 @@ const ConditionalStoryItem = (props) => {
           imageURL={imageURL}
           id={id}
           constructedURL={constructedURL}
+          customFields={customFields}
         />
       );
     default:

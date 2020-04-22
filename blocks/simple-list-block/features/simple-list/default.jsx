@@ -32,6 +32,8 @@ const SimpleList = (props) => {
         contentConfigValues = {},
       } = {},
       title = '',
+      showHeadline = true,
+      showImage = true,
     } = {},
     id = '',
   } = props;
@@ -66,6 +68,8 @@ const SimpleList = (props) => {
             primaryFont={primaryFont}
             websiteURL={websiteURL}
             websiteDomain={websiteDomain}
+            showHeadline={showHeadline}
+            showImage={showImage}
           />
         ))
       }
@@ -82,6 +86,16 @@ SimpleList.propTypes = {
       },
     ),
     title: PropTypes.string.tag({ label: 'Title' }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
 };
 

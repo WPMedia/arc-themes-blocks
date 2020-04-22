@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
@@ -16,10 +38,9 @@ jest.mock('fusion:context', () => ({
   })),
 }));
 
+
 jest.mock('fusion:content', () => ({
-  useEditableContent: jest.fn(() => ({
-    editableContent: {},
-  })),
+  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
 }));
 
 describe('horizontal overline image story item', () => {
@@ -35,6 +56,9 @@ describe('horizontal overline image story item', () => {
     const displayDate = '';
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
     const id = 'test';
+    const overlineUrl = '/news';
+    const overlineText = 'News';
+    const overlineDisplay = true;
 
     const wrapper = mount(
       <HorizontalOverlineImageStoryItem
@@ -47,6 +71,10 @@ describe('horizontal overline image story item', () => {
         element={element}
         displayDate={displayDate}
         id={id}
+        overlineDisplay={overlineDisplay}
+        overlineUrl={overlineUrl}
+        overlineText={overlineText}
+        customFields={config}
       />,
     );
 
@@ -89,6 +117,7 @@ describe('horizontal overline image story item', () => {
         element={element}
         displayDate={displayDate}
         id={id}
+        customFields={config}
       />,
     );
 

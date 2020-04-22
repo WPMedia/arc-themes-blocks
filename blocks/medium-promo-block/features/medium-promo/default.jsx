@@ -5,7 +5,6 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -112,15 +111,12 @@ const MediumPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                // medium is 16:9
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
+                smallWidth={275}
+                smallHeight={155}
+                mediumWidth={275}
+                mediumHeight={155}
                 largeWidth={400}
                 largeHeight={225}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
               />
             </a>
           </div>

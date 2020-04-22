@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -16,9 +15,6 @@ const DescriptionText = styled.p`
 `;
 
 const MediumManualPromo = ({ customFields, arcSite }) => {
-  const {
-    breakpoints,
-  } = getProperties(arcSite);
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
   return customFields.linkURL ? (
@@ -32,17 +28,14 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
               title={customFields.headline}
             >
               <Image
-                // medium is 16:9
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
+                smallWidth={275}
+                smallHeight={155}
+                mediumWidth={275}
+                mediumHeight={155}
                 largeWidth={400}
                 largeHeight={225}
-                breakpoints={breakpoints}
-                resizerURL={resizerURL}
               />
             </a>
           </div>

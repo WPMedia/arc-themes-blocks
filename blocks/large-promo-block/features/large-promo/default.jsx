@@ -5,7 +5,6 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
@@ -145,15 +144,12 @@ const LargePromo = ({ customFields }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                // large is 4:3 aspect ratio
                 smallWidth={274}
-                smallHeight={206}
+                smallHeight={148}
                 mediumWidth={274}
-                mediumHeight={206}
+                mediumHeight={148}
                 largeWidth={377}
-                largeHeight={283}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+                largeHeight={272}
               />
             </a>
           </div>

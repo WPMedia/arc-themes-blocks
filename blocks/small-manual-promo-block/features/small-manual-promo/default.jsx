@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -44,15 +43,12 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
               <Image
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                // small should be 3:2 aspect ratio
-                smallWidth={274}
+                smallWidth={275}
                 smallHeight={183}
-                mediumWidth={274}
+                mediumWidth={275}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
               />
             </a>
           </div>

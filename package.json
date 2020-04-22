@@ -52,7 +52,6 @@
     "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "dependencies": {
-    "@wpmedia/resizer-image-block": "file:blocks/resizer-image-block",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
     "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
     "@wpmedia/byline-block": "file:blocks/byline-block",

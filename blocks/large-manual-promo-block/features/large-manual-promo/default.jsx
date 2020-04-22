@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -43,15 +42,12 @@ const LargeManualPromo = ({ customFields, arcSite }) => {
               <Image
                 url={customFields.imageURL}
                 alt={customFields.headline}
-                // large promo has 4:3
                 smallWidth={274}
-                smallHeight={206}
+                smallHeight={148}
                 mediumWidth={274}
-                mediumHeight={206}
+                mediumHeight={148}
                 largeWidth={377}
-                largeHeight={283}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+                largeHeight={272}
               />
             </a>
           </div>

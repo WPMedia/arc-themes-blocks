@@ -20,5 +20,4 @@ export default {
   params,
   resolve,
   schemaName: 'ans-feed',
-  transform: (data) => data,
 };

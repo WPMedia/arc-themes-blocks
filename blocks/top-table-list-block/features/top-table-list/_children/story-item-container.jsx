@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import Consumer from 'fusion:consumer';
-import getProperties from 'fusion:properties';
 import ConditionalStoryItem from './conditional-story-item';
 
 @Consumer
@@ -29,14 +27,6 @@ class StoryItemContainer extends Component {
     return overlineContent;
   }
 
-  constructHref() {
-    const { arcSite, websiteURL } = this.props;
-    const { websiteDomain } = getProperties(arcSite);
-    return typeof window !== 'undefined' && window.location.hostname === 'localhost'
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}`
-      : `${websiteDomain}/${websiteURL}`;
-  }
-
   render() {
     const {
       id,
@@ -48,8 +38,8 @@ class StoryItemContainer extends Component {
       element,
       storySize,
       primaryFont,
+      websiteURL,
     } = this.props;
-    const constructedURL = this.constructHref();
     const [overlineText, overlineURL] = this.getOverlineData();
 
     return (
@@ -57,7 +47,7 @@ class StoryItemContainer extends Component {
         <ConditionalStoryItem
           primaryFont={primaryFont}
           storySize={storySize}
-          constructedURL={constructedURL}
+          websiteURL={websiteURL}
           id={id}
           itemTitle={itemTitle}
           imageURL={imageURL}

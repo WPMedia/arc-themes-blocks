@@ -9,7 +9,7 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 // via results list
 const MediumListItem = (props) => {
   const {
-    constructedURL,
+    websiteURL,
     itemTitle,
     imageURL,
     descriptionText,
@@ -25,7 +25,7 @@ const MediumListItem = (props) => {
     <article className="container-fluid medium-promo" key={id}>
       <div className="row med-promo-padding-bottom">
         <div className="col-sm-12 col-md-xl-4">
-          <a href={constructedURL} title={itemTitle}>
+          <a href={websiteURL} title={itemTitle}>
             {imageURL !== '' ? (
               <Image
                 url={imageURL}
@@ -43,7 +43,7 @@ const MediumListItem = (props) => {
         </div>
         <div className="col-sm-12 col-md-xl-8 flex-col">
           {itemTitle !== '' ? (
-            <a href={constructedURL} title={itemTitle} className="md-promo-headline">
+            <a href={websiteURL} title={itemTitle} className="md-promo-headline">
               <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
             </a>
           ) : null}

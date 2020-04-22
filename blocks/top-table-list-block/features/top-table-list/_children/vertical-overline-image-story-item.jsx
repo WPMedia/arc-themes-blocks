@@ -9,7 +9,7 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
-    constructedURL,
+    websiteURL,
     itemTitle,
     imageURL,
     descriptionText,
@@ -33,13 +33,13 @@ const VerticalOverlineImageStoryItem = (props) => {
               className="overline"
             />
           ) : null}
-          <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
+          <a href={websiteURL} title={itemTitle} className="xl-promo-headline">
             <Title primaryFont={primaryFont} className="xl-promo-headline">
               {itemTitle}
             </Title>
           </a>
           {imageURL !== '' ? (
-            <a href={constructedURL} title={itemTitle}>
+            <a href={websiteURL} title={itemTitle}>
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image

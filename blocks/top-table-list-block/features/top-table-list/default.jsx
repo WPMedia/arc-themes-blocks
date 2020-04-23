@@ -103,6 +103,7 @@ const TopTableList = (props) => {
             by,
             websiteURL,
             element,
+            resizedImageOptions,
             overlineDisplay,
             overlineUrl,
             overlineText,
@@ -123,6 +124,7 @@ const TopTableList = (props) => {
               storySize={storyTypeArray[index]}
               primaryFont={primaryFont}
               key={itemId}
+              resizedImageOptions={resizedImageOptions}
               customFields={props.customFields}
             />
           );

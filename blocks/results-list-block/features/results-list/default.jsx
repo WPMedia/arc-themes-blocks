@@ -151,7 +151,7 @@ class ResultsList extends Component {
                   {extractImage(element.promo_items) ? (
                     <Image
                       // results list is 16:9 by default
-                      resizedImageParams={extractResizedParams(element)}
+                      resizedImageOptions={extractResizedParams(element)}
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}

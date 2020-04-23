@@ -24,8 +24,9 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     overlineText = '',
     overlineURL = '',
+    resizedImageOptions = [],
   } = props;
-  // don't want these to re-render if latter unless story size changes
+
   switch (storySize) {
     case EXTRA_LARGE:
       return (
@@ -41,6 +42,7 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           overlineText={overlineText}
           overlineURL={overlineURL}
+          resizedImageOptions={resizedImageOptions}
         />
       );
     case LARGE:
@@ -57,6 +59,8 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           overlineText={overlineText}
           overlineURL={overlineURL}
+          resizedImageOptions={resizedImageOptions}
+
         />
       );
     case MEDIUM:
@@ -71,6 +75,8 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           displayDate={displayDate}
+          resizedImageOptions={resizedImageOptions}
+
         />
       );
     case SMALL:
@@ -81,6 +87,7 @@ const ConditionalStoryItem = (props) => {
           imageURL={imageURL}
           id={id}
           constructedURL={constructedURL}
+          resizedImageOptions={resizedImageOptions}
         />
       );
     default:

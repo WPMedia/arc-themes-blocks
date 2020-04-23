@@ -94,6 +94,7 @@ const TopTableList = (props) => {
             by,
             websiteURL,
             element,
+            resizedImageOptions,
           } = itemObject;
 
           return (
@@ -109,6 +110,7 @@ const TopTableList = (props) => {
               storySize={storyTypeArray[index]}
               primaryFont={primaryFont}
               key={itemId}
+              resizedImageOptions={resizedImageOptions}
             />
           );
         })

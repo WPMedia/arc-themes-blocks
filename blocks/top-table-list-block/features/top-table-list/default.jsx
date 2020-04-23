@@ -94,7 +94,6 @@ const TopTableList = (props) => {
     <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
       {
         contentElements.map(unserializeStory, arcSite).map((itemObject, index) => {
-          console.error('here is the itemObject..', itemObject);
           const {
             id: itemId,
             itemTitle,

@@ -54,7 +54,7 @@ const SampleOutputType = ({
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
   const {
-    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [],
+    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [], fontUrl,
   } = getProperties(arcSite);
   const pageType = metaValue('page-type') || '';
   let storyMetaDataTags = null;
@@ -92,7 +92,7 @@ const SampleOutputType = ({
           <link href="https://fonts.googleapis.com/css?family=Space Mono" rel="stylesheet" />
         );
       default:
-        return '';
+        return fontUrl ? <link href={fontUrl} rel="stylesheet" /> : '';
     }
   };
 

@@ -24,9 +24,8 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     overlineText = '',
     overlineURL = '',
+    resizedImageOptions = [],
   } = props;
-
-  const { resizedImageOptions } = element;
 
   switch (storySize) {
     case EXTRA_LARGE:

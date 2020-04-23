@@ -48,6 +48,7 @@ class StoryItemContainer extends Component {
       element,
       storySize,
       primaryFont,
+      resizedImageOptions,
     } = this.props;
     const constructedURL = this.constructHref();
     const [overlineText, overlineURL] = this.getOverlineData();
@@ -67,6 +68,7 @@ class StoryItemContainer extends Component {
           element={element}
           overlineText={overlineText}
           overlineURL={overlineURL}
+          resizedImageOptions={resizedImageOptions}
         />
       </>
     );

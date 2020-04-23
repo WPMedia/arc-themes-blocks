@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 describe('top table list', () => {
   afterEach(() => {
     jest.resetModules();
@@ -19,7 +41,7 @@ describe('top table list', () => {
       useContent: jest.fn(),
     }));
     const wrapper = mount(
-      <TopTableList />,
+      <TopTableList customFields={config} />,
     );
     expect(wrapper.text()).toBe('');
     expect(wrapper.find('.top-table-list-container').children().length).toBe(0);
@@ -38,7 +60,7 @@ describe('top table list', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
     const wrapper = mount(
-      <TopTableList />,
+      <TopTableList customFields={config} />,
     );
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
@@ -70,7 +92,7 @@ describe('top table list', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
     const wrapper = mount(
-      <TopTableList />,
+      <TopTableList customFields={config} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);

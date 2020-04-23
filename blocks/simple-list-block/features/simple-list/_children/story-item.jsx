@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -12,8 +11,8 @@ const StoryItem = (props) => {
     primaryFont = '',
     websiteURL,
     websiteDomain,
-    arcSite,
-    resizedImageOptions,
+    showHeadline,
+    showImage,
   } = props;
 
   const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
@@ -22,33 +21,32 @@ const StoryItem = (props) => {
 
   return (
     <div key={id} className="list-item-simple">
-      <a
-        href={location}
-        title={itemTitle}
-        className="simple-list-anchor"
-      >
-        {imageURL !== '' ? (
-          <Image
-            resizedImageOptions={resizedImageOptions}
-            url={imageURL}
-            alt={itemTitle}
-            // used this from simple results list
-            // small, including simple list, 3:2 aspect ratio
-            smallWidth={105}
-            smallHeight={70}
-            mediumWidth={105}
-            mediumHeight={70}
-            largeWidth={105}
-            largeHeight={70}
-            className="simple-list-img"
-            breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={resizerURL}
-          />
-        ) : (
-          <div className="simple-list-placeholder" />
-        )}
-      </a>
-      {itemTitle !== '' ? (
+      {showImage ? (
+        <a
+          href={location}
+          title={itemTitle}
+          className="simple-list-anchor"
+        >
+          {imageURL !== '' ? (
+            <Image
+              url={imageURL}
+              alt={itemTitle}
+                // used this from simple results list
+                // small, including simple list, 3:2 aspect ratio
+              smallWidth={105}
+              smallHeight={70}
+              mediumWidth={105}
+              mediumHeight={70}
+              largeWidth={105}
+              largeHeight={70}
+              className="simple-list-img"
+            />
+          ) : (
+            <div className="simple-list-placeholder" />
+          )}
+        </a>
+      ) : <div className="simple-list-placeholder" />}
+      {showHeadline && itemTitle !== '' ? (
         <a
           className="simple-list-headline-anchor"
           href={location}

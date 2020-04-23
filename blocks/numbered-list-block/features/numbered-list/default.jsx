@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 
@@ -20,17 +20,6 @@ const HeadlineText = styled.h2`
 const Number = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
-
-// todo: fix camelcase storyobject parsing
-const extractResizedParams = (storyObject) => {
-  const basicStoryObject = storyObject?.promo_items?.basic;
-
-  if (basicStoryObject?.type === 'image') {
-    return basicStoryObject?.resized_params;
-  }
-
-  return [];
-};
 
 @Consumer
 class NumberedList extends Component {
@@ -62,7 +51,7 @@ class NumberedList extends Component {
   }
 
   render() {
-    const { arcSite } = this.props;
+    const { customFields } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -73,6 +62,8 @@ class NumberedList extends Component {
           } = element;
           return (
             <div className="numbered-list-item" key={`result-card-${element.canonical_url}`} type="1">
+              {customFields.showHeadline
+              && (
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
@@ -81,6 +72,9 @@ class NumberedList extends Component {
                 <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
                 <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
               </a>
+              )}
+              {customFields.showImage
+              && (
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
@@ -88,7 +82,7 @@ class NumberedList extends Component {
               >
                 {extractImage(element.promo_items) ? (
                   <Image
-                    resizedImageOptions={extractResizedParams(element)}
+
                     url={extractImage(element.promo_items)}
                     alt={headlineText}
                     // small, including numbered list, is 3:2 aspect ratio
@@ -98,11 +92,11 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={resizerURL}
+
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>
+              )}
             </div>
           );
         })}
@@ -110,6 +104,7 @@ class NumberedList extends Component {
     );
   }
 }
+
 
 NumberedList.propTypes = {
   customFields: PropTypes.shape({
@@ -119,6 +114,16 @@ NumberedList.propTypes = {
         label: 'Display Content Info',
       },
     ),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
 };
 

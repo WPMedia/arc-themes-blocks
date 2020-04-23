@@ -29,7 +29,6 @@ class StoryItemContainer extends Component {
       storySize,
       primaryFont,
       customFields,
-      resizedImageOptions,
     } = this.props;
     const constructedURL = this.constructHref();
 
@@ -50,7 +49,6 @@ class StoryItemContainer extends Component {
           overlineUrl={overlineUrl}
           overlineText={overlineText}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
         />
       </>
     );

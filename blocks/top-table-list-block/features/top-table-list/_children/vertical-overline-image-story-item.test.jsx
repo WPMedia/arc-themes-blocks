@@ -63,7 +63,7 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
-        overlineURL={overlineUrl}
+        overlineUrl={overlineUrl}
         overlineText={overlineText}
         id={id}
         overlineDisplay={overlineDisplay}
@@ -72,7 +72,6 @@ describe('vertical overline image story item', () => {
     );
     // doesn't show placeholder
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
-
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
     expect(wrapper.props().overlineText).toBe('News');

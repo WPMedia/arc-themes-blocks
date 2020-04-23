@@ -23,7 +23,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     id,
     arcSite,
     resizedImageOptions,
-    overlineURL,
+    overlineUrl,
     overlineText,
     customFields,
   } = props;
@@ -34,7 +34,7 @@ const VerticalOverlineImageStoryItem = (props) => {
       return (
         (
           <Overline
-            customUrl={overlineURL}
+            customUrl={overlineUrl}
             customText={overlineText}
             className="overline"
             editable

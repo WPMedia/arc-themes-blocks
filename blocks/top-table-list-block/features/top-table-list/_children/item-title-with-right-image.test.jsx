@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 describe('item title with right image block', () => {
   it('renders title and image with full props', () => {
     const imageURL = 'pic';
@@ -16,6 +38,7 @@ describe('item title with right image block', () => {
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
+        customFields={config}
       />,
     );
 
@@ -40,6 +63,7 @@ describe('item title with right image block', () => {
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
+        customFields={config}
       />,
     );
 

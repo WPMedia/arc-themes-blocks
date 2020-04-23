@@ -51,6 +51,7 @@ class NumberedList extends Component {
   }
 
   render() {
+    const { customFields } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -61,6 +62,8 @@ class NumberedList extends Component {
           } = element;
           return (
             <div className="numbered-list-item" key={`result-card-${element.canonical_url}`} type="1">
+              {customFields.showHeadline
+              && (
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
@@ -69,6 +72,9 @@ class NumberedList extends Component {
                 <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
                 <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
               </a>
+              )}
+              {customFields.showImage
+              && (
               <a
                 href={this.constructHref(websiteUrl)}
                 title={headlineText}
@@ -90,6 +96,7 @@ class NumberedList extends Component {
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>
+              )}
             </div>
           );
         })}
@@ -97,6 +104,7 @@ class NumberedList extends Component {
     );
   }
 }
+
 
 NumberedList.propTypes = {
   customFields: PropTypes.shape({
@@ -106,6 +114,16 @@ NumberedList.propTypes = {
         label: 'Display Content Info',
       },
     ),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
 };
 

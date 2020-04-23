@@ -3,8 +3,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
-import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -20,8 +19,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
     element,
     displayDate,
     id,
-    arcSite,
-    resizedImageOptions,
     overlineURL,
     overlineText,
   } = props;
@@ -34,7 +31,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
           {imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image
-                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
@@ -45,8 +41,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 mediumHeight={206}
                 largeWidth={377}
                 largeHeight={283}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
               />
             </a>
           ) : null}

@@ -2,8 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -20,8 +19,6 @@ const MediumListItem = (props) => {
     element,
     displayDate,
     id,
-    arcSite,
-    resizedImageOptions,
   } = props;
   const showSeparator = by && by.length !== 0;
 
@@ -32,7 +29,7 @@ const MediumListItem = (props) => {
           <a href={constructedURL} title={itemTitle}>
             {imageURL !== '' ? (
               <Image
-                resizedImageOptions={resizedImageOptions}
+
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 // 16:9 aspect for medium
@@ -43,8 +40,8 @@ const MediumListItem = (props) => {
                 mediumHeight={154}
                 largeWidth={400}
                 largeHeight={225}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+
+
               />
             ) : null}
           </a>

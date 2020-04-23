@@ -24,7 +24,6 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     overlineText = '',
     overlineURL = '',
-    resizedImageOptions = [],
   } = props;
 
   switch (storySize) {
@@ -42,7 +41,7 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           overlineText={overlineText}
           overlineURL={overlineURL}
-          resizedImageOptions={resizedImageOptions}
+
         />
       );
     case LARGE:
@@ -59,7 +58,7 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           overlineText={overlineText}
           overlineURL={overlineURL}
-          resizedImageOptions={resizedImageOptions}
+
 
         />
       );
@@ -75,7 +74,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           displayDate={displayDate}
-          resizedImageOptions={resizedImageOptions}
+
 
         />
       );
@@ -87,7 +86,7 @@ const ConditionalStoryItem = (props) => {
           imageURL={imageURL}
           id={id}
           constructedURL={constructedURL}
-          resizedImageOptions={resizedImageOptions}
+
         />
       );
     default:

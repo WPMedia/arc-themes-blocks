@@ -26,16 +26,6 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
 
-// todo: fix camelcase storyobject parsing
-const extractResizedParams = (storyObject) => {
-  const basicStoryObject = storyObject?.promo_items?.basic;
-
-  if (basicStoryObject?.type === 'image') {
-    return basicStoryObject?.resized_params;
-  }
-
-  return [];
-};
 
 const unserializeStory = (storyObject) => ({
   id: storyObject._id,
@@ -46,7 +36,6 @@ const unserializeStory = (storyObject) => ({
   by: (storyObject.credits && storyObject.credits.by) || [],
   websiteURL: storyObject.website_url || '',
   element: storyObject,
-  resizedImageOptions: extractResizedParams(storyObject),
 });
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
@@ -94,7 +83,6 @@ const TopTableList = (props) => {
             by,
             websiteURL,
             element,
-            resizedImageOptions,
           } = itemObject;
 
           return (
@@ -110,7 +98,7 @@ const TopTableList = (props) => {
               storySize={storyTypeArray[index]}
               primaryFont={primaryFont}
               key={itemId}
-              resizedImageOptions={resizedImageOptions}
+
             />
           );
         })

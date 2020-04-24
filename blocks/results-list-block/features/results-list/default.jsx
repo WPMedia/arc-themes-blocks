@@ -6,7 +6,6 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
@@ -6,11 +7,13 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 import './results-list.scss';
 import './desktop-styles.scss';
 import './mobile-styles.scss';
+
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -93,7 +96,8 @@ class ResultsList extends Component {
       const { resultList } = this.state;
       this.state.storedList = resultList;
       // Check if there are available stories
-      if (resultList.content_elements) {
+
+      if (resultList?.content_elements) {
         // Hide button if no additional stories from initial content
         if (resultList.content_elements.length >= resultList.count) {
           this.state.seeMore = false;
@@ -136,14 +140,18 @@ class ResultsList extends Component {
                 >
                   {extractImage(element.promo_items) ? (
                     <Image
+                      // results list is 16:9 by default
+
                       url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
-                      smallHeight={103}
+                      smallHeight={89}
                       mediumWidth={274}
-                      mediumHeight={148}
+                      mediumHeight={154}
                       largeWidth={274}
-                      largeHeight={148}
+                      largeHeight={154}
+
+
                     />
                   ) : <div className="image-placeholder" />}
                 </a>

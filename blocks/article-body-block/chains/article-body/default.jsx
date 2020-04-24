@@ -5,6 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import { Gallery, ImageMetadata, Image } from '@wpmedia/engine-theme-sdk';
+
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -28,7 +29,11 @@ function parseArticleItem(item, index) {
     }
     case 'image': {
       const {
-        url, subtitle, caption, credits, alt_text: altText,
+        url,
+        subtitle,
+        caption,
+        credits,
+        alt_text: altText,
       } = item;
 
       return (url && url.length > 0) ? (

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -9,6 +10,7 @@ import StoryItem from './_children/story-item';
 import './simple-list.scss';
 
 // helpers start
+
 
 const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic
@@ -32,6 +34,8 @@ const SimpleList = (props) => {
         contentConfigValues = {},
       } = {},
       title = '',
+      showHeadline = true,
+      showImage = true,
     } = {},
     id = '',
   } = props;
@@ -66,6 +70,8 @@ const SimpleList = (props) => {
             primaryFont={primaryFont}
             websiteURL={websiteURL}
             websiteDomain={websiteDomain}
+            showHeadline={showHeadline}
+            showImage={showImage}
           />
         ))
       }
@@ -82,6 +88,16 @@ SimpleList.propTypes = {
       },
     ),
     title: PropTypes.string.tag({ label: 'Title' }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
   }),
 };
 

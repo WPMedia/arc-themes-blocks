@@ -35,7 +35,11 @@ describe('The numbered-list-block', () => {
         },
         contentService: 'story-feed-query',
       };
-      const customFields = { listContentConfig };
+      const customFields = {
+        listContentConfig,
+        showHeadline: true,
+        showImage: true,
+      };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
       const wrapper = shallow(<NumberedList customFields={customFields} />);
@@ -68,7 +72,11 @@ describe('The numbered-list-block', () => {
         },
         contentService: 'story-feed-query',
       };
-      const customFields = { listContentConfig };
+      const customFields = {
+        listContentConfig,
+        showHeadline: true,
+        showImage: true,
+      };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
       const wrapper = shallow(<NumberedList customFields={customFields} />);

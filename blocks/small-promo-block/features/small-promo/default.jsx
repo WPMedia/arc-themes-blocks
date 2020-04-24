@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -56,12 +57,15 @@ const SmallPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageOverrideURL
                   ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                 alt={content && content.headlines ? content.headlines.basic : ''}
-                smallWidth={275}
+                // small should be 3:2 aspect ratio
+                smallWidth={274}
                 smallHeight={183}
-                mediumWidth={275}
+                mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
+
+
               />
             </a>
           </div>

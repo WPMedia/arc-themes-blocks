@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
@@ -9,9 +31,7 @@ jest.mock('fusion:context', () => ({
 }));
 
 jest.mock('fusion:content', () => ({
-  useEditableContent: jest.fn(() => ({
-    editableContent: {},
-  })),
+  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
 }));
 
 describe('vertical overline image story item', () => {
@@ -26,9 +46,10 @@ describe('vertical overline image story item', () => {
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
-    const overlineURL = 'overline';
-    const overlineText = 'overline';
     const id = 'test';
+    const overlineUrl = '/news';
+    const overlineText = 'News';
+    const overlineDisplay = true;
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
@@ -42,17 +63,18 @@ describe('vertical overline image story item', () => {
         by={by}
         element={element}
         displayDate={displayDate}
-        overlineURL={overlineURL}
+        overlineUrl={overlineUrl}
         overlineText={overlineText}
         id={id}
+        overlineDisplay={overlineDisplay}
+        customFields={config}
       />,
     );
     // doesn't show placeholder
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
-
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
-    expect(wrapper.props().overlineText).toBe('overline');
+    expect(wrapper.props().overlineText).toBe('News');
     expect(wrapper.find('a.overline').text()).toBe(overlineText);
 
     // does not find default spacing for headline descriptions
@@ -92,6 +114,7 @@ describe('vertical overline image story item', () => {
         overlineURL={overlineURL}
         overlineText={overlineText}
         id={id}
+        customFields={config}
       />,
     );
     // No img should be present

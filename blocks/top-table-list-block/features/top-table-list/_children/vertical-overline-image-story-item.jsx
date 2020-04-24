@@ -3,6 +3,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -16,34 +17,95 @@ const VerticalOverlineImageStoryItem = (props) => {
     primaryFont,
     by,
     element,
+    overlineDisplay,
     displayDate,
     id,
-    overlineURL,
+    overlineUrl,
     overlineText,
+    customFields,
   } = props;
-  const showSeparator = by && by.length !== 0;
+  const showSeparator = by && by.length !== 0 && customFields.showDateXL;
+
+  const overlineTmpl = () => {
+    if (customFields.showOverlineXL && overlineDisplay) {
+      return (
+        (
+          <Overline
+            customUrl={overlineUrl}
+            customText={overlineText}
+            className="overline"
+            editable
+          />
+        )
+      );
+    }
+    return null;
+  };
+
+  const headlineTmpl = () => {
+    if (customFields.showHeadlineXL && itemTitle) {
+      return (
+        <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
+          <Title primaryFont={primaryFont} className="xl-promo-headline">
+            {itemTitle}
+          </Title>
+        </a>
+      );
+    }
+    return null;
+  };
+
+  const descriptionTmpl = () => {
+    if (customFields.showDescriptionXL && descriptionText) {
+      return (
+        <DescriptionText secondaryFont={primaryFont} className="description-text">
+          {descriptionText}
+        </DescriptionText>
+      );
+    }
+    return null;
+  };
+
+  const byLineTmpl = () => {
+    if (customFields.showBylineXL && !checkObjectEmpty(element)) {
+      return (
+        <>
+          {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
+          {/* The Separator will only be shown if there is atleast one author name */}
+          {showSeparator && <p className="dot-separator">&#9679;</p>}
+        </>
+      );
+    }
+    return null;
+  };
+
+  const dateTmpl = () => {
+    if (customFields.showDateXL && displayDate) {
+      return (
+        <>
+          <ArticleDate date={displayDate} />
+        </>
+      );
+    }
+    return null;
+  };
+
   return (
     <article className="container-fluid xl-large-promo" key={id}>
       <div className="row xl-promo-padding-bottom">
+        {(customFields.showHeadlineXL || customFields.showDescriptionXL
+            || customFields.showBylineXL || customFields.showDateXL)
+        && (
         <div className="col-sm-xl-12 flex-col">
-          {overlineText ? (
-            <Overline
-              customText={overlineText}
-              customUrl={overlineURL}
-              className="overline"
-            />
-          ) : null}
-          <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
-            <Title primaryFont={primaryFont} className="xl-promo-headline">
-              {itemTitle}
-            </Title>
-          </a>
-          {imageURL !== '' ? (
+          {overlineTmpl()}
+          {headlineTmpl()}
+          {customFields.showImageXL && imageURL !== '' ? (
             <a href={constructedURL} title={itemTitle}>
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
+                // xl aspect ratio of 4:3
                 smallWidth={400}
                 smallHeight={300}
                 mediumWidth={600}
@@ -53,16 +115,13 @@ const VerticalOverlineImageStoryItem = (props) => {
               />
             </a>
           ) : null}
-          <DescriptionText secondaryFont={primaryFont} className="description-text">
-            {descriptionText}
-          </DescriptionText>
+          {descriptionTmpl()}
           <div className="article-meta">
-            {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
-            {/* The Separator will only be shown if there is atleast one author name */}
-            {showSeparator && <p className="dot-separator">&#9679;</p>}
-            <ArticleDate date={displayDate} />
+            {byLineTmpl()}
+            {dateTmpl()}
           </div>
         </div>
+        )}
       </div>
     </article>
   );

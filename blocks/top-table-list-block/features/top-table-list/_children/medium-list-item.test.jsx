@@ -1,6 +1,28 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 describe('medium list item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   it('renders title and image with full props', () => {
@@ -26,6 +48,7 @@ describe('medium list item', () => {
       element={element}
       displayDate={displayDate}
       id={id}
+      customFields={config}
     />);
 
     // placeholder
@@ -61,8 +84,8 @@ describe('medium list item', () => {
       by={by}
       element={element}
       displayDate={displayDate}
-
       id={id}
+      customFields={config}
     />);
 
     // There should be no imag present

@@ -8,6 +8,28 @@ import {
   SMALL,
 } from '../shared/storySizeConstants';
 
+const config = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
+
 jest.mock('./item-title-with-right-image', () => class ItemWithRightImage {});
 jest.mock('./medium-list-item', () => class MediumListItem {});
 jest.mock('./horizontal-overline-image-story-item', () => class HorizontalOverlineImageStoryItem {});
@@ -22,7 +44,7 @@ describe('conditional story item', () => {
     const storySize = SMALL;
 
     const wrapper = shallow(
-      <ConditionalStoryItem storySize={storySize} />,
+      <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
     expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
@@ -33,7 +55,7 @@ describe('conditional story item', () => {
     const storySize = MEDIUM;
 
     const wrapper = shallow(
-      <ConditionalStoryItem storySize={storySize} />,
+      <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
     expect(wrapper.is('MediumListItem')).toBeTruthy();
@@ -44,7 +66,7 @@ describe('conditional story item', () => {
     const storySize = LARGE;
 
     const wrapper = shallow(
-      <ConditionalStoryItem storySize={storySize} />,
+      <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
     expect(wrapper.is('HorizontalOverlineImageStoryItem')).toBeTruthy();
@@ -55,7 +77,7 @@ describe('conditional story item', () => {
     const storySize = EXTRA_LARGE;
 
     const wrapper = shallow(
-      <ConditionalStoryItem storySize={storySize} />,
+      <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
     expect(wrapper.is('VerticalOverlineImageStoryItem')).toBeTruthy();

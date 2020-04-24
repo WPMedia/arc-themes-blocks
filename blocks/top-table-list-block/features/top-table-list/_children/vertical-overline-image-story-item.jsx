@@ -10,7 +10,7 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
-    constructedURL,
+    websiteURL,
     itemTitle,
     imageURL,
     descriptionText,
@@ -45,7 +45,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineXL && itemTitle) {
       return (
-        <a href={constructedURL} title={itemTitle} className="xl-promo-headline">
+        <a href={websiteURL} title={itemTitle} className="xl-promo-headline">
           <Title primaryFont={primaryFont} className="xl-promo-headline">
             {itemTitle}
           </Title>
@@ -71,7 +71,7 @@ const VerticalOverlineImageStoryItem = (props) => {
       return (
         <>
           {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
-          {/* The Separator will only be shown if there is atleast one author name */}
+          {/* The Separator will only be shown if there is at least one author name */}
           {showSeparator && <p className="dot-separator">&#9679;</p>}
         </>
       );
@@ -100,7 +100,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           {overlineTmpl()}
           {headlineTmpl()}
           {customFields.showImageXL && imageURL !== '' ? (
-            <a href={constructedURL} title={itemTitle}>
+            <a href={websiteURL} title={itemTitle}>
               <Image
                 url={imageURL}
                 // todo: get the proper alt tag for this image

@@ -39,7 +39,7 @@ describe('vertical overline image story item', () => {
 
   it('renders image and overline with full props', () => {
     const imageURL = 'pic';
-    const constructedURL = 'url';
+    const websiteURL = 'url';
     const itemTitle = 'title';
     const descriptionText = 'description';
     const primaryFont = 'arial';
@@ -56,7 +56,7 @@ describe('vertical overline image story item', () => {
     const wrapper = mount(
       <VerticalOverlineImageStoryItem
         imageURL={imageURL}
-        constructedURL={constructedURL}
+        websiteURL={websiteURL}
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
@@ -70,6 +70,7 @@ describe('vertical overline image story item', () => {
         customFields={config}
       />,
     );
+
     // doesn't show placeholder
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     // finds overline
@@ -79,6 +80,11 @@ describe('vertical overline image story item', () => {
 
     // does not find default spacing for headline descriptions
     expect(wrapper.find('.headline-description-spacing').length).toBe(0);
+
+    // has the correct link
+    expect(wrapper.find('a.xl-promo-headline').length).toBe(1);
+    expect(wrapper.props().websiteURL).toBe('url');
+    expect(wrapper.find('a.xl-promo-headline').props().href).toBe(websiteURL);
   });
   it('does not render image, overline and byline with empty props', () => {
     jest.mock('fusion:context', () => ({
@@ -88,7 +94,7 @@ describe('vertical overline image story item', () => {
       })),
     }));
     const imageURL = '';
-    const constructedURL = 'url';
+    const websiteURL = 'url';
     const itemTitle = 'title';
     const descriptionText = '';
     const primaryFont = 'arial';
@@ -98,13 +104,25 @@ describe('vertical overline image story item', () => {
     const overlineURL = '';
     const overlineText = '';
     const id = 'test';
-
+    const props = {
+      imageURL,
+      websiteURL,
+      itemTitle,
+      descriptionText,
+      primaryFont,
+      by,
+      element,
+      displayDate,
+      overlineURL,
+      overlineText,
+      id,
+    };
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
     const wrapper = mount(
       <VerticalOverlineImageStoryItem
         imageURL={imageURL}
-        constructedURL={constructedURL}
+        websiteURL={websiteURL}
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
@@ -117,14 +135,15 @@ describe('vertical overline image story item', () => {
         customFields={config}
       />,
     );
+
+    // matches props
+    expect(wrapper.props()).toMatchObject(props);
+
     // No img should be present
     expect(wrapper.find('img').length).toBe(0);
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(0);
     expect(wrapper.props().overlineText).toBe('');
-
-    // does not find default spacing for headline descriptions
-    // expect(wrapper.find('.headline-description-spacing').length).toBe(1);
   });
 });

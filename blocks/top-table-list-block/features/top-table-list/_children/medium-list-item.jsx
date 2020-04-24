@@ -10,7 +10,7 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 // via results list
 const MediumListItem = (props) => {
   const {
-    constructedURL,
+    websiteURL,
     itemTitle,
     imageURL,
     descriptionText,
@@ -27,7 +27,7 @@ const MediumListItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={constructedURL} title={itemTitle} className="md-promo-headline">
+        <a href={websiteURL} title={itemTitle} className="md-promo-headline">
           <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
         </a>
       );
@@ -51,7 +51,7 @@ const MediumListItem = (props) => {
       return (
         <>
           {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
-          {/* The Separator will only be shown if there is atleast one author name */}
+          {/* The Separator will only be shown if there is at least one author name */}
           {showSeparator && <p className="dot-separator">&#9679;</p>}
         </>
       );
@@ -75,7 +75,7 @@ const MediumListItem = (props) => {
         {customFields.showImageMD
           && (
           <div className="col-sm-12 col-md-xl-4">
-            <a href={constructedURL} title={itemTitle}>
+            <a href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
                   url={imageURL}

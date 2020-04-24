@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
-import { constructHref, extractImage } from './helpers';
+import { extractImage } from './helpers';
 import './search-results-list.scss';
 
 const GlobalSearchResultsList = () => {
@@ -50,19 +50,20 @@ const GlobalSearchResultsList = () => {
               headlines: { basic: headlineText } = {},
               display_date: displayDate,
               credits: { by } = {},
-              website_url: websiteUrl,
+              canonical_url: canonicalUrl,
+              promo_items: promoItems,
             } = element;
             const showSeparator = by && by.length !== 0;
             return (
-              <div className="list-item" key={`result-card-${element.canonical_url}`}>
+              <div className="list-item" key={`result-card-${canonicalUrl}`}>
                 <a
-                  href={constructHref(websiteUrl, arcSite)}
+                  href={canonicalUrl}
                   title={headlineText}
                   className="list-anchor"
                 >
-                  {extractImage(element.promo_items) ? (
+                  {extractImage(promoItems) ? (
                     <Image
-                      url={extractImage(element.promo_items)}
+                      url={extractImage(promoItems)}
                       alt={headlineText}
                       smallWidth={274}
                       smallHeight={148}
@@ -82,7 +83,7 @@ const GlobalSearchResultsList = () => {
                 >
                   <div>
                     <a
-                      href={constructHref(websiteUrl)}
+                      href={canonicalUrl}
                       title={headlineText}
                       className="list-anchor"
                     >

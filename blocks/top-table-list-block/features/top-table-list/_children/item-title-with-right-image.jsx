@@ -9,7 +9,7 @@ const ItemTitleWithRightImage = (props) => {
     imageURL,
     id,
     primaryFont,
-    constructedURL,
+    websiteURL,
     customFields,
   } = props;
   return (
@@ -17,7 +17,7 @@ const ItemTitleWithRightImage = (props) => {
       <div className="row sm-promo-padding-btm">
         {customFields.showHeadlineSM && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">
-            <a href={constructedURL} title={itemTitle} className="sm-promo-headline">
+            <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
               </Title>
@@ -28,7 +28,7 @@ const ItemTitleWithRightImage = (props) => {
           && (
           <div className="col-sm-4 col-md-xl-4">
             {imageURL !== '' ? (
-              <a href={constructedURL} title={itemTitle}>
+              <a href={websiteURL} title={itemTitle}>
                 <Image
                   url={imageURL}
                   alt={itemTitle}

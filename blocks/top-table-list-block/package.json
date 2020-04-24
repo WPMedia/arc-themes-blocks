@@ -1,8 +1,11 @@
 {
   "name": "@wpmedia/top-table-list-block",
-  "version": "1.1.2",
+  "version": "1.1.6",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
+  "contributors": [
+    "Beltran Caliz <beltran.caliz@washpost.com>"
+  ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",

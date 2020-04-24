@@ -17,7 +17,7 @@ const ConditionalStoryItem = (props) => {
     id,
     storySize,
     primaryFont = '',
-    constructedURL = '',
+    websiteURL = '',
     descriptionText = '',
     by = [],
     element = {},
@@ -36,7 +36,7 @@ const ConditionalStoryItem = (props) => {
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
-          constructedURL={constructedURL}
+          websiteURL={websiteURL}
           descriptionText={descriptionText}
           by={by}
           element={element}
@@ -54,7 +54,7 @@ const ConditionalStoryItem = (props) => {
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
-          constructedURL={constructedURL}
+          websiteURL={websiteURL}
           descriptionText={descriptionText}
           by={by}
           element={element}
@@ -72,7 +72,7 @@ const ConditionalStoryItem = (props) => {
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
-          constructedURL={constructedURL}
+          websiteURL={websiteURL}
           descriptionText={descriptionText}
           by={by}
           element={element}
@@ -87,7 +87,7 @@ const ConditionalStoryItem = (props) => {
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
-          constructedURL={constructedURL}
+          constructedURL={websiteURL}
           customFields={customFields}
         />
       );

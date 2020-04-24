@@ -149,10 +149,24 @@ function parseArticleItem(item, index) {
 
 const ArticleBody = styled.article`
   font-family: ${(props) => props.secondaryFont};
-  h1, h2, h3, h4, h5, h6, figcaption, table {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  figcaption,
+  table {
     font-family: ${(props) => props.primaryFont};
   }
-  .body-paragraph, .interstitial-link, ol, ul, blockquote p, blockquote {
+
+  .body-paragraph,
+  .interstitial-link,
+  ol,
+  ul,
+  blockquote p,
+  blockquote {
     font-family: ${(props) => props.secondaryFont};
   }
 `;

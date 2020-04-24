@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const HeaderContainerHideMobile = styled.div`
-  justify-content: center;
   display: flex;
+  justify-content: center;
   padding-bottom: 10px;
   padding-top: 26px;
 

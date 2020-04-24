@@ -51,6 +51,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
             className="md-promo-headline"
             {...editableContent(content, 'headlines.basic')}
+            suppressContentEditableWarning
           >
             {headlineText}
           </HeadlineText>
@@ -67,6 +68,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
           className="description-text"
           {...editableContent(content, 'description.basic')}
+          suppressContentEditableWarning
         >
           {descriptionText}
         </DescriptionText>

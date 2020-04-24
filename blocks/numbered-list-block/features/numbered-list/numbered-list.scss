@@ -1,5 +1,12 @@
 .numbered-list-container {
   @include block-margin-bottom;
+
+  .list-title {
+    color: $ui-primary-font-color;
+    font-size: calculateRem(20px);
+    font-weight: bold;
+    line-height: calculateRem(24px);
+  }
 }
 
 .numbered-list-item {

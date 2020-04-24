@@ -39,7 +39,7 @@ describe('horizontal overline image story item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   it('renders with the full required props', () => {
     const imageURL = 'pic';
-    const constructedURL = 'url';
+    const websiteURL = 'url';
     const itemTitle = 'title';
     const descriptionText = 'description';
     const primaryFont = 'arial';
@@ -55,7 +55,7 @@ describe('horizontal overline image story item', () => {
     const wrapper = mount(
       <HorizontalOverlineImageStoryItem
         imageURL={imageURL}
-        constructedURL={constructedURL}
+        websiteURL={websiteURL}
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
@@ -70,15 +70,14 @@ describe('horizontal overline image story item', () => {
       />,
     );
 
-    // doesn't show placeholder
-    // expect(wrapper.find('.top-table-large-image-placeholder').length).toBe(0);
-
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
     expect(wrapper.find('a.overline').text()).toBe('News');
 
-    // does not find default spacing for headline descriptions
-    // expect(wrapper.find('.headline-description-spacing').length).toBe(0);
+    // has the correct link
+    expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
+    expect(wrapper.props().websiteURL).toBe('url');
+    expect(wrapper.find('a.lg-promo-headline').props().href).toBe(websiteURL);
   });
   it('renders with empty props with defaults', () => {
     jest.mock('fusion:context', () => ({
@@ -88,7 +87,7 @@ describe('horizontal overline image story item', () => {
       })),
     }));
     const imageURL = '';
-    const constructedURL = '';
+    const websiteURL = '';
     const itemTitle = '';
     const descriptionText = '';
     const primaryFont = '';
@@ -98,12 +97,25 @@ describe('horizontal overline image story item', () => {
     const overlineURL = '';
     const overlineText = '';
     const id = 'test';
+    const props = {
+      imageURL,
+      websiteURL,
+      itemTitle,
+      descriptionText,
+      primaryFont,
+      by,
+      element,
+      displayDate,
+      overlineURL,
+      overlineText,
+      id,
+    };
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
 
     const wrapper = mount(
       <HorizontalOverlineImageStoryItem
         imageURL={imageURL}
-        constructedURL={constructedURL}
+        websiteURL={websiteURL}
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
@@ -116,6 +128,9 @@ describe('horizontal overline image story item', () => {
         customFields={config}
       />,
     );
+
+    // matches props
+    expect(wrapper.props()).toMatchObject(props);
 
     // Should be no img present
     expect(wrapper.find('img').length).toBe(0);

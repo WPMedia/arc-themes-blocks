@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "contributors": [
-    "Jack Howard <jack.howard@washpost.com>"
+    "Jack Howard <jack.howard@washpost.com>",
+    "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
   "files": [
     "features"

@@ -87,7 +87,7 @@ describe('The story-feed-list', () => {
 
       it('should render an anchor and an image with the correct url', () => {
         expect(wrapper.find('.list-item-simple').find('.list-anchor').at(0).find('a')
-          .prop('href')).toEqual('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/arts/2019/12/18/article-with-a-youtube-embed-in-it/');
+          .prop('href')).toEqual('/arts/2019/12/18/article-with-a-youtube-embed-in-it/');
       });
 
       it('should render an anchor and an image with alt text', () => {

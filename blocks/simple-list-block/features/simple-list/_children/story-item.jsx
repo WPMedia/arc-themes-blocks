@@ -34,7 +34,6 @@ const StoryItem = (props) => {
               mediumHeight={70}
               largeWidth={105}
               largeHeight={70}
-              className="simple-list-img"
             />
           ) : (
             <div className="simple-list-placeholder" />

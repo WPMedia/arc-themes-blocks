@@ -1,26 +1,28 @@
-html, body {
-  width: 100%;
+html,
+body {
   height: 100%;
+  width: 100%;
 }
 
 #fusion-app {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   header {
+    height: 54px;
+    left: 0;
     position: fixed;
+    right: 0;
     top: 0;
-    left:0;
-    right:0;
     z-index: 999;
-    height:54px;
   }
+
   .main {
     flex-grow: 1;
-    padding-top: 54px;
     padding-bottom: calculateRem(64px);
+    padding-top: 54px;
     width: 100%;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -33,7 +35,6 @@ html, body {
 
     &.horizontal-borders {
       border-bottom: 1px solid $border-rule-color;
-      border-top: 1px solid $border-rule-color;
 
       &:empty {
         border: none;
@@ -48,8 +49,8 @@ html, body {
   .left-article-section {
     padding: 0;
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
-      padding: 0 map-get($spacers, 'lg') 0 0;
       border-right: 1px solid $border-rule-color;
+      padding: 0 map-get($spacers, 'lg') 0 0;
     }
   }
 
@@ -57,7 +58,7 @@ html, body {
     padding: 0;
   }
 
-  .section-padding{
+  .section-padding {
     padding: map-get($spacers, 'sm');
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

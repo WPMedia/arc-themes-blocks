@@ -20,8 +20,7 @@ import {
   SoundCloudIcon,
   RssIcon,
 } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import constructSocialURL from './shared/constructSocialURL';
 
 
@@ -44,7 +43,7 @@ const AuthorBioStyled = styled.section`
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
-const renderAuthorInfo = (author, arcSite) => {
+const renderAuthorInfo = (author) => {
   const { image: { url = '', alt_text: altText = '' }, image, name } = author;
 
   return (
@@ -59,8 +58,6 @@ const renderAuthorInfo = (author, arcSite) => {
           mediumHeight={0}
           largeWidth={84}
           largeHeight={0}
-          breakpoints={getProperties(arcSite)?.breakpoints}
-          resizerURL={resizerURL}
         />
       ) : null
   );

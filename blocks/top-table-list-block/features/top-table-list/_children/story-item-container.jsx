@@ -19,7 +19,6 @@ class StoryItemContainer extends Component {
       storySize,
       primaryFont,
       customFields,
-      resizedImageOptions,
       websiteURL,
     } = this.props;
 
@@ -40,7 +39,6 @@ class StoryItemContainer extends Component {
           overlineUrl={overlineUrl}
           overlineText={overlineText}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
         />
       </>
     );

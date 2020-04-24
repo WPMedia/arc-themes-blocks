@@ -5,7 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -64,8 +64,8 @@ const SmallPromo = ({ customFields, arcSite }) => {
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+
+
               />
             </a>
           </div>

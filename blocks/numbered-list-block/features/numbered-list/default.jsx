@@ -51,7 +51,12 @@ class NumberedList extends Component {
   }
 
   render() {
-    const { customFields } = this.props;
+    const {
+      customFields: {
+        showHeadline = true,
+        showImage = true,
+      },
+    } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -62,7 +67,7 @@ class NumberedList extends Component {
           } = element;
           return (
             <div className="numbered-list-item" key={`result-card-${element.canonical_url}`} type="1">
-              {customFields.showHeadline
+              {showHeadline
               && (
               <a
                 href={this.constructHref(websiteUrl)}
@@ -73,7 +78,7 @@ class NumberedList extends Component {
                 <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
               </a>
               )}
-              {customFields.showImage
+              {showImage
               && (
               <a
                 href={this.constructHref(websiteUrl)}

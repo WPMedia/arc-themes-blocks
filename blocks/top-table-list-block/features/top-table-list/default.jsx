@@ -59,10 +59,51 @@ const TopTableList = (props) => {
         contentConfigValues = {},
       } = {},
       extraLarge = 0, large = 0, medium = 0, small = 0,
+      // eslint-disable-next-line no-unused-vars
+      showOverlineXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showHeadlineXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showImageXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showDescriptionXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showBylineXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showDateXL = true,
+      // eslint-disable-next-line no-unused-vars
+      showOverlineLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showHeadlineLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showImageLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showDescriptionLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showBylineLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showDateLG = true,
+      // eslint-disable-next-line no-unused-vars
+      showHeadlineMD = true,
+      // eslint-disable-next-line no-unused-vars
+      showImageMD = true,
+      // eslint-disable-next-line no-unused-vars
+      showDescriptionMD = true,
+      // eslint-disable-next-line no-unused-vars
+      showBylineMD = true,
+      // eslint-disable-next-line no-unused-vars
+      showDateMD = true,
+      // eslint-disable-next-line no-unused-vars
+      showHeadlineSM = true,
+      // eslint-disable-next-line no-unused-vars
+      showImageSM = true,
+
     } = {},
     id = '',
   } = props;
 
+  // eslint-disable-next-line react/destructuring-assignment
+  const defaultProps = props.customFields;
   const { arcSite } = useFusionContext();
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
@@ -112,7 +153,7 @@ const TopTableList = (props) => {
               storySize={storyTypeArray[index]}
               primaryFont={primaryFont}
               key={itemId}
-              customFields={props.customFields}
+              customFields={defaultProps}
             />
           );
         })

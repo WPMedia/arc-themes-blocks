@@ -101,7 +101,7 @@ Note three things here:
 
 1. The initial version is set to `0.0.0`. This is because on your initial commit you are going to choose the first version you want to publish. Otherwise, it will default to `1.0.0` and then you'll need to bump up the package version no matter what once you publish.
 2. The `files` consists of three directories: `features`, `chains`, and `layouts`. These are the three types of components blocks currently support. You'll want to delete the `lib` and `__tests__` directories from your repo as well as the `files` list.
-3. There is a `lint` and `lint:fix` script in the `scripts`. Before your commits are pushed, the files need to be linted to [Airbnb code style](https://github.com/airbnb/javascript) and [React best practices](https://github.com/yannickcr/eslint-plugin-react). This is helpful for learning best practices as well as developer velocity. (Plus, it's more fun to worry about coding than code style!) First, have a clean `node_modules` folder. Run `sudo rm -rf node_modules/`. Then either `sudo npx lerna bootstrap` or `sudo npm i` to install dependencies. Next, from the top-level directory, run `npm run lint`. If there are eslint-fixable errors that you notice, you can run `npm run lint:fix` that will auto-fix them. If you have [VS Code eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) downloaded, then saving a file will auto-format. It will also notice linting errors as you type per airbnb rules. To see the linting rules, go to `.eslintrc.js`. Your `.vscode/settings.json` can be configured as follows for auto-format:
+3. There is a `lint` and `lint:fix` script in the `scripts`. Before your commits are pushed, the files need to be linted to [Airbnb code style](https://github.com/airbnb/javascript) and [React best practices](https://github.com/yannickcr/eslint-plugin-react). This is helpful for learning best practices as well as developer velocity. (Plus, it's more fun to worry about coding than code style!) First, have a clean `node_modules` folder. Run `sudo rm -rf node_modules/`. Then either `sudo npx lerna bootstrap` or `sudo npm i` to install dependencies. Next, from the top-level directory, run `npm run lint`. If there are eslint-fixable errors that you notice, you can run `npm run lint:fix` that will auto-fix them. If you have [VS Code eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) downloaded, then saving a file will auto-format. It will also notice linting errors as you type per airbnb rules. To see the linting rules, go to `.eslintrc.js`. Also, to lint and auto-fix for `.scss` files, download the [stylelint extension](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint). To use the cli to check or fix styles, use `npm run lint:styles` or `npm run lint:styles:fix`, respectively. Your `.vscode/settings.json` can be configured as follows for auto-format:
 
 ```
 {
@@ -112,7 +112,12 @@ Note three things here:
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "eslint.enable": true
+  "eslint.enable": true,
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    },
+  },
 }
 ```
 

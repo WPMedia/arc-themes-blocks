@@ -24,6 +24,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
               href={customFields.linkURL}
               className="sm-promo-headline"
               title={customFields.headline}
+              target={customFields.newTab ? '_blank' : '_self'}
             >
               <HeadlineText
                 primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -40,6 +41,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
             <a
               href={customFields.linkURL}
               title={customFields.headline}
+              target={customFields.newTab ? '_blank' : '_self'}
             >
               <Image
                 url={customFields.imageURL}
@@ -74,6 +76,11 @@ SmallManualPromo.propTypes = {
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',
+      group: 'Configure Content',
+    }),
+    newTab: PropTypes.bool.tag({
+      label: 'Open in new tab',
+      defaultValue: false,
       group: 'Configure Content',
     }),
     showHeadline: PropTypes.bool.tag({

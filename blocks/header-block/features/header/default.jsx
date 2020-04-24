@@ -14,19 +14,19 @@ const ExtraLargeHeader = styled.h2`
 const LargeHeader = styled.h3`
   font-family: ${(props) => props.primaryFont};
   font-size: 30px;
-  line-height 32px;
+  line-height: 32px;
 `;
 
 const MediumHeader = styled.h4`
   font-family: ${(props) => props.primaryFont};
   font-size: 26px;
-  line-height 32px;
+  line-height: 32px;
 `;
 
 const SmallHeader = styled.h5`
   font-family: ${(props) => props.primaryFont};
   font-size: 20px;
-  line-height 24px;
+  line-height: 24px;
 `;
 
 @Consumer

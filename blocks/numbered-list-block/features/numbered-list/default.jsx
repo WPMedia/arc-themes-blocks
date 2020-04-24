@@ -20,6 +20,10 @@ const Number = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
+const Title = styled.h2`
+  font-family: ${(props) => props.primaryFont};
+`;
+
 @Consumer
 class NumberedList extends Component {
   constructor(props) {
@@ -27,6 +31,7 @@ class NumberedList extends Component {
     this.arcSite = props.arcSite;
     this.state = {};
     this.fetchStories();
+    this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
   }
 
   fetchStories() {
@@ -45,12 +50,18 @@ class NumberedList extends Component {
       customFields: {
         showHeadline = true,
         showImage = true,
+        title = '',
       },
     } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
-        {contentElements && contentElements.length && contentElements.map((element, i) => {
+        {(title !== '' && contentElements && contentElements.length) ? (
+          <Title className="list-title" primaryFont={this.primaryFont}>
+            {title}
+          </Title>
+        ) : null }
+        {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
           const {
             headlines: { basic: headlineText } = {},
             website_url: websiteUrl,
@@ -95,7 +106,7 @@ class NumberedList extends Component {
               )}
             </div>
           );
-        })}
+        }) : null}
       </div>
     );
   }
@@ -110,6 +121,7 @@ NumberedList.propTypes = {
         label: 'Display Content Info',
       },
     ),
+    title: PropTypes.string.tag({ label: 'Title' }),
     showHeadline: PropTypes.bool.tag({
       label: 'Show headline',
       defaultValue: true,

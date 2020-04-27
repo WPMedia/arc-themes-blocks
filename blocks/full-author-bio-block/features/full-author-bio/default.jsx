@@ -23,12 +23,15 @@ import constructSocialURL from './shared/constructSocialURL';
 
 const StyledAuthorContent = styled.div`
   font-family: ${(props) => props.primaryFont};
+
   .author-name {
     font-family: ${(props) => props.primaryFont};
   }
+
   .author-title {
     font-family: ${(props) => props.primaryFont};
   }
+
   .author-bio {
     font-family: ${(props) => props.secondaryFont};
   }

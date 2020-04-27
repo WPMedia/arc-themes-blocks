@@ -5,16 +5,16 @@ const MastheadItemsContainer = styled.div`
   justify-content: space-evenly;
 
   > div {
-    flex: 1;
-    display: flex;
     align-items: flex-end;
+    display: flex;
+    flex: 1;
     padding-bottom: 9px;
     padding-top: 5px;
 
     > p {
+      color: #191919;
       font-family: ${(props) => props.primaryFont};
       margin: 0;
-      color: #191919;
     }
   }
 

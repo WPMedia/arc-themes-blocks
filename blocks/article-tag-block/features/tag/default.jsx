@@ -7,8 +7,8 @@ import { LinkBackgroundHover } from '@wpmedia/news-theme-css/js/styled/linkHover
 import './tags.scss';
 
 const Tags = styled(LinkBackgroundHover)`
-  font-family:  ${(props) => props.primaryFont};
-  background-color:  ${(props) => props.primaryColor};
+  background-color: ${(props) => props.primaryColor};
+  font-family: ${(props) => props.primaryFont};
 `;
 
 const ArticleTags = () => {

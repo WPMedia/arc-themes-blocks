@@ -24,6 +24,7 @@
     .row {
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
         grid-column-gap: 0;
+
         img {
           max-width: 90%;
         }

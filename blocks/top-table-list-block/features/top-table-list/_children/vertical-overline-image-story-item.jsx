@@ -4,6 +4,8 @@ import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -21,6 +23,8 @@ const VerticalOverlineImageStoryItem = (props) => {
     displayDate,
     id,
     overlineUrl,
+    arcSite,
+    resizedImageOptions,
     overlineText,
     customFields,
   } = props;
@@ -102,6 +106,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           {customFields.showImageXL && imageURL !== '' ? (
             <a href={websiteURL} title={itemTitle}>
               <Image
+                resizedImageOptions={resizedImageOptions}
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
@@ -112,6 +117,8 @@ const VerticalOverlineImageStoryItem = (props) => {
                 mediumHeight={450}
                 largeWidth={800}
                 largeHeight={600}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
               />
             </a>
           ) : (

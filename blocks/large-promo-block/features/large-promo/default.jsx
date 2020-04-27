@@ -5,7 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
@@ -156,6 +156,9 @@ const LargePromo = ({ customFields }) => {
                       mediumHeight={206}
                       largeWidth={377}
                       largeHeight={283}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
+                      // todo: should have resized params
                     />
                   )
                   : (

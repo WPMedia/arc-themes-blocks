@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -12,6 +14,8 @@ const StoryItem = (props) => {
     websiteURL,
     showHeadline,
     showImage,
+    arcSite,
+    resizedImageOptions,
   } = props;
 
   return (
@@ -24,16 +28,20 @@ const StoryItem = (props) => {
         >
           {imageURL !== '' ? (
             <Image
+              resizedImageOptions={resizedImageOptions}
               url={imageURL}
               alt={itemTitle}
               // used this from simple results list
               // small, including simple list, 3:2 aspect ratio
-              smallWidth={105}
-              smallHeight={70}
-              mediumWidth={105}
-              mediumHeight={70}
-              largeWidth={105}
-              largeHeight={70}
+              smallWidth={274}
+              smallHeight={183}
+              mediumWidth={274}
+              mediumHeight={183}
+              largeWidth={274}
+              largeHeight={183}
+              className="simple-list-img"
+              breakpoints={getProperties(arcSite)?.breakpoints}
+              resizerURL={resizerURL}
             />
           ) : (
             <PlaceholderImage
@@ -58,7 +66,6 @@ const StoryItem = (props) => {
           </Title>
         </a>
       ) : null}
-
     </div>
   );
 };

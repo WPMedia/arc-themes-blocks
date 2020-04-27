@@ -7,12 +7,12 @@ This is a helper to transform the return value of the content sources. This is s
 ```
 
 import source from '@arc-core-components/content-source_story-feed_sections-v4';
-
+import getResizedImageData from '@wpmedia/resizer-image-block';
 export default {
   resolve: source.resolve,
   schemaName: source.schemaName,
   params: source.params,
-
+  transform: (data) => getResizedImageData(data),
 };
 
 ```

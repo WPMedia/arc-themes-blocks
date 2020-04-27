@@ -4,7 +4,8 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 
@@ -23,6 +24,16 @@ const Number = styled.p`
 const Title = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
+// todo: fix camelcase storyobject parsing
+const extractResizedParams = (storyObject) => {
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
+};
 
 @Consumer
 class NumberedList extends Component {
@@ -53,6 +64,7 @@ class NumberedList extends Component {
         title = '',
       },
     } = this.props;
+    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -90,7 +102,8 @@ class NumberedList extends Component {
               >
                 {extractImage(promoItems) ? (
                   <Image
-                    url={extractImage(promoItems)}
+                    resizedImageOptions={extractResizedParams(element)}
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
                     // small, including numbered list, is 3:2 aspect ratio
                     smallWidth={105}
@@ -99,7 +112,8 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
-
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={resizerURL}
                   />
                 ) : <div className="numbered-list-placeholder" />}
               </a>

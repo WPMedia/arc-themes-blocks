@@ -2,7 +2,8 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -20,6 +21,8 @@ const MediumListItem = (props) => {
     displayDate,
     id,
     customFields,
+    arcSite,
+    resizedImageOptions,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const textClass = customFields.showImageMD ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
@@ -78,9 +81,10 @@ const MediumListItem = (props) => {
             <a href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
+                  resizedImageOptions={resizedImageOptions}
                   url={imageURL}
-                    // todo: get the proper alt tag for this image
-                    // 16:9 aspect for medium
+                  // todo: get the proper alt tag for this image
+                  // 16:9 aspect for medium
                   alt={itemTitle}
                   smallWidth={274}
                   smallHeight={154}
@@ -88,6 +92,8 @@ const MediumListItem = (props) => {
                   mediumHeight={154}
                   largeWidth={400}
                   largeHeight={225}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={resizerURL}
                 />
               ) : null}
             </a>

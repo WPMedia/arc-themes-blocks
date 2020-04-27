@@ -83,7 +83,6 @@ const SimpleList = (props) => {
             websiteDomain={websiteDomain}
             showHeadline={showHeadline}
             showImage={showImage}
-            s
             resizedImageOptions={resizedImageOptions}
           />
         ))

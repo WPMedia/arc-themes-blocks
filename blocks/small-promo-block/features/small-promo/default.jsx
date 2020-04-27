@@ -40,6 +40,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
                 primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
                 className="sm-promo-headline"
                 {...editableContent(content, 'headlines.basic')}
+                suppressContentEditableWarning
               >
                 {content && content.headlines ? content.headlines.basic : ''}
               </HeadlineText>

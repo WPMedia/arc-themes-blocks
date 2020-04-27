@@ -10,20 +10,15 @@ const StoryItem = (props) => {
     id = '',
     primaryFont = '',
     websiteURL,
-    websiteDomain,
     showHeadline,
     showImage,
   } = props;
-
-  const location = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteURL}`
-    : `${websiteDomain}/${websiteURL}`;
 
   return (
     <div key={id} className="list-item-simple">
       {showImage ? (
         <a
-          href={location}
+          href={websiteURL}
           title={itemTitle}
           className="simple-list-anchor"
         >
@@ -33,13 +28,12 @@ const StoryItem = (props) => {
               alt={itemTitle}
                 // used this from simple results list
                 // small, including simple list, 3:2 aspect ratio
-              smallWidth={274}
-              smallHeight={183}
-              mediumWidth={274}
-              mediumHeight={183}
-              largeWidth={274}
-              largeHeight={183}
-              className="simple-list-img"
+              smallWidth={105}
+              smallHeight={70}
+              mediumWidth={105}
+              mediumHeight={70}
+              largeWidth={105}
+              largeHeight={70}
             />
           ) : (
             <div className="simple-list-placeholder" />
@@ -49,7 +43,7 @@ const StoryItem = (props) => {
       {showHeadline && itemTitle !== '' ? (
         <a
           className="simple-list-headline-anchor"
-          href={location}
+          href={websiteURL}
           title={itemTitle}
         >
           <Title primaryFont={primaryFont} className="simple-list-headline-text">

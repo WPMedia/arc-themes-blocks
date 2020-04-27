@@ -6,7 +6,6 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -106,16 +105,6 @@ class ResultsList extends Component {
     }
   }
 
-  constructHref(websiteUrl) {
-    const { arcSite } = this.props;
-    const {
-      websiteDomain,
-    } = getProperties(arcSite);
-    return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-      ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}`
-      : `${websiteDomain}/${websiteUrl}`;
-  }
-
   render() {
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
@@ -127,22 +116,22 @@ class ResultsList extends Component {
             display_date: displayDate,
             credits: { by } = {},
             website_url: websiteUrl,
+            canonical_url: canonicalUrl,
+            promo_items: promoItems,
           } = element;
           const showSeparator = by && by.length !== 0;
 
-          const constructedURL = this.constructHref(websiteUrl);
           return (
-            <div className="list-item" key={`result-card-${element.canonical_url}`}>
+            <div className="list-item" key={`result-card-${canonicalUrl}`}>
               <div className="results-list--image-container">
                 <a
-                  href={constructedURL}
+                  href={websiteUrl}
                   title={headlineText}
                 >
-                  {extractImage(element.promo_items) ? (
+                  {extractImage(promoItems) ? (
                     <Image
                       // results list is 16:9 by default
-
-                      url={extractImage(element.promo_items)}
+                      url={extractImage(promoItems)}
                       alt={headlineText}
                       smallWidth={158}
                       smallHeight={89}
@@ -158,7 +147,7 @@ class ResultsList extends Component {
               </div>
               <div className="results-list--headline-container">
                 <a
-                  href={constructedURL}
+                  href={websiteUrl}
                   title={headlineText}
                 >
                   <HeadlineText
@@ -172,7 +161,7 @@ class ResultsList extends Component {
               <div className="results-list--description-author-container">
                 {descriptionText && (
                   <a
-                    href={constructedURL}
+                    href={websiteUrl}
                     title={headlineText}
                   >
                     <DescriptionText

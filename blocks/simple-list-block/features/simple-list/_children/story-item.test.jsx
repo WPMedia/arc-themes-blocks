@@ -23,6 +23,6 @@ describe('Story item', () => {
 
     const wrapper = mount(<StoryItem imageURL={imageURL} showHeadline showImage />);
     expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
-    expect(wrapper.find('.simple-list-img').length).toBe(1);
+    expect(wrapper.find('img').length).toBe(1);
   });
 });

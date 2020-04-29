@@ -8,6 +8,7 @@ import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import './card-list.scss';
+import { Image } from '@wpmedia/engine-theme-sdk';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -90,6 +91,7 @@ class CardList extends React.Component {
                         mediumHeight={283}
                         largeWidth={377}
                         largeHeight={283}
+                        // todo: add resized params
                       />
                     ) : (
                       <PlaceholderImage
@@ -169,6 +171,7 @@ class CardList extends React.Component {
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
+                                // todo: add resized params
                               />
                             )
                             : (

@@ -10,11 +10,9 @@ describe('the collections content source block', () => {
       expect(url).toEqual('content/v4/collections?_id=VTKOTRJXEVATHG7MELTPZ2RIBU&website=the-sun&from=0&size=1&published=true');
     });
   });
-  describe('when a website param is not provided', () => {
-    it('should build the url without the website', () => {
-      const url = contentSource.resolve({});
 
-      expect(url).toEqual('content/v4/collections?_id=VTKOTRJXEVATHG7MELTPZ2RIBU&from=0&size=1&published=true');
-    });
-  });
+  /*
+  TODO: Write tests for handling lack of arc site, which will then be replaced by content alias
+  Currently blocked until Content API releases the related ticket
+  */
 });

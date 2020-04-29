@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import './card-list.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import './card-list.scss';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -82,6 +82,13 @@ class CardList extends React.Component {
                         url={extractImage(contentElements[0].promo_items)}
                         alt={contentElements[0].headlines.basic}
                         className="card-list-main-img"
+                        // first element is always bigger
+                        smallWidth={377}
+                        smallHeight={283}
+                        mediumWidth={377}
+                        mediumHeight={283}
+                        largeWidth={377}
+                        largeHeight={283}
                       />
                     ) : <div className="image-placeholder-sm" />
                   }
@@ -143,8 +150,15 @@ class CardList extends React.Component {
                           extractImage(element.promo_items)
                             ? (
                               <Image
-                                src={extractImage(element.promo_items)}
+                                url={extractImage(element.promo_items)}
                                 alt={headlineText}
+                                // small, matches numbered list, is 3:2 aspect ratio
+                                smallWidth={105}
+                                smallHeight={70}
+                                mediumWidth={105}
+                                mediumHeight={70}
+                                largeWidth={274}
+                                largeHeight={183}
                               />
                             )
                             : <div className="card-list-placeholder" />

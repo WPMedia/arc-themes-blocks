@@ -8,7 +8,6 @@ import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import './card-list.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -84,7 +83,6 @@ class CardList extends React.Component {
                       <Image
                         url={extractImage(contentElements[0].promo_items)}
                         alt={contentElements[0].headlines.basic}
-                        // first element is always bigger
                         smallWidth={377}
                         smallHeight={283}
                         mediumWidth={377}

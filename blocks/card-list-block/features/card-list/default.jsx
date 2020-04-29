@@ -7,6 +7,9 @@ import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 import './card-list.scss';
 
 function extractImage(promo) {
@@ -42,7 +45,7 @@ class CardList extends React.Component {
   }
 
   render() {
-    const { customFields: { title } = {} } = this.props;
+    const { customFields: { title } = {}, arcSite } = this.props;
     const { cardList: { content_elements: contentElements = [] } = {} } = this.state;
     const showSeparator = !!(
       contentElements[0]
@@ -89,7 +92,9 @@ class CardList extends React.Component {
                         mediumHeight={283}
                         largeWidth={377}
                         largeHeight={283}
-                        // todo: add resized params
+                        resizedImageOptions={extractResizedParams(contentElements[0])}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={resizerURL}
                       />
                     ) : (
                       <PlaceholderImage
@@ -169,7 +174,9 @@ class CardList extends React.Component {
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
-                                // todo: add resized params
+                                resizedImageOptions={extractResizedParams(element)}
+                                breakpoints={getProperties(arcSite)?.breakpoints}
+                                resizerURL={resizerURL}
                               />
                             )
                             : (

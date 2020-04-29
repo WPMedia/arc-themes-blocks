@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import {
   EXTRA_LARGE,
   LARGE,
   MEDIUM,
   SMALL,
 } from './shared/storySizeConstants';
+import StoryItemContainer from './_children/story-item-container';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -17,7 +19,6 @@ import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import './default.scss';
-import StoryItemContainer from './_children/story-item-container';
 // styles end
 
 // helpers start
@@ -25,17 +26,6 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
-
-// todo: fix camelcase storyobject parsing
-const extractResizedParams = (storyObject) => {
-  const basicStoryObject = storyObject?.promo_items?.basic;
-
-  if (basicStoryObject?.type === 'image') {
-    return basicStoryObject?.resized_params;
-  }
-
-  return [];
-};
 
 const unserializeStory = (storyObject) => ({
   id: storyObject._id,

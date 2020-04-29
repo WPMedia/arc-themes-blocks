@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, camelcase */
 import getProperties from 'fusion:properties';
 import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
@@ -158,6 +158,16 @@ const getResizedImageParams = (data, option, filterQuality) => {
   }
 
   return data;
+};
+
+export const extractResizedParams = (storyObject) => {
+  const basicStoryObject = storyObject?.promo_items?.basic;
+
+  if (basicStoryObject?.type === 'image') {
+    return basicStoryObject?.resized_params;
+  }
+
+  return [];
 };
 
 

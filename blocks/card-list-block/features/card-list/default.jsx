@@ -6,6 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import './card-list.scss';
+import { Image } from '@wpmedia/engine-theme-sdk';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -77,8 +78,8 @@ class CardList extends React.Component {
                 >
                   {
                     extractImage(contentElements[0].promo_items) ? (
-                      <img
-                        src={extractImage(contentElements[0].promo_items)}
+                      <Image
+                        url={extractImage(contentElements[0].promo_items)}
                         alt={contentElements[0].headlines.basic}
                         className="card-list-main-img"
                       />
@@ -141,7 +142,7 @@ class CardList extends React.Component {
                         {
                           extractImage(element.promo_items)
                             ? (
-                              <img
+                              <Image
                                 src={extractImage(element.promo_items)}
                                 alt={headlineText}
                               />

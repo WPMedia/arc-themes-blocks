@@ -11,6 +11,7 @@ import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -127,7 +128,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
                       largeHeight={225}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={resizerURL}
-                      // todo: should have resized params
+                      resizedImageOptions={extractResizedParams(content)}
                     />
                   )
                   : (

@@ -12,6 +12,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -154,6 +155,7 @@ const LargePromo = ({ customFields }) => {
                 largeHeight={283}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
+                resizedImageOptions={extractResizedParams(content)}
               />
             </a>
           </div>

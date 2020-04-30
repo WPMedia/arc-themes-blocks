@@ -10,6 +10,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -123,6 +124,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
                 largeHeight={225}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
+                resizedImageOptions={extractResizedParams(content)}
               />
             </a>
           </div>

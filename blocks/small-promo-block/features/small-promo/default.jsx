@@ -8,6 +8,7 @@ import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -67,6 +68,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
                 largeHeight={267}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
+                resizedImageOptions={extractResizedParams(content)}
               />
             </a>
           </div>

@@ -1,3 +1,5 @@
+import getResizedImageData from '@wpmedia/resizer-image-block';
+
 const params = {
   website_url: 'text',
 };
@@ -8,8 +10,11 @@ const resolve = (key = {}) => {
   return `/content/v4/?website_url=${websiteUrl}${site ? `&website=${site}` : ''}`;
 };
 
+const transform = (data) => getResizedImageData(data);
+
 export default {
   schemaName: 'ans-item',
   params,
   resolve,
+  transform,
 };

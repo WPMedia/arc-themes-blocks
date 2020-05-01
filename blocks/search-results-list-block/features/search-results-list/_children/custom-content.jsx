@@ -5,6 +5,9 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
@@ -78,6 +81,7 @@ class CustomSearchResultsList extends React.Component {
       } = {},
       searchTerm,
     } = this.state;
+    const { arcSite } = this.props;
     return (
       <div>
         <div className="search-container">
@@ -118,6 +122,7 @@ class CustomSearchResultsList extends React.Component {
                 canonical_url: canonicalUrl,
                 promo_items: promoItems,
               } = element;
+              const resizedImageOptions = extractResizedParams(element);
               const showSeparator = by && by.length !== 0;
               return (
                 <div className="list-item" key={`result-card-${canonicalUrl}`}>
@@ -130,12 +135,16 @@ class CustomSearchResultsList extends React.Component {
                       <Image
                         url={extractImage(promoItems)}
                         alt={headlineText}
+                        // results lists are 16:9 by default
                         smallWidth={274}
-                        smallHeight={148}
+                        smallHeight={154}
                         mediumWidth={274}
-                        mediumHeight={148}
+                        mediumHeight={154}
                         largeWidth={274}
-                        largeHeight={148}
+                        largeHeight={154}
+                        resizedImageOptions={resizedImageOptions}
+                        resizerURL={resizerURL}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
                       />
                     ) : <div className="image-placeholder" />}
                   </a>

@@ -150,9 +150,10 @@ const getResizedImageParams = (data, option, filterQuality) => {
   };
 
   if (data && data.count > 0) {
-    data.content_elements.forEach((contentElement) => {
-      generateParams(contentElement);
-    });
+    data.content_elements.forEach(generateParams);
+  } else if (data && data.length && data.length > 0) {
+    // to test, like for search-api, that will have array of content elements
+    data.forEach(generateParams);
   } else {
     generateParams(data);
   }

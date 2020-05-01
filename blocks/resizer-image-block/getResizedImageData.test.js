@@ -8,6 +8,7 @@
 import getProperties from 'fusion:properties';
 import getResizedImageData from '.';
 import mockStoryFeedData from './mockFeedData';
+import mockSearchApiData from './mockSearchApiData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -80,6 +81,44 @@ describe('get resized image data helper on the server-side', () => {
     // },
 
     // will return undefined if no window
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
+    expect(allValidFilterValues).toEqual(true);
+
+    expect(paramKeys).toEqual([
+      '158x105',
+      '274x183',
+      '158x119',
+      '274x206',
+    ]);
+  });
+
+  it('returns data passed in from search-api', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+      }));
+
+    const dataWithResizedImages = getResizedImageData(mockSearchApiData);
+
+    // doesn't have content_elements, just an array with elements that have promo_items
+    const resizedParams = dataWithResizedImages[0].promo_items
+      .basic
+      .resized_params;
+
+    const paramKeys = Object.keys(resizedParams);
+
+    const filterValues = Object.values(resizedParams);
+
+    // if the same resizer key is used this won't change
+    expect(filterValues).toEqual([
+      '/5eirj3cmfExljl2SvX6qbwxrB3Y=filters:format(jpg):quality(70)/',
+      '/rIrdmTmnUR9StYnBIR1e4vpyLMo=filters:format(jpg):quality(70)/',
+      '/v9_ZAorNWy8_1ujEQVwu9lYF1Mo=filters:format(jpg):quality(70)/',
+      '/B014aKo-I_UZCWeJ43kYGefBp40=filters:format(jpg):quality(70)/',
+    ]);
+
     const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
     expect(allValidFilterValues).toEqual(true);
 

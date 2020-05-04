@@ -2,100 +2,94 @@
 import getProperties from 'fusion:properties';
 import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
-const createResizer = (resizerKey, resizerUrl, filterQuality = 70) => {
-  const getResizerParam = (originalUrl, breakpoint, format) => {
-    if (typeof window === 'undefined') {
-      const Thumbor = require('thumbor-lite');
-      // this is height and width of the target image
-      const { height, width } = breakpoint;
+const getResizerParam = (originalUrl, breakpoint, format, filterQuality = 70) => {
+  if (typeof window === 'undefined') {
+    const Thumbor = require('thumbor-lite');
+    // this is height and width of the target image
+    const { height, width } = breakpoint;
 
-      if (!height && !width) throw new Error('Height and Width required');
-      const thumbor = new Thumbor(resizerKey, resizerUrl);
-      const thumborParam = thumbor
-        .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
-        .filter(`format(${format})`)
-        .filter(`quality(${filterQuality})`)
-        .resize(width, height)
-        .buildUrl();
-      const urlSuffix = originalUrl.replace('https://', '');
-      const breakpointName = `${width}x${height}`;
-      return thumborParam
-        .replace(resizerUrl, '')
-        .replace(urlSuffix, '')
-        .replace(`/${breakpointName}/`, '');
-    }
-    return undefined;
-  };
-
-  // input: none
-  // if only [420] (int) and ['1:1'], aspect ratio
-  // output: array of strings for ['420x420']
-  const getImageDimensionsForAspectRatios = () => {
-    // consider adding window.devicePixelRatio for * scale
-    const siteProperties = getProperties();
-    const {
-      aspectRatios,
-      imageWidths,
-    } = siteProperties;
-    return aspectRatios.reduce((availableDimensions, aspectRatio) => {
-      const aspectRatioDimensions = aspectRatio.split(':');
-      // get width by splitting the 400x400 string
-      const widthDivisor = aspectRatioDimensions[0];
-      const heightDivisor = aspectRatioDimensions[1];
-      return availableDimensions.concat(imageWidths.map((width) => {
-        const scaledHeight = Math.round((width / widthDivisor) * heightDivisor);
-        const dimension = `${width}x${scaledHeight}`;
-        return dimension;
-      }));
-    }, []);
-  };
-
-
-  const getResizerParams = (originalUrl) => {
-    const output = {};
-    const getParamsByFormat = (format, previousOutput) => {
-      // where we get image widths
-      const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios();
-      imageDimensionsAspectRatios.forEach((aspectRatioValue) => {
-        const dimensions = aspectRatioValue;
-        const [aspectRatioWidth, aspectRatioHeight] = dimensions.split('x');
-
-        previousOutput[aspectRatioValue] = getResizerParam(
-          originalUrl,
-          {
-            width: aspectRatioWidth,
-            height: aspectRatioHeight,
-          },
-          format,
-        );
-      });
-      return previousOutput;
-    };
-    // todo: use webp for next gen images spike
-    // getParamsByFormat('webp', output);
-    getParamsByFormat('jpg', output);
-    return output;
-  };
-
-  return {
-    getResizerParam,
-    getResizerParams,
-  };
+    if (!height && !width) throw new Error('Height and Width required');
+    const thumbor = new Thumbor(RESIZER_SECRET_KEY, RESIZER_URL);
+    const thumborParam = thumbor
+      .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
+      .filter(`format(${format})`)
+      .filter(`quality(${filterQuality})`)
+      .resize(width, height)
+      .buildUrl();
+    const urlSuffix = originalUrl.replace('https://', '');
+    const breakpointName = `${width}x${height}`;
+    return thumborParam
+      .replace(RESIZER_URL, '')
+      .replace(urlSuffix, '')
+      .replace(`/${breakpointName}/`, '');
+  }
+  return undefined;
 };
 
-const resizeImage = (image, resizer) => {
+const getImageDimensionsForAspectRatios = () => {
+  // consider adding window.devicePixelRatio for * scale
+  const siteProperties = getProperties();
+  const {
+    aspectRatios,
+    imageWidths,
+  } = siteProperties;
+  return aspectRatios.reduce((availableDimensions, aspectRatio) => {
+    const aspectRatioDimensions = aspectRatio.split(':');
+    // get width by splitting the 400x400 string
+    const widthDivisor = aspectRatioDimensions[0];
+    const heightDivisor = aspectRatioDimensions[1];
+    return availableDimensions.concat(imageWidths.map((width) => {
+      const scaledHeight = Math.round((width / widthDivisor) * heightDivisor);
+      const dimension = `${width}x${scaledHeight}`;
+      return dimension;
+    }));
+  }, []);
+};
+
+// input: original url
+// if only [420] (int) and ['1:1'], aspect ratio
+// output: array of strings for ['420x420']
+
+export const getResizerParams = (originalUrl) => {
+  const output = {};
+  const getParamsByFormat = (format, previousOutput) => {
+    // where we get image widths
+    const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios();
+    imageDimensionsAspectRatios.forEach((aspectRatioValue) => {
+      const dimensions = aspectRatioValue;
+      const [aspectRatioWidth, aspectRatioHeight] = dimensions.split('x');
+
+      previousOutput[aspectRatioValue] = getResizerParam(
+        originalUrl,
+        {
+          width: aspectRatioWidth,
+          height: aspectRatioHeight,
+        },
+        format,
+      );
+    });
+    return previousOutput;
+  };
+    // todo: use webp for next gen images spike
+    // getParamsByFormat('webp', output);
+  getParamsByFormat('jpg', output);
+  return output;
+};
+
+
+const resizeImage = (image) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
-  return resizer.getResizerParams(image.url);
+  return getResizerParams(image.url);
 };
 
-const resizePromoItems = (promoItems, resizer) => Object.keys(promoItems)
+const resizePromoItems = (promoItems) => Object.keys(promoItems)
   .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
     if ((key === 'type' && promoItem === 'image') || key === 'url') {
-      promoItemWithResizedImages.resized_params = resizeImage(promoItems, resizer);
+      promoItemWithResizedImages.resized_params = resizeImage(promoItems);
       promoItemWithResizedImages.url = promoItems.url;
       promoItemWithResizedImages.type = 'image';
     } else {
@@ -104,12 +98,10 @@ const resizePromoItems = (promoItems, resizer) => Object.keys(promoItems)
     return promoItemWithResizedImages;
   }, {});
 
-const getResizedImageParams = (data, option, filterQuality) => {
+const getResizedImageParams = (data, option) => {
   if (!option.resizerSecret || !option.resizerUrl) {
     throw new Error('Not a valid image object');
   }
-
-  const resizer = createResizer(option.resizerSecret, option.resizerUrl, filterQuality);
 
   const generateParams = (sourceData) => {
     /*
@@ -143,7 +135,6 @@ const getResizedImageParams = (data, option, filterQuality) => {
     if (sourceData && sourceData.promo_items && sourceData.promo_items.basic) {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,
-        resizer,
       );
     }
     return sourceData;

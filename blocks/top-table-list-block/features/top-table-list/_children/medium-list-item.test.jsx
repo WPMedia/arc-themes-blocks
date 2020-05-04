@@ -1,6 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -51,6 +54,7 @@ describe('medium list item', () => {
       customFields={config}
     />);
 
+
     // placeholder
     // expect(wrapper.find('.top-table-med-image-placeholder').length).toBe(0);
 
@@ -88,8 +92,11 @@ describe('medium list item', () => {
       customFields={config}
     />);
 
+    const placeholderImage = wrapper.find('img');
+
     // There should be no imag present
-    expect(wrapper.find('img').length).toBe(0);
+    expect(placeholderImage.length).toBe(1);
+    expect(placeholderImage.props().src.includes('placeholder.jpg')).toBe(true);
 
     // doesn't find a headline
     expect(wrapper.find('a.md-promo-headline').length).toBe(0);

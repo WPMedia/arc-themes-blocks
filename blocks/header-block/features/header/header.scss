@@ -2,4 +2,8 @@
   color: $ui-primary-font-color;
   font-weight: bold;
   margin-bottom: map-get($spacers, 'md');
+
+  &.no-bottom-margin {
+    margin-bottom: 0;
+  }
 }

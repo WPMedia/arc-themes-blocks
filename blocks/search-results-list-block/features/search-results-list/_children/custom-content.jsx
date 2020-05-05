@@ -5,6 +5,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
@@ -71,6 +72,7 @@ class CustomSearchResultsList extends React.Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const {
       resultList: {
         data,
@@ -137,7 +139,19 @@ class CustomSearchResultsList extends React.Component {
                         largeWidth={274}
                         largeHeight={148}
                       />
-                    ) : <div className="image-placeholder" />}
+                    ) : (
+                      <Image
+                        url={getProperties(arcSite).fallbackImage}
+                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        smallWidth={274}
+                        smallHeight={148}
+                        mediumWidth={274}
+                        mediumHeight={148}
+                        largeWidth={274}
+                        largeHeight={148}
+                        respectAspectRatio
+                      />
+                    )}
                   </a>
                   <div
                     className={

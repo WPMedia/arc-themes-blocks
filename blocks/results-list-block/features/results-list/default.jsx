@@ -6,6 +6,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 
@@ -106,6 +107,7 @@ class ResultsList extends Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
@@ -139,10 +141,21 @@ class ResultsList extends Component {
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
-
-
                     />
-                  ) : <div className="image-placeholder" />}
+                  ) : (
+                    <Image
+                      // results list is 16:9 by default
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      smallWidth={158}
+                      smallHeight={89}
+                      mediumWidth={274}
+                      mediumHeight={154}
+                      largeWidth={274}
+                      largeHeight={154}
+                      respectAspectRatio
+                    />
+                  )}
                 </a>
               </div>
               <div className="results-list--headline-container">

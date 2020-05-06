@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 
 import Title from './title';
 
@@ -11,6 +12,7 @@ const ItemTitleWithRightImage = (props) => {
     primaryFont,
     websiteURL,
     customFields,
+    arcSite,
   } = props;
   return (
     <article key={id} className="container-fluid small-promo">
@@ -41,7 +43,20 @@ const ItemTitleWithRightImage = (props) => {
                   largeHeight={267}
                 />
               </a>
-            ) : null}
+            ) : (
+              <Image
+                url={getProperties(arcSite).fallbackImage}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                // small size aspect ratios 3:2
+                smallWidth={274}
+                smallHeight={183}
+                mediumWidth={274}
+                mediumHeight={183}
+                largeWidth={400}
+                largeHeight={267}
+                respectAspectRatio
+              />
+            )}
           </div>
           )}
       </div>

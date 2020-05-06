@@ -1,6 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,

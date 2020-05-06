@@ -28,7 +28,7 @@ const mockOutput = {
   ],
 };
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({ websiteDomain: '' }))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({ websiteDomain: '', fallbackImage: 'placeholder.jpg' }))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('Simple list', () => {

@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,
 }));
@@ -12,9 +16,6 @@ jest.mock('styled-components', () => ({
   p: jest.fn(),
   h2: jest.fn(),
 }));
-
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
-
 
 jest.mock('prop-types', () => ({
   shape: jest.fn(),
@@ -85,7 +86,8 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
         expect(wrapper.find('.numbered-list-container').childAt(3).type()).toEqual('div');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').find('.numbered-list-placeholder').length).toEqual(1);
+        const placeholderImage = wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').children();
+        expect(placeholderImage.props().url).toEqual('placeholder.jpg');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Story with video as the Lead Art');
       });

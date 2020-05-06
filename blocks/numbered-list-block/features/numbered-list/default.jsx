@@ -4,6 +4,7 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
@@ -52,6 +53,7 @@ class NumberedList extends Component {
         showImage = true,
         title = '',
       },
+      arcSite,
     } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
@@ -99,9 +101,21 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
-
                   />
-                ) : <div className="numbered-list-placeholder" />}
+                ) : (
+                  <Image
+                    url={getProperties(arcSite).fallbackImage}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    // small, including numbered list, is 3:2 aspect ratio
+                    smallWidth={105}
+                    smallHeight={70}
+                    mediumWidth={105}
+                    mediumHeight={70}
+                    largeWidth={274}
+                    largeHeight={183}
+                    respectAspectRatio
+                  />
+                )}
               </a>
               )}
             </div>

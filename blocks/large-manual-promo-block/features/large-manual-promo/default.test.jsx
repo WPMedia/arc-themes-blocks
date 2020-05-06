@@ -13,6 +13,10 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
 }));
 
+jest.mock('fusion:content', () => ({
+  useContent: jest.fn(() => ({})),
+}));
+
 const config = {
   showOverline: true,
   showHeadline: true,

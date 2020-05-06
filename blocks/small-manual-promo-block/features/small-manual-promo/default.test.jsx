@@ -11,6 +11,9 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
 }));
+jest.mock('fusion:content', () => ({
+  useContent: jest.fn(() => ({})),
+}));
 
 const config = {
   showHeadline: true,

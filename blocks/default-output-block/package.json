@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/engine-theme-sdk": "latest",
     "dom-parser": "^0.1.6",
     "thumbor-lite": "^0.1.6"
   },

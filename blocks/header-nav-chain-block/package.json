@@ -1,9 +1,9 @@
 {
-  "name": "@wpmedia/right-rail-block",
-  "version": "1.2.3-beta.0",
-  "description": "Fusion themes block containing a right-rail layout.",
-  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "name": "@wpmedia/header-nav-chain-block",
+  "version": "0.1.0-beta.0",
+  "description": "Fusion News Theme header nav chain block",
+  "author": "Sean Shannon <sean.shannon@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
@@ -18,13 +18,14 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
-    "directory": "blocks/right-rail-block"
+    "directory": "blocks/header-nav-chain-block"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
   }

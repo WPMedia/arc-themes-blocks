@@ -63,7 +63,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
   };
 
   const descriptionTmpl = () => {
-    if (customFields.showDescription && byLineArray) {
+    if (customFields.showDescription && descriptionText) {
       return (
         <DescriptionText
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
@@ -79,7 +79,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
   };
 
   const byLineTmpl = () => {
-    if (customFields.showByline && descriptionText) {
+    if (customFields.showByline && byLineArray) {
       return (
         <>
           <Byline story={content} stylesFor="list" />

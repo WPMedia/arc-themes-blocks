@@ -68,23 +68,33 @@ const mockPayload = {
           url: 'www.the-world.com',
           _id: 'column-item-9',
         },
+        {
+          display_name: 'External Link',
+          node_type: 'link',
+          url: 'https://www.the-world.com',
+          _id: 'column-item-10',
+        },
       ],
     },
     {
       _id: 'get-us',
-      name: 'Get Us',
+      name: '',
       children: [
         {
           display_name: 'Why Our Product',
           url: 'www.plz-buy-our-products.com',
-          _id: 'column-item-10',
+          _id: 'column-item-11',
         },
         {
           display_name: 'Pricing',
           url: 'www.the-dollars.com',
-          _id: 'column-item-11',
+          _id: 'column-item-12',
         },
       ],
+    },
+    {
+      _id: 'blank-colum',
+      name: '',
     },
   ],
 };
@@ -113,24 +123,22 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
-  it('should have 4 column headers', () => {
+  it('should have 5 column headers', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
-
-    expect(wrapper.find('ul > section')).toHaveLength(4);
+    expect(wrapper.find('ul > section')).toHaveLength(5);
   });
 
-  it('should have 11 column items', () => {
+  it('should have 12 column items', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
+    expect(wrapper.find('ul > li')).toHaveLength(12);
+  });
 
-    expect(wrapper.find('ul > li')).toHaveLength(11);
+  it('should have a link with target blank if is an absolute link with (http(s))', () => {
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+    expect(wrapper.find('a[target="_blank"]')).toHaveLength(1);
   });
 
   it('should have empty column when empty payload is given', () => {

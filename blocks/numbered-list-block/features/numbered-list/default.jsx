@@ -56,7 +56,6 @@ class NumberedList extends Component {
       },
       arcSite,
     } = this.props;
-    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">

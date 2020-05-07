@@ -145,20 +145,37 @@ const ExtraLargePromo = ({ customFields }) => {
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
-                <Image
-                  url={customFields.imageOverrideURL
-                    ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                  alt={content && content.headlines ? content.headlines.basic : ''}
-                  smallWidth={400}
-                  smallHeight={300}
-                  mediumWidth={600}
-                  mediumHeight={450}
-                  largeWidth={800}
-                  largeHeight={600}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={resizerURL}
-                  resizedImageOptions={extractResizedParams(content)}
-                />
+                {customFields.imageOverrideURL || extractImage(content.promo_items)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      smallWidth={400}
+                      smallHeight={300}
+                      mediumWidth={600}
+                      mediumHeight={450}
+                      largeWidth={800}
+                      largeHeight={600}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
+                    />
+                  )
+                  : (
+                    <Image
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      smallWidth={400}
+                      smallHeight={300}
+                      mediumWidth={600}
+                      mediumHeight={450}
+                      largeWidth={800}
+                      largeHeight={600}
+                      respectAspectRatio
+                      // todo: implement placeholder resizer
+                    />
+                  )}
               </a>
             )}
             {descriptionTmpl()}

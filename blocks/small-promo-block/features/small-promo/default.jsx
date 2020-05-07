@@ -55,21 +55,39 @@ const SmallPromo = ({ customFields, arcSite }) => {
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
-              <Image
-                url={customFields.imageOverrideURL
-                  ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                alt={content && content.headlines ? content.headlines.basic : ''}
+              {customFields.imageOverrideURL || extractImage(content.promo_items)
+                ? (
+                  <Image
+                    url={customFields.imageOverrideURL
+                      ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                    alt={content && content.headlines ? content.headlines.basic : ''}
                 // small should be 3:2 aspect ratio
-                smallWidth={274}
-                smallHeight={183}
-                mediumWidth={274}
-                mediumHeight={183}
-                largeWidth={400}
-                largeHeight={267}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
-                resizedImageOptions={extractResizedParams(content)}
-              />
+                    smallWidth={274}
+                    smallHeight={183}
+                    mediumWidth={274}
+                    mediumHeight={183}
+                    largeWidth={400}
+                    largeHeight={267}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={resizerURL}
+                    resizedImageOptions={extractResizedParams(content)}
+                  />
+                )
+                : (
+                  <Image
+                    url={getProperties(arcSite).fallbackImage}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    // small should be 3:2 aspect ratio
+                    smallWidth={274}
+                    smallHeight={183}
+                    mediumWidth={274}
+                    mediumHeight={183}
+                    largeWidth={400}
+                    largeHeight={267}
+                    respectAspectRatio
+                    // todo: implement fallback placeholder
+                  />
+                )}
             </a>
           </div>
         )}

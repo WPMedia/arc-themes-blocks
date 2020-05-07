@@ -74,6 +74,7 @@ class CustomSearchResultsList extends React.Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const {
       resultList: {
         data,
@@ -81,7 +82,6 @@ class CustomSearchResultsList extends React.Component {
       } = {},
       searchTerm,
     } = this.state;
-    const { arcSite } = this.props;
     return (
       <div>
         <div className="search-container">
@@ -146,7 +146,19 @@ class CustomSearchResultsList extends React.Component {
                         resizerURL={resizerURL}
                         breakpoints={getProperties(arcSite)?.breakpoints}
                       />
-                    ) : <div className="image-placeholder" />}
+                    ) : (
+                      <Image
+                        url={getProperties(arcSite).fallbackImage}
+                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        smallWidth={274}
+                        smallHeight={148}
+                        mediumWidth={274}
+                        mediumHeight={148}
+                        largeWidth={274}
+                        largeHeight={148}
+                        respectAspectRatio
+                      />
+                    )}
                   </a>
                   <div
                     className={

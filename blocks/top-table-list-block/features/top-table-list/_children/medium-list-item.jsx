@@ -95,7 +95,19 @@ const MediumListItem = (props) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={resizerURL}
                 />
-              ) : null}
+              ) : (
+                <Image
+                  url={getProperties(arcSite).fallbackImage}
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                  smallWidth={274}
+                  smallHeight={154}
+                  mediumWidth={274}
+                  mediumHeight={154}
+                  largeWidth={400}
+                  largeHeight={225}
+                  respectAspectRatio
+                />
+              )}
             </a>
           </div>
           )}

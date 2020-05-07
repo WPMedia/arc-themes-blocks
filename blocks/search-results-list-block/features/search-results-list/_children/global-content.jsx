@@ -4,6 +4,7 @@ import ArticleDate from '@wpmedia/date-block';
 import { useAppContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
@@ -72,7 +73,19 @@ const GlobalSearchResultsList = () => {
                       largeWidth={274}
                       largeHeight={148}
                     />
-                  ) : <div className="image-placeholder" />}
+                  ) : (
+                    <Image
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      smallWidth={274}
+                      smallHeight={148}
+                      mediumWidth={274}
+                      mediumHeight={148}
+                      largeWidth={274}
+                      largeHeight={148}
+                      respectAspectRatio
+                    />
+                  )}
                 </a>
                 <div
                   className={

@@ -120,7 +120,19 @@ const VerticalOverlineImageStoryItem = (props) => {
                 resizerURL={resizerURL}
               />
             </a>
-          ) : null}
+          ) : (
+            <Image
+              url={getProperties(arcSite).fallbackImage}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              smallWidth={400}
+              smallHeight={300}
+              mediumWidth={600}
+              mediumHeight={450}
+              largeWidth={800}
+              largeHeight={600}
+              respectAspectRatio
+            />
+          )}
           {descriptionTmpl()}
           <div className="article-meta">
             {byLineTmpl()}

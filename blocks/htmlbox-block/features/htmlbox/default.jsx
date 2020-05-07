@@ -20,7 +20,9 @@ HTMLBox.label = 'HTML Box – Arc Block';
 
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string.tag({
+      label: 'Unique Feature ID',
+    }).isRequired,
     HTML: PropTypes.richtext,
   }),
 };

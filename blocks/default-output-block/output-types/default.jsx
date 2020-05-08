@@ -60,7 +60,6 @@ const SampleOutputType = ({
         return fontUrl ? <link href={fontUrl} rel="stylesheet" /> : '';
     }
   };
-  const { getImgURL, getImgAlt } = require('./_children/promoImageHelper');
 
   const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
   const gaScript = `
@@ -70,7 +69,6 @@ const SampleOutputType = ({
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','${gtmID}');
   `;
-
   return (
     <html lang="en">
       <head>
@@ -83,12 +81,11 @@ const SampleOutputType = ({
           MetaTag={MetaTag}
           MetaTags={MetaTags}
           metaValue={metaValue}
-          getImgURL={getImgURL}
-          getImgAlt={getImgAlt}
           globalContent={gc}
           websiteName={websiteName}
           twitterSite={twitterSite}
         />
+
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
         {
           /** polyfill.io has browser detection and will not load the feature

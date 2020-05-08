@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/default-output-block",
-  "version": "2.3.1",
+  "version": "2.3.2-beta.0",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [
@@ -27,8 +27,8 @@
     "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "latest",
-    "@wpmedia/engine-theme-sdk": "latest"
+    "@wpmedia/engine-theme-sdk": "latest",
+    "@wpmedia/news-theme-css": "latest"
   },
   "gitHead": "20ccf6bc5686ef57c050e5b8ddbde2c7c825036f"
 }

@@ -28,19 +28,10 @@
     flex: 0 0 25%;
     text-decoration: none;
 
-    img,
-    .numbered-list-placeholder {
+    img {
       height: auto;
       width: 100%;
     }
-
-    .numbered-list-placeholder {
-      min-height: 60px;
-    }
-  }
-
-  .numbered-list-placeholder {
-    background-color: $ui-light-gray;
   }
 
   .headline-list-anchor {

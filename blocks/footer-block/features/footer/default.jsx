@@ -5,10 +5,10 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import Link from '@wpmedia/links-bar-block';
 import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
 import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
 import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon';
-import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 
 import './footer.scss';
 
@@ -17,7 +17,21 @@ const FooterSection = styled.ul`
 `;
 
 const Footer = ({ customFields: { navigationConfig } }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, deployment, contextPath } = useFusionContext();
+  const {
+    facebookPage,
+    twitterUsername,
+    rssUrl,
+    copyrightText,
+    lightBackgroundLogo,
+    lightBackgroundLogoAlt,
+    primaryLogo,
+    primaryLogoAlt,
+  } = getProperties(arcSite);
+
+  // Check if URL is absolute/base64
+  let logoUrl = lightBackgroundLogo || primaryLogo;
+  if (logoUrl && !(logoUrl.indexOf('http') === 0 || logoUrl.indexOf('base64') === 0)) logoUrl = deployment(`${contextPath}/${logoUrl}`);
 
   const content = useContent({
     source: navigationConfig.contentService,
@@ -32,13 +46,13 @@ const Footer = ({ customFields: { navigationConfig } }) => {
   const socialButtons = (
     <>
       {
-        (getProperties(arcSite).facebookPage)
+        (facebookPage)
           ? (
             <a
               title="Facebook page"
               target="_blank"
               rel="noopener noreferrer"
-              href={getProperties(arcSite).facebookPage}
+              href={facebookPage}
             >
               <FacebookAltIcon fill="#2980B9" />
             </a>
@@ -46,13 +60,13 @@ const Footer = ({ customFields: { navigationConfig } }) => {
           : ''
       }
       {
-        (getProperties(arcSite).twitterUsername)
+        (twitterUsername)
           ? (
             <a
               title="Twitter feed"
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://twitter.com/${getProperties(arcSite).twitterUsername}`}
+              href={`https://twitter.com/${twitterUsername}`}
             >
               <TwitterIcon fill="#2980B9" />
             </a>
@@ -60,13 +74,13 @@ const Footer = ({ customFields: { navigationConfig } }) => {
           : ''
       }
       {
-        (getProperties(arcSite).rssUrl)
+        (rssUrl)
           ? (
             <a
               title="RSS feed"
               target="_blank"
               rel="noopener noreferrer"
-              href={getProperties(arcSite).rssUrl}
+              href={rssUrl}
             >
               <RssIcon fill="#2980B9" />
             </a>
@@ -89,7 +103,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
             <div className="copyright-column">
               {/* If large screen, show copyright over border */}
               <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
-                {getProperties(arcSite).copyrightText}
+                {copyrightText}
               </p>
             </div>
           </div>
@@ -98,7 +112,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
       <div>
         {/* If small screen, show copyright under border */}
         <p className="copyright" id="copyright-bottom" style={{ width: '100%' }}>
-          {getProperties(arcSite).copyrightText}
+          {copyrightText}
         </p>
       </div>
       <div className="row legacy-footer-row">
@@ -106,7 +120,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
         {footerColumns.map((column) => {
           const columnItems = (column.children) ? column.children.map((item) => (
             <li className="footer-item" key={item._id}>
-              <a href={item.url}>{item.display_name}</a>
+              {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
             </li>
           )) : [];
 
@@ -122,19 +136,19 @@ const Footer = ({ customFields: { navigationConfig } }) => {
           );
         })}
       </div>
-      <div className="primaryLogo">
-        {
-          getProperties(arcSite).primaryLogo
-            ? (
+      {
+        (logoUrl)
+          ? (
+            <div className="primaryLogo">
               <img
-                src={getProperties(arcSite).primaryLogo}
-                alt={getProperties(arcSite).primaryLogoAlt || 'Footer logo'}
+                src={logoUrl}
+                alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || 'Footer logo'}
                 className="footer-logo"
               />
-            )
-            : <ArcLogo />
-        }
-      </div>
+            </div>
+          )
+          : null
+      }
     </div>
   );
 };

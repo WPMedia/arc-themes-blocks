@@ -93,7 +93,7 @@ const LargePromo = ({ customFields }) => {
   };
 
   const descriptionTmpl = () => {
-    if (customFields.showDescription && byLineArray) {
+    if (customFields.showDescription && descriptionText) {
       return (
         <DescriptionText
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
@@ -109,7 +109,7 @@ const LargePromo = ({ customFields }) => {
   };
 
   const byLineTmpl = () => {
-    if (customFields.showByline && descriptionText) {
+    if (customFields.showByline && byLineArray) {
       return (
         <>
           <Byline story={content} stylesFor="list" />
@@ -141,20 +141,36 @@ const LargePromo = ({ customFields }) => {
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
-              <Image
-                url={customFields.imageOverrideURL
-                  ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                alt={content && content.headlines ? content.headlines.basic : ''}
+              {
+                customFields.imageOverrideURL || extractImage(content.promo_items)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
                 // large is 4:3 aspect ratio
-                smallWidth={274}
-                smallHeight={206}
-                mediumWidth={274}
-                mediumHeight={206}
-                largeWidth={377}
-                largeHeight={283}
-
-
-              />
+                      smallWidth={274}
+                      smallHeight={206}
+                      mediumWidth={274}
+                      mediumHeight={206}
+                      largeWidth={377}
+                      largeHeight={283}
+                    />
+                  )
+                  : (
+                    <Image
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}// large is 4:3 aspect ratio
+                      smallWidth={274}
+                      smallHeight={206}
+                      mediumWidth={274}
+                      mediumHeight={206}
+                      largeWidth={377}
+                      largeHeight={283}
+                      respectAspectRatio
+                    />
+                  )
+}
             </a>
           </div>
         )}

@@ -98,6 +98,11 @@ const resizePromoItems = (promoItems) => Object.keys(promoItems)
     return promoItemWithResizedImages;
   }, {});
 
+const resizeAuthorCredits = (authorCredits) => authorCredits.map((creditObject) => ({
+  ...creditObject,
+  resized_params: creditObject?.image?.url ? getResizerParams(creditObject.image.url) : {},
+}));
+
 const getResizedImageParams = (data, option) => {
   if (!option.resizerSecret || !option.resizerUrl) {
     throw new Error('Not a valid image object');
@@ -137,6 +142,13 @@ const getResizedImageParams = (data, option) => {
         sourceData.promo_items.basic,
       );
     }
+
+    // checking if by is array with a length
+    if (sourceData && sourceData.credits && sourceData.credits.by.length) {
+      sourceData.credits.by = resizeAuthorCredits(
+        sourceData.credits.by,
+      );
+    }
     return sourceData;
   };
 
@@ -168,7 +180,7 @@ export const extractResizedParams = (storyObject) => {
 // see mock data for example
 // optional filter quality for reducing quality of pics
 // exporting for test while we figure out a helper fix
-const getResizedImageData = (data, filterQuality = 70) => {
+const getResizedImageData = (data, filterQuality = 70, onlyUrl = false) => {
   const { imageWidths, aspectRatios } = getProperties();
   const resizerKey = RESIZER_SECRET_KEY;
   const resizerUrl = RESIZER_URL;
@@ -182,6 +194,10 @@ const getResizedImageData = (data, filterQuality = 70) => {
       || typeof aspectRatios === 'undefined'
   ) {
     return data;
+  }
+
+  if (onlyUrl) {
+    return getResizerParams(data);
   }
 
   return getResizedImageParams(data, {

@@ -221,6 +221,23 @@ To doublecheck yourself, please use `npm view [package name]` or `npm view [pack
 
 `npx lerna publish --conventional-commits --conventional-graduate`
 
+9. After publishing from the `master` branch, rebase `staging` on top of `master` so that the two branches are the same and so that we can start the block development cycle over again.
+
+```sh
+# Ensure we're on the master branch
+git checkout master
+# Ensure we have the latest from master
+git pull origin master
+# Checkout staging
+git checkout staging
+# Ensure we have the latest from staging
+git pull origin staging
+# Rebase staging onto master
+git rebase master
+# Push the updated staging branch (--force is required or else it will fail)
+git push --force origin staging
+```
+
 In tech grooming, we also talked about using --conventional-graduate. Here's more [info](https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate) on that. 
 
 #### Publish hotfix 

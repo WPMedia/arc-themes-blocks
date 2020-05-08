@@ -10,6 +10,7 @@
   "rules": {
     "plugin/no-unsupported-browser-features": [
       true
-    ]
+    ],
+    "font-family-no-missing-generic-family-keyword": null
   }
 }

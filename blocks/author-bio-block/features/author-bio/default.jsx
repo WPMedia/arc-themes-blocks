@@ -47,7 +47,12 @@ const AuthorBioStyled = styled.section`
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
 const renderAuthorInfo = (author, arcSite) => {
-  const { image: { url = '', alt_text: altText = '' }, image, name } = author;
+  const {
+    image: { url = '', alt_text: altText = '' },
+    image,
+    name,
+    resized_params: resizedImageOptions,
+  } = author;
 
   return (
     image && url
@@ -63,6 +68,7 @@ const renderAuthorInfo = (author, arcSite) => {
           largeHeight={0}
           breakpoints={getProperties(arcSite)?.breakpoints}
           resizerURL={resizerURL}
+          resizedImageOptions={resizedImageOptions}
         />
       ) : null
   );

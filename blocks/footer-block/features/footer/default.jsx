@@ -5,6 +5,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import Link from '@wpmedia/links-bar-block';
 import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
 import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
 import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon';
@@ -119,7 +120,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
         {footerColumns.map((column) => {
           const columnItems = (column.children) ? column.children.map((item) => (
             <li className="footer-item" key={item._id}>
-              <a href={item.url}>{item.display_name}</a>
+              {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
             </li>
           )) : [];
 

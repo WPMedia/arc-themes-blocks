@@ -1,8 +1,5 @@
 import resizerImageBlock from '@wpmedia/resizer-image-block';
 
-// named import doesn't seem to be working as expected
-const { getResizerParams } = resizerImageBlock;
-
 const params = {
   // has to be an external image
   raw_image_url: 'text',
@@ -13,7 +10,8 @@ const params = {
 const fetch = (query) => {
   const { raw_image_url: rawImageUrl } = query;
 
-  return getResizerParams(rawImageUrl);
+  // last param designates only url -- not data ans object
+  return resizerImageBlock(rawImageUrl, 70, true);
 };
 
 /*

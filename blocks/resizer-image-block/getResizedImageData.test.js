@@ -11,6 +11,7 @@ import mockStoryFeedData from './mockFeedData';
 import mockSearchApiData from './mockSearchApiData';
 import mockCreditsData from './mockCreditsData';
 import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
+import mockLeadArtData from './mockLeadArtData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -40,7 +41,7 @@ const IMAGE_WIDTHS = [
 ];
 
 describe('get resized image data helper on the server-side', () => {
-  xit('returns data passed in if missing env variables', () => {
+  it('returns data passed in if missing env variables', () => {
     getProperties.mockImplementation(() => ({}));
     const dataWithResizedImages = getResizedImageData(mockStoryFeedData);
     const resizedParams = dataWithResizedImages
@@ -50,7 +51,7 @@ describe('get resized image data helper on the server-side', () => {
 
     expect(typeof resizedParams.resized_params).toBe('undefined');
   });
-  xit('returns data passed in if window is undefined', () => {
+  it('returns data passed in if window is undefined', () => {
     getProperties.mockImplementation(() => (
       {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
@@ -159,5 +160,42 @@ describe('get resized image data helper on the server-side', () => {
     const { credits: { by } } = getResizedImageData(mockCreditsEmptyImgData);
     // doesn't have content_elements, just an array with elements that have promo_items
     expect(by[0].resized_params).toEqual({});
+  });
+  it('get lead art', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+      }));
+
+    const dataWithResizedImages = getResizedImageData(mockLeadArtData);
+
+    // doesn't have content_elements, just an array with elements that have promo_items
+    const resizedParams = dataWithResizedImages.promo_items
+      .lead_art
+      .promo_items.basic.resized_params;
+
+    const paramKeys = Object.keys(resizedParams);
+
+    const filterValues = Object.values(resizedParams);
+
+    // if the same resizer key is used this won't change
+    expect(filterValues).toEqual([
+      '/JH9YE5rXU3WoFv5vs342UvuC1gA=filters:format(jpg):quality(70)/',
+      '/oVCzXp5WcaNYOq9omFEyWoMCo78=filters:format(jpg):quality(70)/',
+      '/31mmYPove0AN7aFn_vwKJ0qhZeI=filters:format(jpg):quality(70)/',
+      '/TkU_4vX7gHlX4WBLLwCDMrLuQj4=filters:format(jpg):quality(70)/',
+    ]);
+
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
+    expect(allValidFilterValues).toEqual(true);
+
+    expect(paramKeys).toEqual([
+      '158x105',
+      '274x183',
+      '158x119',
+      '274x206',
+    ]);
   });
 });

@@ -180,29 +180,35 @@ to the private NPM repo. Reach out to a team member to get this.
 
 #### How To Publish 
 
-1. Get approval for your pr on your feature branch
-2. Make sure you're up to date with the latest master
+1. Pull the latest `staging` branch. 
 
-`git checkout master`
+`git checkout staging`
 
-`git fetch --all`
+`git fetch -a`
 
-`git pull origin master`
+2. Branch off the `staging` branch
 
-`git checkout {feature branch name}`
+`git checkout -b PEN-[jira ticket num]-[brief description of feature]`
 
-`git merge master`
+3. Do the work (heh). Commit as you go, which will run the linter and tests.
 
-3. Merge on github into master.
+4. Make pull request using github against the `staging` branch. Get approval for your pr on your feature branch. 
 
-4. From the master branch, check what's changed from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
+5. Merge into `staging` branch. Pre-publish your changed packages. Select either `prepatch`, `preminor` or `premajor` for each of your blocks in lerna cli options. ([See semantic versioning cheatsheet](https://devhints.io/semver) for reference versioning.) If there's a block that you have not changed, reach out to team-members.
+
+`npx lerna publish --preid beta --pre-dist-tag beta`
+
+6. Go to new theme feature pack's `blocks.json`. Change your blocks to the @beta release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment. Alert quality assurance stakeholder that the change has been published.
+
+7. After either design qa or qa approval, make a pull request from the staging branch to the master branch. (Should we make a new pr for just your staging changes?) 
+
+8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.) From the master branch, check what's changed from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
 
 `npx lerna diff`
 `npx lerna changed`
-
-5. Publish. Make sure to iterate through versions as necessary. We're not planning on following independent versioning. You should always be using the latest dependencies of our own blocks (eg, using "latest", not a particular version of own of our blocks)
-
 `npx lerna publish`
+
+Another method for more continuous integration is "graduate" your beta release. In tech grooming, we also talked about using --conventional-graduate. https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate
 
 ### fusion-news-theme
 

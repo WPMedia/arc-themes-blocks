@@ -109,38 +109,33 @@ const getResizedImageParams = (data, option) => {
   }
 
   const generateParams = (sourceData) => {
-    /*
-    path not taken based on current reqs
     if (sourceData && sourceData.content_elements) {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
           if (contentElement.type === 'image') {
-            contentElement.resized_params = resizeImage(
-              contentElement,
-              // designate widths not the width of the screen
-              // this is not going to be 100 percent images always
-              option.imageWidths,
-              resizer,
+            contentElement.resized_params = getResizerParams(
+              contentElement.url,
             );
           }
-          // not totally sure the reason for two here for different structure
-          // commented out for now
           // if (contentElement.promo_items && contentElement.promo_items.basic) {
           //   contentElement.promo_items.basic = resizePromoItems(
           //     contentElement.promo_items.basic,
-          //     option.breakpoints,
-          //     resizer,
           //   );
           // }
           return contentElement;
         },
       );
     }
-    */
     if (sourceData && sourceData.promo_items && sourceData.promo_items.basic) {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,
       );
+    }
+
+    if (sourceData?.promo_items?.lead_art?.content_elements) {
+      // recursive if I find content elements
+      // find content elements
+      generateParams(sourceData.promo_items.lead_art);
     }
 
     // checking if by is array with a length

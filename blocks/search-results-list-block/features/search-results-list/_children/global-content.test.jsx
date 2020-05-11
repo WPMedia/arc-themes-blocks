@@ -21,10 +21,8 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 
-
 describe('The search results list', () => {
   describe('renders a search bar', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: oneListItem }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
     it('should render a text input', () => {
@@ -42,10 +40,35 @@ describe('The search results list', () => {
         expect(wrapper.find('button').at(0).text()).toEqual('Search');
       });
     });
+
+    describe('when a new search is made', () => {
+      global.window = Object.create(window);
+      Object.defineProperty(window, 'location', {
+        value: {
+          href: '',
+        },
+      });
+      it('should go to a new page if a search value is provided', () => {
+        wrapper.setState({ value: 'article' }, () => {
+          wrapper.update();
+          expect(wrapper.state('value')).toEqual('article');
+          wrapper.find('button').at(0).simulate('click');
+          expect(window.location.href).toEqual('/search/article');
+        });
+      });
+      it('should not go to a new page if no search value is provided', () => {
+        window.location.href = '';
+        wrapper.setState({ value: '' }, () => {
+          wrapper.update();
+          expect(wrapper.state('value')).toEqual('');
+          wrapper.find('button').at(0).simulate('click');
+          expect(window.location.href).toEqual('');
+        });
+      });
+    });
   });
 
   it('should render a list of stories', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: mockData }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={mockData} />);
     expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -54,7 +77,6 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: oneListItem }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
     it('should have one parent wrapper', () => {
@@ -108,7 +130,6 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly when description is missing', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: LineItemWithOutDescription }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={LineItemWithOutDescription} />);
     it('should render one parent wrapper', () => {
@@ -133,7 +154,6 @@ describe('The search results list', () => {
   });
 
   describe('renders one list item correctly when list of authors is missing', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: withoutByline }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={withoutByline} />);
     it('should render one parent wrapper', () => {
@@ -146,7 +166,6 @@ describe('The search results list', () => {
   });
 
   describe('renders a button to display more stories', () => {
-    // useAppContext.mockImplementation(() => ({ globalContent: oneListItem }));
     const { default: SearchResultsList } = require('./global-content');
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
     it('should render a button to display more stories', () => {

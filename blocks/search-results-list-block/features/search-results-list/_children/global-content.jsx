@@ -19,6 +19,7 @@ class GlobalSearchResultsList extends React.Component {
       storedList: {},
       resultList: {},
       page: 1,
+      value: '',
     };
   }
 
@@ -54,6 +55,13 @@ class GlobalSearchResultsList extends React.Component {
     });
   }
 
+  handleSearch() {
+    const { value } = this.state;
+    if (value.length > 0) {
+      window.location.href = `/search/${value}`;
+    }
+  }
+
   render() {
     const { globalContent, arcSite } = this.props;
     const {
@@ -77,10 +85,12 @@ class GlobalSearchResultsList extends React.Component {
               type="text"
               placeholder="Enter your search terms here"
               className="search-bar"
+              onChange={(evt) => this.setState({ value: evt.target.value })}
             />
             <button
               type="button"
               className="btn btn-sm"
+              onClick={() => this.handleSearch()}
             >
               Search
             </button>

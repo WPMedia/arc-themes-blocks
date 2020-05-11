@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContent } from 'fusion:content';
 import { Gallery } from '@wpmedia/engine-theme-sdk';
+import { resizerURL } from 'fusion:environment';
 
 const CustomContentGallery = ({ contentConfig }) => {
   const { content_elements: contentElements = [] } = useContent({
@@ -8,7 +9,7 @@ const CustomContentGallery = ({ contentConfig }) => {
     query: contentConfig.contentConfigValues,
   }) || {};
 
-  return <Gallery galleryElements={contentElements} />;
+  return <Gallery galleryElements={contentElements} resizerURL={resizerURL} />;
 };
 
 export default CustomContentGallery;

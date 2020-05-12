@@ -11,6 +11,7 @@ import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -131,18 +132,13 @@ const MediumPromo = ({ customFields, arcSite }) => {
                     />
                   )
                   : (
-                    <Image
-                      url={getProperties(arcSite).fallbackImage}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                      // medium is 16:9
+                    <PlaceholderImage
                       smallWidth={274}
                       smallHeight={154}
                       mediumWidth={274}
                       mediumHeight={154}
                       largeWidth={400}
                       largeHeight={225}
-                      respectAspectRatio
-                      // todo: implement resizer params
                     />
                   )
                 }

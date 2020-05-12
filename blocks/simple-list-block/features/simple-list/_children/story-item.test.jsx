@@ -7,11 +7,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 }))));
 
 describe('Story item', () => {
-  it('renders title if title provided', () => {
-    const testText = 'Man Bites Dog';
-    const wrapper = mount(<StoryItem itemTitle={testText} showHeadline showImage />);
-    expect(wrapper.text()).toBe(testText);
-  });
   it('renders placeholder if no props provided', () => {
     const wrapper = mount(<StoryItem />);
 

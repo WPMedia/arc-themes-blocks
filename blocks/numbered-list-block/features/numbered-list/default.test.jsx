@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
-
+jest.mock('@wpmedia/placeholder-image-block', () => <img url="placeholder.jpg" />);
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,
 }));
@@ -87,6 +87,8 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').childAt(3).type()).toEqual('div');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').length).toEqual(1);
         const placeholderImage = wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').children();
+
+        console.log(placeholderImage.debug());
         expect(placeholderImage.props().url).toEqual('placeholder.jpg');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Story with video as the Lead Art');

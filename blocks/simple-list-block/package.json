@@ -24,6 +24,7 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/placeholder-image-block": "^1.0.0",
     "styled-components": "^4.4.0"
   },
   "scripts": {

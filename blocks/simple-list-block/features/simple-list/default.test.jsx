@@ -30,7 +30,7 @@ const mockOutput = {
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({ websiteDomain: '', fallbackImage: 'placeholder.jpg' }))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-
+jest.mock('@wpmedia/placeholder-image-block', () => <div />);
 describe('Simple list', () => {
   jest.mock('fusion:context', () => ({
     useFusionContext: jest.fn(() => ({

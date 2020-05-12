@@ -40,13 +40,13 @@ const StyledSectionDrawer = styled.div`
 const Nav = (props) => {
   const { arcSite } = useAppContext();
 
-  const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+  const { primaryLogo, primaryLogoAlt, navColor } = getProperties(arcSite);
 
   const {
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
-  const { children = [], customFields: { hierarchy, signInOrder, navColor } = {} } = props;
+  const { children = [], customFields: { hierarchy, signInOrder } = {} } = props;
 
   // signInOrder is 1-based instead of 0-based, so we subtract 1
   const signInButton = (Number.isInteger(signInOrder) && children[signInOrder - 1])
@@ -118,14 +118,6 @@ Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,
     signInOrder: PropTypes.number,
-    navColor: PropTypes.oneOf(['dark', 'light']).tag({
-      defaultValue: 'dark',
-      label: 'Color',
-      labels: {
-        dark: 'Dark',
-        light: 'Light',
-      },
-    }),
   }),
 };
 

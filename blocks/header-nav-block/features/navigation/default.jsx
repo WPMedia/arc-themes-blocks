@@ -45,7 +45,7 @@ const NavButton = styled.button`
 const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
 
-  const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+  const { primaryLogo, primaryLogoAlt, navColor = 'dark' } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
@@ -53,7 +53,7 @@ const Nav = (props) => {
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
-  const { customFields: { hierarchy, showSignIn, navColor } = {} } = props;
+  const { customFields: { hierarchy, showSignIn } = {} } = props;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -131,14 +131,6 @@ Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,
     showSignIn: PropTypes.bool,
-    navColor: PropTypes.oneOf(['dark', 'light']).tag({
-      defaultValue: 'dark',
-      label: 'Color',
-      labels: {
-        dark: 'Dark',
-        light: 'Light',
-      },
-    }),
   }),
 };
 

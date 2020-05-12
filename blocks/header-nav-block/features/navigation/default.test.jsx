@@ -89,19 +89,22 @@ describe('the header navigation feature for the default output type', () => {
 
   describe('when the nav color is set to "dark"', () => {
     it('should set the "dark" class on the component', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'dark' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'dark' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find('.news-theme-navigation-feature')).toHaveClassName('dark');
     });
 
     it('should set all buttons to use the light color scheme', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'dark' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'dark' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-dark')).toEqual(true);
     });
 
     it('should pass the navColor to the SearchBox', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'dark' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'dark' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'dark');
     });
@@ -109,18 +112,21 @@ describe('the header navigation feature for the default output type', () => {
 
   describe('when the nav color is set to "light"', () => {
     it('should set the "light" class on the component', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'light' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'light' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find('.news-theme-navigation-feature')).toHaveClassName('light');
     });
     it('should set all buttons to use the light color scheme', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'light' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'light' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-light')).toEqual(true);
     });
 
     it('should pass the navColor to the SearchBox', () => {
-      const wrapper = mount(<Navigation customFields={{ navColor: 'light' }} />);
+      getProperties.mockImplementation(() => ({ navColor: 'light' }));
+      const wrapper = mount(<Navigation />);
 
       expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'light');
     });

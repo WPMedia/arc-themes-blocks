@@ -150,31 +150,32 @@ class GlobalSearchResultsList extends React.Component {
                     </a>
                   </div>
                   <div className="results-list--headline-container">
-                  <a
-                    href={canonicalUrl}
-                    title={headlineText}
-                    className="list-anchor"
-                  >
-                    <HeadlineText
-                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                      className="headline-text"
+                    <a
+                      href={canonicalUrl}
+                      title={headlineText}
+                      className="list-anchor"
                     >
-                      {headlineText}
-                    </HeadlineText>
-                  </a>
-                </div>
-                <div className="results-list--description-author-container">
-                  <DescriptionText
-                    secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                    className="description-text"
-                  >
-                    {descriptionText}
-                  </DescriptionText>
-                  <div className="results-list--author-date">
-                    <Byline story={element} stylesFor="list" />
-                    {/* The Separator will only be shown if there is at least one author name */}
-                    { showSeparator && <p className="dot-separator">&#9679;</p> }
-                    <ArticleDate classNames="story-date" date={displayDate} />
+                      <HeadlineText
+                        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                        className="headline-text"
+                      >
+                        {headlineText}
+                      </HeadlineText>
+                    </a>
+                  </div>
+                  <div className="results-list--description-author-container">
+                    <DescriptionText
+                      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+                      className="description-text"
+                    >
+                      {descriptionText}
+                    </DescriptionText>
+                    <div className="results-list--author-date">
+                      <Byline story={element} stylesFor="list" />
+                      {/* The Separator will only be shown if there is at least one author name */}
+                      { showSeparator && <p className="dot-separator">&#9679;</p> }
+                      <ArticleDate classNames="story-date" date={displayDate} />
+                    </div>
                   </div>
                 </div>
               );

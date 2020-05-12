@@ -1,1 +1,1 @@
-export default jest.fn(() => 'static-component');
+export default jest.fn((e) => e.children);

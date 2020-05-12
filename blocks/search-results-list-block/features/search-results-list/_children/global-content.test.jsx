@@ -117,25 +117,25 @@ describe('The search results list', () => {
     });
 
     it('should render a parent for headline and a description', () => {
-      expect(wrapper.find('.list-item').find('.headline-description').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
     });
 
     it('should render a headline and a description', () => {
-      expect(wrapper.find('.list-item').find('.headline-description').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').find('.headline-text').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').find('.headline-text')
+      expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text')
         .text()).toEqual('Article with a YouTube embed in it');
-      expect(wrapper.find('.list-item').find('.headline-description').find('.description-text')
+      expect(wrapper.find('.list-item').find('.results-list--description-author-container').find('.description-text')
         .text()).toEqual('Test article for YouTube responsiveness');
     });
 
     it('should render an author and a publish date section', () => {
-      expect(wrapper.find('.list-item').find('.author-date').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--author-date').length).toEqual(1);
     });
 
     it('should render a byline', () => {
-      expect(wrapper.find('.list-item').find('.author-date').find('Byline').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--author-date').find('Byline').length).toEqual(1);
     });
 
     it('should render a separator', () => {
@@ -143,7 +143,7 @@ describe('The search results list', () => {
     });
 
     it('should render a publish date', () => {
-      expect(wrapper.find('.list-item').find('.author-date').find('ArticleDate').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--author-date').find('ArticleDate').length).toEqual(1);
     });
   });
 
@@ -156,19 +156,19 @@ describe('The search results list', () => {
     });
 
     it('should render a parent for headline and a description', () => {
-      expect(wrapper.find('.list-item').find('.headline-description').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
     });
 
     it('should render a headline', () => {
-      expect(wrapper.find('.list-item').find('.headline-description').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').find('.headline-text').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').find('.headline-text')
+      expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text')
         .text()).toEqual('Article with a YouTube embed in it');
     });
 
     it('should not render a description', () => {
-      expect(wrapper.find('.list-item').find('.headline-description').find('.list-anchor').find('.description-text').length).toEqual(0);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.description-text').length).toEqual(0);
     });
   });
 

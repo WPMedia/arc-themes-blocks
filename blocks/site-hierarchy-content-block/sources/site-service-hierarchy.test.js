@@ -41,4 +41,20 @@ describe('the site-service-hierarchy content source block', () => {
 
     expect(url).toEqual('/site/v3/navigation/bbbbb-ccccc?');
   });
+
+  it('when a hierarchy and sectionId are provided it should return data', () => {
+    const data = contentSource.transform({ _id: '/' }, { hierarchy: 'hierarchy', sectionId: '/sectionId' });
+
+    expect(data._id).toEqual('/');
+  });
+
+  it('when a hierarchy is not provided and sectionId is provided that matches the API data then the data is returned', () => {
+    const data = contentSource.transform({ _id: '/sectionId' }, { hierarchy: '', sectionId: '/sectionId' });
+
+    expect(data._id).toEqual('/sectionId');
+  });
+
+  it('when a hierarchy is not provided and sectionId is provided that does not match the API data a 404 is thrown', () => {
+    expect(() => contentSource.transform({ _id: '/' }, { hierarchy: '', sectionId: '/sectionId' })).toThrow(Error);
+  });
 });

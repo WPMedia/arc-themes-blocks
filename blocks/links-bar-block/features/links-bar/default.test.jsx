@@ -51,12 +51,26 @@ describe('the links bar feature for the default output type', () => {
             _id: 'id_2',
             name: 'test link 2',
           },
+          {
+            _id: 'id_3',
+            node_type: 'link',
+            url: '/',
+            display_name: 'Link Text',
+          },
+          {
+            _id: 'id_4',
+            node_type: 'link',
+            url: 'http://arcpublishing.com',
+            display_name: 'Link Text',
+          },
         ],
       })),
     }));
     const wrapper = mount(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
-    expect(wrapper.find('span.links-menu')).toHaveLength(2);
+    expect(wrapper.find('span.links-menu')).toHaveLength(4);
+    expect(wrapper.find('span.links-menu a:not([target])')).toHaveLength(3);
+    expect(wrapper.find('span.links-menu a[target="_blank"]')).toHaveLength(1);
   });
 
   it('should have no menu item if no content is returned', () => {

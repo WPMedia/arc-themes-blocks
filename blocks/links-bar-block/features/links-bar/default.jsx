@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import Link from './_children/link';
 
 import './links-bar.scss';
 
@@ -27,7 +28,7 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
     <nav key={id} className="links-bar">
       {menuItems && menuItems.map((item) => (
         <LinkBarSpan className="links-menu" key={item._id} primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
-          <a href={item._id}>{item.name}</a>
+          {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
         </LinkBarSpan>
       ))}
     </nav>

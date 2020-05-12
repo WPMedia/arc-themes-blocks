@@ -8,4 +8,12 @@ export default {
     hierarchy: 'text',
     sectionId: 'text',
   },
+  transform: (data, query) => {
+    if (!query.hierarchy && data._id !== query.sectionId) {
+      const error = new Error('Not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    return data;
+  },
 };

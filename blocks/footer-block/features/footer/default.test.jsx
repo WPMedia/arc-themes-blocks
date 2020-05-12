@@ -68,23 +68,33 @@ const mockPayload = {
           url: 'www.the-world.com',
           _id: 'column-item-9',
         },
+        {
+          display_name: 'External Link',
+          node_type: 'link',
+          url: 'https://www.the-world.com',
+          _id: 'column-item-10',
+        },
       ],
     },
     {
       _id: 'get-us',
-      name: 'Get Us',
+      name: '',
       children: [
         {
           display_name: 'Why Our Product',
           url: 'www.plz-buy-our-products.com',
-          _id: 'column-item-10',
+          _id: 'column-item-11',
         },
         {
           display_name: 'Pricing',
           url: 'www.the-dollars.com',
-          _id: 'column-item-11',
+          _id: 'column-item-12',
         },
       ],
+    },
+    {
+      _id: 'blank-colum',
+      name: '',
     },
   ],
 };
@@ -92,7 +102,10 @@ const mockPayload = {
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({})),
+  useFusionContext: jest.fn(() => ({
+    contextPath: 'pf',
+    deployment: jest.fn((path) => path),
+  })),
 }));
 
 jest.mock('fusion:content', () => ({
@@ -113,24 +126,22 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
-  it('should have 4 column headers', () => {
+  it('should have 5 column headers', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
-
-    expect(wrapper.find('ul > section')).toHaveLength(4);
+    expect(wrapper.find('ul > section')).toHaveLength(5);
   });
 
-  it('should have 11 column items', () => {
+  it('should have 12 column items', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => (mockPayload)),
-    }));
+    expect(wrapper.find('ul > li')).toHaveLength(12);
+  });
 
-    expect(wrapper.find('ul > li')).toHaveLength(11);
+  it('should have a link with target blank if is an absolute link with (http(s))', () => {
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+    expect(wrapper.find('a[target="_blank"]')).toHaveLength(1);
   });
 
   it('should have empty column when empty payload is given', () => {
@@ -180,11 +191,25 @@ describe('the footer feature for the default output type', () => {
 
   describe('the footer image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
-      it('should make the src of the logo the provided image', () => {
+      it('should make the relative src of the logo the provided image', () => {
         getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
         const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-        expect(wrapper.find('div > img')).toHaveProp('src', 'my-nav-logo.svg');
+        expect(wrapper.find('div > img')).toHaveProp('src', 'pf/my-nav-logo.svg');
+      });
+
+      it('should make the absolute src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'http://test/my-nav-logo.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'http://test/my-nav-logo.svg');
+      });
+
+      it('should make the base64 src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'base64:my-nav-logo.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'base64:my-nav-logo.svg');
       });
 
       describe('when the theme manifest provides alt text', () => {
@@ -206,12 +231,67 @@ describe('the footer feature for the default output type', () => {
       });
     });
 
+    describe('when the theme manifest provides a light logo url', () => {
+      it('should use the light logo over the primary logo', () => {
+        getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'light.svg', primaryLogo: 'primary.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'pf/light.svg');
+      });
+
+      it('should make the relative src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'my-nav-logo.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'pf/my-nav-logo.svg');
+      });
+
+      it('should make the absolute src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'http://test/my-nav-logo.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'http://test/my-nav-logo.svg');
+      });
+
+      it('should make the base64 src of the logo the provided image', () => {
+        getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'base64:my-nav-logo.svg' }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+        expect(wrapper.find('div > img')).toHaveProp('src', 'base64:my-nav-logo.svg');
+      });
+
+      describe('when the theme manifest provides alt text', () => {
+        it('should make the alt text of the logo the provided text', () => {
+          getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'my-nav-logo.svg', lightBackgroundLogoAlt: 'my alt text' }));
+          const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'my alt text');
+        });
+
+        it('should use the light alt text over the primary alt text', () => {
+          getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'my-nav-logo.svg', lightBackgroundLogoAlt: 'light', primaryLogoAlt: 'primary' }));
+          const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'light');
+        });
+      });
+
+      describe('when the theme manifest does not provide alt text', () => {
+        it('should make the alt text of the logo the default text', () => {
+          getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'my-nav-logo.svg' }));
+          const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+
+          expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+        });
+      });
+    });
+
     describe('when the theme does not provide a logo url', () => {
-      it('should make the src of the logo the placeholder image', () => {
+      it('should not render the primary logo div', () => {
         getProperties.mockImplementation(() => ({}));
         const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-        expect(wrapper.find('div.primaryLogo > ArcLogo')).toHaveLength(1);
+        expect(wrapper.find('div.primaryLogo')).toHaveLength(0);
       });
     });
   });

@@ -76,13 +76,13 @@ class CardList extends React.Component {
                   href={contentElements[0].website_url}
                   title={contentElements[0].headlines.basic}
                   className="list-anchor"
+                  id="card-list--link-container"
                 >
                   {
                     extractImage(contentElements[0].promo_items) ? (
                       <Image
                         url={extractImage(contentElements[0].promo_items)}
                         alt={contentElements[0].headlines.basic}
-                        className="card-list-main-img"
                         // first element is always bigger
                         smallWidth={377}
                         smallHeight={283}

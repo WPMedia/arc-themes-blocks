@@ -5,7 +5,7 @@
     grid-template-areas:
       'headline image'
       'description description';
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr minmax(0, max-content);
     grid-template-rows: auto;
 
     .description-text {

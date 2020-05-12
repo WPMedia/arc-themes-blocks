@@ -21,9 +21,10 @@ const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
-background-color: #000;
-height: ${navHeight};
-z-index: ${navZIdx};
+  background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+  height: ${navHeight};
+  z-index: ${navZIdx};
+
   * {
     font-family: ${(props) => props.font};
   }
@@ -45,7 +46,7 @@ const Nav = (props) => {
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
-  const { children = [], customFields: { hierarchy, signInOrder } = {} } = props;
+  const { children = [], customFields: { hierarchy, signInOrder, navColor } = {} } = props;
 
   // signInOrder is 1-based instead of 0-based, so we subtract 1
   const signInButton = (Number.isInteger(signInOrder) && children[signInOrder - 1])
@@ -79,13 +80,13 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav id="main-nav" className="news-theme-navigation" font={primaryFont}>
+      <StyledNav className={`news-theme-navigation-chain ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
 
         <div className="nav-left">
-          <SearchBox iconSize={20} />
-          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className="nav-btn nav-sections-btn border transparent" type="button">
+          <SearchBox iconSize={20} navBarColor={navColor} />
+          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
             <span>Sections</span>
-            <HamburgerMenuIcon fill="white" height={iconSize} width={iconSize} />
+            <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>
         </div>
 
@@ -117,6 +118,14 @@ Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string,
     signInOrder: PropTypes.number,
+    navColor: PropTypes.oneOf(['dark', 'light']).tag({
+      defaultValue: 'dark',
+      label: 'Color',
+      labels: {
+        dark: 'Dark',
+        light: 'Light',
+      },
+    }),
   }),
 };
 

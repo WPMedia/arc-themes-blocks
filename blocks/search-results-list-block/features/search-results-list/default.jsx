@@ -10,10 +10,10 @@ const SearchResultsListContainer = (
     } = {},
   } = {},
 ) => {
+  // const { globalContent = {}, arcSite } = useAppContext();
   if (inheritGlobalContent) {
     return <GlobalContentSearch />;
   }
-
   return <CustomSearchResultsList />;
 };
 

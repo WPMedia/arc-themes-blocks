@@ -172,6 +172,7 @@ const LargePromo = ({ customFields }) => {
                       largeWidth={377}
                       largeHeight={283}
                       respectAspectRatio
+                      // todo: implement placeholder resizer url
                     />
                   )
 }

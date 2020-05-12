@@ -26,7 +26,7 @@ const ConditionalStoryItem = (props) => {
     customFields,
     overlineText = '',
     overlineURL = '',
-    resizedImageOptions = [],
+    resizedImageOptions = {},
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {

@@ -85,6 +85,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
                     largeWidth={400}
                     largeHeight={267}
                     respectAspectRatio
+                    // todo: implement fallback placeholder
                   />
                 )}
             </a>

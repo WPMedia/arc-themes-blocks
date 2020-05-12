@@ -118,6 +118,7 @@ class NumberedList extends Component {
                     largeWidth={274}
                     largeHeight={183}
                     respectAspectRatio
+                    // todo: implement placeholder resizer
                   />
                 )}
               </a>

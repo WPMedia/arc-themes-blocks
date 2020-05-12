@@ -142,6 +142,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
                       largeWidth={400}
                       largeHeight={225}
                       respectAspectRatio
+                      // todo: implement resizer params
                     />
                   )
                 }

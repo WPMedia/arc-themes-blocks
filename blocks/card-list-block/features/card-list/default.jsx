@@ -108,7 +108,7 @@ class CardList extends React.Component {
                         largeWidth={377}
                         largeHeight={283}
                         respectAspectRatio
-                        // todo: implement placeholder
+                        // todo: implement resizer with content source
                       />
                     )
                   }
@@ -196,7 +196,7 @@ class CardList extends React.Component {
                                 largeWidth={274}
                                 largeHeight={183}
                                 respectAspectRatio
-                                // implement placeholder with new resizer
+                                // todo: implement resizer with content source
                               />
                             )
                         }

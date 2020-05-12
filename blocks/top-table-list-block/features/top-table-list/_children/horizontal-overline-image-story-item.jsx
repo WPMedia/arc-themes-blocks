@@ -128,6 +128,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               largeWidth={377}
               largeHeight={283}
               respectAspectRatio
+              // todo: implement resizer url
             />
           )}
         </div>

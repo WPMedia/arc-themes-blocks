@@ -173,6 +173,7 @@ const ExtraLargePromo = ({ customFields }) => {
                       largeWidth={800}
                       largeHeight={600}
                       respectAspectRatio
+                      // todo: implement placeholder resizer
                     />
                   )}
               </a>

@@ -3,11 +3,6 @@
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.14);
 }
 
-.list-item-simple:nth-child(2) > a > .image-placeholder-sm {
-  min-height: 284px;
-  min-width: 100%;
-}
-
 .card-list-main-img {
   height: auto;
   max-height: 400px;
@@ -95,17 +90,12 @@
   }
 
   .list-anchor-image {
-    img,
-    .card-list-placeholder {
+    img {
       max-height: 71px;
       max-width: 105px;
       min-height: 71px;
       min-width: 105px;
     }
-  }
-
-  .card-list-placeholder {
-    background-color: $ui-light-gray;
   }
 
   .headline-list-anchor {

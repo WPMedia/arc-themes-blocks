@@ -74,6 +74,7 @@ class CustomSearchResultsList extends React.Component {
   }
 
   render() {
+    const { arcSite } = this.props;
     const {
       resultList: {
         data,
@@ -81,7 +82,6 @@ class CustomSearchResultsList extends React.Component {
       } = {},
       searchTerm,
     } = this.state;
-    const { arcSite } = this.props;
     return (
       <div>
         <div className="search-container">
@@ -126,56 +126,65 @@ class CustomSearchResultsList extends React.Component {
               const showSeparator = by && by.length !== 0;
               return (
                 <div className="list-item" key={`result-card-${canonicalUrl}`}>
-                  <a
-                    href={canonicalUrl}
-                    title={headlineText}
-                    className="list-anchor"
-                  >
-                    {extractImage(promoItems) ? (
-                      <Image
-                        url={extractImage(promoItems)}
-                        alt={headlineText}
-                        // results lists are 16:9 by default
-                        smallWidth={274}
-                        smallHeight={154}
-                        mediumWidth={274}
-                        mediumHeight={154}
-                        largeWidth={274}
-                        largeHeight={154}
-                        resizedImageOptions={resizedImageOptions}
-                        resizerURL={resizerURL}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                      />
-                    ) : <div className="image-placeholder" />}
-                  </a>
-                  <div
-                    className={
-                    descriptionText
-                      ? 'headline-description'
-                      : 'headline-description headline-description-spacing'
-                  }
-                  >
-                    <div>
-                      <a
-                        href={canonicalUrl}
-                        title={headlineText}
-                        className="list-anchor"
+                  <div className="results-list--image-container">
+                    <a
+                      href={canonicalUrl}
+                      title={headlineText}
+                      className="list-anchor"
+                    >
+                      {extractImage(promoItems) ? (
+                        <Image
+                          url={extractImage(promoItems)}
+                          alt={headlineText}
+                          // todo: height changed slightly
+                          // will have to modify blocks.json to show
+                          smallWidth={274}
+                          smallHeight={148}
+                          mediumWidth={274}
+                          mediumHeight={148}
+                          largeWidth={274}
+                          largeHeight={148}
+                          resizedImageOptions={resizedImageOptions}
+                          resizerURL={resizerURL}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
+                        />
+                      ) : (
+                        <Image
+                          url={getProperties(arcSite).fallbackImage}
+                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                          smallWidth={274}
+                          smallHeight={148}
+                          mediumWidth={274}
+                          mediumHeight={148}
+                          largeWidth={274}
+                          largeHeight={148}
+                          respectAspectRatio
+                        />
+                      )}
+                    </a>
+                  </div>
+                  <div className="results-list--headline-container">
+                    <a
+                      href={canonicalUrl}
+                      title={headlineText}
+                      className="list-anchor"
+                    >
+                      <HeadlineText
+                        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                        className="headline-text"
                       >
-                        <HeadlineText
-                          primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                          className="headline-text"
-                        >
-                          {headlineText}
-                        </HeadlineText>
-                      </a>
-                      <DescriptionText
-                        secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
-                        className="description-text"
-                      >
-                        {descriptionText}
-                      </DescriptionText>
-                    </div>
-                    <div className="author-date">
+                        {headlineText}
+                      </HeadlineText>
+                    </a>
+                  </div>
+                  <div className="results-list--description-author-container">
+                    <DescriptionText
+                      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+                      className="description-text"
+                    >
+                      {descriptionText}
+                    </DescriptionText>
+                    <div className="results-list--author-date">
                       <Byline story={element} stylesFor="list" />
                       {/* The Separator will only be shown if there is at least one author name */}
                       { showSeparator && <p className="dot-separator">&#9679;</p> }

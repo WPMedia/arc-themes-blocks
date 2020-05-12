@@ -63,7 +63,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
   };
 
   const descriptionTmpl = () => {
-    if (customFields.showDescription && byLineArray) {
+    if (customFields.showDescription && descriptionText) {
       return (
         <DescriptionText
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
@@ -79,7 +79,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
   };
 
   const byLineTmpl = () => {
-    if (customFields.showByline && descriptionText) {
+    if (customFields.showByline && byLineArray) {
       return (
         <>
           <Byline story={content} stylesFor="list" />
@@ -111,21 +111,40 @@ const MediumPromo = ({ customFields, arcSite }) => {
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
-              <Image
-                url={customFields.imageOverrideURL
-                  ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                alt={content && content.headlines ? content.headlines.basic : ''}
-                // medium is 16:9
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
-                largeWidth={400}
-                largeHeight={225}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
-                resizedImageOptions={extractResizedParams(content)}
-              />
+              {
+                customFields.imageOverrideURL || extractImage(content.promo_items)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      // medium is 16:9
+                      smallWidth={274}
+                      smallHeight={154}
+                      mediumWidth={274}
+                      mediumHeight={154}
+                      largeWidth={400}
+                      largeHeight={225}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
+                    />
+                  )
+                  : (
+                    <Image
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      // medium is 16:9
+                      smallWidth={274}
+                      smallHeight={154}
+                      mediumWidth={274}
+                      mediumHeight={154}
+                      largeWidth={400}
+                      largeHeight={225}
+                      respectAspectRatio
+                    />
+                  )
+                }
             </a>
           </div>
         )}

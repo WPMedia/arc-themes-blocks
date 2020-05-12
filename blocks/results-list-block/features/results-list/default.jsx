@@ -145,7 +145,20 @@ class ResultsList extends Component {
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={resizerURL}
                     />
-                  ) : <div className="image-placeholder" />}
+                  ) : (
+                    <Image
+                      // results list is 16:9 by default
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      smallWidth={158}
+                      smallHeight={89}
+                      mediumWidth={274}
+                      mediumHeight={154}
+                      largeWidth={274}
+                      largeHeight={154}
+                      respectAspectRatio
+                    />
+                  )}
                 </a>
               </div>
               <div className="results-list--headline-container">

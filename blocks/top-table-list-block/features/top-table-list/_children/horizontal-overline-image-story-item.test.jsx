@@ -1,6 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -22,6 +25,7 @@ const config = {
   showHeadlineSM: true,
   showImageSM: true,
 };
+
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
@@ -133,7 +137,8 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.props()).toMatchObject(props);
 
     // Should be no img present
-    expect(wrapper.find('img').length).toBe(0);
+    const placeholderImage = wrapper.find('img');
+    expect(placeholderImage.length).toBe(1);
 
     // does not find overline
     expect(wrapper.find('a.overline').length).toBe(0);

@@ -96,7 +96,21 @@ class CardList extends React.Component {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={resizerURL}
                       />
-                    ) : <div className="image-placeholder-sm" />
+                    ) : (
+                      <Image
+                        url={getProperties(arcSite).fallbackImage}
+                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        // first element is always bigger
+                        smallWidth={377}
+                        smallHeight={283}
+                        mediumWidth={377}
+                        mediumHeight={283}
+                        largeWidth={377}
+                        largeHeight={283}
+                        respectAspectRatio
+                        // todo: implement placeholder
+                      />
+                    )
                   }
                   <Title
                     primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
@@ -170,7 +184,21 @@ class CardList extends React.Component {
                                 resizerURL={resizerURL}
                               />
                             )
-                            : <div className="card-list-placeholder" />
+                            : (
+                              <Image
+                                url={getProperties(arcSite).fallbackImage}
+                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                                // small, matches numbered list, is 3:2 aspect ratio
+                                smallWidth={105}
+                                smallHeight={70}
+                                mediumWidth={105}
+                                mediumHeight={70}
+                                largeWidth={274}
+                                largeHeight={183}
+                                respectAspectRatio
+                                // implement placeholder with new resizer
+                              />
+                            )
                         }
                       </a>
                     </div>

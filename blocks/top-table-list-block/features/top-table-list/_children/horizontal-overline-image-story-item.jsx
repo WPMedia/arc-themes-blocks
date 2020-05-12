@@ -116,7 +116,20 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 resizerURL={resizerURL}
               />
             </a>
-          ) : null}
+          ) : (
+            <Image
+              url={getProperties(arcSite).fallbackImage}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              // large aspect ratio 4:3
+              smallWidth={274}
+              smallHeight={206}
+              mediumWidth={274}
+              mediumHeight={206}
+              largeWidth={377}
+              largeHeight={283}
+              respectAspectRatio
+            />
+          )}
         </div>
         )}
         {(customFields.showHeadlineLG || customFields.showDescriptionLG

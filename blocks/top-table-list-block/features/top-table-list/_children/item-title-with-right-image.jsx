@@ -47,7 +47,20 @@ const ItemTitleWithRightImage = (props) => {
                   resizerURL={resizerURL}
                 />
               </a>
-            ) : null}
+            ) : (
+              <Image
+                url={getProperties(arcSite).fallbackImage}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                // small size aspect ratios 3:2
+                smallWidth={274}
+                smallHeight={183}
+                mediumWidth={274}
+                mediumHeight={183}
+                largeWidth={400}
+                largeHeight={267}
+                respectAspectRatio
+              />
+            )}
           </div>
           )}
       </div>

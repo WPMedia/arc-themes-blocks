@@ -54,8 +54,8 @@ class NumberedList extends Component {
         showImage = true,
         title = '',
       },
+      arcSite,
     } = this.props;
-    const { arcSite } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
       <div className="numbered-list-container">
@@ -106,7 +106,20 @@ class NumberedList extends Component {
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizerURL={resizerURL}
                   />
-                ) : <div className="numbered-list-placeholder" />}
+                ) : (
+                  <Image
+                    url={getProperties(arcSite).fallbackImage}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    // small, including numbered list, is 3:2 aspect ratio
+                    smallWidth={105}
+                    smallHeight={70}
+                    mediumWidth={105}
+                    mediumHeight={70}
+                    largeWidth={274}
+                    largeHeight={183}
+                    respectAspectRatio
+                  />
+                )}
               </a>
               )}
             </div>

@@ -43,7 +43,19 @@ const StoryItem = (props) => {
               resizerURL={resizerURL}
             />
           ) : (
-            <div className="simple-list-placeholder" />
+            <Image
+              url={getProperties(arcSite).fallbackImage}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              // used this from simple results list
+              // small, including simple list, 3:2 aspect ratio
+              smallWidth={274}
+              smallHeight={183}
+              mediumWidth={274}
+              mediumHeight={183}
+              largeWidth={274}
+              largeHeight={183}
+              respectAspectRatio
+            />
           )}
         </a>
       ) : <div className="simple-list-placeholder" />}

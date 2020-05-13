@@ -18,7 +18,6 @@ $submenu-link-color: #7F8C8D;
   white-space: nowrap;
 
   &.border {
-    border: $border-width solid $border-color-dull;
     transition: border 100ms linear;
   }
 

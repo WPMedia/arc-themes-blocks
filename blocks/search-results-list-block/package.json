@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/search-results-list-block",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "description": "Fusion News Theme search results list block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -23,9 +23,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@wpmedia/date-block": "latest",
     "@wpmedia/engine-theme-sdk": "^0.5.2",
-    "styled-components": "^4.4.0",
-    "@wpmedia/date-block": "latest"
+    "styled-components": "^4.4.0"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

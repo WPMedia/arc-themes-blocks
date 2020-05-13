@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/right-rail-block",
-  "version": "1.2.4",
+  "version": "1.2.5-beta.0",
   "description": "Fusion themes block containing a right-rail layout.",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",

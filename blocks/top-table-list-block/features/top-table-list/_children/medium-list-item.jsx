@@ -2,6 +2,7 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import getProperties from 'fusion:properties';
 
 import Title from './title';
 import DescriptionText from './description-text';
@@ -20,6 +21,7 @@ const MediumListItem = (props) => {
     displayDate,
     id,
     customFields,
+    arcSite,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const textClass = customFields.showImageMD ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
@@ -89,7 +91,19 @@ const MediumListItem = (props) => {
                   largeWidth={400}
                   largeHeight={225}
                 />
-              ) : null}
+              ) : (
+                <Image
+                  url={getProperties(arcSite).fallbackImage}
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                  smallWidth={274}
+                  smallHeight={154}
+                  mediumWidth={274}
+                  mediumHeight={154}
+                  largeWidth={400}
+                  largeHeight={225}
+                  respectAspectRatio
+                />
+              )}
             </a>
           </div>
           )}

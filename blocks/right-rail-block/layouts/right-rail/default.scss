@@ -28,6 +28,13 @@ body {
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding-bottom: calculateRem(80px);
     }
+
+    @media screen and (max-width: 95rem) and (min-width: 90rem) {
+      .container {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
   }
 
   .fullwidth-section {

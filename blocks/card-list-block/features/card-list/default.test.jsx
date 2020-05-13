@@ -78,7 +78,7 @@ describe('The story-feed-list', () => {
 
       it('should render one image wrapped in an anchor tag', () => {
         expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(1);
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('img').length).toEqual(1);
+        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').length).toEqual(1);
       });
 
       it('should render an anchor ', () => {
@@ -91,7 +91,7 @@ describe('The story-feed-list', () => {
       });
 
       it('should render an anchor and an image with alt text', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('img').prop('alt')).toEqual('Article with a YouTube embed in it');
+        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').prop('alt')).toEqual('Article with a YouTube embed in it');
       });
 
       it('should render an overline', () => {

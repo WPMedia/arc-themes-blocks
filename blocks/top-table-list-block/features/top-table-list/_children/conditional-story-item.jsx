@@ -87,7 +87,7 @@ const ConditionalStoryItem = (props) => {
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
-          constructedURL={websiteURL}
+          websiteURL={websiteURL}
           customFields={customFields}
         />
       );

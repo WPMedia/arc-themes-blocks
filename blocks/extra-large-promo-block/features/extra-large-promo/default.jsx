@@ -91,7 +91,7 @@ const ExtraLargePromo = ({ customFields }) => {
   };
 
   const descriptionTmpl = () => {
-    if (customFields.showDescription && byLineArray) {
+    if (customFields.showDescription && descriptionText) {
       return (
         <DescriptionText
           secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
@@ -107,7 +107,7 @@ const ExtraLargePromo = ({ customFields }) => {
   };
 
   const byLineTmpl = () => {
-    if (customFields.showByline && descriptionText) {
+    if (customFields.showByline && byLineArray) {
       return (
         <>
           <Byline story={content} stylesFor="list" />
@@ -144,18 +144,33 @@ const ExtraLargePromo = ({ customFields }) => {
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
-                <Image
-                  url={customFields.imageOverrideURL
-                    ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                  alt={content && content.headlines ? content.headlines.basic : ''}
-                  smallWidth={400}
-                  smallHeight={300}
-                  mediumWidth={600}
-                  mediumHeight={450}
-                  largeWidth={800}
-                  largeHeight={600}
-
-                />
+                {customFields.imageOverrideURL || extractImage(content.promo_items)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      smallWidth={400}
+                      smallHeight={300}
+                      mediumWidth={600}
+                      mediumHeight={450}
+                      largeWidth={800}
+                      largeHeight={600}
+                    />
+                  )
+                  : (
+                    <Image
+                      url={getProperties(arcSite).fallbackImage}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      smallWidth={400}
+                      smallHeight={300}
+                      mediumWidth={600}
+                      mediumHeight={450}
+                      largeWidth={800}
+                      largeHeight={600}
+                      respectAspectRatio
+                    />
+                  )}
               </a>
             )}
             {descriptionTmpl()}

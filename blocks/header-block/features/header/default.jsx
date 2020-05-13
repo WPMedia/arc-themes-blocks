@@ -37,14 +37,14 @@ class Header extends React.Component {
     this.state = { };
   }
 
-  getHeader(text) {
+  getHeader(text, removeBottomPadding) {
     const { arcSite, customFields: { size } = {} } = this.props;
     switch (size) {
       case 'Extra Large':
         return (
           <ExtraLargeHeader
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="header-block"
+            className={`header-block ${removeBottomPadding ? 'no-bottom-margin' : ''}`}
           >
             {text}
           </ExtraLargeHeader>
@@ -53,7 +53,7 @@ class Header extends React.Component {
         return (
           <LargeHeader
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="header-block"
+            className={`header-block ${removeBottomPadding ? 'no-bottom-margin' : ''}`}
           >
             {text}
           </LargeHeader>
@@ -62,7 +62,7 @@ class Header extends React.Component {
         return (
           <MediumHeader
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="header-block"
+            className={`header-block ${removeBottomPadding ? 'no-bottom-margin' : ''}`}
           >
             {text}
           </MediumHeader>
@@ -71,7 +71,7 @@ class Header extends React.Component {
         return (
           <SmallHeader
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="header-block"
+            className={`header-block ${removeBottomPadding ? 'no-bottom-margin' : ''}`}
           >
             {text}
           </SmallHeader>
@@ -80,7 +80,7 @@ class Header extends React.Component {
         return (
           <MediumHeader
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="header-block"
+            className={`header-block ${removeBottomPadding ? 'no-bottom-margin' : ''}`}
           >
             {text}
           </MediumHeader>
@@ -89,9 +89,8 @@ class Header extends React.Component {
   }
 
   render() {
-    const { customFields: { text } = '' } = this.props;
-    const header = this.getHeader(text);
-    return header;
+    const { customFields: { text = '', removeBottomPadding = false } } = this.props;
+    return this.getHeader(text, removeBottomPadding);
   }
 }
 
@@ -99,6 +98,12 @@ Header.propTypes = {
   customFields: PropTypes.shape({
     text: PropTypes.string,
     size: PropTypes.oneOf(['Extra Large', 'Large', 'Medium', 'Small']),
+    removeBottomPadding: PropTypes.bool.tag(
+      {
+        label: 'Remove bottom padding',
+        defaultValue: false,
+      },
+    ),
   }),
 };
 

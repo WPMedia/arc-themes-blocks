@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-
+import getProperties from 'fusion:properties';
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -12,6 +12,7 @@ const StoryItem = (props) => {
     websiteURL,
     showHeadline,
     showImage,
+    arcSite,
   } = props;
 
   return (
@@ -26,8 +27,8 @@ const StoryItem = (props) => {
             <Image
               url={imageURL}
               alt={itemTitle}
-                // used this from simple results list
-                // small, including simple list, 3:2 aspect ratio
+              // used this from simple results list
+              // small, including simple list, 3:2 aspect ratio
               smallWidth={105}
               smallHeight={70}
               mediumWidth={105}
@@ -36,7 +37,19 @@ const StoryItem = (props) => {
               largeHeight={70}
             />
           ) : (
-            <div className="simple-list-placeholder" />
+            <Image
+              url={getProperties(arcSite).fallbackImage}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              // used this from simple results list
+              // small, including simple list, 3:2 aspect ratio
+              smallWidth={105}
+              smallHeight={70}
+              mediumWidth={105}
+              mediumHeight={70}
+              largeWidth={105}
+              largeHeight={70}
+              respectAspectRatio
+            />
           )}
         </a>
       ) : <div className="simple-list-placeholder" />}

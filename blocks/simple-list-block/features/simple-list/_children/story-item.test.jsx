@@ -2,6 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import StoryItem from './story-item';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 describe('Story item', () => {
   it('renders title if title provided', () => {
     const testText = 'Man Bites Dog';

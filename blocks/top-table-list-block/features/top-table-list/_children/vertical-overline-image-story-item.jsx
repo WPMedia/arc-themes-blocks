@@ -3,6 +3,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+import getProperties from 'fusion:properties';
 
 import Title from './title';
 import DescriptionText from './description-text';
@@ -23,6 +24,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     overlineUrl,
     overlineText,
     customFields,
+    arcSite,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
@@ -114,7 +116,19 @@ const VerticalOverlineImageStoryItem = (props) => {
                 largeHeight={600}
               />
             </a>
-          ) : null}
+          ) : (
+            <Image
+              url={getProperties(arcSite).fallbackImage}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              smallWidth={400}
+              smallHeight={300}
+              mediumWidth={600}
+              mediumHeight={450}
+              largeWidth={800}
+              largeHeight={600}
+              respectAspectRatio
+            />
+          )}
           {descriptionTmpl()}
           <div className="article-meta">
             {byLineTmpl()}

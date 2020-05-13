@@ -34,16 +34,11 @@
     color: $ui-primary-font-color;
   }
 
-  img,
-  .image-placeholder {
+  img {
     height: auto;
     // doesn't work on ie 11, looks like it'll stretch past natural width
     max-width: max-content;
     width: 100%;
-  }
-
-  .image-placeholder {
-    min-height: calculateRem(140px);
   }
 }
 

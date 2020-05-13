@@ -383,8 +383,21 @@ so Fusion will now to exclude it from the npm install procedures.
 7) The major disadvantage of the classic development environment is that every change in either `fusion-news-theme-blocks`
 or `engine-theme-sdk` will require you stop and restart Fusion.
 
+### Images 
+
+- If images are not displaying, check that you have a resizerKey in your .env file 
+- Use the latest version of engine that uses a secure resizerKey 
+- If an image has an unknown src, check that your image aspect ratios and sizes are in the `blocks.json` file of feature pack
+    - For instance, you can't have an image resized as 666 x 98999 because that size is not supported in blocks.json. But 100 x 0 is, for example. If unsure, use image sizes you see elsewhere. This is to ensure we're not making unnecessary resizes. These images are not actually being served; there's only crypto cost to making a string with a resizer key
+    - Look at thumbor's documentation for help on filters and the link anatomy 
+- The placeholder image uses only the block.json fallback image field. That needs to be an external link for now. It can't be an svg (again, for now)
+- See the readme for the resizer content source for details how to useContent query and how to use class @consumer
+    - There's an example of @consumer usage in the placeholder image block
+- For debugging image performance, use lighthouse
+- Credit to other arc developers, including the Infobae team, for inspiration on the solution
 
 ## Troubleshooting Dependencies
+
 
 ### Finding Your Bearings
 

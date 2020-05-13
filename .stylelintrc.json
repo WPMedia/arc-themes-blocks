@@ -1,7 +1,16 @@
 {
+  "plugins": [
+    "stylelint-no-unsupported-browser-features"
+  ],
   "extends": [
     "stylelint-config-recommended",
     "stylelint-config-styled-components",
     "stylelint-config-sass-guidelines"
-  ]
+  ],
+  "rules": {
+    "plugin/no-unsupported-browser-features": [
+      true
+    ],
+    "font-family-no-missing-generic-family-keyword": null
+  }
 }

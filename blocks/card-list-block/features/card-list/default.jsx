@@ -6,6 +6,8 @@ import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 
@@ -90,6 +92,9 @@ class CardList extends React.Component {
                         mediumHeight={283}
                         largeWidth={377}
                         largeHeight={283}
+                        resizedImageOptions={extractResizedParams(contentElements[0])}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={resizerURL}
                       />
                     ) : (
                       <Image
@@ -103,6 +108,7 @@ class CardList extends React.Component {
                         largeWidth={377}
                         largeHeight={283}
                         respectAspectRatio
+                        // todo: implement resizer with content source
                       />
                     )
                   }
@@ -173,6 +179,9 @@ class CardList extends React.Component {
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
+                                resizedImageOptions={extractResizedParams(element)}
+                                breakpoints={getProperties(arcSite)?.breakpoints}
+                                resizerURL={resizerURL}
                               />
                             )
                             : (
@@ -187,6 +196,7 @@ class CardList extends React.Component {
                                 largeWidth={274}
                                 largeHeight={183}
                                 respectAspectRatio
+                                // todo: implement resizer with content source
                               />
                             )
                         }

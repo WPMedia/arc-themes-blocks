@@ -5,13 +5,14 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -156,6 +157,9 @@ const ExtraLargePromo = ({ customFields }) => {
                       mediumHeight={450}
                       largeWidth={800}
                       largeHeight={600}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
                     />
                   )
                   : (
@@ -169,6 +173,7 @@ const ExtraLargePromo = ({ customFields }) => {
                       largeWidth={800}
                       largeHeight={600}
                       respectAspectRatio
+                      // todo: implement placeholder resizer
                     />
                   )}
               </a>

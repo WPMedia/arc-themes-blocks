@@ -5,11 +5,12 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -124,6 +125,9 @@ const MediumPromo = ({ customFields, arcSite }) => {
                       mediumHeight={154}
                       largeWidth={400}
                       largeHeight={225}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
                     />
                   )
                   : (
@@ -138,6 +142,7 @@ const MediumPromo = ({ customFields, arcSite }) => {
                       largeWidth={400}
                       largeHeight={225}
                       respectAspectRatio
+                      // todo: implement resizer params
                     />
                   )
                 }

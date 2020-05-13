@@ -7,13 +7,13 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 import './results-list.scss';
 import './desktop-styles.scss';
 import './mobile-styles.scss';
-
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -133,7 +133,8 @@ class ResultsList extends Component {
                   {extractImage(promoItems) ? (
                     <Image
                       // results list is 16:9 by default
-                      url={extractImage(promoItems)}
+                      resizedImageOptions={extractResizedParams(element)}
+                      url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
                       smallHeight={89}
@@ -141,6 +142,8 @@ class ResultsList extends Component {
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
                     />
                   ) : (
                     <Image

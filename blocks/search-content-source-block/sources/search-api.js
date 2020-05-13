@@ -1,4 +1,5 @@
 import getProperties from 'fusion:properties';
+import getResizedImageData from '@wpmedia/resizer-image-block';
 
 export default {
   resolve(contentOptions) {
@@ -12,4 +13,17 @@ export default {
     query: 'text',
     page: 'text',
   },
+  /*
+    root: {
+      data: [{ promo_items: {...}}],
+      otherFields: ...
+    }
+    different from other content sources that have content elements
+    on the top-level
+  */
+  transform: (data) => ({
+    data: getResizedImageData(data.data),
+    ...data,
+  })
+  ,
 };

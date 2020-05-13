@@ -5,9 +5,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -92,7 +93,8 @@ class NumberedList extends Component {
               >
                 {extractImage(promoItems) ? (
                   <Image
-                    url={extractImage(promoItems)}
+                    resizedImageOptions={extractResizedParams(element)}
+                    url={extractImage(element.promo_items)}
                     alt={headlineText}
                     // small, including numbered list, is 3:2 aspect ratio
                     smallWidth={105}
@@ -101,6 +103,8 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={resizerURL}
                   />
                 ) : (
                   <Image
@@ -114,6 +118,7 @@ class NumberedList extends Component {
                     largeWidth={274}
                     largeHeight={183}
                     respectAspectRatio
+                    // todo: implement placeholder resizer
                   />
                 )}
               </a>

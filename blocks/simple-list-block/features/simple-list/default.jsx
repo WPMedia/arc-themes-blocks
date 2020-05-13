@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import Title from './_children/title';
@@ -10,8 +11,6 @@ import StoryItem from './_children/story-item';
 import './simple-list.scss';
 
 // helpers start
-
-
 const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic
   && storyObject.promo_items.basic.type === 'image'
@@ -22,6 +21,7 @@ const unserializeStory = (storyObject) => ({
   itemTitle: storyObject.headlines.basic,
   imageURL: extractImage(storyObject) || '',
   websiteURL: storyObject.website_url || '',
+  resizedImageOptions: extractResizedParams(storyObject),
 });
 
 // helpers end
@@ -60,7 +60,7 @@ const SimpleList = (props) => {
       </Title>
       {
         contentElements.map(unserializeStory).map(({
-          id: listItemId, itemTitle, imageURL, websiteURL,
+          id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
           <StoryItem
             key={listItemId}
@@ -72,6 +72,7 @@ const SimpleList = (props) => {
             websiteDomain={websiteDomain}
             showHeadline={showHeadline}
             showImage={showImage}
+            resizedImageOptions={resizedImageOptions}
           />
         ))
       }

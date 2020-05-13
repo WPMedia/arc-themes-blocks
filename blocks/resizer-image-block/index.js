@@ -2,7 +2,9 @@
 import getProperties from 'fusion:properties';
 import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
-const getResizerParam = (originalUrl, breakpoint, format, filterQuality = 70) => {
+const getResizerParam = (
+  originalUrl, breakpoint, format, filterQuality = 70, respectAspectRatio = false,
+) => {
   if (typeof window === 'undefined') {
     const Thumbor = require('thumbor-lite');
     // this is height and width of the target image
@@ -10,7 +12,29 @@ const getResizerParam = (originalUrl, breakpoint, format, filterQuality = 70) =>
 
     if (!height && !width) throw new Error('Height and Width required');
     const thumbor = new Thumbor(RESIZER_SECRET_KEY, RESIZER_URL);
-    const thumborParam = thumbor
+
+    let thumborParam = '';
+    if (respectAspectRatio) {
+      // https://thumbor.readthedocs.io/en/latest/filling.html?highlight=fill#filling
+      // fitIn will respect the aspect ratio of the photo and fit it into dsipaly
+      // fitin https://thumbor.readthedocs.io/en/latest/usage.html?highlight=fit#fit-in
+      thumborParam = thumbor
+        .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
+        /* have to keep png for transparency effect */
+        .filter(`quality(${filterQuality})`)
+        .filter('fill(white)')
+        /* todo: enable background color in angler fish resizer api */
+        .filter('background_color(white)')
+        .fitIn(width, height)
+        .buildUrl();
+
+      const urlSuffix = originalUrl.replace('https://', '');
+      return thumborParam
+        .replace(RESIZER_URL, '')
+        .replace(urlSuffix, '');
+    }
+
+    thumborParam = thumbor
       .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
       .filter(`format(${format})`)
       .filter(`quality(${filterQuality})`)
@@ -50,7 +74,7 @@ const getImageDimensionsForAspectRatios = () => {
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
 
-export const getResizerParams = (originalUrl) => {
+export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
   const output = {};
   const getParamsByFormat = (format, previousOutput) => {
     // where we get image widths
@@ -66,6 +90,8 @@ export const getResizerParams = (originalUrl) => {
           height: aspectRatioHeight,
         },
         format,
+        70,
+        respectAspectRatio,
       );
     });
     return previousOutput;
@@ -175,7 +201,12 @@ export const extractResizedParams = (storyObject) => {
 // see mock data for example
 // optional filter quality for reducing quality of pics
 // exporting for test while we figure out a helper fix
-const getResizedImageData = (data, filterQuality = 70, onlyUrl = false) => {
+/**
+ * @param respectAspectRatio if true, then will use fitIn rather than resize via thumbor
+*/
+const getResizedImageData = (
+  data, filterQuality = 70, onlyUrl = false, respectAspectRatio = false,
+) => {
   const { imageWidths, aspectRatios } = getProperties();
   const resizerKey = RESIZER_SECRET_KEY;
   const resizerUrl = RESIZER_URL;
@@ -192,7 +223,7 @@ const getResizedImageData = (data, filterQuality = 70, onlyUrl = false) => {
   }
 
   if (onlyUrl) {
-    return getResizerParams(data);
+    return getResizerParams(data, respectAspectRatio);
   }
 
   return getResizedImageParams(data, {

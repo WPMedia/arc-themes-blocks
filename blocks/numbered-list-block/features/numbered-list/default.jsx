@@ -55,6 +55,7 @@ class NumberedList extends Component {
         showImage = true,
         title = '',
       },
+      arcSite,
     } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (

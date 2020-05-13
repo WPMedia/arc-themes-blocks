@@ -10,6 +10,7 @@ import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 import './results-list.scss';
 import './desktop-styles.scss';
@@ -107,7 +108,9 @@ class ResultsList extends Component {
   }
 
   render() {
-    const { arcSite } = this.props;
+    const {
+      arcSite,
+    } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">
@@ -146,17 +149,13 @@ class ResultsList extends Component {
                       resizerURL={resizerURL}
                     />
                   ) : (
-                    <Image
-                      // results list is 16:9 by default
-                      url={getProperties(arcSite).fallbackImage}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    <PlaceholderImage
                       smallWidth={158}
                       smallHeight={89}
                       mediumWidth={274}
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
-                      respectAspectRatio
                     />
                   )}
                 </a>

@@ -51,6 +51,7 @@ class LeadArt extends Component {
     const imgParentElm = this.imgRef.current;
     const imgElm = imgParentElm.querySelector('img');
     if (imgElm) {
+      // this is where it's getting the resized lightbox img
       return imgElm.dataset.lightbox;
     }
     return '';
@@ -70,6 +71,7 @@ class LeadArt extends Component {
 
       if (lead_art.type === 'raw_html') {
         if (buttonPosition !== 'hidden') {
+          // this could be figure and figcaption, a react component
           const mainContent = (
             <>
               <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
@@ -152,6 +154,7 @@ class LeadArt extends Component {
                 lightBoxHeight={0}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
+                resizedImageOptions={lead_art.resized_params}
               />
             </div>
             {lightbox}
@@ -164,7 +167,7 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
-        return <Gallery galleryElements={lead_art.content_elements} />;
+        return <Gallery galleryElements={lead_art.content_elements} resizerURL={resizerURL} />;
       }
       return null;
     }

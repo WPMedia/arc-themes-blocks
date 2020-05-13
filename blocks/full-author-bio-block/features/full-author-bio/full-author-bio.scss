@@ -8,12 +8,12 @@
   margin-right: map-get($spacers, 'md');
   margin-top: map-get($spacers, 'lg');
   width: 30%;
-}
 
-.author-image {
-  border-radius: 100%;
-  max-height: 180px;
-  width: auto;
+  img {
+    border-radius: 100%;
+    max-height: 180px;
+    width: auto;
+  }
 }
 
 .author-content {
@@ -74,25 +74,23 @@
   height: 40px;
   justify-content: center;
   margin: 0 0 0 map-get($spacers, 'xs');
+}
 
-  svg {
-    display: block;
-    height: auto;
-    margin: 0 auto;
-    width: 24px;
+.social-column > svg {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  width: 24px;
 
-    path {
-      fill: rgba($ui-medium-gray, 1);
-      transition: all 0.2s ease-in-out;
-    }
+  path {
+    fill: rgba($ui-medium-gray, 1);
+    transition: all 0.2s ease-in-out;
   }
+}
 
-  &:hover {
-    svg {
-      path {
-        fill: rgba($ui-medium-gray, 0.8);
-      }
-    }
+.social-column:hover > svg {
+  path {
+    fill: rgba($ui-medium-gray, 0.8);
   }
 }
 

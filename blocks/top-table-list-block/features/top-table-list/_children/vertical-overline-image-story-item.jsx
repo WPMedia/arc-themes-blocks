@@ -5,6 +5,7 @@ import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -121,16 +122,13 @@ const VerticalOverlineImageStoryItem = (props) => {
               />
             </a>
           ) : (
-            <Image
-              url={getProperties(arcSite).fallbackImage}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+            <PlaceholderImage
               smallWidth={400}
               smallHeight={300}
               mediumWidth={600}
               mediumHeight={450}
               largeWidth={800}
               largeHeight={600}
-              respectAspectRatio
             />
           )}
           {descriptionTmpl()}

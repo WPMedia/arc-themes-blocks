@@ -6,12 +6,17 @@ import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
 const SmallManualPromo = ({ customFields, arcSite }) => {
+  const resizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: customFields.imageURL },
+  });
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
   return customFields.linkURL ? (
@@ -55,6 +60,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
                 largeHeight={267}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
+                resizedImageOptions={resizedImageOptions}
               />
             </a>
           </div>

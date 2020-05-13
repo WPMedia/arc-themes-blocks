@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import getThemeStyle from 'fusion:themes';
 import {
   EnvelopeIcon,
@@ -17,6 +19,7 @@ import {
   SnapchatIcon,
   WhatsAppIcon,
   SoundCloudIcon,
+  Image,
 } from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
 import constructSocialURL from './shared/constructSocialURL';
@@ -103,10 +106,18 @@ const FullAuthorBio = () => {
         <div className="image-container">
           {
             (content.authors[0].image) && (
-              <img
-                src={content.authors[0].image}
-                className="author-image"
+              <Image
+                url={content.authors[0].image}
                 alt="Author photo"
+                smallWidth={158}
+                smallHeight={158}
+                mediumWidth={158}
+                mediumHeight={158}
+                largeWidth={158}
+                largeHeight={158}
+                resizedImageOptions={content.authors[0].resized_params}
+                resizerURL={resizerURL}
+                breakpoints={getProperties(arcSite)?.breakpoints}
               />
             )
           }

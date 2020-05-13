@@ -55,7 +55,6 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
-    "@wpmedia/resizer-image-block": "file:blocks/resizer-image-block",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
     "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
     "@wpmedia/byline-block": "file:blocks/byline-block",
@@ -69,19 +68,21 @@
     "@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
     "@wpmedia/large-promo-block": "file:blocks/large-promo-block",
     "@wpmedia/lead-art-block": "file:blocks/lead-art-block",
+    "@wpmedia/links-bar-block": "file:blocks/links-bar-block",
     "@wpmedia/medium-manual-promo-block": "file:blocks/medium-manual-promo-block",
     "@wpmedia/medium-promo-block": "file:blocks/medium-promo-block",
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/overline-block": "file:blocks/overline-block",
+    "@wpmedia/placeholder-image-block": "file:blocks/placeholder-image-block",
+    "@wpmedia/resizer-image-block": "file:blocks/resizer-image-block",
     "@wpmedia/results-list-block": "file:blocks/results-list-block",
+    "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block",
+    "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
-    "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
-    "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
-    "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block",
-    "@wpmedia/links-bar-block": "file:blocks/links-bar-block"
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
   },
   "jest": {
     "transformIgnorePatterns": [

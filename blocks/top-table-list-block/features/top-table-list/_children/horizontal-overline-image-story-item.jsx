@@ -5,6 +5,7 @@ import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -117,18 +118,13 @@ const HorizontalOverlineImageStoryItem = (props) => {
               />
             </a>
           ) : (
-            <Image
-              url={getProperties(arcSite).fallbackImage}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-              // large aspect ratio 4:3
+            <PlaceholderImage
               smallWidth={274}
               smallHeight={206}
               mediumWidth={274}
               mediumHeight={206}
               largeWidth={377}
               largeHeight={283}
-              respectAspectRatio
-              // todo: implement resizer url
             />
           )}
         </div>

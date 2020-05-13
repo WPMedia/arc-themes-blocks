@@ -68,7 +68,7 @@ describe('the full author bio block', () => {
     it('should render a photo', () => {
       const wrapper = mount(<FullAuthorBio />);
 
-      expect(wrapper.find('img')).toHaveClassName('author-image');
+      expect(wrapper.find('img').props().src === '').toEqual(false);
     });
   });
 

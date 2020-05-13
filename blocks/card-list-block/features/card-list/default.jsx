@@ -7,6 +7,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { resizerURL } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
@@ -97,18 +98,13 @@ class CardList extends React.Component {
                         resizerURL={resizerURL}
                       />
                     ) : (
-                      <Image
-                        url={getProperties(arcSite).fallbackImage}
-                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                        // first element is always bigger
+                      <PlaceholderImage
                         smallWidth={377}
                         smallHeight={283}
                         mediumWidth={377}
                         mediumHeight={283}
                         largeWidth={377}
                         largeHeight={283}
-                        respectAspectRatio
-                        // todo: implement resizer with content source
                       />
                     )
                   }
@@ -185,18 +181,13 @@ class CardList extends React.Component {
                               />
                             )
                             : (
-                              <Image
-                                url={getProperties(arcSite).fallbackImage}
-                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                                // small, matches numbered list, is 3:2 aspect ratio
+                              <PlaceholderImage
                                 smallWidth={105}
                                 smallHeight={70}
                                 mediumWidth={105}
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
-                                respectAspectRatio
-                                // todo: implement resizer with content source
                               />
                             )
                         }

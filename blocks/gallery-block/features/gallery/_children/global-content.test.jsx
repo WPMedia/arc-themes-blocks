@@ -33,6 +33,7 @@ describe('the global content gallery', () => {
               subtitle: 'my cool subtitle',
             },
           ],
+          resizerURL: 'https://fake.cdn.com/resizer',
         },
       );
     });
@@ -56,6 +57,7 @@ describe('the global content gallery', () => {
       expect(wrapper.find('Gallery').props()).toStrictEqual(
         {
           galleryElements: [],
+          resizerURL: 'https://fake.cdn.com/resizer',
         },
       );
     });
@@ -77,6 +79,8 @@ describe('the global content gallery', () => {
       expect(wrapper.find('Gallery').props()).toStrictEqual(
         {
           galleryElements: [],
+          resizerURL: 'https://fake.cdn.com/resizer',
+
         },
       );
     });

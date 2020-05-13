@@ -1,0 +1,31 @@
+{
+  "name": "@wpmedia/resizer-image-content-source-block",
+  "version": "1.0.0",
+  "description": "Pass in a raw image url, get some size options for that image generated via thumbor-lite",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/resizer-image-content-source-block"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
+  },
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "files": [
+    "sources"
+  ],
+  "keywords": [
+    "thumbor",
+    "thumbor-lite",
+    "image-resizer",
+    "responsive",
+    "images"
+  ],
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "license": "UNLICENSED"
+}

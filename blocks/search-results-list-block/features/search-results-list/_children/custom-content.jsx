@@ -3,6 +3,7 @@ import Consumer from 'fusion:consumer';
 import React from 'react';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
@@ -136,6 +137,8 @@ class CustomSearchResultsList extends React.Component {
                         <Image
                           url={extractImage(promoItems)}
                           alt={headlineText}
+                          // todo: height changed slightly
+                          // will have to modify blocks.json to show
                           smallWidth={274}
                           smallHeight={148}
                           mediumWidth={274}
@@ -147,16 +150,13 @@ class CustomSearchResultsList extends React.Component {
                           breakpoints={getProperties(arcSite)?.breakpoints}
                         />
                       ) : (
-                        <Image
-                          url={getProperties(arcSite).fallbackImage}
-                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        <PlaceholderImage
                           smallWidth={274}
                           smallHeight={148}
                           mediumWidth={274}
                           mediumHeight={148}
                           largeWidth={274}
                           largeHeight={148}
-                          respectAspectRatio
                         />
                       )}
                     </a>

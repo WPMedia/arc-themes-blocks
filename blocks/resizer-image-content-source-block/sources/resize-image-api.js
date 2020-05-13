@@ -8,10 +8,10 @@ const params = {
 // input: raw image url
 // output: object with dimensions and image keys
 const fetch = (query) => {
-  const { raw_image_url: rawImageUrl } = query;
+  const { raw_image_url: rawImageUrl, respect_aspect_ratio: respectAspectRatio = false } = query;
 
   // last param designates only url -- not data ans object
-  return resizerImageBlock(rawImageUrl, 70, true);
+  return resizerImageBlock(rawImageUrl, 70, true, respectAspectRatio);
 };
 
 /*

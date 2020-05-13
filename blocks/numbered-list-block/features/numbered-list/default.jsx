@@ -9,6 +9,7 @@ import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -107,18 +108,13 @@ class NumberedList extends Component {
                     resizerURL={resizerURL}
                   />
                 ) : (
-                  <Image
-                    url={getProperties(arcSite).fallbackImage}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    // small, including numbered list, is 3:2 aspect ratio
+                  <PlaceholderImage
                     smallWidth={105}
                     smallHeight={70}
                     mediumWidth={105}
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
-                    respectAspectRatio
-                    // todo: implement placeholder resizer
                   />
                 )}
               </a>

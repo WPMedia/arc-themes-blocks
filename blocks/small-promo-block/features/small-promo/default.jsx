@@ -9,6 +9,7 @@ import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -74,18 +75,13 @@ const SmallPromo = ({ customFields, arcSite }) => {
                   />
                 )
                 : (
-                  <Image
-                    url={getProperties(arcSite).fallbackImage}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    // small should be 3:2 aspect ratio
+                  <PlaceholderImage
                     smallWidth={274}
                     smallHeight={183}
                     mediumWidth={274}
                     mediumHeight={183}
                     largeWidth={400}
                     largeHeight={267}
-                    respectAspectRatio
-                    // todo: implement fallback placeholder
                   />
                 )}
             </a>

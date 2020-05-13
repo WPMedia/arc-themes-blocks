@@ -11,6 +11,7 @@ import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 import './results-list.scss';
 import './desktop-styles.scss';
@@ -108,7 +109,9 @@ class ResultsList extends Component {
   }
 
   render() {
-    const { arcSite } = this.props;
+    const {
+      arcSite,
+    } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
     return (
       <div className="results-list-container">

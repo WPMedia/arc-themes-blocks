@@ -27,6 +27,7 @@
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/overline-block": "latest",
+    "@wpmedia/placeholder-image-block": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
   },

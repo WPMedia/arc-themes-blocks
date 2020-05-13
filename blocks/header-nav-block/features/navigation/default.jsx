@@ -21,13 +21,15 @@ const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
-background-color: #000;
-height: ${navHeight};
-z-index: ${navZIdx};
+  background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+  height: ${navHeight};
+  z-index: ${navZIdx};
+
   * {
     font-family: ${(props) => props.font};
   }
 `;
+
 const StyledSectionDrawer = styled.div`
   font-family: ${(props) => props.font};
   position: fixed;
@@ -43,7 +45,7 @@ const NavButton = styled.button`
 const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
 
-  const { primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+  const { primaryLogo, primaryLogoAlt, navColor = 'dark' } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
@@ -87,13 +89,13 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav id="main-nav" className="news-theme-navigation" font={primaryFont}>
+      <StyledNav id="main-nav" className={`news-theme-navigation-feature ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
 
         <div className="nav-left">
-          <SearchBox iconSize={20} />
-          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className="nav-btn nav-sections-btn border transparent" type="button">
+          <SearchBox iconSize={20} navBarColor={navColor} />
+          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
             <span>Sections</span>
-            <HamburgerMenuIcon fill="white" height={iconSize} width={iconSize} />
+            <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>
         </div>
 
@@ -106,9 +108,9 @@ const Nav = (props) => {
         <div className="nav-right">
           {showSignIn
             && (
-            <NavButton className="nav-btn nav-sections-btn" type="button" bgColor={primaryColor}>
+            <NavButton className={`nav-btn nav-sections-btn ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button" bgColor={primaryColor}>
               <span>Sign In</span>
-              <UserIcon fill="white" height={iconSize} width={iconSize} />
+              <UserIcon fill={null} height={iconSize} width={iconSize} />
             </NavButton>
             )}
         </div>

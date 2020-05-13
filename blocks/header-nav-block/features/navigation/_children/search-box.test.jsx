@@ -62,4 +62,32 @@ describe('the SearchBox component', () => {
       expect(wrapper.find('.nav-search')).toHaveClassName('open');
     });
   });
+
+  describe('when the navBarColor is set to "dark"', () => {
+    it('should set the "dark" class on the component', () => {
+      const wrapper = shallow(<SearchBox navBarColor="dark" />);
+
+      expect(wrapper.find('.nav-search')).toHaveClassName('dark');
+    });
+
+    it('should set the buttons to dark mode', () => {
+      const wrapper = shallow(<SearchBox navBarColor="dark" />);
+
+      expect(wrapper.find('.nav-btn').every('.nav-btn-dark')).toEqual(true);
+    });
+  });
+
+  describe('when the navBarColor is set to "light"', () => {
+    it('should set the "light" class on the component', () => {
+      const wrapper = shallow(<SearchBox navBarColor="light" />);
+
+      expect(wrapper.find('.nav-search')).toHaveClassName('light');
+    });
+
+    it('should set the buttons to light mode', () => {
+      const wrapper = shallow(<SearchBox navBarColor="light" />);
+
+      expect(wrapper.find('.nav-btn').every('.nav-btn-light')).toEqual(true);
+    });
+  });
 });

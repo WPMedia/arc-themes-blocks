@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
-export default ({ alwaysOpen = false, iconSize = 16 }) => {
+export default ({ alwaysOpen = false, iconSize = 16, navBarColor = 'dark' }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const searchInput = useRef(null);
 
@@ -24,9 +24,9 @@ export default ({ alwaysOpen = false, iconSize = 16 }) => {
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
-  const btnClassNames = `nav-btn transparent${!isSearchBarOpen ? ' border' : ''}`;
-  const iconFill = isSearchBarOpen ? '#666666' : 'white';
+  const navClassNames = `nav-search ${isSearchBarOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
+  const btnClassNames = `nav-btn ${navBarColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'} transparent${!isSearchBarOpen ? ' border' : ''}`;
+  const iconFill = isSearchBarOpen ? '#666666' : null;
 
   return (
     <div className={navClassNames}>

@@ -230,6 +230,11 @@ For info on rebasing, see [tutorial](https://www.atlassian.com/git/tutorials/rew
 
 For background on lerna conventional graduate and diffing, see [lerna versioning docs](https://github.com/lerna/lerna/blob/master/commands/version/README.md).
 
+Open questions:
+1. Should we use versions with preids like our current non-hotfix release process?
+2. Should we use the `beta` preid and dist-tag in hotfixed packages?
+3. Should we use the non-prerelease builds and manually add and remove dist-tags?
+
 ### fusion-news-theme
 
 

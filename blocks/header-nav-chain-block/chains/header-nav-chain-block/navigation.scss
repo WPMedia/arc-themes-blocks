@@ -10,6 +10,10 @@ $section-bg: #3B3B3B;
 $section-width: 315px;
 $submenu-link-color: #7F8C8D;
 
+body.nav-open {
+  overflow-y: hidden;
+}
+
 .nav-btn {
   border: 0;
   height: $btn-size;
@@ -196,6 +200,7 @@ $submenu-link-color: #7F8C8D;
 
   &.open {
     transform: translate(0px, 0px);
+    overflow-y: scroll;
   }
 
   &.closed {

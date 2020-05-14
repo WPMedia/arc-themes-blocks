@@ -81,7 +81,8 @@
     "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
     "@wpmedia/right-rail-block": "file:blocks/right-rail-block",
     "@wpmedia/right-rail-advanced-block": "file:blocks/right-rail-advanced-block",
-    "@wpmedia/links-bar-block": "file:blocks/links-bar-block"
+    "@wpmedia/links-bar-block": "file:blocks/links-bar-block",
+    "@wpmedia/placeholder-image-block": "file:blocks/placeholder-image-block"
   },
   "jest": {
     "transformIgnorePatterns": [

@@ -3,8 +3,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
-import getProperties from 'fusion:properties';
-
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -24,7 +23,6 @@ const VerticalOverlineImageStoryItem = (props) => {
     overlineUrl,
     overlineText,
     customFields,
-    arcSite,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
@@ -117,16 +115,13 @@ const VerticalOverlineImageStoryItem = (props) => {
               />
             </a>
           ) : (
-            <Image
-              url={getProperties(arcSite).fallbackImage}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+            <PlaceholderImage
               smallWidth={400}
               smallHeight={300}
               mediumWidth={600}
               mediumHeight={450}
               largeWidth={800}
               largeHeight={600}
-              respectAspectRatio
             />
           )}
           {descriptionTmpl()}

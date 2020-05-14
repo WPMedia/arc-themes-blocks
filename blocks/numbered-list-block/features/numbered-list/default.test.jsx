@@ -87,7 +87,8 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').childAt(3).type()).toEqual('div');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').length).toEqual(1);
         const placeholderImage = wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').children();
-        expect(placeholderImage.props().url).toEqual('placeholder.jpg');
+        // the placeholder component is mocked globally in jest mocks with this alt tag
+        expect(placeholderImage.html()).toEqual('<img alt="placeholder"/>');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Story with video as the Lead Art');
       });

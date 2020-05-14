@@ -1,9 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  fallbackImage: 'placeholder.jpg',
-}))));
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -146,7 +143,7 @@ describe('vertical overline image story item', () => {
 
     // There should be no imag present
     expect(placeholderImage.length).toBe(1);
-    expect(placeholderImage.props().src.includes('placeholder.jpg')).toBe(true);
+    expect(placeholderImage.html()).toBe('<img alt="placeholder">');
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(0);

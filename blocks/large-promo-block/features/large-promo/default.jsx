@@ -12,6 +12,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -158,16 +159,13 @@ const LargePromo = ({ customFields }) => {
                     />
                   )
                   : (
-                    <Image
-                      url={getProperties(arcSite).fallbackImage}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}// large is 4:3 aspect ratio
+                    <PlaceholderImage
                       smallWidth={274}
                       smallHeight={206}
                       mediumWidth={274}
                       mediumHeight={206}
                       largeWidth={377}
                       largeHeight={283}
-                      respectAspectRatio
                     />
                   )
 }

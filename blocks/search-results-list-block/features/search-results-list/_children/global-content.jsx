@@ -4,7 +4,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
@@ -135,16 +135,13 @@ class GlobalSearchResultsList extends React.Component {
                           largeHeight={148}
                         />
                       ) : (
-                        <Image
-                          url={getProperties(arcSite).fallbackImage}
-                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        <PlaceholderImage
                           smallWidth={274}
                           smallHeight={148}
                           mediumWidth={274}
                           mediumHeight={148}
                           largeWidth={274}
                           largeHeight={148}
-                          respectAspectRatio
                         />
                       )}
                     </a>

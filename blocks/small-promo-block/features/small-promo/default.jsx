@@ -8,6 +8,7 @@ import getProperties from 'fusion:properties';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -70,17 +71,13 @@ const SmallPromo = ({ customFields, arcSite }) => {
                   />
                 )
                 : (
-                  <Image
-                    url={getProperties(arcSite).fallbackImage}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    // small should be 3:2 aspect ratio
+                  <PlaceholderImage
                     smallWidth={274}
                     smallHeight={183}
                     mediumWidth={274}
                     mediumHeight={183}
                     largeWidth={400}
                     largeHeight={267}
-                    respectAspectRatio
                   />
                 )}
             </a>

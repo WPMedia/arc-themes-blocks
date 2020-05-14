@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import './card-list.scss';
 
 function extractImage(promo) {
@@ -42,7 +42,7 @@ class CardList extends React.Component {
   }
 
   render() {
-    const { customFields: { title } = {}, arcSite } = this.props;
+    const { customFields: { title } = {} } = this.props;
     const { cardList: { content_elements: contentElements = [] } = {} } = this.state;
     const showSeparator = !!(
       contentElements[0]
@@ -92,17 +92,13 @@ class CardList extends React.Component {
                         largeHeight={283}
                       />
                     ) : (
-                      <Image
-                        url={getProperties(arcSite).fallbackImage}
-                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                        // first element is always bigger
+                      <PlaceholderImage
                         smallWidth={377}
                         smallHeight={283}
                         mediumWidth={377}
                         mediumHeight={283}
                         largeWidth={377}
                         largeHeight={283}
-                        respectAspectRatio
                       />
                     )
                   }
@@ -176,17 +172,13 @@ class CardList extends React.Component {
                               />
                             )
                             : (
-                              <Image
-                                url={getProperties(arcSite).fallbackImage}
-                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                                // small, matches numbered list, is 3:2 aspect ratio
+                              <PlaceholderImage
                                 smallWidth={105}
                                 smallHeight={70}
                                 mediumWidth={105}
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
-                                respectAspectRatio
                               />
                             )
                         }

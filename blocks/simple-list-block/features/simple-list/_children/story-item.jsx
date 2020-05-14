@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 
 const StoryItem = (props) => {
@@ -12,7 +12,6 @@ const StoryItem = (props) => {
     websiteURL,
     showHeadline,
     showImage,
-    arcSite,
   } = props;
 
   return (
@@ -37,18 +36,13 @@ const StoryItem = (props) => {
               largeHeight={70}
             />
           ) : (
-            <Image
-              url={getProperties(arcSite).fallbackImage}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-              // used this from simple results list
-              // small, including simple list, 3:2 aspect ratio
-              smallWidth={105}
-              smallHeight={70}
-              mediumWidth={105}
-              mediumHeight={70}
-              largeWidth={105}
-              largeHeight={70}
-              respectAspectRatio
+            <PlaceholderImage
+              smallWidth={274}
+              smallHeight={183}
+              mediumWidth={274}
+              mediumHeight={183}
+              largeWidth={274}
+              largeHeight={183}
             />
           )}
         </a>

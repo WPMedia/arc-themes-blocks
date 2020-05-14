@@ -12,6 +12,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -159,16 +160,13 @@ const ExtraLargePromo = ({ customFields }) => {
                     />
                   )
                   : (
-                    <Image
-                      url={getProperties(arcSite).fallbackImage}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    <PlaceholderImage
                       smallWidth={400}
                       smallHeight={300}
                       mediumWidth={600}
                       mediumHeight={450}
                       largeWidth={800}
                       largeHeight={600}
-                      respectAspectRatio
                     />
                   )}
               </a>

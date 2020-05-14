@@ -4,10 +4,10 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -53,7 +53,6 @@ class NumberedList extends Component {
         showImage = true,
         title = '',
       },
-      arcSite,
     } = this.props;
     const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
     return (
@@ -103,17 +102,13 @@ class NumberedList extends Component {
                     largeHeight={183}
                   />
                 ) : (
-                  <Image
-                    url={getProperties(arcSite).fallbackImage}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    // small, including numbered list, is 3:2 aspect ratio
+                  <PlaceholderImage
                     smallWidth={105}
                     smallHeight={70}
                     mediumWidth={105}
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
-                    respectAspectRatio
                   />
                 )}
               </a>

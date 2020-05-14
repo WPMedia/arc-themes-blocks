@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import Static from 'fusion:static';
 
-const HTMLBox = () => {
+const HTMLBox = ({ id }) => {
   let htmlbox = null;
-  const { customFields: { HTML, id = 'static' } } = useFusionContext();
+  const { customFields: { HTML } } = useFusionContext();
   if (HTML) {
     htmlbox = (
-      <Static id={id.replace(/\s/g, '')}>
+      <Static id={`html-block-${id}`}>
         <div dangerouslySetInnerHTML={{ __html: HTML }} />
       </Static>
     );
@@ -20,9 +20,6 @@ HTMLBox.label = 'HTML Box – Arc Block';
 
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({
-    id: PropTypes.string.tag({
-      label: 'Unique Feature ID',
-    }).isRequired,
     HTML: PropTypes.richtext,
   }),
 };

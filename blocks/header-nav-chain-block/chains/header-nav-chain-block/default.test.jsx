@@ -7,7 +7,10 @@ import SearchBox from './_children/search-box';
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
-  useAppContext: jest.fn(() => ({})),
+  useFusionContext: jest.fn(() => ({
+    contextPath: 'pf',
+    deployment: jest.fn(() => ({})).mockReturnValue('path/image.svg'),
+  })),
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),
@@ -68,10 +71,10 @@ describe('the header navigation feature for the default output type', () => {
   describe('the navigation bar image/logo', () => {
     describe('when the theme manifest provides a logo url', () => {
       it('should make the src of the logo the provided image', () => {
-        getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
+        getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div.nav-logo > a > img')).toHaveProp('src', 'my-nav-logo.svg');
+        expect(wrapper.find('div.nav-logo > a > img')).toHaveProp('src', 'https://test.com/my-nav-logo.svg');
       });
 
       it('should make the alt text of the logo the default text', () => {
@@ -88,14 +91,22 @@ describe('the header navigation feature for the default output type', () => {
           expect(wrapper.find('div.nav-logo > a > img')).toHaveProp('alt', 'My Nav Logo');
         });
       });
+
+      describe('when the provided logo is a relative url', () => {
+        it('should create a url with a context path', () => {
+          getProperties.mockImplementation(() => ({ primaryLogo: 'image.svg' }));
+          const wrapper = mount(<Navigation />);
+          expect(wrapper.find('div.nav-logo > a > img')).toHaveProp('src', 'path/image.svg');
+        });
+      });
     });
 
     describe('when the theme does not provide a logo url', () => {
-      it('should render a default SVG', () => {
+      it('should not render a logo', () => {
         getProperties.mockImplementation(() => ({}));
         const wrapper = mount(<Navigation />);
 
-        expect(wrapper.find('div.nav-logo svg > title')).toIncludeText('Arc Publishing logo');
+        expect(wrapper.find('div.nav-logo > a > img').length).toBe(0);
       });
     });
   });

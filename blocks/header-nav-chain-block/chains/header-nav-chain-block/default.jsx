@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
-import { useAppContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
-import ArcLogo from '@wpmedia/engine-theme-sdk/dist/es/components/ArcLogo';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
 import './navigation.scss';
@@ -38,9 +37,9 @@ const StyledSectionDrawer = styled.div`
 
 /* Main Component */
 const Nav = (props) => {
-  const { arcSite } = useAppContext();
-
+  const { arcSite, deployment, contextPath } = useFusionContext();
   const { primaryLogo, primaryLogoAlt, navColor } = getProperties(arcSite);
+  let primaryLogoPath;
 
   const {
     'primary-font-family': primaryFont,
@@ -78,6 +77,13 @@ const Nav = (props) => {
     };
   });
 
+  // Check if URL is absolute/base64
+  if (primaryLogo && (primaryLogo.indexOf('http') === 0 || primaryLogo.indexOf('base64') === 0)) {
+    primaryLogoPath = primaryLogo;
+  } else {
+    primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
+  }
+
   return (
     <>
       <StyledNav className={`news-theme-navigation-chain ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
@@ -92,9 +98,7 @@ const Nav = (props) => {
 
         <div className="nav-logo">
           <a href="/" title={primaryLogoAlt}>
-            {primaryLogo
-              ? <img src={primaryLogo} alt={primaryLogoAlt || 'Navigation bar logo'} />
-              : <ArcLogo />}
+            {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
           </a>
         </div>
 

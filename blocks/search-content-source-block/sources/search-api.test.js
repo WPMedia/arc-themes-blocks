@@ -16,7 +16,7 @@ describe('the search content source block', () => {
         query: 'test',
         'arc-site': 'the-sun',
       });
-      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1&key=1234');
+      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1&website_id=the-sun&key=1234');
     });
   });
 
@@ -27,7 +27,7 @@ describe('the search content source block', () => {
         page: '3',
         'arc-site': 'the-sun',
       });
-      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=3&key=1234');
+      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=3&website_id=the-sun&key=1234');
     });
   });
 
@@ -45,7 +45,14 @@ describe('the search content source block', () => {
   describe('when a key is not provided', () => {
     it('should not build a url with a key', () => {
       const url = contentSource.resolve({ query: 'test' });
-      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1&key=undefined');
+      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1');
+    });
+  });
+
+  describe('when a site is not provided', () => {
+    it('should not build a url with a website_url', () => {
+      const url = contentSource.resolve({ query: 'test' });
+      expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1');
     });
   });
 });

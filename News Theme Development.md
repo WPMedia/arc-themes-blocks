@@ -210,6 +210,31 @@ to the private NPM repo. Reach out to a team member to get this.
 
 Another method for more continuous integration is "graduate" your beta release. In tech grooming, we also talked about using --conventional-graduate. https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate
 
+#### Publish hotfix 
+
+1. Branch off of master. 
+
+2. merge feature branch into master. 
+
+3. release feature branch changes as beta from master (overwriting staging beta) 
+
+4. Create feature pack with latest but with only the new beta packages 
+
+5. Rebase staging onto master for future dev 
+
+6. Set dist tags of released (and good) packages to latest on the staging blocks. Basically, graduating the “hotfix” release to latest in the staging workflow
+
+For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013). 
+
+For info on rebasing, see [tutorial](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase). 
+
+For background on lerna conventional graduate and diffing, see [lerna versioning docs](https://github.com/lerna/lerna/blob/master/commands/version/README.md).
+
+Open questions:
+1. Should we use versions with preids like our current non-hotfix release process?
+2. Should we use the `beta` preid and dist-tag in hotfixed packages?
+3. Should we use the non-prerelease builds and manually add and remove dist-tags?
+
 ### fusion-news-theme
 
 

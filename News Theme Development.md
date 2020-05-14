@@ -180,6 +180,21 @@ to the private NPM repo. Reach out to a team member to get this.
 
 #### How To Publish 
 
+---
+NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
+
+`rm -rf node_modules/`
+
+`npm i`
+
+`npx lerna clean`
+
+If this does happen, you can use `from-package` syntax in lerna [docs](https://github.com/lerna/lerna/tree/master/commands/publish#bump-from-package). Everything will be alright.
+
+To doublecheck yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work. 
+
+---
+
 1. Pull the latest `staging` branch. 
 
 `git checkout staging`
@@ -204,11 +219,9 @@ to the private NPM repo. Reach out to a team member to get this.
 
 8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.) From the master branch, check what's changed from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
 
-`npx lerna diff`
-`npx lerna changed`
-`npx lerna publish`
+`npx lerna publish --conventional-commits --conventional-graduate`
 
-Another method for more continuous integration is "graduate" your beta release. In tech grooming, we also talked about using --conventional-graduate. https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate
+In tech grooming, we also talked about using --conventional-graduate. Here's more [info](https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate) on that. 
 
 #### Publish hotfix 
 
@@ -216,13 +229,17 @@ Another method for more continuous integration is "graduate" your beta release. 
 
 2. merge feature branch into master. 
 
-3. release feature branch changes as beta from master (overwriting staging beta) 
+3. release feature branch changes as `@hotfix` from master 
 
-4. Create feature pack with latest but with only the new beta packages 
+`npx lerna publish --preid hotfix --pre-dist-tag hotfix`
 
-5. Rebase staging onto master for future dev 
+4. Create feature pack with @hotfix blocks to test
 
-6. Set dist tags of released (and good) packages to latest on the staging blocks. Basically, graduating the “hotfix” release to latest in the staging workflow
+5. Upon successful qa, graduate the “hotfix” release to latest in the same publish workflow
+
+`npx lerna publish --conventional-commits --conventional-graduate`
+
+6. Go back to beta packages and look into handling changes. *TODO - SEE OPEN QUESTIONS BELOW*
 
 For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013). 
 

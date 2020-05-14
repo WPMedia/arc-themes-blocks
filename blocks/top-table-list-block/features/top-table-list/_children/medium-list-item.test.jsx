@@ -96,7 +96,7 @@ describe('medium list item', () => {
 
     // There should be no imag present
     expect(placeholderImage.length).toBe(1);
-    expect(placeholderImage.props().src.includes('placeholder.jpg')).toBe(true);
+    expect(placeholderImage.html()).toBe('<img alt="placeholder">');
 
     // doesn't find a headline
     expect(wrapper.find('a.md-promo-headline').length).toBe(0);

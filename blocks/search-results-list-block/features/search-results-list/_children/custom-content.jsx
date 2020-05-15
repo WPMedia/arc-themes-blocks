@@ -18,7 +18,6 @@ import './search-results-list.scss';
 class CustomSearchResultsList extends React.Component {
   constructor(props) {
     super(props);
-    this.arcSite = props.arcSite;
     this.state = {
       storedList: {},
       resultList: {},
@@ -75,7 +74,6 @@ class CustomSearchResultsList extends React.Component {
   }
 
   render() {
-    const { arcSite } = this.props;
     const {
       resultList: {
         data,

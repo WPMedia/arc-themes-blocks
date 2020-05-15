@@ -5,7 +5,6 @@ import ArticleDate from '@wpmedia/date-block';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';

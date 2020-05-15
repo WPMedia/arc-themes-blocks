@@ -10,7 +10,6 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;

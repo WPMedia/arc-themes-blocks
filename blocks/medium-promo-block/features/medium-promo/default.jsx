@@ -12,7 +12,6 @@ import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};

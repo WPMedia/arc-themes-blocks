@@ -3,7 +3,6 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import Title from './title';
 
 const ItemTitleWithRightImage = (props) => {

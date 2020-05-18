@@ -387,7 +387,7 @@ These are what each of these variables do:
 
     Another use case for `devBlocks` is if you want to only locally develop certain blocks but want to bring in production versions of all the others. You can do this by setting `useLocal` to false and including the blocks you want to develop inside `devBlocks`, and when you run the `npx fusion start theme --links` it will link all the blocks inside the `devBlocks` array but also install all the production versions of blocks in `blocks` array, and Fusion will take the linked blocks as higher priority. This will work with the CLI version `1.0.13-alpha.0`, but currently (accidentally) removed on the `1.0.13-versioning.0`
 
-3) Boot up the local environment with the command `npx fusion start theme`. If you want to link the blocks as specified in `blocks/devBlocks` array, either run it with `--links` or `-l` flag or run `npx fusion link` command before running the start command
+3) Boot up the local environment with the command `npx fusion start theme` at the root of the bundle. If you want to link the blocks as specified in `blocks/devBlocks` array, either run it with `--links` or `-l` flag or run `npx fusion link` command before running the start command
 
 4) Fusion will start up the bundle as normal. Once it fully boots up and the local editor is loaded, go to the blocks 
 and make a change and save, and observe that the change is reflected on the local editor.

@@ -307,7 +307,11 @@ then follow these procedures:
 3.  Request a PR review.
 4.  When the PR is approved, merge into master.
 5.  Next build using npx fusion zip and deploy to the core components
-    environment for testing.
+    environment for testing. If you want to deploy with all the blocks with
+    a certain version, you can run `npx fusion zip <version>`. This will
+    release with all of the blocks tagged with that version,
+    i.e. `npx fusion zip beta` will tag all of the blocks with `@beta` tag
+    before zipping
 
 **Note:** When running or creating a build bundle, you will need a .npmrc
 file that gives you access to the private NPM repo. Reach out to a team
@@ -358,19 +362,34 @@ working at the time you read this or not meeting your needs for a specific issue
 please see the next classic dev environment.
 
 #### NPM Link Local Development Instructions
-1) Add `FUSION_RELEASE=2.4.1-localContentSupport.9` (or whatever the version of fusion this will be included in) and 
+1) Add `FUSION_RELEASE=2.4.2-themesDev.5` (or whatever the version of fusion this will be included in) and 
 `THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` 
 on the bundle so everything installs properly as well
 
-2) Ensure the following variables: `"useLocal": true`, `"engineSDK": "@wpmedia/engine-theme-sdk"`, `"cssFramework": "@wpmedia/news-theme-css"` 
-are in blocks.json.
+2) These key/value pairs should be included on your `blocks.json` depending on what you are developing:
+```json
+{
+    ...
+  "useLocal": true/false,
+  "useLocalEngineSDK": true/false,
+  "useLocalCSSFramework": true/false,
+  "blocks": [...],
+  "devBlocks": [...],
+  ...
+}
+```
+These are what each of these variables do:
+- `useLocal`: Decides whether it should use locally linked modules or install public versions of the blocks
+- `useLocalEngineSDK`: Decides whether it should use locally linked engine SDK or install public version. *NOTE*: The Engine SDK should be manually linked
+- `useLocalCSSFramework`: Decides whether it should use locally linked CSS Framework or install public version. *NOTE*: The CSS Framework should be manually linked
+- `blocks`: Contains the list of blocks to be linked/installed. Each string should be in the format of `"<@org>/<blockName>/<@version, if necessary>"`, i.e. `"@wpmedia/alert-bar-block@beta"`
+- `devBlocks`: You should use this if you don't want to link all of the blocks (which may considerably slow down the local environment booting up) - the CLI will only link the blocks provided in this array if one exists. This is just a convenience tool to narrow down the `blocks` array without having to manually revert the changes every time you commit. Each string should be in the same format as `blocks` array. Keep in mind that you should still include the minimum block needed to start up the local environment (an output type, a layout, a content source). This does NOT replace the `blocks` array.
 
-3) At the root of the bundle, `run sudo npm run link:blocks` (sudo is required because npm link needs write access). 
-This will batch link all of the listed blocks in blocks.json into the bundle
+    Another use case for `devBlocks` is if you want to only locally develop certain blocks but want to bring in production versions of all the others. You can do this by setting `useLocal` to false and including the blocks you want to develop inside `devBlocks`, and when you run the `npx fusion start theme --links` it will link all the blocks inside the `devBlocks` array but also install all the production versions of blocks in `blocks` array, and Fusion will take the linked blocks as higher priority. This will work with the CLI version `1.0.13-alpha.0`, but currently (accidentally) removed on the `1.0.13-versioning.0`
 
-4) After linking is done, `run npx fusion start-theme` at the root of the bundle
+3) Boot up the local environment with the command `npx fusion start theme`. If you want to link the blocks as specified in `blocks/devBlocks` array, either run it with `--links` or `-l` flag or run `npx fusion link` command before running the start command
 
-5) Fusion will start up the bundle as normal. Once it fully boots up and the local editor is loaded, go to the blocks 
+4) Fusion will start up the bundle as normal. Once it fully boots up and the local editor is loaded, go to the blocks 
 and make a change and save, and observe that the change is reflected on the local editor.
 
 Note: It also looks like the webpack watch now requires more CPUs (in testing with Jason Young, who went from 2 - 4 

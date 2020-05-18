@@ -33,3 +33,8 @@
     padding-top: map-get($spacers, 'md');
   }
 }
+
+.right-aligned-container {
+  display: flex;
+  justify-content: flex-end;
+}

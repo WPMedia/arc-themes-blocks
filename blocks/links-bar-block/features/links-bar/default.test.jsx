@@ -94,6 +94,7 @@ describe('the links bar feature for the default output type', () => {
       expect(wrapper.find('[href="/testurl/"]').length).toBe(1);
     });
   });
+
   describe('when a link is not missing a trailing slash', () => {
     it('should not add a slash at the end of the link', () => {
       const { default: Link } = require('./_children/link');

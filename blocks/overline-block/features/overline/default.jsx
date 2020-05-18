@@ -13,6 +13,14 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+function fixTrailingSlash(item) {
+  let fixedItem = item;
+  if (fixedItem[fixedItem.length - 1] !== '/') {
+    fixedItem += '/';
+  }
+  return fixedItem;
+}
+
 const Overline = (props) => {
   const { globalContent: content = {}, arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
@@ -41,7 +49,7 @@ const Overline = (props) => {
   return text
     ? (
       <StyledLink
-        href={url}
+        href={fixTrailingSlash(url)}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
         {...edit}

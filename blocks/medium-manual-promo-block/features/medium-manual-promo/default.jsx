@@ -32,7 +32,7 @@ const MediumManualPromo = ({ customFields, arcSite }) => {
       <div className="row med-promo-padding-bottom">
         {(customFields.showImage && customFields.imageURL)
         && (
-          <div className="col-sm-xl-4">
+          <div className="col-sm-12 col-md-xl-4">
             <a
               href={customFields.linkURL}
               title={customFields.headline}

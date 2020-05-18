@@ -70,6 +70,11 @@ const Nav = (props) => {
     }
   };
 
+  const hamburgerClick = () => {
+    setSectionDrawerOpen(!isSectionDrawerOpen);
+    document.body.classList.toggle('nav-open');
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handleEscKey, true);
     return () => {
@@ -90,7 +95,7 @@ const Nav = (props) => {
 
         <div className="nav-left">
           <SearchBox iconSize={20} navBarColor={navColor} />
-          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+          <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
             <span>Sections</span>
             <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>

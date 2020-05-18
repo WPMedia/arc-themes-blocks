@@ -10,6 +10,10 @@ $section-bg: $ui-medium-gray;
 $section-width: 315px;
 $submenu-link-color: $ui-dark-gray;
 
+body.nav-open {
+  overflow-y: hidden;
+}
+
 .nav-btn {
   border: 0;
   height: $btn-size;
@@ -198,6 +202,7 @@ $submenu-link-color: $ui-dark-gray;
 
   &.open {
     transform: translate(0, 0);
+    overflow-y: scroll;
   }
 
   &.closed {

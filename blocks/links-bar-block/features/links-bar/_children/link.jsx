@@ -1,15 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function fixTrailingSlash(item) {
+  let fixedItem = item;
+  if (fixedItem[fixedItem.length - 1] !== '/') {
+    fixedItem += '/';
+  }
+  return fixedItem;
+}
+
 const Link = ({ href, name }) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
   return (
     externalUrl ? (
-      <a href={href} target="_blank" rel="noopener noreferrer">
+      <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
         {name}
         <span className="sr-only">(Opens in new window)</span>
       </a>
-    ) : <a href={href}>{name}</a>
+    ) : <a href={fixTrailingSlash(href)}>{name}</a>
   );
 };
 

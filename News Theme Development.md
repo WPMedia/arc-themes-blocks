@@ -369,7 +369,7 @@ on the bundle so everything installs properly as well
 2) These key/value pairs should be included on your `blocks.json` depending on what you are developing:
 ```json
 {
-    ...
+  ...
   "useLocal": true/false,
   "useLocalEngineSDK": true/false,
   "useLocalCSSFramework": true/false,

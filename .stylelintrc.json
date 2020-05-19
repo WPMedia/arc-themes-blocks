@@ -9,7 +9,10 @@
   ],
   "rules": {
     "plugin/no-unsupported-browser-features": [
-      true
+      true,
+      {
+        "severity": "warning"
+      }
     ],
     "font-family-no-missing-generic-family-keyword": null
   }

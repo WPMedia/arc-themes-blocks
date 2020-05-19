@@ -1,9 +1,9 @@
 import React from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
-import { useFusionContext } from 'fusion:context';
 import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import withFusionContext from 'fusion:context';
 
 @Consumer
 class PlaceholderImage extends React.Component {
@@ -14,8 +14,8 @@ class PlaceholderImage extends React.Component {
     this.fetch();
   }
 
-  fetch() {
-    const { arcSite, deployment, contextPath } = useFusionContext();
+  getTargetFallbackImageUrl() {
+    const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
 
     // if true then it's a local image
@@ -23,16 +23,21 @@ class PlaceholderImage extends React.Component {
     if (targetFallbackImage && !(targetFallbackImage.includes('http'))) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
+    return targetFallbackImage;
+  }
 
+  fetch() {
+    const targetFallbackImage = this.getTargetFallbackImageUrl();
     const { resizedImageOptions } = this.state;
     this.fetchContent({
       resizedImageOptions: {
         source: 'resize-image-api',
         query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
         transform(newResizedImageOptions) {
-          // console.log(newResizedImageOptions, 'new resized options');
-          // Check if data is being returned
-          if (newResizedImageOptions) return { ...resizedImageOptions, ...newResizedImageOptions };
+          // Check if obj empty is being returned
+          if (Object.keys(newResizedImageOptions).length > 0) {
+            return { ...resizedImageOptions, ...newResizedImageOptions };
+          }
 
           // Otherwise just keep the current image options
           return resizedImageOptions;
@@ -56,9 +61,8 @@ class PlaceholderImage extends React.Component {
     return (
       <>
         <Image
-          url={getProperties(arcSite).fallbackImage}
+          url={this.getTargetFallbackImageUrl()}
           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-          // first element is always bigger
           smallWidth={smallWidth}
           smallHeight={smallHeight}
           mediumWidth={mediumWidth}
@@ -75,4 +79,4 @@ class PlaceholderImage extends React.Component {
 
 PlaceholderImage.label = 'Placeholder Image – Arc Block';
 
-export default PlaceholderImage;
+export default withFusionContext(PlaceholderImage);

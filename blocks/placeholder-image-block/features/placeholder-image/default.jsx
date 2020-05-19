@@ -30,8 +30,10 @@ class PlaceholderImage extends React.Component {
         source: 'resize-image-api',
         query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
         transform(newResizedImageOptions) {
-          // Check if data is being returned
-          if (newResizedImageOptions) return { ...resizedImageOptions, ...newResizedImageOptions };
+          // Check if obj empty is being returned
+          if (Object.keys(newResizedImageOptions).length > 0) {
+            return { ...resizedImageOptions, ...newResizedImageOptions };
+          }
 
           // Otherwise just keep the current image options
           return resizedImageOptions;

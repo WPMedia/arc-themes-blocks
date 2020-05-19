@@ -42,7 +42,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
         )}
         {(customFields.showImage && customFields.imageURL)
         && (
-          <div className="col-sm-xl-4">
+          <div className="col-sm-xl-4 right-aligned-container">
             <a
               href={customFields.linkURL}
               title={customFields.headline}
@@ -52,12 +52,12 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageURL}
                 alt={customFields.headline}
                 // small should be 3:2 aspect ratio
-                smallWidth={274}
-                smallHeight={183}
-                mediumWidth={274}
-                mediumHeight={183}
-                largeWidth={400}
-                largeHeight={267}
+                smallWidth={105}
+                smallHeight={70}
+                mediumWidth={105}
+                mediumHeight={70}
+                largeWidth={105}
+                largeHeight={70}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={resizerURL}
                 resizedImageOptions={resizedImageOptions}

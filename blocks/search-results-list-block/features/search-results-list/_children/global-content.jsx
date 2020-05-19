@@ -11,6 +11,9 @@ import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { resizerURL } from 'fusion:environment';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
+import '@wpmedia/shared-styles/scss/_results-list.scss';
+import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
+import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
 
 @Consumer

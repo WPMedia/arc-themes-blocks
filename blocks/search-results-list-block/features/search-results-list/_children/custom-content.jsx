@@ -12,6 +12,14 @@ import getProperties from 'fusion:properties';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
+
+// shared with results list
+// to modify, go to the shared styles block
+import '@wpmedia/shared-styles/scss/_results-list.scss';
+import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
+import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
+
+// not shared with results list
 import './search-results-list.scss';
 
 @Consumer

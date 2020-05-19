@@ -14,7 +14,7 @@ class PlaceholderImage extends React.Component {
     this.fetch();
   }
 
-  fetch() {
+  getTargetFallbackImageUrl() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
 
@@ -23,7 +23,11 @@ class PlaceholderImage extends React.Component {
     if (targetFallbackImage && !(targetFallbackImage.includes('http'))) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
+    return targetFallbackImage;
+  }
 
+  fetch() {
+    const targetFallbackImage = this.getTargetFallbackImageUrl();
     const { resizedImageOptions } = this.state;
     this.fetchContent({
       resizedImageOptions: {
@@ -57,7 +61,7 @@ class PlaceholderImage extends React.Component {
     return (
       <>
         <Image
-          url={getProperties(arcSite).fallbackImage}
+          url={this.getTargetFallbackImageUrl()}
           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
           smallWidth={smallWidth}
           smallHeight={smallHeight}

@@ -164,6 +164,12 @@ const getResizedImageParams = (data, option) => {
       generateParams(sourceData.promo_items.lead_art);
     }
 
+    if (sourceData?.promo_items?.lead_art?.promo_items?.basic) {
+      sourceData.promo_items.lead_art.promo_items.basic.resized_params = getResizerParams(
+        sourceData.promo_items.lead_art.promo_items.basic.url,
+      );
+    }
+
     // checking if by is array with a length
     if (sourceData && sourceData.credits && sourceData.credits.by.length) {
       sourceData.credits.by = resizeAuthorCredits(

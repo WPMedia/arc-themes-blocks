@@ -1,9 +1,9 @@
 import React from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
-import { useFusionContext } from 'fusion:context';
 import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import withFusionContext from 'fusion:context';
 
 @Consumer
 class PlaceholderImage extends React.Component {
@@ -15,7 +15,7 @@ class PlaceholderImage extends React.Component {
   }
 
   fetch() {
-    const { arcSite, deployment, contextPath } = useFusionContext();
+    const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
 
     // if true then it's a local image
@@ -30,7 +30,6 @@ class PlaceholderImage extends React.Component {
         source: 'resize-image-api',
         query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
         transform(newResizedImageOptions) {
-          // console.log(newResizedImageOptions, 'new resized options');
           // Check if data is being returned
           if (newResizedImageOptions) return { ...resizedImageOptions, ...newResizedImageOptions };
 
@@ -58,7 +57,6 @@ class PlaceholderImage extends React.Component {
         <Image
           url={getProperties(arcSite).fallbackImage}
           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-          // first element is always bigger
           smallWidth={smallWidth}
           smallHeight={smallHeight}
           mediumWidth={mediumWidth}
@@ -75,4 +73,4 @@ class PlaceholderImage extends React.Component {
 
 PlaceholderImage.label = 'Placeholder Image – Arc Block';
 
-export default PlaceholderImage;
+export default withFusionContext(PlaceholderImage);

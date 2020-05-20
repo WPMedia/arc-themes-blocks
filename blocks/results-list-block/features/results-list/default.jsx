@@ -120,17 +120,16 @@ class ResultsList extends Component {
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
             credits: { by } = {},
-            website_url: websiteUrl,
-            canonical_url: canonicalUrl,
             promo_items: promoItems,
+            websites,
           } = element;
           const showSeparator = by && by.length !== 0;
-
+          const url = websites[arcSite].website_url;
           return (
-            <div className="list-item" key={`result-card-${canonicalUrl}`}>
+            <div className="list-item" key={`result-card-${url}`}>
               <div className="results-list--image-container">
                 <a
-                  href={websiteUrl}
+                  href={url}
                   title={headlineText}
                 >
                   {extractImage(promoItems) ? (
@@ -162,7 +161,7 @@ class ResultsList extends Component {
               </div>
               <div className="results-list--headline-container">
                 <a
-                  href={websiteUrl}
+                  href={url}
                   title={headlineText}
                 >
                   <HeadlineText
@@ -176,7 +175,7 @@ class ResultsList extends Component {
               <div className="results-list--description-author-container">
                 {descriptionText && (
                   <a
-                    href={websiteUrl}
+                    href={url}
                     title={headlineText}
                   >
                     <DescriptionText

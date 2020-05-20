@@ -14,8 +14,8 @@ import getProperties from 'fusion:properties';
 import './card-list.scss';
 
 function getResizedImage(promo) {
-  if (promo?.basic && promo.basic.type === 'image' && promo.basic?.resized_params) {
-    return promo.basic?.resized_params;
+  if (promo?.basic?.type === 'image' && promo?.basic?.resized_params) {
+    return promo.basic.resized_params;
   }
 
   if (promo?.lead_art?.promo_items) {
@@ -26,7 +26,7 @@ function getResizedImage(promo) {
 }
 
 function extractImage(promo) {
-  if (promo?.basic && promo.basic.type === 'image' && promo.basic.url) {
+  if (promo?.basic?.type === 'image' && promo?.basic?.url) {
     return promo.basic.url;
   }
 

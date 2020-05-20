@@ -3,12 +3,12 @@ $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
-$nav-search-border-color: #5c6364;
-$overlay-color: #2a2a2a;
+$nav-search-border-color: $ui-light-gray;
+$overlay-color: $ui-dark-gray;
 $overlay-z-index: 2;
-$section-bg: #3B3B3B;
+$section-bg: $ui-medium-gray;
 $section-width: 315px;
-$submenu-link-color: #7F8C8D;
+$submenu-link-color: $ui-dark-gray;
 
 body.nav-open {
   overflow-y: hidden;
@@ -75,7 +75,8 @@ body.nav-open {
     margin: 0;
   }
 
-  > span, > img {
+  > span,
+  > img {
     flex: 0;
   }
 
@@ -128,12 +129,12 @@ body.nav-open {
     margin: 0;
     outline: none;
     padding: 0;
-    transition: all .25s cubic-bezier(.49,.37,.45,.71);
+    transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
   }
 }
 
-.news-theme-navigation-chain {
+.news-theme-navigation-container {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -145,7 +146,8 @@ body.nav-open {
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search, .nav-sections-btn span {
+    .nav-search,
+    .nav-sections-btn span {
       display: none;
     }
   }
@@ -163,10 +165,10 @@ body.nav-open {
   }
 
   > div {
-    text-align: center;
+    align-items: center;
     display: flex;
     flex: 1;
-    align-items: center;
+    text-align: center;
 
     &.nav-left {
       justify-content: flex-start;
@@ -182,8 +184,8 @@ body.nav-open {
 
       img {
         height: auto;
-        max-height: 30px;
-        min-width: 30px;
+        max-height: 40px;
+        max-width: 240px;
         width: auto;
       }
     }
@@ -199,12 +201,12 @@ body.nav-open {
   width: $section-width;
 
   &.open {
-    transform: translate(0px, 0px);
     overflow-y: scroll;
+    transform: translate(0, 0);
   }
 
   &.closed {
-    transform: translate(-$section-width, 0px);
+    transform: translate(-$section-width, 0);
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -218,7 +220,8 @@ body.nav-open {
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .submenu-caret, .subsection-container {
+    .submenu-caret,
+    .subsection-container {
       display: none;
     }
   }
@@ -229,15 +232,16 @@ body.nav-open {
 
   .nav-search {
     border-bottom: $border-width solid $nav-search-border-color;
-    padding-bottom: 16px;
     margin: 16px 20px 0;
+    padding-bottom: 16px;
 
     input {
       flex: 1;
     }
   }
 
-  ul.section-menu, ul.subsection-menu {
+  ul.section-menu,
+  ul.subsection-menu {
     flex: 1;
     flex-direction: column;
   }
@@ -298,7 +302,7 @@ body.nav-open {
   ul.subsection-menu {
     background: white;
     border-radius: 2px;
-    box-shadow: 0px 0px 20px 0 rgba(42, 42, 42, 0.5);
+    box-shadow: 0 0 20px 0 rgba(42, 42, 42, 0.5);
     left: 0;
     list-style: none;
     margin: 0;
@@ -309,7 +313,6 @@ body.nav-open {
     z-index: ($overlay-z-index + 1);
 
     > li {
-
       > a {
         color: $submenu-link-color;
         padding: 8px 0;

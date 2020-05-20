@@ -20,7 +20,7 @@ describe('the header navigation feature for the default output type', () => {
   it('should be a nav element with class .news-theme-navigation', () => {
     const wrapper = mount(<Navigation />);
 
-    expect(wrapper.find('nav').hasClass('news-theme-navigation-chain')).toBe(true);
+    expect(wrapper.find('nav').hasClass('news-theme-navigation-container')).toBe(true);
   });
 
   it('should render a SearchBox component in the top navbar', () => {
@@ -116,7 +116,7 @@ describe('the header navigation feature for the default output type', () => {
       getProperties.mockImplementation(() => ({ navColor: 'dark' }));
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('.news-theme-navigation-chain')).toHaveClassName('dark');
+      expect(wrapper.find('.news-theme-navigation-container')).toHaveClassName('dark');
     });
 
     it('should set all buttons to use the light color scheme', () => {
@@ -139,7 +139,7 @@ describe('the header navigation feature for the default output type', () => {
       getProperties.mockImplementation(() => ({ navColor: 'light' }));
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('.news-theme-navigation-chain')).toHaveClassName('light');
+      expect(wrapper.find('.news-theme-navigation-container')).toHaveClassName('light');
     });
     it('should set all buttons to use the light color scheme', () => {
       getProperties.mockImplementation(() => ({ navColor: 'light' }));

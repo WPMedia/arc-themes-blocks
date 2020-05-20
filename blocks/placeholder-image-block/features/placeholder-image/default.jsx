@@ -11,6 +11,7 @@ class PlaceholderImage extends React.Component {
     super(props);
     this.state = { resizedImageOptions: {} };
     this.fetch = this.fetch.bind(this);
+    this.getTargetFallbackImageUrl = this.getTargetFallbackImageUrl.bind(this);
     this.fetch();
   }
 
@@ -23,29 +24,16 @@ class PlaceholderImage extends React.Component {
     if (targetFallbackImage && !(targetFallbackImage.includes('http'))) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
+
     return targetFallbackImage;
   }
 
   fetch() {
     const targetFallbackImage = this.getTargetFallbackImageUrl();
-    const { resizedImageOptions } = this.state;
     this.fetchContent({
       resizedImageOptions: {
         source: 'resize-image-api',
         query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-        transform(newResizedImageOptions) {
-          // Check if obj empty is being returned
-          if (
-            typeof newResizedImageOptions === 'object'
-              && newResizedImageOptions !== null
-              && Object.keys(newResizedImageOptions).length > 0
-          ) {
-            return { ...resizedImageOptions, ...newResizedImageOptions };
-          }
-
-          // Otherwise just keep the current image options
-          return resizedImageOptions;
-        },
       },
     });
   }
@@ -53,12 +41,12 @@ class PlaceholderImage extends React.Component {
   render() {
     const {
       arcSite,
-      smallWidth,
-      smallHeight,
-      mediumWidth,
-      mediumHeight,
-      largeWidth,
-      largeHeight,
+      smallWidth = 105,
+      smallHeight = 105,
+      mediumWidth = 105,
+      mediumHeight = 105,
+      largeWidth = 105,
+      largeHeight = 105,
     } = this.props;
     const { resizedImageOptions } = this.state;
 

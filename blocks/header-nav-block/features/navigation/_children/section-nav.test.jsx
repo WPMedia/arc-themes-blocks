@@ -59,7 +59,7 @@ describe('the SectionNav component', () => {
   it('should render the href for a section node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(0)).toHaveProp('href', '/sports');
+    expect(wrapper.find('li.section-item > a').at(0)).toHaveProp('href', '/sports/');
   });
 
   it('should render the text for a link node correctly', () => {
@@ -71,7 +71,7 @@ describe('the SectionNav component', () => {
   it('should render the href for a link node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(1)).toHaveProp('href', '/entertainment');
+    expect(wrapper.find('li.section-item > a').at(1)).toHaveProp('href', '/entertainment/');
   });
 
   describe('when a section has child nodes', () => {
@@ -104,7 +104,30 @@ describe('the SectionNav component', () => {
     it('should render the href for a subsection link node correctly', () => {
       const wrapper = mount(<SectionNav sections={items} />);
 
-      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toHaveProp('href', '/basketball');
+      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toHaveProp('href', '/basketball/');
+    });
+  });
+
+  describe('when a link is not missing a trailing slash', () => {
+    const itemsNoSlash = [
+      {
+        _id: '/sports',
+        node_type: 'section',
+        name: 'Sports',
+        children: [
+          {
+            _id: 'foo',
+            node_type: 'link',
+            display_name: 'Basketball',
+            url: '/basketball/',
+          },
+        ],
+      },
+    ];
+    it('should not add a slash at the end of the link', () => {
+      const wrapper = mount(<SectionNav sections={itemsNoSlash} />);
+
+      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toHaveProp('href', '/basketball/');
     });
   });
 });

@@ -11,6 +11,7 @@ class PlaceholderImage extends React.Component {
     super(props);
     this.state = { resizedImageOptions: {} };
     this.fetch = this.fetch.bind(this);
+    this.getTargetFallbackImageUrl = this.getTargetFallbackImageUrl.bind(this);
     this.fetch();
   }
 
@@ -53,12 +54,12 @@ class PlaceholderImage extends React.Component {
   render() {
     const {
       arcSite,
-      smallWidth,
-      smallHeight,
-      mediumWidth,
-      mediumHeight,
-      largeWidth,
-      largeHeight,
+      smallWidth = 105,
+      smallHeight = 105,
+      mediumWidth = 105,
+      mediumHeight = 105,
+      largeWidth = 105,
+      largeHeight = 105,
     } = this.props;
     const { resizedImageOptions } = this.state;
 

@@ -43,7 +43,7 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList customFields={customFields} />);
+      const wrapper = shallow(<NumberedList customFields={customFields} arcSite="the-sun" />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
@@ -80,7 +80,7 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList customFields={customFields} />);
+      const wrapper = shallow(<NumberedList customFields={customFields} arcSite="the-sun" />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);

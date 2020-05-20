@@ -68,16 +68,16 @@ class NumberedList extends Component {
         {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
           const {
             headlines: { basic: headlineText } = {},
-            website_url: websiteUrl,
             promo_items: promoItems,
-            canonical_url: canonicalUrl,
+            websites,
           } = element;
+          const url = websites[arcSite].website_url;
           return (
-            <div className="numbered-list-item" key={`result-card-${canonicalUrl}`} type="1">
+            <div className="numbered-list-item" key={`result-card-${url}`} type="1">
               {showHeadline
               && (
               <a
-                href={websiteUrl}
+                href={url}
                 title={headlineText}
                 className="headline-list-anchor"
               >
@@ -88,14 +88,14 @@ class NumberedList extends Component {
               {showImage
               && (
               <a
-                href={websiteUrl}
+                href={url}
                 title={headlineText}
                 className="list-anchor-image"
               >
                 {extractImage(promoItems) ? (
                   <Image
                     resizedImageOptions={extractResizedParams(element)}
-                    url={extractImage(element.promo_items)}
+                    url={extractImage(promoItems)}
                     alt={headlineText}
                     // small, including numbered list, is 3:2 aspect ratio
                     smallWidth={105}

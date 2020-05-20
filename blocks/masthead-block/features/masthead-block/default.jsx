@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
+import { localizeDate } from '@wpmedia/engine-theme-sdk';
 
 // styles
 import MastheadItemsContainer from './_children/MastheadItemsContainer';
@@ -11,20 +14,19 @@ import HeaderContainerHideMobile from './_children/HeaderContainerHideMobile';
 
 import './masthead-block.scss';
 
-const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
-
-const showLocalMonthDateYear = (dateObject) => `${MONTH_NAMES[dateObject.getMonth()]} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
-
 const Masthead = (props) => {
   const {
     customFields: {
       tagLine, promoLinkURL, promoLinkText, logoURL, showDate,
-    }, arcSite,
+    },
   } = props;
-
+  const { arcSite } = useFusionContext();
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+
+  const {
+    dateLocalization: { language, timeZone, dateFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy' },
+  } = getProperties(arcSite);
+  const displayDate = localizeDate(new Date(), dateFormat, language, timeZone);
 
   return (
     <HeaderContainerHideMobile>
@@ -39,7 +41,7 @@ const Masthead = (props) => {
       }
       <MastheadItemsContainer primaryFont={primaryFont}>
         <div>
-          {showDate && <p className="masthead-block--text">{showLocalMonthDateYear(new Date())}</p>}
+          {showDate && <p className="masthead-block--text">{displayDate}</p>}
         </div>
         <div>
           {tagLine && <p className="masthead-block--text">{tagLine}</p>}

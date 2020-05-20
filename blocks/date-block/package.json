@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/engine-theme-sdk": "latest",
     "styled-components": "^4.4.0"
   }
 }

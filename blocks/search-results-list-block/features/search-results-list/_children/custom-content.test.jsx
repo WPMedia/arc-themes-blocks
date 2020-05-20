@@ -28,7 +28,7 @@ describe('The search results list', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData, searchTerm: 'test' }, () => {
       wrapper.update();
       it('should render a text input', () => {
@@ -67,7 +67,7 @@ describe('The search results list', () => {
   it('should render a list of stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -79,7 +79,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -136,7 +136,7 @@ describe('The search results list', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn()
       .mockReturnValue(LineItemWithOutDescription);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -164,7 +164,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly when list of authors is missing', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -180,7 +180,7 @@ describe('The search results list', () => {
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {

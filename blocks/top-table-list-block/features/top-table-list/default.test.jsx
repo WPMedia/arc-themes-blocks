@@ -85,6 +85,11 @@ describe('top table list', () => {
           credits: {
             by: ['Bob Woodward'],
           },
+          websites: {
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
         }],
       })),
     }));

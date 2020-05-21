@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React from 'react';
@@ -12,8 +13,28 @@ import { resizerURL } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 
+function getResizedImage(promo) {
+  if (promo?.basic?.type === 'image' && promo?.basic?.resized_params) {
+    return promo.basic.resized_params;
+  }
+
+  if (promo?.lead_art?.promo_items) {
+    return getResizedImage(promo.lead_art.promo_items);
+  }
+
+  return null;
+}
+
 function extractImage(promo) {
-  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  if (promo?.basic?.type === 'image' && promo?.basic?.url) {
+    return promo.basic.url;
+  }
+
+  if (promo?.lead_art?.promo_items) {
+    return extractImage(promo.lead_art.promo_items);
+  }
+
+  return null;
 }
 
 const HeadlineText = styled.h2`
@@ -82,30 +103,30 @@ class CardList extends React.Component {
                   id="card-list--link-container"
                 >
                   {
-                    extractImage(contentElements[0].promo_items) ? (
-                      <Image
-                        url={extractImage(contentElements[0].promo_items)}
-                        alt={contentElements[0].headlines.basic}
-                        smallWidth={377}
-                        smallHeight={283}
-                        mediumWidth={377}
-                        mediumHeight={283}
-                        largeWidth={377}
-                        largeHeight={283}
-                        resizedImageOptions={extractResizedParams(contentElements[0])}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                        resizerURL={resizerURL}
-                      />
-                    ) : (
-                      <PlaceholderImage
-                        smallWidth={377}
-                        smallHeight={283}
-                        mediumWidth={377}
-                        mediumHeight={283}
-                        largeWidth={377}
-                        largeHeight={283}
-                      />
-                    )
+                   extractImage(contentElements[0].promo_items) ? (
+                     <Image
+                       url={extractImage(contentElements[0].promo_items)}
+                       alt={contentElements[0].headlines.basic}
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
+                       resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
+                       resizerURL={resizerURL}
+                     />
+                   ) : (
+                     <PlaceholderImage
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
+                     />
+                   )
                   }
                   <Title
                     primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}

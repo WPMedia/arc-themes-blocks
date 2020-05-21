@@ -9,7 +9,9 @@ import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icon
 import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
-import './navigation.scss';
+// shares styles with header nav chain
+// can modify styles in shared styles block
+import '@wpmedia/shared-styles/scss/_header-nav.scss';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -94,7 +96,7 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav id="main-nav" className={`news-theme-navigation-feature ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
+      <StyledNav id="main-nav" className={`news-theme-navigation-container ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
 
         <div className="nav-left">
           <SearchBox iconSize={20} navBarColor={navColor} />

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/header-nav-block",
-  "version": "2.2.3-beta.0",
+  "version": "2.2.3-beta.1",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -30,6 +30,7 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
   }
 }

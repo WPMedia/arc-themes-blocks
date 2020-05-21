@@ -167,7 +167,14 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
-        return <Gallery galleryElements={lead_art.content_elements} resizerURL={resizerURL} />;
+        return (
+          <Gallery
+            galleryElements={lead_art.content_elements}
+            resizerURL={resizerURL}
+            ansId={content._id}
+            ansHeadline={content.headlines.basic ? content.headlines.basic : ''}
+          />
+        );
       }
       return null;
     }

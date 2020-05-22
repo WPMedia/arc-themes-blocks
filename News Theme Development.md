@@ -430,12 +430,12 @@ or `engine-theme-sdk` will require you stop and restart Fusion.
 1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally.
 
 
-~Fusion-News-Theme/.env~
+*Fusion-News-Theme/.env*
 ```
 resizerKey=[no brackets, should be decrypted resizer key in the env index]
 ```
 
-~fusion-news-theme-blocks/environment/index.json~
+fusion-news-theme-blocks/environment/index.json*
 
 ```json
 
@@ -448,7 +448,7 @@ resizerKey=[no brackets, should be decrypted resizer key in the env index]
 
 2. Ensure you have your corresponding resizer url for the resizer key for your org. This can also be managed on a per site basis.
 
-~fusion-news-theme-blocks/environment/index.json~
+*fusion-news-theme-blocks/environment/index.json*
 
 ```json
 
@@ -461,7 +461,7 @@ resizerKey=[no brackets, should be decrypted resizer key in the env index]
 
 3. If you are creating a custom block using the engine-theme-sdk Image component, you will need to import and pass in the resizerURL so that the thumbor url can be recreated.
 
-~fusion-news-theme-blocks/blocks/custom-image-block/index.js~
+*fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
 import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -492,7 +492,7 @@ const CustomImageBlock = ({ rawImageURL }) => {
 export default CustomImageBlock;
 ```
 
-~Fusion-News-Theme/blocks.json~
+*Fusion-News-Theme/blocks.json*
 ```json
   "blocks": [
     "@wpmedia/resizer-image-block",
@@ -557,7 +557,7 @@ const ImageItem = ({ contentElement }) => (
 
 5. Add breakpoints based on expected device size (ie, mobile, tablet, desktop) for resizer image media queries.
 
-~Fusion-News-Theme/blocks.json~
+*Fusion-News-Theme/blocks.json*
 ```json
     "breakpoints": {
         "small": 0,
@@ -566,7 +566,7 @@ const ImageItem = ({ contentElement }) => (
     }
 ```
 
-~fusion-news-theme-blocks/blocks/custom-image-block/index.js~
+*fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
 import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -620,7 +620,7 @@ Both values `resizerURL` and `resizerKey` will be accessible via fusion getter m
 
 The resizerKey will only accessed via this helper. For security, this helper is accessed only server-side. To prevent possible misuse, this helper also has a window check to prevent client-side use.
 
-~Fusion-News-Theme/blocks.json~
+*Fusion-News-Theme/blocks.json*
 ```json
     "blocks": [
         "@wpmedia/resizer-image-block"
@@ -631,7 +631,7 @@ The resizerKey will only accessed via this helper. For security, this helper is 
 
 ```
 
-~fusion-news-theme-blocks/blocks/resizer-image-block/index.js~
+*fusion-news-theme-blocks/blocks/resizer-image-block/index.js*
 
 ```js
 import { resizerURL, resizerKey } from 'fusion:environment';

@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
+import getThemeStyle from 'fusion:themes';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
 
 const mockReturnData = mockData;
@@ -26,6 +27,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./custom-content');
+    getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
     const wrapper = shallow(<SearchResultsList />);
@@ -51,14 +53,22 @@ describe('The search results list', () => {
 
       describe('renders a search button', () => {
         it('should render a search button to search for results', () => {
-          expect(wrapper.find('button').at(0).length).toEqual(1);
-          expect(wrapper.find('button').at(0).text()).toEqual('Search');
+          expect(wrapper.find('.btn').at(0).length).toEqual(1);
+          expect(wrapper.find('.btn').at(0).text()).toEqual('Search');
         });
 
         it('should call fetchContent when clicked', () => {
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(0);
-          wrapper.find('button').at(0).simulate('click');
+          wrapper.find('.btn').at(0).simulate('click');
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+        });
+
+        it('should have the primary text as font family', () => {
+          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryFont', 'Open Sans');
+        });
+
+        it('should have the primary text as font family', () => {
+          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryColor', '#10c8cd');
         });
       });
     });
@@ -195,6 +205,14 @@ describe('The search results list', () => {
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
         (wrapper.find('.see-more')).childAt(0).simulate('click');
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
       });
     });
   });

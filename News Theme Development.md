@@ -334,6 +334,24 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 
 * When developing locally and you want to run your feature pack, please see the next section.
 
+##Event Listening
+The EventEmitter object, located in @wpmedia/engine-theme-sdk can be used to 
+publish and subscribe to events.  This can be useful for adding analytic tracking for a custom block.
+In fact, the Gallery component sends off events for when the next or previous image is viewed. These Gallery events are named
+`galleryImageNext` and `galleryImagePrevious` respectively.  If you wanted to listen to these events, the first thing is to import the EventEmitter object 
+into the block:<br /><br />
+`import { EventEmitter } from '@wpmedia/engine-theme-sdk'`
+<br /><br />
+Then create a callback function such as:
+<br /><br />
+`const myGalleryImageNext = (event) => {console.log('Here is the event: ', event);}`<br />
+`const myGalleryImagePrevious = (event) => {console.log('Here is the event: ', event);}`
+<br /><br />
+Then use you use your callback in subscribing to the event:
+<br /><br />
+`EventEmitter.subscribe('galleryImageNext', (event) => myGalleryImageNext(event));`
+`EventEmitter.subscribe('galleryImagePrevious', (event) => myGalleryImagePrevious(event));`
+
 ## Local Development Process
 
 ### Basic Local Development

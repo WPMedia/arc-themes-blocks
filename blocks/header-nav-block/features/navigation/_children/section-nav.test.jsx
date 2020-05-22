@@ -20,13 +20,25 @@ const items = [
         display_name: 'Dodgeball',
         url: '/dodgeball',
       },
+      {
+        _id: '/some-inactive-sub-section',
+        inactive: false,
+        node_type: 'section',
+        name: 'Some Inactive Section',
+      },
     ],
   },
   {
     _id: 'bar',
     node_type: 'link',
     display_name: 'Entertainment',
-    url: '/entertainment',
+    url: '/entertainment/',
+  },
+  {
+    _id: 'external',
+    node_type: 'link',
+    display_name: 'External Link',
+    url: 'http://washingtonpost.com/entertainment/',
   },
   {
     _id: '/some-inactive-section',
@@ -37,6 +49,13 @@ const items = [
 ];
 
 describe('the SectionNav component', () => {
+  it('should render children', () => {
+    const wrapper = shallow(<SectionNav><div className="child">Child Item</div></SectionNav>);
+
+    expect(wrapper.find('.child')).toHaveLength(1);
+    expect(wrapper.find('ul.section-menu')).toHaveLength(1);
+  });
+
   it('should render a .section-menu list', () => {
     const wrapper = shallow(<SectionNav />);
 
@@ -50,35 +69,35 @@ describe('the SectionNav component', () => {
     expect(wrapper.find('li.section-item')).toHaveLength(numActiveItems);
   });
 
-  it('should render the text for a section node correctly', () => {
+  it.only('should render the text for a section node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(0)).toIncludeText('Sports');
+    expect(wrapper.find('li.section-item > Link').at(0)).toIncludeText('Sports');
   });
 
   it('should render the href for a section node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(0)).toHaveProp('href', '/sports/');
+    expect(wrapper.find('li.section-item > Link').at(0)).toHaveProp('href', '/sports/');
   });
 
   it('should render the text for a link node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(1)).toIncludeText('Entertainment');
+    expect(wrapper.find('li.section-item > Link').at(1)).toIncludeText('Entertainment');
   });
 
   it('should render the href for a link node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > a').at(1)).toHaveProp('href', '/entertainment/');
+    expect(wrapper.find('li.section-item > Link').at(1)).toHaveProp('href', '/entertainment/');
   });
 
   describe('when a section has child nodes', () => {
     it('should render a .submenu-caret element inside the anchor tag', () => {
       const wrapper = mount(<SectionNav sections={items} />);
 
-      expect(wrapper.find('li.section-item > a > span.submenu-caret').at(0)).toHaveLength(1);
+      expect(wrapper.find('li.section-item > Link > span.submenu-caret').at(0)).toHaveLength(1);
     });
 
     it('should render a .subsection-container', () => {
@@ -98,13 +117,20 @@ describe('the SectionNav component', () => {
     it('should render the text for a subsection link node correctly', () => {
       const wrapper = mount(<SectionNav sections={items} />);
 
-      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toIncludeText('Basketball');
+      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > Link').at(0)).toIncludeText('Basketball');
     });
 
     it('should render the href for a subsection link node correctly', () => {
       const wrapper = mount(<SectionNav sections={items} />);
 
-      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toHaveProp('href', '/basketball/');
+      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > Link').at(0)).toHaveProp('href', '/basketball/');
+    });
+
+    it('should render target and rel attribute for external links', () => {
+      const wrapper = mount(<SectionNav sections={items} />);
+
+      expect(wrapper.find('li.section-item > Link').at(1)).toHaveProp('target', '/_blank/');
+      expect(wrapper.find('li.section-item > Link').at(1)).toHaveProp('rel', '/noopener noreferrer/');
     });
   });
 
@@ -127,7 +153,7 @@ describe('the SectionNav component', () => {
     it('should not add a slash at the end of the link', () => {
       const wrapper = mount(<SectionNav sections={itemsNoSlash} />);
 
-      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > a').at(0)).toHaveProp('href', '/basketball/');
+      expect(wrapper.find('.subsection-container').at(0).find('li.subsection-item > Link').at(0)).toHaveProp('href', '/basketball/');
     });
   });
 });

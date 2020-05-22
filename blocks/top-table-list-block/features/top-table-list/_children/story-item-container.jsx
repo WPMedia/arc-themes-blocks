@@ -33,7 +33,7 @@ class StoryItemContainer extends Component {
           itemTitle={itemTitle}
           imageURL={imageURL}
           displayDate={displayDate}
-          description={description}
+          descriptionText={description}
           by={by}
           element={element}
           overlineDisplay={overlineDisplay}

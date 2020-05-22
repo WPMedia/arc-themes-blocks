@@ -659,11 +659,6 @@ const getResizerParam = (
 }
 ```
 
-
-
-
-
-
 ### Images 
 
 - If images are not displaying, check that you have a resizerKey in your .env file 

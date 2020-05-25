@@ -21,11 +21,12 @@ class GlobalSearchResultsList extends React.Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
+    const query = props.globalContent.metadata && props.globalContent.metadata.q;
     this.state = {
       storedList: {},
       resultList: {},
       page: 1,
-      value: '',
+      value: query || '',
     };
   }
 
@@ -78,6 +79,7 @@ class GlobalSearchResultsList extends React.Component {
       resultList: {
         data: moreStories,
       } = {},
+      value,
     } = this.state;
     const results = moreStories || data;
     return (
@@ -89,7 +91,8 @@ class GlobalSearchResultsList extends React.Component {
             </div>
             <input
               type="text"
-              placeholder="Enter your search terms here"
+              placeholder="Enter your search terms"
+              value={value}
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />

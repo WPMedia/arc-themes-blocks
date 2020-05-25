@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
@@ -15,6 +16,10 @@ import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
+
+const StyledInput = styled.input`
+  font-family: ${(props) => props.primaryFont};
+`;
 
 @Consumer
 class GlobalSearchResultsList extends React.Component {
@@ -89,12 +94,13 @@ class GlobalSearchResultsList extends React.Component {
             <div className="search-icon-container">
               <SearchIcon fill="#979797" />
             </div>
-            <input
+            <StyledInput
               type="text"
               placeholder="Enter your search terms"
               value={value}
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             />
             <button
               type="button"

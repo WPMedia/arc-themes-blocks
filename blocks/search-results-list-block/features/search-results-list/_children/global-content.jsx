@@ -21,7 +21,7 @@ import './search-results-list.scss';
 const StyledInput = styled.input`
   font-family: ${(props) => props.primaryFont};
 `;
-  
+
 const StyledButton = styled.button`
   && {
     background-color: ${(props) => props.primaryColor};

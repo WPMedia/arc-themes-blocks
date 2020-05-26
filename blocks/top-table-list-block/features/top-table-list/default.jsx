@@ -91,13 +91,13 @@ const TopTableList = (props) => {
             displayDate,
             description,
             by,
-            websiteURL,
             element,
             overlineDisplay,
             overlineUrl,
             overlineText,
             resizedImageOptions,
           } = itemObject;
+          const url = (element.websites) ? element.websites[arcSite].website_url : '';
           return (
             <StoryItemContainer
               id={itemId}
@@ -106,7 +106,7 @@ const TopTableList = (props) => {
               displayDate={displayDate}
               description={description}
               by={by}
-              websiteURL={websiteURL}
+              websiteURL={url}
               element={element}
               overlineDisplay={overlineDisplay}
               overlineUrl={overlineUrl}

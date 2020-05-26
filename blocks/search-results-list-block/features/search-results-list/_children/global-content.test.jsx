@@ -24,7 +24,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
+    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
     it('should render a text input', () => {
       expect(wrapper.find('.search-bar').length).toEqual(1);
       expect(wrapper.find('.search-bar').prop('placeholder')).toEqual('Enter your search terms here');
@@ -70,7 +70,7 @@ describe('The search results list', () => {
 
   it('should render a list of stories', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={mockData} />);
+    const wrapper = shallow(<SearchResultsList globalContent={mockData} arcSite="the-sun" />);
     expect(wrapper.find('.results-list-container').length).toEqual(1);
     expect(wrapper.find('.list-item').length).toEqual(28);
     expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
@@ -78,7 +78,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
+    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
     it('should have one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
     });
@@ -131,7 +131,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly when description is missing', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={LineItemWithOutDescription} />);
+    const wrapper = shallow(<SearchResultsList globalContent={LineItemWithOutDescription} arcSite="the-sun" />);
     it('should render one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
     });
@@ -155,7 +155,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly when list of authors is missing', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={withoutByline} />);
+    const wrapper = shallow(<SearchResultsList globalContent={withoutByline} arcSite="the-sun" />);
     it('should render one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
     });
@@ -167,7 +167,7 @@ describe('The search results list', () => {
 
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
+    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
     it('should render a button to display more stories', () => {
       expect((wrapper.find('.see-more')).childAt(0).length).toEqual(1);
     });

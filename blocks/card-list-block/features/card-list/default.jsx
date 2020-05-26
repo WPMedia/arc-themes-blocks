@@ -74,7 +74,6 @@ class CardList extends React.Component {
       && contentElements[0].credits.by
       && contentElements[0].credits.by.length !== 0
     );
-
     return (
       (contentElements.length > 0
         && (
@@ -94,10 +93,10 @@ class CardList extends React.Component {
               }
               <div
                 className="list-item-simple"
-                key={`result-card-${contentElements[0].canonical_url}`}
+                key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a
-                  href={contentElements[0].website_url}
+                  href={contentElements[0].websites[arcSite].website_url}
                   title={contentElements[0].headlines.basic}
                   className="list-anchor"
                   id="card-list--link-container"
@@ -159,10 +158,11 @@ class CardList extends React.Component {
                     headlines: { basic: headlineText } = {},
                     website_url: websiteUrl,
                   } = element;
+                  const url = element.websites[arcSite].website_url;
                   return (
                     <div
                       className="card-list-item"
-                      key={`result-card-${element.canonical_url}`}
+                      key={`result-card-${url}`}
                       type="1"
                     >
                       <a
@@ -178,7 +178,7 @@ class CardList extends React.Component {
                         </HeadlineText>
                       </a>
                       <a
-                        href={websiteUrl}
+                        href={url}
                         title={headlineText}
                         className="list-anchor-image"
                       >

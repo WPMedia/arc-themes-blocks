@@ -143,6 +143,10 @@ const getResizedImageParams = (data, option) => {
               contentElement.url,
             );
           }
+          if (contentElement.type === 'gallery') {
+            // recursively resize if gallery
+            return generateParams(contentElement);
+          }
           // if (contentElement.promo_items && contentElement.promo_items.basic) {
           //   contentElement.promo_items.basic = resizePromoItems(
           //     contentElement.promo_items.basic,

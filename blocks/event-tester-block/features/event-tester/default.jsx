@@ -30,4 +30,6 @@ class EventTester extends Component {
   }
 }
 
+EventTester.label = 'EventTester – Arc Block';
+
 export default EventTester;

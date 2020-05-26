@@ -7,6 +7,7 @@ import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { resizerURL } from 'fusion:environment';
@@ -21,7 +22,7 @@ import './search-results-list.scss';
 const StyledInput = styled.input`
   font-family: ${(props) => props.primaryFont};
 `;
-  
+
 const StyledButton = styled.button`
   && {
     background-color: ${(props) => props.primaryColor};
@@ -41,6 +42,8 @@ class GlobalSearchResultsList extends React.Component {
       page: 1,
       value: query || '',
     };
+    this.locale = getProperties(this.arcSite).locale || 'en';
+    this.phrases = getTranslatedPhrases(this.locale);
   }
 
   fetchStories() {
@@ -118,13 +121,13 @@ class GlobalSearchResultsList extends React.Component {
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               onClick={() => this.handleSearch()}
             >
-              Search
+              {this.phrases.t('search-results-block.search-button')}
             </StyledButton>
           </div>
           {
             data && (
               <p className="search-results-text">
-                {`${totalHits} Results for “${query}”`}
+                {this.phrases.t('search-results-block.search-result-number', { smart_count: totalHits, searchTerm: query })}
               </p>
             )
           }
@@ -218,11 +221,13 @@ class GlobalSearchResultsList extends React.Component {
                   primaryColor={getThemeStyle(arcSite)['primary-color']}
                   primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                 >
-                  See More
+                  {this.phrases.t('search-results-block.see-more-button')}
                   {' '}
-                  <span className="visuallyHidden">
-                    stories about this topic
-                  </span>
+                  {this.locale === 'en' && (
+                    <span className="visuallyHidden">
+                      stories about this topic
+                    </span>
+                  )}
                 </StyledButton>
               </div>
             )

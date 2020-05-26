@@ -1,6 +1,8 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
 describe('article-body chain', () => {
   describe('when it is initialized', () => {
     it('should render correctly with one parent container', () => {

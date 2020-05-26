@@ -1,11 +1,20 @@
-/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
+/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
+// import getTranslatedPhrases from 'fusion:intl';
+// import getProperties from 'fusion:properties';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
 
-jest.mock('fusion:themes', () => jest.fn(() => ({})));
+jest.mock('fusion:themes', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' })),
+}));
 jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
+}));
 
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
@@ -25,7 +34,6 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./global-content');
-    getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
 
     it('should render a text input', () => {
@@ -34,7 +42,7 @@ describe('The search results list', () => {
     });
 
     it('should show the total number of hits', () => {
-      expect(wrapper.find('.search-results-text').text()).toEqual('50 Results for “test”');
+      expect(wrapper.find('.search-results-text').text()).toEqual('%{smart_count} result for "%{searchTerm}" |||| %{smart_count} results for "%{searchTerm}"');
     });
 
     describe('renders a search button', () => {
@@ -181,22 +189,49 @@ describe('The search results list', () => {
   });
 
   describe('renders a button to display more stories', () => {
-    const { default: SearchResultsList } = require('./global-content');
-    const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
     it('should render a button to display more stories', () => {
-      expect((wrapper.find('.see-more')).childAt(0).length).toEqual(1);
-    });
-
-    it('should have invisible text for accessibility purposes', () => {
-      expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
+      const { default: SearchResultsList } = require('./global-content');
+      const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
+      expect(wrapper.find('.see-more').childAt(0).length).toEqual(1);
     });
 
     it('should have the primary text as font family', () => {
+      const { default: SearchResultsList } = require('./global-content');
+      const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
       expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
     });
 
     it('should have the primary text as font family', () => {
+      const { default: SearchResultsList } = require('./global-content');
+      const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
       expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
+    });
+
+    describe('when the locale is unset', () => {
+      // TODO
+      // it('should have invisible text for accessibility when using the default English', () => {
+      //   getTranslatedPhrases.mockImplementation((locale) => ({
+      //     t: jest.fn(() => ({ en: 'See More', sv: 'Visa fler' })[locale]),
+      //   }));
+      //   const { default: SearchResultsList } = require('./global-content');
+      //   const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
+      //   expect(wrapper.find('.see-more').childAt(0).text()).toEqual('See More stories about this topic');
+      // });
+    });
+
+    describe('when the locale is set', () => {
+      // TODO
+      // it('should not have invisible text for accessibility', () => {
+      //   getTranslatedPhrases.mockImplementation((locale) => ({
+      //     t: jest.fn(() => ({ en: 'See More', sv: 'Visa fler' })[locale]),
+      //   }));
+      //   getProperties.mockImplementation(() => ({
+      //     locale: 'sv',
+      //   }));
+      //   const { default: SearchResultsList } = require('./global-content');
+      //   const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
+      //   expect(wrapper.find('.see-more').childAt(0).text()).toEqual('Visa fler');
+      // });
     });
   });
 });

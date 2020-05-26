@@ -162,6 +162,12 @@ const getResizedImageParams = (data, option) => {
       );
     }
 
+    if (sourceData && sourceData.promo_items && sourceData.promo_items.lead_art) {
+      sourceData.promo_items.lead_art = resizePromoItems(
+        sourceData.promo_items.lead_art,
+      );
+    }
+
     if (sourceData?.promo_items?.lead_art?.content_elements) {
       // recursive if I find content elements
       // find content elements

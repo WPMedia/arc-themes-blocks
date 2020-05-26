@@ -12,6 +12,7 @@ import mockSearchApiData from './mockSearchApiData';
 import mockCreditsData from './mockCreditsData';
 import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
 import mockLeadArtData from './mockLeadArtData';
+import topLeveLeadArt from './topLevelLeadArt';
 import galleryResizeData from './galleryResizeData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
@@ -207,5 +208,21 @@ describe('get resized image data helper on the server-side', () => {
         '274x183': '/7sIpUrg_ehT1iJ9gAnFgPGmm7So=filters:format(jpg):quality(70)/',
         '274x206': '/gJXVPdVLug6x7R899x-K90w6CXo=filters:format(jpg):quality(70)/',
       });
+  });
+  it('takes in lead art on the top level data', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+      }));
+
+    const dataWithResizedImages = getResizedImageData(topLeveLeadArt);
+    expect(dataWithResizedImages.promo_items.lead_art.resized_params).toEqual({
+      '158x105': '/I9PStk1gjBSf260jZTioN4u_RPo=filters:format(jpg):quality(70)/',
+      '158x119': '/-bLoWbHajT6EMnuJq9KILDWTk9k=filters:format(jpg):quality(70)/',
+      '274x183': '/3iOl2XDNsie7ZxxlpRagvADtkio=filters:format(jpg):quality(70)/',
+      '274x206': '/P5WszqbW7D4BknEyLhffQi2ulIk=filters:format(jpg):quality(70)/',
+    });
   });
 });

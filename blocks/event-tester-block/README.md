@@ -1,6 +1,6 @@
 # `@wpmedia/event-tester-block`
 
-Fusion News Theme date block
+Fusion News Theme event tester block
 
 ## Usage
 

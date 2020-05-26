@@ -12,6 +12,7 @@ import mockSearchApiData from './mockSearchApiData';
 import mockCreditsData from './mockCreditsData';
 import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
 import mockLeadArtData from './mockLeadArtData';
+import topLeveLeadArt from './topLevelLeadArt';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -197,5 +198,21 @@ describe('get resized image data helper on the server-side', () => {
       '158x119',
       '274x206',
     ]);
+  });
+  it('takes in lead art on the top level data', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+      }));
+
+    const dataWithResizedImages = getResizedImageData(topLeveLeadArt);
+    expect(dataWithResizedImages.promo_items.lead_art.resized_params).toEqual({
+      '158x105': '/I9PStk1gjBSf260jZTioN4u_RPo=filters:format(jpg):quality(70)/',
+      '158x119': '/-bLoWbHajT6EMnuJq9KILDWTk9k=filters:format(jpg):quality(70)/',
+      '274x183': '/3iOl2XDNsie7ZxxlpRagvADtkio=filters:format(jpg):quality(70)/',
+      '274x206': '/P5WszqbW7D4BknEyLhffQi2ulIk=filters:format(jpg):quality(70)/',
+    });
   });
 });

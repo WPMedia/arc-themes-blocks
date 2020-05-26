@@ -30,7 +30,7 @@ describe('The search results list', () => {
 
     it('should render a text input', () => {
       expect(wrapper.find('.search-bar').length).toEqual(1);
-      expect(wrapper.find('.search-bar').prop('placeholder')).toEqual('Enter your search terms here');
+      expect(wrapper.find('.search-bar').prop('placeholder')).toEqual('Enter your search terms');
     });
 
     it('should show the total number of hits', () => {

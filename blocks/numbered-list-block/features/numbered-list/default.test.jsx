@@ -43,7 +43,7 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList customFields={customFields} arcSite="the-sun" />);
+      const wrapper = shallow(<NumberedList customFields={customFields} arcSite="the-sun" deployment={jest.fn()} />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
@@ -80,7 +80,11 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList customFields={customFields} arcSite="the-sun" />);
+      const wrapper = shallow(<NumberedList
+        customFields={customFields}
+        deployment={jest.fn()}
+        arcSite="the-sun"
+      />);
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
@@ -88,7 +92,7 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').length).toEqual(1);
         const placeholderImage = wrapper.find('.numbered-list-container').childAt(3).find('.list-anchor-image').children();
         // the placeholder component is mocked globally in jest mocks with this alt tag
-        expect(placeholderImage.html()).toEqual('<img alt="placeholder"/>');
+        expect(placeholderImage.html()).toEqual('<img alt="test"/>');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Story with video as the Lead Art');
       });

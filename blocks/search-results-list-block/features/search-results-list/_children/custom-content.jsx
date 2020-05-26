@@ -1,6 +1,7 @@
-import PropTypes from 'prop-types';
-import Consumer from 'fusion:consumer';
 import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Consumer from 'fusion:consumer';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
@@ -21,6 +22,13 @@ import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 // not shared with results list
 import './search-results-list.scss';
+
+const StyledButton = styled.button`
+  && {
+    background-color: ${(props) => props.primaryColor};
+    font-family: ${(props) => props.primaryFont};
+  } 
+`;
 
 @Consumer
 class CustomSearchResultsList extends React.Component {
@@ -103,13 +111,15 @@ class CustomSearchResultsList extends React.Component {
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />
-            <button
+            <StyledButton
               type="button"
               className="btn btn-sm"
+              primaryColor={getThemeStyle(arcSite)['primary-color']}
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               onClick={() => this.fetchStories(false)}
             >
               Search
-            </button>
+            </StyledButton>
           </div>
           {
             data && (
@@ -202,17 +212,19 @@ class CustomSearchResultsList extends React.Component {
           {
             !!(data && data.length > 0 && data.length < totalHits) && (
               <div className="see-more">
-                <button
+                <StyledButton
                   type="button"
                   onClick={() => this.fetchStories(true)}
                   className="btn btn-sm"
+                  primaryColor={getThemeStyle(arcSite)['primary-color']}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                 >
                   See More
                   {' '}
                   <span className="visuallyHidden">
                     stories about this topic
                   </span>
-                </button>
+                </StyledButton>
               </div>
             )
           }

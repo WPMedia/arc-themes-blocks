@@ -10,3 +10,4 @@ Makes use of ByLine to display authors of each story and it is included as a dep
 If there's one author, it will return `By <author>`
 If there are two authors, it will return `By <author_0> and <author_1>`
 If there are three or more authors, it will return with the pattern `By <author_0>, <author_1>, ... <author_(n-1)> and <author_(n)>`
+

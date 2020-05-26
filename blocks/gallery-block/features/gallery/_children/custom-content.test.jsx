@@ -13,6 +13,22 @@ jest.mock('fusion:content', () => ({
   })),
 }));
 
+const mockReturnData = {
+  arcSite: 'the-sun',
+  globalContent: {
+    _id: 'shdsjdhs73e34',
+    headlines: {
+      basic: 'This is a headline',
+    },
+  },
+};
+
+const mockFunction = jest.fn().mockReturnValue(mockReturnData);
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: mockFunction,
+}));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Gallery: (props, children) => <div {...props}>{ children }</div>,
 }));
@@ -42,6 +58,8 @@ describe('the custom content gallery', () => {
             },
           ],
           resizerURL: 'https://fake.cdn.com/resizer',
+          ansId: 'shdsjdhs73e34',
+          ansHeadline: 'This is a headline',
         },
       );
     });
@@ -58,6 +76,8 @@ describe('the custom content gallery', () => {
         {
           galleryElements: [],
           resizerURL: 'https://fake.cdn.com/resizer',
+          ansId: 'shdsjdhs73e34',
+          ansHeadline: 'This is a headline',
         },
       );
     });

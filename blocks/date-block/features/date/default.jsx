@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { localizeDateTime } from '@wpmedia/engine-theme-sdk';
 import Consumer from 'fusion:consumer';
+import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import { TIMEZONE } from 'fusion:environment';
 import './date.scss';
 
 const StyledTime = styled.time`
@@ -26,23 +27,12 @@ class ArticleDate extends Component {
     // If it has a date prop then set dateString to the
     // date recieved from prop instead of the date from globalContent
     const dateString = date || globalDateString;
-    // Convert the time to browser's local time using the ECMAScript Internationalization API
-    // Browser support found here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString
-    const displayDate = (dateString && Date.parse(dateString)) // check if it's a valid time string
-      ? new Intl.DateTimeFormat('en', {
-        year: 'numeric',
-        day: 'numeric',
-        month: 'long',
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZone: (TIMEZONE && TIMEZONE !== '') ? TIMEZONE : undefined,
-        timeZoneName: 'short',
-      }).format(new Date(dateString))
-        .replace(/(,)(.*?)(,)/, '$1$2 at')
-        .replace('PM', 'p.m.')
-        .replace('AM', 'a.m.')
-      : '';
 
+    const { arcSite } = this.props;
+    const {
+      dateLocalization: { language, timeZone, dateTimeFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy \'at\' K:m bbbb z' },
+    } = getProperties(arcSite);
+    const displayDate = (dateString && Date.parse(dateString)) ? localizeDateTime(new Date(dateString), dateTimeFormat, language, timeZone) : '';
     this.state = { displayDate };
   }
 

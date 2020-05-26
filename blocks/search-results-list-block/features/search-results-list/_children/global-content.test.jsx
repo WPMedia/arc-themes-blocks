@@ -1,6 +1,7 @@
 /* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
+import getThemeStyle from 'fusion:themes';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
@@ -24,7 +25,9 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./global-content');
+    getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
+
     it('should render a text input', () => {
       expect(wrapper.find('.search-bar').length).toEqual(1);
       expect(wrapper.find('.search-bar').prop('placeholder')).toEqual('Enter your search terms here');
@@ -36,8 +39,20 @@ describe('The search results list', () => {
 
     describe('renders a search button', () => {
       it('should render a search button to search for results', () => {
-        expect(wrapper.find('button').at(0).length).toEqual(1);
-        expect(wrapper.find('button').at(0).text()).toEqual('Search');
+        expect(wrapper.find('.btn').at(0).length).toEqual(1);
+        expect(wrapper.find('.btn').at(0).text()).toEqual('Search');
+      });
+
+      it('should have the primary color as background color', () => {
+        expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.btn').at(0))).toHaveProp('primaryFont', 'Open Sans');
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.btn').at(0))).toHaveProp('primaryColor', '#10c8cd');
       });
     });
 
@@ -52,7 +67,7 @@ describe('The search results list', () => {
         wrapper.setState({ value: 'article' }, () => {
           wrapper.update();
           expect(wrapper.state('value')).toEqual('article');
-          wrapper.find('button').at(0).simulate('click');
+          wrapper.find('.btn').at(0).simulate('click');
           expect(window.location.href).toEqual('/search/article');
         });
       });
@@ -61,7 +76,7 @@ describe('The search results list', () => {
         wrapper.setState({ value: '' }, () => {
           wrapper.update();
           expect(wrapper.state('value')).toEqual('');
-          wrapper.find('button').at(0).simulate('click');
+          wrapper.find('.btn').at(0).simulate('click');
           expect(window.location.href).toEqual('');
         });
       });
@@ -174,6 +189,14 @@ describe('The search results list', () => {
 
     it('should have invisible text for accessibility purposes', () => {
       expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
+    });
+
+    it('should have the primary text as font family', () => {
+      expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
+    });
+
+    it('should have the primary text as font family', () => {
+      expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
     });
   });
 });

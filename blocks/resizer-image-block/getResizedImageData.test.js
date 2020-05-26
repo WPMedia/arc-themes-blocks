@@ -12,6 +12,7 @@ import mockSearchApiData from './mockSearchApiData';
 import mockCreditsData from './mockCreditsData';
 import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
 import mockLeadArtData from './mockLeadArtData';
+import galleryResizeData from './galleryResizeData';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -176,8 +177,6 @@ describe('get resized image data helper on the server-side', () => {
       .lead_art
       .promo_items.basic.resized_params;
 
-    const paramKeys = Object.keys(resizedParams);
-
     const filterValues = Object.values(resizedParams);
 
     // if the same resizer key is used this won't change
@@ -190,12 +189,23 @@ describe('get resized image data helper on the server-side', () => {
 
     const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
     expect(allValidFilterValues).toEqual(true);
+  });
 
-    expect(paramKeys).toEqual([
-      '158x105',
-      '274x183',
-      '158x119',
-      '274x206',
-    ]);
+  it('resizes recursively for content type gallery', () => {
+    getProperties.mockImplementation(() => ({
+      breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+      aspectRatios: ASPECT_RATIOS,
+      imageWidths: IMAGE_WIDTHS,
+    }));
+
+    const resizedObject = getResizedImageData(galleryResizeData);
+
+    expect(resizedObject.content_elements[0].content_elements[0].resized_params)
+      .toEqual({
+        '158x105': '/C1z9lDKfadVti7Pph_eivOnRUTo=filters:format(jpg):quality(70)/',
+        '158x119': '/Z34lUtK2CgTEqUQ3b9yIXKcqDak=filters:format(jpg):quality(70)/',
+        '274x183': '/7sIpUrg_ehT1iJ9gAnFgPGmm7So=filters:format(jpg):quality(70)/',
+        '274x206': '/gJXVPdVLug6x7R899x-K90w6CXo=filters:format(jpg):quality(70)/',
+      });
   });
 });

@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^0.5.2",
+    "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
   },

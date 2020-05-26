@@ -4,7 +4,9 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
-import { Gallery, ImageMetadata, Image } from '@wpmedia/engine-theme-sdk';
+import {
+  Gallery, ImageMetadata, Image,
+} from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import List from './_children/list';
@@ -144,7 +146,12 @@ function parseArticleItem(item, index, arcSite) {
     case 'gallery':
       return (
         <section className="block-margin-bottom gallery">
-          <Gallery galleryElements={item.content_elements} />
+          <Gallery
+            galleryElements={item.content_elements}
+            resizerURL={resizerURL}
+            ansId={item._id}
+            ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
+          />
         </section>
       );
     default:

@@ -334,7 +334,7 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 
 * When developing locally and you want to run your feature pack, please see the next section.
 
-##Event Listening
+## Event Listening
 The EventEmitter object, located in @wpmedia/engine-theme-sdk can be used to 
 publish and subscribe to events.  This can be useful for adding analytic tracking for a custom block.
 In fact, the Gallery component sends off events for when the next or previous image is viewed. These Gallery events are named

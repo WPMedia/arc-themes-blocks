@@ -144,7 +144,7 @@ function parseArticleItem(item, index, arcSite) {
     case 'gallery':
       return (
         <section className="block-margin-bottom gallery">
-          <Gallery galleryElements={item.content_elements} />
+          <Gallery galleryElements={item.content_elements} resizerURL={resizerURL} />
         </section>
       );
     default:

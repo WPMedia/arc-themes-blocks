@@ -1,10 +1,35 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { localizeDate } from '@wpmedia/engine-theme-sdk';
 import Masthead from './default';
 
+const mockContextObj = {
+  arcSite: 'the-sun',
+};
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockContextObj),
+}));
+
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  localizeDate: jest.fn(() => new Date().toDateString()),
+}));
+
 describe('the masthead block', () => {
+  getProperties.mockImplementation(() => ({
+    dateLocalization: {
+      language: 'en',
+      timeZone: 'America/New_York',
+      dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+      dateFormat: 'LLLL d, yyyy',
+    },
+  }));
+  useFusionContext.mockImplementation(() => mockContextObj);
   getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
+  localizeDate.mockImplementation(() => new Date().toDateString());
 
   it('hides image if none passed in', () => {
     const wrapper = mount(<Masthead customFields={{ logoURL: '' }} />);

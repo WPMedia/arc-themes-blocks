@@ -137,16 +137,17 @@ class CustomSearchResultsList extends React.Component {
                 headlines: { basic: headlineText } = {},
                 display_date: displayDate,
                 credits: { by } = {},
-                canonical_url: canonicalUrl,
                 promo_items: promoItems,
+                websites,
               } = element;
+              const url = websites[arcSite].website_url;
               const resizedImageOptions = extractResizedParams(element);
               const showSeparator = by && by.length !== 0;
               return (
-                <div className="list-item" key={`result-card-${canonicalUrl}`}>
+                <div className="list-item" key={`result-card-${url}`}>
                   <div className="results-list--image-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >
@@ -178,7 +179,7 @@ class CustomSearchResultsList extends React.Component {
                   </div>
                   <div className="results-list--headline-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >

@@ -334,6 +334,24 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 
 * When developing locally and you want to run your feature pack, please see the next section.
 
+##Event Listening
+The EventEmitter object, located in @wpmedia/engine-theme-sdk can be used to 
+publish and subscribe to events.  This can be useful for adding analytic tracking for a custom block.
+In fact, the Gallery component sends off events for when the next or previous image is viewed. These Gallery events are named
+`galleryImageNext` and `galleryImagePrevious` respectively.  If you wanted to listen to these events, the first thing is to import the EventEmitter object 
+into the block:<br /><br />
+`import { EventEmitter } from '@wpmedia/engine-theme-sdk'`
+<br /><br />
+Then create a callback function such as:
+<br /><br />
+`const myGalleryImageNext = (event) => {console.log('Here is the event: ', event);}`<br />
+`const myGalleryImagePrevious = (event) => {console.log('Here is the event: ', event);}`
+<br /><br />
+Then use you use your callback in subscribing to the event:
+<br /><br />
+`EventEmitter.subscribe('galleryImageNext', (event) => myGalleryImageNext(event));`
+`EventEmitter.subscribe('galleryImagePrevious', (event) => myGalleryImagePrevious(event));`
+
 ## Local Development Process
 
 ### Basic Local Development
@@ -424,6 +442,240 @@ so Fusion will now to exclude it from the npm install procedures.
     
 7) The major disadvantage of the classic development environment is that every change in either `fusion-news-theme-blocks`
 or `engine-theme-sdk` will require you stop and restart Fusion.
+
+### Secure Image Resizing Quickstart 
+
+1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally.
+
+
+*Fusion-News-Theme/.env*
+```
+resizerKey=[no brackets, should be decrypted resizer key in the env index]
+```
+
+fusion-news-theme-blocks/environment/index.json*
+
+```json
+
+{
+  ...
+  "resizerKey": "%{ladjfklkdfjldsjlkfjldkjf}"
+}
+
+```
+
+2. Ensure you have your corresponding resizer url for the resizer key for your org. This can also be managed on a per site basis.
+
+*fusion-news-theme-blocks/environment/index.json*
+
+```json
+
+{
+   ...
+  "resizerURL": "https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer",
+}
+
+```
+
+3. If you are creating a custom block using the engine-theme-sdk Image component, you will need to import and pass in the resizerURL so that the thumbor url can be recreated.
+
+*fusion-news-theme-blocks/blocks/custom-image-block/index.js*
+```jsx
+import { resizerURL } from 'fusion:environment';
+import { Image } from '@wpmedia/engine-theme-sdk';
+
+const CustomImageBlock = ({ rawImageURL }) => {
+    const resizedImageOptions = useContent({
+        source: 'resize-image-api',
+        query: { raw_image_url: rawImageURL },
+    });
+
+    return (
+        <Image
+            resizerURL={resizerURL}
+            resizedImageOptions={resizedImageOptions}
+            url={rawImageURL}
+            alt={'This is a placeholder placeholder'}
+            // 16:9 aspect ratio
+            smallWidth={274}
+            smallHeight={154}
+            mediumWidth={274}
+            mediumHeight={154}
+            largeWidth={400}
+            largeHeight={225}
+        />
+    )
+}
+
+export default CustomImageBlock;
+```
+
+*Fusion-News-Theme/blocks.json*
+```json
+  "blocks": [
+    "@wpmedia/resizer-image-block",
+    "@wpmedia/resizer-image-content-source-block",
+    "@yourorg/custom-image-block"
+  ],
+    "imageWidths": [
+        274,
+        400
+    ],
+    "aspectRatios": [
+        "16:9"
+    ]
+```
+
+4. Ensure that your existing content sources are using the `resizer-image-block` if you want to utilize engine-theme-sdk secure resizer image. That transform takes in items and transforms via ans schema. 
+
+There's also a helper in the package to extract the `resized_params` values.
+
+```js
+import getResizedImageData from '@wpmedia/resizer-image-block';
+
+export default {
+  resolve: (params) => `/content/v4/search/published?q=${params.query || '*'}`,
+  schemaName: 'ans-feed',
+  params: {
+    query: 'text',
+    size: 'number',
+    offset: 'number',
+  },
+  // key part for discussion v
+  transform: (data) => getResizedImageData(data),
+};
+```
+
+```jsx
+import { resizerURL } from 'fusion:environment';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+
+function extractImage(promo) {
+  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+}
+
+// ans schema content element
+const ImageItem = ({ contentElement }) => (
+    <Image
+        // results list is 16:9 by default
+        resizedImageOptions={extractResizedParams(element)}
+        url={extractImage(element.promo_items)}
+        alt={'This is a placeholder placeholder'}
+        smallWidth={158}
+        smallHeight={89}
+        mediumWidth={274}
+        mediumHeight={154}
+        largeWidth={274}
+        largeHeight={154}
+        resizerURL={resizerURL}
+    />
+)
+```
+
+5. Add breakpoints based on expected device size (ie, mobile, tablet, desktop) for resizer image media queries.
+
+*Fusion-News-Theme/blocks.json*
+```json
+    "breakpoints": {
+        "small": 0,
+        "medium": 768,
+        "large": 992
+    }
+```
+
+*fusion-news-theme-blocks/blocks/custom-image-block/index.js*
+```jsx
+import { resizerURL } from 'fusion:environment';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import getProperties from 'fusion:properties';
+
+const CustomImageBlock = ({ rawImageURL }) => {
+    const resizedImageOptions = useContent({
+        source: 'resize-image-api',
+        query: { raw_image_url: rawImageURL },
+    });
+
+    const { breakpoints } = getProperties(arcSite);
+
+    return (
+        <Image
+            resizerURL={resizerURL}
+            resizedImageOptions={resizedImageOptions}
+            url={rawImageURL}
+            alt={'This is a placeholder placeholder'}
+            // 16:9 aspect ratio
+            smallWidth={274}
+            smallHeight={154}
+            mediumWidth={274}
+            mediumHeight={154}
+            largeWidth={400}
+            largeHeight={225}
+            breakpoints={breakpoints}
+        />
+    )
+}
+
+export default CustomImageBlock;
+```
+
+Will translate to 
+
+```html
+<picture class="Image__StyledPicture-sc-8yioqf-0 dRTDJJ">
+    <source srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/400x225/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG" media="screen and (min-width: 992px)">
+    <source srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG" media="screen and (min-width: 768px)">
+    <source srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG" media="screen and (min-width: 0px)">
+
+    <img alt="In Albania, age-old traditions and Mediterranean beaches on the cheap " src="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG" width="274" height="183">
+</picture>
+```
+
+-----
+Technical Side Note:
+
+Both values `resizerURL` and `resizerKey` will be accessible via fusion getter methods. You can see how they are implemented in the content source image resizer. You will need to have `"@wpmedia/resizer-image-block"` in your `blocks` and, if using per-block linking, `devBlocks` arrays. 
+
+The resizerKey will only accessed via this helper. For security, this helper is accessed only server-side. To prevent possible misuse, this helper also has a window check to prevent client-side use.
+
+*Fusion-News-Theme/blocks.json*
+```json
+    "blocks": [
+        "@wpmedia/resizer-image-block"
+    ],
+    "devBlocks":[
+        "@wpmedia/resizer-image-block"
+    ]
+
+```
+
+*fusion-news-theme-blocks/blocks/resizer-image-block/index.js*
+
+```js
+import { resizerURL, resizerKey } from 'fusion:environment';
+
+const getResizerParam = (
+  originalUrl, targetWidth, targetHeight, filterQuality, format
+) => {
+  if (typeof window === 'undefined') {
+    const Thumbor = require('thumbor-lite');
+
+    const thumbor = new Thumbor(resizerKey, resizerURL);
+
+    thumborParam = thumbor
+      .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
+      .filter(`format(${format})`)
+      .filter(`quality(${filterQuality})`)
+      .resize(targetWidth, targetHeight)
+      .buildUrl();
+
+    // url to securely access thumbor image  
+    return thumborParam;
+  }
+
+  return null;
+}
+```
 
 ### Images 
 

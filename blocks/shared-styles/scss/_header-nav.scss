@@ -199,6 +199,11 @@ body.nav-open {
   left: 0;
   transition: transform 300ms ease-in-out;
   width: $section-width;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &.open {
     overflow-y: scroll;

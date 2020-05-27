@@ -5,6 +5,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
@@ -40,12 +41,16 @@ const StyledSectionDrawer = styled.div`
 /* Main Component */
 const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
-  const { primaryLogo, primaryLogoAlt, navColor } = getProperties(arcSite);
+  const {
+    primaryLogo, primaryLogoAlt, navColor, locale = 'en',
+  } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
 
   const { children = [], customFields: { hierarchy, signInOrder } = {} } = props;
 
@@ -96,9 +101,8 @@ const Nav = (props) => {
       <StyledNav className={`news-theme-navigation-container ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
 
         <div className="nav-left">
-          <SearchBox iconSize={20} navBarColor={navColor} />
+          <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} />
           <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-            <span>Sections</span>
             <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>
         </div>
@@ -116,7 +120,7 @@ const Nav = (props) => {
 
       <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
         <SectionNav sections={sections}>
-          <SearchBox alwaysOpen />
+          <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
         </SectionNav>
       </StyledSectionDrawer>
 

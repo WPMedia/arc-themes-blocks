@@ -2,6 +2,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
+
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../../intl.json')[phrase][locale]) })),
+}));
+
 // two classes for testing purposes
 jest.mock('./_children/global-content', () => class GlobalContentGallery {});
 jest.mock('./_children/custom-content', () => class CustomContentGallery {});
@@ -18,6 +26,7 @@ describe('the gallery feature block', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
       expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+      expect(typeof wrapper.props().phrases).toEqual('object');
     });
   });
 
@@ -36,7 +45,7 @@ describe('the gallery feature block', () => {
       const wrapper = shallow(
         <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
       );
-      expect(wrapper.props()).toStrictEqual({ contentConfig: {} });
+      expect(wrapper.props().contentConfig).toStrictEqual({});
     });
   });
 

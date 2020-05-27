@@ -10,6 +10,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { resizerURL } from 'fusion:environment';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
@@ -41,6 +42,7 @@ class CustomSearchResultsList extends React.Component {
       page: 1,
       searchTerm: '',
     };
+    this.phrases = getTranslatedPhrases(getProperties(this.arcSite).locale || 'en');
   }
 
   fetchStories(additionalStoryAmount) {
@@ -118,13 +120,13 @@ class CustomSearchResultsList extends React.Component {
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               onClick={() => this.fetchStories(false)}
             >
-              Search
+              {this.phrases.t('search-results-block.search-button')}
             </StyledButton>
           </div>
           {
             data && (
               <p className="search-results-text">
-                {`${totalHits} Results for “${searchTerm}”`}
+                {this.phrases.t('search-results-block.search-result-number', { smart_count: totalHits, searchTerm })}
               </p>
             )
           }
@@ -219,7 +221,7 @@ class CustomSearchResultsList extends React.Component {
                   primaryColor={getThemeStyle(arcSite)['primary-color']}
                   primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                 >
-                  See More
+                  {this.phrases.t('search-results-block.see-more-button')}
                   {' '}
                   <span className="visuallyHidden">
                     stories about this topic

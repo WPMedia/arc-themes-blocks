@@ -3,6 +3,8 @@ import Consumer from 'fusion:consumer';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import './byline.scss';
 
 const BylineSection = styled.section`
@@ -46,6 +48,8 @@ class ArticleByline extends Component {
       by: story?.credits?.by || globalContent?.credits?.by || [],
       arcSite: arcSite || '',
     };
+
+    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
   }
 
   render() {
@@ -83,7 +87,7 @@ class ArticleByline extends Component {
           break;
         }
         case 2: {
-          bylineString = `${authors[0]} and ${authors[1]}`;
+          bylineString = `${authors[0]} ${this.phrases.t('byline-block.and-text')} ${authors[1]}`;
           break;
         }
         default: {
@@ -93,7 +97,7 @@ class ArticleByline extends Component {
           }
 
           // Add last two authors in Oxford comma style
-          bylineString = `${bylineString}${authors[numAuthors - 2]} and ${authors[numAuthors - 1]}`;
+          bylineString = `${bylineString}${authors[numAuthors - 2]} ${this.phrases.t('byline-block.and-text')} ${authors[numAuthors - 1]}`;
           break;
         }
       }
@@ -107,7 +111,7 @@ class ArticleByline extends Component {
 
     return (
       <BylineSection primaryFont={getThemeStyle(arcSite)['primary-font-family']} className="byline" stylesFor={stylesFor}>
-        <By stylesFor={stylesFor}>By</By>
+        <By stylesFor={stylesFor}>{this.phrases.t('byline-block.by-text')}</By>
         <BylineNames dangerouslySetInnerHTML={{ __html: `${bylineString}` }} stylesFor={stylesFor} />
       </BylineSection>
     );

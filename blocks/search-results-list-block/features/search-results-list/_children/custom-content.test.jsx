@@ -8,6 +8,10 @@ const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
+}));
 
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
@@ -39,7 +43,7 @@ describe('The search results list', () => {
       });
 
       it('should show the total number of hits', () => {
-        expect(wrapper.find('.search-results-text').text()).toEqual('50 Results for “test”');
+        expect(wrapper.find('.search-results-text').text()).toEqual('%{smart_count} result for "%{searchTerm}" |||| %{smart_count} results for "%{searchTerm}"');
       });
 
       it('should set a search term', () => {

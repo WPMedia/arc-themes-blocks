@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image,
 } from '@wpmedia/engine-theme-sdk';
-import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import List from './_children/list';
 import Header from './_children/heading';
@@ -18,7 +19,7 @@ import Table from './_children/table';
 import './_articlebody.scss';
 
 
-function parseArticleItem(item, index, arcSite) {
+function parseArticleItem(item, index, arcSite, phrases) {
   const {
     _id: key = index, type, content,
   } = item;
@@ -151,6 +152,10 @@ function parseArticleItem(item, index, arcSite) {
             resizerURL={resizerURL}
             ansId={item._id}
             ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
+            expandPhrase={phrases.t('global.gallery-expand-button')}
+            autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
+            pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
+            pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
           />
         </section>
       );
@@ -187,6 +192,8 @@ const ArticleBodyChain = ({ children }) => {
   const { globalContent: items = {}, customFields = {}, arcSite } = useFusionContext();
   const { content_elements: contentElements = [], location } = items;
   const { elementPlacement: adPlacementConfigObj = {} } = customFields;
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const adPlacements = Object.keys(adPlacementConfigObj).map(
     (key) => ({ feature: +key, paragraph: +adPlacementConfigObj[key] }),
@@ -213,13 +220,13 @@ const ArticleBodyChain = ({ children }) => {
       // the current paragraph is the last or second-to-last paragraph.
       if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
         return [
-          parseArticleItem(contentElement, index, arcSite),
+          parseArticleItem(contentElement, index, arcSite, phrases),
           ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
         ];
       }
     }
 
-    return parseArticleItem(contentElement, index, arcSite);
+    return parseArticleItem(contentElement, index, arcSite, phrases);
   }));
 
   return (

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
+import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
 import {
   EnvelopeIcon,
@@ -86,6 +87,8 @@ const logos = {
 
 const FullAuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const socials = [];
   if (content.authors) {
@@ -151,7 +154,7 @@ const FullAuthorBio = () => {
 
         <div className="social-container">
           <p className="connect-label">
-            <strong>Connect</strong>
+            <strong>{phrases.t('full-author-bio-block.connect-text')}</strong>
           </p>
           <div className="social-items">
             {

@@ -2,13 +2,25 @@
 
 Fusion News Theme article-body block
 
+## Translation phrases
+
+| Phrase key | Default (English) |
+|---|---|
+|`global.gallery-expand-button`|`Expand`|
+|`global.gallery-autoplay-button`|`%{current} of %{total}`|
+|`global.gallery-pause-autoplay-button`|`Autoplay`|
+|`global.gallery-page-count-text`|`Pause autoplay`|
+
+
 ## Usage
 
-```
+```js
 const articleBodyBlock = require('@wpmedia/article-body-block');
 ```
-# Example ANS Schema:
-```
+
+## Example ANS Schema
+
+```json
 {
   "_id": "unique ANS id",
   "type": "story",

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import GlobalContentGallery from './_children/global-content';
 import CustomContentGallery from './_children/custom-content';
 
@@ -10,12 +12,15 @@ const GalleryFeature = (
       galleryContentConfig,
     } = {},
   } = {},
+  arcSite,
 ) => {
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
   if (inheritGlobalContent) {
-    return <GlobalContentGallery />;
+    return <GlobalContentGallery phrases={phrases} />;
   }
 
-  return <CustomContentGallery contentConfig={galleryContentConfig} />;
+  return <CustomContentGallery contentConfig={galleryContentConfig} phrases={phrases} />;
 };
 
 GalleryFeature.propTypes = {

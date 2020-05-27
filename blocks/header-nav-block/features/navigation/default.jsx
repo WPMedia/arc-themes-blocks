@@ -5,6 +5,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
 import SectionNav from './_children/section-nav';
@@ -47,13 +48,20 @@ const NavButton = styled.button`
 const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
 
-  const { primaryLogo, primaryLogoAlt, navColor = 'dark' } = getProperties(arcSite);
+  const {
+    primaryLogo,
+    primaryLogoAlt,
+    navColor = 'dark',
+    locale = 'en',
+  } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
     'primary-color': primaryColor = '#000',
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
 
   const { customFields: { hierarchy, showSignIn } = {} } = props;
 
@@ -99,9 +107,9 @@ const Nav = (props) => {
       <StyledNav id="main-nav" className={`news-theme-navigation-container ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
 
         <div className="nav-left">
-          <SearchBox iconSize={20} navBarColor={navColor} />
+          <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} />
           <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-            <span>Sections</span>
+            <span>{phrases.t('header-nav-block.sections-button')}</span>
             <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>
         </div>
@@ -116,7 +124,7 @@ const Nav = (props) => {
           {showSignIn
             && (
             <NavButton className={`nav-btn nav-sections-btn ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button" bgColor={primaryColor}>
-              <span>Sign In</span>
+              <span>{phrases.t('header-nav-block.sign-in-button')}</span>
               <UserIcon fill={null} height={iconSize} width={iconSize} />
             </NavButton>
             )}
@@ -125,7 +133,7 @@ const Nav = (props) => {
 
       <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
         <SectionNav sections={sections}>
-          <SearchBox alwaysOpen />
+          <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
         </SectionNav>
       </StyledSectionDrawer>
 

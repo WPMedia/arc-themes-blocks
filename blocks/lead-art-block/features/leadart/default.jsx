@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import {
@@ -10,7 +12,6 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
-import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 
 const LeadArtWrapperDiv = styled.div`
@@ -35,7 +36,7 @@ const LeadArtWrapperFigure = styled.figure`
 class LeadArt extends Component {
   constructor(props) {
     super(props);
-    const { globalContent: content, customFields } = this.props;
+    const { globalContent: content, customFields, arcSite } = this.props;
     this.state = {
       isOpen: false,
       enableZoom: customFields.enableZoom || false,
@@ -45,6 +46,7 @@ class LeadArt extends Component {
     };
 
     this.imgRef = React.createRef();
+    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
   }
 
   lightboxImgHandler() {
@@ -160,7 +162,7 @@ class LeadArt extends Component {
             {lightbox}
             {caption && (
               <figcaption>
-                { caption }
+                {caption}
               </figcaption>
             )}
 
@@ -173,6 +175,10 @@ class LeadArt extends Component {
             resizerURL={resizerURL}
             ansId={content._id}
             ansHeadline={content.headlines.basic ? content.headlines.basic : ''}
+            expandPhrase={this.phrases.t('global.gallery-expand-button')}
+            autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
+            pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
+            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
           />
         );
       }

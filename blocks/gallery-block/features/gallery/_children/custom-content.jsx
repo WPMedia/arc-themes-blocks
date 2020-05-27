@@ -4,7 +4,7 @@ import { Gallery } from '@wpmedia/engine-theme-sdk';
 import { resizerURL } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 
-const CustomContentGallery = ({ contentConfig }) => {
+const CustomContentGallery = ({ contentConfig, phrases }) => {
   const { globalContent: content } = useFusionContext();
   const { content_elements: contentElements = [] } = useContent({
     source: contentConfig.contentService,
@@ -17,6 +17,10 @@ const CustomContentGallery = ({ contentConfig }) => {
       resizerURL={resizerURL}
       ansId={content?._id ? content._id : ''}
       ansHeadline={content?.headlines?.basic ? content.headlines.basic : ''}
+      expandPhrase={phrases.t('global.gallery-expand-button')}
+      autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
+      pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
+      pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
     />
   );
 };

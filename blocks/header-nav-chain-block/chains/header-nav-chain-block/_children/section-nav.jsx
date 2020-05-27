@@ -3,22 +3,6 @@ import ChevronRight from '@wpmedia/engine-theme-sdk/dist/es/components/icons/Che
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
 
-function parseLinkData(node) {
-  if (node.node_type === 'section') {
-    return {
-      text: node.name,
-      url: node._id,
-    };
-  } if (node.node_type === 'link') {
-    return {
-      text: node.display_name,
-      url: node.url,
-    };
-  }
-
-  return {};
-}
-
 function fixTrailingSlash(item) {
   let fixedItem = item;
   if (fixedItem[fixedItem.length - 1] !== '/') {
@@ -27,36 +11,47 @@ function fixTrailingSlash(item) {
   return fixedItem;
 }
 
+const Link = ({ href, name, child }) => {
+  const externalUrl = /(http(s?)):\/\//i.test(href);
+  return (
+    externalUrl ? (
+      <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
+        {name}
+        <span className="sr-only">(Opens in new window)</span>
+        {child}
+      </a>
+    ) : (
+      <a href={fixTrailingSlash(href)}>
+        {name}
+        {child}
+      </a>
+    )
+  );
+};
+
 const SectionItem = ({ item }) => {
-  const { text = '', url = '' } = parseLinkData(item);
+  const child = (hasChildren(item)
+  && (
+    <span className="submenu-caret">
+      <ChevronRight fill="rgba(255, 255, 255, 0.5)" height={12} width={12} />
+    </span>
+  ));
   return (
     <li className="section-item">
-      <a href={fixTrailingSlash(url)} title={text}>
-        {text}
-        {
-          hasChildren(item) && (
-            <span className="submenu-caret">
-              <ChevronRight fill="rgba(255, 255, 255, 0.5)" height={12} width={12} />
-            </span>
-          )
-        }
-      </a>
+      {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} />
+        : <Link href={item._id} name={item.name} child={child} />}
       {hasChildren(item) && <SubSectionMenu items={item.children} />}
     </li>
   );
 };
 
 const SubSectionMenu = ({ items }) => {
-  const itemsList = items.map((item) => {
-    const { text = '', url = '' } = parseLinkData(item);
-    return (
-      <li className="subsection-item" key={item._id}>
-        <a href={fixTrailingSlash(url)} title={text}>
-          {text}
-        </a>
-      </li>
-    );
-  });
+  const itemsList = items.map((item) => (
+    <li className="subsection-item" key={item._id}>
+      {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} />
+        : <Link href={item._id} name={item.name} />}
+    </li>
+  ));
 
   return (
     <div className="subsection-container">

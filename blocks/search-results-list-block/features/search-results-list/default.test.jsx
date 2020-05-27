@@ -9,6 +9,9 @@ jest.mock('prop-types', () => ({
   shape: () => {},
   contentConfig: () => {},
 }));
+jest.mock('fusion:context', () => ({
+  useAppContext: jest.fn(() => ({})),
+}));
 
 describe('the search results list feature block', () => {
   describe('when it is configured to inherit global content', () => {

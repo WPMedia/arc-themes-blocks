@@ -42,7 +42,7 @@ class CustomSearchResultsList extends React.Component {
       page: 1,
       searchTerm: '',
     };
-    this.phrases = getTranslatedPhrases(getProperties(this.arcSite).locale || 'en');
+    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
   }
 
   fetchStories(additionalStoryAmount) {

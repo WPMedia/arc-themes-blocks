@@ -1,7 +1,7 @@
 /* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
-import getThemeStyle from 'fusion:themes';
+// import getThemeStyle from 'fusion:themes';
 // import getTranslatedPhrases from 'fusion:intl';
 // import getProperties from 'fusion:properties';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';

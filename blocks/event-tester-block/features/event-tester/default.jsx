@@ -20,6 +20,7 @@ class EventTester extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   galleryHandler(event) {
+    // eslint-disable-next-line no-console
     console.log('\n\nEvent: event.eventName caught: ', event);
   }
 

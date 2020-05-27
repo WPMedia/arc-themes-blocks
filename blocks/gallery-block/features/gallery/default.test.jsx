@@ -3,7 +3,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({})),
+}));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,

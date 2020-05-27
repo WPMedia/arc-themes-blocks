@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import GlobalContentGallery from './_children/global-content';
@@ -12,8 +13,8 @@ const GalleryFeature = (
       galleryContentConfig,
     } = {},
   } = {},
-  arcSite,
 ) => {
+  const { arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
   if (inheritGlobalContent) {

@@ -103,6 +103,7 @@ const Nav = (props) => {
         <div className="nav-left">
           <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} />
           <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+            <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
             <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
           </button>
         </div>

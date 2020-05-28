@@ -181,22 +181,22 @@ class GlobalSearchResultsList extends React.Component {
                           url={extractImage(promoItems)}
                           alt={headlineText}
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
                           breakpoints={getProperties(arcSite)?.breakpoints}
                           resizerURL={resizerURL}
                         />
                       ) : (
                         <Image
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
                           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
                           url={targetFallbackImage}
                           breakpoints={getProperties(arcSite)?.breakpoints}

@@ -156,22 +156,22 @@ class GlobalSearchResultsList extends React.Component {
                           url={extractImage(promoItems)}
                           alt={headlineText}
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
                           breakpoints={getProperties(arcSite)?.breakpoints}
                           resizerURL={resizerURL}
                         />
                       ) : (
                         <PlaceholderImage
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
                         />
                       )}
                     </a>

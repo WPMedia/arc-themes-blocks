@@ -2,7 +2,6 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import Title from './title';
@@ -24,6 +23,8 @@ const MediumListItem = (props) => {
     customFields,
     arcSite,
     resizedImageOptions,
+    targetFallbackImage,
+    placeholderResizedImageOptions,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const textClass = customFields.showImageMD ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
@@ -97,13 +98,18 @@ const MediumListItem = (props) => {
                   resizerURL={resizerURL}
                 />
               ) : (
-                <PlaceholderImage
+                <Image
                   smallWidth={274}
                   smallHeight={154}
                   mediumWidth={274}
                   mediumHeight={154}
                   largeWidth={400}
                   largeHeight={225}
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                  url={targetFallbackImage}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizedImageOptions={placeholderResizedImageOptions}
+                  resizerURL={resizerURL}
                 />
               )}
             </a>

@@ -22,7 +22,9 @@ const config = {
   showHeadlineSM: true,
   showImageSM: true,
 };
-
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="placeholder" />,
+}));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',

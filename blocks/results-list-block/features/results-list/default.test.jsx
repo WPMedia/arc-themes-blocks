@@ -6,8 +6,9 @@ import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
-
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
   default: function Byline(props, children) { return <div {...props}>{children}</div>; },
@@ -23,7 +24,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 
-describe('The story-feed-list', () => {
+describe('The results list', () => {
   it('should render a list of stories', () => {
     const listContentConfig = {
       contentConfigValues: {
@@ -37,6 +38,7 @@ describe('The story-feed-list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
@@ -183,6 +185,8 @@ describe('The story-feed-list', () => {
     const customFields = { listContentConfig };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();

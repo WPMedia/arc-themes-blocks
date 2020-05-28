@@ -45,37 +45,21 @@ class ResultsList extends Component {
   }
 
   getFallbackImageURL() {
-    const {
-      // deployment, contextPath,
-
-      arcSite,
-    } = this.props;
-    const targetFallbackImage = getProperties(arcSite).fallbackImage;
-
-    // if true then it's a local image
-    // else it's a url image that can be served
-    if (targetFallbackImage && !(targetFallbackImage.includes('http'))) {
-      // hard-coding again to see if their cdn option might work
-      return 'https://cmg-cmg-rd-20030-prod.cdn.arcpublishing.com/pf/resources/images/sites/cmg-rd-20030/station-logo.png?d=26';
-      // hard coding for now to validate bc not working locally
-      // targetFallbackImage = deployment(`https://corecomponents.arcpublishing.com${contextPath}/${targetFallbackImage}`);
-
-      // haven't been able to validate this use of latest locally
-      // targetFallbackImage = targetFallbackImage.replace('LATEST', '');
-    }
-
-    return targetFallbackImage;
+    const { arcSite } = this.props;
+    return getProperties(arcSite).fallbackImage;
   }
 
   fetchPlaceholder() {
     const targetFallbackImage = this.getFallbackImageURL();
 
-    this.fetchContent({
-      placeholderResizedImageOptions: {
-        source: 'resize-image-api',
-        query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-      },
-    });
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories(additionalStoryAmount) {

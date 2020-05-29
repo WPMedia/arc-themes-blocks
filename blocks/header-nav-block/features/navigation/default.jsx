@@ -132,9 +132,11 @@ const Nav = (props) => {
       </StyledNav>
 
       <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
-        <SectionNav sections={sections}>
-          <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
-        </SectionNav>
+        <div className="innerDrawerNav">
+          <SectionNav sections={sections}>
+            <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
+          </SectionNav>
+        </div>
       </StyledSectionDrawer>
 
       {isSectionDrawerOpen ? <div id="overlay" role="dialog" onKeyDown={handleEscKey} onClick={() => setSectionDrawerOpen(false)} /> : null}

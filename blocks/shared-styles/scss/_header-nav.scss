@@ -193,12 +193,12 @@ body.nav-open {
 }
 
 #nav-sections {
-  background: $section-bg;
+  background: transparent;
   bottom: 0;
   flex-direction: column;
   left: 0;
   transition: transform 300ms ease-in-out;
-  width: $section-width;
+  width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -233,6 +233,13 @@ body.nav-open {
 
   * {
     display: flex;
+  }
+
+  .innerDrawerNav{
+    width: $section-width;
+    background-color: $section-bg;
+    display: flex;
+    flex-direction: column;
   }
 
   .nav-search {

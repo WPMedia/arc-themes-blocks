@@ -4,7 +4,6 @@ $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
 $nav-search-border-color: $ui-light-gray;
-$overlay-color: $ui-dark-gray;
 $overlay-z-index: 2;
 $section-bg: $ui-medium-gray;
 $section-width: 315px;
@@ -12,9 +11,14 @@ $submenu-link-color: $ui-dark-gray;
 
 body.nav-open {
   overflow-y: hidden;
+
+  .main {
+    z-index: -1;
+  }
 }
 
 .nav-btn {
+  align-items: center;
   border: 0;
   height: $btn-size;
   outline: none;
@@ -193,25 +197,27 @@ body.nav-open {
 }
 
 #nav-sections {
-  background: transparent;
-  bottom: 0;
+  background: rgba(25, 25, 25, 0.5);
   flex-direction: column;
-  left: 0;
+  position: fixed;
   transition: transform 300ms ease-in-out;
   width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
 
   &.open {
+    height: 100vh;
     overflow-y: scroll;
     transform: translate(0, 0);
   }
 
   &.closed {
     transform: translate(-$section-width, 0);
+    width: 0;
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -343,15 +349,4 @@ body.nav-open {
       }
     }
   }
-}
-
-#overlay {
-  background: $overlay-color;
-  height: 100%;
-  left: 0;
-  opacity: 0.5;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: $overlay-z-index;
 }

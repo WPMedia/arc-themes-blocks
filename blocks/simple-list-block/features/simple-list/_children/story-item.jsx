@@ -1,6 +1,5 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import Title from './title';
@@ -16,6 +15,8 @@ const StoryItem = (props) => {
     showImage,
     arcSite,
     resizedImageOptions,
+    placeholderResizedImageOptions,
+    targetFallbackImage,
   } = props;
 
   return (
@@ -44,13 +45,18 @@ const StoryItem = (props) => {
               resizerURL={resizerURL}
             />
           ) : (
-            <PlaceholderImage
+            <Image
               smallWidth={274}
               smallHeight={183}
               mediumWidth={274}
               mediumHeight={183}
               largeWidth={274}
               largeHeight={183}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              url={targetFallbackImage}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+              resizedImageOptions={placeholderResizedImageOptions}
+              resizerURL={resizerURL}
             />
           )}
         </a>

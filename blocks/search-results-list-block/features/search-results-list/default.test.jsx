@@ -13,6 +13,10 @@ jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
 }));
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 describe('the search results list feature block', () => {
   describe('when it is configured to inherit global content', () => {
     it('should render the global content search results list', () => {

@@ -27,6 +27,8 @@ const ConditionalStoryItem = (props) => {
     overlineText = '',
     overlineURL = '',
     resizedImageOptions = {},
+    targetFallbackImage,
+    placeholderResizedImageOptions,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -47,6 +49,8 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           customFields={customFields}
           resizedImageOptions={resizedImageOptions}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
         />
       );
     case LARGE:
@@ -66,6 +70,8 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           customFields={customFields}
           resizedImageOptions={resizedImageOptions}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
         />
       );
     case MEDIUM:
@@ -82,6 +88,8 @@ const ConditionalStoryItem = (props) => {
           displayDate={displayDate}
           customFields={customFields}
           resizedImageOptions={resizedImageOptions}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
         />
       );
     case SMALL:
@@ -94,6 +102,8 @@ const ConditionalStoryItem = (props) => {
           websiteURL={websiteURL}
           customFields={customFields}
           resizedImageOptions={resizedImageOptions}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
         />
       );
     default:

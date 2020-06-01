@@ -8,7 +8,6 @@ import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { resizerURL } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
@@ -50,8 +49,30 @@ class CardList extends React.Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { cardList: {} };
+    this.state = {
+      cardList: {},
+      placeholderResizedImageOptions: {},
+    };
     this.fetchStories();
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite } = this.props;
+    return getProperties(arcSite).fallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories() {
@@ -67,13 +88,17 @@ class CardList extends React.Component {
 
   render() {
     const { customFields: { title } = {}, arcSite } = this.props;
-    const { cardList: { content_elements: contentElements = [] } = {} } = this.state;
+    const {
+      cardList: { content_elements: contentElements = [] } = {},
+      placeholderResizedImageOptions,
+    } = this.state;
     const showSeparator = !!(
       contentElements[0]
       && contentElements[0].credits
       && contentElements[0].credits.by
       && contentElements[0].credits.by.length !== 0
     );
+    const targetFallbackImage = this.getFallbackImageURL();
     return (
       (contentElements.length > 0
         && (
@@ -117,13 +142,18 @@ class CardList extends React.Component {
                        resizerURL={resizerURL}
                      />
                    ) : (
-                     <PlaceholderImage
+                     <Image
                        smallWidth={377}
                        smallHeight={283}
                        mediumWidth={377}
                        mediumHeight={283}
                        largeWidth={377}
                        largeHeight={283}
+                       alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                       url={targetFallbackImage}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
+                       resizedImageOptions={placeholderResizedImageOptions}
+                       resizerURL={resizerURL}
                      />
                    )
                   }
@@ -201,13 +231,18 @@ class CardList extends React.Component {
                               />
                             )
                             : (
-                              <PlaceholderImage
+                              <Image
                                 smallWidth={105}
                                 smallHeight={70}
                                 mediumWidth={105}
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
+                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                                url={targetFallbackImage}
+                                breakpoints={getProperties(arcSite)?.breakpoints}
+                                resizedImageOptions={placeholderResizedImageOptions}
+                                resizerURL={resizerURL}
                               />
                             )
                         }

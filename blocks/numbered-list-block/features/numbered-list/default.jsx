@@ -41,16 +41,8 @@ class NumberedList extends Component {
 
 
   getFallbackImageURL() {
-    const { deployment, contextPath, arcSite } = this.props;
-    let targetFallbackImage = getProperties(arcSite).fallbackImage;
-
-    // if true then it's a local image
-    // else it's a url image that can be served
-    if (targetFallbackImage && !(targetFallbackImage.includes('http'))) {
-      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
-    }
-
-    return targetFallbackImage;
+    const { arcSite } = this.props;
+    return getProperties(arcSite).fallbackImage;
   }
 
   fetchStories() {
@@ -67,12 +59,14 @@ class NumberedList extends Component {
   fetchPlaceholder() {
     const targetFallbackImage = this.getFallbackImageURL();
 
-    this.fetchContent({
-      placeholderResizedImageOptions: {
-        source: 'resize-image-api',
-        query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-      },
-    });
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   render() {

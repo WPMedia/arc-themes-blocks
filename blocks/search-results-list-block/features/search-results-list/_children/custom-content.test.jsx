@@ -7,7 +7,10 @@ import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
@@ -34,7 +37,8 @@ describe('The search results list', () => {
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" targetFallbackImage="" />);
     wrapper.setState({ resultList: mockData, searchTerm: 'test' }, () => {
       wrapper.update();
       it('should render a text input', () => {
@@ -194,6 +198,8 @@ describe('The search results list', () => {
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+
     const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();

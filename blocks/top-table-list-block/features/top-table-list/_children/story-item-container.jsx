@@ -21,6 +21,8 @@ class StoryItemContainer extends Component {
       customFields,
       websiteURL,
       resizedImageOptions,
+      placeholderResizedImageOptions,
+      targetFallbackImage,
     } = this.props;
 
     return (
@@ -41,6 +43,8 @@ class StoryItemContainer extends Component {
           overlineText={overlineText}
           customFields={customFields}
           resizedImageOptions={resizedImageOptions}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
         />
       </>
     );

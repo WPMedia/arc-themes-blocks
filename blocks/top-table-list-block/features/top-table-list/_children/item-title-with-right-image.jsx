@@ -1,6 +1,5 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import { resizerURL } from 'fusion:environment';
 import Title from './title';
@@ -15,6 +14,8 @@ const ItemTitleWithRightImage = (props) => {
     customFields,
     arcSite,
     resizedImageOptions,
+    targetFallbackImage,
+    placeholderResizedImageOptions,
   } = props;
   return (
     <article key={id} className="container-fluid small-promo">
@@ -49,13 +50,18 @@ const ItemTitleWithRightImage = (props) => {
                 />
               </a>
             ) : (
-              <PlaceholderImage
+              <Image
                 smallWidth={274}
                 smallHeight={183}
                 mediumWidth={274}
                 mediumHeight={183}
                 largeWidth={400}
                 largeHeight={267}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                url={targetFallbackImage}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizedImageOptions={placeholderResizedImageOptions}
+                resizerURL={resizerURL}
               />
             )}
           </div>

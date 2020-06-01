@@ -10,7 +10,9 @@ jest.mock('fusion:themes', () => ({
   __esModule: true,
   default: jest.fn(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' })),
 }));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
@@ -34,6 +36,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
 
     it('should render a text input', () => {
@@ -93,6 +96,7 @@ describe('The search results list', () => {
 
   it('should render a list of stories', () => {
     const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
     const wrapper = shallow(<SearchResultsList globalContent={mockData} arcSite="the-sun" />);
     expect(wrapper.find('.results-list-container').length).toEqual(1);
     expect(wrapper.find('.list-item').length).toEqual(28);
@@ -101,6 +105,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly', () => {
     const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
     const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
     it('should have one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -154,6 +159,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly when description is missing', () => {
     const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
     const wrapper = shallow(<SearchResultsList globalContent={LineItemWithOutDescription} arcSite="the-sun" />);
     it('should render one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -178,6 +184,7 @@ describe('The search results list', () => {
 
   describe('renders one list item correctly when list of authors is missing', () => {
     const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
     const wrapper = shallow(<SearchResultsList globalContent={withoutByline} arcSite="the-sun" />);
     it('should render one parent wrapper', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -191,18 +198,21 @@ describe('The search results list', () => {
   describe('renders a button to display more stories', () => {
     it('should render a button to display more stories', () => {
       const { default: SearchResultsList } = require('./global-content');
+      SearchResultsList.prototype.fetchContent = jest.fn();
       const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
       expect(wrapper.find('.see-more').childAt(0).length).toEqual(1);
     });
 
     it('should have the primary text as font family', () => {
       const { default: SearchResultsList } = require('./global-content');
+      SearchResultsList.prototype.fetchContent = jest.fn();
       const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
       expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
     });
 
     it('should have the primary text as font family', () => {
       const { default: SearchResultsList } = require('./global-content');
+      SearchResultsList.prototype.fetchContent = jest.fn();
       const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" />);
       expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
     });

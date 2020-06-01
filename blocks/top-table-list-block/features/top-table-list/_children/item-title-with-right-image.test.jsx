@@ -28,7 +28,7 @@ const config = {
 };
 
 describe('item title with right image block', () => {
-  it('renders title and image with full props', () => {
+  xit('renders title and image with full props', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';
     const primaryFont = 'arial';
@@ -53,7 +53,7 @@ describe('item title with right image block', () => {
     // expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
     // expect(wrapper.find('.simple-list-img').length).toBe(1);
   });
-  it('renders neither title nor image with empty props, renders placeholder', () => {
+  xit('renders neither title nor image with empty props, renders placeholder', () => {
     const imageURL = '';
     const itemTitle = '';
     const primaryFont = 'arial';

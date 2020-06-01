@@ -61,6 +61,7 @@ describe('Simple list', () => {
 
   it('should show title if there is a title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => null),
@@ -77,6 +78,7 @@ describe('Simple list', () => {
   });
   it('should show no title if there is no title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => mockOutput),
@@ -87,6 +89,7 @@ describe('Simple list', () => {
   });
   it('should fetch an array of data when content service is provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     const customFields = {
       listContentConfig: {
@@ -103,6 +106,7 @@ describe('Simple list', () => {
   });
   it('should not render items when no data provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => null),

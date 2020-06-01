@@ -63,8 +63,14 @@ class TopTableListWrapper extends Component {
   }
 
   getFallbackImageURL() {
-    const { arcSite } = this.props;
-    return getProperties(arcSite).fallbackImage;
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (targetFallbackImage && !targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
   }
 
   fetchPlaceholder() {

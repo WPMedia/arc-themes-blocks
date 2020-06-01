@@ -38,7 +38,7 @@ describe('Card list', () => {
 
     const { default: CardList } = require('./default');
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
@@ -61,7 +61,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
@@ -142,7 +142,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
@@ -176,7 +176,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: withoutByline }, () => {
       wrapper.update();

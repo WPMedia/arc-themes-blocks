@@ -72,7 +72,10 @@ describe('Simple list', () => {
       title: testText,
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('h2.list-title').text()).toBe(testText);
   });
@@ -83,7 +86,7 @@ describe('Simple list', () => {
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => mockOutput),
     }));
-    const wrapper = mount(<SimpleList />);
+    const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
     expect(wrapper.find('h2.list-title').text()).toBe('');
   });
@@ -100,7 +103,10 @@ describe('Simple list', () => {
       },
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(2);
   });
@@ -120,7 +126,10 @@ describe('Simple list', () => {
       },
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(0);
   });

@@ -39,7 +39,7 @@ describe('The results list', () => {
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
 
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -61,7 +61,7 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -124,7 +124,7 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(LineItemWithOutDescription);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -160,7 +160,7 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -187,7 +187,7 @@ describe('The results list', () => {
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {

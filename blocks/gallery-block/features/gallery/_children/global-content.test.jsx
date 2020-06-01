@@ -32,7 +32,10 @@ describe('the global content gallery', () => {
       const { default: GlobalContentGallery } = require('./global-content');
 
       const wrapper = shallow(
-        <GlobalContentGallery phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }} />,
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
         [
@@ -65,7 +68,10 @@ describe('the global content gallery', () => {
       const { default: GlobalContentGallery } = require('./global-content');
 
       const wrapper = shallow(
-        <GlobalContentGallery phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }} />,
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
       expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
@@ -89,7 +95,10 @@ describe('the global content gallery', () => {
       const { default: GlobalContentGallery } = require('./global-content');
 
       const wrapper = shallow(
-        <GlobalContentGallery phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }} />,
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
       expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');

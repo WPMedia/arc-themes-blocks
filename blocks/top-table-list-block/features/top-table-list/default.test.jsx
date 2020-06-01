@@ -51,7 +51,7 @@ describe('top table list', () => {
       useContent: jest.fn(),
     }));
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.text()).toBe('');
     expect(wrapper.find('.top-table-list-container').children().length).toBe(0);
@@ -68,11 +68,8 @@ describe('top table list', () => {
       })),
     }));
 
-
-    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
@@ -111,7 +108,7 @@ describe('top table list', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);

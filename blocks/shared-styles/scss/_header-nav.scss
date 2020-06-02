@@ -199,8 +199,9 @@ body.nav-open {
 #nav-sections {
   background: rgba(25, 25, 25, 0.5);
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   transition: transform 300ms ease-in-out;
+  top: 0;
   width: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -30,8 +30,6 @@ const StyledNav = styled.nav`
   .news-theme-navigation-bar {
     background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
     height: ${navHeight};
-    position: fixed;
-    width: 100%;
     z-index: ${navZIdx};
   }
 

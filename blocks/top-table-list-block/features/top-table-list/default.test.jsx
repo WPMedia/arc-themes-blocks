@@ -23,12 +23,22 @@ const config = {
   showImageSM: true,
 };
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 describe('top table list', () => {
+  beforeEach(() => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+    }))));
+  });
   afterEach(() => {
     jest.resetModules();
   });
+
   it('renders null if no content', () => {
     const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
     jest.mock('fusion:context', () => ({
@@ -41,13 +51,15 @@ describe('top table list', () => {
       useContent: jest.fn(),
     }));
     const wrapper = mount(
-      <TopTableList customFields={config} />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.text()).toBe('');
     expect(wrapper.find('.top-table-list-container').children().length).toBe(0);
   });
   it('renders one content item with incomplete data', () => {
     const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({
         content_elements: [{
@@ -56,16 +68,15 @@ describe('top table list', () => {
       })),
     }));
 
-
-    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-
     const wrapper = mount(
-      <TopTableList customFields={config} />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
   it('renders one content item with complete data', () => {
     const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({
         content_elements: [{
@@ -85,6 +96,11 @@ describe('top table list', () => {
           credits: {
             by: ['Bob Woodward'],
           },
+          websites: {
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
         }],
       })),
     }));
@@ -92,7 +108,7 @@ describe('top table list', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
     const wrapper = mount(
-      <TopTableList customFields={config} />,
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);

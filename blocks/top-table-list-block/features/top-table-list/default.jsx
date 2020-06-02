@@ -1,15 +1,19 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE,
   LARGE,
   MEDIUM,
   SMALL,
 } from './shared/storySizeConstants';
+import StoryItemContainer from './_children/story-item-container';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -17,7 +21,6 @@ import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import './default.scss';
-import StoryItemContainer from './_children/story-item-container';
 // styles end
 
 // helpers start
@@ -25,7 +28,6 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
-
 
 const unserializeStory = (storyObject) => ({
   id: storyObject._id,
@@ -45,10 +47,60 @@ const unserializeStory = (storyObject) => ({
   overlineText: (storyObject?.label?.basic?.text ?? null)
     || (storyObject?.websites?.[this] && storyObject?.websites?.[this]?.name)
     || '',
+  resizedImageOptions: extractResizedParams(storyObject),
 });
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
+@Consumer
+class TopTableListWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      placeholderResizedImageOptions: {},
+    };
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (targetFallbackImage && !targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    // using the fetchContent seems both more reliable
+    // and allows for conditional calls whereas useContent hook does not
+    if (targetFallbackImage && !targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
+  }
+
+  render() {
+    const { placeholderResizedImageOptions } = this.state;
+    const targetFallbackImage = this.getFallbackImageURL();
+    return (
+      <TopTableList
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...this.props}
+        placeholderResizedImageOptions={placeholderResizedImageOptions}
+        targetFallbackImage={targetFallbackImage}
+      />
+    );
+  }
+}
 
 // components end
 const TopTableList = (props) => {
@@ -61,6 +113,8 @@ const TopTableList = (props) => {
       extraLarge = 0, large = 0, medium = 0, small = 0,
     } = {},
     id = '',
+    placeholderResizedImageOptions,
+    targetFallbackImage,
   } = props;
 
   const { arcSite } = useFusionContext();
@@ -90,12 +144,13 @@ const TopTableList = (props) => {
             displayDate,
             description,
             by,
-            websiteURL,
             element,
             overlineDisplay,
             overlineUrl,
             overlineText,
+            resizedImageOptions,
           } = itemObject;
+          const url = (element.websites) ? element.websites[arcSite].website_url : '';
           return (
             <StoryItemContainer
               id={itemId}
@@ -104,7 +159,7 @@ const TopTableList = (props) => {
               displayDate={displayDate}
               description={description}
               by={by}
-              websiteURL={websiteURL}
+              websiteURL={url}
               element={element}
               overlineDisplay={overlineDisplay}
               overlineUrl={overlineUrl}
@@ -113,6 +168,9 @@ const TopTableList = (props) => {
               primaryFont={primaryFont}
               key={itemId}
               customFields={props.customFields}
+              resizedImageOptions={resizedImageOptions}
+              placeholderResizedImageOptions={placeholderResizedImageOptions}
+              targetFallbackImage={targetFallbackImage}
             />
           );
         })
@@ -121,7 +179,7 @@ const TopTableList = (props) => {
   );
 };
 
-TopTableList.propTypes = {
+TopTableListWrapper.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed').tag(
       {
@@ -251,6 +309,6 @@ TopTableList.propTypes = {
   }),
 };
 
-TopTableList.label = 'Top Table List – Arc Block';
+TopTableListWrapper.label = 'Top Table List – Arc Block';
 
-export default TopTableList;
+export default TopTableListWrapper;

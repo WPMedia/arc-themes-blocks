@@ -5,10 +5,13 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
-import './navigation.scss';
+// shares styles with header nav block
+// can modify styles in shared styles block
+import '@wpmedia/shared-styles/scss/_header-nav.scss';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -20,30 +23,39 @@ const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
-  background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
-  height: ${navHeight};
-  z-index: ${navZIdx};
+  align-items: center;
+  position: relative;
+
+  .news-theme-navigation-bar {
+    background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+    height: ${navHeight};
+    z-index: ${navZIdx};
+  }
 
   * {
     font-family: ${(props) => props.font};
   }
 `;
+
 const StyledSectionDrawer = styled.div`
   font-family: ${(props) => props.font};
-  position: fixed;
-  top: ${navHeight};
+  margin-top: ${navHeight};
   z-index: ${sectionZIdx};
 `;
 
 /* Main Component */
 const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
-  const { primaryLogo, primaryLogoAlt, navColor } = getProperties(arcSite);
+  const {
+    primaryLogo, primaryLogoAlt, navColor, locale = 'en',
+  } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
 
   const { children = [], customFields: { hierarchy, signInOrder } = {} } = props;
 
@@ -67,7 +79,13 @@ const Nav = (props) => {
   const handleEscKey = (event) => {
     if (event.keyCode === 27) {
       setSectionDrawerOpen(false);
+      document.body.classList.remove('nav-open');
     }
+  };
+
+  const hamburgerClick = () => {
+    setSectionDrawerOpen(!isSectionDrawerOpen);
+    document.body.classList.toggle('nav-open');
   };
 
   useEffect(() => {
@@ -75,7 +93,7 @@ const Nav = (props) => {
     return () => {
       window.removeEventListener('keydown', handleEscKey);
     };
-  });
+  }, []);
 
   // Check if URL is absolute/base64
   if (primaryLogo && (primaryLogo.indexOf('http') === 0 || primaryLogo.indexOf('base64') === 0)) {
@@ -86,34 +104,36 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav className={`news-theme-navigation-chain ${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
+      <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
+        <div className="news-theme-navigation-container news-theme-navigation-bar">
+          <div className="nav-left">
+            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} />
+            <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+              <span>{phrases.t('header-nav-block.sections-button')}</span>
+              <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
+            </button>
+          </div>
 
-        <div className="nav-left">
-          <SearchBox iconSize={20} navBarColor={navColor} />
-          <button onClick={() => setSectionDrawerOpen(!isSectionDrawerOpen)} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-            <span>Sections</span>
-            <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
-          </button>
+          <div className="nav-logo">
+            <a href="/" title={primaryLogoAlt}>
+              {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
+            </a>
+          </div>
+
+          <div className="nav-right">
+            {signInButton}
+          </div>
         </div>
 
-        <div className="nav-logo">
-          <a href="/" title={primaryLogoAlt}>
-            {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
-          </a>
-        </div>
+        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
+          <div className="innerDrawerNav">
+            <SectionNav sections={sections}>
+              <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
+            </SectionNav>
+          </div>
+        </StyledSectionDrawer>
 
-        <div className="nav-right">
-          {signInButton}
-        </div>
       </StyledNav>
-
-      <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
-        <SectionNav sections={sections}>
-          <SearchBox alwaysOpen />
-        </SectionNav>
-      </StyledSectionDrawer>
-
-      {isSectionDrawerOpen ? <div id="overlay" role="dialog" onKeyDown={handleEscKey} onClick={() => setSectionDrawerOpen(false)} /> : null}
     </>
   );
 };

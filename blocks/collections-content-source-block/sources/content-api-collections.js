@@ -1,3 +1,5 @@
+import getResizedImageData from '@wpmedia/resizer-image-block';
+
 const params = {
   _id: 'text',
   content_alias: 'text',
@@ -20,5 +22,5 @@ export default {
   params,
   resolve,
   schemaName: 'ans-feed',
-  transform: (data) => data,
+  transform: (data) => getResizedImageData(data),
 };

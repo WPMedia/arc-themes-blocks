@@ -11,3 +11,4 @@ size: 30
 offset: 0
 
 Displays a numbered list where each list item will have a number, headline and an Image. 
+

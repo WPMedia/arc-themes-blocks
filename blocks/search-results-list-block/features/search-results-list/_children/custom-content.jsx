@@ -1,29 +1,75 @@
-import PropTypes from 'prop-types';
-import Consumer from 'fusion:consumer';
 import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Consumer from 'fusion:consumer';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
+
+// shared with results list
+// to modify, go to the shared styles block
+import '@wpmedia/shared-styles/scss/_results-list.scss';
+import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
+import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
+
+// not shared with results list
 import './search-results-list.scss';
+
+const StyledButton = styled.button`
+  && {
+    background-color: ${(props) => props.primaryColor};
+    font-family: ${(props) => props.primaryFont};
+  } 
+`;
 
 @Consumer
 class CustomSearchResultsList extends React.Component {
   constructor(props) {
     super(props);
-    this.arcSite = props.arcSite;
     this.state = {
       storedList: {},
       resultList: {},
       value: '',
       page: 1,
       searchTerm: '',
+      placeholderResizedImageOptions: {},
     };
+    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
+    this.fetchPlaceholder();
   }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (!targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
+  }
+
 
   fetchStories(additionalStoryAmount) {
     const { customFields: { searchContentConfig } } = this.props;
@@ -72,14 +118,17 @@ class CustomSearchResultsList extends React.Component {
   }
 
   render() {
-    const { arcSite } = this.props;
     const {
       resultList: {
         data,
         metadata: { total_hits: totalHits } = {},
       } = {},
       searchTerm,
+      placeholderResizedImageOptions,
     } = this.state;
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    const { arcSite } = this.props;
     return (
       <div>
         <div className="search-container">
@@ -93,18 +142,20 @@ class CustomSearchResultsList extends React.Component {
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />
-            <button
+            <StyledButton
               type="button"
               className="btn btn-sm"
+              primaryColor={getThemeStyle(arcSite)['primary-color']}
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               onClick={() => this.fetchStories(false)}
             >
-              Search
-            </button>
+              {this.phrases.t('search-results-block.search-button')}
+            </StyledButton>
           </div>
           {
             data && (
               <p className="search-results-text">
-                {`${totalHits} Results for “${searchTerm}”`}
+                {this.phrases.t('search-results-block.search-result-number', { smart_count: totalHits, searchTerm })}
               </p>
             )
           }
@@ -117,15 +168,17 @@ class CustomSearchResultsList extends React.Component {
                 headlines: { basic: headlineText } = {},
                 display_date: displayDate,
                 credits: { by } = {},
-                canonical_url: canonicalUrl,
                 promo_items: promoItems,
+                websites,
               } = element;
+              const url = websites[arcSite].website_url;
+              const resizedImageOptions = extractResizedParams(element);
               const showSeparator = by && by.length !== 0;
               return (
-                <div className="list-item" key={`result-card-${canonicalUrl}`}>
+                <div className="list-item" key={`result-card-${url}`}>
                   <div className="results-list--image-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >
@@ -134,27 +187,35 @@ class CustomSearchResultsList extends React.Component {
                           url={extractImage(promoItems)}
                           alt={headlineText}
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
+                          resizedImageOptions={resizedImageOptions}
+                          resizerURL={resizerURL}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
                         />
                       ) : (
-                        <PlaceholderImage
+                        <Image
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
+                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                          url={targetFallbackImage}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
+                          resizedImageOptions={placeholderResizedImageOptions}
+                          resizerURL={resizerURL}
                         />
                       )}
                     </a>
                   </div>
                   <div className="results-list--headline-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >
@@ -187,17 +248,19 @@ class CustomSearchResultsList extends React.Component {
           {
             !!(data && data.length > 0 && data.length < totalHits) && (
               <div className="see-more">
-                <button
+                <StyledButton
                   type="button"
                   onClick={() => this.fetchStories(true)}
                   className="btn btn-sm"
+                  primaryColor={getThemeStyle(arcSite)['primary-color']}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                 >
-                  See More
+                  {this.phrases.t('search-results-block.see-more-button')}
                   {' '}
                   <span className="visuallyHidden">
                     stories about this topic
                   </span>
-                </button>
+                </StyledButton>
               </div>
             )
           }

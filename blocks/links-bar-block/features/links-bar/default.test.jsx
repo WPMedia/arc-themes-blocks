@@ -84,4 +84,24 @@ describe('the links bar feature for the default output type', () => {
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });
+
+  describe('when a link is missing a trailing slash', () => {
+    it('should add a slash at the end of the link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="/testurl" name="test" />);
+
+      expect(wrapper.props().href).toBe('/testurl');
+      expect(wrapper.find('[href="/testurl/"]').length).toBe(1);
+    });
+  });
+
+  describe('when a link is not missing a trailing slash', () => {
+    it('should not add a slash at the end of the link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="/testurl/" name="test" />);
+
+      expect(wrapper.props().href).toBe('/testurl/');
+      expect(wrapper.find('[href="/testurl/"]').length).toBe(2);
+    });
+  });
 });

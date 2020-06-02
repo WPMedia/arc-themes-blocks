@@ -5,10 +5,11 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -61,13 +62,16 @@ const SmallPromo = ({ customFields, arcSite }) => {
                     url={customFields.imageOverrideURL
                       ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                     alt={content && content.headlines ? content.headlines.basic : ''}
-                // small should be 3:2 aspect ratio
+                    // small should be 3:2 aspect ratio
                     smallWidth={274}
                     smallHeight={183}
                     mediumWidth={274}
                     mediumHeight={183}
                     largeWidth={400}
                     largeHeight={267}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={resizerURL}
+                    resizedImageOptions={extractResizedParams(content)}
                   />
                 )
                 : (

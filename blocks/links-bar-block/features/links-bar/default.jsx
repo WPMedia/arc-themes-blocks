@@ -28,7 +28,11 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
     <nav key={id} className="links-bar">
       {menuItems && menuItems.map((item) => (
         <LinkBarSpan className="links-menu" key={item._id} primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
-          {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
+          {
+            item.node_type === 'link'
+              ? <Link href={item.url} name={item.display_name} />
+              : <Link href={item._id} name={item.name} />
+          }
         </LinkBarSpan>
       ))}
     </nav>

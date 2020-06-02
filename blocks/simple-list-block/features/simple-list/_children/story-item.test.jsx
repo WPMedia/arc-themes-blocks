@@ -2,6 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import StoryItem from './story-item';
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img url="" alt="placeholder placeholder" />,
+}));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));

@@ -8,3 +8,4 @@ Fusion News Theme top table list block
 const topTableListBlock = require('@wpmedia/top-table-list-block');
 
 ```
+

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -27,10 +28,16 @@ const OverlineHeader = styled.h1`
   text-decoration: none;
 `;
 
-const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkURL ? (
-  <article className="container-fluid xl-large-promo">
-    <div className="row xl-promo-padding-bottom">
-      {(customFields.showHeadline || customFields.showDescription
+const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
+  const resizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: customFields.imageURL },
+  });
+
+  return (customFields.linkURL ? (
+    <article className="container-fluid xl-large-promo">
+      <div className="row xl-promo-padding-bottom">
+        {(customFields.showHeadline || customFields.showDescription
           || customFields.showOverline)
         && (
           <div className="col-sm-xl-12 flex-col">
@@ -85,6 +92,9 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
                   mediumHeight={450}
                   largeWidth={800}
                   largeHeight={600}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={resizerURL}
+                  resizedImageOptions={resizedImageOptions}
                 />
               </a>
             )}
@@ -99,9 +109,10 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => (customFields.linkU
             )}
           </div>
         )}
-    </div>
-  </article>
-) : null);
+      </div>
+    </article>
+  ) : null);
+};
 
 ExtraLargeManualPromo.propTypes = {
   customFields: PropTypes.shape({

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React from 'react';
@@ -6,11 +7,33 @@ import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 import './card-list.scss';
 
+function getResizedImage(promo) {
+  if (promo?.basic?.type === 'image' && promo?.basic?.resized_params) {
+    return promo.basic.resized_params;
+  }
+
+  if (promo?.lead_art?.promo_items) {
+    return getResizedImage(promo.lead_art.promo_items);
+  }
+
+  return null;
+}
+
 function extractImage(promo) {
-  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
+  if (promo?.basic?.type === 'image' && promo?.basic?.url) {
+    return promo.basic.url;
+  }
+
+  if (promo?.lead_art?.promo_items) {
+    return extractImage(promo.lead_art.promo_items);
+  }
+
+  return null;
 }
 
 const HeadlineText = styled.h2`
@@ -26,8 +49,36 @@ class CardList extends React.Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = { cardList: {} };
+    this.state = {
+      cardList: {},
+      placeholderResizedImageOptions: {},
+    };
     this.fetchStories();
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (!targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories() {
@@ -42,15 +93,18 @@ class CardList extends React.Component {
   }
 
   render() {
-    const { customFields: { title } = {} } = this.props;
-    const { cardList: { content_elements: contentElements = [] } = {} } = this.state;
+    const { customFields: { title } = {}, arcSite } = this.props;
+    const {
+      cardList: { content_elements: contentElements = [] } = {},
+      placeholderResizedImageOptions,
+    } = this.state;
     const showSeparator = !!(
       contentElements[0]
       && contentElements[0].credits
       && contentElements[0].credits.by
       && contentElements[0].credits.by.length !== 0
     );
-
+    const targetFallbackImage = this.getFallbackImageURL();
     return (
       (contentElements.length > 0
         && (
@@ -70,37 +124,44 @@ class CardList extends React.Component {
               }
               <div
                 className="list-item-simple"
-                key={`result-card-${contentElements[0].canonical_url}`}
+                key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a
-                  href={contentElements[0].website_url}
+                  href={contentElements[0].websites[arcSite].website_url}
                   title={contentElements[0].headlines.basic}
                   className="list-anchor"
                   id="card-list--link-container"
                 >
                   {
-                    extractImage(contentElements[0].promo_items) ? (
-                      <Image
-                        url={extractImage(contentElements[0].promo_items)}
-                        alt={contentElements[0].headlines.basic}
-                        // first element is always bigger
-                        smallWidth={377}
-                        smallHeight={283}
-                        mediumWidth={377}
-                        mediumHeight={283}
-                        largeWidth={377}
-                        largeHeight={283}
-                      />
-                    ) : (
-                      <PlaceholderImage
-                        smallWidth={377}
-                        smallHeight={283}
-                        mediumWidth={377}
-                        mediumHeight={283}
-                        largeWidth={377}
-                        largeHeight={283}
-                      />
-                    )
+                   extractImage(contentElements[0].promo_items) ? (
+                     <Image
+                       url={extractImage(contentElements[0].promo_items)}
+                       alt={contentElements[0].headlines.basic}
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
+                       resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
+                       resizerURL={resizerURL}
+                     />
+                   ) : (
+                     <Image
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
+                       alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                       url={targetFallbackImage}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
+                       resizedImageOptions={placeholderResizedImageOptions}
+                       resizerURL={resizerURL}
+                     />
+                   )
                   }
                   <Title
                     primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
@@ -133,10 +194,11 @@ class CardList extends React.Component {
                     headlines: { basic: headlineText } = {},
                     website_url: websiteUrl,
                   } = element;
+                  const url = element.websites[arcSite].website_url;
                   return (
                     <div
                       className="card-list-item"
-                      key={`result-card-${element.canonical_url}`}
+                      key={`result-card-${url}`}
                       type="1"
                     >
                       <a
@@ -152,7 +214,7 @@ class CardList extends React.Component {
                         </HeadlineText>
                       </a>
                       <a
-                        href={websiteUrl}
+                        href={url}
                         title={headlineText}
                         className="list-anchor-image"
                       >
@@ -169,16 +231,24 @@ class CardList extends React.Component {
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
+                                resizedImageOptions={extractResizedParams(element)}
+                                breakpoints={getProperties(arcSite)?.breakpoints}
+                                resizerURL={resizerURL}
                               />
                             )
                             : (
-                              <PlaceholderImage
+                              <Image
                                 smallWidth={105}
                                 smallHeight={70}
                                 mediumWidth={105}
                                 mediumHeight={70}
                                 largeWidth={274}
                                 largeHeight={183}
+                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                                url={targetFallbackImage}
+                                breakpoints={getProperties(arcSite)?.breakpoints}
+                                resizedImageOptions={placeholderResizedImageOptions}
+                                resizerURL={resizerURL}
                               />
                             )
                         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
 import Navigation from './default';
 import SearchBox from './_children/search-box';
@@ -16,13 +16,12 @@ jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),
 }));
 
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
+
 describe('the header navigation feature for the default output type', () => {
-  it('should be a nav element with class .news-theme-navigation', () => {
-    const wrapper = mount(<Navigation />);
-
-    expect(wrapper.find('nav').hasClass('news-theme-navigation-feature')).toBe(true);
-  });
-
   it('should render a SearchBox component in the top navbar', () => {
     const wrapper = mount(<Navigation />);
 
@@ -92,7 +91,7 @@ describe('the header navigation feature for the default output type', () => {
       getProperties.mockImplementation(() => ({ navColor: 'dark' }));
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('.news-theme-navigation-feature')).toHaveClassName('dark');
+      expect(wrapper.find('#main-nav')).toHaveClassName('dark');
     });
 
     it('should set all buttons to use the light color scheme', () => {
@@ -115,7 +114,7 @@ describe('the header navigation feature for the default output type', () => {
       getProperties.mockImplementation(() => ({ navColor: 'light' }));
       const wrapper = mount(<Navigation />);
 
-      expect(wrapper.find('.news-theme-navigation-feature')).toHaveClassName('light');
+      expect(wrapper.find('#main-nav')).toHaveClassName('light');
     });
     it('should set all buttons to use the light color scheme', () => {
       getProperties.mockImplementation(() => ({ navColor: 'light' }));
@@ -129,6 +128,20 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation />);
 
       expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'light');
+    });
+  });
+
+  describe('hamburger menu', () => {
+    it('opens and closes with the sections button', () => {
+      const wrapper = shallow(<Navigation />);
+
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
+
+      wrapper.find('.nav-left > .nav-btn').simulate('click');
+      expect(wrapper.find('#nav-sections').hasClass('open')).toBe(true);
+
+      wrapper.find('.nav-left > .nav-btn').simulate('click');
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
     });
   });
 });

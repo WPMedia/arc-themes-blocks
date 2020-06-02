@@ -60,7 +60,7 @@ const RightRailAdvancedLayout = ({ children }) => {
 
   return (
     <>
-      <header>{children[0]}</header>
+      <header className="page-header">{children[0]}</header>
       <section role="main" className="main">
         <div className="container">
           <div className="row">

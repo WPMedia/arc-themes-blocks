@@ -1,9 +1,19 @@
 # `@wpmedia/byline-block`
+
 Byline block for Fusion News Theme
 
+## Translation phrases
+
+| Phrase key | Default (English) |
+|---|---|
+|`byline-block.by-text`|`By`|
+|`byline-block.and-text`|`and`|
+
 ## Usage
+
 It expects the `credits` section from Composer's ANS schema, which is laid out as
-```
+
+```js
 credits: {
     by: [{
         name: ...

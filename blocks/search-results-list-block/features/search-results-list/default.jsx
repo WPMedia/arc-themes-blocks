@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import CustomSearchResultsList from './_children/custom-content';
 import GlobalContentSearch from './_children/global-content';
 
@@ -10,11 +11,11 @@ const SearchResultsListContainer = (
     } = {},
   } = {},
 ) => {
-  // const { globalContent = {}, arcSite } = useAppContext();
+  const { arcSite } = useAppContext();
   if (inheritGlobalContent) {
-    return <GlobalContentSearch />;
+    return <GlobalContentSearch arcSite={arcSite} />;
   }
-  return <CustomSearchResultsList />;
+  return <CustomSearchResultsList arcSite={arcSite} />;
 };
 
 

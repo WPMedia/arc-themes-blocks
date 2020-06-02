@@ -51,7 +51,7 @@ describe('overline feature for default output type', () => {
     it('should have the href of the website_section _id', () => {
       const wrapper = shallow(<Overline />);
 
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/news');
+      expect(wrapper.at(0).prop('href')).toStrictEqual('/news/');
     });
   });
 
@@ -80,14 +80,14 @@ describe('overline feature for default output type', () => {
       it('should render the href of the label instead of the website section', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive');
+        expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive/');
       });
     });
 
     describe('when label.basic.display is NOT true', () => {
       beforeEach(() => {
         const labelObj = {
-          label: { basic: { display: false, text: 'EXCLUSIVE', url: '/exclusive' } },
+          label: { basic: { display: false, text: 'EXCLUSIVE', url: '/exclusive/' } },
         };
         const contextObjWithLabel = {
 
@@ -109,7 +109,7 @@ describe('overline feature for default output type', () => {
       it('should have the href of the website_section _id', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/news');
+        expect(wrapper.at(0).prop('href')).toStrictEqual('/news/');
       });
     });
   });
@@ -123,6 +123,30 @@ describe('overline feature for default output type', () => {
       const wrapper = mount(<Overline />);
 
       expect(wrapper).toBeEmptyRender();
+    });
+  });
+
+  describe('when a link is not missing a trailing slash', () => {
+    beforeEach(() => {
+      const mockTrailingSlash = {
+        arcSite: 'site',
+        globalContent: {
+          websites: {
+            site: {
+              website_section: {
+                _id: '/test/',
+                name: 'Test',
+              },
+            },
+          },
+        },
+      };
+      useFusionContext.mockImplementation(() => mockTrailingSlash);
+    });
+    it('should not add a slash at the end of the link', () => {
+      const wrapper = shallow(<Overline />);
+
+      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
     });
   });
 });

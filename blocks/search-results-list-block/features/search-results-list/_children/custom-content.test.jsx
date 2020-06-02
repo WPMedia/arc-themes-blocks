@@ -1,12 +1,20 @@
 /* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
 import React from 'react';
 import { shallow } from 'enzyme';
+import getThemeStyle from 'fusion:themes';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
 
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
+}));
 
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
@@ -26,9 +34,15 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./custom-content');
+    getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
-    const wrapper = shallow(<SearchResultsList />);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+    const wrapper = shallow(<SearchResultsList
+      arcSite="the-sun"
+      targetFallbackImage=""
+      deployment={jest.fn((path) => path)}
+    />);
     wrapper.setState({ resultList: mockData, searchTerm: 'test' }, () => {
       wrapper.update();
       it('should render a text input', () => {
@@ -37,7 +51,7 @@ describe('The search results list', () => {
       });
 
       it('should show the total number of hits', () => {
-        expect(wrapper.find('.search-results-text').text()).toEqual('50 Results for “test”');
+        expect(wrapper.find('.search-results-text').text()).toEqual('%{smart_count} result for "%{searchTerm}" |||| %{smart_count} results for "%{searchTerm}"');
       });
 
       it('should set a search term', () => {
@@ -51,14 +65,22 @@ describe('The search results list', () => {
 
       describe('renders a search button', () => {
         it('should render a search button to search for results', () => {
-          expect(wrapper.find('button').at(0).length).toEqual(1);
-          expect(wrapper.find('button').at(0).text()).toEqual('Search');
+          expect(wrapper.find('.btn').at(0).length).toEqual(1);
+          expect(wrapper.find('.btn').at(0).text()).toEqual('Search');
         });
 
         it('should call fetchContent when clicked', () => {
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(0);
-          wrapper.find('button').at(0).simulate('click');
+          wrapper.find('.btn').at(0).simulate('click');
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+        });
+
+        it('should have the primary text as font family', () => {
+          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryFont', 'Open Sans');
+        });
+
+        it('should have the primary text as font family', () => {
+          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryColor', '#10c8cd');
         });
       });
     });
@@ -67,7 +89,7 @@ describe('The search results list', () => {
   it('should render a list of stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -79,7 +101,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -136,7 +158,7 @@ describe('The search results list', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn()
       .mockReturnValue(LineItemWithOutDescription);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -164,7 +186,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly when list of authors is missing', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<SearchResultsList />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -180,7 +202,9 @@ describe('The search results list', () => {
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList />);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {
@@ -195,6 +219,14 @@ describe('The search results list', () => {
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
         (wrapper.find('.see-more')).childAt(0).simulate('click');
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
+      });
+
+      it('should have the primary text as font family', () => {
+        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
       });
     });
   });

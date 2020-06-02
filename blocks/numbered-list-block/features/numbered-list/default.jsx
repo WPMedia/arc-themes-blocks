@@ -4,10 +4,11 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -30,9 +31,24 @@ class NumberedList extends Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
-    this.state = {};
+    this.state = {
+      placeholderResizedImageOptions: {},
+    };
     this.fetchStories();
+    this.fetchPlaceholder();
     this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
+  }
+
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (!targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
   }
 
   fetchStories() {
@@ -46,6 +62,19 @@ class NumberedList extends Component {
     });
   }
 
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
+  }
+
   render() {
     const {
       customFields: {
@@ -53,8 +82,15 @@ class NumberedList extends Component {
         showImage = true,
         title = '',
       },
+      arcSite,
     } = this.props;
-    const { resultList: { content_elements: contentElements = [] } = {} } = this.state;
+    const {
+      resultList: { content_elements: contentElements = [] } = {},
+      placeholderResizedImageOptions,
+    } = this.state;
+
+    const targetFallbackImage = this.getFallbackImageURL();
+
     return (
       <div className="numbered-list-container">
         {(title !== '' && contentElements && contentElements.length) ? (
@@ -65,16 +101,16 @@ class NumberedList extends Component {
         {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
           const {
             headlines: { basic: headlineText } = {},
-            website_url: websiteUrl,
             promo_items: promoItems,
-            canonical_url: canonicalUrl,
+            websites,
           } = element;
+          const url = websites[arcSite].website_url;
           return (
-            <div className="numbered-list-item" key={`result-card-${canonicalUrl}`} type="1">
+            <div className="numbered-list-item" key={`result-card-${url}`} type="1">
               {showHeadline
               && (
               <a
-                href={websiteUrl}
+                href={url}
                 title={headlineText}
                 className="headline-list-anchor"
               >
@@ -85,12 +121,13 @@ class NumberedList extends Component {
               {showImage
               && (
               <a
-                href={websiteUrl}
+                href={url}
                 title={headlineText}
                 className="list-anchor-image"
               >
                 {extractImage(promoItems) ? (
                   <Image
+                    resizedImageOptions={extractResizedParams(element)}
                     url={extractImage(promoItems)}
                     alt={headlineText}
                     // small, including numbered list, is 3:2 aspect ratio
@@ -100,15 +137,22 @@ class NumberedList extends Component {
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={resizerURL}
                   />
                 ) : (
-                  <PlaceholderImage
+                  <Image
                     smallWidth={105}
                     smallHeight={70}
                     mediumWidth={105}
                     mediumHeight={70}
                     largeWidth={274}
                     largeHeight={183}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={resizerURL}
                   />
                 )}
               </a>

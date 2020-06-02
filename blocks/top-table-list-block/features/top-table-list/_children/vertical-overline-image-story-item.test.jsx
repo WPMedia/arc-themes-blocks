@@ -22,7 +22,9 @@ const config = {
   showHeadlineSM: true,
   showImageSM: true,
 };
-
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="placeholder" />,
+}));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
@@ -33,6 +35,8 @@ jest.mock('fusion:context', () => ({
 jest.mock('fusion:content', () => ({
   useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
 }));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 describe('vertical overline image story item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

@@ -1,26 +1,74 @@
 import React from 'react';
+import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resizerURL } from 'fusion:environment';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
+import '@wpmedia/shared-styles/scss/_results-list.scss';
+import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
+import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
+
+
+const StyledInput = styled.input`
+  font-family: ${(props) => props.primaryFont};
+`;
+
+const StyledButton = styled.button`
+  && {
+    background-color: ${(props) => props.primaryColor};
+    font-family: ${(props) => props.primaryFont};
+  } 
+`;
 
 @Consumer
 class GlobalSearchResultsList extends React.Component {
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
+    const query = props.globalContent.metadata && props.globalContent.metadata.q;
     this.state = {
       storedList: {},
       resultList: {},
       page: 1,
-      value: '',
+      value: query || '',
+      placeholderResizedImageOptions: {},
     };
+    this.locale = getProperties(this.arcSite).locale || 'en';
+    this.phrases = getTranslatedPhrases(this.locale);
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (targetFallbackImage && !targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories() {
@@ -72,8 +120,13 @@ class GlobalSearchResultsList extends React.Component {
       resultList: {
         data: moreStories,
       } = {},
+      value,
+      placeholderResizedImageOptions,
     } = this.state;
+
+    const targetFallbackImage = this.getFallbackImageURL();
     const results = moreStories || data;
+
     return (
       <div>
         <div className="search-container">
@@ -81,24 +134,28 @@ class GlobalSearchResultsList extends React.Component {
             <div className="search-icon-container">
               <SearchIcon fill="#979797" />
             </div>
-            <input
+            <StyledInput
               type="text"
-              placeholder="Enter your search terms here"
+              placeholder="Enter your search terms"
+              value={value}
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             />
-            <button
+            <StyledButton
               type="button"
               className="btn btn-sm"
+              primaryColor={getThemeStyle(arcSite)['primary-color']}
+              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               onClick={() => this.handleSearch()}
             >
-              Search
-            </button>
+              {this.phrases.t('search-results-block.search-button')}
+            </StyledButton>
           </div>
           {
             data && (
               <p className="search-results-text">
-                {`${totalHits} Results for “${query}”`}
+                {this.phrases.t('search-results-block.search-result-number', { smart_count: totalHits, searchTerm: query })}
               </p>
             )
           }
@@ -111,44 +168,53 @@ class GlobalSearchResultsList extends React.Component {
                 headlines: { basic: headlineText } = {},
                 display_date: displayDate,
                 credits: { by } = {},
-                canonical_url: canonicalUrl,
                 promo_items: promoItems,
+                websites,
               } = element;
               const showSeparator = by && by.length !== 0;
+              const url = websites[arcSite].website_url;
               return (
-                <div className="list-item" key={`result-card-${canonicalUrl}`}>
+                <div className="list-item" key={`result-card-${url}`}>
                   <div className="results-list--image-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >
                       {extractImage(promoItems) ? (
                         <Image
+                          resizedImageOptions={extractResizedParams(element)}
                           url={extractImage(promoItems)}
                           alt={headlineText}
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
+                          resizerURL={resizerURL}
                         />
                       ) : (
-                        <PlaceholderImage
+                        <Image
                           smallWidth={274}
-                          smallHeight={148}
+                          smallHeight={154}
                           mediumWidth={274}
-                          mediumHeight={148}
+                          mediumHeight={154}
                           largeWidth={274}
-                          largeHeight={148}
+                          largeHeight={154}
+                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                          url={targetFallbackImage}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
+                          resizedImageOptions={placeholderResizedImageOptions}
+                          resizerURL={resizerURL}
                         />
                       )}
                     </a>
                   </div>
                   <div className="results-list--headline-container">
                     <a
-                      href={canonicalUrl}
+                      href={url}
                       title={headlineText}
                       className="list-anchor"
                     >
@@ -181,17 +247,21 @@ class GlobalSearchResultsList extends React.Component {
           {
             !!(results && results.length > 0 && results.length < totalHits) && (
               <div className="see-more">
-                <button
+                <StyledButton
                   type="button"
                   onClick={() => this.fetchStories()}
                   className="btn btn-sm"
+                  primaryColor={getThemeStyle(arcSite)['primary-color']}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                 >
-                  See More
+                  {this.phrases.t('search-results-block.see-more-button')}
                   {' '}
-                  <span className="visuallyHidden">
-                    stories about this topic
-                  </span>
-                </button>
+                  {this.locale === 'en' && (
+                    <span className="visuallyHidden">
+                      stories about this topic
+                    </span>
+                  )}
+                </StyledButton>
               </div>
             )
           }

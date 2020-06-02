@@ -4,6 +4,10 @@ import { mount } from 'enzyme';
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="test" />,
+}));
+
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,

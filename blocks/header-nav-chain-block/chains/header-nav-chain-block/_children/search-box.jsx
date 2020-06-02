@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
-export default ({ alwaysOpen = false, iconSize = 16, navBarColor = 'dark' }) => {
+export default ({
+  alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark',
+}) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const searchInput = useRef(null);
   let disabledBtn = true;
@@ -49,7 +51,7 @@ export default ({ alwaysOpen = false, iconSize = 16, navBarColor = 'dark' }) => 
 
   return (
     <div className={navClassNames}>
-      <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder="Search" />
+      <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
       <button className={btnClassNames} onClick={handleClick} onMouseDown={handleSearchBtnMousedown} type="button">
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>

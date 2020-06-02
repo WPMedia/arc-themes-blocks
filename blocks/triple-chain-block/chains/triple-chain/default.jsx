@@ -17,13 +17,13 @@ const TripleChain = ({ children, customFields }) => {
       return (
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
               {children.slice(0, columnOneLength)}
             </div>
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
               {children.slice(columnOneLength, endOfColumnTwoIndex)}
             </div>
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
               {children.slice(endOfColumnTwoIndex)}
             </div>
           </div>

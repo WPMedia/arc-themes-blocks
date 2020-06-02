@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import {
@@ -10,6 +12,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+import { resizerURL } from 'fusion:environment';
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -33,11 +36,12 @@ const LeadArtWrapperFigure = styled.figure`
 class LeadArt extends Component {
   constructor(props) {
     super(props);
-    const { globalContent: content, customFields } = this.props;
+    const { globalContent: content, customFields, arcSite } = this.props;
+    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
     this.state = {
       isOpen: false,
       enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel || 'Full Screen',
+      buttonLabel: customFields.buttonLabel || this.phrases.t('global.gallery-expand-button'),
       showCredit: customFields.showCredit || false,
       content,
     };
@@ -49,6 +53,7 @@ class LeadArt extends Component {
     const imgParentElm = this.imgRef.current;
     const imgElm = imgParentElm.querySelector('img');
     if (imgElm) {
+      // this is where it's getting the resized lightbox img
       return imgElm.dataset.lightbox;
     }
     return '';
@@ -68,6 +73,7 @@ class LeadArt extends Component {
 
       if (lead_art.type === 'raw_html') {
         if (buttonPosition !== 'hidden') {
+          // this could be figure and figcaption, a react component
           const mainContent = (
             <>
               <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
@@ -148,19 +154,33 @@ class LeadArt extends Component {
                 largeHeight={0}
                 lightBoxWidth={1600}
                 lightBoxHeight={0}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
+                resizedImageOptions={lead_art.resized_params}
               />
             </div>
             {lightbox}
             {caption && (
               <figcaption>
-                { caption }
+                {caption}
               </figcaption>
             )}
 
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
-        return <Gallery galleryElements={lead_art.content_elements} />;
+        return (
+          <Gallery
+            galleryElements={lead_art.content_elements}
+            resizerURL={resizerURL}
+            ansId={content._id}
+            ansHeadline={content.headlines.basic ? content.headlines.basic : ''}
+            expandPhrase={this.phrases.t('global.gallery-expand-button')}
+            autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
+            pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
+            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+          />
+        );
       }
       return null;
     }

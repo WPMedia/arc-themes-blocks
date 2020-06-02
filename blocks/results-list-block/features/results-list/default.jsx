@@ -6,14 +6,16 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-
+import getProperties from 'fusion:properties';
+import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
-import './results-list.scss';
-import './desktop-styles.scss';
-import './mobile-styles.scss';
-
+// shared with search results list
+// to modify, go to the shared styles block
+import '@wpmedia/shared-styles/scss/_results-list.scss';
+import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
+import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -36,8 +38,34 @@ class ResultsList extends Component {
       storedList: {},
       resultList: {},
       seeMore: true,
+      placeholderResizedImageOptions: {},
     };
     this.fetchStories(false);
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (!targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories(additionalStoryAmount) {
@@ -107,7 +135,15 @@ class ResultsList extends Component {
   }
 
   render() {
-    const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
+    const {
+      arcSite,
+    } = this.props;
+    const {
+      resultList: { content_elements: contentElements = [] } = {}, seeMore,
+      placeholderResizedImageOptions,
+    } = this.state;
+    const targetFallbackImage = this.getFallbackImageURL();
+
     return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
@@ -116,23 +152,23 @@ class ResultsList extends Component {
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
             credits: { by } = {},
-            website_url: websiteUrl,
-            canonical_url: canonicalUrl,
             promo_items: promoItems,
+            websites,
           } = element;
           const showSeparator = by && by.length !== 0;
-
+          const url = websites[arcSite].website_url;
           return (
-            <div className="list-item" key={`result-card-${canonicalUrl}`}>
+            <div className="list-item" key={`result-card-${url}`}>
               <div className="results-list--image-container">
                 <a
-                  href={websiteUrl}
+                  href={url}
                   title={headlineText}
                 >
                   {extractImage(promoItems) ? (
                     <Image
                       // results list is 16:9 by default
-                      url={extractImage(promoItems)}
+                      resizedImageOptions={extractResizedParams(element)}
+                      url={extractImage(element.promo_items)}
                       alt={headlineText}
                       smallWidth={158}
                       smallHeight={89}
@@ -140,22 +176,29 @@ class ResultsList extends Component {
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={resizerURL}
                     />
                   ) : (
-                    <PlaceholderImage
+                    <Image
                       smallWidth={158}
                       smallHeight={89}
                       mediumWidth={274}
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      url={targetFallbackImage}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizedImageOptions={placeholderResizedImageOptions}
+                      resizerURL={resizerURL}
                     />
                   )}
                 </a>
               </div>
               <div className="results-list--headline-container">
                 <a
-                  href={websiteUrl}
+                  href={url}
                   title={headlineText}
                 >
                   <HeadlineText
@@ -169,7 +212,7 @@ class ResultsList extends Component {
               <div className="results-list--description-author-container">
                 {descriptionText && (
                   <a
-                    href={websiteUrl}
+                    href={url}
                     title={headlineText}
                   >
                     <DescriptionText

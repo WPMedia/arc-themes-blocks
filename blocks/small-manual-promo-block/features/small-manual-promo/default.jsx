@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
+import { resizerURL } from 'fusion:environment';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
 const SmallManualPromo = ({ customFields, arcSite }) => {
+  const resizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: customFields.imageURL },
+  });
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
   return customFields.linkURL ? (
@@ -37,7 +42,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
         )}
         {(customFields.showImage && customFields.imageURL)
         && (
-          <div className="col-sm-xl-4">
+          <div className="col-sm-xl-4 right-aligned-container">
             <a
               href={customFields.linkURL}
               title={customFields.headline}
@@ -47,14 +52,15 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
                 url={customFields.imageURL}
                 alt={customFields.headline}
                 // small should be 3:2 aspect ratio
-                smallWidth={274}
-                smallHeight={183}
-                mediumWidth={274}
-                mediumHeight={183}
-                largeWidth={400}
-                largeHeight={267}
-
-
+                smallWidth={105}
+                smallHeight={70}
+                mediumWidth={105}
+                mediumHeight={70}
+                largeWidth={105}
+                largeHeight={70}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizerURL={resizerURL}
+                resizedImageOptions={resizedImageOptions}
               />
             </a>
           </div>

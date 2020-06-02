@@ -9,13 +9,23 @@ jest.mock('prop-types', () => ({
   shape: () => {},
   contentConfig: () => {},
 }));
+jest.mock('fusion:context', () => ({
+  useAppContext: jest.fn(() => ({})),
+}));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 
 describe('the search results list feature block', () => {
   describe('when it is configured to inherit global content', () => {
     it('should render the global content search results list', () => {
       const { default: SearchResultsListContainer } = require('./default');
       const wrapper = shallow(
-        <SearchResultsListContainer customFields={{ inheritGlobalContent: true }} />,
+        <SearchResultsListContainer
+          customFields={{ inheritGlobalContent: true }}
+          deployment={jest.fn((path) => path)}
+        />,
       );
       expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
@@ -28,6 +38,7 @@ describe('the search results list feature block', () => {
       const wrapper = shallow(
         <SearchResultsListContainer
           customFields={{ inheritGlobalContent: false, sectionContentConfig: {} }}
+          deployment={jest.fn((path) => path)}
         />,
       );
       expect(wrapper.is('CustomContentSearchResultsList')).toBeTruthy();
@@ -37,7 +48,10 @@ describe('the search results list feature block', () => {
   describe('when customFields is empty', () => {
     it('should render the global content search results list', () => {
       const { default: SearchResultsListContainer } = require('./default');
-      const wrapper = shallow(<SearchResultsListContainer customFields={{}} />);
+      const wrapper = shallow(<SearchResultsListContainer
+        customFields={{}}
+        deployment={jest.fn((path) => path)}
+      />);
       expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
   });
@@ -45,7 +59,10 @@ describe('the search results list feature block', () => {
   describe('when customFields is missing', () => {
     it('should render the global content search results list', () => {
       const { default: SearchResultsListContainer } = require('./default');
-      const wrapper = shallow(<SearchResultsListContainer customFields={undefined} />);
+      const wrapper = shallow(<SearchResultsListContainer
+        customFields={undefined}
+        deployment={jest.fn((path) => path)}
+      />);
       expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
   });

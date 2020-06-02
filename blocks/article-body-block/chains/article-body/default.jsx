@@ -9,7 +9,7 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image,
 } from '@wpmedia/engine-theme-sdk';
-import { resizerURL } from 'fusion:environment';
+
 import List from './_children/list';
 import Header from './_children/heading';
 import Oembed from './_children/oembed';
@@ -54,7 +54,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
             largeWidth={1440}
             largeHeight={0}
             breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={resizerURL}
+            resizerURL={getProperties(arcSite)?.resizerURL}
           />
           <figcaption>
             <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
@@ -149,7 +149,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
         <section className="block-margin-bottom gallery">
           <Gallery
             galleryElements={item.content_elements}
-            resizerURL={resizerURL}
+            resizerURL={getProperties(arcSite)?.resizerURL}
             ansId={item._id}
             ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
             expandPhrase={phrases.t('global.gallery-expand-button')}

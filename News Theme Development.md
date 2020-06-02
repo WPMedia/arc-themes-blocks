@@ -481,7 +481,7 @@ fusion-news-theme-blocks/environment/index.json*
 
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
-import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 const CustomImageBlock = ({ rawImageURL }) => {
@@ -492,7 +492,7 @@ const CustomImageBlock = ({ rawImageURL }) => {
 
     return (
         <Image
-            resizerURL={resizerURL}
+            resizerURL={getProperties().resizerURL}
             resizedImageOptions={resizedImageOptions}
             url={rawImageURL}
             alt={'This is a placeholder placeholder'}
@@ -547,7 +547,7 @@ export default {
 ```
 
 ```jsx
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
@@ -586,7 +586,7 @@ const ImageItem = ({ contentElement }) => (
 
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 

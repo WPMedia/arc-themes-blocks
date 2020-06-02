@@ -42,7 +42,6 @@ describe('the global content gallery', () => {
           },
         ],
       );
-      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
       expect(wrapper.find('Gallery').props().pausePhrase).toEqual('Pause autoplay');
@@ -68,7 +67,6 @@ describe('the global content gallery', () => {
         <GlobalContentGallery phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }} />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
-      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
       expect(wrapper.find('Gallery').props().pausePhrase).toEqual('Pause autoplay');
@@ -92,7 +90,6 @@ describe('the global content gallery', () => {
         <GlobalContentGallery phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }} />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
-      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
       expect(wrapper.find('Gallery').props().pausePhrase).toEqual('Pause autoplay');

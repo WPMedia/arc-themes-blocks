@@ -1,15 +1,15 @@
 import React from 'react';
 import { useAppContext } from 'fusion:context';
 import { Gallery } from '@wpmedia/engine-theme-sdk';
-import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 
-const GlobalContentGallery = ({ phrases }) => {
+const GlobalContentGallery = ({ phrases, arcSite }) => {
   const { globalContent: { content_elements: contentElements = [] } = {} } = useAppContext();
 
   return (
     <Gallery
       galleryElements={contentElements}
-      resizerURL={resizerURL}
+      resizerURL={getProperties(arcSite)?.resizerURL}
       expandPhrase={phrases.t('global.gallery-expand-button')}
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
@@ -138,7 +138,7 @@ class NumberedList extends Component {
                     largeWidth={274}
                     largeHeight={183}
                     breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={resizerURL}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
                   />
                 ) : (
                   <Image
@@ -152,7 +152,7 @@ class NumberedList extends Component {
                     url={targetFallbackImage}
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizedImageOptions={placeholderResizedImageOptions}
-                    resizerURL={resizerURL}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
                   />
                 )}
               </a>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
@@ -93,7 +93,7 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
                   largeWidth={800}
                   largeHeight={600}
                   breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={resizerURL}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
                 />
               </a>

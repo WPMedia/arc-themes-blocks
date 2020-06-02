@@ -4,15 +4,15 @@ describe('the content api source block', () => {
   it('should use the proper param types', () => {
     expect(contentApi.params).toEqual({
       website_url: 'text',
-      _id: 'text'
+      _id: 'text',
     });
   });
 
   describe('when a site is provided', () => {
     it('should include the "website" query param with the value', () => {
-      const url = contentApi.resolve({ 
-        website_url: '/aaaa/bccccd/', 
-        'arc-site': 'wapo' 
+      const url = contentApi.resolve({
+        website_url: '/aaaa/bccccd/',
+        'arc-site': 'wapo',
       });
 
       expect(url).toEqual('/content/v4/?website_url=/aaaa/bccccd/&website=wapo');
@@ -45,9 +45,9 @@ describe('the content api source block', () => {
 
   describe('when an _id and website_url are both provided', () => {
     it('should set the _id query param', () => {
-      const url = contentApi.resolve({ 
-        website_url: '/aaaa/eeeeee/', 
-        _id: 'myid' 
+      const url = contentApi.resolve({
+        website_url: '/aaaa/eeeeee/',
+        _id: 'myid',
       });
 
       expect(url).toEqual('/content/v4/?_id=myid');

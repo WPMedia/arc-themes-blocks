@@ -37,16 +37,16 @@ class LeadArt extends Component {
   constructor(props) {
     super(props);
     const { globalContent: content, customFields, arcSite } = this.props;
+    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
     this.state = {
       isOpen: false,
       enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel || 'Full Screen',
+      buttonLabel: customFields.buttonLabel || this.phrases.t('global.gallery-expand-button'),
       showCredit: customFields.showCredit || false,
       content,
     };
 
     this.imgRef = React.createRef();
-    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
   }
 
   lightboxImgHandler() {

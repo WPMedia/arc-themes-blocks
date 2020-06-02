@@ -59,6 +59,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockStoryFeedData);
@@ -103,6 +104,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockSearchApiData);
@@ -140,6 +142,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const { credits: { by } } = getResizedImageData(mockCreditsData);
@@ -157,6 +160,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const { credits: { by } } = getResizedImageData(mockCreditsEmptyImgData);
@@ -169,6 +173,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockLeadArtData);
@@ -197,6 +202,7 @@ describe('get resized image data helper on the server-side', () => {
       breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
       aspectRatios: ASPECT_RATIOS,
       imageWidths: IMAGE_WIDTHS,
+      resizerURL: 'https://fake.cdn.com/resizer',
     }));
 
     const resizedObject = getResizedImageData(galleryResizeData);
@@ -215,6 +221,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(topLeveLeadArt);

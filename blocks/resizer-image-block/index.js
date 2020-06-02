@@ -1,17 +1,23 @@
 /* eslint-disable no-param-reassign, camelcase */
 import getProperties from 'fusion:properties';
-import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
+import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
 const getResizerParam = (
-  originalUrl, breakpoint, format, filterQuality = 70, respectAspectRatio = false,
+  originalUrl,
+  breakpoint,
+  format,
+  filterQuality = 70,
+  respectAspectRatio = false,
 ) => {
+  const { resizerURL } = getProperties();
+
   if (typeof window === 'undefined') {
     const Thumbor = require('thumbor-lite');
     // this is height and width of the target image
     const { height, width } = breakpoint;
 
     if (!height && !width) throw new Error('Height and Width required');
-    const thumbor = new Thumbor(RESIZER_SECRET_KEY, RESIZER_URL);
+    const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerURL);
 
     let thumborParam = '';
     if (respectAspectRatio) {
@@ -30,7 +36,7 @@ const getResizerParam = (
 
       const urlSuffix = originalUrl.replace('https://', '');
       return thumborParam
-        .replace(RESIZER_URL, '')
+        .replace(resizerURL, '')
         .replace(urlSuffix, '');
     }
 
@@ -43,7 +49,7 @@ const getResizerParam = (
     const urlSuffix = originalUrl.replace('https://', '');
     const breakpointName = `${width}x${height}`;
     return thumborParam
-      .replace(RESIZER_URL, '')
+      .replace(resizerURL, '')
       .replace(urlSuffix, '')
       .replace(`/${breakpointName}/`, '');
   }
@@ -76,6 +82,7 @@ const getImageDimensionsForAspectRatios = () => {
 
 export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
   const output = {};
+  const { resizerURL } = getProperties();
   const getParamsByFormat = (format, previousOutput) => {
     // where we get image widths
     const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios();
@@ -92,6 +99,7 @@ export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
         format,
         70,
         respectAspectRatio,
+        resizerURL,
       );
     });
     return previousOutput;
@@ -130,7 +138,7 @@ const resizeAuthorCredits = (authorCredits) => authorCredits.map((creditObject) 
 }));
 
 const getResizedImageParams = (data, option) => {
-  if (!option.resizerSecret || !option.resizerUrl) {
+  if (!option.resizerSecret || !option.resizerURL) {
     throw new Error('Not a valid image object');
   }
 
@@ -223,15 +231,14 @@ export const extractResizedParams = (storyObject) => {
 const getResizedImageData = (
   data, filterQuality = 70, onlyUrl = false, respectAspectRatio = false,
 ) => {
-  const { imageWidths, aspectRatios } = getProperties();
+  // todo: take in arcSite to determine resizer url
+  const { imageWidths, aspectRatios, resizerURL } = getProperties();
   const resizerKey = RESIZER_SECRET_KEY;
-  const resizerUrl = RESIZER_URL;
-
 
   // ensure that necessary env variables available
   if (
     typeof resizerKey === 'undefined'
-      || typeof resizerUrl === 'undefined'
+      || typeof resizerURL === 'undefined'
       || typeof imageWidths === 'undefined'
       || typeof aspectRatios === 'undefined'
   ) {
@@ -244,7 +251,7 @@ const getResizedImageData = (
 
   return getResizedImageParams(data, {
     resizerSecret: resizerKey,
-    resizerUrl,
+    resizerURL,
     imageWidths,
   }, filterQuality);
 };

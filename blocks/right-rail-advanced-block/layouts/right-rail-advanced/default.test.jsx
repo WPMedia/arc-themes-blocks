@@ -18,7 +18,7 @@ describe('the right rail layout for the default output type', () => {
       </RightRailAdvancedLayout>,
     );
 
-    expect(wrapper.find('header')).toHaveHTML('<header><div id="first"></div></header>');
+    expect(wrapper.find('header')).toHaveHTML('<header class="page-header"><div id="first"></div></header>');
     expect(wrapper.find('footer')).toHaveHTML('<footer><div id="ninth"></div></footer>');
   });
 });

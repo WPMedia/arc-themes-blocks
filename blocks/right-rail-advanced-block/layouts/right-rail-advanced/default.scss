@@ -9,6 +9,12 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
+  .page-header {
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+  }
+
   .main {
     flex-grow: 1;
     padding-bottom: calculateRem(64px);

@@ -9,7 +9,6 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 // shared with search results list
@@ -39,8 +38,34 @@ class ResultsList extends Component {
       storedList: {},
       resultList: {},
       seeMore: true,
+      placeholderResizedImageOptions: {},
     };
     this.fetchStories(false);
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (!targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories(additionalStoryAmount) {
@@ -113,7 +138,12 @@ class ResultsList extends Component {
     const {
       arcSite,
     } = this.props;
-    const { resultList: { content_elements: contentElements = [] } = {}, seeMore } = this.state;
+    const {
+      resultList: { content_elements: contentElements = [] } = {}, seeMore,
+      placeholderResizedImageOptions,
+    } = this.state;
+    const targetFallbackImage = this.getFallbackImageURL();
+
     return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
@@ -150,13 +180,19 @@ class ResultsList extends Component {
                       resizerURL={getProperties(arcSite)?.resizerURL}
                     />
                   ) : (
-                    <PlaceholderImage
+                    <Image
                       smallWidth={158}
                       smallHeight={89}
                       mediumWidth={274}
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      url={targetFallbackImage}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizedImageOptions={placeholderResizedImageOptions}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+
                     />
                   )}
                 </a>

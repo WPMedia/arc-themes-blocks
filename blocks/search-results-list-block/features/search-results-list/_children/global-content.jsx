@@ -5,7 +5,6 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
@@ -41,9 +40,35 @@ class GlobalSearchResultsList extends React.Component {
       resultList: {},
       page: 1,
       value: query || '',
+      placeholderResizedImageOptions: {},
     };
     this.locale = getProperties(this.arcSite).locale || 'en';
     this.phrases = getTranslatedPhrases(this.locale);
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (targetFallbackImage && !targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    if (!targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
   }
 
   fetchStories() {
@@ -96,7 +121,10 @@ class GlobalSearchResultsList extends React.Component {
         data: moreStories,
       } = {},
       value,
+      placeholderResizedImageOptions,
     } = this.state;
+
+    const targetFallbackImage = this.getFallbackImageURL();
     const results = moreStories || data;
 
     return (
@@ -168,13 +196,19 @@ class GlobalSearchResultsList extends React.Component {
                           resizerURL={getProperties(arcSite)?.resizerURL}
                         />
                       ) : (
-                        <PlaceholderImage
+                        <Image
                           smallWidth={274}
                           smallHeight={154}
                           mediumWidth={274}
                           mediumHeight={154}
                           largeWidth={274}
                           largeHeight={154}
+                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                          url={targetFallbackImage}
+                          breakpoints={getProperties(arcSite)?.breakpoints}
+                          resizedImageOptions={placeholderResizedImageOptions}
+                          resizerURL={getProperties(arcSite)?.resizerURL}
+
                         />
                       )}
                     </a>

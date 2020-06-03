@@ -3,7 +3,10 @@ import { mount } from 'enzyme';
 import { useFusionContext } from 'fusion:context';
 import FullAuthorBio from './default';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+  resizerURL: 'resizer',
+}))));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
@@ -38,6 +41,9 @@ jest.mock('fusion:context', () => ({
           status: true,
           last_updated_date: '2019-01-24T23:15:45.348Z',
           type: 'author',
+          resized_params: {
+            '158x158': '',
+          },
         },
       ],
       last: 'c2FyYWNhcm90aGVycw==',

@@ -7,7 +7,10 @@ import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
+
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
@@ -34,7 +37,12 @@ describe('The search results list', () => {
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open Sans', 'primary-color': '#10c8cd' }));
     SearchResultsList.prototype.fetchStories = jest.fn();
     SearchResultsList.prototype.onChange = jest.fn();
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+    const wrapper = shallow(<SearchResultsList
+      arcSite="the-sun"
+      targetFallbackImage=""
+      deployment={jest.fn((path) => path)}
+    />);
     wrapper.setState({ resultList: mockData, searchTerm: 'test' }, () => {
       wrapper.update();
       it('should render a text input', () => {
@@ -81,7 +89,7 @@ describe('The search results list', () => {
   it('should render a list of stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -93,7 +101,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -150,7 +158,7 @@ describe('The search results list', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn()
       .mockReturnValue(LineItemWithOutDescription);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -178,7 +186,7 @@ describe('The search results list', () => {
   describe('renders one list item correctly when list of authors is missing', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -194,7 +202,9 @@ describe('The search results list', () => {
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./custom-content');
     SearchResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" />);
+    SearchResultsList.prototype.fetchContent = jest.fn();
+
+    const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {

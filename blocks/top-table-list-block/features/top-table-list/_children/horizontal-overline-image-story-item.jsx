@@ -3,7 +3,6 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
-import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
@@ -27,6 +26,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     customFields,
     arcSite,
     resizedImageOptions,
+    placeholderResizedImageOptions,
+    targetFallbackImage,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
@@ -118,13 +119,18 @@ const HorizontalOverlineImageStoryItem = (props) => {
               />
             </a>
           ) : (
-            <PlaceholderImage
+            <Image
               smallWidth={274}
               smallHeight={206}
               mediumWidth={274}
               mediumHeight={206}
               largeWidth={377}
               largeHeight={283}
+              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              url={targetFallbackImage}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+              resizedImageOptions={placeholderResizedImageOptions}
+              resizerURL={getProperties(arcSite)?.resizerURL}
             />
           )}
         </div>

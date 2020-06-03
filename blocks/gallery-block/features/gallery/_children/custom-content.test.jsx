@@ -54,6 +54,7 @@ describe('the custom content gallery', () => {
       <CustomContentGallery
         contentConfig={{ contentService: 'cool-api', contentConfigValues: 'cool-config' }}
         phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+        deployment={jest.fn((path) => path)}
       />,
     );
     expect(useContent.mock.calls).toHaveLength(1);
@@ -69,6 +70,7 @@ describe('the custom content gallery', () => {
         <CustomContentGallery
           contentConfig={{ contentService: 'cool-api', contentConfigValues: 'cool-config' }}
           phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
         />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(

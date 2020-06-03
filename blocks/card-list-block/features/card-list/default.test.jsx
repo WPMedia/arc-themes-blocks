@@ -11,8 +11,9 @@ import mockData,
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
-
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
   default: function Byline(props, children) { return <div {...props}>{children}</div>; },
@@ -23,7 +24,7 @@ jest.mock('@wpmedia/date-block', () => ({
   default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
 }));
 
-describe('The story-feed-list', () => {
+describe('Card list', () => {
   it('should render a list of stories', () => {
     const listContentConfig = {
       contentConfigValues: {
@@ -37,7 +38,7 @@ describe('The story-feed-list', () => {
 
     const { default: CardList } = require('./default');
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
@@ -58,10 +59,9 @@ describe('The story-feed-list', () => {
     const title = 'Test Title';
     const customFields = { listContentConfig, title };
     const { default: CardList } = require('./default');
-
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
@@ -142,7 +142,7 @@ describe('The story-feed-list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
@@ -176,7 +176,7 @@ describe('The story-feed-list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: withoutByline }, () => {
       wrapper.update();

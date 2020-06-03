@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
+import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE,
   LARGE,
@@ -50,6 +52,55 @@ const unserializeStory = (storyObject) => ({
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
+@Consumer
+class TopTableListWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      placeholderResizedImageOptions: {},
+    };
+    this.fetchPlaceholder();
+  }
+
+  getFallbackImageURL() {
+    const { arcSite, deployment, contextPath } = this.props;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+
+    if (targetFallbackImage && !targetFallbackImage.includes('http')) {
+      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
+    }
+
+    return targetFallbackImage;
+  }
+
+  fetchPlaceholder() {
+    const targetFallbackImage = this.getFallbackImageURL();
+
+    // using the fetchContent seems both more reliable
+    // and allows for conditional calls whereas useContent hook does not
+    if (targetFallbackImage && !targetFallbackImage.includes('/resources/')) {
+      this.fetchContent({
+        placeholderResizedImageOptions: {
+          source: 'resize-image-api',
+          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+        },
+      });
+    }
+  }
+
+  render() {
+    const { placeholderResizedImageOptions } = this.state;
+    const targetFallbackImage = this.getFallbackImageURL();
+    return (
+      <TopTableList
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...this.props}
+        placeholderResizedImageOptions={placeholderResizedImageOptions}
+        targetFallbackImage={targetFallbackImage}
+      />
+    );
+  }
+}
 
 // components end
 const TopTableList = (props) => {
@@ -62,6 +113,8 @@ const TopTableList = (props) => {
       extraLarge = 0, large = 0, medium = 0, small = 0,
     } = {},
     id = '',
+    placeholderResizedImageOptions,
+    targetFallbackImage,
   } = props;
 
   const { arcSite } = useFusionContext();
@@ -116,6 +169,8 @@ const TopTableList = (props) => {
               key={itemId}
               customFields={props.customFields}
               resizedImageOptions={resizedImageOptions}
+              placeholderResizedImageOptions={placeholderResizedImageOptions}
+              targetFallbackImage={targetFallbackImage}
             />
           );
         })
@@ -124,7 +179,7 @@ const TopTableList = (props) => {
   );
 };
 
-TopTableList.propTypes = {
+TopTableListWrapper.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed').tag(
       {
@@ -254,6 +309,6 @@ TopTableList.propTypes = {
   }),
 };
 
-TopTableList.label = 'Top Table List – Arc Block';
+TopTableListWrapper.label = 'Top Table List – Arc Block';
 
-export default TopTableList;
+export default TopTableListWrapper;

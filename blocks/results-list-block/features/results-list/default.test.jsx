@@ -6,8 +6,9 @@ import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-jest.mock('fusion:properties', () => jest.fn(() => ({})));
-
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
   default: function Byline(props, children) { return <div {...props}>{children}</div>; },
@@ -23,7 +24,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 
-describe('The story-feed-list', () => {
+describe('The results list', () => {
   it('should render a list of stories', () => {
     const listContentConfig = {
       contentConfigValues: {
@@ -37,7 +38,8 @@ describe('The story-feed-list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -59,7 +61,7 @@ describe('The story-feed-list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -122,7 +124,7 @@ describe('The story-feed-list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(LineItemWithOutDescription);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -158,7 +160,7 @@ describe('The story-feed-list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -183,7 +185,9 @@ describe('The story-feed-list', () => {
     const customFields = { listContentConfig };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" />);
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {

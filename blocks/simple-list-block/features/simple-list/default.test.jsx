@@ -61,6 +61,7 @@ describe('Simple list', () => {
 
   it('should show title if there is a title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => null),
@@ -71,22 +72,27 @@ describe('Simple list', () => {
       title: testText,
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('h2.list-title').text()).toBe(testText);
   });
   it('should show no title if there is no title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => mockOutput),
     }));
-    const wrapper = mount(<SimpleList />);
+    const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
     expect(wrapper.find('h2.list-title').text()).toBe('');
   });
   it('should fetch an array of data when content service is provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     const customFields = {
       listContentConfig: {
@@ -97,12 +103,16 @@ describe('Simple list', () => {
       },
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(2);
   });
   it('should not render items when no data provided', () => {
     const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => null),
@@ -116,7 +126,10 @@ describe('Simple list', () => {
       },
     };
 
-    const wrapper = mount(<SimpleList customFields={customFields} />);
+    const wrapper = mount(<SimpleList
+      customFields={customFields}
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(0);
   });

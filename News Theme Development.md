@@ -221,7 +221,22 @@ To doublecheck yourself, please use `npm view [package name]` or `npm view [pack
 
 `npx lerna publish --conventional-commits --conventional-graduate`
 
-In tech grooming, we also talked about using --conventional-graduate. Here's more [info](https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate) on that. 
+9. After publishing from the `master` branch, rebase `staging` on top of `master` so that the two branches are the same and so that we can start the block development cycle over again.
+
+```sh
+# Ensure we're on the master branch
+git checkout master
+# Ensure we have the latest from master
+git pull origin master
+# Checkout staging
+git checkout staging
+# Ensure we have the latest from staging
+git pull origin staging
+# Rebase staging onto master
+git rebase master
+# Push the updated staging branch (--force is required or else it will fail)
+git push --force origin staging
+```
 
 #### Publish hotfix 
 
@@ -240,6 +255,8 @@ In tech grooming, we also talked about using --conventional-graduate. Here's mor
 `npx lerna publish --conventional-commits --conventional-graduate`
 
 6. Go back to beta packages and look into handling changes. *TODO - SEE OPEN QUESTIONS BELOW*
+
+7. After publishing, follow the rebasing instructions in step 9 of the non-hotfix release process.
 
 For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013). 
 

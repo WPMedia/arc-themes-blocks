@@ -238,8 +238,6 @@ git rebase master
 git push --force origin staging
 ```
 
-In tech grooming, we also talked about using --conventional-graduate. Here's more [info](https://github.com/lerna/lerna/blob/master/commands/version/README.md#--conventional-graduate) on that. 
-
 #### Publish hotfix 
 
 1. Branch off of master. 
@@ -257,6 +255,8 @@ In tech grooming, we also talked about using --conventional-graduate. Here's mor
 `npx lerna publish --conventional-commits --conventional-graduate`
 
 6. Go back to beta packages and look into handling changes. *TODO - SEE OPEN QUESTIONS BELOW*
+
+7. After publishing, follow the rebasing instructions in step 9 of the non-hotfix release process.
 
 For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013). 
 

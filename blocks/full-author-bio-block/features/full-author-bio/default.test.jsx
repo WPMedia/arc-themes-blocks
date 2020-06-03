@@ -38,6 +38,9 @@ jest.mock('fusion:context', () => ({
           status: true,
           last_updated_date: '2019-01-24T23:15:45.348Z',
           type: 'author',
+          resized_params: {
+            '158x158': '',
+          },
         },
       ],
       last: 'c2FyYWNhcm90aGVycw==',

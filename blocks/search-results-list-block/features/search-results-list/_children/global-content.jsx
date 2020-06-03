@@ -26,7 +26,7 @@ const StyledButton = styled.button`
   && {
     background-color: ${(props) => props.primaryColor};
     font-family: ${(props) => props.primaryFont};
-  } 
+  }
 `;
 
 @Consumer
@@ -172,6 +172,9 @@ class GlobalSearchResultsList extends React.Component {
                 websites,
               } = element;
               const showSeparator = by && by.length !== 0;
+              if (!websites[arcSite]) {
+                return null;
+              }
               const url = websites[arcSite].website_url;
               return (
                 <div className="list-item" key={`result-card-${url}`}>

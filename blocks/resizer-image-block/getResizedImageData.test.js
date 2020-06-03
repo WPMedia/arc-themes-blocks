@@ -232,4 +232,23 @@ describe('get resized image data helper on the server-side', () => {
       '274x206': '/P5WszqbW7D4BknEyLhffQi2ulIk=filters:format(jpg):quality(70)/',
     });
   });
+  it('respects aspect ratio of image and only url', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+    const sampleImage = 'image.jpg';
+    const dataWithResizedImages = getResizedImageData(sampleImage, null, true, true);
+    // uses fit in logic
+    expect(dataWithResizedImages).toEqual({
+      '158x105': '/OhPCT9HOiYClZDcHtXJA1y_HbO8=/fit-in/158x105/filters:quality(70):fill(white):background_color(white)/',
+      '158x119': '/d1gFvKA4cYT9lBiMNFWTq-7zY5w=/fit-in/158x119/filters:quality(70):fill(white):background_color(white)/',
+      '274x183': '/DakL7zt-4boiiIW4glxQ_Ot3l1k=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/',
+      '274x206': '/1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/',
+    });
+  });
+  it.todo('look for different output based on a different resizer url');
 });

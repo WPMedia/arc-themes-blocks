@@ -181,7 +181,7 @@ const getResizedImageParams = (data, option) => {
     }
 
     // checking if by is array with a length
-    if (sourceData && sourceData.credits && sourceData.credits.by.length) {
+    if (sourceData && sourceData.credits && sourceData.credits.by && sourceData.credits.by.length) {
       sourceData.credits.by = resizeAuthorCredits(
         sourceData.credits.by,
       );

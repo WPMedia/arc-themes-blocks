@@ -8,5 +8,12 @@ export default {
     size: 'number',
     offset: 'number',
   },
-  transform: (data) => getResizedImageData(data),
+  transform: (data, query) => getResizedImageData(
+    data,
+    70,
+    false,
+    false,
+    query['arc-site'],
+  )
+  ,
 };

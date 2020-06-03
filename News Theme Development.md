@@ -536,13 +536,19 @@ export default CustomImageBlock;
     "@wpmedia/resizer-image-content-source-block",
     "@yourorg/custom-image-block"
   ],
-    "imageWidths": [
-        274,
-        400
-    ],
-    "aspectRatios": [
-        "16:9"
-    ]
+  "values": {
+      "default": {
+          "siteProperties": {
+            "imageWidths": [
+                274,
+                400
+            ],
+            "aspectRatios": [
+                "16:9"
+            ]
+          }
+      }
+  }
 ```
 
 4. Ensure that your existing content sources are using the `resizer-image-block` if you want to utilize engine-theme-sdk secure resizer image. That transform takes in items and transforms via ans schema. 
@@ -596,11 +602,17 @@ const ImageItem = ({ contentElement }) => (
 
 *Fusion-News-Theme/blocks.json*
 ```json
-    "breakpoints": {
-        "small": 0,
-        "medium": 768,
-        "large": 992
-    }
+  "values": {
+      "default": {
+          "siteProperties": {
+                "breakpoints": {
+                    "small": 0,
+                    "medium": 768,
+                    "large": 992
+                }
+          }
+      }
+  }
 ```
 
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*

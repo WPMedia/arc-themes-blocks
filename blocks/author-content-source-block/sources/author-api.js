@@ -7,10 +7,11 @@ export default {
   params: {
     slug: 'text',
   },
-  transform: (data) => {
+  transform: (data, query) => {
     const authors = data.authors.map((authorObject) => ({
       ...authorObject,
-      resized_params: getResizedImageData(authorObject.image, 70, true),
+      // other options null use default functionality, such as filter quality
+      resized_params: getResizedImageData(authorObject.image, null, true, null, query['arc-site']),
     }));
 
     return ({

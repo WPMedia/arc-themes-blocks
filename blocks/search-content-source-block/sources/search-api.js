@@ -21,8 +21,8 @@ export default {
     different from other content sources that have content elements
     on the top-level
   */
-  transform: (data) => ({
-    data: getResizedImageData(data.data),
+  transform: (data, query) => ({
+    data: getResizedImageData(data.data, null, null, null, query['arc-site']),
     ...data,
   })
   ,

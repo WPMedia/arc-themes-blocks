@@ -22,5 +22,12 @@ export default {
   params,
   resolve,
   schemaName: 'ans-feed',
-  transform: (data) => getResizedImageData(data),
+  // other options null use default functionality, such as filter quality
+  transform: (data, query) => getResizedImageData(
+    data,
+    null,
+    null,
+    null,
+    query['arc-site'],
+  ),
 };

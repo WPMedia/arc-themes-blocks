@@ -173,8 +173,8 @@ class LeadArt extends Component {
           <Gallery
             galleryElements={lead_art.content_elements}
             resizerURL={resizerURL}
-            ansId={content._id}
-            ansHeadline={content.headlines.basic ? content.headlines.basic : ''}
+            ansId={lead_art._id}
+            ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
             expandPhrase={this.phrases.t('global.gallery-expand-button')}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}

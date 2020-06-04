@@ -14,6 +14,7 @@ import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
 import mockLeadArtData from './mockLeadArtData';
 import topLeveLeadArt from './topLevelLeadArt';
 import galleryResizeData from './galleryResizeData';
+import searchResultsDataBroken from './searchResultsDataBroken';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -230,6 +231,24 @@ describe('get resized image data helper on the server-side', () => {
       '158x119': '/-bLoWbHajT6EMnuJq9KILDWTk9k=filters:format(jpg):quality(70)/',
       '274x183': '/3iOl2XDNsie7ZxxlpRagvADtkio=filters:format(jpg):quality(70)/',
       '274x206': '/P5WszqbW7D4BknEyLhffQi2ulIk=filters:format(jpg):quality(70)/',
+    });
+  });
+  it('takes in search results data object', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const dataWithResizedImages = getResizedImageData(searchResultsDataBroken.data);
+
+    expect(dataWithResizedImages[0].promo_items.basic.resized_params).toEqual({
+      '158x105': '/OsfQnLmY00jrVTU2Bn4BNFUNMhU=filters:format(jpg):quality(70)/',
+      '158x119': '/h0EkN6oDSPYmLReOq22BJZYfCz4=filters:format(jpg):quality(70)/',
+      '274x183': '/tei84mHd537sfGdIxzgfEPb90rM=filters:format(jpg):quality(70)/',
+      '274x206': '/2Qa9_nYqKGnCzwL-goJs3iZ4LwY=filters:format(jpg):quality(70)/',
     });
   });
   it('respects aspect ratio of image and only url', () => {

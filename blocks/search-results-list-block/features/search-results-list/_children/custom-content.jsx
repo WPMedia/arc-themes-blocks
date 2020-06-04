@@ -27,7 +27,7 @@ const StyledButton = styled.button`
   && {
     background-color: ${(props) => props.primaryColor};
     font-family: ${(props) => props.primaryFont};
-  } 
+  }
 `;
 
 @Consumer
@@ -171,6 +171,9 @@ class CustomSearchResultsList extends React.Component {
                 promo_items: promoItems,
                 websites,
               } = element;
+              if (!websites[arcSite]) {
+                return null;
+              }
               const url = websites[arcSite].website_url;
               const resizedImageOptions = extractResizedParams(element);
               const showSeparator = by && by.length !== 0;

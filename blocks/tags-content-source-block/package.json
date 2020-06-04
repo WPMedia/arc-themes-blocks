@@ -22,5 +22,5 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "a4e5943cb4fdcb4226472f4e8e0607f35310b499"
+  "gitHead": "0f5021bb18ddd06a9c38e59ae2f57ddd9536a912"
 }

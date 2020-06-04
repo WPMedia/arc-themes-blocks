@@ -565,8 +565,9 @@ export default {
     size: 'number',
     offset: 'number',
   },
-  // key part for discussion v
-  transform: (data) => getResizedImageData(data),
+  // other options null use default functionality, such as filter quality
+  // need query arcsite if resizer is utilizes different resizer urls per site 
+  transform: (data, query) => getResizedImageData(data, null, null, null, query['arc-site']),
 };
 ```
 

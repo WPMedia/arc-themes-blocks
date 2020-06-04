@@ -269,5 +269,4 @@ describe('get resized image data helper on the server-side', () => {
       '274x206': '/1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/',
     });
   });
-  it.todo('look for different output based on a different resizer url');
 });

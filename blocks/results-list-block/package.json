@@ -33,5 +33,6 @@
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

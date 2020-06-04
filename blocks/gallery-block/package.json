@@ -27,5 +27,6 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

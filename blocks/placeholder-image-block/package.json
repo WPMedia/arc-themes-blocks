@@ -26,5 +26,6 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

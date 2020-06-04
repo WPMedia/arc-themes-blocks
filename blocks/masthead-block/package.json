@@ -26,5 +26,6 @@
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/masthead-block"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

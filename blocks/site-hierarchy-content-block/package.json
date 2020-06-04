@@ -32,5 +32,6 @@
   "dependencies": {
     "@wpmedia/news-theme-css": "^2.0.6",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

@@ -30,5 +30,6 @@
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "dependencies": {
     "thumbor-lite": "^0.1.8"
-  }
+  },
+  "gitHead": "d138a355e338d98a23e44929dd326278d95bb3d1"
 }

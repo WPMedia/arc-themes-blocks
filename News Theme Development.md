@@ -464,8 +464,7 @@ or `engine-theme-sdk` will require you stop and restart Fusion.
 
 ### Secure Image Resizing Quickstart 
 
-1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally.
-
+1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally. This local .env file will live in the `[feature pack]/environment/index.json` -- it can be decrypted using admin with `[https://yoursite.arcpublishing.com]/deployment/fusion/secrets`.
 
 *Fusion-News-Theme/.env*
 ```

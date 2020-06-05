@@ -1,0 +1,24 @@
+name: Canary block
+on:
+  push:
+    branches:
+      - staging
+
+# Publishes Canary builds with the dist tag of "canary" and
+# with a version of 0.0.0 with a short git SHA appended to
+# the end.
+jobs:
+  publish:
+    name: Canary block publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@wpmedia'
+      - run: npm install
+      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --force-publish --no-push --dist-tag canary --yes

@@ -27,7 +27,7 @@
     border-radius: 100%;
     height: calculateRem(84px);
     margin: map-get($spacers, 'xs');
-    width: calculateRem(84px);
+    min-width: calculateRem(84px);
   }
 
   .descriptions {

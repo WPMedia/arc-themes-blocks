@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import styled from 'styled-components';
 import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image,
@@ -18,17 +18,26 @@ import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 import './_articlebody.scss';
 
+const StyledText = styled.p`
+  a {
+    color: ${(props) => props.primaryColor};
+  }
+`; 
 
 function parseArticleItem(item, index, arcSite, phrases) {
   const {
     _id: key = index, type, content,
   } = item;
-
   // TODO: Split each type into a separate reusable component
   switch (type) {
     case 'text': {
       return (content && content.length > 0) ? (
-        <p className="body-paragraph" key={key} dangerouslySetInnerHTML={{ __html: content }} />
+        <StyledText
+          primaryColor={getThemeStyle(arcSite)['primary-color']}
+          className="body-paragraph"
+          key={key}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       ) : null;
     }
     case 'image': {
@@ -110,7 +119,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
 
     case 'header':
       return (item.content && item.content.length > 0) ? (
-        <Header element={item} />
+        <Header element={item} primaryColor={getThemeStyle(arcSite)['primary-color']} />
       ) : null;
 
     case 'oembed_response': {

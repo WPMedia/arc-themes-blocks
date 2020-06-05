@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/resizer-image-block",
-  "version": "5.0.1-beta.1",
+  "version": "0.0.0-f493ba84",
   "description": "Takes a raw image url and uses thumbor to create resize urls",
   "main": "index.js",
   "scripts": {

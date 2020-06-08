@@ -24,6 +24,12 @@ const StyledText = styled.p`
   }
 `;
 
+const StyledDiv = styled.div`
+  a {
+    color: ${(props) => props.primaryColor};
+  }
+`;
+
 function parseArticleItem(item, index, arcSite, phrases) {
   const {
     _id: key = index, type, content,
@@ -91,7 +97,11 @@ function parseArticleItem(item, index, arcSite, phrases) {
     case 'raw_html': {
       return (content && content.length > 0) ? (
         <Fragment key={key}>
-          <div className="block-margin-bottom" dangerouslySetInnerHTML={{ __html: content }} />
+          <StyledDiv
+            className="block-margin-bottom"
+            dangerouslySetInnerHTML={{ __html: content }}
+            primaryColor={getThemeStyle(arcSite)['primary-color']}
+          />
         </Fragment>
       ) : null;
     }

@@ -2,46 +2,52 @@ import React from 'react';
 import styled from 'styled-components';
 import unescapeHtml from '../shared/unescape-html';
 
-const StyledOrdered = styled.li`
+const StyledListItem = styled.li`
   a {
     color: ${(props) => props.primaryColor};
   }
 `;
 
-const StyledUnordered = styled.ul`
+const StyledOrderedList = styled.ol`
+  a {
+    color: ${(props) => props.primaryColor};
+  }
+`;
+
+const StyledUnorderedList = styled.ul`
   a {
     color: ${(props) => props.primaryColor};
   }
 `;
 
 const List = (props) => {
-  const { listType, listItems } = props;
+  const { listType, listItems, primaryColor } = props;
   const list = listItems.map((listItem) => {
     if (listItem.type === 'list') {
       const { list_type: nestedListType, items: nestedListItems } = listItem;
       return <List key={listItem._id} listType={nestedListType} listItems={nestedListItems} />;
     }
     return (
-      <StyledOrdered
+      <StyledListItem
         key={listItem._id}
         dangerouslySetInnerHTML={{ __html: unescapeHtml(listItem.content) }}
-        primaryColor={props.primaryColor}
+        primaryColor={primaryColor}
       />
     );
   });
 
   if (listType === 'unordered') {
     return (
-      <StyledUnordered primaryColor={props.primaryColor}>
+      <StyledUnorderedList primaryColor={primaryColor}>
         {list}
-      </StyledUnordered>
+      </StyledUnorderedList>
     );
   }
 
   return (
-    <ol>
+    <StyledOrderedList primaryColor={primaryColor}>
       {list}
-    </ol>
+    </StyledOrderedList>
   );
 };
 

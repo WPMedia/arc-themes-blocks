@@ -22,6 +22,6 @@ jobs:
       - run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --force-publish --no-push --dist-tag canary --yes
+      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --force-publish --no-git-tag-version --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

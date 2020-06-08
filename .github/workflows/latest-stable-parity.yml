@@ -1,0 +1,26 @@
+name: 'latest'/'stable' parity
+on:
+  registry_package:
+    types: [published]
+
+# Every time a package is published to this repo:
+#   1. Get the 'latest' version number
+#   2. If the package that was just published is the same as 'latest'
+#      then we set the dist tag for that package to also be 'stable'
+jobs:
+  set-tag:
+    name: Set 'latest' block to be tagged as 'stable'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          registry-url: 'https://npm.pkg.github.com'
+      - id: latest-version
+        run: echo "::set-output name=version::$(npm view ${{ github.event.package.name }} dist-tags.latest)"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - if: ${{ github.event.package.version == steps.latest-version.outputs.version }}
+        run: npm dist-tag add ${{ github.event.package.name }}@${{ steps.latest-version.outputs.version }} stable
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }

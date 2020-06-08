@@ -26,6 +26,10 @@ describe('the global content gallery', () => {
                 subtitle: 'my cool subtitle',
               },
             ],
+            _id: 'shdsjdhs73e34',
+            headlines: {
+              basic: 'This is a headline',
+            },
           },
         })),
       }));

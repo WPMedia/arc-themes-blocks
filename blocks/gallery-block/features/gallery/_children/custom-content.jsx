@@ -3,14 +3,12 @@ import { useContent } from 'fusion:content';
 import { Gallery } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 
-import { useFusionContext } from 'fusion:context';
-
 const CustomContentGallery = ({ contentConfig, phrases, arcSite }) => {
-  const { globalContent: content } = useFusionContext();
-  const { content_elements: contentElements = [] } = useContent({
+  const content = useContent({
     source: contentConfig.contentService,
     query: contentConfig.contentConfigValues,
   }) || {};
+  const { content_elements: contentElements = [] } = content;
 
   return (
     <Gallery

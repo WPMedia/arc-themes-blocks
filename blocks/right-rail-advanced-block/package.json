@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/right-rail-advanced-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Fusion themes block containing an advanced right-rail layout.",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -27,5 +27,6 @@
   "dependencies": {
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
 }

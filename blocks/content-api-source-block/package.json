@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/content-api-source-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -24,5 +24,6 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
-  }
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

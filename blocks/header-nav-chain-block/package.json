@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/header-nav-chain-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Fusion News Theme header nav chain block",
   "author": "Sean Shannon <sean.shannon@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -30,5 +30,6 @@
     "@wpmedia/news-theme-css": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

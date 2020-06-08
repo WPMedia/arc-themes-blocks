@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-tag-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Fusion Article Tag block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -27,5 +27,6 @@
   "dependencies": {
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

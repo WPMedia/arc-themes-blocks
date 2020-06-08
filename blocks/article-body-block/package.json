@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-body-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [
@@ -31,5 +31,6 @@
     "@wpmedia/video-player-block": "latest",
     "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

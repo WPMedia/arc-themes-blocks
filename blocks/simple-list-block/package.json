@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/simple-list-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -29,5 +29,6 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
-  }
+  },
+  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
 }

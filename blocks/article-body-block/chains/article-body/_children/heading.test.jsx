@@ -19,7 +19,7 @@ describe('the article body Heading component', () => {
     expect(wrapper.find('h3').length).toBe(1);
     expect(wrapper.find('h3').text()).toMatch('Heading 3 - bold italic underline hyperlink');
     // eslint-disable-next-line no-useless-escape
-    expect(wrapper.find('h3').html()).toMatch('<h3>Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href="https://www.washingtonpost.com/" target=\"_blank\">hyperlink</a></h3>');
+    expect(wrapper.find('h3').html()).toMatch('<h3 class=\"sc-bdVaJa glstMe\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href="https://www.washingtonpost.com/" target=\"_blank\">hyperlink</a></h3>');
   });
 
   it('should default to h2 if no heading level is given', () => {
@@ -37,7 +37,7 @@ describe('the article body Heading component', () => {
     const wrapper = mount(<Heading element={headingData} />);
     expect(wrapper.find('h2').length).toBe(1);
     // eslint-disable-next-line no-useless-escape
-    expect(wrapper.find('h2').html()).toMatch('<h2>Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href="https://www.washingtonpost.com/" target=\"_blank\">hyperlink</a></h2>');
+    expect(wrapper.find('h2').html()).toMatch('<h2 class=\"sc-bdVaJa glstMe\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href="https://www.washingtonpost.com/" target=\"_blank\">hyperlink</a></h2>');
     expect(wrapper.find('h2').text()).toMatch('Heading 3 - bold italic underline hyperlink');
   });
 });

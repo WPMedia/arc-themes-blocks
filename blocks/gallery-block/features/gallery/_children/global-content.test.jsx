@@ -9,6 +9,11 @@ const mockPhrases = {
   'global.gallery-pause-autoplay-button': 'Pause autoplay',
 };
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+  resizerURL: 'https://fake.cdn.com/resizer',
+}))));
+
 describe('the global content gallery', () => {
   describe('when there is an array of content elements present', () => {
     it('should load content from global content', () => {
@@ -37,6 +42,7 @@ describe('the global content gallery', () => {
           deployment={jest.fn((path) => path)}
         />,
       );
+      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
         [
           {
@@ -72,6 +78,7 @@ describe('the global content gallery', () => {
           deployment={jest.fn((path) => path)}
         />,
       );
+      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
@@ -98,6 +105,7 @@ describe('the global content gallery', () => {
           deployment={jest.fn((path) => path)}
         />,
       );
+      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');

@@ -9,6 +9,11 @@ const mockPhrases = {
   'global.gallery-pause-autoplay-button': 'Pause autoplay',
 };
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+  resizerURL: 'https://fake.cdn.com/resizer',
+}))));
+
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({
     content_elements: [
@@ -81,6 +86,7 @@ describe('the custom content gallery', () => {
           },
         ],
       );
+      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().ansId).toEqual('shdsjdhs73e34');
       expect(wrapper.find('Gallery').props().ansHeadline).toEqual('This is a headline');
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
@@ -103,6 +109,7 @@ describe('the custom content gallery', () => {
         />,
       );
       expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
+      expect(wrapper.find('Gallery').props().resizerURL).toEqual('https://fake.cdn.com/resizer');
       expect(wrapper.find('Gallery').props().ansId).toEqual('shdsjdhs73e34');
       expect(wrapper.find('Gallery').props().ansHeadline).toEqual('This is a headline');
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');

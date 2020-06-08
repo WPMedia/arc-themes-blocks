@@ -1,4 +1,4 @@
-name: 'latest'/'stable' parity
+name: latest and stable dist-tag parity
 on:
   registry_package:
     types: [published]

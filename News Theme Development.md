@@ -481,8 +481,7 @@ or `engine-theme-sdk` will require you stop and restart Fusion.
 
 ### Secure Image Resizing Quickstart 
 
-1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally.
-
+1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally. This local .env file will live in the `[feature pack]/environment/index.json` -- it can be decrypted using admin with `[https://yoursite.arcpublishing.com]/deployment/fusion/secrets`.
 
 *Fusion-News-Theme/.env*
 ```
@@ -517,7 +516,7 @@ fusion-news-theme-blocks/environment/index.json*
 
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
-import { resizerURL } from 'fusion:environment';
+import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 const CustomImageBlock = ({ rawImageURL }) => {
@@ -528,7 +527,7 @@ const CustomImageBlock = ({ rawImageURL }) => {
 
     return (
         <Image
-            resizerURL={resizerURL}
+            resizerURL={getProperties().resizerURL}
             resizedImageOptions={resizedImageOptions}
             url={rawImageURL}
             alt={'This is a placeholder placeholder'}
@@ -583,13 +582,14 @@ export default {
     size: 'number',
     offset: 'number',
   },
-  // key part for discussion v
-  transform: (data) => getResizedImageData(data),
+  // other options null use default functionality, such as filter quality
+  // need query arcsite if resizer is utilizes different resizer urls per site 
+  transform: (data, query) => getResizedImageData(data, null, null, null, query['arc-site']),
 };
 ```
 
 ```jsx
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
@@ -634,7 +634,7 @@ const ImageItem = ({ contentElement }) => (
 
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 

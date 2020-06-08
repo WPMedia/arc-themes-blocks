@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
 import {
@@ -119,7 +119,7 @@ const FullAuthorBio = () => {
                 largeWidth={158}
                 largeHeight={158}
                 resizedImageOptions={content.authors[0].resized_params}
-                resizerURL={resizerURL}
+                resizerURL={getProperties(arcSite)?.resizerURL}
                 breakpoints={getProperties(arcSite)?.breakpoints}
               />
             )

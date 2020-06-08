@@ -7,7 +7,7 @@ import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { resizerURL } from 'fusion:environment';
+
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
@@ -196,7 +196,7 @@ class CustomSearchResultsList extends React.Component {
                           largeWidth={274}
                           largeHeight={154}
                           resizedImageOptions={resizedImageOptions}
-                          resizerURL={resizerURL}
+                          resizerURL={getProperties(arcSite)?.resizerURL}
                           breakpoints={getProperties(arcSite)?.breakpoints}
                         />
                       ) : (
@@ -211,7 +211,7 @@ class CustomSearchResultsList extends React.Component {
                           url={targetFallbackImage}
                           breakpoints={getProperties(arcSite)?.breakpoints}
                           resizedImageOptions={placeholderResizedImageOptions}
-                          resizerURL={resizerURL}
+                          resizerURL={getProperties(arcSite)?.resizerURL}
                         />
                       )}
                     </a>

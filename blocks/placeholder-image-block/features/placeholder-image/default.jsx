@@ -1,7 +1,7 @@
 import React from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import withFusionContext from 'fusion:context';
 
@@ -62,7 +62,7 @@ class PlaceholderImage extends React.Component {
           largeWidth={largeWidth}
           largeHeight={largeHeight}
           resizedImageOptions={resizedImageOptions}
-          resizerURL={resizerURL}
+          resizerURL={getProperties(arcSite)?.resizerURL}
         />
       </>
     );

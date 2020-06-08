@@ -9,6 +9,11 @@ const mockPhrases = {
   'global.gallery-pause-autoplay-button': 'Pause autoplay',
 };
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+  resizerURL: 'https://fake.cdn.com/resizer',
+}))));
+
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({
     content_elements: [

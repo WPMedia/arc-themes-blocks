@@ -8,7 +8,6 @@ This is specifically to make sure that resized image urls are available at theme
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
@@ -29,7 +28,7 @@ const ManualBlock = ({ customFields, arcSite }) => {
       largeWidth={377}
       largeHeight={283}
       breakpoints={getProperties(arcSite)?.breakpoints}
-      resizerURL={resizerURL}
+      resizerURL={getProperties(arcSite)?.resizerURL}
       resizedImageOptions={resizedImageOptions}
     />
   )

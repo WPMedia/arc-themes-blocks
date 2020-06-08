@@ -22,7 +22,7 @@ const StyledText = styled.p`
   a {
     color: ${(props) => props.primaryColor};
   }
-`; 
+`;
 
 function parseArticleItem(item, index, arcSite, phrases) {
   const {

@@ -101,7 +101,11 @@ function parseArticleItem(item, index, arcSite, phrases) {
       // eslint-disable-next-line arrow-body-style
       return (listItems && listItems.length > 0) ? (
         <Fragment key={key}>
-          <List listType={listType} listItems={listItems} />
+          <List
+            listType={listType}
+            listItems={listItems}
+            primaryColor={getThemeStyle(arcSite)['primary-color']}
+          />
         </Fragment>
       ) : null;
     }

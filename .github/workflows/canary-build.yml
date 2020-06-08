@@ -21,7 +21,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - run: npm install
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
       - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --force-publish --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

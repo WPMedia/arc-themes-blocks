@@ -16,11 +16,12 @@ jobs:
         with:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
-      - id: latest-version
-        run: echo "::set-output name=version::$(npm view ${{ github.event.package.name }} dist-tags.latest)"
+      - id: latestversion
+        run: echo "::set-output name=latest::$(npm view ${{ github.event.package.name }} dist-tags.latest)"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - if: ${{ github.event.package.version == steps.latest-version.outputs.version }}
-        run: npm dist-tag add ${{ github.event.package.name }}@${{ steps.latest-version.outputs.version }} stable
+      - run: echo ${{ github.event.package.name }}@${{ github.event.package.version }}
+      - if: github.event.package.version == steps.latestversion.outputs.latest
+        run: npm dist-tag add ${{ github.event.package.name }}@${{ steps.latestversion.outputs.latest }} stable
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

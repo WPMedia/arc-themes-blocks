@@ -22,7 +22,7 @@ body {
     width: 100%;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-bottom: calculateRem(68px);
+      padding-bottom: calculateRem(52px);
     }
 
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {

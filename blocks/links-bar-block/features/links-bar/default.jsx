@@ -23,15 +23,36 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
   });
   const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
+  const showSeparator = !!(
+    content
+    && content.children
+    && content.children.length > 1
+  );
 
   return (
     <nav key={id} className="links-bar">
-      {menuItems && menuItems.map((item) => (
-        <LinkBarSpan className="links-menu" key={item._id} primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+      {menuItems && menuItems.map((item, index) => (
+        <LinkBarSpan
+          className="links-menu"
+          key={item._id}
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        >
           {
             item.node_type === 'link'
-              ? <Link href={item.url} name={item.display_name} />
-              : <Link href={item._id} name={item.name} />
+              ? (
+                <Link
+                  href={item.url}
+                  name={item.display_name}
+                  showSeparator={content.children.length !== index + 1 && showSeparator}
+                />
+              )
+              : (
+                <Link
+                  href={item._id}
+                  name={item.name}
+                  showSeparator={content.children.length !== index + 1 && showSeparator}
+                />
+              )
           }
         </LinkBarSpan>
       ))}

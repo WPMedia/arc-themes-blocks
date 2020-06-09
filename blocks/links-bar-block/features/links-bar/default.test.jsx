@@ -85,6 +85,16 @@ describe('the links bar feature for the default output type', () => {
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });
 
+  describe('a link element ', () => {
+    it('should have the right name', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="/testurl" name="test" />);
+
+      expect(wrapper.props().name).toBe('test');
+      expect(wrapper.find('a').text()).toBe('test');
+    });
+  });
+
   describe('when a link is missing a trailing slash', () => {
     it('should add a slash at the end of the link', () => {
       const { default: Link } = require('./_children/link');

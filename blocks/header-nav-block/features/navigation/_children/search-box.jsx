@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
 export default ({
-  alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark',
+  alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const searchInput = useRef(null);
@@ -33,14 +33,22 @@ export default ({
   const handleClick = (event) => {
     if (!disabledBtn) {
       event.preventDefault();
-      window.location.href = `/search/${searchInput.current.value}`;
+      if (customSearchAction) {
+        customSearchAction(searchInput.current.value);
+      } else {
+        window.location.href = `/search/${searchInput.current.value}`;
+      }
     }
   };
 
   const handleKey = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      window.location.href = `/search/${searchInput.current.value}`;
+      if (customSearchAction) {
+        customSearchAction(searchInput.current.value);
+      } else {
+        window.location.href = `/search/${searchInput.current.value}`;
+      }
     }
   };
 

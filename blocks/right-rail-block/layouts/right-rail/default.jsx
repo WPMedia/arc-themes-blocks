@@ -1,43 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import './default.scss';
 
-const RightRailLayout = ({ children }) => (
-  <>
-    <header className="page-header">{children[0]}</header>
-    <section role="main" className="main">
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
-            {/* Full Width 1 Content Area */}
-            {children[1]}
+const getFeatureList = () => {
+  const { renderables } = useAppContext();
+  const featureList = {};
+  renderables.forEach((renderable) => {
+    if (renderable.collection === 'sections') {
+      featureList[renderable.props.id] = renderable.children.length || 0;
+    }
+  });
+  return featureList;
+};
+
+const RightRailLayout = ({ children }) => {
+  const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] = children;
+  const featureList = getFeatureList();
+
+  return (
+    <>
+      <header className="page-header">{navigation}</header>
+      <section role="main" className="main">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
+              {fullWidth1}
+            </div>
           </div>
+
+          <div className="row">
+            <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
+              {main}
+            </div>
+            <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
+              {rightRail}
+            </aside>
+          </div>
+
+          {featureList['4'] > 0 && (
+            <div className="row">
+              <div className="col-sm-xl-12">
+                {fullWidth2}
+              </div>
+            </div>
+          )}
+
         </div>
 
-        <div className="row">
-          <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
-            {/* Main Content Area */}
-            {children[2]}
-          </div>
-          <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
-            {/* Right Rail Content Area */}
-            {children[3]}
-          </aside>
-        </div>
-
-        <div className="row">
-          <div className="col-sm-xl-12 fullwidth-section">
-            {/* Full Width 2 Content Area */}
-            {children[4]}
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-    <footer>{children[5]}</footer>
-  </>
-);
+      </section>
+      <footer>{footer}</footer>
+    </>
+  );
+};
 
 RightRailLayout.propTypes = {
   children: PropTypes.array,

@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useAppContext } from 'fusion:context';
 import { framework } from '@wpmedia/news-theme-css/js/framework';
 import './default.scss';
 
+const getFeatureList = () => {
+  const { renderables } = useAppContext();
+  const featureList = {};
+  renderables.forEach((renderable) => {
+    if (renderable.collection === 'sections') {
+      featureList[renderable.props.id] = renderable.children.length || 0;
+    }
+  });
+  return featureList;
+};
+
 const RightRailAdvancedLayout = ({ children }) => {
   const [isDesktop, setIsDesktop] = useState(true);
+  const [
+    navigation,
+    fullwidth1,
+    main,
+    main2,
+    rightRailTop,
+    rightRailMiddle,
+    rightRailBottom,
+    fullWidth2,
+    footer,
+  ] = children;
+  const featureList = getFeatureList();
 
   useEffect(() => {
     let mounted = true;
@@ -30,11 +54,11 @@ const RightRailAdvancedLayout = ({ children }) => {
       <div className="row">
         <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
           {/* Main Content Area */}
-          {children[4]}
-          {children[2]}
-          {children[5]}
-          {children[3]}
-          {children[6]}
+          {rightRailTop}
+          {main}
+          {rightRailMiddle}
+          {main2}
+          {rightRailBottom}
         </div>
       </div>
     </>
@@ -45,14 +69,14 @@ const RightRailAdvancedLayout = ({ children }) => {
       <div className="row">
         <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
           {/* Main Content Area */}
-          {children[2]}
-          {children[3]}
+          {main}
+          {main2}
         </div>
         <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
           {/* Right Rail Content Area */}
-          {children[4]}
-          {children[5]}
-          {children[6]}
+          {rightRailTop}
+          {rightRailMiddle}
+          {rightRailBottom}
         </aside>
       </div>
     </>
@@ -60,26 +84,26 @@ const RightRailAdvancedLayout = ({ children }) => {
 
   return (
     <>
-      <header className="page-header">{children[0]}</header>
+      <header className="page-header">{navigation}</header>
       <section role="main" className="main">
         <div className="container">
           <div className="row">
             <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
-              {/* Full Width 1 Content Area */}
-              {children[1]}
+              {fullwidth1}
             </div>
           </div>
           {isDesktop ? desktopLayout : mobileTabletLayout }
-          <div className="row">
-            <div className="col-sm-xl-12 fullwidth-section">
-              {/* Full Width 2 Content Area */}
-              {children[7]}
+          {featureList['7'] > 0 && (
+            <div className="row">
+              <div className="col-sm-xl-12">
+                {fullWidth2}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
       </section>
-      <footer>{children[8]}</footer>
+      <footer>{footer}</footer>
     </>
   );
 };

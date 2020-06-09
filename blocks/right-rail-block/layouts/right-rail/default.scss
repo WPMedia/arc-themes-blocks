@@ -17,12 +17,20 @@ body {
 
   .main {
     flex-grow: 1;
-    padding-bottom: calculateRem(64px);
+    padding-bottom: calculateRem(56px);
     padding-top: 54px;
     width: 100%;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-bottom: calculateRem(80px);
+      padding-bottom: calculateRem(52px);
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      padding-bottom: calculateRem(64px);
+    }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
+      padding-bottom: calculateRem(56px);
     }
 
     @media screen and (max-width: 95rem) and (min-width: 90rem) {

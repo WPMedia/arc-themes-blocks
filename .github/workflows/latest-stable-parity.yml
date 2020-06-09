@@ -1,7 +1,7 @@
 name: latest and stable dist-tag parity
 on:
   registry_package:
-    types: [published]
+    types: [published, updated]
 
 # Every time a package is published to this repo:
 #   1. Get the 'latest' version number
@@ -10,6 +10,7 @@ on:
 jobs:
   set-tag:
     name: Set 'latest' block to be tagged as 'stable'
+    if: startsWith(github.event.package.version, '0.0.0') == false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v1

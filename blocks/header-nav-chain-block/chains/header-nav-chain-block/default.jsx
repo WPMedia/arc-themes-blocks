@@ -57,7 +57,11 @@ const Nav = (props) => {
 
   const phrases = getTranslatedPhrases(locale);
 
-  const { children = [], customFields: { hierarchy, signInOrder } = {} } = props;
+  const {
+    children = [],
+    customFields: { hierarchy, signInOrder } = {},
+    customSearchAction = null,
+  } = props;
 
   // signInOrder is 1-based instead of 0-based, so we subtract 1
   const signInButton = (Number.isInteger(signInOrder) && children[signInOrder - 1])
@@ -107,7 +111,7 @@ const Nav = (props) => {
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
-            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} />
+            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />
             <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
               <span>{phrases.t('header-nav-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />

@@ -45,6 +45,7 @@ class GlobalSearchResultsList extends React.Component {
     this.locale = getProperties(this.arcSite).locale || 'en';
     this.phrases = getTranslatedPhrases(this.locale);
     this.fetchPlaceholder();
+    this.customSearchAction = props.customSearchAction || null;
   }
 
   getFallbackImageURL() {
@@ -105,7 +106,9 @@ class GlobalSearchResultsList extends React.Component {
 
   handleSearch() {
     const { value } = this.state;
-    if (value.length > 0) {
+    if (this.customSearchAction && value.length > 0) {
+      this.customSearchAction(value);
+    } else if (value.length > 0) {
       window.location.href = `/search/${value}`;
     }
   }

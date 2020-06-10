@@ -13,6 +13,7 @@ const HeadlineText = styled.h1`
 `;
 
 const SmallManualPromo = ({ customFields, arcSite }) => {
+  // inject arc site here
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
     query: { raw_image_url: customFields.imageURL },

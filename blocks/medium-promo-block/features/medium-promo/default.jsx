@@ -24,6 +24,7 @@ const DescriptionText = styled.p`
 const MediumPromo = ({ customFields, arcSite }) => {
   const { editableContent } = useEditableContent();
 
+  // inject arc site query
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues ?? null,

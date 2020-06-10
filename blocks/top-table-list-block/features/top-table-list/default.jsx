@@ -130,7 +130,7 @@ const TopTableList = (props) => {
 
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
   return (

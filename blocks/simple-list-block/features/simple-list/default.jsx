@@ -104,7 +104,7 @@ const SimpleList = (props) => {
   // need to inject the arc site here into use content
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: contentConfigValues,
+    query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
   return (

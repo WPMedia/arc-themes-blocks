@@ -95,6 +95,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
               href={url}
               aria-label="Open related story"
               dangerouslySetInnerHTML={{ __html: content }}
+              primaryColor={getThemeStyle(arcSite)['primary-color']}
             />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
           </p>

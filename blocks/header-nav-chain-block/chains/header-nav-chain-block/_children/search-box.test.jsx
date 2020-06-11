@@ -25,6 +25,16 @@ describe('the SearchBox component', () => {
 
       expect(wrapper.find('.nav-search')).toHaveClassName('open');
     });
+    it('should run the customSearchAction when not not null', () => {
+      const customSearchAction = () => {
+        document.body.classList.add('has-custom-search-action');
+      };
+      const wrapper = shallow(<SearchBox customSearchAction={customSearchAction} />);
+
+      wrapper.find('.nav-search button').simulate('mousedown', fakeEvent); // need to use mousedown instead of click to prevent race condition
+
+      expect(document.body.classList.contains('has-custom-search-action'));
+    });
   });
 
   describe('when .nav-search is open', () => {

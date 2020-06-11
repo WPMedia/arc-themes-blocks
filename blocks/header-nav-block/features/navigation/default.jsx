@@ -67,7 +67,7 @@ const Nav = (props) => {
 
   const phrases = getTranslatedPhrases(locale);
 
-  const { customFields: { hierarchy, showSignIn } = {} } = props;
+  const { customFields: { hierarchy, showSignIn } = {}, customSearchAction = null } = props;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -112,7 +112,7 @@ const Nav = (props) => {
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
-            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} />
+            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />
             <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
               <span>{phrases.t('header-nav-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />

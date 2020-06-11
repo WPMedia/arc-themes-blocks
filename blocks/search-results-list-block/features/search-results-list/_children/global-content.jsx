@@ -9,7 +9,7 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { resizerURL } from 'fusion:environment';
+
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
 import '@wpmedia/shared-styles/scss/_results-list.scss';
@@ -45,6 +45,7 @@ class GlobalSearchResultsList extends React.Component {
     this.locale = getProperties(this.arcSite).locale || 'en';
     this.phrases = getTranslatedPhrases(this.locale);
     this.fetchPlaceholder();
+    this.customSearchAction = props.customSearchAction || null;
   }
 
   getFallbackImageURL() {
@@ -105,7 +106,9 @@ class GlobalSearchResultsList extends React.Component {
 
   handleSearch() {
     const { value } = this.state;
-    if (value.length > 0) {
+    if (this.customSearchAction && value.length > 0) {
+      this.customSearchAction(value);
+    } else if (value.length > 0) {
       window.location.href = `/search/${value}`;
     }
   }
@@ -196,7 +199,7 @@ class GlobalSearchResultsList extends React.Component {
                           largeWidth={274}
                           largeHeight={154}
                           breakpoints={getProperties(arcSite)?.breakpoints}
-                          resizerURL={resizerURL}
+                          resizerURL={getProperties(arcSite)?.resizerURL}
                         />
                       ) : (
                         <Image
@@ -210,7 +213,8 @@ class GlobalSearchResultsList extends React.Component {
                           url={targetFallbackImage}
                           breakpoints={getProperties(arcSite)?.breakpoints}
                           resizedImageOptions={placeholderResizedImageOptions}
-                          resizerURL={resizerURL}
+                          resizerURL={getProperties(arcSite)?.resizerURL}
+
                         />
                       )}
                     </a>

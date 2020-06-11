@@ -5,5 +5,12 @@ export default {
   resolve: source.resolve,
   schemaName: source.schemaName,
   params: source.params,
-  transform: (data) => getResizedImageData(data),
+  // other options null use default functionality, such as filter quality
+  transform: (data, query) => getResizedImageData(
+    data,
+    null,
+    null,
+    null,
+    query['arc-site'],
+  ),
 };

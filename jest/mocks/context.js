@@ -1,5 +1,3 @@
-export default {
-  useComponentContext: jest.fn(),
-  useAppContext: jest.fn(),
-  useFusionContext: jest.fn(),
-};
+export const useComponentContext = jest.fn();
+export const useAppContext = jest.fn();
+export const useFusionContext = jest.fn();

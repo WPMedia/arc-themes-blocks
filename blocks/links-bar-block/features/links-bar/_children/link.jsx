@@ -9,15 +9,16 @@ function fixTrailingSlash(item) {
   return fixedItem;
 }
 
-const Link = ({ href, name }) => {
+const Link = ({ href, name, showSeparator }) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
+
   return (
     externalUrl ? (
       <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
-        {name}
+        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
         <span className="sr-only">(Opens in new window)</span>
       </a>
-    ) : <a href={fixTrailingSlash(href)}>{name}</a>
+    ) : <a href={fixTrailingSlash(href)}>{`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}</a>
   );
 };
 

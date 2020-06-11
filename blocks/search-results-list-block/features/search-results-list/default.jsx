@@ -9,11 +9,12 @@ const SearchResultsListContainer = (
     customFields: {
       inheritGlobalContent = true,
     } = {},
+    customSearchAction = null,
   } = {},
 ) => {
   const { arcSite } = useAppContext();
   if (inheritGlobalContent) {
-    return <GlobalContentSearch arcSite={arcSite} />;
+    return <GlobalContentSearch arcSite={arcSite} customSearchAction={customSearchAction} />;
   }
   return <CustomSearchResultsList arcSite={arcSite} />;
 };

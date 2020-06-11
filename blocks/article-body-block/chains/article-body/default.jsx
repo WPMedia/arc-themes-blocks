@@ -25,6 +25,10 @@ const StyledText = styled.p`
   }
 `;
 
+const StyledLink = styled.a`
+  color: ${(props) => props.primaryColor};
+`;
+
 function parseArticleItem(item, index, arcSite, phrases) {
   const {
     _id: key = index, type, content,
@@ -82,7 +86,12 @@ function parseArticleItem(item, index, arcSite, phrases) {
         <Fragment key={key}>
           <p className="interstitial-link block-margin-bottom">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
-            <a href={url} aria-label="Open related story" dangerouslySetInnerHTML={{ __html: content }} />
+            <StyledLink
+              href={url}
+              aria-label="Open related story"
+              dangerouslySetInnerHTML={{ __html: content }}
+              primaryColor={getThemeStyle(arcSite)['primary-color']}
+            />
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
           </p>
         </Fragment>

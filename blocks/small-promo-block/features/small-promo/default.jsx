@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -15,12 +16,15 @@ const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const SmallPromo = ({ customFields, arcSite }) => {
+const SmallPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
-    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      : null,
   }) || null;
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;

@@ -29,7 +29,9 @@ const ExtraLargePromo = ({ customFields }) => {
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
-    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      : null,
   }) || null;
 
   const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {

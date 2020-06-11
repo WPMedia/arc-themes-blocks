@@ -5,6 +5,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
@@ -21,12 +22,15 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const MediumPromo = ({ customFields, arcSite }) => {
+const MediumPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
-    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      : null,
   }) || null;
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;

@@ -31,6 +31,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledLink = styled.a`
+  border-bottom: 1px solid ${(props) => props.primaryColor};
   color: ${(props) => props.primaryColor};
 `;
 

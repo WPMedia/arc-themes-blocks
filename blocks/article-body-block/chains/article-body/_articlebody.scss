@@ -274,15 +274,14 @@
     margin: 0 0 map-get($spacers, 'md');
 
     a {
-      border-bottom: 1px solid rgba($link-color, 0.5);
-      color: $ui-primary-font-color;
+      @include link-color-active-hover($ui-primary-font-color);
       text-decoration: none;
 
       &:active,
       &:hover {
-        border-bottom: 1px solid rgba($link-color, 1);
-        color: $link-color;
+        border-bottom: 1px solid #7f7f7f;
       }
+      
     }
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       margin-bottom: map-get($spacers, 'lg');

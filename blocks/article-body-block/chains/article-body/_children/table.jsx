@@ -13,13 +13,17 @@ const Table = ({ element }) => {
   ));
 
   const tableRows = rows.map((row) => {
-    const cells = row.map((item) => (
-      <td
-        key={item._id}
-        dangerouslySetInnerHTML={{ __html: unescapeHtml(item.content) }}
-      />
-    ));
-    return <tr>{cells}</tr>;
+    let keys;
+    const cells = row.map((item) => {
+      keys += item._id;
+      return (
+        <td
+          key={item._id}
+          dangerouslySetInnerHTML={{ __html: unescapeHtml(item.content) }}
+        />
+      );
+    });
+    return <tr key={keys}>{cells}</tr>;
   });
 
 

@@ -26,6 +26,7 @@
   "dependencies": {
     "@wpmedia/date-block": "latest",
     "@wpmedia/engine-theme-sdk": "latest",
+    "@wpmedia/global-phrases-block": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
   },

@@ -11,7 +11,8 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "files": [
-    "features"
+    "features",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

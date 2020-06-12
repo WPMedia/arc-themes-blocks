@@ -23,6 +23,7 @@ class StoryItemContainer extends Component {
       resizedImageOptions,
       placeholderResizedImageOptions,
       targetFallbackImage,
+      arcSite,
     } = this.props;
 
     return (
@@ -45,6 +46,7 @@ class StoryItemContainer extends Component {
           resizedImageOptions={resizedImageOptions}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          arcSite={arcSite}
         />
       </>
     );

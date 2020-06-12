@@ -29,6 +29,7 @@ const ConditionalStoryItem = (props) => {
     resizedImageOptions = {},
     targetFallbackImage,
     placeholderResizedImageOptions,
+    arcSite,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -51,6 +52,7 @@ const ConditionalStoryItem = (props) => {
           resizedImageOptions={resizedImageOptions}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          arcSite={arcSite}
         />
       );
     case LARGE:
@@ -72,6 +74,7 @@ const ConditionalStoryItem = (props) => {
           resizedImageOptions={resizedImageOptions}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          arcSite={arcSite}
         />
       );
     case MEDIUM:
@@ -90,6 +93,7 @@ const ConditionalStoryItem = (props) => {
           resizedImageOptions={resizedImageOptions}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          arcSite={arcSite}
         />
       );
     case SMALL:
@@ -104,6 +108,7 @@ const ConditionalStoryItem = (props) => {
           resizedImageOptions={resizedImageOptions}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          arcSite={arcSite}
         />
       );
     default:

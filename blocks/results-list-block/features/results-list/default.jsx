@@ -7,6 +7,7 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
@@ -40,6 +41,7 @@ class ResultsList extends Component {
       seeMore: true,
       placeholderResizedImageOptions: {},
     };
+    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
     this.fetchStories(false);
     this.fetchPlaceholder();
   }
@@ -242,7 +244,7 @@ class ResultsList extends Component {
                 onClick={() => this.fetchStories(true)}
                 className="btn btn-sm"
               >
-                See More
+                {this.phrases.t('results-list-block.see-more-button')}
                 {' '}
                 <span className="visuallyHidden">
                   stories about this topic

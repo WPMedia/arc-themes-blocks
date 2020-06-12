@@ -9,6 +9,12 @@ jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
+
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
+
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
   default: function Byline(props, children) { return <div {...props}>{children}</div>; },

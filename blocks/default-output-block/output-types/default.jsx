@@ -84,6 +84,7 @@ const SampleOutputType = ({
           globalContent={gc}
           websiteName={websiteName}
           twitterSite={twitterSite}
+          resizerURL={getProperties().resizerURL}
         />
 
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

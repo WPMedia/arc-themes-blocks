@@ -517,6 +517,7 @@ fusion-news-theme-blocks/environment/index.json*
 *fusion-news-theme-blocks/blocks/custom-image-block/index.js*
 ```jsx
 import getProperties from 'fusion:properties';
+import { useContent } from 'fusion:content';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 const CustomImageBlock = ({ rawImageURL }) => {

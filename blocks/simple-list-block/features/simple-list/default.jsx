@@ -129,6 +129,7 @@ const SimpleList = (props) => {
             resizedImageOptions={resizedImageOptions}
             placeholderResizedImageOptions={placeholderResizedImageOptions}
             targetFallbackImage={targetFallbackImage}
+            arcSite={arcSite}
           />
         ))
       }

@@ -17,6 +17,6 @@ please explain why (so that we can fix it whenever it gets refactored).
 
 Examples of dependencies or side effects are:
 - Additional settings that will be required in the blocks.json
-- changes to the custom fields which will require users to reconfigure features
-- update to css framework or SDK
-- dependency on another PR that needs to be merged first
+- Changes to the custom fields which will require users to reconfigure features
+- Update to css framework or SDK
+- Dependency on another PR that needs to be merged first

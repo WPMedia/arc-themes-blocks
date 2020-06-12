@@ -25,7 +25,7 @@ const SampleOutputType = ({
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
   const {
-    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [], fontUrl,
+    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [], fontUrl, resizerURL,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -84,6 +84,7 @@ const SampleOutputType = ({
           globalContent={gc}
           websiteName={websiteName}
           twitterSite={twitterSite}
+          resizerURL={resizerURL}
         />
 
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

@@ -5,7 +5,7 @@ on:
     branches: [ master, staging ]
 
 jobs:
-  test:
+  install:
 
     runs-on: ubuntu-latest
 
@@ -19,8 +19,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        always-auth: true
+        registry-url: https://npm.pkg.github.com
+        scope: '@wpmedia'
     - run: npm i
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: npm run test:coverage && npm run lint
-

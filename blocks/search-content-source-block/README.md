@@ -2,6 +2,19 @@
 
 Fusion News Theme unpublished API content source block
 
+## Requirements
+
+Search Key is required to be set as an environment variable.
+
+For local set this in your `.env.` file
+
+For all other environments make sure you have updated the neccessary files in the environment folder of your feature pack repo.
+
+```
+searchKey=ABCDEF
+```
+
+
 ## Usage
 
 ```

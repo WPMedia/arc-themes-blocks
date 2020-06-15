@@ -50,8 +50,8 @@ describe('the article tag block', () => {
     it('should render tags with their correct href', () => {
       const { default: ArticleTags } = require('./default.jsx');
       const wrapper = mount(<ArticleTags />);
-      expect(wrapper.children().find('a').at(0).props().href).toBe('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/tags/dogs%20slug');
-      expect(wrapper.children().find('a').at(1).props().href).toBe('https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/tags/cats%20slug');
+      expect(wrapper.children().find('a').at(0).props().href).toBe('/tags/dogs%20slug/');
+      expect(wrapper.children().find('a').at(1).props().href).toBe('/tags/cats%20slug/');
     });
   });
 

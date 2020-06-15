@@ -8,8 +8,8 @@ const HeadlineHeader = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const Headline = () => {
-  const { globalContent: content, arcSite } = useFusionContext();
+const Headline = ({ fusionContext = useFusionContext }) => {
+  const { globalContent: content, arcSite } = fusionContext();
 
   return (
     !!(content && content.headlines && content.headlines.basic) && (

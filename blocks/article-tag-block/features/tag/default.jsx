@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import { LinkBackgroundHover } from '@wpmedia/news-theme-css/js/styled/linkHovers';
 import './tags.scss';
 
@@ -16,23 +15,18 @@ const ArticleTags = () => {
   const { 'primary-color': primaryColor, 'primary-font': primaryFont } = getThemeStyle(arcSite);
   const defaultBackgroundColor = '#14689A';
   const { taxonomy: { tags = [] } = {} } = content;
-  const {
-    websiteDomain,
-  } = getProperties(arcSite);
-  const location = (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-    ? 'https://corecomponents-the-gazette-prod.cdn.arcpublishing.com' : websiteDomain;
 
   return tags.length ? (
     <div className="tags-holder">
       {
         tags.map((tag) => {
           const slug = tag.slug || '#';
-          const href = slug !== '#' ? encodeURI(`${location}/tags/${slug}`) : '#';
+          const href = slug !== '#' ? encodeURI(`/tags/${slug}/`) : '#';
           return <Tags key={slug} className="tags" href={href} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
         })
       }
     </div>
-  ) : '';
+  ) : null;
 };
 
 ArticleTags.label = 'Tags Bar – Arc Block';

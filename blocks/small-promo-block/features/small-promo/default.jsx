@@ -5,7 +5,8 @@ import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+import { useFusionContext } from 'fusion:context';
+
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
@@ -15,12 +16,15 @@ const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const SmallPromo = ({ customFields, arcSite }) => {
+const SmallPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
-    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues
+      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      : null,
   }) || null;
 
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -70,7 +74,7 @@ const SmallPromo = ({ customFields, arcSite }) => {
                     largeWidth={400}
                     largeHeight={267}
                     breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={resizerURL}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
                     resizedImageOptions={extractResizedParams(content)}
                   />
                 )

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/large-promo-block",
-  "version": "5.0.0",
+  "version": "5.0.10-beta.0",
   "description": "Fusion News Theme Large Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -33,5 +33,6 @@
     "@wpmedia/overline-block": "latest",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "b80023124aed777cfa92f1215bf4ccc2b7b65868"
 }

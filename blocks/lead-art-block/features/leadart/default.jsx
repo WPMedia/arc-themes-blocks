@@ -12,7 +12,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
-import { resizerURL } from 'fusion:environment';
+
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -155,7 +155,7 @@ class LeadArt extends Component {
                 lightBoxWidth={1600}
                 lightBoxHeight={0}
                 breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+                resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
               />
             </div>
@@ -172,9 +172,9 @@ class LeadArt extends Component {
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
-            resizerURL={resizerURL}
-            ansId={content._id}
-            ansHeadline={content.headlines.basic ? content.headlines.basic : ''}
+            resizerURL={getProperties(arcSite)?.resizerURL}
+            ansId={lead_art._id}
+            ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
             expandPhrase={this.phrases.t('global.gallery-expand-button')}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}

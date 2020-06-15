@@ -1,9 +1,14 @@
 /* eslint-disable no-param-reassign, camelcase */
 import getProperties from 'fusion:properties';
-import { resizerURL as RESIZER_URL, resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
+import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
 const getResizerParam = (
-  originalUrl, breakpoint, format, filterQuality = 70, respectAspectRatio = false,
+  originalUrl,
+  breakpoint,
+  format,
+  filterQuality = 70,
+  respectAspectRatio = false,
+  resizerURL,
 ) => {
   if (typeof window === 'undefined') {
     const Thumbor = require('thumbor-lite');
@@ -11,7 +16,7 @@ const getResizerParam = (
     const { height, width } = breakpoint;
 
     if (!height && !width) throw new Error('Height and Width required');
-    const thumbor = new Thumbor(RESIZER_SECRET_KEY, RESIZER_URL);
+    const thumbor = new Thumbor(RESIZER_SECRET_KEY, resizerURL);
 
     let thumborParam = '';
     if (respectAspectRatio) {
@@ -30,7 +35,7 @@ const getResizerParam = (
 
       const urlSuffix = originalUrl.replace('https://', '');
       return thumborParam
-        .replace(RESIZER_URL, '')
+        .replace(resizerURL, '')
         .replace(urlSuffix, '');
     }
 
@@ -43,7 +48,7 @@ const getResizerParam = (
     const urlSuffix = originalUrl.replace('https://', '');
     const breakpointName = `${width}x${height}`;
     return thumborParam
-      .replace(RESIZER_URL, '')
+      .replace(resizerURL, '')
       .replace(urlSuffix, '')
       .replace(`/${breakpointName}/`, '');
   }
@@ -74,7 +79,7 @@ const getImageDimensionsForAspectRatios = () => {
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
 
-export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
+export const getResizerParams = (originalUrl, respectAspectRatio = false, resizerURL) => {
   const output = {};
   const getParamsByFormat = (format, previousOutput) => {
     // where we get image widths
@@ -92,6 +97,7 @@ export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
         format,
         70,
         respectAspectRatio,
+        resizerURL,
       );
     });
     return previousOutput;
@@ -103,19 +109,20 @@ export const getResizerParams = (originalUrl, respectAspectRatio = false) => {
 };
 
 
-const resizeImage = (image) => {
+const resizeImage = (image, resizerURL) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
-  return getResizerParams(image.url);
+  // todo: support fitIn respect aspect logic
+  return getResizerParams(image.url, false, resizerURL);
 };
 
-const resizePromoItems = (promoItems) => Object.keys(promoItems)
+const resizePromoItems = (promoItems, resizerURL) => Object.keys(promoItems)
   .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
     if ((key === 'type' && promoItem === 'image') || key === 'url') {
-      promoItemWithResizedImages.resized_params = resizeImage(promoItems);
+      promoItemWithResizedImages.resized_params = resizeImage(promoItems, resizerURL);
       promoItemWithResizedImages.url = promoItems.url;
       promoItemWithResizedImages.type = 'image';
     } else {
@@ -124,28 +131,31 @@ const resizePromoItems = (promoItems) => Object.keys(promoItems)
     return promoItemWithResizedImages;
   }, {});
 
-const resizeAuthorCredits = (authorCredits) => authorCredits.map((creditObject) => ({
+const resizeAuthorCredits = (authorCredits, resizerURL) => authorCredits.map((creditObject) => ({
   ...creditObject,
-  resized_params: creditObject?.image?.url ? getResizerParams(creditObject.image.url) : {},
+  resized_params: creditObject?.image?.url
+    ? getResizerParams(creditObject.image.url, false, resizerURL) : {},
 }));
 
 const getResizedImageParams = (data, option) => {
-  if (!option.resizerSecret || !option.resizerUrl) {
+  if (!option.resizerSecret || !option.resizerURL) {
     throw new Error('Not a valid image object');
   }
 
-  const generateParams = (sourceData) => {
+  const generateParams = (sourceData, resizerURL) => {
     if (sourceData && sourceData.content_elements) {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
           if (contentElement.type === 'image') {
             contentElement.resized_params = getResizerParams(
               contentElement.url,
+              false,
+              resizerURL,
             );
           }
           if (contentElement.type === 'gallery' || contentElement.type === 'story') {
             // recursively resize if gallery or story
-            return generateParams(contentElement);
+            return generateParams(contentElement, resizerURL);
           }
           // if (contentElement.promo_items && contentElement.promo_items.basic) {
           //   contentElement.promo_items.basic = resizePromoItems(
@@ -159,24 +169,28 @@ const getResizedImageParams = (data, option) => {
     if (sourceData && sourceData.promo_items && sourceData.promo_items.basic) {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,
+        resizerURL,
       );
     }
 
     if (sourceData && sourceData.promo_items && sourceData.promo_items.lead_art) {
       sourceData.promo_items.lead_art = resizePromoItems(
         sourceData.promo_items.lead_art,
+        resizerURL,
       );
     }
 
     if (sourceData?.promo_items?.lead_art?.content_elements) {
       // recursive if I find content elements
       // find content elements
-      generateParams(sourceData.promo_items.lead_art);
+      generateParams(sourceData.promo_items.lead_art, resizerURL);
     }
 
     if (sourceData?.promo_items?.lead_art?.promo_items?.basic) {
       sourceData.promo_items.lead_art.promo_items.basic.resized_params = getResizerParams(
         sourceData.promo_items.lead_art.promo_items.basic.url,
+        false,
+        resizerURL,
       );
     }
 
@@ -184,18 +198,19 @@ const getResizedImageParams = (data, option) => {
     if (sourceData && sourceData.credits && sourceData.credits.by && sourceData.credits.by.length) {
       sourceData.credits.by = resizeAuthorCredits(
         sourceData.credits.by,
+        resizerURL,
       );
     }
     return sourceData;
   };
 
   if (data && data.count > 0) {
-    data.content_elements.forEach(generateParams);
+    data.content_elements.forEach((element) => generateParams(element, option.resizerURL));
   } else if (data && data.length && data.length > 0) {
     // to test, like for search-api, that will have array of content elements
-    data.forEach(generateParams);
+    data.forEach((dataElement) => generateParams(dataElement, option.resizerURL));
   } else {
-    generateParams(data);
+    generateParams(data, option.resizerURL);
   }
 
   return data;
@@ -221,17 +236,21 @@ export const extractResizedParams = (storyObject) => {
  * @param respectAspectRatio if true, then will use fitIn rather than resize via thumbor
 */
 const getResizedImageData = (
-  data, filterQuality = 70, onlyUrl = false, respectAspectRatio = false,
+  data,
+  filterQuality = 70,
+  onlyUrl = false,
+  respectAspectRatio = false,
+  arcSite,
 ) => {
-  const { imageWidths, aspectRatios } = getProperties();
-  const resizerKey = RESIZER_SECRET_KEY;
-  const resizerUrl = RESIZER_URL;
+  // resizer url is only arcSite specific option
+  const { imageWidths, aspectRatios, resizerURL } = getProperties(arcSite);
 
+  const resizerKey = RESIZER_SECRET_KEY;
 
   // ensure that necessary env variables available
   if (
     typeof resizerKey === 'undefined'
-      || typeof resizerUrl === 'undefined'
+      || typeof resizerURL === 'undefined'
       || typeof imageWidths === 'undefined'
       || typeof aspectRatios === 'undefined'
   ) {
@@ -239,12 +258,12 @@ const getResizedImageData = (
   }
 
   if (onlyUrl) {
-    return getResizerParams(data, respectAspectRatio);
+    return getResizerParams(data, respectAspectRatio, resizerURL);
   }
 
   return getResizedImageParams(data, {
     resizerSecret: resizerKey,
-    resizerUrl,
+    resizerURL,
     imageWidths,
   }, filterQuality);
 };

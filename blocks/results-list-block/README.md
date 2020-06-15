@@ -1,6 +1,12 @@
 # `@wpmedia/results-list-block`
 Results List block for Fusion News Theme
 
+## Translation phrases
+
+| Phrase key | Default (English) |
+|---|---|
+|`results-list-block.see-more-button`|`See More`|
+
 ## Usage
 
 ```

@@ -60,6 +60,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockStoryFeedData);
@@ -104,6 +105,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockSearchApiData);
@@ -141,6 +143,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const { credits: { by } } = getResizedImageData(mockCreditsData);
@@ -158,6 +161,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const { credits: { by } } = getResizedImageData(mockCreditsEmptyImgData);
@@ -170,6 +174,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(mockLeadArtData);
@@ -198,6 +203,7 @@ describe('get resized image data helper on the server-side', () => {
       breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
       aspectRatios: ASPECT_RATIOS,
       imageWidths: IMAGE_WIDTHS,
+      resizerURL: 'https://fake.cdn.com/resizer',
     }));
 
     const resizedObject = getResizedImageData(galleryResizeData);
@@ -216,6 +222,7 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
 
     const dataWithResizedImages = getResizedImageData(topLeveLeadArt);
@@ -232,7 +239,9 @@ describe('get resized image data helper on the server-side', () => {
         breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
       }));
+
     const dataWithResizedImages = getResizedImageData(searchResultsDataBroken.data);
 
     expect(dataWithResizedImages[0].promo_items.basic.resized_params).toEqual({
@@ -240,6 +249,24 @@ describe('get resized image data helper on the server-side', () => {
       '158x119': '/h0EkN6oDSPYmLReOq22BJZYfCz4=filters:format(jpg):quality(70)/',
       '274x183': '/tei84mHd537sfGdIxzgfEPb90rM=filters:format(jpg):quality(70)/',
       '274x206': '/2Qa9_nYqKGnCzwL-goJs3iZ4LwY=filters:format(jpg):quality(70)/',
+    });
+  });
+  it('respects aspect ratio of image and only url', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+    const sampleImage = 'image.jpg';
+    const dataWithResizedImages = getResizedImageData(sampleImage, null, true, true);
+    // uses fit in logic
+    expect(dataWithResizedImages).toEqual({
+      '158x105': '/OhPCT9HOiYClZDcHtXJA1y_HbO8=/fit-in/158x105/filters:quality(70):fill(white):background_color(white)/',
+      '158x119': '/d1gFvKA4cYT9lBiMNFWTq-7zY5w=/fit-in/158x119/filters:quality(70):fill(white):background_color(white)/',
+      '274x183': '/DakL7zt-4boiiIW4glxQ_Ot3l1k=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/',
+      '274x206': '/1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/',
     });
   });
 });

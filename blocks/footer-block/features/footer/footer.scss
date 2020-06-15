@@ -80,7 +80,7 @@ footer {
     display: inline-flex;
     justify-content: space-between;
     margin-left: -(map-get($spacers, 'xs'));
-  
+
     a {
       align-self: center;
       border-right: 1px solid $primary-color;
@@ -90,6 +90,13 @@ footer {
 
       &:last-child {
         border-right: none;
+      }
+
+      svg {
+        display: block;
+        height: auto;
+        margin: 0 auto;
+        width: 24px;
       }
 
       svg path {

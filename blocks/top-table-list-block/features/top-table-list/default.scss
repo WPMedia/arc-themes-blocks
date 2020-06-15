@@ -30,7 +30,7 @@
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
     }
 
-    &:nth-child(2n) {
+    &:nth-child(2n+1) {
       margin-right: 0;
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
         margin-right: map-get($spacers, 'md');

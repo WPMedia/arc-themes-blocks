@@ -7,7 +7,8 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+import getTranslatedPhrases from 'fusion:intl';
+
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
@@ -40,6 +41,7 @@ class ResultsList extends Component {
       seeMore: true,
       placeholderResizedImageOptions: {},
     };
+    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
     this.fetchStories(false);
     this.fetchPlaceholder();
   }
@@ -177,7 +179,7 @@ class ResultsList extends Component {
                       largeWidth={274}
                       largeHeight={154}
                       breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={resizerURL}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
                     />
                   ) : (
                     <Image
@@ -191,7 +193,8 @@ class ResultsList extends Component {
                       url={targetFallbackImage}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizedImageOptions={placeholderResizedImageOptions}
-                      resizerURL={resizerURL}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+
                     />
                   )}
                 </a>
@@ -241,7 +244,7 @@ class ResultsList extends Component {
                 onClick={() => this.fetchStories(true)}
                 className="btn btn-sm"
               >
-                See More
+                {this.phrases.t('results-list-block.see-more-button')}
                 {' '}
                 <span className="visuallyHidden">
                   stories about this topic

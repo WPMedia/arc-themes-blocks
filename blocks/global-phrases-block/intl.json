@@ -1,7 +1,7 @@
 {
   "global.gallery-expand-button": {
     "en": "Expand",
-    "sv": "Bygga ut"
+    "sv": "Förstora"
   },
   "global.gallery-page-count-text": {
     "en": "%{current} of %{total}",
@@ -9,7 +9,7 @@
   },
   "global.gallery-autoplay-button": {
     "en": "Autoplay",
-    "sv": "Autospela"
+    "sv": "Spela upp"
   },
   "global.gallery-pause-autoplay-button": {
     "en": "Pause autoplay",

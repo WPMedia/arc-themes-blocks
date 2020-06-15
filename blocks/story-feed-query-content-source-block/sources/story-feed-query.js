@@ -8,5 +8,12 @@ export default {
     size: 'number',
     offset: 'number',
   },
-  transform: (data) => getResizedImageData(data),
+  // other options null use default functionality, such as filter quality
+  transform: (data, query) => getResizedImageData(
+    data,
+    null,
+    null,
+    null,
+    query['arc-site'],
+  ),
 };

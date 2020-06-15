@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/numbered-list-block",
-  "version": "5.0.0",
+  "version": "5.0.3-beta.0",
   "description": "Fusion News Theme numbered list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -30,5 +30,6 @@
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "b80023124aed777cfa92f1215bf4ccc2b7b65868"
 }

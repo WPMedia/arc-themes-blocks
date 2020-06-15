@@ -20,3 +20,12 @@ Makes use of ByLine to display authors of each story and it is included as a dep
 If there's one author, it will return `By <author>`
 If there are two authors, it will return `By <author_0> and <author_1>`
 If there are three or more authors, it will return with the pattern `By <author_0>, <author_1>, ... <author_(n-1)> and <author_(n)>`
+
+## Custom Search Action
+If you are creating custom blocks that are leveraging the global content part of the Search Results List block and 
+need to over-ride the action taken when the search box field has been submitted 
+(for both click and keyboard submisstions) an over-ride function can be passed as a prop to either the 
+main default.jsx or to the global-content.jsx component.  The prop name is called `customSearchAction`.
+If passed into default.jsx it will pass it down to global-content.  Your implementation of `customSearchAction`
+should expect one param that will be the value of the search entry.  If `customSearchAction` is not implemented, default 
+behavior will occur during a search submission.

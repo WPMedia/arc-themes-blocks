@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
+  resizerURL: 'resizer',
 }))));
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,

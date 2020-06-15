@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
+import { useFusionContext } from 'fusion:context';
+
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
@@ -28,10 +29,12 @@ const OverlineHeader = styled.h1`
   text-decoration: none;
 `;
 
-const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
+const ExtraLargeManualPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
+
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL },
+    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
   return (customFields.linkURL ? (
@@ -93,7 +96,7 @@ const ExtraLargeManualPromo = ({ customFields, arcSite }) => {
                   largeWidth={800}
                   largeHeight={600}
                   breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={resizerURL}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
                 />
               </a>

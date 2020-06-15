@@ -1,10 +1,11 @@
 const TIMEZONE = 'America/Chicago';
 
 const resizerKey = '%{FKDFJK}';
-const resizerURL = 'https://fake.cdn.com/resizer';
+
+const searchKey = 'ABCDEF';
 
 export {
   TIMEZONE,
   resizerKey,
-  resizerURL,
+  searchKey,
 };

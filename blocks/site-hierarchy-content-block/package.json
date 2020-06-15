@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/site-hierarchy-content-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -32,5 +32,6 @@
   "dependencies": {
     "@wpmedia/news-theme-css": "^2.0.6",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
 }

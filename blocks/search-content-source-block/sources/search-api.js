@@ -1,11 +1,11 @@
-import getProperties from 'fusion:properties';
+import { searchKey as SEARCH_KEY } from 'fusion:environment';
 import getResizedImageData from '@wpmedia/resizer-image-block';
 
 export default {
   resolve(contentOptions) {
     const { query, page, 'arc-site': arcSite } = contentOptions;
     if (query) {
-      return `https://search.arcpublishing.com/search?&q=${query}&page=${page || 1}${arcSite ? `&website_id=${arcSite}` : ''}${getProperties(arcSite).searchKey ? `&key=${getProperties(arcSite).searchKey}` : ''}`;
+      return `https://search.arcpublishing.com/search?&q=${query}&page=${page || 1}${arcSite ? `&website_id=${arcSite}` : ''}${SEARCH_KEY ? `&key=${SEARCH_KEY}` : ''}`;
     }
     return '';
   },
@@ -21,8 +21,8 @@ export default {
     different from other content sources that have content elements
     on the top-level
   */
-  transform: (data) => ({
-    data: getResizedImageData(data.data),
+  transform: (data, query) => ({
+    data: getResizedImageData(data.data, null, null, null, query['arc-site']),
     ...data,
   })
   ,

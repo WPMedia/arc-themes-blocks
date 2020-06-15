@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/placeholder-image-block",
-  "version": "5.0.0",
+  "version": "5.0.3-beta.0",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {
@@ -26,5 +26,6 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest"
-  }
+  },
+  "gitHead": "b80023124aed777cfa92f1215bf4ccc2b7b65868"
 }

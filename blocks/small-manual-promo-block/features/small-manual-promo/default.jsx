@@ -3,19 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { resizerURL } from 'fusion:environment';
-import '@wpmedia/shared-styles/scss/_small-promo.scss';
+import { useFusionContext } from 'fusion:context';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
+
+import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const SmallManualPromo = ({ customFields, arcSite }) => {
+const SmallManualPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
+
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL },
+    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
@@ -59,7 +62,7 @@ const SmallManualPromo = ({ customFields, arcSite }) => {
                 largeWidth={105}
                 largeHeight={70}
                 breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={resizerURL}
+                resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={resizedImageOptions}
               />
             </a>

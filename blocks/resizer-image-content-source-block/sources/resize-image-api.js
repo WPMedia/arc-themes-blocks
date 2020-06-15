@@ -1,4 +1,4 @@
-import resizerImageBlock from '@wpmedia/resizer-image-block';
+import getResizedImageData from '@wpmedia/resizer-image-block';
 
 const params = {
   // has to be an external image
@@ -11,7 +11,7 @@ const fetch = (query) => {
   const { raw_image_url: rawImageUrl, respect_aspect_ratio: respectAspectRatio = false } = query;
 
   // last param designates only url -- not data ans object
-  return resizerImageBlock(rawImageUrl, 70, true, respectAspectRatio);
+  return getResizedImageData(rawImageUrl, null, true, respectAspectRatio, query['arc-site']);
 };
 
 /*

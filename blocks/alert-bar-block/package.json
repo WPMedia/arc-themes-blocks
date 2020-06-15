@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/alert-bar-block",
-  "version": "5.0.0",
+  "version": "5.0.2-beta.0",
   "description": "Fusion News Theme alert bar block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -25,5 +25,6 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "latest",
     "styled-components": "^4.4.0"
-  }
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

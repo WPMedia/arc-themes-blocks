@@ -1,28 +1,30 @@
 name: latest and stable dist-tag parity
 on:
-  registry_package:
-    types: [published, updated]
+  push:
+    branches:
+      - master
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 # Every time a package is published to this repo:
-#   1. Get the 'latest' version number
+#   1. Get the 'latest' version number from lerna.json
 #   2. If the package that was just published is the same as 'latest'
 #      then we set the dist tag for that package to also be 'stable'
 jobs:
   set-tag:
-    name: Set 'latest' block to be tagged as 'stable'
-    if: startsWith(github.event.package.version, '0.0.0') == false
+    name: "Set 'latest' blocks to be tagged as 'stable'"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Node and NPM
+        uses: actions/setup-node@v1
         with:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
-      - id: latestversion
-        run: echo "::set-output name=latest::$(npm view ${{ github.event.package.name }} dist-tags.latest)"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo ${{ github.event.package.name }}@${{ github.event.package.version }}
-      - if: github.event.package.version == steps.latestversion.outputs.latest
-        run: npm dist-tag add ${{ github.event.package.name }}@${{ steps.latestversion.outputs.latest }} stable
+      - name: Install lerna
+        run: npm i -g lerna
+      - name: Get the latest version from lerna.json and tag all stable blocks with that
+        run: lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json)") stable
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

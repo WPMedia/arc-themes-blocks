@@ -6,6 +6,16 @@ This monorepo is a collection of packages for blocks and SDK components, but the
 
 **if you're looking for local news theme block development, go to news theme development markdown doc**
 
+## `dist-tags`
+
+This package has been published with a number of dist-tags meant for different purposes:
+
+- `latest`: As with all other NPM packages, this is the default dist-tag. Whenever a non-prerelease block gets published, it is published with this tag.
+- `stable`: This tag should be equivalent to `latest` and the process for maintaining parity _should_ be automated with a [Github Action workflow found here](/.github/workflows/stable-dist-tag.yml). If that workflow doesn't work or the versions tagged by `latest` and `stable` do not match you can run `npm run latest-stable-parity` to fix that.
+- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `staging` branch. [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
+- `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `staging` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-cafebabe`).
+- `hotfix`: As you may have guessed, these builds are meant for hotfixes. [More information about how these builds are made can be found here.](/News%20Theme%20Development.md#publish-hotfix)
+
 ## Instructions
 
 Lerna requires some setup and know-how, so be sure to read the instructions below to prevent any hiccups/accidents/incidents.

@@ -25,6 +25,6 @@ jobs:
       - name: Install lerna
         run: npm i -g lerna
       - name: Get the latest version from lerna.json and tag all stable blocks with that
-        run: lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json)") stable
+        run: lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json) stable
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

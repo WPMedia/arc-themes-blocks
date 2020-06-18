@@ -118,6 +118,12 @@ const TopTableList = (props) => {
   } = props;
 
   const { arcSite } = useFusionContext();
+  const storySizeMap = {
+    extraLarge,
+    large,
+    medium,
+    small,
+  };
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
 
@@ -165,6 +171,8 @@ const TopTableList = (props) => {
               overlineUrl={overlineUrl}
               overlineText={overlineText}
               storySize={storyTypeArray[index]}
+              index={index}
+              storySizeMap={storySizeMap}
               primaryFont={primaryFont}
               key={itemId}
               customFields={props.customFields}

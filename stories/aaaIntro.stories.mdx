@@ -1,0 +1,97 @@
+<Meta title="Intro" />
+
+# Theme Blocks
+
+**beta: 5.0.2-beta.0 latest: 5.0.11         stable: 5.0.11     **
+
+It’s a collection of React components designed to:
+
+- Speed up design and development velocity
+- Help create consistent and usable functionality in our various websites
+- Promote best practices for accessibility and responsive web design
+
+We hope to accomplish these goals by:
+
+- Reducing the number of decisions needed when iterating on UI
+- Reducing the amount of code duplication in our apps
+- Providing easy-to-use and extensible components for anyone to consume
+
+## Install
+
+Engine SDK components are written in React and Typescript, and its stories are written in [Component Story Format](https://medium.com/storybookjs/component-story-format-66f4c32366df). It requires Storybook version 6.0.0-beta.26 and up.
+
+Add Engine SDK to your project.
+
+`npm install --save @wpmedia/engine-theme-sdk`
+
+Add to your `blocks.json`.
+
+`@wpmedia/engine-theme-sdk@version`
+
+### **Use**
+
+Import components you want into your project
+
+`import { ImageMetadata } from '@wpmedia/engine-theme-sdk';`
+
+and use them like so
+
+```
+  <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
+```
+
+add engine-theme-sdk yo your block's `package.json` dependencies
+
+```
+"dependencies": {
+    "@wpmedia/engine-theme-sdk": "latest"
+  },
+```
+
+
+### **Local Development**
+
+You can test Engine SDK components locally by adding the following properties to yout blocks.json:
+-  `"useLocal": true`
+-  `"useLocalEngineSDK": true`
+
+## How To Publish
+
+1. Pull the latest `staging` branch.
+
+    - `git checkout staging`
+
+    - `git fetch -a`
+
+2. Branch off the `staging` branch
+
+    - `git checkout -b PEN-[jira ticket num]-[brief description of feature]`
+
+3. Do the work, commit as you go, which will run the linter and tests.
+
+4. Make pull request using GitHub against the `staging` branch. 
+
+    - Get approval for your pr on your feature branch.
+
+5. Merge into `staging` branch.
+
+    - `npm version prerelease --preid=beta`
+
+    - `npm publish --tag beta`
+
+6. Go to new theme feature pack's `blocks.json`
+    - Change your engine block to the `@beta` release in the blocks list (eg, `"@wpmedia/header-nav"` -> `"@wpmedia/header-nav@beta"`).
+    - Make a pr against the news theme repo making that change to the `master` branch. 
+    - Then publish that change using deployment strategy to the `staging` environment (corecomponents prod is a `staging` env). 
+    - Alert quality assurance stakeholder that the change has been published.
+
+7. After design qa and qa approval, make a pull request from the `staging` branch to the `master` branch. (Should we make a new pr for just your staging changes?)
+
+8. Once the pr has been approved, merge your feature staging branch to `master`. 
+    - In master, you can publish against what's changed. (This could be done at the end of a sprint.)
+    - `npm publish`
+
+
+### **Resources**
+
+- [Read more about dist tags via npm.](https://docs.npmjs.com/adding-dist-tags-to-packages)

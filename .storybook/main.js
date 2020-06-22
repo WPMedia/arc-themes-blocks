@@ -14,7 +14,7 @@ module.exports = {
 			...config.resolve,
 			alias: {
 				...config.resolve.alias,
-				'fusion:context': '../../context.js',
+				'fusion:context':  path.resolve(__dirname, './alias/context.js'),
 				'fusion:content': path.resolve(__dirname, './alias/content.js'),
 				'fusion:themes':  path.resolve(__dirname, './alias/themes.js'),
 				'fusion:properties': path.resolve(__dirname, './alias/properties.js'),

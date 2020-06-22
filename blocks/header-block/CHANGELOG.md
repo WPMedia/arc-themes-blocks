@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.11](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.0.11-beta.0...v5.0.11) (2020-06-15)
+
+**Note:** Version bump only for package @wpmedia/header-block
+
+
+
+
+
 ## [0.3.4](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-block@0.3.3...@wpmedia/header-block@0.3.4) (2020-06-02)
 
 

@@ -68,6 +68,7 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
+    "@storybook/addon-knobs": "^5.3.19",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
     "@wpmedia/article-tag-block": "file:blocks/article-tag-block",
     "@wpmedia/byline-block": "file:blocks/byline-block",

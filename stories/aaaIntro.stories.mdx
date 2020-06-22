@@ -2,7 +2,7 @@
 
 # Theme Blocks
 
-**beta: 5.0.2-beta.0 latest: 5.0.11         stable: 5.0.11     **
+**beta: 5.0.2-beta.0 latest: 5.0.11         stable: 5.0.11**
 
 It’s a collection of React components designed to:
 
@@ -18,34 +18,44 @@ We hope to accomplish these goals by:
 
 ## Install
 
-Engine SDK components are written in React and Typescript, and its stories are written in [Component Story Format](https://medium.com/storybookjs/component-story-format-66f4c32366df). It requires Storybook version 6.0.0-beta.26 and up.
+Add theme block to your project.
 
-Add Engine SDK to your project.
-
-`npm install --save @wpmedia/engine-theme-sdk`
+`npm install --save @wpmedia/share-bar-block`
 
 Add to your `blocks.json`.
 
-`@wpmedia/engine-theme-sdk@version`
+`@wpmedia/share-bar-block@version`
 
 ### **Use**
 
 Import components you want into your project
 
-`import { ImageMetadata } from '@wpmedia/engine-theme-sdk';`
+`import { ShareBar } from '@wpmedia/share-bar-block';`
 
 and use them like so
 
 ```
-  <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
-```
 
-add engine-theme-sdk yo your block's `package.json` dependencies
-
-```
-"dependencies": {
-    "@wpmedia/engine-theme-sdk": "latest"
+const data = () => ({
+  customFields: {
+    email: false,
+    facebook: true,
+    pinterest: false,
+    twitter: false,
+    linkedIn: false,
   },
+  globalContent: {
+    label: {
+      basic: {
+        display: true,
+        url: 'http://google.com/',
+        text: 'Overline Text Root',
+      },
+    },
+  },
+});
+
+  <ShareBar fusionContext={data} />
 ```
 
 
@@ -53,8 +63,7 @@ add engine-theme-sdk yo your block's `package.json` dependencies
 
 You can test Engine SDK components locally by adding the following properties to yout blocks.json:
 -  `"useLocal": true`
--  `"useLocalEngineSDK": true`
-
+- `"devBlocks": ["@wpmedia/share-bar-block"]`
 ## How To Publish
 
 1. Pull the latest `staging` branch.
@@ -73,11 +82,7 @@ You can test Engine SDK components locally by adding the following properties to
 
     - Get approval for your pr on your feature branch.
 
-5. Merge into `staging` branch.
-
-    - `npm version prerelease --preid=beta`
-
-    - `npm publish --tag beta`
+5. Merge into `staging` branch. A CI/CD will publish.
 
 6. Go to new theme feature pack's `blocks.json`
     - Change your engine block to the `@beta` release in the blocks list (eg, `"@wpmedia/header-nav"` -> `"@wpmedia/header-nav@beta"`).
@@ -87,10 +92,7 @@ You can test Engine SDK components locally by adding the following properties to
 
 7. After design qa and qa approval, make a pull request from the `staging` branch to the `master` branch. (Should we make a new pr for just your staging changes?)
 
-8. Once the pr has been approved, merge your feature staging branch to `master`. 
-    - In master, you can publish against what's changed. (This could be done at the end of a sprint.)
-    - `npm publish`
-
+8. Once the pr has been approved, merge your feature staging branch to `master`. A CI/CD will publish.
 
 ### **Resources**
 

@@ -18,6 +18,8 @@ module.exports = {
 				'fusion:content': path.resolve(__dirname, './alias/content.js'),
 				'fusion:themes':  path.resolve(__dirname, './alias/themes.js'),
 				'fusion:properties': path.resolve(__dirname, './alias/properties.js'),
+				'fusion:intl': path.resolve(__dirname, './alias/intl.js'), 
+				'fusion:environment': path.resolve(__dirname, './alias/environment.js')
 			}
 		},
 		config.module.rules.push({

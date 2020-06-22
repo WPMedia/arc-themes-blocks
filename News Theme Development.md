@@ -811,12 +811,14 @@ Ensure all node modules are cleared:
 
 ### LocalDev Tips/Playbook
 - If your are running locally with `useLocal` set to true in `blocks.json` and you are noticing that webpack is not picking 
-up your changes and recompiling, try the following: 
+up your changes in the blocks repo and recompiling, try the following: 
     1) First ensure you do have `useLocal` set to true.
-    2) Shut down Fusion.
-    3) Run `docker image prune`
-    4) Restart Docker
-    5) Restart Fusion.
+    2) Remember in order for Fusion to link to your local working blocks repository, you need to start fusion with 
+        the `--links` or `-l` flag.  Ex: `fusion start theme --links` or `fusion start theme -l`
+    3) Shut down Fusion.
+    4) Run `docker image prune`
+    5) Restart Docker
+    6) Restart Fusion.
 
 - Before publishing, creating a bundle, or right after creating a new branch:
     1) Delete the @wpmedia folder inside your theme pack's node_modules directory.

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';

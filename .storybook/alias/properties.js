@@ -9,4 +9,10 @@ export default (site) => ({
 	lightBackgroundLogoAlt: 'light logo alt text',
 	primaryLogo: 'https://www.klartale.no/img/klartale/klartale-logo-new.svg',
 	primaryLogoAlt: 'primary logo alt text',
+	dateLocalization: {
+		language: 'en',
+		timeZone: 'America/New_York',
+		dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+		dateFormat: 'LLLL d, yyyy',
+	},
 });

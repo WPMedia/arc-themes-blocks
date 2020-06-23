@@ -1,9 +1,13 @@
 import React from 'react';
+import { withKnobs, text } from '@storybook/addon-knobs';
 import Headline from './features/headline/default';
 
-export default { title: 'Headline' };
+export default {
+  title: 'Headline',
+  decorators: [withKnobs],
+};
 
-export const basic = () => (
+export const shortHeadline = () => (
   <Headline />
 );
 
@@ -18,3 +22,19 @@ const data = () => ({
 export const longHeadline = () => (
   <Headline fusionContext={data} />
 );
+
+
+export const customHeadline = () => {
+  const headline = text('Headline', 'Man Bites Dog');
+  const newData = () => ({
+    globalContent: {
+      headlines: {
+        basic: headline,
+      },
+    },
+  });
+
+  return (
+    <Headline fusionContext={newData} />
+  );
+};

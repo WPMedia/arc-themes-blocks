@@ -809,5 +809,33 @@ Ensure all node modules are cleared:
 - What license.md should we have?
 - What about versioning block dependencies? Using `latest` may just be easiest for depending on other blocks
 
+### LocalDev Tips/Playbook
+- If your are running locally with `useLocal` set to true in `blocks.json` and you are noticing that webpack is not picking 
+up your changes in the blocks repo and recompiling, try the following: 
+    1) First ensure you do have `useLocal` set to true.
+    2) Remember in order for Fusion to link to your local working blocks repository, you need to start fusion with 
+        the `--links` or `-l` flag.  Ex: `fusion start theme --links` or `fusion start theme -l`
+    3) Shut down Fusion.
+    4) Run `docker image prune`
+    5) Restart Docker
+    6) Restart Fusion.
+
+- Before publishing, creating a bundle, or right after creating a new branch:
+    1) Delete the @wpmedia folder inside your theme pack's node_modules directory.
+    2) Remove npm links to engine-theme-sdk and news-theme-css.
+    
+- If you have set `useLocalEngineSDK` or `useLocalCSSFramework` to true and changes are not getting picked up
+    1) First ensure you set the manual npm link.  In the case of engine-theme-sdk, you first need to go to the root of your 
+    local copy on engine-theme-sdk and run `sudo npm link`, then in the root of you feature pack, run `npm link @wpmedia/engine-theme-sdk`. 
+    For news-theme-sdk, go to the root of your local copy on news-theme-sdk and run `sudo npm link`, then in the root of you feature pack, 
+    run `npm link @wpmedia/news-theme-sdk`. 
+    1) Note: Changes to these repos do not get picked up automatically by Fusion's webpack when its running.
+    2) When a change is made to engine-theme-sdk or news-theme-css, 
+    you will need to shut down fusion, run the build command in either engine-theme-sdk or news-theme-css and then 
+    restart Fusion. Note: you do not need to reestablish the npm links after making changes (unless you explicitly unlinked).
+    
+- You want the latest Fusion CLI tool installed
+    1) In the root of your theme pack directory run: `npm install -D @arc-fusion/cli@canary`    
+
 ### Resources 
 https://explainshell.com/

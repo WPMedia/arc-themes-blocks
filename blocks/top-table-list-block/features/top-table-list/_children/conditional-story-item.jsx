@@ -30,6 +30,8 @@ const ConditionalStoryItem = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     arcSite,
+    storySizeMap = {},
+    index,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -109,6 +111,9 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          paddingRight={
+            (index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)) % 2 === 0
+          }
         />
       );
     default:

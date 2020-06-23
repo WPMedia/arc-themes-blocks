@@ -16,9 +16,10 @@ const ItemTitleWithRightImage = (props) => {
     resizedImageOptions,
     targetFallbackImage,
     placeholderResizedImageOptions,
+    paddingRight = false,
   } = props;
   return (
-    <article key={id} className="container-fluid small-promo">
+    <article key={id} className={`container-fluid small-promo ${paddingRight ? 'small-promo-padding' : ''}`}>
       <div className="row sm-promo-padding-btm">
         {customFields.showHeadlineSM && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">

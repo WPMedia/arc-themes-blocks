@@ -29,26 +29,39 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
 
-const unserializeStory = (storyObject) => ({
-  id: storyObject._id,
-  itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
-  imageURL: extractImage(storyObject) || '',
-  displayDate: storyObject.display_date || '',
-  description: (storyObject.description && storyObject.description.basic) || '',
-  by: (storyObject.credits && storyObject.credits.by) || [],
-  websiteURL: storyObject.website_url || '',
-  element: storyObject,
-  overlineDisplay: (storyObject?.label?.basic?.display ?? null)
-      || (storyObject?.websites?.[this] && storyObject?.websites?.[this])
-      || false,
-  overlineUrl: (storyObject?.label?.basic?.url ?? null)
-    || (storyObject?.websites?.[this] && storyObject?.websites?.[this]?._id)
-    || '',
-  overlineText: (storyObject?.label?.basic?.text ?? null)
-    || (storyObject?.websites?.[this] && storyObject?.websites?.[this]?.name)
-    || '',
-  resizedImageOptions: extractResizedParams(storyObject),
-});
+const overlineData = (storyObject, arcSite) => {
+  const { display: labelDisplay, url: labelUrl, text: labelText } = (
+    storyObject.label && storyObject.label.basic
+  ) || {};
+  const shouldUseLabel = !!labelDisplay;
+
+  const { _id: sectionUrl, name: sectionText } = (
+    storyObject.websites
+    && storyObject.websites[arcSite]
+    && storyObject.websites[arcSite].website_section
+  ) || {};
+
+  return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
+};
+
+const unserializeStory = (arcSite) => (storyObject) => {
+  const [overlineText, overlineUrl] = overlineData(storyObject, arcSite);
+
+  return {
+    id: storyObject._id,
+    itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
+    imageURL: extractImage(storyObject) || '',
+    displayDate: storyObject.display_date || '',
+    description: (storyObject.description && storyObject.description.basic) || '',
+    by: (storyObject.credits && storyObject.credits.by) || [],
+    websiteURL: storyObject.website_url || '',
+    element: storyObject,
+    overlineDisplay: !!overlineText,
+    overlineUrl,
+    overlineText,
+    resizedImageOptions: extractResizedParams(storyObject),
+  };
+};
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
@@ -135,21 +148,20 @@ const TopTableList = (props) => {
 
   return (
     <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
-      {
-        contentElements.map(unserializeStory, arcSite).map((itemObject, index) => {
-          const {
-            id: itemId,
-            itemTitle,
-            imageURL,
-            displayDate,
-            description,
-            by,
-            element,
-            overlineDisplay,
-            overlineUrl,
-            overlineText,
-            resizedImageOptions,
-          } = itemObject;
+      {contentElements.map(unserializeStory(arcSite)).map((itemObject, index) => {
+        const {
+          id: itemId,
+          itemTitle,
+          imageURL,
+          displayDate,
+          description,
+          by,
+          element,
+          overlineDisplay,
+          overlineUrl,
+          overlineText,
+          resizedImageOptions,
+        } = itemObject;
           const url = (element.websites) ? element.websites[arcSite].website_url : '';
           return (
             <StoryItemContainer

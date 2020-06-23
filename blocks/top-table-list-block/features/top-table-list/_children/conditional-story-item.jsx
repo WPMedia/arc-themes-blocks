@@ -25,7 +25,7 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     customFields,
     overlineText = '',
-    overlineURL = '',
+    overlineUrl = '',
     resizedImageOptions = {},
     targetFallbackImage,
     placeholderResizedImageOptions,
@@ -45,7 +45,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           overlineDisplay={overlineDisplay}
-          overlineUrl={overlineURL}
+          overlineUrl={overlineUrl}
           overlineText={overlineText}
           displayDate={displayDate}
           customFields={customFields}
@@ -67,7 +67,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           overlineDisplay={overlineDisplay}
-          overlineUrl={overlineURL}
+          overlineUrl={overlineUrl}
           overlineText={overlineText}
           displayDate={displayDate}
           customFields={customFields}

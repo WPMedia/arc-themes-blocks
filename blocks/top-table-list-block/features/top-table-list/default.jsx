@@ -119,11 +119,11 @@ class TopTableListWrapper extends Component {
 const TopTableList = (props) => {
   const {
     customFields: {
-      listContentConfig: {
-        contentService = '',
-        contentConfigValues = {},
-      } = {},
-      extraLarge = 0, large = 0, medium = 0, small = 0,
+      listContentConfig: { contentService = '', contentConfigValues = {} } = {},
+      extraLarge = 0,
+      large = 0,
+      medium = 0,
+      small = 0,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -162,91 +162,76 @@ const TopTableList = (props) => {
           overlineText,
           resizedImageOptions,
         } = itemObject;
-          const url = (element.websites) ? element.websites[arcSite].website_url : '';
-          return (
-            <StoryItemContainer
-              id={itemId}
-              itemTitle={itemTitle}
-              imageURL={imageURL}
-              displayDate={displayDate}
-              description={description}
-              by={by}
-              websiteURL={url}
-              element={element}
-              overlineDisplay={overlineDisplay}
-              overlineUrl={overlineUrl}
-              overlineText={overlineText}
-              storySize={storyTypeArray[index]}
-              primaryFont={primaryFont}
-              key={itemId}
-              customFields={props.customFields}
-              resizedImageOptions={resizedImageOptions}
-              placeholderResizedImageOptions={placeholderResizedImageOptions}
-              targetFallbackImage={targetFallbackImage}
-              arcSite={arcSite}
-            />
-          );
-        })
-      }
+        const url = element.websites ? element.websites[arcSite].website_url : '';
+        return (
+          <StoryItemContainer
+            id={itemId}
+            itemTitle={itemTitle}
+            imageURL={imageURL}
+            displayDate={displayDate}
+            description={description}
+            by={by}
+            websiteURL={url}
+            element={element}
+            overlineDisplay={overlineDisplay}
+            overlineUrl={overlineUrl}
+            overlineText={overlineText}
+            storySize={storyTypeArray[index]}
+            primaryFont={primaryFont}
+            key={itemId}
+            customFields={props.customFields}
+            resizedImageOptions={resizedImageOptions}
+            placeholderResizedImageOptions={placeholderResizedImageOptions}
+            targetFallbackImage={targetFallbackImage}
+            arcSite={arcSite}
+          />
+        );
+      })}
     </div>
   );
 };
 
 TopTableListWrapper.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
-      {
-        group: 'Configure Content',
-        label: 'Display Content Info',
-      },
-    ),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
     extraLarge: PropTypes.number.tag({ label: generateLabelString('Extra Large'), default: 0 }),
     large: PropTypes.number.tag({ label: generateLabelString('Large'), default: 0 }),
     medium: PropTypes.number.tag({ label: generateLabelString('Medium'), default: 0 }),
     small: PropTypes.number.tag({ label: generateLabelString('Small'), default: 0 }),
 
-    showOverlineXL: PropTypes.bool.tag(
-      {
-        label: 'Show overline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showHeadlineXL: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showImageXL: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showDescriptionXL: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showBylineXL: PropTypes.bool.tag(
-      {
-        label: 'Show byline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showDateXL: PropTypes.bool.tag(
-      {
-        label: 'Show date',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
+    showOverlineXL: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showHeadlineXL: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showImageXL: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showDescriptionXL: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showBylineXL: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showDateXL: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -305,20 +290,16 @@ TopTableListWrapper.propTypes = {
       group: 'Medium story settings',
     }),
 
-    showHeadlineSM: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Small story settings',
-      },
-    ),
-    showImageSM: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Small story settings',
-      },
-    ),
+    showHeadlineSM: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Small story settings',
+    }),
+    showImageSM: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Small story settings',
+    }),
   }),
 };
 

@@ -16,6 +16,7 @@
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook",
     "test": "jest",
+    "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
     "test:coverage": "jest --coverage"
   },
   "husky": {

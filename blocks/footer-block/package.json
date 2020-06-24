@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/footer-block",
-  "version": "5.0.11",
+  "version": "5.1.0-beta.0",
   "description": "Fusion News Theme footer block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -25,6 +25,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/links-bar-block": "latest",
     "@wpmedia/news-theme-css": "latest",

@@ -30,13 +30,6 @@
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
     }
 
-    &:nth-child(2n+1) {
-      margin-right: 0;
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-right: map-get($spacers, 'md');
-      }
-    }
-
     .row {
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
         grid-column-gap: 0;
@@ -45,6 +38,13 @@
           max-width: 90%;
         }
       }
+    }
+  }
+
+  .small-promo-padding {
+    padding-right: 0;
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding-right: map-get($spacers, 'md');
     }
   }
 }

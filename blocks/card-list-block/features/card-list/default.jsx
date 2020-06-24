@@ -122,7 +122,7 @@ class CardList extends React.Component {
                   : ''
               }
               <div
-                className="list-item-simple"
+                className={`list-item-simple ${contentElements.length > 1 ? 'list-item-simple--divider' : ''}`}
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a

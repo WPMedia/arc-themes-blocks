@@ -193,6 +193,8 @@ If this does happen, you can use `from-package` syntax in lerna [docs](https://g
 
 To doublecheck yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work. 
 
+WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
+
 ---
 
 1. Pull the latest `staging` branch. 
@@ -368,6 +370,8 @@ These Gallery events are:
 | galleryImagePrevious | When the next button is pressed.                             |
 | galleryAutoplayStart | When the autoplay button is pressed                          |
 | galleryAutoplayStop  | When the autoplay button is pressed and the autoplay mode was enabled. If the gallery reach the end of the playlist will stop and generate this event too |
+| galleryExpandEnter   | When the expand button is pressed                            |
+| galleryExpandExit    | When the close button on the lightbox is pressed             |
 
 If you wanted to listen to these events, the first thing is to import the EventEmitter object into the block:
 

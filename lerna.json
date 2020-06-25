@@ -3,7 +3,7 @@
     "blocks/*",
     "components/*"
   ],
-  "version": "5.0.11",
+  "version": "5.1.0",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"

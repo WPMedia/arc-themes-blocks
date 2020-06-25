@@ -125,6 +125,10 @@ describe('Card list', () => {
       it('should set the primary font for the title', () => {
         expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
+
+      it('should not add the line divider', () => {
+        expect(wrapper.find('.list-item-simple--divider').length).toEqual(0);
+      });
     });
   });
 
@@ -159,6 +163,10 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
+      });
+
+      it('should add the line divider when have multiple items', () => {
+        expect(wrapper.find('.list-item-simple--divider').length).toEqual(1);
       });
     });
   });

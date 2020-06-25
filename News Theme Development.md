@@ -193,6 +193,8 @@ If this does happen, you can use `from-package` syntax in lerna [docs](https://g
 
 To doublecheck yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work. 
 
+WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
+
 ---
 
 1. Pull the latest `staging` branch. 

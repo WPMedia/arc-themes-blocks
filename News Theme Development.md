@@ -360,14 +360,16 @@ from the blocks list in `blocks.json` to prevent a Fusion error because of the n
 ## Event Listening
 The EventEmitter object, located in @wpmedia/engine-theme-sdk can be used to 
 publish and subscribe to events.  This can be useful for adding analytic tracking for a custom block.
-In fact, the Gallery component sends off events for when the next or previous image is viewed. 
+In fact, the Gallery component sends off events for when the next or previous image is viewed and when the autoplay mode is enabled. 
 
 These Gallery events are:
 
 |                      |                                                              |
 | -------------------- | ------------------------------------------------------------ |
-| galleryImageNext     | When the next button is pressed.                             |
+| galleryImageNext     | When the next button is pressed. If the autoplay property of the event is true, the gallery is executing in autoplay mode |
 | galleryImagePrevious | When the next button is pressed.                             |
+| galleryAutoplayStart | When the autoplay button is pressed                          |
+| galleryAutoplayStop  | When the autoplay button is pressed and the autoplay mode was enabled. If the gallery reach the end of the playlist will stop and generate this event too |
 | galleryExpandEnter   | When the expand button is pressed                            |
 | galleryExpandExit    | When the close button on the lightbox is pressed             |
 

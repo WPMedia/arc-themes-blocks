@@ -16,6 +16,10 @@ class EventTester extends Component {
     super(props);
     EventEmitter.subscribe('galleryImageNext', (event) => this.galleryHandler(event));
     EventEmitter.subscribe('galleryImagePrevious', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryAutoplayStart', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryAutoplayStop', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryExpandEnter', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryExpandExit', (event) => this.galleryHandler(event));
   }
 
   // eslint-disable-next-line class-methods-use-this

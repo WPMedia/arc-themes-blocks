@@ -58,6 +58,10 @@
 }
 
 .list-item-simple {
+  &--divider {
+    box-shadow: inset 0 -1px 0 0 $ui-light-gray;
+  }
+
   .list-anchor {
     text-decoration: none;
   }

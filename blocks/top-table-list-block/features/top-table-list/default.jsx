@@ -5,7 +5,10 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import {
+  extractResizedParams,
+  imageRatioCustomField,
+} from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE,
@@ -14,7 +17,6 @@ import {
   SMALL,
 } from './shared/storySizeConstants';
 import StoryItemContainer from './_children/story-item-container';
-import { imageRatioProps } from './shared/helper';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -244,7 +246,7 @@ TopTableListWrapper.propTypes = {
         group: 'Extra Large story settings',
       },
     ),
-    ...imageRatioProps('imageRatioXL', 'Extra Large story settings', '4:3'),
+    ...imageRatioCustomField('imageRatioXL', 'Extra Large story settings', '4:3'),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -276,7 +278,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Large story settings',
     }),
-    ...imageRatioProps('imageRatioLG', 'Large story settings', '4:3'),
+    ...imageRatioCustomField('imageRatioLG', 'Large story settings', '4:3'),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
@@ -303,7 +305,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Medium story settings',
     }),
-    ...imageRatioProps('imageRatioMD', 'Medium story settings', '16:9'),
+    ...imageRatioCustomField('imageRatioMD', 'Medium story settings', '16:9'),
 
     showHeadlineSM: PropTypes.bool.tag(
       {
@@ -319,7 +321,7 @@ TopTableListWrapper.propTypes = {
         group: 'Small story settings',
       },
     ),
-    ...imageRatioProps('imageRatioSM', 'Small story settings', '3:2'),
+    ...imageRatioCustomField('imageRatioSM', 'Small story settings', '3:2'),
   }),
 };
 

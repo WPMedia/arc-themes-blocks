@@ -3,12 +3,12 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import { ratiosPropsFor } from '../shared/helper';
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -96,7 +96,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosPropsFor('LG', imageRatio);
+  const ratios = ratiosFor('LG', imageRatio);
 
   return (
     <article key={id} className="container-fluid large-promo">

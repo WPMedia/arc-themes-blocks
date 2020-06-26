@@ -3,12 +3,12 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import { ratiosPropsFor } from '../shared/helper';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
@@ -97,7 +97,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosPropsFor('XL', imageRatio);
+  const ratios = ratiosFor('XL', imageRatio);
 
   return (
     <article className="container-fluid xl-large-promo" key={id}>

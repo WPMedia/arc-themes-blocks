@@ -1,34 +1,3 @@
-import PropTypes from 'prop-types';
-
-const imageRatioLabels = {
-  '16:9': '16:9',
-  '3:2': '3:2',
-  '4:3': '4:3',
-};
-
-const imageRatiosKeys = Object.keys(imageRatioLabels);
-
-/**
- * Helper to create imageRatio properties to be used on CustomFields
- *
- * @param element Base name of the element.
- * @param group Group to witch the element belong to
- * @param defaultValue Default value to use for this property
- *
- * @return A property object to be use on CustomFields
- */
-export const imageRatioProps = (element, group, defaultValue) => {
-  const elementTextProp = {
-    [`${element}`]: PropTypes.oneOf(imageRatiosKeys).tag({
-      labels: imageRatioLabels,
-      name: 'Image ratio',
-      defaultValue,
-      group,
-    }),
-  };
-  return { ...elementTextProp };
-};
-
 const sizes = {
   XL: {
     options: [
@@ -72,12 +41,15 @@ const ratios = {
 /**
  * Helper to return the image sizes properties according to a ratio
  *
+ * @param size Label to use to determine the size (XL, LG, MD, SM)
  * @param ratioValue Ratio to use for the calc
  *
- * @return an object with all the sizes
+ * @return an object with the sizes for each option
  */
-export const ratiosPropsFor = (size, ratioValue) => {
-  const { options, defaultRatio } = sizes[size];
+const ratiosFor = (size, ratioValue) => {
+  const validOptions = Object.keys(sizes);
+  const imageSize = validOptions.some((e) => e === size) ? size : 'XL';
+  const { options, defaultRatio } = sizes[imageSize];
   const ratio = ratios[ratioValue] || ratios[defaultRatio];
 
   return options.reduce((acc, ele) => {
@@ -86,3 +58,5 @@ export const ratiosPropsFor = (size, ratioValue) => {
     return acc;
   }, {});
 };
+
+export default ratiosFor;

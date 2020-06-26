@@ -2,12 +2,12 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import { ratiosPropsFor } from '../shared/helper';
 
 // via results list
 const MediumListItem = (props) => {
@@ -77,7 +77,7 @@ const MediumListItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosPropsFor('MD', imageRatio);
+  const ratios = ratiosFor('MD', imageRatio);
 
   return (
     <article className="container-fluid medium-promo" key={id}>

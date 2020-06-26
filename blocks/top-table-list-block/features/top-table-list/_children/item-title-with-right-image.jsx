@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
-import { ratiosPropsFor } from '../shared/helper';
 
 const ItemTitleWithRightImage = (props) => {
   const {
@@ -21,7 +21,7 @@ const ItemTitleWithRightImage = (props) => {
     imageRatio,
   } = props;
 
-  const ratios = ratiosPropsFor('SM', imageRatio);
+  const ratios = ratiosFor('SM', imageRatio);
 
   return (
     <article key={id} className={`container-fluid small-promo ${paddingRight ? 'small-promo-padding' : ''}`}>

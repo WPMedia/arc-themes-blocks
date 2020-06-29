@@ -198,7 +198,7 @@ describe('get resized image data helper on the server-side', () => {
     expect(allValidFilterValues).toEqual(true);
   });
 
-  it('resizes recursively for content type gallery', () => {
+  it('resizes recursively for content type gallery, returns gallery specific sizes', () => {
     getProperties.mockImplementation(() => ({
       breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
       aspectRatios: ASPECT_RATIOS,
@@ -210,10 +210,14 @@ describe('get resized image data helper on the server-side', () => {
 
     expect(resizedObject.content_elements[0].content_elements[0].resized_params)
       .toEqual({
-        '158x105': '/C1z9lDKfadVti7Pph_eivOnRUTo=filters:format(jpg):quality(70)/',
-        '158x119': '/Z34lUtK2CgTEqUQ3b9yIXKcqDak=filters:format(jpg):quality(70)/',
-        '274x183': '/7sIpUrg_ehT1iJ9gAnFgPGmm7So=filters:format(jpg):quality(70)/',
-        '274x206': '/gJXVPdVLug6x7R899x-K90w6CXo=filters:format(jpg):quality(70)/',
+        '1600x1067': '/Aed9imgLCVXM6Nwk1zJulxUpaIk=filters:format(jpg):quality(70)/',
+        '1600x1200': '/N5G8ddC9NDk_mNbK9PVAA800hwo=filters:format(jpg):quality(70)/',
+        '400x267': '/mEsGuTeYQorRDsIYGoHSmEeIIRY=filters:format(jpg):quality(70)/',
+        '400x300': '/HBqyO7f0x9txjJ9Xpw2fB6wcO1I=filters:format(jpg):quality(70)/',
+        '600x400': '/LEQ0FS_CjCNwdc8pPfrwj4Aw8ng=filters:format(jpg):quality(70)/',
+        '600x450': '/4j_-SGNQZLqeShesrITrWb-jqHY=filters:format(jpg):quality(70)/',
+        '800x533': '/hx55AmkHc6npIZv0uiZ2bPseXhE=filters:format(jpg):quality(70)/',
+        '800x600': '/Z3sU9m11Oq8UNZ5MsgMs3u8m5Qs=filters:format(jpg):quality(70)/',
       });
   });
   it('takes in lead art on the top level data', () => {

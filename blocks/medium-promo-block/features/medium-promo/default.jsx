@@ -12,7 +12,11 @@ import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import {
+  extractResizedParams,
+  imageRatioCustomField,
+  ratiosFor,
+} from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -106,6 +110,8 @@ const MediumPromo = ({ customFields }) => {
     return null;
   };
 
+  const ratios = ratiosFor('MD', customFields.imageRatio);
+
   return content ? (
     <article className="container-fluid medium-promo">
       <div className="row med-promo-padding-bottom">
@@ -124,12 +130,12 @@ const MediumPromo = ({ customFields }) => {
                         ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                       alt={content && content.headlines ? content.headlines.basic : ''}
                       // medium is 16:9
-                      smallWidth={274}
-                      smallHeight={154}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={400}
-                      largeHeight={225}
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
                       resizedImageOptions={extractResizedParams(content)}
@@ -137,12 +143,12 @@ const MediumPromo = ({ customFields }) => {
                   )
                   : (
                     <PlaceholderImage
-                      smallWidth={274}
-                      smallHeight={154}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={400}
-                      largeHeight={225}
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
                     />
                   )
                 }
@@ -201,6 +207,7 @@ MediumPromo.propTypes = {
       label: 'Image URL',
       group: 'Image',
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
   }),
 };
 

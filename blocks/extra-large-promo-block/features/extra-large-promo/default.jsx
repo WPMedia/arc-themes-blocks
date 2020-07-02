@@ -13,7 +13,11 @@ import Overline from '@wpmedia/overline-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import {
+  extractResizedParams,
+  imageRatioCustomField,
+  ratiosFor,
+} from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -133,6 +137,8 @@ const ExtraLargePromo = ({ customFields }) => {
     return null;
   };
 
+  const ratios = ratiosFor('XL', customFields.imageRatio);
+
   return content && (
     <article className="container-fluid xl-large-promo">
       <div className="row xl-promo-padding-bottom">
@@ -154,12 +160,12 @@ const ExtraLargePromo = ({ customFields }) => {
                       url={customFields.imageOverrideURL
                         ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                       alt={content && content.headlines ? content.headlines.basic : ''}
-                      smallWidth={400}
-                      smallHeight={300}
-                      mediumWidth={600}
-                      mediumHeight={450}
-                      largeWidth={800}
-                      largeHeight={600}
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
                       resizedImageOptions={extractResizedParams(content)}
@@ -168,12 +174,12 @@ const ExtraLargePromo = ({ customFields }) => {
                   )
                   : (
                     <PlaceholderImage
-                      smallWidth={400}
-                      smallHeight={300}
-                      mediumWidth={600}
-                      mediumHeight={450}
-                      largeWidth={800}
-                      largeHeight={600}
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
                     />
                   )}
               </a>
@@ -244,6 +250,7 @@ ExtraLargePromo.propTypes = {
       label: 'Image URL',
       group: 'Image',
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
   }),
 };
 

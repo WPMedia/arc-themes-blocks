@@ -271,7 +271,7 @@ const getResizedImageData = (
   }
 
   if (onlyUrl) {
-    return getResizerParams(data, respectAspectRatio, resizerURL);
+    return !data ? null : getResizerParams(data, respectAspectRatio, resizerURL);
   }
 
   return getResizedImageParams(data, {

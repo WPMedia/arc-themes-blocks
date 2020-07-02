@@ -273,4 +273,16 @@ describe('get resized image data helper on the server-side', () => {
       '274x206': '/1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/',
     });
   });
+  it('return null if only image is used with no image url', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+    const dataWithResizedImages = getResizedImageData('', null, true, true);
+    // uses fit in logic
+    expect(dataWithResizedImages).toEqual(null);
+  });
 });

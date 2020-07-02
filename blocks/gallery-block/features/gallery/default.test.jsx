@@ -76,5 +76,4 @@ describe('the gallery feature block', () => {
       expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
-
 });

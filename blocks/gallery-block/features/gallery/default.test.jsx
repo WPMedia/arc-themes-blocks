@@ -55,7 +55,7 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={{}} />);
-      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
     });
   });
 
@@ -63,7 +63,18 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={undefined} />);
+      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+    });
+  });
+
+  describe('when gallery is inserted use the default customFields values', () => {
+    it('should render the global content gallery', () => {
+      const { default: GalleryFeature } = require('./default');
+      const wrapper = shallow(
+        <GalleryFeature customFields={{ inheritGlobalContent: true, galleryContentConfig: {} }} />,
+      );
       expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
+
 });

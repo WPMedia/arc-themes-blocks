@@ -9,7 +9,7 @@ import CustomContentGallery from './_children/custom-content';
 const GalleryFeature = (
   {
     customFields: {
-      inheritGlobalContent = true,
+      inheritGlobalContent,
       galleryContentConfig,
     } = {},
   } = {},
@@ -32,6 +32,7 @@ GalleryFeature.propTypes = {
     }),
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
+      defaultValue: true,
     }),
   }),
 };

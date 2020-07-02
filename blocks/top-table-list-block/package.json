@@ -29,6 +29,7 @@
     "@wpmedia/overline-block": "latest",
     "@wpmedia/placeholder-image-block": "latest",
     "@wpmedia/shared-styles": "latest",
+    "@wpmedia/resizer-image-block": "latest",
     "styled-components": "^4.4.0"
   },
   "scripts": {

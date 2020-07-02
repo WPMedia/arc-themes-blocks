@@ -2,6 +2,9 @@
 import getProperties from 'fusion:properties';
 import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
+export { default as ratiosFor } from './ratiosFor';
+export { default as imageRatioCustomField } from './imageRatioCustomField';
+
 const getResizerParam = (
   originalUrl,
   breakpoint,

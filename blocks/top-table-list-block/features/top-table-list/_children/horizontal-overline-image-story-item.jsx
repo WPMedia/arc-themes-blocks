@@ -3,6 +3,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
@@ -28,6 +29,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     resizedImageOptions,
     placeholderResizedImageOptions,
     targetFallbackImage,
+    imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
@@ -94,6 +96,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     return null;
   };
 
+  const ratios = ratiosFor('LG', imageRatio);
+
   return (
     <article key={id} className="container-fluid large-promo">
       <div className="row lg-promo-padding-bottom">
@@ -107,25 +111,24 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 url={imageURL}
                 // todo: get the proper alt tag for this image
                 alt={itemTitle}
-                // large aspect ratio 4:3
-                smallWidth={274}
-                smallHeight={206}
-                mediumWidth={274}
-                mediumHeight={206}
-                largeWidth={377}
-                largeHeight={283}
+                smallWidth={ratios.smallWidth}
+                smallHeight={ratios.smallHeight}
+                mediumWidth={ratios.mediumWidth}
+                mediumHeight={ratios.mediumHeight}
+                largeWidth={ratios.largeWidth}
+                largeHeight={ratios.largeHeight}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
               />
             </a>
           ) : (
             <Image
-              smallWidth={274}
-              smallHeight={206}
-              mediumWidth={274}
-              mediumHeight={206}
-              largeWidth={377}
-              largeHeight={283}
+              smallWidth={ratios.smallWidth}
+              smallHeight={ratios.smallHeight}
+              mediumWidth={ratios.mediumWidth}
+              mediumHeight={ratios.mediumHeight}
+              largeWidth={ratios.largeWidth}
+              largeHeight={ratios.largeHeight}
               alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
               url={targetFallbackImage}
               breakpoints={getProperties(arcSite)?.breakpoints}

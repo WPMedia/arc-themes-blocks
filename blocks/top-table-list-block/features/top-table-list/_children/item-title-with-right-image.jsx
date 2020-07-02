@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 
 import Title from './title';
@@ -17,7 +18,11 @@ const ItemTitleWithRightImage = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     paddingRight = false,
+    imageRatio,
   } = props;
+
+  const ratios = ratiosFor('SM', imageRatio);
+
   return (
     <article key={id} className={`container-fluid small-promo ${paddingRight ? 'small-promo-padding' : ''}`}>
       <div className="row sm-promo-padding-btm">
@@ -39,25 +44,24 @@ const ItemTitleWithRightImage = (props) => {
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   alt={itemTitle}
-                  // small size aspect ratios 3:2
-                  smallWidth={274}
-                  smallHeight={183}
-                  mediumWidth={274}
-                  mediumHeight={183}
-                  largeWidth={400}
-                  largeHeight={267}
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                 />
               </a>
             ) : (
               <Image
-                smallWidth={274}
-                smallHeight={183}
-                mediumWidth={274}
-                mediumHeight={183}
-                largeWidth={400}
-                largeHeight={267}
+                smallWidth={ratios.smallWidth}
+                smallHeight={ratios.smallHeight}
+                mediumWidth={ratios.mediumWidth}
+                mediumHeight={ratios.mediumHeight}
+                largeWidth={ratios.largeWidth}
+                largeHeight={ratios.largeHeight}
                 alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
                 url={targetFallbackImage}
                 breakpoints={getProperties(arcSite)?.breakpoints}

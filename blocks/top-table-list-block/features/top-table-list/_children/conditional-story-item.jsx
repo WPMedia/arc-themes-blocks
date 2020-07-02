@@ -55,6 +55,7 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioXL}
         />
       );
     case LARGE:
@@ -77,6 +78,7 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioLG}
         />
       );
     case MEDIUM:
@@ -96,6 +98,7 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioMD}
         />
       );
     case SMALL:
@@ -114,6 +117,7 @@ const ConditionalStoryItem = (props) => {
           paddingRight={
             (index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)) % 2 === 0
           }
+          imageRatio={customFields.imageRatioSM}
         />
       );
     default:

@@ -80,10 +80,14 @@ const Nav = (props) => {
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
 
+  const closeNavigation = () => {
+    setSectionDrawerOpen(false);
+    document.body.classList.remove('nav-open');
+  };
+
   const handleEscKey = (event) => {
     if (event.keyCode === 27) {
-      setSectionDrawerOpen(false);
-      document.body.classList.remove('nav-open');
+      closeNavigation();
     }
   };
 
@@ -129,7 +133,7 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
+        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} onClick={closeNavigation} font={primaryFont}>
           <div className="innerDrawerNav">
             <SectionNav sections={sections}>
               <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />

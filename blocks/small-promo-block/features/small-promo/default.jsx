@@ -10,7 +10,11 @@ import { useFusionContext } from 'fusion:context';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import {
+  extractResizedParams,
+  imageRatioCustomField,
+  ratiosFor,
+} from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -30,6 +34,8 @@ const SmallPromo = ({ customFields }) => {
   const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
+
+  const ratios = ratiosFor('SM', customFields.imageRatio);
 
   return content ? (
     <article className="container-fluid small-promo">
@@ -67,12 +73,12 @@ const SmallPromo = ({ customFields }) => {
                       ? customFields.imageOverrideURL : extractImage(content.promo_items)}
                     alt={content && content.headlines ? content.headlines.basic : ''}
                     // small should be 3:2 aspect ratio
-                    smallWidth={274}
-                    smallHeight={183}
-                    mediumWidth={274}
-                    mediumHeight={183}
-                    largeWidth={400}
-                    largeHeight={267}
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizerURL={getProperties(arcSite)?.resizerURL}
                     resizedImageOptions={extractResizedParams(content)}
@@ -80,12 +86,12 @@ const SmallPromo = ({ customFields }) => {
                 )
                 : (
                   <PlaceholderImage
-                    smallWidth={274}
-                    smallHeight={183}
-                    mediumWidth={274}
-                    mediumHeight={183}
-                    largeWidth={400}
-                    largeHeight={267}
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
                   />
                 )}
             </a>
@@ -122,6 +128,7 @@ SmallPromo.propTypes = {
       label: 'Image URL',
       group: 'Image',
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
   }),
 };
 

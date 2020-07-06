@@ -102,6 +102,7 @@ describe('vertical overline image story item', () => {
     const itemTitle = 'title';
     const descriptionText = '';
     const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
     const by = [];
     const element = { };
     const displayDate = '';
@@ -114,6 +115,7 @@ describe('vertical overline image story item', () => {
       itemTitle,
       descriptionText,
       primaryFont,
+      secondaryFont,
       by,
       element,
       displayDate,
@@ -130,6 +132,7 @@ describe('vertical overline image story item', () => {
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
+        secondaryFont={secondaryFont}
         by={by}
         element={element}
         displayDate={displayDate}

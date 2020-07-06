@@ -162,7 +162,7 @@ describe('the header navigation feature for the default output type', () => {
       wrapper.find('.nav-left > .nav-btn').simulate('click');
       expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
     });
-    it('opens and closes when click the container', () => {
+    it('open with section button, closes when click the container', () => {
       const wrapper = shallow(<Navigation />);
 
       expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);

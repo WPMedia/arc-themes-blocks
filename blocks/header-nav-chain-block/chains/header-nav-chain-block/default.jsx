@@ -91,6 +91,14 @@ const Nav = (props) => {
     }
   };
 
+  const closeDrawer = (event) => {
+    const ele = event.target;
+    if (ele.closest('.innerDrawerNav')) {
+      return;
+    }
+    closeNavigation();
+  };
+
   const hamburgerClick = () => {
     setSectionDrawerOpen(!isSectionDrawerOpen);
     document.body.classList.toggle('nav-open');
@@ -133,8 +141,8 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} onClick={closeNavigation} font={primaryFont}>
-          <div className="innerDrawerNav">
+        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} onClick={closeDrawer} font={primaryFont}>
+          <div className="innerDrawerNav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
               <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
             </SectionNav>

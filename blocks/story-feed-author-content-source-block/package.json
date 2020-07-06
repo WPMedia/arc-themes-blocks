@@ -22,8 +22,6 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "dependencies": {
-    "@arc-core-components/content-source_story-feed_author-v4": "^1.0.6-beta.0"
-  },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77",
+  "dependencies": {}
 }

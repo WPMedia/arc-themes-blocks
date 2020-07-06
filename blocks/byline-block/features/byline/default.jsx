@@ -19,7 +19,6 @@ const BylineSection = styled.section`
 `}
 `;
 
-
 const By = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #3B3B3B;
@@ -27,13 +26,11 @@ const By = styled.span`
   `}
 `;
 
-
 const BylineNames = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #434343;
   `}
 `;
-
 
 @Consumer
 class ArticleByline extends Component {

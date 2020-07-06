@@ -24,7 +24,6 @@ import getProperties from 'fusion:properties';
 
 import constructSocialURL from './shared/constructSocialURL';
 
-
 import './author-bio.scss';
 
 /*

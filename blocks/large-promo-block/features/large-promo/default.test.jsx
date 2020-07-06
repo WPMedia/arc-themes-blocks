@@ -104,4 +104,31 @@ describe('the large promo feature', () => {
     const wrapper = mount(<LargePromo customFields={noHeadlineConfig} />);
     expect(wrapper.find('a')).toHaveLength(1);
   });
+
+  it('should have by default an 4:3 image ratio', () => {
+    const wrapper = mount(<LargePromo customFields={config} />);
+    const img = wrapper.find('Image');
+    expect(img.prop('largeHeight')).toBe(283);
+  });
+
+  it('should accept a 16:9 ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<LargePromo customFields={myConfig} />);
+    const img = wrapper.find('Image');
+    expect(img.prop('largeHeight')).toBe(212);
+  });
+
+  it('should accept a 3:2 ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<LargePromo customFields={myConfig} />);
+    const img = wrapper.find('Image');
+    expect(img.prop('largeHeight')).toBe(251);
+  });
+
+  it('should accept a 4:3 ratio', () => {
+    const myConfig = { ...config, imageRatio: '4:3' };
+    const wrapper = mount(<LargePromo customFields={myConfig} />);
+    const img = wrapper.find('Image');
+    expect(img.prop('largeHeight')).toBe(283);
+  });
 });

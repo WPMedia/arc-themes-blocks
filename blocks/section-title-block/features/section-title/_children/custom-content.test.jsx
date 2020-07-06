@@ -7,7 +7,6 @@ jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockNestedChildren)),
 }));
 
-
 describe('the custom content section title', () => {
   it('should call useContent with the expected content config values', () => {
     const { default: CustomContentSectionTitle } = require('./custom-content');

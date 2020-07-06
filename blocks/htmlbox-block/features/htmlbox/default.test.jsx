@@ -1,7 +1,6 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-
 describe('the htmlbox block', () => {
   it('should render the embedded iframe', () => {
     const { default: HTMLBox } = require('./default');

@@ -18,7 +18,6 @@ const SectionTitleContainer = (
   return <CustomContentSectionTitle contentConfig={sectionContentConfig} />;
 };
 
-
 SectionTitleContainer.label = 'Section Title – Arc Block';
 
 SectionTitleContainer.propTypes = {

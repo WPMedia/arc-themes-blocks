@@ -56,7 +56,6 @@ describe('the collections content source block', () => {
     });
   });
 
-
   describe('when a size is provided', () => {
     it('should build the correct url without a size', () => {
       const url = contentSource.resolve({

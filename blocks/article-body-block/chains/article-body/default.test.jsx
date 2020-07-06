@@ -290,7 +290,6 @@ describe('article-body chain', () => {
     });
   });
 
-
   describe('when it is initalized with no customFields in editor', () => {
     afterEach(() => {
       jest.resetModules();

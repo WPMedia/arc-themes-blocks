@@ -59,7 +59,6 @@ describe('medium list item', () => {
       customFields={config}
     />);
 
-
     // placeholder
     // expect(wrapper.find('.top-table-med-image-placeholder').length).toBe(0);
 

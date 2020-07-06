@@ -23,7 +23,6 @@ export const longHeadline = () => (
   <Headline fusionContext={data} />
 );
 
-
 export const customHeadline = () => {
   const headline = text('Headline', 'Man Bites Dog');
   const newData = () => ({

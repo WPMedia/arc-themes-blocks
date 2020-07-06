@@ -31,14 +31,12 @@ const config = {
   showImageSM: true,
 };
 
-
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
     globalContent: {},
   })),
 }));
-
 
 jest.mock('fusion:content', () => ({
   useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),

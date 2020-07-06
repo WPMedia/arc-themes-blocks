@@ -133,5 +133,4 @@ const SampleOutputType = ({
   );
 };
 
-
 export default SampleOutputType;

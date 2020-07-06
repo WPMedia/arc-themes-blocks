@@ -80,11 +80,23 @@ const Nav = (props) => {
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
 
+  const closeNavigation = () => {
+    setSectionDrawerOpen(false);
+    document.body.classList.remove('nav-open');
+  };
+
   const handleEscKey = (event) => {
     if (event.keyCode === 27) {
-      setSectionDrawerOpen(false);
-      document.body.classList.remove('nav-open');
+      closeNavigation();
     }
+  };
+
+  const closeDrawer = (event) => {
+    const ele = event.target;
+    if (ele.closest('.innerDrawerNav')) {
+      return;
+    }
+    closeNavigation();
   };
 
   const hamburgerClick = () => {
@@ -129,8 +141,8 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
-          <div className="innerDrawerNav">
+        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} onClick={closeDrawer} font={primaryFont}>
+          <div className="innerDrawerNav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
               <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
             </SectionNav>

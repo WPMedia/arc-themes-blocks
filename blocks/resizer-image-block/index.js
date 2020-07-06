@@ -113,7 +113,6 @@ export const getResizerParams = (
   return output;
 };
 
-
 const resizeImage = (image, resizerURL) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
@@ -240,7 +239,6 @@ export const extractResizedParams = (storyObject) => {
 
   return [];
 };
-
 
 // top level for transforming data
 // takes in content source story data via ans

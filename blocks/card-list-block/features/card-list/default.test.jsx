@@ -76,8 +76,13 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-title').text()).toEqual('Test Title');
       });
 
+      it('should render two anchor tags - one around image one for the title', () => {
+        expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(2);
+        expect(wrapper.find('#card-list--link-container').find('Image').length).toEqual(1);
+        expect(wrapper.find('.card-list-headline #card-list--headline-link').length).toEqual(1);
+      });
+
       it('should render one image wrapped in an anchor tag', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(1);
         expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').length).toEqual(1);
       });
 

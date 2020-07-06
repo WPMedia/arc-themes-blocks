@@ -18,6 +18,7 @@ class StoryItemContainer extends Component {
       overlineText,
       storySize,
       primaryFont,
+      secondaryFont,
       customFields,
       websiteURL,
       resizedImageOptions,
@@ -32,6 +33,7 @@ class StoryItemContainer extends Component {
       <>
         <ConditionalStoryItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           storySize={storySize}
           websiteURL={websiteURL}
           id={id}

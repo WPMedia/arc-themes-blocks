@@ -142,6 +142,7 @@ const TopTableList = (props) => {
   };
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+  const secondaryFont = getThemeStyle(arcSite)['secondary-font-family'];
 
   const storyTypeArray = [
     ...new Array(extraLarge).fill(EXTRA_LARGE),
@@ -189,6 +190,7 @@ const TopTableList = (props) => {
             index={index}
             storySizeMap={storySizeMap}
             primaryFont={primaryFont}
+            secondaryFont={secondaryFont}
             key={itemId}
             customFields={props.customFields}
             resizedImageOptions={resizedImageOptions}

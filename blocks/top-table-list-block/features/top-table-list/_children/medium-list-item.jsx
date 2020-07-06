@@ -17,6 +17,7 @@ const MediumListItem = (props) => {
     imageURL,
     descriptionText,
     primaryFont,
+    secondaryFont,
     by,
     element,
     displayDate,
@@ -45,7 +46,7 @@ const MediumListItem = (props) => {
   const descriptionTmpl = () => {
     if (customFields.showDescriptionMD) {
       return (
-        <DescriptionText secondaryFont={primaryFont} className="description-text">
+        <DescriptionText secondaryFont={secondaryFont} className="description-text">
           {descriptionText}
         </DescriptionText>
       );

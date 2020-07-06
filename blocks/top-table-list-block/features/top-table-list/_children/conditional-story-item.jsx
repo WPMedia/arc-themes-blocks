@@ -17,6 +17,7 @@ const ConditionalStoryItem = (props) => {
     id,
     storySize,
     primaryFont = '',
+    secondaryFont = '',
     websiteURL = '',
     descriptionText = '',
     by = [],
@@ -39,6 +40,7 @@ const ConditionalStoryItem = (props) => {
       return (
         <VerticalOverlineImageStoryItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -62,6 +64,7 @@ const ConditionalStoryItem = (props) => {
       return (
         <HorizontalOverlineImageStoryItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -85,6 +88,7 @@ const ConditionalStoryItem = (props) => {
       return (
         <MediumListItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -105,6 +109,7 @@ const ConditionalStoryItem = (props) => {
       return (
         <ItemTitleWithRightImage
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}

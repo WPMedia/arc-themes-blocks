@@ -17,6 +17,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     imageURL,
     descriptionText,
     primaryFont,
+    secondaryFont,
     by,
     element,
     overlineDisplay,
@@ -64,7 +65,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const descriptionTmpl = () => {
     if (customFields.showDescriptionLG && descriptionText) {
       return (
-        <DescriptionText secondaryFont={primaryFont} className="description-text">
+        <DescriptionText secondaryFont={secondaryFont} className="description-text">
           {descriptionText}
         </DescriptionText>
       );

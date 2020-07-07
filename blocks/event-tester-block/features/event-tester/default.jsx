@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { EventEmitter } from '@wpmedia/engine-theme-sdk';
 import './event.scss';
 
-
 /**
  * @file EventTester is a React Class Component
  * @summary Used for testing the event emitter.  When new events are created, they should be

@@ -844,5 +844,4 @@ const galleryResizeData = {
   created_date: '2020-05-21T18:09:59.840Z',
 };
 
-
 export default galleryResizeData;

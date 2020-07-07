@@ -85,7 +85,6 @@ describe('the header navigation feature for the default output type', () => {
     });
   });
 
-
   describe('when the nav color is set to "dark"', () => {
     it('should set the "dark" class on the component', () => {
       getProperties.mockImplementation(() => ({ navColor: 'dark' }));

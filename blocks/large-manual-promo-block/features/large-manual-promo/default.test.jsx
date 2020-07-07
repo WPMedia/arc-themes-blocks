@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import LargeManualPromo from './default';
 
-
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));

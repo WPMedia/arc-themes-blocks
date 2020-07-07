@@ -1,7 +1,6 @@
 const React = require('react');
 const { render } = require('enzyme');
 
-
 jest.mock('fusion:properties', () => jest.fn(() => (
   {
     dateLocalization: {
@@ -12,7 +11,6 @@ jest.mock('fusion:properties', () => jest.fn(() => (
     },
   }
 )));
-
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   localizeDateTime: jest.fn(() => new Date().toDateString()),

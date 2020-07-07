@@ -13,7 +13,6 @@ import {
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
-
 const LeadArtWrapperDiv = styled.div`
   figcaption {
     font-family: ${(props) => props.primaryFont};

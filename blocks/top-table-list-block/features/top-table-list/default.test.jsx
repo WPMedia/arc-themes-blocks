@@ -276,7 +276,6 @@ describe('top table list overline rules', () => {
       })),
     }));
 
-
     const wrapper = mount(
       <TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );

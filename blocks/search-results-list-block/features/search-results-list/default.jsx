@@ -19,7 +19,6 @@ const SearchResultsListContainer = (
   return <CustomSearchResultsList arcSite={arcSite} />;
 };
 
-
 SearchResultsListContainer.label = 'Search Results List – Arc Block';
 
 SearchResultsListContainer.propTypes = {

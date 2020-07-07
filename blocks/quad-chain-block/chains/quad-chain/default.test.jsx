@@ -41,7 +41,6 @@ describe('the quad chain block', () => {
       </Chain>,
     );
 
-
     const columnOne = component.find('.row').children().at(0);
     const columnTwo = component.find('.row').children().at(1);
 

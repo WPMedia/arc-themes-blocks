@@ -39,7 +39,6 @@ class NumberedList extends Component {
     this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
   }
 
-
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
@@ -164,7 +163,6 @@ class NumberedList extends Component {
     );
   }
 }
-
 
 NumberedList.propTypes = {
   customFields: PropTypes.shape({

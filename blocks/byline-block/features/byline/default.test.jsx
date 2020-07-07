@@ -99,7 +99,6 @@ describe('Given the display time from ANS, it should convert to the proper timez
     expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
-
   it('should return 4 authors complete with url and bylines', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
@@ -154,7 +153,6 @@ describe('Given the display time from ANS, it should convert to the proper timez
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
     const { default: ArticleByline } = require('./default');
-
 
     expect(() => {
       mount(<ArticleByline />);

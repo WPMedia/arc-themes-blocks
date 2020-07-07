@@ -70,7 +70,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                 className="xl-promo-headline"
                 title={customFields.headline}
                 target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
+                rel={customFields.newTab ? 'noreferrer' : ''}
               >
                 <HeadlineText
                   primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -86,7 +86,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                 href={customFields.linkURL}
                 title={customFields.headline}
                 target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
+                rel={customFields.newTab ? 'noreferrer' : ''}
               >
                 <Image
                   url={customFields.imageURL}

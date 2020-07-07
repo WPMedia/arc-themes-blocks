@@ -97,7 +97,7 @@ const LargeManualPromo = ({ customFields }) => {
                 className="lg-promo-headline"
                 title={customFields.headline}
                 target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
+                rel={customFields.newTab ? 'noreferrer' : ''}
               >
                 <HeadlineText
                   primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}

@@ -40,6 +40,7 @@ const MediumManualPromo = ({ customFields }) => {
               href={customFields.linkURL}
               title={customFields.headline}
               target={customFields.newTab ? '_blank' : '_self'}
+              rel={customFields.newTab ? 'noreferrer noopener' : ''}
             >
               <Image
                 // medium is 16:9
@@ -68,6 +69,7 @@ const MediumManualPromo = ({ customFields }) => {
                 className="md-promo-headline"
                 title={customFields.headline}
                 target={customFields.newTab ? '_blank' : '_self'}
+                rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <HeadlineText
                   primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}

@@ -179,6 +179,29 @@ describe('The results list', () => {
     });
   });
 
+  describe('should render content only for the arcSite', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig };
+
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: mockData }, () => {
+      wrapper.update();
+      expect(wrapper.find('.results-list-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').length).toEqual(1);
+      expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
+    });
+  });
+
   describe('renders a button to display more stories', () => {
     const listContentConfig = {
       contentConfigValues: {

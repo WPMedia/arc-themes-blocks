@@ -17,7 +17,15 @@ const GalleryFeature = (
   const { arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
-  if (inheritGlobalContent) {
+
+  let globalContent;
+  if (inheritGlobalContent === undefined) {
+    globalContent = (galleryContentConfig === undefined);
+  } else {
+    globalContent = inheritGlobalContent;
+  }
+
+  if (globalContent) {
     return <GlobalContentGallery phrases={phrases} />;
   }
 

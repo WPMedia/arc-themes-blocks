@@ -103,7 +103,12 @@ class NumberedList extends Component {
             promo_items: promoItems,
             websites,
           } = element;
+
+          if (!websites[arcSite]) {
+            return null;
+          }
           const url = websites[arcSite].website_url;
+
           return (
             <div className="numbered-list-item" key={`result-card-${url}`} type="1">
               {showHeadline

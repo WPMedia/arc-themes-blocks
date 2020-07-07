@@ -18,14 +18,14 @@ const GalleryFeature = (
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
-  let globalContent;
-  if (inheritGlobalContent === undefined) {
-    globalContent = (galleryContentConfig === undefined);
+  let showGlobalContent;
+  if (typeof inheritGlobalContent === 'undefined') {
+    showGlobalContent = (typeof galleryContentConfig === 'undefined');
   } else {
-    globalContent = inheritGlobalContent;
+    showGlobalContent = inheritGlobalContent;
   }
 
-  if (globalContent) {
+  if (showGlobalContent) {
     return <GlobalContentGallery phrases={phrases} />;
   }
 

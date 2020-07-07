@@ -8,6 +8,9 @@ const mockOutput = {
         basic: {
           type: 'image',
           url: 'something.jpg',
+          resized_params: {
+            '274x183': '',
+          },
         },
       },
       headlines: {
@@ -18,46 +21,80 @@ const mockOutput = {
         tablet: '',
       },
       _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ',
+      websites: {
+        'the-sun': {
+          website_section: {
+            _id: '/arts',
+          },
+          website_url: '/arts/url',
+        },
+      },
+    },
+    {
+      promo_items: {
+        basic: {
+          type: 'image',
+          url: 'something2.jpg',
+          resized_params: {
+            '274x183': '',
+          },
+        },
+      },
+      headlines: {
+        basic: 'Video Test #2',
+        mobile: '',
+        native: '',
+        print: '',
+        tablet: '',
+      },
+      _id: 'UK662DYK6VF5XCY7KNZ25XB3QQ',
+      websites: {
+        dagen: {
+          website_section: {
+            _id: '/arts',
+          },
+          website_url: '/arts/url',
+        },
+      },
     },
     {
       headlines: {
         basic: 'Title',
       },
       _id: 'kdfjkdjfkldjf',
+      websites: {
+        'the-sun': {
+          website_section: {
+            _id: '/arts',
+          },
+          website_url: '/arts/url',
+        },
+      },
     },
   ],
 };
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({ websiteDomain: '', fallbackImage: 'placeholder.jpg' }))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  websiteDomain: '',
+  fallbackImage: '/resources/placeholder.jpg',
+  resizerURL: 'resizer',
+}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('Simple list', () => {
-  jest.mock('fusion:context', () => ({
-    useFusionContext: jest.fn(() => ({
-      globalContent: {
-        _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
-        type: 'story',
-        version: '0.10.2',
-        content_elements: [
-          {
-            _id: 'L57RVT4465HMBKL5T26NBBFBNI',
-            type: 'text',
-            additional_properties: {
-              comments: [],
-              inline_comments: [],
-              _id: 1563473120767,
-            },
-            content:
-              'This is a test article that has all kinds of different element types in it. You should see each element type appear below the bolded text.',
-          },
-        ],
-      },
-      arcSite: 'the-sun',
-      customFields: {
-        elementPlacement: { 1: 2, 2: 1 },
-      },
-    })),
-  }));
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        customFields: {
+          elementPlacement: { 1: 2, 2: 1 },
+        },
+      })),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
 
   it('should show title if there is a title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
@@ -132,5 +169,32 @@ describe('Simple list', () => {
     />);
 
     expect(wrapper.find('.list-item-simple').length).toBe(0);
+  });
+});
+
+describe('Simple list', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'dagen',
+        customFields: {
+          elementPlacement: { 1: 2, 2: 1 },
+        },
+      })),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+  it('should render content only for the arcSite', () => {
+    const { default: SimpleList } = require('./default.jsx');
+    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => mockOutput),
+    }));
+    const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
+
+    expect(wrapper.find('.list-item-simple').length).toBe(1);
   });
 });

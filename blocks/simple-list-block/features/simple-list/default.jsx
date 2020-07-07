@@ -17,13 +17,18 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
 
-const unserializeStory = (storyObject) => ({
-  id: storyObject._id,
-  itemTitle: storyObject.headlines.basic,
-  imageURL: extractImage(storyObject) || '',
-  websiteURL: storyObject.website_url || '',
-  resizedImageOptions: extractResizedParams(storyObject),
-});
+const unserializeStory = (arcSite) => (acc, storyObject) => {
+  if (storyObject.websites?.[arcSite]) {
+    return acc.concat({
+      id: storyObject._id,
+      itemTitle: storyObject.headlines.basic,
+      imageURL: extractImage(storyObject) || '',
+      websiteURL: storyObject.websites[arcSite].website_url || '',
+      resizedImageOptions: extractResizedParams(storyObject),
+    });
+  }
+  return acc;
+};
 
 // helpers end
 
@@ -113,7 +118,7 @@ const SimpleList = (props) => {
         {title}
       </Title>
       {
-        contentElements.map(unserializeStory).map(({
+        contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
           <StoryItem

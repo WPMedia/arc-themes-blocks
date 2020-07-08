@@ -32,7 +32,7 @@ describe('the gallery feature block', () => {
   });
 
   describe('when it is configured to NOT inherit global content', () => {
-    it('should render the global content gallery', () => {
+    it('should render the custom content gallery', () => {
       const { default: GalleryFeature } = require('./default');
 
       const wrapper = shallow(
@@ -50,11 +50,21 @@ describe('the gallery feature block', () => {
     });
   });
 
+  describe('when is only configured the content source', () => {
+    it('should render a custom content callery', () => {
+      const { default: GalleryFeature } = require('./default');
+      const wrapper = shallow(
+        <GalleryFeature customFields={{ galleryContentConfig: {} }} />,
+      );
+      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+    });
+  });
+
   describe('when customfields is empty', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={{}} />);
-      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
 
@@ -62,7 +72,7 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={undefined} />);
-      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });
 
@@ -70,7 +80,7 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(
-        <GalleryFeature customFields={{ inheritGlobalContent: true, galleryContentConfig: {} }} />,
+        <GalleryFeature />,
       );
       expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });

@@ -2,7 +2,6 @@ import getProperties from 'fusion:properties';
 
 import contentSource from './author-api';
 
-
 describe('the author api content source block', () => {
   it('should use the proper param types', () => {
     expect(contentSource.params).toEqual({

@@ -57,7 +57,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
     displayDate: storyObject.display_date || '',
     description: (storyObject.description && storyObject.description.basic) || '',
     by: (storyObject.credits && storyObject.credits.by) || [],
-    websiteURL: storyObject.website_url || '',
+    websiteURL: storyObject.websites[arcSite].website_url || '',
     element: storyObject,
     overlineDisplay: !!overlineText,
     overlineUrl,
@@ -68,6 +68,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
+
 @Consumer
 class TopTableListWrapper extends Component {
   constructor(props) {
@@ -156,9 +157,16 @@ const TopTableList = (props) => {
     query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
+  const siteContent = contentElements.reduce((acc, element) => {
+    if (element.websites?.[arcSite]) {
+      return acc.concat(element);
+    }
+    return acc;
+  }, []);
+
   return (
     <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
-      {contentElements.map(unserializeStory(arcSite)).map((itemObject, index) => {
+      {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
         const {
           id: itemId,
           itemTitle,

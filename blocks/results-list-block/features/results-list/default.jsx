@@ -157,6 +157,11 @@ class ResultsList extends Component {
             promo_items: promoItems,
             websites,
           } = element;
+
+          if (!websites[arcSite]) {
+            return null;
+          }
+
           const showSeparator = by && by.length !== 0;
           const url = websites[arcSite].website_url;
           return (

@@ -162,5 +162,29 @@ describe('the header navigation feature for the default output type', () => {
       wrapper.find('.nav-left > .nav-btn').simulate('click');
       expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
     });
+
+    it('open with section button, closes when click the container', () => {
+      const wrapper = shallow(<Navigation />);
+
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
+
+      wrapper.find('.nav-left > .nav-btn').simulate('click');
+      expect(wrapper.find('#nav-sections').hasClass('open')).toBe(true);
+
+      wrapper.find('#nav-sections').simulate('click', { target: { closest: () => false } });
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
+    });
+
+    it('open with section button, must not close when inside the drawer', () => {
+      const wrapper = shallow(<Navigation />);
+
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
+
+      wrapper.find('.nav-left > .nav-btn').simulate('click');
+      expect(wrapper.find('#nav-sections').hasClass('open')).toBe(true);
+
+      wrapper.find('#nav-sections').simulate('click', { target: { closest: () => true } });
+      expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(false);
+    });
   });
 });

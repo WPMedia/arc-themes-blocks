@@ -70,7 +70,6 @@ class CustomSearchResultsList extends React.Component {
     }
   }
 
-
   fetchStories(additionalStoryAmount) {
     const { customFields: { searchContentConfig } } = this.props;
     const { value, storedList } = this.state;

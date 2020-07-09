@@ -76,8 +76,13 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-title').text()).toEqual('Test Title');
       });
 
+      it('should render two anchor tags - one around image one for the title', () => {
+        expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(2);
+        expect(wrapper.find('#card-list--link-container').find('Image').length).toEqual(1);
+        expect(wrapper.find('.card-list-headline #card-list--headline-link').length).toEqual(1);
+      });
+
       it('should render one image wrapped in an anchor tag', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(1);
         expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').length).toEqual(1);
       });
 
@@ -125,6 +130,10 @@ describe('Card list', () => {
       it('should set the primary font for the title', () => {
         expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
+
+      it('should not add the line divider', () => {
+        expect(wrapper.find('.list-item-simple--divider').length).toEqual(0);
+      });
     });
   });
 
@@ -159,6 +168,10 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
+      });
+
+      it('should add the line divider when have multiple items', () => {
+        expect(wrapper.find('.list-item-simple--divider').length).toEqual(1);
       });
     });
   });

@@ -31,14 +31,12 @@ const config = {
   showImageSM: true,
 };
 
-
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
     globalContent: {},
   })),
 }));
-
 
 jest.mock('fusion:content', () => ({
   useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
@@ -52,6 +50,7 @@ describe('horizontal overline image story item', () => {
     const itemTitle = 'title';
     const descriptionText = 'description';
     const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
@@ -68,6 +67,7 @@ describe('horizontal overline image story item', () => {
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
+        secondaryFont={secondaryFont}
         by={by}
         element={element}
         displayDate={displayDate}
@@ -100,6 +100,7 @@ describe('horizontal overline image story item', () => {
     const itemTitle = '';
     const descriptionText = '';
     const primaryFont = '';
+    const secondaryFont = '';
     const by = [];
     const element = {};
     const displayDate = '';
@@ -128,6 +129,7 @@ describe('horizontal overline image story item', () => {
         itemTitle={itemTitle}
         descriptionText={descriptionText}
         primaryFont={primaryFont}
+        secondaryFont={secondaryFont}
         by={by}
         element={element}
         displayDate={displayDate}

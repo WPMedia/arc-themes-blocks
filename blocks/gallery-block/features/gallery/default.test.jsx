@@ -21,7 +21,6 @@ jest.mock('prop-types', () => ({
   contentConfig: () => {},
 }));
 
-
 describe('the gallery feature block', () => {
   describe('when it is configured to inherit global content', () => {
     it('should render the global content gallery', () => {
@@ -33,7 +32,7 @@ describe('the gallery feature block', () => {
   });
 
   describe('when it is configured to NOT inherit global content', () => {
-    it('should render the global content gallery', () => {
+    it('should render the custom content gallery', () => {
       const { default: GalleryFeature } = require('./default');
 
       const wrapper = shallow(
@@ -51,6 +50,16 @@ describe('the gallery feature block', () => {
     });
   });
 
+  describe('when is only configured the content source', () => {
+    it('should render a custom content callery', () => {
+      const { default: GalleryFeature } = require('./default');
+      const wrapper = shallow(
+        <GalleryFeature customFields={{ galleryContentConfig: {} }} />,
+      );
+      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+    });
+  });
+
   describe('when customfields is empty', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
@@ -63,6 +72,16 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={undefined} />);
+      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+    });
+  });
+
+  describe('when gallery is inserted use the default customFields values', () => {
+    it('should render the global content gallery', () => {
+      const { default: GalleryFeature } = require('./default');
+      const wrapper = shallow(
+        <GalleryFeature />,
+      );
       expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
     });
   });

@@ -2,6 +2,9 @@
 import getProperties from 'fusion:properties';
 import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
+export { default as ratiosFor } from './ratiosFor';
+export { default as imageRatioCustomField } from './imageRatioCustomField';
+
 const getResizerParam = (
   originalUrl,
   breakpoint,
@@ -55,19 +58,20 @@ const getResizerParam = (
   return undefined;
 };
 
-const getImageDimensionsForAspectRatios = () => {
+const getImageDimensionsForAspectRatios = (onlyImageWidths = []) => {
   // consider adding window.devicePixelRatio for * scale
   const siteProperties = getProperties();
   const {
     aspectRatios,
     imageWidths,
   } = siteProperties;
+  const imageDimensionsToGenerate = onlyImageWidths.length ? onlyImageWidths : imageWidths;
   return aspectRatios.reduce((availableDimensions, aspectRatio) => {
     const aspectRatioDimensions = aspectRatio.split(':');
     // get width by splitting the 400x400 string
     const widthDivisor = aspectRatioDimensions[0];
     const heightDivisor = aspectRatioDimensions[1];
-    return availableDimensions.concat(imageWidths.map((width) => {
+    return availableDimensions.concat(imageDimensionsToGenerate.map((width) => {
       const scaledHeight = Math.round((width / widthDivisor) * heightDivisor);
       const dimension = `${width}x${scaledHeight}`;
       return dimension;
@@ -78,12 +82,13 @@ const getImageDimensionsForAspectRatios = () => {
 // input: original url
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
-
-export const getResizerParams = (originalUrl, respectAspectRatio = false, resizerURL) => {
+export const getResizerParams = (
+  originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [],
+) => {
   const output = {};
   const getParamsByFormat = (format, previousOutput) => {
     // where we get image widths
-    const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios();
+    const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios(onlyImageWidths);
     imageDimensionsAspectRatios.forEach((aspectRatioValue) => {
       const dimensions = aspectRatioValue;
       const [aspectRatioWidth, aspectRatioHeight] = dimensions.split('x');
@@ -107,7 +112,6 @@ export const getResizerParams = (originalUrl, respectAspectRatio = false, resize
   getParamsByFormat('jpg', output);
   return output;
 };
-
 
 const resizeImage = (image, resizerURL) => {
   if ((image.type && image.type !== 'image') || !image.url) {
@@ -137,12 +141,12 @@ const resizeAuthorCredits = (authorCredits, resizerURL) => authorCredits.map((cr
     ? getResizerParams(creditObject.image.url, false, resizerURL) : {},
 }));
 
-const getResizedImageParams = (data, option) => {
-  if (!option.resizerSecret || !option.resizerURL) {
+const getResizedImageParams = (data, options) => {
+  if (!options.resizerSecret || !options.resizerURL) {
     throw new Error('Not a valid image object');
   }
 
-  const generateParams = (sourceData, resizerURL) => {
+  const generateParams = (sourceData, resizerURL, onlyImageWidths = []) => {
     if (sourceData && sourceData.content_elements) {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
@@ -151,17 +155,19 @@ const getResizedImageParams = (data, option) => {
               contentElement.url,
               false,
               resizerURL,
+              onlyImageWidths,
             );
           }
-          if (contentElement.type === 'gallery' || contentElement.type === 'story') {
-            // recursively resize if gallery or story
+          // recursively resize if gallery with speicifc resized sizes
+          if (contentElement.type === 'gallery') {
+            const galleryImageWidths = [400, 600, 800, 1600];
+            return generateParams(contentElement, resizerURL, galleryImageWidths);
+          }
+          // recursively resize if story
+          if (contentElement.type === 'story') {
             return generateParams(contentElement, resizerURL);
           }
-          // if (contentElement.promo_items && contentElement.promo_items.basic) {
-          //   contentElement.promo_items.basic = resizePromoItems(
-          //     contentElement.promo_items.basic,
-          //   );
-          // }
+
           return contentElement;
         },
       );
@@ -205,12 +211,20 @@ const getResizedImageParams = (data, option) => {
   };
 
   if (data && data.count > 0) {
-    data.content_elements.forEach((element) => generateParams(element, option.resizerURL));
+    data.content_elements.forEach((element) => generateParams(
+      element,
+      options.resizerURL,
+      options.imageWidths,
+    ));
   } else if (data && data.length && data.length > 0) {
     // to test, like for search-api, that will have array of content elements
-    data.forEach((dataElement) => generateParams(dataElement, option.resizerURL));
+    data.forEach((dataElement) => generateParams(
+      dataElement,
+      options.resizerURL,
+      options.imageWidths,
+    ));
   } else {
-    generateParams(data, option.resizerURL);
+    generateParams(data, options.resizerURL);
   }
 
   return data;
@@ -226,7 +240,6 @@ export const extractResizedParams = (storyObject) => {
   return [];
 };
 
-
 // top level for transforming data
 // takes in content source story data via ans
 // see mock data for example
@@ -241,9 +254,10 @@ const getResizedImageData = (
   onlyUrl = false,
   respectAspectRatio = false,
   arcSite,
+  imageWidths = getProperties(arcSite).imageWidths,
 ) => {
   // resizer url is only arcSite specific option
-  const { imageWidths, aspectRatios, resizerURL } = getProperties(arcSite);
+  const { aspectRatios, resizerURL } = getProperties(arcSite);
 
   const resizerKey = RESIZER_SECRET_KEY;
 
@@ -258,7 +272,7 @@ const getResizedImageData = (
   }
 
   if (onlyUrl) {
-    return getResizerParams(data, respectAspectRatio, resizerURL);
+    return !data ? null : getResizerParams(data, respectAspectRatio, resizerURL);
   }
 
   return getResizedImageParams(data, {
@@ -266,6 +280,8 @@ const getResizedImageData = (
     resizerURL,
     imageWidths,
   }, filterQuality);
+  // Note: filterQuality is passed in but never used...
+  // Should be moved to the options object and other functions to make use of option
 };
 
 export default getResizedImageData;

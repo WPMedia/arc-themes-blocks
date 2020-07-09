@@ -122,13 +122,13 @@ class CardList extends React.Component {
                   : ''
               }
               <div
-                className="list-item-simple"
+                className={`list-item-simple ${contentElements.length > 1 ? 'list-item-simple--divider' : ''}`}
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a
                   href={contentElements[0].websites[arcSite].website_url}
-                  title={contentElements[0].headlines.basic}
                   className="list-anchor"
+                  aria-label={contentElements[0].headlines.basic}
                   id="card-list--link-container"
                 >
                   {
@@ -163,30 +163,36 @@ class CardList extends React.Component {
                      />
                    )
                   }
+                </a>
+                <Title
+                  primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                  className="card-list-overline"
+                >
+                  {contentElements[0].websites[this.arcSite].website_section.name}
+                </Title>
+                <div>
                   <Title
                     primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                    className="card-list-overline"
+                    className="card-list-headline"
                   >
-                    {contentElements[0].websites[this.arcSite].website_section.name}
-                  </Title>
-                  <div>
-                    <Title
-                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                      className="card-list-headline"
+                    <a
+                      href={contentElements[0].websites[arcSite].website_url}
+                      className="list-anchor"
+                      id="card-list--headline-link"
                     >
                       {contentElements[0].headlines.basic}
-                    </Title>
-                    <div className="author-date">
-                      <Byline story={contentElements[0]} stylesFor="list" />
-                      {/* separator will only be shown if there is at least one author */}
-                      { showSeparator && <p className="dot-separator">&#9679;</p> }
-                      <ArticleDate
-                        classNames="story-date"
-                        date={contentElements[0].display_date}
-                      />
-                    </div>
+                    </a>
+                  </Title>
+                  <div className="author-date">
+                    <Byline story={contentElements[0]} stylesFor="list" />
+                    {/* separator will only be shown if there is at least one author */}
+                    { showSeparator && <p className="dot-separator">&#9679;</p> }
+                    <ArticleDate
+                      classNames="story-date"
+                      date={contentElements[0].display_date}
+                    />
                   </div>
-                </a>
+                </div>
               </div>
               {
                 contentElements.slice(1).map((element) => {
@@ -203,7 +209,6 @@ class CardList extends React.Component {
                     >
                       <a
                         href={websiteUrl}
-                        title={headlineText}
                         className="headline-list-anchor"
                       >
                         <HeadlineText
@@ -215,7 +220,6 @@ class CardList extends React.Component {
                       </a>
                       <a
                         href={url}
-                        title={headlineText}
                         className="list-anchor-image"
                       >
                         {

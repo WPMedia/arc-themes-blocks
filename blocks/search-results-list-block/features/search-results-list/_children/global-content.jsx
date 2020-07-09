@@ -17,7 +17,6 @@ import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
 
-
 const StyledInput = styled.input`
   font-family: ${(props) => props.primaryFont};
 `;

@@ -17,6 +17,7 @@ const ConditionalStoryItem = (props) => {
     id,
     storySize,
     primaryFont = '',
+    secondaryFont = '',
     websiteURL = '',
     descriptionText = '',
     by = [],
@@ -25,7 +26,7 @@ const ConditionalStoryItem = (props) => {
     displayDate = '',
     customFields,
     overlineText = '',
-    overlineURL = '',
+    overlineUrl = '',
     resizedImageOptions = {},
     targetFallbackImage,
     placeholderResizedImageOptions,
@@ -39,6 +40,7 @@ const ConditionalStoryItem = (props) => {
       return (
         <VerticalOverlineImageStoryItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -47,7 +49,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           overlineDisplay={overlineDisplay}
-          overlineUrl={overlineURL}
+          overlineUrl={overlineUrl}
           overlineText={overlineText}
           displayDate={displayDate}
           customFields={customFields}
@@ -55,12 +57,14 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioXL}
         />
       );
     case LARGE:
       return (
         <HorizontalOverlineImageStoryItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -69,7 +73,7 @@ const ConditionalStoryItem = (props) => {
           by={by}
           element={element}
           overlineDisplay={overlineDisplay}
-          overlineUrl={overlineURL}
+          overlineUrl={overlineUrl}
           overlineText={overlineText}
           displayDate={displayDate}
           customFields={customFields}
@@ -77,12 +81,14 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioLG}
         />
       );
     case MEDIUM:
       return (
         <MediumListItem
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -96,12 +102,14 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          imageRatio={customFields.imageRatioMD}
         />
       );
     case SMALL:
       return (
         <ItemTitleWithRightImage
           primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
           itemTitle={itemTitle}
           imageURL={imageURL}
           id={id}
@@ -114,6 +122,7 @@ const ConditionalStoryItem = (props) => {
           paddingRight={
             (index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)) % 2 === 0
           }
+          imageRatio={customFields.imageRatioSM}
         />
       );
     default:

@@ -9,7 +9,7 @@ import CustomContentGallery from './_children/custom-content';
 const GalleryFeature = (
   {
     customFields: {
-      inheritGlobalContent = true,
+      inheritGlobalContent,
       galleryContentConfig,
     } = {},
   } = {},
@@ -17,7 +17,15 @@ const GalleryFeature = (
   const { arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
-  if (inheritGlobalContent) {
+
+  let showGlobalContent;
+  if (typeof inheritGlobalContent === 'undefined') {
+    showGlobalContent = (typeof galleryContentConfig === 'undefined');
+  } else {
+    showGlobalContent = inheritGlobalContent;
+  }
+
+  if (showGlobalContent) {
     return <GlobalContentGallery phrases={phrases} />;
   }
 
@@ -32,6 +40,7 @@ GalleryFeature.propTypes = {
     }),
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
+      defaultValue: true,
     }),
   }),
 };

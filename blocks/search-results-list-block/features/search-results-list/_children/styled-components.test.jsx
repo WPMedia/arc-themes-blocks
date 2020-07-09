@@ -3,7 +3,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { HeadlineText, DescriptionText } from './styled-components';
 
-
 describe('the HeadlineText', () => {
   it('renders correctly', () => {
     const tree = renderer

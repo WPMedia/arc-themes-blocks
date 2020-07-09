@@ -26,7 +26,6 @@ const Table = ({ element }) => {
     return <tr key={keys}>{cells}</tr>;
   });
 
-
   return (
     <div className="table-wrapper">
       <table>

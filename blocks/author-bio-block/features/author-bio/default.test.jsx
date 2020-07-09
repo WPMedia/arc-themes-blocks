@@ -9,7 +9,6 @@ jest.mock('fusion:themes', () => (jest.fn(() => ({
   'primary-color': 'blue',
 }))));
 
-
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,
@@ -617,7 +616,6 @@ describe('Given the list of author(s) from the article', () => {
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
     const { default: AuthorBio } = require('./default');
-
 
     const wrapper = mount(<AuthorBio />);
     expect(wrapper).toBeEmptyRender();

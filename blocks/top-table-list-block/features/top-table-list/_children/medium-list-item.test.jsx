@@ -37,6 +37,7 @@ describe('medium list item', () => {
     const itemTitle = 'title';
     const descriptionText = 'description';
     const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
@@ -50,13 +51,13 @@ describe('medium list item', () => {
       itemTitle={itemTitle}
       descriptionText={descriptionText}
       primaryFont={primaryFont}
+      secondaryFont={secondaryFont}
       by={by}
       element={element}
       displayDate={displayDate}
       id={id}
       customFields={config}
     />);
-
 
     // placeholder
     // expect(wrapper.find('.top-table-med-image-placeholder').length).toBe(0);
@@ -76,6 +77,7 @@ describe('medium list item', () => {
     const itemTitle = '';
     const descriptionText = '';
     const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
     const by = [];
     const element = { };
     const displayDate = '';
@@ -88,6 +90,7 @@ describe('medium list item', () => {
       itemTitle={itemTitle}
       descriptionText={descriptionText}
       primaryFont={primaryFont}
+      secondaryFont={secondaryFont}
       by={by}
       element={element}
       displayDate={displayDate}

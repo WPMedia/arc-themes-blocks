@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { EventEmitter } from '@wpmedia/engine-theme-sdk';
 import './event.scss';
 
-
 /**
  * @file EventTester is a React Class Component
  * @summary Used for testing the event emitter.  When new events are created, they should be
@@ -16,6 +15,10 @@ class EventTester extends Component {
     super(props);
     EventEmitter.subscribe('galleryImageNext', (event) => this.galleryHandler(event));
     EventEmitter.subscribe('galleryImagePrevious', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryAutoplayStart', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryAutoplayStop', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryExpandEnter', (event) => this.galleryHandler(event));
+    EventEmitter.subscribe('galleryExpandExit', (event) => this.galleryHandler(event));
   }
 
   // eslint-disable-next-line class-methods-use-this

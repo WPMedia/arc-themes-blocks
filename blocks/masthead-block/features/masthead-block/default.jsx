@@ -59,7 +59,6 @@ const Masthead = (props) => {
   );
 };
 
-
 Masthead.label = 'Masthead – Arc Block';
 
 Masthead.propTypes = {

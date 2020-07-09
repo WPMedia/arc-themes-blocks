@@ -5,7 +5,10 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import {
+  extractResizedParams,
+  imageRatioCustomField,
+} from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE,
@@ -29,26 +32,39 @@ const extractImage = (storyObject) => storyObject.promo_items
   && storyObject.promo_items.basic.type === 'image'
   && storyObject.promo_items.basic.url;
 
-const unserializeStory = (storyObject) => ({
-  id: storyObject._id,
-  itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
-  imageURL: extractImage(storyObject) || '',
-  displayDate: storyObject.display_date || '',
-  description: (storyObject.description && storyObject.description.basic) || '',
-  by: (storyObject.credits && storyObject.credits.by) || [],
-  websiteURL: storyObject.website_url || '',
-  element: storyObject,
-  overlineDisplay: (storyObject?.label?.basic?.display ?? null)
-      || (storyObject?.websites?.[this] && storyObject?.websites?.[this])
-      || false,
-  overlineUrl: (storyObject?.label?.basic?.url ?? null)
-    || (storyObject?.websites?.[this] && storyObject?.websites?.[this]?._id)
-    || '',
-  overlineText: (storyObject?.label?.basic?.text ?? null)
-    || (storyObject?.websites?.[this] && storyObject?.websites?.[this]?.name)
-    || '',
-  resizedImageOptions: extractResizedParams(storyObject),
-});
+const overlineData = (storyObject, arcSite) => {
+  const { display: labelDisplay, url: labelUrl, text: labelText } = (
+    storyObject.label && storyObject.label.basic
+  ) || {};
+  const shouldUseLabel = !!labelDisplay;
+
+  const { _id: sectionUrl, name: sectionText } = (
+    storyObject.websites
+    && storyObject.websites[arcSite]
+    && storyObject.websites[arcSite].website_section
+  ) || {};
+
+  return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
+};
+
+const unserializeStory = (arcSite) => (storyObject) => {
+  const [overlineText, overlineUrl] = overlineData(storyObject, arcSite);
+
+  return {
+    id: storyObject._id,
+    itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
+    imageURL: extractImage(storyObject) || '',
+    displayDate: storyObject.display_date || '',
+    description: (storyObject.description && storyObject.description.basic) || '',
+    by: (storyObject.credits && storyObject.credits.by) || [],
+    websiteURL: storyObject.website_url || '',
+    element: storyObject,
+    overlineDisplay: !!overlineText,
+    overlineUrl,
+    overlineText,
+    resizedImageOptions: extractResizedParams(storyObject),
+  };
+};
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
@@ -106,11 +122,11 @@ class TopTableListWrapper extends Component {
 const TopTableList = (props) => {
   const {
     customFields: {
-      listContentConfig: {
-        contentService = '',
-        contentConfigValues = {},
-      } = {},
-      extraLarge = 0, large = 0, medium = 0, small = 0,
+      listContentConfig: { contentService = '', contentConfigValues = {} } = {},
+      extraLarge = 0,
+      large = 0,
+      medium = 0,
+      small = 0,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -126,6 +142,7 @@ const TopTableList = (props) => {
   };
 
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+  const secondaryFont = getThemeStyle(arcSite)['secondary-font-family'];
 
   const storyTypeArray = [
     ...new Array(extraLarge).fill(EXTRA_LARGE),
@@ -141,108 +158,94 @@ const TopTableList = (props) => {
 
   return (
     <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
-      {
-        contentElements.map(unserializeStory, arcSite).map((itemObject, index) => {
-          const {
-            id: itemId,
-            itemTitle,
-            imageURL,
-            displayDate,
-            description,
-            by,
-            element,
-            overlineDisplay,
-            overlineUrl,
-            overlineText,
-            resizedImageOptions,
-          } = itemObject;
-          const url = (element.websites) ? element.websites[arcSite].website_url : '';
-          return (
-            <StoryItemContainer
-              id={itemId}
-              itemTitle={itemTitle}
-              imageURL={imageURL}
-              displayDate={displayDate}
-              description={description}
-              by={by}
-              websiteURL={url}
-              element={element}
-              overlineDisplay={overlineDisplay}
-              overlineUrl={overlineUrl}
-              overlineText={overlineText}
-              storySize={storyTypeArray[index]}
-              index={index}
-              storySizeMap={storySizeMap}
-              primaryFont={primaryFont}
-              key={itemId}
-              customFields={props.customFields}
-              resizedImageOptions={resizedImageOptions}
-              placeholderResizedImageOptions={placeholderResizedImageOptions}
-              targetFallbackImage={targetFallbackImage}
-              arcSite={arcSite}
-            />
-          );
-        })
-      }
+      {contentElements.map(unserializeStory(arcSite)).map((itemObject, index) => {
+        const {
+          id: itemId,
+          itemTitle,
+          imageURL,
+          displayDate,
+          description,
+          by,
+          element,
+          overlineDisplay,
+          overlineUrl,
+          overlineText,
+          resizedImageOptions,
+        } = itemObject;
+        const url = element.websites ? element.websites[arcSite].website_url : '';
+        return (
+          <StoryItemContainer
+            id={itemId}
+            itemTitle={itemTitle}
+            imageURL={imageURL}
+            displayDate={displayDate}
+            description={description}
+            by={by}
+            websiteURL={url}
+            element={element}
+            overlineDisplay={overlineDisplay}
+            overlineUrl={overlineUrl}
+            overlineText={overlineText}
+            storySize={storyTypeArray[index]}
+            index={index}
+            storySizeMap={storySizeMap}
+            primaryFont={primaryFont}
+            secondaryFont={secondaryFont}
+            key={itemId}
+            customFields={props.customFields}
+            resizedImageOptions={resizedImageOptions}
+            placeholderResizedImageOptions={placeholderResizedImageOptions}
+            targetFallbackImage={targetFallbackImage}
+            arcSite={arcSite}
+          />
+        );
+      })}
     </div>
   );
 };
 
 TopTableListWrapper.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed').tag(
-      {
-        group: 'Configure Content',
-        label: 'Display Content Info',
-      },
-    ),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
     extraLarge: PropTypes.number.tag({ label: generateLabelString('Extra Large'), default: 0 }),
     large: PropTypes.number.tag({ label: generateLabelString('Large'), default: 0 }),
     medium: PropTypes.number.tag({ label: generateLabelString('Medium'), default: 0 }),
     small: PropTypes.number.tag({ label: generateLabelString('Small'), default: 0 }),
 
-    showOverlineXL: PropTypes.bool.tag(
-      {
-        label: 'Show overline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showHeadlineXL: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showImageXL: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showDescriptionXL: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showBylineXL: PropTypes.bool.tag(
-      {
-        label: 'Show byline',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
-    showDateXL: PropTypes.bool.tag(
-      {
-        label: 'Show date',
-        defaultValue: true,
-        group: 'Extra Large story settings',
-      },
-    ),
+    showOverlineXL: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showHeadlineXL: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showImageXL: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showDescriptionXL: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showBylineXL: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    showDateXL: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
+    ...imageRatioCustomField('imageRatioXL', 'Extra Large story settings', '4:3'),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -274,6 +277,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Large story settings',
     }),
+    ...imageRatioCustomField('imageRatioLG', 'Large story settings', '4:3'),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
@@ -300,21 +304,19 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Medium story settings',
     }),
+    ...imageRatioCustomField('imageRatioMD', 'Medium story settings', '16:9'),
 
-    showHeadlineSM: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Small story settings',
-      },
-    ),
-    showImageSM: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Small story settings',
-      },
-    ),
+    showHeadlineSM: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Small story settings',
+    }),
+    showImageSM: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Small story settings',
+    }),
+    ...imageRatioCustomField('imageRatioSM', 'Small story settings', '3:2'),
   }),
 };
 

@@ -178,7 +178,7 @@ For more information, see the repo's read me:
 Note: When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.
 
-#### How To Publish 
+#### How To Publish
 
 ---
 NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
@@ -197,33 +197,38 @@ WARNING: If you need help rolling back publish, please see the wiki [How A Dev C
 
 ---
 
-1. Pull the latest `staging` branch. 
+1. Pull the latest `staging` branch:
 
-`git checkout staging`
+```sh
+git checkout staging
+git fetch -a
+```
 
-`git fetch -a`
+2. Branch off the `staging` branch:
 
-2. Branch off the `staging` branch
-
-`git checkout -b PEN-[jira ticket num]-[brief description of feature]`
+```sh
+git checkout -b PEN-[jira ticket num]-[brief description of feature]
+```
 
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
+4. Make pull request using Github against the `staging` branch. Get approval for your pr on your feature branch.
+5. Merge the PR into the `staging` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
+6. When you're ready to start the production release process, you'll want to make prerelease (`beta`) builds of the blocks. Start by running the below command to publish packages with the `beta` dist-tag:
 
-4. Make pull request using github against the `staging` branch. Get approval for your pr on your feature branch. 
+```sh
+npx lerna publish --force-publish --preid beta --pre-dist-tag beta
+```
 
-5. Merge into `staging` branch. Pre-publish your changed packages. Select either `prepatch`, `preminor` or `premajor` for each of your blocks in lerna cli options. ([See semantic versioning cheatsheet](https://devhints.io/semver) for reference versioning.) If there's a block that you have not changed, reach out to team-members.
+7. Select either `prepatch`, `preminor`, or `premajor` if this is the first prerelease build for this production release (e.g. `-beta.0`). If this is a prerelease that makes changes on top of a prior prerelease then select the `Custom Prerelease` option and accept the default, this should result in the version having only an incremented prerelease number instead of an incremented major, minor, or patch number (e.g `-beta.1`). Note that this will publish all packages to aid our block installer process.
+8. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
+9. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge staging` to get the changes from `staging` into `master`.
+10. Then, in `master`, you can publish a production release with the following command:
 
-`npx lerna publish --preid beta --pre-dist-tag beta`
+```sh
+npx lerna publish --conventional-commits --conventional-graduate
+```
 
-6. Go to new theme feature pack's `blocks.json`. Change your blocks to the @beta release in the blocks list (eg, "@wpmedia/header-nav" -> "@wpmedia/header-nav@beta"). Make a pr against the news theme repo making that change to the `master` branch. Then publish that change using deployment strategy to the staging environment. Alert quality assurance stakeholder that the change has been published.
-
-7. After either design qa or qa approval, make a pull request from the staging branch to the master branch. (Should we make a new pr for just your staging changes?) 
-
-8. Once the pr has been approved, merge your feature staging branch to master. Then, in master, you can publish against what's changed. (This could be done at the end of a sprint.) From the master branch, check what's changed from lerna's perspective. This is mostly a sanity check that it should be only your changes (assuming last person to merge followed these steps)
-
-`npx lerna publish --conventional-commits --conventional-graduate`
-
-9. After publishing from the `master` branch, rebase `staging` on top of `master` so that the two branches are the same and so that we can start the block development cycle over again.
+11. After publishing from the `master` branch, rebase `staging` on top of `master` so that the two branches are the same and so that we can start the block development cycle over again.
 
 ```sh
 # Ensure we're on the master branch
@@ -242,34 +247,28 @@ git push --force origin staging
 
 #### Publish hotfix 
 
-1. Branch off of master. 
+1. Branch off of master.
 
-2. merge feature branch into master. 
+2. merge feature branch into master.
 
-3. release feature branch changes as `@hotfix` from master 
+3. release feature branch changes as `@hotfix` from master.
 
-`npx lerna publish --preid hotfix --pre-dist-tag hotfix`
+`npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
 
 4. Create feature pack with @hotfix blocks to test
-
-5. Upon successful qa, graduate the “hotfix” release to latest in the same publish workflow
+5. Upon successful QA, graduate the “hotfix” release to latest in the same publish workflow
 
 `npx lerna publish --conventional-commits --conventional-graduate`
 
-6. Go back to beta packages and look into handling changes. *TODO - SEE OPEN QUESTIONS BELOW*
+6. Go back to beta packages and look into handling changes.
 
 7. After publishing, follow the rebasing instructions in step 9 of the non-hotfix release process.
 
-For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013). 
+For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013).
 
-For info on rebasing, see [tutorial](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase). 
+For info on rebasing, see [tutorial](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase).
 
 For background on lerna conventional graduate and diffing, see [lerna versioning docs](https://github.com/lerna/lerna/blob/master/commands/version/README.md).
-
-Open questions:
-1. Should we use versions with preids like our current non-hotfix release process?
-2. Should we use the `beta` preid and dist-tag in hotfixed packages?
-3. Should we use the non-prerelease builds and manually add and remove dist-tags?
 
 ### fusion-news-theme
 

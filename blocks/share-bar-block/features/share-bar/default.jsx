@@ -70,7 +70,7 @@ function getLogoComponent(type) {
   }
 }
 
-const ShareBar = ({ fusionContext = useFusionContext }) => {
+const ShareBar = ({ useInjectedFusionContext = useFusionContext }) => {
   const {
     customFields,
     globalContent: {
@@ -78,7 +78,7 @@ const ShareBar = ({ fusionContext = useFusionContext }) => {
       website_url: websiteUrl = '',
     } = {},
     arcSite,
-  } = fusionContext();
+  } = useInjectedFusionContext();
 
   const {
     websiteDomain,

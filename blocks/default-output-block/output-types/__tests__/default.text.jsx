@@ -7,6 +7,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
+import { MetaData } from '@wpmedia/engine-theme-sdk';
 import DefaultOutputType from '../default';
 
 jest.mock('fusion:context', () => ({
@@ -22,7 +23,7 @@ jest.mock('react-dom/server', () => ({
 
 getProperties.mockImplementation(() => ({
   websiteName: 'The Sun',
-  twitterSite: 'https://www.twitter.com/the-sun',
+  twitterUsername: 'thesun',
   dangerouslyInjectJS: [],
 }));
 
@@ -48,6 +49,14 @@ describe('the default output type', () => {
 
     it('should have link tags', () => {
       expect(wrapper.find('link').length).toBe(2);
+    });
+
+    it('should have a MedataData component', () => {
+      expect(wrapper.find(MetaData).length).toBe(1);
+    });
+
+    it('MedataData should receive twitterUsername', () => {
+      expect(wrapper.find(MetaData).prop('twitterUsername')).toEqual('thesun');
     });
   });
 

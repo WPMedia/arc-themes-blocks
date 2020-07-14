@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
 import getThemeStyle from 'fusion:themes';
-import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
-import { HeadlineText, DescriptionText } from './styled-components';
+import SearchResult from './search-result';
 import { extractImage } from './helpers';
 import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
@@ -128,6 +125,7 @@ class GlobalSearchResultsList extends React.Component {
 
     const targetFallbackImage = this.getFallbackImageURL();
     const results = moreStories || data;
+    const { promoElements } = this.props;
 
     return (
       <div>
@@ -165,88 +163,20 @@ class GlobalSearchResultsList extends React.Component {
         <div className="results-list-container">
           {
             results && results.length > 0 && results.map((element) => {
-              const {
-                description: { basic: descriptionText } = {},
-                headlines: { basic: headlineText } = {},
-                display_date: displayDate,
-                credits: { by } = {},
-                promo_items: promoItems,
-                websites,
-              } = element;
-              const showSeparator = by && by.length !== 0;
-              if (!websites[arcSite]) {
-                return null;
-              }
-              const url = websites[arcSite].website_url;
-              return (
-                <div className="list-item" key={`result-card-${url}`}>
-                  <div className="results-list--image-container">
-                    <a
-                      href={url}
-                      title={headlineText}
-                      className="list-anchor"
-                    >
-                      {extractImage(promoItems) ? (
-                        <Image
-                          resizedImageOptions={extractResizedParams(element)}
-                          url={extractImage(promoItems)}
-                          alt={headlineText}
-                          smallWidth={274}
-                          smallHeight={154}
-                          mediumWidth={274}
-                          mediumHeight={154}
-                          largeWidth={274}
-                          largeHeight={154}
-                          breakpoints={getProperties(arcSite)?.breakpoints}
-                          resizerURL={getProperties(arcSite)?.resizerURL}
-                        />
-                      ) : (
-                        <Image
-                          smallWidth={274}
-                          smallHeight={154}
-                          mediumWidth={274}
-                          mediumHeight={154}
-                          largeWidth={274}
-                          largeHeight={154}
-                          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                          url={targetFallbackImage}
-                          breakpoints={getProperties(arcSite)?.breakpoints}
-                          resizedImageOptions={placeholderResizedImageOptions}
-                          resizerURL={getProperties(arcSite)?.resizerURL}
+              const resizedImageOptions = extractImage(element.promoItems)
+                ? extractResizedParams(element)
+                : placeholderResizedImageOptions;
 
-                        />
-                      )}
-                    </a>
-                  </div>
-                  <div className="results-list--headline-container">
-                    <a
-                      href={url}
-                      title={headlineText}
-                      className="list-anchor"
-                    >
-                      <HeadlineText
-                        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                        className="headline-text"
-                      >
-                        {headlineText}
-                      </HeadlineText>
-                    </a>
-                  </div>
-                  <div className="results-list--description-author-container">
-                    <DescriptionText
-                      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                      className="description-text"
-                    >
-                      {descriptionText}
-                    </DescriptionText>
-                    <div className="results-list--author-date">
-                      <Byline story={element} stylesFor="list" />
-                      {/* The Separator will only be shown if there is at least one author name */}
-                      { showSeparator && <p className="dot-separator">&#9679;</p> }
-                      <ArticleDate classNames="story-date" date={displayDate} />
-                    </div>
-                  </div>
-                </div>
+              return (
+                <SearchResult
+                  key={`result-card-${element._id}`}
+                  element={element}
+                  arcSite={arcSite}
+                  targetFallbackImage={targetFallbackImage}
+                  placeholderResizedImageOptions={placeholderResizedImageOptions}
+                  resizedImageOptions={resizedImageOptions}
+                  promoElements={promoElements}
+                />
               );
             })
           }

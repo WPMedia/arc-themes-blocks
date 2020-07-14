@@ -2,7 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
-import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
+import mockData from '../mock-data';
 
 const mockReturnData = mockData;
 
@@ -102,25 +102,8 @@ describe('The search results list', () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
       expect(wrapper.find('SearchResult').length).toEqual(28);
-      // expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
     });
   });
-
-  // describe('renders one list item correctly when list of authors is missing', () => {
-  //   const { default: SearchResultsList } = require('./custom-content');
-  //   SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-  //   const wrapper = shallow(<SearchResultsList arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-  //   wrapper.setState({ resultList: withoutByline }, () => {
-  //     wrapper.update();
-  //     it('should render one parent wrapper', () => {
-  //       expect(wrapper.find('.results-list-container').length).toEqual(1);
-  //     });
-  //
-  //     it('should render a separator', () => {
-  //       expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(0);
-  //     });
-  //   });
-  // });
 
   describe('renders a button to display more stories', () => {
     const { default: SearchResultsList } = require('./custom-content');

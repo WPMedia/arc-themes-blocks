@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 // import getThemeStyle from 'fusion:themes';
 // import getTranslatedPhrases from 'fusion:intl';
 // import getProperties from 'fusion:properties';
-import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from '../mock-data';
+import mockData, { oneListItem } from '../mock-data';
 
 jest.mock('fusion:themes', () => ({
   __esModule: true,
@@ -100,21 +100,7 @@ describe('The search results list', () => {
     const wrapper = shallow(<SearchResultsList globalContent={mockData} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     expect(wrapper.find('.results-list-container').length).toEqual(1);
     expect(wrapper.find('SearchResult').length).toEqual(28);
-    // expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
   });
-
-  // describe('renders one list item correctly when list of authors is missing', () => {
-  //   const { default: SearchResultsList } = require('./global-content');
-  //   SearchResultsList.prototype.fetchContent = jest.fn();
-  //   const wrapper = shallow(<SearchResultsList globalContent={withoutByline} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-  //   it('should render one parent wrapper', () => {
-  //     expect(wrapper.find('.results-list-container').length).toEqual(1);
-  //   });
-  //
-  //   it('should render a separator', () => {
-  //     expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(0);
-  //   });
-  // });
 
   describe('renders a button to display more stories', () => {
     it('should render a button to display more stories', () => {

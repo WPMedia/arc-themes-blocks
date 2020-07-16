@@ -16,5 +16,9 @@ describe('the collections content source block', () => {
 
       expect(url).toEqual('content/v4/collections?content_alias=alert-bar&from=0&size=1&published=true');
     });
+    it('should build the url without the website', () => {
+      const url = contentSource.resolve();
+      expect(url).toEqual('content/v4/collections?content_alias=alert-bar&from=0&size=1&published=true');
+    });
   });
 });

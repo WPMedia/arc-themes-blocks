@@ -168,4 +168,47 @@ describe('Given the display time from ANS, it should convert to the proper timez
     const wrapper = mount(<ArticleByline />);
     expect(wrapper).toBeEmptyRender();
   });
+
+  it('should return nothing if type is not author', () => {
+    const { default: ArticleByline } = require('./default');
+    const credits = {
+      by: [{
+        type: 'novelist',
+        name: 'SangHee Kim',
+        url: '/author/sanghee-kim',
+      }],
+    };
+    const globalContent = { credits };
+
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('.byline').length).toBe(0);
+  });
+
+  it('should return nothing if name is missing', () => {
+    const { default: ArticleByline } = require('./default');
+    const credits = {
+      by: [{
+        type: 'author',
+        url: '/author/sanghee-kim',
+      }],
+    };
+    const globalContent = { credits };
+
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('.byline').length).toBe(0);
+  });
+
+  it('should return only text if do not have an url', () => {
+    const { default: ArticleByline } = require('./default');
+    const credits = {
+      by: [{
+        type: 'author',
+        name: 'SangHee Kim',
+      }],
+    };
+    const globalContent = { credits };
+
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
+    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' SangHee Kim' });
+  });
 });

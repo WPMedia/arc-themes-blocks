@@ -117,5 +117,4 @@ describe('when dateLocalization setup is missing', () => {
     expect(wrapper.attr('class').includes('sc-')).toBe(true);
     expect(wrapper.text()).not.toEqual(testDate);
   });
-
 });

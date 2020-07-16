@@ -43,6 +43,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -80,6 +81,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -100,6 +102,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers2',
@@ -135,6 +138,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -154,6 +158,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers2',
@@ -190,6 +195,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -226,6 +232,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -260,9 +267,8 @@ describe('Given the list of author(s) from the article', () => {
               type: 'author',
               name: 'Sara Carothers',
               description: 'description',
-              image: {
-                url: '',
-              },
+              image: {},
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -299,6 +305,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: '',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -350,6 +357,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: '',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -387,6 +395,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: '',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -426,6 +435,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: '',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -465,6 +475,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -501,6 +512,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -541,6 +553,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',
@@ -578,6 +591,7 @@ describe('Given the list of author(s) from the article', () => {
               image: {
                 url: '',
               },
+              resized_params: { '158x158': '' },
               additional_properties: {
                 original: {
                   _id: 'saracarothers',

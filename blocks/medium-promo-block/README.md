@@ -1,7 +1,39 @@
 # `@wpmedia/medium-promo-block`
+_Block containing a medium promo component. Please provide a 1-2 sentence description of what the block is and what it does._
 
-Block containing a medium promo component.
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Usage
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
 
-Configuration (including content) is handled through proptypes in the PB editor
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
+
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+| Phrase key | Default (English) |
+|---|---|
+|`key`|`english translation`|
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+_Configuration (including content) is handled through proptypes in the PB editor._

@@ -1,14 +1,43 @@
 # `@wpmedia/textfile-block`
+_Text File block for Fusion News Theme. This block offers a convenient way to render text files such as `ads.txt` or `robots.txt`. It must be used with `text` output type only, if other output type is selected, it will render nothing._
 
-Text File block for Fusion News Theme
-This block offers a convenient way to render text files such as `ads.txt` or `robots.txt`. It must be used with `text` output type only, if other output type is selected, it will render nothing.
+## Acceptance Criteria
+- The content of the custom field `Text` is the data to be rendered on the page.
+- Be sure to use the page output type `text` or nothing will render. 
 
-## Usage
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
 
-The content of the custom field `Text` is the data to be rendered on the page.
-Be sure to use the page output type `text` or nothing will render. 
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
 
-## Production
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+| Phrase key | Default (English) |
+|---|---|
+|`key`|`english translation`|
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+### Production
 
 Before go live, open a ticket with ACS (Arc Customer Service) asking to have a redirect added:
 ```

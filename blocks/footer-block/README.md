@@ -1,3 +1,37 @@
 # `@wpmedia/header-nav-block`
+_Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site service._
 
-Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site services.
+## Acceptance Criteria
+- Add AC relevant to the block
+
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
+
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
+
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+- Add all internationalization fields used in the block
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

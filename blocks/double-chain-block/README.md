@@ -1,27 +1,39 @@
 # `@wpmedia/double-chain-block`
+Fusion News Theme double-chain block. Takes in a number of how many items to be put in column one. The rest go in column two. Negative numbers here will yield nothing.
 
-Fusion News Theme double-chain block
-
-## Usage
-
-```
-const doubleChainBlock = require('@wpmedia/double-chain-block');
-```
-
-## Parameters 
-
-Takes in a number of how many items to be put in column one. The rest go in column two. Negative numbers here will yield nothing.
-
-## Key features
-
+## Acceptance Criteria
 - Places features within the Double Chain within two columns. 
 - PageBuilder editor can select whether the columns are equal width, or whether the left or right column is wider. 
 - PageBuilder editor can configure how many features are placed in each column within the chain. 
 
-## Other Blocks 
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
 
-### Single Chain
-Similar in a respect because it's chain. However, this block has formatting whereas `single-chain` does not -- it's a fragment. 
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
 
-### Triple Chain 
-Will likely have three components, with formatting.
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+- Add all internationalization fields used in the block
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

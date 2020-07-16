@@ -1,33 +1,16 @@
 # `@wpmedia/search-content-source-block`
+_Fusion News Theme unpublished API content source block. Please provide a 1-2 sentence description of what the block is and what it does._
 
-Fusion News Theme unpublished API content source block
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Requirements
+## Endpoint
+- Add the endpoint that this content source is hitting
 
-Search Key is required to be set as an environment variable.
-
-For local set this in your `.env.` file
-
-For all other environments make sure you have updated the neccessary files in the environment folder of your feature pack repo.
-
-```
-searchKey=ABCDEF
-```
+## ANS Schema
 
 
-## Usage
-
-```
-const searchContentSourceBlock = require('@wpmedia/search-content-source-block');
-```
-
-## Example input
-```
-query: obama
-page: 1
-```
-
-## Example output
+### Example output
 ```
 {
   data: [
@@ -61,4 +44,26 @@ page: 1
   },
   _id: "7d23d241bfcb79e1891c13f8fae45183c49e1356667429ef2f064cde493335a1"
 }
+```
+
+## Configurable Params
+| **Param** | **Type** | **Description** |
+|---|---|---|
+| **query** | | |
+| **page** | | |
+
+## TTL
+- Add the TTL of the content source
+
+## Additional Considerations
+### Requirements
+
+Search Key is required to be set as an environment variable.
+
+For local set this in your `.env.` file
+
+For all other environments make sure you have updated the neccessary files in the environment folder of your feature pack repo.
+
+```
+searchKey=ABCDEF
 ```

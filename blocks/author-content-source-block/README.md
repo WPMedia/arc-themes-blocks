@@ -1,19 +1,14 @@
 # `@wpmedia/author-content-source-block`
-
 Fusion News Theme author API content source block
+_Please provide a 1-2 sentence description of what the block is and what it does._
 
-## Usage
+## Acceptance Criteria
+- Add AC relevant to the block
 
-```
-const authorContentSourceBlock = require('@wpmedia/author-content-source-block');
-```
+## Endpoint
+- `/author/v2/author-service?slug=<slug>`
 
-## Example input
-```
-slug: sara-carothers
-```
-
-## Example output
+## ANS Schema
 ```
 {
   "authors": [
@@ -50,3 +45,14 @@ slug: sara-carothers
   "_id": "aea0c7ea37263d5d663cbb6844a506d39dfb7e02a76ab932d6e740c4e2807906"
 }
 ```
+
+## Configurable Params
+| **Param** | **Type** | **Description** |
+|---|---|---|
+| **slug** | string | |
+
+## TTL
+- `300`
+
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

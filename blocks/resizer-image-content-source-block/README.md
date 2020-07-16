@@ -1,8 +1,25 @@
 # `@wpmedia/resizer-image-content-source-block`
+_This is specifically to make sure that resized image urls are available at themes' `blocks.json` widths._
 
-This is specifically to make sure that resized image urls are available at themes' `blocks.json` widths. 
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Usage
+## Endpoint
+- Add the endpoint that this content source is hitting
+
+## ANS Schema
+Detail the data structure returned from this content source
+
+## Configurable Params
+| **Param** | **Type** | **Description** |
+|---|---|---|
+| **param** |  |  |
+
+## TTL
+- Add the TTL of the content source
+
+## Additional Considerations
+### Usage
 
 ```
 import React from 'react';

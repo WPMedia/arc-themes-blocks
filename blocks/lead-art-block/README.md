@@ -1,9 +1,22 @@
 # `@wpmedia/lead-art-block`
+_Fusion News Theme lead art block. Please provide a 1-2 sentence description of what the block is and what it does._
 
-Fusion News Theme lead art block
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Translation phrases
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
 
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
+
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
 | Phrase key | Default (English) |
 |---|---|
 |`global.gallery-expand-button`|`Expand`|
@@ -11,15 +24,15 @@ Fusion News Theme lead art block
 |`global.gallery-pause-autoplay-button`|`Autoplay`|
 |`global.gallery-page-count-text`|`Pause autoplay`|
 
-## Usage
+## Events
+Blocks can emit events. When the LeadArt component is functioning as a Gallery, it will emit events for when the next or previous image is viewed.
 
-```js
-const dateBlock = require('@wpmedia/lead-art-block');
-```
+| **Event Name** | **Description** |
+|---|---|
+| **galleryImageNext** | The next image is viewed |
+| **galleryImagePrevious** | The previous image is viewed |
 
-## Event Listening
-When the LeadArt component is functioning as a Gallery, it will emit events for when the next or previous image is viewed. 
-These events are named `galleryImageNext` and `galleryImagePrevious` respectively.  
+### Event Listening
 <br /><br />
 If you want to listen to these events, the first thing is to import the EventEmitter object 
 into your code:<br /><br />
@@ -46,3 +59,5 @@ The event object for these events will contain the following information:
 **totalImages (Number):** Total number of images in the carousel.<br />
 **autoplay (boolean):** whether or not the event triggered during autoplay. Value is either `true` or `false`.<br />
 
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

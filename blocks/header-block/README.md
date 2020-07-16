@@ -1,16 +1,38 @@
 # `@arc-test-org/header-block`
+_Fusion News Theme header block. Please provide a 1-2 sentence description of what the block is and what it does._
 
-Fusion News Theme header block
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Usage
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **customFields.text** | no | string | add description |
+| **customfields.size** | no | oneOf | 'Extra Large', 'Large', 'Medium', 'Small' |
+| **customfields.removeBottomPadding** | no | boolean | Removes the bottom padding from the block. It has a default value of `false`. |
 
-```
-const headerBlock = require('@arc-test-org/header-block');
-```
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
 
-## Custom Fields
+### ANS Fields
+- `Add all ANS fields used in the block`
 
-```
-text: string
-size: ('Extra Large', 'Large', 'Medium', 'Small')
-```
+## Internationalization fields
+- Add all internationalization fields used in the block
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

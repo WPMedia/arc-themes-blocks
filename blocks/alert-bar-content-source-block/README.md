@@ -1,6 +1,13 @@
 # `@wpmedia/collections-content-source-block`
 This is the content source that feeds the `alert-bar-block`. While the alert bar itself will refresh 30 seconds by default, this content source will refresh the cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals.
 
+## Acceptance Criteria
+- Add AC relevant to the block
+
+## Endpoint
+- `content/v4/collections?content_alias=alert-bar&website=<arcSite>&from=0&size=1&published=true`
+
+## ANS Schema
 Example ANS schema that will be returned from the content source:
 ```js
 { _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
@@ -35,3 +42,12 @@ Example ANS schema that will be returned from the content source:
    website: 'the-sun' 
 }
 ```
+
+## Configurable Params
+None
+
+## TTL
+- `120`
+
+## Additional Considerations
+_This is optional. Please add an additional context that would be important to know in order to use this block._

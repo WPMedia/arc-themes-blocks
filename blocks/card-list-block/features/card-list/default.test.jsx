@@ -196,6 +196,11 @@ describe('Card list', () => {
       it('should add the line divider when have multiple items', () => {
         expect(wrapper.find('.list-item-simple--divider').length).toEqual(1);
       });
+
+      it('should use resized_params from promo items if exists', () => {
+        const image = wrapper.find('.list-item-simple').find('Image');
+        expect(image.prop('resizedImageOptions')).toEqual({ '128x128': '' });
+      });
     });
   });
 

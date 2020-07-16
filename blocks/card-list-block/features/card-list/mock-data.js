@@ -4687,6 +4687,9 @@ export default {
           url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg',
           version: '0.10.3',
           width: 5616,
+          resized_params: {
+            '128x128': '',
+          },
         },
       },
       distributor: {

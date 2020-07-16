@@ -19,10 +19,11 @@ const ArticleTags = () => {
   return tags.length ? (
     <div className="tags-holder">
       {
-        tags.map((tag) => {
+        tags.map((tag, index) => {
           const slug = tag.slug || '#';
+          const keySlug = `${slug}-${index}`;
           const href = slug !== '#' ? encodeURI(`/tags/${slug}/`) : '#';
-          return <Tags key={slug} className="tags" href={href} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
+          return <Tags key={keySlug} className="tags" href={href} primaryColor={primaryColor || defaultBackgroundColor} primaryFont={primaryFont}>{tag.text}</Tags>;
         })
       }
     </div>

@@ -53,6 +53,7 @@ body {
     }
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      /* top | horizontal | bottom */
       padding: 0 0 map-get($spacers, 'lg');
     }
   }

@@ -1,3 +1,4 @@
+import getProperties from 'fusion:properties';
 import contentSource from './content-api-collections';
 
 describe('the collections content source block', () => {
@@ -110,6 +111,21 @@ describe('the collections content source block', () => {
       const url = contentSource.resolve({ });
 
       expect(url).toEqual('content/v4/collections?content_alias=undefined&published=true');
+    });
+    it('should not build a url with an id and website', () => {
+      const url = contentSource.resolve();
+
+      expect(url).toEqual('content/v4/collections?content_alias=undefined&published=true');
+    });
+  });
+
+  // This test is only to complete test coverage
+  // the correct test implementation is on resizer-image-block
+  describe('when data need to be transformed', () => {
+    it('should add resized image data', () => {
+      getProperties.mockImplementation(() => ({}));
+      const data = contentSource.transform([], { 'arc-site': 'dummy' });
+      expect(data).toEqual([]);
     });
   });
 });

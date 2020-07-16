@@ -1,3 +1,4 @@
+import getProperties from 'fusion:properties';
 import contentApi from './content-api';
 
 describe('the content api source block', () => {
@@ -59,6 +60,22 @@ describe('the content api source block', () => {
       const url = contentApi.resolve({});
 
       expect(url).toEqual('/content/v4/?website_url=undefined');
+    });
+
+    it('should have an undefined website_url', () => {
+      const url = contentApi.resolve();
+
+      expect(url).toEqual('/content/v4/?website_url=undefined');
+    });
+  });
+
+  // This test is only to complete test coverage
+  // the correct test implementation is on resizer-image-block
+  describe('when data is transformed', () => {
+    it('should add resized params', () => {
+      getProperties.mockImplementation(() => ({}));
+      const data = contentApi.transform([], { 'arc-site': 'dummy' });
+      expect(data).toEqual([]);
     });
   });
 });

@@ -113,7 +113,12 @@ const Nav = (props) => {
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
             <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />
-            <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+            <button
+              onClick={hamburgerClick}
+              className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}
+              type="button"
+              aria-label="Toggle opening or closing the menu to see section options"
+            >
               <span>{phrases.t('header-nav-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>

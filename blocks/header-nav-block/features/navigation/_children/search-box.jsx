@@ -65,7 +65,7 @@ export default ({
         onClick={handleClick}
         onMouseDown={handleSearchBtnMousedown}
         type="button"
-        aria-label="Search the site's content"
+        aria-label={shouldSearchOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>

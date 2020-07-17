@@ -117,7 +117,7 @@ const Nav = (props) => {
               onClick={hamburgerClick}
               className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}
               type="button"
-              aria-label="Toggle opening or closing the menu to see section options"
+              aria-label={isSectionDrawerOpen ? 'Close the menu to hide section options' : 'Open the menu to see section options'}
             >
               <span>{phrases.t('header-nav-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />

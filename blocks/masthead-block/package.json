@@ -14,8 +14,8 @@
     "access": "restricted"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "latest",
-    "@wpmedia/news-theme-css": "latest",
+    "@wpmedia/engine-theme-sdk": "^2.1.0",
+    "@wpmedia/news-theme-css": "^2.1.8",
     "styled-components": "^5.0.1"
   },
   "scripts": {

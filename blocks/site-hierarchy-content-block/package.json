@@ -30,7 +30,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "dependencies": {
-    "@wpmedia/news-theme-css": "^2.0.6",
+    "@wpmedia/news-theme-css": "^2.1.8",
     "styled-components": "^4.4.0"
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"

@@ -21,5 +21,8 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx output-types"
+  },
+  "dependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"
   }
 }

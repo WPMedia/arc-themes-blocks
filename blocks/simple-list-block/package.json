@@ -22,7 +22,7 @@
     "directory": "blocks/simple-list-block"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.1.0",
+    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
     "@wpmedia/news-theme-css": "^2.1.8",
     "styled-components": "^4.4.0"
   },

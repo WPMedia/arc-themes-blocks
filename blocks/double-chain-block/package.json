@@ -22,6 +22,7 @@
     "directory": "blocks/double-chain-block"
   },
   "dependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
     "@wpmedia/news-theme-css": "^2.1.8"
   },
   "scripts": {

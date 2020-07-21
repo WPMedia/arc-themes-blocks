@@ -25,5 +25,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c",
+  "dependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"
+  }
 }

@@ -23,6 +23,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
     "@wpmedia/resizer-image-block": "LATEST"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"

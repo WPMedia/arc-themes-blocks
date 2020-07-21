@@ -11,6 +11,7 @@ Fusion News Theme double-chain block. Takes in a number of how many items to be 
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

@@ -12,6 +12,7 @@ _Fusion News Article Tags block_
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 The Article Tag Block expects the `taxonomy` section from Composer's ANS schema, which is laid out as

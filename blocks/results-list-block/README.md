@@ -12,6 +12,7 @@ _Results List block for Fusion News Theme. Displays a results list where each re
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

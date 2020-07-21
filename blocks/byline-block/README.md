@@ -13,6 +13,7 @@ Byline block for Fusion News Theme
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 The Byline Block expects the `credits` section from Composer's ANS schema, which is laid out as

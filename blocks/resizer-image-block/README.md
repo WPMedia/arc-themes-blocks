@@ -9,6 +9,7 @@ _This is a helper to transform the return value of the content sources. This is 
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

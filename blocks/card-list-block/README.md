@@ -15,6 +15,7 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

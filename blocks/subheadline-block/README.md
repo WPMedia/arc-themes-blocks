@@ -9,6 +9,7 @@ _Fusion News Theme sub-headline block. Please provide a 1-2 sentence description
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

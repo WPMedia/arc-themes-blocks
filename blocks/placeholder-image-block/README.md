@@ -9,6 +9,7 @@ _Fusion News Theme placeholder image. The intended use is to take the feature pa
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

@@ -10,6 +10,7 @@ _Fusion News Theme triple-chain block. Utilizes bootstrap's three column approac
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

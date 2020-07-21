@@ -9,6 +9,7 @@ _Fusion News Theme Simple List block is a dynamically-sized list with items of a
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 This takes in the [ANS Schema](https://github.com/washingtonpost/ans-schema). You can designate the length of the query.

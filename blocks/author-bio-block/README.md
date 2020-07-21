@@ -9,6 +9,7 @@ _Author Short Biography block for Fusion News Theme_
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 The Author Bio Block expects the `credits` section from Composer's ANS schema, which is laid out as 

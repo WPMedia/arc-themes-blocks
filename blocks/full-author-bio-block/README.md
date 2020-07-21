@@ -9,6 +9,7 @@ _Fusion News Theme full author bio block. Please provide a 1-2 sentence descript
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

@@ -9,6 +9,7 @@ _This is the alert bar block that feeds from the `alert-bar-content-source-block
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
 This block consumes data returned from the `alert-bar-content-source-block` content source. The following is an example of that response.

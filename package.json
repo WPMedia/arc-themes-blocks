@@ -98,7 +98,8 @@
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
-    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
+    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block"
   },
   "jest": {
     "transformIgnorePatterns": [

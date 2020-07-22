@@ -1,14 +1,49 @@
 # `@wpmedia/placeholder-image-block`
+_Fusion News Theme placeholder image. The intended use is to take the feature pack fallback image, as an external url or relative path._
 
-Fusion News Theme placeholder image. The intended use is to take the feature pack fallback image, as an external url or relative path.
+## Acceptance Criteria
+- Add AC relevant to the block
 
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
+
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
+
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+| Phrase key | Default (English) |
+|---|---|
+|`key`|`english translation`|
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
 Please advise the `useFusionContext` [docs](https://github.com/WPMedia/fusion/blob/45e0b633021431f0bbb486a07e90d303ba0eddcf/documentation/api/react-hooks.md).
 
 This was adapted from the footer block's usage of the `deployment()` for relative blocks. This block does not support base64. 
 
 Takes in the desired height and width and small, medium and large breakpoints. See image document in news theme development file for more info on resizing in the future.
 
-## Usage
+### Usage
 
 CustomBlock.jsx
 ```

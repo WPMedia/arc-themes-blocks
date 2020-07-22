@@ -14,14 +14,21 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+      - name: Cache NPM files
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '12'
           registry-url: 'https://npm.pkg.github.com'
-      - run: npm install
+      - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --force-publish --no-git-tag-version --no-push --dist-tag canary --yes
+      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

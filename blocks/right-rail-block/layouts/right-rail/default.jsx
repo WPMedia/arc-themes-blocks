@@ -22,25 +22,25 @@ const RightRailLayout = ({ children }) => {
     <>
       <header className="page-header">{navigation}</header>
       <section role="main" className="main">
-        <div className="container">
+        <div className="container layout-section">
           <div className="row">
-            <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
+            <div className="col-sm-xl-12 layout-section wrap-bottom">
               {fullWidth1}
             </div>
           </div>
 
           <div className="row">
-            <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
+            <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
               {main}
             </div>
-            <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
+            <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section wrap-bottom">
               {rightRail}
             </aside>
           </div>
 
           {featureList['4'] > 0 && (
             <div className="row">
-              <div className="col-sm-xl-12">
+              <div className="col-sm-xl-12 layout-section wrap-bottom">
                 {fullWidth2}
               </div>
             </div>

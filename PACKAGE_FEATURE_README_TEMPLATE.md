@@ -1,5 +1,7 @@
-# `@wpmedia/author-bio-block`
-_Author Short Biography block for Fusion News Theme_
+# Name of Block
+_Please provide a 1-2 sentence description of what the block is and what it does._
+
+// TODO: add badge for passing/failing tests
 
 ## Acceptance Criteria
 - Add AC relevant to the block
@@ -12,25 +14,15 @@ _Author Short Biography block for Fusion News Theme_
 | **contentConfig example** | | | Please specify which content sources are compatible |
 
 ## ANS Schema
-The Author Bio Block expects the `credits` section from Composer's ANS schema, which is laid out as 
+Outline any schema information requirements necessary to know for ths block
 
-```
-credits: {
-    by: [{
-        name: ...
-        url: ...
-        ...
-    }]
-}
-```
-
-If there is no description provided by the schema, then no author bio will be displayed - this means that they are not a staff writer. If there is no credits or global content provided, no section tag at all will be rendered.
-
-### ANS fields
-- `credits.by`
+### ANS Fields
+- `Add all ANS fields used in the block`
 
 ## Internationalization fields
-- Add all internationalization fields used in the block
+| Phrase key | Default (English) |
+|---|---|
+|`key`|`english translation`|
 
 ## Events
 Blocks can emit events. The following is a list of events that are emitted by this block.

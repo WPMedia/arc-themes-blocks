@@ -142,64 +142,67 @@ const LargePromo = ({ customFields }) => {
   const ratios = ratiosFor('LG', customFields.imageRatio);
 
   return content ? (
-    <article className="container-fluid large-promo">
-      <div className="row lg-promo-padding-bottom">
-        {customFields.showImage
-        && (
-          <div className="col-sm-12 col-md-xl-6">
-            <a
-              href={content.website_url}
-              title={content && content.headlines ? content.headlines.basic : ''}
-            >
-              {
-                customFields.imageOverrideURL || extractImage(content.promo_items)
-                  ? (
-                    <Image
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                      alt={content && content.headlines ? content.headlines.basic : ''}
-                      // large is 4:3 aspect ratio
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
-                      // todo: should have resized params
-                    />
-                  )
-                  : (
-                    <PlaceholderImage
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                    />
-                  )
-}
-            </a>
-          </div>
-        )}
-        {(customFields.showHeadline || customFields.showDescription
-          || customFields.showByline || customFields.showDate)
-        && (
-          <div className={textClass}>
-            {overlineTmpl()}
-            {headlineTmpl()}
-            {descriptionTmpl()}
-            <div className="article-meta">
-              {byLineTmpl()}
-              {dateTmpl()}
+    <>
+      <article className="container-fluid large-promo">
+        <div className="row">
+          {customFields.showImage
+          && (
+            <div className="col-sm-12 col-md-xl-6">
+              <a
+                href={content.website_url}
+                title={content && content.headlines ? content.headlines.basic : ''}
+              >
+                {
+                  customFields.imageOverrideURL || extractImage(content.promo_items)
+                    ? (
+                      <Image
+                        url={customFields.imageOverrideURL
+                          ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                        alt={content && content.headlines ? content.headlines.basic : ''}
+                        // large is 4:3 aspect ratio
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                        resizedImageOptions={extractResizedParams(content)}
+                        // todo: should have resized params
+                      />
+                    )
+                    : (
+                      <PlaceholderImage
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                      />
+                    )
+  }
+              </a>
             </div>
-          </div>
-        )}
-      </div>
-    </article>
+          )}
+          {(customFields.showHeadline || customFields.showDescription
+            || customFields.showByline || customFields.showDate)
+          && (
+            <div className={textClass}>
+              {overlineTmpl()}
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
+            </div>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   ) : null;
 };
 

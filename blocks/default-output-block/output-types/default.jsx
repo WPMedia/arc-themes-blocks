@@ -123,7 +123,7 @@ const SampleOutputType = ({
               />
             </noscript>
           ) : null}
-        <div id="fusion-app">
+        <div id="fusion-app" className="layout-section">
           {children}
         </div>
         <Fusion />

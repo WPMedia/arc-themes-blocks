@@ -6,7 +6,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 }))));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <img alt="test" deployment={jest.fn((path) => path)} />,
+  Image: () => <img alt="test" />,
 }));
 const { default: mockData } = require('./mock-data');
 
@@ -99,6 +99,36 @@ describe('The numbered-list-block', () => {
         expect(placeholderImage.html()).toEqual('<img alt="test"/>');
         expect(wrapper.find('.numbered-list-container').childAt(3).find('.headline-list-anchor').find('.headline-text')
           .text()).toEqual('Story with video as the Lead Art');
+      });
+    });
+
+    it('should render elements only for arcSite', () => {
+      const { default: NumberedList } = require('./default');
+      const listContentConfig = {
+        contentConfigValues:
+        {
+          offset: '0',
+          query: 'type:story',
+          size: '30',
+        },
+        contentService: 'story-feed-query',
+      };
+      const customFields = {
+        listContentConfig,
+        showHeadline: true,
+        showImage: true,
+      };
+      NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
+
+      const wrapper = shallow(<NumberedList
+        customFields={customFields}
+        arcSite="dagen"
+        deployment={jest.fn((path) => path)}
+      />);
+      wrapper.setState({ resultList: mockData }, () => {
+        wrapper.update();
+        expect(wrapper.find('.numbered-list-container').length).toEqual(1);
+        expect(wrapper.find('.numbered-list-item').length).toEqual(1);
       });
     });
   });

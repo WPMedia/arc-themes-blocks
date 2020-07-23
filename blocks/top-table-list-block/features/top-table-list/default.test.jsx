@@ -28,12 +28,14 @@ jest.mock('fusion:properties', () => jest.fn(() => ({
 })));
 
 describe('top table list', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({
       fallbackImage: 'placeholder.jpg',
     }))));
+    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
   });
-  afterEach(() => {
+  afterAll(() => {
     jest.resetModules();
   });
 
@@ -41,7 +43,6 @@ describe('top table list', () => {
     const { default: TopTableList } = require('./default');
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
-    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
         arcSite: 'the-sun',
@@ -66,12 +67,17 @@ describe('top table list', () => {
       useContent: jest.fn(() => ({
         content_elements: [{
           _id: 'kjdfh',
+          websites: {
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
         }],
       })),
     }));
 
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
+      <TopTableList customFields={config} arcSite="the-sun" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
@@ -108,13 +114,107 @@ describe('top table list', () => {
       })),
     }));
 
-    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+    const wrapper = mount(
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
+    );
+
+    expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
+  });
+
+  it('renders content only for the arcSite', () => {
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        content_elements: [{
+          _id: 'kjdfh',
+          promo_items: {
+            basic: {
+              type: 'image',
+              url: 'url',
+            },
+          },
+          headlines: {
+            basic: 'Basic Headline',
+          },
+          description: {
+            basic: 'Basic description',
+          },
+          credits: {
+            by: ['Bob Woodward'],
+          },
+          websites: {
+            'the-prophet': {
+              website_url: 'url',
+            },
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
+        }],
+      })),
+    }));
 
     const wrapper = mount(
       <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
+  });
+
+  it('renders no content if arcSite not found', () => {
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'daily-telegraph',
+      })),
+    }));
+
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        content_elements: [{
+          _id: 'kjdfh',
+          promo_items: {
+            basic: {
+              type: 'image',
+              url: 'url',
+            },
+          },
+          headlines: {
+            basic: 'Basic Headline',
+          },
+          description: {
+            basic: 'Basic description',
+          },
+          credits: {
+            by: ['Bob Woodward'],
+          },
+          websites: {
+            'the-prophet': {
+              website_url: 'url',
+            },
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
+        }],
+      })),
+    }));
+
+    const wrapper = mount(
+      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
+    );
+
+    expect(wrapper.find('.top-table-list-container').children().length).toBe(0);
   });
 });
 

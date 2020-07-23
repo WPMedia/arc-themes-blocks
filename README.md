@@ -153,6 +153,20 @@ Much like installing existing dependencies, we'll want to rely on lerna commands
 
 [We'll want to use lerna's 'add' command to install new dependencies.](https://github.com/lerna/lerna/tree/master/commands/add#readme) It's unlikely any of our usage will end up deviating from that doc.
 
+##### Batch Updating Dependencies
+
+Arc Blocks uses fixed major versions of the Engine SDK and CSS Framework to prevent accidentally opting into breaking changes. Therefore, when we need to update these dependencies, we must go through all the Arc Blocks and update it to the new major version and make any code changes required. 
+
+Lerna does not have a batch update command, so this process is somewhat manual. Luckily, the blocks should all be using the same versions of both, so these dependencies can be easily searched for in the repository and changed at once.
+
+For either the Engine SDK or the CSS Framework, the process is as follows:
+
+1. Search for the current dependency using your IDE. For example, if you were updating the Engine SDK from `2.1.0` to `3.x.x`, you would search for `"@wpmedia/engine-theme-sdk": "^2.1.0"`
+
+2. Replace all instances with the new version. In the example above, you would replace `"@wpmedia/engine-theme-sdk": "^2.1.0"` with `"@wpmedia/engine-theme-sdk": "^3.0.0"`
+
+3. Run `npx lerna boostrap` to make sure the dependencies are being pulled properly
+
 #### 5. Writing Unit Tests
 Unit tests should be written alongside the feature before it is pushed to Code Review. We're using Jest as our test runner and Enzyme as our testing tool for testing React components. Not only will you have the standard Jest assertion available to you. You'll also have all of assertion matchers provided by [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme). The test files should be placed in the same directory as the main feature React file as well as be named the same. If you're testing `default.jsx`, your tests would be in the same directory in a file called `default.test.jsx`.
 

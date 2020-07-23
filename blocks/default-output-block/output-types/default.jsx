@@ -25,7 +25,7 @@ const SampleOutputType = ({
 }) => {
   const { globalContent: gc, arcSite } = useFusionContext();
   const {
-    websiteName, twitterSite, gtmID, dangerouslyInjectJS = [], fontUrl, resizerURL,
+    websiteName, twitterUsername, gtmID, dangerouslyInjectJS = [], fontUrl, resizerURL,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -83,7 +83,7 @@ const SampleOutputType = ({
           metaValue={metaValue}
           globalContent={gc}
           websiteName={websiteName}
-          twitterSite={twitterSite}
+          twitterUsername={twitterUsername}
           resizerURL={resizerURL}
         />
 
@@ -98,16 +98,15 @@ const SampleOutputType = ({
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
+        <script
+          src={powaBoot}
+          async
+          data-powa-script
+          data-loaded-via="powa-manifest"
+        />
+        <link rel="preload" as="script" href={powaDrive} />
+        {googleFonts()}
       </head>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58927291-1" />
-      <script
-        src={powaBoot}
-        async
-        data-powa-script
-        data-loaded-via="powa-manifest"
-      />
-      <link rel="preload" as="script" href={powaDrive} />
-      {googleFonts()}
       <body>
         {gtmID
           ? (

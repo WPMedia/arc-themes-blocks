@@ -94,9 +94,17 @@ class CardList extends React.Component {
   render() {
     const { customFields: { title } = {}, arcSite } = this.props;
     const {
-      cardList: { content_elements: contentElements = [] } = {},
+      cardList: { content_elements: pageContent = [] } = {},
       placeholderResizedImageOptions,
     } = this.state;
+
+    const contentElements = pageContent.reduce((acc, element) => {
+      if (element.websites?.[arcSite]) {
+        return acc.concat(element);
+      }
+      return acc;
+    }, []);
+
     const showSeparator = !!(
       contentElements[0]
       && contentElements[0].credits
@@ -104,6 +112,7 @@ class CardList extends React.Component {
       && contentElements[0].credits.by.length !== 0
     );
     const targetFallbackImage = this.getFallbackImageURL();
+
     return (
       (contentElements.length > 0
         && (

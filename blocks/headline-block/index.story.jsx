@@ -20,7 +20,7 @@ const data = () => ({
 });
 
 export const longHeadline = () => (
-  <Headline fusionContext={data} />
+  <Headline useInjectedFusionContext={data} />
 );
 
 export const customHeadline = () => {
@@ -34,6 +34,6 @@ export const customHeadline = () => {
   });
 
   return (
-    <Headline fusionContext={newData} />
+    <Headline useInjectedFusionContext={newData} />
   );
 };

@@ -42,7 +42,7 @@ body {
   }
 
   .fullwidth-section {
-    padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
+    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'md');
 
     &.horizontal-borders {
       border-bottom: 1px solid $border-rule-color;
@@ -53,7 +53,8 @@ body {
     }
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding: map-get($spacers, 'lg') 0;
+      /* top | horizontal | bottom */
+      padding: 0 0 map-get($spacers, 'lg');
     }
   }
 

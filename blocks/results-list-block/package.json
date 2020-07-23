@@ -30,7 +30,7 @@
   "dependencies": {
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
+    "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/global-phrases-block": "latest",
     "@wpmedia/news-theme-css": "^2.1.8",
     "@wpmedia/shared-styles": "latest",

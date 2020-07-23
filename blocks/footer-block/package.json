@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
+    "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/links-bar-block": "latest",
     "@wpmedia/news-theme-css": "^2.1.8",
     "styled-components": "^4.4.0"

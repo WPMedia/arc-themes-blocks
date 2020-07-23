@@ -23,6 +23,6 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"
+    "@wpmedia/engine-theme-sdk": "^2.2.0"
   }
 }

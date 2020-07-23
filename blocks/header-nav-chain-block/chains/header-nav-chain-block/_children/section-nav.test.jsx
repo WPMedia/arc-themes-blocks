@@ -41,6 +41,36 @@ const items = [
     url: 'http://washingtonpost.com/entertainment/',
   },
   {
+    _id: 'query',
+    node_type: 'link',
+    display_name: 'External with query',
+    url: 'http://washingtonpost.com/entertainment/?test=2&foo=bar',
+  },
+  {
+    _id: 'query2',
+    node_type: 'link',
+    display_name: 'internal with query',
+    url: '/entertainment/?test=1',
+  },
+  {
+    _id: 'link3',
+    node_type: 'link',
+    display_name: 'with page name',
+    url: 'https://example.com/category/page.html',
+  },
+  {
+    _id: 'hash',
+    node_type: 'link',
+    display_name: 'internal with hash',
+    url: '/entertainment/page#myhash',
+  },
+  {
+    _id: 'mail',
+    node_type: 'link',
+    display_name: 'mail link',
+    url: 'mailto:readers@washpost.com',
+  },
+  {
     _id: '/some-inactive-section',
     inactive: true,
     node_type: 'section',
@@ -91,6 +121,16 @@ describe('the SectionNav component', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
     expect(wrapper.find('li.section-item > Link > a').at(1)).toHaveProp('href', '/entertainment/');
+  });
+
+  it('should render the href for a link without a final slash if has a query parameter', () => {
+    const wrapper = mount(<SectionNav sections={items} />);
+
+    expect(wrapper.find('li.section-item > Link > a').at(3)).toHaveProp('href', 'http://washingtonpost.com/entertainment/?test=2&foo=bar');
+    expect(wrapper.find('li.section-item > Link > a').at(4)).toHaveProp('href', '/entertainment/?test=1');
+    expect(wrapper.find('li.section-item > Link > a').at(5)).toHaveProp('href', 'https://example.com/category/page.html');
+    expect(wrapper.find('li.section-item > Link > a').at(6)).toHaveProp('href', '/entertainment/page#myhash');
+    expect(wrapper.find('li.section-item > Link > a').at(7)).toHaveProp('href', 'mailto:readers@washpost.com');
   });
 
   describe('when a section has child nodes', () => {

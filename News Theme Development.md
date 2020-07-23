@@ -221,14 +221,14 @@ npx lerna publish --force-publish --preid beta --pre-dist-tag beta
 
 7. Select either `prepatch`, `preminor`, or `premajor` if this is the first prerelease build for this production release (e.g. `-beta.0`). If this is a prerelease that makes changes on top of a prior prerelease then select the `Custom Prerelease` option and accept the default, this should result in the version having only an incremented prerelease number instead of an incremented major, minor, or patch number (e.g `-beta.1`). Note that this will publish all packages to aid our block installer process.
 8. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
-9. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge staging` to get the changes from `staging` into `master`.
+9. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `staging` into `master`.
 10. Then, in `master`, you can publish a production release with the following command:
 
 ```sh
 npx lerna publish --conventional-commits --conventional-graduate
 ```
 
-11. After publishing from the `master` branch, rebase `staging` on top of `master` so that the two branches are the same and so that we can start the block development cycle over again.
+11. After publishing from the `master` branch, merge `master` into `staging` so that the changes related to the publish we just did end up in both of those branches.
 
 ```sh
 # Ensure we're on the master branch
@@ -245,7 +245,7 @@ git rebase master
 git push --force origin staging
 ```
 
-#### Publish hotfix 
+#### Publish hotfix
 
 1. Branch off of master.
 

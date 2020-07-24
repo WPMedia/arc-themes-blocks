@@ -1,4 +1,3 @@
-
 const CollectionWithUnpublishedStory = {
   _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
   headlines: {

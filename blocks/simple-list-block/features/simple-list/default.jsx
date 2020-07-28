@@ -113,7 +113,7 @@ const SimpleList = (props) => {
   }) || {};
 
   return (
-    <div key={id} className="list-container">
+    <div key={id} className="list-container layout-section">
       <Title className="list-title" primaryFont={primaryFont}>
         {title}
       </Title>
@@ -121,21 +121,24 @@ const SimpleList = (props) => {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
-          <StoryItem
-            key={listItemId}
-            id={listItemId}
-            itemTitle={itemTitle}
-            imageURL={imageURL}
-            primaryFont={primaryFont}
-            websiteURL={websiteURL}
-            websiteDomain={websiteDomain}
-            showHeadline={showHeadline}
-            showImage={showImage}
-            resizedImageOptions={resizedImageOptions}
-            placeholderResizedImageOptions={placeholderResizedImageOptions}
-            targetFallbackImage={targetFallbackImage}
-            arcSite={arcSite}
-          />
+          <React.Fragment key={listItemId}>
+            <StoryItem
+              key={listItemId}
+              id={listItemId}
+              itemTitle={itemTitle}
+              imageURL={imageURL}
+              primaryFont={primaryFont}
+              websiteURL={websiteURL}
+              websiteDomain={websiteDomain}
+              showHeadline={showHeadline}
+              showImage={showImage}
+              resizedImageOptions={resizedImageOptions}
+              placeholderResizedImageOptions={placeholderResizedImageOptions}
+              targetFallbackImage={targetFallbackImage}
+              arcSite={arcSite}
+            />
+            <hr />
+          </React.Fragment>
         ))
       }
     </div>

@@ -1,18 +1,4 @@
 .top-table-list-container {
-  &.box-shadow-bottom {
-    box-shadow: none;
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      box-shadow: inset 0 -1px 0 0 $ui-light-gray;
-    }
-  }
-
-  .small-promo,
-  .medium-promo,
-  .large-promo,
-  .xl-large-promo {
-    margin-bottom: 0;
-  }
-
   .small-promo {
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
       .row.sm-promo-padding-btm {

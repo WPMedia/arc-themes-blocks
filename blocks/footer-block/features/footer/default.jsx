@@ -91,7 +91,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
   );
 
   return (
-    <div className="container">
+    <div className="container layout-section">
       <div className="section-separator">
         <section className="footer-header">
           <div className="footer-row">

@@ -35,7 +35,7 @@ describe('the links bar feature for the default output type', () => {
     }));
     const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
-    expect(wrapper.at(0).type()).toBe('nav');
+    expect(wrapper.children().at(0).type()).toBe('nav');
   });
 
   it('should contain the equal number of links between input and output', () => {

@@ -17,20 +17,11 @@ body {
 
   .main {
     flex-grow: 1;
-    padding-bottom: calculateRem(56px);
-    padding-top: 54px;
+    padding-top: calc(56px + #{map-get($spacers, 'lg')});
     width: 100%;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-bottom: calculateRem(52px);
-    }
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
-      padding-bottom: calculateRem(64px);
-    }
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'xl')) {
-      padding-bottom: calculateRem(56px);
+      padding-top: calc(56px + #{map-get($spacers, 'md')});
     }
 
     @media screen and (max-width: 95rem) and (min-width: 90rem) {
@@ -38,23 +29,6 @@ body {
         margin-left: 5%;
         margin-right: 5%;
       }
-    }
-  }
-
-  .fullwidth-section {
-    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'md');
-
-    &.horizontal-borders {
-      border-bottom: 1px solid $border-rule-color;
-
-      &:empty {
-        border: none;
-      }
-    }
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      /* top | horizontal | bottom */
-      padding: 0 0 map-get($spacers, 'lg');
     }
   }
 
@@ -69,17 +43,4 @@ body {
   .right-article-section {
     padding: 0;
   }
-
-  .section-padding {
-    padding: map-get($spacers, 'sm');
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding: map-get($spacers, 'md');
-    }
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
-      padding: map-get($spacers, 'ld');
-    }
-  }
-
 }

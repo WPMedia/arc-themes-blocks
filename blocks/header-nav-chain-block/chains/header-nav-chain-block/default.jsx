@@ -93,7 +93,7 @@ const Nav = (props) => {
 
   const closeDrawer = (event) => {
     const ele = event.target;
-    if (ele.closest('.innerDrawerNav')) {
+    if (ele.closest('.inner-drawer-nav')) {
       return;
     }
     closeNavigation();
@@ -141,10 +141,10 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} onClick={closeDrawer} font={primaryFont}>
-          <div className="innerDrawerNav" style={{ zIndex: 10 }}>
+        <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
+          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
-              <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
+              <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
             </SectionNav>
           </div>
         </StyledSectionDrawer>

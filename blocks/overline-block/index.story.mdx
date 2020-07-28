@@ -1,0 +1,51 @@
+import Overline from './features/overline/default';
+import { text } from '@storybook/addon-knobs';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="Overline blocks" component={Overline} />
+
+# Overline
+
+The `Overline` block is used by several blocks to display their top level section or relevant data.
+Some of these blocks are:
+
+- Top table list block
+- Extra Large Promo block
+- Large promo block
+
+If no custom text and URL are passed as props to the Overline block, it will default to use data from global content.
+
+## Use
+
+To import it into a block:
+
+```
+import Overline from '@wpmedia/overline-block';
+
+...
+    <Overline
+        customText="Overline text"
+        customUrl="Overline url"
+    />
+...
+
+```
+
+
+
+## Props
+<Props of={Overline} />
+
+## Stories
+
+<Story name="Basic" />
+
+** Custom Overline **
+<Preview>
+    <Story name="Custom Overline">
+        <Overline 
+            customText={text('Text', 'Overline text')} 
+            customUrl={text('URL', 'Overline URL')}
+        />
+    </Story>
+</Preview>

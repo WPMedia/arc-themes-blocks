@@ -86,6 +86,9 @@ export const getResizerParams = (
   originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [],
 ) => {
   const output = {};
+  if (!originalUrl) {
+    return undefined;
+  }
   const getParamsByFormat = (format, previousOutput) => {
     // where we get image widths
     const imageDimensionsAspectRatios = getImageDimensionsForAspectRatios(onlyImageWidths);
@@ -107,8 +110,8 @@ export const getResizerParams = (
     });
     return previousOutput;
   };
-    // todo: use webp for next gen images spike
-    // getParamsByFormat('webp', output);
+  // todo: use webp for next gen images spike
+  // getParamsByFormat('webp', output);
   getParamsByFormat('jpg', output);
   return output;
 };
@@ -125,7 +128,7 @@ const resizeImage = (image, resizerURL) => {
 const resizePromoItems = (promoItems, resizerURL) => Object.keys(promoItems)
   .reduce((promoItemWithResizedImages, key) => {
     const promoItem = promoItems[key];
-    if ((key === 'type' && promoItem === 'image') || key === 'url') {
+    if ((key === 'type' && promoItem === 'image' && promoItems.url) || key === 'url') {
       promoItemWithResizedImages.resized_params = resizeImage(promoItems, resizerURL);
       promoItemWithResizedImages.url = promoItems.url;
       promoItemWithResizedImages.type = 'image';

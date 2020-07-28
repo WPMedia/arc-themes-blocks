@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components';
 
-
 export const AllyControl = styled.button`
     width:100px;
     height: 60px;
@@ -12,29 +11,29 @@ export const AllyControl = styled.button`
     justify-content:center;
     align-items: center;
     border: 0;
-    
+
     cursor: pointer;
-    
+
     &.topleft {
         top:0;
         left:0;
     }
-    
+
     &.topright {
         top:0;
-        right:0;    
+        right:0;
     }
-    
+
     &.bottomleft {
         bottom:0;
-        left:0;    
+        left:0;
     }
-    
+
     &.bottomright {
         bottom:0;
-        right:0;     
-    }        
-    
+        right:0;
+    }
+
     img {
         width: 55px;
         height:auto;
@@ -56,15 +55,15 @@ export const AllyContainer = styled.div`
     display: flex;
     flex-direction: column;
     transition: all 1s ease;
-    
+
     &.ally-panel-active {
         right: 0;
     }
-    
+
     * {
         box-sizing: border-box;
     }
-    
+
    .header {
         width: 100%;
         padding: 5px 10px;
@@ -110,13 +109,13 @@ export const AllyContainer = styled.div`
         background-color: transparent;
         cursor: pointer;
     }
-    
+
     .alert {
         color: red;
         padding: 15px;
         background: #F5F5F5
     }
-    
+
     .alert h2 {
         font-size: 24px;
         line-height: 30px;
@@ -133,7 +132,7 @@ export const AllyContainer = styled.div`
         align-items: center;
         height: 100%
     }
-    
+
     section.allyInnerContainer .reportContainer {
         width: 100%;
         padding: 15px;
@@ -151,7 +150,7 @@ export const AllyContainer = styled.div`
         background-color: rgba(244, 215, 201, .37);
         border-left: 4px solid #d93025;
     }
-    
+
     section.allyInnerContainer .reportContainer .report h2 {
         font-size: 22px;
         font-weight: 700;
@@ -214,13 +213,13 @@ export const AllyContainer = styled.div`
     section.allyInnerContainer .reportContainer .report ul li {
         margin-left: 25px;
     }
-    
+
     section.allyInnerContainer .reportContainer .report pre{
         width: 100%;
         overflow-y: scroll;
     }
-    
+
     .a11yHighlight {
         border: 4px solid red;
-    }        
+    }
 `;

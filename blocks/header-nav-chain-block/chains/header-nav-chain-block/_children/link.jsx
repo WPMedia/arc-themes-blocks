@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function getLocation(uri) {
   let url;
@@ -31,22 +30,22 @@ function fixTrailingSlash(item) {
   return item;
 }
 
-const Link = ({ href, name, showSeparator }) => {
+const Link = ({ href, name, child }) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
-
   return (
     externalUrl ? (
       <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
-        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+        {name}
         <span className="sr-only">(Opens in new window)</span>
+        {child}
       </a>
-    ) : <a href={fixTrailingSlash(href)}>{`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}</a>
+    ) : (
+      <a href={fixTrailingSlash(href)}>
+        {name}
+        {child}
+      </a>
+    )
   );
-};
-
-Link.propTypes = {
-  href: PropTypes.string,
-  name: PropTypes.string,
 };
 
 export default Link;

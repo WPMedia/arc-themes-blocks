@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/news-theme-css": "^2.1.13",
     "@wpmedia/video-player-block": "latest",
     "styled-components": "^4.4.0"
   },

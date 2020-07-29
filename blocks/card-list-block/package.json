@@ -26,7 +26,7 @@
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/news-theme-css": "^2.1.13",
     "styled-components": "^4.4.0"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"

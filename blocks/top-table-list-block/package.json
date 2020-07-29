@@ -25,7 +25,7 @@
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^2.1.13",
+    "@wpmedia/news-theme-css": "^3.0.0",
     "@wpmedia/overline-block": "latest",
     "@wpmedia/placeholder-image-block": "latest",
     "@wpmedia/resizer-image-block": "latest",

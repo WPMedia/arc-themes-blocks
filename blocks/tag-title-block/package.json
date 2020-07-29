@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^2.1.13"
+    "@wpmedia/news-theme-css": "^3.0.0"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

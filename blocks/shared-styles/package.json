@@ -18,6 +18,10 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/shared-styles"
   },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/news-theme-css": "^3.0.0"
+  },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/news-theme-css": "^3.0.0"

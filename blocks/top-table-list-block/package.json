@@ -21,6 +21,10 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/top-table-list-block"
   },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/news-theme-css": "^3.0.0"
+  },
   "dependencies": {
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",

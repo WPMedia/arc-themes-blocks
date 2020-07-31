@@ -9,7 +9,7 @@ jest.mock('fusion:intl', () => ({
 }));
 
 describe('Given a single author', () => {
-  it('should use additional_properties byline if exists', () => {
+  it('should use additional_properties byline if it exists', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
@@ -29,7 +29,7 @@ describe('Given a single author', () => {
     expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim Byline</a>' });
   });
 
-  it('should fallback to author name if additional_properties doesnt exist', () => {
+  it("should fallback to author name if additional_properties doesn't exist", () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
@@ -79,7 +79,7 @@ describe('Given a single author', () => {
     expect(wrapper.find('span').length).toBe(0);
   });
 
-  it('should not be a link if not have url', () => {
+  it('should not be a link if url is missing', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -97,7 +97,7 @@ describe('Given a single author', () => {
     expect(wrapper.find('span').at(1).text().trim()).toEqual('SangHee Kim');
   });
 
-  it('should not be a link if not have url #2', () => {
+  it('should not be a link if url is missing #2', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -114,7 +114,7 @@ describe('Given a single author', () => {
     expect(wrapper.find('span').at(1).text().trim()).toEqual('SangHee Kim');
   });
 
-  it('should not be a link if not have url #3', () => {
+  it('should not be a link if url is missing #3', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [

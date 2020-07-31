@@ -10,7 +10,8 @@
     "features"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",

@@ -12,7 +12,8 @@
     "directory": "blocks/resizer-image-block"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "keywords": [
     "thumbor",

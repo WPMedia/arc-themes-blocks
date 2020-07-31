@@ -100,7 +100,8 @@ The structure of blocks is largely incompatible with what lerna generates in thi
     "layouts"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

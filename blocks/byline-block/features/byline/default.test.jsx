@@ -26,7 +26,9 @@ describe('Given a single author', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim Byline</a>' });
+    expect(
+      wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
+    ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim Byline</a>' });
   });
 
   it("should fallback to author name if additional_properties doesn't exist", () => {
@@ -41,7 +43,9 @@ describe('Given a single author', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>' });
+    expect(
+      wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
+    ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>' });
   });
 
 
@@ -157,7 +161,9 @@ describe('Given an author list', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: '<a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
+    expect(
+      wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
+    ).toStrictEqual({ __html: '<a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
   it('should return three authors, oxford comma', () => {
@@ -182,7 +188,9 @@ describe('Given an author list', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a> and <a href="/author/brent-miller">Brent Miller</a>' });
+    expect(
+      wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
+    ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a> and <a href="/author/brent-miller">Brent Miller</a>' });
   });
 
   it('should return four authors, oxford comma', () => {
@@ -211,7 +219,9 @@ describe('Given an author list', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
+    expect(
+      wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
+    ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>, <a href="/author/joe-grosspietsch">Joe Grosspietsch</a>, <a href="/author/brent-miller">Brent Miller</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
   it('should return 4 authors complete with url and bylines', () => {
@@ -269,7 +279,9 @@ describe('Given an author list', () => {
     const globalContent = { credits };
 
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
-    expect(wrapper.find('span').at(1).text().trim()).toEqual('SangHee Kim Byline, Joe Grosspietsch Byline, Brent Miller Byline and Sara Lynn Carothers');
+    expect(
+      wrapper.find('span').at(1).text().trim(),
+    ).toEqual('SangHee Kim Byline, Joe Grosspietsch Byline, Brent Miller Byline and Sara Lynn Carothers');
 
     wrapper.find('span').at(1).find('a').forEach((anchor, idx) => {
       expect(anchor.prop('href')).toEqual(credits.by[idx].url);

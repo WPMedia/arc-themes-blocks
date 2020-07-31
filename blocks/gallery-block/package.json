@@ -4,7 +4,7 @@
   "description": "Fusion News Theme gallery block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "features",
@@ -12,8 +12,7 @@
     "layouts"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",

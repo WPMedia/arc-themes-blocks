@@ -12,8 +12,7 @@
     "directory": "blocks/resizer-image-block"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "thumbor",
@@ -23,7 +22,7 @@
     "images"
   ],
   "author": "Jack Howard <jack.howard@washpost.com>",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },

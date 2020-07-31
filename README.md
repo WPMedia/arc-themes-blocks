@@ -92,7 +92,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "features",
@@ -100,7 +100,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
     "layouts"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

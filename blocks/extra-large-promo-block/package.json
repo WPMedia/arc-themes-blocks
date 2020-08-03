@@ -7,7 +7,7 @@
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "features"

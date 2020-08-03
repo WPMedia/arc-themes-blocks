@@ -23,7 +23,7 @@
     "thumbor"
   ],
   "author": "Jack Howard <jack.howard@washpost.com>",
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"
   },

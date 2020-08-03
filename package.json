@@ -25,7 +25,7 @@
       "pre-push": "npm run test:coverage && npm run lint"
     }
   },
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@babel/core": "^7.10.2",

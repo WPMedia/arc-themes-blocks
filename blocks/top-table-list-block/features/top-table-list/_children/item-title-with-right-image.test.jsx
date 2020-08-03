@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
+  resizerURL: 'http://example.com',
 }))));
 
 const config = {
@@ -28,7 +29,7 @@ const config = {
 };
 
 describe('item title with right image block', () => {
-  xit('renders title and image with full props', () => {
+  it('renders title and image with full props', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';
     const primaryFont = 'arial';
@@ -43,6 +44,7 @@ describe('item title with right image block', () => {
         primaryFont={primaryFont}
         id={id}
         customFields={config}
+        resizedImageOptions={{ '400x267': '' }}
       />,
     );
 
@@ -52,6 +54,8 @@ describe('item title with right image block', () => {
     // placeholder
     // expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
     // expect(wrapper.find('.simple-list-img').length).toBe(1);
+
+    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
   });
   xit('renders neither title nor image with empty props, renders placeholder', () => {
     const imageURL = '';

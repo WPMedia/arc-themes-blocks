@@ -31,7 +31,7 @@ const config = {
 
 describe('medium list item', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-  xit('renders title and image with full props', () => {
+  it('renders title and image with full props', () => {
     const imageURL = 'pic';
     const constructedURL = 'url';
     const itemTitle = 'title';
@@ -60,13 +60,15 @@ describe('medium list item', () => {
     />);
 
     // placeholder
-    // expect(wrapper.find('.top-table-med-image-placeholder').length).toBe(0);
+    expect(wrapper.find('.top-table-med-image-placeholder').length).toBe(0);
 
     // doesn't find spacer
     // expect(wrapper.find('.headline-description-spacing').length).toBe(0);
 
     // finds description text
-    // expect(wrapper.find('p.description-text').text()).toBe(descriptionText);
+    expect(wrapper.find('p.description-text').text()).toBe(descriptionText);
+
+    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
   });
 
   it('renders image placeholder with empty props', () => {
@@ -106,5 +108,7 @@ describe('medium list item', () => {
 
     // doesn't find a headline
     expect(wrapper.find('a.md-promo-headline').length).toBe(0);
+
+    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
   });
 });

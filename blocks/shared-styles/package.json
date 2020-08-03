@@ -4,14 +4,14 @@
   "description": "Fusion News Theme Shared Styles",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",

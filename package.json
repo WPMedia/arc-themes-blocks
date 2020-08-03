@@ -1,7 +1,8 @@
 {
   "name": "fusion-news-theme-blocks",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
       "pre-push": "npm run test:coverage && npm run lint"
     }
   },
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "devDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@babel/core": "^7.10.2",

@@ -7,14 +7,14 @@
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",

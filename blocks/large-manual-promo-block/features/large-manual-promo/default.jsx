@@ -39,87 +39,90 @@ const LargeManualPromo = ({ customFields }) => {
   });
 
   return customFields.linkURL ? (
-    <article className="container-fluid large-promo">
-      <div className="row lg-promo-padding-bottom">
-        {(customFields.showImage && customFields.imageURL)
-        && (
-          <div className="col-sm-12 col-md-xl-6">
-            <a
-              href={customFields.linkURL}
-              title={customFields.headline}
-              target={customFields.newTab ? '_blank' : '_self'}
-              rel={customFields.newTab ? 'noreferrer noopener' : ''}
-            >
-              <Image
-                url={customFields.imageURL}
-                alt={customFields.headline}
-                // large promo has 4:3
-                smallWidth={274}
-                smallHeight={206}
-                mediumWidth={274}
-                mediumHeight={206}
-                largeWidth={377}
-                largeHeight={283}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                resizedImageOptions={resizedImageOptions}
-              />
-            </a>
-          </div>
-        )}
-        {(customFields.showHeadline || customFields.showDescription
-          || customFields.showOverline)
-        && (
-          <div className={textClass}>
-            {(customFields.showOverline && customFields.overline && customFields.overlineURL)
-            && (
-              <OverlineLink
-                href={customFields.overlineURL}
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                className="overline"
-              >
-                {customFields.overline}
-              </OverlineLink>
-            )}
-            {((customFields.showOverline && customFields.overline) && !customFields.overlineURL)
-            && (
-              <OverlineHeader
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                className="overline"
-              >
-                {customFields.overline}
-              </OverlineHeader>
-            )}
-            {(customFields.showHeadline && customFields.headline)
-            && (
+    <>
+      <article className="container-fluid large-promo">
+        <div className="row lg-promo-padding-bottom">
+          {(customFields.showImage && customFields.imageURL)
+          && (
+            <div className="col-sm-12 col-md-xl-6">
               <a
                 href={customFields.linkURL}
-                className="lg-promo-headline"
                 title={customFields.headline}
                 target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer' : ''}
+                rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
-                <HeadlineText
-                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                  className="lg-promo-headline"
-                >
-                  {customFields.headline}
-                </HeadlineText>
+                <Image
+                  url={customFields.imageURL}
+                  alt={customFields.headline}
+                  // large promo has 4:3
+                  smallWidth={274}
+                  smallHeight={206}
+                  mediumWidth={274}
+                  mediumHeight={206}
+                  largeWidth={377}
+                  largeHeight={283}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                  resizedImageOptions={resizedImageOptions}
+                />
               </a>
-            )}
-            {(customFields.showDescription && customFields.description)
-            && (
-              <DescriptionText
-                secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                className="description-text"
-              >
-                {customFields.description}
-              </DescriptionText>
-            )}
-          </div>
-        )}
-      </div>
-    </article>
+            </div>
+          )}
+          {(customFields.showHeadline || customFields.showDescription
+            || customFields.showOverline)
+          && (
+            <div className={textClass}>
+              {(customFields.showOverline && customFields.overline && customFields.overlineURL)
+              && (
+                <OverlineLink
+                  href={customFields.overlineURL}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  className="overline"
+                >
+                  {customFields.overline}
+                </OverlineLink>
+              )}
+              {((customFields.showOverline && customFields.overline) && !customFields.overlineURL)
+              && (
+                <OverlineHeader
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  className="overline"
+                >
+                  {customFields.overline}
+                </OverlineHeader>
+              )}
+              {(customFields.showHeadline && customFields.headline)
+              && (
+                <a
+                  href={customFields.linkURL}
+                  className="lg-promo-headline"
+                  title={customFields.headline}
+                  target={customFields.newTab ? '_blank' : '_self'}
+                  rel={customFields.newTab ? 'noreferrer' : ''}
+                >
+                  <HeadlineText
+                    primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                    className="lg-promo-headline"
+                  >
+                    {customFields.headline}
+                  </HeadlineText>
+                </a>
+              )}
+              {(customFields.showDescription && customFields.description)
+              && (
+                <DescriptionText
+                  secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+                  className="description-text"
+                >
+                  {customFields.description}
+                </DescriptionText>
+              )}
+            </div>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   ) : null;
 };
 

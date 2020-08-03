@@ -30,33 +30,36 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
   );
 
   return (
-    <nav key={id} className="links-bar">
-      {menuItems && menuItems.map((item, index) => (
-        <LinkBarSpan
-          className="links-menu"
-          key={item._id}
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        >
-          {
-            item.node_type === 'link'
-              ? (
-                <Link
-                  href={item.url}
-                  name={item.display_name}
-                  showSeparator={content.children.length !== index + 1 && showSeparator}
-                />
-              )
-              : (
-                <Link
-                  href={item._id}
-                  name={item.name}
-                  showSeparator={content.children.length !== index + 1 && showSeparator}
-                />
-              )
-          }
-        </LinkBarSpan>
-      ))}
-    </nav>
+    <>
+      <nav key={id} className="links-bar">
+        {menuItems && menuItems.map((item, index) => (
+          <LinkBarSpan
+            className="links-menu"
+            key={item._id}
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          >
+            {
+              item.node_type === 'link'
+                ? (
+                  <Link
+                    href={item.url}
+                    name={item.display_name}
+                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                  />
+                )
+                : (
+                  <Link
+                    href={item._id}
+                    name={item.name}
+                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                  />
+                )
+            }
+          </LinkBarSpan>
+        ))}
+      </nav>
+      <hr />
+    </>
   );
 };
 

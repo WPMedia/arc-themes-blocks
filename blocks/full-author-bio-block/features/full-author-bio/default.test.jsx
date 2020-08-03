@@ -76,7 +76,7 @@ describe('the full author bio block', () => {
     it('should render a photo', () => {
       const wrapper = mount(<FullAuthorBio />);
 
-      expect(wrapper.find('Image').props().url === '').toEqual(false);
+      expect(wrapper.find('Image').props().src === '').toEqual(false);
     });
   });
 

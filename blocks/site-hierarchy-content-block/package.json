@@ -7,7 +7,7 @@
     "Jack Howard <jack.howard@washpost.com>"
   ],
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "directories": {
     "lib": "lib",
@@ -18,7 +18,7 @@
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/news-theme-css": "^3.0.0",
     "styled-components": "^4.4.0"
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"

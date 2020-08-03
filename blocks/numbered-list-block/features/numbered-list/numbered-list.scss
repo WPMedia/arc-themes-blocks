@@ -1,6 +1,4 @@
 .numbered-list-container {
-  @include block-margin-bottom;
-
   .list-title {
     color: $ui-primary-font-color;
     font-size: calculateRem(20px);
@@ -10,10 +8,8 @@
 }
 
 .numbered-list-item {
-  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   display: flex;
   justify-content: space-between;
-  padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
 
   .list-item-number {
     color: $ui-dark-secondary-color;

@@ -91,7 +91,7 @@ class NumberedList extends Component {
     const targetFallbackImage = this.getFallbackImageURL();
 
     return (
-      <div className="numbered-list-container">
+      <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
           <Title className="list-title" primaryFont={this.primaryFont}>
             {title}
@@ -110,58 +110,61 @@ class NumberedList extends Component {
           const url = websites[arcSite].website_url;
 
           return (
-            <div className="numbered-list-item" key={`result-card-${url}`} type="1">
-              {showHeadline
-              && (
-              <a
-                href={url}
-                title={headlineText}
-                className="headline-list-anchor"
-              >
-                <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
-                <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
-              </a>
-              )}
-              {showImage
-              && (
-              <a
-                href={url}
-                title={headlineText}
-                className="list-anchor-image"
-              >
-                {extractImage(promoItems) ? (
-                  <Image
-                    resizedImageOptions={extractResizedParams(element)}
-                    url={extractImage(promoItems)}
-                    alt={headlineText}
-                    // small, including numbered list, is 3:2 aspect ratio
-                    smallWidth={105}
-                    smallHeight={70}
-                    mediumWidth={105}
-                    mediumHeight={70}
-                    largeWidth={274}
-                    largeHeight={183}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
-                ) : (
-                  <Image
-                    smallWidth={105}
-                    smallHeight={70}
-                    mediumWidth={105}
-                    mediumHeight={70}
-                    largeWidth={274}
-                    largeHeight={183}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    url={targetFallbackImage}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizedImageOptions={placeholderResizedImageOptions}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
+            <React.Fragment key={`result-card-${url}`}>
+              <div className="numbered-list-item" key={`result-card-${url}`} type="1">
+                {showHeadline
+                && (
+                <a
+                  href={url}
+                  title={headlineText}
+                  className="headline-list-anchor"
+                >
+                  <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
+                  <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
+                </a>
                 )}
-              </a>
-              )}
-            </div>
+                {showImage
+                && (
+                <a
+                  href={url}
+                  title={headlineText}
+                  className="list-anchor-image"
+                >
+                  {extractImage(promoItems) ? (
+                    <Image
+                      resizedImageOptions={extractResizedParams(element)}
+                      url={extractImage(promoItems)}
+                      alt={headlineText}
+                      // small, including numbered list, is 3:2 aspect ratio
+                      smallWidth={105}
+                      smallHeight={70}
+                      mediumWidth={105}
+                      mediumHeight={70}
+                      largeWidth={274}
+                      largeHeight={183}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                    />
+                  ) : (
+                    <Image
+                      smallWidth={105}
+                      smallHeight={70}
+                      mediumWidth={105}
+                      mediumHeight={70}
+                      largeWidth={274}
+                      largeHeight={183}
+                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      url={targetFallbackImage}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizedImageOptions={placeholderResizedImageOptions}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                    />
+                  )}
+                </a>
+                )}
+              </div>
+              <hr />
+            </React.Fragment>
           );
         }) : null}
       </div>

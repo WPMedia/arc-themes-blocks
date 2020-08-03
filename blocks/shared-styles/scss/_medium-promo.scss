@@ -1,14 +1,8 @@
 .medium-promo {
-  @include block-margin-bottom;
-  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   color: $ui-primary-font-color;
 
   a {
     color: $ui-primary-font-color;
-  }
-
-  .med-promo-padding-bottom {
-    padding-bottom: map-get($spacers, 'md');
   }
 
   .md-promo-headline {

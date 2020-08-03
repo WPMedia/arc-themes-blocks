@@ -13,7 +13,7 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "files": [
@@ -27,7 +27,7 @@
     "images"
   ],
   "author": "Jack Howard <jack.howard@washpost.com>",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"

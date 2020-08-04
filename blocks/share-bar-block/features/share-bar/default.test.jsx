@@ -103,18 +103,16 @@ describe('When the share bar is shown', () => {
     expect(wrapper.find('div.shareBar').children()).toHaveLength(0);
   });
 
-  it('should open a new window when facebook button is clicked', () => {
-    const { default: ShareBar } = require('./default');
-
+  describe('when the social buttons are clicked', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
         arcSite: 'the-sun',
         customFields: {
-          email: false,
+          email: true,
           facebook: true,
-          pinterest: false,
-          twitter: false,
-          linkedIn: false,
+          pinterest: true,
+          twitter: true,
+          linkedIn: true,
         },
         globalContent: {
           headlines: {
@@ -130,12 +128,43 @@ describe('When the share bar is shown', () => {
       websiteName: 'The Sun',
     }));
 
+    const { default: ShareBar } = require('./default');
     window.open = jest.fn();
 
-    const wrapper = mount(<ShareBar />);
-    wrapper.find({ title: 'facebook' }).simulate('click');
-    expect(window.location.origin).toEqual('http://localhost');
-    expect(window.open).toBeCalled();
+    it('should open a new window when facebook button is clicked', () => {
+      const wrapper = mount(<ShareBar />);
+      wrapper.find({ title: 'facebook' }).simulate('click');
+      expect(window.location.origin).toEqual('http://localhost');
+      expect(window.open).toBeCalled();
+    });
+
+    it('should open a new window when linkedIn button is clicked', () => {
+      const wrapper = mount(<ShareBar />);
+      wrapper.find({ title: 'linkedIn' }).simulate('click');
+      expect(window.location.origin).toEqual('http://localhost');
+      expect(window.open).toBeCalled();
+    });
+
+    it('should open a new window when email button is clicked', () => {
+      const wrapper = mount(<ShareBar />);
+      wrapper.find({ title: 'email' }).simulate('click');
+      expect(window.location.origin).toEqual('http://localhost');
+      expect(window.open).toBeCalled();
+    });
+
+    it('should open a new window when pinterest button is clicked', () => {
+      const wrapper = mount(<ShareBar />);
+      wrapper.find({ title: 'pinterest' }).simulate('click');
+      expect(window.location.origin).toEqual('http://localhost');
+      expect(window.open).toBeCalled();
+    });
+
+    it('should open a new window when twitter button is clicked', () => {
+      const wrapper = mount(<ShareBar />);
+      wrapper.find({ title: 'twitter' }).simulate('click');
+      expect(window.location.origin).toEqual('http://localhost');
+      expect(window.open).toBeCalled();
+    });
   });
 
   it('should work with a keypress', () => {

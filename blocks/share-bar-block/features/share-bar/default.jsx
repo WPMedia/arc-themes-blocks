@@ -117,11 +117,26 @@ ShareBar.label = 'Share Bar – Arc Block';
 
 ShareBar.propTypes = {
   customFields: PropTypes.shape({
-    facebook: PropTypes.bool,
-    twitter: PropTypes.bool,
-    pinterest: PropTypes.bool,
-    linkedIn: PropTypes.bool,
-    email: PropTypes.bool,
+    email: PropTypes.bool.tag({
+      label: 'Email',
+      defaultValue: true,
+    }),
+    facebook: PropTypes.bool.tag({
+      label: 'Facebook',
+      defaultValue: true,
+    }),
+    pinterest: PropTypes.bool.tag({
+      label: 'Pinterest',
+      defaultValue: true,
+    }),
+    twitter: PropTypes.bool.tag({
+      label: 'Twitter',
+      defaultValue: true,
+    }),
+    linkedIn: PropTypes.bool.tag({
+      label: 'LinkedIn',
+      defaultValue: true,
+    }),
   }),
 };
 

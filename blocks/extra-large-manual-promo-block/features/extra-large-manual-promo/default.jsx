@@ -38,84 +38,87 @@ const ExtraLargeManualPromo = ({ customFields }) => {
   });
 
   return (customFields.linkURL ? (
-    <article className="container-fluid xl-large-promo">
-      <div className="row xl-promo-padding-bottom">
-        {(customFields.showHeadline || customFields.showDescription
-          || customFields.showOverline)
-        && (
-          <div className="col-sm-xl-12 flex-col">
-            {(customFields.showOverline && customFields.overline && customFields.overlineURL)
-            && (
-              <OverlineLink
-                href={customFields.overlineURL}
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                className="overline"
-              >
-                {customFields.overline}
-              </OverlineLink>
-            )}
-            {((customFields.showOverline && customFields.overline) && !customFields.overlineURL)
-            && (
-              <OverlineHeader
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                className="overline"
-              >
-                {customFields.overline}
-              </OverlineHeader>
-            )}
-            {(customFields.showHeadline && customFields.headline)
-            && (
-              <a
-                href={customFields.linkURL}
-                className="xl-promo-headline"
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer' : ''}
-              >
-                <HeadlineText
-                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                  className="xl-promo-headline"
+    <>
+      <article className="container-fluid xl-large-promo xl-large-manual-promo">
+        <div className="row">
+          {(customFields.showHeadline || customFields.showDescription
+            || customFields.showOverline)
+          && (
+            <div className="col-sm-xl-12 flex-col">
+              {(customFields.showOverline && customFields.overline && customFields.overlineURL)
+              && (
+                <OverlineLink
+                  href={customFields.overlineURL}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  className="overline"
                 >
-                  {customFields.headline}
-                </HeadlineText>
-              </a>
-            )}
-            {(customFields.showImage && customFields.imageURL)
-            && (
-              <a
-                href={customFields.linkURL}
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer' : ''}
-              >
-                <Image
-                  url={customFields.imageURL}
-                  alt={customFields.headline}
-                  smallWidth={400}
-                  smallHeight={300}
-                  mediumWidth={600}
-                  mediumHeight={450}
-                  largeWidth={800}
-                  largeHeight={600}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                  resizedImageOptions={resizedImageOptions}
-                />
-              </a>
-            )}
-            {(customFields.showDescription && customFields.description)
-            && (
-              <DescriptionText
-                secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                className="description-text"
-              >
-                {customFields.description}
-              </DescriptionText>
-            )}
-          </div>
-        )}
-      </div>
-    </article>
+                  {customFields.overline}
+                </OverlineLink>
+              )}
+              {((customFields.showOverline && customFields.overline) && !customFields.overlineURL)
+              && (
+                <OverlineHeader
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  className="overline"
+                >
+                  {customFields.overline}
+                </OverlineHeader>
+              )}
+              {(customFields.showHeadline && customFields.headline)
+              && (
+                <a
+                  href={customFields.linkURL}
+                  className="xl-promo-headline"
+                  title={customFields.headline}
+                  target={customFields.newTab ? '_blank' : '_self'}
+                  rel={customFields.newTab ? 'noreferrer' : ''}
+                >
+                  <HeadlineText
+                    primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                    className="xl-promo-headline"
+                  >
+                    {customFields.headline}
+                  </HeadlineText>
+                </a>
+              )}
+              {(customFields.showImage && customFields.imageURL)
+              && (
+                <a
+                  href={customFields.linkURL}
+                  title={customFields.headline}
+                  target={customFields.newTab ? '_blank' : '_self'}
+                  rel={customFields.newTab ? 'noreferrer' : ''}
+                >
+                  <Image
+                    url={customFields.imageURL}
+                    alt={customFields.headline}
+                    smallWidth={400}
+                    smallHeight={300}
+                    mediumWidth={600}
+                    mediumHeight={450}
+                    largeWidth={800}
+                    largeHeight={600}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                    resizedImageOptions={resizedImageOptions}
+                  />
+                </a>
+              )}
+              {(customFields.showDescription && customFields.description)
+              && (
+                <DescriptionText
+                  secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+                  className="description-text"
+                >
+                  {customFields.description}
+                </DescriptionText>
+              )}
+            </div>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   ) : null);
 };
 

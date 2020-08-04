@@ -113,4 +113,9 @@ describe('the large promo feature', () => {
     const wrapper = mount(<LargeManualPromo customFields={noHeadlineConfig} />);
     expect(wrapper.find('a')).toHaveLength(1);
   });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<LargeManualPromo customFields={config} />);
+    expect(wrapper.find('LargeManualPromo > hr')).toHaveLength(1);
+  });
 });

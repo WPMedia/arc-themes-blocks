@@ -11,7 +11,6 @@
       text-align: right;
     }
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      box-shadow: none;
       display: inline-block;
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
     }
@@ -25,6 +24,14 @@
         }
       }
     }
+
+    &.wrap-bottom {
+      margin-bottom: 0 !important;
+
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        margin-bottom: inherit;
+      }
+    }
   }
 
   .small-promo-padding {
@@ -32,5 +39,9 @@
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding-right: map-get($spacers, 'md');
     }
+  }
+
+  &.wrap-bottom {
+    margin-bottom: inherit !important;
   }
 }

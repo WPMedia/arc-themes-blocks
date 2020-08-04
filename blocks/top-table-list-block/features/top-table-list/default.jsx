@@ -165,7 +165,7 @@ const TopTableList = (props) => {
   }, []);
 
   return (
-    <div key={id} className="top-table-list-container layout-section">
+    <div key={id} className="top-table-list-container layout-section wrap-bottom">
       {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
         const {
           id: itemId,
@@ -208,7 +208,6 @@ const TopTableList = (props) => {
           />
         );
       })}
-      { small > 0 && <hr /> }
     </div>
   );
 };

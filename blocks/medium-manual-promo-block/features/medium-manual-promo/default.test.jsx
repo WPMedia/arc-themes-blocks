@@ -100,4 +100,9 @@ describe('the medium promo feature', () => {
     const wrapper = mount(<MediumManualPromo customFields={noHeadlineConfig} />);
     expect(wrapper.find('a')).toHaveLength(1);
   });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<MediumManualPromo customFields={config} />);
+    expect(wrapper.find('MediumManualPromo > hr')).toHaveLength(1);
+  });
 });

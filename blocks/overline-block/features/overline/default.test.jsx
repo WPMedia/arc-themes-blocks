@@ -84,6 +84,63 @@ describe('overline feature for default output type', () => {
       });
     });
 
+    describe('when label.basic.url is missing', () => {
+      beforeEach(() => {
+        const labelObj = {
+          label: { basic: { display: true, text: 'EXCLUSIVE' } },
+        };
+        const contextObjWithLabel = {
+          ...mockContextObj,
+          globalContent: {
+            ...labelObj,
+            ...mockContextObj.globalContent,
+          },
+        };
+        useFusionContext.mockImplementation(() => contextObjWithLabel);
+      });
+
+      it('should display the label name instead of the website section name', () => {
+        const wrapper = shallow(<Overline />);
+
+        expect(wrapper.text()).toMatch('EXCLUSIVE');
+      });
+
+      it('should render as text', () => {
+        const wrapper = shallow(<Overline />);
+
+        expect(wrapper.at(0).prop('className')).toEqual('overline');
+        expect(wrapper.at(0).prop('href')).toBeFalsy();
+      });
+    });
+
+    describe('when label.basic.url is empty', () => {
+      beforeEach(() => {
+        const labelObj = {
+          label: { basic: { display: true, text: 'EXCLUSIVE', url: '' } },
+        };
+        const contextObjWithLabel = {
+          ...mockContextObj,
+          globalContent: {
+            ...labelObj,
+            ...mockContextObj.globalContent,
+          },
+        };
+        useFusionContext.mockImplementation(() => contextObjWithLabel);
+      });
+
+      it('should display the label name instead of the website section name', () => {
+        const wrapper = shallow(<Overline />);
+        expect(wrapper.text()).toMatch('EXCLUSIVE');
+      });
+
+      it('should render as text', () => {
+        const wrapper = shallow(<Overline />);
+
+        expect(wrapper.at(0).prop('className')).toEqual('overline');
+        expect(wrapper.at(0).prop('href')).toBeFalsy();
+      });
+    });
+
     describe('when label.basic.display is NOT true', () => {
       beforeEach(() => {
         const labelObj = {
@@ -126,8 +183,8 @@ describe('overline feature for default output type', () => {
     });
   });
 
-  describe('when a link is not missing a trailing slash', () => {
-    beforeEach(() => {
+  describe('when a link is rendered', () => {
+    it('should not add a slash at the end of the link if already has one', () => {
       const mockTrailingSlash = {
         arcSite: 'site',
         globalContent: {
@@ -142,11 +199,69 @@ describe('overline feature for default output type', () => {
         },
       };
       useFusionContext.mockImplementation(() => mockTrailingSlash);
-    });
-    it('should not add a slash at the end of the link', () => {
       const wrapper = shallow(<Overline />);
 
       expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
+    });
+
+    it('should add a slash at the end of the link', () => {
+      const mockTrailingSlash = {
+        arcSite: 'site',
+        globalContent: {
+          websites: {
+            site: {
+              website_section: {
+                _id: '/test',
+                name: 'Test',
+              },
+            },
+          },
+        },
+      };
+      useFusionContext.mockImplementation(() => mockTrailingSlash);
+      const wrapper = shallow(<Overline />);
+
+      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
+    });
+
+    it('should not add a slash at the end of the link with query params', () => {
+      const mockTrailingSlash = {
+        arcSite: 'site',
+        globalContent: {
+          websites: {
+            site: {
+              website_section: {
+                _id: '/test?query=a',
+                name: 'Test',
+              },
+            },
+          },
+        },
+      };
+      useFusionContext.mockImplementation(() => mockTrailingSlash);
+      const wrapper = shallow(<Overline />);
+
+      expect(wrapper.at(0).prop('href')).toStrictEqual('/test?query=a');
+    });
+
+    it('should not add a slash at the end of the link with hash params', () => {
+      const mockTrailingSlash = {
+        arcSite: 'site',
+        globalContent: {
+          websites: {
+            site: {
+              website_section: {
+                _id: '/test/page#section',
+                name: 'Test',
+              },
+            },
+          },
+        },
+      };
+      useFusionContext.mockImplementation(() => mockTrailingSlash);
+      const wrapper = shallow(<Overline />);
+
+      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/page#section');
     });
   });
 });

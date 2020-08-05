@@ -69,8 +69,9 @@ describe('the full author bio block', () => {
 
     it('should render a p', () => {
       const wrapper = mount(<FullAuthorBio />);
-
-      expect(wrapper.find('.author-content > p')).toHaveClassName('author-bio');
+      const bio = wrapper.find('.author-content > p');
+      expect(bio).toHaveClassName('author-bio');
+      expect(bio.text()).toMatch('She works on Arc Themes');
     });
 
     it('should render a photo', () => {
@@ -93,6 +94,7 @@ describe('the full author bio block', () => {
               byline: 'Jane Da Doe',
               role: 'Senior Product Manager',
               image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              resized_params: { '158x158': '' },
               email: 'jane@doe.com',
               facebook: 'https://facebook.com/janedoe',
               rss: 'somersslink',
@@ -107,8 +109,43 @@ describe('the full author bio block', () => {
 
     it('should render a short bio', () => {
       const wrapper = mount(<FullAuthorBio />);
+      const bio = wrapper.find('.author-content > p');
+      expect(bio).toHaveClassName('author-bio');
+      expect(bio.text()).toMatch('short bio');
+    });
+  });
 
-      expect(wrapper.find('.author-content > p')).toHaveClassName('author-bio');
+  describe('when there is only a long bio', () => {
+    beforeEach(() => {
+      useFusionContext.mockImplementation(() => ({
+        arcSite: 'no-site',
+        globalContent: {
+          authors: [
+            {
+              _id: 'janedoe',
+              firstName: 'Jane',
+              lastName: 'Doe',
+              byline: 'Jane Da Doe',
+              role: 'Senior Product Manager',
+              image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              resized_params: { '158x158': '' },
+              email: 'jane@doe.com',
+              facebook: 'https://facebook.com/janedoe',
+              rss: 'somersslink',
+              twitter: 'janedoe',
+              longBio: 'Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ',
+              instagram: 'janedoe',
+            },
+          ],
+        },
+      }));
+    });
+
+    it('should render a short bio', () => {
+      const wrapper = mount(<FullAuthorBio />);
+      const bio = wrapper.find('.author-content > p');
+      expect(bio).toHaveClassName('author-bio');
+      expect(bio.text()).toMatch('Long bio');
     });
   });
 

@@ -105,7 +105,13 @@ const ConditionalStoryItem = (props) => {
           imageRatio={customFields.imageRatioMD}
         />
       );
-    case SMALL:
+    case SMALL: {
+      let hasPaddingRight = false;
+      if ((typeof customFields.storiesPerRowSM === 'undefined') || (customFields.storiesPerRowSM === 2)) {
+        hasPaddingRight = (
+          index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)
+        ) % 2 === 0;
+      }
       return (
         <ItemTitleWithRightImage
           primaryFont={primaryFont}
@@ -119,12 +125,11 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
-          paddingRight={
-            (index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)) % 2 === 0
-          }
+          paddingRight={hasPaddingRight}
           imageRatio={customFields.imageRatioSM}
         />
       );
+    }
     default:
       // don't render if no size
       return null;

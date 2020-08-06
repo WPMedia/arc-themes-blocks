@@ -83,7 +83,7 @@ describe('conditional story item', () => {
     expect(wrapper.is('VerticalOverlineImageStoryItem')).toBeTruthy();
   });
 
-  it.only('renders a small component with padding if storiesPerRowSM is 2 and the position is even', () => {
+  it('renders a small component with padding if storiesPerRowSM is 2 and the position is even', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');
 
     const storySize = SMALL;
@@ -108,7 +108,7 @@ describe('conditional story item', () => {
     expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
   });
 
-  it.only('renders a small component with padding if storiesPerRowSM is undefined and the position is even', () => {
+  it('renders a small component with padding if storiesPerRowSM is undefined and the position is even', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');
 
     const storySize = SMALL;
@@ -132,7 +132,7 @@ describe('conditional story item', () => {
     expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
   });
 
-  it.only('renders a small component without padding if storiesPerRowSM is 1', () => {
+  it('renders a small component without padding if storiesPerRowSM is 1', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');
 
     const storySize = SMALL;

@@ -4,11 +4,7 @@
   "description": "Fusion News Theme alert bar block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-<<<<<<< HEAD
   "license": "CC-BY-NC-ND-4.0",
-=======
-  "license": "CC-BY-NC-ND",
->>>>>>> rc
   "main": "index.js",
   "files": [
     "features"

@@ -22,9 +22,11 @@ const ItemTitleWithRightImage = (props) => {
   } = props;
 
   const ratios = ratiosFor('SM', imageRatio);
+  const onePerLine = customFields.storiesPerRowSM === 1;
+  const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
 
   return (
-    <article key={id} className={`container-fluid small-promo ${paddingRight ? 'small-promo-padding' : ''}`}>
+    <article key={id} className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}>
       <div className="row sm-promo-padding-btm">
         {customFields.showHeadlineSM && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">
@@ -72,6 +74,7 @@ const ItemTitleWithRightImage = (props) => {
           </div>
           )}
       </div>
+      <hr />
     </article>
   );
 };

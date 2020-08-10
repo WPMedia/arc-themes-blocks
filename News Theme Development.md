@@ -178,24 +178,7 @@ For more information, see the repo's read me:
 Note: When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.
 
-#### How To Publish
-
----
-NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
-
-`rm -rf node_modules/`
-
-`npm i`
-
-`npx lerna clean`
-
-If this does happen, you can use `from-package` syntax in lerna [docs](https://github.com/lerna/lerna/tree/master/commands/publish#bump-from-package). Everything will be alright.
-
-To doublecheck yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work. 
-
-WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
-
----
+### Development Process
 
 1. Pull the latest `staging` branch:
 
@@ -213,34 +196,81 @@ git checkout -b PEN-[jira ticket num]-[brief description of feature]
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
 4. Make pull request using Github against the `staging` branch. Get approval for your pr on your feature branch.
 5. Merge the PR into the `staging` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
-6. When you're ready to start the production release process, you'll want to make prerelease (`beta`) builds of the blocks. Start by running the below command to publish packages with the `beta` dist-tag:
+
+
+#### How To Publish
+
+Before publishing, make sure a Pull Request has been made and merged from the `staging` branch against the `rc` branch. This PR should only include features that belong to the current release, so make sure to merge as soon as the features for the release have been completed to avoid including further features from `staging` belonging to a later release.
+
+---
+NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
+
+`rm -rf node_modules/`
+
+`npm i`
+
+`npx lerna clean`
+
+If this does happen, you can use `from-package` syntax in lerna [docs](https://github.com/lerna/lerna/tree/master/commands/publish#bump-from-package). Everything will be alright.
+
+To double check yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work. 
+
+WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
+
+---
+
+1. Pull the latest `rc` branch:
+
+```sh
+git checkout rc
+git fetch -a
+```
+
+2. When you're ready to start the production release process, you'll want to make prerelease (`beta`) builds of the blocks. Start by running the below command to publish packages with the `beta` dist-tag:
 
 ```sh
 npx lerna publish --force-publish --preid beta --pre-dist-tag beta
 ```
 
-7. Select either `prepatch`, `preminor`, or `premajor` if this is the first prerelease build for this production release (e.g. `-beta.0`). If this is a prerelease that makes changes on top of a prior prerelease then select the `Custom Prerelease` option and accept the default, this should result in the version having only an incremented prerelease number instead of an incremented major, minor, or patch number (e.g `-beta.1`). Note that this will publish all packages to aid our block installer process.
-8. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
-9. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `staging` into `master`.
-10. Then, in `master`, you can publish a production release with the following command:
+3. Select either `prepatch`, `preminor`, or `premajor` if this is the first prerelease build for this production release (e.g. `-beta.0`). If this is a prerelease that makes changes on top of a prior prerelease then select the `Custom Prerelease` option and accept the default, this should result in the version having only an incremented prerelease number instead of an incremented major, minor, or patch number (e.g `-beta.1`). Note that this will publish all packages to aid our block installer process.
+4. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
+5. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `rc` into `master`.
+6. Then, in `master`, you can publish a production release with the following command:
 
 ```sh
 npx lerna publish --conventional-commits --conventional-graduate
 ```
 
-11. After publishing from the `master` branch, merge `master` into `staging` so that the changes related to the publish we just did end up in both of those branches.
+7. After publishing from the `master` branch, merge `master` into `rc` and `rc` into `staging` so that the changes related to the publish we just did end up in both of those branches.
 
+Merging `rc`
 ```sh
 # Ensure we're on the master branch
 git checkout master
 # Ensure we have the latest from master
 git pull origin master
+# Checkout rc
+git checkout rc
+# Ensure we have the latest from rc
+git pull origin rc
+# Rebase rc onto master
+git rebase master
+# Push the updated rc branch (--force is required or else it will fail)
+git push --force origin rc
+```
+
+Merging `staging`
+```sh
+# Ensure we're on the rc branch
+git checkout rc
+# Ensure we have the latest from rc
+git pull origin rc
 # Checkout staging
 git checkout staging
 # Ensure we have the latest from staging
 git pull origin staging
-# Rebase staging onto master
-git rebase master
+# Rebase staging onto rc
+git rebase rc
 # Push the updated staging branch (--force is required or else it will fail)
 git push --force origin staging
 ```

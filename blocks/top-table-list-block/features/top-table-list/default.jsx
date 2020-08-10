@@ -128,6 +128,7 @@ const TopTableList = (props) => {
       large = 0,
       medium = 0,
       small = 0,
+      storiesPerRowSM,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -164,8 +165,10 @@ const TopTableList = (props) => {
     return acc;
   }, []);
 
+  const onePerLine = storiesPerRowSM === 1;
+
   return (
-    <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
+    <div key={id} className={`top-table-list-container layout-section ${onePerLine ? '' : 'wrap-bottom'}`}>
       {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
         const {
           id: itemId,
@@ -325,6 +328,11 @@ TopTableListWrapper.propTypes = {
       group: 'Small story settings',
     }),
     ...imageRatioCustomField('imageRatioSM', 'Small story settings', '3:2'),
+    storiesPerRowSM: PropTypes.oneOf([1, 2]).tag({
+      name: 'Stories per row',
+      defaultValue: 2,
+      group: 'Small story settings',
+    }),
   }),
 };
 

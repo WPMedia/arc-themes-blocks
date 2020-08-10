@@ -102,42 +102,44 @@ describe('the SectionNav component', () => {
   it('should render the text for a section node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > Link > a').at(0)).toIncludeText('Sports');
+    expect(wrapper.find('li.section-item').at(0).find('Link > a').at(0)).toIncludeText('Sports');
   });
 
   it('should render the href for a section node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > Link > a').at(0)).toHaveProp('href', '/sports/');
+    expect(wrapper.find('li.section-item').at(0).find('Link > a').at(0)).toHaveProp('href', '/sports/');
   });
 
   it('should render the text for a link node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > Link').at(1)).toIncludeText('Entertainment');
+    expect(wrapper.find('li.section-item').at(1).find('Link > a')).toIncludeText('Entertainment');
   });
 
   it('should render the href for a link node correctly', () => {
     const wrapper = mount(<SectionNav sections={items} />);
 
-    expect(wrapper.find('li.section-item > Link > a').at(1)).toHaveProp('href', '/entertainment/');
+    expect(wrapper.find('li.section-item').at(1).find('Link > a')).toHaveProp('href', '/entertainment/');
   });
 
   it('should render the href for a link without a final slash if has a query parameter', () => {
     const wrapper = mount(<SectionNav sections={items} />);
+    const section = wrapper.find('li.section-item');
 
-    expect(wrapper.find('li.section-item > Link > a').at(3)).toHaveProp('href', 'http://washingtonpost.com/entertainment/?test=2&foo=bar');
-    expect(wrapper.find('li.section-item > Link > a').at(4)).toHaveProp('href', '/entertainment/?test=1');
-    expect(wrapper.find('li.section-item > Link > a').at(5)).toHaveProp('href', 'https://example.com/category/page.html');
-    expect(wrapper.find('li.section-item > Link > a').at(6)).toHaveProp('href', '/entertainment/page#myhash');
-    expect(wrapper.find('li.section-item > Link > a').at(7)).toHaveProp('href', 'mailto:readers@washpost.com');
+    expect(section.at(3).find('Link > a')).toHaveProp('href', 'http://washingtonpost.com/entertainment/?test=2&foo=bar');
+    expect(section.at(4).find('Link > a')).toHaveProp('href', '/entertainment/?test=1');
+    expect(section.at(5).find('Link > a')).toHaveProp('href', 'https://example.com/category/page.html');
+    expect(section.at(6).find('Link > a')).toHaveProp('href', '/entertainment/page#myhash');
+    expect(section.at(7).find('Link > a')).toHaveProp('href', 'mailto:readers@washpost.com');
   });
 
   describe('when a section has child nodes', () => {
     it('should render a .submenu-caret element inside the anchor tag', () => {
       const wrapper = mount(<SectionNav sections={items} />);
+      const section = wrapper.find('li.section-item').at(0);
 
-      expect(wrapper.find('li.section-item > Link > a > span.submenu-caret').at(0)).toHaveLength(1);
+      expect(section.find('.subsection-anchor .submenu-caret').at(0)).toHaveLength(1);
     });
 
     it('should render a .subsection-container', () => {
@@ -168,9 +170,10 @@ describe('the SectionNav component', () => {
 
     it('should render target and rel attribute for external links', () => {
       const wrapper = mount(<SectionNav sections={items} />);
+      const section = wrapper.find('li.section-item').at(3);
 
-      expect(wrapper.find('li.section-item > Link > a').at(2)).toHaveProp('target', '_blank');
-      expect(wrapper.find('li.section-item > Link > a').at(2)).toHaveProp('rel', 'noopener noreferrer');
+      expect(section.find('Link > a')).toHaveProp('target', '_blank');
+      expect(section.find('Link > a')).toHaveProp('rel', 'noopener noreferrer');
     });
   });
 

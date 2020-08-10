@@ -4,7 +4,7 @@
   "description": "Fusion News Theme footer block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "features",
@@ -13,7 +13,7 @@
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/links-bar-block": "latest",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/news-theme-css": "^3.0.0",
     "styled-components": "^4.4.0"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"

@@ -140,59 +140,62 @@ const ExtraLargePromo = ({ customFields }) => {
   const ratios = ratiosFor('XL', customFields.imageRatio);
 
   return content && (
-    <article className="container-fluid xl-large-promo">
-      <div className="row xl-promo-padding-bottom">
-        {(customFields.showHeadline || customFields.showDescription
-          || customFields.showByline || customFields.showDate)
-        && (
-          <div className="col-sm-xl-12 flex-col">
-            {overlineTmpl()}
-            {headlineTmpl()}
-            {customFields.showImage
-            && (
-              <a
-                href={content.website_url}
-                title={content && content.headlines ? content.headlines.basic : ''}
-              >
-                {customFields.imageOverrideURL || extractImage(content.promo_items)
-                  ? (
-                    <Image
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                      alt={content && content.headlines ? content.headlines.basic : ''}
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
-                      // todo: this should have resized params
-                    />
-                  )
-                  : (
-                    <PlaceholderImage
-                      smallWidth={ratios.smallWidth}
-                      smallHeight={ratios.smallHeight}
-                      mediumWidth={ratios.mediumWidth}
-                      mediumHeight={ratios.mediumHeight}
-                      largeWidth={ratios.largeWidth}
-                      largeHeight={ratios.largeHeight}
-                    />
-                  )}
-              </a>
-            )}
-            {descriptionTmpl()}
-            <div className="article-meta">
-              {byLineTmpl()}
-              {dateTmpl()}
+    <>
+      <article className="container-fluid xl-large-promo">
+        <div className="row">
+          {(customFields.showHeadline || customFields.showDescription
+            || customFields.showByline || customFields.showDate)
+          && (
+            <div className="col-sm-xl-12 flex-col">
+              {overlineTmpl()}
+              {headlineTmpl()}
+              {customFields.showImage
+              && (
+                <a
+                  href={content.website_url}
+                  title={content && content.headlines ? content.headlines.basic : ''}
+                >
+                  {customFields.imageOverrideURL || extractImage(content.promo_items)
+                    ? (
+                      <Image
+                        url={customFields.imageOverrideURL
+                          ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                        alt={content && content.headlines ? content.headlines.basic : ''}
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                        resizedImageOptions={extractResizedParams(content)}
+                        // todo: this should have resized params
+                      />
+                    )
+                    : (
+                      <PlaceholderImage
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                      />
+                    )}
+                </a>
+              )}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </article>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   );
 };
 

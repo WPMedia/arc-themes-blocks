@@ -4,33 +4,77 @@ import Link from './link';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
 
-const SectionItem = ({ item }) => {
-  const child = (hasChildren(item)
-  && (
+const SectionAnchor = ({ item }) => (
+  item.node_type === 'link'
+    ? <Link href={item.url} name={item.display_name} />
+    : <Link href={item._id} name={item.name} />
+);
+
+const onClickSubsection = (evt) => {
+  const t = evt.target;
+  if (t.nodeName === 'A') {
+    return;
+  }
+
+  const container = t.closest('.subsection-anchor');
+  const subsection = container.nextElementSibling;
+  const css = container.classList;
+  if (css.contains('open')) {
+    css.remove('open');
+    subsection.classList.remove('open');
+  } else {
+    css.add('open');
+    subsection.classList.add('open');
+  }
+  evt.stopPropagation();
+};
+
+const isSamePath = (current, menuLink) => {
+  if (current && menuLink) {
+    return current.split('/')[1] === menuLink.split('/')[1];
+  }
+  return false;
+};
+
+/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
+const SubSectionAnchor = ({ item, isOpen }) => (
+  <div className={`subsection-anchor ${isOpen ? 'open' : ''}`} onClick={onClickSubsection}>
+    <SectionAnchor item={item} />
     <span className="submenu-caret">
-      <ChevronRight fill="rgba(255, 255, 255, 0.5)" height={12} width={12} />
+      <ChevronRight height={24} width={24} />
     </span>
-  ));
+  </div>
+);
+/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
+
+const SectionItem = ({ item }) => {
+  let currentLocation;
+  if (typeof window !== 'undefined') {
+    currentLocation = window.location.pathname;
+  }
+  const isOpen = isSamePath(currentLocation, item._id) ? 'open' : '';
+
   return (
     <li className="section-item">
-      {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} />
-        : <Link href={item._id} name={item.name} child={child} />}
-      {hasChildren(item) && <SubSectionMenu items={item.children} />}
+      { hasChildren(item)
+        ? <SubSectionAnchor item={item} isOpen={isOpen} />
+        : <SectionAnchor item={item} /> }
+      {hasChildren(item) && <SubSectionMenu items={item.children} isOpen={isOpen} />}
     </li>
   );
 };
 
-const SubSectionMenu = ({ items }) => {
+const SubSectionMenu = ({ items, isOpen }) => {
   const itemsList = items.map((item) => (
     <li className="subsection-item" key={item._id}>
-      {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} />
+      {item.node_type === 'link'
+        ? <Link href={item.url} name={item.display_name} />
         : <Link href={item._id} name={item.name} />}
     </li>
   ));
 
   return (
-    <div className="subsection-container">
-      <span className="arrow-left" />
+    <div className={`subsection-container ${isOpen ? 'open' : ''}`}>
       <ul className="subsection-menu">{itemsList}</ul>
     </div>
   );

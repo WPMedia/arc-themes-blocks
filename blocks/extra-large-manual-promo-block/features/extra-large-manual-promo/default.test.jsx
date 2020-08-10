@@ -66,4 +66,9 @@ describe('the extra large promo feature', () => {
     const wrapper = mount(<ExtraLargeManualPromo customFields={noImgConfig} />);
     expect(wrapper.find('Image')).toHaveLength(0);
   });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<ExtraLargeManualPromo customFields={config} />);
+    expect(wrapper.find('ExtraLargeManualPromo > hr')).toHaveLength(1);
+  });
 });

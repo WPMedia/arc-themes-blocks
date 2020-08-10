@@ -22,7 +22,8 @@ const ItemTitleWithRightImage = (props) => {
   } = props;
 
   const ratios = ratiosFor('SM', imageRatio);
-  const promoClasses = 'container-fluid small-promo layout-section wrap-bottom';
+  const onePerLine = customFields.storiesPerRowSM === 1;
+  const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
 
   return (
     <article key={id} className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}>

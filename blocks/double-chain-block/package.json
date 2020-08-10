@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^3.0.0"
+    "@wpmedia/news-theme-css": "stable"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

@@ -15,15 +15,15 @@ const TripleChain = ({ children, customFields }) => {
       const endOfColumnTwoIndex = columnOneLength + columnTwoLength;
 
       return (
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
+        <div className="container-fluid triple-chain chain-container">
+          <div className="row wrap-bottom">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
               {children.slice(0, columnOneLength)}
             </div>
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
               {children.slice(columnOneLength, endOfColumnTwoIndex)}
             </div>
-            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap">
+            <div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
               {children.slice(endOfColumnTwoIndex)}
             </div>
           </div>

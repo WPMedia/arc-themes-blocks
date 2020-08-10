@@ -87,6 +87,8 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
     expect(wrapper.props().websiteURL).toBe('url');
     expect(wrapper.find('a.lg-promo-headline').props().href).toBe(websiteURL);
+
+    expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
   it('renders with empty props with defaults', () => {
     jest.mock('fusion:context', () => ({
@@ -153,5 +155,7 @@ describe('horizontal overline image story item', () => {
 
     // finds default spacing for headline descriptions
     // expect(wrapper.find('.headline-description-spacing').length).toBe(1);
+
+    expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
 });

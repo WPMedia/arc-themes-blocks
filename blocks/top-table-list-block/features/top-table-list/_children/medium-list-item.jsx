@@ -81,61 +81,64 @@ const MediumListItem = (props) => {
   const ratios = ratiosFor('MD', imageRatio);
 
   return (
-    <article className="container-fluid medium-promo" key={id}>
-      <div className="row med-promo-padding-bottom">
-        {customFields.showImageMD
-          && (
-          <div className="col-sm-12 col-md-xl-4">
-            <a href={websiteURL} title={itemTitle}>
-              {imageURL !== '' ? (
-                <Image
-                  resizedImageOptions={resizedImageOptions}
-                  url={imageURL}
-                  // todo: get the proper alt tag for this image
-                  // 16:9 aspect for medium
-                  alt={itemTitle}
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
-              ) : (
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
+    <>
+      <article className="container-fluid medium-promo" key={id}>
+        <div className="row med-promo-padding-bottom">
+          {customFields.showImageMD
+            && (
+            <div className="col-sm-12 col-md-xl-4">
+              <a href={websiteURL} title={itemTitle}>
+                {imageURL !== '' ? (
+                  <Image
+                    resizedImageOptions={resizedImageOptions}
+                    url={imageURL}
+                    // todo: get the proper alt tag for this image
+                    // 16:9 aspect for medium
+                    alt={itemTitle}
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                ) : (
+                  <Image
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
 
-                />
-              )}
-            </a>
-          </div>
-          )}
-        {(customFields.showHeadlineMD || customFields.showDescriptionMD
-              || customFields.showBylineMD || customFields.showDateMD)
-          && (
-          <div className={textClass}>
-            {headlineTmpl()}
-            {descriptionTmpl()}
-            <div className="article-meta">
-              {byLineTmpl()}
-              {dateTmpl()}
+                  />
+                )}
+              </a>
             </div>
-          </div>
-          )}
-      </div>
-    </article>
+            )}
+          {(customFields.showHeadlineMD || customFields.showDescriptionMD
+                || customFields.showBylineMD || customFields.showDateMD)
+            && (
+            <div className={textClass}>
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
+            </div>
+            )}
+        </div>
+      </article>
+      <hr />
+    </>
   );
 };
 

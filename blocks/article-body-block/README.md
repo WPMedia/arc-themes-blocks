@@ -1,8 +1,24 @@
 # `@wpmedia/article-body-block`
+_Fusion News Theme article-body block_
 
-Fusion News Theme article-body block
+// TODO: add badge for passing/failing tests
 
-## Translation phrases
+## Acceptance Criteria
+- Add AC relevant to the block
+
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
+
+### ANS Schema
+
+## ANS fields
+- Add all ANS fields used in the block
+
+## Internationalization fields
+- Add all internationalization fields used in the block
 
 | Phrase key | Default (English) |
 |---|---|
@@ -11,14 +27,23 @@ Fusion News Theme article-body block
 |`global.gallery-pause-autoplay-button`|`Autoplay`|
 |`global.gallery-page-count-text`|`Pause autoplay`|
 
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
 
-## Usage
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
 
-```js
-const articleBodyBlock = require('@wpmedia/article-body-block');
-```
+### Event Listening
+Include block specific intructions for event listening.
 
-## Example ANS Schema
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+
+### Example ANS Schema
 
 ```json
 {

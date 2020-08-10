@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/unpublished-content-source-block",
-  "version": "5.3.0",
+  "version": "5.4.0-beta.0",
   "description": "Fusion News Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "contributors": [
@@ -27,6 +27,6 @@
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10"
+    "@wpmedia/engine-theme-sdk": "^2.2.0"
   }
 }

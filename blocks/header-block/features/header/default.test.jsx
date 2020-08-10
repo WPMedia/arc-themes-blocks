@@ -11,7 +11,6 @@ describe('The header block', () => {
     const customFields = {
       text: 'Header',
       size: 'Extra Large',
-      removeBottomPadding: false,
     };
     const wrapper = shallow(<Header customFields={customFields} />);
 
@@ -25,20 +24,7 @@ describe('The header block', () => {
     });
 
     it('should have the appropriate class', () => {
-      expect(wrapper).toHaveProp('className', 'header-block ');
-    });
-  });
-
-  describe('when bottom margin is removed by user', () => {
-    const customFields = {
-      text: 'Header',
-      size: 'Extra Large',
-      removeBottomPadding: true,
-    };
-    const wrapper = shallow(<Header customFields={customFields} />);
-
-    it('should have the appropriate class', () => {
-      expect(wrapper).toHaveProp('className', 'header-block no-bottom-margin');
+      expect(wrapper).toHaveProp('className', 'header-block');
     });
   });
 

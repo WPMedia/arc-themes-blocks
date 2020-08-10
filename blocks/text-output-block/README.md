@@ -1,12 +1,40 @@
 # `@wpmedia/text-output-block`
+_Fusion News Theme text output type. Please provide a 1-2 sentence description of what the block is and what it does._
 
-Fusion News Theme text output type
+## Acceptance Criteria
+- Add AC relevant to the block
 
-## Usage
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
 
-```
-import textOutputBlock from '@wpmedia/text-output-block';
-```
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
 
-Any child feature component that support this output type (`text`) will be rendered.
-Can check `@wpmedia/textfile-block` for a reference implementation.
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
+| Phrase key | Default (English) |
+|---|---|
+|`key`|`english translation`|
+
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
+
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
+
+### Event Listening
+Include block specific intructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+_Any child feature component that support this output type (`text`) will be rendered. Check `@wpmedia/textfile-block` for a reference implementation._

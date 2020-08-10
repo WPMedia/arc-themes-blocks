@@ -52,7 +52,7 @@ const RightRailAdvancedLayout = ({ children }) => {
   const mobileTabletLayout = (
     <>
       <div className="row">
-        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
+        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
           {/* Main Content Area */}
           {rightRailTop}
           {main}
@@ -67,12 +67,12 @@ const RightRailAdvancedLayout = ({ children }) => {
   const desktopLayout = (
     <>
       <div className="row">
-        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
+        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
           {/* Main Content Area */}
           {main}
           {main2}
         </div>
-        <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
+        <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section">
           {/* Right Rail Content Area */}
           {rightRailTop}
           {rightRailMiddle}
@@ -86,16 +86,16 @@ const RightRailAdvancedLayout = ({ children }) => {
     <>
       <header className="page-header">{navigation}</header>
       <section role="main" className="main">
-        <div className="container">
+        <div className="container layout-section">
           <div className="row">
-            <div className="col-sm-xl-12 fullwidth-section horizontal-borders">
+            <div className="col-sm-xl-12 layout-section wrap-bottom">
               {fullwidth1}
             </div>
           </div>
           {isDesktop ? desktopLayout : mobileTabletLayout }
           {featureList['7'] > 0 && (
             <div className="row">
-              <div className="col-sm-xl-12">
+              <div className="col-sm-xl-12 layout-section wrap-bottom">
                 {fullWidth2}
               </div>
             </div>

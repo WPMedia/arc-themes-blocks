@@ -11,12 +11,12 @@ const DoubleChain = ({ children, customFields }) => {
     // check column one length not negative
     if (columnOneLength > 0) {
       return (
-        <div className="container-fluid double-chain">
-          <div className="row">
-            <div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-1 reduce-internal-row-col-gap">
+        <div className="container-fluid double-chain chain-container">
+          <div className="row wrap-bottom">
+            <div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-1 reduce-internal-row-col-gap chain-col">
               {children.slice(0, columnOneLength)}
             </div>
-            <div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-2 reduce-internal-row-col-gap">
+            <div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-2 reduce-internal-row-col-gap chain-col">
               {children.slice(columnOneLength)}
             </div>
           </div>

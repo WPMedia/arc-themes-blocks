@@ -1,11 +1,5 @@
 .xl-large-promo {
-  @include block-margin-bottom;
-  box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   color: $ui-primary-font-color;
-
-  .xl-promo-padding-bottom {
-    padding-bottom: map-get($spacers, 'md');
-  }
 
   a {
     color: $ui-primary-font-color;
@@ -81,5 +75,11 @@
   .flex-col {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.xl-large-manual-promo {
+  .description-text {
+    margin-bottom: 0;
   }
 }

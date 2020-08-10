@@ -139,6 +139,8 @@ Note three things here:
 }
 ```
 
+In addition to updating the package.json, you'll also want to make sure that each package is using the standardized package read me templates so that the documentation for each block is consistent. There are two templates. One focuses on the necessary information for a feature block and one that is tailored towards a content source. Both templates currently exist at the root of this repository and are named `PACKAGE_CS_README_TEMPLATE` for content sources and `PACKAGE_FEATURE_README_TEMPLATE` for features.
+
 Make sure to reorganize the newly created directory in the same way as other blocks. Once that's created, copy the feature folder that you've created/developed from step 1 into the corresponding directory (<block-name>/<features/output-types/layouts/sources>).
 
 ##### Installing `node_modules`

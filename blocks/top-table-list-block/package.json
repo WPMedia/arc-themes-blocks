@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/top-table-list-block",
-  "version": "5.3.0",
+  "version": "5.4.0-beta.0",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -24,8 +24,8 @@
   "dependencies": {
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^2.0.1-beta.10",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/news-theme-css": "^3.0.0",
     "@wpmedia/overline-block": "latest",
     "@wpmedia/placeholder-image-block": "latest",
     "@wpmedia/resizer-image-block": "latest",

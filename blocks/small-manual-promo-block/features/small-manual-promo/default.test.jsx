@@ -92,4 +92,9 @@ describe('the small promo feature', () => {
     const wrapper = mount(<SmallManualPromo customFields={noHeadlineConfig} />);
     expect(wrapper.find('a')).toHaveLength(1);
   });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<SmallManualPromo customFields={config} />);
+    expect(wrapper.find('SmallManualPromo > hr')).toHaveLength(1);
+  });
 });

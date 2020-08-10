@@ -60,7 +60,13 @@ export default ({
   return (
     <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
-      <button className={btnClassNames} onClick={handleClick} onMouseDown={handleSearchBtnMousedown} type="button">
+      <button
+        className={btnClassNames}
+        onClick={handleClick}
+        onMouseDown={handleSearchBtnMousedown}
+        type="button"
+        aria-label={shouldSearchOpen ? "Search the site's content" : 'Open the search input to search the site'}
+      >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>
     </div>

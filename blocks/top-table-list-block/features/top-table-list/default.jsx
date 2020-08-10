@@ -165,7 +165,7 @@ const TopTableList = (props) => {
   }, []);
 
   return (
-    <div key={id} className={`top-table-list-container ${small > 0 ? 'box-shadow-bottom' : ''}`}>
+    <div key={id} className="top-table-list-container layout-section wrap-bottom">
       {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
         const {
           id: itemId,

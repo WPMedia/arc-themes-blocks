@@ -89,6 +89,8 @@ describe('vertical overline image story item', () => {
     expect(wrapper.find('a.xl-promo-headline').length).toBe(1);
     expect(wrapper.props().websiteURL).toBe('url');
     expect(wrapper.find('a.xl-promo-headline').props().href).toBe(websiteURL);
+
+    expect(wrapper.find('VerticalOverlineImageStoryItem > hr').length).toBe(1);
   });
   it('does not render image, overline and byline with empty props', () => {
     jest.mock('fusion:context', () => ({
@@ -155,5 +157,7 @@ describe('vertical overline image story item', () => {
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(0);
     expect(wrapper.props().overlineText).toBe('');
+
+    expect(wrapper.find('VerticalOverlineImageStoryItem > hr').length).toBe(1);
   });
 });

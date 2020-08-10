@@ -100,60 +100,63 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const ratios = ratiosFor('LG', imageRatio);
 
   return (
-    <article key={id} className="container-fluid large-promo">
-      <div className="row lg-promo-padding-bottom">
-        {customFields.showImageLG
-        && (
-        <div className="col-sm-12 col-md-xl-6">
-          {imageURL !== '' ? (
-            <a href={websiteURL} title={itemTitle}>
+    <>
+      <article key={id} className="container-fluid large-promo">
+        <div className="row lg-promo-padding-bottom">
+          {customFields.showImageLG
+          && (
+          <div className="col-sm-12 col-md-xl-6">
+            {imageURL !== '' ? (
+              <a href={websiteURL} title={itemTitle}>
+                <Image
+                  resizedImageOptions={resizedImageOptions}
+                  url={imageURL}
+                  // todo: get the proper alt tag for this image
+                  alt={itemTitle}
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                />
+              </a>
+            ) : (
               <Image
-                resizedImageOptions={resizedImageOptions}
-                url={imageURL}
-                // todo: get the proper alt tag for this image
-                alt={itemTitle}
                 smallWidth={ratios.smallWidth}
                 smallHeight={ratios.smallHeight}
                 mediumWidth={ratios.mediumWidth}
                 mediumHeight={ratios.mediumHeight}
                 largeWidth={ratios.largeWidth}
                 largeHeight={ratios.largeHeight}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                url={targetFallbackImage}
                 breakpoints={getProperties(arcSite)?.breakpoints}
+                resizedImageOptions={placeholderResizedImageOptions}
                 resizerURL={getProperties(arcSite)?.resizerURL}
               />
-            </a>
-          ) : (
-            <Image
-              smallWidth={ratios.smallWidth}
-              smallHeight={ratios.smallHeight}
-              mediumWidth={ratios.mediumWidth}
-              mediumHeight={ratios.mediumHeight}
-              largeWidth={ratios.largeWidth}
-              largeHeight={ratios.largeHeight}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-              url={targetFallbackImage}
-              breakpoints={getProperties(arcSite)?.breakpoints}
-              resizedImageOptions={placeholderResizedImageOptions}
-              resizerURL={getProperties(arcSite)?.resizerURL}
-            />
+            )}
+          </div>
+          )}
+          {(customFields.showHeadlineLG || customFields.showDescriptionLG
+              || customFields.showBylineLG || customFields.showDateLG)
+          && (
+          <div className={textClass}>
+            {overlineTmpl()}
+            {headlineTmpl()}
+            {descriptionTmpl()}
+            <div className="article-meta">
+              {byLineTmpl()}
+              {dateTmpl()}
+            </div>
+          </div>
           )}
         </div>
-        )}
-        {(customFields.showHeadlineLG || customFields.showDescriptionLG
-            || customFields.showBylineLG || customFields.showDateLG)
-        && (
-        <div className={textClass}>
-          {overlineTmpl()}
-          {headlineTmpl()}
-          {descriptionTmpl()}
-          <div className="article-meta">
-            {byLineTmpl()}
-            {dateTmpl()}
-          </div>
-        </div>
-        )}
-      </div>
-    </article>
+      </article>
+      <hr />
+    </>
   );
 };
 

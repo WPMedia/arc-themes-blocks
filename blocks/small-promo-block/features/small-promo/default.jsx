@@ -38,67 +38,70 @@ const SmallPromo = ({ customFields }) => {
   const ratios = ratiosFor('SM', customFields.imageRatio);
 
   return content ? (
-    <article className="container-fluid small-promo">
-      <div className="row sm-promo-padding-btm">
-        {customFields.showHeadline
-        && (
-          <div className={headlineClass}>
-            <a
-              href={content.website_url}
-              className="sm-promo-headline"
-              title={content && content.headlines ? content.headlines.basic : ''}
-            >
-              <HeadlineText
-                primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+    <>
+      <article className="container-fluid small-promo">
+        <div className="row">
+          {customFields.showHeadline
+          && (
+            <div className={headlineClass}>
+              <a
+                href={content.website_url}
                 className="sm-promo-headline"
-                {...editableContent(content, 'headlines.basic')}
-                suppressContentEditableWarning
+                title={content && content.headlines ? content.headlines.basic : ''}
               >
-                {content && content.headlines ? content.headlines.basic : ''}
-              </HeadlineText>
-            </a>
-          </div>
-        )}
-        {customFields.showImage
-        && (
-          <div className="col-sm-xl-4">
-            <a
-              href={content.website_url}
-              title={content && content.headlines ? content.headlines.basic : ''}
-            >
-              {customFields.imageOverrideURL || extractImage(content.promo_items)
-                ? (
-                  <Image
-                    url={customFields.imageOverrideURL
-                      ? customFields.imageOverrideURL : extractImage(content.promo_items)}
-                    alt={content && content.headlines ? content.headlines.basic : ''}
-                    // small should be 3:2 aspect ratio
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                    resizedImageOptions={extractResizedParams(content)}
-                  />
-                )
-                : (
-                  <PlaceholderImage
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                  />
-                )}
-            </a>
-          </div>
-        )}
-      </div>
-    </article>
+                <HeadlineText
+                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  className="sm-promo-headline"
+                  {...editableContent(content, 'headlines.basic')}
+                  suppressContentEditableWarning
+                >
+                  {content && content.headlines ? content.headlines.basic : ''}
+                </HeadlineText>
+              </a>
+            </div>
+          )}
+          {customFields.showImage
+          && (
+            <div className="col-sm-xl-4">
+              <a
+                href={content.website_url}
+                title={content && content.headlines ? content.headlines.basic : ''}
+              >
+                {customFields.imageOverrideURL || extractImage(content.promo_items)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      // small should be 3:2 aspect ratio
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
+                    />
+                  )
+                  : (
+                    <PlaceholderImage
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                    />
+                  )}
+              </a>
+            </div>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   ) : null;
 };
 

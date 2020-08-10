@@ -15,6 +15,9 @@ import mockLeadArtData from './mockLeadArtData';
 import topLeveLeadArt from './topLevelLeadArt';
 import galleryResizeData from './galleryResizeData';
 import searchResultsDataBroken from './searchResultsDataBroken';
+import mockStoryFeedDataEmptyPromo from './mockStoryFeedDataEmptyPromo';
+import mockLeadArtDataEmptyPromo from './mockLeadArtDataEmptyPromo';
+import mockSearchApiDataEmptyPromo from './mockSearchApiDataEmptyPromo';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -284,5 +287,50 @@ describe('get resized image data helper on the server-side', () => {
     const dataWithResizedImages = getResizedImageData('', null, true, true);
     // uses fit in logic
     expect(dataWithResizedImages).toEqual(null);
+  });
+
+  it('returns data passed in if promo_items do not has all the data', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const data = getResizedImageData(mockStoryFeedDataEmptyPromo);
+    expect(data).toEqual(mockStoryFeedDataEmptyPromo);
+  });
+
+  it('get lead art passed in if promo_items do not has all the data', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const leadArtData = getResizedImageData(mockLeadArtDataEmptyPromo);
+    const resizedParams = leadArtData.promo_items
+      .lead_art
+      .promo_items.basic.resized_params;
+
+    expect(typeof resizedParams).toEqual('undefined');
+    expect(leadArtData).toEqual(mockLeadArtDataEmptyPromo);
+  });
+
+  it('takes in search results data object', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const dataSearch = getResizedImageData(mockSearchApiDataEmptyPromo);
+    expect(typeof dataSearch[0].promo_items.basic.resized_params).toEqual('undefined');
+    expect(dataSearch).toEqual(mockSearchApiDataEmptyPromo);
   });
 });

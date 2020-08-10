@@ -131,7 +131,7 @@ class CardList extends React.Component {
                   : ''
               }
               <div
-                className={`list-item-simple ${contentElements.length > 1 ? 'list-item-simple--divider' : ''}`}
+                className="list-item-simple"
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a
@@ -211,62 +211,65 @@ class CardList extends React.Component {
                   } = element;
                   const url = element.websites[arcSite].website_url;
                   return (
-                    <div
-                      className="card-list-item"
-                      key={`result-card-${url}`}
-                      type="1"
-                    >
-                      <a
-                        href={websiteUrl}
-                        className="headline-list-anchor"
+                    <React.Fragment key={`result-card-${url}`}>
+                      <hr />
+                      <div
+                        className="card-list-item"
+                        key={`result-card-${url}`}
+                        type="1"
                       >
-                        <HeadlineText
-                          primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                          className="headline-text"
+                        <a
+                          href={websiteUrl}
+                          className="headline-list-anchor"
                         >
-                          {headlineText}
-                        </HeadlineText>
-                      </a>
-                      <a
-                        href={url}
-                        className="list-anchor-image"
-                      >
-                        {
-                          extractImage(element.promo_items)
-                            ? (
-                              <Image
-                                url={extractImage(element.promo_items)}
-                                alt={headlineText}
-                                // small, matches numbered list, is 3:2 aspect ratio
-                                smallWidth={105}
-                                smallHeight={70}
-                                mediumWidth={105}
-                                mediumHeight={70}
-                                largeWidth={274}
-                                largeHeight={183}
-                                resizedImageOptions={extractResizedParams(element)}
-                                breakpoints={getProperties(arcSite)?.breakpoints}
-                                resizerURL={getProperties(arcSite)?.resizerURL}
-                              />
-                            )
-                            : (
-                              <Image
-                                smallWidth={105}
-                                smallHeight={70}
-                                mediumWidth={105}
-                                mediumHeight={70}
-                                largeWidth={274}
-                                largeHeight={183}
-                                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                                url={targetFallbackImage}
-                                breakpoints={getProperties(arcSite)?.breakpoints}
-                                resizedImageOptions={placeholderResizedImageOptions}
-                                resizerURL={getProperties(arcSite)?.resizerURL}
-                              />
-                            )
-                        }
-                      </a>
-                    </div>
+                          <HeadlineText
+                            primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                            className="headline-text"
+                          >
+                            {headlineText}
+                          </HeadlineText>
+                        </a>
+                        <a
+                          href={url}
+                          className="list-anchor-image"
+                        >
+                          {
+                            extractImage(element.promo_items)
+                              ? (
+                                <Image
+                                  url={extractImage(element.promo_items)}
+                                  alt={headlineText}
+                                  // small, matches numbered list, is 3:2 aspect ratio
+                                  smallWidth={105}
+                                  smallHeight={70}
+                                  mediumWidth={105}
+                                  mediumHeight={70}
+                                  largeWidth={274}
+                                  largeHeight={183}
+                                  resizedImageOptions={extractResizedParams(element)}
+                                  breakpoints={getProperties(arcSite)?.breakpoints}
+                                  resizerURL={getProperties(arcSite)?.resizerURL}
+                                />
+                              )
+                              : (
+                                <Image
+                                  smallWidth={105}
+                                  smallHeight={70}
+                                  mediumWidth={105}
+                                  mediumHeight={70}
+                                  largeWidth={274}
+                                  largeHeight={183}
+                                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                                  url={targetFallbackImage}
+                                  breakpoints={getProperties(arcSite)?.breakpoints}
+                                  resizedImageOptions={placeholderResizedImageOptions}
+                                  resizerURL={getProperties(arcSite)?.resizerURL}
+                                />
+                              )
+                          }
+                        </a>
+                      </div>
+                    </React.Fragment>
                   );
                 })
               }

@@ -23,55 +23,58 @@ const SmallManualPromo = ({ customFields }) => {
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
   return customFields.linkURL ? (
-    <article className="container-fluid small-promo">
-      <div className="row sm-promo-padding-btm">
-        {(customFields.showHeadline && customFields.headline)
-        && (
-          <div className={headlineClass}>
-            <a
-              href={customFields.linkURL}
-              className="sm-promo-headline"
-              title={customFields.headline}
-              target={customFields.newTab ? '_blank' : '_self'}
-              rel={customFields.newTab ? 'noreferrer noopener' : ''}
-            >
-              <HeadlineText
-                primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+    <>
+      <article className="container-fluid small-promo">
+        <div className="row sm-promo-padding-btm">
+          {(customFields.showHeadline && customFields.headline)
+          && (
+            <div className={headlineClass}>
+              <a
+                href={customFields.linkURL}
                 className="sm-promo-headline"
+                title={customFields.headline}
+                target={customFields.newTab ? '_blank' : '_self'}
+                rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
-                {customFields.headline}
-              </HeadlineText>
-            </a>
-          </div>
-        )}
-        {(customFields.showImage && customFields.imageURL)
-        && (
-          <div className="col-sm-xl-4 right-aligned-container">
-            <a
-              href={customFields.linkURL}
-              title={customFields.headline}
-              target={customFields.newTab ? '_blank' : '_self'}
-              rel={customFields.newTab ? 'noreferrer noopener' : ''}
-            >
-              <Image
-                url={customFields.imageURL}
-                alt={customFields.headline}
-                // small should be 3:2 aspect ratio
-                smallWidth={105}
-                smallHeight={70}
-                mediumWidth={105}
-                mediumHeight={70}
-                largeWidth={105}
-                largeHeight={70}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                resizedImageOptions={resizedImageOptions}
-              />
-            </a>
-          </div>
-        )}
-      </div>
-    </article>
+                <HeadlineText
+                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  className="sm-promo-headline"
+                >
+                  {customFields.headline}
+                </HeadlineText>
+              </a>
+            </div>
+          )}
+          {(customFields.showImage && customFields.imageURL)
+          && (
+            <div className="col-sm-xl-4 right-aligned-container">
+              <a
+                href={customFields.linkURL}
+                title={customFields.headline}
+                target={customFields.newTab ? '_blank' : '_self'}
+                rel={customFields.newTab ? 'noreferrer noopener' : ''}
+              >
+                <Image
+                  url={customFields.imageURL}
+                  alt={customFields.headline}
+                  // small should be 3:2 aspect ratio
+                  smallWidth={105}
+                  smallHeight={70}
+                  mediumWidth={105}
+                  mediumHeight={70}
+                  largeWidth={105}
+                  largeHeight={70}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                  resizedImageOptions={resizedImageOptions}
+                />
+              </a>
+            </div>
+          )}
+        </div>
+      </article>
+      <hr />
+    </>
   ) : null;
 };
 

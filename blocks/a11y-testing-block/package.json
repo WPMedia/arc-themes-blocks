@@ -1,0 +1,30 @@
+{
+  "name": "@wpmedia/a11y-testing-block",
+  "version": "0.0.1",
+  "description": "Fusion News Theme A11y Testing block",
+  "author": "Brent Miller <brent.miller@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/a11y-testing-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "devDependencies": {
+    "axe-core": "^3.5.0",
+    "requestidlecallback": "^0.3.0"
+  },
+  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
+}

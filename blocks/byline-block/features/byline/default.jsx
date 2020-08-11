@@ -55,22 +55,22 @@ class ArticleByline extends Component {
 
     const authors = by.length > 0 && by.map((author) => {
       if (author.type === 'author') {
-        const hasName = Object.prototype.hasOwnProperty.call(author, 'name');
+        /* eslint-disable-next-line camelcase */
+        const authorName = author?.additional_properties?.original?.byline || author?.name;
         const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
 
         // If the author has a url to their bio page, return an anchor tag to the bio.
         // If not, just return the string.
-        if (hasName) {
-          return (hasURL) ? `<a href="${author.url}">${author.name}</a>` : author.name;
+        if (authorName) {
+          return (hasURL) ? `<a href="${author.url}">${authorName}</a>` : authorName;
         }
         // Those without name will not be included in the byline
       }
 
       return null;
-    });
+    }).filter((author) => author != null);
 
-    const numAuthors = authors.length && authors.every((element) => element !== null)
-      ? authors.length : 0;
+    const numAuthors = authors.length;
     // This will be an innerHTML to accommodate potential multiple anchor tags within the section
     // Leave it empty so that if there's no author with listed name it would just return '' string
     // note: default is empty string with one space

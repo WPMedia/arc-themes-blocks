@@ -11,6 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { resolveDefaultPromoElements } from './helpers';
 
 // shared with search results list
 // to modify, go to the shared styles block
@@ -139,12 +140,14 @@ class ResultsList extends Component {
   render() {
     const {
       arcSite,
+      customFields,
     } = this.props;
     const {
       resultList: { content_elements: contentElements = [] } = {}, seeMore,
       placeholderResizedImageOptions,
     } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
+    const promoElements = resolveDefaultPromoElements(customFields);
 
     return (
       <div className="results-list-container">
@@ -166,78 +169,90 @@ class ResultsList extends Component {
           const url = websites[arcSite].website_url;
           return (
             <div className="list-item" key={`result-card-${url}`}>
-              <div className="results-list--image-container">
-                <a
-                  href={url}
-                  title={headlineText}
-                >
-                  {extractImage(promoItems) ? (
-                    <Image
-                      // results list is 16:9 by default
-                      resizedImageOptions={extractResizedParams(element)}
-                      url={extractImage(element.promo_items)}
-                      alt={headlineText}
-                      smallWidth={158}
-                      smallHeight={89}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={274}
-                      largeHeight={154}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  ) : (
-                    <Image
-                      smallWidth={158}
-                      smallHeight={89}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={274}
-                      largeHeight={154}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                      url={targetFallbackImage}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizedImageOptions={placeholderResizedImageOptions}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-
-                    />
-                  )}
-                </a>
-              </div>
-              <div className="results-list--headline-container">
-                <a
-                  href={url}
-                  title={headlineText}
-                >
-                  <HeadlineText
-                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                    className="headline-text"
-                  >
-                    {headlineText}
-                  </HeadlineText>
-                </a>
-              </div>
-              <div className="results-list--description-author-container">
-                {descriptionText && (
+              { promoElements.showImage && (
+                <div className="results-list--image-container">
                   <a
                     href={url}
                     title={headlineText}
                   >
-                    <DescriptionText
-                      secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
-                      className="description-text"
-                    >
-                      {descriptionText}
-                    </DescriptionText>
+                    {extractImage(promoItems) ? (
+                      <Image
+                        // results list is 16:9 by default
+                        resizedImageOptions={extractResizedParams(element)}
+                        url={extractImage(element.promo_items)}
+                        alt={headlineText}
+                        smallWidth={158}
+                        smallHeight={89}
+                        mediumWidth={274}
+                        mediumHeight={154}
+                        largeWidth={274}
+                        largeHeight={154}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                      />
+                    ) : (
+                      <Image
+                        smallWidth={158}
+                        smallHeight={89}
+                        mediumWidth={274}
+                        mediumHeight={154}
+                        largeWidth={274}
+                        largeHeight={154}
+                        alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                        url={targetFallbackImage}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizedImageOptions={placeholderResizedImageOptions}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+
+                      />
+                    )}
                   </a>
-                )}
-                <div className="results-list--author-date">
-                  <Byline story={element} stylesFor="list" />
-                  {/* The Separator will only be shown if there is at least one author name */}
-                  { showSeparator && <p className="dot-separator">&#9679;</p> }
-                  <ArticleDate classNames="story-date" date={displayDate} />
                 </div>
-              </div>
+              )}
+              { promoElements.showHeadline && (
+                <div className="results-list--headline-container">
+                  <a
+                    href={url}
+                    title={headlineText}
+                  >
+                    <HeadlineText
+                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      className="headline-text"
+                    >
+                      {headlineText}
+                    </HeadlineText>
+                  </a>
+                </div>
+              )}
+              { (
+                promoElements.showDescription
+                  || promoElements.showDate
+                  || promoElements.showByline
+              ) && (
+                <div className="results-list--description-author-container">
+                  {promoElements.showDescription && descriptionText && (
+                    <a
+                      href={url}
+                      title={headlineText}
+                    >
+                      <DescriptionText
+                        secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                        className="description-text"
+                      >
+                        {descriptionText}
+                      </DescriptionText>
+                    </a>
+                  )}
+                  { (promoElements.showDate || promoElements.showByline) && (
+                    <div className="results-list--author-date">
+                      { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
+                      {/* The Separator will only be shown if there is at least one author name */}
+                      { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
+                      { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}
@@ -267,7 +282,45 @@ ResultsList.label = 'Results List – Arc Block';
 
 ResultsList.propTypes = {
   customFields: PropTypes.shape({
-    listContentConfig: PropTypes.contentConfig('ans-feed'),
+    listContentConfig: PropTypes.contentConfig('ans-feed').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    showHeadline: PropTypes.bool.tag(
+      {
+        label: 'Show headline',
+        defaultValue: true,
+        group: 'Show promo elements',
+      },
+    ),
+    showImage: PropTypes.bool.tag(
+      {
+        label: 'Show image',
+        defaultValue: true,
+        group: 'Show promo elements',
+      },
+    ),
+    showDescription: PropTypes.bool.tag(
+      {
+        label: 'Show description',
+        defaultValue: true,
+        group: 'Show promo elements',
+      },
+    ),
+    showByline: PropTypes.bool.tag(
+      {
+        label: 'Show byline',
+        defaultValue: true,
+        group: 'Show promo elements',
+      },
+    ),
+    showDate: PropTypes.bool.tag(
+      {
+        label: 'Show date',
+        defaultValue: true,
+        group: 'Show promo elements',
+      },
+    ),
   }),
 };
 

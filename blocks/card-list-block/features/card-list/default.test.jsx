@@ -194,7 +194,7 @@ describe('Card list', () => {
       });
 
       it('should add the line divider when have multiple items', () => {
-        expect(wrapper.find('.list-item-simple--divider').length).toEqual(1);
+        expect(wrapper.find('hr').length).toEqual(27);
       });
 
       it('should use resized_params from promo items if exists', () => {

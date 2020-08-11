@@ -1,7 +1,8 @@
 {
   "name": "fusion-news-theme-blocks",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
       "pre-push": "npm run test:coverage && npm run lint"
     }
   },
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "devDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@babel/core": "^7.10.2",
@@ -76,7 +77,7 @@
     "@wpmedia/byline-block": "file:blocks/byline-block",
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
-    "@wpmedia/engine-theme-sdk": "latest",
+    "@wpmedia/engine-theme-sdk": "^2.1.0",
     "@wpmedia/event-tester-block": "file:blocks/event-tester-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
@@ -98,7 +99,9 @@
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
-    "@wpmedia/subheadline-block": "file:blocks/subheadline-block"
+    "@wpmedia/subheadline-block": "file:blocks/subheadline-block",
+    "@wpmedia/video-player-block": "file:blocks/video-player-block",
+    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block"
   },
   "jest": {
     "transformIgnorePatterns": [

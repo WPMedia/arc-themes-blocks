@@ -1,25 +1,44 @@
 # `@wpmedia/header-nav-chain-block`
+_Please provide a 1-2 sentence description of what the block is and what it does._
 
-## Translation phrases
+## Acceptance Criteria
+- Add AC relevant to the block
 
+## Props
+| **Prop** | **Required** | **Type** | **Descripton** |
+|---|---|---|---|
+| **required prop** | yes | | |
+| **optional prop** | no | | |
+| **contentConfig example** | | | Please specify which content sources are compatible |
+
+## ANS Schema
+Outline any schema information requirements necessary to know for ths block
+
+### ANS Fields
+- `Add all ANS fields used in the block`
+
+## Internationalization fields
 | Phrase key | Default (English) |
 |---|---|
 |`header-nav-chain-block.sections-button`|`Sections`|
 |`header-nav-chain-block.search-text`|`Search`|
 
-## Usage
+## Events
+Blocks can emit events. The following is a list of events that are emitted by this block.
 
-```js
-const headerNavChainBlock = require('@wpmedia/header-nav-chain-block');
+| **Event Name** | **Description** |
+|---|---|
+| **eventName** | Describe the event |
 
-// TODO: DEMONSTRATE API
-```
+### Event Listening
+Include block specific intructions for event listening.
 
-## Custom Search Action
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+### Custom Search Action
 If you are creating custom blocks that are leveraging all or parts of the header-nav-block and 
 need to over-ride the action taken when the search box field has been submitted 
-(for both click and keyboard submisstions) an over-ride function can be passed as a prop to either the 
-main default.jsx (nav component) or to the search-box.jsx component.  The prop name is called `customSearchAction`.
-If passed into default.jsx it will pass it down to search-box.  Your implementation of `customSearchAction`
-should expect one param that will be the value of the search entry.  If `customSearchAction` is not implemented, default 
-behavior will occur during a search submission.
+(for both click and keyboard submisstions) an over-ride function can be passed as a prop to either the main default.jsx (nav component) or to the search-box.jsx component. The prop name is called `customSearchAction`. If passed into default.jsx it will pass it down to search-box. Your implementation of `customSearchAction` should expect one param that will be the value of the search entry. If `customSearchAction` is not implemented, default behavior will occur during a search submission.

@@ -78,10 +78,9 @@ describe('The results list', () => {
         expect(wrapper.find('.list-item').length).toEqual(1);
       });
 
-      // todo: add this back when engine theme sdk used
-      // it('should render one image wrapped in an anchor tag', () => {
-      //   expect(wrapper.find('.list-item').find('a').find('Image').length).toEqual(1);
-      // });
+      it('should render one image wrapped in an anchor tag', () => {
+        expect(wrapper.find('.list-item').find('a').find('Image').length).toEqual(1);
+      });
 
       it('should render an anchor and an image with the correct url', () => {
         expect(wrapper.find('.list-item').find('a').first()
@@ -199,6 +198,193 @@ describe('The results list', () => {
       expect(wrapper.find('.results-list-container').length).toEqual(1);
       expect(wrapper.find('.list-item').length).toEqual(1);
       expect(wrapper.find('.results-list-container').childAt(0).hasClass('list-item')).toEqual(true);
+    });
+  });
+
+  describe('when all promo items disabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showByline: false,
+      showDate: false,
+      showDescription: false,
+      showHeadline: false,
+      showImage: false,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    ResultsList.prototype.fetchStories = jest.fn().mockReturnValue({});
+
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should not render promor elements', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        expect(wrapper.find('.results-list-container').find('.list-item').children().length).toEqual(0);
+      });
+    });
+  });
+
+  describe('when only headline enabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showHeadline: true,
+      showImage: false,
+      showDescription: false,
+      showByline: false,
+      showDate: false,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    ResultsList.prototype.fetchStories = jest.fn().mockReturnValue({});
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should render only headline', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        const item = wrapper.find('.results-list-container').find('.list-item');
+        expect(item.length).toEqual(1);
+        expect(item.children().length).toEqual(1);
+        expect(item.find('.results-list--headline-container').length).toEqual(1);
+      });
+    });
+  });
+
+  describe('when only image enabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showHeadline: false,
+      showImage: true,
+      showDescription: false,
+      showByline: false,
+      showDate: false,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should render only image', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        const item = wrapper.find('.results-list-container').find('.list-item');
+        expect(item.length).toEqual(1);
+        expect(item.children().length).toEqual(1);
+        expect(item.find('.results-list--image-container').length).toEqual(1);
+      });
+    });
+  });
+
+  describe('when only description enabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showHeadline: false,
+      showImage: false,
+      showDescription: true,
+      showByline: false,
+      showDate: false,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should render only description', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        const item = wrapper.find('.results-list-container').find('.list-item');
+        expect(item.length).toEqual(1);
+        expect(item.children().length).toEqual(1);
+        expect(item.find('.results-list--description-author-container').length).toEqual(1);
+      });
+    });
+  });
+
+  describe('when only byline enabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showHeadline: false,
+      showImage: false,
+      showDescription: false,
+      showByline: true,
+      showDate: false,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should render only byline', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        const item = wrapper.find('.results-list-container').find('.list-item');
+        expect(item.length).toEqual(1);
+        expect(item.children().length).toEqual(1);
+        expect(item.find('.results-list--description-author-container').length).toEqual(1);
+        expect(item.find('.results-list--description-author-container').children().length).toEqual(1);
+        expect(item.find('.results-list--author-date').length).toEqual(1);
+        expect(item.find('.results-list--author-date').find('Byline').length).toEqual(1);
+      });
+    });
+  });
+
+  describe('when only byline date', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+      showHeadline: false,
+      showImage: false,
+      showDescription: false,
+      showByline: false,
+      showDate: true,
+    };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: oneListItem }, () => {
+      wrapper.update();
+
+      it('should render only date', () => {
+        expect(wrapper.find('.results-list-container').length).toEqual(1);
+        const item = wrapper.find('.results-list-container').find('.list-item');
+        expect(item.length).toEqual(1);
+        expect(item.children().length).toEqual(1);
+        expect(item.find('.results-list--description-author-container').length).toEqual(1);
+        expect(item.find('.results-list--description-author-container').children().length).toEqual(1);
+        expect(item.find('.results-list--author-date').length).toEqual(1);
+        expect(item.find('.results-list--author-date').find('ArticleDate').length).toEqual(1);
+      });
     });
   });
 

@@ -92,7 +92,7 @@ The structure of blocks is largely incompatible with what lerna generates in thi
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-ND",
   "main": "index.js",
   "files": [
     "features",
@@ -100,7 +100,8 @@ The structure of blocks is largely incompatible with what lerna generates in thi
     "layouts"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
@@ -133,6 +134,8 @@ Note three things here:
 }
 ```
 
+In addition to updating the package.json, you'll also want to make sure that each package is using the standardized package read me templates so that the documentation for each block is consistent. There are two templates. One focuses on the necessary information for a feature block and one that is tailored towards a content source. Both templates currently exist at the root of this repository and are named `PACKAGE_CS_README_TEMPLATE` for content sources and `PACKAGE_FEATURE_README_TEMPLATE` for features.
+
 Make sure to reorganize the newly created directory in the same way as other blocks. Once that's created, copy the feature folder that you've created/developed from step 1 into the corresponding directory (<block-name>/<features/output-types/layouts/sources>).
 
 ##### Installing `node_modules`
@@ -152,6 +155,20 @@ This command does all the installing and linking we need to have access to our d
 Much like installing existing dependencies, we'll want to rely on lerna commands for adding new dependecies and linking subpackages together as well.
 
 [We'll want to use lerna's 'add' command to install new dependencies.](https://github.com/lerna/lerna/tree/master/commands/add#readme) It's unlikely any of our usage will end up deviating from that doc.
+
+##### Batch Updating Dependencies
+
+Arc Blocks uses fixed major versions of the Engine SDK and CSS Framework to prevent accidentally opting into breaking changes. Therefore, when we need to update these dependencies, we must go through all the Arc Blocks and update it to the new major version and make any code changes required. 
+
+Lerna does not have a batch update command, so this process is somewhat manual. Luckily, the blocks should all be using the same versions of both, so these dependencies can be easily searched for in the repository and changed at once.
+
+For either the Engine SDK or the CSS Framework, the process is as follows:
+
+1. Search for the current dependency using your IDE. For example, if you were updating the Engine SDK from `2.1.0` to `3.x.x`, you would search for `"@wpmedia/engine-theme-sdk": "^2.1.0"`
+
+2. Replace all instances with the new version. In the example above, you would replace `"@wpmedia/engine-theme-sdk": "^2.1.0"` with `"@wpmedia/engine-theme-sdk": "^3.0.0"`
+
+3. Run `npx lerna boostrap` to make sure the dependencies are being pulled properly
 
 #### 5. Writing Unit Tests
 Unit tests should be written alongside the feature before it is pushed to Code Review. We're using Jest as our test runner and Enzyme as our testing tool for testing React components. Not only will you have the standard Jest assertion available to you. You'll also have all of assertion matchers provided by [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme). The test files should be placed in the same directory as the main feature React file as well as be named the same. If you're testing `default.jsx`, your tests would be in the same directory in a file called `default.test.jsx`.
@@ -190,4 +207,13 @@ Notes:
 
 ## License
 
-TODO
+Shield: [![CC BY-NC-ND 4.0][cc-by-shield]][cc-by-nc-nd]
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License][cc-by-nc-nd].
+
+[![CC BY-NC-ND 4.0][cc-by-image]][cc-by-nc-nd]
+
+[cc-by-nc-nd]: https://creativecommons.org/licenses/by-nc-nd/4.0/
+[cc-by-image]: https://licensebuttons.net/l/by-nc-nd/3.0/88x31.png
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg

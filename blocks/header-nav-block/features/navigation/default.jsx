@@ -14,6 +14,8 @@ import SearchBox from './_children/search-box';
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
 
+import './header-nav.scss';
+
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
@@ -113,7 +115,12 @@ const Nav = (props) => {
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
             <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />
-            <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+            <button
+              onClick={hamburgerClick}
+              className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}
+              type="button"
+              aria-label={isSectionDrawerOpen ? 'Close the menu to hide section options' : 'Open the menu to see section options'}
+            >
               <span>{phrases.t('header-nav-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
@@ -136,8 +143,8 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={isSectionDrawerOpen ? 'open' : 'closed'} font={primaryFont}>
-          <div className="innerDrawerNav">
+        <StyledSectionDrawer id="nav-sections" className={`nav-block-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} font={primaryFont}>
+          <div className="inner-drawer-nav">
             <SectionNav sections={sections}>
               <SearchBox alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
             </SectionNav>

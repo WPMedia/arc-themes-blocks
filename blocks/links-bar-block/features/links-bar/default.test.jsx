@@ -35,7 +35,7 @@ describe('the links bar feature for the default output type', () => {
     }));
     const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
 
-    expect(wrapper.at(0).type()).toBe('nav');
+    expect(wrapper.children().at(0).type()).toBe('nav');
   });
 
   it('should contain the equal number of links between input and output', () => {
@@ -112,6 +112,56 @@ describe('the links bar feature for the default output type', () => {
 
       expect(wrapper.props().href).toBe('/testurl/');
       expect(wrapper.find('[href="/testurl/"]').length).toBe(2);
+    });
+  });
+
+  describe('when a link has query parameters', () => {
+    it('should not add a slash at the end of a internal link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="/testurl/?query=home" name="test" />);
+
+      expect(wrapper.props().href).toBe('/testurl/?query=home');
+      expect(wrapper.find('[href="/testurl/?query=home"]').length).toBe(2);
+    });
+  });
+
+  describe('when a link has query parameters', () => {
+    it('should not add a slash at the end of a external link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="http://example.com/testurl/?query=home" name="test" />);
+
+      expect(wrapper.props().href).toBe('http://example.com/testurl/?query=home');
+      expect(wrapper.find('[href="http://example.com/testurl/?query=home"]').length).toBe(2);
+    });
+  });
+
+  describe('when a link is to a page', () => {
+    it('should not add a slash at the end of the link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="https://example.com/category/page.html" name="test" />);
+
+      expect(wrapper.props().href).toBe('https://example.com/category/page.html');
+      expect(wrapper.find('[href="https://example.com/category/page.html"]').length).toBe(2);
+    });
+  });
+
+  describe('when a link has a hash', () => {
+    it('should not add a slash at the end of the link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="/category/page#myhash" name="test" />);
+
+      expect(wrapper.props().href).toBe('/category/page#myhash');
+      expect(wrapper.find('[href="/category/page#myhash"]').length).toBe(2);
+    });
+  });
+
+  describe('when a link has a mail', () => {
+    it('should not add a slash at the end of the link', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" />);
+
+      expect(wrapper.props().href).toBe('mailto:readers@washpost.com');
+      expect(wrapper.find('[href="mailto:readers@washpost.com"]').length).toBe(2);
     });
   });
 });

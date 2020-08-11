@@ -88,7 +88,7 @@ const SubSectionAnchor = ({ item, isOpen }) => (
   <div className={`subsection-anchor ${isOpen ? 'open' : ''}`} onClick={onClickSubsection}>
     <SectionAnchor item={item} />
     <span className="submenu-caret">
-      <ChevronRight height={24} width={24} />
+      <ChevronRight height={20} width={20} />
     </span>
   </div>
 );

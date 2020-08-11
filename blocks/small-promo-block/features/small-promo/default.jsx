@@ -14,6 +14,7 @@ import {
   extractResizedParams,
   imageRatioCustomField,
   ratiosFor,
+  extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
@@ -30,8 +31,6 @@ const SmallPromo = ({ customFields }) => {
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   }) || null;
-
-  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
@@ -67,11 +66,11 @@ const SmallPromo = ({ customFields }) => {
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
-                {customFields.imageOverrideURL || extractImage(content.promo_items)
+                {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
                     <Image
                       url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
                       alt={content && content.headlines ? content.headlines.basic : ''}
                       // small should be 3:2 aspect ratio
                       smallWidth={ratios.smallWidth}

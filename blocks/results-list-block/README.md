@@ -18,7 +18,12 @@ _Results List block for Fusion News Theme. Displays a results list where each re
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content_elements[x].description.basic`
+- `content_elements[x].headlines.basic`
+- `content_elements[x].display_date`
+- `content_elements[x].credits.by`
+- `content_elements[x].promo_items`
+- `content_elements[x].websites`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

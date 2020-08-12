@@ -15,7 +15,12 @@ _Fusion News Theme lead art block. Please provide a 1-2 sentence description of 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `promo_items.lead_art` or `promo_items.basic` = `lead_art`
+- `lead_art.caption`
+- `lead_art.subtitle`
+- `lead_art.credits`
+- `lead_art.content`
+- `lead_art.type` determines what kind of content to render with
 
 ## Internationalization fields
 | Phrase key | Default (English) |

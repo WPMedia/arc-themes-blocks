@@ -15,7 +15,7 @@ _Fusion News Theme text output type. Please provide a 1-2 sentence description o
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 | Phrase key | Default (English) |

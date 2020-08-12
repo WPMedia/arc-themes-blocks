@@ -15,7 +15,7 @@ _Block containing an extra large manual promo component. Please provide a 1-2 se
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

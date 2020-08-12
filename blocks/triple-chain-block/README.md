@@ -16,7 +16,7 @@ _Fusion News Theme triple-chain block. Utilizes bootstrap's three column approac
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 | Phrase key | Default (English) |

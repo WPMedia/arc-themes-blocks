@@ -15,7 +15,13 @@ Fusion News Theme date block. _Please provide a 1-2 sentence description of what
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `display_date` global date fallback string
+
+```js
+{
+  display_date: "Wed Aug 12 2020 10:06:33 GMT-0500 (Central Daylight Time)"
+}
+```
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

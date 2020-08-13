@@ -15,8 +15,35 @@ Fusion News Theme default output type. _Please provide a 1-2 sentence descriptio
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `globalContent` (see below) used by Metadata component in Engine Theme SDK
 
+```ts
+ description?: {
+      basic?: string;
+  };
+  headlines?: {
+      basic?: string;
+  };
+  taxonomy?: {
+      seo_keywords?: Array<string>;
+      tags?: Array<{
+          slug?: string;
+      }>;
+  };
+  authors?: Array<{
+      bio?: string;
+      byline?: string;
+  }>;
+  Payload?: Array<{
+      description?: string;
+      name?: string;
+  }>;
+  metadata?: {
+      metadata_description?: string;
+      metadata_title?: string;
+  };
+  name?: string;
+```
 ## Internationalization fields
 - Add all internationalization fields used in the block
 

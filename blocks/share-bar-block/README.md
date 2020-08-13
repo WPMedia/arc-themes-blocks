@@ -15,7 +15,8 @@ _This is the share bar block for the news theme, written as a functional compone
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `globalContent.headlines.basic`
+- `globalContent.website_url`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

@@ -17,3 +17,6 @@ be displayed on the right side when it is open.
 https://www.w3.org/WAI/WCAG21/quickref/
 4) Include additional best practices: Enabled by default.  This adds additional best practice checks during the audit that are not in the 
 WCAG at this time, but help to improve a11y concerns. It is recommended to keep this setting on.
+
+### ANS fields
+- n/a

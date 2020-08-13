@@ -10,6 +10,9 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 ## ANS Schema
 Detail the data structure returned from this content source
 
+### ANS Fields 
+- n/a
+
 ## Configurable Params
 | **Param** | **Type** | **Description** |
 |---|---|---|

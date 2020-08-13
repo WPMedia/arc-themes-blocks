@@ -15,7 +15,7 @@ _This is a helper to transform the return value of the content sources. This is 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 | Phrase key | Default (English) |

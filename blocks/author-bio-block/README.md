@@ -27,7 +27,34 @@ credits: {
 If there is no description provided by the schema, then no author bio will be displayed - this means that they are not a staff writer. If there is no credits or global content provided, no section tag at all will be rendered.
 
 ### ANS fields
-- `credits.by`
+- `credits.by` via `globalContent`
+- `credits.by[x]` 
+- `credits.by[x].description` optional
+- `credits.by[x].additional_properties.original` optional
+
+```js
+{
+  credits: {
+    by: [
+      {
+        social_links: [
+          {
+            site: 'linkedin',
+            url: 'https://linkedin.com/in/jack'
+          }
+        ],
+        description: 'They are a journalist',
+        additional_properties: {
+          original: {
+            bio: 'I enjoy long walks on the beach and writing journalism'
+          } 
+        }
+      }
+    ]
+  }
+}
+
+```
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

@@ -15,7 +15,13 @@ _Footer block for the Fusion News Theme. This will pull the data from the footer
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+Available through `useContent`
+
+- `children`
+- `children[x].node_type`
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

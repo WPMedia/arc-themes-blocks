@@ -15,7 +15,12 @@ _Fusion News Theme Simple List block is a dynamically-sized list with items of a
 This takes in the [ANS Schema](https://github.com/washingtonpost/ans-schema). You can designate the length of the query.
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content_elements[x].description.basic`
+- `content_elements[x].headlines.basic`
+- `content_elements[x].display_date`
+- `content_elements[x].credits.by`
+- `content_elements[x].promo_items`
+- `content_elements[x].websites`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

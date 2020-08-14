@@ -6,7 +6,7 @@
  */
 
 import getProperties from 'fusion:properties';
-import getResizedImageData from '.';
+import getResizedImageData, { extractResizedParams } from '.';
 import mockStoryFeedData from './mockFeedData';
 import mockSearchApiData from './mockSearchApiData';
 import mockCreditsData from './mockCreditsData';
@@ -18,6 +18,8 @@ import searchResultsDataBroken from './searchResultsDataBroken';
 import mockStoryFeedDataEmptyPromo from './mockStoryFeedDataEmptyPromo';
 import mockLeadArtDataEmptyPromo from './mockLeadArtDataEmptyPromo';
 import mockSearchApiDataEmptyPromo from './mockSearchApiDataEmptyPromo';
+import mockLeadArtVideo from './mockLeadArtVideo';
+import mockLeadArtVideoPromoBasic from './mockLeadArtVideoPromoBasic';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -196,6 +198,66 @@ describe('get resized image data helper on the server-side', () => {
       '/31mmYPove0AN7aFn_vwKJ0qhZeI=filters:format(jpg):quality(70)/',
       '/TkU_4vX7gHlX4WBLLwCDMrLuQj4=filters:format(jpg):quality(70)/',
     ]);
+
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
+    expect(allValidFilterValues).toEqual(true);
+  });
+
+  it('get lead art from video', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const dataWithResizedImages = getResizedImageData(mockLeadArtVideo);
+
+    // doesn't have content_elements, just an array with elements that have promo_items
+    const resizedParams = dataWithResizedImages.promo_items
+      .lead_art
+      .promo_items.basic.resized_params;
+    const extracted = extractResizedParams(dataWithResizedImages);
+    const filterValues = Object.values(resizedParams);
+
+    // if the same resizer key is used this won't change
+    expect(filterValues).toEqual([
+      '/tlTe1hPc85YfFlTMCStAmmrE2Vc=filters:format(jpg):quality(70)/',
+      '/bWSAqvBttzIKiAE1e6phCZBYdH0=filters:format(jpg):quality(70)/',
+      '/Vl230_LsGyl4R2KEQU6TF_8H5Wc=filters:format(jpg):quality(70)/',
+      '/wHPWgxtNFn5PYodMUfU3SpZV5rA=filters:format(jpg):quality(70)/',
+    ]);
+
+    expect(resizedParams).toEqual(extracted);
+
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
+    expect(allValidFilterValues).toEqual(true);
+  });
+
+  it('get lead art fom video from promo.basic if has image', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const dataWithResizedImages = getResizedImageData(mockLeadArtVideoPromoBasic);
+
+    const resizedParams = dataWithResizedImages.promo_items.basic.resized_params;
+    const extracted = extractResizedParams(dataWithResizedImages);
+    const filterValues = Object.values(resizedParams);
+
+    expect(filterValues).toEqual([
+      '/Kjuf_xqpadIZBFEG2XsBC3bNoEM=filters:format(jpg):quality(70)/',
+      '/_gwdkIM1uwTFiR0LWaaOUQc3rA0=filters:format(jpg):quality(70)/',
+      '/15d84ojP7siUek9f5jzDMQQWMMs=filters:format(jpg):quality(70)/',
+      '/qCvQmPpPxYd_dYM8uNnbRcRt4rY=filters:format(jpg):quality(70)/',
+    ]);
+
+    expect(resizedParams).toEqual(extracted);
 
     const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':quality(70)/'));
     expect(allValidFilterValues).toEqual(true);

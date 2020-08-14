@@ -70,5 +70,5 @@ describe('render Taboola widget', () => {
       expect(wrapper.find('AdTaboola #tbl-widget').length).toBe(0);
       expect(wrapper.find('AdTaboola script').length).toBe(0);
     });
-  })
+  });
 });

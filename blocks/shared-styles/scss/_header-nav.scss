@@ -228,6 +228,7 @@ body.nav-open {
 
   &.closed {
     transform: translate(-$section-width, 0);
+    width: 0;
   }
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

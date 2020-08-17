@@ -70,13 +70,17 @@ const SampleOutputType = ({
     })(window,document,'script','dataLayer','${gtmID}');
   `;
   const gaScript = `
-    <script async src="https://www.googletagmanager.com/gtag/js?id=${gaID}"></script>
-    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());gtag('config', '${gaID}');
-    </script>
   `;
+  const renderGaScript = () => (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaID}`} />
+      <script dangerouslySetInnerHTML={{ __html: gaScript }} />
+    </>
+  );
+
   return (
     <html lang="en">
       <head>
@@ -84,9 +88,7 @@ const SampleOutputType = ({
         {gtmID
           ? (<script dangerouslySetInnerHTML={{ __html: gtmScript }} />)
           : null}
-        {gaID
-          ? (<script dangerouslySetInnerHTML={{ __html: gaScript }} />)
-          : null}
+        {gaID ? renderGaScript() : null}
         <MetaData
           MetaTag={MetaTag}
           MetaTags={MetaTags}

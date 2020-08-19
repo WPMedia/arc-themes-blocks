@@ -27,7 +27,7 @@
     "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "stable",
+    "@wpmedia/engine-theme-sdk": "latest",
     "@wpmedia/news-theme-css": "stable"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"

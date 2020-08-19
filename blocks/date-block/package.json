@@ -1,10 +1,10 @@
 {
   "name": "@wpmedia/date-block",
-  "version": "5.3.0",
+  "version": "5.4.3-beta.0",
   "description": "Fusion News Theme date block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "features",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^3.0.0",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"

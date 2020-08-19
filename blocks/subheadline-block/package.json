@@ -1,10 +1,10 @@
 {
   "name": "@wpmedia/subheadline-block",
-  "version": "5.3.0",
+  "version": "5.4.3-beta.0",
   "description": "Fusion News Theme sub-headline block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "features",
@@ -13,7 +13,7 @@
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
-    "access": "public" 
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "^3.0.0",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"

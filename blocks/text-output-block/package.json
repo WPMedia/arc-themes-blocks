@@ -1,10 +1,10 @@
 {
   "name": "@wpmedia/text-output-block",
-  "version": "5.3.0",
+  "version": "5.4.3-beta.0",
   "description": "Fusion News Theme text output type",
   "author": "nelson fernandez <nelson.fernandez@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "output-types"

@@ -26,7 +26,7 @@
       "pre-push": "npm run test:coverage && npm run lint"
     }
   },
-  "license": "CC-BY-NC-ND",
+  "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@babel/core": "^7.10.2",
@@ -37,7 +37,7 @@
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "@wpmedia/news-theme-css": "^2.1.8",
+    "@wpmedia/news-theme-css": "stable",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",

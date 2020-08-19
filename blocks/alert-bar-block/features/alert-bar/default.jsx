@@ -8,7 +8,9 @@ import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 import './alert-bar.scss';
 
 const AlertBarLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
+  &&& {
+    font-family: ${(props) => props.primaryFont};
+  }
 `;
 @Consumer
 class AlertBar extends Component {

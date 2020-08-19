@@ -15,7 +15,11 @@ _This is the links bar block for the news theme, written as a functional compone
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `children` array
+- `children[x].node_type` determines what kind of content to render
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

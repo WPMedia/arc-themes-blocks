@@ -15,7 +15,46 @@ _Fusion News Theme full author bio block. Please provide a 1-2 sentence descript
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `authors[0]` Only uses first author
+
+```js
+{
+  authors: [
+    {
+      _id: 'janedoe',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      secondLastName: 'Deo',
+      byline: 'Jane Da Doe',
+      role: 'Senior Product Manager',
+      image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+      email: 'jane@doe.com',
+      facebook: 'https://facebook.com/janedoe',
+      affiliations: '',
+      education: [],
+      awards: [],
+      books: [],
+      podcasts: [],
+      rss: 'somersslink',
+      twitter: 'janedoe',
+      bio_page: '/author/jane doe/',
+      bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
+      longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
+      slug: 'jane-doe',
+      instagram: 'janedoe',
+      native_app_rendering: false,
+      fuzzy_match: false,
+      contributor: false,
+      status: true,
+      last_updated_date: '2019-01-24T23:15:45.348Z',
+      type: 'author',
+      resized_params: {
+        '158x158': '',
+      },
+    }
+  ]
+}
+```
 
 ## Internationalization fields
 | Phrase key | Default (English) |

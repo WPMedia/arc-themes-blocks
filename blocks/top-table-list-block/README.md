@@ -12,13 +12,20 @@ _Fusion News Theme top table list block. Please provide a 1-2 sentence descripti
 ## ANS Schema
 Detail the data structure returned from this content source
 
+### ANS Fields
+- `promo_items.basic.url`
+- `promo_items.basic.type`
+- `promo_items.label.basic.display`
+- `promo_items.label.basic.url`
+- `promo_items.label.basic.text`
+- `promo_items.headlines.basic`
+- `promo_items.content.description.basic`
+
+
 ## Configurable Params
 | **Param** | **Type** | **Description** |
 |---|---|---|
 | **param** |  |  |
-
-## TTL
-- Add the TTL of the content source
 
 ## Additional Considerations
 _This is optional. Please add an additional context that would be important to know in order to use this block._

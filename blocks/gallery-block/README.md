@@ -14,7 +14,28 @@ _Block containing a gallery that reads in a gallery from a content source. Pleas
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `globalContent.headlines.basic` (optional)
+- `globalContent.content_elements` (see below) for Engine Theme SDK Gallery component
+
+```ts
+  _id: string;
+  url: string;
+  alt_text?: string;
+  subtitle?: string;
+  caption?: string;
+  credits?: {
+      by?: ImageAttribution[];
+      affiliation?: ImageAttribution[];
+  };
+  resized_params: {
+      [key: string]: string;
+  };
+  breakpoints: {
+      small: number;
+      medium: number;
+      large: number;
+  };
+```
 
 ## Internationalization fields
 | Phrase key | Default (English) |

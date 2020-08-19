@@ -53,7 +53,7 @@ export default ({
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-search ${isSearchBarOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
+  const navClassNames = `nav-block-search ${isSearchBarOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
   const btnClassNames = `nav-btn ${navBarColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'} transparent${!isSearchBarOpen ? ' border' : ''}`;
   const iconFill = isSearchBarOpen ? '#666666' : null;
 

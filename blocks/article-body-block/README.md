@@ -43,6 +43,31 @@ This block does not emit any events.
 
 ## Additional Considerations
 
+
+### ANS fields
+- `content_elements`
+- `content_elements[x].type` Check how many paragraphs included
+- `content_elements[x].content` Creates article body with included content
+
+```js
+{
+
+  content_elements: [
+    {
+      type: 'text',
+      _id: "123",
+      type: "text",
+      content: "<h1>this is my first paragraph</h1>"
+    },
+    {
+      type: 'not text'
+    }
+  ]
+}
+```
+
+
+
 ### Example ANS Schema
 
 ```json

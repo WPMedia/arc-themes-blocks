@@ -17,7 +17,7 @@ _HTML Box for block for Fusion News Theme. Please provide a 1-2 sentence descrip
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 | Phrase key | Default (English) |

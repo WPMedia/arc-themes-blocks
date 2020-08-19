@@ -15,7 +15,11 @@ _Fusion News Theme overline block. Please provide a 1-2 sentence description of 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `globalContent.label.basic.display`
+- `globalContent.label.basic.url`
+- `globalContent.label.basic.text`
+- `content.websites[arcSite].website_section._id`
+- `content.websites[arcSite].website_section.name`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

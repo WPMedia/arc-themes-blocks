@@ -49,7 +49,25 @@ This block consumes data returned from the `alert-bar-content-source-block` cont
 ```
 
 ### ANS fields
-- Add all ANS fields used in the block
+- `content_elements[0]` only uses first content element. used to check whether to render headline
+- `content_elements[0].websites[arcSite]` Uses `website_url`
+- `content_elements[0].headlines.basic`
+
+```js
+{
+  content_elements: [
+    {
+      websites: {
+        "the post": "http://washpost.com/huge-story"
+      },
+      headlines: {
+        "basic": "Man Bites dog"
+      }
+    },
+    ...
+  ]
+}
+```
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

@@ -200,23 +200,30 @@ body.nav-open {
 }
 
 .nav-sections {
-  background: rgba(25, 25, 25, 0.5);
+  background: rgba(25, 25, 25, 0);
   flex-direction: column;
   -ms-overflow-style: none;
   position: absolute;
   scrollbar-width: none;
   top: 0;
-  transition: transform 300ms ease-in-out;
-  width: 100%;
+  transition: transform 300ms ease-in-out, background 300ms ease-in-out;
+  width: 200%;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   &.open {
+    background: rgba(25, 25, 25, 0.5);
     height: 100vh;
     overflow-y: scroll;
     transform: translate(0, 0);
+
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      .inner-drawer-nav {
+        width: 100vw;
+      }
+    }
   }
 
   &.closed {
@@ -271,15 +278,10 @@ body.nav-open {
         align-items: center;
         color: #fff;
         display: block;
-        font-size: 20px;
+        font-size: 16px;
         justify-content: space-between;
         line-height: 40px;
         text-decoration: none;
-
-        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-          font-size: 16px;
-          line-height: 40px;
-        }
       }
 
       &:hover,

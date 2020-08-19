@@ -15,7 +15,7 @@ _Fusion News Theme video player block. Please provide a 1-2 sentence description
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `embed_html`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

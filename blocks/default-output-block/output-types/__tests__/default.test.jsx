@@ -157,7 +157,7 @@ describe('head content', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({
       websiteName: 'The Sun',
       twitterUsername: 'thesun',
-      dangerouslyInjectJS: ['<script>alert("hello world");</script>'],
+      dangerouslyInjectJS: ['alert("hello world");'],
       websiteDomain: '',
       fallbackImage: '/resources/placeholder.jpg',
       resizerURL: 'resizer',
@@ -186,12 +186,21 @@ describe('head content', () => {
   it('must render custom script', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
-    expect(wrapper.find('script').at(4).html()).toMatch(/hello world/);
+    expect(wrapper.find('script').at(5).html()).toMatch(/hello world/);
   });
 
   it('must render custom font url', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
     expect(wrapper.find('link').at(2).html()).toMatch(/fonts.googleapis/);
+  });
+
+  it('must not render nested scripts', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    const scripts = wrapper.find('script');
+    for (let i = 0; i < scripts.length; i += 1) {
+      expect(scripts.at(i).html().match(/<script[^>]*>.*?<script/gs)).toBeNull();
+    }
   });
 });

@@ -9,6 +9,8 @@ _Fusion News Theme unpublished API content source block. Please provide a 1-2 se
 
 ## ANS Schema
 
+### ANS Fields
+- n/a
 
 ### Example output
 ```

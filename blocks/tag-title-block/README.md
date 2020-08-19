@@ -15,7 +15,8 @@ _Fusion News Theme tag title block. Please provide a 1-2 sentence description of
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content.Payload[0].name`
+- `content.Payload[0].description`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

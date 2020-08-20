@@ -4,6 +4,9 @@
   a {
     color: $ui-primary-font-color;
   }
+  a > picture > img {
+    vertical-align: middle;
+  }
 
   .overline {
     display: block;

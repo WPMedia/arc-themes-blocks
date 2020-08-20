@@ -6,6 +6,10 @@
     margin-right: 16px;
   }
 
+  a > picture > img {
+    vertical-align: middle;
+  }
+
   .simple-results-list-container {
     @include container-vertial-spacing;
     @include container-hr-separator;

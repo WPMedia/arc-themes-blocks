@@ -40,6 +40,10 @@
     max-width: max-content;
     width: 100%;
   }
+
+  a > picture > img {
+    vertical-align: middle;
+  }
 }
 
 .see-more {

@@ -30,6 +30,12 @@ module.exports = {
             'fusion:intl': './jest/mocks/intl.js',
           },
         }],
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            regenerator: true,
+          },
+        ],
       ],
     },
   },

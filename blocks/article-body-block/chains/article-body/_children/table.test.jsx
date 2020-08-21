@@ -90,6 +90,9 @@ describe('the article body Table component', () => {
       type: 'text',
       _id: 'YOGUWFM2JBB7FOI2OX4FD6G5LE',
       content: 'Multiple paragraphs lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    }, {
+      type: 'text',
+      _id: 'YOGUWFM2JBB7FOI2OX4FD6G5LO',
     }]],
   };
 
@@ -98,6 +101,7 @@ describe('the article body Table component', () => {
     const wrapper = mount(
       <Table element={tableData} />,
     );
+
     expect(wrapper.find(Table)).toHaveLength(1);
     expect(wrapper.find('thead')).toHaveLength(1);
     expect(wrapper.find('thead').find('tr').childAt(0).html()).toMatch('<th aria-label="See content for column">Column 1</th>');

@@ -1,5 +1,8 @@
+import mockStoryVideo from './mockdata/story_video.json';
+import mockStoryGallery from './mockdata/story_gallery.json';
+
 const React = require('react');
-const { mount } = require('enzyme');
+const { mount, shallow } = require('enzyme');
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
@@ -1238,6 +1241,10 @@ describe('article-body chain', () => {
 
   describe('Render image correctly', () => {
     it('should render image with figcaption and author', () => {
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }))));
+
       jest.mock('fusion:context', () => ({
         useAppContext: jest.fn(() => ({
           globalContent: {
@@ -1335,6 +1342,7 @@ describe('article-body chain', () => {
                 url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
                 version: '0.9.0',
                 width: 5616,
+                resized_params: { '1440x0': '' },
               },
             ],
           },
@@ -1460,6 +1468,146 @@ describe('article-body chain', () => {
       expect(wrapper.find('figure').find('img').length).toEqual(0);
       expect(wrapper.find('figure').find('figcaption').length).toEqual(0);
       expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(0);
+    });
+  });
+
+  describe('Render video correctly', () => {
+    it('should video element', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              mockStoryVideo,
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = shallow(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+      expect(wrapper.find('VideoPlayer').length).toEqual(1);
+    });
+  });
+
+  describe('Render gallery correctly', () => {
+    it('should render gallery', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              mockStoryGallery,
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = shallow(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+      expect(wrapper.find('Gallery').length).toEqual(1);
+    });
+  });
+
+  describe('when the content have location', () => {
+    it('should start the paragraph with the location and &mdash;', () => {
+      jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            location: 'JA',
+            content_elements: [
+              {
+                _id: 'L57RVT4465HMBKL5T26NBBFBNI',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120767,
+                },
+                content: 'This is a test article that has all JA &mdash; kinds of different element types in it. You should see each element type appear below the bolded text.',
+              },
+              {
+                _id: 'E3ZIEEQTXBCWVFPN6DWSGAORE4',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120768,
+                },
+                content: '<b>Text (two paragraphs with HTML)</b>',
+              },
+              {
+                _id: 'HAPKPWEE3ZDV3AEQI6IJHA4S24',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                  _id: 1563473120769,
+                },
+                content: 'Lorem ipsum <u>dolor sit amet</u>, consectetur adipiscing elit. <i>Nunc nulla ligula</i>, lobortis egestas urna vel, <a href="https://www.lipsum.com/feed/html" target=_blank>pulvinar dapibus nunc</a>. Nulla rutrum, l<b>igula ac rutrum tempor</b>, erat lectus posuere ipsum, quis facilisis velit neque quis erat. Proin massa massa, suscipit et pretium vitae, posuere non turpis.',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: {
+            elementPlacement: { 1: 2, 2: 1 },
+          },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper')).toHaveLength(1);
+      expect(wrapper.find('p.body-paragraph').at(0).text()).toMatch(/^JA\s—\s/);
+      expect(wrapper.find('p.body-paragraph').at(1).text()).not.toMatch(/^JA\s—\s/);
     });
   });
 });

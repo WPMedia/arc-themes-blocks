@@ -1,0 +1,135 @@
+{
+  "type": "video",
+  "_id": "e3fd9d65-abef-44c0-95b6-7bdfe2acc82d",
+  "version": "0.8.0",
+  "canonical_url": "/2019/11/05/a-shallow-river-streaming-through-a-bed-of-rocks/",
+  "canonical_website": "the-gazette",
+  "short_url": "/2019/11/05/a-shallow-river-streaming-through-a-bed-of-rocks/",
+  "created_date": "2019-11-05T19:47:14Z",
+  "last_updated_date": "2019-11-05T20:42:24Z",
+  "publish_date": "2019-11-05T20:42:36Z",
+  "first_publish_date": "2019-11-05T19:53:57Z",
+  "display_date": "2019-11-05T19:53:57Z",
+  "headlines": {
+    "basic": "A Shallow River Streaming Through A Bed Of Rocks"
+  },
+  "subheadlines": {
+    "basic": "This is the blurb for the video \"A Shallow River Streaming Through A Bed Of Rocks\""
+  },
+  "description": {
+    "basic": "This is the caption for the video \"A Shallow River Streaming Through A Bed Of Rocks\""
+  },
+  "credits": {
+    "affiliation": [
+      {
+        "name": "Pexels"
+      }
+    ],
+    "by": [
+      {
+        "type": "author",
+        "name": "",
+        "org": "Pexels",
+        "slug": ""
+      }
+    ]
+  },
+  "taxonomy": {
+    "tags": [],
+    "seo_keywords": []
+  },
+  "promo_items": {
+    "basic": {
+      "type": "image",
+      "version": "0.5.8",
+      "credits": {},
+      "caption": "GF Default - A Shallow River Streaming Through A Bed Of Rocks",
+      "url": "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "related_content": {
+    "redirect": [],
+    "basic": []
+  },
+  "owner": {
+    "sponsored": false
+  },
+  "planning": {
+    "scheduling": {}
+  },
+  "revision": {
+    "published": true
+  },
+  "syndication": {
+    "search": true
+  },
+  "source": {
+    "name": "Pexels",
+    "system": "video center",
+    "edit_url": "https://corecomponents.arcpublishing.com/goldfish/video/5dc1d1c252faff00098c3399"
+  },
+  "distributor": {
+    "mode": "reference",
+    "reference_id": "884ff0c4-4276-4ac3-895b-53c717097079"
+  },
+  "tracking": {
+    "in_url_headline": "05"
+  },
+  "additional_properties": {
+    "subsection": "Politics",
+    "videoCategory": "vod",
+    "anglerfishArcId": "5VG53AS44JCNNPDXB4UAS3HJRI",
+    "isWire": false,
+    "gifAsThumbnail": false,
+    "videoId": "5dc1d1c252faff00098c3399",
+    "vertical": false,
+    "embedContinuousPlay": true,
+    "published": true,
+    "imageResizerUrls": [],
+    "advertising": {},
+    "disableUpNext": false,
+    "videoAdZone": "",
+    "lastPublishedBy": {
+      "name": "Sara Carothers",
+      "email": "Sara.Carothers@washpost.com",
+      "lastname": ""
+    },
+    "permalinkUrl": "/2019/11/05/a-shallow-river-streaming-through-a-bed-of-rocks/",
+    "platform": "desktop",
+    "playVideoAds": true,
+    "forceClosedCaptionsOn": false,
+    "doNotShowTranscripts": false,
+    "useVariants": false,
+    "has_published_copy": true,
+    "5VG53AS44JCNNPDXB4UAS3HJRI": "11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
+    "playlistTags": [],
+    "comments": [],
+    "_id": "EZVQQ4ONBVAZZFCKGRJFY7VWGA"
+  },
+  "duration": 27583,
+  "video_type": "clip",
+  "streams": [
+    {
+      "height": 720,
+      "width": 1280,
+      "filesize": 7611481,
+      "stream_type": "mp4",
+      "url": "https://d3nn18fxf34y7p.cloudfront.net/wp-corecomponents/Custom/2019/11/05/5dc1d1c252faff00098c3399/t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708/file_1280x720-2000-v3_1.mp4",
+      "bitrate": 2000,
+      "provider": "mediaconvert"
+    }
+  ],
+  "subtitles": {},
+  "promo_image": {
+    "type": "image",
+    "version": "0.5.8",
+    "credits": {},
+    "caption": "GF Default - A Shallow River Streaming Through A Bed Of Rocks",
+    "url": "https://d22ff27hdsy159.cloudfront.net/11-05-2019/t_9f51049ae2e640ba99b4a7f1763ca5fc_name_t_1c01cadfde48422b857383e38d8553a7_name_Pexels_Videos_2330708__scaled.jpg",
+    "width": 1920,
+    "height": 1080
+  },
+  "embed_html": "<div class=\"powa\" id=\"powa-e3fd9d65-abef-44c0-95b6-7bdfe2acc82d\" data-org=\"corecomponents\" data-env=\"prod\" data-uuid=\"e3fd9d65-abef-44c0-95b6-7bdfe2acc82d\" data-aspect-ratio=\"0.562\" data-api=\"prod\"><script src=\"//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents\"></script></div>"
+}

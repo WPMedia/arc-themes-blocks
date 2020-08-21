@@ -5,6 +5,10 @@
     color: $ui-primary-font-color;
   }
 
+  a > picture > img {
+    vertical-align: middle;
+  }
+
   .overline {
     display: inline-block;
     font-size: calculateRem(16px);

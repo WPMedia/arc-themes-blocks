@@ -5,6 +5,10 @@
     font-weight: bold;
     line-height: calculateRem(24px);
   }
+
+  a > picture > img {
+    vertical-align: middle;
+  }
 }
 
 .numbered-list-item {

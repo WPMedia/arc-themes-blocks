@@ -7,12 +7,12 @@ import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import { useDebouncedCallback } from 'use-debounce';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
-import useDebouncedCallback from './useDebounce';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables

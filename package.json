@@ -82,6 +82,7 @@
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
     "@wpmedia/header-nav-block": "file:blocks/header-nav-block",
+    "@wpmedia/header-nav-chain-block": "file:blocks/header-nav-chain-block",
     "@wpmedia/headline-block": "file:blocks/headline-block",
     "@wpmedia/large-manual-promo-block": "file:blocks/large-manual-promo-block",
     "@wpmedia/large-promo-block": "file:blocks/large-promo-block",

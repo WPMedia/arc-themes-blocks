@@ -29,7 +29,8 @@
     "@wpmedia/engine-theme-sdk": "^2.2.0",
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/shared-styles": "latest",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "use-debounce": "^3.4.3"
   },
   "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount, shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
 import Navigation from './default';
@@ -40,7 +41,7 @@ describe('the header navigation feature for the default output type', () => {
       it('should render nothing inside the .nav-right', () => {
         const wrapper = mount(
           <Navigation customFields={{ signInOrder: 2 }}>
-            {[<button type="button">Sign In</button>]}
+            {[<button key={1} type="button">Sign In</button>]}
           </Navigation>,
         );
 
@@ -52,7 +53,7 @@ describe('the header navigation feature for the default output type', () => {
       it('should render the child component inside the .nav-right', () => {
         const wrapper = mount(
           <Navigation customFields={{ signInOrder: 1 }}>
-            {[<button type="button">Sign In</button>]}
+            {[<button key={1} type="button">Sign In</button>]}
           </Navigation>,
         );
 
@@ -101,6 +102,62 @@ describe('the header navigation feature for the default output type', () => {
         const wrapper = mount(<Navigation />);
 
         expect(wrapper.find('div.nav-logo > a > img').length).toBe(0);
+      });
+    });
+
+    describe('when the page has a masthead-block', () => {
+      it('should hide the logo on the initial render', () => {
+        getProperties.mockImplementation(() => ({}));
+        const wrapper = mount(
+          <>
+            <Navigation />
+            <div className="masthead-block-container" />
+          </>,
+        );
+
+        expect(wrapper.find('.nav-logo.nav-logo-hidden').length).toBe(1);
+      });
+
+      it('should show the logo after 1 second if there is not a masthead', () => {
+        jest.useFakeTimers();
+        getProperties.mockImplementation(() => ({}));
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
+      });
+
+      it('should show the logo after 1 second on mobile devices', () => {
+        jest.useFakeTimers();
+        // we need to fake medium breakpoint because jest can't spy on innerWidth yet
+        getProperties.mockImplementation(() => ({
+          breakpoints: { small: 0, medium: 1500, large: 2000 },
+        }));
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
+      });
+
+      it('should setup scroll handlers, when enable logo', () => {
+        const spy = jest.spyOn(window, 'addEventListener');
+        getProperties.mockImplementation(() => ({}));
+        const wrapper = mount(
+          <div>
+            <Navigation />
+            <div className="masthead-block-container" />
+          </div>,
+        );
+        expect(wrapper.find('.masthead-block-container').length).toBe(1);
+        expect(spy).toHaveBeenCalled();
+
+        spy.mockRestore();
       });
     });
   });

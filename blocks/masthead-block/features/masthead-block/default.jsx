@@ -29,7 +29,7 @@ const Masthead = (props) => {
   const displayDate = localizeDate(new Date(), dateFormat, language, timeZone);
 
   return (
-    <HeaderContainerHideMobile>
+    <HeaderContainerHideMobile className="masthead-block-container">
       {
          logoURL && (
          <HeightConstrainedImageContainer>

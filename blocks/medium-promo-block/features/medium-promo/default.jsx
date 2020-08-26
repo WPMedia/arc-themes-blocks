@@ -16,6 +16,7 @@ import {
   extractResizedParams,
   imageRatioCustomField,
   ratiosFor,
+  extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
@@ -44,8 +45,6 @@ const MediumPromo = ({ customFields }) => {
   const byLineArray = (content && content.credits && content.credits.by
       && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
-
-  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
@@ -124,11 +123,11 @@ const MediumPromo = ({ customFields }) => {
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
                 {
-                  customFields.imageOverrideURL || extractImage(content.promo_items)
+                  customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
                         url={customFields.imageOverrideURL
-                          ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                          ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}
                         // medium is 16:9
                         smallWidth={ratios.smallWidth}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function getLocation(uri) {
   let url;
-  if (typeof window !== 'undefined') {
+  if (typeof window === 'undefined') {
     url = new URL(uri, 'http://example.com');
   } else {
     url = document.createElement('a');

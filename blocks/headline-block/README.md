@@ -15,7 +15,7 @@ _Fusion News Theme headline block. Please provide a 1-2 sentence description of 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `headlines.basic`
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

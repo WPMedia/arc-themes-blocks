@@ -17,6 +17,7 @@ import {
   extractResizedParams,
   imageRatioCustomField,
   ratiosFor,
+  extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
 const HeadlineText = styled.h1`
@@ -57,8 +58,6 @@ const ExtraLargePromo = ({ customFields }) => {
   const overlineText = (content?.label?.basic?.text ?? null)
     || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
     || '';
-
-  const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {
@@ -155,11 +154,11 @@ const ExtraLargePromo = ({ customFields }) => {
                   href={content.website_url}
                   title={content && content.headlines ? content.headlines.basic : ''}
                 >
-                  {customFields.imageOverrideURL || extractImage(content.promo_items)
+                  {customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
                         url={customFields.imageOverrideURL
-                          ? customFields.imageOverrideURL : extractImage(content.promo_items)}
+                          ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}
                         smallWidth={ratios.smallWidth}
                         smallHeight={ratios.smallHeight}

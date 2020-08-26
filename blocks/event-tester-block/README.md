@@ -15,7 +15,7 @@ _Fusion News Theme event tester block. Used for testing the event emitter.  When
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

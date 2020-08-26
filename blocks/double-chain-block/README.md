@@ -17,7 +17,7 @@ Fusion News Theme double-chain block. Takes in a number of how many items to be 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

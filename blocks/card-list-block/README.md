@@ -21,7 +21,10 @@ _Please provide a 1-2 sentence description of what the block is and what it does
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content_elements[x].websites[arcSite].website_url`
+- `content_elements[0].credits.by` Check for multiple authors in first article
+- `content_elements[0].websites[arcSite]` Uses `website_url`
+- `content_elements[0].headlines.basic`
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

@@ -15,7 +15,7 @@ _Fusion News Theme masthead block is a relatively simple feature that is typical
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- n/a
 
 ## Internationalization fields
 | Phrase key | Default (English) |

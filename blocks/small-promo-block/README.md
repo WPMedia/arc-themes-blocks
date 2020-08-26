@@ -15,7 +15,10 @@ _Block containing a small promo component. Please provide a 1-2 sentence descrip
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content.headlines.basic`
+- `content.description.basic`
+- `content.websites[arcSite].website_section`
+- `content.promo_items`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

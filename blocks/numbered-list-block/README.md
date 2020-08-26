@@ -15,7 +15,9 @@ _Numbered List block for Fusion News Theme. Displays a numbered list where each 
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content_elements.headlines.basic`
+- `content_elements.promo_items`
+- `content_elements.websites[arcSite].website_url`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

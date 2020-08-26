@@ -15,7 +15,11 @@ _Block containing our News Theme nav for the header. Please provide a 1-2 senten
 Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `children` available via `site-service-hierarchy` (optional)
+- `children[x].node_type`
+- `children[x].url`
+- `children[x].display_name`
+- `children[x].name`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

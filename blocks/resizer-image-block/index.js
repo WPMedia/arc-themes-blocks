@@ -4,6 +4,7 @@ import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
 
 export { default as ratiosFor } from './ratiosFor';
 export { default as imageRatioCustomField } from './imageRatioCustomField';
+export { default as extractImageFromStory } from './extractImageFromStory';
 
 const getResizerParam = (
   originalUrl,
@@ -234,10 +235,14 @@ const getResizedImageParams = (data, options) => {
 };
 
 export const extractResizedParams = (storyObject) => {
-  const basicStoryObject = storyObject?.promo_items?.basic;
+  const basicStoryObject = storyObject?.promo_items?.basic
+                        || storyObject?.promo_items?.lead_art?.promo_items?.basic;
+  if (!basicStoryObject) {
+    return [];
+  }
 
-  if (basicStoryObject?.type === 'image') {
-    return basicStoryObject?.resized_params;
+  if (basicStoryObject.type === 'image') {
+    return basicStoryObject.resized_params;
   }
 
   return [];

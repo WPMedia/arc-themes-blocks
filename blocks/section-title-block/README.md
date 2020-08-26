@@ -16,7 +16,7 @@ Outline any schema information requirements necessary to know for ths block
 
 ### Example output for section
 
-```
+```js
 {
   _id: '/',
   name: 'Section Title',
@@ -54,7 +54,9 @@ Outline any schema information requirements necessary to know for ths block
 ```
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `content.children[x].id`
+- `content.children[x]._id` used as href for link
+- `content.children[x].name`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

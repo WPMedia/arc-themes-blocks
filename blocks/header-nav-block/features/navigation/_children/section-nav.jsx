@@ -60,7 +60,8 @@ const SectionItem = ({ item }) => {
   ));
   return (
     <li className="section-item">
-      {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} />
+      {item.node_type === 'link'
+        ? <Link href={item.url} name={item.display_name} />
         : <Link href={item._id} name={item.name} child={child} />}
       {hasChildren(item) && <SubSectionMenu items={item.children} />}
     </li>

@@ -32,8 +32,25 @@ taxonomy: {
 ```
 
 ### ANS Fields
-- `taxonomy.tags.slug`
-- `taxonomy.tags.text`
+- `taxonomy.tags[x].slug` Detects for '#' as href for fallback
+- `taxonomy.tags[x].text` Required to be string
+
+```js
+{
+  taxonomy: {
+    tags: [
+      {
+        slug: 'sportsball',
+        text: 'Sports!'
+      },
+      {
+        slug: '#',
+        text: 'General'
+      }
+    ]
+  }
+}
+```
 
 ## Internationalization fields
 - Add all internationalization fields used in the block

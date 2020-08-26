@@ -10,6 +10,9 @@ _This is specifically to make sure that resized image urls are available at them
 ## ANS Schema
 Detail the data structure returned from this content source
 
+### ANS Fields
+- n/a
+
 ## Configurable Params
 | **Param** | **Type** | **Description** |
 |---|---|---|

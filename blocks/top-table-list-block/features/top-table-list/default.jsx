@@ -8,6 +8,7 @@ import getThemeStyle from 'fusion:themes';
 import {
   extractResizedParams,
   imageRatioCustomField,
+  extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {
@@ -27,11 +28,6 @@ import './default.scss';
 // styles end
 
 // helpers start
-const extractImage = (storyObject) => storyObject.promo_items
-  && storyObject.promo_items.basic
-  && storyObject.promo_items.basic.type === 'image'
-  && storyObject.promo_items.basic.url;
-
 const overlineData = (storyObject, arcSite) => {
   const { display: labelDisplay, url: labelUrl, text: labelText } = (
     storyObject.label && storyObject.label.basic
@@ -53,7 +49,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
   return {
     id: storyObject._id,
     itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
-    imageURL: extractImage(storyObject) || '',
+    imageURL: extractImageFromStory(storyObject) || '',
     displayDate: storyObject.display_date || '',
     description: (storyObject.description && storyObject.description.basic) || '',
     by: (storyObject.credits && storyObject.credits.by) || [],

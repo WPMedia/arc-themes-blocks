@@ -29,7 +29,7 @@ credits: {
 ```
 
 ### ANS Fields
-- `Add all ANS fields used in the block`
+- `credits.by`
 
 ## Internationalization fields
 | Phrase key | Default (English) |

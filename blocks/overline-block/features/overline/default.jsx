@@ -13,12 +13,40 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-function fixTrailingSlash(item) {
-  let fixedItem = item;
-  if (fixedItem[fixedItem.length - 1] !== '/') {
-    fixedItem += '/';
+const StyledText = styled.span`
+  font-family: ${(props) => props.primaryFont};
+  font-weight: bold;
+  text-decoration: none;
+`;
+
+function getLocation(uri) {
+  let url;
+  if (typeof window === 'undefined') {
+    url = new URL(uri, 'http://example.com');
+  } else {
+    url = document.createElement('a');
+    // IE doesn't populate all link properties when setting .href with a relative URL,
+    // however .href will return an absolute URL which then can be used on itself
+    // to populate these additional fields.
+    url.href = uri;
+    if (url.host === '') {
+      url.href = `${url.href}`;
+    }
   }
-  return fixedItem;
+  return url;
+}
+
+function fixTrailingSlash(item) {
+  const url = getLocation(item);
+
+  if (url.hash || url.search || url.pathname.match(/\./)) {
+    return item;
+  }
+
+  if (item[item.length - 1] !== '/') {
+    return `${item}/`;
+  }
+  return item;
 }
 
 const Overline = (props) => {
@@ -46,8 +74,8 @@ const Overline = (props) => {
   const [text, url] = shouldUseProps ? [customText, customUrl] : useGlobalContent;
   const edit = editable ? { ...editableContent(content, text) } : {};
 
-  return text
-    ? (
+  if (url) {
+    return (
       <StyledLink
         href={fixTrailingSlash(url)}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
@@ -57,8 +85,23 @@ const Overline = (props) => {
       >
         {text}
       </StyledLink>
-    )
-    : null;
+    );
+  }
+
+  if (text) {
+    return (
+      <StyledText
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        className="overline"
+        {...edit}
+        suppressContentEditableWarning
+      >
+        {text}
+      </StyledText>
+    );
+  }
+
+  return null;
 };
 
 Overline.label = 'Overline – Arc Block';

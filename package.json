@@ -38,6 +38,7 @@
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/react": "^5.3.19",
     "@wpmedia/news-theme-css": "stable",
+    "@storybook/addon-knobs": "^5.3.19",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",
@@ -71,7 +72,7 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
-    "@storybook/addon-knobs": "^5.3.19",
+    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",
     "@wpmedia/alert-bar-content-source-block": "file:blocks/alert-bar-content-source-block",

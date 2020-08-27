@@ -7,6 +7,7 @@ import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import { useDebouncedCallback } from 'use-debounce';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
 // shares styles with header nav block
@@ -48,6 +49,7 @@ const Nav = (props) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
     primaryLogo, primaryLogoAlt, navColor, locale = 'en',
+    breakpoints = { small: 0, medium: 768, large: 992 },
   } = getProperties(arcSite);
   let primaryLogoPath;
 
@@ -79,6 +81,7 @@ const Nav = (props) => {
   const sections = (mainContent && mainContent.children) ? mainContent.children : [];
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
+  const [isLogoVisible, setLogoVisibility] = useState(false);
 
   const closeNavigation = () => {
     setSectionDrawerOpen(false);
@@ -118,6 +121,61 @@ const Nav = (props) => {
     primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
   }
 
+  const onScrollEvent = (evt) => {
+    if (!evt) {
+      return;
+    }
+
+    const scrollTop = evt.target?.documentElement?.scrollTop;
+    if (typeof scrollTop === 'undefined') {
+      return;
+    }
+
+    if (scrollTop > 150) {
+      setLogoVisibility(true);
+    }
+    if (scrollTop < 30) {
+      setLogoVisibility(false);
+    }
+  };
+
+  const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
+
+  useEffect(() => {
+    const mastHead = document.querySelector('.masthead-block-container');
+    if (!mastHead) {
+      return undefined;
+    }
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    // on small viewports we do not need this
+    if (vw >= breakpoints.medium) {
+      window.addEventListener('scroll', onScrollDebounced);
+      return () => {
+        window.removeEventListener('scroll', onScrollDebounced);
+      };
+    }
+    return undefined;
+  }, []);
+
+  useEffect(() => {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (vw < breakpoints.medium) {
+      setLogoVisibility(true);
+      return undefined;
+    }
+
+    const timerID = setTimeout(() => {
+      const mastHead = document.querySelector('.masthead-block-container');
+      if (!mastHead) {
+        setLogoVisibility(true);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timerID);
+    };
+  }, []);
+
   return (
     <>
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
@@ -130,7 +188,7 @@ const Nav = (props) => {
             </button>
           </div>
 
-          <div className="nav-logo">
+          <div className={`nav-logo ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
             <a href="/" title={primaryLogoAlt}>
               {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
             </a>

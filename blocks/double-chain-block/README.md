@@ -7,7 +7,7 @@ Fusion News Theme double-chain block. Takes in a number of how many items to be 
 - PageBuilder editor can configure how many features are placed in each column within the chain. 
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

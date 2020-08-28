@@ -5,7 +5,7 @@ _Fusion News Theme event tester block. Used for testing the event emitter.  When
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

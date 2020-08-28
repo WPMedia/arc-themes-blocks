@@ -5,7 +5,7 @@ _Search Results List block for Fusion News Theme. This block displays a search b
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

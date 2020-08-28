@@ -7,7 +7,7 @@ _The translations can be found the `intl.json` file._
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

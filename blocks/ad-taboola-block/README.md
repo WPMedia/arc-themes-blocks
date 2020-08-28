@@ -4,7 +4,7 @@ _Block that implement a [Taboola Widget](https://www.taboola.com/)._
 ## Props
 
 ### Global
-| **Prop** | **Required** | **Descripton** |
+| **Prop** | **Required** | **Description** |
 |---|---|---|
 | **taboolaPublisherId** | yes | Publishier ID provided by Taboola |
 
@@ -25,7 +25,7 @@ This configuration need to added to `blocks.json` like this:
 ```
 
 ### Per widget
-| **Prop** | **Required** | **Descripton** |
+| **Prop** | **Required** | **Description** |
 |---|---|---|
 | **taboolaPlacement** | yes | Widget placement description, provided by Taboola |
 | **taboolaMode** | yes | Widget mode, provided by Taboola |

@@ -6,7 +6,7 @@ _Text File block for Fusion News Theme. This block offers a convenient way to re
 - Be sure to use the page output type `text` or nothing will render. 
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

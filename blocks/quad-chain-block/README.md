@@ -7,7 +7,7 @@ _Fusion News Theme quad-chain block. Utilizes bootstrap's three column approach 
 - PageBuilder editor can configure how many features are placed in each column within the chain.
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

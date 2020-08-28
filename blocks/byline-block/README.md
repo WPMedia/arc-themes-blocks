@@ -9,7 +9,7 @@ Byline block for Fusion News Theme
 - If there's no authors, it will return null.
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

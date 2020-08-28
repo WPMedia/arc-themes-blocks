@@ -5,7 +5,7 @@ _Fusion News Theme masthead block is a relatively simple feature that is typical
 - As a Themes customer, I can put a Masthead Arc Block onto my homepage, because I want this traditional newspaper design element 
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

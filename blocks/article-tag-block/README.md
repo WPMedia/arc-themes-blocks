@@ -8,7 +8,7 @@ _Fusion News Article Tags block_
 - If taxonomy section is missing, it will not render anything.
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

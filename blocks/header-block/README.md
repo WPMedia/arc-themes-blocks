@@ -5,7 +5,7 @@ _Fusion News Theme header block. Please provide a 1-2 sentence description of wh
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **customFields.text** | no | string | add description |
 | **customfields.size** | no | oneOf | 'Extra Large', 'Large', 'Medium', 'Small' |

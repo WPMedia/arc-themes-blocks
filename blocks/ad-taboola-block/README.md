@@ -6,7 +6,7 @@ _Block that implement a [Taboola Widget](https://www.taboola.com/)._
 ### Global
 | **Prop** | **Required** | **Description** |
 |---|---|---|
-| **taboolaPublisherId** | yes | Publishier ID provided by Taboola |
+| **taboolaPublisherId** | yes | Publisher ID provided by Taboola |
 
 This configuration need to added to `blocks.json` like this:
 ```

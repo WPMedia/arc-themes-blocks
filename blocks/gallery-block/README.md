@@ -8,7 +8,7 @@ _Block containing a gallery that reads in a gallery from a content source. Pleas
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **customFields.inheritGlobalContent** | no | Boolean | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
-| **ocustomFields.galleryContentConfig** | no | Fusion Content Config | Content config that will be used if `inheritGlobalContent` is false. |
+| **customFields.galleryContentConfig** | no | Fusion Content Config | Content config that will be used if `inheritGlobalContent` is false. |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

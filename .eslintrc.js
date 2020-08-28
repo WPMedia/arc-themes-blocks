@@ -21,7 +21,8 @@ module.exports = {
   plugins: [
     'react',
     'jest',
-    'jsx-a11y'
+    'jsx-a11y',
+    'react-hooks'
   ],
   rules: {
     'global-require': 'off',
@@ -67,6 +68,8 @@ module.exports = {
     'jsx-a11y/role-has-required-aria-props': 2,
     'jsx-a11y/role-supports-aria-props': 2,
     'jsx-a11y/scope': 2,
-    'jsx-a11y/tabindex-no-positive': 2
+    'jsx-a11y/tabindex-no-positive': 2,
+    "react-hooks/rules-of-hooks": "warn", // todo: this should be an error
+    "react-hooks/exhaustive-deps": "warn" 
   },
 };

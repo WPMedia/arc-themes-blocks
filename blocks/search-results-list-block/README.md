@@ -5,7 +5,7 @@ _Search Results List block for Fusion News Theme. This block displays a search b
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
@@ -32,7 +32,7 @@ Blocks can emit events. The following is a list of events that are emitted by th
 | **eventName** | Describe the event |
 
 ### Event Listening
-Include block specific intructions for event listening.
+Include block specific instructions for event listening.
 
 OR
 
@@ -48,6 +48,6 @@ _It also makes use of ByLine to display authors of each story and it is included
 
 ### Custom Search Action
 If you are creating custom blocks that are leveraging the global content part of the Search Results List block and need to over-ride the action taken when the search box field has been submitted 
-(for both click and keyboard submisstions) an over-ride function can be passed as a prop to either the main default.jsx or to the global-content.jsx component.  The prop name is called `customSearchAction`.
+(for both click and keyboard submissions) an over-ride function can be passed as a prop to either the main default.jsx or to the global-content.jsx component.  The prop name is called `customSearchAction`.
 
 If passed into default.jsx it will pass it down to global-content.  Your implementation of `customSearchAction` should expect one param that will be the value of the search entry.  If `customSearchAction` is not implemented, default behavior will occur during a search submission.

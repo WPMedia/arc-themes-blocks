@@ -157,7 +157,7 @@ This command does all the installing and linking we need to have access to our d
 
 ##### Adding a new dependency
 
-Much like installing existing dependencies, we'll want to rely on lerna commands for adding new dependecies and linking subpackages together as well.
+Much like installing existing dependencies, we'll want to rely on lerna commands for adding new dependencies and linking subpackages together as well.
 
 [We'll want to use lerna's 'add' command to install new dependencies.](https://github.com/lerna/lerna/tree/master/commands/add#readme) It's unlikely any of our usage will end up deviating from that doc.
 
@@ -173,7 +173,7 @@ For either the Engine SDK or the CSS Framework, the process is as follows:
 
 2. Replace all instances with the new version. In the example above, you would replace `"@wpmedia/engine-theme-sdk": "^2.1.0"` with `"@wpmedia/engine-theme-sdk": "^3.0.0"`
 
-3. Run `npx lerna boostrap` to make sure the dependencies are being pulled properly
+3. Run `npx lerna bootstrap` to make sure the dependencies are being pulled properly
 
 #### 5. Writing Unit Tests
 Unit tests should be written alongside the feature before it is pushed to Code Review. We're using Jest as our test runner and Enzyme as our testing tool for testing React components. Not only will you have the standard Jest assertion available to you. You'll also have all of assertion matchers provided by [jest-enzyme](https://github.com/FormidableLabs/enzyme-matchers/tree/master/packages/jest-enzyme). The test files should be placed in the same directory as the main feature React file as well as be named the same. If you're testing `default.jsx`, your tests would be in the same directory in a file called `default.test.jsx`.

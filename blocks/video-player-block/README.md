@@ -5,7 +5,7 @@ _Fusion News Theme video player block. Please provide a 1-2 sentence description
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |
@@ -30,7 +30,7 @@ Blocks can emit events. The following is a list of events that are emitted by th
 | **eventName** | Describe the event |
 
 ### Event Listening
-Include block specific intructions for event listening.
+Include block specific instructions for event listening.
 
 OR
 

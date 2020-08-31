@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 describe('the alert bar feature for the default output type', () => {
@@ -64,5 +64,101 @@ describe('the alert bar feature for the default output type', () => {
     });
     const wrapper = mount(<AlertBar customFields={customFields} arcSite="the-sun" />);
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
+  });
+});
+
+describe('the alert can handle user interaction', () => {
+  it('must hide when click the close button', () => {
+    const { default: AlertBar } = require('./default');
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched: new Promise((r) => r(content)),
+    });
+    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    expect(wrapper.find('.alert-bar')).toHaveLength(1);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('.alert-bar')).toHaveLength(0);
+  });
+
+  it('must set a cookie with the headline text when is dismissed', () => {
+    const { default: AlertBar } = require('./default');
+    const cookieText = 'This is a test headline for cookie';
+    const encodedCookie = 'arcblock_alert-bar=This%20is%20a%20test%20headline%20for%20cookie';
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: cookieText,
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched: new Promise((r) => r(content)),
+    });
+    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    expect(wrapper.find('.alert-bar')).toHaveLength(1);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('.alert-bar')).toHaveLength(0);
+    expect(document.cookie).toEqual(encodedCookie);
+  });
+
+
+  it('must not render alert when cookie match the headline text', () => {
+    const { default: AlertBar } = require('./default');
+    const cookieText = 'cookie with text';
+    const encodedCookie = 'arcblock_alert-bar=cookie%20with%20text';
+
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: cookieText,
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+    document.cookie = encodedCookie;
+
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched: new Promise((r) => r(content)),
+    });
+    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    expect(wrapper.find('.alert-bar')).toHaveLength(0);
+    expect(document.cookie).toEqual(encodedCookie);
   });
 });

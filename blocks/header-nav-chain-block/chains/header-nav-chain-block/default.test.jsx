@@ -178,7 +178,7 @@ describe('the header navigation feature for the default output type', () => {
         spy.mockRestore();
       });
 
-      it('should not setup scroll handlers when enable logo and masthead logo missing', () => {
+      it('should not setup scroll handlers when logo is enabled and masthead logo is missing', () => {
         getProperties.mockImplementation(() => ({}));
         let handlerSetup = false;
         const spy = jest.spyOn(window, 'addEventListener').mockImplementation((...args) => {

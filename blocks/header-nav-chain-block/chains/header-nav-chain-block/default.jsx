@@ -142,7 +142,7 @@ const Nav = (props) => {
   const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
 
   useEffect(() => {
-    const mastHead = document.querySelector('.masthead-block-container');
+    const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
     if (!mastHead) {
       return undefined;
     }
@@ -165,7 +165,7 @@ const Nav = (props) => {
     }
 
     const timerID = setTimeout(() => {
-      const mastHead = document.querySelector('.masthead-block-container');
+      const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
       if (!mastHead) {
         setLogoVisibility(true);
       }

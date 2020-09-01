@@ -97,7 +97,7 @@ describe('the alert can handle user interaction', () => {
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
   });
 
-  it('must set a cookie with the headline text when is dismissed', () => {
+  it("must set a cookie with the headline text when it's dismissed", () => {
     const { default: AlertBar } = require('./default');
     const cookieText = 'This is a test headline for cookie';
     const encodedCookie = 'arcblock_alert-bar=This%20is%20a%20test%20headline%20for%20cookie';

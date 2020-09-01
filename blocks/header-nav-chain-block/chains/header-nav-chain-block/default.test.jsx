@@ -161,7 +161,7 @@ describe('the header navigation feature for the default output type', () => {
         spy.mockRestore();
       });
 
-      it('should not show the logo after 1 second if there is masthead and logo', () => {
+      it('should not show the logo after 1 second if there is a masthead and logo', () => {
         jest.useFakeTimers();
         getProperties.mockImplementation(() => ({}));
         const spy = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (

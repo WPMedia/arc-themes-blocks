@@ -145,7 +145,7 @@ describe('the header navigation feature for the default output type', () => {
         expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
       });
 
-      it('should show the logo after 1 second if there is masthead but no logo', () => {
+      it('should show the logo after 1 second if there is a masthead but no logo', () => {
         jest.useFakeTimers();
         getProperties.mockImplementation(() => ({}));
         const spy = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (

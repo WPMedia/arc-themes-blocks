@@ -130,7 +130,7 @@ describe('the alert can handle user interaction', () => {
   });
 
 
-  it('must not render alert when cookie match the headline text', () => {
+  it('must not render alert when cookie matches the headline text', () => {
     const { default: AlertBar } = require('./default');
     const cookieText = 'cookie with text';
     const encodedCookie = 'arcblock_alert-bar=cookie%20with%20text';

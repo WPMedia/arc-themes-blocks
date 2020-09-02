@@ -28,9 +28,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "stable",
+    "@wpmedia/news-theme-css": "stable"
+  },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "stable",
     "@wpmedia/shared-styles": "latest",
     "styled-components": "^4.4.0"
   },

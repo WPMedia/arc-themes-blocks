@@ -13,9 +13,11 @@
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "stable",
+    "@wpmedia/news-theme-css": "stable"
+  },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^5.0.1"
   },
   "scripts": {

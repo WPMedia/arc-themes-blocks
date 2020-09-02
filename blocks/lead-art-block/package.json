@@ -20,9 +20,11 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/lead-art-block"
   },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "stable",
+    "@wpmedia/news-theme-css": "stable"
+  },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "stable",
     "@wpmedia/video-player-block": "latest",
     "styled-components": "^4.4.0"
   },

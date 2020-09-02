@@ -27,10 +27,10 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "stable",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/video-player-block": "stable"
   },
   "dependencies": {
-    "@wpmedia/video-player-block": "latest",
     "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   },

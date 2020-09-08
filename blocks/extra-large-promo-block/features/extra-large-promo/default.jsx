@@ -19,6 +19,8 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -58,6 +60,7 @@ const ExtraLargePromo = ({ customFields }) => {
   const overlineText = (content?.label?.basic?.text ?? null)
     || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
     || '';
+  const promoType = discoverPromoType(content);
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {
@@ -182,6 +185,7 @@ const ExtraLargePromo = ({ customFields }) => {
                         largeHeight={ratios.largeHeight}
                       />
                     )}
+                  <PromoLabel type={promoType} />
                 </a>
               )}
               {descriptionTmpl()}

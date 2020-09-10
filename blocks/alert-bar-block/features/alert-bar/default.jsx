@@ -29,6 +29,7 @@ class AlertBar extends Component {
     });
 
     if (typeof window !== 'undefined') {
+      this.cookie = readCookie();
       this.state = {
         content: cached,
         visible: this.checkAlertVisible(cached),

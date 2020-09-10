@@ -88,12 +88,6 @@ const Nav = (props) => {
     document.body.classList.remove('nav-open');
   };
 
-  const handleEscKey = (event) => {
-    if (event.keyCode === 27) {
-      closeNavigation();
-    }
-  };
-
   const closeDrawer = (event) => {
     const ele = event.target;
     if (ele.closest('.inner-drawer-nav')) {
@@ -108,6 +102,12 @@ const Nav = (props) => {
   };
 
   useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.keyCode === 27) {
+        closeNavigation();
+      }
+    };
+
     window.addEventListener('keydown', handleEscKey, true);
     return () => {
       window.removeEventListener('keydown', handleEscKey);
@@ -142,7 +142,7 @@ const Nav = (props) => {
   const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
 
   useEffect(() => {
-    const mastHead = document.querySelector('.masthead-block-container');
+    const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
     if (!mastHead) {
       return undefined;
     }
@@ -155,7 +155,7 @@ const Nav = (props) => {
       };
     }
     return undefined;
-  }, []);
+  }, [onScrollDebounced, breakpoints]);
 
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -165,7 +165,7 @@ const Nav = (props) => {
     }
 
     const timerID = setTimeout(() => {
-      const mastHead = document.querySelector('.masthead-block-container');
+      const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
       if (!mastHead) {
         setLogoVisibility(true);
       }
@@ -174,7 +174,7 @@ const Nav = (props) => {
     return () => {
       clearTimeout(timerID);
     };
-  }, []);
+  }, [breakpoints]);
 
   return (
     <>

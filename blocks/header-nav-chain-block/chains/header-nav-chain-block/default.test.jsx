@@ -145,19 +145,90 @@ describe('the header navigation feature for the default output type', () => {
         expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
       });
 
-      it('should setup scroll handlers, when enable logo', () => {
-        const spy = jest.spyOn(window, 'addEventListener');
+      it('should show the logo after 1 second if there is a masthead but no logo', () => {
+        jest.useFakeTimers();
         getProperties.mockImplementation(() => ({}));
-        const wrapper = mount(
-          <div>
-            <Navigation />
-            <div className="masthead-block-container" />
-          </div>,
-        );
-        expect(wrapper.find('.masthead-block-container').length).toBe(1);
-        expect(spy).toHaveBeenCalled();
+        const spy = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (
+          (selector === '.masthead-block-container .masthead-block-logo') ? undefined : {}
+        ));
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
+        spy.mockRestore();
+      });
+
+      it('should not show the logo after 1 second if there is a masthead and logo', () => {
+        jest.useFakeTimers();
+        getProperties.mockImplementation(() => ({}));
+        const spy = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (
+          (selector === '.masthead-block-container .masthead-block-logo') ? {} : undefined
+        ));
+
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-hidden').length).toBe(1);
+        spy.mockRestore();
+      });
+
+      it('should not setup scroll handlers when logo is enabled and masthead logo is missing', () => {
+        getProperties.mockImplementation(() => ({}));
+        let handlerSetup = false;
+        const spy = jest.spyOn(window, 'addEventListener').mockImplementation((...args) => {
+          if (args[0] === 'scroll') {
+            handlerSetup = true;
+          }
+          return undefined;
+        });
+        const spy2 = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (
+          (selector === '.masthead-block-container .masthead-block-logo') ? undefined : { data: true }
+        ));
+
+        jest.useFakeTimers();
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
+        expect(handlerSetup).toBeFalsy();
 
         spy.mockRestore();
+        spy2.mockRestore();
+      });
+
+      it('should setup scroll handlers, when enable logo', () => {
+        let handlerSetup = false;
+        const spy = jest.spyOn(window, 'addEventListener').mockImplementation((...args) => {
+          if (args[0] === 'scroll') {
+            handlerSetup = true;
+          }
+          return undefined;
+        });
+        const spy2 = jest.spyOn(document, 'querySelector').mockImplementation((selector) => (
+          (selector === '.masthead-block-container .masthead-block-logo') ? { data: true } : undefined
+        ));
+        getProperties.mockImplementation(() => ({}));
+        jest.useFakeTimers();
+        const wrapper = mount(<Navigation />);
+        act(() => {
+          jest.runAllTimers();
+          wrapper.setProps({});
+        });
+
+        expect(wrapper.find('.nav-logo.nav-logo-hidden').length).toBe(1);
+        expect(handlerSetup).toBeTruthy();
+
+        spy.mockRestore();
+        spy2.mockRestore();
       });
     });
   });

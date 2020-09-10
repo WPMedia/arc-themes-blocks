@@ -32,7 +32,7 @@ const Masthead = (props) => {
     <HeaderContainerHideMobile className="masthead-block-container">
       {
          logoURL && (
-         <HeightConstrainedImageContainer>
+         <HeightConstrainedImageContainer className="masthead-block-logo">
            <picture>
              <img src={logoURL} alt="Masthead logo" />
            </picture>

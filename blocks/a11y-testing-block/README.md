@@ -12,7 +12,7 @@ on your page that when clicked will open/close the issue panel where you can see
 2) UI Panel Trigger Control:  If have `Show A11y UI` set to `true`, then you can decide where to place the control button that
 opens and closes the issue panel.  The button can be placed in one of the four corners of the page, however the issue panel will always 
 be displayed on the right side when it is open.
-3) WCAG A11y Levels: Choose the WACG (Web Content Accessibility Guidelines) level you want to target.  The default setting of
+3) WCAG A11y Levels: Choose the WCAG (Web Content Accessibility Guidelines) level you want to target.  The default setting of
 `Level AA` is recommended.  More information on the different types of WCAG levels and what they target can be found here: 
 https://www.w3.org/WAI/WCAG21/quickref/
 4) Include additional best practices: Enabled by default.  This adds additional best practice checks during the audit that are not in the 

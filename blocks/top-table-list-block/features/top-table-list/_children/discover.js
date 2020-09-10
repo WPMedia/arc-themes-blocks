@@ -4,25 +4,25 @@ function discoverPromoType(content) {
     return undefined;
   }
 
-  let rc = '';
+  let promoType = '';
 
   switch (content.type) {
     case 'video':
-      rc = 'Video';
+      promoType = 'Video';
       break;
     case 'gallery':
-      rc = 'Gallery';
+      promoType = 'Gallery';
       break;
     default:
       // eslint-disable-next-line camelcase
       if (content.promo_items?.lead_art?.type) {
-        rc = discoverPromoType(content.promo_items.lead_art);
+        promoType = discoverPromoType(content.promo_items.lead_art);
       } else {
-        rc = 'other';
+        promoType = 'other';
       }
   }
 
-  return rc;
+  return promoType;
 }
 
 export default discoverPromoType;

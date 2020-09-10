@@ -102,7 +102,7 @@ component Sass code to set spacing and media queries.
 news-theme-css is provided to the other parts of the system as an NPM
 package. For more information on the build and publishing process for this repository,
 please see the readme.md for the project:
-<https://github.com/WPMedia/news-theme-css/blob/master/readme.md>
+<https://github.com/WPMedia/news-theme-css/blob/stables/readme.md>
 
 **Note:** When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.
@@ -121,12 +121,12 @@ committing changes and publishing. Originally, this repo was a
 multi-package using Lerna (<https://lerna.js.org/>), however, it has since changed into a mono-repo (like news-theme-css).
 Here are the steps and commands you need to know to build and publish.
 
-1.  Create a branch off master for what you want to work on.
+1.  Create a branch off stable for what you want to work on.
 2.  Once changes are completed, run: `npm run build` then add, commit,
     push all changes to your branch on GitHub.
 3.  Create a PR and ask for it to be reviewed.
-4.  When approved, merge into master.
-5.  Pull down master on your system.
+4.  When approved, merge into stable.
+5.  Pull down stable on your system.
 6.  Look at the package.json for the project and note the version. Your
     will want to increment the version in the next step
 7.  If, for example, the current version says 0.4.3, then run the
@@ -173,34 +173,34 @@ components to inject these values into the component.
 The development process is similar engine-theme-sdk, except when it
 comes time to publish, you need to follow the Lerna publish procedure.
 For more information, see the repo's read me:
-<https://github.com/WPMedia/fusion-news-theme-blocks/blob/master/README.md>
+<https://github.com/WPMedia/fusion-news-theme-blocks/blob/stable/README.md>
 
 Note: When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.
 
 ### Development Process
 
-1. Pull the latest `staging` branch:
+1. Pull the latest `canary` branch:
 
 ```sh
-git checkout staging
+git checkout canary
 git fetch -a
 ```
 
-2. Branch off the `staging` branch:
+2. Branch off the `canary` branch:
 
 ```sh
 git checkout -b PEN-[jira ticket num]-[brief description of feature]
 ```
 
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
-4. Make pull request using Github against the `staging` branch. Get approval for your pr on your feature branch.
-5. Merge the PR into the `staging` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
+4. Make pull request using Github against the `canary` branch. Get approval for your pr on your feature branch.
+5. Merge the PR into the `canary` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
 
 
 #### How To Publish
 
-Before publishing, make sure a Pull Request has been made and merged from the `staging` branch against the `rc` branch. This PR should only include features that belong to the current release, so make sure to merge as soon as the features for the release have been completed to avoid including further features from `staging` belonging to a later release.
+Before publishing, make sure a Pull Request has been made and merged from the `canary` branch against the `beta` branch. This PR should only include features that belong to the current release, so make sure to merge as soon as the features for the release have been completed to avoid including further features from `canary` belonging to a later release.
 
 ---
 NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
@@ -219,10 +219,10 @@ WARNING: If you need help rolling back publish, please see the wiki [How A Dev C
 
 ---
 
-1. Pull the latest `rc` branch:
+1. Pull the latest `beta` branch:
 
 ```sh
-git checkout rc
+git checkout beta
 git fetch -a
 ```
 
@@ -234,54 +234,54 @@ npx lerna publish --force-publish --preid beta --pre-dist-tag beta
 
 3. Select either `prepatch`, `preminor`, or `premajor` if this is the first prerelease build for this production release (e.g. `-beta.0`). If this is a prerelease that makes changes on top of a prior prerelease then select the `Custom Prerelease` option and accept the default, this should result in the version having only an incremented prerelease number instead of an incremented major, minor, or patch number (e.g `-beta.1`). Note that this will publish all packages to aid our block installer process.
 4. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
-5. After either design QA or product QA approval of that deployed bundle, checkout `master` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `rc` into `master`.
-6. Then, in `master`, you can publish a production release with the following command:
+5. After either design QA or product QA approval of that deployed bundle, checkout `stable` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `beta` into `stable`.
+6. Then, in `stable`, you can publish a production release with the following command:
 
 ```sh
 npx lerna publish --conventional-commits --conventional-graduate
 ```
 
-7. After publishing from the `master` branch, merge `master` into `rc` and `rc` into `staging` so that the changes related to the publish we just did end up in both of those branches.
+7. After publishing from the `stable` branch, merge `stable` into `beta` and `beta` into `canary` so that the changes related to the publish we just did end up in both of those branches.
 
-Merging `rc`
+Merging `beta`
 ```sh
-# Ensure we're on the master branch
-git checkout master
-# Ensure we have the latest from master
-git pull origin master
-# Checkout rc
-git checkout rc
-# Ensure we have the latest from rc
-git pull origin rc
-# Rebase rc onto master
-git rebase master
-# Push the updated rc branch (--force is required or else it will fail)
-git push --force origin rc
+# Ensure we're on the stable branch
+git checkout stable
+# Ensure we have the latest from stable
+git pull origin stable
+# Checkout beta
+git checkout beta
+# Ensure we have the latest from beta
+git pull origin beta
+# Rebase beta onto stable
+git rebase stable
+# Push the updated beta branch (--force is required or else it will fail)
+git push --force origin beta
 ```
 
-Merging `staging`
+Merging `canary`
 ```sh
-# Ensure we're on the rc branch
-git checkout rc
-# Ensure we have the latest from rc
-git pull origin rc
-# Checkout staging
-git checkout staging
-# Ensure we have the latest from staging
-git pull origin staging
-# Rebase staging onto rc
-git rebase rc
-# Push the updated staging branch (--force is required or else it will fail)
-git push --force origin staging
+# Ensure we're on the beta branch
+git checkout beta
+# Ensure we have the latest from beta
+git pull origin beta
+# Checkout canary
+git checkout canary
+# Ensure we have the latest from canary
+git pull origin canary
+# Rebase canary onto beta
+git rebase beta
+# Push the updated canary branch (--force is required or else it will fail)
+git push --force origin canary
 ```
 
 #### Publish hotfix
 
-1. Branch off of master.
+1. Branch off of stable.
 
-2. merge feature branch into master.
+2. merge feature branch into stable.
 
-3. release feature branch changes as `@hotfix` from master.
+3. release feature branch changes as `@hotfix` from stable.
 
 `npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
 
@@ -336,24 +336,24 @@ Since this is the feature pack there is no publishing process. In fact,
 when you build and deploy, this just like a traditional feature pack:
 i.e. `npx fusion zip`. 
 
-For staging we are currently using this environment:
+For canary we are currently using this environment:
 <https://corecomponents.arcpublishing.com/pf/admin/app/browse/pages.html>.
 
 Unless you are adding new resources or custom components in this repo,
 you do not need to follow a PR process. Usually, you will be creating a new
 block in fusion-news-theme-blocks and once that has gone through the PR
-process and pushed to master and published, all you'll need to do here is make sure its
+process and pushed to stable and published, all you'll need to do here is make sure its
 listed in the blocks section of `blocks.json`. If it's not listed, cause
 it new for example, then feel free to add it and commit immediately to
-master. Then, create a build and deploy to the environment for design
+stable. Then, create a build and deploy to the environment for design
 and general testing. If, however, you are doing something more custom
 then follow these procedures:
 
-1.  First create a branch off master for what you want to work on.
+1.  First create a branch off stable for what you want to work on.
 2.  Once changes are completed, then add, commit, push all changes to
     your branch on GitHub.
 3.  Request a PR review.
-4.  When the PR is approved, merge into master.
+4.  When the PR is approved, merge into stable.
 5.  Next build using npx fusion zip and deploy to the core components
     environment for testing. If you want to deploy with all the blocks with
     a certain version, you can run `npx fusion zip <version>`. This will
@@ -805,10 +805,10 @@ const getResizerParam = (
 
 #### Ensure you have latest version
 `git branch`
--> should highlight with * master
+-> should highlight with * stable
 
 if not,
-`git checkout master`
+`git checkout stable`
 
 fetch latest
 `git fetch`

@@ -14,8 +14,8 @@ This package has been published with a number of dist-tags meant for different p
 
 - `latest`: As with all other NPM packages, this is the default dist-tag. Whenever a non-prerelease block gets published, it is published with this tag.
 - `stable`: This tag should be equivalent to `latest` and the process for maintaining parity _should_ be automated with a [Github Action workflow found here](/.github/workflows/stable-dist-tag.yml). If that workflow doesn't work or the versions tagged by `latest` and `stable` do not match you can run `npm run latest-stable-parity` to fix that.
-- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `staging` branch. [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
-- `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `staging` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-cafebabe`).
+- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
+- `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `canary` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-cafebabe`).
 - `hotfix`: As you may have guessed, these builds are meant for hotfixes. [More information about how these builds are made can be found here.](/News%20Theme%20Development.md#publish-hotfix)
 
 ## Instructions
@@ -181,10 +181,10 @@ Unit tests should be written alongside the feature before it is pushed to Code R
 The tests can be run with the npm command `npm run test`. Make sure to watch out for coverage, because the coverage threshold is 80% for *all* blocks. Testing patterns and examples can be seen in other blocks that have been developed so far.
 
 #### 5. Code Review
-Now that the feature is in the right directory format, you can create a pull request so that it can be reviewed and merged. Make sure to move the JIRA ticket to `Code Review` section at this point. Once it is approved by the team member(s), you can merge the code into the master branch.
+Now that the feature is in the right directory format, you can create a pull request so that it can be reviewed and merged. Make sure to move the JIRA ticket to `Code Review` section at this point. Once it is approved by the team member(s), you can merge the code into the stable branch.
 
 #### 6. Publishing the block
-Before publishing any new blocks, make sure to check `git fetch --all` and `git pull` from master so that you can get the latest *published* version of the blocks and not accidentally publish any conflicting/outdated version of other blocks. Knowing the quirks of publishing a subpackage of this monorepo to a registry is very important. Please, please [read the documentation for lerna's 'publish' command before trying to publish anything](https://github.com/lerna/lerna/tree/master/commands/publish#readme).
+Before publishing any new blocks, make sure to check `git fetch --all` and `git pull` from stable so that you can get the latest *published* version of the blocks and not accidentally publish any conflicting/outdated version of other blocks. Knowing the quirks of publishing a subpackage of this monorepo to a registry is very important. Please, please [read the documentation for lerna's 'publish' command before trying to publish anything](https://github.com/lerna/lerna/tree/master/commands/publish#readme).
 
 Once you do so, you can publish the block by running `npx lerna publish` at the root of this repo.
 

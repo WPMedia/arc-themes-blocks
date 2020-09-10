@@ -102,7 +102,7 @@ component Sass code to set spacing and media queries.
 news-theme-css is provided to the other parts of the system as an NPM
 package. For more information on the build and publishing process for this repository,
 please see the readme.md for the project:
-<https://github.com/WPMedia/news-theme-css/blob/stables/readme.md>
+<https://github.com/WPMedia/news-theme-css/blob/stable/readme.md>
 
 **Note:** When publishing, you will need a .npmrc file that gives you access
 to the private NPM repo. Reach out to a team member to get this.

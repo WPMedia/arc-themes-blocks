@@ -2,7 +2,7 @@ name: Canary block
 on:
   push:
     branches:
-      - staging
+      - canary
 
 # Publishes Canary builds with the dist tag of "canary" and
 # with a version of 0.0.0 with a short git SHA appended to

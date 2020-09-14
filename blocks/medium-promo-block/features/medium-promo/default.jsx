@@ -18,6 +18,8 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -47,6 +49,7 @@ const MediumPromo = ({ customFields }) => {
   const dateText = content && content.display_date ? content.display_date : null;
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
+  const promoType = discoverPromoType(content);
 
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
@@ -117,7 +120,7 @@ const MediumPromo = ({ customFields }) => {
         <div className="row med-promo-padding-bottom">
           {customFields.showImage
           && (
-            <div className="col-sm-12 col-md-xl-4">
+            <div className="col-sm-12 col-md-xl-4 flex-col">
               <a
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
@@ -152,6 +155,7 @@ const MediumPromo = ({ customFields }) => {
                       />
                     )
                   }
+                <PromoLabel type={promoType} />
               </a>
             </div>
           )}

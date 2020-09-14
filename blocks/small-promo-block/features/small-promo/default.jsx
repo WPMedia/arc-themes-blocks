@@ -16,6 +16,8 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -35,6 +37,7 @@ const SmallPromo = ({ customFields }) => {
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
   const ratios = ratiosFor('SM', customFields.imageRatio);
+  const promoType = discoverPromoType(content);
 
   return content ? (
     <>
@@ -61,7 +64,7 @@ const SmallPromo = ({ customFields }) => {
           )}
           {customFields.showImage
           && (
-            <div className="col-sm-xl-4">
+            <div className="col-sm-xl-4 flex-col">
               <a
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
@@ -94,6 +97,7 @@ const SmallPromo = ({ customFields }) => {
                       largeHeight={ratios.largeHeight}
                     />
                   )}
+                <PromoLabel type={promoType} size="small" />
               </a>
             </div>
           )}

@@ -66,6 +66,7 @@ class AlertBar extends Component {
   }
 
   updateContent = (content) => {
+    this.cookie = readCookie();
     const isAlertVisible = this.checkAlertVisible(content);
     this.setState({ content, visible: isAlertVisible });
   }

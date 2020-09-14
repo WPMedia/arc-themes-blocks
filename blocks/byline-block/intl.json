@@ -1,12 +1,10 @@
 {
-   "byline-block.by-text":{
-      "en":"By",
-      "sv":"Av",
-      "no":"Av"
-   },
-   "byline-block.and-text":{
-      "en":"and",
-      "sv":"och",
-      "no":"og"
-   }
+    "byline-block.by-text": {
+        "en": "By",
+        "sv": "Av"
+    },
+    "byline-block.and-text": {
+        "en": "and",
+        "sv": "och"
+    }
 }

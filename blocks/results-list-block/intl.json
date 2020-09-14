@@ -1,7 +1,6 @@
 {
-   "results-list-block.see-more-button":{
-      "en":"See More",
-      "sv":"Fler artiklar",
-      "no":"Se mer"
-   }
-}
+    "results-list-block.see-more-button":{
+       "en":"See More",
+       "sv":"Fler artiklar"
+    }
+ }

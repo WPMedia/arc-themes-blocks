@@ -1,14 +1,17 @@
 {
     "header-nav-block.sections-button": {
         "en": "Sections",
-        "sv": "Meny"
+        "sv": "Meny",
+        "no":"Deler"
     },
     "header-nav-block.sign-in-button": {
         "en": "Sign In",
-        "sv": "Logga in"
+        "sv": "Logga in",
+        "no":"Logg på"
     },
     "header-nav-block.search-text": {
         "en": "Search",
-        "sv": "Sök"
+        "sv": "Sök",
+        "no":"Søk"
     }
 }

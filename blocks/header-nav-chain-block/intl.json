@@ -1,10 +1,12 @@
 {
-    "header-nav-chain-block.sections-button": {
-        "en": "Sections",
-        "sv": "Meny"
-    },
-    "header-nav-chain-block.search-text": {
-        "en": "Search",
-        "sv": "Sök"
-    }
+   "header-nav-chain-block.sections-button":{
+      "en":"Sections",
+      "sv":"Meny",
+      "no":"Deler"
+   },
+   "header-nav-chain-block.search-text":{
+      "en":"Search",
+      "sv":"Sök",
+      "no":"Søk"
+   }
 }

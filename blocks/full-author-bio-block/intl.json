@@ -1,6 +1,7 @@
 {
-    "full-author-bio-block.connect-text":{
-        "en":"Connect",
-        "sv":"Följ"
-     }
+   "full-author-bio-block.connect-text":{
+      "en":"Connect",
+      "sv":"Följ",
+      "no":"Koble til"
+   }
 }

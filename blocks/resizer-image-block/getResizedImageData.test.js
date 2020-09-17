@@ -7,19 +7,23 @@
 
 import getProperties from 'fusion:properties';
 import getResizedImageData, { extractResizedParams } from '.';
-import mockStoryFeedData from './mockFeedData';
-import mockSearchApiData from './mockSearchApiData';
-import mockCreditsData from './mockCreditsData';
-import mockCreditsEmptyImgData from './mockCreditsEmptyImgData';
-import mockLeadArtData from './mockLeadArtData';
-import topLeveLeadArt from './topLevelLeadArt';
-import galleryResizeData from './galleryResizeData';
-import searchResultsDataBroken from './searchResultsDataBroken';
-import mockStoryFeedDataEmptyPromo from './mockStoryFeedDataEmptyPromo';
-import mockLeadArtDataEmptyPromo from './mockLeadArtDataEmptyPromo';
-import mockSearchApiDataEmptyPromo from './mockSearchApiDataEmptyPromo';
-import mockLeadArtVideo from './mockLeadArtVideo';
-import mockLeadArtVideoPromoBasic from './mockLeadArtVideoPromoBasic';
+import mockStoryFeedData from './mocks/mockFeedData';
+import mockSearchApiData from './mocks/mockSearchApiData';
+import mockCreditsData from './mocks/mockCreditsData';
+import mockCreditsEmptyImgData from './mocks/mockCreditsEmptyImgData';
+import mockLeadArtData from './mocks/mockLeadArtData';
+import topLeveLeadArt from './mocks/topLevelLeadArt';
+import galleryResizeData from './mocks/galleryResizeData';
+import searchResultsDataBroken from './mocks/searchResultsDataBroken';
+import mockStoryFeedDataEmptyPromo from './mocks/mockStoryFeedDataEmptyPromo';
+import mockLeadArtDataEmptyPromo from './mocks/mockLeadArtDataEmptyPromo';
+import mockSearchApiDataEmptyPromo from './mocks/mockSearchApiDataEmptyPromo';
+import mockLeadArtVideo from './mocks/mockLeadArtVideo';
+import mockLeadArtVideoPromoBasic from './mocks/mockLeadArtVideoPromoBasic';
+import mockFocalBasicPoint from './mocks/mockStoryPromoItemsBasicFocalPoint';
+import mockFocalLeadArtPoint from './mocks/mockStoryPromoItemsLeadArtFocalPoint';
+import mockFocalPointOverwrite from './mocks/mockStoryPromoItemsBasicFocalPointOverwrite';
+import mockGalleryFocalPoint from './mocks/mockStoryPromoItemsGalleryFocalPoint';
 
 // https://github.com/wapopartners/Infobae-PageBuilder-Fusion-Features/blob/a2409b8147667bd9c435bb44f81bab7ac974c1e8/properties/index.json#L8
 const DEFAULT_BREAKPOINTS_ARRAY = [
@@ -394,5 +398,86 @@ describe('get resized image data helper on the server-side', () => {
     const dataSearch = getResizedImageData(mockSearchApiDataEmptyPromo);
     expect(typeof dataSearch[0].promo_items.basic.resized_params).toEqual('undefined');
     expect(dataSearch).toEqual(mockSearchApiDataEmptyPromo);
+  });
+});
+
+describe('focal point', () => {
+  it('must genenerate focal point filter for all resized urls on basic promo items', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const imageData = getResizedImageData(mockFocalBasicPoint);
+    const resizedParams = imageData.promo_items.basic.resized_params;
+
+    Object.keys(resizedParams).forEach((key) => {
+      expect(resizedParams[key]).toMatch(/focal\(1674x452:1684x462\)/);
+    });
+  });
+
+  it('must genenerate focal point filter for all resized urls on lead_art promo items', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const imageData = getResizedImageData(mockFocalLeadArtPoint);
+    const resizedParams = imageData.promo_items.lead_art.resized_params;
+
+    Object.keys(resizedParams).forEach((key) => {
+      expect(resizedParams[key]).toMatch(/focal\(65x65:75x75\)/);
+    });
+  });
+
+  it('must genenerate focal point filter for all resized urls on basic promo items when overwritten on Composer', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const imageData = getResizedImageData(mockFocalPointOverwrite);
+    const resizedParams = imageData.promo_items.basic.resized_params;
+
+    Object.keys(resizedParams).forEach((key) => {
+      expect(resizedParams[key]).toMatch(/focal\(95x95:105x105\)/);
+    });
+  });
+
+  it('must genenerate focal point filter for all resized urls on lead art promo items when is Gallery', () => {
+    getProperties.mockImplementation(() => (
+      {
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }));
+
+    const imageData = getResizedImageData(mockGalleryFocalPoint);
+    const resizedParams = imageData.promo_items.lead_art.promo_items.basic.resized_params;
+
+    Object.keys(resizedParams).forEach((key) => {
+      expect(resizedParams[key]).toMatch(/focal\(5245x213:5255x223\)/);
+    });
+
+    const galleryItems = imageData.promo_items.lead_art.content_elements;
+
+    // the gallery elements that have focal point, must have the url with the filter too
+    galleryItems.forEach((item) => {
+      if (item.focal_point) {
+        Object.keys(item.resized_params).forEach((key) => {
+          expect(item.resized_params[key]).toMatch(/focal\(5245x213:5255x223\)/);
+        });
+      }
+    });
   });
 });

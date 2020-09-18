@@ -14,7 +14,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 describe('The search results', () => {
   describe('renders one list item correctly', () => {
     const element = oneListItem.data[0];
-    if (element?.['promo_items']?.basic) {
+    if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }
     const fullElements = {
@@ -82,7 +82,7 @@ describe('The search results', () => {
 
   describe('renders one list item correctly when description is missing', () => {
     const element = LineItemWithOutDescription.data[0];
-    if (element?.['promo_items']?.basic) {
+    if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }
     const fullElements = {
@@ -122,7 +122,7 @@ describe('The search results', () => {
 
   describe('renders results items on demand', () => {
     const element = oneListItem.data[0];
-    if (element?.['promo_items']?.basic) {
+    if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }
 

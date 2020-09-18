@@ -1,4 +1,3 @@
-
 function discoverPromoType(content) {
   if (!content) {
     return undefined;

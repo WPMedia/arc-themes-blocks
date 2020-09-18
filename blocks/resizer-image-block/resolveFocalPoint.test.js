@@ -34,7 +34,10 @@ describe('focal point usage', () => {
     const {
       focal_point: focalPoint,
     } = mockFocalPointOverwrite.promo_items.basic.additional_properties;
-    const focalPointNormalized = { x: focalPoint.max[0], y: focalPoint.min[0] };
+    const focalPointNormalized = {
+      x: parseInt(focalPoint.min[0], 10),
+      y: parseInt(focalPoint.min[1], 10),
+    };
     expect(focalPointFromContent(mockFocalPointOverwrite)).toEqual(focalPointNormalized);
   });
 
@@ -42,7 +45,10 @@ describe('focal point usage', () => {
     const {
       focal_point: focalPoint,
     } = mockFocalLeadArtPoint.promo_items.lead_art.additional_properties;
-    const focalPointNormalized = { x: focalPoint.max[0], y: focalPoint.min[0] };
+    const focalPointNormalized = {
+      x: parseInt(focalPoint.min[0], 10),
+      y: parseInt(focalPoint.min[1], 10),
+    };
 
     expect(focalPointFromContent(mockFocalLeadArtPoint)).toEqual(focalPointNormalized);
   });

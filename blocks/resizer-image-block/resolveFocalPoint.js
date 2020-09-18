@@ -1,3 +1,9 @@
+const normalizeFocalValues = (focalPoint) => (
+  {
+    x: parseInt(focalPoint.x, 10),
+    y: parseInt(focalPoint.y, 10),
+  }
+);
 
 /*
  * Helper function to extract focal point from a promo item
@@ -16,19 +22,20 @@ export const focalPointFromPromo = (promoItem) => {
 
   switch (promoItem.type) {
     case 'image': {
-      // focal point when is ovewritten on Composer on the Feature Media tab
-      // here focal point is returned as:  { min: [11,22], max: [33,44] }
+      // focal point can be ovewritten on Composer under the Feature Media tab
+      // here focal point is returned as:  { min: [11,22], max: [11,22] }
+      // and some times can be a float value, need to normalize it
       // eslint-disable-next-line camelcase
       let focal = promoItem.additional_properties?.focal_point;
       if (focal) {
-        return { x: focal.min[0], y: focal.min[1] };
+        return normalizeFocalValues({ x: focal.min[0], y: focal.min[1] });
       }
 
       // here focal point is returned as: { x: 11, y: 22 }
       // eslint-disable-next-line camelcase
       focal = promoItem.focal_point;
       if (focal) {
-        return focal;
+        return normalizeFocalValues(focal);
       }
       return undefined;
     }

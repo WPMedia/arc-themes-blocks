@@ -449,7 +449,7 @@ describe('focal point', () => {
     const resizedParams = imageData.promo_items.basic.resized_params;
 
     Object.keys(resizedParams).forEach((key) => {
-      expect(resizedParams[key]).toMatch(/focal\(95x95:105x105\)/);
+      expect(resizedParams[key]).toMatch(/focal\(98x99:108x109\)/);
     });
   });
 

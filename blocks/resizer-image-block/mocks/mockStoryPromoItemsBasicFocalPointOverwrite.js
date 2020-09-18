@@ -69,12 +69,12 @@ const data = {
       additional_properties: {
         focal_point: {
           max: [
-            100,
-            100,
+            101.11,
+            102.22,
           ],
           min: [
-            100,
-            100,
+            103,
+            104,
           ],
         },
         fullSizeResizeUrl: '/photo/resize/vw1sQ3cLpQq21AzJRls-usF5NMU=/arc-anglerfish-arc2-prod-corecomponents/public/ROWVW4VI5ZEJ7ISJNYEMVQ5YTE.png',

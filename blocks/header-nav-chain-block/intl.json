@@ -4,6 +4,11 @@
       "sv":"Meny",
       "no":"Deler"
    },
+   "header-nav-chain-block.sign-in-button": {
+      "en": "Sign In",
+      "sv": "Logga in",
+      "no":"Logg på"
+  },
    "header-nav-chain-block.search-text":{
       "en":"Search",
       "sv":"Sök",

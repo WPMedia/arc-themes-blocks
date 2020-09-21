@@ -1,9 +1,9 @@
-import React from 'react';
-import { Image } from '@wpmedia/engine-theme-sdk';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
-import getProperties from 'fusion:properties';
+import React from "react";
+import { Image } from "@wpmedia/engine-theme-sdk";
+import { ratiosFor } from "@wpmedia/resizer-image-block";
+import getProperties from "fusion:properties";
 
-import Title from './title';
+import Title from "./title";
 
 const ItemTitleWithRightImage = (props) => {
   const {
@@ -21,26 +21,36 @@ const ItemTitleWithRightImage = (props) => {
     imageRatio,
   } = props;
 
-  const ratios = ratiosFor('SM', imageRatio);
+  const ratios = ratiosFor("SM", imageRatio);
   const onePerLine = customFields.storiesPerRowSM === 1;
-  const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
+  const promoClasses = `container-fluid small-promo layout-section ${
+    onePerLine ? "small-promo-one" : "wrap-bottom"
+  }`;
 
   return (
-    <article key={id} className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}>
+    <article
+      key={id}
+      className={`${promoClasses} ${paddingRight ? "small-promo-padding" : ""}`}
+    >
       <div className="row sm-promo-padding-btm">
-        {customFields.showHeadlineSM && itemTitle !== '' ? (
+        {customFields.showHeadlineSM === "above" &&
+        customFields.showHeadlineSM &&
+        itemTitle !== "" ? (
           <div className="col-sm-8 col-md-xl-8">
-            <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
+            <a
+              href={websiteURL}
+              title={itemTitle}
+              className="sm-promo-headline"
+            >
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
               </Title>
             </a>
           </div>
         ) : null}
-        {customFields.showImageSM
-          && (
+        {customFields.showImageSM && (
           <div className="col-sm-4 col-md-xl-4">
-            {imageURL !== '' ? (
+            {imageURL !== "" ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
                   resizedImageOptions={resizedImageOptions}
@@ -64,7 +74,9 @@ const ItemTitleWithRightImage = (props) => {
                 mediumHeight={ratios.mediumHeight}
                 largeWidth={ratios.largeWidth}
                 largeHeight={ratios.largeHeight}
-                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                alt={
+                  getProperties(arcSite).primaryLogoAlt || "Placeholder logo"
+                }
                 url={targetFallbackImage}
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizedImageOptions={placeholderResizedImageOptions}
@@ -72,8 +84,19 @@ const ItemTitleWithRightImage = (props) => {
               />
             )}
           </div>
-          )}
+        )}
       </div>
+      {customFields.showHeadlineSM === "below" &&
+      customFields.showHeadlineSM &&
+      itemTitle !== "" ? (
+        <div className="col-sm-8 col-md-xl-8">
+          <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
+            <Title primaryFont={primaryFont} className="sm-promo-headline">
+              {itemTitle}
+            </Title>
+          </a>
+        </div>
+      ) : null}
       <hr />
     </article>
   );

@@ -109,7 +109,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           && (
           <div className="col-sm-xl-12 flex-col">
             {overlineTmpl()}
-            {headlineTmpl()}
+            {customFields.headlinePositionXL === "above" && headlineTmpl()}
             {customFields.showImageXL && imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
@@ -142,6 +142,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                 resizerURL={getProperties(arcSite)?.resizerURL}
               />
             )}
+            {customFields.headlinePositionXL === "below"" && headlineTmpl()}
             {descriptionTmpl()}
             <div className="article-meta">
               {byLineTmpl()}

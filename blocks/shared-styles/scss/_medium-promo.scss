@@ -12,15 +12,33 @@
 
   .md-promo-headline {
     @include link-color-active-hover($ui-primary-font-color);
-    font-size: calculateRem(16px);
+    margin-bottom: map-get($spacers, 'sm');
+    text-decoration: none;
+    display: inline-block;
+    max-width: calc(68%);
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      max-width: calc(62%);
+      margin-left: calc(3%);
+      margin-bottom: map-get($spacers, 'md');
+    }
+  }
+
+  .md-promo-headline-text {
+    display: inline-block;
+    font-size: calculateRem(19px);
     font-weight: bold;
     line-height: calculateRem(24px);
-    margin-bottom: map-get($spacers, 'xxs');
-    text-decoration: none;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: calculateRem(24px);
       line-height: calculateRem(34px);
+    }
+  }
+
+  .description-text {
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-left: calc(38%);
     }
   }
 
@@ -35,9 +53,20 @@
     }
   }
 
+  .image-link {
+    float: right;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      float: left;
+      max-width: calc(35%);
+    }
+  }
+
   img {
     height: auto;
-    width: 100%;
+    max-width: 100px;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      max-width: calc(100%);
+    }
   }
 
   .article-meta {
@@ -65,10 +94,33 @@
         line-height: calculateRem(14px);
       }
     }
+
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-left: calc(38%);
+    }
   }
 
   .flex-col {
     display: flex;
     flex-direction: column;
+  }
+
+  .medium-promo-wrapper {
+    clear: both;
+    content: '';
+    display: table;
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    .promo-label {
+      bottom: unset;
+      left: unset;
+      right: 8px;
+      top: 8px;
+    }
+    
+    span {
+      display: none;
+    }
   }
 }

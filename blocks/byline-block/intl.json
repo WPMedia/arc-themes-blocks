@@ -2,11 +2,13 @@
    "byline-block.by-text":{
       "en":"By",
       "sv":"Av",
-      "no":"Av"
+      "no":"Av",
+      "fr":"Par"
    },
    "byline-block.and-text":{
       "en":"and",
       "sv":"och",
-      "no":"og"
+      "no":"og",
+      "fr":"et"
    }
 }

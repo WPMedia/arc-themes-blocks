@@ -4,7 +4,6 @@ import mockLeadArtVideo from './mockLeadArtVideo';
 import mockLeadArtVideoNoImage from './mockLeadArtVideoNoImage';
 import mockLeadArtVideoPromoBasic from './mockLeadArtVideoPromoBasic';
 
-
 describe('when extract an image from a story', () => {
   it('must extract image from lead_art.promo_items if is present', () => {
     const url = extractImageFromStory(mockLeadArtVideo);

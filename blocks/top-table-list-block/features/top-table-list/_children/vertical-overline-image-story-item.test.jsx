@@ -23,7 +23,6 @@ const config = {
   showImageSM: true,
 };
 
-
 describe('vertical overline image story item', () => {
   beforeAll(() => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));

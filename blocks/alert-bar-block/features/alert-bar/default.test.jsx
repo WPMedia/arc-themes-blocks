@@ -129,7 +129,6 @@ describe('the alert can handle user interaction', () => {
     expect(document.cookie).toEqual(encodedCookie);
   });
 
-
   it('must not render alert when cookie matches the headline text', () => {
     const { default: AlertBar } = require('./default');
     const cookieText = 'cookie with text';

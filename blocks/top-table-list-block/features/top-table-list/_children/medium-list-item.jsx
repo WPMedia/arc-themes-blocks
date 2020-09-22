@@ -85,7 +85,7 @@ const MediumListItem = (props) => {
   return (
     <>
       <article className="container-fluid medium-promo" key={id}>
-        <div className="medium-promo-wrapper">
+        <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showImageMD
             && (
             <a className="image-link" href={websiteURL} title={itemTitle}>

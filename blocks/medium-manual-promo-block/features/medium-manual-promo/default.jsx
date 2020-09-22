@@ -29,12 +29,12 @@ const MediumManualPromo = ({ customFields }) => {
     breakpoints,
   } = getProperties(arcSite);
 
+  const hasImage = customFields.showImage && customFields.imageURL;
   return customFields.linkURL ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className="medium-promo-wrapper">
-          {(customFields.showImage && customFields.imageURL)
-          && (
+        <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
+          {hasImage && (
             <a
               className="image-link"
               href={customFields.linkURL}

@@ -12,14 +12,11 @@
 
   .md-promo-headline {
     @include link-color-active-hover($ui-primary-font-color);
+    display: block;
     margin-bottom: map-get($spacers, 'sm');
     text-decoration: none;
-    display: inline-block;
-    max-width: calc(68%);
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      max-width: calc(62%);
-      margin-left: calc(3%);
       margin-bottom: map-get($spacers, 'md');
     }
   }
@@ -33,12 +30,6 @@
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: calculateRem(24px);
       line-height: calculateRem(34px);
-    }
-  }
-
-  .description-text {
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      margin-left: calc(38%);
     }
   }
 
@@ -94,10 +85,6 @@
         line-height: calculateRem(14px);
       }
     }
-
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      margin-left: calc(38%);
-    }
   }
 
   .flex-col {
@@ -109,6 +96,7 @@
     clear: both;
     content: '';
     display: table;
+    width: 100%;
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
@@ -121,6 +109,28 @@
     
     span {
       display: none;
+    }
+  }
+
+  .md-promo-image {
+    .md-promo-headline {
+      width: 68%;
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-left: 38%;
+        width: 100%;
+      }
+    }
+
+    .description-text {
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-left: 38%;
+      }
+    }
+
+    .article-meta {
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-left: 38%;
+      }
     }
   }
 }

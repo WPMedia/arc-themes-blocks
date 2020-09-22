@@ -116,7 +116,7 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className="medium-promo-wrapper">
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
           {customFields.showImage
           && (
             <a

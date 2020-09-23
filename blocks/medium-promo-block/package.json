@@ -25,11 +25,11 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "latest",
-    "@wpmedia/date-block": "latest",
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "latest",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "b80023124aed777cfa92f1215bf4ccc2b7b65868"

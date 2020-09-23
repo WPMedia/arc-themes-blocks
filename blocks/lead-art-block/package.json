@@ -23,7 +23,7 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/video-player-block": "latest",
+    "@wpmedia/video-player-block": "canary",
     "styled-components": "^4.4.0"
   },
   "scripts": {

@@ -27,7 +27,7 @@
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "latest",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"

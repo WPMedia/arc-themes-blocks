@@ -30,7 +30,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },

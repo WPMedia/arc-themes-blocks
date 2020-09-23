@@ -22,14 +22,14 @@
     "directory": "blocks/top-table-list-block"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "latest",
-    "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/overline-block": "latest",
-    "@wpmedia/placeholder-image-block": "latest",
-    "@wpmedia/resizer-image-block": "latest",
-    "@wpmedia/shared-styles": "latest",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "scripts": {

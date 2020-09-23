@@ -27,6 +27,6 @@
   },
   "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

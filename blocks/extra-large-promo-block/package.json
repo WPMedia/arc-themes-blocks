@@ -28,7 +28,7 @@
   "dependencies": {
     "@wpmedia/byline-block": "latest",
     "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/global-phrases-block": "latest",
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/overline-block": "latest",

@@ -9,8 +9,6 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -100,7 +98,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('LG', imageRatio);
-  const promoType = discoverPromoType(element);
 
   return (
     <>
@@ -108,7 +105,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
         <div className="row lg-promo-padding-bottom">
           {customFields.showImageLG
           && (
-          <div className="col-sm-12 col-md-xl-6 flex-col">
+          <div className="col-sm-12 col-md-xl-6">
             {imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
@@ -125,25 +122,21 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                 />
-                <PromoLabel type={promoType} />
               </a>
             ) : (
-              <div className="image-wrapper">
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
-                <PromoLabel type={promoType} />
-              </div>
+              <Image
+                smallWidth={ratios.smallWidth}
+                smallHeight={ratios.smallHeight}
+                mediumWidth={ratios.mediumWidth}
+                mediumHeight={ratios.mediumHeight}
+                largeWidth={ratios.largeWidth}
+                largeHeight={ratios.largeHeight}
+                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                url={targetFallbackImage}
+                breakpoints={getProperties(arcSite)?.breakpoints}
+                resizedImageOptions={placeholderResizedImageOptions}
+                resizerURL={getProperties(arcSite)?.resizerURL}
+              />
             )}
           </div>
           )}

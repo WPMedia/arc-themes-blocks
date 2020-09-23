@@ -18,6 +18,7 @@ body {
   .main {
     flex-grow: 1;
     padding-top: calc(56px + #{map-get($spacers, 'lg')});
+    transition: padding-top 0.3s linear;
     width: 100%;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

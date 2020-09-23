@@ -1,32 +1,32 @@
-import React from 'react';
-import VerticalOverlineImageStoryItem from './vertical-overline-image-story-item';
-import ItemTitleWithRightImage from './item-title-with-right-image';
-import MediumListItem from './medium-list-item';
-import HorizontalOverlineImageStoryItem from './horizontal-overline-image-story-item';
+import React from "react";
+import VerticalOverlineImageStoryItem from "./vertical-overline-image-story-item";
+import ItemTitleWithRightImage from "./item-title-with-right-image";
+import MediumListItem from "./medium-list-item";
+import HorizontalOverlineImageStoryItem from "./horizontal-overline-image-story-item";
 import {
   EXTRA_LARGE,
   LARGE,
   MEDIUM,
   SMALL,
-} from '../shared/storySizeConstants';
+} from "../shared/storySizeConstants";
 
 const ConditionalStoryItem = (props) => {
   const {
-    itemTitle = '',
-    imageURL = '',
+    itemTitle = "",
+    imageURL = "",
     id,
     storySize,
-    primaryFont = '',
-    secondaryFont = '',
-    websiteURL = '',
-    descriptionText = '',
+    primaryFont = "",
+    secondaryFont = "",
+    websiteURL = "",
+    descriptionText = "",
     by = [],
     element = {},
     overlineDisplay,
-    displayDate = '',
+    displayDate = "",
     customFields,
-    overlineText = '',
-    overlineUrl = '',
+    overlineText = "",
+    overlineUrl = "",
     resizedImageOptions = {},
     targetFallbackImage,
     placeholderResizedImageOptions,
@@ -107,10 +107,17 @@ const ConditionalStoryItem = (props) => {
       );
     case SMALL: {
       let hasPaddingRight = false;
-      if ((typeof customFields.storiesPerRowSM === 'undefined') || (customFields.storiesPerRowSM === 2)) {
-        hasPaddingRight = (
-          index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)
-        ) % 2 === 0;
+      if (
+        typeof customFields.storiesPerRowSM === "undefined" ||
+        customFields.storiesPerRowSM === 2
+      ) {
+        hasPaddingRight =
+          (index -
+            (storySizeMap.extraLarge +
+              storySizeMap.large +
+              storySizeMap.medium)) %
+            2 ===
+          0;
       }
       return (
         <ItemTitleWithRightImage

@@ -31,6 +31,9 @@ const ItemTitleWithRightImage = (props) => {
     <article
       key={id}
       className={`${promoClasses} ${paddingRight ? "small-promo-padding" : ""}`}
+      style={{
+        width: `calc((100% - 1.5rem) / ${customFields.storiesPerRowSM || 1})`,
+      }}
     >
       <div className="row sm-promo-padding-btm">
         {customFields.showHeadlineSM === "above" &&

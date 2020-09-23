@@ -1,11 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  fallbackImage: 'placeholder.jpg',
-  resizerURL: 'http://example.com',
-}))));
-
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -29,6 +24,23 @@ const config = {
 };
 
 describe('item title with right image block', () => {
+  beforeAll(() => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+      resizerURL: 'http://example.com',
+    }))));
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {},
+      })),
+    }));
+  });
+
+  afterAll(() => {
+    jest.resetModules();
+  });
+
   it('renders title and image with full props', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';

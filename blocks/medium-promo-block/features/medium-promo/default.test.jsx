@@ -65,9 +65,9 @@ describe('the medium promo feature', () => {
     expect(wrapper.find('Image')).toHaveLength(1);
   });
 
-  it('Headline div should have class .col-sm-xl-8 when show image is true', () => {
+  it('should have class .md-promo-image when show image is true', () => {
     const wrapper = mount(<MediumPromo customFields={config} />);
-    expect(wrapper.find('.col-md-xl-8')).toHaveLength(1);
+    expect(wrapper.find('.md-promo-image')).toHaveLength(1);
   });
 
   it('should have no Image when show image is false', () => {
@@ -80,14 +80,14 @@ describe('the medium promo feature', () => {
     expect(wrapper.find('Image')).toHaveLength(0);
   });
 
-  it('headline div should have class .col-sm-xl-12 when show image is false', () => {
+  it('should not have .md-promo-image class when show image is false', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
       showImage: false,
     };
     const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
-    expect(wrapper.find('.col-sm-xl-12')).toHaveLength(1);
+    expect(wrapper.find('.md-promo-image')).toHaveLength(0);
   });
 
   it('should only be one link when showHeadline is false and show image is true', () => {

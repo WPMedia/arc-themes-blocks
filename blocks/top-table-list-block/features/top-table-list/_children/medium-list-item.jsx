@@ -32,13 +32,12 @@ const MediumListItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
-  const textClass = customFields.showImageMD ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
         <a href={websiteURL} title={itemTitle} className="md-promo-headline">
-          <Title className="md-promo-headline" primaryFont={primaryFont}>{itemTitle}</Title>
+          <Title className="md-promo-headline-text" primaryFont={primaryFont}>{itemTitle}</Title>
         </a>
       );
     }
@@ -86,58 +85,56 @@ const MediumListItem = (props) => {
   return (
     <>
       <article className="container-fluid medium-promo" key={id}>
-        <div className="row med-promo-padding-bottom">
+        <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showImageMD
             && (
-            <div className="col-sm-12 col-md-xl-4 flex-col">
-              <a href={websiteURL} title={itemTitle}>
-                {imageURL !== '' ? (
-                  <Image
-                    resizedImageOptions={resizedImageOptions}
-                    url={imageURL}
-                    // todo: get the proper alt tag for this image
-                    // 16:9 aspect for medium
-                    alt={itemTitle}
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
-                ) : (
-                  <Image
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                    url={targetFallbackImage}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizedImageOptions={placeholderResizedImageOptions}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
+            <a className="image-link" href={websiteURL} title={itemTitle}>
+              {imageURL !== '' ? (
+                <Image
+                  resizedImageOptions={resizedImageOptions}
+                  url={imageURL}
+                  // todo: get the proper alt tag for this image
+                  // 16:9 aspect for medium
+                  alt={itemTitle}
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                />
+              ) : (
+                <Image
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                  url={targetFallbackImage}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizedImageOptions={placeholderResizedImageOptions}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
 
-                  />
-                )}
-                <PromoLabel type={promoType} />
-              </a>
-            </div>
+                />
+              )}
+              <PromoLabel type={promoType} />
+            </a>
             )}
           {(customFields.showHeadlineMD || customFields.showDescriptionMD
                 || customFields.showBylineMD || customFields.showDateMD)
             && (
-            <div className={textClass}>
+            <>
               {headlineTmpl()}
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}
                 {dateTmpl()}
               </div>
-            </div>
+            </>
             )}
         </div>
       </article>

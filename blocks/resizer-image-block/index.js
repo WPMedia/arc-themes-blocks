@@ -1,10 +1,25 @@
 /* eslint-disable no-param-reassign, camelcase */
 import getProperties from 'fusion:properties';
 import { resizerKey as RESIZER_SECRET_KEY } from 'fusion:environment';
+import { focalPointFromPromo } from './resolveFocalPoint';
 
 export { default as ratiosFor } from './ratiosFor';
 export { default as imageRatioCustomField } from './imageRatioCustomField';
 export { default as extractImageFromStory } from './extractImageFromStory';
+
+/**
+ * generate the filter for focal point
+ *
+ * give a focal point X and Y, will expand it to a block of 5x5
+ * and return the thumbor focal filter contruct.
+ *
+ * docs: https://thumbor.readthedocs.io/en/latest/focal.html
+ */
+const focalPointFilter = (focalPoint) => {
+  const { x, y } = focalPoint;
+  const rect = [x - 5, y - 5, x + 5, y + 5];
+  return `focal(${rect[0]}x${rect[1]}:${rect[2]}x${rect[3]})`;
+};
 
 const getResizerParam = (
   originalUrl,
@@ -13,6 +28,7 @@ const getResizerParam = (
   filterQuality = 70,
   respectAspectRatio = false,
   resizerURL,
+  focalPoint,
 ) => {
   if (typeof window === 'undefined') {
     const Thumbor = require('thumbor-lite');
@@ -33,10 +49,13 @@ const getResizerParam = (
         .filter(`quality(${filterQuality})`)
         .filter('fill(white)')
         /* todo: enable background color in angler fish resizer api */
-        .filter('background_color(white)')
-        .fitIn(width, height)
-        .buildUrl();
+        .filter('background_color(white)');
 
+      if (focalPoint) {
+        thumborParam = thumborParam.filter(focalPointFilter(focalPoint));
+      }
+
+      thumborParam = thumborParam.fitIn(width, height).buildUrl();
       const urlSuffix = originalUrl.replace('https://', '');
       return thumborParam
         .replace(resizerURL, '')
@@ -46,9 +65,13 @@ const getResizerParam = (
     thumborParam = thumbor
       .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
       .filter(`format(${format})`)
-      .filter(`quality(${filterQuality})`)
-      .resize(width, height)
-      .buildUrl();
+      .filter(`quality(${filterQuality})`);
+
+    if (focalPoint) {
+      thumborParam = thumborParam.filter(focalPointFilter(focalPoint));
+    }
+    thumborParam = thumborParam.resize(width, height).buildUrl();
+
     const urlSuffix = originalUrl.replace('https://', '');
     const breakpointName = `${width}x${height}`;
     return thumborParam
@@ -84,7 +107,7 @@ const getImageDimensionsForAspectRatios = (onlyImageWidths = []) => {
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
 export const getResizerParams = (
-  originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [],
+  originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [], focalPoint,
 ) => {
   const output = {};
   if (!originalUrl) {
@@ -107,6 +130,7 @@ export const getResizerParams = (
         70,
         respectAspectRatio,
         resizerURL,
+        focalPoint,
       );
     });
     return previousOutput;
@@ -117,27 +141,34 @@ export const getResizerParams = (
   return output;
 };
 
-const resizeImage = (image, resizerURL) => {
+const resizeImage = (image, resizerURL, focalPoint) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
   // todo: support fitIn respect aspect logic
-  return getResizerParams(image.url, false, resizerURL);
+  return getResizerParams(image.url, false, resizerURL, [], focalPoint);
 };
 
-const resizePromoItems = (promoItems, resizerURL) => Object.keys(promoItems)
-  .reduce((promoItemWithResizedImages, key) => {
-    const promoItem = promoItems[key];
-    if ((key === 'type' && promoItem === 'image' && promoItems.url) || key === 'url') {
-      promoItemWithResizedImages.resized_params = resizeImage(promoItems, resizerURL);
-      promoItemWithResizedImages.url = promoItems.url;
-      promoItemWithResizedImages.type = 'image';
-    } else {
-      promoItemWithResizedImages[key] = promoItem;
-    }
-    return promoItemWithResizedImages;
-  }, {});
+const resizePromoItems = (promoItems, resizerURL) => {
+  const focalPoint = focalPointFromPromo(promoItems);
+  return Object.keys(promoItems)
+    .reduce((promoItemWithResizedImages, key) => {
+      const promoItem = promoItems[key];
+      if ((key === 'type' && promoItem === 'image' && promoItems.url) || key === 'url') {
+        promoItemWithResizedImages.resized_params = resizeImage(
+          promoItems,
+          resizerURL,
+          focalPoint,
+        );
+        promoItemWithResizedImages.url = promoItems.url;
+        promoItemWithResizedImages.type = 'image';
+      } else {
+        promoItemWithResizedImages[key] = promoItem;
+      }
+      return promoItemWithResizedImages;
+    }, {});
+};
 
 const resizeAuthorCredits = (authorCredits, resizerURL) => authorCredits.map((creditObject) => ({
   ...creditObject,
@@ -155,11 +186,13 @@ const getResizedImageParams = (data, options) => {
       sourceData.content_elements = sourceData.content_elements.map(
         (contentElement) => {
           if (contentElement.type === 'image') {
+            const focalPoint = focalPointFromPromo(contentElement);
             contentElement.resized_params = getResizerParams(
               contentElement.url,
               false,
               resizerURL,
               onlyImageWidths,
+              focalPoint,
             );
           }
           // recursively resize if gallery with speicifc resized sizes
@@ -201,6 +234,8 @@ const getResizedImageParams = (data, options) => {
         sourceData.promo_items.lead_art.promo_items.basic.url,
         false,
         resizerURL,
+        [],
+        focalPointFromPromo(sourceData.promo_items.lead_art.promo_items.basic),
       );
     }
 

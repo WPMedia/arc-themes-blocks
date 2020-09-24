@@ -1,38 +1,39 @@
 # `@wpmedia/video-promo-block`
-_Block containing an video promo component. Please provide a 1-2 sentence description of what the block is and what it does._
+_The block contains an video promo component. Pagebuilder users can feature a video on the homepage or similar pages to encourage readers to watch it. They can configure the content of the video, title, description, and a live video label for this block._
 
 ## Acceptance Criteria
-- Add AC relevant to the block
+PageBuilder users can configure:
+- Video
+- Title
+- Description
+- LIVE toggle
+- Autoplay
 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
-| **required prop** | yes | | |
-| **optional prop** | no | | |
-| **contentConfig example** | | | Please specify which content sources are compatible |
+| **itemContentConfig** | yes (no if uuid is specified) | contentConfig | the content source config to fetch a video (ex use `content-api` and specify the `website_url` of a video) |
+| **uuid** | yes (no if itemContentConfig is specified) | string | the uuid of a video (itemContentConfig will be ignore if this is specified)  |
+| **autoplay** | no | boolean | if set to true, the video will auto play and be muted by default |
+| **ratio** | no | number | the aspect ratio of the video used by the powa player  |
+| **title** | no | string | the title of the component |
+| **description** | no | string | the description of the component  |
+| **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
 
 ## ANS Schema
-Outline any schema information requirements necessary to know for ths block
+ANS of the video type
 
 ### ANS Fields
-- n/a
+- _id (uuid)
 
 ## Internationalization fields
-- Add all internationalization fields used in the block
+- N/A
 
 ## Events
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description** |
-|---|---|
-| **eventName** | Describe the event |
-
-### Event Listening
-Include block specific instructions for event listening.
-
-OR
-
 This block does not emit any events.
 
+### Event Listening
+This block does not listen to any events.
+
 ## Additional Considerations
-_Configuration (including content) is handled through proptypes in the PB editor._
+_N/A_

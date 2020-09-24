@@ -1,14 +1,14 @@
-import React from 'react';
-import { Image } from '@wpmedia/engine-theme-sdk';
-import ArticleDate from '@wpmedia/date-block';
-import Byline from '@wpmedia/byline-block';
-import Overline from '@wpmedia/overline-block';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
-import getProperties from 'fusion:properties';
+import React from "react";
+import { Image } from "@wpmedia/engine-theme-sdk";
+import ArticleDate from "@wpmedia/date-block";
+import Byline from "@wpmedia/byline-block";
+import Overline from "@wpmedia/overline-block";
+import { ratiosFor } from "@wpmedia/resizer-image-block";
+import getProperties from "fusion:properties";
 
-import Title from './title';
-import DescriptionText from './description-text';
-import checkObjectEmpty from '../shared/checkObjectEmpty';
+import Title from "./title";
+import DescriptionText from "./description-text";
+import checkObjectEmpty from "../shared/checkObjectEmpty";
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -33,19 +33,19 @@ const HorizontalOverlineImageStoryItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
-  const textClass = customFields.showImageLG ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
+  const textClass = customFields.showImageLG
+    ? "col-sm-12 col-md-xl-6 flex-col"
+    : "col-sm-xl-12 flex-col";
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
       return (
-        (
-          <Overline
-            customUrl={overlineUrl}
-            customText={overlineText}
-            className="overline"
-            editable
-          />
-        )
+        <Overline
+          customUrl={overlineUrl}
+          customText={overlineText}
+          className="overline"
+          editable
+        />
       );
     }
     return null;
@@ -55,7 +55,9 @@ const HorizontalOverlineImageStoryItem = (props) => {
     if (customFields.showHeadlineLG && itemTitle) {
       return (
         <a href={websiteURL} title={itemTitle} className="lg-promo-headline">
-          <Title primaryFont={primaryFont} className="lg-promo-headline">{itemTitle}</Title>
+          <Title primaryFont={primaryFont} className="lg-promo-headline">
+            {itemTitle}
+          </Title>
         </a>
       );
     }
@@ -65,7 +67,10 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const descriptionTmpl = () => {
     if (customFields.showDescriptionLG && descriptionText) {
       return (
-        <DescriptionText secondaryFont={secondaryFont} className="description-text">
+        <DescriptionText
+          secondaryFont={secondaryFont}
+          className="description-text"
+        >
           {descriptionText}
         </DescriptionText>
       );
@@ -77,7 +82,9 @@ const HorizontalOverlineImageStoryItem = (props) => {
     if (customFields.showBylineLG && !checkObjectEmpty(element)) {
       return (
         <>
-          {!checkObjectEmpty(element) ? <Byline story={element} stylesFor="list" /> : null}
+          {!checkObjectEmpty(element) ? (
+            <Byline story={element} stylesFor="list" />
+          ) : null}
           {/* The Separator will only be shown if there is at least one author name */}
           {showSeparator && <p className="dot-separator">&#9679;</p>}
         </>
@@ -97,62 +104,80 @@ const HorizontalOverlineImageStoryItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosFor('LG', imageRatio);
+  const ratios = ratiosFor("LG", imageRatio);
 
   return (
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {customFields.showImageLG
-          && (
-          <div className="col-sm-12 col-md-xl-6">
-            {imageURL !== '' ? (
-              <a href={websiteURL} title={itemTitle}>
+          {customFields.headlinePositionLG === "above" &&
+            (customFields.showHeadlineLG ||
+              customFields.showDescriptionLG ||
+              customFields.showBylineLG ||
+              customFields.showDateLG) && (
+              <div className={textClass}>
+                {overlineTmpl()}
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta">
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
+              </div>
+            )}
+          {customFields.showImageLG && (
+            <div className="col-sm-12 col-md-xl-6">
+              {imageURL !== "" ? (
+                <a href={websiteURL} title={itemTitle}>
+                  <Image
+                    resizedImageOptions={resizedImageOptions}
+                    url={imageURL}
+                    // todo: get the proper alt tag for this image
+                    alt={itemTitle}
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                </a>
+              ) : (
                 <Image
-                  resizedImageOptions={resizedImageOptions}
-                  url={imageURL}
-                  // todo: get the proper alt tag for this image
-                  alt={itemTitle}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}
                   mediumHeight={ratios.mediumHeight}
                   largeWidth={ratios.largeWidth}
                   largeHeight={ratios.largeHeight}
+                  alt={
+                    getProperties(arcSite).primaryLogoAlt || "Placeholder logo"
+                  }
+                  url={targetFallbackImage}
                   breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizedImageOptions={placeholderResizedImageOptions}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                 />
-              </a>
-            ) : (
-              <Image
-                smallWidth={ratios.smallWidth}
-                smallHeight={ratios.smallHeight}
-                mediumWidth={ratios.mediumWidth}
-                mediumHeight={ratios.mediumHeight}
-                largeWidth={ratios.largeWidth}
-                largeHeight={ratios.largeHeight}
-                alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                url={targetFallbackImage}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizedImageOptions={placeholderResizedImageOptions}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-              />
-            )}
-          </div>
-          )}
-          {(customFields.showHeadlineLG || customFields.showDescriptionLG
-              || customFields.showBylineLG || customFields.showDateLG)
-          && (
-          <div className={textClass}>
-            {overlineTmpl()}
-            {headlineTmpl()}
-            {descriptionTmpl()}
-            <div className="article-meta">
-              {byLineTmpl()}
-              {dateTmpl()}
+              )}
             </div>
-          </div>
           )}
+          {customFields.headlinePositionLG === "below" &&
+            (customFields.showHeadlineLG ||
+              customFields.showDescriptionLG ||
+              customFields.showBylineLG ||
+              customFields.showDateLG) && (
+              <div className={textClass}>
+                {overlineTmpl()}
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta">
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
+              </div>
+            )}
         </div>
       </article>
       <hr />

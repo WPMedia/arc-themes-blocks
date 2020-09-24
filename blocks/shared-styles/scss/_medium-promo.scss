@@ -52,7 +52,7 @@
     }
   }
 
-  img {
+  picture img {
     height: auto;
     max-width: 100px;
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

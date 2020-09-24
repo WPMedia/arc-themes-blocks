@@ -1,6 +1,8 @@
 # `@wpmedia/video-promo-block`
 _The block contains an video promo component. Pagebuilder users can feature a video on the homepage or similar pages to encourage readers to watch it. They can configure the content of the video, title, description, and a live video label for this block._
 
+**The block depends on a new environment variable `videoEnv` (usually sandbox or prod) required by the powa player in addition to `playerRoot` and `videoOrg`.**
+
 ## Acceptance Criteria
 PageBuilder users can configure:
 - Video

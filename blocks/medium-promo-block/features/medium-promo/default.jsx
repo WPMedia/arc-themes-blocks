@@ -193,20 +193,20 @@ const MediumPromo = ({ customFields }) => {
               </a>
             </div>
           )}
-          {{customFields.headlinePosition === "below" &&
-          (customFields.showHeadline ||
-            customFields.showDescription ||
-            customFields.showByline ||
-            customFields.showDate) && (
-            <div className={textClass}>
-              {headlineTmpl()}
-              {descriptionTmpl()}
-              <div className="article-meta">
-                {byLineTmpl()}
-                {dateTmpl()}
+          {customFields.headlinePosition === "below" &&
+            (customFields.showHeadline ||
+              customFields.showDescription ||
+              customFields.showByline ||
+              customFields.showDate) && (
+              <div className={textClass}>
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta">
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </article>
       <hr />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "@wpmedia/engine-theme-sdk";
+import { Image, Video } from "@wpmedia/engine-theme-sdk";
 import ArticleDate from "@wpmedia/date-block";
 import Byline from "@wpmedia/byline-block";
 import Overline from "@wpmedia/overline-block";
@@ -105,6 +105,12 @@ const HorizontalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor("LG", imageRatio);
+  const videoUUID =
+    element &&
+    element.promo_items &&
+    element.promo_items.basic &&
+    element.promo_items.basic.additional_properties &&
+    element.promo_items.basic.additional_properties.videoId;
 
   return (
     <>
@@ -125,7 +131,16 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 </div>
               </div>
             )}
-          {customFields.showImageLG && (
+          {videoUUID && (
+            <Video
+              uuid={videoUUID}
+              autoplay={false}
+              aspectRatio={0.75}
+              org="arcbrands"
+              env="sandbox"
+            />
+          )}
+          {customFields.showImageLG && !videoUUID && (
             <div className="col-sm-12 col-md-xl-6">
               {imageURL !== "" ? (
                 <a href={websiteURL} title={itemTitle}>

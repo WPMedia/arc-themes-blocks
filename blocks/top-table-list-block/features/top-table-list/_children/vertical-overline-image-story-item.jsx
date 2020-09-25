@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "@wpmedia/engine-theme-sdk";
+import { Image, Video } from "@wpmedia/engine-theme-sdk";
 import ArticleDate from "@wpmedia/date-block";
 import Byline from "@wpmedia/byline-block";
 import Overline from "@wpmedia/overline-block";
@@ -102,6 +102,12 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor("XL", imageRatio);
+  const videoUUID =
+    element &&
+    element.promo_items &&
+    element.promo_items.basic &&
+    element.promo_items.basic.additional_properties &&
+    element.promo_items.basic.additional_properties.videoId;
 
   return (
     <>
@@ -114,7 +120,16 @@ const VerticalOverlineImageStoryItem = (props) => {
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
               {customFields.headlinePositionXL === "above" && headlineTmpl()}
-              {customFields.showImageXL && imageURL !== "" ? (
+              {videoUUID && (
+                <Video
+                  uuid={videoUUID}
+                  autoplay={false}
+                  aspectRatio={0.75}
+                  org="arcbrands"
+                  env="sandbox"
+                />
+              )}
+              {customFields.showImageXL && !videoUUID && imageURL !== "" ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
@@ -132,21 +147,24 @@ const VerticalOverlineImageStoryItem = (props) => {
                   />
                 </a>
               ) : (
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={
-                    getProperties(arcSite).primaryLogoAlt || "Placeholder logo"
-                  }
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
+                !videoUUID && (
+                  <Image
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    alt={
+                      getProperties(arcSite).primaryLogoAlt ||
+                      "Placeholder logo"
+                    }
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                )
               )}
               {customFields.headlinePositionXL === "below" && headlineTmpl()}
               {descriptionTmpl()}

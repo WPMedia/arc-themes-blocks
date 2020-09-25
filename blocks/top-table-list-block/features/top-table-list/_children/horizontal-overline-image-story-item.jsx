@@ -5,10 +5,11 @@ import Byline from "@wpmedia/byline-block";
 import Overline from "@wpmedia/overline-block";
 import { ratiosFor } from "@wpmedia/resizer-image-block";
 import getProperties from "fusion:properties";
-
-import Title from "./title";
-import DescriptionText from "./description-text";
-import checkObjectEmpty from "../shared/checkObjectEmpty";
+import Title from './title';
+import DescriptionText from './description-text';
+import checkObjectEmpty from '../shared/checkObjectEmpty';
+import PromoLabel from './promo_label';
+import discoverPromoType from './discover';
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -111,6 +112,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     element.promo_items.basic &&
     element.promo_items.basic.additional_properties &&
     element.promo_items.basic.additional_properties.videoId;
+  const promoType = discoverPromoType(element);
 
   return (
     <>
@@ -175,7 +177,38 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   resizedImageOptions={placeholderResizedImageOptions}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                 />
-              )}
+                <PromoLabel type={promoType} />
+              </a>
+            ) : (
+              <div className="image-wrapper">
+                <Image
+                  smallWidth={ratios.smallWidth}
+                  smallHeight={ratios.smallHeight}
+                  mediumWidth={ratios.mediumWidth}
+                  mediumHeight={ratios.mediumHeight}
+                  largeWidth={ratios.largeWidth}
+                  largeHeight={ratios.largeHeight}
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                  url={targetFallbackImage}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizedImageOptions={placeholderResizedImageOptions}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                />
+                <PromoLabel type={promoType} />
+              </div>
+            )}
+          </div>
+          )}
+          {(customFields.showHeadlineLG || customFields.showDescriptionLG
+              || customFields.showBylineLG || customFields.showDateLG)
+          && (
+          <div className={textClass}>
+            {overlineTmpl()}
+            {headlineTmpl()}
+            {descriptionTmpl()}
+            <div className="article-meta">
+              {byLineTmpl()}
+              {dateTmpl()}
             </div>
           )}
           {customFields.headlinePositionLG === "below" &&

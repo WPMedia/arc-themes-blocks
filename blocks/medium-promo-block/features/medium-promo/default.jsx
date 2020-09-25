@@ -17,7 +17,9 @@ import {
   imageRatioCustomField,
   ratiosFor,
   extractImageFromStory,
-} from "@wpmedia/resizer-image-block";
+} from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -65,6 +67,8 @@ const MediumPromo = ({ customFields }) => {
     ? "col-sm-12 col-md-xl-8 flex-col"
     : "col-sm-xl-12 flex-col";
 
+  const promoType = discoverPromoType(content);
+
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
       return (
@@ -74,11 +78,9 @@ const MediumPromo = ({ customFields }) => {
           title={content && content.headlines ? content.headlines.basic : ""}
         >
           <HeadlineText
-            primaryFont={
-              getThemeStyle(getProperties(arcSite))["primary-font-family"]
-            }
-            className="md-promo-headline"
-            {...editableContent(content, "headlines.basic")}
+            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            className="md-promo-headline-text"
+            {...editableContent(content, 'headlines.basic')}
             suppressContentEditableWarning
           >
             {headlineText}
@@ -133,8 +135,8 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className="row med-promo-padding-bottom">
-          {customFields.headlinePosition === "above" &&
+         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+        {customFields.headlinePosition === "above" &&
             (customFields.showHeadline ||
               customFields.showDescription ||
               customFields.showByline ||
@@ -148,65 +150,58 @@ const MediumPromo = ({ customFields }) => {
                 </div>
               </div>
             )}
-          {customFields.showImage && (
-            <div className="col-sm-12 col-md-xl-4">
-              <a
-                href={content.website_url}
-                title={
-                  content && content.headlines ? content.headlines.basic : ""
+          {customFields.showImage
+          && (
+            <a
+              className="image-link"
+              href={content.website_url}
+              title={content && content.headlines ? content.headlines.basic : ''}
+            >
+              {
+                customFields.imageOverrideURL || extractImageFromStory(content)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      // medium is 16:9
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
+                    />
+                  )
+                  : (
+                    <PlaceholderImage
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                    />
+                  )
                 }
-              >
-                {customFields.imageOverrideURL ||
-                extractImageFromStory(content) ? (
-                  <Image
-                    url={
-                      customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL
-                        : extractImageFromStory(content)
-                    }
-                    alt={
-                      content && content.headlines
-                        ? content.headlines.basic
-                        : ""
-                    }
-                    // medium is 16:9
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                    resizedImageOptions={extractResizedParams(content)}
-                  />
-                ) : (
-                  <PlaceholderImage
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                  />
-                )}
-              </a>
-            </div>
+              <PromoLabel type={promoType} />
+            </a>
           )}
-          {customFields.headlinePosition === "below" &&
-            (customFields.showHeadline ||
-              customFields.showDescription ||
-              customFields.showByline ||
-              customFields.showDate) && (
-              <div className={textClass}>
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
+          {customFields.headlinePosition === "below" && (customFields.showHeadline || customFields.showDescription
+            || customFields.showByline || customFields.showDate)
+          && (
+            <>
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
               </div>
-            )}
+            </>
+          )}
         </div>
       </article>
       <hr />

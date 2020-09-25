@@ -3,6 +3,9 @@ import { mount, shallow } from 'enzyme';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 describe('the alert bar feature for the default output type', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
   afterEach(() => {
     jest.resetModules();
   });
@@ -40,6 +43,8 @@ describe('the alert bar feature for the default output type', () => {
       fetched,
     });
     const wrapper = mount(<AlertBar customFields={customFields} arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(1);
     expect(wrapper.find('.alert-bar').children().find('a').props().href).toBe('/2019/12/02/baby-panda-born-at-the-zoo/');
     expect(wrapper.find('.alert-bar').children().find('a').props().children).toBe('This is a test headline');
@@ -63,11 +68,16 @@ describe('the alert bar feature for the default output type', () => {
       fetched,
     });
     const wrapper = mount(<AlertBar customFields={customFields} arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
   });
 });
 
 describe('the alert can handle user interaction', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
   it('must hide when click the close button', () => {
     const { default: AlertBar } = require('./default');
     const content = {
@@ -92,6 +102,8 @@ describe('the alert can handle user interaction', () => {
       fetched: new Promise((r) => r(content)),
     });
     const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(1);
     wrapper.find('button').simulate('click');
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
@@ -123,6 +135,8 @@ describe('the alert can handle user interaction', () => {
       fetched: new Promise((r) => r(content)),
     });
     const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(1);
     wrapper.find('button').simulate('click');
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
@@ -157,7 +171,131 @@ describe('the alert can handle user interaction', () => {
       fetched: new Promise((r) => r(content)),
     });
     const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(0);
     expect(document.cookie).toEqual(encodedCookie);
+  });
+});
+
+describe('when add the alert to the header-nav-chain', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+  afterEach(() => {
+    jest.resetModules();
+  });
+
+  it('must add has-alert class to page-header', () => {
+    const wrapperComponent = ({ children }) => (
+      <div className="fusion-app">
+        <div className="page-header">{children}</div>
+        <div className="main" />
+      </div>
+    );
+    const { default: AlertBar } = require('./default');
+    const customFields = {
+      refreshIntervals: 120,
+    };
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    function getContent() {
+      return new Promise((resolve) => {
+        resolve(content);
+      });
+    }
+    const fetched = getContent();
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched,
+    });
+    const wrapper = mount(
+      <AlertBar customFields={customFields} arcSite="the-sun" />,
+      {
+        wrappingComponent: wrapperComponent,
+      },
+    );
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
+    const wrapping = wrapper.getWrappingComponent();
+    wrapping.update();
+
+    expect(wrapping.find('.page-header').html()).toMatch(/page-header has-alert/);
+  });
+});
+
+describe('when add the alert to main section', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+  afterEach(() => {
+    jest.resetModules();
+  });
+
+  it('must add nothing to page-header', () => {
+    const wrapperComponent = ({ children }) => (
+      <div className="fusion-app">
+        <div className="page-header" />
+        <div className="main">{children}</div>
+      </div>
+    );
+    const { default: AlertBar } = require('./default');
+    const customFields = {
+      refreshIntervals: 120,
+    };
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    function getContent() {
+      return new Promise((resolve) => {
+        resolve(content);
+      });
+    }
+    const fetched = getContent();
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched,
+    });
+    const wrapper = mount(
+      <AlertBar customFields={customFields} arcSite="the-sun" />,
+      {
+        wrappingComponent: wrapperComponent,
+      },
+    );
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
+    const wrapping = wrapper.getWrappingComponent();
+    wrapping.update();
+
+    expect(wrapping.find('.page-header').html()).toMatch(/class="page-header"/);
   });
 });

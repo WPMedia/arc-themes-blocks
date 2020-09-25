@@ -15,7 +15,9 @@ import {
   imageRatioCustomField,
   ratiosFor,
   extractImageFromStory,
-} from "@wpmedia/resizer-image-block";
+} from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -40,7 +42,8 @@ const SmallPromo = ({ customFields }) => {
     ? "col-sm-xl-8"
     : "col-sm-xl-12 no-image-padding";
 
-  const ratios = ratiosFor("SM", customFields.imageRatio);
+  const ratios = ratiosFor('SM', customFields.imageRatio);
+  const promoType = discoverPromoType(content);
 
   return content ? (
     <>
@@ -74,47 +77,42 @@ const SmallPromo = ({ customFields }) => {
               </div>
             )}
           {customFields.showImage && (
-            <div className="col-sm-xl-4">
+            <div className="col-sm-xl-4 flex-col">
               <a
                 href={content.website_url}
                 title={
                   content && content.headlines ? content.headlines.basic : ""
                 }
               >
-                {customFields.imageOverrideURL ||
-                extractImageFromStory(content) ? (
-                  <Image
-                    url={
-                      customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL
-                        : extractImageFromStory(content)
-                    }
-                    alt={
-                      content && content.headlines
-                        ? content.headlines.basic
-                        : ""
-                    }
-                    // small should be 3:2 aspect ratio
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                    resizedImageOptions={extractResizedParams(content)}
-                  />
-                ) : (
-                  <PlaceholderImage
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                  />
-                )}
+                {customFields.imageOverrideURL || extractImageFromStory(content)
+                  ? (
+                    <Image
+                      url={customFields.imageOverrideURL
+                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                      alt={content && content.headlines ? content.headlines.basic : ''}
+                      // small should be 3:2 aspect ratio
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                      resizedImageOptions={extractResizedParams(content)}
+                    />
+                  )
+                  : (
+                    <PlaceholderImage
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                    />
+                  )}
+                <PromoLabel type={promoType} size="small" />
               </a>
             </div>
           )}

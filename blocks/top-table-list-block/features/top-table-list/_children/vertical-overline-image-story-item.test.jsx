@@ -22,24 +22,27 @@ const config = {
   showHeadlineSM: true,
   showImageSM: true,
 };
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <img alt="placeholder" />,
-}));
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    arcSite: 'the-sun',
-    globalContent: {},
-  })),
-}));
-
-jest.mock('fusion:content', () => ({
-  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
-}));
-
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 describe('vertical overline image story item', () => {
-  jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+  beforeAll(() => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+    jest.mock('@wpmedia/engine-theme-sdk', () => ({
+      Image: () => <img alt="placeholder" />,
+    }));
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {},
+      })),
+    }));
+    jest.mock('fusion:content', () => ({
+      useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
 
   it('renders image and overline with full props', () => {
     const imageURL = 'pic';
@@ -93,12 +96,6 @@ describe('vertical overline image story item', () => {
     expect(wrapper.find('VerticalOverlineImageStoryItem > hr').length).toBe(1);
   });
   it('does not render image, overline and byline with empty props', () => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        globalContent: {},
-      })),
-    }));
     const imageURL = '';
     const websiteURL = 'url';
     const itemTitle = 'title';

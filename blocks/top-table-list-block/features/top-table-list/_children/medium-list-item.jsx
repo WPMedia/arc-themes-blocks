@@ -4,10 +4,11 @@ import Byline from "@wpmedia/byline-block";
 import ArticleDate from "@wpmedia/date-block";
 import { ratiosFor } from "@wpmedia/resizer-image-block";
 import getProperties from "fusion:properties";
-
-import Title from "./title";
-import DescriptionText from "./description-text";
-import checkObjectEmpty from "../shared/checkObjectEmpty";
+import Title from './title';
+import DescriptionText from './description-text';
+import checkObjectEmpty from '../shared/checkObjectEmpty';
+import PromoLabel from './promo_label';
+import discoverPromoType from './discover';
 
 // via results list
 const MediumListItem = (props) => {
@@ -87,12 +88,13 @@ const MediumListItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosFor("MD", imageRatio);
+  const ratios = ratiosFor('MD', imageRatio);
+  const promoType = discoverPromoType(element);
 
   return (
     <>
       <article className="container-fluid medium-promo" key={id}>
-        <div className="row med-promo-padding-bottom">
+       <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showHeadlineMD === "above" &&
             (customFields.showHeadlineMD ||
               customFields.showDescriptionMD ||
@@ -144,6 +146,7 @@ const MediumListItem = (props) => {
                     resizerURL={getProperties(arcSite)?.resizerURL}
                   />
                 )}
+                <PromoLabel type={promoType} />
               </a>
             </div>
           )}

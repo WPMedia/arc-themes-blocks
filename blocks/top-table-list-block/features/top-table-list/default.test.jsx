@@ -23,10 +23,6 @@ const config = {
   showImageSM: true,
 };
 
-jest.mock('fusion:properties', () => jest.fn(() => ({
-  fallbackImage: 'placeholder.jpg',
-})));
-
 describe('top table list', () => {
   beforeAll(() => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -34,6 +30,9 @@ describe('top table list', () => {
     }))));
     jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:properties', () => jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+    })));
   });
   afterAll(() => {
     jest.resetModules();

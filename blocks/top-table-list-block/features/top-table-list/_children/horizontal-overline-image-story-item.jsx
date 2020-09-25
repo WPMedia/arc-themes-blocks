@@ -5,11 +5,11 @@ import Byline from "@wpmedia/byline-block";
 import Overline from "@wpmedia/overline-block";
 import { ratiosFor } from "@wpmedia/resizer-image-block";
 import getProperties from "fusion:properties";
-import Title from './title';
-import DescriptionText from './description-text';
-import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
+import Title from "./title";
+import DescriptionText from "./description-text";
+import checkObjectEmpty from "../shared/checkObjectEmpty";
+import PromoLabel from "./promo_label";
+import discoverPromoType from "./discover";
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -148,9 +148,11 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
-                    url={imageURL}
-                    // todo: get the proper alt tag for this image
-                    alt={itemTitle}
+                    url={targetFallbackImage}
+                    alt={
+                      getProperties(arcSite).primaryLogoAlt ||
+                      "Placeholder logo"
+                    }
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}
@@ -160,55 +162,43 @@ const HorizontalOverlineImageStoryItem = (props) => {
                     breakpoints={getProperties(arcSite)?.breakpoints}
                     resizerURL={getProperties(arcSite)?.resizerURL}
                   />
+                  <PromoLabel type={promoType} />
                 </a>
               ) : (
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={
-                    getProperties(arcSite).primaryLogoAlt || "Placeholder logo"
-                  }
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
-                <PromoLabel type={promoType} />
-              </a>
-            ) : (
-              <div className="image-wrapper">
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
-                <PromoLabel type={promoType} />
-              </div>
-            )}
-          </div>
+                <div className="image-wrapper">
+                  <Image
+                    smallWidth={ratios.smallWidth}
+                    smallHeight={ratios.smallHeight}
+                    mediumWidth={ratios.mediumWidth}
+                    mediumHeight={ratios.mediumHeight}
+                    largeWidth={ratios.largeWidth}
+                    largeHeight={ratios.largeHeight}
+                    alt={
+                      getProperties(arcSite).primaryLogoAlt ||
+                      "Placeholder logo"
+                    }
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                  <PromoLabel type={promoType} />
+                </div>
+              )}
+            </div>
           )}
-          {(customFields.showHeadlineLG || customFields.showDescriptionLG
-              || customFields.showBylineLG || customFields.showDateLG)
-          && (
-          <div className={textClass}>
-            {overlineTmpl()}
-            {headlineTmpl()}
-            {descriptionTmpl()}
-            <div className="article-meta">
-              {byLineTmpl()}
-              {dateTmpl()}
+          {(customFields.showHeadlineLG ||
+            customFields.showDescriptionLG ||
+            customFields.showBylineLG ||
+            customFields.showDateLG) && (
+            <div className={textClass}>
+              {overlineTmpl()}
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
             </div>
           )}
           {customFields.headlinePositionLG === "below" &&

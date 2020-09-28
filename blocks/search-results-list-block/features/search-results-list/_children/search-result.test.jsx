@@ -14,6 +14,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 describe('The search results', () => {
   describe('renders one list item correctly', () => {
     const element = oneListItem.data[0];
+    // eslint-disable-next-line camelcase
     if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }

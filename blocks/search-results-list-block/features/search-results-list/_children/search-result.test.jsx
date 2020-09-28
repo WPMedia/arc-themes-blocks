@@ -83,6 +83,7 @@ describe('The search results', () => {
 
   describe('renders one list item correctly when description is missing', () => {
     const element = LineItemWithOutDescription.data[0];
+    // eslint-disable-next-line camelcase
     if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }
@@ -123,6 +124,7 @@ describe('The search results', () => {
 
   describe('renders results items on demand', () => {
     const element = oneListItem.data[0];
+    // eslint-disable-next-line camelcase
     if (element?.promo_items?.basic) {
       element.promo_items.basic.resized_params = { '274x154': '' };
     }

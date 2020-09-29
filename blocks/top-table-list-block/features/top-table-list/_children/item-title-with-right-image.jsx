@@ -1,7 +1,7 @@
-import React from "react";
-import { Image } from "@wpmedia/engine-theme-sdk";
-import { ratiosFor } from "@wpmedia/resizer-image-block";
-import getProperties from "fusion:properties";
+import React from 'react';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
+import getProperties from 'fusion:properties';
 import Title from './title';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
@@ -23,7 +23,7 @@ const ItemTitleWithRightImage = (props) => {
     imageRatio,
   } = props;
 
-  const ratios = ratiosFor("SM", imageRatio);
+  const ratios = ratiosFor('SM', imageRatio);
   const onePerLine = customFields.storiesPerRowSM === 1;
   const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
   const promoType = discoverPromoType(element);
@@ -31,15 +31,15 @@ const ItemTitleWithRightImage = (props) => {
   return (
     <article
       key={id}
-      className={`${promoClasses} ${paddingRight ? "small-promo-padding" : ""}`}
+      className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
       style={{
         width: `calc((100% - 1.5rem) / ${customFields.storiesPerRowSM || 1})`,
       }}
     >
       <div className="row sm-promo-padding-btm">
-        {customFields.showHeadlineSM === "above" &&
-        customFields.showHeadlineSM &&
-        itemTitle !== "" ? (
+        {customFields.showHeadlineSM === 'above'
+        && customFields.showHeadlineSM
+        && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">
             <a
               href={websiteURL}
@@ -51,7 +51,7 @@ const ItemTitleWithRightImage = (props) => {
               </Title>
             </a>
           </div>
-        ) : null}
+          ) : null}
         {customFields.showImageSM
           && (
           <div className="col-sm-4 col-md-xl-4 flex-col">
@@ -91,11 +91,11 @@ const ItemTitleWithRightImage = (props) => {
               </div>
             )}
           </div>
-        )}
+          )}
       </div>
-      {customFields.showHeadlineSM === "below" &&
-      customFields.showHeadlineSM &&
-      itemTitle !== "" ? (
+      {customFields.showHeadlineSM === 'below'
+      && customFields.showHeadlineSM
+      && itemTitle !== '' ? (
         <div className="col-sm-8 col-md-xl-8">
           <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
             <Title primaryFont={primaryFont} className="sm-promo-headline">
@@ -103,7 +103,7 @@ const ItemTitleWithRightImage = (props) => {
             </Title>
           </a>
         </div>
-      ) : null}
+        ) : null}
       <hr />
     </article>
   );

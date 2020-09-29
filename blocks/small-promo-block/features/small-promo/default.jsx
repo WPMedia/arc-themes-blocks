@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
-import PropTypes from "prop-types";
-import { useEditableContent, useContent } from "fusion:content";
-import styled from "styled-components";
-import getThemeStyle from "fusion:themes";
-import getProperties from "fusion:properties";
-import { useFusionContext } from "fusion:context";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useEditableContent, useContent } from 'fusion:content';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+import { useFusionContext } from 'fusion:context';
 
-import "@wpmedia/shared-styles/scss/_small-promo.scss";
-import { Image } from "@wpmedia/engine-theme-sdk";
-import PlaceholderImage from "@wpmedia/placeholder-image-block";
+import '@wpmedia/shared-styles/scss/_small-promo.scss';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
   extractResizedParams,
   imageRatioCustomField,
@@ -27,20 +27,19 @@ const SmallPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
-  const content =
-    useContent({
-      source: customFields?.itemContentConfig?.contentService ?? null,
-      query: customFields?.itemContentConfig?.contentConfigValues
-        ? {
-            "arc-site": arcSite,
-            ...customFields.itemContentConfig.contentConfigValues,
-          }
-        : null,
-    }) || null;
+  const content = useContent({
+    source: customFields?.itemContentConfig?.contentService ?? null,
+    query: customFields?.itemContentConfig?.contentConfigValues
+      ? {
+        'arc-site': arcSite,
+        ...customFields.itemContentConfig.contentConfigValues,
+      }
+      : null,
+  }) || null;
 
   const headlineClass = customFields.showImage
-    ? "col-sm-xl-8"
-    : "col-sm-xl-12 no-image-padding";
+    ? 'col-sm-xl-8'
+    : 'col-sm-xl-12 no-image-padding';
 
   const ratios = ratiosFor('SM', customFields.imageRatio);
   const promoType = discoverPromoType(content);
@@ -49,39 +48,39 @@ const SmallPromo = ({ customFields }) => {
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline &&
-            customFields.headlinePosition === "above" && (
+          {customFields.showHeadline
+            && customFields.headlinePosition === 'above' && (
               <div className={headlineClass}>
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
                   title={
-                    content && content.headlines ? content.headlines.basic : ""
+                    content && content.headlines ? content.headlines.basic : ''
                   }
                 >
                   <HeadlineText
                     primaryFont={
                       getThemeStyle(getProperties(arcSite))[
-                        "primary-font-family"
+                        'primary-font-family'
                       ]
                     }
                     className="sm-promo-headline"
-                    {...editableContent(content, "headlines.basic")}
+                    {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
                     {content && content.headlines
                       ? content.headlines.basic
-                      : ""}
+                      : ''}
                   </HeadlineText>
                 </a>
               </div>
-            )}
+          )}
           {customFields.showImage && (
             <div className="col-sm-xl-4 flex-col">
               <a
                 href={content.website_url}
                 title={
-                  content && content.headlines ? content.headlines.basic : ""
+                  content && content.headlines ? content.headlines.basic : ''
                 }
               >
                 {customFields.imageOverrideURL || extractImageFromStory(content)
@@ -116,33 +115,33 @@ const SmallPromo = ({ customFields }) => {
               </a>
             </div>
           )}
-          {customFields.showHeadline &&
-            customFields.headlinePosition === "below" && (
+          {customFields.showHeadline
+            && customFields.headlinePosition === 'below' && (
               <div className={headlineClass}>
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
                   title={
-                    content && content.headlines ? content.headlines.basic : ""
+                    content && content.headlines ? content.headlines.basic : ''
                   }
                 >
                   <HeadlineText
                     primaryFont={
                       getThemeStyle(getProperties(arcSite))[
-                        "primary-font-family"
+                        'primary-font-family'
                       ]
                     }
                     className="sm-promo-headline"
-                    {...editableContent(content, "headlines.basic")}
+                    {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
                     {content && content.headlines
                       ? content.headlines.basic
-                      : ""}
+                      : ''}
                   </HeadlineText>
                 </a>
               </div>
-            )}
+          )}
         </div>
       </article>
       <hr />
@@ -152,33 +151,33 @@ const SmallPromo = ({ customFields }) => {
 
 SmallPromo.propTypes = {
   customFields: PropTypes.shape({
-    itemContentConfig: PropTypes.contentConfig("ans-item").tag({
-      group: "Configure Content",
-      label: "Display Content Info",
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
     }),
     showHeadline: PropTypes.bool.tag({
-      label: "Show headline",
+      label: 'Show headline',
       defaultValue: true,
-      group: "Show promo elements",
+      group: 'Show promo elements',
     }),
-    headlinePosition: PropTypes.oneOf(["above", "below"]).tag({
-      label: "Headline Position",
-      group: "Show promo elements",
-      defaultValue: "above",
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
     }),
     showImage: PropTypes.bool.tag({
-      label: "Show image",
+      label: 'Show image',
       defaultValue: true,
-      group: "Show promo elements",
+      group: 'Show promo elements',
     }),
     imageOverrideURL: PropTypes.string.tag({
-      label: "Image URL",
-      group: "Image",
+      label: 'Image URL',
+      group: 'Image',
     }),
-    ...imageRatioCustomField("imageRatio", "Art", "3:2"),
+    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
   }),
 };
 
-SmallPromo.label = "Small Promo – Arc Block";
+SmallPromo.label = 'Small Promo – Arc Block';
 
 export default SmallPromo;

@@ -1,15 +1,13 @@
-import React from "react";
-import { Image, Video } from "@wpmedia/engine-theme-sdk";
-import ArticleDate from "@wpmedia/date-block";
-import Byline from "@wpmedia/byline-block";
-import Overline from "@wpmedia/overline-block";
-import { ratiosFor } from "@wpmedia/resizer-image-block";
-import getProperties from "fusion:properties";
+import React from 'react';
+import { Image, Video } from '@wpmedia/engine-theme-sdk';
+import ArticleDate from '@wpmedia/date-block';
+import Byline from '@wpmedia/byline-block';
+import Overline from '@wpmedia/overline-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
+import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
@@ -102,26 +100,24 @@ const VerticalOverlineImageStoryItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosFor("XL", imageRatio);
-  const videoUUID =
-    element &&
-    element.promo_items &&
-    element.promo_items.basic &&
-    element.promo_items.basic.additional_properties &&
-    element.promo_items.basic.additional_properties.videoId;
-  const promoType = discoverPromoType(element);
+  const ratios = ratiosFor('XL', imageRatio);
+  const videoUUID = element
+    && element.promo_items
+    && element.promo_items.basic
+    && element.promo_items.basic.additional_properties
+    && element.promo_items.basic.additional_properties.videoId;
 
   return (
     <>
       <article className="container-fluid xl-large-promo" key={id}>
         <div className="row xl-promo-padding-bottom">
-          {(customFields.showHeadlineXL ||
-            customFields.showDescriptionXL ||
-            customFields.showBylineXL ||
-            customFields.showDateXL) && (
+          {(customFields.showHeadlineXL
+            || customFields.showDescriptionXL
+            || customFields.showBylineXL
+            || customFields.showDateXL) && (
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
-              {customFields.headlinePositionXL === "above" && headlineTmpl()}
+              {customFields.headlinePositionXL === 'above' && headlineTmpl()}
               {videoUUID && (
                 <Video
                   uuid={videoUUID}
@@ -131,7 +127,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   env="sandbox"
                 />
               )}
-              {customFields.showImageXL && !videoUUID && imageURL !== "" ? (
+              {customFields.showImageXL && !videoUUID && imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
@@ -158,8 +154,8 @@ const VerticalOverlineImageStoryItem = (props) => {
                     largeWidth={ratios.largeWidth}
                     largeHeight={ratios.largeHeight}
                     alt={
-                      getProperties(arcSite).primaryLogoAlt ||
-                      "Placeholder logo"
+                      getProperties(arcSite).primaryLogoAlt
+                      || 'Placeholder logo'
                     }
                     url={targetFallbackImage}
                     breakpoints={getProperties(arcSite)?.breakpoints}
@@ -168,7 +164,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   />
                 )
               )}
-              {customFields.headlinePositionXL === "below" && headlineTmpl()}
+              {customFields.headlinePositionXL === 'below' && headlineTmpl()}
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}

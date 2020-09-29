@@ -1,15 +1,15 @@
-import React from "react";
-import { Image, Video } from "@wpmedia/engine-theme-sdk";
-import ArticleDate from "@wpmedia/date-block";
-import Byline from "@wpmedia/byline-block";
-import Overline from "@wpmedia/overline-block";
-import { ratiosFor } from "@wpmedia/resizer-image-block";
-import getProperties from "fusion:properties";
-import Title from "./title";
-import DescriptionText from "./description-text";
-import checkObjectEmpty from "../shared/checkObjectEmpty";
-import PromoLabel from "./promo_label";
-import discoverPromoType from "./discover";
+import React from 'react';
+import { Image, Video } from '@wpmedia/engine-theme-sdk';
+import ArticleDate from '@wpmedia/date-block';
+import Byline from '@wpmedia/byline-block';
+import Overline from '@wpmedia/overline-block';
+import { ratiosFor } from '@wpmedia/resizer-image-block';
+import getProperties from 'fusion:properties';
+import Title from './title';
+import DescriptionText from './description-text';
+import checkObjectEmpty from '../shared/checkObjectEmpty';
+import PromoLabel from './promo_label';
+import discoverPromoType from './discover';
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
@@ -35,8 +35,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG
-    ? "col-sm-12 col-md-xl-6 flex-col"
-    : "col-sm-xl-12 flex-col";
+    ? 'col-sm-12 col-md-xl-6 flex-col'
+    : 'col-sm-xl-12 flex-col';
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
@@ -105,24 +105,23 @@ const HorizontalOverlineImageStoryItem = (props) => {
     return null;
   };
 
-  const ratios = ratiosFor("LG", imageRatio);
-  const videoUUID =
-    element &&
-    element.promo_items &&
-    element.promo_items.basic &&
-    element.promo_items.basic.additional_properties &&
-    element.promo_items.basic.additional_properties.videoId;
+  const ratios = ratiosFor('LG', imageRatio);
+  const videoUUID = element
+    && element.promo_items
+    && element.promo_items.basic
+    && element.promo_items.basic.additional_properties
+    && element.promo_items.basic.additional_properties.videoId;
   const promoType = discoverPromoType(element);
 
   return (
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {customFields.headlinePositionLG === "above" &&
-            (customFields.showHeadlineLG ||
-              customFields.showDescriptionLG ||
-              customFields.showBylineLG ||
-              customFields.showDateLG) && (
+          {customFields.headlinePositionLG === 'above'
+            && (customFields.showHeadlineLG
+              || customFields.showDescriptionLG
+              || customFields.showBylineLG
+              || customFields.showDateLG) && (
               <div className={textClass}>
                 {overlineTmpl()}
                 {headlineTmpl()}
@@ -132,7 +131,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-            )}
+          )}
           {videoUUID && (
             <Video
               uuid={videoUUID}
@@ -144,14 +143,14 @@ const HorizontalOverlineImageStoryItem = (props) => {
           )}
           {customFields.showImageLG && !videoUUID && (
             <div className="col-sm-12 col-md-xl-6">
-              {imageURL !== "" ? (
+              {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
                     url={targetFallbackImage}
                     alt={
-                      getProperties(arcSite).primaryLogoAlt ||
-                      "Placeholder logo"
+                      getProperties(arcSite).primaryLogoAlt
+                      || 'Placeholder logo'
                     }
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
@@ -174,8 +173,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                     largeWidth={ratios.largeWidth}
                     largeHeight={ratios.largeHeight}
                     alt={
-                      getProperties(arcSite).primaryLogoAlt ||
-                      "Placeholder logo"
+                      getProperties(arcSite).primaryLogoAlt
+                      || 'Placeholder logo'
                     }
                     url={targetFallbackImage}
                     breakpoints={getProperties(arcSite)?.breakpoints}
@@ -187,10 +186,10 @@ const HorizontalOverlineImageStoryItem = (props) => {
               )}
             </div>
           )}
-          {(customFields.showHeadlineLG ||
-            customFields.showDescriptionLG ||
-            customFields.showBylineLG ||
-            customFields.showDateLG) && (
+          {(customFields.showHeadlineLG
+            || customFields.showDescriptionLG
+            || customFields.showBylineLG
+            || customFields.showDateLG) && (
             <div className={textClass}>
               {overlineTmpl()}
               {headlineTmpl()}
@@ -201,11 +200,11 @@ const HorizontalOverlineImageStoryItem = (props) => {
               </div>
             </div>
           )}
-          {customFields.headlinePositionLG === "below" &&
-            (customFields.showHeadlineLG ||
-              customFields.showDescriptionLG ||
-              customFields.showBylineLG ||
-              customFields.showDateLG) && (
+          {customFields.headlinePositionLG === 'below'
+            && (customFields.showHeadlineLG
+              || customFields.showDescriptionLG
+              || customFields.showBylineLG
+              || customFields.showDateLG) && (
               <div className={textClass}>
                 {overlineTmpl()}
                 {headlineTmpl()}
@@ -215,7 +214,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-            )}
+          )}
         </div>
       </article>
       <hr />

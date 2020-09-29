@@ -137,13 +137,16 @@ export const getResizerParams = (
   // todo: use webp for next gen images spike
   // getParamsByFormat('webp', output);
   getParamsByFormat('jpg', output);
-  // Going to clean the data by stripping off leading slash
-  // and compressing format and quality notation
-  // Since this code is only supporting jpg and filterQuality of 70,
-  // we will just assume as much for now.
+  /*  Going to clean the data by stripping off leading slash
+  and compressing format and quality notation
+  Since this code is only supporting jpg and filterQuality of 70,
+  we will just assume as much for now.
+  also going to add a param (cm=t), letting src/components/Image/thumbor-image-url.ts in engine-sdk
+  know that this url has been compressed.
+  */
   Object.keys(output).forEach((key) => {
     if (output[key]) {
-      output[key] = output[key].replace(/\//, '').replace('format(jpg)', 'f=jpg').replace('quality(70)', 'q=70');
+      output[key] = output[key].replace(/\//, '').replace('format(jpg)', 'f=jpg').replace('quality(70)', 'q=70:cm=t');
     }
   });
   return output;

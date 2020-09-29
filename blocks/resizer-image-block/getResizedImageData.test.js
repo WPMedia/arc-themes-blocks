@@ -86,10 +86,10 @@ describe('get resized image data helper on the server-side', () => {
 
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
-      'B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:f=jpg:q=70/',
-      'CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:f=jpg:q=70/',
-      'RwaE87wvO3wFs17iLXhecTl2hhQ=filters:f=jpg:q=70/',
-      '6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:f=jpg:q=70/']);
+      'B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:f=jpg:q=70:cm=t/',
+      'CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:f=jpg:q=70:cm=t/',
+      'RwaE87wvO3wFs17iLXhecTl2hhQ=filters:f=jpg:q=70:cm=t/',
+      '6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:f=jpg:q=70:cm=t/']);
 
     // {
     // '420x315|mobile':
@@ -97,7 +97,7 @@ describe('get resized image data helper on the server-side', () => {
     // },
 
     // will return undefined if no window
-    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70/'));
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70:cm=t/'));
     expect(allValidFilterValues).toEqual(true);
 
     expect(paramKeys).toEqual([
@@ -130,13 +130,13 @@ describe('get resized image data helper on the server-side', () => {
 
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
-      '5eirj3cmfExljl2SvX6qbwxrB3Y=filters:f=jpg:q=70/',
-      'rIrdmTmnUR9StYnBIR1e4vpyLMo=filters:f=jpg:q=70/',
-      'v9_ZAorNWy8_1ujEQVwu9lYF1Mo=filters:f=jpg:q=70/',
-      'B014aKo-I_UZCWeJ43kYGefBp40=filters:f=jpg:q=70/',
+      '5eirj3cmfExljl2SvX6qbwxrB3Y=filters:f=jpg:q=70:cm=t/',
+      'rIrdmTmnUR9StYnBIR1e4vpyLMo=filters:f=jpg:q=70:cm=t/',
+      'v9_ZAorNWy8_1ujEQVwu9lYF1Mo=filters:f=jpg:q=70:cm=t/',
+      'B014aKo-I_UZCWeJ43kYGefBp40=filters:f=jpg:q=70:cm=t/',
     ]);
 
-    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70/'));
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70:cm=t/'));
     expect(allValidFilterValues).toEqual(true);
 
     expect(paramKeys).toEqual([
@@ -158,10 +158,10 @@ describe('get resized image data helper on the server-side', () => {
     const { credits: { by } } = getResizedImageData(mockCreditsData);
     // doesn't have content_elements, just an array with elements that have promo_items
     expect(by[0].resized_params).toEqual({
-      '158x105': 'jDV13NRbki-mzrsgQFfZjcSwABw=filters:f=jpg:q=70/',
-      '158x119': 'BTrRV2a2kh2y3BIwbM5oKQKBNDs=filters:f=jpg:q=70/',
-      '274x183': 'fxQaIWaQP5lRjwYUPWVQwMkNH9o=filters:f=jpg:q=70/',
-      '274x206': 'OL7VUs7AyKWyREepsXcuvd89l58=filters:f=jpg:q=70/',
+      '158x105': 'jDV13NRbki-mzrsgQFfZjcSwABw=filters:f=jpg:q=70:cm=t/',
+      '158x119': 'BTrRV2a2kh2y3BIwbM5oKQKBNDs=filters:f=jpg:q=70:cm=t/',
+      '274x183': 'fxQaIWaQP5lRjwYUPWVQwMkNH9o=filters:f=jpg:q=70:cm=t/',
+      '274x206': 'OL7VUs7AyKWyREepsXcuvd89l58=filters:f=jpg:q=70:cm=t/',
     });
   });
   it('returns empty resizer params author bio if img not', () => {
@@ -197,13 +197,13 @@ describe('get resized image data helper on the server-side', () => {
 
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
-      'JH9YE5rXU3WoFv5vs342UvuC1gA=filters:f=jpg:q=70/',
-      'oVCzXp5WcaNYOq9omFEyWoMCo78=filters:f=jpg:q=70/',
-      '31mmYPove0AN7aFn_vwKJ0qhZeI=filters:f=jpg:q=70/',
-      'TkU_4vX7gHlX4WBLLwCDMrLuQj4=filters:f=jpg:q=70/',
+      'JH9YE5rXU3WoFv5vs342UvuC1gA=filters:f=jpg:q=70:cm=t/',
+      'oVCzXp5WcaNYOq9omFEyWoMCo78=filters:f=jpg:q=70:cm=t/',
+      '31mmYPove0AN7aFn_vwKJ0qhZeI=filters:f=jpg:q=70:cm=t/',
+      'TkU_4vX7gHlX4WBLLwCDMrLuQj4=filters:f=jpg:q=70:cm=t/',
     ]);
 
-    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70/'));
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70:cm=t/'));
     expect(allValidFilterValues).toEqual(true);
   });
 
@@ -227,15 +227,15 @@ describe('get resized image data helper on the server-side', () => {
 
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
-      'tlTe1hPc85YfFlTMCStAmmrE2Vc=filters:f=jpg:q=70/',
-      'bWSAqvBttzIKiAE1e6phCZBYdH0=filters:f=jpg:q=70/',
-      'Vl230_LsGyl4R2KEQU6TF_8H5Wc=filters:f=jpg:q=70/',
-      'wHPWgxtNFn5PYodMUfU3SpZV5rA=filters:f=jpg:q=70/',
+      'tlTe1hPc85YfFlTMCStAmmrE2Vc=filters:f=jpg:q=70:cm=t/',
+      'bWSAqvBttzIKiAE1e6phCZBYdH0=filters:f=jpg:q=70:cm=t/',
+      'Vl230_LsGyl4R2KEQU6TF_8H5Wc=filters:f=jpg:q=70:cm=t/',
+      'wHPWgxtNFn5PYodMUfU3SpZV5rA=filters:f=jpg:q=70:cm=t/',
     ]);
 
     expect(resizedParams).toEqual(extracted);
 
-    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70/'));
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70:cm=t/'));
     expect(allValidFilterValues).toEqual(true);
   });
 
@@ -255,15 +255,15 @@ describe('get resized image data helper on the server-side', () => {
     const filterValues = Object.values(resizedParams);
 
     expect(filterValues).toEqual([
-      'Kjuf_xqpadIZBFEG2XsBC3bNoEM=filters:f=jpg:q=70/',
-      '_gwdkIM1uwTFiR0LWaaOUQc3rA0=filters:f=jpg:q=70/',
-      '15d84ojP7siUek9f5jzDMQQWMMs=filters:f=jpg:q=70/',
-      'qCvQmPpPxYd_dYM8uNnbRcRt4rY=filters:f=jpg:q=70/',
+      'Kjuf_xqpadIZBFEG2XsBC3bNoEM=filters:f=jpg:q=70:cm=t/',
+      '_gwdkIM1uwTFiR0LWaaOUQc3rA0=filters:f=jpg:q=70:cm=t/',
+      '15d84ojP7siUek9f5jzDMQQWMMs=filters:f=jpg:q=70:cm=t/',
+      'qCvQmPpPxYd_dYM8uNnbRcRt4rY=filters:f=jpg:q=70:cm=t/',
     ]);
 
     expect(resizedParams).toEqual(extracted);
 
-    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70/'));
+    const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':q=70:cm=t/'));
     expect(allValidFilterValues).toEqual(true);
   });
 
@@ -279,14 +279,14 @@ describe('get resized image data helper on the server-side', () => {
 
     expect(resizedObject.content_elements[0].content_elements[0].resized_params)
       .toEqual({
-        '1600x1067': 'Aed9imgLCVXM6Nwk1zJulxUpaIk=filters:f=jpg:q=70/',
-        '1600x1200': 'N5G8ddC9NDk_mNbK9PVAA800hwo=filters:f=jpg:q=70/',
-        '400x267': 'mEsGuTeYQorRDsIYGoHSmEeIIRY=filters:f=jpg:q=70/',
-        '400x300': 'HBqyO7f0x9txjJ9Xpw2fB6wcO1I=filters:f=jpg:q=70/',
-        '600x400': 'LEQ0FS_CjCNwdc8pPfrwj4Aw8ng=filters:f=jpg:q=70/',
-        '600x450': '4j_-SGNQZLqeShesrITrWb-jqHY=filters:f=jpg:q=70/',
-        '800x533': 'hx55AmkHc6npIZv0uiZ2bPseXhE=filters:f=jpg:q=70/',
-        '800x600': 'Z3sU9m11Oq8UNZ5MsgMs3u8m5Qs=filters:f=jpg:q=70/',
+        '1600x1067': 'Aed9imgLCVXM6Nwk1zJulxUpaIk=filters:f=jpg:q=70:cm=t/',
+        '1600x1200': 'N5G8ddC9NDk_mNbK9PVAA800hwo=filters:f=jpg:q=70:cm=t/',
+        '400x267': 'mEsGuTeYQorRDsIYGoHSmEeIIRY=filters:f=jpg:q=70:cm=t/',
+        '400x300': 'HBqyO7f0x9txjJ9Xpw2fB6wcO1I=filters:f=jpg:q=70:cm=t/',
+        '600x400': 'LEQ0FS_CjCNwdc8pPfrwj4Aw8ng=filters:f=jpg:q=70:cm=t/',
+        '600x450': '4j_-SGNQZLqeShesrITrWb-jqHY=filters:f=jpg:q=70:cm=t/',
+        '800x533': 'hx55AmkHc6npIZv0uiZ2bPseXhE=filters:f=jpg:q=70:cm=t/',
+        '800x600': 'Z3sU9m11Oq8UNZ5MsgMs3u8m5Qs=filters:f=jpg:q=70:cm=t/',
       });
   });
   it('takes in lead art on the top level data', () => {
@@ -300,10 +300,10 @@ describe('get resized image data helper on the server-side', () => {
 
     const dataWithResizedImages = getResizedImageData(topLeveLeadArt);
     expect(dataWithResizedImages.promo_items.lead_art.resized_params).toEqual({
-      '158x105': 'I9PStk1gjBSf260jZTioN4u_RPo=filters:f=jpg:q=70/',
-      '158x119': '-bLoWbHajT6EMnuJq9KILDWTk9k=filters:f=jpg:q=70/',
-      '274x183': '3iOl2XDNsie7ZxxlpRagvADtkio=filters:f=jpg:q=70/',
-      '274x206': 'P5WszqbW7D4BknEyLhffQi2ulIk=filters:f=jpg:q=70/',
+      '158x105': 'I9PStk1gjBSf260jZTioN4u_RPo=filters:f=jpg:q=70:cm=t/',
+      '158x119': '-bLoWbHajT6EMnuJq9KILDWTk9k=filters:f=jpg:q=70:cm=t/',
+      '274x183': '3iOl2XDNsie7ZxxlpRagvADtkio=filters:f=jpg:q=70:cm=t/',
+      '274x206': 'P5WszqbW7D4BknEyLhffQi2ulIk=filters:f=jpg:q=70:cm=t/',
     });
   });
   it('takes in search results data object', () => {
@@ -318,10 +318,10 @@ describe('get resized image data helper on the server-side', () => {
     const dataWithResizedImages = getResizedImageData(searchResultsDataBroken.data);
 
     expect(dataWithResizedImages[0].promo_items.basic.resized_params).toEqual({
-      '158x105': 'OsfQnLmY00jrVTU2Bn4BNFUNMhU=filters:f=jpg:q=70/',
-      '158x119': 'h0EkN6oDSPYmLReOq22BJZYfCz4=filters:f=jpg:q=70/',
-      '274x183': 'tei84mHd537sfGdIxzgfEPb90rM=filters:f=jpg:q=70/',
-      '274x206': '2Qa9_nYqKGnCzwL-goJs3iZ4LwY=filters:f=jpg:q=70/',
+      '158x105': 'OsfQnLmY00jrVTU2Bn4BNFUNMhU=filters:f=jpg:q=70:cm=t/',
+      '158x119': 'h0EkN6oDSPYmLReOq22BJZYfCz4=filters:f=jpg:q=70:cm=t/',
+      '274x183': 'tei84mHd537sfGdIxzgfEPb90rM=filters:f=jpg:q=70:cm=t/',
+      '274x206': '2Qa9_nYqKGnCzwL-goJs3iZ4LwY=filters:f=jpg:q=70:cm=t/',
     });
   });
   it('respects aspect ratio of image and only url', () => {
@@ -336,10 +336,10 @@ describe('get resized image data helper on the server-side', () => {
     const dataWithResizedImages = getResizedImageData(sampleImage, null, true, true);
     // uses fit in logic
     expect(dataWithResizedImages).toEqual({
-      '158x105': 'OhPCT9HOiYClZDcHtXJA1y_HbO8=/fit-in/158x105/filters:q=70:fill(white):background_color(white)/',
-      '158x119': 'd1gFvKA4cYT9lBiMNFWTq-7zY5w=/fit-in/158x119/filters:q=70:fill(white):background_color(white)/',
-      '274x183': 'DakL7zt-4boiiIW4glxQ_Ot3l1k=/fit-in/274x183/filters:q=70:fill(white):background_color(white)/',
-      '274x206': '1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:q=70:fill(white):background_color(white)/',
+      '158x105': 'OhPCT9HOiYClZDcHtXJA1y_HbO8=/fit-in/158x105/filters:q=70:cm=t:fill(white):background_color(white)/',
+      '158x119': 'd1gFvKA4cYT9lBiMNFWTq-7zY5w=/fit-in/158x119/filters:q=70:cm=t:fill(white):background_color(white)/',
+      '274x183': 'DakL7zt-4boiiIW4glxQ_Ot3l1k=/fit-in/274x183/filters:q=70:cm=t:fill(white):background_color(white)/',
+      '274x206': '1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:q=70:cm=t:fill(white):background_color(white)/',
     });
   });
   it('return null if only image is used with no image url', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withKnobs, text } from '@storybook/addon-knobs';
-import Headline from './features/headline/default';
+import { Headline } from './features/headline/default';
 
 export default {
   title: 'Headline',
@@ -8,32 +8,17 @@ export default {
 };
 
 export const shortHeadline = () => (
-  <Headline />
+  <Headline headlineString="Man Bites Dog" />
 );
 
-const data = () => ({
-  globalContent: {
-    headlines: {
-      basic: 'At home with your kids? Here’s the ultimate parents’ guide to summer activity resources.',
-    },
-  },
-});
-
 export const longHeadline = () => (
-  <Headline useInjectedFusionContext={data} />
+  <Headline headlineString="At home with your kids? Here’s the ultimate parents’ guide to summer activity resources." />
 );
 
 export const customHeadline = () => {
-  const headline = text('Headline', 'Man Bites Dog');
-  const newData = () => ({
-    globalContent: {
-      headlines: {
-        basic: headline,
-      },
-    },
-  });
+  const headlineString = text('headlineString', 'Man Bites Dog');
 
   return (
-    <Headline useInjectedFusionContext={newData} />
+    <Headline headlineString={headlineString} />
   );
 };

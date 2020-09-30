@@ -36,17 +36,23 @@ const MediumPromo = ({ customFields }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? {
+        'arc-site': arcSite,
+        ...customFields.itemContentConfig.contentConfigValues,
+      }
       : null,
   }) || null;
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
-  const showSeparator = content && content.credits && content.credits.by
-      && content.credits.by.length !== 0;
-  const byLineArray = (content && content.credits && content.credits.by
-      && content.credits.by.length !== 0) ? content.credits.by : null;
-  const dateText = content && content.display_date ? content.display_date : null;
+  const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
+  const byLineArray = content?.credits?.by
+    && content.credits.by.length !== 0 ? content.credits.by : null;
+  const dateText = content?.display_date || null;
+
+  const textClass = customFields.showImage
+    ? 'col-sm-12 col-md-xl-8 flex-col'
+    : 'col-sm-xl-12 flex-col';
 
   const promoType = discoverPromoType(content);
 
@@ -55,7 +61,7 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className="md-promo-headline"
+          className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={content && content.headlines ? content.headlines.basic : ''}
         >
           <HeadlineText
@@ -93,7 +99,7 @@ const MediumPromo = ({ customFields }) => {
       return (
         <>
           <Byline story={content} stylesFor="list" />
-          { showSeparator && <p className="dot-separator">&#9679;</p> }
+          {showSeparator && <p className="dot-separator">&#9679;</p>}
         </>
       );
     }
@@ -117,6 +123,20 @@ const MediumPromo = ({ customFields }) => {
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+          {customFields.headlinePosition === 'above'
+            && (customFields.showHeadline
+              || customFields.showDescription
+              || customFields.showByline
+              || customFields.showDate) && (
+              <div className={textClass}>
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta">
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
+              </div>
+          )}
           {customFields.showImage
           && (
             <a
@@ -157,7 +177,7 @@ const MediumPromo = ({ customFields }) => {
               <PromoLabel type={promoType} />
             </a>
           )}
-          {(customFields.showHeadline || customFields.showDescription
+          {customFields.headlinePosition === 'below' && (customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
             <>
@@ -186,6 +206,11 @@ MediumPromo.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
     }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',

@@ -12,10 +12,7 @@ import {
 } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {
-  EXTRA_LARGE,
-  LARGE,
-  MEDIUM,
-  SMALL,
+  EXTRA_LARGE, LARGE, MEDIUM, SMALL,
 } from './shared/storySizeConstants';
 import StoryItemContainer from './_children/story-item-container';
 
@@ -29,16 +26,14 @@ import './default.scss';
 
 // helpers start
 const overlineData = (storyObject, arcSite) => {
-  const { display: labelDisplay, url: labelUrl, text: labelText } = (
-    storyObject.label && storyObject.label.basic
-  ) || {};
+  const { display: labelDisplay, url: labelUrl, text: labelText } = (storyObject.label
+    && storyObject.label.basic) || {};
   const shouldUseLabel = !!labelDisplay;
 
-  const { _id: sectionUrl, name: sectionText } = (
-    storyObject.websites
-    && storyObject.websites[arcSite]
-    && storyObject.websites[arcSite].website_section
-  ) || {};
+  const { _id: sectionUrl, name: sectionText } = (storyObject.websites
+      && storyObject.websites[arcSite]
+      && storyObject.websites[arcSite].website_section)
+    || {};
 
   return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
 };
@@ -48,12 +43,12 @@ const unserializeStory = (arcSite) => (storyObject) => {
 
   return {
     id: storyObject._id,
-    itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
+    itemTitle: storyObject?.headlines?.basic || '',
     imageURL: extractImageFromStory(storyObject) || '',
     displayDate: storyObject.display_date || '',
-    description: (storyObject.description && storyObject.description.basic) || '',
-    by: (storyObject.credits && storyObject.credits.by) || [],
-    websiteURL: storyObject.websites[arcSite].website_url || '',
+    description: storyObject?.description?.basic || '',
+    by: storyObject?.credits?.by || [],
+    websiteURL: storyObject?.websites[arcSite]?.website_url || '',
     element: storyObject,
     overlineDisplay: !!overlineText,
     overlineUrl,
@@ -95,7 +90,10 @@ class TopTableListWrapper extends Component {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+          query: {
+            raw_image_url: targetFallbackImage,
+            respect_aspect_ratio: true,
+          },
         },
       });
     }
@@ -164,7 +162,12 @@ const TopTableList = (props) => {
   const onePerLine = storiesPerRowSM === 1;
 
   return (
-    <div key={id} className={`top-table-list-container layout-section ${onePerLine ? '' : 'wrap-bottom'}`}>
+    <div
+      key={id}
+      className={`top-table-list-container layout-section ${
+        onePerLine ? '' : 'wrap-bottom'
+      }`}
+    >
       {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
         const {
           id: itemId,
@@ -179,7 +182,7 @@ const TopTableList = (props) => {
           overlineText,
           resizedImageOptions,
         } = itemObject;
-        const url = element.websites ? element.websites[arcSite].website_url : '';
+        const url = element?.websites[arcSite]?.website_url || '';
         return (
           <StoryItemContainer
             id={itemId}
@@ -217,10 +220,22 @@ TopTableListWrapper.propTypes = {
       group: 'Configure Content',
       label: 'Display Content Info',
     }),
-    extraLarge: PropTypes.number.tag({ label: generateLabelString('Extra Large'), default: 0 }),
-    large: PropTypes.number.tag({ label: generateLabelString('Large'), default: 0 }),
-    medium: PropTypes.number.tag({ label: generateLabelString('Medium'), default: 0 }),
-    small: PropTypes.number.tag({ label: generateLabelString('Small'), default: 0 }),
+    extraLarge: PropTypes.number.tag({
+      label: generateLabelString('Extra Large'),
+      default: 0,
+    }),
+    large: PropTypes.number.tag({
+      label: generateLabelString('Large'),
+      default: 0,
+    }),
+    medium: PropTypes.number.tag({
+      label: generateLabelString('Medium'),
+      default: 0,
+    }),
+    small: PropTypes.number.tag({
+      label: generateLabelString('Small'),
+      default: 0,
+    }),
 
     showOverlineXL: PropTypes.bool.tag({
       label: 'Show overline',
@@ -231,6 +246,11 @@ TopTableListWrapper.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Extra Large story settings',
+    }),
+    headlinePositionXL: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Extra Large story settings',
+      defaultValue: 'above',
     }),
     showImageXL: PropTypes.bool.tag({
       label: 'Show image',
@@ -252,7 +272,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Extra Large story settings',
     }),
-    ...imageRatioCustomField('imageRatioXL', 'Extra Large story settings', '4:3'),
+    ...imageRatioCustomField(
+      'imageRatioXL',
+      'Extra Large story settings',
+      '4:3',
+    ),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -263,6 +287,11 @@ TopTableListWrapper.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Large story settings',
+    }),
+    headlinePositionLG: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Large story settings',
+      defaultValue: 'above',
     }),
     showImageLG: PropTypes.bool.tag({
       label: 'Show image',
@@ -291,6 +320,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Medium story settings',
     }),
+    headlinePositionMD: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Medium story settings',
+      defaultValue: 'above',
+    }),
     showImageMD: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -317,6 +351,11 @@ TopTableListWrapper.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Small story settings',
+    }),
+    headlinePositionSM: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Small story settings',
+      defaultValue: 'above',
     }),
     showImageSM: PropTypes.bool.tag({
       label: 'Show image',

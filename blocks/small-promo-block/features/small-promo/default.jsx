@@ -55,7 +55,7 @@ const SmallPromo = ({ customFields }) => {
                   href={content.website_url}
                   className="sm-promo-headline"
                   title={
-                    content && content.headlines ? content.headlines.basic : ''
+                    content?.headlines ? content?.headlines?.basic : ''
                   }
                 >
                   <HeadlineText
@@ -68,9 +68,7 @@ const SmallPromo = ({ customFields }) => {
                     {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
-                    {content && content.headlines
-                      ? content.headlines.basic
-                      : ''}
+                    {content?.headlines ? content?.headlines?.basic : ''}
                   </HeadlineText>
                 </a>
               </div>
@@ -78,10 +76,8 @@ const SmallPromo = ({ customFields }) => {
           {customFields.showImage && (
             <div className="col-sm-xl-4 flex-col">
               <a
-                href={content.website_url}
-                title={
-                  content && content.headlines ? content.headlines.basic : ''
-                }
+                href={content?.website_url || ''}
+                title={content?.headlines ? content?.headlines?.basic : ''}
               >
                 {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
@@ -121,9 +117,7 @@ const SmallPromo = ({ customFields }) => {
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
-                  title={
-                    content && content.headlines ? content.headlines.basic : ''
-                  }
+                  title={content?.headlines ? content?.headlines?.basic : ''}
                 >
                   <HeadlineText
                     primaryFont={
@@ -135,9 +129,7 @@ const SmallPromo = ({ customFields }) => {
                     {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
-                    {content && content.headlines
-                      ? content.headlines.basic
-                      : ''}
+                    {content?.headlines ? content?.headlines?.basic : ''}
                   </HeadlineText>
                 </a>
               </div>

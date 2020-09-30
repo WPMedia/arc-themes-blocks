@@ -43,13 +43,12 @@ const unserializeStory = (arcSite) => (storyObject) => {
 
   return {
     id: storyObject._id,
-    itemTitle: (storyObject.headlines && storyObject.headlines.basic) || '',
+    itemTitle: storyObject?.headlines?.basic || '',
     imageURL: extractImageFromStory(storyObject) || '',
     displayDate: storyObject.display_date || '',
-    description:
-      (storyObject.description && storyObject.description.basic) || '',
-    by: (storyObject.credits && storyObject.credits.by) || [],
-    websiteURL: storyObject.websites[arcSite].website_url || '',
+    description: storyObject?.description?.basic || '',
+    by: storyObject?.credits?.by || [],
+    websiteURL: storyObject?.websites[arcSite]?.website_url || '',
     element: storyObject,
     overlineDisplay: !!overlineText,
     overlineUrl,
@@ -183,9 +182,7 @@ const TopTableList = (props) => {
           overlineText,
           resizedImageOptions,
         } = itemObject;
-        const url = element.websites
-          ? element.websites[arcSite].website_url
-          : '';
+        const url = element?.websites[arcSite]?.website_url || '';
         return (
           <StoryItemContainer
             id={itemId}

@@ -45,17 +45,9 @@ const MediumPromo = ({ customFields }) => {
 
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
-  const showSeparator = content
-    && content.credits
-    && content.credits.by
-    && content.credits.by.length !== 0;
-  const byLineArray = content
-    && content.credits
-    && content.credits.by
-    && content.credits.by.length !== 0
-    ? content.credits.by
-    : null;
-  const dateText = content && content.display_date ? content.display_date : null;
+  const showSeparator = content?.credits?.by?.length !== 0;
+  const byLineArray = content?.credits?.by?.length !== 0 ? content.credits.by : null;
+  const dateText = content?.display_date ? content.display_date : null;
 
   const textClass = customFields.showImage
     ? 'col-sm-12 col-md-xl-8 flex-col'

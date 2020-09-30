@@ -106,11 +106,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('LG', imageRatio);
-  const videoUUID = element
-    && element.promo_items
-    && element.promo_items.basic
-    && element.promo_items.basic.additional_properties
-    && element.promo_items.basic.additional_properties.videoId;
+  const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
   const promoType = discoverPromoType(element);
 
   return (

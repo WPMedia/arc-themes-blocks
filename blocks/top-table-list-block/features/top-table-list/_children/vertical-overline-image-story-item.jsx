@@ -101,11 +101,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
-  const videoUUID = element
-    && element.promo_items
-    && element.promo_items.basic
-    && element.promo_items.basic.additional_properties
-    && element.promo_items.basic.additional_properties.videoId;
+  const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
 
   return (
     <>

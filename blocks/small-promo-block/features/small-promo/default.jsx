@@ -54,9 +54,7 @@ const SmallPromo = ({ customFields }) => {
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
-                  title={
-                    content?.headlines ? content?.headlines?.basic : ''
-                  }
+                  title={content?.headlines?.basic || ''}
                 >
                   <HeadlineText
                     primaryFont={
@@ -68,7 +66,7 @@ const SmallPromo = ({ customFields }) => {
                     {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
-                    {content?.headlines ? content?.headlines?.basic : ''}
+                    {content?.headlines?.basic || ''}
                   </HeadlineText>
                 </a>
               </div>
@@ -77,7 +75,7 @@ const SmallPromo = ({ customFields }) => {
             <div className="col-sm-xl-4 flex-col">
               <a
                 href={content?.website_url || ''}
-                title={content?.headlines ? content?.headlines?.basic : ''}
+                title={content?.headlines?.basic || ''}
               >
                 {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
@@ -117,7 +115,7 @@ const SmallPromo = ({ customFields }) => {
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
-                  title={content?.headlines ? content?.headlines?.basic : ''}
+                  title={content?.headlines?.basic || ''}
                 >
                   <HeadlineText
                     primaryFont={
@@ -129,7 +127,7 @@ const SmallPromo = ({ customFields }) => {
                     {...editableContent(content, 'headlines.basic')}
                     suppressContentEditableWarning
                   >
-                    {content?.headlines ? content?.headlines?.basic : ''}
+                    {content?.headlines?.basic || ''}
                   </HeadlineText>
                 </a>
               </div>

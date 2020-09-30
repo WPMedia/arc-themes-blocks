@@ -68,7 +68,7 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className="md-promo-headline"
+          className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={content && content.headlines ? content.headlines.basic : ''}
         >
           <HeadlineText

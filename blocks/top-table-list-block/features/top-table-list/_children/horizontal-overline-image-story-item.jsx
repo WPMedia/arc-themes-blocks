@@ -55,7 +55,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineLG && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className="lg-promo-headline">
+        <a href={websiteURL} title={itemTitle} className={`lg-promo-headline headline-${customFields.headlinePositionLG}`}>
           <Title primaryFont={primaryFont} className="lg-promo-headline">
             {itemTitle}
           </Title>

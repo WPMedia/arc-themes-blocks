@@ -37,14 +37,14 @@ const ItemTitleWithRightImage = (props) => {
       }}
     >
       <div className="row sm-promo-padding-btm">
-        {customFields.showHeadlineSM === 'above'
+        {customFields.headlinePositionSM === 'above'
         && customFields.showHeadlineSM
         && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">
             <a
               href={websiteURL}
               title={itemTitle}
-              className="sm-promo-headline"
+              className="sm-promo-headline headline-above"
             >
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
@@ -93,11 +93,11 @@ const ItemTitleWithRightImage = (props) => {
           </div>
           )}
       </div>
-      {customFields.showHeadlineSM === 'below'
+      {customFields.headlinePositionSM === 'below'
       && customFields.showHeadlineSM
       && itemTitle !== '' ? (
         <div className="col-sm-8 col-md-xl-8">
-          <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
+          <a href={websiteURL} title={itemTitle} className="sm-promo-headline headline-below">
             <Title primaryFont={primaryFont} className="sm-promo-headline">
               {itemTitle}
             </Title>

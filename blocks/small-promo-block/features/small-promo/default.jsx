@@ -50,7 +50,7 @@ const SmallPromo = ({ customFields }) => {
         <div className="row">
           {customFields.showHeadline
             && customFields.headlinePosition === 'above' && (
-              <div className={headlineClass}>
+              <div className={`headline-above ${headlineClass}`}>
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"
@@ -117,7 +117,7 @@ const SmallPromo = ({ customFields }) => {
           )}
           {customFields.showHeadline
             && customFields.headlinePosition === 'below' && (
-              <div className={headlineClass}>
+              <div className={`headline-below ${headlineClass}`}>
                 <a
                   href={content.website_url}
                   className="sm-promo-headline"

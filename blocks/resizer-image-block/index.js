@@ -146,7 +146,7 @@ export const getResizerParams = (
   */
   Object.keys(output).forEach((key) => {
     if (output[key]) {
-      output[key] = output[key].replace(/\//, '').replace('format(jpg)', 'f=jpg').replace('quality(70)', 'q=70:cm=t');
+      output[key] = output[key].replace(/\//, '').replace(':format(jpg)', '').replace(':quality(70)', ':cm=t');
     }
   });
   return output;

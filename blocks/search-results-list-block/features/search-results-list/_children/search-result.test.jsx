@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
+/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading, dot-notation  */
 import React from 'react';
 import { mount } from 'enzyme';
 // import getThemeStyle from 'fusion:themes';

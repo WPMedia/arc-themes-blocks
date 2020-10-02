@@ -27,6 +27,7 @@ describe('the headline feature for the default output type', () => {
       const wrapper = mount(<Headline />);
 
       expect(wrapper.find('h1')).toHaveClassName('headline');
+      // checking for styled component class
       expect(wrapper.find('h1').hasClass(/sc-/)).toBe(true);
     });
 

@@ -10,13 +10,18 @@ const HeadlineHeader = styled.h1`
 `;
 
 // presentational component handles only visual
-export const Headline = ({ headlineString = '', primaryFont }) => (
+export const Headline = ({ headlineString, primaryFont }) => (
+  /*
+    if string is default empty from presentational container,
+    then render null
+  */
   (headlineString !== '') && (
     <HeadlineHeader
       className="headline"
-      dangerouslySetInnerHTML={{ __html: headlineString }}
       primaryFont={primaryFont}
-    />
+    >
+      {headlineString}
+    </HeadlineHeader>
   ));
 
 // container handles data fetching, connection to fusion
@@ -33,8 +38,9 @@ const HeadlineContainer = () => {
   return (<Headline headlineString={headlineString} primaryFont={primaryFont} />);
 };
 
-Headline.label = 'Headline – Arc Block';
+HeadlineContainer.label = 'Headline – Arc Block';
 
+// proptypes for the presentational component
 Headline.propTypes = {
   headlineString: PropTypes.string,
   primaryFont: PropTypes.string,

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/content-api-source-block",
-  "version": "5.7.0",
+  "version": "5.8.0-beta.0",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [

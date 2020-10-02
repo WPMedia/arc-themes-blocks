@@ -9,8 +9,9 @@ export default {
 
 export const customHeadline = () => {
   const headlineString = text('headlineString', 'Man Bites Dog');
+  const primaryFont = text('primaryFont (web-safe)', 'Arial');
 
   return (
-    <Headline headlineString={headlineString} />
+    <Headline headlineString={headlineString} primaryFont={primaryFont} />
   );
 };

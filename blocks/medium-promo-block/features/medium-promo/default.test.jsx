@@ -21,7 +21,7 @@ jest.mock('fusion:content', () => ({
 const config = {
   itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
   showHeadline: true,
-  headlinePosition: 'below',
+  // headlinePosition: 'below',
   showImage: true,
 };
 
@@ -75,7 +75,7 @@ describe('the medium promo feature', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
-      headlinePosition: 'below',
+      // headlinePosition: 'below',
       showImage: false,
     };
     const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
@@ -86,36 +86,36 @@ describe('the medium promo feature', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
-      headlinePosition: 'below',
+      // headlinePosition: 'below',
       showImage: false,
     };
     const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
     expect(wrapper.find('.md-promo-image')).toHaveLength(0);
   });
 
-  it('headline div should have class .headline-above when headline position is above', () => {
-    const headAboveConfig = {
-      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-      showHeadline: true,
-      headlinePosition: 'above',
-      showImage: false,
-    };
-    const wrapper = mount(<MediumPromo customFields={headAboveConfig} />);
-    expect(wrapper.find('.headline-above')).toHaveLength(1);
-    expect(wrapper.find('.headline-below').length).toBe(0);
-  });
+  // it('headline div should have class .headline-above when headline position is above', () => {
+  //   const headAboveConfig = {
+  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+  //     showHeadline: true,
+  //     headlinePosition: 'above',
+  //     showImage: false,
+  //   };
+  //   const wrapper = mount(<MediumPromo customFields={headAboveConfig} />);
+  //   expect(wrapper.find('.headline-above')).toHaveLength(1);
+  //   expect(wrapper.find('.headline-below').length).toBe(0);
+  // });
 
-  it('headline div should have class .headline-below when headline position is below', () => {
-    const headBelowConfig = {
-      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-      showHeadline: true,
-      headlinePosition: 'below',
-      showImage: false,
-    };
-    const wrapper = mount(<MediumPromo customFields={headBelowConfig} />);
-    expect(wrapper.find('.headline-below')).toHaveLength(1);
-    expect(wrapper.find('.headline-above').length).toBe(0);
-  });
+  // it('headline div should have class .headline-below when headline position is below', () => {
+  //   const headBelowConfig = {
+  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+  //     showHeadline: true,
+  //     headlinePosition: 'below',
+  //     showImage: false,
+  //   };
+  //   const wrapper = mount(<MediumPromo customFields={headBelowConfig} />);
+  //   expect(wrapper.find('.headline-below')).toHaveLength(1);
+  //   expect(wrapper.find('.headline-above').length).toBe(0);
+  // });
 
   it('should only be one link when showHeadline is false and show image is true', () => {
     const noHeadlineConfig = {

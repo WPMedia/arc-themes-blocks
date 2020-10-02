@@ -61,7 +61,8 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className={`md-promo-headline headline-${customFields.headlinePosition}`}
+          className="md-promo-headline"
+          // className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={content && content.headlines ? content.headlines.basic : ''}
         >
           <HeadlineText
@@ -123,7 +124,7 @@ const MediumPromo = ({ customFields }) => {
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
-          {customFields.headlinePosition === 'above'
+          {/* customFields.headlinePosition === 'above'
             && (customFields.showHeadline
               || customFields.showDescription
               || customFields.showByline
@@ -136,7 +137,7 @@ const MediumPromo = ({ customFields }) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )}
+              ) */}
           {customFields.showImage
           && (
             <a
@@ -177,7 +178,7 @@ const MediumPromo = ({ customFields }) => {
               <PromoLabel type={promoType} />
             </a>
           )}
-          {customFields.headlinePosition === 'below' && (customFields.showHeadline || customFields.showDescription
+          {/* customFields.headlinePosition === 'below' && */(customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
             <>
@@ -207,11 +208,11 @@ MediumPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Show promo elements',
-      defaultValue: 'above',
-    }),
+    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Show promo elements',
+    //   defaultValue: 'above',
+    // }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

@@ -1,14 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  fallbackImage: 'placeholder.jpg',
-  resizerURL: 'resizer',
-}))));
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <img alt="test" />,
-}));
-
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -31,19 +23,31 @@ const config = {
   showImageSM: true,
 };
 
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    arcSite: 'the-sun',
-    globalContent: {},
-  })),
-}));
-
-jest.mock('fusion:content', () => ({
-  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
-}));
-
 describe('horizontal overline image story item', () => {
-  jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+  beforeAll(() => {
+    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {},
+      })),
+    }));
+    jest.mock('fusion:content', () => ({
+      useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
+    }));
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+      resizerURL: 'resizer',
+    }))));
+    jest.mock('@wpmedia/engine-theme-sdk', () => ({
+      Image: () => <img alt="test" />,
+    }));
+  });
+
+  afterAll(() => {
+    jest.resetModules();
+  });
+
   it('renders with the full required props', () => {
     const imageURL = 'pic';
     const websiteURL = 'url';
@@ -91,12 +95,6 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
   it('renders with empty props with defaults', () => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        globalContent: {},
-      })),
-    }));
     const imageURL = '';
     const websiteURL = '';
     const itemTitle = '';

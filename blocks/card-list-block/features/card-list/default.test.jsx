@@ -114,8 +114,9 @@ describe('Card list', () => {
       });
 
       it('should render an anchor and an image with the correct url', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').at(0).find('a')
-          .prop('href')).toEqual('/arts/2019/12/18/article-with-a-youtube-embed-in-it/');
+        const anchors = wrapper.find('.list-item-simple').find('.list-anchor');
+        expect(anchors.at(0).prop('href')).toEqual('/this/is/the/correct/url');
+        expect(anchors.at(1).prop('href')).toEqual('/this/is/the/correct/url');
       });
 
       it('should render an anchor and an image with alt text', () => {
@@ -191,6 +192,9 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
         expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
+        expect(
+          wrapper.find('.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
+        ).toEqual('/this/is/the/correct/url');
       });
 
       it('should add the line divider when have multiple items', () => {

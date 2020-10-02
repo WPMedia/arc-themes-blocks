@@ -1,14 +1,17 @@
 {
-    "search-results-block.search-button":{
-       "en":"Search",
-       "sv":"Sök"
-    },
-    "search-results-block.search-result-number":{
-       "en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
-       "sv":"%{smart_count} resultat för ”%{searchTerm}”"
-    },
-    "search-results-block.see-more-button":{
-       "en":"See More",
-       "sv":"Fler artiklar"
-    }
- }
+   "search-results-block.search-button":{
+      "en":"Search",
+      "sv":"Sök",
+      "no":"Søk"
+   },
+   "search-results-block.search-result-number":{
+      "en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
+      "sv":"%{smart_count} resultat för ”%{searchTerm}”",
+      "no":"%{smart_count} resultat for \"%{searchTerm}\" |||| %{smart_count} resultater for \"%{searchTerm}\""
+   },
+   "search-results-block.see-more-button":{
+      "en":"See More",
+      "sv":"Fler artiklar",
+      "no":"Se mer"
+   }
+}

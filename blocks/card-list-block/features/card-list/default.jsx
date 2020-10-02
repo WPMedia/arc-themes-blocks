@@ -207,7 +207,6 @@ class CardList extends React.Component {
                 contentElements.slice(1).map((element) => {
                   const {
                     headlines: { basic: headlineText } = {},
-                    website_url: websiteUrl,
                   } = element;
                   const url = element.websites[arcSite].website_url;
                   return (
@@ -219,7 +218,7 @@ class CardList extends React.Component {
                         type="1"
                       >
                         <a
-                          href={websiteUrl}
+                          href={url}
                           className="headline-list-anchor"
                         >
                           <HeadlineText

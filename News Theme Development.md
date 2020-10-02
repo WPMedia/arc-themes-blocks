@@ -1,7 +1,5 @@
 # News Theme Developers Guide
 
-**Note:** _This is a living document. Please check back for updates. Also, comments are very much appreciated to make this documentation better!_
-
 ## Setup
 
 All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start-theme` in your local feature blocks repo.

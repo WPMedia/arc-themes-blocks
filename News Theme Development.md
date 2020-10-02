@@ -2,7 +2,7 @@
 
 ## Setup
 
-All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start-theme` in your local feature blocks repo.
+All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation in fusion cli](https://github.com/WPMedia/fusion-cli#start---no-admin) for more info.
 
 To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
 
@@ -24,8 +24,6 @@ Note that for GitHub, you will have to provide your own personal access token fo
 The Token you create on `Creating Auth Tokens (HTTPS)` will be the token you'll have to put in your `.npmrc` file. Please create a read-only token as well - when deploying, please switch this token to this one.
 
 Finally, log into npm with `npm login --registry=https://npm.pkg.github.com`. The username will be your GitHub username, email will be your public email address, and the password will be the token that you've created above. This will be a one-time action as long as you don't log out. Please look at [this documentation](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) for further details.
-
-TODO: So that we don't have to have personal GitHub tokens out in the wild, we'll have to set up GitHub Actions to use GitHub Token: https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token
 
 ## Introduction
 

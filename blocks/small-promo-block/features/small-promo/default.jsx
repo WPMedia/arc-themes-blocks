@@ -48,7 +48,7 @@ const SmallPromo = ({ customFields }) => {
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline(<div className={headlineClass}>
+          {customFields.showHeadline && (<div className={headlineClass}>
             <a
               href={content.website_url}
               className="sm-promo-headline"

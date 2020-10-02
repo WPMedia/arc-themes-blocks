@@ -1,18 +1,22 @@
 {
-  "global.gallery-expand-button": {
-    "en": "Expand",
-    "sv": "Förstora"
-  },
-  "global.gallery-page-count-text": {
-    "en": "%{current} of %{total}",
-    "sv": "%{current} av %{total}"
-  },
-  "global.gallery-autoplay-button": {
-    "en": "Autoplay",
-    "sv": "Spela upp"
-  },
-  "global.gallery-pause-autoplay-button": {
-    "en": "Pause autoplay",
-    "sv": "Pausa"
-  }
+   "global.gallery-expand-button":{
+      "en":"Expand",
+      "sv":"Förstora",
+      "no":"Utvid"
+   },
+   "global.gallery-page-count-text":{
+      "en":"%{current} of %{total}",
+      "sv":"%{current} av %{total}",
+      "no":"%{current} av %{total}"
+   },
+   "global.gallery-autoplay-button":{
+      "en":"Autoplay",
+      "sv":"Spela upp",
+      "no":"Autoavspilling"
+   },
+   "global.gallery-pause-autoplay-button":{
+      "en":"Pause autoplay",
+      "sv":"Pausa",
+      "no":"Sett autoavspilling på pause"
+   }
 }

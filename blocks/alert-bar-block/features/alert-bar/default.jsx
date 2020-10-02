@@ -5,6 +5,8 @@ import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 
+import { readCookie, saveCookie } from './cookies';
+
 import './alert-bar.scss';
 
 const AlertBarLink = styled.a`
@@ -26,14 +28,19 @@ class AlertBar extends Component {
       },
     });
 
-    this.state = {
-      content: cached,
-      visible: true,
-    };
-    fetched.then((content) => {
-      const visible = content?.content_elements?.length > 0;
-      this.setState({ content, visible });
-    });
+    if (typeof window !== 'undefined') {
+      this.cookie = readCookie();
+      this.state = {
+        content: cached,
+        visible: this.checkAlertVisible(cached),
+      };
+      fetched.then(this.updateContent);
+    } else {
+      this.state = {
+        content: cached,
+        visible: false,
+      };
+    }
   }
 
   componentDidMount() {
@@ -50,15 +57,33 @@ class AlertBar extends Component {
           size: 1,
         },
       });
-      fetched.then((content) => {
-        const visible = content?.content_elements?.length > 0;
-        this.setState({ content, visible });
-      });
+      fetched.then(this.updateContent);
     }, 120000);
   }
 
   componentWillUnmount() {
     clearInterval(this.timeID);
+  }
+
+  updateContent = (content) => {
+    this.cookie = readCookie();
+    const isAlertVisible = this.checkAlertVisible(content);
+    this.setState({ content, visible: isAlertVisible });
+  }
+
+  checkAlertVisible = (content) => {
+    const elements = content?.content_elements;
+    const hasAlert = elements?.length > 0;
+    return hasAlert
+      ? elements?.[0].headlines?.basic !== this.cookie
+      : false;
+  }
+
+  hideAlert = () => {
+    const { content = {} } = this.state;
+    const story = content?.content_elements?.[0]?.headlines?.basic;
+    saveCookie(story);
+    this.setState({ visible: false });
   }
 
   render() {
@@ -79,7 +104,7 @@ class AlertBar extends Component {
           >
             {headlines.basic}
           </AlertBarLink>
-          <button type="button" onClick={() => this.setState({ visible: false })}>
+          <button type="button" onClick={this.hideAlert}>
             <CloseIcon className="close" fill="white" />
           </button>
         </nav>

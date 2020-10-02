@@ -49,4 +49,12 @@
     display: block;
     width: 100%;
   }
+
+  .image-wrapper {
+    position: relative;
+
+    > picture > img {
+      vertical-align: middle;
+    }
+  }
 }

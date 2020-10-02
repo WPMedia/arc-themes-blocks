@@ -181,9 +181,9 @@ const Nav = (props) => {
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
-            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />
+            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
             <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-              <span>{phrases.t('header-nav-block.sections-button')}</span>
+              <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
           </div>
@@ -202,7 +202,7 @@ const Nav = (props) => {
         <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
           <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
-              <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-block.search-text')} />
+              <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
             </SectionNav>
           </div>
         </StyledSectionDrawer>

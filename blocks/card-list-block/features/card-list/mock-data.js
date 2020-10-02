@@ -1309,7 +1309,7 @@ export const oneListItem = {
             },
             _website_section_id: 'the-sun./entertainment',
           },
-          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+          website_url: '/this/is/the/correct/url',
         },
       },
       additional_properties: {
@@ -1327,7 +1327,7 @@ export const oneListItem = {
       },
       _id: 'SQXVCFU7PZGXLJNNC2WQ3VZRBY',
       website: 'the-sun',
-      website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+      website_url: '/must/not/use/this/url',
     },
   ],
   additional_properties: {
@@ -5607,7 +5607,7 @@ export default {
             },
             _website_section_id: 'the-sun./food',
           },
-          website_url: '/2019/12/10/jons-prod-story/',
+          website_url: '/this/is/the/correct/url',
         },
       },
       additional_properties: {
@@ -5625,7 +5625,7 @@ export default {
       },
       _id: '2P27EXPK4JGDPDDRVLXGGPPNC4',
       website: 'the-sun',
-      website_url: '/2019/12/10/jons-prod-story/',
+      website_url: '/must/not/use/this/url',
     },
     {
       type: 'story',

@@ -247,11 +247,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Extra Large story settings',
     }),
-    headlinePositionXL: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Extra Large story settings',
-      defaultValue: 'above',
-    }),
+    // headlinePositionXL: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Extra Large story settings',
+    //   defaultValue: 'above',
+    // }),
     showImageXL: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -288,11 +288,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Large story settings',
     }),
-    headlinePositionLG: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Large story settings',
-      defaultValue: 'above',
-    }),
+    // headlinePositionLG: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Large story settings',
+    //   defaultValue: 'above',
+    // }),
     showImageLG: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -320,11 +320,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Medium story settings',
     }),
-    headlinePositionMD: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Medium story settings',
-      defaultValue: 'above',
-    }),
+    // headlinePositionMD: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Medium story settings',
+    //   defaultValue: 'above',
+    // }),
     showImageMD: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -352,11 +352,11 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Small story settings',
     }),
-    headlinePositionSM: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Small story settings',
-      defaultValue: 'above',
-    }),
+    // headlinePositionSM: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Small story settings',
+    //   defaultValue: 'above',
+    // }),
     showImageSM: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

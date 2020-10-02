@@ -38,7 +38,7 @@ const MediumListItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD}`}>
+        <a href={websiteURL} title={itemTitle} className="md-promo-headline">
           <Title className="md-promo-headline" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
@@ -95,7 +95,7 @@ const MediumListItem = (props) => {
     <>
       <article className="container-fluid medium-promo" key={id}>
         <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
-          {customFields.headlinePositionMD === 'above'
+          {/* {customFields.headlinePositionMD === 'above'
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
@@ -108,7 +108,7 @@ const MediumListItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )}
+          )} */}
           {customFields.showImageMD && (
           <div className="col-sm-12 col-md-xl-4">
             <a href={websiteURL} title={itemTitle}>
@@ -150,8 +150,8 @@ const MediumListItem = (props) => {
             </a>
           </div>
           )}
-          {customFields.headlinePositionMD === 'below'
-            && (customFields.showHeadlineMD
+          {/* customFields.headlinePositionMD === 'below'
+            && */ (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
@@ -163,7 +163,8 @@ const MediumListItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )}
+    )
+}
         </div>
       </article>
       <hr />

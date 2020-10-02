@@ -59,7 +59,7 @@ news-theme-css is provided to the other parts of the system as an NPM package. F
 
 ### engine-theme-sdk
 
-The engine-theme-sdk is located at: <https://github.com/WPMedia/engine-theme-sdk>. The purpose of this repository is to store basic React components and utilities that are not tied to one specific theme. So, for example, there is a lightbox and image component. We also store React based svg icons in here as well. Unlike the other repos in the system, this repo uses TypeScript, so its important to build the repo and commit the generated source before committing changes and publishing. Originally, this repo was a multi-package using Lerna (<https://lerna.js.org/>), however, it has since changed into a mono-repo (like news-theme-css). Here are the steps and commands you need to know to build and publish.
+The engine-theme-sdk is located at: <https://github.com/WPMedia/engine-theme-sdk>. The purpose of this repository is to store basic React components and utilities that are not tied to one specific theme. So, for example, there is a lightbox and image component. We also store React based svg icons in here as well. Unlike the other repos in the system, this repo uses TypeScript, so its important to build the repo and commit the generated source before committing changes and publishing.
 
 1.  Create a branch off stable for what you want to work on.
 2.  Once changes are completed, run: `npm run build` then add, commit, push all changes to your branch on GitHub.

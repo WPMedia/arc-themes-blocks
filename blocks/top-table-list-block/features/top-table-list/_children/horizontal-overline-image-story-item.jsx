@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Video } from '@wpmedia/engine-theme-sdk';
+import { Image /* , Video */ } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';

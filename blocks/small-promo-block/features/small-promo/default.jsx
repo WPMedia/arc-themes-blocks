@@ -48,26 +48,28 @@ const SmallPromo = ({ customFields }) => {
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline && (<div className={headlineClass}>
-            <a
-              href={content.website_url}
-              className="sm-promo-headline"
-              title={content?.headlines?.basic || ''}
-            >
-              <HeadlineText
-                primaryFont={
-                      getThemeStyle(getProperties(arcSite))[
-                        'primary-font-family'
-                      ]
-                    }
+          {customFields.showHeadline && (
+            <div className={headlineClass}>
+              <a
+                href={content.website_url}
                 className="sm-promo-headline"
-                {...editableContent(content, 'headlines.basic')}
-                suppressContentEditableWarning
+                title={content?.headlines?.basic || ''}
               >
-                {content?.headlines?.basic || ''}
-              </HeadlineText>
-            </a>
-                                     </div>)}
+                <HeadlineText
+                  primaryFont={
+                        getThemeStyle(getProperties(arcSite))[
+                          'primary-font-family'
+                        ]
+                      }
+                  className="sm-promo-headline"
+                  {...editableContent(content, 'headlines.basic')}
+                  suppressContentEditableWarning
+                >
+                  {content?.headlines?.basic || ''}
+                </HeadlineText>
+              </a>
+            </div>
+          )}
           {customFields.showImage && (
             <div className="col-sm-xl-4 flex-col">
               <a

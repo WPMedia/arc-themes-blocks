@@ -50,9 +50,9 @@ const MediumPromo = ({ customFields }) => {
     && content.credits.by.length !== 0 ? content.credits.by : null;
   const dateText = content?.display_date || null;
 
-  const textClass = customFields.showImage
-    ? 'col-sm-12 col-md-xl-8 flex-col'
-    : 'col-sm-xl-12 flex-col';
+  // const textClass = customFields.showImage
+  //   ? 'col-sm-12 col-md-xl-8 flex-col'
+  //   : 'col-sm-xl-12 flex-col';
 
   const promoType = discoverPromoType(content);
 
@@ -178,7 +178,8 @@ const MediumPromo = ({ customFields }) => {
               <PromoLabel type={promoType} />
             </a>
           )}
-          {/* customFields.headlinePosition === 'below' && */(customFields.showHeadline || customFields.showDescription
+          {/* customFields.headlinePosition === 'below' && */
+          (customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
             <>
@@ -189,7 +190,8 @@ const MediumPromo = ({ customFields }) => {
                 {dateTmpl()}
               </div>
             </>
-          )}
+          )
+        }
         </div>
       </article>
       <hr />

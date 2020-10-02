@@ -61,21 +61,7 @@ news-theme-css is provided to the other parts of the system as an NPM package. F
 
 The engine-theme-sdk is located at: <https://github.com/WPMedia/engine-theme-sdk>. The purpose of this repository is to store basic React components and utilities that are not tied to one specific theme. So, for example, there is a lightbox and image component. We also store React based svg icons in here as well. Unlike the other repos in the system, this repo uses TypeScript, so its important to build the repo and commit the generated source before committing changes and publishing.
 
-1.  Create a branch off stable for what you want to work on.
-2.  Once changes are completed, run: `npm run build` then add, commit, push all changes to your branch on GitHub.
-3.  Create a PR and ask for it to be reviewed.
-4.  When approved, merge into stable.
-5.  Pull down stable on your system.
-6.  Look at the package.json for the project and note the version. Your will want to increment the version in the next step
-7.  If, for example, the current version says 0.4.3, then run the following command: `npm version 0.4.4`. This will bump up the version in package.json
-8.  Push the change up to Github.
-9.  Once the version has been updated you can publish with the command: `npm publish`.
-10. You will then want to create a new bundle of fusion-news-theme (see the fusion-news-theme section) and deploy to our environment for design and general testing.
-
-**Notes:**
-
-1.  We have an issue where Sass in this repository is not getting included into the Fusion build process. Until we can get this resolved, we are placing any Sass for these components in the news-theme-css repository.
-2.  When publishing, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
+For contributing to that repo, please see its contributing guidelines.
 
 ### fusion-news-theme-blocks
 
@@ -298,89 +284,7 @@ EventEmitter.subscribe("galleryImagePrevious", event =>
 
 ## Local Development Process
 
-### Basic Local Development
-
-If you are only creating custom components for a specific client and/or only using published packages of `@wpmedia/engine-theme-sdk`, `@wpmedia/fusion-news-theme-blocks`, and `@wpmedia/news-theme-css`, you can simply run the feature pack using `npx fusion start`.  
-If however your are actively developing for engine-theme-sdk, fusion-news-theme-blocks and news-theme-css, see the next section for a more advanced options.
-
-### Advanced Local Development
-
-There are 4 main repos that are actively being developed on and three of them are NPM packages. As you can imagine, a proper local dev environment is paramount. We certainly don't want to have to publish an untested, incomplete block in fusion-news-theme-blocks just to see how it looks and behaves on Fusion! We are currently wrapping up development on providing npm link functionality for themes through the Fusion CLI. We anticipate this to be ready by the time your are ready for development. Below are the instructions for setting this up. If however, this feature is not working at the time you read this or not meeting your needs for a specific issue, please see the next classic dev environment.
-
-#### NPM Link Local Development Instructions
-
-1. Add `FUSION_RELEASE=2.4.2-themesDev.5` (or whatever the version of fusion this will be included in) and `THEMES_BLOCKS_REPO=<path/to/the/root/of/blocks/repo>` to the `.env` file of the bundle. Also make sure to include `.npmrc` on the bundle so everything installs properly as well
-
-2. These key/value pairs should be included on your `blocks.json` depending on what you are developing:
-
-```json
-{
-  ...
-  "useLocal": true/false,
-  "useLocalEngineSDK": true/false,
-  "useLocalCSSFramework": true/false,
-  "blocks": [...],
-  "devBlocks": [...],
-  ...
-}
-```
-
-These are what each of these variables do:
-
-- `useLocal`: Decides whether it should use locally linked modules or install public versions of the blocks
-- `useLocalEngineSDK`: Decides whether it should use locally linked engine SDK or install public version. _NOTE_: The Engine SDK should be manually linked
-- `useLocalCSSFramework`: Decides whether it should use locally linked CSS Framework or install public version. _NOTE_: The CSS Framework should be manually linked
-- `blocks`: Contains the list of blocks to be linked/installed. Each string should be in the format of `"<@org>/<blockName>/<@version, if necessary>"`, i.e. `"@wpmedia/alert-bar-block@beta"`
-- `devBlocks`: You should use this if you don't want to link all of the blocks (which may considerably slow down the local environment booting up) - the CLI will only link the blocks provided in this array if one exists. This is just a convenience tool to narrow down the `blocks` array without having to manually revert the changes every time you commit. Each string should be in the same format as `blocks` array. Keep in mind that you should still include the minimum block needed to start up the local environment (an output type, a layout, a content source). This does NOT replace the `blocks` array.
-
-  Another use case for `devBlocks` is if you want to only locally develop certain blocks but want to bring in production versions of all the others. You can do this by setting `useLocal` to false and including the blocks you want to develop inside `devBlocks`, and when you run the `npx fusion start theme --links` it will link all the blocks inside the `devBlocks` array but also install all the production versions of blocks in `blocks` array, and Fusion will take the linked blocks as higher priority. This will work with the CLI version `1.0.13-alpha.0`, but currently (accidentally) removed on the `1.0.13-versioning.0`
-
-3. Boot up the local environment with the command `npx fusion start theme` at the root of the bundle. If you want to link the blocks as specified in `blocks/devBlocks` array, either run it with `--links` or `-l` flag or run `npx fusion link` command before running the start command
-
-4. Fusion will start up the bundle as normal. Once it fully boots up and the local editor is loaded, go to the blocks and make a change and save, and observe that the change is reflected on the local editor.
-
-Note: It also looks like the webpack watch now requires more CPUs (in testing with Jason Young, who went from 2 - 4 CPUs) - otherwise the real-time webpack watch might not work.
-
-#### Classic Local Development Instructions
-
-1.  Clone the Fusion repo:`git clone git@github.com:WPMedia/fusion.git`
-
-2.  Checkout the branch: `bmiller-2.3-hydrate-extended-theme-dev`
-
-3.  Create an env file at the root your local fusion repository.
-
-Your .env file should look something like this:
-
-        FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
-        THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
-        CONTENT_BASE=[get from dev]
-        CONTEXT_PATH=pf
-        DEFAULT_ARC_SITE=the-sun
-        resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
-        resizerKey=[get the key from a dev]
-
-**FUSION_REPO** should point to your local repo of fusion-news-theme and the **THEMES_BLOCKS_REPO** should point to the /blocks directory of your local fusion-news-theme-blocks repo.
-
-4.  Then run fusion with the command: `npm run start:admin:theme-dev`
-
-5.  If you would also like to run local code for engine-theme-sdk, then extend the .env file to look like this:
-
-
-        FUSION_REPO=/Users/millerb/work/Fusion-News-Theme
-        THEMES_BLOCKS_REPO=/Users/millerb/work/fusion-news-theme-blocks/blocks
-        THEMES_ENGINE_SDK_REPO=/Users/millerb/work/engine-theme-sdk
-        THEMES_ENGINE_SDK_NAME=@wpmedia/engine-theme-sdk
-        CONTENT_BASE=[get from dev]
-        CONTEXT_PATH=pf
-        DEFAULT_ARC_SITE=the-sun
-        resizerURL=https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer
-        resizerKey=[get the key from a dev]
-
-**THEMES_ENGINE_SDK_REPO** should point to your local repo of engine-theme-sdk and **THEMES_ENGINE_SDK_NAME** is the NPM package name so Fusion will now to exclude it from the npm install procedures.
-
-6.  Then run this command to start Fusion: `npm run start:admin:theme-and-engine-dev`
-
-7.  The major disadvantage of the classic development environment is that every change in either `fusion-news-theme-blocks` or `engine-theme-sdk` will require you stop and restart Fusion.
+- Please see [fusion cli documentation](https://github.com/WPMedia/fusion-cli#start---no-admin) for how to run locally-linked repositories for testing integration between, for example Engine Theme SDK and blocks. 
 
 ### Secure Image Resizing Quickstart
 
@@ -739,27 +643,6 @@ Ensure all node modules are cleared:
 `npm view @wpmedia/video-player-block`
 
 - Will show latest version, more concise
-
-### Open Questions
-
-- Why do we need top-level local file dependencies at all
-  - Hoisting up the dependencies is something lerna does, but that yarn workspaces could help
-- What license.md should we have?
-- What about versioning block dependencies? Using `latest` may just be easiest for depending on other blocks
-
-### LocalDev Tips/Playbook
-
-- If your are running locally with `useLocal` set to true in `blocks.json` and you are noticing that webpack is not picking up your changes in the blocks repo and recompiling, try the following: 1) First ensure you do have `useLocal` set to true. 2) Remember in order for Fusion to link to your local working blocks repository, you need to start fusion with the `--links` or `-l` flag. Ex: `fusion start theme --links` or `fusion start theme -l` 3) Shut down Fusion. 4) Run `docker image prune` 5) Restart Docker 6) Restart Fusion.
-
-- Before publishing, creating a bundle, or right after creating a new branch:
-  1. Delete the @wpmedia folder inside your theme pack's node_modules directory.
-  2. Remove npm links to engine-theme-sdk and news-theme-css.
-- If you have set `useLocalEngineSDK` or `useLocalCSSFramework` to true and changes are not getting picked up
-  1. First ensure you set the manual npm link. In the case of engine-theme-sdk, you first need to go to the root of your local copy on engine-theme-sdk and run `sudo npm link`, then in the root of you feature pack, run `npm link @wpmedia/engine-theme-sdk`. For news-theme-sdk, go to the root of your local copy on news-theme-sdk and run `sudo npm link`, then in the root of you feature pack, run `npm link @wpmedia/news-theme-sdk`.
-  1. Note: Changes to these repos do not get picked up automatically by Fusion's webpack when its running.
-  1. When a change is made to engine-theme-sdk or news-theme-css, you will need to shut down fusion, run the build command in either engine-theme-sdk or news-theme-css and then restart Fusion. Note: you do not need to reestablish the npm links after making changes (unless you explicitly unlinked).
-- You want the latest Fusion CLI tool installed
-  1. In the root of your theme pack directory run: `npm install -D @arc-fusion/cli@canary`
 
 ### Resources
 

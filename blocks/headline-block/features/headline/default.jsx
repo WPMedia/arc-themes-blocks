@@ -19,9 +19,9 @@ export const Headline = ({ headlineString, primaryFont }) => (
     <HeadlineHeader
       className="headline"
       primaryFont={primaryFont}
-    >
-      {headlineString}
-    </HeadlineHeader>
+      // dangerouslySetInnerHTML seems to be a pattern for blocks
+      dangerouslySetInnerHTML={headlineString}
+    />
   ));
 
 // container handles data fetching, connection to fusion

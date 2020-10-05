@@ -3,7 +3,7 @@
     "blocks/*",
     "components/*"
   ],
-  "version": "5.7.2-canary.0",
+  "version": "5.7.3-canary.0",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"

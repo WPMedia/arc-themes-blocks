@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/content-api-source-block",
-  "version": "5.7.2-canary.0",
+  "version": "5.7.3-canary.0",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [

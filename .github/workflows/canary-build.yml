@@ -32,3 +32,11 @@ jobs:
       - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: craftech-io/slack-action@v1
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          status: failure
+        if: failure()  

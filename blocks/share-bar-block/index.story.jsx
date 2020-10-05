@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  withKnobs, text, optionsKnob as options, boolean,
+  withKnobs, text, boolean,
 } from '@storybook/addon-knobs';
 import { ShareBar } from './features/share-bar/default';
 

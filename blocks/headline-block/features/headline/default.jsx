@@ -20,7 +20,7 @@ export const Headline = ({ headlineString, primaryFont }) => (
       className="headline"
       primaryFont={primaryFont}
       // dangerouslySetInnerHTML seems to be a pattern for blocks
-      dangerouslySetInnerHTML={headlineString}
+      dangerouslySetInnerHTML={{ __html: headlineString }}
     />
   ));
 

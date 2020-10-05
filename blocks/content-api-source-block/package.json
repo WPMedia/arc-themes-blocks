@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/content-api-source-block",
-  "version": "5.7.2-canary.0",
+  "version": "5.7.3-canary.0",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -25,7 +25,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c",
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   }

@@ -1,9 +1,9 @@
 {
   "name": "@wpmedia/related-content-content-source-block",
-  "version": "5.7.2-canary.0",
+  "version": "5.7.3-canary.0",
   "description": "Content source block to get stories related content.",
   "author": "nelson fernandez <nelson.fernandez@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -13,11 +13,17 @@
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/related-content-content-source--block"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
-  }
+  },
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

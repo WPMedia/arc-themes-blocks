@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/shared-styles",
-  "version": "5.7.2-canary.0",
+  "version": "5.7.3-canary.0",
   "description": "Fusion News Theme Shared Styles",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -23,5 +23,5 @@
     "@wpmedia/news-theme-css": "stable"
   },
   "scripts": {},
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

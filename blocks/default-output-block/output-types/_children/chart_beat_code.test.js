@@ -20,7 +20,7 @@ describe('ChartBeat code', () => {
     expect(chartBeatCode(1, undefined)).toBeFalsy();
   });
 
-  it('must render if both values present', () => {
+  it('must render if both values are present', () => {
     expect(chartBeatCode(1, 'a')).toBeTruthy();
   });
 });

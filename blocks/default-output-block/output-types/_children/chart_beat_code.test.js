@@ -14,7 +14,7 @@ describe('ChartBeat code', () => {
     expect(chartBeatCode(undefined, 'a')).toBeFalsy();
   });
 
-  it('must not render if Domain missing', () => {
+  it('must not render if Domain is missing', () => {
     expect(chartBeatCode(1)).toBeFalsy();
     expect(chartBeatCode(1, null)).toBeFalsy();
     expect(chartBeatCode(1, undefined)).toBeFalsy();

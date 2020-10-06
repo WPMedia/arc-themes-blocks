@@ -332,15 +332,25 @@ describe('get resized image data helper on the server-side', () => {
         imageWidths: IMAGE_WIDTHS,
         resizerURL: 'https://fake.cdn.com/resizer',
       }));
-    const sampleImage = 'image.jpg';
-    const dataWithResizedImages = getResizedImageData(sampleImage, null, true, true);
+    const sampleImage = 'image.png';
+    const dataWithResizedImages = getResizedImageData(
+      sampleImage,
+      null,
+      true,
+      true,
+    );
     // uses fit in logic
-    expect(dataWithResizedImages).toEqual({
-      '158x105': 'OhPCT9HOiYClZDcHtXJA1y_HbO8=/fit-in/158x105/filters:cm=t:fill(white):background_color(white)/',
-      '158x119': 'd1gFvKA4cYT9lBiMNFWTq-7zY5w=/fit-in/158x119/filters:cm=t:fill(white):background_color(white)/',
-      '274x183': 'DakL7zt-4boiiIW4glxQ_Ot3l1k=/fit-in/274x183/filters:cm=t:fill(white):background_color(white)/',
-      '274x206': '1ZfEGgXbYqMzzbVM2PUWqZo1RJo=/fit-in/274x206/filters:cm=t:fill(white):background_color(white)/',
-    });
+    // only png allowed here
+    // by default, fit in only works with png
+    // not coercing png
+    expect(dataWithResizedImages).toMatchInlineSnapshot(`
+      Object {
+        "158x105": "4YZlDRk2vFB5v1DDYdsBVnNQtDM=/fit-in/158x105/filters:quality(70):fill(white):background_color(white)/",
+        "158x119": "5h0UziONFBZ4KtgeEDdbTP-pfqQ=/fit-in/158x119/filters:quality(70):fill(white):background_color(white)/",
+        "274x183": "S6XrUE_Pi6Gqh8HYGu7ZxYcXBeQ=/fit-in/274x183/filters:quality(70):fill(white):background_color(white)/",
+        "274x206": "yO4EAH81mK47WPQYyeJDXkCVejM=/fit-in/274x206/filters:quality(70):fill(white):background_color(white)/",
+      }
+    `);
   });
   it('return null if only image is used with no image url', () => {
     getProperties.mockImplementation(() => (

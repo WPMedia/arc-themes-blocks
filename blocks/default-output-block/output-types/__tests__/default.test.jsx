@@ -164,6 +164,8 @@ describe('head content', () => {
       gtmID: 'GTM-12345ID',
       gaID: 'UA-6789ID',
       fontUrl: 'https://fonts.googleapis.com/css?family=Open Sans',
+      chartBeatAccountId: 994949,
+      chartBeatDomain: 'example.com',
     }))));
   });
   afterAll(() => {
@@ -202,5 +204,37 @@ describe('head content', () => {
     for (let i = 0; i < scripts.length; i += 1) {
       expect(scripts.at(i).html().match(/<script[^>]*>.*?<script/gs)).toBeNull();
     }
+  });
+
+  it('must render chartbeat code', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(1);
+  });
+});
+
+describe('head content without properties', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must not render chartbeat code', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
   });
 });

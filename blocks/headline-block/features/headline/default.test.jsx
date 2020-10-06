@@ -1,5 +1,5 @@
 const React = require('react');
-const { shallow, mount } = require('enzyme');
+const { mount } = require('enzyme');
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
@@ -27,14 +27,16 @@ describe('the headline feature for the default output type', () => {
       const wrapper = mount(<Headline />);
 
       expect(wrapper.find('h1')).toHaveClassName('headline');
+      // checking for styled component class
       expect(wrapper.find('h1').hasClass(/sc-/)).toBe(true);
     });
 
     it('should dangerously set the innerHTML to the headline content', () => {
       const { default: Headline } = require('./default');
-      const wrapper = shallow(<Headline />);
+      const wrapper = mount(<Headline />);
 
-      expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'headline for our story' });
+      // text() shows any text within tag
+      expect(wrapper.find('h1').text()).toStrictEqual('headline for our story');
     });
   });
 
@@ -49,7 +51,7 @@ describe('the headline feature for the default output type', () => {
 
     it('should render nothing', () => {
       const { default: Headline } = require('./default');
-      const wrapper = shallow(<Headline />);
+      const wrapper = mount(<Headline />);
 
       expect(wrapper).toBeEmptyRender();
     });

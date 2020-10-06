@@ -9,7 +9,7 @@ describe('ChartBeat code', () => {
     expect(chartBeatCode(undefined, null)).toBeFalsy();
   });
 
-  it('must not render if accountId missing', () => {
+  it('must not render if accountId is missing', () => {
     expect(chartBeatCode(null, 'a')).toBeFalsy();
     expect(chartBeatCode(undefined, 'a')).toBeFalsy();
   });

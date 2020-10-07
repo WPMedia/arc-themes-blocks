@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/alert-bar-content-source-block",
-  "version": "5.6.0",
+  "version": "5.7.3-canary.0",
   "description": "Fusion News Theme collections content API content source block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -22,7 +22,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c",
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "dependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   }

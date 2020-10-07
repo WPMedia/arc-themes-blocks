@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import styled from 'styled-components';
 import PlayIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/PlayIcon';
 import CameraIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/CameraIcon';
@@ -56,14 +55,14 @@ const Icon = ({ type }) => {
 };
 
 const LabelLarge = ({ arcSite, type }) => (
-  <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(getProperties(arcSite))['primary-color']}>
+  <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
     <Label>{type}</Label>
   </LabelBoxLarge>
 );
 
 const LabelSmall = ({ arcSite, type }) => (
-  <LabelBoxSmall className="promo-label" primaryColor={getThemeStyle(getProperties(arcSite))['primary-color']}>
+  <LabelBoxSmall className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
   </LabelBoxSmall>
 );

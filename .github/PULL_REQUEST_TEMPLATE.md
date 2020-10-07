@@ -32,7 +32,7 @@ _Examples of dependencies or side effects are:_
 
 ## Review Checklist
 _The author of the PR should fill out the following sections to ensure this PR is ready for review._
-- [ ] Confirmed all the test steps above are working. Please run `npm run test`.
+- [ ] Confirmed all the test steps a reviewer will follow above are working. 
 - [ ] Confirmed there are no linter errors. Please run `npm run lint` to check for errors. Often, `npm run lint:fix` will fix those errors and warnings.
 - [ ] Confirmed this PR has reasonable code coverage. You can run `npm run test:coverage` to see your progress.
   - [ ] Confirmed this PR has unit test files

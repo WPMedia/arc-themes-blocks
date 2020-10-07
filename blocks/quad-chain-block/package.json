@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/quad-chain-block",
-  "version": "5.6.0",
+  "version": "5.7.3-canary.0",
   "description": "Quad Chain – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -26,8 +26,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx chains"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77",
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

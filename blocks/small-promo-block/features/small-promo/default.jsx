@@ -30,11 +30,16 @@ const SmallPromo = ({ customFields }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? {
+        'arc-site': arcSite,
+        ...customFields.itemContentConfig.contentConfigValues,
+      }
       : null,
   }) || null;
 
-  const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
+  const headlineClass = customFields.showImage
+    ? 'col-sm-xl-8'
+    : 'col-sm-xl-12 no-image-padding';
 
   const ratios = ratiosFor('SM', customFields.imageRatio);
   const promoType = discoverPromoType(content);
@@ -43,31 +48,33 @@ const SmallPromo = ({ customFields }) => {
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline
-          && (
+          {customFields.showHeadline && (
             <div className={headlineClass}>
               <a
                 href={content.website_url}
                 className="sm-promo-headline"
-                title={content && content.headlines ? content.headlines.basic : ''}
+                title={content?.headlines?.basic || ''}
               >
                 <HeadlineText
-                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  primaryFont={
+                        getThemeStyle(getProperties(arcSite))[
+                          'primary-font-family'
+                        ]
+                      }
                   className="sm-promo-headline"
                   {...editableContent(content, 'headlines.basic')}
                   suppressContentEditableWarning
                 >
-                  {content && content.headlines ? content.headlines.basic : ''}
+                  {content?.headlines?.basic || ''}
                 </HeadlineText>
               </a>
             </div>
           )}
-          {customFields.showImage
-          && (
+          {customFields.showImage && (
             <div className="col-sm-xl-4 flex-col">
               <a
-                href={content.website_url}
-                title={content && content.headlines ? content.headlines.basic : ''}
+                href={content?.website_url || ''}
+                title={content?.headlines?.basic || ''}
               >
                 {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
@@ -101,6 +108,29 @@ const SmallPromo = ({ customFields }) => {
               </a>
             </div>
           )}
+          {/* customFields.showHeadline
+            && customFields.headlinePosition === 'below' && (
+              <div className={`headline-below ${headlineClass}`}>
+                <a
+                  href={content.website_url}
+                  className="sm-promo-headline"
+                  title={content?.headlines?.basic || ''}
+                >
+                  <HeadlineText
+                    primaryFont={
+                      getThemeStyle(getProperties(arcSite))[
+                        'primary-font-family'
+                      ]
+                    }
+                    className="sm-promo-headline"
+                    {...editableContent(content, 'headlines.basic')}
+                    suppressContentEditableWarning
+                  >
+                    {content?.headlines?.basic || ''}
+                  </HeadlineText>
+                </a>
+              </div>
+          ) */}
         </div>
       </article>
       <hr />
@@ -110,26 +140,25 @@ const SmallPromo = ({ customFields }) => {
 
 SmallPromo.propTypes = {
   customFields: PropTypes.shape({
-    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
-      {
-        group: 'Configure Content',
-        label: 'Display Content Info',
-      },
-    ),
-    showHeadline: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      group: 'Configure Content',
+      label: 'Display Content Info',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+    //   label: 'Headline Position',
+    //   group: 'Show promo elements',
+    //   defaultValue: 'above',
+    // }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',

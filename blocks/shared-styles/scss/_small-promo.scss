@@ -5,6 +5,9 @@
   a {
     color: $ui-primary-font-color;
     position: relative;
+    h1 {
+      display: inline;
+    }
   }
 
   a > picture > img {

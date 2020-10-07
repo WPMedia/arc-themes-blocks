@@ -48,7 +48,6 @@ describe('Given a single author', () => {
     ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a>' });
   });
 
-
   it('should return nothing if type is not "author"', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {

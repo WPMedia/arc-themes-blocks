@@ -2,7 +2,6 @@ import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
-
 import Title from './title';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
@@ -30,17 +29,30 @@ const ItemTitleWithRightImage = (props) => {
   const promoType = discoverPromoType(element);
 
   return (
-    <article key={id} className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}>
+    <article
+      key={id}
+      className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
+      style={{
+        width: `calc((100% - 1.5rem) / ${customFields.storiesPerRowSM || 1})`,
+      }}
+    >
       <div className="row sm-promo-padding-btm">
-        {customFields.showHeadlineSM && itemTitle !== '' ? (
+        {/* customFields.headlinePositionSM === 'above'
+        && */ customFields.showHeadlineSM
+        && itemTitle !== '' ? (
           <div className="col-sm-8 col-md-xl-8">
-            <a href={websiteURL} title={itemTitle} className="sm-promo-headline">
+            <a
+              href={websiteURL}
+              title={itemTitle}
+              className="sm-promo-headline"
+            >
               <Title primaryFont={primaryFont} className="sm-promo-headline">
                 {itemTitle}
               </Title>
             </a>
           </div>
-        ) : null}
+      ) : null
+}
         {customFields.showImageSM
           && (
           <div className="col-sm-4 col-md-xl-4 flex-col">
@@ -82,6 +94,17 @@ const ItemTitleWithRightImage = (props) => {
           </div>
           )}
       </div>
+      {/* {customFields.headlinePositionSM === 'below'
+      && customFields.showHeadlineSM
+      && itemTitle !== '' ? (
+        <div className="col-sm-8 col-md-xl-8">
+          <a href={websiteURL} title={itemTitle} className="sm-promo-headline headline-below">
+            <Title primaryFont={primaryFont} className="sm-promo-headline">
+              {itemTitle}
+            </Title>
+          </a>
+        </div>
+        ) : null} */}
       <hr />
     </article>
   );

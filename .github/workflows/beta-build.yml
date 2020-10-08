@@ -32,7 +32,7 @@ jobs:
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --preid beta --dist-tag beta --no
+      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --preid beta --dist-tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Check beta failure status

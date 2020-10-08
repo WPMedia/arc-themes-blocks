@@ -138,14 +138,15 @@ const HorizontalOverlineImageStoryItem = (props) => {
             />
           )} */}
           {customFields.showImageLG && /*! videoUUID && */ (
-            <div className="col-sm-12 col-md-xl-6">
+            <div className="col-sm-12 col-md-xl-6 flex-col">
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
-                    url={targetFallbackImage}
+                    url={imageURL}
                     alt={
-                      getProperties(arcSite).primaryLogoAlt
+                      itemTitle
+                      || getProperties(arcSite).primaryLogoAlt
                       || 'Placeholder logo'
                     }
                     smallWidth={ratios.smallWidth}
@@ -169,7 +170,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                     largeWidth={ratios.largeWidth}
                     largeHeight={ratios.largeHeight}
                     alt={
-                      getProperties(arcSite).primaryLogoAlt
+                      itemTitle
+                      || getProperties(arcSite).primaryLogoAlt
                       || 'Placeholder logo'
                     }
                     url={targetFallbackImage}
@@ -182,8 +184,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
               )}
             </div>
           )}
-          {/* customFields.headlinePositionLG === 'below'
-            && */ (customFields.showHeadlineLG
+          {/* customFields.headlinePositionLG === 'below' && */
+            (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG
               || customFields.showDateLG) && (
@@ -196,8 +198,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-    )
-}
+            )
+          }
         </div>
       </article>
       <hr />

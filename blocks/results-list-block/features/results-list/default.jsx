@@ -31,6 +31,14 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
+const ReadMoreButton = styled.button`
+  background-color:${(props) => props.primaryColor}; 
+
+  &:not(:disabled):not(.disabled):active:hover, &:not(:disabled):not(.disabled):hover:hover{
+    background-color:${(props) => props.primaryColor}; 
+  }
+`;
+
 @Consumer
 class ResultsList extends Component {
   constructor(props) {
@@ -259,17 +267,18 @@ class ResultsList extends Component {
         {
           !!(contentElements && contentElements.length > 0 && seeMore) && (
             <div className="see-more">
-              <button
+              <ReadMoreButton
                 type="button"
                 onClick={() => this.fetchStories(true)}
                 className="btn btn-sm"
+                primaryColor={getThemeStyle(arcSite)['primary-color']}
               >
                 {this.phrases.t('results-list-block.see-more-button')}
                 {' '}
                 <span className="visuallyHidden">
                   stories about this topic
                 </span>
-              </button>
+              </ReadMoreButton>
             </div>
           )
         }

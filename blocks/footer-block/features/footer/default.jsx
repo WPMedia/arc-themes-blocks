@@ -16,6 +16,15 @@ const FooterSection = styled.ul`
   font-family: ${(props) => props.primaryFont};
 `;
 
+const StyledSocialContainer = styled.div`
+  border: 1px solid ${(props) => props.primaryColor}; 
+  fill: ${(props) => props.primaryColor};
+
+  a {
+    border-right: 1px solid ${(props) => props.primaryColor};;
+  }
+`;
+
 const Footer = ({ customFields: { navigationConfig } }) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
@@ -28,6 +37,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
     primaryLogo,
     primaryLogoAlt,
   } = getProperties(arcSite);
+
 
   // Check if URL is absolute/base64
   let logoUrl = lightBackgroundLogo || primaryLogo;
@@ -54,7 +64,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               rel="noopener noreferrer"
               href={facebookPage}
             >
-              <FacebookAltIcon fill="#2980B9" />
+              <FacebookAltIcon fill={getThemeStyle(arcSite)['primary-color']} />
             </a>
           )
           : ''
@@ -68,7 +78,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               rel="noopener noreferrer"
               href={`https://twitter.com/${twitterUsername}`}
             >
-              <TwitterIcon fill="#2980B9" />
+              <TwitterIcon fill={getThemeStyle(arcSite)['primary-color']} />
             </a>
           )
           : ''
@@ -82,7 +92,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               rel="noopener noreferrer"
               href={rssUrl}
             >
-              <RssIcon fill="#2980B9" />
+              <RssIcon fill={getThemeStyle(arcSite)['primary-color']} />
             </a>
           )
           : ''
@@ -96,9 +106,9 @@ const Footer = ({ customFields: { navigationConfig } }) => {
         <section className="footer-header">
           <div className="footer-row">
             <div className="social-column">
-              <div className="socialBtn-container">
+              <StyledSocialContainer className="socialBtn-container" primaryColor={getThemeStyle(arcSite)['primary-color']} >
                 {socialButtons}
-              </div>
+              </StyledSocialContainer>
             </div>
             <div className="copyright-column">
               {/* If large screen, show copyright over border */}

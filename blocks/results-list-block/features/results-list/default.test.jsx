@@ -406,7 +406,6 @@ describe('The results list', () => {
     wrapper.setState({ resultList: mockData, seeMore:true }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {
-        console.log('wrapper 409', wrapper.state());
         expect(wrapper.find('.btn').length).toEqual(1);
       });
 

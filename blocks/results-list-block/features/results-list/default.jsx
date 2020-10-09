@@ -57,11 +57,11 @@ class ResultsList extends Component {
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
-
+    console.log('targetFallbackImage = ', targetFallbackImage)
     if (!targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
-
+    console.log('FINAL targetFallbackImage = ', targetFallbackImage)
     return targetFallbackImage;
   }
 

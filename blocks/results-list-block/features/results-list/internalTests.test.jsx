@@ -1,7 +1,12 @@
 
 import ResultsList from './default.jsx';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount} from 'enzyme';
+import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
+
+const mockReturnData = mockData;
+
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
     fallbackImage: 'http://test/resources/fallback.jpg',
@@ -232,13 +237,41 @@ describe('getFallbackImageURL', () => {
         expect(result).toEqual('storedList');
     });
 
-    it('if has  data, return concentated data with storedList', () => {
+    it('if has  data, return concatenated data with storedList', () => {
         ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
         const mockDeployment = jest.fn();
-        const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath='/pf' customFields={customFields} />);
+        const wrapper = mount(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath='/pf' customFields={customFields} />);
 
         const result = wrapper.instance().fetchStoriesTransform({content_elements:['A', 'B'], next:10}, {content_elements:['C', 'D']});
         expect(result).toEqual( {"content_elements": ["C", "D", "A", "B"], "next": 10});
+    });
+  });
+
+  describe('styled components', () => {
+
+    const listContentConfig = {
+        contentConfigValues: {
+          offset: '0',
+          query: 'type: story',
+          size: '1',
+        },
+        contentService: 'story-feed-query',
+      };
+      const customFields = { listContentConfig };
+
+    it('renders styled headline, read more button and description', () => {
+        ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+        ResultsList.prototype.getThemeStyle = jest.fn().mockReturnValue({'primary-font-family':'font1'});
+        
+        const mockDeployment = jest.fn();
+        const wrapper = mount(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath='/pf' customFields={customFields} />);
+        wrapper.setState({ resultList: oneListItem });
+        wrapper.update();
+
+
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(3);
+        expect(wrapper.find('.list-item').find('.description-text').length).toEqual(3);
+
     });
   });

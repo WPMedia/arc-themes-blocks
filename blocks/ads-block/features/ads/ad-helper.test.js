@@ -1,3 +1,4 @@
+import getProperties from 'fusion:properties';
 import {
   isContentPage,
   getSizemapBreakpoints,
@@ -18,7 +19,16 @@ import {
 } from './ad-helper';
 import adMap from './ad-mapping';
 
-const content = {
+const SITE_PROPS_MOCK = {
+  breakpoints: {
+    "small": 0,
+    "medium": 768,
+    "large": 992
+  },
+  websiteAdPath: 'news',
+};
+
+const CONTENT_MOCK = {
   _id: '1a2b3c4d5e',
   type: 'story',
   taxonomy: {
@@ -28,31 +38,50 @@ const content = {
       { slug: 'tag3' },
     ],
     sections: [
-      { _id: 'primarysection' },
+      { _id: '/primarysection' },
     ],
   },
 };
 
-const contentAlt = {
-  ...content,
+const CONTENT_ALT_MOCK = {
+  ...CONTENT_MOCK,
   id: 'site-service-id',
   taxonomy: {
     sites: [
-      { _id: 'primarysite' },
+      { _id: '/primarysite' },
     ],
   },
 };
 
-const contentConfig = { _jge: 'site-menu' };
-
-const testAdProps = {
+const AD_PROPS_MOCK = {
   adType: '300x250',
   display: 'all',
-  globalContent: content,
-  contentConfig,
+  globalContent: CONTENT_MOCK,
+  contentConfig: { _jge: 'site-menu' },
+};
+
+const checkObjectRecursively = (obj, schema) => {
+  Object.keys(schema).forEach((key) => {
+    const expectedType = schema[key];
+    const propertyValue = obj[key];
+    expect(propertyValue).toBeDefined();
+    if (typeof propertyValue === 'object'
+      && typeof expectedType === 'object') {
+      checkObjectRecursively(propertyValue, expectedType);
+    } else if (expectedType === 'array') {
+      expect(Array.isArray(propertyValue)).toBe(true);
+    } else {
+      expect(typeof propertyValue).toBe(expectedType);
+    }
+  });
 };
 
 describe('ad-helper', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    getProperties.mockReturnValue(SITE_PROPS_MOCK);
+  });
+
   describe('getSizemapBreakpoints()', () => {
     it('returns breakpoint sizemap', () => {
       const sizemap = getSizemapBreakpoints();
@@ -73,9 +102,9 @@ describe('ad-helper', () => {
       expect(type).not.toBeDefined();
     });
     it('returns content type', () => {
-      const type = getType(content);
+      const type = getType(CONTENT_MOCK);
       expect(type).toBeDefined();
-      expect(type).toBe(content.type);
+      expect(type).toBe(CONTENT_MOCK.type);
     });
   });
 
@@ -86,7 +115,7 @@ describe('ad-helper', () => {
       expect(isContent).toBe(false);
     });
     it('returns "true" when it is a "content" page', () => {
-      const isContent = isContentPage(content);
+      const isContent = isContentPage(CONTENT_MOCK);
       expect(isContent).toBeDefined();
       expect(isContent).toBe(true);
     });
@@ -98,9 +127,9 @@ describe('ad-helper', () => {
       expect(adName).not.toBeDefined();
     });
     it('returns ad name', () => {
-      const adName = getAdName(testAdProps.adType);
+      const adName = getAdName(AD_PROPS_MOCK.adType);
       expect(adName).toBeDefined();
-      expect(adName).toBe(adMap[testAdProps.adType].adName);
+      expect(adName).toBe(adMap[AD_PROPS_MOCK.adType].adName);
     });
   });
 
@@ -110,9 +139,9 @@ describe('ad-helper', () => {
       expect(adClass).not.toBeDefined();
     });
     it('returns ad class', () => {
-      const adClass = getAdClass(testAdProps.adType);
+      const adClass = getAdClass(AD_PROPS_MOCK.adType);
       expect(adClass).toBeDefined();
-      expect(adClass).toBe(adMap[testAdProps.adType].adClass);
+      expect(adClass).toBe(adMap[AD_PROPS_MOCK.adType].adClass);
     });
   });
 
@@ -122,9 +151,9 @@ describe('ad-helper', () => {
       expect(dimensions).not.toBeDefined();
     });
     it('returns dimensions array', () => {
-      const dimensions = getDimensions(testAdProps.adType);
+      const dimensions = getDimensions(AD_PROPS_MOCK.adType);
       expect(dimensions).toBeDefined();
-      expect(dimensions).toBe(adMap[testAdProps.adType].dimensionsArray);
+      expect(dimensions).toBe(adMap[AD_PROPS_MOCK.adType].dimensionsArray);
     });
   });
 
@@ -146,9 +175,9 @@ describe('ad-helper', () => {
       expect(id).not.toBeDefined();
     });
     it('returns content ID', () => {
-      const id = getID(content);
+      const id = getID(CONTENT_MOCK);
       expect(id).toBeDefined();
-      expect(id).toBe(content._id);
+      expect(id).toBe(CONTENT_MOCK._id);
     });
   });
 
@@ -159,9 +188,9 @@ describe('ad-helper', () => {
       expect(tags).toBe('');
     });
     it('returns content taxonomy tags', () => {
-      const tags = getTags(content);
+      const tags = getTags(CONTENT_MOCK);
       expect(tags).toBeDefined();
-      content.taxonomy.tags.forEach((tag) => {
+      CONTENT_MOCK.taxonomy.tags.forEach((tag) => {
         expect(tags).toContain(tag.slug);
       });
     });
@@ -188,9 +217,9 @@ describe('ad-helper', () => {
       expect(psID).not.toBeDefined();
     });
     it('returns primary section ID', () => {
-      const psID = getPrimarySectionId(content);
+      const psID = getPrimarySectionId(CONTENT_MOCK);
       expect(psID).toBeDefined();
-      expect(psID).toBe(content.taxonomy.sections[0]._id);
+      expect(psID).toBe(CONTENT_MOCK.taxonomy.sections[0]._id);
     });
   });
 
@@ -200,9 +229,9 @@ describe('ad-helper', () => {
       expect(psID).not.toBeDefined();
     });
     it('returns primary site ID', () => {
-      const psID = getPrimarySiteId(contentAlt);
+      const psID = getPrimarySiteId(CONTENT_ALT_MOCK);
       expect(psID).toBeDefined();
-      expect(psID).toBe(contentAlt.taxonomy.sites[0]._id);
+      expect(psID).toBe(CONTENT_ALT_MOCK.taxonomy.sites[0]._id);
     });
   });
 
@@ -227,9 +256,9 @@ describe('ad-helper', () => {
       expect(sectionPath).toBe('');
     });
     it('returns section path', () => {
-      const sectionPath = getSectionPath(content);
+      const sectionPath = getSectionPath({ globalContent: CONTENT_MOCK });
       expect(sectionPath).toBeDefined();
-      expect(sectionPath).toBe(content.taxonomy.sections[0]._id);
+      expect(sectionPath).toBe(CONTENT_MOCK.taxonomy.sections[0]._id);
     });
   });
 
@@ -242,29 +271,14 @@ describe('ad-helper', () => {
     it('returns slot name', () => {
       const testProps = {
         arcSite: 'tvnz',
-        sectionPath: '/test-page-ad-unit-path',
+        globalContent: CONTENT_MOCK,
+        metaValue: jest.fn(() => undefined),
       };
       const slotName = getSlotName(testProps);
       expect(slotName).toBeDefined();
-      expect(slotName).toEqual('news/test-page-ad-unit-path');
+      expect(slotName).toEqual(`${sitePropsMock.websiteAdPath}${CONTENT_MOCK.taxonomy.sections[0]._id}`);
     });
   });
-
-  const checkObjectRecursively = (obj, schema) => {
-    Object.keys(schema).forEach((key) => {
-      const expectedType = schema[key];
-      const propertyValue = obj[key];
-      expect(propertyValue).toBeDefined();
-      if (typeof propertyValue === 'object'
-        && typeof expectedType === 'object') {
-        checkObjectRecursively(propertyValue, expectedType);
-      } else if (expectedType === 'array') {
-        expect(Array.isArray(propertyValue)).toBe(true);
-      } else {
-        expect(typeof propertyValue).toBe(expectedType);
-      }
-    });
-  };
 
   describe('getAdObject()', () => {
     it('returns ad object (config)', () => {
@@ -283,7 +297,7 @@ describe('ad-helper', () => {
           pos: 'number',
         },
       };
-      const adObj = getAdObject(testAdProps);
+      const adObj = getAdObject(AD_PROPS_MOCK);
       expect(adObj).toBeDefined();
       expect(typeof adObj).toBe('object');
       checkObjectRecursively(adObj, AdConfigSchema);

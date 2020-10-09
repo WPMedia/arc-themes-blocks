@@ -6,6 +6,7 @@ import adMap from './ad-mapping';
 import ArcAdminAd from './_children/ArcAdminAd';
 import ArcAdsInstance from './_children/ArcAdsInstance';
 import { getAdObject, setPageTargeting } from './ad-helper';
+import './ads.scss';
 
 /** === ArcAd Component === */
 const ArcAd = (props) => {
@@ -20,10 +21,16 @@ const ArcAd = (props) => {
       ...propsWithContext,
     }),
   );
+  const isAMP = () => (
+    !!(propsWithContext.outputType && propsWithContext.outputType === 'amp')
+  );
+
+  const { arcSite, customFields: { debug, displayAdvertisementLabel } } = propsWithContext;
+    const siteVars = getProperties(arcSite);
+
+  console.log('ArcAd ---', { propsWithContext, config, siteVars });
 
   const registerAd = () => {
-    const { arcSite, customFields: { debug } } = propsWithContext;
-    const siteVars = getProperties(arcSite);
     const publisherIds = { dfp_publisher_id: siteVars.dfpId };
     ArcAdsInstance
       .getInstance(siteVars, () => {
@@ -41,15 +48,18 @@ const ArcAd = (props) => {
   }, []);
 
   const {
-    id, adClass, adType, dimensions, slotName,
+    id, adClass, adType, dimensions, slotName, display,
   } = config;
   const { isAdmin } = propsWithContext;
 
   return (
-    <div id={`feature_${id}`}
+    <div id={`arcad_feature-${id}`}
       className="arcad_feature">
       <div className="arcad_container">
-        {!isAdmin && (
+        {/* {!isAdmin && displayAdvertisementLabel && siteVars.advertisementLabel && !isAMP() && (
+          <div className={`advertisement-label advertisement-label--${display}`}>{siteVars.advertisementLabel}</div>
+        )} */}
+        {!isAdmin && !isAMP() && (
           <div id={id} className={`arcad ad-${adClass}`}></div>
         )}
         <ArcAdminAd
@@ -90,6 +100,10 @@ ArcAd.propTypes = {
       defaultValue: 'all',
       required: false,
       hidden: false,
+    }),
+    displayAdvertisementLabel: PropTypes.boolean.tag({
+      name: 'Display advertisement label?',
+      defaultValue: true,
     }),
   }),
 };

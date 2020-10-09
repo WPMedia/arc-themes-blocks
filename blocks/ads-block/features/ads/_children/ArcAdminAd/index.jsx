@@ -12,6 +12,7 @@ const ArcAdminAd = ({
         'pb-ad-admin',
         'arcad',
         `ad-${adClass}`,
+        'background_gray_6',
         'color_white',
         'padding-sm-all',
         'text_align_center',

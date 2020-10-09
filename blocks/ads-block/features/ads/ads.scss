@@ -1,34 +1,33 @@
-.alert-bar {
-  align-items: center;
-  background-color: $danger-color;
-  display: inline-flex;
-  flex-wrap: wrap;
-  height: 56px;
-  justify-content: space-between;
-  padding-left: calculateRem(20px);
-  padding-right: 0;
-  width: 100%;
+.advertisement-label {
+  color: $ui-medium-gray;
+  font-size: calculateRem(12px);
+  line-height: calculateRem(16px);
 
-  .article-link {
-    align-items: center;
-    color: white;
-    display: inline-flex;
-    font-family: $theme-primary-font-family;
-    font-size: calculateRem(16px);
-    font-weight: bold;
-    height: 100%;
-    line-height: calculateRem(16px);
-    text-align: left;
-    text-decoration: none;
-    width: 80%;
+  &--mobile {
+    @media only screen and (min-width: map-get($grid-breakpoints, md)) {
+      display: none;
+    }
   }
 
-  button {
-    background: none !important;
-    border: none;
-    cursor: pointer;
-    margin-right: 0;
-    padding-left: calculateRem(8px);
-    padding-right: calculateRem(8px);
+  &--desktop {
+    @media only screen and (max-width: map-get($grid-breakpoints-max, sm)) {
+      display: none;
+    }
+  }
+}
+
+.arcad_feature {
+  .arcad_container {
+    margin-left: auto;
+    margin-right: auto;
+    width: min-content;
+
+    .arcad {
+      text-align: center;
+
+      div[id^="google_ads_iframe"] {
+        text-align: center;
+      }
+    }
   }
 }

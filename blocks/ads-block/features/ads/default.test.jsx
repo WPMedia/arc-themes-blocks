@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { useFusionContext } from 'fusion:context';
 import ArcAd from './default';
 
@@ -10,6 +10,7 @@ const defaultProps = {
   customFields: {
     adType: '300x250',
     display: 'all',
+    displayAdvertisementLabel: true,
   },
   displayProperties: {},
   variants: {},
@@ -39,5 +40,10 @@ describe('<ArcAd>', () => {
     expect(container).toHaveLength(1);
     expect(container.find('.arcad')).toBeDefined();
     expect(container.find('.arcad')).toHaveLength(1);
+  });
+
+  it('renders advertisement label', () => {
+    const wrapper = shallow(<ArcAd {...defaultProps} />);
+    expect(wrapper.find('div.advertisement-label')).toHaveLength(1);
   });
 });

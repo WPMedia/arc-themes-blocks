@@ -13,24 +13,24 @@ const logAdUnit = (adConfig) => {
   adUnitLog[adType].push(adConfig);
 };
 
-export const getSizemapBreakpoints = () => {
-  const breakpoints = {
-    mobile: 0,
-    tablet: 768,
-    desktop: 992,
-  };
+export const getBreakpoints = (arcSite) => {
+  const siteProps = getProperties(arcSite);
+  return get(siteProps, 'breakpoints');
+}
 
-  return [
-    [breakpoints.desktop, 0],
-    [breakpoints.tablet, 0],
-    [breakpoints.mobile, 0],
+export const getSizemapBreakpoints = ({ arcSite }) => {
+  const breakpoints = getBreakpoints(arcSite);
+  return !breakpoints ? [] : [
+    [breakpoints.large, 0],
+    [breakpoints.medium, 0],
+    [breakpoints.small, 0],
   ];
 };
 
 export const getType = (globalContent = {}) => get(globalContent, 'type');
 
 export const isContentPage = (globalContent) => {
-  const type = get(globalContent, 'type');
+  const type = getType(globalContent);
   return (type && (
     type === 'story'
     || type === 'gallery'
@@ -38,11 +38,21 @@ export const isContentPage = (globalContent) => {
   )) || false;
 };
 
-export const getAdName = (adType) => get(adMap, `${adType}.adName`);
+export const isSectionPage = (globalContent) => (
+  get(globalContent, 'node_type', '') === 'section'
+);
 
-export const getAdClass = (adType) => get(adMap, `${adType}.adClass`);
+export const getAdName = ({ adType }) => (
+  get(adMap, `${adType}.adName`)
+);
 
-export const getDimensions = (adType) => get(adMap, `${adType}.dimensionsArray`);
+export const getAdClass = ({ adType }) => (
+  get(adMap, `${adType}.adClass`)
+);
+
+export const getDimensions = ({ adType }) => (
+  get(adMap, `${adType}.dimensionsArray`)
+);
 
 export const getCategory = (sectionPath) => sectionPath && sectionPath.split('/')[1];
 
@@ -60,6 +70,15 @@ export const getTags = (globalContent) => (
 export const getPageType = (props) => {
   const metaValue = get(props, 'metaValue');
   return (metaValue && metaValue('page-type')) || '';
+};
+
+export const getAdPath = (props) => {
+  const metaValue = get(props, 'metaValue');
+  let adPath = (metaValue && metaValue('ad-path')) || '';
+  if (adPath && adPath.charAt(0) === '/') {
+    adPath = adPath.substring(1);
+  }
+  return adPath || undefined;
 };
 
 export const getPrimarySectionId = (globalContent) => {
@@ -82,23 +101,27 @@ export const formatSectionPath = (sectionPath) => {
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);
     }
+    if (fmtPath.charAt(0) !== '/') {
+      fmtPath = `/${fmtPath}`;
+    }
   }
   return fmtPath;
 };
 
-export const getSectionPath = (globalContent) => (
-  formatSectionPath(
+export const getSectionPath = (props) => {
+  const globalContent = get(props, 'globalContent');
+  return formatSectionPath(
     (isContentPage(globalContent) && (
       getPrimarySectionId(globalContent) || getPrimarySiteId(globalContent)
-    )) || getID(globalContent),
-  )
-);
+    )) || (isSectionPage(globalContent) && getID(globalContent)) || '',
+  );
+};
 
+// TODO: Set default slot name logic for 'tag', 'author' and 'search' pages
 export const getSlotName = (props) => {
-  const sectionPath = get(props, 'sectionPath', '');
   const arcSite = get(props, 'arcSite');
   const { websiteAdPath } = getProperties(arcSite);
-  return `${websiteAdPath || ''}${sectionPath || ''}`;
+  return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) || ''}`;
 };
 
 export const getPosition = ({ adType }) => (
@@ -112,7 +135,7 @@ export const setPageTargeting = (props) => {
   window.googletag.cmd.push(() => {
     window.googletag.pubads()
       .setTargeting('page_type', getPageType(props))
-      .setTargeting('section_id', getSectionPath(globalContent));
+      .setTargeting('section_id', getSectionPath(props));
     if (isContentPage(globalContent)) {
       window.googletag.pubads()
         .setTargeting('arc_id', getID(globalContent))
@@ -121,34 +144,29 @@ export const setPageTargeting = (props) => {
   });
 };
 
-export const getPageTargeting = (props) => ({
-  ad_type: get(props, 'adType'),
+export const getSlotTargeting = (props) => ({
+  ad_type: get(props, 'adName'),
   pos: getPosition(props),
 });
 
+/* Expects a 'props' object containing feature props, FusionContext, AppContext */
 export const getAdObject = (props) => {
-  const {
-    adType: type,
-    display: displayProp,
-    globalContent,
-  } = props;
+  console.log('ad-helper:getBreakpoints(): ', getBreakpoints(props.arcSite));
   const rand = Math.floor(Math.random() * 10000);
-  const adType = getAdName(get(props, 'adType'));
-  const display = adType === 'right_rail_cube' ? 'desktop' : displayProp;
+  const adName = getAdName(props);
+  const display = adName === 'right_rail_cube'
+    ? 'desktop' : get(props, 'display', 'all');
   const adObj = {
     id: `arcad_${rand}`,
-    slotName: getSlotName({
-      ...props,
-      sectionPath: getSectionPath(globalContent),
-    }),
-    adType,
-    adClass: getAdClass(type),
-    dimensions: getDimensions(type),
+    slotName: getSlotName(props),
+    adType: adName,
+    adClass: getAdClass(props),
+    dimensions: getDimensions(props),
     sizemap: {
-      breakpoints: getSizemapBreakpoints(),
+      breakpoints: getSizemapBreakpoints(props),
       refresh: true,
     },
-    targeting: getPageTargeting({ ...props, adType }),
+    targeting: getSlotTargeting({ ...props, adName }),
     display,
   };
   logAdUnit(adObj);

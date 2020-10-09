@@ -57,11 +57,11 @@ class ResultsList extends Component {
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
-    console.log('targetFallbackImage = ', targetFallbackImage)
+    
     if (!targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
-    console.log('FINAL targetFallbackImage = ', targetFallbackImage)
+   
     return targetFallbackImage;
   }
 
@@ -76,6 +76,16 @@ class ResultsList extends Component {
         },
       });
     }
+  }
+
+  fetchStoriesTransform(data, storedList){
+    if (data) {
+      // Add new data to previous list
+      const combinedList = storedList.content_elements.concat(data.content_elements);
+      storedList.content_elements = combinedList;
+      storedList.next = data.next;
+    }
+    return storedList;
   }
 
   fetchStories(additionalStoryAmount) {
@@ -108,15 +118,7 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform(data) {
-              if (data) {
-                // Add new data to previous list
-                const combinedList = storedList.content_elements.concat(data.content_elements);
-                storedList.content_elements = combinedList;
-                storedList.next = data.next;
-              }
-              return storedList;
-            },
+            transform: (data) => this.fetchStoriesTransform(data, storedList),
           },
         });
         // Hide button if no more stories to load

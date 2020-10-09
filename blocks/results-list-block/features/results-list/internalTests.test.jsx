@@ -58,3 +58,187 @@ describe('getFallbackImageURL', () => {
         expect(fetchContentMock).toHaveBeenCalledWith({"resultList": {"query": {"offset": "0", "query": "type: story", "size": "1"}, "source": "story-feed-query"}});
     });
   });
+
+
+  describe('fetchStories', () => {
+
+    const listContentConfig = {
+        contentConfigValues: {
+          offset: '0',
+          query: 'type: story',
+          size: '1',
+        },
+        contentService: 'story-feed-query',
+      };
+      const customFields = { listContentConfig };
+
+    it('should make appropriate calculations if has additionalStoryAmount and story-feed-query', () => {
+        const fetchContentMock = jest.fn().mockReturnValue({});
+        ResultsList.prototype.fetchContent = fetchContentMock;
+
+        const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath='/pf' customFields={customFields} />);
+        fetchContentMock.mockClear();
+        wrapper.setState({ storedList: {next: 2} });
+        wrapper.update();
+        wrapper.instance().fetchStories(true);
+
+        expect(wrapper.state('resultList')).toEqual({});
+        expect(fetchContentMock).toHaveBeenCalledTimes(1);
+        const partialObj = {
+               "resultList":  {
+                 "query":  {
+                   "offset": "2",
+                   "query": "type: story",
+                   "size": "1",
+                 },
+                 "source": "story-feed-query",
+                 "transform": expect.any(Function),
+               }
+            };
+        expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
+    });
+
+    it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
+        const fetchContentMock = jest.fn().mockReturnValue({});
+        ResultsList.prototype.fetchContent = fetchContentMock;
+
+        const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath='/pf' customFields={customFields} />);
+        fetchContentMock.mockClear();
+        wrapper.setState({ storedList: {} });
+        wrapper.update();
+        wrapper.instance().fetchStories(true);
+
+        expect(wrapper.state('resultList')).toEqual({});
+        expect(fetchContentMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
+        const fetchContentMock = jest.fn().mockReturnValue({});
+        ResultsList.prototype.fetchContent = fetchContentMock;
+
+        const listContentConfig = {
+            contentConfigValues: {
+              offset: '0',
+              query: 'type: story',
+              size: '1',
+            },
+            contentService: 'story-feed-author',
+        };
+        const customFields = { listContentConfig };
+
+        const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath='/pf' customFields={customFields} />);
+        fetchContentMock.mockClear();
+        wrapper.setState({ storedList: {next: 2} });
+        wrapper.update();
+        wrapper.instance().fetchStories(true);
+
+        expect(wrapper.state('resultList')).toEqual({});
+        expect(fetchContentMock).toHaveBeenCalledTimes(1);
+        const partialObj = {
+            "resultList":  {
+                "query":  {
+                    "feedOffset": "2",
+                    "offset": "0",
+                    "query": "type: story",
+                    "size": "1",
+                },
+                 "source": 'story-feed-author',
+                 "transform": expect.any(Function),
+               }
+            };
+        expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
+    });
+
+    it('should make appropriate calculations if has additionalStoryAmount and non-specified and no storedList.next', () => {
+        const fetchContentMock = jest.fn().mockReturnValue({});
+        ResultsList.prototype.fetchContent = fetchContentMock;
+
+        const listContentConfig = {
+            contentConfigValues: {
+              offset: '0',
+              query: 'type: story',
+              size: '1',
+            },
+            contentService: 'other',
+        };
+        const customFields = { listContentConfig };
+
+        const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath='/pf' customFields={customFields} />);
+        fetchContentMock.mockClear();
+        wrapper.setState({ storedList: {next: 2} });
+        wrapper.update();
+        wrapper.instance().fetchStories(true);
+
+        expect(wrapper.state('resultList')).toEqual({});
+        expect(fetchContentMock).toHaveBeenCalledTimes(1);
+        const partialObj = {
+            "resultList":  {
+                "query":  {
+                    "offset": "0",
+                    "query": "type: story",
+                    "size": "1",
+                },
+                 "source": 'other',
+                 "transform": expect.any(Function),
+               }
+            };
+        expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
+    });
+
+    it('should update seeMore if value is greater than storied list count', () => {
+        const fetchContentMock = jest.fn().mockReturnValue({content_elements:['elem1', 'elem2']});
+        ResultsList.prototype.getContent = fetchContentMock;
+
+        const listContentConfig = {
+            contentConfigValues: {
+              offset: '0',
+              query: 'type: story',
+              size: '1',
+            },
+            contentService: 'story-feed-query',
+        };
+        const customFields = { listContentConfig };
+
+        const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath='/pf' customFields={customFields} />);
+        fetchContentMock.mockClear();
+        wrapper.setState({ storedList: {next: 2, count: 0} });
+        wrapper.update();
+        wrapper.instance().fetchStories(true);
+
+        expect(wrapper.state('seeMore')).toBeFalsy()
+        
+    });
+  });
+
+  describe('fetchStoriesTransform', () => {
+
+    const listContentConfig = {
+        contentConfigValues: {
+          offset: '0',
+          query: 'type: story',
+          size: '1',
+        },
+        contentService: 'story-feed-query',
+      };
+      const customFields = { listContentConfig };
+
+    it('if has no data, return storedList', () => {
+        ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+        const mockDeployment = jest.fn();
+        const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath='/pf' customFields={customFields} />);
+
+        const result = wrapper.instance().fetchStoriesTransform(null, 'storedList');
+        expect(result).toEqual('storedList');
+    });
+
+    it('if has  data, return concentated data with storedList', () => {
+        ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+        const mockDeployment = jest.fn();
+        const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath='/pf' customFields={customFields} />);
+
+        const result = wrapper.instance().fetchStoriesTransform({content_elements:['A', 'B'], next:10}, {content_elements:['C', 'D']});
+        expect(result).toEqual( {"content_elements": ["C", "D", "A", "B"], "next": 10});
+    });
+  });

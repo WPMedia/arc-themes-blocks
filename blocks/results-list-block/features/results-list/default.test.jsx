@@ -403,19 +403,20 @@ describe('The results list', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: mockData }, () => {
+    wrapper.setState({ resultList: mockData, seeMore:true }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {
-        expect(wrapper.find('button').length).toEqual(1);
+        console.log('wrapper 409', wrapper.state());
+        expect(wrapper.find('.btn').length).toEqual(1);
       });
 
       it('should have invisible text for accessibility purposes', () => {
-        expect(wrapper.find('button').text()).toEqual('See More stories about this topic');
+        expect(wrapper.find('.btn').text()).toEqual('See More stories about this topic');
       });
 
       it('should call fetchContent when clicked', () => {
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-        wrapper.find('button').simulate('click');
+        wrapper.find('.btn').simulate('click');
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
       });
     });

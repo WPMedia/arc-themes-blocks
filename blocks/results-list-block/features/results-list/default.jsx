@@ -40,6 +40,16 @@ const ReadMoreButton = styled.button`
 
 @Consumer
 class ResultsList extends Component {
+  static fetchStoriesTransform(data, storedList) {
+    const result = storedList;
+    if (data) {
+      // Add new data to previous list
+      result.content_elements = storedList.content_elements.concat(data.content_elements);
+      result.next = data.next;
+    }
+    return result;
+  }
+
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
@@ -57,11 +67,11 @@ class ResultsList extends Component {
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
-    
+
     if (!targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
     }
-   
+
     return targetFallbackImage;
   }
 
@@ -76,16 +86,6 @@ class ResultsList extends Component {
         },
       });
     }
-  }
-
-  fetchStoriesTransform(data, storedList){
-    if (data) {
-      // Add new data to previous list
-      const combinedList = storedList.content_elements.concat(data.content_elements);
-      storedList.content_elements = combinedList;
-      storedList.next = data.next;
-    }
-    return storedList;
   }
 
   fetchStories(additionalStoryAmount) {

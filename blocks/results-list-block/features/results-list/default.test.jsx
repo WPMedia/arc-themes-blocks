@@ -403,7 +403,7 @@ describe('The results list', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: mockData, seeMore:true }, () => {
+    wrapper.setState({ resultList: mockData, seeMore: true }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {
         expect(wrapper.find('.btn').length).toEqual(1);

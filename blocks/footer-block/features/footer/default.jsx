@@ -38,7 +38,6 @@ const Footer = ({ customFields: { navigationConfig } }) => {
     primaryLogoAlt,
   } = getProperties(arcSite);
 
-
   // Check if URL is absolute/base64
   let logoUrl = lightBackgroundLogo || primaryLogo;
   if (logoUrl && !(logoUrl.indexOf('http') === 0 || logoUrl.indexOf('base64') === 0)) logoUrl = deployment(`${contextPath}/${logoUrl}`);
@@ -106,7 +105,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
         <section className="footer-header">
           <div className="footer-row">
             <div className="social-column">
-              <StyledSocialContainer className="socialBtn-container" primaryColor={getThemeStyle(arcSite)['primary-color']} >
+              <StyledSocialContainer className="socialBtn-container" primaryColor={getThemeStyle(arcSite)['primary-color']}>
                 {socialButtons}
               </StyledSocialContainer>
             </div>

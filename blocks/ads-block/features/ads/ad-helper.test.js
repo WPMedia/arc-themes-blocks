@@ -11,7 +11,6 @@ import {
   getTags,
   getPageType,
   getPrimarySectionId,
-  getPrimarySiteId,
   formatSectionPath,
   getSectionPath,
   getSlotName,
@@ -220,18 +219,6 @@ describe('ad-helper', () => {
       const psID = getPrimarySectionId(CONTENT_MOCK);
       expect(psID).toBeDefined();
       expect(psID).toBe(CONTENT_MOCK.taxonomy.sections[0]._id);
-    });
-  });
-
-  describe('getPrimarySiteId()', () => {
-    it('returns "undefined" with invalid "globalContent"', () => {
-      const psID = getPrimarySiteId(null);
-      expect(psID).not.toBeDefined();
-    });
-    it('returns primary site ID', () => {
-      const psID = getPrimarySiteId(CONTENT_ALT_MOCK);
-      expect(psID).toBeDefined();
-      expect(psID).toBe(CONTENT_ALT_MOCK.taxonomy.sites[0]._id);
     });
   });
 

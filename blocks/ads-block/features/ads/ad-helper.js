@@ -82,15 +82,11 @@ export const getAdPath = (props) => {
 };
 
 export const getPrimarySectionId = (globalContent) => {
-  const basePath = 'taxonomy.sections[0]';
-  return get(globalContent, `${basePath}.referent.id`)
-    || get(globalContent, `${basePath}._id`);
-};
-
-export const getPrimarySiteId = (globalContent) => {
-  const basePath = 'taxonomy.sites[0]';
-  return get(globalContent, `${basePath}.referent.id`)
-    || get(globalContent, `${basePath}._id`);
+  const sectionItem = (
+    get(globalContent, 'taxonomy.primary_section')
+    || get(globalContent, 'taxonomy.sections[0]')
+  );
+  return get(sectionItem, '_id');
 };
 
 export const formatSectionPath = (sectionPath) => {
@@ -110,10 +106,15 @@ export const formatSectionPath = (sectionPath) => {
 
 export const getSectionPath = (props) => {
   const globalContent = get(props, 'globalContent');
+  const pageType = getPageType(props);
   return formatSectionPath(
-    (isContentPage(globalContent) && (
-      getPrimarySectionId(globalContent) || getPrimarySiteId(globalContent)
-    )) || (isSectionPage(globalContent) && getID(globalContent)) || '',
+    pageType === 'tag'
+    || pageType === 'author'
+    || pageType === 'search'
+      ? pageType : (
+        (isContentPage(globalContent) && getPrimarySectionId(globalContent))
+        || (isSectionPage(globalContent) && getID(globalContent)) || ''
+      )
   );
 };
 
@@ -151,7 +152,6 @@ export const getSlotTargeting = (props) => ({
 
 /* Expects a 'props' object containing feature props, FusionContext, AppContext */
 export const getAdObject = (props) => {
-  console.log('ad-helper:getBreakpoints(): ', getBreakpoints(props.arcSite));
   const rand = Math.floor(Math.random() * 10000);
   const adName = getAdName(props);
   const display = adName === 'right_rail_cube'

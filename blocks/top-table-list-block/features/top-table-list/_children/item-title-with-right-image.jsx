@@ -32,27 +32,23 @@ const ItemTitleWithRightImage = (props) => {
     <article
       key={id}
       className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
-      style={{
-        width: `calc((100% - 1.5rem) / ${customFields.storiesPerRowSM || 1})`,
-      }}
     >
       <div className="row sm-promo-padding-btm">
-        {/* customFields.headlinePositionSM === 'above'
-        && */ customFields.showHeadlineSM
-        && itemTitle !== '' ? (
-          <div className="col-sm-8 col-md-xl-8">
-            <a
-              href={websiteURL}
-              title={itemTitle}
-              className="sm-promo-headline"
-            >
-              <Title primaryFont={primaryFont} className="sm-promo-headline">
-                {itemTitle}
-              </Title>
-            </a>
-          </div>
-      ) : null
-}
+        {/* customFields.headlinePositionSM === 'above' && */
+          customFields.showHeadlineSM && itemTitle !== '' ? (
+            <div className="col-sm-8 col-md-xl-8">
+              <a
+                href={websiteURL}
+                title={itemTitle}
+                className="sm-promo-headline"
+              >
+                <Title primaryFont={primaryFont} className="sm-promo-headline">
+                  {itemTitle}
+                </Title>
+              </a>
+            </div>
+          ) : null
+        }
         {customFields.showImageSM
           && (
           <div className="col-sm-4 col-md-xl-4 flex-col">

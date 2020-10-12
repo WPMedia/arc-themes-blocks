@@ -66,6 +66,14 @@ describe('the related-content content source block', () => {
       expect(mockFn.mock.calls.length).toBe(1);
     });
 
+    it('should rename the top property as content_elements', () => {
+      const { default: contentSource } = require('./related-content');
+      const result = contentSource.transform({
+        basic: [{}],
+      }, {});
+      expect(result.content_elements).toBeTruthy();
+    });
+
     it('should not call getResizedImageData if data missing', () => {
       const { default: contentSource } = require('./related-content');
       contentSource.transform(null, {});

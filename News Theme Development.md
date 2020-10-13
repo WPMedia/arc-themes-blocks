@@ -115,7 +115,7 @@ npm install
 ```
 then restart fusion from within client dir (fusion-news-theme):
 ```sh
-npm fusion start -l
+npx fusion start -l
 ```
 
 To check if blocks are being properly linked, run:

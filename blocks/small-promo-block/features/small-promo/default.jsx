@@ -48,8 +48,9 @@ const SmallPromo = ({ customFields }) => {
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline && (
-            <div className={headlineClass}>
+          {customFields.showHeadline
+          && (customFields.headlinePosition === 'above' || undefined || 'undefined') && (
+            <div className={`headline-above ${headlineClass}`}>
               <a
                 href={content.website_url}
                 className="sm-promo-headline"
@@ -108,7 +109,7 @@ const SmallPromo = ({ customFields }) => {
               </a>
             </div>
           )}
-          {/* customFields.showHeadline
+          {customFields.showHeadline
             && customFields.headlinePosition === 'below' && (
               <div className={`headline-below ${headlineClass}`}>
                 <a
@@ -130,7 +131,7 @@ const SmallPromo = ({ customFields }) => {
                   </HeadlineText>
                 </a>
               </div>
-          ) */}
+          )}
         </div>
       </article>
       <hr />
@@ -149,11 +150,11 @@ SmallPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Show promo elements',
-    //   defaultValue: 'above',
-    // }),
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
+    }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

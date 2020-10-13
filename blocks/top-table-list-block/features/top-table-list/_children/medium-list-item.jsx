@@ -35,7 +35,7 @@ const MediumListItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className="md-promo-headline">
+        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD}`}>
           <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
@@ -92,12 +92,12 @@ const MediumListItem = (props) => {
     <>
       <article className="container-fluid medium-promo" key={id}>
         <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
-          {/* {customFields.headlinePositionMD === 'above'
+          {(customFields.headlinePositionMD === 'above' || undefined || 'undefined')
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
-              <div className={textClass}>
+              <div>
                 {headlineTmpl()}
                 {descriptionTmpl()}
                 <div className="article-meta">
@@ -105,7 +105,7 @@ const MediumListItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )} */}
+          )}
           {customFields.showImageMD
             && (
             <a className="image-link" href={websiteURL} title={itemTitle}>
@@ -143,8 +143,8 @@ const MediumListItem = (props) => {
               <PromoLabel type={promoType} />
             </a>
             )}
-          {/* customFields.headlinePositionMD === 'below' && */
-            (customFields.showHeadlineMD
+          {customFields.headlinePositionMD === 'below'
+            && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
@@ -156,8 +156,7 @@ const MediumListItem = (props) => {
                   {dateTmpl()}
                 </div>
               </>
-            )
-          }
+          )}
         </div>
       </article>
       <hr />

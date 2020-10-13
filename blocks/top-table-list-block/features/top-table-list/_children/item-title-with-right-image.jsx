@@ -34,21 +34,20 @@ const ItemTitleWithRightImage = (props) => {
       className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
     >
       <div className="row sm-promo-padding-btm">
-        {/* customFields.headlinePositionSM === 'above' && */
-          customFields.showHeadlineSM && itemTitle !== '' ? (
+        {(customFields.headlinePositionSM === 'above' || undefined || 'undefined')
+          && customFields.showHeadlineSM && itemTitle !== '' ? (
             <div className="col-sm-8 col-md-xl-8">
               <a
                 href={websiteURL}
                 title={itemTitle}
-                className="sm-promo-headline"
+                className="sm-promo-headline headline-above"
               >
                 <Title primaryFont={primaryFont} className="sm-promo-headline">
                   {itemTitle}
                 </Title>
               </a>
             </div>
-          ) : null
-        }
+          ) : null}
         {customFields.showImageSM
           && (
           <div className="col-sm-4 col-md-xl-4 flex-col">
@@ -90,7 +89,7 @@ const ItemTitleWithRightImage = (props) => {
           </div>
           )}
       </div>
-      {/* {customFields.headlinePositionSM === 'below'
+      {customFields.headlinePositionSM === 'below'
       && customFields.showHeadlineSM
       && itemTitle !== '' ? (
         <div className="col-sm-8 col-md-xl-8">
@@ -100,7 +99,7 @@ const ItemTitleWithRightImage = (props) => {
             </Title>
           </a>
         </div>
-        ) : null} */}
+        ) : null}
       <hr />
     </article>
   );

@@ -56,9 +56,11 @@ const ArcAd = (props) => {
     <div id={`arcad_feature-${id}`}
       className="arcad_feature">
       <div className="arcad_container">
-        {/* {!isAdmin && displayAdvertisementLabel && siteVars.advertisementLabel && !isAMP() && (
-          <div className={`advertisement-label advertisement-label--${display}`}>{siteVars.advertisementLabel}</div>
-        )} */}
+        {!isAdmin && displayAdvertisementLabel && !isAMP() && (
+          <div className={`advertisement-label advertisement-label--${display}`}>
+            {siteVars.advertisementLabel || 'ADVERTISEMENT'}
+          </div>
+        )}
         {!isAdmin && !isAMP() && (
           <div id={id} className={`arcad ad-${adClass}`}></div>
         )}

@@ -1,6 +1,7 @@
 import getProperties from 'fusion:properties';
 import {
   isContentPage,
+  isSectionPage,
   getSizemapBreakpoints,
   getAdName,
   getAdClass,
@@ -12,6 +13,7 @@ import {
   getPageType,
   getPrimarySectionId,
   formatSectionPath,
+  getAdPath,
   getSectionPath,
   getSlotName,
   getAdObject,
@@ -40,16 +42,13 @@ const CONTENT_MOCK = {
       { _id: '/primarysection' },
     ],
   },
-};
-
-const CONTENT_ALT_MOCK = {
-  ...CONTENT_MOCK,
-  id: 'site-service-id',
-  taxonomy: {
-    sites: [
-      { _id: '/primarysite' },
-    ],
-  },
+  websites: {
+    'the-sun': {
+      website_section: {
+        _id: '/news'
+      }
+    }
+  }
 };
 
 const AD_PROPS_MOCK = {
@@ -81,9 +80,18 @@ describe('ad-helper', () => {
     getProperties.mockReturnValue(SITE_PROPS_MOCK);
   });
 
+  describe('getBreakpoints()', () => {
+    it('returns breakpoint sizemap', () => {
+      const breakpoints = getBreakpoints('the-sun');
+      expect(breakpoints).toBeDefined();
+      expect(typeof breakpoints).toEqual('object');
+      expect(breakpoints).toEqual(SITE_PROPS_MOCK.breakpoints);
+    });
+  });
+
   describe('getSizemapBreakpoints()', () => {
     it('returns breakpoint sizemap', () => {
-      const sizemap = getSizemapBreakpoints();
+      const sizemap = getSizemapBreakpoints({ arcSite: 'the-sun' });
       expect(sizemap).toBeDefined();
       expect(Array.isArray(sizemap)).toBe(true);
       expect(sizemap.length).toEqual(3);
@@ -109,24 +117,45 @@ describe('ad-helper', () => {
 
   describe('isContentPage()', () => {
     it('returns "false" when not a "content" page', () => {
-      const isContent = isContentPage({ type: 'notcontent' });
+      const isContent = isContentPage({
+        globalContent: { node_type: 'section' },
+      });
       expect(isContent).toBeDefined();
       expect(isContent).toBe(false);
     });
     it('returns "true" when it is a "content" page', () => {
-      const isContent = isContentPage(CONTENT_MOCK);
+      const isContent = isContentPage({
+        globalContent: CONTENT_MOCK,
+      });
       expect(isContent).toBeDefined();
       expect(isContent).toBe(true);
     });
   });
 
+  describe('isSectionPage()', () => {
+    it('returns "false" when not a "content" page', () => {
+      const isSection = isSectionPage({
+        globalContent: { type: 'story' },
+      });
+      expect(isSection).toBeDefined();
+      expect(isSection).toBe(false);
+    });
+    it('returns "true" when it is a "content" page', () => {
+      const isSection = isSectionPage({
+        globalContent: { node_type: 'section' },
+      });
+      expect(isSection).toBeDefined();
+      expect(isSection).toBe(true);
+    });
+  });
+
   describe('getAdName()', () => {
     it('returns "undefined" with invalid "adType"', () => {
-      const adName = getAdName('fakeadtype');
+      const adName = getAdName({ adType: 'fakeadtype' });
       expect(adName).not.toBeDefined();
     });
     it('returns ad name', () => {
-      const adName = getAdName(AD_PROPS_MOCK.adType);
+      const adName = getAdName(AD_PROPS_MOCK);
       expect(adName).toBeDefined();
       expect(adName).toBe(adMap[AD_PROPS_MOCK.adType].adName);
     });
@@ -134,11 +163,11 @@ describe('ad-helper', () => {
 
   describe('getAdClass()', () => {
     it('returns "undefined" with invalid "adType"', () => {
-      const adClass = getAdClass('fakeadtype');
+      const adClass = getAdClass({ adType: 'fakeadtype' });
       expect(adClass).not.toBeDefined();
     });
     it('returns ad class', () => {
-      const adClass = getAdClass(AD_PROPS_MOCK.adType);
+      const adClass = getAdClass(AD_PROPS_MOCK);
       expect(adClass).toBeDefined();
       expect(adClass).toBe(adMap[AD_PROPS_MOCK.adType].adClass);
     });
@@ -146,11 +175,11 @@ describe('ad-helper', () => {
 
   describe('getDimensions()', () => {
     it('returns "undefined" with invalid "adType"', () => {
-      const dimensions = getDimensions('fakeadtype');
+      const dimensions = getDimensions({ adType: 'fakeadtype' });
       expect(dimensions).not.toBeDefined();
     });
     it('returns dimensions array', () => {
-      const dimensions = getDimensions(AD_PROPS_MOCK.adType);
+      const dimensions = getDimensions(AD_PROPS_MOCK);
       expect(dimensions).toBeDefined();
       expect(dimensions).toBe(adMap[AD_PROPS_MOCK.adType].dimensionsArray);
     });
@@ -174,7 +203,9 @@ describe('ad-helper', () => {
       expect(id).not.toBeDefined();
     });
     it('returns content ID', () => {
-      const id = getID(CONTENT_MOCK);
+      const id = getID({
+        globalContent: CONTENT_MOCK,
+      });
       expect(id).toBeDefined();
       expect(id).toBe(CONTENT_MOCK._id);
     });
@@ -187,7 +218,9 @@ describe('ad-helper', () => {
       expect(tags).toBe('');
     });
     it('returns content taxonomy tags', () => {
-      const tags = getTags(CONTENT_MOCK);
+      const tags = getTags({
+        globalContent: CONTENT_MOCK,
+      });
       expect(tags).toBeDefined();
       CONTENT_MOCK.taxonomy.tags.forEach((tag) => {
         expect(tags).toContain(tag.slug);
@@ -210,13 +243,34 @@ describe('ad-helper', () => {
     });
   });
 
+  describe('getAdPath()', () => {
+    it('returns "undefined" when "ad-path" meta field is not set on page', () => {
+      const adPath = getAdPath({
+        metaValue: jest.fn(() => undefined),
+      });
+      expect(adPath).not.toBeDefined();
+    });
+
+    it('returns custom "ad-path" when set on page', () => {
+      const customAdPath = 'custom/ad_path';
+      const adPath = getAdPath({
+        metaValue: jest.fn(() => customAdPath),
+      });
+      expect(adPath).toBeDefined();
+      expect(adPath).toEqual(customAdPath);
+    });
+  });
+
   describe('getPrimarySectionId()', () => {
     it('returns "undefined" with invalid "globalContent"', () => {
       const psID = getPrimarySectionId(null);
       expect(psID).not.toBeDefined();
     });
     it('returns primary section ID', () => {
-      const psID = getPrimarySectionId(CONTENT_MOCK);
+      const psID = getPrimarySectionId({
+        globalContent: CONTENT_MOCK,
+        arcSite: 'the-sun',
+      });
       expect(psID).toBeDefined();
       expect(psID).toBe(CONTENT_MOCK.taxonomy.sections[0]._id);
     });
@@ -242,6 +296,8 @@ describe('ad-helper', () => {
       expect(sectionPath).toBeDefined();
       expect(sectionPath).toBe('');
     });
+
+    // TODO: Test cases for 'tag', 'author', 'section' pages
     it('returns section path', () => {
       const sectionPath = getSectionPath({ globalContent: CONTENT_MOCK });
       expect(sectionPath).toBeDefined();

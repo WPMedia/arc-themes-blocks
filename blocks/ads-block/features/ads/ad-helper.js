@@ -29,7 +29,7 @@ export const getSizemapBreakpoints = ({ arcSite }) => {
 
 export const getType = (globalContent = {}) => get(globalContent, 'type');
 
-export const isContentPage = (globalContent) => {
+export const isContentPage = ({ globalContent } = {}) => {
   const type = getType(globalContent);
   return (type && (
     type === 'story'
@@ -38,7 +38,7 @@ export const isContentPage = (globalContent) => {
   )) || false;
 };
 
-export const isSectionPage = (globalContent) => (
+export const isSectionPage = ({ globalContent } = {}) => (
   get(globalContent, 'node_type', '') === 'section'
 );
 
@@ -54,13 +54,15 @@ export const getDimensions = ({ adType }) => (
   get(adMap, `${adType}.dimensionsArray`)
 );
 
-export const getCategory = (sectionPath) => sectionPath && sectionPath.split('/')[1];
+export const getCategory = (sectionPath) => (
+  sectionPath && sectionPath.split('/')[1]
+);
 
-export const getID = (globalContent = {}) => (
+export const getID = ({ globalContent } = {}) => (
   get(globalContent, '_id', undefined)
 );
 
-export const getTags = (globalContent) => (
+export const getTags = ({ globalContent } = {}) => (
   get(globalContent, 'taxonomy.tags', [])
     .map((tagObj) => get(tagObj, 'slug', null))
     .filter((tag) => tag)
@@ -81,18 +83,14 @@ export const getAdPath = (props) => {
   return adPath || undefined;
 };
 
-export const getPrimarySectionId = (globalContent) => {
-  const sectionItem = (
-    get(globalContent, 'taxonomy.primary_section')
-    || get(globalContent, 'taxonomy.sections[0]')
-  );
-  return get(sectionItem, '_id');
-};
+export const getPrimarySectionId = ({ globalContent, arcSite } = {}) => (
+  get(globalContent, `websites[${arcSite}].website_section._id`, '')
+);
 
 export const formatSectionPath = (sectionPath) => {
   let fmtPath = '';
   if (sectionPath) {
-    fmtPath = sectionPath.replace('-', '_');
+    fmtPath = sectionPath.replaceAll('-', '_');
     const endIdx = fmtPath.length - 1;
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);
@@ -105,24 +103,27 @@ export const formatSectionPath = (sectionPath) => {
 };
 
 export const getSectionPath = (props) => {
-  const globalContent = get(props, 'globalContent');
   const pageType = getPageType(props);
-  return formatSectionPath(
+  return (
     pageType === 'tag'
     || pageType === 'author'
     || pageType === 'search'
       ? pageType : (
-        (isContentPage(globalContent) && getPrimarySectionId(globalContent))
-        || (isSectionPage(globalContent) && getID(globalContent)) || ''
+        (isContentPage(props) && getPrimarySectionId(props))
+        || (isSectionPage(props) && getID(props)) || ''
       )
   );
 };
 
+export const getSectionID = (props) => (
+  formatSectionPath(getAdPath(props) || getSectionPath(props))
+);
+
 // TODO: Set default slot name logic for 'tag', 'author' and 'search' pages
 export const getSlotName = (props) => {
   const arcSite = get(props, 'arcSite');
-  const { websiteAdPath } = getProperties(arcSite);
-  return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) || ''}`;
+  const { websiteAdPath = '' } = getProperties(arcSite);
+  return `${websiteAdPath}${getSectionID(props)}`;
 };
 
 export const getPosition = ({ adType }) => (
@@ -136,11 +137,11 @@ export const setPageTargeting = (props) => {
   window.googletag.cmd.push(() => {
     window.googletag.pubads()
       .setTargeting('page_type', getPageType(props))
-      .setTargeting('section_id', getSectionPath(props));
-    if (isContentPage(globalContent)) {
+      .setTargeting('section_id', getSectionID(props));
+    if (isContentPage(props)) {
       window.googletag.pubads()
-        .setTargeting('arc_id', getID(globalContent))
-        .setTargeting('tags', getTags(globalContent));
+        .setTargeting('arc_id', getID(props))
+        .setTargeting('tags', getTags(props));
     }
   });
 };

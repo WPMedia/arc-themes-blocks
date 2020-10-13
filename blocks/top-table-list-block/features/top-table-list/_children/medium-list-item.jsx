@@ -35,7 +35,7 @@ const MediumListItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD}`}>
+        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD || 'above'}`}>
           <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>

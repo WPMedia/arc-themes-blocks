@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/default-output-block",
-  "version": "5.9.0-beta.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [

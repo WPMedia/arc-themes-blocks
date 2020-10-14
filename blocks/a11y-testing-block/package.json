@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/a11y-testing-block",
-  "version": "5.8.0-beta.0",
+  "version": "5.9.0-beta.0",
   "description": "Fusion News Theme A11y Testing block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -26,5 +26,5 @@
     "axe-core": "^3.5.0",
     "requestidlecallback": "^0.3.0"
   },
-  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

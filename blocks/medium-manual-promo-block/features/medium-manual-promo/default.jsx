@@ -28,41 +28,39 @@ const MediumManualPromo = ({ customFields }) => {
   const {
     breakpoints,
   } = getProperties(arcSite);
-  const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-8 flex-col' : 'col-sm-xl-12 flex-col';
 
+  const hasImage = customFields.showImage && customFields.imageURL;
   return customFields.linkURL ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className="row med-promo-padding-bottom">
-          {(customFields.showImage && customFields.imageURL)
-          && (
-            <div className="col-sm-12 col-md-xl-4">
-              <a
-                href={customFields.linkURL}
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
-              >
-                <Image
-                  // medium is 16:9
-                  url={customFields.imageURL}
-                  alt={customFields.headline}
-                  smallWidth={274}
-                  smallHeight={154}
-                  mediumWidth={274}
-                  mediumHeight={154}
-                  largeWidth={400}
-                  largeHeight={225}
-                  breakpoints={breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                  resizedImageOptions={resizedImageOptions}
-                />
-              </a>
-            </div>
+        <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
+          {hasImage && (
+            <a
+              className="image-link"
+              href={customFields.linkURL}
+              title={customFields.headline}
+              target={customFields.newTab ? '_blank' : '_self'}
+              rel={customFields.newTab ? 'noreferrer noopener' : ''}
+            >
+              <Image
+                // medium is 16:9
+                url={customFields.imageURL}
+                alt={customFields.headline}
+                smallWidth={274}
+                smallHeight={154}
+                mediumWidth={274}
+                mediumHeight={154}
+                largeWidth={400}
+                largeHeight={225}
+                breakpoints={breakpoints}
+                resizerURL={getProperties(arcSite)?.resizerURL}
+                resizedImageOptions={resizedImageOptions}
+              />
+            </a>
           )}
           {(customFields.showHeadline || customFields.showDescription)
           && (
-            <div className={textClass}>
+            <>
               {(customFields.showHeadline && customFields.headline)
               && (
                 <a
@@ -74,7 +72,7 @@ const MediumManualPromo = ({ customFields }) => {
                 >
                   <HeadlineText
                     primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                    className="md-promo-headline"
+                    className="md-promo-headline-text"
                   >
                     {customFields.headline}
                   </HeadlineText>
@@ -89,7 +87,7 @@ const MediumManualPromo = ({ customFields }) => {
                   {customFields.description}
                 </DescriptionText>
               )}
-            </div>
+            </>
           )}
         </div>
       </article>

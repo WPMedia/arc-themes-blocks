@@ -28,17 +28,21 @@ class AlertBar extends Component {
       },
     });
 
+    this.alertRef = React.createRef();
+
     if (typeof window !== 'undefined') {
       this.cookie = readCookie();
       this.state = {
         content: cached,
         visible: this.checkAlertVisible(cached),
+        hidden: true,
       };
       fetched.then(this.updateContent);
     } else {
       this.state = {
         content: cached,
         visible: false,
+        hidden: true,
       };
     }
   }
@@ -59,10 +63,54 @@ class AlertBar extends Component {
       });
       fetched.then(this.updateContent);
     }, 120000);
+
+    // need to delay a bit the first render, to let the browser settle the layout
+    // or the initial animation will now execute
+    window.setTimeout(this.showAlert, 500);
+
+    const { visible } = this.state;
+    this.engageAlert(visible);
+  }
+
+  componentDidUpdate(_prevProps, prevState) {
+    const { visible, hidden } = this.state;
+    if ((visible !== prevState.visible) || (hidden !== prevState.hidden)) {
+      if (visible) {
+        this.engageAlert();
+      } else {
+        this.disengageAlert();
+      }
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.timeID);
+  }
+
+  showAlert = () => {
+    this.setState({ hidden: false });
+  }
+
+  engageAlert = () => {
+    if (!this.alertRef.current) {
+      return;
+    }
+    // the has-alert class is added to the page-header ONLY if the alert-bar
+    // is inside it. if not, nothing is needed
+    const header = this.alertRef.current.closest('.page-header');
+    if (!header) {
+      return;
+    }
+
+    header.classList.add('has-alert');
+  }
+
+  disengageAlert = () => {
+    const header = document.body.getElementsByClassName('page-header')[0];
+    if (!header) {
+      return;
+    }
+    header.classList.remove('has-alert');
   }
 
   updateContent = (content) => {
@@ -87,7 +135,12 @@ class AlertBar extends Component {
   }
 
   render() {
-    const { content = {}, visible } = this.state;
+    const { content = {}, visible, hidden } = this.state;
+
+    if (hidden) {
+      return null;
+    }
+
     const { arcSite } = this.props;
     const { content_elements: elements = [] } = content;
     const article = elements[0] || {};
@@ -96,7 +149,7 @@ class AlertBar extends Component {
 
     return (
       !!content?.content_elements?.length && visible && (
-        <nav className="alert-bar">
+        <nav className="alert-bar" ref={this.alertRef}>
           <AlertBarLink
             href={websiteURL}
             className="article-link"

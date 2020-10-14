@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/text-output-block",
-  "version": "5.8.0-beta.0",
+  "version": "5.9.0-beta.0",
   "description": "Fusion News Theme text output type",
   "author": "nelson fernandez <nelson.fernandez@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -23,6 +23,7 @@
     "lint": "eslint --ext js --ext jsx output-types"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0"
-  }
+    "@wpmedia/engine-theme-sdk": "beta"
+  },
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

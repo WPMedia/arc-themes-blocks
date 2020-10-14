@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/placeholder-image-block",
-  "version": "5.8.0-beta.0",
+  "version": "5.9.0-beta.0",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "author": "Jack Howard <jack.howard@washpost.com>",
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0"
+    "@wpmedia/engine-theme-sdk": "beta"
   },
-  "gitHead": "b80023124aed777cfa92f1215bf4ccc2b7b65868"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

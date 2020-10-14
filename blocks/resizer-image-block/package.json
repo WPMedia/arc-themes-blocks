@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/resizer-image-block",
-  "version": "5.8.0-beta.0",
+  "version": "5.9.0-beta.0",
   "description": "Takes a raw image url and uses thumbor to create resize urls",
   "main": "index.js",
   "scripts": {
@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/engine-theme-sdk": "beta",
     "thumbor-lite": "^0.1.8"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

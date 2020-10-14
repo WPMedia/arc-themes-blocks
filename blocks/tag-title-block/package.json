@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/tag-title-block",
-  "version": "5.8.0-beta.0",
+  "version": "5.9.0-beta.0",
   "description": "Fusion themes block containing a tag title block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -23,11 +23,11 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

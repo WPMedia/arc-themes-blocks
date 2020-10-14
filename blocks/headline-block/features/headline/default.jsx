@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
@@ -8,16 +9,42 @@ const HeadlineHeader = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const Headline = ({ useInjectedFusionContext = useFusionContext }) => {
-  const { globalContent: content, arcSite } = useInjectedFusionContext();
+// presentational component handles only visual
+export const Headline = ({ headlineString, primaryFont }) => (
+  /*
+    if string is default empty from presentational container,
+    then render null
+  */
+  (headlineString !== '') && (
+    <HeadlineHeader
+      className="headline"
+      primaryFont={primaryFont}
+      // dangerouslySetInnerHTML seems to be a pattern for blocks
+      dangerouslySetInnerHTML={{ __html: headlineString }}
+    />
+  ));
 
-  return (
-    !!(content && content.headlines && content.headlines.basic) && (
-      <HeadlineHeader className="headline" dangerouslySetInnerHTML={{ __html: content.headlines.basic }} primaryFont={getThemeStyle(arcSite)['primary-font-family']} />
-    )
-  );
+// container handles data fetching, connection to fusion
+const HeadlineContainer = () => {
+  // get headlines basic
+  const { globalContent } = useFusionContext();
+
+  const { basic: headlineString = '' } = globalContent?.headlines || {};
+
+  // get primary font
+  const { arcSite } = useFusionContext();
+  const { primaryFont } = getThemeStyle(arcSite);
+
+  return (<Headline headlineString={headlineString} primaryFont={primaryFont} />);
 };
 
-Headline.label = 'Headline – Arc Block';
+HeadlineContainer.label = 'Headline – Arc Block';
 
-export default Headline;
+// proptypes for the presentational component
+Headline.propTypes = {
+  headlineString: PropTypes.string,
+  primaryFont: PropTypes.string,
+};
+
+// maintain default export of container
+export default HeadlineContainer;

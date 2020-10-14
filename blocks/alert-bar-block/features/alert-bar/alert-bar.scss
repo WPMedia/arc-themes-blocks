@@ -1,10 +1,14 @@
+$nav-bar-height: 56px;
+$alert-bar-height: 56px;
+
 .alert-bar {
   align-items: center;
   background-color: $danger-color;
-  display: inline-flex;
-  flex-wrap: wrap;
-  height: 56px;
+  display: flex;
+  flex-wrap: nowrap;
+  height: $alert-bar-height;
   justify-content: space-between;
+  overflow: hidden;
   padding-left: calculateRem(20px);
   padding-right: 0;
   width: 100%;
@@ -12,7 +16,7 @@
   .article-link {
     align-items: center;
     color: white;
-    display: inline-flex;
+    display: flex;
     font-family: $theme-primary-font-family;
     font-size: calculateRem(16px);
     font-weight: bold;
@@ -30,5 +34,12 @@
     margin-right: 0;
     padding-left: calculateRem(8px);
     padding-right: calculateRem(8px);
+  }
+}
+
+#fusion-app .has-alert + .main {
+  padding-top: calc(#{$nav-bar-height} + #{$alert-bar-height} + #{map-get($spacers, 'lg')});
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    padding-top: calc(#{$nav-bar-height} + #{$alert-bar-height} + #{map-get($spacers, 'md')});
   }
 }

@@ -43,16 +43,19 @@ const MediumPromo = ({ customFields }) => {
       : null,
   }) || null;
 
+  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
   const byLineArray = content?.credits?.by
     && content.credits.by.length !== 0 ? content.credits.by : null;
   const dateText = content?.display_date || null;
-
-  // const textClass = customFields.showImage
-  //   ? 'col-sm-12 col-md-xl-8 flex-col'
-  //   : 'col-sm-xl-12 flex-col';
 
   const promoType = discoverPromoType(content);
 
@@ -63,7 +66,7 @@ const MediumPromo = ({ customFields }) => {
           href={content.website_url}
           className="md-promo-headline"
           // className={`md-promo-headline headline-${customFields.headlinePosition}`}
-          title={content && content.headlines ? content.headlines.basic : ''}
+          title={headlineText}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -119,25 +122,16 @@ const MediumPromo = ({ customFields }) => {
   };
 
   const ratios = ratiosFor('MD', customFields.imageRatio);
+  const imageURL = customFields.imageOverrideURL
+    ? customFields.imageOverrideURL : extractImageFromStory(content);
+  const resizedImageOptions = customFields.imageOverrideURL
+    ? customFieldImageResizedImageOptions
+    : extractResizedParams(content);
 
   return content ? (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
-          {/* customFields.headlinePosition === 'above'
-            && (customFields.showHeadline
-              || customFields.showDescription
-              || customFields.showByline
-              || customFields.showDate) && (
-              <div className={textClass}>
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
-              </div>
-              ) */}
           {customFields.showImage
           && (
             <a
@@ -146,11 +140,10 @@ const MediumPromo = ({ customFields }) => {
               title={content && content.headlines ? content.headlines.basic : ''}
             >
               {
-                customFields.imageOverrideURL || extractImageFromStory(content)
+                imageURL
                   ? (
                     <Image
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                      url={imageURL}
                       alt={content && content.headlines ? content.headlines.basic : ''}
                       // medium is 16:9
                       smallWidth={ratios.smallWidth}
@@ -161,7 +154,7 @@ const MediumPromo = ({ customFields }) => {
                       largeHeight={ratios.largeHeight}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
+                      resizedImageOptions={resizedImageOptions}
                     />
                   )
                   : (
@@ -210,11 +203,6 @@ MediumPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Show promo elements',
-    //   defaultValue: 'above',
-    // }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

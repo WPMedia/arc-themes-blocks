@@ -22,7 +22,7 @@
     "directory": "blocks/simple-list-block"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },

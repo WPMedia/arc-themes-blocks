@@ -24,7 +24,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },

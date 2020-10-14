@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "canary",
+    "@wpmedia/shared-styles": "beta",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

@@ -23,9 +23,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "canary",
-    "@wpmedia/date-block": "canary",
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/byline-block": "beta",
+    "@wpmedia/date-block": "beta",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },

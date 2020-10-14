@@ -28,12 +28,12 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/byline-block": "canary",
-    "@wpmedia/date-block": "canary",
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/global-phrases-block": "canary",
+    "@wpmedia/byline-block": "beta",
+    "@wpmedia/date-block": "beta",
+    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/global-phrases-block": "beta",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "canary",
+    "@wpmedia/shared-styles": "beta",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

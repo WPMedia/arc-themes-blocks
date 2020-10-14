@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^5.0.1"
   },

@@ -22,7 +22,7 @@
     "directory": "blocks/double-chain-block"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/news-theme-css": "stable"
   },
   "scripts": {

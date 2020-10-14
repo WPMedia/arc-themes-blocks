@@ -23,8 +23,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/resizer-image-block": "beta"
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/resizer-image-block": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

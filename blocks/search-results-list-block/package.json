@@ -24,10 +24,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/date-block": "beta",
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/global-phrases-block": "beta",
-    "@wpmedia/shared-styles": "beta",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/global-phrases-block": "canary",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "bugs": {

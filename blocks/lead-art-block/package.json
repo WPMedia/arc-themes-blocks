@@ -21,9 +21,9 @@
     "directory": "blocks/lead-art-block"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/video-player-block": "beta",
+    "@wpmedia/video-player-block": "canary",
     "styled-components": "^4.4.0"
   },
   "scripts": {

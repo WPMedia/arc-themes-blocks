@@ -5,6 +5,8 @@ import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 import './default.scss';
 
+const chartBeatCode = require('./_children/chart_beat_code');
+
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
 const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
@@ -34,6 +36,8 @@ const SampleOutputType = ({
     fontUrl,
     resizerURL,
     facebookAdmins,
+    chartBeatAccountId,
+    chartBeatDomain,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -88,6 +92,7 @@ const SampleOutputType = ({
       <script dangerouslySetInnerHTML={{ __html: gaScript }} />
     </>
   );
+  const chartBeat = chartBeatCode(chartBeatAccountId, chartBeatDomain);
 
   return (
     <html lang="en">
@@ -129,6 +134,7 @@ const SampleOutputType = ({
         />
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
+        {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
       </head>
       <body>
         {gtmID

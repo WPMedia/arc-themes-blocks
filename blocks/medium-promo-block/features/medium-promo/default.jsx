@@ -21,7 +21,7 @@ import {
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 

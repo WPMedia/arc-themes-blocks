@@ -9,7 +9,7 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 

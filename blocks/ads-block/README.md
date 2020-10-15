@@ -1,5 +1,5 @@
 # `@wpmedia/ads-block`
-_Fusion News Theme ads block._
+_This is the `AdsBlock` feature that utilizes the ArcAds library to render Google DFP advertisements. It will allow PageBuilder editors to select an 'Ad Type' as well as 'display' configuration option. It also includes the option of displaying or hiding an 'ADVERTISEMENT' label above the ad unit._
 
 ## Acceptance Criteria
 - Add AC relevant to the block
@@ -7,9 +7,9 @@ _Fusion News Theme ads block._
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
-| **required prop** | yes | | |
-| **optional prop** | no | | |
-| **contentConfig example** | | | Please specify which content sources are compatible |
+| **adType** | yes | string | 'Ad Type' configuration to use for ad unit instance |
+| **display** | yes | string | Indicates which breakpoint(s) to display ad unit on (all, desktop or mobile) |
+| **displayAdLabel** | yes | boolean | Indicates whether or not to display advertisement label |
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

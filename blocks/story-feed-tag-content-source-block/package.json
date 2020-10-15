@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_tag-v4": "latest",
-    "@wpmedia/engine-theme-sdk": "canary"
+    "@wpmedia/resizer-image-block": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

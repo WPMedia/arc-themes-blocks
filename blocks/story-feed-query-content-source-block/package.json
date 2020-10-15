@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "dependencies": {
-    "@arc-core-components/content-source_story-feed_sections-v4": "^1.0.6-canary.0",
+    "@arc-core-components/content-source_story-feed_sections-v4": "latest",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/resizer-image-block": "canary"
   },

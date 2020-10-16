@@ -22,7 +22,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/resizer-image-block": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

@@ -5,14 +5,38 @@ import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 import './default.scss';
 
-const chartBeatCode = require('./_children/chart_beat_code');
-
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
 const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((scriptString) => (
   <script dangerouslySetInnerHTML={{ __html: scriptString }} />
 ));
+
+const chartBeatCode = (accountId, domain) => {
+  if (!accountId || !domain) {
+    return null;
+  }
+  return `
+    (function() {
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        _sf_async_config.uid = ${accountId};
+        _sf_async_config.domain = "${domain}";
+        _sf_async_config.useCanonical = true;
+        _sf_async_config.useCanonicalDomain = true;
+        _sf_async_config.sections = '';
+        _sf_async_config.authors = '';
+        function loadChartbeat() {
+            var e = document.createElement('script');
+            var n = document.getElementsByTagName('script')[0];
+            e.type = 'text/javascript';
+            e.async = true;
+            e.src = '//static.chartbeat.com/js/chartbeat.js';
+            n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+     })();
+  `;
+};
 
 const SampleOutputType = ({
   children,

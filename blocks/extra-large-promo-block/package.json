@@ -25,7 +25,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/byline-block": "canary",
     "@wpmedia/date-block": "canary",
     "@wpmedia/engine-theme-sdk": "canary",

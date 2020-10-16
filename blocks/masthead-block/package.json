@@ -13,7 +13,7 @@
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^5.0.1"

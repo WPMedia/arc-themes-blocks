@@ -29,7 +29,9 @@
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/shared-styles": "canary",
-    "styled-components": "^4.4.0",
+    "styled-components": "^4.4.0"
+  },
+  "dependencies": {
     "use-debounce": "^3.4.3"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

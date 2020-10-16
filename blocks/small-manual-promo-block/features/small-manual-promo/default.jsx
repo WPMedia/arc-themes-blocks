@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -22,38 +22,42 @@ const SmallManualPromo = ({ customFields }) => {
   });
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
-  return customFields.linkURL ? (
+  const renderWithLink = useCallback((element, props) => (
+    <a
+      href={customFields.linkURL || '#'}
+      className={(props && props.className) || ''}
+      title={customFields.headline}
+      target={customFields.newTab ? '_blank' : '_self'}
+      rel={customFields.newTab ? 'noreferrer noopener' : ''}
+      onClick={!customFields.linkURL ? (evt) => {
+        evt.preventDefault();
+      } : undefined}
+    >
+      {element}
+    </a>
+  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+
+  return (
     <>
       <article className="container-fluid small-promo">
         <div className="row sm-promo-padding-btm">
           {(customFields.showHeadline && customFields.headline)
           && (
             <div className={headlineClass}>
-              <a
-                href={customFields.linkURL}
-                className="sm-promo-headline"
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
-              >
+              { renderWithLink((
                 <HeadlineText
                   primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
                   className="sm-promo-headline"
                 >
                   {customFields.headline}
                 </HeadlineText>
-              </a>
+              ), { className: 'sm-promo-headline' }) }
             </div>
           )}
           {(customFields.showImage && customFields.imageURL)
           && (
             <div className="col-sm-xl-4 right-aligned-container">
-              <a
-                href={customFields.linkURL}
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
-              >
+              { renderWithLink(
                 <Image
                   url={customFields.imageURL}
                   alt={customFields.headline}
@@ -67,15 +71,15 @@ const SmallManualPromo = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
-                />
-              </a>
+                />,
+              )}
             </div>
           )}
         </div>
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 SmallManualPromo.propTypes = {

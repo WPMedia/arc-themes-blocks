@@ -113,7 +113,7 @@ const VerticalOverlineImageStoryItem = (props) => {
             || customFields.showDateXL) && (
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
-              {(customFields.headlinePositionXL === 'above' || undefined || 'undefined') && headlineTmpl()}
+              {(customFields.headlinePositionXL === 'above' || customFields.headlinePositionXL === undefined) && headlineTmpl()}
               {videoUUID && (
                 <Video
                   uuid={videoUUID}

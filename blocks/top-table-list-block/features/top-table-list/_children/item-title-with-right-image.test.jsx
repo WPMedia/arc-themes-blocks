@@ -161,7 +161,7 @@ describe('item title with right image block', () => {
     );
 
     expect(wrapper.find('.headline-below').length).toBe(1);
-    expect(wrapper.find('.headline-above').length).toBe(1);
+    expect(wrapper.find('.headline-above').length).toBe(0);
   });
 });
 

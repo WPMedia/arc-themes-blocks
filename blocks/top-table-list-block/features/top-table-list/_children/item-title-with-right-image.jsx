@@ -34,7 +34,7 @@ const ItemTitleWithRightImage = (props) => {
       className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
     >
       <div className="row sm-promo-padding-btm">
-        {(customFields.headlinePositionSM === 'above' || undefined || 'undefined')
+        {(customFields.headlinePositionSM === 'above' || customFields.headlinePositionSM === undefined)
           && customFields.showHeadlineSM && itemTitle !== '' ? (
             <div className="col-sm-8 col-md-xl-8">
               <a

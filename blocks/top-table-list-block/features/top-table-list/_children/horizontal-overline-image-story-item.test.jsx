@@ -257,7 +257,7 @@ describe('horizontal overline image story item', () => {
       />,
     );
 
-    expect(wrapper.find('.headline-below').length).toBe(2);
+    expect(wrapper.find('.headline-below').length).toBe(1);
     expect(wrapper.find('.headline-above').length).toBe(0);
   });
 });

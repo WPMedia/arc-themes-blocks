@@ -46,7 +46,7 @@ describe('the small promo feature', () => {
 
   it('should have two link elements by default', () => {
     const wrapper = mount(<SmallPromo customFields={config} />);
-    expect(wrapper.find('a')).toHaveLength(3);
+    expect(wrapper.find('a')).toHaveLength(2);
   });
 
   // it('should link the headline to the current site website_url ANS property', () => {
@@ -68,7 +68,7 @@ describe('the small promo feature', () => {
 
   it('Headline div should have class .col-sm-xl-8 when show image is true', () => {
     const wrapper = mount(<SmallPromo customFields={config} />);
-    expect(wrapper.find('.col-sm-xl-8')).toHaveLength(2);
+    expect(wrapper.find('.col-sm-xl-8')).toHaveLength(1);
   });
 
   it('should have no Image when show image is false', () => {
@@ -90,7 +90,7 @@ describe('the small promo feature', () => {
       showImage: false,
     };
     const wrapper = mount(<SmallPromo customFields={noImgConfig} />);
-    expect(wrapper.find('.col-sm-xl-12')).toHaveLength(2);
+    expect(wrapper.find('.col-sm-xl-12')).toHaveLength(1);
   });
 
   it('headline div should have class .headline-above when headline position is above', () => {
@@ -114,7 +114,7 @@ describe('the small promo feature', () => {
     };
     const wrapper = mount(<SmallPromo customFields={headBelowConfig} />);
     expect(wrapper.find('.headline-below')).toHaveLength(1);
-    expect(wrapper.find('.headline-above').length).toBe(1);
+    expect(wrapper.find('.headline-above').length).toBe(0);
   });
 
   it('should only be one link when showHeadline is false and show image is true', () => {

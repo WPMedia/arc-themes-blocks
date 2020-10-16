@@ -49,7 +49,7 @@ const SmallPromo = ({ customFields }) => {
       <article className="container-fluid small-promo">
         <div className="row">
           {customFields.showHeadline
-          && (customFields.headlinePosition === 'above' || undefined || 'undefined') && (
+          && (customFields.headlinePosition === 'above' || customFields.headlinePosition === undefined) && (
             <div className={`headline-above ${headlineClass}`}>
               <a
                 href={content.website_url}

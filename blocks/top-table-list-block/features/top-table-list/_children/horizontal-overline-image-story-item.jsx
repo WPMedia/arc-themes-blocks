@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Video } from '@wpmedia/engine-theme-sdk';
+import { Image/* , Video */ } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
@@ -106,14 +106,14 @@ const HorizontalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('LG', imageRatio);
-  const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
+  // const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
   const promoType = discoverPromoType(element);
 
   return (
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {(customFields.headlinePositionLG === 'above' || undefined || 'undefined')
+          {(customFields.headlinePositionLG === 'above' || customFields.headlinePositionLG === undefined)
             && (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG
@@ -128,7 +128,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                 </div>
               </div>
           )}
-          {videoUUID && (
+          {/* videoUUID && (
             <Video
               uuid={videoUUID}
               autoplay={false}
@@ -136,8 +136,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
               org="arcbrands"
               env="sandbox"
             />
-          )}
-          {customFields.showImageLG && !videoUUID && (
+          ) */}
+          {customFields.showImageLG /* && !videoUUID */ && (
             <div className="col-sm-12 col-md-xl-6 flex-col">
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>

@@ -107,7 +107,7 @@ npm i
 npx lerna bootstrap
 ```
 
-As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block us-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion 
+As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
 ```sh
 cd blocks/header-nav-chain-block
 check .npmrc file here exists

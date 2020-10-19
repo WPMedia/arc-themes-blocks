@@ -8,9 +8,9 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
+      branches: 85,
+      functions: 85,
+      lines: 85,
     },
   },
   collectCoverageFrom: [

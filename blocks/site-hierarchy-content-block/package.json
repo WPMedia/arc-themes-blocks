@@ -29,7 +29,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"

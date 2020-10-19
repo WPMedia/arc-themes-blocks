@@ -21,7 +21,7 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/top-table-list-block"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/byline-block": "canary",
     "@wpmedia/date-block": "canary",
     "@wpmedia/engine-theme-sdk": "canary",

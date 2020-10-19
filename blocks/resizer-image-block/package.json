@@ -28,7 +28,7 @@
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "thumbor-lite": "^0.1.8"
   },

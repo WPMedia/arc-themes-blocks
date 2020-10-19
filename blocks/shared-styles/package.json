@@ -18,7 +18,7 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/shared-styles"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable"
   },

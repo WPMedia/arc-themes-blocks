@@ -67,6 +67,7 @@ const MediumPromo = ({ customFields }) => {
           className="md-promo-headline"
           // className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={headlineText}
+          style={{ marginLeft: (customFields.headlinePosition === 'below' ? '' : '0') }}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -131,13 +132,29 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`} style={{ display: (customFields.headlinePosition === 'below' ? '' : 'flex') }}>
+          {(customFields.headlinePosition === 'above' || customFields.headlinePosition === undefined)
+            && (customFields.showHeadline
+              || customFields.showDescription
+              || customFields.showByline
+              || customFields.showDate) && (
+              <div>
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta" style={{ marginLeft: '0' }}>
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
+              </div>
+          )}
+
           {customFields.showImage
           && (
             <a
               className="image-link"
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
+              style={{ float: (customFields.headlinePosition === 'below' ? '' : 'right') }}
             >
               {
                 imageURL
@@ -171,8 +188,8 @@ const MediumPromo = ({ customFields }) => {
               <PromoLabel type={promoType} />
             </a>
           )}
-          {/* customFields.headlinePosition === 'below' && */
-          (customFields.showHeadline || customFields.showDescription
+          {customFields.headlinePosition === 'below'
+          && (customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
             <>
@@ -183,8 +200,7 @@ const MediumPromo = ({ customFields }) => {
                 {dateTmpl()}
               </div>
             </>
-          )
-        }
+          )}
         </div>
       </article>
       <hr />
@@ -202,6 +218,11 @@ MediumPromo.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
     }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',

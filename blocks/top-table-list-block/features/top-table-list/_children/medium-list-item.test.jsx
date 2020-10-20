@@ -159,7 +159,6 @@ describe('medium list item', () => {
     const id = 'test';
     const { default: MediumListItem } = require('./medium-list-item');
 
-    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(<MediumListItem
       imageURL={imageURL}
       constructedURL={constructedURL}

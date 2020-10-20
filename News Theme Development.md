@@ -78,6 +78,54 @@ The development process is similar engine-theme-sdk, except when it comes time t
 
 Note: When publishing, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
 
+Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.  
+
+Update the client code base .env file to include:
+```sh
+CONTENT_BASE=https://api.corecomponents.arcpublishing.com OR Client content base
+ARC_ACCESS_TOKEN=XXX access token generated from client Developer Center
+FUSION_RELEASE=2.6.3-blockrelease.1 //OR latest fusion block release
+DEBUG=fusion:* //May comment this out if extra fusion logging is not desired
+THEMES_BLOCKS_REPO=/path/to/local/fusion-news-theme-blocks/directory
+CONTEXT_PATH=pf
+resizerURL=//client resizer url
+resizerKey=//unencrypted client resizer key
+WATCH=true
+DB_NAME=Fusion_News_Theme
+COMPOSE_HTTP_TIMEOUT=240
+DOCKER_CLIENT_TIMEOUT=240
+BLOCK_DIST_TAG=canary
+CSS_DIST_TAG=canary
+ENGINE_SDK_DIST_TAG=canary
+```
+
+Within fusion-news-theme-blocks directory root, run the following:
+```sh
+rm -rf ./node_modules
+npx lerna clean
+npm i
+npx lerna bootstrap
+```
+
+As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
+```sh
+cd blocks/header-nav-chain-block
+check .npmrc file here exists
+npm install
+```
+then restart fusion from within client dir (fusion-news-theme):
+```sh
+npx fusion start -l
+```
+
+To check if blocks are being properly linked, run:
+```sh
+ cat .fusion/docker-compose.yml
+ ```
+  If blocks linking was successful, you'll see the listing for volumes with all the block names linked. 
+
+  NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
+
 ### Development Process
 
 1. Pull the latest `canary` branch:

@@ -95,7 +95,7 @@ describe('the small promo feature', () => {
     const wrapper = mount(<SmallPromo customFields={noImgConfig} />);
     expect(wrapper.find('.col-sm-xl-12')).toHaveLength(1);
   });
-  
+
   it('headline div should have class .headline-above when headline position is above', () => {
     const headAboveConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
@@ -119,7 +119,7 @@ describe('the small promo feature', () => {
     expect(wrapper.find('.headline-below')).toHaveLength(1);
     expect(wrapper.find('.headline-above').length).toBe(0);
   });
-  
+
   it('should only be one link when showHeadline is false and show image is true', () => {
     const noHeadlineConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },

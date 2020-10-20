@@ -67,6 +67,7 @@ const MediumPromo = ({ customFields }) => {
           className="md-promo-headline"
           // className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={headlineText}
+          style={{ marginLeft: (customFields.headlinePosition === 'below' ? '' : '0') }}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -131,28 +132,29 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`} style={{ display: (customFields.headlinePosition === 'below' ? '' : 'flex') }}>
           {(customFields.headlinePosition === 'above' || customFields.headlinePosition === undefined)
             && (customFields.showHeadline
               || customFields.showDescription
               || customFields.showByline
               || customFields.showDate) && (
-              <div className={textClass}>
+              <div>
                 {headlineTmpl()}
                 {descriptionTmpl()}
-                <div className="article-meta">
+                <div className="article-meta" style={{ marginLeft: '0' }}>
                   {byLineTmpl()}
                   {dateTmpl()}
                 </div>
               </div>
           )}
-        
+
           {customFields.showImage
           && (
             <a
               className="image-link"
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
+              style={{ float: (customFields.headlinePosition === 'below' ? '' : 'right') }}
             >
               {
                 imageURL

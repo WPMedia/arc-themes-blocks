@@ -97,7 +97,7 @@ const MediumListItem = (props) => {
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
-              <div>
+              <div style={{ float: 'left' }}>
                 {headlineTmpl()}
                 {descriptionTmpl()}
                 <div className="article-meta">
@@ -108,7 +108,7 @@ const MediumListItem = (props) => {
           )}
           {customFields.showImageMD
             && (
-            <a className="image-link" href={websiteURL} title={itemTitle}>
+            <a className="image-link" href={websiteURL} title={itemTitle} style={{ float: (customFields.headlinePositionMD === 'below' ? '' : 'right') }}>
               {imageURL !== '' ? (
                 <Image
                   resizedImageOptions={resizedImageOptions}

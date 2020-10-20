@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/right-rail-advanced-block",
-  "version": "5.7.3-canary.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion themes block containing an advanced right-rail layout.",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -24,7 +24,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"

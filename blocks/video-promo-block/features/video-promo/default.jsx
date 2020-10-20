@@ -9,7 +9,7 @@ import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
-const TitleText = styled.h1`
+const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 

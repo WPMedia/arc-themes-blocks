@@ -9,7 +9,7 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -23,7 +23,7 @@ const OverlineLink = styled.a`
   text-decoration: none;
 `;
 
-const OverlineHeader = styled.h1`
+const OverlineHeader = styled.h2`
   font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;

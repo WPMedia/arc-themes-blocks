@@ -43,7 +43,7 @@ describe('the video promo feature', () => {
 
   it('should have show title, description, and video with default configs', () => {
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h1').text()).toBe('Title');
+    expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
@@ -58,7 +58,7 @@ describe('the video promo feature', () => {
   it('should have show title, description, live label, and video with default configs', () => {
     config.live = true;
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h1').text()).toBe('Title');
+    expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
     expect(wrapper.find('span').text()).toBe('LIVE VIDEO');
     const video = wrapper.find('#video').at(0);
@@ -74,7 +74,7 @@ describe('the video promo feature', () => {
   it('should have show title, description, and video with autoplay', () => {
     config.autoplay = true;
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h1').text()).toBe('Title');
+    expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
@@ -89,7 +89,7 @@ describe('the video promo feature', () => {
   it('should have show title, description, and video with different ratio', () => {
     config.ratio = 0.75;
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h1').text()).toBe('Title');
+    expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
@@ -104,7 +104,7 @@ describe('the video promo feature', () => {
   it('should have show title, description, and video with uuid specified directly', () => {
     config.uuid = 'new-uuid';
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h1').text()).toBe('Title');
+    expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({

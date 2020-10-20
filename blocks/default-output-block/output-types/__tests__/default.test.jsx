@@ -204,3 +204,97 @@ describe('head content', () => {
     }
   });
 });
+
+describe('head content without properties', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must not render chartbeat code', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
+  });
+});
+
+describe('chartbeat render conditions', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must not render chartbeat code when properties are missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
+  });
+
+  it('must not render chartbeat code when chartBeatAccountId property is missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      chartBeatDomain: 'example.com',
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
+  });
+
+  it('must not render chartbeat code when chartBeatDomain property is missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      chartBeatAccountId: 994949,
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
+  });
+
+  it('must not render chartbeat code when both properties are empty', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      chartBeatAccountId: '',
+      chartBeatDomain: '',
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
+  });
+
+  it('must render chartbeat code when chartBeatDomain and chartBeatAccountID properties are present', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      chartBeatAccountId: 994949,
+      chartBeatDomain: 'example.com',
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(1);
+  });
+});

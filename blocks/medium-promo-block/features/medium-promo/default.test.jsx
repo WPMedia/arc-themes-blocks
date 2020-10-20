@@ -46,7 +46,7 @@ describe('the medium promo feature', () => {
 
   it('should have two link elements by default', () => {
     const wrapper = mount(<MediumPromo customFields={config} />);
-    expect(wrapper.find('a')).toHaveLength(3);
+    expect(wrapper.find('a')).toHaveLength(2);
   });
 
   // it('should link the headline to the current site website_url ANS property', () => {
@@ -113,7 +113,7 @@ describe('the medium promo feature', () => {
       showImage: false,
     };
     const wrapper = mount(<MediumPromo customFields={headBelowConfig} />);
-    expect(wrapper.find('.headline-below')).toHaveLength(2);
+    expect(wrapper.find('.headline-below')).toHaveLength(1);
     expect(wrapper.find('.headline-above').length).toBe(0);
   });
 

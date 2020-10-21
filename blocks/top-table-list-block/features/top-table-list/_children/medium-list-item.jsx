@@ -32,10 +32,12 @@ const MediumListItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
 
+  const headlinePositionMD = customFields.headlinePositionMD == 'below' ? 'below' : 'above';
+
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD || 'above'}`}>
+        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${headlinePositionMD}`}>
           <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
@@ -92,12 +94,12 @@ const MediumListItem = (props) => {
     <>
       <article className="container-fluid medium-promo" key={id}>
         <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
-          {(customFields.headlinePositionMD === 'above' || customFields.headlinePositionMD === undefined)
+          {(headlinePositionMD === 'above')
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
-              <div style={{ float: 'left' }}>
+              <div className="float-left">
                 {headlineTmpl()}
                 {descriptionTmpl()}
                 <div className="article-meta">
@@ -108,7 +110,7 @@ const MediumListItem = (props) => {
           )}
           {customFields.showImageMD
             && (
-            <a className="image-link" href={websiteURL} title={itemTitle} style={{ float: (customFields.headlinePositionMD === 'below' ? '' : 'right') }}>
+            <a className={`image-link${headlinePositionMD === 'below' ? '' : ' float-right'}`} href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
                   resizedImageOptions={resizedImageOptions}
@@ -143,7 +145,7 @@ const MediumListItem = (props) => {
               <PromoLabel type={promoType} />
             </a>
             )}
-          {customFields.headlinePositionMD === 'below'
+          {headlinePositionMD === 'below'
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD

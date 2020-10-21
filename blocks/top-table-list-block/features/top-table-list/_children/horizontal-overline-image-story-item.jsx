@@ -38,6 +38,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
 
+  const headlinePositionLG = customFields.headlinePositionLG == 'below' ? 'below' : 'above';
+
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
       return (
@@ -55,7 +57,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineLG && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className={`lg-promo-headline headline-${customFields.headlinePositionLG || 'above'}`}>
+        <a href={websiteURL} title={itemTitle} className={`lg-promo-headline headline-${headlinePositionLG}`}>
           <Title primaryFont={primaryFont} className="lg-promo-headline">
             {itemTitle}
           </Title>
@@ -113,7 +115,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {(customFields.headlinePositionLG === 'above' || customFields.headlinePositionLG === undefined)
+          {(headlinePositionLG === 'above')
             && (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG
@@ -184,7 +186,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               )}
             </div>
           )}
-          {customFields.headlinePositionLG === 'below'
+          {headlinePositionLG === 'below'
             && (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG

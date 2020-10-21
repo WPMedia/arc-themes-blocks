@@ -33,6 +33,8 @@ const VerticalOverlineImageStoryItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
+  const headlinePositionXL = customFields.headlinePositionXL == 'below' ? 'below' : 'above';
+
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
       return (
@@ -50,7 +52,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineXL && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className={`xl-promo-headline headline-${customFields.headlinePositionXL || 'above'}`}>
+        <a href={websiteURL} title={itemTitle} className={`xl-promo-headline headline-${headlinePositionXL}`}>
           <Title primaryFont={primaryFont} className="xl-promo-headline">
             {itemTitle}
           </Title>
@@ -113,7 +115,7 @@ const VerticalOverlineImageStoryItem = (props) => {
             || customFields.showDateXL) && (
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
-              {(customFields.headlinePositionXL === 'above' || customFields.headlinePositionXL === undefined) && headlineTmpl()}
+              {headlinePositionXL === 'above' && headlineTmpl()}
               {videoUUID && (
                 <Video
                   uuid={videoUUID}
@@ -160,7 +162,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   />
                 )
               )}
-              {customFields.headlinePositionXL === 'below' && headlineTmpl()}
+              {headlinePositionXL === 'below' && headlineTmpl()}
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}

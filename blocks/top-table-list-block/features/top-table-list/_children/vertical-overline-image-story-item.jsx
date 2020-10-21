@@ -33,7 +33,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
-  const headlinePositionXL = customFields.headlinePositionXL == 'below' ? 'below' : 'above';
+  const headlinePositionXL = customFields.headlinePositionXL === 'below' ? 'below' : 'above';
 
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
@@ -103,6 +103,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
+  /* eslint-disable camelcase */
   const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
 
   return (

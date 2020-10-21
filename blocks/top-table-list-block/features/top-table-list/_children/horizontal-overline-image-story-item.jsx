@@ -38,7 +38,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
 
-  const headlinePositionLG = customFields.headlinePositionLG == 'below' ? 'below' : 'above';
+  const headlinePositionLG = customFields.headlinePositionLG === 'below' ? 'below' : 'above';
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {

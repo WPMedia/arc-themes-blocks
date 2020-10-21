@@ -32,7 +32,7 @@ const MediumListItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
 
-  const headlinePositionMD = customFields.headlinePositionMD == 'below' ? 'below' : 'above';
+  const headlinePositionMD = customFields.headlinePositionMD === 'below' ? 'below' : 'above';
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {

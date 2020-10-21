@@ -51,12 +51,13 @@ const MediumPromo = ({ customFields }) => {
     query: { raw_image_url: customFields.imageOverrideURL },
   }) || undefined;
 
-  const headlinePosition = customFields.headlinePosition == 'below' ? 'below' : 'above';
+  const headlinePosition = customFields.headlinePosition === 'below' ? 'below' : 'above';
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
   const byLineArray = content?.credits?.by
     && content.credits.by.length !== 0 ? content.credits.by : null;
+  /* eslint-disable camelcase */
   const dateText = content?.display_date || null;
 
   const promoType = discoverPromoType(content);

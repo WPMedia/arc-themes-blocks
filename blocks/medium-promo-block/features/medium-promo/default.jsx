@@ -67,8 +67,7 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className={`md-promo-headline ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}
-          // className={`md-promo-headline headline-${headlinePosition}`}
+          className={`md-promo-headline headline-${headlinePosition} ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}
           title={headlineText}
         >
           <HeadlineText

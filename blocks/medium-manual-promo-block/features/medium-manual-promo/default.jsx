@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -30,53 +30,54 @@ const MediumManualPromo = ({ customFields }) => {
   } = getProperties(arcSite);
 
   const hasImage = customFields.showImage && customFields.imageURL;
-  return customFields.linkURL ? (
+
+  const renderWithLink = useCallback((element, props) => (
+    <a
+      href={customFields.linkURL || '#'}
+      className={(props && props.className) || ''}
+      title={customFields.headline}
+      target={customFields.newTab ? '_blank' : '_self'}
+      rel={customFields.newTab ? 'noreferrer noopener' : ''}
+      onClick={!customFields.linkURL ? (evt) => {
+        evt.preventDefault();
+      } : undefined}
+    >
+      {element}
+    </a>
+  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+
+  return (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
-          {hasImage && (
-            <a
-              className="image-link"
-              href={customFields.linkURL}
-              title={customFields.headline}
-              target={customFields.newTab ? '_blank' : '_self'}
-              rel={customFields.newTab ? 'noreferrer noopener' : ''}
-            >
-              <Image
-                // medium is 16:9
-                url={customFields.imageURL}
-                alt={customFields.headline}
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
-                largeWidth={400}
-                largeHeight={225}
-                breakpoints={breakpoints}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                resizedImageOptions={resizedImageOptions}
-              />
-            </a>
+          {hasImage && renderWithLink(
+            <Image
+              // medium is 16:9
+              url={customFields.imageURL}
+              alt={customFields.headline}
+              smallWidth={274}
+              smallHeight={154}
+              mediumWidth={274}
+              mediumHeight={154}
+              largeWidth={400}
+              largeHeight={225}
+              breakpoints={breakpoints}
+              resizerURL={getProperties(arcSite)?.resizerURL}
+              resizedImageOptions={resizedImageOptions}
+            />, { className: 'image-link' },
           )}
           {(customFields.showHeadline || customFields.showDescription)
           && (
             <>
               {(customFields.showHeadline && customFields.headline)
-              && (
-                <a
-                  href={customFields.linkURL}
-                  className="md-promo-headline"
-                  title={customFields.headline}
-                  target={customFields.newTab ? '_blank' : '_self'}
-                  rel={customFields.newTab ? 'noreferrer' : ''}
+              && renderWithLink(
+                <HeadlineText
+                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  className="md-promo-headline-text"
                 >
-                  <HeadlineText
-                    primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                    className="md-promo-headline-text"
-                  >
-                    {customFields.headline}
-                  </HeadlineText>
-                </a>
+                  {customFields.headline}
+                </HeadlineText>,
+                { className: 'md-promo-headline' },
               )}
               {(customFields.showDescription && customFields.description)
               && (
@@ -93,7 +94,7 @@ const MediumManualPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 MediumManualPromo.propTypes = {

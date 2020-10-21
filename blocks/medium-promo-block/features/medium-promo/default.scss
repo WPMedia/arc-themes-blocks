@@ -1,15 +1,14 @@
 .medium-promo {
+  .md-promo-image .md-promo-headline.margin-left-zero,
+  .md-promo-image .article-meta.margin-left-zero {
+    margin-left: 0;
+  }
 
-.md-promo-image .md-promo-headline.margin-left-zero,
-.md-promo-image .article-meta.margin-left-zero {
-margin-left: 0;
-}
+  .float-right {
+    float: right;
+  }
 
-.float-right {
-float: right;
-}
-
-.flex {
-  display: flex;
-}
+  .flex {
+    display: flex;
+  }
 }

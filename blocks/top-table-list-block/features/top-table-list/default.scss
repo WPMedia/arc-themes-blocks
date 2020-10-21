@@ -3,10 +3,12 @@
     .float-left {
       float: left;
     }
+
     .float-right {
       float: right;
     }
   }
+
   .small-promo {
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
       .row.sm-promo-padding-btm {

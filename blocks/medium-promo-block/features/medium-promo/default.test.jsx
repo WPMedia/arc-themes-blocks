@@ -29,11 +29,11 @@ const config = {
 };
 
 const headlineBelowConfig = {
-    itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-    showHeadline: true,
-    headlinePosition: 'below',
-    showImage: true,
-}
+  itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+  showHeadline: true,
+  headlinePosition: 'below',
+  showImage: true,
+};
 
 describe('the medium promo feature', () => {
   afterEach(() => {

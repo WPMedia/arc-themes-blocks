@@ -118,117 +118,115 @@ describe('item title with right image block', () => {
     // expect(wrapper.find('.simple-list-img').length).toBe(0);
   });
 
-    it('headline has class headline-above when headline position is above', () => {
-      const imageURL = 'pic';
-      const itemTitle = 'title';
-      const primaryFont = 'arial';
-      const id = 'test';
-      const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+  it('headline has class headline-above when headline position is above', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-      // eslint-disable-next-line no-unused-vars
-      const wrapper = mount(
-        <ItemTitleWithRightImage
-          imageURL={imageURL}
-          itemTitle={itemTitle}
-          primaryFont={primaryFont}
-          id={id}
-          customFields={config}
-          resizedImageOptions={{ '400x267': '' }}
-        />,
-      );
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={config}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-      expect(wrapper.find('.headline-above').length).toBe(1);
-      expect(wrapper.find('.headline-below').length).toBe(0);
-    });
-
-    it('headline has class headline-below when headline position is below', () => {
-      const imageURL = 'pic';
-      const itemTitle = 'title';
-      const primaryFont = 'arial';
-      const id = 'test';
-      const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
-
-      // eslint-disable-next-line no-unused-vars
-      const wrapper = mount(
-        <ItemTitleWithRightImage
-          imageURL={imageURL}
-          itemTitle={itemTitle}
-          primaryFont={primaryFont}
-          id={id}
-          customFields={headBelowConfig}
-          resizedImageOptions={{ '400x267': '' }}
-        />,
-      );
-
-      expect(wrapper.find('.headline-below').length).toBe(1);
-      expect(wrapper.find('.headline-above').length).toBe(0);
-    });
+    expect(wrapper.find('.headline-above').length).toBe(1);
+    expect(wrapper.find('.headline-below').length).toBe(0);
   });
 
-  describe('small promo display', () => {
-    it('when storiesPerRowSM is undefined must not add class small-promo-one', () => {
-      const imageURL = 'pic';
-      const itemTitle = 'title';
-      const primaryFont = 'arial';
-      const id = 'test';
-      const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+  it('headline has class headline-below when headline position is below', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-      const wrapper = mount(
-        <ItemTitleWithRightImage
-          imageURL={imageURL}
-          itemTitle={itemTitle}
-          primaryFont={primaryFont}
-          id={id}
-          customFields={config}
-          resizedImageOptions={{ '400x267': '' }}
-        />,
-      );
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={headBelowConfig}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-      expect(wrapper.find('.small-promo-one').length).toBe(0);
-      expect(wrapper.find('article.wrap-bottom').length).toBe(1);
-    });
+    expect(wrapper.find('.headline-below').length).toBe(1);
+    expect(wrapper.find('.headline-above').length).toBe(0);
+  });
+});
 
-    it('when storiesPerRowSM is 2 must not add class small-promo-one', () => {
-      const imageURL = 'pic';
-      const itemTitle = 'title';
-      const primaryFont = 'arial';
-      const id = 'test';
-      const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
-      const setup = Object.assign(config, { storiesPerRowSM: 2 });
+describe('small promo display', () => {
+  it('when storiesPerRowSM is undefined must not add class small-promo-one', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-      const wrapper = mount(
-        <ItemTitleWithRightImage
-          imageURL={imageURL}
-          itemTitle={itemTitle}
-          primaryFont={primaryFont}
-          id={id}
-          customFields={setup}
-          resizedImageOptions={{ '400x267': '' }}
-        />,
-      );
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={config}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-      expect(wrapper.find('.small-promo-one').length).toBe(0);
-      expect(wrapper.find('article.wrap-bottom').length).toBe(1);
-    });
+    expect(wrapper.find('.small-promo-one').length).toBe(0);
+    expect(wrapper.find('article.wrap-bottom').length).toBe(1);
+  });
 
-    it('when storiesPerRowSM is 1 must add class small-promo-one', () => {
-      const imageURL = 'pic';
-      const itemTitle = 'title';
-      const primaryFont = 'arial';
-      const id = 'test';
-      const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
-      const setup = Object.assign(config, { storiesPerRowSM: 1 });
+  it('when storiesPerRowSM is 2 must not add class small-promo-one', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const setup = Object.assign(config, { storiesPerRowSM: 2 });
 
-      const wrapper = mount(
-        <ItemTitleWithRightImage
-          imageURL={imageURL}
-          itemTitle={itemTitle}
-          primaryFont={primaryFont}
-          id={id}
-          customFields={setup}
-          resizedImageOptions={{ '400x267': '' }}
-        />,
-      );
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={setup}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('.small-promo-one').length).toBe(0);
+    expect(wrapper.find('article.wrap-bottom').length).toBe(1);
+  });
+
+  it('when storiesPerRowSM is 1 must add class small-promo-one', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const setup = Object.assign(config, { storiesPerRowSM: 1 });
+
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={setup}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
     expect(wrapper.find('.small-promo-one').length).toBe(1);
     expect(wrapper.find('article.wrap-bottom').length).toBe(0);

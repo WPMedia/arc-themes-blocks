@@ -193,8 +193,7 @@ describe('horizontal overline image story item', () => {
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
-    const { default: HorizontalOverlineImageStoryItem } =
-  require('./horizontal-overline-image-story-item');
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
     const id = 'test';
     const overlineUrl = '/news';
     const overlineText = 'News';
@@ -233,8 +232,7 @@ describe('horizontal overline image story item', () => {
     const by = ['jack'];
     const element = { credits: { by: [] } };
     const displayDate = '';
-    const { default: HorizontalOverlineImageStoryItem } =
-  require('./horizontal-overline-image-story-item');
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
     const id = 'test';
     const overlineUrl = '/news';
     const overlineText = 'News';

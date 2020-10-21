@@ -140,8 +140,7 @@ describe('vertical overline image story item', () => {
     const overlineText = 'News';
     const overlineDisplay = true;
 
-    const { default: VerticalOverlineImageStoryItem } =
-  require('./vertical-overline-image-story-item');
+    const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
     const wrapper = mount(
       <VerticalOverlineImageStoryItem
@@ -179,8 +178,7 @@ describe('vertical overline image story item', () => {
     const overlineText = 'News';
     const overlineDisplay = true;
 
-    const { default: VerticalOverlineImageStoryItem } =
-  require('./vertical-overline-image-story-item');
+    const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
     const wrapper = mount(
       <VerticalOverlineImageStoryItem

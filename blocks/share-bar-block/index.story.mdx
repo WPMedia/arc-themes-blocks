@@ -13,30 +13,36 @@ The `ShareBar` block is written as a functional component. Users can choose out 
 To import it into a block:
 
 ```
-import ShareBar from '@wpmedia/share-bar-block';
+// functional component without global content
+// using named import statement
+import { ShareBar } from '@wpmedia/share-bar-block';
 
-...
+const AnotherComponentWithoutGlobalContent = () => (
     <ShareBar
-        useInjectedFusionContext={{
-            customFields: {
-                email: false,
-                facebook: true,
-                pinterest: false,
-                twitter: false,
-                linkedIn: false,
-            },
-            globalContent: {
-                label: {
-                basic: {
-                    display: true,
-                    url: 'http://google.com/',
-                    text: 'Overline Text Root',
-                },
-                },
-            },
-        }}
+      customFields={{
+        email:  true,
+        facebook:  true,
+        pinterest:  true,
+        twitter:  true,
+        linkedIn:  true,
+      }}
+        websiteName={'Man Bites Dog'}
+        websiteDomain={'https://www.thesun.com/'}
+        websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
+        headlineString={'The Sun'}
     />
-...
+)
+
+```
+
+```
+// functional component using global content
+// using default import to get the ShareBarContainer
+import ShareBar  from '@wpmedia/share-bar-block';
+
+const AnotherComponentWithGlobalContent = () => (
+  <ShareBar />
+)
 
 ```
 

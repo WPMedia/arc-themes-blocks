@@ -199,13 +199,14 @@ body.nav-open {
 
     &.nav-logo-hidden {
       opacity: 0;
-      visibility: hidden;
       transition: opacity 800ms ease, visibility 0s ease 800ms;
+      visibility: hidden;
     }
+
     &.nav-logo-show {
       opacity: 1;
-      visibility: visible;
       transition: opacity 800ms ease, visibility 0s ease 0s;
+      visibility: visible;
     }
   }
 }
@@ -352,6 +353,7 @@ body.nav-open {
       svg {
         transform: rotate(-90deg);
       }
+
       path {
         fill: #fff;
       }

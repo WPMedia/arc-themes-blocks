@@ -12,6 +12,32 @@ const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((sc
   <script dangerouslySetInnerHTML={{ __html: scriptString }} />
 ));
 
+const chartBeatCode = (accountId, domain) => {
+  if (!accountId || !domain) {
+    return null;
+  }
+  return `
+    (function() {
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        _sf_async_config.uid = ${accountId};
+        _sf_async_config.domain = "${domain}";
+        _sf_async_config.useCanonical = true;
+        _sf_async_config.useCanonicalDomain = true;
+        _sf_async_config.sections = '';
+        _sf_async_config.authors = '';
+        function loadChartbeat() {
+            var e = document.createElement('script');
+            var n = document.getElementsByTagName('script')[0];
+            e.type = 'text/javascript';
+            e.async = true;
+            e.src = '//static.chartbeat.com/js/chartbeat.js';
+            n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+     })();
+  `;
+};
+
 const SampleOutputType = ({
   children,
   contextPath,
@@ -34,6 +60,8 @@ const SampleOutputType = ({
     fontUrl,
     resizerURL,
     facebookAdmins,
+    chartBeatAccountId,
+    chartBeatDomain,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -88,6 +116,7 @@ const SampleOutputType = ({
       <script dangerouslySetInnerHTML={{ __html: gaScript }} />
     </>
   );
+  const chartBeat = chartBeatCode(chartBeatAccountId, chartBeatDomain);
 
   return (
     <html lang="en">
@@ -129,6 +158,7 @@ const SampleOutputType = ({
         />
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
+        {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
       </head>
       <body>
         {gtmID

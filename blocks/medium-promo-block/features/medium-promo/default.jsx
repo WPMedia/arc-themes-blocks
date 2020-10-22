@@ -20,8 +20,9 @@ import {
 } from '@wpmedia/resizer-image-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
+import './default.scss';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -43,16 +44,21 @@ const MediumPromo = ({ customFields }) => {
       : null,
   }) || null;
 
+  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
+  const headlinePosition = customFields.headlinePosition === 'below' ? 'below' : 'above';
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
   const byLineArray = content?.credits?.by
     && content.credits.by.length !== 0 ? content.credits.by : null;
+  /* eslint-disable camelcase */
   const dateText = content?.display_date || null;
-
-  // const textClass = customFields.showImage
-  //   ? 'col-sm-12 col-md-xl-8 flex-col'
-  //   : 'col-sm-xl-12 flex-col';
 
   const promoType = discoverPromoType(content);
 
@@ -61,9 +67,8 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className="md-promo-headline"
-          // className={`md-promo-headline headline-${customFields.headlinePosition}`}
-          title={content && content.headlines ? content.headlines.basic : ''}
+          className={`md-promo-headline headline-${headlinePosition} ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}
+          title={headlineText}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -119,38 +124,43 @@ const MediumPromo = ({ customFields }) => {
   };
 
   const ratios = ratiosFor('MD', customFields.imageRatio);
+  const imageURL = customFields.imageOverrideURL
+    ? customFields.imageOverrideURL : extractImageFromStory(content);
+  const resizedImageOptions = customFields.imageOverrideURL
+    ? customFieldImageResizedImageOptions
+    : extractResizedParams(content);
 
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
-          {/* customFields.headlinePosition === 'above'
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''} ${headlinePosition === 'below' ? '' : 'flex'}`}>
+          {headlinePosition === 'above'
             && (customFields.showHeadline
               || customFields.showDescription
               || customFields.showByline
               || customFields.showDate) && (
-              <div className={textClass}>
+              <div>
                 {headlineTmpl()}
                 {descriptionTmpl()}
-                <div className="article-meta">
+                <div className={`article-meta ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}>
                   {byLineTmpl()}
                   {dateTmpl()}
                 </div>
               </div>
-              ) */}
+          )}
+
           {customFields.showImage
           && (
             <a
-              className="image-link"
+              className={`image-link ${headlinePosition === 'below' ? '' : 'float-right'}`}
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
               {
-                customFields.imageOverrideURL || extractImageFromStory(content)
+                imageURL
                   ? (
                     <Image
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                      url={imageURL}
                       alt={content && content.headlines ? content.headlines.basic : ''}
                       // medium is 16:9
                       smallWidth={ratios.smallWidth}
@@ -161,7 +171,7 @@ const MediumPromo = ({ customFields }) => {
                       largeHeight={ratios.largeHeight}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
+                      resizedImageOptions={resizedImageOptions}
                     />
                   )
                   : (
@@ -178,8 +188,8 @@ const MediumPromo = ({ customFields }) => {
               <PromoLabel type={promoType} />
             </a>
           )}
-          {/* customFields.headlinePosition === 'below' && */
-          (customFields.showHeadline || customFields.showDescription
+          {headlinePosition === 'below'
+          && (customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
             <>
@@ -190,8 +200,7 @@ const MediumPromo = ({ customFields }) => {
                 {dateTmpl()}
               </div>
             </>
-          )
-        }
+          )}
         </div>
       </article>
       <hr />
@@ -210,11 +219,11 @@ MediumPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Show promo elements',
-    //   defaultValue: 'above',
-    // }),
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
+    }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

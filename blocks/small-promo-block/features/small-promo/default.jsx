@@ -19,7 +19,7 @@ import {
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -37,19 +37,32 @@ const SmallPromo = ({ customFields }) => {
       : null,
   }) || null;
 
+  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
   const headlineClass = customFields.showImage
     ? 'col-sm-xl-8'
     : 'col-sm-xl-12 no-image-padding';
 
   const ratios = ratiosFor('SM', customFields.imageRatio);
   const promoType = discoverPromoType(content);
+  const imageURL = customFields.imageOverrideURL
+    ? customFields.imageOverrideURL : extractImageFromStory(content);
+  const resizedImageOptions = customFields.imageOverrideURL
+    ? customFieldImageResizedImageOptions
+    : extractResizedParams(content);
 
   return content ? (
     <>
       <article className="container-fluid small-promo">
         <div className="row">
-          {customFields.showHeadline && (
-            <div className={headlineClass}>
+          {customFields.showHeadline
+          && (customFields.headlinePosition === 'above' || customFields.headlinePosition === undefined) && (
+            <div className={`headline-above ${headlineClass}`}>
               <a
                 href={content.website_url}
                 className="sm-promo-headline"
@@ -76,11 +89,10 @@ const SmallPromo = ({ customFields }) => {
                 href={content?.website_url || ''}
                 title={content?.headlines?.basic || ''}
               >
-                {customFields.imageOverrideURL || extractImageFromStory(content)
+                {imageURL
                   ? (
                     <Image
-                      url={customFields.imageOverrideURL
-                        ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                      url={imageURL}
                       alt={content && content.headlines ? content.headlines.basic : ''}
                       // small should be 3:2 aspect ratio
                       smallWidth={ratios.smallWidth}
@@ -91,7 +103,7 @@ const SmallPromo = ({ customFields }) => {
                       largeHeight={ratios.largeHeight}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizerURL={getProperties(arcSite)?.resizerURL}
-                      resizedImageOptions={extractResizedParams(content)}
+                      resizedImageOptions={resizedImageOptions}
                     />
                   )
                   : (
@@ -108,7 +120,7 @@ const SmallPromo = ({ customFields }) => {
               </a>
             </div>
           )}
-          {/* customFields.showHeadline
+          {customFields.showHeadline
             && customFields.headlinePosition === 'below' && (
               <div className={`headline-below ${headlineClass}`}>
                 <a
@@ -130,7 +142,7 @@ const SmallPromo = ({ customFields }) => {
                   </HeadlineText>
                 </a>
               </div>
-          ) */}
+          )}
         </div>
       </article>
       <hr />
@@ -149,11 +161,11 @@ SmallPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    // headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Show promo elements',
-    //   defaultValue: 'above',
-    // }),
+    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
+      label: 'Headline Position',
+      group: 'Show promo elements',
+      defaultValue: 'above',
+    }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,

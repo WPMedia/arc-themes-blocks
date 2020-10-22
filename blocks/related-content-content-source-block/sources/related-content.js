@@ -22,7 +22,7 @@ export default {
   transform: (data, query) => {
     if (data && data.basic && typeof Array.isArray(data.basic)) {
       return {
-        basic: data.basic.map((ele) => (
+        content_elements: data.basic.map((ele) => (
           getResizedImageData(
             ele,
             null,

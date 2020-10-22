@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image /* , Video */ } from '@wpmedia/engine-theme-sdk';
+import { Image, Video } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
@@ -33,6 +33,8 @@ const VerticalOverlineImageStoryItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
+  const headlinePositionXL = customFields.headlinePositionXL === 'below' ? 'below' : 'above';
+
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
       return (
@@ -50,7 +52,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineXL && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className="xl-promo-headline">
+        <a href={websiteURL} title={itemTitle} className={`xl-promo-headline headline-${headlinePositionXL}`}>
           <Title primaryFont={primaryFont} className="xl-promo-headline">
             {itemTitle}
           </Title>
@@ -101,7 +103,8 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
-  // const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
+  /* eslint-disable camelcase */
+  const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
 
   return (
     <>
@@ -113,8 +116,8 @@ const VerticalOverlineImageStoryItem = (props) => {
             || customFields.showDateXL) && (
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
-              {/* customFields.headlinePositionXL === 'above' && */ headlineTmpl()}
-              {/* {videoUUID && (
+              {headlinePositionXL === 'above' && headlineTmpl()}
+              {videoUUID && (
                 <Video
                   uuid={videoUUID}
                   autoplay={false}
@@ -122,8 +125,8 @@ const VerticalOverlineImageStoryItem = (props) => {
                   org="arcbrands"
                   env="sandbox"
                 />
-              )} */}
-              {customFields.showImageXL && /*! videoUUID && */ imageURL !== '' ? (
+              )}
+              {customFields.showImageXL && !videoUUID && imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
                     resizedImageOptions={resizedImageOptions}
@@ -141,7 +144,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   />
                 </a>
               ) : (
-                /*! videoUUID && */ (
+                !videoUUID && (
                   <Image
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
@@ -160,7 +163,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   />
                 )
               )}
-              {/* customFields.headlinePositionXL === 'below' && headlineTmpl() */}
+              {headlinePositionXL === 'below' && headlineTmpl()}
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}

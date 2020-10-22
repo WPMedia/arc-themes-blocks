@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -9,7 +9,7 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -23,7 +23,7 @@ const OverlineLink = styled.a`
   text-decoration: none;
 `;
 
-const OverlineHeader = styled.h1`
+const OverlineHeader = styled.h2`
   font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
@@ -37,7 +37,22 @@ const ExtraLargeManualPromo = ({ customFields }) => {
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
-  return (customFields.linkURL ? (
+  const renderWithLink = useCallback((element, props) => (
+    <a
+      href={customFields.linkURL || '#'}
+      className={(props && props.className) || ''}
+      title={customFields.headline}
+      target={customFields.newTab ? '_blank' : '_self'}
+      rel={customFields.newTab ? 'noreferrer' : ''}
+      onClick={!customFields.linkURL ? (evt) => {
+        evt.preventDefault();
+      } : undefined}
+    >
+      {element}
+    </a>
+  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+
+  return (
     <>
       <article className="container-fluid xl-large-promo xl-large-manual-promo">
         <div className="row">
@@ -65,44 +80,30 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                 </OverlineHeader>
               )}
               {(customFields.showHeadline && customFields.headline)
-              && (
-                <a
-                  href={customFields.linkURL}
+              && renderWithLink(
+                <HeadlineText
+                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
                   className="xl-promo-headline"
-                  title={customFields.headline}
-                  target={customFields.newTab ? '_blank' : '_self'}
-                  rel={customFields.newTab ? 'noreferrer' : ''}
                 >
-                  <HeadlineText
-                    primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                    className="xl-promo-headline"
-                  >
-                    {customFields.headline}
-                  </HeadlineText>
-                </a>
+                  {customFields.headline}
+                </HeadlineText>,
+                { className: 'xl-promo-headline' },
               )}
               {(customFields.showImage && customFields.imageURL)
-              && (
-                <a
-                  href={customFields.linkURL}
-                  title={customFields.headline}
-                  target={customFields.newTab ? '_blank' : '_self'}
-                  rel={customFields.newTab ? 'noreferrer' : ''}
-                >
-                  <Image
-                    url={customFields.imageURL}
-                    alt={customFields.headline}
-                    smallWidth={400}
-                    smallHeight={300}
-                    mediumWidth={600}
-                    mediumHeight={450}
-                    largeWidth={800}
-                    largeHeight={600}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                    resizedImageOptions={resizedImageOptions}
-                  />
-                </a>
+              && renderWithLink(
+                <Image
+                  url={customFields.imageURL}
+                  alt={customFields.headline}
+                  smallWidth={400}
+                  smallHeight={300}
+                  mediumWidth={600}
+                  mediumHeight={450}
+                  largeWidth={800}
+                  largeHeight={600}
+                  breakpoints={getProperties(arcSite)?.breakpoints}
+                  resizerURL={getProperties(arcSite)?.resizerURL}
+                  resizedImageOptions={resizedImageOptions}
+                />,
               )}
               {(customFields.showDescription && customFields.description)
               && (
@@ -119,7 +120,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null);
+  );
 };
 
 ExtraLargeManualPromo.propTypes = {

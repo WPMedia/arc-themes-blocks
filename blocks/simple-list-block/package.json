@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/simple-list-block",
-  "version": "5.7.3-canary.0",
+  "version": "5.9.0-canary.0",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -21,7 +21,7 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/simple-list-block"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"

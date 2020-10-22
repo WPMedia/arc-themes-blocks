@@ -105,10 +105,10 @@
       left: unset;
       right: 8px;
       top: 8px;
-    }
-    
-    span {
-      display: none;
+
+      span {
+        display: none;
+      }
     }
   }
 
@@ -116,20 +116,20 @@
     .md-promo-headline {
       width: 68%;
       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-left: 38%;
-        width: 100%;
+        margin-left: 39%;
+        width: 60%;
       }
     }
 
     .description-text {
       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-left: 38%;
+        margin-left: 39%;
       }
     }
 
     .article-meta {
       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-left: 38%;
+        margin-left: 39%;
       }
     }
   }

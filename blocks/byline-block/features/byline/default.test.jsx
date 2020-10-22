@@ -162,7 +162,7 @@ describe('Given an author list', () => {
     const wrapper = mount(<ArticleByline globalContent={globalContent} />);
     expect(
       wrapper.find('span').at(1).prop('dangerouslySetInnerHTML'),
-    ).toStrictEqual({ __html: '<a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
+    ).toStrictEqual({ __html: ' <a href="/author/sanghee-kim">SangHee Kim</a> and <a href="/author/sara-carothers">Sara Carothers</a>' });
   });
 
   it('should return three authors, oxford comma', () => {

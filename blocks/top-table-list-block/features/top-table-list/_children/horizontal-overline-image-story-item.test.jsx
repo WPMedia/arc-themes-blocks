@@ -10,7 +10,7 @@ const config = {
   showDateXL: true,
   showOverlineLG: true,
   showHeadlineLG: true,
-  // headlinePositionLG: 'above',
+  headlinePositionLG: 'above',
   showImageLG: true,
   showDescriptionLG: true,
   showBylineLG: true,
@@ -24,28 +24,28 @@ const config = {
   showImageSM: true,
 };
 
-// const headBelowConfig = {
-//   showOverlineXL: true,
-//   showHeadlineXL: true,
-//   showImageXL: true,
-//   showDescriptionXL: true,
-//   showBylineXL: true,
-//   showDateXL: true,
-//   showOverlineLG: true,
-//   showHeadlineLG: true,
-//   headlinePositionLG: 'below',
-//   showImageLG: true,
-//   showDescriptionLG: true,
-//   showBylineLG: true,
-//   showDateLG: true,
-//   showHeadlineMD: true,
-//   showImageMD: true,
-//   showDescriptionMD: true,
-//   showBylineMD: true,
-//   showDateMD: true,
-//   showHeadlineSM: true,
-//   showImageSM: true,
-// };
+const headBelowConfig = {
+  showOverlineXL: true,
+  showHeadlineXL: true,
+  showImageXL: true,
+  showDescriptionXL: true,
+  showBylineXL: true,
+  showDateXL: true,
+  showOverlineLG: true,
+  showHeadlineLG: true,
+  headlinePositionLG: 'below',
+  showImageLG: true,
+  showDescriptionLG: true,
+  showBylineLG: true,
+  showDateLG: true,
+  showHeadlineMD: true,
+  showImageMD: true,
+  showDescriptionMD: true,
+  showBylineMD: true,
+  showDateMD: true,
+  showHeadlineSM: true,
+  showImageSM: true,
+};
 
 describe('horizontal overline image story item', () => {
   beforeAll(() => {
@@ -183,83 +183,81 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
 
-  // it('headline div has class headline-above when headline is above', () => {
-  //   const imageURL = 'pic';
-  //   const websiteURL = 'url';
-  //   const itemTitle = 'title';
-  //   const descriptionText = 'description';
-  //   const primaryFont = 'arial';
-  //   const secondaryFont = 'Georgia';
-  //   const by = ['jack'];
-  //   const element = { credits: { by: [] } };
-  //   const displayDate = '';
-  //   const { default: HorizontalOverlineImageStoryItem } =
-  // require('./horizontal-overline-image-story-item');
-  //   const id = 'test';
-  //   const overlineUrl = '/news';
-  //   const overlineText = 'News';
-  //   const overlineDisplay = true;
+  it('headline div has class headline-above when headline is above', () => {
+    const imageURL = 'pic';
+    const websiteURL = 'url';
+    const itemTitle = 'title';
+    const descriptionText = 'description';
+    const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
+    const by = ['jack'];
+    const element = { credits: { by: [] } };
+    const displayDate = '';
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const id = 'test';
+    const overlineUrl = '/news';
+    const overlineText = 'News';
+    const overlineDisplay = true;
 
-  //   const wrapper = mount(
-  //     <HorizontalOverlineImageStoryItem
-  //       imageURL={imageURL}
-  //       websiteURL={websiteURL}
-  //       itemTitle={itemTitle}
-  //       descriptionText={descriptionText}
-  //       primaryFont={primaryFont}
-  //       secondaryFont={secondaryFont}
-  //       by={by}
-  //       element={element}
-  //       displayDate={displayDate}
-  //       id={id}
-  //       overlineDisplay={overlineDisplay}
-  //       overlineUrl={overlineUrl}
-  //       overlineText={overlineText}
-  //       customFields={config}
-  //     />,
-  //   );
+    const wrapper = mount(
+      <HorizontalOverlineImageStoryItem
+        imageURL={imageURL}
+        websiteURL={websiteURL}
+        itemTitle={itemTitle}
+        descriptionText={descriptionText}
+        primaryFont={primaryFont}
+        secondaryFont={secondaryFont}
+        by={by}
+        element={element}
+        displayDate={displayDate}
+        id={id}
+        overlineDisplay={overlineDisplay}
+        overlineUrl={overlineUrl}
+        overlineText={overlineText}
+        customFields={config}
+      />,
+    );
 
-  //   expect(wrapper.find('.headline-above').length).toBe(2);
-  //   expect(wrapper.find('.headline-below').length).toBe(0);
-  // });
+    expect(wrapper.find('.headline-above').length).toBe(1);
+    expect(wrapper.find('.headline-below').length).toBe(0);
+  });
 
-  // it('headline div has class headline-below when headline is below', () => {
-  //   const imageURL = 'pic';
-  //   const websiteURL = 'url';
-  //   const itemTitle = 'title';
-  //   const descriptionText = 'description';
-  //   const primaryFont = 'arial';
-  //   const secondaryFont = 'Georgia';
-  //   const by = ['jack'];
-  //   const element = { credits: { by: [] } };
-  //   const displayDate = '';
-  //   const { default: HorizontalOverlineImageStoryItem } =
-  // require('./horizontal-overline-image-story-item');
-  //   const id = 'test';
-  //   const overlineUrl = '/news';
-  //   const overlineText = 'News';
-  //   const overlineDisplay = true;
+  it('headline div has class headline-below when headline is below', () => {
+    const imageURL = 'pic';
+    const websiteURL = 'url';
+    const itemTitle = 'title';
+    const descriptionText = 'description';
+    const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
+    const by = ['jack'];
+    const element = { credits: { by: [] } };
+    const displayDate = '';
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const id = 'test';
+    const overlineUrl = '/news';
+    const overlineText = 'News';
+    const overlineDisplay = true;
 
-  //   const wrapper = mount(
-  //     <HorizontalOverlineImageStoryItem
-  //       imageURL={imageURL}
-  //       websiteURL={websiteURL}
-  //       itemTitle={itemTitle}
-  //       descriptionText={descriptionText}
-  //       primaryFont={primaryFont}
-  //       secondaryFont={secondaryFont}
-  //       by={by}
-  //       element={element}
-  //       displayDate={displayDate}
-  //       id={id}
-  //       overlineDisplay={overlineDisplay}
-  //       overlineUrl={overlineUrl}
-  //       overlineText={overlineText}
-  //       customFields={headBelowConfig}
-  //     />,
-  //   );
+    const wrapper = mount(
+      <HorizontalOverlineImageStoryItem
+        imageURL={imageURL}
+        websiteURL={websiteURL}
+        itemTitle={itemTitle}
+        descriptionText={descriptionText}
+        primaryFont={primaryFont}
+        secondaryFont={secondaryFont}
+        by={by}
+        element={element}
+        displayDate={displayDate}
+        id={id}
+        overlineDisplay={overlineDisplay}
+        overlineUrl={overlineUrl}
+        overlineText={overlineText}
+        customFields={headBelowConfig}
+      />,
+    );
 
-  //   expect(wrapper.find('.headline-below').length).toBe(2);
-  //   expect(wrapper.find('.headline-above').length).toBe(0);
-  // });
+    expect(wrapper.find('.headline-below').length).toBe(1);
+    expect(wrapper.find('.headline-above').length).toBe(0);
+  });
 });

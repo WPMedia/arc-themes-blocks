@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image/* , Video */ } from '@wpmedia/engine-theme-sdk';
+import { Image /* , Video */ } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
@@ -38,8 +38,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
 
-  const headlinePositionLG = customFields.headlinePositionLG === 'below' ? 'below' : 'above';
-
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
       return (
@@ -57,7 +55,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineLG && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className={`lg-promo-headline headline-${headlinePositionLG}`}>
+        <a href={websiteURL} title={itemTitle} className="lg-promo-headline">
           <Title primaryFont={primaryFont} className="lg-promo-headline">
             {itemTitle}
           </Title>
@@ -115,7 +113,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {(headlinePositionLG === 'above')
+          {/* {customFields.headlinePositionLG === 'above'
             && (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG
@@ -129,8 +127,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )}
-          {/* videoUUID && (
+          )} */}
+          {/* {videoUUID && (
             <Video
               uuid={videoUUID}
               autoplay={false}
@@ -138,8 +136,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
               org="arcbrands"
               env="sandbox"
             />
-          ) */}
-          {customFields.showImageLG /* && !videoUUID */ && (
+          )} */}
+          {customFields.showImageLG && /*! videoUUID && */ (
             <div className="col-sm-12 col-md-xl-6 flex-col">
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
@@ -186,8 +184,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
               )}
             </div>
           )}
-          {headlinePositionLG === 'below'
-            && (customFields.showHeadlineLG
+          {/* customFields.headlinePositionLG === 'below' && */
+            (customFields.showHeadlineLG
               || customFields.showDescriptionLG
               || customFields.showBylineLG
               || customFields.showDateLG) && (
@@ -200,7 +198,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-          )}
+            )
+          }
         </div>
       </article>
       <hr />

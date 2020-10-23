@@ -12,7 +12,7 @@ const extractImageFromPromo = (promoItem) => (
  * @return an string with the image URL or null if not found
  */
 const extractImageFromStory = (storyObject) => {
-  const { promo_items: promoItems } = storyObject;
+  const { promo_items: promoItems } = (storyObject || {});
   if (!promoItems) {
     return null;
   }

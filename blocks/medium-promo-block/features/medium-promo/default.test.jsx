@@ -24,14 +24,7 @@ jest.mock('fusion:content', () => ({
 const config = {
   itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
   showHeadline: true,
-  headlinePosition: 'above',
-  showImage: true,
-};
-
-const headlineBelowConfig = {
-  itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-  showHeadline: true,
-  headlinePosition: 'below',
+  // headlinePosition: 'below',
   showImage: true,
 };
 
@@ -80,18 +73,6 @@ describe('the medium promo feature', () => {
   it('should have class .md-promo-image when show image is true', () => {
     const wrapper = mount(<MediumPromo customFields={config} />);
     expect(wrapper.find('.md-promo-image')).toHaveLength(1);
-  });
-
-  it('should have class .headline-above when headline position is above', () => {
-    const wrapper = mount(<MediumPromo customFields={config} />);
-    expect(wrapper.find('.headline-above')).toHaveLength(1);
-    expect(wrapper.find('.headline-below')).toHaveLength(0);
-  });
-
-  it('should have class .headline-below when headline position is below', () => {
-    const wrapper = mount(<MediumPromo customFields={headlineBelowConfig} />);
-    expect(wrapper.find('.headline-above')).toHaveLength(0);
-    expect(wrapper.find('.headline-below')).toHaveLength(1);
   });
 
   it('should have no Image when show image is false', () => {

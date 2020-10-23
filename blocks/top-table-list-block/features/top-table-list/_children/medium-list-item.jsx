@@ -32,12 +32,10 @@ const MediumListItem = (props) => {
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
 
-  const headlinePositionMD = customFields.headlinePositionMD === 'below' ? 'below' : 'above';
-
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${headlinePositionMD}`}>
+        <a href={websiteURL} title={itemTitle} className={`md-promo-headline headline-${customFields.headlinePositionMD || 'above'}`}>
           <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
@@ -94,23 +92,23 @@ const MediumListItem = (props) => {
     <>
       <article className="container-fluid medium-promo" key={id}>
         <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
-          {(headlinePositionMD === 'above')
-            && (customFields.showHeadlineMD
-              || customFields.showDescriptionMD
-              || customFields.showBylineMD
-              || customFields.showDateMD) && (
-              <div className="float-left">
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
+          {(customFields.headlinePositionMD === 'above' || customFields.headlinePositionMD === undefined)
+          && (customFields.showHeadlineMD
+            || customFields.showDescriptionMD
+            || customFields.showBylineMD
+            || customFields.showDateMD) && (
+            <div style={{ float: 'left' }}>
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
               </div>
+            </div>
           )}
           {customFields.showImageMD
-            && (
-            <a className={`image-link${headlinePositionMD === 'below' ? '' : ' float-right'}`} href={websiteURL} title={itemTitle}>
+          && (
+            <a className="image-link" href={websiteURL} title={itemTitle} style={{ float: (customFields.headlinePositionMD === 'below' ? '' : 'right') }}>
               {imageURL !== '' ? (
                 <Image
                   resizedImageOptions={resizedImageOptions}
@@ -144,20 +142,20 @@ const MediumListItem = (props) => {
               )}
               <PromoLabel type={promoType} />
             </a>
-            )}
-          {headlinePositionMD === 'below'
-            && (customFields.showHeadlineMD
-              || customFields.showDescriptionMD
-              || customFields.showBylineMD
-              || customFields.showDateMD) && (
-              <>
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
-              </>
+          )}
+          {customFields.headlinePositionMD === 'below'
+          && (customFields.showHeadlineMD
+            || customFields.showDescriptionMD
+            || customFields.showBylineMD
+            || customFields.showDateMD) && (
+            <>
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
+              </div>
+            </>
           )}
         </div>
       </article>

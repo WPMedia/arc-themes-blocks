@@ -20,7 +20,6 @@ import {
 } from '@wpmedia/resizer-image-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
-import './default.scss';
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -51,13 +50,11 @@ const MediumPromo = ({ customFields }) => {
     query: { raw_image_url: customFields.imageOverrideURL },
   }) || undefined;
 
-  const headlinePosition = customFields.headlinePosition === 'below' ? 'below' : 'above';
   const headlineText = content && content.headlines ? content.headlines.basic : null;
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
   const byLineArray = content?.credits?.by
-    && content.credits.by.length !== 0 ? content.credits.by : null;
-  /* eslint-disable camelcase */
+  && content.credits.by.length !== 0 ? content.credits.by : null;
   const dateText = content?.display_date || null;
 
   const promoType = discoverPromoType(content);
@@ -67,7 +64,8 @@ const MediumPromo = ({ customFields }) => {
       return (
         <a
           href={content.website_url}
-          className={`md-promo-headline headline-${headlinePosition} ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}
+          className="md-promo-headline"
+          // className={`md-promo-headline headline-${customFields.headlinePosition}`}
           title={headlineText}
         >
           <HeadlineText
@@ -133,26 +131,11 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''} ${headlinePosition === 'below' ? '' : 'flex'}`}>
-          {headlinePosition === 'above'
-            && (customFields.showHeadline
-              || customFields.showDescription
-              || customFields.showByline
-              || customFields.showDate) && (
-              <div>
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className={`article-meta ${headlinePosition === 'below' ? '' : 'margin-left-zero'}`}>
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
-              </div>
-          )}
-
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
           {customFields.showImage
           && (
             <a
-              className={`image-link ${headlinePosition === 'below' ? '' : 'float-right'}`}
+              className="image-link"
               href={content.website_url}
               title={content && content.headlines ? content.headlines.basic : ''}
             >
@@ -184,23 +167,24 @@ const MediumPromo = ({ customFields }) => {
                       largeHeight={ratios.largeHeight}
                     />
                   )
-                }
+              }
               <PromoLabel type={promoType} />
             </a>
           )}
-          {headlinePosition === 'below'
-          && (customFields.showHeadline || customFields.showDescription
-            || customFields.showByline || customFields.showDate)
-          && (
-            <>
-              {headlineTmpl()}
-              {descriptionTmpl()}
-              <div className="article-meta">
-                {byLineTmpl()}
-                {dateTmpl()}
-              </div>
-            </>
-          )}
+          {/* customFields.headlinePosition === 'below' && */
+            (customFields.showHeadline || customFields.showDescription
+              || customFields.showByline || customFields.showDate)
+            && (
+              <>
+                {headlineTmpl()}
+                {descriptionTmpl()}
+                <div className="article-meta">
+                  {byLineTmpl()}
+                  {dateTmpl()}
+                </div>
+              </>
+            )
+          }
         </div>
       </article>
       <hr />
@@ -218,11 +202,6 @@ MediumPromo.propTypes = {
       label: 'Show headline',
       defaultValue: true,
       group: 'Show promo elements',
-    }),
-    headlinePosition: PropTypes.oneOf(['above', 'below']).tag({
-      label: 'Headline Position',
-      group: 'Show promo elements',
-      defaultValue: 'above',
     }),
     showImage: PropTypes.bool.tag({
       label: 'Show image',

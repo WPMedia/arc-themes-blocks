@@ -71,7 +71,7 @@ const SmallPromo = ({ customFields }) => {
                   primaryFont={
                     getThemeStyle(getProperties(arcSite))[
                       'primary-font-family'
-                      ]
+                    ]
                   }
                   className="sm-promo-headline"
                   {...editableContent(content, 'headlines.basic')}

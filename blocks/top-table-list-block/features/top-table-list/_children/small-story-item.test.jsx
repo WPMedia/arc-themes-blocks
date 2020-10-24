@@ -163,4 +163,26 @@ describe('small promo display', () => {
     expect(wrapper.find('.small-promo-one').length).toBe(1);
     expect(wrapper.find('article.wrap-bottom').length).toBe(0);
   });
+
+  it('headline takes the full container\'s width while show image is false', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: SmallStoryItem } = require('./small-story-item');
+    const setup = Object.assign(config, { showImageSM: false });
+
+    const wrapper = mount(
+      <SmallStoryItem
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        customFields={setup}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('.no-image-padding').length).toBe(1);
+  });
 });

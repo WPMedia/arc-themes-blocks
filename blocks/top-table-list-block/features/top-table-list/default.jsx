@@ -352,11 +352,6 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Small story settings',
     }),
-    // headlinePositionSM: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Small story settings',
-    //   defaultValue: 'above',
-    // }),
     showImageSM: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -367,6 +362,19 @@ TopTableListWrapper.propTypes = {
       name: 'Stories per row',
       defaultValue: 2,
       group: 'Small story settings',
+    }),
+    imagePosition: PropTypes.oneOf([
+      'right', 'left', 'above', 'below',
+    ]).tag({
+      defaultValue: 'right',
+      label: 'Image Position',
+      group: 'Small story settings',
+      labels: {
+        right: 'Image Right',
+        left: 'Image Left',
+        above: 'Image Above',
+        below: 'Image Below',
+      },
     }),
   }),
 };

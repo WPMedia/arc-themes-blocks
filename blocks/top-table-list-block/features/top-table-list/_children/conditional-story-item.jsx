@@ -1,6 +1,5 @@
 import React from 'react';
 import VerticalOverlineImageStoryItem from './vertical-overline-image-story-item';
-import ItemTitleWithRightImage from './item-title-with-right-image';
 import MediumListItem from './medium-list-item';
 import HorizontalOverlineImageStoryItem from './horizontal-overline-image-story-item';
 import {
@@ -9,6 +8,7 @@ import {
   MEDIUM,
   SMALL,
 } from '../shared/storySizeConstants';
+import SmallStoryItem from './small-story-item'
 
 const ConditionalStoryItem = (props) => {
   const {
@@ -116,7 +116,7 @@ const ConditionalStoryItem = (props) => {
         ) % 2 === 0;
       }
       return (
-        <ItemTitleWithRightImage
+        <SmallStoryItem
           primaryFont={primaryFont}
           secondaryFont={secondaryFont}
           itemTitle={itemTitle}

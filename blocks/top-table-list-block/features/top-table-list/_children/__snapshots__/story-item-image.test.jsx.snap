@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoryItemImage render placeholder image while imageUrl is empty 1`] = `
+<div
+  className=""
+>
+  <div
+    className="flex no-image-padding"
+  >
+    <div
+      className="image-wrapper"
+    >
+      <Image
+        alt="Placeholder logo"
+        largeHeight={267}
+        largeWidth={400}
+        mediumHeight={183}
+        mediumWidth={274}
+        resizedImageOptions={Object {}}
+        smallHeight={183}
+        smallWidth={274}
+        url={Object {}}
+      />
+      <PromoLabel
+        size="small"
+        type="other"
+      />
+    </div>
+  </div>
+</div>
+`;

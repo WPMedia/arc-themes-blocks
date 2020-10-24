@@ -1,6 +1,6 @@
 import React from 'react';
 
-function getPromoContainer(imagePosition = 'right', headline, image, promoContainersStyles) {
+function getPromoContainer(headline, image, promoContainersStyles, imagePosition = 'right') {
   // image left, above
   if (imagePosition === 'left' || imagePosition === 'above') {
     return (

@@ -65,7 +65,7 @@ const SmallStoryItem = (props) => {
       className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
     >
       {/* from item-title-with-right-image <div className="row sm-promo-padding-btm"> */}
-      {getPromoContainer(imagePosition, headline, image, promoContainersStyles)}
+      {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       <hr />
     </article>
   );

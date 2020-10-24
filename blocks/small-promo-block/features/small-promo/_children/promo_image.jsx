@@ -2,7 +2,7 @@ import React from 'react';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
-import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
+import { extractImageFromStory, extractResizedParams } from '@wpmedia/resizer-image-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import PromoLabel from './promo_label';

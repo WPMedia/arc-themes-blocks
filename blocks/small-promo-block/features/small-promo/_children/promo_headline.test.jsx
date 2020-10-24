@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import PromoHeadline from './promo_headline';
-import SmallPromo from '../default';
 
 const { default: mockData } = require('../mock-data');
 

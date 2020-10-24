@@ -8,7 +8,7 @@ import {
   MEDIUM,
   SMALL,
 } from '../shared/storySizeConstants';
-import SmallStoryItem from './small-story-item'
+import SmallStoryItem from './small-story-item';
 
 const ConditionalStoryItem = (props) => {
   const {

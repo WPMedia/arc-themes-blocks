@@ -19,7 +19,6 @@ const PromoHeadline = (props) => {
   const imagePosition = customFields?.imagePosition || 'right';
   const headlineMarginClass = getPromoStyle(imagePosition, 'headlineMargin');
 
-  const { website_url: websiteUrl } = content;
   return content ? (
 
     <div className={`promo-headline${headlineMarginClass}`}>

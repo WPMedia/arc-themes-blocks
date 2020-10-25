@@ -5,11 +5,18 @@
         padding-top: 0;
       }
     }
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      &:nth-child(odd) {
+        padding-right: map-get($spacers, 'sm');
+      }
+      &:nth-child(even) {
+        padding-left: map-get($spacers, 'sm');
+      }
+    }
+
     display: block;
 
-    .col-md-xl-4 {
-      text-align: right;
-    }
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
       display: inline-block;
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
@@ -55,6 +62,12 @@
 
     > picture > img {
       vertical-align: middle;
+    }
+  }
+
+  .promo-headline {
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      min-height: 3rem;
     }
   }
 }

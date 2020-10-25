@@ -18,7 +18,7 @@ function getPromoStyle(position = 'right', element = 'container') {
     below: {
       container: '',
       margin: '',
-      headlineMargin: '',
+      headlineMargin: 'margin-sm-bottom',
     },
   };
   const promoClasses = imagePositionClassMapping[position][element];

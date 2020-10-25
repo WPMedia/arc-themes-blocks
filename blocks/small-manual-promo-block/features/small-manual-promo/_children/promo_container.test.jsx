@@ -11,32 +11,32 @@ describe('the promo container', () => {
   };
 
   it('default to headline first dom structure by default', () => {
-    const result = getPromoContainer('', mockHeadline, mockImage, promoContainerStyle);
+    const result = getPromoContainer(mockHeadline, mockImage, promoContainerStyle);
     expect(result).toMatchSnapshot();
   });
 
   it('render headline first if image position is right', () => {
-    const result = getPromoContainer('right', mockHeadline, mockImage, promoContainerStyle);
+    const result = getPromoContainer(mockHeadline, mockImage, promoContainerStyle, 'right');
     expect(result).toMatchSnapshot();
   });
 
   it('render headline first if image position is below', () => {
-    const result = getPromoContainer('below', mockHeadline, mockImage, promoContainerStyle);
+    const result = getPromoContainer(mockHeadline, mockImage, promoContainerStyle, 'below');
     expect(result).toMatchSnapshot();
   });
 
   it('render image first if image position is on left', () => {
-    const result = getPromoContainer('left', mockHeadline, mockImage, promoContainerStyle);
+    const result = getPromoContainer(mockHeadline, mockImage, promoContainerStyle, 'left');
     expect(result).toMatchSnapshot();
   });
 
   it('render image first if image position is above', () => {
-    const result = getPromoContainer('above', mockHeadline, mockImage, promoContainerStyle);
+    const result = getPromoContainer(mockHeadline, mockImage, promoContainerStyle, 'above');
     expect(result).toMatchSnapshot();
   });
 
   it('return empty dom value while no value pass in', () => {
-    const result = getPromoContainer('above', '', '', {});
+    const result = getPromoContainer('', '', {}, 'above');
     expect(result).toMatchSnapshot();
   });
 });

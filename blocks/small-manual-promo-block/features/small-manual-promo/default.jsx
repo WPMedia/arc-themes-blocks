@@ -28,7 +28,7 @@ const SmallManualPromo = ({ customFields }) => {
   return (
     <>
       <article className="container-fluid small-promo">
-        {getPromoContainer(imagePosition, headline, image, promoContainersStyles)}
+        {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       </article>
       <hr />
     </>

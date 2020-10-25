@@ -23,7 +23,6 @@ jest.mock('fusion:content', () => ({
 const config = {
   itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
   showHeadline: true,
-  // headlinePosition: 'below',
   showImage: true,
 };
 
@@ -72,6 +71,18 @@ describe('the small promo feature', () => {
   it('Headline div should have class .col-sm-xl-8 when show image is true', () => {
     const wrapper = mount(<SmallPromo customFields={config} />);
     expect(wrapper.find('.col-sm-xl-8')).toHaveLength(1);
+  });
+
+  it('default image position to right if imagePosition is unavailable', () => {
+    const wrapper = mount(<SmallPromo customFields={config} />);
+    expect(wrapper.find('.image-right')).toHaveLength(1);
+  });
+
+  it('render image position based on imagePosition in customfield', () => {
+    const mockConfig = config;
+    mockConfig.imagePosition = 'above'; //
+    const wrapper = mount(<SmallPromo customFields={mockConfig} />);
+    expect(wrapper.find('.image-above')).toHaveLength(1);
   });
 
   it('should have no Image when show image is false', () => {

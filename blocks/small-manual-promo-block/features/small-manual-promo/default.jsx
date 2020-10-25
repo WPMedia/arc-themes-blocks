@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
+import { useContent } from 'fusion:content';
 import getPromoContainer from './_children/promo_container';
 import getPromoStyle from './_children/promo_style';
-import PromoManualHeadline from './_children/promo_manual_headline';
-import PromoManualImage from './_children/promo_manual_image';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
+const HeadlineText = styled.h2`
+  font-family: ${(props) => props.primaryFont};
+`;
+
 const SmallManualPromo = ({ customFields }) => {
+  const { arcSite } = useFusionContext();
   const imagePosition = customFields?.imagePosition || 'right';
 
-  const headline = customFields.showHeadline && customFields.headline
-    && (<PromoManualHeadline customFields={customFields} />);
+  const headlineMarginClass = getPromoStyle(imagePosition, 'headlineMargin');
 
-  const image = customFields.showImage && customFields.imageURL
-          && (<PromoManualImage customFields={customFields} />);
+  const imageMarginClass = getPromoStyle(imagePosition, 'margin');
+  const resizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
+  });
 
   const promoContainersStyles = {
     containerClass: getPromoStyle(imagePosition, 'container'),
@@ -25,14 +35,65 @@ const SmallManualPromo = ({ customFields }) => {
     imageClass: 'col-sm-xl-4',
   };
 
-  return (
+  const renderWithLink = useCallback((element, props) => (
+    <a
+      href={customFields.linkURL || '#'}
+      className={(props && props.className) || ''}
+      title={customFields.headline}
+      target={customFields.newTab ? '_blank' : '_self'}
+      rel={customFields.newTab ? 'noreferrer noopener' : ''}
+      onClick={!customFields.linkURL ? (evt) => {
+        evt.preventDefault();
+      } : undefined}
+    >
+      {element}
+    </a>
+  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+
+  const headline = customFields.showHeadline && customFields.headline
+    && (
+      <div className={`promo-headline ${headlineMarginClass}`}>
+        { renderWithLink((
+          <HeadlineText
+            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            className="sm-promo-headline"
+          >
+            {customFields.headline}
+          </HeadlineText>
+        ), { className: 'sm-promo-headline' }) }
+      </div>
+    );
+
+  const image = customFields.showImage && customFields.imageURL
+    && (
+      <div className={imageMarginClass}>
+        { renderWithLink(
+          <Image
+            url={customFields.imageURL}
+            alt={customFields.headline}
+            // small should be 3:2 aspect ratio
+            smallWidth={105}
+            smallHeight={70}
+            mediumWidth={105}
+            mediumHeight={70}
+            largeWidth={105}
+            largeHeight={70}
+            breakpoints={getProperties(arcSite)?.breakpoints}
+            resizerURL={getProperties(arcSite)?.resizerURL}
+            resizedImageOptions={resizedImageOptions}
+          />,
+        )}
+      </div>
+    );
+
+  return customFields.linkURL ? (
     <>
       <article className="container-fluid small-promo">
         {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       </article>
       <hr />
     </>
-  );
+  ) : null;
 };
 
 SmallManualPromo.propTypes = {

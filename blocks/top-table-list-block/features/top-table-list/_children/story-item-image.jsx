@@ -24,11 +24,11 @@ const StoryItemImage = (props) => {
   const ratios = ratiosFor('SM', imageRatio);
 
   const imagePosition = customFields?.imagePosition || 'right';
-  const imageMarginClass = getPromoStyle(imagePosition, 'margin');
+  const imageClass = getPromoStyle(imagePosition, 'margin');
 
   return (
     // from item-title-with-right-image <div className="col-sm-4 col-md-xl-4 flex-col">
-    <div className={imageMarginClass}>
+    <div className={imageClass}>
       <div className="flex no-image-padding">
         {imageURL !== '' ? (
           <a href={websiteURL} title={itemTitle}>

@@ -2,12 +2,12 @@ function getPromoStyle(position = 'right', element = 'container') {
   const imagePositionClassMapping = {
     right: {
       container: 'row',
-      margin: '',
+      margin: 'sm-promo-padding-btm',
       headlineMargin: '',
     },
     left: {
       container: 'row',
-      margin: '',
+      margin: 'sm-promo-padding-btm',
       headlineMargin: 'margin-sm-left',
     },
     above: {

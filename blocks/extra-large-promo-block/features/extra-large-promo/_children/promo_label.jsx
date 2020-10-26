@@ -11,9 +11,9 @@ export const getLabelText = (phrases, type) => {
   if (phrases && type) {
     switch (type) {
       case 'Video':
-        return phrases.t('extra-large-promo-block.video-label');
+        return phrases.t('extra-large-promo-block.video-text');
       case 'Gallery':
-        return phrases.t('extra-large-promo-block.gallery-label');
+        return phrases.t('extra-large-promo-block.gallery-text');
       default:
         return null;
     }

@@ -56,7 +56,7 @@ const SmallStoryItem = (props) => {
     headlineClass: customFields.showImageSM
       ? 'col-sm-8 col-md-xl-8'
       : 'col-sm-xl-12 no-image-padding',
-    imageClass: 'col-sm-4 col-md-xl-4',
+    imageClass: 'col-sm-4 col-md-xl-4 promo-image',
   };
 
   return (

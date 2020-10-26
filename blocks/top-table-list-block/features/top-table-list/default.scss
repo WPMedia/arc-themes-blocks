@@ -7,12 +7,8 @@
     }
 
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      &:nth-child(odd) {
-        padding-right: map-get($spacers, 'sm');
-      }
-      &:nth-child(even) {
-        padding-left: map-get($spacers, 'sm');
-      }
+      padding-left: map-get($spacers, 'sm');
+      padding-right: map-get($spacers, 'sm');
     }
 
     display: block;
@@ -20,6 +16,11 @@
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
       display: inline-block;
       width: calc((100% - #{map-get($spacers, 'md')}) / 2);
+
+      .promo-image {
+        align-items: center;
+        display: flex;
+      }
     }
 
     .row {
@@ -38,13 +39,6 @@
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
         margin-bottom: inherit;
       }
-    }
-  }
-
-  .small-promo-padding {
-    padding-right: 0;
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-right: map-get($spacers, 'md');
     }
   }
 

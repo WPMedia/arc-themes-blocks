@@ -2,7 +2,7 @@
 
 exports[`StoryItemImage render placeholder image while imageUrl is empty 1`] = `
 <div
-  className=""
+  className="sm-promo-padding-btm"
 >
   <div
     className="flex no-image-padding"

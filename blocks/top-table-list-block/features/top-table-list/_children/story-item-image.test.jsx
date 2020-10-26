@@ -33,8 +33,8 @@ describe('StoryItemImage', () => {
   afterAll(() => {
     jest.resetModules();
   });
-  // 10/23/20 WIP test
   it('render placeholder image while imageUrl is empty', () => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
     const wrapper = shallow(<StoryItemImage {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
   });

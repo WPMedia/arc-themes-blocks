@@ -8,8 +8,6 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
-import discoverPromoType from './discover';
 
 // via results list
 const MediumListItem = (props) => {
@@ -81,7 +79,6 @@ const MediumListItem = (props) => {
   };
 
   const ratios = ratiosFor('MD', imageRatio);
-  const promoType = discoverPromoType(element);
 
   return (
     <>
@@ -89,7 +86,7 @@ const MediumListItem = (props) => {
         <div className="row med-promo-padding-bottom">
           {customFields.showImageMD
             && (
-            <div className="col-sm-12 col-md-xl-4 flex-col">
+            <div className="col-sm-12 col-md-xl-4">
               <a href={websiteURL} title={itemTitle}>
                 {imageURL !== '' ? (
                   <Image
@@ -123,7 +120,6 @@ const MediumListItem = (props) => {
 
                   />
                 )}
-                <PromoLabel type={promoType} />
               </a>
             </div>
             )}

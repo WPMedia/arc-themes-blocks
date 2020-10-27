@@ -30,17 +30,13 @@ const config = {
   showImageSM: true,
 };
 
+jest.mock('./item-title-with-right-image', () => class ItemWithRightImage {});
+jest.mock('./medium-list-item', () => class MediumListItem {});
+jest.mock('./horizontal-overline-image-story-item', () => class HorizontalOverlineImageStoryItem {});
+jest.mock('./vertical-overline-image-story-item', () => class VerticalOverlineImageStoryItem {});
+
 describe('conditional story item', () => {
-  beforeAll(() => {
-    jest.mock('./item-title-with-right-image', () => class ItemWithRightImage {});
-    jest.mock('./medium-list-item', () => class MediumListItem {});
-    jest.mock('./horizontal-overline-image-story-item', () => class HorizontalOverlineImageStoryItem {});
-    jest.mock('./vertical-overline-image-story-item', () => class VerticalOverlineImageStoryItem {});
-    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-  });
-  afterAll(() => {
-    jest.resetModules();
-  });
+  jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
   it('renders a small component if small passed in', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');

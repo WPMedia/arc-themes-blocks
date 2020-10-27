@@ -1,1 +1,4 @@
-features/numbered-list/mock-data.js
+blocks/features/numbered-list/mock-data.js
+mock-data.js
+default.test.jsx
+*.test.jsx

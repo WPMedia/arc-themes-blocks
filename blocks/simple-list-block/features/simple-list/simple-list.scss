@@ -1,5 +1,6 @@
 .list-container {
   @include block-margin-bottom;
+  @include block-internal-spacing;
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;

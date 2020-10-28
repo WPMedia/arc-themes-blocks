@@ -1,5 +1,6 @@
 .numbered-list-container {
   @include block-margin-bottom;
+  @include block-internal-spacing;
 }
 
 .numbered-list-item {

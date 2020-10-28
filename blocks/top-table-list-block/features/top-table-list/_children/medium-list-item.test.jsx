@@ -1,6 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <img alt="placeholder" />,
+}));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -24,26 +30,7 @@ const config = {
 };
 
 describe('medium list item', () => {
-  beforeAll(() => {
-    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-    jest.mock('@wpmedia/engine-theme-sdk', () => ({
-      Image: () => <img alt="placeholder" />,
-    }));
-    jest.mock('fusion:properties', () => (jest.fn(() => ({
-      fallbackImage: 'placeholder.jpg',
-    }))));
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        globalContent: {},
-      })),
-    }));
-  });
-
-  afterAll(() => {
-    jest.resetModules();
-  });
-
+  jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   it('renders title and image with full props', () => {
     const imageURL = 'pic';
     const constructedURL = 'url';

@@ -127,7 +127,6 @@ const ConditionalStoryItem = (props) => {
           arcSite={arcSite}
           paddingRight={hasPaddingRight}
           imageRatio={customFields.imageRatioSM}
-          element={element}
         />
       );
     }

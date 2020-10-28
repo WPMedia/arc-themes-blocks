@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.8.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0...v5.8.1) (2020-10-28)
+
+
+### Reverts
+
+* Revert "Ball promo label to extra-large-promo-block" ([463c8e1](https://github.com/WPMedia/fusion-news-theme-blocks/commit/463c8e1a98d344ff24e20fa0f2d3506325fa2361))
+* Revert "update wording on discover.js" ([d6f6f69](https://github.com/WPMedia/fusion-news-theme-blocks/commit/d6f6f69602645c7dab9f752947363f061a10c293))
+
+
+
+
+
 # [5.8.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0-beta.0...v5.8.0) (2020-10-02)
 
 **Note:** Version bump only for package @wpmedia/extra-large-promo-block

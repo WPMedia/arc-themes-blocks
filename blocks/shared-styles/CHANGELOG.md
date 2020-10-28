@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.8.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0...v5.8.1) (2020-10-28)
+
+
+### Reverts
+
+* Revert "shared styles for promo label" ([9749ddf](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9749ddf8869a524b2ff39768e1221a925e344a6c))
+
+
+
+
+
 # [5.8.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0-beta.0...v5.8.0) (2020-10-02)
 
 **Note:** Version bump only for package @wpmedia/shared-styles

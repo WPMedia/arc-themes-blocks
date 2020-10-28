@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/placeholder-image-block",
-  "version": "5.8.0",
+  "version": "5.8.2-beta.0",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {

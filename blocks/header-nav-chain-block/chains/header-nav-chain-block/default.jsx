@@ -214,11 +214,15 @@ const Nav = (props) => {
 
 Nav.propTypes = {
   customFields: PropTypes.shape({
-    hierarchy: PropTypes.string,
+    hierarchy: PropTypes.string.tag({
+      label: 'Sections Menu hierarchy',
+      defaultValue: '',
+      group: 'Configure content',
+    }),
     signInOrder: PropTypes.number,
   }),
 };
 
-Nav.label = 'Header Nav Chain – Arc Block';
+Nav.label = 'Navigation - Arc Chain';
 
 export default Nav;

@@ -16,7 +16,7 @@ const FooterSection = styled.ul`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const StyledSocialContainer = styled.div`
+export const StyledSocialContainer = styled.div`
   border: ${(props) => (props.hasSocialLinks ? '1px' : '0')} solid ${(props) => props.primaryColor}; 
   fill: ${(props) => props.primaryColor};
 
@@ -108,7 +108,7 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               <StyledSocialContainer
                 className="socialBtn-container"
                 primaryColor={getThemeStyle(arcSite)['primary-color']}
-                hasSocialLinks={facebookPage || twitterUsername || rssUrl}
+                hasSocialLinks={!!(facebookPage || twitterUsername || rssUrl)}
               >
                 {socialButtons}
               </StyledSocialContainer>

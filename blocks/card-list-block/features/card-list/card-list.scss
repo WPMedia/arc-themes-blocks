@@ -1,3 +1,5 @@
+/* stylelint-disable max-nesting-depth */
+
 .card-list-container {
   @include block-margin-bottom;
   @include block-internal-spacing;
@@ -7,9 +9,8 @@
   .card-list-title {
     margin-bottom: 0;
   }
-  .simple-results-list-container {
-   
 
+  .simple-results-list-container {
     .list-item-simple {
       margin-bottom: map-get($spacers, 'md');
     }

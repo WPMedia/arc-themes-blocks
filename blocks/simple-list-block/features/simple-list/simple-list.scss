@@ -1,3 +1,5 @@
+/* stylelint-disable max-nesting-depth, selector-max-compound-selectors */
+
 .list-container {
   @include block-margin-bottom;
   @include block-internal-spacing;

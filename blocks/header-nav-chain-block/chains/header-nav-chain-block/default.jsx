@@ -13,6 +13,7 @@ import SearchBox from './_children/search-box';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
+import HorizontalLinksBar from './_children/horizontal-links/default';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -46,7 +47,7 @@ const StyledSectionDrawer = styled.div`
 
 /* Main Component */
 const Nav = (props) => {
-  const { arcSite, deployment, contextPath } = useFusionContext();
+  const { arcSite, deployment, contextPath, isAdmin } = useFusionContext();
   const {
     primaryLogo, primaryLogoAlt, navColor, locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
@@ -61,7 +62,7 @@ const Nav = (props) => {
 
   const {
     children = [],
-    customFields: { hierarchy, signInOrder } = {},
+    customFields: { hierarchy, signInOrder,logoAlignment, horizontalLinksHierarchy  } = {},
     customSearchAction = null,
   } = props;
 
@@ -176,6 +177,7 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+
   return (
     <>
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
@@ -193,7 +195,14 @@ const Nav = (props) => {
               {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
             </a>
           </div>
-
+          {(horizontalLinksHierarchy && logoAlignment !== "center") &&
+            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} />
+          }
+          {(horizontalLinksHierarchy && logoAlignment === "center" && isAdmin) &&
+            <div>
+              In order to render horizontal links, the logo must be aligned to the left.
+            </div>
+          }
           <div className="nav-right">
             {signInButton}
           </div>
@@ -220,7 +229,18 @@ Nav.propTypes = {
       group: 'Configure content',
     }),
     signInOrder: PropTypes.number,
-  }),
+    logoAlignment: PropTypes.oneOf([
+      'center', 'left'
+    ]).tag({
+      label: 'Logo alignment',
+      group: 'Logo',
+      defaultValue: 'center'
+    }),
+    horizontalLinksHierarchy: PropTypes.string.tag({
+      label: 'Horizontal Links hierarchy',
+      group: 'Configure content',
+    })
+  })
 };
 
 Nav.label = 'Navigation - Arc Chain';

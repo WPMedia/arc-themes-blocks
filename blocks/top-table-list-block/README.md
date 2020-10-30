@@ -23,9 +23,9 @@ Detail the data structure returned from this content source
 
 
 ## Configurable Params
-| **Prop** | **Required** | **Type** | **Description** |
-|---|---|---|---|
-| **customFields.imagePosition** | **no** | **String** | **Determine Image Position within the Small Story Item Card. Default to Right Position** |
+| **Param** | **Type** | **Description** |
+|---|---|---|
+| **param** |  |  |
 
 ## Additional Considerations
 _This is optional. Please add an additional context that would be important to know in order to use this block._

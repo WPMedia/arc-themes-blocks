@@ -13,10 +13,10 @@
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "stable",
-    "styled-components": "^5.0.1"
+    "@wpmedia/news-theme-css": "beta",
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

@@ -21,9 +21,9 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/double-chain-block"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/news-theme-css": "beta"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

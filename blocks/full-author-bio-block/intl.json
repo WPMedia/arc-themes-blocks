@@ -2,6 +2,7 @@
    "full-author-bio-block.connect-text":{
       "en":"Connect",
       "sv":"Följ",
-      "no":"Koble til"
+      "no":"Koble til",
+      "fr": "Connecter"
    }
 }

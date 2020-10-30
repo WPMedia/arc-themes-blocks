@@ -10,7 +10,7 @@
   top: 200px;
   width: 44px;
 
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  @media screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1rem}) {
     visibility: hidden;
   }
 

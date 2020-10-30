@@ -32,7 +32,7 @@ const config = {
 
 describe('conditional story item', () => {
   beforeAll(() => {
-    jest.mock('./item-title-with-right-image', () => class ItemWithRightImage {});
+    jest.mock('./small-story-item', () => class SmallStoryItem {});
     jest.mock('./medium-list-item', () => class MediumListItem {});
     jest.mock('./horizontal-overline-image-story-item', () => class HorizontalOverlineImageStoryItem {});
     jest.mock('./vertical-overline-image-story-item', () => class VerticalOverlineImageStoryItem {});
@@ -51,7 +51,7 @@ describe('conditional story item', () => {
       <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
-    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
+    expect(wrapper.is('SmallStoryItem')).toBeTruthy();
   });
   it('renders a medium component if small passed in', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');
@@ -108,8 +108,8 @@ describe('conditional story item', () => {
       />,
     );
 
-    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
-    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
+    expect(wrapper.is('SmallStoryItem')).toBeTruthy();
+    expect(wrapper.find('SmallStoryItem').prop('paddingRight')).toBe(true);
   });
 
   it('renders a small component with padding if storiesPerRowSM is undefined and the position is even', () => {
@@ -132,8 +132,8 @@ describe('conditional story item', () => {
       />,
     );
 
-    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
-    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
+    expect(wrapper.is('SmallStoryItem')).toBeTruthy();
+    expect(wrapper.find('SmallStoryItem').prop('paddingRight')).toBe(true);
   });
 
   it('renders a small component without padding if storiesPerRowSM is 1', () => {
@@ -156,7 +156,7 @@ describe('conditional story item', () => {
       />,
     );
 
-    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
-    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(false);
+    expect(wrapper.is('SmallStoryItem')).toBeTruthy();
+    expect(wrapper.find('SmallStoryItem').prop('paddingRight')).toBe(false);
   });
 });

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PromoImage render placeholder image while imageUrl is empty 1`] = `""`;

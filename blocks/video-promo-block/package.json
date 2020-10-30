@@ -23,8 +23,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@wpmedia/engine-theme-sdk": "latest",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/engine-theme-sdk": "stable"
+  },
+  "peerDependencies": {
+    "@wpmedia/news-theme-css": "beta",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

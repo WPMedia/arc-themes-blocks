@@ -179,7 +179,7 @@ class ResultsList extends Component {
           return (
             <div className="list-item" key={`result-card-${url}`}>
               { promoElements.showImage && (
-                <div className="results-list--image-container">
+                <div className="results-list--image-container mobile-order-2 mobile-image">
                   <a
                     href={url}
                     title={headlineText}
@@ -219,7 +219,7 @@ class ResultsList extends Component {
                 </div>
               )}
               { promoElements.showHeadline && (
-                <div className="results-list--headline-container">
+                <div className="results-list--headline-container mobile-order-1">
                   <a
                     href={url}
                     title={headlineText}
@@ -238,7 +238,7 @@ class ResultsList extends Component {
                   || promoElements.showDate
                   || promoElements.showByline
               ) && (
-                <div className="results-list--description-author-container">
+                <div className="results-list--description-author-container mobile-order-3">
                   {promoElements.showDescription && descriptionText && (
                     <a
                       href={url}

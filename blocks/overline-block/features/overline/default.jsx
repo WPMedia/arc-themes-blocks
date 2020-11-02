@@ -52,27 +52,39 @@ function fixTrailingSlash(item) {
 const Overline = (props) => {
   const { globalContent: content = {}, arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
-  const { customText, customUrl, editable } = props;
+  const {
+    customText,
+    customUrl,
+    editable,
+    story,
+  } = props;
+  const sourceContent = story || (Object.prototype.hasOwnProperty.call(content, '_id') && content) || {};
 
   const {
     display: labelDisplay,
     url: labelUrl,
     text: labelText,
-  } = (content.label && content.label.basic) || {};
+  } = (sourceContent.label && sourceContent.label.basic) || {};
   const shouldUseLabel = !!(labelDisplay);
 
   const {
     _id: sectionUrl,
     name: sectionText,
-  } = (content.websites
-    && content.websites[arcSite]
-    && content.websites[arcSite].website_section) || {};
+  } = (sourceContent.websites
+    && sourceContent.websites[arcSite]
+    && sourceContent.websites[arcSite].website_section) || {};
 
-  const shouldUseProps = !!((customText && customUrl));
+  const shouldUseProps = !!(customText && customUrl); // ? true : sourceContent._id ? false : false;
   const useGlobalContent = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
-
+  const editableContentPath = shouldUseLabel ? 'headlines.basic' : `websites.${arcSite}.website_section.name`;
   const [text, url] = shouldUseProps ? [customText, customUrl] : useGlobalContent;
-  const edit = editable ? { ...editableContent(content, text) } : {};
+
+  let edit = {};
+  if (editable) {
+    if (sourceContent._id) {
+      edit = { ...editableContent(sourceContent, editableContentPath) };
+    }
+  }
 
   if (url) {
     return (

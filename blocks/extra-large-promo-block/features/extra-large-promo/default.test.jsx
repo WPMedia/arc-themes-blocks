@@ -197,8 +197,8 @@ describe('the extra large promo feature', () => {
     const wrapperOverline = wrapper.find('Overline');
     expect(wrapperOverline.length).toBe(1);
 
-    expect(wrapperOverline.props().customUrl).toEqual('the-sun-ID');
-    expect(wrapperOverline.props().customText).toEqual('the-sun-name');
+    expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
+    expect(wrapperOverline.find('a.overline').prop('href')).toEqual('the-sun-ID/');
     wrapper.unmount();
   });
 

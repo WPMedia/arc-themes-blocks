@@ -8,7 +8,12 @@ import getTranslatedPhrases from 'fusion:intl';
 import getProperties from 'fusion:properties';
 
 export const getLabelText = (phrases, type) => {
+  console.log("M promo - getLabelText phrases", phrases);
+  
   if (phrases && type) {
+    console.log("getLabelText video label = ", phrases.t('extra-large-promo-block.video-label'));
+    console.log("getLabelText video label = ", phrases.t('extra-large-promo-block.gallery-label'));
+
     switch (type) {
       case 'Video':
         return phrases.t('extra-large-promo-block.video-label');

@@ -88,45 +88,36 @@ VideoPromo.propTypes = {
     itemContentConfig: PropTypes.contentConfig('ans-item').tag(
       {
         label: 'Video Content',
-        group: 'Configure Video',
+        group: 'Configure Content',
       },
     ),
-    uuid: PropTypes.string.tag({
-      label: 'Video UUID',
-      group: 'Configure Video',
-      description: 'If the UUID is specified, this will be used instead of the video content.',
+    website_url: PropTypes.string.tag({
+      group: 'Configure Content',
+    }),
+    inheritGlobalContent: PropTypes.boolean.tag({
+      group: 'Configure Content',
+      label: 'Inherit global content',
     }),
     autoplay: PropTypes.bool.tag(
       {
         label: 'Autoplay',
         defaultValue: false,
-        group: 'Configure Video',
+        group: 'Video settings',
       },
     ),
-    ratio: PropTypes.oneOf([
-      0.5625, 0.75,
-    ]).tag({
-      label: 'Ratio',
-      labels: {
-        0.5625: '16:9',
-        0.75: '4:3',
-      },
-      defaultValue: 0.5625,
-      group: 'Configure Video',
-    }),
     title: PropTypes.string.tag({
       label: 'Title',
-      group: 'Content',
+      group: 'Display Setting',
     }),
     description: PropTypes.string.tag({
       label: 'Description',
-      group: 'Content',
+      group: 'Display settings',
     }),
     live: PropTypes.bool.tag(
       {
         label: 'Live',
         defaultValue: false,
-        group: 'Content',
+        group: 'Display settings',
       },
     ),
   }),

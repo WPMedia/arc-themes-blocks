@@ -1,21 +1,11 @@
 /* eslint-disable object-curly-newline */
-import get from 'lodash.get';
 import getProperties from 'fusion:properties';
 import adMap from './ad-mapping';
-
-const adUnitLog = {};
-
-const logAdUnit = (adConfig) => {
-  const { adType } = adConfig;
-  if (!adUnitLog[adType]) {
-    adUnitLog[adType] = [];
-  }
-  adUnitLog[adType].push(adConfig);
-};
+import AdUnitLog from './_children/AdUnitLog';
 
 export const getBreakpoints = (arcSite) => {
   const siteProps = getProperties(arcSite);
-  return get(siteProps, 'breakpoints');
+  return siteProps?.breakpoints;
 };
 
 export const getSizemapBreakpoints = ({ arcSite }) => {
@@ -27,7 +17,7 @@ export const getSizemapBreakpoints = ({ arcSite }) => {
   ];
 };
 
-export const getType = (globalContent = {}) => get(globalContent, 'type');
+export const getType = (globalContent = {}) => globalContent?.type;
 
 export const isContentPage = ({ globalContent } = {}) => {
   const type = getType(globalContent);
@@ -39,19 +29,19 @@ export const isContentPage = ({ globalContent } = {}) => {
 };
 
 export const isSectionPage = ({ globalContent } = {}) => (
-  get(globalContent, 'node_type', '') === 'section'
+  (globalContent?.node_type || '') === 'section'
 );
 
 export const getAdName = ({ adType }) => (
-  get(adMap, `${adType}.adName`)
+  adMap[adType]?.adName
 );
 
 export const getAdClass = ({ adType }) => (
-  get(adMap, `${adType}.adClass`)
+  adMap[adType]?.adClass
 );
 
 export const getDimensions = ({ adType }) => (
-  get(adMap, `${adType}.dimensionsArray`)
+  adMap[adType]?.dimensionsArray
 );
 
 export const getCategory = (sectionPath) => (
@@ -59,23 +49,23 @@ export const getCategory = (sectionPath) => (
 );
 
 export const getID = ({ globalContent } = {}) => (
-  get(globalContent, '_id', undefined)
+  globalContent?._id
 );
 
 export const getTags = ({ globalContent } = {}) => (
-  get(globalContent, 'taxonomy.tags', [])
-    .map((tagObj) => get(tagObj, 'slug', null))
+  (globalContent?.taxonomy?.tags || [])
+    .map((tagObj) => (tagObj?.slug || null))
     .filter((tag) => tag)
     .join(',')
 );
 
-export const getPageType = (props) => {
-  const metaValue = get(props, 'metaValue');
+export const getPageType = (props = {}) => {
+  const { metaValue } = props;
   return (metaValue && metaValue('page-type')) || '';
 };
 
 export const getAdPath = (props) => {
-  const metaValue = get(props, 'metaValue');
+  const { metaValue } = props;
   let adPath = (metaValue && metaValue('ad-path')) || '';
   if (adPath && adPath.charAt(0) === '/') {
     adPath = adPath.substring(1);
@@ -84,7 +74,7 @@ export const getAdPath = (props) => {
 };
 
 export const getPrimarySectionId = ({ globalContent, arcSite } = {}) => (
-  get(globalContent, `websites[${arcSite}].website_section._id`, '')
+  globalContent?.websites[arcSite]?.website_section?._id || ''
 );
 
 export const formatSectionPath = (sectionPath) => {
@@ -119,16 +109,11 @@ export const getSectionID = (props) => (
   formatSectionPath(getAdPath(props) || getSectionPath(props))
 );
 
-export const getSlotName = (props) => {
-  const arcSite = get(props, 'arcSite');
+export const getSlotName = (props = {}) => {
+  const { arcSite = '' } = props;
   const { websiteAdPath = '' } = getProperties(arcSite);
   return `${websiteAdPath}${getSectionID(props)}`;
 };
-
-// istanbul ignore next
-export const getPosition = ({ adType }) => (
-  adUnitLog[adType] ? (adUnitLog[adType].length + 1) : 1
-);
 
 export const setPageTargeting = (props) => {
   window.googletag = window.googletag || {};
@@ -148,18 +133,18 @@ export const setPageTargeting = (props) => {
 };
 
 export const getSlotTargeting = (props) => ({
-  ad_type: get(props, 'adName'),
-  pos: getPosition(props),
+  ad_type: props?.adType,
+  pos: AdUnitLog.getInstance().getPosition(props),
 });
 
 /* Expects a 'props' object containing feature props, FusionContext, AppContext */
 export const getAdObject = (props) => {
-  const rand = Math.floor(Math.random() * 10000);
+  const { instanceId = '' } = props;
   const adName = getAdName(props);
   const display = adName === 'right_rail_cube'
-    ? 'desktop' : get(props, 'display', 'all');
+    ? 'desktop' : (props?.display || 'all');
   const adObj = {
-    id: `arcad_${rand}`,
+    id: `arcad_${instanceId}`,
     slotName: getSlotName(props),
     adType: adName,
     adClass: getAdClass(props),
@@ -168,9 +153,9 @@ export const getAdObject = (props) => {
       breakpoints: getSizemapBreakpoints(props),
       refresh: true,
     },
-    targeting: getSlotTargeting({ ...props, adName }),
     display,
   };
-  logAdUnit(adObj);
+  AdUnitLog.getInstance().add(adObj);
+  adObj.targeting = getSlotTargeting(adObj);
   return adObj;
 };

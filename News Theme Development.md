@@ -126,6 +126,27 @@ To check if blocks are being properly linked, run:
 
   NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
 
+
+### Internationalization
+
+Phrase translations may be added via an intl.json file for each block to contain the phrases that block needs. For example  this is the intl.json file for results list block:
+```sh
+{
+   "results-list-block.see-more-button":{
+      "en":"See More",
+      "sv":"Fler artiklar",
+      "no":"Se mer"
+   }
+}
+```
+Common phrases needed across multiple blocks are declared in global-phrases-block.  In order for the intl.json files to be included in a build, it must be included in the lists for a block in that blocks package.json file:
+```sh
+  "files": [
+    "features",
+    "intl.json"
+  ],
+```
+
 ### Development Process
 
 1. Pull the latest `canary` branch:

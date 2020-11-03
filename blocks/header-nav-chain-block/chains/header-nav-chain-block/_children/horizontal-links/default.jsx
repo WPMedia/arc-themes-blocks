@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
@@ -14,7 +13,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const HorizontalLinksBar = ( hierarchy ) => {
+const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
   const { id, arcSite } = useFusionContext();
 
   const content = useContent({
@@ -32,14 +31,17 @@ const HorizontalLinksBar = ( hierarchy ) => {
     && content.children.length > 1
   );
 
+  const font = getThemeStyle(arcSite)['primary-font-family'];
+
   return (
     <>
-      <nav key={id} className="links-bar">
+      {}
+      <nav key={id} className="horizontal-links-bar">
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan
             className="links-menu"
             key={item._id}
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            primaryFont={font}
           >
             {
               item.node_type === 'link'
@@ -48,6 +50,7 @@ const HorizontalLinksBar = ( hierarchy ) => {
                     href={item.url}
                     name={item.display_name}
                     showSeparator={content.children.length !== index + 1 && showSeparator}
+                    navBarColor={navBarColor}
                   />
                 )
                 : (
@@ -55,6 +58,7 @@ const HorizontalLinksBar = ( hierarchy ) => {
                     href={item._id}
                     name={item.name}
                     showSeparator={content.children.length !== index + 1 && showSeparator}
+                    navBarColor={navBarColor}
                   />
                 )
             }
@@ -65,10 +69,5 @@ const HorizontalLinksBar = ( hierarchy ) => {
     </>
   );
 };
-
-HorizontalLinksBar.propTypes = {
-  customFields: PropTypes.shape({
-  horizontalLinksHierarchy:PropTypes.string
-})};
 
 export default HorizontalLinksBar;

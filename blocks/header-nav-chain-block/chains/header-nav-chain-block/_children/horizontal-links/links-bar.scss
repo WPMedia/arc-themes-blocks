@@ -1,4 +1,4 @@
-.links-bar {
+.horizontal-links-bar {
   @include block-margin-bottom;
   align-items: center;
   text-align: left;
@@ -9,10 +9,8 @@
 
   .links-menu {
     padding: 8px 0;
-
     a {
       @include link-color-active-hover($ui-primary-font-color);
-      color: $ui-primary-font-color;
       font-family: $theme-primary-font-family;
       font-size: 14px;
       height: 100%;

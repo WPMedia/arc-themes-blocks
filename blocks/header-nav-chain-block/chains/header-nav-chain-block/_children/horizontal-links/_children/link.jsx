@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 function getLocation(uri) {
   let url;
@@ -31,22 +32,40 @@ function fixTrailingSlash(item) {
   return item;
 }
 
-const Link = ({ href, name, showSeparator }) => {
+/* Styled Components */
+const StyledLink = styled.a`
+    color: ${(props) => (props.navBarColor === 'light' ? '#000' : '#fff')};
+    font-family: ${(props) => props.font};
+`;
+
+const Link = ({
+  href, name, showSeparator, navBarColor,
+}) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
 
   return (
     externalUrl ? (
-      <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
+      <StyledLink
+        href={fixTrailingSlash(href)}
+        target="_blank"
+        rel="noopener noreferrer"
+        navBarColor={navBarColor}
+      >
         {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
         <span className="sr-only">(Opens in new window)</span>
-      </a>
-    ) : <a href={fixTrailingSlash(href)}>{`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}</a>
+      </StyledLink>
+    ) : (
+      <StyledLink href={fixTrailingSlash(href)} navBarColor={navBarColor}>
+        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+      </StyledLink>
+    )
   );
 };
 
 Link.propTypes = {
   href: PropTypes.string,
   name: PropTypes.string,
+  navBarColor: PropTypes.string,
 };
 
 export default Link;

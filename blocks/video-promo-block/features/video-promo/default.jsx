@@ -28,22 +28,20 @@ const LiveLabel = styled.span`
 const VideoPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const {
-    uuid,
     autoplay = false,
-    ratio = 0.5625,
     title,
     description,
     live = false,
   } = customFields;
 
-  const content = uuid ? null : useContent({
+  const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   });
 
-  if (!uuid && !content) {
+  if (!content) {
     return null;
   }
 
@@ -64,7 +62,6 @@ const VideoPromo = ({ customFields }) => {
           <Video
             uuid={uuid || content._id}
             autoplay={autoplay}
-            aspectRatio={ratio}
             org={videoOrg}
             env={videoEnv}
           />
@@ -91,12 +88,9 @@ VideoPromo.propTypes = {
         group: 'Configure Content',
       },
     ),
-    website_url: PropTypes.string.tag({
-      group: 'Configure Content',
-    }),
-    inheritGlobalContent: PropTypes.boolean.tag({
-      group: 'Configure Content',
+    inheritGlobalContent: PropTypes.bool.tag({
       label: 'Inherit global content',
+      group: 'Configure Content',
     }),
     autoplay: PropTypes.bool.tag(
       {
@@ -107,7 +101,7 @@ VideoPromo.propTypes = {
     ),
     title: PropTypes.string.tag({
       label: 'Title',
-      group: 'Display Setting',
+      group: 'Display settings',
     }),
     description: PropTypes.string.tag({
       label: 'Description',

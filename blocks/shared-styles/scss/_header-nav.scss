@@ -144,8 +144,8 @@ body.nav-open {
 .news-theme-navigation-container {
   align-items: center;
   display: flex;
-  // justify-content: space-between;
-  justify-content: flex-start;
+  justify-content: space-between;
+  // justify-content: flex-start;
   padding: 0 20px;
   position: relative;
   flex-shrink: 0;
@@ -176,7 +176,7 @@ body.nav-open {
   > div {
     align-items: center;
     display: flex;
-    // flex: 1;
+    flex: 1;
     text-align: center;
 
     &.nav-left {
@@ -189,10 +189,9 @@ body.nav-open {
 
     &.nav-right:not(:empty) {
       margin-left:10px
-  }
+    }
 
     &.nav-logo, & > .nav-logo {
-      // flex: 2;
       justify-content: center;
 
       img {

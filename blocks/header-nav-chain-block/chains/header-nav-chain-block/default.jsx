@@ -213,12 +213,12 @@ const Nav = (props) => {
           {logoAlignment === 'center' && <NavLogo />}
           {(horizontalLinksHierarchy && logoAlignment !== 'center')
             && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
-          {/* {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
+          {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
             && (
             <StyledWarning>
               In order to render horizontal links, the logo must be aligned to the left.
-            </div>
-            )} */}
+            </StyledWarning>
+            )}
           <div className="nav-right">
             {signInButton}
           </div>

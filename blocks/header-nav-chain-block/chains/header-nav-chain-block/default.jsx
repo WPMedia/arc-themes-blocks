@@ -48,7 +48,6 @@ const StyledSectionDrawer = styled.div`
 const StyledWarning = styled.div`
   background-color: #cc3300;
   color: #fff;
-  width: 300px;
   display: flex;
   align-self: flex-start;
 `;
@@ -208,12 +207,6 @@ const Nav = (props) => {
           </div>
           {(horizontalLinksHierarchy && logoAlignment !== 'center')
             && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
-          {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
-            && (
-            <StyledWarning>
-              In order to render horizontal links, the logo must be aligned to the left.
-            </StyledWarning>
-            )}
           <div className="nav-right">
             {signInButton}
           </div>
@@ -228,6 +221,12 @@ const Nav = (props) => {
         </StyledSectionDrawer>
 
       </StyledNav>
+      {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
+        && (
+        <StyledWarning>
+          In order to render horizontal links, the logo must be aligned to the left.
+        </StyledWarning>
+        )}
     </>
   );
 };

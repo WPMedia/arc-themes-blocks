@@ -65,7 +65,6 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
           </LinkBarSpan>
         ))}
       </nav>
-      <hr />
     </>
   );
 };

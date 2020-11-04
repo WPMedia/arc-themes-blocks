@@ -182,6 +182,14 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  const NavLogo = () => (
+    <div className={`nav-logo nav-logo-${logoAlignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
+      <a href="/" title={primaryLogoAlt}>
+        {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
+      </a>
+    </div>
+  );
+
   return (
     <>
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
@@ -192,20 +200,17 @@ const Nav = (props) => {
               <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
+            {logoAlignment === 'left' && <NavLogo />}
           </div>
-          <div className={`nav-logo nav-logo-${logoAlignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
-            <a href="/" title={primaryLogoAlt}>
-              {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
-            </a>
-          </div>
+          {logoAlignment === 'center' && <NavLogo />}
           {(horizontalLinksHierarchy && logoAlignment !== 'center')
             && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
-          {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
+          {/* {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
             && (
             <div>
               In order to render horizontal links, the logo must be aligned to the left.
             </div>
-            )}
+            )} */}
           <div className="nav-right">
             {signInButton}
           </div>

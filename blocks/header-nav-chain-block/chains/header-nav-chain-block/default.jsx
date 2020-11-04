@@ -66,7 +66,7 @@ const Nav = (props) => {
   const {
     children = [],
     customFields: {
-      hierarchy, signInOrder, logoAlignment, horizontalLinksHierarchy,
+      hierarchy, signInOrder, logoAlignment = 'center', horizontalLinksHierarchy,
     } = {},
     customSearchAction = null,
   } = props;
@@ -193,8 +193,7 @@ const Nav = (props) => {
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
           </div>
-
-          <div className={`nav-logo ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
+          <div className={`nav-logo nav-logo-${logoAlignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
             <a href="/" title={primaryLogoAlt}>
               {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
             </a>

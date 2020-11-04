@@ -1,8 +1,8 @@
 .horizontal-links-bar {
-  @include block-margin-bottom;
+  // @include block-margin-bottom;
   align-items: center;
   text-align: left;
-  width: 100%;
+  flex: 1;
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: center;
   }

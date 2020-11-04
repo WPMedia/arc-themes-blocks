@@ -148,6 +148,7 @@ body.nav-open {
   justify-content: flex-start;
   padding: 0 20px;
   position: relative;
+  flex-shrink: 0;
 
   &.light {
     border-bottom: $border-width solid $border-rule-color;
@@ -175,7 +176,7 @@ body.nav-open {
   > div {
     align-items: center;
     display: flex;
-    flex: 1;
+    // flex: 1;
     text-align: center;
 
     &.nav-left {
@@ -185,6 +186,10 @@ body.nav-open {
     &.nav-right {
       justify-content: flex-end;
     }
+
+    &.nav-right:not(:empty) {
+      margin-left:10px
+  }
 
     &.nav-logo, & > .nav-logo {
       // flex: 2;

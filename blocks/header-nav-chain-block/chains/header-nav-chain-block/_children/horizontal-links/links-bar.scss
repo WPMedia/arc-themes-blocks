@@ -2,9 +2,13 @@
   @include block-margin-bottom;
   align-items: center;
   text-align: left;
-  width: 100%;
+  align-self: flex-start;
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: center;
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    display: none;
   }
 
   .links-menu {

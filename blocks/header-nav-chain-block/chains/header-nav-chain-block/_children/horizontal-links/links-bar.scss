@@ -3,6 +3,8 @@
   align-items: center;
   text-align: left;
   flex: 1;
+  overflow: hidden;
+  
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: center;
   }

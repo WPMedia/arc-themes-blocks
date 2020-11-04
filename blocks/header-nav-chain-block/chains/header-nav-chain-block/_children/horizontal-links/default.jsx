@@ -40,7 +40,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
       <nav key={id} className="horizontal-links-bar">
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan
-            className="links-menu"
+            className="horizontal-links-menu"
             key={item._id}
             primaryFont={font}
           >

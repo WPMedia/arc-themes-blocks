@@ -14,7 +14,7 @@ const sz300x600 = [300, 600];
 const sz320x50 = [320, 50];
 const sz728x90 = [728, 90];
 const sz970x90 = [970, 90];
-const sz970x250 = [970, 90];
+const sz970x250 = [970, 250];
 
 const adMapping = {
   '1x1': {
@@ -61,7 +61,7 @@ const adMapping = {
     adLabel: 'Leaderboard - Large',
     adClass: '728x90',
     dimensionsArray: [
-      [sz728x90, sz970x90, sz970x250],
+      [sz970x250, sz970x90, sz728x90],
       sz728x90,
       sz320x50,
     ],

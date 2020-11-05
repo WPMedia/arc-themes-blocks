@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable comma-dangle */
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
@@ -11,12 +12,16 @@ import './ads.scss';
 
 /** === ArcAd Component === */
 const ArcAd = (props) => {
+  if (typeof window === 'undefined') return null;
+  const [instanceId] = useState(Math.floor(Math.random() * 10000));
   const propsWithContext = {
     ...useAppContext(),
     ...useFusionContext(),
     ...props,
+    instanceId,
   };
   const { customFields } = props;
+  const { isAdmin } = propsWithContext;
   const [config] = useState(
     getAdObject({
       ...customFields,
@@ -49,17 +54,16 @@ const ArcAd = (props) => {
   }, [config]);
 
   useEffect(() => {
-    registerAd();
-  }, [registerAd]);
+    if (!isAdmin) registerAd();
+  }, [registerAd, isAdmin]);
 
   const {
     id, adClass, adType, dimensions, slotName, display,
   } = config;
-  const { isAdmin } = propsWithContext;
 
   return (
     <div
-      id={`arcad_feature-${id}`}
+      id={`arcad_feature-${instanceId}`}
       className="arcad_feature margin-md-bottom"
     >
       <div className="arcad_container">

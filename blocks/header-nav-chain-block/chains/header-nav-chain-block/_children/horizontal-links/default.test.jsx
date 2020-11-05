@@ -163,4 +163,12 @@ describe('the links bar feature for the default output type', () => {
       expect(wrapper.find('[href="mailto:readers@washpost.com"]').length).toBe(4);
     });
   });
+
+  describe('when a link has show separator true', () => {
+    it('should should show dot separator', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" navBarColor="light" showSeparator="true" />);
+      expect(wrapper.text()).toContain('test    •    ');
+    });
+  });
 });

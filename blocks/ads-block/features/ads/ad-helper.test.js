@@ -29,6 +29,7 @@ const SITE_PROPS_MOCK = {
     large: 992,
   },
   websiteAdPath: 'news',
+  dfpId: 701,
 };
 
 const STORY_MOCK = {

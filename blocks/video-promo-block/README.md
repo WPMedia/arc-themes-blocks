@@ -14,7 +14,7 @@ PageBuilder users can configure:
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
-| **itemContentConfig** | yes (no if uuid is specified) | contentConfig | the content source config to fetch a video (ex use `content-api` and specify the `website_url` of a video) |
+| **itemContentConfig** | yes (no if inheritGlobalContent is checked) | contentConfig | the content source config to fetch a video (ex use `content-api` and specify the `website_url` of a video) |
 | **autoplay** | no | boolean | if set to true, the video will auto play and be muted by default |
 | **title** | no | string | the title of the component |
 | **description** | no | string | the description of the component  |

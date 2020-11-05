@@ -50,7 +50,6 @@ const VideoPromo = ({ customFields }) => {
       : null,
   });
   let videoId = content?._id;
-
   // use globalcontent
   if (inheritGlobalContent && globalContent) {
     if (globalContent?.promo_items?.lead_art?.type === 'video') {

@@ -1,0 +1,40 @@
+name: Test News Theme Blocks
+
+on:
+  pull_request:
+    # synchronize	commit(s) pushed to the pull request
+    types: [synchronize, opened]
+
+jobs:
+  ensure_minimum_test_coverage_linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node with 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies if lockfile changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      # Remove nested modules to prevent multiple react versions
+      - name: Run tests with coverage
+        run: npx lerna clean -y && npm run test:coverage
+
+      - name: Check linting
+        run: npm run lint

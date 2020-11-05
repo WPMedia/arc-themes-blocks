@@ -15,18 +15,21 @@ PageBuilder users can configure:
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **itemContentConfig** | yes (no if uuid is specified) | contentConfig | the content source config to fetch a video (ex use `content-api` and specify the `website_url` of a video) |
-| **uuid** | yes (no if itemContentConfig is specified) | string | the uuid of a video (itemContentConfig will be ignore if this is specified)  |
 | **autoplay** | no | boolean | if set to true, the video will auto play and be muted by default |
-| **ratio** | no | number | the aspect ratio of the video used by the powa player  |
 | **title** | no | string | the title of the component |
 | **description** | no | string | the description of the component  |
 | **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
+| **inheritGlobalContent** | no | Boolean | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
+
 
 ## ANS Schema
 ANS of the video type
 
 ### ANS Fields
-- _id (uuid)
+- `globalContent.promo_items.lead_art._id` (optional)
+- `globalContent.promo_items.lead_art.headline.basic` (optional)
+- `globalContent.promo_items.lead_art.description.basic` (optional)
+
 
 ## Internationalization fields
 - N/A

@@ -3934,6 +3934,1308 @@ export const LineItemWithOutDescription = {
   _id: 'e3de4e3edcc50753f0879e4aba393e5b8857d9b8c9f58ccda5b3c42488d66286',
 };
 
+// Dagen do not have a websites.dagen.website_section property
+export const oneListItemWithoutSectionName = {
+  type: 'results',
+  version: '0.6.0',
+  content_elements: [
+    {
+      type: 'story',
+      version: '0.10.4',
+      content_elements: [
+        {
+          _id: 'HMWPLRZQSVAS3JD7BGRPROY3DM',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1576691055079,
+          },
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Scelerisque viverra mauris in aliquam sem fringilla ut morbi. Sagittis id consectetur purus ut faucibus pulvinar elementum integer enim. Integer quis auctor elit sed vulputate mi sit. Id eu nisl nunc mi ipsum faucibus vitae aliquet. Ipsum dolor sit amet consectetur. Dui id ornare arcu odio. Risus nec feugiat in fermentum posuere urna nec. A arcu cursus vitae congue. Leo vel fringilla est ullamcorper eget nulla. Ullamcorper malesuada proin libero nunc consequat. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare. Dictum varius duis at consectetur lorem donec massa. Etiam erat velit scelerisque in dictum non consectetur a. Amet dictum sit amet justo donec enim. Pulvinar etiam non quam lacus suspendisse faucibus interdum. Orci dapibus ultrices in iaculis. Duis convallis convallis tellus id interdum velit laoreet id donec.',
+        },
+        {
+          type: 'oembed_response',
+          subtype: 'youtube',
+          _id: 'X5FLBDRGOJAU7DQ2YBO5MCXCIA',
+          raw_oembed: {
+            title: 'Cars now run on data. We hacked one to find out what it knows about you.',
+            author_url: 'https://www.youtube.com/user/WashingtonPost',
+            provider_name: 'YouTube',
+            html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/2gR6eBN0fm8?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            width: 480,
+            thumbnail_height: 360,
+            provider_url: 'https://www.youtube.com/',
+            thumbnail_width: 480,
+            height: 270,
+            author_name: 'Washington Post',
+            thumbnail_url: 'https://i.ytimg.com/vi/2gR6eBN0fm8/hqdefault.jpg',
+            version: '1.0',
+            type: 'youtube',
+            _id: 'https://www.youtube.com/watch?v=2gR6eBN0fm8',
+            additional_properties: {
+              comments: [],
+              _id: 1576691055080,
+            },
+          },
+          referent: {
+            id: 'https://www.youtube.com/watch?v=2gR6eBN0fm8',
+            service: 'oembed',
+            type: 'youtube',
+            provider: 'https://www.youtube.com/oembed?url=',
+            referent_properties: {
+              additional_properties: {
+                comments: [],
+                _id: 1576691055080,
+              },
+            },
+          },
+        },
+        {
+          _id: 'QQEQSDZQLZF77KG75HE42Z3RMQ',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1576691055081,
+          },
+          content: 'Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices. Et tortor at risus viverra adipiscing at in. In mollis nunc sed id. Sit amet massa vitae tortor condimentum lacinia quis vel. Facilisis mauris sit amet massa. Nunc sed velit dignissim sodales ut. Amet risus nullam eget felis eget nunc lobortis. Morbi tristique senectus et netus. Nec nam aliquam sem et tortor consequat id. Aliquet porttitor lacus luctus accumsan tortor posuere.',
+        },
+        {
+          _id: 'JODNLNGB5VHTDIUET4VIHJ4ILE',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1576691055082,
+          },
+          content: 'Ut placerat orci nulla pellentesque. Tortor pretium viverra suspendisse potenti. Viverra mauris in aliquam sem fringilla. Aliquam ultrices sagittis orci a scelerisque purus semper. Aliquam faucibus purus in massa tempor nec feugiat nisl pretium. Gravida dictum fusce ut placerat orci nulla pellentesque. Viverra aliquet eget sit amet tellus cras. Enim diam vulputate ut pharetra sit amet aliquam id diam. Ut ornare lectus sit amet est placerat. Molestie ac feugiat sed lectus vestibulum. Sed augue lacus viverra vitae congue. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Euismod nisi porta lorem mollis aliquam ut porttitor leo. Etiam dignissim diam quis enim lobortis scelerisque fermentum. Rhoncus urna neque viverra justo. Urna cursus eget nunc scelerisque viverra mauris in aliquam.',
+        },
+        {
+          _id: 'GBHTWHFCZBAXZIQLQFK5C4SQEI',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1576691055083,
+          },
+          content: 'Non nisi est sit amet facilisis magna etiam tempor orci. Nulla pharetra diam sit amet. Enim nec dui nunc mattis enim ut. Vel facilisis volutpat est velit egestas dui id. Lectus arcu bibendum at varius. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Sem et tortor consequat id. Dui nunc mattis enim ut tellus elementum sagittis vitae et. Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Elit ut aliquam purus sit amet luctus venenatis. Ipsum dolor sit amet consectetur adipiscing elit duis. Pharetra magna ac placerat vestibulum lectus mauris. Semper auctor neque vitae tempus quam pellentesque nec nam. Morbi tempus iaculis urna id volutpat lacus laoreet non.',
+        },
+        {
+          _id: 'TTOW5U4WHNGEXM5BSPZAWQCREM',
+          type: 'text',
+          additional_properties: {
+            comments: [],
+            inline_comments: [],
+            _id: 1576691055084,
+          },
+          content: 'Diam sit amet nisl suscipit adipiscing bibendum est. Faucibus in ornare quam viverra. Sed id semper risus in hendrerit gravida rutrum. Arcu felis bibendum ut tristique et egestas quis. Donec adipiscing tristique risus nec. Tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Congue quisque egestas diam in arcu cursus euismod quis viverra. Mus mauris vitae ultricies leo. Scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada. Elementum integer enim neque volutpat. Sollicitudin ac orci phasellus egestas tellus rutrum tellus. Vitae congue eu consequat ac felis donec et odio pellentesque. Adipiscing commodo elit at imperdiet. Et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut. Quis blandit turpis cursus in hac habitasse platea dictumst. Elementum nibh tellus molestie nunc non blandit massa. Ultricies tristique nulla aliquet enim tortor. Consectetur adipiscing elit ut aliquam purus sit amet. Volutpat maecenas volutpat blandit aliquam etiam erat.',
+        },
+      ],
+      created_date: '2019-12-18T17:06:47.564Z',
+      revision: {
+        revision_id: 'LHMPA3TTCBGEBMRDLTCPWQXHE4',
+        parent_id: 'DPPOYUIWAFGV5O3HBH3F5CXMDM',
+        editions: [
+          'default',
+        ],
+        branch: 'default',
+        user_id: 'CAROTHERSSL@washpost.com',
+        published: true,
+      },
+      last_updated_date: '2019-12-18T17:47:41.619Z',
+      canonical_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+      website_section: {
+        name: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+      },
+      headlines: {
+        basic: 'Article with a YouTube embed in it',
+        mobile: '',
+        native: '',
+        print: '',
+        tablet: '',
+        web: '',
+        meta_title: '',
+      },
+      owner: {
+        sponsored: false,
+        id: 'corecomponents',
+      },
+      content_restrictions: {
+        content_code: 'free',
+      },
+      address: {},
+      workflow: {
+        status_code: 1,
+      },
+      subheadlines: {
+        basic: 'This is to help test that articles with YouTube embeds size responsively on mobile',
+      },
+      description: {
+        basic: 'Test article for YouTube responsiveness',
+      },
+      language: '',
+      source: {
+        system: 'composer',
+        name: 'corecomponents',
+        source_type: 'staff',
+      },
+      label: {},
+      taxonomy: {
+        sites: [
+          {
+            _id: '/entertainment',
+            type: 'site',
+            version: '0.5.8',
+            name: 'Entertainment',
+            description: null,
+            path: '/entertainment',
+            parent_id: '/',
+            additional_properties: {
+              original: {
+                _id: '/entertainment',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Entertainment',
+                parent: '/',
+                _admin: {
+                  alias_ids: [
+                    '/entertainment',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+              },
+            },
+          },
+        ],
+        tags: [],
+        sections: [
+          {
+            _id: '/kultur',
+            _website: 'dagen',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Kultur',
+            path: '/kultur',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/kultur',
+                metadata: {
+                  metadata_title: 'Kultur - Dagen Kultur',
+                  metadata_description: 'Kulturartiklar från Dagen, Sveriges största dagstidning på kristen grund',
+                },
+                _website: 'dagen',
+                name: 'Kultur',
+                parent: {
+                  default: '/',
+                  footer: '/familj',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/familj',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'dagen./kultur',
+          },
+          {
+            _id: '/arts',
+            _website: 'the-gazette',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Arts',
+            description: null,
+            path: '/arts',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/arts',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Arts',
+                _website: 'the-gazette',
+                parent: {
+                  default: '/',
+                  footer: '/',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/arts',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 1001,
+                },
+              },
+            },
+            _website_section_id: 'the-gazette./arts',
+          },
+          {
+            _id: '/news',
+            _website: 'the-globe',
+            type: 'section',
+            version: '0.6.0',
+            name: 'News',
+            description: null,
+            path: '/news',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/news',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'News',
+                _website: 'the-globe',
+                parent: {
+                  default: '/',
+                  footer: '/sports',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/sports',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/news',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-globe./news',
+          },
+          {
+            _id: '/politics',
+            _website: 'the-mercury',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Politics',
+            description: null,
+            path: '/politics',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/politics',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Politics',
+                _website: 'the-mercury',
+                parent: {
+                  default: '/',
+                  footer: '/sports',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/sports',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/politics',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-mercury./politics',
+          },
+          {
+            _id: '/entertainment',
+            _website: 'the-planet',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Entertainment',
+            description: null,
+            path: '/entertainment',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/entertainment',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Entertainment',
+                _website: 'the-planet',
+                parent: {
+                  default: '/',
+                  footer: '/news',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/news',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/entertainment',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-planet./entertainment',
+          },
+          {
+            _id: '/sports',
+            _website: 'the-prophet',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Sports',
+            description: null,
+            path: '/sports',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/sports',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Sports',
+                _website: 'the-prophet',
+                parent: {
+                  default: '/',
+                  footer: '/news',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/news',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/sports',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-prophet./sports',
+          },
+          {
+            _id: '/entertainment',
+            _website: 'the-sun',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Entertainment',
+            description: null,
+            path: '/entertainment',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/entertainment',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Entertainment',
+                _website: 'the-sun',
+                parent: {
+                  default: '/',
+                  footer: null,
+                },
+                ancestors: {
+                  default: [],
+                  footer: [],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/entertainment',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {},
+              },
+            },
+            _website_section_id: 'the-sun./entertainment',
+          },
+        ],
+        primary_site: {
+          _id: '/entertainment',
+          type: 'site',
+          version: '0.5.8',
+          name: 'Entertainment',
+          description: null,
+          path: '/entertainment',
+          parent_id: '/',
+          additional_properties: {
+            original: {
+              _id: '/entertainment',
+              site: {
+                site_tagline: null,
+                pagebuilder_path_for_native_apps: null,
+                site_description: null,
+                site_url: null,
+                site_keywords: null,
+                site_title: null,
+                site_about: null,
+              },
+              social: {
+                rss: null,
+                twitter: null,
+                instagram: null,
+                facebook: null,
+              },
+              navigation: {
+                nav_title: null,
+              },
+              site_topper: {
+                site_logo_image: null,
+              },
+              name: 'Entertainment',
+              parent: '/',
+              _admin: {
+                alias_ids: [
+                  '/entertainment',
+                ],
+              },
+              inactive: false,
+              node_type: 'section',
+            },
+          },
+        },
+        primary_section: {
+          _id: '/arts',
+          _website: 'the-gazette',
+          type: 'section',
+          version: '0.6.0',
+          name: 'Arts',
+          description: null,
+          path: '/arts',
+          parent_id: '/',
+          parent: {
+            default: '/',
+          },
+          additional_properties: {
+            original: {
+              _id: '/arts',
+              site: {
+                site_tagline: null,
+                pagebuilder_path_for_native_apps: null,
+                site_description: null,
+                site_url: null,
+                site_keywords: null,
+                site_title: null,
+                site_about: null,
+              },
+              social: {
+                rss: null,
+                twitter: null,
+                instagram: null,
+                facebook: null,
+              },
+              navigation: {
+                nav_title: null,
+              },
+              site_topper: {
+                site_logo_image: null,
+              },
+              name: 'Arts',
+              _website: 'the-gazette',
+              parent: {
+                default: '/',
+                footer: '/',
+              },
+              ancestors: {
+                default: [],
+                footer: [
+                  '/',
+                ],
+              },
+              _admin: {
+                alias_ids: [
+                  '/arts',
+                ],
+              },
+              inactive: false,
+              node_type: 'section',
+              order: {
+                footer: 1001,
+              },
+            },
+          },
+        },
+      },
+      related_content: {
+        basic: [],
+        redirect: [],
+      },
+      promo_items: {
+        basic: {
+          _id: 'YJH6DMK6UFCZFABUOH3NQ4IHRA',
+          additional_properties: {
+            fullSizeResizeUrl: '/photo/resize/Ojb4x1TYVodUSpp-xAx_U5sVDmI=/arc-anglerfish-arc2-prod-corecomponents/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+            galleries: [],
+            ingestionMethod: 'manual',
+            keywords: [
+              '',
+              'city',
+              'new york',
+              'streets',
+            ],
+            mime_type: 'image/jpeg',
+            originalName: 'Death_to_Stock_Photography_NYC_Skyline_3.jpg',
+            originalUrl: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+            owner: 'sara.carothers@washpost.com',
+            proxyUrl: '/photo/resize/Ojb4x1TYVodUSpp-xAx_U5sVDmI=/arc-anglerfish-arc2-prod-corecomponents/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+            published: true,
+            resizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/Ojb4x1TYVodUSpp-xAx_U5sVDmI=/arc-anglerfish-arc2-prod-corecomponents/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+            restricted: false,
+            takenOn: '2015-08-25T17:59:37Z',
+            thumbnailResizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/Oxkf29KA9nRqwrK6anfw5vloYxw=/300x0/arc-anglerfish-arc2-prod-corecomponents/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+            version: 2,
+          },
+          address: {},
+          alt_text: 'An aerial view of the Brooklyn Bridge',
+          caption: 'A trip above the New York City skyline in a helicopter.',
+          created_date: '2019-07-09T23:06:05Z',
+          credits: {
+            affiliation: [
+              {
+                name: 'Death to Stock Photo',
+                type: 'author',
+              },
+            ],
+          },
+          distributor: {
+            mode: 'reference',
+            reference_id: '508c6d12-f2bb-47db-a836-b2b5de225c43',
+          },
+          height: 3808,
+          image_type: 'photograph',
+          last_updated_date: '2019-07-09T23:08:44Z',
+          licensable: false,
+          owner: {
+            id: 'corecomponents',
+            sponsored: false,
+          },
+          source: {
+            name: 'Death to Stock Photo',
+            source_type: 'stock',
+            edit_url: 'https://corecomponents.arcpublishing.com/photo/YJH6DMK6UFCZFABUOH3NQ4IHRA',
+            system: 'Anglerfish',
+          },
+          subtitle: 'Skyline',
+          taxonomy: {
+            associated_tasks: [],
+          },
+          type: 'image',
+          url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
+          version: '0.10.3',
+          width: 5712,
+        },
+      },
+      distributor: {
+        name: 'corecomponents',
+        category: 'staff',
+        subcategory: '',
+      },
+      canonical_website: 'the-gazette',
+      planning: {
+        internal_note: '',
+        story_length: {
+          word_count_actual: 598,
+          line_count_actual: 21,
+          inch_count_actual: 3,
+        },
+      },
+      display_date: '2019-12-18T17:09:22.308Z',
+      credits: {
+        by: [
+          {
+            _id: 'saracarothers',
+            type: 'author',
+            version: '0.5.8',
+            name: 'Sara Carothers',
+            image: {
+              url: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              version: '0.5.8',
+            },
+            description: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+            url: '/author/sara-carothers/',
+            slug: 'sara-carothers',
+            social_links: [
+              {
+                site: 'email',
+                url: '',
+              },
+              {
+                site: 'twitter',
+                url: 'https://twitter.com/sLcarothers',
+              },
+              {
+                site: 'instagram',
+                url: 'https://www.instagram.com/scarothers/',
+              },
+            ],
+            socialLinks: [
+              {
+                site: 'email',
+                url: '',
+                deprecated: true,
+                deprecation_msg: 'Please use social_links.',
+              },
+              {
+                site: 'twitter',
+                url: 'https://twitter.com/sLcarothers',
+                deprecated: true,
+                deprecation_msg: 'Please use social_links.',
+              },
+              {
+                site: 'instagram',
+                url: 'https://www.instagram.com/scarothers/',
+                deprecated: true,
+                deprecation_msg: 'Please use social_links.',
+              },
+            ],
+            additional_properties: {
+              original: {
+                _id: 'saracarothers',
+                firstName: 'Sara',
+                lastName: 'Carothers',
+                secondLastName: '',
+                byline: 'Sara Lynn Carothers',
+                role: 'Senior Product Manager',
+                image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+                email: '',
+                affiliations: '',
+                education: [],
+                awards: [],
+                books: [],
+                podcasts: [],
+                twitter: 'https://twitter.com/sLcarothers',
+                bio_page: '/author/sara-carothers/',
+                bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                longBio: 'Sara Carothers is a senior product manager for Arc Publishing. She works on Arc Themes and PageBuilder Fusion. This is a long bio. \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n',
+                slug: 'sara-carothers',
+                instagram: 'https://www.instagram.com/scarothers/',
+                native_app_rendering: false,
+                fuzzy_match: false,
+                contributor: false,
+                status: true,
+                last_updated_date: '2019-11-22T23:15:45.348Z',
+                type: 'author',
+              },
+            },
+          },
+        ],
+      },
+      subtype: 'right-rail-template',
+      first_publish_date: '2019-12-18T17:09:23.034Z',
+      websites: {
+        dagen: {
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-gazette': {
+          website_section: {
+            _id: '/arts',
+            _website: 'the-gazette',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Arts',
+            description: null,
+            path: '/arts',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/arts',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Arts',
+                _website: 'the-gazette',
+                parent: {
+                  default: '/',
+                  footer: '/',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/arts',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 1001,
+                },
+              },
+            },
+            _website_section_id: 'the-gazette./arts',
+          },
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-globe': {
+          website_section: {
+            _id: '/news',
+            _website: 'the-globe',
+            type: 'section',
+            version: '0.6.0',
+            name: 'News',
+            description: null,
+            path: '/news',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/news',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'News',
+                _website: 'the-globe',
+                parent: {
+                  default: '/',
+                  footer: '/sports',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/sports',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/news',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-globe./news',
+          },
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-mercury': {
+          website_section: {
+            _id: '/politics',
+            _website: 'the-mercury',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Politics',
+            description: null,
+            path: '/politics',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/politics',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Politics',
+                _website: 'the-mercury',
+                parent: {
+                  default: '/',
+                  footer: '/sports',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/sports',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/politics',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-mercury./politics',
+          },
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-planet': {
+          website_section: {
+            _id: '/entertainment',
+            _website: 'the-planet',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Entertainment',
+            description: null,
+            path: '/entertainment',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/entertainment',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Entertainment',
+                _website: 'the-planet',
+                parent: {
+                  default: '/',
+                  footer: '/news',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/news',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/entertainment',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-planet./entertainment',
+          },
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-prophet': {
+          website_section: {
+            _id: '/sports',
+            _website: 'the-prophet',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Sports',
+            description: null,
+            path: '/sports',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/sports',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Sports',
+                _website: 'the-prophet',
+                parent: {
+                  default: '/',
+                  footer: '/news',
+                },
+                ancestors: {
+                  default: [],
+                  footer: [
+                    '/',
+                    '/news',
+                  ],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/sports',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {
+                  footer: 2001,
+                },
+              },
+            },
+            _website_section_id: 'the-prophet./sports',
+          },
+          website_url: '/arts/2019/12/18/article-with-a-youtube-embed-in-it/',
+        },
+        'the-sun': {
+          website_section: {
+            _id: '/entertainment',
+            _website: 'the-sun',
+            type: 'section',
+            version: '0.6.0',
+            name: 'Entertainment',
+            description: null,
+            path: '/entertainment',
+            parent_id: '/',
+            parent: {
+              default: '/',
+            },
+            additional_properties: {
+              original: {
+                _id: '/entertainment',
+                site: {
+                  site_tagline: null,
+                  pagebuilder_path_for_native_apps: null,
+                  site_description: null,
+                  site_url: null,
+                  site_keywords: null,
+                  site_title: null,
+                  site_about: null,
+                },
+                social: {
+                  rss: null,
+                  twitter: null,
+                  instagram: null,
+                  facebook: null,
+                },
+                navigation: {
+                  nav_title: null,
+                },
+                site_topper: {
+                  site_logo_image: null,
+                },
+                name: 'Entertainment',
+                _website: 'the-sun',
+                parent: {
+                  default: '/',
+                  footer: null,
+                },
+                ancestors: {
+                  default: [],
+                  footer: [],
+                },
+                _admin: {
+                  alias_ids: [
+                    '/entertainment',
+                  ],
+                },
+                inactive: false,
+                node_type: 'section',
+                order: {},
+              },
+            },
+            _website_section_id: 'the-sun./entertainment',
+          },
+          website_url: '/this/is/the/correct/url',
+        },
+      },
+      additional_properties: {
+        clipboard: {},
+        has_published_copy: true,
+        is_published: true,
+        publish_date: '2019-12-18T17:09:23.034Z',
+      },
+      publish_date: '2019-12-18T17:47:41.657Z',
+      publishing: {
+        scheduled_operations: {
+          publish_edition: [],
+          unpublish_edition: [],
+        },
+      },
+      _id: 'SQXVCFU7PZGXLJNNC2WQ3VZRBY',
+      website: 'the-sun',
+      website_url: '/must/not/use/this/url',
+    },
+  ],
+  additional_properties: {
+    took: 4,
+    timed_out: false,
+  },
+  count: 30,
+  next: 1,
+  _id: 'e3de4e3edcc50753f0879e4aba393e5b8857d9b8c9f58ccda5b3c42488d66286',
+};
+
 export default {
   type: 'results',
   version: '0.6.0',

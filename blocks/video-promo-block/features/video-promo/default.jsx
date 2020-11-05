@@ -9,6 +9,8 @@ import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
+const RATIO = 0.5625;
+
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -60,8 +62,9 @@ const VideoPromo = ({ customFields }) => {
             </TitleText>
             )}
           <Video
-            uuid={uuid || content._id}
+            uuid={content._id}
             autoplay={autoplay}
+            aspectRatio={RATIO}
             org={videoOrg}
             env={videoEnv}
           />

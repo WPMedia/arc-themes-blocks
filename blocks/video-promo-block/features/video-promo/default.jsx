@@ -41,7 +41,7 @@ const VideoPromo = ({ customFields }) => {
     description,
   } = customFields;
 
-  const { globalContent = {} } = useAppContext();
+  const { globalContent = {} } = useFusionContext();
 
   const content = inheritGlobalContent ? globalContent : useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,

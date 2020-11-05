@@ -50,6 +50,7 @@ const StyledWarning = styled.div`
   color: #fff;
   display: flex;
   align-self: flex-start;
+  padding: 6px;
 `;
 
 /* Main Component */

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { videoOrg, videoEnv } from 'fusion:environment';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
 const RATIO = 0.5625;
@@ -31,22 +31,39 @@ const VideoPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const {
     autoplay = false,
-    title,
-    description,
     live = false,
+    inheritGlobalContent,
   } = customFields;
 
-  const content = useContent({
+  // can be overwrite by globalContent
+  let {
+    title,
+    description,
+  } = customFields;
+
+  const { globalContent = {} } = useAppContext();
+
+  const content = inheritGlobalContent ? globalContent : useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   });
+  let videoId = content?._id;
+
+  // use globalcontent
+  if (inheritGlobalContent && globalContent) {
+    if (globalContent?.promo_items?.lead_art?.type === 'video') {
+      const videoProps = globalContent?.promo_items?.lead_art;
+      title = videoProps?.headline?.basic;
+      description = videoProps?.description?.basic;
+      videoId = videoProps?._id;
+    }
+  }
 
   if (!content) {
     return null;
   }
-
   return (
     <div className="container-fluid video-promo">
       <div className="row">
@@ -62,7 +79,7 @@ const VideoPromo = ({ customFields }) => {
             </TitleText>
             )}
           <Video
-            uuid={content._id}
+            uuid={videoId}
             autoplay={autoplay}
             aspectRatio={RATIO}
             org={videoOrg}

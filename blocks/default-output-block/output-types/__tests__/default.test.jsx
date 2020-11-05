@@ -298,3 +298,41 @@ describe('chartbeat render conditions', () => {
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(1);
   });
 });
+
+describe('comscore render conditions', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must not render comscore code when property is missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="comscore"]').length).toBe(0);
+    expect(wrapper.find('noscript[data-integration="comscore"]').length).toBe(0);
+  });
+
+  it('must render comscore code when comscoreID site property is present', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      comscoreID: 88776655,
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="comscore"]').length).toBe(1);
+    expect(wrapper.find('noscript[data-integration="comscore"]').length).toBe(1);
+  });
+});

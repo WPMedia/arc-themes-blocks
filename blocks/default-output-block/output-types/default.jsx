@@ -38,6 +38,36 @@ const chartBeatCode = (accountId, domain) => {
   `;
 };
 
+const comscoreScript = (accountId) => {
+  if (!accountId) {
+    return null;
+  }
+  const scriptCode = `
+    var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "${accountId}" });
+    (function() {
+      var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+      s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+      el.parentNode.insertBefore(s, el);
+    })();
+  `;
+
+  return (
+    <script data-integration="comscore" dangerouslySetInnerHTML={{ __html: scriptCode }} />
+  );
+};
+
+const comscoreNoScript = (accountId) => {
+  if (!accountId) {
+    return null;
+  }
+  return (
+    <noscript data-integration="comscore">
+      <img alt="comscore" src={`http://b.scorecardresearch.com/p?c1=2&c2=${accountId}&cv=2.0&cj=1`} />
+    </noscript>
+  );
+};
+
 const SampleOutputType = ({
   children,
   contextPath,
@@ -62,6 +92,7 @@ const SampleOutputType = ({
     facebookAdmins,
     chartBeatAccountId,
     chartBeatDomain,
+    comscoreID,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -159,8 +190,10 @@ const SampleOutputType = ({
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
         {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
+        {comscoreScript(comscoreID)}
       </head>
       <body>
+        {comscoreNoScript(comscoreID)}
         {gtmID
           ? (
             <noscript>

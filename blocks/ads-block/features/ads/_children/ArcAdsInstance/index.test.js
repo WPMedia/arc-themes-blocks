@@ -93,7 +93,7 @@ describe('ArcAdsInstance', () => {
     it('registers ad', () => {
       const arcAds = ArcAdsInstance.getInstance(siteProperties);
       jest.spyOn(arcAds, 'registerAd');
-      arcAds.registerAd({ adRegisterProps });
+      arcAds.registerAd(adRegisterProps);
       expect(arcAds.registerAd).toHaveBeenCalledTimes(1);
     });
   });

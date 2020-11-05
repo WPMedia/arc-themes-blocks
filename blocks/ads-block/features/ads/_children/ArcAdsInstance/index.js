@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 // istanbul ignore file
 import { ArcAds } from 'arcads';
-import get from 'lodash.get';
 
 export const logEvent = (evt, debug = false) => {
   if (debug) {
@@ -34,7 +33,7 @@ class ArcAdsInstance {
 
   initArcAds({ publisherIds, debug = false }) {
     if (!this.arcAds) {
-      const id = get(publisherIds, 'dfp_publisher_id');
+      const { dfp_publisher_id: id } = publisherIds;
       const arcAdsConfig = { dfp: { id } };
       this.arcAds = new ArcAds(arcAdsConfig, (evt) => {
         logEvent(evt, debug);

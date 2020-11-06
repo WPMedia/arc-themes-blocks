@@ -74,7 +74,7 @@ describe('the video promo feature', () => {
   it('should NOT show live label while live customfield is emtpy', () => {
     config.live = '';
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('span').text()).toBe('');
+    expect(wrapper.find('span').length).toEqual(0);
   });
 
   it('should have show title, description, and video with autoplay', () => {

@@ -20,7 +20,7 @@ PageBuilder users can configure:
 | **ratio** | no | number | the aspect ratio of the video used by the powa player  |
 | **title** | no | string | the title of the component |
 | **description** | no | string | the description of the component  |
-| **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
+| **live** | no | string | a `LIVE VIDEO` label will show up on top of the component if value is not empty |
 
 ## ANS Schema
 ANS of the video type

@@ -56,11 +56,11 @@ describe('the video promo feature', () => {
   });
 
   it('should have show title, description, live label, and video with default configs', () => {
-    config.live = true;
+    config.live = 'testing live video label';
     const wrapper = mount(<VideoPromo customFields={config} />);
     expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
-    expect(wrapper.find('span').text()).toBe('LIVE VIDEO');
+    expect(wrapper.find('span').text()).toBe('testing live video label');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
@@ -69,6 +69,12 @@ describe('the video promo feature', () => {
       org: 'org',
       env: 'env',
     });
+  });
+
+  it('should NOT show live label while live customfield is emtpy', () => {
+    config.live = '';
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.find('span').text()).toBe('');
   });
 
   it('should have show title, description, and video with autoplay', () => {

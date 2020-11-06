@@ -33,7 +33,7 @@ const VideoPromo = ({ customFields }) => {
     ratio = 0.5625,
     title,
     description,
-    live = false,
+    live,
   } = customFields;
 
   const content = uuid ? null : useContent({
@@ -51,7 +51,7 @@ const VideoPromo = ({ customFields }) => {
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          {live && <LiveLabel>LIVE VIDEO</LiveLabel>}
+          {live && <LiveLabel>{live}</LiveLabel>}
           {title
             && (
             <TitleText
@@ -122,11 +122,10 @@ VideoPromo.propTypes = {
       label: 'Description',
       group: 'Content',
     }),
-    live: PropTypes.bool.tag(
+    live: PropTypes.string.tag(
       {
         label: 'Live',
-        defaultValue: false,
-        group: 'Content',
+        group: 'Display settings',
       },
     ),
   }),

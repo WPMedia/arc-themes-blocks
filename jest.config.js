@@ -19,7 +19,7 @@ module.exports = {
     },
     // if an output type breaks, the page doesn't load
     // this should be higher, really
-    'default-output-block/output-types': {
+    'blocks/default-output-block/output-types': {
       statements: 86,
       branches: 80,
       functions: 100,

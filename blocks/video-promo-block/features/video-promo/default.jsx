@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { videoOrg, videoEnv } from 'fusion:environment';
-import { useFusionContext, useAppContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
 const RATIO = 0.5625;

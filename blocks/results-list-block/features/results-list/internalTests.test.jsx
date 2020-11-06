@@ -9,6 +9,7 @@ jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'http://test/resources/fallback.jpg',
+  resizerURL: 'https://resizer.me',
 }))));
 
 describe('getFallbackImageURL', () => {

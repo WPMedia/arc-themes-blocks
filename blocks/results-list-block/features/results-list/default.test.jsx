@@ -8,6 +8,7 @@ const mockReturnData = mockData;
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
+  resizerURL: 'https://resizer.me',
 }))));
 
 jest.mock('fusion:intl', () => ({

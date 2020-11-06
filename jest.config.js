@@ -1,4 +1,8 @@
 module.exports = {
+  transformIgnorePatterns: [
+    '//node_modules/(?!@wpmedia/.*-block).*/',
+    '//node_modules/(?!(@wpmedia)).*/',
+  ],
   projects: [
     '<rootDir>/blocks/*/jest.config.js',
     // '<rootDir>/components/*/jest.config.js',

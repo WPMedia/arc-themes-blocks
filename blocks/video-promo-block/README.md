@@ -16,8 +16,8 @@ PageBuilder users can configure:
 |---|---|---|---|
 | **itemContentConfig** | yes (no if inheritGlobalContent is checked) | contentConfig | the content source config to fetch a video (ex use `content-api` and specify the `website_url` of a video) |
 | **autoplay** | no | boolean | if set to true, the video will auto play and be muted by default |
-| **title** | no | string | the title of the component |
-| **description** | no | string | the description of the component  |
+| **title** | no | string | the title of the component, will be overwritten if inheritGlobalContent is checked  |
+| **description** | no | string | the description of the component, will be overwritten if inheritGlobalContent is checked  |
 | **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
 | **inheritGlobalContent** | no | Boolean | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
 

@@ -32,7 +32,7 @@ const VideoPromo = ({ customFields }) => {
   const {
     autoplay = false,
     live = false,
-    inheritGlobalContent,
+    inheritGlobalContent = true,
   } = customFields;
 
   // can be overwrite by globalContent
@@ -110,6 +110,7 @@ VideoPromo.propTypes = {
     inheritGlobalContent: PropTypes.bool.tag({
       label: 'Inherit global content',
       group: 'Configure Content',
+      defaultValue: true,
     }),
     autoplay: PropTypes.bool.tag(
       {

@@ -8,7 +8,7 @@ PageBuilder users can configure:
 - Video
 - Title
 - Description
-- LIVE toggle
+- LIVE
 - Autoplay
 
 ## Props

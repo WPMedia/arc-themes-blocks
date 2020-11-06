@@ -8,8 +8,17 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {
-      branches: 85,
-      functions: 85,
+      statements: 88,
+      branches: 88,
+      functions: 87,
+      lines: 88,
+    },
+    // if an output type breaks, the page doesn't load
+    // this should be higher, really
+    'default-output-block': {
+      statements: 86,
+      branches: 80,
+      functions: 100,
       lines: 85,
     },
   },
@@ -18,5 +27,6 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/images/*.svg',
+    '!**/mock*.js',
   ],
 };

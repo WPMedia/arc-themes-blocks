@@ -12,14 +12,14 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {
-      statements: 88,
-      branches: 88,
-      functions: 87,
-      lines: 88,
+      statements: 85,
+      branches: 85,
+      functions: 85,
+      lines: 85,
     },
     // if an output type breaks, the page doesn't load
     // this should be higher, really
-    'default-output-block': {
+    'default-output-block/output-types': {
       statements: 86,
       branches: 80,
       functions: 100,

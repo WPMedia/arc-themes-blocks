@@ -28,6 +28,9 @@ module.exports = {
   },
   collectCoverageFrom: [
     '**/(features|chains|layouts|sources|output-types)/**/*.{js,jsx}',
+    '**/extractImageFromStory.js',
+    '**/imageRatioCustomField.js',
+    '**/ratioFor.js',
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/images/*.svg',

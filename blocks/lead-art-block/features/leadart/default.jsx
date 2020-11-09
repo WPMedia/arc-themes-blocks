@@ -46,6 +46,15 @@ class LeadArt extends Component {
     };
 
     this.imgRef = React.createRef();
+    this.setIsOpenToFalse = this.setIsOpenToFalse.bind(this);
+  }
+
+  setIsOpenToFalse() {
+    this.setState({ isOpen: false });
+  }
+
+  setIsOpenToTrue() {
+    this.setState({ isOpen: true });
   }
 
   lightboxImgHandler() {
@@ -83,8 +92,8 @@ class LeadArt extends Component {
               {isOpen && (
                 <Lightbox
                   mainSrc={mainContent}
-                  onCloseRequest={() => this.setState({ isOpen: false })}
-                  showImageCaption="false"
+                  onCloseRequest={this.setIsOpenToFalse}
+                  showImageCaption={false}
                   enableZoom={enableZoom}
                 />
               )}
@@ -102,7 +111,7 @@ class LeadArt extends Component {
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer embedMarkup={lead_art.embed_html} />;
+        return <VideoPlayer embedMarkup={lead_art.embed_html} enableAutoplay />;
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
@@ -110,7 +119,7 @@ class LeadArt extends Component {
               {isOpen && (
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
-                  onCloseRequest={() => this.setState({ isOpen: false })}
+                  onCloseRequest={this.setIsOpenToFalse}
                   showImageCaption={showCredit}
                   imageCaption={lead_art.caption}
                   enableZoom={enableZoom}
@@ -136,7 +145,7 @@ class LeadArt extends Component {
             <button
               type="button"
               className="btn-full-screen"
-              onClick={() => this.setState({ isOpen: true })}
+              onClick={this.setIsOpenToTrue}
             >
               <FullscreenIcon width="100%" height="100%" fill="#6B6B6B" />
               {buttonLabel}
@@ -203,6 +212,11 @@ LeadArt.propTypes = {
     enableZoom: PropTypes.bool,
     showCredit: PropTypes.bool,
     inheritGlobalContent: PropTypes.bool,
+    enableAutoplay: PropTypes.bool.tag({
+      label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video',
+    }),
   }),
 };
 

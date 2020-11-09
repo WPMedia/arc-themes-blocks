@@ -1,7 +1,9 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  resizerURL: 'https://resizer.me',
+}))));
 
 describe('article-body chain', () => {
   describe('when it is initialized', () => {
@@ -1238,6 +1240,10 @@ describe('article-body chain', () => {
 
   describe('Render image correctly', () => {
     it('should render image with figcaption and author', () => {
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }))));
+
       jest.mock('fusion:context', () => ({
         useAppContext: jest.fn(() => ({
           globalContent: {
@@ -1335,6 +1341,7 @@ describe('article-body chain', () => {
                 url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
                 version: '0.9.0',
                 width: 5616,
+                resized_params: { '1440x0': '' },
               },
             ],
           },

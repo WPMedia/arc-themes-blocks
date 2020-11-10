@@ -8,6 +8,8 @@ on:
 jobs:
   ensure_minimum_test_coverage_linting:
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
     steps:
       - name: Checkout repo
@@ -37,3 +39,9 @@ jobs:
 
       - name: Check linting
         run: npm run lint
+
+      - name: Check failure status
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()

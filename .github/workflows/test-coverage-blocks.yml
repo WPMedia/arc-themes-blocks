@@ -32,7 +32,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      # Remove nested modules to prevent multiple react versions
       - name: Run tests with coverage
         run: npm run test:coverage
 

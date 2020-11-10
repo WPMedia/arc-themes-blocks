@@ -43,7 +43,6 @@ describe('the default output type', () => {
   it('should render', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn()} {...mockFuntions} />,
     );
     expect(wrapper).toBeDefined();
@@ -79,7 +78,6 @@ describe('renders a page', () => {
   it('should have a head', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('head').length).toBe(1);
@@ -88,7 +86,6 @@ describe('renders a page', () => {
   it('should have a body', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('body').length).toBe(1);
@@ -98,7 +95,6 @@ describe('renders a page', () => {
   it('should have script tags', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').length).toBe(3);
@@ -107,7 +103,6 @@ describe('renders a page', () => {
   it('should have link tags', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('link').length).toBe(2);
@@ -116,7 +111,6 @@ describe('renders a page', () => {
   it('should have a MedataData component', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('MetaData').length).toBe(1);
@@ -125,7 +119,6 @@ describe('renders a page', () => {
   it('MedataData should receive twitterUsername', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('MetaData').prop('twitterUsername')).toEqual('thesun');
@@ -161,7 +154,6 @@ describe('root html layout', () => {
   it('html must have only head and body tags', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     const html = wrapper.find('html');
@@ -204,7 +196,6 @@ describe('head content', () => {
   it('must render Google Tag Manager script', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').at(0).html()).toMatch(/GTM-12345ID/);
@@ -214,7 +205,6 @@ describe('head content', () => {
   it('must render Google Analytics script', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').at(1).html()).toMatch(/UA-6789ID/);
@@ -223,7 +213,6 @@ describe('head content', () => {
   it('must render custom script', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').at(5).html()).toMatch(/hello world/);
@@ -232,7 +221,6 @@ describe('head content', () => {
   it('must render custom font url', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('link').at(2).html()).toMatch(/fonts.googleapis/);
@@ -241,7 +229,6 @@ describe('head content', () => {
   it('must not render nested scripts', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     const scripts = wrapper.find('script');
@@ -273,7 +260,6 @@ describe('head content without properties', () => {
   it('must not render chartbeat code', () => {
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
@@ -302,7 +288,6 @@ describe('chartbeat render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
@@ -315,7 +300,6 @@ describe('chartbeat render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
@@ -328,7 +312,6 @@ describe('chartbeat render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
@@ -342,7 +325,6 @@ describe('chartbeat render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(0);
@@ -356,7 +338,6 @@ describe('chartbeat render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="chartbeat"]').length).toBe(1);
@@ -385,7 +366,6 @@ describe('comscore render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="comscore"]').length).toBe(0);
@@ -399,7 +379,6 @@ describe('comscore render conditions', () => {
 
     const { default: DefaultOutputType } = require('../default');
     const wrapper = shallow(
-      // eslint-disable-next-line react/jsx-props-no-spreading
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('script[data-integration="comscore"]').length).toBe(1);

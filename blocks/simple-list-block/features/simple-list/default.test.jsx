@@ -125,7 +125,7 @@ describe('Simple list', () => {
     }));
     const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
-    expect(wrapper.find('h2.list-title').text()).toBe('');
+    expect(wrapper.find('h2.list-title').length).toBe(0);
   });
   it('should fetch an array of data when content service is provided', () => {
     const { default: SimpleList } = require('./default.jsx');

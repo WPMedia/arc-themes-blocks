@@ -28,13 +28,13 @@ jobs:
 
       - name: Install dependencies if lockfile changed
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       # Remove nested modules to prevent multiple react versions
       - name: Run tests with coverage
-        run: npx lerna clean -y && npm run test:coverage
+        run: npm run test:coverage
 
       - name: Check linting
         run: npm run lint

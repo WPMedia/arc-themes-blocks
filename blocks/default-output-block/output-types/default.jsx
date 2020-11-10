@@ -3,15 +3,20 @@ import { playerRoot, videoOrg } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
-import uniqid from './uniqid';
 import './default.scss';
 
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
 const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
-const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((scriptString) => (
-  <script key={uniqid('script')} dangerouslySetInnerHTML={{ __html: scriptString }} />
-));
+const injectStringScriptArray = (scriptStringArray) => (
+  scriptStringArray.map((scriptString, index) => (
+    // no good way of getting keys for this
+    // index used to remove warnings
+    // this key will not affect performance or issues with changing order
+    /* eslint-disable-next-line react/no-array-index-key */
+    <script key={index} dangerouslySetInnerHTML={{ __html: scriptString }} />
+  ))
+);
 
 const chartBeatCode = (accountId, domain) => {
   if (!accountId || !domain) {

@@ -144,12 +144,6 @@
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
-  "jest": {
-    "transformIgnorePatterns": [
-      "//node_modules/(?!@wpmedia/.*-block).*/",
-      "//node_modules/(?!(@wpmedia)).*/"
-    ]
-  },
   "browserslist": [
     "defaults"
   ]

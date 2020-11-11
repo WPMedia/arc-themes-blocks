@@ -52,6 +52,7 @@ describe('the video promo feature', () => {
       aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
+      playthrough: false,
     });
   });
 
@@ -68,6 +69,7 @@ describe('the video promo feature', () => {
       aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
+      playthrough: false,
     });
   });
 
@@ -83,6 +85,7 @@ describe('the video promo feature', () => {
       aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
+      playthrough: false,
     });
   });
 
@@ -98,6 +101,7 @@ describe('the video promo feature', () => {
       aspectRatio: 0.75,
       org: 'org',
       env: 'env',
+      playthrough: false,
     });
   });
 
@@ -113,6 +117,23 @@ describe('the video promo feature', () => {
       aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
+      playthrough: false,
+    });
+  });
+
+  it('should playthrough video', () => {
+    config.playthrough = true;
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.find('h2').text()).toBe('Title');
+    expect(wrapper.find('p').text()).toBe('Description');
+    const video = wrapper.find('#video').at(0);
+    expect(video.prop('data-props')).toEqual({
+      uuid: 'video-uuid',
+      autoplay: false,
+      aspectRatio: 0.5625,
+      org: 'org',
+      env: 'env',
+      playthrough: true,
     });
   });
 });

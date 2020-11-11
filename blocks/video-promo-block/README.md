@@ -10,6 +10,7 @@ PageBuilder users can configure:
 - Description
 - LIVE
 - Autoplay
+- Playthrough
 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
@@ -21,6 +22,7 @@ PageBuilder users can configure:
 | **title** | no | string | the title of the component |
 | **description** | no | string | the description of the component  |
 | **live** | no | string | a `LIVE VIDEO` label will show up on top of the component if value is not empty |
+| **playthrough** | no | boolean | enable/disable playthrough for videos , default set to false  |
 
 ## ANS Schema
 ANS of the video type

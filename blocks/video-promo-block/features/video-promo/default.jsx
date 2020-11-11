@@ -34,6 +34,7 @@ const VideoPromo = ({ customFields }) => {
     title,
     description,
     live,
+    playthrough = false,
   } = customFields;
 
   const content = uuid ? null : useContent({
@@ -67,6 +68,7 @@ const VideoPromo = ({ customFields }) => {
             aspectRatio={ratio}
             org={videoOrg}
             env={videoEnv}
+            playthrough={playthrough}
           />
           {description
             && (
@@ -126,6 +128,13 @@ VideoPromo.propTypes = {
       {
         label: 'Live',
         group: 'Display settings',
+      },
+    ),
+    playthrough: PropTypes.bool.tag(
+      {
+        label: 'Playthrough',
+        defaultValue: false,
+        group: 'Video settings',
       },
     ),
   }),

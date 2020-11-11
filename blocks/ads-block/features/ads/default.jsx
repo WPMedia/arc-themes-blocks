@@ -58,8 +58,10 @@ const ArcAd = (props) => {
   }, [registerAd, isAdmin]);
 
   const {
-    id, adClass, adType, dimensions, slotName, display,
+    id, adClass, adType, dimensions, slotName,
   } = config;
+
+  const display = adType === 'right_rail_cube' ? 'desktop' : 'all';
 
   return (
     <div
@@ -101,19 +103,6 @@ ArcAd.propTypes = {
       labels: adTypeLabels,
       defaultValue: '1x1px',
       required: true,
-      hidden: false,
-    }),
-    display: PropTypes.oneOf([
-      'all', 'mobile', 'desktop',
-    ]).tag({
-      name: 'Display',
-      labels: {
-        all: 'All',
-        mobile: 'Mobile',
-        desktop: 'Desktop',
-      },
-      defaultValue: 'all',
-      required: false,
       hidden: false,
     }),
     displayAdLabel: PropTypes.boolean.tag({

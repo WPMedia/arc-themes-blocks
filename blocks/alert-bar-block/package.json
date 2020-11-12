@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "cookie": "^0.4.1",
-    "@wpmedia/engine-theme-sdk": "stable"
+    "@wpmedia/engine-theme-sdk": "beta"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

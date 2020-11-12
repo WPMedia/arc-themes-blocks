@@ -150,7 +150,7 @@ export const getResizerParams = (
   know that this url has been compressed.
   */
   Object.keys(output).forEach((key) => {
-    if (output[key] && compressedParams) {
+    if (output[key]) {
       output[key] = output[key].replace(/\//, '');
 
       if (compressedParams) {

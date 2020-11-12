@@ -33,7 +33,6 @@ const VideoPromo = ({ customFields }) => {
     ratio = 0.5625,
     title,
     description,
-    live,
     playthrough = false,
   } = customFields;
 
@@ -46,6 +45,12 @@ const VideoPromo = ({ customFields }) => {
 
   if (!uuid && !content) {
     return null;
+  }
+
+  let { live } = customFields;
+  // handle previous checked checkbox, ref PEN-1459
+  if (live && JSON.stringify(live) === ('true')) {
+    live = 'LIVE VIDEO';
   }
 
   return (

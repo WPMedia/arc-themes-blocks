@@ -20,7 +20,6 @@ const AD_PROPS_MOCK = {
   id: '0fPdGkcOqEoaWyN',
   customFields: {
     adType: '300x250',
-    display: 'all',
     displayAdLabel: true,
   },
   displayProperties: {},
@@ -70,5 +69,17 @@ describe('<ArcAd>', () => {
   it('renders advertisement label when enabled', () => {
     const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
     expect(wrapper.find('div.advertisement-label')).toHaveLength(1);
+  });
+
+  it('should use "all" on wrapper for advertisement label', () => {
+    const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+    expect(wrapper.find('div.advertisement-label--all')).toHaveLength(1);
+  });
+
+  it('should use "desktop" on wrapper for advertisement right_rail_cube', () => {
+    const mockData = { ...AD_PROPS_MOCK };
+    mockData.customFields.adType = '300x250|300x600_rightrail';
+    const wrapper = shallow(<ArcAd {...mockData} />);
+    expect(wrapper.find('div.advertisement-label--desktop')).toHaveLength(1);
   });
 });

@@ -151,7 +151,11 @@ export const getResizerParams = (
   */
   Object.keys(output).forEach((key) => {
     if (output[key] && compressedParams) {
-      output[key] = output[key].replace(/\//, '').replace(':format(jpg):quality(70)', ':cm=t');
+      output[key] = output[key].replace(/\//, '');
+
+      if (compressedParams) {
+        output[key] = output[key].replace(':format(jpg):quality(70)', ':cm=t');
+      }
     }
   });
   return output;

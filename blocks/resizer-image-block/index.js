@@ -106,7 +106,12 @@ const getImageDimensionsForAspectRatios = (onlyImageWidths = []) => {
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
 export const getResizerParams = (
-  originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [], focalPoint,
+  originalUrl,
+  respectAspectRatio = false,
+  resizerURL,
+  onlyImageWidths = [],
+  focalPoint,
+  compressedParams,
 ) => {
   const output = {};
   if (!originalUrl) {
@@ -145,20 +150,20 @@ export const getResizerParams = (
   know that this url has been compressed.
   */
   Object.keys(output).forEach((key) => {
-    if (output[key]) {
+    if (output[key] && compressedParams) {
       output[key] = output[key].replace(/\//, '').replace(':format(jpg):quality(70)', ':cm=t');
     }
   });
   return output;
 };
 
-const resizeImage = (image, resizerURL, focalPoint) => {
+const resizeImage = (image, resizerURL, focalPoint, compressedParams) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
   // todo: support fitIn respect aspect logic
-  return getResizerParams(image.url, false, resizerURL, [], focalPoint);
+  return getResizerParams(image.url, false, resizerURL, [], focalPoint, compressedParams);
 };
 
 const resizePromoItems = (promoItems, resizerURL) => {
@@ -181,10 +186,14 @@ const resizePromoItems = (promoItems, resizerURL) => {
     }, {});
 };
 
-const resizeAuthorCredits = (authorCredits, resizerURL) => authorCredits.map((creditObject) => ({
+const resizeAuthorCredits = (
+  authorCredits,
+  resizerURL,
+  compressedParams,
+) => authorCredits.map((creditObject) => ({
   ...creditObject,
   resized_params: creditObject?.image?.url
-    ? getResizerParams(creditObject.image.url, false, resizerURL) : {},
+    ? getResizerParams(creditObject.image.url, false, resizerURL, [], compressedParams) : {},
 }));
 
 const getResizedImageParams = (data, options) => {
@@ -204,6 +213,7 @@ const getResizedImageParams = (data, options) => {
               resizerURL,
               onlyImageWidths,
               focalPoint,
+              options?.compressedParams,
             );
           }
           // recursively resize if gallery with speicifc resized sizes
@@ -247,6 +257,7 @@ const getResizedImageParams = (data, options) => {
         resizerURL,
         [],
         focalPointFromPromo(sourceData.promo_items.lead_art.promo_items.basic),
+        options?.compressedParams,
       );
     }
 
@@ -309,6 +320,7 @@ const getResizedImageData = (
   respectAspectRatio = false,
   arcSite,
   imageWidths = getProperties(arcSite).imageWidths,
+  compressedParams,
 ) => {
   // resizer url is only arcSite specific option
   const { aspectRatios, resizerURL } = getProperties(arcSite);
@@ -326,7 +338,9 @@ const getResizedImageData = (
   }
 
   if (onlyUrl) {
-    return !data ? null : getResizerParams(data, respectAspectRatio, resizerURL);
+    return !data
+      ? null
+      : getResizerParams(data, respectAspectRatio, resizerURL, [], compressedParams);
   }
 
   return getResizedImageParams(data, {

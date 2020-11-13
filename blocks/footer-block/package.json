@@ -25,10 +25,12 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "@arc-fusion/prop-types": "^0.1.5",
+    "@arc-fusion/prop-types": "^0.1.5"
+  },
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/links-bar-block": "beta",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/news-theme-css": "beta",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

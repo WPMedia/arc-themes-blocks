@@ -22,10 +22,12 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "cookie": "^0.4.1",
+  "peerDependencies": {
     "styled-components": "^4.4.0"
+  },
+  "dependencies": {
+    "cookie": "^0.4.1",
+    "@wpmedia/engine-theme-sdk": "beta"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

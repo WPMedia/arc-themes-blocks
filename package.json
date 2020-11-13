@@ -38,7 +38,7 @@
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/news-theme-css": "beta",
     "@storybook/addon-knobs": "^5.3.19",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",

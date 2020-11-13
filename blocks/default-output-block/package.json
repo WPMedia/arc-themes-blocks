@@ -26,9 +26,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx output-types"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/news-theme-css": "beta"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

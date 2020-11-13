@@ -1,7 +1,6 @@
 /* eslint-disable object-curly-newline */
 import getProperties from 'fusion:properties';
 import adMap from './ad-mapping';
-import AdUnitLog from './_children/AdUnitLog';
 
 export const getBreakpoints = (arcSite) => {
   const siteProps = getProperties(arcSite);
@@ -134,7 +133,6 @@ export const setPageTargeting = (props) => {
 
 export const getSlotTargeting = (props) => ({
   ad_type: props?.adType,
-  pos: AdUnitLog.getInstance().getPosition(props),
 });
 
 /* Expects a 'props' object containing feature props, FusionContext, AppContext */
@@ -155,7 +153,6 @@ export const getAdObject = (props) => {
     },
     display,
   };
-  AdUnitLog.getInstance().add(adObj);
   adObj.targeting = getSlotTargeting(adObj);
   return adObj;
 };

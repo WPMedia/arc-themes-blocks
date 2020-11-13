@@ -170,7 +170,7 @@ const resizeImage = (image, resizerURL, focalPoint, compressedParams) => {
   return getResizerParams(image.url, false, resizerURL, [], focalPoint, compressedParams);
 };
 
-const resizePromoItems = (promoItems, resizerURL) => {
+const resizePromoItems = (promoItems, resizerURL, compressedParams) => {
   const focalPoint = focalPointFromPromo(promoItems);
   return Object.keys(promoItems)
     .reduce((promoItemWithResizedImages, key) => {
@@ -180,6 +180,7 @@ const resizePromoItems = (promoItems, resizerURL) => {
           promoItems,
           resizerURL,
           focalPoint,
+          compressedParams,
         );
         promoItemWithResizedImages.url = promoItems.url;
         promoItemWithResizedImages.type = 'image';
@@ -197,7 +198,14 @@ const resizeAuthorCredits = (
 ) => authorCredits.map((creditObject) => ({
   ...creditObject,
   resized_params: creditObject?.image?.url
-    ? getResizerParams(creditObject.image.url, false, resizerURL, [], compressedParams) : {},
+    ? getResizerParams(
+      creditObject.image.url,
+      false,
+      resizerURL,
+      [],
+      undefined,
+      compressedParams,
+    ) : {},
 }));
 
 const getResizedImageParams = (data, options) => {
@@ -238,6 +246,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,
         resizerURL,
+        options?.compressedParams,
       );
     }
 
@@ -245,6 +254,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.promo_items.lead_art = resizePromoItems(
         sourceData.promo_items.lead_art,
         resizerURL,
+        options?.compressedParams,
       );
     }
 
@@ -270,6 +280,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.credits.by = resizeAuthorCredits(
         sourceData.credits.by,
         resizerURL,
+        options?.compressedParams,
       );
     }
     return sourceData;
@@ -344,13 +355,14 @@ const getResizedImageData = (
   if (onlyUrl) {
     return !data
       ? null
-      : getResizerParams(data, respectAspectRatio, resizerURL, [], compressedParams);
+      : getResizerParams(data, respectAspectRatio, resizerURL, [], undefined, compressedParams);
   }
 
   return getResizedImageParams(data, {
     resizerSecret: resizerKey,
     resizerURL,
     imageWidths,
+    compressedParams,
   }, filterQuality);
   // Note: filterQuality is passed in but never used...
   // Should be moved to the options object and other functions to make use of option

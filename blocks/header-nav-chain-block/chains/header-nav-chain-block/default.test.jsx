@@ -105,6 +105,43 @@ describe('the header navigation feature for the default output type', () => {
       });
     });
 
+    describe('when no "logoAlignment" custom field is provided to nav bar', () => {
+      it('should default nav logo to "center-aligned" (direct child of the nav bar container)', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
+        const wrapper = mount(<Navigation />);
+        expect(wrapper.props().customFields).not.toBeDefined();
+        expect(wrapper.find('.news-theme-navigation-bar > div.nav-left > NavLogo > div.nav-logo')).toHaveLength(0);
+        const navLogoEl = wrapper.find('.news-theme-navigation-bar > NavLogo > div.nav-logo');
+        expect(navLogoEl).toHaveLength(1);
+        expect(navLogoEl.hasClass('nav-logo-center')).toBe(true);
+      });
+    });
+
+    describe('when the nav logo is center-aligned', () => {
+      it('should be a direct child of the nav bar container (center-aligned)', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
+        const wrapper = mount(<Navigation customFields={{ logoAlignment: 'center' }} />);
+        expect(wrapper.props().customFields.logoAlignment).toBeDefined();
+        expect(wrapper.props().customFields.logoAlignment).toEqual('center');
+        expect(wrapper.find('.news-theme-navigation-bar > div.nav-left > NavLogo > div.nav-logo')).toHaveLength(0);
+        const navLogoEl = wrapper.find('.news-theme-navigation-bar > NavLogo > div.nav-logo');
+        expect(navLogoEl).toHaveLength(1);
+        expect(navLogoEl.hasClass('nav-logo-center')).toBe(true);
+      });
+    });
+
+    describe('when the nav logo is left-aligned', () => {
+      it('should be rendered inside "nav-left" container (left-aligned)', () => {
+        getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
+        const wrapper = mount(<Navigation customFields={{ logoAlignment: 'left' }} />);
+        expect(wrapper.props().customFields.logoAlignment).toBeDefined();
+        expect(wrapper.props().customFields.logoAlignment).toEqual('left');
+        const navLogoEl = wrapper.find('.news-theme-navigation-bar > div.nav-left > NavLogo > div.nav-logo');
+        expect(navLogoEl).toHaveLength(1);
+        expect(navLogoEl.hasClass('nav-logo-left')).toBe(true);
+      });
+    });
+
     describe('when the page has a masthead-block', () => {
       it('should hide the logo on the initial render', () => {
         getProperties.mockImplementation(() => ({}));

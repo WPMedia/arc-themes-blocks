@@ -114,9 +114,12 @@ const SimpleList = (props) => {
 
   return (
     <div key={id} className="list-container layout-section">
-      <Title className="list-title" primaryFont={primaryFont}>
-        {title}
-      </Title>
+      { title
+        && (
+        <Title className="list-title" primaryFont={primaryFont}>
+          {title}
+        </Title>
+        )}
       {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,

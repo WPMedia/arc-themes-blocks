@@ -775,6 +775,9 @@ export const oneListItem = {
           url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/YJH6DMK6UFCZFABUOH3NQ4IHRA.jpg',
           version: '0.10.3',
           width: 5712,
+          resized_params: {
+            '274x154': '',
+          },
         },
       },
       distributor: {

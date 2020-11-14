@@ -10,6 +10,7 @@ PageBuilder users can configure:
 - Description
 - LIVE toggle
 - Autoplay
+- Playthrough
 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
@@ -21,6 +22,7 @@ PageBuilder users can configure:
 | **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
 | **inheritGlobalContent** | no | Boolean | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
 
+| **playthrough** | no | boolean | enable/disable playthrough for videos , default set to false  |
 
 ## ANS Schema
 ANS of the video type

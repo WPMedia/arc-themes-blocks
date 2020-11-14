@@ -33,12 +33,14 @@ const VideoPromo = ({ customFields }) => {
     autoplay = false,
     live = false,
     inheritGlobalContent = true,
+    playthrough = false,
   } = customFields;
 
   // can be overwrite by globalContent
   let {
     title,
     description,
+
   } = customFields;
 
   const { globalContent = {} } = useFusionContext();
@@ -83,6 +85,7 @@ const VideoPromo = ({ customFields }) => {
             aspectRatio={RATIO}
             org={videoOrg}
             env={videoEnv}
+            playthrough={playthrough}
           />
           {description
             && (
@@ -132,6 +135,13 @@ VideoPromo.propTypes = {
         label: 'Live',
         defaultValue: false,
         group: 'Display settings',
+      },
+    ),
+    playthrough: PropTypes.bool.tag(
+      {
+        label: 'Playthrough',
+        defaultValue: false,
+        group: 'Video settings',
       },
     ),
   }),

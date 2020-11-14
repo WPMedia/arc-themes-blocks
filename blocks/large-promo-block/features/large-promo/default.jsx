@@ -62,12 +62,6 @@ const LargePromo = ({ customFields }) => {
   const overlineDisplay = (content?.label?.basic?.display ?? null)
       || (content?.websites?.[arcSite] && websiteSection)
       || false;
-  const overlineUrl = (content?.label?.basic?.url ?? null)
-      || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
-      || '';
-  const overlineText = (content?.label?.basic?.text ?? null)
-      || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
-      || '';
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const promoType = discoverPromoType(content);
 
@@ -76,9 +70,8 @@ const LargePromo = ({ customFields }) => {
       return (
         (
           <Overline
-            customUrl={overlineUrl}
-            customText={overlineText}
             className="overline"
+            story={content}
             editable
           />
         )

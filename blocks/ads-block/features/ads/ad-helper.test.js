@@ -88,7 +88,6 @@ const AD_CONFIG_SCHEMA = {
   },
   targeting: {
     ad_type: 'string',
-    pos: 'number',
   },
   display: 'string',
 };

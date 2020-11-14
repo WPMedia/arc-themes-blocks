@@ -98,6 +98,7 @@ const SampleOutputType = ({
     facebookAdmins,
     chartBeatAccountId,
     chartBeatDomain,
+    fallbackImage,
     comscoreID,
   } = getProperties(arcSite);
 
@@ -174,6 +175,7 @@ const SampleOutputType = ({
           resizerURL={resizerURL}
           arcSite={arcSite}
           facebookAdmins={facebookAdmins}
+          fallbackImage={fallbackImage}
         />
 
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />

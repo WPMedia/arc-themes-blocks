@@ -1,18 +1,13 @@
 # `@wpmedia/overline-block`
-_Fusion News Theme overline block. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-- Add AC relevant to the block
+_Fusion News Theme Overline block. Text usually displayed over the headline. By default will use the ANS fields Label or Web Site Section if they exist or optionally a custom text and url can be used._
 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
-| **required prop** | yes | | |
-| **optional prop** | no | | |
-| **contentConfig example** | | | Please specify which content sources are compatible |
-
-## ANS Schema
-Outline any schema information requirements necessary to know for ths block
+| **customText** | no | string | Text to use for the overline, if **customUrl** parameter do not exists, will be an span element |
+| **customUrl** | no | string | If exists, the **customText** will be wrapped with an anchor and this url used to link to |
+| **editable** | no | boolean | if the content of the overline **do not** came from the previous __customXXX__ params, the overline text can be flagged as editable and used on PageBuilder |
+| **story** | no | object | story object to use to extract overline values instead of GlobalContent |
 
 ### ANS Fields
 - `globalContent.label.basic.display`
@@ -21,23 +16,7 @@ Outline any schema information requirements necessary to know for ths block
 - `content.websites[arcSite].website_section._id`
 - `content.websites[arcSite].website_section.name`
 
-## Internationalization fields
-| Phrase key | Default (English) |
-|---|---|
-|`key`|`english translation`|
-
-## Events
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description** |
-|---|---|
-| **eventName** | Describe the event |
-
 ### Event Listening
-Include block specific instructions for event listening.
-
-OR
-
 This block does not emit any events.
 
 ## Additional Considerations

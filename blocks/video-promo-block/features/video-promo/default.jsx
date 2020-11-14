@@ -17,7 +17,7 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const LiveLabel = styled.span`
+const AlertBadge = styled.span`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   color: #FFFFFF;
@@ -34,6 +34,7 @@ const VideoPromo = ({ customFields }) => {
     title,
     description,
     playthrough = false,
+    alertBadge,
   } = customFields;
 
   const content = uuid ? null : useContent({
@@ -47,17 +48,11 @@ const VideoPromo = ({ customFields }) => {
     return null;
   }
 
-  let { live } = customFields;
-  // handle previous checked checkbox, ref PEN-1459
-  if (live && JSON.stringify(live) === ('true')) {
-    live = 'LIVE VIDEO';
-  }
-
   return (
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          {live && <LiveLabel>{live}</LiveLabel>}
+          {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
           {title
             && (
             <TitleText
@@ -129,19 +124,15 @@ VideoPromo.propTypes = {
       label: 'Description',
       group: 'Content',
     }),
-    live: PropTypes.string.tag(
-      {
-        label: 'Live',
-        group: 'Display settings',
-      },
-    ),
-    playthrough: PropTypes.bool.tag(
-      {
-        label: 'Playthrough',
-        defaultValue: false,
-        group: 'Video settings',
-      },
-    ),
+    alertBadge: PropTypes.string.tag({
+      label: 'Alert Badge',
+      group: 'Display settings',
+    }),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
+      defaultValue: false,
+      group: 'Video settings',
+    }),
   }),
 };
 

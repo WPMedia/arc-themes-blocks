@@ -25,5 +25,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "beta"
   },
+  "dependencies": {
+    "@arc-core-components/content-source_story-feed_tag-v4": "^1.0.6-beta.0"
+  },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

@@ -3,6 +3,11 @@ _The block contains an video promo component. Pagebuilder users can feature a vi
 
 **The block depends on a new environment variable `videoEnv` (usually sandbox or prod) required by the powa player in addition to `playerRoot` and `videoOrg`.**
 
+#####Under the theme repo:
+1. update the `videoEnv` value in `environment/index.json` e.g. `videoEnv=prod`. 
+2. Update `.env` file with `videoOrg=prod` and `videoOrg=corecomponents`
+3. Link to your local engine-theme-sdk in `.env` file. `ENGINE_SDK_REPO={PATH_TO_LOCAL}/blocks/engine-theme-sdk`
+             
 ## Acceptance Criteria
 PageBuilder users can configure:
 - Video

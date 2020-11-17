@@ -56,12 +56,12 @@ describe('the video promo feature', () => {
     });
   });
 
-  it('should have show title, description, live label, and video with default configs', () => {
-    config.live = true;
+  it('should have show title, description, alert badge, and video with default configs', () => {
+    config.alertBadge = 'testing alert badge video label';
     const wrapper = mount(<VideoPromo customFields={config} />);
     expect(wrapper.find('h2').text()).toBe('Title');
     expect(wrapper.find('p').text()).toBe('Description');
-    expect(wrapper.find('span').text()).toBe('LIVE VIDEO');
+    expect(wrapper.find('span').text()).toBe('testing alert badge video label');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
@@ -71,6 +71,12 @@ describe('the video promo feature', () => {
       env: 'env',
       playthrough: false,
     });
+  });
+
+  it('should NOT show alert badge while its customfield is emtpy', () => {
+    config.alertBadge = '';
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.find('span').length).toEqual(0);
   });
 
   it('should have show title, description, and video with autoplay', () => {

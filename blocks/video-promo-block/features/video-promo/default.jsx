@@ -17,7 +17,7 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const LiveLabel = styled.span`
+const AlertBadge = styled.span`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   color: #FFFFFF;
@@ -33,8 +33,8 @@ const VideoPromo = ({ customFields }) => {
     ratio = 0.5625,
     title,
     description,
-    live = false,
     playthrough = false,
+    alertBadge,
   } = customFields;
 
   const content = uuid ? null : useContent({
@@ -52,7 +52,7 @@ const VideoPromo = ({ customFields }) => {
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          {live && <LiveLabel>LIVE VIDEO</LiveLabel>}
+          {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
           {title
             && (
             <TitleText
@@ -124,20 +124,15 @@ VideoPromo.propTypes = {
       label: 'Description',
       group: 'Content',
     }),
-    live: PropTypes.bool.tag(
-      {
-        label: 'Live',
-        defaultValue: false,
-        group: 'Content',
-      },
-    ),
-    playthrough: PropTypes.bool.tag(
-      {
-        label: 'Playthrough',
-        defaultValue: false,
-        group: 'Video settings',
-      },
-    ),
+    alertBadge: PropTypes.string.tag({
+      label: 'Alert Badge',
+      group: 'Display settings',
+    }),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
+      defaultValue: false,
+      group: 'Video settings',
+    }),
   }),
 };
 

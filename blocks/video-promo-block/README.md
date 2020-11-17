@@ -3,12 +3,17 @@ _The block contains an video promo component. Pagebuilder users can feature a vi
 
 **The block depends on a new environment variable `videoEnv` (usually sandbox or prod) required by the powa player in addition to `playerRoot` and `videoOrg`.**
 
+#####Under the theme repo:
+1. update the `videoEnv` value in `environment/index.json` e.g. `videoEnv=prod`. 
+2. Update `.env` file with `videoOrg=prod` and `videoOrg=corecomponents`
+3. Link to your local engine-theme-sdk in `.env` file. `ENGINE_SDK_REPO={PATH_TO_LOCAL}/blocks/engine-theme-sdk`
+             
 ## Acceptance Criteria
 PageBuilder users can configure:
 - Video
 - Title
 - Description
-- LIVE toggle
+- Alert Badge
 - Autoplay
 - Playthrough
 
@@ -21,7 +26,7 @@ PageBuilder users can configure:
 | **ratio** | no | number | the aspect ratio of the video used by the powa player  |
 | **title** | no | string | the title of the component |
 | **description** | no | string | the description of the component  |
-| **live** | no | boolean | if set to true, a `LIVE VIDEO` label will show up on top of the component |
+| **alertBadge** | no | string | a `LIVE VIDEO` label will show up on top of the component if value is not empty |
 | **playthrough** | no | boolean | enable/disable playthrough for videos , default set to false  |
 
 ## ANS Schema

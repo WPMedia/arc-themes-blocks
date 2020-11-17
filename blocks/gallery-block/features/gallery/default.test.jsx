@@ -51,7 +51,7 @@ describe('the gallery feature block', () => {
   });
 
   describe('when is only configured the content source', () => {
-    it('should render a custom content callery', () => {
+    it('should render a custom content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(
         <GalleryFeature customFields={{ galleryContentConfig: {} }} />,

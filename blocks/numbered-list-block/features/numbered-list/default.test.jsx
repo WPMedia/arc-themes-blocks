@@ -10,18 +10,12 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 }));
 const { default: mockData } = require('./mock-data');
 
-jest.mock('fusion:themes', () => jest.fn(() => ({})));
-
-jest.mock('styled-components', () => ({
-  p: jest.fn(),
-  h2: jest.fn(),
-}));
-
-jest.mock('prop-types', () => ({
-  shape: jest.fn(),
-  contentConfig: jest.fn(),
-  customFields: jest.fn(),
-}));
+jest.mock('fusion:themes', () => (
+  () => ({
+    'primary-font-family': 'fontPrimary',
+    'secondary-font-family': 'fontSecondary',
+  })
+));
 
 describe('The numbered-list-block', () => {
   describe('render a list of numbered-list-items', () => {

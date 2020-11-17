@@ -41,7 +41,7 @@ export const focalPointFromPromo = (promoItem) => {
     }
     case 'gallery': {
       // eslint-disable-next-line camelcase
-      return focalPointFromPromo(promoItem.promo_items.basic);
+      return focalPointFromPromo(promoItem?.promo_items?.basic);
     }
     default:
       return undefined;

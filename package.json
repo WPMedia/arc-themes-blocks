@@ -75,6 +75,7 @@
   "dependencies": {
     "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
+    "@wpmedia/ads-block": "file:blocks/ads-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",
     "@wpmedia/alert-bar-content-source-block": "file:blocks/alert-bar-content-source-block",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -142,12 +143,6 @@
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "//node_modules/(?!@wpmedia/.*-block).*/",
-      "//node_modules/(?!(@wpmedia)).*/"
-    ]
   },
   "browserslist": [
     "defaults"

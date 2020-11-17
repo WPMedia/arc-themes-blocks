@@ -31,15 +31,12 @@ const MediumListItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
-  const textClass = customFields.showImageMD
-    ? 'col-sm-12 col-md-xl-8 flex-col'
-    : 'col-sm-xl-12 flex-col';
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
         <a href={websiteURL} title={itemTitle} className="md-promo-headline">
-          <Title className="md-promo-headline" primaryFont={primaryFont}>
+          <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
         </a>
@@ -109,15 +106,15 @@ const MediumListItem = (props) => {
                 </div>
               </div>
           )} */}
-          {customFields.showImageMD && (
-          <div className="col-sm-12 col-md-xl-4">
-            <a href={websiteURL} title={itemTitle}>
+          {customFields.showImageMD
+            && (
+            <a className="image-link" href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
-                    // todo: get the proper alt tag for this image
-                    // 16:9 aspect for medium
+                  // todo: get the proper alt tag for this image
+                  // 16:9 aspect for medium
                   alt={itemTitle}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
@@ -136,10 +133,7 @@ const MediumListItem = (props) => {
                   mediumHeight={ratios.mediumHeight}
                   largeWidth={ratios.largeWidth}
                   largeHeight={ratios.largeHeight}
-                  alt={
-                      getProperties(arcSite).primaryLogoAlt
-                      || 'Placeholder logo'
-                    }
+                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
                   url={targetFallbackImage}
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizedImageOptions={placeholderResizedImageOptions}
@@ -148,23 +142,22 @@ const MediumListItem = (props) => {
               )}
               <PromoLabel type={promoType} />
             </a>
-          </div>
-          )}
-          {/* customFields.headlinePositionMD === 'below'
-            && */ (customFields.showHeadlineMD
+            )}
+          {/* customFields.headlinePositionMD === 'below' && */
+            (customFields.showHeadlineMD
               || customFields.showDescriptionMD
               || customFields.showBylineMD
               || customFields.showDateMD) && (
-              <div className={textClass}>
+              <>
                 {headlineTmpl()}
                 {descriptionTmpl()}
                 <div className="article-meta">
                   {byLineTmpl()}
                   {dateTmpl()}
                 </div>
-              </div>
-    )
-}
+              </>
+            )
+          }
         </div>
       </article>
       <hr />

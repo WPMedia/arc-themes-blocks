@@ -13,6 +13,7 @@ import SearchBox from './_children/search-box';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
+import HorizontalLinksBar from './_children/horizontal-links/default';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -44,9 +45,20 @@ const StyledSectionDrawer = styled.div`
   z-index: ${sectionZIdx};
 `;
 
+const StyledWarning = styled.div`
+  background-color: #cc3300;
+  color: #fff;
+  display: flex;
+  align-self: flex-start;
+  padding: 6px;
+`;
+
 /* Main Component */
 const Nav = (props) => {
-  const { arcSite, deployment, contextPath } = useFusionContext();
+  const {
+    arcSite, deployment, contextPath, isAdmin,
+  } = useFusionContext();
+
   const {
     primaryLogo, primaryLogoAlt, navColor, locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
@@ -61,7 +73,9 @@ const Nav = (props) => {
 
   const {
     children = [],
-    customFields: { hierarchy, signInOrder } = {},
+    customFields: {
+      hierarchy, signInOrder, logoAlignment = 'center', horizontalLinksHierarchy,
+    } = {},
     customSearchAction = null,
   } = props;
 
@@ -176,6 +190,14 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  const NavLogo = () => (
+    <div className={`nav-logo nav-logo-${logoAlignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
+      <a href="/" title={primaryLogoAlt}>
+        {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
+      </a>
+    </div>
+  );
+
   return (
     <>
       <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
@@ -186,14 +208,11 @@ const Nav = (props) => {
               <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
+            {logoAlignment === 'left' && <NavLogo />}
           </div>
-
-          <div className={`nav-logo ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
-            <a href="/" title={primaryLogoAlt}>
-              {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
-            </a>
-          </div>
-
+          {logoAlignment === 'center' && <NavLogo />}
+          {(horizontalLinksHierarchy && logoAlignment !== 'center')
+            && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
           <div className="nav-right">
             {signInButton}
           </div>
@@ -208,17 +227,38 @@ const Nav = (props) => {
         </StyledSectionDrawer>
 
       </StyledNav>
+      {(horizontalLinksHierarchy && logoAlignment === 'center' && isAdmin)
+        && (
+        <StyledWarning>
+          In order to render horizontal links, the logo must be aligned to the left.
+        </StyledWarning>
+        )}
     </>
   );
 };
 
 Nav.propTypes = {
   customFields: PropTypes.shape({
-    hierarchy: PropTypes.string,
+    hierarchy: PropTypes.string.tag({
+      label: 'Sections Menu hierarchy',
+      defaultValue: '',
+      group: 'Configure content',
+    }),
     signInOrder: PropTypes.number,
+    logoAlignment: PropTypes.oneOf([
+      'center', 'left',
+    ]).tag({
+      label: 'Logo alignment',
+      group: 'Logo',
+      defaultValue: 'center',
+    }),
+    horizontalLinksHierarchy: PropTypes.string.tag({
+      label: 'Horizontal Links hierarchy',
+      group: 'Configure content',
+    }),
   }),
 };
 
-Nav.label = 'Header Nav Chain – Arc Block';
+Nav.label = 'Navigation - Arc Chain';
 
 export default Nav;

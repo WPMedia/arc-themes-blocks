@@ -1,0 +1,42 @@
+name: Beta blocks publish to beta tag
+on:
+  push:
+    branches:
+      - beta
+
+# Publishes beta builds with the dist tag of "beta" and
+# with a version of 0.0.0 with a short git SHA appended to
+# the end.
+jobs:
+  publish:
+    name: Beta block publish
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Cache NPM files
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Publish to beta tag with a short git SHA as the version
+        run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag beta --yes
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check beta failure status
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()

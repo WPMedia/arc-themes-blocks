@@ -67,12 +67,12 @@ $submenu-link-color: $ui-dark-gray;
 .nav-block-sections {
   background: rgba(25, 25, 25, 0.5);
   flex-direction: column;
-  position: absolute;
-  transition: transform 300ms ease-in-out;
-  top: 0;
-  width: 100%;
   -ms-overflow-style: none;
+  position: absolute;
   scrollbar-width: none;
+  top: 0;
+  transition: transform 300ms ease-in-out;
+  width: 100%;
 
   &::-webkit-scrollbar {
     display: none;
@@ -111,10 +111,10 @@ $submenu-link-color: $ui-dark-gray;
   }
 
   .inner-drawer-nav {
-    width: $section-width;
     background-color: $section-bg;
     display: flex;
     flex-direction: column;
+    width: $section-width;
   }
 
   .nav-block-search {

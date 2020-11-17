@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/tags-content-source-block",
-  "version": "5.7.3-canary.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme tags API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
-  "dependencies": {
+  "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   }
 }

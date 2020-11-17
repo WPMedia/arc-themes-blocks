@@ -4,6 +4,22 @@ import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import PlayIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/PlayIcon';
 import CameraIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/CameraIcon';
+import getTranslatedPhrases from 'fusion:intl';
+import getProperties from 'fusion:properties';
+
+export const getLabelText = (phrases, type) => {
+  if (phrases) {
+    switch (type) {
+      case 'Video':
+        return phrases.t('extra-large-promo-block.video-text');
+      case 'Gallery':
+        return phrases.t('extra-large-promo-block.gallery-text');
+      default:
+        return null;
+    }
+  }
+  return null;
+};
 
 const LabelBoxLarge = styled.div`
   align-items: center;
@@ -54,10 +70,10 @@ const Icon = ({ type }) => {
   }
 };
 
-const LabelLarge = ({ arcSite, type }) => (
+const LabelLarge = ({ arcSite, type, labelText }) => (
   <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
-    <Label>{type}</Label>
+    <Label>{labelText}</Label>
   </LabelBoxLarge>
 );
 
@@ -79,7 +95,9 @@ const PromoLabel = ({ type, size }) => {
     return <LabelSmall type={type} arcSite={arcSite} />;
   }
 
-  return <LabelLarge type={type} arcSite={arcSite} />;
+  const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
+  const translatedLabelText = getLabelText(phrases, type);
+  return <LabelLarge type={type} arcSite={arcSite} labelText={translatedLabelText} />;
 };
 
 export default PromoLabel;

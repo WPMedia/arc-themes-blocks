@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
@@ -70,25 +70,39 @@ function getLogoComponent(type) {
   }
 }
 
-const ShareBar = ({ useInjectedFusionContext = useFusionContext }) => {
+const ShareBarContainer = () => {
   const {
     customFields,
     globalContent: {
-      headlines = {},
+      headlines: { basic: headlineString = '' },
       website_url: websiteUrl = '',
     } = {},
     arcSite,
-  } = useInjectedFusionContext();
+  } = useFusionContext();
 
   const {
     websiteDomain,
     websiteName,
   } = getProperties(arcSite);
 
+  return (
+    <ShareBar
+      customFields={customFields}
+      websiteName={websiteName}
+      websiteDomain={websiteDomain}
+      websiteUrl={websiteUrl}
+      headlineString={headlineString}
+    />
+  );
+};
+
+export const ShareBar = ({
+  customFields, websiteName, websiteDomain, websiteUrl, headlineString,
+}) => {
   const shareButtons = [];
   Object.keys(customFields).forEach((social) => {
     if (customFields[social]) {
-      const encodedTitle = encodeURIComponent(headlines.basic);
+      const encodedTitle = encodeURIComponent(headlineString);
       const encodedUrl = encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social);
 
       shareButtons.push((
@@ -113,9 +127,9 @@ const ShareBar = ({ useInjectedFusionContext = useFusionContext }) => {
   );
 };
 
-ShareBar.label = 'Share Bar – Arc Block';
+ShareBarContainer.label = 'Share Bar – Arc Block';
 
-ShareBar.propTypes = {
+ShareBarContainer.propTypes = {
   customFields: PropTypes.shape({
     email: PropTypes.bool.tag({
       label: 'Email',
@@ -140,4 +154,4 @@ ShareBar.propTypes = {
   }),
 };
 
-export default ShareBar;
+export default ShareBarContainer;

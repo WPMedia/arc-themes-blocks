@@ -1,0 +1,14 @@
+{
+   "medium-promo-block.gallery-text":{
+      "en":"Gallery",
+      "sv":"Bildspel",
+      "no":"Bildegalleri",
+      "fr": "Galerie"
+   },
+   "medium-promo-block.video-text":{
+      "en":"Video",
+      "sv":"Video",
+      "no":"Video",
+      "fr": "Vidéo"
+   }
+}

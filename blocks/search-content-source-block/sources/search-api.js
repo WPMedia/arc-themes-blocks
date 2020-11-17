@@ -22,7 +22,15 @@ export default {
     on the top-level
   */
   transform: (data, query) => ({
-    data: getResizedImageData(data.data, null, null, null, query['arc-site']),
+    data: getResizedImageData(
+      data.data,
+      null,
+      null,
+      null,
+      query['arc-site'],
+      undefined,
+      true,
+    ),
     ...data,
   })
   ,

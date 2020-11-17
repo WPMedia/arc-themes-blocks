@@ -11,7 +11,15 @@ const fetch = (query) => {
   const { raw_image_url: rawImageUrl, respect_aspect_ratio: respectAspectRatio = false } = query;
 
   // last param designates only url -- not data ans object
-  return getResizedImageData(rawImageUrl, null, true, respectAspectRatio, query['arc-site']);
+  return getResizedImageData(
+    rawImageUrl,
+    null,
+    true,
+    respectAspectRatio,
+    query['arc-site'],
+    undefined,
+    true,
+  );
 };
 
 /*

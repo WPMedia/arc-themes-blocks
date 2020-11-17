@@ -30,7 +30,7 @@ const VideoPlayer = (props) => {
 
   // In all other scenarios, fetch from the provided url and content api
   const fetchSource = doFetch ? 'content-api' : null;
-  // const { embed_html: fetchedEmbedMarkup = '' } =
+
   const fetchedData = useContent({
     source: fetchSource,
     query: {

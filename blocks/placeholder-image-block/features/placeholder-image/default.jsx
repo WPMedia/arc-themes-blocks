@@ -53,6 +53,7 @@ class PlaceholderImage extends React.Component {
     return (
       <>
         <Image
+          compressedThumborParams
           url={this.getTargetFallbackImageUrl()}
           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
           smallWidth={smallWidth}

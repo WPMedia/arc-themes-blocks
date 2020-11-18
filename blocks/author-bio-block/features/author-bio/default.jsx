@@ -57,6 +57,7 @@ const renderAuthorInfo = (author, arcSite) => {
     image && url
       ? (
         <Image
+          compressedThumborParams
           url={url}
           alt={(altText || name)}
           smallWidth={84}

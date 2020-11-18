@@ -59,6 +59,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
       return (url && url.length > 0) ? (
         <figure key={key}>
           <Image
+            compressedThumborParams
             resizedImageOptions={resizedImageOptions}
             url={url}
             alt={altText}
@@ -72,7 +73,12 @@ function parseArticleItem(item, index, arcSite, phrases) {
             resizerURL={getProperties(arcSite)?.resizerURL}
           />
           <figcaption>
-            <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
+            <Image
+              compressedThumborParamsMetadata
+              subtitle={subtitle}
+              caption={caption}
+              credits={credits}
+            />
           </figcaption>
         </figure>
       ) : null;

@@ -29,6 +29,7 @@ const StoryItem = (props) => {
         >
           {imageURL !== '' ? (
             <Image
+              compressedThumborParams
               resizedImageOptions={resizedImageOptions}
               url={imageURL}
               alt={itemTitle}
@@ -46,6 +47,7 @@ const StoryItem = (props) => {
             />
           ) : (
             <Image
+              compressedThumborParams
               smallWidth={274}
               smallHeight={183}
               mediumWidth={274}

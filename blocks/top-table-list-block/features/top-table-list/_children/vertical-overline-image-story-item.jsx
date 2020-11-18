@@ -126,6 +126,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               {customFields.showImageXL && /*! videoUUID && */ imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
+                    compressedThumborParams
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     // todo: get the proper alt tag for this image
@@ -143,6 +144,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               ) : (
                 /*! videoUUID && */ (
                   <Image
+                    compressedThumborParams
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

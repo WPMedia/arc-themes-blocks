@@ -109,19 +109,20 @@ const FullAuthorBio = () => {
         <div className="image-container">
           {
             (content.authors[0].image) && (
-              <Image
-                url={content.authors[0].image}
-                alt="Author photo"
-                smallWidth={158}
-                smallHeight={158}
-                mediumWidth={158}
-                mediumHeight={158}
-                largeWidth={158}
-                largeHeight={158}
-                resizedImageOptions={content.authors[0].resized_params}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-              />
+            <Image
+              compressedThumborParams
+              url={content.authors[0].image}
+              alt="Author photo"
+              smallWidth={158}
+              smallHeight={158}
+              mediumWidth={158}
+              mediumHeight={158}
+              largeWidth={158}
+              largeHeight={158}
+              resizedImageOptions={content.authors[0].resized_params}
+              resizerURL={getProperties(arcSite)?.resizerURL}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+            />
             )
           }
         </div>

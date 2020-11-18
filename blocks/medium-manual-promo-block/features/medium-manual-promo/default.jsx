@@ -43,6 +43,7 @@ const MediumManualPromo = ({ customFields }) => {
               rel={customFields.newTab ? 'noreferrer noopener' : ''}
             >
               <Image
+                compressedThumborParams
                 // medium is 16:9
                 url={customFields.imageURL}
                 alt={customFields.headline}

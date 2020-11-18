@@ -177,6 +177,7 @@ class ResultsList extends Component {
                   >
                     {extractImage(promoItems) ? (
                       <Image
+                        compressedThumborParams
                         // results list is 16:9 by default
                         resizedImageOptions={extractResizedParams(element)}
                         url={extractImage(element.promo_items)}
@@ -192,6 +193,7 @@ class ResultsList extends Component {
                       />
                     ) : (
                       <Image
+                        compressedThumborParams
                         smallWidth={158}
                         smallHeight={89}
                         mediumWidth={274}
@@ -203,7 +205,6 @@ class ResultsList extends Component {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizedImageOptions={placeholderResizedImageOptions}
                         resizerURL={getProperties(arcSite)?.resizerURL}
-
                       />
                     )}
                   </a>

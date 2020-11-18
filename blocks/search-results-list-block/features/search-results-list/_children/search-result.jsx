@@ -51,6 +51,7 @@ const SearchResult = ({
           >
             {extractImage(promoItems) ? (
               <Image
+                compressedThumborParams
                 url={extractImage(promoItems)}
                 alt={headlineText}
                 smallWidth={274}
@@ -65,6 +66,7 @@ const SearchResult = ({
               />
             ) : (
               <Image
+                compressedThumborParams
                 smallWidth={274}
                 smallHeight={154}
                 mediumWidth={274}

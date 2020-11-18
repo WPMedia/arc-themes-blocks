@@ -160,6 +160,7 @@ const ExtraLargePromo = ({ customFields }) => {
                   {customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
+                        compressedThumborParams
                         url={customFields.imageOverrideURL
                           ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}
@@ -172,7 +173,6 @@ const ExtraLargePromo = ({ customFields }) => {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={getProperties(arcSite)?.resizerURL}
                         resizedImageOptions={extractResizedParams(content)}
-                        // todo: this should have resized params
                       />
                     )
                     : (

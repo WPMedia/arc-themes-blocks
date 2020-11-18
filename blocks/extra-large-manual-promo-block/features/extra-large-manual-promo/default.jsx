@@ -90,6 +90,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                   rel={customFields.newTab ? 'noreferrer' : ''}
                 >
                   <Image
+                    compressedThumborParams
                     url={customFields.imageURL}
                     alt={customFields.headline}
                     smallWidth={400}

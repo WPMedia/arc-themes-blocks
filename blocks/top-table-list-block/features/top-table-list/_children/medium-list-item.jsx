@@ -111,6 +111,7 @@ const MediumListItem = (props) => {
             <a className="image-link" href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
+                  compressedThumborParams
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   // todo: get the proper alt tag for this image
@@ -127,6 +128,7 @@ const MediumListItem = (props) => {
                 />
               ) : (
                 <Image
+                  compressedThumborParams
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}

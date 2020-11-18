@@ -55,6 +55,7 @@ const SmallManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
+                  compressedThumborParams
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // small should be 3:2 aspect ratio

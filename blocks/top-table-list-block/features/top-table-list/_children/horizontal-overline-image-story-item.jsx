@@ -142,6 +142,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
+                    compressedThumborParams
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     alt={
@@ -163,6 +164,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               ) : (
                 <div className="image-wrapper">
                   <Image
+                    compressedThumborParams
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

@@ -132,6 +132,7 @@ class NumberedList extends Component {
                 >
                   {extractImage(promoItems) ? (
                     <Image
+                      compressedThumborParams
                       resizedImageOptions={extractResizedParams(element)}
                       url={extractImage(promoItems)}
                       alt={headlineText}
@@ -147,6 +148,7 @@ class NumberedList extends Component {
                     />
                   ) : (
                     <Image
+                      compressedThumborParams
                       smallWidth={105}
                       smallHeight={70}
                       mediumWidth={105}

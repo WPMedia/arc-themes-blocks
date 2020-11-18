@@ -52,6 +52,7 @@ const LargeManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
+                  compressedThumborParams
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // large promo has 4:3

@@ -121,7 +121,8 @@ class LeadArt extends Component {
         }
 
         caption = (
-          <ImageMetadata
+          <Image
+            compressedThumborParamsMetadata
             subtitle={lead_art.subtitle}
             caption={lead_art.caption}
             credits={lead_art.credits}
@@ -143,6 +144,7 @@ class LeadArt extends Component {
             </button>
             <div ref={this.imgRef}>
               <Image
+                compressedThumborParams
                 url={lead_art.url}
                 alt={lead_art.alt_text}
                 smallWidth={800}

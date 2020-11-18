@@ -79,6 +79,7 @@ const SmallPromo = ({ customFields }) => {
                 {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
                     <Image
+                      compressedThumborParams
                       url={customFields.imageOverrideURL
                         ? customFields.imageOverrideURL : extractImageFromStory(content)}
                       alt={content && content.headlines ? content.headlines.basic : ''}

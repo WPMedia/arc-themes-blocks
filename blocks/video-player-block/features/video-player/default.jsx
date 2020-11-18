@@ -30,7 +30,8 @@ const VideoPlayer = (props) => {
 
   // In all other scenarios, fetch from the provided url and content api
   const fetchSource = doFetch ? 'content-api' : null;
-  const { embed_html: fetchedEmbedMarkup = '' } = useContent({
+  // const { embed_html: fetchedEmbedMarkup = '' } =
+  const fetchedData = useContent({
     source: fetchSource,
     query: {
       website_url: websiteURL,
@@ -38,7 +39,7 @@ const VideoPlayer = (props) => {
     },
   });
 
-  embedHTML = doFetch ? fetchedEmbedMarkup : embedHTML;
+  embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
 
   if (enableAutoplay && embedHTML) {
     const position = embedHTML.search('id=');
@@ -46,7 +47,7 @@ const VideoPlayer = (props) => {
   }
 
   // Make sure that the player does not render until after component is mounted
-  embedHTML = embedHTML.replace('<script', '<!--script')
+  embedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
     .replace('script>', 'script-->');
 
   useEffect(() => {

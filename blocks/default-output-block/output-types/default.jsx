@@ -96,6 +96,7 @@ const SampleOutputType = ({
     fontUrl,
     resizerURL,
     facebookAdmins,
+    nativoIntegration,
     chartBeatAccountId,
     chartBeatDomain,
     fallbackImage,
@@ -197,6 +198,9 @@ const SampleOutputType = ({
         />
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
+        {nativoIntegration
+          ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)
+          : null}
         {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
         {comscoreScript(comscoreID)}
       </head>

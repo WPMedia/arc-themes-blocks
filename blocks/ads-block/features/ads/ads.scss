@@ -1,6 +1,8 @@
 .advertisement-label {
   color: $ui-medium-gray;
   font-size: calculateRem(12px);
+
+  
   line-height: calculateRem(16px);
 
   &--mobile {

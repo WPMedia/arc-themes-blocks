@@ -14,8 +14,9 @@ This package has been published with a number of dist-tags meant for different p
 
 - `latest`: As with all other NPM packages, this is the default dist-tag. Whenever a non-prerelease block gets published, it is published with this tag.
 - `stable`: This tag should be equivalent to `latest` and the process for maintaining parity _should_ be automated with a [Github Action workflow found here](/.github/workflows/stable-dist-tag.yml). If that workflow doesn't work or the versions tagged by `latest` and `stable` do not match you can run `npm run latest-stable-parity` to fix that.
-- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
+- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. Beta should not be pushed to unless code has been tested in canary or rc branches [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
 - `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `canary` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-cafebabe`).
+- `rc`: Release candidate tag to match engine-theme-sdk rc tag
 - `hotfix`: As you may have guessed, these builds are meant for hotfixes. [More information about how these builds are made can be found here.](/News%20Theme%20Development.md#publish-hotfix)
 
 ## Instructions
@@ -184,16 +185,8 @@ The tests can be run with the npm command `npm run test`. Make sure to watch out
 Now that the feature is in the right directory format, you can create a pull request so that it can be reviewed and merged. Make sure to move the JIRA ticket to `Code Review` section at this point. Once it is approved by the team member(s), you can merge the code into the stable branch.
 
 #### 6. Publishing the block
-Before publishing any new blocks, make sure to check `git fetch --all` and `git pull` from stable so that you can get the latest *published* version of the blocks and not accidentally publish any conflicting/outdated version of other blocks. Knowing the quirks of publishing a subpackage of this monorepo to a registry is very important. Please, please [read the documentation for lerna's 'publish' command before trying to publish anything](https://github.com/lerna/lerna/tree/master/commands/publish#readme).
 
-Once you do so, you can publish the block by running `npx lerna publish` at the root of this repo.
-
-A few key things to know:
-
-* This repo manages each package version _independently_ meaning you'll need to know the right semver choice for each version change.
-* If you want to publish one of our subpackages and there's another subpackage in the repo that has committed and unpublished changes, you will be _required_ to publish a new version of those other subpackages. So do not start a `lerna publish` unless you are in a place where you can publish all of those other unpublished subpackages.
-* You'll need to specify the name of the package scope in the `name` field of the `package.json` order for the package to be published for that scope.
-
+In order to publish a block, make sure you get approval before merging into a `canary`, `rc`, `stable` or `beta` branches that publish to their respective tags.
 #### 7. Deploying a block to sandbox/production
 Once the block is published, it is now ready to be deployed - we can include it in the bundle's `blocks.json` so that it can be used in sandbox/production.
 

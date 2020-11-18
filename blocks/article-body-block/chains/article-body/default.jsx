@@ -73,12 +73,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
             resizerURL={getProperties(arcSite)?.resizerURL}
           />
           <figcaption>
-            <Image
-              compressedThumborParamsMetadata
-              subtitle={subtitle}
-              caption={caption}
-              credits={credits}
-            />
+            <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
           </figcaption>
         </figure>
       ) : null;

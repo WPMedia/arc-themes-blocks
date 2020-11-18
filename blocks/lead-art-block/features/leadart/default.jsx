@@ -121,8 +121,7 @@ class LeadArt extends Component {
         }
 
         caption = (
-          <Image
-            compressedThumborParamsMetadata
+          <ImageMetadata
             subtitle={lead_art.subtitle}
             caption={lead_art.caption}
             credits={lead_art.credits}

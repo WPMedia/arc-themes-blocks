@@ -6,6 +6,8 @@ import Title from './title';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const ItemTitleWithRightImage = (props) => {
   const {
     itemTitle,
@@ -55,7 +57,7 @@ const ItemTitleWithRightImage = (props) => {
             {imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
-                  compressedThumborParams
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   alt={itemTitle}
@@ -73,7 +75,7 @@ const ItemTitleWithRightImage = (props) => {
             ) : (
               <div className="image-wrapper">
                 <Image
-                  compressedThumborParams
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}

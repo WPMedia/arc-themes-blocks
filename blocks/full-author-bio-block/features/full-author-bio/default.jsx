@@ -25,6 +25,8 @@ import {
 import './full-author-bio.scss';
 import constructSocialURL from './shared/constructSocialURL';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const StyledAuthorContent = styled.div`
   font-family: ${(props) => props.primaryFont};
 
@@ -110,7 +112,7 @@ const FullAuthorBio = () => {
           {
             (content.authors[0].image) && (
             <Image
-              compressedThumborParams
+              compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
               url={content.authors[0].image}
               alt="Author photo"
               smallWidth={158}

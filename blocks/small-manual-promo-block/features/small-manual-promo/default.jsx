@@ -9,6 +9,8 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -55,7 +57,7 @@ const SmallManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
-                  compressedThumborParams
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // small should be 3:2 aspect ratio

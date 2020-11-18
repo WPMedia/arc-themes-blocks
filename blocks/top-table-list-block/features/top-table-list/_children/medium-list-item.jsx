@@ -10,6 +10,8 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 // via results list
 const MediumListItem = (props) => {
   const {
@@ -111,7 +113,7 @@ const MediumListItem = (props) => {
             <a className="image-link" href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
-                  compressedThumborParams
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   // todo: get the proper alt tag for this image
@@ -128,7 +130,7 @@ const MediumListItem = (props) => {
                 />
               ) : (
                 <Image
-                  compressedThumborParams
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}

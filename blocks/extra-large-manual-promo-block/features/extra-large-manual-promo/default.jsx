@@ -9,6 +9,8 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -90,7 +92,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                   rel={customFields.newTab ? 'noreferrer' : ''}
                 >
                   <Image
-                    compressedThumborParams
+                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                     url={customFields.imageURL}
                     alt={customFields.headline}
                     smallWidth={400}

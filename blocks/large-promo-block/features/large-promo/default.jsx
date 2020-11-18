@@ -22,6 +22,8 @@ import {
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -158,7 +160,7 @@ const LargePromo = ({ customFields }) => {
                   customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
-                        compressedThumborParams
+                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         url={customFields.imageOverrideURL
                           ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}

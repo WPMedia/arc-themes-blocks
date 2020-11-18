@@ -19,6 +19,8 @@ import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
@@ -177,7 +179,7 @@ class ResultsList extends Component {
                   >
                     {extractImage(promoItems) ? (
                       <Image
-                        compressedThumborParams
+                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         // results list is 16:9 by default
                         resizedImageOptions={extractResizedParams(element)}
                         url={extractImage(element.promo_items)}
@@ -193,7 +195,7 @@ class ResultsList extends Component {
                       />
                     ) : (
                       <Image
-                        compressedThumborParams
+                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         smallWidth={158}
                         smallHeight={89}
                         mediumWidth={274}

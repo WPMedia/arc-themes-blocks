@@ -30,6 +30,8 @@ import './author-bio.scss';
 Testing: Unit tests are written to cover this block
 */
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const AuthorBioStyled = styled.section`
   font-family: ${(props) => props.primaryFont};
 
@@ -57,7 +59,7 @@ const renderAuthorInfo = (author, arcSite) => {
     image && url
       ? (
         <Image
-          compressedThumborParams
+          compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
           url={url}
           alt={(altText || name)}
           smallWidth={84}

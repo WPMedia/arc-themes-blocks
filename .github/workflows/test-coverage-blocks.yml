@@ -40,6 +40,9 @@ jobs:
       - name: Check linting
         run: npm run lint
 
+      - name: Check Style linting (always passes, informative)
+        run: npm run lint:styles
+
       - name: Check failure status
         uses: act10ns/slack@v1
         with:

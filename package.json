@@ -24,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run test:coverage && npm run lint"
+      "pre-push": "npm run lint"
     }
   },
   "license": "CC-BY-NC-ND-4.0",

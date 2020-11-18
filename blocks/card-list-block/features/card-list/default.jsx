@@ -144,7 +144,6 @@ class CardList extends React.Component {
                    extractImage(contentElements[0].promo_items) ? (
                      <Image
                        compressedThumborParams
-
                        url={extractImage(contentElements[0].promo_items)}
                        alt={contentElements[0].headlines.basic}
                        smallWidth={377}

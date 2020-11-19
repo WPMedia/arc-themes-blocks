@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -9,6 +8,7 @@ import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
+// aspect ratio for video player engine theme sdk
 const RATIO = 0.5625;
 
 const TitleText = styled.h2`
@@ -20,11 +20,11 @@ const DescriptionText = styled.p`
 `;
 
 const AlertBadge = styled.span`
+  background-color: #db0a07;
+  border-radius: 5px;
+  color: #fff;
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  color: #FFFFFF;
-  background-color: #DB0A07;
-  border-radius: 5px;
 `;
 
 const VideoPromo = ({ customFields }) => {
@@ -36,7 +36,7 @@ const VideoPromo = ({ customFields }) => {
     alertBadge,
   } = customFields;
 
-  // can be overwrite by globalContent
+  // title and description can be overwritten by globalContent
   let {
     title,
     description,
@@ -60,6 +60,9 @@ const VideoPromo = ({ customFields }) => {
       description = videoProps?.description?.basic;
       videoId = videoProps?._id;
     }
+    // videoId remains undefined if not type video
+    // todo: potentially refactor (inheritGlobalContent && globalContent)
+    // to include type video. Tests broke including it
   } else {
     videoId = customContent?._id;
   }
@@ -86,6 +89,7 @@ const VideoPromo = ({ customFields }) => {
           <Video
             uuid={videoId}
             autoplay={autoplay}
+            // RATIO is a constant declared at top of file
             aspectRatio={RATIO}
             org={videoOrg}
             env={videoEnv}

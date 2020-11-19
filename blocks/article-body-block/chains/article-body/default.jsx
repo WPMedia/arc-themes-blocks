@@ -19,6 +19,8 @@ import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 import './_articlebody.scss';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const StyledText = styled.p`
   a {
     color: ${(props) => props.primaryColor};
@@ -59,6 +61,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
       return (url && url.length > 0) ? (
         <figure key={key}>
           <Image
+            compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
             resizedImageOptions={resizedImageOptions}
             url={url}
             alt={altText}

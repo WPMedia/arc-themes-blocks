@@ -9,6 +9,8 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -43,6 +45,7 @@ const MediumManualPromo = ({ customFields }) => {
               rel={customFields.newTab ? 'noreferrer noopener' : ''}
             >
               <Image
+                compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                 // medium is 16:9
                 url={customFields.imageURL}
                 alt={customFields.headline}

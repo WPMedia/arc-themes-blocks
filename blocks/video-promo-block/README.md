@@ -32,9 +32,9 @@ PageBuilder users can configure:
 ANS of the video type
 
 ### ANS Fields
-- `globalContent.promo_items.lead_art._id` (optional)
-- `globalContent.promo_items.lead_art.headline.basic` (optional)
-- `globalContent.promo_items.lead_art.description.basic` (optional)
+- `globalContent._id` (optional)
+- `globalContent.headlines.basic` (optional)
+- `globalContent.description.basic` (optional)
 
 
 ## Internationalization fields

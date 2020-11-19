@@ -26,20 +26,14 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
     globalContent: {
-      _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
-      type: 'story',
+      _id: 'e924e51b-db94-492e-8346-02283a126943',
+      type: 'video',
       version: '0.10.2',
-      promo_items: {
-        lead_art: {
-          type: 'video',
-          headline: {
-            basic: 'global content headline',
-          },
-          description: {
-            basic: 'global content description',
-          },
-          _id: 'global-content-id',
-        },
+      headlines: {
+        basic: 'global content headline',
+      },
+      description: {
+        basic: 'global content description',
       },
     },
   })),

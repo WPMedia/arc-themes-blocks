@@ -37,13 +37,12 @@ const VideoPromo = ({ customFields }) => {
   } = customFields;
 
   // title and description can be overwritten by globalContent
-  let {
+  const {
     title,
     description,
   } = customFields;
 
   const { globalContent = {} } = useFusionContext();
-  let videoId;
 
   const customContent = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -52,22 +51,10 @@ const VideoPromo = ({ customFields }) => {
       : null,
   });
 
-  // use globalcontent
-  if (inheritGlobalContent && globalContent) {
-    if (globalContent?.promo_items?.lead_art?.type === 'video') {
-      const videoProps = globalContent?.promo_items?.lead_art;
-      title = videoProps?.headline?.basic;
-      description = videoProps?.description?.basic;
-      videoId = videoProps?._id;
-    }
-    // videoId remains undefined if not type video
-    // todo: potentially refactor (inheritGlobalContent && globalContent)
-    // to include type video. Tests broke including it
-  } else {
-    videoId = customContent?._id;
-  }
-
   const content = inheritGlobalContent ? globalContent : customContent;
+  const videoId = content?._id;
+  const videoTitle = title || content?.headlines?.basic;
+  const videoDescription = description || content?.description?.basic;
 
   if (!videoId || !content) {
     return null;
@@ -77,13 +64,13 @@ const VideoPromo = ({ customFields }) => {
       <div className="row">
         <div className="col-sm-xl-12">
           {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
-          {title
+          {videoTitle
             && (
             <TitleText
               primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
               className="xl-promo-headline"
             >
-              {title}
+              {videoTitle}
             </TitleText>
             )}
           <Video
@@ -95,13 +82,13 @@ const VideoPromo = ({ customFields }) => {
             env={videoEnv}
             playthrough={playthrough}
           />
-          {description
+          {videoDescription
             && (
             <DescriptionText
               secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
               className="description-text"
             >
-              {description}
+              {videoDescription}
             </DescriptionText>
             )}
         </div>

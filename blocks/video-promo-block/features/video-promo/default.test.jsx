@@ -1,5 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import VideoPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
@@ -129,6 +131,22 @@ describe('the video promo feature', () => {
     });
   });
 
+  it('should use custom content if inheritGlobalContent is set to false', () => {
+    config.inheritGlobalContent = false;
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.find('h2').text()).toBe('Title');
+    expect(wrapper.find('p').text()).toBe('Description');
+    const video = wrapper.find('#video').at(0);
+    expect(video.prop('data-props')).toEqual({
+      uuid: 'video-uuid',
+      autoplay: false,
+      aspectRatio: 0.5625,
+      org: 'org',
+      env: 'env',
+      playthrough: false,
+    });
+  });
+
   it('should playthrough video', () => {
     config.playthrough = true;
     const wrapper = mount(<VideoPromo customFields={config} />);
@@ -143,5 +161,82 @@ describe('the video promo feature', () => {
       env: 'env',
       playthrough: true,
     });
+  });
+
+  it('should not playthrough video', () => {
+    config.playthrough = false;
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.find('h2').text()).toBe('Title');
+    expect(wrapper.find('p').text()).toBe('Description');
+    const video = wrapper.find('#video').at(0);
+    expect(video.prop('data-props')).toEqual({
+      uuid: 'video-uuid',
+      autoplay: false,
+      aspectRatio: 0.5625,
+      org: 'org',
+      env: 'env',
+      playthrough: false,
+    });
+  });
+
+  it('should be empty render while no content available', () => {
+    useContent.mockReturnValueOnce(undefined);
+
+    const wrapper = mount(<VideoPromo customFields={config} />);
+    expect(wrapper.isEmptyRender()).toBe(true);
+  });
+
+  it('should not render while globalContent is empty while inheritGlobalContent is true', () => {
+    const mockConfig = {
+      itemContentConfig: {},
+      title: 'Title',
+      description: 'Description',
+      inheritGlobalContent: false,
+    };
+    useFusionContext.mockClear();
+
+    useFusionContext.mockReturnValue({});
+    useContent.mockReturnValueOnce(undefined);
+
+    config.inheritGlobalContent = true;
+
+    const wrapper = mount(<VideoPromo customFields={mockConfig} />);
+    expect(wrapper.isEmptyRender()).toBe(true);
+  });
+
+  it('no video render if global promo item is not video ', () => {
+    const mockConfig = {
+      itemContentConfig: {},
+      title: 'Title',
+      description: 'Description',
+    };
+    useFusionContext.mockClear();
+
+    useContent.mockReturnValue({ _id: 'video-uuid' });
+    useFusionContext.mockReturnValue({
+      arcSite: 'the-sun',
+      globalContent: {
+        _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+        type: 'story',
+        version: '0.10.2',
+        promo_items: {
+          lead_art: {
+            type: 'image',
+            headline: {
+              basic: 'image headline',
+            },
+            description: {
+              basic: 'image description',
+            },
+            _id: 'global-content-id',
+          },
+        },
+      },
+    });
+
+    config.inheritGlobalContent = true;
+
+    const wrapper = mount(<VideoPromo customFields={mockConfig} />);
+    expect(wrapper.isEmptyRender()).toBe(true);
   });
 });

@@ -43,14 +43,15 @@ const VideoPromo = ({ customFields }) => {
   } = customFields;
 
   const { globalContent = {} } = useFusionContext();
+  let videoId;
 
-  const content = inheritGlobalContent ? globalContent : useContent({
+  const customContent = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   });
-  let videoId = content?._id;
+
   // use globalcontent
   if (inheritGlobalContent && globalContent) {
     if (globalContent?.promo_items?.lead_art?.type === 'video') {
@@ -59,9 +60,13 @@ const VideoPromo = ({ customFields }) => {
       description = videoProps?.description?.basic;
       videoId = videoProps?._id;
     }
+  } else {
+    videoId = customContent?._id;
   }
 
-  if (!content) {
+  const content = inheritGlobalContent ? globalContent : customContent;
+
+  if (!videoId || !content) {
     return null;
   }
   return (

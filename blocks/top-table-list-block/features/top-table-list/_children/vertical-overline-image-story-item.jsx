@@ -9,6 +9,8 @@ import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const VerticalOverlineImageStoryItem = (props) => {
   const {
     websiteURL,
@@ -126,6 +128,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               {customFields.showImageXL && /*! videoUUID && */ imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
+                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     // todo: get the proper alt tag for this image
@@ -143,6 +146,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               ) : (
                 /*! videoUUID && */ (
                   <Image
+                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

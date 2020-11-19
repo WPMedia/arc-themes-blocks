@@ -335,7 +335,7 @@ const getResizedImageData = (
   respectAspectRatio = false,
   arcSite,
   imageWidths = getProperties(arcSite).imageWidths,
-  compressedParams,
+  compressedParams = false,
 ) => {
   // resizer url is only arcSite specific option
   const { aspectRatios, resizerURL } = getProperties(arcSite);

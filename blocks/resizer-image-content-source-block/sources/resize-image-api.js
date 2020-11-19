@@ -8,7 +8,11 @@ const params = {
 // input: raw image url
 // output: object with dimensions and image keys
 const fetch = (query) => {
-  const { raw_image_url: rawImageUrl, respect_aspect_ratio: respectAspectRatio = false } = query;
+  const {
+    raw_image_url: rawImageUrl,
+    respect_aspect_ratio: respectAspectRatio = false,
+    isCompressedImageParams = false,
+  } = query;
 
   // last param designates only url -- not data ans object
   return getResizedImageData(
@@ -18,7 +22,7 @@ const fetch = (query) => {
     respectAspectRatio,
     query['arc-site'],
     undefined,
-    true,
+    isCompressedImageParams,
   );
 };
 

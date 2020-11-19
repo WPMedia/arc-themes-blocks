@@ -188,7 +188,11 @@ describe('the video promo feature', () => {
 
   it('should not render while globalContent is empty while inheritGlobalContent is true', () => {
     const mockConfig = {
-      itemContentConfig: {},
+      itemContentConfig: {
+        contentService: 'ans-item',
+        contentConfiguration: {},
+        contentConfigValues: {},
+      },
       title: 'Title',
       description: 'Description',
       inheritGlobalContent: false,

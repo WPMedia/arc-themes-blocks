@@ -9,7 +9,8 @@
   "files": [
     "features",
     "chains",
-    "layouts"
+    "layouts",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

@@ -52,6 +52,8 @@ describe('the video promo feature', () => {
       title: 'Title',
       description: 'Description',
       inheritGlobalContent: false,
+      autoplay: false,
+      playthrough: false,
     };
   });
 
@@ -209,11 +211,10 @@ describe('the video promo feature', () => {
       description: 'Description',
     };
     useFusionContext.mockClear();
+    config.inheritGlobalContent = false;
 
-    useContent.mockReturnValue({ _id: 'video-uuid' });
+    useContent.mockReturnValue({});
     useFusionContext.mockReturnValue({});
-
-    config.inheritGlobalContent = true;
 
     const wrapper = mount(<VideoPromo customFields={mockConfig} />);
     expect(wrapper.isEmptyRender()).toBe(true);

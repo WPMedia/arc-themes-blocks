@@ -30,9 +30,9 @@ const AlertBadge = styled.span`
 const VideoPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const {
-    autoplay = false,
-    inheritGlobalContent = true,
-    playthrough = false,
+    autoplay,
+    inheritGlobalContent,
+    playthrough,
     alertBadge,
   } = customFields;
 

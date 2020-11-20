@@ -111,11 +111,9 @@ describe('the video promo feature', () => {
 
   it('should use globalContent for video while inherit global content is checked in customfields', () => {
     config.inheritGlobalContent = true;
-    config.title = '';
-    config.description = '';
     const wrapper = mount(<VideoPromo customFields={config} />);
-    expect(wrapper.find('h2').text()).toBe('global content headline');
-    expect(wrapper.find('p').text()).toBe('global content description');
+    expect(wrapper.find('h2').text()).toBe('Title');
+    expect(wrapper.find('p').text()).toBe('Description');
     const video = wrapper.find('#video').at(0);
     expect(video.prop('data-props')).toEqual({
       uuid: 'global-content-id',

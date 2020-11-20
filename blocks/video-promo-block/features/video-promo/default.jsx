@@ -53,8 +53,6 @@ const VideoPromo = ({ customFields }) => {
 
   const content = inheritGlobalContent ? globalContent : customContent;
   const videoId = content?._id;
-  const videoTitle = title || content?.headlines?.basic;
-  const videoDescription = description || content?.description?.basic;
 
   if (!videoId || !content) {
     return null;
@@ -64,13 +62,13 @@ const VideoPromo = ({ customFields }) => {
       <div className="row">
         <div className="col-sm-xl-12">
           {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
-          {videoTitle
+          {title
             && (
             <TitleText
               primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
               className="xl-promo-headline"
             >
-              {videoTitle}
+              {title}
             </TitleText>
             )}
           <Video
@@ -82,13 +80,13 @@ const VideoPromo = ({ customFields }) => {
             env={videoEnv}
             playthrough={playthrough}
           />
-          {videoDescription
+          {description
             && (
             <DescriptionText
               secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
               className="description-text"
             >
-              {videoDescription}
+              {description}
             </DescriptionText>
             )}
         </div>

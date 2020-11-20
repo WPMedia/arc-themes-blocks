@@ -26,7 +26,7 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
     globalContent: {
-      _id: 'e924e51b-db94-492e-8346-02283a126943',
+      _id: 'global-content-id',
       type: 'video',
       version: '0.10.2',
       headlines: {
@@ -111,6 +111,8 @@ describe('the video promo feature', () => {
 
   it('should use globalContent for video while inherit global content is checked in customfields', () => {
     config.inheritGlobalContent = true;
+    config.title = '';
+    config.description = '';
     const wrapper = mount(<VideoPromo customFields={config} />);
     expect(wrapper.find('h2').text()).toBe('global content headline');
     expect(wrapper.find('p').text()).toBe('global content description');
@@ -211,26 +213,7 @@ describe('the video promo feature', () => {
     useFusionContext.mockClear();
 
     useContent.mockReturnValue({ _id: 'video-uuid' });
-    useFusionContext.mockReturnValue({
-      arcSite: 'the-sun',
-      globalContent: {
-        _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
-        type: 'story',
-        version: '0.10.2',
-        promo_items: {
-          lead_art: {
-            type: 'image',
-            headline: {
-              basic: 'image headline',
-            },
-            description: {
-              basic: 'image description',
-            },
-            _id: 'global-content-id',
-          },
-        },
-      },
-    });
+    useFusionContext.mockReturnValue({});
 
     config.inheritGlobalContent = true;
 

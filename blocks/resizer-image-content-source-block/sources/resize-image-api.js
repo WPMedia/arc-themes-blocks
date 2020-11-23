@@ -35,4 +35,9 @@ export default {
   params,
   http: false,
   fetch,
+  // not making any network requests anyway
+  // so this won't be too big of a performance hit
+  // and, resizing the image would change between deployments
+  // with caching the same image if params change
+  cache: false,
 };

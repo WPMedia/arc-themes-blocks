@@ -1,4 +1,6 @@
 import { useFusionContext } from 'fusion:context';
+import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
 import VideoPlayer from './default';
 
 const React = require('react');
@@ -97,6 +99,12 @@ describe('VideoPlayer', () => {
     getElementMock.mockReturnValue({ firstElementChild: {} });
     document.getElementById = getElementMock;
 
+    getThemeStyle.mockImplementation(() => (
+      { 'primary-font-family': 'Leopard' }));
+
+    getProperties.mockImplementation(() => (
+      'sampleSite'));
+
     const customFields = { inheritGlobalContent: false };
     const wrapper = mount(<VideoPlayer
       customFields={customFields}
@@ -111,5 +119,74 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+  });
+
+  it('if playthrough is enabled, add playthrough props ', () => {
+    const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+    + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+    + 'src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+    useFusionContext.mockImplementation(() => (
+      { id: '12345' }));
+
+    const getElementMock = jest.fn();
+    getElementMock.mockReturnValue({ firstElementChild: {} });
+    document.getElementById = getElementMock;
+
+    const customFields = { inheritGlobalContent: false, playthrough: true };
+    const wrapper = mount(<VideoPlayer
+      customFields={customFields}
+      embedMarkup={testEmbed}
+      enableAutoplay
+    />);
+
+    const expectedEmbed = {
+      __html: '<div class="powa"  data-autoplay=true data-muted=true  data-playthrough=true'
+      + ' id="powa-e924" data-org="corecomponents" data-env="prod" data-uuid="e924e51b" '
+      + 'data-aspect-ratio="0.562" data-api="prod"><!--script src="//d2w3jw6424abwq.cloud'
+      + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
+    };
+    expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+  });
+
+  it('if title, description, alert badge is provided then show those ', () => {
+    const testEmbed = '<div class="powa" id="powa-e924" data-org="corecomponents" data-env="prod"'
+    + ' data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod"><script '
+    + 'src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>';
+
+    useFusionContext.mockImplementation(() => (
+      { id: '12345' }));
+
+    const getElementMock = jest.fn();
+    getElementMock.mockReturnValue({ firstElementChild: {} });
+    document.getElementById = getElementMock;
+
+    const titleText = 'Test Title';
+    const descriptionText = 'Test Description';
+    const alertBadgeText = 'Test Alert  Badge';
+
+    const customFields = {
+      inheritGlobalContent: false,
+      playthrough: true,
+      title: titleText,
+      description: descriptionText,
+      alertBadge: alertBadgeText,
+    };
+
+    const wrapper = mount(<VideoPlayer
+      customFields={customFields}
+      embedMarkup={testEmbed}
+      enableAutoplay
+    />);
+
+    const expectedAlertBadge = '<span class="sc-htpNat dgLZsB">Test Alert  Badge</span>';
+    const expectedTitle = '<h2 class="sc-bdVaJa jbIaBK xl-promo-headline">Test Title</h2>';
+    const expectedDescription = '<p class="sc-bwzfXH gfyHkX description-text">Test Description</p>';
+    const foundStyledComponents = wrapper.find('StyledComponent');
+
+    expect(foundStyledComponents.length).toEqual(3);
+    expect(foundStyledComponents.at(0).html()).toEqual(expectedAlertBadge);
+    expect(foundStyledComponents.at(1).html()).toEqual(expectedTitle);
+    expect(foundStyledComponents.at(2).html()).toEqual(expectedDescription);
   });
 });

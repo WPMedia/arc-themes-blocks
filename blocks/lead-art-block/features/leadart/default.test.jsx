@@ -21,6 +21,9 @@ describe('LeadArt', () => {
 
     getProperties.mockImplementation(() => (
       { locale: [] }));
+
+    getTranslatedPhrases.mockImplementation(() => (
+      { t: jest.fn().mockReturnValue('gallery-expand') }));
   });
 
   it('renders html lead art type', () => {
@@ -147,9 +150,6 @@ describe('LeadArt', () => {
   it('uses english phrases if no locale available', () => {
     getProperties.mockImplementation(() => (
       { locale: undefined }));
-
-    getTranslatedPhrases.mockImplementation(() => (
-      {}));
 
     const globalContent = {
       promo_items: {

@@ -35,18 +35,17 @@ const LeadArtWrapperFigure = styled.figure`
 class LeadArt extends Component {
   constructor(props) {
     super(props);
-    const { globalContent: content, customFields, arcSite } = this.props;
+    const { globalContent: content, arcSite } = this.props;
     this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
     this.state = {
       isOpen: false,
-      enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel || this.phrases.t('global.gallery-expand-button'),
-      showCredit: customFields.showCredit || false,
+      buttonLabel: this.phrases.t('global.gallery-expand-button'),
       content,
     };
 
     this.imgRef = React.createRef();
     this.setIsOpenToFalse = this.setIsOpenToFalse.bind(this);
+    this.setIsOpenToTrue = this.setIsOpenToTrue.bind(this);
   }
 
   setIsOpenToFalse() {
@@ -69,7 +68,7 @@ class LeadArt extends Component {
 
   render() {
     const {
-      enableZoom, isOpen, buttonPosition, buttonLabel, showCredit, content,
+      isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
     const { arcSite } = this.props;
@@ -94,7 +93,6 @@ class LeadArt extends Component {
                   mainSrc={mainContent}
                   onCloseRequest={this.setIsOpenToFalse}
                   showImageCaption={false}
-                  enableZoom={enableZoom}
                 />
               )}
             </>
@@ -104,7 +102,7 @@ class LeadArt extends Component {
         return (
           <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
             <div
-              className="innerContent"
+              className="inner-content"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
@@ -120,9 +118,7 @@ class LeadArt extends Component {
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
                   onCloseRequest={this.setIsOpenToFalse}
-                  showImageCaption={showCredit}
                   imageCaption={lead_art.caption}
-                  enableZoom={enableZoom}
                 />
               )}
             </>
@@ -200,18 +196,12 @@ LeadArt.label = 'Lead Art – Arc Block';
 
 LeadArt.defaultProps = {
   customFields: {
-    enableZoom: false,
-    buttonLabel: 'Full Screen',
-    showCredit: false,
+    enableAutoplay: false,
   },
 };
 
 LeadArt.propTypes = {
   customFields: PropTypes.shape({
-    buttonLabel: PropTypes.string,
-    enableZoom: PropTypes.bool,
-    showCredit: PropTypes.bool,
-    inheritGlobalContent: PropTypes.bool,
     enableAutoplay: PropTypes.bool.tag({
       label: 'Autoplay',
       defaultValue: false,

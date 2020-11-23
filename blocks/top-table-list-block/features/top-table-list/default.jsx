@@ -277,6 +277,11 @@ TopTableListWrapper.propTypes = {
       'Extra Large story settings',
       '4:3',
     ),
+    playVideoInPlaceXL: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Extra Large story settings',
+      defaultValue: false,
+    }),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -314,6 +319,11 @@ TopTableListWrapper.propTypes = {
       group: 'Large story settings',
     }),
     ...imageRatioCustomField('imageRatioLG', 'Large story settings', '4:3'),
+    playVideoInPlaceLG: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Large story settings',
+      defaultValue: false,
+    }),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',

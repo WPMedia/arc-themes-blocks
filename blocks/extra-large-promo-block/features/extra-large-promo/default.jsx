@@ -19,8 +19,10 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import VideoPlayer from '@wpmedia/video-player-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
+import extractVideoEmbedFromStory from './_children/extractVideoEmbedFromStory';
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -145,6 +147,7 @@ const ExtraLargePromo = ({ customFields }) => {
   const resizedImageOptions = customFields.imageOverrideURL
     ? customFieldImageResizedImageOptions
     : extractResizedParams(content);
+  const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return content && (
     <>
@@ -156,43 +159,51 @@ const ExtraLargePromo = ({ customFields }) => {
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
               {headlineTmpl()}
-              {customFields.showImage
-              && (
-                <a
-                  href={content.website_url}
-                  title={content && content.headlines ? content.headlines.basic : ''}
-                >
-                  {imageURL
-                    ? (
-                      <Image
-                        url={imageURL}
-                        alt={content && content.headlines ? content.headlines.basic : ''}
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                        resizerURL={getProperties(arcSite)?.resizerURL}
-                        resizedImageOptions={resizedImageOptions}
-                      />
+              {
+                (
+                  !!videoEmbed && (
+                    <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                  )
+                ) || (
+                  customFields.showImage
+                    && (
+                      <a
+                        href={content.website_url}
+                        title={content && content.headlines ? content.headlines.basic : ''}
+                      >
+                        {imageURL
+                          ? (
+                            <Image
+                              url={imageURL}
+                              alt={content && content.headlines ? content.headlines.basic : ''}
+                              smallWidth={ratios.smallWidth}
+                              smallHeight={ratios.smallHeight}
+                              mediumWidth={ratios.mediumWidth}
+                              mediumHeight={ratios.mediumHeight}
+                              largeWidth={ratios.largeWidth}
+                              largeHeight={ratios.largeHeight}
+                              breakpoints={getProperties(arcSite)?.breakpoints}
+                              resizerURL={getProperties(arcSite)?.resizerURL}
+                              resizedImageOptions={resizedImageOptions}
+                            />
+                          )
+
+                          : (
+                            <PlaceholderImage
+                              smallWidth={ratios.smallWidth}
+                              smallHeight={ratios.smallHeight}
+                              mediumWidth={ratios.mediumWidth}
+                              mediumHeight={ratios.mediumHeight}
+                              largeWidth={ratios.largeWidth}
+                              largeHeight={ratios.largeHeight}
+                            />
+                          )}
+
+                        <PromoLabel type={promoType} />
+                      </a>
                     )
-
-                    : (
-                      <PlaceholderImage
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                      />
-                    )}
-
-                  <PromoLabel type={promoType} />
-                </a>
-              )}
+                )
+              }
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}
@@ -262,6 +273,11 @@ ExtraLargePromo.propTypes = {
       group: 'Image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    playVideoInPlace: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Art',
+      defaultValue: false,
+    }),
   }),
 };
 

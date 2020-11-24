@@ -110,7 +110,7 @@ export const getSectionID = (props) => (
 );
 
 export const getSlotName = (props = {}) => {
-  const arcSite = get(props, 'arcSite');
+  const { arcSite } = props;
   const { websiteAdPath } = getProperties(arcSite);
   if (websiteAdPath) {
     return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) ? '/' : ''}${getSectionPath(props) || ''}`;

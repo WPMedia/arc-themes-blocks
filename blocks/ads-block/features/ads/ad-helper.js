@@ -112,7 +112,11 @@ export const getSectionID = (props) => (
 export const getSlotName = (props = {}) => {
   const { arcSite } = props;
   const { websiteAdPath } = getProperties(arcSite);
-  return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) || ''}`;
+
+  if (websiteAdPath) {
+    return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) ? '/' : ''}${getSectionPath(props) || ''}`;
+  }
+  return getAdPath(props) || `${getSectionPath(props) || ''}`;
 };
 
 export const setPageTargeting = (props) => {

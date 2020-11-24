@@ -87,6 +87,7 @@ export const formatSectionPath = (sectionPath) => {
     if (fmtPath.charAt(0) !== '/') {
       fmtPath = `/${fmtPath}`;
     }
+    fmtPath = fmtPath.replace(/\//, '');
   }
   return fmtPath;
 };
@@ -109,9 +110,12 @@ export const getSectionID = (props) => (
 );
 
 export const getSlotName = (props = {}) => {
-  const { arcSite = '' } = props;
-  const { websiteAdPath = '' } = getProperties(arcSite);
-  return `${websiteAdPath}${getSectionID(props)}`;
+  const arcSite = get(props, 'arcSite');
+  const { websiteAdPath } = getProperties(arcSite);
+  if (websiteAdPath) {
+    return getAdPath(props) || `${websiteAdPath || ''}${getSectionPath(props) ? '/' : ''}${getSectionPath(props) || ''}`;
+  }
+  return getAdPath(props) || `${getSectionPath(props) || ''}`;
 };
 
 export const setPageTargeting = (props) => {

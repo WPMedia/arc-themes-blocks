@@ -32,7 +32,7 @@ const LabelBoxSmall = styled.div`
 `;
 
 const Label = styled.span`
-  color: white;
+  color: #fff;
   font-family: Arial;
   font-size: 12px;
   font-stretch: normal;

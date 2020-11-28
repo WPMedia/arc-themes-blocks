@@ -8,6 +8,7 @@ const MastheadItemsContainer = styled.div`
     align-items: flex-end;
     display: flex;
     flex: 1;
+    justify-content: center;
     padding-bottom: 9px;
     padding-top: 5px;
 
@@ -16,10 +17,6 @@ const MastheadItemsContainer = styled.div`
       font-family: ${(props) => props.primaryFont};
       margin: 0;
     }
-  }
-
-  > div {
-    justify-content: center;
   }
 
   > div:first-child {

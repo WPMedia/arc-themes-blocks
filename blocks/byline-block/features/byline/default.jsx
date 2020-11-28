@@ -8,14 +8,14 @@ import getTranslatedPhrases from 'fusion:intl';
 import './byline.scss';
 
 const BylineSection = styled.section`
-  font-family: ${(props) => props.secondaryFont};
-  font-size: 1.25rem;
-  line-height: 2.5rem;
-  color: #191919;
-  ${({ stylesFor }) => stylesFor === 'list' && `
-    display: inline;
-    font-size: .875rem;
-    line-height: 1rem;
+color: #191919;
+font-family: ${(props) => props.secondaryFont};
+font-size: 1.25rem;
+line-height: 2.5rem;
+${({ stylesFor }) => stylesFor === 'list' && `
+  display: inline;
+  font-size: .875rem;
+  line-height: 1rem;
 `}
 `;
 

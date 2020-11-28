@@ -1,0 +1,17 @@
+import SearchBox from './features/navigation/_children/search-box'
+import { select, text, boolean } from '@storybook/addon-knobs';
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+
+# Header nav
+
+<Meta title="Header nav" component={SearchBox} />
+
+## Stories
+
+** Custom Search box **
+
+<Preview>
+  <Story name="Custom Search box">
+    <SearchBox placeholderText={"placeholder"} />
+  </Story>
+</Preview>

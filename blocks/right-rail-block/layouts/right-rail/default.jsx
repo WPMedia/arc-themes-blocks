@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import './default.scss';
 
-const getFeatureList = () => {
+const useFeatueList = () => {
   const { renderables } = useAppContext();
   const featureList = {};
   renderables.forEach((renderable) => {
@@ -16,7 +16,7 @@ const getFeatureList = () => {
 
 const RightRailLayout = ({ children }) => {
   const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] = children;
-  const featureList = getFeatureList();
+  const featureList = useFeatueList();
 
   return (
     <>

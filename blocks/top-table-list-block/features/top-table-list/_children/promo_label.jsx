@@ -23,7 +23,6 @@ export const getLabelText = (phrases, type) => {
 
 const LabelBoxLarge = styled.div`
   align-items: center;
-  padding: 6px 8px 8px;
   background-color: ${(props) => props.primaryColor};
   border: none;
   border-radius: 4px;
@@ -31,29 +30,30 @@ const LabelBoxLarge = styled.div`
   display: flex;
   flex-direction: row;
   left: 8px;
+  padding: 6px 8px 8px;
   position: absolute;
 `;
 
 const LabelBoxSmall = styled.div`
   align-items: center;
-  padding: 8px;
   background-color: ${(props) => props.primaryColor};
   border: none;
   border-radius: 4px;
   display: flex;
   flex-direction: row;
+  padding: 8px;
   position: absolute;
   right: 8px;
   top: 8px;
 `;
 
 const Label = styled.span`
-  color: white;
+  color: #fff;
   font-family: Arial;
   font-size: 12px;
-  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
+  font-weight: bold;
   height: 12px;
   letter-spacing: normal;
   margin-left: 8px;

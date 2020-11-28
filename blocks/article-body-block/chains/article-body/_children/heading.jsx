@@ -8,7 +8,7 @@ const Heading = ({ element, primaryColor }) => {
     a {
       color: ${(props) => props.primaryColor};
     }
-  `;
+`;
 
   return (
     <StyledHeading

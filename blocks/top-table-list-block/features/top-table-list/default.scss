@@ -26,8 +26,8 @@
 
     .vertical {
       grid-auto-flow: column;
-      grid-row-gap: 0.5rem;
       grid-column-gap: 0;
+      grid-row-gap: 0.5rem;
 
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
         grid-auto-flow: row;
@@ -47,12 +47,12 @@
     }
 
     .headline-wrap-vertical {
-      height: 4.6em;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
+      box-orient: vertical;
       -moz-box-oriented: vertical;
+      display: box;
+      height: 4.6em;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
       /* opera */
       text-overflow: -o-ellipsis-lastline;
     }

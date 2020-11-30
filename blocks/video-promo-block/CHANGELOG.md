@@ -8,7 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* Use peer dependencies not dependencies for packages already installed ([f692bd0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f692bd0a48e9c69faded2c5a98b731117fb7ba96))
+* Use deliberate stable tags for blocks to demonstrate that peerDeps and deps can work together, or at least be installed separately ([35210c3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/35210c3b2f3e53e2c48c5a06a8b83c72ceb2ae18))
 
 
 
@@ -25,11 +25,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 ## [5.7.1-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0...v5.7.1-canary.0) (2020-10-05)
-
-
-
-
-
-# [5.7.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.6.0-beta.0...v5.6.0) (2020-09-30)
-
-**Note:** Initial version

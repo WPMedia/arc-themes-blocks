@@ -4,6 +4,10 @@
 
   a {
     color: $ui-primary-font-color;
+    position: relative;
+    h1 {
+      display: inline;
+    }
   }
 
   a > picture > img {
@@ -26,6 +30,11 @@
   img {
     height: auto;
     max-width: 100%;
+  }
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;
   }
 }
 

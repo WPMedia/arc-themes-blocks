@@ -1,0 +1,31 @@
+{
+  "name": "@wpmedia/video-promo-block",
+  "version": "5.9.0-beta.0",
+  "description": "Fusion News Theme Video Promo block",
+  "author": "Cheng-Hsin Weng <cheng-hsin.weng@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/video-promo-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/engine-theme-sdk": "beta",
+    "styled-components": "^4.4.0"
+  },
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+}

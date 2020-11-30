@@ -71,7 +71,6 @@ const getResizerParam = (
       thumborParam = thumborParam.filter(focalPointFilter(focalPoint));
     }
     thumborParam = thumborParam.resize(width, height).buildUrl();
-
     const urlSuffix = originalUrl.replace('https://', '');
     const breakpointName = `${width}x${height}`;
     return thumborParam
@@ -107,7 +106,12 @@ const getImageDimensionsForAspectRatios = (onlyImageWidths = []) => {
 // if only [420] (int) and ['1:1'], aspect ratio
 // output: array of strings for ['420x420']
 export const getResizerParams = (
-  originalUrl, respectAspectRatio = false, resizerURL, onlyImageWidths = [], focalPoint,
+  originalUrl,
+  respectAspectRatio = false,
+  resizerURL,
+  onlyImageWidths = [],
+  focalPoint,
+  compressedParams,
 ) => {
   const output = {};
   if (!originalUrl) {
@@ -138,19 +142,35 @@ export const getResizerParams = (
   // todo: use webp for next gen images spike
   // getParamsByFormat('webp', output);
   getParamsByFormat('jpg', output);
+  /*  Going to clean the data by stripping off leading slash
+  and compressing format and quality notation
+  Since this code is only supporting jpg and filterQuality of 70,
+  we will just assume as much for now.
+  also going to add a param (cm=t), letting src/components/Image/thumbor-image-url.ts in engine-sdk
+  know that this url has been compressed.
+  */
+  Object.keys(output).forEach((key) => {
+    if (output[key]) {
+      output[key] = output[key].replace(/\//, '');
+
+      if (compressedParams) {
+        output[key] = output[key].replace(':format(jpg):quality(70)', ':cm=t');
+      }
+    }
+  });
   return output;
 };
 
-const resizeImage = (image, resizerURL, focalPoint) => {
+const resizeImage = (image, resizerURL, focalPoint, compressedParams) => {
   if ((image.type && image.type !== 'image') || !image.url) {
     throw new Error('Not a valid image object');
   }
 
   // todo: support fitIn respect aspect logic
-  return getResizerParams(image.url, false, resizerURL, [], focalPoint);
+  return getResizerParams(image.url, false, resizerURL, [], focalPoint, compressedParams);
 };
 
-const resizePromoItems = (promoItems, resizerURL) => {
+const resizePromoItems = (promoItems, resizerURL, compressedParams) => {
   const focalPoint = focalPointFromPromo(promoItems);
   return Object.keys(promoItems)
     .reduce((promoItemWithResizedImages, key) => {
@@ -160,6 +180,7 @@ const resizePromoItems = (promoItems, resizerURL) => {
           promoItems,
           resizerURL,
           focalPoint,
+          compressedParams,
         );
         promoItemWithResizedImages.url = promoItems.url;
         promoItemWithResizedImages.type = 'image';
@@ -170,10 +191,21 @@ const resizePromoItems = (promoItems, resizerURL) => {
     }, {});
 };
 
-const resizeAuthorCredits = (authorCredits, resizerURL) => authorCredits.map((creditObject) => ({
+const resizeAuthorCredits = (
+  authorCredits,
+  resizerURL,
+  compressedParams,
+) => authorCredits.map((creditObject) => ({
   ...creditObject,
   resized_params: creditObject?.image?.url
-    ? getResizerParams(creditObject.image.url, false, resizerURL) : {},
+    ? getResizerParams(
+      creditObject.image.url,
+      false,
+      resizerURL,
+      [],
+      undefined,
+      compressedParams,
+    ) : {},
 }));
 
 const getResizedImageParams = (data, options) => {
@@ -193,6 +225,7 @@ const getResizedImageParams = (data, options) => {
               resizerURL,
               onlyImageWidths,
               focalPoint,
+              options?.compressedParams,
             );
           }
           // recursively resize if gallery with speicifc resized sizes
@@ -213,6 +246,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.promo_items.basic = resizePromoItems(
         sourceData.promo_items.basic,
         resizerURL,
+        options?.compressedParams,
       );
     }
 
@@ -220,6 +254,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.promo_items.lead_art = resizePromoItems(
         sourceData.promo_items.lead_art,
         resizerURL,
+        options?.compressedParams,
       );
     }
 
@@ -236,6 +271,7 @@ const getResizedImageParams = (data, options) => {
         resizerURL,
         [],
         focalPointFromPromo(sourceData.promo_items.lead_art.promo_items.basic),
+        options?.compressedParams,
       );
     }
 
@@ -244,6 +280,7 @@ const getResizedImageParams = (data, options) => {
       sourceData.credits.by = resizeAuthorCredits(
         sourceData.credits.by,
         resizerURL,
+        options?.compressedParams,
       );
     }
     return sourceData;
@@ -298,6 +335,7 @@ const getResizedImageData = (
   respectAspectRatio = false,
   arcSite,
   imageWidths = getProperties(arcSite).imageWidths,
+  compressedParams = false,
 ) => {
   // resizer url is only arcSite specific option
   const { aspectRatios, resizerURL } = getProperties(arcSite);
@@ -315,13 +353,16 @@ const getResizedImageData = (
   }
 
   if (onlyUrl) {
-    return !data ? null : getResizerParams(data, respectAspectRatio, resizerURL);
+    return !data
+      ? null
+      : getResizerParams(data, respectAspectRatio, resizerURL, [], undefined, compressedParams);
   }
 
   return getResizedImageParams(data, {
     resizerSecret: resizerKey,
     resizerURL,
     imageWidths,
+    compressedParams,
   }, filterQuality);
   // Note: filterQuality is passed in but never used...
   // Should be moved to the options object and other functions to make use of option

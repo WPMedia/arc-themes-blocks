@@ -1,3 +1,5 @@
+import getResizedImageData from '@wpmedia/resizer-image-block';
+
 export default {
   resolve(contentOptions) {
     const { _id, 'arc-site': arcSite } = contentOptions;
@@ -5,5 +7,17 @@ export default {
   },
   params: {
     _id: 'text',
+  },
+  transform: (data, query) => {
+    const { isCompressedImageParams = false } = query;
+    return getResizedImageData(
+      data,
+      null,
+      null,
+      null,
+      query['arc-site'],
+      undefined,
+      isCompressedImageParams,
+    );
   },
 };

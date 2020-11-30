@@ -9,6 +9,8 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
+
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -52,6 +54,7 @@ const LargeManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
+                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // large promo has 4:3

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/collections-content-source-block",
-  "version": "5.8.2",
+  "version": "5.9.0-beta.0",
   "description": "Fusion News Theme collections content API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -22,9 +22,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/resizer-image-block": "latest"
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/resizer-image-block": "beta"
   },
-  "gitHead": "19de22f905fd1a2b3efee242235ab15af41bd96c"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

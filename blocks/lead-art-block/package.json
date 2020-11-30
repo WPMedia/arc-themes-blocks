@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/lead-art-block",
-  "version": "5.8.2",
+  "version": "5.9.0-beta.0",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -20,15 +20,15 @@
     "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/lead-art-block"
   },
-  "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/video-player-block": "latest",
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/video-player-block": "beta",
     "styled-components": "^4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

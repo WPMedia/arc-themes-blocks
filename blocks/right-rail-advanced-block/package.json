@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/right-rail-advanced-block",
-  "version": "5.8.2",
+  "version": "5.9.0-beta.0",
   "description": "Fusion themes block containing an advanced right-rail layout.",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -24,10 +24,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/news-theme-css": "stable",
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/news-theme-css": "beta",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

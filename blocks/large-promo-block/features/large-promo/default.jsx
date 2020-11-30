@@ -19,6 +19,10 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
+
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -60,6 +64,7 @@ const LargePromo = ({ customFields }) => {
       || '';
 
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
+  const promoType = discoverPromoType(content);
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {
@@ -146,7 +151,7 @@ const LargePromo = ({ customFields }) => {
         <div className="row">
           {customFields.showImage
           && (
-            <div className="col-sm-12 col-md-xl-6">
+            <div className="col-sm-12 col-md-xl-6 flex-col">
               <a
                 href={content.website_url}
                 title={content && content.headlines ? content.headlines.basic : ''}
@@ -155,6 +160,7 @@ const LargePromo = ({ customFields }) => {
                   customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
+                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         url={customFields.imageOverrideURL
                           ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}
@@ -168,7 +174,6 @@ const LargePromo = ({ customFields }) => {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={getProperties(arcSite)?.resizerURL}
                         resizedImageOptions={extractResizedParams(content)}
-                        // todo: should have resized params
                       />
                     )
                     : (
@@ -181,7 +186,8 @@ const LargePromo = ({ customFields }) => {
                         largeHeight={ratios.largeHeight}
                       />
                     )
-  }
+                }
+                <PromoLabel type={promoType} />
               </a>
             </div>
           )}

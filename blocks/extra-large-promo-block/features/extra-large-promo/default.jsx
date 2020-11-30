@@ -19,6 +19,10 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import PromoLabel from './_children/promo_label';
+import discoverPromoType from './_children/discover';
+
+const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -58,6 +62,7 @@ const ExtraLargePromo = ({ customFields }) => {
   const overlineText = (content?.label?.basic?.text ?? null)
     || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
     || '';
+  const promoType = discoverPromoType(content);
 
   const overlineTmpl = () => {
     if (customFields.showOverline && overlineDisplay) {
@@ -157,6 +162,7 @@ const ExtraLargePromo = ({ customFields }) => {
                   {customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
+                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         url={customFields.imageOverrideURL
                           ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}
@@ -169,7 +175,6 @@ const ExtraLargePromo = ({ customFields }) => {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={getProperties(arcSite)?.resizerURL}
                         resizedImageOptions={extractResizedParams(content)}
-                        // todo: this should have resized params
                       />
                     )
                     : (
@@ -182,6 +187,7 @@ const ExtraLargePromo = ({ customFields }) => {
                         largeHeight={ratios.largeHeight}
                       />
                     )}
+                  <PromoLabel type={promoType} />
                 </a>
               )}
               {descriptionTmpl()}

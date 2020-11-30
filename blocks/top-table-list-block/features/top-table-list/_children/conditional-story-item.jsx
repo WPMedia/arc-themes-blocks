@@ -107,7 +107,10 @@ const ConditionalStoryItem = (props) => {
       );
     case SMALL: {
       let hasPaddingRight = false;
-      if ((typeof customFields.storiesPerRowSM === 'undefined') || (customFields.storiesPerRowSM === 2)) {
+      if (
+        (typeof customFields.storiesPerRowSM === 'undefined')
+        || (customFields.storiesPerRowSM === null)
+        || (customFields.storiesPerRowSM === 2)) {
         hasPaddingRight = (
           index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)
         ) % 2 === 0;
@@ -127,6 +130,7 @@ const ConditionalStoryItem = (props) => {
           arcSite={arcSite}
           paddingRight={hasPaddingRight}
           imageRatio={customFields.imageRatioSM}
+          element={element}
         />
       );
     }

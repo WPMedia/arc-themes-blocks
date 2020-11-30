@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/search-results-list-block",
-  "version": "5.8.2",
+  "version": "5.9.0-beta.0",
   "description": "Fusion News Theme search results list block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -23,15 +23,15 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "dependencies": {
-    "@wpmedia/date-block": "latest",
-    "@wpmedia/engine-theme-sdk": "^2.2.0",
-    "@wpmedia/global-phrases-block": "latest",
-    "@wpmedia/shared-styles": "latest",
+  "peerDependencies": {
+    "@wpmedia/date-block": "beta",
+    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/global-phrases-block": "beta",
+    "@wpmedia/shared-styles": "beta",
     "styled-components": "^4.4.0"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
-  "gitHead": "7e5881cd8abeec2c2540cd76d5f4720a74d80a77"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

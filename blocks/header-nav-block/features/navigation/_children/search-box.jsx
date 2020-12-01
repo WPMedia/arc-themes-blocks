@@ -32,6 +32,8 @@ function SearchBox(props) {
       // then open it and focus the input on click
       // set focus on open
       // in some sense this is a side effect that could be a custom useState hook
+      // custom hook doing this
+      // follow up with Joe on this potential custom hook
       searchInput.current.focus();
       setSearchBarOpen(true);
     }
@@ -65,6 +67,10 @@ function SearchBox(props) {
         className={btnClassNames}
         onClick={handleClick}
         type="button"
+        // if react transition group
+        // we wouldn't have to track the state of the transition
+        // wouldn't have to listen for
+        disabled={isSearchBarOpen}
         aria-label={isSearchBarOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />

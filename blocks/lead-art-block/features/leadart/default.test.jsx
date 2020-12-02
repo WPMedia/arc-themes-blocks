@@ -54,7 +54,7 @@ describe('LeadArt', () => {
     expect(wrapper.find('ReactImageLightbox').length).toEqual(1);
   });
 
-  it('renders video lead art type', () => {
+  it('renders video lead art type without auto-play', () => {
     const globalContent = {
       promo_items: {
         lead_art: {
@@ -63,8 +63,38 @@ describe('LeadArt', () => {
       },
     };
 
-    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    expect(wrapper.find('VideoPlayer').length).toEqual(1);
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{ enableAutoplay: false }}
+      />,
+    );
+    const vidPlayer = wrapper.find('VideoPlayer');
+    expect(vidPlayer.length).toEqual(1);
+    expect(vidPlayer.prop('enableAutoplay')).toBeFalsy();
+  });
+
+  it('renders video lead art type with auto-play', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'video',
+        },
+      },
+    };
+
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{ enableAutoplay: true }}
+      />,
+    );
+    const vidPlayer = wrapper.find('VideoPlayer');
+    expect(vidPlayer.length).toEqual(1);
+    expect(vidPlayer.prop('enableAutoplay')).toBeDefined();
+    expect(vidPlayer.prop('enableAutoplay')).toEqual(true);
   });
 
   it('renders image type', () => {

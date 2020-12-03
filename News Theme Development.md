@@ -129,8 +129,7 @@ git checkout -b PEN-[jira ticket num]-[brief description of feature]
 
 #### How To Publish
 
-Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta` or `stable` or other tags.
-
+Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta`, `stable`, `rc`, or other desired tags. The tags and publish GitHub Actions can be tracked by looking at the [Actions tab on the GitHub UI](https://github.com/WPMedia/fusion-news-theme-blocks/actions) and within the .github folder within the repository.
 
 WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 

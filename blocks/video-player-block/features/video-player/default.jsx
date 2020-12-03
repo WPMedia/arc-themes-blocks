@@ -106,26 +106,11 @@ const VideoPlayer = (props) => {
             {title}
           </TitleText>
           )}
-          {(embedHTML && (
+          {embedHTML && (
             <div className="embed-video">
               <EmbedContainer markup={embedHTML}>
                 <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
               </EmbedContainer>
-            </div>
-          )) || (
-            <div
-              id={`empty-box-${videoRef.current}`}
-              className={[
-                'ev-empty-box',
-                'arcev',
-                'padding-sm-all',
-              ].join(' ')}
-            >
-              <div className="margin-md-bottom">
-                <span>
-                  N/A
-                </span>
-              </div>
             </div>
           )}
           {description

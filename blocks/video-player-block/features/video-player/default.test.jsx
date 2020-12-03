@@ -23,7 +23,7 @@ describe('VideoPlayer', () => {
 
   it('renders ', () => {
     const wrapper = shallow(<VideoPlayer />);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
+    expect(wrapper.find('.embed-video').length).toEqual(0);
   });
 
   it('if inheritGlobalContent do not fetch data and use gc ', () => {
@@ -61,7 +61,6 @@ describe('VideoPlayer', () => {
     + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if inheritGlobalContent is FALSE use markup passed as prop ', () => {
@@ -86,7 +85,6 @@ describe('VideoPlayer', () => {
       + '</script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if autplay is enabled, add autoplay props ', () => {
@@ -121,7 +119,6 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if playthrough is enabled, add playthrough props ', () => {
@@ -150,7 +147,6 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if title, description, alert badge is provided then show those ', () => {
@@ -194,7 +190,7 @@ describe('VideoPlayer', () => {
     expect(foundStyledComponents.at(2).html()).toEqual(expectedDescription);
   });
 
-  it('if no video content, show empty box ', () => {
+  it('if no video content, show empty space ', () => {
     const testEmbed = undefined;
 
     useFusionContext.mockImplementation(() => (
@@ -217,6 +213,6 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    expect(wrapper.find('#empty-box-12345').length).toEqual(1);
+    expect(wrapper.find('#video-12345').length).toEqual(0);
   });
 });

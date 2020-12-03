@@ -61,6 +61,7 @@ describe('VideoPlayer', () => {
     + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if inheritGlobalContent is FALSE use markup passed as prop ', () => {
@@ -85,6 +86,7 @@ describe('VideoPlayer', () => {
       + '</script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if autplay is enabled, add autoplay props ', () => {
@@ -119,6 +121,7 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if playthrough is enabled, add playthrough props ', () => {
@@ -147,6 +150,7 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('#empty-box-12345').length).toEqual(0);
   });
 
   it('if title, description, alert badge is provided then show those ', () => {
@@ -188,5 +192,31 @@ describe('VideoPlayer', () => {
     expect(foundStyledComponents.at(0).html()).toEqual(expectedAlertBadge);
     expect(foundStyledComponents.at(1).html()).toEqual(expectedTitle);
     expect(foundStyledComponents.at(2).html()).toEqual(expectedDescription);
+  });
+
+  it('if no video content, show empty box ', () => {
+    const testEmbed = undefined;
+
+    useFusionContext.mockImplementation(() => (
+      { id: '12345' }));
+
+    const getElementMock = jest.fn();
+    getElementMock.mockReturnValue({ firstElementChild: {} });
+    document.getElementById = getElementMock;
+
+    getThemeStyle.mockImplementation(() => (
+      { 'primary-font-family': 'Leopard' }));
+
+    getProperties.mockImplementation(() => (
+      'sampleSite'));
+
+    const customFields = { inheritGlobalContent: false };
+    const wrapper = mount(<VideoPlayer
+      customFields={customFields}
+      embedMarkup={testEmbed}
+      enableAutoplay
+    />);
+
+    expect(wrapper.find('#empty-box-12345').length).toEqual(1);
   });
 });

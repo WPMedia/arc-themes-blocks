@@ -1,4 +1,5 @@
 import { useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import VideoPlayer from './default';
@@ -24,6 +25,23 @@ describe('VideoPlayer', () => {
   it('renders ', () => {
     const wrapper = shallow(<VideoPlayer />);
     expect(wrapper.find('.embed-video').length).toEqual(1);
+  });
+
+  it('renders with deprecated "websiteURL" custom field', () => {
+    const mockFusionContext = { arcSite: 'dagen' };
+    useFusionContext.mockReturnValueOnce(mockFusionContext);
+    const websiteURL = '/some/website/url';
+    const mockFetchParam = {
+      query: {
+        site: mockFusionContext.arcSite,
+        website_url: websiteURL,
+      },
+      source: 'content-api',
+    };
+    const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
+    expect(useContent).toHaveBeenCalledTimes(1);
+    expect(useContent).toHaveBeenCalledWith(mockFetchParam);
   });
 
   it('if inheritGlobalContent do not fetch data and use gc ', () => {

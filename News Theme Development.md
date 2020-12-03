@@ -62,7 +62,7 @@ As indicated from the diagram above, fusion-news-theme-blocks is dependent on th
 
 The development process is similar engine-theme-sdk, except when it comes time to publish, you need to follow the Lerna publish procedure. For more information, see the repo's read me: <https://github.com/WPMedia/fusion-news-theme-blocks/blob/stable/README.md>
 
-Note: When publishing, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
+Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (fusion-news-theme-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
 
 Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.  
 

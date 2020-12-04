@@ -399,7 +399,7 @@ describe('ad-helper', () => {
         },
       });
       expect(sectionId).toBeDefined();
-      expect(sectionId).toEqual('/custom/ad_path');
+      expect(sectionId).toEqual('/custom/ad-path');
     });
   });
 

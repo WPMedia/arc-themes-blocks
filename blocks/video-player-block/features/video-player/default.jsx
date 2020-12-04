@@ -38,6 +38,7 @@ const VideoPlayer = (props) => {
     alertBadge,
     title,
     description,
+    websiteURL,
   } = customFields;
 
   const { id, globalContent = {}, arcSite } = useFusionContext();
@@ -57,13 +58,19 @@ const VideoPlayer = (props) => {
 
   // In all other scenarios, fetch from the provided url and content api
   const customFieldSource = customFields?.itemContentConfig?.contentService ?? null;
-  const fetchSource = doFetch ? customFieldSource : null;
+  const contentConfigValues = customFields?.itemContentConfig?.contentConfigValues;
+  // Support for deprecated 'websiteURL' custom field (use 'content-api' & URL for fetch)
+  const fetchSource = doFetch ? (
+    (!!websiteURL && 'content-api') || customFieldSource
+  ) : null;
+  const fetchDataQuery = websiteURL ? {
+    website_url: websiteURL,
+    site: arcSite,
+  } : (contentConfigValues && { 'arc-site': arcSite, ...contentConfigValues }) || null;
 
   const fetchedData = useContent({
     source: fetchSource,
-    query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
-      : null,
+    query: fetchDataQuery,
   });
 
   embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;

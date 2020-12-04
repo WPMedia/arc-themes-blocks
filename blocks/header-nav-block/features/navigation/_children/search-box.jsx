@@ -20,6 +20,7 @@ function SearchBox(props) {
     if (isSearchBarOpen) {
       event.preventDefault();
     } else {
+      searchInput.current.focus();
       setSearchBarOpen(true);
     }
   }

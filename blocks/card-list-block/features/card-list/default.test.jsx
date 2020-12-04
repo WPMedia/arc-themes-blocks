@@ -103,7 +103,7 @@ describe('Card list', () => {
       it('should render two anchor tags - one around image one for the title', () => {
         expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(2);
         expect(wrapper.find('#card-list--link-container').find('Image').length).toEqual(1);
-        expect(wrapper.find('.card-list-headline #card-list--headline-link').length).toEqual(1);
+        expect(wrapper.find('h2.card-list-headline #card-list--headline-link').length).toEqual(1);
       });
 
       it('should render one image wrapped in an anchor tag', () => {
@@ -129,7 +129,7 @@ describe('Card list', () => {
       });
 
       it('should render a main headline', () => {
-        expect(wrapper.find('.card-list-headline').length).toEqual(1);
+        expect(wrapper.find('h2.card-list-headline').length).toEqual(1);
       });
 
       it('should render an author and a publish date section', () => {
@@ -149,11 +149,11 @@ describe('Card list', () => {
       });
 
       it('should set the primary font for the headline', () => {
-        expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
+        expect(wrapper.find('h2.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
 
       it('should set the primary font for the title', () => {
-        expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
+        expect(wrapper.find('h2.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
 
       it('should not add the line divider', () => {
@@ -252,7 +252,7 @@ describe('Card list', () => {
         expect(wrapper.find('.overline').length).toBe(0);
       });
       it('should render headline', () => {
-        expect(wrapper.find('.card-list-headline').length).toBe(1);
+        expect(wrapper.find('h2.card-list-headline').length).toBe(1);
       });
       it('should render author-date', () => {
         expect(wrapper.find('.author-date').length).toBe(1);

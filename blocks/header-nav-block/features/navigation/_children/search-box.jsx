@@ -67,10 +67,6 @@ function SearchBox(props) {
         className={btnClassNames}
         onClick={handleClick}
         type="button"
-        // if react transition group
-        // we wouldn't have to track the state of the transition
-        // wouldn't have to listen for
-        disabled={isSearchBarOpen}
         aria-label={isSearchBarOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />

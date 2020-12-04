@@ -51,7 +51,9 @@ $submenu-link-color: $ui-dark-gray;
     margin: 0;
     outline: none;
     padding: 0;
-    transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
+    // todo: add transition group targeting this class
+    // className-active, className-exit 
+    // transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
   }
 }

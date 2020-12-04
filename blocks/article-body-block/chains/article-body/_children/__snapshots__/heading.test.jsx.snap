@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the article body Heading component should default to h2 if no heading level is given 1`] = `"<h2 class=\\"sc-bdVaJa eajvwU\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h2>"`;
+
+exports[`the article body Heading component should render the correct heading 1`] = `"<h3 class=\\"sc-bdVaJa eajvwU\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h3>"`;

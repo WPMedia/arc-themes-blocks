@@ -15,6 +15,15 @@ function SearchBox(props) {
   const [isSearchBarOpen, setSearchBarOpen] = useState(alwaysOpen);
   const searchInput = useRef(null);
 
+  function handleMousedown(event) {
+    // handle mousedown manually
+    if (isSearchBarOpen) {
+      event.preventDefault();
+    } else {
+      setSearchBarOpen(true);
+    }
+  }
+
   function handleClick(event) {
     // handling submit manually
     event.preventDefault();
@@ -61,12 +70,14 @@ function SearchBox(props) {
       <input
         ref={searchInput}
         onKeyDown={handleKey}
+        onBlur={() => setSearchBarOpen(false)}
         type="text"
         placeholder={placeholderText}
       />
       <button
         className={btnClassNames}
         onClick={handleClick}
+        onMouseDown={handleMousedown}
         type="button"
         aria-label={isSearchBarOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >

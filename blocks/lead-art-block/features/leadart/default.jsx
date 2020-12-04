@@ -71,7 +71,7 @@ class LeadArt extends Component {
       isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -109,7 +109,12 @@ class LeadArt extends Component {
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer embedMarkup={lead_art.embed_html} enableAutoplay />;
+        return (
+          <VideoPlayer
+            embedMarkup={lead_art?.embed_html}
+            enableAutoplay={!!(customFields?.enableAutoplay)}
+          />
+        );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (

@@ -4,6 +4,25 @@ import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import EmbedContainer from 'react-oembed-container';
 import './default.scss';
+import styled from 'styled-components';
+import getThemeStyle from 'fusion:themes';
+import getProperties from 'fusion:properties';
+
+const TitleText = styled.h2`
+  font-family: ${(props) => props.primaryFont};
+`;
+
+const DescriptionText = styled.p`
+  font-family: ${(props) => props.secondaryFont};
+`;
+
+const AlertBadge = styled.span`
+  background-color: #db0a07;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+`;
 
 const VideoPlayer = (props) => {
   const {
@@ -12,15 +31,24 @@ const VideoPlayer = (props) => {
     enableAutoplay = false,
   } = props;
 
-  const { inheritGlobalContent = false, websiteURL = '' } = customFields;
-  const { id, globalContent: { embed_html: globalContentHTML = '' } = {}, arcSite } = useFusionContext();
+  const {
+    autoplay,
+    inheritGlobalContent,
+    playthrough,
+    alertBadge,
+    title,
+    description,
+    websiteURL,
+  } = customFields;
+
+  const { id, globalContent = {}, arcSite } = useFusionContext();
   const videoRef = useRef(id);
   let embedHTML = '';
   let doFetch = false;
 
   // If it's inheriting from global content, use the html from the content
   if (inheritGlobalContent) {
-    embedHTML = globalContentHTML;
+    embedHTML = globalContent?.embed_html;
   } else if (embedMarkup) {
     // If there is an embed html being passed in from a parent, use that
     embedHTML = embedMarkup;
@@ -29,21 +57,32 @@ const VideoPlayer = (props) => {
   }
 
   // In all other scenarios, fetch from the provided url and content api
-  const fetchSource = doFetch ? 'content-api' : null;
+  const customFieldSource = customFields?.itemContentConfig?.contentService ?? null;
+  const contentConfigValues = customFields?.itemContentConfig?.contentConfigValues;
+  // Support for deprecated 'websiteURL' custom field (use 'content-api' & URL for fetch)
+  const fetchSource = doFetch ? (
+    (!!websiteURL && 'content-api') || customFieldSource
+  ) : null;
+  const fetchDataQuery = websiteURL ? {
+    website_url: websiteURL,
+    site: arcSite,
+  } : (contentConfigValues && { 'arc-site': arcSite, ...contentConfigValues }) || null;
 
   const fetchedData = useContent({
     source: fetchSource,
-    query: {
-      website_url: websiteURL,
-      site: arcSite,
-    },
+    query: fetchDataQuery,
   });
 
   embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
 
-  if (enableAutoplay && embedHTML) {
+  if ((enableAutoplay || autoplay) && embedHTML) {
     const position = embedHTML.search('id=');
     embedHTML = [embedHTML.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
+  }
+
+  if (playthrough && embedHTML) {
+    const position = embedHTML.search('id=');
+    embedHTML = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
   }
 
   // Make sure that the player does not render until after component is mounted
@@ -59,10 +98,35 @@ const VideoPlayer = (props) => {
   });
 
   return (
-    <div className="embed-video">
-      <EmbedContainer markup={embedHTML}>
-        <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-      </EmbedContainer>
+    <div className="container-fluid video-promo">
+      <div className="row">
+        <div className="col-sm-xl-12">
+          {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
+          {title
+          && (
+          <TitleText
+            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            className="xl-promo-headline"
+          >
+            {title}
+          </TitleText>
+          )}
+          <div className="embed-video">
+            <EmbedContainer markup={embedHTML}>
+              <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+            </EmbedContainer>
+          </div>
+          {description
+            && (
+            <DescriptionText
+              secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+              className="description-text"
+            >
+              {description}
+            </DescriptionText>
+            )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -72,9 +136,42 @@ VideoPlayer.propTypes = {
     websiteURL: PropTypes.string.tag({
       group: 'Configure Content',
       label: 'Display Content Info',
+      hidden: true,
     }),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
+      {
+        label: 'Video Content',
+        group: 'Configure Content',
+      },
+    ),
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
+      label: 'Inherit global content',
+      defaultValue: true,
+    }),
+    autoplay: PropTypes.bool.tag(
+      {
+        label: 'Autoplay',
+        defaultValue: false,
+        group: 'Video settings',
+      },
+    ),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
+      defaultValue: false,
+      group: 'Video settings',
+    }),
+    title: PropTypes.string.tag({
+      label: 'Title',
+      group: 'Display settings',
+    }),
+    description: PropTypes.string.tag({
+      label: 'Description',
+      group: 'Display settings',
+    }),
+    alertBadge: PropTypes.string.tag({
+      label: 'Alert Badge',
+      group: 'Display settings',
     }),
   }),
   embedMarkup: PropTypes.string,

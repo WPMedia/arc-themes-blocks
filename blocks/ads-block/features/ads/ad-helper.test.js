@@ -318,17 +318,11 @@ describe('ad-helper', () => {
       expect(fmtPath).toBeDefined();
       expect(fmtPath).toBe('');
     });
-    it('returns formatted section path', () => {
-      const testPath = '/news/test-section/another-section';
-      const fmtPath = formatSectionPath(testPath);
-      expect(fmtPath).toBeDefined();
-      expect(fmtPath).toBe('/news/test_section/another_section');
-    });
     it('returns formatted section path with trailing backslash', () => {
       const testPath = '/news/test-section/another-section/';
       const fmtPath = formatSectionPath(testPath);
       expect(fmtPath).toBeDefined();
-      expect(fmtPath).toBe('/news/test_section/another_section');
+      expect(fmtPath).toBe('/news/test-section/another-section');
     });
   });
 

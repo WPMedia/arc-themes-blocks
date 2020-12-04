@@ -21,7 +21,7 @@ const DescriptionText = styled.p`
 
 const AlertBadge = styled.span`
   background-color: #db0a07;
-  border-radius: 24px;
+  border-radius: 1.5rem;
   color: #fff;
   display: inline-block;
   padding: 0.3rem 0.8rem;

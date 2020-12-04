@@ -63,9 +63,12 @@ const VideoPromo = ({ customFields }) => {
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          <div className="padding-sm-bottom">
-            {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
-          </div>
+          {alertBadge
+            && (
+            <div className="padding-sm-bottom">
+              <AlertBadge>{alertBadge}</AlertBadge>
+            </div>
+            )}
           {title
             && (
             <TitleText

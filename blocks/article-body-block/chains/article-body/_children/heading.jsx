@@ -8,6 +8,7 @@ const Heading = ({ element, primaryColor }) => {
     a {
       color: ${(props) => props.primaryColor};
     }
+    /* stylelint-disable-next-line no-missing-end-of-source-newline */
   `;
 
   return (

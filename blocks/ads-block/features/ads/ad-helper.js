@@ -109,8 +109,6 @@ export const getSectionID = (props) => (
 export const getSlotName = (props = {}) => {
   const { arcSite = '' } = props;
   const { websiteAdPath = '' } = getProperties(arcSite);
-  console.log('websiteAdPath', websiteAdPath);
-  console.log('section id', getSectionID(props));
   if (websiteAdPath) {
     return `${websiteAdPath}/${getSectionID(props)}`;
   }

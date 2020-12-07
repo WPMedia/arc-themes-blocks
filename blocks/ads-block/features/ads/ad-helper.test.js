@@ -432,7 +432,8 @@ describe('ad-helper', () => {
         metaValue: jest.fn(() => undefined),
       });
       expect(slotName).toBeDefined();
-      expect(slotName).toEqual(`${STORY_MOCK.websites[arcSite].website_section._id}`);
+      const fmtSlotName = STORY_MOCK.websites[arcSite].website_section._id.replace(/\//, '');
+      expect(slotName).toEqual(fmtSlotName);
     });
   });
 

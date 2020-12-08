@@ -45,7 +45,8 @@ please explain why (so that we can fix it whenever it gets refactored).
 _The reviewer of the PR should copy-paste this template into the review comments on review._
 
 - [ ] Linting code actions have passed.
-- [ ] Ran the code locally based on the test instructions
+- [ ] Ran the code locally based on the test instructions. 
+  - [ ] I don't think this is needed to be tested locally. For example, a padding style change (storybook?) or a logic change (write a test).
 - [ ] I am a member of the engine theme team so that I can approve and merge this. If you're not on the team, you won't have access to approve and merge this pr. 
 - [ ] Looked to see that the relevant code has code coverage, specifically. Not just if global code coverage is met. 
 - [ ] There are no more warnings than necessary, if explained. The linter will show in-line any warnings when you're reviewing.

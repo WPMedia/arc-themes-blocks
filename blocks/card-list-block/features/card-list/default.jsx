@@ -43,8 +43,6 @@ const Title = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 @Consumer
 class CardList extends React.Component {
   constructor(props) {
@@ -56,6 +54,7 @@ class CardList extends React.Component {
     };
     this.fetchStories();
     this.fetchPlaceholder();
+    this.handleCompressedImageParams = getProperties(this.arcSite)?.shouldCompressImageParams;
   }
 
   getFallbackImageURL() {
@@ -145,7 +144,7 @@ class CardList extends React.Component {
                   {
                    extractImage(contentElements[0].promo_items) ? (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                       compressedThumborParams={this.handleCompressedImageParams}
                        url={extractImage(contentElements[0].promo_items)}
                        alt={contentElements[0].headlines.basic}
                        smallWidth={377}
@@ -160,7 +159,7 @@ class CardList extends React.Component {
                      />
                    ) : (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                       compressedThumborParams={this.handleCompressedImageParams}
                        smallWidth={377}
                        smallHeight={283}
                        mediumWidth={377}
@@ -239,7 +238,7 @@ class CardList extends React.Component {
                             extractImage(element.promo_items)
                               ? (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                                  compressedThumborParams={this.handleCompressedImageParams}
                                   url={extractImage(element.promo_items)}
                                   alt={headlineText}
                                   // small, matches numbered list, is 3:2 aspect ratio
@@ -256,7 +255,7 @@ class CardList extends React.Component {
                               )
                               : (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                                  compressedThumborParams={this.handleCompressedImageParams}
                                   smallWidth={105}
                                   smallHeight={70}
                                   mediumWidth={105}

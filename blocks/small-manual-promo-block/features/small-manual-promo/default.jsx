@@ -9,8 +9,6 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -22,6 +20,9 @@ const SmallManualPromo = ({ customFields }) => {
     source: 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
+
   const headlineClass = customFields.showImage ? 'col-sm-xl-8' : 'col-sm-xl-12 no-image-padding';
 
   return customFields.linkURL ? (
@@ -57,7 +58,7 @@ const SmallManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                  compressedThumborParams={handleCompressedImageParams}
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // small should be 3:2 aspect ratio

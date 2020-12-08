@@ -9,8 +9,6 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -33,6 +31,7 @@ const OverlineHeader = styled.h1`
 
 const ExtraLargeManualPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   const resizedImageOptions = useContent({
     source: 'resize-image-api',
@@ -92,7 +91,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                   rel={customFields.newTab ? 'noreferrer' : ''}
                 >
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                    compressedThumborParams={handleCompressedImageParams}
                     url={customFields.imageURL}
                     alt={customFields.headline}
                     smallWidth={400}

@@ -25,8 +25,6 @@ import {
 import './full-author-bio.scss';
 import constructSocialURL from './shared/constructSocialURL';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const StyledAuthorContent = styled.div`
   font-family: ${(props) => props.primaryFont};
 
@@ -89,7 +87,7 @@ const logos = {
 
 const FullAuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
-  const { locale = 'en' } = getProperties(arcSite);
+  const { locale = 'en', shouldCompressImageParams } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const socials = [];
@@ -112,7 +110,7 @@ const FullAuthorBio = () => {
           {
             (content.authors[0].image) && (
             <Image
-              compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+              compressedThumborParams={shouldCompressImageParams}
               url={content.authors[0].image}
               alt="Author photo"
               smallWidth={158}

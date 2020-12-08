@@ -5,8 +5,6 @@ import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import withFusionContext from 'fusion:context';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 @Consumer
 class PlaceholderImage extends React.Component {
   constructor(props) {
@@ -14,6 +12,7 @@ class PlaceholderImage extends React.Component {
     this.state = { resizedImageOptions: {} };
     this.fetch = this.fetch.bind(this);
     this.getTargetFallbackImageUrl = this.getTargetFallbackImageUrl.bind(this);
+    this.handleCompressedImageParams = getProperties(this.arcSite)?.shouldCompressImageParams;
     this.fetch();
   }
 
@@ -55,7 +54,7 @@ class PlaceholderImage extends React.Component {
     return (
       <>
         <Image
-          compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+          compressedThumborParams={this.handleCompressedImageParams}
           url={this.getTargetFallbackImageUrl()}
           alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
           smallWidth={smallWidth}

@@ -11,8 +11,6 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
     websiteURL,
@@ -39,6 +37,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const textClass = customFields.showImageLG
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
@@ -144,7 +144,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                    compressedThumborParams={handleCompressedImageParams}
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     alt={
@@ -166,7 +166,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               ) : (
                 <div className="image-wrapper">
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                    compressedThumborParams={handleCompressedImageParams}
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

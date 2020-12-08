@@ -19,8 +19,6 @@ import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 import './_articlebody.scss';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const StyledText = styled.p`
   a {
     color: ${(props) => props.primaryColor};
@@ -36,6 +34,9 @@ function parseArticleItem(item, index, arcSite, phrases) {
   const {
     _id: key = index, type, content,
   } = item;
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
+
   // TODO: Split each type into a separate reusable component
   switch (type) {
     case 'text': {
@@ -61,7 +62,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
       return (url && url.length > 0) ? (
         <figure key={key}>
           <Image
-            compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+            compressedThumborParams={handleCompressedImageParams}
             resizedImageOptions={resizedImageOptions}
             url={url}
             alt={altText}

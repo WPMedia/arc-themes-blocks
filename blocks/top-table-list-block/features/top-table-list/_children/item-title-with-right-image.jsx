@@ -6,8 +6,6 @@ import Title from './title';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const ItemTitleWithRightImage = (props) => {
   const {
     itemTitle,
@@ -29,6 +27,8 @@ const ItemTitleWithRightImage = (props) => {
   const onePerLine = customFields.storiesPerRowSM === 1;
   const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
   const promoType = discoverPromoType(element);
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   return (
     <article
@@ -57,7 +57,7 @@ const ItemTitleWithRightImage = (props) => {
             {imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                  compressedThumborParams={handleCompressedImageParams}
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   alt={itemTitle}
@@ -75,7 +75,7 @@ const ItemTitleWithRightImage = (props) => {
             ) : (
               <div className="image-wrapper">
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                  compressedThumborParams={handleCompressedImageParams}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}

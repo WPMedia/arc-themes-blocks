@@ -10,8 +10,6 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
@@ -39,6 +37,7 @@ class NumberedList extends Component {
     this.fetchStories();
     this.fetchPlaceholder();
     this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
+    this.handleCompressedImageParams = getProperties(this.arcSite)?.shouldCompressImageParams;
   }
 
   getFallbackImageURL() {
@@ -134,7 +133,7 @@ class NumberedList extends Component {
                 >
                   {extractImage(promoItems) ? (
                     <Image
-                      compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                      compressedThumborParams={this.handleCompressedImageParams}
                       resizedImageOptions={extractResizedParams(element)}
                       url={extractImage(promoItems)}
                       alt={headlineText}
@@ -150,7 +149,7 @@ class NumberedList extends Component {
                     />
                   ) : (
                     <Image
-                      compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                      compressedThumborParams={this.handleCompressedImageParams}
                       smallWidth={105}
                       smallHeight={70}
                       mediumWidth={105}

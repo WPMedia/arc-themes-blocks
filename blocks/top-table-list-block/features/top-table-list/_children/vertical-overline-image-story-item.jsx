@@ -9,8 +9,6 @@ import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const VerticalOverlineImageStoryItem = (props) => {
   const {
     websiteURL,
@@ -34,6 +32,8 @@ const VerticalOverlineImageStoryItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
@@ -128,7 +128,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               {customFields.showImageXL && /*! videoUUID && */ imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                    compressedThumborParams={handleCompressedImageParams}
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     // todo: get the proper alt tag for this image
@@ -146,7 +146,7 @@ const VerticalOverlineImageStoryItem = (props) => {
               ) : (
                 /*! videoUUID && */ (
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                    compressedThumborParams={handleCompressedImageParams}
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

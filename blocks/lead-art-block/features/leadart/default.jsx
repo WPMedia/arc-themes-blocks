@@ -13,8 +13,6 @@ import {
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const LeadArtWrapperDiv = styled.div`
   figcaption {
     font-family: ${(props) => props.primaryFont};
@@ -48,6 +46,7 @@ class LeadArt extends Component {
     };
 
     this.imgRef = React.createRef();
+    this.handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
   }
 
   lightboxImgHandler() {
@@ -145,7 +144,7 @@ class LeadArt extends Component {
             </button>
             <div ref={this.imgRef}>
               <Image
-                compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                compressedThumborParams={this.handleCompressedImageParams}
                 url={lead_art.url}
                 alt={lead_art.alt_text}
                 smallWidth={800}

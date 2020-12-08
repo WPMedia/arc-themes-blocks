@@ -19,8 +19,6 @@ import {
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -38,6 +36,8 @@ const SmallPromo = ({ customFields }) => {
       }
       : null,
   }) || null;
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   const headlineClass = customFields.showImage
     ? 'col-sm-xl-8'
@@ -81,7 +81,7 @@ const SmallPromo = ({ customFields }) => {
                 {customFields.imageOverrideURL || extractImageFromStory(content)
                   ? (
                     <Image
-                      compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                      compressedThumborParams={handleCompressedImageParams}
                       url={customFields.imageOverrideURL
                         ? customFields.imageOverrideURL : extractImageFromStory(content)}
                       alt={content && content.headlines ? content.headlines.basic : ''}

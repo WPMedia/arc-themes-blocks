@@ -9,8 +9,6 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -40,6 +38,8 @@ const LargeManualPromo = ({ customFields }) => {
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
+
   return customFields.linkURL ? (
     <>
       <article className="container-fluid large-promo">
@@ -54,7 +54,7 @@ const LargeManualPromo = ({ customFields }) => {
                 rel={customFields.newTab ? 'noreferrer noopener' : ''}
               >
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                  compressedThumborParams={handleCompressedImageParams}
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // large promo has 4:3

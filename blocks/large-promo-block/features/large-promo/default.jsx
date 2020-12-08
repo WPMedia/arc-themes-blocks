@@ -22,8 +22,6 @@ import {
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HeadlineText = styled.h1`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -42,6 +40,8 @@ const LargePromo = ({ customFields }) => {
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   }) || null;
+
+  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
     website_section: null,
@@ -160,7 +160,7 @@ const LargePromo = ({ customFields }) => {
                   customFields.imageOverrideURL || extractImageFromStory(content)
                     ? (
                       <Image
-                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
+                        compressedThumborParams={handleCompressedImageParams}
                         url={customFields.imageOverrideURL
                           ? customFields.imageOverrideURL : extractImageFromStory(content)}
                         alt={content && content.headlines ? content.headlines.basic : ''}

@@ -8,6 +8,8 @@ import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
+import PromoLabel from './promo_label';
+import discoverPromoType from './discover';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
@@ -32,6 +34,8 @@ const VerticalOverlineImageStoryItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
+
+  const promoType = discoverPromoType(element);
 
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
@@ -125,39 +129,45 @@ const VerticalOverlineImageStoryItem = (props) => {
               )} */}
               {customFields.showImageXL && /*! videoUUID && */ imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
-                  <Image
-                    resizedImageOptions={resizedImageOptions}
-                    url={imageURL}
-                    // todo: get the proper alt tag for this image
-                    alt={itemTitle}
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
+                  <div className="image-wrapper">
+                    <Image
+                      resizedImageOptions={resizedImageOptions}
+                      url={imageURL}
+                      // todo: get the proper alt tag for this image
+                      alt={itemTitle}
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                    />
+                    <PromoLabel type={promoType} size="large" />
+                  </div>
                 </a>
               ) : (
                 /*! videoUUID && */ (
-                  <Image
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    alt={
-                      getProperties(arcSite).primaryLogoAlt
-                      || 'Placeholder logo'
-                    }
-                    url={targetFallbackImage}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizedImageOptions={placeholderResizedImageOptions}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
+                  <div className="image-wrapper">
+                    <Image
+                      smallWidth={ratios.smallWidth}
+                      smallHeight={ratios.smallHeight}
+                      mediumWidth={ratios.mediumWidth}
+                      mediumHeight={ratios.mediumHeight}
+                      largeWidth={ratios.largeWidth}
+                      largeHeight={ratios.largeHeight}
+                      alt={
+                        getProperties(arcSite).primaryLogoAlt
+                        || 'Placeholder logo'
+                      }
+                      url={targetFallbackImage}
+                      breakpoints={getProperties(arcSite)?.breakpoints}
+                      resizedImageOptions={placeholderResizedImageOptions}
+                      resizerURL={getProperties(arcSite)?.resizerURL}
+                    />
+                    <PromoLabel type={promoType} size="large" />
+                  </div>
                 )
               )}
               {/* customFields.headlinePositionXL === 'below' && headlineTmpl() */}

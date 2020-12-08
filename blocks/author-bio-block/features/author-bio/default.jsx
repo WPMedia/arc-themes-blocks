@@ -57,7 +57,7 @@ const renderAuthorInfo = (author, arcSite) => {
     image && url
       ? (
         <Image
-          compressedThumborParams={handleCompressedImageParams}
+          compressedThumborParams={getProperties(arcSite)?.shouldCompressImageParams}
           url={url}
           alt={(altText || name)}
           smallWidth={84}
@@ -78,7 +78,6 @@ const AuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
   const { credits = {} } = content;
   const { by = [] } = credits;
-  const handleCompressedImageParams = getProperties(arcSite)?.shouldCompressImageParams;
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {

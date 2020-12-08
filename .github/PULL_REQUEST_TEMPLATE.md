@@ -40,3 +40,13 @@ _The author of the PR should fill out the following sections to ensure this PR i
   - [ ] If the amount of work to write unit tests for this change are excessive,
 please explain why (so that we can fix it whenever it gets refactored).
 - [ ] Confirmed relevant documentation has been updated/added.
+
+## Reviewer Checklist 
+_The reviewer of the PR should copy-paste this template into the review comments on review._
+
+- [ ] Linting code actions have passed.
+- [ ] Ran the code locally based on the test instructions
+- [ ] I am a member of the engine theme team so that I can approve and merge this. If you're not on the team, you won't have access to approve and merge this pr. 
+- [ ] Looked to see that the relevant code has code coverage, specifically. Not just if global code coverage is met. 
+- [ ] There are no more warnings than necessary, if explained. The linter will show in-line any warnings when you're reviewing.
+- [ ] I'm not clicking boxes and blindly merging. 

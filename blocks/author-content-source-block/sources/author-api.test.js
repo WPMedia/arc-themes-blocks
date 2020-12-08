@@ -48,7 +48,8 @@ describe('the author api content source block', () => {
     });
 
     it('should return object with blank authors array', () => {
-      expect(contentSource.transform(null)).toEqual({ authors: [] });
+      // as far as I know we can always assume an empty obj for query
+      expect(contentSource.transform(null, {})).toEqual({ authors: [] });
     });
 
     it('should return author with resized params populated', () => {

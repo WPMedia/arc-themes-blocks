@@ -21,7 +21,7 @@ const PromoHeadline = (props) => {
 
   return content ? (
 
-    <div className={`promo-headline${headlineMarginClass}`}>
+    <div className={`promo-headline ${headlineMarginClass}`}>
       <a
         href={content.website_url}
         className="sm-promo-headline"

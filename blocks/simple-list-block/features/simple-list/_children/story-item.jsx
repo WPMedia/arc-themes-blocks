@@ -4,8 +4,6 @@ import getProperties from 'fusion:properties';
 
 import Title from './title';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const StoryItem = (props) => {
   const {
     itemTitle = '',
@@ -31,7 +29,6 @@ const StoryItem = (props) => {
         >
           {imageURL !== '' ? (
             <Image
-              compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
               resizedImageOptions={resizedImageOptions}
               url={imageURL}
               alt={itemTitle}
@@ -49,7 +46,6 @@ const StoryItem = (props) => {
             />
           ) : (
             <Image
-              compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
               smallWidth={274}
               smallHeight={183}
               mediumWidth={274}

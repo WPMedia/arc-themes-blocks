@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/author-bio-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme byline block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -25,8 +25,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

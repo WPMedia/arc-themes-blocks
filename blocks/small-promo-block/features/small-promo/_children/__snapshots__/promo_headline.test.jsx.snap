@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promo headline return null while no content available in props 1`] = `
+<PromoHeadline
+  content={true}
+  customFields={
+    Object {
+      "imagePosition": "left",
+    }
+  }
+>
+  <div
+    className="promo-headline margin-md-left"
+  >
+    <a
+      className="sm-promo-headline"
+      title=""
+    >
+      <styled.h2
+        className="sm-promo-headline"
+        contentEditable="true"
+        suppressContentEditableWarning={true}
+      >
+        <StyledComponent
+          className="sm-promo-headline"
+          contentEditable="true"
+          forwardedComponent={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-bdVaJa",
+                "isStatic": false,
+                "lastClassName": "gDGmfb",
+                "rules": Array [
+                  "
+  font-family: ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "styled.h2",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-bdVaJa",
+              "target": "h2",
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+            }
+          }
+          forwardedRef={null}
+          suppressContentEditableWarning={true}
+        >
+          <h2
+            className="sc-bdVaJa gDGmfb sm-promo-headline"
+            contentEditable="true"
+            suppressContentEditableWarning={true}
+          />
+        </StyledComponent>
+      </styled.h2>
+    </a>
+  </div>
+</PromoHeadline>
+`;

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/resizer-image-content-source-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Pass in a raw image url, get some size options for that image generated via thumbor-lite",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,6 @@
   "license": "CC-BY-NC-ND-4.0",
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

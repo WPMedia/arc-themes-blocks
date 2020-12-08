@@ -11,9 +11,9 @@ export const getLabelText = (phrases, type) => {
   if (phrases) {
     switch (type) {
       case 'Video':
-        return phrases.t('extra-large-promo-block.video-label');
+        return phrases.t('extra-large-promo-block.video-text');
       case 'Gallery':
-        return phrases.t('extra-large-promo-block.gallery-label');
+        return phrases.t('extra-large-promo-block.gallery-text');
       default:
         return null;
     }
@@ -48,7 +48,7 @@ const LabelBoxSmall = styled.div`
 `;
 
 const Label = styled.span`
-  color: white;
+  color: #fff;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;

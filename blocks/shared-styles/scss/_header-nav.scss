@@ -147,6 +147,7 @@ body.nav-open {
   justify-content: space-between;
   padding: 0 20px;
   position: relative;
+  flex-shrink: 0;
 
   &.light {
     border-bottom: $border-width solid $border-rule-color;
@@ -185,8 +186,12 @@ body.nav-open {
       justify-content: flex-end;
     }
 
-    &.nav-logo {
-      flex: 2;
+    &.nav-right:not(:empty) {
+      margin-left: 10px;
+    }
+
+    &.nav-logo,
+    & > .nav-logo {
       justify-content: center;
 
       img {
@@ -195,17 +200,23 @@ body.nav-open {
         max-width: 240px;
         width: auto;
       }
+
+      &.nav-logo-left {
+        justify-content: flex-start;
+        margin: 0 24px;
+      }
     }
 
     &.nav-logo-hidden {
       opacity: 0;
-      visibility: hidden;
       transition: opacity 800ms ease, visibility 0s ease 800ms;
+      visibility: hidden;
     }
+
     &.nav-logo-show {
       opacity: 1;
-      visibility: visible;
       transition: opacity 800ms ease, visibility 0s ease 0s;
+      visibility: visible;
     }
   }
 }
@@ -352,6 +363,7 @@ body.nav-open {
       svg {
         transform: rotate(-90deg);
       }
+
       path {
         fill: #fff;
       }

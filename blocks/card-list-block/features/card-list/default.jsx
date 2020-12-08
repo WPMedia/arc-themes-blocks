@@ -43,8 +43,6 @@ const Title = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 @Consumer
 class CardList extends React.Component {
   constructor(props) {
@@ -124,7 +122,7 @@ class CardList extends React.Component {
                 title
                   ? (
                     <Title
-                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                       className="card-list-title"
                     >
                       {title}
@@ -145,7 +143,6 @@ class CardList extends React.Component {
                   {
                    extractImage(contentElements[0].promo_items) ? (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                        url={extractImage(contentElements[0].promo_items)}
                        alt={contentElements[0].headlines.basic}
                        smallWidth={377}
@@ -160,7 +157,6 @@ class CardList extends React.Component {
                      />
                    ) : (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                        smallWidth={377}
                        smallHeight={283}
                        mediumWidth={377}
@@ -172,19 +168,23 @@ class CardList extends React.Component {
                        breakpoints={getProperties(arcSite)?.breakpoints}
                        resizedImageOptions={placeholderResizedImageOptions}
                        resizerURL={getProperties(arcSite)?.resizerURL}
+
                      />
                    )
                   }
                 </a>
-                <Title
-                  primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                  className="card-list-overline"
-                >
-                  {contentElements[0].websites[this.arcSite].website_section.name}
-                </Title>
+                { contentElements[0].websites[arcSite].website_section
+                  && (
+                  <Title
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                    className="card-list-overline"
+                  >
+                    {contentElements[0].websites[arcSite].website_section.name}
+                  </Title>
+                  )}
                 <div>
                   <Title
-                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                     className="card-list-headline"
                   >
                     <a
@@ -225,7 +225,7 @@ class CardList extends React.Component {
                           className="headline-list-anchor"
                         >
                           <HeadlineText
-                            primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                             className="headline-text"
                           >
                             {headlineText}
@@ -239,7 +239,6 @@ class CardList extends React.Component {
                             extractImage(element.promo_items)
                               ? (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                                   url={extractImage(element.promo_items)}
                                   alt={headlineText}
                                   // small, matches numbered list, is 3:2 aspect ratio
@@ -256,7 +255,6 @@ class CardList extends React.Component {
                               )
                               : (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                                   smallWidth={105}
                                   smallHeight={70}
                                   mediumWidth={105}

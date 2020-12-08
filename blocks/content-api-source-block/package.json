@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/content-api-source-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -27,6 +27,6 @@
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

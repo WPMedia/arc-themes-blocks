@@ -114,7 +114,7 @@ export const getSlotName = (props = {}) => {
   const { websiteAdPath = '' } = getProperties(arcSite);
   const sectionId = getSectionID(props);
   if (websiteAdPath && !sectionId) {
-    return websiteAdPath || sectionId;
+    return websiteAdPath;
   }
   if (websiteAdPath && sectionId) {
     return `${websiteAdPath}/${sectionId}`;

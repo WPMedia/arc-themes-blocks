@@ -4,7 +4,7 @@ import { useAppContext } from 'fusion:context';
 import { framework } from '@wpmedia/news-theme-css/js/framework';
 import './default.scss';
 
-const getFeatureList = () => {
+const useFeatureList = () => {
   const { renderables } = useAppContext();
   const featureList = {};
   renderables.forEach((renderable) => {
@@ -28,7 +28,7 @@ const RightRailAdvancedLayout = ({ children }) => {
     fullWidth2,
     footer,
   ] = children;
-  const featureList = getFeatureList();
+  const featureList = useFeatureList();
 
   useEffect(() => {
     let mounted = true;

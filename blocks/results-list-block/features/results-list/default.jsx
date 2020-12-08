@@ -32,9 +32,11 @@ const DescriptionText = styled.p`
 `;
 
 const ReadMoreButton = styled.button`
-  background-color:${(props) => props.primaryColor}; 
-  &:not(:disabled):not(.disabled):active:hover, &:not(:disabled):not(.disabled):hover:hover{
-    background-color:${(props) => props.primaryColor}; 
+  background-color: ${(props) => props.primaryColor};
+
+  &:not(:disabled):not(.disabled):active:hover,
+  &:not(:disabled):not(.disabled):hover:hover {
+    background-color: ${(props) => props.primaryColor}; 
   }
 `;
 

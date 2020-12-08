@@ -118,25 +118,28 @@ describe('the header navigation feature for the default output type', () => {
     });
 
     describe('when the nav logo is center-aligned', () => {
-      it('should be a direct child of the nav bar container (center-aligned)', () => {
+      it('should render in nav bar (center-aligned)', () => {
         getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
         const wrapper = mount(<Navigation customFields={{ logoAlignment: 'center' }} />);
         expect(wrapper.props().customFields.logoAlignment).toBeDefined();
         expect(wrapper.props().customFields.logoAlignment).toEqual('center');
-        expect(wrapper.find('.news-theme-navigation-bar > div.nav-left > NavLogo > div.nav-logo')).toHaveLength(0);
-        const navLogoEl = wrapper.find('.news-theme-navigation-bar > NavLogo > div.nav-logo');
+        const navBarEl = wrapper.find('.news-theme-navigation-bar');
+        expect(navBarEl.hasClass('logo-center')).toBe(true);
+        const navLogoEl = navBarEl.find('NavLogo > div.nav-logo');
         expect(navLogoEl).toHaveLength(1);
         expect(navLogoEl.hasClass('nav-logo-center')).toBe(true);
       });
     });
 
     describe('when the nav logo is left-aligned', () => {
-      it('should be rendered inside "nav-left" container (left-aligned)', () => {
+      it('should render in nav bar (left-aligned)', () => {
         getProperties.mockImplementation(() => ({ primaryLogo: 'https://test.com/my-nav-logo.svg' }));
         const wrapper = mount(<Navigation customFields={{ logoAlignment: 'left' }} />);
         expect(wrapper.props().customFields.logoAlignment).toBeDefined();
         expect(wrapper.props().customFields.logoAlignment).toEqual('left');
-        const navLogoEl = wrapper.find('.news-theme-navigation-bar > div.nav-left > NavLogo > div.nav-logo');
+        const navBarEl = wrapper.find('.news-theme-navigation-bar');
+        expect(navBarEl.hasClass('logo-left')).toBe(true);
+        const navLogoEl = navBarEl.find('NavLogo > div.nav-logo');
         expect(navLogoEl).toHaveLength(1);
         expect(navLogoEl.hasClass('nav-logo-left')).toBe(true);
       });

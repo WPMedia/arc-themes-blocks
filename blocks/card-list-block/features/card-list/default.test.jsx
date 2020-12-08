@@ -6,6 +6,7 @@ import mockData,
 {
   oneListItem,
   withoutByline,
+  oneListItemWithoutSectionName,
 } from './mock-data';
 
 const mockReturnData = mockData;
@@ -226,6 +227,38 @@ describe('Card list', () => {
 
       it('should render a separator', () => {
         expect(wrapper.find('.list-item-simple').find('.dot-separator').length).toEqual(0);
+      });
+    });
+  });
+
+  describe('should not render overline if websites.artSite.website_section is missing', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type:story',
+        size: '1',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig };
+    const { default: CardList } = require('./default');
+
+    CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItemWithoutSectionName);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
+
+    wrapper.setState({ cardList: oneListItemWithoutSectionName }, () => {
+      wrapper.update();
+      it('should not render overline', () => {
+        expect(wrapper.find('.overline').length).toBe(0);
+      });
+      it('should render headline', () => {
+        expect(wrapper.find('.card-list-headline').length).toBe(1);
+      });
+      it('should render author-date', () => {
+        expect(wrapper.find('.author-date').length).toBe(1);
+      });
+      it('should render image', () => {
+        expect(wrapper.find('.list-item-simple Image').length).toBe(1);
       });
     });
   });

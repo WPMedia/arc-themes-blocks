@@ -10,16 +10,13 @@ const MastheadItemsContainer = styled.div`
     flex: 1;
     padding-bottom: 9px;
     padding-top: 5px;
+    justify-content: center;
 
     > p {
       color: #191919;
       font-family: ${(props) => props.primaryFont};
       margin: 0;
     }
-  }
-
-  > div {
-    justify-content: center;
   }
 
   > div:first-child {

@@ -96,8 +96,10 @@ const SampleOutputType = ({
     fontUrl,
     resizerURL,
     facebookAdmins,
+    nativoIntegration,
     chartBeatAccountId,
     chartBeatDomain,
+    fallbackImage,
     comscoreID,
   } = getProperties(arcSite);
 
@@ -174,6 +176,7 @@ const SampleOutputType = ({
           resizerURL={resizerURL}
           arcSite={arcSite}
           facebookAdmins={facebookAdmins}
+          fallbackImage={fallbackImage}
         />
 
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
@@ -195,6 +198,9 @@ const SampleOutputType = ({
         />
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
+        {nativoIntegration
+          ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)
+          : null}
         {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
         {comscoreScript(comscoreID)}
       </head>

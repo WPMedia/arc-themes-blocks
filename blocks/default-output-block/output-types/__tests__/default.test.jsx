@@ -236,6 +236,49 @@ describe('head content', () => {
       expect(scripts.at(i).html().match(/<script[^>]*>.*?<script/gs)).toBeNull();
     }
   });
+
+  it('must not render nativo script', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="nativo-ad"]').length).toBe(0);
+  });
+});
+
+describe('nativo ad integration', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      websiteName: 'The Sun',
+      twitterUsername: 'thesun',
+      dangerouslyInjectJS: ['alert("hello world");'],
+      websiteDomain: '',
+      fallbackImage: '/resources/placeholder.jpg',
+      resizerURL: 'resizer',
+      gtmID: 'GTM-12345ID',
+      gaID: 'UA-6789ID',
+      fontUrl: 'https://fonts.googleapis.com/css?family=Open Sans',
+      nativoIntegration: true,
+    }))));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must add Nativo Ad script when is enabled on the properties', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    expect(wrapper.find('script[data-integration="nativo-ad"]').length).toBe(1);
+  });
 });
 
 describe('head content without properties', () => {

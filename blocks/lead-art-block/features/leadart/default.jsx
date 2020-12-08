@@ -35,17 +35,25 @@ const LeadArtWrapperFigure = styled.figure`
 class LeadArt extends Component {
   constructor(props) {
     super(props);
-    const { globalContent: content, customFields, arcSite } = this.props;
+    const { globalContent: content, arcSite } = this.props;
     this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
     this.state = {
       isOpen: false,
-      enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel || this.phrases.t('global.gallery-expand-button'),
-      showCredit: customFields.showCredit || false,
+      buttonLabel: this.phrases.t('global.gallery-expand-button'),
       content,
     };
 
     this.imgRef = React.createRef();
+    this.setIsOpenToFalse = this.setIsOpenToFalse.bind(this);
+    this.setIsOpenToTrue = this.setIsOpenToTrue.bind(this);
+  }
+
+  setIsOpenToFalse() {
+    this.setState({ isOpen: false });
+  }
+
+  setIsOpenToTrue() {
+    this.setState({ isOpen: true });
   }
 
   lightboxImgHandler() {
@@ -60,10 +68,10 @@ class LeadArt extends Component {
 
   render() {
     const {
-      enableZoom, isOpen, buttonPosition, buttonLabel, showCredit, content,
+      isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -83,9 +91,8 @@ class LeadArt extends Component {
               {isOpen && (
                 <Lightbox
                   mainSrc={mainContent}
-                  onCloseRequest={() => this.setState({ isOpen: false })}
-                  showImageCaption="false"
-                  enableZoom={enableZoom}
+                  onCloseRequest={this.setIsOpenToFalse}
+                  showImageCaption={false}
                 />
               )}
             </>
@@ -95,14 +102,19 @@ class LeadArt extends Component {
         return (
           <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
             <div
-              className="innerContent"
+              className="inner-content"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer embedMarkup={lead_art.embed_html} />;
+        return (
+          <VideoPlayer
+            embedMarkup={lead_art?.embed_html}
+            enableAutoplay={!!(customFields?.enableAutoplay)}
+          />
+        );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
@@ -110,10 +122,8 @@ class LeadArt extends Component {
               {isOpen && (
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
-                  onCloseRequest={() => this.setState({ isOpen: false })}
-                  showImageCaption={showCredit}
+                  onCloseRequest={this.setIsOpenToFalse}
                   imageCaption={lead_art.caption}
-                  enableZoom={enableZoom}
                 />
               )}
             </>
@@ -136,7 +146,7 @@ class LeadArt extends Component {
             <button
               type="button"
               className="btn-full-screen"
-              onClick={() => this.setState({ isOpen: true })}
+              onClick={this.setIsOpenToTrue}
             >
               <FullscreenIcon width="100%" height="100%" fill="#6B6B6B" />
               {buttonLabel}
@@ -191,18 +201,17 @@ LeadArt.label = 'Lead Art – Arc Block';
 
 LeadArt.defaultProps = {
   customFields: {
-    enableZoom: false,
-    buttonLabel: 'Full Screen',
-    showCredit: false,
+    enableAutoplay: false,
   },
 };
 
 LeadArt.propTypes = {
   customFields: PropTypes.shape({
-    buttonLabel: PropTypes.string,
-    enableZoom: PropTypes.bool,
-    showCredit: PropTypes.bool,
-    inheritGlobalContent: PropTypes.bool,
+    enableAutoplay: PropTypes.bool.tag({
+      label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video',
+    }),
   }),
 };
 

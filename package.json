@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
     "lint:styles": "stylelint '**/*.(scss|jsx)' --formatter verbose",
-    "lint:styles:fix": "stylelint '**/*.scss' -- --fix",
+    "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook",
     "test": "jest",
@@ -145,6 +145,8 @@
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not op_mini all",
+    "not IE 11"
   ]
 }

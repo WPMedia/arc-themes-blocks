@@ -61,12 +61,6 @@ const ExtraLargePromo = ({ customFields }) => {
   const overlineDisplay = (content?.label?.basic?.display ?? null)
     || (content?.websites?.[arcSite] && websiteSection)
     || false;
-  const overlineUrl = (content?.label?.basic?.url ?? null)
-    || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
-    || '';
-  const overlineText = (content?.label?.basic?.text ?? null)
-    || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
-    || '';
   const promoType = discoverPromoType(content);
 
   const overlineTmpl = () => {
@@ -74,9 +68,8 @@ const ExtraLargePromo = ({ customFields }) => {
       return (
         (
           <Overline
-            customUrl={overlineUrl}
-            customText={overlineText}
             className="overline"
+            story={content}
             editable
           />
         )

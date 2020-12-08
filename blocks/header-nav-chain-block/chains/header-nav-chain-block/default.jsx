@@ -46,7 +46,7 @@ const StyledSectionDrawer = styled.div`
 `;
 
 const StyledWarning = styled.div`
-  background-color: #cc3300;
+  background-color: #c30;
   color: #fff;
   display: flex;
   align-self: flex-start;

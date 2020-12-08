@@ -17,11 +17,11 @@ const FooterSection = styled.ul`
 `;
 
 export const StyledSocialContainer = styled.div`
-  border: ${(props) => (props.hasSocialLinks ? '1px' : '0')} solid ${(props) => props.primaryColor}; 
+  border: ${(props) => (props.hasSocialLinks ? '1px' : '0')} solid ${(props) => props.primaryColor};
   fill: ${(props) => props.primaryColor};
 
   a {
-    border-right: 1px solid ${(props) => props.primaryColor};;
+    border-right: 1px solid ${(props) => props.primaryColor};
   }
 `;
 

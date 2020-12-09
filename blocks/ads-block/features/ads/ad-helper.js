@@ -80,10 +80,12 @@ export const formatSectionPath = (sectionPath) => {
   let fmtPath = '';
   if (sectionPath) {
     fmtPath = sectionPath.replace(/-/g, '_');
+    // remove trailing slash
     const endIdx = fmtPath.length - 1;
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);
     }
+    // remove leading slash
     if (fmtPath.charAt(0) === '/') {
       fmtPath = fmtPath.substring(1);
     }

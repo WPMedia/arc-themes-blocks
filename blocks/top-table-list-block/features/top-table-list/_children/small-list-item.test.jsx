@@ -1,5 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import {
+  LEFT, RIGHT, ABOVE, BELOW,
+} from '../shared/imagePositionConstants';
 
 const config = {
   showOverlineXL: true,
@@ -21,6 +24,7 @@ const config = {
   showDateMD: true,
   showHeadlineSM: true,
   showImageSM: true,
+  imagePositionSM: RIGHT,
 };
 
 describe('small image block', () => {
@@ -46,10 +50,10 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -65,7 +69,7 @@ describe('small image block', () => {
     expect(wrapper.find('Image').length).toBe(1);
     expect(wrapper.find('Image').prop('url')).toBe(imageURL);
 
-    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must renders neither title nor image with empty props, renders placeholder image', () => {
@@ -74,10 +78,10 @@ describe('small image block', () => {
     const itemTitle = '';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -93,7 +97,7 @@ describe('small image block', () => {
     expect(wrapper.find('Image').length).toBe(1);
     expect(wrapper.find('Image').prop('url')).toBe(fallbackImage);
 
-    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must render only title if showImageSM false', () => {
@@ -101,10 +105,10 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -120,7 +124,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('Image').length).toBe(0);
 
-    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must render only image if showHeadlinesSM false', () => {
@@ -128,10 +132,10 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -146,24 +150,24 @@ describe('small image block', () => {
 
     expect(wrapper.find('Image').length).toBe(1);
 
-    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
-  it('must render with layout horizontal if stories per row is less than 3', () => {
+  it('must render with layout horizontal if image position is "left" or "right"', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
         /* eslint-disable-next-line */
-        customFields={Object.assign({}, config, { storiesPerRowSM: 2})}
+        customFields={Object.assign({}, config, { imagePositionSM: LEFT })}
         resizedImageOptions={{ '400x267': '' }}
       />,
     );
@@ -171,25 +175,24 @@ describe('small image block', () => {
     expect(wrapper.find('article > .horizontal').length).toBe(1);
   });
 
-  it('must render with layout vertical if stories per row greater than 3', () => {
+  it('must render with layout vertical if image position is "above" or "below"', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
         /* eslint-disable-next-line */
-        customFields={Object.assign({}, config, { storiesPerRowSM: 3})}
+        customFields={Object.assign({}, config, { imagePositionSM: BELOW })}
         resizedImageOptions={{ '400x267': '' }}
       />,
     );
-
     expect(wrapper.find('article > .vertical').length).toBe(1);
   });
 
@@ -198,10 +201,10 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -224,10 +227,10 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
@@ -249,16 +252,16 @@ describe('small image block', () => {
     const itemTitle = '';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
         /* eslint-disable-next-line */
-        customFields={Object.assign({}, config, { storiesPerRowSM: 3, showHeadlineSM: false})}
+        customFields={Object.assign({}, config, { imagePositionSM: ABOVE, showHeadlineSM: false})}
         resizedImageOptions={{ '400x267': '' }}
       />,
     );
@@ -272,16 +275,16 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
-    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
-      <ItemTitleWithRightImage
+      <SmallListItem
         imageURL={imageURL}
         itemTitle={itemTitle}
         primaryFont={primaryFont}
         id={id}
         /* eslint-disable-next-line */
-        customFields={Object.assign({}, config, { storiesPerRowSM: 3, showImageSM: false})}
+        customFields={Object.assign({}, config, { imagePositionSM: BELOW, showImageSM: false})}
         resizedImageOptions={{ '400x267': '' }}
       />,
     );

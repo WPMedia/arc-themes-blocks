@@ -71,6 +71,20 @@ describe('<ArcAd>', () => {
     expect(wrapper.find('div.advertisement-label')).toHaveLength(1);
   });
 
+  it('render advertisementLabel in DESKTOP view for right rail cube ad type', () => {
+    const mockAdProps = {
+      ...AD_PROPS_MOCK,
+      customFields: {
+        adType: '300x250|300x600_rightrail', // refer to blocks/ads-block/features/ads/ad-mapping.js for mapping
+        displayAdLabel: true,
+      },
+    };
+
+    const wrapper = shallow(<ArcAd {...mockAdProps} />);
+
+    expect(wrapper.find('div.advertisement-label--desktop')).toHaveLength(1);
+  });
+
   it('renders the label with text ADVERTISEMENT when advertisementLabel property is missing', () => {
     const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
     /* eslint-disable-next-line no-underscore-dangle */

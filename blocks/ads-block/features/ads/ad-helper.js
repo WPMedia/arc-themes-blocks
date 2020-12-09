@@ -84,10 +84,9 @@ export const formatSectionPath = (sectionPath) => {
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);
     }
-    if (fmtPath.charAt(0) !== '/') {
-      fmtPath = `/${fmtPath}`;
+    if (fmtPath.charAt(0) === '/') {
+      fmtPath = fmtPath.substring(1);
     }
-    fmtPath = fmtPath.replace(/\//, '');
   }
   return fmtPath;
 };

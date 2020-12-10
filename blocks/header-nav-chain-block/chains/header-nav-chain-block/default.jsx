@@ -70,6 +70,7 @@ const Nav = (props) => {
   let primaryLogoPath;
 
   const {
+    'primary-color': primaryColor = '#000',
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 

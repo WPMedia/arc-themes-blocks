@@ -1,4 +1,5 @@
 import { useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import VideoPlayer from './default';
@@ -24,6 +25,23 @@ describe('VideoPlayer', () => {
   it('renders ', () => {
     const wrapper = shallow(<VideoPlayer />);
     expect(wrapper.find('.embed-video').length).toEqual(0);
+  });
+
+  it('renders with deprecated "websiteURL" custom field', () => {
+    const mockFusionContext = { arcSite: 'dagen' };
+    useFusionContext.mockReturnValueOnce(mockFusionContext);
+    const websiteURL = '/some/website/url';
+    const mockFetchParam = {
+      query: {
+        site: mockFusionContext.arcSite,
+        website_url: websiteURL,
+      },
+      source: 'content-api',
+    };
+    const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
+    expect(useContent).toHaveBeenCalledTimes(1);
+    expect(useContent).toHaveBeenCalledWith(mockFetchParam);
   });
 
   it('if inheritGlobalContent do not fetch data and use gc ', () => {
@@ -179,7 +197,7 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    const expectedAlertBadge = '<span class="sc-htpNat dgLZsB">Test Alert  Badge</span>';
+    const expectedAlertBadge = '<span class="sc-htpNat bLgVsz">Test Alert  Badge</span>';
     const expectedTitle = '<h2 class="sc-bdVaJa jbIaBK xl-promo-headline">Test Title</h2>';
     const expectedDescription = '<p class="sc-bwzfXH gfyHkX description-text">Test Description</p>';
     const foundStyledComponents = wrapper.find('StyledComponent');

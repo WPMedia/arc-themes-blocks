@@ -79,7 +79,7 @@ export const getPrimarySectionId = ({ globalContent, arcSite } = {}) => (
 export const formatSectionPath = (sectionPath) => {
   let fmtPath = '';
   if (sectionPath) {
-    fmtPath = sectionPath.replace(/-/g, '_');
+    fmtPath = sectionPath;
     const endIdx = fmtPath.length - 1;
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);

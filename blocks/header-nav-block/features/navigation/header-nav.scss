@@ -145,7 +145,7 @@ $submenu-link-color: $ui-dark-gray;
 
       a {
         align-items: center;
-        color: white;
+        color: #fff;
         flex: 1;
         justify-content: space-between;
         padding: 14px 0;
@@ -175,7 +175,7 @@ $submenu-link-color: $ui-dark-gray;
 
     .arrow-left {
       border-bottom: $arrow-size solid transparent;
-      border-right: $arrow-size solid white;
+      border-right: $arrow-size solid #fff;
       border-top: $arrow-size solid transparent;
       height: 0;
       left: -$arrow-size;
@@ -187,7 +187,7 @@ $submenu-link-color: $ui-dark-gray;
   }
 
   ul.subsection-menu {
-    background: white;
+    background: #fff;
     border-radius: 2px;
     box-shadow: 0 0 20px 0 rgba(42, 42, 42, 0.5);
     left: 0;

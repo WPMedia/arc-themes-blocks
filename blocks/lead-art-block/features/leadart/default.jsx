@@ -10,6 +10,7 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@wpmedia/engine-theme-sdk';
+import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
@@ -71,7 +72,7 @@ class LeadArt extends Component {
       isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -109,7 +110,12 @@ class LeadArt extends Component {
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer embedMarkup={lead_art.embed_html} enableAutoplay />;
+        return (
+          <VideoPlayer
+            embedMarkup={lead_art?.embed_html}
+            enableAutoplay={!!(customFields?.enableAutoplay)}
+          />
+        );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
@@ -173,6 +179,25 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
+        const GalleryInterstitialAd = () => (
+          <ArcAd
+            customFields={{
+              adType: '300x250',
+              displayAdLabel: true,
+            }}
+          />
+        );
+        const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
+        let adProps = {};
+        if (galleryCubeClicks) {
+          const value = parseInt(galleryCubeClicks, 10);
+          if (!Number.isNaN(value)) {
+            adProps = {
+              adElement: GalleryInterstitialAd,
+              interstitialClicks: value,
+            };
+          }
+        }
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -183,6 +208,7 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            {...adProps}
           />
         );
       }

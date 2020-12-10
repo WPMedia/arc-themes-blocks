@@ -45,8 +45,6 @@ please explain why (so that we can fix it whenever it gets refactored).
 _The reviewer of the PR should copy-paste this template into the review comments on review._
 
 - [ ] Linting code actions have passed.
-- [ ] Ran the code locally based on the test instructions. Even if the feature seems like a small addition of css, there could be unintended consequences. This can take time to catch if it's not caught at the source. We are working on better scoping. 
+- [ ] Ran the code locally based on the test instructions. Even if the feature seems like a small addition of css, there could be unintended consequences. It's a goal to run the code locally.
 - [ ] I am a member of the engine theme team so that I can approve and merge this. If you're not on the team, you won't have access to approve and merge this pr. 
-- [ ] Looked to see that the relevant code has code coverage, specifically. Not just if global code coverage is met. 
-- [ ] There are no more warnings than necessary, if explained. The linter will show in-line any warnings when you're reviewing.
-- [ ] I'm not clicking boxes and blindly merging. 
+- [ ] Looked to see that the new or changed code has code coverage, specifically. We want the global code coverage to keep on going up with targeted testing.

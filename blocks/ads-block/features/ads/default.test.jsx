@@ -71,6 +71,12 @@ describe('<ArcAd>', () => {
     expect(wrapper.find('div.advertisement-label')).toHaveLength(1);
   });
 
+  it('renders the label with text ADVERTISEMENT when advertisementLabel property is missing', () => {
+    const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+    /* eslint-disable-next-line no-underscore-dangle */
+    expect(wrapper.find('div.advertisement-label').prop('dangerouslySetInnerHTML').__html).toEqual('ADVERTISEMENT');
+  });
+
   it('should use "all" on wrapper for advertisement label', () => {
     const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
     expect(wrapper.find('div.advertisement-label--all')).toHaveLength(1);
@@ -81,5 +87,25 @@ describe('<ArcAd>', () => {
     mockData.customFields.adType = '300x250|300x600_rightrail';
     const wrapper = shallow(<ArcAd {...mockData} />);
     expect(wrapper.find('div.advertisement-label--desktop')).toHaveLength(1);
+  });
+});
+
+describe('ArcAd with custom advertisement label', () => {
+  const customLabel = {
+    advertisementLabel: "Advertisement / <a href='http://example.com' target='_blank'>Advertisement</a>",
+  };
+  beforeEach(() => {
+    jest.clearAllMocks();
+    getProperties.mockReturnValue({ ...SITE_PROPS_MOCK, ...customLabel });
+    useFusionContext.mockReturnValue({ isAdmin: false });
+    useAppContext.mockReturnValue({});
+  });
+
+  it('renders the label using advertisementLabel property when present', () => {
+    const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+    expect(
+      /* eslint-disable-next-line no-underscore-dangle */
+      wrapper.find('div.advertisement-label').prop('dangerouslySetInnerHTML').__html,
+    ).toEqual(customLabel.advertisementLabel);
   });
 });

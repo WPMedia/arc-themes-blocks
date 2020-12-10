@@ -36,7 +36,7 @@ const ArcAd = (props) => {
     customFields: {
       debug,
       displayAdLabel,
-    }
+    },
   } = propsWithContext;
   const siteVars = getProperties(arcSite);
 
@@ -51,7 +51,7 @@ const ArcAd = (props) => {
         publisherIds,
         debug,
       });
-  }, [config]);
+  }, [config, debug, propsWithContext, siteVars]);
 
   useEffect(() => {
     if (!isAdmin) registerAd();
@@ -70,9 +70,10 @@ const ArcAd = (props) => {
     >
       <div className="arcad_container">
         {!isAdmin && displayAdLabel && !isAMP() && (
-          <div className={`advertisement-label advertisement-label--${display}`}>
-            {siteVars.advertisementLabel || 'ADVERTISEMENT'}
-          </div>
+          <div
+            className={`advertisement-label advertisement-label--${display}`}
+            dangerouslySetInnerHTML={{ __html: siteVars.advertisementLabel || 'ADVERTISEMENT' }}
+          />
         )}
         {!isAdmin && !isAMP() && (
           <div id={id} className={`arcad ad-${adClass}`} />

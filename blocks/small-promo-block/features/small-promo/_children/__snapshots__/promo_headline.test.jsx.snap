@@ -10,7 +10,7 @@ exports[`promo headline return null while no content available in props 1`] = `
   }
 >
   <div
-    className="promo-headlinemargin-sm-left"
+    className="promo-headline margin-md-left"
   >
     <a
       className="sm-promo-headline"

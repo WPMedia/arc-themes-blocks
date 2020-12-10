@@ -7,6 +7,7 @@ _Fusion News Theme lead art block. Please provide a 1-2 sentence description of 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
+|customFields.enableAutoplay|no|boolean|If the lead art type is video, configures the video to autoplay on page load. If value is true it will autoplay the video.  If value is false, it will not autoplay the video.  |
 | **required prop** | yes | | |
 | **optional prop** | no | | |
 | **contentConfig example** | | | Please specify which content sources are compatible |

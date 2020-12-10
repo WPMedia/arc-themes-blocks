@@ -10,6 +10,7 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@wpmedia/engine-theme-sdk';
+import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
@@ -35,18 +36,17 @@ const LeadArtWrapperFigure = styled.figure`
 class LeadArt extends Component {
   constructor(props) {
     super(props);
-    const { globalContent: content, customFields, arcSite } = this.props;
+    const { globalContent: content, arcSite } = this.props;
     this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
     this.state = {
       isOpen: false,
-      enableZoom: customFields.enableZoom || false,
-      buttonLabel: customFields.buttonLabel || this.phrases.t('global.gallery-expand-button'),
-      showCredit: customFields.showCredit || false,
+      buttonLabel: this.phrases.t('global.gallery-expand-button'),
       content,
     };
 
     this.imgRef = React.createRef();
     this.setIsOpenToFalse = this.setIsOpenToFalse.bind(this);
+    this.setIsOpenToTrue = this.setIsOpenToTrue.bind(this);
   }
 
   setIsOpenToFalse() {
@@ -69,10 +69,10 @@ class LeadArt extends Component {
 
   render() {
     const {
-      enableZoom, isOpen, buttonPosition, buttonLabel, showCredit, content,
+      isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -94,7 +94,6 @@ class LeadArt extends Component {
                   mainSrc={mainContent}
                   onCloseRequest={this.setIsOpenToFalse}
                   showImageCaption={false}
-                  enableZoom={enableZoom}
                 />
               )}
             </>
@@ -104,14 +103,19 @@ class LeadArt extends Component {
         return (
           <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
             <div
-              className="innerContent"
+              className="inner-content"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
           </LeadArtWrapperDiv>
         );
       } if (lead_art.type === 'video') {
-        return <VideoPlayer embedMarkup={lead_art.embed_html} enableAutoplay />;
+        return (
+          <VideoPlayer
+            embedMarkup={lead_art?.embed_html}
+            enableAutoplay={!!(customFields?.enableAutoplay)}
+          />
+        );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
@@ -120,9 +124,7 @@ class LeadArt extends Component {
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
                   onCloseRequest={this.setIsOpenToFalse}
-                  showImageCaption={showCredit}
                   imageCaption={lead_art.caption}
-                  enableZoom={enableZoom}
                 />
               )}
             </>
@@ -177,6 +179,25 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
+        const GalleryInterstitialAd = () => (
+          <ArcAd
+            customFields={{
+              adType: '300x250',
+              displayAdLabel: true,
+            }}
+          />
+        );
+        const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
+        let adProps = {};
+        if (galleryCubeClicks) {
+          const value = parseInt(galleryCubeClicks, 10);
+          if (!Number.isNaN(value)) {
+            adProps = {
+              adElement: GalleryInterstitialAd,
+              interstitialClicks: value,
+            };
+          }
+        }
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -187,6 +208,7 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            {...adProps}
           />
         );
       }
@@ -200,18 +222,12 @@ LeadArt.label = 'Lead Art – Arc Block';
 
 LeadArt.defaultProps = {
   customFields: {
-    enableZoom: false,
-    buttonLabel: 'Full Screen',
-    showCredit: false,
+    enableAutoplay: false,
   },
 };
 
 LeadArt.propTypes = {
   customFields: PropTypes.shape({
-    buttonLabel: PropTypes.string,
-    enableZoom: PropTypes.bool,
-    showCredit: PropTypes.bool,
-    inheritGlobalContent: PropTypes.bool,
     enableAutoplay: PropTypes.bool.tag({
       label: 'Autoplay',
       defaultValue: false,

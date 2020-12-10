@@ -24,8 +24,10 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
-    "cookie": "^0.4.1",
     "styled-components": "^4.4.0"
+  },
+  "dependencies": {
+    "cookie": "^0.4.1"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

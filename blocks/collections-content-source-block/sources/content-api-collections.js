@@ -23,17 +23,13 @@ export default {
   resolve,
   schemaName: 'ans-feed',
   // other options null use default functionality, such as filter quality
-  transform: (data, query) => {
-    const { isCompressedImageParams = false } = query;
-
-    return getResizedImageData(
+  transform: (data, query) => (
+    getResizedImageData(
       data,
       null,
       null,
       null,
       query['arc-site'],
-      undefined,
-      isCompressedImageParams,
-    );
-  },
+    )
+  ),
 };

@@ -73,7 +73,6 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
-    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
     "@wpmedia/ads-block": "file:blocks/ads-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",

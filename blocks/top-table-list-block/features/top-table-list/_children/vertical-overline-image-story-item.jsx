@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image /* , Video */ } from '@wpmedia/engine-theme-sdk';
+import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
@@ -9,7 +9,6 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import extractVideoEmbedFromStory from '../shared/extractVideoEmbedFromStory';
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {

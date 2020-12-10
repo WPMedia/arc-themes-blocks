@@ -58,6 +58,7 @@ describe('horizontal overline image story item', () => {
     }))));
     jest.mock('@wpmedia/engine-theme-sdk', () => ({
       Image: () => <img alt="test" />,
+      extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
     }));
   });
 

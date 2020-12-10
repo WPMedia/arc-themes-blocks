@@ -46,6 +46,7 @@ describe('vertical overline image story item', () => {
     jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
     jest.mock('@wpmedia/engine-theme-sdk', () => ({
       Image: () => <img alt="placeholder" />,
+      extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
     }));
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({

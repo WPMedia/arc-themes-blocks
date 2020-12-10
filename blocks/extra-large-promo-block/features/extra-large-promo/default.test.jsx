@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { useContent } from 'fusion:content';
+import { extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import ExtraLargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
@@ -9,6 +10,7 @@ const { default: mockDataVideo } = require('./mock-data-video');
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
+  extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -298,6 +300,7 @@ describe('the extra large promo feature', () => {
     describe('when ANS content type is "story"', () => {
       it('should render Image when no video found in ANS lead art', () => {
         useContent.mockReturnValueOnce(mockData);
+        extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
         const wrapper = shallow(
           <ExtraLargePromo
             customFields={{
@@ -340,6 +343,7 @@ describe('the extra large promo feature', () => {
         const mockDataVideoNoEmbed = { ...mockData };
         delete mockDataVideoNoEmbed.embed_html;
         useContent.mockReturnValueOnce(mockDataVideoNoEmbed);
+        extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
         const wrapper = shallow(
           <ExtraLargePromo
             customFields={{

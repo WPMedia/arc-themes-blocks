@@ -10,7 +10,7 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
@@ -22,7 +22,6 @@ import {
 import VideoPlayer from '@wpmedia/video-player-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
-import extractVideoEmbedFromStory from './_children/extractVideoEmbedFromStory';
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};

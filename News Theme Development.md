@@ -133,6 +133,7 @@ Merge into `canary` branch to publish to canary tag. Please reach out to arc blo
 
 WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 
+NOTE: Make sure to rebase onto beta branch if you hotfix stable, for instance.
 ---
 
 ## For stable releases, it remains manual process

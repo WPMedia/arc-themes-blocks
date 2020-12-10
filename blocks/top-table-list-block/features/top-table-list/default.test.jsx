@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { RIGHT } from './shared/imagePositionConstants';
 
 const config = {
   showOverlineXL: true,
@@ -21,6 +22,7 @@ const config = {
   showDateMD: true,
   showHeadlineSM: true,
   showImageSM: true,
+  imagePositionSM: RIGHT,
 };
 
 describe('top table list', () => {
@@ -75,8 +77,14 @@ describe('top table list', () => {
       })),
     }));
 
+    const smConfig = {
+      ...config,
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '4:3',
+    };
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="the-sun" deployment={jest.fn((path) => path)} />,
+      <TopTableList customFields={smConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />,
     );
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
@@ -113,8 +121,14 @@ describe('top table list', () => {
       })),
     }));
 
+    const smConfig = {
+      ...config,
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '4:3',
+    };
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
+      <TopTableList customFields={smConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
@@ -161,8 +175,15 @@ describe('top table list', () => {
       })),
     }));
 
+    const xlConfig = {
+      ...config,
+      extraLarge: 1,
+      showImageXL: true,
+      showHeadlineXL: true,
+      imageRatioXL: '3:2',
+    };
     const wrapper = mount(
-      <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
+      <TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);

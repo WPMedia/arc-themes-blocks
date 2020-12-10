@@ -36,7 +36,7 @@ const ArcAd = (props) => {
     customFields: {
       debug,
       displayAdLabel,
-    }
+    },
   } = propsWithContext;
   const siteVars = getProperties(arcSite);
 
@@ -51,7 +51,7 @@ const ArcAd = (props) => {
         publisherIds,
         debug,
       });
-  }, [config]);
+  }, [config, debug, propsWithContext, siteVars]);
 
   useEffect(() => {
     if (!isAdmin) registerAd();

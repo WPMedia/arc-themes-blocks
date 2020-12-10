@@ -8,16 +8,13 @@ export default {
   params: {
     _id: 'text',
   },
-  transform: (data, query) => {
-    const { isCompressedImageParams = false } = query;
-    return getResizedImageData(
+  transform: (data, query) => (
+    getResizedImageData(
       data,
       null,
       null,
       null,
       query['arc-site'],
-      undefined,
-      isCompressedImageParams,
-    );
-  },
+    )
+  ),
 };

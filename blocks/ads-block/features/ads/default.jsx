@@ -36,7 +36,7 @@ const ArcAd = (props) => {
     customFields: {
       debug,
       displayAdLabel,
-    }
+    },
   } = propsWithContext;
   const siteVars = getProperties(arcSite);
 
@@ -51,15 +51,17 @@ const ArcAd = (props) => {
         publisherIds,
         debug,
       });
-  }, [config]);
+  }, [config, debug, propsWithContext, siteVars]);
 
   useEffect(() => {
     if (!isAdmin) registerAd();
   }, [registerAd, isAdmin]);
 
   const {
-    id, adClass, adType, dimensions, slotName, display,
+    id, adClass, adType, dimensions, slotName,
   } = config;
+
+  const display = adType === 'right_rail_cube' ? 'desktop' : 'all';
 
   return (
     <div
@@ -68,9 +70,10 @@ const ArcAd = (props) => {
     >
       <div className="arcad_container">
         {!isAdmin && displayAdLabel && !isAMP() && (
-          <div className={`advertisement-label advertisement-label--${display}`}>
-            {siteVars.advertisementLabel || 'ADVERTISEMENT'}
-          </div>
+          <div
+            className={`advertisement-label advertisement-label--${display}`}
+            dangerouslySetInnerHTML={{ __html: siteVars.advertisementLabel || 'ADVERTISEMENT' }}
+          />
         )}
         {!isAdmin && !isAMP() && (
           <div id={id} className={`arcad ad-${adClass}`} />
@@ -101,19 +104,6 @@ ArcAd.propTypes = {
       labels: adTypeLabels,
       defaultValue: '1x1px',
       required: true,
-      hidden: false,
-    }),
-    display: PropTypes.oneOf([
-      'all', 'mobile', 'desktop',
-    ]).tag({
-      name: 'Display',
-      labels: {
-        all: 'All',
-        mobile: 'Mobile',
-        desktop: 'Desktop',
-      },
-      defaultValue: 'all',
-      required: false,
       hidden: false,
     }),
     displayAdLabel: PropTypes.boolean.tag({

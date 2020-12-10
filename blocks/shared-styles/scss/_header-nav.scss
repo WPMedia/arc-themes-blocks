@@ -187,10 +187,11 @@ body.nav-open {
     }
 
     &.nav-right:not(:empty) {
-      margin-left:10px
+      margin-left: 10px;
     }
 
-    &.nav-logo, & > .nav-logo {
+    &.nav-logo,
+    & > .nav-logo {
       justify-content: center;
 
       img {
@@ -202,7 +203,7 @@ body.nav-open {
 
       &.nav-logo-left {
         justify-content: flex-start;
-        margin: 0 24px 0 24px;
+        margin: 0 24px;
       }
     }
 

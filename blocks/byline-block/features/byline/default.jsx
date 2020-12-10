@@ -16,7 +16,7 @@ const BylineSection = styled.section`
     display: inline;
     font-size: .875rem;
     line-height: 1rem;
-`}
+  `}
 `;
 
 const By = styled.span`

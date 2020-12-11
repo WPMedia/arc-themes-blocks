@@ -335,10 +335,9 @@ const getResizedImageData = (
   respectAspectRatio = false,
   arcSite,
   imageWidths = getProperties(arcSite).imageWidths,
-  compressedParams = false,
 ) => {
   // resizer url is only arcSite specific option
-  const { aspectRatios, resizerURL } = getProperties(arcSite);
+  const { aspectRatios, resizerURL, shouldCompressImageParams = false } = getProperties(arcSite);
 
   const resizerKey = RESIZER_SECRET_KEY;
 
@@ -355,14 +354,21 @@ const getResizedImageData = (
   if (onlyUrl) {
     return !data
       ? null
-      : getResizerParams(data, respectAspectRatio, resizerURL, [], undefined, compressedParams);
+      : getResizerParams(
+        data,
+        respectAspectRatio,
+        resizerURL,
+        [],
+        undefined,
+        shouldCompressImageParams,
+      );
   }
 
   return getResizedImageParams(data, {
     resizerSecret: resizerKey,
     resizerURL,
     imageWidths,
-    compressedParams,
+    compressedParams: shouldCompressImageParams,
   }, filterQuality);
   // Note: filterQuality is passed in but never used...
   // Should be moved to the options object and other functions to make use of option

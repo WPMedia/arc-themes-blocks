@@ -10,6 +10,7 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@wpmedia/engine-theme-sdk';
+import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
@@ -178,6 +179,25 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
+        const GalleryInterstitialAd = () => (
+          <ArcAd
+            customFields={{
+              adType: '300x250',
+              displayAdLabel: true,
+            }}
+          />
+        );
+        const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
+        let adProps = {};
+        if (galleryCubeClicks) {
+          const value = parseInt(galleryCubeClicks, 10);
+          if (!Number.isNaN(value)) {
+            adProps = {
+              adElement: GalleryInterstitialAd,
+              interstitialClicks: value,
+            };
+          }
+        }
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -188,6 +208,7 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            {...adProps}
           />
         );
       }

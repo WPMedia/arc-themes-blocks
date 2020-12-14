@@ -135,7 +135,7 @@ const Nav = (props) => {
     primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
   }
 
-  const isLogoSVG = (!!primaryLogoPath && String(primaryLogoPath).endsWith('.svg')) || false;
+  const isLogoSVG = !!primaryLogoPath && String(primaryLogoPath).endsWith('.svg');
 
   const onScrollEvent = (evt) => {
     if (!evt) {

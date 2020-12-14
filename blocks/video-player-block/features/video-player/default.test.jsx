@@ -40,7 +40,7 @@ describe('VideoPlayer', () => {
       source: 'content-api',
     };
 
-    const wrapper = shallow(<VideoPlayer customFields={websiteURL} />);
+    const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
     expect(wrapper.find('.embed-video').length).toEqual(0);
     expect(useContent).toHaveBeenCalledTimes(1);
     expect(useContent).toHaveBeenCalledWith(mockFetchParam);

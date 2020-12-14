@@ -29,7 +29,7 @@ const StyledNav = styled.nav`
   position: relative;
 
   .news-theme-navigation-bar {
-    background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+    background-color: ${(props) => props.navBarBackground};
     height: ${navHeight};
     z-index: ${navZIdx};
   }
@@ -60,12 +60,17 @@ const Nav = (props) => {
   } = useFusionContext();
 
   const {
-    primaryLogo, primaryLogoAlt, navColor, locale = 'en',
+    primaryLogo,
+    primaryLogoAlt,
+    navColor,
+    locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
+    navBarBackground,
   } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
+    'primary-color': primaryColor = '#000',
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
@@ -137,6 +142,14 @@ const Nav = (props) => {
 
   const isLogoSVG = !!primaryLogoPath && String(primaryLogoPath).endsWith('.svg');
 
+  let backgroundColor = '#000';
+
+  if (navBarBackground === 'primary-color') {
+    backgroundColor = primaryColor;
+  } else if (navColor === 'light') {
+    backgroundColor = '#fff';
+  }
+
   const onScrollEvent = (evt) => {
     if (!evt) {
       return;
@@ -202,7 +215,13 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
+      <StyledNav
+        id="main-nav"
+        className={`${navColor === 'light' ? 'light' : 'dark'}`}
+        font={primaryFont}
+        navBarBackground={backgroundColor}
+      >
+        {' '}
         <div className={`news-theme-navigation-container news-theme-navigation-bar ${isLogoSVG ? 'svg-logo' : ''} logo-${logoAlignment} ${horizontalLinksHierarchy ? 'horizontal-links' : ''}`}>
           <div className="nav-left">
             <SearchBox iconSize={16} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />

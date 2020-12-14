@@ -31,6 +31,7 @@ describe('VideoPlayer', () => {
     const mockFusionContext = { arcSite: 'dagen' };
     useFusionContext.mockReturnValueOnce(mockFusionContext);
     const websiteURL = '/some/website/url';
+
     const mockFetchParam = {
       query: {
         site: mockFusionContext.arcSite,
@@ -38,8 +39,9 @@ describe('VideoPlayer', () => {
       },
       source: 'content-api',
     };
-    const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
+
+    const wrapper = shallow(<VideoPlayer customFields={websiteURL} />);
+    expect(wrapper.find('.embed-video').length).toEqual(0);
     expect(useContent).toHaveBeenCalledTimes(1);
     expect(useContent).toHaveBeenCalledWith(mockFetchParam);
   });
@@ -79,6 +81,7 @@ describe('VideoPlayer', () => {
     + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if inheritGlobalContent is FALSE use markup passed as prop ', () => {
@@ -103,6 +106,7 @@ describe('VideoPlayer', () => {
       + '</script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if autplay is enabled, add autoplay props ', () => {
@@ -137,6 +141,7 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if playthrough is enabled, add playthrough props ', () => {

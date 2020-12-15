@@ -90,7 +90,7 @@ SmallPromo.propTypes = {
         above: 'Image Above',
         below: 'Image Below',
       },
-    }),
+    }).isRequired,
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
   }),
 };

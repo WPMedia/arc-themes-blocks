@@ -70,7 +70,7 @@ module.exports = {
     'jsx-a11y/role-supports-aria-props': 2,
     'jsx-a11y/scope': 2,
     'jsx-a11y/tabindex-no-positive': 2,
-    "react-hooks/rules-of-hooks": "warn", // todo: this should be an error
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/rules-of-hooks": "error", 
+    "react-hooks/exhaustive-deps": "error"
   },
 };

@@ -21,7 +21,7 @@ const DescriptionText = styled.p`
 
 const AlertBadge = styled.span`
   background-color: #db0a07;
-  border-radius: 24px;
+  border-radius: 1.5rem;
   color: #fff;
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -63,9 +63,12 @@ const VideoPromo = ({ customFields }) => {
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          <div className="padding-sm-bottom">
-            {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
-          </div>
+          {alertBadge
+            && (
+            <div className="padding-sm-bottom">
+              <AlertBadge>{alertBadge}</AlertBadge>
+            </div>
+            )}
           {title
             && (
             <TitleText

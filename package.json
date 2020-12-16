@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
     "lint:styles": "stylelint '**/*.(scss|jsx)' --formatter verbose",
-    "lint:styles:fix": "stylelint '**/*.scss' -- --fix",
+    "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook",
     "test": "jest",
@@ -73,7 +73,6 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
-    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
     "@wpmedia/ads-block": "file:blocks/ads-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",

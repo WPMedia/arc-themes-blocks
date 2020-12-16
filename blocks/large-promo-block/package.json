@@ -33,6 +33,7 @@
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/overline-block": "canary",
     "@wpmedia/shared-styles": "canary",
+    "@wpmedia/video-player-block": "stable",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

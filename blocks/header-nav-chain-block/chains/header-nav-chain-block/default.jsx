@@ -29,7 +29,7 @@ const StyledNav = styled.nav`
   position: relative;
 
   .news-theme-navigation-bar {
-    background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+    background-color: ${(props) => props.navBarBackground};
     height: ${navHeight};
     z-index: ${navZIdx};
   }
@@ -46,7 +46,7 @@ const StyledSectionDrawer = styled.div`
 `;
 
 const StyledWarning = styled.div`
-  background-color: #cc3300;
+  background-color: #c30;
   color: #fff;
   display: flex;
   align-self: flex-start;
@@ -60,12 +60,17 @@ const Nav = (props) => {
   } = useFusionContext();
 
   const {
-    primaryLogo, primaryLogoAlt, navColor, locale = 'en',
+    primaryLogo,
+    primaryLogoAlt,
+    navColor,
+    locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
+    navBarBackground,
   } = getProperties(arcSite);
   let primaryLogoPath;
 
   const {
+    'primary-color': primaryColor = '#000',
     'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
@@ -135,6 +140,16 @@ const Nav = (props) => {
     primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
   }
 
+  const isLogoSVG = !!primaryLogoPath && String(primaryLogoPath).endsWith('.svg');
+
+  let backgroundColor = '#000';
+
+  if (navBarBackground === 'primary-color') {
+    backgroundColor = primaryColor;
+  } else if (navColor === 'light') {
+    backgroundColor = '#fff';
+  }
+
   const onScrollEvent = (evt) => {
     if (!evt) {
       return;
@@ -200,17 +215,22 @@ const Nav = (props) => {
 
   return (
     <>
-      <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
-        <div className="news-theme-navigation-container news-theme-navigation-bar">
+      <StyledNav
+        id="main-nav"
+        className={`${navColor === 'light' ? 'light' : 'dark'}`}
+        font={primaryFont}
+        navBarBackground={backgroundColor}
+      >
+        {' '}
+        <div className={`news-theme-navigation-container news-theme-navigation-bar ${isLogoSVG ? 'svg-logo' : ''} logo-${logoAlignment} ${horizontalLinksHierarchy ? 'horizontal-links' : ''}`}>
           <div className="nav-left">
-            <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
+            <SearchBox iconSize={16} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
             <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
               <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
               <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
             </button>
-            {logoAlignment === 'left' && <NavLogo />}
           </div>
-          {logoAlignment === 'center' && <NavLogo />}
+          <NavLogo />
           {(horizontalLinksHierarchy && logoAlignment !== 'center')
             && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
           <div className="nav-right">

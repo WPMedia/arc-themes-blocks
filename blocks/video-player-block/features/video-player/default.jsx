@@ -18,10 +18,12 @@ const DescriptionText = styled.p`
 
 const AlertBadge = styled.span`
   background-color: #db0a07;
-  border-radius: 5px;
+  border-radius: 1.5rem;
   color: #fff;
   display: inline-block;
   padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  line-height: 1.33;
 `;
 
 const VideoPlayer = (props) => {
@@ -99,34 +101,35 @@ const VideoPlayer = (props) => {
 
   return (
     <div className="container-fluid video-promo">
-      <div className="row">
-        <div className="col-sm-xl-12">
-          {alertBadge && <AlertBadge>{alertBadge}</AlertBadge>}
-          {title
-          && (
-          <TitleText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-            className="xl-promo-headline"
-          >
-            {title}
-          </TitleText>
-          )}
-          <div className="embed-video">
-            <EmbedContainer markup={embedHTML}>
-              <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-            </EmbedContainer>
-          </div>
-          {description
-            && (
-            <DescriptionText
-              secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
-              className="description-text"
-            >
-              {description}
-            </DescriptionText>
-            )}
+      {alertBadge
+        && (
+        <div className="padding-sm-bottom">
+          <AlertBadge>{alertBadge}</AlertBadge>
         </div>
+        )}
+      {title
+      && (
+      <TitleText
+        primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+        className="xl-promo-headline"
+      >
+        {title}
+      </TitleText>
+      )}
+      <div className="embed-video">
+        <EmbedContainer markup={embedHTML}>
+          <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+        </EmbedContainer>
       </div>
+      {description
+        && (
+        <DescriptionText
+          secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+          className="description-text"
+        >
+          {description}
+        </DescriptionText>
+        )}
     </div>
   );
 };

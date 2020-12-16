@@ -7,7 +7,6 @@ import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
-import Title from './_children/title';
 import StoryItem from './_children/story-item';
 import './simple-list.scss';
 
@@ -116,9 +115,9 @@ const SimpleList = (props) => {
     <div key={id} className="list-container layout-section">
       { title
         && (
-        <Title className="list-title" primaryFont={primaryFont}>
+        <div className="list-title" primaryFont={primaryFont}>
           {title}
-        </Title>
+        </div>
         )}
       {
         contentElements.reduce(unserializeStory(arcSite), []).map(({

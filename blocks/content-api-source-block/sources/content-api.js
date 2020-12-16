@@ -11,12 +11,14 @@ const resolve = (key = {}) => {
   return `/content/v4/?${id ? `_id=${id}` : `website_url=${websiteUrl}`}${site ? `&website=${site}` : ''}`;
 };
 
-const transform = (data, query) => getResizedImageData(
-  data,
-  null,
-  null,
-  null,
-  query['arc-site'],
+const transform = (data, query) => (
+  getResizedImageData(
+    data,
+    null,
+    null,
+    null,
+    query['arc-site'],
+  )
 );
 
 export default {

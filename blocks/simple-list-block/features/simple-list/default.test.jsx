@@ -145,7 +145,7 @@ describe('Simple list', () => {
       deployment={jest.fn((path) => path)}
     />);
 
-    expect(wrapper.find('.list-item-simple').length).toBe(2);
+    expect(wrapper.find('article.list-item-simple').length).toBe(2);
   });
   it('should not render items when no data provided', () => {
     const { default: SimpleList } = require('./default.jsx');
@@ -168,7 +168,7 @@ describe('Simple list', () => {
       deployment={jest.fn((path) => path)}
     />);
 
-    expect(wrapper.find('.list-item-simple').length).toBe(0);
+    expect(wrapper.find('article.list-item-simple').length).toBe(0);
   });
 });
 
@@ -195,6 +195,6 @@ describe('Simple list', () => {
     }));
     const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
-    expect(wrapper.find('.list-item-simple').length).toBe(1);
+    expect(wrapper.find('article.list-item-simple').length).toBe(1);
   });
 });

@@ -102,39 +102,35 @@ const VideoPlayer = (props) => {
 
   return (
     <div className="container-fluid video-promo">
-      <div className="row">
-        <div className="col-sm-xl-12">
-          {alertBadge
-            && (
-            <div className="padding-sm-bottom">
-              <AlertBadge>{alertBadge}</AlertBadge>
-            </div>
-            )}
-          {title
-          && (
-          <TitleText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-            className="xl-promo-headline"
-          >
-            {title}
-          </TitleText>
-          )}
-          <div className="embed-video">
-            <EmbedContainer markup={embedHTML}>
-              <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-            </EmbedContainer>
-          </div>
-          {description
-            && (
-            <DescriptionText
-              secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
-              className="description-text"
-            >
-              {description}
-            </DescriptionText>
-            )}
+      {alertBadge
+        && (
+        <div className="padding-sm-bottom">
+          <AlertBadge>{alertBadge}</AlertBadge>
         </div>
+        )}
+      {title
+      && (
+      <TitleText
+        primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+        className="xl-promo-headline"
+      >
+        {title}
+      </TitleText>
+      )}
+      <div className="embed-video">
+        <EmbedContainer markup={embedHTML}>
+          <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+        </EmbedContainer>
       </div>
+      {description
+        && (
+        <DescriptionText
+          secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+          className="description-text"
+        >
+          {description}
+        </DescriptionText>
+        )}
     </div>
   );
 };

@@ -8,7 +8,7 @@
    "search-results-block.search-result-number":{
       "en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
       "sv":"%{smart_count} resultat för ”%{searchTerm}”",
-      "no":"%{smart_count} resultat for \"%{searchTerm}\" |||| %{smart_count} resultater for \"%{searchTerm}\"",
+      "no":"%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
       "fr":"%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\""
    
       },

@@ -66,9 +66,14 @@ describe('<ArcAd>', () => {
     expect(wrapper.find('div.advertisement-label')).toHaveLength(0);
   });
 
-  it('renders advertisement label when enabled', () => {
+  it('advertisement label class exist when enabled', () => {
     const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
     expect(wrapper.find('div.advertisement-label')).toHaveLength(1);
+  });
+
+  it('does not render advertisement label before ad callback', () => {
+    const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+    expect(wrapper.find('div.advertisement-label').is('.no-display')).toEqual(true);
   });
 
   it('renders the label with text ADVERTISEMENT when advertisementLabel property is missing', () => {

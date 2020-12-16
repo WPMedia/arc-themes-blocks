@@ -197,7 +197,7 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    const expectedAlertBadge = '<span class="sc-htpNat bLgVsz">Test Alert  Badge</span>';
+    const expectedAlertBadge = '<span class="sc-htpNat Sqzan">Test Alert  Badge</span>';
     const expectedTitle = '<h2 class="sc-bdVaJa jbIaBK xl-promo-headline">Test Title</h2>';
     const expectedDescription = '<p class="sc-bwzfXH gfyHkX description-text">Test Description</p>';
     const foundStyledComponents = wrapper.find('StyledComponent');

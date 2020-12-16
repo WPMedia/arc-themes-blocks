@@ -114,7 +114,7 @@ describe('Simple list', () => {
       deployment={jest.fn((path) => path)}
     />);
 
-    expect(wrapper.find('h2.list-title').text()).toBe(testText);
+    expect(wrapper.find('div.list-title').text()).toBe(testText);
   });
   it('should show no title if there is no title provided', () => {
     const { default: SimpleList } = require('./default.jsx');
@@ -125,7 +125,7 @@ describe('Simple list', () => {
     }));
     const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
-    expect(wrapper.find('h2.list-title').length).toBe(0);
+    expect(wrapper.find('div.list-title').length).toBe(0);
   });
   it('should fetch an array of data when content service is provided', () => {
     const { default: SimpleList } = require('./default.jsx');

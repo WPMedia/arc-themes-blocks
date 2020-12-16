@@ -1,4 +1,8 @@
 module.exports = {
+  transformIgnorePatterns: [
+    '//node_modules/(?!@wpmedia/.*-block).*/',
+    '//node_modules/(?!(@wpmedia)).*/',
+  ],
   projects: [
     '<rootDir>/blocks/*/jest.config.js',
     // '<rootDir>/components/*/jest.config.js',
@@ -8,15 +12,29 @@ module.exports = {
   coverageDirectory: '<rootDir>/coverage',
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
+      statements: 85,
+      branches: 85,
+      functions: 85,
+      lines: 85,
+    },
+    // if an output type breaks, the page doesn't load
+    // this should be higher, really
+    'blocks/default-output-block/output-types': {
+      statements: 86,
+      branches: 80,
+      functions: 100,
+      lines: 85,
     },
   },
   collectCoverageFrom: [
     '**/(features|chains|layouts|sources|output-types)/**/*.{js,jsx}',
+    // for resizer image block
+    '**/extractImageFromStory.js',
+    '**/imageRatioCustomField.js',
+    '**/ratioFor.js',
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/images/*.svg',
+    '!**/mock*.js',
   ],
 };

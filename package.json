@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
     "lint:styles": "stylelint '**/*.(scss|jsx)' --formatter verbose",
-    "lint:styles:fix": "stylelint '**/*.scss' -- --fix",
+    "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook",
     "test": "jest",
@@ -38,7 +38,7 @@
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/news-theme-css": "stable",
     "@storybook/addon-knobs": "^5.3.19",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
@@ -75,6 +75,7 @@
   "dependencies": {
     "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
+    "@wpmedia/ads-block": "file:blocks/ads-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",
     "@wpmedia/alert-bar-content-source-block": "file:blocks/alert-bar-content-source-block",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -88,7 +89,7 @@
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
     "@wpmedia/double-chain-block": "file:blocks/double-chain-block",
-    "@wpmedia/engine-theme-sdk": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/event-tester-block": "file:blocks/event-tester-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
@@ -143,13 +144,9 @@
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
-  "jest": {
-    "transformIgnorePatterns": [
-      "//node_modules/(?!@wpmedia/.*-block).*/",
-      "//node_modules/(?!(@wpmedia)).*/"
-    ]
-  },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not op_mini all",
+    "not IE 11"
   ]
 }

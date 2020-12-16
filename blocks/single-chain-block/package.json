@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/single-chain-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Single Chain – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -24,6 +24,6 @@
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

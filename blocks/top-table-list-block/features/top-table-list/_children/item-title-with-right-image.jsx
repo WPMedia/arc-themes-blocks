@@ -6,8 +6,6 @@ import Title from './title';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const ItemTitleWithRightImage = (props) => {
   const {
     itemTitle,
@@ -26,19 +24,56 @@ const ItemTitleWithRightImage = (props) => {
   } = props;
 
   const ratios = ratiosFor('SM', imageRatio);
-  const onePerLine = customFields.storiesPerRowSM === 1;
-  const promoClasses = `container-fluid small-promo layout-section ${onePerLine ? 'small-promo-one' : 'wrap-bottom'}`;
+  const storiesPerRow = (typeof customFields.storiesPerRowSM === 'undefined')
+    ? 2
+    : customFields.storiesPerRowSM;
+  const promoClasses = `small-promo layout-section small-promo-${storiesPerRow} wrap-bottom`;
   const promoType = discoverPromoType(element);
+  const showHeadline = customFields.showHeadlineSM && itemTitle !== '';
+  const showImage = customFields.showImageSM;
+  let showSize;
+  let layout;
+
+  if (storiesPerRow > 2) {
+    showSize = `${showHeadline ? 'vHead' : ''}${showImage ? 'vImage' : ''}`;
+    layout = 'vertical';
+  } else {
+    showSize = `${showHeadline ? 'hHead' : ''}${showImage ? 'hImage' : ''}`;
+    layout = 'horizontal';
+  }
+
+  const sizes = {
+    hHeadhImage: {
+      title: 'col-sm-8 col-md-8 col-lg-8 col-xl-8 headline-wrap-horizontal',
+      image: 'col-sm-4 col-md-4 col-lg-4 col-xl-4 flex-col',
+    },
+    hHead: {
+      title: 'col-sm-12 col-md-12 col-lg-12 col-xl-12 headline-wrap-horizontal',
+    },
+    hImage: {
+      image: 'col-sm-4 col-md-4 col-lg-4 col-xl-4 flex-col',
+    },
+    vHeadvImage: {
+      title: 'col-sm-8 col-md-12 col-lg-12 col-xl-12 headline-wrap-vertical',
+      image: 'col-sm-4 col-md-12 col-lg-12 col-xl-12 flex-col',
+    },
+    vHead: {
+      title: 'col-sm-8 col-md-12 col-lg-12 col-xl-12 headline-wrap-vertical',
+    },
+    vImage: {
+      image: 'col-sm-4 col-md-12 col-lg-12 col-xl-12 flex-col',
+    },
+  };
 
   return (
     <article
       key={id}
       className={`${promoClasses} ${paddingRight ? 'small-promo-padding' : ''}`}
     >
-      <div className="row sm-promo-padding-btm">
+      <div className={`row sm-promo-padding-btm ${layout}`}>
         {/* customFields.headlinePositionSM === 'above' && */
-          customFields.showHeadlineSM && itemTitle !== '' ? (
-            <div className="col-sm-8 col-md-xl-8">
+          showHeadline ? (
+            <div className={sizes[showSize].title}>
               <a
                 href={websiteURL}
                 title={itemTitle}
@@ -51,13 +86,11 @@ const ItemTitleWithRightImage = (props) => {
             </div>
           ) : null
         }
-        {customFields.showImageSM
-          && (
-          <div className="col-sm-4 col-md-xl-4 flex-col">
-            {imageURL !== '' ? (
+        {showImage && (
+          <div className={sizes[showSize].image}>
+            { imageURL !== '' ? (
               <a href={websiteURL} title={itemTitle}>
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   alt={itemTitle}
@@ -75,7 +108,6 @@ const ItemTitleWithRightImage = (props) => {
             ) : (
               <div className="image-wrapper">
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}
@@ -92,7 +124,7 @@ const ItemTitleWithRightImage = (props) => {
               </div>
             )}
           </div>
-          )}
+        )}
       </div>
       {/* {customFields.headlinePositionSM === 'below'
       && customFields.showHeadlineSM

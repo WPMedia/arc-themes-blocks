@@ -75,7 +75,6 @@ footer {
 
   .socialBtn-container {
     align-items: center;
-    border: 1px solid $primary-color;
     border-radius: calculateRem(5px);
     display: inline-flex;
     justify-content: space-between;
@@ -83,7 +82,6 @@ footer {
 
     a {
       align-self: center;
-      border-right: 1px solid $primary-color;
       display: inline-block;
       flex: auto;
       padding: map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs');
@@ -99,15 +97,15 @@ footer {
         width: 24px;
       }
 
-      svg path {
-        fill: $primary-color;
-      }
+      // svg path {
+      //   fill: $primary-color;
+      // }
 
-      &:hover {
-        svg path {
-          fill: $primary-color;
-        }
-      }
+      // &:hover {
+      //   svg path {
+      //     fill: $primary-color;
+      //   }
+      // }
     }
   }
 

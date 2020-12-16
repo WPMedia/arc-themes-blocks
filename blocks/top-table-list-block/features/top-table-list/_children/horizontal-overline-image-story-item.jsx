@@ -11,8 +11,6 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
     websiteURL,
@@ -144,7 +142,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
               {imageURL !== '' ? (
                 <a href={websiteURL} title={itemTitle}>
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                     resizedImageOptions={resizedImageOptions}
                     url={imageURL}
                     alt={
@@ -166,7 +163,6 @@ const HorizontalOverlineImageStoryItem = (props) => {
               ) : (
                 <div className="image-wrapper">
                   <Image
-                    compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                     smallWidth={ratios.smallWidth}
                     smallHeight={ratios.smallHeight}
                     mediumWidth={ratios.mediumWidth}

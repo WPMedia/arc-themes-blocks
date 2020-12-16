@@ -1,0 +1,33 @@
+.horizontal-links-bar {
+  // @include block-margin-bottom;
+  align-items: center;
+  flex: 0 1 auto;
+  overflow: hidden;
+  text-align: left;
+  margin-left: 20px;
+ 
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    text-align: center;
+  }
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    display: none;
+  }
+}
+
+.horizontal-links-menu {
+  padding: 8px 0;
+
+  a {
+    @include link-color-active-hover($ui-primary-font-color);
+    font-family: $theme-primary-font-family;
+    font-size: 14px;
+    height: 100%;
+    line-height: 14px;
+    margin: 8px 0;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+

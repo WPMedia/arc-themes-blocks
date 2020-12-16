@@ -22,7 +22,11 @@ Outline any schema information requirements necessary to know for ths block
 ## Internationalization fields
 | Phrase key | Default (English) |
 |---|---|
-|`key`|`english translation`|
+|gallery-expand-button|Expand|
+|gallery-page-count-text|"%{current} of %{total}"|
+|gallery-autoplay-button|Autoplay|
+|gallery-pause-autoplay-button|Pause autoplay|
+
 
 ## Events
 Blocks can emit events. The following is a list of events that are emitted by this block.

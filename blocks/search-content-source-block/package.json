@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/search-content-source-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme search API content source block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -24,6 +24,6 @@
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta"
+    "@wpmedia/engine-theme-sdk": "canary"
   }
 }

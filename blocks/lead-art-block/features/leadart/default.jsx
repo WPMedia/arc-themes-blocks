@@ -115,7 +115,7 @@ class LeadArt extends Component {
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
             customFields={{
-              playthrough: !!(customFields?.playthrough)
+              playthrough: !!(customFields?.playthrough),
             }}
           />
         );

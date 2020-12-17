@@ -114,6 +114,9 @@ class LeadArt extends Component {
           <VideoPlayer
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
+            customFields={{
+              playthrough: !!(customFields?.playthrough)
+            }}
           />
         );
       } if (lead_art.type === 'image') {
@@ -223,6 +226,7 @@ LeadArt.label = 'Lead Art – Arc Block';
 LeadArt.defaultProps = {
   customFields: {
     enableAutoplay: false,
+    playthrough: false,
   },
 };
 
@@ -230,6 +234,11 @@ LeadArt.propTypes = {
   customFields: PropTypes.shape({
     enableAutoplay: PropTypes.bool.tag({
       label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video',
+    }),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
       defaultValue: false,
       group: 'Video',
     }),

@@ -125,7 +125,7 @@ const TopTableList = (props) => {
       large = 0,
       medium = 0,
       small = 0,
-      storiesPerRowSM,
+      storiesPerRowSM = 2,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -166,10 +166,15 @@ const TopTableList = (props) => {
   const storyTypes = [...(new Set(storyTypeArray))];
   const storyList = siteContent.map(unserializeStory(arcSite));
   const storyTypeMap = {};
-  storyTypeArray.forEach((sType, index) => {
-    if (!storyTypeMap[sType]) storyTypeMap[sType] = [];
-    storyTypeMap[sType].push(storyList[index]);
-  });
+
+  if (storyList && storyTypeArray) {
+    storyTypeArray.forEach((sType, index) => {
+      if (index < storyList.length) {
+        if (!storyTypeMap[sType]) storyTypeMap[sType] = [];
+        storyTypeMap[sType].push(storyList[index]);
+      }
+    });
+  }
 
   return (
     <div
@@ -187,48 +192,51 @@ const TopTableList = (props) => {
             (storiesPerRowSM && storiesPerRowSM > 1 && storyType === SMALL ? 'row' : ''),
           ].join(' ')}
         >
-          {storyTypeMap[storyType].map((itemObject, index) => {
-            const {
-              id: itemId,
-              itemTitle,
-              imageURL,
-              displayDate,
-              description,
-              by,
-              element,
-              overlineDisplay,
-              overlineUrl,
-              overlineText,
-              resizedImageOptions,
-            } = itemObject;
-            const url = element?.websites[arcSite]?.website_url || '';
-            return (
-              <StoryItemContainer
-                id={itemId}
-                itemTitle={itemTitle}
-                imageURL={imageURL}
-                displayDate={displayDate}
-                description={description}
-                by={by}
-                websiteURL={url}
-                element={element}
-                overlineDisplay={overlineDisplay}
-                overlineUrl={overlineUrl}
-                overlineText={overlineText}
-                storySize={storyType}
-                index={index}
-                storySizeMap={storySizeMap}
-                primaryFont={primaryFont}
-                secondaryFont={secondaryFont}
-                key={itemId}
-                customFields={props.customFields}
-                resizedImageOptions={resizedImageOptions}
-                placeholderResizedImageOptions={placeholderResizedImageOptions}
-                targetFallbackImage={targetFallbackImage}
-                arcSite={arcSite}
-              />
-            );
-          })}
+          {
+            !!storyTypeMap[storyType]
+            && storyTypeMap[storyType].map((itemObject = {}, index) => {
+              const {
+                id: itemId,
+                itemTitle,
+                imageURL,
+                displayDate,
+                description,
+                by,
+                element,
+                overlineDisplay,
+                overlineUrl,
+                overlineText,
+                resizedImageOptions,
+              } = itemObject;
+              const url = element?.websites[arcSite]?.website_url || '';
+              return (
+                <StoryItemContainer
+                  id={itemId}
+                  itemTitle={itemTitle}
+                  imageURL={imageURL}
+                  displayDate={displayDate}
+                  description={description}
+                  by={by}
+                  websiteURL={url}
+                  element={element}
+                  overlineDisplay={overlineDisplay}
+                  overlineUrl={overlineUrl}
+                  overlineText={overlineText}
+                  storySize={storyType}
+                  index={index}
+                  storySizeMap={storySizeMap}
+                  primaryFont={primaryFont}
+                  secondaryFont={secondaryFont}
+                  key={itemId}
+                  customFields={props.customFields}
+                  resizedImageOptions={resizedImageOptions}
+                  placeholderResizedImageOptions={placeholderResizedImageOptions}
+                  targetFallbackImage={targetFallbackImage}
+                  arcSite={arcSite}
+                />
+              );
+            })
+          }
         </div>
       ))}
     </div>

@@ -11,7 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { resolveDefaultPromoElements } from './helpers';
+import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
 // to modify, go to the shared styles block
@@ -40,15 +40,6 @@ const ReadMoreButton = styled.button`
   }
 `;
 
-function fetchStoriesTransform(data, storedList) {
-  const result = storedList;
-  if (data) {
-    // Add new data to previous list
-    result.content_elements = storedList.content_elements.concat(data.content_elements);
-    result.next = data.next;
-  }
-  return result;
-}
 @Consumer
 class ResultsList extends Component {
   constructor(props) {

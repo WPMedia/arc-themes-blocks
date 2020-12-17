@@ -43,7 +43,7 @@ describe('Card list', () => {
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
-      expect(wrapper.find('.card-list-item').length).toEqual(27);
+      expect(wrapper.find('article.card-list-item').length).toEqual(27);
       expect(wrapper.find('.simple-results-list-container').childAt(0).hasClass('list-item-simple')).toEqual(true);
     });
   });
@@ -65,7 +65,7 @@ describe('Card list', () => {
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
-      expect(wrapper.find('.card-list-item').length).toEqual(0);
+      expect(wrapper.find('article.card-list-item').length).toEqual(0);
       expect(wrapper.find('.list-item-simple').length).toEqual(1);
       expect(wrapper.find('.simple-results-list-container').childAt(0).hasClass('list-item-simple')).toEqual(true);
     });
@@ -185,16 +185,16 @@ describe('Card list', () => {
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.card-list-item').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').length).toEqual(27);
       });
 
       it('should render a headline', () => {
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').length).toEqual(27);
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
-        expect(wrapper.find('.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
         expect(
-          wrapper.find('.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
+          wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
         ).toEqual('/this/is/the/correct/url');
       });
 

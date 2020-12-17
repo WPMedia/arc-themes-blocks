@@ -318,11 +318,17 @@ describe('ad-helper', () => {
       expect(fmtPath).toBeDefined();
       expect(fmtPath).toBe('');
     });
+    it('returns formatted section path', () => {
+      const testPath = '/news/test-section/another-section';
+      const fmtPath = formatSectionPath(testPath);
+      expect(fmtPath).toBeDefined();
+      expect(fmtPath).toBe('news/test-section/another-section');
+    });
     it('returns formatted section path with trailing backslash', () => {
       const testPath = '/news/test-section/another-section/';
       const fmtPath = formatSectionPath(testPath);
       expect(fmtPath).toBeDefined();
-      expect(fmtPath).toBe('/news/test-section/another-section');
+      expect(fmtPath).toBe('news/test-section/another-section');
     });
   });
 
@@ -382,7 +388,7 @@ describe('ad-helper', () => {
         },
       });
       expect(sectionId).toBeDefined();
-      expect(sectionId).toEqual('/news');
+      expect(sectionId).toEqual('news');
     });
 
     it('Returns custom "ad-path" as section ID', () => {
@@ -399,7 +405,7 @@ describe('ad-helper', () => {
         },
       });
       expect(sectionId).toBeDefined();
-      expect(sectionId).toEqual('/custom/ad-path');
+      expect(sectionId).toEqual('custom/ad-path');
     });
   });
 
@@ -426,7 +432,8 @@ describe('ad-helper', () => {
         metaValue: jest.fn(() => undefined),
       });
       expect(slotName).toBeDefined();
-      expect(slotName).toEqual(`${STORY_MOCK.websites[arcSite].website_section._id}`);
+      const fmtSlotName = STORY_MOCK.websites[arcSite].website_section._id.replace(/\//, '');
+      expect(slotName).toEqual(fmtSlotName);
     });
   });
 

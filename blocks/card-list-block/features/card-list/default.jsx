@@ -217,7 +217,7 @@ class CardList extends React.Component {
                   return (
                     <React.Fragment key={`result-card-${url}`}>
                       <hr />
-                      <div
+                      <article
                         className="card-list-item"
                         key={`result-card-${url}`}
                         type="1"
@@ -272,7 +272,7 @@ class CardList extends React.Component {
                               )
                           }
                         </a>
-                      </div>
+                      </article>
                     </React.Fragment>
                   );
                 })

@@ -120,7 +120,7 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform: (data) => this.fetchStoriesTransform(data, storedList),
+            transform: (data) => ResultsList.fetchStoriesTransform(data, storedList),
           },
         });
         // Hide button if no more stories to load

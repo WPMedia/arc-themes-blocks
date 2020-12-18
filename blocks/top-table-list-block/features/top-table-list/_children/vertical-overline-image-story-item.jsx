@@ -102,7 +102,9 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
-  const videoEmbed = customFields.playVideoInPlaceXL && extractVideoEmbedFromStory(element);
+  const videoEmbed = customFields.playVideoInPlaceXL
+    && !!extractVideoEmbedFromStory
+    && extractVideoEmbedFromStory(element);
 
   return (
     <>

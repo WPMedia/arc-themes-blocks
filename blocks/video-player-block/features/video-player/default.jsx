@@ -93,10 +93,12 @@ const VideoPlayer = (props) => {
     .replace('script>', 'script-->');
 
   useEffect(() => {
-    const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
+    if (document.getElementById(`video-${videoRef.current}`)) {
+      const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
 
-    if (powaEl) {
-      if (window.powaBoot) window.powaBoot();
+      if (powaEl) {
+        if (window.powaBoot) window.powaBoot();
+      }
     }
   });
 
@@ -117,11 +119,13 @@ const VideoPlayer = (props) => {
         {title}
       </TitleText>
       )}
-      <div className="embed-video">
-        <EmbedContainer markup={embedHTML}>
-          <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-        </EmbedContainer>
-      </div>
+      {embedHTML && (
+        <div className="embed-video">
+          <EmbedContainer markup={embedHTML}>
+            <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+          </EmbedContainer>
+        </div>
+      )}
       {description
         && (
         <DescriptionText

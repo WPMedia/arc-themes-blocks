@@ -39,7 +39,7 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
-HeadlineText.displayName = 'h2';
+HeadlineText.displayName = 'HeadlineText';
 
 const Title = styled.div`
   font-family: ${(props) => props.primaryFont};

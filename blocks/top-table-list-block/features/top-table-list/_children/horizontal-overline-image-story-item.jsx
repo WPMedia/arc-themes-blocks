@@ -108,7 +108,9 @@ const HorizontalOverlineImageStoryItem = (props) => {
 
   const ratios = ratiosFor('LG', imageRatio);
   const promoType = discoverPromoType(element);
-  const videoEmbed = customFields.playVideoInPlaceLG && extractVideoEmbedFromStory(element);
+  const videoEmbed = customFields.playVideoInPlaceLG
+    && !!extractVideoEmbedFromStory
+    && extractVideoEmbedFromStory(element);
 
   return (
     <>

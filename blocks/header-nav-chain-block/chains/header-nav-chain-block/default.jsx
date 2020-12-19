@@ -8,8 +8,10 @@ import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import { useDebouncedCallback } from 'use-debounce';
+import { generateNavComponentPropTypes, generateNavComponentMap } from './nav-helper';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
+import NavLogo from './_children/nav-logo';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
@@ -56,18 +58,15 @@ const StyledWarning = styled.div`
 /* Main Component */
 const Nav = (props) => {
   const {
-    arcSite, deployment, contextPath, isAdmin,
+    arcSite, isAdmin,
   } = useFusionContext();
 
   const {
-    primaryLogo,
-    primaryLogoAlt,
     navColor,
     locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
     navBarBackground,
   } = getProperties(arcSite);
-  let primaryLogoPath;
 
   const {
     'primary-color': primaryColor = '#000',
@@ -78,11 +77,15 @@ const Nav = (props) => {
 
   const {
     children = [],
-    customFields: {
-      hierarchy, signInOrder, logoAlignment = 'center', horizontalLinksHierarchy,
-    } = {},
+    customFields = {},
     customSearchAction = null,
   } = props;
+  const {
+    hierarchy,
+    signInOrder,
+    logoAlignment = 'center',
+    horizontalLinksHierarchy,
+  } = customFields;
 
   // signInOrder is 1-based instead of 0-based, so we subtract 1
   const signInButton = (Number.isInteger(signInOrder) && children[signInOrder - 1])
@@ -132,15 +135,6 @@ const Nav = (props) => {
       window.removeEventListener('keydown', handleEscKey);
     };
   }, []);
-
-  // Check if URL is absolute/base64
-  if (primaryLogo && (primaryLogo.indexOf('http') === 0 || primaryLogo.indexOf('base64') === 0)) {
-    primaryLogoPath = primaryLogo;
-  } else {
-    primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
-  }
-
-  const isLogoSVG = !!primaryLogoPath && String(primaryLogoPath).endsWith('.svg');
 
   let backgroundColor = '#000';
 
@@ -205,12 +199,46 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
-  const NavLogo = () => (
-    <div className={`nav-logo nav-logo-${logoAlignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'}`}>
-      <a href="/" title={primaryLogoAlt}>
-        {!!primaryLogo && <img src={primaryLogoPath} alt={primaryLogoAlt || 'Navigation bar logo'} />}
-      </a>
-    </div>
+  const getCustomComponent = (type) => {
+    const typeParts = type.split('_');
+    const position = !!typeParts && typeParts.length === 2 ? typeParts[1] : null;
+    return (
+      children
+      && children.length > 0
+      && position
+      && position > 0
+        ? children[position - 1] : undefined
+    );
+  };
+
+  const navComponentMap = generateNavComponentMap({
+    ...customFields, useSignInButton: !!signInButton,
+  });
+
+  const NavSection = ({ side }) => (
+    !side ? null : (
+      <div key={side} className={`nav-${side}`}>
+        { Object.keys(navComponentMap[side]).map((breakpoint) => !!breakpoint && (
+          <div key={breakpoint} className={`nav-components--${breakpoint}`}>
+            { navComponentMap[side][breakpoint].map((componentType, idx) => (
+              <div key={`${side}_${breakpoint}_${(idx + 1)}`}>
+                {
+                  (componentType === 'signin' && signInButton)
+                  || (componentType === 'search' && (
+                    <SearchBox iconSize={16} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
+                  )) || (componentType === 'menu' && (
+                    <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
+                      <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
+                      <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
+                    </button>
+                  )) || getCustomComponent(componentType)
+                }
+              </div>
+            )) }
+          </div>
+        )) }
+      </div>
+    )
   );
 
   return (
@@ -221,21 +249,12 @@ const Nav = (props) => {
         font={primaryFont}
         navBarBackground={backgroundColor}
       >
-        {' '}
-        <div className={`news-theme-navigation-container news-theme-navigation-bar ${isLogoSVG ? 'svg-logo' : ''} logo-${logoAlignment} ${horizontalLinksHierarchy ? 'horizontal-links' : ''}`}>
-          <div className="nav-left">
-            <SearchBox iconSize={16} navBarColor={navColor} placeholderText={phrases.t('header-nav-chain-block.search-text')} customSearchAction={customSearchAction} />
-            <button onClick={hamburgerClick} className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`} type="button">
-              <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
-              <HamburgerMenuIcon fill={null} height={iconSize} width={iconSize} />
-            </button>
-          </div>
-          <NavLogo />
+        <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${horizontalLinksHierarchy ? 'horizontal-links' : ''}`}>
+          <NavSection side="left" />
+          <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {(horizontalLinksHierarchy && logoAlignment !== 'center')
             && <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />}
-          <div className="nav-right">
-            {signInButton}
-          </div>
+          <NavSection side="right" />
         </div>
 
         <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
@@ -257,6 +276,8 @@ const Nav = (props) => {
   );
 };
 
+/** Nav PropTypes */
+
 Nav.propTypes = {
   customFields: PropTypes.shape({
     hierarchy: PropTypes.string.tag({
@@ -264,7 +285,9 @@ Nav.propTypes = {
       defaultValue: '',
       group: 'Configure content',
     }),
-    signInOrder: PropTypes.number,
+    signInOrder: PropTypes.number.tag({
+      hidden: true,
+    }),
     logoAlignment: PropTypes.oneOf([
       'center', 'left',
     ]).tag({
@@ -276,6 +299,7 @@ Nav.propTypes = {
       label: 'Horizontal Links hierarchy',
       group: 'Configure content',
     }),
+    ...generateNavComponentPropTypes(),
   }),
 };
 

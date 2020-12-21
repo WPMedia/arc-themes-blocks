@@ -1,12 +1,13 @@
 {
   "name": "fusion-news-theme-blocks",
+  "version": "0.0.1",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com:Mentor-Medier/fusion-news-theme-blocks.git",
     "directory": "blocks/article-body-block"
   },
   "private": true,
@@ -37,9 +38,9 @@
     "@babel/preset-react": "^7.0.0",
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
     "@storybook/react": "^5.3.19",
     "@wpmedia/news-theme-css": "beta",
-    "@storybook/addon-knobs": "^5.3.19",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",
@@ -59,7 +60,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
-    "lerna": "^3.18.3",
+    "lerna": "^3.22.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

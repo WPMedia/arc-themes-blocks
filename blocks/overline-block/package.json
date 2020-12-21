@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/overline-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Fusion themes block containing an overline block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -25,8 +25,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta"
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/header-nav-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -29,9 +29,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
-    "@wpmedia/shared-styles": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/top-table-list-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -22,14 +22,14 @@
     "directory": "blocks/top-table-list-block"
   },
   "peerDependencies": {
-    "@wpmedia/byline-block": "beta",
-    "@wpmedia/date-block": "beta",
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
-    "@wpmedia/overline-block": "beta",
-    "@wpmedia/placeholder-image-block": "beta",
-    "@wpmedia/resizer-image-block": "beta",
-    "@wpmedia/shared-styles": "beta",
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "scripts": {

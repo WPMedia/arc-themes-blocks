@@ -1,15 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { useContent } from 'fusion:content';
 import ExtraLargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  localizeDateTime: jest.fn(() => new Date().toDateString()),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
 }));
@@ -35,6 +38,7 @@ jest.mock('fusion:context', () => ({
 describe('the extra large promo feature', () => {
   afterEach(() => {
     jest.resetModules();
+    jest.clearAllMocks();
   });
 
   beforeEach(() => {
@@ -105,5 +109,187 @@ describe('the extra large promo feature', () => {
     const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
     const img = wrapper.find('Image');
     expect(img.prop('largeHeight')).toBe(600);
+  });
+
+  it('should fetch content using null source and query if none in custom fields', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      itemContentConfig: {
+        contentConfigValues: { id: 1234 },
+        contentService: 'content-api',
+      },
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+    const expectedArgs = {
+      query: {
+        'arc-site': 'the-sun',
+        id: 1234,
+      },
+      source: 'content-api',
+    };
+    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
+    wrapper.unmount();
+  });
+
+  it('if undefined content return null result', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      itemContentConfig: {
+        contentConfigValues: { id: 1234 },
+        contentService: 'content-api',
+      },
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+    const expectedArgs = {
+      query: {
+        'arc-site': 'the-sun',
+        id: 1234,
+      },
+      source: 'content-api',
+    };
+    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
+    wrapper.unmount();
+  });
+
+  it('returns null if null content', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce(undefined);
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} arcSite="dagen" />);
+    expect(wrapper).toEqual({});
+    wrapper.unmount();
+  });
+
+  it('show image useContent for resizer parameter returns undefined if falsy', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} arcSite="dagen" />);
+
+    const image = wrapper.find('Image');
+    expect(image.length).toBe(1);
+    expect(image.props().resizedImageOptions).toEqual(undefined);
+    wrapper.unmount();
+  });
+
+  it('uses websiteSection for overline if there is no content.label.basic', () => {
+    const myConfig = {
+      showHeadline: true,
+      showOverline: true,
+    };
+    useContent.mockReturnValueOnce({ websites: { 'the-sun': { website_section: { _id: 'the-sun-ID', name: 'the-sun-name' } } } });
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+
+    const wrapperOverline = wrapper.find('Overline');
+    expect(wrapperOverline.length).toBe(1);
+
+    expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
+    expect(wrapperOverline.find('a.overline').prop('href')).toEqual('the-sun-ID/');
+    wrapper.unmount();
+  });
+
+  it('show ALL options if enabled', () => {
+    useContent.mockReturnValueOnce(mockData);
+
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      showOverline: true,
+      showDescription: true,
+      showByline: true,
+      showDate: true,
+    };
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+
+    expect(wrapper.find('Overline').length).toBe(1);
+    expect(wrapper.find('.xl-promo-headline').length).toBe(4);
+    expect(wrapper.find('.description-text').length).toBe(3);
+    expect(wrapper.find('ArticleByline').length).toBe(1);
+    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('show image if has showDescription enabled', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      showOverline: false,
+      showDescription: true,
+      showByline: false,
+      showDate: false,
+    };
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+    expect(wrapper.find('.description-text').length).toBe(3);
+    expect(wrapper.find('Image').length).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('show image if has showByline enabled', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      showOverline: false,
+      showDescription: false,
+      showByline: true,
+      showDate: false,
+    };
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+    expect(wrapper.find('ArticleByline').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('show image if has showDate enabled', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      showOverline: false,
+      showDescription: false,
+      showByline: false,
+      showDate: true,
+    };
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('shows placeholder image if no image URL', () => {
+    useContent.mockReturnValueOnce({});
+
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+    };
+
+    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
+
+    expect(wrapper.find('PlaceholderImage').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(0);
+    wrapper.unmount();
   });
 });

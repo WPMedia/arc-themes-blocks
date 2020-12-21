@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/small-promo-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Fusion News Theme Small Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -9,8 +9,7 @@
   "files": [
     "features",
     "chains",
-    "layouts",
-    "intl.json"
+    "layouts"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -26,9 +25,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
-    "@wpmedia/shared-styles": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

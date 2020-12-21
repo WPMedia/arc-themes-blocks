@@ -3,35 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [5.9.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.2...v5.9.0) (2020-11-30)
+## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
 
-### Bug Fixes
+### Performance Improvements
 
-* Hard-code handle image params to be false ([dea0f4f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dea0f4f3d891dcc0cb8fa96873235dd9285f5975))
-* Opt into image compression in all arc block components ([33a3f82](https://github.com/WPMedia/fusion-news-theme-blocks/commit/33a3f82f33a7a19b6673504abf504596b3cb4392))
-* Use peer dependencies not dependencies for packages already installed ([f692bd0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f692bd0a48e9c69faded2c5a98b731117fb7ba96))
-
-
-
-# [5.9.0-beta.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.7.3-canary.0...v5.9.0-beta.0) (2020-10-14)
+* Ignore all test jsx files and mock numbered list ([5de2919](https://github.com/WPMedia/fusion-news-theme-blocks/commit/5de29191332f2d7bd54fd898f926e686dc2a62dc))
+* Include npmignore in the features folder because that's what's included in the package.json's files ([4cb617f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4cb617fb8ee26973203f317957e69c5cdc1c7a59))
+* Remove test files by name and without path in ignore file ([7657a37](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7657a3754ae73d90c5e5dbee50a286d7648509ba))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
 
 
 
-## [5.7.3-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.7.2-canary.0...v5.7.3-canary.0) (2020-10-05)
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
 
 
 
-## [5.7.2-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.7.1-canary.0...v5.7.2-canary.0) (2020-10-05)
 
 
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
 
-## [5.7.1-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.8.0...v5.7.1-canary.0) (2020-10-05)
-
-
-### Bug Fixes
-
-* Use nested canary versions of engine theme sdk issue ([89fdb48](https://github.com/WPMedia/fusion-news-theme-blocks/commit/89fdb48fef1c437e6149ee4a646c27f5ef781fb9))
+**Note:** Version bump only for package @wpmedia/numbered-list-block
 
 
 

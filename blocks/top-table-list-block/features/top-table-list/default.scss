@@ -5,23 +5,14 @@
         padding-top: 0;
       }
     }
-    display: block;
 
-    .col-md-xl-4 {
-      text-align: right;
-    }
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      display: inline-block;
-      width: calc((100% - #{map-get($spacers, 'md')}) / 2);
-    }
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
 
     .row {
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
         grid-column-gap: 0;
-
-        img {
-          max-width: 90%;
-        }
       }
     }
 
@@ -32,22 +23,91 @@
         margin-bottom: inherit;
       }
     }
+
+    .vertical {
+      grid-auto-flow: column;
+      grid-row-gap: 0.5rem;
+      grid-column-gap: 0;
+
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        grid-auto-flow: row;
+
+        & > div:first-child {
+          grid-row-start: 2;
+        }
+      }
+    }
+
+    .horizontal {
+      grid-auto-flow: column;
+    }
+
+    hr {
+      width: 100%;
+    }
+
+    .headline-wrap-vertical {
+      height: 4.6em;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      -moz-box-oriented: vertical;
+      /* opera */
+      text-overflow: -o-ellipsis-lastline;
+    }
+
+    .headline-wrap-horizontal {
+      height: 50px;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+    }
   }
 
-  .small-promo-padding {
-    padding-right: 0;
+  .small-promo-1 {
+    width: 100%;
+  }
+
+  .small-promo-2 {
+    width: 100%;
+
     @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-right: map-get($spacers, 'md');
+      padding: 0 5px;
+      width: 50%;
+    }
+  }
+
+  .small-promo-2:nth-child(odd) {
+    padding-right: 0.75rem;
+  }
+
+  .small-promo-2:nth-child(even) {
+    padding-left: 0.75rem;
+  }
+
+  .small-promo-3 {
+    width: 100%;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding: 0 5px;
+      width: 33%;
+    }
+  }
+
+  .small-promo-4 {
+    width: 100%;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding: 0 5px;
+      width: 25%;
     }
   }
 
   &.wrap-bottom {
     margin-bottom: inherit !important;
-  }
-
-  .small-promo-one {
-    display: block;
-    width: 100%;
   }
 
   .image-wrapper {

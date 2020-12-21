@@ -20,34 +20,10 @@ const config = {
   showBylineMD: true,
   showDateMD: true,
   showHeadlineSM: true,
-  // headlinePositionSM: 'above',
   showImageSM: true,
 };
 
-// const headBelowConfig = {
-//   showOverlineXL: true,
-//   showHeadlineXL: true,
-//   showImageXL: true,
-//   showDescriptionXL: true,
-//   showBylineXL: true,
-//   showDateXL: true,
-//   showOverlineLG: true,
-//   showHeadlineLG: true,
-//   showImageLG: true,
-//   showDescriptionLG: true,
-//   showBylineLG: true,
-//   showDateLG: true,
-//   showHeadlineMD: true,
-//   showImageMD: true,
-//   showDescriptionMD: true,
-//   showBylineMD: true,
-//   showDateMD: true,
-//   showHeadlineSM: true,
-//   headlinePositionSM: 'below',
-//   showImageSM: true,
-// };
-
-describe('item title with right image block', () => {
+describe('small image block', () => {
   beforeAll(() => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({
       fallbackImage: 'placeholder.jpg',
@@ -65,14 +41,13 @@ describe('item title with right image block', () => {
     jest.resetModules();
   });
 
-  it('renders title and image with full props', () => {
+  it('must render title and image with full props', () => {
     const imageURL = 'pic';
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(
       <ItemTitleWithRightImage
         imageURL={imageURL}
@@ -84,23 +59,23 @@ describe('item title with right image block', () => {
       />,
     );
 
-    // expect(wrapper.find('h2.simple-list-headline-text').length).toBe(1);
-    // expect(wrapper.find('h2.simple-list-headline-text').text()).toBe(itemTitle);
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
+    expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
 
-    // placeholder
-    // expect(wrapper.find('.simple-list-placeholder').length).toBe(0);
-    // expect(wrapper.find('.simple-list-img').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(1);
+    expect(wrapper.find('Image').prop('url')).toBe(imageURL);
 
     expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
   });
-  xit('renders neither title nor image with empty props, renders placeholder', () => {
+
+  it('must renders neither title nor image with empty props, renders placeholder image', () => {
     const imageURL = '';
+    const fallbackImage = 'fallback';
     const itemTitle = '';
     const primaryFont = 'arial';
     const id = 'test';
     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(
       <ItemTitleWithRightImage
         imageURL={imageURL}
@@ -108,129 +83,212 @@ describe('item title with right image block', () => {
         primaryFont={primaryFont}
         id={id}
         customFields={config}
+        placeholderResizedImageOptions={{ '400x267': '' }}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
-    // expect(wrapper.find('h2.simple-list-headline-text').length).toBe(0);
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
 
-    // placeholder
-    // expect(wrapper.find('.simple-list-placeholder').length).toBe(1);
-    // expect(wrapper.find('.simple-list-img').length).toBe(0);
+    expect(wrapper.find('Image').length).toBe(1);
+    expect(wrapper.find('Image').prop('url')).toBe(fallbackImage);
+
+    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
   });
 
-  //   it('headline has class headline-above when headline position is above', () => {
-  //     const imageURL = 'pic';
-  //     const itemTitle = 'title';
-  //     const primaryFont = 'arial';
-  //     const id = 'test';
-  //     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+  it('must render only title if showImageSM false', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-  //     // eslint-disable-next-line no-unused-vars
-  //     const wrapper = mount(
-  //       <ItemTitleWithRightImage
-  //         imageURL={imageURL}
-  //         itemTitle={itemTitle}
-  //         primaryFont={primaryFont}
-  //         id={id}
-  //         customFields={config}
-  //         resizedImageOptions={{ '400x267': '' }}
-  //       />,
-  //     );
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { showImageSM: false })}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-  //     expect(wrapper.find('.headline-above').length).toBe(1);
-  //     expect(wrapper.find('.headline-below').length).toBe(0);
-  //   });
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
+    expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
 
-  //   it('headline has class headline-below when headline position is below', () => {
-  //     const imageURL = 'pic';
-  //     const itemTitle = 'title';
-  //     const primaryFont = 'arial';
-  //     const id = 'test';
-  //     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    expect(wrapper.find('Image').length).toBe(0);
 
-  //     // eslint-disable-next-line no-unused-vars
-  //     const wrapper = mount(
-  //       <ItemTitleWithRightImage
-  //         imageURL={imageURL}
-  //         itemTitle={itemTitle}
-  //         primaryFont={primaryFont}
-  //         id={id}
-  //         customFields={headBelowConfig}
-  //         resizedImageOptions={{ '400x267': '' }}
-  //       />,
-  //     );
+    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+  });
 
-  //     expect(wrapper.find('.headline-below').length).toBe(1);
-  //     expect(wrapper.find('.headline-above').length).toBe(0);
-  //   });
-  // });
+  it('must render only image if showHeadlinesSM false', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-  // describe('small promo display', () => {
-  //   it('when storiesPerRowSM is undefined must not add class small-promo-one', () => {
-  //     const imageURL = 'pic';
-  //     const itemTitle = 'title';
-  //     const primaryFont = 'arial';
-  //     const id = 'test';
-  //     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { showHeadlineSM: false })}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-  //     const wrapper = mount(
-  //       <ItemTitleWithRightImage
-  //         imageURL={imageURL}
-  //         itemTitle={itemTitle}
-  //         primaryFont={primaryFont}
-  //         id={id}
-  //         customFields={config}
-  //         resizedImageOptions={{ '400x267': '' }}
-  //       />,
-  //     );
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
 
-  //     expect(wrapper.find('.small-promo-one').length).toBe(0);
-  //     expect(wrapper.find('article.wrap-bottom').length).toBe(1);
-  //   });
+    expect(wrapper.find('Image').length).toBe(1);
 
-  //   it('when storiesPerRowSM is 2 must not add class small-promo-one', () => {
-  //     const imageURL = 'pic';
-  //     const itemTitle = 'title';
-  //     const primaryFont = 'arial';
-  //     const id = 'test';
-  //     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
-  //     const setup = Object.assign(config, { storiesPerRowSM: 2 });
+    expect(wrapper.find('ItemTitleWithRightImage > article > hr').length).toBe(1);
+  });
 
-  //     const wrapper = mount(
-  //       <ItemTitleWithRightImage
-  //         imageURL={imageURL}
-  //         itemTitle={itemTitle}
-  //         primaryFont={primaryFont}
-  //         id={id}
-  //         customFields={setup}
-  //         resizedImageOptions={{ '400x267': '' }}
-  //       />,
-  //     );
+  it('must render with layout horizontal if stories per row is less than 3', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-  //     expect(wrapper.find('.small-promo-one').length).toBe(0);
-  //     expect(wrapper.find('article.wrap-bottom').length).toBe(1);
-  //   });
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 2})}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
 
-  //   it('when storiesPerRowSM is 1 must add class small-promo-one', () => {
-  //     const imageURL = 'pic';
-  //     const itemTitle = 'title';
-  //     const primaryFont = 'arial';
-  //     const id = 'test';
-  //     const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
-  //     const setup = Object.assign(config, { storiesPerRowSM: 1 });
+    expect(wrapper.find('article > .horizontal').length).toBe(1);
+  });
 
-  //     const wrapper = mount(
-  //       <ItemTitleWithRightImage
-  //         imageURL={imageURL}
-  //         itemTitle={itemTitle}
-  //         primaryFont={primaryFont}
-  //         id={id}
-  //         customFields={setup}
-  //         resizedImageOptions={{ '400x267': '' }}
-  //       />,
-  //     );
+  it('must render with layout vertical if stories per row greater than 3', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
 
-//     expect(wrapper.find('.small-promo-one').length).toBe(1);
-//     expect(wrapper.find('article.wrap-bottom').length).toBe(0);
-//   });
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 3})}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('article > .vertical').length).toBe(1);
+  });
+
+  it('must render only title if showImageSM false in horizontal layuout', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 2, showImageSM: false })}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
+    expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
+
+    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('article > .horizontal').length).toBe(1);
+  });
+
+  it('must render only image if showHeadlineSM false in horizontal layuout', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 2, showHeadlineSM: false })}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
+
+    expect(wrapper.find('Image').length).toBe(1);
+    expect(wrapper.find('article > .horizontal').length).toBe(1);
+  });
+
+  it('must render only image if showHeadlineSM false in vertical layout', () => {
+    const imageURL = 'pic';
+    const itemTitle = '';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 3, showHeadlineSM: false})}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
+    expect(wrapper.find('article > .vertical').length).toBe(1);
+  });
+
+  it('must render only title if showImageSM false in vertical layout', () => {
+    const imageURL = 'pic';
+    const itemTitle = 'title';
+    const primaryFont = 'arial';
+    const id = 'test';
+    const { default: ItemTitleWithRightImage } = require('./item-title-with-right-image');
+
+    const wrapper = mount(
+      <ItemTitleWithRightImage
+        imageURL={imageURL}
+        itemTitle={itemTitle}
+        primaryFont={primaryFont}
+        id={id}
+        /* eslint-disable-next-line */
+        customFields={Object.assign({}, config, { storiesPerRowSM: 3, showImageSM: false})}
+        resizedImageOptions={{ '400x267': '' }}
+      />,
+    );
+
+    expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
+    expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
+    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('article > .vertical').length).toBe(1);
+  });
 });

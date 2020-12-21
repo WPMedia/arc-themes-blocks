@@ -8,9 +8,71 @@ import './default.scss';
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
 const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
-const injectStringScriptArray = (scriptStringArray) => scriptStringArray.map((scriptString) => (
-  <script dangerouslySetInnerHTML={{ __html: scriptString }} />
-));
+const injectStringScriptArray = (scriptStringArray) => (
+  scriptStringArray.map((scriptString, index) => (
+    // no good way of getting keys for this
+    // index used to remove warnings
+    // this key will not affect performance or issues with changing order
+    /* eslint-disable-next-line react/no-array-index-key */
+    <script key={index} dangerouslySetInnerHTML={{ __html: scriptString }} />
+  ))
+);
+
+const chartBeatCode = (accountId, domain) => {
+  if (!accountId || !domain) {
+    return null;
+  }
+  return `
+    (function() {
+        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+        _sf_async_config.uid = ${accountId};
+        _sf_async_config.domain = "${domain}";
+        _sf_async_config.useCanonical = true;
+        _sf_async_config.useCanonicalDomain = true;
+        _sf_async_config.sections = '';
+        _sf_async_config.authors = '';
+        function loadChartbeat() {
+            var e = document.createElement('script');
+            var n = document.getElementsByTagName('script')[0];
+            e.type = 'text/javascript';
+            e.async = true;
+            e.src = '//static.chartbeat.com/js/chartbeat.js';
+            n.parentNode.insertBefore(e, n);
+        }
+        loadChartbeat();
+     })();
+  `;
+};
+
+const comscoreScript = (accountId) => {
+  if (!accountId) {
+    return null;
+  }
+  const scriptCode = `
+    var _comscore = _comscore || [];
+    _comscore.push({ c1: "2", c2: "${accountId}" });
+    (function() {
+      var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+      s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+      el.parentNode.insertBefore(s, el);
+    })();
+  `;
+
+  return (
+    <script data-integration="comscore" dangerouslySetInnerHTML={{ __html: scriptCode }} />
+  );
+};
+
+const comscoreNoScript = (accountId) => {
+  if (!accountId) {
+    return null;
+  }
+  return (
+    <noscript data-integration="comscore">
+      <img alt="comscore" src={`http://b.scorecardresearch.com/p?c1=2&c2=${accountId}&cv=2.0&cj=1`} />
+    </noscript>
+  );
+};
 
 const SampleOutputType = ({
   children,
@@ -34,6 +96,11 @@ const SampleOutputType = ({
     fontUrl,
     resizerURL,
     facebookAdmins,
+    nativoIntegration,
+    chartBeatAccountId,
+    chartBeatDomain,
+    fallbackImage,
+    comscoreID,
   } = getProperties(arcSite);
 
   const googleFonts = () => {
@@ -88,6 +155,7 @@ const SampleOutputType = ({
       <script dangerouslySetInnerHTML={{ __html: gaScript }} />
     </>
   );
+  const chartBeat = chartBeatCode(chartBeatAccountId, chartBeatDomain);
 
   return (
     <html lang="en">
@@ -108,6 +176,7 @@ const SampleOutputType = ({
           resizerURL={resizerURL}
           arcSite={arcSite}
           facebookAdmins={facebookAdmins}
+          fallbackImage={fallbackImage}
         />
 
         <script dangerouslySetInnerHTML={{ __html: ieTest }} />
@@ -129,8 +198,14 @@ const SampleOutputType = ({
         />
         <link rel="preload" as="script" href={powaDrive} />
         {googleFonts()}
+        {nativoIntegration
+          ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)
+          : null}
+        {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
+        {comscoreScript(comscoreID)}
       </head>
       <body>
+        {comscoreNoScript(comscoreID)}
         {gtmID
           ? (
             <noscript>

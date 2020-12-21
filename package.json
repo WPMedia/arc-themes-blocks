@@ -1,7 +1,6 @@
 {
   "name": "fusion-news-theme-blocks",
-  "version": "0.0.1",
-  "publishConfig": {
+    "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },

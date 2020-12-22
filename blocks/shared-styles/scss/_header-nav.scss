@@ -189,6 +189,8 @@ body.nav-open {
       & > .nav-components {
         &--mobile,
         &--desktop {
+          align-items: center;
+          
           & > * {
             margin-right: calculateRem(16px);
     

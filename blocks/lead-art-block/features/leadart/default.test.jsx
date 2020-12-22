@@ -54,6 +54,49 @@ describe('LeadArt', () => {
     expect(wrapper.find('ReactImageLightbox').length).toEqual(1);
   });
 
+  it('renders video lead art type without playthrough', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'video',
+        },
+      },
+    };
+
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{ playthrough: false }}
+      />,
+    );
+    const vidPlayer = wrapper.find('VideoPlayer');
+    expect(vidPlayer.length).toEqual(1);
+    expect(vidPlayer.props().customFields.playthrough).toBeFalsy();
+  });
+
+  it('renders video lead art type with playthrough', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'video',
+        },
+      },
+    };
+
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{ playthrough: true }}
+      />,
+    );
+    const vidPlayer = wrapper.find('VideoPlayer');
+    expect(vidPlayer.length).toEqual(1);
+    expect(vidPlayer.props().customFields.playthrough).toBeDefined();
+    expect(vidPlayer.props().customFields.playthrough).toEqual(true);
+  });
+
   it('renders video lead art type without auto-play', () => {
     const globalContent = {
       promo_items: {

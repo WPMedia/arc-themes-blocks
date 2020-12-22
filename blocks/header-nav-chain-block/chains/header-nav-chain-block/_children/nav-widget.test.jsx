@@ -1,6 +1,4 @@
 import React from 'react';
-// import getProperties from 'fusion:properties';
-// import { useFusionContext } from 'fusion:context';
 import { mount } from 'enzyme';
 import NavWidget from './nav-widget';
 import SearchBox from './search-box';

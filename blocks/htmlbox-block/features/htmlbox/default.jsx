@@ -16,7 +16,7 @@ const HTMLBox = ({ id }) => {
   return htmlbox;
 };
 
-HTMLBox.label = 'HTML Box – Arc Block (Mentor)';
+HTMLBox.label = 'HTML Box – Arc Block (Mentor 2)';
 
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({

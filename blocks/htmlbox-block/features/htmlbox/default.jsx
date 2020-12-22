@@ -9,14 +9,14 @@ const HTMLBox = ({ id }) => {
   if (HTML) {
     htmlbox = (
       <Static id={`html-block-${id}`}>
-        <div className="mentor-fusion"><div dangerouslySetInnerHTML={{ __html: HTML }} /></div>
+        <div dangerouslySetInnerHTML={{ __html: HTML }} />
       </Static>
     );
   }
   return htmlbox;
 };
 
-HTMLBox.label = 'HTML Box – Arc Block (Mentor 2)';
+HTMLBox.label = 'HTML Box – Arc Block (Mentor latest)';
 
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({

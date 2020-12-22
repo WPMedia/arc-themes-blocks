@@ -28,7 +28,7 @@
   ],
   "author": "Jack Howard <jack.howard@washpost.com>",
   "license": "CC-BY-NC-ND-4.0",
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
+  "gitHead": "a092bfc2228948b2a8c0c6b0e514e54977bdd711",
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   }

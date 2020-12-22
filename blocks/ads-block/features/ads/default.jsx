@@ -54,7 +54,7 @@ const ArcAd = (props) => {
   }, [config]);
 
   useEffect(() => {
-    if (!isAdmin) registerAd();
+    if (!isAdmin && 1) registerAd();
   }, [registerAd, isAdmin]);
 
   const {

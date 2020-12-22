@@ -24,5 +24,6 @@
   },
   "dependencies": {
     "arcads": "^2.0.2"
-  }
+  },
+  "gitHead": "a092bfc2228948b2a8c0c6b0e514e54977bdd711"
 }

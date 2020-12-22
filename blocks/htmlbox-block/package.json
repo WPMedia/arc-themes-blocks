@@ -1,9 +1,9 @@
 {
-  "name": "@wpmedia/htmlbox-block",
+  "name": "@mentor-medier/htmlbox-block",
   "version": "5.9.2",
   "description": "Fusion News Theme HTMLBox block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/Mentor-Medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "git@github.com:Mentor-Medier/fusion-news-theme-blocks.git",
     "directory": "blocks/htmlbox-block"
   },
   "scripts": {
@@ -29,5 +29,5 @@
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "a092bfc2228948b2a8c0c6b0e514e54977bdd711"
 }

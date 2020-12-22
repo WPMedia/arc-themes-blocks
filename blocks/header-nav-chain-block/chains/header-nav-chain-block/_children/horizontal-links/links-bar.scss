@@ -31,11 +31,3 @@
     white-space: nowrap;
   }
 }
-
-// Re-adding temporary hack for SVG logo
-// Doesn't scale - only keeping until ticket for real SVG fix
-.news-theme-navigation-container.svg-logo  {
-  .horizontal-links-bar {
-    margin-left: calculateRem(32px);
-  }
-}

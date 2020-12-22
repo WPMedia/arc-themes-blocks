@@ -186,11 +186,30 @@ body.nav-open {
 
     &.nav-left,
     &.nav-right {
-      & > * {
-        margin-right: calculateRem(16px);
+      & > .nav-components {
+        &--mobile,
+        &--desktop {
+          align-items: center;
+          
+          & > * {
+            margin-right: calculateRem(16px);
+    
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
 
-        &:last-child {
-          margin-right: 0;
+        &--mobile {
+          @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+            display: none;
+          }
+        }
+
+        &--desktop {
+          @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+            display: none;
+          }
         }
       }
     }
@@ -211,6 +230,10 @@ body.nav-open {
         max-height: 40px;
         max-width: 240px;
         width: auto;
+      }
+
+      &.svg-logo {
+        flex: 1;
       }
     }
 

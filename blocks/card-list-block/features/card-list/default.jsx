@@ -132,7 +132,7 @@ class CardList extends React.Component {
                   )
                   : ''
               }
-              <div
+              <article
                 className="list-item-simple"
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
@@ -207,7 +207,7 @@ class CardList extends React.Component {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
               {
                 contentElements.slice(1).map((element) => {
                   const {

@@ -5,8 +5,8 @@ export default ({
   alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
+  const [isSearchBarPending, setSearchBarPending] = useState(false);
   const searchInput = useRef(null);
-  let disabledBtn = true;
 
   useEffect(() => {
     const el = searchInput.current;
@@ -14,7 +14,7 @@ export default ({
       el.focus();
       // Wait for open searchbar animation to finish
       setTimeout(() => {
-        disabledBtn = false;
+        setSearchBarPending(false);
       }, 250);
     } else {
       el.blur();
@@ -22,16 +22,19 @@ export default ({
   }, [shouldSearchOpen]);
 
   const handleSearchBtnMousedown = (event) => {
+    if (!isSearchBarPending) {
     // if open, prevent blur event so we don't get a race condition on click vs blur
-    if (shouldSearchOpen) {
-      event.preventDefault();
-    } else {
-      setShouldSearchOpen(true);
+      if (shouldSearchOpen) {
+        event.preventDefault();
+      } else {
+        setSearchBarPending(true);
+        setShouldSearchOpen(true);
+      }
     }
   };
 
   const handleClick = (event) => {
-    if (!disabledBtn) {
+    if (!isSearchBarPending) {
       event.preventDefault();
       if (customSearchAction) {
         customSearchAction(searchInput.current.value);
@@ -65,6 +68,7 @@ export default ({
         onClick={handleClick}
         onMouseDown={handleSearchBtnMousedown}
         type="button"
+        disabled={isSearchBarPending}
         aria-label={shouldSearchOpen ? "Search the site's content" : 'Open the search input to search the site'}
       >
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />

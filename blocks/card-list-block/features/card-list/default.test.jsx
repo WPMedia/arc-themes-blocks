@@ -66,7 +66,7 @@ describe('Card list', () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
       expect(wrapper.find('article.card-list-item').length).toEqual(0);
-      expect(wrapper.find('.list-item-simple').length).toEqual(1);
+      expect(wrapper.find('article.list-item-simple').length).toEqual(1);
       expect(wrapper.find('.simple-results-list-container').childAt(0).hasClass('list-item-simple')).toEqual(true);
     });
   });
@@ -101,27 +101,27 @@ describe('Card list', () => {
       });
 
       it('should render two anchor tags - one around image one for the title', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').length).toEqual(2);
+        expect(wrapper.find('article.list-item-simple').find('.list-anchor').length).toEqual(2);
         expect(wrapper.find('#card-list--link-container').find('Image').length).toEqual(1);
-        expect(wrapper.find('.card-list-headline #card-list--headline-link').length).toEqual(1);
+        expect(wrapper.find('HeadlineText.card-list-headline #card-list--headline-link').length).toEqual(1);
       });
 
       it('should render one image wrapped in an anchor tag', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').length).toEqual(1);
+        expect(wrapper.find('article.list-item-simple').find('.list-anchor').find('Image').length).toEqual(1);
       });
 
       it('should render an anchor ', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').at(0).find('a').length).toEqual(1);
+        expect(wrapper.find('article.list-item-simple').find('.list-anchor').at(0).find('a').length).toEqual(1);
       });
 
       it('should render an anchor and an image with the correct url', () => {
-        const anchors = wrapper.find('.list-item-simple').find('.list-anchor');
+        const anchors = wrapper.find('article.list-item-simple').find('.list-anchor');
         expect(anchors.at(0).prop('href')).toEqual('/this/is/the/correct/url');
         expect(anchors.at(1).prop('href')).toEqual('/this/is/the/correct/url');
       });
 
       it('should render an anchor and an image with alt text', () => {
-        expect(wrapper.find('.list-item-simple').find('.list-anchor').find('Image').prop('alt')).toEqual('Article with a YouTube embed in it');
+        expect(wrapper.find('article.list-item-simple').find('.list-anchor').find('Image').prop('alt')).toEqual('Article with a YouTube embed in it');
       });
 
       it('should render an overline', () => {
@@ -129,11 +129,11 @@ describe('Card list', () => {
       });
 
       it('should render a main headline', () => {
-        expect(wrapper.find('.card-list-headline').length).toEqual(1);
+        expect(wrapper.find('HeadlineText.card-list-headline').length).toEqual(1);
       });
 
       it('should render an author and a publish date section', () => {
-        expect(wrapper.find('.list-item-simple').find('.author-date').length).toEqual(1);
+        expect(wrapper.find('article.list-item-simple').find('.author-date').length).toEqual(1);
       });
 
       it('should render a byline', () => {
@@ -149,15 +149,15 @@ describe('Card list', () => {
       });
 
       it('should set the primary font for the headline', () => {
-        expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
+        expect(wrapper.find('HeadlineText.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
 
       it('should set the primary font for the title', () => {
-        expect(wrapper.find('.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
+        expect(wrapper.find('HeadlineText.card-list-headline')).toHaveProp('primaryFont', 'Papyrus');
       });
 
       it('should not add the line divider', () => {
-        expect(wrapper.find('.list-item-simple--divider').length).toEqual(0);
+        expect(wrapper.find('article.list-item-simple--divider').length).toEqual(0);
       });
     });
   });
@@ -252,13 +252,13 @@ describe('Card list', () => {
         expect(wrapper.find('.overline').length).toBe(0);
       });
       it('should render headline', () => {
-        expect(wrapper.find('.card-list-headline').length).toBe(1);
+        expect(wrapper.find('HeadlineText.card-list-headline').length).toBe(1);
       });
       it('should render author-date', () => {
         expect(wrapper.find('.author-date').length).toBe(1);
       });
       it('should render image', () => {
-        expect(wrapper.find('.list-item-simple Image').length).toBe(1);
+        expect(wrapper.find('article.list-item-simple Image').length).toBe(1);
       });
     });
   });

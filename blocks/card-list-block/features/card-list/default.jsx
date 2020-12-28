@@ -39,6 +39,8 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
+HeadlineText.displayName = 'HeadlineText';
+
 const Title = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -130,7 +132,7 @@ class CardList extends React.Component {
                   )
                   : ''
               }
-              <div
+              <article
                 className="list-item-simple"
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
@@ -183,7 +185,7 @@ class CardList extends React.Component {
                   </Title>
                   )}
                 <div>
-                  <Title
+                  <HeadlineText
                     primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                     className="card-list-headline"
                   >
@@ -194,7 +196,7 @@ class CardList extends React.Component {
                     >
                       {contentElements[0].headlines.basic}
                     </a>
-                  </Title>
+                  </HeadlineText>
                   <div className="author-date">
                     <Byline story={contentElements[0]} stylesFor="list" />
                     {/* separator will only be shown if there is at least one author */}
@@ -205,7 +207,7 @@ class CardList extends React.Component {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
               {
                 contentElements.slice(1).map((element) => {
                   const {

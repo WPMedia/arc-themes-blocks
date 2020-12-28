@@ -46,6 +46,15 @@ function parseArticleItem(item, index, arcSite, phrases) {
         />
       ) : null;
     }
+    case 'divider': {
+      return (
+        <Fragment key={key}>
+          <div className="divider">
+            <hr />
+          </div>
+        </Fragment>
+      );
+    }
     case 'image': {
       const {
         url,

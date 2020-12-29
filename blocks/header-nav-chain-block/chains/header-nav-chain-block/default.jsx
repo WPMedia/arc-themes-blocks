@@ -280,7 +280,7 @@ const Nav = (props) => {
         </StyledSectionDrawer>
 
       </StyledNav>
-      {(!displayLinks && isAdmin) && (
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
         <StyledWarning>
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>

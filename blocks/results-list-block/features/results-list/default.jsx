@@ -50,6 +50,7 @@ class ResultsList extends Component {
       resultList: {},
       seeMore: true,
       placeholderResizedImageOptions: {},
+      count: 0,
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
     this.fetchStories(false);
@@ -83,9 +84,8 @@ class ResultsList extends Component {
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
-    const { storedList } = this.state;
-
     if (additionalStoryAmount) {
+      const { storedList, count } = this.state;
       // Check for next value
       if (storedList.next) {
         // Determine content service type
@@ -117,21 +117,50 @@ class ResultsList extends Component {
         if (value >= storedList.count) {
           this.state.seeMore = false;
         }
+      } else if (listContentConfig.contentService === 'content-api-collections') {
+        const from = parseInt(contentConfigValues.from, 0);
+        const size = parseInt(contentConfigValues.size, 10);
+        contentConfigValues.from = String(from + size);
+        this.fetchContent({
+          resultList: {
+            source: contentService,
+            query: contentConfigValues,
+            transform: (data) => fetchStoriesTransform(data, storedList),
+          },
+        });
+        // Hide button if no more stories to load
+        if ((storedList.content_elements.length + size) >= count) {
+          this.state.seeMore = false;
+        }
       }
     } else {
+      if (listContentConfig.contentService === 'content-api-collections') {
+        // Count all items from collection based on contentConfigValues conditions
+        const query = { ...contentConfigValues };
+        // By default collection limit 20 items
+        query.size = '20';
+        this.fetchContent({
+          collection: {
+            source: contentService,
+            query,
+          },
+        });
+        const { collection } = this.state;
+        this.state.count = collection?.content_elements ? collection.content_elements.length : 0;
+      }
       this.fetchContent({
         resultList: {
           source: contentService,
           query: contentConfigValues,
         },
       });
-      const { resultList } = this.state;
+      const { resultList, count } = this.state;
       this.state.storedList = resultList;
       // Check if there are available stories
-
       if (resultList?.content_elements) {
         // Hide button if no additional stories from initial content
-        if (resultList.content_elements.length >= resultList.count) {
+        if ((resultList.content_elements.length >= resultList.count)
+          || (resultList.content_elements.length >= count)) {
           this.state.seeMore = false;
         }
       }

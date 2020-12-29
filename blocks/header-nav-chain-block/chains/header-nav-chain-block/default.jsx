@@ -208,11 +208,12 @@ const Nav = (props) => {
     const renderWidgets = (bpoint) => {
       let widgetList = [];
       let userHasConfigured = false;
+      console.log('customFields', customFields);
       // eslint-disable-next-line no-plusplus
       for (let i = 1; i <= NAV_SLOT_COUNTS[bpoint]; i++) {
         const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
         const cFieldIndexKey = getNavComponentIndexPropTypeKey(side, bpoint, i);
-        const navWidgetType = customFields[cFieldKey] || 'none';
+        const navWidgetType = getNavComponentDefaultSelection(cFieldKey);
         if (!!navWidgetType && navWidgetType !== 'none') {
           widgetList.push(
             <NavWidget

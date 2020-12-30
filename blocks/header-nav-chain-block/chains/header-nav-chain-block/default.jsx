@@ -27,29 +27,47 @@ import HorizontalLinksBar from './_children/horizontal-links/default';
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
-const navHeight = '56px';
+// const navHeight = '56px';
 const navZIdx = 9;
 const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
   align-items: center;
-  position: relative;
+  width: 100%;
+  position: fixed;
+  top: 0px;
 
   .news-theme-navigation-bar {
     background-color: ${(props) => props.navBarBackground};
-    height: ${navHeight};
+    height: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
+    transition: 0.5s;
     z-index: ${navZIdx};
+
+    &.nav-logo, & > .nav-logo {
+      img {
+        height: auto;
+        max-height: ${(props) => (props.scrolled ? (props.shrinkHeight - 16) : (props.navHeight - 16))}px;
+        max-width: 240px;
+        width: auto;
+        transition: 0.5s;
+      }
+    }
   }
 
   * {
     font-family: ${(props) => props.font};
   }
+
+  & + * {
+    margin-top: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
+  }
+
 `;
 
 const StyledSectionDrawer = styled.div`
   font-family: ${(props) => props.font};
-  margin-top: ${navHeight};
+  margin-top: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
   z-index: ${sectionZIdx};
 `;
 
@@ -98,9 +116,13 @@ const Nav = (props) => {
     signInOrder,
     logoAlignment = 'center',
     horizontalLinksHierarchy,
+    desktopNavivationStartHeight,
+    shrinkDesktopNavivationHeight,
+
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
+  const shrinkHeight = shrinkDesktopNavivationHeight || desktopNavivationStartHeight;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -114,6 +136,7 @@ const Nav = (props) => {
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
   const [isLogoVisible, setLogoVisibility] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const closeNavigation = () => {
     setSectionDrawerOpen(false);
@@ -204,6 +227,25 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  useEffect(() => {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (vw < breakpoints.medium) {
+      return undefined;
+    }
+    const handleScroll = () => {
+      if (window.pageYOffset > desktopNavivationStartHeight) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [desktopNavivationStartHeight, breakpoints]);
+
   const NavSection = ({ side }) => {
     const renderWidgets = (bpoint) => {
       let widgetList = [];
@@ -255,12 +297,15 @@ const Nav = (props) => {
   };
 
   return (
-    <div>
+    <>
       <StyledNav
         id="main-nav"
         className={`${navColor === 'light' ? 'light' : 'dark'}`}
         font={primaryFont}
         navBarBackground={backgroundColor}
+        navHeight={desktopNavivationStartHeight}
+        shrinkHeight={shrinkHeight}
+        scrolled={scrolled}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
@@ -271,7 +316,15 @@ const Nav = (props) => {
           <NavSection side="right" />
         </div>
 
-        <StyledSectionDrawer id="nav-sections" className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`} onClick={closeDrawer} font={primaryFont}>
+        <StyledSectionDrawer
+          id="nav-sections"
+          className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
+          onClick={closeDrawer}
+          font={primaryFont}
+          navHeight={desktopNavivationStartHeight}
+          shrinkHeight={shrinkHeight}
+          scrolled={scrolled}
+        >
           <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
               <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
@@ -285,7 +338,7 @@ const Nav = (props) => {
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>
       )}
-    </div>
+    </>
   );
 };
 
@@ -311,6 +364,19 @@ Nav.propTypes = {
     horizontalLinksHierarchy: PropTypes.string.tag({
       label: 'Horizontal Links hierarchy',
       group: 'Configure content',
+    }),
+    desktopNavivationStartHeight: PropTypes.number.tag({
+      label: 'Starting desktop navigation bar height',
+      group: 'Logo',
+      max: 200,
+      min: 56,
+      defaultValue: 56,
+    }),
+    shrinkDesktopNavivationHeight: PropTypes.number.tag({
+      label: 'Shrink navigation bar after scrolling ',
+      group: 'Logo',
+      max: 200,
+      min: 56,
     }),
     ...generateNavComponentPropTypes(),
   }),

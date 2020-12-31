@@ -301,7 +301,7 @@ describe('the header navigation feature for the default output type', () => {
         });
 
         expect(wrapper.find('.nav-logo.nav-logo-show').length).toBe(1);
-        expect(handlerSetup).toBeTruthy();
+        expect(handlerSetup).toBeFalsy();
 
         spy.mockRestore();
         spy2.mockRestore();

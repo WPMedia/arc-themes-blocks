@@ -26,7 +26,7 @@ import HorizontalLinksBar from './_children/horizontal-links/default';
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
-// const navHeight = '56px';
+const standardNavHeight = 56;
 const navZIdx = 9;
 const sectionZIdx = navZIdx - 1;
 
@@ -38,18 +38,28 @@ const StyledNav = styled.nav`
   top: 0px;
 
   .news-theme-navigation-bar {
+    @media screen and (max-width: ${(props) => props.breakpoint}px) {
+      height: ${standardNavHeight}px;
+    }
+    @media screen and (min-width: ${(props) => props.breakpoint}px) {
+      height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+    }
     background-color: ${(props) => props.navBarBackground};
-    height: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
     transition: 0.5s;
     z-index: ${navZIdx};
 
     &.nav-logo, & > .nav-logo {
       img {
         height: auto;
-        max-height: ${(props) => (props.scrolled ? (props.shrinkHeight - 16) : (props.navHeight - 16))}px;
         max-width: 240px;
         width: auto;
         transition: 0.5s;
+        @media screen and (max-width: ${(props) => props.breakpoint}px) {
+          max-height: 40px;
+        }
+        @media screen and (min-width: ${(props) => props.breakpoint}px) {
+          max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+        }
       }
     }
   }
@@ -59,15 +69,27 @@ const StyledNav = styled.nav`
   }
 
   & + * {
-    margin-top: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
+    
+    @media screen and (max-width: ${(props) => props.breakpoint}px) {
+      margin-top: ${standardNavHeight}px;
+    }
+    @media screen and (min-width: ${(props) => props.breakpoint}px) {
+      margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+    }
   }
 
 `;
 
 const StyledSectionDrawer = styled.div`
   font-family: ${(props) => props.font};
-  margin-top: ${(props) => (props.scrolled ? props.shrinkHeight : props.navHeight)}px;
   z-index: ${sectionZIdx};
+
+  @media screen and (max-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${standardNavHeight}px;
+  }
+  @media screen and (min-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+  }
 `;
 
 const StyledWarning = styled.div`
@@ -118,7 +140,6 @@ const Nav = (props) => {
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
-  const shrinkHeight = shrinkDesktopNavivationHeight || desktopNavivationStartHeight;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -323,8 +344,8 @@ const Nav = (props) => {
         font={primaryFont}
         navBarBackground={backgroundColor}
         navHeight={desktopNavivationStartHeight}
-        shrinkHeight={shrinkHeight}
         scrolled={scrolled}
+        breakpoint={breakpoints.medium}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
@@ -391,7 +412,6 @@ Nav.propTypes = {
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
       label: 'Shrink navigation bar after scrolling ',
       group: 'Logo',
-      max: 200,
       min: 56,
     }),
     ...generateNavComponentPropTypes(),

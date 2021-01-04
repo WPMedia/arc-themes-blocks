@@ -3,7 +3,7 @@ const { mount } = require('enzyme');
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:intl', () => ({
+jest.mock('@wpmedia/intl-block', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));

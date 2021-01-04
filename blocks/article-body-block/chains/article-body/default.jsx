@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image,

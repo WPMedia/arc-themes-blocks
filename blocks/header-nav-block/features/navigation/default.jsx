@@ -5,7 +5,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
 import SectionNav from './_children/section-nav';

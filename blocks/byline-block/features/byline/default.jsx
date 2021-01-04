@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import './byline.scss';
 
 const BylineSection = styled.section`

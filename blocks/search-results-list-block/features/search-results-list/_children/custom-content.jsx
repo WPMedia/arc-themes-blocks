@@ -5,7 +5,7 @@ import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 import SearchResult from './search-result';
 

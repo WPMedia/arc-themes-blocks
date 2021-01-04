@@ -7,7 +7,7 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import GlobalContentGallery from './_children/global-content';
 import CustomContentGallery from './_children/custom-content';
 

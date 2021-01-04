@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import PromoLabel, { getLabelText } from './promo_label';
 
 describe('the promo label', () => {
@@ -13,7 +13,7 @@ describe('the promo label', () => {
     getThemeStyle.mockReturnValue({ 'primary-color': '#ff0000' });
   });
 
-  jest.mock('fusion:intl', () => ({
+  jest.mock('@wpmedia/intl-block', () => ({
     __esModule: true,
     default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
   }));

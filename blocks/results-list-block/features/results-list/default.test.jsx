@@ -11,7 +11,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'https://resizer.me',
 }))));
 
-jest.mock('fusion:intl', () => ({
+jest.mock('@wpmedia/intl-block', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SearchBox from './search-box';
 

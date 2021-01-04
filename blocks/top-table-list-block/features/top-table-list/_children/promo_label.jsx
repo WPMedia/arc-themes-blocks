@@ -4,7 +4,7 @@ import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import PlayIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/PlayIcon';
 import CameraIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/CameraIcon';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import getProperties from 'fusion:properties';
 
 export const getLabelText = (phrases, type) => {

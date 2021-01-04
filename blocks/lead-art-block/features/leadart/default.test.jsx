@@ -1,6 +1,6 @@
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import { useAppContext } from 'fusion:context';
 import LeadArt from './default';
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import getThemeStyle from 'fusion:themes';
 import {
   EnvelopeIcon,

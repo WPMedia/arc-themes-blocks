@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
+import getTranslatedPhrases from '@wpmedia/intl-block';
 import PromoLabel from './promo_label';
 
 describe('the promo label', () => {

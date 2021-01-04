@@ -50,7 +50,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
                   <Link
                     href={item.url}
                     name={item.display_name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )
@@ -58,7 +58,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
                   <Link
                     href={item._id}
                     name={item.name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )

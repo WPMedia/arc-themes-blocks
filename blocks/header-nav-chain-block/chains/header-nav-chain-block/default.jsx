@@ -212,7 +212,7 @@ const Nav = (props) => {
       for (let i = 1; i <= NAV_SLOT_COUNTS[bpoint]; i++) {
         const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
         const cFieldIndexKey = getNavComponentIndexPropTypeKey(side, bpoint, i);
-        const navWidgetType = customFields[cFieldKey] || 'none';
+        const navWidgetType = getNavComponentDefaultSelection(cFieldKey);
         if (!!navWidgetType && navWidgetType !== 'none') {
           widgetList.push(
             <NavWidget
@@ -280,7 +280,7 @@ const Nav = (props) => {
         </StyledSectionDrawer>
 
       </StyledNav>
-      {(!displayLinks && isAdmin) && (
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
         <StyledWarning>
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>

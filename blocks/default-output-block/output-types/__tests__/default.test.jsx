@@ -239,7 +239,9 @@ describe('head content', () => {
 
   it('must not render nativo script', () => {
     const { default: DefaultOutputType } = require('../default');
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
     expect(wrapper.find('script[data-integration="nativo-ad"]').length).toBe(0);
   });
 });
@@ -276,7 +278,9 @@ describe('nativo ad integration', () => {
 
   it('must add Nativo Ad script when is enabled on the properties', () => {
     const { default: DefaultOutputType } = require('../default');
-    const wrapper = shallow(<DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} />);
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
     expect(wrapper.find('script[data-integration="nativo-ad"]').length).toBe(1);
   });
 });
@@ -426,5 +430,57 @@ describe('comscore render conditions', () => {
     );
     expect(wrapper.find('script[data-integration="comscore"]').length).toBe(1);
     expect(wrapper.find('noscript[data-integration="comscore"]').length).toBe(1);
+  });
+});
+
+describe('queryly render conditions', () => {
+  beforeAll(() => {
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        globalContent: {},
+        arcSite: 'the-sun',
+      })),
+    }));
+
+    jest.mock('react-dom/server', () => ({
+      renderToString: jest.fn().mockReturnValue('<meta />'),
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must not render Queryly code when property is missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('script[data-integration="queryly"]').length).toBe(0);
+  });
+
+  it('must render Queryly code when querylyId site property is present', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      querylyId: 88776655,
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('script[data-integration="queryly"]').length).toBe(2);
+  });
+
+  it('must render Queryly advanced search when page type is search-queryly', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      querylyId: 88776655,
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('queryly-search')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('script[data-integration="queryly"]').length).toBe(3);
   });
 });

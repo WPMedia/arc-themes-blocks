@@ -14,6 +14,9 @@ import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE, LARGE, MEDIUM, SMALL,
 } from './shared/storySizeConstants';
+import {
+  LEFT, RIGHT, ABOVE, BELOW,
+} from './shared/imagePositionConstants';
 import StoryItemContainer from './_children/story-item-container';
 
 // start styles
@@ -122,7 +125,7 @@ const TopTableList = (props) => {
       large = 0,
       medium = 0,
       small = 0,
-      storiesPerRowSM,
+      storiesPerRowSM = 2,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -160,6 +163,18 @@ const TopTableList = (props) => {
   }, []);
 
   const onePerLine = storiesPerRowSM === 1;
+  const storyTypes = [...(new Set(storyTypeArray))];
+  const storyList = siteContent.map(unserializeStory(arcSite));
+  const storyTypeMap = {};
+
+  if (storyList && storyTypeArray) {
+    storyTypeArray.forEach((sType, index) => {
+      if (index < storyList.length) {
+        if (!storyTypeMap[sType]) storyTypeMap[sType] = [];
+        storyTypeMap[sType].push(storyList[index]);
+      }
+    });
+  }
 
   return (
     <div
@@ -168,48 +183,62 @@ const TopTableList = (props) => {
         onePerLine ? '' : 'wrap-bottom'
       }`}
     >
-      {siteContent.map(unserializeStory(arcSite)).map((itemObject, index) => {
-        const {
-          id: itemId,
-          itemTitle,
-          imageURL,
-          displayDate,
-          description,
-          by,
-          element,
-          overlineDisplay,
-          overlineUrl,
-          overlineText,
-          resizedImageOptions,
-        } = itemObject;
-        const url = element?.websites[arcSite]?.website_url || '';
-        return (
-          <StoryItemContainer
-            id={itemId}
-            itemTitle={itemTitle}
-            imageURL={imageURL}
-            displayDate={displayDate}
-            description={description}
-            by={by}
-            websiteURL={url}
-            element={element}
-            overlineDisplay={overlineDisplay}
-            overlineUrl={overlineUrl}
-            overlineText={overlineText}
-            storySize={storyTypeArray[index]}
-            index={index}
-            storySizeMap={storySizeMap}
-            primaryFont={primaryFont}
-            secondaryFont={secondaryFont}
-            key={itemId}
-            customFields={props.customFields}
-            resizedImageOptions={resizedImageOptions}
-            placeholderResizedImageOptions={placeholderResizedImageOptions}
-            targetFallbackImage={targetFallbackImage}
-            arcSite={arcSite}
-          />
-        );
-      })}
+      {storyTypes.map((storyType) => (
+        <div
+          key={storyType}
+          className={[
+            'top-table-list-section',
+            `top-table-list-section-${storyType.toLowerCase()}`,
+            (storiesPerRowSM && storiesPerRowSM > 1 && storyType === SMALL ? 'row' : ''),
+          ].join(' ')}
+        >
+          {
+            !!storyTypeMap[storyType]
+            && storyTypeMap[storyType].map((itemObject = {}, index) => {
+              const {
+                id: itemId,
+                itemTitle,
+                imageURL,
+                displayDate,
+                description,
+                by,
+                element,
+                overlineDisplay,
+                overlineUrl,
+                overlineText,
+                resizedImageOptions,
+              } = itemObject;
+              const url = element?.websites[arcSite]?.website_url || '';
+              return (
+                <StoryItemContainer
+                  id={itemId}
+                  itemTitle={itemTitle}
+                  imageURL={imageURL}
+                  displayDate={displayDate}
+                  description={description}
+                  by={by}
+                  websiteURL={url}
+                  element={element}
+                  overlineDisplay={overlineDisplay}
+                  overlineUrl={overlineUrl}
+                  overlineText={overlineText}
+                  storySize={storyType}
+                  index={index}
+                  storySizeMap={storySizeMap}
+                  primaryFont={primaryFont}
+                  secondaryFont={secondaryFont}
+                  key={itemId}
+                  customFields={props.customFields}
+                  resizedImageOptions={resizedImageOptions}
+                  placeholderResizedImageOptions={placeholderResizedImageOptions}
+                  targetFallbackImage={targetFallbackImage}
+                  arcSite={arcSite}
+                />
+              );
+            })
+          }
+        </div>
+      ))}
     </div>
   );
 };
@@ -247,11 +276,6 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Extra Large story settings',
     }),
-    // headlinePositionXL: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Extra Large story settings',
-    //   defaultValue: 'above',
-    // }),
     showImageXL: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -277,6 +301,11 @@ TopTableListWrapper.propTypes = {
       'Extra Large story settings',
       '4:3',
     ),
+    playVideoInPlaceXL: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Extra Large story settings',
+      defaultValue: false,
+    }),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -288,11 +317,6 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Large story settings',
     }),
-    // headlinePositionLG: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Large story settings',
-    //   defaultValue: 'above',
-    // }),
     showImageLG: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -314,17 +338,17 @@ TopTableListWrapper.propTypes = {
       group: 'Large story settings',
     }),
     ...imageRatioCustomField('imageRatioLG', 'Large story settings', '4:3'),
+    playVideoInPlaceLG: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Large story settings',
+      defaultValue: false,
+    }),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
       defaultValue: true,
       group: 'Medium story settings',
     }),
-    // headlinePositionMD: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Medium story settings',
-    //   defaultValue: 'above',
-    // }),
     showImageMD: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -352,11 +376,6 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Small story settings',
     }),
-    // headlinePositionSM: PropTypes.oneOf(['above', 'below']).tag({
-    //   label: 'Headline Position',
-    //   group: 'Small story settings',
-    //   defaultValue: 'above',
-    // }),
     showImageSM: PropTypes.bool.tag({
       label: 'Show image',
       defaultValue: true,
@@ -367,6 +386,19 @@ TopTableListWrapper.propTypes = {
       name: 'Stories per row',
       defaultValue: 2,
       group: 'Small story settings',
+    }),
+    imagePositionSM: PropTypes.oneOf([ABOVE, BELOW, LEFT, RIGHT]).tag({
+      name: 'Image position',
+      defaultValue: 'right',
+      group: 'Small story settings',
+      labels: {
+        above: 'Image above',
+        below: 'Image below',
+        left: 'Image left',
+        right: 'Image right',
+      },
+      required: false,
+      hidden: false,
     }),
   }),
 };

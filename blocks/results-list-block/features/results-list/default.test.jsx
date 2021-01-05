@@ -462,7 +462,7 @@ describe('The results list from collection', () => {
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ collectionFirst10Items });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: collectionFirst10Items, count: 20 }, () => {
+    wrapper.setState({ resultList: collectionFirst10Items, count: 11 }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
       expect(wrapper.find('.list-item').length).toEqual(10);
@@ -505,7 +505,7 @@ describe('The results list from collection', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ mockCollections });
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(collectionFirst10Items);
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: collectionFirst10Items, count: 20, seeMore: true }, () => {
+    wrapper.setState({ resultList: collectionFirst10Items, count: 11, seeMore: true }, () => {
       wrapper.update();
       expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
       wrapper.find('.btn').simulate('click');
@@ -529,7 +529,7 @@ describe('The results list from collection', () => {
     ResultsList.prototype.fetchContent = fetchMock;
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     fetchMock.mockClear();
-    wrapper.setState({ storedList: collectionFirst10Items, count: 20 });
+    wrapper.setState({ storedList: collectionFirst10Items, count: 11 });
     wrapper.update();
     wrapper.instance().fetchStories(true);
     expect(fetchMock).toHaveBeenCalledTimes(1);

@@ -101,12 +101,9 @@ describe('the header navigation feature for the default output type', () => {
             {[<button key={1} type="button">Sign In</button>]}
           </Navigation>,
         );
-        const navRightDesktop = wrapper.find('.nav-right > .nav-components--desktop');
-        const navRightMobile = wrapper.find('.nav-right > .nav-components--mobile');
-        expect(navRightDesktop.children()).toHaveLength(1);
-        expect(navRightMobile.children()).toHaveLength(1);
-        expect(navRightDesktop.find('button')).toHaveText('Sign In');
-        expect(navRightMobile.find('button')).toHaveText('Sign In');
+        const navRight = wrapper.find('.nav-right');
+        expect(navRight.children()).toHaveLength(1);
+        expect(navRight.find('button')).toHaveText('Sign In');
       });
     });
   });

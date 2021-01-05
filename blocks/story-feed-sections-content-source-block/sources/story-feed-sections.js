@@ -6,13 +6,17 @@ export default {
   schemaName: source.schemaName,
   params: source.params,
   // other options null use default functionality, such as filter quality
-  transform: (data, query) => (
-    getResizedImageData(
+  transform: (data, query) => {
+    const { isCompressedImageParams = false } = query;
+
+    return getResizedImageData(
       data,
       null,
       null,
       null,
       query['arc-site'],
-    )
-  ),
+      undefined,
+      isCompressedImageParams,
+    );
+  },
 };

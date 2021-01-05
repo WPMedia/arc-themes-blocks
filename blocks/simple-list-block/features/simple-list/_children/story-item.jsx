@@ -20,7 +20,7 @@ const StoryItem = (props) => {
   } = props;
 
   return (
-    <article key={id} className="list-item-simple">
+    <div key={id} className="list-item-simple">
       {showImage ? (
         <a
           href={websiteURL}
@@ -72,7 +72,7 @@ const StoryItem = (props) => {
           </Title>
         </a>
       ) : null}
-    </article>
+    </div>
   );
 };
 

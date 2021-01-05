@@ -1,120 +1,108 @@
 .top-table-list-container {
-
-  .top-table-list-section-small {
-
-    & > .small-promo {
-
-      img {
-        width: 100%;
+  .small-promo {
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      .row.sm-promo-padding-btm {
+        padding-top: 0;
       }
+    }
 
-      .promo-container {
-        display: flex;
-        flex-direction: row;
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: top;
 
-        & > div {
-          &:nth-child(odd) {
-            padding-right: 0.75rem;
-          }
-      
-          &:nth-child(even) {
-            padding-left: 0.75rem;
-          }
-        }
-
-        &.horizontal.reverse {
-          flex-direction: row-reverse;
-
-          & > div {
-            &:nth-child(odd) {
-              padding-left: 0.75rem;
-              padding-right: 0;
-            }
-        
-            &:nth-child(even) {
-              padding-left: 0;
-              padding-right: 0.75rem;
-            }
-          }
-        }
-
-        &.vertical {
-          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            flex-direction: column;
-
-            & > div {
-              padding: 0;
-
-              &:first-child {
-                padding-bottom: 0.75rem;
-              }
-            }
-
-            &.reverse {
-              flex-direction: column-reverse;
-
-              & > div {
-                padding: 0;
-  
-                &:last-child {
-                  padding-bottom: 0.75rem;
-                }
-              }
-            }
-          }
-        }
-
-        .promo-headline {
-          flex: 2;
-
-          &.headline-wrap-vertical {
-            height: 4.6em;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            -moz-box-oriented: vertical;
-            /* opera */
-            text-overflow: -o-ellipsis-lastline;
-          }
-
-          &.headline-wrap-horizontal {
-            height: 50px;
-            overflow: hidden;
-          }
-        }
-
-        .promo-image {
-          flex: 1;
-
-          a {
-            display: flex;
-            flex-direction: column;
-          }
-
-          &.flex-col {
-            justify-content: center;
-          }
-        }
-
-        &.sm-promo-padding-btm {
-          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            padding-top: 0;
-          }
-        }
+    .row {
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
+        grid-column-gap: 0;
       }
+    }
 
-      &.wrap-bottom {
-        margin-bottom: 0 !important;
+    &.wrap-bottom {
+      margin-bottom: 0 !important;
 
-        @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-          margin-bottom: inherit;
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        margin-bottom: inherit;
+      }
+    }
+
+    .vertical {
+      grid-auto-flow: column;
+      grid-row-gap: 0.5rem;
+      grid-column-gap: 0;
+
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        grid-auto-flow: row;
+
+        & > div:first-child {
+          grid-row-start: 2;
         }
       }
     }
 
+    .horizontal {
+      grid-auto-flow: column;
+    }
+
     hr {
       width: 100%;
+    }
+
+    .headline-wrap-vertical {
+      height: 4.6em;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      -moz-box-oriented: vertical;
+      /* opera */
+      text-overflow: -o-ellipsis-lastline;
+    }
+
+    .headline-wrap-horizontal {
+      height: 50px;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .small-promo-1 {
+    width: 100%;
+  }
+
+  .small-promo-2 {
+    width: 100%;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding: 0 5px;
+      width: 50%;
+    }
+  }
+
+  .small-promo-2:nth-child(odd) {
+    padding-right: 0.75rem;
+  }
+
+  .small-promo-2:nth-child(even) {
+    padding-left: 0.75rem;
+  }
+
+  .small-promo-3 {
+    width: 100%;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding: 0 5px;
+      width: 33%;
+    }
+  }
+
+  .small-promo-4 {
+    width: 100%;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding: 0 5px;
+      width: 25%;
     }
   }
 

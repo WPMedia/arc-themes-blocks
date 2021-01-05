@@ -8,6 +8,7 @@ _This is the `AdsBlock` feature that utilizes the ArcAds library to render Googl
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **adType** | yes | string | 'Ad Type' configuration to use for ad unit instance |
+| **display** | yes | string | Indicates which breakpoint(s) to display ad unit on (all, desktop or mobile) |
 | **displayAdLabel** | yes | boolean | Indicates whether or not to display advertisement label |
 
 ## ANS Schema

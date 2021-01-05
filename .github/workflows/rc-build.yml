@@ -32,7 +32,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Publish to rc tag with a short git SHA as the version
-        run: npx lerna publish 0.0.0-rc.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag rc --yes
+        run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag rc --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check rc failure status

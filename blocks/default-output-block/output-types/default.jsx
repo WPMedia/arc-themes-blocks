@@ -46,7 +46,7 @@ const chartBeatCode = (accountId, domain) => {
 
 const querylyCode = (querylyId, querylyOrg, pageType) => {
   const querylyInit = `
-    queryly.init("${querylyId}", document.querySelectorAll("main, .header-fix-nav"));
+    queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
   `;
   return (
     <>

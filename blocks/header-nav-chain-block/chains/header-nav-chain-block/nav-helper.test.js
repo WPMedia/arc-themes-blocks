@@ -62,7 +62,7 @@ describe('nav-helper', () => {
         group: 'Desktop Components',
         hidden: false,
         labels: {
-          custom: 'Custom', menu: 'Site Menu', none: 'None', search: 'Search',
+          custom: 'Custom', menu: 'Sections Menu', none: 'None', search: 'Search',
         },
         name: 'Left Component 1 - Desktop',
         required: false,

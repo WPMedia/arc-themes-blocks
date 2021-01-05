@@ -11,7 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { resolveDefaultPromoElements } from './helpers';
+import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
 // to modify, go to the shared styles block
@@ -42,16 +42,6 @@ const ReadMoreButton = styled.button`
 
 @Consumer
 class ResultsList extends Component {
-  static fetchStoriesTransform(data, storedList) {
-    const result = storedList;
-    if (data) {
-      // Add new data to previous list
-      result.content_elements = storedList.content_elements.concat(data.content_elements);
-      result.next = data.next;
-    }
-    return result;
-  }
-
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
@@ -120,7 +110,7 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform: (data) => this.fetchStoriesTransform(data, storedList),
+            transform: (data) => fetchStoriesTransform(data, storedList),
           },
         });
         // Hide button if no more stories to load

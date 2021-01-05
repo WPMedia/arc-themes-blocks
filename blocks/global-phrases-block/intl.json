@@ -14,13 +14,13 @@
    "global.gallery-autoplay-button":{
       "en":"Autoplay",
       "sv":"Spela upp",
-      "no":"Autoavspilling",
+      "no":"Spill av",
       "fr":"Lecture automatique"
    },
    "global.gallery-pause-autoplay-button":{
       "en":"Pause autoplay",
       "sv":"Pausa",
-      "no":"Sett autoavspilling på pause",
+      "no":"Stopp",
       "fr":"Mettre en pause la lecture automatique"
    }
 }

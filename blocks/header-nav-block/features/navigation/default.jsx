@@ -30,7 +30,7 @@ const StyledNav = styled.nav`
   position: relative;
 
   .news-theme-navigation-bar {
-    background-color: ${(props) => (props.navBarColor === 'light' ? '#fff' : '#000')};
+    background-color: ${(props) => props.navBarBackground};
     height: ${navHeight};
     z-index: ${navZIdx};
   }
@@ -59,6 +59,7 @@ const Nav = (props) => {
     primaryLogoAlt,
     navColor = 'dark',
     locale = 'en',
+    navBarBackground,
   } = getProperties(arcSite);
   let primaryLogoPath;
 
@@ -109,9 +110,22 @@ const Nav = (props) => {
     primaryLogoPath = deployment(`${contextPath}/${primaryLogo}`);
   }
 
+  let backgroundColor = '#000';
+
+  if (navBarBackground === 'primary-color') {
+    backgroundColor = primaryColor;
+  } else if (navColor === 'light') {
+    backgroundColor = '#fff';
+  }
+
   return (
     <>
-      <StyledNav id="main-nav" className={`${navColor === 'light' ? 'light' : 'dark'}`} font={primaryFont} navBarColor={navColor}>
+      <StyledNav
+        id="main-nav"
+        className={`${navColor === 'light' ? 'light' : 'dark'}`}
+        font={primaryFont}
+        navBarBackground={backgroundColor}
+      >
         <div className="news-theme-navigation-container news-theme-navigation-bar">
           <div className="nav-left">
             <SearchBox iconSize={20} navBarColor={navColor} placeholderText={phrases.t('header-nav-block.search-text')} customSearchAction={customSearchAction} />

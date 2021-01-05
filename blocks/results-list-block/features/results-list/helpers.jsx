@@ -17,5 +17,14 @@ const resolveDefaultPromoElements = (customFields = {}) => {
   }, fields);
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { resolveDefaultPromoElements };
+const fetchStoriesTransform = (data, storedList) => {
+  const result = storedList;
+  if (data) {
+    // Add new data to previous list
+    result.content_elements = storedList.content_elements.concat(data.content_elements);
+    result.next = data.next;
+  }
+  return result;
+};
+
+export { resolveDefaultPromoElements, fetchStoriesTransform };

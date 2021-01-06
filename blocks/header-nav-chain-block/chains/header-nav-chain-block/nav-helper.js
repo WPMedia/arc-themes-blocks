@@ -38,7 +38,7 @@ export const generateNavComponentPropType = (section, breakpoint, position) => (
   group: `${capitalize(breakpoint)} Components`,
   labels: {
     search: 'Search',
-    menu: 'Site Menu',
+    menu: 'Sections Menu',
     none: 'None',
     custom: 'Custom',
   },

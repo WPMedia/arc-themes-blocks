@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -10,6 +11,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import {
   NAV_BREAKPOINTS,
   NAV_SLOT_COUNTS,
+  NAV_SECTIONS,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
   generateNavComponentPropTypes,
@@ -204,53 +206,67 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  const getNavWidgetType = (fieldKey) => (
+    customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
+  );
+
+  const hasUserConfiguredNavItems = () => {
+    let userHasConfigured = false;
+    NAV_SECTIONS.forEach((side) => {
+      NAV_BREAKPOINTS.forEach((bpoint) => {
+        for (let i = 1; i <= NAV_SLOT_COUNTS[bpoint]; i++) {
+          const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
+          const navWidgetType = getNavWidgetType(cFieldKey);
+          const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
+          if (!userHasConfigured && matchesDefault) userHasConfigured = true;
+        }
+      });
+    });
+    return userHasConfigured;
+  };
+
   const NavSection = ({ side }) => {
     const renderWidgets = (bpoint) => {
-      let widgetList = [];
-      let userHasConfigured = false;
-      // eslint-disable-next-line no-plusplus
+      const widgetList = [];
       for (let i = 1; i <= NAV_SLOT_COUNTS[bpoint]; i++) {
         const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
         const cFieldIndexKey = getNavComponentIndexPropTypeKey(side, bpoint, i);
-        const navWidgetType = customFields[cFieldKey] || 'none';
+        const navWidgetType = getNavWidgetType(cFieldKey);
         if (!!navWidgetType && navWidgetType !== 'none') {
           widgetList.push(
-            <NavWidget
-              {...props}
-              key={`${side}_${bpoint}_${i}`}
-              type={navWidgetType}
-              position={customFields[cFieldIndexKey]}
-              menuButtonClickAction={hamburgerClick}
-            />,
+            <div className="nav-widget">
+              <NavWidget
+                {...props}
+                key={`${side}_${bpoint}_${i}`}
+                type={navWidgetType}
+                position={customFields[cFieldIndexKey]}
+                menuButtonClickAction={hamburgerClick}
+              />
+            </div>,
           );
         }
-        if (
-          !userHasConfigured
-          && navWidgetType !== getNavComponentDefaultSelection(cFieldKey)
-        ) userHasConfigured = true;
-      }
-      // Support for deprecated 'signInOrder' custom field
-      if (
-        !userHasConfigured
-        && signInOrder
-        && Number.isInteger(signInOrder)
-        && side === 'right'
-        && children[signInOrder - 1]
-      ) {
-        widgetList = [children[signInOrder - 1]];
       }
       return widgetList;
     };
-    return (
-      !side ? null : (
-        <div key={side} className={`nav-${side}`}>
-          { NAV_BREAKPOINTS.map((breakpoint) => (
-            <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-              { renderWidgets(breakpoint) }
-            </div>
-          ))}
-        </div>
-      )
+    return !side ? null : (
+      <div key={side} className={`nav-${side}`}>
+        {
+          // Support for deprecated 'signInOrder' custom field
+          // "If" condition is for rendering "signIn" element
+          // "Else" condition is for standard nav bar customization logic
+          side === 'right'
+          && !hasUserConfiguredNavItems()
+          && signInOrder
+          && Number.isInteger(signInOrder)
+          && children[signInOrder - 1]
+            ? children[signInOrder - 1]
+            : NAV_BREAKPOINTS.map((breakpoint) => (
+              <div key={breakpoint} className={`nav-components--${breakpoint}`}>
+                { renderWidgets(breakpoint) }
+              </div>
+            ))
+        }
+      </div>
     );
   };
 
@@ -280,7 +296,7 @@ const Nav = (props) => {
         </StyledSectionDrawer>
 
       </StyledNav>
-      {(!displayLinks && isAdmin) && (
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
         <StyledWarning>
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>

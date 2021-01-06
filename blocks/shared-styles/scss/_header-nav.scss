@@ -191,9 +191,9 @@ body.nav-open {
         &--desktop {
           align-items: center;
           
-          & > * {
+          & > .nav-widget {
             margin-right: calculateRem(16px);
-    
+            
             &:last-child {
               margin-right: 0;
             }

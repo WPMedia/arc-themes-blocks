@@ -26,7 +26,7 @@ const AlertBadge = styled.span`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;
-  line-height: 1.33;
+  line-height: 1;
   font-weight: bold;
 `;
 

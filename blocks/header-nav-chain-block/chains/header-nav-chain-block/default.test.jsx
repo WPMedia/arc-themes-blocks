@@ -45,12 +45,16 @@ describe('the header navigation feature for the default output type', () => {
 
   it('should render nothing inside the .nav-right on desktop', () => {
     const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-    expect(wrapper.find('.nav-right > .nav-components--desktop').children()).toHaveLength(0);
+    const widgetList = wrapper.find('.nav-right > .nav-components--desktop > WidgetList');
+    expect(widgetList).toHaveLength(1);
+    expect(widgetList.children()).toHaveLength(0);
   });
 
   it('should render nothing inside the .nav-right on mobile', () => {
     const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-    expect(wrapper.find('.nav-right > .nav-components--mobile').children()).toHaveLength(0);
+    const widgetList = wrapper.find('.nav-right > .nav-components--mobile > WidgetList');
+    expect(widgetList).toHaveLength(1);
+    expect(widgetList.children()).toHaveLength(0);
   });
 
   it('should render horizontal links when "logoAlignment" is "left"', () => {
@@ -89,8 +93,12 @@ describe('the header navigation feature for the default output type', () => {
             {[<button key={1} type="button">Sign In</button>]}
           </Navigation>,
         );
-        expect(wrapper.find('.nav-right > .nav-components--desktop').children()).toHaveLength(0);
-        expect(wrapper.find('.nav-right > .nav-components--mobile').children()).toHaveLength(0);
+        const widgetListMobile = wrapper.find('.nav-right > .nav-components--mobile > WidgetList');
+        const widgetListDesktop = wrapper.find('.nav-right > .nav-components--desktop > WidgetList');
+        expect(widgetListMobile).toHaveLength(1);
+        expect(widgetListDesktop).toHaveLength(1);
+        expect(widgetListMobile.children()).toHaveLength(0);
+        expect(widgetListDesktop.children()).toHaveLength(0);
       });
     });
 

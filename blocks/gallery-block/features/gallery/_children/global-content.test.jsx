@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-props-no-spreading, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 

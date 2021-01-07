@@ -69,11 +69,12 @@ const StyledNav = styled.nav`
     font-family: ${(props) => props.font};
   }
 
-  & + * {
-    
+  & + *, & ~ nav:nth-of-type(2) {
+
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
       margin-top: ${standardNavHeight}px;
     }
+    
     @media screen and (min-width: ${(props) => props.breakpoint}px) {
       margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
     }

@@ -26,8 +26,7 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "canary",
-    "@wpmedia/ads-block": "canary"
+    "@wpmedia/news-theme-css": "stable"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

@@ -97,7 +97,7 @@ describe('the custom content gallery', () => {
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
       expect(wrapper.find('Gallery').props().pausePhrase).toEqual('Pause autoplay');
-      // expect(wrapper.find('Gallery').props().interstitialClicks).toEqual(5);
+      expect(wrapper.find('Gallery').props().interstitialClicks).toEqual(5);
       expect(typeof wrapper.find('Gallery').props().pageCountPhrase).toEqual('function');
       expect(wrapper.find('Gallery').props().pageCountPhrase(1, 5)).toEqual('%{current} of %{total}');
     });
@@ -123,7 +123,7 @@ describe('the custom content gallery', () => {
       expect(typeof wrapper.find('Gallery').props().pageCountPhrase).toEqual('function');
     });
   });
-  /**
+
   describe('when galleryCubeClicks is present', () => {
     it('should send interstitialClicks', () => {
       jest.mock('fusion:context', () => ({
@@ -166,5 +166,4 @@ describe('the custom content gallery', () => {
       expect(wrapper.find('Gallery').prop('adElement')).toBeFalsy();
     });
   });
-   * */
 });

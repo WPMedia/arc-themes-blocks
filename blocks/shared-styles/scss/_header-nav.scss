@@ -191,9 +191,9 @@ body.nav-open {
         &--desktop {
           align-items: center;
           
-          & > * {
+          & > .nav-widget {
             margin-right: calculateRem(16px);
-    
+            
             &:last-child {
               margin-right: 0;
             }
@@ -201,14 +201,20 @@ body.nav-open {
         }
 
         &--mobile {
-          @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            display: none;
-          }
+          display: none;
         }
 
         &--desktop {
-          @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
             display: none;
+          }
+
+          &--mobile {
+            display: inherit;
           }
         }
       }

@@ -218,4 +218,95 @@ describe('medium list item', () => {
 
     expect(wrapper.find('MediumListItem > hr').length).toBe(1);
   });
+
+  it('renders image placeholder with empty props with bottom border', () => {
+    const { default: MediumListItem } = require('./medium-list-item');
+
+    const imageURL = '';
+    const constructedURL = 'url';
+    const itemTitle = '';
+    const descriptionText = '';
+    const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
+    const by = [];
+    const element = { };
+    const displayDate = '';
+    const id = 'test';
+
+    config.showBottomBorderMD = true;
+
+    // eslint-disable-next-line no-unused-vars
+    const wrapper = mount(<MediumListItem
+      imageURL={imageURL}
+      constructedURL={constructedURL}
+      itemTitle={itemTitle}
+      descriptionText={descriptionText}
+      primaryFont={primaryFont}
+      secondaryFont={secondaryFont}
+      by={by}
+      element={element}
+      displayDate={displayDate}
+      id={id}
+      customFields={config}
+    />);
+
+    const placeholderImage = wrapper.find('img');
+
+    // There should be no imag present
+    expect(placeholderImage.length).toBe(1);
+    expect(placeholderImage.html()).toBe('<img alt="placeholder">');
+
+    // doesn't find a headline
+    expect(wrapper.find('a.md-promo-headline').length).toBe(0);
+
+    expect(wrapper.find('hr').length).toBe(1);
+    expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
+
+    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+  });
+
+  it('renders image placeholder with empty props without bottom border', () => {
+    const { default: MediumListItem } = require('./medium-list-item');
+
+    const imageURL = '';
+    const constructedURL = 'url';
+    const itemTitle = '';
+    const descriptionText = '';
+    const primaryFont = 'arial';
+    const secondaryFont = 'Georgia';
+    const by = [];
+    const element = { };
+    const displayDate = '';
+    const id = 'test';
+
+    config.showBottomBorderMD = false;
+
+    // eslint-disable-next-line no-unused-vars
+    const wrapper = mount(<MediumListItem
+      imageURL={imageURL}
+      constructedURL={constructedURL}
+      itemTitle={itemTitle}
+      descriptionText={descriptionText}
+      primaryFont={primaryFont}
+      secondaryFont={secondaryFont}
+      by={by}
+      element={element}
+      displayDate={displayDate}
+      id={id}
+      customFields={config}
+    />);
+
+    const placeholderImage = wrapper.find('img');
+
+    // There should be no imag present
+    expect(placeholderImage.length).toBe(1);
+    expect(placeholderImage.html()).toBe('<img alt="placeholder">');
+
+    // doesn't find a headline
+    expect(wrapper.find('a.md-promo-headline').length).toBe(0);
+
+    expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(true);
+
+    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+  });
 });

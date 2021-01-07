@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
+import mockCollections, { collectionFirst10Items } from './mock-collections-data';
 
 const mockReturnData = mockData;
 
@@ -420,5 +421,118 @@ describe('The results list', () => {
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
       });
     });
+  });
+
+  it('renders list item without show more button', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type: story',
+        size: '28',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig };
+
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: mockData, seeMore: false }, () => {
+      wrapper.update();
+      wrapper.instance().fetchStories(false);
+      expect(wrapper.find('.results-list-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').length).toEqual(28);
+      expect(wrapper.state('seeMore')).toEqual(false);
+      expect(wrapper.find('.btn')).not.toExist();
+    });
+  });
+});
+
+describe('The results list from collection', () => {
+  it('should render a list of items using content-api-collections', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        from: '0',
+        content_alias: 'homepage',
+        size: '10',
+      },
+      contentService: 'content-api-collections',
+    };
+    const customFields = { listContentConfig };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ collectionFirst10Items });
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: collectionFirst10Items, count: 11 }, () => {
+      wrapper.update();
+      expect(wrapper.find('.results-list-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').length).toEqual(10);
+      expect(wrapper.find('.btn')).toExist();
+    });
+  });
+
+  it('should render a list of items using content-api-collections without show more button', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        from: '0',
+        content_alias: 'homepage',
+        size: '10',
+      },
+      contentService: 'content-api-collections',
+    };
+    const customFields = { listContentConfig };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ mockCollections });
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: collectionFirst10Items, count: 10, seeMore: false }, () => {
+      wrapper.update();
+      expect(wrapper.find('.results-list-container').length).toEqual(1);
+      expect(wrapper.find('.list-item').length).toEqual(10);
+      expect(wrapper.find('.btn')).not.toExist();
+    });
+  });
+
+  it('Result list using content-api-collections should call fetchStories when clicked', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        from: '0',
+        content_alias: 'homepage',
+        size: '10',
+      },
+      contentService: 'content-api-collections',
+    };
+    const customFields = { listContentConfig };
+    const { default: ResultsList } = require('./default');
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ mockCollections });
+    ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(collectionFirst10Items);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    wrapper.setState({ resultList: collectionFirst10Items, count: 11, seeMore: true }, () => {
+      wrapper.update();
+      expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+      wrapper.find('.btn').simulate('click');
+      expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+    });
+  });
+
+  it('Result list using content-api-collections with default value', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        from: '',
+        content_alias: 'homepage',
+        size: '10',
+      },
+      contentService: 'content-api-collections',
+    };
+    const customFields = { listContentConfig };
+
+    const { default: ResultsList } = require('./default');
+    const fetchMock = jest.fn().mockReturnValue({});
+    ResultsList.prototype.fetchContent = fetchMock;
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    fetchMock.mockClear();
+    wrapper.setState({ storedList: collectionFirst10Items, count: 11 });
+    wrapper.update();
+    wrapper.instance().fetchStories(true);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(wrapper.state('seeMore')).toEqual(false);
   });
 });

@@ -230,10 +230,12 @@ const Nav = (props) => {
       const navWidgetType = getNavWidgetType(cFieldKey);
       if (!!navWidgetType && navWidgetType !== 'none') {
         widgetList.push(
-          <div className="nav-widget">
+          <div
+            className="nav-widget"
+            key={`${id}_${breakpoint}_${i}`}
+          >
             <NavWidget
               {...props}
-              key={`${id}_${breakpoint}_${i}`}
               type={navWidgetType}
               position={customFields[cFieldIndexKey]}
               placement={placement}

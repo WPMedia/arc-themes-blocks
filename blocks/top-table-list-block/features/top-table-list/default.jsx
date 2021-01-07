@@ -306,6 +306,11 @@ TopTableListWrapper.propTypes = {
       group: 'Extra Large story settings',
       defaultValue: false,
     }),
+    showBottomBorderXL: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -343,6 +348,11 @@ TopTableListWrapper.propTypes = {
       group: 'Large story settings',
       defaultValue: false,
     }),
+    showBottomBorderLG: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Large story settings',
+    }),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
@@ -370,6 +380,11 @@ TopTableListWrapper.propTypes = {
       group: 'Medium story settings',
     }),
     ...imageRatioCustomField('imageRatioMD', 'Medium story settings', '16:9'),
+    showBottomBorderMD: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Medium story settings',
+    }),
 
     showHeadlineSM: PropTypes.bool.tag({
       label: 'Show headline',
@@ -399,6 +414,11 @@ TopTableListWrapper.propTypes = {
       },
       required: false,
       hidden: false,
+    }),
+    showBottomBorderSM: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Small story settings',
     }),
   }),
 };

@@ -220,9 +220,7 @@ const Nav = (props) => {
     return userHasConfigured;
   };
 
-  const WidgetList = ({
-    id, breakpoint, placement,
-  }) => {
+  const WidgetList = ({ id, breakpoint, placement }) => {
     if (!id || !breakpoint) return null;
     const { slotCounts } = WIDGET_CONFIG[placement];
     const widgetList = [];

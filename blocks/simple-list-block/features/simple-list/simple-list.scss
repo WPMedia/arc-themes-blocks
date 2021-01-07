@@ -17,6 +17,7 @@
   }
 
   .list-item-simple {
+    @include block-internal-spacing;
     display: flex;
     justify-content: flex-start;
     min-height: 72px;

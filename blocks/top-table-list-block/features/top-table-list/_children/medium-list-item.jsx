@@ -31,6 +31,18 @@ const MediumListItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
+  const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
@@ -160,7 +172,7 @@ const MediumListItem = (props) => {
           }
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

@@ -1,12 +1,12 @@
 {
-  "name": "@wpmedia/unpublished-content-source-block",
+  "name": "@mentor-medier/unpublished-content-source-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "contributors": [
     "Jack Howard <jack.howard@washpost.com>"
   ],
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
     "directory": "blocks/unpublished-content-source-block"
   },
   "scripts": {
@@ -27,6 +27,6 @@
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary"
+    "@mentor-medier/engine-theme-sdk": "canary"
   }
 }

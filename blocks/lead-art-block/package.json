@@ -1,9 +1,9 @@
 {
-  "name": "@wpmedia/lead-art-block",
+  "name": "@mentor-medier/lead-art-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -17,13 +17,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
     "directory": "blocks/lead-art-block"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/video-player-block": "canary",
+    "@mentor-medier/engine-theme-sdk": "canary",
+    "@mentor-medier/news-theme-css": "stable",
+    "@mentor-medier/video-player-block": "canary",
     "styled-components": "^4.4.0"
   },
   "scripts": {

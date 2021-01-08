@@ -1,9 +1,9 @@
 {
-  "name": "@wpmedia/search-results-list-block",
+  "name": "@mentor-medier/search-results-list-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme search results list block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
     "directory": "blocks/search-results-list-block"
   },
   "scripts": {
@@ -24,14 +24,14 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/date-block": "canary",
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/global-phrases-block": "canary",
-    "@wpmedia/shared-styles": "canary",
+    "@mentor-medier/date-block": "canary",
+    "@mentor-medier/engine-theme-sdk": "canary",
+    "@mentor-medier/global-phrases-block": "canary",
+    "@mentor-medier/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "bugs": {
-    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+    "url": "https://github.com/mentor-medier/fusion-news-theme-blocks/issues"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

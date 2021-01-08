@@ -22,11 +22,11 @@ const NavWidget = ({
   const predefinedWidget = (
     (type === 'search' && (
       <SearchBox
-        iconSize={WIDGET_CONFIG[placement].iconSize}
+        iconSize={WIDGET_CONFIG[placement]?.iconSize}
         navBarColor={navColor}
         placeholderText={phrases.t('header-nav-chain-block.search-text')}
         customSearchAction={customSearchAction}
-        alwaysOpen={WIDGET_CONFIG[placement].expandSearch}
+        alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
       />
     )) || (type === 'menu' && (
       <button
@@ -37,8 +37,8 @@ const NavWidget = ({
         <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
         <HamburgerMenuIcon
           fill={null}
-          height={WIDGET_CONFIG[placement].iconSize}
-          width={WIDGET_CONFIG[placement].iconSize}
+          height={WIDGET_CONFIG[placement]?.iconSize}
+          width={WIDGET_CONFIG[placement]?.iconSize}
         />
       </button>
     ))

@@ -82,8 +82,9 @@ export const generateNavComponentIndexPropType = (section, breakpoint, position)
 export const generateNavComponentPropTypes = () => {
   const navComponentPropTypes = {};
   Object.keys(WIDGET_CONFIG).forEach((cfgKey) => {
-    const cfg = WIDGET_CONFIG[cfgKey];
-    const { sections, options, slotCounts } = cfg;
+    const {
+      sections, options, slotCounts,
+    } = WIDGET_CONFIG[cfgKey];
     sections.forEach((navSection) => {
       NAV_BREAKPOINTS.forEach((navBreakpoint) => {
         // eslint-disable-next-line no-plusplus

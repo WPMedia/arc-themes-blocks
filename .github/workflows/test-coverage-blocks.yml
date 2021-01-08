@@ -17,7 +17,10 @@ jobs:
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
+          scope: '@wpmedia'  
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
@@ -30,10 +33,10 @@ jobs:
 
       - name: Clean install (CI) dependencies if lockfile (above) changed
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
+        run: npm ci
+     
       - name: Run tests with coverage
         run: npm run test:coverage
 

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-query-content-source-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Content source block for story feed queries by Elasticsearch queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -23,8 +23,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/resizer-image-block": "beta"
+    "@wpmedia/resizer-image-block": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

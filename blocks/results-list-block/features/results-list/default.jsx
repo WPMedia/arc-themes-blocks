@@ -33,8 +33,25 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
+const ReadMoreButton = styled.button`
+  background-color:${(props) => props.primaryColor}; 
+  &:not(:disabled):not(.disabled):active:hover, &:not(:disabled):not(.disabled):hover:hover{
+    background-color:${(props) => props.primaryColor}; 
+  }
+`;
+
 @Consumer
 class ResultsList extends Component {
+  static fetchStoriesTransform(data, storedList) {
+    const result = storedList;
+    if (data) {
+      // Add new data to previous list
+      result.content_elements = storedList.content_elements.concat(data.content_elements);
+      result.next = data.next;
+    }
+    return result;
+  }
+
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
@@ -103,15 +120,7 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform(data) {
-              if (data) {
-                // Add new data to previous list
-                const combinedList = storedList.content_elements.concat(data.content_elements);
-                storedList.content_elements = combinedList;
-                storedList.next = data.next;
-              }
-              return storedList;
-            },
+            transform: (data) => this.fetchStoriesTransform(data, storedList),
           },
         });
         // Hide button if no more stories to load
@@ -172,7 +181,7 @@ class ResultsList extends Component {
           return (
             <div className="list-item" key={`result-card-${url}`}>
               { promoElements.showImage && (
-                <div className="results-list--image-container">
+                <div className="results-list--image-container mobile-order-2 mobile-image">
                   <a
                     href={url}
                     title={headlineText}
@@ -213,7 +222,7 @@ class ResultsList extends Component {
                 </div>
               )}
               { promoElements.showHeadline && (
-                <div className="results-list--headline-container">
+                <div className="results-list--headline-container mobile-order-1">
                   <a
                     href={url}
                     title={headlineText}
@@ -232,7 +241,7 @@ class ResultsList extends Component {
                   || promoElements.showDate
                   || promoElements.showByline
               ) && (
-                <div className="results-list--description-author-container">
+                <div className="results-list--description-author-container mobile-order-3">
                   {promoElements.showDescription && descriptionText && (
                     <a
                       href={url}
@@ -262,17 +271,18 @@ class ResultsList extends Component {
         {
           !!(contentElements && contentElements.length > 0 && seeMore) && (
             <div className="see-more">
-              <button
+              <ReadMoreButton
                 type="button"
                 onClick={() => this.fetchStories(true)}
                 className="btn btn-sm"
+                primaryColor={getThemeStyle(arcSite)['primary-color']}
               >
                 {this.phrases.t('results-list-block.see-more-button')}
                 {' '}
                 <span className="visuallyHidden">
                   stories about this topic
                 </span>
-              </button>
+              </ReadMoreButton>
             </div>
           )
         }

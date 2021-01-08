@@ -19,12 +19,11 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -43,6 +42,13 @@ const LargePromo = ({ customFields }) => {
       : null,
   }) || null;
 
+  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
   const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
     website_section: null,
   };
@@ -56,13 +62,6 @@ const LargePromo = ({ customFields }) => {
   const overlineDisplay = (content?.label?.basic?.display ?? null)
       || (content?.websites?.[arcSite] && websiteSection)
       || false;
-  const overlineUrl = (content?.label?.basic?.url ?? null)
-      || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
-      || '';
-  const overlineText = (content?.label?.basic?.text ?? null)
-      || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
-      || '';
-
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const promoType = discoverPromoType(content);
 
@@ -71,9 +70,8 @@ const LargePromo = ({ customFields }) => {
       return (
         (
           <Overline
-            customUrl={overlineUrl}
-            customText={overlineText}
             className="overline"
+            story={content}
             editable
           />
         )
@@ -88,7 +86,7 @@ const LargePromo = ({ customFields }) => {
         <a
           href={content.website_url}
           className="lg-promo-headline"
-          title={content && content.headlines ? content.headlines.basic : ''}
+          title={headlineText}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -144,6 +142,11 @@ const LargePromo = ({ customFields }) => {
   };
 
   const ratios = ratiosFor('LG', customFields.imageRatio);
+  const imageURL = customFields.imageOverrideURL
+    ? customFields.imageOverrideURL : extractImageFromStory(content || {});
+  const resizedImageOptions = customFields.imageOverrideURL
+    ? customFieldImageResizedImageOptions
+    : extractResizedParams(content);
 
   return content ? (
     <>
@@ -157,12 +160,10 @@ const LargePromo = ({ customFields }) => {
                 title={content && content.headlines ? content.headlines.basic : ''}
               >
                 {
-                  customFields.imageOverrideURL || extractImageFromStory(content)
+                  imageURL
                     ? (
                       <Image
-                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
-                        url={customFields.imageOverrideURL
-                          ? customFields.imageOverrideURL : extractImageFromStory(content)}
+                        url={imageURL}
                         alt={content && content.headlines ? content.headlines.basic : ''}
                         // large is 4:3 aspect ratio
                         smallWidth={ratios.smallWidth}
@@ -173,7 +174,8 @@ const LargePromo = ({ customFields }) => {
                         largeHeight={ratios.largeHeight}
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizerURL={getProperties(arcSite)?.resizerURL}
-                        resizedImageOptions={extractResizedParams(content)}
+                        resizedImageOptions={resizedImageOptions}
+                        // todo: should have resized params
                       />
                     )
                     : (

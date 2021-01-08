@@ -45,7 +45,7 @@ const SearchResult = ({
   return (
     <div className="list-item" key={`result-card-${url}`}>
       { showImage && (
-        <div className="results-list--image-container">
+        <div className="results-list--image-container mobile-order-2 mobile-image">
           <a
             href={url}
             title={headlineText}
@@ -86,7 +86,7 @@ const SearchResult = ({
         </div>
       )}
       { showHeadline && (
-        <div className="results-list--headline-container">
+        <div className="results-list--headline-container mobile-order-1">
           <a
             href={url}
             title={headlineText}
@@ -102,7 +102,7 @@ const SearchResult = ({
         </div>
       )}
       { (showDescription || showDate || showByline) && (
-        <div className="results-list--description-author-container">
+        <div className="results-list--description-author-container mobile-order-3">
           { showDescription && (
             <DescriptionText
               secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}

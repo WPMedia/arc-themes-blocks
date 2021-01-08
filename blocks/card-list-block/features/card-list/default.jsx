@@ -124,7 +124,7 @@ class CardList extends React.Component {
                 title
                   ? (
                     <Title
-                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                       className="card-list-title"
                     >
                       {title}
@@ -176,15 +176,18 @@ class CardList extends React.Component {
                    )
                   }
                 </a>
-                <Title
-                  primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                  className="card-list-overline"
-                >
-                  {contentElements[0].websites[this.arcSite].website_section.name}
-                </Title>
+                { contentElements[0].websites[arcSite].website_section
+                  && (
+                  <Title
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                    className="card-list-overline"
+                  >
+                    {contentElements[0].websites[arcSite].website_section.name}
+                  </Title>
+                  )}
                 <div>
                   <Title
-                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                     className="card-list-headline"
                   >
                     <a
@@ -225,7 +228,7 @@ class CardList extends React.Component {
                           className="headline-list-anchor"
                         >
                           <HeadlineText
-                            primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                             className="headline-text"
                           >
                             {headlineText}

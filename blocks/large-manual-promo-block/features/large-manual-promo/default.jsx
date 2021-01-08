@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -9,9 +9,7 @@ import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -25,7 +23,7 @@ const OverlineLink = styled.a`
   text-decoration: none;
 `;
 
-const OverlineHeader = styled.h1`
+const OverlineHeader = styled.h2`
   font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
@@ -40,21 +38,30 @@ const LargeManualPromo = ({ customFields }) => {
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
-  return customFields.linkURL ? (
+  const renderWithLink = useCallback((element, props) => (
+    <a
+      href={customFields.linkURL || '#'}
+      className={(props && props.className) || ''}
+      title={customFields.headline}
+      target={customFields.newTab ? '_blank' : '_self'}
+      rel={customFields.newTab ? 'noreferrer noopener' : ''}
+      onClick={!customFields.linkURL ? (evt) => {
+        evt.preventDefault();
+      } : undefined}
+    >
+      {element}
+    </a>
+  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+
+  return (
     <>
       <article className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
           {(customFields.showImage && customFields.imageURL)
           && (
             <div className="col-sm-12 col-md-xl-6">
-              <a
-                href={customFields.linkURL}
-                title={customFields.headline}
-                target={customFields.newTab ? '_blank' : '_self'}
-                rel={customFields.newTab ? 'noreferrer noopener' : ''}
-              >
+              { renderWithLink(
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   url={customFields.imageURL}
                   alt={customFields.headline}
                   // large promo has 4:3
@@ -67,8 +74,8 @@ const LargeManualPromo = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
-                />
-              </a>
+                />,
+              )}
             </div>
           )}
           {(customFields.showHeadline || customFields.showDescription
@@ -95,21 +102,14 @@ const LargeManualPromo = ({ customFields }) => {
                 </OverlineHeader>
               )}
               {(customFields.showHeadline && customFields.headline)
-              && (
-                <a
-                  href={customFields.linkURL}
+              && renderWithLink(
+                <HeadlineText
+                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
                   className="lg-promo-headline"
-                  title={customFields.headline}
-                  target={customFields.newTab ? '_blank' : '_self'}
-                  rel={customFields.newTab ? 'noreferrer' : ''}
                 >
-                  <HeadlineText
-                    primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-                    className="lg-promo-headline"
-                  >
-                    {customFields.headline}
-                  </HeadlineText>
-                </a>
+                  {customFields.headline}
+                </HeadlineText>,
+                { className: 'lg-promo-headline' },
               )}
               {(customFields.showDescription && customFields.description)
               && (
@@ -126,7 +126,7 @@ const LargeManualPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 LargeManualPromo.propTypes = {

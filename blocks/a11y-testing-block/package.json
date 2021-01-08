@@ -1,6 +1,6 @@
 {
-  "name": "@mentor-medier/a11y-testing-block",
-  "version": "5.9.1-alpha.2+dd60f314",
+  "name": "@wpmedia/a11y-testing-block",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme A11y Testing block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/Mentor-Medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/a11y-testing-block"
   },
   "scripts": {
@@ -26,5 +26,5 @@
     "axe-core": "^3.5.0",
     "requestidlecallback": "^0.3.0"
   },
-  "gitHead": "dd60f3149673acddbc62c60234ebbbc12a28afb5"
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

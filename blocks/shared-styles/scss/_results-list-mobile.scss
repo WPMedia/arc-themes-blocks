@@ -7,22 +7,22 @@
       'description description';
     grid-template-columns: 1fr minmax(0, max-content);
     grid-template-rows: auto;
+    padding: map-get($spacers, 'md') 0 map-get($spacers, 'md') 0;
 
     .description-text {
       font-size: calculateRem(18px);
-      line-height: calculateRem(32px);
-      margin-bottom: map-get($spacers, 'xs');
+      line-height: 1.78;
+      margin-bottom: map-get($spacers, 'sm');
     }
 
     .headline-text {
-      font-size: calculateRem(16px);
+      font-size: calculateRem(19px);
       font-weight: bold;
-      line-height: calculateRem(24px);
-      margin-bottom: map-get($spacers, 'xs');
+      line-height: 1.26;
+      margin-bottom: map-get($spacers, 'sm');
     }
 
     .results-list--author-date {
-      display: flex;
       font-size: calculateRem(14px);
       line-height: calculateRem(16px);
 
@@ -41,5 +41,29 @@
         line-height: calculateRem(16px);
       }
     }
+
+    .mobile {
+      &-order {
+        &-1 {
+          order: 1;
+        }
+    
+        &-2 {
+          order: 2;
+        }
+    
+        &-3 {
+          order: 3;
+        }
+      }
+
+      &-image {
+        height: 60px;
+        width: 99px;
+      }
+        
+    }
+    
+
   }
 }

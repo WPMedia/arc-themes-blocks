@@ -391,5 +391,22 @@ describe('the footer feature for the default output type', () => {
         expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(0);
       });
     });
+
+    describe('when no social site properties are provided', () => {
+      it('should render no social buttons and no border on container', () => {
+        getProperties.mockImplementation(() => ({
+          facebookPage: '',
+          twitterUsername: '',
+          rssUrl: '',
+        }));
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+        expect(wrapper.find({ title: 'Facebook page' })).toHaveLength(0);
+        expect(wrapper.find({ title: 'Twitter feed' })).toHaveLength(0);
+        expect(wrapper.find({ title: 'RSS feed' })).toHaveLength(0);
+        const container = wrapper.find('.socialBtn-container');
+        expect(container).toBeDefined();
+        expect(container.get(0).props.hasSocialLinks).toBeFalsy();
+      });
+    });
   });
 });

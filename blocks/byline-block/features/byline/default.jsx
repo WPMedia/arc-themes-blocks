@@ -84,7 +84,7 @@ class ArticleByline extends Component {
           break;
         }
         case 2: {
-          bylineString = `${authors[0]} ${this.phrases.t('byline-block.and-text')} ${authors[1]}`;
+          bylineString += `${authors[0]} ${this.phrases.t('byline-block.and-text')} ${authors[1]}`;
           break;
         }
         default: {

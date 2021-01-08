@@ -86,7 +86,7 @@ class TopTableListWrapper extends Component {
 
     // using the fetchContent seems both more reliable
     // and allows for conditional calls whereas useContent hook does not
-    if (targetFallbackImage && !targetFallbackImage.includes('/resources/')) {
+    if (targetFallbackImage && !targetFallbackImage.includes('resources/')) {
       this.fetchContent({
         placeholderResizedImageOptions: {
           source: 'resize-image-api',
@@ -363,7 +363,7 @@ TopTableListWrapper.propTypes = {
       group: 'Small story settings',
     }),
     ...imageRatioCustomField('imageRatioSM', 'Small story settings', '3:2'),
-    storiesPerRowSM: PropTypes.oneOf([1, 2]).tag({
+    storiesPerRowSM: PropTypes.oneOf([1, 2, 3, 4]).tag({
       name: 'Stories per row',
       defaultValue: 2,
       group: 'Small story settings',

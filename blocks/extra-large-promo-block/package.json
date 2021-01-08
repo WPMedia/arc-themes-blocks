@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/extra-large-promo-block",
-  "version": "5.9.0",
+  "version": "5.9.0-canary.0",
   "description": "Fusion News Theme Extra Large Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -27,13 +27,13 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/byline-block": "beta",
-    "@wpmedia/date-block": "beta",
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/global-phrases-block": "beta",
-    "@wpmedia/news-theme-css": "beta",
-    "@wpmedia/overline-block": "beta",
-    "@wpmedia/shared-styles": "beta",
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/global-phrases-block": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

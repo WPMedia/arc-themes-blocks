@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { useContent } from 'fusion:content';
 import SmallPromo from './default';
 
 const { default: mockData } = require('./mock-data');
@@ -8,8 +9,9 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
 }));
@@ -21,13 +23,13 @@ jest.mock('fusion:content', () => ({
 const config = {
   itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
   showHeadline: true,
-  // headlinePosition: 'below',
   showImage: true,
 };
 
 describe('the small promo feature', () => {
   afterEach(() => {
     jest.resetModules();
+    jest.clearAllMocks();
   });
 
   beforeEach(() => {
@@ -71,6 +73,18 @@ describe('the small promo feature', () => {
     expect(wrapper.find('.col-sm-xl-8')).toHaveLength(1);
   });
 
+  it('default image position to right if imagePosition is unavailable', () => {
+    const wrapper = mount(<SmallPromo customFields={config} />);
+    expect(wrapper.find('.image-right')).toHaveLength(1);
+  });
+
+  it('render image position based on imagePosition in customfield', () => {
+    const mockConfig = config;
+    mockConfig.imagePosition = 'above'; //
+    const wrapper = mount(<SmallPromo customFields={mockConfig} />);
+    expect(wrapper.find('.image-above')).toHaveLength(1);
+  });
+
   it('should have no Image when show image is false', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
@@ -92,30 +106,6 @@ describe('the small promo feature', () => {
     const wrapper = mount(<SmallPromo customFields={noImgConfig} />);
     expect(wrapper.find('.col-sm-xl-12')).toHaveLength(1);
   });
-
-  // it('headline div should have class .headline-above when headline position is above', () => {
-  //   const headAboveConfig = {
-  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-  //     showHeadline: true,
-  //     headlinePosition: 'above',
-  //     showImage: false,
-  //   };
-  //   const wrapper = mount(<SmallPromo customFields={headAboveConfig} />);
-  //   expect(wrapper.find('.headline-above')).toHaveLength(1);
-  //   expect(wrapper.find('.headline-below').length).toBe(0);
-  // });
-
-  // it('headline div should have class .headline-below when headline position is below', () => {
-  //   const headBelowConfig = {
-  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-  //     showHeadline: true,
-  //     headlinePosition: 'below',
-  //     showImage: false,
-  //   };
-  //   const wrapper = mount(<SmallPromo customFields={headBelowConfig} />);
-  //   expect(wrapper.find('.headline-below')).toHaveLength(1);
-  //   expect(wrapper.find('.headline-above').length).toBe(0);
-  // });
 
   it('should only be one link when showHeadline is false and show image is true', () => {
     const noHeadlineConfig = {
@@ -152,5 +142,74 @@ describe('the small promo feature', () => {
     const wrapper = mount(<SmallPromo customFields={myConfig} />);
     const img = wrapper.find('Image');
     expect(img.prop('largeHeight')).toBe(300);
+  });
+
+  it('should fetch content using null source and query if none in custom fields', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      itemContentConfig: {
+        contentConfigValues: { id: 1234 },
+        contentService: 'content-api',
+      },
+    };
+    const wrapper = mount(<SmallPromo customFields={myConfig} />);
+    const expectedArgs = {
+      query: {
+        'arc-site': undefined,
+        id: 1234,
+      },
+      source: 'content-api',
+    };
+    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
+    wrapper.unmount();
+  });
+
+  it('returns null if null content', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce(undefined);
+    const wrapper = mount(<SmallPromo customFields={myConfig} />);
+    expect(wrapper).toEqual({});
+    wrapper.unmount();
+  });
+
+  it('show image useContent for resizer parameter returns undefined if falsy', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
+
+    const wrapper = mount(<SmallPromo customFields={myConfig} arcSite="dagen" />);
+
+    const image = wrapper.find('Image');
+    expect(image.length).toBe(1);
+    expect(image.props().resizedImageOptions).toEqual(undefined);
+    wrapper.unmount();
+  });
+
+  it('shows placeholder image if no image URL', () => {
+    useContent.mockReturnValueOnce({});
+
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+    };
+
+    const wrapper = mount(<SmallPromo customFields={myConfig} />);
+
+    expect(wrapper.find('PlaceholderImage').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(0);
+    wrapper.unmount();
   });
 });

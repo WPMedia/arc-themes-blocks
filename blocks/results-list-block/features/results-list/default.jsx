@@ -11,15 +11,13 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { resolveDefaultPromoElements } from './helpers';
+import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
 // to modify, go to the shared styles block
 import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
-
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -34,24 +32,16 @@ const DescriptionText = styled.p`
 `;
 
 const ReadMoreButton = styled.button`
-  background-color:${(props) => props.primaryColor}; 
-  &:not(:disabled):not(.disabled):active:hover, &:not(:disabled):not(.disabled):hover:hover{
-    background-color:${(props) => props.primaryColor}; 
+  background-color: ${(props) => props.primaryColor};
+
+  &:not(:disabled):not(.disabled):active:hover,
+  &:not(:disabled):not(.disabled):hover:hover {
+    background-color: ${(props) => props.primaryColor}; 
   }
 `;
 
 @Consumer
 class ResultsList extends Component {
-  static fetchStoriesTransform(data, storedList) {
-    const result = storedList;
-    if (data) {
-      // Add new data to previous list
-      result.content_elements = storedList.content_elements.concat(data.content_elements);
-      result.next = data.next;
-    }
-    return result;
-  }
-
   constructor(props) {
     super(props);
     this.arcSite = props.arcSite;
@@ -60,6 +50,7 @@ class ResultsList extends Component {
       resultList: {},
       seeMore: true,
       placeholderResizedImageOptions: {},
+      count: 0,
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
     this.fetchStories(false);
@@ -93,9 +84,8 @@ class ResultsList extends Component {
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
-    const { storedList } = this.state;
-
     if (additionalStoryAmount) {
+      const { storedList, count } = this.state;
       // Check for next value
       if (storedList.next) {
         // Determine content service type
@@ -120,28 +110,57 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform: (data) => this.fetchStoriesTransform(data, storedList),
+            transform: (data) => fetchStoriesTransform(data, storedList),
           },
         });
         // Hide button if no more stories to load
         if (value >= storedList.count) {
           this.state.seeMore = false;
         }
+      } else if (listContentConfig.contentService === 'content-api-collections') {
+        const from = parseInt(contentConfigValues.from, 0);
+        const size = parseInt(contentConfigValues.size, 10);
+        contentConfigValues.from = String(from + size);
+        this.fetchContent({
+          resultList: {
+            source: contentService,
+            query: contentConfigValues,
+            transform: (data) => fetchStoriesTransform(data, storedList),
+          },
+        });
+        // Hide button if no more stories to load
+        if ((storedList.content_elements.length + size) >= count) {
+          this.state.seeMore = false;
+        }
       }
     } else {
+      if (listContentConfig.contentService === 'content-api-collections') {
+        // Count all items from collection based on contentConfigValues conditions
+        const query = { ...contentConfigValues };
+        // By default collection limit 20 items
+        query.size = '20';
+        this.fetchContent({
+          collection: {
+            source: contentService,
+            query,
+          },
+        });
+        const { collection } = this.state;
+        this.state.count = collection?.content_elements ? collection.content_elements.length : 0;
+      }
       this.fetchContent({
         resultList: {
           source: contentService,
           query: contentConfigValues,
         },
       });
-      const { resultList } = this.state;
+      const { resultList, count } = this.state;
       this.state.storedList = resultList;
       // Check if there are available stories
-
       if (resultList?.content_elements) {
         // Hide button if no additional stories from initial content
-        if (resultList.content_elements.length >= resultList.count) {
+        if ((resultList.content_elements.length >= resultList.count)
+          || (resultList.content_elements.length >= count)) {
           this.state.seeMore = false;
         }
       }
@@ -188,7 +207,6 @@ class ResultsList extends Component {
                   >
                     {extractImage(promoItems) ? (
                       <Image
-                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         // results list is 16:9 by default
                         resizedImageOptions={extractResizedParams(element)}
                         url={extractImage(element.promo_items)}
@@ -204,7 +222,6 @@ class ResultsList extends Component {
                       />
                     ) : (
                       <Image
-                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                         smallWidth={158}
                         smallHeight={89}
                         mediumWidth={274}
@@ -216,6 +233,7 @@ class ResultsList extends Component {
                         breakpoints={getProperties(arcSite)?.breakpoints}
                         resizedImageOptions={placeholderResizedImageOptions}
                         resizerURL={getProperties(arcSite)?.resizerURL}
+
                       />
                     )}
                   </a>

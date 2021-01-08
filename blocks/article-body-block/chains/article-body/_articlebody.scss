@@ -160,10 +160,6 @@
         border: 2px solid $border-rule-color;
       }
 
-      th {
-        white-space: nowrap;
-      }
-
       th,
       td {
         border: 1px solid $border-rule-color;
@@ -287,6 +283,11 @@
       margin-bottom: map-get($spacers, 'lg');
     }
 
+  }
+
+  .divider {
+    @include container-vertial-spacing;
+    @include container-hr-separator;
   }
 
 }

@@ -3,6 +3,7 @@ $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
+$btn-padding: calculateRem(8px);
 $nav-search-border-color: $ui-light-gray;
 $overlay-z-index: 2;
 $section-bg: #292929;
@@ -23,6 +24,8 @@ body.nav-open {
   outline: none;
   position: relative;
   white-space: nowrap;
+  padding-left: $btn-padding;
+  padding-right: $btn-padding;
 
   &.border {
     transition: border 100ms linear;
@@ -72,7 +75,6 @@ body.nav-open {
 .nav-sections-btn {
   align-items: center;
   display: flex;
-  margin-left: 10px;
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
@@ -96,18 +98,10 @@ body.nav-open {
   justify-content: center;
   position: relative;
 
-  &.open.dark {
-    border: 0;
-  }
-
-  &.open.light {
-    border: $border-width solid $ui-light-gray;
-  }
-
   &.open {
     input {
       font-size: 16px;
-      height: 48px;
+      height: $btn-size;
       line-height: 24px;
       padding: 4px $btn-size 4px 11px;
       width: 100%;
@@ -124,6 +118,14 @@ body.nav-open {
     > .nav-btn-dark > svg > path {
       fill: #292929;
       opacity: 0.6;
+    }
+
+    &.dark input {
+      border: $border-width solid $border-color-bright;
+    }
+
+    &.light input {
+      border: $border-width solid $ui-light-gray;
     }
   }
 
@@ -145,7 +147,7 @@ body.nav-open {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 8px 20px;
   position: relative;
   flex-shrink: 0;
 
@@ -175,8 +177,48 @@ body.nav-open {
   > div {
     align-items: center;
     display: flex;
-    flex: 1;
     text-align: center;
+    margin-right: calculateRem(16px);
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.nav-left,
+    &.nav-right {
+      & > .nav-components {
+        &--mobile,
+        &--desktop {
+          align-items: center;
+          
+          & > .nav-widget {
+            margin-right: calculateRem(16px);
+            
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+
+        &--mobile {
+          display: none;
+        }
+
+        &--desktop {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
+            display: none;
+          }
+
+          &--mobile {
+            display: inherit;
+          }
+        }
+      }
+    }
 
     &.nav-left {
       justify-content: flex-start;
@@ -184,10 +226,6 @@ body.nav-open {
 
     &.nav-right {
       justify-content: flex-end;
-    }
-
-    &.nav-right:not(:empty) {
-      margin-left:10px
     }
 
     &.nav-logo, & > .nav-logo {
@@ -200,9 +238,8 @@ body.nav-open {
         width: auto;
       }
 
-      &.nav-logo-left {
-        justify-content: flex-start;
-        margin: 0 24px 0 24px;
+      &.svg-logo {
+        flex: 1;
       }
     }
 
@@ -216,6 +253,34 @@ body.nav-open {
       opacity: 1;
       transition: opacity 800ms ease, visibility 0s ease 0s;
       visibility: visible;
+    }
+  }
+
+  &.logo {
+    &-left {
+      .nav-logo {
+        justify-content: flex-start;
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          flex: 1;
+        }
+      }
+
+      &:not(.horizontal-links) {
+        .nav-logo {
+          flex: 1;
+        }
+      }
+    }
+
+    &-center {
+      > div {
+        flex: 1;
+
+        &.nav-logo {
+          margin: 0 calculateRem(16px) 0 calculateRem(16px);
+        }
+      }
     }
   }
 }
@@ -269,6 +334,18 @@ body.nav-open {
     display: flex;
     flex-direction: column;
     width: $section-width;
+
+    .nav-search {
+      &.open {
+        input {
+          height: calculateRem(48px);
+        }
+
+        &.dark {
+          border: 0;
+        }
+      }
+    }
   }
 
   .nav-search {

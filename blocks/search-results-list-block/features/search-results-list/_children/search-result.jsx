@@ -9,8 +9,6 @@ import getProperties from 'fusion:properties';
 import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 const SearchResult = ({
   element,
   arcSite,
@@ -53,7 +51,6 @@ const SearchResult = ({
           >
             {extractImage(promoItems) ? (
               <Image
-                compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                 url={extractImage(promoItems)}
                 alt={headlineText}
                 smallWidth={274}
@@ -68,7 +65,6 @@ const SearchResult = ({
               />
             ) : (
               <Image
-                compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                 smallWidth={274}
                 smallHeight={154}
                 mediumWidth={274}

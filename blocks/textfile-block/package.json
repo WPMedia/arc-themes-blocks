@@ -1,9 +1,9 @@
 {
-  "name": "@mentor-medier/textfile-block",
+  "name": "@wpmedia/textfile-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme text file block",
   "author": "nelson fernandez <nelson.fernandez@washpost.com>",
-  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/textfile-block"
   },
   "scripts": {
@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@mentor-medier/engine-theme-sdk": "canary"
+    "@wpmedia/engine-theme-sdk": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

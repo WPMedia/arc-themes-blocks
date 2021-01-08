@@ -1,12 +1,12 @@
 {
-  "name": "@mentor-medier/top-table-list-block",
+  "name": "@wpmedia/top-table-list-block",
   "version": "5.9.0-canary.0",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -18,18 +18,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/top-table-list-block"
   },
   "peerDependencies": {
-    "@mentor-medier/byline-block": "canary",
-    "@mentor-medier/date-block": "canary",
-    "@mentor-medier/engine-theme-sdk": "canary",
-    "@mentor-medier/news-theme-css": "stable",
-    "@mentor-medier/overline-block": "canary",
-    "@mentor-medier/placeholder-image-block": "canary",
-    "@mentor-medier/resizer-image-block": "canary",
-    "@mentor-medier/shared-styles": "canary",
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
+    "@wpmedia/video-player-block": "stable",
     "styled-components": "^4.4.0"
   },
   "scripts": {

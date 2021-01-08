@@ -20,8 +20,6 @@ export default {
     _id: 'text',
   },
   transform: (data, query) => {
-    const { isCompressedImageParams = false } = query;
-
     if (data && data.basic && typeof Array.isArray(data.basic)) {
       return {
         content_elements: data.basic.map((ele) => (
@@ -31,8 +29,6 @@ export default {
             null,
             null,
             query['arc-site'],
-            undefined,
-            isCompressedImageParams,
           )
         )),
       };

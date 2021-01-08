@@ -1,12 +1,12 @@
 {
-  "name": "@mentor-medier/simple-list-block",
+  "name": "@wpmedia/simple-list-block",
   "version": "5.9.0-canary.0",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/simple-list-block"
   },
   "peerDependencies": {
-    "@mentor-medier/engine-theme-sdk": "canary",
-    "@mentor-medier/news-theme-css": "stable",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "scripts": {

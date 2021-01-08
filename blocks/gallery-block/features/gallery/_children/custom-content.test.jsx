@@ -12,6 +12,7 @@ const mockPhrases = {
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
   resizerURL: 'https://fake.cdn.com/resizer',
+  galleryCubeClicks: 5,
 }))));
 
 jest.mock('fusion:content', () => ({
@@ -96,7 +97,9 @@ describe('the custom content gallery', () => {
       expect(wrapper.find('Gallery').props().expandPhrase).toEqual('Expand');
       expect(wrapper.find('Gallery').props().autoplayPhrase).toEqual('Autoplay');
       expect(wrapper.find('Gallery').props().pausePhrase).toEqual('Pause autoplay');
+      // expect(wrapper.find('Gallery').props().interstitialClicks).toEqual(5);
       expect(typeof wrapper.find('Gallery').props().pageCountPhrase).toEqual('function');
+      expect(wrapper.find('Gallery').props().pageCountPhrase(1, 5)).toEqual('%{current} of %{total}');
     });
   });
 
@@ -120,4 +123,48 @@ describe('the custom content gallery', () => {
       expect(typeof wrapper.find('Gallery').props().pageCountPhrase).toEqual('function');
     });
   });
+  /**
+  describe('when galleryCubeClicks is present', () => {
+    it('should send interstitialClicks', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({})),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
+        })),
+      }));
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        fallbackImage: 'placeholder.jpg',
+        resizerURL: 'https://fake.cdn.com/resizer',
+        galleryCubeClicks: 5,
+      }))));
+      const { default: CustomContentGallery } = require('./custom-content');
+      const wrapper = shallow(
+        <CustomContentGallery
+          contentConfig={{ contentService: 'cool-api', contentConfigValues: 'cool-config' }}
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+        />,
+      );
+      expect(wrapper.find('Gallery').prop('interstitialClicks')).toBeTruthy();
+      const adElement = wrapper.find('Gallery').prop('adElement');
+      expect(adElement).toBeTruthy();
+      expect(adElement()).toBeInstanceOf(Object);
+    });
+    it('should should not send Ad data if is invalid', () => {
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        fallbackImage: 'placeholder.jpg',
+        resizerURL: 'https://fake.cdn.com/resizer',
+        galleryCubeClicks: '[]',
+      }))));
+      const { default: CustomContentGallery } = require('./custom-content');
+      const wrapper = shallow(
+        <CustomContentGallery
+          contentConfig={{ contentService: 'cool-api', contentConfigValues: 'cool-config' }}
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+        />,
+      );
+      expect(wrapper.find('Gallery').prop('interstitialClicks')).toBeFalsy();
+      expect(wrapper.find('Gallery').prop('adElement')).toBeFalsy();
+    });
+  });
+   * */
 });

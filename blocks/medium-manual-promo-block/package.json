@@ -1,9 +1,9 @@
 {
-  "name": "@mentor-medier/medium-manual-promo-block",
+  "name": "@wpmedia/medium-manual-promo-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme Medium Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
-  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/medium-manual-promo-block"
   },
   "scripts": {
@@ -25,9 +25,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@mentor-medier/engine-theme-sdk": "canary",
-    "@mentor-medier/news-theme-css": "stable",
-    "@mentor-medier/shared-styles": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

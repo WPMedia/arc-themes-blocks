@@ -1,9 +1,9 @@
 {
-  "name": "@mentor-medier/collections-content-source-block",
+  "name": "@wpmedia/collections-content-source-block",
   "version": "5.9.0-canary.0",
   "description": "Fusion News Theme collections content API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
-  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/collections-content-source-block"
   },
   "scripts": {
@@ -23,8 +23,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@mentor-medier/engine-theme-sdk": "canary",
-    "@mentor-medier/resizer-image-block": "canary"
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/resizer-image-block": "canary"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

@@ -10,8 +10,6 @@ import checkObjectEmpty from '../shared/checkObjectEmpty';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
 // via results list
 const MediumListItem = (props) => {
   const {
@@ -33,6 +31,18 @@ const MediumListItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
+  const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
@@ -113,7 +123,6 @@ const MediumListItem = (props) => {
             <a className="image-link" href={websiteURL} title={itemTitle}>
               {imageURL !== '' ? (
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   resizedImageOptions={resizedImageOptions}
                   url={imageURL}
                   // todo: get the proper alt tag for this image
@@ -130,7 +139,6 @@ const MediumListItem = (props) => {
                 />
               ) : (
                 <Image
-                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}
@@ -164,7 +172,7 @@ const MediumListItem = (props) => {
           }
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

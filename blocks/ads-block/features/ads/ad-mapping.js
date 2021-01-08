@@ -21,7 +21,6 @@ const adMapping = {
     adName: 'oop',
     adLabel: 'OOP',
     adClass: '1x1',
-    dimensionsArray: [sz1x1, sz1x1, sz1x1],
     ampDimensionsArray: sz1x1,
   },
   '300x250': {

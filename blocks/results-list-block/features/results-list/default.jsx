@@ -137,7 +137,7 @@ class ResultsList extends Component {
             source: contentService,
             query,
             transform: (data) => {
-              if (!data || data.content_elements.length === 0) {
+              if (!data || !data.content_elements || data.content_elements.length === 0) {
                 return false;
               }
               return true;
@@ -160,7 +160,6 @@ class ResultsList extends Component {
         const from = parseInt(contentConfigValues.from, 10) || 0;
         const size = parseInt(contentConfigValues.size, 10) || 10;
         query.from = from + size + 1;
-        console.log(from);
         this.fetchContent({
           nextCollection: {
             source: contentService,
@@ -175,6 +174,7 @@ class ResultsList extends Component {
         // Hide button if no additional stories from initial content
         if ((resultList.content_elements.length >= resultList.count)
           || !nextCollection
+          || !nextCollection.content_elements
           || (nextCollection.content_elements.length === 0)) {
           this.state.seeMore = false;
         }

@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-props-no-spreading, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -140,6 +140,7 @@ describe('the global content gallery', () => {
     });
   });
 
+  /**
   describe('when galleryCubeClicks is present', () => {
     it('should send interstitialClicks', () => {
       jest.mock('fusion:context', () => ({
@@ -189,4 +190,5 @@ describe('the global content gallery', () => {
       expect(wrapper.find('Gallery').prop('adElement')).toBeFalsy();
     });
   });
+   * */
 });

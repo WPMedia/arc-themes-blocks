@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/video-player-block",
-  "version": "5.9.5",
+  "version": "5.9.1",
   "description": "Fusion News Theme video player block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -27,8 +27,10 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "react-oembed-container": "^0.3.0",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
+  "dependencies": {
+    "react-oembed-container": "^1.0.0"
+  },
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

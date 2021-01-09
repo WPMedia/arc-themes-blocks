@@ -79,13 +79,14 @@ export const getPrimarySectionId = ({ globalContent, arcSite } = {}) => (
 export const formatSectionPath = (sectionPath) => {
   let fmtPath = '';
   if (sectionPath) {
-    fmtPath = sectionPath.replace(/-/g, '_');
+    fmtPath = sectionPath;
     const endIdx = fmtPath.length - 1;
     if (fmtPath.charAt(endIdx) === '/') {
       fmtPath = fmtPath.substring(0, endIdx);
     }
-    if (fmtPath.charAt(0) !== '/') {
-      fmtPath = `/${fmtPath}`;
+    // remove leading slash
+    if (fmtPath.charAt(0) === '/') {
+      fmtPath = fmtPath.substring(1);
     }
   }
   return fmtPath;
@@ -111,7 +112,14 @@ export const getSectionID = (props) => (
 export const getSlotName = (props = {}) => {
   const { arcSite = '' } = props;
   const { websiteAdPath = '' } = getProperties(arcSite);
-  return `${websiteAdPath}${getSectionID(props)}`;
+  const sectionId = getSectionID(props);
+  if (websiteAdPath && !sectionId) {
+    return websiteAdPath;
+  }
+  if (websiteAdPath && sectionId) {
+    return `${websiteAdPath}/${sectionId}`;
+  }
+  return sectionId;
 };
 
 export const setPageTargeting = (props) => {

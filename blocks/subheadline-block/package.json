@@ -1,9 +1,9 @@
 {
-  "name": "@wpmedia/subheadline-block",
+  "name": "@mentor-medier/subheadline-block",
   "version": "5.9.1",
   "description": "Fusion News Theme sub-headline block",
   "author": "Brent Miller <brent.miller@washport.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
     "directory": "blocks/subheadline-block"
   },
   "scripts": {

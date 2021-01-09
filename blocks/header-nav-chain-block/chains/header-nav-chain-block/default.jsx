@@ -144,6 +144,8 @@ const Nav = (props) => {
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
 
+  const navHeight = desktopNavivationStartHeight || 56;
+
   const mainContent = useContent({
     source: 'site-service-hierarchy',
     query: {
@@ -346,7 +348,7 @@ const Nav = (props) => {
         className={`${navColor === 'light' ? 'light' : 'dark'}`}
         font={primaryFont}
         navBarBackground={backgroundColor}
-        navHeight={desktopNavivationStartHeight}
+        navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
       >

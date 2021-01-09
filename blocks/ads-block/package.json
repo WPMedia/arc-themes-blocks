@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/ads-block",
-  "version": "5.9.1",
+  "version": "5.9.5",
   "description": "> TODO: description",
   "author": "nealmalkani <nealm939@gmail.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -24,5 +24,6 @@
   },
   "dependencies": {
     "arcads": "^2.0.2"
-  }
+  },
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

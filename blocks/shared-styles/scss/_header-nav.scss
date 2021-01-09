@@ -233,13 +233,6 @@ body.nav-open {
     &.nav-logo, & > .nav-logo {
       justify-content: center;
 
-      img {
-        height: auto;
-        max-height: 40px;
-        max-width: 240px;
-        width: auto;
-      }
-
       &.svg-logo {
         flex: 1;
       }
@@ -266,6 +259,10 @@ body.nav-open {
         @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
           flex: 1;
         }
+
+        a {
+          justify-content: flex-start;
+        }
       }
 
       &:not(.horizontal-links) {
@@ -281,6 +278,10 @@ body.nav-open {
 
         &.nav-logo {
           margin: 0 calculateRem(16px) 0 calculateRem(16px);
+
+          a {
+            justify-content: center;
+          }
         }
       }
     }

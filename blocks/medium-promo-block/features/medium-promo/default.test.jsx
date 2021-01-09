@@ -1,15 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { useContent } from 'fusion:content';
 import MediumPromo from './default';
 
 const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  localizeDateTime: jest.fn(() => new Date().toDateString()),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  fallbackImage: 'placeholder.jpg',
+}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
 }));
@@ -28,6 +31,7 @@ const config = {
 describe('the medium promo feature', () => {
   afterEach(() => {
     jest.resetModules();
+    jest.clearAllMocks();
   });
 
   beforeEach(() => {
@@ -86,36 +90,11 @@ describe('the medium promo feature', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
-      // headlinePosition: 'below',
       showImage: false,
     };
     const wrapper = mount(<MediumPromo customFields={noImgConfig} />);
     expect(wrapper.find('.md-promo-image')).toHaveLength(0);
   });
-
-  // it('headline div should have class .headline-above when headline position is above', () => {
-  //   const headAboveConfig = {
-  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-  //     showHeadline: true,
-  //     headlinePosition: 'above',
-  //     showImage: false,
-  //   };
-  //   const wrapper = mount(<MediumPromo customFields={headAboveConfig} />);
-  //   expect(wrapper.find('.headline-above')).toHaveLength(1);
-  //   expect(wrapper.find('.headline-below').length).toBe(0);
-  // });
-
-  // it('headline div should have class .headline-below when headline position is below', () => {
-  //   const headBelowConfig = {
-  //     itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
-  //     showHeadline: true,
-  //     headlinePosition: 'below',
-  //     showImage: false,
-  //   };
-  //   const wrapper = mount(<MediumPromo customFields={headBelowConfig} />);
-  //   expect(wrapper.find('.headline-below')).toHaveLength(1);
-  //   expect(wrapper.find('.headline-above').length).toBe(0);
-  // });
 
   it('should only be one link when showHeadline is false and show image is true', () => {
     const noHeadlineConfig = {
@@ -152,5 +131,96 @@ describe('the medium promo feature', () => {
     const wrapper = mount(<MediumPromo customFields={myConfig} />);
     const img = wrapper.find('Image');
     expect(img.prop('largeHeight')).toBe(300);
+  });
+
+  it('should fetch content using null source and query if none in custom fields', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      itemContentConfig: {
+        contentConfigValues: { id: 1234 },
+        contentService: 'content-api',
+      },
+    };
+    const wrapper = mount(<MediumPromo customFields={myConfig} />);
+    const expectedArgs = {
+      query: {
+        'arc-site': undefined,
+        id: 1234,
+      },
+      source: 'content-api',
+    };
+    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
+    wrapper.unmount();
+  });
+
+  it('returns null if null content', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce(undefined);
+    const wrapper = mount(<MediumPromo customFields={myConfig} arcSite="dagen" />);
+    expect(wrapper).toEqual({});
+    wrapper.unmount();
+  });
+
+  it('show image useContent for resizer parameter returns undefined if falsy', () => {
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      imageOverrideURL: 'overrideImage.jpg',
+    };
+
+    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
+
+    const wrapper = mount(<MediumPromo customFields={myConfig} arcSite="dagen" />);
+
+    const image = wrapper.find('Image');
+    expect(image.length).toBe(1);
+    expect(image.props().resizedImageOptions).toEqual(undefined);
+    wrapper.unmount();
+  });
+
+  it('show ALL options if enabled', () => {
+    useContent.mockReturnValueOnce(mockData);
+
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+      showDescription: true,
+      showByline: true,
+      showDate: true,
+    };
+
+    const wrapper = mount(<MediumPromo customFields={myConfig} />);
+
+    expect(wrapper.find('.md-promo-headline').length).toBe(1);
+    expect(wrapper.find('.description-text').length).toBe(3);
+    expect(wrapper.find('ArticleByline').length).toBe(1);
+    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(1);
+    wrapper.unmount();
+  });
+
+  it('shows placeholder image if no image URL', () => {
+    useContent.mockReturnValueOnce({});
+
+    const myConfig = {
+      showHeadline: true,
+      showImage: true,
+      imageRatio: '4:3',
+    };
+
+    const wrapper = mount(<MediumPromo customFields={myConfig} />);
+
+    expect(wrapper.find('PlaceholderImage').length).toBe(1);
+    expect(wrapper.find('Image').length).toBe(0);
+    wrapper.unmount();
   });
 });

@@ -10,7 +10,7 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
@@ -19,12 +19,11 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import VideoPlayer from '@wpmedia/video-player-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
-
-const HeadlineText = styled.h1`
+const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -43,6 +42,13 @@ const ExtraLargePromo = ({ customFields }) => {
       : null,
   }) || null;
 
+  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
   const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
     website_section: null,
   };
@@ -56,12 +62,6 @@ const ExtraLargePromo = ({ customFields }) => {
   const overlineDisplay = (content?.label?.basic?.display ?? null)
     || (content?.websites?.[arcSite] && websiteSection)
     || false;
-  const overlineUrl = (content?.label?.basic?.url ?? null)
-    || (content?.websites?.[arcSite] && websiteSection && websiteSection._id)
-    || '';
-  const overlineText = (content?.label?.basic?.text ?? null)
-    || (content?.websites?.[arcSite] && websiteSection && websiteSection.name)
-    || '';
   const promoType = discoverPromoType(content);
 
   const overlineTmpl = () => {
@@ -69,9 +69,8 @@ const ExtraLargePromo = ({ customFields }) => {
       return (
         (
           <Overline
-            customUrl={overlineUrl}
-            customText={overlineText}
             className="overline"
+            story={content}
             editable
           />
         )
@@ -86,7 +85,7 @@ const ExtraLargePromo = ({ customFields }) => {
         <a
           href={content.website_url}
           className="xl-promo-headline"
-          title={content && content.headlines ? content.headlines.basic : ''}
+          title={headlineText}
         >
           <HeadlineText
             primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
@@ -142,6 +141,12 @@ const ExtraLargePromo = ({ customFields }) => {
   };
 
   const ratios = ratiosFor('XL', customFields.imageRatio);
+  const imageURL = customFields.imageOverrideURL
+    ? customFields.imageOverrideURL : extractImageFromStory(content);
+  const resizedImageOptions = customFields.imageOverrideURL
+    ? customFieldImageResizedImageOptions
+    : extractResizedParams(content);
+  const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return content && (
     <>
@@ -153,43 +158,51 @@ const ExtraLargePromo = ({ customFields }) => {
             <div className="col-sm-xl-12 flex-col">
               {overlineTmpl()}
               {headlineTmpl()}
-              {customFields.showImage
-              && (
-                <a
-                  href={content.website_url}
-                  title={content && content.headlines ? content.headlines.basic : ''}
-                >
-                  {customFields.imageOverrideURL || extractImageFromStory(content)
-                    ? (
-                      <Image
-                        compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
-                        url={customFields.imageOverrideURL
-                          ? customFields.imageOverrideURL : extractImageFromStory(content)}
-                        alt={content && content.headlines ? content.headlines.basic : ''}
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                        resizerURL={getProperties(arcSite)?.resizerURL}
-                        resizedImageOptions={extractResizedParams(content)}
-                      />
+              {
+                (
+                  !!videoEmbed && (
+                    <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                  )
+                ) || (
+                  customFields.showImage
+                    && (
+                      <a
+                        href={content.website_url}
+                        title={content && content.headlines ? content.headlines.basic : ''}
+                      >
+                        {imageURL
+                          ? (
+                            <Image
+                              url={imageURL}
+                              alt={content && content.headlines ? content.headlines.basic : ''}
+                              smallWidth={ratios.smallWidth}
+                              smallHeight={ratios.smallHeight}
+                              mediumWidth={ratios.mediumWidth}
+                              mediumHeight={ratios.mediumHeight}
+                              largeWidth={ratios.largeWidth}
+                              largeHeight={ratios.largeHeight}
+                              breakpoints={getProperties(arcSite)?.breakpoints}
+                              resizerURL={getProperties(arcSite)?.resizerURL}
+                              resizedImageOptions={resizedImageOptions}
+                            />
+                          )
+
+                          : (
+                            <PlaceholderImage
+                              smallWidth={ratios.smallWidth}
+                              smallHeight={ratios.smallHeight}
+                              mediumWidth={ratios.mediumWidth}
+                              mediumHeight={ratios.mediumHeight}
+                              largeWidth={ratios.largeWidth}
+                              largeHeight={ratios.largeHeight}
+                            />
+                          )}
+
+                        <PromoLabel type={promoType} />
+                      </a>
                     )
-                    : (
-                      <PlaceholderImage
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                      />
-                    )}
-                  <PromoLabel type={promoType} />
-                </a>
-              )}
+                )
+              }
               {descriptionTmpl()}
               <div className="article-meta">
                 {byLineTmpl()}
@@ -259,6 +272,11 @@ ExtraLargePromo.propTypes = {
       group: 'Image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    playVideoInPlace: PropTypes.bool.tag({
+      label: 'Play video in place',
+      group: 'Art',
+      defaultValue: false,
+    }),
   }),
 };
 

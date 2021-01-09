@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-body-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [
@@ -26,13 +26,13 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
-    "@wpmedia/video-player-block": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/video-player-block": "canary",
     "styled-components": "^4.4.0"
   },
   "dependencies": {
-    "react-oembed-container": "^0.3.0"
+    "react-oembed-container": "^1.0.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

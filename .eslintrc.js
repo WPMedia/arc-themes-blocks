@@ -35,6 +35,7 @@ module.exports = {
     'react/prop-types': 'off', // We will want to be more granular with this I assume.
     'react/require-default-props': 'off', // We will also want to have some rules around this. Whitelisting certain props for example
     'react/no-danger': 'off',
+    'react/jsx-props-no-spreading': 'off',
     //For list of a11y definitions for this see: https://github.com/evcohen/eslint-plugin-jsx-a11y
     'jsx-a11y/accessible-emoji': 2,
     'jsx-a11y/alt-text': 2,
@@ -69,7 +70,7 @@ module.exports = {
     'jsx-a11y/role-supports-aria-props': 2,
     'jsx-a11y/scope': 2,
     'jsx-a11y/tabindex-no-positive': 2,
-    "react-hooks/rules-of-hooks": "warn", // todo: this should be an error
-    "react-hooks/exhaustive-deps": "warn" 
+    "react-hooks/rules-of-hooks": "error", 
+    "react-hooks/exhaustive-deps": "error"
   },
 };

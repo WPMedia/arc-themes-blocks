@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -9,7 +8,10 @@ import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
 
-const TitleText = styled.h1`
+// aspect ratio for video player engine theme sdk
+const RATIO = 0.5625;
+
+const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -17,41 +19,57 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const LiveLabel = styled.span`
+const AlertBadge = styled.span`
+  background-color: #db0a07;
+  border-radius: 1.5rem;
+  color: #fff;
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  color: #FFFFFF;
-  background-color: #DB0A07;
-  border-radius: 5px;
+  font-size: 0.75rem;
+  line-height: 1.33;
+  font-weight: bold;
 `;
 
 const VideoPromo = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const {
-    uuid,
-    autoplay = false,
-    ratio = 0.5625,
-    title,
-    description,
-    live = false,
+    autoplay,
+    inheritGlobalContent,
+    playthrough,
+    alertBadge,
   } = customFields;
 
-  const content = uuid ? null : useContent({
+  // title and description can be overwritten by globalContent
+  const {
+    title,
+    description,
+  } = customFields;
+
+  const { globalContent = {} } = useFusionContext();
+
+  const customContent = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
       : null,
   });
 
-  if (!uuid && !content) {
+  const content = inheritGlobalContent ? globalContent : customContent;
+  const videoId = content?._id;
+
+  if (!videoId || !content) {
     return null;
   }
-
   return (
     <div className="container-fluid video-promo">
       <div className="row">
         <div className="col-sm-xl-12">
-          {live && <LiveLabel>LIVE VIDEO</LiveLabel>}
+          {alertBadge
+            && (
+            <div className="padding-sm-bottom">
+              <AlertBadge>{alertBadge}</AlertBadge>
+            </div>
+            )}
           {title
             && (
             <TitleText
@@ -62,11 +80,13 @@ const VideoPromo = ({ customFields }) => {
             </TitleText>
             )}
           <Video
-            uuid={uuid || content._id}
+            uuid={videoId}
             autoplay={autoplay}
-            aspectRatio={ratio}
+            // RATIO is a constant declared at top of file
+            aspectRatio={RATIO}
             org={videoOrg}
             env={videoEnv}
+            playthrough={playthrough}
           />
           {description
             && (
@@ -88,47 +108,38 @@ VideoPromo.propTypes = {
     itemContentConfig: PropTypes.contentConfig('ans-item').tag(
       {
         label: 'Video Content',
-        group: 'Configure Video',
+        group: 'Configure Content',
       },
     ),
-    uuid: PropTypes.string.tag({
-      label: 'Video UUID',
-      group: 'Configure Video',
-      description: 'If the UUID is specified, this will be used instead of the video content.',
+    inheritGlobalContent: PropTypes.bool.tag({
+      label: 'Inherit global content',
+      group: 'Configure Content',
+      defaultValue: true,
     }),
     autoplay: PropTypes.bool.tag(
       {
         label: 'Autoplay',
         defaultValue: false,
-        group: 'Configure Video',
+        group: 'Video settings',
       },
     ),
-    ratio: PropTypes.oneOf([
-      0.5625, 0.75,
-    ]).tag({
-      label: 'Ratio',
-      labels: {
-        0.5625: '16:9',
-        0.75: '4:3',
-      },
-      defaultValue: 0.5625,
-      group: 'Configure Video',
-    }),
     title: PropTypes.string.tag({
       label: 'Title',
-      group: 'Content',
+      group: 'Display settings',
     }),
     description: PropTypes.string.tag({
       label: 'Description',
-      group: 'Content',
+      group: 'Display settings',
     }),
-    live: PropTypes.bool.tag(
-      {
-        label: 'Live',
-        defaultValue: false,
-        group: 'Content',
-      },
-    ),
+    alertBadge: PropTypes.string.tag({
+      label: 'Alert Badge',
+      group: 'Display settings',
+    }),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
+      defaultValue: false,
+      group: 'Video settings',
+    }),
   }),
 };
 

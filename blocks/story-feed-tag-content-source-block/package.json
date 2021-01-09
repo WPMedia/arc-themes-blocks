@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-tag-content-source-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Content source block for story feed queries by tag",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta"
+    "@wpmedia/resizer-image-block": "canary"
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_tag-v4": "^1.0.6-beta.0"

@@ -2,11 +2,13 @@
    "header-nav-chain-block.sections-button":{
       "en":"Sections",
       "sv":"Meny",
-      "no":"Deler"
+      "no":"Meny",
+      "fr":"Sections"
    },
    "header-nav-chain-block.search-text":{
       "en":"Search",
       "sv":"Sök",
-      "no":"Søk"
+      "no":"Søk",
+      "fr":"Rechercher"
    }
 }

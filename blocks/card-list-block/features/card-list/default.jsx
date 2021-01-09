@@ -39,11 +39,11 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
+HeadlineText.displayName = 'HeadlineText';
+
 const Title = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
-
-const HANDLE_COMPRESSED_IMAGE_PARAMS = false;
 
 @Consumer
 class CardList extends React.Component {
@@ -124,7 +124,7 @@ class CardList extends React.Component {
                 title
                   ? (
                     <Title
-                      primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                       className="card-list-title"
                     >
                       {title}
@@ -132,7 +132,7 @@ class CardList extends React.Component {
                   )
                   : ''
               }
-              <div
+              <article
                 className="list-item-simple"
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
@@ -145,7 +145,6 @@ class CardList extends React.Component {
                   {
                    extractImage(contentElements[0].promo_items) ? (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                        url={extractImage(contentElements[0].promo_items)}
                        alt={contentElements[0].headlines.basic}
                        smallWidth={377}
@@ -160,7 +159,6 @@ class CardList extends React.Component {
                      />
                    ) : (
                      <Image
-                       compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                        smallWidth={377}
                        smallHeight={283}
                        mediumWidth={377}
@@ -172,19 +170,23 @@ class CardList extends React.Component {
                        breakpoints={getProperties(arcSite)?.breakpoints}
                        resizedImageOptions={placeholderResizedImageOptions}
                        resizerURL={getProperties(arcSite)?.resizerURL}
+
                      />
                    )
                   }
                 </a>
-                <Title
-                  primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
-                  className="card-list-overline"
-                >
-                  {contentElements[0].websites[this.arcSite].website_section.name}
-                </Title>
-                <div>
+                { contentElements[0].websites[arcSite].website_section
+                  && (
                   <Title
-                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                    className="card-list-overline"
+                  >
+                    {contentElements[0].websites[arcSite].website_section.name}
+                  </Title>
+                  )}
+                <div>
+                  <HeadlineText
+                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                     className="card-list-headline"
                   >
                     <a
@@ -194,7 +196,7 @@ class CardList extends React.Component {
                     >
                       {contentElements[0].headlines.basic}
                     </a>
-                  </Title>
+                  </HeadlineText>
                   <div className="author-date">
                     <Byline story={contentElements[0]} stylesFor="list" />
                     {/* separator will only be shown if there is at least one author */}
@@ -205,7 +207,7 @@ class CardList extends React.Component {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
               {
                 contentElements.slice(1).map((element) => {
                   const {
@@ -215,7 +217,7 @@ class CardList extends React.Component {
                   return (
                     <React.Fragment key={`result-card-${url}`}>
                       <hr />
-                      <div
+                      <article
                         className="card-list-item"
                         key={`result-card-${url}`}
                         type="1"
@@ -225,7 +227,7 @@ class CardList extends React.Component {
                           className="headline-list-anchor"
                         >
                           <HeadlineText
-                            primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                             className="headline-text"
                           >
                             {headlineText}
@@ -239,7 +241,6 @@ class CardList extends React.Component {
                             extractImage(element.promo_items)
                               ? (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                                   url={extractImage(element.promo_items)}
                                   alt={headlineText}
                                   // small, matches numbered list, is 3:2 aspect ratio
@@ -256,7 +257,6 @@ class CardList extends React.Component {
                               )
                               : (
                                 <Image
-                                  compressedThumborParams={HANDLE_COMPRESSED_IMAGE_PARAMS}
                                   smallWidth={105}
                                   smallHeight={70}
                                   mediumWidth={105}
@@ -272,7 +272,7 @@ class CardList extends React.Component {
                               )
                           }
                         </a>
-                      </div>
+                      </article>
                     </React.Fragment>
                   );
                 })

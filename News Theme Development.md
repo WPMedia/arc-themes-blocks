@@ -2,21 +2,13 @@
 
 ## Setup
 
-All of the themes-related packages reside in GitHub as GitHub Packages. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation in fusion cli](https://github.com/WPMedia/fusion-cli#start---no-admin) for more info.
+All of the themes-related packages reside in the GitHub Package Registry. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for a step-by-step setup.
 
 To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
 
 ```
-@arc-test-org:registry=https://registry.npmjs.org/
 @wpmedia:registry=https://npm.pkg.github.com/
-...
-@<org name>:registry=<url to registry>
-...
-//registry.npmjs.org/:_authToken=<npm auth token>
 //npm.pkg.github.com/:_authToken=<your personal access token>
-...
-//<url to registry>/:authToken=<auth token>
-...
 ```
 
 Note that for GitHub, you will have to provide your own personal access token for it to be able to properly find and install your GitHub packages. Please follow the instructions on these documentation to generate your GitHub token: 
@@ -25,10 +17,6 @@ Note that for GitHub, you will have to provide your own personal access token fo
 - [Creating Auth Tokens (HTTPS)](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) 
 - [Enable SSO for Auth Tokens](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) 
 - [Authorizing SSH Keys](https://help.github.com/en/github/authenticating-to-github/authorizing-an-ssh-key-for-use-with-saml-single-sign-on)
-
-The Token you create on `Creating Auth Tokens (HTTPS)` will be the token you'll have to put in your `.npmrc` file. Please create a read-only token as well - when deploying, please switch this token to this one.
-
-Finally, log into npm with `npm login --registry=https://npm.pkg.github.com`. The username will be your GitHub username, email will be your public email address, and the password will be the token that you've created above. This will be a one-time action as long as you don't log out. Please look at [this documentation](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) for further details.
 
 ## Introduction
 
@@ -40,7 +28,7 @@ This document will go over the overall architecture of themes, a more detailed l
 
 The image below shows the four repositories that go into building out the News theme. We will describe each repository and the role it plays.
 
-![alt diagram](theme_architecture.png "diagram")
+![themes blocks are related themes styles and feature pack](theme_architecture.png "diagram")
 
 ### news-theme-css
 
@@ -54,13 +42,11 @@ The news-theme-css repo is located at: <https://github.com/WPMedia/news-theme-cs
 
 The grid layout part of the framework is a simple row/column grid. It uses CSS Grid, but defaults to using flexbox when grid is not supported in the browser. While the grid framework can be nested, its recommended to use the grid framework for overall page layouts and then use flexbox (or other CSS) for the layouts inside columns. If, however, you feel a nested grid is warranted, you'll probably want to use `.container-fluid` over `.container` for your nested grid wrapper element as it has its margins set to auto.
 
-The majority of the framework is documented using KSS (<https://github.com/kss-node/kss-node>). This allows for a style guide to be generated and to show markup examples in the compiled CSS (which may be hard to infer from the Sass alone---especially for the grid column classes). This is stored in the /styleguide folder of the project. Opening up /news-theme-css/styleguide/index.html in a browser will show you the main page of the documentation.
+The majority of the framework is documented using KSS (<https://github.com/kss-node/kss-node>). This allows for a style guide to be generated and to show markup examples in the compiled CSS (which may be hard to infer from the Sass alone, especially for the grid column classes). This is stored in the /styleguide folder of the project. Opening up /news-theme-css/styleguide/index.html in a browser will show you the main page of the documentation.
 
 While the style guide will provide a good overview, it's advisable to review the Sass files as well to have a proper understanding of its usage. For example, if you look in scss/\_variables.scss you will see variables such as `$primary-font-family` and `$secondary-font-family`. These variables use the Sass notation `!default` at the end so that they can be over-ridden in the themes file, `blocks.json`, located in the fusion-news-theme repository. (We will talk about `blocks.json` more in the fusion-news-theme section.). Also, if you look in scss/\_breakpoints.scss you will see Sass maps for breakpoints and spacing. These maps are leveraged with the Sass function, `map-get`, in component Sass code to set spacing and media queries.
 
 news-theme-css is provided to the other parts of the system as an NPM package. For more information on the build and publishing process for this repository, please see the readme.md for the project: <https://github.com/WPMedia/news-theme-css/blob/stable/readme.md>
-
-**Note:** When publishing, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
 
 ### engine-theme-sdk
 
@@ -76,7 +62,51 @@ As indicated from the diagram above, fusion-news-theme-blocks is dependent on th
 
 The development process is similar engine-theme-sdk, except when it comes time to publish, you need to follow the Lerna publish procedure. For more information, see the repo's read me: <https://github.com/WPMedia/fusion-news-theme-blocks/blob/stable/README.md>
 
-Note: When publishing, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
+Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (fusion-news-theme-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
+
+Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.  
+
+As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
+```sh
+cd blocks/header-nav-chain-block
+check .npmrc file here exists
+npm install
+```
+Then restart fusion from within client dir. NOTE: Running with `-l` will link all blocks. If you want to only link some blocks, please use `npx fusion start -f -l @wpmedia/card-list-block,@wpmedia/top-table-list-block`, for example, to link card list block and the top table list block. You can see their package names' in the block's package.json.
+
+(fusion-news-theme):
+```sh
+npx fusion start -l
+```
+
+To check if blocks are being properly linked, run:
+```sh
+ cat .fusion/docker-compose.yml
+ ```
+  If blocks linking was successful, you'll see the listing for volumes with all the block names linked. 
+
+  NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
+
+
+### Internationalization
+
+Phrase translations may be added via an intl.json file for each block to contain the phrases that block needs. For example  this is the intl.json file for results list block:
+```sh
+{
+   "results-list-block.see-more-button":{
+      "en":"See More",
+      "sv":"Fler artiklar",
+      "no":"Se mer"
+   }
+}
+```
+Common phrases needed across multiple blocks are declared in global-phrases-block.  In order for the intl.json files to be included in a build, it must be included in the lists for a block in that blocks package.json file:
+```sh
+  "files": [
+    "features",
+    "intl.json"
+  ],
+```
 
 ### Development Process
 
@@ -99,25 +129,26 @@ git checkout -b PEN-[jira ticket num]-[brief description of feature]
 
 #### How To Publish
 
-Before publishing, make sure a Pull Request has been made and merged from the `canary` branch against the `beta` branch. This PR should only include features that belong to the current release, so make sure to merge as soon as the features for the release have been completed to avoid including further features from `canary` belonging to a later release.
-
----
-
-NOTE: Any time before publishing, make sure you've removed nested node modules and installed updated top-level dependencies. This will ensure there's no halfway publish if the tags for publishing are pushed but the packages are not actually published. This is a known bug in lerna.
-
-`rm -rf node_modules/`
-
-`npm i`
-
-`npx lerna clean`
-
-If this does happen, you can use `from-package` syntax in lerna [docs](https://github.com/lerna/lerna/tree/master/commands/publish#bump-from-package). Everything will be alright.
-
-To double check yourself, please use `npm view [package name]` or `npm view [package name]@[desired tag]` to view your work.
+Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta`, `stable`, `rc`, or other desired tags. The tags and publish GitHub Actions can be tracked by looking at the [Actions tab on the GitHub UI](https://github.com/WPMedia/fusion-news-theme-blocks/actions) and within the .github folder within the repository.
 
 WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 
+NOTE: Make sure to rebase onto beta branch if you hotfix stable, for instance.
 ---
+
+## Cut The `canary` development process for RC release 
+
+1. Ensure all tickets are in current canary branch ready. 
+2. `git push origin canary:rc`
+3. This will publish that version with the rc tag for testing. 
+4. Ensure the engine theme sdk and news-theme-css have also been published to the `rc` tag. (For the news-theme-css, that process is done locally. Engine theme sdk can be done by merging into rc branch.)
+5. Go to admin in Okta
+6. Go to themes internal site. Find the dev-sandbox environment. Then, in the deployer, deploy a feature pack that has the rc versions of the aforementioned repos. This can be done in the `environment/` folder using BLOCK_DIST_TAG (note: not the `.env` file).
+7. Make sure that version is designated as the version release. 
+8. After it's approved, merge `rc` tag into `beta` branch. 
+9. Then, make sure that `beta` branch is rebased onto canary `branch`.
+
+## For stable releases, it remains manual process
 
 1. Pull the latest `beta` branch:
 
@@ -200,7 +231,7 @@ For background on lerna conventional graduate and diffing, see [lerna versioning
 
 The fusion-news-theme repo is located at: <https://github.com/WPMedia/Fusion-News-Theme>.
 
-It is like a typical feature pack in regards that it has the same directory structure; you can add assets in the resource directory, etc. However as mentioned above, currently there are no components residing in this repo. The way this feature pack knows what components to use is through a new special file in the root of the repo called `blocks.json`. blocks.json is a special file that Fusion (Hydrate versions) knows to look for and run specific internal build commands to bring everything together. blocks.json is the glue that brings it altogther.
+It is like a typical feature pack in regards that it has the same directory structure; you can add assets in the resource directory, etc. However as mentioned above, currently there are no components residing in this repo. The way this feature pack knows what components to use is through a new special file in the root of the repo called `blocks.json`. blocks.json is a special file that Fusion (Hydrate versions) knows to look for and run specific internal build commands to bring everything together. blocks.json is the glue that brings it all together.
 
 Below describes the various properties that are in blocks.json and their purpose:
 
@@ -280,10 +311,6 @@ EventEmitter.subscribe("galleryImagePrevious", event =>
   myGalleryImagePrevious(event)
 );
 ```
-
-## Local Development Process
-
-- Please see [fusion cli documentation](https://github.com/WPMedia/fusion-cli#start---no-admin) for how to run locally-linked repositories for testing integration between, for example Engine Theme SDK and blocks. 
 
 ### Secure Image Resizing Quickstart
 

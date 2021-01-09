@@ -1,53 +1,125 @@
 .top-table-list-container {
-  .small-promo {
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      .row.sm-promo-padding-btm {
-        padding-top: 0;
+
+  .top-table-list-section-small {
+
+    & > .small-promo {
+
+      img {
+        width: 100%;
       }
-    }
-    display: block;
 
-    .col-md-xl-4 {
-      text-align: right;
-    }
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      display: inline-block;
-      width: calc((100% - #{map-get($spacers, 'md')}) / 2);
-    }
+      .promo-container {
+        display: flex;
+        flex-direction: row;
 
-    .row {
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
-        grid-column-gap: 0;
+        & > div {
+          &:nth-child(odd) {
+            padding-right: 0.75rem;
+          }
+      
+          &:nth-child(even) {
+            padding-left: 0.75rem;
+          }
+        }
 
-        img {
-          max-width: 90%;
+        &.horizontal.reverse {
+          flex-direction: row-reverse;
+
+          & > div {
+            &:nth-child(odd) {
+              padding-left: 0.75rem;
+              padding-right: 0;
+            }
+        
+            &:nth-child(even) {
+              padding-left: 0;
+              padding-right: 0.75rem;
+            }
+          }
+        }
+
+        &.vertical {
+          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+            flex-direction: column;
+
+            & > div {
+              padding: 0;
+
+              &:first-child {
+                padding-bottom: 0.75rem;
+              }
+            }
+
+            &.reverse {
+              flex-direction: column-reverse;
+
+              & > div {
+                padding: 0;
+  
+                &:last-child {
+                  padding-bottom: 0.75rem;
+                }
+              }
+            }
+          }
+        }
+
+        .promo-headline {
+          flex: 2;
+
+          &.headline-wrap-vertical {
+            height: 4.6em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            -moz-box-oriented: vertical;
+            /* opera */
+            text-overflow: -o-ellipsis-lastline;
+          }
+
+          &.headline-wrap-horizontal {
+            height: 50px;
+            overflow: hidden;
+          }
+        }
+
+        .promo-image {
+          flex: 1;
+
+          a {
+            display: flex;
+            flex-direction: column;
+          }
+
+          &.flex-col {
+            justify-content: center;
+          }
+        }
+
+        &.sm-promo-padding-btm {
+          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+            padding-top: 0;
+          }
+        }
+      }
+
+      &.wrap-bottom {
+        margin-bottom: 0 !important;
+
+        @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+          margin-bottom: inherit;
         }
       }
     }
 
-    &.wrap-bottom {
-      margin-bottom: 0 !important;
-
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-bottom: inherit;
-      }
-    }
-  }
-
-  .small-promo-padding {
-    padding-right: 0;
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-right: map-get($spacers, 'md');
+    hr {
+      width: 100%;
     }
   }
 
   &.wrap-bottom {
     margin-bottom: inherit !important;
-  }
-
-  .small-promo-one {
-    display: block;
-    width: 100%;
   }
 
   .image-wrapper {

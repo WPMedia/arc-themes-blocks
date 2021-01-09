@@ -1,7 +1,9 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  resizerURL: 'https://resizer.me',
+}))));
 
 describe('article-body chain', () => {
   describe('when it is initialized', () => {
@@ -1238,6 +1240,10 @@ describe('article-body chain', () => {
 
   describe('Render image correctly', () => {
     it('should render image with figcaption and author', () => {
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        resizerURL: 'https://fake.cdn.com/resizer',
+      }))));
+
       jest.mock('fusion:context', () => ({
         useAppContext: jest.fn(() => ({
           globalContent: {
@@ -1335,6 +1341,7 @@ describe('article-body chain', () => {
                 url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
                 version: '0.9.0',
                 width: 5616,
+                resized_params: { '1440x0': '' },
               },
             ],
           },
@@ -1460,6 +1467,92 @@ describe('article-body chain', () => {
       expect(wrapper.find('figure').find('img').length).toEqual(0);
       expect(wrapper.find('figure').find('figcaption').length).toEqual(0);
       expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(0);
+    });
+    it('should render divider in content', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'This story has a divider below this paragraph',
+              },
+              {
+                _id: 'OLHVB7NXJRGXJBPRHDOPZCOQBQ',
+                type: 'divider',
+                additional_properties: {
+                  _id: 'K4MQV4RPHVC5DPAZBWLD7C2GGY',
+                  comments: [],
+                },
+              },
+              {
+                _id: 'VOA2YAFCEFBFHK77GYM266ID3Q',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi elit, varius quis dui nec, bibendum accumsan nisl. Cras et efficitur ex. Maecenas tempor pellentesque sem, ac interdum felis mollis ac. Sed at tristique felis. Morbi a dictum sapien, quis lacinia nulla. Vestibulum sagittis mauris vitae faucibus sodales. Nunc porttitor sollicitudin leo, ut varius metus condimentum sit amet. Nam ipsum ante, vestibulum vitae rutrum at, viverra sed neque. In non imperdiet risus. Duis maximus lectus a sollicitudin pulvinar. Curabitur non fermentum neque. In sed lacus in leo venenatis luctus. Cras mollis et mi at pretium.',
+              },
+              {
+                _id: '73UIBILEIBHQLFRRJKT3YBT5VU',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Suspendisse sollicitudin nulla nisi, sed accumsan leo interdum a. Mauris sit amet fermentum dolor, non sollicitudin tortor. Cras enim ante, consectetur sed sapien ac, blandit dictum ex. Suspendisse lacinia ligula at mauris fermentum viverra. Duis facilisis sit amet risus quis blandit. Suspendisse eget nulla quam. Etiam facilisis purus ac interdum convallis. Nunc vel ultrices ante, eget lacinia est. Etiam sollicitudin, mi quis gravida tempor, lorem sem ultricies massa, nec blandit purus nunc vitae metus. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus imperdiet ullamcorper facilisis.',
+              },
+              {
+                _id: 'TVRCSMOSTVAYHLP56AADERG34Y',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'There is another divider below this paragraph',
+              },
+              {
+                _id: 'TTENPJSMUZFSBIMAOV6WBAGYGE',
+                type: 'divider',
+                additional_properties: {
+                  _id: 'RT3AIWENWZAG5NKSKHVQFEB5RE',
+                  comments: [],
+                },
+              },
+              {
+                _id: 'VM5YVJZ2BZBNPISEVH6CLOKEBE',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Vivamus scelerisque vestibulum pharetra. Nullam erat elit, suscipit ac eros nec, faucibus dapibus diam. Curabitur venenatis orci sit amet massa suscipit, non cursus diam consequat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sollicitudin, justo ac tristique blandit, felis dolor lobortis turpis, a facilisis diam lectus id nisi. Ut quis accumsan felis. Praesent nec condimentum eros, sed faucibus tortor. Nullam at commodo purus.',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+      expect(wrapper.find('.divider').length).toEqual(2);
+      expect(wrapper.find('.divider').find('hr').length).toEqual(2);
     });
   });
 });

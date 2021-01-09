@@ -7,9 +7,8 @@ _Block containing a small manual promo component. Please provide a 1-2 sentence 
 ## Props
 | **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
-| **required prop** | yes | | |
-| **optional prop** | no | | |
-| **contentConfig example** | | | Please specify which content sources are compatible |
+| **customFields.imagePosition** | no | String | Determine Image Position within the card. Default to Right Position |
+
 
 ## ANS Schema
 Outline any schema information requirements necessary to know for ths block

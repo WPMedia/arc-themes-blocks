@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/site-hierarchy-content-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -30,8 +30,8 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

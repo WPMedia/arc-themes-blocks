@@ -1,19 +1,19 @@
 {
   "name": "fusion-news-theme-blocks",
-    "publishConfig": {
+  "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:Mentor-Medier/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
     "directory": "blocks/article-body-block"
   },
   "private": true,
   "scripts": {
     "lint": "eslint --ext js --ext jsx blocks components --no-error-on-unmatched-pattern",
     "lint:styles": "stylelint '**/*.(scss|jsx)' --formatter verbose",
-    "lint:styles:fix": "stylelint '**/*.scss' -- --fix",
+    "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook",
     "test": "jest",
@@ -39,7 +39,8 @@
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",
@@ -59,13 +60,15 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
-    "lerna": "^3.22.1",
+    "lerna": "^3.18.3",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-oembed-container": "^1.0.0",
     "sass-loader": "^8.0.2",
     "storybook-readme": "^5.0.8",
     "style-loader": "^1.2.1",
+    "styled-components": "^4.4.1",
     "stylelint": "^13.3.3",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-sass-guidelines": "^7.0.0",
@@ -73,8 +76,8 @@
     "stylelint-no-unsupported-browser-features": "^4.0.0"
   },
   "dependencies": {
-    "@wpmedia/a11y-testing-block": "file:blocks/a11y-testing-block",
     "@wpmedia/ad-taboola-block": "file:blocks/ad-taboola-block",
+    "@wpmedia/ads-block": "file:blocks/ads-block",
     "@wpmedia/alert-bar-block": "file:blocks/alert-bar-block",
     "@wpmedia/alert-bar-content-source-block": "file:blocks/alert-bar-content-source-block",
     "@wpmedia/article-body-block": "file:blocks/article-body-block",
@@ -88,7 +91,6 @@
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
     "@wpmedia/double-chain-block": "file:blocks/double-chain-block",
-    "@wpmedia/engine-theme-sdk": "beta",
     "@wpmedia/event-tester-block": "file:blocks/event-tester-block",
     "@wpmedia/extra-large-manual-promo-block": "file:blocks/extra-large-manual-promo-block",
     "@wpmedia/extra-large-promo-block": "file:blocks/extra-large-promo-block",
@@ -143,13 +145,9 @@
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
-  "jest": {
-    "transformIgnorePatterns": [
-      "//node_modules/(?!@wpmedia/.*-block).*/",
-      "//node_modules/(?!(@wpmedia)).*/"
-    ]
-  },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not op_mini all",
+    "not IE 11"
   ]
 }

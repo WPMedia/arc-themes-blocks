@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/simple-list-block",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -22,8 +22,8 @@
     "directory": "blocks/simple-list-block"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "beta",
-    "@wpmedia/news-theme-css": "beta",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
   "scripts": {

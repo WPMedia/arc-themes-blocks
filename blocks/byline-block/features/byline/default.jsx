@@ -16,13 +16,13 @@ const BylineSection = styled.section`
     display: inline;
     font-size: .875rem;
     line-height: 1rem;
-`}
+  `}
 `;
 
 const By = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #3B3B3B;
-    margin-right: .25rem;
+    margin-right: 0;
   `}
 `;
 
@@ -84,7 +84,7 @@ class ArticleByline extends Component {
           break;
         }
         case 2: {
-          bylineString = `${authors[0]} ${this.phrases.t('byline-block.and-text')} ${authors[1]}`;
+          bylineString += `${authors[0]} ${this.phrases.t('byline-block.and-text')} ${authors[1]}`;
           break;
         }
         default: {

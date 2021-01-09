@@ -1,5 +1,5 @@
 {
-  "name": "@wpmedia/default-output-block",
+  "name": "@mentor-medier/default-output-block",
   "version": "5.9.5",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
@@ -7,7 +7,7 @@
     "Jack Howard <jack.howard@washpost.com>",
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
     "directory": "blocks/default-output-block"
   },
   "scripts": {

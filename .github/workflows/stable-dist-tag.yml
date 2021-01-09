@@ -21,6 +21,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12'
+          scope: '@wpmedia'
           registry-url: 'https://npm.pkg.github.com'
       - name: Install lerna
         run: npm i -g lerna

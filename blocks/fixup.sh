@@ -2,6 +2,6 @@
 
 for d in */ ; do
     echo "$d/package.json"
-    gsed -i  "s/wpmedia/mentor-medier/ig" "$d/package.json"
+    cat  "$d/package.json"   | jq '( .repository.url, .name, .homepage) |= sub("wpmedia";"mentor-medier";"gi")'  | sponge  "$d/package.json"   
 done
 

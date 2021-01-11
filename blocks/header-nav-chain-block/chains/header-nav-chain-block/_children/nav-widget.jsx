@@ -4,13 +4,13 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SearchBox from './search-box';
-
-const ICON_SIZE = 16;
+import { WIDGET_CONFIG } from '../nav-helper';
 
 const NavWidget = ({
   type,
   position = 0,
   children = [],
+  placement = 'nav-bar',
   customSearchAction,
   menuButtonClickAction,
 }) => {
@@ -22,10 +22,11 @@ const NavWidget = ({
   const predefinedWidget = (
     (type === 'search' && (
       <SearchBox
-        iconSize={ICON_SIZE}
+        iconSize={WIDGET_CONFIG[placement]?.iconSize}
         navBarColor={navColor}
         placeholderText={phrases.t('header-nav-chain-block.search-text')}
         customSearchAction={customSearchAction}
+        alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
       />
     )) || (type === 'menu' && (
       <button
@@ -34,7 +35,11 @@ const NavWidget = ({
         className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}
       >
         <span>{phrases.t('header-nav-chain-block.sections-button')}</span>
-        <HamburgerMenuIcon fill={null} height={ICON_SIZE} width={ICON_SIZE} />
+        <HamburgerMenuIcon
+          fill={null}
+          height={WIDGET_CONFIG[placement]?.iconSize}
+          width={WIDGET_CONFIG[placement]?.iconSize}
+        />
       </button>
     ))
   );

@@ -78,6 +78,9 @@ body.nav-open {
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
+    span {
+      display: none;
+    }
   }
 
   > span,
@@ -156,8 +159,7 @@ body.nav-open {
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search,
-    .nav-sections-btn span {
+    .nav-search {
       display: none;
     }
   }
@@ -191,9 +193,9 @@ body.nav-open {
         &--desktop {
           align-items: center;
           
-          & > * {
+          & > .nav-widget {
             margin-right: calculateRem(16px);
-    
+            
             &:last-child {
               margin-right: 0;
             }
@@ -201,14 +203,20 @@ body.nav-open {
         }
 
         &--mobile {
-          @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            display: none;
-          }
+          display: none;
         }
 
         &--desktop {
-          @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
             display: none;
+          }
+
+          &--mobile {
+            display: inherit;
           }
         }
       }
@@ -312,12 +320,6 @@ body.nav-open {
     width: 0;
   }
 
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     .subsection-container {
       display: none;
@@ -331,6 +333,10 @@ body.nav-open {
     width: $section-width;
 
     .nav-search {
+      input {
+        flex: 1;
+      }
+
       &.open {
         input {
           height: calculateRem(48px);
@@ -341,15 +347,35 @@ body.nav-open {
         }
       }
     }
-  }
 
-  .nav-search {
-    border-bottom: $border-width solid $nav-search-border-color;
-    margin: 16px 20px 0;
-    padding-bottom: 16px;
+    .nav-menu {
+      & > .nav-components {
+        &--mobile,
+        &--desktop {          
+          & > .nav-widget {
+            margin-top: calculateRem(16px);
+            padding: 0 20px;
+          }
+        }
 
-    input {
-      flex: 1;
+        &--mobile {
+          display: none;
+        }
+
+        &--desktop {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
+            display: none;
+          }
+
+          &--mobile {
+            display: inherit;
+          }
+        }
+      }
     }
   }
 

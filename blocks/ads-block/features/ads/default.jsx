@@ -10,10 +10,18 @@ import ArcAdsInstance from './_children/ArcAdsInstance';
 import { getAdObject, setPageTargeting } from './ad-helper';
 import './ads.scss';
 
-/** === ArcAd Component === */
+function generateInstanceId() {
+  function getRandomNumber() {
+    // Number.MAX_SAFE_INTEGER doesn't exist in IE11.
+    return Math.floor(Math.random() * 9007199254740991).toString(16);
+  }
+
+  return [0, 0].map(getRandomNumber).join('-');
+}
+
 const ArcAd = (props) => {
   if (typeof window === 'undefined') return null;
-  const [instanceId] = useState(Math.floor(Math.random() * 10000));
+  const [instanceId] = useState(() => generateInstanceId());
   const propsWithContext = {
     ...useAppContext(),
     ...useFusionContext(),

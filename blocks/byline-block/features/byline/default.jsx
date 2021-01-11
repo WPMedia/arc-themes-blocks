@@ -22,7 +22,7 @@ const BylineSection = styled.section`
 const By = styled.span`
   ${({ stylesFor }) => stylesFor === 'list' && `
     color: #3B3B3B;
-    margin-right: 0;
+    margin-right: .25rem;
   `}
 `;
 

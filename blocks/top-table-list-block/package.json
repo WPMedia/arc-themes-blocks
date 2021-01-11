@@ -30,7 +30,6 @@
     "@wpmedia/placeholder-image-block": "canary",
     "@wpmedia/resizer-image-block": "canary",
     "@wpmedia/shared-styles": "canary",
-    "@wpmedia/video-player-block": "stable",
     "styled-components": "^4.4.0"
   },
   "scripts": {

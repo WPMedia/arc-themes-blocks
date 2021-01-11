@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
-import getThemeStyle from 'fusion:themes';
 import Navigation from './default';
 import SearchBox from './_children/search-box';
 
@@ -142,16 +141,6 @@ describe('the header navigation feature for the default output type', () => {
 
       wrapper.find('.nav-left > .nav-btn').simulate('click');
       expect(wrapper.find('#nav-sections').hasClass('closed')).toBe(true);
-    });
-  });
-
-  describe('primary color background color option', () => {
-    it('if has navBarBackground as primary color, use primary color as background color', () => {
-      getProperties.mockImplementation(() => ({ navColor: 'light', navBarBackground: 'primary-color' }));
-      getThemeStyle.mockImplementation(() => ({ 'primary-color': '#1B6FA6' }));
-
-      const wrapper = mount(<Navigation />);
-      expect(wrapper.find('StyledComponent').at(0).prop('navBarBackground')).toEqual('#1B6FA6');
     });
   });
 });

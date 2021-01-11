@@ -62,6 +62,7 @@ describe('get resized image data helper on the server-side', () => {
       undefined,
       undefined,
       undefined,
+      true,
     );
     const resizedParams = dataWithResizedImages
       .content_elements[0]
@@ -87,6 +88,7 @@ describe('get resized image data helper on the server-side', () => {
       undefined,
       undefined,
       undefined,
+      true,
     );
 
     const resizedParams = dataWithResizedImages
@@ -101,10 +103,10 @@ describe('get resized image data helper on the server-side', () => {
 
     // if the same resizer key is used this won't change
     expect(filterValues).toEqual([
-      'B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:format(jpg):quality(70)/',
-      'CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:format(jpg):quality(70)/',
-      'RwaE87wvO3wFs17iLXhecTl2hhQ=filters:format(jpg):quality(70)/',
-      '6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:format(jpg):quality(70)/']);
+      'B-33vJ0Ak54a9pMvGhgkzGk0meE=filters:cm=t/',
+      'CfybbXLZWF3gcwc2tD-FYzZlc8Y=filters:cm=t/',
+      'RwaE87wvO3wFs17iLXhecTl2hhQ=filters:cm=t/',
+      '6SNHSvz_6KHTam6lqe-ZgKzlzLs=filters:cm=t/']);
 
     // {
     // '420x315|mobile':
@@ -113,7 +115,7 @@ describe('get resized image data helper on the server-side', () => {
 
     // will return undefined if no window
     const allValidFilterValues = filterValues.every((imageFilterValue) => typeof imageFilterValue !== 'undefined' && imageFilterValue.includes(':cm=t/'));
-    expect(allValidFilterValues).toEqual(false);
+    expect(allValidFilterValues).toEqual(true);
 
     expect(paramKeys).toEqual([
       '158x105',
@@ -123,7 +125,7 @@ describe('get resized image data helper on the server-side', () => {
     ]);
   });
 
-  describe('when shouldCompressImageParams siteProperty is true', () => {
+  describe('when compressed params is true', () => {
     it('returns data passed in from search-api', () => {
       getProperties.mockImplementation(() => (
         {
@@ -131,7 +133,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -141,6 +142,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -178,7 +180,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const { credits: { by } } = getResizedImageData(
@@ -188,6 +189,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       // doesn't have content_elements, just an array with elements that have promo_items
       expect(by[0].resized_params).toEqual({
@@ -205,7 +207,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const { credits: { by } } = getResizedImageData(
@@ -215,6 +216,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       // doesn't have content_elements, just an array with elements that have promo_items
       expect(by[0].resized_params).toEqual({});
@@ -227,7 +229,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -237,6 +238,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -265,7 +267,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -275,6 +276,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -305,7 +307,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -315,6 +316,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       const resizedParams = dataWithResizedImages.promo_items.basic.resized_params;
@@ -340,7 +342,6 @@ describe('get resized image data helper on the server-side', () => {
         aspectRatios: ASPECT_RATIOS,
         imageWidths: IMAGE_WIDTHS,
         resizerURL: 'https://fake.cdn.com/resizer',
-        shouldCompressImageParams: true,
       }));
 
       const resizedObject = getResizedImageData(
@@ -350,6 +351,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       expect(resizedObject.content_elements[0].content_elements[0].resized_params)
@@ -372,7 +374,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -382,6 +383,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       expect(dataWithResizedImages.promo_items.lead_art.resized_params).toEqual({
         '158x105': 'I9PStk1gjBSf260jZTioN4u_RPo=filters:cm=t/',
@@ -398,7 +400,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataWithResizedImages = getResizedImageData(
@@ -408,6 +409,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
 
       expect(dataWithResizedImages[0].promo_items.basic.resized_params).toEqual({
@@ -425,7 +427,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
       const sampleImage = 'image.png';
       const dataWithResizedImages = getResizedImageData(
@@ -435,6 +436,7 @@ describe('get resized image data helper on the server-side', () => {
         true,
         undefined,
         undefined,
+        true,
       );
       // uses fit in logic
       // only png allowed here
@@ -456,7 +458,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
       const dataWithResizedImages = getResizedImageData('', null, true, true);
       // uses fit in logic
@@ -470,7 +471,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const data = getResizedImageData(
@@ -480,6 +480,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       expect(data).toEqual(mockStoryFeedDataEmptyPromo);
     });
@@ -491,7 +492,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const leadArtData = getResizedImageData(
@@ -501,6 +501,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       const resizedParams = leadArtData.promo_items
         .lead_art
@@ -517,7 +518,6 @@ describe('get resized image data helper on the server-side', () => {
           aspectRatios: ASPECT_RATIOS,
           imageWidths: IMAGE_WIDTHS,
           resizerURL: 'https://fake.cdn.com/resizer',
-          shouldCompressImageParams: true,
         }));
 
       const dataSearch = getResizedImageData(
@@ -527,12 +527,13 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       expect(typeof dataSearch[0].promo_items.basic.resized_params).toEqual('undefined');
       expect(dataSearch).toEqual(mockSearchApiDataEmptyPromo);
     });
   });
-  describe('when shouldCompressImageParams siteProperty is false (unset)', () => {
+  describe('when compressed params is false', () => {
     it('returns data passed in from search-api', () => {
       getProperties.mockImplementation(() => (
         {
@@ -549,6 +550,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -595,6 +597,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       // doesn't have content_elements, just an array with elements that have promo_items
       expect(by[0].resized_params).toEqual({
@@ -621,6 +624,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       // doesn't have content_elements, just an array with elements that have promo_items
       expect(by[0].resized_params).toEqual({});
@@ -642,6 +646,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -679,6 +684,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       // doesn't have content_elements, just an array with elements that have promo_items
@@ -718,6 +724,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       const resizedParams = dataWithResizedImages.promo_items.basic.resized_params;
@@ -752,6 +759,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       expect(resizedObject.content_elements[0].content_elements[0].resized_params)
@@ -783,6 +791,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       expect(dataWithResizedImages.promo_items.lead_art.resized_params).toEqual({
         '158x105': 'I9PStk1gjBSf260jZTioN4u_RPo=filters:format(jpg):quality(70)/',
@@ -808,6 +817,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
 
       expect(dataWithResizedImages[0].promo_items.basic.resized_params).toEqual({
@@ -834,6 +844,7 @@ describe('get resized image data helper on the server-side', () => {
         true,
         undefined,
         undefined,
+        false,
       );
       // uses fit in logic
       // only png allowed here
@@ -882,6 +893,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       expect(data).toEqual(mockStoryFeedDataEmptyPromo);
     });
@@ -902,6 +914,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       const resizedParams = leadArtData.promo_items
         .lead_art
@@ -927,6 +940,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        false,
       );
       expect(typeof dataSearch[0].promo_items.basic.resized_params).toEqual('undefined');
       expect(dataSearch).toEqual(mockSearchApiDataEmptyPromo);
@@ -950,6 +964,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       const resizedParams = imageData.promo_items.basic.resized_params;
 
@@ -974,6 +989,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       const resizedParams = imageData.promo_items.lead_art.resized_params;
 
@@ -998,6 +1014,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       const resizedParams = imageData.promo_items.basic.resized_params;
 
@@ -1022,6 +1039,7 @@ describe('get resized image data helper on the server-side', () => {
         undefined,
         undefined,
         undefined,
+        true,
       );
       const resizedParams = imageData.promo_items.lead_art.promo_items.basic.resized_params;
 

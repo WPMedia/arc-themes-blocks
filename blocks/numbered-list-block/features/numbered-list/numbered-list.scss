@@ -38,10 +38,9 @@
     @include link-color-active-hover($ui-primary-font-color);
     color: $ui-primary-font-color;
     display: flex;
-    padding-right: calculateRem(16px);
+    margin-right: calculateRem(16px);
     text-decoration: none;
-    flex: 0 0 75%;
-    
+
     .headline-text {
       font-size: calculateRem(16px);
       font-weight: normal;

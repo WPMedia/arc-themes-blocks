@@ -285,9 +285,4 @@
 
   }
 
-  .divider {
-    @include container-vertial-spacing;
-    @include container-hr-separator;
-  }
-
 }

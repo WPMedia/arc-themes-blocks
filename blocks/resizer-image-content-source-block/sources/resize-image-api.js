@@ -11,6 +11,7 @@ const fetch = (query) => {
   const {
     raw_image_url: rawImageUrl,
     respect_aspect_ratio: respectAspectRatio = false,
+    isCompressedImageParams = false,
   } = query;
 
   // last param designates only url -- not data ans object
@@ -20,6 +21,8 @@ const fetch = (query) => {
     true,
     respectAspectRatio,
     query['arc-site'],
+    undefined,
+    isCompressedImageParams,
   );
 };
 

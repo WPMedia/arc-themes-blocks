@@ -27,7 +27,6 @@ const AlertBadge = styled.span`
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;
   line-height: 1.33;
-  font-weight: bold;
 `;
 
 const VideoPromo = ({ customFields }) => {

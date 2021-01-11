@@ -44,21 +44,6 @@ const chartBeatCode = (accountId, domain) => {
   `;
 };
 
-const querylyCode = (querylyId, querylyOrg, pageType) => {
-  const querylyInit = `
-    queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
-  `;
-  return (
-    <>
-      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.js" />
-      <script data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
-      { pageType === 'queryly-search'
-        ? <script data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />
-        : null}
-    </>
-  );
-};
-
 const comscoreScript = (accountId) => {
   if (!accountId) {
     return null;
@@ -116,11 +101,7 @@ const SampleOutputType = ({
     chartBeatDomain,
     fallbackImage,
     comscoreID,
-    querylyId,
-    querylyOrg,
   } = getProperties(arcSite);
-
-  const pageType = metaValue('page-type');
 
   const googleFonts = () => {
     switch (websiteName) {
@@ -244,7 +225,6 @@ const SampleOutputType = ({
           {children}
         </div>
         <Fusion />
-        {querylyId ? querylyCode(querylyId, querylyOrg, pageType) : null}
       </body>
     </html>
   );

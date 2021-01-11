@@ -1,16 +1,13 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { useContent } from 'fusion:content';
-import { extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import LargePromo from './default';
 
 const { default: mockData } = require('./mock-data');
-const { default: mockDataVideo } = require('./mock-data-video');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
-  extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -318,82 +315,5 @@ describe('the large promo feature', () => {
     };
     expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
     wrapper.unmount();
-  });
-
-  describe('when "playVideoInPlace" custom field is "true"', () => {
-    describe('when ANS content type is "story"', () => {
-      it('should render Image when no video found in ANS lead art', () => {
-        useContent.mockReturnValueOnce(mockData);
-        extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = shallow(
-          <LargePromo
-            customFields={{
-              ...config,
-              playVideoInPlace: true,
-            }}
-          />,
-        );
-        expect(wrapper.find('Image')).toHaveLength(1);
-        wrapper.unmount();
-      });
-
-      it('should render VideoPlayer when video exists in ANS lead art', () => {
-        useContent.mockReturnValueOnce({
-          ...mockData,
-          promo_items: {
-            ...mockData.promo_items,
-            lead_art: {
-              type: 'video',
-              embed_html: '<div class="video-embed"></div>',
-            },
-          },
-        });
-        const wrapper = shallow(
-          <LargePromo
-            customFields={{
-              ...config,
-              playVideoInPlace: true,
-            }}
-          />,
-        );
-        expect(wrapper.find('Image')).toHaveLength(0);
-        expect(wrapper.find('VideoPlayer')).toHaveLength(1);
-        wrapper.unmount();
-      });
-    });
-
-    describe('when ANS content type is "video"', () => {
-      it('should render Image when no video embed found in ANS', () => {
-        const mockDataVideoNoEmbed = { ...mockData };
-        delete mockDataVideoNoEmbed.embed_html;
-        useContent.mockReturnValueOnce(mockDataVideoNoEmbed);
-        extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = shallow(
-          <LargePromo
-            customFields={{
-              ...config,
-              playVideoInPlace: true,
-            }}
-          />,
-        );
-        expect(wrapper.find('Image')).toHaveLength(1);
-        wrapper.unmount();
-      });
-
-      it('should render VideoPlayer when video embed exists in ANS', () => {
-        useContent.mockReturnValueOnce(mockDataVideo);
-        const wrapper = shallow(
-          <LargePromo
-            customFields={{
-              ...config,
-              playVideoInPlace: true,
-            }}
-          />,
-        );
-        expect(wrapper.find('Image')).toHaveLength(0);
-        expect(wrapper.find('VideoPlayer')).toHaveLength(1);
-        wrapper.unmount();
-      });
-    });
   });
 });

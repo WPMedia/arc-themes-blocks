@@ -137,7 +137,7 @@ describe('vertical overline image story item', () => {
 
     const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
 
-    const wrapper = shallow(<VerticalOverlineImageStoryItem {...testProps} />);
+    const wrapper = mount(<VerticalOverlineImageStoryItem {...testProps} />);
 
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     expect(wrapper.find('Overline').length).toBe(1);
@@ -146,7 +146,13 @@ describe('vertical overline image story item', () => {
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
     expect(wrapper.find('Image')).toHaveLength(0);
-    expect(wrapper.find('VideoPlayer')).toHaveLength(1);
+    console.log(wrapper.debug(), 'wrapper');
+
+    //               <Suspense>
+    // <lazy embedMarkup="<div class="video-embed"></div>" />
+    // </Suspense>
+
+    expect(wrapper.find('video-embed')).toHaveLength(1);
   });
 
   it('renders VideoPlayer when type "video" with embed', () => {

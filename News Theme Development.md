@@ -133,20 +133,7 @@ Merge into `canary` branch to publish to canary tag. Please reach out to arc blo
 
 WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 
-NOTE: Make sure to rebase onto beta branch if you hotfix stable, for instance.
 ---
-
-## Cut The `canary` development process for RC release 
-
-1. Ensure all tickets are in current canary branch ready. 
-2. `git push origin canary:rc`
-3. This will publish that version with the rc tag for testing. 
-4. Ensure the engine theme sdk and news-theme-css have also been published to the `rc` tag. (For the news-theme-css, that process is done locally. Engine theme sdk can be done by merging into rc branch.)
-5. Go to admin in Okta
-6. Go to themes internal site. Find the dev-sandbox environment. Then, in the deployer, deploy a feature pack that has the rc versions of the aforementioned repos. This can be done in the `environment/` folder using BLOCK_DIST_TAG (note: not the `.env` file).
-7. Make sure that version is designated as the version release. 
-8. After it's approved, merge `rc` tag into `beta` branch. 
-9. Then, make sure that `beta` branch is rebased onto canary `branch`.
 
 ## For stable releases, it remains manual process
 

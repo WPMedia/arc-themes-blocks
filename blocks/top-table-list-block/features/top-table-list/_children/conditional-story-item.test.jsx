@@ -32,7 +32,7 @@ const config = {
 
 describe('conditional story item', () => {
   beforeAll(() => {
-    jest.mock('./small-list-item', () => class SmallListItem {});
+    jest.mock('./item-title-with-right-image', () => class ItemWithRightImage {});
     jest.mock('./medium-list-item', () => class MediumListItem {});
     jest.mock('./horizontal-overline-image-story-item', () => class HorizontalOverlineImageStoryItem {});
     jest.mock('./vertical-overline-image-story-item', () => class VerticalOverlineImageStoryItem {});
@@ -51,7 +51,7 @@ describe('conditional story item', () => {
       <ConditionalStoryItem storySize={storySize} customFields={config} />,
     );
 
-    expect(wrapper.is('SmallListItem')).toBeTruthy();
+    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
   });
   it('renders a medium component if small passed in', () => {
     const { default: ConditionalStoryItem } = require('./conditional-story-item');
@@ -85,5 +85,78 @@ describe('conditional story item', () => {
     );
 
     expect(wrapper.is('VerticalOverlineImageStoryItem')).toBeTruthy();
+  });
+
+  it('renders a small component with padding if storiesPerRowSM is 2 and the position is even', () => {
+    const { default: ConditionalStoryItem } = require('./conditional-story-item');
+
+    const storySize = SMALL;
+    const setup = Object.assign(config, { storiesPerRowSM: 2 });
+    const storySizeMap = {
+      extraLarge: 0,
+      large: 0,
+      medium: 0,
+      small: 1,
+    };
+
+    const wrapper = shallow(
+      <ConditionalStoryItem
+        storySize={storySize}
+        customFields={setup}
+        index={2}
+        storySizeMap={storySizeMap}
+      />,
+    );
+
+    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
+    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
+  });
+
+  it('renders a small component with padding if storiesPerRowSM is undefined and the position is even', () => {
+    const { default: ConditionalStoryItem } = require('./conditional-story-item');
+
+    const storySize = SMALL;
+    const storySizeMap = {
+      extraLarge: 0,
+      large: 0,
+      medium: 0,
+      small: 1,
+    };
+
+    const wrapper = shallow(
+      <ConditionalStoryItem
+        storySize={storySize}
+        customFields={config}
+        index={2}
+        storySizeMap={storySizeMap}
+      />,
+    );
+
+    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
+    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(true);
+  });
+
+  it('renders a small component without padding if storiesPerRowSM is 1', () => {
+    const { default: ConditionalStoryItem } = require('./conditional-story-item');
+
+    const storySize = SMALL;
+    const storySizeMap = {
+      extraLarge: 0,
+      large: 0,
+      medium: 0,
+      small: 1,
+    };
+
+    const wrapper = shallow(
+      <ConditionalStoryItem
+        storySize={storySize}
+        customFields={config}
+        index={1}
+        storySizeMap={storySizeMap}
+      />,
+    );
+
+    expect(wrapper.is('ItemWithRightImage')).toBeTruthy();
+    expect(wrapper.find('ItemWithRightImage').prop('paddingRight')).toBe(false);
   });
 });

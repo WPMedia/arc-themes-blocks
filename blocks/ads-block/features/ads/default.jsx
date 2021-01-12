@@ -36,11 +36,9 @@ const ArcAd = (props) => {
     customFields: {
       debug,
       displayAdLabel,
-    },
+    }
   } = propsWithContext;
   const siteVars = getProperties(arcSite);
-
-  const [labelDisplayClass, setLabelDisplayClass] = useState('no-display');
 
   const registerAd = useCallback(() => {
     const publisherIds = { dfp_publisher_id: siteVars.dfpId };
@@ -52,13 +50,8 @@ const ArcAd = (props) => {
         params: config,
         publisherIds,
         debug,
-      }, (cb) => {
-        // render advertisement label after ad returns
-        if (cb && cb.adId) {
-          setLabelDisplayClass('');
-        }
       });
-  }, [config, debug, propsWithContext, siteVars]);
+  }, [config]);
 
   useEffect(() => {
     if (!isAdmin && 1) registerAd();
@@ -78,7 +71,7 @@ const ArcAd = (props) => {
       <div className="arcad_container">
         {!isAdmin && displayAdLabel && !isAMP() && (
           <div
-            className={`advertisement-label advertisement-label--${display} ${labelDisplayClass}`}
+            className={`advertisement-label advertisement-label--${display}`}
             dangerouslySetInnerHTML={{ __html: siteVars.advertisementLabel || 'ADVERTISEMENT' }}
           />
         )}

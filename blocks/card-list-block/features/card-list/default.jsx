@@ -39,8 +39,6 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
-HeadlineText.displayName = 'HeadlineText';
-
 const Title = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
@@ -132,7 +130,7 @@ class CardList extends React.Component {
                   )
                   : ''
               }
-              <article
+              <div
                 className="list-item-simple"
                 key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
@@ -185,7 +183,7 @@ class CardList extends React.Component {
                   </Title>
                   )}
                 <div>
-                  <HeadlineText
+                  <Title
                     primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                     className="card-list-headline"
                   >
@@ -196,7 +194,7 @@ class CardList extends React.Component {
                     >
                       {contentElements[0].headlines.basic}
                     </a>
-                  </HeadlineText>
+                  </Title>
                   <div className="author-date">
                     <Byline story={contentElements[0]} stylesFor="list" />
                     {/* separator will only be shown if there is at least one author */}
@@ -207,7 +205,7 @@ class CardList extends React.Component {
                     />
                   </div>
                 </div>
-              </article>
+              </div>
               {
                 contentElements.slice(1).map((element) => {
                   const {
@@ -217,7 +215,7 @@ class CardList extends React.Component {
                   return (
                     <React.Fragment key={`result-card-${url}`}>
                       <hr />
-                      <article
+                      <div
                         className="card-list-item"
                         key={`result-card-${url}`}
                         type="1"
@@ -272,7 +270,7 @@ class CardList extends React.Component {
                               )
                           }
                         </a>
-                      </article>
+                      </div>
                     </React.Fragment>
                   );
                 })

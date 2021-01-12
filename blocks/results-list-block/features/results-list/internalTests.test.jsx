@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import ResultsList from './default';
 import mockData, { oneListItem } from './mock-data';
-import { fetchStoriesTransform } from './helpers';
 
 const mockReturnData = mockData;
 
@@ -214,14 +213,14 @@ describe('fetchStoriesTransform', () => {
   it('if has no data, return storedList', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
-    const result = fetchStoriesTransform(null, 'storedList');
+    const result = ResultsList.fetchStoriesTransform(null, 'storedList');
     expect(result).toEqual('storedList');
   });
 
   it('if has  data, return concatenated data with storedList', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
-    const result = fetchStoriesTransform({ content_elements: ['A', 'B'], next: 10 }, { content_elements: ['C', 'D'] });
+    const result = ResultsList.fetchStoriesTransform({ content_elements: ['A', 'B'], next: 10 }, { content_elements: ['C', 'D'] });
     expect(result).toEqual({ content_elements: ['C', 'D', 'A', 'B'], next: 10 });
   });
 });

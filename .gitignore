@@ -7,3 +7,4 @@ coverage
 .vscode/*
 *.log
 !.vscode/extensions.json
+*.orig

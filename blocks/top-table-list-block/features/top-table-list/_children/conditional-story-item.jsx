@@ -1,6 +1,6 @@
 import React from 'react';
 import VerticalOverlineImageStoryItem from './vertical-overline-image-story-item';
-import SmallListItem from './small-list-item';
+import ItemTitleWithRightImage from './item-title-with-right-image';
 import MediumListItem from './medium-list-item';
 import HorizontalOverlineImageStoryItem from './horizontal-overline-image-story-item';
 import {
@@ -31,6 +31,8 @@ const ConditionalStoryItem = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     arcSite,
+    storySizeMap = {},
+    index,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -104,8 +106,17 @@ const ConditionalStoryItem = (props) => {
         />
       );
     case SMALL: {
+      let hasPaddingRight = false;
+      if (
+        (typeof customFields.storiesPerRowSM === 'undefined')
+        || (customFields.storiesPerRowSM === null)
+        || (customFields.storiesPerRowSM === 2)) {
+        hasPaddingRight = (
+          index - (storySizeMap.extraLarge + storySizeMap.large + storySizeMap.medium)
+        ) % 2 === 0;
+      }
       return (
-        <SmallListItem
+        <ItemTitleWithRightImage
           primaryFont={primaryFont}
           secondaryFont={secondaryFont}
           itemTitle={itemTitle}
@@ -117,6 +128,7 @@ const ConditionalStoryItem = (props) => {
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
+          paddingRight={hasPaddingRight}
           imageRatio={customFields.imageRatioSM}
           element={element}
         />

@@ -5,8 +5,8 @@ export default ({
   alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
 }) => {
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
-  const [isSearchBarPending, setSearchBarPending] = useState(false);
   const searchInput = useRef(null);
+  let disabledBtn = true;
 
   useEffect(() => {
     const el = searchInput.current;
@@ -14,7 +14,7 @@ export default ({
       el.focus();
       // Wait for open searchbar animation to finish
       setTimeout(() => {
-        setSearchBarPending(false);
+        disabledBtn = false;
       }, 250);
     } else {
       el.blur();
@@ -22,19 +22,16 @@ export default ({
   }, [shouldSearchOpen]);
 
   const handleSearchBtnMousedown = (event) => {
-    if (!isSearchBarPending) {
     // if open, prevent blur event so we don't get a race condition on click vs blur
-      if (shouldSearchOpen) {
-        event.preventDefault();
-      } else {
-        setSearchBarPending(true);
-        setShouldSearchOpen(true);
-      }
+    if (shouldSearchOpen) {
+      event.preventDefault();
+    } else {
+      setShouldSearchOpen(true);
     }
   };
 
   const handleClick = (event) => {
-    if (!isSearchBarPending) {
+    if (!disabledBtn) {
       event.preventDefault();
       if (customSearchAction) {
         customSearchAction(searchInput.current.value);
@@ -63,13 +60,7 @@ export default ({
   return (
     <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
-      <button
-        className={btnClassNames}
-        onClick={handleClick}
-        onMouseDown={handleSearchBtnMousedown}
-        disabled={isSearchBarPending}
-        type="button"
-      >
+      <button className={btnClassNames} onClick={handleClick} onMouseDown={handleSearchBtnMousedown} type="button">
         <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
       </button>
     </div>

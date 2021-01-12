@@ -24,14 +24,13 @@ describe('VideoPlayer', () => {
 
   it('renders ', () => {
     const wrapper = shallow(<VideoPlayer />);
-    expect(wrapper.find('.embed-video').length).toEqual(0);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('renders with deprecated "websiteURL" custom field', () => {
     const mockFusionContext = { arcSite: 'dagen' };
     useFusionContext.mockReturnValueOnce(mockFusionContext);
     const websiteURL = '/some/website/url';
-
     const mockFetchParam = {
       query: {
         site: mockFusionContext.arcSite,
@@ -39,9 +38,8 @@ describe('VideoPlayer', () => {
       },
       source: 'content-api',
     };
-
     const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
-    expect(wrapper.find('.embed-video').length).toEqual(0);
+    expect(wrapper.find('.embed-video').length).toEqual(1);
     expect(useContent).toHaveBeenCalledTimes(1);
     expect(useContent).toHaveBeenCalledWith(mockFetchParam);
   });
@@ -81,7 +79,6 @@ describe('VideoPlayer', () => {
     + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if inheritGlobalContent is FALSE use markup passed as prop ', () => {
@@ -106,7 +103,6 @@ describe('VideoPlayer', () => {
       + '</script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if autplay is enabled, add autoplay props ', () => {
@@ -141,7 +137,6 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if playthrough is enabled, add playthrough props ', () => {
@@ -202,7 +197,7 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    const expectedAlertBadge = '<span class="sc-htpNat Sqzan">Test Alert  Badge</span>';
+    const expectedAlertBadge = '<span class="sc-htpNat bLgVsz">Test Alert  Badge</span>';
     const expectedTitle = '<h2 class="sc-bdVaJa jbIaBK xl-promo-headline">Test Title</h2>';
     const expectedDescription = '<p class="sc-bwzfXH gfyHkX description-text">Test Description</p>';
     const foundStyledComponents = wrapper.find('StyledComponent');
@@ -211,31 +206,5 @@ describe('VideoPlayer', () => {
     expect(foundStyledComponents.at(0).html()).toEqual(expectedAlertBadge);
     expect(foundStyledComponents.at(1).html()).toEqual(expectedTitle);
     expect(foundStyledComponents.at(2).html()).toEqual(expectedDescription);
-  });
-
-  it('if no video content, show empty space ', () => {
-    const testEmbed = undefined;
-
-    useFusionContext.mockImplementation(() => (
-      { id: '12345' }));
-
-    const getElementMock = jest.fn();
-    getElementMock.mockReturnValue({ firstElementChild: {} });
-    document.getElementById = getElementMock;
-
-    getThemeStyle.mockImplementation(() => (
-      { 'primary-font-family': 'Leopard' }));
-
-    getProperties.mockImplementation(() => (
-      'sampleSite'));
-
-    const customFields = { inheritGlobalContent: false };
-    const wrapper = mount(<VideoPlayer
-      customFields={customFields}
-      embedMarkup={testEmbed}
-      enableAutoplay
-    />);
-
-    expect(wrapper.find('#video-12345').length).toEqual(0);
   });
 });

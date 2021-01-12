@@ -35,25 +35,12 @@ describe('the SearchBox component', () => {
 
       expect(document.body.classList.contains('has-custom-search-action'));
     });
-    it('should have a disabled button initially on click', () => {
-      const wrapper = mount(<SearchBox />);
-
-      wrapper.find('.nav-block-search button').simulate('mousedown', fakeEvent); // need to use mousedown instead of click to prevent race condition
-
-      expect(wrapper.find('.nav-block-search > .nav-btn').prop('disabled')).toBe(true);
-    });
   });
 
   describe('when .nav-block-search is open', () => {
     it('should focus on the input element', () => {
       const wrapper = mount(<SearchBox />);
       expect(wrapper.find('input').getElement() === document.activeElement);
-    });
-
-    it('should not have a disabled button', () => {
-      const wrapper = mount(<SearchBox />);
-
-      expect(wrapper.find('.nav-block-search > .nav-btn').prop('disabled')).toBe(false);
     });
 
     describe('when input loses focus', () => {

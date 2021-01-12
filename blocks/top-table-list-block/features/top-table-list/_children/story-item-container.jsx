@@ -28,6 +28,7 @@ class StoryItemContainer extends Component {
       storySizeMap,
       index,
     } = this.props;
+
     return (
       <>
         <ConditionalStoryItem

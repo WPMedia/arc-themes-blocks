@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { Fragment, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 import styled from 'styled-components';
@@ -19,9 +19,10 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
-import VideoPlayer from '@wpmedia/video-player-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
+
+const VideoPlayerPromo = lazy(() => import('./_children/VideoPlayerSection'));
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -161,7 +162,9 @@ const ExtraLargePromo = ({ customFields }) => {
               {
                 (
                   !!videoEmbed && (
-                    <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                    <Suspense fallback="loading">
+                      <VideoPlayerPromo videoEmbed={videoEmbed} />
+                    </Suspense>
                   )
                 ) || (
                   customFields.showImage

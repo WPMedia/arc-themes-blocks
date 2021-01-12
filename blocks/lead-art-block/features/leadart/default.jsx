@@ -1,18 +1,19 @@
 /* eslint-disable camelcase, max-len */
-import React, { Component } from 'react';
+import React, { lazy, Suspense, Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
-import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@wpmedia/engine-theme-sdk';
 // import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+
+const VideoPlayerLeadArt = lazy(() => import('./_children/VideoPlayerLeadArt'));
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -111,13 +112,15 @@ class LeadArt extends Component {
         );
       } if (lead_art.type === 'video') {
         return (
-          <VideoPlayer
-            embedMarkup={lead_art?.embed_html}
-            enableAutoplay={!!(customFields?.enableAutoplay)}
-            customFields={{
-              playthrough: !!(customFields?.playthrough),
-            }}
-          />
+          <Suspense fallback="loading">
+            <VideoPlayerLeadArt
+              embedMarkup={lead_art?.embed_html}
+              enableAutoplay={!!(customFields?.enableAutoplay)}
+              customFields={{
+                playthrough: !!(customFields?.playthrough),
+              }}
+            />
+          </Suspense>
         );
       } if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {

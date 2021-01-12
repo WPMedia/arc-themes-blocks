@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
-import VideoPlayer from '@wpmedia/video-player-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
 import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
+
+const VideoPlayerTopTable = lazy(() => import('./VideoPlayerTopTable'));
 
 const VerticalOverlineImageStoryItem = (props) => {
   const {
@@ -137,7 +138,11 @@ const VerticalOverlineImageStoryItem = (props) => {
                 <>
                   {(
                     !!videoEmbed && (
-                      <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                      <Suspense fallback="loading">
+                        <VideoPlayerTopTable
+                          embedMarkup={videoEmbed}
+                        />
+                      </Suspense>
                     )
                   ) || (
                     <>

@@ -1,15 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image,
 } from '@wpmedia/engine-theme-sdk';
-
 import Blockquote from './_children/blockquote';
 import Header from './_children/heading';
 import HTML from './_children/html';
@@ -18,6 +16,8 @@ import Oembed from './_children/oembed';
 import Pullquote from './_children/pullquote';
 import Table from './_children/table';
 import './_articlebody.scss';
+
+const VideoPlayerSection = lazy(() => import('./_children/VideoPlayerSection'));
 
 const StyledText = styled.p`
   a {
@@ -176,9 +176,9 @@ function parseArticleItem(item, index, arcSite, phrases) {
       }
     case 'video':
       return (
-        <section key={key} className="block-margin-bottom">
-          <VideoPlayer embedMarkup={item.embed_html} />
-        </section>
+        <Suspense fallback="loading">
+          <VideoPlayerSection embedHTML={item.embed_html} key={key} />
+        </Suspense>
       );
     case 'gallery':
       return (

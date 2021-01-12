@@ -5,11 +5,9 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import VideoPlayer from '@wpmedia/video-player-block';
 import {
-  Gallery, ImageMetadata, Image,
+  Gallery, ImageMetadata, Image, VideoPlayer,
 } from '@wpmedia/engine-theme-sdk';
-
 import Blockquote from './_children/blockquote';
 import Header from './_children/heading';
 import HTML from './_children/html';
@@ -30,7 +28,7 @@ const StyledLink = styled.a`
   color: ${(props) => props.primaryColor};
 `;
 
-function parseArticleItem(item, index, arcSite, phrases) {
+function parseArticleItem(item, index, arcSite, phrases, id) {
   const {
     _id: key = index, type, content,
   } = item;
@@ -175,9 +173,14 @@ function parseArticleItem(item, index, arcSite, phrases) {
           );
       }
     case 'video':
+      // console.log(item.embed_html);
+      // console.log('embed html');
+      // todo: include scss needed to contain the video player embed video class
+      // found in the scss at the video playerRoot
+      // bc scss from themes-news-theme-css doesn't go in engine theme sdk
       return (
         <section key={key} className="block-margin-bottom">
-          <VideoPlayer embedMarkup={item.embed_html} />
+          <VideoPlayer id={id} embedHTML={item.embed_html} />
         </section>
       );
     case 'gallery':
@@ -225,7 +228,9 @@ const ArticleBody = styled.article`
 `;
 
 const ArticleBodyChain = ({ children }) => {
-  const { globalContent: items = {}, customFields = {}, arcSite } = useFusionContext();
+  const {
+    globalContent: items = {}, customFields = {}, arcSite, id,
+  } = useFusionContext();
   const { content_elements: contentElements = [], location } = items;
   const { elementPlacement: adPlacementConfigObj = {} } = customFields;
   const { locale = 'en' } = getProperties(arcSite);
@@ -256,13 +261,13 @@ const ArticleBodyChain = ({ children }) => {
       // the current paragraph is the last or second-to-last paragraph.
       if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
         return [
-          parseArticleItem(contentElement, index, arcSite, phrases),
+          parseArticleItem(contentElement, index, arcSite, phrases, id),
           ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
         ];
       }
     }
 
-    return parseArticleItem(contentElement, index, arcSite, phrases);
+    return parseArticleItem(contentElement, index, arcSite, phrases, id);
   }));
 
   return (

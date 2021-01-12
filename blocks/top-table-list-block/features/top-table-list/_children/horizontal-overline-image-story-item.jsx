@@ -38,6 +38,18 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const textClass = customFields.showImageLG
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
+  const showBottomBorder = (typeof customFields.showBottomBorderLG === 'undefined') ? true : customFields.showBottomBorderLG;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
@@ -187,7 +199,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
           )}
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

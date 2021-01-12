@@ -21,20 +21,14 @@ export default {
     different from other content sources that have content elements
     on the top-level
   */
-  transform: (data, query) => {
-    const { isCompressedImageParams = false } = query;
-
-    return ({
-      data: getResizedImageData(
-        data.data,
-        null,
-        null,
-        null,
-        query['arc-site'],
-        undefined,
-        isCompressedImageParams,
-      ),
-      ...data,
-    });
-  },
+  transform: (data, query) => ({
+    data: getResizedImageData(
+      data.data,
+      null,
+      null,
+      null,
+      query['arc-site'],
+    ),
+    ...data,
+  }),
 };

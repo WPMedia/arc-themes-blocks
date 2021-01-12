@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-props-no-spreading, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -31,6 +31,9 @@ describe('the global content gallery', () => {
               basic: 'This is a headline',
             },
           },
+        })),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
         })),
       }));
 
@@ -68,6 +71,9 @@ describe('the global content gallery', () => {
         useAppContext: jest.fn(() => ({
           globalContent: {},
         })),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
+        })),
       }));
 
       jest.mock('@wpmedia/engine-theme-sdk', () => ({
@@ -95,6 +101,9 @@ describe('the global content gallery', () => {
     it('should load content from global content', () => {
       jest.mock('fusion:context', () => ({
         useAppContext: jest.fn(() => ({})),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
+        })),
       }));
 
       jest.mock('@wpmedia/engine-theme-sdk', () => ({
@@ -117,4 +126,69 @@ describe('the global content gallery', () => {
       expect(typeof wrapper.find('Gallery').props().pageCountPhrase).toEqual('function');
     });
   });
+
+  describe('when galleryCubeClicks is missing', () => {
+    it('should not send interstitialClicks property', () => {
+      const { default: GlobalContentGallery } = require('./global-content');
+      const wrapper = shallow(
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
+      );
+      expect(wrapper.find('Gallery').prop('interstitialClicks')).toBeFalsy();
+    });
+  });
+
+  /**
+  describe('when galleryCubeClicks is present', () => {
+    it('should send interstitialClicks', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({})),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
+        })),
+      }));
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        fallbackImage: 'placeholder.jpg',
+        resizerURL: 'https://fake.cdn.com/resizer',
+        galleryCubeClicks: 5,
+      }))));
+      const { default: GlobalContentGallery } = require('./global-content');
+      const wrapper = shallow(
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
+      );
+      expect(wrapper.find('Gallery').prop('interstitialClicks')).toBeTruthy();
+      const adElement = wrapper.find('Gallery').prop('adElement');
+      expect(adElement).toBeTruthy();
+      expect(adElement()).toBeInstanceOf(Object);
+      expect(wrapper.find('Gallery').props().pageCountPhrase(1, 5)).toEqual('%{current} of %{total}');
+    });
+    it('should not send interstitialClicks in value invalid', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({})),
+        useFusionContext: jest.fn(() => ({
+          arcSite: 'the-sun',
+        })),
+      }));
+      jest.mock('fusion:properties', () => (jest.fn(() => ({
+        fallbackImage: 'placeholder.jpg',
+        resizerURL: 'https://fake.cdn.com/resizer',
+        galleryCubeClicks: '{}',
+      }))));
+      const { default: GlobalContentGallery } = require('./global-content');
+      const wrapper = shallow(
+        <GlobalContentGallery
+          phrases={{ t: jest.fn((phrase) => mockPhrases[phrase]) }}
+          deployment={jest.fn((path) => path)}
+        />,
+      );
+      expect(wrapper.find('Gallery').prop('interstitialClicks')).toBeFalsy();
+      expect(wrapper.find('Gallery').prop('adElement')).toBeFalsy();
+    });
+  });
+   * */
 });

@@ -28,10 +28,11 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
+          scope: '@wpmedia'  
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-      - run: npx lerna publish 0.0.0-$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
+      - run: npx lerna publish 0.0.0-canary.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

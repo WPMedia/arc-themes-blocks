@@ -32,7 +32,7 @@
     "styled-components": "^4.4.0"
   },
   "dependencies": {
-    "react-oembed-container": "^0.3.0"
+    "react-oembed-container": "^1.0.0"
   },
   "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

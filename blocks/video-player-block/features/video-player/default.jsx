@@ -23,7 +23,8 @@ const AlertBadge = styled.span`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;
-  line-height: 1.33;
+  line-height: 1;
+  font-weight: bold;
 `;
 
 const VideoPlayer = (props) => {
@@ -92,48 +93,48 @@ const VideoPlayer = (props) => {
     .replace('script>', 'script-->');
 
   useEffect(() => {
-    const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
+    if (document.getElementById(`video-${videoRef.current}`)) {
+      const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
 
-    if (powaEl) {
-      if (window.powaBoot) window.powaBoot();
+      if (powaEl) {
+        if (window.powaBoot) window.powaBoot();
+      }
     }
   });
 
   return (
     <div className="container-fluid video-promo">
-      <div className="row">
-        <div className="col-sm-xl-12">
-          {alertBadge
-            && (
-            <div className="padding-sm-bottom">
-              <AlertBadge>{alertBadge}</AlertBadge>
-            </div>
-            )}
-          {title
-          && (
-          <TitleText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
-            className="xl-promo-headline"
-          >
-            {title}
-          </TitleText>
-          )}
-          <div className="embed-video">
-            <EmbedContainer markup={embedHTML}>
-              <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-            </EmbedContainer>
-          </div>
-          {description
-            && (
-            <DescriptionText
-              secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
-              className="description-text"
-            >
-              {description}
-            </DescriptionText>
-            )}
+      {alertBadge
+        && (
+        <div className="padding-sm-bottom">
+          <AlertBadge>{alertBadge}</AlertBadge>
         </div>
-      </div>
+        )}
+      {title
+      && (
+      <TitleText
+        primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+        className="xl-promo-headline"
+      >
+        {title}
+      </TitleText>
+      )}
+      {embedHTML && (
+        <div className="embed-video">
+          <EmbedContainer markup={embedHTML}>
+            <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
+          </EmbedContainer>
+        </div>
+      )}
+      {description
+        && (
+        <DescriptionText
+          secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+          className="description-text"
+        >
+          {description}
+        </DescriptionText>
+        )}
     </div>
   );
 };

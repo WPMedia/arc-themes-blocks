@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image /* , Video */ } from '@wpmedia/engine-theme-sdk';
+import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
+import VideoPlayer from '@wpmedia/video-player-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -37,6 +38,18 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const textClass = customFields.showImageLG
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
+  const showBottomBorder = (typeof customFields.showBottomBorderLG === 'undefined') ? true : customFields.showBottomBorderLG;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
@@ -106,89 +119,74 @@ const HorizontalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('LG', imageRatio);
-  // const videoUUID = element?.promo_items?.basic?.additional_properties?.videoId;
   const promoType = discoverPromoType(element);
+  const videoEmbed = customFields.playVideoInPlaceLG
+    && !!extractVideoEmbedFromStory
+    && extractVideoEmbedFromStory(element);
 
   return (
     <>
       <article key={id} className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
-          {/* {customFields.headlinePositionLG === 'above'
-            && (customFields.showHeadlineLG
-              || customFields.showDescriptionLG
-              || customFields.showBylineLG
-              || customFields.showDateLG) && (
-              <div className={textClass}>
-                {overlineTmpl()}
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
-              </div>
-          )} */}
-          {/* {videoUUID && (
-            <Video
-              uuid={videoUUID}
-              autoplay={false}
-              aspectRatio={0.75}
-              org="arcbrands"
-              env="sandbox"
-            />
-          )} */}
-          {customFields.showImageLG && /*! videoUUID && */ (
+          { customFields.showImageLG && (
             <div className="col-sm-12 col-md-xl-6 flex-col">
-              {imageURL !== '' ? (
-                <a href={websiteURL} title={itemTitle}>
-                  <Image
-                    resizedImageOptions={resizedImageOptions}
-                    url={imageURL}
-                    alt={
-                      itemTitle
-                      || getProperties(arcSite).primaryLogoAlt
-                      || 'Placeholder logo'
-                    }
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
-                  <PromoLabel type={promoType} />
-                </a>
-              ) : (
-                <div className="image-wrapper">
-                  <Image
-                    smallWidth={ratios.smallWidth}
-                    smallHeight={ratios.smallHeight}
-                    mediumWidth={ratios.mediumWidth}
-                    mediumHeight={ratios.mediumHeight}
-                    largeWidth={ratios.largeWidth}
-                    largeHeight={ratios.largeHeight}
-                    alt={
-                      itemTitle
-                      || getProperties(arcSite).primaryLogoAlt
-                      || 'Placeholder logo'
-                    }
-                    url={targetFallbackImage}
-                    breakpoints={getProperties(arcSite)?.breakpoints}
-                    resizedImageOptions={placeholderResizedImageOptions}
-                    resizerURL={getProperties(arcSite)?.resizerURL}
-                  />
-                  <PromoLabel type={promoType} />
-                </div>
+              {(
+                !!videoEmbed && (
+                  <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                )
+              ) || (
+                <>
+                  { imageURL ? (
+                    <a href={websiteURL} title={itemTitle}>
+                      <Image
+                        resizedImageOptions={resizedImageOptions}
+                        url={imageURL}
+                        alt={
+                          itemTitle
+                          || getProperties(arcSite).primaryLogoAlt
+                          || 'Placeholder logo'
+                        }
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                      />
+                      <PromoLabel type={promoType} />
+                    </a>
+                  ) : (
+                    <div className="image-wrapper">
+                      <Image
+                        smallWidth={ratios.smallWidth}
+                        smallHeight={ratios.smallHeight}
+                        mediumWidth={ratios.mediumWidth}
+                        mediumHeight={ratios.mediumHeight}
+                        largeWidth={ratios.largeWidth}
+                        largeHeight={ratios.largeHeight}
+                        alt={
+                          itemTitle
+                          || getProperties(arcSite).primaryLogoAlt
+                          || 'Placeholder logo'
+                        }
+                        url={targetFallbackImage}
+                        breakpoints={getProperties(arcSite)?.breakpoints}
+                        resizedImageOptions={placeholderResizedImageOptions}
+                        resizerURL={getProperties(arcSite)?.resizerURL}
+                      />
+                      <PromoLabel type={promoType} />
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}
-          {/* customFields.headlinePositionLG === 'below' && */
-            (customFields.showHeadlineLG
-              || customFields.showDescriptionLG
-              || customFields.showBylineLG
-              || customFields.showDateLG) && (
+          {(customFields.showHeadlineLG
+            || customFields.showDescriptionLG
+            || customFields.showBylineLG
+            || customFields.showDateLG) && (
               <div className={textClass}>
                 {overlineTmpl()}
                 {headlineTmpl()}
@@ -198,11 +196,10 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   {dateTmpl()}
                 </div>
               </div>
-            )
-          }
+          )}
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

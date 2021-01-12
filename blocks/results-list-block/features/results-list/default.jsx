@@ -49,7 +49,6 @@ class ResultsList extends Component {
       storedList: {},
       resultList: {},
       seeMore: true,
-      nextCollection: {},
       placeholderResizedImageOptions: {},
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
@@ -136,12 +135,7 @@ class ResultsList extends Component {
           seeMore: {
             source: contentService,
             query,
-            transform: (data) => {
-              if (!data || !data.content_elements || data.content_elements.length === 0) {
-                return false;
-              }
-              return true;
-            },
+            transform: (data) => !!(data?.content_elements?.length),
           },
         });
       }
@@ -155,29 +149,22 @@ class ResultsList extends Component {
       const { resultList } = this.state;
       this.state.storedList = resultList;
 
+      // Check if there are available next item from collection
       if (listContentConfig.contentService === 'content-api-collections') {
         const query = { ...contentConfigValues };
         const from = parseInt(contentConfigValues.from, 10) || 0;
         const size = parseInt(contentConfigValues.size, 10) || 10;
         query.from = from + size + 1;
         this.fetchContent({
-          nextCollection: {
+          seeMore: {
             source: contentService,
             query,
+            transform: (data) => !!(data?.content_elements?.length),
           },
         });
-      }
-      const { nextCollection } = this.state;
-
-      // Check if there are available stories
-      if (resultList?.content_elements) {
-        // Hide button if no additional stories from initial content
-        if ((resultList.content_elements.length >= resultList.count)
-          || !nextCollection
-          || !nextCollection.content_elements
-          || (nextCollection.content_elements.length === 0)) {
-          this.state.seeMore = false;
-        }
+      } else if (resultList?.content_elements
+        && resultList.content_elements.length >= resultList.count) {
+        this.state.seeMore = false;
       }
     }
   }

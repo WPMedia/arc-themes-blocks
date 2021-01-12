@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { useFusionContext, useAppContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import ArcAd from './default';
 
@@ -32,7 +32,6 @@ describe('<ArcAd>', () => {
     jest.clearAllMocks();
     getProperties.mockReturnValue(SITE_PROPS_MOCK);
     useFusionContext.mockReturnValue({ isAdmin: false });
-    useAppContext.mockReturnValue({});
   });
 
   it('renders no ad unit in admin dashboard', () => {
@@ -103,7 +102,6 @@ describe('ArcAd with custom advertisement label', () => {
     jest.clearAllMocks();
     getProperties.mockReturnValue({ ...SITE_PROPS_MOCK, ...customLabel });
     useFusionContext.mockReturnValue({ isAdmin: false });
-    useAppContext.mockReturnValue({});
   });
 
   it('renders the label using advertisementLabel property when present', () => {

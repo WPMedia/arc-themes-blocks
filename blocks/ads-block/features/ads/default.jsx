@@ -1,30 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable comma-dangle */
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
-import { useFusionContext, useAppContext } from 'fusion:context';
+import { useFusionContext } from 'fusion:context';
 import adMap from './ad-mapping';
 import ArcAdminAd from './_children/ArcAdminAd';
 import ArcAdsInstance from './_children/ArcAdsInstance';
 import { getAdObject, setPageTargeting } from './ad-helper';
 import './ads.scss';
 
-function generateInstanceId() {
-  function getRandomNumber() {
-    // Number.MAX_SAFE_INTEGER doesn't exist in IE11.
-    return Math.floor(Math.random() * 9007199254740991).toString(16);
-  }
-
-  return [0, 0].map(getRandomNumber).join('-');
+function generateInstanceId(componentId) {
+  return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
 const ArcAd = (props) => {
   if (typeof window === 'undefined') return null;
-  const [instanceId] = useState(() => generateInstanceId());
+  const fusionContext = useFusionContext();
+  const [instanceId] = useState(() => generateInstanceId(fusionContext.id || '0000'));
   const propsWithContext = {
-    ...useAppContext(),
-    ...useFusionContext(),
+    ...fusionContext,
     ...props,
     instanceId,
   };

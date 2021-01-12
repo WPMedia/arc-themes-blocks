@@ -51,12 +51,12 @@ const Link = ({
         rel="noopener noreferrer"
         navBarColor={navBarColor}
       >
-        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+        {`${(showSeparator) ? '  \u00a0 • \u00a0' : ''}${name}`}
         <span className="sr-only">(Opens in new window)</span>
       </StyledLink>
     ) : (
       <StyledLink href={fixTrailingSlash(href)} navBarColor={navBarColor}>
-        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+        {`${(showSeparator) ? '  \u00a0 • \u00a0' : ''}${name}`}
       </StyledLink>
     )
   );

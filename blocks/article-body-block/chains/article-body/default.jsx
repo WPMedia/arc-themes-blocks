@@ -177,7 +177,7 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
     case 'video':
       return (
         <section key={key} className="block-margin-bottom">
-          <VideoPlayerPresentational id={id} embedHTML={item.embed_html} />
+          <VideoPlayerPresentational id={id} embedMarkup={item.embed_html} />
         </section>
       );
     case 'gallery':

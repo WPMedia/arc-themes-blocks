@@ -37,7 +37,7 @@ const DescriptionText = styled.p`
 `;
 
 const LargePromo = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, id } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
@@ -162,7 +162,11 @@ const LargePromo = ({ customFields }) => {
             <div className="col-sm-12 col-md-xl-6 flex-col">
               {
                 videoEmbed ? (
-                  <VideoPlayerPresentational embedMarkup={videoEmbed} enableAutoplay={false} />
+                  <VideoPlayerPresentational
+                    id={id}
+                    embedMarkup={videoEmbed}
+                    enableAutoplay={false}
+                  />
                 ) : (
                   <a
                     href={content.website_url}

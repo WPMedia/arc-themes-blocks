@@ -127,6 +127,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               {(
                 !!videoEmbed && (
                   <VideoPlayerPresentational
+                    id={id}
                     embedMarkup={videoEmbed}
                     enableAutoplay={false}
                   />

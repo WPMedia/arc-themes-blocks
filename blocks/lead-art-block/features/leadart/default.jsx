@@ -73,7 +73,7 @@ class LeadArt extends Component {
       isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite, customFields } = this.props;
+    const { arcSite, customFields, id } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -113,8 +113,12 @@ class LeadArt extends Component {
       }
 
       if (lead_art.type === 'video') {
+        console.log(id, 'id');
+        console.log('got here to type video');
+        console.log(lead_art, 'lead art');
         return (
           <VideoPlayerPresentational
+            id={id}
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
             customFields={{

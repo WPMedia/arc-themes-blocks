@@ -36,7 +36,7 @@ const DescriptionText = styled.p`
 `;
 
 const ExtraLargePromo = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, id } = useFusionContext();
   const { editableContent } = useEditableContent();
 
   const content = useContent({
@@ -166,6 +166,7 @@ const ExtraLargePromo = ({ customFields }) => {
                 (
                   !!videoEmbed && (
                     <VideoPlayerPresentational
+                      id={id}
                       embedMarkup={videoEmbed}
                       enableAutoplay={false}
                     />

@@ -6,9 +6,10 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
-import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
 // import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
@@ -111,7 +112,7 @@ class LeadArt extends Component {
         );
       } if (lead_art.type === 'video') {
         return (
-          <VideoPlayer
+          <VideoPlayerPresentational
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
             customFields={{

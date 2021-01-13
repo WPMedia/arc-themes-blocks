@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-import { VideoPlayer as VideoPlayerPresentational } from '@wpmedia/engine-theme-sdk';
+import {
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
+} from '@wpmedia/engine-theme-sdk';
 
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -77,16 +80,6 @@ const VideoPlayer = (props) => {
 
   embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
 
-  if ((enableAutoplay || autoplay) && embedHTML) {
-    const position = embedHTML.search('id=');
-    embedHTML = [embedHTML.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
-  }
-
-  if (playthrough && embedHTML) {
-    const position = embedHTML.search('id=');
-    embedHTML = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
-  }
-
   // Make sure that the player does not render until after component is mounted
   // this logic is only for fetching content
   // therefore, excluded from engine theme sdk videoplayer component
@@ -121,7 +114,15 @@ const VideoPlayer = (props) => {
       </TitleText>
       )}
       {embedHTML && (
-        <VideoPlayerPresentational id={id} embedHTML={embedHTML} />
+        <VideoPlayerPresentational
+          id={id}
+          embedHTML={embedHTML}
+          enableAutoplay={enableAutoplay}
+          customFields={{
+            playthrough,
+            autoplay,
+          }}
+        />
       )}
       {description
         && (

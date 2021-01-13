@@ -10,7 +10,12 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
-import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
+import {
+  Image,
+  extractVideoEmbedFromStory,
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
+} from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
@@ -19,7 +24,6 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
-import VideoPlayer from '@wpmedia/video-player-block';
 import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
@@ -161,7 +165,10 @@ const ExtraLargePromo = ({ customFields }) => {
               {
                 (
                   !!videoEmbed && (
-                    <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                    <VideoPlayerPresentational
+                      embedMarkup={videoEmbed}
+                      enableAutoplay={false}
+                    />
                   )
                 ) || (
                   customFields.showImage

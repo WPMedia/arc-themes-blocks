@@ -6,7 +6,9 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import {
-  Gallery, ImageMetadata, Image, VideoPlayer,
+  Gallery, ImageMetadata, Image,
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
 import Blockquote from './_children/blockquote';
 import Header from './_children/heading';
@@ -175,7 +177,7 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
     case 'video':
       return (
         <section key={key} className="block-margin-bottom">
-          <VideoPlayer id={id} embedHTML={item.embed_html} />
+          <VideoPlayerPresentational id={id} embedHTML={item.embed_html} />
         </section>
       );
     case 'gallery':

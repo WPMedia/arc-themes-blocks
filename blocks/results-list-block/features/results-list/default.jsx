@@ -52,8 +52,11 @@ class ResultsList extends Component {
       placeholderResizedImageOptions: {},
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
-    this.fetchStories(false);
     this.fetchPlaceholder();
+  }
+
+  componentDidMount() {
+    this.fetchStories(false);
   }
 
   getFallbackImageURL() {
@@ -130,7 +133,7 @@ class ResultsList extends Component {
 
         const query = { ...contentConfigValues };
         from = parseInt(contentConfigValues.from, 10) || 0;
-        query.from = String(from + size + 1);
+        query.from = String(from + size);
         this.fetchContent({
           seeMore: {
             source: contentService,
@@ -140,31 +143,24 @@ class ResultsList extends Component {
         });
       }
     } else {
-      this.fetchContent({
-        resultList: {
-          source: contentService,
-          query: contentConfigValues,
-        },
+      const { fetched } = this.getContent(listContentConfig.contentService, contentConfigValues);
+      fetched.then((response) => {
+        this.setState({ resultList: response, storedList: response });
+        if (response?.content_elements
+          && response?.count
+          && response.content_elements.length >= response.count) {
+          this.setState({ seeMore: false });
+        }
       });
-      const { resultList } = this.state;
-      this.state.storedList = resultList;
-
-      // Check if there are available next item from collection
       if (listContentConfig.contentService === 'content-api-collections') {
         const query = { ...contentConfigValues };
         const from = parseInt(contentConfigValues.from, 10) || 0;
         const size = parseInt(contentConfigValues.size, 10) || 10;
-        query.from = from + size + 1;
-        this.fetchContent({
-          seeMore: {
-            source: contentService,
-            query,
-            transform: (data) => !!(data?.content_elements?.length),
-          },
+        query.from = String(from + size);
+        const { fetched: nextPage } = this.getContent('content-api-collections', query);
+        nextPage.then((data) => {
+          this.setState({ seeMore: !!(data?.content_elements?.length) });
         });
-      } else if (resultList?.content_elements
-        && resultList.content_elements.length >= resultList.count) {
-        this.state.seeMore = false;
       }
     }
   }

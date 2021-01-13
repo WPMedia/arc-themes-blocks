@@ -116,7 +116,7 @@ const VideoPlayer = (props) => {
       {embedHTML && (
         <VideoPlayerPresentational
           id={id}
-          embedHTML={embedHTML}
+          embedMarkup={embedHTML}
           enableAutoplay={enableAutoplay}
           customFields={{
             playthrough,

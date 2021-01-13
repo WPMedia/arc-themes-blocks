@@ -2,11 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
-import EmbedContainer from 'react-oembed-container';
-import './default.scss';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
+import { VideoPlayer as VideoPlayerPresentational } from '@wpmedia/engine-theme-sdk';
 
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -89,6 +88,8 @@ const VideoPlayer = (props) => {
   }
 
   // Make sure that the player does not render until after component is mounted
+  // this logic is only for fetching content
+  // therefore, excluded from engine theme sdk videoplayer component
   embedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
     .replace('script>', 'script-->');
 
@@ -103,7 +104,7 @@ const VideoPlayer = (props) => {
   });
 
   return (
-    <div className="container-fluid video-promo">
+    <div className="container-fluid">
       {alertBadge
         && (
         <div className="padding-sm-bottom">
@@ -120,11 +121,7 @@ const VideoPlayer = (props) => {
       </TitleText>
       )}
       {embedHTML && (
-        <div className="embed-video">
-          <EmbedContainer markup={embedHTML}>
-            <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-          </EmbedContainer>
-        </div>
+        <VideoPlayerPresentational id={id} embedHTML={embedHTML} />
       )}
       {description
         && (

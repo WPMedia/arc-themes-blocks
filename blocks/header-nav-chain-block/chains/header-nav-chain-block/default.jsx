@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -5,18 +6,16 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
 import { useDebouncedCallback } from 'use-debounce';
 import {
+  WIDGET_CONFIG,
   NAV_BREAKPOINTS,
-  NAV_SLOT_COUNTS,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
   generateNavComponentPropTypes,
   getNavComponentDefaultSelection,
 } from './nav-helper';
 import SectionNav from './_children/section-nav';
-import SearchBox from './_children/search-box';
 import NavLogo from './_children/nav-logo';
 import NavWidget from './_children/nav-widget';
 // shares styles with header nav block
@@ -71,11 +70,12 @@ const StyledNav = styled.nav`
     font-family: ${(props) => props.font};
   }
 
-  & + * {
-    
+  & + *, & ~ nav:nth-of-type(2) {
+
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
       margin-top: ${standardNavHeight}px;
     }
+    
     @media screen and (min-width: ${(props) => props.breakpoint}px) {
       margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
     }
@@ -111,7 +111,6 @@ const Nav = (props) => {
 
   const {
     navColor,
-    locale = 'en',
     breakpoints = { small: 0, medium: 768, large: 992 },
     navBarBackground,
   } = getProperties(arcSite);
@@ -129,11 +128,9 @@ const Nav = (props) => {
     backgroundColor = '#fff';
   }
 
-  const phrases = getTranslatedPhrases(locale);
-
   const {
     children = [],
-    customFields = {},
+    customFields,
   } = props;
   const {
     hierarchy,
@@ -147,6 +144,8 @@ const Nav = (props) => {
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
+
+  const navHeight = desktopNavivationStartHeight || 56;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -270,53 +269,95 @@ const Nav = (props) => {
     };
   }, [shrinkDesktopNavivationHeight, breakpoints]);
 
-  const NavSection = ({ side }) => {
-    const renderWidgets = (bpoint) => {
-      let widgetList = [];
-      let userHasConfigured = false;
-      // eslint-disable-next-line no-plusplus
-      for (let i = 1; i <= NAV_SLOT_COUNTS[bpoint]; i++) {
-        const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
-        const cFieldIndexKey = getNavComponentIndexPropTypeKey(side, bpoint, i);
-        const navWidgetType = customFields[cFieldKey] || 'none';
-        if (!!navWidgetType && navWidgetType !== 'none') {
-          widgetList.push(
+  const getNavWidgetType = (fieldKey) => (
+    customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
+  );
+
+  const hasUserConfiguredNavItems = () => {
+    let userHasConfigured = false;
+    const { slotCounts, sections: navBarSections } = WIDGET_CONFIG['nav-bar'];
+    navBarSections.forEach((side) => {
+      NAV_BREAKPOINTS.forEach((bpoint) => {
+        for (let i = 1; i <= slotCounts[bpoint]; i++) {
+          const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
+          const navWidgetType = getNavWidgetType(cFieldKey);
+          const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
+          if (!userHasConfigured && matchesDefault) userHasConfigured = true;
+        }
+      });
+    });
+    return userHasConfigured;
+  };
+
+  const WidgetList = ({ id, breakpoint, placement }) => {
+    if (!id || !breakpoint) return null;
+    const { slotCounts } = WIDGET_CONFIG[placement];
+    const widgetList = [];
+    for (let i = 1; i <= slotCounts[breakpoint]; i++) {
+      const cFieldKey = getNavComponentPropTypeKey(id, breakpoint, i);
+      const cFieldIndexKey = getNavComponentIndexPropTypeKey(id, breakpoint, i);
+      const navWidgetType = getNavWidgetType(cFieldKey);
+      if (!!navWidgetType && navWidgetType !== 'none') {
+        widgetList.push(
+          <div
+            className="nav-widget"
+            key={`${id}_${breakpoint}_${i}`}
+          >
             <NavWidget
               {...props}
-              key={`${side}_${bpoint}_${i}`}
               type={navWidgetType}
               position={customFields[cFieldIndexKey]}
+              placement={placement}
               menuButtonClickAction={hamburgerClick}
-            />,
-          );
+            />
+          </div>,
+        );
+      }
+    }
+    return widgetList;
+  };
+
+  const NavSection = ({ side }) => (
+    !side ? null : (
+      <div key={side} className={`nav-${side}`}>
+        {
+          // Support for deprecated 'signInOrder' custom field
+          // "If" condition is for rendering "signIn" element
+          // "Else" condition is for standard nav bar customization logic
+          side === 'right'
+          && !hasUserConfiguredNavItems()
+          && signInOrder
+          && Number.isInteger(signInOrder)
+          && children[signInOrder - 1]
+            ? children[signInOrder - 1]
+            : NAV_BREAKPOINTS.map((breakpoint) => (
+              <div key={breakpoint} className={`nav-components--${breakpoint}`}>
+                <WidgetList
+                  id={side}
+                  breakpoint={breakpoint}
+                  placement="nav-bar"
+                />
+              </div>
+            ))
         }
-        if (
-          !userHasConfigured
-          && navWidgetType !== getNavComponentDefaultSelection(cFieldKey)
-        ) userHasConfigured = true;
-      }
-      // Support for deprecated 'signInOrder' custom field
-      if (
-        !userHasConfigured
-        && signInOrder
-        && Number.isInteger(signInOrder)
-        && side === 'right'
-        && children[signInOrder - 1]
-      ) {
-        widgetList = [children[signInOrder - 1]];
-      }
-      return widgetList;
-    };
+      </div>
+    )
+  );
+
+  const MenuWidgets = () => {
+    const navSection = 'menu';
     return (
-      !side ? null : (
-        <div key={side} className={`nav-${side}`}>
-          { NAV_BREAKPOINTS.map((breakpoint) => (
-            <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-              { renderWidgets(breakpoint) }
-            </div>
-          ))}
-        </div>
-      )
+      <div key={navSection} className={`nav-${navSection}`}>
+        {NAV_BREAKPOINTS.map((breakpoint) => (
+          <div key={breakpoint} className={`nav-components--${breakpoint}`}>
+            <WidgetList
+              id={navSection}
+              breakpoint={breakpoint}
+              placement="section-menu"
+            />
+          </div>
+        ))}
+      </div>
     );
   };
 
@@ -327,7 +368,7 @@ const Nav = (props) => {
         className={`${navColor === 'light' ? 'light' : 'dark'}`}
         font={primaryFont}
         navBarBackground={backgroundColor}
-        navHeight={desktopNavivationStartHeight}
+        navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
       >
@@ -349,19 +390,19 @@ const Nav = (props) => {
           className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
           onClick={closeDrawer}
           font={primaryFont}
-          navHeight={desktopNavivationStartHeight}
+          navHeight={navHeight}
           scrolled={scrolled}
           breakpoint={breakpoints.medium}
         >
           <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
-              <SearchBox iconSize={21} alwaysOpen placeholderText={phrases.t('header-nav-chain-block.search-text')} />
+              <MenuWidgets />
             </SectionNav>
           </div>
         </StyledSectionDrawer>
-
       </StyledNav>
-      {(!displayLinks && isAdmin) && (
+
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
         <StyledWarning>
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>

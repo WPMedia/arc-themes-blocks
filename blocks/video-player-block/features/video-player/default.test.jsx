@@ -7,6 +7,11 @@ import VideoPlayer from './default';
 const React = require('react');
 const { mount, shallow } = require('enzyme');
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  // not great, but mocks the component functionally
+  VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
+}));
+
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),
 }));
@@ -22,11 +27,6 @@ describe('VideoPlayer', () => {
       { id: '12345' }));
   });
 
-  it('renders ', () => {
-    const wrapper = shallow(<VideoPlayer />);
-    expect(wrapper.find('.embed-video').length).toEqual(0);
-  });
-
   it('renders with deprecated "websiteURL" custom field', () => {
     const mockFusionContext = { arcSite: 'dagen' };
     useFusionContext.mockReturnValueOnce(mockFusionContext);
@@ -40,8 +40,7 @@ describe('VideoPlayer', () => {
       source: 'content-api',
     };
 
-    const wrapper = shallow(<VideoPlayer customFields={{ websiteURL }} />);
-    expect(wrapper.find('.embed-video').length).toEqual(0);
+    shallow(<VideoPlayer customFields={{ websiteURL }} />);
     expect(useContent).toHaveBeenCalledTimes(1);
     expect(useContent).toHaveBeenCalledWith(mockFetchParam);
   });
@@ -81,7 +80,6 @@ describe('VideoPlayer', () => {
     + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if inheritGlobalContent is FALSE use markup passed as prop ', () => {
@@ -106,7 +104,6 @@ describe('VideoPlayer', () => {
       + '</script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if autplay is enabled, add autoplay props ', () => {
@@ -141,7 +138,6 @@ describe('VideoPlayer', () => {
       + 'front.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
-    expect(wrapper.find('.embed-video').length).toEqual(1);
   });
 
   it('if playthrough is enabled, add playthrough props ', () => {

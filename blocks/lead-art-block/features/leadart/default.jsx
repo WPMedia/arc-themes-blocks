@@ -110,7 +110,9 @@ class LeadArt extends Component {
             {lightbox}
           </LeadArtWrapperDiv>
         );
-      } if (lead_art.type === 'video') {
+      }
+
+      if (lead_art.type === 'video') {
         return (
           <VideoPlayerPresentational
             embedMarkup={lead_art?.embed_html}

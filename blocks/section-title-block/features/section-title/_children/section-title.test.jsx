@@ -2,7 +2,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SectionTitle from './section-title';
-import { mockOneSection, mockTwoSection, mockNoChildren, mockTwoSectionWithUrl } from './mock-data';
+import {
+  mockOneSection, mockTwoSection, mockNoChildren, mockTwoSectionWithUrl 
+} from './mock-data';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({

@@ -173,11 +173,6 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
           );
       }
     case 'video':
-      // console.log(item.embed_html);
-      // console.log('embed html');
-      // todo: include scss needed to contain the video player embed video class
-      // found in the scss at the video playerRoot
-      // bc scss from themes-news-theme-css doesn't go in engine theme sdk
       return (
         <section key={key} className="block-margin-bottom">
           <VideoPlayer id={id} embedHTML={item.embed_html} />

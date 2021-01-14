@@ -8,7 +8,7 @@
   },
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
+
+
+### Bug Fixes
+
+* Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
+* Add primary color ([970685b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/970685b442eb6f62bad6d75e023a04a955e7e244))
+* Ensure button is disabled from submitting ([1de53d8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1de53d89e047a9cadefcb1a786fcaefc0a5a48b3))
+* Ensure oembed is a block dep not feature pack dep ([dfc370d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dfc370d430f5863444b1991abb7e7ba8c5ff5ca8))
+* Ensure top-level npm i, then npx lerna clean -y, then npm t works ([e4e8874](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e4e8874bc609fe1a56abaf5677ac31e05d5b8669))
+* Remove exhaustive hooks issue and remove unnecessary eslint ignore ([8bed4ab](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8bed4ab8524ff27814023ca85af2613307a2510d))
+
+
+### Performance Improvements
+
+* Ignore test files in features folder ([b2a344f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b2a344f96d92b63d25658ab70ec9ec63633fcf6f))
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+* Remove mocks from source blocks ([1b62c84](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1b62c84933331db4420110369519cc4f13781ca6))
+* Remove testfiles from package with nested npmignore to override files declaration ([7af4ec9](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7af4ec9b0973341302934d001886bd68bf64ad78))
+
+
+
+
+
 ## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
 

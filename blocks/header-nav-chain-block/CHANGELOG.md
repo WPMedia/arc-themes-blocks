@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
+
+
+### Bug Fixes
+
+* Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
+* Add primary color ([970685b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/970685b442eb6f62bad6d75e023a04a955e7e244))
+* Ensure button is disabled from submitting ([1de53d8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1de53d89e047a9cadefcb1a786fcaefc0a5a48b3))
+
+
+### Performance Improvements
+
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
+
+
+
+
+
 ## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
 

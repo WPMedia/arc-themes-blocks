@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
@@ -10,6 +10,7 @@ import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
 } from '@wpmedia/engine-theme-sdk';
+// import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
@@ -113,6 +114,9 @@ class LeadArt extends Component {
           <VideoPlayer
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
+            customFields={{
+              playthrough: !!(customFields?.playthrough),
+            }}
           />
         );
       } if (lead_art.type === 'image') {
@@ -178,6 +182,40 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
+        /**
+        const GalleryInterstitialAd = () => (
+          <ArcAd
+            customFields={{
+              adType: '300x250',
+              displayAdLabel: true,
+            }}
+          />
+        );
+        const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
+        let adProps = {};
+        if (galleryCubeClicks) {
+          const value = parseInt(galleryCubeClicks, 10);
+          if (!Number.isNaN(value)) {
+            adProps = {
+              adElement: GalleryInterstitialAd,
+              interstitialClicks: value,
+            };
+          }
+        }
+        return (
+          <Gallery
+            galleryElements={lead_art.content_elements}
+            resizerURL={getProperties(arcSite)?.resizerURL}
+            ansId={lead_art._id}
+            ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
+            expandPhrase={this.phrases.t('global.gallery-expand-button')}
+            autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
+            pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
+            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            {...adProps}
+          />
+        );
+        * */
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -191,6 +229,7 @@ class LeadArt extends Component {
           />
         );
       }
+
       return null;
     }
     return null;
@@ -202,6 +241,7 @@ LeadArt.label = 'Lead Art – Arc Block';
 LeadArt.defaultProps = {
   customFields: {
     enableAutoplay: false,
+    playthrough: false,
   },
 };
 
@@ -209,6 +249,11 @@ LeadArt.propTypes = {
   customFields: PropTypes.shape({
     enableAutoplay: PropTypes.bool.tag({
       label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video',
+    }),
+    playthrough: PropTypes.bool.tag({
+      label: 'Playthrough',
       defaultValue: false,
       group: 'Video',
     }),

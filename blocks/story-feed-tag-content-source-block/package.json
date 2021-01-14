@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/story-feed-tag-content-source-block",
-  "version": "5.9.12",
+  "version": "5.9.14",
   "description": "Content source block for story feed queries by tag",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",

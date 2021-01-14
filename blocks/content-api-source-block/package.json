@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/content-api-source-block",
-  "version": "5.9.12",
+  "version": "5.9.14",
   "description": "Content source block for Content API queries",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [

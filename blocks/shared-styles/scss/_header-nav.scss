@@ -38,37 +38,59 @@ body.nav-open {
   &:hover {
     outline: none;
   }
-}
 
-.nav-btn-dark > span {
-  color: $ui-btn-white-color;
-}
+  &-dark {
+    span {
+      color: $ui-btn-white-color;
+    }
 
-.nav-btn-light > span {
-  color: $ui-medium-gray;
-}
+    svg > path {
+      fill: $ui-btn-white-color;
+    }
 
-.nav-btn-dark > svg > path {
-  fill: $ui-btn-white-color;
-}
-
-.nav-btn-light > svg > path {
-  fill: $ui-medium-gray;
-}
-
-.nav-btn-dark.border {
-  border: $border-width solid $border-color-dull;
-
-  &:hover {
-    border: $border-width solid $border-color-bright;
+    &.border {
+      border: $border-width solid $border-color-dull;
+    
+      &:hover {
+        border: $border-width solid $border-color-bright;
+      }
+    }
+    
   }
-}
 
-.nav-btn-light.border {
-  border: $border-width solid $ui-light-gray;
+  &-light {
+    span {
+      color: $ui-medium-gray;
+    }
 
-  &:hover {
-    border: $border-width solid $ui-medium-gray;
+    svg > path {
+      fill: $ui-medium-gray;
+    }
+
+    &.border {
+      border: $border-width solid $ui-light-gray;
+
+      &:hover {
+        border: $border-width solid $ui-medium-gray;
+      }
+    }
+  }
+
+  &.queryly {
+    padding: 0;
+
+    label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+      align-content: center;
+      padding-left: $btn-padding;
+      padding-right: $btn-padding;
+      cursor: pointer;
+    }
   }
 }
 
@@ -156,12 +178,6 @@ body.nav-open {
 
   &.light {
     border-bottom: $border-width solid $border-rule-color;
-  }
-
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search {
-      display: none;
-    }
   }
 
   * {

@@ -10,20 +10,17 @@ body {
   min-height: 100vh;
 
   .page-header {
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 9;
   }
 
   .main {
     flex-grow: 1;
-    padding-top: calc(56px + #{map-get($spacers, 'lg')});
     transition: padding-top 0.3s linear;
     width: 100%;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      padding-top: calc(56px + #{map-get($spacers, 'md')});
-    }
 
     @media screen and (max-width: 95rem) and (min-width: 90rem) {
       .container {

@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/placeholder-image-block",
-  "version": "5.9.14",
+  "version": "5.9.15",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {

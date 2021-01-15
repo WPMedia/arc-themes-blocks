@@ -12,7 +12,7 @@
     "directory": "blocks/resizer-image-content-source-block"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",

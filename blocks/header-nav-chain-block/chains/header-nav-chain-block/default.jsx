@@ -129,6 +129,7 @@ const Nav = (props) => {
     horizontalLinksHierarchy,
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
+    showHorizontalSeperatorDots,
 
   } = customFields;
 
@@ -365,7 +366,11 @@ const Nav = (props) => {
           <NavSection side="left" />
           <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {displayLinks && (
-            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />
+            <HorizontalLinksBar
+              hierarchy={horizontalLinksHierarchy}
+              navBarColor={navColor}
+              showHorizontalSeperatorDots={showHorizontalSeperatorDots}
+            />
           )}
           <NavSection side="right" />
         </div>
@@ -427,9 +432,14 @@ Nav.propTypes = {
       defaultValue: 56,
     }),
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
-      label: 'Shrink navigation bar after scrolling ',
+      label: 'Shrink navigation bar after scrolling',
       group: 'Logo',
       min: 56,
+    }),
+    showHorizontalSeperatorDots: PropTypes.bool.tag({
+      label: 'Display dots between horizontal links',
+      group: 'Display',
+      defaultValue: true,
     }),
     ...generateNavComponentPropTypes(),
   }),

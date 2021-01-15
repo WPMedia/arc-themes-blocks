@@ -63,6 +63,7 @@ function parseArticleItem(item, index, arcSite, phrases) {
         credits,
         alt_text: altText,
         resized_params: resizedImageOptions = {},
+        vanity_credits: vanityCredits,
       } = item;
 
       return (url && url.length > 0) ? (
@@ -81,7 +82,12 @@ function parseArticleItem(item, index, arcSite, phrases) {
             resizerURL={getProperties(arcSite)?.resizerURL}
           />
           <figcaption>
-            <ImageMetadata subtitle={subtitle} caption={caption} credits={credits} />
+            <ImageMetadata
+              subtitle={subtitle}
+              caption={caption}
+              credits={credits}
+              vanityCredits={vanityCredits}
+            />
           </figcaption>
         </figure>
       ) : null;

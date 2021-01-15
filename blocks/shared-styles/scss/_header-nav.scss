@@ -75,23 +75,6 @@ body.nav-open {
       }
     }
   }
-
-  &.queryly {
-    padding: 0;
-
-    label {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-items: center;
-      align-content: center;
-      padding-left: $btn-padding;
-      padding-right: $btn-padding;
-      cursor: pointer;
-    }
-  }
 }
 
 .nav-sections-btn {
@@ -165,6 +148,23 @@ body.nav-open {
     padding: 0;
     transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
+  }
+
+  &.queryly > .nav-btn {
+    padding: 0;
+
+    label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+      align-content: center;
+      padding-left: $btn-padding;
+      padding-right: $btn-padding;
+      cursor: pointer;
+    }
   }
 }
 
@@ -348,23 +348,27 @@ body.nav-open {
     flex-direction: column;
     width: $section-width;
 
-    .nav-search {
-      input {
-        flex: 1;
-      }
-
-      &.open {
-        input {
-          height: calculateRem(48px);
-        }
-
-        &.dark {
-          border: 0;
-        }
-      }
-    }
-
     .nav-menu {
+      .nav-widget {
+        .nav-search {
+          justify-content: flex-start;
+
+          input {
+            flex: 1;
+          }
+
+          &.open {
+            input {
+              height: calculateRem(48px);
+            }
+
+            &.dark {
+              border: 0;
+            }
+          }
+        }
+      }
+
       & > .nav-components {
         &--mobile,
         &--desktop {          

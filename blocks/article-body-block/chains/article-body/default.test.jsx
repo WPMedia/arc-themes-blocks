@@ -1544,8 +1544,8 @@ describe('article-body chain', () => {
                   ],
                 },
                 vanity_credits: {
-                  "by": [],
-                  "affiliation": []
+                  by: [],
+                  affiliation: [],
                 },
                 distributor: {
                   mode: 'reference',
@@ -1677,18 +1677,18 @@ describe('article-body chain', () => {
                   ],
                 },
                 vanity_credits: {
-                  "by": [
+                  by: [
                     {
-                      "type": "author",
-                      "name": "Here's my vanity photographer"
-                    }
+                      type: 'author',
+                      name: "Here's my vanity photographer",
+                    },
                   ],
-                  "affiliation": [
+                  affiliation: [
                     {
-                      "type": "author",
-                      "name": "Here's my vanity credit"
-                    }
-                  ]
+                      type: 'author',
+                      name: "Here's my vanity credit",
+                    },
+                  ],
                 },
                 distributor: {
                   mode: 'reference',

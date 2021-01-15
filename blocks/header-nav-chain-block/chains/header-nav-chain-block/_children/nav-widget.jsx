@@ -4,6 +4,7 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SearchBox from './search-box';
+import QuerylySearch from './queryly-search';
 import { WIDGET_CONFIG } from '../nav-helper';
 
 const NavWidget = ({
@@ -27,6 +28,11 @@ const NavWidget = ({
         placeholderText={phrases.t('header-nav-chain-block.search-text')}
         customSearchAction={customSearchAction}
         alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
+      />
+    )) || (type === 'queryly' && (
+      <QuerylySearch
+        iconSize={WIDGET_CONFIG[placement]?.iconSize}
+        theme={navColor}
       />
     )) || (type === 'menu' && (
       <button

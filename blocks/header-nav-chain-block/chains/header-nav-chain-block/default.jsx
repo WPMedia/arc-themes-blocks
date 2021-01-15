@@ -56,9 +56,11 @@ const StyledNav = styled.nav`
         transition: 0.5s;
         @media screen and (max-width: ${(props) => props.breakpoint}px) {
           max-height: 40px;
+          min-width: 40px;
         }
         @media screen and (min-width: ${(props) => props.breakpoint}px) {
           max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+          min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
         }
       }
     }
@@ -137,6 +139,7 @@ const Nav = (props) => {
     horizontalLinksHierarchy,
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
+    showHorizontalSeperatorDots,
 
   } = customFields;
 
@@ -373,7 +376,11 @@ const Nav = (props) => {
           <NavSection side="left" />
           <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {displayLinks && (
-            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />
+            <HorizontalLinksBar
+              hierarchy={horizontalLinksHierarchy}
+              navBarColor={navColor}
+              showHorizontalSeperatorDots={showHorizontalSeperatorDots}
+            />
           )}
           <NavSection side="right" />
         </div>
@@ -435,9 +442,14 @@ Nav.propTypes = {
       defaultValue: 56,
     }),
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
-      label: 'Shrink navigation bar after scrolling ',
+      label: 'Shrink navigation bar after scrolling',
       group: 'Logo',
       min: 56,
+    }),
+    showHorizontalSeperatorDots: PropTypes.bool.tag({
+      label: 'Display dots between horizontal links',
+      group: 'Display',
+      defaultValue: true,
     }),
     ...generateNavComponentPropTypes(),
   }),

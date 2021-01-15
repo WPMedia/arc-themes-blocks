@@ -35,8 +35,9 @@ const sectionZIdx = navZIdx - 1;
 const StyledNav = styled.nav`
   align-items: center;
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0px;
+  margin-bottom: 0px;
 
   .news-theme-navigation-bar {
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
@@ -69,17 +70,6 @@ const StyledNav = styled.nav`
 
   * {
     font-family: ${(props) => props.font};
-  }
-
-  & + *, & ~ nav:nth-of-type(2) {
-
-    @media screen and (max-width: ${(props) => props.breakpoint}px) {
-      margin-top: ${standardNavHeight}px;
-    }
-    
-    @media screen and (min-width: ${(props) => props.breakpoint}px) {
-      margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-    }
   }
 
 `;
@@ -140,6 +130,7 @@ const Nav = (props) => {
     horizontalLinksHierarchy,
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
+    showHorizontalSeperatorDots,
 
   } = customFields;
 
@@ -379,7 +370,11 @@ const Nav = (props) => {
           <NavSection side="left" />
           <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {displayLinks && (
-            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />
+            <HorizontalLinksBar
+              hierarchy={horizontalLinksHierarchy}
+              navBarColor={navColor}
+              showHorizontalSeperatorDots={showHorizontalSeperatorDots}
+            />
           )}
           <NavSection side="right" />
         </div>
@@ -441,9 +436,14 @@ Nav.propTypes = {
       defaultValue: 56,
     }),
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
-      label: 'Shrink navigation bar after scrolling ',
+      label: 'Shrink navigation bar after scrolling',
       group: 'Logo',
       min: 56,
+    }),
+    showHorizontalSeperatorDots: PropTypes.bool.tag({
+      label: 'Display dots between horizontal links',
+      group: 'Display',
+      defaultValue: true,
     }),
     ...generateNavComponentPropTypes(),
   }),

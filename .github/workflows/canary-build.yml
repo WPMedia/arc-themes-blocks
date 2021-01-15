@@ -25,16 +25,24 @@ jobs:
             ${{ runner.os }}-node-
       - name: Setup Node
         uses: actions/setup-node@v1
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
           scope: '@wpmedia'  
       - run: npm ci
-        
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Authenticate with Registry
+        run: |
+          echo "@mentor-medier:registry=http://registry.npmjs.org/" > .npmrc
+          echo "registry=http://registry.npmjs.org/" >> .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npx lerna publish 0.0.0-canary.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
-        
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Check failure status
         uses: act10ns/slack@v1

@@ -35,7 +35,7 @@ jobs:
       - name: Publish to beta tag with a short git SHA as the version
         run: npx lerna publish 0.0.0-beta.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag beta --yes
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Check beta failure status
         uses: act10ns/slack@v1
         with:

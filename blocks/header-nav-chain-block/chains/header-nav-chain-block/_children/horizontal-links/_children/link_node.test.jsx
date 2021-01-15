@@ -12,7 +12,7 @@ describe('When the link is generated SSR', () => {
   it('must add a final slash to internal urls', () => {
     const link = renderToString(Link({ href: '/entertaiment', name: 'Entertaiment', showSepartor: false }));
     expect(link).toMatch(/\/entertaiment\//);
-    expect(link).toMatch(/>Entertaiment</);
+    expect(link).toMatch(/>*Entertaiment</);
   });
 
   it('must not add a final slash to links with query params', () => {

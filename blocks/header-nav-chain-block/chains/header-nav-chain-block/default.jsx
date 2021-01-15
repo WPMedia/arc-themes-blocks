@@ -9,6 +9,7 @@ import getThemeStyle from 'fusion:themes';
 import { useDebouncedCallback } from 'use-debounce';
 import {
   WIDGET_CONFIG,
+  PLACEMENT_AREAS,
   NAV_BREAKPOINTS,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
@@ -255,7 +256,10 @@ const Nav = (props) => {
 
   const hasUserConfiguredNavItems = () => {
     let userHasConfigured = false;
-    const { slotCounts, sections: navBarSections } = WIDGET_CONFIG['nav-bar'];
+    const {
+      slotCounts,
+      sections: navBarSections,
+    } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
     navBarSections.forEach((side) => {
       NAV_BREAKPOINTS.forEach((bpoint) => {
         for (let i = 1; i <= slotCounts[bpoint]; i++) {
@@ -315,7 +319,7 @@ const Nav = (props) => {
                 <WidgetList
                   id={side}
                   breakpoint={breakpoint}
-                  placement="nav-bar"
+                  placement={PLACEMENT_AREAS.NAV_BAR}
                 />
               </div>
             ))
@@ -333,7 +337,7 @@ const Nav = (props) => {
             <WidgetList
               id={navSection}
               breakpoint={breakpoint}
-              placement="section-menu"
+              placement={PLACEMENT_AREAS.SECTION_MENU}
             />
           </div>
         ))}

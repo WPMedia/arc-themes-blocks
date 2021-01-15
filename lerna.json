@@ -7,10 +7,5 @@
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"
-  ],
-  "command": {
-    "publish": {
-      "registry": "https://npm.pkg.github.com"
-    }
-  }
+  ]
 }

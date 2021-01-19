@@ -1,11 +1,14 @@
 import React from 'react';
-import { Image, extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
+import {
+  Image, extractVideoEmbedFromStory,
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
+} from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
-import VideoPlayer from '@wpmedia/video-player-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -37,18 +40,6 @@ const VerticalOverlineImageStoryItem = (props) => {
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
   const promoType = discoverPromoType(element);
-  const showBottomBorder = (typeof customFields.showBottomBorderXL === 'undefined') ? true : customFields.showBottomBorderXL;
-
-  const hrBorderTmpl = () => {
-    if (showBottomBorder) {
-      return (
-        <hr />
-      );
-    }
-    return (
-      <hr className="hr-borderless" />
-    );
-  };
 
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
@@ -137,7 +128,11 @@ const VerticalOverlineImageStoryItem = (props) => {
                 <>
                   {(
                     !!videoEmbed && (
-                      <VideoPlayer embedMarkup={videoEmbed} enableAutoplay={false} />
+                      <VideoPlayerPresentational
+                        id={id}
+                        embedMarkup={videoEmbed}
+                        enableAutoplay={false}
+                      />
                     )
                   ) || (
                     <>
@@ -195,7 +190,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           )}
         </div>
       </article>
-      {hrBorderTmpl()}
+      <hr />
     </>
   );
 };

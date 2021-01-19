@@ -113,9 +113,6 @@ class LeadArt extends Component {
       }
 
       if (lead_art.type === 'video') {
-        console.log(id, 'id');
-        console.log('got here to type video');
-        console.log(lead_art, 'lead art');
         return (
           <VideoPlayerPresentational
             id={id}

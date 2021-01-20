@@ -33,9 +33,13 @@ const HeadlineContainer = () => {
 
   // get primary font
   const { arcSite } = useFusionContext();
-  const { primaryFont } = getThemeStyle(arcSite);
 
-  return (<Headline headlineString={headlineString} primaryFont={primaryFont} />);
+  return (
+    <Headline
+      headlineString={headlineString}
+      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+    />
+  );
 };
 
 HeadlineContainer.label = 'Headline – Arc Block';

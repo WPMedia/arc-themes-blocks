@@ -69,7 +69,7 @@ const MediumPromo = ({ customFields }) => {
           title={headlineText}
         >
           <HeadlineText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="md-promo-headline-text"
             {...editableContent(content, 'headlines.basic')}
             suppressContentEditableWarning

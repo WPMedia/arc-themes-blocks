@@ -138,6 +138,8 @@ const Nav = (props) => {
 
   const navHeight = desktopNavivationStartHeight || 56;
 
+  const showDotSeparators = showHorizontalSeperatorDots || true;
+
   const mainContent = useContent({
     source: 'site-service-hierarchy',
     query: {
@@ -373,7 +375,7 @@ const Nav = (props) => {
             <HorizontalLinksBar
               hierarchy={horizontalLinksHierarchy}
               navBarColor={navColor}
-              showHorizontalSeperatorDots={showHorizontalSeperatorDots}
+              showHorizontalSeperatorDots={showDotSeparators}
             />
           )}
           <NavSection side="right" />

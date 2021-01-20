@@ -16,3 +16,7 @@ export const customHeadline = () => {
     <Headline headlineString={headlineString} primaryFont={primaryFont} />
   );
 };
+
+export const comicSansFontFamily = () => (
+  <Headline headlineString="Emperor Has No Pants" primaryFont="Comic Sans MS" />
+);

@@ -9,6 +9,7 @@ import getThemeStyle from 'fusion:themes';
 import { useDebouncedCallback } from 'use-debounce';
 import {
   WIDGET_CONFIG,
+  PLACEMENT_AREAS,
   NAV_BREAKPOINTS,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
@@ -34,8 +35,9 @@ const sectionZIdx = navZIdx - 1;
 const StyledNav = styled.nav`
   align-items: center;
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0px;
+  margin-bottom: 0px;
 
   .news-theme-navigation-bar {
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
@@ -68,17 +70,6 @@ const StyledNav = styled.nav`
 
   * {
     font-family: ${(props) => props.font};
-  }
-
-  & + *, & ~ nav:nth-of-type(2) {
-
-    @media screen and (max-width: ${(props) => props.breakpoint}px) {
-      margin-top: ${standardNavHeight}px;
-    }
-    
-    @media screen and (min-width: ${(props) => props.breakpoint}px) {
-      margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-    }
   }
 
 `;
@@ -139,6 +130,7 @@ const Nav = (props) => {
     horizontalLinksHierarchy,
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
+    showHorizontalSeperatorDots,
 
   } = customFields;
 
@@ -274,7 +266,10 @@ const Nav = (props) => {
 
   const hasUserConfiguredNavItems = () => {
     let userHasConfigured = false;
-    const { slotCounts, sections: navBarSections } = WIDGET_CONFIG['nav-bar'];
+    const {
+      slotCounts,
+      sections: navBarSections,
+    } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
     navBarSections.forEach((side) => {
       NAV_BREAKPOINTS.forEach((bpoint) => {
         for (let i = 1; i <= slotCounts[bpoint]; i++) {
@@ -334,7 +329,7 @@ const Nav = (props) => {
                 <WidgetList
                   id={side}
                   breakpoint={breakpoint}
-                  placement="nav-bar"
+                  placement={PLACEMENT_AREAS.NAV_BAR}
                 />
               </div>
             ))
@@ -352,7 +347,7 @@ const Nav = (props) => {
             <WidgetList
               id={navSection}
               breakpoint={breakpoint}
-              placement="section-menu"
+              placement={PLACEMENT_AREAS.SECTION_MENU}
             />
           </div>
         ))}
@@ -375,7 +370,11 @@ const Nav = (props) => {
           <NavSection side="left" />
           <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {displayLinks && (
-            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />
+            <HorizontalLinksBar
+              hierarchy={horizontalLinksHierarchy}
+              navBarColor={navColor}
+              showHorizontalSeperatorDots={showHorizontalSeperatorDots}
+            />
           )}
           <NavSection side="right" />
         </div>
@@ -437,9 +436,14 @@ Nav.propTypes = {
       defaultValue: 56,
     }),
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
-      label: 'Shrink navigation bar after scrolling ',
+      label: 'Shrink navigation bar after scrolling',
       group: 'Logo',
       min: 56,
+    }),
+    showHorizontalSeperatorDots: PropTypes.bool.tag({
+      label: 'Display dots between horizontal links',
+      group: 'Display',
+      defaultValue: true,
     }),
     ...generateNavComponentPropTypes(),
   }),

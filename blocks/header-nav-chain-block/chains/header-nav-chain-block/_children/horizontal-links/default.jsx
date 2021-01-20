@@ -14,7 +14,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
+const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDots }) => {
   const { id, arcSite } = useFusionContext();
 
   const content = useContent({
@@ -30,6 +30,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
     content
     && content.children
     && content.children.length > 1
+    && showHorizontalSeperatorDots
   );
 
   const font = getThemeStyle(arcSite)['primary-font-family'];

@@ -3,7 +3,9 @@ const path = require('path');
 // Export a function. Accept the base config as the only param.
 module.exports = {
 	stories: ['../stories/*.stories.@(js|jsx|mdx|tsx)', '../blocks/**/*.story.@(js|jsx|mdx|tsx)' ],
-	addons: ['@storybook/addon-a11y/register', '@storybook/addon-docs', '@storybook/addon-knobs'],
+  addons: ['@storybook/addon-a11y/register', '@storybook/addon-docs', '@storybook/addon-knobs',     
+  
+  ],
 	webpackFinal: async (config, { configType }) => {
 		// `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
 		// You can change the configuration based on that.
@@ -23,8 +25,9 @@ module.exports = {
 			}
 		},
 		config.module.rules.push({
-			test: /\.scss$/,
-			use: ['style-loader', 'css-loader',
+      test: /\.scss$/,
+      exclude: /\.module\.scss$/,
+      use: ['style-loader', 'css-loader',
 			{
 				loader: 'sass-loader',
 				options: {
@@ -41,9 +44,37 @@ module.exports = {
 			},
 			],
 			include: path.resolve(__dirname, '../'),
-		});
+    });
+
+    config.module.rules.push({
+      test: /\.module\.scss$/,
+      sideEffects: false,
+      use: [
+        "style-loader",
+        {
+          loader: "css-loader",
+          options: {
+            modules: true,
+          },
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            prependData: () => {
+              return `
+                @import '~@wpmedia/news-theme-css/scss';
+  
+                // Should look for a better way to do this ->
+                // This should be defaulted in the news-theme-css repo too!
+                $theme-primary-font-family: $primary-font-family !default;
+              `;
+            }
+          }
+        }
+      ],
+    });
 
 		// Return the altered config
 		return config;
-	},
+  },
 };

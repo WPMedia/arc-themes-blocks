@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import './headline.scss';
+import styles from './headline.module.scss';
 
 const HeadlineHeader = styled.h1`
   font-family: ${(props) => props.primaryFont};
@@ -17,7 +17,8 @@ export const Headline = ({ headlineString, primaryFont }) => (
   */
   (headlineString !== '') && (
     <HeadlineHeader
-      className="headline"
+      // use css modules to scope styles
+      className={styles.headline}
       primaryFont={primaryFont}
       // dangerouslySetInnerHTML seems to be a pattern for blocks
       dangerouslySetInnerHTML={{ __html: headlineString }}

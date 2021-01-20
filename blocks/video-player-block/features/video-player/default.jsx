@@ -4,7 +4,6 @@ import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
@@ -107,7 +106,7 @@ const VideoPlayer = (props) => {
       {title
       && (
       <TitleText
-        primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="xl-promo-headline"
       >
         {title}
@@ -127,7 +126,7 @@ const VideoPlayer = (props) => {
       {description
         && (
         <DescriptionText
-          secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
           className="description-text"
         >
           {description}

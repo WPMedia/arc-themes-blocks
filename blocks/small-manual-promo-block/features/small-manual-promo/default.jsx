@@ -55,7 +55,7 @@ const SmallManualPromo = ({ customFields }) => {
       <div className={`promo-headline ${headlineMarginClass}`}>
         { renderWithLink((
           <HeadlineText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="sm-promo-headline"
           >
             {customFields.headline}

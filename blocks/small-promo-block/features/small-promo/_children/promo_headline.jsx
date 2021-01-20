@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEditableContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
 import getPromoStyle from './promo_style';
@@ -29,7 +28,7 @@ const PromoHeadline = (props) => {
       >
         <HeadlineText
           primaryFont={
-            getThemeStyle(getProperties(arcSite))[
+            getThemeStyle(arcSite)[
               'primary-font-family'
             ]
           }

@@ -94,7 +94,7 @@ const LargePromo = ({ customFields }) => {
           title={headlineText}
         >
           <HeadlineText
-            primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="lg-promo-headline"
             {...editableContent(content, 'headlines.basic')}
             suppressContentEditableWarning

@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types';
 
+export const PLACEMENT_AREAS = {
+  NAV_BAR: 'nav-bar',
+  SECTION_MENU: 'section-menu',
+};
+
 export const NAV_BREAKPOINTS = ['mobile', 'desktop'];
 export const NAV_LABELS = {
   left: 'Left',
@@ -23,18 +28,18 @@ export const DEFAULT_SELECTIONS = {
 };
 
 export const WIDGET_CONFIG = {
-  'nav-bar': {
+  [PLACEMENT_AREAS.NAV_BAR]: {
     iconSize: 16,
     expandSearch: false,
     slotCounts: { mobile: 1, desktop: 2 },
     options: ['search', 'queryly', 'menu', 'none', 'custom'],
     sections: ['left', 'right'],
   },
-  'section-menu': {
+  [PLACEMENT_AREAS.SECTION_MENU]: {
     iconSize: 21,
     expandSearch: true,
     slotCounts: { mobile: 2, desktop: 2 },
-    options: ['search', 'none', 'custom'],
+    options: ['search', 'queryly', 'none', 'custom'],
     sections: ['menu'],
   },
 };

@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
-import EmbedContainer from 'react-oembed-container';
-import './default.scss';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
+import {
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
+} from '@wpmedia/engine-theme-sdk';
 
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -22,7 +24,7 @@ const AlertBadge = styled.span`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;
-  line-height: 1;
+  line-height: 1.33;
   font-weight: bold;
 `;
 
@@ -77,17 +79,9 @@ const VideoPlayer = (props) => {
 
   embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
 
-  if ((enableAutoplay || autoplay) && embedHTML) {
-    const position = embedHTML.search('id=');
-    embedHTML = [embedHTML.slice(0, position), ' data-autoplay=true data-muted=true ', embedHTML.slice(position)].join('');
-  }
-
-  if (playthrough && embedHTML) {
-    const position = embedHTML.search('id=');
-    embedHTML = [embedHTML.slice(0, position), ' data-playthrough=true ', embedHTML.slice(position)].join('');
-  }
-
   // Make sure that the player does not render until after component is mounted
+  // this logic is only for fetching content
+  // therefore, excluded from engine theme sdk videoplayer component
   embedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
     .replace('script>', 'script-->');
 
@@ -102,7 +96,7 @@ const VideoPlayer = (props) => {
   });
 
   return (
-    <div className="container-fluid video-promo">
+    <div className="container-fluid">
       {alertBadge
         && (
         <div className="padding-sm-bottom">
@@ -119,11 +113,15 @@ const VideoPlayer = (props) => {
       </TitleText>
       )}
       {embedHTML && (
-        <div className="embed-video">
-          <EmbedContainer markup={embedHTML}>
-            <div id={`video-${videoRef.current}`} dangerouslySetInnerHTML={{ __html: embedHTML }} />
-          </EmbedContainer>
-        </div>
+        <VideoPlayerPresentational
+          id={id}
+          embedMarkup={embedHTML}
+          enableAutoplay={enableAutoplay}
+          customFields={{
+            playthrough,
+            autoplay,
+          }}
+        />
       )}
       {description
         && (

@@ -52,8 +52,11 @@ class ResultsList extends Component {
       placeholderResizedImageOptions: {},
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
-    this.fetchStories(false);
     this.fetchPlaceholder();
+  }
+
+  componentDidMount() {
+    this.fetchStories(false);
   }
 
   getFallbackImageURL() {
@@ -83,9 +86,8 @@ class ResultsList extends Component {
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
-    const { storedList } = this.state;
-
     if (additionalStoryAmount) {
+      const { storedList } = this.state;
       // Check for next value
       if (storedList.next) {
         // Determine content service type
@@ -117,23 +119,48 @@ class ResultsList extends Component {
         if (value >= storedList.count) {
           this.state.seeMore = false;
         }
+      } else if (listContentConfig.contentService === 'content-api-collections') {
+        let from = parseInt(contentConfigValues.from, 10) || 0;
+        const size = parseInt(contentConfigValues.size, 10) || 10;
+        contentConfigValues.from = String(from + size);
+        this.fetchContent({
+          resultList: {
+            source: contentService,
+            query: contentConfigValues,
+            transform: (data) => fetchStoriesTransform(data, storedList),
+          },
+        });
+
+        const query = { ...contentConfigValues };
+        from = parseInt(contentConfigValues.from, 10) || 0;
+        query.from = String(from + size);
+        this.fetchContent({
+          seeMore: {
+            source: contentService,
+            query,
+            transform: (data) => !!(data?.content_elements?.length),
+          },
+        });
       }
     } else {
-      this.fetchContent({
-        resultList: {
-          source: contentService,
-          query: contentConfigValues,
-        },
-      });
-      const { resultList } = this.state;
-      this.state.storedList = resultList;
-      // Check if there are available stories
-
-      if (resultList?.content_elements) {
-        // Hide button if no additional stories from initial content
-        if (resultList.content_elements.length >= resultList.count) {
-          this.state.seeMore = false;
+      const { fetched } = this.getContent(listContentConfig.contentService, contentConfigValues);
+      fetched.then((response) => {
+        this.setState({ resultList: response, storedList: response });
+        if (response?.content_elements
+          && response?.count
+          && response.content_elements.length >= response.count) {
+          this.setState({ seeMore: false });
         }
+      });
+      if (listContentConfig.contentService === 'content-api-collections') {
+        const query = { ...contentConfigValues };
+        const from = parseInt(contentConfigValues.from, 10) || 0;
+        const size = parseInt(contentConfigValues.size, 10) || 10;
+        query.from = String(from + size);
+        const { fetched: nextPage } = this.getContent('content-api-collections', query);
+        nextPage.then((data) => {
+          this.setState({ seeMore: !!(data?.content_elements?.length) });
+        });
       }
     }
   }

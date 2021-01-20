@@ -38,37 +38,42 @@ body.nav-open {
   &:hover {
     outline: none;
   }
-}
 
-.nav-btn-dark > span {
-  color: $ui-btn-white-color;
-}
+  &-dark {
+    span {
+      color: $ui-btn-white-color;
+    }
 
-.nav-btn-light > span {
-  color: $ui-medium-gray;
-}
+    svg > path {
+      fill: $ui-btn-white-color;
+    }
 
-.nav-btn-dark > svg > path {
-  fill: $ui-btn-white-color;
-}
-
-.nav-btn-light > svg > path {
-  fill: $ui-medium-gray;
-}
-
-.nav-btn-dark.border {
-  border: $border-width solid $border-color-dull;
-
-  &:hover {
-    border: $border-width solid $border-color-bright;
+    &.border {
+      border: $border-width solid $border-color-dull;
+    
+      &:hover {
+        border: $border-width solid $border-color-bright;
+      }
+    }
+    
   }
-}
 
-.nav-btn-light.border {
-  border: $border-width solid $ui-light-gray;
+  &-light {
+    span {
+      color: $ui-medium-gray;
+    }
 
-  &:hover {
-    border: $border-width solid $ui-medium-gray;
+    svg > path {
+      fill: $ui-medium-gray;
+    }
+
+    &.border {
+      border: $border-width solid $ui-light-gray;
+
+      &:hover {
+        border: $border-width solid $ui-medium-gray;
+      }
+    }
   }
 }
 
@@ -78,6 +83,9 @@ body.nav-open {
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
+    span {
+      display: none;
+    }
   }
 
   > span,
@@ -141,6 +149,23 @@ body.nav-open {
     transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
   }
+
+  &.queryly > .nav-btn {
+    padding: 0;
+
+    label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-items: center;
+      align-content: center;
+      padding-left: $btn-padding;
+      padding-right: $btn-padding;
+      cursor: pointer;
+    }
+  }
 }
 
 .news-theme-navigation-container {
@@ -153,13 +178,6 @@ body.nav-open {
 
   &.light {
     border-bottom: $border-width solid $border-rule-color;
-  }
-
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search,
-    .nav-sections-btn span {
-      display: none;
-    }
   }
 
   * {
@@ -191,9 +209,9 @@ body.nav-open {
         &--desktop {
           align-items: center;
           
-          & > * {
+          & > .nav-widget {
             margin-right: calculateRem(16px);
-    
+            
             &:last-child {
               margin-right: 0;
             }
@@ -201,14 +219,20 @@ body.nav-open {
         }
 
         &--mobile {
-          @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            display: none;
-          }
+          display: none;
         }
 
         &--desktop {
-          @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
             display: none;
+          }
+
+          &--mobile {
+            display: inherit;
           }
         }
       }
@@ -224,13 +248,6 @@ body.nav-open {
 
     &.nav-logo, & > .nav-logo {
       justify-content: center;
-
-      img {
-        height: auto;
-        max-height: 40px;
-        max-width: 240px;
-        width: auto;
-      }
 
       &.svg-logo {
         flex: 1;
@@ -258,6 +275,10 @@ body.nav-open {
         @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
           flex: 1;
         }
+
+        a {
+          justify-content: flex-start;
+        }
       }
 
       &:not(.horizontal-links) {
@@ -273,6 +294,10 @@ body.nav-open {
 
         &.nav-logo {
           margin: 0 calculateRem(16px) 0 calculateRem(16px);
+
+          a {
+            justify-content: center;
+          }
         }
       }
     }
@@ -311,12 +336,6 @@ body.nav-open {
     width: 0;
   }
 
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    .nav-search {
-      display: none;
-    }
-  }
-
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     .subsection-container {
       display: none;
@@ -329,26 +348,54 @@ body.nav-open {
     flex-direction: column;
     width: $section-width;
 
-    .nav-search {
-      &.open {
-        input {
-          height: calculateRem(48px);
-        }
+    .nav-menu {
+      .nav-widget {
+        .nav-search {
+          justify-content: flex-start;
 
-        &.dark {
-          border: 0;
+          input {
+            flex: 1;
+          }
+
+          &.open {
+            input {
+              height: calculateRem(48px);
+            }
+
+            &.dark {
+              border: 0;
+            }
+          }
         }
       }
-    }
-  }
 
-  .nav-search {
-    border-bottom: $border-width solid $nav-search-border-color;
-    margin: 16px 20px 0;
-    padding-bottom: 16px;
+      & > .nav-components {
+        &--mobile,
+        &--desktop {          
+          & > .nav-widget {
+            margin-top: calculateRem(16px);
+            padding: 0 20px;
+          }
+        }
 
-    input {
-      flex: 1;
+        &--mobile {
+          display: none;
+        }
+
+        &--desktop {
+          display: inherit;
+        }
+
+        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+          &--desktop {
+            display: none;
+          }
+
+          &--mobile {
+            display: inherit;
+          }
+        }
+      }
     }
   }
 

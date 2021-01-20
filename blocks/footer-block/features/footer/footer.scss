@@ -8,6 +8,14 @@ footer {
     justify-content: space-around;
     @supports (display: grid) {
       justify-content: initial;
+      row-gap: 1rem;
+    }
+  }
+
+  .container {
+    @media (min-width: 90rem)  {
+      margin-left: 5%;
+      margin-right: 5%;
     }
   }
 

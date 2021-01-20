@@ -14,6 +14,18 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+const Separator = '  \u00a0 • \u00a0  ';
+
+const styledLinkTmpl = (name, id, separator, arcSite) => (
+  <StyledLink
+    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+    href={id}
+    key={id}
+  >
+    {`${name}${separator}`}
+  </StyledLink>
+);
+
 const SectionTitle = (props) => {
   const { content } = props;
   const { arcSite } = useFusionContext();
@@ -24,25 +36,23 @@ const SectionTitle = (props) => {
   );
 
   return (
-    !!(content && content.name) && (
+    !!(content && (content.name || content.display_name)) && (
       <>
         <StyledTitle
           primaryFont={getThemeStyle(arcSite)['primary-font-family']}
           className="section-title"
         >
-          {content.name}
+          {content.name || content.display_name}
         </StyledTitle>
         <div className="section-container">
           {
             !!(content.children && content.children.length > 0)
             && (content.children.map((child, index) => (
-              <StyledLink
-                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                href={child._id}
-                key={child._id}
-              >
-                {`${child.name}${(content.children.length !== index + 1 && showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
-              </StyledLink>
+              (child.node_type && child.node_type === 'link' && (
+                styledLinkTmpl(child.display_name, child.url, ((content.children.length !== index + 1 && showSeparator) ? Separator : ''), arcSite)
+              )) || (
+                styledLinkTmpl(child.name, child._id, ((content.children.length !== index + 1 && showSeparator) ? Separator : ''), arcSite)
+              )
             )))
           }
         </div>

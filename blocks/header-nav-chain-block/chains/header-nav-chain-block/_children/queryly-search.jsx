@@ -3,8 +3,8 @@ import React from 'react';
 import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
 
 const QuerylySearch = ({ theme = 'dark', iconSize = 16 }) => (
-  <div className={`nav-search ${theme}`}>
-    <button className={`nav-btn nav-btn-${theme} transparent border queryly`} type="button">
+  <div className={`nav-search ${theme} queryly`}>
+    <button className={`nav-btn nav-btn-${theme} transparent border`} type="button">
       <label htmlFor="queryly_toggle">
         <SearchIcon height={iconSize} width={iconSize} />
       </label>

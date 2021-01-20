@@ -1,6 +1,6 @@
 footer {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
 
   //Fix for IE 11 and non grid browsers
@@ -9,6 +9,13 @@ footer {
     @supports (display: grid) {
       justify-content: initial;
       row-gap: 1rem;
+    }
+  }
+
+  .container {
+    @media (min-width: 90rem)  {
+      margin-left: 5%;
+      margin-right: 5%;
     }
   }
 

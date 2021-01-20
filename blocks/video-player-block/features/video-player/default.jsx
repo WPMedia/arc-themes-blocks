@@ -6,7 +6,6 @@ import EmbedContainer from 'react-oembed-container';
 import './default.scss';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -113,7 +112,7 @@ const VideoPlayer = (props) => {
       {title
       && (
       <TitleText
-        primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="xl-promo-headline"
       >
         {title}
@@ -129,7 +128,7 @@ const VideoPlayer = (props) => {
       {description
         && (
         <DescriptionText
-          secondaryFont={getThemeStyle(getProperties(arcSite))['secondary-font-family']}
+          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
           className="description-text"
         >
           {description}

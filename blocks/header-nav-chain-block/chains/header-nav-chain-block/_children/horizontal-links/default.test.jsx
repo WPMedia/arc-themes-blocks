@@ -91,7 +91,7 @@ describe('the links bar feature for the default output type', () => {
       const wrapper = mount(<Link href="/testurl" name="test" />);
 
       expect(wrapper.props().name).toBe('test');
-      expect(wrapper.find('a').text()).toBe('test');
+      expect(wrapper.find('a').text()).toBe('      test');
     });
   });
 
@@ -164,11 +164,16 @@ describe('the links bar feature for the default output type', () => {
     });
   });
 
-  describe('when a link has show separator true', () => {
-    it('should should show dot separator', () => {
+  describe('when a link has show separator based on showSeparator attribute', () => {
+    it('should show dot separator', () => {
       const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" navBarColor="light" showSeparator="true" />);
-      expect(wrapper.text()).toContain('test    •    ');
+      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" navBarColor="light" showSeparator />);
+      expect(wrapper.text()).toContain('    •  test');
+    });
+    it('should not show dot separator', () => {
+      const { default: Link } = require('./_children/link');
+      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test123" navBarColor="light" showSeparator={false} />);
+      expect(wrapper.text()).toContain('      test');
     });
   });
 });

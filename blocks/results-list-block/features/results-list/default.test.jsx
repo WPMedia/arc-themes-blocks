@@ -46,6 +46,11 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched(mockReturnData) });
 
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
@@ -69,6 +74,10 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched(oneListItem) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
@@ -131,6 +140,11 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(LineItemWithOutDescription);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched(LineItemWithOutDescription) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
@@ -167,6 +181,11 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched(withoutByline) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
@@ -193,7 +212,11 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched(mockReturnData) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
@@ -220,6 +243,11 @@ describe('The results list', () => {
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
@@ -250,6 +278,11 @@ describe('The results list', () => {
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -280,6 +313,11 @@ describe('The results list', () => {
     };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -310,6 +348,11 @@ describe('The results list', () => {
     };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -340,6 +383,11 @@ describe('The results list', () => {
     };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -373,6 +421,11 @@ describe('The results list', () => {
     };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -404,6 +457,10 @@ describe('The results list', () => {
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(mockReturnData);
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData, seeMore: true }, () => {
       wrapper.update();
@@ -436,6 +493,11 @@ describe('The results list', () => {
 
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched({ mockData }) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData, seeMore: false }, () => {
       wrapper.update();
@@ -461,8 +523,13 @@ describe('The results list from collection', () => {
     const customFields = { listContentConfig };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ collectionFirst10Items });
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched({ collectionFirst10Items }) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: collectionFirst10Items, count: 11 }, () => {
+    wrapper.setState({ resultList: collectionFirst10Items }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
       expect(wrapper.find('.list-item').length).toEqual(10);
@@ -482,8 +549,13 @@ describe('The results list from collection', () => {
     const customFields = { listContentConfig };
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ mockCollections });
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched({ mockCollections }) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: collectionFirst10Items, count: 10, seeMore: false }, () => {
+    wrapper.setState({ resultList: collectionFirst10Items, seeMore: false }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
       expect(wrapper.find('.list-item').length).toEqual(10);
@@ -504,8 +576,13 @@ describe('The results list from collection', () => {
     const { default: ResultsList } = require('./default');
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({ mockCollections });
     ResultsList.prototype.fetchStories = jest.fn().mockReturnValue(collectionFirst10Items);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched({ mockCollections }) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: collectionFirst10Items, count: 11, seeMore: true }, () => {
+    wrapper.setState({ resultList: collectionFirst10Items, seeMore: true }, () => {
       wrapper.update();
       expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
       wrapper.find('.btn').simulate('click');
@@ -527,12 +604,16 @@ describe('The results list from collection', () => {
     const { default: ResultsList } = require('./default');
     const fetchMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
     const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     fetchMock.mockClear();
-    wrapper.setState({ storedList: collectionFirst10Items, count: 11 });
+    wrapper.setState({ storedList: collectionFirst10Items });
     wrapper.update();
     wrapper.instance().fetchStories(true);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(wrapper.state('seeMore')).toEqual(false);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(wrapper.state('seeMore')).toEqual(true);
   });
 });

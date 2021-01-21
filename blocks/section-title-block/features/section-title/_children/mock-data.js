@@ -60,6 +60,46 @@ const mockTwoSection = {
   },
 };
 
+const mockTwoSectionWithUrl = {
+  arcSite: 'site',
+  globalContent: {
+    _id: '/',
+    name: 'Section Title',
+    children: [
+      {
+        _id: '/news',
+        _website: 'The Washington Post',
+        privilege: 'News',
+        name: 'News',
+        order: {
+          default: 1002,
+        },
+        ancestors: {
+          default: ['/'],
+        },
+        inactive: false,
+        children: [],
+      },
+      {
+        _id: '/sports',
+        _website: 'The Washington Post',
+        privilege: 'Sports',
+        display_name: 'Sports',
+        url: 'www.google.com',
+        node_type: 'link',
+        order: {
+          default: 1002,
+        },
+        ancestors: {
+          default: ['/'],
+        },
+        inactive: false,
+        children: [],
+      },
+    ],
+  },
+};
+
 const mockNestedChildren = {
   arcSite: 'site',
   globalContent: {
@@ -134,5 +174,5 @@ const mockNoChildren = {
 };
 
 export {
-  mockOneSection, mockTwoSection, mockNestedChildren, mockNoChildren,
+  mockOneSection, mockTwoSection, mockNestedChildren, mockNoChildren, mockTwoSectionWithUrl,
 };

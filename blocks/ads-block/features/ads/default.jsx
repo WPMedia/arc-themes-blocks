@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import styled from 'styled-components';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import adMap from './ad-mapping';
@@ -12,6 +13,18 @@ import './ads.scss';
 function generateInstanceId(componentId) {
   return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
+
+const StyledAdUnit = styled.div`
+  .arcad > div[id^='google_ads_iframe']:not(:empty):before {
+    content: "${(props) => props.adLabel}";
+    ${(props) => (props.displayAdLabel ? '' : 'display: none')}
+  }
+
+  .arcad > div[id^='google_ads_iframe']:empty[style] {
+    width: 0px !important;
+    height: 0px !important;
+  }
+`;
 
 const ArcAd = (props) => {
   if (typeof window === 'undefined') return null;
@@ -31,7 +44,10 @@ const ArcAd = (props) => {
     }),
   );
   // istanbul ignore next
-  const isAMP = () => (!!(propsWithContext.outputType && propsWithContext.outputType === 'amp'));
+  const isAMP = () => (
+    !!(propsWithContext.outputType
+      && propsWithContext.outputType === 'amp')
+  );
 
   const {
     arcSite,
@@ -41,8 +57,6 @@ const ArcAd = (props) => {
     },
   } = propsWithContext;
   const siteVars = getProperties(arcSite);
-
-  const [labelDisplayClass, setLabelDisplayClass] = useState('no-display');
 
   const registerAd = useCallback(() => {
     const publisherIds = { dfp_publisher_id: siteVars.dfpId };
@@ -54,11 +68,6 @@ const ArcAd = (props) => {
         params: config,
         publisherIds,
         debug,
-      }, (cb) => {
-        // render advertisement label after ad returns
-        if (cb && cb.adId) {
-          setLabelDisplayClass('');
-        }
       });
   }, [config, debug, propsWithContext, siteVars]);
 
@@ -70,20 +79,14 @@ const ArcAd = (props) => {
     id, adClass, adType, dimensions, slotName,
   } = config;
 
-  const display = adType === 'right_rail_cube' ? 'desktop' : 'all';
-
   return (
-    <div
+    <StyledAdUnit
       id={`arcad_feature-${instanceId}`}
-      className="arcad_feature margin-md-bottom"
+      className="arcad_feature"
+      adLabel={siteVars?.advertisementLabel || 'ADVERTISEMENT'}
+      displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
     >
       <div className="arcad_container">
-        {!isAdmin && displayAdLabel && !isAMP() && (
-          <div
-            className={`advertisement-label advertisement-label--${display} ${labelDisplayClass}`}
-            dangerouslySetInnerHTML={{ __html: siteVars.advertisementLabel || 'ADVERTISEMENT' }}
-          />
-        )}
         {!isAdmin && !isAMP() && (
           <div id={id} className={`arcad ad-${adClass}`} />
         )}
@@ -94,7 +97,7 @@ const ArcAd = (props) => {
           dimensions={dimensions}
         />
       </div>
-    </div>
+    </StyledAdUnit>
   );
 };
 

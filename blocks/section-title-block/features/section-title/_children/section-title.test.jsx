@@ -2,7 +2,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SectionTitle from './section-title';
-import { mockOneSection, mockTwoSection, mockNoChildren } from './mock-data';
+import {
+  mockOneSection, mockTwoSection, mockNoChildren, mockTwoSectionWithUrl,
+} from './mock-data';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
@@ -70,6 +72,18 @@ describe('the section title block', () => {
 
           expect(wrapper.find('a').length).toEqual(0);
         });
+      });
+
+      it('should render sub-section links with url', () => {
+        const wrapper = mount(<SectionTitle content={mockTwoSectionWithUrl.globalContent} />);
+
+        expect(wrapper.find('.section-container').length).toEqual(1);
+        expect(wrapper.find('a').length).toEqual(2);
+        expect(wrapper.find('a').at(0).props().href).toBe('/news');
+        expect(wrapper.find('a').at(1).props().href).toBe('www.google.com');
+
+        expect(wrapper.find('a').at(0)).toIncludeText('News');
+        expect(wrapper.find('a').at(1)).toIncludeText('Sports');
       });
     });
   });

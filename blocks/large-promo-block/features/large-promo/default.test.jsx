@@ -11,6 +11,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
   extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
+  VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

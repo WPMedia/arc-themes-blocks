@@ -40,6 +40,18 @@ const VerticalOverlineImageStoryItem = (props) => {
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
   const promoType = discoverPromoType(element);
+  const showBottomBorder = (typeof customFields.showBottomBorderXL === 'undefined') ? true : customFields.showBottomBorderXL;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const overlineTmpl = () => {
     if (customFields.showOverlineXL && overlineDisplay) {
@@ -190,7 +202,7 @@ const VerticalOverlineImageStoryItem = (props) => {
           )}
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

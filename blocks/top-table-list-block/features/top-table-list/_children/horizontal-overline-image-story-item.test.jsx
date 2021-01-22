@@ -59,6 +59,7 @@ describe('horizontal overline image story item', () => {
     jest.mock('@wpmedia/engine-theme-sdk', () => ({
       Image: () => <img alt="test" />,
       extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
+      VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
     }));
   });
 
@@ -233,7 +234,7 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(testProps.websiteURL);
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
-    expect(wrapper.find('Image')).toHaveLength(0);
-    expect(wrapper.find('VideoPlayer')).toHaveLength(1);
+    expect(wrapper.find('Image')).toHaveLength(0); expect(wrapper.find('Image')).toHaveLength(0);
+    expect(wrapper.find('VideoPlayer')).toHaveLength(1); expect(wrapper.find('VideoPlayer')).toHaveLength(1);
   });
 });

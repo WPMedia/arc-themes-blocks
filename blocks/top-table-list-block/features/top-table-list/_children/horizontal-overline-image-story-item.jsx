@@ -4,14 +4,12 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-
 } from '@wpmedia/engine-theme-sdk';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
-// import VideoPlayer from '@wpmedia/video-player-block';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
@@ -44,6 +42,19 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const textClass = customFields.showImageLG
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
+
+  const showBottomBorder = (typeof customFields.showBottomBorderLG === 'undefined') ? true : customFields.showBottomBorderLG;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const overlineTmpl = () => {
     if (customFields.showOverlineLG && overlineDisplay) {
@@ -197,7 +208,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
           )}
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

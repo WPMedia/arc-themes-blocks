@@ -50,12 +50,12 @@ body.nav-open {
 
     &.border {
       border: $border-width solid $border-color-dull;
-    
+
       &:hover {
         border: $border-width solid $border-color-bright;
       }
     }
-    
+
   }
 
   &-light {
@@ -208,10 +208,10 @@ body.nav-open {
         &--mobile,
         &--desktop {
           align-items: center;
-          
+
           & > .nav-widget {
             margin-right: calculateRem(16px);
-            
+
             &:last-child {
               margin-right: 0;
             }
@@ -371,7 +371,7 @@ body.nav-open {
 
       & > .nav-components {
         &--mobile,
-        &--desktop {          
+        &--desktop {
           & > .nav-widget {
             margin-top: calculateRem(16px);
             padding: 0 20px;
@@ -495,6 +495,9 @@ body.nav-open {
 
   .submenu-caret {
     align-self: center;
+    appearance: none;
+    background: transparent;
+    border: 0;
     display: flex;
 
     path {

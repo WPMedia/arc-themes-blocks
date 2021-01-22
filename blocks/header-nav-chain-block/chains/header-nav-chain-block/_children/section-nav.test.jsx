@@ -175,6 +175,44 @@ describe('the SectionNav component', () => {
       expect(section.find('Link > a')).toHaveProp('target', '_blank');
       expect(section.find('Link > a')).toHaveProp('rel', 'noopener noreferrer');
     });
+
+    it('submenu "caret" button sets open class correctly on parent', () => {
+      const wrapper = mount(<SectionNav sections={items} />);
+      const section = wrapper.find('li.section-item').at(0);
+      const caret = section.find('.subsection-anchor .submenu-caret').at(0);
+      const sectionMenu = section.find('.subsection-anchor').at(0);
+
+      expect(sectionMenu.getDOMNode().classList.contains('open')).toBe(false);
+      caret.simulate('click');
+      wrapper.update();
+      expect(sectionMenu.getDOMNode().classList.contains('open')).toBe(true);
+    });
+
+    it('submenu "caret" button sets correct aria-expanded on open and close', () => {
+      const wrapper = mount(<SectionNav sections={items} />);
+      const section = wrapper.find('li.section-item').at(0);
+      const caret = section.find('.subsection-anchor .submenu-caret').at(0);
+
+      expect(caret.getDOMNode().getAttribute('aria-expanded')).toBe('false');
+      caret.simulate('click');
+      wrapper.update();
+      expect(caret.getDOMNode().getAttribute('aria-expanded')).toBe('true');
+      caret.simulate('click');
+      wrapper.update();
+      expect(caret.getDOMNode().getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('clicking menu item link does not open sub sections', () => {
+      const wrapper = mount(<SectionNav sections={items} />);
+      const section = wrapper.find('li.section-item').at(0);
+      const menuItem = section.find('.subsection-anchor a');
+      const sectionMenu = section.find('.subsection-anchor').at(0);
+
+      expect(sectionMenu.getDOMNode().classList.contains('open')).toBe(false);
+      menuItem.simulate('click');
+      wrapper.update();
+      expect(sectionMenu.getDOMNode().classList.contains('open')).toBe(false);
+    });
   });
 
   describe('when a link is not missing a trailing slash', () => {

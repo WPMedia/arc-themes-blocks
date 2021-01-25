@@ -131,8 +131,14 @@
     visibility: hidden;
   }
 
-  .container-fluid {
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
+  #promo-item-margins {
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
+    }
   }
 }

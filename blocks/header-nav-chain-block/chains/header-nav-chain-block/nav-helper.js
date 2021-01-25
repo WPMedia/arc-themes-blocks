@@ -1,13 +1,47 @@
 import PropTypes from 'prop-types';
 
-export const NAV_COMPONENT_OPTIONS = ['search', 'menu', 'none', 'custom'];
-export const NAV_SECTIONS = ['left', 'right'];
+export const PLACEMENT_AREAS = {
+  NAV_BAR: 'nav-bar',
+  SECTION_MENU: 'section-menu',
+};
+
 export const NAV_BREAKPOINTS = ['mobile', 'desktop'];
-export const NAV_SLOT_COUNTS = { mobile: 1, desktop: 2 };
+export const NAV_LABELS = {
+  left: 'Left',
+  right: 'Right',
+  menu: 'Sections Menu',
+};
+
+export const WIDGET_OPTIONS = {
+  none: 'None',
+  search: 'Arc Search',
+  queryly: 'Queryly Search',
+  menu: 'Sections Menu',
+  custom: 'Custom',
+};
+
 export const DEFAULT_SELECTIONS = {
   leftComponentDesktop1: 'search',
   leftComponentDesktop2: 'menu',
   leftComponentMobile1: 'menu',
+  menuComponentMobile1: 'search',
+};
+
+export const WIDGET_CONFIG = {
+  [PLACEMENT_AREAS.NAV_BAR]: {
+    iconSize: 16,
+    expandSearch: false,
+    slotCounts: { mobile: 1, desktop: 2 },
+    options: ['search', 'queryly', 'menu', 'none', 'custom'],
+    sections: ['left', 'right'],
+  },
+  [PLACEMENT_AREAS.SECTION_MENU]: {
+    iconSize: 21,
+    expandSearch: true,
+    slotCounts: { mobile: 2, desktop: 2 },
+    options: ['search', 'queryly', 'none', 'custom'],
+    sections: ['menu'],
+  },
 };
 
 export const capitalize = (string) => (
@@ -18,7 +52,7 @@ export const capitalize = (string) => (
 );
 
 export const getNavComponentLabel = (section, breakpoint, position) => (
-  `${capitalize(section)} Component ${position} - ${capitalize(breakpoint)}`
+  `${NAV_LABELS[section]} Component ${position} - ${capitalize(breakpoint)}`
 );
 
 export const getNavComponentPropTypeKey = (section, breakpoint, position) => (
@@ -36,12 +70,7 @@ export const getNavComponentDefaultSelection = (propTypeKey) => (
 export const generateNavComponentPropType = (section, breakpoint, position) => ({
   name: getNavComponentLabel(section, breakpoint, position),
   group: `${capitalize(breakpoint)} Components`,
-  labels: {
-    search: 'Search',
-    menu: 'Sections Menu',
-    none: 'None',
-    custom: 'Custom',
-  },
+  labels: WIDGET_OPTIONS,
   defaultValue: getNavComponentDefaultSelection(
     getNavComponentPropTypeKey(section, breakpoint, position),
   ),
@@ -60,21 +89,24 @@ export const generateNavComponentIndexPropType = (section, breakpoint, position)
 // eslint-disable-next-line import/prefer-default-export
 export const generateNavComponentPropTypes = () => {
   const navComponentPropTypes = {};
-  NAV_SECTIONS.forEach((navSection) => {
-    NAV_BREAKPOINTS.forEach((navBreakpoint) => {
-      // eslint-disable-next-line no-plusplus
-      for (let i = 1; i <= NAV_SLOT_COUNTS[navBreakpoint]; i++) {
-        navComponentPropTypes[
-          getNavComponentPropTypeKey(navSection, navBreakpoint, i)
-        ] = PropTypes.oneOf(NAV_COMPONENT_OPTIONS).tag(
-          generateNavComponentPropType(navSection, navBreakpoint, i),
-        );
-        navComponentPropTypes[
-          getNavComponentIndexPropTypeKey(navSection, navBreakpoint, i)
-        ] = PropTypes.number.tag(
-          generateNavComponentIndexPropType(navSection, navBreakpoint, i),
-        );
-      }
+  Object.keys(WIDGET_CONFIG).forEach((cfgKey) => {
+    const {
+      sections, options, slotCounts,
+    } = WIDGET_CONFIG[cfgKey];
+    sections.forEach((navSection) => {
+      NAV_BREAKPOINTS.forEach((navBreakpoint) => {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 1; i <= slotCounts[navBreakpoint]; i++) {
+          const itemSelectionKey = getNavComponentPropTypeKey(navSection, navBreakpoint, i);
+          const itemIndexKey = getNavComponentIndexPropTypeKey(navSection, navBreakpoint, i);
+          navComponentPropTypes[itemSelectionKey] = PropTypes.oneOf(options).tag(
+            generateNavComponentPropType(navSection, navBreakpoint, i),
+          );
+          navComponentPropTypes[itemIndexKey] = PropTypes.number.tag(
+            generateNavComponentIndexPropType(navSection, navBreakpoint, i),
+          );
+        }
+      });
     });
   });
   return navComponentPropTypes;

@@ -14,7 +14,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
+const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDots }) => {
   const { id, arcSite } = useFusionContext();
 
   const content = useContent({
@@ -30,6 +30,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
     content
     && content.children
     && content.children.length > 1
+    && showHorizontalSeperatorDots
   );
 
   const font = getThemeStyle(arcSite)['primary-font-family'];
@@ -50,7 +51,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
                   <Link
                     href={item.url}
                     name={item.display_name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )
@@ -58,7 +59,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor }) => {
                   <Link
                     href={item._id}
                     name={item.name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
+                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )

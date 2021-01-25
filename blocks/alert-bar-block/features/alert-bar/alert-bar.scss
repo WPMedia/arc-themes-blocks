@@ -1,4 +1,3 @@
-$nav-bar-height: 56px;
 $alert-bar-height: 56px;
 
 .alert-bar {
@@ -34,12 +33,5 @@ $alert-bar-height: 56px;
     margin-right: 0;
     padding-left: calculateRem(8px);
     padding-right: calculateRem(8px);
-  }
-}
-
-#fusion-app .has-alert + .main {
-  padding-top: calc(#{$nav-bar-height} + #{$alert-bar-height} + #{map-get($spacers, 'lg')});
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    padding-top: calc(#{$nav-bar-height} + #{$alert-bar-height} + #{map-get($spacers, 'md')});
   }
 }

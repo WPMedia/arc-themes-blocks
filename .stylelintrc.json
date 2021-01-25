@@ -17,7 +17,6 @@
     "font-family-no-missing-generic-family-keyword": null,
     "order/properties-alphabetical-order": null,
     "declaration-property-value-disallowed-list": [
-      true,
       {
         "border": [
           "none"

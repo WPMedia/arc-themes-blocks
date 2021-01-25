@@ -121,6 +121,7 @@ const TopTableList = (props) => {
   const {
     customFields: {
       listContentConfig: { contentService = '', contentConfigValues = {} } = {},
+      offsetOverride = 0,
       extraLarge = 0,
       large = 0,
       medium = 0,
@@ -155,8 +156,8 @@ const TopTableList = (props) => {
     query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
-  const siteContent = contentElements.reduce((acc, element) => {
-    if (element.websites?.[arcSite]) {
+  const siteContent = contentElements.reduce((acc, element, index) => {
+    if (element.websites?.[arcSite] && index >= offsetOverride) {
       return acc.concat(element);
     }
     return acc;
@@ -248,6 +249,11 @@ TopTableListWrapper.propTypes = {
     listContentConfig: PropTypes.contentConfig('ans-feed').tag({
       group: 'Configure Content',
       label: 'Display Content Info',
+    }),
+    offsetOverride: PropTypes.number.tag({
+      group: 'Configure Content',
+      label: 'Offset Override',
+      defaultValue: 0,
     }),
     extraLarge: PropTypes.number.tag({
       label: generateLabelString('Extra Large'),

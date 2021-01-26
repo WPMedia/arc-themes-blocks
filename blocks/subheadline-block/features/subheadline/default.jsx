@@ -1,5 +1,6 @@
 import React from 'react';
-import { useAppContext, useComponentContext } from 'fusion:context';
+import PropTypes from 'prop-types';
+import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import './subheadline.scss';
 import styled from 'styled-components';
@@ -9,14 +10,31 @@ const SubheadH2 = styled.h2`
 `;
 
 const SubHeadline = () => {
-  const { arcSite } = useAppContext();
-  const { globalContent: content } = useComponentContext();
-
+  const { globalContent: content, customFields = {}, arcSite } = useFusionContext();
+  const { valueToDisplay = 'Subheadline' } = customFields;
+  const value = (valueToDisplay === 'Description') ? content?.description?.basic
+    : content?.subheadlines?.basic;
   return (
-    !!(content && content.subheadlines && content.subheadlines.basic) && (
-      <SubheadH2 className="h4-primary sub-headline" primaryFont={getThemeStyle(arcSite)['primary-font-family']} dangerouslySetInnerHTML={{ __html: content.subheadlines.basic }} />
+    !!value && (
+      <SubheadH2
+        className="h4-primary sub-headline"
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        dangerouslySetInnerHTML={{ __html: value }}
+      />
     )
   );
+};
+
+SubHeadline.propTypes = {
+  customFields: PropTypes.shape({
+    valueToDisplay: PropTypes.oneOf([
+      'Subheadline', 'Description',
+    ]).tag({
+      label: 'Value to display',
+      group: 'Content Configuration',
+      defaultValue: 'Subheadline',
+    }),
+  }),
 };
 
 SubHeadline.label = 'Subheadline – Arc Block';

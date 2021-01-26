@@ -112,7 +112,7 @@ const SmallListItem = (props) => {
       key={id}
       className={`top-table-list-small-promo small-promo ${colClasses} layout-section wrap-bottom`}
     >
-      <div className={`promo-item-margins promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
+      <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         { showHeadline && <PromoHeadline /> }
         { showImage && <PromoImage /> }
       </div>

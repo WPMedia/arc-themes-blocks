@@ -128,7 +128,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   return (
     <>
       <article className="container-fluid xl-large-promo" key={id}>
-        <div id="promo-item-margins" className="row xl-promo-padding-bottom">
+        <div className="promo-item-margins row xl-promo-padding-bottom">
           {(customFields.showHeadlineXL
             || customFields.showDescriptionXL
             || customFields.showBylineXL

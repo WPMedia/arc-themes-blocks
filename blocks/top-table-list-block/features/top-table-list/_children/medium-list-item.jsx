@@ -103,7 +103,7 @@ const MediumListItem = (props) => {
   return (
     <>
       <article className="container-fluid medium-promo" key={id}>
-        <div id="promo-item-margins" className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
+        <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {/* {customFields.headlinePositionMD === 'above'
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD

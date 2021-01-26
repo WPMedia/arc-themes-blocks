@@ -134,6 +134,82 @@ describe('top table list', () => {
     expect(wrapper.find('.top-table-list-container').children().length).toBe(1);
   });
 
+  it('renders content with offset override custom field set', () => {
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        content_elements: [
+          {
+            _id: 'kjdfh',
+            promo_items: {
+              basic: {
+                type: 'image',
+                url: 'url',
+              },
+            },
+            headlines: {
+              basic: 'Basic Headline',
+            },
+            description: {
+              basic: 'Basic description',
+            },
+            credits: {
+              by: ['Bob Woodward'],
+            },
+            websites: {
+              'the-sun': {
+                website_url: 'url',
+              },
+            },
+          },
+          {
+            _id: 'abcde',
+            promo_items: {
+              basic: {
+                type: 'image',
+                url: 'url',
+              },
+            },
+            headlines: {
+              basic: 'Alt Headline',
+            },
+            description: {
+              basic: 'Alt description',
+            },
+            credits: {
+              by: ['John Doe'],
+            },
+            websites: {
+              'the-sun': {
+                website_url: 'url',
+              },
+            },
+          },
+        ],
+      })),
+    }));
+
+    const smConfig = {
+      ...config,
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '4:3',
+      offsetOverride: 1,
+    };
+    const wrapper = mount(
+      <TopTableList customFields={smConfig} arcSite="" deployment={jest.fn((path) => path)} />,
+    );
+    const container = wrapper.find('.top-table-list-container');
+    expect(container.children().length).toBe(1);
+    const storyItem = container.find('StoryItemContainer');
+    expect(storyItem).toHaveLength(1);
+    expect(storyItem.prop('id')).toEqual('abcde');
+    expect(storyItem.prop('itemTitle')).toEqual('Alt Headline');
+    expect(storyItem.prop('description')).toEqual('Alt description');
+  });
+
   it('renders content only for the arcSite', () => {
     const { default: TopTableList } = require('./default');
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});

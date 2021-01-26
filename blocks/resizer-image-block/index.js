@@ -62,9 +62,11 @@ const getResizerParam = (
         .replace(urlSuffix, '');
     }
 
+    const formatFileType = originalUrl.endsWith('.png') ? 'png' : format;
+
     thumborParam = thumbor
       .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
-      .filter(`format(${format})`)
+      .filter(`format(${formatFileType})`)
       .filter(`quality(${filterQuality})`);
 
     if (focalPoint) {

@@ -1,9 +1,6 @@
 .top-table-list-container {
-
   .top-table-list-section-small {
-
     & > .small-promo {
-
       img {
         width: 100%;
       }
@@ -132,5 +129,16 @@
 
   .hr-borderless {
     visibility: hidden;
+  }
+
+  #promo-item-margins {
+    @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
+    }
   }
 }

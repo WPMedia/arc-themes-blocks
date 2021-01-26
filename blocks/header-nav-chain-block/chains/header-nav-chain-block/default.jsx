@@ -138,7 +138,7 @@ const Nav = (props) => {
 
   const navHeight = desktopNavivationStartHeight || 56;
 
-  const showDotSeparators = showHorizontalSeperatorDots || true;
+  const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',

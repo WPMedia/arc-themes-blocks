@@ -132,7 +132,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   return (
     <>
       <article key={id} className="container-fluid large-promo">
-        <div id="promo-item-margins" className="row lg-promo-padding-bottom">
+        <div className="promo-item-margins row lg-promo-padding-bottom">
           { customFields.showImageLG && (
             <div className="col-sm-12 col-md-xl-6 flex-col">
               {(

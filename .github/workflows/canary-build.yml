@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
-          scope: '@wpmedia'  
+          scope: '@wpmedia'
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
@@ -38,7 +38,7 @@ jobs:
           node-version: "12"
           registry-url: 'https://registry.npmjs.org'
 #          registry-url: "https://npm.pkg.github.com"
-#          scope: '@wpmedia'  
+          scope: '@mentor-medier'  
 
       - run: npx lerna publish 0.0.0-canary.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
         env:

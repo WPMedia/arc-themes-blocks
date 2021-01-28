@@ -25,6 +25,7 @@ const LabelBoxLarge = styled.div`
   align-items: center;
   padding: 6px 8px 8px;
   background-color: ${(props) => props.primaryColor};
+  border: 0;
   border: none;
   border-radius: 4px;
   bottom: 8px;

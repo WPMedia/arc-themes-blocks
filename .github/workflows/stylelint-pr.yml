@@ -4,6 +4,10 @@ on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
+    branches-ignore:
+      - rc
+      - stable
+      - beta
 
 jobs:
   stylelint_pr_diffs:

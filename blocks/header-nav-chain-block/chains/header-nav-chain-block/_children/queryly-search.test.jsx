@@ -6,10 +6,10 @@ const testQuerylySearch = ({ root, theme, iconSize = 16 }) => {
   const container = root.find('.nav-search');
   expect(container).toHaveLength(1);
   expect(container).toHaveClassName(theme);
+  expect(container).toHaveClassName('queryly');
   const navBtn = container.find('button.nav-btn');
   expect(navBtn).toHaveLength(1);
   expect(navBtn).toHaveClassName(`nav-btn-${theme}`);
-  expect(navBtn).toHaveClassName('queryly');
   expect(navBtn).toHaveClassName('border');
   expect(navBtn).toHaveClassName('transparent');
   const querylyLabel = navBtn.find('label');

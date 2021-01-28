@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useFusionContext } from 'fusion:context';
 import { mount } from 'enzyme';
-import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import ArcAd from './default';
 
@@ -32,7 +32,6 @@ describe('<ArcAd>', () => {
     jest.clearAllMocks();
     getProperties.mockReturnValue(SITE_PROPS_MOCK);
     useFusionContext.mockReturnValue({ isAdmin: false });
-    useAppContext.mockReturnValue({});
   });
 
   it('renders no ad unit in admin dashboard', () => {

@@ -66,11 +66,11 @@ describe('When the share bar is shown', () => {
     />);
 
     expect(wrapper.find('button.shareButton')).toHaveLength(3);
-    expect(wrapper.find({ title: 'email' })).toHaveLength(1);
-    expect(wrapper.find({ title: 'twitter' })).toHaveLength(1);
-    expect(wrapper.find({ title: 'linkedIn' })).toHaveLength(1);
-    expect(wrapper.find({ title: 'facebook' })).toHaveLength(0);
-    expect(wrapper.find({ title: 'pinterest' })).toHaveLength(0);
+    expect(wrapper.find('#article-share-email')).toHaveLength(1);
+    expect(wrapper.find('#article-share-twitter')).toHaveLength(1);
+    expect(wrapper.find('#article-share-linkedIn')).toHaveLength(1);
+    expect(wrapper.find('#article-share-facebook')).toHaveLength(0);
+    expect(wrapper.find('#article-share-pinterest')).toHaveLength(0);
   });
 
   it('should not show any social buttons when all are marked false', () => {
@@ -111,7 +111,7 @@ describe('When the share bar is shown', () => {
         websiteUrl={websiteUrl}
         headlineString={headlineString}
       />);
-      wrapper.find({ title: 'facebook' }).simulate('click');
+      wrapper.find('#article-share-facebook').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
       expect(window.open).toBeCalled();
     });
@@ -124,7 +124,7 @@ describe('When the share bar is shown', () => {
         websiteUrl={websiteUrl}
         headlineString={headlineString}
       />);
-      wrapper.find({ title: 'linkedIn' }).simulate('click');
+      wrapper.find('#article-share-linkedIn').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
       expect(window.open).toBeCalled();
     });
@@ -137,7 +137,7 @@ describe('When the share bar is shown', () => {
         websiteUrl={websiteUrl}
         headlineString={headlineString}
       />);
-      wrapper.find({ title: 'email' }).simulate('click');
+      wrapper.find('#article-share-email').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
       expect(window.open).toBeCalled();
     });
@@ -150,7 +150,7 @@ describe('When the share bar is shown', () => {
         websiteUrl={websiteUrl}
         headlineString={headlineString}
       />);
-      wrapper.find({ title: 'pinterest' }).simulate('click');
+      wrapper.find('#article-share-pinterest').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
       expect(window.open).toBeCalled();
     });
@@ -163,19 +163,7 @@ describe('When the share bar is shown', () => {
         websiteUrl={websiteUrl}
         headlineString={headlineString}
       />);
-      wrapper.find({ title: 'twitter' }).simulate('click');
-      expect(window.location.origin).toEqual('http://localhost');
-      expect(window.open).toBeCalled();
-    });
-    it('should work with a keypress', () => {
-      const wrapper = mount(<ShareBar
-        customFields={customFields}
-        websiteName={websiteName}
-        websiteDomain={websiteDomain}
-        websiteUrl={websiteUrl}
-        headlineString={headlineString}
-      />);
-      wrapper.find({ title: 'facebook' }).simulate('keyPress');
+      wrapper.find('#article-share-twitter').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
       expect(window.open).toBeCalled();
     });

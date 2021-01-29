@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/headline-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "Fusion News Theme headline block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -27,5 +27,5 @@
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

@@ -12,6 +12,13 @@ footer {
     }
   }
 
+  .container {
+    @media screen and (max-width: 95rem) and (min-width: 90rem)  {
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+  }
+
   .section-separator {
     border-bottom: 1px solid #babdc2;
     border-top: 1px solid #babdc2;

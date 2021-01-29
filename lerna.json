@@ -3,14 +3,9 @@
     "blocks/*",
     "components/*"
   ],
-  "version": "5.9.15",
+  "version": "0.0.0-canary.cc9c836f",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"
-  ],
-  "command": {
-    "publish": {
-      "registry": "https://npm.pkg.github.com"
-    }
-  }
+  ]
 }

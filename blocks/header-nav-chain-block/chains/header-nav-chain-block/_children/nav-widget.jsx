@@ -4,13 +4,14 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
 import SearchBox from './search-box';
-import { WIDGET_CONFIG } from '../nav-helper';
+import QuerylySearch from './queryly-search';
+import { WIDGET_CONFIG, PLACEMENT_AREAS } from '../nav-helper';
 
 const NavWidget = ({
   type,
   position = 0,
   children = [],
-  placement = 'nav-bar',
+  placement = PLACEMENT_AREAS.NAV_BAR,
   customSearchAction,
   menuButtonClickAction,
 }) => {
@@ -27,6 +28,12 @@ const NavWidget = ({
         placeholderText={phrases.t('header-nav-chain-block.search-text')}
         customSearchAction={customSearchAction}
         alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
+      />
+    )) || (type === 'queryly' && (
+      <QuerylySearch theme={
+        placement === PLACEMENT_AREAS.SECTION_MENU
+          ? 'dark' : navColor
+        }
       />
     )) || (type === 'menu' && (
       <button

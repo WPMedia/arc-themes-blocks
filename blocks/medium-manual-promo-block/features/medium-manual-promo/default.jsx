@@ -72,7 +72,7 @@ const MediumManualPromo = ({ customFields }) => {
               {(customFields.showHeadline && customFields.headline)
               && renderWithLink(
                 <HeadlineText
-                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                   className="md-promo-headline-text"
                 >
                   {customFields.headline}

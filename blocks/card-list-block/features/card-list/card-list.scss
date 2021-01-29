@@ -2,11 +2,13 @@
   @include block-margin-bottom;
   @include block-internal-spacing;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.14);
-
+  padding-bottom: 1rem;
 
   hr {
     margin-left: 16px;
     margin-right: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   a > picture > img {
@@ -123,5 +125,16 @@
       font-weight: normal;
       line-height: 24px;
     }
+  }
+}
+
+.card-list-item-margins {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }

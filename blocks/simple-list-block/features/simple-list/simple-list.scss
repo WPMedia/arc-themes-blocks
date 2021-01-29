@@ -16,6 +16,11 @@
     vertical-align: middle;
   }
 
+  hr {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
   .list-item-simple {
     @include block-internal-spacing;
     display: flex;
@@ -49,5 +54,16 @@
         text-overflow: ellipsis;
       }
     }
+  }
+}
+
+.simple-list-item-margins {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }

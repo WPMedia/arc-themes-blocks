@@ -218,7 +218,7 @@ class CardList extends React.Component {
                     <React.Fragment key={`result-card-${url}`}>
                       <hr />
                       <article
-                        className="card-list-item"
+                        className="card-list-item card-list-item-margins"
                         key={`result-card-${url}`}
                         type="1"
                       >

@@ -13,6 +13,7 @@ describe('Given a single author', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
+        _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
         type: 'author',
         name: 'SangHee Kim',
         url: '/author/sanghee-kim',
@@ -35,6 +36,7 @@ describe('Given a single author', () => {
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
+        _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
         type: 'author',
         name: 'SangHee Kim',
         url: '/author/sanghee-kim',
@@ -53,6 +55,7 @@ describe('Given a single author', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'other',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
@@ -70,6 +73,7 @@ describe('Given a single author', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: '',
           url: '/author/sanghee-kim',
@@ -87,6 +91,7 @@ describe('Given a single author', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '',
@@ -105,6 +110,7 @@ describe('Given a single author', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
         },
@@ -122,6 +128,7 @@ describe('Given a single author', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '',
@@ -147,10 +154,12 @@ describe('Given an author list', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -170,14 +179,17 @@ describe('Given an author list', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
@@ -197,18 +209,22 @@ describe('Given an author list', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -228,6 +244,7 @@ describe('Given an author list', () => {
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
@@ -237,6 +254,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
@@ -246,6 +264,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
@@ -255,6 +274,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -264,6 +284,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'other',
           name: 'John Doe',
           url: '/author/john-doe',
@@ -306,6 +327,6 @@ describe('Given an author list', () => {
     const { default: ArticleByline } = require('./default');
 
     const wrapper = mount(<ArticleByline />);
-    expect(wrapper).toBeEmptyRender();
+    expect(wrapper.html()).toBe(null);
   });
 });

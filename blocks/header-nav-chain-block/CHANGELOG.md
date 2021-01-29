@@ -5,7 +5,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [5.9.13](https://github.com/mentor-medier/fusion-news-theme-blocks/compare/v5.9.12...v5.9.13) (2021-01-12)
 
-**Note:** Version bump only for package @mentor-medier/header-nav-chain-block
+
+### Bug Fixes
+
+* Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
+* Add primary color ([970685b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/970685b442eb6f62bad6d75e023a04a955e7e244))
+* Ensure button is disabled from submitting ([1de53d8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1de53d89e047a9cadefcb1a786fcaefc0a5a48b3))
+
+
+### Performance Improvements
+
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
 
 
 

@@ -28,8 +28,4 @@ jobs:
       - name: Get the latest version from lerna.json and tag all stable blocks with that
         run: lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json) stable
         env:
-<<<<<<< HEAD
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-=======
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
->>>>>>> stable

@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/ads-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "> TODO: description",
   "author": "nealmalkani <nealm939@gmail.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
@@ -10,7 +10,7 @@
     "features"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -24,5 +24,6 @@
   },
   "dependencies": {
     "arcads": "^2.0.2"
-  }
+  },
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

@@ -26,6 +26,10 @@ describe('getFallbackImageURL', () => {
 
   it('should NOT call deployment with context path if http is contained in fallback image url', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const mockDeployment = jest.fn();
     const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath="/pf" customFields={customFields} />);
@@ -49,8 +53,12 @@ describe('fetchPlaceholder', () => {
   const customFields = { listContentConfig };
 
   it('should call fetchContent if fallback image contains resources', () => {
-    const fetchContentMock = jest.fn().mockReturnValue({});
-    ResultsList.prototype.fetchContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    const fetchContentMock = jest.fn().mockReturnValue({ fetched: fetched({}) });
+    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    ResultsList.prototype.getContent = fetchContentMock;
     const mockDeployment = jest.fn();
     const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath="/pf" customFields={customFields} />);
     mockDeployment.mockClear();
@@ -58,7 +66,7 @@ describe('fetchPlaceholder', () => {
     wrapper.instance().fetchPlaceholder();
 
     expect(fetchContentMock).toHaveBeenCalledTimes(1);
-    expect(fetchContentMock).toHaveBeenCalledWith({ resultList: { query: { offset: '0', query: 'type: story', size: '1' }, source: 'story-feed-query' } });
+    expect(fetchContentMock).toHaveBeenCalledWith('story-feed-query', { offset: '0', query: 'type: story', size: '1' });
   });
 });
 
@@ -76,6 +84,10 @@ describe('fetchStories', () => {
   it('should make appropriate calculations if has additionalStoryAmount and story-feed-query', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFields} />);
     fetchContentMock.mockClear();
@@ -102,6 +114,10 @@ describe('fetchStories', () => {
   it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFields} />);
     fetchContentMock.mockClear();
@@ -116,6 +132,10 @@ describe('fetchStories', () => {
   it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const listContentConfigStory = {
       contentConfigValues: {
@@ -153,6 +173,10 @@ describe('fetchStories', () => {
   it('should make appropriate calculations if has additionalStoryAmount and non-specified and no storedList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const listContentConfigOther = {
       contentConfigValues: {
@@ -188,7 +212,10 @@ describe('fetchStories', () => {
 
   it('should update seeMore if value is greater than storied list count', () => {
     const fetchContentMock = jest.fn().mockReturnValue({ content_elements: ['elem1', 'elem2'] });
-    ResultsList.prototype.getContent = fetchContentMock;
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({ content_elements: ['elem1', 'elem2'] }) });
 
     const listContentConfigStoryFeed = {
       contentConfigValues: {
@@ -213,6 +240,10 @@ describe('fetchStories', () => {
 describe('fetchStoriesTransform', () => {
   it('if has no data, return storedList', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
     const result = fetchStoriesTransform(null, 'storedList');
     expect(result).toEqual('storedList');
@@ -239,6 +270,11 @@ describe('styled components', () => {
 
   it('renders styled headline, read more button and description', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    const fetched = (content) => new Promise((resolve) => {
+      resolve(content);
+    });
+    ResultsList.prototype.getContent = jest.fn()
+      .mockReturnValue({ fetched: fetched({ mockReturnData }) });
     ResultsList.prototype.getThemeStyle = jest.fn().mockReturnValue({ 'primary-font-family': 'font1' });
 
     const mockDeployment = jest.fn();

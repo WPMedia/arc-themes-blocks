@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/search-results-list-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "Fusion News Theme search results list block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
@@ -11,7 +11,7 @@
     "intl.json"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -33,5 +33,5 @@
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

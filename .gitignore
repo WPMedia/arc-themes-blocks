@@ -1,5 +1,6 @@
 node_modules
 .idea
+.env
 coverage
 .npmrc
 **/.DS_Store

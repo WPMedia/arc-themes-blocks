@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/story-feed-sections-content-source-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -10,7 +10,7 @@
     "sources"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -28,5 +28,5 @@
   "dependencies": {
     "@arc-core-components/content-source_story-feed_sections-v4": "^1.0.6-beta.0"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

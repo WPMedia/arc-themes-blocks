@@ -1,4 +1,6 @@
 .numbered-list-container {
+  @include block-margin-bottom;
+  @include block-internal-spacing;
   .list-title {
     color: $ui-primary-font-color;
     font-size: calculateRem(20px);
@@ -12,6 +14,7 @@
 }
 
 .numbered-list-item {
+  @include block-internal-spacing;
   display: flex;
   justify-content: space-between;
 
@@ -41,7 +44,7 @@
     padding-right: calculateRem(16px);
     text-decoration: none;
     flex: 0 0 75%;
-    
+
     .headline-text {
       font-size: calculateRem(16px);
       font-weight: normal;

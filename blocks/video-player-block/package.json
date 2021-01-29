@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/video-player-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "Fusion News Theme video player block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -12,7 +12,7 @@
     "layouts"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {

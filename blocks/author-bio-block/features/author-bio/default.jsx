@@ -88,6 +88,7 @@ const AuthorBio = () => {
     if (
       author.description
             && author.description.length > 0
+            && original
             && original.bio
             && original.bio.length > 0
     ) {

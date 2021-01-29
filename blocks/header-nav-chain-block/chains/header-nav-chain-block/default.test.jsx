@@ -5,7 +5,7 @@ import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Navigation from './default';
 import SearchBox from './_children/search-box';
-import { DEFAULT_SELECTIONS } from './nav-helper';
+import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from './nav-helper';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -159,7 +159,7 @@ describe('the header navigation feature for the default output type', () => {
         expect(navWidget).toHaveLength(1);
         expect(navWidget.prop('type')).toEqual('custom');
         expect(navWidget.prop('position')).toEqual(1);
-        expect(navWidget.prop('placement')).toEqual('section-menu');
+        expect(navWidget.prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
       });
       it('should render custom widget on desktop', () => {
         const CUSTOM_SELECTIONS = {
@@ -171,7 +171,7 @@ describe('the header navigation feature for the default output type', () => {
         expect(navWidget).toHaveLength(1);
         expect(navWidget.prop('type')).toEqual('custom');
         expect(navWidget.prop('position')).toEqual(1);
-        expect(navWidget.prop('placement')).toEqual('section-menu');
+        expect(navWidget.prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
       });
       it('should render two widgets on mobile', () => {
         const CUSTOM_SELECTIONS = {
@@ -183,10 +183,10 @@ describe('the header navigation feature for the default output type', () => {
         const navWidgets = testSectionMenuWidget(CUSTOM_SELECTIONS, 'mobile');
         expect(navWidgets).toHaveLength(2);
         expect(navWidgets.at(0).prop('type')).toEqual('search');
-        expect(navWidgets.at(0).prop('placement')).toEqual('section-menu');
+        expect(navWidgets.at(0).prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
         expect(navWidgets.at(1).prop('type')).toEqual('custom');
         expect(navWidgets.at(1).prop('position')).toEqual(1);
-        expect(navWidgets.at(1).prop('placement')).toEqual('section-menu');
+        expect(navWidgets.at(1).prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
       });
       it('should render two widgets on desktop', () => {
         const CUSTOM_SELECTIONS = {
@@ -199,9 +199,9 @@ describe('the header navigation feature for the default output type', () => {
         expect(navWidgets).toHaveLength(2);
         expect(navWidgets.at(0).prop('type')).toEqual('custom');
         expect(navWidgets.at(0).prop('position')).toEqual(1);
-        expect(navWidgets.at(0).prop('placement')).toEqual('section-menu');
+        expect(navWidgets.at(0).prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
         expect(navWidgets.at(1).prop('type')).toEqual('search');
-        expect(navWidgets.at(1).prop('placement')).toEqual('section-menu');
+        expect(navWidgets.at(1).prop('placement')).toEqual(PLACEMENT_AREAS.SECTION_MENU);
       });
     });
   });

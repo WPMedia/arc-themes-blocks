@@ -1,0 +1,47 @@
+name: Stylelint PR Diffs
+
+on:
+  pull_request:
+    # synchronize	commit(s) pushed to the pull request
+    types: [synchronize, opened]
+    branches-ignore:
+      - rc
+      - stable
+      - beta
+
+jobs:
+  stylelint_pr_diffs:
+    name: Stylelint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Rep
+        uses: actions/checkout@v1
+
+      - name: Setup Node with 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: stylelint
+        uses: reviewdog/action-stylelint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          fail_on_error: true
+          reporter: github-pr-review
+          filter_mode: 'diff_context'
+          stylelint_config: '.stylelintrc.json'
+          stylelint_input: '**/*.(scss|jsx)'

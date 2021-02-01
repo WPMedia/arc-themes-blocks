@@ -41,20 +41,13 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
             {
               item.node_type === 'link'
                 ? (
-                  <Link
-                    href={item.url}
-                    name={item.display_name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
-                  />
+                  <Link href={item.url} name={item.display_name} />
                 )
                 : (
-                  <Link
-                    href={item._id}
-                    name={item.name}
-                    showSeparator={content.children.length !== index + 1 && showSeparator}
-                  />
+                  <Link href={item._id} name={item.name} />
                 )
             }
+            {(content.children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : ''}
           </LinkBarSpan>
         ))}
       </nav>

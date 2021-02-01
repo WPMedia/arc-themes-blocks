@@ -51,7 +51,7 @@ const SmallListItem = (props) => {
   };
 
   const PromoHeadline = () => (
-    <div className="promo-headline headline-wrap">
+    <div className="promo-headline">
       <a
         href={websiteURL}
         title={itemTitle}

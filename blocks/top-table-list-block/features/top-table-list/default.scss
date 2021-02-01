@@ -76,16 +76,6 @@
 
   .promo-headline {
     flex: 2;
-
-    &.headline-wrap {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      -moz-box-oriented: vertical;
-      /* opera */
-      text-overflow: -o-ellipsis-lastline;
-    }
   }
 
   .promo-image {

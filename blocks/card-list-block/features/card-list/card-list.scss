@@ -12,16 +12,16 @@
   }
 }
 
-.vertical-align-image > picture > img {
-  vertical-align: middle;
-}
-
 .card-list--link-container img {
   height: auto;
   max-height: 400px;
   max-height: 40vh;
   object-fit: cover;
   width: 100%;
+}
+
+.vertical-align-image > picture > img {
+  vertical-align: middle;
 }
 
 .card-list-title {

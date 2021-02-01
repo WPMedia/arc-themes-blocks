@@ -5,11 +5,13 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:intl', () => ({
   __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+  // eslint-disable-next-line global-require
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('./intl.json')[phrase][locale]) })),
 }));
 
 describe('Given a single author', () => {
   it('should use additional_properties byline if it exists', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
@@ -33,6 +35,7 @@ describe('Given a single author', () => {
   });
 
   it("should fallback to author name if additional_properties doesn't exist", () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
@@ -51,6 +54,7 @@ describe('Given a single author', () => {
   });
 
   it('should return nothing if type is not "author"', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -69,6 +73,7 @@ describe('Given a single author', () => {
   });
 
   it('should return nothing if name is missing', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -87,6 +92,7 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -106,6 +112,7 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing #2', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -124,6 +131,7 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing #3', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -150,6 +158,7 @@ describe('Given a single author', () => {
 
 describe('Given an author list', () => {
   it('should return two authors', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -175,6 +184,7 @@ describe('Given an author list', () => {
   });
 
   it('should return three authors, oxford comma', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -205,6 +215,7 @@ describe('Given an author list', () => {
   });
 
   it('should return four authors, oxford comma', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -240,6 +251,7 @@ describe('Given an author list', () => {
   });
 
   it('should return 4 authors complete with url and bylines', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
@@ -313,6 +325,7 @@ describe('Given an author list', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
 
     expect(() => {
@@ -324,6 +337,7 @@ describe('Given an author list', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
 
     const wrapper = mount(<ArticleByline />);

@@ -66,8 +66,12 @@ class ArticleByline extends Component {
           if (!author._id) {
             // eslint-disable-next-line camelcase
             const guestType = author?.additional_properties?.original?.author_type;
-            const guestTypeStr = (guestType) ? `${guestType}, ` : '';
-            return `<a href="/search/${authorName}">${authorName}</a> (${guestTypeStr}${author.org})`;
+            const guestOrg = author?.org;
+            let guestMore = [];
+            guestMore.push(guestType, guestOrg);
+            guestMore = guestMore.filter((gm) => (gm !== null && gm !== ''));
+            const guestInfo = (guestMore.length > 0) ? `(${guestMore.join(', ')})` : '';
+            return `<a href="/search/${authorName}">${authorName}</a> ${guestInfo}`;
           }
 
           // eslint-disable-next-line no-nested-ternary

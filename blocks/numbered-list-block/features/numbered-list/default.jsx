@@ -128,7 +128,7 @@ class NumberedList extends Component {
                 <a
                   href={url}
                   title={headlineText}
-                  className="list-anchor-image"
+                  className="list-anchor-image vertical-align-image"
                 >
                   {extractImage(promoItems) ? (
                     <Image

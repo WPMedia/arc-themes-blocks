@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
@@ -18,24 +18,25 @@ describe('the links bar feature for the default output type', () => {
   });
 
   it('should be a nav element', () => {
-    const { default: LinksBar } = require('./default');
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [
-          {
-            _id: 'id_1',
-            name: 'test link 1',
-          },
-          {
-            _id: 'id_2',
-            name: 'test link 2',
-          },
-        ],
-      })),
-    }));
-    const wrapper = shallow(
-      <LinksBar customFields={{ navigationConfig: 'links' }} />,
-    );
+    const { default: LinkBar } = require('./link-bar');
+    const fusionContext = { arcSite: 'abc' };
+    const content = {
+      children: [
+        {
+          _id: 123,
+          node_type: 'link',
+          url: 'http://google.com',
+          display_name: 'Text',
+        },
+        {
+          _id: 123,
+          node_type: 'link',
+          url: 'http://google.com',
+          display_name: 'Text 2',
+        },
+      ],
+    };
+    const wrapper = mount(<LinkBar useContent={content} useFusionContext={fusionContext} />);
 
     expect(wrapper.children().at(0).type()).toBe('nav');
   });
@@ -93,36 +94,33 @@ describe('the links bar feature for the default output type', () => {
   });
 
   it('should contain the equal number of links between input and output', () => {
-    const { default: LinksBar } = require('./default');
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [
-          {
-            _id: 'id_1',
-            name: 'test link 1',
-          },
-          {
-            _id: 'id_2',
-            name: 'test link 2',
-          },
-          {
-            _id: 'id_3',
-            node_type: 'link',
-            url: '/',
-            display_name: 'Link Text',
-          },
-          {
-            _id: 'id_4',
-            node_type: 'link',
-            url: 'http://arcpublishing.com',
-            display_name: 'Link Text',
-          },
-        ],
-      })),
-    }));
-    const wrapper = mount(
-      <LinksBar customFields={{ navigationConfig: 'links' }} />,
-    );
+    const { default: LinkBar } = require('./link-bar');
+    const fusionContext = { arcSite: 'abc' };
+    const content = {
+      children: [
+        {
+          _id: 'id_1',
+          name: 'test link 1',
+        },
+        {
+          _id: 'id_2',
+          name: 'test link 2',
+        },
+        {
+          _id: 'id_3',
+          node_type: 'link',
+          url: '/',
+          display_name: 'Link Text',
+        },
+        {
+          _id: 'id_4',
+          node_type: 'link',
+          url: 'http://arcpublishing.com',
+          display_name: 'Link Text',
+        },
+      ],
+    };
+    const wrapper = mount(<LinkBar useContent={content} useFusionContext={fusionContext} />);
 
     expect(wrapper.find('span.links-menu')).toHaveLength(4);
     expect(wrapper.find('span.links-menu a:not([target])')).toHaveLength(3);
@@ -130,15 +128,10 @@ describe('the links bar feature for the default output type', () => {
   });
 
   it('should have no menu item if no content is returned', () => {
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [],
-      })),
-    }));
-    const { default: LinksBar } = require('./default');
-    const wrapper = shallow(
-      <LinksBar customFields={{ navigationConfig: 'links' }} />,
-    );
+    const { default: LinkBar } = require('./link-bar');
+    const fusionContext = { arcSite: 'abc' };
+    const content = {};
+    const wrapper = mount(<LinkBar useContent={content} useFusionContext={fusionContext} />);
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });

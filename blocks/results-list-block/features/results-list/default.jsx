@@ -67,7 +67,7 @@ class ResultsList extends Component {
     if (prevFocusItem === focusItem && prevFocusItem > 0) {
       const nextItem = resultList.content_elements[focusItem];
       if (nextItem?._id) {
-        this.listItemRefs[nextItem._id].querySelector('a').focus();
+        this.listItemRefs[nextItem._id].querySelector('a:not([aria-hidden])').focus();
       }
     }
   }
@@ -228,6 +228,8 @@ class ResultsList extends Component {
                   <a
                     href={url}
                     title={headlineText}
+                    aria-hidden="true"
+                    tabIndex="-1"
                   >
                     {extractImage(promoItems) ? (
                       <Image

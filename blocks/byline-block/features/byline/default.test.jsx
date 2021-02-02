@@ -6,7 +6,7 @@ jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   // eslint-disable-next-line global-require
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('./intl.json')[phrase][locale]) })),
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));
 
 describe('Given a single author', () => {

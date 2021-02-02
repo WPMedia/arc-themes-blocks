@@ -5,9 +5,9 @@ import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styles from './headline.module.scss';
 
-const HeadlineHeader = styled.h1`
-  font-family: ${(props) => props.primaryFont};
-`;
+// const HeadlineHeader = styled.h1`
+//   font-family: ${(props) => props.primaryFont};
+// `;
 
 // presentational component handles only visual
 export const Headline = ({ headlineString, primaryFont }) => (
@@ -16,10 +16,10 @@ export const Headline = ({ headlineString, primaryFont }) => (
     then render null
   */
   (headlineString !== '') && (
-    <HeadlineHeader
+    <h1
+      className={'primary-font'}
       // use css modules to scope styles
-      className={styles.headline}
-      primaryFont={primaryFont}
+      // className={styles.headline}
       // dangerouslySetInnerHTML seems to be a pattern for blocks
       dangerouslySetInnerHTML={{ __html: headlineString }}
     />

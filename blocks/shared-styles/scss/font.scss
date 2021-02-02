@@ -1,0 +1,10 @@
+::root {
+  // todo: setup string interpolation possibly
+  --primary-font: $primary-font-family;
+}
+
+.primary-font {
+  // order for ie 11 support with variables
+  font-family: $primary-font-family;
+  font-family: var(--primary-font);
+}

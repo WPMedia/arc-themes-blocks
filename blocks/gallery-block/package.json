@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/gallery-block",
-  "version": "5.9.1",
+  "version": "5.9.15",
   "description": "Fusion News Theme gallery block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -25,8 +25,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@wpmedia/ads-block": "canary",
     "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "canary"
+    "@wpmedia/news-theme-css": "stable"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
 }

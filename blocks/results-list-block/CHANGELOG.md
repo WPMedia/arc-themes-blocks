@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.13](https://github.com/mentor-medier/fusion-news-theme-blocks/compare/v5.9.12...v5.9.13) (2021-01-12)
+
+
+### Performance Improvements
+
+* Ignore test files in features folder ([b2a344f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b2a344f96d92b63d25658ab70ec9ec63633fcf6f))
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+
+
+
+
+
 ## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
 

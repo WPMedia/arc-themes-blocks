@@ -6,9 +6,10 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
-import VideoPlayer from '@wpmedia/video-player-block';
 import {
   Gallery, ImageMetadata, Image, Lightbox,
+  // presentational component does not do data fetching
+  VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
 // import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
@@ -72,7 +73,7 @@ class LeadArt extends Component {
       isOpen, buttonPosition, content, buttonLabel,
     } = this.state;
 
-    const { arcSite, customFields } = this.props;
+    const { arcSite, customFields, id } = this.props;
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -109,9 +110,12 @@ class LeadArt extends Component {
             {lightbox}
           </LeadArtWrapperDiv>
         );
-      } if (lead_art.type === 'video') {
+      }
+
+      if (lead_art.type === 'video') {
         return (
-          <VideoPlayer
+          <VideoPlayerPresentational
+            id={id}
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
             customFields={{

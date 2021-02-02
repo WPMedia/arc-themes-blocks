@@ -28,9 +28,13 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
+<<<<<<< HEAD
           scope: '@wpmedia'  
       - run: npm whoami
 
+=======
+          scope: '@wpmedia'
+>>>>>>> fe8fb7a3eeaa8072960332adafaf0d47d4dcafef
       - run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
@@ -39,10 +43,14 @@ jobs:
         with:
           node-version: "12"
           registry-url: 'https://registry.npmjs.org'
+<<<<<<< HEAD
 #          registry-url: "https://npm.pkg.github.com"
           scope: '@mentor-medier'  
 
       - run: npm whoami
+=======
+          scope: '@mentor-medier'  
+>>>>>>> fe8fb7a3eeaa8072960332adafaf0d47d4dcafef
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

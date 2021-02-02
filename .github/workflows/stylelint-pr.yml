@@ -1,27 +1,30 @@
-name: Test News Theme Blocks
+name: Stylelint PR Diffs
 
 on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
+    branches-ignore:
+      - rc
+      - stable
+      - beta
 
 jobs:
-  ensure_minimum_test_coverage_linting:
+  stylelint_pr_diffs:
+    name: Stylelint
     runs-on: ubuntu-latest
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - name: Checkout Rep
+        uses: actions/checkout@v1
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1
         with:
           node-version: "12"
-          scope: "@wpmedia"
           registry-url: "https://npm.pkg.github.com"
-
+          scope: "@wpmedia"
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2
@@ -35,14 +38,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Run tests with coverage
-        run: npm run test:coverage
-
-      - name: Check linting
-        run: npm run lint
-
-      - name: Check failure status
-        uses: act10ns/slack@v1
+      - name: stylelint
+        uses: reviewdog/action-stylelint@v1
         with:
-          status: ${{ job.status }}
-        if: failure()
+          github_token: ${{ secrets.github_token }}
+          fail_on_error: true
+          reporter: github-pr-review
+          filter_mode: 'diff_context'
+          stylelint_config: '.stylelintrc.json'
+          stylelint_input: '**/*.(scss|jsx)'

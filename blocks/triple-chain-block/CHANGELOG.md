@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
+
+
+### Performance Improvements
+
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
+
+
+
+
+
 ## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
 

@@ -5,14 +5,17 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:intl', () => ({
   __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+  // eslint-disable-next-line global-require
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('./intl.json')[phrase][locale]) })),
 }));
 
 describe('Given a single author', () => {
   it('should use additional_properties byline if it exists', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
+        _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
         type: 'author',
         name: 'SangHee Kim',
         url: '/author/sanghee-kim',
@@ -32,9 +35,11 @@ describe('Given a single author', () => {
   });
 
   it("should fallback to author name if additional_properties doesn't exist", () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [{
+        _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
         type: 'author',
         name: 'SangHee Kim',
         url: '/author/sanghee-kim',
@@ -49,10 +54,12 @@ describe('Given a single author', () => {
   });
 
   it('should return nothing if type is not "author"', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'other',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
@@ -66,10 +73,12 @@ describe('Given a single author', () => {
   });
 
   it('should return nothing if name is missing', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: '',
           url: '/author/sanghee-kim',
@@ -83,10 +92,12 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '',
@@ -101,10 +112,12 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing #2', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
         },
@@ -118,10 +131,12 @@ describe('Given a single author', () => {
   });
 
   it('should not be a link if url is missing #3', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '',
@@ -143,14 +158,17 @@ describe('Given a single author', () => {
 
 describe('Given an author list', () => {
   it('should return two authors', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -166,18 +184,22 @@ describe('Given an author list', () => {
   });
 
   it('should return three authors, oxford comma', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
@@ -193,22 +215,27 @@ describe('Given an author list', () => {
   });
 
   it('should return four authors, oxford comma', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -224,10 +251,12 @@ describe('Given an author list', () => {
   });
 
   it('should return 4 authors complete with url and bylines', () => {
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
     const credits = {
       by: [
         {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'SangHee Kim',
           url: '/author/sanghee-kim',
@@ -237,6 +266,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Joe Grosspietsch',
           url: '/author/joe-grosspietsch',
@@ -246,6 +276,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Brent Miller',
           url: '/author/brent-miller',
@@ -255,6 +286,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'author',
           name: 'Sara Carothers',
           url: '/author/sara-carothers',
@@ -264,6 +296,7 @@ describe('Given an author list', () => {
             },
           },
         }, {
+          _id: 'ESONVRVLIFD3RCDQEJ5A6RMDU',
           type: 'other',
           name: 'John Doe',
           url: '/author/john-doe',
@@ -292,6 +325,7 @@ describe('Given an author list', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
 
     expect(() => {
@@ -303,9 +337,10 @@ describe('Given an author list', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({ globalContent: {} })),
     }));
+    // eslint-disable-next-line global-require
     const { default: ArticleByline } = require('./default');
 
     const wrapper = mount(<ArticleByline />);
-    expect(wrapper).toBeEmptyRender();
+    expect(wrapper.html()).toBe(null);
   });
 });

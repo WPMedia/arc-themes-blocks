@@ -166,6 +166,8 @@ git fetch -a
 npx lerna publish --conventional-commits --conventional-graduate
 ```
 
+Make sure all blocks have been graduated or promoted.
+
 7. After publishing from the `stable` branch, merge `stable` into `beta` and `beta` into `canary` so that the changes related to the publish we just did end up in both of those branches.
 
 Merging `beta`

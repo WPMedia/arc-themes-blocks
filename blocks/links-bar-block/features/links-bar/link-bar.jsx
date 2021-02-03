@@ -35,7 +35,7 @@ const LinkBar = ({
                   <Link href={item._id} name={item.name} />
                 )
             }
-            {(children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : ''}
+            {(menuItems.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : ''}
           </LinkBarSpan>
         ))}
       </nav>

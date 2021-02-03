@@ -4,6 +4,36 @@
   }
 }
 
+.xl-large-promo {
+  .xl-promo-headline {
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-bottom: map-get($spacers, 'xs');
+    }
+  }
+}
+
+
+.top-table-list-section-large {
+  .large-promo {
+    .lg-promo-headline {
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        margin-top: - map-get($spacers, 'xs');
+      }
+    }
+  }
+}
+
+.top-table-list-section-medium {
+  .medium-promo {
+    .md-promo-headline {
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        margin-bottom: map-get($spacers, 'xs');
+        margin-top: - map-get($spacers, 'xs');
+      }
+    }
+  }
+}
+
 .top-table-list-small-promo {
   img {
     width: 100%;
@@ -138,3 +168,4 @@
     margin-top: 1.5rem;
   }
 }
+

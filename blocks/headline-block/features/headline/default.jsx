@@ -1,11 +1,18 @@
+import React from 'react';
 import { useFusionContext } from 'fusion:context';
-import composeHooks from './compose-hooks';
 
-import Headline from './headline';
+import Headline from './_children/headline';
 
-const HeadlineContainer = composeHooks(() => ({
-  useFusionContext,
-}))(Headline);
+// get headlines basic
+// container handles data fetching, connection to fusion
+const HeadlineContainer = () => {
+  // get headlines basic
+  const { globalContent } = useFusionContext();
+
+  const { basic: headlineString = '' } = globalContent?.headlines || {};
+
+  return <Headline headlineString={headlineString} />;
+};
 
 HeadlineContainer.label = 'Headline – Arc Block';
 

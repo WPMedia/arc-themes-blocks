@@ -1,28 +1,34 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
-import getProperties from 'fusion:properties';
+import Lazy from 'lazy-child';
 import { useFusionContext } from 'fusion:context';
 import adMap from './ad-mapping';
 import ArcAdminAd from './_children/ArcAdminAd';
-import ArcAdsInstance from './_children/ArcAdsInstance';
-import { getAdObject, setPageTargeting } from './ad-helper';
+import { getAdObject } from './ad-helper';
+import AdUnit from './_children/AdUnit';
 import './ads.scss';
 
 function generateInstanceId(componentId) {
   return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
+// eslint-disable-next-line arrow-body-style
+const setAdLabelVisibility = (props) => {
+  // istanbul ignore next
+  return props.displayAdLabel ? '' : 'display: none';
+};
+
 const StyledAdUnit = styled.div`
-  .arcad > div[id^='google_ads_iframe']:not(:empty):before {
+  .arcad > [id^='google_ads_iframe']:not(:empty)::before {
     content: "${(props) => props.adLabel}";
-    ${(props) => (props.displayAdLabel ? '' : 'display: none')}
+    ${(props) => setAdLabelVisibility(props)}
   }
 
-  .arcad > div[id^='google_ads_iframe']:empty[style] {
-    width: 0px !important;
-    height: 0px !important;
+  .arcad > [id^='google_ads_iframe']:empty[style] {
+    width: 0 !important;
+    height: 0 !important;
   }
 `;
 
@@ -35,67 +41,58 @@ const ArcAd = (props) => {
     ...props,
     instanceId,
   };
-  const { customFields } = props;
-  const { isAdmin } = propsWithContext;
+  const { customFields, isAdmin, siteProperties } = propsWithContext;
+  const { displayAdLabel, lazyLoad = true } = customFields;
   const [config] = useState(
     getAdObject({
       ...customFields,
       ...propsWithContext,
     }),
   );
+
   // istanbul ignore next
   const isAMP = () => (
     !!(propsWithContext.outputType
       && propsWithContext.outputType === 'amp')
   );
 
-  const {
-    arcSite,
-    customFields: {
-      debug,
-      displayAdLabel,
-    },
-  } = propsWithContext;
-  const siteVars = getProperties(arcSite);
-
-  const registerAd = useCallback(() => {
-    const publisherIds = { dfp_publisher_id: siteVars.dfpId };
-    ArcAdsInstance
-      .getInstance(siteVars, () => {
-        setPageTargeting(propsWithContext);
-      })
-      .registerAd({
-        params: config,
-        publisherIds,
-        debug,
-      });
-  }, [config, debug, propsWithContext, siteVars]);
-
-  useEffect(() => {
-    if (!isAdmin) registerAd();
-  }, [registerAd, isAdmin]);
-
-  const {
-    id, adClass, adType, dimensions, slotName,
-  } = config;
+  const LazyLoad = ({ children, enabled }) => (
+    !enabled ? children : (
+      <Lazy
+        offsetBottom={0}
+        offsetLeft={0}
+        offsetRight={0}
+        offsetTop={200}
+        // eslint-disable-next-line arrow-body-style
+        renderPlaceholder={(ref) => {
+          // istanbul ignore next
+          return <div ref={ref} />;
+        }}
+      >
+        { children }
+      </Lazy>
+    )
+  );
 
   return (
     <StyledAdUnit
       id={`arcad_feature-${instanceId}`}
       className="arcad_feature"
-      adLabel={siteVars?.advertisementLabel || 'ADVERTISEMENT'}
+      adLabel={siteProperties?.advertisementLabel || 'ADVERTISEMENT'}
       displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
     >
       <div className="arcad_container">
         {!isAdmin && !isAMP() && (
-          <div id={id} className={`arcad ad-${adClass}`} />
+          <LazyLoad enabled={lazyLoad}>
+            <AdUnit
+              adConfig={config}
+              featureConfig={propsWithContext}
+            />
+          </LazyLoad>
         )}
-        <ArcAdminAd
-          adClass={adClass}
-          adName={adType}
-          slotName={slotName}
-          dimensions={dimensions}
-        />
+        {isAdmin && (
+          <ArcAdminAd {...config} />
+        )}
       </div>
     </StyledAdUnit>
   );
@@ -117,6 +114,10 @@ ArcAd.propTypes = {
       defaultValue: '1x1px',
       required: true,
       hidden: false,
+    }),
+    lazyLoad: PropTypes.boolean.tag({
+      name: 'Lazy Load Ad?',
+      defaultValue: true,
     }),
     displayAdLabel: PropTypes.boolean.tag({
       name: 'Display Advertisement Label?',

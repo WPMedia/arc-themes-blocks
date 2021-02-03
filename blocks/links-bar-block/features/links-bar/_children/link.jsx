@@ -31,16 +31,16 @@ function fixTrailingSlash(item) {
   return item;
 }
 
-const Link = ({ href, name, showSeparator }) => {
+const Link = ({ href, name }) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
 
   return (
     externalUrl ? (
       <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
-        {`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}
+        {`${name}`}
         <span className="sr-only">(Opens in new window)</span>
       </a>
-    ) : <a href={fixTrailingSlash(href)}>{`${name}${(showSeparator) ? '  \u00a0 • \u00a0  ' : ''}`}</a>
+    ) : <a href={fixTrailingSlash(href)}>{`${name}`}</a>
   );
 };
 

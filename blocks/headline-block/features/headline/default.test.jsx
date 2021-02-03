@@ -1,5 +1,5 @@
 const React = require('react');
-const { mount, shallow } = require('enzyme');
+const { mount } = require('enzyme');
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

@@ -3,7 +3,6 @@ import { useFusionContext } from 'fusion:context';
 
 import Headline from './_children/headline';
 
-// get headlines basic
 // container handles data fetching, connection to fusion
 const HeadlineContainer = () => {
   // get headlines basic

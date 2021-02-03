@@ -20,9 +20,6 @@ const VSpaceStyles = styled.div.attrs((props) => ({
   }
 `;
 
-const VSpace = (props) => {
-  console.log(props);
-  return <VSpaceStyles {...props} />
-}
+const VSpace = (props) => <VSpaceStyles {...props} />;
 
 export default VSpace;

@@ -1,123 +1,117 @@
-.top-table-list-container {
+.top-table-list-section-small {
+  hr {
+    margin: calculateRem(16px) 0;
+    width: 100%;
+  }
+}
 
-  .top-table-list-section-small {
+.top-table-list-small-promo {
+  img {
+    width: 100%;
+  }
 
-    & > .small-promo {
+  .promo-container {
+    display: flex;
+    flex-direction: row;
 
-      img {
-        width: 100%;
+    > div {
+      &:nth-child(odd) {
+        padding-right: 0.75rem;
       }
 
-      .promo-container {
-        display: flex;
-        flex-direction: row;
-
-        & > div {
-          &:nth-child(odd) {
-            padding-right: 0.75rem;
-          }
-      
-          &:nth-child(even) {
-            padding-left: 0.75rem;
-          }
-        }
-
-        &.horizontal.reverse {
-          flex-direction: row-reverse;
-
-          & > div {
-            &:nth-child(odd) {
-              padding-left: 0.75rem;
-              padding-right: 0;
-            }
-        
-            &:nth-child(even) {
-              padding-left: 0;
-              padding-right: 0.75rem;
-            }
-          }
-        }
-
-        &.vertical {
-          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            flex-direction: column;
-
-            & > div {
-              padding: 0;
-
-              &:first-child {
-                padding-bottom: 0.75rem;
-              }
-            }
-
-            &.reverse {
-              flex-direction: column-reverse;
-
-              & > div {
-                padding: 0;
-  
-                &:last-child {
-                  padding-bottom: 0.75rem;
-                }
-              }
-            }
-          }
-        }
-
-        .promo-headline {
-          flex: 2;
-
-          &.headline-wrap-vertical {
-            height: 4.6em;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            -moz-box-oriented: vertical;
-            /* opera */
-            text-overflow: -o-ellipsis-lastline;
-          }
-
-          &.headline-wrap-horizontal {
-            height: 50px;
-            overflow: hidden;
-          }
-        }
-
-        .promo-image {
-          flex: 1;
-
-          a {
-            display: flex;
-            flex-direction: column;
-          }
-
-          &.flex-col {
-            justify-content: center;
-          }
-        }
-
-        &.sm-promo-padding-btm {
-          @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-            padding-top: 0;
-          }
-        }
+      &:nth-child(even) {
+        padding-left: 0.75rem;
       }
+    }
 
-      &.wrap-bottom {
-        margin-bottom: 0 !important;
+    &.horizontal.reverse {
+      flex-direction: row-reverse;
 
-        @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-          margin-bottom: inherit;
+      > div {
+        padding-left: 0;
+        padding-right: 0;
+
+        &:nth-child(odd) {
+          padding-left: 0.75rem;
+        }
+
+        &:nth-child(even) {
+          padding-right: 0.75rem;
         }
       }
     }
 
-    hr {
-      width: 100%;
+    &.vertical {
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        flex-direction: column;
+
+        > div {
+          padding: 0;
+
+          &:first-child {
+            margin-bottom: 0.75rem;
+          }
+        }
+
+        &.reverse {
+          flex-direction: column-reverse;
+
+          > div {
+            margin-bottom: 0;
+            padding: 0;
+
+            &:last-child {
+              margin-bottom: 0.75rem;
+            }
+          }
+        }
+      }
+    }
+
+    &.sm-promo-padding-btm {
+      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-top: 0;
+      }
     }
   }
 
+  .promo-headline {
+    flex: 2;
+
+    &.headline-wrap {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      -moz-box-oriented: vertical;
+      /* opera */
+      text-overflow: -o-ellipsis-lastline;
+    }
+  }
+
+  .promo-image {
+    flex: 1;
+
+    a {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.flex-col {
+      justify-content: center;
+    }
+  }
+
+  &.wrap-bottom {
+    margin-bottom: 0 !important;
+
+    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      margin-bottom: inherit;
+    }
+  }
+}
+
+.top-table-list-container {
   &.wrap-bottom {
     margin-bottom: inherit !important;
   }
@@ -128,5 +122,20 @@
     > picture > img {
       vertical-align: middle;
     }
+  }
+
+  .hr-borderless {
+    visibility: hidden;
+  }
+}
+
+.promo-item-margins {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
   }
 }

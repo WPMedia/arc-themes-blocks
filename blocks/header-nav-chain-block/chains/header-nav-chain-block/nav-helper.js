@@ -1,10 +1,23 @@
 import PropTypes from 'prop-types';
 
+export const PLACEMENT_AREAS = {
+  NAV_BAR: 'nav-bar',
+  SECTION_MENU: 'section-menu',
+};
+
 export const NAV_BREAKPOINTS = ['mobile', 'desktop'];
 export const NAV_LABELS = {
   left: 'Left',
   right: 'Right',
   menu: 'Sections Menu',
+};
+
+export const WIDGET_OPTIONS = {
+  none: 'None',
+  search: 'Arc Search',
+  queryly: 'Queryly Search',
+  menu: 'Sections Menu',
+  custom: 'Custom',
 };
 
 export const DEFAULT_SELECTIONS = {
@@ -15,18 +28,18 @@ export const DEFAULT_SELECTIONS = {
 };
 
 export const WIDGET_CONFIG = {
-  'nav-bar': {
+  [PLACEMENT_AREAS.NAV_BAR]: {
     iconSize: 16,
     expandSearch: false,
     slotCounts: { mobile: 1, desktop: 2 },
-    options: ['search', 'menu', 'none', 'custom'],
+    options: ['search', 'queryly', 'menu', 'none', 'custom'],
     sections: ['left', 'right'],
   },
-  'section-menu': {
+  [PLACEMENT_AREAS.SECTION_MENU]: {
     iconSize: 21,
     expandSearch: true,
     slotCounts: { mobile: 2, desktop: 2 },
-    options: ['search', 'none', 'custom'],
+    options: ['search', 'queryly', 'none', 'custom'],
     sections: ['menu'],
   },
 };
@@ -57,12 +70,7 @@ export const getNavComponentDefaultSelection = (propTypeKey) => (
 export const generateNavComponentPropType = (section, breakpoint, position) => ({
   name: getNavComponentLabel(section, breakpoint, position),
   group: `${capitalize(breakpoint)} Components`,
-  labels: {
-    search: 'Search',
-    menu: 'Sections Menu',
-    none: 'None',
-    custom: 'Custom',
-  },
+  labels: WIDGET_OPTIONS,
   defaultValue: getNavComponentDefaultSelection(
     getNavComponentPropTypeKey(section, breakpoint, position),
   ),

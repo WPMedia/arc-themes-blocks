@@ -8,6 +8,7 @@
     "stylelint-config-sass-guidelines"
   ],
   "rules": {
+    "max-nesting-depth": 5,
     "plugin/no-unsupported-browser-features": [
       true,
       {
@@ -17,7 +18,6 @@
     "font-family-no-missing-generic-family-keyword": null,
     "order/properties-alphabetical-order": null,
     "declaration-property-value-disallowed-list": [
-      true,
       {
         "border": [
           "none"

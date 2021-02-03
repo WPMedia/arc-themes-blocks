@@ -104,7 +104,7 @@ const LargeManualPromo = ({ customFields }) => {
               {(customFields.showHeadline && customFields.headline)
               && renderWithLink(
                 <HeadlineText
-                  primaryFont={getThemeStyle(getProperties(arcSite))['primary-font-family']}
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
                   className="lg-promo-headline"
                 >
                   {customFields.headline}

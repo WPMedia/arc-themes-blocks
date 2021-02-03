@@ -20,7 +20,7 @@ const StoryItem = (props) => {
   } = props;
 
   return (
-    <article key={id} className="list-item-simple">
+    <article key={id} className="list-item-simple simple-list-item-margins">
       {showImage ? (
         <a
           href={websiteURL}

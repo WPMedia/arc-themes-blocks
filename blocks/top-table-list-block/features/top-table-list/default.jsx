@@ -121,6 +121,7 @@ const TopTableList = (props) => {
   const {
     customFields: {
       listContentConfig: { contentService = '', contentConfigValues = {} } = {},
+      offsetOverride = 0,
       extraLarge = 0,
       large = 0,
       medium = 0,
@@ -155,8 +156,8 @@ const TopTableList = (props) => {
     query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
-  const siteContent = contentElements.reduce((acc, element) => {
-    if (element.websites?.[arcSite]) {
+  const siteContent = contentElements.reduce((acc, element, index) => {
+    if (element.websites?.[arcSite] && index >= offsetOverride) {
       return acc.concat(element);
     }
     return acc;
@@ -249,6 +250,11 @@ TopTableListWrapper.propTypes = {
       group: 'Configure Content',
       label: 'Display Content Info',
     }),
+    offsetOverride: PropTypes.number.tag({
+      group: 'Configure Content',
+      label: 'Offset Override',
+      defaultValue: 0,
+    }),
     extraLarge: PropTypes.number.tag({
       label: generateLabelString('Extra Large'),
       default: 0,
@@ -306,6 +312,11 @@ TopTableListWrapper.propTypes = {
       group: 'Extra Large story settings',
       defaultValue: false,
     }),
+    showBottomBorderXL: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Extra Large story settings',
+    }),
 
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
@@ -343,6 +354,11 @@ TopTableListWrapper.propTypes = {
       group: 'Large story settings',
       defaultValue: false,
     }),
+    showBottomBorderLG: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Large story settings',
+    }),
 
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
@@ -370,6 +386,11 @@ TopTableListWrapper.propTypes = {
       group: 'Medium story settings',
     }),
     ...imageRatioCustomField('imageRatioMD', 'Medium story settings', '16:9'),
+    showBottomBorderMD: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Medium story settings',
+    }),
 
     showHeadlineSM: PropTypes.bool.tag({
       label: 'Show headline',
@@ -399,6 +420,11 @@ TopTableListWrapper.propTypes = {
       },
       required: false,
       hidden: false,
+    }),
+    showBottomBorderSM: PropTypes.bool.tag({
+      label: 'Show bottom border',
+      defaultValue: true,
+      group: 'Small story settings',
     }),
   }),
 };

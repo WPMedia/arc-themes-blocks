@@ -27,6 +27,7 @@ const SmallListItem = (props) => {
       storiesPerRowSM,
       showHeadlineSM,
       showImageSM,
+      showBottomBorderSM,
     },
   } = props;
   const ratios = ratiosFor('SM', imageRatio);
@@ -36,9 +37,21 @@ const SmallListItem = (props) => {
   const showImage = showImageSM;
   const layout = imagePosition === ABOVE || imagePosition === BELOW ? 'vertical' : 'horizontal';
   const isReverseLayout = (imagePosition === ABOVE || imagePosition === LEFT);
+  const showBottomBorder = (typeof showBottomBorderSM === 'undefined') ? true : showBottomBorderSM;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const PromoHeadline = () => (
-    <div className={`promo-headline headline-wrap-${layout}`}>
+    <div className="promo-headline headline-wrap">
       <a
         href={websiteURL}
         title={itemTitle}
@@ -97,13 +110,13 @@ const SmallListItem = (props) => {
   return (
     <article
       key={id}
-      className={`small-promo ${colClasses} layout-section wrap-bottom`}
+      className={`top-table-list-small-promo small-promo ${colClasses}`}
     >
       <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         { showHeadline && <PromoHeadline /> }
         { showImage && <PromoImage /> }
       </div>
-      <hr />
+      {hrBorderTmpl()}
     </article>
   );
 };

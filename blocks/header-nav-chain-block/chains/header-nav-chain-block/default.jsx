@@ -9,6 +9,7 @@ import getThemeStyle from 'fusion:themes';
 import { useDebouncedCallback } from 'use-debounce';
 import {
   WIDGET_CONFIG,
+  PLACEMENT_AREAS,
   NAV_BREAKPOINTS,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
@@ -26,30 +27,63 @@ import HorizontalLinksBar from './_children/horizontal-links/default';
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
 // so we could just change the vars instead of multiple CSS values
-const navHeight = '56px';
+const standardNavHeight = 56;
 const navZIdx = 9;
 const sectionZIdx = navZIdx - 1;
 
 /* Styled Components */
 const StyledNav = styled.nav`
   align-items: center;
-  position: relative;
+  width: 100%;
+  position: sticky;
+  top: 0px;
+  margin-bottom: 0px;
 
   .news-theme-navigation-bar {
+    @media screen and (max-width: ${(props) => props.breakpoint}px) {
+      height: ${standardNavHeight}px;
+    }
+    @media screen and (min-width: ${(props) => props.breakpoint}px) {
+      height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+    }
     background-color: ${(props) => props.navBarBackground};
-    height: ${navHeight};
+    transition: 0.5s;
     z-index: ${navZIdx};
+
+    &.nav-logo, & > .nav-logo {
+      img {
+        height: auto;
+        max-width: 240px;
+        width: auto;
+        transition: 0.5s;
+        @media screen and (max-width: ${(props) => props.breakpoint}px) {
+          max-height: 40px;
+          min-width: 40px;
+        }
+        @media screen and (min-width: ${(props) => props.breakpoint}px) {
+          max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+          min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+        }
+      }
+    }
   }
 
   * {
     font-family: ${(props) => props.font};
   }
+
 `;
 
 const StyledSectionDrawer = styled.div`
   font-family: ${(props) => props.font};
-  margin-top: ${navHeight};
   z-index: ${sectionZIdx};
+
+  @media screen and (max-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${standardNavHeight}px;
+  }
+  @media screen and (min-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+  }
 `;
 
 const StyledWarning = styled.div`
@@ -94,9 +128,17 @@ const Nav = (props) => {
     signInOrder,
     logoAlignment = 'center',
     horizontalLinksHierarchy,
+    desktopNavivationStartHeight,
+    shrinkDesktopNavivationHeight,
+    showHorizontalSeperatorDots,
+
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
+
+  const navHeight = desktopNavivationStartHeight || 56;
+
+  const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -110,6 +152,7 @@ const Nav = (props) => {
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
   const [isLogoVisible, setLogoVisibility] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const closeNavigation = () => {
     setSectionDrawerOpen(false);
@@ -200,13 +243,35 @@ const Nav = (props) => {
     };
   }, [breakpoints]);
 
+  useEffect(() => {
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (!shrinkDesktopNavivationHeight || vw < breakpoints.medium) {
+      return undefined;
+    }
+    const handleScroll = () => {
+      if (window.pageYOffset > shrinkDesktopNavivationHeight) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [shrinkDesktopNavivationHeight, breakpoints]);
+
   const getNavWidgetType = (fieldKey) => (
     customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
   );
 
   const hasUserConfiguredNavItems = () => {
     let userHasConfigured = false;
-    const { slotCounts, sections: navBarSections } = WIDGET_CONFIG['nav-bar'];
+    const {
+      slotCounts,
+      sections: navBarSections,
+    } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
     navBarSections.forEach((side) => {
       NAV_BREAKPOINTS.forEach((bpoint) => {
         for (let i = 1; i <= slotCounts[bpoint]; i++) {
@@ -266,7 +331,7 @@ const Nav = (props) => {
                 <WidgetList
                   id={side}
                   breakpoint={breakpoint}
-                  placement="nav-bar"
+                  placement={PLACEMENT_AREAS.NAV_BAR}
                 />
               </div>
             ))
@@ -284,7 +349,7 @@ const Nav = (props) => {
             <WidgetList
               id={navSection}
               breakpoint={breakpoint}
-              placement="section-menu"
+              placement={PLACEMENT_AREAS.SECTION_MENU}
             />
           </div>
         ))}
@@ -293,18 +358,25 @@ const Nav = (props) => {
   };
 
   return (
-    <div>
+    <>
       <StyledNav
         id="main-nav"
         className={`${navColor === 'light' ? 'light' : 'dark'}`}
         font={primaryFont}
         navBarBackground={backgroundColor}
+        navHeight={navHeight}
+        scrolled={scrolled}
+        breakpoint={breakpoints.medium}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
           <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
           {displayLinks && (
-            <HorizontalLinksBar hierarchy={horizontalLinksHierarchy} navBarColor={navColor} />
+            <HorizontalLinksBar
+              hierarchy={horizontalLinksHierarchy}
+              navBarColor={navColor}
+              showHorizontalSeperatorDots={showDotSeparators}
+            />
           )}
           <NavSection side="right" />
         </div>
@@ -314,6 +386,9 @@ const Nav = (props) => {
           className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
           onClick={closeDrawer}
           font={primaryFont}
+          navHeight={navHeight}
+          scrolled={scrolled}
+          breakpoint={breakpoints.medium}
         >
           <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
             <SectionNav sections={sections}>
@@ -328,7 +403,7 @@ const Nav = (props) => {
           In order to render horizontal links, the logo must be aligned to the left.
         </StyledWarning>
       )}
-    </div>
+    </>
   );
 };
 
@@ -354,6 +429,23 @@ Nav.propTypes = {
     horizontalLinksHierarchy: PropTypes.string.tag({
       label: 'Horizontal Links hierarchy',
       group: 'Configure content',
+    }),
+    desktopNavivationStartHeight: PropTypes.number.tag({
+      label: 'Starting desktop navigation bar height',
+      group: 'Logo',
+      max: 200,
+      min: 56,
+      defaultValue: 56,
+    }),
+    shrinkDesktopNavivationHeight: PropTypes.number.tag({
+      label: 'Shrink navigation bar after scrolling',
+      group: 'Logo',
+      min: 56,
+    }),
+    showHorizontalSeperatorDots: PropTypes.bool.tag({
+      label: 'Display dots between horizontal links',
+      group: 'Display',
+      defaultValue: true,
     }),
     ...generateNavComponentPropTypes(),
   }),

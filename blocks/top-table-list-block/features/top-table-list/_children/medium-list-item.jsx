@@ -31,6 +31,18 @@ const MediumListItem = (props) => {
     imageRatio,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
+  const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
+
+  const hrBorderTmpl = () => {
+    if (showBottomBorder) {
+      return (
+        <hr />
+      );
+    }
+    return (
+      <hr className="hr-borderless" />
+    );
+  };
 
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
@@ -91,7 +103,7 @@ const MediumListItem = (props) => {
   return (
     <>
       <article className="container-fluid medium-promo" key={id}>
-        <div className={`medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
+        <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {/* {customFields.headlinePositionMD === 'above'
             && (customFields.showHeadlineMD
               || customFields.showDescriptionMD
@@ -160,7 +172,7 @@ const MediumListItem = (props) => {
           }
         </div>
       </article>
-      <hr />
+      {hrBorderTmpl()}
     </>
   );
 };

@@ -143,7 +143,7 @@ export const getSlotTargeting = (props) => ({
   ad_type: props?.adType,
 });
 
-/* Expects a 'props' object containing feature props, FusionContext, AppContext */
+/* Expects a 'props' object containing feature props, FusionContext */
 export const getAdObject = (props) => {
   const { instanceId = '' } = props;
   const adName = getAdName(props);

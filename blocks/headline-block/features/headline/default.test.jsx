@@ -1,6 +1,7 @@
 const React = require('react');
-const { mount } = require('enzyme');
+const { mount, shallow } = require('enzyme');
 
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
 describe('the headline feature for the default output type', () => {
@@ -9,22 +10,20 @@ describe('the headline feature for the default output type', () => {
   });
 
   describe('when headline content from globalContent is present', () => {
-    beforeEach(() => {
-      jest.mock('fusion:context', () => ({
-        useFusionContext: jest.fn(() => ({
+    it('should render an h1', () => {
+      const data = {
+        useFusionContext: {
           globalContent: {
             headlines: {
-              basic: 'headline for our story',
+              basic: 'Headline Text',
             },
           },
-          arcSite: 'not-real',
-        })),
-      }));
-    });
-
-    it('should render an h1', () => {
-      const { default: Headline } = require('./default');
-      const wrapper = mount(<Headline />);
+        },
+      };
+      const { default: Headline } = require('./headline');
+      const { useFusionContext } = require('fusion:context');
+      useFusionContext.mockReturnValue({ arcSite: 'abc123' });
+      const wrapper = mount(<Headline {...data} />);
 
       expect(wrapper.find('h1')).toHaveClassName('headline');
       // checking for styled component class
@@ -32,8 +31,19 @@ describe('the headline feature for the default output type', () => {
     });
 
     it('should dangerously set the innerHTML to the headline content', () => {
-      const { default: Headline } = require('./default');
-      const wrapper = mount(<Headline />);
+      const data = {
+        useFusionContext: {
+          globalContent: {
+            headlines: {
+              basic: 'headline for our story',
+            },
+          },
+        },
+      };
+      const { default: Headline } = require('./headline');
+      const { useFusionContext } = require('fusion:context');
+      useFusionContext.mockReturnValue({ arcSite: 'abc123' });
+      const wrapper = mount(<Headline {...data} />);
 
       // text() shows any text within tag
       expect(wrapper.find('h1').text()).toStrictEqual('headline for our story');
@@ -41,17 +51,12 @@ describe('the headline feature for the default output type', () => {
   });
 
   describe('when headline content from globalContent is NOT present', () => {
-    beforeEach(() => {
-      jest.mock('fusion:context', () => ({
-        useFusionContext: jest.fn(() => ({
-          globalContent: {},
-        })),
-      }));
-    });
-
     it('should render nothing', () => {
-      const { default: Headline } = require('./default');
-      const wrapper = mount(<Headline />);
+      const data = {};
+      const { default: Headline } = require('./headline');
+      const { useFusionContext } = require('fusion:context');
+      useFusionContext.mockReturnValue({ arcSite: 'abc123' });
+      const wrapper = mount(<Headline {...data} />);
 
       expect(wrapper).toBeEmptyRender();
     });

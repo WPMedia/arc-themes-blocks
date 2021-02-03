@@ -8,9 +8,9 @@ const Headline = ({
     globalContent: {
       headlines: {
         basic: headlineString = '',
-      },
-    },
-  },
+      } = {},
+    } = {},
+  } = {},
 }) => (
   /*
     if string is default empty from presentational container,

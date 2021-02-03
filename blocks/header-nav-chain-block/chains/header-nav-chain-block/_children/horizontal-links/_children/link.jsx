@@ -39,7 +39,7 @@ const StyledLink = styled.a`
 `;
 
 const Link = ({
-  href, name, showSeparator, navBarColor,
+  href, name, navBarColor,
 }) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
 
@@ -51,12 +51,12 @@ const Link = ({
         rel="noopener noreferrer"
         navBarColor={navBarColor}
       >
-        {`${showSeparator ? '  \u00a0 • \u00a0' : '  \u00a0  \u00a0'}${name}`}
+        {`${name}`}
         <span className="sr-only">(Opens in new window)</span>
       </StyledLink>
     ) : (
       <StyledLink href={fixTrailingSlash(href)} navBarColor={navBarColor}>
-        {`${showSeparator ? '  \u00a0 • \u00a0' : '  \u00a0  \u00a0'}${name}`}
+        {`${name}`}
       </StyledLink>
     )
   );
@@ -66,7 +66,6 @@ Link.propTypes = {
   href: PropTypes.string,
   name: PropTypes.string,
   navBarColor: PropTypes.string,
-  showSeparator: PropTypes.bool,
 };
 
 export default Link;

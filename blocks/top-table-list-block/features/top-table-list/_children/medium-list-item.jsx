@@ -29,6 +29,7 @@ const MediumListItem = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     imageRatio,
+    subType,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
@@ -102,7 +103,7 @@ const MediumListItem = (props) => {
 
   return (
     <>
-      <article className="container-fluid medium-promo" key={id}>
+      <article className={`container-fluid medium-promo ${subType}`} key={id}>
         <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {/* {customFields.headlinePositionMD === 'above'
             && (customFields.showHeadlineMD

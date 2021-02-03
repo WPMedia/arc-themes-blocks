@@ -86,6 +86,7 @@ describe('medium list item', () => {
     const displayDate = '';
     const id = 'test';
     const { default: MediumListItem } = require('./medium-list-item');
+    const subTypeClassName = 'subtype_longread';
 
     // eslint-disable-next-line no-unused-vars
     const wrapper = mount(<MediumListItem
@@ -100,6 +101,7 @@ describe('medium list item', () => {
       displayDate={displayDate}
       id={id}
       customFields={config}
+      subType={subTypeClassName}
     />);
 
     // placeholder
@@ -112,6 +114,7 @@ describe('medium list item', () => {
     expect(wrapper.find('p.description-text').text()).toBe(descriptionText);
 
     expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('MediumListItem > article').hasClass(subTypeClassName)).toBe(true);
   });
 
   // it('headline has class headline-above when headline position is above', () => {
@@ -191,6 +194,7 @@ describe('medium list item', () => {
     const element = { };
     const displayDate = '';
     const id = 'test';
+    const subTypeClassName = 'subtype_longread';
 
     // eslint-disable-next-line no-unused-vars
     const wrapper = mount(<MediumListItem
@@ -205,6 +209,7 @@ describe('medium list item', () => {
       displayDate={displayDate}
       id={id}
       customFields={config}
+      subType={subTypeClassName}
     />);
 
     const placeholderImage = wrapper.find('img');
@@ -217,6 +222,7 @@ describe('medium list item', () => {
     expect(wrapper.find('a.md-promo-headline').length).toBe(0);
 
     expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('MediumListItem > article').hasClass(subTypeClassName)).toBe(true);
   });
 
   it('renders image placeholder with empty props with bottom border', () => {

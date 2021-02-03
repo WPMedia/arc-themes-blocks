@@ -17,7 +17,6 @@ const Headline = ({
     then render null
   */
   (headlineString !== '') && (
-  <>
     <PrimaryFont
       as="h1"
       className="headline"
@@ -25,19 +24,7 @@ const Headline = ({
       // dangerouslySetInnerHTML seems to be a pattern for blocks
       dangerouslySetInnerHTML={{ __html: headlineString }}
     />
-    <PrimaryFont
-      as="h2"
-    >
-      {headlineString}
-    </PrimaryFont>
-    <PrimaryFont
-      as="h3"
-      className="headline"
-      fontColor="primary-color"
-      // dangerouslySetInnerHTML seems to be a pattern for blocks
-      dangerouslySetInnerHTML={{ __html: headlineString }}
-    />
-  </>
-  ));
+  )
+);
 
 export default Headline;

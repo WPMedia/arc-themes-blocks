@@ -23,6 +23,8 @@ const config = {
   showImageSM: true,
 };
 
+const subTypeClassName = 'subtype_article';
+
 const sampleProps = {
   imageURL: 'pic',
   websiteURL: 'url',
@@ -38,6 +40,7 @@ const sampleProps = {
   overlineText: 'News',
   overlineDisplay: true,
   customFields: config,
+  subType: subTypeClassName,
 };
 
 describe('vertical overline image story item', () => {
@@ -86,6 +89,7 @@ describe('vertical overline image story item', () => {
     expect(wrapper.find('VerticalOverlineImageStoryItem > hr').length).toBe(1);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('VideoPlayer')).toHaveLength(0);
+    expect(wrapper.find('article').hasClass(subTypeClassName)).toBe(true);
   });
 
   it('does not render image, overline and byline with empty props', () => {

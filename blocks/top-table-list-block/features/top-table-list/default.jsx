@@ -41,6 +41,8 @@ const overlineData = (storyObject, arcSite) => {
   return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
 };
 
+const extractSubType = (storyObject) => (storyObject?.subtype ? `subtype_${storyObject.subtype}` : '');
+
 const unserializeStory = (arcSite) => (storyObject) => {
   const [overlineText, overlineUrl] = overlineData(storyObject, arcSite);
 
@@ -57,6 +59,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
     overlineUrl,
     overlineText,
     resizedImageOptions: extractResizedParams(storyObject),
+    subType: extractSubType(storyObject),
   };
 };
 
@@ -208,6 +211,7 @@ const TopTableList = (props) => {
                 overlineUrl,
                 overlineText,
                 resizedImageOptions,
+                subType,
               } = itemObject;
               const url = element?.websites[arcSite]?.website_url || '';
               return (
@@ -234,6 +238,7 @@ const TopTableList = (props) => {
                   placeholderResizedImageOptions={placeholderResizedImageOptions}
                   targetFallbackImage={targetFallbackImage}
                   arcSite={arcSite}
+                  subType={subType}
                 />
               );
             })
@@ -429,6 +434,6 @@ TopTableListWrapper.propTypes = {
   }),
 };
 
-TopTableListWrapper.label = 'Top Table List – Arc Block';
+TopTableListWrapper.label = 'Top Table List – Mentor Block';
 
 export default TopTableListWrapper;

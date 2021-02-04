@@ -36,6 +36,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     imageRatio,
+    subType,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
@@ -127,7 +128,7 @@ const VerticalOverlineImageStoryItem = (props) => {
 
   return (
     <>
-      <article className="container-fluid xl-large-promo" key={id}>
+      <article className={`container-fluid xl-large-promo ${subType}`} key={id}>
         <div className="promo-item-margins row xl-promo-padding-bottom">
           {(customFields.showHeadlineXL
             || customFields.showDescriptionXL

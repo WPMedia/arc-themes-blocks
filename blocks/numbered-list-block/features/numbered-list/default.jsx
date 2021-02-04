@@ -111,7 +111,7 @@ class NumberedList extends Component {
 
           return (
             <React.Fragment key={`result-card-${url}`}>
-              <div className="numbered-list-item" key={`result-card-${url}`} type="1">
+              <div className="numbered-list-item numbered-item-margins" key={`result-card-${url}`} type="1">
                 {showHeadline
                 && (
                 <a
@@ -128,7 +128,7 @@ class NumberedList extends Component {
                 <a
                   href={url}
                   title={headlineText}
-                  className="list-anchor-image"
+                  className="list-anchor-image vertical-align-image"
                 >
                   {extractImage(promoItems) ? (
                     <Image

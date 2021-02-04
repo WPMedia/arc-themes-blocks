@@ -111,7 +111,7 @@ const SmallListItem = (props) => {
   return (
     <article
       key={id}
-      className={`top-table-list-small-promo small-promo ${subType} ${colClasses} layout-section wrap-bottom`}
+      className={`top-table-list-small-promo small-promo ${subType} ${colClasses}`}
     >
       <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         { showHeadline && <PromoHeadline /> }

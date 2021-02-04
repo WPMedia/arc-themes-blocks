@@ -22,7 +22,7 @@ const setAdLabelVisibility = (props) => {
 
 const StyledAdUnit = styled.div`
   .arcad > [id^='google_ads_iframe']:not(:empty)::before {
-    content: "${(props) => props.adLabel}";
+    content: '${(props) => props.adLabel}';
     ${(props) => setAdLabelVisibility(props)}
   }
 

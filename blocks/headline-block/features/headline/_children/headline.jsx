@@ -15,7 +15,6 @@ const Headline = ({
     <PrimaryFont
       as="h1"
       className="headline"
-      fontColor="primary-color"
       // dangerouslySetInnerHTML seems to be a pattern for blocks
       dangerouslySetInnerHTML={{ __html: headlineString }}
     />

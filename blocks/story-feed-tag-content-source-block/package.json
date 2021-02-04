@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-tag-content-source-block",
-  "version": "5.9.0-canary.0",
+  "version": "5.9.4",
   "description": "Content source block for story feed queries by tag",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",

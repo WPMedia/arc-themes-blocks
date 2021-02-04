@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
+
+**Note:** Version bump only for package @wpmedia/numbered-list-block
+
+
+
+
+
+## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
+
+
+### Performance Improvements
+
+* Ignore all test jsx files and mock numbered list ([5de2919](https://github.com/WPMedia/fusion-news-theme-blocks/commit/5de29191332f2d7bd54fd898f926e686dc2a62dc))
+* Include npmignore in the features folder because that's what's included in the package.json's files ([4cb617f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4cb617fb8ee26973203f317957e69c5cdc1c7a59))
+* Remove test files by name and without path in ignore file ([7657a37](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7657a3754ae73d90c5e5dbee50a286d7648509ba))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
+
+
+
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
+
+
+
+
+
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
+
+**Note:** Version bump only for package @wpmedia/numbered-list-block
+
+
+
+
+
 # [5.6.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.6.0-beta.0...v5.6.0) (2020-09-09)
 
 **Note:** Version bump only for package @wpmedia/numbered-list-block

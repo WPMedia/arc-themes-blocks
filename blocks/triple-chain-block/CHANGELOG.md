@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
+
+
+### Performance Improvements
+
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
+
+
+
+
+
+## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
+
+
+### Performance Improvements
+
+* Use peer dependencies especially for content sources that've changed ([8ecf0bf](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8ecf0bfae486eba3334baf93cf54846deb12dd5d))
+
+
+
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
+
+
+
+
+
+# [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
+
+**Note:** Version bump only for package @wpmedia/triple-chain-block
+
+
+
+
+
 # [5.6.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.6.0-beta.0...v5.6.0) (2020-09-09)
 
 **Note:** Version bump only for package @wpmedia/triple-chain-block

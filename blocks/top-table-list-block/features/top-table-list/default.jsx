@@ -48,7 +48,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
 
   return {
     id: storyObject._id,
-    itemTitle: storyObject?.headlines?.basic || '',
+    itemTitle: storyObject?.headlines?.web || storyObject?.headlines?.basic || '',
     imageURL: extractImageFromStory(storyObject) || '',
     displayDate: storyObject.display_date || '',
     description: storyObject?.description?.basic || '',

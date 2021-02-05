@@ -6,6 +6,14 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img url="" alt="placeholder placeholder" />,
 }));
 
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-gazette',
+  })),
+}));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));

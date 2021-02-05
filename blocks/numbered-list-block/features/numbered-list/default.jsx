@@ -100,11 +100,7 @@ class NumberedList extends Component {
               <div className="numbered-list-item numbered-item-margins" key={`result-card-${url}`} type="1">
                 {showHeadline
                 && (
-                <a
-                  href={url}
-                  title={headlineText}
-                  className="headline-list-anchor"
-                >
+                <a href={url} className="headline-list-anchor">
                   <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
                   <PrimaryFont as="h2" className="headline-text">{headlineText}</PrimaryFont>
                 </a>
@@ -113,8 +109,9 @@ class NumberedList extends Component {
                 && (
                 <a
                   href={url}
-                  title={headlineText}
                   className="list-anchor-image vertical-align-image"
+                  aria-hidden="true"
+                  tabIndex="-1"
                 >
                   {extractImage(promoItems) ? (
                     <Image

@@ -24,8 +24,9 @@ const StoryItem = (props) => {
       {showImage ? (
         <a
           href={websiteURL}
-          title={itemTitle}
           className="simple-list-anchor"
+          aria-hidden="true"
+          tabIndex="-1"
         >
           {imageURL !== '' ? (
             <Image
@@ -65,7 +66,6 @@ const StoryItem = (props) => {
         <a
           className="simple-list-headline-anchor"
           href={websiteURL}
-          title={itemTitle}
         >
           <Title primaryFont={primaryFont} className="simple-list-headline-text">
             {itemTitle}

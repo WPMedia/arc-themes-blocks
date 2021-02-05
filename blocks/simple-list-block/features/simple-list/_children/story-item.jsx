@@ -1,15 +1,13 @@
 import React from 'react';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
-
-import Title from './title';
 
 const StoryItem = (props) => {
   const {
     itemTitle = '',
     imageURL = '',
     id = '',
-    primaryFont = '',
     websiteURL,
     showHeadline,
     showImage,
@@ -67,9 +65,9 @@ const StoryItem = (props) => {
           href={websiteURL}
           title={itemTitle}
         >
-          <Title primaryFont={primaryFont} className="simple-list-headline-text">
+          <PrimaryFont as="h2" className="simple-list-headline-text">
             {itemTitle}
-          </Title>
+          </PrimaryFont>
         </a>
       ) : null}
     </article>

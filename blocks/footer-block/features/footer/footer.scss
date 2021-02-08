@@ -140,8 +140,8 @@ footer {
 
     .footer-header {
       font-weight: bold;
-      font-size: 14px;
-      line-height: 21px;
+      font-size: calculateRem(14px);
+      line-height: calculateRem(21px);
     }
 
     .footer-item {

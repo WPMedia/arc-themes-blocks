@@ -21,11 +21,7 @@ const PromoHeadline = (props) => {
   return content ? (
 
     <div className={`promo-headline ${headlineMarginClass}`}>
-      <a
-        href={content.website_url}
-        className="sm-promo-headline"
-        title={content?.headlines?.basic || ''}
-      >
+      <a href={content.website_url} className="sm-promo-headline">
         <HeadlineText
           primaryFont={
             getThemeStyle(arcSite)[

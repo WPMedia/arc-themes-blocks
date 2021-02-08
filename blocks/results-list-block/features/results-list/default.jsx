@@ -36,7 +36,7 @@ const ReadMoreButton = styled.button`
 
   &:not(:disabled):not(.disabled):active:hover,
   &:not(:disabled):not(.disabled):hover:hover {
-    background-color: ${(props) => props.primaryColor}; 
+    background-color: ${(props) => props.primaryColor};
   }
 `;
 
@@ -46,17 +46,30 @@ class ResultsList extends Component {
     super(props);
     this.arcSite = props.arcSite;
     this.state = {
-      storedList: {},
       resultList: {},
       seeMore: true,
       placeholderResizedImageOptions: {},
+      focusItem: 0,
     };
     this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
+    this.listItemRefs = {};
     this.fetchPlaceholder();
   }
 
   componentDidMount() {
     this.fetchStories(false);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevFocusItem = prevState.focusItem;
+    const { focusItem, resultList } = this.state;
+
+    if (prevFocusItem === focusItem && prevFocusItem > 0) {
+      const nextItem = resultList.content_elements[focusItem];
+      if (nextItem?._id) {
+        this.listItemRefs[nextItem._id].querySelector('a:not([aria-hidden])').focus();
+      }
+    }
   }
 
   getFallbackImageURL() {
@@ -87,23 +100,24 @@ class ResultsList extends Component {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
     if (additionalStoryAmount) {
-      const { storedList } = this.state;
+      const { resultList } = this.state;
+      const currentCount = resultList?.content_elements?.length;
       // Check for next value
-      if (storedList.next) {
+      if (resultList.next) {
         // Determine content service type
         let value;
         switch (listContentConfig.contentService) {
           case 'story-feed-query':
             value = parseInt(contentConfigValues.size, 10);
-            contentConfigValues.offset = (storedList.next).toString();
-            value += storedList.next;
+            contentConfigValues.offset = (resultList.next).toString();
+            value += resultList.next;
             break;
           case 'story-feed-author':
           case 'story-feed-sections':
           case 'story-feed-tag':
             value = parseInt(contentConfigValues.feedSize, 10);
-            contentConfigValues.feedOffset = (storedList.next).toString();
-            value += storedList.next;
+            contentConfigValues.feedOffset = (resultList.next).toString();
+            value += resultList.next;
             break;
           default:
             break;
@@ -112,12 +126,14 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform: (data) => fetchStoriesTransform(data, storedList),
+            transform: (data) => fetchStoriesTransform(data, resultList),
           },
         });
         // Hide button if no more stories to load
-        if (value >= storedList.count) {
-          this.state.seeMore = false;
+        if (value >= resultList.count) {
+          this.setState({
+            seeMore: false,
+          });
         }
       } else if (listContentConfig.contentService === 'content-api-collections') {
         let from = parseInt(contentConfigValues.from, 10) || 0;
@@ -127,7 +143,7 @@ class ResultsList extends Component {
           resultList: {
             source: contentService,
             query: contentConfigValues,
-            transform: (data) => fetchStoriesTransform(data, storedList),
+            transform: (data) => fetchStoriesTransform(data, resultList),
           },
         });
 
@@ -142,10 +158,14 @@ class ResultsList extends Component {
           },
         });
       }
+
+      this.setState({
+        focusItem: currentCount,
+      });
     } else {
       const { fetched } = this.getContent(listContentConfig.contentService, contentConfigValues);
       fetched.then((response) => {
-        this.setState({ resultList: response, storedList: response });
+        this.setState({ resultList: response });
         if (response?.content_elements
           && response?.count
           && response.content_elements.length >= response.count) {
@@ -196,12 +216,20 @@ class ResultsList extends Component {
           const showSeparator = by && by.length !== 0;
           const url = websites[arcSite].website_url;
           return (
-            <div className="list-item" key={`result-card-${url}`}>
+            <div
+              className="list-item"
+              key={`result-card-${url}`}
+              ref={(ref) => {
+                this.listItemRefs[element._id] = ref;
+              }}
+            >
               { promoElements.showImage && (
                 <div className="results-list--image-container mobile-order-2 mobile-image">
                   <a
                     href={url}
                     title={headlineText}
+                    aria-hidden="true"
+                    tabIndex="-1"
                   >
                     {extractImage(promoItems) ? (
                       <Image

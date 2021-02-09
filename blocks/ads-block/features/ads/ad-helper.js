@@ -1,14 +1,12 @@
 /* eslint-disable object-curly-newline */
-import getProperties from 'fusion:properties';
 import adMap from './ad-mapping';
 
-export const getBreakpoints = (arcSite) => {
-  const siteProps = getProperties(arcSite);
-  return siteProps?.breakpoints;
-};
+export const getBreakpoints = ({ siteProperties }) => (
+  siteProperties?.breakpoints
+);
 
-export const getSizemapBreakpoints = ({ arcSite }) => {
-  const breakpoints = getBreakpoints(arcSite);
+export const getSizemapBreakpoints = (props) => {
+  const breakpoints = getBreakpoints(props);
   return !breakpoints ? [] : [
     [breakpoints.large, 0],
     [breakpoints.medium, 0],
@@ -110,8 +108,8 @@ export const getSectionID = (props) => (
 );
 
 export const getSlotName = (props = {}) => {
-  const { arcSite = '' } = props;
-  const { websiteAdPath = '' } = getProperties(arcSite);
+  const { siteProperties } = props;
+  const { websiteAdPath = '' } = (siteProperties || {});
   const sectionId = getSectionID(props);
   if (websiteAdPath && !sectionId) {
     return websiteAdPath;

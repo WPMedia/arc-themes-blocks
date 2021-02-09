@@ -86,11 +86,7 @@ const ExtraLargePromo = ({ customFields }) => {
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
       return (
-        <a
-          href={content.website_url}
-          className="xl-promo-headline"
-          title={headlineText}
-        >
+        <a href={content.website_url} className="xl-promo-headline">
           <HeadlineText
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="xl-promo-headline"
@@ -174,10 +170,7 @@ const ExtraLargePromo = ({ customFields }) => {
                 ) || (
                   customFields.showImage
                     && (
-                      <a
-                        href={content.website_url}
-                        title={content && content.headlines ? content.headlines.basic : ''}
-                      >
+                      <a href={content.website_url} aria-hidden="true" tabIndex="-1">
                         {imageURL
                           ? (
                             <Image

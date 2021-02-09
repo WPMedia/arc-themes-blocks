@@ -62,12 +62,7 @@ const MediumPromo = ({ customFields }) => {
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
       return (
-        <a
-          href={content.website_url}
-          className="md-promo-headline"
-          // className={`md-promo-headline headline-${customFields.headlinePosition}`}
-          title={headlineText}
-        >
+        <a href={content.website_url} className="md-promo-headline">
           <HeadlineText
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="md-promo-headline-text"
@@ -134,11 +129,7 @@ const MediumPromo = ({ customFields }) => {
         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
           {customFields.showImage
           && (
-            <a
-              className="image-link"
-              href={content.website_url}
-              title={content && content.headlines ? content.headlines.basic : ''}
-            >
+            <a className="image-link" href={content.website_url} aria-hidden="true" tabIndex="-1">
               {
                 imageURL
                   ? (

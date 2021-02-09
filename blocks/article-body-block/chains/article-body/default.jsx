@@ -143,8 +143,8 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
       return (item.text && item.text.length > 0) ? (
         <Fragment key={key}>
           <section className="correction">
-            <h6>{item.correction_type || 'Correction'}</h6>
-            <div>{item.text}</div>
+            <h2 className="h6-primary">{item.correction_type || 'Correction'}</h2>
+            <p>{item.text}</p>
           </section>
         </Fragment>
       ) : null;

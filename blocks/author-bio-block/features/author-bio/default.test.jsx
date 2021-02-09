@@ -331,6 +331,11 @@ describe('Given the list of author(s) from the article', () => {
 
     const socialButtonsContainer = wrapper.find('section.socialButtons');
     expect(socialButtonsContainer.children()).toHaveLength(13);
+    const socialLinks = socialButtonsContainer.find('a');
+    expect(socialLinks).toHaveLength(13);
+    socialLinks.forEach((link) => {
+      expect(typeof link.prop('aria-label')).toEqual('string');
+    });
 
     // envelope icon is the default we want to avoid
     expect(socialButtonsContainer.text().includes('EnvelopeIcon')).toBe(false);

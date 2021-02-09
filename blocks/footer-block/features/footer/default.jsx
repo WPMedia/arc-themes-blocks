@@ -12,7 +12,7 @@ import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon'
 
 import './footer.scss';
 
-const FooterSection = styled.ul`
+const FooterSection = styled.div`
   font-family: ${(props) => props.primaryFont};
 `;
 
@@ -143,8 +143,8 @@ const Footer = ({ customFields: { navigationConfig } }) => {
               key={column._id}
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             >
-              <section className="footer-header">{(column.name) ? column.name : ''}</section>
-              {columnItems}
+              <h4 className="footer-header">{(column.name) ? column.name : ''}</h4>
+              <ul>{columnItems}</ul>
             </FooterSection>
           );
         })}

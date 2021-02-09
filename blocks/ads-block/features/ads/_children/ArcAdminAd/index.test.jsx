@@ -7,7 +7,7 @@ import ArcAdminAd from './index';
 const defaults = {
   props: {
     adClass: 'test-ad-class',
-    adName: 'test-ad-name',
+    adType: 'test-ad-name',
     slotName: 'test-slot-name',
     dimensions: [[1, 1], [1, 1], [1, 1]],
   },
@@ -33,7 +33,7 @@ describe('<ArcAdminAd>', () => {
     useFusionContext.mockReturnValueOnce({ isAdmin: true });
     const adProps = {
       ...defaults.props,
-      adName: undefined,
+      adType: undefined,
     };
     const wrapper = mount(<ArcAdminAd {...adProps} />);
     expect(wrapper).toBeDefined();

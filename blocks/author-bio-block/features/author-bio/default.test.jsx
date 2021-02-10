@@ -285,56 +285,63 @@ describe('Given the list of author(s) from the article', () => {
   });
 
   it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss, soundcloud not the mail fallback', () => {
-    const { default: AuthorBio } = require('./default');
+    const { default: AuthorBio, getSocialLinkAriaLabel } = require('./default');
 
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        globalContent: {
-          credits: {
-            by: [{
-              type: 'author',
-              name: 'Sara Carothers',
-              description: 'description',
-              image: {
-                url: '',
+    const mockUseFusionContext = {
+      arcSite: 'the-sun',
+      globalContent: {
+        credits: {
+          by: [{
+            type: 'author',
+            name: 'Sara Carothers',
+            description: 'description',
+            image: {
+              url: '',
+            },
+            additional_properties: {
+              original: {
+                _id: 'saracarothers',
+                byline: 'Sara Lynn Carothers',
+                bio_page: '/author/sara-carothers/',
+                bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
               },
-              additional_properties: {
-                original: {
-                  _id: 'saracarothers',
-                  byline: 'Sara Lynn Carothers',
-                  bio_page: '/author/sara-carothers/',
-                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
-                },
-              },
-              social_links: [
-                { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
-                { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
-                { site: 'facebook', url: 'https://www.thefacebook.com' },
-                { site: 'reddit', url: 'https://reddit.com' },
-                { site: 'youtube', url: 'https://youtube.com' },
-                { site: 'medium', url: 'https://medium.com' },
-                { site: 'tumblr', url: 'https://tumblr.com' },
-                { site: 'pinterest', url: 'https://pinterest.com' },
-                { site: 'snapchat', url: 'https://snapchat.com' },
-                { site: 'whatsapp', url: 'https://whatsapp.com' },
-                { site: 'linkedin', url: 'https://whatsapp.com' },
-                { site: 'rss', url: 'rss feed' },
-                { site: 'soundcloud', url: 'https://soundcloud.com' },
-              ],
-            }],
-          },
+            },
+            social_links: [
+              { site: 'twitter', url: 'https://twitter.com/sLcarothers' },
+              { site: 'instagram', url: 'https://www.instagram.com/scarothers/' },
+              { site: 'facebook', url: 'https://www.thefacebook.com' },
+              { site: 'reddit', url: 'https://reddit.com' },
+              { site: 'youtube', url: 'https://youtube.com' },
+              { site: 'medium', url: 'https://medium.com' },
+              { site: 'tumblr', url: 'https://tumblr.com' },
+              { site: 'pinterest', url: 'https://pinterest.com' },
+              { site: 'snapchat', url: 'https://snapchat.com' },
+              { site: 'whatsapp', url: 'https://whatsapp.com' },
+              { site: 'linkedin', url: 'https://whatsapp.com' },
+              { site: 'rss', url: 'rss feed' },
+              { site: 'soundcloud', url: 'https://soundcloud.com' },
+            ],
+          }],
         },
-      })),
+      },
+    };
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => mockUseFusionContext),
     }));
-    const wrapper = mount(<AuthorBio />);
 
+    const wrapper = mount(<AuthorBio />);
     const socialButtonsContainer = wrapper.find('section.socialButtons');
     expect(socialButtonsContainer.children()).toHaveLength(13);
     const socialLinks = socialButtonsContainer.find('a');
     expect(socialLinks).toHaveLength(13);
-    socialLinks.forEach((link) => {
+    socialLinks.forEach((link, index) => {
       expect(typeof link.prop('aria-label')).toEqual('string');
+      expect(link.prop('aria-label').toLowerCase()).toEqual(
+        getSocialLinkAriaLabel(
+          mockUseFusionContext?.globalContent?.credits?.by[0]?.name,
+          mockUseFusionContext?.globalContent?.credits?.by[0]?.social_links[index].site,
+        ).toLowerCase(),
+      );
     });
 
     // envelope icon is the default we want to avoid
@@ -624,5 +631,25 @@ describe('Given the list of author(s) from the article', () => {
 
     const wrapper = mount(<AuthorBio />);
     expect(wrapper).toBeEmptyRender();
+  });
+});
+
+describe('getSocialLinkAriaLabel()', () => {
+  it('returns null when "webService" param is undefined', () => {
+    const { getSocialLinkAriaLabel } = require('./default');
+    const value = getSocialLinkAriaLabel();
+    expect(value).toBeNull();
+  });
+
+  it('returns generic label when author name param is undefined', () => {
+    const { getSocialLinkAriaLabel } = require('./default');
+    const value = getSocialLinkAriaLabel(undefined, 'LinkedIn');
+    expect(value).toEqual('Connect with author on LinkedIn');
+  });
+
+  it('returns label with author name and web service name', () => {
+    const { getSocialLinkAriaLabel } = require('./default');
+    const value = getSocialLinkAriaLabel('Stewie Griffin', 'LinkedIn');
+    expect(value).toEqual('Connect with Stewie Griffin on LinkedIn');
   });
 });

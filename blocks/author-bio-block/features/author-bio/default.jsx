@@ -45,6 +45,16 @@ const AuthorBioStyled = styled.section`
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
+export const getSocialLinkAriaLabel = (authorName = 'author', webService) => {
+  if (!webService) return null;
+  return (
+    (webService.toLowerCase() === 'soundcloud' && `Listen to ${authorName} on SoundCloud`)
+    || (webService.toLowerCase() === 'rss' && `Subscribe to ${authorName} RSS feed`)
+    || (webService.toLowerCase() === 'email' && `Send an email to ${authorName}`)
+    || `Connect with ${authorName} on ${webService}`
+  );
+};
+
 const renderAuthorInfo = (author, arcSite) => {
   const {
     image: { url = '', alt_text: altText = '' },
@@ -80,7 +90,7 @@ const AuthorBio = () => {
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
-    const { additional_properties: additionalProperties } = author;
+    const { additional_properties: additionalProperties, name } = author;
     const { original } = additionalProperties;
 
     // If the author doesn't have a description, then do not add them to the list
@@ -101,12 +111,12 @@ const AuthorBio = () => {
             let linkTitle;
             const constructedURL = constructSocialURL(socialLink.site, socialLink.url);
 
-            const MediaLink = ({ children, label, ...otherProps }) => (
+            const MediaLink = ({ children, webService, ...otherProps }) => (
               <MediaLinksStyled
                 href={constructedURL}
                 target="_blank"
                 rel="noreferrer noopener"
-                aria-label={`Click ${label} link`}
+                aria-label={getSocialLinkAriaLabel(name, webService)}
                 primaryColor={getThemeStyle(arcSite)['primary-color']}
                 {...otherProps}
               >
@@ -118,7 +128,7 @@ const AuthorBio = () => {
               case 'linkedin':
                 linkTitle = 'LinkedIn';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <LinkedInIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -130,7 +140,7 @@ const AuthorBio = () => {
               case 'twitter':
                 linkTitle = 'Twitter';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <TwitterIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -142,7 +152,7 @@ const AuthorBio = () => {
               case 'instagram':
                 linkTitle = 'Instagram';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <InstagramIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -154,7 +164,7 @@ const AuthorBio = () => {
               case 'facebook':
                 linkTitle = 'Facebook';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <FacebookIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -166,7 +176,7 @@ const AuthorBio = () => {
               case 'reddit':
                 linkTitle = 'Reddit';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <RedditIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -178,7 +188,7 @@ const AuthorBio = () => {
               case 'youtube':
                 linkTitle = 'YouTube';
                 socialButton = (
-                  <MediaLink label={linkTitle} id="link-social-youtube">
+                  <MediaLink webService={linkTitle} id="link-social-youtube">
                     <YoutubeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -190,7 +200,7 @@ const AuthorBio = () => {
               case 'medium':
                 linkTitle = 'Medium';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <MediumIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -202,7 +212,7 @@ const AuthorBio = () => {
               case 'tumblr':
                 linkTitle = 'Tumblr';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <TumblrIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -214,7 +224,7 @@ const AuthorBio = () => {
               case 'pinterest':
                 linkTitle = 'Pinterest';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <PinterestIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -226,7 +236,7 @@ const AuthorBio = () => {
               case 'snapchat':
                 linkTitle = 'Snapchat';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <SnapchatIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -238,7 +248,7 @@ const AuthorBio = () => {
               case 'whatsapp':
                 linkTitle = 'WhatsApp';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <WhatsAppIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -250,7 +260,7 @@ const AuthorBio = () => {
               case 'soundcloud':
                 linkTitle = 'SoundCloud';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <SoundCloudIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -262,7 +272,7 @@ const AuthorBio = () => {
               case 'rss':
                 linkTitle = 'RSS';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <RssIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}
@@ -274,7 +284,7 @@ const AuthorBio = () => {
               default:
                 linkTitle = 'Email';
                 socialButton = (
-                  <MediaLink label={linkTitle}>
+                  <MediaLink webService={linkTitle}>
                     <EnvelopeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
                       title={linkTitle}

@@ -10,7 +10,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features"
+    "dist"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

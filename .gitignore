@@ -8,3 +8,4 @@ coverage
 *.log
 !.vscode/extensions.json
 *.orig
+dist/

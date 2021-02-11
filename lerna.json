@@ -1,9 +1,9 @@
 {
   "packages": [
-    "blocks/*",
+    "dist/blocks/*",
     "components/*"
   ],
-  "version": "0.0.0-canary.a096a2a1",
+  "version": "0.0.0-canary.b3b38167",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"

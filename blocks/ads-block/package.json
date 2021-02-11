@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/ads-block",
-  "version": "5.9.15",
+  "version": "0.0.0-canary.ec2e143c",
   "description": "> TODO: description",
   "author": "nealmalkani <nealm939@gmail.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
@@ -25,6 +25,6 @@
   "dependencies": {
     "arcads": "^2.0.2",
     "lazy-child": "^0.2.0"
-    },
-  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

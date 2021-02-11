@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/site-hierarchy-content-block",
-  "version": "5.9.15",
+  "version": "0.0.0-canary.ec2e143c",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -34,5 +34,5 @@
     "@wpmedia/news-theme-css": "stable",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

@@ -172,7 +172,6 @@ describe('The search results', () => {
       const headline = wrapper.find('.list-item').find('.results-list--headline-container');
       expect(headline.length).toEqual(1);
       expect(headline.find('.list-anchor').length).toEqual(1);
-      expect(headline.find('.list-anchor').prop('title')).toEqual('Article with a YouTube embed in it');
       expect(headline.find('h2.headline-text').length).toEqual(1);
       expect(headline.text()).toEqual('Article with a YouTube embed in it');
     });
@@ -199,7 +198,6 @@ describe('The search results', () => {
       const image = wrapper.find('.list-item').find('.results-list--image-container');
       expect(image.length).toEqual(1);
       expect(image.find('.list-anchor').length).toEqual(1);
-      expect(image.find('.list-anchor').prop('title')).toEqual('Article with a YouTube embed in it');
       expect(image.find('Image').length).toEqual(1);
       expect(image.find('Image').prop('alt')).toEqual('Article with a YouTube embed in it');
     });

@@ -14,7 +14,6 @@ exports[`promo headline return null while no content available in props 1`] = `
   >
     <a
       className="sm-promo-headline"
-      title=""
     >
       <styled.h2
         className="sm-promo-headline"

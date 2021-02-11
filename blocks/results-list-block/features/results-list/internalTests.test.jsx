@@ -91,11 +91,10 @@ describe('fetchStories', () => {
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFields} />);
     fetchContentMock.mockClear();
-    wrapper.setState({ storedList: { next: 2 } });
+    wrapper.setState({ resultList: { next: 2 } });
     wrapper.update();
     wrapper.instance().fetchStories(true);
 
-    expect(wrapper.state('resultList')).toEqual({});
     expect(fetchContentMock).toHaveBeenCalledTimes(1);
     const partialObj = {
       resultList: {
@@ -111,7 +110,7 @@ describe('fetchStories', () => {
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
   });
 
-  it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
+  it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no resultList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
     const fetched = (content) => new Promise((resolve) => {
@@ -121,15 +120,14 @@ describe('fetchStories', () => {
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFields} />);
     fetchContentMock.mockClear();
-    wrapper.setState({ storedList: {} });
+    wrapper.setState({ resultList: {} });
     wrapper.update();
     wrapper.instance().fetchStories(true);
 
-    expect(wrapper.state('resultList')).toEqual({});
     expect(fetchContentMock).toHaveBeenCalledTimes(0);
   });
 
-  it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no storedList.next', () => {
+  it('should make appropriate calculations if has additionalStoryAmount and story-feed-query and no resultList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
     const fetched = (content) => new Promise((resolve) => {
@@ -149,11 +147,10 @@ describe('fetchStories', () => {
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFieldsNoSize} />);
     fetchContentMock.mockClear();
-    wrapper.setState({ storedList: { next: 2 } });
+    wrapper.setState({ resultList: { next: 2 } });
     wrapper.update();
     wrapper.instance().fetchStories(true);
 
-    expect(wrapper.state('resultList')).toEqual({});
     expect(fetchContentMock).toHaveBeenCalledTimes(1);
     const partialObj = {
       resultList: {
@@ -170,7 +167,7 @@ describe('fetchStories', () => {
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
   });
 
-  it('should make appropriate calculations if has additionalStoryAmount and non-specified and no storedList.next', () => {
+  it('should make appropriate calculations if has additionalStoryAmount and non-specified and no resultList.next', () => {
     const fetchContentMock = jest.fn().mockReturnValue({});
     ResultsList.prototype.fetchContent = fetchContentMock;
     const fetched = (content) => new Promise((resolve) => {
@@ -190,11 +187,10 @@ describe('fetchStories', () => {
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFieldsOther} />);
     fetchContentMock.mockClear();
-    wrapper.setState({ storedList: { next: 2 } });
+    wrapper.setState({ resultList: { next: 2 } });
     wrapper.update();
     wrapper.instance().fetchStories(true);
 
-    expect(wrapper.state('resultList')).toEqual({});
     expect(fetchContentMock).toHaveBeenCalledTimes(1);
     const partialObj = {
       resultList: {
@@ -229,7 +225,7 @@ describe('fetchStories', () => {
 
     const wrapper = shallow(<ResultsList arcSite="the-sun" contextPath="/pf" customFields={customFieldsStoryFeed} />);
     fetchContentMock.mockClear();
-    wrapper.setState({ storedList: { next: 2, count: 0 } });
+    wrapper.setState({ resultList: { next: 2, count: 0 } });
     wrapper.update();
     wrapper.instance().fetchStories(true);
 
@@ -238,18 +234,18 @@ describe('fetchStories', () => {
 });
 
 describe('fetchStoriesTransform', () => {
-  it('if has no data, return storedList', () => {
+  it('if has no data, return resultList', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const fetched = (content) => new Promise((resolve) => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
-    const result = fetchStoriesTransform(null, 'storedList');
-    expect(result).toEqual('storedList');
+    const result = fetchStoriesTransform(null, 'resultList');
+    expect(result).toEqual('resultList');
   });
 
-  it('if has  data, return concatenated data with storedList', () => {
+  it('if has  data, return concatenated data with resultList', () => {
     ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     const result = fetchStoriesTransform({ content_elements: ['A', 'B'], next: 10 }, { content_elements: ['C', 'D'] });

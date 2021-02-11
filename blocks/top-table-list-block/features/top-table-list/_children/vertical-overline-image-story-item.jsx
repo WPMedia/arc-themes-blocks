@@ -71,7 +71,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineXL && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className="xl-promo-headline">
+        <a href={websiteURL} className="xl-promo-headline">
           <Title primaryFont={primaryFont} className="xl-promo-headline">
             {itemTitle}
           </Title>
@@ -150,7 +150,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   ) || (
                     <>
                       { imageURL ? (
-                        <a href={websiteURL} title={itemTitle}>
+                        <a href={websiteURL} aria-hidden="true" tabIndex="-1">
                           <div className="image-wrapper">
                             <Image
                               resizedImageOptions={resizedImageOptions}

@@ -53,11 +53,7 @@ const SmallListItem = (props) => {
 
   const PromoHeadline = () => (
     <div className="promo-headline headline-wrap">
-      <a
-        href={websiteURL}
-        title={itemTitle}
-        className="sm-promo-headline"
-      >
+      <a href={websiteURL} className="sm-promo-headline">
         <Title primaryFont={primaryFont} className="sm-promo-headline">
           {itemTitle}
         </Title>
@@ -68,7 +64,7 @@ const SmallListItem = (props) => {
   const PromoImage = () => (
     <div className="promo-image flex-col">
       { imageURL !== '' ? (
-        <a href={websiteURL} title={itemTitle}>
+        <a href={websiteURL} aria-hidden="true" tabIndex="-1">
           <Image
             resizedImageOptions={resizedImageOptions}
             url={imageURL}

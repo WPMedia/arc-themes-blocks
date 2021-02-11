@@ -48,7 +48,7 @@ const MediumListItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineMD && itemTitle !== '') {
       return (
-        <a href={websiteURL} title={itemTitle} className="md-promo-headline">
+        <a href={websiteURL} className="md-promo-headline">
           <Title className="md-promo-headline-text" primaryFont={primaryFont}>
             {itemTitle}
           </Title>
@@ -105,23 +105,14 @@ const MediumListItem = (props) => {
     <>
       <article className={`container-fluid medium-promo ${subType}`} key={id}>
         <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
-          {/* {customFields.headlinePositionMD === 'above'
-            && (customFields.showHeadlineMD
-              || customFields.showDescriptionMD
-              || customFields.showBylineMD
-              || customFields.showDateMD) && (
-              <div className={textClass}>
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
-              </div>
-          )} */}
           {customFields.showImageMD
             && (
-            <a className="image-link" href={websiteURL} title={itemTitle}>
+            <a
+              className="image-link"
+              href={websiteURL}
+              aria-hidden="true"
+              tabIndex="-1"
+            >
               {imageURL !== '' ? (
                 <Image
                   resizedImageOptions={resizedImageOptions}

@@ -4,7 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import './index.scss';
 
 const ArcAdminAd = ({
-  adClass, adName, slotName, dimensions,
+  adClass, adType, slotName, dimensions,
 }) => {
   const { isAdmin } = useFusionContext();
   return isAdmin ? (
@@ -18,7 +18,7 @@ const ArcAdminAd = ({
     >
       <div className="margin-md-bottom">
         <span className="ad_name margin-md-right">
-          {adName || 'Ad Name N/A'}
+          {adType || 'Ad Name N/A'}
         </span>
         <span>{slotName}</span>
       </div>

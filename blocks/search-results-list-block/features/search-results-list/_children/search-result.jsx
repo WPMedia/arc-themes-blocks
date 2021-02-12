@@ -44,11 +44,7 @@ const SearchResult = ({
     <div className="list-item" key={`result-card-${url}`}>
       { showImage && (
         <div className="results-list--image-container mobile-order-2 mobile-image">
-          <a
-            href={url}
-            title={headlineText}
-            className="list-anchor"
-          >
+          <a href={url} className="list-anchor" aria-hidden="true" tabIndex="-1">
             {extractImage(promoItems) ? (
               <Image
                 url={extractImage(promoItems)}
@@ -83,11 +79,7 @@ const SearchResult = ({
       )}
       { showHeadline && (
         <div className="results-list--headline-container mobile-order-1">
-          <a
-            href={url}
-            title={headlineText}
-            className="list-anchor"
-          >
+          <a href={url} className="list-anchor">
             <HeadlineText
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               className="headline-text"

@@ -22,6 +22,7 @@ const SmallListItem = (props) => {
     placeholderResizedImageOptions,
     element,
     imageRatio,
+    subType,
     customFields: {
       imagePositionSM: imagePosition = RIGHT,
       storiesPerRowSM,
@@ -52,11 +53,7 @@ const SmallListItem = (props) => {
 
   const PromoHeadline = () => (
     <div className="promo-headline headline-wrap">
-      <a
-        href={websiteURL}
-        title={itemTitle}
-        className="sm-promo-headline"
-      >
+      <a href={websiteURL} className="sm-promo-headline">
         <Title primaryFont={primaryFont} className="sm-promo-headline">
           {itemTitle}
         </Title>
@@ -67,7 +64,7 @@ const SmallListItem = (props) => {
   const PromoImage = () => (
     <div className="promo-image flex-col">
       { imageURL !== '' ? (
-        <a href={websiteURL} title={itemTitle}>
+        <a href={websiteURL} aria-hidden="true" tabIndex="-1">
           <Image
             resizedImageOptions={resizedImageOptions}
             url={imageURL}
@@ -110,7 +107,7 @@ const SmallListItem = (props) => {
   return (
     <article
       key={id}
-      className={`top-table-list-small-promo small-promo ${colClasses}`}
+      className={`top-table-list-small-promo small-promo ${subType} ${colClasses}`}
     >
       <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         { showHeadline && <PromoHeadline /> }

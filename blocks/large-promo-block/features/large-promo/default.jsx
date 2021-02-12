@@ -88,11 +88,7 @@ const LargePromo = ({ customFields }) => {
   const headlineTmpl = () => {
     if (customFields.showHeadline && headlineText) {
       return (
-        <a
-          href={content.website_url}
-          className="lg-promo-headline"
-          title={headlineText}
-        >
+        <a href={content.website_url} className="lg-promo-headline">
           <HeadlineText
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             className="lg-promo-headline"
@@ -168,10 +164,7 @@ const LargePromo = ({ customFields }) => {
                     enableAutoplay={false}
                   />
                 ) : (
-                  <a
-                    href={content.website_url}
-                    title={content && content.headlines ? content.headlines.basic : ''}
-                  >
+                  <a href={content.website_url} aria-hidden="true" tabIndex="-1">
                     {
                       imageURL
                         ? (

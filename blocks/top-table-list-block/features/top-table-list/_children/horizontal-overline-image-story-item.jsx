@@ -37,6 +37,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     placeholderResizedImageOptions,
     targetFallbackImage,
     imageRatio,
+    subType,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG
@@ -73,7 +74,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineLG && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className="lg-promo-headline">
+        <a href={websiteURL} className="lg-promo-headline">
           <Title primaryFont={primaryFont} className="lg-promo-headline">
             {itemTitle}
           </Title>
@@ -131,7 +132,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
 
   return (
     <>
-      <article key={id} className="container-fluid large-promo">
+      <article key={id} className={`container-fluid large-promo ${subType}`}>
         <div className="promo-item-margins row lg-promo-padding-bottom">
           { customFields.showImageLG && (
             <div className="col-sm-12 col-md-xl-6 flex-col">
@@ -146,7 +147,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
               ) || (
                 <>
                   { imageURL ? (
-                    <a href={websiteURL} title={itemTitle}>
+                    <a href={websiteURL} aria-hidden="true" tabIndex="-1">
                       <Image
                         resizedImageOptions={resizedImageOptions}
                         url={imageURL}

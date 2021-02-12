@@ -21,7 +21,6 @@ body.nav-open {
   align-items: center;
   border: 0;
   height: $btn-size;
-  outline: none;
   position: relative;
   white-space: nowrap;
   padding-left: $btn-padding;
@@ -33,10 +32,6 @@ body.nav-open {
 
   &.transparent {
     background-color: transparent;
-  }
-
-  &:hover {
-    outline: none;
   }
 
   &-dark {
@@ -144,7 +139,6 @@ body.nav-open {
     font-size: 0.9em;
     line-height: 20px;
     margin: 0;
-    outline: none;
     padding: 0;
     transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;

@@ -35,20 +35,20 @@ const SmallManualPromo = ({ customFields }) => {
     imageClass: 'col-sm-xl-4',
   };
 
-  const renderWithLink = useCallback((element, props) => (
+  const renderWithLink = useCallback((element, props, attributes) => (
     <a
       href={customFields.linkURL || '#'}
       className={(props && props.className) || ''}
-      title={customFields.headline}
       target={customFields.newTab ? '_blank' : '_self'}
       rel={customFields.newTab ? 'noreferrer noopener' : ''}
       onClick={!customFields.linkURL ? (evt) => {
         evt.preventDefault();
       } : undefined}
+      {...attributes}
     >
       {element}
     </a>
-  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+  ), [customFields.linkURL, customFields.newTab]);
 
   const headline = customFields.showHeadline && customFields.headline
     && (
@@ -81,7 +81,7 @@ const SmallManualPromo = ({ customFields }) => {
             breakpoints={getProperties(arcSite)?.breakpoints}
             resizerURL={getProperties(arcSite)?.resizerURL}
             resizedImageOptions={resizedImageOptions}
-          />,
+          />, {}, { 'aria-hidden': 'true', tabIndex: '-1' },
         )}
       </div>
     );

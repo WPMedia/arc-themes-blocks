@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 describe('the links bar feature for the default output type', () => {
   afterEach(() => {
@@ -33,9 +33,100 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-    const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
+    const wrapper = shallow(
+      <LinksBar customFields={{ navigationConfig: 'links' }} />,
+    );
 
-    expect(wrapper.children().at(0).type()).toBe('nav');
+    expect(
+      wrapper
+        .children()
+        .at(0)
+        .type(),
+    ).toBe('nav');
+  });
+
+  it('should not have separator only one link', () => {
+    const { default: LinksBar } = require('./default');
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [
+          {
+            _id: 'id_1',
+            name: 'test link 1',
+          },
+        ],
+      })),
+    }));
+    const wrapper = shallow(
+      <LinksBar
+        customFields={{ navigationConfig: 'links' }}
+        showHorizontalSeperatorDots
+      />,
+    );
+
+    expect(wrapper.html()).toMatchInlineSnapshot(
+      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a>    </span></nav>"',
+    );
+  });
+
+  it('should have separator when more than one link', () => {
+    const { default: LinksBar } = require('./default');
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [
+          {
+            _id: 'id_1',
+            name: 'test link 1',
+          },
+          {
+            _id: 'id_2',
+            name: 'test link 2',
+          },
+          {
+            _id: 'id_3',
+            name: 'test link 3',
+          },
+        ],
+      })),
+    }));
+    const wrapper = shallow(
+      <LinksBar
+        customFields={{ navigationConfig: 'links' }}
+        showHorizontalSeperatorDots
+      />,
+    );
+
+    expect(wrapper.html()).toMatchInlineSnapshot(
+      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a>  •  </span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a>  •  </span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_3/\\" class=\\"sc-bdVaJa jLoscj\\">test link 3</a>    </span></nav>"',
+    );
+  });
+
+  it('should not have separator when more than one link and showHorizontalSeperatorDots is false', () => {
+    const { default: LinksBar } = require('./default');
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [
+          {
+            _id: 'id_1',
+            name: 'test link 1',
+          },
+          {
+            _id: 'id_2',
+            name: 'test link 2',
+          },
+        ],
+      })),
+    }));
+    const wrapper = shallow(
+      <LinksBar
+        customFields={{ navigationConfig: 'links' }}
+        showHorizontalSeperatorDots={false}
+      />,
+    );
+
+    expect(wrapper.html()).toMatchInlineSnapshot(
+      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a>    </span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\"><a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a>    </span></nav>"',
+    );
   });
 
   it('should contain the equal number of links between input and output', () => {
@@ -66,11 +157,17 @@ describe('the links bar feature for the default output type', () => {
         ],
       })),
     }));
-    const wrapper = mount(<LinksBar customFields={{ navigationConfig: 'links' }} />);
+    const wrapper = mount(
+      <LinksBar customFields={{ navigationConfig: 'links' }} />,
+    );
 
     expect(wrapper.find('span.horizontal-links-menu')).toHaveLength(4);
-    expect(wrapper.find('span.horizontal-links-menu a:not([target])')).toHaveLength(3);
-    expect(wrapper.find('span.horizontal-links-menu a[target="_blank"]')).toHaveLength(1);
+    expect(
+      wrapper.find('span.horizontal-links-menu a:not([target])'),
+    ).toHaveLength(3);
+    expect(
+      wrapper.find('span.horizontal-links-menu a[target="_blank"]'),
+    ).toHaveLength(1);
   });
 
   it('should have no menu item if no content is returned', () => {
@@ -80,7 +177,9 @@ describe('the links bar feature for the default output type', () => {
       })),
     }));
     const { default: LinksBar } = require('./default');
-    const wrapper = shallow(<LinksBar customFields={{ navigationConfig: 'links' }} />);
+    const wrapper = shallow(
+      <LinksBar customFields={{ navigationConfig: 'links' }} />,
+    );
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });
@@ -91,7 +190,7 @@ describe('the links bar feature for the default output type', () => {
       const wrapper = mount(<Link href="/testurl" name="test" />);
 
       expect(wrapper.props().name).toBe('test');
-      expect(wrapper.find('a').text()).toBe('      test');
+      expect(wrapper.find('a').text()).toBe('test');
     });
   });
 
@@ -127,20 +226,32 @@ describe('the links bar feature for the default output type', () => {
   describe('when a link has query parameters', () => {
     it('should not add a slash at the end of a external link', () => {
       const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="http://example.com/testurl/?query=home" name="test" />);
+      const wrapper = mount(
+        <Link href="http://example.com/testurl/?query=home" name="test" />,
+      );
 
-      expect(wrapper.props().href).toBe('http://example.com/testurl/?query=home');
-      expect(wrapper.find('[href="http://example.com/testurl/?query=home"]').length).toBe(4);
+      expect(wrapper.props().href).toBe(
+        'http://example.com/testurl/?query=home',
+      );
+      expect(
+        wrapper.find('[href="http://example.com/testurl/?query=home"]').length,
+      ).toBe(4);
     });
   });
 
   describe('when a link is to a page', () => {
     it('should not add a slash at the end of the link', () => {
       const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="https://example.com/category/page.html" name="test" />);
+      const wrapper = mount(
+        <Link href="https://example.com/category/page.html" name="test" />,
+      );
 
-      expect(wrapper.props().href).toBe('https://example.com/category/page.html');
-      expect(wrapper.find('[href="https://example.com/category/page.html"]').length).toBe(4);
+      expect(wrapper.props().href).toBe(
+        'https://example.com/category/page.html',
+      );
+      expect(
+        wrapper.find('[href="https://example.com/category/page.html"]').length,
+      ).toBe(4);
     });
   });
 
@@ -157,23 +268,14 @@ describe('the links bar feature for the default output type', () => {
   describe('when a link has a mail', () => {
     it('should not add a slash at the end of the link', () => {
       const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" />);
+      const wrapper = mount(
+        <Link href="mailto:readers@washpost.com" name="test" />,
+      );
 
       expect(wrapper.props().href).toBe('mailto:readers@washpost.com');
-      expect(wrapper.find('[href="mailto:readers@washpost.com"]').length).toBe(4);
-    });
-  });
-
-  describe('when a link has show separator based on showSeparator attribute', () => {
-    it('should show dot separator', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test" navBarColor="light" showSeparator />);
-      expect(wrapper.text()).toContain('    •  test');
-    });
-    it('should not show dot separator', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="mailto:readers@washpost.com" name="test123" navBarColor="light" showSeparator={false} />);
-      expect(wrapper.text()).toContain('      test');
+      expect(wrapper.find('[href="mailto:readers@washpost.com"]').length).toBe(
+        4,
+      );
     });
   });
 });

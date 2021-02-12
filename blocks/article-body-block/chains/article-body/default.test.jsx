@@ -952,6 +952,8 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('.correction')).toHaveLength(1);
+      expect(wrapper.find('.correction h2')).toHaveLength(1);
+      expect(wrapper.find('.correction p')).toHaveLength(1);
     });
 
     it('should not render correction when no data is provided', () => {

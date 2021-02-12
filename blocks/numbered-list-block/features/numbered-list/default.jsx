@@ -2,29 +2,16 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 
 import { Image } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const Number = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
-const Title = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 @Consumer
 class NumberedList extends Component {
@@ -36,7 +23,6 @@ class NumberedList extends Component {
     };
     this.fetchStories();
     this.fetchPlaceholder();
-    this.primaryFont = getThemeStyle(this.arcSite)['primary-font-family'];
   }
 
   getFallbackImageURL() {
@@ -93,9 +79,9 @@ class NumberedList extends Component {
     return (
       <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
-          <Title className="list-title" primaryFont={this.primaryFont}>
+          <PrimaryFont as="h2" className="list-title">
             {title}
-          </Title>
+          </PrimaryFont>
         ) : null }
         {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
           const {
@@ -111,24 +97,21 @@ class NumberedList extends Component {
 
           return (
             <React.Fragment key={`result-card-${url}`}>
-              <div className="numbered-list-item" key={`result-card-${url}`} type="1">
+              <div className="numbered-list-item numbered-item-margins" key={`result-card-${url}`} type="1">
                 {showHeadline
                 && (
-                <a
-                  href={url}
-                  title={headlineText}
-                  className="headline-list-anchor"
-                >
-                  <Number secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']} className="list-item-number">{i + 1}</Number>
-                  <HeadlineText primaryFont={getThemeStyle(this.arcSite)['primary-font-family']} className="headline-text">{headlineText}</HeadlineText>
+                <a href={url} className="headline-list-anchor">
+                  <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
+                  <PrimaryFont as="h2" className="headline-text">{headlineText}</PrimaryFont>
                 </a>
                 )}
                 {showImage
                 && (
                 <a
                   href={url}
-                  title={headlineText}
-                  className="list-anchor-image"
+                  className="list-anchor-image vertical-align-image"
+                  aria-hidden="true"
+                  tabIndex="-1"
                 >
                   {extractImage(promoItems) ? (
                     <Image

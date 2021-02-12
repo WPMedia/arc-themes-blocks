@@ -23,6 +23,8 @@ const config = {
   showImageSM: true,
 };
 
+const subTypeClassName = 'subtype_opinion';
+
 const sampleProps = {
   imageURL: 'pic',
   websiteURL: 'url',
@@ -38,6 +40,7 @@ const sampleProps = {
   overlineText: 'News',
   overlineDisplay: true,
   customFields: config,
+  subType: subTypeClassName,
 };
 
 describe('horizontal overline image story item', () => {
@@ -85,6 +88,7 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('VideoPlayer')).toHaveLength(0);
+    expect(wrapper.find('article').hasClass(subTypeClassName)).toBe(true);
   });
   it('renders with empty props with defaults', () => {
     const testProps = {

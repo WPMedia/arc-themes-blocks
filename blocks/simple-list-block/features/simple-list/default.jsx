@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import getThemeStyle from 'fusion:themes';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
 import StoryItem from './_children/story-item';
@@ -103,8 +103,6 @@ const SimpleList = (props) => {
     websiteDomain,
   } = getProperties(arcSite);
 
-  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
-
   // need to inject the arc site here into use content
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
@@ -115,9 +113,9 @@ const SimpleList = (props) => {
     <div key={id} className="list-container layout-section">
       { title
         && (
-        <div className="list-title" primaryFont={primaryFont}>
+        <PrimaryFont as="div" className="list-title">
           {title}
-        </div>
+        </PrimaryFont>
         )}
       {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
@@ -129,7 +127,6 @@ const SimpleList = (props) => {
               id={listItemId}
               itemTitle={itemTitle}
               imageURL={imageURL}
-              primaryFont={primaryFont}
               websiteURL={websiteURL}
               websiteDomain={websiteDomain}
               showHeadline={showHeadline}

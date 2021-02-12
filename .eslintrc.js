@@ -71,6 +71,7 @@ module.exports = {
     'jsx-a11y/scope': 2,
     'jsx-a11y/tabindex-no-positive': 2,
     "react-hooks/rules-of-hooks": "error", 
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-no-target-blank": [1, {  "enforceDynamicLinks": 'never' }]
   },
 };

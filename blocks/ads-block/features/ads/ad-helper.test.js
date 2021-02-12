@@ -1,4 +1,3 @@
-import getProperties from 'fusion:properties';
 import {
   isContentPage,
   isSectionPage,
@@ -21,6 +20,8 @@ import {
   getAdObject,
 } from './ad-helper';
 import adMap from './ad-mapping';
+
+const arcSite = 'the-sun';
 
 const SITE_PROPS_MOCK = {
   breakpoints: {
@@ -46,9 +47,9 @@ const STORY_MOCK = {
     ],
   },
   websites: {
-    'the-sun': {
+    [arcSite]: {
       website_section: {
-        _id: '/news',
+        _id: '/technology',
       },
     },
   },
@@ -59,14 +60,15 @@ const SECTION_MOCK = {
   _id: 'sectionid',
 };
 
-const arcSite = 'the-sun';
 const STORY_MOCK_PROPS = {
   arcSite,
   globalContent: STORY_MOCK,
+  siteProperties: SITE_PROPS_MOCK,
 };
 const SECTION_MOCK_PROPS = {
   arcSite,
   globalContent: SECTION_MOCK,
+  siteProperties: SITE_PROPS_MOCK,
 };
 
 const AD_PROPS_MOCK = {
@@ -111,12 +113,11 @@ const checkObjectRecursively = (obj, schema) => {
 describe('ad-helper', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    getProperties.mockReturnValue(SITE_PROPS_MOCK);
   });
 
   describe('getBreakpoints()', () => {
     it('returns breakpoint sizemap', () => {
-      const breakpoints = getBreakpoints(arcSite);
+      const breakpoints = getBreakpoints(STORY_MOCK_PROPS);
       expect(breakpoints).toBeDefined();
       expect(typeof breakpoints).toEqual('object');
       expect(breakpoints).toEqual(SITE_PROPS_MOCK.breakpoints);
@@ -139,8 +140,10 @@ describe('ad-helper', () => {
     it('returns blank array when no breakpoints available', () => {
       const SITE_PROPS_MOCK_ALT = { ...SITE_PROPS_MOCK };
       delete SITE_PROPS_MOCK_ALT.breakpoints;
-      getProperties.mockReturnValueOnce(SITE_PROPS_MOCK_ALT);
-      const sizemap = getSizemapBreakpoints(STORY_MOCK_PROPS);
+      const sizemap = getSizemapBreakpoints({
+        ...STORY_MOCK_PROPS,
+        siteProperties: SITE_PROPS_MOCK_ALT,
+      });
       expect(sizemap).toBeDefined();
       expect(Array.isArray(sizemap)).toBe(true);
       expect(sizemap.length).toEqual(0);
@@ -388,7 +391,9 @@ describe('ad-helper', () => {
         },
       });
       expect(sectionId).toBeDefined();
-      expect(sectionId).toEqual('news');
+      expect(sectionId).toEqual(
+        STORY_MOCK.websites[arcSite].website_section._id.substring(1),
+      );
     });
 
     it('Returns custom "ad-path" as section ID', () => {
@@ -410,8 +415,15 @@ describe('ad-helper', () => {
   });
 
   describe('getSlotName()', () => {
-    it('returns just ad path with invalid props', () => {
+    it('returns blank string with undefined props', () => {
       const slotName = getSlotName();
+      expect(slotName).toBeDefined();
+      expect(slotName).toBe('');
+    });
+    it('returns just ad path with invalid props', () => {
+      const slotName = getSlotName({
+        siteProperties: SITE_PROPS_MOCK,
+      });
       expect(slotName).toBeDefined();
       expect(slotName).toBe('news');
     });
@@ -426,9 +438,9 @@ describe('ad-helper', () => {
     it('returns slot name with no "websiteAdPath"', () => {
       const SITE_PROPS_MOCK_ALT = { ...SITE_PROPS_MOCK };
       delete SITE_PROPS_MOCK_ALT.websiteAdPath;
-      getProperties.mockReturnValueOnce(SITE_PROPS_MOCK_ALT);
       const slotName = getSlotName({
         ...STORY_MOCK_PROPS,
+        siteProperties: SITE_PROPS_MOCK_ALT,
         metaValue: jest.fn(() => undefined),
       });
       expect(slotName).toBeDefined();

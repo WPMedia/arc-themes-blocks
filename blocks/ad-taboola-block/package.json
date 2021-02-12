@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/ad-taboola-block",
-  "version": "5.9.15",
+  "version": "0.0.0-canary.ec2e143c",
   "description": "Fusion News Theme Taboola Widget",
   "author": "nelson fernandez <nelson.fernandez@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -22,5 +22,5 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

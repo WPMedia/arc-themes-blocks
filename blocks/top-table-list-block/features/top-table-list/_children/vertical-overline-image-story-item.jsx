@@ -36,6 +36,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     targetFallbackImage,
     placeholderResizedImageOptions,
     imageRatio,
+    subType,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
@@ -70,7 +71,7 @@ const VerticalOverlineImageStoryItem = (props) => {
   const headlineTmpl = () => {
     if (customFields.showHeadlineXL && itemTitle) {
       return (
-        <a href={websiteURL} title={itemTitle} className="xl-promo-headline">
+        <a href={websiteURL} className="xl-promo-headline">
           <Title primaryFont={primaryFont} className="xl-promo-headline">
             {itemTitle}
           </Title>
@@ -127,7 +128,7 @@ const VerticalOverlineImageStoryItem = (props) => {
 
   return (
     <>
-      <article className="container-fluid xl-large-promo" key={id}>
+      <article className={`container-fluid xl-large-promo ${subType}`} key={id}>
         <div className="promo-item-margins row xl-promo-padding-bottom">
           {(customFields.showHeadlineXL
             || customFields.showDescriptionXL
@@ -149,7 +150,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                   ) || (
                     <>
                       { imageURL ? (
-                        <a href={websiteURL} title={itemTitle}>
+                        <a href={websiteURL} aria-hidden="true" tabIndex="-1">
                           <div className="image-wrapper">
                             <Image
                               resizedImageOptions={resizedImageOptions}

@@ -40,7 +40,8 @@ jobs:
           scope: '@mentor-medier'  
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+      - name: run babel
+        run:  ./scripts/babel.sh
       - run: npx lerna publish 0.0.0-canary.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

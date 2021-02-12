@@ -1,4 +1,8 @@
 module.exports = {
+  plugins: [
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
+  ],
   presets: [
     [
       '@babel/preset-env',
@@ -9,7 +13,7 @@ module.exports = {
     '@babel/preset-react'],
   env: {
     test: {
-      plugins: [
+      plugins: [ 
         'transform-react-remove-prop-types',
         [
           '@babel/plugin-proposal-decorators',

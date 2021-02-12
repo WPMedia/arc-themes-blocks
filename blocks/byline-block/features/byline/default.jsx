@@ -62,7 +62,21 @@ class ArticleByline extends Component {
         // If the author has a url to their bio page, return an anchor tag to the bio.
         // If not, just return the string.
         if (authorName) {
-          return (hasURL) ? `<a href="${author.url}">${authorName}</a>` : authorName;
+          // If the author does not have _id field then it is a guest author.
+          if (!author._id) {
+            // eslint-disable-next-line camelcase
+            const guestType = author?.additional_properties?.original?.author_type;
+            const guestOrg = author?.org;
+            let guestMore = [];
+            guestMore.push(guestType, guestOrg);
+            guestMore = guestMore.filter((gm) => (gm !== null && gm !== ''));
+            const guestInfo = (guestMore.length > 0) ? `(${guestMore.join(', ')})` : '';
+            return `<a href="/search/${authorName}">${authorName}</a> ${guestInfo}`;
+          }
+
+          // eslint-disable-next-line no-nested-ternary
+          const authorUrl = (hasURL) ? author.url : (author.slug) ? `/author/${author.slug}` : '';
+          return (authorUrl) ? `<a href="${authorUrl}">${authorName}</a>` : authorName;
         }
         // Those without name will not be included in the byline
       }
@@ -115,7 +129,7 @@ class ArticleByline extends Component {
   }
 }
 
-ArticleByline.label = 'Byline – Arc Block';
+ArticleByline.label = 'Byline – Mentor Block';
 
 ArticleByline.propTypes = {
   story: PropTypes.object,

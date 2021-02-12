@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/placeholder-image-block",
-  "version": "5.9.15",
+  "version": "0.0.0-canary.ec2e143c",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,5 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   },
-  "gitHead": "49545b589d0c94749dd87690a1f869193c0f024e"
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

@@ -45,6 +45,16 @@ const AuthorBioStyled = styled.section`
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
+export const getSocialLinkAriaLabel = (authorName = 'author', webService) => {
+  if (!webService) return null;
+  return (
+    (webService.toLowerCase() === 'soundcloud' && `Listen to ${authorName} on SoundCloud`)
+    || (webService.toLowerCase() === 'rss' && `Subscribe to ${authorName} RSS feed`)
+    || (webService.toLowerCase() === 'email' && `Send an email to ${authorName}`)
+    || `Connect with ${authorName} on ${webService}`
+  );
+};
+
 const renderAuthorInfo = (author, arcSite) => {
   const {
     image: { url = '', alt_text: altText = '' },
@@ -80,7 +90,7 @@ const AuthorBio = () => {
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
-    const { additional_properties: additionalProperties } = author;
+    const { additional_properties: additionalProperties, name } = author;
     const { original } = additionalProperties;
 
     // If the author doesn't have a description, then do not add them to the list
@@ -98,167 +108,189 @@ const AuthorBio = () => {
         ? author.social_links.reduce((result, socialLink) => {
           if (socialLink.site && socialLink.url && socialLink.url.length > 0) {
             let socialButton;
+            let linkTitle;
             const constructedURL = constructSocialURL(socialLink.site, socialLink.url);
+
+            const MediaLink = ({ children, webService, ...otherProps }) => (
+              <MediaLinksStyled
+                href={constructedURL}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={getSocialLinkAriaLabel(name, webService)}
+                primaryColor={getThemeStyle(arcSite)['primary-color']}
+                {...otherProps}
+              >
+                { children }
+              </MediaLinksStyled>
+            );
 
             switch (socialLink.site) {
               case 'linkedin':
+                linkTitle = 'LinkedIn';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <LinkedInIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="LinkedIn"
+                      title={linkTitle}
                       description="Connect on LinkedIn"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'twitter':
+                linkTitle = 'Twitter';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <TwitterIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Twitter"
+                      title={linkTitle}
                       description="Connect on Twitter"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'instagram':
+                linkTitle = 'Instagram';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <InstagramIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Instagram"
+                      title={linkTitle}
                       description="Connect on Instagram"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'facebook':
+                linkTitle = 'Facebook';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <FacebookIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Facebook"
+                      title={linkTitle}
                       description="Connect on Facebook"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'reddit':
+                linkTitle = 'Reddit';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <RedditIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Reddit"
+                      title={linkTitle}
                       description="Connect on Reddit"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'youtube':
+                linkTitle = 'YouTube';
                 socialButton = (
-                  <MediaLinksStyled
-                    href={constructedURL}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    id="link-social-youtube"
-                    primaryColor={getThemeStyle(arcSite)['primary-color']}
-                  >
+                  <MediaLink webService={linkTitle} id="link-social-youtube">
                     <YoutubeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="YouTube"
+                      title={linkTitle}
                       description="Connect on YouTube"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'medium':
+                linkTitle = 'Medium';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <MediumIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Medium"
+                      title={linkTitle}
                       description="Connect on Medium"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'tumblr':
+                linkTitle = 'Tumblr';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <TumblrIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Tumblr"
+                      title={linkTitle}
                       description="Connect on Tumblr"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'pinterest':
+                linkTitle = 'Pinterest';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <PinterestIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Pinterest"
+                      title={linkTitle}
                       description="Connect on Pinterest"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'snapchat':
+                linkTitle = 'Snapchat';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <SnapchatIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Snapchat"
+                      title={linkTitle}
                       description="Connect on Snapchat"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'whatsapp':
+                linkTitle = 'WhatsApp';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <WhatsAppIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="WhatsApp"
+                      title={linkTitle}
                       description="Connect on WhatsApp"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'soundcloud':
+                linkTitle = 'SoundCloud';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <SoundCloudIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="SoundCloud"
+                      title={linkTitle}
                       description="Listen on SoundCloud"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               case 'rss':
+                linkTitle = 'RSS';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <RssIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="RSS"
+                      title={linkTitle}
                       description="Subscribe to RSS feed"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
               default:
+                linkTitle = 'Email';
                 socialButton = (
-                  <MediaLinksStyled href={constructedURL} target="_blank" rel="noreferrer noopener" primaryColor={getThemeStyle(arcSite)['primary-color']}>
+                  <MediaLink webService={linkTitle}>
                     <EnvelopeIcon
                       fill={getThemeStyle(arcSite)['primary-color']}
-                      title="Email"
+                      title={linkTitle}
                       description="Send an email"
                     />
-                  </MediaLinksStyled>
+                  </MediaLink>
                 );
                 break;
             }

@@ -50,6 +50,7 @@ describe('small image block', () => {
     const itemTitle = 'title';
     const primaryFont = 'arial';
     const id = 'test';
+    const subTypeClassName = 'subtype_editorial';
     const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
@@ -60,6 +61,7 @@ describe('small image block', () => {
         id={id}
         customFields={config}
         resizedImageOptions={{ '400x267': '' }}
+        subType={subTypeClassName}
       />,
     );
 
@@ -70,6 +72,7 @@ describe('small image block', () => {
     expect(wrapper.find('Image').prop('url')).toBe(imageURL);
 
     expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
+    expect(wrapper.find('SmallListItem > article').hasClass(subTypeClassName)).toBe(true);
   });
 
   it('must renders neither title nor image with empty props, renders placeholder image', () => {

@@ -40,6 +40,8 @@ jobs:
           scope: '@mentor-medier'  
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: run babel
+        run:  ./scripts/babel.sh
 
       - name: Publish to beta tag with a short git SHA as the version
         run: npx lerna publish 0.0.0-beta.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag beta --yes

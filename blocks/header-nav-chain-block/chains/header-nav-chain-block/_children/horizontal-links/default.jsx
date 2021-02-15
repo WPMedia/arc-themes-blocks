@@ -48,7 +48,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
             primaryFont={font}
             navBarColor={navBarColor}
           >
-
+            {(index > 0 && showSeparator) ? '\u00a0 • \u00a0' : '\u00A0  \u00A0'}
             {
               item.node_type === 'link'
                 ? (
@@ -66,7 +66,6 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
                   />
                 )
             }
-            {(content.children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : '\u00A0  \u00A0'}
           </LinkBarSpan>
         ))}
       </nav>

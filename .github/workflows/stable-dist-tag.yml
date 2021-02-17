@@ -21,13 +21,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@wpmedia"
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}        
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
           registry-url: 'https://registry.npmjs.org'
           scope: '@mentor-medier'  
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Install lerna
         run: npm i -g lerna
       - name: run babel

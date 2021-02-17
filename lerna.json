@@ -3,7 +3,7 @@
     "dist/blocks/*",
     "components/*"
   ],
-  "version": "0.0.0-canary.b3b38167",
+  "version": "5.9.16",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"

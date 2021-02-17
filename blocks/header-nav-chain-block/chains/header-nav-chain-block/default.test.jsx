@@ -1,6 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
+// eslint-disable-next-line no-unused-vars
+import FocusTrap from 'focus-trap-react';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Navigation from './default';

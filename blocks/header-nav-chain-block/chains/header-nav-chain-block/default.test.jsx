@@ -7,9 +7,7 @@ import Navigation from './default';
 import SearchBox from './_children/search-box';
 import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from './nav-helper';
 
-jest.mock('focus-trap-react', () => {
-  return ({ children }) => children;
-});
+jest.mock('focus-trap-react', () => ({ children }) => children);
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({

@@ -4,10 +4,10 @@ import Link from './link';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
 
-const SectionAnchor = ({ item }) => (
+const SectionAnchor = ({ item, isHidden }) => (
   item.node_type === 'link'
-    ? <Link href={item.url} name={item.display_name} />
-    : <Link href={item._id} name={item.name} />
+    ? <Link href={item.url} name={item.display_name} isHidden={isHidden} />
+    : <Link href={item._id} name={item.name} isHidden={isHidden} />
 );
 
 const onClickSubsection = (evt) => {
@@ -45,15 +45,16 @@ const isSamePath = (current, menuLink) => {
 // and doesn't need to be as the caret is a button which is focusable
 // and has default button behaviour and the onClick event on the parent
 // div receives the event via propagation.
-const SubSectionAnchor = ({ item, isOpen }) => (
+const SubSectionAnchor = ({ item, isOpen, isHidden }) => (
   <div className={`subsection-anchor ${isOpen ? 'open' : ''}`} onClick={onClickSubsection}>
-    <SectionAnchor item={item} />
+    <SectionAnchor item={item} isHidden={isHidden} />
     <button
       type="button"
       className="submenu-caret"
       aria-expanded={isOpen ? 'true' : 'false'}
       aria-label={`Show ${item.display_name ?? item.name} sub sections`}
       aria-controls={`header_sub_section_${item._id.replace('/', '')}`}
+      {...(isHidden ? { tabIndex: -1 } : {})}
     >
       <ChevronRight height={20} width={20} />
     </button>
@@ -61,7 +62,7 @@ const SubSectionAnchor = ({ item, isOpen }) => (
 );
 /* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 
-const SectionItem = ({ item }) => {
+const SectionItem = ({ item, isHidden }) => {
   let currentLocation;
   if (typeof window !== 'undefined') {
     currentLocation = window.location.pathname;
@@ -71,19 +72,28 @@ const SectionItem = ({ item }) => {
   return (
     <li className="section-item">
       { hasChildren(item)
-        ? <SubSectionAnchor item={item} isOpen={isOpen} />
-        : <SectionAnchor item={item} /> }
-      {hasChildren(item) && <SubSectionMenu items={item.children} isOpen={isOpen} id={item._id.replace('/', '')} />}
+        ? <SubSectionAnchor item={item} isOpen={isOpen} isHidden={isHidden} />
+        : <SectionAnchor item={item} isHidden={isHidden} /> }
+      {hasChildren(item) && (
+        <SubSectionMenu
+          items={item.children}
+          isOpen={isOpen}
+          id={item._id.replace('/', '')}
+          isHidden={isHidden}
+        />
+      )}
     </li>
   );
 };
 
-const SubSectionMenu = ({ items, isOpen, id }) => {
+const SubSectionMenu = ({
+  items, isOpen, id, isHidden,
+}) => {
   const itemsList = items.map((item) => (
     <li className="subsection-item" key={item._id}>
       {item.node_type === 'link'
-        ? <Link href={item.url} name={item.display_name} />
-        : <Link href={item._id} name={item.name} />}
+        ? <Link href={item.url} name={item.display_name} isHidden={isHidden} />
+        : <Link href={item._id} name={item.name} isHidden={isHidden} />}
     </li>
   ));
 
@@ -94,14 +104,14 @@ const SubSectionMenu = ({ items, isOpen, id }) => {
   );
 };
 
-export default ({ children = [], sections = [] }) => {
+export default ({ children = [], sections = [], isHidden = false }) => {
   const active = sections.filter((s) => !s.inactive);
 
   return (
     <>
       {children}
       <ul className="section-menu">
-        {active.map((item) => <SectionItem key={item._id} item={item} />)}
+        {active.map((item) => <SectionItem key={item._id} item={item} isHidden={isHidden} />)}
       </ul>
       <div style={{ height: '80vh' }}> </div>
     </>

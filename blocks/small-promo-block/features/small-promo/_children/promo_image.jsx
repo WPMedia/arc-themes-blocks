@@ -33,10 +33,7 @@ const PromoImage = (props) => {
       <div className={`promo-image ${getPromoStyle(imagePosition, 'margin')}`}>
         <div className="flex no-image-padding">
           {/* <div className="col-sm-xl-4 flex-col"> // from default */}
-          <a
-            href={content?.website_url || ''}
-            title={content?.headlines?.basic || ''}
-          >
+          <a href={content?.website_url || ''} aria-hidden="true" tabIndex="-1">
             {imageURL
               ? (
                 <Image

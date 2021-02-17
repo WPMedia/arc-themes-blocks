@@ -117,6 +117,7 @@ describe('top table list', () => {
               website_url: 'url',
             },
           },
+          subtype: 'editorial',
         }],
       })),
     }));
@@ -163,6 +164,7 @@ describe('top table list', () => {
                 website_url: 'url',
               },
             },
+            subtype: 'editorial',
           },
           {
             _id: 'abcde',
@@ -186,6 +188,7 @@ describe('top table list', () => {
                 website_url: 'url',
               },
             },
+            subtype: 'editorial',
           },
         ],
       })),
@@ -208,6 +211,7 @@ describe('top table list', () => {
     expect(storyItem.prop('id')).toEqual('abcde');
     expect(storyItem.prop('itemTitle')).toEqual('Alt Headline');
     expect(storyItem.prop('description')).toEqual('Alt description');
+    expect(storyItem.prop('subType')).toEqual('subtype_editorial');
   });
 
   it('renders content only for the arcSite', () => {

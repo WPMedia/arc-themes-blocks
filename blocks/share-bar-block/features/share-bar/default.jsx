@@ -108,11 +108,11 @@ export const ShareBar = ({
       shareButtons.push((
         <button
           key={social}
-          title={social}
+          id={`article-share-${social}`}
+          aria-label={`Share current article via ${social}`}
           type="button"
           className="shareButton"
           onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
-          onKeyPress={() => share[social](encodedUrl, encodedTitle, websiteName)}
         >
           { getLogoComponent(social) }
         </button>

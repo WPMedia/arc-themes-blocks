@@ -22,7 +22,9 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
-
+          scope: "@wpmedia"
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2

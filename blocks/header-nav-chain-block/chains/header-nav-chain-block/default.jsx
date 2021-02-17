@@ -405,7 +405,10 @@ const Nav = (props) => {
                   #main-nav button:not(.nav-sections-btn)
                 `);
                 // istanbul ignore next
-                if (focusElement) focusElement.focus();
+                if (focusElement) {
+                  focusElement.focus();
+                  focusElement.blur();
+                }
               },
             }}
           >

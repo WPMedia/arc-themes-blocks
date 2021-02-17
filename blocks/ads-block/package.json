@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "arcads": "^2.0.2",
-    "lazy-child": "^0.2.0"
+    "lazy-child": "^0.3.1"
   }
 }

@@ -25,7 +25,9 @@ jobs:
           scope: '@mentor-medier'  
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       - name: Install lerna
         run: npm i -g lerna
       - name: run babel

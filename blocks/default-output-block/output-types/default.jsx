@@ -3,6 +3,8 @@ import { playerRoot, videoOrg } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
+
+// this is blank import but used to inject scss
 import './default.scss';
 
 const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;

@@ -125,7 +125,6 @@
 
     padding: map-get($spacers, 'sm') 0;
 
-    div,
     p {
       color: $ui-medium-gray;
       display: inline;
@@ -136,7 +135,7 @@
       margin: 0;
     }
 
-    h6 {
+    h2 {
       font-style: italic;
       text-transform: uppercase;
     }
@@ -277,7 +276,7 @@
       &:hover {
         border-bottom: 1px solid #7f7f7f;
       }
-      
+
     }
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       margin-bottom: map-get($spacers, 'lg');

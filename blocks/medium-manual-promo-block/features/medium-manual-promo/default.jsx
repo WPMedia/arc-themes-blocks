@@ -31,20 +31,20 @@ const MediumManualPromo = ({ customFields }) => {
 
   const hasImage = customFields.showImage && customFields.imageURL;
 
-  const renderWithLink = useCallback((element, props) => (
+  const renderWithLink = useCallback((element, props, attributes) => (
     <a
       href={customFields.linkURL || '#'}
       className={(props && props.className) || ''}
-      title={customFields.headline}
       target={customFields.newTab ? '_blank' : '_self'}
       rel={customFields.newTab ? 'noreferrer noopener' : ''}
       onClick={!customFields.linkURL ? (evt) => {
         evt.preventDefault();
       } : undefined}
+      {...attributes}
     >
       {element}
     </a>
-  ), [customFields.linkURL, customFields.headline, customFields.newTab]);
+  ), [customFields.linkURL, customFields.newTab]);
 
   return (
     <>
@@ -64,7 +64,7 @@ const MediumManualPromo = ({ customFields }) => {
               breakpoints={breakpoints}
               resizerURL={getProperties(arcSite)?.resizerURL}
               resizedImageOptions={resizedImageOptions}
-            />, { className: 'image-link' },
+            />, { className: 'image-link' }, { 'aria-hidden': 'true', tabIndex: '-1' },
           )}
           {(customFields.showHeadline || customFields.showDescription)
           && (

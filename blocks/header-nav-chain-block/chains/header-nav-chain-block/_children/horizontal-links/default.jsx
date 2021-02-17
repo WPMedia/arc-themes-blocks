@@ -8,6 +8,8 @@ import Link from './_children/link';
 import './links-bar.scss';
 
 const LinkBarSpan = styled.span`
+  color: ${(props) => (props.navBarColor === 'light' ? '#000' : '#fff')};
+
   a {
     font-family: ${(props) => props.primaryFont};
     white-space: nowrap;
@@ -44,14 +46,15 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
             className="horizontal-links-menu"
             key={item._id}
             primaryFont={font}
+            navBarColor={navBarColor}
           >
+
             {
               item.node_type === 'link'
                 ? (
                   <Link
                     href={item.url}
                     name={item.display_name}
-                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )
@@ -59,11 +62,11 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
                   <Link
                     href={item._id}
                     name={item.name}
-                    showSeparator={index !== 0 && showSeparator}
                     navBarColor={navBarColor}
                   />
                 )
             }
+            {(content.children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : '\u00A0  \u00A0'}
           </LinkBarSpan>
         ))}
       </nav>

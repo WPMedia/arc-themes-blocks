@@ -138,9 +138,8 @@ class CardList extends React.Component {
               >
                 <a
                   href={contentElements[0].websites[arcSite].website_url}
-                  className="list-anchor"
+                  className="list-anchor card-list--link-container vertical-align-image"
                   aria-label={contentElements[0].headlines.basic}
-                  id="card-list--link-container"
                 >
                   {
                    extractImage(contentElements[0].promo_items) ? (
@@ -191,7 +190,7 @@ class CardList extends React.Component {
                   >
                     <a
                       href={contentElements[0].websites[arcSite].website_url}
-                      className="list-anchor"
+                      className="list-anchor vertical-align-image"
                       id="card-list--headline-link"
                     >
                       {contentElements[0].headlines.basic}
@@ -218,13 +217,13 @@ class CardList extends React.Component {
                     <React.Fragment key={`result-card-${url}`}>
                       <hr />
                       <article
-                        className="card-list-item"
+                        className="card-list-item card-list-item-margins"
                         key={`result-card-${url}`}
                         type="1"
                       >
                         <a
                           href={url}
-                          className="headline-list-anchor"
+                          className="headline-list-anchor vertical-align-image"
                         >
                           <HeadlineText
                             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
@@ -235,7 +234,7 @@ class CardList extends React.Component {
                         </a>
                         <a
                           href={url}
-                          className="list-anchor-image"
+                          className="list-anchor-image vertical-align-image"
                         >
                           {
                             extractImage(element.promo_items)

@@ -1,35 +1,27 @@
 .card-list-container {
+  @include block-margin-bottom;
+  @include block-internal-spacing;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.14);
+  padding-bottom: 1rem;
 
   hr {
     margin-left: 16px;
     margin-right: 16px;
-  }
-
-  a > picture > img {
-    vertical-align: middle;
-  }
-
-  .simple-results-list-container {
-    @include container-vertial-spacing;
-    @include container-hr-separator;
-
-    > *:last-child {
-      padding-bottom: map-get($spacers, 'lg');
-
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-bottom: map-get($spacers, 'md');
-      }
-    }
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
-#card-list--link-container img {
+.card-list--link-container img {
   height: auto;
   max-height: 400px;
   max-height: 40vh;
   object-fit: cover;
   width: 100%;
+}
+
+.vertical-align-image > picture > img {
+  vertical-align: middle;
 }
 
 .card-list-title {
@@ -84,6 +76,7 @@
 }
 
 .list-item-simple {
+  @include block-internal-spacing;
   &--divider {
     box-shadow: inset 0 -1px 0 0 $ui-light-gray;
   }
@@ -94,6 +87,7 @@
 }
 
 .card-list-item {
+  @include block-internal-spacing;
   display: flex;
   justify-content: space-between;
   padding: 0 16px;
@@ -130,5 +124,16 @@
       font-weight: normal;
       line-height: 24px;
     }
+  }
+}
+
+.card-list-item-margins {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 }

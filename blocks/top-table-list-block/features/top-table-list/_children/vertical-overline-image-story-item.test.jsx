@@ -47,6 +47,7 @@ describe('vertical overline image story item', () => {
     jest.mock('@wpmedia/engine-theme-sdk', () => ({
       Image: () => <img alt="placeholder" />,
       extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
+      VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
     }));
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
@@ -144,6 +145,35 @@ describe('vertical overline image story item', () => {
     expect(wrapper.find('a.xl-promo-headline').length).toBe(1);
     expect(wrapper.find('a.xl-promo-headline').prop('href')).toBe(testProps.websiteURL);
     expect(wrapper.find('hr').length).toBe(1);
+    expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
+    expect(wrapper.find('Image')).toHaveLength(0);
+    expect(wrapper.find('VideoPlayer')).toHaveLength(1);
+  });
+
+  it('renders VideoPlayer when type "video" with embed without bottom border', () => {
+    const testProps = {
+      ...sampleProps,
+      element: {
+        type: 'video',
+        embed_html: '<div></div>',
+      },
+      customFields: {
+        ...config,
+        showHeadlineXL: false,
+        showDateXL: false,
+        playVideoInPlaceXL: true,
+        showBottomBorderXL: false,
+      },
+    };
+
+    const { default: VerticalOverlineImageStoryItem } = require('./vertical-overline-image-story-item');
+
+    const wrapper = shallow(<VerticalOverlineImageStoryItem {...testProps} />);
+
+    expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
+    expect(wrapper.find('Overline').length).toBe(1);
+    expect(wrapper.find('a.xl-promo-headline').length).toBe(0);
+    expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(true);
     expect(wrapper.find('Image')).toHaveLength(0);
     expect(wrapper.find('VideoPlayer')).toHaveLength(1);
   });
@@ -160,6 +190,7 @@ describe('vertical overline image story item', () => {
         showHeadlineXL: false,
         showDateXL: false,
         playVideoInPlaceXL: true,
+        showBottomBorderXL: true,
       },
     };
 

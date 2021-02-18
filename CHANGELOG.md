@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.17](https://github.com/Mentor-Medier/fusion-news-theme-blocks/compare/v5.9.15...v5.9.17) (2021-02-18)
+
+
+
+## [5.9.14](https://github.com/Mentor-Medier/fusion-news-theme-blocks/compare/v5.9.13...v5.9.14) (2021-01-12)
+
+
+### Bug Fixes
+
+* Ensure top-level npm i, then npx lerna clean -y, then npm t works ([072e282](https://github.com/Mentor-Medier/fusion-news-theme-blocks/commit/072e282bb7b59d60066e25a4660779fca5c34544))
+
+
+### Reverts
+
+* Revert "adding update package files" ([b9c1808](https://github.com/Mentor-Medier/fusion-news-theme-blocks/commit/b9c1808b609ec5adc63e176873df14db95444df3))
+
+
+
+
+
 ## [5.9.13](https://github.com/Mentor-Medier/fusion-news-theme-blocks/compare/v5.9.12...v5.9.13) (2021-01-12)
 
 **Note:** Version bump only for package fusion-news-theme-blocks

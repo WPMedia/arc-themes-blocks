@@ -36,6 +36,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: run babel
         run:  ./scripts/babel.sh
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Get the latest version from lerna.json and tag all stable blocks with that
         run: npx lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json) stable
         env:

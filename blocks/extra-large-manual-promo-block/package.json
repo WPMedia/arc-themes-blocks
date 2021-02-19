@@ -29,6 +29,7 @@
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/shared-styles": "canary",
+    "@wpmedia/resizer-image-block": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

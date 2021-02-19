@@ -52,9 +52,24 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('a')).toHaveLength(3);
   });
 
-  it('should have one img when show image is true', () => {
+  it('should have one img when show image is true with 4:3 default ratio', () => {
     const wrapper = mount(<ExtraLargeManualPromo customFields={config} />);
     expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(600);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<ExtraLargeManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(450);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<ExtraLargeManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(533);
   });
 
   it('should have no Image when show image is false', () => {

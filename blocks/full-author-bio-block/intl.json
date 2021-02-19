@@ -3,6 +3,10 @@
       "en":"Connect",
       "sv":"Följ",
       "no":"Kontakt",
-      "fr": "Connecter"
+      "fr": "Connecter",
+      "de": "Verbinden",
+      "es": "Conectar",
+      "ja": "接続",
+      "ko": "연결"
    }
 }

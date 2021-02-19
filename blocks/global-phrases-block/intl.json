@@ -3,24 +3,40 @@
       "en":"Expand",
       "sv":"Förstora",
       "no":"Utvid",
-      "fr":"Développer"
+      "fr":"Développer",
+      "de": "Erweitern",
+      "es": "Expandir",
+      "ja": "展開",
+      "ko": "더보기"
    },
    "global.gallery-page-count-text":{
       "en":"%{current} of %{total}",
       "sv":"%{current} av %{total}",
       "no":"%{current} av %{total}",
-      "fr":"%{current} de %{total}"
+      "fr":"%{current} de %{total}",
+      "de": "%{current} von %{total}",
+      "es": "%{current} de %{total}",
+      "ja": "%{current} / %{total}",
+      "ko": "%{current}/%개 보는 %{total}"
    },
    "global.gallery-autoplay-button":{
       "en":"Autoplay",
       "sv":"Spela upp",
       "no":"Spill av",
-      "fr":"Lecture automatique"
+      "fr":"Lecture automatique",
+      "de": "Automatische Wiedergabe",
+      "es": "Reproducción automática",
+      "ja": "自動再生",
+      "ko": "자동 재생"
    },
    "global.gallery-pause-autoplay-button":{
       "en":"Pause autoplay",
       "sv":"Pausa",
       "no":"Stopp",
-      "fr":"Mettre en pause la lecture automatique"
+      "fr":"Mettre en pause la lecture automatique",
+      "de": "Automatische Wiedergabe anhalten",
+      "es": "Pausar reproducción automática",
+      "ja": "自動再生の一時停止",
+      "ko": "자동 재생 일시 중지"
    }
 }

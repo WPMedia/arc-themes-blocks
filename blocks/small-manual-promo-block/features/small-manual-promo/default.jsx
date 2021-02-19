@@ -6,6 +6,7 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
+import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 import getPromoContainer from './_children/promo_container';
 import getPromoStyle from './_children/promo_style';
 
@@ -26,6 +27,7 @@ const SmallManualPromo = ({ customFields }) => {
     source: 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
+  const ratios = ratiosFor('SM', customFields.imageRatio);
 
   const promoContainersStyles = {
     containerClass: getPromoStyle(imagePosition, 'container'),
@@ -72,12 +74,7 @@ const SmallManualPromo = ({ customFields }) => {
             url={customFields.imageURL}
             alt={customFields.headline}
             // small should be 3:2 aspect ratio
-            smallWidth={105}
-            smallHeight={70}
-            mediumWidth={105}
-            mediumHeight={70}
-            largeWidth={105}
-            largeHeight={70}
+            {...ratios}
             breakpoints={getProperties(arcSite)?.breakpoints}
             resizerURL={getProperties(arcSite)?.resizerURL}
             resizedImageOptions={resizedImageOptions}
@@ -138,6 +135,7 @@ SmallManualPromo.propTypes = {
         below: 'Image Below',
       },
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
   }),
 };
 

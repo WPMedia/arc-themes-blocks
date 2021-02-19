@@ -7,6 +7,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import { useDebouncedCallback } from 'use-debounce';
+import FocusTrap from 'focus-trap-react';
 import {
   WIDGET_CONFIG,
   PLACEMENT_AREAS,
@@ -131,7 +132,6 @@ const Nav = (props) => {
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
     showHorizontalSeperatorDots,
-
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
@@ -286,6 +286,7 @@ const Nav = (props) => {
   };
 
   const WidgetList = ({ id, breakpoint, placement }) => {
+    // istanbul ignore next
     if (!id || !breakpoint) return null;
     const { slotCounts } = WIDGET_CONFIG[placement];
     const widgetList = [];
@@ -314,6 +315,7 @@ const Nav = (props) => {
   };
 
   const NavSection = ({ side }) => (
+    // istanbul ignore next
     !side ? null : (
       <div key={side} className={`nav-${side}`}>
         {
@@ -384,25 +386,46 @@ const Nav = (props) => {
         <StyledSectionDrawer
           id="nav-sections"
           className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
-          onClick={closeDrawer}
           font={primaryFont}
           navHeight={navHeight}
           scrolled={scrolled}
           breakpoint={breakpoints.medium}
+          onClick={closeDrawer}
         >
-          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
-            <SectionNav sections={sections}>
-              <MenuWidgets />
-            </SectionNav>
-          </div>
+          <FocusTrap
+            active={isSectionDrawerOpen}
+            focusTrapOptions={{
+              allowOutsideClick: true,
+              returnFocusOnDeactivate: true,
+              onDeactivate: () => {
+                // Focus the next focusable element in the navbar
+                // Workaround for issue where 'nav-sections-btn' won't programatically focus
+                const focusElement = document.querySelector(`
+                  #main-nav a:not(.nav-sections-btn),
+                  #main-nav button:not(.nav-sections-btn)
+                `);
+                // istanbul ignore next
+                if (focusElement) {
+                  focusElement.focus();
+                  focusElement.blur();
+                }
+              },
+            }}
+          >
+            <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
+              <SectionNav sections={sections} isHidden={!isSectionDrawerOpen}>
+                <MenuWidgets />
+              </SectionNav>
+            </div>
+          </FocusTrap>
         </StyledSectionDrawer>
-      </StyledNav>
 
-      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
-        <StyledWarning>
-          In order to render horizontal links, the logo must be aligned to the left.
-        </StyledWarning>
-      )}
+        {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
+          <StyledWarning>
+            In order to render horizontal links, the logo must be aligned to the left.
+          </StyledWarning>
+        )}
+      </StyledNav>
     </>
   );
 };

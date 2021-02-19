@@ -36,4 +36,14 @@ describe('When the link is generated SSR', () => {
     expect(link).toMatch(/target="_blank"/);
     expect(link).toMatch(/rel="noopener noreferrer"/);
   });
+
+  it('must add negative tab index when "isHidden" prop is truthy', () => {
+    const link = renderToString(Link({
+      href: 'https://example.com/some/page.html', name: 'Entertaiment', isHidden: true,
+    }));
+    expect(link).toMatch(/href="https:\/\/example.com\/some\/page.html"/);
+    expect(link).toMatch(/target="_blank"/);
+    expect(link).toMatch(/rel="noopener noreferrer"/);
+    expect(link).toMatch(/tabindex="-1"/);
+  });
 });

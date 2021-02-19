@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import SmallManualPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <div />,
+  Image: ({ url }) => <img src={url} alt="fake test image" />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -111,5 +111,19 @@ describe('the small promo feature', () => {
   it('should have one line separator', () => {
     const wrapper = mount(<SmallManualPromo customFields={config} />);
     expect(wrapper.find('SmallManualPromo > hr')).toHaveLength(1);
+  });
+
+  it('should render even without a link url', () => {
+    const imageURL = 'www.google.com/fake.png';
+    const noLinkURLConfig = {
+      imageURL,
+    };
+
+    const wrapper = mount(<SmallManualPromo customFields={noLinkURLConfig} />);
+    // testing for whether that import is shallow component
+    expect(wrapper.find('Image')).toHaveLength(1);
+
+    // testing whether the image url was indeed passed down
+    expect(wrapper.find('img').prop('src')).toEqual(imageURL);
   });
 });

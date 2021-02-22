@@ -16,7 +16,8 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const SmallManualPromo = ({ customFields }) => {
+const SmallManualPromo = ({ customFields = {} }) => {
+  const { showImage = true } = customFields;
   const { arcSite } = useFusionContext();
   const imagePosition = customFields?.imagePosition || 'right';
 
@@ -31,9 +32,9 @@ const SmallManualPromo = ({ customFields }) => {
 
   const promoContainersStyles = {
     containerClass: getPromoStyle(imagePosition, 'container'),
-    headlineClass: customFields.showImage
+    headlineClass: showImage
       ? 'col-sm-xl-8'
-      : 'col-sm-xl-12 no-image-padding',
+      : 'col-sm-xl-12',
     imageClass: 'col-sm-xl-4',
   };
 
@@ -66,7 +67,7 @@ const SmallManualPromo = ({ customFields }) => {
       </div>
     );
 
-  const image = customFields.showImage && customFields.imageURL
+  const image = showImage && customFields.imageURL
     && (
       <div className={imageMarginClass}>
         { renderWithLink(
@@ -83,14 +84,15 @@ const SmallManualPromo = ({ customFields }) => {
       </div>
     );
 
-  return customFields.linkURL ? (
+  // base case for rendering image without even a link
+  return (
     <>
       <article className="container-fluid small-promo">
         {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 SmallManualPromo.propTypes = {

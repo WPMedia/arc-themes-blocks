@@ -249,9 +249,10 @@ const Nav = (props) => {
       return undefined;
     }
     const handleScroll = () => {
-      if (window.pageYOffset > shrinkDesktopNavivationHeight) {
+      const pageOffset = window.pageYOffset;
+      if (pageOffset > shrinkDesktopNavivationHeight) {
         setScrolled(true);
-      } else {
+      } else if (pageOffset < (shrinkDesktopNavivationHeight - desktopNavivationStartHeight)) {
         setScrolled(false);
       }
     };
@@ -260,7 +261,7 @@ const Nav = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [shrinkDesktopNavivationHeight, breakpoints]);
+  }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, breakpoints]);
 
   const getNavWidgetType = (fieldKey) => (
     customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)

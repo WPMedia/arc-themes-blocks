@@ -8,7 +8,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { Gallery } from '@wpmedia/engine-theme-sdk';
 import ErrorBoundary from './error-boundary';
 
-const AdFeature = lazy(() => import('@wpmedia/ads-blocks'));
+const AdFeature = lazy(() => import('@wpmedia/ads-block'));
 
 const GalleryFeature = (
   {

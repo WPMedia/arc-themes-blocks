@@ -1,5 +1,5 @@
 /* eslint-disable camelcase, max-len */
-import React, { Component } from 'react';
+import React, { lazy, Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
@@ -10,10 +10,13 @@ import {
   Gallery, ImageMetadata, Image, Lightbox,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  ErrorBoundary,
 } from '@wpmedia/engine-theme-sdk';
 // import ArcAd from '@wpmedia/ads-block';
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
+
+const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'));
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -186,26 +189,9 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
-        /**
-        const GalleryInterstitialAd = () => (
-          <ArcAd
-            customFields={{
-              adType: '300x250',
-              displayAdLabel: true,
-            }}
-          />
-        );
         const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
-        let adProps = {};
-        if (galleryCubeClicks) {
-          const value = parseInt(galleryCubeClicks, 10);
-          if (!Number.isNaN(value)) {
-            adProps = {
-              adElement: GalleryInterstitialAd,
-              interstitialClicks: value,
-            };
-          }
-        }
+        const interstitialClicks = parseInt(galleryCubeClicks, 10);
+
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -216,20 +202,17 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
-            {...adProps}
-          />
-        );
-        * */
-        return (
-          <Gallery
-            galleryElements={lead_art.content_elements}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-            ansId={lead_art._id}
-            ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
-            expandPhrase={this.phrases.t('global.gallery-expand-button')}
-            autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
-            pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
-            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            adElement={/* istanbul ignore next */ () => (
+              <ErrorBoundary fallback={<div>Missing Ad block</div>}>
+                <AdFeature
+                  customFields={{
+                    adType: '300x250',
+                    displayAdLabel: true,
+                  }}
+                />
+              </ErrorBoundary>
+            )}
+            interstitialClicks={interstitialClicks}
           />
         );
       }

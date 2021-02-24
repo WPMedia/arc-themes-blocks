@@ -1,5 +1,5 @@
 /* eslint-disable camelcase, max-len */
-import React, { lazy, Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
@@ -204,12 +204,14 @@ class LeadArt extends Component {
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (
               <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-                <AdFeature
-                  customFields={{
-                    adType: '300x250',
-                    displayAdLabel: true,
-                  }}
-                />
+                <Suspense fallback={<div>Missing ad block</div>}>
+                  <AdFeature
+                    customFields={{
+                      adType: '300x250',
+                      displayAdLabel: true,
+                    }}
+                  />
+                </Suspense>
               </ErrorBoundary>
             )}
             interstitialClicks={interstitialClicks}

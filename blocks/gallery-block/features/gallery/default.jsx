@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext, useAppContext } from 'fusion:context';
@@ -47,12 +47,14 @@ const GalleryFeature = (
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (
         <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-          <AdFeature
-            customFields={{
-              adType: '300x250',
-              displayAdLabel: true,
-            }}
-          />
+          <Suspense fallback={<div>Missing ad block</div>}>
+            <AdFeature
+              customFields={{
+                adType: '300x250',
+                displayAdLabel: true,
+              }}
+            />
+          </Suspense>
         </ErrorBoundary>
       )}
       interstitialClicks={interstitialClicks}

@@ -5,10 +5,9 @@ import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Gallery } from '@wpmedia/engine-theme-sdk';
-import ErrorBoundary from './error-boundary';
+import { Gallery, ErrorBoundary } from '@wpmedia/engine-theme-sdk';
 
-const AdFeature = lazy(() => import('@wpmedia/ads-block'));
+const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'));
 
 const GalleryFeature = (
   {
@@ -45,8 +44,8 @@ const GalleryFeature = (
       expandPhrase={phrases.t('global.gallery-expand-button')}
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
-      pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
-      adElement={() => (
+      pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+      adElement={/* istanbul ignore next */ () => (
         <ErrorBoundary fallback={<div>Missing Ad block</div>}>
           <AdFeature
             customFields={{

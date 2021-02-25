@@ -47,7 +47,7 @@ const GalleryFeature = (
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (
         <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-          <Suspense fallback={<div>Missing ad block</div>}>
+          <Suspense fallback={<div>Loading ad block</div>}>
             <AdFeature
               customFields={{
                 adType: '300x250',

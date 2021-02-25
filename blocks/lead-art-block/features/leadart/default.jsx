@@ -204,7 +204,7 @@ class LeadArt extends Component {
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (
               <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-                <Suspense fallback={<div>Missing ad block</div>}>
+                <Suspense fallback={<div>Loading Ad block</div>}>
                   <AdFeature
                     customFields={{
                       adType: '300x250',

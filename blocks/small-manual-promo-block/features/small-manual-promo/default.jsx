@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
@@ -84,14 +84,20 @@ const SmallManualPromo = ({ customFields = {} }) => {
       </div>
     );
 
-  // base case for rendering image without even a link
-  return (
+  const SmallManualPromoRender = () => (
     <>
       <article className="container-fluid small-promo">
         {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       </article>
       <hr />
     </>
+  );
+
+  // base case for rendering image without even a link
+  return (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <SmallManualPromoRender />
+    </LazyLoad>
   );
 };
 
@@ -138,6 +144,10 @@ SmallManualPromo.propTypes = {
       },
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+    }),
   }),
 };
 

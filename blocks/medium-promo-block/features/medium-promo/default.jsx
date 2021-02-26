@@ -10,7 +10,7 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
   extractResizedParams,
@@ -123,7 +123,7 @@ const MediumPromo = ({ customFields }) => {
     ? customFieldImageResizedImageOptions
     : extractResizedParams(content);
 
-  return content ? (
+  const MediumPromoRender = () => (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
@@ -180,6 +180,12 @@ const MediumPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
+  );
+
+  return content ? (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <MediumPromoRender />
+    </LazyLoad>
   ) : null;
 };
 
@@ -219,6 +225,10 @@ MediumPromo.propTypes = {
       group: 'Image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+    }),
   }),
 };
 

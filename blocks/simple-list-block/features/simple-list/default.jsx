@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
@@ -91,6 +92,7 @@ const SimpleList = (props) => {
       title = '',
       showHeadline = true,
       showImage = true,
+      lazyLoad = false,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -109,7 +111,7 @@ const SimpleList = (props) => {
     query: { 'arc-site': arcSite, ...contentConfigValues },
   }) || {};
 
-  return (
+  const SimpleListRender = () => (
     <div key={id} className="list-container layout-section">
       { title
         && (
@@ -142,6 +144,12 @@ const SimpleList = (props) => {
       }
     </div>
   );
+
+  return contentElements ? (
+    <LazyLoad enabled={lazyLoad}>
+      <SimpleListRender />
+    </LazyLoad>
+  ) : null;
 };
 
 SimpleListWrapper.propTypes = {
@@ -162,6 +170,10 @@ SimpleListWrapper.propTypes = {
       label: 'Show image',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
     }),
   }),
 };

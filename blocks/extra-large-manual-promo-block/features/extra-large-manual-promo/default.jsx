@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h2`
@@ -52,7 +51,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
     </a>
   ), [customFields.linkURL, customFields.newTab]);
 
-  return (
+  const ExtraLargeManualPromoRender = () => (
     <>
       <article className="container-fluid xl-large-promo xl-large-manual-promo">
         <div className="row">
@@ -121,6 +120,12 @@ const ExtraLargeManualPromo = ({ customFields }) => {
       <hr />
     </>
   );
+
+  return (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <ExtraLargeManualPromoRender />
+    </LazyLoad>
+  );
 };
 
 ExtraLargeManualPromo.propTypes = {
@@ -182,6 +187,10 @@ ExtraLargeManualPromo.propTypes = {
         group: 'Show promo elements',
       },
     ),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+    }),
   }),
 };
 

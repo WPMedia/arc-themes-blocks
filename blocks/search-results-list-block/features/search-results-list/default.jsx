@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
+import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import CustomSearchResultsList from './_children/custom-content';
 import GlobalContentSearch from './_children/global-content';
 import { resolveDefaultPromoElements } from './_children/helpers';
@@ -12,7 +13,7 @@ const SearchResultsListContainer = (
   } = {},
 ) => {
   const { arcSite } = useAppContext();
-  const { inheritGlobalContent } = customFields;
+  const { inheritGlobalContent, lazyLoad = false } = customFields;
   let showGlobalContent;
 
   if (typeof inheritGlobalContent === 'undefined') {
@@ -21,20 +22,25 @@ const SearchResultsListContainer = (
     showGlobalContent = inheritGlobalContent;
   }
 
-  if (showGlobalContent) {
-    return (
+  const SearchResultsListRender = () => (
+    showGlobalContent ? (
       <GlobalContentSearch
         arcSite={arcSite}
         customSearchAction={customSearchAction}
         promoElements={resolveDefaultPromoElements(customFields)}
       />
-    );
-  }
+    ) : (
+      <CustomSearchResultsList
+        arcSite={arcSite}
+        promoElements={resolveDefaultPromoElements(customFields)}
+      />
+    )
+  );
+
   return (
-    <CustomSearchResultsList
-      arcSite={arcSite}
-      promoElements={resolveDefaultPromoElements(customFields)}
-    />
+    <LazyLoad enabled={lazyLoad}>
+      <SearchResultsListRender />
+    </LazyLoad>
   );
 };
 
@@ -84,6 +90,10 @@ SearchResultsListContainer.propTypes = {
         group: 'Show promo elements',
       },
     ),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+    }),
   }),
 };
 

@@ -3,9 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-
+import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
-
 import {
   imageRatioCustomField,
   ratiosFor,
@@ -48,13 +47,19 @@ const SmallPromo = ({ customFields }) => {
     imageClass: 'col-sm-xl-4',
   };
 
-  return content ? (
+  const SmallPromoRender = () => (
     <>
       <article className="container-fluid small-promo">
         {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
       </article>
       <hr />
     </>
+  );
+
+  return content ? (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <SmallPromoRender />
+    </LazyLoad>
   ) : null;
 };
 
@@ -92,6 +97,10 @@ SmallPromo.propTypes = {
       },
     }).isRequired,
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+    }),
   }),
 };
 

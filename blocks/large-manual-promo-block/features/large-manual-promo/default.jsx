@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
@@ -53,7 +53,7 @@ const LargeManualPromo = ({ customFields }) => {
     </a>
   ), [customFields.linkURL, customFields.newTab]);
 
-  return (
+  const LargeManualPromoRender = () => (
     <>
       <article className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom">
@@ -127,6 +127,12 @@ const LargeManualPromo = ({ customFields }) => {
       <hr />
     </>
   );
+
+  return (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <LargeManualPromoRender />
+    </LazyLoad>
+  );
 };
 
 LargeManualPromo.propTypes = {
@@ -179,6 +185,10 @@ LargeManualPromo.propTypes = {
       label: 'Show description',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
     }),
   }),
 };

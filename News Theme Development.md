@@ -168,6 +168,7 @@ Stable Release is the contents of the beta branch once signed off - beta -> stab
     * Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
     * Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
     * Make sure all blocks have been graduated or promoted.
+    * Check that there is a commit in your local for the next version - created by the `npx lerna` command
     * `git push origin stable`
 5. Merge `stable` back to `canary`
 

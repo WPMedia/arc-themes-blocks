@@ -3,19 +3,30 @@
       "en":"Search",
       "sv":"Sök",
       "no":"Søk",
-      "fr":"Rechercher"
+      "fr":"Rechercher",
+      "de": "Suche",
+      "es": "Buscar",
+      "ja": "検索",
+      "ko": "검색"
    },
    "search-results-block.search-result-number":{
       "en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
       "sv":"%{smart_count} resultat för ”%{searchTerm}”",
       "no":"%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
-      "fr":"%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\""
-   
+      "fr":"%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
+        "de": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"",
+        "es": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
+        "ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
+        "ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개"
       },
    "search-results-block.see-more-button":{
       "en":"See More",
       "sv":"Fler artiklar",
       "no":"Se mer",
-      "fr":"En savoir plus"
+      "fr":"En savoir plus",
+      "de": "Mehr anzeigen",
+      "es": "Ver más",
+      "ja": "詳細",
+      "ko": "자세히 보기"
    }
 }

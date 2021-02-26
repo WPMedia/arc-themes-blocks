@@ -30,17 +30,20 @@ function fixTrailingSlash(item) {
   return item;
 }
 
-const Link = ({ href, name, child }) => {
+const Link = ({
+  href, name, child, isHidden = false,
+}) => {
   const externalUrl = /(http(s?)):\/\//i.test(href);
+  const linkAttributes = isHidden ? { tabIndex: -1 } : {};
   return (
     externalUrl ? (
-      <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer">
+      <a href={fixTrailingSlash(href)} target="_blank" rel="noopener noreferrer" {...linkAttributes}>
         {name}
         <span className="sr-only">(Opens in new window)</span>
         {child}
       </a>
     ) : (
-      <a href={fixTrailingSlash(href)}>
+      <a href={fixTrailingSlash(href)} {...linkAttributes}>
         {name}
         {child}
       </a>

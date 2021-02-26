@@ -69,6 +69,21 @@ describe('the medium promo feature', () => {
   it('should have one img when show image is true', () => {
     const wrapper = mount(<MediumPromo customFields={config} />);
     expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<MediumPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<MediumPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(267);
   });
 
   it('should have class .md-promo-image when show image is true', () => {

@@ -5,6 +5,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -30,6 +31,7 @@ const MediumManualPromo = ({ customFields }) => {
   } = getProperties(arcSite);
 
   const hasImage = customFields.showImage && customFields.imageURL;
+  const ratios = ratiosFor('MD', customFields.imageRatio);
 
   const renderWithLink = useCallback((element, props, attributes) => (
     <a
@@ -55,12 +57,7 @@ const MediumManualPromo = ({ customFields }) => {
               // medium is 16:9
               url={customFields.imageURL}
               alt={customFields.headline}
-              smallWidth={274}
-              smallHeight={154}
-              mediumWidth={274}
-              mediumHeight={154}
-              largeWidth={400}
-              largeHeight={225}
+              {...ratios}
               breakpoints={breakpoints}
               resizerURL={getProperties(arcSite)?.resizerURL}
               resizedImageOptions={resizedImageOptions}
@@ -151,6 +148,7 @@ MediumManualPromo.propTypes = {
       name: 'Lazy Load block?',
       defaultValue: false,
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
   }),
 };
 

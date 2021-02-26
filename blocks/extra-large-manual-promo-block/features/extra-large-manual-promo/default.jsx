@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
@@ -35,6 +36,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
     source: 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
+  const ratios = ratiosFor('XL', customFields.imageRatio);
 
   const renderWithLink = useCallback((element, props, attributes) => (
     <a
@@ -93,12 +95,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
                 <Image
                   url={customFields.imageURL}
                   alt={customFields.headline}
-                  smallWidth={400}
-                  smallHeight={300}
-                  mediumWidth={600}
-                  mediumHeight={450}
-                  largeWidth={800}
-                  largeHeight={600}
+                  {...ratios}
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
@@ -191,6 +188,7 @@ ExtraLargeManualPromo.propTypes = {
       name: 'Lazy Load block?',
       defaultValue: false,
     }),
+    ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
   }),
 };
 

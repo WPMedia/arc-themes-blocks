@@ -188,8 +188,9 @@ class CardList extends React.Component {
               >
                 <a
                   href={contentElements[0].websites[arcSite].website_url}
-                  className="list-anchor vertical-align-image"
-                  id="card-list--headline-link"
+                  className="list-anchor card-list--link-container vertical-align-image"
+                  aria-hidden="true"
+                  tabIndex="-1"
                 >
                   {contentElements[0].headlines.basic}
                 </a>
@@ -233,6 +234,8 @@ class CardList extends React.Component {
                     <a
                       href={url}
                       className="list-anchor-image vertical-align-image"
+                      aria-hidden="true"
+                      tabIndex="-1"
                     >
                       {
                         extractImage(element.promo_items)

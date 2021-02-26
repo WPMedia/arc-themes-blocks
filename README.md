@@ -6,8 +6,9 @@ This is the lerna-managed monorepo for the blocks that make up the Fusion News T
 
 This monorepo is a collection of packages for blocks. Blocks are versioned together.
 
-**if you're looking for local news theme block development, go to news theme development markdown doc**
+**if you're looking for local news theme block development, go to [news theme development markdown doc](https://github.com/WPMedia/fusion-news-theme-blocks/blob/canary/News%20Theme%20Development.md)**
 
+**if you're looking for local blocks setup instructions with the news-theme, go to [the prerequisites and 9-step quick guide](https://github.com/WPMedia/Fusion-News-Theme#prerequisites)**
 ## `dist-tags`
 
 This package has been published with a number of dist-tags meant for different purposes:

@@ -84,7 +84,6 @@ const SmallManualPromo = ({ customFields = {} }) => {
       </div>
     );
 
-
   const SmallManualPromoRender = () => (
     <>
       <article className="container-fluid small-promo">

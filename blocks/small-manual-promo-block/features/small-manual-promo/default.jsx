@@ -84,7 +84,7 @@ const SmallManualPromo = ({ customFields = {} }) => {
       </div>
     );
 
-  // base case for rendering image without even a link
+
   const SmallManualPromoRender = () => (
     <>
       <article className="container-fluid small-promo">
@@ -94,11 +94,12 @@ const SmallManualPromo = ({ customFields = {} }) => {
     </>
   );
 
-  return customFields.linkURL ? (
+  // base case for rendering image without even a link
+  return (
     <LazyLoad enabled={customFields?.lazyLoad}>
       <SmallManualPromoRender />
     </LazyLoad>
-  ) : null;
+  );
 };
 
 SmallManualPromo.propTypes = {

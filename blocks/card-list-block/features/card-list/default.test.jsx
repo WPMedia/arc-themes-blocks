@@ -108,7 +108,7 @@ describe('Card list', () => {
       it('should render two anchor tags - one around image one for the title', () => {
         expect(wrapper.find('article.list-item-simple').find('.list-anchor').length).toEqual(2);
         expect(wrapper.find('.card-list--link-container').find('Image').length).toEqual(1);
-        expect(wrapper.find('HeadlineText.card-list-headline #card-list--headline-link').length).toEqual(1);
+        expect(wrapper.find('HeadlineText').length).toEqual(1);
       });
 
       it('should render one image wrapped in an anchor tag', () => {

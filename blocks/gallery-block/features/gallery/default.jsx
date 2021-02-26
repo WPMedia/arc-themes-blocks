@@ -51,6 +51,7 @@ GalleryFeature.propTypes = {
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,
+      description: 'Lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

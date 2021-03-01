@@ -36,6 +36,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: run babel
         run:  ./scripts/babel.sh
+      - name: Lerna publish
+        run: npx lerna publish --conventional-commits --conventional-graduate --yes	--no-changelog  --no-push      
       - name: Get the latest version from lerna.json and tag all stable blocks with that
         run: npx lerna exec --no-bail --parallel -- npm dist-tag add \${LERNA_PACKAGE_NAME}@$(jq -r .version lerna.json) stable
         env:

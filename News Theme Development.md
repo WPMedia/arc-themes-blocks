@@ -184,7 +184,7 @@ If you need to make a change (hotfix) to any of these three branches RC, beta, s
 
 ### Hotfix a stable issue
 
-If an issue is found in stable this is a production issue, and requires a hotfix follow these steps
+If an issue is found in stable this is a production issue, and requires a hotfix follow these steps:
 
 1. `git pull origin stable` - Pll remote branch to ensure you have most upto date code
 2. `git checkout -b RC-Hotfix-ticket-123` - Create a hotfix branch
@@ -199,16 +199,20 @@ If an issue is found in stable this is a production issue, and requires a hotfix
 7. Merge `stable` to `canary`
 8. Merge hotfix branch `RC-Hotfix-ticket-123` to `beta`
 
-Any environment with the `BLOCK_DIST_TAG=hotfix` will get the updated blocks on next deploy
+Any environment with the `BLOCK_DIST_TAG=hotfix` will get the updated blocks on next deploy.
 
 ### Hotfix a Beta or RC issue
 
-RC and Beta are used within non production environments and follow a different flow to stable
+RC and Beta are used within non production environments and follow a different flow to stable. **But** require each hotfix merged into them to land back into `canary`.
 
 RC example flow -
 * `git pull origin rc` - Pull remote branch to ensure you have most upto date code
 * `git checkout -b RC-Hotfix-ticket-123` - Create a branch for hotfix
 * Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `rc`
+* PR Approved - Merge PR via the GitHub UI then:
+  * `git checkout canary && git reset --hard origin/canary`
+  * `git merge RC-Hotfix-ticket-123` - Merges the hotfix onto canary
+  * `git push origin canary` - Pushes the changes to canary
 
 Once pull request is approved, merge into target branch **also** merge target branch back to `canary`.
 

@@ -214,8 +214,8 @@ RC example flow -
   * `git merge RC-Hotfix-ticket-123` - Merges the hotfix onto canary
   * `git push origin canary` - Pushes the changes to canary
 
-Once pull request is approved, merge into target branch **also** merge target branch back to `canary`.
 
+## Git Diagram
 
 ![Themes Git Flow](themes-git-flow.png "diagram")
 

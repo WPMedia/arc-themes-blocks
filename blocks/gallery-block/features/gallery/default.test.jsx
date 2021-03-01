@@ -12,9 +12,10 @@ jest.mock('fusion:intl', () => ({
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../../intl.json')[phrase][locale]) })),
 }));
 
-// two classes for testing purposes
-jest.mock('./_children/global-content', () => class GlobalContentGallery {});
-jest.mock('./_children/custom-content', () => class CustomContentGallery {});
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  LazyLoad: ({ children }) => <>{ children }</>,
+}));
+
 jest.mock('prop-types', () => ({
   bool: true,
   shape: () => {},
@@ -26,8 +27,9 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
-      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
-      expect(typeof wrapper.props().phrases).toEqual('object');
+      const galleryInstance = wrapper.find('GlobalContentGallery');
+      expect(galleryInstance).toHaveLength(1);
+      expect(typeof galleryInstance.props().phrases).toEqual('object');
     });
   });
 
@@ -38,7 +40,7 @@ describe('the gallery feature block', () => {
       const wrapper = shallow(
         <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
       );
-      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+      expect(wrapper.find('CustomContentGallery')).toHaveLength(1);
     });
 
     it('should pass the content config for fetching the gallery', () => {
@@ -46,7 +48,7 @@ describe('the gallery feature block', () => {
       const wrapper = shallow(
         <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
       );
-      expect(wrapper.props().contentConfig).toStrictEqual({});
+      expect(wrapper.find('CustomContentGallery').props().contentConfig).toStrictEqual({});
     });
   });
 
@@ -54,9 +56,9 @@ describe('the gallery feature block', () => {
     it('should render a custom content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(
-        <GalleryFeature customFields={{ galleryContentConfig: {} }} />,
+        <GalleryFeature customFields={{ inheritGlobalContent: false, galleryContentConfig: {} }} />,
       );
-      expect(wrapper.is('CustomContentGallery')).toBeTruthy();
+      expect(wrapper.find('CustomContentGallery')).toHaveLength(1);
     });
   });
 
@@ -64,7 +66,7 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={{}} />);
-      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+      expect(wrapper.find('GlobalContentGallery')).toHaveLength(1);
     });
   });
 
@@ -72,7 +74,7 @@ describe('the gallery feature block', () => {
     it('should render the global content gallery', () => {
       const { default: GalleryFeature } = require('./default');
       const wrapper = shallow(<GalleryFeature customFields={undefined} />);
-      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+      expect(wrapper.find('GlobalContentGallery')).toHaveLength(1);
     });
   });
 
@@ -82,7 +84,7 @@ describe('the gallery feature block', () => {
       const wrapper = shallow(
         <GalleryFeature />,
       );
-      expect(wrapper.is('GlobalContentGallery')).toBeTruthy();
+      expect(wrapper.find('GlobalContentGallery')).toHaveLength(1);
     });
   });
 });

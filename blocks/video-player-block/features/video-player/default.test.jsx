@@ -10,6 +10,7 @@ const { mount, shallow } = require('enzyme');
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   // not great, but mocks the component functionally
   VideoPlayer: ({ embedMarkup, id }) => <div dangerouslySetInnerHTML={{ __html: embedMarkup }} id={`video-${id}`} />,
+  LazyLoad: ({ children }) => <>{ children }</>,
 }));
 
 jest.mock('fusion:content', () => ({

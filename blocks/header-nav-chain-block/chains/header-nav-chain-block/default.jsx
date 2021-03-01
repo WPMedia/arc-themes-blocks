@@ -456,6 +456,7 @@ Nav.propTypes = {
     }),
     desktopNavivationStartHeight: PropTypes.number.tag({
       label: 'Starting desktop navigation bar height',
+      description: 'Select the height of the navigation bar (in px) when the user first opens a page on desktop. Must be between 56 and 200.',
       group: 'Logo',
       max: 200,
       min: 56,
@@ -463,6 +464,7 @@ Nav.propTypes = {
     }),
     shrinkDesktopNavivationHeight: PropTypes.number.tag({
       label: 'Shrink navigation bar after scrolling',
+      description: 'How far should the user scroll (in px) until the navigation height shrinks back to standard size (56px) on desktop? Must be greater than the value configured for "Starting desktop navigation bar height".',
       group: 'Logo',
       min: 56,
     }),

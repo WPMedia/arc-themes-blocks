@@ -38,6 +38,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     targetFallbackImage,
     imageRatio,
     subType,
+    premium,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG
@@ -124,6 +125,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
     return null;
   };
 
+  const premiumClass = (premium) ? ' premium' : '';
   const ratios = ratiosFor('LG', imageRatio);
   const promoType = discoverPromoType(element);
   const videoEmbed = customFields.playVideoInPlaceLG
@@ -132,7 +134,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
 
   return (
     <>
-      <article key={id} className={`container-fluid large-promo ${subType}`}>
+      <article key={id} className={`container-fluid large-promo ${subType}${premiumClass}`}>
         <div className="promo-item-margins row lg-promo-padding-bottom">
           { customFields.showImageLG && (
             <div className="col-sm-12 col-md-xl-6 flex-col">
@@ -197,15 +199,15 @@ const HorizontalOverlineImageStoryItem = (props) => {
             || customFields.showDescriptionLG
             || customFields.showBylineLG
             || customFields.showDateLG) && (
-              <div className={textClass}>
-                {overlineTmpl()}
-                {headlineTmpl()}
-                {descriptionTmpl()}
-                <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
-                </div>
+            <div className={textClass}>
+              {overlineTmpl()}
+              {headlineTmpl()}
+              {descriptionTmpl()}
+              <div className="article-meta">
+                {byLineTmpl()}
+                {dateTmpl()}
               </div>
+            </div>
           )}
         </div>
       </article>

@@ -32,6 +32,7 @@ const ConditionalStoryItem = (props) => {
     placeholderResizedImageOptions,
     arcSite,
     subType,
+    premium,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
@@ -58,6 +59,7 @@ const ConditionalStoryItem = (props) => {
           arcSite={arcSite}
           imageRatio={customFields.imageRatioXL}
           subType={subType}
+          premium={premium}
         />
       );
     case LARGE:
@@ -83,6 +85,7 @@ const ConditionalStoryItem = (props) => {
           arcSite={arcSite}
           imageRatio={customFields.imageRatioLG}
           subType={subType}
+          premium={premium}
         />
       );
     case MEDIUM:
@@ -105,6 +108,7 @@ const ConditionalStoryItem = (props) => {
           arcSite={arcSite}
           imageRatio={customFields.imageRatioMD}
           subType={subType}
+          premium={premium}
         />
       );
     case SMALL: {
@@ -124,6 +128,7 @@ const ConditionalStoryItem = (props) => {
           imageRatio={customFields.imageRatioSM}
           element={element}
           subType={subType}
+          premium={premium}
         />
       );
     }

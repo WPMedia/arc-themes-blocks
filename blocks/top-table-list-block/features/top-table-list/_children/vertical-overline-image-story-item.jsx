@@ -37,6 +37,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     placeholderResizedImageOptions,
     imageRatio,
     subType,
+    premium,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateXL;
 
@@ -122,13 +123,14 @@ const VerticalOverlineImageStoryItem = (props) => {
   };
 
   const ratios = ratiosFor('XL', imageRatio);
+  const premiumClass = (premium) ? ' premium' : '';
   const videoEmbed = customFields.playVideoInPlaceXL
     && !!extractVideoEmbedFromStory
     && extractVideoEmbedFromStory(element);
 
   return (
     <>
-      <article className={`container-fluid xl-large-promo ${subType}`} key={id}>
+      <article className={`container-fluid xl-large-promo ${subType}${premiumClass}`} key={id}>
         <div className="promo-item-margins row xl-promo-padding-bottom">
           {(customFields.showHeadlineXL
             || customFields.showDescriptionXL

@@ -23,6 +23,7 @@ const SmallListItem = (props) => {
     element,
     imageRatio,
     subType,
+    premium,
     customFields: {
       imagePositionSM: imagePosition = RIGHT,
       storiesPerRowSM,
@@ -101,13 +102,14 @@ const SmallListItem = (props) => {
     </div>
   );
 
+  const premiumClass = (premium) ? ' premium' : '';
   const colClassNum = (!!storiesPerRow && Math.floor(12 / storiesPerRow)) || 1;
   const colClasses = `col-sm-12 col-md-${colClassNum} col-lg-${colClassNum} col-xl-${colClassNum}`;
 
   return (
     <article
       key={id}
-      className={`top-table-list-small-promo small-promo ${subType} ${colClasses}`}
+      className={`top-table-list-small-promo small-promo ${subType} ${colClasses}${premiumClass}`}
     >
       <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         { showHeadline && <PromoHeadline /> }

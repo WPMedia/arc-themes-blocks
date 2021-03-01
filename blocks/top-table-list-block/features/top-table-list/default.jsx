@@ -27,16 +27,15 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import './default.scss';
 // styles end
 
-// helpers start
 const overlineData = (storyObject, arcSite) => {
   const { display: labelDisplay, url: labelUrl, text: labelText } = (storyObject.label
     && storyObject.label.basic) || {};
   const shouldUseLabel = !!labelDisplay;
 
   const { _id: sectionUrl, name: sectionText } = (storyObject.websites
-      && storyObject.websites[arcSite]
-      && storyObject.websites[arcSite].website_section)
-    || {};
+    && storyObject.websites[arcSite]
+    && storyObject.websites[arcSite].website_section)
+  || {};
 
   return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
 };
@@ -60,6 +59,7 @@ const unserializeStory = (arcSite) => (storyObject) => {
     overlineText,
     resizedImageOptions: extractResizedParams(storyObject),
     subType: extractSubType(storyObject),
+    premium: storyObject.isPremium || '',
   };
 };
 
@@ -212,6 +212,7 @@ const TopTableList = (props) => {
                 overlineText,
                 resizedImageOptions,
                 subType,
+                premium,
               } = itemObject;
               const url = element?.websites[arcSite]?.website_url || '';
               return (
@@ -239,6 +240,7 @@ const TopTableList = (props) => {
                   targetFallbackImage={targetFallbackImage}
                   arcSite={arcSite}
                   subType={subType}
+                  premium={premium}
                 />
               );
             })

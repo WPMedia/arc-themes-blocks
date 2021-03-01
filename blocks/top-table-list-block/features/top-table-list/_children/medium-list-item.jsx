@@ -30,6 +30,7 @@ const MediumListItem = (props) => {
     placeholderResizedImageOptions,
     imageRatio,
     subType,
+    premium,
   } = props;
   const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
@@ -98,15 +99,16 @@ const MediumListItem = (props) => {
     return null;
   };
 
+  const premiumClass = (premium) ? ' premium' : '';
   const ratios = ratiosFor('MD', imageRatio);
   const promoType = discoverPromoType(element);
 
   return (
     <>
-      <article className={`container-fluid medium-promo ${subType}`} key={id}>
+      <article className={`container-fluid medium-promo ${subType}${premiumClass}`} key={id}>
         <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showImageMD
-            && (
+          && (
             <a
               className="image-link"
               href={websiteURL}
@@ -146,7 +148,7 @@ const MediumListItem = (props) => {
               )}
               <PromoLabel type={promoType} />
             </a>
-            )}
+          )}
           {/* customFields.headlinePositionMD === 'below' && */
             (customFields.showHeadlineMD
               || customFields.showDescriptionMD

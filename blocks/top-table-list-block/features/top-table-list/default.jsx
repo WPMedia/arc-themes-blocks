@@ -124,10 +124,10 @@ const TopTableList = (props) => {
   const {
     customFields: {
       listContentConfig: { contentService = '', contentConfigValues = {} } = {},
-      offsetOverride = 0,
       extraLarge = 0,
       large = 0,
       medium = 0,
+      offsetOverride = 0,
       small = 0,
       storiesPerRowSM = 2,
     } = {},

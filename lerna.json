@@ -3,7 +3,7 @@
     "dist/blocks/*",
     "components/*"
   ],
-  "version": "5.9.19",
+  "version": "5.9.18",
   "ignoreChanges": [
     "**/node_modules/**",
     "**/package-lock.json"

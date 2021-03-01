@@ -20,6 +20,7 @@ jest.mock('fusion:context', () => ({
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Gallery: (props, children) => (<div {...props}>{ children }</div>),
+  LazyLoad: ({ children }) => <>{ children }</>,
 }));
 
 jest.mock('fusion:intl', () => ({

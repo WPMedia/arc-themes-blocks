@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
@@ -94,7 +94,7 @@ class CardList extends React.Component {
   }
 
   render() {
-    const { customFields: { title } = {}, arcSite } = this.props;
+    const { customFields: { title, lazyLoad = false } = {}, arcSite } = this.props;
     const {
       cardList: { content_elements: pageContent = [] } = {},
       placeholderResizedImageOptions,
@@ -115,26 +115,76 @@ class CardList extends React.Component {
     );
     const targetFallbackImage = this.getFallbackImageURL();
 
-    return (
-      (contentElements.length > 0
-        && (
-          <div className="card-list-container">
-            <div className="simple-results-list-container">
+    const CardListRender = () => (
+      <div className="card-list-container">
+        <div className="simple-results-list-container">
+          {
+            title
+              ? (
+                <Title
+                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  className="card-list-title"
+                >
+                  {title}
+                </Title>
+              )
+              : ''
+          }
+          <article
+            className="list-item-simple"
+            key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
+          >
+            <a
+              href={contentElements[0].websites[arcSite].website_url}
+              className="list-anchor card-list--link-container vertical-align-image"
+              aria-label={contentElements[0].headlines.basic}
+            >
               {
-                title
-                  ? (
-                    <Title
-                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                      className="card-list-title"
-                    >
-                      {title}
-                    </Title>
-                  )
-                  : ''
+                extractImage(contentElements[0].promo_items) ? (
+                  <Image
+                    url={extractImage(contentElements[0].promo_items)}
+                    alt={contentElements[0].headlines.basic}
+                    smallWidth={377}
+                    smallHeight={283}
+                    mediumWidth={377}
+                    mediumHeight={283}
+                    largeWidth={377}
+                    largeHeight={283}
+                    resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+                  />
+                ) : (
+                  <Image
+                    smallWidth={377}
+                    smallHeight={283}
+                    mediumWidth={377}
+                    mediumHeight={283}
+                    largeWidth={377}
+                    largeHeight={283}
+                    alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                    url={targetFallbackImage}
+                    breakpoints={getProperties(arcSite)?.breakpoints}
+                    resizedImageOptions={placeholderResizedImageOptions}
+                    resizerURL={getProperties(arcSite)?.resizerURL}
+
+                  />
+                )
               }
-              <article
-                className="list-item-simple"
-                key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
+            </a>
+            { contentElements[0].websites[arcSite].website_section
+              && (
+              <Title
+                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                className="card-list-overline"
+              >
+                {contentElements[0].websites[arcSite].website_section.name}
+              </Title>
+              )}
+            <div>
+              <HeadlineText
+                primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                className="card-list-headline"
               >
                 <a
                   href={contentElements[0].websites[arcSite].website_url}
@@ -142,146 +192,100 @@ class CardList extends React.Component {
                   aria-hidden="true"
                   tabIndex="-1"
                 >
-                  {
-                   extractImage(contentElements[0].promo_items) ? (
-                     <Image
-                       url={extractImage(contentElements[0].promo_items)}
-                       alt={contentElements[0].headlines.basic}
-                       smallWidth={377}
-                       smallHeight={283}
-                       mediumWidth={377}
-                       mediumHeight={283}
-                       largeWidth={377}
-                       largeHeight={283}
-                       resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
-                       breakpoints={getProperties(arcSite)?.breakpoints}
-                       resizerURL={getProperties(arcSite)?.resizerURL}
-                     />
-                   ) : (
-                     <Image
-                       smallWidth={377}
-                       smallHeight={283}
-                       mediumWidth={377}
-                       mediumHeight={283}
-                       largeWidth={377}
-                       largeHeight={283}
-                       alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                       url={targetFallbackImage}
-                       breakpoints={getProperties(arcSite)?.breakpoints}
-                       resizedImageOptions={placeholderResizedImageOptions}
-                       resizerURL={getProperties(arcSite)?.resizerURL}
-
-                     />
-                   )
-                  }
+                  {contentElements[0].headlines.basic}
                 </a>
-                { contentElements[0].websites[arcSite].website_section
-                  && (
-                  <Title
-                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                    className="card-list-overline"
-                  >
-                    {contentElements[0].websites[arcSite].website_section.name}
-                  </Title>
-                  )}
-                <div>
-                  <HeadlineText
-                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                    className="card-list-headline"
+              </HeadlineText>
+              <div className="author-date">
+                <Byline story={contentElements[0]} stylesFor="list" />
+                {/* separator will only be shown if there is at least one author */}
+                { showSeparator && <p className="dot-separator">&#9679;</p> }
+                <ArticleDate
+                  classNames="story-date"
+                  date={contentElements[0].display_date}
+                />
+              </div>
+            </div>
+          </article>
+          {
+            contentElements.slice(1).map((element) => {
+              const {
+                headlines: { basic: headlineText } = {},
+              } = element;
+              const url = element.websites[arcSite].website_url;
+              return (
+                <React.Fragment key={`result-card-${url}`}>
+                  <hr />
+                  <article
+                    className="card-list-item card-list-item-margins"
+                    key={`result-card-${url}`}
+                    type="1"
                   >
                     <a
-                      href={contentElements[0].websites[arcSite].website_url}
-                      className="list-anchor vertical-align-image"
-                      id="card-list--headline-link"
+                      href={url}
+                      className="headline-list-anchor vertical-align-image"
                     >
-                      {contentElements[0].headlines.basic}
-                    </a>
-                  </HeadlineText>
-                  <div className="author-date">
-                    <Byline story={contentElements[0]} stylesFor="list" />
-                    {/* separator will only be shown if there is at least one author */}
-                    { showSeparator && <p className="dot-separator">&#9679;</p> }
-                    <ArticleDate
-                      classNames="story-date"
-                      date={contentElements[0].display_date}
-                    />
-                  </div>
-                </div>
-              </article>
-              {
-                contentElements.slice(1).map((element) => {
-                  const {
-                    headlines: { basic: headlineText } = {},
-                  } = element;
-                  const url = element.websites[arcSite].website_url;
-                  return (
-                    <React.Fragment key={`result-card-${url}`}>
-                      <hr />
-                      <article
-                        className="card-list-item card-list-item-margins"
-                        key={`result-card-${url}`}
-                        type="1"
+                      <HeadlineText
+                        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                        className="headline-text"
                       >
-                        <a
-                          href={url}
-                          className="headline-list-anchor vertical-align-image"
-                        >
-                          <HeadlineText
-                            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                            className="headline-text"
-                          >
-                            {headlineText}
-                          </HeadlineText>
-                        </a>
-                        <a
-                          href={url}
-                          className="list-anchor-image vertical-align-image"
-                          aria-hidden="true"
-                          tabIndex="-1"
-                        >
-                          {
-                            extractImage(element.promo_items)
-                              ? (
-                                <Image
-                                  url={extractImage(element.promo_items)}
-                                  alt={headlineText}
-                                  // small, matches numbered list, is 3:2 aspect ratio
-                                  smallWidth={105}
-                                  smallHeight={70}
-                                  mediumWidth={105}
-                                  mediumHeight={70}
-                                  largeWidth={274}
-                                  largeHeight={183}
-                                  resizedImageOptions={extractResizedParams(element)}
-                                  breakpoints={getProperties(arcSite)?.breakpoints}
-                                  resizerURL={getProperties(arcSite)?.resizerURL}
-                                />
-                              )
-                              : (
-                                <Image
-                                  smallWidth={105}
-                                  smallHeight={70}
-                                  mediumWidth={105}
-                                  mediumHeight={70}
-                                  largeWidth={274}
-                                  largeHeight={183}
-                                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                                  url={targetFallbackImage}
-                                  breakpoints={getProperties(arcSite)?.breakpoints}
-                                  resizedImageOptions={placeholderResizedImageOptions}
-                                  resizerURL={getProperties(arcSite)?.resizerURL}
-                                />
-                              )
-                          }
-                        </a>
-                      </article>
-                    </React.Fragment>
-                  );
-                })
-              }
-            </div>
-          </div>
-        )
+                        {headlineText}
+                      </HeadlineText>
+                    </a>
+                    <a
+                      href={url}
+                      className="list-anchor-image vertical-align-image"
+                      aria-hidden="true"
+                      tabIndex="-1"
+                    >
+                      {
+                        extractImage(element.promo_items)
+                          ? (
+                            <Image
+                              url={extractImage(element.promo_items)}
+                              alt={headlineText}
+                              // small, matches numbered list, is 3:2 aspect ratio
+                              smallWidth={105}
+                              smallHeight={70}
+                              mediumWidth={105}
+                              mediumHeight={70}
+                              largeWidth={274}
+                              largeHeight={183}
+                              resizedImageOptions={extractResizedParams(element)}
+                              breakpoints={getProperties(arcSite)?.breakpoints}
+                              resizerURL={getProperties(arcSite)?.resizerURL}
+                            />
+                          )
+                          : (
+                            <Image
+                              smallWidth={105}
+                              smallHeight={70}
+                              mediumWidth={105}
+                              mediumHeight={70}
+                              largeWidth={274}
+                              largeHeight={183}
+                              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                              url={targetFallbackImage}
+                              breakpoints={getProperties(arcSite)?.breakpoints}
+                              resizedImageOptions={placeholderResizedImageOptions}
+                              resizerURL={getProperties(arcSite)?.resizerURL}
+                            />
+                          )
+                      }
+                    </a>
+                  </article>
+                </React.Fragment>
+              );
+            })
+          }
+        </div>
+      </div>
+    );
+
+    return (
+      contentElements.length > 0 && (
+        <LazyLoad enabled={lazyLoad}>
+          <CardListRender />
+        </LazyLoad>
       )
     );
   }
@@ -298,6 +302,11 @@ CardList.propTypes = {
       },
     ),
     title: PropTypes.string,
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

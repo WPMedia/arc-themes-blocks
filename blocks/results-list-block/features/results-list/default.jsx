@@ -9,7 +9,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
@@ -197,7 +197,7 @@ class ResultsList extends Component {
     const targetFallbackImage = this.getFallbackImageURL();
     const promoElements = resolveDefaultPromoElements(customFields);
 
-    return (
+    const ResultsListRender = () => (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
           const {
@@ -302,7 +302,8 @@ class ResultsList extends Component {
                   { (promoElements.showDate || promoElements.showByline) && (
                     <div className="results-list--author-date">
                       { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
-                      {/* The Separator will only be shown if there is at least one author name */}
+                      {/* The Separator will only be shown if
+                        there is at least one author name */}
                       { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
                       { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                     </div>
@@ -331,6 +332,12 @@ class ResultsList extends Component {
           )
         }
       </div>
+    );
+
+    return (
+      <LazyLoad enabled={customFields?.lazyLoad}>
+        <ResultsListRender />
+      </LazyLoad>
     );
   }
 }
@@ -378,6 +385,11 @@ ResultsList.propTypes = {
         group: 'Show promo elements',
       },
     ),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

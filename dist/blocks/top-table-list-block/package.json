@@ -1,0 +1,41 @@
+{
+  "name": "@mentor-medier/top-table-list-block",
+  "version": "0.0.1-canary.ec2e143c",
+  "description": "Top Table List – Arc Block",
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "contributors": [
+    "Beltran Caliz <beltran.caliz@washpost.com>"
+  ],
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/top-table-list-block"
+  },
+  "peerDependencies": {
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
+    "@wpmedia/video-player-block": "stable",
+    "styled-components": "^4.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

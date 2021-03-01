@@ -28,6 +28,7 @@ class StoryItemContainer extends Component {
       storySizeMap,
       index,
       subType,
+      premium,
     } = this.props;
     return (
       <>
@@ -54,6 +55,7 @@ class StoryItemContainer extends Component {
           targetFallbackImage={targetFallbackImage}
           arcSite={arcSite}
           subType={subType}
+          premium={premium}
         />
       </>
     );

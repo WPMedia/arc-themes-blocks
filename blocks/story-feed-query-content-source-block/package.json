@@ -1,0 +1,29 @@
+{
+  "name": "@mentor-medier/story-feed-query-content-source-block",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "Content source block for story feed queries by Elasticsearch queries",
+  "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "sources"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/story-feed-query-content-source-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx sources"
+  },
+  "peerDependencies": {
+    "@wpmedia/resizer-image-block": "canary"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

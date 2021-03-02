@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the DescriptionText renders correctly 1`] = `
+<p
+  className="sc-bwzfXH gfyHkX"
+>
+  Description
+</p>
+`;
+
+exports[`the HeadlineText renders correctly 1`] = `
+<h2
+  className="sc-bdVaJa gDGmfb"
+>
+  Text
+</h2>
+`;

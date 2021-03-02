@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/top-table-list-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "0.0.1-canary.ec2e143c",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -8,9 +8,9 @@
   ],
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "dist/index.js",
+  "main": "index.js",
   "files": [
-    "dist/"
+    "features"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -35,9 +35,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features",
-    "preversion": "rm -rf ./dist",
-    "version": "babel . -d ./dist -D"
+    "lint": "eslint --ext js --ext jsx features"
   },
   "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

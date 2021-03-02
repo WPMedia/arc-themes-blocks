@@ -1,0 +1,14 @@
+{
+   "byline-block.by-text":{
+      "en":"By",
+      "fr": "Par",
+      "sv":"Av",
+      "no":"Av"
+   },
+   "byline-block.and-text":{
+      "en":"and",
+      "sv":"och",
+      "no":"og",
+      "fr":"et"
+   }
+}

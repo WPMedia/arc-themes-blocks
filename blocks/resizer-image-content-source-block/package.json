@@ -1,0 +1,35 @@
+{
+  "name": "@mentor-medier/resizer-image-content-source-block",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "Pass in a raw image url, get some size options for that image generated via thumbor-lite",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/resizer-image-content-source-block"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "files": [
+    "sources"
+  ],
+  "keywords": [
+    "thumbor",
+    "thumbor-lite",
+    "image-resizer",
+    "responsive",
+    "images"
+  ],
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "license": "CC-BY-NC-ND-4.0",
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5",
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "canary"
+  }
+}

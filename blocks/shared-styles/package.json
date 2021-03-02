@@ -1,0 +1,28 @@
+{
+  "name": "@mentor-medier/shared-styles",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "Fusion News Theme Shared Styles",
+  "author": "Brent Miller <brent.miller@washpost.com>",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "scss",
+    "_children"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/shared-styles"
+  },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable"
+  },
+  "scripts": {},
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

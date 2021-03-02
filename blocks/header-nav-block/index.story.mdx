@@ -1,0 +1,16 @@
+import HeaderNav from './features/navigation/default'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+<Meta title="Header Nav" component={HeaderNav} />
+
+# Header Nav
+
+## Stories
+
+** Custom Header Nav **
+
+<Preview>
+  <Story name="Closed Header Nav">
+    <HeaderNav customSearchAction={text => alert(text)}/>
+  </Story>
+</Preview>

@@ -1,6 +1,5 @@
 {
   "packages": [
-    "dist/blocks/*",
     "components/*"
   ],
   "version": "5.9.18",

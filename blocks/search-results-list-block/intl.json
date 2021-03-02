@@ -1,0 +1,21 @@
+{
+   "search-results-block.search-button":{
+      "en":"Search",
+      "sv":"Sök",
+      "no":"Søk",
+      "fr":"Rechercher"
+   },
+   "search-results-block.search-result-number":{
+      "en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
+      "sv":"%{smart_count} resultat för ”%{searchTerm}”",
+      "no":"%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+      "fr":"%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\""
+   
+      },
+   "search-results-block.see-more-button":{
+      "en":"See More",
+      "sv":"Fler artiklar",
+      "no":"Se mer",
+      "fr":"En savoir plus"
+   }
+}

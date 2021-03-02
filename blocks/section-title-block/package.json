@@ -1,0 +1,33 @@
+{
+  "name": "@mentor-medier/section-title-block",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "Fusion News Theme section title block",
+  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/section-title-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable"
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

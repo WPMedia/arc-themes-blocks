@@ -1,0 +1,26 @@
+{
+   "global.gallery-expand-button":{
+      "en":"Expand",
+      "sv":"Förstora",
+      "no":"Utvid",
+      "fr":"Développer"
+   },
+   "global.gallery-page-count-text":{
+      "en":"%{current} of %{total}",
+      "sv":"%{current} av %{total}",
+      "no":"%{current} av %{total}",
+      "fr":"%{current} de %{total}"
+   },
+   "global.gallery-autoplay-button":{
+      "en":"Autoplay",
+      "sv":"Spela upp",
+      "no":"Spill av",
+      "fr":"Lecture automatique"
+   },
+   "global.gallery-pause-autoplay-button":{
+      "en":"Pause autoplay",
+      "sv":"Pausa",
+      "no":"Stopp",
+      "fr":"Mettre en pause la lecture automatique"
+   }
+}

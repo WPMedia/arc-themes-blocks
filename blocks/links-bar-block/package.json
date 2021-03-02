@@ -1,0 +1,34 @@
+{
+  "name": "@mentor-medier/links-bar-block",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "Fusion News Theme links bar block",
+  "author": "SangHee Kim <sanghee.kim@washpost.com>",
+  "contributors": [
+    "Beltran Caliz <beltran.caliz@washpost.com>"
+  ],
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/links-bar-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "styled-components": "^4.4.0"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

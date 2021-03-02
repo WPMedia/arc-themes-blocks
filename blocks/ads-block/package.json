@@ -1,0 +1,30 @@
+{
+  "name": "@mentor-medier/ads-block",
+  "version": "0.0.0-canary.ec2e143c",
+  "description": "> TODO: description",
+  "author": "nealmalkani <nealm939@gmail.com>",
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/ads-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "dependencies": {
+    "arcads": "^2.0.2",
+    "lazy-child": "^0.2.0"
+  },
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+}

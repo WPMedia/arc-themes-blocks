@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { breakpointCustomField, spacerCustomField, VSpace } from '@wpmedia/shared-styles';
 
-const DoubleChain = ({ children, customFields }) => {
+const DoubleChain = ({ children, customFields = {} }) => {
   if (children && children.length && children.length > 0) {
     // if no columnOne length set, then use the length of the children
     // if no length set, then all children will be put in column one

@@ -36,7 +36,11 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features",
-    "prepublish": "npx babel --config-file=../../babel.config.js .  -d dist -D"
+    "prepare": "npx babel .  -d dist -D"
   },
-  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
 }

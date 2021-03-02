@@ -8,7 +8,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const primaryFontBlock = () => {
+export const primaryFont = () => {
   const label = 'Font Color';
   const options = {
     Ignore: '',
@@ -29,7 +29,7 @@ export const primaryFontBlock = () => {
   );
 };
 
-export const secondaryFontBlock = () => {
+export const secondaryFont = () => {
   const label = 'Font Color';
   const options = {
     Ignore: '',

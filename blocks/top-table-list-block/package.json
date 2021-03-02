@@ -8,9 +8,9 @@
   ],
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "features"
+    "dist"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

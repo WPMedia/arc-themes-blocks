@@ -6,9 +6,9 @@ import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import {
+  extractImageFromStory,
   extractResizedParams,
   imageRatioCustomField,
-  extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {

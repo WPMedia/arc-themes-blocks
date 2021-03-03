@@ -7,6 +7,7 @@ const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({

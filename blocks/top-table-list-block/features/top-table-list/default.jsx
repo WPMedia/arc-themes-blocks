@@ -71,7 +71,14 @@ class TopTableListWrapper extends Component {
     this.state = {
       placeholderResizedImageOptions: {},
     };
-    this.fetchPlaceholder();
+
+    const { lazyLoad } = props.customFields;
+
+    this.lazyLoad = lazyLoad;
+
+    if (lazyLoad && typeof window === 'undefined') { // On Server
+      this.fetchPlaceholder();
+    }
   }
 
   getFallbackImageURL() {
@@ -104,15 +111,20 @@ class TopTableListWrapper extends Component {
   }
 
   render() {
+    if (this.lazyLoad && typeof window === 'undefined') { // On Server
+      return null;
+    }
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
     return (
-      <TopTableList
+      <LazyLoad enabled={this.lazyLoad}>
+        <TopTableList
         // eslint-disable-next-line react/jsx-props-no-spreading
-        {...this.props}
-        placeholderResizedImageOptions={placeholderResizedImageOptions}
-        targetFallbackImage={targetFallbackImage}
-      />
+          {...this.props}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
+        />
+      </LazyLoad>
     );
   }
 }
@@ -128,7 +140,6 @@ const TopTableList = (props) => {
       medium = 0,
       small = 0,
       storiesPerRowSM = 2,
-      lazyLoad = false,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -246,9 +257,7 @@ const TopTableList = (props) => {
   );
 
   return (
-    <LazyLoad enabled={lazyLoad}>
-      <TopTableListRender />
-    </LazyLoad>
+    <TopTableListRender />
   );
 };
 

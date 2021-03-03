@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import getProperties from 'fusion:properties';
-
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
@@ -66,6 +65,7 @@ class NumberedList extends Component {
         showHeadline = true,
         showImage = true,
         title = '',
+        lazyLoad,
       },
       arcSite,
     } = this.props;
@@ -76,7 +76,7 @@ class NumberedList extends Component {
 
     const targetFallbackImage = this.getFallbackImageURL();
 
-    return (
+    const NumberedListRender = () => (
       <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
           <PrimaryFont as="h2" className="list-title">
@@ -136,7 +136,7 @@ class NumberedList extends Component {
                       mediumHeight={70}
                       largeWidth={274}
                       largeHeight={183}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      alt={getProperties(arcSite)?.primaryLogoAlt || 'Placeholder logo'}
                       url={targetFallbackImage}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizedImageOptions={placeholderResizedImageOptions}
@@ -151,6 +151,12 @@ class NumberedList extends Component {
           );
         }) : null}
       </div>
+    );
+
+    return (
+      <LazyLoad enabled={lazyLoad}>
+        <NumberedListRender />
+      </LazyLoad>
     );
   }
 }
@@ -173,6 +179,11 @@ NumberedList.propTypes = {
       label: 'Show image',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

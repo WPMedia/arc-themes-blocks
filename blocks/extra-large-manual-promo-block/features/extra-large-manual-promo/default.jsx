@@ -7,7 +7,7 @@ import { useFusionContext } from 'fusion:context';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h2`
@@ -54,7 +54,7 @@ const ExtraLargeManualPromo = ({ customFields }) => {
     </a>
   ), [customFields.linkURL, customFields.newTab]);
 
-  return (
+  const ExtraLargeManualPromoRender = () => (
     <>
       <article className="container-fluid xl-large-promo xl-large-manual-promo">
         <div className="row">
@@ -118,6 +118,12 @@ const ExtraLargeManualPromo = ({ customFields }) => {
       <hr />
     </>
   );
+
+  return (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <ExtraLargeManualPromoRender />
+    </LazyLoad>
+  );
 };
 
 ExtraLargeManualPromo.propTypes = {
@@ -180,6 +186,11 @@ ExtraLargeManualPromo.propTypes = {
       },
     ),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

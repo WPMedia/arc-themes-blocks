@@ -12,6 +12,7 @@ import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
 import {
   Image,
+  LazyLoad,
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
@@ -148,7 +149,7 @@ const ExtraLargePromo = ({ customFields }) => {
     : extractResizedParams(content);
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
-  return content && (
+  const ExtraLargePromoRender = () => (
     <>
       <article className="container-fluid xl-large-promo">
         <div className="row">
@@ -216,6 +217,12 @@ const ExtraLargePromo = ({ customFields }) => {
       <hr />
     </>
   );
+
+  return content && (
+    <LazyLoad enabled={customFields?.lazyLoad}>
+      <ExtraLargePromoRender />
+    </LazyLoad>
+  );
 };
 
 ExtraLargePromo.propTypes = {
@@ -277,6 +284,11 @@ ExtraLargePromo.propTypes = {
       label: 'Play video in place',
       group: 'Art',
       defaultValue: false,
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

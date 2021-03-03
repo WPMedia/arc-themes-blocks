@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
@@ -7,6 +7,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,
+  LazyLoad: ({ children }) => <>{ children }</>,
 }));
 const { default: mockData } = require('./mock-data');
 
@@ -16,6 +17,11 @@ jest.mock('fusion:themes', () => (
     'secondary-font-family': 'fontSecondary',
   })
 ));
+
+jest.mock('@wpmedia/shared-styles', () => ({
+  PrimaryFont: ({ children }) => <div id="primary-font-mock">{ children }</div>,
+  SecondaryFont: ({ children }) => <div id="secondary-font-mock">{ children }</div>,
+}));
 
 describe('The numbered-list-block', () => {
   describe('render a list of numbered-list-items', () => {
@@ -37,11 +43,12 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList
+      const wrapper = mount(<NumberedList
         customFields={customFields}
         arcSite="the-sun"
         deployment={jest.fn((path) => path)}
       />);
+
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
@@ -80,7 +87,7 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList
+      const wrapper = mount(<NumberedList
         customFields={customFields}
         arcSite="the-sun"
         deployment={jest.fn((path) => path)}
@@ -92,7 +99,7 @@ describe('The numbered-list-block', () => {
         expect(wrapper.find('.numbered-list-container').childAt(4).find('.list-anchor-image').length).toEqual(1);
         const placeholderImage = wrapper.find('.numbered-list-container').childAt(4).find('.list-anchor-image').children();
         // the placeholder component is mocked globally in jest mocks with this alt tag
-        expect(placeholderImage.html()).toEqual('<img alt="test"/>');
+        expect(placeholderImage.html()).toEqual('<img alt="test">');
         expect(wrapper.find('.numbered-list-container').childAt(6).find('.headline-list-anchor').find('.headline-text')
           .children()
           .text()).toEqual('Story with video as the Lead Art');
@@ -117,7 +124,7 @@ describe('The numbered-list-block', () => {
       };
       NumberedList.prototype.fetchContent = jest.fn().mockReturnValue(mockData);
 
-      const wrapper = shallow(<NumberedList
+      const wrapper = mount(<NumberedList
         customFields={customFields}
         arcSite="dagen"
         deployment={jest.fn((path) => path)}

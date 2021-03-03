@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import SmallManualPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <div />,
+  Image: ({ url }) => <img src={url} alt="fake test image" />,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -42,9 +42,24 @@ describe('the small promo feature', () => {
     expect(wrapper.find('.container-fluid')).toHaveLength(1);
   });
 
-  it('should have two link elements by default', () => {
+  it('should have two link elements by default with 4:3 default ratio', () => {
     const wrapper = mount(<SmallManualPromo customFields={config} />);
     expect(wrapper.find('a')).toHaveLength(2);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(267);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<SmallManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<SmallManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(267);
   });
 
   it('should have one img when show image is true', () => {
@@ -96,5 +111,19 @@ describe('the small promo feature', () => {
   it('should have one line separator', () => {
     const wrapper = mount(<SmallManualPromo customFields={config} />);
     expect(wrapper.find('SmallManualPromo > hr')).toHaveLength(1);
+  });
+
+  it('should render even without a link url', () => {
+    const imageURL = 'www.google.com/fake.png';
+    const noLinkURLConfig = {
+      imageURL,
+    };
+
+    const wrapper = mount(<SmallManualPromo customFields={noLinkURLConfig} />);
+    // testing for whether that import is shallow component
+    expect(wrapper.find('Image')).toHaveLength(1);
+
+    // testing whether the image url was indeed passed down
+    expect(wrapper.find('img').prop('src')).toEqual(imageURL);
   });
 });

@@ -16,7 +16,9 @@
 
 .horizontal-links-menu {
   align-items: center;
+  display: flex;
   font-size: calculateRem(14px);
+  height: 100%;
   justify-content: center;
 
   a {

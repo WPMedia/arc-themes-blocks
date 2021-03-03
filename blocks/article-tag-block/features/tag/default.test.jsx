@@ -4,9 +4,6 @@ import { mount } from 'enzyme';
 describe('the article tag block', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-  jest.mock('@wpmedia/engine-theme-sdk', () => ({
-    LazyLoad: ({ children }) => <>{ children }</>,
-  }));
 
   describe('when the global content has an array of tags in its taxonomy', () => {
     const mockReturnData = {

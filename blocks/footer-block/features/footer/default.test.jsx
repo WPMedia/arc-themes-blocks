@@ -107,11 +107,9 @@ jest.mock('fusion:context', () => ({
     deployment: jest.fn((path) => path),
   })),
 }));
+
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockPayload)),
-}));
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  LazyLoad: ({ children }) => <>{ children }</>,
 }));
 
 describe('the footer feature for the default output type', () => {
@@ -302,7 +300,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is provided', () => {
       it('should show copyright text', () => {
         getProperties.mockImplementation(() => ({ copyrightText: 'my copyright text' }));
-        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('my copyright text');
       });
@@ -311,7 +309,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is not provided', () => {
       it('should not show copyright text', () => {
         getProperties.mockImplementation(() => ({ }));
-        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('');
       });

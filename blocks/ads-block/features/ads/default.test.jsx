@@ -4,10 +4,6 @@ import { useFusionContext } from 'fusion:context';
 import { shallow, mount } from 'enzyme';
 import ArcAd from './default';
 
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  LazyLoad: ({ children }) => <>{ children }</>,
-}));
-
 const SITE_PROPS_MOCK = {
   breakpoints: {
     small: 0,

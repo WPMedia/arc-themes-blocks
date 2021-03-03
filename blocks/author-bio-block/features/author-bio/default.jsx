@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
@@ -20,7 +19,6 @@ import {
   WhatsAppIcon,
   SoundCloudIcon,
   RssIcon,
-  LazyLoad,
 } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 
@@ -85,12 +83,10 @@ const renderAuthorInfo = (author, arcSite) => {
   );
 };
 
-const AuthorBio = (props) => {
+const AuthorBio = () => {
   const { globalContent: content, arcSite } = useFusionContext();
   const { credits = {} } = content;
   const { by = [] } = credits;
-  const { customFields = {} } = props || {};
-  const { lazyLoad = false } = customFields;
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
@@ -333,7 +329,7 @@ const AuthorBio = (props) => {
     return null;
   }
 
-  const AuthorBioRender = () => (
+  return (
     <AuthorBioStyled
       className="author-bio"
       primaryFont={getThemeStyle(arcSite)['primary-font-family']}
@@ -342,22 +338,6 @@ const AuthorBio = (props) => {
       {authors}
     </AuthorBioStyled>
   );
-
-  return (
-    <LazyLoad enabled={lazyLoad}>
-      <AuthorBioRender />
-    </LazyLoad>
-  );
-};
-
-AuthorBio.propTypes = {
-  customFields: PropTypes.shape({
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
-  }),
 };
 
 AuthorBio.label = 'Short Author Bio – Arc Block';

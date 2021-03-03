@@ -7,7 +7,6 @@ const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

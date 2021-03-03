@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import {
-  Gallery, ImageMetadata, Image, LazyLoad,
+  Gallery, ImageMetadata, Image,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
@@ -235,7 +235,7 @@ const ArticleBodyChain = ({ children }) => {
     globalContent: items = {}, customFields = {}, arcSite, id,
   } = useFusionContext();
   const { content_elements: contentElements = [], location } = items;
-  const { elementPlacement: adPlacementConfigObj = {}, lazyLoad = false } = customFields;
+  const { elementPlacement: adPlacementConfigObj = {} } = customFields;
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
@@ -273,23 +273,14 @@ const ArticleBodyChain = ({ children }) => {
     return parseArticleItem(contentElement, index, arcSite, phrases, id);
   }));
 
-  const ArticleBodyRender = () => {
-    const themeStyle = getThemeStyle(arcSite) || {};
-    return (
-      <ArticleBody
-        className="article-body-wrapper"
-        primaryFont={themeStyle['primary-font-family']}
-        secondaryFont={themeStyle['secondary-font-family']}
-      >
-        { articleBody }
-      </ArticleBody>
-    );
-  };
-
   return (
-    <LazyLoad enabled={lazyLoad}>
-      <ArticleBodyRender />
-    </LazyLoad>
+    <ArticleBody
+      className="article-body-wrapper"
+      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+      secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+    >
+      { articleBody }
+    </ArticleBody>
   );
 };
 
@@ -299,11 +290,6 @@ ArticleBodyChain.propTypes = {
       label: 'Ad placements',
       group: 'Inline ads',
       description: 'Places your inline article body ads in the article body chain. For each ad feature in the chain, fill in two values below: Field 1) The position of the ad within the chain and Field 2) the paragraph number that this ad should follow in the article body. For example, entering 1 and 3 would mean that the first ad in the article body chain will be placed after the third paragraph in the article.',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

@@ -8,22 +8,6 @@ const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
-jest.mock('@wpmedia/byline-block', () => ({
-  __esModule: true,
-  default: function Byline() { return <div />; },
-}));
-
-jest.mock('@wpmedia/date-block', () => ({
-  __esModule: true,
-  default: function ArticleDate() { return <div />; },
-}));
-
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  __esModule: true,
-  Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-}));
-
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'http://test/resources/fallback.jpg',
   resizerURL: 'https://resizer.me',

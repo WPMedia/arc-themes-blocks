@@ -1,0 +1,43 @@
+{
+  "name": "@mentor-medier/top-table-list-block",
+  "version": "0.0.0-beta.57bd5321",
+  "description": "Top Table List – Arc Block",
+  "author": "Jack Howard <jack.howard@washpost.com>",
+  "contributors": [
+    "Beltran Caliz <beltran.caliz@washpost.com>"
+  ],
+  "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "dist/index.js",
+  
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/mentor-medier/fusion-news-theme-blocks.git",
+    "directory": "blocks/top-table-list-block"
+  },
+  "peerDependencies": {
+    "@wpmedia/byline-block": "canary",
+    "@wpmedia/date-block": "canary",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/overline-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
+    "@wpmedia/video-player-block": "stable",
+    "styled-components": "^4.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features",
+    "prepare": "npx babel --root-mode upward . -d dist -D --ignore **/dist --verbose"
+  },
+  "gitHead": "57bd5321bbc6f6c87cd619386093d06b4a299839",
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

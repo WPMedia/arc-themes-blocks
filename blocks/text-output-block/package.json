@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/text-output-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "0.0.0-beta.f00b1dd4",
   "description": "Fusion News Theme text output type",
   "author": "nelson fernandez <nelson.fernandez@washport.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -25,5 +25,5 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   },
-  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5"
 }

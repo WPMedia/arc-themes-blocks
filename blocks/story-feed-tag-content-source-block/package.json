@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/story-feed-tag-content-source-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "0.0.0-beta.f00b1dd4",
   "description": "Content source block for story feed queries by tag",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -28,5 +28,5 @@
   "dependencies": {
     "@arc-core-components/content-source_story-feed_tag-v4": "^1.0.6-beta.0"
   },
-  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
+  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5"
 }

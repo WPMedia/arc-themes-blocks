@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/top-table-list-block",
-  "version": "0.0.1-canary.ec2e143c",
+  "version": "0.0.0-beta.f00b1dd4",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -36,10 +36,9 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features",
-    "prepare": "npx babel .  -d dist -D --root-mode upward"
+    "prepare": "npx babel --root-mode upward . -d dist -D --ignore **/dist"
   },
-  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5",
-  "dependencies": {},
+  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5",
   "devDependencies": {
     "babel-cli": "^6.26.0"
   }

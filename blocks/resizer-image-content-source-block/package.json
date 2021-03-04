@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/resizer-image-content-source-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "0.0.0-beta.f00b1dd4",
   "description": "Pass in a raw image url, get some size options for that image generated via thumbor-lite",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   ],
   "author": "Jack Howard <jack.howard@washpost.com>",
   "license": "CC-BY-NC-ND-4.0",
-  "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5",
+  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5",
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary"
   }

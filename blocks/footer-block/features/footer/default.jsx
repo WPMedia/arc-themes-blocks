@@ -5,7 +5,6 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import Link from '@wpmedia/links-bar-block';
 import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
 import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
@@ -26,7 +25,7 @@ export const StyledSocialContainer = styled.div`
   }
 `;
 
-const Footer = ({ customFields: { navigationConfig, lazyLoad = false } }) => {
+const Footer = ({ customFields: { navigationConfig } }) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
     facebookPage,
@@ -100,7 +99,7 @@ const Footer = ({ customFields: { navigationConfig, lazyLoad = false } }) => {
     </>
   );
 
-  const FooterRender = () => (
+  return (
     <div className="container layout-section">
       <div className="section-separator">
         <section className="footer-header">
@@ -137,6 +136,7 @@ const Footer = ({ customFields: { navigationConfig, lazyLoad = false } }) => {
               {item.node_type === 'link' ? <Link href={item.url} name={item.display_name} /> : <Link href={item._id} name={item.name} />}
             </li>
           )) : [];
+
           return (
             <FooterSection
               className="footer-section col-sm-12 col-md-6 col-lg-xl-3"
@@ -164,12 +164,6 @@ const Footer = ({ customFields: { navigationConfig, lazyLoad = false } }) => {
       }
     </div>
   );
-
-  return (
-    <LazyLoad enabled={lazyLoad}>
-      <FooterRender />
-    </LazyLoad>
-  );
 };
 
 Footer.propTypes = {
@@ -177,11 +171,6 @@ Footer.propTypes = {
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
       label: 'Navigation',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

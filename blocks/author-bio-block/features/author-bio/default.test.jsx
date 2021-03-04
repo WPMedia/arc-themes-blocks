@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 jest.mock('@wpmedia/news-theme-css', () => ({
   lightenDarkenColor: () => 'blue',
@@ -11,7 +11,6 @@ jest.mock('fusion:themes', () => (jest.fn(() => ({
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
   EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,
   LinkedInIcon: () => <svg>LinkedInIcon</svg>,
   InstagramIcon: () => <svg>InstagramIcon</svg>,
@@ -244,7 +243,7 @@ describe('Given the list of author(s) from the article', () => {
         },
       })),
     }));
-    const wrapper = mount(<AuthorBio />);
+    const wrapper = shallow(<AuthorBio />);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('Image').prop('url')).toEqual('https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg');
   });

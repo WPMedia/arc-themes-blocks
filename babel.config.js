@@ -1,6 +1,6 @@
 module.exports = {
   ignore: [
-    "./dist",
+    './dist',
   ],
   plugins: [
     ['@babel/plugin-proposal-decorators', { legacy: true }],

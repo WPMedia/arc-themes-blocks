@@ -16,8 +16,8 @@ import {
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
-const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'))
-  .catch(() => ({ default: () => <p>Ad block not found</p> }));
+const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block')
+  .catch(() => ({ default: () => <p>Ad block not found</p> })));
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {

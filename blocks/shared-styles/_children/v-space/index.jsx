@@ -31,9 +31,9 @@ VSpace.defaultProps = {
 };
 
 VSpace.propTypes = {
-  space: PropTypes.string,
-  breakpoint: PropTypes.string,
-  breakpointSpace: PropTypes.string,
+  space: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
+  breakpoint: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  breakpointSpace: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
 };
 
 export default VSpace;

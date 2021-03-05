@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { Image, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -48,7 +48,7 @@ const MediumManualPromo = ({ customFields }) => {
     </a>
   ), [customFields.linkURL, customFields.newTab]);
 
-  const MediumManualPromoRender = () => (
+  return (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
@@ -91,12 +91,6 @@ const MediumManualPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
-  );
-
-  return (
-    <LazyLoad enabled={customFields?.lazyLoad}>
-      <MediumManualPromoRender />
-    </LazyLoad>
   );
 };
 
@@ -145,11 +139,6 @@ MediumManualPromo.propTypes = {
       },
     ),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

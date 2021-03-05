@@ -1,11 +1,8 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
 import Header from './default';
 
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  LazyLoad: ({ children }) => <>{ children }</>,
-}));
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open-Sans' }));
 
@@ -14,23 +11,20 @@ describe('The header block', () => {
     const customFields = {
       text: 'Header',
       size: 'Extra Large',
-      lazyLoad: false,
     };
-    const wrapper = mount(<Header customFields={customFields} />);
-    const headerEl = wrapper.find('HeaderType StyledComponent');
-    expect(headerEl).toHaveLength(1);
+    const wrapper = shallow(<Header customFields={customFields} />);
 
     it('should render a text element', () => {
-      expect(headerEl.length).toEqual(1);
-      expect(headerEl.text()).toEqual('Header');
+      expect(wrapper.length).toEqual(1);
+      expect(wrapper.text()).toEqual('Header');
     });
 
     it('should set the primary font of the header', () => {
-      expect(headerEl).toHaveProp('primaryFont', 'Open-Sans');
+      expect(wrapper).toHaveProp('primaryFont', 'Open-Sans');
     });
 
     it('should have the appropriate class', () => {
-      expect(headerEl).toHaveProp('className', 'header-block');
+      expect(wrapper).toHaveProp('className', 'header-block');
     });
   });
 

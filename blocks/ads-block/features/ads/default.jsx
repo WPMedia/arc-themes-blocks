@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
+import Lazy from 'lazy-child';
 import { useFusionContext } from 'fusion:context';
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import adMap from './ad-mapping';
 import ArcAdminAd from './_children/ArcAdminAd';
 import { getAdObject } from './ad-helper';
@@ -56,6 +56,24 @@ const ArcAd = (props) => {
       && propsWithContext.outputType === 'amp')
   );
 
+  const LazyLoad = ({ children, enabled }) => (
+    !enabled ? children : (
+      <Lazy
+        offsetBottom={0}
+        offsetLeft={0}
+        offsetRight={0}
+        offsetTop={200}
+        // eslint-disable-next-line arrow-body-style
+        renderPlaceholder={(ref) => {
+          // istanbul ignore next
+          return <div ref={ref} />;
+        }}
+      >
+        { children }
+      </Lazy>
+    )
+  );
+
   return (
     <StyledAdUnit
       id={`arcad_feature-${instanceId}`}
@@ -97,12 +115,11 @@ ArcAd.propTypes = {
       required: true,
       hidden: false,
     }),
-    lazyLoad: PropTypes.bool.tag({
+    lazyLoad: PropTypes.boolean.tag({
       name: 'Lazy Load Ad?',
       defaultValue: true,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
-    displayAdLabel: PropTypes.bool.tag({
+    displayAdLabel: PropTypes.boolean.tag({
       name: 'Display Advertisement Label?',
       defaultValue: true,
     }),

@@ -7,7 +7,8 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Gallery, ErrorBoundary } from '@wpmedia/engine-theme-sdk';
 
-const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'));
+const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'))
+  .catch(() => ({ default: () => <p>Ad block not found</p> }));
 
 const GalleryFeature = (
   {

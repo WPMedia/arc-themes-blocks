@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/header-nav-block",
-  "version": "0.0.0-beta.f00b1dd4",
+  "version": "0.0.0-beta.9a4082d7",
   "description": "Fusion News Theme header nav block",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
@@ -34,5 +34,5 @@
     "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5"
+  "gitHead": "9a4082d79cb66c23454d8a3ff83809b4e13f760c"
 }

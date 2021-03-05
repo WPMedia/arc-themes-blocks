@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/simple-list-block",
-  "version": "0.0.0-beta.f00b1dd4",
+  "version": "0.0.0-beta.9a4082d7",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -30,5 +30,5 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "f00b1dd46e405bbbb6909c3e3ebad88e95ea6bd5"
+  "gitHead": "9a4082d79cb66c23454d8a3ff83809b4e13f760c"
 }

@@ -9,6 +9,7 @@ jest.mock('@wpmedia/news-theme-css/js/framework', () => ({
   framework: {
     spacers: {
       xl: '0.75rem',
+      sm: '0.5rem',
       xxl: '1rem',
     },
     gridBreakpoints: {
@@ -36,8 +37,9 @@ describe('VSpace Custom Fields', () => {
           "description": "description",
           "group": "spacing",
           "labels": Object {
-            "xl": "xl - 0.75rem",
-            "xxl": "xxl - 1rem",
+            "sm": "0.5rem - sm",
+            "xl": "0.75rem - xl",
+            "xxl": "1rem - xxl",
           },
           "name": "Vertical Block Spacing",
         },
@@ -63,7 +65,7 @@ describe('VSpace Custom Fields', () => {
           "description": "description",
           "group": "spacing",
           "labels": Object {
-            "xl": "xl - 1rem",
+            "xl": "1rem - xl",
           },
           "name": "Vertical Block Spacing",
         },

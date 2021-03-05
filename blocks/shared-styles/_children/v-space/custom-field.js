@@ -3,8 +3,9 @@ import { framework } from '@wpmedia/news-theme-css/js/framework';
 
 const labelAndValueLabelGroup = (keyValueObject) => {
   const newKeyMap = {};
+
   Object.keys(keyValueObject).forEach((item) => {
-    newKeyMap[item] = `${item} - ${keyValueObject[item]}`;
+    newKeyMap[item] = `${keyValueObject[item]} - ${item}`;
   });
   return newKeyMap;
 };

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase, max-len */
-import React, { Component, lazy, Suspense } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
@@ -10,7 +10,6 @@ import {
   Gallery, ImageMetadata, Image, Lightbox,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  ErrorBoundary,
 } from '@wpmedia/engine-theme-sdk';
 
 import './leadart.scss';
@@ -76,8 +75,20 @@ class LeadArt extends Component {
 
     const { arcSite, customFields, id } = this.props;
 
-    const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block')
-      .catch(() => ({ default: () => <p>Ad block not found</p> })));
+    let AdBlock;
+
+    try {
+      const { default: AdFeature } = require('@wpmedia/ads-block');
+      AdBlock = () => (
+        <AdFeature customFields={{
+          adType: '300x250',
+          displayAdLabel: true,
+        }}
+        />
+      );
+    } catch (e) {
+      AdBlock = () => <p>Ad block not found</p>;
+    }
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -203,18 +214,7 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
-            adElement={/* istanbul ignore next */ () => (
-              <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-                <Suspense fallback={<div>Loading Ad block</div>}>
-                  <AdFeature
-                    customFields={{
-                      adType: '300x250',
-                      displayAdLabel: true,
-                    }}
-                  />
-                </Suspense>
-              </ErrorBoundary>
-            )}
+            adElement={/* istanbul ignore next */ () => (<AdBlock />)}
             interstitialClicks={interstitialClicks}
           />
         );

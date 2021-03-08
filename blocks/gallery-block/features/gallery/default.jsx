@@ -1,11 +1,11 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Gallery, ErrorBoundary } from '@wpmedia/engine-theme-sdk';
+import { Gallery } from '@wpmedia/engine-theme-sdk';
 
 const GalleryFeature = (
   {
@@ -15,8 +15,20 @@ const GalleryFeature = (
     } = {},
   },
 ) => {
-  const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block')
-    .catch(() => ({ default: () => <p>Ad block not found</p> })));
+  let AdBlock;
+
+  try {
+    const { default: AdFeature } = require('@wpmedia/ads-block');
+    AdBlock = () => (
+      <AdFeature customFields={{
+        adType: '300x250',
+        displayAdLabel: true,
+      }}
+      />
+    );
+  } catch (e) {
+    AdBlock = () => <p>Ad block not found</p>;
+  }
 
   const { arcSite } = useFusionContext();
   const { resizerURL, galleryCubeClicks, locale = 'en' } = getProperties(arcSite);
@@ -46,18 +58,7 @@ const GalleryFeature = (
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
-      adElement={/* istanbul ignore next */ () => (
-        <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-          <Suspense fallback={<div>Loading ad block</div>}>
-            <AdFeature
-              customFields={{
-                adType: '300x250',
-                displayAdLabel: true,
-              }}
-            />
-          </Suspense>
-        </ErrorBoundary>
-      )}
+      adElement={/* istanbul ignore next */ () => (<AdBlock />)}
       interstitialClicks={interstitialClicks}
     />
   );

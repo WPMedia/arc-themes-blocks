@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/small-manual-promo-block",
-  "version": "0.0.0-beta.9a4082d7",
+  "version": "5.10.0",
   "description": "Fusion News Theme Small Manual Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -28,6 +28,7 @@
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "@wpmedia/shared-styles": "canary",
+    "@wpmedia/resizer-image-block": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "9a4082d79cb66c23454d8a3ff83809b4e13f760c"

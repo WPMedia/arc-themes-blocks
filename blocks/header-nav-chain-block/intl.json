@@ -3,12 +3,20 @@
       "en":"Sections",
       "sv":"Meny",
       "no":"Meny",
-      "fr":"Sections"
+      "fr":"Sections",
+      "de": "Ressorts",
+      "es": "Secciones",
+      "ja": "セクション",
+      "ko": "섹션"
    },
    "header-nav-chain-block.search-text":{
       "en":"Search",
       "sv":"Sök",
       "no":"Søk",
-      "fr":"Rechercher"
+      "fr":"Rechercher",
+      "de": "Suche",
+      "es": "Buscar",
+      "ja": "検索",
+      "ko": "검색"
    }
 }

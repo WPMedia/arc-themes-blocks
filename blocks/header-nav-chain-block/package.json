@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/header-nav-chain-block",
-  "version": "0.0.0-beta.9a4082d7",
+  "version": "5.10.0",
   "description": "Fusion News Theme header nav chain block",
   "author": "Sean Shannon <sean.shannon@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",
@@ -32,7 +32,8 @@
     "styled-components": "^4.4.0"
   },
   "dependencies": {
-    "use-debounce": "^3.4.3"
+    "use-debounce": "^3.4.3",
+    "focus-trap-react": "^8.4.2"
   },
   "gitHead": "9a4082d79cb66c23454d8a3ff83809b4e13f760c"
 }

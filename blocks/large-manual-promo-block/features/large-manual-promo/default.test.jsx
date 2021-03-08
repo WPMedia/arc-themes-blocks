@@ -53,9 +53,24 @@ describe('the large promo feature', () => {
     expect(wrapper.find('a')).toHaveLength(3);
   });
 
-  it('should have one img when show image is true', () => {
+  it('should have one img when show image is true with 4:3 default ratio', () => {
     const wrapper = mount(<LargeManualPromo customFields={config} />);
     expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(283);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<LargeManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(212);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<LargeManualPromo customFields={myConfig} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(251);
   });
 
   it('Headline div should have class .col-md-xl-6 when show image is true', () => {

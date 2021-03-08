@@ -4,13 +4,17 @@
 _Information about what you changed for this PR_
 
 ## Jira Ticket
-- [PEN-](https://arcpublishing.atlassian.net/browse/PEN-)
+- [TMEDIA-](https://arcpublishing.atlassian.net/browse/TMEDIA-)
 
 ## Acceptance Criteria
 _copy from ticket_
 
 ## Test Steps
 - Add test steps a reviewer must complete to test this PR
+
+1. Checkout this branch `git checkout {branch name}`
+2. Run fusion repo with linked blocks `npx fusion start -f -l {blocks to link}`
+3. {Next ....}
 
 ## Effect Of Changes
 ### Before
@@ -32,7 +36,7 @@ _Examples of dependencies or side effects are:_
 
 ## Author Checklist
 _The author of the PR should fill out the following sections to ensure this PR is ready for review._
-- [ ] Confirmed all the test steps a reviewer will follow above are working. 
+- [ ] Confirmed all the test steps a reviewer will follow above are working.
 - [ ] Confirmed there are no linter errors. Please run `npm run lint` to check for errors. Often, `npm run lint:fix` will fix those errors and warnings.
 - [ ] Ran this code locally and checked that there are not any unintended side effects. For example, that a CSS selector is scoped only to a particular block.
 - [ ] Confirmed this PR has reasonable code coverage. You can run `npm run test:coverage` to see your progress.
@@ -42,11 +46,11 @@ _The author of the PR should fill out the following sections to ensure this PR i
 please explain why (so that we can fix it whenever it gets refactored).
 - [ ] Confirmed relevant documentation has been updated/added.
 
-## Reviewer Checklist 
+## Reviewer Checklist
 _The reviewer of the PR should copy-paste this template into the review comments on review._
 
 - [ ] Linting code actions have passed.
 - [ ] Ran the code locally based on the test instructions.
   - [ ] I don’t think this is needed to be tested locally. For example, a padding style change (storybook?) or a logic change (write a test).
-- [ ] I am a member of the engine theme team so that I can approve and merge this. If you're not on the team, you won't have access to approve and merge this pr. 
+- [ ] I am a member of the engine theme team so that I can approve and merge this. If you're not on the team, you won't have access to approve and merge this pr.
 - [ ] Looked to see that the new or changed code has code coverage, specifically. We want the global code coverage to keep on going up with targeted testing.

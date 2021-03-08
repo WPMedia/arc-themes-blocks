@@ -12,11 +12,9 @@ import {
   VideoPlayer as VideoPlayerPresentational,
   ErrorBoundary,
 } from '@wpmedia/engine-theme-sdk';
-// import ArcAd from '@wpmedia/ads-block';
+
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
-
-const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'));
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {
@@ -77,6 +75,9 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
+
+    const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block')
+      .catch(() => ({ default: () => <p>Ad block not found</p> })));
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);

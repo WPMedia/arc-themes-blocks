@@ -13,6 +13,7 @@ describe('the double chain block', () => {
     );
     expect(component).toBeEmptyRender();
   });
+
   it('should put all features into the first column by default', () => {
     const customFields = {};
     const component = shallow(
@@ -24,9 +25,10 @@ describe('the double chain block', () => {
       </DoubleChain>,
     );
     expect(component).not.toBeEmptyRender();
-    expect(component.find('.column-1').children().length).toBe(4);
-    expect(component.find('.column-2').children().length).toBe(0);
+    expect(component.find('.row').children().at(0).children().length).toBe(4);
+    expect(component.find('.row').children().at(1).children().length).toBe(0);
   });
+
   it('should be able to accept a number in the custom field, and that number of features within the chain should appear in the first column. ', () => {
     const customFields = { columnOne: 2 };
     const component = mount(
@@ -38,12 +40,13 @@ describe('the double chain block', () => {
       </DoubleChain>,
     );
 
-    const column1 = component.find('.column-1');
-    const column2 = component.find('.column-2');
+    const column1 = component.find('.row').children().at(0);
+    const column2 = component.find('.row').children().at(1);
 
     expect(column1.text()).toEqual('12');
     expect(column2.text()).toEqual('34');
   });
+
   it('should be able to accept a number in the custom field, any additional features in the chain should be placed in the second column. ', () => {
     const customFields = { columnOne: 1 };
     const component = mount(
@@ -55,14 +58,13 @@ describe('the double chain block', () => {
       </DoubleChain>,
     );
 
-    const column1 = component.find('.column-1');
-    const column2 = component.find('.column-2');
+    const column1 = component.find('.row').children().at(0);
+    const column2 = component.find('.row').children().at(1);
 
     expect(column1.text()).toEqual('1');
     expect(column2.text()).toEqual('234');
-
-    expect(column2.children().length).toBe(3);
   });
+
   it('should render nothing if negative column 1 amount', () => {
     const customFields = { columnOne: -10 };
     const component = mount(

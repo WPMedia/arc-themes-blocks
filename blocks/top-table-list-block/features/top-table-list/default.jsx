@@ -5,7 +5,6 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import {
   extractResizedParams,
   imageRatioCustomField,
@@ -83,7 +82,7 @@ class TopTableListWrapper extends Component {
 
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
-    let targetFallbackImage = getProperties(arcSite)?.fallbackImage;
+    let targetFallbackImage = getProperties(arcSite).fallbackImage;
 
     if (targetFallbackImage && !targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
@@ -190,7 +189,7 @@ const TopTableList = (props) => {
     });
   }
 
-  const TopTableListRender = () => (
+  return (
     <div
       key={id}
       className={`top-table-list-container layout-section ${
@@ -254,10 +253,6 @@ const TopTableList = (props) => {
         </div>
       ))}
     </div>
-  );
-
-  return (
-    <TopTableListRender />
   );
 };
 
@@ -442,11 +437,6 @@ TopTableListWrapper.propTypes = {
       label: 'Show bottom border',
       defaultValue: true,
       group: 'Small story settings',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

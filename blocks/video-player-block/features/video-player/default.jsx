@@ -7,7 +7,6 @@ import getThemeStyle from 'fusion:themes';
 import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  LazyLoad,
 } from '@wpmedia/engine-theme-sdk';
 
 const TitleText = styled.h2`
@@ -44,7 +43,6 @@ const VideoPlayer = (props) => {
     title,
     description,
     websiteURL,
-    lazyLoad,
   } = customFields;
 
   const { id, globalContent = {}, arcSite } = useFusionContext();
@@ -97,7 +95,7 @@ const VideoPlayer = (props) => {
     }
   });
 
-  const VideoPlayerRender = () => (
+  return (
     <div className="container-fluid">
       {alertBadge
         && (
@@ -135,12 +133,6 @@ const VideoPlayer = (props) => {
         </DescriptionText>
         )}
     </div>
-  );
-
-  return (
-    <LazyLoad enabled={lazyLoad}>
-      <VideoPlayerRender />
-    </LazyLoad>
   );
 };
 
@@ -184,11 +176,6 @@ VideoPlayer.propTypes = {
     }),
     alertBadge: PropTypes.string.tag({
       label: 'Alert Badge',
-      group: 'Display settings',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
       group: 'Display settings',
     }),
   }),

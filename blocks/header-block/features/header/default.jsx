@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import './header.scss';
 
 const ExtraLargeHeader = styled.h2`
@@ -30,58 +29,6 @@ const SmallHeader = styled.h5`
   line-height: 24px;
 `;
 
-const HeaderType = ({
-  text, size, arcSite,
-}) => {
-  switch (size) {
-    case 'Extra Large':
-      return (
-        <ExtraLargeHeader
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="header-block"
-        >
-          {text}
-        </ExtraLargeHeader>
-      );
-    case 'Large':
-      return (
-        <LargeHeader
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="header-block"
-        >
-          {text}
-        </LargeHeader>
-      );
-    case 'Medium':
-      return (
-        <MediumHeader
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="header-block"
-        >
-          {text}
-        </MediumHeader>
-      );
-    case 'Small':
-      return (
-        <SmallHeader
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="header-block"
-        >
-          {text}
-        </SmallHeader>
-      );
-    default:
-      return (
-        <MediumHeader
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-          className="header-block"
-        >
-          {text}
-        </MediumHeader>
-      );
-  }
-};
-
 @Consumer
 class Header extends React.Component {
   constructor(props) {
@@ -90,24 +37,60 @@ class Header extends React.Component {
     this.state = { };
   }
 
+  getHeader(text) {
+    const { arcSite, customFields: { size } = {} } = this.props;
+    switch (size) {
+      case 'Extra Large':
+        return (
+          <ExtraLargeHeader
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            className="header-block"
+          >
+            {text}
+          </ExtraLargeHeader>
+        );
+      case 'Large':
+        return (
+          <LargeHeader
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            className="header-block"
+          >
+            {text}
+          </LargeHeader>
+        );
+      case 'Medium':
+        return (
+          <MediumHeader
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            className="header-block"
+          >
+            {text}
+          </MediumHeader>
+        );
+      case 'Small':
+        return (
+          <SmallHeader
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            className="header-block"
+          >
+            {text}
+          </SmallHeader>
+        );
+      default:
+        return (
+          <MediumHeader
+            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            className="header-block"
+          >
+            {text}
+          </MediumHeader>
+        );
+    }
+  }
+
   render() {
-    const {
-      arcSite,
-      customFields: {
-        text = '',
-        lazyLoad = false,
-        size,
-      },
-    } = this.props;
-    return (
-      <LazyLoad enabled={lazyLoad}>
-        <HeaderType
-          text={text}
-          size={size}
-          arcSite={arcSite}
-        />
-      </LazyLoad>
-    );
+    const { customFields: { text = '' } } = this.props;
+    return this.getHeader(text);
   }
 }
 
@@ -115,11 +98,6 @@ Header.propTypes = {
   customFields: PropTypes.shape({
     text: PropTypes.string,
     size: PropTypes.oneOf(['Extra Large', 'Large', 'Medium', 'Small']),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

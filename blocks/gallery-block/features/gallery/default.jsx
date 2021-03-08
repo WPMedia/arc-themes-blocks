@@ -5,19 +5,19 @@ import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Gallery, ErrorBoundary, LazyLoad } from '@wpmedia/engine-theme-sdk';
-
-const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block'));
+import { Gallery, ErrorBoundary } from '@wpmedia/engine-theme-sdk';
 
 const GalleryFeature = (
   {
     customFields: {
       inheritGlobalContent,
       galleryContentConfig,
-      lazyLoad = false,
     } = {},
   },
 ) => {
+  const AdFeature = lazy(/* istanbul ignore next */ () => import('@wpmedia/ads-block')
+    .catch(() => ({ default: () => <p>Ad block not found</p> })));
+
   const { arcSite } = useFusionContext();
   const { resizerURL, galleryCubeClicks, locale = 'en' } = getProperties(arcSite);
   const { globalContent = {} } = useAppContext();
@@ -37,31 +37,29 @@ const GalleryFeature = (
   const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
   return (
-    <LazyLoad enabled={lazyLoad}>
-      <Gallery
-        galleryElements={contentElements}
-        resizerURL={resizerURL}
-        ansId={id}
-        ansHeadline={headlines?.basic ? headlines.basic : ''}
-        expandPhrase={phrases.t('global.gallery-expand-button')}
-        autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
-        pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
-        pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
-        adElement={/* istanbul ignore next */ () => (
-          <ErrorBoundary fallback={<div>Missing Ad block</div>}>
-            <Suspense fallback={<div>Loading ad block</div>}>
-              <AdFeature
-                customFields={{
-                  adType: '300x250',
-                  displayAdLabel: true,
-                }}
-              />
-            </Suspense>
-          </ErrorBoundary>
-        )}
-        interstitialClicks={interstitialClicks}
-      />
-    </LazyLoad>
+    <Gallery
+      galleryElements={contentElements}
+      resizerURL={resizerURL}
+      ansId={id}
+      ansHeadline={headlines?.basic ? headlines.basic : ''}
+      expandPhrase={phrases.t('global.gallery-expand-button')}
+      autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
+      pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
+      pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+      adElement={/* istanbul ignore next */ () => (
+        <ErrorBoundary fallback={<div>Missing Ad block</div>}>
+          <Suspense fallback={<div>Loading ad block</div>}>
+            <AdFeature
+              customFields={{
+                adType: '300x250',
+                displayAdLabel: true,
+              }}
+            />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+      interstitialClicks={interstitialClicks}
+    />
   );
 };
 
@@ -74,11 +72,6 @@ GalleryFeature.propTypes = {
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
       defaultValue: true,
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

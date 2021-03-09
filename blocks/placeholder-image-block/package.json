@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/placeholder-image-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "5.10.0",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {

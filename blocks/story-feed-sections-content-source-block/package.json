@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/story-feed-sections-content-source-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "5.10.0",
   "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/mentor-medier/fusion-news-theme-blocks",

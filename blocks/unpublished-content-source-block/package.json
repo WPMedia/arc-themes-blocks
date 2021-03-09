@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/unpublished-content-source-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "5.10.0",
   "description": "Fusion News Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "contributors": [

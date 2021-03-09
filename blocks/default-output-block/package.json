@@ -1,6 +1,6 @@
 {
   "name": "@mentor-medier/default-output-block",
-  "version": "0.0.0-canary.ec2e143c",
+  "version": "5.10.0",
   "description": "Fusion News Theme default output type",
   "author": "Brent Miller <brent.miller@washport.com>",
   "contributors": [

@@ -60,11 +60,12 @@ const SmallPromoItem = ({ customFields }) => {
 };
 
 const SmallPromo = ({ customFields }) => {
-  if (customFields.lazyLoad && isServerSide()) { // On Server
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad}>
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
       <SmallPromoItem customFields={{ ...customFields }} />
     </LazyLoad>
   );

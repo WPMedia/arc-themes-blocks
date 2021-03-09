@@ -74,6 +74,7 @@ class TopTableListWrapper extends Component {
     const { lazyLoad } = props.customFields;
 
     this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
 
     if (lazyLoad && isServerSide()) { // On Server
       this.fetchPlaceholder();
@@ -110,14 +111,14 @@ class TopTableListWrapper extends Component {
   }
 
   render() {
-    if (this.lazyLoad && isServerSide()) { // On Server
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
       return null;
     }
 
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
     return (
-      <LazyLoad enabled={this.lazyLoad}>
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
         <TopTableList
           {...this.props}
           placeholderResizedImageOptions={placeholderResizedImageOptions}

@@ -35,7 +35,8 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "lint": "eslint --ext js --ext jsx features",
+    "prepare": "npx babel --root-mode upward . -d ./dist -D --ignore **/dist"
   },
   "gitHead": "ec2e143c5527044192233a3f9ff5ce03099b73e5"
 }

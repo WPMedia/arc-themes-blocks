@@ -1,1 +1,36 @@
 
+{
+    "name": "@wpmedia/footer-block",
+    "version": "5.10.0",
+    "description": "Fusion News Theme footer block",
+    "author": "SangHee Kim <sanghee.kim@washpost.com>",
+    "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+    "license": "CC-BY-NC-ND-4.0",
+    "main": "index.js",
+    "files": [
+    "features",
+    "chains",
+    "layouts"
+    ],
+    "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+    },
+    "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/footer-block"
+    },
+    "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+    },
+    "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/links-bar-block": "canary",
+    "@wpmedia/news-theme-css": "stable",
+    "styled-components": "^4.4.0"
+    },
+    "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+    }

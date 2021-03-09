@@ -5,6 +5,7 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import {
   extractResizedParams,
   imageRatioCustomField,
@@ -70,12 +71,11 @@ class TopTableListWrapper extends Component {
     this.state = {
       placeholderResizedImageOptions: {},
     };
-
     const { lazyLoad } = props.customFields;
 
     this.lazyLoad = lazyLoad;
 
-    if (lazyLoad && typeof window === 'undefined') { // On Server
+    if (lazyLoad && isServerSide()) { // On Server
       this.fetchPlaceholder();
     }
   }
@@ -110,15 +110,15 @@ class TopTableListWrapper extends Component {
   }
 
   render() {
-    if (this.lazyLoad && typeof window === 'undefined') { // On Server
+    if (this.lazyLoad && isServerSide()) { // On Server
       return null;
     }
+
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
     return (
       <LazyLoad enabled={this.lazyLoad}>
         <TopTableList
-        // eslint-disable-next-line react/jsx-props-no-spreading
           {...this.props}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
@@ -437,6 +437,11 @@ TopTableListWrapper.propTypes = {
       label: 'Show bottom border',
       defaultValue: true,
       group: 'Small story settings',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

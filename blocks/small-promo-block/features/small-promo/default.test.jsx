@@ -7,6 +7,8 @@ const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -39,6 +41,16 @@ describe('the small promo feature', () => {
         id: 'testId',
       })),
     }));
+  });
+
+  it('renders nothing server side with lazyLoad enabled', () => {
+    const updatedConfig = {
+      ...config,
+      lazyLoad: true,
+    };
+
+    const wrapper = mount(<SmallPromo customFields={updatedConfig} />);
+    expect(wrapper.html()).toBe(null);
   });
 
   it('should have 1 container fluid class', () => {

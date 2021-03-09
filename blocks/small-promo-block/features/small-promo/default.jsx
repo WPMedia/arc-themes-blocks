@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
@@ -15,7 +16,7 @@ import PromoHeadline from './_children/promo_headline';
 import getPromoStyle from './_children/promo_style';
 import getPromoContainer from './_children/promo_container';
 
-const SmallPromo = ({ customFields }) => {
+const SmallPromoItem = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const content = useContent({
@@ -58,6 +59,17 @@ const SmallPromo = ({ customFields }) => {
   ) : null;
 };
 
+const SmallPromo = ({ customFields }) => {
+  if (customFields.lazyLoad && isServerSide()) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad}>
+      <SmallPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 SmallPromo.propTypes = {
   customFields: PropTypes.shape({
     itemContentConfig: PropTypes.contentConfig('ans-item').tag({
@@ -92,6 +104,11 @@ SmallPromo.propTypes = {
       },
     }).isRequired,
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

@@ -76,8 +76,8 @@ describe('VideoPlayer', () => {
     const expectedEmbed = {
       __html: '<div class="powa" id="powa-e924e51b-db94-492e-8346-02283'
     + 'a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346'
-    + '-02283a126943" data-aspect-ratio="0.562" data-api="prod"><!--script src="//d2w3jw6424abwq'
-    + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script--></div>',
+    + '-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq'
+    + '.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
   });
@@ -100,8 +100,8 @@ describe('VideoPlayer', () => {
     const expectedEmbed = {
       __html: '<div class="powa" id="powa-e924" data-org="corecomponents"'
       + ' data-env="prod" data-uuid="e924e51b" data-aspect-ratio="0.562" data-api="prod">'
-      + '<!--script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents">'
-      + '</script--></div>',
+      + '<script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents">'
+      + '</script></div>',
     };
     expect(wrapper.find('#video-12345').prop('dangerouslySetInnerHTML')).toEqual(expectedEmbed);
   });

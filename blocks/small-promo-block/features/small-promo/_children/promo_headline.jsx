@@ -29,7 +29,6 @@ const PromoHeadline = (props) => {
             ]
           }
           className="sm-promo-headline"
-          /* eslint-disable-next-line react/jsx-props-no-spreading */
           {...editableContent(content, 'headlines.basic')}
           suppressContentEditableWarning
         >

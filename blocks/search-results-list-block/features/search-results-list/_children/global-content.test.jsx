@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading, max-len */
+/* eslint-disable prefer-arrow-callback, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 // import getThemeStyle from 'fusion:themes';

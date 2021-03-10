@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading,import/no-unresolved */
+/* eslint-disable import/no-unresolved */
 /* istanbul ignore file */
 import React from 'react';
 import PropTypes from 'prop-types';

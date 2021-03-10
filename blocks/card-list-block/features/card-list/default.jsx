@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
@@ -49,13 +49,27 @@ const Title = styled.div`
 class CardList extends React.Component {
   constructor(props) {
     super(props);
+    const { lazyLoad = false } = props.customFields || {};
+
     this.arcSite = props.arcSite;
+    this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
+
     this.state = {
       cardList: {},
       placeholderResizedImageOptions: {},
     };
-    this.fetchStories();
+
     this.fetchPlaceholder();
+
+    // On Server and in Admin
+    if (this.lazyLoad && isServerSide() && this.isAdmin) {
+      this.fetchStories();
+    }
+  }
+
+  componentDidMount() {
+    this.fetchStories();
   }
 
   getFallbackImageURL() {
@@ -94,6 +108,10 @@ class CardList extends React.Component {
   }
 
   render() {
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
+      return null;
+    }
+
     const { customFields: { title } = {}, arcSite } = this.props;
     const {
       cardList: { content_elements: pageContent = [] } = {},
@@ -115,7 +133,7 @@ class CardList extends React.Component {
     );
     const targetFallbackImage = this.getFallbackImageURL();
 
-    return (
+    const CardListItems = () => (
       (contentElements.length > 0
         && (
           <div className="card-list-container">
@@ -284,6 +302,12 @@ class CardList extends React.Component {
         )
       )
     );
+
+    return (
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
+        <CardListItems />
+      </LazyLoad>
+    );
   }
 }
 
@@ -298,6 +322,11 @@ CardList.propTypes = {
       },
     ),
     title: PropTypes.string,
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
@@ -38,6 +39,11 @@ class SimpleListWrapper extends Component {
     this.state = {
       placeholderResizedImageOptions: {},
     };
+    const { lazyLoad = false } = props.customFields || {};
+
+    this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
+
     this.fetchPlaceholder();
   }
 
@@ -68,15 +74,20 @@ class SimpleListWrapper extends Component {
   }
 
   render() {
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
+      return null;
+    }
+
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
     return (
-      <SimpleList
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...this.props}
-        placeholderResizedImageOptions={placeholderResizedImageOptions}
-        targetFallbackImage={targetFallbackImage}
-      />
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
+        <SimpleList
+          {...this.props}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
+        />
+      </LazyLoad>
     );
   }
 }
@@ -162,6 +173,11 @@ SimpleListWrapper.propTypes = {
       label: 'Show image',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

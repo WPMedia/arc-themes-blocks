@@ -1,5 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { useContent } from 'fusion:content';
+import SimpleList from './default';
 
 const mockOutput = {
   content_elements: [
@@ -74,35 +76,39 @@ const mockOutput = {
   ],
 };
 
+jest.mock('fusion:content', () => ({
+  useContent: jest.fn(() => mockOutput),
+  useFusionContext: jest.fn(() => {}),
+}));
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+    customFields: {
+      elementPlacement: { 1: 2, 2: 1 },
+    },
+  })),
+}));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   websiteDomain: '',
   fallbackImage: '/resources/placeholder.jpg',
   resizerURL: 'resizer',
 }))));
+
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
+}));
+
+jest.mock('./_children/story-item', () => (
+  function StoryItem() { return <div />; }
+));
+
 describe('Simple list', () => {
-  beforeAll(() => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        customFields: {
-          elementPlacement: { 1: 2, 2: 1 },
-        },
-      })),
-    }));
-  });
-  afterAll(() => {
-    jest.resetModules();
-  });
-
   it('should show title if there is a title provided', () => {
-    const { default: SimpleList } = require('./default.jsx');
-    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
-
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => null),
-    }));
     const testText = 'List Over Here';
 
     const customFields = {
@@ -116,8 +122,8 @@ describe('Simple list', () => {
 
     expect(wrapper.find('div.list-title').text()).toBe(testText);
   });
+
   it('should show no title if there is no title provided', () => {
-    const { default: SimpleList } = require('./default.jsx');
     SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
     jest.mock('fusion:content', () => ({
@@ -127,10 +133,8 @@ describe('Simple list', () => {
 
     expect(wrapper.find('div.list-title').length).toBe(0);
   });
+
   it('should fetch an array of data when content service is provided', () => {
-    const { default: SimpleList } = require('./default.jsx');
-    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
-
     const customFields = {
       listContentConfig: {
         contentService: 'something',
@@ -145,15 +149,12 @@ describe('Simple list', () => {
       deployment={jest.fn((path) => path)}
     />);
 
-    expect(wrapper.find('article.list-item-simple').length).toBe(2);
+    expect(wrapper.find('StoryItem').length).toBe(2);
   });
-  it('should not render items when no data provided', () => {
-    const { default: SimpleList } = require('./default.jsx');
-    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
 
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => null),
-    }));
+  it('should not render items when no data provided', () => {
+    useContent.mockReturnValueOnce(null);
+
     const customFields = {
       listContentConfig: {
         contentService: 'something',
@@ -168,33 +169,14 @@ describe('Simple list', () => {
       deployment={jest.fn((path) => path)}
     />);
 
-    expect(wrapper.find('article.list-item-simple').length).toBe(0);
+    expect(wrapper.find('StoryItem').length).toBe(0);
   });
 });
 
 describe('Simple list', () => {
-  beforeAll(() => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'dagen',
-        customFields: {
-          elementPlacement: { 1: 2, 2: 1 },
-        },
-      })),
-    }));
-  });
-  afterAll(() => {
-    jest.resetModules();
-  });
   it('should render content only for the arcSite', () => {
-    const { default: SimpleList } = require('./default.jsx');
-    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
-
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => mockOutput),
-    }));
     const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
 
-    expect(wrapper.find('article.list-item-simple').length).toBe(1);
+    expect(wrapper.find('StoryItem')).toHaveLength(2);
   });
 });

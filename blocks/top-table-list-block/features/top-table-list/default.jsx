@@ -68,17 +68,16 @@ const generateLabelString = (size) => `Number of ${size} Stories`;
 class TopTableListWrapper extends Component {
   constructor(props) {
     super(props);
+    const { lazyLoad = false } = props.customFields || {};
+
     this.state = {
       placeholderResizedImageOptions: {},
     };
-    const { lazyLoad } = props.customFields;
 
     this.lazyLoad = lazyLoad;
     this.isAdmin = props.isAdmin;
 
-    if (lazyLoad && isServerSide()) { // On Server
-      this.fetchPlaceholder();
-    }
+    this.fetchPlaceholder();
   }
 
   getFallbackImageURL() {

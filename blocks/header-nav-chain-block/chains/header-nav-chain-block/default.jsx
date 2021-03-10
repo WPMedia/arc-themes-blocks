@@ -37,8 +37,8 @@ const StyledNav = styled.nav`
   align-items: center;
   width: 100%;
   position: sticky;
-  top: 0px;
-  margin-bottom: 0px;
+  top: 0;
+  margin-bottom: 0;
 
   .news-theme-navigation-bar {
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
@@ -51,7 +51,8 @@ const StyledNav = styled.nav`
     transition: 0.5s;
     z-index: ${navZIdx};
 
-    &.nav-logo, & > .nav-logo {
+    &.nav-logo,
+    & > .nav-logo {
       img {
         height: auto;
         max-width: 240px;

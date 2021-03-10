@@ -27,8 +27,16 @@ class NumberedList extends Component {
       placeholderResizedImageOptions: {},
     };
 
-    this.fetchStories();
     this.fetchPlaceholder();
+
+    // On Server and in Admin
+    if (this.lazyLoad && isServerSide() && this.isAdmin) {
+      this.fetchStories();
+    }
+  }
+
+  componentDidMount() {
+    this.fetchStories();
   }
 
   getFallbackImageURL() {

@@ -1,6 +1,7 @@
-# `@wpmedia/top-table-list-block`
+# `@mentor-medier/top-table-list-block`
 _Fusion News Theme top table list block. Please provide a 1-2 sentence description of what the block is and what it does._
-
+This block is customzied version made by mentor
+The code is transpiled. Or, should be, at least.
 // TODO: Adding some more information (testing)
 // TODO: add badge for passing/failing tests
 

@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback, react/jsx-props-no-spreading  */
+/* eslint-disable prefer-arrow-callback  */
 import React from 'react';
 import { mount } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';

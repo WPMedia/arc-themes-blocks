@@ -78,6 +78,7 @@ body.nav-open {
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
+
     span {
       display: none;
     }
@@ -240,7 +241,8 @@ body.nav-open {
       justify-content: flex-end;
     }
 
-    &.nav-logo, & > .nav-logo {
+    &.nav-logo,
+    & > .nav-logo {
       justify-content: center;
 
       &.svg-logo {

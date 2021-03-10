@@ -4,7 +4,7 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import getProperties from 'fusion:properties';
 
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
@@ -17,12 +17,26 @@ function extractImage(promo) {
 class NumberedList extends Component {
   constructor(props) {
     super(props);
+    const { lazyLoad = false } = props.customFields || {};
+
     this.arcSite = props.arcSite;
+    this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
+
     this.state = {
       placeholderResizedImageOptions: {},
     };
-    this.fetchStories();
+
     this.fetchPlaceholder();
+
+    // On Server and in Admin
+    if (this.lazyLoad && isServerSide() && this.isAdmin) {
+      this.fetchStories();
+    }
+  }
+
+  componentDidMount() {
+    this.fetchStories();
   }
 
   getFallbackImageURL() {
@@ -61,6 +75,10 @@ class NumberedList extends Component {
   }
 
   render() {
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
+      return null;
+    }
+
     const {
       customFields: {
         showHeadline = true,
@@ -76,7 +94,7 @@ class NumberedList extends Component {
 
     const targetFallbackImage = this.getFallbackImageURL();
 
-    return (
+    const ListResults = () => (
       <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
           <PrimaryFont as="h2" className="list-title">
@@ -152,6 +170,12 @@ class NumberedList extends Component {
         }) : null}
       </div>
     );
+
+    return (
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
+        <ListResults />
+      </LazyLoad>
+    );
   }
 }
 
@@ -173,6 +197,11 @@ NumberedList.propTypes = {
       label: 'Show image',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

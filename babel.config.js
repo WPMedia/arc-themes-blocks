@@ -1,4 +1,3 @@
-
 module.exports = {
   ignore: [
     './dist',
@@ -8,12 +7,7 @@ module.exports = {
     ['@babel/plugin-proposal-class-properties', { loose: true }],
   ],
   presets: [
-    [
-      '@babel/preset-env',
-      {
-        modules: 'commonjs',
-      },
-    ],
+    ['@babel/preset-env', { targets: 'defaults' }],
     '@babel/preset-react'],
   env: {
     test: {

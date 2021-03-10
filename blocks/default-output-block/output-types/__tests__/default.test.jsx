@@ -97,7 +97,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').length).toBe(3);
+    expect(wrapper.find('script').length).toBe(2);
   });
 
   it('should have link tags', () => {
@@ -105,7 +105,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').length).toBe(2);
+    expect(wrapper.find('link').length).toBe(1);
   });
 
   it('should have a MedataData component', () => {
@@ -223,7 +223,7 @@ describe('head content', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').at(2).html()).toMatch(/fonts.googleapis/);
+    expect(wrapper.find('link').at(1).html()).toMatch(/fonts.googleapis/);
   });
 
   it('must not render nested scripts', () => {

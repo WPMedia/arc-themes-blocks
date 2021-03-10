@@ -79,12 +79,6 @@ const VideoPlayer = (props) => {
 
   embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
 
-  // Make sure that the player does not render until after component is mounted
-  // this logic is only for fetching content
-  // therefore, excluded from engine theme sdk videoplayer component
-  embedHTML = embedHTML && embedHTML.replace('<script', '<!--script')
-    .replace('script>', 'script-->');
-
   useEffect(() => {
     if (document.getElementById(`video-${videoRef.current}`)) {
       const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;

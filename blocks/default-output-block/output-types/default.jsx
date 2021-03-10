@@ -1,14 +1,10 @@
 import React from 'react';
-import { playerRoot, videoOrg } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
 // this is blank import but used to inject scss
 import './default.scss';
-
-const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
-const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const injectStringScriptArray = (scriptStringArray) => (
   scriptStringArray.map((scriptString, index) => (
@@ -192,13 +188,6 @@ const SampleOutputType = ({
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
-        <script
-          src={powaBoot}
-          async
-          data-powa-script
-          data-loaded-via="powa-manifest"
-        />
-        <link rel="preload" as="script" href={powaDrive} />
         {buildFontUrl()}
         {nativoIntegration
           ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)

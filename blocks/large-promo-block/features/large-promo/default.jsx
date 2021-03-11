@@ -14,7 +14,7 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  LazyLoad, isServerSide
+  LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';

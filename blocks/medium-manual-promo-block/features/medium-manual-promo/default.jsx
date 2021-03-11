@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 import { useContent } from 'fusion:content';
 
@@ -18,11 +18,11 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const MediumManualPromo = ({ customFields }) => {
+const MediumManualPromoItem = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const resizedImageOptions = useContent({
-    source: 'resize-image-api',
+    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
@@ -52,7 +52,7 @@ const MediumManualPromo = ({ customFields }) => {
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
-          {hasImage && renderWithLink(
+          {hasImage && resizedImageOptions && renderWithLink(
             <Image
               // medium is 16:9
               url={customFields.imageURL}
@@ -91,6 +91,18 @@ const MediumManualPromo = ({ customFields }) => {
       </article>
       <hr />
     </>
+  );
+};
+
+const MediumManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <MediumManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
   );
 };
 
@@ -139,6 +151,11 @@ MediumManualPromo.propTypes = {
       },
     ),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

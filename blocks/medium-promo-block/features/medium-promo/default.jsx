@@ -9,7 +9,7 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
   extractResizedParams,
@@ -28,7 +28,7 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const MediumPromo = ({ customFields }) => {
+const MediumPromoItem = ({ customFields }) => {
   const { arcSite } = useFusionContext();
   const { editableContent } = useEditableContent();
 
@@ -42,7 +42,12 @@ const MediumPromo = ({ customFields }) => {
       : null,
   }) || null;
 
-  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+  let imageConfig = null;
+  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
@@ -130,7 +135,7 @@ const MediumPromo = ({ customFields }) => {
           && (
             <a className="image-link" href={content.website_url} aria-hidden="true" tabIndex="-1">
               {
-                imageURL
+                imageURL && resizedImageOptions
                   ? (
                     <Image
                       url={imageURL}
@@ -155,6 +160,7 @@ const MediumPromo = ({ customFields }) => {
                       mediumHeight={ratios.mediumHeight}
                       largeWidth={ratios.largeWidth}
                       largeHeight={ratios.largeHeight}
+                      client={imageConfig === 'resize-image-api-client'}
                     />
                   )
                 }
@@ -180,6 +186,18 @@ const MediumPromo = ({ customFields }) => {
       <hr />
     </>
   ) : null;
+};
+
+const MediumPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <MediumPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 MediumPromo.propTypes = {
@@ -218,6 +236,11 @@ MediumPromo.propTypes = {
       group: 'Image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

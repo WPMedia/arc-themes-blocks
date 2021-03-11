@@ -48,5 +48,5 @@ jobs:
       - name: Check beta failure status
         uses: act10ns/slack@v1
         with:
-          status: ${{ job.status }}
+          status: ${{ job.status }} 
         if: failure()

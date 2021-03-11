@@ -14,6 +14,7 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  LazyLoad, isServerSide
 } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
@@ -35,7 +36,7 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const LargePromo = ({ customFields }) => {
+const LargePromoItem = ({ customFields }) => {
   const { arcSite, id } = useFusionContext();
   const { editableContent } = useEditableContent();
 
@@ -46,7 +47,12 @@ const LargePromo = ({ customFields }) => {
       : null,
   }) || null;
 
-  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+  let imageConfig = null;
+  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
@@ -165,7 +171,7 @@ const LargePromo = ({ customFields }) => {
                 ) : (
                   <a href={content.website_url} aria-hidden="true" tabIndex="-1">
                     {
-                      imageURL
+                      imageURL && resizedImageOptions
                         ? (
                           <Image
                             url={imageURL}
@@ -191,6 +197,7 @@ const LargePromo = ({ customFields }) => {
                             mediumHeight={ratios.mediumHeight}
                             largeWidth={ratios.largeWidth}
                             largeHeight={ratios.largeHeight}
+                            client={imageConfig === 'resize-image-api-client'}
                           />
                         )
                     }
@@ -218,6 +225,18 @@ const LargePromo = ({ customFields }) => {
       <hr />
     </>
   ) : null;
+};
+
+const LargePromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <LargePromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 LargePromo.propTypes = {
@@ -265,6 +284,11 @@ LargePromo.propTypes = {
       label: 'Play video in place',
       group: 'Art',
       defaultValue: false,
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 

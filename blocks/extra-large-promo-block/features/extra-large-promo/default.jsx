@@ -201,6 +201,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
                               mediumHeight={ratios.mediumHeight}
                               largeWidth={ratios.largeWidth}
                               largeHeight={ratios.largeHeight}
+                              client={imageConfig === 'resize-image-api-client'}
                             />
                           )}
 

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
@@ -16,7 +16,7 @@ const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
 `;
 
-const SmallManualPromo = ({ customFields = {} }) => {
+const SmallManualPromoItem = ({ customFields = {} }) => {
   const { showImage = true } = customFields;
   const { arcSite } = useFusionContext();
   const imagePosition = customFields?.imagePosition || 'right';
@@ -25,7 +25,7 @@ const SmallManualPromo = ({ customFields = {} }) => {
 
   const imageMarginClass = getPromoStyle(imagePosition, 'margin');
   const resizedImageOptions = useContent({
-    source: 'resize-image-api',
+    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('SM', customFields.imageRatio);
@@ -67,7 +67,7 @@ const SmallManualPromo = ({ customFields = {} }) => {
       </div>
     );
 
-  const image = showImage && customFields.imageURL
+  const image = showImage && customFields.imageURL && resizedImageOptions
     && (
       <div className={imageMarginClass}>
         { renderWithLink(
@@ -92,6 +92,18 @@ const SmallManualPromo = ({ customFields = {} }) => {
       </article>
       <hr />
     </>
+  );
+};
+
+const SmallManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <SmallManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
   );
 };
 
@@ -138,6 +150,11 @@ SmallManualPromo.propTypes = {
       },
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

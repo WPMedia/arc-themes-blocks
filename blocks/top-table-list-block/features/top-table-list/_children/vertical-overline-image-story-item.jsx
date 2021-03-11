@@ -7,7 +7,7 @@ import {
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
 import Overline from '@wpmedia/overline-block';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
+import { ratiosFor } from '@mentor-medier/resizer-image-block-mentor';
 import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';

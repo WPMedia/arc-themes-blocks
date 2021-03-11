@@ -9,7 +9,7 @@ import {
   extractImageFromStory,
   extractResizedParams,
   imageRatioCustomField,
-} from '@wpmedia/resizer-image-block';
+} from '@mentor-medier/resizer-image-block-mentor';
 import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE, LARGE, MEDIUM, SMALL,

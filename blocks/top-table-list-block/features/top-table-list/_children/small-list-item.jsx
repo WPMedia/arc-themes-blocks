@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
+import { ratiosFor } from '@mentor-medier/resizer-image-block-mentor';
 import getProperties from 'fusion:properties';
 import Title from './title';
 import PromoLabel from './promo_label';

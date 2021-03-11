@@ -546,7 +546,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(600);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(551);
   });
 
   it('must have a default 4:3 ratio for LG', () => {
@@ -558,7 +558,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(283);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(338);
   });
 
   it('must have a default 16:9 ratio for MD', () => {
@@ -570,7 +570,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(225);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(450);
   });
 
   it('must have a default 3:2 ratio for SM', () => {
@@ -596,7 +596,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(450);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(551);
   });
 
   it('XL can be changed to 4:3', () => {
@@ -610,7 +610,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(600);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(735);
   });
 
   it('XL can be changed to 3:2', () => {
@@ -624,7 +624,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(533);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(653);
   });
 
   it('LG can be changed to 16:9', () => {
@@ -637,7 +637,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(212);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(338);
   });
 
   it('LG can be changed to 4:3', () => {
@@ -650,7 +650,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(283);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(450);
   });
 
   it('LG can be changed to 3:2', () => {
@@ -663,7 +663,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(251);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(400);
   });
 
   it('MD can be changed to 16:9', () => {
@@ -676,7 +676,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(225);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(338);
   });
 
   it('MD can be changed to 4:3', () => {
@@ -689,7 +689,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(300);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(450);
   });
 
   it('MD can be changed to 3:2', () => {
@@ -702,7 +702,7 @@ describe('default ratios', () => {
     TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
     const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    expect(ttl.find('Image').prop('largeHeight')).toBe(267);
+    expect(ttl.find('Image').prop('largeHeight')).toBe(400);
   });
 
   it('SM can be changed to 16:9', () => {

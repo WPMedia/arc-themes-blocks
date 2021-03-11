@@ -123,8 +123,8 @@ const SampleOutputType = ({
   const buildFontUrl = () => {
     // If fontURL is an array, then iterate over the array and build out the links
     if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
-      const fontLinks = fontUrl.map((url) => (
-        <link href={url} rel="stylesheet" />
+      const fontLinks = fontUrl.map((url, index) => (
+        <link data-testid={`font-loading-url-${index}`} href={url} rel="stylesheet" />
       ));
       return (
         <>{fontLinks}</>

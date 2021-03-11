@@ -30,6 +30,13 @@ const adMapping = {
     dimensionsArray: [sz300x250, sz300x250, sz300x250],
     ampDimensionsArray: sz300x250,
   },
+  '300x250_gallery': {
+    adName: 'gallery_cube',
+    adLabel: 'Gallery Cube',
+    adClass: '300x250',
+    dimensionsArray: [sz300x250, sz300x250, sz300x250],
+    ampDimensionsArray: sz300x250,
+  },
   '300x250|300x600': {
     adName: 'flex_cube',
     adLabel: 'Flex Cube',

@@ -69,6 +69,7 @@ describe('renders a page', () => {
       websiteDomain: '',
       fallbackImage: '/resources/placeholder.jpg',
       resizerURL: 'resizer',
+      fontUrl: ['https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto'],
     }))));
   });
   afterAll(() => {
@@ -81,6 +82,14 @@ describe('renders a page', () => {
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
     expect(wrapper.find('head').length).toBe(1);
+  });
+
+  it('should have a font loading URL', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find("[data-testid='font-loading-url-0']").length).toBe(1);
   });
 
   it('should have a body', () => {
@@ -105,7 +114,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').length).toBe(1);
+    expect(wrapper.find('link').length).toBe(2);
   });
 
   it('should have a MedataData component', () => {

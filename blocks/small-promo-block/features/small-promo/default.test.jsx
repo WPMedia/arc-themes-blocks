@@ -191,7 +191,7 @@ describe('the small promo feature', () => {
     wrapper.unmount();
   });
 
-  it('show image useContent for resizer parameter returns undefined if falsy', () => {
+  it('no image is shown if resizer returns no resized image options', () => {
     const myConfig = {
       showHeadline: true,
       showImage: true,
@@ -203,9 +203,7 @@ describe('the small promo feature', () => {
 
     const wrapper = mount(<SmallPromo customFields={myConfig} arcSite="dagen" />);
 
-    const image = wrapper.find('Image');
-    expect(image.length).toBe(1);
-    expect(image.props().resizedImageOptions).toEqual(undefined);
+    expect(wrapper.find('Image').length).toBe(0);
     wrapper.unmount();
   });
 

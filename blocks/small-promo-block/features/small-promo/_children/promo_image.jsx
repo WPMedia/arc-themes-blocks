@@ -14,7 +14,12 @@ const PromoImage = (props) => {
   const { arcSite } = useFusionContext();
   const promoType = discoverPromoType(content);
 
-  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+  let imageConfig = null;
+  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
@@ -32,9 +37,8 @@ const PromoImage = (props) => {
     ? (
       <div className={`promo-image ${getPromoStyle(imagePosition, 'margin')}`}>
         <div className="flex no-image-padding">
-          {/* <div className="col-sm-xl-4 flex-col"> // from default */}
           <a href={content?.website_url || ''} aria-hidden="true" tabIndex="-1">
-            {imageURL
+            {imageURL && resizedImageOptions
               ? (
                 <Image
                   url={imageURL}
@@ -59,6 +63,7 @@ const PromoImage = (props) => {
                   mediumHeight={ratios.mediumHeight}
                   largeWidth={ratios.largeWidth}
                   largeHeight={ratios.largeHeight}
+                  client={imageConfig === 'resize-image-api-client'}
                 />
               )}
             <PromoLabel type={promoType} size="small" />

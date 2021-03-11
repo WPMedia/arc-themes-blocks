@@ -81,7 +81,7 @@ class LeadArt extends Component {
       const { default: AdFeature } = require('@wpmedia/ads-block');
       AdBlock = () => (
         <AdFeature customFields={{
-          adType: '300x250',
+          adType: '300x250_gallery',
           displayAdLabel: true,
         }}
         />

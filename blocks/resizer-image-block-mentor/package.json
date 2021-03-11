@@ -2,9 +2,10 @@
   "name": "@mentor-medier/resizer-image-block-mentor",
   "version": "5.10.0",
   "description": "Takes a raw image url and uses thumbor to create resize urls",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npx babel --root-mode upward . -d ./dist -D --ignore **/dist"
   },
   "repository": {
     "type": "git",

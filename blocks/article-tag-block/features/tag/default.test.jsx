@@ -5,6 +5,11 @@ describe('the article tag block', () => {
   jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
   jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
+  jest.mock('@wpmedia/engine-theme-sdk', () => ({
+    LazyLoad: ({ children }) => <>{ children }</>,
+    isServerSide: () => true,
+  }));
+
   describe('when the global content has an array of tags in its taxonomy', () => {
     const mockReturnData = {
       arcSite: 'the-sun',
@@ -33,6 +38,15 @@ describe('the article tag block', () => {
       jest.mock('fusion:context', () => ({
         useFusionContext: mockFunction,
       }));
+    });
+
+    it('should return null if lazyLoad on the server and not in the admin', () => {
+      const { default: ArticleTags } = require('./default.jsx');
+      const config = {
+        lazyLoad: true,
+      };
+      const wrapper = mount(<ArticleTags customFields={config} />);
+      expect(wrapper.html()).toBe(null);
     });
 
     it('should render a parent container for the tags', () => {

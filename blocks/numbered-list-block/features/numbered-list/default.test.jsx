@@ -8,6 +8,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <img alt="test" />,
   LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 const { default: mockData } = require('./mock-data');
 
@@ -25,6 +26,29 @@ jest.mock('@wpmedia/shared-styles', () => ({
 
 describe('The numbered-list-block', () => {
   describe('render a list of numbered-list-items', () => {
+    it('should render null if isServerSide and lazyLoad enabled', () => {
+      const listContentConfig = {
+        contentConfigValues:
+        {
+          offset: '0',
+          query: 'type:story',
+          size: '30',
+        },
+        contentService: 'story-feed-query',
+      };
+      const customFields = {
+        listContentConfig,
+        showHeadline: true,
+        showImage: true,
+        lazyLoad: true,
+      };
+
+      const { default: NumberedList } = require('./default');
+      NumberedList.prototype.fetchContent = jest.fn().mockReturnValue({});
+      const wrapper = mount(<NumberedList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+      expect(wrapper.html()).toBe(null);
+    });
+
     it('should render list item with headline, image and a number', () => {
       const { default: NumberedList } = require('./default');
       const listContentConfig = {

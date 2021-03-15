@@ -62,8 +62,8 @@ class CardList extends React.Component {
 
     this.fetchPlaceholder();
 
-    // On Server and in Admin
-    if (this.lazyLoad && isServerSide() && this.isAdmin) {
+    // Fetch stories if lazyLoad is not enabled, the code is running on the server
+    if (!this.lazyLoad && isServerSide()) {
       this.fetchStories();
     }
   }
@@ -108,7 +108,7 @@ class CardList extends React.Component {
   }
 
   render() {
-    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) {
       return null;
     }
 

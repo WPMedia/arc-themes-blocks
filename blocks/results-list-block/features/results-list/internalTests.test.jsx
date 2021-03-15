@@ -22,6 +22,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   Image: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -81,7 +82,7 @@ describe('fetchPlaceholder', () => {
     expect(mockDeployment).toHaveBeenCalledTimes(0);
     wrapper.instance().fetchPlaceholder();
 
-    expect(fetchContentMock).toHaveBeenCalledTimes(1);
+    expect(fetchContentMock).toHaveBeenCalledTimes(2);
     expect(fetchContentMock).toHaveBeenCalledWith('story-feed-query', { offset: '0', query: 'type: story', size: '1' });
   });
 });

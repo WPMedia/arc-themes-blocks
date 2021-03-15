@@ -60,6 +60,11 @@ class ResultsList extends Component {
     this.isAdmin = props.isAdmin;
 
     this.fetchPlaceholder();
+
+    // Fetch stories if lazyLoad is not enabled, the code is running on the server
+    if (!this.lazyLoad && isServerSide()) {
+      this.fetchStories(false);
+    }
   }
 
   componentDidMount() {

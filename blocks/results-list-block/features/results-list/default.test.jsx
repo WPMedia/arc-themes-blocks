@@ -31,6 +31,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   Image: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 
 describe('The results list', () => {
@@ -474,9 +475,9 @@ describe('The results list', () => {
       });
 
       it('should call fetchContent when clicked', () => {
-        expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-        wrapper.find('button.btn').simulate('click');
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+        wrapper.find('button.btn').simulate('click');
+        expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(3);
       });
     });
   });
@@ -585,9 +586,9 @@ describe('The results list from collection', () => {
     const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: collectionFirst10Items, seeMore: true }, () => {
       wrapper.update();
-      expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-      wrapper.find('button.btn').simulate('click');
       expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+      wrapper.find('button.btn').simulate('click');
+      expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(3);
     });
   });
 

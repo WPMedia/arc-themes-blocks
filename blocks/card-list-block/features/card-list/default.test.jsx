@@ -17,6 +17,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 
 jest.mock('@wpmedia/byline-block', () => ({
@@ -30,6 +31,26 @@ jest.mock('@wpmedia/date-block', () => ({
 }));
 
 describe('Card list', () => {
+  it('should render null if isServerSide and lazyLoad enabled', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type:story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = {
+      listContentConfig,
+      lazyLoad: true,
+    };
+
+    const { default: CardList } = require('./default');
+    CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
+    const wrapper = mount(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    expect(wrapper.html()).toBe(null);
+  });
+
   it('should render a list of stories', () => {
     const listContentConfig = {
       contentConfigValues: {

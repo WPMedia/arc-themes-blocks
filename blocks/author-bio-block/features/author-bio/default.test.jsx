@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 jest.mock('@wpmedia/news-theme-css', () => ({
   lightenDarkenColor: () => 'blue',
@@ -25,9 +25,24 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
   SoundCloudIcon: () => <svg>SoundCloudIcon</svg>,
   RssIcon: () => <svg>RssIcon</svg>,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
+}));
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: () => ({ isAdmin: false }),
 }));
 
 describe('Given the list of author(s) from the article', () => {
+  it('should return null if lazyLoad on the server and not in the admin', () => {
+    const { default: AuthorBio } = require('./default.jsx');
+    const config = {
+      lazyLoad: true,
+    };
+    const wrapper = mount(<AuthorBio customFields={config} />);
+    expect(wrapper.html()).toBe(null);
+  });
+
   it("should show one author's bio", () => {
     const { default: AuthorBio } = require('./default');
 
@@ -243,7 +258,7 @@ describe('Given the list of author(s) from the article', () => {
         },
       })),
     }));
-    const wrapper = shallow(<AuthorBio />);
+    const wrapper = mount(<AuthorBio />);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('Image').prop('url')).toEqual('https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg');
   });

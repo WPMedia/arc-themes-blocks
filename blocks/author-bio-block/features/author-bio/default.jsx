@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import styled from 'styled-components';
@@ -19,6 +20,8 @@ import {
   WhatsAppIcon,
   SoundCloudIcon,
   RssIcon,
+  LazyLoad,
+  isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 
@@ -83,7 +86,7 @@ const renderAuthorInfo = (author, arcSite) => {
   );
 };
 
-const AuthorBio = () => {
+const AuthorBioItems = () => {
   const { globalContent: content, arcSite } = useFusionContext();
   const { credits = {} } = content;
   const { by = [] } = credits;
@@ -340,6 +343,28 @@ const AuthorBio = () => {
   );
 };
 
+const AuthorBio = ({ customFields = {} }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <AuthorBioItems customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 AuthorBio.label = 'Short Author Bio – Arc Block';
+
+AuthorBio.propTypes = {
+  customFields: PropTypes.shape({
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
+  }),
+};
 
 export default AuthorBio;

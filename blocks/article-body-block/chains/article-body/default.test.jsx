@@ -1,9 +1,17 @@
 const React = require('react');
 const { mount } = require('enzyme');
 
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'https://resizer.me',
 }))));
+
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <div />,
+  ImageMetadata: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+}));
 
 describe('article-body chain', () => {
   describe('when it is initialized', () => {
@@ -1359,15 +1367,18 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('figure').length).toEqual(1);
-      expect(wrapper.find('figure').find('Image').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').text()).toMatch("Australia surf trip Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.  (Brett Danielsen/Death to Stock Photo)");
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title')
-        .text()).toMatch('Australia surf trip ');
+      const figureEl = wrapper.find('figure');
+      expect(figureEl).toHaveLength(1);
+      expect(figureEl.find('Image')).toHaveLength(1);
+      const figCaptionEl = figureEl.find('figcaption');
+      expect(figCaptionEl).toHaveLength(1);
+      const imageMetadataEl = figCaptionEl.find('ImageMetadata');
+      expect(imageMetadataEl).toHaveLength(1);
+      expect(imageMetadataEl.prop('caption')).toContain("Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.");
+      expect(imageMetadataEl.prop('subtitle')).toMatch('Australia surf trip');
+      const authorCredits = imageMetadataEl.prop('credits');
+      expect(authorCredits?.by[0]?.name).toEqual('Brett Danielsen');
+      expect(authorCredits?.affiliation[0]?.name).toEqual('Death to Stock Photo');
     });
     it('should not render image with figcaption and author', () => {
       jest.mock('fusion:context', () => ({
@@ -1593,15 +1604,18 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('figure').length).toEqual(1);
-      expect(wrapper.find('figure').find('Image').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').text()).toMatch("Australia surf trip Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.");
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title')
-        .text()).toMatch('Australia surf trip ');
+      const figureEl = wrapper.find('figure');
+      expect(figureEl).toHaveLength(1);
+      expect(figureEl.find('Image')).toHaveLength(1);
+      const figCaptionEl = figureEl.find('figcaption');
+      expect(figCaptionEl).toHaveLength(1);
+      const imageMetadataEl = figCaptionEl.find('ImageMetadata');
+      expect(imageMetadataEl).toHaveLength(1);
+      expect(imageMetadataEl.prop('caption')).toContain("Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.");
+      expect(imageMetadataEl.prop('subtitle')).toMatch('Australia surf trip');
+      const vanityCredits = imageMetadataEl.prop('vanityCredits');
+      expect(vanityCredits?.by).toHaveLength(0);
+      expect(vanityCredits?.affiliation).toHaveLength(0);
     });
 
     it('should override photographer and credit by using vanity_credits', () => {
@@ -1736,16 +1750,19 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('figure').length).toEqual(1);
-      expect(wrapper.find('figure').find('Image').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('span').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title').length).toEqual(1);
-      expect(wrapper.find('figure').find('figcaption').find('p').text())
-        .toMatch("Australia surf trip Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.  (Here's my vanity photographer/Here's my vanity credit)");
-      expect(wrapper.find('figure').find('figcaption').find('p').find('.title')
-        .text()).toMatch('Australia surf trip ');
+
+      const figureEl = wrapper.find('figure');
+      expect(figureEl).toHaveLength(1);
+      expect(figureEl.find('Image')).toHaveLength(1);
+      const figCaptionEl = figureEl.find('figcaption');
+      expect(figCaptionEl).toHaveLength(1);
+      const imageMetadataEl = figCaptionEl.find('ImageMetadata');
+      expect(imageMetadataEl).toHaveLength(1);
+      expect(imageMetadataEl.prop('caption')).toContain("Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break.");
+      expect(imageMetadataEl.prop('subtitle')).toMatch('Australia surf trip');
+      const authorCredits = imageMetadataEl.prop('credits');
+      expect(authorCredits?.by[0]?.name).toEqual('Brett Danielsen');
+      expect(authorCredits?.affiliation[0]?.name).toEqual('Death to Stock Photo');
     });
   });
 

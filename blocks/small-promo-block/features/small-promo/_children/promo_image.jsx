@@ -5,7 +5,7 @@ import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams } from '@wpmedia/resizer-image-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
-import PromoLabel from './promo_label';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import discoverPromoType from './discover';
 import getPromoStyle from './promo_style';
 

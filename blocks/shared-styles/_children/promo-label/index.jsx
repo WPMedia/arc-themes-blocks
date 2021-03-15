@@ -7,25 +7,11 @@ import CameraIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/Camer
 import getTranslatedPhrases from 'fusion:intl';
 import getProperties from 'fusion:properties';
 
-export const getLabelText = (phrases, type) => {
-  if (phrases && type) {
-    switch (type) {
-      case 'Video':
-        return phrases.t('extra-large-promo-block.video-text');
-      case 'Gallery':
-        return phrases.t('extra-large-promo-block.gallery-text');
-      default:
-        return null;
-    }
-  }
-  return null;
-};
-
 const LabelBoxLarge = styled.div`
   align-items: center;
   padding: 6px 8px 8px;
   background-color: ${(props) => props.primaryColor};
-  border: none;
+  border: 0;
   border-radius: 4px;
   bottom: 8px;
   display: flex;
@@ -38,7 +24,7 @@ const LabelBoxSmall = styled.div`
   align-items: center;
   padding: 8px;
   background-color: ${(props) => props.primaryColor};
-  border: none;
+  border: 0;
   border-radius: 4px;
   display: flex;
   flex-direction: row;
@@ -59,6 +45,20 @@ const Label = styled.span`
   margin-left: 8px;
 `;
 
+export const getLabelText = (phrases, type) => {
+  if (phrases && type) {
+    switch (type) {
+      case 'Video':
+        return phrases.t('promo-label.video-text');
+      case 'Gallery':
+        return phrases.t('promo-label.gallery-text');
+      default:
+        return null;
+    }
+  }
+  return null;
+};
+
 const Icon = ({ type }) => {
   switch (type) {
     case 'Video':
@@ -70,10 +70,10 @@ const Icon = ({ type }) => {
   }
 };
 
-const LabelLarge = ({ arcSite, type, labelText }) => (
+const LabelLarge = ({ arcSite, type }) => (
   <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
-    <Label>{labelText}</Label>
+    <Label>{type}</Label>
   </LabelBoxLarge>
 );
 
@@ -92,12 +92,12 @@ const PromoLabel = ({ type, size }) => {
   const labelSize = size || 'large';
 
   if (labelSize === 'small') {
-    return <LabelSmall type={type} arcSite={arcSite} />;
+    return <LabelSmall arcSite={arcSite} type={type} />;
   }
 
   const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
-  return <LabelLarge type={type} arcSite={arcSite} labelText={getLabelText(phrases, type)} />;
+  return <LabelLarge arcSite={arcSite} type={type} labelText={getLabelText(phrases, type)} />;
 };
 
 export default PromoLabel;

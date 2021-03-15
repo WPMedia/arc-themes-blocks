@@ -4,7 +4,7 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import PromoLabel, { getLabelText } from './promo_label';
+import PromoLabel, { getLabelText } from './index';
 
 describe('the promo label', () => {
   beforeAll(() => {
@@ -13,9 +13,13 @@ describe('the promo label', () => {
     getThemeStyle.mockReturnValue({ 'primary-color': '#ff0000' });
   });
 
+  jest.mock('fusion:intl', () => ({
+    __esModule: true,
+    default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
+  }));
+
   afterAll(() => {
     jest.resetModules();
-    jest.clearAllMocks();
   });
 
   it('should not render when the promo type is missing', () => {
@@ -78,8 +82,10 @@ describe('the promo label', () => {
   });
 
   it('should not render an icon if label type is not recognized', () => {
-    const wrapper = mount(<PromoLabel type="other" />);
-    expect(wrapper.find('div.promo-label').length).toBe(0);
+    const wrapper = mount(<PromoLabel type="PromoType" />);
+    expect(wrapper.find('div.promo-label').length).toBe(1);
+    expect(wrapper.find('div.promo-label span').text()).toBe('');
+    expect(wrapper.find('Icon').html()).toBeFalsy();
     wrapper.unmount();
   });
 

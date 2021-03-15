@@ -9,6 +9,7 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import {
   Image,
   extractVideoEmbedFromStory,
@@ -25,7 +26,6 @@ import {
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
-import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h2`

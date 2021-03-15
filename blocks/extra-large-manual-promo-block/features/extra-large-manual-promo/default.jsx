@@ -7,7 +7,7 @@ import { useFusionContext } from 'fusion:context';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';
 
 const HeadlineText = styled.h2`
@@ -30,11 +30,11 @@ const OverlineHeader = styled.h2`
   text-decoration: none;
 `;
 
-const ExtraLargeManualPromo = ({ customFields }) => {
+const ExtraLargeManualPromoItem = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const resizedImageOptions = useContent({
-    source: 'resize-image-api',
+    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('XL', customFields.imageRatio);
@@ -120,6 +120,18 @@ const ExtraLargeManualPromo = ({ customFields }) => {
   );
 };
 
+const ExtraLargeManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <ExtraLargeManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 ExtraLargeManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
@@ -180,6 +192,11 @@ ExtraLargeManualPromo.propTypes = {
       },
     ),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

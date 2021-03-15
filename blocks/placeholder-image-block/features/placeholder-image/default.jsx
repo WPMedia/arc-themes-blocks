@@ -9,6 +9,8 @@ import withFusionContext from 'fusion:context';
 class PlaceholderImage extends React.Component {
   constructor(props) {
     super(props);
+    this.clientSide = props.client || false;
+
     this.state = { resizedImageOptions: {} };
     this.fetch = this.fetch.bind(this);
     this.getTargetFallbackImageUrl = this.getTargetFallbackImageUrl.bind(this);
@@ -32,7 +34,7 @@ class PlaceholderImage extends React.Component {
     const targetFallbackImage = this.getTargetFallbackImageUrl();
     this.fetchContent({
       resizedImageOptions: {
-        source: 'resize-image-api',
+        source: this.clientSide ? 'resize-image-api-client' : 'resize-image-api',
         query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
       },
     });
@@ -49,6 +51,10 @@ class PlaceholderImage extends React.Component {
       largeHeight = 105,
     } = this.props;
     const { resizedImageOptions } = this.state;
+
+    if (!resizedImageOptions) {
+      return null;
+    }
 
     return (
       <>

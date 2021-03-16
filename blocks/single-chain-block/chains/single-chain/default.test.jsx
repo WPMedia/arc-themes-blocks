@@ -14,7 +14,7 @@ describe('single chain', () => {
       );
 
       expect(wrapper.html()).toMatchInlineSnapshot(
-        '"<div class=\\"sc-htpNat jHQBno\\"><p>one chainz</p></div>"',
+        '"<div class=\\"sc-EHOje fUQYKv\\"><p>one chainz</p></div>"',
       );
     });
     it('should render null when null is the child', () => {

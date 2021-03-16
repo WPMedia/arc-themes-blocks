@@ -70,10 +70,10 @@ const Icon = ({ type }) => {
   }
 };
 
-const LabelLarge = ({ arcSite, type }) => (
+const LabelLarge = ({ arcSite, type, labelText }) => (
   <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
-    <Label>{type}</Label>
+    <Label>{labelText}</Label>
   </LabelBoxLarge>
 );
 

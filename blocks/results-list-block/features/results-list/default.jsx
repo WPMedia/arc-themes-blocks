@@ -174,15 +174,20 @@ class ResultsList extends Component {
         focusItem: currentCount,
       });
     } else {
-      const { fetched } = this.getContent(listContentConfig.contentService, contentConfigValues);
-      fetched.then((response) => {
-        this.setState({ resultList: response });
-        if (response?.content_elements
-          && response?.count
-          && response.content_elements.length >= response.count) {
-          this.setState({ seeMore: false });
-        }
+      this.fetchContent({
+        resultList: {
+          source: listContentConfig.contentService,
+          query: contentConfigValues,
+        },
       });
+
+      const { resultList } = this.state;
+      if (resultList?.content_elements
+        && resultList?.count
+        && resultList.content_elements.length >= resultList.count) {
+        this.setState({ seeMore: false });
+      }
+
       if (listContentConfig.contentService === 'content-api-collections') {
         const query = { ...contentConfigValues };
         const from = parseInt(contentConfigValues.from, 10) || 0;

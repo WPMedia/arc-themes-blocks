@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/medium-promo-block",
-  "version": "5.10.0",
+  "version": "5.10.1",
   "description": "Fusion News Theme Medium Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -30,8 +30,8 @@
     "@wpmedia/date-block": "canary",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/shared-styles": "canary",
     "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/shared-styles": "canary",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

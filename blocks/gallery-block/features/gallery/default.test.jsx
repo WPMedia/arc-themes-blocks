@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 const mockPhrases = {
   'global.gallery-expand-button': 'Expand',
@@ -14,18 +14,37 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'https://fake.cdn.com/resizer',
   galleryCubeClicks: 5,
 }))));
+
 jest.mock('fusion:context', () => ({
+  useAppContext: jest.fn(() => ({})),
   useFusionContext: jest.fn(() => ({})),
 }));
 
+jest.mock('fusion:content', () => ({
+  useContent: jest.fn(() => ([])),
+}));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Gallery: (props, children) => (<div {...props}>{ children }</div>),
+  Gallery: function Gallery() {
+    return <div />;
+  },
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
 }));
+
+describe('gallery feature block - lazy load', () => {
+  it('should not return on server side with lazy load true', () => {
+    const { default: GalleryFeature } = require('./default');
+    const wrapper = mount(<GalleryFeature customFields={{ lazyLoad: true }} />);
+
+    expect(wrapper.html()).toBe(null);
+  });
+});
 
 describe('gallery feature block - no custom fields', () => {
   beforeEach(() => {
@@ -37,13 +56,13 @@ describe('gallery feature block - no custom fields', () => {
     }));
 
     jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({})),
+      useContent: jest.fn(() => ([])),
     }));
   });
 
   it('should render the global content gallery', () => {
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature />);
+    const wrapper = mount(<GalleryFeature />);
 
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
@@ -79,13 +98,13 @@ describe('gallery feature block - globalContent', () => {
     }));
 
     jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({})),
+      useContent: jest.fn(() => ([])),
     }));
   });
 
   it('should render the global content gallery', () => {
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
+    const wrapper = mount(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
 
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('This is a global content headline');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
@@ -126,7 +145,7 @@ describe('gallery feature block - contentConfig', () => {
       })),
     }));
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
+    const wrapper = mount(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('This is a headline');
     expect(wrapper.find('Gallery').props().pageCountPhrase).toBeInstanceOf(Function);
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
@@ -152,7 +171,7 @@ describe('gallery feature block - contentConfig', () => {
       })),
     }));
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
+    const wrapper = mount(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
       [
@@ -176,7 +195,7 @@ describe('gallery feature block - contentConfig', () => {
       })),
     }));
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
+    const wrapper = mount(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
     expect(wrapper.find('Gallery').props().ansId).toEqual('');
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual(
@@ -191,10 +210,10 @@ describe('gallery feature block - contentConfig', () => {
 
   it('should have no gallery elements if no content_elements', () => {
     jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({})),
+      useContent: jest.fn(() => ([])),
     }));
     const { default: GalleryFeature } = require('./default');
-    const wrapper = shallow(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
+    const wrapper = mount(<GalleryFeature customFields={{ galleryContentConfig: { contentService: 'cool-api', contentConfigValues: 'cool-config' } }} />);
     expect(wrapper.find('Gallery').props().ansId).toEqual('');
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);

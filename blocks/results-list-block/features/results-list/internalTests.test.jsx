@@ -74,8 +74,7 @@ describe('fetchPlaceholder', () => {
       resolve(content);
     });
     const fetchContentMock = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
-    ResultsList.prototype.getContent = fetchContentMock;
+    ResultsList.prototype.fetchContent = fetchContentMock;
     const mockDeployment = jest.fn();
     const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath="/pf" customFields={customFields} />);
     mockDeployment.mockClear();
@@ -83,7 +82,7 @@ describe('fetchPlaceholder', () => {
     wrapper.instance().fetchPlaceholder();
 
     expect(fetchContentMock).toHaveBeenCalledTimes(2);
-    expect(fetchContentMock).toHaveBeenCalledWith('story-feed-query', { offset: '0', query: 'type: story', size: '1' });
+    expect(fetchContentMock).toHaveBeenCalledWith({ resultList: { query: { offset: '0', query: 'type: story', size: '1' }, source: 'story-feed-query' } });
   });
 });
 

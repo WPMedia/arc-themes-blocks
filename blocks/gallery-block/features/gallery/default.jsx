@@ -5,9 +5,9 @@ import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Gallery } from '@wpmedia/engine-theme-sdk';
+import { Gallery, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 
-const GalleryFeature = (
+const GalleryFeatureItem = (
   {
     customFields: {
       inheritGlobalContent,
@@ -64,6 +64,18 @@ const GalleryFeature = (
   );
 };
 
+const GalleryFeature = ({ customFields = {} }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <GalleryFeatureItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 GalleryFeature.propTypes = {
   customFields: PropTypes.shape({
     galleryContentConfig: PropTypes.contentConfig().tag({
@@ -73,6 +85,11 @@ GalleryFeature.propTypes = {
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
       defaultValue: true,
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

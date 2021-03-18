@@ -6,9 +6,14 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Link from '@wpmedia/links-bar-block';
-import FacebookAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookAltIcon';
-import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
-import RssIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/RssIcon';
+
+import {
+  FacebookAltIcon,
+  TwitterIcon,
+  RssIcon,
+  LazyLoad,
+  isServerSide,
+} from '@wpmedia/engine-theme-sdk';
 
 import './footer.scss';
 
@@ -25,7 +30,7 @@ export const StyledSocialContainer = styled.div`
   }
 `;
 
-const Footer = ({ customFields: { navigationConfig } }) => {
+const FooterItem = ({ customFields: { navigationConfig } }) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
     facebookPage,
@@ -166,11 +171,28 @@ const Footer = ({ customFields: { navigationConfig } }) => {
   );
 };
 
+const Footer = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <FooterItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 Footer.propTypes = {
   customFields: PropTypes.shape({
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
       label: 'Navigation',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -21,6 +22,8 @@ import {
   WhatsAppIcon,
   SoundCloudIcon,
   Image,
+  LazyLoad,
+  isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
 import constructSocialURL from './shared/constructSocialURL';
@@ -85,7 +88,7 @@ const logos = {
   />,
 };
 
-const FullAuthorBio = () => {
+const FullAuthorBioItem = () => {
   const { globalContent: content, arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
@@ -175,6 +178,28 @@ const FullAuthorBio = () => {
   );
 };
 
+const FullAuthorBio = ({ customFields = {} }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <FullAuthorBioItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 FullAuthorBio.label = 'FullAuthorBio – Arc Block';
+
+FullAuthorBio.propTypes = {
+  customFields: PropTypes.shape({
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
+  }),
+};
 
 export default FullAuthorBio;

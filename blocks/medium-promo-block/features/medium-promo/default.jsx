@@ -243,6 +243,7 @@ MediumPromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     imageOverrideAlt: PropTypes.string.tag({
       label: 'Image Alt',

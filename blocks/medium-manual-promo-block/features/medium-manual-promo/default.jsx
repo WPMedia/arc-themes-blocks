@@ -126,6 +126,7 @@ MediumManualPromo.propTypes = {
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Configure Content',
+      searchable: 'image',
     }),
     imageAlt: PropTypes.string.tag({
       label: 'Image Alt',

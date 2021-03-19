@@ -1,29 +1,23 @@
 import React from 'react';
 
-function getPromoContainer(headline, image, promoContainersStyles, imagePosition = 'right') {
-  // image left, above
-  if (imagePosition === 'left' || imagePosition === 'above') {
-    return (
-      <div className={promoContainersStyles?.containerClass}>
-        <div className={promoContainersStyles?.imageClass}>
-          {image}
-        </div>
-        <div className={promoContainersStyles?.headlineClass}>
-          {headline}
-        </div>
-      </div>
-    );
-  }
+function getPromoContainer(headline, image, promoContainersStyles, imagePosition = 'right', isAdmin) {
+  const imageLeftOrAbove = (imagePosition === 'left' || imagePosition === 'above');
+  const HeadlineOutput = (
+    <div className={promoContainersStyles?.headlineClass}>
+      {headline}
+    </div>
+  );
 
-  // image right, below
+  const ImageOutput = (
+    <div className={promoContainersStyles?.imageClass} style={{ position: isAdmin ? 'relative' : null }}>
+      {image}
+    </div>
+  );
+
   return (
     <div className={promoContainersStyles?.containerClass}>
-      <div className={promoContainersStyles?.headlineClass}>
-        {headline}
-      </div>
-      <div className={promoContainersStyles?.imageClass}>
-        {image}
-      </div>
+      {imageLeftOrAbove ? ImageOutput : HeadlineOutput}
+      {imageLeftOrAbove ? HeadlineOutput : ImageOutput}
     </div>
   );
 }

@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
+import styled from 'styled-components';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 import getPromoContainer from './_children/promo_container';
 import getPromoStyle from './_children/promo_style';
@@ -18,14 +18,15 @@ const HeadlineText = styled.h2`
 
 const SmallManualPromoItem = ({ customFields = {} }) => {
   const { showImage = true } = customFields;
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
   const imagePosition = customFields?.imagePosition || 'right';
 
   const headlineMarginClass = getPromoStyle(imagePosition, 'headlineMargin');
 
   const imageMarginClass = getPromoStyle(imagePosition, 'margin');
   const resizedImageOptions = useContent({
-    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
+    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('SM', customFields.imageRatio);
@@ -69,11 +70,17 @@ const SmallManualPromoItem = ({ customFields = {} }) => {
 
   const image = showImage && customFields.imageURL && resizedImageOptions
     && (
-      <div className={imageMarginClass}>
+      <div
+        className={imageMarginClass}
+        {...searchableField({
+          imageURL: 'url',
+          imageAlt: 'alt_text',
+        })}
+      >
         { renderWithLink(
           <Image
             url={customFields.imageURL}
-            alt={customFields.headline}
+            alt={customFields.imageAlt || customFields.headline}
             // small should be 3:2 aspect ratio
             {...ratios}
             breakpoints={getProperties(arcSite)?.breakpoints}
@@ -88,7 +95,7 @@ const SmallManualPromoItem = ({ customFields = {} }) => {
   return (
     <>
       <article className="container-fluid small-promo">
-        {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
+        {getPromoContainer(headline, image, promoContainersStyles, imagePosition, isAdmin)}
       </article>
       <hr />
     </>
@@ -115,6 +122,11 @@ SmallManualPromo.propTypes = {
     }),
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
+      group: 'Configure Content',
+      searchable: 'image',
+    }),
+    imageAlt: PropTypes.string.tag({
+      label: 'Image Alt Text',
       group: 'Configure Content',
     }),
     linkURL: PropTypes.string.tag({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFusionContext } from 'fusion:context';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams } from '@wpmedia/resizer-image-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -11,11 +11,14 @@ import getPromoStyle from './promo_style';
 
 const PromoImage = (props) => {
   const { content, customFields, ratios } = props;
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
   const promoType = discoverPromoType(content);
 
   let imageConfig = null;
-  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+  if (
+    (customFields.imageOverrideURL && customFields.lazyLoad)
+    || (customFields.imageOverrideURL && isAdmin)) {
     imageConfig = 'resize-image-api-client';
   } else if (customFields.imageOverrideURL) {
     imageConfig = 'resize-image-api';
@@ -36,14 +39,13 @@ const PromoImage = (props) => {
   return content
     ? (
       <div className={`promo-image ${getPromoStyle(imagePosition, 'margin')}`}>
-        <div className="flex no-image-padding">
-          <a href={content?.website_url || ''} aria-hidden="true" tabIndex="-1">
+        <div className="flex no-image-padding" style={{ position: isAdmin ? 'relative' : null }}>
+          <a href={content?.website_url || ''} aria-hidden="true" tabIndex="-1" {...searchableField('imageOverrideURL')}>
             {imageURL && resizedImageOptions
               ? (
                 <Image
                   url={imageURL}
                   alt={content && content.headlines ? content.headlines.basic : ''}
-                    // small should be 3:2 aspect ratio
                   smallWidth={ratios.smallWidth}
                   smallHeight={ratios.smallHeight}
                   mediumWidth={ratios.mediumWidth}

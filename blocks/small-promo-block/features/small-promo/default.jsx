@@ -89,6 +89,7 @@ SmallPromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     imagePosition: PropTypes.oneOf([
       'right', 'left', 'above', 'below',

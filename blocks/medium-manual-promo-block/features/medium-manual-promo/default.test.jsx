@@ -15,6 +15,10 @@ jest.mock('fusion:context', () => ({
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),
+  useEditableContent: jest.fn(() => ({
+    editableContent: () => ({ contentEditable: 'true' }),
+    searchableField: () => {},
+  })),
 }));
 
 const config = {

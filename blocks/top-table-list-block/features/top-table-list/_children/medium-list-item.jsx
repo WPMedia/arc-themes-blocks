@@ -3,11 +3,11 @@ import { Image } from '@wpmedia/engine-theme-sdk';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import { ratiosFor } from '@wpmedia/resizer-image-block';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import Title from './title';
 import DescriptionText from './description-text';
 import checkObjectEmpty from '../shared/checkObjectEmpty';
-import PromoLabel from './promo_label';
 import discoverPromoType from './discover';
 
 // via results list

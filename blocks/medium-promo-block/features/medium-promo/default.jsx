@@ -8,6 +8,7 @@ import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
@@ -17,7 +18,6 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
-import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h2`

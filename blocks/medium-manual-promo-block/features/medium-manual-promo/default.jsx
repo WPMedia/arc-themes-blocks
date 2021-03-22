@@ -54,10 +54,7 @@ const MediumManualPromoItem = ({ customFields }) => {
       <article className="container-fluid medium-promo" style={{ position: isAdmin ? 'relative' : null }}>
         <div
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
-          {...searchableField({
-            imageURL: 'url',
-            imageAlt: 'alt_text',
-          })}
+          {...searchableField('imageOverrideURL')}
         >
           {hasImage && resizedImageOptions && renderWithLink(
             <Image
@@ -127,10 +124,6 @@ MediumManualPromo.propTypes = {
       label: 'Image URL',
       group: 'Configure Content',
       searchable: 'image',
-    }),
-    imageAlt: PropTypes.string.tag({
-      label: 'Image Alt',
-      group: 'Image',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',

@@ -138,10 +138,7 @@ const MediumPromoItem = ({ customFields }) => {
               href={content.website_url}
               aria-hidden="true"
               tabIndex="-1"
-              {...searchableField({
-                imageOverrideURL: 'url',
-                imageOverrideAlt: 'alt_text',
-              })}
+              {...searchableField('imageOverrideURL')}
             >
               {
                 imageURL && resizedImageOptions
@@ -244,10 +241,6 @@ MediumPromo.propTypes = {
       label: 'Image URL',
       group: 'Image',
       searchable: 'image',
-    }),
-    imageOverrideAlt: PropTypes.string.tag({
-      label: 'Image Alt',
-      group: 'Image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
     lazyLoad: PropTypes.bool.tag({

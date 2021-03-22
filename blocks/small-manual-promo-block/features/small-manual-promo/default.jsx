@@ -72,15 +72,12 @@ const SmallManualPromoItem = ({ customFields = {} }) => {
     && (
       <div
         className={imageMarginClass}
-        {...searchableField({
-          imageURL: 'url',
-          imageAlt: 'alt_text',
-        })}
+        {...searchableField('imageURL')}
       >
         { renderWithLink(
           <Image
             url={customFields.imageURL}
-            alt={customFields.imageAlt || customFields.headline}
+            alt={customFields.headline}
             // small should be 3:2 aspect ratio
             {...ratios}
             breakpoints={getProperties(arcSite)?.breakpoints}
@@ -124,10 +121,6 @@ SmallManualPromo.propTypes = {
       label: 'Image URL',
       group: 'Configure Content',
       searchable: 'image',
-    }),
-    imageAlt: PropTypes.string.tag({
-      label: 'Image Alt Text',
-      group: 'Configure Content',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',

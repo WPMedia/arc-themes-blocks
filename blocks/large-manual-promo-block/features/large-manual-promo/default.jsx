@@ -6,7 +6,7 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
@@ -31,11 +31,12 @@ const OverlineHeader = styled.h2`
 `;
 
 const LargeManualPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
   const resizedImageOptions = useContent({
-    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
+    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('LG', customFields.imageRatio);
@@ -58,10 +59,10 @@ const LargeManualPromoItem = ({ customFields }) => {
   return (
     <>
       <article className="container-fluid large-promo">
-        <div className="row lg-promo-padding-bottom">
+        <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
           {(customFields.showImage && customFields.imageURL && resizedImageOptions)
           && (
-            <div className="col-sm-12 col-md-xl-6">
+            <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
               { renderWithLink(
                 <Image
                   url={customFields.imageURL}

@@ -8,7 +8,8 @@
   "main": "index.js",
   "files": [
     "scss",
-    "_children"
+    "_children",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

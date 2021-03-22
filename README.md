@@ -13,6 +13,7 @@ This monorepo is a collection of packages for blocks. Blocks are versioned toget
 
 This package has been published with a number of dist-tags meant for different purposes:
 
+
 - `stable`: This tag should be equivalent to `latest` and the process for maintaining parity _should_ be automated with a [Github Action workflow found here](/.github/workflows/stable-dist-tag.yml). If that workflow doesn't work or the versions tagged by `latest` and `stable` do not match you can run `npm run latest-stable-parity` to fix that.
 - `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. [More information can be found here.](/News%20Theme%20Development.md#fusion-news-theme-blocks)
 - `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `canary` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-canary`).

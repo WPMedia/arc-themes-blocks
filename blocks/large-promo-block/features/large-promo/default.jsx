@@ -283,10 +283,7 @@ LargePromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
-    }),
-    imageOverrideAlt: PropTypes.string.tag({
-      label: 'Image Alt',
-      group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
     playVideoInPlace: PropTypes.bool.tag({

@@ -160,6 +160,7 @@ LargeManualPromo.propTypes = {
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Configure Content',
+      searchable: 'image',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',

@@ -54,11 +54,11 @@ const RightRailAdvancedLayout = ({ children }) => {
       <div className="row">
         <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
           {/* Main Content Area */}
-          {rightRailTop}
-          {main}
-          {rightRailMiddle}
-          {main2}
-          {rightRailBottom}
+          <RenderChild Item={rightRailTop} key="rightrailtop" />
+          <RenderChild Item={main} key="main" />
+          <RenderChild Item={rightRailMiddle} key="rightrailmiddle" />
+          <RenderChild Item={main2} key="main2" />
+          <RenderChild Item={rightRailBottom} key="rightrailbottom" />
         </div>
       </div>
     </>
@@ -69,15 +69,15 @@ const RightRailAdvancedLayout = ({ children }) => {
       <div className="row">
         <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
           {/* Main Content Area */}
-          {main}
-          {main2}
+          <RenderChild Item={main} key="main" />
+          <RenderChild Item={main2} key="main2" />
         </div>
-        <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section">
+        <div className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section">
           {/* Right Rail Content Area */}
-          {rightRailTop}
-          {rightRailMiddle}
-          {rightRailBottom}
-        </aside>
+          <RenderChild Item={rightRailTop} key="rightrailtop" />
+          <RenderChild Item={rightRailMiddle} key="rightrailmiddle" />
+          <RenderChild Item={rightRailBottom} key="rightrailbottom" />
+        </div>
       </div>
     </>
   );
@@ -107,6 +107,8 @@ const RightRailAdvancedLayout = ({ children }) => {
     </>
   );
 };
+
+const RenderChild = ({ Item }) => Item;
 
 RightRailAdvancedLayout.propTypes = {
   children: PropTypes.array,

@@ -29,8 +29,8 @@ const DescriptionText = styled.p`
 `;
 
 const MediumPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
-  const { editableContent } = useEditableContent();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { editableContent, searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -43,7 +43,7 @@ const MediumPromoItem = ({ customFields }) => {
   }) || null;
 
   let imageConfig = null;
-  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+  if ((customFields.imageOverrideURL && customFields.lazyLoad) || isAdmin) {
     imageConfig = 'resize-image-api-client';
   } else if (customFields.imageOverrideURL) {
     imageConfig = 'resize-image-api';
@@ -130,10 +130,16 @@ const MediumPromoItem = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
           {customFields.showImage
           && (
-            <a className="image-link" href={content.website_url} aria-hidden="true" tabIndex="-1">
+            <a
+              className="image-link"
+              href={content.website_url}
+              aria-hidden="true"
+              tabIndex="-1"
+              {...searchableField('imageOverrideURL')}
+            >
               {
                 imageURL && resizedImageOptions
                   ? (
@@ -234,6 +240,7 @@ MediumPromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
     lazyLoad: PropTypes.bool.tag({

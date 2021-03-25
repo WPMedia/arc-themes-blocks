@@ -13,6 +13,11 @@ exports[`the promo container default to headline first dom structure by default 
   </div>
   <div
     className="col-sm-xl-4"
+    style={
+      Object {
+        "position": null,
+      }
+    }
   >
     <img
       alt="mock image"
@@ -35,6 +40,11 @@ exports[`the promo container render headline first if image position is below 1`
   </div>
   <div
     className="col-sm-xl-4"
+    style={
+      Object {
+        "position": null,
+      }
+    }
   >
     <img
       alt="mock image"
@@ -57,6 +67,11 @@ exports[`the promo container render headline first if image position is right 1`
   </div>
   <div
     className="col-sm-xl-4"
+    style={
+      Object {
+        "position": null,
+      }
+    }
   >
     <img
       alt="mock image"
@@ -72,6 +87,11 @@ exports[`the promo container render image first if image position is above 1`] =
 >
   <div
     className="col-sm-xl-4"
+    style={
+      Object {
+        "position": null,
+      }
+    }
   >
     <img
       alt="mock image"
@@ -94,6 +114,11 @@ exports[`the promo container render image first if image position is on left 1`]
 >
   <div
     className="col-sm-xl-4"
+    style={
+      Object {
+        "position": null,
+      }
+    }
   >
     <img
       alt="mock image"
@@ -112,7 +137,13 @@ exports[`the promo container render image first if image position is on left 1`]
 
 exports[`the promo container return empty dom value while no value pass in 1`] = `
 <div>
-  <div>
+  <div
+    style={
+      Object {
+        "position": null,
+      }
+    }
+  >
     
   </div>
   <div>

@@ -36,8 +36,8 @@ const DescriptionText = styled.p`
 `;
 
 const ExtraLargePromoItem = ({ customFields }) => {
-  const { arcSite, id } = useFusionContext();
-  const { editableContent } = useEditableContent();
+  const { arcSite, id, isAdmin } = useFusionContext();
+  const { editableContent, searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -47,7 +47,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
   }) || null;
 
   let imageConfig = null;
-  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+  if ((customFields.imageOverrideURL && customFields.lazyLoad) || isAdmin) {
     imageConfig = 'resize-image-api-client';
   } else if (customFields.imageOverrideURL) {
     imageConfig = 'resize-image-api';
@@ -160,7 +160,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
           {(customFields.showHeadline || customFields.showDescription
             || customFields.showByline || customFields.showDate)
           && (
-            <div className="col-sm-xl-12 flex-col">
+            <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
               {overlineTmpl()}
               {headlineTmpl()}
               {
@@ -175,7 +175,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
                 ) || (
                   customFields.showImage
                     && (
-                      <a href={content.website_url} aria-hidden="true" tabIndex="-1">
+                      <a href={content.website_url} aria-hidden="true" tabIndex="-1" {...searchableField('imageOverrideURL')}>
                         {imageURL && resizedImageOptions
                           ? (
                             <Image
@@ -289,6 +289,7 @@ ExtraLargePromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
     playVideoInPlace: PropTypes.bool.tag({

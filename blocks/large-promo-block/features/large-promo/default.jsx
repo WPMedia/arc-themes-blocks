@@ -37,8 +37,8 @@ const DescriptionText = styled.p`
 `;
 
 const LargePromoItem = ({ customFields }) => {
-  const { arcSite, id } = useFusionContext();
-  const { editableContent } = useEditableContent();
+  const { arcSite, id, isAdmin } = useFusionContext();
+  const { editableContent, searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -48,7 +48,7 @@ const LargePromoItem = ({ customFields }) => {
   }) || null;
 
   let imageConfig = null;
-  if (customFields.imageOverrideURL && customFields.lazyLoad) {
+  if ((customFields.imageOverrideURL && customFields.lazyLoad) || isAdmin) {
     imageConfig = 'resize-image-api-client';
   } else if (customFields.imageOverrideURL) {
     imageConfig = 'resize-image-api';
@@ -160,7 +160,7 @@ const LargePromoItem = ({ customFields }) => {
       <article className="container-fluid large-promo">
         <div className="row">
           { customFields.showImage && (
-            <div className="col-sm-12 col-md-xl-6 flex-col">
+            <div className="col-sm-12 col-md-xl-6 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
               {
                 videoEmbed ? (
                   <VideoPlayerPresentational
@@ -169,7 +169,12 @@ const LargePromoItem = ({ customFields }) => {
                     enableAutoplay={false}
                   />
                 ) : (
-                  <a href={content.website_url} aria-hidden="true" tabIndex="-1">
+                  <a
+                    href={content.website_url}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    {...searchableField('imageOverrideURL')}
+                  >
                     {
                       imageURL && resizedImageOptions
                         ? (
@@ -278,6 +283,7 @@ LargePromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
     playVideoInPlace: PropTypes.bool.tag({

@@ -8,7 +8,7 @@ import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
 
 const HeadlineText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -31,10 +31,11 @@ const OverlineHeader = styled.h2`
 `;
 
 const ExtraLargeManualPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
 
   const resizedImageOptions = useContent({
-    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
+    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('XL', customFields.imageRatio);
@@ -61,7 +62,7 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
           {(customFields.showHeadline || customFields.showDescription
             || customFields.showOverline)
           && (
-            <div className="col-sm-xl-12 flex-col">
+            <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
               {(customFields.showOverline && customFields.overline && customFields.overlineURL)
               && (
                 <OverlineLink
@@ -100,7 +101,7 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
                   breakpoints={getProperties(arcSite)?.breakpoints}
                   resizerURL={getProperties(arcSite)?.resizerURL}
                   resizedImageOptions={resizedImageOptions}
-                />, {}, { 'aria-hidden': 'true', tabIndex: '-1' },
+                />, {}, { 'aria-hidden': 'true', tabIndex: '-1', ...searchableField('imageURL') },
               )}
               {(customFields.showDescription && customFields.description)
               && (
@@ -153,6 +154,7 @@ ExtraLargeManualPromo.propTypes = {
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Configure Content',
+      searchable: 'image',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',

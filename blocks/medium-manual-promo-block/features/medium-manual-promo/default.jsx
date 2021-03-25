@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
+import { useContent, useEditableContent } from 'fusion:content';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
@@ -19,10 +19,11 @@ const DescriptionText = styled.p`
 `;
 
 const MediumManualPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
 
   const resizedImageOptions = useContent({
-    source: customFields.lazyLoad ? 'resize-image-api-client' : 'resize-image-api',
+    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
 
@@ -50,8 +51,11 @@ const MediumManualPromoItem = ({ customFields }) => {
 
   return (
     <>
-      <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}>
+      <article className="container-fluid medium-promo" style={{ position: isAdmin ? 'relative' : null }}>
+        <div
+          className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
+          {...searchableField('imageOverrideURL')}
+        >
           {hasImage && resizedImageOptions && renderWithLink(
             <Image
               // medium is 16:9
@@ -119,6 +123,7 @@ MediumManualPromo.propTypes = {
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Configure Content',
+      searchable: 'image',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',
@@ -129,27 +134,21 @@ MediumManualPromo.propTypes = {
       defaultValue: false,
       group: 'Configure Content',
     }),
-    showHeadline: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',

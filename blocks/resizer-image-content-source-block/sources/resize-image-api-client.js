@@ -1,7 +1,7 @@
 import { allowedImageDomains as ALLOWED_IMAGE_DOMAINS } from 'fusion:environment';
 import getResizedImageData from '@wpmedia/resizer-image-block';
 
-const ARCDomain = ['images.arcpublishing.com'];
+const ARCDomains = ['images.arcpublishing.com', 's3.amazonaws.com/arc-authors/'];
 
 const params = {
   // has to be an external image
@@ -10,17 +10,27 @@ const params = {
 
 const getAllowedDomains = () => {
   if (ALLOWED_IMAGE_DOMAINS) {
-    return ARCDomain.concat(ALLOWED_IMAGE_DOMAINS.split(','));
+    return ARCDomains.concat(ALLOWED_IMAGE_DOMAINS.split(','));
   }
-  return ARCDomain;
+  return ARCDomains;
 };
 
-const getDomainHostname = (domain) => {
+const getURL = (domain) => {
   try {
-    return new URL(domain).hostname;
+    return new URL(domain);
   } catch (e) {
     return '';
   }
+};
+
+const getDomainHostname = (domain) => {
+  const itemURL = getURL(domain);
+
+  if (itemURL === '') {
+    return '';
+  }
+
+  return itemURL.hostname;
 };
 
 const isAnAllowedDomain = (imageUrl) => {
@@ -30,7 +40,19 @@ const isAnAllowedDomain = (imageUrl) => {
     return false;
   }
 
-  const matcher = (domain) => inputHost.endsWith(domain) || inputHost === getDomainHostname(domain);
+  const matcher = (domain) => {
+    if (domain.indexOf('/') !== -1 && !getURL(domain).protocol) {
+      // If a domain in the allowedDomains has a / but no protocol (http://)
+      // check hostname and pathname together to see if they match this
+      // mainly accounts for the author-service image URL that use a generic
+      // s3 URL that doesn't allow us to just check hostname alone.
+      const iUrl = getURL(imageUrl);
+      const imageURLAndPath = `${iUrl.hostname}/${iUrl.pathname.split('/')[1]}/`;
+
+      return domain === imageURLAndPath;
+    }
+    return inputHost.endsWith(domain) || inputHost === getDomainHostname(domain);
+  };
 
   return getAllowedDomains().some(matcher);
 };

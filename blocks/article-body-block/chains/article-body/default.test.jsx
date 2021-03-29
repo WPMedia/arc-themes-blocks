@@ -924,6 +924,19 @@ describe('article-body chain', () => {
   });
 
   describe('correction text is rendered correctly', () => {
+    const correctionText = 'Correction!!';
+    const clarificationText = 'Clarification!!!!';
+
+    const mockPhrases = {
+      'article-body-block.clarification': clarificationText,
+      'article-body-block.correction': correctionText,
+    };
+
+    jest.mock('fusion:intl', () => ({
+      __esModule: true,
+      default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
+    }));
+
     it('should render correction text', () => {
       jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
       jest.mock('fusion:context', () => ({
@@ -951,6 +964,7 @@ describe('article-body chain', () => {
           customFields: { },
         })),
       }));
+
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
         <ArticleBodyChain>
@@ -960,8 +974,49 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('.correction')).toHaveLength(1);
-      expect(wrapper.find('.correction h2')).toHaveLength(1);
+
+      const correctionLabel = wrapper.find('.correction h2');
+      expect(correctionLabel.text()).toBe(correctionText);
+      expect(correctionLabel).toHaveLength(1);
       expect(wrapper.find('.correction p')).toHaveLength(1);
+    });
+
+    it('should render clarification text', () => {
+      jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              {
+                _id: 'TCBM2JRT4ZA27BU2X47KATFTFA',
+                type: 'correction',
+                correction_type: 'clarification',
+                additional_properties: {
+                  _id: 'DKRZMRK2ZZF7BI2XGZ3V7FDGEI',
+                  comments: [
+
+                  ],
+                },
+                text: 'This is a clarification. An editor might add this if the story had a small potential misunderstanding.',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+      expect(wrapper.find('.correction')).toHaveLength(1);
+
+      const correctionLabel = wrapper.find('.correction h2');
+      expect(correctionLabel.text()).toBe(clarificationText);
     });
 
     it('should not render correction when no data is provided', () => {

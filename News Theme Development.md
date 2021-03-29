@@ -187,7 +187,7 @@ If you need to make a change (hotfix) to any of these three branches RC, beta, s
 
 If an issue is found in stable this is a production issue, and requires a hotfix follow these steps:
 
-1. `git pull origin stable` - Pll remote branch to ensure you have most upto date code
+1. `git pull origin stable` - Pull remote branch to ensure you have most upto date code
 2. `git checkout -b RC-Hotfix-ticket-123` - Create a hotfix branch
 3. Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `stable`
 4. release feature branch changes as `@hotfix` from stable.

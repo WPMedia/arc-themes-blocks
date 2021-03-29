@@ -964,7 +964,6 @@ describe('article-body chain', () => {
           customFields: { },
         })),
       }));
-
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
         <ArticleBodyChain>

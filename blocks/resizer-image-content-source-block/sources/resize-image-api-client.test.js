@@ -32,8 +32,14 @@ describe('the resizer image api client source block', () => {
     contentSource.fetch({ raw_image_url: 'http://images.arcpublishing.com/image.jpg' });
     expect(mockFn.mock.calls.length).toBe(2);
 
+    contentSource.fetch({ raw_image_url: 'https://s3.amazonaws.com/arc-authors/marty-mcfly.jpg' });
+    expect(mockFn.mock.calls.length).toBe(3);
+
+    contentSource.fetch({ raw_image_url: 'https://s3.amazonaws.com/arcauthors/marty-mcfly.jpg' });
+    expect(mockFn.mock.calls.length).toBe(3);
+
     contentSource.fetch({ raw_image_url: 'https://example.com/image.jpg' });
-    expect(mockFn.mock.calls.length).toBe(2);
+    expect(mockFn.mock.calls.length).toBe(3);
   });
 
   it('should call getResizedImageData if image and domain match with environment domains', () => {

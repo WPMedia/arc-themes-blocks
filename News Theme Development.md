@@ -140,7 +140,7 @@ WARNING: If you need help rolling back publish, please see the wiki [How A Dev C
 RC Release is the contents of the canary branch once signed off - Canary -> RC
 
 1. Ensure canary is signed off with all RC tickets merged in
-2. `git pull origin canary`
+2. `git checkout canary && git remote update --prune origin && git reset --hard origin/canary` - Checkout canary and reset your local to remote canary
 3. `git push origin canary:rc`
 4. Check GitHub action used to publish rc tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/rc-build.yml
 
@@ -152,7 +152,7 @@ Any environment with the `BLOCK_DIST_TAG=rc` will get the updated blocks on next
 Beta Release is the contents of the RC branch once signed off - RC -> Beta
 
 1. Enusre RC is ready - All PR's/hotfixes made against RC are merged in
-2. `git pull origin rc`
+2. `git checkout rc && git remote update --prune origin && git reset --hard origin/rc` - Checkout rc and reset your local to remote rc
 3. `git push origin rc:beta`
 4. Check GitHub action used to publish beta tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/beta-build.yml
 
@@ -164,16 +164,17 @@ Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on ne
 Stable Release is the contents of the beta branch once signed off - beta -> stable
 
 1. Enusre beta is ready - All PR's/hotfixes made against beta are merged in
-2. `git pull origin beta`
-3. `git push origin beta:stable`
-4. To release blocks
+2. `git checkout beta && git remote update --prune origin && git reset --hard origin/beta` - Checkout beta and reset your local to remote beta
+3. `git checkout stable && git remote update --prune origin && git reset --hard origin/stable` - Checkout stable and reset your local to remote stable
+4. `git push origin beta:stable`
+5. To release blocks
     * Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
     * Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
     * Make sure all blocks have been graduated or promoted.
     * Check that there is a commit in your local for the next version - created by the `npx lerna` command
     * `git push origin stable`
     * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/stable-dist-tag.yml
-5. Merge `stable` back to `canary`
+6. Merge `stable` back to `canary`
 
 Any environment with the `BLOCK_DIST_TAG=stable` will get the updated blocks on next deploy
 

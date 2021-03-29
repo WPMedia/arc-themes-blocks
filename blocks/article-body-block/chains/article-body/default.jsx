@@ -141,10 +141,16 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
     }
 
     case 'correction': {
+      // can either be clarification or correction
+      const { correction_type: labelType } = item;
+      const labelText = labelType === 'clarification'
+        ? phrases.t('article-body-block.clarification')
+        : phrases.t('article-body-block.correction');
+
       return (item.text && item.text.length > 0) ? (
         <Fragment key={key}>
           <section className="correction">
-            <h2 className="h6-primary">{item.correction_type || 'Correction'}</h2>
+            <h2 className="h6-primary">{labelText}</h2>
             <p>{item.text}</p>
           </section>
         </Fragment>

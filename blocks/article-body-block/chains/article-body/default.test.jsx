@@ -974,7 +974,6 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('.correction')).toHaveLength(1);
-
       const correctionLabel = wrapper.find('.correction h2');
       expect(correctionLabel.text()).toBe(correctionText);
       expect(correctionLabel).toHaveLength(1);

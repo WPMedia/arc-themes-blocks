@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import { framework } from '@wpmedia/news-theme-css/js/framework';
 import './default.scss';
 
 const useFeatureList = () => {
@@ -16,7 +15,6 @@ const useFeatureList = () => {
 };
 
 const RightRailAdvancedLayout = ({ children }) => {
-  const [isDesktop, setIsDesktop] = useState(true);
   const [
     navigation,
     fullwidth1,
@@ -30,58 +28,6 @@ const RightRailAdvancedLayout = ({ children }) => {
   ] = children;
   const featureList = useFeatureList();
 
-  useEffect(() => {
-    let mounted = true;
-    const matchQuery = window.matchMedia(`(min-width: ${framework.gridBreakpoints.lg})`);
-    setIsDesktop(matchQuery.matches);
-
-    const onChange = (e) => {
-      if (mounted) {
-        setIsDesktop(e.matches);
-      }
-    };
-
-    matchQuery.addListener(onChange);
-
-    return () => {
-      mounted = false;
-      matchQuery.removeListener(onChange);
-    };
-  }, []);
-
-  const mobileTabletLayout = (
-    <>
-      <div className="row">
-        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
-          {/* Main Content Area */}
-          {rightRailTop}
-          {main}
-          {rightRailMiddle}
-          {main2}
-          {rightRailBottom}
-        </div>
-      </div>
-    </>
-  );
-
-  const desktopLayout = (
-    <>
-      <div className="row">
-        <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
-          {/* Main Content Area */}
-          {main}
-          {main2}
-        </div>
-        <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section">
-          {/* Right Rail Content Area */}
-          {rightRailTop}
-          {rightRailMiddle}
-          {rightRailBottom}
-        </aside>
-      </div>
-    </>
-  );
-
   return (
     <>
       <header className="page-header">{navigation}</header>
@@ -92,7 +38,17 @@ const RightRailAdvancedLayout = ({ children }) => {
               {fullwidth1}
             </div>
           </div>
-          {isDesktop ? desktopLayout : mobileTabletLayout }
+          <div className="row advanced-grid">
+            <section className="col-sm-md-12 col-lg-xl-8 advanced-grid-desktop-main-area">
+              <RenderChild Item={main} tabletPlacement="2" />
+              <RenderChild Item={main2} tabletPlacement="4" />
+            </section>
+            <section className="col-sm-md-12 col-lg-xl-4">
+              <RenderChild Item={rightRailTop} tabletPlacement="1" />
+              <RenderChild Item={rightRailMiddle} tabletPlacement="3" />
+              <RenderChild Item={rightRailBottom} tabletPlacement="5" />
+            </section>
+          </div>
           {featureList['7'] > 0 && (
             <div className="row">
               <div className="col-sm-xl-12 layout-section wrap-bottom">
@@ -107,6 +63,10 @@ const RightRailAdvancedLayout = ({ children }) => {
     </>
   );
 };
+
+const RenderChild = ({ Item, tabletPlacement }) => (
+  <div className={`advanced-grid-${tabletPlacement} layout-section`}>{Item}</div>
+);
 
 RightRailAdvancedLayout.propTypes = {
   children: PropTypes.array,

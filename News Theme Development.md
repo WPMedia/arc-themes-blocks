@@ -174,7 +174,7 @@ Stable Release is the contents of the beta branch once signed off - beta -> stab
     * Check that there is a commit in your local for the next version - created by the `npx lerna` command
     * `git push origin stable`
     * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/stable-dist-tag.yml
-6. Merge `stable` back to `canary`
+6. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
 
 Any environment with the `BLOCK_DIST_TAG=stable` will get the updated blocks on next deploy
 

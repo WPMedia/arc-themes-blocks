@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [5.10.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.0...v5.10.1) (2021-03-17)
+## [5.10.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.0...v5.10.2) (2021-03-30)
+
+
+### Bug Fixes
+
+* Add test for handling show image with just defaults, no link url ([2c9f00e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/2c9f00e402ff178df2b9869eab7286f39cc2e551))
+
+
+
+
+
+## [5.10.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.0...v5.10.1) (2021-03-30)
 
 
 ### Bug Fixes

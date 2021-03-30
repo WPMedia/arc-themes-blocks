@@ -165,7 +165,94 @@ const TopTableList = (props) => {
 
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: { 'arc-site': arcSite, ...contentConfigValues },
+    query: { ...contentConfigValues, feature: 'top-table-list' },
+    filter: `{
+      content_elements {
+        _id,
+        type
+        display_date
+        credits {
+          by {
+            _id
+            name
+            url
+            type
+            additional_properties {
+              original {
+                byline
+              }
+            }
+          }
+        }
+        headlines {
+          basic
+        }
+        description {
+          basic
+        }
+        label {
+          basic
+        }
+        promo_items {
+          basic {
+            type
+            url
+            resized_params {
+              800x600
+              800x533
+              600x450
+              600x400
+              600x338
+              400x300
+              400x267
+              400x225
+              377x283
+              377x251
+              377x212
+              274x206
+              274x183
+              274x154
+            }
+          }
+          lead_art {
+            type
+            embed_html
+            promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  800x600
+                  800x533
+                  600x450
+                  600x400
+                  600x338
+                  400x300
+                  400x267
+                  400x225
+                  377x283
+                  377x251
+                  377x212
+                  274x206
+                  274x183
+                  274x154
+                }
+              }
+            }
+          }
+        }
+        embed_html
+        websites {
+          ${arcSite} {
+            website_url
+            website_section {
+              _id
+              name
+            }
+          }
+        }
+      }
+    }`,
   }) || {};
 
   const siteContent = contentElements.reduce((acc, element, index) => {

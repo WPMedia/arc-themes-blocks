@@ -111,7 +111,7 @@ ArcAd.propTypes = {
     adType: PropTypes.oneOf(adTypes).tag({
       name: 'Ad Type',
       labels: adTypeLabels,
-      defaultValue: '1x1px',
+      defaultValue: '1x1',
       required: true,
       hidden: false,
     }),

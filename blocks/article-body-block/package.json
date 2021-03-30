@@ -10,7 +10,8 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "chains"
+    "chains",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

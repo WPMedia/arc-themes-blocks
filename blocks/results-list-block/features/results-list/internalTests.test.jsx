@@ -82,7 +82,15 @@ describe('fetchPlaceholder', () => {
     wrapper.instance().fetchPlaceholder();
 
     expect(fetchContentMock).toHaveBeenCalledTimes(2);
-    expect(fetchContentMock).toHaveBeenCalledWith({ resultList: { query: { offset: '0', query: 'type: story', size: '1' }, source: 'story-feed-query' } });
+    expect(fetchContentMock).toHaveBeenCalledWith({
+      resultList: {
+        query: {
+          offset: '0', query: 'type: story', size: '1', feature: 'results-list',
+        },
+        source: 'story-feed-query',
+        filter: expect.any(String),
+      },
+    });
   });
 });
 
@@ -118,9 +126,11 @@ describe('fetchStories', () => {
           offset: '2',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'story-feed-query',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
@@ -175,9 +185,11 @@ describe('fetchStories', () => {
           offset: '0',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'story-feed-author',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
@@ -214,11 +226,14 @@ describe('fetchStories', () => {
           offset: '0',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'other',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
+
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
   });
 

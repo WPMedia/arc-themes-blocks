@@ -51,12 +51,35 @@ class NumberedList extends Component {
   }
 
   fetchStories() {
-    const { customFields: { listContentConfig } } = this.props;
+    const { customFields: { listContentConfig, showImage } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
     this.fetchContent({
       resultList: {
         source: contentService,
-        query: contentConfigValues,
+        query: { ...contentConfigValues, feature: 'numbered-list' },
+        filter: `{
+          content_elements {
+            _id,
+            headlines {
+              basic
+            }
+            ${showImage ? `promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  274x183
+                  105x70
+                }
+              }
+            }` : null}
+            websites {
+              ${this.arcSite} {
+                website_url
+              }
+            }
+          }
+        }`,
       },
     });
   }
@@ -114,8 +137,8 @@ class NumberedList extends Component {
           const url = websites[arcSite].website_url;
 
           return (
-            <React.Fragment key={`result-card-${url}`}>
-              <div className="numbered-list-item numbered-item-margins" key={`result-card-${url}`} type="1">
+            <React.Fragment key={`numbered-list-${url}`}>
+              <div className="numbered-list-item numbered-item-margins">
                 {showHeadline
                 && (
                 <a href={url} className="headline-list-anchor">

@@ -107,6 +107,52 @@ class ResultsList extends Component {
     }
   }
 
+  contentSourceFilter() {
+    return `{
+      count
+      next
+      content_elements {
+        _id,
+        type
+        display_date
+        credits {
+          by {
+            _id
+            name
+            url
+            type
+            additional_properties {
+              original {
+                byline
+              }
+            }
+          }
+        }
+        headlines {
+          basic
+        }
+        description {
+          basic
+        }
+        promo_items {
+          basic {
+            type
+            url
+            resized_params {
+              274x154
+              158x89
+            }
+          }
+        }
+        websites {
+          ${this.arcSite} {
+            website_url
+          }
+        }
+      }
+    }`;
+  }
+
   fetchStories(additionalStoryAmount) {
     const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
@@ -136,7 +182,8 @@ class ResultsList extends Component {
         this.fetchContent({
           resultList: {
             source: contentService,
-            query: contentConfigValues,
+            query: { ...contentConfigValues, feature: 'results-list' },
+            filter: this.contentSourceFilter(),
             transform: (data) => fetchStoriesTransform(data, resultList),
           },
         });
@@ -153,18 +200,20 @@ class ResultsList extends Component {
         this.fetchContent({
           resultList: {
             source: contentService,
-            query: contentConfigValues,
+            query: { ...contentConfigValues, feature: 'results-list' },
+            filter: this.contentSourceFilter(),
             transform: (data) => fetchStoriesTransform(data, resultList),
           },
         });
 
-        const query = { ...contentConfigValues };
+        const query = { ...contentConfigValues, feature: 'results-list' };
         from = parseInt(contentConfigValues.from, 10) || 0;
         query.from = String(from + size);
         this.fetchContent({
           seeMore: {
             source: contentService,
             query,
+            filter: this.contentSourceFilter(),
             transform: (data) => !!(data?.content_elements?.length),
           },
         });
@@ -177,7 +226,8 @@ class ResultsList extends Component {
       this.fetchContent({
         resultList: {
           source: listContentConfig.contentService,
-          query: contentConfigValues,
+          query: { ...contentConfigValues, feature: 'results-list' },
+          filter: this.contentSourceFilter(),
         },
       });
 
@@ -253,7 +303,7 @@ class ResultsList extends Component {
                 >
                   {extractImage(promoItems) ? (
                     <Image
-                  // results list is 16:9 by default
+                      // results list is 16:9 by default
                       resizedImageOptions={extractResizedParams(element)}
                       url={extractImage(element.promo_items)}
                       alt={headlineText}

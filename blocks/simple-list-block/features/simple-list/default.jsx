@@ -117,7 +117,41 @@ const SimpleList = (props) => {
   // need to inject the arc site here into use content
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: { 'arc-site': arcSite, ...contentConfigValues },
+    query: { ...contentConfigValues, feature: 'simple-list' },
+    filter: `{
+      content_elements {
+        _id
+        headlines {
+          basic
+        }
+        website_url
+        ${showImage ? `promo_items {
+          basic {
+            type
+            url
+            resized_params {
+              274x183
+            }
+          }
+          lead_art {
+            promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  274x183
+                }
+              }
+            }
+          }
+        }` : null}
+        websites {
+          ${arcSite} {
+            website_url
+          }
+        }
+      }
+    }`,
   }) || {};
 
   return (

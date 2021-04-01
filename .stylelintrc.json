@@ -8,12 +8,6 @@
     "stylelint-config-sass-guidelines"
   ],
   "rules": {
-    "media-feature-name-no-unknown": [
-      true,
-      {
-        "ignoreMediaFeatureNames": ["/m/"]
-      }
-    ],
     "max-nesting-depth": 5,
     "plugin/no-unsupported-browser-features": [
       true,

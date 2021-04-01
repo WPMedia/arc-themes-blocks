@@ -52,7 +52,24 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
     query: {
       hierarchy: 'footer',
       ...navigationConfig.contentConfigValues,
+      feature: 'footer',
     },
+    filter: `{
+      children {
+        _id
+        node_type
+        display_name
+        name
+        url
+        children {
+          _id
+          node_type
+          display_name
+          name
+          url
+        }
+      }
+    }`,
   });
 
   const footerColumns = (content && content.children) ? content.children : [];

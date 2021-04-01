@@ -19,7 +19,17 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
     source: navigationConfig.contentService,
     query: {
       ...navigationConfig.contentConfigValues,
+      feature: 'links-bar',
     },
+    filter: `{
+      children {
+        _id
+        node_type
+        display_name
+        name
+        url
+      }
+    }`,
   });
   const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];

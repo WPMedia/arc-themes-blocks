@@ -143,9 +143,25 @@ const Nav = (props) => {
   const mainContent = useContent({
     source: 'site-service-hierarchy',
     query: {
-      site: arcSite,
       hierarchy,
+      feature: 'header-nav-chain',
     },
+    filter: `{
+      children {
+        _id
+        node_type
+        display_name
+        name
+        url
+        children {
+          _id
+          node_type
+          display_name
+          name
+          url
+        }
+      }
+    }`,
   });
 
   const sections = (mainContent && mainContent.children) ? mainContent.children : [];

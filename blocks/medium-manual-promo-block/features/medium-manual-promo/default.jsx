@@ -54,7 +54,7 @@ const MediumManualPromoItem = ({ customFields }) => {
       <article className="container-fluid medium-promo" style={{ position: isAdmin ? 'relative' : null }}>
         <div
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
-          {...searchableField('imageOverrideURL')}
+          {...searchableField('imageURL')}
         >
           {hasImage && resizedImageOptions && renderWithLink(
             <Image
@@ -149,7 +149,7 @@ MediumManualPromo.propTypes = {
       defaultValue: true,
       group: 'Show promo elements',
     }),
-    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,

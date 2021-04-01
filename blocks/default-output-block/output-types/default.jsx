@@ -44,11 +44,13 @@ const chartBeatCode = (accountId, domain) => {
 
 const querylyCode = (querylyId, querylyOrg, pageType) => {
   const querylyInit = `
-    queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
+    window.addEventListener('DOMContentLoaded', (event) => {
+      queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
+    });
   `;
   return (
     <>
-      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
+      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" defer />
       <script data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
       { pageType === 'queryly-search'
         ? <script data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />

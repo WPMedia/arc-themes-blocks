@@ -48,7 +48,7 @@ const querylyCode = (querylyId, querylyOrg, pageType) => {
   `;
   return (
     <>
-      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.js" />
+      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
       <script data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
       { pageType === 'queryly-search'
         ? <script data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />

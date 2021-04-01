@@ -23,7 +23,7 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/shared-styles": "canary"
+    "@wpmedia/news-theme-css": "stable"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

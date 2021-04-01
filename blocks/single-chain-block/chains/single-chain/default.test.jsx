@@ -1,6 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import SingleChain from './default';
+
+const React = require('react');
+const { mount } = require('enzyme');
 
 describe('single chain', () => {
   describe('when it is first rendered', () => {
@@ -13,9 +14,8 @@ describe('single chain', () => {
         </SingleChain>,
       );
 
-      expect(wrapper.html()).toMatchInlineSnapshot(
-        '"<div class=\\"sc-EHOje fUQYKv\\"><p>one chainz</p></div>"',
-      );
+      expect(wrapper.text()).toBe(testText);
+      expect(wrapper.html()).toBe(`<p>${testText}</p>`);
     });
     it('should render null when null is the child', () => {
       const wrapper = mount(<SingleChain>{null}</SingleChain>);

@@ -43,8 +43,87 @@ const LargePromoItem = ({ customFields }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? {
+        'arc-site': arcSite,
+        feature: 'large-promo',
+        ...customFields.itemContentConfig.contentConfigValues,
+      }
       : null,
+    filter: `{
+      _id
+      credits {
+        by {
+          _id
+          name
+          url
+          type
+          additional_properties {
+            original {
+              byline
+            }
+          }
+        }
+      }
+      description {
+        basic
+      }
+      display_date
+      type
+      headlines {
+        basic
+      }
+      label {
+        basic {
+          display
+          url
+          text
+        }
+      }
+      promo_items {
+        type
+        url
+        lead_art {
+          embed_html
+          type
+          promo_items {
+            basic {
+              type
+              url
+              resized_params {
+                377x283
+                377x251
+                377x212
+                274x206
+                274x183
+                274x154
+              }
+            }
+          }
+        }
+        basic {
+          type
+          url
+          resized_params {
+            377x283
+            377x251
+            377x212
+            274x206
+            274x183
+            274x154
+          }
+        }
+      }
+      embed_html
+      website_url
+      websites {
+        ${arcSite} {
+          website_section {
+            _id
+            name
+          }
+        }
+      }
+    }`,
   }) || null;
 
   let imageConfig = null;

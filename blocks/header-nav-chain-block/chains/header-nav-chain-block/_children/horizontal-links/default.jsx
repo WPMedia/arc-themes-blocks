@@ -22,9 +22,18 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
   const content = useContent({
     source: 'site-service-hierarchy',
     query: {
-      site: arcSite,
       hierarchy,
+      feature: 'links-bar',
     },
+    filter: `{
+      children {
+        _id
+        node_type
+        display_name
+        name
+        url
+      }
+    }`,
   });
 
   const menuItems = (content && content.children) ? content.children : [];

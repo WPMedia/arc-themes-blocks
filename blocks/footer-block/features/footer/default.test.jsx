@@ -187,8 +187,10 @@ describe('the footer feature for the default output type', () => {
       expect(useContent).toHaveBeenCalledWith({
         query: {
           hierarchy: 'footer',
+          feature: 'footer',
         },
         source: 'footer-service',
+        filter: expect.any(String),
       });
     });
 
@@ -199,8 +201,10 @@ describe('the footer feature for the default output type', () => {
         query: {
           hierarchy: 'not-a-footer',
           extraval: 11111,
+          feature: 'footer',
         },
         source: 'footer-service',
+        filter: expect.any(String),
       });
     });
   });

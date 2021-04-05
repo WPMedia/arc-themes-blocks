@@ -13,9 +13,9 @@ function OverlineContainer({ customFields, content, arcSite }) {
     return (
       <Overline
         className="overline"
-          // overlineDisplay is basically needed here
-          // websiteSection and basic display label
-          // todo: refactor to take in overlineDisplay
+        // overlineDisplay is basically needed here
+        // websiteSection and basic display label
+        // todo: refactor to take in overlineDisplay
         story={content}
         editable
       />

@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
-
 import { useFusionContext } from 'fusion:context';
-import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
-import Overline from '@wpmedia/overline-block';
 import { PromoLabel } from '@wpmedia/shared-styles';
 import {
   Image,
@@ -25,19 +19,16 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
+import Description from './_children/Description';
+import OverlineContainer from './_children/OverlineContainer';
 import discoverPromoType from './_children/discover';
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
+import Headline from './_children/Headline';
+import BylineContainer from './_children/BylineContainer';
+import DateContainer from './_children/DateContainer';
 
 const ExtraLargePromoItem = ({ customFields }) => {
   const { arcSite, id, isAdmin } = useFusionContext();
-  const { editableContent, searchableField } = useEditableContent();
+  const { searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -143,92 +134,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
     query: { raw_image_url: customFields.imageOverrideURL },
   }) || undefined;
 
-  const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
-    website_section: null,
-  };
-  const headlineText = content && content.headlines ? content.headlines.basic : null;
-  const descriptionText = content && content.description ? content.description.basic : null;
-  const showSeparator = content && content.credits && content.credits.by
-    && content.credits.by.length !== 0;
-  const byLineArray = (content && content.credits && content.credits.by
-    && content.credits.by.length !== 0) ? content.credits.by : null;
-  const dateText = content && content.display_date ? content.display_date : null;
-  const overlineDisplay = (content?.label?.basic?.display ?? null)
-    || (content?.websites?.[arcSite] && websiteSection)
-    || false;
   const promoType = discoverPromoType(content);
-
-  const overlineTmpl = () => {
-    if (customFields.showOverline && overlineDisplay) {
-      return (
-        (
-          <Overline
-            className="overline"
-            story={content}
-            editable
-          />
-        )
-      );
-    }
-    return null;
-  };
-
-  const headlineTmpl = () => {
-    if (customFields.showHeadline && headlineText) {
-      return (
-        <a href={content.website_url} className="xl-promo-headline">
-          <HeadlineText
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="xl-promo-headline"
-            {...editableContent(content, 'headlines.basic')}
-            suppressContentEditableWarning
-          >
-            {headlineText}
-          </HeadlineText>
-        </a>
-      );
-    }
-    return null;
-  };
-
-  const descriptionTmpl = () => {
-    if (customFields.showDescription && descriptionText) {
-      return (
-        <DescriptionText
-          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-          className="description-text"
-          {...editableContent(content, 'description.basic')}
-          suppressContentEditableWarning
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
-
-  const byLineTmpl = () => {
-    if (customFields.showByline && byLineArray) {
-      return (
-        <>
-          <Byline story={content} stylesFor="list" />
-          { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDate && dateText) {
-      return (
-        <>
-          <ArticleDate date={dateText} />
-        </>
-      );
-    }
-    return null;
-  };
 
   const ratios = ratiosFor('XL', customFields.imageRatio);
   const imageURL = customFields.imageOverrideURL
@@ -247,8 +153,15 @@ const ExtraLargePromoItem = ({ customFields }) => {
             || customFields.showByline || customFields.showDate)
           && (
             <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {overlineTmpl()}
-              {headlineTmpl()}
+              <OverlineContainer
+                customFields={customFields}
+                content={content}
+                arcSite={arcSite}
+              />
+              <Headline
+                customFields={customFields}
+                content={content}
+              />
               {
                 (
                   !!videoEmbed && (
@@ -296,10 +209,13 @@ const ExtraLargePromoItem = ({ customFields }) => {
                     )
                 )
               }
-              {descriptionTmpl()}
+              <Description
+                customFields={customFields}
+                content={content}
+              />
               <div className="article-meta">
-                {byLineTmpl()}
-                {dateTmpl()}
+                <BylineContainer customFields={customFields} content={content} />
+                <DateContainer customFields={customFields} content={content} />
               </div>
             </div>
           )}

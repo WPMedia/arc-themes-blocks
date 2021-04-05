@@ -11,16 +11,14 @@ function OverlineContainer({ customFields, content, arcSite }) {
 
   if (customFields.showOverline && overlineDisplay) {
     return (
-      (
-        <Overline
-          className="overline"
-            // overlineDisplay is basically needed here
-            // websiteSection and basic display label
-            // todo: refactor to take in overlineDisplay
-          story={content}
-          editable
-        />
-      )
+      <Overline
+        className="overline"
+          // overlineDisplay is basically needed here
+          // websiteSection and basic display label
+          // todo: refactor to take in overlineDisplay
+        story={content}
+        editable
+      />
     );
   }
   return null;

@@ -1,1 +1,3 @@
-export default jest.fn();
+export default jest.fn(() => ({
+  getProperties: jest.fn(),
+}));

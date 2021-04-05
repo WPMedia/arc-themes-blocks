@@ -1,6 +1,8 @@
 import React from 'react';
 import Byline from '@wpmedia/byline-block';
 
+// passes in whole content object
+// no arc hooks
 function BylineContainer({
   customFields, content,
 }) {

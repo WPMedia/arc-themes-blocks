@@ -162,27 +162,6 @@ describe('the medium promo feature', () => {
     expect(img.prop('largeHeight')).toBe(300);
   });
 
-  it('should fetch content using null source and query if none in custom fields', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      itemContentConfig: {
-        contentConfigValues: { id: 1234 },
-        contentService: 'content-api',
-      },
-    };
-    const wrapper = mount(<MediumPromo customFields={myConfig} />);
-    const expectedArgs = {
-      query: {
-        'arc-site': undefined,
-        id: 1234,
-      },
-      source: 'content-api',
-    };
-    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
-    wrapper.unmount();
-  });
-
   it('returns null if null content', () => {
     const myConfig = {
       showHeadline: true,

@@ -23,9 +23,62 @@ const SmallPromoItem = ({ customFields }) => {
     query: customFields?.itemContentConfig?.contentConfigValues
       ? {
         'arc-site': arcSite,
+        feature: 'small-promo',
         ...customFields.itemContentConfig.contentConfigValues,
       }
       : null,
+    // does not need embed_html because no video section
+    // does not need website section nor label because no overline
+    // does not need byline because no byline shown
+    filter: `{
+      _id
+      description {
+        basic
+      }
+      display_date
+      type
+      headlines {
+        basic
+      }
+      promo_items {
+        type
+        url
+        lead_art {
+          type
+          promo_items {
+            basic {
+              type
+              url
+              resized_params {
+                400x300
+                400x267
+                400x225
+                274x206
+                274x183
+                274x154
+              }
+            }
+          }
+        }
+        basic {
+          type
+          url
+          resized_params {
+            400x300
+            400x267
+            400x225
+            274x206
+            274x183
+            274x154
+          }
+        }
+      }
+      websites {
+        ${arcSite} {
+          website_url
+        }
+      }
+    }`,
   }) || null;
 
   const ratios = ratiosFor('SM', customFields.imageRatio);

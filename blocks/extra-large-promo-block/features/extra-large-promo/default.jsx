@@ -42,8 +42,93 @@ const ExtraLargePromoItem = ({ customFields }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
+      ? {
+        'arc-site': arcSite,
+        feature: 'extra-large-promo',
+        ...customFields.itemContentConfig.contentConfigValues,
+      }
       : null,
+    filter: `{
+      _id
+      credits {
+        by {
+          _id
+          name
+          url
+          type
+          additional_properties {
+            original {
+              byline
+            }
+          }
+        }
+      }
+      description {
+        basic
+      }
+      display_date
+      type
+      headlines {
+        basic
+      }
+      label {
+        basic {
+          display
+          url
+          text
+        }
+      }
+      promo_items {
+        type
+        url
+        lead_art {
+          embed_html
+          type
+          promo_items {
+            basic {
+              type
+              url
+              resized_params {
+                800x600
+                800x533
+                800x450
+                600x450
+                600x400
+                600x338
+                400x300
+                400x267
+                400x225
+              }
+            }
+          }
+        }
+        basic {
+          type
+          url
+          resized_params {
+            800x600
+            800x533
+            800x450
+            600x450
+            600x400
+            600x338
+            400x300
+            400x267
+            400x225
+          }
+        }
+      }
+      website_url
+      embed_html
+      websites {
+        ${arcSite} {
+          website_section {
+            _id
+            name
+          }
+        }
+      }
+    }`,
   }) || null;
 
   let imageConfig = null;
@@ -151,6 +236,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
   const resizedImageOptions = customFields.imageOverrideURL
     ? customFieldImageResizedImageOptions
     : extractResizedParams(content);
+
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return content && (

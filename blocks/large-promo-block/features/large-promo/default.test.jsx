@@ -171,17 +171,6 @@ describe('the large promo feature', () => {
     wrapper.unmount();
   });
 
-  it('not call content source if not custom fields for url', () => {
-    useContent.mockReturnValueOnce(mockData);
-    const myConfig = { showHeadline: true, showImage: true, imageRatio: '4:3' };
-    const wrapper = mount(<LargePromo customFields={myConfig} />);
-
-    expect(useContent).toHaveBeenNthCalledWith(1, { query: null, source: null });
-    expect(useContent).toHaveBeenNthCalledWith(2,
-      { query: { raw_image_url: undefined }, source: null });
-    wrapper.unmount();
-  });
-
   it('show ALL options if enabled', () => {
     useContent.mockReturnValueOnce(mockData);
 
@@ -308,29 +297,6 @@ describe('the large promo feature', () => {
 
     expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
     expect(wrapperOverline.find('a.overline').prop('href')).toEqual('the-sun-ID/');
-    wrapper.unmount();
-  });
-
-  it('uses for content query contentConfigValues if it is present in custom fields', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      imageRatio: '4:3',
-      imageOverrideURL: 'overrideImage.jpg',
-      itemContentConfig: {
-        contentConfigValues: { id: 1234 },
-        contentService: 'content-api',
-      },
-    };
-    const wrapper = mount(<LargePromo customFields={myConfig} arcSite="dagen" />);
-    const expectedArgs = {
-      query: {
-        'arc-site': 'the-sun',
-        id: 1234,
-      },
-      source: 'content-api',
-    };
-    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
     wrapper.unmount();
   });
 

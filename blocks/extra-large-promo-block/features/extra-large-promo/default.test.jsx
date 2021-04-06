@@ -129,48 +129,6 @@ describe('the extra large promo feature', () => {
     expect(img.prop('largeHeight')).toBe(600);
   });
 
-  it('should fetch content using null source and query if none in custom fields', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      itemContentConfig: {
-        contentConfigValues: { id: 1234 },
-        contentService: 'content-api',
-      },
-    };
-    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
-    const expectedArgs = {
-      query: {
-        'arc-site': 'the-sun',
-        id: 1234,
-      },
-      source: 'content-api',
-    };
-    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
-    wrapper.unmount();
-  });
-
-  it('if undefined content return null result', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      itemContentConfig: {
-        contentConfigValues: { id: 1234 },
-        contentService: 'content-api',
-      },
-    };
-    const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
-    const expectedArgs = {
-      query: {
-        'arc-site': 'the-sun',
-        id: 1234,
-      },
-      source: 'content-api',
-    };
-    expect(useContent).toHaveBeenNthCalledWith(1, expectedArgs);
-    wrapper.unmount();
-  });
-
   it('returns null if null content', () => {
     const myConfig = {
       showHeadline: true,

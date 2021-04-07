@@ -141,7 +141,7 @@ RC Release is the contents of the canary branch once signed off - Canary -> RC
 
 1. Ensure canary is signed off with all RC tickets merged in
 2. `git checkout canary && git remote update --prune origin && git reset --hard origin/canary` - Checkout canary and reset your local to remote canary
-3. `git push origin canary:rc`
+3. `git push origin canary:rc -f`
 4. Check GitHub action used to publish rc tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/rc-build.yml
 
 Any environment with the `BLOCK_DIST_TAG=rc` will get the updated blocks on next deploy
@@ -153,7 +153,7 @@ Beta Release is the contents of the RC branch once signed off - RC -> Beta
 
 1. Enusre RC is ready - All PR's/hotfixes made against RC are merged in
 2. `git checkout rc && git remote update --prune origin && git reset --hard origin/rc` - Checkout rc and reset your local to remote rc
-3. `git push origin rc:beta`
+3. `git push origin rc:beta -f`
 4. Check GitHub action used to publish beta tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/beta-build.yml
 
 Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on next deploy

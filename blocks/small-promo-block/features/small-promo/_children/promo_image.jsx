@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFusionContext } from 'fusion:context';
-import { useContent, useEditableContent } from 'fusion:content';
+import { useEditableContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams } from '@wpmedia/resizer-image-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
@@ -10,24 +10,13 @@ import discoverPromoType from './discover';
 import getPromoStyle from './promo_style';
 
 const PromoImage = (props) => {
-  const { content, customFields, ratios } = props;
+  const {
+    content, customFields, ratios, customFieldImageResizedImageOptions,
+  } = props;
+
   const { arcSite, isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
   const promoType = discoverPromoType(content);
-
-  let imageConfig = null;
-  if (
-    (customFields.imageOverrideURL && customFields.lazyLoad)
-    || (customFields.imageOverrideURL && isAdmin)) {
-    imageConfig = 'resize-image-api-client';
-  } else if (customFields.imageOverrideURL) {
-    imageConfig = 'resize-image-api';
-  }
-
-  const customFieldImageResizedImageOptions = useContent({
-    source: imageConfig,
-    query: { raw_image_url: customFields.imageOverrideURL },
-  }) || undefined;
 
   const imageURL = customFields.imageOverrideURL
     ? customFields.imageOverrideURL : extractImageFromStory(content);

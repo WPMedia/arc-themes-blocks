@@ -81,6 +81,22 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
+  let imageConfig = null;
+  const { isAdmin } = useFusionContext();
+
+  if (
+    (customFields.imageOverrideURL && customFields.lazyLoad)
+    || (customFields.imageOverrideURL && isAdmin)) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
+
+  const customFieldImageResizedImageOptions = useContent({
+    source: imageConfig,
+    query: { raw_image_url: customFields.imageOverrideURL },
+  }) || undefined;
+
   const ratios = ratiosFor('SM', customFields.imageRatio);
 
   const headline = customFields?.showHeadline && (
@@ -88,7 +104,12 @@ const SmallPromoItem = ({ customFields }) => {
   );
 
   const image = customFields?.showImage && (
-    <PromoImage content={content} customFields={customFields} ratios={ratios} />
+    <PromoImage
+      content={content}
+      customFields={customFields}
+      ratios={ratios}
+      customFieldImageResizedImageOptions={customFieldImageResizedImageOptions}
+    />
   );
 
   const imagePosition = customFields?.imagePosition || 'right';

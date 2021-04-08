@@ -158,36 +158,4 @@ describe('the small promo feature', () => {
     expect(wrapper).toEqual({});
     wrapper.unmount();
   });
-
-  it('no image is shown if resizer returns no resized image options', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      imageRatio: '4:3',
-      imageOverrideURL: 'overrideImage.jpg',
-    };
-
-    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
-
-    const wrapper = mount(<SmallPromo customFields={myConfig} arcSite="dagen" />);
-
-    expect(wrapper.find('Image').length).toBe(0);
-    wrapper.unmount();
-  });
-
-  it('shows placeholder image if no image URL', () => {
-    useContent.mockReturnValueOnce({});
-
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      imageRatio: '4:3',
-    };
-
-    const wrapper = mount(<SmallPromo customFields={myConfig} />);
-
-    expect(wrapper.find('PlaceholderImage').length).toBe(1);
-    expect(wrapper.find('Image').length).toBe(0);
-    wrapper.unmount();
-  });
 });

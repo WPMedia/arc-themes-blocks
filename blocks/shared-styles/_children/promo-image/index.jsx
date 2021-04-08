@@ -38,7 +38,7 @@ const PromoImage = ({
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
     query: { raw_image_url: customImageURL },
-  }) || undefined;
+  });
 
   const imageURL = customImageURL || extractImageFromStory(content);
   const resizedImageOptions = customImageURL

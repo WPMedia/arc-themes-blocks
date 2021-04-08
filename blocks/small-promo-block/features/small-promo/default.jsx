@@ -96,14 +96,15 @@ const SmallPromoItem = ({ customFields }) => {
           showPromoLabel
           promoSize="SM"
           imageRatio={customFields.imageRatio}
+          lazyLoad={customFields.lazyLoad}
         />
       </div>
     </div>
   );
 
-  return content ? (
+  return (
     SmallPromoContainer(headline, image, imagePosition)
-  ) : null;
+  );
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {

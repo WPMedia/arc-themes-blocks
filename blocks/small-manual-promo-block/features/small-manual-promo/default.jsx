@@ -29,7 +29,7 @@ const SmallManualPromoItem = ({ customFields }) => {
   const image = customFields?.showImage && customFields.imageURL
     && (
       <div style={{ position: isAdmin ? 'relative' : null }}>
-        <div {...searchableField('imageOverrideURL')}>
+        <div {...searchableField('imageURL')}>
           <PromoImage
             customImageURL={customFields.imageURL}
             alt={customFields.headline}

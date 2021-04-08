@@ -92,7 +92,7 @@ const SmallPromoItem = ({ customFields }) => {
       <div {...searchableField('imageOverrideURL')}>
         <PromoImage
           content={content}
-          customImageUrl={customFields.imageOverrideURL}
+          customImageURL={customFields.imageOverrideURL}
           showPromoLabel
           promoSize="SM"
           imageRatio={customFields.imageRatio}

@@ -37,6 +37,7 @@ const SmallManualPromoItem = ({ customFields }) => {
             imageRatio={customFields.imageRatio}
             linkURL={customFields.linkURL}
             newTab={customFields.newTab}
+            lazyLoad={customFields.lazyLoad}
           />
         </div>
       </div>

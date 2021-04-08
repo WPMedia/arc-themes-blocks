@@ -31,19 +31,17 @@ const config = {
   showImage: true,
 };
 
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+    id: 'testId',
+  })),
+}));
+
 describe('the small promo feature', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-  });
-
-  beforeEach(() => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        id: 'testId',
-      })),
-    }));
   });
 
   it('renders nothing server side with lazyLoad enabled', () => {
@@ -69,6 +67,7 @@ describe('the small promo feature', () => {
   it('should link the headline to the current site website_url ANS property', () => {
     const url = mockData.websites['the-sun'].website_url;
     const wrapper = mount(<SmallPromo customFields={config} />);
+
     expect(wrapper.find('a.sm-promo-headline')).toHaveProp('href', url);
   });
 
@@ -88,23 +87,10 @@ describe('the small promo feature', () => {
     expect(wrapper.find('.col-sm-xl-8')).toHaveLength(1);
   });
 
-  it('default image position to right if imagePosition is unavailable', () => {
-    const wrapper = mount(<SmallPromo customFields={config} />);
-    expect(wrapper.find('.image-right')).toHaveLength(1);
-  });
-
-  it('render image position based on imagePosition in customfield', () => {
-    const mockConfig = config;
-    mockConfig.imagePosition = 'above'; //
-    const wrapper = mount(<SmallPromo customFields={mockConfig} />);
-    expect(wrapper.find('.image-above')).toHaveLength(1);
-  });
-
   it('should have no Image when show image is false', () => {
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
-      // headlinePosition: 'below',
       showImage: false,
     };
     const wrapper = mount(<SmallPromo customFields={noImgConfig} />);

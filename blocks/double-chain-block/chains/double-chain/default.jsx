@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './default.scss';
 
 const DoubleChain = ({ children, customFields }) => {
   if (children && children.length && children.length > 0) {

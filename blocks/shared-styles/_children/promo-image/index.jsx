@@ -80,7 +80,7 @@ const PromoImage = ({
   return (
     <div className="promo-image">
       {hasLink() ? withLink(ImageOrPlaceholder) : ImageOrPlaceholder}
-      {showPromoLabel ? <PromoLabel type={promoType} size={promoLabelSize} /> : null}
+      {showPromoLabel && promoType ? <PromoLabel type={promoType} size={promoLabelSize} /> : null}
     </div>
   );
 };

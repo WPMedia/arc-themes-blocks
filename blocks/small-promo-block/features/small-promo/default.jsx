@@ -93,6 +93,7 @@ const SmallPromoItem = ({ customFields }) => {
         <PromoImage
           content={content}
           customImageUrl={customFields.imageOverrideURL}
+          showPromoLabel
           promoSize="SM"
           imageRatio={customFields.imageRatio}
         />

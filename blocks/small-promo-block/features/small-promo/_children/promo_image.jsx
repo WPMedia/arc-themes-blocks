@@ -11,7 +11,11 @@ import getPromoStyle from './promo_style';
 
 const PromoImage = (props) => {
   const {
-    content, customFields, ratios, customFieldImageResizedImageOptions,
+    content,
+    customFieldImageResizedImageOptions,
+    customFields,
+    imageConfig,
+    ratios,
   } = props;
 
   const { arcSite, isAdmin } = useFusionContext();
@@ -61,7 +65,6 @@ const PromoImage = (props) => {
           </a>
         </div>
       </div>
-
     ) : null;
 };
 export default PromoImage;

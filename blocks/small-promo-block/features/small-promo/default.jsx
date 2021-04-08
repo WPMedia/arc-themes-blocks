@@ -109,6 +109,7 @@ const SmallPromoItem = ({ customFields }) => {
       customFields={customFields}
       ratios={ratios}
       customFieldImageResizedImageOptions={customFieldImageResizedImageOptions}
+      imageConfig={imageConfig}
     />
   );
 

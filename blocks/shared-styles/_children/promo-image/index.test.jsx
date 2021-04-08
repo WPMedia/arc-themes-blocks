@@ -58,7 +58,6 @@ describe('PromoImage', () => {
 
   it('renders image with a link from ANS Story content object', () => {
     const props = {
-      showPromoLabel: true,
       content: {
         promo_items: {
           basic: {
@@ -88,6 +87,7 @@ describe('PromoImage', () => {
 
   it('renders image with a link and promo label from ANS Story content object', () => {
     const props = {
+      showPromoLabel: true,
       content: {
         type: 'video',
         promo_items: {

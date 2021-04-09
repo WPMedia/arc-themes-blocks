@@ -1,139 +1,187 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SmallPromoContainer default to headline first dom structure by default 1`] = `
-<React.Fragment>
+<SmallPromoContainer
+  headline={
+    <h1>
+      mockHeadline
+    </h1>
+  }
+  image={
+    <img
+      alt="mock image"
+      href="mocklink.jpg"
+    />
+  }
+>
   <article
     className="container-fluid small-promo"
   >
     <div
       className="row"
     >
-      <React.Fragment>
-        <div
-          className="col-sm-xl-8"
-        >
-          <h1>
-            mockHeadline
-          </h1>
-        </div>
-        <div
-          className="col-sm-xl-4"
-        >
-          <img
-            alt="mock image"
-            href="mocklink.jpg"
-          />
-        </div>
-      </React.Fragment>
+      <div
+        className="col-sm-xl-8"
+      >
+        <h1>
+          mockHeadline
+        </h1>
+      </div>
+      <div
+        className="col-sm-xl-4"
+      >
+        <img
+          alt="mock image"
+          href="mocklink.jpg"
+        />
+      </div>
     </div>
   </article>
   <hr />
-</React.Fragment>
+</SmallPromoContainer>
 `;
 
 exports[`SmallPromoContainer render headline first if image position is below 1`] = `
-<React.Fragment>
+<SmallPromoContainer
+  headline={
+    <h1>
+      mockHeadline
+    </h1>
+  }
+  image={
+    <img
+      alt="mock image"
+      href="mocklink.jpg"
+    />
+  }
+  imagePosition="below"
+>
   <article
     className="container-fluid small-promo"
   >
-    <React.Fragment>
-      <div
-        className="col-sm-xl-8"
-      >
-        <h1>
-          mockHeadline
-        </h1>
-      </div>
-      <div
-        className="col-sm-xl-4"
-      >
-        <img
-          alt="mock image"
-          href="mocklink.jpg"
-        />
-      </div>
-    </React.Fragment>
+    <div
+      className="col-sm-xl-8"
+    >
+      <h1>
+        mockHeadline
+      </h1>
+    </div>
+    <div
+      className="col-sm-xl-4"
+    >
+      <img
+        alt="mock image"
+        href="mocklink.jpg"
+      />
+    </div>
   </article>
   <hr />
-</React.Fragment>
+</SmallPromoContainer>
 `;
 
 exports[`SmallPromoContainer render image first if image position is above 1`] = `
-<React.Fragment>
+<SmallPromoContainer
+  headline={
+    <h1>
+      mockHeadline
+    </h1>
+  }
+  image={
+    <img
+      alt="mock image"
+      href="mocklink.jpg"
+    />
+  }
+  imagePosition="above"
+>
   <article
     className="container-fluid small-promo"
   >
-    <React.Fragment>
-      <div
-        className="col-sm-xl-4"
-      >
-        <img
-          alt="mock image"
-          href="mocklink.jpg"
-        />
-      </div>
-      <div
-        className="col-sm-xl-8"
-      >
-        <h1>
-          mockHeadline
-        </h1>
-      </div>
-    </React.Fragment>
+    <div
+      className="col-sm-xl-4"
+    >
+      <img
+        alt="mock image"
+        href="mocklink.jpg"
+      />
+    </div>
+    <div
+      className="col-sm-xl-8"
+    >
+      <h1>
+        mockHeadline
+      </h1>
+    </div>
   </article>
   <hr />
-</React.Fragment>
+</SmallPromoContainer>
 `;
 
 exports[`SmallPromoContainer render image first if image position is on left 1`] = `
-<React.Fragment>
+<SmallPromoContainer
+  headline={
+    <h1>
+      mockHeadline
+    </h1>
+  }
+  image={
+    <img
+      alt="mock image"
+      href="mocklink.jpg"
+    />
+  }
+  imagePosition="left"
+>
   <article
     className="container-fluid small-promo"
   >
     <div
       className="row"
     >
-      <React.Fragment>
-        <div
-          className="col-sm-xl-4"
-        >
-          <img
-            alt="mock image"
-            href="mocklink.jpg"
-          />
-        </div>
-        <div
-          className="col-sm-xl-8"
-        >
-          <h1>
-            mockHeadline
-          </h1>
-        </div>
-      </React.Fragment>
-    </div>
-  </article>
-  <hr />
-</React.Fragment>
-`;
-
-exports[`SmallPromoContainer renders with no image 1`] = `
-<React.Fragment>
-  <article
-    className="container-fluid small-promo"
-  >
-    <React.Fragment>
       <div
         className="col-sm-xl-4"
-      />
+      >
+        <img
+          alt="mock image"
+          href="mocklink.jpg"
+        />
+      </div>
       <div
-        className="col-sm-xl-12"
+        className="col-sm-xl-8"
       >
         <h1>
           mockHeadline
         </h1>
       </div>
-    </React.Fragment>
+    </div>
   </article>
   <hr />
-</React.Fragment>
+</SmallPromoContainer>
+`;
+
+exports[`SmallPromoContainer renders with no image 1`] = `
+<SmallPromoContainer
+  headline={
+    <h1>
+      mockHeadline
+    </h1>
+  }
+  imagePosition="above"
+>
+  <article
+    className="container-fluid small-promo"
+  >
+    <div
+      className="col-sm-xl-4"
+    />
+    <div
+      className="col-sm-xl-12"
+    >
+      <h1>
+        mockHeadline
+      </h1>
+    </div>
+  </article>
+  <hr />
+</SmallPromoContainer>
 `;

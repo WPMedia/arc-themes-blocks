@@ -2,7 +2,7 @@ import React from 'react';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
-function SmallPromoContainer(headline, image, imagePosition = 'right') {
+function SmallPromoContainer({ headline, image, imagePosition = 'right' }) {
   const headlineClass = image
     ? 'col-sm-xl-8'
     : 'col-sm-xl-12';

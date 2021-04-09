@@ -35,7 +35,7 @@ describe('PromoImage', () => {
 
   it('renders custom image without a link', () => {
     const props = {
-      customImageURL: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+      customImageURL: 'https://fakeimage.com/test.jpg',
     };
 
     const wrapper = mount(<PromoImage {...props} />);
@@ -46,7 +46,7 @@ describe('PromoImage', () => {
 
   it('renders custom image with a link', () => {
     const props = {
-      customImageURL: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+      customImageURL: 'https://fakeimage.com/test.jpg',
       linkURL: 'https://arcxp.com',
     };
 
@@ -60,7 +60,7 @@ describe('PromoImage', () => {
 
   it('renders custom image with a link and new tab params', () => {
     const props = {
-      customImageURL: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+      customImageURL: 'https://fakeimage.com/test.jpg',
       linkURL: 'https://arcxp.com',
       newTab: true,
     };
@@ -79,7 +79,7 @@ describe('PromoImage', () => {
         promo_items: {
           basic: {
             type: 'image',
-            url: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+            url: 'https://fakeimage.com/test.jpg',
             resized_params: {
               '800x600': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
               '600x450': 'nMHJLqy4jBawvstr8mcTCfgBzoE=filters:cm=t/',
@@ -98,7 +98,7 @@ describe('PromoImage', () => {
     const wrapper = mount(<PromoImage {...props} />);
 
     expect(wrapper.find('a').prop('href')).toBe('https://arcxp.com');
-    expect(wrapper.find('Image').prop('url')).toBe('https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg');
+    expect(wrapper.find('Image').prop('url')).toBe('https://fakeimage.com/test.jpg');
     expect(wrapper.find('PromoLabel').exists()).toBe(false);
   });
 
@@ -110,7 +110,7 @@ describe('PromoImage', () => {
         promo_items: {
           basic: {
             type: 'image',
-            url: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+            url: 'https://fakeimage.com/test.jpg',
             resized_params: {
               '800x600': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
               '600x450': 'nMHJLqy4jBawvstr8mcTCfgBzoE=filters:cm=t/',
@@ -129,7 +129,7 @@ describe('PromoImage', () => {
     const wrapper = mount(<PromoImage {...props} />);
 
     expect(wrapper.find('a').prop('href')).toBe('https://arcxp.com');
-    expect(wrapper.find('Image').prop('url')).toBe('https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg');
+    expect(wrapper.find('Image').prop('url')).toBe('https://fakeimage.com/test.jpg');
     expect(wrapper.find('PromoLabel').exists()).toBe(true);
   });
 });

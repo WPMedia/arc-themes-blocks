@@ -7,7 +7,6 @@ function SmallPromoStyles(position = 'above', element = 'headlineMargin') {
       headlineMargin: 'margin-md-bottom',
     },
   };
-  const promoClasses = imagePositionClassMapping?.[position]?.[element] || '';
-  return promoClasses;
+  return imagePositionClassMapping?.[position]?.[element] || '';
 }
 export default SmallPromoStyles;

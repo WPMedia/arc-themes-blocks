@@ -16,7 +16,7 @@ const SmallManualPromoItem = ({ customFields }) => {
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 
   const headlineOutput = customFields.showHeadline && customFields.headline
-    && (
+    ? (
       <PromoHeadline
         text={customFields.headline}
         link={customFields.linkURL}
@@ -25,10 +25,10 @@ const SmallManualPromoItem = ({ customFields }) => {
         headingClassName="sm-promo-headline"
         newTab={customFields.newTab}
       />
-    );
+    ) : null;
 
   const image = customFields?.showImage && customFields.imageURL
-    && (
+    ? (
       <div style={{ position: isAdmin ? 'relative' : null }}>
         <div {...searchableField('imageURL')}>
           <PromoImage
@@ -42,9 +42,15 @@ const SmallManualPromoItem = ({ customFields }) => {
           />
         </div>
       </div>
-    );
+    ) : null;
 
-  return SmallPromoContainer(headlineOutput, image, imagePosition);
+  return (
+    <SmallPromoContainer
+      headline={headlineOutput}
+      image={image}
+      imagePosition={imagePosition}
+    />
+  );
 };
 
 const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {

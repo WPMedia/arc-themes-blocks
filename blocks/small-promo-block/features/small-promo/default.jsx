@@ -78,16 +78,16 @@ const SmallPromoItem = ({ customFields }) => {
   const imagePosition = customFields?.imagePosition || 'right';
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 
-  const headline = customFields?.showHeadline && (
+  const headline = customFields?.showHeadline ? (
     <PromoHeadline
       content={content}
       className={headlineMarginClass}
       linkClassName="sm-promo-headline"
       headingClassName="sm-promo-headline"
     />
-  );
+  ) : null;
 
-  const image = customFields?.showImage && (
+  const image = customFields?.showImage ? (
     <div style={{ position: isAdmin ? 'relative' : null }}>
       <div {...searchableField('imageOverrideURL')}>
         <PromoImage
@@ -100,10 +100,14 @@ const SmallPromoItem = ({ customFields }) => {
         />
       </div>
     </div>
-  );
+  ) : null;
 
   return (
-    SmallPromoContainer(headline, image, imagePosition)
+    <SmallPromoContainer
+      headline={headline}
+      image={image}
+      imagePosition={imagePosition}
+    />
   );
 };
 

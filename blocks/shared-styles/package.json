@@ -22,7 +22,10 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/resizer-image-block": "canary",
+    "@wpmedia/placeholder-image-block": "canary",
+    "styled-components": "^4.4.0"
   },
   "scripts": {},
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

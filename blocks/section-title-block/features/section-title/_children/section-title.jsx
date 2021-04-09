@@ -16,11 +16,13 @@ const StyledLink = styled.a`
 
 const Separator = '  \u00a0 • \u00a0  ';
 
+// using the class twice to ensure the • and the text are both same font-size and
 const styledLinkTmpl = (name, id, separator, arcSite) => (
-  <span key={id}>
+  <span key={id} className="section-title--styled-link">
     <StyledLink
       primaryFont={getThemeStyle(arcSite)['primary-font-family']}
       href={id}
+      className="section-title--styled-link"
     >
       {name}
     </StyledLink>

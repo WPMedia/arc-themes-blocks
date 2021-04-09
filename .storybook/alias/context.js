@@ -1,9 +1,12 @@
 export const useAppContext = () => ({
-  arcSite: '',
+  arcSite: 'story-book',
   renderables: [],
 });
 
+export const withFusionContext = (x) => (x);
+
 export const useFusionContext = () => ({
+  arcSite: 'story-book',
   customFields: {
     email: true,
     facebook: true,
@@ -25,3 +28,5 @@ export const useFusionContext = () => ({
   },
   deployment: (a) => a,
 });
+
+export default () => {};

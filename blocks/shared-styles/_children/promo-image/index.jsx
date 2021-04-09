@@ -59,7 +59,7 @@ const PromoImage = ({
     </a>
   );
 
-  const ImageOrPlaceholder = imageURL
+  const ImageOrPlaceholder = imageURL && resizedImageOptions
     ? (
       <Image
         url={imageURL}

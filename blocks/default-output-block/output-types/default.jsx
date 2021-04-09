@@ -118,6 +118,7 @@ const SampleOutputType = ({
     comscoreID,
     querylyId,
     querylyOrg,
+    locale = 'en',
   } = getProperties(arcSite);
 
   const pageType = metaValue('page-type');
@@ -158,7 +159,7 @@ const SampleOutputType = ({
   const chartBeat = chartBeatCode(chartBeatAccountId, chartBeatDomain);
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {gtmID

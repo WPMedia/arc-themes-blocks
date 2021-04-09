@@ -10,6 +10,17 @@ import discoverPromoType from './discover';
 
 import './styles.scss';
 
+/*
+  This components has a useContent hook to fetch image meta data if a
+  customImageURL is passed in.
+  If in your paretn compout you are using the customImageURL prop to render
+  a custom image make sure this component is not conditionally loaded anywhere
+  in the render cycle.
+
+  Fusion needs to run this component on the first server side pass to pick up
+  the useContent hook to allow it to render server side.
+*/
+
 const PromoImage = ({
   content = {},
   customImageURL = null,

@@ -53,6 +53,23 @@ describe('PromoImage', () => {
     const wrapper = mount(<PromoImage {...props} />);
 
     expect(wrapper.find('a').prop('href')).toBe(props.linkURL);
+    expect(wrapper.find('a').prop('target')).not.toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).not.toBe('noreferrer noopener');
+    expect(wrapper.find('Image').prop('url')).toBe(props.customImageURL);
+  });
+
+  it('renders custom image with a link and new tab params', () => {
+    const props = {
+      customImageURL: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+      linkURL: 'https://arcxp.com',
+      newTab: true,
+    };
+
+    const wrapper = mount(<PromoImage {...props} />);
+
+    expect(wrapper.find('a').prop('href')).toBe(props.linkURL);
+    expect(wrapper.find('a').prop('target')).toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).toBe('noreferrer noopener');
     expect(wrapper.find('Image').prop('url')).toBe(props.customImageURL);
   });
 

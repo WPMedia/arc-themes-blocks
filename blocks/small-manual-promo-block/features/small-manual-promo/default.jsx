@@ -23,6 +23,7 @@ const SmallManualPromoItem = ({ customFields }) => {
         className={headlineMarginClass}
         linkClassName="sm-promo-headline"
         headingClassName="sm-promo-headline"
+        newTab={customFields.newTab}
       />
     );
 

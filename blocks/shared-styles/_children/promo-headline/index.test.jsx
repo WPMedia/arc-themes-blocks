@@ -34,6 +34,23 @@ describe('PromoHeadline', () => {
 
     expect(wrapper.find('a').text()).toBe(props.text);
     expect(wrapper.find('a').prop('href')).toBe(props.link);
+    expect(wrapper.find('a').prop('target')).not.toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).not.toBe('noreferrer noopener');
+  });
+
+  it('link opens in newTab', () => {
+    const props = {
+      text: 'Link text',
+      link: 'https://arcxp.com',
+      newTab: true,
+    };
+
+    const wrapper = mount(<PromoHeadline {...props} />);
+
+    expect(wrapper.find('a').text()).toBe(props.text);
+    expect(wrapper.find('a').prop('href')).toBe(props.link);
+    expect(wrapper.find('a').prop('target')).toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).toBe('noreferrer noopener');
   });
 
   it('renders link with link text from ANS Story object', () => {

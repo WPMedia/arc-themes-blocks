@@ -11,6 +11,7 @@ const PromoHeadline = (props) => {
     className = '',
     linkClassName = '',
     headingClassName = '',
+    newTab = false,
   } = props;
   const { editableContent } = useEditableContent();
   const { arcSite } = useFusionContext();
@@ -28,7 +29,12 @@ const PromoHeadline = (props) => {
         {...editableItem}
         suppressContentEditableWarning
       >
-        <a href={linkURL} className={linkClassName}>
+        <a
+          href={linkURL}
+          target={newTab ? '_blank' : '_self'}
+          rel={newTab ? 'noreferrer noopener' : ''}
+          className={linkClassName}
+        >
           {linkText}
         </a>
       </PrimaryFont>

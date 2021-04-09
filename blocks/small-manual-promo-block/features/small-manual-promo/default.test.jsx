@@ -121,6 +121,7 @@ describe('the small promo feature', () => {
   it('should render even without a link url', () => {
     const imageURL = 'www.google.com/fake.png';
     const noLinkURLConfig = {
+      showImage: true,
       imageURL,
     };
 

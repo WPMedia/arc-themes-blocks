@@ -1,105 +1,59 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import getThemeStyle from 'fusion:themes';
-import { useContent, useEditableContent } from 'fusion:content';
-import styled from 'styled-components';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import getPromoContainer from './_children/promo_container';
-import getPromoStyle from './_children/promo_style';
+import { useEditableContent } from 'fusion:content';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
+import {
+  PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
+} from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_small-promo.scss';
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const SmallManualPromoItem = ({ customFields = {} }) => {
-  const { showImage = true } = customFields;
-  const { arcSite, isAdmin } = useFusionContext();
+const SmallManualPromoItem = ({ customFields }) => {
   const { searchableField } = useEditableContent();
+  const { isAdmin } = useFusionContext();
+
   const imagePosition = customFields?.imagePosition || 'right';
+  const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 
-  const headlineMarginClass = getPromoStyle(imagePosition, 'headlineMargin');
+  const headlineOutput = customFields.showHeadline && customFields.headline
+    ? (
+      <PromoHeadline
+        text={customFields.headline}
+        link={customFields.linkURL}
+        className={headlineMarginClass}
+        linkClassName="sm-promo-headline"
+        headingClassName="sm-promo-headline"
+        newTab={customFields.newTab}
+      />
+    ) : null;
 
-  const imageMarginClass = getPromoStyle(imagePosition, 'margin');
-  const resizedImageOptions = useContent({
-    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
-  });
-  const ratios = ratiosFor('SM', customFields.imageRatio);
-
-  const promoContainersStyles = {
-    containerClass: getPromoStyle(imagePosition, 'container'),
-    headlineClass: showImage
-      ? 'col-sm-xl-8'
-      : 'col-sm-xl-12',
-    imageClass: 'col-sm-xl-4',
-  };
-
-  const renderWithLink = useCallback((element, props, attributes) => (
-    <a
-      href={customFields.linkURL || '#'}
-      className={(props && props.className) || ''}
-      target={customFields.newTab ? '_blank' : '_self'}
-      rel={customFields.newTab ? 'noreferrer noopener' : ''}
-      onClick={!customFields.linkURL ? (evt) => {
-        evt.preventDefault();
-      } : undefined}
-      {...attributes}
-    >
-      {element}
-    </a>
-  ), [customFields.linkURL, customFields.newTab]);
-
-  const headline = customFields.showHeadline && customFields.headline
-    && (
-      <div className={`promo-headline ${headlineMarginClass}`}>
-        { renderWithLink((
-          <HeadlineText
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            className="sm-promo-headline"
-          >
-            {customFields.headline}
-          </HeadlineText>
-        ), { className: 'sm-promo-headline' }) }
-      </div>
-    );
-
-  const image = showImage && customFields.imageURL && resizedImageOptions
-    && (
-      <div
-        className={imageMarginClass}
-        {...searchableField('imageURL')}
-      >
-        { renderWithLink(
-          <Image
-            url={customFields.imageURL}
+  const image = customFields?.showImage && customFields.imageURL
+    ? (
+      <div style={{ position: isAdmin ? 'relative' : null }}>
+        <div {...searchableField('imageURL')}>
+          <PromoImage
+            customImageURL={customFields.imageURL}
             alt={customFields.headline}
-            // small should be 3:2 aspect ratio
-            {...ratios}
-            breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-            resizedImageOptions={resizedImageOptions}
-          />, {}, { 'aria-hidden': 'true', tabIndex: '-1' },
-        )}
+            promoSize="SM"
+            imageRatio={customFields.imageRatio}
+            linkURL={customFields.linkURL}
+            newTab={customFields.newTab}
+            lazyLoad={customFields.lazyLoad}
+          />
+        </div>
       </div>
-    );
+    ) : null;
 
-  // base case for rendering image without even a link
   return (
-    <>
-      <article className="container-fluid small-promo">
-        {getPromoContainer(headline, image, promoContainersStyles, imagePosition, isAdmin)}
-      </article>
-      <hr />
-    </>
+    <SmallPromoContainer
+      headline={headlineOutput}
+      image={image}
+      imagePosition={imagePosition}
+    />
   );
 };
 
-const SmallManualPromo = ({ customFields }) => {
+const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
   const { isAdmin } = useFusionContext();
   if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;

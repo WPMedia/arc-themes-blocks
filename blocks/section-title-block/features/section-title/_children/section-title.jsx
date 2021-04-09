@@ -17,13 +17,15 @@ const StyledLink = styled.a`
 const Separator = '  \u00a0 • \u00a0  ';
 
 const styledLinkTmpl = (name, id, separator, arcSite) => (
-  <StyledLink
-    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-    href={id}
-    key={id}
-  >
-    {`${name}${separator}`}
-  </StyledLink>
+  <span key={id}>
+    <StyledLink
+      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+      href={id}
+    >
+      {name}
+    </StyledLink>
+    {separator}
+  </span>
 );
 
 const SectionTitle = (props) => {

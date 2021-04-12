@@ -1,6 +1,7 @@
 .section-title {
   color: $ui-primary-font-color;
   display: block;
+  font-weight: bold;
 }
 
 .section-container {
@@ -10,5 +11,6 @@
 .section-title--styled-link {
   font-size: 14px;
   color: $ui-primary-font-color;
+  text-decoration: none;
 }
 

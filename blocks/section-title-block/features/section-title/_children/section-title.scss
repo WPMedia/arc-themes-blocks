@@ -9,7 +9,7 @@
 }
 
 .section-title--styled-link {
-  font-size: 14px;
+  font-size: calculateRem(14px);
   color: $ui-primary-font-color;
   text-decoration: none;
 }

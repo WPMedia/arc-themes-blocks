@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import QuerylySearch from './queryly-search';
 
-const testQuerylySearch = ({ root, theme, iconSize = 16 }) => {
+const testQuerylySearch = ({
+  root, theme, iconSize = 16, label = 'Search',
+}) => {
   const container = root.find('.nav-search');
   expect(container).toHaveLength(1);
   expect(container).toHaveClassName(theme);
@@ -19,6 +21,9 @@ const testQuerylySearch = ({ root, theme, iconSize = 16 }) => {
   expect(searchIcon).toHaveLength(1);
   expect(searchIcon.prop('height')).toEqual(iconSize);
   expect(searchIcon.prop('width')).toEqual(iconSize);
+
+  const button = container.find('button');
+  expect(button.prop('aria-label')).toBe(label);
 };
 
 describe('<QuerylySearch/>', () => {
@@ -40,5 +45,12 @@ describe('<QuerylySearch/>', () => {
   it('renders with custom icon size', () => {
     const wrapper = shallow(<QuerylySearch theme="dark" iconSize={24} />);
     testQuerylySearch({ root: wrapper, theme: 'dark', iconSize: 24 });
+  });
+
+  it('custom label', () => {
+    const wrapper = shallow(<QuerylySearch theme="dark" iconSize={24} label="Suche" />);
+    testQuerylySearch({
+      root: wrapper, theme: 'dark', iconSize: 24, label: 'Suche',
+    });
   });
 });

@@ -22,9 +22,9 @@ const querylySearchClick = () => {
   document.getElementById('queryly_toggle').dispatchEvent(event);
 };
 
-const QuerylySearch = ({ theme = 'dark', iconSize = 16 }) => (
+const QuerylySearch = ({ theme = 'dark', iconSize = 16, label = 'Search' }) => (
   <div className={`nav-search ${theme} queryly`}>
-    <button className={`nav-btn nav-btn-${theme} transparent border`} type="button" onClick={querylySearchClick}>
+    <button className={`nav-btn nav-btn-${theme} transparent border`} type="button" onClick={querylySearchClick} aria-label={label}>
       <label htmlFor="queryly_toggle">
         <SearchIcon height={iconSize} width={iconSize} />
       </label>

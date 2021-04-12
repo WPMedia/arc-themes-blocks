@@ -235,8 +235,8 @@ const getResizedImageParams = (data, options) => {
             const galleryImageWidths = [400, 600, 800, 1600];
             return generateParams(contentElement, resizerURL, galleryImageWidths);
           }
-          // recursively resize if story
-          if (contentElement.type === 'story') {
+          // recursively resize if story or video
+          if (contentElement.type === 'story' || contentElement.type === 'video') {
             return generateParams(contentElement, resizerURL);
           }
 

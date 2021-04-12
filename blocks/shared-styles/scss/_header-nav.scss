@@ -78,6 +78,7 @@ body.nav-open {
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
+
     span {
       display: none;
     }
@@ -103,7 +104,7 @@ body.nav-open {
 
   &.open {
     input {
-      font-size: 16px;
+      font-size: calculateRem(16px);
       height: $btn-size;
       line-height: 24px;
       padding: 4px $btn-size 4px 11px;
@@ -240,7 +241,8 @@ body.nav-open {
       justify-content: flex-end;
     }
 
-    &.nav-logo, & > .nav-logo {
+    &.nav-logo,
+    & > .nav-logo {
       justify-content: center;
 
       &.svg-logo {
@@ -411,7 +413,7 @@ body.nav-open {
         align-items: center;
         color: #fff;
         display: block;
-        font-size: 16px;
+        font-size: calculateRem(16px);
         justify-content: space-between;
         line-height: 40px;
         text-decoration: none;
@@ -444,7 +446,7 @@ body.nav-open {
       > a {
         color: $ui-medium-gray;
         display: block;
-        font-size: 16px;
+        font-size: calculateRem(16px);
         font-weight: bold;
         line-height: 24px;
         padding: 8px 16px 8px 20px;

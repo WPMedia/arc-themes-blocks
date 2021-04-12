@@ -171,6 +171,31 @@ describe('root html layout', () => {
     expect(html.children('head').length).toBe(1);
     expect(html.children('body').length).toBe(1);
   });
+
+  it('must take in a language', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      locale: 'fr',
+    }))));
+
+    const { default: DefaultOutputType } = require('../default');
+
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+
+    expect(wrapper.find('html').prop('lang')).toBe('fr');
+  });
+
+  it('must fallback to en without a locale', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+    const { default: DefaultOutputType } = require('../default');
+
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+
+    expect(wrapper.find('html').prop('lang')).toBe('en');
+  });
 });
 
 describe('head content', () => {

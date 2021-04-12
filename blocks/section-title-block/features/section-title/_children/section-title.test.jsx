@@ -43,7 +43,8 @@ describe('the section title block', () => {
       it('should have the correct href', () => {
         const wrapper = mount(<SectionTitle content={mockTwoSection.globalContent} />);
 
-        expect(wrapper.find('.section-container').childAt(0).prop('href')).toEqual('/news');
+        // nesting within a span to find the a tag
+        expect(wrapper.find('.section-container').childAt(0).find('a').prop('href')).toEqual('/news');
       });
 
       it('should have a last element without a separator', () => {

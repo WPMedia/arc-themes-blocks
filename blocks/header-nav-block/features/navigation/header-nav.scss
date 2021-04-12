@@ -137,7 +137,7 @@ $submenu-link-color: $ui-dark-gray;
     padding: 0;
 
     > li {
-      font-size: 14px;
+      font-size: calculateRem(14px);
       font-weight: bold;
       list-style: none;
       padding: 0 20px;

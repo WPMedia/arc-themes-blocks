@@ -13,7 +13,7 @@ footer {
   }
 
   .container {
-    @media screen and (max-width: 95rem) and (min-width: 90rem)  {
+    @media screen and (max-width: 95rem) and (min-width: 90rem) {
       margin-left: 5%;
       margin-right: 5%;
     }
@@ -127,8 +127,7 @@ footer {
   }
 
   .footer-section {
-
-    font-size: 14px;
+    font-size: calculateRem(14px);
     justify-self: left;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

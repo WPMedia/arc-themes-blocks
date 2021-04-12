@@ -14,7 +14,7 @@
       @include link-color-active-hover($ui-primary-font-color);
       color: $ui-primary-font-color;
       font-family: $theme-primary-font-family;
-      font-size: 14px;
+      font-size: calculateRem(14px);
       height: 100%;
       line-height: 14px;
       margin: 8px 0;

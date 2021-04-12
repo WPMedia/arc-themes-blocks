@@ -9,6 +9,7 @@ import getProperties from 'fusion:properties';
 import getResizedImageData, { extractResizedParams } from '.';
 import mockStoryFeedData from './mocks/mockFeedData';
 import mockSearchApiData from './mocks/mockSearchApiData';
+import mockCollectionApiData from './mocks/mockCollectionApi';
 import mockCreditsData from './mocks/mockCreditsData';
 import mockCreditsEmptyImgData from './mocks/mockCreditsEmptyImgData';
 import mockLeadArtData from './mocks/mockLeadArtData';
@@ -519,6 +520,29 @@ describe('get resized image data helper on the server-side', () => {
         'undefined',
       );
       expect(dataSearch).toEqual(mockSearchApiDataEmptyPromo);
+    });
+
+    it('takes in collection api results data object', () => {
+      getProperties.mockImplementation(() => ({
+        breakpoints: DEFAULT_BREAKPOINTS_ARRAY,
+        aspectRatios: ASPECT_RATIOS,
+        imageWidths: IMAGE_WIDTHS,
+        resizerURL: 'https://fake.cdn.com/resizer',
+        shouldCompressImageParams: true,
+      }));
+
+      const dataSearch = getResizedImageData(
+        mockCollectionApiData,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+      );
+
+      expect(typeof dataSearch.content_elements[0].promo_items.basic.resized_params).toEqual(
+        'object',
+      );
     });
   });
   describe('when shouldCompressImageParams siteProperty is false (unset)', () => {

@@ -113,7 +113,6 @@ export default ({ children = [], sections = [], isHidden = false }) => {
       <ul className="section-menu">
         {active.map((item) => <SectionItem key={item._id} item={item} isHidden={isHidden} />)}
       </ul>
-      <div style={{ height: '80vh' }}> </div>
     </>
   );
 };

@@ -2,6 +2,8 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import { Image } from '@wpmedia/engine-theme-sdk';
+import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent, useEditableContent } from 'fusion:content';
 import styled from 'styled-components';
@@ -99,18 +101,6 @@ const SmallManualPromoItem = ({ customFields = {} }) => {
   );
 };
 
-const SmallManualPromo = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
-    return null;
-  }
-  return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <SmallManualPromoItem customFields={{ ...customFields }} />
-    </LazyLoad>
-  );
-};
-
 SmallManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
@@ -155,11 +145,6 @@ SmallManualPromo.propTypes = {
       },
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

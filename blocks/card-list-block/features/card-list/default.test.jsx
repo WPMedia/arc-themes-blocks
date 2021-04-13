@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
 import mockData,
 {
@@ -14,20 +14,14 @@ jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
-}));
-
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
-  default: function Byline() { return <div />; },
+  default: function Byline(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 jest.mock('@wpmedia/date-block', () => ({
   __esModule: true,
-  default: function ArticleDate() { return <div />; },
+  default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 describe('Card list', () => {
@@ -64,7 +58,7 @@ describe('Card list', () => {
 
     const { default: CardList } = require('./default');
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
@@ -86,7 +80,7 @@ describe('Card list', () => {
 
     const { default: CardList } = require('./default');
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.card-list-container').length).toEqual(1);
@@ -110,7 +104,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
     getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Papyrus' }));
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItem);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
@@ -118,17 +112,17 @@ describe('Card list', () => {
       });
 
       it('should render a title', () => {
-        expect(wrapper.find('div.card-list-title').length).toEqual(1);
+        expect(wrapper.find('.card-list-title').length).toEqual(1);
       });
 
       it('should render a title with the right text', () => {
-        expect(wrapper.find('div.card-list-title').text()).toEqual('Test Title');
+        expect(wrapper.find('.card-list-title').text()).toEqual('Test Title');
       });
 
       it('should render two anchor tags - one around image one for the title', () => {
         expect(wrapper.find('article.list-item-simple').find('.list-anchor').length).toEqual(2);
         expect(wrapper.find('.card-list--link-container').find('Image').length).toEqual(1);
-        expect(wrapper.find('HeadlineText').length).toEqual(1);
+        expect(wrapper.find('HeadlineText.card-list-headline #card-list--headline-link').length).toEqual(1);
       });
 
       it('should render one image wrapped in an anchor tag', () => {
@@ -150,7 +144,7 @@ describe('Card list', () => {
       });
 
       it('should render an overline', () => {
-        expect(wrapper.find('div.card-list-overline').length).toEqual(1);
+        expect(wrapper.find('.card-list-overline').length).toEqual(1);
       });
 
       it('should render a main headline', () => {
@@ -201,7 +195,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: mockData }, () => {
       wrapper.update();
@@ -214,9 +208,9 @@ describe('Card list', () => {
       });
 
       it('should render a headline', () => {
-        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').length).toEqual(27);
-        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('h2.headline-text').length).toEqual(27);
-        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('h2.headline-text').first()
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').find('.headline-text').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').find('.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
         expect(
           wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
@@ -242,12 +236,12 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
-        expect(wrapper.find('div.card-list-container').length).toEqual(1);
+        expect(wrapper.find('.card-list-container').length).toEqual(1);
       });
 
       it('should render a separator', () => {
@@ -269,7 +263,7 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
 
     CardList.prototype.fetchContent = jest.fn().mockReturnValue(oneListItemWithoutSectionName);
-    const wrapper = mount(<CardList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<CardList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ cardList: oneListItemWithoutSectionName }, () => {
       wrapper.update();

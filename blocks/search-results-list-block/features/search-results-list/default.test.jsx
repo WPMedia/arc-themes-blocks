@@ -11,12 +11,6 @@ jest.mock('prop-types', () => ({
 }));
 jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => ({})),
-  useFusionContext: jest.fn(() => ({})),
-}));
-
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
 }));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -41,7 +35,7 @@ describe('the search results list feature block', () => {
           deployment={jest.fn((path) => path)}
         />,
       );
-      expect(wrapper.find('GlobalContentSearchResultsList')).toBeTruthy();
+      expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
   });
 
@@ -56,7 +50,7 @@ describe('the search results list feature block', () => {
     );
 
     it('should render the global content search results list', () => {
-      expect(wrapper.find('CustomContentSearchResultsList')).toBeTruthy();
+      expect(wrapper.is('CustomContentSearchResultsList')).toBeTruthy();
     });
 
     it('should render all promo items', () => {
@@ -72,7 +66,7 @@ describe('the search results list feature block', () => {
     />);
 
     it('should render the global content search results list', () => {
-      expect(wrapper.find('GlobalContentSearchResultsList')).toBeTruthy();
+      expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
 
     it('should render all promo items', () => {
@@ -88,23 +82,11 @@ describe('the search results list feature block', () => {
     />);
 
     it('should render the global content search results list', () => {
-      expect(wrapper.find('GlobalContentSearchResultsList')).toBeTruthy();
+      expect(wrapper.is('GlobalContentSearchResultsList')).toBeTruthy();
     });
 
     it('should render all promo items', () => {
       expect(wrapper.find('GlobalContentSearchResultsList').prop('promoElements')).toEqual(defaultPromos);
-    });
-  });
-
-  describe('when lazyLoad is true', () => {
-    const { default: SearchResultsListContainer } = require('./default');
-    const wrapper = shallow(<SearchResultsListContainer
-      customFields={{ lazyLoad: true }}
-      deployment={jest.fn((path) => path)}
-    />);
-
-    it('should not render the global content search results list', () => {
-      expect(wrapper.html()).toBe(null);
     });
   });
 });

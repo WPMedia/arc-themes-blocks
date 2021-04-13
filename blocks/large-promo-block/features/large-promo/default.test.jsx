@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { useContent } from 'fusion:content';
 import { extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import LargePromo from './default';
@@ -12,8 +12,6 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   localizeDateTime: jest.fn(() => new Date().toDateString()),
   extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
   VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -339,7 +337,7 @@ describe('the large promo feature', () => {
       it('should render Image when no video found in ANS lead art', () => {
         useContent.mockReturnValueOnce(mockData);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = mount(
+        const wrapper = shallow(
           <LargePromo
             customFields={{
               ...config,
@@ -362,7 +360,7 @@ describe('the large promo feature', () => {
             },
           },
         });
-        const wrapper = mount(
+        const wrapper = shallow(
           <LargePromo
             customFields={{
               ...config,
@@ -382,7 +380,7 @@ describe('the large promo feature', () => {
         delete mockDataVideoNoEmbed.embed_html;
         useContent.mockReturnValueOnce(mockDataVideoNoEmbed);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = mount(
+        const wrapper = shallow(
           <LargePromo
             customFields={{
               ...config,
@@ -396,7 +394,7 @@ describe('the large promo feature', () => {
 
       it('should render VideoPlayer when video embed exists in ANS', () => {
         useContent.mockReturnValueOnce(mockDataVideo);
-        const wrapper = mount(
+        const wrapper = shallow(
           <LargePromo
             customFields={{
               ...config,

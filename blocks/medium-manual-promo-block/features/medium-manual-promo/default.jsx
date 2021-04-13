@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { useContent, useEditableContent } from 'fusion:content';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
@@ -98,6 +98,18 @@ const MediumManualPromoItem = ({ customFields }) => {
   );
 };
 
+const MediumManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <MediumManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 MediumManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
@@ -122,28 +134,27 @@ MediumManualPromo.propTypes = {
       defaultValue: false,
       group: 'Configure Content',
     }),
-    showHeadline: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

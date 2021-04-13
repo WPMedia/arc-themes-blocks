@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
@@ -127,6 +127,18 @@ const LargeManualPromoItem = ({ customFields }) => {
   );
 };
 
+const LargeManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <LargeManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 LargeManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
@@ -180,6 +192,11 @@ LargeManualPromo.propTypes = {
       group: 'Show promo elements',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

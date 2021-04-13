@@ -10,7 +10,7 @@ import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import { PromoLabel } from '@wpmedia/shared-styles';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
   extractResizedParams,
@@ -194,6 +194,18 @@ const MediumPromoItem = ({ customFields }) => {
   ) : null;
 };
 
+const MediumPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <MediumPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 MediumPromo.propTypes = {
   customFields: PropTypes.shape({
     itemContentConfig: PropTypes.contentConfig('ans-item').tag({
@@ -231,6 +243,11 @@ MediumPromo.propTypes = {
       searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

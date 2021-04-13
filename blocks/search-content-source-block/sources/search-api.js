@@ -5,7 +5,7 @@ export default {
   resolve(contentOptions) {
     const { query, page, 'arc-site': arcSite } = contentOptions;
     if (query) {
-      return `https://search.arcpublishing.com/search?&q=${query}&page=${page || 1}${arcSite ? `&website_id=${arcSite}` : ''}${SEARCH_KEY ? `&key=${SEARCH_KEY}` : ''}`;
+      return `https://search.arcpublishing.com/search?&q=${encodeURIComponent(decodeURIComponent(query))}&page=${page || 1}${arcSite ? `&website_id=${arcSite}` : ''}${SEARCH_KEY ? `&key=${SEARCH_KEY}` : ''}`;
     }
     return '';
   },

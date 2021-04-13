@@ -4,8 +4,6 @@ import SmallManualPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: ({ url }) => <img src={url} alt="fake test image" />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -115,7 +113,7 @@ describe('the small promo feature', () => {
 
   it('should have one line separator', () => {
     const wrapper = mount(<SmallManualPromo customFields={config} />);
-    expect(wrapper.find('hr')).toHaveLength(1);
+    expect(wrapper.find('SmallManualPromo > hr')).toHaveLength(1);
   });
 
   it('should render even without a link url', () => {

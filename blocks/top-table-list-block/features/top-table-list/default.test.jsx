@@ -2,20 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { RIGHT } from './shared/imagePositionConstants';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  fallbackImage: 'placeholder.jpg',
-}))));
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
-}));
-jest.mock('./_children/story-item-container', () => (
-  function StoryItemContainer() {
-    return <div />;
-  }
-));
-
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -40,7 +26,17 @@ const config = {
 };
 
 describe('top table list', () => {
-  afterEach(() => {
+  beforeAll(() => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+    }))));
+    jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+    jest.mock('fusion:properties', () => jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+    })));
+  });
+  afterAll(() => {
     jest.resetModules();
   });
 
@@ -73,7 +69,6 @@ describe('top table list', () => {
     const wrapper = mount(
       <TopTableList customFields={config} arcSite="" deployment={jest.fn((path) => path)} />,
     );
-
     expect(wrapper.text()).toBe('');
     expect(wrapper.find('.top-table-list-container').children().length).toBe(0);
   });
@@ -397,9 +392,9 @@ describe('top table list overline rules', () => {
 
     const wrapper = mount(<TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
-    expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
+    const ele = wrapper.find('.top-table-list-container').find('a.overline');
+    expect(ele.length).toBe(1);
+    expect(ele.text()).toEqual('The Label');
   });
 
   it('must render overline from section', () => {
@@ -442,9 +437,9 @@ describe('top table list overline rules', () => {
       <TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
-    expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Section');
+    const ele = wrapper.find('.top-table-list-container').find('a.overline');
+    expect(ele.text()).toEqual('The Section');
+    expect(ele.length).toBe(1);
   });
 
   it('must prioritize overline from label if has section too', () => {
@@ -494,8 +489,267 @@ describe('top table list overline rules', () => {
       <TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
-    expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
+    const ele = wrapper.find('.top-table-list-container').find('a.overline');
+    expect(ele.text()).toEqual('The Label');
+    expect(ele.length).toBe(1);
+  });
+});
+
+describe('default ratios', () => {
+  beforeAll(() => {
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        content_elements: [{
+          _id: 'kjdfh',
+          promo_items: {
+            basic: {
+              type: 'image',
+              url: 'url',
+              resized_params: {
+                '377x283': '',
+                '377x251': '',
+                '377x212': '',
+                '400x225': '',
+                '400x267': '',
+                '400x300': '',
+                '800x600': '',
+                '800x533': '',
+                '800x450': '',
+              },
+            },
+          },
+          headlines: {
+            basic: 'Basic Headline',
+          },
+          description: {
+            basic: 'Basic description',
+          },
+          credits: {
+            by: ['Bob Woodward'],
+          },
+          websites: {
+            'the-sun': {
+              website_url: 'url',
+            },
+          },
+        }],
+      })),
+    }));
+
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      fallbackImage: 'placeholder.jpg',
+      resizerURL: 'resizer',
+    }))));
+  });
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('must have a default 4:3 ratio for XL', () => {
+    const xlConfig = {
+      extraLarge: 1,
+      showImageXL: true,
+      showHeadlineXL: true,
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(600);
+  });
+
+  it('must have a default 4:3 ratio for LG', () => {
+    const xlConfig = {
+      large: 1,
+      showImageLG: true,
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(283);
+  });
+
+  it('must have a default 16:9 ratio for MD', () => {
+    const xlConfig = {
+      medium: 1,
+      showImageMD: true,
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('must have a default 3:2 ratio for SM', () => {
+    const xlConfig = {
+      small: 1,
+      showImageSM: true,
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(267);
+  });
+
+  it('XL can be changed to 16:9', () => {
+    const xlConfig = {
+      extraLarge: 1,
+      showImageXL: true,
+      showHeadlineXL: true,
+      imageRatioXL: '16:9',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(450);
+  });
+
+  it('XL can be changed to 4:3', () => {
+    const xlConfig = {
+      extraLarge: 1,
+      showImageXL: true,
+      showHeadlineXL: true,
+      imageRatioXL: '4:3',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(600);
+  });
+
+  it('XL can be changed to 3:2', () => {
+    const xlConfig = {
+      extraLarge: 1,
+      showImageXL: true,
+      showHeadlineXL: true,
+      imageRatioXL: '3:2',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(533);
+  });
+
+  it('LG can be changed to 16:9', () => {
+    const xlConfig = {
+      large: 1,
+      showImageLG: true,
+      imageRatioLG: '16:9',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(212);
+  });
+
+  it('LG can be changed to 4:3', () => {
+    const xlConfig = {
+      large: 1,
+      showImageLG: true,
+      imageRatioLG: '4:3',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(283);
+  });
+
+  it('LG can be changed to 3:2', () => {
+    const xlConfig = {
+      large: 1,
+      showImageLG: true,
+      imageRatioLG: '3:2',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(251);
+  });
+
+  it('MD can be changed to 16:9', () => {
+    const xlConfig = {
+      medium: 1,
+      showImageMD: true,
+      imageRatioMD: '16:9',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('MD can be changed to 4:3', () => {
+    const xlConfig = {
+      medium: 1,
+      showImageMD: true,
+      imageRatioMD: '4:3',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(300);
+  });
+
+  it('MD can be changed to 3:2', () => {
+    const xlConfig = {
+      medium: 1,
+      showImageMD: true,
+      imageRatioMD: '3:2',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(267);
+  });
+
+  it('SM can be changed to 16:9', () => {
+    const xlConfig = {
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '16:9',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(225);
+  });
+
+  it('SM can be changed to 4:3', () => {
+    const xlConfig = {
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '4:3',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(300);
+  });
+
+  it('SM can be changed to 3:2', () => {
+    const xlConfig = {
+      small: 1,
+      showImageSM: true,
+      imageRatioSM: '3:2',
+    };
+    const { default: TopTableList } = require('./default');
+    TopTableList.prototype.fetchContent = jest.fn().mockReturnValue({});
+    const ttl = mount(<TopTableList customFields={xlConfig} arcSite="" deployment={jest.fn((path) => path)} />);
+
+    expect(ttl.find('Image').prop('largeHeight')).toBe(267);
   });
 });

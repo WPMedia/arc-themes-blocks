@@ -311,18 +311,6 @@ const LargePromoItem = ({ customFields }) => {
   ) : null;
 };
 
-const LargePromo = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
-    return null;
-  }
-  return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <LargePromoItem customFields={{ ...customFields }} />
-    </LazyLoad>
-  );
-};
-
 LargePromo.propTypes = {
   customFields: PropTypes.shape({
     itemContentConfig: PropTypes.contentConfig('ans-item').tag({
@@ -369,11 +357,6 @@ LargePromo.propTypes = {
       label: 'Play video in place',
       group: 'Art',
       defaultValue: false,
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 

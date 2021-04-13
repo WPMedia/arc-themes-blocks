@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import Byline from '@wpmedia/byline-block';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
@@ -186,10 +186,6 @@ class CardList extends React.Component {
   }
 
   render() {
-    if (this.lazyLoad && isServerSide() && !this.isAdmin) {
-      return null;
-    }
-
     const { customFields: { title } = {}, arcSite } = this.props;
     const {
       cardList: { content_elements: pageContent = [] } = {},
@@ -211,7 +207,7 @@ class CardList extends React.Component {
     );
     const targetFallbackImage = this.getFallbackImageURL();
 
-    const CardListItems = () => (
+    return (
       (contentElements.length > 0
         && (
           <div className="card-list-container">
@@ -230,7 +226,7 @@ class CardList extends React.Component {
               }
               <article
                 className="list-item-simple"
-                key={`card-list-${contentElements[0].websites[arcSite].website_url}`}
+                key={`result-card-${contentElements[0].websites[arcSite].website_url}`}
               >
                 <a
                   href={contentElements[0].websites[arcSite].website_url}
@@ -243,15 +239,30 @@ class CardList extends React.Component {
                      <Image
                        url={extractImage(contentElements[0].promo_items)}
                        alt={contentElements[0].headlines.basic}
-                       {...this.largeImageOptions}
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
                        resizedImageOptions={getResizedImage(contentElements[0].promo_items)}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
+                       resizerURL={getProperties(arcSite)?.resizerURL}
                      />
                    ) : (
                      <Image
+                       smallWidth={377}
+                       smallHeight={283}
+                       mediumWidth={377}
+                       mediumHeight={283}
+                       largeWidth={377}
+                       largeHeight={283}
+                       alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
                        url={targetFallbackImage}
-                       alt={this.siteProperties.primaryLogoAlt || 'Placeholder logo'}
-                       {...this.largeImageOptions}
+                       breakpoints={getProperties(arcSite)?.breakpoints}
                        resizedImageOptions={placeholderResizedImageOptions}
+                       resizerURL={getProperties(arcSite)?.resizerURL}
+
                      />
                    )
                   }
@@ -296,11 +307,11 @@ class CardList extends React.Component {
                   } = element;
                   const url = element.websites[arcSite].website_url;
                   return (
-                    <React.Fragment key={`card-list-${url}`}>
+                    <React.Fragment key={`result-card-${url}`}>
                       <hr />
                       <article
                         className="card-list-item card-list-item-margins"
-                        key={`card-list-${url}`}
+                        key={`result-card-${url}`}
                         type="1"
                       >
                         <a
@@ -326,16 +337,31 @@ class CardList extends React.Component {
                                 <Image
                                   url={extractImage(element.promo_items)}
                                   alt={headlineText}
-                                  {...this.samllImageOptions}
+                                  // small, matches numbered list, is 3:2 aspect ratio
+                                  smallWidth={105}
+                                  smallHeight={70}
+                                  mediumWidth={105}
+                                  mediumHeight={70}
+                                  largeWidth={274}
+                                  largeHeight={183}
                                   resizedImageOptions={extractResizedParams(element)}
+                                  breakpoints={getProperties(arcSite)?.breakpoints}
+                                  resizerURL={getProperties(arcSite)?.resizerURL}
                                 />
                               )
                               : (
                                 <Image
+                                  smallWidth={105}
+                                  smallHeight={70}
+                                  mediumWidth={105}
+                                  mediumHeight={70}
+                                  largeWidth={274}
+                                  largeHeight={183}
+                                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
                                   url={targetFallbackImage}
-                                  alt={this.siteProperties.primaryLogoAlt || 'Placeholder logo'}
-                                  {...this.samllImageOptions}
+                                  breakpoints={getProperties(arcSite)?.breakpoints}
                                   resizedImageOptions={placeholderResizedImageOptions}
+                                  resizerURL={getProperties(arcSite)?.resizerURL}
                                 />
                               )
                           }
@@ -349,12 +375,6 @@ class CardList extends React.Component {
           </div>
         )
       )
-    );
-
-    return (
-      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <CardListItems />
-      </LazyLoad>
     );
   }
 }
@@ -370,11 +390,6 @@ CardList.propTypes = {
       },
     ),
     title: PropTypes.string,
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

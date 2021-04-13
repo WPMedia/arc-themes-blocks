@@ -30,7 +30,7 @@ export const StyledSocialContainer = styled.div`
   }
 `;
 
-const FooterItem = ({ customFields: { navigationConfig } }) => {
+const Footer = ({ customFields: { navigationConfig } }) => {
   const { arcSite, deployment, contextPath } = useFusionContext();
   const {
     facebookPage,
@@ -188,28 +188,11 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
   );
 };
 
-const Footer = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
-    return null;
-  }
-  return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <FooterItem customFields={{ ...customFields }} />
-    </LazyLoad>
-  );
-};
-
 Footer.propTypes = {
   customFields: PropTypes.shape({
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
       label: 'Navigation',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

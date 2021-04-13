@@ -1,6 +1,6 @@
 /* eslint-disable prefer-arrow-callback  */
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import mockData, { oneListItem, LineItemWithOutDescription, withoutByline } from './mock-data';
 import mockCollections, { collectionFirst10Items } from './mock-collections-data';
 
@@ -19,19 +19,17 @@ jest.mock('fusion:intl', () => ({
 
 jest.mock('@wpmedia/byline-block', () => ({
   __esModule: true,
-  default: function Byline() { return <div />; },
+  default: function Byline(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 jest.mock('@wpmedia/date-block', () => ({
   __esModule: true,
-  default: function ArticleDate() { return <div />; },
+  default: function ArticleDate(props, children) { return <div {...props}>{children}</div>; },
 }));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
 }));
 
 describe('The results list', () => {
@@ -54,7 +52,7 @@ describe('The results list', () => {
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched(mockReturnData) });
 
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -80,7 +78,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched(oneListItem) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       it('should have one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -101,13 +99,13 @@ describe('The results list', () => {
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
       });
 
       it('should render a headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
-        expect(wrapper.find('.list-item').find('h2.headline-text').text()).toEqual('Article with a YouTube embed in it');
-        expect(wrapper.find('.list-item').find('p.description-text')
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').text()).toEqual('Article with a YouTube embed in it');
+        expect(wrapper.find('.list-item').find('.description-text')
           .text()).toEqual('Test article for YouTube responsiveness');
       });
 
@@ -147,7 +145,7 @@ describe('The results list', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched(LineItemWithOutDescription) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: LineItemWithOutDescription }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -155,17 +153,17 @@ describe('The results list', () => {
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
       });
 
       it('should render a headline', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
-        expect(wrapper.find('.list-item').find('h2.headline-text')
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text')
           .text()).toEqual('Article with a YouTube embed in it');
       });
 
       it('should not render a description', () => {
-        expect(wrapper.find('.list-item').find('p.description-text').length).toEqual(0);
+        expect(wrapper.find('.list-item').find('.description-text').length).toEqual(0);
       });
     });
   });
@@ -188,7 +186,7 @@ describe('The results list', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched(withoutByline) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: withoutByline }, () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
@@ -219,7 +217,7 @@ describe('The results list', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched(mockReturnData) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="dagen" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -251,7 +249,7 @@ describe('The results list', () => {
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
 
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
 
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
@@ -285,7 +283,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
@@ -320,7 +318,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
@@ -355,7 +353,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
@@ -390,7 +388,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
@@ -428,7 +426,7 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={listContentConfig} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: oneListItem }, () => {
       wrapper.update();
 
@@ -463,18 +461,20 @@ describe('The results list', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData, seeMore: true }, () => {
       wrapper.update();
       it('should render a button to display more stories', () => {
-        expect(wrapper.find('button.btn').length).toEqual(1);
+        expect(wrapper.find('.btn').length).toEqual(1);
       });
 
       it('should have invisible text for accessibility purposes', () => {
-        expect(wrapper.find('button.btn').text()).toEqual('See More stories about this topic');
+        expect(wrapper.find('.btn').text()).toEqual('See More stories about this topic');
       });
 
       it('should call fetchContent when clicked', () => {
+        expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+        wrapper.find('.btn').simulate('click');
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
         wrapper.find('button.btn').simulate('click');
         expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(3);
@@ -500,7 +500,7 @@ describe('The results list', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched({ mockData }) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: mockData, seeMore: false }, () => {
       wrapper.update();
       wrapper.instance().fetchStories(false);
@@ -530,7 +530,7 @@ describe('The results list from collection', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched({ collectionFirst10Items }) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: collectionFirst10Items }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -556,7 +556,7 @@ describe('The results list from collection', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched({ mockCollections }) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: collectionFirst10Items, seeMore: false }, () => {
       wrapper.update();
       expect(wrapper.find('.results-list-container').length).toEqual(1);
@@ -583,9 +583,11 @@ describe('The results list from collection', () => {
     });
     ResultsList.prototype.getContent = jest.fn()
       .mockReturnValue({ fetched: fetched({ mockCollections }) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     wrapper.setState({ resultList: collectionFirst10Items, seeMore: true }, () => {
       wrapper.update();
+      expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+      wrapper.find('.btn').simulate('click');
       expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
       wrapper.find('button.btn').simulate('click');
       expect(ResultsList.prototype.fetchStories.mock.calls.length).toEqual(3);
@@ -610,7 +612,7 @@ describe('The results list from collection', () => {
       resolve(content);
     });
     ResultsList.prototype.getContent = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    const wrapper = mount(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
+    const wrapper = shallow(<ResultsList customFields={customFields} arcSite="the-gazette" deployment={jest.fn((path) => path)} />);
     fetchMock.mockClear();
     wrapper.setState({ storedList: collectionFirst10Items });
     wrapper.update();

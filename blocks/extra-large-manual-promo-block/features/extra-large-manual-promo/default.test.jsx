@@ -4,8 +4,6 @@ import ExtraLargeManualPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
-  LazyLoad: ({ children }) => <>{ children }</>,
-  isServerSide: () => true,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -98,6 +96,6 @@ describe('the extra large promo feature', () => {
 
   it('should have one line separator', () => {
     const wrapper = mount(<ExtraLargeManualPromo customFields={config} />);
-    expect(wrapper.find('hr')).toHaveLength(1);
+    expect(wrapper.find('ExtraLargeManualPromo > hr')).toHaveLength(1);
   });
 });

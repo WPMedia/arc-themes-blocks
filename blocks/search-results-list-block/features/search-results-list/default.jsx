@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAppContext, useFusionContext } from 'fusion:context';
-import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useAppContext } from 'fusion:context';
 import CustomSearchResultsList from './_children/custom-content';
 import GlobalContentSearch from './_children/global-content';
 import { resolveDefaultPromoElements } from './_children/helpers';
@@ -13,8 +12,7 @@ const SearchResultsListContainer = (
   } = {},
 ) => {
   const { arcSite } = useAppContext();
-  const { isAdmin } = useFusionContext();
-  const { inheritGlobalContent, lazyLoad = false } = customFields;
+  const { inheritGlobalContent } = customFields;
   let showGlobalContent;
 
   if (lazyLoad && isServerSide() && !isAdmin) { // On Server
@@ -29,22 +27,18 @@ const SearchResultsListContainer = (
 
   if (showGlobalContent) {
     return (
-      <LazyLoad enabled={lazyLoad && !isAdmin}>
-        <GlobalContentSearch
-          arcSite={arcSite}
-          customSearchAction={customSearchAction}
-          promoElements={resolveDefaultPromoElements(customFields)}
-        />
-      </LazyLoad>
+      <GlobalContentSearch
+        arcSite={arcSite}
+        customSearchAction={customSearchAction}
+        promoElements={resolveDefaultPromoElements(customFields)}
+      />
     );
   }
   return (
-    <LazyLoad enabled={lazyLoad && !isAdmin}>
-      <CustomSearchResultsList
-        arcSite={arcSite}
-        promoElements={resolveDefaultPromoElements(customFields)}
-      />
-    </LazyLoad>
+    <CustomSearchResultsList
+      arcSite={arcSite}
+      promoElements={resolveDefaultPromoElements(customFields)}
+    />
   );
 };
 
@@ -94,11 +88,6 @@ SearchResultsListContainer.propTypes = {
         group: 'Show promo elements',
       },
     ),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

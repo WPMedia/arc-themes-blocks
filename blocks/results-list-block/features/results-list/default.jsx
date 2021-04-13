@@ -9,7 +9,7 @@ import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
@@ -267,7 +267,7 @@ class ResultsList extends Component {
     const targetFallbackImage = this.getFallbackImageURL();
     const promoElements = resolveDefaultPromoElements(customFields);
 
-    const Results = () => (
+    return (
       <div className="results-list-container">
         {contentElements && contentElements.length > 0 && contentElements.map((element) => {
           const {
@@ -354,26 +354,28 @@ class ResultsList extends Component {
             || promoElements.showDate
             || promoElements.showByline
               ) && (
-              <div className="results-list--description-author-container mobile-order-3">
-                {promoElements.showDescription && descriptionText && (
-                <a
-                  href={url}
-                  title={headlineText}
-                >
-                  <DescriptionText
-                    secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
-                    className="description-text"
-                  >
-                    {descriptionText}
-                  </DescriptionText>
-                </a>
-                )}
-                { (promoElements.showDate || promoElements.showByline) && (
-                <div className="results-list--author-date">
-                  { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
-                  {/* The Separator will only be shown if there is at least one author name */}
-                  { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
-                  { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+                <div className="results-list--description-author-container mobile-order-3">
+                  {promoElements.showDescription && descriptionText && (
+                    <a
+                      href={url}
+                      title={headlineText}
+                    >
+                      <DescriptionText
+                        secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                        className="description-text"
+                      >
+                        {descriptionText}
+                      </DescriptionText>
+                    </a>
+                  )}
+                  { (promoElements.showDate || promoElements.showByline) && (
+                    <div className="results-list--author-date">
+                      { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
+                      {/* The Separator will only be shown if there is at least one author name */}
+                      { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
+                      { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+                    </div>
+                  )}
                 </div>
                 )}
               </div>
@@ -400,12 +402,6 @@ class ResultsList extends Component {
     )
   }
       </div>
-    );
-
-    return (
-      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <Results />
-      </LazyLoad>
     );
   }
 }
@@ -453,11 +449,6 @@ ResultsList.propTypes = {
         group: 'Show promo elements',
       },
     ),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
-    }),
   }),
 };
 

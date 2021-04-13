@@ -5,7 +5,6 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
-import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import {
   extractResizedParams,
   imageRatioCustomField,
@@ -524,11 +523,6 @@ TopTableListWrapper.propTypes = {
       label: 'Show bottom border',
       defaultValue: true,
       group: 'Small story settings',
-    }),
-    lazyLoad: PropTypes.bool.tag({
-      name: 'Lazy Load block?',
-      defaultValue: false,
-      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

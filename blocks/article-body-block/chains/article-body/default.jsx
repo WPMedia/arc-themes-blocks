@@ -291,12 +291,31 @@ const ArticleBodyChainItems = ({ children }) => {
   );
 };
 
+const ArticleBodyChain = ({ customFields = {}, children }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <ArticleBodyChainItems customFields={{ ...customFields }}>
+        {children}
+      </ArticleBodyChainItems>
+    </LazyLoad>
+  );
+};
+
 ArticleBodyChain.propTypes = {
   customFields: PropTypes.shape({
     elementPlacement: PropTypes.kvp.tag({
       label: 'Ad placements',
       group: 'Inline ads',
       description: 'Places your inline article body ads in the article body chain. For each ad feature in the chain, fill in two values below: Field 1) The position of the ad within the chain and Field 2) the paragraph number that this ad should follow in the article body. For example, entering 1 and 3 would mean that the first ad in the article body chain will be placed after the third paragraph in the article.',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

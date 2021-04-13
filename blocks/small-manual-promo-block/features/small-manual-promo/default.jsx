@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import { Image } from '@wpmedia/engine-theme-sdk';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
-import { useContent } from 'fusion:content';
-import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import getPromoContainer from './_children/promo_container';
-import getPromoStyle from './_children/promo_style';
+import { useEditableContent } from 'fusion:content';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
+import {
+  PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
+} from '@wpmedia/shared-styles';
 
 const SmallManualPromoItem = ({ customFields }) => {
   const { searchableField } = useEditableContent();
@@ -46,14 +44,24 @@ const SmallManualPromoItem = ({ customFields }) => {
       </div>
     ) : null;
 
-  // base case for rendering image without even a link
   return (
-    <>
-      <article className="container-fluid small-promo">
-        {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
-      </article>
-      <hr />
-    </>
+    <SmallPromoContainer
+      headline={headlineOutput}
+      image={image}
+      imagePosition={imagePosition}
+    />
+  );
+};
+
+const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <SmallManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
   );
 };
 
@@ -101,6 +109,11 @@ SmallManualPromo.propTypes = {
       },
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

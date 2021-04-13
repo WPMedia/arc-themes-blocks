@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { useContent } from 'fusion:content';
 import { extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import ExtraLargePromo from './default';
@@ -12,6 +12,8 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   localizeDateTime: jest.fn(() => new Date().toDateString()),
   extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
   VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -271,7 +273,7 @@ describe('the extra large promo feature', () => {
       it('should render Image when no video found in ANS lead art', () => {
         useContent.mockReturnValueOnce(mockData);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = shallow(
+        const wrapper = mount(
           <ExtraLargePromo
             customFields={{
               ...config,
@@ -294,7 +296,7 @@ describe('the extra large promo feature', () => {
             },
           },
         });
-        const wrapper = shallow(
+        const wrapper = mount(
           <ExtraLargePromo
             customFields={{
               ...config,
@@ -314,7 +316,7 @@ describe('the extra large promo feature', () => {
         delete mockDataVideoNoEmbed.embed_html;
         useContent.mockReturnValueOnce(mockDataVideoNoEmbed);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
-        const wrapper = shallow(
+        const wrapper = mount(
           <ExtraLargePromo
             customFields={{
               ...config,
@@ -328,7 +330,7 @@ describe('the extra large promo feature', () => {
 
       it('should render VideoPlayer when video embed exists in ANS', () => {
         useContent.mockReturnValueOnce(mockDataVideo);
-        const wrapper = shallow(
+        const wrapper = mount(
           <ExtraLargePromo
             customFields={{
               ...config,

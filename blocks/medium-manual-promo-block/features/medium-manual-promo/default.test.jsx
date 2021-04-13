@@ -4,6 +4,8 @@ import MediumManualPromo from './default';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
@@ -116,6 +118,6 @@ describe('the medium promo feature', () => {
 
   it('should have one line separator', () => {
     const wrapper = mount(<MediumManualPromo customFields={config} />);
-    expect(wrapper.find('MediumManualPromo > hr')).toHaveLength(1);
+    expect(wrapper.find('hr')).toHaveLength(1);
   });
 });

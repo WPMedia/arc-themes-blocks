@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent, useEditableContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-
-import '@wpmedia/shared-styles/scss/_small-promo.scss';
-
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
   PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
 } from '@wpmedia/shared-styles';
@@ -103,14 +102,25 @@ const SmallPromoItem = ({ customFields }) => {
     </div>
   ) : null;
 
-  return content ? (
-    <>
-      <article className="container-fluid small-promo">
-        {getPromoContainer(headline, image, promoContainersStyles, imagePosition)}
-      </article>
-      <hr />
-    </>
-  ) : null;
+  return (
+    <SmallPromoContainer
+      headline={headline}
+      image={image}
+      imagePosition={imagePosition}
+    />
+  );
+};
+
+const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <SmallPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 SmallPromo.propTypes = {
@@ -148,6 +158,11 @@ SmallPromo.propTypes = {
       },
     }).isRequired,
     ...imageRatioCustomField('imageRatio', 'Art', '3:2'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

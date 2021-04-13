@@ -16,6 +16,14 @@ describe('the search content source block', () => {
       });
       expect(url).toEqual('https://search.arcpublishing.com/search?&q=test&page=1&website_id=the-sun&key=ABCDEF');
     });
+
+    it('should encode the query value', () => {
+      const url = contentSource.resolve({
+        query: 'vidèo',
+        'arc-site': 'the-sun',
+      });
+      expect(url).toEqual('https://search.arcpublishing.com/search?&q=vid%C3%A8o&page=1&website_id=the-sun&key=ABCDEF');
+    });
   });
 
   describe('when a page number is provided', () => {

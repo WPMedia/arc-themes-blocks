@@ -305,29 +305,10 @@ body.nav-open {
   position: absolute;
   scrollbar-width: none;
   top: 0;
-  transition: transform 300ms ease-in-out, background 300ms ease-in-out;
-  width: 200%;
+  width: 0;
 
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  &.open {
-    background: rgba(25, 25, 25, 0.5);
-    height: 100vh;
-    overflow-y: scroll;
-    transform: translate(0, 0);
-
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      .inner-drawer-nav {
-        width: 100vw;
-      }
-    }
-  }
-
-  &.closed {
-    transform: translate(-$section-width, 0);
-    width: 0;
   }
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
@@ -340,6 +321,7 @@ body.nav-open {
     background-color: $section-bg;
     display: flex;
     flex-direction: column;
+    transition: transform 300ms ease-in-out;
     width: $section-width;
 
     .nav-menu {
@@ -394,6 +376,7 @@ body.nav-open {
   }
 
   .section-menu {
+    height: 10px;
     margin-top: 13px;
     padding: 0;
 
@@ -421,6 +404,34 @@ body.nav-open {
       &:active {
         background: $ui-medium-gray;
       }
+    }
+  }
+
+  &.open {
+    background: rgba(25, 25, 25, 0.5);
+    height: 100vh;
+    overflow-y: scroll;
+    transform: translate(0, 0);
+    width: 100%;
+
+    .section-menu {
+      height: 100vh;
+    }
+
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      .inner-drawer-nav {
+        width: 100vw;
+      }
+    }
+  }
+
+  &.closed {
+    .section-menu {
+      transition: height 100ms ease-in-out 600ms;
+    }
+
+    .inner-drawer-nav {
+      transform: translate(-$section-width, 0);
     }
   }
 

@@ -37,8 +37,9 @@ const StyledNav = styled.nav`
   align-items: center;
   width: 100%;
   position: sticky;
-  top: 0px;
-  margin-bottom: 0px;
+  top: 0;
+  margin-bottom: 0;
+  z-index: 1;
 
   .news-theme-navigation-bar {
     @media screen and (max-width: ${(props) => props.breakpoint}px) {

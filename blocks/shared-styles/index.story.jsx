@@ -20,6 +20,7 @@ export const primaryFontBlock = () => {
   const data = {
     as: text('"as"', 'h1'),
     fontColor: select(label, options, defaultValue),
+    backgroundColor: select('Background Color', options, defaultValue),
   };
 
   const textString = text('Text', 'When this baby hits 88mph...');
@@ -40,6 +41,7 @@ export const secondaryFontBlock = () => {
   const data = {
     as: text('"as"', 'p'),
     fontColor: select(label, options, defaultValue),
+    backgroundColor: select('Background Color', options, defaultValue),
   };
 
   const textString = text('Text', 'When this baby hits 88mph...');

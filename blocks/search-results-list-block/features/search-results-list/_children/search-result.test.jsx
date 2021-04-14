@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-// import getThemeStyle from 'fusion:themes';
+
 import { oneListItem, LineItemWithOutDescription } from '../mock-data';
 import SearchResult from './search-result';
 
@@ -11,6 +11,13 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
   resizerURL: 'http://example.com',
 }))));
+
+jest.mock('fusion:context', () => ({
+  useAppContext: jest.fn(() => ({})),
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+  })),
+}));
 
 describe('The search results', () => {
   describe('renders one list item correctly', () => {
@@ -276,6 +283,31 @@ describe('The search results', () => {
       expect(desc.length).toEqual(1);
       expect(desc.find('ArticleDate').length).toEqual(1);
       // check internal items
+    });
+  });
+
+  describe('handles missing webbsites object', () => {
+    const element = {};
+    const fullElements = {
+      showHeadline: true,
+      showImage: true,
+      showDescription: true,
+      showByline: true,
+      showDate: true,
+    };
+
+    const wrapper = mount(
+      <SearchResult
+        element={element}
+        arcSite="the-sun"
+        targetFallbackImage="/resource/example.jpg"
+        placeholderResizedImageOptions={{}}
+        promoElements={fullElements}
+      />,
+    );
+
+    it('should render one list item as its child', () => {
+      expect(wrapper.find('.list-item').length).toEqual(0);
     });
   });
 });

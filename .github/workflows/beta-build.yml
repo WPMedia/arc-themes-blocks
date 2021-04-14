@@ -35,8 +35,12 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: Get current datetime for re-running publish if necessary
+        id: get-datetime
+        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+
       - name: Publish to beta tag with a short git SHA as the version
-        run: npx lerna publish 0.0.0-beta.$(git rev-parse --short HEAD) --no-git-tag-version --no-push --dist-tag beta --yes
+        run: npx lerna publish 0.0.0-beta.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }} --no-git-tag-version --no-push --dist-tag beta --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check beta failure status

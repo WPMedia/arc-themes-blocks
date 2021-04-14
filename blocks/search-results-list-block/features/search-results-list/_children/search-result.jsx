@@ -2,11 +2,10 @@ import React from 'react';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import getThemeStyle from 'fusion:themes';
 
 import getProperties from 'fusion:properties';
-import { HeadlineText, DescriptionText } from './styled-components';
 import { extractImage } from './helpers';
 
 const SearchResult = ({
@@ -22,7 +21,7 @@ const SearchResult = ({
     display_date: displayDate,
     credits: { by } = {},
     promo_items: promoItems,
-    websites,
+    websites = {},
   } = element;
 
   if (!websites[arcSite]) {
@@ -80,24 +79,24 @@ const SearchResult = ({
       { showHeadline && (
         <div className="results-list--headline-container mobile-order-1">
           <a href={url} className="list-anchor">
-            <HeadlineText
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            <PrimaryFont
+              as="h2"
               className="headline-text"
             >
               {headlineText}
-            </HeadlineText>
+            </PrimaryFont>
           </a>
         </div>
       )}
       { (showDescription || showDate || showByline) && (
         <div className="results-list--description-author-container mobile-order-3">
           { showDescription && (
-            <DescriptionText
-              secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+            <SecondaryFont
+              as="p"
               className="description-text"
             >
               {descriptionText}
-            </DescriptionText>
+            </SecondaryFont>
           )}
           { (showDate || showByline) && (
             <div className="results-list--author-date">

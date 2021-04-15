@@ -144,6 +144,7 @@
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
     "@wpmedia/video-promo-block": "file:blocks/video-promo-block",
+    "@wpmedia/spa-output-block": "file:blocks/spa-output-block",
     "focus-trap-react": "^8.4.2"
   },
   "browserslist": [

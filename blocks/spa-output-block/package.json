@@ -1,0 +1,32 @@
+{
+  "name": "@wpmedia/spa-output-block",
+  "version": "5.10.3",
+  "description": "Fusion News Theme spa output type",
+  "contributors": [
+    "Jack Howard <jack.howard@washpost.com>",
+    "Matthew Roach <matthew.roach@washpost.com>"
+  ],
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "output-types"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/spa-output-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx output-types"
+  },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*"
+  }
+}

@@ -1,18 +1,14 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
+import { useEditableContent } from 'fusion:content';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
+import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { useContent, useEditableContent } from 'fusion:content';
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
@@ -33,27 +29,6 @@ const OverlineHeader = styled.h2`
 const ExtraLargeManualPromoItem = ({ customFields }) => {
   const { arcSite, isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
-
-  const resizedImageOptions = useContent({
-    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
-  });
-  const ratios = ratiosFor('XL', customFields.imageRatio);
-
-  const renderWithLink = useCallback((element, props, attributes) => (
-    <a
-      href={customFields.linkURL || '#'}
-      className={(props && props.className) || ''}
-      target={customFields.newTab ? '_blank' : '_self'}
-      rel={customFields.newTab ? 'noreferrer' : ''}
-      onClick={!customFields.linkURL ? (evt) => {
-        evt.preventDefault();
-      } : undefined}
-      {...attributes}
-    >
-      {element}
-    </a>
-  ), [customFields.linkURL, customFields.newTab]);
 
   return (
     <>
@@ -82,27 +57,28 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
                   {customFields.overline}
                 </OverlineHeader>
               )}
+
               {(customFields.showHeadline && customFields.headline)
-              && renderWithLink(
-                <HeadlineText
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                  className="xl-promo-headline"
-                >
-                  {customFields.headline}
-                </HeadlineText>,
-                { className: 'xl-promo-headline' },
-              )}
-              {(customFields.showImage && customFields.imageURL)
-              && renderWithLink(
-                <Image
-                  url={customFields.imageURL}
-                  alt={customFields.headline}
-                  {...ratios}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                  resizedImageOptions={resizedImageOptions}
-                />, {}, { 'aria-hidden': 'true', tabIndex: '-1', ...searchableField('imageURL') },
-              )}
+                ? (
+                  <PromoHeadline
+                    link={customFields.linkURL}
+                    text={customFields.headline}
+                    newTab={customFields.newTab}
+                    className="xl-promo-headline"
+                    linkClassName="xl-promo-headline"
+                  />
+                ) : null}
+
+              {(customFields.showImage && customFields.imageURL) ? (
+                <div {...searchableField('imageURL')}>
+                  <PromoImage
+                    {...customFields}
+                    customImageURL={customFields.imageURL}
+                    alt={customFields.headline}
+                    promoSize="XL"
+                  />
+                </div>
+              ) : null}
               {(customFields.showDescription && customFields.description)
               && (
                 <DescriptionText

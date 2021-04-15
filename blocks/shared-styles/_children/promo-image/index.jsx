@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, registerSuccessEvent } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
@@ -65,6 +65,7 @@ const PromoImage = ({
       rel={newTab ? 'noreferrer noopener' : ''}
       aria-hidden="true"
       tabIndex="-1"
+      onClick={registerSuccessEvent}
     >
       {item}
     </a>

@@ -16,7 +16,9 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
 jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({})),
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+  })),
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockData)),
@@ -37,15 +39,6 @@ describe('the medium promo feature', () => {
   afterEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
-  });
-
-  beforeEach(() => {
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        id: 'testId',
-      })),
-    }));
   });
 
   it('should return null if lazyLoad on the server and not in the admin', () => {
@@ -70,7 +63,7 @@ describe('the medium promo feature', () => {
   it('should link the headline to the current site website_url ANS property', () => {
     const url = mockData.websites['the-sun'].website_url;
     const wrapper = mount(<MediumPromo customFields={config} />);
-    expect(wrapper.find('a.md-promo-headline')).toHaveProp('href', url);
+    expect(wrapper.find('.md-promo-headline a')).toHaveProp('href', url);
   });
 
   it('should link the image to the current site website_url ANS property', () => {
@@ -207,7 +200,7 @@ describe('the medium promo feature', () => {
 
     const wrapper = mount(<MediumPromo customFields={myConfig} />);
 
-    expect(wrapper.find('.md-promo-headline').length).toBe(1);
+    expect(wrapper.find('.md-promo-headline').length).toBe(2);
     expect(wrapper.find('.description-text').length).toBe(3);
     expect(wrapper.find('ArticleByline').length).toBe(1);
     expect(wrapper.find('ArticleDate').length).toBe(1);

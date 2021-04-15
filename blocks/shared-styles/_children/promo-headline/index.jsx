@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEditableContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
+import { useFusionContext, registerSuccessEvent } from 'fusion:context';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const PromoHeadline = (props) => {
@@ -34,6 +34,7 @@ const PromoHeadline = (props) => {
           target={newTab ? '_blank' : '_self'}
           rel={newTab ? 'noreferrer noopener' : ''}
           className={linkClassName}
+          onClick={registerSuccessEvent}
         >
           {linkText}
         </a>

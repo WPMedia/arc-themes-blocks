@@ -1,7 +1,13 @@
 .small-promo {
-
   color: $ui-primary-font-color;
   margin-top: 0;
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    .row {
+      grid-gap: 1rem;
+    }
+  }
+
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     min-height: calculateRem(80px);
   }

@@ -19,7 +19,6 @@
       true,
       {
         "ignore": ["css-sticky"],
-        "ignorePartialSupport": true,
         "severity": "warning"
       }
     ],

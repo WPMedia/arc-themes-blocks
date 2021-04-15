@@ -221,7 +221,7 @@ const LargePromoItem = ({ customFields }) => {
               {customFields.showHeadline ? (
                 <PromoHeadline
                   content={content}
-                  className="lg-promo-headline"
+                  headingClassName="lg-promo-headline"
                   linkClassName="lg-promo-headline"
                 />
               ) : null}

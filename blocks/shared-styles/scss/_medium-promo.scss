@@ -5,10 +5,10 @@
     color: $ui-primary-font-color;
     position: relative;
     text-decoration: none;
-  }
 
-  a > picture > img {
-    vertical-align: middle;
+    img {
+      vertical-align: middle;
+    }
   }
 
   .md-promo-headline {

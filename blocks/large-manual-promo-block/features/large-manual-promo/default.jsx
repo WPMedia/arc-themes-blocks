@@ -76,7 +76,7 @@ const LargeManualPromoItem = ({ customFields }) => {
                     link={customFields.linkURL}
                     text={customFields.headline}
                     newTab={customFields.newTab}
-                    className="lg-promo-headline"
+                    headingClassName="lg-promo-headline"
                     linkClassName="lg-promo-headline"
                   />
                 ) : null}

@@ -2,17 +2,13 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { useContent, useEditableContent } from 'fusion:content';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
+import { useEditableContent } from 'fusion:content';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
+import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
@@ -22,32 +18,7 @@ const MediumManualPromoItem = ({ customFields }) => {
   const { arcSite, isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
-  const resizedImageOptions = useContent({
-    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
-  });
-
-  const {
-    breakpoints,
-  } = getProperties(arcSite);
-
   const hasImage = customFields.showImage && customFields.imageURL;
-  const ratios = ratiosFor('MD', customFields.imageRatio);
-
-  const renderWithLink = useCallback((element, props, attributes) => (
-    <a
-      href={customFields.linkURL || '#'}
-      className={(props && props.className) || ''}
-      target={customFields.newTab ? '_blank' : '_self'}
-      rel={customFields.newTab ? 'noreferrer noopener' : ''}
-      onClick={!customFields.linkURL ? (evt) => {
-        evt.preventDefault();
-      } : undefined}
-      {...attributes}
-    >
-      {element}
-    </a>
-  ), [customFields.linkURL, customFields.newTab]);
 
   return (
     <>
@@ -56,30 +27,31 @@ const MediumManualPromoItem = ({ customFields }) => {
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
           {...searchableField('imageURL')}
         >
-          {hasImage && resizedImageOptions && renderWithLink(
-            <Image
-              // medium is 16:9
-              url={customFields.imageURL}
-              alt={customFields.headline}
-              {...ratios}
-              breakpoints={breakpoints}
-              resizerURL={getProperties(arcSite)?.resizerURL}
-              resizedImageOptions={resizedImageOptions}
-            />, { className: 'image-link' }, { 'aria-hidden': 'true', tabIndex: '-1' },
-          )}
+          {(customFields.showImage && customFields.imageURL)
+            ? (
+              <div className="image-link">
+                <PromoImage
+                  {...customFields}
+                  customImageURL={customFields.imageURL}
+                  alt={customFields.headline}
+                  promoSize="MD"
+                />
+              </div>
+            ) : null}
+
           {(customFields.showHeadline || customFields.showDescription)
           && (
             <>
-              {(customFields.showHeadline && customFields.headline)
-              && renderWithLink(
-                <HeadlineText
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                  className="md-promo-headline-text"
-                >
-                  {customFields.headline}
-                </HeadlineText>,
-                { className: 'md-promo-headline' },
-              )}
+              {(customFields.showHeadline)
+                ? (
+                  <PromoHeadline
+                    link={customFields.linkURL}
+                    text={customFields.headline}
+                    newTab={customFields.newTab}
+                    headingClassName="md-promo-headline-text"
+                    className="md-promo-headline"
+                  />
+                ) : null}
               {(customFields.showDescription && customFields.description)
               && (
                 <DescriptionText

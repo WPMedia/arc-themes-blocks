@@ -187,7 +187,7 @@ describe('the large promo feature', () => {
     const wrapper = mount(<LargePromo customFields={myConfig} arcSite="dagen" />);
 
     expect(wrapper.find('Overline').length).toBe(1);
-    expect(wrapper.find('.lg-promo-headline').length).toBe(4);
+    expect(wrapper.find('.lg-promo-headline').length).toBe(3);
     expect(wrapper.find('.description-text').length).toBe(3);
     expect(wrapper.find('ArticleByline').length).toBe(1);
     expect(wrapper.find('ArticleDate').length).toBe(1);

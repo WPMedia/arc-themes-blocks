@@ -1,18 +1,14 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent, useEditableContent } from 'fusion:content';
+import { useEditableContent } from 'fusion:content';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
+import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
@@ -35,47 +31,21 @@ const LargeManualPromoItem = ({ customFields }) => {
   const { searchableField } = useEditableContent();
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
-  const resizedImageOptions = useContent({
-    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
-    query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
-  });
-  const ratios = ratiosFor('LG', customFields.imageRatio);
-
-  const renderWithLink = useCallback((element, props, attributes) => (
-    <a
-      href={customFields.linkURL || '#'}
-      className={(props && props.className) || ''}
-      target={customFields.newTab ? '_blank' : '_self'}
-      rel={customFields.newTab ? 'noreferrer noopener' : ''}
-      onClick={!customFields.linkURL ? (evt) => {
-        evt.preventDefault();
-      } : undefined}
-      {...attributes}
-    >
-      {element}
-    </a>
-  ), [customFields.linkURL, customFields.newTab]);
-
   return (
     <>
       <article className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
-          {(customFields.showImage && customFields.imageURL && resizedImageOptions)
-          && (
-            <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
-              { renderWithLink(
-                <Image
-                  url={customFields.imageURL}
+          {(customFields.showImage && customFields.imageURL)
+            ? (
+              <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
+                <PromoImage
+                  {...customFields}
+                  customImageURL={customFields.imageURL}
                   alt={customFields.headline}
-                  // large promo has 4:3
-                  {...ratios}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                  resizedImageOptions={resizedImageOptions}
-                />, {}, { 'aria-hidden': 'true', tabIndex: '-1' },
-              )}
-            </div>
-          )}
+                  promoSize="LG"
+                />
+              </div>
+            ) : null}
           {(customFields.showHeadline || customFields.showDescription
             || customFields.showOverline)
           && (
@@ -99,16 +69,18 @@ const LargeManualPromoItem = ({ customFields }) => {
                   {customFields.overline}
                 </OverlineHeader>
               )}
+
               {(customFields.showHeadline && customFields.headline)
-              && renderWithLink(
-                <HeadlineText
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                  className="lg-promo-headline"
-                >
-                  {customFields.headline}
-                </HeadlineText>,
-                { className: 'lg-promo-headline' },
-              )}
+                ? (
+                  <PromoHeadline
+                    link={customFields.linkURL}
+                    text={customFields.headline}
+                    newTab={customFields.newTab}
+                    className="lg-promo-headline"
+                    linkClassName="lg-promo-headline"
+                  />
+                ) : null}
+
               {(customFields.showDescription && customFields.description)
               && (
                 <DescriptionText

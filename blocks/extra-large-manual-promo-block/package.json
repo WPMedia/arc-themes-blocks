@@ -28,9 +28,7 @@
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/resizer-image-block": "*",
-    "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
+    "@wpmedia/resizer-image-block": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

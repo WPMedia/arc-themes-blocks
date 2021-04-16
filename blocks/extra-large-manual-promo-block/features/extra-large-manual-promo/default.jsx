@@ -1,21 +1,17 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { Overline, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import {
+  Overline, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 const ExtraLargeManualPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
+  const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
   return (
@@ -57,14 +53,12 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
                 </div>
               ) : null}
               {(customFields.showDescription && customFields.description)
-              && (
-                <DescriptionText
-                  secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                  className="description-text"
-                >
-                  {customFields.description}
-                </DescriptionText>
-              )}
+                ? (
+                  <PromoDescription
+                    className="description-text"
+                    text={customFields.description}
+                  />
+                ) : null}
             </div>
           )}
         </div>

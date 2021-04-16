@@ -201,7 +201,7 @@ describe('the medium promo feature', () => {
     const wrapper = mount(<MediumPromo customFields={myConfig} />);
 
     expect(wrapper.find('.md-promo-headline').length).toBe(2);
-    expect(wrapper.find('.description-text').length).toBe(3);
+    expect(wrapper.find('.description-text').length).toBe(5);
     expect(wrapper.find('ArticleByline').length).toBe(1);
     expect(wrapper.find('ArticleDate').length).toBe(1);
     expect(wrapper.find('Image').length).toBe(1);

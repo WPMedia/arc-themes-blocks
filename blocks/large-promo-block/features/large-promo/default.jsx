@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
@@ -14,17 +12,13 @@ import {
   LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { Overline, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import { Overline, PromoDescription, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 const LargePromoItem = ({ customFields }) => {
   const { arcSite, id, isAdmin } = useFusionContext();
-  const { editableContent, searchableField } = useEditableContent();
+  const { searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -113,30 +107,12 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
       && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
       && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
-
-
-  const descriptionTmpl = () => {
-    if (customFields.showDescription && descriptionText) {
-      return (
-        <DescriptionText
-          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-          className="description-text"
-          {...editableContent(content, 'description.basic')}
-          suppressContentEditableWarning
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
 
   const byLineTmpl = () => {
     if (customFields.showByline && byLineArray) {
@@ -206,7 +182,12 @@ const LargePromoItem = ({ customFields }) => {
                   linkClassName="lg-promo-headline"
                 />
               ) : null}
-              {descriptionTmpl()}
+              {(customFields.showDescription ? (
+                <PromoDescription
+                  className="description-text"
+                  content={content}
+                />
+              ) : null)}
               <div className="article-meta">
                 {byLineTmpl()}
                 {dateTmpl()}

@@ -1,25 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import { PromoDescription, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 const MediumPromoItem = ({ customFields }) => {
   const { arcSite, isAdmin } = useFusionContext();
-  const { editableContent, searchableField } = useEditableContent();
+  const { searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -96,27 +90,11 @@ const MediumPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
   const byLineArray = content?.credits?.by
     && content.credits.by.length !== 0 ? content.credits.by : null;
   const dateText = content?.display_date || null;
 
-  const descriptionTmpl = () => {
-    if (customFields.showDescription && descriptionText) {
-      return (
-        <DescriptionText
-          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-          className="description-text"
-          {...editableContent(content, 'description.basic')}
-          suppressContentEditableWarning
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
 
   const byLineTmpl = () => {
     if (customFields.showByline && byLineArray) {
@@ -170,7 +148,12 @@ const MediumPromoItem = ({ customFields }) => {
                   className="md-promo-headline"
                 />
               ) : null}
-              {descriptionTmpl()}
+              {(customFields.showDescription ? (
+                <PromoDescription
+                  className="description-text"
+                  content={content}
+                />
+              ) : null)}
               <div className="article-meta">
                 {byLineTmpl()}
                 {dateTmpl()}

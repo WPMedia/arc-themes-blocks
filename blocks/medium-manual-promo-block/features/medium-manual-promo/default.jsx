@@ -1,21 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import { PromoDescription, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 const MediumManualPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
+  const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
   const hasImage = customFields.showImage && customFields.imageURL;
@@ -53,14 +47,12 @@ const MediumManualPromoItem = ({ customFields }) => {
                   />
                 ) : null}
               {(customFields.showDescription && customFields.description)
-              && (
-                <DescriptionText
-                  secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                  className="description-text"
-                >
-                  {customFields.description}
-                </DescriptionText>
-              )}
+                ? (
+                  <PromoDescription
+                    className="description-text"
+                    text={customFields.description}
+                  />
+                ) : null}
             </>
           )}
         </div>

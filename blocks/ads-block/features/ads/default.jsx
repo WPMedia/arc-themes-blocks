@@ -33,7 +33,6 @@ const StyledAdUnit = styled.div`
 `;
 
 const ArcAd = (props) => {
-  if (typeof window === 'undefined') return null;
   const fusionContext = useFusionContext();
   const [instanceId] = useState(() => generateInstanceId(fusionContext.id || '0000'));
   const propsWithContext = {
@@ -42,7 +41,7 @@ const ArcAd = (props) => {
     instanceId,
   };
   const { customFields, isAdmin, siteProperties } = propsWithContext;
-  const { displayAdLabel, lazyLoad = true } = customFields;
+  const { displayAdLabel, lazyLoad = true, reserveSpace = true } = customFields;
   const [config] = useState(
     getAdObject({
       ...customFields,
@@ -74,12 +73,15 @@ const ArcAd = (props) => {
     )
   );
 
+  const [width, height] = config.adClass ? config.adClass.split('x') : [];
+
   return (
     <StyledAdUnit
       id={`arcad_feature-${instanceId}`}
       className="arcad_feature"
       adLabel={siteProperties?.advertisementLabel || 'ADVERTISEMENT'}
       displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
+      style={reserveSpace ? { minHeight: `calc(${height}px + 2rem)`, width: `${width}px` } : {}}
     >
       <div className="arcad_container">
         {!isAdmin && !isAMP() && (
@@ -121,6 +123,10 @@ ArcAd.propTypes = {
     }),
     displayAdLabel: PropTypes.boolean.tag({
       name: 'Display Advertisement Label?',
+      defaultValue: true,
+    }),
+    reserveSpace: PropTypes.boolean.tag({
+      name: 'Reserve space for Ad',
       defaultValue: true,
     }),
   }),

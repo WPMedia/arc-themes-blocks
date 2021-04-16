@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 
 import { useFusionContext } from 'fusion:context';
-import Byline from '@wpmedia/byline-block';
 import {
-  Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 import {
   extractVideoEmbedFromStory,
@@ -114,23 +113,6 @@ const ExtraLargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const showSeparator = content && content.credits && content.credits.by
-    && content.credits.by.length !== 0;
-  const byLineArray = (content && content.credits && content.credits.by
-    && content.credits.by.length !== 0) ? content.credits.by : null;
-
-  const byLineTmpl = () => {
-    if (customFields.showByline && byLineArray) {
-      return (
-        <>
-          <Byline story={content} stylesFor="list" />
-          { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
-
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return (
@@ -183,7 +165,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
                 />
               ) : null)}
               <div className="article-meta">
-                {byLineTmpl()}
+                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
                 {(customFields.showDate) ? (
                   <PromoDate content={content} />
                 ) : null}

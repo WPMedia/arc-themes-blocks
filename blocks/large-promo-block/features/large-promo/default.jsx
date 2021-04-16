@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
-import Byline from '@wpmedia/byline-block';
 import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
@@ -12,7 +11,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
@@ -108,23 +107,7 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const showSeparator = content && content.credits && content.credits.by
-      && content.credits.by.length !== 0;
-  const byLineArray = (content && content.credits && content.credits.by
-      && content.credits.by.length !== 0) ? content.credits.by : null;
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
-
-  const byLineTmpl = () => {
-    if (customFields.showByline && byLineArray) {
-      return (
-        <>
-          <Byline story={content} stylesFor="list" />
-          { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
 
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
@@ -178,7 +161,7 @@ const LargePromoItem = ({ customFields }) => {
                 />
               ) : null)}
               <div className="article-meta">
-                {byLineTmpl()}
+                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
                 {(customFields.showDate) ? (
                   <PromoDate content={content} />
                 ) : null}

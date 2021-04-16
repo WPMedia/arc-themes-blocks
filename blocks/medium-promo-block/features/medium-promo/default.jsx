@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
-import Byline from '@wpmedia/byline-block';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -91,22 +90,6 @@ const MediumPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const showSeparator = content?.credits?.by && content.credits.by.length !== 0;
-  const byLineArray = content?.credits?.by
-    && content.credits.by.length !== 0 ? content.credits.by : null;
-
-  const byLineTmpl = () => {
-    if (customFields.showByline && byLineArray) {
-      return (
-        <>
-          <Byline story={content} stylesFor="list" />
-          {showSeparator && <p className="dot-separator">&#9679;</p>}
-        </>
-      );
-    }
-    return null;
-  };
-
   return (
     <>
       <article className="container-fluid medium-promo">
@@ -143,7 +126,7 @@ const MediumPromoItem = ({ customFields }) => {
                 />
               ) : null)}
               <div className="article-meta">
-                {byLineTmpl()}
+                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
                 {(customFields.showDate) ? (
                   <PromoDate content={content} />
                 ) : null}

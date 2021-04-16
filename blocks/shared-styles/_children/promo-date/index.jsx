@@ -4,6 +4,8 @@ import getProperties from 'fusion:properties';
 import { localizeDateTime } from '@wpmedia/engine-theme-sdk';
 import PrimaryFont from '../primary-font';
 
+import './index.scss';
+
 const PromoDate = (props) => {
   const {
     content = {},
@@ -21,7 +23,7 @@ const PromoDate = (props) => {
   return displayDate ? (
     <PrimaryFont
       as="time"
-      className={className}
+      className={`promo-date ${className}`}
       dateTime={formattedDate}
     >
       {formattedDate}

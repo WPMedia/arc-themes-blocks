@@ -1,4 +1,5 @@
 import Overline from './_children/overline';
+import PromoDescription from './_children/promo-description';
 import PromoHeadline from './_children/promo-headline';
 import PromoLabel from './_children/promo-label';
 import PromoImage from './_children/promo-image';
@@ -9,6 +10,7 @@ import SmallPromoStyles from './_children/promo-helpers/small/styles';
 
 export {
   Overline,
+  PromoDescription,
   PromoHeadline,
   PromoLabel,
   PromoImage,

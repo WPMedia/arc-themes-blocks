@@ -7,7 +7,6 @@ import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import Overline from '@wpmedia/overline-block';
 import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
@@ -15,7 +14,7 @@ import {
   LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import { Overline, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
@@ -114,34 +113,14 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
-    website_section: null,
-  };
   const descriptionText = content && content.description ? content.description.basic : null;
   const showSeparator = content && content.credits && content.credits.by
       && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
       && content.credits.by.length !== 0) ? content.credits.by : null;
   const dateText = content && content.display_date ? content.display_date : null;
-  const overlineDisplay = (content?.label?.basic?.display ?? null)
-      || (content?.websites?.[arcSite] && websiteSection)
-      || false;
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
-  const overlineTmpl = () => {
-    if (customFields.showOverline && overlineDisplay) {
-      return (
-        (
-          <Overline
-            className="overline"
-            story={content}
-            editable
-          />
-        )
-      );
-    }
-    return null;
-  };
 
   const descriptionTmpl = () => {
     if (customFields.showDescription && descriptionText) {
@@ -217,7 +196,9 @@ const LargePromoItem = ({ customFields }) => {
             || customFields.showByline || customFields.showDate)
           && (
             <div className={textClass}>
-              {overlineTmpl()}
+              {(customFields.showOverline)
+                ? <Overline story={content} editable />
+                : null}
               {customFields.showHeadline ? (
                 <PromoHeadline
                   content={content}

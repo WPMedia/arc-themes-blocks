@@ -30,8 +30,6 @@
     "@wpmedia/byline-block": "*",
     "@wpmedia/date-block": "*",
     "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/global-phrases-block": "*",
-    "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*",
     "@wpmedia/video-player-block": "*"
   },

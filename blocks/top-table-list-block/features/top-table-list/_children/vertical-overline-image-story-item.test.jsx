@@ -48,6 +48,7 @@ describe('vertical overline image story item', () => {
       Image: () => <img alt="placeholder" />,
       extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
       VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
+      formatURL: jest.fn((input) => input.toString()),
     }));
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({

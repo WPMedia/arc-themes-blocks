@@ -4,7 +4,6 @@ import { useEditableContent, useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
 import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
@@ -12,7 +11,9 @@ import {
   LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { Overline, PromoDescription, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import {
+  Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
@@ -111,7 +112,6 @@ const LargePromoItem = ({ customFields }) => {
       && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
       && content.credits.by.length !== 0) ? content.credits.by : null;
-  const dateText = content && content.display_date ? content.display_date : null;
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
   const byLineTmpl = () => {
@@ -120,17 +120,6 @@ const LargePromoItem = ({ customFields }) => {
         <>
           <Byline story={content} stylesFor="list" />
           { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDate && dateText) {
-      return (
-        <>
-          <ArticleDate date={dateText} />
         </>
       );
     }
@@ -190,7 +179,9 @@ const LargePromoItem = ({ customFields }) => {
               ) : null)}
               <div className="article-meta">
                 {byLineTmpl()}
-                {dateTmpl()}
+                {(customFields.showDate) ? (
+                  <PromoDate content={content} />
+                ) : null}
               </div>
             </div>
           )}

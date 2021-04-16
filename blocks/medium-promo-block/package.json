@@ -27,7 +27,6 @@
   },
   "peerDependencies": {
     "@wpmedia/byline-block": "*",
-    "@wpmedia/date-block": "*",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/resizer-image-block": "*",

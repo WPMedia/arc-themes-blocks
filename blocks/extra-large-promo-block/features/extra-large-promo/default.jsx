@@ -4,9 +4,8 @@ import { useEditableContent, useContent } from 'fusion:content';
 
 import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
 import {
-  Overline, PromoDescription, PromoHeadline, PromoImage,
+  Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 import {
   extractVideoEmbedFromStory,
@@ -119,7 +118,6 @@ const ExtraLargePromoItem = ({ customFields }) => {
     && content.credits.by.length !== 0;
   const byLineArray = (content && content.credits && content.credits.by
     && content.credits.by.length !== 0) ? content.credits.by : null;
-  const dateText = content && content.display_date ? content.display_date : null;
 
   const byLineTmpl = () => {
     if (customFields.showByline && byLineArray) {
@@ -127,17 +125,6 @@ const ExtraLargePromoItem = ({ customFields }) => {
         <>
           <Byline story={content} stylesFor="list" />
           { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDate && dateText) {
-      return (
-        <>
-          <ArticleDate date={dateText} />
         </>
       );
     }
@@ -197,7 +184,9 @@ const ExtraLargePromoItem = ({ customFields }) => {
               ) : null)}
               <div className="article-meta">
                 {byLineTmpl()}
-                {dateTmpl()}
+                {(customFields.showDate) ? (
+                  <PromoDate content={content} />
+                ) : null}
               </div>
             </div>
           )}

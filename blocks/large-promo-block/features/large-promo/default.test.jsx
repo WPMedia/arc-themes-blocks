@@ -190,7 +190,7 @@ describe('the large promo feature', () => {
     expect(wrapper.find('.lg-promo-headline').length).toBe(5);
     expect(wrapper.find('.description-text').length).toBe(5);
     expect(wrapper.find('ArticleByline').length).toBe(1);
-    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('PromoDate').length).toBe(1);
     expect(wrapper.find('Image').length).toBe(1);
 
     wrapper.unmount();
@@ -215,7 +215,7 @@ describe('the large promo feature', () => {
     expect(wrapper.find('HeadlineText').length).toBe(0);
     expect(wrapper.find('DescriptionText').length).toBe(0);
     expect(wrapper.find('Byline').length).toBe(0);
-    expect(wrapper.find('ArticleDate').length).toBe(0);
+    expect(wrapper.find('PromoDate').length).toBe(0);
     expect(wrapper.find('Image').length).toBe(0);
     wrapper.unmount();
   });

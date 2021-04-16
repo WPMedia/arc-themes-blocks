@@ -196,7 +196,7 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('.xl-promo-headline').length).toBe(5);
     expect(wrapper.find('.description-text').length).toBe(5);
     expect(wrapper.find('ArticleByline').length).toBe(1);
-    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('PromoDate').length).toBe(1);
     expect(wrapper.find('Image').length).toBe(1);
     wrapper.unmount();
   });
@@ -247,7 +247,7 @@ describe('the extra large promo feature', () => {
     };
 
     const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
-    expect(wrapper.find('ArticleDate').length).toBe(1);
+    expect(wrapper.find('PromoDate').length).toBe(1);
     expect(wrapper.find('Image').length).toBe(1);
     wrapper.unmount();
   });

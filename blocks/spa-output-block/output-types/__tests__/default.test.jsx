@@ -41,7 +41,7 @@ describe('the spa output type', () => {
   });
 
   it('should render', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn()} {...mockFuntions} />,
     );
@@ -77,7 +77,7 @@ describe('renders a page', () => {
   });
 
   it('should have a head', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -85,7 +85,7 @@ describe('renders a page', () => {
   });
 
   it('should have a font loading URL', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -93,7 +93,7 @@ describe('renders a page', () => {
   });
 
   it('should have a body', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -102,7 +102,7 @@ describe('renders a page', () => {
   });
 
   it('should have script tags', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -110,7 +110,7 @@ describe('renders a page', () => {
   });
 
   it('should have link tags', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -118,7 +118,7 @@ describe('renders a page', () => {
   });
 
   it('should have a MedataData component', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -126,7 +126,7 @@ describe('renders a page', () => {
   });
 
   it('MedataData should receive twitterUsername', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -161,7 +161,7 @@ describe('root html layout', () => {
   });
 
   it('html must have only head and body tags', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -177,7 +177,7 @@ describe('root html layout', () => {
       locale: 'fr',
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
 
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
@@ -188,7 +188,7 @@ describe('root html layout', () => {
 
   it('must fallback to en without a locale', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
 
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
@@ -228,7 +228,7 @@ describe('head content', () => {
   });
 
   it('must render Google Tag Manager script', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -237,7 +237,7 @@ describe('head content', () => {
   });
 
   it('must render Google Analytics script', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -245,7 +245,7 @@ describe('head content', () => {
   });
 
   it('must render custom script', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -253,7 +253,7 @@ describe('head content', () => {
   });
 
   it('must render custom font url', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -261,7 +261,7 @@ describe('head content', () => {
   });
 
   it('must not render nested scripts', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -272,7 +272,7 @@ describe('head content', () => {
   });
 
   it('must not render nativo script', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -311,7 +311,7 @@ describe('nativo ad integration', () => {
   });
 
   it('must add Nativo Ad script when is enabled on the properties', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -339,7 +339,7 @@ describe('head content without properties', () => {
   });
 
   it('must not render chartbeat code', () => {
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -367,7 +367,7 @@ describe('chartbeat render conditions', () => {
   it('must not render chartbeat code when properties are missing', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -379,7 +379,7 @@ describe('chartbeat render conditions', () => {
       chartBeatDomain: 'example.com',
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -391,7 +391,7 @@ describe('chartbeat render conditions', () => {
       chartBeatAccountId: 994949,
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -404,7 +404,7 @@ describe('chartbeat render conditions', () => {
       chartBeatDomain: '',
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -417,7 +417,7 @@ describe('chartbeat render conditions', () => {
       chartBeatDomain: 'example.com',
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -445,7 +445,7 @@ describe('comscore render conditions', () => {
   it('must not render comscore code when property is missing', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -458,7 +458,7 @@ describe('comscore render conditions', () => {
       comscoreID: 88776655,
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -487,7 +487,7 @@ describe('queryly render conditions', () => {
   it('must not render Queryly code when property is missing', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -499,7 +499,7 @@ describe('queryly render conditions', () => {
       querylyId: 88776655,
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
@@ -511,7 +511,7 @@ describe('queryly render conditions', () => {
       querylyId: 88776655,
     }))));
 
-    const { default: SpaOutputType } = require('../default');
+    const { default: SpaOutputType } = require('../spa');
     const wrapper = shallow(
       <SpaOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('queryly-search')} {...mockFuntions} />,
     );

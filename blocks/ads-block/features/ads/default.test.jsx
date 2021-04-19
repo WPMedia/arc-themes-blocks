@@ -106,7 +106,7 @@ describe('<ArcAd>', () => {
   });
 
   describe('Reserve Space', () => {
-    it('renders without style data', () => {
+    it('renders with width only', () => {
       const adProps = {
         ...AD_PROPS_MOCK,
         customFields: {
@@ -116,14 +116,16 @@ describe('<ArcAd>', () => {
       const wrapper = shallow(<ArcAd {...adProps} />);
       const container = wrapper.find('.arcad-container');
       expect(container).toHaveLength(1);
-      expect(container.prop('style')).toEqual({});
+      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').minHeight).toBe(null);
     });
 
-    it('renders with style data', () => {
+    it('renders with height and width', () => {
       const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
       const container = wrapper.find('.arcad-container');
       expect(container).toHaveLength(1);
-      expect(container.prop('style')).not.toEqual({});
+      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').minHeight).not.toBe(null);
     });
   });
 

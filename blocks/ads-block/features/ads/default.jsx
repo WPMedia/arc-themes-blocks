@@ -77,6 +77,11 @@ const ArcAd = (props) => {
   // Height is + 17px to account line-height of advertisment string of 17px;
   const heightWithAdjustments = parseInt(height, 10) + ((displayAdLabel) ? 17 : 0);
 
+  const sizing = {
+    width: `${width}px`,
+    minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
+  };
+
   return (
     <StyledAdUnit
       id={`arcad-feature-${instanceId}`}
@@ -84,7 +89,7 @@ const ArcAd = (props) => {
       adLabel={siteProperties?.advertisementLabel || 'ADVERTISEMENT'}
       displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
     >
-      <div className="arcad-container" style={reserveSpace ? { minHeight: `${heightWithAdjustments}px`, width: `${width}px` } : {}}>
+      <div className="arcad-container" style={sizing}>
         {!isAdmin && !isAMP() && (
           <LazyLoad enabled={lazyLoad}>
             <AdUnit

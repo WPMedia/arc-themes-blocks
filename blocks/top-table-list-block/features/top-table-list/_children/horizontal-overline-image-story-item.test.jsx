@@ -60,6 +60,7 @@ describe('horizontal overline image story item', () => {
       Image: () => <img alt="test" />,
       extractVideoEmbedFromStory: jest.fn(() => '<div class="video-embed"></div>'),
       VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
+      formatURL: jest.fn((input) => input.toString()),
     }));
   });
 

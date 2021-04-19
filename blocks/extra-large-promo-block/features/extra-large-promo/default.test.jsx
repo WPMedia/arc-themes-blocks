@@ -14,6 +14,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   VideoPlayer: ({ embedHTML, id }) => <div dangerouslySetInnerHTML={{ __html: embedHTML }} id={`video-${id}`} />,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+  formatURL: jest.fn((input) => input.toString()),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -173,7 +174,6 @@ describe('the extra large promo feature', () => {
     expect(wrapperOverline.length).toBe(1);
 
     expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
-    expect(wrapperOverline.find('a.overline').prop('href')).toEqual('the-sun-ID/');
     wrapper.unmount();
   });
 

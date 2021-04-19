@@ -18,6 +18,10 @@ const mockContextObj = {
   },
 };
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  formatURL: jest.fn((input) => (input.toString())),
+}));
+
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockContextObj),
@@ -47,12 +51,6 @@ describe('overline feature for default output type', () => {
       const wrapper = mount(<Overline />);
 
       expect(wrapper.find('a').hasClass(/sc-/)).toBe(true);
-    });
-
-    it('should have the href of the website_section _id', () => {
-      const wrapper = mount(<Overline />);
-
-      expect(wrapper.find('a').prop('href')).toStrictEqual('/news/');
     });
 
     it('should render only text if label do not have url', () => {
@@ -104,12 +102,6 @@ describe('overline feature for default output type', () => {
         const wrapper = mount(<Overline />);
 
         expect(wrapper.text()).toMatch('EXCLUSIVE');
-      });
-
-      it('should render the href of the label instead of the website section', () => {
-        const wrapper = shallow(<Overline />);
-
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive/');
       });
     });
 
@@ -191,12 +183,6 @@ describe('overline feature for default output type', () => {
 
         expect(wrapper.text()).toMatch('News');
       });
-
-      it('should have the href of the website_section _id', () => {
-        const wrapper = shallow(<Overline />);
-
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/news/');
-      });
     });
   });
 
@@ -212,99 +198,12 @@ describe('overline feature for default output type', () => {
     });
   });
 
-  describe('when a link is rendered', () => {
-    it('should not add a slash at the end of the link if already has one', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test/',
-                name: 'Test',
-              },
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
-    });
-
-    it('should add a slash at the end of the link', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test',
-                name: 'Test',
-              },
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
-    });
-
-    it('should not add a slash at the end of the link with query params', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test?query=a',
-                name: 'Test',
-              },
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test?query=a');
-    });
-
-    it('should not add a slash at the end of the link with hash params', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test/page#section',
-                name: 'Test',
-              },
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/page#section');
-    });
-  });
-
   describe('when custom values are send throw param must be used instead of globalContent', () => {
     it('should render an anchor with correct values', () => {
       const wrapper = mount(<Overline customText="hello" customUrl="http://example.com" />);
 
       expect(wrapper.find('a')).toHaveClassName('overline');
       expect(wrapper.find('a').text()).toEqual('hello');
-      expect(wrapper.find('a').prop('href')).toEqual('http://example.com/');
     });
   });
 
@@ -353,7 +252,6 @@ describe('overline feature for default output type', () => {
 
       expect(wrapper.find('a')).toHaveClassName('overline');
       expect(wrapper.find('a').text()).toEqual(mockStory.label.basic.text);
-      expect(wrapper.find('a').prop('href')).toEqual(`${mockStory.label.basic.url}/`);
     });
 
     it('should render an anchor using the story values if label display is false', () => {

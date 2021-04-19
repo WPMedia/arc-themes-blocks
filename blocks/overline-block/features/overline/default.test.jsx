@@ -29,6 +29,10 @@ jest.mock('fusion:content', () => ({
   })),
 }));
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  formatURL: jest.fn((input) => (input.toString())),
+}));
+
 describe('overline feature for default output type', () => {
   describe('when website_section content from globalContent is present', () => {
     it('should render an a', () => {
@@ -47,12 +51,6 @@ describe('overline feature for default output type', () => {
       const wrapper = mount(<Overline />);
 
       expect(wrapper.find('a').hasClass(/sc-/)).toBe(true);
-    });
-
-    it('should have the href of the website_section _id', () => {
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/news/');
     });
 
     it('should render only text if label do not have url', () => {
@@ -104,12 +102,6 @@ describe('overline feature for default output type', () => {
         const wrapper = shallow(<Overline />);
 
         expect(wrapper.text()).toMatch('EXCLUSIVE');
-      });
-
-      it('should render the href of the label instead of the website section', () => {
-        const wrapper = shallow(<Overline />);
-
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/exclusive/');
       });
     });
 
@@ -191,196 +183,102 @@ describe('overline feature for default output type', () => {
 
         expect(wrapper.text()).toMatch('News');
       });
+    });
 
-      it('should have the href of the website_section _id', () => {
-        const wrapper = shallow(<Overline />);
+    describe('when headline content from globalContent is NOT present', () => {
+      beforeEach(() => {
+        useFusionContext.mockImplementation(() => ({}));
+      });
 
-        expect(wrapper.at(0).prop('href')).toStrictEqual('/news/');
+      it('should not render anything', () => {
+        const wrapper = mount(<Overline />);
+
+        expect(wrapper).toBeEmptyRender();
       });
     });
-  });
+    describe('when a link is rendered', () => {
+      describe('when custom values are send throw param must be used instead of globalContent', () => {
+        it('should render an anchor with correct values', () => {
+          const wrapper = mount(<Overline customText="hello" customUrl="http://example.com" />);
 
-  describe('when headline content from globalContent is NOT present', () => {
-    beforeEach(() => {
-      useFusionContext.mockImplementation(() => ({}));
-    });
+          expect(wrapper.find('a')).toHaveClassName('overline');
+          expect(wrapper.find('a').text()).toEqual('hello');
+        });
+      });
 
-    it('should not render anything', () => {
-      const wrapper = mount(<Overline />);
-
-      expect(wrapper).toBeEmptyRender();
-    });
-  });
-
-  describe('when a link is rendered', () => {
-    it('should not add a slash at the end of the link if already has one', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test/',
-                name: 'Test',
+      describe('when a story is send throw param must be used instead of globalContent', () => {
+        it('should render an anchor with correct values', () => {
+          const mockStory = {
+            _id: '123456',
+            websites: {
+              site: {
+                website_section: {
+                  _id: '/mock/',
+                  name: 'Mock',
+                },
               },
             },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
+          };
+          useFusionContext.mockImplementation(() => mockContextObj);
+          const wrapper = mount(<Overline story={mockStory} />);
 
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
-    });
+          expect(wrapper.find('a')).toHaveClassName('overline');
+          expect(wrapper.find('a').text()).toEqual('Mock');
+          expect(wrapper.find('a').prop('href')).toEqual('/mock/');
+        });
 
-    it('should add a slash at the end of the link', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test',
-                name: 'Test',
+        it('should render an anchor using the label values if exists', () => {
+          const mockStory = {
+            _id: '123456',
+            label: {
+              basic: {
+                display: true,
+                url: 'http://label_url',
+                text: 'label',
               },
             },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/');
-    });
-
-    it('should not add a slash at the end of the link with query params', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test?query=a',
-                name: 'Test',
+            websites: {
+              site: {
+                website_section: {
+                  _id: '/mock/',
+                  name: 'Mock',
+                },
               },
             },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
+          };
+          useFusionContext.mockImplementation(() => mockContextObj);
+          const wrapper = mount(<Overline story={mockStory} />);
 
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test?query=a');
-    });
+          expect(wrapper.find('a')).toHaveClassName('overline');
+          expect(wrapper.find('a').text()).toEqual(mockStory.label.basic.text);
+        });
 
-    it('should not add a slash at the end of the link with hash params', () => {
-      const mockTrailingSlash = {
-        arcSite: 'site',
-        globalContent: {
-          _id: '123456',
-          websites: {
-            site: {
-              website_section: {
-                _id: '/test/page#section',
-                name: 'Test',
+        it('should render an anchor using the story values if label display is false', () => {
+          const mockStory = {
+            _id: '123456',
+            label: {
+              basic: {
+                display: false,
+                url: 'http://label_url',
+                text: 'label',
               },
             },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockTrailingSlash);
-      const wrapper = shallow(<Overline />);
-
-      expect(wrapper.at(0).prop('href')).toStrictEqual('/test/page#section');
-    });
-  });
-
-  describe('when custom values are send throw param must be used instead of globalContent', () => {
-    it('should render an anchor with correct values', () => {
-      const wrapper = mount(<Overline customText="hello" customUrl="http://example.com" />);
-
-      expect(wrapper.find('a')).toHaveClassName('overline');
-      expect(wrapper.find('a').text()).toEqual('hello');
-      expect(wrapper.find('a').prop('href')).toEqual('http://example.com/');
-    });
-  });
-
-  describe('when a story is send throw param must be used instead of globalContent', () => {
-    it('should render an anchor with correct values', () => {
-      const mockStory = {
-        _id: '123456',
-        websites: {
-          site: {
-            website_section: {
-              _id: '/mock/',
-              name: 'Mock',
+            websites: {
+              site: {
+                website_section: {
+                  _id: '/mock/',
+                  name: 'Mock',
+                },
+              },
             },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockContextObj);
-      const wrapper = mount(<Overline story={mockStory} />);
+          };
+          useFusionContext.mockImplementation(() => mockContextObj);
+          const wrapper = mount(<Overline story={mockStory} />);
 
-      expect(wrapper.find('a')).toHaveClassName('overline');
-      expect(wrapper.find('a').text()).toEqual('Mock');
-      expect(wrapper.find('a').prop('href')).toEqual('/mock/');
-    });
-
-    it('should render an anchor using the label values if exists', () => {
-      const mockStory = {
-        _id: '123456',
-        label: {
-          basic: {
-            display: true,
-            url: 'http://label_url',
-            text: 'label',
-          },
-        },
-        websites: {
-          site: {
-            website_section: {
-              _id: '/mock/',
-              name: 'Mock',
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockContextObj);
-      const wrapper = mount(<Overline story={mockStory} />);
-
-      expect(wrapper.find('a')).toHaveClassName('overline');
-      expect(wrapper.find('a').text()).toEqual(mockStory.label.basic.text);
-      expect(wrapper.find('a').prop('href')).toEqual(`${mockStory.label.basic.url}/`);
-    });
-
-    it('should render an anchor using the story values if label display is false', () => {
-      const mockStory = {
-        _id: '123456',
-        label: {
-          basic: {
-            display: false,
-            url: 'http://label_url',
-            text: 'label',
-          },
-        },
-        websites: {
-          site: {
-            website_section: {
-              _id: '/mock/',
-              name: 'Mock',
-            },
-          },
-        },
-      };
-      useFusionContext.mockImplementation(() => mockContextObj);
-      const wrapper = mount(<Overline story={mockStory} />);
-
-      expect(wrapper.find('a')).toHaveClassName('overline');
-      expect(wrapper.find('a').text()).toEqual(mockStory.websites.site.website_section.name);
-      expect(wrapper.find('a').prop('href')).toEqual(mockStory.websites.site.website_section._id);
+          expect(wrapper.find('a')).toHaveClassName('overline');
+          expect(wrapper.find('a').text()).toEqual(mockStory.websites.site.website_section.name);
+        });
+      });
     });
   });
 });

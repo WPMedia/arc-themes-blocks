@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';

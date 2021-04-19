@@ -15,7 +15,7 @@ jest.mock('fusion:properties', () => jest.fn(() => (
 )));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  localizeDateTime: jest.fn(() => new Date().toDateString()),
+  localizeDateTime: jest.fn((x) => new Date(x).toDateString()),
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -41,8 +41,8 @@ describe('PromoDate', () => {
 
     const wrapper = mount(<PromoDate {...props} />);
 
-    expect(wrapper.find('time').text()).toBe('Fri Apr 16 2021');
-    expect(wrapper.find('time').prop('dateTime')).toBe('Fri Apr 16 2021');
+    expect(wrapper.find('time').text()).toBe('Sun Aug 11 2019');
+    expect(wrapper.find('time').prop('dateTime')).toBe('Sun Aug 11 2019');
   });
 
   it('renders description from ANS Story object', () => {
@@ -54,7 +54,7 @@ describe('PromoDate', () => {
 
     const wrapper = mount(<PromoDate {...props} />);
 
-    expect(wrapper.find('time').text()).toBe('Fri Apr 16 2021');
-    expect(wrapper.find('time').prop('dateTime')).toBe('Fri Apr 16 2021');
+    expect(wrapper.find('time').text()).toBe('Sun Aug 11 2019');
+    expect(wrapper.find('time').prop('dateTime')).toBe('Sun Aug 11 2019');
   });
 });

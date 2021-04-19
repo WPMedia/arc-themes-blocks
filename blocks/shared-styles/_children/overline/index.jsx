@@ -1,23 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
-import getThemeStyle from 'fusion:themes';
 import { formatURL } from '@wpmedia/engine-theme-sdk';
+import PrimaryFont from '../primary-font';
+
 import './overline.scss';
-
-const StyledLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
-
-const StyledText = styled.span`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
 
 const Overline = (props) => {
   const { globalContent: content = {}, arcSite } = useFusionContext();
@@ -44,7 +32,7 @@ const Overline = (props) => {
     && sourceContent.websites[arcSite]
     && sourceContent.websites[arcSite].website_section) || {};
 
-  const shouldUseProps = !!(customText && customUrl); // ? true : sourceContent._id ? false : false;
+  const shouldUseProps = !!(customText || customUrl);
   const useGlobalContent = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
   const editableContentPath = shouldUseLabel ? 'headlines.basic' : `websites.${arcSite}.website_section.name`;
   const [text, url] = shouldUseProps ? [customText, customUrl] : useGlobalContent;
@@ -56,34 +44,22 @@ const Overline = (props) => {
     }
   }
 
+  const itemProps = {
+    ...edit,
+    className: 'overline',
+    as: 'span',
+  };
+
   if (url) {
-    return (
-      <StyledLink
-        href={formatURL(url)}
-        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className="overline"
-        {...edit}
-        suppressContentEditableWarning
-      >
-        {text}
-      </StyledLink>
-    );
+    itemProps.href = formatURL(url);
+    itemProps.as = 'a';
   }
 
-  if (text) {
-    return (
-      <StyledText
-        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className="overline"
-        {...edit}
-        suppressContentEditableWarning
-      >
-        {text}
-      </StyledText>
-    );
-  }
-
-  return null;
+  return (url || text) ? (
+    <PrimaryFont {...itemProps}>
+      {text}
+    </PrimaryFont>
+  ) : null;
 };
 
 Overline.label = 'Overline – Arc Block';

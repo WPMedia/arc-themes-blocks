@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
@@ -33,7 +32,6 @@ const StyledAdUnit = styled.div`
 `;
 
 const ArcAd = (props) => {
-  if (typeof window === 'undefined') return null;
   const fusionContext = useFusionContext();
   const [instanceId] = useState(() => generateInstanceId(fusionContext.id || '0000'));
   const propsWithContext = {
@@ -42,7 +40,7 @@ const ArcAd = (props) => {
     instanceId,
   };
   const { customFields, isAdmin, siteProperties } = propsWithContext;
-  const { displayAdLabel, lazyLoad = true } = customFields;
+  const { displayAdLabel, lazyLoad = true, reserveSpace = true } = customFields;
   const [config] = useState(
     getAdObject({
       ...customFields,
@@ -74,14 +72,23 @@ const ArcAd = (props) => {
     )
   );
 
+  const [width, height] = config.adClass ? config.adClass.split('x') : [];
+  // Height is + 17px to account line-height of advertisment string of 17px;
+  const heightWithAdjustments = parseInt(height, 10) + ((displayAdLabel) ? 17 : 0);
+
+  const sizing = {
+    width: `${width}px`,
+    minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
+  };
+
   return (
     <StyledAdUnit
-      id={`arcad_feature-${instanceId}`}
-      className="arcad_feature"
+      id={`arcad-feature-${instanceId}`}
+      className="arcad-feature"
       adLabel={siteProperties?.advertisementLabel || 'ADVERTISEMENT'}
       displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
     >
-      <div className="arcad_container">
+      <div className="arcad-container" style={sizing}>
         {!isAdmin && !isAMP() && (
           <LazyLoad enabled={lazyLoad}>
             <AdUnit
@@ -121,6 +128,10 @@ ArcAd.propTypes = {
     }),
     displayAdLabel: PropTypes.boolean.tag({
       name: 'Display Advertisement Label?',
+      defaultValue: true,
+    }),
+    reserveSpace: PropTypes.boolean.tag({
+      name: 'Reserve space for Ad',
       defaultValue: true,
     }),
   }),

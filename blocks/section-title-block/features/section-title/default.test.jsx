@@ -11,6 +11,10 @@ jest.mock('prop-types', () => ({
   contentConfig: () => {},
 }));
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  formatURL: jest.fn((input) => (input.toString())),
+}));
+
 describe('the section title feature block', () => {
   describe('when it is configured to inherit global content', () => {
     it('should render the global content section title', () => {

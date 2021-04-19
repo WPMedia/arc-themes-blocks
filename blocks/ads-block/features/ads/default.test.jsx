@@ -21,6 +21,7 @@ const AD_PROPS_MOCK = {
     adType: '300x250',
     displayAdLabel: true,
     lazyLoad: false,
+    reserveSpace: true,
   },
   displayProperties: {},
   variants: {},
@@ -40,7 +41,7 @@ describe('<ArcAd>', () => {
     it('renders no ad unit in admin dashboard', () => {
       const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
       expect(wrapper).toBeDefined();
-      const arcAdminAd = wrapper.find('.arcad_feature .arcad_container > ArcAdminAd');
+      const arcAdminAd = wrapper.find('.arcad-feature .arcad-container > ArcAdminAd');
       expect(arcAdminAd.prop('adClass')).toEqual(AD_PROPS_MOCK.customFields.adType);
       expect(arcAdminAd.prop('adType')).toEqual('cube');
       expect(arcAdminAd.prop('slotName')).toEqual('news');
@@ -62,7 +63,7 @@ describe('<ArcAd>', () => {
       it('renders ad unit with disabled lazy-load container', () => {
         const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
         expect(wrapper).toBeDefined();
-        const lazyLoaderEl = wrapper.find('div.arcad_feature LazyLoad');
+        const lazyLoaderEl = wrapper.find('div.arcad-feature LazyLoad');
         expect(lazyLoaderEl).toHaveLength(1);
         expect(lazyLoaderEl.prop('enabled')).toBe(false);
         const adUnitEl = lazyLoaderEl.find('AdUnit');
@@ -82,7 +83,7 @@ describe('<ArcAd>', () => {
         };
         const wrapper = mount(<ArcAd {...adProps} />);
         expect(wrapper).toBeDefined();
-        const lazyLoaderEl = wrapper.find('div.arcad_feature LazyLoad');
+        const lazyLoaderEl = wrapper.find('div.arcad-feature LazyLoad');
         expect(lazyLoaderEl).toHaveLength(1);
         expect(lazyLoaderEl.prop('enabled')).toBe(true);
       });
@@ -96,11 +97,35 @@ describe('<ArcAd>', () => {
         };
         const wrapper = shallow(<ArcAd {...adProps} />);
         expect(wrapper).toBeDefined();
-        const adUnitEl = wrapper.find('.arcad_feature LazyLoad AdUnit');
+        const adUnitEl = wrapper.find('.arcad-feature LazyLoad AdUnit');
         expect(adUnitEl).toHaveLength(1);
         expect(typeof adUnitEl.prop('adConfig')).toEqual('object');
         expect(typeof adUnitEl.prop('featureConfig')).toEqual('object');
       });
+    });
+  });
+
+  describe('Reserve Space', () => {
+    it('renders with width only', () => {
+      const adProps = {
+        ...AD_PROPS_MOCK,
+        customFields: {
+          reserveSpace: false,
+        },
+      };
+      const wrapper = shallow(<ArcAd {...adProps} />);
+      const container = wrapper.find('.arcad-container');
+      expect(container).toHaveLength(1);
+      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').minHeight).toBe(null);
+    });
+
+    it('renders with height and width', () => {
+      const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+      const container = wrapper.find('.arcad-container');
+      expect(container).toHaveLength(1);
+      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').minHeight).not.toBe(null);
     });
   });
 
@@ -113,7 +138,7 @@ describe('<ArcAd>', () => {
         },
       };
       const wrapper = shallow(<ArcAd {...adProps} />);
-      const container = wrapper.find('.arcad_feature');
+      const container = wrapper.find('.arcad-feature');
       expect(container).toHaveLength(1);
       expect(container.prop('displayAdLabel')).toBe(false);
       expect(container.prop('adLabel')).toEqual('ADVERTISEMENT');
@@ -121,7 +146,7 @@ describe('<ArcAd>', () => {
 
     it('renders advertisement label when enabled', () => {
       const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-      const container = wrapper.find('.arcad_feature');
+      const container = wrapper.find('.arcad-feature');
       expect(container).toHaveLength(1);
       expect(container.prop('displayAdLabel')).toBe(true);
       expect(container.prop('adLabel')).toEqual('ADVERTISEMENT');
@@ -136,7 +161,7 @@ describe('<ArcAd>', () => {
         },
       });
       const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-      const container = wrapper.find('.arcad_feature');
+      const container = wrapper.find('.arcad-feature');
       expect(container).toHaveLength(1);
       expect(container.prop('displayAdLabel')).toBe(true);
       expect(container.prop('adLabel')).toEqual(advertisementLabel);

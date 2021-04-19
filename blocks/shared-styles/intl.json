@@ -18,5 +18,25 @@
     "es": "Video",
     "ja": "ビデオ",
     "ko": "비디오"
-  }
+  },
+  "byline.by-text":{
+    "en":"By",
+    "fr": "Par",
+    "sv":"Av",
+    "no":"Av",
+    "de": "Von",
+    "es": "Por",
+    "ja": "担当者：",
+    "ko": "저작자"
+ },
+ "byline.and-text":{
+    "en":"and",
+    "sv":"och",
+    "no":"og",
+    "fr":"et",
+    "de": "und",
+    "es": "y",
+    "ja": "および",
+    "ko": "및"
+ }
 }

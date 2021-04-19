@@ -12,6 +12,10 @@ jest.mock('fusion:context', () => ({
   useAppContext: jest.fn(() => mockTwoSection),
 }));
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  formatURL: jest.fn((input) => (input.toString())),
+}));
+
 describe('the section title block', () => {
   describe('when content from globalContent is present', () => {
     it('should render a title', () => {

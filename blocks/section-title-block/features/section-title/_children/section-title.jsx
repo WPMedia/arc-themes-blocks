@@ -1,23 +1,28 @@
 import React from 'react';
 import { PrimaryFont } from '@wpmedia/shared-styles';
+import { formatURL } from '@wpmedia/engine-theme-sdk';
 
 import './section-title.scss';
 
 const Separator = '  \u00a0 • \u00a0  ';
 
 // using the class twice to ensure the • and the text are both same font-size and
-const styledLinkTmpl = (name, id, separator) => (
-  <span key={id} className="section-title--styled-link">
-    <PrimaryFont
-      as="a"
-      href={id}
-      className="section-title--styled-link"
-    >
-      {name}
-    </PrimaryFont>
-    {separator}
-  </span>
-);
+const styledLinkTmpl = (name, id, separator) => {
+  const formattedURL = formatURL(id);
+
+  return (
+    <span key={id} className="section-title--styled-link">
+      <PrimaryFont
+        as="a"
+        href={formattedURL}
+        className="section-title--styled-link"
+      >
+        {name}
+      </PrimaryFont>
+      {separator}
+    </span>
+  );
+};
 
 const SectionTitle = (props) => {
   const { content } = props;

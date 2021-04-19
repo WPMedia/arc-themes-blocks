@@ -36,5 +36,6 @@ module.exports = {
     '!**/vendor/**',
     '!**/images/*.svg',
     '!**/mock*.js',
+    '!**/*.story*.jsx',
   ],
 };

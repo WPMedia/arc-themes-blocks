@@ -1,33 +1,17 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import {
+  Overline, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
-const OverlineLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
-
-const OverlineHeader = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
-
 const ExtraLargeManualPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
+  const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
   return (
@@ -38,25 +22,14 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
             || customFields.showOverline)
           && (
             <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {(customFields.showOverline && customFields.overline && customFields.overlineURL)
-              && (
-                <OverlineLink
-                  href={customFields.overlineURL}
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                  className="overline"
-                >
-                  {customFields.overline}
-                </OverlineLink>
-              )}
-              {((customFields.showOverline && customFields.overline) && !customFields.overlineURL)
-              && (
-                <OverlineHeader
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                  className="overline"
-                >
-                  {customFields.overline}
-                </OverlineHeader>
-              )}
+              {(customFields.showOverline)
+                ? (
+                  <Overline
+                    customText={customFields.overline}
+                    customUrl={customFields.overlineURL}
+                  />
+                )
+                : null}
 
               {(customFields.showHeadline && customFields.headline)
                 ? (
@@ -80,14 +53,12 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
                 </div>
               ) : null}
               {(customFields.showDescription && customFields.description)
-              && (
-                <DescriptionText
-                  secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-                  className="description-text"
-                >
-                  {customFields.description}
-                </DescriptionText>
-              )}
+                ? (
+                  <PromoDescription
+                    className="description-text"
+                    text={customFields.description}
+                  />
+                ) : null}
             </div>
           )}
         </div>

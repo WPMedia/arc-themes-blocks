@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 const config = {
   showOverlineXL: true,
@@ -23,20 +23,40 @@ const config = {
   showImageSM: true,
 };
 
+const imageURL = 'pic';
+const itemTitle = 'title';
+const descriptionText = 'description';
+const websiteURL = 'https://arcxp.com';
+
 const sampleProps = {
-  imageURL: 'pic',
-  websiteURL: 'url',
-  itemTitle: 'title',
-  descriptionText: 'description',
-  primaryFont: 'arial',
-  secondaryFont: 'Georgia',
-  by: ['jack'],
-  element: { credits: { by: [] } },
-  displayDate: '',
+  element: {
+    headlines: {
+      basic: itemTitle,
+    },
+    description: {
+      basic: descriptionText,
+    },
+    websites: {
+      'the-sun': {
+        website_url: websiteURL,
+        website_section: {
+          _id: '/news',
+          name: 'News',
+        },
+      },
+    },
+    credits: { by: ['jack'] },
+    promo_items: {
+      basic: {
+        type: 'image',
+        url: imageURL,
+        resized_params: {
+          '400x267': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
+        },
+      },
+    },
+  },
   id: 'test',
-  overlineUrl: '/news',
-  overlineText: 'News',
-  overlineDisplay: true,
   customFields: config,
 };
 
@@ -51,6 +71,7 @@ describe('horizontal overline image story item', () => {
     }));
     jest.mock('fusion:content', () => ({
       useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
+      useContent: jest.fn(),
     }));
     jest.mock('fusion:properties', () => (jest.fn(() => ({
       fallbackImage: 'placeholder.jpg',
@@ -74,33 +95,21 @@ describe('horizontal overline image story item', () => {
 
     // finds overline
     expect(wrapper.find('a.overline').length).toBe(1);
-    // expect(wrapper.find('a.overline').at(0).text()).toBe('News');
     expect(wrapper.find('a.overline').text()).toBe('News');
 
     // has the correct link
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
-    expect(wrapper.props().websiteURL).toBe('url');
-    // expect(wrapper.find('a.lg-promo-headline').at(0).props().href).toBe(websiteURL);
-    expect(wrapper.find('a.lg-promo-headline').props().href).toBe(sampleProps.websiteURL);
+    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
 
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('VideoPlayer')).toHaveLength(0);
   });
+
   it('renders with empty props with defaults', () => {
     const testProps = {
       ...sampleProps,
-      imageURL: '',
-      websiteURL: '',
-      itemTitle: '',
-      descriptionText: '',
-      primaryFont: '',
-      secondaryFont: '',
-      by: [],
       element: {},
-      displayDate: '',
-      overlineURL: '',
-      overlineText: '',
       id: 'test',
     };
 
@@ -116,18 +125,14 @@ describe('horizontal overline image story item', () => {
 
     // does not find overline
     expect(wrapper.find('a.overline').length).toBe(0);
-    expect(wrapper.props().overlineText).toBe('');
-
-    // finds default spacing for headline descriptions
-    // expect(wrapper.find('.headline-description-spacing').length).toBe(1);
 
     expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
   });
 
   it('renders VideoPlayer when type "story" with video lead art', () => {
     const testProps = {
-      ...sampleProps,
       element: {
+        ...sampleProps.element,
         type: 'story',
         promo_items: {
           lead_art: {
@@ -143,12 +148,12 @@ describe('horizontal overline image story item', () => {
     };
 
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
-    const wrapper = shallow(<HorizontalOverlineImageStoryItem {...testProps} />);
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
 
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     expect(wrapper.find('Overline').length).toBe(1);
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
-    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(testProps.websiteURL);
+    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('Image')).toHaveLength(0);
     expect(wrapper.find('VideoPlayer')).toHaveLength(1);
@@ -156,8 +161,8 @@ describe('horizontal overline image story item', () => {
 
   it('renders VideoPlayer when type "video" with embed', () => {
     const testProps = {
-      ...sampleProps,
       element: {
+        ...sampleProps.element,
         type: 'video',
         embed_html: '<div></div>',
       },
@@ -170,12 +175,12 @@ describe('horizontal overline image story item', () => {
     };
 
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
-    const wrapper = shallow(<HorizontalOverlineImageStoryItem {...testProps} />);
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
 
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     expect(wrapper.find('Overline').length).toBe(0);
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
-    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(testProps.websiteURL);
+    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
     expect(wrapper.find('Image')).toHaveLength(0);
@@ -184,8 +189,8 @@ describe('horizontal overline image story item', () => {
 
   it('renders VideoPlayer when type "video" with embed without border line', () => {
     const testProps = {
-      ...sampleProps,
       element: {
+        ...sampleProps.element,
         type: 'video',
         embed_html: '<div></div>',
       },
@@ -199,12 +204,12 @@ describe('horizontal overline image story item', () => {
     };
 
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
-    const wrapper = shallow(<HorizontalOverlineImageStoryItem {...testProps} />);
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
 
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     expect(wrapper.find('Overline').length).toBe(0);
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
-    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(testProps.websiteURL);
+    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(true);
     expect(wrapper.find('Image')).toHaveLength(0);
     expect(wrapper.find('VideoPlayer')).toHaveLength(1);
@@ -212,8 +217,8 @@ describe('horizontal overline image story item', () => {
 
   it('renders VideoPlayer when type "video" with embed with border line', () => {
     const testProps = {
-      ...sampleProps,
       element: {
+        ...sampleProps.element,
         type: 'video',
         embed_html: '<div></div>',
       },
@@ -227,12 +232,12 @@ describe('horizontal overline image story item', () => {
     };
 
     const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
-    const wrapper = shallow(<HorizontalOverlineImageStoryItem {...testProps} />);
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
 
     expect(wrapper.find('.top-table-extra-large-image-placeholder').length).toBe(0);
     expect(wrapper.find('Overline').length).toBe(0);
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
-    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(testProps.websiteURL);
+    expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
     expect(wrapper.find('Image')).toHaveLength(0); expect(wrapper.find('Image')).toHaveLength(0);

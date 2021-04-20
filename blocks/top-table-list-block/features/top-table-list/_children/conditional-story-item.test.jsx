@@ -176,7 +176,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={LARGE} customFields={lgConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(283);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(283);
   });
 
   it('must have a default 16:9 ratio for MD', () => {
@@ -255,7 +255,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={LARGE} customFields={lgConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(212);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(212);
   });
 
   it('LG can be changed to 4:3', () => {
@@ -268,7 +268,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={LARGE} customFields={lgConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(283);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(283);
   });
 
   it('LG can be changed to 3:2', () => {
@@ -281,7 +281,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={LARGE} customFields={lgConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(251);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(251);
   });
 
   it('MD can be changed to 16:9', () => {

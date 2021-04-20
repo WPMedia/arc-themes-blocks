@@ -1,130 +1,25 @@
 import React from 'react';
 import {
-  Image,
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
-import ArticleDate from '@wpmedia/date-block';
-import Byline from '@wpmedia/byline-block';
-import Overline from '@wpmedia/overline-block';
-import { PromoLabel } from '@wpmedia/shared-styles';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
-import getProperties from 'fusion:properties';
-import Title from './title';
-import DescriptionText from './description-text';
-import checkObjectEmpty from '../shared/checkObjectEmpty';
-import discoverPromoType from './discover';
+import {
+  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
 const HorizontalOverlineImageStoryItem = (props) => {
   const {
-    websiteURL,
-    itemTitle,
-    imageURL,
-    descriptionText,
-    primaryFont,
-    secondaryFont,
-    by,
     element,
-    overlineDisplay,
-    overlineUrl,
-    overlineText,
-    displayDate,
     id,
     customFields,
-    arcSite,
-    resizedImageOptions,
-    placeholderResizedImageOptions,
-    targetFallbackImage,
-    imageRatio,
   } = props;
-  const showSeparator = by && by.length !== 0 && customFields.showDateLG;
   const textClass = customFields.showImageLG
     ? 'col-sm-12 col-md-xl-6 flex-col'
     : 'col-sm-xl-12 flex-col';
 
   const showBottomBorder = (typeof customFields.showBottomBorderLG === 'undefined') ? true : customFields.showBottomBorderLG;
 
-  const hrBorderTmpl = () => {
-    if (showBottomBorder) {
-      return (
-        <hr />
-      );
-    }
-    return (
-      <hr className="hr-borderless" />
-    );
-  };
-
-  const overlineTmpl = () => {
-    if (customFields.showOverlineLG && overlineDisplay) {
-      return (
-        <Overline
-          customUrl={overlineUrl}
-          customText={overlineText}
-          className="overline"
-          editable
-        />
-      );
-    }
-    return null;
-  };
-
-  const headlineTmpl = () => {
-    if (customFields.showHeadlineLG && itemTitle) {
-      return (
-        <a href={websiteURL} className="lg-promo-headline">
-          <Title primaryFont={primaryFont} className="lg-promo-headline">
-            {itemTitle}
-          </Title>
-        </a>
-      );
-    }
-    return null;
-  };
-
-  const descriptionTmpl = () => {
-    if (customFields.showDescriptionLG && descriptionText) {
-      return (
-        <DescriptionText
-          secondaryFont={secondaryFont}
-          className="description-text"
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
-
-  const byLineTmpl = () => {
-    if (customFields.showBylineLG && !checkObjectEmpty(element)) {
-      return (
-        <>
-          {!checkObjectEmpty(element) ? (
-            <Byline story={element} stylesFor="list" />
-          ) : null}
-          {/* The Separator will only be shown if there is at least one author name */}
-          {showSeparator && <p className="dot-separator">&#9679;</p>}
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDateLG && displayDate) {
-      return (
-        <>
-          <ArticleDate date={displayDate} />
-        </>
-      );
-    }
-    return null;
-  };
-
-  const ratios = ratiosFor('LG', imageRatio);
-  const promoType = discoverPromoType(element);
   const videoEmbed = customFields.playVideoInPlaceLG
     && !!extractVideoEmbedFromStory
     && extractVideoEmbedFromStory(element);
@@ -144,71 +39,54 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   />
                 )
               ) || (
-                <>
-                  { imageURL ? (
-                    <a href={websiteURL} aria-hidden="true" tabIndex="-1">
-                      <Image
-                        resizedImageOptions={resizedImageOptions}
-                        url={imageURL}
-                        alt={
-                          itemTitle
-                          || getProperties(arcSite).primaryLogoAlt
-                          || 'Placeholder logo'
-                        }
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                        resizerURL={getProperties(arcSite)?.resizerURL}
-                      />
-                      <PromoLabel type={promoType} />
-                    </a>
-                  ) : (
-                    <div className="image-wrapper">
-                      <Image
-                        smallWidth={ratios.smallWidth}
-                        smallHeight={ratios.smallHeight}
-                        mediumWidth={ratios.mediumWidth}
-                        mediumHeight={ratios.mediumHeight}
-                        largeWidth={ratios.largeWidth}
-                        largeHeight={ratios.largeHeight}
-                        alt={
-                          itemTitle
-                          || getProperties(arcSite).primaryLogoAlt
-                          || 'Placeholder logo'
-                        }
-                        url={targetFallbackImage}
-                        breakpoints={getProperties(arcSite)?.breakpoints}
-                        resizedImageOptions={placeholderResizedImageOptions}
-                        resizerURL={getProperties(arcSite)?.resizerURL}
-                      />
-                      <PromoLabel type={promoType} />
-                    </div>
-                  )}
-                </>
+                <PromoImage
+                  content={element}
+                  showPromoLabel
+                  promoSize="LG"
+                  promoLabelSize="large"
+                  imageRatio={customFields.imageRatioLG}
+                />
               )}
             </div>
           )}
           {(customFields.showHeadlineLG
             || customFields.showDescriptionLG
             || customFields.showBylineLG
-            || customFields.showDateLG) && (
+            || customFields.showDateLG) ? (
               <div className={textClass}>
-                {overlineTmpl()}
-                {headlineTmpl()}
-                {descriptionTmpl()}
+                {customFields.showOverlineLG ? (
+                  <Overline
+                    story={element}
+                    className="overline"
+                    editable
+                  />
+                ) : null}
+                {customFields.showHeadlineLG ? (
+                  <PromoHeadline
+                    content={element}
+                    headingClassName="lg-promo-headline"
+                    linkClassName="lg-promo-headline"
+                    editable={false}
+                  />
+                ) : null}
+                {customFields.showDescriptionLG ? (
+                  <PromoDescription
+                    content={element}
+                    className="description-text"
+                    editable={false}
+                  />
+                ) : null}
                 <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
+                  {customFields.showBylineLG ? <Byline content={element} font="Primary" list /> : null}
+                  {customFields.showDateLG ? (
+                    <PromoDate content={element} />
+                  ) : null}
                 </div>
               </div>
-          )}
+            ) : null}
         </div>
       </article>
-      {hrBorderTmpl()}
+      <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
     </>
   );
 };

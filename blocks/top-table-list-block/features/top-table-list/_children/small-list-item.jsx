@@ -1,104 +1,28 @@
 import React from 'react';
-import { Image } from '@wpmedia/engine-theme-sdk';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
-import getProperties from 'fusion:properties';
-import { PromoLabel } from '@wpmedia/shared-styles';
-import Title from './title';
-import discoverPromoType from './discover';
+import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from '../shared/imagePositionConstants';
 
 const SmallListItem = (props) => {
   const {
-    itemTitle,
-    imageURL,
     id,
-    primaryFont,
-    websiteURL,
-    arcSite,
-    resizedImageOptions,
-    targetFallbackImage,
-    placeholderResizedImageOptions,
     element,
-    imageRatio,
     customFields: {
       imagePositionSM: imagePosition = RIGHT,
       storiesPerRowSM,
       showHeadlineSM,
       showImageSM,
       showBottomBorderSM,
+      imageRatioSM,
     },
   } = props;
-  const ratios = ratiosFor('SM', imageRatio);
+
   const storiesPerRow = (typeof storiesPerRowSM === 'undefined') ? 2 : storiesPerRowSM;
-  const promoType = discoverPromoType(element);
-  const showHeadline = showHeadlineSM && itemTitle !== '';
   const showImage = showImageSM;
   const layout = imagePosition === ABOVE || imagePosition === BELOW ? 'vertical' : 'horizontal';
   const isReverseLayout = (imagePosition === ABOVE || imagePosition === LEFT);
   const showBottomBorder = (typeof showBottomBorderSM === 'undefined') ? true : showBottomBorderSM;
-
-  const hrBorderTmpl = () => {
-    if (showBottomBorder) {
-      return (
-        <hr />
-      );
-    }
-    return (
-      <hr className="hr-borderless" />
-    );
-  };
-
-  const PromoHeadline = () => (
-    <div className="promo-headline headline-wrap">
-      <a href={websiteURL} className="sm-promo-headline">
-        <Title primaryFont={primaryFont} className="sm-promo-headline">
-          {itemTitle}
-        </Title>
-      </a>
-    </div>
-  );
-
-  const PromoImage = () => (
-    <div className="promo-image flex-col">
-      { imageURL !== '' ? (
-        <a href={websiteURL} aria-hidden="true" tabIndex="-1">
-          <Image
-            resizedImageOptions={resizedImageOptions}
-            url={imageURL}
-            alt={itemTitle}
-            smallWidth={ratios.smallWidth}
-            smallHeight={ratios.smallHeight}
-            mediumWidth={ratios.mediumWidth}
-            mediumHeight={ratios.mediumHeight}
-            largeWidth={ratios.largeWidth}
-            largeHeight={ratios.largeHeight}
-            breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-          />
-          <PromoLabel type={promoType} size="small" />
-        </a>
-      ) : (
-        <div className="image-wrapper">
-          <Image
-            smallWidth={ratios.smallWidth}
-            smallHeight={ratios.smallHeight}
-            mediumWidth={ratios.mediumWidth}
-            mediumHeight={ratios.mediumHeight}
-            largeWidth={ratios.largeWidth}
-            largeHeight={ratios.largeHeight}
-            alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-            url={targetFallbackImage}
-            breakpoints={getProperties(arcSite)?.breakpoints}
-            resizedImageOptions={placeholderResizedImageOptions}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-          />
-          <PromoLabel type={promoType} size="small" />
-        </div>
-      )}
-    </div>
-  );
 
   const colClassNum = (!!storiesPerRow && Math.floor(12 / storiesPerRow)) || 1;
   const colClasses = `col-sm-12 col-md-${colClassNum} col-lg-${colClassNum} col-xl-${colClassNum}`;
@@ -108,11 +32,27 @@ const SmallListItem = (props) => {
       key={id}
       className={`top-table-list-small-promo small-promo ${colClasses}`}
     >
-      <div className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
-        { showHeadline && <PromoHeadline /> }
-        { showImage && <PromoImage /> }
+      <div className={`promo-container row ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
+        {showHeadlineSM ? (
+          <PromoHeadline
+            content={element}
+            className="headline-wrap"
+            linkClassName="sm-promo-headline"
+            headingClassName="sm-promo-headline"
+            editable={false}
+          />
+        ) : null}
+        { showImage ? (
+          <PromoImage
+            content={element}
+            showPromoLabel
+            promoSize="SM"
+            imageRatio={imageRatioSM}
+            editable={false}
+          />
+        ) : null }
       </div>
-      {hrBorderTmpl()}
+      <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
     </article>
   );
 };

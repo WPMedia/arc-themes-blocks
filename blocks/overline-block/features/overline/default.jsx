@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';
+import { formatURL } from '@wpmedia/engine-theme-sdk';
 import './overline.scss';
 
 const StyledLink = styled.a`
@@ -17,36 +18,6 @@ const StyledText = styled.span`
   font-weight: bold;
   text-decoration: none;
 `;
-
-function getLocation(uri) {
-  let url;
-  if (typeof window === 'undefined') {
-    url = new URL(uri, 'http://example.com');
-  } else {
-    url = document.createElement('a');
-    // IE doesn't populate all link properties when setting .href with a relative URL,
-    // however .href will return an absolute URL which then can be used on itself
-    // to populate these additional fields.
-    url.href = uri;
-    if (url.host === '') {
-      url.href = `${url.href}`;
-    }
-  }
-  return url;
-}
-
-function fixTrailingSlash(item) {
-  const url = getLocation(item);
-
-  if (url.hash || url.search || url.pathname.match(/\./)) {
-    return item;
-  }
-
-  if (item[item.length - 1] !== '/') {
-    return `${item}/`;
-  }
-  return item;
-}
 
 const Overline = (props) => {
   const { globalContent: content = {}, arcSite } = useFusionContext();
@@ -88,7 +59,7 @@ const Overline = (props) => {
   if (url) {
     return (
       <StyledLink
-        href={fixTrailingSlash(url)}
+        href={formatURL(url)}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
         {...edit}

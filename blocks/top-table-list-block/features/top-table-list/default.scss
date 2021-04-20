@@ -43,16 +43,7 @@
   .promo-container {
     display: flex;
     flex-direction: row;
-
-    > div {
-      &:nth-child(odd) {
-        padding-right: 0.75rem;
-      }
-
-      &:nth-child(even) {
-        padding-left: 0.75rem;
-      }
-    }
+    column-gap: calculateRem(24px);
 
     &.horizontal.reverse {
       flex-direction: row-reverse;
@@ -60,14 +51,6 @@
       > div {
         padding-left: 0;
         padding-right: 0;
-
-        &:nth-child(odd) {
-          padding-left: 0.75rem;
-        }
-
-        &:nth-child(even) {
-          padding-right: 0.75rem;
-        }
       }
     }
 
@@ -75,24 +58,12 @@
       @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
         flex-direction: column;
 
-        > div {
-          padding: 0;
-
-          &:first-child {
-            margin-bottom: 0.75rem;
-          }
-        }
-
         &.reverse {
           flex-direction: column-reverse;
 
           > div {
             margin-bottom: 0;
             padding: 0;
-
-            &:last-child {
-              margin-bottom: 0.75rem;
-            }
           }
         }
       }
@@ -169,4 +140,3 @@
     margin-top: 1.5rem;
   }
 }
-

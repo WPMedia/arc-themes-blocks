@@ -10,8 +10,8 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
 }));
-jest.mock('./_children/story-item-container', () => (
-  function StoryItemContainer() {
+jest.mock('./_children/conditional-story-item', () => (
+  function ConditionalStoryItem() {
     return <div />;
   }
 ));
@@ -221,11 +221,8 @@ describe('top table list', () => {
     );
     const container = wrapper.find('.top-table-list-container');
     expect(container.children().length).toBe(1);
-    const storyItem = container.find('StoryItemContainer');
+    const storyItem = container.find('ConditionalStoryItem');
     expect(storyItem).toHaveLength(1);
-    expect(storyItem.prop('id')).toEqual('abcde');
-    expect(storyItem.prop('itemTitle')).toEqual('Alt Headline');
-    expect(storyItem.prop('description')).toEqual('Alt description');
   });
 
   it('renders content only for the arcSite', () => {
@@ -397,9 +394,8 @@ describe('top table list overline rules', () => {
 
     const wrapper = mount(<TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />);
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
+    const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
   });
 
   it('must render overline from section', () => {
@@ -442,9 +438,8 @@ describe('top table list overline rules', () => {
       <TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
+    const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Section');
   });
 
   it('must prioritize overline from label if has section too', () => {
@@ -494,8 +489,7 @@ describe('top table list overline rules', () => {
       <TopTableList customFields={localConfig} arcSite="" deployment={jest.fn((path) => path)} />,
     );
 
-    const ele = wrapper.find('.top-table-list-container').find('StoryItemContainer');
+    const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
   });
 });

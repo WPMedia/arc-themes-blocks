@@ -1,0 +1,31 @@
+.byline {
+  $self: &;
+  color: #191919;
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+
+  &--list {
+    display: inline;
+    font-size: 0.875rem;
+    line-height: 1rem;
+
+    #{$self}__by {
+      color: #3b3b3b;
+      margin-right: 0;
+    }
+
+    #{$self}__names {
+      color: #434343;
+    }
+  }
+
+
+  a {
+    color: $ui-primary-font-color;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}

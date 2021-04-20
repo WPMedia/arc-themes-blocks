@@ -105,6 +105,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   RssIcon: () => <svg>RssIcon</svg>,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+  formatURL: jest.fn((input) => input.toString()),
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));

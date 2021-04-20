@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  formatURL: jest.fn((input) => (input.toString())),
+}));
 describe('the links bar feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();
@@ -182,100 +184,5 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
-  });
-
-  describe('a link element ', () => {
-    it('should have the right name', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="/testurl" name="test" />);
-
-      expect(wrapper.props().name).toBe('test');
-      expect(wrapper.find('a').text()).toBe('test');
-    });
-  });
-
-  describe('when a link is missing a trailing slash', () => {
-    it('should add a slash at the end of the link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="/testurl" name="test" />);
-      expect(wrapper.props().href).toBe('/testurl');
-      expect(wrapper.find('[href="/testurl/"]').length).toBe(3);
-    });
-  });
-
-  describe('when a link is not missing a trailing slash', () => {
-    it('should not add a slash at the end of the link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="/testurl/" name="test" />);
-
-      expect(wrapper.props().href).toBe('/testurl/');
-      expect(wrapper.find('[href="/testurl/"]').length).toBe(4);
-    });
-  });
-
-  describe('when a link has query parameters', () => {
-    it('should not add a slash at the end of a internal link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="/testurl/?query=home" name="test" />);
-
-      expect(wrapper.props().href).toBe('/testurl/?query=home');
-      expect(wrapper.find('[href="/testurl/?query=home"]').length).toBe(4);
-    });
-  });
-
-  describe('when a link has query parameters', () => {
-    it('should not add a slash at the end of a external link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(
-        <Link href="http://example.com/testurl/?query=home" name="test" />,
-      );
-
-      expect(wrapper.props().href).toBe(
-        'http://example.com/testurl/?query=home',
-      );
-      expect(
-        wrapper.find('[href="http://example.com/testurl/?query=home"]').length,
-      ).toBe(4);
-    });
-  });
-
-  describe('when a link is to a page', () => {
-    it('should not add a slash at the end of the link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(
-        <Link href="https://example.com/category/page.html" name="test" />,
-      );
-
-      expect(wrapper.props().href).toBe(
-        'https://example.com/category/page.html',
-      );
-      expect(
-        wrapper.find('[href="https://example.com/category/page.html"]').length,
-      ).toBe(4);
-    });
-  });
-
-  describe('when a link has a hash', () => {
-    it('should not add a slash at the end of the link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(<Link href="/category/page#myhash" name="test" />);
-
-      expect(wrapper.props().href).toBe('/category/page#myhash');
-      expect(wrapper.find('[href="/category/page#myhash"]').length).toBe(4);
-    });
-  });
-
-  describe('when a link has a mail', () => {
-    it('should not add a slash at the end of the link', () => {
-      const { default: Link } = require('./_children/link');
-      const wrapper = mount(
-        <Link href="mailto:readers@washpost.com" name="test" />,
-      );
-
-      expect(wrapper.props().href).toBe('mailto:readers@washpost.com');
-      expect(wrapper.find('[href="mailto:readers@washpost.com"]').length).toBe(
-        4,
-      );
-    });
   });
 });

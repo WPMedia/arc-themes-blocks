@@ -1,6 +1,21 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({
+    editableContent: () => ({ contentEditable: 'true' }),
+  })),
+  useContent: jest.fn(),
+}));
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+  })),
+}));
+
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -76,28 +91,39 @@ describe('medium list item', () => {
 
   it('renders title and image with full props', () => {
     const imageURL = 'pic';
-    const constructedURL = 'url';
     const itemTitle = 'title';
     const descriptionText = 'description';
-    const primaryFont = 'arial';
-    const secondaryFont = 'Georgia';
     const by = ['jack'];
-    const element = { credits: { by: [] } };
-    const displayDate = '';
     const id = 'test';
+
+    const element = {
+      headlines: {
+        basic: itemTitle,
+      },
+      description: {
+        basic: descriptionText,
+      },
+      promo_items: {
+        basic: {
+          type: 'image',
+          url: imageURL,
+          resized_params: {
+            '400x267': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
+          },
+        },
+      },
+      credits: { by },
+      websites: {
+        'the-sun': {
+          website_url: 'https://arcxp.com',
+        },
+      },
+    };
     const { default: MediumListItem } = require('./medium-list-item');
 
     // eslint-disable-next-line no-unused-vars
     const wrapper = mount(<MediumListItem
-      imageURL={imageURL}
-      constructedURL={constructedURL}
-      itemTitle={itemTitle}
-      descriptionText={descriptionText}
-      primaryFont={primaryFont}
-      secondaryFont={secondaryFont}
-      by={by}
       element={element}
-      displayDate={displayDate}
       id={id}
       customFields={config}
     />);
@@ -109,7 +135,7 @@ describe('medium list item', () => {
     // expect(wrapper.find('.headline-description-spacing').length).toBe(0);
 
     // finds description text
-    expect(wrapper.find('p.description-text').text()).toBe(descriptionText);
+    expect(wrapper.find('PromoDescription').text()).toBe(descriptionText);
 
     expect(wrapper.find('MediumListItem > hr').length).toBe(1);
   });

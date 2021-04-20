@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 
 import { useFusionContext } from 'fusion:context';
-import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
-import Overline from '@wpmedia/overline-block';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import {
+  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
@@ -19,13 +16,9 @@ import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
-
 const ExtraLargePromoItem = ({ customFields }) => {
   const { arcSite, id, isAdmin } = useFusionContext();
-  const { editableContent, searchableField } = useEditableContent();
+  const { searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -120,73 +113,6 @@ const ExtraLargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const { website_section: websiteSection } = content?.websites?.[arcSite] ?? {
-    website_section: null,
-  };
-  const descriptionText = content && content.description ? content.description.basic : null;
-  const showSeparator = content && content.credits && content.credits.by
-    && content.credits.by.length !== 0;
-  const byLineArray = (content && content.credits && content.credits.by
-    && content.credits.by.length !== 0) ? content.credits.by : null;
-  const dateText = content && content.display_date ? content.display_date : null;
-  const overlineDisplay = (content?.label?.basic?.display ?? null)
-    || (content?.websites?.[arcSite] && websiteSection)
-    || false;
-
-  const overlineTmpl = () => {
-    if (customFields.showOverline && overlineDisplay) {
-      return (
-        (
-          <Overline
-            className="overline"
-            story={content}
-            editable
-          />
-        )
-      );
-    }
-    return null;
-  };
-
-  const descriptionTmpl = () => {
-    if (customFields.showDescription && descriptionText) {
-      return (
-        <DescriptionText
-          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-          className="description-text"
-          {...editableContent(content, 'description.basic')}
-          suppressContentEditableWarning
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
-
-  const byLineTmpl = () => {
-    if (customFields.showByline && byLineArray) {
-      return (
-        <>
-          <Byline story={content} stylesFor="list" />
-          { showSeparator && <p className="dot-separator">&#9679;</p> }
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDate && dateText) {
-      return (
-        <>
-          <ArticleDate date={dateText} />
-        </>
-      );
-    }
-    return null;
-  };
-
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return (
@@ -197,7 +123,9 @@ const ExtraLargePromoItem = ({ customFields }) => {
             || customFields.showByline || customFields.showDate)
           && (
             <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {overlineTmpl()}
+              {(customFields.showOverline)
+                ? <Overline story={content} editable />
+                : null}
               {customFields.showHeadline ? (
                 <PromoHeadline
                   content={content}
@@ -230,10 +158,17 @@ const ExtraLargePromoItem = ({ customFields }) => {
                   ) : null
                 )
               }
-              {descriptionTmpl()}
+              {(customFields.showDescription ? (
+                <PromoDescription
+                  className="description-text"
+                  content={content}
+                />
+              ) : null)}
               <div className="article-meta">
-                {byLineTmpl()}
-                {dateTmpl()}
+                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
+                {(customFields.showDate) ? (
+                  <PromoDate content={content} />
+                ) : null}
               </div>
             </div>
           )}

@@ -61,25 +61,9 @@ const ConditionalStoryItem = (props) => {
     case LARGE:
       return (
         <HorizontalOverlineImageStoryItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
-          descriptionText={descriptionText}
-          by={by}
           element={element}
-          overlineDisplay={overlineDisplay}
-          overlineUrl={overlineUrl}
-          overlineText={overlineText}
-          displayDate={displayDate}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioLG}
         />
       );
     case MEDIUM:

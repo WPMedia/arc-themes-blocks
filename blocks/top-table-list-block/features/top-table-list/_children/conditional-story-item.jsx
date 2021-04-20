@@ -85,22 +85,9 @@ const ConditionalStoryItem = (props) => {
     case MEDIUM:
       return (
         <MediumListItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
-          descriptionText={descriptionText}
-          by={by}
           element={element}
-          displayDate={displayDate}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioMD}
         />
       );
     case SMALL: {

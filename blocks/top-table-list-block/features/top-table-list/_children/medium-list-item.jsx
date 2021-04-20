@@ -1,104 +1,15 @@
 import React from 'react';
-import { Image } from '@wpmedia/engine-theme-sdk';
-import Byline from '@wpmedia/byline-block';
-import ArticleDate from '@wpmedia/date-block';
-import { ratiosFor } from '@wpmedia/resizer-image-block';
-import { PromoLabel } from '@wpmedia/shared-styles';
-import getProperties from 'fusion:properties';
-import Title from './title';
-import DescriptionText from './description-text';
-import checkObjectEmpty from '../shared/checkObjectEmpty';
-import discoverPromoType from './discover';
+import {
+  Byline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
-// via results list
 const MediumListItem = (props) => {
   const {
-    websiteURL,
-    itemTitle,
-    imageURL,
-    descriptionText,
-    primaryFont,
-    secondaryFont,
-    by,
     element,
-    displayDate,
     id,
     customFields,
-    arcSite,
-    resizedImageOptions,
-    targetFallbackImage,
-    placeholderResizedImageOptions,
-    imageRatio,
   } = props;
-  const showSeparator = by && by.length !== 0 && customFields.showDateMD;
   const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
-
-  const hrBorderTmpl = () => {
-    if (showBottomBorder) {
-      return (
-        <hr />
-      );
-    }
-    return (
-      <hr className="hr-borderless" />
-    );
-  };
-
-  const headlineTmpl = () => {
-    if (customFields.showHeadlineMD && itemTitle !== '') {
-      return (
-        <a href={websiteURL} className="md-promo-headline">
-          <Title className="md-promo-headline-text" primaryFont={primaryFont}>
-            {itemTitle}
-          </Title>
-        </a>
-      );
-    }
-    return null;
-  };
-
-  const descriptionTmpl = () => {
-    if (customFields.showDescriptionMD) {
-      return (
-        <DescriptionText
-          secondaryFont={secondaryFont}
-          className="description-text"
-        >
-          {descriptionText}
-        </DescriptionText>
-      );
-    }
-    return null;
-  };
-
-  const byLineTmpl = () => {
-    if (customFields.showBylineMD) {
-      return (
-        <>
-          {!checkObjectEmpty(element) ? (
-            <Byline story={element} stylesFor="list" />
-          ) : null}
-          {/* The Separator will only be shown if there is at least one author name */}
-          {showSeparator && <p className="dot-separator">&#9679;</p>}
-        </>
-      );
-    }
-    return null;
-  };
-
-  const dateTmpl = () => {
-    if (customFields.showDateMD && displayDate) {
-      return (
-        <>
-          <ArticleDate date={displayDate} />
-        </>
-      );
-    }
-    return null;
-  };
-
-  const ratios = ratiosFor('MD', imageRatio);
-  const promoType = discoverPromoType(element);
 
   return (
     <>
@@ -106,45 +17,16 @@ const MediumListItem = (props) => {
         <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showImageMD
             && (
-            <a
-              className="image-link"
-              href={websiteURL}
-              aria-hidden="true"
-              tabIndex="-1"
-            >
-              {imageURL !== '' ? (
-                <Image
-                  resizedImageOptions={resizedImageOptions}
-                  url={imageURL}
-                  // todo: get the proper alt tag for this image
-                  // 16:9 aspect for medium
-                  alt={itemTitle}
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
+              <div className="image-link">
+                <PromoImage
+                  content={element}
+                  showPromoLabel
+                  promoSize="MD"
+                  promoLabelSize="large"
+                  imageRatio={customFields.imageRatioMD}
+                  lazyLoad={customFields.lazyLoad}
                 />
-              ) : (
-                <Image
-                  smallWidth={ratios.smallWidth}
-                  smallHeight={ratios.smallHeight}
-                  mediumWidth={ratios.mediumWidth}
-                  mediumHeight={ratios.mediumHeight}
-                  largeWidth={ratios.largeWidth}
-                  largeHeight={ratios.largeHeight}
-                  alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
-                  url={targetFallbackImage}
-                  breakpoints={getProperties(arcSite)?.breakpoints}
-                  resizedImageOptions={placeholderResizedImageOptions}
-                  resizerURL={getProperties(arcSite)?.resizerURL}
-                />
-              )}
-              <PromoLabel type={promoType} />
-            </a>
+              </div>
             )}
           {/* customFields.headlinePositionMD === 'below' && */
             (customFields.showHeadlineMD
@@ -152,18 +34,33 @@ const MediumListItem = (props) => {
               || customFields.showBylineMD
               || customFields.showDateMD) && (
               <>
-                {headlineTmpl()}
-                {descriptionTmpl()}
+                {customFields.showHeadlineMD ? (
+                  <PromoHeadline
+                    content={element}
+                    headingClassName="md-promo-headline-text"
+                    className="md-promo-headline"
+                    editable={false}
+                  />
+                ) : null}
+                {(customFields.showDescriptionMD ? (
+                  <PromoDescription
+                    className="description-text"
+                    content={element}
+                    editable={false}
+                  />
+                ) : null)}
                 <div className="article-meta">
-                  {byLineTmpl()}
-                  {dateTmpl()}
+                  {(customFields.showBylineMD) ? <Byline content={element} font="Primary" list /> : null}
+                  {(customFields.showDateMD) ? (
+                    <PromoDate content={element} />
+                  ) : null}
                 </div>
               </>
             )
           }
         </div>
       </article>
-      {hrBorderTmpl()}
+      <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
     </>
   );
 };

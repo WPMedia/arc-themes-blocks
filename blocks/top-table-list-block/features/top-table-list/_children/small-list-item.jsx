@@ -39,6 +39,7 @@ const SmallListItem = (props) => {
             className="headline-wrap"
             linkClassName="sm-promo-headline"
             headingClassName="sm-promo-headline"
+            editable={false}
           />
         ) : null}
         { showImage ? (
@@ -47,6 +48,7 @@ const SmallListItem = (props) => {
             showPromoLabel
             promoSize="SM"
             imageRatio={imageRatio}
+            editable={false}
           />
         ) : null }
       </div>

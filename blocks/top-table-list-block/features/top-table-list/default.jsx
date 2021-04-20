@@ -18,7 +18,7 @@ import {
 import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from './shared/imagePositionConstants';
-import StoryItemContainer from './_children/story-item-container';
+import ConditionalStoryItem from './_children/conditional-story-item';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -310,12 +310,12 @@ const TopTableList = (props) => {
               } = itemObject;
               const url = element?.websites[arcSite]?.website_url || '';
               return (
-                <StoryItemContainer
+                <ConditionalStoryItem
                   id={itemId}
                   itemTitle={itemTitle}
                   imageURL={imageURL}
                   displayDate={displayDate}
-                  description={description}
+                  descriptionText={description}
                   by={by}
                   websiteURL={url}
                   element={element}

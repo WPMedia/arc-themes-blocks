@@ -4,6 +4,21 @@ import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from '../shared/imagePositionConstants';
 
+jest.mock('fusion:content', () => ({
+  useEditableContent: jest.fn(() => ({
+    editableContent: () => ({ contentEditable: 'true' }),
+  })),
+  useContent: jest.fn(),
+}));
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'the-sun',
+  })),
+}));
+
+jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
+
 const config = {
   showOverlineXL: true,
   showHeadlineXL: true,
@@ -45,73 +60,112 @@ describe('small image block', () => {
     jest.resetModules();
   });
 
-  it('must render title and image with full props', () => {
-    const imageURL = 'pic';
+  it.only('must render title and image with full props', () => {
     const itemTitle = 'title';
-    const primaryFont = 'arial';
+    const imageURL = 'pic';
+
+    const element = {
+      headlines: {
+        basic: itemTitle,
+      },
+      promo_items: {
+        basic: {
+          type: 'image',
+          url: imageURL,
+          resized_params: {
+            '400x267': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
+          },
+        },
+      },
+      websites: {
+        'the-sun': {
+          website_url: 'https://arcxp.com',
+        },
+      },
+    };
     const id = 'test';
     const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
       <SmallListItem
-        imageURL={imageURL}
-        itemTitle={itemTitle}
-        primaryFont={primaryFont}
+        element={element}
         id={id}
         customFields={config}
-        resizedImageOptions={{ '400x267': '' }}
       />,
     );
 
-    expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
-    expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
+    expect(wrapper.find('PromoHeadline').length).toBe(1);
+    expect(wrapper.find('.sm-promo-headline').first().text()).toBe(itemTitle);
 
-    expect(wrapper.find('Image').length).toBe(1);
+    expect(wrapper.find('PromoImage').length).toBe(1);
     expect(wrapper.find('Image').prop('url')).toBe(imageURL);
 
     expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must renders neither title nor image with empty props, renders placeholder image', () => {
-    const imageURL = '';
     const fallbackImage = 'fallback';
     const itemTitle = '';
-    const primaryFont = 'arial';
     const id = 'test';
+
+    const element = {
+      headlines: {
+        basic: itemTitle,
+      },
+      promo_items: {},
+      websites: {
+        'the-sun': {
+          website_url: 'https://arcxp.com',
+        },
+      },
+    };
     const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
       <SmallListItem
-        imageURL={imageURL}
-        itemTitle={itemTitle}
-        primaryFont={primaryFont}
+        element={element}
         id={id}
         customFields={config}
-        placeholderResizedImageOptions={{ '400x267': '' }}
-        targetFallbackImage={fallbackImage}
       />,
     );
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
 
-    expect(wrapper.find('Image').length).toBe(1);
-    expect(wrapper.find('Image').prop('url')).toBe(fallbackImage);
+    expect(wrapper.find('PromoImage').length).toBe(1);
+    expect(wrapper.find('PromoImage').prop('url')).toBe(fallbackImage);
 
     expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must render only title if showImageSM false', () => {
-    const imageURL = 'pic';
-    const itemTitle = 'title';
-    const primaryFont = 'arial';
     const id = 'test';
+    const itemTitle = 'title';
+    const imageURL = 'pic';
+
+    const element = {
+      headlines: {
+        basic: itemTitle,
+      },
+      promo_items: {
+        basic: {
+          type: 'image',
+          url: imageURL,
+          resized_params: {
+            '400x267': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
+          },
+        },
+      },
+      websites: {
+        'the-sun': {
+          website_url: 'https://arcxp.com',
+        },
+      },
+    };
     const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
       <SmallListItem
-        imageURL={imageURL}
-        itemTitle={itemTitle}
-        primaryFont={primaryFont}
+        element={element}
         id={id}
         /* eslint-disable-next-line */
         customFields={Object.assign({}, config, { showImageSM: false })}
@@ -121,35 +175,47 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
-
-    expect(wrapper.find('Image').length).toBe(0);
-
+    expect(wrapper.find('PromoImage').length).toBe(0);
     expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
   it('must render only image if showHeadlinesSM false', () => {
-    const imageURL = 'pic';
     const itemTitle = 'title';
-    const primaryFont = 'arial';
+    const imageURL = 'pic';
+
+    const element = {
+      headlines: {
+        basic: itemTitle,
+      },
+      promo_items: {
+        basic: {
+          type: 'image',
+          url: imageURL,
+          resized_params: {
+            '400x267': 'VWgB9mYQ5--6WT0lD6nIw11D_yA=filters:cm=t/',
+          },
+        },
+      },
+      websites: {
+        'the-sun': {
+          website_url: 'https://arcxp.com',
+        },
+      },
+    };
     const id = 'test';
     const { default: SmallListItem } = require('./small-list-item');
 
     const wrapper = mount(
       <SmallListItem
-        imageURL={imageURL}
-        itemTitle={itemTitle}
-        primaryFont={primaryFont}
+        element={element}
         id={id}
         /* eslint-disable-next-line */
         customFields={Object.assign({}, config, { showHeadlineSM: false })}
-        resizedImageOptions={{ '400x267': '' }}
       />,
     );
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
-
-    expect(wrapper.find('Image').length).toBe(1);
-
+    expect(wrapper.find('PromoImage').length).toBe(1);
     expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
   });
 
@@ -218,7 +284,7 @@ describe('small image block', () => {
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
 
-    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('PromoImage').length).toBe(0);
     expect(wrapper.find('article > .horizontal').length).toBe(1);
   });
 
@@ -243,7 +309,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
 
-    expect(wrapper.find('Image').length).toBe(1);
+    expect(wrapper.find('PromoImage').length).toBe(1);
     expect(wrapper.find('article > .horizontal').length).toBe(1);
   });
 
@@ -291,7 +357,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
-    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('PromoImage').length).toBe(0);
     expect(wrapper.find('article > .vertical').length).toBe(1);
   });
 
@@ -316,7 +382,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
-    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('PromoImage').length).toBe(0);
     expect(wrapper.find('article > .vertical').length).toBe(1);
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
@@ -343,7 +409,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
-    expect(wrapper.find('Image').length).toBe(0);
+    expect(wrapper.find('PromoImage').length).toBe(0);
     expect(wrapper.find('article > .vertical').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(true);
   });

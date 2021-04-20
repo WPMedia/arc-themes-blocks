@@ -106,17 +106,8 @@ const ConditionalStoryItem = (props) => {
     case SMALL: {
       return (
         <SmallListItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
           imageRatio={customFields.imageRatioSM}
           element={element}
         />

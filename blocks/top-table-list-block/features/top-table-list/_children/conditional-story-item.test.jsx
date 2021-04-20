@@ -200,7 +200,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={SMALL} customFields={smConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(267);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(267);
   });
 
   it('XL can be changed to 16:9', () => {
@@ -333,7 +333,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={SMALL} customFields={smConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(225);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(225);
   });
 
   it('SM can be changed to 4:3', () => {
@@ -346,7 +346,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={SMALL} customFields={smConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(300);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(300);
   });
 
   it('SM can be changed to 3:2', () => {
@@ -359,6 +359,6 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={SMALL} customFields={smConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(267);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(267);
   });
 });

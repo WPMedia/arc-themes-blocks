@@ -43,7 +43,7 @@
   .promo-container {
     display: flex;
     flex-direction: row;
-    grid-column-gap: calculateRem(24px);
+    column-gap: calculateRem(24px);
 
     &.horizontal.reverse {
       flex-direction: row-reverse;

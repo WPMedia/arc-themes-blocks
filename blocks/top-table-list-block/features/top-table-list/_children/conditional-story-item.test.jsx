@@ -111,6 +111,7 @@ describe('default ratios', () => {
       })),
     }));
     jest.mock('fusion:content', () => ({
+      useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
       useContent: jest.fn(() => ({
         content_elements: [{
           _id: 'kjdfh',
@@ -164,7 +165,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={EXTRA_LARGE} customFields={xlConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(600);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(600);
   });
 
   it('must have a default 4:3 ratio for LG', () => {
@@ -214,7 +215,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={EXTRA_LARGE} customFields={xlConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(450);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(450);
   });
 
   it('XL can be changed to 4:3', () => {
@@ -228,7 +229,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={EXTRA_LARGE} customFields={xlConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(600);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(600);
   });
 
   it('XL can be changed to 3:2', () => {
@@ -242,7 +243,7 @@ describe('default ratios', () => {
     const wrapper = mount(
       <ConditionalStoryItem storySize={EXTRA_LARGE} customFields={xlConfig} />,
     );
-    expect(wrapper.find('Image').prop('largeHeight')).toBe(533);
+    expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(533);
   });
 
   it('LG can be changed to 16:9', () => {

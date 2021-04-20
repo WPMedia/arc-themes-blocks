@@ -7,11 +7,12 @@ const PromoDescription = (props) => {
     content = {},
     text,
     className = '',
+    editable = true,
   } = props;
   const { editableContent } = useEditableContent();
 
   const descriptionText = content?.description?.basic || text;
-  const editableItem = content?.description ? editableContent(content, 'description.basic') : {};
+  const editableItem = content?.description && editable ? editableContent(content, 'description.basic') : {};
 
   return descriptionText ? (
     <SecondaryFont

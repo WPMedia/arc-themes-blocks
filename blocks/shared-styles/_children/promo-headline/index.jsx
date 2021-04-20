@@ -12,6 +12,7 @@ const PromoHeadline = (props) => {
     linkClassName = '',
     headingClassName = '',
     newTab = false,
+    editable = true,
   } = props;
   const { editableContent } = useEditableContent();
   const { arcSite } = useFusionContext();
@@ -19,7 +20,7 @@ const PromoHeadline = (props) => {
   const linkURL = content?.websites?.[arcSite]?.website_url || link;
   const linkText = content?.headlines?.basic || text;
 
-  const editableItem = content?.headlines ? editableContent(content, 'headlines.basic') : {};
+  const editableItem = content?.headlines && editable ? editableContent(content, 'headlines.basic') : {};
 
   return linkText ? (
     <div className={`promo-headline ${className}`}>

@@ -12,112 +12,42 @@ import {
 
 const ConditionalStoryItem = (props) => {
   const {
-    itemTitle = '',
-    imageURL = '',
     id,
     storySize,
-    primaryFont = '',
-    secondaryFont = '',
-    websiteURL = '',
-    descriptionText = '',
-    by = [],
     element = {},
-    overlineDisplay,
-    displayDate = '',
     customFields,
-    overlineText = '',
-    overlineUrl = '',
-    resizedImageOptions = {},
-    targetFallbackImage,
-    placeholderResizedImageOptions,
-    arcSite,
   } = props;
   // don't want these to re-render if latter unless story size changes
   switch (storySize) {
     case EXTRA_LARGE:
       return (
         <VerticalOverlineImageStoryItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
-          descriptionText={descriptionText}
-          by={by}
           element={element}
-          overlineDisplay={overlineDisplay}
-          overlineUrl={overlineUrl}
-          overlineText={overlineText}
-          displayDate={displayDate}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioXL}
         />
       );
     case LARGE:
       return (
         <HorizontalOverlineImageStoryItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
-          descriptionText={descriptionText}
-          by={by}
           element={element}
-          overlineDisplay={overlineDisplay}
-          overlineUrl={overlineUrl}
-          overlineText={overlineText}
-          displayDate={displayDate}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioLG}
         />
       );
     case MEDIUM:
       return (
         <MediumListItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
-          descriptionText={descriptionText}
-          by={by}
           element={element}
-          displayDate={displayDate}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioMD}
         />
       );
     case SMALL: {
       return (
         <SmallListItem
-          primaryFont={primaryFont}
-          secondaryFont={secondaryFont}
-          itemTitle={itemTitle}
-          imageURL={imageURL}
           id={id}
-          websiteURL={websiteURL}
           customFields={customFields}
-          resizedImageOptions={resizedImageOptions}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          arcSite={arcSite}
-          imageRatio={customFields.imageRatioSM}
           element={element}
         />
       );

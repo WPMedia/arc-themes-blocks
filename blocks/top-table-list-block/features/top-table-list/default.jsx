@@ -4,13 +4,8 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
-import getThemeStyle from 'fusion:themes';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import {
-  extractResizedParams,
-  imageRatioCustomField,
-  extractImageFromStory,
-} from '@wpmedia/resizer-image-block';
+import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
 import {
   EXTRA_LARGE, LARGE, MEDIUM, SMALL,
@@ -18,7 +13,7 @@ import {
 import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from './shared/imagePositionConstants';
-import StoryItemContainer from './_children/story-item-container';
+import ConditionalStoryItem from './_children/conditional-story-item';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -28,38 +23,10 @@ import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
 import './default.scss';
 // styles end
 
-// helpers start
-const overlineData = (storyObject, arcSite) => {
-  const { display: labelDisplay, url: labelUrl, text: labelText } = (storyObject.label
-    && storyObject.label.basic) || {};
-  const shouldUseLabel = !!labelDisplay;
-
-  const { _id: sectionUrl, name: sectionText } = (storyObject.websites
-      && storyObject.websites[arcSite]
-      && storyObject.websites[arcSite].website_section)
-    || {};
-
-  return shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
-};
-
-const unserializeStory = (arcSite) => (storyObject) => {
-  const [overlineText, overlineUrl] = overlineData(storyObject, arcSite);
-
-  return {
-    id: storyObject._id,
-    itemTitle: storyObject?.headlines?.basic || '',
-    imageURL: extractImageFromStory(storyObject) || '',
-    displayDate: storyObject.display_date || '',
-    description: storyObject?.description?.basic || '',
-    by: storyObject?.credits?.by || [],
-    websiteURL: storyObject?.websites[arcSite]?.website_url || '',
-    element: storyObject,
-    overlineDisplay: !!overlineText,
-    overlineUrl,
-    overlineText,
-    resizedImageOptions: extractResizedParams(storyObject),
-  };
-};
+const unserializeStory = () => (storyObject) => ({
+  id: storyObject._id,
+  element: storyObject,
+});
 
 const generateLabelString = (size) => `Number of ${size} Stories`;
 // helpers end
@@ -69,10 +36,6 @@ class TopTableListWrapper extends Component {
   constructor(props) {
     super(props);
     const { lazyLoad = false } = props.customFields || {};
-
-    this.state = {
-      placeholderResizedImageOptions: {},
-    };
 
     this.lazyLoad = lazyLoad;
     this.isAdmin = props.isAdmin;
@@ -114,15 +77,9 @@ class TopTableListWrapper extends Component {
       return null;
     }
 
-    const { placeholderResizedImageOptions } = this.state;
-    const targetFallbackImage = this.getFallbackImageURL();
     return (
       <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <TopTableList
-          {...this.props}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-        />
+        <TopTableList {...this.props} />
       </LazyLoad>
     );
   }
@@ -141,20 +98,9 @@ const TopTableList = (props) => {
       storiesPerRowSM = 2,
     } = {},
     id = '',
-    placeholderResizedImageOptions,
-    targetFallbackImage,
   } = props;
 
   const { arcSite } = useFusionContext();
-  const storySizeMap = {
-    extraLarge,
-    large,
-    medium,
-    small,
-  };
-
-  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
-  const secondaryFont = getThemeStyle(arcSite)['secondary-font-family'];
 
   const storyTypeArray = [
     ...new Array(extraLarge).fill(EXTRA_LARGE),
@@ -264,7 +210,7 @@ const TopTableList = (props) => {
 
   const onePerLine = storiesPerRowSM === 1;
   const storyTypes = [...(new Set(storyTypeArray))];
-  const storyList = siteContent.map(unserializeStory(arcSite));
+  const storyList = siteContent.map(unserializeStory());
   const storyTypeMap = {};
 
   if (storyList && storyTypeArray) {
@@ -294,45 +240,18 @@ const TopTableList = (props) => {
         >
           {
             !!storyTypeMap[storyType]
-            && storyTypeMap[storyType].map((itemObject = {}, index) => {
+            && storyTypeMap[storyType].map((itemObject = {}) => {
               const {
                 id: itemId,
-                itemTitle,
-                imageURL,
-                displayDate,
-                description,
-                by,
                 element,
-                overlineDisplay,
-                overlineUrl,
-                overlineText,
-                resizedImageOptions,
               } = itemObject;
-              const url = element?.websites[arcSite]?.website_url || '';
               return (
-                <StoryItemContainer
+                <ConditionalStoryItem
                   id={itemId}
-                  itemTitle={itemTitle}
-                  imageURL={imageURL}
-                  displayDate={displayDate}
-                  description={description}
-                  by={by}
-                  websiteURL={url}
                   element={element}
-                  overlineDisplay={overlineDisplay}
-                  overlineUrl={overlineUrl}
-                  overlineText={overlineText}
                   storySize={storyType}
-                  index={index}
-                  storySizeMap={storySizeMap}
-                  primaryFont={primaryFont}
-                  secondaryFont={secondaryFont}
                   key={itemId}
                   customFields={props.customFields}
-                  resizedImageOptions={resizedImageOptions}
-                  placeholderResizedImageOptions={placeholderResizedImageOptions}
-                  targetFallbackImage={targetFallbackImage}
-                  arcSite={arcSite}
                 />
               );
             })

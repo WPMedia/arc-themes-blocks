@@ -22,16 +22,10 @@
     "directory": "blocks/top-table-list-block"
   },
   "peerDependencies": {
-    "@wpmedia/byline-block": "canary",
-    "@wpmedia/date-block": "canary",
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/overline-block": "canary",
-    "@wpmedia/placeholder-image-block": "canary",
-    "@wpmedia/resizer-image-block": "canary",
-    "@wpmedia/shared-styles": "canary",
-    "@wpmedia/video-player-block": "stable",
-    "styled-components": "^4.4.0"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*",
+    "@wpmedia/resizer-image-block": "*",
+    "@wpmedia/shared-styles": "*"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

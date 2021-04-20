@@ -26,6 +26,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   RssIcon: () => <svg>RssIcon</svg>,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+  constructSocialURL: (type, field) => field,
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -185,7 +186,7 @@ describe('the full author bio block', () => {
       it('should have a twitter url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('.twitter').prop('href'))).toEqual('https://twitter.com/janedoe');
+        expect((wrapper.find('.twitter').prop('href'))).toEqual('janedoe');
       });
     });
 
@@ -199,7 +200,7 @@ describe('the full author bio block', () => {
       it('should have an instagram url', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('.instagram').prop('href'))).toEqual('https://www.instagram.com/janedoe/');
+        expect((wrapper.find('.instagram').prop('href'))).toEqual('janedoe');
       });
     });
 
@@ -227,7 +228,7 @@ describe('the full author bio block', () => {
       it('should have a mailto link', () => {
         const wrapper = mount(<FullAuthorBio />);
 
-        expect((wrapper.find('.email').prop('href'))).toEqual('mailto:jane@doe.com');
+        expect((wrapper.find('.email').prop('href'))).toEqual('jane@doe.com');
       });
     });
 

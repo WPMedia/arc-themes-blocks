@@ -27,6 +27,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   RssIcon: () => <svg>RssIcon</svg>,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+  constructSocialURL: (type, field) => field,
 }));
 
 jest.mock('fusion:context', () => ({
@@ -624,7 +625,7 @@ describe('Given the list of author(s) from the article', () => {
     const wrapper = mount(<AuthorBio />);
 
     const socialButtonsContainer = wrapper.find('section.socialButtons');
-    expect(socialButtonsContainer.find('a').props().href).toBe('mailto:bernstein@washpost.com');
+    expect(socialButtonsContainer.find('a').props().href).toBe('bernstein@washpost.com');
     expect(socialButtonsContainer.children()).toHaveLength(1);
   });
   it('should not throw by undefined error if empty global content object', () => {

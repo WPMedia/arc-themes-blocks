@@ -223,9 +223,6 @@ describe('top table list', () => {
     expect(container.children().length).toBe(1);
     const storyItem = container.find('ConditionalStoryItem');
     expect(storyItem).toHaveLength(1);
-    expect(storyItem.prop('id')).toEqual('abcde');
-    expect(storyItem.prop('itemTitle')).toEqual('Alt Headline');
-    expect(storyItem.prop('descriptionText')).toEqual('Alt description');
   });
 
   it('renders content only for the arcSite', () => {
@@ -399,7 +396,6 @@ describe('top table list overline rules', () => {
 
     const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
   });
 
   it('must render overline from section', () => {
@@ -444,7 +440,6 @@ describe('top table list overline rules', () => {
 
     const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Section');
   });
 
   it('must prioritize overline from label if has section too', () => {
@@ -496,6 +491,5 @@ describe('top table list overline rules', () => {
 
     const ele = wrapper.find('.top-table-list-container').find('ConditionalStoryItem');
     expect(ele).toHaveLength(1);
-    expect(ele.prop('overlineText')).toEqual('The Label');
   });
 });

@@ -8,13 +8,13 @@ const SmallListItem = (props) => {
   const {
     id,
     element,
-    imageRatio,
     customFields: {
       imagePositionSM: imagePosition = RIGHT,
       storiesPerRowSM,
       showHeadlineSM,
       showImageSM,
       showBottomBorderSM,
+      imageRatioSM,
     },
   } = props;
 
@@ -47,7 +47,7 @@ const SmallListItem = (props) => {
             content={element}
             showPromoLabel
             promoSize="SM"
-            imageRatio={imageRatio}
+            imageRatio={imageRatioSM}
             editable={false}
           />
         ) : null }

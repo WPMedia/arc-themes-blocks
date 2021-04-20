@@ -48,7 +48,6 @@ const ConditionalStoryItem = (props) => {
         <SmallListItem
           id={id}
           customFields={customFields}
-          imageRatio={customFields.imageRatioSM}
           element={element}
         />
       );

@@ -8,6 +8,26 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'resizer',
 }))));
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  Image: () => <div />,
+  EnvelopeIcon: () => <svg>EnvelopeIcon</svg>,
+  LinkedInIcon: () => <svg>LinkedInIcon</svg>,
+  InstagramIcon: () => <svg>InstagramIcon</svg>,
+  TwitterIcon: () => <svg>TwitterIcon</svg>,
+  FacebookIcon: () => <svg>FacebookIcon</svg>,
+  RedditIcon: () => <svg>RedditIcon</svg>,
+  YoutubeIcon: () => <svg>YoutubeIcon</svg>,
+  MediumIcon: () => <svg>MediumIcon</svg>,
+  TumblrIcon: () => <svg>TumblrIcon</svg>,
+  PinterestIcon: () => <svg>PinterestIcon</svg>,
+  SnapchatIcon: () => <svg>SnapchatIcon</svg>,
+  WhatsAppIcon: () => <svg>WhatsAppIcon</svg>,
+  SoundCloudIcon: () => <svg>SoundCloudIcon</svg>,
+  RssIcon: () => <svg>RssIcon</svg>,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
+}));
+
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
@@ -54,6 +74,11 @@ jest.mock('fusion:context', () => ({
 }));
 
 describe('the full author bio block', () => {
+  it('should return null if lazyLoad on the server and not in the admin', () => {
+    const wrapper = mount(<FullAuthorBio customFields={{ lazyLoad: true }} />);
+    expect(wrapper.html()).toBe(null);
+  });
+
   describe('when fields from globalContent are present', () => {
     it('should render a h1', () => {
       const wrapper = mount(<FullAuthorBio />);

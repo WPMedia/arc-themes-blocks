@@ -1,14 +1,10 @@
 import React from 'react';
-import { playerRoot, videoOrg } from 'fusion:environment';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
 // this is blank import but used to inject scss
 import './default.scss';
-
-const powaBoot = `${playerRoot}/prod/powaBoot.js?=org=${videoOrg}`;
-const powaDrive = `${playerRoot}/prod/powaDrive.js?org=${videoOrg}`;
 
 const injectStringScriptArray = (scriptStringArray) => (
   scriptStringArray.map((scriptString, index) => (
@@ -124,37 +120,18 @@ const SampleOutputType = ({
 
   const pageType = metaValue('page-type');
 
-  const googleFonts = () => {
-    switch (websiteName) {
-      case 'Arc Demo 1':
-        return (
-          <link href="https://fonts.googleapis.com/css?family=Work Sans" rel="stylesheet" />
-        );
-      case 'Arc Demo 2':
-        return (
-          <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet" />
-        );
-      case 'Arc Demo 3':
-        return (
-          <>
-            <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" />
-          </>
-        );
-      case 'Arc Demo 4':
-        return (
-          <>
-            <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet" />
-          </>
-        );
-      case 'Arc Demo 5':
-        return (
-          <link href="https://fonts.googleapis.com/css?family=Space Mono" rel="stylesheet" />
-        );
-      default:
-        return fontUrl ? <link href={fontUrl} rel="stylesheet" /> : '';
+  const buildFontUrl = () => {
+    // If fontURL is an array, then iterate over the array and build out the links
+    if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
+      const fontLinks = fontUrl.map((url, index) => (
+        <link data-testid={`font-loading-url-${index}`} href={url} rel="stylesheet" />
+      ));
+      return (
+        <>{fontLinks}</>
+      );
     }
+    // Legacy support where fontUrl is a string
+    return fontUrl ? <link href={fontUrl} rel="stylesheet" /> : '';
   };
 
   const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
@@ -211,14 +188,7 @@ const SampleOutputType = ({
         <Libs />
         <CssLinks />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
-        <script
-          src={powaBoot}
-          async
-          data-powa-script
-          data-loaded-via="powa-manifest"
-        />
-        <link rel="preload" as="script" href={powaDrive} />
-        {googleFonts()}
+        {buildFontUrl()}
         {nativoIntegration
           ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)
           : null}

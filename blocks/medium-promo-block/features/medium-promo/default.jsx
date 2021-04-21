@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -9,8 +8,9 @@ import { useFusionContext } from 'fusion:context';
 
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import {
   extractResizedParams,
@@ -18,7 +18,6 @@ import {
   ratiosFor,
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
-import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h2`
@@ -29,9 +28,9 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const MediumPromo = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
-  const { editableContent } = useEditableContent();
+const MediumPromoItem = ({ customFields }) => {
+  const { arcSite, isAdmin } = useFusionContext();
+  const { editableContent, searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -43,7 +42,12 @@ const MediumPromo = ({ customFields }) => {
       : null,
   }) || null;
 
-  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+  let imageConfig = null;
+  if ((customFields.imageOverrideURL && customFields.lazyLoad) || isAdmin) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
@@ -126,12 +130,18 @@ const MediumPromo = ({ customFields }) => {
   return content ? (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`}>
+        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
           {customFields.showImage
           && (
-            <a className="image-link" href={content.website_url} aria-hidden="true" tabIndex="-1">
+            <a
+              className="image-link"
+              href={content.website_url}
+              aria-hidden="true"
+              tabIndex="-1"
+              {...searchableField('imageOverrideURL')}
+            >
               {
-                imageURL
+                imageURL && resizedImageOptions
                   ? (
                     <Image
                       url={imageURL}
@@ -156,6 +166,7 @@ const MediumPromo = ({ customFields }) => {
                       mediumHeight={ratios.mediumHeight}
                       largeWidth={ratios.largeWidth}
                       largeHeight={ratios.largeHeight}
+                      client={imageConfig === 'resize-image-api-client'}
                     />
                   )
                 }
@@ -181,6 +192,18 @@ const MediumPromo = ({ customFields }) => {
       <hr />
     </>
   ) : null;
+};
+
+const MediumPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <MediumPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 MediumPromo.propTypes = {
@@ -217,8 +240,14 @@ MediumPromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '16:9'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

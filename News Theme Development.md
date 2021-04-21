@@ -11,11 +11,11 @@ To set up this repo for local development and deployment, you'll have to set up 
 //npm.pkg.github.com/:_authToken=<your personal access token>
 ```
 
-Note that for GitHub, you will have to provide your own personal access token for it to be able to properly find and install your GitHub packages. Please follow the instructions on these documentation to generate your GitHub token: 
+Note that for GitHub, you will have to provide your own personal access token for it to be able to properly find and install your GitHub packages. Please follow the instructions on these documentation to generate your GitHub token:
 
-- [Configuring your local authentication with npm](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) 
-- [Creating Auth Tokens (HTTPS)](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) 
-- [Enable SSO for Auth Tokens](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) 
+- [Configuring your local authentication with npm](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages)
+- [Creating Auth Tokens (HTTPS)](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+- [Enable SSO for Auth Tokens](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on)
 - [Authorizing SSH Keys](https://help.github.com/en/github/authenticating-to-github/authorizing-an-ssh-key-for-use-with-saml-single-sign-on)
 
 ## Introduction
@@ -64,7 +64,7 @@ The development process is similar engine-theme-sdk, except when it comes time t
 
 Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (fusion-news-theme-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
 
-Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.  
+Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.
 
 As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
 ```sh
@@ -83,7 +83,7 @@ To check if blocks are being properly linked, run:
 ```sh
  cat .fusion/docker-compose.yml
  ```
-  If blocks linking was successful, you'll see the listing for volumes with all the block names linked. 
+  If blocks linking was successful, you'll see the listing for volumes with all the block names linked.
 
   NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
 
@@ -124,7 +124,7 @@ git checkout -b PEN-[jira ticket num]-[brief description of feature]
 ```
 
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
-4. Make pull request using Github against the `canary` branch. Get approval for your pr on your feature branch.
+4. Make pull request using Github against the `canary` branch. Get approval for your PR on your feature branch.
 5. Merge the PR into the `canary` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
 
 #### How To Publish
@@ -133,95 +133,95 @@ Merge into `canary` branch to publish to canary tag. Please reach out to arc blo
 
 WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 
-NOTE: Make sure to rebase onto beta branch if you hotfix stable, for instance.
 ---
 
-## Cut The `canary` development process for RC release 
+## Creating a Release Candidate (RC)
 
-1. Ensure all tickets are in current canary branch ready. 
-2. `git push origin canary:rc`
-3. This will publish that version with the rc tag for testing. 
-4. Ensure the engine theme sdk and news-theme-css have also been published to the `rc` tag. (For the news-theme-css, that process is done locally. Engine theme sdk can be done by merging into rc branch.)
-5. Go to admin in Okta
-6. Go to themes internal site. Find the dev-sandbox environment. Then, in the deployer, deploy a feature pack that has the rc versions of the aforementioned repos. This can be done in the `environment/` folder using BLOCK_DIST_TAG (note: not the `.env` file).
-7. Make sure that version is designated as the version release. 
-8. After it's approved, merge `rc` tag into `beta` branch. 
-9. Then, make sure that `beta` branch is rebased onto canary `branch`.
+RC Release is the contents of the canary branch once signed off - Canary -> RC
 
-## For stable releases, it remains manual process
+1. Ensure canary is signed off with all RC tickets merged in
+2. `git checkout canary && git remote update --prune origin && git reset --hard origin/canary` - Checkout canary and reset your local to remote canary
+3. `git push origin canary:rc`
+4. Check GitHub action used to publish rc tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/rc-build.yml
 
-1. Pull the latest `beta` branch:
+Any environment with the `BLOCK_DIST_TAG=rc` will get the updated blocks on next deploy
 
-```sh
-git checkout beta
-git fetch -a
-```
-2. Make a pr against the `beta` branch. After merging, this will push a hashed version to the `beta` tag. You can view the result of the github action work with `npm view [package name]@beta` (eg, `npm view @wpmedia/date-block@beta`).
 
-3. Deploy a bundle with the `BLOCK_DIST_TAG` environment variable set as `beta` in your environment file(s).
-4. After either design QA or product QA approval of that deployed bundle, checkout `stable` and pull down the latest from that branch. Then run `git merge vX.X.X-beta.X` (where `X.X.X-beta.X` is the beta release we're releasing to production) to get the changes from `beta` into `stable`.
-5. Then, in `stable`, you can publish a production release with the following command:
+## Creating a Beta Release
 
-```sh
-npx lerna publish --conventional-commits --conventional-graduate
-```
+Beta Release is the contents of the RC branch once signed off - RC -> Beta
 
-Make sure all blocks have been graduated or promoted.
+1. Enusre RC is ready - All PR's/hotfixes made against RC are merged in
+2. `git checkout rc && git remote update --prune origin && git reset --hard origin/rc` - Checkout rc and reset your local to remote rc
+3. `git push origin rc:beta`
+4. Check GitHub action used to publish beta tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/beta-build.yml
 
-7. After publishing from the `stable` branch, merge `stable` into `beta` and `beta` into `canary` so that the changes related to the publish we just did end up in both of those branches.
+Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on next deploy
 
-Merging `beta`
 
-```sh
-# Ensure we're on the stable branch
-git checkout stable
-# Ensure we have the latest from stable
-git pull origin stable
-# Checkout beta
-git checkout beta
-# Ensure we have the latest from beta
-git pull origin beta
-# Rebase beta onto stable
-git rebase stable
-# Push the updated beta branch (--force is required or else it will fail)
-git push --force origin beta
-```
+## Creating a stable Release
 
-Merging `canary`
+Stable Release is the contents of the beta branch once signed off - beta -> stable
 
-```sh
-# Ensure we're on the beta branch
-git checkout beta
-# Ensure we have the latest from beta
-git pull origin beta
-# Checkout canary
-git checkout canary
-# Ensure we have the latest from canary
-git pull origin canary
-# Rebase canary onto beta
-git rebase beta
-# Push the updated canary branch (--force is required or else it will fail)
-git push --force origin canary
-```
+1. Enusre beta is ready - All PR's/hotfixes made against beta are merged in
+2. `git checkout beta && git remote update --prune origin && git reset --hard origin/beta` - Checkout beta and reset your local to remote beta
+3. `git checkout stable && git remote update --prune origin && git reset --hard origin/stable` - Checkout stable and reset your local to remote stable
+4. `git push origin beta:stable`
+5. To release blocks
+    * Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
+    * Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
+    * Make sure all blocks have been graduated or promoted.
+    * Check that there is a commit in your local for the next version - created by the `npx lerna` command
+    * `git push origin stable`
+    * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/stable-dist-tag.yml
+6. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
 
-#### Publish hotfix
+Any environment with the `BLOCK_DIST_TAG=stable` will get the updated blocks on next deploy
 
-1. Branch off of stable.
+## Hotfixes
 
-2. merge feature branch into stable.
+Each branch RC, beta, and stable can all have hotfixes applied to them if an issue is found in each stages regression testing.
+If you need to make a change (hotfix) to any of these three branches RC, beta, stable follow the feature development flow of branch of the base branch and creating a pull request with your work.
 
-3. release feature branch changes as `@hotfix` from stable.
+### Hotfix a stable issue
 
-`npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
+If an issue is found in stable this is a production issue, and requires a hotfix follow these steps:
 
-4. Create feature pack with @hotfix blocks to test
-5. Upon successful QA, graduate the “hotfix” release to latest in the same publish workflow
+1. `git pull origin stable` - Pull remote branch to ensure you have most upto date code
+2. `git checkout -b RC-Hotfix-ticket-123` - Create a hotfix branch
+3. Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `stable`
+4. release feature branch changes as `@hotfix` from stable.
+    * `npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
+5. Create feature pack with @hotfix blocks to test
+6. Upon successful QA, merge pull request, graduate the “hotfix” release to latest in the same publish workflow
+    * `git pull origin stable`
+    * `npx lerna publish --conventional-commits --conventional-graduate`
+    * `git push origin stable`
+7. Merge `stable` to `canary`
+8. Merge hotfix branch `RC-Hotfix-ticket-123` to `beta`
 
-`npx lerna publish --conventional-commits --conventional-graduate`
+Any environment with the `BLOCK_DIST_TAG=hotfix` will get the updated blocks on next deploy.
 
-6. Go back to beta packages and look into handling changes.
+### Hotfix a Beta or RC issue
 
-7. After publishing, follow the rebasing instructions in step 9 of the non-hotfix release process.
+RC and Beta are used within non production environments and follow a different flow to stable. **But** require each hotfix merged into them to land back into `canary`.
+
+RC example flow -
+* `git pull origin rc` - Pull remote branch to ensure you have most upto date code
+* `git checkout -b RC-Hotfix-ticket-123` - Create a branch for hotfix
+* Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `rc`
+* PR Approved - Merge PR via the GitHub UI then:
+  * `git checkout canary && git reset --hard origin/canary`
+  * `git merge RC-Hotfix-ticket-123` - Merges the hotfix onto canary
+  * `git push origin canary` - Pushes the changes to canary
+
+
+## Git Diagram
+
+![Themes Git Flow](themes-git-flow.png "diagram")
+
+
+### Other Information
 
 For info on hotfix background, see [hotfix section](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) and/or [diagram](<https://wac-cdn.atlassian.com/dam/jcr:61ccc620-5249-4338-be66-94d563f2843c/05%20(2).svg?cdnVersion=1013>).
 
@@ -644,9 +644,9 @@ Ensure all node modules are cleared:
 
 #### **DOM-PARSER NOT FOUND**
 
-- That's something in default output type that needs to be installed 
+- That's something in default output type that needs to be installed
 
-`cd blocks/default-output-block` 
+`cd blocks/default-output-block`
 
 `npm i`
 

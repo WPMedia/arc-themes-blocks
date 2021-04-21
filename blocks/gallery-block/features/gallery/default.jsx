@@ -1,35 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useFusionContext } from 'fusion:context';
+import { useContent } from 'fusion:content';
+import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import GlobalContentGallery from './_children/global-content';
-import CustomContentGallery from './_children/custom-content';
 
-const GalleryFeature = (
+import { Gallery, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+
+const GalleryFeatureItem = (
   {
     customFields: {
       inheritGlobalContent,
       galleryContentConfig,
     } = {},
-  } = {},
+  },
 ) => {
+  let AdBlock;
+
+  try {
+    const { default: AdFeature } = require('@wpmedia/ads-block');
+    AdBlock = () => (
+      <AdFeature customFields={{
+        adType: '300x250_gallery',
+        displayAdLabel: true,
+      }}
+      />
+    );
+  } catch (e) {
+    AdBlock = () => <p>Ad block not found</p>;
+  }
+
   const { arcSite } = useFusionContext();
-  const { locale = 'en' } = getProperties(arcSite);
+  const { resizerURL, galleryCubeClicks, locale = 'en' } = getProperties(arcSite);
+  const { globalContent = {} } = useAppContext();
   const phrases = getTranslatedPhrases(locale);
+  const content = useContent(galleryContentConfig ? {
+    source: galleryContentConfig.contentService,
+    query: galleryContentConfig.contentConfigValues,
+  } : {});
 
-  let showGlobalContent;
-  if (typeof inheritGlobalContent === 'undefined') {
-    showGlobalContent = (typeof galleryContentConfig === 'undefined');
-  } else {
-    showGlobalContent = inheritGlobalContent;
+  const showGlobalContent = (typeof inheritGlobalContent === 'undefined') ? (typeof galleryContentConfig === 'undefined') : inheritGlobalContent;
+  const {
+    content_elements: contentElements = [],
+    headlines = {},
+    id = '',
+  } = showGlobalContent ? globalContent : content;
+
+  const interstitialClicks = parseInt(galleryCubeClicks, 10);
+
+  return (
+    <Gallery
+      galleryElements={contentElements}
+      resizerURL={resizerURL}
+      ansId={id}
+      ansHeadline={headlines?.basic ? headlines.basic : ''}
+      expandPhrase={phrases.t('global.gallery-expand-button')}
+      autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
+      pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
+      pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+      adElement={/* istanbul ignore next */ () => (<AdBlock />)}
+      interstitialClicks={interstitialClicks}
+    />
+  );
+};
+
+const GalleryFeature = ({ customFields = {} }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
   }
-
-  if (showGlobalContent) {
-    return <GlobalContentGallery phrases={phrases} />;
-  }
-
-  return <CustomContentGallery contentConfig={galleryContentConfig} phrases={phrases} />;
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <GalleryFeatureItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 GalleryFeature.propTypes = {
@@ -41,6 +85,11 @@ GalleryFeature.propTypes = {
     inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
       defaultValue: true,
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

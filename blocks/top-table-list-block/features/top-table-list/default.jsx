@@ -5,6 +5,7 @@ import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import {
   extractResizedParams,
   imageRatioCustomField,
@@ -67,9 +68,15 @@ const generateLabelString = (size) => `Number of ${size} Stories`;
 class TopTableListWrapper extends Component {
   constructor(props) {
     super(props);
+    const { lazyLoad = false } = props.customFields || {};
+
     this.state = {
       placeholderResizedImageOptions: {},
     };
+
+    this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
+
     this.fetchPlaceholder();
   }
 
@@ -103,15 +110,20 @@ class TopTableListWrapper extends Component {
   }
 
   render() {
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
+      return null;
+    }
+
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
     return (
-      <TopTableList
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...this.props}
-        placeholderResizedImageOptions={placeholderResizedImageOptions}
-        targetFallbackImage={targetFallbackImage}
-      />
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
+        <TopTableList
+          {...this.props}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          targetFallbackImage={targetFallbackImage}
+        />
+      </LazyLoad>
     );
   }
 }
@@ -153,7 +165,94 @@ const TopTableList = (props) => {
 
   const { content_elements: contentElements = [] } = useContent({
     source: contentService,
-    query: { 'arc-site': arcSite, ...contentConfigValues },
+    query: { ...contentConfigValues, feature: 'top-table-list' },
+    filter: `{
+      content_elements {
+        _id,
+        type
+        display_date
+        credits {
+          by {
+            _id
+            name
+            url
+            type
+            additional_properties {
+              original {
+                byline
+              }
+            }
+          }
+        }
+        headlines {
+          basic
+        }
+        description {
+          basic
+        }
+        label {
+          basic
+        }
+        promo_items {
+          basic {
+            type
+            url
+            resized_params {
+              800x600
+              800x533
+              600x450
+              600x400
+              600x338
+              400x300
+              400x267
+              400x225
+              377x283
+              377x251
+              377x212
+              274x206
+              274x183
+              274x154
+            }
+          }
+          lead_art {
+            type
+            embed_html
+            promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  800x600
+                  800x533
+                  600x450
+                  600x400
+                  600x338
+                  400x300
+                  400x267
+                  400x225
+                  377x283
+                  377x251
+                  377x212
+                  274x206
+                  274x183
+                  274x154
+                }
+              }
+            }
+          }
+        }
+        embed_html
+        websites {
+          ${arcSite} {
+            website_url
+            website_section {
+              _id
+              name
+            }
+          }
+        }
+      }
+    }`,
   }) || {};
 
   const siteContent = contentElements.reduce((acc, element, index) => {
@@ -425,6 +524,11 @@ TopTableListWrapper.propTypes = {
       label: 'Show bottom border',
       defaultValue: true,
       group: 'Small story settings',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

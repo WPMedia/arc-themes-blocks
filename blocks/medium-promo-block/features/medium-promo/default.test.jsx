@@ -7,6 +7,8 @@ const { default: mockData } = require('./mock-data');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
 }));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -18,7 +20,10 @@ jest.mock('fusion:context', () => ({
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockData)),
-  useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),
+  useEditableContent: jest.fn(() => ({
+    editableContent: () => ({ contentEditable: 'true' }),
+    searchableField: () => {},
+  })),
 }));
 
 const config = {
@@ -41,6 +46,15 @@ describe('the medium promo feature', () => {
         id: 'testId',
       })),
     }));
+  });
+
+  it('should return null if lazyLoad on the server and not in the admin', () => {
+    const updatedConfig = {
+      ...config,
+      lazyLoad: true,
+    };
+    const wrapper = mount(<MediumPromo customFields={updatedConfig} />);
+    expect(wrapper.html()).toBe(null);
   });
 
   it('should have 1 container fluid class', () => {
@@ -183,7 +197,7 @@ describe('the medium promo feature', () => {
     wrapper.unmount();
   });
 
-  it('show image useContent for resizer parameter returns undefined if falsy', () => {
+  it('no image is shown if resizer returns no resized image options', () => {
     const myConfig = {
       showHeadline: true,
       showImage: true,
@@ -196,8 +210,7 @@ describe('the medium promo feature', () => {
     const wrapper = mount(<MediumPromo customFields={myConfig} arcSite="dagen" />);
 
     const image = wrapper.find('Image');
-    expect(image.length).toBe(1);
-    expect(image.props().resizedImageOptions).toEqual(undefined);
+    expect(image.length).toBe(0);
     wrapper.unmount();
   });
 

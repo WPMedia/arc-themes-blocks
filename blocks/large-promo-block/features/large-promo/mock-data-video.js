@@ -748,6 +748,7 @@ export default {
     credits: {},
     caption: 'A snowy waterfall',
     url: 'https://d22ff27hdsy159.cloudfront.net/12-17-2019/t_b47df64ea45e4b178442347c0dc3724b_name_file_1280x720_2000_v3_1_.jpg',
+    resized_params: {},
     width: 1280,
     height: 720,
   },

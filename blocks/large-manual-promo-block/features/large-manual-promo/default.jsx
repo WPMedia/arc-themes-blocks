@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField, ratiosFor } from '@wpmedia/resizer-image-block';
-import { useContent } from 'fusion:content';
+import { useContent, useEditableContent } from 'fusion:content';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
@@ -30,12 +30,13 @@ const OverlineHeader = styled.h2`
   text-decoration: none;
 `;
 
-const LargeManualPromo = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
+const LargeManualPromoItem = ({ customFields }) => {
+  const { arcSite, isAdmin } = useFusionContext();
+  const { searchableField } = useEditableContent();
   const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
   const resizedImageOptions = useContent({
-    source: 'resize-image-api',
+    source: (customFields.lazyLoad || isAdmin) ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: customFields.imageURL, 'arc-site': arcSite },
   });
   const ratios = ratiosFor('LG', customFields.imageRatio);
@@ -58,10 +59,10 @@ const LargeManualPromo = ({ customFields }) => {
   return (
     <>
       <article className="container-fluid large-promo">
-        <div className="row lg-promo-padding-bottom">
-          {(customFields.showImage && customFields.imageURL)
+        <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
+          {(customFields.showImage && customFields.imageURL && resizedImageOptions)
           && (
-            <div className="col-sm-12 col-md-xl-6">
+            <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
               { renderWithLink(
                 <Image
                   url={customFields.imageURL}
@@ -126,6 +127,18 @@ const LargeManualPromo = ({ customFields }) => {
   );
 };
 
+const LargeManualPromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <LargeManualPromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
+};
+
 LargeManualPromo.propTypes = {
   customFields: PropTypes.shape({
     headline: PropTypes.string.tag({
@@ -147,6 +160,7 @@ LargeManualPromo.propTypes = {
     imageURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Configure Content',
+      searchable: 'image',
     }),
     linkURL: PropTypes.string.tag({
       label: 'Link URL',
@@ -178,6 +192,11 @@ LargeManualPromo.propTypes = {
       group: 'Show promo elements',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
   }),
 };
 

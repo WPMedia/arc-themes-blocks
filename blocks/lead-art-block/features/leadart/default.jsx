@@ -11,7 +11,7 @@ import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
-// import ArcAd from '@wpmedia/ads-block';
+
 import './leadart.scss';
 import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
@@ -74,6 +74,21 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
+
+    let AdBlock;
+
+    try {
+      const { default: AdFeature } = require('@wpmedia/ads-block');
+      AdBlock = () => (
+        <AdFeature customFields={{
+          adType: '300x250_gallery',
+          displayAdLabel: true,
+        }}
+        />
+      );
+    } catch (e) {
+      AdBlock = () => <p>Ad block not found</p>;
+    }
 
     if (content.promo_items && (content.promo_items.lead_art || content.promo_items.basic)) {
       const lead_art = (content.promo_items.lead_art || content.promo_items.basic);
@@ -186,26 +201,9 @@ class LeadArt extends Component {
           </LeadArtWrapperFigure>
         );
       } if (lead_art.type === 'gallery') {
-        /**
-        const GalleryInterstitialAd = () => (
-          <ArcAd
-            customFields={{
-              adType: '300x250',
-              displayAdLabel: true,
-            }}
-          />
-        );
         const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
-        let adProps = {};
-        if (galleryCubeClicks) {
-          const value = parseInt(galleryCubeClicks, 10);
-          if (!Number.isNaN(value)) {
-            adProps = {
-              adElement: GalleryInterstitialAd,
-              interstitialClicks: value,
-            };
-          }
-        }
+        const interstitialClicks = parseInt(galleryCubeClicks, 10);
+
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -216,20 +214,8 @@ class LeadArt extends Component {
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
-            {...adProps}
-          />
-        );
-        * */
-        return (
-          <Gallery
-            galleryElements={lead_art.content_elements}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-            ansId={lead_art._id}
-            ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
-            expandPhrase={this.phrases.t('global.gallery-expand-button')}
-            autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
-            pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
-            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            adElement={/* istanbul ignore next */ () => (<AdBlock />)}
+            interstitialClicks={interstitialClicks}
           />
         );
       }

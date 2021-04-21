@@ -8,6 +8,23 @@ const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
+jest.mock('@wpmedia/byline-block', () => ({
+  __esModule: true,
+  default: function Byline() { return <div />; },
+}));
+
+jest.mock('@wpmedia/date-block', () => ({
+  __esModule: true,
+  default: function ArticleDate() { return <div />; },
+}));
+
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  __esModule: true,
+  Image: () => <div />,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
+}));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'http://test/resources/fallback.jpg',
   resizerURL: 'https://resizer.me',
@@ -57,16 +74,23 @@ describe('fetchPlaceholder', () => {
       resolve(content);
     });
     const fetchContentMock = jest.fn().mockReturnValue({ fetched: fetched({}) });
-    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue({});
-    ResultsList.prototype.getContent = fetchContentMock;
+    ResultsList.prototype.fetchContent = fetchContentMock;
     const mockDeployment = jest.fn();
     const wrapper = shallow(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath="/pf" customFields={customFields} />);
     mockDeployment.mockClear();
     expect(mockDeployment).toHaveBeenCalledTimes(0);
     wrapper.instance().fetchPlaceholder();
 
-    expect(fetchContentMock).toHaveBeenCalledTimes(1);
-    expect(fetchContentMock).toHaveBeenCalledWith('story-feed-query', { offset: '0', query: 'type: story', size: '1' });
+    expect(fetchContentMock).toHaveBeenCalledTimes(2);
+    expect(fetchContentMock).toHaveBeenCalledWith({
+      resultList: {
+        query: {
+          offset: '0', query: 'type: story', size: '1', feature: 'results-list',
+        },
+        source: 'story-feed-query',
+        filter: expect.any(String),
+      },
+    });
   });
 });
 
@@ -102,9 +126,11 @@ describe('fetchStories', () => {
           offset: '2',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'story-feed-query',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
@@ -159,9 +185,11 @@ describe('fetchStories', () => {
           offset: '0',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'story-feed-author',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
@@ -198,11 +226,14 @@ describe('fetchStories', () => {
           offset: '0',
           query: 'type: story',
           size: '1',
+          feature: 'results-list',
         },
         source: 'other',
         transform: expect.any(Function),
+        filter: expect.any(String),
       },
     };
+
     expect(fetchContentMock.mock.calls[0][0]).toEqual(expect.objectContaining(partialObj));
   });
 

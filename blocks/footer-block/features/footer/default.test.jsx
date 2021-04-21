@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import Footer from './default';
@@ -99,6 +99,14 @@ const mockPayload = {
   ],
 };
 
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  FacebookAltIcon: () => <svg>FacebookAltIcon</svg>,
+  TwitterIcon: () => <svg>TwitterIcon</svg>,
+  RssIcon: () => <svg>RssIcon</svg>,
+  LazyLoad: ({ children }) => <>{ children }</>,
+  isServerSide: () => true,
+}));
+
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
@@ -126,6 +134,14 @@ describe('the footer feature for the default output type', () => {
     }));
   });
 
+  it('should return null if lazyLoad on the server and not in the admin', () => {
+    const config = {
+      lazyLoad: true,
+    };
+    const wrapper = mount(<Footer customFields={config} />);
+    expect(wrapper.html()).toBe(null);
+  });
+
   it('should have 5 column headers', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
@@ -145,7 +161,7 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column when empty payload is given', () => {
-    const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({})),
@@ -155,7 +171,7 @@ describe('the footer feature for the default output type', () => {
   });
 
   it('should have empty column without error when undefined payload is given', () => {
-    const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+    const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => (undefined)),
@@ -166,7 +182,7 @@ describe('the footer feature for the default output type', () => {
 
   describe('the content source configuration', () => {
     it('should have a default set of query values', () => {
-      shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: {} } }} />);
+      mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: {} } }} />);
 
       expect(useContent).toHaveBeenCalledWith({
         query: {
@@ -177,7 +193,7 @@ describe('the footer feature for the default output type', () => {
     });
 
     it('should overwrite those values with configured values', () => {
-      shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: { hierarchy: 'not-a-footer', extraval: 11111 } } }} />);
+      mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfigValues: { hierarchy: 'not-a-footer', extraval: 11111 } } }} />);
 
       expect(useContent).toHaveBeenCalledWith({
         query: {
@@ -300,7 +316,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is provided', () => {
       it('should show copyright text', () => {
         getProperties.mockImplementation(() => ({ copyrightText: 'my copyright text' }));
-        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('my copyright text');
       });
@@ -309,7 +325,7 @@ describe('the footer feature for the default output type', () => {
     describe('when copyright text is not provided', () => {
       it('should not show copyright text', () => {
         getProperties.mockImplementation(() => ({ }));
-        const wrapper = shallow(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
+        const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
         expect((wrapper.find('#copyright-top')).text()).toStrictEqual('');
       });

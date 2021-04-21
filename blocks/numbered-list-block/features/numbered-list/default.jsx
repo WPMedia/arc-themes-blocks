@@ -4,7 +4,7 @@ import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
 import getProperties from 'fusion:properties';
 
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
@@ -17,12 +17,26 @@ function extractImage(promo) {
 class NumberedList extends Component {
   constructor(props) {
     super(props);
+    const { lazyLoad = false } = props.customFields || {};
+
     this.arcSite = props.arcSite;
+    this.lazyLoad = lazyLoad;
+    this.isAdmin = props.isAdmin;
+
     this.state = {
       placeholderResizedImageOptions: {},
     };
-    this.fetchStories();
+
     this.fetchPlaceholder();
+
+    // Fetch stories if lazyLoad is not enabled, the code is running on the server
+    if (!this.lazyLoad && isServerSide()) {
+      this.fetchStories();
+    }
+  }
+
+  componentDidMount() {
+    this.fetchStories();
   }
 
   getFallbackImageURL() {
@@ -37,12 +51,35 @@ class NumberedList extends Component {
   }
 
   fetchStories() {
-    const { customFields: { listContentConfig } } = this.props;
+    const { customFields: { listContentConfig, showImage } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
     this.fetchContent({
       resultList: {
         source: contentService,
-        query: contentConfigValues,
+        query: { ...contentConfigValues, feature: 'numbered-list' },
+        filter: `{
+          content_elements {
+            _id,
+            headlines {
+              basic
+            }
+            ${showImage ? `promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  274x183
+                  105x70
+                }
+              }
+            }` : null}
+            websites {
+              ${this.arcSite} {
+                website_url
+              }
+            }
+          }
+        }`,
       },
     });
   }
@@ -61,6 +98,10 @@ class NumberedList extends Component {
   }
 
   render() {
+    if (this.lazyLoad && isServerSide() && !this.isAdmin) {
+      return null;
+    }
+
     const {
       customFields: {
         showHeadline = true,
@@ -76,7 +117,7 @@ class NumberedList extends Component {
 
     const targetFallbackImage = this.getFallbackImageURL();
 
-    return (
+    const ListResults = () => (
       <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
           <PrimaryFont as="h2" className="list-title">
@@ -96,8 +137,8 @@ class NumberedList extends Component {
           const url = websites[arcSite].website_url;
 
           return (
-            <React.Fragment key={`result-card-${url}`}>
-              <div className="numbered-list-item numbered-item-margins" key={`result-card-${url}`} type="1">
+            <React.Fragment key={`numbered-list-${url}`}>
+              <div className="numbered-list-item numbered-item-margins">
                 {showHeadline
                 && (
                 <a href={url} className="headline-list-anchor">
@@ -152,6 +193,12 @@ class NumberedList extends Component {
         }) : null}
       </div>
     );
+
+    return (
+      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
+        <ListResults />
+      </LazyLoad>
+    );
   }
 }
 
@@ -173,6 +220,11 @@ NumberedList.propTypes = {
       label: 'Show image',
       defaultValue: true,
       group: 'Show promo elements',
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 };

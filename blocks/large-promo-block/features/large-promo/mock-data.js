@@ -221,6 +221,7 @@ export default {
           type: 'image',
           url:
             'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/DBUX66M3LRFMHKXZOM46RO4EXM.png',
+          resized_params: {},
           version: '0.10.3',
           width: 1179,
           syndication: [Object],

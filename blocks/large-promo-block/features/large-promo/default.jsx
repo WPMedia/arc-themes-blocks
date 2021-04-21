@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
@@ -10,11 +9,13 @@ import { useFusionContext } from 'fusion:context';
 import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
 import Overline from '@wpmedia/overline-block';
+import { PromoLabel } from '@wpmedia/shared-styles';
 import {
   Image,
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
@@ -25,7 +26,6 @@ import {
   extractImageFromStory,
 } from '@wpmedia/resizer-image-block';
 
-import PromoLabel from './_children/promo_label';
 import discoverPromoType from './_children/discover';
 
 const HeadlineText = styled.h2`
@@ -36,9 +36,9 @@ const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
 `;
 
-const LargePromo = ({ customFields }) => {
-  const { arcSite, id } = useFusionContext();
-  const { editableContent } = useEditableContent();
+const LargePromoItem = ({ customFields }) => {
+  const { arcSite, id, isAdmin } = useFusionContext();
+  const { editableContent, searchableField } = useEditableContent();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -47,7 +47,12 @@ const LargePromo = ({ customFields }) => {
       : null,
   }) || null;
 
-  const imageConfig = customFields.imageOverrideURL ? 'resize-image-api' : null;
+  let imageConfig = null;
+  if ((customFields.imageOverrideURL && customFields.lazyLoad) || isAdmin) {
+    imageConfig = 'resize-image-api-client';
+  } else if (customFields.imageOverrideURL) {
+    imageConfig = 'resize-image-api';
+  }
 
   const customFieldImageResizedImageOptions = useContent({
     source: imageConfig,
@@ -155,7 +160,7 @@ const LargePromo = ({ customFields }) => {
       <article className="container-fluid large-promo">
         <div className="row">
           { customFields.showImage && (
-            <div className="col-sm-12 col-md-xl-6 flex-col">
+            <div className="col-sm-12 col-md-xl-6 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
               {
                 videoEmbed ? (
                   <VideoPlayerPresentational
@@ -164,9 +169,14 @@ const LargePromo = ({ customFields }) => {
                     enableAutoplay={false}
                   />
                 ) : (
-                  <a href={content.website_url} aria-hidden="true" tabIndex="-1">
+                  <a
+                    href={content.website_url}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    {...searchableField('imageOverrideURL')}
+                  >
                     {
-                      imageURL
+                      imageURL && resizedImageOptions
                         ? (
                           <Image
                             url={imageURL}
@@ -192,6 +202,7 @@ const LargePromo = ({ customFields }) => {
                             mediumHeight={ratios.mediumHeight}
                             largeWidth={ratios.largeWidth}
                             largeHeight={ratios.largeHeight}
+                            client={imageConfig === 'resize-image-api-client'}
                           />
                         )
                     }
@@ -219,6 +230,18 @@ const LargePromo = ({ customFields }) => {
       <hr />
     </>
   ) : null;
+};
+
+const LargePromo = ({ customFields }) => {
+  const { isAdmin } = useFusionContext();
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
+  }
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <LargePromoItem customFields={{ ...customFields }} />
+    </LazyLoad>
+  );
 };
 
 LargePromo.propTypes = {
@@ -260,12 +283,18 @@ LargePromo.propTypes = {
     imageOverrideURL: PropTypes.string.tag({
       label: 'Image URL',
       group: 'Image',
+      searchable: 'image',
     }),
     ...imageRatioCustomField('imageRatio', 'Art', '4:3'),
     playVideoInPlace: PropTypes.bool.tag({
       label: 'Play video in place',
       group: 'Art',
       defaultValue: false,
+    }),
+    lazyLoad: PropTypes.bool.tag({
+      name: 'Lazy Load block?',
+      defaultValue: false,
+      description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
   }),
 

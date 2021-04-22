@@ -22,10 +22,9 @@ import {
   RssIcon,
   LazyLoad,
   isServerSide,
+  constructSocialURL,
 } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
-
-import constructSocialURL from './shared/constructSocialURL';
 
 import './author-bio.scss';
 

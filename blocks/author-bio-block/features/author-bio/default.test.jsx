@@ -625,7 +625,6 @@ describe('Given the list of author(s) from the article', () => {
     const wrapper = mount(<AuthorBio />);
 
     const socialButtonsContainer = wrapper.find('section.socialButtons');
-    expect(socialButtonsContainer.find('a').props().href).toBe('bernstein@washpost.com');
     expect(socialButtonsContainer.children()).toHaveLength(1);
   });
   it('should not throw by undefined error if empty global content object', () => {

@@ -16,7 +16,12 @@ const Overline = (props) => {
     editable,
     story,
   } = props;
-  const sourceContent = story || (Object.prototype.hasOwnProperty.call(content, '_id') && content) || {};
+
+  let sourceContent = story || {};
+
+  if ((story && !Object.keys(story).length) && Object.prototype.hasOwnProperty.call(content, '_id')) {
+    sourceContent = content;
+  }
 
   const {
     display: labelDisplay,
@@ -33,9 +38,9 @@ const Overline = (props) => {
     && sourceContent.websites[arcSite].website_section) || {};
 
   const shouldUseProps = !!(customText || customUrl);
-  const useGlobalContent = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
+  const overlineContent = shouldUseLabel ? [labelText, labelUrl] : [sectionText, sectionUrl];
   const editableContentPath = shouldUseLabel ? 'headlines.basic' : `websites.${arcSite}.website_section.name`;
-  const [text, url] = shouldUseProps ? [customText, customUrl] : useGlobalContent;
+  const [text, url] = shouldUseProps ? [customText, customUrl] : overlineContent;
 
   let edit = {};
   if (editable) {

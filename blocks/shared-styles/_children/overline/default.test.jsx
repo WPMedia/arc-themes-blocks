@@ -281,4 +281,30 @@ describe('overline feature for default output type', () => {
       expect(wrapper.find('a').prop('href')).toEqual(mockStory.websites.site.website_section._id);
     });
   });
+
+  describe('use story object instead of global content', () => {
+    const storyObject = {
+      _id: '12345',
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it.only('if story object is null renders nothing', () => {
+      const wrapper = mount(<Overline story={null} />);
+
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('should dangerously set the inner HTML to the website_section content', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.text()).toMatch('Story Object');
+    });
+  });
 });

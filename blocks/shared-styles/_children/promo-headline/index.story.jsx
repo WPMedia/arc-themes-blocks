@@ -3,7 +3,7 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import PromoHeadline from './index';
 
 export default {
-  title: 'Promo/Headline',
+  title: 'Shared Styles/Promo/Headline',
   decorators: [withKnobs],
 };
 

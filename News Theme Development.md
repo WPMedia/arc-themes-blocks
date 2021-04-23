@@ -108,7 +108,9 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
   ],
 ```
 
-### Development Process
+---
+
+## Development Process
 
 1. Pull the latest `canary` branch:
 
@@ -126,6 +128,33 @@ git checkout -b TMEDIA-[jira ticket num]-[brief description of feature]
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
 4. Make pull request using Github against the `canary` branch. Get approval for your PR on your feature branch.
 5. Merge the PR into the `canary` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
+
+### Deployment for QA
+
+In the development process this takes care of doing the work and getting your changes into the `canary` tag. In order to see your changes on a live environment for QA you will need to, use the Fusion deployer to either deploy a new bundle or duplicate an existing one - http://redirector.arcpublishing.com/deployments/fusion/
+
+* If you have a running bundle on your environment you can "Duplicate" the bundle and wait for it to build, then "Promote" it to be live - options are under the three vertical dots menu on the deployer page
+* If you do not have a bundle that has the `BLOCK_DIST_TAG` set to `canary` you will need to create a bundle, upload and then "Deploy"
+
+### Creating a feature pack
+
+If you need to create a feature pack to set either `BLOCK_DIST_TAG` to a specific tag, or update blocks you wish to have deployed or change site settings you need to:
+
+1. Have the Fusion-News-Theme repo checked out - https://github.com/WPMedia/Fusion-News-Theme
+2. Update the relevant files
+  * For `BLOCK_DIST_TAG` this is set in `/environment/index.json`
+  * Changing blocks - update the `blocks` array in `/blocks.json`
+  * Changing default site settings - update the `values.default.siteProperties` in `/blocks.json`
+  * Changing a specific sites settings - update the `values.sites.{SITE-NAME}.siteProperties` in `/blocks.json`
+3. Create a feature pack zip
+  * In terminal in the root of the Fusion-News-Theme repo run `npx fusion zip`
+  * A new zip file will be added to `/dist/` folder named in a date format eg `2021-03-26-13-56-25.zip`
+4. Upload zip file to the relevant environment using Fusion deployer, using "upload bundle" - http://redirector.arcpublishing.com/deployments/fusion/
+5. Once uploded, using three dots menu on your uploaded item choose "Deploy"
+6. You'll see your bundle listing in the "Running" list, once it's finished deploying you are then able to promote it to make it a live bundle
+  * If you do not promote it you can see access the bundle using the `d={VERSION}` query param - https://{URL-TO-YOUR-SITE}/?d=725
+
+
 
 ### How To Publish
 

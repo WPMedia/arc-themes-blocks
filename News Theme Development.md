@@ -120,14 +120,14 @@ git fetch -a
 2. Branch off the `canary` branch:
 
 ```sh
-git checkout -b PEN-[jira ticket num]-[brief description of feature]
+git checkout -b TMEDIA-[jira ticket num]-[brief description of feature]
 ```
 
 3. Do the work (heh). Commit as you go, which will run the linter and tests.
 4. Make pull request using Github against the `canary` branch. Get approval for your PR on your feature branch.
 5. Merge the PR into the `canary` branch. At this point a release with the dist-tag of `canary` will be built automatically. This means that if you want to verify your changes in a deployed environment, you need to make sure you're using the `canary` dist-tag in whatever environment that is by setting the `BLOCK_DIST_TAG` environment variable in your environment file(s).
 
-#### How To Publish
+### How To Publish
 
 Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta`, `stable`, `rc`, or other desired tags. The tags and publish GitHub Actions can be tracked by looking at the [Actions tab on the GitHub UI](https://github.com/WPMedia/fusion-news-theme-blocks/actions) and within the .github folder within the repository.
 
@@ -163,18 +163,23 @@ Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on ne
 
 Stable Release is the contents of the beta branch once signed off - beta -> stable
 
-1. Enusre beta is ready - All PR's/hotfixes made against beta are merged in
-2. `git checkout beta && git remote update --prune origin && git reset --hard origin/beta` - Checkout beta and reset your local to remote beta
-3. `git checkout stable && git remote update --prune origin && git reset --hard origin/stable` - Checkout stable and reset your local to remote stable
-4. `git push origin beta:stable`
-5. To release blocks
+1. Create a Pull Request from Beta -> Stable
+    * https://github.com/WPMedia/fusion-news-theme-blocks/compare/stable...beta?expand=1
+    * Resolve any conflicts
+2. Get pull request approved and merged
+3. Get latest stable code locally - `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
+4. Releasing blocks to stable is a manual step
     * Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
     * Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
     * Make sure all blocks have been graduated or promoted.
     * Check that there is a commit in your local for the next version - created by the `npx lerna` command
     * `git push origin stable`
     * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/stable-dist-tag.yml
-6. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
+5. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
+    * `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
+    * `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
+    * `git cherry-pick {SHA OF LAST COMMIT IN STABLE}` - Commit should be the commit that bumps the version number.
+    * `git push origin canary`
 
 Any environment with the `BLOCK_DIST_TAG=stable` will get the updated blocks on next deploy
 
@@ -263,7 +268,9 @@ Unless you are adding new resources or custom components in this repo, you do no
 
 **Note:** When running or creating a build bundle, you will need a .npmrc file that gives you access to the private NPM repo. Reach out to a team member to get this.
 
-##Developing Custom Blocks for use with Themes In addition to using platform-built and maintained Arc Blocks to construct your site in PageBuilder, you can also build Custom Blocks that are custom to your website. The process is similar to developing features on Fusion – you'll build components in the components directory (https://staging.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/intro.md?version=2.4). However, you can utilize the Theme CSS and SDK components within your Custom Block, so that it has the same look-and-feel as the rest of the Theme website.
+## Developing Custom Blocks for use with Themes
+
+In addition to using platform-built and maintained Arc Blocks to construct your site in PageBuilder, you can also build Custom Blocks that are custom to your website. The process is similar to developing features on Fusion – you'll build components in the components directory (https://redirector.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/recipes/intro.md?version=2.7). However, you can utilize the Theme CSS and SDK components within your Custom Block, so that it has the same look-and-feel as the rest of the Theme website.
 
 - To leverage the CSS Framework, you do not need to do anything. Fusion will automatically inject it into your source files when `cssImport`, `cssFramework` and `sassVariableOverrides` (as they should be) are defined in your `blocks.json` file
 
@@ -275,7 +282,7 @@ Unless you are adding new resources or custom components in this repo, you do no
 
 ## Event Listening
 
-The EventEmitter object, located in @wpmedia/engine-theme-sdk can be used to publish and subscribe to events. This can be useful for adding analytic tracking for a custom block. In fact, the Gallery component sends off events for when the next or previous image is viewed and when the autoplay mode is enabled.
+The EventEmitter object, located in `@wpmedia/engine-theme-sdk` can be used to publish and subscribe to events. This can be useful for adding analytic tracking for a custom block. In fact, the Gallery component sends off events for when the next or previous image is viewed and when the autoplay mode is enabled.
 
 These Gallery events are:
 

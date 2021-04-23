@@ -26,6 +26,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   RssIcon: () => <svg>RssIcon</svg>,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+  constructSocialURL: (type, field) => field,
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
@@ -181,12 +182,6 @@ describe('the full author bio block', () => {
 
         expect(wrapper.find('.twitter')).toHaveLength(1);
       });
-
-      it('should have a twitter url', () => {
-        const wrapper = mount(<FullAuthorBio />);
-
-        expect((wrapper.find('.twitter').prop('href'))).toEqual('https://twitter.com/janedoe');
-      });
     });
 
     describe('when the instagram link is present', () => {
@@ -194,12 +189,6 @@ describe('the full author bio block', () => {
         const wrapper = mount(<FullAuthorBio />);
 
         expect(wrapper.find('.instagram')).toHaveLength(1);
-      });
-
-      it('should have an instagram url', () => {
-        const wrapper = mount(<FullAuthorBio />);
-
-        expect((wrapper.find('.instagram').prop('href'))).toEqual('https://www.instagram.com/janedoe/');
       });
     });
 
@@ -209,12 +198,6 @@ describe('the full author bio block', () => {
 
         expect(wrapper.find('.facebook')).toHaveLength(1);
       });
-
-      it('should have a facebook url', () => {
-        const wrapper = mount(<FullAuthorBio />);
-
-        expect((wrapper.find('.facebook').prop('href'))).toEqual('https://facebook.com/janedoe');
-      });
     });
 
     describe('when the email link is present', () => {
@@ -223,12 +206,6 @@ describe('the full author bio block', () => {
 
         expect(wrapper.find('.email')).toHaveLength(1);
       });
-
-      it('should have a mailto link', () => {
-        const wrapper = mount(<FullAuthorBio />);
-
-        expect((wrapper.find('.email').prop('href'))).toEqual('mailto:jane@doe.com');
-      });
     });
 
     describe('when the RSS link is present', () => {
@@ -236,12 +213,6 @@ describe('the full author bio block', () => {
         const wrapper = mount(<FullAuthorBio />);
 
         expect(wrapper.find('.rss')).toHaveLength(1);
-      });
-
-      it('should have a RSS url', () => {
-        const wrapper = mount(<FullAuthorBio />);
-
-        expect((wrapper.find('.rss').prop('href'))).toEqual('somersslink');
       });
     });
 

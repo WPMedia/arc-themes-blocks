@@ -24,9 +24,9 @@ import {
   Image,
   LazyLoad,
   isServerSide,
+  constructSocialURL,
 } from '@wpmedia/engine-theme-sdk';
 import './full-author-bio.scss';
-import constructSocialURL from './shared/constructSocialURL';
 
 const StyledAuthorContent = styled.div`
   font-family: ${(props) => props.primaryFont};

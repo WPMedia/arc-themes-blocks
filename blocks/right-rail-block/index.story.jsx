@@ -7,7 +7,7 @@ import Masthead from '../masthead-block/features/masthead-block/default';
 // import ExtraLargeManualPromo from
 //  '../extra-large-manual-promo-block/features/extra-large-manual-promo/default';
 
-export default { title: 'Right Rail Block' };
+export default { title: 'Blocks/Right Rail Block' };
 
 const navigationComponents = () => (
   <Navigation />

@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import PromoDescription from './index';
 
 export default {
-  title: 'Promo/Description',
+  title: 'Shared Styles/Promo/Description',
   decorators: [withKnobs],
 };
 

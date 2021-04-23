@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import Headline from './features/headline/_children/headline';
 
 export default {
-  title: 'Headline',
+  title: 'Blocks/Headline',
   decorators: [withKnobs],
 };
 

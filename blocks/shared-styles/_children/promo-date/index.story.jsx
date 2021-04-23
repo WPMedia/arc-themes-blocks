@@ -3,7 +3,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import PromoDate from './index';
 
 export default {
-  title: 'Promo/Date',
+  title: 'Shared Styles/Promo/Date',
   decorators: [withKnobs],
 };
 

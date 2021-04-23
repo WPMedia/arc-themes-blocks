@@ -131,7 +131,7 @@ git checkout -b TMEDIA-[jira ticket num]-[brief description of feature]
 
 ### Deployment for QA
 
-In the development process this takes care of doing the work and getting your changes into the `canary` tag. In order to see your changes on a live environment for QA you will need to, use the Fusion deployer to either deploy a new bundle or duplicate an existing one - http://redirector.arcpublishing.com/deployments/fusion/
+In the development process this takes care of doing the work and getting your changes into the `canary` tag. In order to see your changes on a live environment for QA you will need to use the Fusion deployer to either deploy a new bundle or duplicate an existing one - http://redirector.arcpublishing.com/deployments/fusion/
 
 * If you have a running bundle on your environment you can "Duplicate" the bundle and wait for it to build, then "Promote" it to be live - options are under the three vertical dots menu on the deployer page
 * If you do not have a bundle that has the `BLOCK_DIST_TAG` set to `canary` you will need to create a bundle, upload and then "Deploy"

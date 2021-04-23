@@ -78,10 +78,10 @@ const Byline = (props) => {
   return bylineString !== ' ' ? (
     <FontType
       as="section"
-      className={`byline ${className} ${list ? 'byline--list' : ''}`}
+      className={`ts-byline ${className} ${list ? 'ts-byline--list' : ''}`}
     >
-      <span className="byline__by">{phrases.t('byline.by-text')}</span>
-      <span className="byline__names" dangerouslySetInnerHTML={{ __html: bylineString }} />
+      <span className="ts-byline__by">{phrases.t('byline.by-text')}</span>
+      <span className="ts-byline__names" dangerouslySetInnerHTML={{ __html: bylineString }} />
       { separator && bylineString !== ' ' ? <span className="dot-separator"> &#9679;</span> : null }
     </FontType>
   ) : null;

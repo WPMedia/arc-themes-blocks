@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.11.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.11.1) (2021-04-26)
+
+**Note:** Version bump only for package @wpmedia/medium-promo-block
+
+
+
+
+
 ## [5.10.3](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.3-hotfix.0...v5.10.3) (2021-04-13)
 
 **Note:** Version bump only for package @wpmedia/medium-promo-block

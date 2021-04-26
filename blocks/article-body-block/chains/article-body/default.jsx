@@ -204,6 +204,13 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
         </section>
       );
     case 'gallery':
+      // When we have all translated languages we can uncomment this line and
+      // the Gallery property autoplayPhraseLabels
+      // const autoplayPhraseLabels = {
+      //   start: this.phrases.t('global.gallery-autoplay-label-start'),
+      //   stop: this.phrases.t('global.gallery-autoplay-label-stop'),
+      // };
+
       return (
         <section key={key} className="block-margin-bottom gallery">
           <Gallery
@@ -211,6 +218,7 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
             resizerURL={getProperties(arcSite)?.resizerURL}
             ansId={item._id}
             ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
+            // autoplayPhraseLabels={autoplayPhraseLabels}
             expandPhrase={phrases.t('global.gallery-expand-button')}
             autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
             pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}

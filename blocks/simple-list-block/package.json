@@ -1,10 +1,6 @@
 {
   "name": "@wpmedia/simple-list-block",
-<<<<<<< HEAD
-  "version": "5.11.0",
-=======
-  "version": "5.11.1-hotfix.0",
->>>>>>> HOTFIX-TMEDIA-214-16-9-top-table-list
+  "version": "5.11.1",
   "description": "Simple List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [

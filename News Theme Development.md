@@ -140,7 +140,7 @@ In the development process this takes care of doing the work and getting your ch
 
 If you need to create a feature pack to set either `BLOCK_DIST_TAG` to a specific tag, or update blocks you wish to have deployed or change site settings you need to:
 
-1. Have the Fusion-News-Theme repo checked out - https://github.com/WPMedia/Fusion-News-Theme
+1. Have the Fusion-News-Theme repo `master` branch checked out - https://github.com/WPMedia/Fusion-News-Theme
 2. Update the relevant files
   * For `BLOCK_DIST_TAG` this is set in `/environment/index.json`
   * Changing blocks - update the `blocks` array in `/blocks.json`

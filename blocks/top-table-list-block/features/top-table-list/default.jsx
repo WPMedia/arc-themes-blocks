@@ -146,6 +146,7 @@ const TopTableList = (props) => {
             resized_params {
               800x600
               800x533
+              800x450
               600x450
               600x400
               600x338
@@ -170,6 +171,7 @@ const TopTableList = (props) => {
                 resized_params {
                   800x600
                   800x533
+                  800x450
                   600x450
                   600x400
                   600x338

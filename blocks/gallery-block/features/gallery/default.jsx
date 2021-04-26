@@ -48,6 +48,13 @@ const GalleryFeatureItem = (
 
   const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
+  // When we have all translated languages we can uncomment this line and
+  // the Gallery property autoplayPhraseLabels
+  // const autoplayPhraseLabels = {
+  //   start: this.phrases.t('global.gallery-autoplay-label-start'),
+  //   stop: this.phrases.t('global.gallery-autoplay-label-stop'),
+  // };
+
   return (
     <Gallery
       galleryElements={contentElements}
@@ -55,6 +62,7 @@ const GalleryFeatureItem = (
       ansId={id}
       ansHeadline={headlines?.basic ? headlines.basic : ''}
       expandPhrase={phrases.t('global.gallery-expand-button')}
+      // autoplayPhraseLabels={autoplayPhraseLabels}
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}

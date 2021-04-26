@@ -53,7 +53,6 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
           primaryColor={getThemeStyle(arcSite)['primary-color']}
           className="body-paragraph body-copyright"
           key={key}
-          role="contentinfo"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       ) : null;

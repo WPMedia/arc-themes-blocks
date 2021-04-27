@@ -6,7 +6,7 @@ export default {
   title: 'Blocks/Right Rail Block',
   parameters: {
     // Set the viewports in Chromatic at a component level.
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 960, 1200, 1600] },
   },
 };
 

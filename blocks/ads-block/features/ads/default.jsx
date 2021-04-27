@@ -22,6 +22,7 @@ const setAdLabelVisibility = (props) => {
 const StyledAdUnit = styled.div`
   .arcad > [id^='google_ads_iframe']:not(:empty)::before {
     content: '${(props) => props.adLabel}';
+    display: block;
     ${(props) => setAdLabelVisibility(props)}
   }
 
@@ -77,7 +78,7 @@ const ArcAd = (props) => {
   const heightWithAdjustments = parseInt(height, 10) + ((displayAdLabel) ? 17 : 0);
 
   const sizing = {
-    width: `${width}px`,
+    maxWidth: `${width}px`,
     minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
   };
 

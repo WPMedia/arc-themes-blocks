@@ -2,7 +2,13 @@
 import React from 'react';
 import RightRailBlock from './layouts/right-rail/default';
 
-export default { title: 'Blocks/Right Rail Block' };
+export default {
+  title: 'Blocks/Right Rail Block',
+  parameters: {
+    // Set the viewports in Chromatic at a component level.
+    chromatic: { viewports: [320, 1200] },
+  },
+};
 
 const layoutItemStyles = {
   navigation: {

@@ -204,6 +204,13 @@ class LeadArt extends Component {
         const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;
         const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
+        // When we have all translated languages we can uncomment this line and
+        // the Gallery property autoplayPhraseLabels
+        // const autoplayPhraseLabels = {
+        //   start: this.phrases.t('global.gallery-autoplay-label-start'),
+        //   stop: this.phrases.t('global.gallery-autoplay-label-stop'),
+        // };
+
         return (
           <Gallery
             galleryElements={lead_art.content_elements}
@@ -211,6 +218,7 @@ class LeadArt extends Component {
             ansId={lead_art._id}
             ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
             expandPhrase={this.phrases.t('global.gallery-expand-button')}
+            // autoplayPhraseLabels={autoplayPhraseLabels}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}

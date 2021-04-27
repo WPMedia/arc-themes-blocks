@@ -1,8 +1,8 @@
-import { ShareBar } from './features/share-bar/default';
+import ShareBarContainer, { ShareBar } from './features/share-bar/default';
 import { select, text, boolean } from '@storybook/addon-knobs';
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 
-<Meta title="Blocks/Share Bar" component={ShareBar} />
+<Meta title="Blocks/Share Bar" component={ShareBarContainer} />
 
 # Share Bar
 
@@ -26,10 +26,10 @@ const AnotherComponentWithoutGlobalContent = () => (
         twitter:  true,
         linkedIn:  true,
       }}
-        websiteName={'Man Bites Dog'}
-        websiteDomain={'https://www.thesun.com/'}
-        websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
-        headlineString={'The Sun'}
+      websiteName={'Man Bites Dog'}
+      websiteDomain={'https://www.thesun.com/'}
+      websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
+      headlineString={'The Sun'}
     />
 )
 
@@ -48,14 +48,14 @@ const AnotherComponentWithGlobalContent = () => (
 
 ## Props
 
-<Props of={ShareBar} />
+<Props of={ShareBarContainer} />
 
 ## Stories
 
 ** Custom ShareBar **
 
 <Preview>
-  <Story name="Custom ShareBar">
+  <Story name="Custom ShareBar" height="700px">
      <ShareBar
         customFields={{
             email: boolean('Email', true),

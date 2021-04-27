@@ -116,7 +116,7 @@ describe('<ArcAd>', () => {
       const wrapper = shallow(<ArcAd {...adProps} />);
       const container = wrapper.find('.arcad-container');
       expect(container).toHaveLength(1);
-      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').maxWidth).toBeDefined();
       expect(container.prop('style').minHeight).toBe(null);
     });
 
@@ -124,7 +124,7 @@ describe('<ArcAd>', () => {
       const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
       const container = wrapper.find('.arcad-container');
       expect(container).toHaveLength(1);
-      expect(container.prop('style').width).toBeDefined();
+      expect(container.prop('style').maxWidth).toBeDefined();
       expect(container.prop('style').minHeight).not.toBe(null);
     });
   });

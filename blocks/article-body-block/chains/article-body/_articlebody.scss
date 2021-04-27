@@ -207,7 +207,7 @@
       }
     }
 
-    > * + *  {
+    > * + * {
       margin-bottom: 0;
       margin-top: calculateRem(24px);
     }

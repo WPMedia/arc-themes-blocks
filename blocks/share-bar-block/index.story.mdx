@@ -71,3 +71,16 @@ const AnotherComponentWithGlobalContent = () => (
      />
   </Story>
 </Preview>
+
+** No share buttons **
+
+<Preview>
+  <Story name="No Share Buttons" height="700px">
+     <ShareBar
+        websiteName={text('headlineString', 'Man Bites Dog')}
+        websiteDomain={text('websiteDomain', 'https://www.thesun.com/')}
+        websiteUrl={text('websiteUrl', '/2019/07/15/global-kitchen-sink-article/')}
+        headlineString={text('websiteName', 'The Sun')}
+     />
+  </Story>
+</Preview>

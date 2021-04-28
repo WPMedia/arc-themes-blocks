@@ -47,6 +47,16 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
         />
       ) : null;
     }
+    case 'copyright': {
+      return (content && content.length > 0) ? (
+        <StyledText
+          primaryColor={getThemeStyle(arcSite)['primary-color']}
+          className="body-paragraph body-copyright"
+          key={key}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      ) : null;
+    }
     case 'divider': {
       return (
         <Fragment key={key}>
@@ -247,8 +257,12 @@ const ArticleBody = styled.article`
 
 const ArticleBodyChainItems = ({ children }) => {
   const {
-    globalContent: items = {}, customFields = {}, arcSite, id,
+    globalContent: items = {},
+    customFields = {},
+    arcSite,
+    id,
   } = useFusionContext();
+
   const { content_elements: contentElements = [], location } = items;
   const { elementPlacement: adPlacementConfigObj = {} } = customFields;
   const { locale = 'en' } = getProperties(arcSite);
@@ -261,32 +275,44 @@ const ArticleBodyChainItems = ({ children }) => {
   const paragraphTotal = contentElements.filter((element) => element.type === 'text').length;
 
   let paragraphCounter = 0;
-  const articleBody = [].concat(...contentElements.map((contentElement, index) => {
-    if (contentElement.type === 'text') {
-      // Start at 1 since the ad configs use one-based array indexes
-      paragraphCounter += 1;
+  const articleBody = [
+    ...contentElements.map((contentElement, index) => {
+      if (contentElement.type === 'text') {
+        // Start at 1 since the ad configs use one-based array indexes
+        paragraphCounter += 1;
 
-      const adsAfterParagraph = adPlacements.filter(
-        (placement) => placement.paragraph === paragraphCounter,
-      );
+        const adsAfterParagraph = adPlacements.filter(
+          (placement) => placement.paragraph === paragraphCounter,
+        );
 
-      if (paragraphCounter === 1 && location && contentElement.content.indexOf(`${location} &mdash;`) !== 0) {
-        // eslint-disable-next-line no-param-reassign
-        contentElement.content = `${location} &mdash; ${contentElement.content}`;
+        if (paragraphCounter === 1 && location && contentElement.content.indexOf(`${location} &mdash;`) !== 0) {
+          // eslint-disable-next-line no-param-reassign
+          contentElement.content = `${location} &mdash; ${contentElement.content}`;
+        }
+
+        // The ad features should follow the content element if they exist, but not if
+        // the current paragraph is the last or second-to-last paragraph.
+        if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
+          return [
+            parseArticleItem(contentElement, index, arcSite, phrases, id),
+            ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
+          ];
+        }
       }
 
-      // The ad features should follow the content element if they exist, but not if
-      // the current paragraph is the last or second-to-last paragraph.
-      if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
-        return [
-          parseArticleItem(contentElement, index, arcSite, phrases, id),
-          ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
-        ];
-      }
-    }
-
-    return parseArticleItem(contentElement, index, arcSite, phrases, id);
-  }));
+      return parseArticleItem(contentElement, index, arcSite, phrases, id);
+    }),
+    ...(items.copyright ? [parseArticleItem(
+      {
+        type: 'copyright',
+        content: items.copyright,
+      },
+      'copyright-text',
+      arcSite,
+      null, // phrases not used by text type
+      null, // id not used by text type
+    )] : []),
+  ];
 
   return (
     <ArticleBody

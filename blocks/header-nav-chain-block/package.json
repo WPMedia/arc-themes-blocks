@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "focus-trap-react": "^8.4.2",
-    "use-debounce": "^3.4.3"
+    "use-debounce": "^6.0.1"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

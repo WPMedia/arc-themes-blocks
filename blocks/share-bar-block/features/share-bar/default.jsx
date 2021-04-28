@@ -114,7 +114,7 @@ export const ShareBar = ({
           id={`article-share-${social}`}
           aria-label={`Share current article via ${social}`}
           type="button"
-          className="shareButton"
+          className="ts-share-bar__button"
           onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
         >
           { getLogoComponent(social) }
@@ -128,7 +128,7 @@ export const ShareBar = ({
   }
 
   return (
-    <div className="shareBar">
+    <div className="ts-share-bar">
       {shareButtons}
     </div>
   );

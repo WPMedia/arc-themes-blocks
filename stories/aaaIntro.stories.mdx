@@ -32,26 +32,20 @@ Import components you want into your project
 
 and use them like so
 
-```
-
-const data = () => ({
-  customFields: {
-    email: false,
-    facebook: true,
-    pinterest: false,
-    twitter: false,
-    linkedIn: false,
-  },
-  globalContent: {
-    label: {
-      basic: {
-        display: true,
-        url: 'http://google.com/',
-        text: 'Overline Text Root',
-      },
-    },
-  },
-});
-
-  <ShareBar useInjectedFusionContext={data} />
+```jsx
+const CustomShareBarBlock = () => (
+  <ShareBar
+    customFields={{
+      email:  true,
+      facebook:  true,
+      pinterest:  true,
+      twitter:  true,
+      linkedIn:  true,
+    }}
+    websiteName={'Man Bites Dog'}
+    websiteDomain={'https://www.thesun.com/'}
+    websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
+    headlineString={'The Sun'}
+  />
+)
 ```

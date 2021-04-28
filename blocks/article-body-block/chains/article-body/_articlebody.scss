@@ -206,12 +206,7 @@
         line-height: calculateRem(32px);
       }
     }
-
-    > * + * {
-      margin-bottom: 0;
-      margin-top: calculateRem(24px);
-    }
-
+    
     .citation-text {
       font-family: $primary-font-family;
       font-size: calculateRem(18px);
@@ -221,6 +216,11 @@
         font-size: calculateRem(16px);
         line-height: calculateRem(24px);
       }
+    }
+
+    > * + * {
+      margin-bottom: 0;
+      margin-top: calculateRem(24px);
     }
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -254,10 +254,6 @@
       }
     }
 
-    > * + * {
-      margin-bottom: 0;
-      margin-top: calculateRem(24px);
-    }
 
     .citation-text {
       color: $ui-primary-font-color;
@@ -268,6 +264,11 @@
       font-weight: normal;
       line-height: calculateRem(24px);
       text-align: left;
+    }
+
+    > * + * {
+      margin-bottom: 0;
+      margin-top: calculateRem(24px);
     }
   }
 

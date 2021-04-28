@@ -1,3 +1,3 @@
 export default () => ({
-  t: () => ''
-})
+  t: (key) => key
+});

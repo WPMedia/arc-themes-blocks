@@ -1,6 +1,34 @@
 export const useAppContext = () => ({
   arcSite: 'story-book',
-  renderables: [],
+  renderables: [{
+    collection: 'sections',
+    props: { id: 0 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 1 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 2 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 3 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 4 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 5 },
+    children: [1],
+  }, {
+    collection: 'feature',
+    props: { id: 99 },
+    children: [0],
+  }],
 });
 
 export const withFusionContext = (x) => (x);

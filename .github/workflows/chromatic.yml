@@ -7,10 +7,6 @@ on:
   push:
     branches-ignore:
       - "dependabot/**"
-  pull_request:
-    types: [synchronize, opened]
-    branches-ignore:
-      - "dependabot/**"
 
 # List of jobs
 jobs:

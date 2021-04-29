@@ -246,11 +246,6 @@
       }
     }
 
-    *:not(:first-child) {
-      margin-bottom: 0;
-      margin-top: calculateRem(24px);
-    }
-
     .citation-text {
       font-family: $primary-font-family;
       font-size: calculateRem(18px);

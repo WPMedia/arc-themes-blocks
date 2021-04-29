@@ -11,7 +11,7 @@ export default ({ element }) => {
       pullQuote.push(<p key={paragraph._id}>{ paragraph.content }</p>);
     }
   });
-  if (citation.type === 'text') {
+  if (citation.type === 'text' && citation.content !== null && citation.content !== undefined && citation.content !== '') {
     pullQuote.push(
       <span key={`text-${elementId}`} className="citation-text">
         &mdash;

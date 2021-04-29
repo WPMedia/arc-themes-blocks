@@ -11,7 +11,7 @@ export default ({ element }) => {
       blockQuote.push(<p key={paragraph._id}>{ paragraph.content }</p>);
     }
   });
-  if (citation.type === 'text') {
+  if (citation.type === 'text' && citation.content !== null && citation.content !== undefined && citation.content !== '') {
     blockQuote.push(
       // doesn't look like it has id
       // via https://github.com/washingtonpost/ans-schema/search?p=2&q=citation&unscoped_q=citation

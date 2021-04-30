@@ -50,7 +50,7 @@ const MediumListItem = (props) => {
                   />
                 ) : null)}
                 <div className="article-meta">
-                  {(customFields.showBylineMD) ? <Byline content={element} font="Primary" list /> : null}
+                  {(customFields.showBylineMD) ? <Byline content={element} font="Primary" list separator={customFields.showDateMD} /> : null}
                   {(customFields.showDateMD) ? (
                     <PromoDate content={element} />
                   ) : null}

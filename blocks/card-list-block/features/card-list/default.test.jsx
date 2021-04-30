@@ -166,7 +166,7 @@ describe('Card list', () => {
       });
 
       it('should render a separator', () => {
-        expect(wrapper.find('.dot-separator').length).toEqual(1);
+        expect(wrapper.find('Byline').prop('separator')).toEqual(true);
       });
 
       it('should render a publish date', () => {
@@ -248,10 +248,6 @@ describe('Card list', () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
         expect(wrapper.find('div.card-list-container').length).toEqual(1);
-      });
-
-      it('should render a separator', () => {
-        expect(wrapper.find('.list-item-simple').find('.dot-separator').length).toEqual(0);
       });
     });
   });

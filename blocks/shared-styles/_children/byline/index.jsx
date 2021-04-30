@@ -7,19 +7,21 @@ import SecondaryFont from '../secondary-font';
 
 import './index.scss';
 
+const DEFAULT_FONT = 'Secondary';
+
 const Byline = (props) => {
   const {
     globalContent = {},
     content = {},
     className = '',
-    separator = true,
+    separator = false,
     list = false,
-    font = 'Secondary',
+    font = DEFAULT_FONT,
   } = props;
   const { arcSite } = useFusionContext();
   const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
-  const FontType = font === 'Seconday' ? SecondaryFont : PrimaryFont;
+  const FontType = font === DEFAULT_FONT ? SecondaryFont : PrimaryFont;
 
   const by = content?.credits?.by || globalContent?.credits?.by || [];
   const authors = by.length > 0 && by.map((author) => {
@@ -82,7 +84,7 @@ const Byline = (props) => {
     >
       <span className="ts-byline__by">{phrases.t('byline.by-text')}</span>
       <span className="ts-byline__names" dangerouslySetInnerHTML={{ __html: bylineString }} />
-      { separator && bylineString !== ' ' ? <span className="dot-separator"> &#9679;</span> : null }
+      { separator && bylineString !== ' ' ? <span className="dot-separator">&#9679;</span> : null }
     </FontType>
   ) : null;
 };

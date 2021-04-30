@@ -115,12 +115,8 @@ describe('The results list', () => {
         expect(wrapper.find('.list-item').find('.results-list--author-date').length).toEqual(1);
       });
 
-      it('should render a byline', () => {
-        expect(wrapper.find('.list-item').find('.results-list--author-date').find('Byline').length).toEqual(1);
-      });
-
-      it('should render a separator', () => {
-        expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(1);
+      it('should render a byline with separator', () => {
+        expect(wrapper.find('.list-item').find('Byline').prop('separator')).toEqual(true);
       });
 
       it('should render a publish date', () => {
@@ -193,10 +189,6 @@ describe('The results list', () => {
       wrapper.update();
       it('should render one parent wrapper', () => {
         expect(wrapper.find('.results-list-container').length).toEqual(1);
-      });
-
-      it('should render a separator', () => {
-        expect(wrapper.find('.list-item').find('.dot-separator').length).toEqual(0);
       });
     });
   });

@@ -19,7 +19,6 @@ const SearchResult = ({
     description: { basic: descriptionText } = {},
     headlines: { basic: headlineText } = {},
     display_date: displayDate,
-    credits: { by } = {},
     promo_items: promoItems,
     websites = {},
   } = element;
@@ -30,7 +29,6 @@ const SearchResult = ({
 
   const url = websites[arcSite].website_url;
   const resizedImageOptions = extractResizedParams(element);
-  const showSeparator = by && by.length !== 0;
   const {
     showHeadline,
     showImage,
@@ -100,8 +98,7 @@ const SearchResult = ({
           )}
           { (showDate || showByline) && (
             <div className="results-list--author-date">
-              { showByline && <Byline story={element} stylesFor="list" /> }
-              { showByline && showSeparator && showDate && <p className="dot-separator">&#9679;</p> }
+              { showByline && <Byline story={element} stylesFor="list" separator={showDate} /> }
               { showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
             </div>
           )}

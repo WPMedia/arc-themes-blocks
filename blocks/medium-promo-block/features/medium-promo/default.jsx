@@ -126,7 +126,7 @@ const MediumPromoItem = ({ customFields }) => {
                 />
               ) : null)}
               <div className="article-meta">
-                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
+                {(customFields.showByline) ? <Byline content={content} font="Primary" list separator={customFields.showDate} /> : null}
                 {(customFields.showDate) ? (
                   <PromoDate content={content} />
                 ) : null}

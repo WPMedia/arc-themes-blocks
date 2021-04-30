@@ -279,9 +279,7 @@ class CardList extends React.Component {
                     </a>
                   </HeadlineText>
                   <div className="author-date">
-                    <Byline story={contentElements[0]} stylesFor="list" />
-                    {/* separator will only be shown if there is at least one author */}
-                    { showSeparator && <p className="dot-separator">&#9679;</p> }
+                    <Byline story={contentElements[0]} stylesFor="list" separator={showSeparator} />
                     <ArticleDate
                       classNames="story-date"
                       date={contentElements[0].display_date}

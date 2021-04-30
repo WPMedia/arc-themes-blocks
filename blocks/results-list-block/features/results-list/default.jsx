@@ -274,7 +274,6 @@ class ResultsList extends Component {
             description: { basic: descriptionText } = {},
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
-            credits: { by } = {},
             promo_items: promoItems,
             websites,
           } = element;
@@ -283,7 +282,6 @@ class ResultsList extends Component {
             return null;
           }
 
-          const showSeparator = by && by.length !== 0;
           const url = websites[arcSite].website_url;
           return (
             <div
@@ -370,9 +368,7 @@ class ResultsList extends Component {
                 )}
                 { (promoElements.showDate || promoElements.showByline) && (
                 <div className="results-list--author-date">
-                  { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
-                  {/* The Separator will only be shown if there is at least one author name */}
-                  { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
+                  { promoElements.showByline && <Byline story={element} stylesFor="list" separator={promoElements.showDate} /> }
                   { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                 </div>
                 )}

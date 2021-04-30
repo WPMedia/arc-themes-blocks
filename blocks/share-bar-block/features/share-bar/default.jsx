@@ -3,12 +3,15 @@ import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
+import {
+  EnvelopeIcon,
+  LinkedInAltIcon,
+  PinterestAltIcon,
+  TwitterIcon,
+  FacebookIcon,
+} from '@wpmedia/engine-theme-sdk';
+
 import './share-bar.scss';
-import EnvelopeIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/EnvelopeIcon';
-import FacebookIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FacebookIcon';
-import LinkedInAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/LinkedInAltIcon';
-import PinterestAltIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/PinterestAltIcon';
-import TwitterIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/TwitterIcon';
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
   // If this is a local dev, then return the domain as localhost - otherwise use the site properties
@@ -97,7 +100,7 @@ const ShareBarContainer = () => {
 };
 
 export const ShareBar = ({
-  customFields, websiteName, websiteDomain, websiteUrl, headlineString,
+  customFields = {}, websiteName, websiteDomain, websiteUrl, headlineString,
 }) => {
   const shareButtons = [];
   Object.keys(customFields).forEach((social) => {
@@ -111,7 +114,7 @@ export const ShareBar = ({
           id={`article-share-${social}`}
           aria-label={`Share current article via ${social}`}
           type="button"
-          className="shareButton"
+          className="ts-share-bar__button"
           onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
         >
           { getLogoComponent(social) }
@@ -120,8 +123,12 @@ export const ShareBar = ({
     }
   });
 
+  if (!shareButtons.length) {
+    return null;
+  }
+
   return (
-    <div className="shareBar">
+    <div className="ts-share-bar">
       {shareButtons}
     </div>
   );

@@ -10,7 +10,7 @@
       "ko": "더보기"
    },
    "global.gallery-page-count-text":{
-      "en":"%{current} of %{total}",
+      "en":"<span class='sr-only'>Image</span> %{current} of %{total}",
       "sv":"%{current} av %{total}",
       "no":"%{current} av %{total}",
       "fr":"%{current} de %{total}",
@@ -38,5 +38,11 @@
       "es": "Pausar reproducción automática",
       "ja": "自動再生の一時停止",
       "ko": "자동 재생 일시 중지"
+   },
+   "global.gallery-autoplay-label-start": {
+     "en": "Start automatic slide show"
+   },
+   "global.gallery-autoplay-label-stop": {
+     "en": "Stop automatic slide show"
    }
 }

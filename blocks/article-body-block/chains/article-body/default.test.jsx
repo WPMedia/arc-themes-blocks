@@ -1907,4 +1907,74 @@ describe('article-body chain', () => {
       expect(wrapper.find('.divider').find('hr').length).toEqual(2);
     });
   });
+
+  describe('Copyright Rendering', () => {
+    it('should render copyright after content', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            copyright: 'Copyright 2021 - Copyright Holder',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Paragraph with Copyright Following',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-copyright').last().text()).toEqual('Copyright 2021 - Copyright Holder');
+    });
+    it('should not render copyright after content if it does not exist', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Paragraph with Copyright Following',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+          customFields: { },
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain>
+          <div>1</div>
+          <div>2</div>
+          <span>3</span>
+        </ArticleBodyChain>,
+      );
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-copyright').length).toEqual(0);
+    });
+  });
 });

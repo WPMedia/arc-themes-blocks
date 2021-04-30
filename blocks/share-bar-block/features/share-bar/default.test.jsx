@@ -3,27 +3,6 @@ import { mount } from 'enzyme';
 // presentational component not container
 import { ShareBar } from './default';
 
-/*
-    jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({
-        arcSite: 'the-sun',
-        customFields: {
-          email: true,
-          facebook: true,
-          pinterest: true,
-          twitter: true,
-          linkedIn: true,
-        },
-        globalContent: {
-          headlines: {
-            basic: 'sample headline',
-          },
-          website_url: '/2019/07/15/global-kitchen-sink-article/',
-        },
-      })),
-    }));
-*/
-
 describe('When the share bar is shown', () => {
   const websiteDomain = 'https://www.thesun.com/';
   const websiteName = 'The Sun';
@@ -45,7 +24,7 @@ describe('When the share bar is shown', () => {
       websiteUrl={websiteUrl}
       headlineString={headlineString}
     />);
-    expect(wrapper.find('button.shareButton')).toHaveLength(5);
+    expect(wrapper.find('.ts-share-bar__button')).toHaveLength(5);
   });
 
   it('should not show social buttons that are marked as false', () => {
@@ -65,7 +44,7 @@ describe('When the share bar is shown', () => {
       headlineString={headlineString}
     />);
 
-    expect(wrapper.find('button.shareButton')).toHaveLength(3);
+    expect(wrapper.find('.ts-share-bar__button')).toHaveLength(3);
     expect(wrapper.find('#article-share-email')).toHaveLength(1);
     expect(wrapper.find('#article-share-twitter')).toHaveLength(1);
     expect(wrapper.find('#article-share-linkedIn')).toHaveLength(1);
@@ -89,7 +68,7 @@ describe('When the share bar is shown', () => {
       websiteUrl={websiteUrl}
       headlineString={headlineString}
     />);
-    expect(wrapper.find('div.shareBar').children()).toHaveLength(0);
+    expect(wrapper.find('.ts-share-bar').children()).toHaveLength(0);
   });
 
   describe('when the social buttons are clicked', () => {

@@ -20,7 +20,8 @@
     "test:watch": "npm run test -- --watchAll",
     "latest-stable-parity": "lerna exec --no-bail --parallel -- npm dist-tag add \\${LERNA_PACKAGE_NAME}@$(node -e \"console.log(require('./lerna.json').version)\") stable",
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "postinstall": "npx lerna clean -y"
   },
   "husky": {
     "hooks": {

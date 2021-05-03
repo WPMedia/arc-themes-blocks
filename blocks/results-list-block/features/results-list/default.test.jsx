@@ -7,6 +7,7 @@ import mockCollections, { collectionFirst10Items } from './mock-collections-data
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
   resizerURL: 'https://resizer.me',
@@ -15,11 +16,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
-
-jest.mock('@wpmedia/byline-block', () => ({
-  __esModule: true,
-  default: function Byline() { return <div />; },
 }));
 
 jest.mock('@wpmedia/date-block', () => ({
@@ -32,6 +28,11 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
+}));
+
+jest.mock('@wpmedia/shared-styles', () => ({
+  __esModule: true,
+  Byline: () => <div />,
 }));
 
 describe('The results list', () => {

@@ -140,7 +140,7 @@ describe('Given a single author', () => {
     };
     const globalContent = { credits };
 
-    const wrapper = mount(<ArticleByline globalContent={globalContent} stylesFor="list" />);
+    const wrapper = mount(<ArticleByline globalContent={globalContent} />);
     expect(wrapper.find('span').at(1).find('a').length).toBe(0);
     expect(wrapper.find('span').at(1).text().trim()).toEqual('SangHee Kim Byline');
   });

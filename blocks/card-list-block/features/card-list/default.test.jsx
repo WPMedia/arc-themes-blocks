@@ -11,23 +11,25 @@ import mockData,
 const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
 }));
 
-jest.mock('@wpmedia/byline-block', () => ({
-  __esModule: true,
-  default: function Byline() { return <div />; },
-}));
-
 jest.mock('@wpmedia/date-block', () => ({
   __esModule: true,
   default: function ArticleDate() { return <div />; },
+}));
+
+jest.mock('@wpmedia/shared-styles', () => ({
+  __esModule: true,
+  Byline: () => <div />,
 }));
 
 describe('Card list', () => {

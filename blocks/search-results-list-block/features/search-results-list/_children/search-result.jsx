@@ -1,9 +1,8 @@
 import React from 'react';
-import Byline from '@wpmedia/byline-block';
 import ArticleDate from '@wpmedia/date-block';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import { Image } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { Byline, PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 
 import getProperties from 'fusion:properties';
 import { extractImage } from './helpers';
@@ -98,7 +97,7 @@ const SearchResult = ({
           )}
           { (showDate || showByline) && (
             <div className="results-list--author-date">
-              { showByline && <Byline story={element} stylesFor="list" separator={showDate} /> }
+              { showByline && <Byline content={element} list separator={showDate} /> }
               { showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
             </div>
           )}

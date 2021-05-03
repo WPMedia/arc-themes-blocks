@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
-import Byline from '@wpmedia/byline-block';
+
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -11,6 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { Byline } from '@wpmedia/shared-styles';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
@@ -368,7 +369,8 @@ class ResultsList extends Component {
                 )}
                 { (promoElements.showDate || promoElements.showByline) && (
                 <div className="results-list--author-date">
-                  { promoElements.showByline && <Byline story={element} stylesFor="list" separator={promoElements.showDate} /> }
+                  { promoElements.showByline
+                    && <Byline content={element} list separator={promoElements.showDate} /> }
                   { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                 </div>
                 )}

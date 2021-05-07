@@ -37,11 +37,25 @@ class GlobalSearchResultsList extends React.Component {
       page: 1,
       value: query || '',
       placeholderResizedImageOptions: {},
+      focusItem: 0,
     };
     this.locale = getProperties(this.arcSite).locale || 'en';
     this.phrases = getTranslatedPhrases(this.locale);
     this.fetchPlaceholder();
     this.customSearchAction = props.customSearchAction || null;
+    this.listItemRefs = {};
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevFocusItem = prevState.focusItem;
+    const { focusItem, resultList } = this.state;
+
+    if (prevFocusItem === focusItem && prevFocusItem > 0) {
+      const nextItem = resultList.data[focusItem];
+      if (nextItem?._id) {
+        this.listItemRefs[nextItem._id].querySelector('a:not([aria-hidden])').focus();
+      }
+    }
   }
 
   getFallbackImageURL() {
@@ -70,12 +84,17 @@ class GlobalSearchResultsList extends React.Component {
 
   fetchStories() {
     const { globalContent } = this.props;
-    const { storedList, page } = this.state;
+    const { storedList, resultList, page } = this.state;
+    let currentCount;
     // If 'See More' button is pressed for the first time
     if (page === 1) {
       // Set initial list from globalContent data
       storedList.data = globalContent.data;
       storedList.metadata = globalContent.metadata;
+      // use storedList as index reference for focus
+      currentCount = storedList?.data?.length;
+    } else {
+      currentCount = resultList?.data?.length;
     }
     // Get results from new page
     this.state.page += 1;
@@ -97,6 +116,9 @@ class GlobalSearchResultsList extends React.Component {
           return storedList;
         },
       },
+    });
+    this.setState({
+      focusItem: currentCount,
     });
   }
 
@@ -168,15 +190,21 @@ class GlobalSearchResultsList extends React.Component {
                 : placeholderResizedImageOptions;
 
               return (
-                <SearchResult
+                <div
                   key={`result-card-${element._id}`}
-                  element={element}
-                  arcSite={arcSite}
-                  targetFallbackImage={targetFallbackImage}
-                  placeholderResizedImageOptions={placeholderResizedImageOptions}
-                  resizedImageOptions={resizedImageOptions}
-                  promoElements={promoElements}
-                />
+                  ref={(ref) => {
+                    this.listItemRefs[element._id] = ref;
+                  }}
+                >
+                  <SearchResult
+                    element={element}
+                    arcSite={arcSite}
+                    targetFallbackImage={targetFallbackImage}
+                    placeholderResizedImageOptions={placeholderResizedImageOptions}
+                    resizedImageOptions={resizedImageOptions}
+                    promoElements={promoElements}
+                  />
+                </div>
               );
             })
           }

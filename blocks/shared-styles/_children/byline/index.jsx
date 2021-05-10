@@ -11,14 +11,13 @@ const DEFAULT_FONT = 'Secondary';
 
 const Byline = (props) => {
   const {
-    globalContent = {},
     content = {},
     className = '',
     separator = false,
     list = false,
     font = DEFAULT_FONT,
   } = props;
-  const { arcSite } = useFusionContext();
+  const { arcSite, globalContent } = useFusionContext();
   const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
   const FontType = font === DEFAULT_FONT ? SecondaryFont : PrimaryFont;

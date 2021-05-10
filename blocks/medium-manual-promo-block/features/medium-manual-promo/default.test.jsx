@@ -12,6 +12,9 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({})),
+  useComponentContext: jest.fn(() => ({
+    registerSuccessEvent: () => ({}),
+  })),
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),

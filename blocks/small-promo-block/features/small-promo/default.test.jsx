@@ -36,6 +36,9 @@ jest.mock('fusion:context', () => ({
     arcSite: 'the-sun',
     id: 'testId',
   })),
+  useComponentContext: jest.fn(() => ({
+    registerSuccessEvent: () => ({}),
+  })),
 }));
 
 describe('the small promo feature', () => {

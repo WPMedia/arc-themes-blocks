@@ -281,64 +281,81 @@ describe('Given an author list', () => {
   it('should return 4 authors complete with url and bylines', () => {
     const { default: Byline } = require('./index');
 
-    const credits = {
-      by: [
-        {
-          type: 'author',
-          name: 'SangHee Kim',
-          url: '/author/sanghee-kim',
-          additional_properties: {
-            original: {
-              byline: 'SangHee Kim Byline',
-            },
-          },
-        }, {
-          type: 'author',
-          name: 'Joe Grosspietsch',
-          url: '/author/joe-grosspietsch',
-          additional_properties: {
-            original: {
-              byline: 'Joe Grosspietsch Byline',
-            },
-          },
-        }, {
-          type: 'author',
-          name: 'Brent Miller',
-          url: '/author/brent-miller',
-          additional_properties: {
-            original: {
-              byline: 'Brent Miller Byline',
-            },
-          },
-        }, {
-          type: 'author',
-          name: 'Sara Carothers',
-          url: '/author/sara-carothers',
-          additional_properties: {
-            original: {
-              byline: 'Sara Lynn Carothers',
-            },
-          },
-        }, {
-          type: 'other',
-          name: 'John Doe',
-          url: '/author/john-doe',
-          additional_properties: {
-            original: {
-              byline: 'John Doe',
-            },
-          },
-        },
-      ],
-    };
-
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
         globalContent: {
-          credits,
+          credits: {
+            by: [
+              {
+                type: 'author',
+                name: 'SangHee Kim',
+                url: '/author/sanghee-kim',
+                additional_properties: {
+                  original: {
+                    byline: 'SangHee Kim Byline',
+                  },
+                },
+              }, {
+                type: 'author',
+                name: 'Joe Grosspietsch',
+                url: '/author/joe-grosspietsch',
+                additional_properties: {
+                  original: {
+                    byline: 'Joe Grosspietsch Byline',
+                  },
+                },
+              }, {
+                type: 'author',
+                name: 'Brent Miller',
+                url: '/author/brent-miller',
+                additional_properties: {
+                  original: {
+                    byline: 'Brent Miller Byline',
+                  },
+                },
+              }, {
+                type: 'author',
+                name: 'Sara Carothers',
+                url: '/author/sara-carothers',
+                additional_properties: {
+                  original: {
+                    byline: 'Sara Lynn Carothers',
+                  },
+                },
+              }, {
+                type: 'other',
+                name: 'John Doe',
+                url: '/author/john-doe',
+                additional_properties: {
+                  original: {
+                    byline: 'John Doe',
+                  },
+                },
+              },
+            ],
+          },
         },
       })),
     }));
+
+    const creditCheck = [
+      {
+        href: '/author/sanghee-kim',
+        text: 'SangHee Kim Byline',
+      }, {
+        href: '/author/joe-grosspietsch',
+        text: 'Joe Grosspietsch Byline',
+      }, {
+        href: '/author/brent-miller',
+        text: 'Brent Miller Byline',
+      }, {
+        href: '/author/sara-carothers',
+        text: 'Sara Lynn Carothers',
+      }, {
+        href: '/author/john-doe',
+        text: 'John Doe',
+      },
+    ];
 
     const wrapper = mount(<Byline />);
     expect(
@@ -346,8 +363,8 @@ describe('Given an author list', () => {
     ).toEqual('SangHee Kim Byline, Joe Grosspietsch Byline, Brent Miller Byline and Sara Lynn Carothers');
 
     wrapper.find('span').at(1).find('a').forEach((anchor, idx) => {
-      expect(anchor.prop('href')).toEqual(credits.by[idx].url);
-      expect(anchor.text()).toEqual(credits.by[idx].additional_properties.original.byline);
+      expect(anchor.prop('href')).toEqual(creditCheck[idx].href);
+      expect(anchor.text()).toEqual(creditCheck[idx].text);
     });
   });
 

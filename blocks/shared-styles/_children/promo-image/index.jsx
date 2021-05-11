@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFusionContext, registerSuccessEvent } from 'fusion:context';
+import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
@@ -34,6 +34,7 @@ const PromoImage = ({
   lazyLoad = false,
 }) => {
   const { arcSite, isAdmin } = useFusionContext();
+  const { registerSuccessEvent } = useComponentContext();
   const promoType = showPromoLabel ? discoverPromoType(content) : null;
   const ratios = ratiosFor(promoSize, imageRatio);
 

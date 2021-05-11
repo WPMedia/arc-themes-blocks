@@ -57,4 +57,8 @@ export const useFusionContext = () => ({
   deployment: (a) => a,
 });
 
+export const useComponentContext = () => ({
+  registerSuccessEvent: () => ({}),
+})
+
 export default () => {};

@@ -19,6 +19,9 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
   })),
+  useComponentContext: jest.fn(() => ({
+    registerSuccessEvent: () => ({}),
+  })),
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => (mockData)),

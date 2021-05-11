@@ -5,9 +5,9 @@ import React from 'react';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
-import Byline from '@wpmedia/byline-block';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { Byline } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 
@@ -279,9 +279,7 @@ class CardList extends React.Component {
                     </a>
                   </HeadlineText>
                   <div className="author-date">
-                    <Byline story={contentElements[0]} stylesFor="list" />
-                    {/* separator will only be shown if there is at least one author */}
-                    { showSeparator && <p className="dot-separator">&#9679;</p> }
+                    <Byline content={contentElements[0]} list separator={showSeparator} />
                     <ArticleDate
                       classNames="story-date"
                       date={contentElements[0].display_date}

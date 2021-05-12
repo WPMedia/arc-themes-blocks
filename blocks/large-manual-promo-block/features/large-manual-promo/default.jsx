@@ -13,54 +13,56 @@ import '@wpmedia/shared-styles/scss/_large-promo.scss';
 const LargeManualPromoItem = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
-  const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
+  const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
   return (
     <>
       <article className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
-          {(customFields.showImage && customFields.imageURL)
+          {(customFields?.showImage)
             ? (
               <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
                 <PromoImage
                   {...customFields}
-                  customImageURL={customFields.imageURL}
-                  alt={customFields.headline}
+                  customImageURL={customFields?.imageURL}
+                  alt={customFields?.headline}
                   promoSize="LG"
                 />
               </div>
-            ) : null}
-          {(customFields.showHeadline || customFields.showDescription
-            || customFields.showOverline)
+            )
+            : null}
+          {(customFields?.showOverline
+            || customFields?.showHeadline
+            || customFields?.showDescription)
           && (
             <div className={textClass}>
-              {(customFields.showOverline)
+              {customFields?.showOverline
                 ? (
                   <Overline
-                    customText={customFields.overline}
-                    customUrl={customFields.overlineURL}
+                    customText={customFields?.overline}
+                    customUrl={customFields?.overlineURL}
                   />
                 )
                 : null}
-
-              {(customFields.showHeadline && customFields.headline)
+              {customFields?.showHeadline
                 ? (
                   <PromoHeadline
-                    link={customFields.linkURL}
-                    text={customFields.headline}
-                    newTab={customFields.newTab}
+                    link={customFields?.linkURL}
+                    text={customFields?.headline}
+                    newTab={customFields?.newTab}
                     headingClassName="lg-promo-headline"
                     linkClassName="lg-promo-headline"
                   />
-                ) : null}
-
-              {(customFields.showDescription && customFields.description)
+                )
+                : null}
+              {customFields?.showDescription
                 ? (
                   <PromoDescription
                     className="description-text"
-                    text={customFields.description}
+                    text={customFields?.description}
                   />
-                ) : null}
+                )
+                : null}
             </div>
           )}
         </div>
@@ -72,11 +74,11 @@ const LargeManualPromoItem = ({ customFields }) => {
 
 const LargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
       <LargeManualPromoItem customFields={{ ...customFields }} />
     </LazyLoad>
   );

@@ -87,14 +87,44 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('Image').prop('largeHeight')).toBe(533);
   });
 
-  it('should have no Image when show image is false', () => {
-    const noImgConfig = {
+  it('should have no Overline when showOverline is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showOverline: false,
+    };
+    const wrapper = mount(<ExtraLargeManualPromo customFields={specialConfig} />);
+    expect(wrapper.find('Overline')).toHaveLength(0);
+  });
+
+  it('should have no PromoHeadline when showHeadline is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showOverline: true,
+      showHeadline: false,
+    };
+    const wrapper = mount(<ExtraLargeManualPromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoHeadline')).toHaveLength(0);
+  });
+
+  it('should have no PromoImage when showImage is false', () => {
+    const specialConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
       showImage: false,
     };
-    const wrapper = mount(<ExtraLargeManualPromo customFields={noImgConfig} />);
-    expect(wrapper.find('Image')).toHaveLength(0);
+    const wrapper = mount(<ExtraLargeManualPromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoImage')).toHaveLength(0);
+  });
+
+  it('should have no PromoDescription when showDescription is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showDescription: false,
+    };
+    const wrapper = mount(<ExtraLargeManualPromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoDescription')).toHaveLength(0);
   });
 
   it('should have one line separator', () => {

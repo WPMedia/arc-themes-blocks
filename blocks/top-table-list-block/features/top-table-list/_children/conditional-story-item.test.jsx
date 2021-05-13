@@ -43,6 +43,9 @@ describe('conditional story item', () => {
       useFusionContext: jest.fn(() => ({
         arcSite: 'the-sun',
       })),
+      useComponentContext: jest.fn(() => ({
+        registerSuccessEvent: () => ({}),
+      })),
     }));
   });
   afterAll(() => {
@@ -108,6 +111,9 @@ describe('default ratios', () => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
         arcSite: 'the-sun',
+      })),
+      useComponentContext: jest.fn(() => ({
+        registerSuccessEvent: () => ({}),
       })),
     }));
     jest.mock('fusion:content', () => ({

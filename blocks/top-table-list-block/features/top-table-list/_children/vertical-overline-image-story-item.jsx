@@ -77,7 +77,7 @@ const VerticalOverlineImageStoryItem = (props) => {
                 : null}
               <div className="article-meta">
                 {customFields?.showBylineXL
-                  ? <Byline content={element} font="Primary" list />
+                  ? <Byline content={element} font="Primary" list separator={customFields.showDateXL} />
                   : null}
                 {customFields?.showDateXL
                   ? <PromoDate content={element} />

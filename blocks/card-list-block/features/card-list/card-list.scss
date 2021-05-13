@@ -56,17 +56,6 @@
   // top, horizontal, botom
   padding: 16px 16px 0;
 
-  .dot-separator {
-    color: $ui-primary-font-color;
-    display: inline-block;
-    font-size: calculateRem(14px);
-    font-size: calculateRem(10px);
-    line-height: calculateRem(16px);
-    margin: 0 map-get($spacers, 'xs');
-    position: relative;
-    top: -1px;
-  }
-
   .story-date {
     color: $ui-primary-font-color;
     display: inline;

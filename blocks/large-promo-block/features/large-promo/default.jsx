@@ -163,7 +163,7 @@ const LargePromoItem = ({ customFields }) => {
                 : null}
               <div className="article-meta">
                 {customFields?.showByline
-                  ? <Byline content={content} font="Primary" list />
+                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
                   : null}
                 {customFields?.showDate
                   ? <PromoDate content={content} />

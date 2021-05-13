@@ -83,7 +83,7 @@ const HorizontalOverlineImageStoryItem = (props) => {
                   : null}
                 <div className="article-meta">
                   {customFields?.showBylineLG
-                    ? <Byline content={element} font="Primary" list />
+                    ? <Byline content={element} font="Primary" list separator={customFields.showDateLG} />
                     : null}
                   {customFields?.showDateLG
                     ? <PromoDate content={element} />

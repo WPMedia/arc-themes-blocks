@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - "canary"
-      - "TMEDIA-207-clean-packages-failure"
 
 jobs:
   clear-packages:

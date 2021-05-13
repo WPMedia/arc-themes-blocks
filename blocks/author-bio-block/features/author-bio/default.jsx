@@ -27,14 +27,13 @@ import {
 import getProperties from 'fusion:properties';
 
 import './author-bio.scss';
+import {PrimaryFont} from "@wpmedia/shared-styles";
 
 /*
 Testing: Unit tests are written to cover this block
 */
 
 const AuthorBioStyled = styled.section`
-  font-family: ${(props) => props.primaryFont};
-
   .authorName {
     color: ${(props) => props.primaryColor};
     font-family: ${(props) => props.primaryFont};
@@ -332,13 +331,15 @@ const AuthorBioItems = () => {
   }
 
   return (
-    <AuthorBioStyled
-      className="author-bio"
-      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-      primaryColor={getThemeStyle(arcSite)['primary-color']}
-    >
-      {authors}
-    </AuthorBioStyled>
+    <PrimaryFont>
+      <AuthorBioStyled
+        className="author-bio"
+        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        primaryColor={getThemeStyle(arcSite)['primary-color']}
+      >
+        {authors}
+      </AuthorBioStyled>
+    </PrimaryFont>
   );
 };
 

@@ -113,37 +113,45 @@ const ExtraLargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
+  const videoEmbed = (customFields?.playVideoInPlace && extractVideoEmbedFromStory(content));
 
   return (
     <>
       <article className="container-fluid xl-large-promo">
         <div className="row">
-          {(customFields.showHeadline || customFields.showDescription
-            || customFields.showByline || customFields.showDate)
+          {(customFields.showOverline
+            || customFields?.showHeadline
+            || !!videoEmbed
+            || customFields?.showImage
+            || customFields?.showDescription
+            || customFields?.showByline
+            || customFields?.showDate)
           && (
             <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {(customFields.showOverline)
+              {customFields.showOverline
                 ? <Overline story={content} editable />
                 : null}
-              {customFields.showHeadline ? (
-                <PromoHeadline
-                  content={content}
-                  headingClassName="xl-promo-headline"
-                  linkClassName="xl-promo-headline"
-                />
-              ) : null}
-              {
-                (
-                  !!videoEmbed && (
-                    <VideoPlayerPresentational
-                      id={id}
-                      embedMarkup={videoEmbed}
-                      enableAutoplay={false}
-                    />
-                  )
-                ) || (
-                  customFields?.showImage ? (
+              {customFields.showHeadline
+                ? (
+                  <PromoHeadline
+                    content={content}
+                    headingClassName="xl-promo-headline"
+                    linkClassName="xl-promo-headline"
+                  />
+                )
+                : null}
+              {(!!videoEmbed
+                && (
+                  <VideoPlayerPresentational
+                    id={id}
+                    embedMarkup={videoEmbed}
+                    enableAutoplay={false}
+                  />
+                )
+              )
+                || (
+                  customFields?.showImage
+                  && (
                     <div {...searchableField('imageOverrideURL')}>
                       <PromoImage
                         content={content}
@@ -155,20 +163,18 @@ const ExtraLargePromoItem = ({ customFields }) => {
                         lazyLoad={customFields.lazyLoad}
                       />
                     </div>
-                  ) : null
-                )
-              }
-              {(customFields.showDescription ? (
-                <PromoDescription
-                  className="description-text"
-                  content={content}
-                />
-              ) : null)}
+                  )
+                )}
+              {customFields.showDescription
+                ? (<PromoDescription className="description-text" content={content} />)
+                : null}
               <div className="article-meta">
-                {(customFields.showByline) ? <Byline content={content} font="Primary" list separator={customFields.showDate} /> : null}
-                {(customFields.showDate) ? (
-                  <PromoDate content={content} />
-                ) : null}
+                {customFields.showByline
+                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
+                  : null}
+                {customFields.showDate
+                  ? <PromoDate content={content} />
+                  : null}
               </div>
             </div>
           )}
@@ -186,7 +192,7 @@ const ExtraLargePromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <ExtraLargePromoItem customFields={{ ...customFields }} />
+      <ExtraLargePromoItem customFields={customFields} />
     </LazyLoad>
   );
 };

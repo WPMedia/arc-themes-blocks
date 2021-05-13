@@ -87,6 +87,23 @@ To check if blocks are being properly linked, run:
 
   NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
 
+### Creating New Block Checklist 
+
+- [ ] Make sure it is added to the `names` field of `.github/workflows/delete-unused-canary-packages.yml`. Please add the block name (without org name WPMedia, similar to others) to the last step's name field as there can only be 20 packages per step.
+- [ ] The block has a valid file path. Please see [documentation](https://github.com/WPMedia/fusion/blob/2.7/documentation/recipes/creating-feature-component.md) for best practices around file paths and development
+- [ ] The block is locally linked to ensure tests and linking run as expected. See `package.json`'s `dependencies` field for examples
+- [ ] Your new block has a readme that describes its purpose. The `blocks/results-list-block/README.md` is pretty good.
+- [ ] Your devDependencies in the block's package.json are installed in the `Fusion-News-Theme` or elsewhere. `devDependencies` are not installed by the [Fusion block installer](https://github.com/WPMedia/fusion/blob/2.7/engine/scripts/block-installer.js#L57)
+- [ ] You have a valid `jest.config.js` in your package to ensure that any tests (and they should exist) are run
+
+```js
+// cool-new-block/jest.config.js
+const base = require('../../jest/jest.config.base');
+
+module.exports = {
+  ...base,
+};
+```
 
 ### Internationalization
 

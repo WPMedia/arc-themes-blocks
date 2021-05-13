@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete many package oldest canaries pt 1
-        uses: JackHowa/delete-github-package-versions@v0.4.9
+        uses: WPMedia/delete-github-package-versions@v0.4.10
         with:
           version-pattern: "canary"
           keep: 5
@@ -38,7 +38,7 @@ jobs:
             header-nav-chain-block
             headline-block
       - name: Delete many package oldest canaries pt 2
-        uses: JackHowa/delete-github-package-versions@v0.4.9
+        uses: WPMedia/delete-github-package-versions@v0.4.10
         with:
           version-pattern: "canary"
           keep: 5
@@ -67,7 +67,7 @@ jobs:
             shared-styles
             simple-list-block
       - name: Delete many package oldest canaries pt 3
-        uses: JackHowa/delete-github-package-versions@v0.4.9
+        uses: WPMedia/delete-github-package-versions@v0.4.10
         with:
           version-pattern: "canary"
           keep: 5
@@ -96,7 +96,7 @@ jobs:
             story-feed-sections-content-source-block
             story-feed-tag-content-source-block
       - name: Delete many package oldest canaries pt 4
-        uses: JackHowa/delete-github-package-versions@v0.4.9
+        uses: WPMedia/delete-github-package-versions@v0.4.10
         with:
           version-pattern: "canary"
           keep: 5

@@ -1,33 +1,18 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import getThemeStyle from 'fusion:themes';
+import { mount } from 'enzyme';
 import Header from './default';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open-Sans' }));
+
+const mockFusionContext = {
+  arcSite: 'the-sun',
+};
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockFusionContext),
+}));
 
 describe('The header block', () => {
-  describe('when a text prop is provided', () => {
-    const customFields = {
-      text: 'Header',
-      size: 'Extra Large',
-    };
-    const wrapper = shallow(<Header customFields={customFields} />);
-
-    it('should render a text element', () => {
-      expect(wrapper.length).toEqual(1);
-      expect(wrapper.text()).toEqual('Header');
-    });
-
-    it('should set the primary font of the header', () => {
-      expect(wrapper).toHaveProp('primaryFont', 'Open-Sans');
-    });
-
-    it('should have the appropriate class', () => {
-      expect(wrapper).toHaveProp('className', 'header-block');
-    });
-  });
-
   describe('when an Extra Large size prop is provided', () => {
     const customFields = {
       text: 'Extra Large Header',
@@ -38,7 +23,7 @@ describe('The header block', () => {
       expect(wrapper.length).toEqual(1);
       expect(wrapper.props().customFields.size).toEqual('Extra Large');
       expect(wrapper.text()).toEqual('Extra Large Header');
-      expect(wrapper.find('h2').length).toEqual(1);
+      expect(wrapper.find('.tb-header-block--extra-large').exists()).toBe(true);
     });
   });
 
@@ -52,7 +37,7 @@ describe('The header block', () => {
       expect(wrapper.length).toEqual(1);
       expect(wrapper.props().customFields.size).toEqual('Large');
       expect(wrapper.text()).toEqual('Large Header');
-      expect(wrapper.find('h3').length).toEqual(1);
+      expect(wrapper.find('.tb-header-block--large').exists()).toBe(true);
     });
   });
 
@@ -66,7 +51,7 @@ describe('The header block', () => {
       expect(wrapper.length).toEqual(1);
       expect(wrapper.props().customFields.size).toEqual('Medium');
       expect(wrapper.text()).toEqual('Medium Header');
-      expect(wrapper.find('h4').length).toEqual(1);
+      expect(wrapper.find('.tb-header-block--medium').exists()).toBe(true);
     });
   });
 
@@ -80,7 +65,7 @@ describe('The header block', () => {
       expect(wrapper.length).toEqual(1);
       expect(wrapper.props().customFields.size).toEqual('Small');
       expect(wrapper.text()).toEqual('Small Header');
-      expect(wrapper.find('h5').length).toEqual(1);
+      expect(wrapper.find('.tb-header-block--small').exists()).toBe(true);
     });
   });
 
@@ -94,7 +79,7 @@ describe('The header block', () => {
       expect(wrapper.length).toEqual(1);
       expect(wrapper.props().customFields.size).toEqual('');
       expect(wrapper.text()).toEqual('Header');
-      expect(wrapper.find('h4').length).toEqual(1);
+      expect(wrapper.find('.tb-header-block').exists()).toBe(true);
     });
   });
 
@@ -104,12 +89,8 @@ describe('The header block', () => {
       size: '',
     };
     const wrapper = mount(<Header customFields={customFields} />);
-    it('should render an empty header with no text', () => {
-      expect(wrapper.length).toEqual(1);
-      expect(wrapper.props().customFields.size).toEqual('');
-      expect(wrapper.props().customFields.text).toEqual('');
-      expect(wrapper.text()).toEqual('');
-      expect(wrapper.find('h4').length).toEqual(1);
+    it('should render null if no text', () => {
+      expect(wrapper.html()).toBe(null);
     });
   });
 });

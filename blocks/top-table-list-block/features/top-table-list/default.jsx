@@ -7,6 +7,7 @@ import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import getProperties from 'fusion:properties';
+import { HeadingSection } from '@wpmedia/shared-styles';
 import {
   EXTRA_LARGE, LARGE, MEDIUM, SMALL,
 } from './shared/storySizeConstants';
@@ -225,22 +226,23 @@ const TopTableList = (props) => {
   }
 
   return (
-    <div
-      key={id}
-      className={`top-table-list-container layout-section ${
-        onePerLine ? '' : 'wrap-bottom'
-      }`}
-    >
-      {storyTypes.map((storyType) => (
-        <div
-          key={storyType}
-          className={[
-            'top-table-list-section',
-            `top-table-list-section-${storyType.toLowerCase()}`,
-            (storiesPerRowSM && storiesPerRowSM > 1 && storyType === SMALL ? 'row' : ''),
-          ].join(' ')}
-        >
-          {
+    <HeadingSection>
+      <div
+        key={id}
+        className={`top-table-list-container layout-section ${
+          onePerLine ? '' : 'wrap-bottom'
+        }`}
+      >
+        {storyTypes.map((storyType) => (
+          <div
+            key={storyType}
+            className={[
+              'top-table-list-section',
+              `top-table-list-section-${storyType.toLowerCase()}`,
+              (storiesPerRowSM && storiesPerRowSM > 1 && storyType === SMALL ? 'row' : ''),
+            ].join(' ')}
+          >
+            {
             !!storyTypeMap[storyType]
             && storyTypeMap[storyType].map((itemObject = {}) => {
               const {
@@ -258,9 +260,10 @@ const TopTableList = (props) => {
               );
             })
           }
-        </div>
-      ))}
-    </div>
+          </div>
+        ))}
+      </div>
+    </HeadingSection>
   );
 };
 

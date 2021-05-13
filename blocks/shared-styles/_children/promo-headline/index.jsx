@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEditableContent } from 'fusion:content';
 import { useComponentContext, useFusionContext } from 'fusion:context';
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import Heading from '../headings/heading';
 
 const PromoHeadline = (props) => {
   const {
@@ -25,8 +25,7 @@ const PromoHeadline = (props) => {
 
   return linkText ? (
     <div className={`promo-headline ${className}`}>
-      <PrimaryFont
-        as="h2"
+      <Heading
         className={headingClassName}
         {...editableItem}
         suppressContentEditableWarning
@@ -40,7 +39,7 @@ const PromoHeadline = (props) => {
         >
           {linkText}
         </a>
-      </PrimaryFont>
+      </Heading>
     </div>
   ) : null;
 };

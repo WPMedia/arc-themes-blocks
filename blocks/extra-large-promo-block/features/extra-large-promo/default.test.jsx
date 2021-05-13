@@ -246,7 +246,7 @@ describe('the extra large promo feature', () => {
     const wrapper = mount(<ExtraLargePromo customFields={myConfig} />);
 
     expect(wrapper.find('Overline').length).toBe(1);
-    expect(wrapper.find('.xl-promo-headline').length).toBe(5);
+    expect(wrapper.find('.xl-promo-headline').length).toBe(6);
     expect(wrapper.find('.description-text').length).toBe(5);
     expect(wrapper.find('Byline').length).toBe(1);
     expect(wrapper.find('PromoDate').length).toBe(1);

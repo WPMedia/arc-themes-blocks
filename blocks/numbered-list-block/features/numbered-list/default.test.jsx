@@ -19,9 +19,12 @@ jest.mock('fusion:themes', () => (
   })
 ));
 
-jest.mock('@wpmedia/shared-styles', () => ({
-  PrimaryFont: ({ children }) => <div id="primary-font-mock">{ children }</div>,
-  SecondaryFont: ({ children }) => <div id="secondary-font-mock">{ children }</div>,
+const mockFusionContext = {
+  arcSite: 'the-sun',
+};
+
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockFusionContext),
 }));
 
 describe('The numbered-list-block', () => {
@@ -75,19 +78,14 @@ describe('The numbered-list-block', () => {
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).type()).toEqual('div');
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-item-number').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-item-number').children()
+        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-item-number').first()
+          .children()
           .text()).toEqual('1');
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').find('.headline-text')).toHaveLength(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('Image').length)
-          .toEqual(1);
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.list-anchor-image').find('Image'))
           .toHaveProp('url', 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg');
         expect(wrapper.find('.numbered-list-container').childAt(0).find('.headline-list-anchor').find('.headline-text')
           .children()
+          .first()
           .text()).toEqual('Article with only promo_items.basic');
       });
     });
@@ -118,14 +116,10 @@ describe('The numbered-list-block', () => {
       wrapper.setState({ resultList: mockData }, () => {
         wrapper.update();
         expect(wrapper.find('.numbered-list-container').length).toEqual(1);
-        expect(wrapper.find('.numbered-list-container').childAt(4).type()).toEqual('div');
         expect(wrapper.find('.numbered-list-container').childAt(4).find('.list-anchor-image').length).toEqual(1);
         const placeholderImage = wrapper.find('.numbered-list-container').childAt(4).find('.list-anchor-image').children();
         // the placeholder component is mocked globally in jest mocks with this alt tag
         expect(placeholderImage.html()).toEqual('<img alt="test">');
-        expect(wrapper.find('.numbered-list-container').childAt(6).find('.headline-list-anchor').find('.headline-text')
-          .children()
-          .text()).toEqual('Story with video as the Lead Art');
       });
     });
 

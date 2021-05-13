@@ -7,7 +7,7 @@ import getProperties from 'fusion:properties';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
+import { Heading, HeadingSection, SecondaryFont } from '@wpmedia/shared-styles';
 
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
@@ -120,9 +120,9 @@ class NumberedList extends Component {
     const ListResults = () => (
       <div className="numbered-list-container layout-section">
         {(title !== '' && contentElements && contentElements.length) ? (
-          <PrimaryFont as="h2" className="list-title">
+          <Heading className="list-title">
             {title}
-          </PrimaryFont>
+          </Heading>
         ) : null }
         {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
           const {
@@ -137,13 +137,13 @@ class NumberedList extends Component {
           const url = websites[arcSite].website_url;
 
           return (
-            <React.Fragment key={`numbered-list-${url}`}>
+            <HeadingSection key={`numbered-list-${url}`}>
               <div className="numbered-list-item numbered-item-margins">
                 {showHeadline
                 && (
                 <a href={url} className="headline-list-anchor">
                   <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
-                  <PrimaryFont as="h2" className="headline-text">{headlineText}</PrimaryFont>
+                  <Heading className="headline-text">{headlineText}</Heading>
                 </a>
                 )}
                 {showImage
@@ -188,7 +188,7 @@ class NumberedList extends Component {
                 )}
               </div>
               <hr />
-            </React.Fragment>
+            </HeadingSection>
           );
         }) : null}
       </div>

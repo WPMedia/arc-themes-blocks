@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
+import PropTypes from 'prop-types';
+
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 
 import { readCookie, saveCookie } from './cookies';
@@ -141,7 +143,8 @@ class AlertBar extends Component {
       return null;
     }
 
-    const { arcSite } = this.props;
+    const { arcSite, customFields } = this.props;
+    const { ariaLabel } = customFields;
     const { content_elements: elements = [] } = content;
     const article = elements[0] || {};
     const { websites = {}, headlines = {} } = article;
@@ -149,7 +152,11 @@ class AlertBar extends Component {
 
     return (
       !!content?.content_elements?.length && visible && (
-        <nav className="alert-bar" ref={this.alertRef}>
+        <nav
+          className="alert-bar"
+          ref={this.alertRef}
+          aria-label={ariaLabel || 'Breaking News Alert'}
+        >
           <AlertBarLink
             href={websiteURL}
             className="article-link"
@@ -167,5 +174,14 @@ class AlertBar extends Component {
 }
 
 AlertBar.label = 'Alert Bar – Arc Block';
+
+AlertBar.propTypes = {
+  customFields: PropTypes.shape({
+    ariaLabel: PropTypes.string.tag({
+      label: 'Aria-label',
+      default: 'Breaking News Alert',
+    }),
+  }),
+};
 
 export default AlertBar;

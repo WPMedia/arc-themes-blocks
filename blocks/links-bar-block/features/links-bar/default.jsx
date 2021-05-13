@@ -31,17 +31,22 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
       }
     }`,
   });
-  const { id, arcSite } = useFusionContext();
+  const { id, arcSite, customFields } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
   const showSeparator = !!(
     content
     && content.children
     && content.children.length > 1
   );
+  const { ariaLabel } = customFields;
 
   return (
     <>
-      <nav key={id} className="links-bar">
+      <nav
+        key={id}
+        className="links-bar"
+        aria-label={ariaLabel || 'More Links'}
+      >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan
             className="links-menu"
@@ -73,6 +78,10 @@ LinksBar.propTypes = {
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
       label: 'Navigation',
+    }),
+    ariaLabel: PropTypes.string.tag({
+      label: 'Aria-label',
+      default: 'More Links',
     }),
   }),
 };

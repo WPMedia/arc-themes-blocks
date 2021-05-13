@@ -141,6 +141,8 @@ const Nav = (props) => {
 
   const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
+  const { ariaLabel } = customFields;
+
   const mainContent = useContent({
     source: 'site-service-hierarchy',
     query: {
@@ -387,6 +389,7 @@ const Nav = (props) => {
         navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
+        aria-label={ariaLabel || 'Sections Menu'}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
@@ -489,6 +492,10 @@ Nav.propTypes = {
       label: 'Display dots between horizontal links',
       group: 'Display',
       defaultValue: true,
+    }),
+    ariaLabel: PropTypes.string.tag({
+      label: 'Aria-label',
+      default: 'Sections Menu',
     }),
     ...generateNavComponentPropTypes(),
   }),

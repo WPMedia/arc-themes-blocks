@@ -44,7 +44,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel = 'More Lin
       <nav
         key={id}
         className="links-bar"
-        aria-label={ariaLabel}
+        aria-label={ariaLabel || 'More Links'}
       >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan

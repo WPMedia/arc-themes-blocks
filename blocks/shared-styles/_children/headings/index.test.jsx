@@ -37,15 +37,15 @@ describe('HeadingSection', () => {
   it('increases the heading level for each HeadingSection', () => {
     const wrapper = mount(
       <div>
-        <Heading>h2 text</Heading>
+        <Heading>h1 text</Heading>
         <HeadingSection>
-          <Heading>h3 text</Heading>
+          <Heading>h2 text</Heading>
         </HeadingSection>
       </div>,
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<div><h1 class=\\"sc-bdVaJa bFuGRU\\">h2 text</h1><h2 class=\\"sc-bdVaJa bFuGRU\\">h3 text</h2></div>"',
+      '"<div><h1 class=\\"sc-bdVaJa bFuGRU\\">h1 text</h1><h2 class=\\"sc-bdVaJa bFuGRU\\">h2 text</h2></div>"',
     );
   });
 });

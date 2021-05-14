@@ -14,7 +14,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
+const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel = 'More Links' } }) => {
   const content = useContent({
     source: navigationConfig.contentService,
     query: {
@@ -31,21 +31,20 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
       }
     }`,
   });
-  const { id, arcSite, customFields } = useFusionContext();
+  const { id, arcSite } = useFusionContext();
   const menuItems = (content && content.children) ? content.children : [];
   const showSeparator = !!(
     content
     && content.children
     && content.children.length > 1
   );
-  const { ariaLabel } = customFields;
 
   return (
     <>
       <nav
         key={id}
         className="links-bar"
-        aria-label={ariaLabel || 'More Links'}
+        aria-label={ariaLabel}
       >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan

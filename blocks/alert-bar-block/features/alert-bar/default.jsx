@@ -175,6 +175,12 @@ class AlertBar extends Component {
 
 AlertBar.label = 'Alert Bar – Arc Block';
 
+AlertBar.defaultProps = {
+  customFields: {
+    ariaLabel: 'Breaking News Alert',
+  },
+};
+
 AlertBar.propTypes = {
   customFields: PropTypes.shape({
     ariaLabel: PropTypes.string.tag({

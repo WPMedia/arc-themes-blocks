@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  formatURL: jest.fn((input) => (input.toString())),
+  formatURL: jest.fn((input) => input.toString()),
 }));
 describe('the links bar feature for the default output type', () => {
   afterEach(() => {
@@ -39,12 +39,7 @@ describe('the links bar feature for the default output type', () => {
       <LinksBar customFields={{ navigationConfig: 'links' }} />,
     );
 
-    expect(
-      wrapper
-        .children()
-        .at(0)
-        .type(),
-    ).toBe('nav');
+    expect(wrapper.children().at(0).type()).toBe('nav');
   });
 
   it('should not have separator only one link', () => {
@@ -67,7 +62,8 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span></nav>"',
     );
   });
 
@@ -99,7 +95,8 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_3/\\" class=\\"sc-bdVaJa jLoscj\\">test link 3</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_3/\\" class=\\"sc-bdVaJa jLoscj\\">test link 3</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_3/\\" class=\\"sc-bdVaJa jLoscj\\">test link 3</a></span></nav>"',
     );
   });
 
@@ -127,7 +124,8 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span></nav>"',
+      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"[object Object]\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span></nav>"',
     );
   });
 

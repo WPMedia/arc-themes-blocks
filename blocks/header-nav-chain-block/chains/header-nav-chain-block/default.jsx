@@ -133,6 +133,7 @@ const Nav = (props) => {
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
     showHorizontalSeperatorDots,
+    ariaLabel = 'Sections Menu',
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
@@ -140,8 +141,6 @@ const Nav = (props) => {
   const navHeight = desktopNavivationStartHeight || 56;
 
   const showDotSeparators = showHorizontalSeperatorDots ?? true;
-
-  const { ariaLabel } = customFields;
 
   const mainContent = useContent({
     source: 'site-service-hierarchy',
@@ -389,7 +388,7 @@ const Nav = (props) => {
         navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
-        aria-label={ariaLabel || 'Sections Menu'}
+        aria-label={ariaLabel}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
@@ -449,6 +448,12 @@ const Nav = (props) => {
       </StyledNav>
     </>
   );
+};
+
+Nav.defaultProps = {
+  customFields: {
+    ariaLabel: 'Sections Menu',
+  },
 };
 
 /** Nav PropTypes */

@@ -27,11 +27,7 @@
       line-height: calculateRem(16px);
 
       .dot-separator {
-        color: $ui-primary-font-color;
-        display: inline-block;
-        margin: 0 map-get($spacers, 'xs');
-        position: relative;
-        top: calculateRem(-2px);
+        color: transparent;
       }
 
       .story-date {

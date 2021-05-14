@@ -15,9 +15,9 @@ const VerticalOverlineImageStoryItem = (props) => {
     customFields = {},
   } = props;
 
-  const showBottomBorder = (typeof customFields.showBottomBorderXL === 'undefined') ? true : customFields.showBottomBorderXL;
+  const showBottomBorder = (typeof customFields?.showBottomBorderXL === 'undefined') || customFields?.showBottomBorderXL;
 
-  const videoEmbed = customFields.playVideoInPlaceXL
+  const videoEmbed = customFields?.playVideoInPlaceXL
     && !!extractVideoEmbedFromStory
     && extractVideoEmbedFromStory(element);
 
@@ -25,59 +25,63 @@ const VerticalOverlineImageStoryItem = (props) => {
     <>
       <article className="container-fluid xl-large-promo" key={id}>
         <div className="promo-item-margins row xl-promo-padding-bottom">
-          {(customFields.showHeadlineXL
-            || customFields.showDescriptionXL
-            || customFields.showBylineXL
-            || customFields.showDateXL) && (
+          {(customFields?.showHeadlineXL
+            || !!videoEmbed
+            || customFields?.showImageXL
+            || customFields?.showDescriptionXL
+            || customFields?.showBylineXL
+            || customFields?.showDateXL)
+          && (
             <div className="col-sm-xl-12 flex-col">
-                {customFields.showOverlineXL ? (
-                  <Overline
-                    story={element}
-                    className="overline"
-                    editable
-                  />
-                ) : null}
-                {customFields.showHeadlineXL ? (
+              {customFields?.showOverlineXL
+                ? <Overline story={element} className="overline" editable />
+                : null}
+              {customFields?.showHeadlineXL
+                ? (
                   <PromoHeadline
                     content={element}
                     headingClassName="xl-promo-headline"
                     linkClassName="xl-promo-headline"
                     editable={false}
                   />
-                ) : null}
-              { customFields.showImageXL && (
-                <>
-                  {(
-                    !!videoEmbed && (
-                      <VideoPlayerPresentational
-                        id={id}
-                        embedMarkup={videoEmbed}
-                        enableAutoplay={false}
-                      />
-                    )
-                  ) || (
-                    <PromoImage
-                      content={element}
-                      showPromoLabel
-                      promoSize="XL"
-                      promoLabelSize="large"
-                      imageRatio={customFields.imageRatioXL}
-                    />
-                  )}
-                </>
+                )
+                : null}
+              {(!!videoEmbed
+                && (
+                  <VideoPlayerPresentational
+                    id={id}
+                    embedMarkup={videoEmbed}
+                    enableAutoplay={false}
+                  />
+                )
+              ) || (
+                customFields?.showImageXL
+                && (
+                  <PromoImage
+                    content={element}
+                    showPromoLabel
+                    promoSize="XL"
+                    promoLabelSize="large"
+                    imageRatio={customFields?.imageRatioXL}
+                  />
+                )
               )}
-              {customFields.showDescriptionXL ? (
-                <PromoDescription
-                  content={element}
-                  className="description-text"
-                  editable={false}
-                />
-              ) : null}
+              {customFields?.showDescriptionXL
+                ? (
+                  <PromoDescription
+                    content={element}
+                    className="description-text"
+                    editable={false}
+                  />
+                )
+                : null}
               <div className="article-meta">
-                {customFields.showBylineXL ? <Byline content={element} font="Primary" list /> : null}
-                {customFields.showDateXL ? (
-                  <PromoDate content={element} />
-                ) : null}
+                {customFields?.showBylineXL
+                  ? <Byline content={element} font="Primary" list separator={customFields.showDateXL} />
+                  : null}
+                {customFields?.showDateXL
+                  ? <PromoDate content={element} />
+                  : null}
               </div>
             </div>
           )}

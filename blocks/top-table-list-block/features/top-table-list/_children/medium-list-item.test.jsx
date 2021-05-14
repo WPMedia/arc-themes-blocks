@@ -82,6 +82,9 @@ describe('medium list item', () => {
         arcSite: 'the-sun',
         globalContent: {},
       })),
+      useComponentContext: jest.fn(() => ({
+        registerSuccessEvent: () => ({}),
+      })),
     }));
   });
 

@@ -64,16 +64,6 @@
         line-height: calculateRem(16px);
       }
     }
-
-    .dot-separator {
-      color: $ui-primary-font-color;
-      display: inline-block;
-      font-size: calculateRem(14px);
-      line-height: calculateRem(14px);
-      margin: 0 map-get($spacers, 'xs');
-      position: relative;
-      top: calculateRem(-2px);
-    }
   }
 
   .flex-col {

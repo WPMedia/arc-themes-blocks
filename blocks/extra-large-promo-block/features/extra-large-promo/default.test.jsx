@@ -43,6 +43,9 @@ const mockFusionContext = {
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockFusionContext),
+  useComponentContext: jest.fn(() => ({
+    registerSuccessEvent: () => ({}),
+  })),
 }));
 
 describe('the extra large promo feature', () => {
@@ -93,14 +96,64 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('Image')).toHaveLength(1);
   });
 
-  it('should have no Image when show image is false', () => {
-    const noImgConfig = {
+  it('should have no Overline when showOverline is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showOverline: false,
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('Overline')).toHaveLength(0);
+  });
+
+  it('should have no PromoHeadline when showHeadline is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showOverline: true,
+      showHeadline: false,
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoHeadline')).toHaveLength(0);
+  });
+
+  it('should have no PromoImage when showImage is false', () => {
+    const specialConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
       showImage: false,
     };
-    const wrapper = mount(<ExtraLargePromo customFields={noImgConfig} />);
-    expect(wrapper.find('Image')).toHaveLength(0);
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoImage')).toHaveLength(0);
+  });
+
+  it('should have no PromoDescription when showDescription is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showDescription: false,
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoDescription')).toHaveLength(0);
+  });
+
+  it('should have no Byline when showByline is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showByline: false,
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('Byline')).toHaveLength(0);
+  });
+
+  it('should have no PromoDate when showDate is false', () => {
+    const specialConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: true,
+      showDate: false,
+    };
+    const wrapper = mount(<ExtraLargePromo customFields={specialConfig} />);
+    expect(wrapper.find('PromoDate')).toHaveLength(0);
   });
 
   it('should have by default an 4:3 image ratio', () => {

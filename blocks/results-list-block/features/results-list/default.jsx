@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React, { Component } from 'react';
-import Byline from '@wpmedia/byline-block';
+
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -11,6 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { Byline } from '@wpmedia/shared-styles';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
@@ -274,7 +275,6 @@ class ResultsList extends Component {
             description: { basic: descriptionText } = {},
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
-            credits: { by } = {},
             promo_items: promoItems,
             websites,
           } = element;
@@ -283,7 +283,6 @@ class ResultsList extends Component {
             return null;
           }
 
-          const showSeparator = by && by.length !== 0;
           const url = websites[arcSite].website_url;
           return (
             <div
@@ -370,9 +369,8 @@ class ResultsList extends Component {
                 )}
                 { (promoElements.showDate || promoElements.showByline) && (
                 <div className="results-list--author-date">
-                  { promoElements.showByline && <Byline story={element} stylesFor="list" /> }
-                  {/* The Separator will only be shown if there is at least one author name */}
-                  { promoElements.showByline && showSeparator && promoElements.showDate && <p className="dot-separator">&#9679;</p> }
+                  { promoElements.showByline
+                    && <Byline content={element} list separator={promoElements.showDate} /> }
                   { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                 </div>
                 )}

@@ -36,6 +36,9 @@ const mockFusionContext = {
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockFusionContext),
+  useComponentContext: jest.fn(() => ({
+    registerSuccessEvent: () => ({}),
+  })),
 }));
 
 jest.mock('fusion:content', () => ({

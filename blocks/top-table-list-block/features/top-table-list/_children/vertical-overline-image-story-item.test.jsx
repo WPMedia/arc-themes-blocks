@@ -75,6 +75,9 @@ describe('vertical overline image story item', () => {
         arcSite: 'the-sun',
         globalContent: {},
       })),
+      useComponentContext: jest.fn(() => ({
+        registerSuccessEvent: () => ({}),
+      })),
     }));
     jest.mock('fusion:content', () => ({
       useEditableContent: jest.fn(() => ({ editableContent: () => ({ contentEditable: 'true' }) })),

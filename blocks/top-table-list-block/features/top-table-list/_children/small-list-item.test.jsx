@@ -53,6 +53,9 @@ describe('small image block', () => {
         arcSite: 'the-sun',
         globalContent: {},
       })),
+      useComponentContext: jest.fn(() => ({
+        registerSuccessEvent: () => ({}),
+      })),
     }));
   });
 

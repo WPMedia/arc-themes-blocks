@@ -12,7 +12,7 @@ const MediumManualPromoItem = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
-  const hasImage = customFields.showImage && customFields.imageURL;
+  const hasImage = customFields?.showImage && customFields?.imageURL;
 
   return (
     <>
@@ -21,40 +21,32 @@ const MediumManualPromoItem = ({ customFields }) => {
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
           {...searchableField('imageURL')}
         >
-          {(customFields.showImage && customFields.imageURL)
+          {customFields?.showImage
             ? (
               <div className="image-link">
                 <PromoImage
                   {...customFields}
-                  customImageURL={customFields.imageURL}
-                  alt={customFields.headline}
+                  customImageURL={customFields?.imageURL}
+                  alt={customFields?.headline}
                   promoSize="MD"
                 />
               </div>
-            ) : null}
-
-          {(customFields.showHeadline || customFields.showDescription)
-          && (
-            <>
-              {(customFields.showHeadline)
-                ? (
-                  <PromoHeadline
-                    link={customFields.linkURL}
-                    text={customFields.headline}
-                    newTab={customFields.newTab}
-                    headingClassName="md-promo-headline-text"
-                    className="md-promo-headline"
-                  />
-                ) : null}
-              {(customFields.showDescription && customFields.description)
-                ? (
-                  <PromoDescription
-                    className="description-text"
-                    text={customFields.description}
-                  />
-                ) : null}
-            </>
-          )}
+            )
+            : null}
+          {customFields?.showHeadline
+            ? (
+              <PromoHeadline
+                link={customFields?.linkURL}
+                text={customFields?.headline}
+                newTab={customFields?.newTab}
+                headingClassName="md-promo-headline-text"
+                className="md-promo-headline"
+              />
+            )
+            : null}
+          {customFields?.showDescription
+            ? <PromoDescription className="description-text" text={customFields?.description} />
+            : null}
         </div>
       </article>
       <hr />
@@ -64,11 +56,11 @@ const MediumManualPromoItem = ({ customFields }) => {
 
 const MediumManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
       <MediumManualPromoItem customFields={{ ...customFields }} />
     </LazyLoad>
   );

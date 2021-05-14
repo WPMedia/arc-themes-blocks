@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Delete many package oldest canaries pt 1
         uses: WPMedia/delete-github-package-versions@v0.4.10
+        continue-on-error: true
         with:
           version-pattern: "canary"
           keep: 5
@@ -39,6 +40,7 @@ jobs:
             headline-block
       - name: Delete many package oldest canaries pt 2
         uses: WPMedia/delete-github-package-versions@v0.4.10
+        continue-on-error: true
         with:
           version-pattern: "canary"
           keep: 5
@@ -68,6 +70,7 @@ jobs:
             simple-list-block
       - name: Delete many package oldest canaries pt 3
         uses: WPMedia/delete-github-package-versions@v0.4.10
+        continue-on-error: true
         with:
           version-pattern: "canary"
           keep: 5
@@ -97,6 +100,7 @@ jobs:
             story-feed-tag-content-source-block
       - name: Delete many package oldest canaries pt 4
         uses: WPMedia/delete-github-package-versions@v0.4.10
+        continue-on-error: true
         with:
           version-pattern: "canary"
           keep: 5
@@ -112,3 +116,6 @@ jobs:
             event-tester-block
             ad-taboola-bloc
             a11y-testing-block
+      - name: The job has failed, likely due to rate-limiting
+        if: ${{ failure() }}
+        run: exit 1

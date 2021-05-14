@@ -10,7 +10,7 @@ export default {
 };
 
 export const heading = () => (
-  <Heading>Heading Level 2</Heading>
+  <Heading>Heading Level 1</Heading>
 );
 
 export const nestedHeadings = () => (

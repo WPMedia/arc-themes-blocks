@@ -6,6 +6,7 @@ import { useFusionContext } from 'fusion:context';
 import { localizeDate } from '@wpmedia/engine-theme-sdk';
 
 // styles
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import MastheadItemsContainer from './_children/MastheadItemsContainer';
 import HeightConstrainedImageContainer from './_children/HeightConstrainedImageContainer';
 import StyledLink from './_children/StyledLink';
@@ -39,21 +40,23 @@ const Masthead = (props) => {
          </HeightConstrainedImageContainer>
          )
       }
-      <MastheadItemsContainer primaryFont={primaryFont}>
-        <div>
-          {showDate && <p className="masthead-block--text">{displayDate}</p>}
-        </div>
-        <div>
-          {tagLine && <p className="masthead-block--text">{tagLine}</p>}
-        </div>
-        <div>
-          {promoLinkURL && promoLinkText && (
-          <StyledLink primaryFont={primaryFont} href={promoLinkURL} className="masthead-block--text">
-            {promoLinkText}
-          </StyledLink>
-          )}
-        </div>
-      </MastheadItemsContainer>
+      <PrimaryFont>
+        <MastheadItemsContainer primaryFont={primaryFont}>
+          <div>
+            {showDate && <p className="masthead-block--text">{displayDate}</p>}
+          </div>
+          <div>
+            {tagLine && <p className="masthead-block--text">{tagLine}</p>}
+          </div>
+          <div>
+            {promoLinkURL && promoLinkText && (
+            <StyledLink primaryFont={primaryFont} href={promoLinkURL} className="masthead-block--text">
+              {promoLinkText}
+            </StyledLink>
+            )}
+          </div>
+        </MastheadItemsContainer>
+      </PrimaryFont>
       <GenericDivider color="#000A12" size={2} />
     </HeaderContainerHideMobile>
   );

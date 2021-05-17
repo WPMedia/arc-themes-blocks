@@ -133,7 +133,7 @@ const Nav = (props) => {
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
     showHorizontalSeperatorDots,
-    ariaLabel
+    ariaLabel,
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';

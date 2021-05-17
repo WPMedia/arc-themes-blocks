@@ -1,6 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Navigation from './default';

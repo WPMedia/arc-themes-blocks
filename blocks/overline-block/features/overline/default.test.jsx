@@ -44,7 +44,7 @@ describe('overline feature for default output type', () => {
     it('should dangerously set the inner HTML to the website_section content', () => {
       const wrapper = shallow(<Overline />);
 
-      expect(wrapper.text()).toMatch('News');
+      expect(wrapper.children(0).text()).toMatch('News');
     });
 
     it('should set a styled component class on the rendered a', () => {
@@ -101,7 +101,7 @@ describe('overline feature for default output type', () => {
       it('should display the label name instead of the website section name', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.text()).toMatch('EXCLUSIVE');
+        expect(wrapper.children(0).text()).toMatch('EXCLUSIVE');
       });
     });
 
@@ -123,14 +123,14 @@ describe('overline feature for default output type', () => {
       it('should display the label name instead of the website section name', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.text()).toMatch('EXCLUSIVE');
+        expect(wrapper.children(0).text()).toMatch('EXCLUSIVE');
       });
 
       it('should render as text', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.at(0).prop('className')).toEqual('overline');
-        expect(wrapper.at(0).prop('href')).toBeFalsy();
+        expect(wrapper.children(0).prop('className')).toEqual('overline');
+        expect(wrapper.children(0).prop('href')).toBeFalsy();
       });
     });
 
@@ -151,14 +151,14 @@ describe('overline feature for default output type', () => {
 
       it('should display the label name instead of the website section name', () => {
         const wrapper = shallow(<Overline />);
-        expect(wrapper.text()).toMatch('EXCLUSIVE');
+        expect(wrapper.children(0).text()).toMatch('EXCLUSIVE');
       });
 
       it('should render as text', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.at(0).prop('className')).toEqual('overline');
-        expect(wrapper.at(0).prop('href')).toBeFalsy();
+        expect(wrapper.children(0).prop('className')).toEqual('overline');
+        expect(wrapper.children(0).prop('href')).toBeFalsy();
       });
     });
 
@@ -181,7 +181,7 @@ describe('overline feature for default output type', () => {
       it('should dangerously set the inner HTML to the website_section content', () => {
         const wrapper = shallow(<Overline />);
 
-        expect(wrapper.text()).toMatch('News');
+        expect(wrapper.children(0).text()).toMatch('News');
       });
     });
 

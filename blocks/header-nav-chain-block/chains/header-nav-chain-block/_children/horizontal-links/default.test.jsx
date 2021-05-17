@@ -180,4 +180,32 @@ describe('the links bar feature for the default output type', () => {
 
     expect(wrapper.find('nav > span')).toHaveLength(0);
   });
+
+  it('should render the block with the default aria-label', () => {
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [],
+      })),
+    }));
+    const { default: LinksBar } = require('./default');
+    const wrapper = shallow(
+      <LinksBar />,
+    );
+
+    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Top Links');
+  });
+
+  it('should render the block with the custom aria-label', () => {
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [],
+      })),
+    }));
+    const { default: LinksBar } = require('./default');
+    const wrapper = shallow(
+      <LinksBar customFields={{ ariaLabel: 'Links' }} />,
+    );
+
+    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
+  });
 });

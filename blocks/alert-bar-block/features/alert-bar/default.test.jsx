@@ -298,4 +298,62 @@ describe('when add the alert to main section', () => {
 
     expect(wrapping.find('.page-header').html()).toMatch(/class="page-header"/);
   });
+
+  it('should render the block with the default aria-label', () => {
+    const { default: AlertBar } = require('./default');
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched: new Promise((r) => r(content)),
+    });
+    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
+    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Breaking News Alert');
+  });
+
+  it('should render the block with the custom aria-label', () => {
+    const { default: AlertBar } = require('./default');
+    const content = {
+      _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
+      type: 'collection',
+      content_elements:
+        [{
+          _id: '55FCWHR6SRCQ3OIJJKWPWUGTBM',
+          headlines: {
+            basic: 'This is a test headline',
+          },
+          websites: {
+            'the-sun': {
+              website_url: '/2019/12/02/baby-panda-born-at-the-zoo/',
+            },
+          },
+        }],
+    };
+
+    AlertBar.prototype.getContent = jest.fn().mockReturnValue({
+      cached: content,
+      fetched: new Promise((r) => r(content)),
+    });
+    const wrapper = shallow(<AlertBar arcSite="the-sun" customFields={{ ariaLabel: 'Breaking News' }} />);
+    jest.advanceTimersByTime(1000);
+    wrapper.update();
+    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Breaking News');
+  });
 });

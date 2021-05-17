@@ -450,7 +450,6 @@ const Nav = (props) => {
   );
 };
 
-
 /** Nav PropTypes */
 
 Nav.propTypes = {

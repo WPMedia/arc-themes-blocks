@@ -450,11 +450,6 @@ const Nav = (props) => {
   );
 };
 
-Nav.defaultProps = {
-  customFields: {
-    ariaLabel: 'Sections Menu',
-  },
-};
 
 /** Nav PropTypes */
 

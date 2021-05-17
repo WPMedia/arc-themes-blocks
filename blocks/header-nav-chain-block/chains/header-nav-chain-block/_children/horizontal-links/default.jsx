@@ -18,7 +18,7 @@ const LinkBarSpan = styled.span`
 `;
 
 const HorizontalLinksBar = ({
-  hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: ariaLabel = 'Top Links',
+  hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: { ariaLabel = 'Top Links' } = {},
 }) => {
   const { id, arcSite } = useFusionContext();
 

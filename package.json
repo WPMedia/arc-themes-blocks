@@ -101,6 +101,7 @@
     "@wpmedia/gallery-block": "file:blocks/gallery-block",
     "@wpmedia/global-phrases-block": "file:blocks/global-phrases-block",
     "@wpmedia/header-block": "file:blocks/header-block",
+    "@wpmedia/header-chain-block": "file:blocks/header-chain-block",
     "@wpmedia/header-nav-block": "file:blocks/header-nav-block",
     "@wpmedia/header-nav-chain-block": "file:blocks/header-nav-chain-block",
     "@wpmedia/headline-block": "file:blocks/headline-block",

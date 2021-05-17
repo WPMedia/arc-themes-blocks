@@ -1,0 +1,32 @@
+{
+  "name": "@wpmedia/header-chain-block",
+  "version": "5.11.1",
+  "description": "Header Chain block",
+  "author": "Matthew Roach <matthew.roach@washpost.com>",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/header-chain-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+    "@wpmedia/shared-styles": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  },
+  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+}

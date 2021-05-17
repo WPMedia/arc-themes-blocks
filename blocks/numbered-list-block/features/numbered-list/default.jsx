@@ -118,35 +118,36 @@ class NumberedList extends Component {
     const targetFallbackImage = this.getFallbackImageURL();
 
     const ListResults = () => (
-      <div className="numbered-list-container layout-section">
-        {(title !== '' && contentElements && contentElements.length) ? (
-          <Heading className="list-title">
-            {title}
-          </Heading>
-        ) : null }
-        {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
-          const {
-            headlines: { basic: headlineText } = {},
-            promo_items: promoItems,
-            websites,
-          } = element;
+      <HeadingSection>
+        <div className="numbered-list-container layout-section">
+          {(title !== '' && contentElements && contentElements.length) ? (
+            <Heading className="list-title">
+              {title}
+            </Heading>
+          ) : null }
+          {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
+            const {
+              headlines: { basic: headlineText } = {},
+              promo_items: promoItems,
+              websites,
+            } = element;
 
-          if (!websites[arcSite]) {
-            return null;
-          }
-          const url = websites[arcSite].website_url;
+            if (!websites[arcSite]) {
+              return null;
+            }
+            const url = websites[arcSite].website_url;
 
-          return (
-            <HeadingSection key={`numbered-list-${url}`}>
-              <div className="numbered-list-item numbered-item-margins">
-                {showHeadline
+            return (
+              <HeadingSection key={`numbered-list-${url}`}>
+                <div className="numbered-list-item numbered-item-margins">
+                  {showHeadline
                 && (
                 <a href={url} className="headline-list-anchor">
                   <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
                   <Heading className="headline-text">{headlineText}</Heading>
                 </a>
                 )}
-                {showImage
+                  {showImage
                 && (
                 <a
                   href={url}
@@ -186,12 +187,13 @@ class NumberedList extends Component {
                   )}
                 </a>
                 )}
-              </div>
-              <hr />
-            </HeadingSection>
-          );
-        }) : null}
-      </div>
+                </div>
+                <hr />
+              </HeadingSection>
+            );
+          }) : null}
+        </div>
+      </HeadingSection>
     );
 
     return (

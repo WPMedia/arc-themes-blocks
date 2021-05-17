@@ -143,7 +143,7 @@ class AlertBar extends Component {
       return null;
     }
 
-    const { arcSite, customFields } = this.props;
+    const { arcSite, customFields = {} } = this.props;
     const { ariaLabel } = customFields;
     const { content_elements: elements = [] } = content;
     const article = elements[0] || {};

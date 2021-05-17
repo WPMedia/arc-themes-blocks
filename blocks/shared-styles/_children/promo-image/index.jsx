@@ -3,7 +3,7 @@ import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { PromoLabel } from '@wpmedia/shared-styles';
 import discoverPromoType from './discover';
@@ -41,7 +41,8 @@ const PromoImage = ({
   let imageConfig = null;
   if (
     (customImageURL && lazyLoad)
-    || (customImageURL && isAdmin)) {
+    || (customImageURL && isAdmin)
+    || (customImageURL && !isServerSide())) {
     imageConfig = 'resize-image-api-client';
   } else if (customImageURL) {
     imageConfig = 'resize-image-api';

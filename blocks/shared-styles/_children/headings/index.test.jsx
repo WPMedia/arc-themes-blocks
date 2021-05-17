@@ -13,7 +13,7 @@ jest.mock('fusion:context', () => ({
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 describe('Heading', () => {
-  it('should render as a h2', () => {
+  it('should render as a h1', () => {
     const wrapper = mount(<Heading />);
 
     expect(wrapper.html()).toMatchInlineSnapshot(
@@ -23,7 +23,7 @@ describe('Heading', () => {
 });
 
 describe('HeadingSection', () => {
-  it('should render as a h3', () => {
+  it('should render as a h2', () => {
     const wrapper = mount(
       <HeadingSection>
         <Heading />

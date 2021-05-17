@@ -6,15 +6,14 @@ import { useEditableContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';
 import { formatURL } from '@wpmedia/engine-theme-sdk';
 import './overline.scss';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const StyledLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
 
 const StyledText = styled.span`
-  font-family: ${(props) => props.primaryFont};
   font-weight: bold;
   text-decoration: none;
 `;
@@ -58,28 +57,32 @@ const Overline = (props) => {
 
   if (url) {
     return (
-      <StyledLink
-        href={formatURL(url)}
-        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className="overline"
-        {...edit}
-        suppressContentEditableWarning
-      >
-        {text}
-      </StyledLink>
+      <PrimaryFont>
+        <StyledLink
+          href={formatURL(url)}
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          className="overline"
+          {...edit}
+          suppressContentEditableWarning
+        >
+          {text}
+        </StyledLink>
+      </PrimaryFont>
     );
   }
 
   if (text) {
     return (
-      <StyledText
-        primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-        className="overline"
-        {...edit}
-        suppressContentEditableWarning
-      >
-        {text}
-      </StyledText>
+      <PrimaryFont>
+        <StyledText
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          className="overline"
+          {...edit}
+          suppressContentEditableWarning
+        >
+          {text}
+        </StyledText>
+      </PrimaryFont>
     );
   }
 

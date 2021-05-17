@@ -46,9 +46,14 @@ const BlockFeature = () => (
 
 <Props of={HeadingSection} />
 
-
 The `<HeadingSection>` component should be used to wrap all `<Heading>` components
 that should not be the page title.
+
+The `<HeadingSection>` component will increase the heading element value each time
+it is used. If you are making a feature that has a heading to be output as a title
+for a group of stories then using the `<HeadingSection>` will increase the
+`<Heading>` items for you providing you correct hierarchy output of headings.
+
 
 ```jsx
 
@@ -56,7 +61,13 @@ import Heading from '@wpmedia/shared-styles';
 
 const SectionBlockFeature = () => (
   <HeadingSection>
-    <Heading>Section Heading</Heading>
+    <Heading>Latest Stories</Heading>
+    <HeadingSection>
+      <Heading>Save the clock tower</Heading>
+      <p>...</p>
+      <Heading>Mayor voting this Friday</Heading>
+      <p>...</p>
+    </HeadingSection>
   </HeadingSection>
 )
 

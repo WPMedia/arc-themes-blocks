@@ -27,7 +27,7 @@ import {
 import getProperties from 'fusion:properties';
 
 import './author-bio.scss';
-import {PrimaryFont} from "@wpmedia/shared-styles";
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 /*
 Testing: Unit tests are written to cover this block

@@ -14,7 +14,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel = 'More Links' } }) => {
+const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
   const content = useContent({
     source: navigationConfig.contentService,
     query: {
@@ -80,7 +80,7 @@ LinksBar.propTypes = {
     }),
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
-      default: 'More Links',
+      defaultValue: 'More Links',
     }),
   }),
 };

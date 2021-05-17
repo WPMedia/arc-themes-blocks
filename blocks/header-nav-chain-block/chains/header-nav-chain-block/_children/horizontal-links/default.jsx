@@ -18,7 +18,7 @@ const LinkBarSpan = styled.span`
 `;
 
 const HorizontalLinksBar = ({
-  hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: { ariaLabel = 'Top Links' } = {},
+  hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: { ariaLabel } = {},
 }) => {
   const { id, arcSite } = useFusionContext();
 
@@ -55,7 +55,7 @@ const HorizontalLinksBar = ({
       <nav
         key={id}
         className="horizontal-links-bar"
-        aria-label={ariaLabel}
+        aria-label={ariaLabel || 'Top Links'}
       >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan
@@ -93,7 +93,7 @@ HorizontalLinksBar.propTypes = {
   customFields: PropTypes.shape({
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
-      default: 'Top Links',
+      defaultValue: 'Top Links',
     }),
   }),
 };

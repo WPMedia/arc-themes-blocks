@@ -179,7 +179,7 @@ AlertBar.propTypes = {
   customFields: PropTypes.shape({
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
-      default: 'Breaking News Alert',
+      defaultValue: 'Breaking News Alert',
     }),
   }),
 };

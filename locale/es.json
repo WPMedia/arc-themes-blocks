@@ -1,0 +1,40 @@
+{
+  "shared-styles": {
+    "promo-label.gallery-text": "Galería",
+    "promo-label.video-text": "Video",
+    "byline.by-text": "Por",
+    "byline.and-text": "y"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "Corrección",
+    "article-body-block.clarification": "Aclaración"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "Conectar"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "Expandir",
+    "global.gallery-page-count-text": "%{current} de %{total}",
+    "global.gallery-autoplay-button": "Reproducción automática",
+    "global.gallery-pause-autoplay-button": "Pausar reproducción automática",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Sections",
+    "header-nav-block.sign-in-button": "Sign In",
+    "header-nav-block.search-text": "Search"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "Secciones",
+    "header-nav-chain-block.search-text": "Buscar"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "Ver más"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "Buscar",
+    "search-results-block.search-result-number": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
+    "search-results-block.see-more-button": "Ver más"
+  }
+}

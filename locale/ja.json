@@ -1,0 +1,40 @@
+{
+  "shared-styles": {
+    "promo-label.gallery-text": "ギャラリー",
+    "promo-label.video-text": "ビデオ",
+    "byline.by-text": "担当者：",
+    "byline.and-text": "및"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "修正",
+    "article-body-block.clarification": "説明"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "接続"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "展開",
+    "global.gallery-page-count-text": "%{current} / %{total}",
+    "global.gallery-autoplay-button": "自動再生",
+    "global.gallery-pause-autoplay-button": "自動再生の一時停止",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Sections",
+    "header-nav-block.sign-in-button": "Sign In",
+    "header-nav-block.search-text": "Search"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "セクション",
+    "header-nav-chain-block.search-text": "検索"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "詳細"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "検索",
+    "search-results-block.search-result-number": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
+    "search-results-block.see-more-button": "詳細"
+  }
+}

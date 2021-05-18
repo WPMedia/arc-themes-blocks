@@ -1,0 +1,40 @@
+{
+  "shared-styles": {
+    "promo-label.gallery-text": "Bildspel",
+    "promo-label.video-text": "Video",
+    "byline.by-text": "Av",
+    "byline.and-text": "och"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "Korrektion",
+    "article-body-block.clarification": "Klargörande"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "Följ"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "Förstora",
+    "global.gallery-page-count-text": "%{current} av %{total}",
+    "global.gallery-autoplay-button": "Spela upp",
+    "global.gallery-pause-autoplay-button": "Pausa",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Meny",
+    "header-nav-block.sign-in-button": "Logga in",
+    "header-nav-block.search-text": "Sök"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "Meny",
+    "header-nav-chain-block.search-text": "Sök"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "Fler artiklar"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "Sök",
+    "search-results-block.search-result-number": "%{smart_count} resultat för ”%{searchTerm}”",
+    "search-results-block.see-more-button": "Fler artiklar"
+  }
+}

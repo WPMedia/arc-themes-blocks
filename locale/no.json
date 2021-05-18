@@ -1,0 +1,40 @@
+{
+  "shared-styles": {
+    "promo-label.gallery-text": "Bildegalleri",
+    "promo-label.video-text": "Video",
+    "byline.by-text": "Av",
+    "byline.and-text": "og"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "Korreksjon",
+    "article-body-block.clarification": "Avklaring"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "Kontakt"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "Utvid",
+    "global.gallery-page-count-text": "%{current} av %{total}",
+    "global.gallery-autoplay-button": "Spill av",
+    "global.gallery-pause-autoplay-button": "Stopp",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Meny",
+    "header-nav-block.sign-in-button": "Logg inn",
+    "header-nav-block.search-text": "Søk"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "Meny",
+    "header-nav-chain-block.search-text": "Søk"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "Se mer"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "Søk",
+    "search-results-block.search-result-number": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+    "search-results-block.see-more-button": "Se mer"
+  }
+}

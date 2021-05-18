@@ -1,0 +1,40 @@
+{
+  "shared-styles": {
+    "promo-label.gallery-text": "갤러리",
+    "promo-label.video-text": "비디오",
+    "byline.by-text": "저작자",
+    "byline.and-text": "및"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "정정",
+    "article-body-block.clarification": "설명"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "연결"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "더보기",
+    "global.gallery-page-count-text": "%{current}/%개 보는 %{total}",
+    "global.gallery-autoplay-button": "자동 재생",
+    "global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Sections",
+    "header-nav-block.sign-in-button": "Sign In",
+    "header-nav-block.search-text": "Search"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "섹션",
+    "header-nav-chain-block.search-text": "검색"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "자세히 보기"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "검색",
+    "search-results-block.search-result-number": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
+    "search-results-block.see-more-button": "자세히 보기"
+  }
+}

@@ -6,13 +6,10 @@ import getThemeStyle from 'fusion:themes';
 import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 // aspect ratio for video player engine theme sdk
 const RATIO = 0.5625;
-
-const TitleText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
@@ -71,12 +68,13 @@ const VideoPromo = ({ customFields }) => {
             )}
           {title
             && (
-            <TitleText
+            <PrimaryFont
+              as="h2"
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               className="xl-promo-headline"
             >
               {title}
-            </TitleText>
+            </PrimaryFont>
             )}
           <Video
             uuid={videoId}

@@ -18,7 +18,8 @@
     "global.gallery-autoplay-button": "Reproducción automática",
     "global.gallery-pause-autoplay-button": "Pausar reproducción automática",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Sections",

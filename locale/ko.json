@@ -18,7 +18,8 @@
     "global.gallery-autoplay-button": "자동 재생",
     "global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Sections",

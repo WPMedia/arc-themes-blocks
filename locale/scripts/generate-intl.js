@@ -34,5 +34,6 @@ blockNames.forEach((key) => {
       blockOutputMap[item][l] = fileMappings[l][key][item];
     });
   });
+
   fs.writeFileSync(`./blocks/${key}/intl.json`, JSON.stringify(blockOutputMap));
 });

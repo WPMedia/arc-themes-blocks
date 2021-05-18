@@ -144,9 +144,9 @@ describe('VideoPlayer', () => {
 
     // todo: write snapshot or styled components style checks for this
     // would be better with checking text via rtl
-    const expectedAlertBadge = '<span class="sc-htpNat kimIwH">Test Alert  Badge</span>';
-    const expectedTitle = '<h2 class="sc-bdVaJa jbIaBK xl-promo-headline">Test Title</h2>';
-    const expectedDescription = '<p class="sc-bwzfXH gfyHkX description-text">Test Description</p>';
+    const expectedAlertBadge = '<span class="sc-bZQynM kYPPZY">Test Alert  Badge</span>';
+    const expectedTitle = '<h2 class="sc-bdVaJa nAQSq xl-promo-headline">Test Title</h2>';
+    const expectedDescription = '<p class="sc-EHOje gSSoLN description-text">Test Description</p>';
     const foundStyledComponents = wrapper.find('StyledComponent');
 
     expect(foundStyledComponents.length).toEqual(3);

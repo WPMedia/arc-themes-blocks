@@ -14,7 +14,7 @@ const LinkBarSpan = styled.span`
   }
 `;
 
-const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
+const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
   const content = useContent({
     source: navigationConfig.contentService,
     query: {
@@ -41,7 +41,11 @@ const LinksBar = ({ customFields: { navigationConfig = {} } }) => {
 
   return (
     <>
-      <nav key={id} className="links-bar">
+      <nav
+        key={id}
+        className="links-bar"
+        aria-label={ariaLabel || 'More Links'}
+      >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan
             className="links-menu"
@@ -73,6 +77,10 @@ LinksBar.propTypes = {
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({
       group: 'Configure Content',
       label: 'Navigation',
+    }),
+    ariaLabel: PropTypes.string.tag({
+      label: 'Aria-label',
+      defaultValue: 'More Links',
     }),
   }),
 };

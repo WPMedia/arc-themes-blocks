@@ -421,4 +421,21 @@ describe('the header navigation feature for the default output type', () => {
       expect(wrapper.find('StyledComponent').at(0).prop('navBarBackground')).toEqual('#1B6FA6');
     });
   });
+  describe('dealing with accessibility and screen readers', () => {
+    it('should render the block with the default aria-label', () => {
+      const wrapper = mount(
+        <Navigation customFields={{}} />,
+      );
+
+      expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Sections Menu');
+    });
+
+    it('should render the block with the custom aria-label', () => {
+      const wrapper = mount(
+        <Navigation customFields={{ ariaLabel: 'Links' }} />,
+      );
+
+      expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
+    });
+  });
 });

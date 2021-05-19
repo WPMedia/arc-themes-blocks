@@ -14,8 +14,8 @@ describe('the article body Blockquote component', () => {
       },
     };
 
-    const { default: Blockquote } = require('./blockquote');
-    const wrapper = mount(<Blockquote element={blockquote} />);
+    const { default: Quote } = require('./quote');
+    const wrapper = mount(<Quote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(0);
   });
 
@@ -67,8 +67,8 @@ describe('the article body Blockquote component', () => {
       },
     };
 
-    const { default: Blockquote } = require('./blockquote');
-    const wrapper = mount(<Blockquote element={blockquote} />);
+    const { default: Quote } = require('./quote');
+    const wrapper = mount(<Quote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
     expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
     expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.</p>');
@@ -123,10 +123,63 @@ describe('the article body Blockquote component', () => {
       },
     };
 
-    const { default: Blockquote } = require('./blockquote');
-    const wrapper = mount(<Blockquote element={blockquote} />);
+    const { default: Quote } = require('./quote');
+    const wrapper = mount(<Quote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
     expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
     expect(wrapper.find('blockquote').find('span').length).toBe(0);
+  });
+
+  it('should render a blockquote when it is provided with the necessary data', () => {
+    const blockquote = {
+      _id: 'CYYF74NCBRF23I41Y6232MKQZILWKA',
+      type: 'quote',
+      content_elements: [{
+        type: 'text',
+        content: 'A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.',
+        additional_properties: {
+          comments: [],
+          inline_comments: [],
+        },
+        _id: 'F6UMSFZWKNANBHQ2V5A12344CRSRGI',
+      }, {
+        type: 'text',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.',
+        additional_properties: {
+          comments: [],
+          inline_comments: [],
+        },
+        _id: 'ULIZJUZ3PZCH3HKO42K412ZUZMASDU',
+      }, {
+        type: 'list',
+        list_type: 'ordered',
+        items: [
+          {
+            type: 'text',
+            content: 'Indented under 2',
+            _id: 'OWQEXQT6N5BTPF2CDZYVND6IAQ',
+          },
+          {
+            type: 'text',
+            content: 'Another thing indented under 2',
+            _id: 'UG52XTXHHRDN5KUPKCGTKE4NMM',
+          },
+        ],
+        _id: 'FLXZDZLOFRGNLMALFGLJGLDPAM',
+      }],
+      subtype: 'blockquote',
+      citation: {
+        type: 'text',
+        content: 'Lorem Ipsum Generator',
+      },
+    };
+
+    const { default: Quote } = require('./quote');
+    const wrapper = mount(<Quote element={blockquote} className="my-custom-classname" />);
+    expect(wrapper.find('blockquote.my-custom-classname').length).toBe(1);
+    expect(wrapper.find('blockquote').find('p').length).toBe(2);
+    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
+    expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.</p>');
+    expect(wrapper.find('blockquote').find('span').length).toBe(1);
   });
 });

@@ -24,6 +24,26 @@ export const usingANSStoryObject = () => {
   );
 };
 
+export const sponsoredContentOutput = () => {
+  const content = {
+    owner: {
+      sponsored: true,
+    },
+    websites: {
+      'story-book': {
+        website_section: {
+          _id: text('websites[arcSite].website_section._id', '/news/'),
+          name: text('websites[arcSite].website_section.name', 'News'),
+        },
+      },
+    },
+  };
+
+  return (
+    <Overline story={content} />
+  );
+};
+
 export const customLinkTextAndUrl = () => {
   const props = {
     customText: text('customText', 'Overline Text'),

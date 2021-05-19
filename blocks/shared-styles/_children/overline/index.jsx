@@ -18,6 +18,7 @@ const Overline = (props) => {
     customUrl,
     editable,
     story,
+    className = '',
   } = props;
 
   const sourceContent = story || globalContent || {};
@@ -44,10 +45,11 @@ const Overline = (props) => {
 
   if (sourceContent?.owner?.sponsored) {
     [text, url] = [phrases.t('overline.sponsored-content'), null];
+  } else if (shouldUseProps) {
+    text = customText;
+    url = customUrl;
   } else if (shouldUseLabel) {
     [text, url] = [labelText, labelUrl];
-  } else if (shouldUseProps) {
-    [text, url] = [customText, customUrl];
   }
 
   let edit = {};
@@ -57,17 +59,23 @@ const Overline = (props) => {
     }
   }
 
+  const classNames = ['overline'];
   const itemProps = {
     ...edit,
-    className: 'overline',
     as: 'span',
   };
 
   if (url) {
     itemProps.href = formatURL(url);
     itemProps.as = 'a';
-    itemProps.className = `${itemProps.className} overline--link`;
+    classNames.push('overline--link');
   }
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  itemProps.className = classNames.join(' ');
 
   return (url || text) ? (
     <PrimaryFont {...itemProps}>

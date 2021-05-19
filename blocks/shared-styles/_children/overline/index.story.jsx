@@ -20,7 +20,7 @@ export const usingANSStoryObject = () => {
   };
 
   return (
-    <Overline story={content} />
+    <Overline story={content} className={text('className', '')} />
   );
 };
 
@@ -40,7 +40,7 @@ export const sponsoredContentOutput = () => {
   };
 
   return (
-    <Overline story={content} />
+    <Overline story={content} className={text('className', '')} />
   );
 };
 
@@ -48,6 +48,7 @@ export const customLinkTextAndUrl = () => {
   const props = {
     customText: text('customText', 'Overline Text'),
     customUrl: text('customUrl', 'https://arcxp.com'),
+    className: text('className', ''),
   };
 
   return (

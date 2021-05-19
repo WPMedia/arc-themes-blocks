@@ -381,4 +381,27 @@ describe('overline feature for default output type', () => {
       expect(wrapper.text()).toMatch('Story Object');
     });
   });
+
+  describe('allows for a className to be set', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: false,
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('set custom class on Overline', () => {
+      const wrapper = mount(<Overline story={storyObject} className="my-custom-class" />);
+
+      expect(wrapper.find('a.my-custom-class').length).toBe(1);
+    });
+  });
 });

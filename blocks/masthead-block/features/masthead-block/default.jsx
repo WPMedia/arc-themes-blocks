@@ -6,9 +6,9 @@ import { useFusionContext } from 'fusion:context';
 import { localizeDate } from '@wpmedia/engine-theme-sdk';
 
 // styles
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import MastheadItemsContainer from './_children/MastheadItemsContainer';
 import HeightConstrainedImageContainer from './_children/HeightConstrainedImageContainer';
-import StyledLink from './_children/StyledLink';
 import GenericDivider from './_children/GenericDivider';
 import HeaderContainerHideMobile from './_children/HeaderContainerHideMobile';
 
@@ -48,9 +48,9 @@ const Masthead = (props) => {
         </div>
         <div>
           {promoLinkURL && promoLinkText && (
-          <StyledLink primaryFont={primaryFont} href={promoLinkURL} className="masthead-block--text">
+          <PrimaryFont as="a" href={promoLinkURL} className="masthead-block--text">
             {promoLinkText}
-          </StyledLink>
+          </PrimaryFont>
           )}
         </div>
       </MastheadItemsContainer>

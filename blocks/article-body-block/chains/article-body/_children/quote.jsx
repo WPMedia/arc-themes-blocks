@@ -7,18 +7,18 @@ export default ({ element, className }) => {
 
   // Only allow text and list contentElement types
   const quoteItems = [];
-  contentElements.forEach((element) => {
-    if (element.type === 'text'
-      && Object.prototype.hasOwnProperty.call(element, 'content')) {
+  contentElements.forEach((contentItem) => {
+    if (contentItem.type === 'text'
+      && Object.prototype.hasOwnProperty.call(contentItem, 'content')) {
       quoteItems.push(<p
-        key={element._id}
-        dangerouslySetInnerHTML={{ __html: element.content }}
+        key={contentItem._id}
+        dangerouslySetInnerHTML={{ __html: contentItem.content }}
       />);
     }
-    if (element.type === 'list') {
-      const { list_type: listType, items: listItems } = element;
+    if (contentItem.type === 'list') {
+      const { list_type: listType, items: listItems } = contentItem;
       quoteItems.push(<List
-        key={element._id}
+        key={contentItem._id}
         listType={listType}
         listItems={listItems}
       />);

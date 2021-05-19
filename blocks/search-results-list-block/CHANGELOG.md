@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
+
+
+### Performance Improvements
+
+* Don't publish snapshot files in blocks ([dd6772e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dd6772e5ce203cfa62a89a881a1af5fde3b1852e)), closes [#806](https://github.com/WPMedia/fusion-news-theme-blocks/issues/806)
+
+
+
+
+
 ## [5.11.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.11.1) (2021-04-26)
 
 **Note:** Version bump only for package @wpmedia/search-results-list-block

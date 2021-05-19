@@ -147,6 +147,9 @@ class CardList extends React.Component {
             headlines {
               basic
             }
+            owner {
+              sponsored
+            }
             promo_items {
               basic {
                 type

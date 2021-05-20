@@ -139,6 +139,9 @@ const TopTableList = (props) => {
         label {
           basic
         }
+        owner {
+          sponsored
+        }
         promo_items {
           basic {
             type

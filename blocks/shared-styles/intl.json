@@ -38,5 +38,15 @@
     "es": "y",
     "ja": "および",
     "ko": "및"
+ },
+ "overline.sponsored-content": {
+  "en": "Sponsored Content",
+  "sv": "Sponsored Content",
+  "no": "Sponsored Content",
+  "fr": "Sponsored Content",
+  "de": "Sponsored Content",
+  "es": "Sponsored Content",
+  "ja": "Sponsored Content",
+  "ko": "Sponsored Content"
  }
 }

@@ -36,7 +36,7 @@ jest.mock('fusion:context', () => ({
 
 describe('Given the list of author(s) from the article', () => {
   it('should return null if lazyLoad on the server and not in the admin', () => {
-    const { default: AuthorBio } = require('./default.jsx');
+    const { default: AuthorBio } = require('./default');
     const config = {
       lazyLoad: true,
     };

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+// Disabled eslint due to it not being able to handle the ternary logic
 import React from 'react';
 import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';

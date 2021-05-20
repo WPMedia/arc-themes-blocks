@@ -41,7 +41,7 @@ describe('the article tag block', () => {
     });
 
     it('should return null if lazyLoad on the server and not in the admin', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const config = {
         lazyLoad: true,
       };
@@ -50,19 +50,19 @@ describe('the article tag block', () => {
     });
 
     it('should render a parent container for the tags', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('.tags-holder').length).toEqual(1);
     });
 
     it('should render a tag element for each tag in the array', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('a').length).toEqual(2);
     });
 
     it('should render tags with their correct href', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('a').at(0).props().href).toBe('/tags/dogs%20slug/');
       expect(wrapper.children().find('a').at(1).props().href).toBe('/tags/cats%20slug/');
@@ -94,7 +94,7 @@ describe('the article tag block', () => {
     });
 
     it('should render tags with correct href', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('a').at(0).props().href).toBe('#');
       expect(wrapper.children().find('a').at(1).props().href).toBe('#');
@@ -120,7 +120,7 @@ describe('the article tag block', () => {
     });
 
     it('should not render anything', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('.tags-holder').length).toEqual(0);
     });
@@ -141,7 +141,7 @@ describe('the article tag block', () => {
     });
 
     it('should not render anything', () => {
-      const { default: ArticleTags } = require('./default.jsx');
+      const { default: ArticleTags } = require('./default');
       const wrapper = mount(<ArticleTags />);
       expect(wrapper.children().find('.tags-holder').length).toEqual(0);
     });

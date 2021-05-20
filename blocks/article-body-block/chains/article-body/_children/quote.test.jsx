@@ -2,7 +2,7 @@ const React = require('react');
 const { mount } = require('enzyme');
 
 describe('the article body Blockquote component', () => {
-  it('should not render a blockquote when it is not provided with the necessary data', () => {
+  it('should not render a quote when it is not provided with the necessary data', () => {
     const blockquote = {
       _id: '44CZ46VGIBBOZAZ23H4OXB4ND4U4',
       type: 'quote',
@@ -19,7 +19,7 @@ describe('the article body Blockquote component', () => {
     expect(wrapper.find('blockquote').find('p').length).toBe(0);
   });
 
-  it('should render a blockquote when it is provided with the necessary data', () => {
+  it('should render a quote when it is provided with the necessary data', () => {
     const blockquote = {
       _id: 'CYYF74NCBRF23I41Y6232MKQZILWKA',
       type: 'quote',
@@ -75,7 +75,7 @@ describe('the article body Blockquote component', () => {
     expect(wrapper.find('blockquote').find('span').length).toBe(1);
   });
 
-  it('should not render a blockquote with an incomplete citation when it is not provided with citation content', () => {
+  it('should not render a quote with an incomplete citation when it is not provided with citation content', () => {
     const blockquote = {
       _id: 'CYYF74NCBRF23I41Y6232MKQZILWKA',
       type: 'quote',
@@ -130,7 +130,7 @@ describe('the article body Blockquote component', () => {
     expect(wrapper.find('blockquote').find('span').length).toBe(0);
   });
 
-  it('should render a blockquote when it is provided with the necessary data', () => {
+  it('should render a quote when it is provided with the necessary data', () => {
     const blockquote = {
       _id: 'CYYF74NCBRF23I41Y6232MKQZILWKA',
       type: 'quote',

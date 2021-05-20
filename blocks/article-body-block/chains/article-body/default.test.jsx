@@ -507,8 +507,7 @@ describe('article-body chain', () => {
 
     it('should render block and pullquotes correctly', () => {
       const { default: ArticleBodyChain } = require('./default');
-      const { default: Pullquote } = require('./_children/pullquote');
-      const { default: Blockquote } = require('./_children/blockquote');
+      const { default: Quote } = require('./_children/quote');
       const wrapper = mount(
         <ArticleBodyChain>
           <div>1</div>
@@ -516,8 +515,7 @@ describe('article-body chain', () => {
           <span>3</span>
         </ArticleBodyChain>,
       );
-      expect(wrapper.find('article.article-body-wrapper').find(Pullquote)).toHaveLength(1);
-      expect(wrapper.find('article.article-body-wrapper').find(Blockquote)).toHaveLength(1);
+      expect(wrapper.find('article.article-body-wrapper').find(Quote)).toHaveLength(2);
     });
   });
 

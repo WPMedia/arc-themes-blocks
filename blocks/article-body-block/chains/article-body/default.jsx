@@ -11,12 +11,11 @@ import {
   VideoPlayer as VideoPlayerPresentational,
   LazyLoad, isServerSide,
 } from '@wpmedia/engine-theme-sdk';
-import Blockquote from './_children/blockquote';
 import Header from './_children/heading';
 import HTML from './_children/html';
 import List from './_children/list';
 import Oembed from './_children/oembed';
-import Pullquote from './_children/pullquote';
+import Quote from './_children/quote';
 import Table from './_children/table';
 import './_articlebody.scss';
 
@@ -188,13 +187,13 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
       switch (item.subtype) {
         case 'pullquote':
           return (
-            <Pullquote key={key} element={item} />
+            <Quote key={key} element={item} className="pullquote" />
           );
 
         case 'blockquote':
         default:
           return (
-            <Blockquote key={key} element={item} />
+            <Quote key={key} element={item} />
           );
       }
     case 'video':

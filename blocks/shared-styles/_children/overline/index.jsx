@@ -44,7 +44,8 @@ const Overline = (props) => {
   let [text, url] = [sectionText, sectionUrl];
 
   if (sourceContent?.owner?.sponsored) {
-    [text, url] = [phrases.t('overline.sponsored-content'), null];
+    text = sourceContent?.label?.basic || phrases.t('overline.sponsored-content');
+    url = null;
   } else if (shouldUseProps) {
     text = customText;
     url = customUrl;

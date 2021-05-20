@@ -353,6 +353,44 @@ describe('overline feature for default output type', () => {
     });
   });
 
+  describe('override sponsored story with kicker label', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: true,
+      },
+      label: {
+        basic: 'Custom label override',
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('if story object is null renders nothing', () => {
+      const wrapper = mount(<Overline story={null} />);
+
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('set text to be Sponsored Content', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.text()).toMatch(storyObject.label.basic);
+    });
+
+    it('not be a link', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.find('span.overline').exists()).toBe(true);
+    });
+  });
+
   describe('story object has owner.sponsored set to false', () => {
     const storyObject = {
       _id: '12345',

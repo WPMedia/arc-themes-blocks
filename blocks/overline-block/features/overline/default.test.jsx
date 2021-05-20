@@ -42,7 +42,7 @@ describe('overline feature for default output type', () => {
     });
 
     it('should dangerously set the inner HTML to the website_section content', () => {
-      const wrapper = shallow(<Overline />);
+      const wrapper = mount(<Overline />);
 
       expect(wrapper.text()).toMatch('News');
     });
@@ -99,8 +99,7 @@ describe('overline feature for default output type', () => {
       });
 
       it('should display the label name instead of the website section name', () => {
-        const wrapper = shallow(<Overline />);
-
+        const wrapper = mount(<Overline />);
         expect(wrapper.text()).toMatch('EXCLUSIVE');
       });
     });
@@ -121,7 +120,7 @@ describe('overline feature for default output type', () => {
       });
 
       it('should display the label name instead of the website section name', () => {
-        const wrapper = shallow(<Overline />);
+        const wrapper = mount(<Overline />);
 
         expect(wrapper.text()).toMatch('EXCLUSIVE');
       });
@@ -150,7 +149,7 @@ describe('overline feature for default output type', () => {
       });
 
       it('should display the label name instead of the website section name', () => {
-        const wrapper = shallow(<Overline />);
+        const wrapper = mount(<Overline />);
         expect(wrapper.text()).toMatch('EXCLUSIVE');
       });
 
@@ -179,7 +178,7 @@ describe('overline feature for default output type', () => {
       });
 
       it('should dangerously set the inner HTML to the website_section content', () => {
-        const wrapper = shallow(<Overline />);
+        const wrapper = mount(<Overline />);
 
         expect(wrapper.text()).toMatch('News');
       });

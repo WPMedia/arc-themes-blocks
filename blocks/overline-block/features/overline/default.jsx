@@ -6,18 +6,7 @@ import { useEditableContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';
 import { formatURL } from '@wpmedia/engine-theme-sdk';
 import './overline.scss';
-
-const StyledLink = styled.a`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
-
-const StyledText = styled.span`
-  font-family: ${(props) => props.primaryFont};
-  font-weight: bold;
-  text-decoration: none;
-`;
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const Overline = (props) => {
   const { globalContent: content = {}, arcSite } = useFusionContext();
@@ -58,7 +47,8 @@ const Overline = (props) => {
 
   if (url) {
     return (
-      <StyledLink
+      <PrimaryFont
+        as="a"
         href={formatURL(url)}
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
@@ -66,20 +56,21 @@ const Overline = (props) => {
         suppressContentEditableWarning
       >
         {text}
-      </StyledLink>
+      </PrimaryFont>
     );
   }
 
   if (text) {
     return (
-      <StyledText
+      <PrimaryFont
+        as="span"
         primaryFont={getThemeStyle(arcSite)['primary-font-family']}
         className="overline"
         {...edit}
         suppressContentEditableWarning
       >
         {text}
-      </StyledText>
+      </PrimaryFont>
     );
   }
 

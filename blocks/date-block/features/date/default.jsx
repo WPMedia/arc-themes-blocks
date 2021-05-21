@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { localizeDateTime } from '@wpmedia/engine-theme-sdk';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';

@@ -5,10 +5,7 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
-import { Video } from '@wpmedia/engine-theme-sdk';
-
-// aspect ratio for video player engine theme sdk
-const RATIO = 0.5625;
+import { Video, videoPlayerCustomFields } from '@wpmedia/engine-theme-sdk';
 
 const TitleText = styled.h2`
   font-family: ${(props) => props.primaryFont};
@@ -36,10 +33,7 @@ const VideoPromo = ({ customFields }) => {
     inheritGlobalContent,
     playthrough,
     alertBadge,
-  } = customFields;
-
-  // title and description can be overwritten by globalContent
-  const {
+    // title and description can be overwritten by globalContent
     title,
     description,
   } = customFields;
@@ -81,11 +75,11 @@ const VideoPromo = ({ customFields }) => {
           <Video
             uuid={videoId}
             autoplay={autoplay}
-            // RATIO is a constant declared at top of file
-            aspectRatio={RATIO}
             org={videoOrg}
             env={videoEnv}
             playthrough={playthrough}
+            shrinkToFit={customFields?.shrinkToFit}
+            viewportPercentage={customFields?.viewportPercentage}
           />
           {description
             && (
@@ -104,41 +98,38 @@ const VideoPromo = ({ customFields }) => {
 
 VideoPromo.propTypes = {
   customFields: PropTypes.shape({
-    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
-      {
-        label: 'Video Content',
-        group: 'Configure Content',
-      },
-    ),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      label: 'Video Content',
+      group: 'Configure Content',
+    }),
     inheritGlobalContent: PropTypes.bool.tag({
       label: 'Inherit global content',
       group: 'Configure Content',
       defaultValue: true,
     }),
-    autoplay: PropTypes.bool.tag(
-      {
-        label: 'Autoplay',
-        defaultValue: false,
-        group: 'Video settings',
-      },
-    ),
+    autoplay: PropTypes.bool.tag({
+      label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video Settings',
+    }),
     title: PropTypes.string.tag({
       label: 'Title',
-      group: 'Display settings',
+      group: 'Display Settings',
     }),
     description: PropTypes.string.tag({
       label: 'Description',
-      group: 'Display settings',
+      group: 'Display Settings',
     }),
     alertBadge: PropTypes.string.tag({
       label: 'Alert Badge',
-      group: 'Display settings',
+      group: 'Display Settings',
     }),
     playthrough: PropTypes.bool.tag({
       label: 'Playthrough',
       defaultValue: false,
-      group: 'Video settings',
+      group: 'Video Settings',
     }),
+    ...(videoPlayerCustomFields()),
   }),
 };
 

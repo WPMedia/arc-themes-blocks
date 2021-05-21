@@ -1,10 +1,8 @@
 name: Delete unused canary packages
-# Only trigger, when the canary build workflow succeeded
 on:
-  workflow_run:
-    workflows: ["Canary block"]
-    types:
-      - completed
+  push:
+    branches:
+      - "canary"
 
 jobs:
   clear-packages:

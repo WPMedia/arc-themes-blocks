@@ -7,7 +7,7 @@ import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { Byline } from '@wpmedia/shared-styles';
+import { Byline, Overline } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 
@@ -147,6 +147,9 @@ class CardList extends React.Component {
             headlines {
               basic
             }
+            owner {
+              sponsored
+            }
             promo_items {
               basic {
                 type
@@ -257,13 +260,7 @@ class CardList extends React.Component {
                   }
                 </a>
                 { contentElements[0].websites[arcSite].website_section
-                  && (
-                  <Title
-                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                    className="card-list-overline"
-                  >
-                    {contentElements[0].websites[arcSite].website_section.name}
-                  </Title>
+                  && (<Overline story={contentElements[0]} className="card-list-overline" />
                   )}
                 <div>
                   <HeadlineText

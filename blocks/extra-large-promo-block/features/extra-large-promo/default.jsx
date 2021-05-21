@@ -59,6 +59,9 @@ const ExtraLargePromoItem = ({ customFields }) => {
           text
         }
       }
+      owner {
+        sponsored
+      }
       promo_items {
         type
         url

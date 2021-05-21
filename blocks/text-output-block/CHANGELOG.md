@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
+
+
+### Performance Improvements
+
+* Remove publishing of output type and other test files ([c95c97c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c95c97c18f458219664d9276c6f3caa7af963a8b)), closes [#799](https://github.com/WPMedia/fusion-news-theme-blocks/issues/799)
+
+
+
+
+
 ## [5.11.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.11.1) (2021-04-26)
 
 **Note:** Version bump only for package @wpmedia/text-output-block

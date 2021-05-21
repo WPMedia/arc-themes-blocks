@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
+
+
+### Bug Fixes
+
+* Add classname for styled span link with font and color for the dot and text ([68d06a2](https://github.com/WPMedia/fusion-news-theme-blocks/commit/68d06a27a82d574547eb6101f063cee81b66041b))
+* Add format url helper from engine theme sdk ([6e1bb0f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6e1bb0f0bc50da75473eb80d1e10564ad77d427b))
+* Focus on the link while tabbing through section title ([a1558a3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a1558a37d8635f63c95800781019bb5723434d5a))
+* Run tests before building and publishing to prevent broken blocks from publish ([e657047](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e657047330178653de21238960c26a6fd8c32db5))
+* Update styles with calc rem ([6190c97](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6190c9771931de43c5208f78b92b72b7d3a92429))
+
+
+### Features
+
+* Add classname to reuse styles for the dot and the text of styled link ([eedadcc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/eedadcc620f2b18087e3210c997ad4accfab3c3f))
+* Factor out format url and rename import to engine theme sdk ([a753ed4](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a753ed4f42cfab6830b48a9b7bda4e719dfba562))
+* Use locale available in properties for html lang ([adee08c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/adee08c39b62d88f24020278f802a6b878742fed))
+
+
+### Performance Improvements
+
+* Defer loading querly third-party script until dom loaded ([692b6e3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/692b6e3d5cd3f390862f5503561637aac3a9a45d))
+* Don't publish snapshot files in blocks ([dd6772e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dd6772e5ce203cfa62a89a881a1af5fde3b1852e)), closes [#806](https://github.com/WPMedia/fusion-news-theme-blocks/issues/806)
+* Factor out styled and arcsite usage for section title ([80d909c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/80d909c049e83ba428ce0880c219befd0e55c93e))
+* Filter out unnecessary promo info, depending on block usage like embed html ([7a15aec](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7a15aecaa7d19bb589604442ecf8a67e0f7c2b3c))
+* Remove publishing of output type and other test files ([c95c97c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c95c97c18f458219664d9276c6f3caa7af963a8b)), closes [#799](https://github.com/WPMedia/fusion-news-theme-blocks/issues/799)
+
+
+
+
+
 ## [5.11.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.11.1) (2021-04-26)
 
 **Note:** Version bump only for package fusion-news-theme-blocks

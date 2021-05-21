@@ -22,9 +22,15 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => (input.toString())),
 }));
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockContextObj),
+}));
+
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));
 
 jest.mock('fusion:content', () => ({
@@ -295,7 +301,11 @@ describe('overline feature for default output type', () => {
       },
     };
 
-    it.only('if story object is null renders nothing', () => {
+    beforeEach(() => {
+      useFusionContext.mockImplementation(() => ({ arcSite: 'site' }));
+    });
+
+    it('if story object is null renders nothing', () => {
       const wrapper = mount(<Overline story={null} />);
 
       expect(wrapper.html()).toBe(null);
@@ -305,6 +315,131 @@ describe('overline feature for default output type', () => {
       const wrapper = mount(<Overline story={storyObject} />);
 
       expect(wrapper.text()).toMatch('Story Object');
+    });
+  });
+
+  describe('story object has owner.sponsored set to true', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: true,
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('if story object is null renders nothing', () => {
+      const wrapper = mount(<Overline story={null} />);
+
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('set text to be Sponsored Content', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.text()).toMatch('Sponsored Content');
+    });
+
+    it('not be a link', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.find('span.overline').exists()).toBe(true);
+    });
+  });
+
+  describe('override sponsored story with kicker label', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: true,
+      },
+      label: {
+        basic: 'Custom label override',
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('if story object is null renders nothing', () => {
+      const wrapper = mount(<Overline story={null} />);
+
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('set text to be Sponsored Content', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.text()).toMatch(storyObject.label.basic);
+    });
+
+    it('not be a link', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.find('span.overline').exists()).toBe(true);
+    });
+  });
+
+  describe('story object has owner.sponsored set to false', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: false,
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('if story object is null renders nothing', () => {
+      const wrapper = mount(<Overline story={null} />);
+
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('set text be story object data', () => {
+      const wrapper = mount(<Overline story={storyObject} />);
+
+      expect(wrapper.text()).toMatch('Story Object');
+    });
+  });
+
+  describe('allows for a className to be set', () => {
+    const storyObject = {
+      _id: '12345',
+      owner: {
+        sponsored: false,
+      },
+      websites: {
+        site: {
+          website_section: {
+            _id: '/news',
+            name: 'Story Object',
+          },
+        },
+      },
+    };
+
+    it('set custom class on Overline', () => {
+      const wrapper = mount(<Overline story={storyObject} className="my-custom-class" />);
+
+      expect(wrapper.find('a.my-custom-class').length).toBe(1);
     });
   });
 });

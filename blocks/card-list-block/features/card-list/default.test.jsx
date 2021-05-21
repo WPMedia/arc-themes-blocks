@@ -30,6 +30,7 @@ jest.mock('@wpmedia/date-block', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
+  Overline: () => <div />,
 }));
 
 describe('Card list', () => {
@@ -152,7 +153,7 @@ describe('Card list', () => {
       });
 
       it('should render an overline', () => {
-        expect(wrapper.find('div.card-list-overline').length).toEqual(1);
+        expect(wrapper.find('Overline').length).toEqual(1);
       });
 
       it('should render a main headline', () => {

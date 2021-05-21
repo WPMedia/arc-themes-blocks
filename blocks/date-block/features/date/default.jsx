@@ -3,12 +3,8 @@ import styled from 'styled-components';
 import { localizeDateTime } from '@wpmedia/engine-theme-sdk';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
-import getThemeStyle from 'fusion:themes';
 import './date.scss';
-
-const StyledTime = styled.time`
-  font-family: ${(props) => props.primaryFont};
-`;
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 @Consumer
 class ArticleDate extends Component {
@@ -38,11 +34,11 @@ class ArticleDate extends Component {
 
   render() {
     const { displayDate } = this.state;
-    const { arcSite, classNames } = this.props;
+    const { classNames } = this.props;
     return (
-      <StyledTime key={displayDate} className={`date ${classNames}`} dateTime={displayDate} primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+      <PrimaryFont as="time" key={displayDate} className={`${classNames}`} dateTime={displayDate}>
         {displayDate}
-      </StyledTime>
+      </PrimaryFont>
     );
   }
 }

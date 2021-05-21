@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import getThemeStyle from 'fusion:themes';

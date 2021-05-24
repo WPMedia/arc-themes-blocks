@@ -269,7 +269,6 @@ describe('Card list', () => {
       });
       it('should render headline', () => {
         expect(wrapper.find('PrimaryFont.card-list-headline').length).toBe(1);
-        expect(wrapper.find('PrimaryFont.card-list-headline').length).toBe(1);
       });
       it('should render author-date', () => {
         expect(wrapper.find('.author-date').length).toBe(1);

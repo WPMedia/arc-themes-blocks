@@ -35,7 +35,7 @@ class ArticleDate extends Component {
     const { displayDate } = this.state;
     const { classNames } = this.props;
     return (
-      <PrimaryFont as="time" key={displayDate} className={`${classNames}`} dateTime={displayDate}>
+      <PrimaryFont as="time" key={displayDate} className={`date ${classNames}`} dateTime={displayDate}>
         {displayDate}
       </PrimaryFont>
     );

@@ -48,7 +48,7 @@ const Masthead = (props) => {
         </div>
         <div>
           {promoLinkURL && promoLinkText && (
-          <PrimaryFont as="a" href={promoLinkURL} className="masthead-block--text">
+          <PrimaryFont as="a" href={promoLinkURL} className="masthead-block--text masthead-block--promo-link">
             {promoLinkText}
           </PrimaryFont>
           )}

@@ -360,7 +360,9 @@ describe('overline feature for default output type', () => {
         sponsored: true,
       },
       label: {
-        basic: 'Custom label override',
+        basic: {
+          text: 'Custom label override',
+        },
       },
       websites: {
         site: {
@@ -381,7 +383,7 @@ describe('overline feature for default output type', () => {
     it('set text to be Sponsored Content', () => {
       const wrapper = mount(<Overline story={storyObject} />);
 
-      expect(wrapper.text()).toMatch(storyObject.label.basic);
+      expect(wrapper.text()).toMatch(storyObject.label.basic.text);
     });
 
     it('not be a link', () => {

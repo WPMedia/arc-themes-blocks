@@ -58,6 +58,15 @@ class GlobalSearchResultsList extends React.Component {
     }
   }
 
+  handleSearch() {
+    const { value } = this.state;
+    if (this.customSearchAction && value.length > 0) {
+      this.customSearchAction(value);
+    } else if (value.length > 0) {
+      window.location.href = `/search/${value}`;
+    }
+  }
+
   getFallbackImageURL() {
     const { arcSite, deployment, contextPath } = this.props;
     let targetFallbackImage = getProperties(arcSite).fallbackImage;
@@ -67,15 +76,6 @@ class GlobalSearchResultsList extends React.Component {
     }
 
     return targetFallbackImage;
-  }
-
-  handleSearch() {
-    const { value } = this.state;
-    if (this.customSearchAction && value.length > 0) {
-      this.customSearchAction(value);
-    } else if (value.length > 0) {
-      window.location.href = `/search/${value}`;
-    }
   }
 
   fetchPlaceholder() {

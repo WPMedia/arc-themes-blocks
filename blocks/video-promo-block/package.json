@@ -24,7 +24,7 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "latest",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/news-theme-css": "*",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

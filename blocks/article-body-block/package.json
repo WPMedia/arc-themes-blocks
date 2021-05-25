@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0",
-    "sanitize-html": "^1.18.2"
+    "sanitize-html": "^2.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

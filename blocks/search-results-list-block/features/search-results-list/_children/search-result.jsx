@@ -97,7 +97,7 @@ const SearchResult = ({
           )}
           { (showDate || showByline) && (
             <div className="results-list--author-date">
-              { showByline && <Byline content={element} list separator={showDate} /> }
+              { showByline && <Byline content={element} list separator={showDate} font="Primary" /> }
               { showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
             </div>
           )}

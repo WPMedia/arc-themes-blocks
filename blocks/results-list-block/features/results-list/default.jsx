@@ -265,6 +265,7 @@ class ResultsList extends Component {
       resultList: { content_elements: contentElements = [] } = {}, seeMore,
       placeholderResizedImageOptions,
     } = this.state;
+    console.log(contentElements);
     const targetFallbackImage = this.getFallbackImageURL();
     const promoElements = resolveDefaultPromoElements(customFields);
 
@@ -370,7 +371,7 @@ class ResultsList extends Component {
                 { (promoElements.showDate || promoElements.showByline) && (
                 <div className="results-list--author-date">
                   { promoElements.showByline
-                    && <Byline content={element} list separator={promoElements.showDate} /> }
+                    && <Byline content={element} list separator={promoElements.showDate} font="Primary" /> }
                   { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                 </div>
                 )}

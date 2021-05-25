@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React from 'react';
 import ArticleDate from '@wpmedia/date-block';
-import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import {
+  Image, LazyLoad, Overline, isServerSide,
+} from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { Byline, Overline, PrimaryFont } from '@wpmedia/shared-styles';
+import { Byline, PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 

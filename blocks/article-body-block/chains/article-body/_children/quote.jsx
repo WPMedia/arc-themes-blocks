@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import List from './list';
 
 export default ({ element, className }) => {
@@ -28,11 +29,11 @@ export default ({ element, className }) => {
     quoteItems.push(
       // doesn't look like it has id
       // via https://github.com/washingtonpost/ans-schema/search?p=2&q=citation&unscoped_q=citation
-      <span key={citation.content} className="citation-text">
+      <PrimaryFont as="span" key={citation.content} className="citation-text">
         &mdash;
         &nbsp;
         {citation.content}
-      </span>,
+      </PrimaryFont>,
     );
   }
 

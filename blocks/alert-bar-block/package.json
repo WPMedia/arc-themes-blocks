@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
+    "@wpmedia/engine-theme-sdk": "*",
     "styled-components": "^4.4.0"
   },
   "dependencies": {

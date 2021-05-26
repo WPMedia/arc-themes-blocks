@@ -147,8 +147,7 @@
     "@wpmedia/triple-chain-block": "file:blocks/triple-chain-block",
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
-    "@wpmedia/video-promo-block": "file:blocks/video-promo-block",
-    "focus-trap-react": "^8.4.2"
+    "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
   "browserslist": [
     "defaults",

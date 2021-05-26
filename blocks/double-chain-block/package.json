@@ -22,8 +22,8 @@
     "directory": "blocks/double-chain-block"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

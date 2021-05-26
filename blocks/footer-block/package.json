@@ -26,9 +26,9 @@
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/links-bar-block": "canary",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/links-bar-block": "*",
+    "@wpmedia/news-theme-css": "*",
     "styled-components": "^4.4.0"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

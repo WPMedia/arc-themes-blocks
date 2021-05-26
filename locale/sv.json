@@ -3,7 +3,8 @@
     "promo-label.gallery-text": "Bildspel",
     "promo-label.video-text": "Video",
     "byline.by-text": "Av",
-    "byline.and-text": "och"
+    "byline.and-text": "och",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "article-body-block": {
     "article-body-block.correction": "Korrektion",
@@ -18,8 +19,7 @@
     "global.gallery-autoplay-button": "Spela upp",
     "global.gallery-pause-autoplay-button": "Pausa",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "overline.sponsored-content": "Sponsored Content"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Meny",

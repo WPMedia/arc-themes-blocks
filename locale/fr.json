@@ -3,7 +3,8 @@
     "promo-label.gallery-text": "Galerie",
     "promo-label.video-text": "Vidéo",
     "byline.by-text": "Par",
-    "byline.and-text": "et"
+    "byline.and-text": "et",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "article-body-block": {
     "article-body-block.correction": "Correction",
@@ -18,8 +19,7 @@
     "global.gallery-autoplay-button": "Lecture automatique",
     "global.gallery-pause-autoplay-button": "Mettre en pause la lecture automatique",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "overline.sponsored-content": "Sponsored Content"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Sections",

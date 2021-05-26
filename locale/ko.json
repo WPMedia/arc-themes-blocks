@@ -3,7 +3,8 @@
     "promo-label.gallery-text": "갤러리",
     "promo-label.video-text": "비디오",
     "byline.by-text": "저작자",
-    "byline.and-text": "및"
+    "byline.and-text": "및",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "article-body-block": {
     "article-body-block.correction": "정정",
@@ -18,8 +19,7 @@
     "global.gallery-autoplay-button": "자동 재생",
     "global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "overline.sponsored-content": "Sponsored Content"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Sections",

@@ -3,7 +3,8 @@
     "promo-label.gallery-text": "ギャラリー",
     "promo-label.video-text": "ビデオ",
     "byline.by-text": "担当者：",
-    "byline.and-text": "및"
+    "byline.and-text": "및",
+    "overline.sponsored-content": "Sponsored Content"
   },
   "article-body-block": {
     "article-body-block.correction": "修正",
@@ -18,8 +19,7 @@
     "global.gallery-autoplay-button": "自動再生",
     "global.gallery-pause-autoplay-button": "自動再生の一時停止",
     "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "overline.sponsored-content": "Sponsored Content"
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
   },
   "header-nav-block": {
     "header-nav-block.sections-button": "Sections",

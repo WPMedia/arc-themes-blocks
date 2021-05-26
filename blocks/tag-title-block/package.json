@@ -24,7 +24,8 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*"
+    "@wpmedia/news-theme-css": "*",
+    "@wpmedia/shared-styles": "*"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

@@ -1,9 +1,17 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
+import { useFusionContext } from 'fusion:context';
 import Header from './default';
 
+const mockContextObj = {
+  arcSite: 'site',
+};
+
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => mockContextObj),
+}));
 getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open-Sans' }));
 
 describe('The header block', () => {
@@ -12,18 +20,16 @@ describe('The header block', () => {
       text: 'Header',
       size: 'Extra Large',
     };
-    const wrapper = shallow(<Header customFields={customFields} />);
 
     it('should render a text element', () => {
+      // use mount to bypass PrimaryFont component
+      const wrapper = mount(<Header customFields={customFields} />);
       expect(wrapper.length).toEqual(1);
       expect(wrapper.text()).toEqual('Header');
     });
 
-    it('should set the primary font of the header', () => {
-      expect(wrapper).toHaveProp('primaryFont', 'Open-Sans');
-    });
-
     it('should have the appropriate class', () => {
+      const wrapper = shallow(<Header customFields={customFields} />);
       expect(wrapper).toHaveProp('className', 'header-block');
     });
   });
@@ -33,6 +39,10 @@ describe('The header block', () => {
       text: 'Extra Large Header',
       size: 'Extra Large',
     };
+    const mockStory = {
+      arcSite: 'site',
+    };
+    useFusionContext.mockImplementation(() => mockStory);
     const wrapper = mount(<Header customFields={customFields} />);
     it('should render a header with Extra Large text', () => {
       expect(wrapper.length).toEqual(1);

@@ -23,10 +23,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/byline-block": "canary",
-    "@wpmedia/date-block": "canary",
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable",
+    "@wpmedia/byline-block": "*",
+    "@wpmedia/date-block": "*",
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"

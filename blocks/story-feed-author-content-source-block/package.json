@@ -24,7 +24,7 @@
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
   "peerDependencies": {
-    "@wpmedia/resizer-image-block": "canary"
+    "@wpmedia/resizer-image-block": "*"
   },
   "dependencies": {
     "@arc-core-components/content-source_story-feed_author-v4": "^1.0.6-beta.0"

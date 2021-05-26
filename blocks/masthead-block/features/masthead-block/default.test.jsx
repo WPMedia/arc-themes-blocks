@@ -62,7 +62,7 @@ describe('the masthead block', () => {
   it('shows text if showdate is true', () => {
     const wrapper = mount(<Masthead customFields={{ showDate: true }} />);
 
-    expect(wrapper.find('div > p').text().length > 0).toEqual(true);
+    expect(wrapper.find('div p').text().length > 0).toEqual(true);
   });
   it('does not show text if showdate is false', () => {
     const wrapper = mount(<Masthead customFields={{ showDate: false }} />);

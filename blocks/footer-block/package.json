@@ -7,9 +7,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -29,7 +27,7 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/links-bar-block": "*",
     "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0"
+    "@wpmedia/shared-styles": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

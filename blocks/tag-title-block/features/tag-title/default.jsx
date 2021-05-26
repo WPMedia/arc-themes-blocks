@@ -1,39 +1,30 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
-import getThemeStyle from 'fusion:themes';
 import './tag-title.scss';
-
-const StyledName = styled.h1`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const StyledDescription = styled.p`
-  font-family: ${(props) => props.primaryFont};
-`;
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const TagTitle = () => {
-  const { globalContent: content, arcSite } = useFusionContext();
+  const { globalContent: content } = useFusionContext();
 
   return (
     // Check if tag exists
     !!(content && content.Payload && content.Payload[0]) && (
       <>
-        <StyledName
-          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+        <PrimaryFont
+          as="h1"
           className="tag-name"
         >
           {content.Payload[0].name}
-        </StyledName>
+        </PrimaryFont>
         {
           // Only display description if present
           !!(content.Payload[0].description) && (
-            <StyledDescription
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            <PrimaryFont
+              as="p"
               className="tag-description"
             >
               {content.Payload[0].description}
-            </StyledDescription>
+            </PrimaryFont>
           )
         }
       </>

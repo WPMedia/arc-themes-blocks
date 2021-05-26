@@ -27,7 +27,7 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0"
+    "@wpmedia/shared-styles": "*"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0"

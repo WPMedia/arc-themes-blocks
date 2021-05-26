@@ -95,9 +95,7 @@ describe('the full author bio block', () => {
 
     it('should render a p', () => {
       const wrapper = mount(<FullAuthorBio />);
-      const bio = wrapper.find('.author-content > p');
-      expect(bio).toHaveClassName('author-bio');
-      expect(bio.text()).toMatch('She works on Arc Themes');
+      expect(wrapper.find('.author-bio').first().text()).toMatch('She works on Arc Themes');
     });
 
     it('should render a photo', () => {
@@ -135,9 +133,7 @@ describe('the full author bio block', () => {
 
     it('should render a short bio', () => {
       const wrapper = mount(<FullAuthorBio />);
-      const bio = wrapper.find('.author-content > p');
-      expect(bio).toHaveClassName('author-bio');
-      expect(bio.text()).toMatch('short bio');
+      expect(wrapper.find('.author-bio').first().text()).toMatch('short bio');
     });
   });
 
@@ -169,9 +165,7 @@ describe('the full author bio block', () => {
 
     it('should render a short bio', () => {
       const wrapper = mount(<FullAuthorBio />);
-      const bio = wrapper.find('.author-content > p');
-      expect(bio).toHaveClassName('author-bio');
-      expect(bio.text()).toMatch('Long bio');
+      expect(wrapper.find('.author-bio').first().text()).toMatch('Long bio');
     });
   });
 

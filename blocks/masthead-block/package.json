@@ -16,6 +16,7 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
+    "@wpmedia/shared-styles": "*",
     "styled-components": "^4.4.0"
   },
   "scripts": {

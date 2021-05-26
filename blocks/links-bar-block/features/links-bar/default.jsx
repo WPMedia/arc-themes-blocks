@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import getThemeStyle from 'fusion:themes';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import Link from './_children/link';
 

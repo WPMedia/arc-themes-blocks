@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { localizeDate } from '@wpmedia/engine-theme-sdk';
@@ -21,7 +20,6 @@ const Masthead = (props) => {
     },
   } = props;
   const { arcSite } = useFusionContext();
-  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
 
   const {
     dateLocalization: { language, timeZone, dateFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy' },
@@ -39,12 +37,12 @@ const Masthead = (props) => {
          </HeightConstrainedImageContainer>
          )
       }
-      <MastheadItemsContainer primaryFont={primaryFont}>
+      <MastheadItemsContainer>
         <div>
-          {showDate && <p className="masthead-block--text">{displayDate}</p>}
+          {showDate && <PrimaryFont as="p" className="masthead-block--text">{displayDate}</PrimaryFont>}
         </div>
         <div>
-          {tagLine && <p className="masthead-block--text">{tagLine}</p>}
+          {tagLine && <PrimaryFont as="p" className="masthead-block--text">{tagLine}</PrimaryFont>}
         </div>
         <div>
           {promoLinkURL && promoLinkText && (

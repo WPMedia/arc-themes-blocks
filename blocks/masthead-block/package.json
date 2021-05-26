@@ -16,7 +16,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

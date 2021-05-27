@@ -1,10 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import ResultsList from './default';
-import mockData, { oneListItem } from './mock-data';
 import { fetchStoriesTransform } from './helpers';
-
-const mockReturnData = mockData;
 
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 

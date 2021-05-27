@@ -14,7 +14,7 @@ const Tags = styled(LinkBackgroundHover)`
 
 const ArticleTagItems = () => {
   const { arcSite, globalContent: content } = useFusionContext();
-  const { 'primary-color': primaryColor, 'primary-font': primaryFont } = getThemeStyle(arcSite);
+  const { 'primary-color': primaryColor, 'primary-font-family': primaryFont } = getThemeStyle(arcSite);
   const defaultBackgroundColor = '#14689A';
   const { taxonomy: { tags = [] } = {} } = content;
 

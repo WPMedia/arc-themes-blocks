@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
 import getTranslatedPhrases from 'fusion:intl';
-import getThemeStyle from 'fusion:themes';
 import {
   EnvelopeIcon,
   TwitterIcon,
@@ -26,23 +24,8 @@ import {
   isServerSide,
   constructSocialURL,
 } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import './full-author-bio.scss';
-
-const StyledAuthorContent = styled.div`
-  font-family: ${(props) => props.primaryFont};
-
-  .author-name {
-    font-family: ${(props) => props.primaryFont};
-  }
-
-  .author-title {
-    font-family: ${(props) => props.primaryFont};
-  }
-
-  .author-bio {
-    font-family: ${(props) => props.secondaryFont};
-  }
-`;
 
 const logos = {
   email: <EnvelopeIcon title="Email" description="Email" alt="email" />,
@@ -129,11 +112,9 @@ const FullAuthorBioItem = () => {
           }
         </div>
         <div>
-          <StyledAuthorContent
+          <PrimaryFont
+            as="div"
             className="author-content"
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
-            primaryColor={getThemeStyle(arcSite)['primary-color']}
           >
             {
               (content.authors[0].byline) && (
@@ -147,12 +128,12 @@ const FullAuthorBioItem = () => {
             }
             {
               (content.authors[0].bio || content.authors[0].longBio) && (
-                <p className="author-bio">
+                <SecondaryFont className="author-bio">
                   {content.authors[0].longBio || content.authors[0].bio}
-                </p>
+                </SecondaryFont>
               )
             }
-          </StyledAuthorContent>
+          </PrimaryFont>
         </div>
 
         <div className="social-container">

@@ -1,12 +1,12 @@
 {
-   "full-author-bio-block.connect-text":{
-      "en":"Connect",
-      "sv":"Följ",
-      "no":"Kontakt",
-      "fr": "Connecter",
-      "de": "Verbinden",
-      "es": "Conectar",
-      "ja": "接続",
-      "ko": "연결"
-   }
+	"full-author-bio-block.connect-text": {
+		"de": "Verbinden",
+		"en": "Connect",
+		"es": "Conectar",
+		"fr": "Connecter",
+		"ja": "接続",
+		"ko": "연결",
+		"no": "Kontakt",
+		"sv": "Följ"
+	}
 }

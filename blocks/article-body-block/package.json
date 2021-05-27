@@ -27,14 +27,14 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable",
-    "@wpmedia/video-player-block": "canary",
-    "@wpmedia/shared-styles": "*",
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*",
+    "@wpmedia/video-player-block": "*",
     "styled-components": "^4.4.0"
   },
   "dependencies": {
-    "react-oembed-container": "^1.0.0"
+    "react-oembed-container": "^1.0.0",
+    "sanitize-html": "^1.18.2"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

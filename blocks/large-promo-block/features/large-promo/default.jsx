@@ -7,7 +7,9 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  LazyLoad, isServerSide,
+  LazyLoad,
+  isServerSide,
+  videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
@@ -127,6 +129,8 @@ const LargePromoItem = ({ customFields }) => {
                     id={id}
                     embedMarkup={videoEmbed}
                     enableAutoplay={false}
+                    shrinkToFit={customFields?.shrinkToFit}
+                    viewportPercentage={customFields?.viewportPercentage}
                   />
                 )
               )
@@ -245,6 +249,7 @@ LargePromo.propTypes = {
       defaultValue: false,
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
+    ...(videoPlayerCustomFields()),
   }),
 
 };

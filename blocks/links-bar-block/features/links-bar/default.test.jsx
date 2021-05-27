@@ -61,7 +61,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa epgcrJ links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"',
+      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"',
     );
   });
 
@@ -92,7 +92,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa epgcrJ links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bdVaJa epgcrJ links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bdVaJa epgcrJ links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"',
+      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"',
     );
   });
 
@@ -158,7 +158,10 @@ describe('the links bar feature for the default output type', () => {
       <LinksBar customFields={{ navigationConfig: 'links' }} />,
     );
 
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'More Links');
+    expect(wrapper.find('nav').props()).toHaveProperty(
+      'aria-label',
+      'More Links',
+    );
   });
 
   it('should render the block with the custom aria-label', () => {
@@ -169,7 +172,9 @@ describe('the links bar feature for the default output type', () => {
     }));
     const { default: LinksBar } = require('./default');
     const wrapper = shallow(
-      <LinksBar customFields={{ navigationConfig: 'links', ariaLabel: 'Links' }} />,
+      <LinksBar
+        customFields={{ navigationConfig: 'links', ariaLabel: 'Links' }}
+      />,
     );
 
     expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');

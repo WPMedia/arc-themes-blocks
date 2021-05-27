@@ -7,9 +7,13 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
 import {
-  Gallery, ImageMetadata, Image, Lightbox,
+  Gallery,
+  ImageMetadata,
+  Image,
+  Lightbox,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
 
 import './leadart.scss';
@@ -133,6 +137,8 @@ class LeadArt extends Component {
             id={id}
             embedMarkup={lead_art?.embed_html}
             enableAutoplay={!!(customFields?.enableAutoplay)}
+            shrinkToFit={customFields?.shrinkToFit}
+            viewportPercentage={customFields?.viewportPercentage}
             customFields={{
               playthrough: !!(customFields?.playthrough),
             }}
@@ -255,6 +261,7 @@ LeadArt.propTypes = {
       defaultValue: false,
       group: 'Video',
     }),
+    ...(videoPlayerCustomFields()),
   }),
 };
 

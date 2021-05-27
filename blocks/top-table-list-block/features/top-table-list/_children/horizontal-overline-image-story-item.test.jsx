@@ -109,6 +109,71 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('VideoPlayer')).toHaveLength(0);
   });
 
+  it('doesn\'t render headline if not requested', () => {
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const testProps = {
+      ...sampleProps,
+      customFields: {
+        ...sampleProps.customFields,
+        showHeadlineLG: false,
+      },
+    };
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
+    expect(wrapper.find('a.lg-promo-headline').length).toBe(0);
+  });
+
+  it('doesn\'t render image if not requested', () => {
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const testProps = {
+      ...sampleProps,
+      customFields: {
+        ...sampleProps.customFields,
+        showImageLG: false,
+      },
+    };
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
+    expect(wrapper.find('Image').length).toBe(0);
+  });
+
+  it('doesn\'t render description if not requested', () => {
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const testProps = {
+      ...sampleProps,
+      customFields: {
+        ...sampleProps.customFields,
+        showDescriptionLG: false,
+      },
+    };
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
+    expect(wrapper.find('PromoDescription').length).toBe(0);
+  });
+
+  it('doesn\'t render byline if not requested', () => {
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const testProps = {
+      ...sampleProps,
+      customFields: {
+        ...sampleProps.customFields,
+        showBylineLG: false,
+      },
+    };
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
+    expect(wrapper.find('Byline').length).toBe(0);
+  });
+
+  it('doesn\'t render date if not requested', () => {
+    const { default: HorizontalOverlineImageStoryItem } = require('./horizontal-overline-image-story-item');
+    const testProps = {
+      ...sampleProps,
+      customFields: {
+        ...sampleProps.customFields,
+        showDateLG: false,
+      },
+    };
+    const wrapper = mount(<HorizontalOverlineImageStoryItem {...testProps} />);
+    expect(wrapper.find('PromoDate').length).toBe(0);
+  });
+
   it('renders with empty props with defaults', () => {
     const testProps = {
       ...sampleProps,
@@ -245,5 +310,51 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
     expect(wrapper.find('Image')).toHaveLength(0); expect(wrapper.find('Image')).toHaveLength(0);
     expect(wrapper.find('VideoPlayer')).toHaveLength(1); expect(wrapper.find('VideoPlayer')).toHaveLength(1);
+  });
+});
+
+describe('settings export', () => {
+  beforeAll(() => {
+    jest.mock('@wpmedia/engine-theme-sdk', () => ({
+      videoPlayerCustomFieldTags: {
+        shrinkToFit: {
+          type: {
+            tag: () => ({
+              testProp: 'testValue',
+              group: 'testGroup',
+            }),
+          },
+        },
+        viewportPercentage: {
+          type: {
+            tag: () => ({
+              testProp: 'testValue',
+              group: 'testGroup',
+            }),
+          },
+        },
+      },
+    }));
+  });
+  afterAll(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  it('must export the pagebuilder settings', () => {
+    const { horizontalOverlineImageStoryFields } = require('./horizontal-overline-image-story-item');
+
+    const expectedFields = {
+      shrinkToFitLG: {
+        testProp: 'testValue',
+        group: 'testGroup',
+      },
+      viewportPercentageLG: {
+        testProp: 'testValue',
+        group: 'testGroup',
+      },
+    };
+
+    expect(horizontalOverlineImageStoryFields('group')).toStrictEqual(expectedFields);
   });
 });

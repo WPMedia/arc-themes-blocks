@@ -54,6 +54,8 @@ describe('the video promo feature', () => {
       inheritGlobalContent: false,
       autoplay: false,
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     };
   });
 
@@ -65,10 +67,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -82,10 +85,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -104,10 +108,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: true,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -120,10 +125,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'global-content-id',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -136,10 +142,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -152,10 +159,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: true,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 
@@ -168,10 +176,11 @@ describe('the video promo feature', () => {
     expect(video.prop('data-props')).toEqual({
       uuid: 'video-uuid',
       autoplay: false,
-      aspectRatio: 0.5625,
       org: 'org',
       env: 'env',
       playthrough: false,
+      shrinkToFit: false,
+      viewportPercentage: 75,
     });
   });
 

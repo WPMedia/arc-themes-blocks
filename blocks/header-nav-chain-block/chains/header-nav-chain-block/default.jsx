@@ -53,6 +53,9 @@ const StyledNav = styled.nav`
     z-index: ${navZIdx};
 
     &.nav-logo, & > .nav-logo {
+      &.svg-logo img {
+        height: 100%;
+      }
       img {
         height: auto;
         max-width: 240px;

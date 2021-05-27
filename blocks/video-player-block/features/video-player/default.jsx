@@ -7,6 +7,7 @@ import getThemeStyle from 'fusion:themes';
 import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
@@ -105,9 +106,11 @@ const VideoPlayer = (props) => {
           id={id}
           embedMarkup={embedHTML}
           enableAutoplay={enableAutoplay}
+          shrinkToFit={customFields?.shrinkToFit}
+          viewportPercentage={customFields?.viewportPercentage}
           customFields={{
-            playthrough,
             autoplay,
+            playthrough,
           }}
         />
       )}
@@ -127,33 +130,30 @@ const VideoPlayer = (props) => {
 VideoPlayer.propTypes = {
   customFields: PropTypes.shape({
     websiteURL: PropTypes.string.tag({
-      group: 'Configure Content',
       label: 'Display Content Info',
       hidden: true,
-    }),
-    itemContentConfig: PropTypes.contentConfig('ans-item').tag(
-      {
-        label: 'Video Content',
-        group: 'Configure Content',
-      },
-    ),
-    inheritGlobalContent: PropTypes.bool.tag({
       group: 'Configure Content',
+    }),
+    itemContentConfig: PropTypes.contentConfig('ans-item').tag({
+      label: 'Video Content',
+      group: 'Configure Content',
+    }),
+    inheritGlobalContent: PropTypes.bool.tag({
       label: 'Inherit global content',
       defaultValue: true,
+      group: 'Configure Content',
     }),
-    autoplay: PropTypes.bool.tag(
-      {
-        label: 'Autoplay',
-        defaultValue: false,
-        group: 'Video settings',
-      },
-    ),
+    autoplay: PropTypes.bool.tag({
+      label: 'Autoplay',
+      defaultValue: false,
+      group: 'Video Settings',
+    }),
     playthrough: PropTypes.bool.tag({
       label: 'Playthrough',
       defaultValue: false,
-      group: 'Video settings',
+      group: 'Video Settings',
     }),
+    ...(videoPlayerCustomFields()),
     title: PropTypes.string.tag({
       label: 'Title',
       group: 'Display settings',

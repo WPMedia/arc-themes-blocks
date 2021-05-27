@@ -3,6 +3,7 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
+  videoPlayerCustomFieldTags,
 } from '@wpmedia/engine-theme-sdk';
 import {
   Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
@@ -37,6 +38,8 @@ const HorizontalOverlineImageStoryItem = (props) => {
                       id={id}
                       embedMarkup={videoEmbed}
                       enableAutoplay={false}
+                      shrinkToFit={customFields?.shrinkToFitLG}
+                      viewportPercentage={customFields?.viewportPercentageLG}
                     />
                   )
                 ) || (
@@ -98,5 +101,16 @@ const HorizontalOverlineImageStoryItem = (props) => {
     </>
   );
 };
+
+export const horizontalOverlineImageStoryFields = (group) => ({
+  shrinkToFitLG: videoPlayerCustomFieldTags.shrinkToFit.type.tag({
+    ...(videoPlayerCustomFieldTags.shrinkToFit),
+    group,
+  }),
+  viewportPercentageLG: videoPlayerCustomFieldTags.viewportPercentage.type.tag({
+    ...(videoPlayerCustomFieldTags.viewportPercentage),
+    group,
+  }),
+});
 
 export default HorizontalOverlineImageStoryItem;

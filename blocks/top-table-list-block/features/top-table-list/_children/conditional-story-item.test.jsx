@@ -161,6 +161,14 @@ describe('default ratios', () => {
     jest.clearAllMocks();
   });
 
+  it('must return empty if there is no size passed in', () => {
+    const { default: ConditionalStoryItem } = require('./conditional-story-item');
+    const wrapper = mount(
+      <ConditionalStoryItem />,
+    );
+    expect(wrapper.children().exists()).toBe(false);
+  });
+
   it('must have a default 4:3 ratio for XL', () => {
     const xlConfig = {
       extraLarge: 1,
@@ -367,5 +375,19 @@ describe('default ratios', () => {
       <ConditionalStoryItem storySize={SMALL} customFields={smConfig} />,
     );
     expect(wrapper.find('PlaceholderImage').prop('largeHeight')).toBe(267);
+  });
+});
+
+describe('settings export', () => {
+  it('must export the pagebuilder settings', () => {
+    const { conditionalStoryFields } = require('./conditional-story-item');
+    const { verticalOverlineImageStoryFields } = require('./vertical-overline-image-story-item');
+    const { horizontalOverlineImageStoryFields } = require('./horizontal-overline-image-story-item');
+    const expectedFields = {
+      EXTRA_LARGE: verticalOverlineImageStoryFields,
+      LARGE: horizontalOverlineImageStoryFields,
+    };
+
+    expect(conditionalStoryFields).toStrictEqual(expectedFields);
   });
 });

@@ -1,1 +1,22 @@
-{"header-nav-chain-block.sections-button":{"de":"Ressorts","en":"Sections","es":"Secciones","fr":"Sections","ja":"セクション","ko":"섹션","no":"Meny","sv":"Meny"},"header-nav-chain-block.search-text":{"de":"Suche","en":"Search","es":"Buscar","fr":"Rechercher","ja":"検索","ko":"검색","no":"Søk","sv":"Sök"}}
+{
+	"header-nav-chain-block.sections-button": {
+		"de": "Ressorts",
+		"en": "Sections",
+		"es": "Secciones",
+		"fr": "Sections",
+		"ja": "セクション",
+		"ko": "섹션",
+		"no": "Meny",
+		"sv": "Meny"
+	},
+	"header-nav-chain-block.search-text": {
+		"de": "Suche",
+		"en": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
+		"no": "Søk",
+		"sv": "Sök"
+	}
+}

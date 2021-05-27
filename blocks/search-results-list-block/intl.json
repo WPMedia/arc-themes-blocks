@@ -1,1 +1,32 @@
-{"search-results-block.search-button":{"de":"Suche","en":"Search","es":"Buscar","fr":"Rechercher","ja":"検索","ko":"검색","no":"Søk","sv":"Sök"},"search-results-block.search-result-number":{"de":"%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"","en":"%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"","es":"%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"","fr":"%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"","ja":"%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件","ko":"\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개","no":"%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"","sv":"%{smart_count} resultat för ”%{searchTerm}”"},"search-results-block.see-more-button":{"de":"Mehr anzeigen","en":"See More","es":"Ver más","fr":"En savoir plus","ja":"詳細","ko":"자세히 보기","no":"Se mer","sv":"Fler artiklar"}}
+{
+	"search-results-block.search-button": {
+		"de": "Suche",
+		"en": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
+		"no": "Søk",
+		"sv": "Sök"
+	},
+	"search-results-block.search-result-number": {
+		"de": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"",
+		"en": "%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
+		"es": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
+		"fr": "%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
+		"ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
+		"ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
+		"no": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+		"sv": "%{smart_count} resultat för ”%{searchTerm}”"
+	},
+	"search-results-block.see-more-button": {
+		"de": "Mehr anzeigen",
+		"en": "See More",
+		"es": "Ver más",
+		"fr": "En savoir plus",
+		"ja": "詳細",
+		"ko": "자세히 보기",
+		"no": "Se mer",
+		"sv": "Fler artiklar"
+	}
+}

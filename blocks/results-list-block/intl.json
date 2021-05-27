@@ -1,1 +1,12 @@
-{"results-list-block.see-more-button":{"de":"Mehr anzeigen","en":"See More","es":"Ver más","fr":"En savoir plus","ja":"詳細","ko":"자세히 보기","no":"Se mer","sv":"Fler artiklar"}}
+{
+	"results-list-block.see-more-button": {
+		"de": "Mehr anzeigen",
+		"en": "See More",
+		"es": "Ver más",
+		"fr": "En savoir plus",
+		"ja": "詳細",
+		"ko": "자세히 보기",
+		"no": "Se mer",
+		"sv": "Fler artiklar"
+	}
+}

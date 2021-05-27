@@ -1,1 +1,62 @@
-{"global.gallery-expand-button":{"de":"Erweitern","en":"Expand","es":"Expandir","fr":"Développer","ja":"展開","ko":"더보기","no":"Utvid","sv":"Förstora"},"global.gallery-page-count-text":{"de":"%{current} von %{total}","en":"<span class='sr-only'>Image</span> %{current} of %{total}","es":"%{current} de %{total}","fr":"%{current} de %{total}","ja":"%{current} / %{total}","ko":"%{current}/%개 보는 %{total}","no":"%{current} av %{total}","sv":"%{current} av %{total}"},"global.gallery-autoplay-button":{"de":"Automatische Wiedergabe","en":"Autoplay","es":"Reproducción automática","fr":"Lecture automatique","ja":"自動再生","ko":"자동 재생","no":"Spill av","sv":"Spela upp"},"global.gallery-pause-autoplay-button":{"de":"Automatische Wiedergabe anhalten","en":"Pause autoplay","es":"Pausar reproducción automática","fr":"Mettre en pause la lecture automatique","ja":"自動再生の一時停止","ko":"자동 재생 일시 중지","no":"Stopp","sv":"Pausa"},"global.gallery-autoplay-label-start":{"de":"Start automatic slide show","en":"Start automatic slide show","es":"Start automatic slide show","fr":"Start automatic slide show","ja":"Start automatic slide show","ko":"Start automatic slide show","no":"Start automatic slide show","sv":"Start automatic slide show"},"global.gallery-autoplay-label-stop":{"de":"Stop automatic slide show","en":"Stop automatic slide show","es":"Stop automatic slide show","fr":"Stop automatic slide show","ja":"Stop automatic slide show","ko":"Stop automatic slide show","no":"Stop automatic slide show","sv":"Stop automatic slide show"}}
+{
+	"global.gallery-expand-button": {
+		"de": "Erweitern",
+		"en": "Expand",
+		"es": "Expandir",
+		"fr": "Développer",
+		"ja": "展開",
+		"ko": "더보기",
+		"no": "Utvid",
+		"sv": "Förstora"
+	},
+	"global.gallery-page-count-text": {
+		"de": "%{current} von %{total}",
+		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
+		"es": "%{current} de %{total}",
+		"fr": "%{current} de %{total}",
+		"ja": "%{current} / %{total}",
+		"ko": "%{current}/%개 보는 %{total}",
+		"no": "%{current} av %{total}",
+		"sv": "%{current} av %{total}"
+	},
+	"global.gallery-autoplay-button": {
+		"de": "Automatische Wiedergabe",
+		"en": "Autoplay",
+		"es": "Reproducción automática",
+		"fr": "Lecture automatique",
+		"ja": "自動再生",
+		"ko": "자동 재생",
+		"no": "Spill av",
+		"sv": "Spela upp"
+	},
+	"global.gallery-pause-autoplay-button": {
+		"de": "Automatische Wiedergabe anhalten",
+		"en": "Pause autoplay",
+		"es": "Pausar reproducción automática",
+		"fr": "Mettre en pause la lecture automatique",
+		"ja": "自動再生の一時停止",
+		"ko": "자동 재생 일시 중지",
+		"no": "Stopp",
+		"sv": "Pausa"
+	},
+	"global.gallery-autoplay-label-start": {
+		"de": "Start automatic slide show",
+		"en": "Start automatic slide show",
+		"es": "Start automatic slide show",
+		"fr": "Start automatic slide show",
+		"ja": "Start automatic slide show",
+		"ko": "Start automatic slide show",
+		"no": "Start automatic slide show",
+		"sv": "Start automatic slide show"
+	},
+	"global.gallery-autoplay-label-stop": {
+		"de": "Stop automatic slide show",
+		"en": "Stop automatic slide show",
+		"es": "Stop automatic slide show",
+		"fr": "Stop automatic slide show",
+		"ja": "Stop automatic slide show",
+		"ko": "Stop automatic slide show",
+		"no": "Stop automatic slide show",
+		"sv": "Stop automatic slide show"
+	}
+}

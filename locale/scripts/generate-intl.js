@@ -35,5 +35,5 @@ blockNames.forEach((key) => {
     });
   });
 
-  fs.writeFileSync(`./blocks/${key}/intl.json`, JSON.stringify(blockOutputMap));
+  fs.writeFileSync(`./blocks/${key}/intl.json`, JSON.stringify(blockOutputMap, null, '\t'));
 });

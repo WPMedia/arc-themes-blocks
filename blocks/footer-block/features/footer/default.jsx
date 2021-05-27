@@ -132,9 +132,9 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
             </div>
             <div className="copyright-column">
               {/* If large screen, show copyright over border */}
-              <p className="copyright" id="copyright-top" style={{ width: '100%' }}>
+              <PrimaryFont as="p" className="copyright" id="copyright-top" style={{ width: '100%' }}>
                 {copyrightText}
-              </p>
+              </PrimaryFont>
             </div>
           </div>
         </section>

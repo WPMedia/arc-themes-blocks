@@ -26,6 +26,7 @@ function extractImage(promo) {
 
 const ReadMoreButton = styled.button`
   background-color: ${(props) => props.primaryColor};
+  font-family: ${(props) => props.primaryFont};
 
   &:not(:disabled):not(.disabled):active:hover,
   &:not(:disabled):not(.disabled):hover:hover {
@@ -257,7 +258,6 @@ class ResultsList extends Component {
       resultList: { content_elements: contentElements = [] } = {}, seeMore,
       placeholderResizedImageOptions,
     } = this.state;
-    console.log(contentElements);
     const targetFallbackImage = this.getFallbackImageURL();
     const promoElements = resolveDefaultPromoElements(customFields);
 
@@ -379,6 +379,7 @@ class ResultsList extends Component {
           type="button"
           onClick={() => this.fetchStories(true)}
           className="btn btn-sm"
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
           primaryColor={getThemeStyle(arcSite)['primary-color']}
         >
           {this.phrases.t('results-list-block.see-more-button')}

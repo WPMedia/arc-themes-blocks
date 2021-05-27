@@ -6,7 +6,6 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Link from '@wpmedia/links-bar-block';
-
 import {
   FacebookAltIcon,
   TwitterIcon,
@@ -14,12 +13,8 @@ import {
   LazyLoad,
   isServerSide,
 } from '@wpmedia/engine-theme-sdk';
-
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import './footer.scss';
-
-const FooterSection = styled.div`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 export const StyledSocialContainer = styled.div`
   border: ${(props) => (props.hasSocialLinks ? '1px' : '0')} solid ${(props) => props.primaryColor};
@@ -160,14 +155,14 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
           )) : [];
 
           return (
-            <FooterSection
+            <PrimaryFont
+              as="div"
               className="footer-section col-sm-12 col-md-6 col-lg-xl-3"
               key={column._id}
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             >
               <h4 className="footer-header">{(column.name) ? column.name : ''}</h4>
               <ul>{columnItems}</ul>
-            </FooterSection>
+            </PrimaryFont>
           );
         })}
       </div>

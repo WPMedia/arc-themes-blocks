@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { localizeDate } from '@wpmedia/engine-theme-sdk';
 
 // styles
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import MastheadItemsContainer from './_children/MastheadItemsContainer';
 import HeightConstrainedImageContainer from './_children/HeightConstrainedImageContainer';
-import StyledLink from './_children/StyledLink';
 import GenericDivider from './_children/GenericDivider';
 import HeaderContainerHideMobile from './_children/HeaderContainerHideMobile';
 
@@ -21,7 +20,6 @@ const Masthead = (props) => {
     },
   } = props;
   const { arcSite } = useFusionContext();
-  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
 
   const {
     dateLocalization: { language, timeZone, dateFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy' },
@@ -39,18 +37,18 @@ const Masthead = (props) => {
          </HeightConstrainedImageContainer>
          )
       }
-      <MastheadItemsContainer primaryFont={primaryFont}>
+      <MastheadItemsContainer>
         <div>
-          {showDate && <p className="masthead-block--text">{displayDate}</p>}
+          {showDate && <PrimaryFont as="p" className="masthead-block--text">{displayDate}</PrimaryFont>}
         </div>
         <div>
-          {tagLine && <p className="masthead-block--text">{tagLine}</p>}
+          {tagLine && <PrimaryFont as="p" className="masthead-block--text">{tagLine}</PrimaryFont>}
         </div>
         <div>
           {promoLinkURL && promoLinkText && (
-          <StyledLink primaryFont={primaryFont} href={promoLinkURL} className="masthead-block--text">
+          <PrimaryFont as="a" href={promoLinkURL} className="masthead-block--text masthead-block--promo-link">
             {promoLinkText}
-          </StyledLink>
+          </PrimaryFont>
           )}
         </div>
       </MastheadItemsContainer>

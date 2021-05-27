@@ -27,8 +27,8 @@
     "lint": "eslint --ext js --ext jsx output-types"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

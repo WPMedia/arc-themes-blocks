@@ -24,9 +24,9 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "canary",
-    "@wpmedia/news-theme-css": "stable",
-    "styled-components": "^4.4.0"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/news-theme-css": "*",
+    "@wpmedia/shared-style": "*"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

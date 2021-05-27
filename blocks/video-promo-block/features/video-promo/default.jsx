@@ -6,10 +6,7 @@ import getThemeStyle from 'fusion:themes';
 import { videoOrg, videoEnv } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { Video, videoPlayerCustomFields } from '@wpmedia/engine-theme-sdk';
-
-const TitleText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const DescriptionText = styled.p`
   font-family: ${(props) => props.secondaryFont};
@@ -65,12 +62,13 @@ const VideoPromo = ({ customFields }) => {
             )}
           {title
             && (
-            <TitleText
+            <PrimaryFont
+              as="h2"
               primaryFont={getThemeStyle(arcSite)['primary-font-family']}
               className="xl-promo-headline"
             >
               {title}
-            </TitleText>
+            </PrimaryFont>
             )}
           <Video
             uuid={videoId}

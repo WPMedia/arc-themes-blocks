@@ -283,33 +283,3 @@ describe('fetchStoriesTransform', () => {
     expect(result).toEqual({ content_elements: ['C', 'D', 'A', 'B'], next: 10 });
   });
 });
-
-describe('styled components', () => {
-  const listContentConfig = {
-    contentConfigValues: {
-      offset: '0',
-      query: 'type: story',
-      size: '1',
-    },
-    contentService: 'story-feed-query',
-  };
-  const customFields = { listContentConfig };
-
-  it('renders styled headline, read more button and description', () => {
-    ResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const fetched = (content) => new Promise((resolve) => {
-      resolve(content);
-    });
-    ResultsList.prototype.getContent = jest.fn()
-      .mockReturnValue({ fetched: fetched({ mockReturnData }) });
-    ResultsList.prototype.getThemeStyle = jest.fn().mockReturnValue({ 'primary-font-family': 'font1' });
-
-    const mockDeployment = jest.fn();
-    const wrapper = mount(<ResultsList arcSite="the-sun" deployment={mockDeployment} contextPath="/pf" customFields={customFields} />);
-    wrapper.setState({ resultList: oneListItem });
-    wrapper.update();
-
-    expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(3);
-    expect(wrapper.find('.list-item').find('.description-text').length).toEqual(3);
-  });
-});

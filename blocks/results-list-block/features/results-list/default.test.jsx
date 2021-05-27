@@ -33,6 +33,8 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
+  PrimaryFont: ({ children }) => <div id="primary-font-mock">{children}</div>,
+  SecondaryFont: ({ children }) => <div id="secondary-font-mock">{children}</div>,
 }));
 
 describe('The results list', () => {
@@ -102,13 +104,13 @@ describe('The results list', () => {
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
       });
 
       it('should render a headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
-        expect(wrapper.find('.list-item').find('h2.headline-text').text()).toEqual('Article with a YouTube embed in it');
-        expect(wrapper.find('.list-item').find('p.description-text')
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').text()).toEqual('Article with a YouTube embed in it');
+        expect(wrapper.find('.list-item').find('.description-text')
           .text()).toEqual('Test article for YouTube responsiveness');
       });
 
@@ -152,17 +154,17 @@ describe('The results list', () => {
       });
 
       it('should render a parent for headline and a description', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
       });
 
       it('should render a headline', () => {
-        expect(wrapper.find('.list-item').find('h2.headline-text').length).toEqual(1);
-        expect(wrapper.find('.list-item').find('h2.headline-text')
+        expect(wrapper.find('.list-item').find('.headline-text').length).toEqual(1);
+        expect(wrapper.find('.list-item').find('.headline-text')
           .text()).toEqual('Article with a YouTube embed in it');
       });
 
       it('should not render a description', () => {
-        expect(wrapper.find('.list-item').find('p.description-text').length).toEqual(0);
+        expect(wrapper.find('.list-item').find('.description-text').length).toEqual(0);
       });
     });
   });

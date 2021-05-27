@@ -21,6 +21,7 @@
     "latest-stable-parity": "lerna exec --no-bail --parallel -- npm dist-tag add \\${LERNA_PACKAGE_NAME}@$(node -e \"console.log(require('./lerna.json').version)\") stable",
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
     "test:coverage": "jest --coverage",
+    "generate:intl": "node locale/scripts/generate-intl.js",
     "postinstall": "npx lerna clean -y"
   },
   "husky": {

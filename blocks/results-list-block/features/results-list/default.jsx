@@ -11,7 +11,7 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { Byline } from '@wpmedia/shared-styles';
+import { Byline, PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
@@ -23,14 +23,6 @@ import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 function extractImage(promo) {
   return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
 }
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
 
 const ReadMoreButton = styled.button`
   background-color: ${(props) => props.primaryColor};
@@ -340,12 +332,12 @@ class ResultsList extends Component {
                   href={url}
                   title={headlineText}
                 >
-                  <HeadlineText
-                    primaryFont={getThemeStyle(this.arcSite)['primary-font-family']}
+                  <PrimaryFont
+                    as="h2"
                     className="headline-text"
                   >
                     {headlineText}
-                  </HeadlineText>
+                  </PrimaryFont>
                 </a>
               </div>
               )}
@@ -360,12 +352,12 @@ class ResultsList extends Component {
                   href={url}
                   title={headlineText}
                 >
-                  <DescriptionText
-                    secondaryFont={getThemeStyle(this.arcSite)['secondary-font-family']}
+                  <SecondaryFont
+                    as="p"
                     className="description-text"
                   >
                     {descriptionText}
-                  </DescriptionText>
+                  </SecondaryFont>
                 </a>
                 )}
                 { (promoElements.showDate || promoElements.showByline) && (

@@ -4,7 +4,7 @@ import PrimaryFont from './_children/primary-font';
 import SecondaryFont from './_children/secondary-font';
 
 export default {
-  title: 'Shared Styles',
+  title: 'Shared Styles/Fonts',
   decorators: [withKnobs],
 };
 

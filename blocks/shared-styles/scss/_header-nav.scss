@@ -240,10 +240,6 @@ body.nav-open {
       justify-content: flex-end;
     }
 
-    .nav-logo {
-      justify-content: center;
-    }
-
     &.nav-logo-hidden {
       opacity: 0;
       transition: opacity 800ms ease, visibility 0s ease 800ms;
@@ -255,6 +251,10 @@ body.nav-open {
       transition: opacity 800ms ease, visibility 0s ease 0s;
       visibility: visible;
     }
+  }
+
+  .nav-logo {
+    justify-content: center;
   }
 
   .nav-logo.svg-logo {

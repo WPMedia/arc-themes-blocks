@@ -242,13 +242,6 @@ body.nav-open {
 
     &.nav-logo, & > .nav-logo {
       justify-content: center;
-
-      &.svg-logo {
-        flex: 0 1 auto;
-        img {
-          height: 100%;
-        }
-      }
     }
 
     &.nav-logo-hidden {
@@ -261,6 +254,14 @@ body.nav-open {
       opacity: 1;
       transition: opacity 800ms ease, visibility 0s ease 0s;
       visibility: visible;
+    }
+  }
+
+  .nav-logo.svg-logo {
+    flex: 0 1 auto;
+
+    img {
+      height: 100%;
     }
   }
 

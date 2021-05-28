@@ -244,7 +244,10 @@ body.nav-open {
       justify-content: center;
 
       &.svg-logo {
-        flex: 1;
+        flex: 0 1 auto;
+        img {
+          height: 100%;
+        }
       }
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import List from './list';
 
 export default ({ element, className }) => {
@@ -11,7 +11,8 @@ export default ({ element, className }) => {
   contentElements.forEach((contentItem) => {
     if (contentItem.type === 'text'
       && Object.prototype.hasOwnProperty.call(contentItem, 'content')) {
-      quoteItems.push(<p
+      quoteItems.push(<SecondaryFont
+        as="p"
         key={contentItem._id}
         dangerouslySetInnerHTML={{ __html: contentItem.content }}
       />);

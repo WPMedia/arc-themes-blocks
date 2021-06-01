@@ -4,6 +4,7 @@ const { mount } = require('enzyme');
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   PrimaryFont: (props) => <span {...props} />,
+  SecondaryFont: (props) => <p {...props} />,
 }));
 
 describe('the article body Blockquote component', () => {
@@ -75,8 +76,6 @@ describe('the article body Blockquote component', () => {
     const { default: Quote } = require('./quote');
     const wrapper = mount(<Quote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
-    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
-    expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.</p>');
     expect(wrapper.find('blockquote').find('span').length).toBe(1);
   });
 
@@ -131,7 +130,6 @@ describe('the article body Blockquote component', () => {
     const { default: Quote } = require('./quote');
     const wrapper = mount(<Quote element={blockquote} />);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
-    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
     expect(wrapper.find('blockquote').find('span').length).toBe(0);
   });
 
@@ -183,8 +181,6 @@ describe('the article body Blockquote component', () => {
     const wrapper = mount(<Quote element={blockquote} className="my-custom-classname" />);
     expect(wrapper.find('blockquote.my-custom-classname').length).toBe(1);
     expect(wrapper.find('blockquote').find('p').length).toBe(2);
-    expect(wrapper.find('blockquote').childAt(0).html()).toMatch('<p>A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.</p>');
-    expect(wrapper.find('blockquote').childAt(1).html()).toMatch('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.</p>');
     expect(wrapper.find('blockquote').find('span').length).toBe(1);
   });
 });

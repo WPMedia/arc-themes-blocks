@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
-import Lazy from 'lazy-child';
 import { useFusionContext } from 'fusion:context';
+import { LazyLoad } from '@wpmedia/engine-theme-sdk';
+
 import adMap from './ad-mapping';
+import AdUnit from './_children/AdUnit';
 import ArcAdminAd from './_children/ArcAdminAd';
 import { getAdObject } from './ad-helper';
-import AdUnit from './_children/AdUnit';
 import './ads.scss';
 
 function generateInstanceId(componentId) {
@@ -55,24 +56,6 @@ const ArcAd = (props) => {
       && propsWithContext.outputType === 'amp')
   );
 
-  const LazyLoad = ({ children, enabled }) => (
-    !enabled ? children : (
-      <Lazy
-        offsetBottom={0}
-        offsetLeft={0}
-        offsetRight={0}
-        offsetTop={200}
-        // eslint-disable-next-line arrow-body-style
-        renderPlaceholder={(ref) => {
-          // istanbul ignore next
-          return <div ref={ref} />;
-        }}
-      >
-        { children }
-      </Lazy>
-    )
-  );
-
   const [width, height] = config.adClass ? config.adClass.split('x') : [];
   // Height is + 17px to account line-height of advertisment string of 17px;
   const heightWithAdjustments = parseInt(height, 10) + ((displayAdLabel) ? 17 : 0);
@@ -91,7 +74,18 @@ const ArcAd = (props) => {
     >
       <div className="arcad-container" style={sizing}>
         {!isAdmin && !isAMP() && (
-          <LazyLoad enabled={lazyLoad}>
+          <LazyLoad
+            enabled={lazyLoad}
+            offsetBottom={0}
+            offsetLeft={0}
+            offsetRight={0}
+            offsetTop={200}
+            // eslint-disable-next-line arrow-body-style
+            renderPlaceholder={(ref) => {
+              // istanbul ignore next
+              return <div ref={ref} />;
+            }}
+          >
             <AdUnit
               adConfig={config}
               featureConfig={propsWithContext}

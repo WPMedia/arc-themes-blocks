@@ -195,70 +195,69 @@ body.nav-open {
     &:last-child {
       margin-right: 0;
     }
+  }
 
-    &.nav-left,
-    &.nav-right {
-      & > .nav-components {
-        &--mobile,
-        &--desktop {
-          align-items: center;
+  .nav-left,
+  .nav-right {
+    .nav-components--mobile {
+      display: none;
+      align-items: center;
+    }
 
-          & > .nav-widget {
-            margin-right: calculateRem(16px);
+    .nav-components--desktop {
+      display: inherit;
+      align-items: center;
+    }
 
-            &:last-child {
-              margin-right: 0;
-            }
-          }
-        }
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      .nav-components--mobile {
+        display: inherit;
+      }
 
-        &--mobile {
-          display: none;
-        }
-
-        &--desktop {
-          display: inherit;
-        }
-
-        @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-          &--desktop {
-            display: none;
-          }
-
-          &--mobile {
-            display: inherit;
-          }
-        }
+      .nav-components--desktop {
+        display: none;
       }
     }
 
-    &.nav-left {
-      justify-content: flex-start;
+    .nav-widget {
+      margin-right: calculateRem(16px);
     }
 
-    &.nav-right {
-      justify-content: flex-end;
+    .nav-widget:last-child {
+      margin-right: 0;
     }
+  }
 
-    &.nav-logo, & > .nav-logo {
-      justify-content: center;
+  .nav-left {
+    justify-content: flex-start;
+  }
 
-      &.svg-logo {
-        flex: 1;
-      }
+  .nav-right {
+    justify-content: flex-end;
+  }
+
+  .nav-logo {
+    justify-content: center;
+  }
+
+  .nav-logo.svg-logo {
+    flex: 0 1 auto;
+
+    img {
+      height: 100%;
     }
+  }
 
-    &.nav-logo-hidden {
-      opacity: 0;
-      transition: opacity 800ms ease, visibility 0s ease 800ms;
-      visibility: hidden;
-    }
+  .nav-logo-hidden {
+    opacity: 0;
+    transition: opacity 800ms ease, visibility 0s ease 800ms;
+    visibility: hidden;
+  }
 
-    &.nav-logo-show {
-      opacity: 1;
-      transition: opacity 800ms ease, visibility 0s ease 0s;
-      visibility: visible;
-    }
+  .nav-logo-show {
+    opacity: 1;
+    transition: opacity 800ms ease, visibility 0s ease 0s;
+    visibility: visible;
   }
 
   &.logo {

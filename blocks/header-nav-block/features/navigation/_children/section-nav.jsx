@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, formatURL } from '@wpmedia/engine-theme-sdk';
+import { ChevronRightIcon, formatURL } from '@wpmedia/engine-theme-sdk';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
 
@@ -25,7 +25,7 @@ const SectionItem = ({ item }) => {
   const child = (hasChildren(item)
   && (
     <span className="submenu-caret">
-      <ChevronRight fill="rgba(255, 255, 255, 0.5)" height={12} width={12} />
+      <ChevronRightIcon fill="rgba(255, 255, 255, 0.5)" height={12} width={12} />
     </span>
   ));
   return (

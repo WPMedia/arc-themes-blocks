@@ -1,5 +1,5 @@
 import React from 'react';
-import ChevronRight from '@wpmedia/engine-theme-sdk/dist/es/components/icons/ChevronRightIcon';
+import { ChevronRight } from '@wpmedia/engine-theme-sdk';
 import Link from './link';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }

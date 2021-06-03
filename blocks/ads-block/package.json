@@ -23,7 +23,6 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "arcads": "^4.0.0",
-    "lazy-child": "^0.2.0"
+    "arcads": "^4.0.0"
   }
 }

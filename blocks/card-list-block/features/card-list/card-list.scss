@@ -34,10 +34,7 @@
 }
 
 .card-list-overline {
-  color: $ui-primary-font-color;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 24px;
+  font-size: calculateRem(16px);
   padding: 12px 0 0 16px;
 }
 

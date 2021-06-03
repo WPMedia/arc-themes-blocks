@@ -145,7 +145,7 @@ describe('the footer feature for the default output type', () => {
 
   it('should have 5 column headers', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
-    
+
     expect(wrapper.find('h4.footer-header')).toHaveLength(5);
   });
 

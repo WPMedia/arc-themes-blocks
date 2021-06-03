@@ -80,6 +80,7 @@ const items = [
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => (input.toString())),
+  ChevronRightIcon: jest.fn(() => <span />),
 }));
 
 describe('the SectionNav component', () => {

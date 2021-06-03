@@ -2,7 +2,7 @@ import React from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
+import { HamburgerMenuIcon } from '@wpmedia/engine-theme-sdk';
 import SearchBox from './search-box';
 import QuerylySearch from './queryly-search';
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from '../nav-helper';

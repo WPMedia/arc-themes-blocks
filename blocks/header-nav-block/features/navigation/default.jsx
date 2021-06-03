@@ -6,8 +6,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import HamburgerMenuIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/HamburgerMenuIcon';
-import UserIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/UserIcon';
+import { HamburgerMenuIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
 import SectionNav from './_children/section-nav';
 import SearchBox from './_children/search-box';
 // shares styles with header nav chain

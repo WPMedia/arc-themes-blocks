@@ -4,7 +4,7 @@ import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 
 import SearchResult from './search-result';

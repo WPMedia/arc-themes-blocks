@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 
 export default ({
   alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,

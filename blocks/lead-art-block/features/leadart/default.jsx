@@ -14,10 +14,10 @@ import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
   videoPlayerCustomFields,
+  FullscreenIcon,
 } from '@wpmedia/engine-theme-sdk';
 
 import './leadart.scss';
-import FullscreenIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/FullscreenIcon';
 
 const LeadArtWrapperDiv = styled.div`
   figcaption {

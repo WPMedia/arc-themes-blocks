@@ -6,7 +6,7 @@ import getThemeStyle from 'fusion:themes';
 
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import SearchIcon from '@wpmedia/engine-theme-sdk/dist/es/components/icons/SearchIcon';
+import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 import SearchResult from './search-result';
 
 // shared with results list

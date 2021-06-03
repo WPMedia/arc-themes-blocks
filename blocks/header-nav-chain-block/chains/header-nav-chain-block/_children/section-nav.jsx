@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight } from '@wpmedia/engine-theme-sdk';
+import { ChevronRightIcon } from '@wpmedia/engine-theme-sdk';
 import Link from './link';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
@@ -56,7 +56,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden }) => (
       aria-controls={`header_sub_section_${item._id.replace('/', '')}`}
       {...(isHidden ? { tabIndex: -1 } : {})}
     >
-      <ChevronRight height={20} width={20} />
+      <ChevronRightIcon height={20} width={20} />
     </button>
   </div>
 );

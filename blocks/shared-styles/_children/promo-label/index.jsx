@@ -9,7 +9,7 @@ import PrimaryFont from '../primary-font';
 
 const LabelBoxLarge = styled.div`
   align-items: center;
-  padding: 6px 8px 8px;
+  padding: 7px 8px;
   background-color: ${(props) => props.primaryColor};
   border: 0;
   border-radius: 4px;

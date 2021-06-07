@@ -1,6 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
 import React from 'react';
-import getThemeStyle from 'fusion:themes';
 import { mount } from 'enzyme';
 
 const mockPhrases = {
@@ -65,7 +64,6 @@ describe('gallery feature block - no custom fields', () => {
 
   it('should render the global content gallery', () => {
     const { default: GalleryFeature } = require('./default');
-    getThemeStyle.mockImplementation(() => ({ 'primary-font-family': 'Open-Sans' }));
     const wrapper = mount(<GalleryFeature />);
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);

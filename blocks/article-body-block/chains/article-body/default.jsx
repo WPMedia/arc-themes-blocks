@@ -225,6 +225,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             ansId={item._id}
             ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
             // autoplayPhraseLabels={autoplayPhraseLabels}
+            controlsFont={getThemeStyle(arcSite)['primary-font-family']}
             expandPhrase={phrases.t('global.gallery-expand-button')}
             autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
             pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}

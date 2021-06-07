@@ -225,6 +225,7 @@ class LeadArt extends Component {
             ansHeadline={lead_art.headlines.basic ? lead_art.headlines.basic : ''}
             expandPhrase={this.phrases.t('global.gallery-expand-button')}
             // autoplayPhraseLabels={autoplayPhraseLabels}
+            controlsFont={getThemeStyle(arcSite)['primary-font-family']}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}

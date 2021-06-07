@@ -1,13 +1,8 @@
 .overline {
-  color: $ui-primary-font-color;
   display: inline-block;
   font-size: calculateRem(20px);
   font-weight: bold;
   line-height: calculateRem(24px);
   padding-bottom: map-get($spacers, 'sm');
   text-decoration: none;
-
-  &--link {
-    @include link-color-active-hover($ui-primary-font-color);
-  }
 }

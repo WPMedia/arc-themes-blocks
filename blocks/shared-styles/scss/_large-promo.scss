@@ -1,8 +1,5 @@
 .large-promo {
-  color: $ui-primary-font-color;
-
   a {
-    color: $ui-primary-font-color;
     position: relative;
   }
 
@@ -23,7 +20,6 @@
   }
 
   .lg-promo-headline {
-    @include link-color-active-hover($ui-primary-font-color);
     font-size: calculateRem(22px);
     font-weight: bold;
     line-height: calculateRem(24px);

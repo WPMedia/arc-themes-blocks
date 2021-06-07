@@ -19,19 +19,13 @@
   padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
 
   a {
-    @include link-color-active-hover($ui-primary-font-color);
-    color: $ui-primary-font-color;
     text-decoration: none;
-
-    & * {
-      @include link-color-active-hover($ui-primary-font-color);
-    }
   }
 
   a,
   h2,
   p {
-    color: $ui-primary-font-color;
+    
   }
 
   img {

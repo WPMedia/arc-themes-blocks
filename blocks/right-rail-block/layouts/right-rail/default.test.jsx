@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { useAppContext } from 'fusion:context';
+import { useAppContext, useFusionContext } from 'fusion:context';
+import getThemeStyle from 'fusion:themes';
 
 import RightRailLayout from './default';
 
@@ -63,6 +64,9 @@ const renderablesNoFullWidth2 = [{
 describe('the right rail layout for the default output type', () => {
   it('should place the child nodes into the right places', () => {
     useAppContext.mockReturnValue({ renderables: allRenderables });
+    useFusionContext.mockReturnValue({ arcSite: '' });
+    getThemeStyle.mockImplementation(() => ({ }));
+
     const wrapper = shallow(
       <RightRailLayout>
         <div id="navigation" />
@@ -81,6 +85,8 @@ describe('the right rail layout for the default output type', () => {
 
   it('should not show fullWidth2 section', () => {
     useAppContext.mockReturnValue({ renderables: renderablesNoFullWidth2 });
+    useFusionContext.mockReturnValue({ arcSite: '' });
+    getThemeStyle.mockImplementation(() => ({ }));
     const wrapper = shallow(
       <RightRailLayout>
         <div id="navigation" />

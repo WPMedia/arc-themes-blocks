@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 
 import { Gallery, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
@@ -65,6 +66,7 @@ const GalleryFeatureItem = (
       // autoplayPhraseLabels={autoplayPhraseLabels}
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
+      controlsFont={getThemeStyle(arcSite)['primary-font-family']}
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (<AdBlock />)}
       interstitialClicks={interstitialClicks}

@@ -26,6 +26,7 @@ function extractImage(promo) {
 
 const ReadMoreButton = styled.button`
   background-color: ${(props) => props.primaryColor};
+  font-family: ${(props) => props.primaryFont};
 
   &:not(:disabled):not(.disabled):active:hover,
   &:not(:disabled):not(.disabled):hover:hover {
@@ -362,7 +363,7 @@ class ResultsList extends Component {
                 { (promoElements.showDate || promoElements.showByline) && (
                 <div className="results-list--author-date">
                   { promoElements.showByline
-                    && <Byline content={element} list separator={promoElements.showDate} /> }
+                    && <Byline content={element} list separator={promoElements.showDate} font="Primary" /> }
                   { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
                 </div>
                 )}
@@ -378,6 +379,7 @@ class ResultsList extends Component {
           type="button"
           onClick={() => this.fetchStories(true)}
           className="btn btn-sm"
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
           primaryColor={getThemeStyle(arcSite)['primary-color']}
         >
           {this.phrases.t('results-list-block.see-more-button')}

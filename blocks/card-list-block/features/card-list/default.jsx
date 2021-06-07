@@ -264,7 +264,7 @@ class CardList extends React.Component {
                     </a>
                   </PrimaryFont>
                   <div className="author-date">
-                    <Byline content={contentElements[0]} list separator={showSeparator} />
+                    <Byline content={contentElements[0]} list separator={showSeparator} font="Primary" />
                     <ArticleDate
                       classNames="story-date"
                       date={contentElements[0].display_date}

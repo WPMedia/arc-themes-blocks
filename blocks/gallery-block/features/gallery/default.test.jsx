@@ -9,6 +9,8 @@ const mockPhrases = {
   'global.gallery-pause-autoplay-button': 'Pause autoplay',
 };
 
+jest.mock('fusion:themes', () => jest.fn(() => ({})));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
   resizerURL: 'https://fake.cdn.com/resizer',
@@ -63,7 +65,6 @@ describe('gallery feature block - no custom fields', () => {
   it('should render the global content gallery', () => {
     const { default: GalleryFeature } = require('./default');
     const wrapper = mount(<GalleryFeature />);
-
     expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
     expect(wrapper.find('Gallery').props().galleryElements).toStrictEqual([]);
     expect(wrapper.find('Gallery').props().interstitialClicks).toStrictEqual(5);

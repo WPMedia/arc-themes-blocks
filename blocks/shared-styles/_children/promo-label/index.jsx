@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import { PlayIcon, CameraIcon } from '@wpmedia/engine-theme-sdk';
 import getTranslatedPhrases from 'fusion:intl';
 import getProperties from 'fusion:properties';
+import PrimaryFont from '../primary-font';
 
 const LabelBoxLarge = styled.div`
   align-items: center;
-  padding: 6px 8px 8px;
+  padding: 7px 8px;
   background-color: ${(props) => props.primaryColor};
   border: 0;
   border-radius: 4px;
@@ -30,18 +31,6 @@ const LabelBoxSmall = styled.div`
   position: absolute;
   right: 8px;
   top: 8px;
-`;
-
-const Label = styled.span`
-  color: #fff;
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  height: 12px;
-  letter-spacing: normal;
-  margin-left: 8px;
 `;
 
 export const getLabelText = (phrases, type) => {
@@ -72,7 +61,7 @@ const Icon = ({ type }) => {
 const LabelLarge = ({ arcSite, type, labelText }) => (
   <LabelBoxLarge className="promo-label" primaryColor={getThemeStyle(arcSite)['primary-color']}>
     <Icon type={type} />
-    <Label>{labelText}</Label>
+    <PrimaryFont as="span" className="label">{labelText}</PrimaryFont>
   </LabelBoxLarge>
 );
 

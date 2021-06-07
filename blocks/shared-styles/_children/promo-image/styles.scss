@@ -1,3 +1,18 @@
 .promo-image {
   position: relative;
+
+  .promo-label {
+    .label {
+      color: #fff;
+      margin-left: 8px;
+      flex-grow: 0;
+      font-size: 12px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.5;
+      letter-spacing: normal;
+      height: 18px;
+    }
+  }
 }

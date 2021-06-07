@@ -66,7 +66,7 @@ const GalleryFeatureItem = (
       // autoplayPhraseLabels={autoplayPhraseLabels}
       autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
       pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
-      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+      controlsFont={getThemeStyle(arcSite)['primary-font-family']}
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (<AdBlock />)}
       interstitialClicks={interstitialClicks}

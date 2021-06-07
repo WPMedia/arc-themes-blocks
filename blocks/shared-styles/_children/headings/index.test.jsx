@@ -17,7 +17,7 @@ describe('Heading', () => {
     const wrapper = mount(<Heading />);
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<h1 class=\\"sc-bdVaJa bFuGRU\\"></h1>"',
+      '"<h1 class=\\"sc-bdVaJa AtUVl\\"></h1>"',
     );
   });
 });
@@ -31,7 +31,7 @@ describe('HeadingSection', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<h2 class=\\"sc-bdVaJa bFuGRU\\"></h2>"',
+      '"<h2 class=\\"sc-bdVaJa AtUVl\\"></h2>"',
     );
   });
   it('increases the heading level for each HeadingSection', () => {
@@ -45,7 +45,7 @@ describe('HeadingSection', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<div><h1 class=\\"sc-bdVaJa bFuGRU\\">h1 text</h1><h2 class=\\"sc-bdVaJa bFuGRU\\">h2 text</h2></div>"',
+      '"<div><h1 class=\\"sc-bdVaJa AtUVl\\">h1 text</h1><h2 class=\\"sc-bdVaJa AtUVl\\">h2 text</h2></div>"',
     );
   });
 });

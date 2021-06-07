@@ -126,7 +126,7 @@ describe('VideoPlayer', () => {
 
     const titleText = 'Test Title';
     const descriptionText = 'Test Description';
-    const alertBadgeText = 'Test Alert  Badge';
+    const alertBadgeText = 'Test Alert Badge';
 
     const customFields = {
       inheritGlobalContent: false,
@@ -142,17 +142,15 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    // todo: write snapshot or styled components style checks for this
-    // would be better with checking text via rtl
-    const expectedAlertBadge = '<span class="sc-bZQynM kYPPZY">Test Alert  Badge</span>';
-    const expectedTitle = '<h2 class="sc-bdVaJa nAQSq xl-promo-headline">Test Title</h2>';
-    const expectedDescription = '<p class="sc-EHOje gSSoLN description-text">Test Description</p>';
+    const expectedAlertBadge = 'Test Alert Badge';
+    const expectedTitle = 'Test Title';
+    const expectedDescription = 'Test Description';
     const foundStyledComponents = wrapper.find('StyledComponent');
 
     expect(foundStyledComponents.length).toEqual(3);
-    expect(foundStyledComponents.at(0).html()).toEqual(expectedAlertBadge);
-    expect(foundStyledComponents.at(1).html()).toEqual(expectedTitle);
-    expect(foundStyledComponents.at(2).html()).toEqual(expectedDescription);
+    expect(foundStyledComponents.at(0).text()).toEqual(expectedAlertBadge);
+    expect(foundStyledComponents.at(1).text()).toEqual(expectedTitle);
+    expect(foundStyledComponents.at(2).text()).toEqual(expectedDescription);
   });
 
   it('if no video content, show empty space ', () => {

@@ -1,0 +1,8 @@
+body[data-theme='light'] {
+  --colors-primary: deeppink;
+  --colors-background: tan;
+}
+body[data-theme='dark'] {
+  --colors-primary: lightpink;
+  --colors-background: black;
+}

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import './default.scss';
+import './css-vars.css';
 
 const useFeatueList = () => {
   const { renderables } = useAppContext();
@@ -18,8 +19,23 @@ const RightRailLayout = ({ children }) => {
   const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] = children;
   const featureList = useFeatueList();
 
+  const [theme, setTheme] = useState('light');
+
+  const nextTheme = theme === 'light' ? 'dark' : 'light';
+
+  React.useEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
+
   return (
     <>
+      <button onClick={() => setTheme(nextTheme)} type="button">
+        Change to
+        {' '}
+        {nextTheme}
+        {' '}
+        mode
+      </button>
       <header className="page-header">{navigation}</header>
       <section role="main" className="main">
         <div className="container layout-section">

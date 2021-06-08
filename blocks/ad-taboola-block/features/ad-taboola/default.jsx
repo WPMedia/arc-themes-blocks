@@ -134,7 +134,7 @@ class AdTaboola extends Component {
       <>
         <div id={`${container}`} />
         <hr />
-        <script type="text/javascript" dangerouslySetInnerHTML={{ __html: scriptString }} />
+        <script type="text/javascript" dangerouslySetInnerHTML={{ __html: scriptString }} async />
       </>
     );
   }

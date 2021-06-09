@@ -160,14 +160,14 @@ const fontUrlLink = (fontUrl, deployment) => {
   // If fontURL is an array, then iterate over the array and build out the links
   if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
     const fontLinks = [...new Set(fontUrl)].map((url, index) => (
-      <link rel="preload" as="style" key={url} data-testid={`font-loading-url-${index}`} href={deployment(url)} />
+      <link rel="prefetch" as="font" key={url} data-testid={`font-loading-url-${index}`} href={deployment(url)} />
     ));
     return (
       <>{fontLinks}</>
     );
   }
   // Legacy support where fontUrl is a string
-  return fontUrl ? <link rel="preload" as="style" href={deployment(fontUrl)} /> : '';
+  return fontUrl ? <link rel="prefetch" as="font" href={deployment(fontUrl)} /> : '';
 };
 
 const injectStringScriptArray = (scriptStringArray) => (
@@ -231,7 +231,6 @@ const SampleOutputType = ({
           fallbackImage={fallbackImage}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
-        <link rel="preconnect" href="https://fonts.gstatic.com/" />
         {fontUrlLink(fontUrl, deployment)}
         <CssLinks />
         <Libs />

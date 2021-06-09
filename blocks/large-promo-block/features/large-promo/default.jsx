@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useEditableContent, useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import styled, { ThemeContext } from 'styled-components';
 
 import {
   extractVideoEmbedFromStory,
@@ -13,12 +14,20 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage, ThemeStyles,
 } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_large-promo.scss';
+const StyledLargePromo = styled(ThemeStyles)`
+  display: inline-block;
+
+  img {
+    height: auto;
+    width: 100%;
+  }
+`;
 
 const LargePromoItem = ({ customFields }) => {
+  const themeContext = useContext(ThemeContext);
   const { arcSite, id, isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
@@ -117,7 +126,7 @@ const LargePromoItem = ({ customFields }) => {
 
   return (
     <>
-      <article className="container-fluid large-promo">
+      <StyledLargePromo as="article" theme={themeContext?.largePromo} className="container-fluid large-promo">
         <div className="row">
           {(!!videoEmbed
             || customFields?.showImage)
@@ -160,10 +169,10 @@ const LargePromoItem = ({ customFields }) => {
           && (
             <div className={textClass}>
               {customFields?.showOverline
-                ? <Overline story={content} editable />
+                ? <Overline styles={themeContext?.largePromo?.overline} story={content} editable />
                 : null}
               {customFields?.showHeadline
-                ? <PromoHeadline content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
+                ? <PromoHeadline styles={themeContext?.largePromo?.heading} content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
                 : null}
               {customFields?.showDescription
                 ? <PromoDescription className="description-text" content={content} />
@@ -179,7 +188,7 @@ const LargePromoItem = ({ customFields }) => {
             </div>
           )}
         </div>
-      </article>
+      </StyledLargePromo>
       <hr />
     </>
   );

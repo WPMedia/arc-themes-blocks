@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
-import './default.scss';
+
+// import './default.scss';
+
+import NewsTheme from '@wpmedia/news-theme/features/default.jsx';
 
 const useFeatueList = () => {
   const { renderables } = useAppContext();
@@ -19,7 +22,8 @@ const RightRailLayout = ({ children }) => {
   const featureList = useFeatueList();
 
   return (
-    <>
+    <NewsTheme>
+      {/* <NewsTheme /> */}
       <header className="page-header">{navigation}</header>
       <section role="main" className="main">
         <div className="container layout-section">
@@ -50,7 +54,7 @@ const RightRailLayout = ({ children }) => {
 
       </section>
       <footer>{footer}</footer>
-    </>
+    </NewsTheme>
   );
 };
 

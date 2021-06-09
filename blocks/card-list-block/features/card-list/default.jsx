@@ -7,7 +7,8 @@ import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
 import { Byline, Overline, PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
-import './card-list.scss';
+
+// import './card-list.scss';
 
 function getResizedImage(promo) {
   if (promo?.basic?.type === 'image' && promo?.basic?.resized_params) {

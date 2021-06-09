@@ -15,7 +15,7 @@ const polyFillScript = () => (
 
 /* Not sure window.isIE is even used. */
 const isIEScript = () => (
-  <script async dangerouslySetInnerHTML={{ __html: 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;' }} />
+  <script dangerouslySetInnerHTML={{ __html: 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;' }} />
 );
 
 const chartBeatScript = (accountId, domain) => {
@@ -35,7 +35,7 @@ const chartBeatScript = (accountId, domain) => {
   `;
   return (
     <>
-      <script async data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} />
+      <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} />
       <script async data-integration="chartbeat" src="https://static.chartbeat.com/js/chartbeat.js" />
     </>
   );
@@ -51,7 +51,7 @@ const comscoreScript = (accountId) => {
   return (
     <>
       <link rel="preconnect" href="https://sb.scorecardresearch.com/" />
-      <script async data-integration="comscore" dangerouslySetInnerHTML={{ __html: scriptCode }} />
+      <script data-integration="comscore" dangerouslySetInnerHTML={{ __html: scriptCode }} />
       <script async data-integration="comscore" src="https://sb.scorecardresearch.com/beacon.js" />
     </>
   );
@@ -81,7 +81,7 @@ const googleAnalyticsScript = (gaID) => {
     <>
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
       <script async data-integration="googleAnalytics" src={`https://www.googletagmanager.com/gtag/js?id=${gaID}`} />
-      <script async data-integration="googleAnalytics" dangerouslySetInnerHTML={{ __html: gaScript }} />
+      <script data-integration="googleAnalytics" dangerouslySetInnerHTML={{ __html: gaScript }} />
     </>
   );
 };
@@ -101,7 +101,7 @@ const googleTagManagerScript = (gtmID) => {
   return (
     <>
       <link rel="preconnect" href="https://www.googletagmanager.com/" />
-      <script async data-integration="googleTagManager" dangerouslySetInnerHTML={{ __html: gtmScript }} />
+      <script data-integration="googleTagManager" dangerouslySetInnerHTML={{ __html: gtmScript }} />
     </>
   );
 };
@@ -148,7 +148,7 @@ const querylyCode = (querylyId, querylyOrg, pageType) => {
     <>
       <link rel="preconnect" href="https://www.queryly.com/" />
       <script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
-      <script defer data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
+      <script data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
       { pageType === 'queryly-search'
         ? <script defer data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />
         : null}
@@ -156,13 +156,13 @@ const querylyCode = (querylyId, querylyOrg, pageType) => {
   );
 };
 
-const fontUrlLink = (fontUrl, deployment) => {
+const fontUrlLink = (fontUrl) => {
   // If fontURL is an array, then iterate over the array and build out the links
   if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
     const fontLinks = [...new Set(fontUrl)].map((url, index) => (
       <>
-        <link rel="prefetch" as="font" key={url} data-testid={`font-loading-url-prefetch-${index}`} href={deployment(`${url}&display=swap`)} crossOrigin="anonymous" />
-        <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={deployment(`${url}&display=swap`)} />
+        <link rel="prefetch" as="font" key={url} data-testid={`font-loading-url-prefetch-${index}`} href={`${url}&display=swap`} crossOrigin="anonymous" />
+        <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={`${url}&display=swap`} />
       </>
     ));
     return (
@@ -172,8 +172,8 @@ const fontUrlLink = (fontUrl, deployment) => {
   // Legacy support where fontUrl is a string
   return fontUrl ? (
     <>
-      <link rel="prefetch" as="font" href={deployment(`${fontUrl}&display=swap`)} crossOrigin="anonymous" />
-      <link rel="stylesheet" href={deployment(`${fontUrl}&display=swap`)} />
+      <link rel="prefetch" as="font" href={`${fontUrl}&display=swap`} crossOrigin="anonymous" />
+      <link rel="stylesheet" href={`${fontUrl}&display=swap`} />
     </>
   ) : '';
 };
@@ -184,7 +184,7 @@ const injectStringScriptArray = (scriptStringArray) => (
     // index used to remove warnings
     // this key will not affect performance or issues with changing order
     /* eslint-disable-next-line react/no-array-index-key */
-    <script defer key={index} data-integration="injected" dangerouslySetInnerHTML={{ __html: scriptString }} />
+    <script key={index} data-integration="injected" dangerouslySetInnerHTML={{ __html: scriptString }} />
   ))
 );
 
@@ -240,7 +240,7 @@ const SampleOutputType = ({
         />
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
         <link rel="preconnect" href="https://fonts.gstatic.com/" />
-        {fontUrlLink(fontUrl, deployment)}
+        {fontUrlLink(fontUrl)}
         <CssLinks />
         <Libs />
         {isIEScript()}

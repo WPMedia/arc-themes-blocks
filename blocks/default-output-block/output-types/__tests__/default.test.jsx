@@ -114,7 +114,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').length).toBe(5);
+    expect(wrapper.find('link').length).toBe(2);
   });
 
   it('should have a MedataData component', () => {
@@ -232,7 +232,7 @@ describe('head content', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'googleTagManager' }).html()).toMatch(/GTM-12345ID/);
+    expect(wrapper.find('script').find({ 'data-integration': 'inlineScripts' }).html()).toMatch(/GTM-12345ID/);
     expect(wrapper.find('body > noscript').find({ title: 'gtm' }).html()).toMatch(/GTM-12345ID/);
   });
 
@@ -241,7 +241,7 @@ describe('head content', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'googleAnalytics' }).at(0).html()).toMatch(/UA-6789ID/);
+    expect(wrapper.find('script').find({ 'data-integration': 'googleAnalyticsTag' }).at(0).html()).toMatch(/UA-6789ID/);
   });
 
   it('must render custom script', () => {
@@ -249,7 +249,7 @@ describe('head content', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'injected' }).at(0).html()).toMatch(/hello world/);
+    expect(wrapper.find('script').find({ 'data-integration': 'inlineScripts' }).at(0).html()).toMatch(/hello world/);
   });
 
   it('must render custom font url', () => {
@@ -421,7 +421,7 @@ describe('chartbeat render conditions', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'chartbeat' }).length).toBe(2);
+    expect(wrapper.find('script').find({ 'data-integration': 'chartbeat' }).length).toBe(1);
   });
 });
 
@@ -462,7 +462,7 @@ describe('comscore render conditions', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'comscore' }).length).toBe(2);
+    expect(wrapper.find('script').find({ 'data-integration': 'comscore' }).length).toBe(1);
     expect(wrapper.find('noscript').find({ 'data-integration': 'comscore' }).length).toBe(1);
   });
 });
@@ -503,7 +503,7 @@ describe('queryly render conditions', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(2);
+    expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(1);
   });
 
   it('must render Queryly advanced search when page type is search-queryly', () => {
@@ -515,6 +515,6 @@ describe('queryly render conditions', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('queryly-search')} {...mockFuntions} />,
     );
-    expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(3);
+    expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(2);
   });
 });

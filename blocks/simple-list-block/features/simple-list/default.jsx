@@ -102,6 +102,7 @@ const SimpleList = (props) => {
       title = '',
       showHeadline = true,
       showImage = true,
+      primaryColor,
     } = {},
     id = '',
     placeholderResizedImageOptions,
@@ -158,7 +159,11 @@ const SimpleList = (props) => {
     <div key={id} className="list-container layout-section">
       { title
         && (
-        <PrimaryFont as="div" className="list-title">
+        <PrimaryFont
+          as="div"
+          className="list-title"
+          overrideColor={primaryColor}
+        >
           {title}
         </PrimaryFont>
         )}
@@ -212,6 +217,11 @@ SimpleListWrapper.propTypes = {
       name: 'Lazy Load block?',
       defaultValue: false,
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
+    }),
+    primaryColor: PropTypes.string.tag({
+      label: 'Primary Color',
+      group: 'Style Settings',
+      defaultValue: '',
     }),
   }),
 };

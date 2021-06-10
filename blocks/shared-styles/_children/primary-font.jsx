@@ -5,10 +5,13 @@ import { useFusionContext } from 'fusion:context';
 
 const PrimaryFontStyles = styled.div.attrs((props) => ({
   arcSite: props.arcSite,
+  overrideColor: props.overrideColor,
 }))`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
-  color: var(--colors-primary);
   background-color: var(--colors-background);
+  color: ${(props) => (
+    props.overrideColor ? props.overrideColor : 'var(--colors-primary)'
+  )};
 `;
 
 const PrimaryFont = (props) => {

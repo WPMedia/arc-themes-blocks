@@ -6,75 +6,17 @@ import { MetaData } from '@wpmedia/engine-theme-sdk';
 // this is blank import but used to inject scss
 import './default.scss';
 
-const injectStringScriptArray = (scriptStringArray) => (
-  scriptStringArray.map((scriptString, index) => (
-    // no good way of getting keys for this
-    // index used to remove warnings
-    // this key will not affect performance or issues with changing order
-    /* eslint-disable-next-line react/no-array-index-key */
-    <script key={index} dangerouslySetInnerHTML={{ __html: scriptString }} />
-  ))
-);
-
-const chartBeatCode = (accountId, domain) => {
-  if (!accountId || !domain) {
+const querylyCode = (querylyId, querylyOrg, pageType) => {
+  if (!querylyId) {
     return null;
   }
-  return `
-    (function() {
-        var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
-        _sf_async_config.uid = ${accountId};
-        _sf_async_config.domain = "${domain}";
-        _sf_async_config.useCanonical = true;
-        _sf_async_config.useCanonicalDomain = true;
-        _sf_async_config.sections = '';
-        _sf_async_config.authors = '';
-        function loadChartbeat() {
-            var e = document.createElement('script');
-            var n = document.getElementsByTagName('script')[0];
-            e.type = 'text/javascript';
-            e.async = true;
-            e.src = '//static.chartbeat.com/js/chartbeat.js';
-            n.parentNode.insertBefore(e, n);
-        }
-        loadChartbeat();
-     })();
-  `;
-};
-
-const querylyCode = (querylyId, querylyOrg, pageType) => {
-  const querylyInit = `
-    window.addEventListener('DOMContentLoaded', (event) => {
-      queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
-    });
-  `;
   return (
     <>
-      <script data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" defer />
-      <script data-integration="queryly" dangerouslySetInnerHTML={{ __html: querylyInit }} />
+      <script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
       { pageType === 'queryly-search'
-        ? <script data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />
+        ? <script defer data-integration="queryly" src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`} />
         : null}
     </>
-  );
-};
-
-const comscoreScript = (accountId) => {
-  if (!accountId) {
-    return null;
-  }
-  const scriptCode = `
-    var _comscore = _comscore || [];
-    _comscore.push({ c1: "2", c2: "${accountId}" });
-    (function() {
-      var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
-      s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
-      el.parentNode.insertBefore(s, el);
-    })();
-  `;
-
-  return (
-    <script data-integration="comscore" dangerouslySetInnerHTML={{ __html: scriptCode }} />
   );
 };
 
@@ -84,9 +26,45 @@ const comscoreNoScript = (accountId) => {
   }
   return (
     <noscript data-integration="comscore">
-      <img alt="comscore" src={`http://b.scorecardresearch.com/p?c1=2&c2=${accountId}&cv=2.0&cj=1`} />
+      <img alt="comscore" src={`https://sb.scorecardresearch.com/p?c1=2&c2=${accountId}&cv=2.0&cj=1`} />
     </noscript>
   );
+};
+
+const googleTagManagerNoScript = (gtmID) => {
+  if (!gtmID) {
+    return null;
+  }
+  return (
+    <noscript>
+      <iframe
+        title="gtm"
+        src={`https://www.googletagmanager.com/ns.html?id=${gtmID}`}
+        height="0"
+        width="0"
+        style={{
+          display: 'none',
+          visibility: 'hidden',
+        }}
+      />
+    </noscript>
+  );
+};
+
+const fontUrlLink = (fontUrl) => {
+  // If fontURL is an array, then iterate over the array and build out the links
+  if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
+    const fontLinks = [...new Set(fontUrl)].map((url, index) => (
+      <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={`${url}&display=swap`} />
+    ));
+    return (
+      <>{fontLinks}</>
+    );
+  }
+  // Legacy support where fontUrl is a string
+  return fontUrl ? (
+    <link rel="stylesheet" href={`${fontUrl}&display=swap`} />
+  ) : '';
 };
 
 const SampleOutputType = ({
@@ -100,7 +78,7 @@ const SampleOutputType = ({
   MetaTags,
   metaValue,
 }) => {
-  const { globalContent: gc, arcSite } = useFusionContext();
+  const { globalContent, arcSite } = useFusionContext();
   const {
     websiteName,
     websiteDomain,
@@ -121,56 +99,61 @@ const SampleOutputType = ({
     locale = 'en',
   } = getProperties(arcSite);
 
-  const pageType = metaValue('page-type');
-
-  const buildFontUrl = () => {
-    // If fontURL is an array, then iterate over the array and build out the links
-    if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
-      const fontLinks = fontUrl.map((url, index) => (
-        <link data-testid={`font-loading-url-${index}`} href={url} rel="stylesheet" />
-      ));
-      return (
-        <>{fontLinks}</>
-      );
-    }
-    // Legacy support where fontUrl is a string
-    return fontUrl ? <link href={fontUrl} rel="stylesheet" /> : '';
-  };
-
-  const ieTest = 'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;';
-  const gtmScript = `
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','${gtmID}');
+  const chartBeatInline = `
+    (function() {
+      var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+      _sf_async_config.uid = ${chartBeatAccountId};
+      _sf_async_config.domain = "${chartBeatDomain}";
+      _sf_async_config.useCanonical = true;
+      _sf_async_config.useCanonicalDomain = true;
+      _sf_async_config.sections = '';
+      _sf_async_config.authors = '';
+    })();
   `;
-  const gaScript = `
+  const scriptCodeInline = `
+    var _comscore = _comscore || []; _comscore.push({ c1: "2", c2: "${comscoreID}" });
+  `;
+  const gaScriptInline = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());gtag('config', '${gaID}');
   `;
-  const renderGaScript = () => (
-    <>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaID}`} />
-      <script dangerouslySetInnerHTML={{ __html: gaScript }} />
-    </>
-  );
-  const chartBeat = chartBeatCode(chartBeatAccountId, chartBeatDomain);
+  const gtmScriptInline = `
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','${gtmID}');
+  `;
+  const querylyInline = `
+    window.addEventListener('DOMContentLoaded', (event) => {
+      queryly.init("${querylyId}", document.querySelectorAll("#fusion-app"));
+    });
+  `;
+
+  const inlineScripts = [
+    ...new Set([
+      ...dangerouslyInjectJS,
+      ...(chartBeatAccountId && chartBeatDomain ? [chartBeatInline] : []),
+      ...(comscoreID ? [scriptCodeInline] : []),
+      ...(gaID ? [gaScriptInline] : []),
+      ...(gtmID ? [gtmScriptInline] : []),
+      ...(querylyId ? [querylyInline] : []),
+      'window.isIE = !!window.MSInputMethodContext && !!document.documentMode;', // Not sure window.isIE is even used.
+    ]),
+  ].join(';');
 
   return (
     <html lang={locale}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {gtmID
-          ? (<script dangerouslySetInnerHTML={{ __html: gtmScript }} />)
-          : null}
-        {gaID ? renderGaScript() : null}
+        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <MetaData
           MetaTag={MetaTag}
           MetaTags={MetaTags}
           metaValue={metaValue}
-          globalContent={gc}
+          globalContent={globalContent}
           websiteName={websiteName}
           websiteDomain={websiteDomain}
           twitterUsername={twitterUsername}
@@ -179,47 +162,30 @@ const SampleOutputType = ({
           facebookAdmins={facebookAdmins}
           fallbackImage={fallbackImage}
         />
-
-        <script dangerouslySetInnerHTML={{ __html: ieTest }} />
-        {
-          /** polyfill.io has browser detection and will not load the feature
-           *  if the browser already supports it.
-           */
-        }
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes" />
-        {injectStringScriptArray(dangerouslyInjectJS)}
-        <Libs />
+        {fontUrlLink(fontUrl)}
         <CssLinks />
-        <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
-        {buildFontUrl()}
-        {nativoIntegration
-          ? (<script type="text/javascript" data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" async />)
+        <Libs />
+        <script async src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CElement.prototype.prepend%2CElement.prototype.remove%2CArray.prototype.find%2CArray.prototype.includes" />
+        <script data-integration="inlineScripts" dangerouslySetInnerHTML={{ __html: inlineScripts }} />
+        {gaID
+          ? <script async data-integration="googleAnalyticsTag" src={`https://www.googletagmanager.com/gtag/js?id=${gaID}`} />
           : null}
-        {chartBeat && <script data-integration="chartbeat" dangerouslySetInnerHTML={{ __html: chartBeat }} /> }
-        {comscoreScript(comscoreID)}
+        {nativoIntegration
+          ? <script async data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" />
+          : null}
+        {chartBeatAccountId && chartBeatDomain
+          ? <script async data-integration="chartbeat" src="https://static.chartbeat.com/js/chartbeat.js" />
+          : null}
+        {comscoreID
+          ? <script async data-integration="comscore" src="https://sb.scorecardresearch.com/beacon.js" />
+          : null}
+        {querylyCode(querylyId, querylyOrg, metaValue('page-type'))}
       </head>
       <body>
         {comscoreNoScript(comscoreID)}
-        {gtmID
-          ? (
-            <noscript>
-              <iframe
-                title="gtm"
-                src={`https://www.googletagmanager.com/ns.html?id=${gtmID}`}
-                height="0"
-                width="0"
-                style={{
-                  display: 'none',
-                  visibility: 'hidden',
-                }}
-              />
-            </noscript>
-          ) : null}
-        <div id="fusion-app" className="layout-section">
-          {children}
-        </div>
+        {googleTagManagerNoScript(gtmID)}
+        <div id="fusion-app" className="layout-section">{children}</div>
         <Fusion />
-        {querylyId ? querylyCode(querylyId, querylyOrg, pageType) : null}
       </body>
     </html>
   );

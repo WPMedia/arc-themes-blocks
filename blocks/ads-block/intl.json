@@ -1,5 +1,12 @@
 {
 	"ads-block.ad-label": {
-		"en": "ADVERTISEMENT"
+		"de": "ADVERTISEMENT",
+		"en": "ADVERTISEMENT",
+		"es": "ADVERTISEMENT",
+		"fr": "ADVERTISEMENT",
+		"ja": "ADVERTISEMENT",
+		"ko": "ADVERTISEMENT",
+		"no": "ADVERTISEMENT",
+		"sv": "ADVERTISEMENT"
 	}
 }

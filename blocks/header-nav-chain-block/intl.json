@@ -1,13 +1,23 @@
 {
-	"header-nav-chain-block.sections-button": {
-		"de": "Ressorts",
-		"en": "Sections",
-		"es": "Secciones",
-		"fr": "Sections",
-		"ja": "セクション",
-		"ko": "섹션",
-		"no": "Meny",
-		"sv": "Meny"
+	"header-nav-chain-block.links-element-aria-label": {
+		"de": "Top Links",
+		"en": "Top Links",
+		"es": "Top Links",
+		"fr": "Top Links",
+		"ja": "Top Links",
+		"ko": "Top Links",
+		"no": "Top Links",
+		"sv": "Top Links"
+	},
+	"header-nav-chain-block.querly-search-aria-label": {
+		"de": "Search",
+		"en": "Search",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
+		"no": "Search",
+		"sv": "Search"
 	},
 	"header-nav-chain-block.search-text": {
 		"de": "Suche",
@@ -19,16 +29,34 @@
 		"no": "Søk",
 		"sv": "Sök"
 	},
+	"header-nav-chain-block.sections-button": {
+		"de": "Ressorts",
+		"en": "Sections",
+		"es": "Secciones",
+		"fr": "Sections",
+		"ja": "セクション",
+		"ko": "섹션",
+		"no": "Meny",
+		"sv": "Meny"
+	},
 	"header-nav-chain-block.sections-button-aria-label": {
-		"en": "Show %{item} sub sections"
+		"de": "Show %{item} sub sections",
+		"en": "Show %{item} sub sections",
+		"es": "Show %{item} sub sections",
+		"fr": "Show %{item} sub sections",
+		"ja": "Show %{item} sub sections",
+		"ko": "Show %{item} sub sections",
+		"no": "Show %{item} sub sections",
+		"sv": "Show %{item} sub sections"
 	},
 	"header-nav-chain-block.sections-element-aria-label": {
-		"en": "Sections Menu"
-	},
-	"header-nav-chain-block.links-element-aria-label": {
-		"en": "Top Links"
-	},
-	"header-nav-chain-block.querly-search-aria-label": {
-		"en": "Search"
+		"de": "Sections Menu",
+		"en": "Sections Menu",
+		"es": "Sections Menu",
+		"fr": "Sections Menu",
+		"ja": "Sections Menu",
+		"ko": "Sections Menu",
+		"no": "Sections Menu",
+		"sv": "Sections Menu"
 	}
 }

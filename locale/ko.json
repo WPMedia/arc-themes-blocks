@@ -1,41 +1,102 @@
 {
-  "shared-styles": {
-    "promo-label.gallery-text": "갤러리",
-    "promo-label.video-text": "비디오",
-    "byline.by-text": "저작자",
-    "byline.and-text": "및",
-    "overline.sponsored-content": "Sponsored Content"
-  },
-  "article-body-block": {
-    "article-body-block.correction": "정정",
-    "article-body-block.clarification": "설명"
-  },
-  "full-author-bio-block": {
-    "full-author-bio-block.connect-text": "연결"
-  },
-  "global-phrases-block": {
-    "global.gallery-expand-button": "더보기",
-    "global.gallery-page-count-text": "%{current}/%개 보는 %{total}",
-    "global.gallery-autoplay-button": "자동 재생",
-    "global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
-    "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show"
-  },
-  "header-nav-block": {
-    "header-nav-block.sections-button": "Sections",
-    "header-nav-block.sign-in-button": "Sign In",
-    "header-nav-block.search-text": "Search"
-  },
-  "header-nav-chain-block": {
-    "header-nav-chain-block.sections-button": "섹션",
-    "header-nav-chain-block.search-text": "검색"
-  },
-  "results-list-block": {
-    "results-list-block.see-more-button": "자세히 보기"
-  },
-  "search-results-list-block": {
-    "search-results-block.search-button": "검색",
-    "search-results-block.search-result-number": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
-    "search-results-block.see-more-button": "자세히 보기"
-  }
+	"ads-block": {
+		"ads-block.ad-label": "ADVERTISEMENT"
+	},
+	"alert-bar-block": {
+		"alert-bar-block.close-button": "Dismiss breaking news alert",
+		"alert-bar-block.element-aria-label": "Breaking News Alert"
+	},
+	"article-body-block": {
+		"article-body-block.clarification": "설명",
+		"article-body-block.correction": "정정"
+	},
+	"author-bio-block": {
+		"author-bio-block.social-email": "Send an email to %{authorName}",
+		"author-bio-block.social-facebook": "Connect on Facebook",
+		"author-bio-block.social-instagram": "Follow on Instagram",
+		"author-bio-block.social-linkedin": "Connect on LinkedIn",
+		"author-bio-block.social-medium": "Connect on Medium",
+		"author-bio-block.social-pinterest": "Connect on Pinterest",
+		"author-bio-block.social-reddit": "Connect on Reddit",
+		"author-bio-block.social-rss": "Subscribe to %{authorName} RSS feed",
+		"author-bio-block.social-snapchat": "Connect on Snapchat",
+		"author-bio-block.social-soundcloud": "Listen to %{authorName} on SoundCloud",
+		"author-bio-block.social-tumblr": "Connect on Tumblr",
+		"author-bio-block.social-twitter": "Connect on Twitter",
+		"author-bio-block.social-whatsapp": "Connect on Whatsapp",
+		"author-bio-block.social-youtube": "Connect on Youtube"
+	},
+	"footer-block": {
+		"footer-block.facebook-link": "Facebook page",
+		"footer-block.rss-link": "RSS feed",
+		"footer-block.twitter-link": "Twitter feed"
+	},
+	"full-author-bio-block": {
+		"full-author-bio-block.connect-text": "연결",
+		"full-author-bio-block.social-email": "Email",
+		"full-author-bio-block.social-facebook": "Connect on Facebook",
+		"full-author-bio-block.social-instagram": "Follow on Instagram",
+		"full-author-bio-block.social-linkedin": "Connect on LinkedIn",
+		"full-author-bio-block.social-medium": "Connect on Medium",
+		"full-author-bio-block.social-pinterest": "Connect on Pinterest",
+		"full-author-bio-block.social-reddit": "Connect on Reddit",
+		"full-author-bio-block.social-rss": "RSS Feed",
+		"full-author-bio-block.social-snapchat": "Connect on Snapchat",
+		"full-author-bio-block.social-soundcloud": "Listen on SoundCloud",
+		"full-author-bio-block.social-tumblr": "Connect on Tumblr",
+		"full-author-bio-block.social-twitter": "Connect on Twitter",
+		"full-author-bio-block.social-whatsapp": "Connect on Whatsapp",
+		"full-author-bio-block.social-youtube": "Connect on Youtube"
+	},
+	"global-phrases-block": {
+		"global.gallery-autoplay-button": "자동 재생",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-expand-button": "더보기",
+		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
+		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
+		"global.opens-in-new-window": "(Opens in new window)",
+		"global.social-email": "Email",
+		"global.social-facebook": "Facebook",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-pinterest": "Pinterest",
+		"global.social-twitter": "Twitter"
+	},
+	"header-nav-block": {
+		"header-nav-block.search-text": "Search",
+		"header-nav-block.sections-button": "Sections",
+		"header-nav-block.sign-in-button": "Sign In"
+	},
+	"header-nav-chain-block": {
+		"header-nav-chain-block.links-element-aria-label": "Top Links",
+		"header-nav-chain-block.querly-search-aria-label": "Search",
+		"header-nav-chain-block.search-text": "검색",
+		"header-nav-chain-block.sections-button": "섹션",
+		"header-nav-chain-block.sections-button-aria-label": "Show %{item} sub sections",
+		"header-nav-chain-block.sections-element-aria-label": "Sections Menu"
+	},
+	"links-bar-block": {
+		"links-bar-block.element-aria-label": "More Links"
+	},
+	"results-list-block": {
+		"results-list-block.see-more-button": "자세히 보기",
+		"results-list-block.see-more-button-aria-label": "See More stories about this topic"
+	},
+	"search-results-list-block": {
+		"search-results-block.search-button": "검색",
+		"search-results-block.search-result-number": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
+		"search-results-block.see-more-button": "자세히 보기",
+		"search-results-block.see-more-button-aria-label": "See More stories about this topic",
+		"search-results-blocks.search-input-placeholder": "Enter your search terms"
+	},
+	"share-bar-block": {
+		"share-bar-block.share-button-aria-label": "Share current article via %{socialType}"
+	},
+	"shared-styles": {
+		"byline.and-text": "및",
+		"byline.by-text": "저작자",
+		"overline.sponsored-content": "Sponsored Content",
+		"promo-label.gallery-text": "갤러리",
+		"promo-label.video-text": "비디오"
+	}
 }

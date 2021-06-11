@@ -6,6 +6,7 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import { useDebouncedCallback } from 'use-debounce';
 import FocusTrap from 'focus-trap-react';
 import {
@@ -106,7 +107,10 @@ const Nav = (props) => {
     navColor,
     breakpoints = { small: 0, medium: 768, large: 992 },
     navBarBackground,
+    locale = 'en',
   } = getProperties(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
 
   const {
     'primary-color': primaryColor = '#000',
@@ -388,7 +392,7 @@ const Nav = (props) => {
         navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
-        aria-label={ariaLabel || 'Sections Menu'}
+        aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />

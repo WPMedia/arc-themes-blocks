@@ -51,7 +51,7 @@ const StoryItem = (props) => {
               mediumHeight={183}
               largeWidth={274}
               largeHeight={183}
-              alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+              alt={getProperties(arcSite).primaryLogoAlt || ''}
               url={targetFallbackImage}
               breakpoints={getProperties(arcSite)?.breakpoints}
               resizedImageOptions={placeholderResizedImageOptions}

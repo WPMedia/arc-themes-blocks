@@ -36,6 +36,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
   const {
     _id: key = index, type, content,
   } = item;
+
   // TODO: Split each type into a separate reusable component
   switch (type) {
     case 'text': {
@@ -210,13 +211,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         </section>
       );
     case 'gallery':
-      // When we have all translated languages we can uncomment this line and
-      // the Gallery property autoplayPhraseLabels
-      // const autoplayPhraseLabels = {
-      //   start: this.phrases.t('global.gallery-autoplay-label-start'),
-      //   stop: this.phrases.t('global.gallery-autoplay-label-stop'),
-      // };
-
       return (
         <section key={key} className="block-margin-bottom gallery">
           <Gallery
@@ -224,7 +218,10 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             resizerURL={getProperties(arcSite)?.resizerURL}
             ansId={item._id}
             ansHeadline={item.headlines.basic ? item.headlines.basic : ''}
-            // autoplayPhraseLabels={autoplayPhraseLabels}
+            autoplayPhraseLabels={{
+              start: phrases.t('global.gallery-autoplay-label-start'),
+              stop: phrases.t('global.gallery-autoplay-label-stop'),
+            }}
             controlsFont={getThemeStyle(arcSite)['primary-font-family']}
             expandPhrase={phrases.t('global.gallery-expand-button')}
             autoplayPhrase={phrases.t('global.gallery-autoplay-button')}

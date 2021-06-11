@@ -1,0 +1,44 @@
+{
+	"author-bio-block.social-email": {
+		"en": "Send an email to %{authorName}"
+	},
+	"author-bio-block.social-rss": {
+		"en": "Subscribe to %{authorName} RSS feed"
+	},
+	"author-bio-block.social-soundcloud": {
+		"en": "Listen to %{authorName} on SoundCloud"
+	},
+	"author-bio-block.social-twitter": {
+		"en": "Connect on Twitter"
+	},
+	"author-bio-block.social-facebook": {
+		"en": "Connect on Facebook"
+	},
+	"author-bio-block.social-instagram": {
+		"en": "Follow on Instagram"
+	},
+	"author-bio-block.social-linkedin": {
+		"en": "Connect on LinkedIn"
+	},
+	"author-bio-block.social-reddit": {
+		"en": "Connect on Reddit"
+	},
+	"author-bio-block.social-youtube": {
+		"en": "Connect on Youtube"
+	},
+	"author-bio-block.social-medium": {
+		"en": "Connect on Medium"
+	},
+	"author-bio-block.social-tumblr": {
+		"en": "Connect on Tumblr"
+	},
+	"author-bio-block.social-pinterest": {
+		"en": "Connect on Pinterest"
+	},
+	"author-bio-block.social-snapchat": {
+		"en": "Connect on Snapchat"
+	},
+	"author-bio-block.social-whatsapp": {
+		"en": "Connect on Whatsapp"
+	}
+}

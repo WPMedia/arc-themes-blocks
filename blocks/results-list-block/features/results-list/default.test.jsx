@@ -466,7 +466,7 @@ describe('The results list', () => {
       });
 
       it('should have invisible text for accessibility purposes', () => {
-        expect(wrapper.find('button.btn').text()).toEqual('See More stories about this topic');
+        expect(wrapper.find('button.btn').prop('aria-label').length).not.toBe(0);
       });
 
       it('should call fetchContent when clicked', () => {

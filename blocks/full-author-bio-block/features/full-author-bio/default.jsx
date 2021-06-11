@@ -28,47 +28,20 @@ import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import './full-author-bio.scss';
 
 const logos = {
-  email: <EnvelopeIcon title="Email" description="Email" alt="email" />,
-  twitter: <TwitterIcon title="Follow on Twitter" description="Twitter" alt="twitter" />,
-  facebook: <FacebookIcon title="Connect on Facebook" description="Facebook" alt="facebook" />,
-  instagram: <InstagramIcon title="Follow on Instagram" description="Instagram" alt="instagram" />,
-  rss: <RssIcon title="Rss feed" description="Rss" alt="rss" />,
-  linkedin: <LinkedInIcon
-    title="LinkedIn"
-    description="Connect on LinkedIn"
-  />,
-  reddit: <RedditIcon
-    title="Reddit"
-    description="Connect on Reddit"
-  />,
-  youtube: <YoutubeIcon
-    title="YouTube"
-    description="Connect on YouTube"
-  />,
-  medium: <MediumIcon
-    title="Medium"
-    description="Connect on Medium"
-  />,
-  tumblr: <TumblrIcon
-    title="Tumblr"
-    description="Connect on Tumblr"
-  />,
-  pinterest: <PinterestIcon
-    title="Pinterest"
-    description="Connect on Pinterest"
-  />,
-  snapchat: <SnapchatIcon
-    title="Snapchat"
-    description="Connect on Snapchat"
-  />,
-  whatsapp: <WhatsAppIcon
-    title="WhatsApp"
-    description="Connect on WhatsApp"
-  />,
-  soundcloud: <SoundCloudIcon
-    title="SoundCloud"
-    description="Listen on SoundCloud"
-  />,
+  email: <EnvelopeIcon />,
+  twitter: <TwitterIcon />,
+  facebook: <FacebookIcon />,
+  instagram: <InstagramIcon />,
+  rss: <RssIcon />,
+  linkedin: <LinkedInIcon />,
+  reddit: <RedditIcon />,
+  youtube: <YoutubeIcon />,
+  medium: <MediumIcon />,
+  tumblr: <TumblrIcon />,
+  pinterest: <PinterestIcon />,
+  snapchat: <SnapchatIcon />,
+  whatsapp: <WhatsAppIcon />,
+  soundcloud: <SoundCloudIcon />,
 };
 
 const FullAuthorBioItem = () => {
@@ -97,7 +70,7 @@ const FullAuthorBioItem = () => {
             (content.authors[0].image) && (
               <Image
                 url={content.authors[0].image}
-                alt="Author photo"
+                alt={(content.authors[0].byline) ? content.authors[0].byline : ''}
                 smallWidth={158}
                 smallHeight={158}
                 mediumWidth={158}
@@ -117,21 +90,21 @@ const FullAuthorBioItem = () => {
             className="author-content"
           >
             {
-              (content.authors[0].byline) && (
+              (content.authors[0].byline) ? (
                 <h1 className="author-name">{content.authors[0].byline}</h1>
-              )
+              ) : null
             }
             {
-              (content.authors[0].role) && (
+              (content.authors[0].role) ? (
                 <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
-              )
+              ) : null
             }
             {
-              (content.authors[0].bio || content.authors[0].longBio) && (
+              (content.authors[0].bio || content.authors[0].longBio) ? (
                 <SecondaryFont className="author-bio">
                   {content.authors[0].longBio || content.authors[0].bio}
                 </SecondaryFont>
-              )
+              ) : null
             }
           </PrimaryFont>
         </div>
@@ -147,6 +120,7 @@ const FullAuthorBioItem = () => {
                   className={`social-column ${item}`}
                   key={item}
                   href={constructSocialURL(item, content.authors[0][item])}
+                  title={phrases.t(`full-author-bio-block.social-${item.toLowerCase()}`)}
                 >
                   {logos[item]}
                 </a>

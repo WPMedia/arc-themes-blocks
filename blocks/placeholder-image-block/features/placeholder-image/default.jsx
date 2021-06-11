@@ -60,7 +60,7 @@ class PlaceholderImage extends React.Component {
       <>
         <Image
           url={this.getTargetFallbackImageUrl()}
-          alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+          alt={getProperties(arcSite).primaryLogoAlt || ''}
           smallWidth={smallWidth}
           smallHeight={smallHeight}
           mediumWidth={mediumWidth}

@@ -5,10 +5,10 @@ const Table = ({ element }) => {
   const { header, rows } = element;
 
   const tableHeaders = header.map((headerItem) => (
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <th
       key={headerItem._id}
       dangerouslySetInnerHTML={{ __html: unescapeHtml(headerItem.content) }}
-      aria-label="See content for column"
     />
   ));
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-import getThemeStyle from 'fusion:themes';
 
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import SearchResult from './search-result';
 
 // shared with results list
@@ -17,13 +16,6 @@ import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 // not shared with results list
 import './search-results-list.scss';
-
-const StyledButton = styled.button`
-  && {
-    background-color: ${(props) => props.primaryColor};
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
 
 @Consumer
 class CustomSearchResultsList extends React.Component {
@@ -131,21 +123,22 @@ class CustomSearchResultsList extends React.Component {
             <div className="search-icon-container">
               <SearchIcon fill="#979797" />
             </div>
-            <input
+            <PrimaryFont
+              as="input"
               type="text"
-              placeholder="Enter your search terms here"
+              placeholder={this.phrases.t('search-results-blocks.search-input-placeholder')}
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
             />
-            <StyledButton
+            <PrimaryFont
+              as="button"
               type="button"
               className="btn btn-sm"
-              primaryColor={getThemeStyle(arcSite)['primary-color']}
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+              backgroundColor="primary-color"
               onClick={() => this.fetchStories(false)}
             >
               {this.phrases.t('search-results-block.search-button')}
-            </StyledButton>
+            </PrimaryFont>
           </div>
           {
             data && (
@@ -171,19 +164,16 @@ class CustomSearchResultsList extends React.Component {
           {
             !!(data && data.length > 0 && data.length < totalHits) && (
               <div className="see-more">
-                <StyledButton
+                <PrimaryFont
+                  as="button"
                   type="button"
                   onClick={() => this.fetchStories(true)}
                   className="btn btn-sm"
-                  primaryColor={getThemeStyle(arcSite)['primary-color']}
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  backgroundColor="primary-color"
+                  aria-label={this.phrases.t('search-results-block.see-more-button-aria-label')}
                 >
                   {this.phrases.t('search-results-block.see-more-button')}
-                  {' '}
-                  <span className="visuallyHidden">
-                    stories about this topic
-                  </span>
-                </StyledButton>
+                </PrimaryFont>
               </div>
             )
           }

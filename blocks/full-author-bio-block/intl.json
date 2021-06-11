@@ -8,5 +8,47 @@
 		"ko": "연결",
 		"no": "Kontakt",
 		"sv": "Följ"
+	},
+	"full-author-bio-block.social-email": {
+		"en": "Email"
+	},
+	"full-author-bio-block.social-twitter": {
+		"en": "Connect on Twitter"
+	},
+	"full-author-bio-block.social-facebook": {
+		"en": "Connect on Facebook"
+	},
+	"full-author-bio-block.social-instagram": {
+		"en": "Follow on Instagram"
+	},
+	"full-author-bio-block.social-rss": {
+		"en": "RSS Feed"
+	},
+	"full-author-bio-block.social-linkedin": {
+		"en": "Connect on LinkedIn"
+	},
+	"full-author-bio-block.social-reddit": {
+		"en": "Connect on Reddit"
+	},
+	"full-author-bio-block.social-youtube": {
+		"en": "Connect on Youtube"
+	},
+	"full-author-bio-block.social-medium": {
+		"en": "Connect on Medium"
+	},
+	"full-author-bio-block.social-tumblr": {
+		"en": "Connect on Tumblr"
+	},
+	"full-author-bio-block.social-pinterest": {
+		"en": "Connect on Pinterest"
+	},
+	"full-author-bio-block.social-snapchat": {
+		"en": "Connect on Snapchat"
+	},
+	"full-author-bio-block.social-whatsapp": {
+		"en": "Connect on Whatsapp"
+	},
+	"full-author-bio-block.social-soundcloud": {
+		"en": "Listen on SoundCloud"
 	}
 }

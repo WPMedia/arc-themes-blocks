@@ -316,7 +316,7 @@ class ResultsList extends Component {
                       mediumHeight={154}
                       largeWidth={274}
                       largeHeight={154}
-                      alt={getProperties(arcSite).primaryLogoAlt || 'Placeholder logo'}
+                      alt={getProperties(arcSite).primaryLogoAlt || ''}
                       url={targetFallbackImage}
                       breakpoints={getProperties(arcSite)?.breakpoints}
                       resizedImageOptions={placeholderResizedImageOptions}
@@ -381,12 +381,9 @@ class ResultsList extends Component {
           className="btn btn-sm"
           primaryFont={getThemeStyle(arcSite)['primary-font-family']}
           primaryColor={getThemeStyle(arcSite)['primary-color']}
+          aria-label={this.phrases.t('results-list-block.see-more-button-aria-label')}
         >
           {this.phrases.t('results-list-block.see-more-button')}
-          {' '}
-          <span className="visuallyHidden">
-            stories about this topic
-          </span>
         </ReadMoreButton>
       </div>
     )

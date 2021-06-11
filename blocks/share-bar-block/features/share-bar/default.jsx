@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 
 import {
   EnvelopeIcon,
@@ -60,16 +61,16 @@ const share = {
 function getLogoComponent(type) {
   switch (type) {
     case 'facebook':
-      return <FacebookIcon description="Facebook icon" fill="#4267B2" />;
+      return <FacebookIcon fill="#4267B2" />;
     case 'linkedIn':
-      return <LinkedInAltIcon description="LinkedIn icon" fill="#2867B2" />;
+      return <LinkedInAltIcon fill="#2867B2" />;
     case 'pinterest':
-      return <PinterestAltIcon description="Pinterest icon" fill="#BD081C" />;
+      return <PinterestAltIcon fill="#BD081C" />;
     case 'twitter':
-      return <TwitterIcon description="Twitter icon" fill="#1DA1F2" />;
+      return <TwitterIcon fill="#1DA1F2" />;
     default:
     case 'email':
-      return <EnvelopeIcon description="Email icon" fill="#C72A22" />;
+      return <EnvelopeIcon fill="#C72A22" />;
   }
 }
 
@@ -86,7 +87,9 @@ const ShareBarContainer = () => {
   const {
     websiteDomain,
     websiteName,
+    locale = 'en',
   } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   return (
     <ShareBar
@@ -95,12 +98,13 @@ const ShareBarContainer = () => {
       websiteDomain={websiteDomain}
       websiteUrl={websiteUrl}
       headlineString={headlineString}
+      phrases={phrases}
     />
   );
 };
 
 export const ShareBar = ({
-  customFields = {}, websiteName, websiteDomain, websiteUrl, headlineString,
+  customFields = {}, websiteName, websiteDomain, websiteUrl, headlineString, phrases,
 }) => {
   const shareButtons = [];
   Object.keys(customFields).forEach((social) => {
@@ -108,11 +112,14 @@ export const ShareBar = ({
       const encodedTitle = encodeURIComponent(headlineString);
       const encodedUrl = encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social);
 
+      const socialType = phrases.t(`global.social-${social.toLowerCase()}`);
+
       shareButtons.push((
         <button
           key={social}
           id={`article-share-${social}`}
-          aria-label={`Share current article via ${social}`}
+          // aria-label={`Share current article via ${social}`}
+          aria-label={phrases.t('share-bar-block.share-button-aria-label', { socialType })}
           type="button"
           className="ts-share-bar__button"
           onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}

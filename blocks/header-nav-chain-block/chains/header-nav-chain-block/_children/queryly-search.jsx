@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 
 /*
@@ -22,14 +25,19 @@ const querylySearchClick = () => {
   document.getElementById('queryly_toggle').dispatchEvent(event);
 };
 
-const QuerylySearch = ({ theme = 'dark', iconSize = 16, label = 'Search' }) => (
-  <div className={`nav-search ${theme} queryly`}>
-    <button className={`nav-btn nav-btn-${theme} transparent border`} type="button" onClick={querylySearchClick} aria-label={label}>
-      <label htmlFor="queryly_toggle">
-        <SearchIcon height={iconSize} width={iconSize} />
-      </label>
-    </button>
-  </div>
-);
+const QuerylySearch = ({ theme = 'dark', iconSize = 16, label }) => {
+  const { arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
+  return (
+    <div className={`nav-search ${theme} queryly`}>
+      <button className={`nav-btn nav-btn-${theme} transparent border`} type="button" onClick={querylySearchClick} aria-label={label || phrases.t('header-nav-chain-block.querly-search-aria-label')}>
+        <label htmlFor="queryly_toggle">
+          <SearchIcon height={iconSize} width={iconSize} />
+        </label>
+      </button>
+    </div>
+  );
+};
 
 export default QuerylySearch;

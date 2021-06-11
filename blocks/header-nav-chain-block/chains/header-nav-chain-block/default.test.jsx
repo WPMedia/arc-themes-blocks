@@ -19,6 +19,10 @@ jest.mock('fusion:context', () => ({
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => ({})),
 }));
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
 
 describe('the header navigation feature for the default output type', () => {
   describe('horizontal links bar', () => {

@@ -240,7 +240,7 @@ class CardList extends React.Component {
                    ) : (
                      <Image
                        url={targetFallbackImage}
-                       alt={this.siteProperties.primaryLogoAlt || 'Placeholder logo'}
+                       alt={this.siteProperties.primaryLogoAlt || ''}
                        {...this.largeImageOptions}
                        resizedImageOptions={placeholderResizedImageOptions}
                      />
@@ -316,7 +316,7 @@ class CardList extends React.Component {
                               : (
                                 <Image
                                   url={targetFallbackImage}
-                                  alt={this.siteProperties.primaryLogoAlt || 'Placeholder logo'}
+                                  alt={this.siteProperties.primaryLogoAlt || ''}
                                   {...this.samllImageOptions}
                                   resizedImageOptions={placeholderResizedImageOptions}
                                 />

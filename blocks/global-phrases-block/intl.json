@@ -58,5 +58,23 @@
 		"ko": "Stop automatic slide show",
 		"no": "Stop automatic slide show",
 		"sv": "Stop automatic slide show"
+	},
+	"global.social-twitter": {
+		"en": "Twitter"
+	},
+	"global.social-facebook": {
+		"en": "Facebook"
+	},
+	"global.social-linkedin": {
+		"en": "LinkedIn"
+	},
+	"global.social-pinterest": {
+		"en": "Pinterest"
+	},
+	"global.social-email": {
+		"en": "Email"
+	},
+	"global.opens-in-new-window": {
+		"en": "(Opens in new window)"
 	}
 }

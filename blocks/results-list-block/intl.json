@@ -8,5 +8,8 @@
 		"ko": "자세히 보기",
 		"no": "Se mer",
 		"sv": "Fler artiklar"
+	},
+	"results-list-block.see-more-button-aria-label": {
+		"en": "See More stories about this topic"
 	}
 }

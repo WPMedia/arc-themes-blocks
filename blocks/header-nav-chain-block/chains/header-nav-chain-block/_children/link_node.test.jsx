@@ -5,25 +5,39 @@
  * @jest-environment node
  */
 
-import { renderToString } from 'react-dom/server';
+import React from 'react';
+import { shallow } from 'enzyme';
 import Link from './link';
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'dagen',
+  })),
+}));
+jest.mock('fusion:intl', () => jest.fn(
+  () => ({
+    t: jest.fn(() => 'test-translation'),
+  }),
+));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => (input.toString())),
 }));
+
 describe('When the link is generated SSR', () => {
   it('must add rel attriutes to external links', () => {
-    const link = renderToString(Link({ href: 'https://example.com/some/page.html', name: 'Entertaiment', showSepartor: false }));
-    expect(link).toMatch(/target="_blank"/);
-    expect(link).toMatch(/rel="noopener noreferrer"/);
+    const wrapper = shallow(<Link href="https://example.com/some/page.html" name="Entertaiment" showSepartor="false" />);
+    expect(wrapper.find('a').prop('target')).toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).toBe('noopener noreferrer');
   });
 
   it('must add negative tab index when "isHidden" prop is truthy', () => {
-    const link = renderToString(Link({
-      href: 'https://example.com/some/page.html', name: 'Entertaiment', isHidden: true,
-    }));
-    expect(link).toMatch(/target="_blank"/);
-    expect(link).toMatch(/rel="noopener noreferrer"/);
-    expect(link).toMatch(/tabindex="-1"/);
+    const wrapper = shallow(<Link href="https://example.com/some/page.html" name="Entertaiment" isHidden />);
+    expect(wrapper.find('a').prop('target')).toBe('_blank');
+    expect(wrapper.find('a').prop('rel')).toBe('noopener noreferrer');
+    expect(wrapper.find('a').prop('tabIndex')).toBe(-1);
   });
 });

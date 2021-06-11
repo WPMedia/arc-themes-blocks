@@ -28,5 +28,11 @@
 		"ko": "자세히 보기",
 		"no": "Se mer",
 		"sv": "Fler artiklar"
+	},
+	"search-results-block.see-more-button-aria-label": {
+		"en": "See More stories about this topic"
+	},
+	"search-results-blocks.search-input-placeholder": {
+		"en": "Enter your search terms"
 	}
 }

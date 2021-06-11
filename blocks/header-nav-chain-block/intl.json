@@ -18,5 +18,17 @@
 		"ko": "검색",
 		"no": "Søk",
 		"sv": "Sök"
+	},
+	"header-nav-chain-block.sections-button-aria-label": {
+		"en": "Show %{item} sub sections"
+	},
+	"header-nav-chain-block.sections-element-aria-label": {
+		"en": "Sections Menu"
+	},
+	"header-nav-chain-block.links-element-aria-label": {
+		"en": "Top Links"
+	},
+	"header-nav-chain-block.querly-search-aria-label": {
+		"en": "Search"
 	}
 }

@@ -1,4 +1,7 @@
 import React from 'react';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import { ChevronRightIcon } from '@wpmedia/engine-theme-sdk';
 import Link from './link';
 
@@ -45,21 +48,27 @@ const isSamePath = (current, menuLink) => {
 // and doesn't need to be as the caret is a button which is focusable
 // and has default button behaviour and the onClick event on the parent
 // div receives the event via propagation.
-const SubSectionAnchor = ({ item, isOpen, isHidden }) => (
-  <div className={`subsection-anchor ${isOpen ? 'open' : ''}`} onClick={onClickSubsection}>
-    <SectionAnchor item={item} isHidden={isHidden} />
-    <button
-      type="button"
-      className="submenu-caret"
-      aria-expanded={isOpen ? 'true' : 'false'}
-      aria-label={`Show ${item.display_name ?? item.name} sub sections`}
-      aria-controls={`header_sub_section_${item._id.replace('/', '')}`}
-      {...(isHidden ? { tabIndex: -1 } : {})}
-    >
-      <ChevronRightIcon height={20} width={20} />
-    </button>
-  </div>
-);
+const SubSectionAnchor = ({ item, isOpen, isHidden }) => {
+  const { arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
+
+  return (
+    <div className={`subsection-anchor ${isOpen ? 'open' : ''}`} onClick={onClickSubsection}>
+      <SectionAnchor item={item} isHidden={isHidden} />
+      <button
+        type="button"
+        className="submenu-caret"
+        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-label={phrases.t('header-nav-chain-block.sections-button-aria-label', { item: item.display_name ?? item.name })}
+        aria-controls={`header_sub_section_${item._id.replace('/', '')}`}
+        {...(isHidden ? { tabIndex: -1 } : {})}
+      >
+        <ChevronRightIcon height={20} width={20} />
+      </button>
+    </div>
+  );
+};
 /* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 
 const SectionItem = ({ item, isHidden }) => {

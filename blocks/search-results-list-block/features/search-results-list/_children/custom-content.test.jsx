@@ -55,7 +55,6 @@ describe('The search results list', () => {
       wrapper.update();
       it('should render a text input', () => {
         expect(wrapper.find('.search-bar').length).toEqual(1);
-        expect(wrapper.find('.search-bar').prop('placeholder')).toEqual('Enter your search terms here');
       });
 
       it('should show the total number of hits', () => {
@@ -66,29 +65,15 @@ describe('The search results list', () => {
         expect(wrapper.state('searchTerm')).toEqual('test');
       });
 
-      it("onChange param is the same value as the input element's value property", () => {
-        wrapper.find('input').simulate('change', { target: { value: 'term' } });
-        expect(wrapper.state('value')).toEqual('term');
-      });
-
       describe('renders a search button', () => {
         it('should render a search button to search for results', () => {
           expect(wrapper.find('.btn').at(0).length).toEqual(1);
-          expect(wrapper.find('.btn').at(0).text()).toEqual('Search');
         });
 
         it('should call fetchContent when clicked', () => {
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(0);
           wrapper.find('.btn').at(0).simulate('click');
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-        });
-
-        it('should have the primary text as font family', () => {
-          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryFont', 'Open Sans');
-        });
-
-        it('should have the primary text as font family', () => {
-          expect((wrapper.find('.btn').at(0))).toHaveProp('primaryColor', '#10c8cd');
         });
       });
     });
@@ -118,21 +103,13 @@ describe('The search results list', () => {
       });
 
       it('should have invisible text for accessibility purposes', () => {
-        expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
+        expect((wrapper.find('.see-more')).childAt(0).prop('aria-label').length).not.toBe(0);
       });
 
       it('should call fetchContent when clicked', () => {
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
         (wrapper.find('.see-more')).childAt(0).simulate('click');
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
-      });
-
-      it('should have the primary text as font family', () => {
-        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
-      });
-
-      it('should have the primary text as font family', () => {
-        expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
       });
     });
   });

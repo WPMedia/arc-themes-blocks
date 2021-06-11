@@ -1,9 +1,6 @@
 /* eslint-disable prefer-arrow-callback, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
-// import getThemeStyle from 'fusion:themes';
-// import getTranslatedPhrases from 'fusion:intl';
-// import getProperties from 'fusion:properties';
 import mockData, { oneListItem } from '../mock-data';
 
 jest.mock('fusion:themes', () => ({
@@ -51,19 +48,6 @@ describe('The search results list', () => {
     describe('renders a search button', () => {
       it('should render a search button to search for results', () => {
         expect(wrapper.find('.btn').at(0).length).toEqual(1);
-        expect(wrapper.find('.btn').at(0).text()).toEqual('Search');
-      });
-
-      it('should have the primary color as background color', () => {
-        expect((wrapper.find('.see-more')).childAt(0).text()).toEqual('See More stories about this topic');
-      });
-
-      it('should have the primary text as font family', () => {
-        expect((wrapper.find('.btn').at(0))).toHaveProp('primaryFont', 'Open Sans');
-      });
-
-      it('should have the primary text as font family', () => {
-        expect((wrapper.find('.btn').at(0))).toHaveProp('primaryColor', '#10c8cd');
       });
     });
 
@@ -108,47 +92,6 @@ describe('The search results list', () => {
       SearchResultsList.prototype.fetchContent = jest.fn();
       const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
       expect(wrapper.find('.see-more').childAt(0).length).toEqual(1);
-    });
-
-    it('should have the primary text as font family', () => {
-      const { default: SearchResultsList } = require('./global-content');
-      SearchResultsList.prototype.fetchContent = jest.fn();
-      const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-      expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryFont', 'Open Sans');
-    });
-
-    it('should have the primary text as font family', () => {
-      const { default: SearchResultsList } = require('./global-content');
-      SearchResultsList.prototype.fetchContent = jest.fn();
-      const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
-      expect((wrapper.find('.see-more')).childAt(0)).toHaveProp('primaryColor', '#10c8cd');
-    });
-
-    describe('when the locale is unset', () => {
-      // TODO
-      // it('should have invisible text for accessibility when using the default English', () => {
-      //   getTranslatedPhrases.mockImplementation((locale) => ({
-      //     t: jest.fn(() => ({ en: 'See More', sv: 'Visa fler' })[locale]),
-      //   }));
-      //   const { default: SearchResultsList } = require('./global-content');
-      //   const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
-      //   expect(wrapper.find('.see-more').childAt(0).text()).toEqual('See More stories about this topic');
-      // });
-    });
-
-    describe('when the locale is set', () => {
-      // TODO
-      // it('should not have invisible text for accessibility', () => {
-      //   getTranslatedPhrases.mockImplementation((locale) => ({
-      //     t: jest.fn(() => ({ en: 'See More', sv: 'Visa fler' })[locale]),
-      //   }));
-      //   getProperties.mockImplementation(() => ({
-      //     locale: 'sv',
-      //   }));
-      //   const { default: SearchResultsList } = require('./global-content');
-      //   const wrapper = shallow(<SearchResultsList globalContent={oneListItem} />);
-      //   expect(wrapper.find('.see-more').childAt(0).text()).toEqual('Visa fler');
-      // });
     });
   });
 });

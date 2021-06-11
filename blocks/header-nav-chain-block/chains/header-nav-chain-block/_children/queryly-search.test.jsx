@@ -2,8 +2,22 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import QuerylySearch from './queryly-search';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'dagen',
+  })),
+}));
+jest.mock('fusion:intl', () => jest.fn(
+  () => ({
+    t: jest.fn(() => 'test-translation'),
+  }),
+));
+
 const testQuerylySearch = ({
-  root, theme, iconSize = 16, label = 'Search',
+  root, theme, iconSize = 16, label = 'test-translation',
 }) => {
   const container = root.find('.nav-search');
   expect(container).toHaveLength(1);

@@ -8,7 +8,8 @@
 	},
 	"article-body-block": {
 		"article-body-block.clarification": "Klargörande",
-		"article-body-block.correction": "Korrektion"
+		"article-body-block.correction": "Korrektion",
+		"article-body-block.interstitial-link-aria-label": "Open related story"
 	},
 	"author-bio-block": {
 		"author-bio-block.social-email": "Send an email to %{authorName}",

@@ -18,5 +18,15 @@
 		"ko": "정정",
 		"no": "Korreksjon",
 		"sv": "Korrektion"
+	},
+	"article-body-block.interstitial-link-aria-label": {
+		"de": "Open related story",
+		"en": "Open related story",
+		"es": "Open related story",
+		"fr": "Open related story",
+		"ja": "Open related story",
+		"ko": "Open related story",
+		"no": "Open related story",
+		"sv": "Open related story"
 	}
 }

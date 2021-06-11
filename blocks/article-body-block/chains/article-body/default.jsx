@@ -117,7 +117,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
             <StyledLink
               href={url}
-              aria-label="Open related story"
+              aria-label={phrases.t('article-body-block.interstitial-link-aria-label')}
               dangerouslySetInnerHTML={{ __html: content }}
               primaryColor={getThemeStyle(arcSite)['primary-color']}
             />

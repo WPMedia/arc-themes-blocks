@@ -22,6 +22,8 @@ To import it into a block:
 // using named import statement
 import { ShareBar } from '@wpmedia/share-bar-block';
 
+const mockPhrases = { t: (key) => key };
+
 const AnotherComponentWithoutGlobalContent = () => (
   <ShareBar
     customFields={{
@@ -35,6 +37,7 @@ const AnotherComponentWithoutGlobalContent = () => (
     websiteDomain={'https://www.thesun.com/'}
     websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
     headlineString={'The Sun'}
+    phrases={mockPhrases}
   />
 )
 
@@ -73,6 +76,7 @@ const AnotherComponentWithGlobalContent = () => (
         websiteDomain={text('websiteDomain', 'https://www.thesun.com/')}
         websiteUrl={text('websiteUrl', '/2019/07/15/global-kitchen-sink-article/')}
         headlineString={text('websiteName', 'The Sun')}
+        phrases={{ t: (key) => key }}
      />
   </Story>
 </Preview>
@@ -86,6 +90,7 @@ const AnotherComponentWithGlobalContent = () => (
         websiteDomain={text('websiteDomain', 'https://www.thesun.com/')}
         websiteUrl={text('websiteUrl', '/2019/07/15/global-kitchen-sink-article/')}
         headlineString={text('websiteName', 'The Sun')}
+        phrases={{ t: (key) => key }}
      />
   </Story>
 </Preview>

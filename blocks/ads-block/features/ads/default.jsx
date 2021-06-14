@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 
 import adMap from './ad-mapping';
@@ -35,6 +37,9 @@ const StyledAdUnit = styled.div`
 
 const ArcAd = (props) => {
   const fusionContext = useFusionContext();
+  const { arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
   const [instanceId] = useState(() => generateInstanceId(fusionContext.id || '0000'));
   const propsWithContext = {
     ...fusionContext,
@@ -69,7 +74,7 @@ const ArcAd = (props) => {
     <StyledAdUnit
       id={`arcad-feature-${instanceId}`}
       className="arcad-feature"
-      adLabel={siteProperties?.advertisementLabel || 'ADVERTISEMENT'}
+      adLabel={siteProperties?.advertisementLabel || phrases.t('ads-block.ad-label')}
       displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
     >
       <div className="arcad-container" style={sizing}>

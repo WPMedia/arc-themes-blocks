@@ -4,6 +4,11 @@ import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import Footer from './default';
 
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
+
 // A payload with 4 columns and 11 column items
 const mockPayload = {
   children: [
@@ -243,11 +248,11 @@ describe('the footer feature for the default output type', () => {
       });
 
       describe('when the theme manifest does not provide alt text', () => {
-        it('should make the alt text of the logo the default text', () => {
+        it('should make the alt text of the logo blank when not supplied', () => {
           getProperties.mockImplementation(() => ({ primaryLogo: 'my-nav-logo.svg' }));
           const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-          expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+          expect(wrapper.find('div > img')).toHaveProp('alt', '');
         });
       });
     });
@@ -298,11 +303,11 @@ describe('the footer feature for the default output type', () => {
       });
 
       describe('when the theme manifest does not provide alt text', () => {
-        it('should make the alt text of the logo the default text', () => {
+        it('should make the alt text of the logo blank', () => {
           getProperties.mockImplementation(() => ({ lightBackgroundLogo: 'my-nav-logo.svg' }));
           const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-          expect(wrapper.find('div > img')).toHaveProp('alt', 'Footer logo');
+          expect(wrapper.find('div > img')).toHaveProp('alt', '');
         });
       });
     });

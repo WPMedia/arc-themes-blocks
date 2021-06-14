@@ -5,6 +5,21 @@ jest.mock('fusion:themes', () => jest.fn(() => ({})));
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => input.toString()),
 }));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'dagen',
+  })),
+}));
+jest.mock('fusion:intl', () => jest.fn(
+  () => ({
+    t: jest.fn(() => 'Top Links'),
+  }),
+));
+
 describe('the links bar feature for the default output type', () => {
   afterEach(() => {
     jest.resetModules();

@@ -100,8 +100,8 @@ describe('the article body Table component', () => {
     );
     expect(wrapper.find(Table)).toHaveLength(1);
     expect(wrapper.find('thead')).toHaveLength(1);
-    expect(wrapper.find('thead').find('tr').childAt(0).html()).toMatch('<th aria-label="See content for column">Column 1</th>');
-    expect(wrapper.find('thead').find('tr').childAt(1).html()).toMatch('<th aria-label="See content for column">Column 2</th>');
+    expect(wrapper.find('thead').find('tr').childAt(0).html()).toMatch('<th>Column 1</th>');
+    expect(wrapper.find('thead').find('tr').childAt(1).html()).toMatch('<th>Column 2</th>');
     expect(wrapper.find('tbody')).toHaveLength(1);
     expect(wrapper.find('tbody').children()).toHaveLength(4);
     expect(wrapper.find('tbody').childAt(0).childAt(0).html()).toMatch('<td>Row 1</td>');

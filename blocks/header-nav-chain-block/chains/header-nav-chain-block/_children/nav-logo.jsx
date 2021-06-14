@@ -21,7 +21,7 @@ const NavLogo = ({ alignment, isVisible }) => {
         {!!primaryLogoPath && (
           <img
             src={primaryLogoPath}
-            alt={primaryLogoAlt || 'Navigation bar logo'}
+            alt={primaryLogoAlt || ''}
           />
         )}
       </a>

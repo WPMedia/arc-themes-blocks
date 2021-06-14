@@ -2,6 +2,7 @@ import React from 'react';
 import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 // this is blank import but used to inject scss
 import './default.scss';
@@ -184,6 +185,7 @@ const SampleOutputType = ({
       <body>
         {comscoreNoScript(comscoreID)}
         {googleTagManagerNoScript(gtmID)}
+        <PrimaryFont as="a" className="skip-main btn btn-outline" fontColor="primary-color" href="#main">Skip to content</PrimaryFont>
         <div id="fusion-app" className="layout-section">{children}</div>
         <Fusion />
       </body>

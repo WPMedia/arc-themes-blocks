@@ -118,7 +118,6 @@ export const ShareBar = ({
         <button
           key={social}
           id={`article-share-${social}`}
-          // aria-label={`Share current article via ${social}`}
           aria-label={phrases.t('share-bar-block.share-button-aria-label', { socialType })}
           type="button"
           className="ts-share-bar__button"

@@ -1,24 +1,4 @@
 {
-	"global.gallery-expand-button": {
-		"de": "Erweitern",
-		"en": "Expand",
-		"es": "Expandir",
-		"fr": "Développer",
-		"ja": "展開",
-		"ko": "더보기",
-		"no": "Utvid",
-		"sv": "Förstora"
-	},
-	"global.gallery-page-count-text": {
-		"de": "%{current} von %{total}",
-		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
-		"es": "%{current} de %{total}",
-		"fr": "%{current} de %{total}",
-		"ja": "%{current} / %{total}",
-		"ko": "%{current}/%개 보는 %{total}",
-		"no": "%{current} av %{total}",
-		"sv": "%{current} av %{total}"
-	},
 	"global.gallery-autoplay-button": {
 		"de": "Automatische Wiedergabe",
 		"en": "Autoplay",
@@ -28,16 +8,6 @@
 		"ko": "자동 재생",
 		"no": "Spill av",
 		"sv": "Spela upp"
-	},
-	"global.gallery-pause-autoplay-button": {
-		"de": "Automatische Wiedergabe anhalten",
-		"en": "Pause autoplay",
-		"es": "Pausar reproducción automática",
-		"fr": "Mettre en pause la lecture automatique",
-		"ja": "自動再生の一時停止",
-		"ko": "자동 재생 일시 중지",
-		"no": "Stopp",
-		"sv": "Pausa"
 	},
 	"global.gallery-autoplay-label-start": {
 		"de": "Start automatic slide show",
@@ -58,5 +28,95 @@
 		"ko": "Stop automatic slide show",
 		"no": "Stop automatic slide show",
 		"sv": "Stop automatic slide show"
+	},
+	"global.gallery-expand-button": {
+		"de": "Erweitern",
+		"en": "Expand",
+		"es": "Expandir",
+		"fr": "Développer",
+		"ja": "展開",
+		"ko": "더보기",
+		"no": "Utvid",
+		"sv": "Förstora"
+	},
+	"global.gallery-page-count-text": {
+		"de": "%{current} von %{total}",
+		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
+		"es": "%{current} de %{total}",
+		"fr": "%{current} de %{total}",
+		"ja": "%{current} / %{total}",
+		"ko": "%{current}/%개 보는 %{total}",
+		"no": "%{current} av %{total}",
+		"sv": "%{current} av %{total}"
+	},
+	"global.gallery-pause-autoplay-button": {
+		"de": "Automatische Wiedergabe anhalten",
+		"en": "Pause autoplay",
+		"es": "Pausar reproducción automática",
+		"fr": "Mettre en pause la lecture automatique",
+		"ja": "自動再生の一時停止",
+		"ko": "자동 재생 일시 중지",
+		"no": "Stopp",
+		"sv": "Pausa"
+	},
+	"global.opens-in-new-window": {
+		"de": "(Opens in new window)",
+		"en": "(Opens in new window)",
+		"es": "(Opens in new window)",
+		"fr": "(Opens in new window)",
+		"ja": "(Opens in new window)",
+		"ko": "(Opens in new window)",
+		"no": "(Opens in new window)",
+		"sv": "(Opens in new window)"
+	},
+	"global.social-email": {
+		"de": "Email",
+		"en": "Email",
+		"es": "Email",
+		"fr": "Email",
+		"ja": "Email",
+		"ko": "Email",
+		"no": "Email",
+		"sv": "Email"
+	},
+	"global.social-facebook": {
+		"de": "Facebook",
+		"en": "Facebook",
+		"es": "Facebook",
+		"fr": "Facebook",
+		"ja": "Facebook",
+		"ko": "Facebook",
+		"no": "Facebook",
+		"sv": "Facebook"
+	},
+	"global.social-linkedin": {
+		"de": "LinkedIn",
+		"en": "LinkedIn",
+		"es": "LinkedIn",
+		"fr": "LinkedIn",
+		"ja": "LinkedIn",
+		"ko": "LinkedIn",
+		"no": "LinkedIn",
+		"sv": "LinkedIn"
+	},
+	"global.social-pinterest": {
+		"de": "Pinterest",
+		"en": "Pinterest",
+		"es": "Pinterest",
+		"fr": "Pinterest",
+		"ja": "Pinterest",
+		"ko": "Pinterest",
+		"no": "Pinterest",
+		"sv": "Pinterest"
+	},
+	"global.social-twitter": {
+		"de": "Twitter",
+		"en": "Twitter",
+		"es": "Twitter",
+		"fr": "Twitter",
+		"ja": "Twitter",
+		"ko": "Twitter",
+		"no": "Twitter",
+		"sv": "Twitter"
 	}
 }

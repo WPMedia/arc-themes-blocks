@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import styled from 'styled-components';
 import { LinkSVGHover } from '@wpmedia/news-theme-css/js/styled/linkHovers';
 import {
@@ -30,16 +31,6 @@ import getProperties from 'fusion:properties';
 import './author-bio.scss';
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
-
-export const getSocialLinkAriaLabel = (authorName = 'author', webService) => {
-  if (!webService) return null;
-  return (
-    (webService.toLowerCase() === 'soundcloud' && `Listen to ${authorName} on SoundCloud`)
-    || (webService.toLowerCase() === 'rss' && `Subscribe to ${authorName} RSS feed`)
-    || (webService.toLowerCase() === 'email' && `Send an email to ${authorName}`)
-    || `Connect with ${authorName} on ${webService}`
-  );
-};
 
 const renderAuthorInfo = (author, arcSite) => {
   const {
@@ -71,8 +62,14 @@ const renderAuthorInfo = (author, arcSite) => {
 
 const AuthorBioItems = () => {
   const { globalContent: content, arcSite } = useFusionContext();
+  const {
+    locale = 'en',
+  } = getProperties(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
   const { credits = {} } = content;
   const { by = [] } = credits;
+  const PrimaryColor = getThemeStyle(arcSite)['primary-color'];
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
@@ -94,7 +91,6 @@ const AuthorBioItems = () => {
         ? author.social_links.reduce((result, socialLink) => {
           if (socialLink.site && socialLink.url && socialLink.url.length > 0) {
             let socialButton;
-            let linkTitle;
             const constructedURL = constructSocialURL(socialLink.site, socialLink.url);
 
             const MediaLink = ({ children, webService, ...otherProps }) => (
@@ -102,8 +98,8 @@ const AuthorBioItems = () => {
                 href={constructedURL}
                 target="_blank"
                 rel="noreferrer noopener"
-                aria-label={getSocialLinkAriaLabel(name, webService)}
-                primaryColor={getThemeStyle(arcSite)['primary-color']}
+                aria-label={webService ? phrases.t(`author-bio-block.social-${webService.toLowerCase()}`, { authorName: name }) : null}
+                primaryColor={PrimaryColor}
                 {...otherProps}
               >
                 { children }
@@ -112,170 +108,100 @@ const AuthorBioItems = () => {
 
             switch (socialLink.site) {
               case 'linkedin':
-                linkTitle = 'LinkedIn';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <LinkedInIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on LinkedIn"
-                    />
+                  <MediaLink webService="linkedin">
+                    <LinkedInIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'twitter':
-                linkTitle = 'Twitter';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <TwitterIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Twitter"
-                    />
+                  <MediaLink webService="twitter">
+                    <TwitterIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'instagram':
-                linkTitle = 'Instagram';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <InstagramIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Instagram"
-                    />
+                  <MediaLink webService="instagram">
+                    <InstagramIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'facebook':
-                linkTitle = 'Facebook';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <FacebookIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Facebook"
-                    />
+                  <MediaLink webService="facebook">
+                    <FacebookIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'reddit':
-                linkTitle = 'Reddit';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <RedditIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Reddit"
-                    />
+                  <MediaLink webService="reddit">
+                    <RedditIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'youtube':
-                linkTitle = 'YouTube';
                 socialButton = (
-                  <MediaLink webService={linkTitle} id="link-social-youtube">
-                    <YoutubeIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on YouTube"
-                    />
+                  <MediaLink webService="youtube" id="link-social-youtube">
+                    <YoutubeIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'medium':
-                linkTitle = 'Medium';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <MediumIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Medium"
-                    />
+                  <MediaLink webService="medium">
+                    <MediumIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'tumblr':
-                linkTitle = 'Tumblr';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <TumblrIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Tumblr"
-                    />
+                  <MediaLink webService="tumblr">
+                    <TumblrIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'pinterest':
-                linkTitle = 'Pinterest';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <PinterestIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Pinterest"
-                    />
+                  <MediaLink webService="pinterest">
+                    <PinterestIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'snapchat':
-                linkTitle = 'Snapchat';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <SnapchatIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on Snapchat"
-                    />
+                  <MediaLink webService="snapchat">
+                    <SnapchatIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'whatsapp':
-                linkTitle = 'WhatsApp';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <WhatsAppIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Connect on WhatsApp"
-                    />
+                  <MediaLink webService="whatsapp">
+                    <WhatsAppIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'soundcloud':
-                linkTitle = 'SoundCloud';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <SoundCloudIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Listen on SoundCloud"
-                    />
+                  <MediaLink webService="soundcloud">
+                    <SoundCloudIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               case 'rss':
-                linkTitle = 'RSS';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <RssIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Subscribe to RSS feed"
-                    />
+                  <MediaLink webService="rss">
+                    <RssIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;
               default:
-                linkTitle = 'Email';
                 socialButton = (
-                  <MediaLink webService={linkTitle}>
-                    <EnvelopeIcon
-                      fill={getThemeStyle(arcSite)['primary-color']}
-                      title={linkTitle}
-                      description="Send an email"
-                    />
+                  <MediaLink webService="email">
+                    <EnvelopeIcon fill={PrimaryColor} />
                   </MediaLink>
                 );
                 break;

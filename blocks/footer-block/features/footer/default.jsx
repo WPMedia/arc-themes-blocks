@@ -4,6 +4,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
 import Link from '@wpmedia/links-bar-block';
 import {
@@ -36,7 +37,10 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
     lightBackgroundLogoAlt,
     primaryLogo,
     primaryLogoAlt,
+    locale = 'en',
   } = getProperties(arcSite);
+
+  const phrases = getTranslatedPhrases(locale);
 
   // Check if URL is absolute/base64
   let logoUrl = lightBackgroundLogo || primaryLogo;
@@ -75,7 +79,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
         (facebookPage)
           ? (
             <a
-              title="Facebook page"
+              title={phrases.t('footer-block.facebook-link')}
               target="_blank"
               rel="noopener noreferrer"
               href={facebookPage}
@@ -89,7 +93,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
         (twitterUsername)
           ? (
             <a
-              title="Twitter feed"
+              title={phrases.t('footer-block.twitter-link')}
               target="_blank"
               rel="noopener noreferrer"
               href={`https://twitter.com/${twitterUsername}`}
@@ -103,7 +107,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
         (rssUrl)
           ? (
             <a
-              title="RSS feed"
+              title={phrases.t('footer-block.rss-link')}
               target="_blank"
               rel="noopener noreferrer"
               href={rssUrl}
@@ -171,7 +175,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
             <div className="primaryLogo">
               <img
                 src={logoUrl}
-                alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || 'Footer logo'}
+                alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || ''}
                 className="footer-logo"
               />
             </div>

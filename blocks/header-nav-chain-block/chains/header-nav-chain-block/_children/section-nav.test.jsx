@@ -2,6 +2,20 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import SectionNav from './section-nav';
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
+jest.mock('fusion:context', () => ({
+  useFusionContext: jest.fn(() => ({
+    arcSite: 'dagen',
+  })),
+}));
+jest.mock('fusion:intl', () => jest.fn(
+  () => ({
+    t: jest.fn(() => 'test-translation'),
+  }),
+));
+
 const items = [
   {
     _id: '/sports',

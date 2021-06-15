@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
 import PropTypes from 'prop-types';
 
@@ -31,6 +33,7 @@ class AlertBar extends Component {
     });
 
     this.alertRef = React.createRef();
+    this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
     if (typeof window !== 'undefined') {
       this.cookie = readCookie();
@@ -155,7 +158,7 @@ class AlertBar extends Component {
         <nav
           className="alert-bar"
           ref={this.alertRef}
-          aria-label={ariaLabel || 'Breaking News Alert'}
+          aria-label={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
         >
           <AlertBarLink
             href={websiteURL}
@@ -164,7 +167,7 @@ class AlertBar extends Component {
           >
             {headlines.basic}
           </AlertBarLink>
-          <button type="button" onClick={this.hideAlert}>
+          <button type="button" onClick={this.hideAlert} aria-label={this.phrases.t('alert-bar-block.close-button')}>
             <CloseIcon className="close" fill="white" />
           </button>
         </nav>

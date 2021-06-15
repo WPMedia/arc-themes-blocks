@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import Link from './_children/link';
 
@@ -24,7 +26,8 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
       }
     }`,
   });
-  const { id } = useFusionContext();
+  const { id, arcSite } = useFusionContext();
+  const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
   const menuItems = (content && content.children) ? content.children : [];
   const showSeparator = !!(
     content
@@ -37,7 +40,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
       <nav
         key={id}
         className="links-bar"
-        aria-label={ariaLabel || 'More Links'}
+        aria-label={ariaLabel || phrases.t('links-bar-block.element-aria-label')}
       >
         {menuItems && menuItems.map((item, index) => (
           <PrimaryFont

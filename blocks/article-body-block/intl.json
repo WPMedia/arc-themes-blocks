@@ -1,4 +1,14 @@
 {
+	"article-body-block.clarification": {
+		"de": "Klarstellung",
+		"en": "Clarification",
+		"es": "Aclaración",
+		"fr": "Précision",
+		"ja": "説明",
+		"ko": "설명",
+		"no": "Avklaring",
+		"sv": "Klargörande"
+	},
 	"article-body-block.correction": {
 		"de": "Korrektur",
 		"en": "Correction",
@@ -9,14 +19,14 @@
 		"no": "Korreksjon",
 		"sv": "Korrektion"
 	},
-	"article-body-block.clarification": {
-		"de": "Klarstellung",
-		"en": "Clarification",
-		"es": "Aclaración",
-		"fr": "Précision",
-		"ja": "説明",
-		"ko": "설명",
-		"no": "Avklaring",
-		"sv": "Klargörande"
+	"article-body-block.interstitial-link-aria-label": {
+		"de": "Open related story",
+		"en": "Open related story",
+		"es": "Open related story",
+		"fr": "Open related story",
+		"ja": "Open related story",
+		"ko": "Open related story",
+		"no": "Open related story",
+		"sv": "Open related story"
 	}
 }

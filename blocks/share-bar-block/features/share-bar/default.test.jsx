@@ -3,6 +3,8 @@ import { mount } from 'enzyme';
 // presentational component not container
 import { ShareBar } from './default';
 
+const mockPhrases = { t: jest.fn((phrase) => phrase) };
+
 describe('When the share bar is shown', () => {
   const websiteDomain = 'https://www.thesun.com/';
   const websiteName = 'The Sun';
@@ -23,6 +25,7 @@ describe('When the share bar is shown', () => {
       websiteDomain={websiteDomain}
       websiteUrl={websiteUrl}
       headlineString={headlineString}
+      phrases={mockPhrases}
     />);
     expect(wrapper.find('.ts-share-bar__button')).toHaveLength(5);
   });
@@ -42,6 +45,7 @@ describe('When the share bar is shown', () => {
       websiteDomain={websiteDomain}
       websiteUrl={websiteUrl}
       headlineString={headlineString}
+      phrases={mockPhrases}
     />);
 
     expect(wrapper.find('.ts-share-bar__button')).toHaveLength(3);
@@ -67,6 +71,7 @@ describe('When the share bar is shown', () => {
       websiteDomain={websiteDomain}
       websiteUrl={websiteUrl}
       headlineString={headlineString}
+      phrases={mockPhrases}
     />);
     expect(wrapper.find('.ts-share-bar').children()).toHaveLength(0);
   });
@@ -89,6 +94,7 @@ describe('When the share bar is shown', () => {
         websiteDomain={websiteDomain}
         websiteUrl={websiteUrl}
         headlineString={headlineString}
+        phrases={mockPhrases}
       />);
       wrapper.find('#article-share-facebook').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
@@ -102,6 +108,7 @@ describe('When the share bar is shown', () => {
         websiteDomain={websiteDomain}
         websiteUrl={websiteUrl}
         headlineString={headlineString}
+        phrases={mockPhrases}
       />);
       wrapper.find('#article-share-linkedIn').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
@@ -115,6 +122,7 @@ describe('When the share bar is shown', () => {
         websiteDomain={websiteDomain}
         websiteUrl={websiteUrl}
         headlineString={headlineString}
+        phrases={mockPhrases}
       />);
       wrapper.find('#article-share-email').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
@@ -128,6 +136,7 @@ describe('When the share bar is shown', () => {
         websiteDomain={websiteDomain}
         websiteUrl={websiteUrl}
         headlineString={headlineString}
+        phrases={mockPhrases}
       />);
       wrapper.find('#article-share-pinterest').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');
@@ -141,6 +150,7 @@ describe('When the share bar is shown', () => {
         websiteDomain={websiteDomain}
         websiteUrl={websiteUrl}
         headlineString={headlineString}
+        phrases={mockPhrases}
       />);
       wrapper.find('#article-share-twitter').simulate('click');
       expect(window.location.origin).toEqual('http://localhost');

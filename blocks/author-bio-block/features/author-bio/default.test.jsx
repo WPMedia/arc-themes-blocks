@@ -34,6 +34,15 @@ jest.mock('fusion:context', () => ({
   useFusionContext: () => ({ isAdmin: false }),
 }));
 
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
+
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
+
 describe('Given the list of author(s) from the article', () => {
   it('should return null if lazyLoad on the server and not in the admin', () => {
     const { default: AuthorBio } = require('./default');
@@ -301,7 +310,7 @@ describe('Given the list of author(s) from the article', () => {
   });
 
   it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss, soundcloud not the mail fallback', () => {
-    const { default: AuthorBio, getSocialLinkAriaLabel } = require('./default');
+    const { default: AuthorBio } = require('./default');
 
     const mockUseFusionContext = {
       arcSite: 'the-sun',
@@ -350,14 +359,8 @@ describe('Given the list of author(s) from the article', () => {
     expect(socialButtonsContainer.children()).toHaveLength(13);
     const socialLinks = socialButtonsContainer.find('a');
     expect(socialLinks).toHaveLength(13);
-    socialLinks.forEach((link, index) => {
+    socialLinks.forEach((link) => {
       expect(typeof link.prop('aria-label')).toEqual('string');
-      expect(link.prop('aria-label').toLowerCase()).toEqual(
-        getSocialLinkAriaLabel(
-          mockUseFusionContext?.globalContent?.credits?.by[0]?.name,
-          mockUseFusionContext?.globalContent?.credits?.by[0]?.social_links[index].site,
-        ).toLowerCase(),
-      );
     });
 
     // envelope icon is the default we want to avoid
@@ -646,25 +649,5 @@ describe('Given the list of author(s) from the article', () => {
 
     const wrapper = mount(<AuthorBio />);
     expect(wrapper).toBeEmptyRender();
-  });
-});
-
-describe('getSocialLinkAriaLabel()', () => {
-  it('returns null when "webService" param is undefined', () => {
-    const { getSocialLinkAriaLabel } = require('./default');
-    const value = getSocialLinkAriaLabel();
-    expect(value).toBeNull();
-  });
-
-  it('returns generic label when author name param is undefined', () => {
-    const { getSocialLinkAriaLabel } = require('./default');
-    const value = getSocialLinkAriaLabel(undefined, 'LinkedIn');
-    expect(value).toEqual('Connect with author on LinkedIn');
-  });
-
-  it('returns label with author name and web service name', () => {
-    const { getSocialLinkAriaLabel } = require('./default');
-    const value = getSocialLinkAriaLabel('Stewie Griffin', 'LinkedIn');
-    expect(value).toEqual('Connect with Stewie Griffin on LinkedIn');
   });
 });

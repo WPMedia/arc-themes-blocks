@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
 import PropTypes from 'prop-types';
 import Link from './_children/link';
@@ -21,6 +23,8 @@ const HorizontalLinksBar = ({
   hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: { ariaLabel } = {},
 }) => {
   const { id, arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const content = useContent({
     source: 'site-service-hierarchy',
@@ -55,7 +59,7 @@ const HorizontalLinksBar = ({
       <nav
         key={id}
         className="horizontal-links-bar"
-        aria-label={ariaLabel || 'Top Links'}
+        aria-label={ariaLabel || phrases.t('header-nav-chain-block.links-element-aria-label')}
       >
         {menuItems && menuItems.map((item, index) => (
           <LinkBarSpan

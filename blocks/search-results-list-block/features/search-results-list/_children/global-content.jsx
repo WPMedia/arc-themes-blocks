@@ -1,11 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
-import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 import SearchResult from './search-result';
 import { extractImage } from './helpers';
@@ -13,17 +12,6 @@ import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
-
-const StyledInput = styled.input`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-const StyledButton = styled.button`
-  && {
-    background-color: ${(props) => props.primaryColor};
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
 
 @Consumer
 class GlobalSearchResultsList extends React.Component {
@@ -156,23 +144,23 @@ class GlobalSearchResultsList extends React.Component {
             <div className="search-icon-container">
               <SearchIcon fill="#979797" />
             </div>
-            <StyledInput
+            <PrimaryFont
+              as="input"
               type="text"
-              placeholder="Enter your search terms"
+              placeholder={this.phrases.t('search-results-blocks.search-input-placeholder')}
               value={value}
               className="search-bar"
               onChange={(evt) => this.setState({ value: evt.target.value })}
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             />
-            <StyledButton
+            <PrimaryFont
+              as="button"
               type="button"
               className="btn btn-sm"
-              primaryColor={getThemeStyle(arcSite)['primary-color']}
-              primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+              backgroundColor="primary-color"
               onClick={() => this.handleSearch()}
             >
               {this.phrases.t('search-results-block.search-button')}
-            </StyledButton>
+            </PrimaryFont>
           </div>
           {
             data && (
@@ -211,21 +199,16 @@ class GlobalSearchResultsList extends React.Component {
           {
             !!(results && results.length > 0 && results.length < totalHits) && (
               <div className="see-more">
-                <StyledButton
+                <PrimaryFont
+                  as="button"
                   type="button"
                   onClick={() => this.fetchStories()}
                   className="btn btn-sm"
-                  primaryColor={getThemeStyle(arcSite)['primary-color']}
-                  primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  backgroundColor="primary-color"
+                  aria-label={this.phrases.t('search-results-block.see-more-button-aria-label')}
                 >
                   {this.phrases.t('search-results-block.see-more-button')}
-                  {' '}
-                  {this.locale === 'en' && (
-                    <span className="visuallyHidden">
-                      stories about this topic
-                    </span>
-                  )}
-                </StyledButton>
+                </PrimaryFont>
               </div>
             )
           }

@@ -7,6 +7,11 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'https://resizer.me',
 }))));
 
+jest.mock('fusion:intl', () => ({
+  __esModule: true,
+  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
+}));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   ImageMetadata: () => <div />,

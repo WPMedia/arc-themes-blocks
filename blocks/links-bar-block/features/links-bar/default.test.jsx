@@ -173,6 +173,23 @@ describe('the links bar feature for the default output type', () => {
     );
   });
 
+  it('should render the block with the default aria-label if custom field is empty', () => {
+    jest.mock('fusion:content', () => ({
+      useContent: jest.fn(() => ({
+        children: [],
+      })),
+    }));
+    const { default: LinksBar } = require('./default');
+    const wrapper = shallow(
+      <LinksBar customFields={{ navigationConfig: 'links', ariaLabel: '' }} />,
+    );
+
+    expect(wrapper.find('nav').props()).toHaveProperty(
+      'aria-label',
+      'More Links',
+    );
+  });
+
   it('should render the block with the custom aria-label', () => {
     jest.mock('fusion:content', () => ({
       useContent: jest.fn(() => ({

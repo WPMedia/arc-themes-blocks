@@ -402,6 +402,7 @@ const Nav = (props) => {
               hierarchy={horizontalLinksHierarchy}
               navBarColor={navColor}
               showHorizontalSeperatorDots={showDotSeparators}
+              ariaLabel={ariaLabel}
             />
           )}
           <NavSection side="right" />
@@ -499,6 +500,7 @@ Nav.propTypes = {
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
       defaultValue: 'Sections Menu',
+      description: 'The label is provided to assistive technologies to provide it with a unique name for the header nav landmark - defaults to "Sections Menu" if left blank',
     }),
     ...generateNavComponentPropTypes(),
   }),

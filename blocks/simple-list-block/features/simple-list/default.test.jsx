@@ -146,6 +146,7 @@ describe('Simple list', () => {
 
     const wrapper = mount(<SimpleList
       customFields={customFields}
+      arcSite="the-sun"
       deployment={jest.fn((path) => path)}
     />);
 
@@ -166,6 +167,7 @@ describe('Simple list', () => {
 
     const wrapper = mount(<SimpleList
       customFields={customFields}
+      arcSite="the-sun"
       deployment={jest.fn((path) => path)}
     />);
 
@@ -175,7 +177,10 @@ describe('Simple list', () => {
 
 describe('Simple list', () => {
   it('should render content only for the arcSite', () => {
-    const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
+    const wrapper = mount(<SimpleList
+      arcSite="the-sun"
+      deployment={jest.fn((path) => path)}
+    />);
 
     expect(wrapper.find('StoryItem')).toHaveLength(2);
   });

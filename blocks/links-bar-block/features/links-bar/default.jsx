@@ -77,6 +77,7 @@ LinksBar.propTypes = {
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
       defaultValue: 'More Links',
+      description: 'The label is provided to assistive technologies to provide it with a unique name for the links bar nav landmark - defaults to "More Links" if left blank',
     }),
   }),
 };

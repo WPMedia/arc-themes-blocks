@@ -5,7 +5,6 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import getThemeStyle from 'fusion:themes';
-import PropTypes from 'prop-types';
 import Link from './_children/link';
 
 import './links-bar.scss';
@@ -20,7 +19,7 @@ const LinkBarSpan = styled.span`
 `;
 
 const HorizontalLinksBar = ({
-  hierarchy, navBarColor, showHorizontalSeperatorDots, customFields: { ariaLabel } = {},
+  hierarchy, navBarColor, showHorizontalSeperatorDots, ariaLabel,
 }) => {
   const { id, arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
@@ -55,7 +54,6 @@ const HorizontalLinksBar = ({
 
   return (
     <>
-      {}
       <nav
         key={id}
         className="horizontal-links-bar"
@@ -91,15 +89,6 @@ const HorizontalLinksBar = ({
       </nav>
     </>
   );
-};
-
-HorizontalLinksBar.propTypes = {
-  customFields: PropTypes.shape({
-    ariaLabel: PropTypes.string.tag({
-      label: 'Aria-label',
-      defaultValue: 'Top Links',
-    }),
-  }),
 };
 
 export default HorizontalLinksBar;

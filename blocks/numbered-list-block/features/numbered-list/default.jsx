@@ -6,12 +6,8 @@ import getProperties from 'fusion:properties';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
-
-function extractImage(promo) {
-  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
-}
 
 @Consumer
 class NumberedList extends Component {
@@ -154,10 +150,10 @@ class NumberedList extends Component {
                   aria-hidden="true"
                   tabIndex="-1"
                 >
-                  {extractImage(promoItems) ? (
+                  {extractImageFromStory(promoItems) ? (
                     <Image
                       resizedImageOptions={extractResizedParams(element)}
-                      url={extractImage(promoItems)}
+                      url={extractImageFromStory(promoItems)}
                       alt={headlineText}
                       // small, including numbered list, is 3:2 aspect ratio
                       smallWidth={105}

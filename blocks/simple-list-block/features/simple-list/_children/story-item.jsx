@@ -28,6 +28,7 @@ const StoryItem = (props) => {
           <Image
             {...imageProps}
             url={imageURL !== '' ? imageURL : targetFallbackImage}
+            alt={imageURL !== '' ? itemTitle : imageProps?.primaryLogoAlt}
             resizedImageOptions={imageURL !== '' ? resizedImageOptions : placeholderResizedImageOptions}
           />
         </a>

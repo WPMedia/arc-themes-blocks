@@ -3,7 +3,8 @@
 import React from 'react';
 import { useEditableContent } from 'fusion:content';
 import { useComponentContext, useFusionContext } from 'fusion:context';
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import Heading from '../headings/heading';
+import HeadingSection from '../headings/section';
 
 const PromoHeadline = (props) => {
   const {
@@ -26,24 +27,25 @@ const PromoHeadline = (props) => {
   const editableItem = content?.headlines && editable ? editableContent(content, 'headlines.basic') : {};
 
   return linkText ? (
-    <div className={`promo-headline ${className}`}>
-      <PrimaryFont
-        as="h2"
-        className={headingClassName}
-        {...editableItem}
-        suppressContentEditableWarning
-      >
-        <a
-          href={linkURL}
-          target={newTab ? '_blank' : '_self'}
-          rel={newTab ? 'noreferrer noopener' : ''}
-          className={linkClassName}
-          onClick={registerSuccessEvent}
+    <HeadingSection>
+      <div className={`promo-headline ${className}`}>
+        <Heading
+          className={headingClassName}
+          {...editableItem}
+          suppressContentEditableWarning
         >
-          {linkText}
-        </a>
-      </PrimaryFont>
-    </div>
+          <a
+            href={linkURL}
+            target={newTab ? '_blank' : '_self'}
+            rel={newTab ? 'noreferrer noopener' : ''}
+            className={linkClassName}
+            onClick={registerSuccessEvent}
+          >
+            {linkText}
+          </a>
+        </Heading>
+      </div>
+    </HeadingSection>
   ) : null;
 };
 

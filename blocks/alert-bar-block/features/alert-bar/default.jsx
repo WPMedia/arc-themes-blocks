@@ -183,6 +183,7 @@ AlertBar.propTypes = {
     ariaLabel: PropTypes.string.tag({
       label: 'Aria-label',
       defaultValue: 'Breaking News Alert',
+      description: 'The label is provided to assistive technologies to provide it with a unique name for the breaking news nav landmark - defaults to "Breaking News Alert" if left blank',
     }),
   }),
 };

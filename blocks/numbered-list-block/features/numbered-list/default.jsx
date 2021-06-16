@@ -6,22 +6,36 @@ import getProperties from 'fusion:properties';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
-
-function extractImage(promo) {
-  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
-}
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
+import {
+  Heading, HeadingSection, SecondaryFont,
+} from '@wpmedia/shared-styles';
 
 @Consumer
 class NumberedList extends Component {
   constructor(props) {
     super(props);
     const { lazyLoad = false } = props.customFields || {};
+    const {
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+    } = getProperties(props.arcSite) || {};
 
     this.arcSite = props.arcSite;
     this.lazyLoad = lazyLoad;
     this.isAdmin = props.isAdmin;
+    this.websiteDomain = websiteDomain;
+    this.fallbackImage = fallbackImage;
+    this.imageProps = {
+      smallWidth: 105,
+      smallHeight: 70,
+      mediumWidth: 105,
+      mediumHeight: 70,
+      largeWidth: 274,
+      largeHeight: 183,
+      primaryLogoAlt,
+      breakpoints,
+      resizerURL,
+    };
 
     this.state = {
       placeholderResizedImageOptions: {},
@@ -40,8 +54,8 @@ class NumberedList extends Component {
   }
 
   getFallbackImageURL() {
-    const { arcSite, deployment, contextPath } = this.props;
-    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+    const { deployment, contextPath } = this.props;
+    let targetFallbackImage = this.fallbackImage;
 
     if (!targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
@@ -51,7 +65,7 @@ class NumberedList extends Component {
   }
 
   fetchStories() {
-    const { customFields: { listContentConfig, showImage } } = this.props;
+    const { customFields: { listContentConfig } } = this.props;
     const { contentService, contentConfigValues } = listContentConfig;
     this.fetchContent({
       resultList: {
@@ -63,7 +77,7 @@ class NumberedList extends Component {
             headlines {
               basic
             }
-            ${showImage ? `promo_items {
+            promo_items {
               basic {
                 type
                 url
@@ -72,7 +86,20 @@ class NumberedList extends Component {
                   105x70
                 }
               }
-            }` : null}
+              lead_art {
+                promo_items {
+                  basic {
+                    type
+                    url
+                    resized_params {
+                      274x183
+                      105x70
+                    }
+                  }
+                }
+                type
+              }
+            }
             websites {
               ${this.arcSite} {
                 website_url
@@ -117,81 +144,61 @@ class NumberedList extends Component {
 
     const targetFallbackImage = this.getFallbackImageURL();
 
+    const Wrapper = title ? HeadingSection : React.Fragment;
+
     const ListResults = () => (
-      <div className="numbered-list-container layout-section">
-        {(title !== '' && contentElements && contentElements.length) ? (
-          <PrimaryFont as="h2" className="list-title">
-            {title}
-          </PrimaryFont>
-        ) : null }
-        {(contentElements && contentElements.length) ? contentElements.map((element, i) => {
-          const {
-            headlines: { basic: headlineText } = {},
-            promo_items: promoItems,
-            websites,
-          } = element;
+      <HeadingSection>
+        <div className="numbered-list-container layout-section">
+          {(title !== '' && contentElements.length) ? (
+            <Heading className="list-title">
+              {title}
+            </Heading>
+          ) : null }
+          <Wrapper>
+            {(contentElements.length) ? contentElements.map((element, i) => {
+              const {
+                headlines: { basic: headlineText } = {},
+                websites,
+              } = element;
+              const imageURL = extractImageFromStory(element);
 
-          if (!websites[arcSite]) {
-            return null;
-          }
-          const url = websites[arcSite].website_url;
+              if (!websites[arcSite]) {
+                return null;
+              }
+              const url = websites[arcSite].website_url;
 
-          return (
-            <React.Fragment key={`numbered-list-${url}`}>
-              <div className="numbered-list-item numbered-item-margins">
-                {showHeadline
-                && (
-                <a href={url} className="headline-list-anchor">
-                  <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
-                  <PrimaryFont as="h2" className="headline-text">{headlineText}</PrimaryFont>
-                </a>
-                )}
-                {showImage
-                && (
-                <a
-                  href={url}
-                  className="list-anchor-image vertical-align-image"
-                  aria-hidden="true"
-                  tabIndex="-1"
-                >
-                  {extractImage(promoItems) ? (
-                    <Image
-                      resizedImageOptions={extractResizedParams(element)}
-                      url={extractImage(promoItems)}
-                      alt={headlineText}
-                      // small, including numbered list, is 3:2 aspect ratio
-                      smallWidth={105}
-                      smallHeight={70}
-                      mediumWidth={105}
-                      mediumHeight={70}
-                      largeWidth={274}
-                      largeHeight={183}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  ) : (
-                    <Image
-                      smallWidth={105}
-                      smallHeight={70}
-                      mediumWidth={105}
-                      mediumHeight={70}
-                      largeWidth={274}
-                      largeHeight={183}
-                      alt={getProperties(arcSite).primaryLogoAlt || ''}
-                      url={targetFallbackImage}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizedImageOptions={placeholderResizedImageOptions}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  )}
-                </a>
-                )}
-              </div>
-              <hr />
-            </React.Fragment>
-          );
-        }) : null}
-      </div>
+              return (
+                <React.Fragment key={`numbered-list-${url}`}>
+                  <div className="numbered-list-item numbered-item-margins">
+                    {showHeadline ? (
+                      <a href={url} className="headline-list-anchor">
+                        <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
+                        <Heading className="headline-text">{headlineText}</Heading>
+                      </a>
+                    ) : null}
+                    {showImage ? (
+                      <a
+                        href={url}
+                        className="list-anchor-image vertical-align-image"
+                        aria-hidden="true"
+                        tabIndex="-1"
+                      >
+                        <Image
+                          {...this.imageProps}
+                          url={imageURL || targetFallbackImage}
+                          resizedImageOptions={imageURL
+                            ? extractResizedParams(element) : placeholderResizedImageOptions}
+                        />
+                      </a>
+                    ) : null}
+                  </div>
+                  <hr />
+                </React.Fragment>
+              );
+            }) : null}
+          </Wrapper>
+        </div>
+      </HeadingSection>
     );
 
     return (

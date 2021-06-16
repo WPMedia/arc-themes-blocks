@@ -316,19 +316,8 @@ const getResizedImageParams = (data, options) => {
   return data;
 };
 
-export const extractResizedParams = (storyObject) => {
-  const basicStoryObject = storyObject?.promo_items?.basic
-                        || storyObject?.promo_items?.lead_art?.promo_items?.basic;
-  if (!basicStoryObject) {
-    return [];
-  }
-
-  if (basicStoryObject.type === 'image') {
-    return basicStoryObject.resized_params;
-  }
-
-  return [];
-};
+export const extractResizedParams = (storyObject) => storyObject?.promo_items?.basic?.resized_params
+  || storyObject?.promo_items?.lead_art?.promo_items?.basic?.resized_params || [];
 
 // top level for transforming data
 // takes in content source story data via ans

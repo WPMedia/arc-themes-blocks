@@ -280,6 +280,16 @@ describe('head content', () => {
   });
 });
 
+describe('body content', () => {
+  it('should render a Skip To Main link', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('.skip-main').length).toBe(1);
+  });
+});
+
 describe('nativo ad integration', () => {
   beforeAll(() => {
     jest.mock('fusion:context', () => ({

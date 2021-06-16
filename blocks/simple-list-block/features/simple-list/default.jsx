@@ -2,35 +2,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
 import StoryItem from './_children/story-item';
 import './simple-list.scss';
 
-// helpers start
-const extractImage = (storyObject) => storyObject.promo_items
-  && storyObject.promo_items.basic
-  && storyObject.promo_items.basic.type === 'image'
-  && storyObject.promo_items.basic.url;
-
 const unserializeStory = (arcSite) => (acc, storyObject) => {
   if (storyObject.websites?.[arcSite]) {
     return acc.concat({
       id: storyObject._id,
       itemTitle: storyObject.headlines.basic,
-      imageURL: extractImage(storyObject) || '',
+      imageURL: extractImageFromStory(storyObject) || '',
       websiteURL: storyObject.websites[arcSite].website_url || '',
       resizedImageOptions: extractResizedParams(storyObject),
     });
   }
   return acc;
 };
-
-// helpers end
 
 @Consumer
 class SimpleListWrapper extends Component {
@@ -40,16 +31,32 @@ class SimpleListWrapper extends Component {
       placeholderResizedImageOptions: {},
     };
     const { lazyLoad = false } = props.customFields || {};
+    const {
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+    } = getProperties(props.arcSite) || {};
 
     this.lazyLoad = lazyLoad;
     this.isAdmin = props.isAdmin;
+    this.websiteDomain = websiteDomain;
+    this.fallbackImage = fallbackImage;
+    this.imageProps = {
+      smallWidth: 274,
+      smallHeight: 183,
+      mediumWidth: 274,
+      mediumHeight: 183,
+      largeWidth: 274,
+      largeHeight: 183,
+      primaryLogoAlt,
+      breakpoints,
+      resizerURL,
+    };
 
     this.fetchPlaceholder();
   }
 
   getFallbackImageURL() {
-    const { arcSite, deployment, contextPath } = this.props;
-    let targetFallbackImage = getProperties(arcSite).fallbackImage;
+    const { deployment, contextPath } = this.props;
+    let targetFallbackImage = this.fallbackImage;
 
     if (!targetFallbackImage.includes('http')) {
       targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
@@ -80,12 +87,15 @@ class SimpleListWrapper extends Component {
 
     const { placeholderResizedImageOptions } = this.state;
     const targetFallbackImage = this.getFallbackImageURL();
+
     return (
       <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
         <SimpleList
           {...this.props}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
           targetFallbackImage={targetFallbackImage}
+          websiteDomain={this.websiteDomain}
+          imageProps={this.imageProps}
         />
       </LazyLoad>
     );
@@ -94,6 +104,8 @@ class SimpleListWrapper extends Component {
 
 const SimpleList = (props) => {
   const {
+    arcSite,
+    websiteDomain,
     customFields: {
       listContentConfig: {
         contentService = '',
@@ -106,13 +118,8 @@ const SimpleList = (props) => {
     id = '',
     placeholderResizedImageOptions,
     targetFallbackImage,
+    imageProps,
   } = props;
-
-  const { arcSite } = useFusionContext();
-
-  const {
-    websiteDomain,
-  } = getProperties(arcSite);
 
   // need to inject the arc site here into use content
   const { content_elements: contentElements = [] } = useContent({
@@ -125,7 +132,7 @@ const SimpleList = (props) => {
           basic
         }
         website_url
-        ${showImage ? `promo_items {
+        promo_items {
           basic {
             type
             url
@@ -143,8 +150,9 @@ const SimpleList = (props) => {
                 }
               }
             }
+            type
           }
-        }` : null}
+        }
         websites {
           ${arcSite} {
             website_url
@@ -157,11 +165,11 @@ const SimpleList = (props) => {
   return (
     <div key={id} className="list-container layout-section">
       { title
-        && (
-        <PrimaryFont as="div" className="list-title">
-          {title}
-        </PrimaryFont>
-        )}
+        ? (
+          <PrimaryFont as="div" className="list-title">
+            {title}
+          </PrimaryFont>
+        ) : null}
       {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
@@ -180,6 +188,7 @@ const SimpleList = (props) => {
               placeholderResizedImageOptions={placeholderResizedImageOptions}
               targetFallbackImage={targetFallbackImage}
               arcSite={arcSite}
+              imageProps={imageProps}
             />
             <hr />
           </React.Fragment>

@@ -272,8 +272,8 @@ class CardList extends React.Component {
                               {...this.samllImageOptions}
                               url={imageURL || targetFallbackImage}
                               alt={imageURL ? headlineText : this.siteProperties.primaryLogoAlt || ''}
-                              resizedImageOptions={extractResizedParams(element)
-                                || placeholderResizedImageOptions}
+                              resizedImageOptions={imageURL
+                                ? extractResizedParams(element) : placeholderResizedImageOptions}
                             />
                           </a>
                         </article>

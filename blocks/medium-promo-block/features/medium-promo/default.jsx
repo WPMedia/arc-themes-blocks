@@ -90,7 +90,7 @@ const MediumPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  return (
+  return content ? (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields?.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
@@ -135,7 +135,7 @@ const MediumPromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  );
+  ) : null;
 };
 
 const MediumPromo = ({ customFields }) => {
@@ -145,7 +145,7 @@ const MediumPromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <MediumPromoItem customFields={{ ...customFields }} />
+      <MediumPromoItem customFields={customFields} />
     </LazyLoad>
   );
 };

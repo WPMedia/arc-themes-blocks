@@ -120,7 +120,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
 
   const videoEmbed = (customFields?.playVideoInPlace && extractVideoEmbedFromStory(content));
 
-  return (
+  return content ? (
     <>
       <article className="container-fluid xl-large-promo">
         <div className="row">
@@ -189,7 +189,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  );
+  ) : null;
 };
 
 const ExtraLargePromo = ({ customFields }) => {

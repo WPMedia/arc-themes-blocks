@@ -102,13 +102,13 @@ const SmallPromoItem = ({ customFields }) => {
     </div>
   ) : null;
 
-  return (
+  return content ? (
     <SmallPromoContainer
       headline={headline}
       image={image}
       imagePosition={imagePosition}
     />
-  );
+  ) : null;
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
@@ -118,7 +118,7 @@ const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imag
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <SmallPromoItem customFields={{ ...customFields }} />
+      <SmallPromoItem customFields={customFields} />
     </LazyLoad>
   );
 };

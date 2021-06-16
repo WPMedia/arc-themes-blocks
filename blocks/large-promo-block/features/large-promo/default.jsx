@@ -115,7 +115,7 @@ const LargePromoItem = ({ customFields }) => {
   const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
-  return (
+  return content ? (
     <>
       <article className="container-fluid large-promo">
         <div className="row">
@@ -182,7 +182,7 @@ const LargePromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  );
+  ) : null;
 };
 
 const LargePromo = ({ customFields }) => {
@@ -192,7 +192,7 @@ const LargePromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <LargePromoItem customFields={{ ...customFields }} />
+      <LargePromoItem customFields={customFields} />
     </LazyLoad>
   );
 };

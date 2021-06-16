@@ -23,6 +23,11 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
 
+jest.mock('@wpmedia/shared-styles', () => ({
+  __esModule: true,
+  HeadingSection: ({ children }) => <>{children}</>,
+}));
+
 const defaultPromos = {
   showByline: true,
   showDate: true,

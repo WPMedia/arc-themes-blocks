@@ -38,7 +38,7 @@ class ResultsList extends Component {
     super(props);
     const { lazyLoad = false } = props.customFields || {};
     const {
-      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale,
     } = getProperties(props.arcSite) || {};
 
     this.arcSite = props.arcSite;
@@ -48,7 +48,7 @@ class ResultsList extends Component {
       placeholderResizedImageOptions: {},
       focusItem: 0,
     };
-    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
+    this.phrases = getTranslatedPhrases(locale || 'en');
     this.listItemRefs = {};
 
     this.lazyLoad = lazyLoad;

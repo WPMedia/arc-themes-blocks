@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import { Heading, HeadingSection } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
 import StoryItem from './_children/story-item';
@@ -90,13 +90,15 @@ class SimpleListWrapper extends Component {
 
     return (
       <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <SimpleList
-          {...this.props}
-          placeholderResizedImageOptions={placeholderResizedImageOptions}
-          targetFallbackImage={targetFallbackImage}
-          websiteDomain={this.websiteDomain}
-          imageProps={this.imageProps}
-        />
+        <HeadingSection>
+          <SimpleList
+            {...this.props}
+            placeholderResizedImageOptions={placeholderResizedImageOptions}
+            targetFallbackImage={targetFallbackImage}
+            websiteDomain={this.websiteDomain}
+            imageProps={this.imageProps}
+          />
+        </HeadingSection>
       </LazyLoad>
     );
   }
@@ -115,7 +117,7 @@ const SimpleList = (props) => {
       showHeadline = true,
       showImage = true,
     } = {},
-    id = '',
+    id,
     placeholderResizedImageOptions,
     targetFallbackImage,
     imageProps,
@@ -162,15 +164,18 @@ const SimpleList = (props) => {
     }`,
   }) || {};
 
+  const Wrapper = title ? HeadingSection : React.Fragment;
+
   return (
-    <div key={id} className="list-container layout-section">
-      { title
-        ? (
-          <PrimaryFont as="div" className="list-title">
-            {title}
-          </PrimaryFont>
-        ) : null}
-      {
+    <Wrapper>
+      <div key={id} className="list-container layout-section">
+        { title
+          ? (
+            <Heading className="list-title">
+              {title}
+            </Heading>
+          ) : null}
+        {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
@@ -194,7 +199,8 @@ const SimpleList = (props) => {
           </React.Fragment>
         ))
       }
-    </div>
+      </div>
+    </Wrapper>
   );
 };
 

@@ -56,7 +56,10 @@ const getResizerParam = (
       }
 
       thumborParam = thumborParam.fitIn(width, height).buildUrl();
-      const urlSuffix = originalUrl.replace('https://', '');
+      const urlSuffix = originalUrl
+        .replace('https://', '')
+        .replace('http://', '');
+
       return thumborParam
         .replace(resizerURL, '')
         .replace(urlSuffix, '');

@@ -10,8 +10,10 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { Byline, PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
+import {
+  Byline, Heading, HeadingSection, SecondaryFont,
+} from '@wpmedia/shared-styles';
 import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 
 // shared with search results list
@@ -19,10 +21,6 @@ import { resolveDefaultPromoElements, fetchStoriesTransform } from './helpers';
 import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
-
-function extractImage(promo) {
-  return promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
-}
 
 const ReadMoreButton = styled.button`
   background-color: ${(props) => props.primaryColor};
@@ -39,6 +37,9 @@ class ResultsList extends Component {
   constructor(props) {
     super(props);
     const { lazyLoad = false } = props.customFields || {};
+    const {
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+    } = getProperties(props.arcSite) || {};
 
     this.arcSite = props.arcSite;
     this.state = {
@@ -52,6 +53,20 @@ class ResultsList extends Component {
 
     this.lazyLoad = lazyLoad;
     this.isAdmin = props.isAdmin;
+
+    this.websiteDomain = websiteDomain;
+    this.fallbackImage = fallbackImage;
+    this.imageProps = {
+      smallWidth: 158,
+      smallHeight: 89,
+      mediumWidth: 274,
+      mediumHeight: 154,
+      largeWidth: 274,
+      largeHeight: 154,
+      primaryLogoAlt,
+      breakpoints,
+      resizerURL,
+    };
 
     this.fetchPlaceholder();
 
@@ -136,6 +151,19 @@ class ResultsList extends Component {
               274x154
               158x89
             }
+          }
+          lead_art {
+            promo_items {
+              basic {
+                type
+                url
+                resized_params {
+                  274x154
+                  158x89
+                }
+              }
+            }
+            type
           }
         }
         websites {
@@ -268,7 +296,6 @@ class ResultsList extends Component {
             description: { basic: descriptionText } = {},
             headlines: { basic: headlineText } = {},
             display_date: displayDate,
-            promo_items: promoItems,
             websites,
           } = element;
 
@@ -277,6 +304,7 @@ class ResultsList extends Component {
           }
 
           const url = websites[arcSite].website_url;
+          const imageURL = extractImageFromStory(element);
           return (
             <div
               className="list-item"
@@ -285,90 +313,63 @@ class ResultsList extends Component {
                 this.listItemRefs[element._id] = ref;
               }}
             >
-              { promoElements.showImage && (
-              <div className="results-list--image-container mobile-order-2 mobile-image">
-                <a
-                  href={url}
-                  title={headlineText}
-                  aria-hidden="true"
-                  tabIndex="-1"
-                >
-                  {extractImage(promoItems) ? (
-                    <Image
-                      // results list is 16:9 by default
-                      resizedImageOptions={extractResizedParams(element)}
-                      url={extractImage(element.promo_items)}
-                      alt={headlineText}
-                      smallWidth={158}
-                      smallHeight={89}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={274}
-                      largeHeight={154}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  ) : (
-                    <Image
-                      smallWidth={158}
-                      smallHeight={89}
-                      mediumWidth={274}
-                      mediumHeight={154}
-                      largeWidth={274}
-                      largeHeight={154}
-                      alt={getProperties(arcSite).primaryLogoAlt || ''}
-                      url={targetFallbackImage}
-                      breakpoints={getProperties(arcSite)?.breakpoints}
-                      resizedImageOptions={placeholderResizedImageOptions}
-                      resizerURL={getProperties(arcSite)?.resizerURL}
-                    />
-                  )}
-                </a>
-              </div>
-              )}
-              { promoElements.showHeadline && (
-              <div className="results-list--headline-container mobile-order-1">
-                <a
-                  href={url}
-                  title={headlineText}
-                >
-                  <PrimaryFont
-                    as="h2"
-                    className="headline-text"
+              { promoElements.showImage ? (
+                <div className="results-list--image-container mobile-order-2 mobile-image">
+                  <a
+                    href={url}
+                    title={headlineText}
+                    aria-hidden="true"
+                    tabIndex="-1"
                   >
-                    {headlineText}
-                  </PrimaryFont>
-                </a>
-              </div>
-              )}
+                    <Image
+                      {...this.imageProps}
+                      url={imageURL !== '' ? imageURL : targetFallbackImage}
+                      alt={imageURL !== '' ? headlineText : this.imageProps?.primaryLogoAlt}
+                      resizedImageOptions={imageURL !== '' ? extractResizedParams(element) : placeholderResizedImageOptions}
+                    />
+                  </a>
+                </div>
+              ) : null}
+              { promoElements.showHeadline ? (
+                <div className="results-list--headline-container mobile-order-1">
+                  <a
+                    href={url}
+                    title={headlineText}
+                  >
+                    <Heading className="headline-text">
+                      {headlineText}
+                    </Heading>
+                  </a>
+                </div>
+              ) : null}
               { (
                 promoElements.showDescription
             || promoElements.showDate
             || promoElements.showByline
-              ) && (
-              <div className="results-list--description-author-container mobile-order-3">
-                {promoElements.showDescription && descriptionText && (
-                <a
-                  href={url}
-                  title={headlineText}
-                >
-                  <SecondaryFont
-                    as="p"
-                    className="description-text"
+              ) ? (
+                <div className="results-list--description-author-container mobile-order-3">
+                  {promoElements.showDescription && descriptionText && (
+                  <a
+                    href={url}
+                    title={headlineText}
                   >
-                    {descriptionText}
-                  </SecondaryFont>
-                </a>
-                )}
-                { (promoElements.showDate || promoElements.showByline) && (
-                <div className="results-list--author-date">
-                  { promoElements.showByline
+                    <SecondaryFont
+                      as="p"
+                      className="description-text"
+                    >
+                      {descriptionText}
+                    </SecondaryFont>
+                  </a>
+                  )}
+                  { (promoElements.showDate || promoElements.showByline) && (
+                  <div className="results-list--author-date">
+                    { promoElements.showByline
                     && <Byline content={element} list separator={promoElements.showDate} font="Primary" /> }
-                  { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+                    { promoElements.showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+                  </div>
+                  )}
                 </div>
-                )}
-              </div>
-              )}
+                ) : null}
             </div>
           );
         })}
@@ -393,7 +394,9 @@ class ResultsList extends Component {
 
     return (
       <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <Results />
+        <HeadingSection>
+          <Results />
+        </HeadingSection>
       </LazyLoad>
     );
   }

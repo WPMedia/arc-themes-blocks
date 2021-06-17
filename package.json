@@ -15,12 +15,14 @@
     "lint:styles": "stylelint '**/*.(scss|jsx)' --formatter verbose",
     "lint:styles:fix": "stylelint '**/*.scss' --fix",
     "lint:fix": "npm run lint -- --fix",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -p 60001",
     "test": "jest",
     "test:watch": "npm run test -- --watchAll",
     "latest-stable-parity": "lerna exec --no-bail --parallel -- npm dist-tag add \\${LERNA_PACKAGE_NAME}@$(node -e \"console.log(require('./lerna.json').version)\") stable",
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "generate:intl": "node locale/scripts/generate-intl.js",
+    "postinstall": "npx lerna clean -y"
   },
   "husky": {
     "hooks": {
@@ -33,12 +35,13 @@
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.14.2",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@storybook/addon-a11y": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/react": "^5.3.19",
+    "@storybook/addon-a11y": "^6.2.9",
+    "@storybook/addon-docs": "^6.2.9",
+    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "babel-eslint": "^10.0.2",
@@ -67,7 +70,7 @@
     "react-dom": "^16.13.1",
     "react-oembed-container": "^1.0.0",
     "sass-loader": "^8.0.2",
-    "storybook-readme": "^5.0.8",
+    "storybook-readme": "^5.0.9",
     "style-loader": "^1.2.1",
     "styled-components": "^4.4.1",
     "stylelint": "^13.3.3",
@@ -144,8 +147,7 @@
     "@wpmedia/triple-chain-block": "file:blocks/triple-chain-block",
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
-    "@wpmedia/video-promo-block": "file:blocks/video-promo-block",
-    "focus-trap-react": "^8.4.2"
+    "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
   },
   "browserslist": [
     "defaults",

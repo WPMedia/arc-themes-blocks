@@ -7,7 +7,9 @@ import {
   extractVideoEmbedFromStory,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  LazyLoad, isServerSide,
+  LazyLoad,
+  isServerSide,
+  videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
@@ -26,7 +28,7 @@ const LargePromoItem = ({ customFields }) => {
       ? {
         'arc-site': arcSite,
         feature: 'large-promo',
-        ...customFields.itemContentConfig.contentConfigValues,
+        ...customFields?.itemContentConfig?.contentConfigValues,
       }
       : null,
     filter: `{
@@ -58,6 +60,9 @@ const LargePromoItem = ({ customFields }) => {
           url
           text
         }
+      }
+      owner {
+        sponsored
       }
       promo_items {
         type
@@ -107,24 +112,31 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const textClass = customFields.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
-
+  const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return (
     <>
       <article className="container-fluid large-promo">
         <div className="row">
-          { customFields.showImage && (
+          {(!!videoEmbed
+            || customFields?.showImage)
+          && (
             <div className="col-sm-12 col-md-xl-6 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {
-                videoEmbed ? (
+              {(!!videoEmbed
+                && (
                   <VideoPlayerPresentational
                     id={id}
                     embedMarkup={videoEmbed}
                     enableAutoplay={false}
+                    shrinkToFit={customFields?.shrinkToFit}
+                    viewportPercentage={customFields?.viewportPercentage}
                   />
-                ) : (
+                )
+              )
+              || (
+                customFields?.showImage
+                && (
                   <div {...searchableField('imageOverrideURL')}>
                     <PromoImage
                       content={content}
@@ -137,34 +149,32 @@ const LargePromoItem = ({ customFields }) => {
                     />
                   </div>
                 )
-              }
+              )}
             </div>
           )}
-          {(customFields.showHeadline || customFields.showDescription
-            || customFields.showByline || customFields.showDate)
+          {(customFields?.showOverline
+            || customFields?.showHeadline
+            || customFields?.showDescription
+            || customFields?.showByline
+            || customFields?.showDate)
           && (
             <div className={textClass}>
-              {(customFields.showOverline)
+              {customFields?.showOverline
                 ? <Overline story={content} editable />
                 : null}
-              {customFields.showHeadline ? (
-                <PromoHeadline
-                  content={content}
-                  headingClassName="lg-promo-headline"
-                  linkClassName="lg-promo-headline"
-                />
-              ) : null}
-              {(customFields.showDescription ? (
-                <PromoDescription
-                  className="description-text"
-                  content={content}
-                />
-              ) : null)}
+              {customFields?.showHeadline
+                ? <PromoHeadline content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
+                : null}
+              {customFields?.showDescription
+                ? <PromoDescription className="description-text" content={content} />
+                : null}
               <div className="article-meta">
-                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
-                {(customFields.showDate) ? (
-                  <PromoDate content={content} />
-                ) : null}
+                {customFields?.showByline
+                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
+                  : null}
+                {customFields?.showDate
+                  ? <PromoDate content={content} />
+                  : null}
               </div>
             </div>
           )}
@@ -177,7 +187,7 @@ const LargePromoItem = ({ customFields }) => {
 
 const LargePromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
@@ -239,6 +249,7 @@ LargePromo.propTypes = {
       defaultValue: false,
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
+    ...(videoPlayerCustomFields()),
   }),
 
 };

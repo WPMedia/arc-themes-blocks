@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-no-target-blank */
+// Disabled eslint due to it not being able to handle the ternary logic
 import React from 'react';
 import { useEditableContent } from 'fusion:content';
-import { useFusionContext, registerSuccessEvent } from 'fusion:context';
+import { useComponentContext, useFusionContext } from 'fusion:context';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
 const PromoHeadline = (props) => {
@@ -15,6 +17,7 @@ const PromoHeadline = (props) => {
     editable = true,
   } = props;
   const { editableContent } = useEditableContent();
+  const { registerSuccessEvent } = useComponentContext();
   const { arcSite } = useFusionContext();
 
   const linkURL = content?.websites?.[arcSite]?.website_url || link;

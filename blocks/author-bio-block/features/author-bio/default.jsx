@@ -24,26 +24,10 @@ import {
   isServerSide,
   constructSocialURL,
 } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 
 import './author-bio.scss';
-
-/*
-Testing: Unit tests are written to cover this block
-*/
-
-const AuthorBioStyled = styled.section`
-  font-family: ${(props) => props.primaryFont};
-
-  .authorName {
-    color: ${(props) => props.primaryColor};
-    font-family: ${(props) => props.primaryFont};
-  }
-
-  button {
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
@@ -303,7 +287,7 @@ const AuthorBioItems = () => {
         : null;
 
       // Make the name a hyperlink if a url to the bio page is provided
-      const authorName = (original.byline) ? <h2 className="authorName">{original.byline}</h2> : undefined;
+      const authorName = (original.byline) ? <PrimaryFont as="h2" className="authorName" fontColor="primary-color">{original.byline}</PrimaryFont> : undefined;
       const authorNameWithHyperlink = (author.url)
         ? <a href={author.url}>{authorName}</a> : undefined;
 
@@ -332,13 +316,12 @@ const AuthorBioItems = () => {
   }
 
   return (
-    <AuthorBioStyled
+    <PrimaryFont
+      as="section"
       className="author-bio"
-      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-      primaryColor={getThemeStyle(arcSite)['primary-color']}
     >
       {authors}
-    </AuthorBioStyled>
+    </PrimaryFont>
   );
 };
 

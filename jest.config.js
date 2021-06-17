@@ -27,7 +27,7 @@ module.exports = {
     },
   },
   collectCoverageFrom: [
-    '**/(features|chains|layouts|sources|output-types)/**/*.{js,jsx}',
+    '**/(features|chains|layouts|sources|output-types|_children)/**/*.{js,jsx}',
     // for resizer image block
     '**/extractImageFromStory.js',
     '**/imageRatioCustomField.js',

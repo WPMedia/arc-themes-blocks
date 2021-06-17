@@ -9,14 +9,15 @@ import {
   Gallery, ImageMetadata, Image,
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
-  LazyLoad, isServerSide,
+  LazyLoad,
+  isServerSide,
+  videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
-import Blockquote from './_children/blockquote';
 import Header from './_children/heading';
 import HTML from './_children/html';
 import List from './_children/list';
 import Oembed from './_children/oembed';
-import Pullquote from './_children/pullquote';
+import Quote from './_children/quote';
 import Table from './_children/table';
 import './_articlebody.scss';
 
@@ -31,7 +32,7 @@ const StyledLink = styled.a`
   color: ${(props) => props.primaryColor};
 `;
 
-function parseArticleItem(item, index, arcSite, phrases, id) {
+function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
   const {
     _id: key = index, type, content,
   } = item;
@@ -188,19 +189,24 @@ function parseArticleItem(item, index, arcSite, phrases, id) {
       switch (item.subtype) {
         case 'pullquote':
           return (
-            <Pullquote key={key} element={item} />
+            <Quote key={key} element={item} className="pullquote" />
           );
 
         case 'blockquote':
         default:
           return (
-            <Blockquote key={key} element={item} />
+            <Quote key={key} element={item} />
           );
       }
     case 'video':
       return (
         <section key={key} className="block-margin-bottom">
-          <VideoPlayerPresentational id={id} embedMarkup={item.embed_html} />
+          <VideoPlayerPresentational
+            id={id}
+            embedMarkup={item.embed_html}
+            shrinkToFit={customFields?.shrinkToFit}
+            viewportPercentage={customFields?.viewportPercentage}
+          />
         </section>
       );
     case 'gallery':
@@ -294,13 +300,13 @@ const ArticleBodyChainItems = ({ children }) => {
         // the current paragraph is the last or second-to-last paragraph.
         if (adsAfterParagraph.length && paragraphCounter < paragraphTotal - 1) {
           return [
-            parseArticleItem(contentElement, index, arcSite, phrases, id),
+            parseArticleItem(contentElement, index, arcSite, phrases, id, customFields),
             ...adsAfterParagraph.map((placement) => children[placement.feature - 1]),
           ];
         }
       }
 
-      return parseArticleItem(contentElement, index, arcSite, phrases, id);
+      return parseArticleItem(contentElement, index, arcSite, phrases, id, customFields);
     }),
     ...(items.copyright ? [parseArticleItem(
       {
@@ -311,6 +317,7 @@ const ArticleBodyChainItems = ({ children }) => {
       arcSite,
       null, // phrases not used by text type
       null, // id not used by text type
+      {}, // customFields only used in video
     )] : []),
   ];
 
@@ -351,6 +358,7 @@ ArticleBodyChain.propTypes = {
       defaultValue: false,
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
+    ...(videoPlayerCustomFields()),
   }),
 };
 

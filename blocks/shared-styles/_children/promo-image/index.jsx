@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-no-target-blank */
+// Disabled eslint due to it not being able to handle the ternary logic
 import React from 'react';
-import { useFusionContext, registerSuccessEvent } from 'fusion:context';
+import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { PromoLabel } from '@wpmedia/shared-styles';
 import discoverPromoType from './discover';
@@ -34,13 +36,15 @@ const PromoImage = ({
   lazyLoad = false,
 }) => {
   const { arcSite, isAdmin } = useFusionContext();
+  const { registerSuccessEvent } = useComponentContext();
   const promoType = showPromoLabel ? discoverPromoType(content) : null;
   const ratios = ratiosFor(promoSize, imageRatio);
 
   let imageConfig = null;
   if (
     (customImageURL && lazyLoad)
-    || (customImageURL && isAdmin)) {
+    || (customImageURL && isAdmin)
+    || (customImageURL && !isServerSide())) {
     imageConfig = 'resize-image-api-client';
   } else if (customImageURL) {
     imageConfig = 'resize-image-api';

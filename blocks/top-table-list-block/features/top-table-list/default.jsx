@@ -13,7 +13,9 @@ import {
 import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from './shared/imagePositionConstants';
-import ConditionalStoryItem from './_children/conditional-story-item';
+import ConditionalStoryItem, {
+  conditionalStoryFields,
+} from './_children/conditional-story-item';
 
 // start styles
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
@@ -138,6 +140,9 @@ const TopTableList = (props) => {
         }
         label {
           basic
+        }
+        owner {
+          sponsored
         }
         promo_items {
           basic {
@@ -291,7 +296,7 @@ TopTableListWrapper.propTypes = {
       label: generateLabelString('Small'),
       default: 0,
     }),
-
+    //---------------------------------------
     showOverlineXL: PropTypes.bool.tag({
       label: 'Show overline',
       defaultValue: true,
@@ -322,11 +327,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Extra Large story settings',
     }),
-    ...imageRatioCustomField(
-      'imageRatioXL',
-      'Extra Large story settings',
-      '4:3',
-    ),
+    ...imageRatioCustomField('imageRatioXL', 'Extra Large story settings', '4:3'),
     playVideoInPlaceXL: PropTypes.bool.tag({
       label: 'Play video in place',
       group: 'Extra Large story settings',
@@ -337,7 +338,8 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Extra Large story settings',
     }),
-
+    ...(conditionalStoryFields[EXTRA_LARGE]('Extra Large story settings')),
+    //---------------------------------------
     showOverlineLG: PropTypes.bool.tag({
       label: 'Show overline',
       defaultValue: true,
@@ -379,7 +381,8 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Large story settings',
     }),
-
+    ...(conditionalStoryFields[LARGE]('Large story settings')),
+    //---------------------------------------
     showHeadlineMD: PropTypes.bool.tag({
       label: 'Show headline',
       defaultValue: true,
@@ -411,7 +414,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Medium story settings',
     }),
-
+    //---------------------------------------
     showHeadlineSM: PropTypes.bool.tag({
       label: 'Show headline',
       defaultValue: true,
@@ -446,6 +449,7 @@ TopTableListWrapper.propTypes = {
       defaultValue: true,
       group: 'Small story settings',
     }),
+    //---------------------------------------
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,

@@ -23,7 +23,7 @@
     "lint": "eslint --ext js --ext jsx sources"
   },
   "peerDependencies": {
-    "@wpmedia/resizer-image-block": "canary"
+    "@wpmedia/resizer-image-block": "*"
   },
   "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
 }

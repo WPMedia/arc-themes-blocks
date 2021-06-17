@@ -21,7 +21,7 @@ const MediumPromoItem = ({ customFields }) => {
       ? {
         'arc-site': arcSite,
         feature: 'medium-promo',
-        ...customFields.itemContentConfig.contentConfigValues,
+        ...customFields?.itemContentConfig?.contentConfigValues,
       }
       : null,
     // does not need embed_html because no video section
@@ -93,43 +93,41 @@ const MediumPromoItem = ({ customFields }) => {
   return (
     <>
       <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
-          {customFields.showImage
+        <div className={`medium-promo-wrapper ${customFields?.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
+          {customFields?.showImage
             ? (
               <div className="image-link" {...searchableField('imageOverrideURL')}>
                 <PromoImage
                   content={content}
-                  customImageURL={customFields.imageOverrideURL}
+                  customImageURL={customFields?.imageOverrideURL}
                   showPromoLabel
                   promoSize="MD"
                   promoLabelSize="large"
-                  imageRatio={customFields.imageRatio}
-                  lazyLoad={customFields.lazyLoad}
+                  imageRatio={customFields?.imageRatio}
+                  lazyLoad={customFields?.lazyLoad}
                 />
               </div>
-            ) : null}
-          {(customFields.showHeadline || customFields.showDescription
-            || customFields.showByline || customFields.showDate)
+            )
+            : null}
+          {(customFields?.showHeadline
+            || customFields?.showDescription
+            || customFields?.showByline
+            || customFields?.showDate)
           && (
             <>
-              {customFields.showHeadline ? (
-                <PromoHeadline
-                  content={content}
-                  headingClassName="md-promo-headline-text"
-                  className="md-promo-headline"
-                />
-              ) : null}
-              {(customFields.showDescription ? (
-                <PromoDescription
-                  className="description-text"
-                  content={content}
-                />
-              ) : null)}
+              {customFields?.showHeadline
+                ? <PromoHeadline content={content} headingClassName="md-promo-headline-text" className="md-promo-headline" />
+                : null}
+              {(customFields?.showDescription
+                ? <PromoDescription className="description-text" content={content} />
+                : null)}
               <div className="article-meta">
-                {(customFields.showByline) ? <Byline content={content} font="Primary" list /> : null}
-                {(customFields.showDate) ? (
-                  <PromoDate content={content} />
-                ) : null}
+                {customFields?.showByline
+                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
+                  : null}
+                {(customFields?.showDate)
+                  ? <PromoDate content={content} />
+                  : null}
               </div>
             </>
           )}
@@ -142,7 +140,7 @@ const MediumPromoItem = ({ customFields }) => {
 
 const MediumPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (

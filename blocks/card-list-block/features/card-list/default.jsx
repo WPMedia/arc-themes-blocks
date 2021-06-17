@@ -2,12 +2,10 @@
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import React from 'react';
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import ArticleDate from '@wpmedia/date-block';
-import Byline from '@wpmedia/byline-block';
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { Byline, Overline, PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 import './card-list.scss';
 
@@ -34,16 +32,6 @@ function extractImage(promo) {
 
   return null;
 }
-
-const HeadlineText = styled.h2`
-  font-family: ${(props) => props.primaryFont};
-`;
-
-HeadlineText.displayName = 'HeadlineText';
-
-const Title = styled.div`
-  font-family: ${(props) => props.primaryFont};
-`;
 
 @Consumer
 class CardList extends React.Component {
@@ -147,6 +135,9 @@ class CardList extends React.Component {
             headlines {
               basic
             }
+            owner {
+              sponsored
+            }
             promo_items {
               basic {
                 type
@@ -219,12 +210,12 @@ class CardList extends React.Component {
               {
                 title
                   ? (
-                    <Title
-                      primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                    <PrimaryFont
+                      as="div"
                       className="card-list-title"
                     >
                       {title}
-                    </Title>
+                    </PrimaryFont>
                   )
                   : ''
               }
@@ -257,17 +248,11 @@ class CardList extends React.Component {
                   }
                 </a>
                 { contentElements[0].websites[arcSite].website_section
-                  && (
-                  <Title
-                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-                    className="card-list-overline"
-                  >
-                    {contentElements[0].websites[arcSite].website_section.name}
-                  </Title>
+                  && (<Overline story={contentElements[0]} className="card-list-overline" />
                   )}
                 <div>
-                  <HeadlineText
-                    primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                  <PrimaryFont
+                    as="h2"
                     className="card-list-headline"
                   >
                     <a
@@ -277,11 +262,9 @@ class CardList extends React.Component {
                     >
                       {contentElements[0].headlines.basic}
                     </a>
-                  </HeadlineText>
+                  </PrimaryFont>
                   <div className="author-date">
-                    <Byline story={contentElements[0]} stylesFor="list" />
-                    {/* separator will only be shown if there is at least one author */}
-                    { showSeparator && <p className="dot-separator">&#9679;</p> }
+                    <Byline content={contentElements[0]} list separator={showSeparator} />
                     <ArticleDate
                       classNames="story-date"
                       date={contentElements[0].display_date}
@@ -307,12 +290,12 @@ class CardList extends React.Component {
                           href={url}
                           className="headline-list-anchor vertical-align-image"
                         >
-                          <HeadlineText
-                            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+                          <PrimaryFont
+                            as="h2"
                             className="headline-text"
                           >
                             {headlineText}
-                          </HeadlineText>
+                          </PrimaryFont>
                         </a>
                         <a
                           href={url}

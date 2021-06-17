@@ -133,6 +133,7 @@ const Nav = (props) => {
     desktopNavivationStartHeight,
     shrinkDesktopNavivationHeight,
     showHorizontalSeperatorDots,
+    ariaLabel,
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
@@ -387,6 +388,7 @@ const Nav = (props) => {
         navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
+        aria-label={ariaLabel || 'Sections Menu'}
       >
         <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
           <NavSection side="left" />
@@ -489,6 +491,10 @@ Nav.propTypes = {
       label: 'Display dots between horizontal links',
       group: 'Display',
       defaultValue: true,
+    }),
+    ariaLabel: PropTypes.string.tag({
+      label: 'Aria-label',
+      defaultValue: 'Sections Menu',
     }),
     ...generateNavComponentPropTypes(),
   }),

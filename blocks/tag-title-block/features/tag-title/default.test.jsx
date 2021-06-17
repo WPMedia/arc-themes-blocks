@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { useFusionContext } from 'fusion:context';
 import TagTitle from './default';
 
@@ -37,13 +37,13 @@ describe('the tag title feature for the default output type', () => {
     });
 
     it('should set the name content', () => {
-      const wrapper = shallow(<TagTitle />);
+      const wrapper = mount(<TagTitle />);
 
       expect(wrapper.text().includes('Dogs')).toBe(true);
     });
 
     it('should set the description content', () => {
-      const wrapper = shallow(<TagTitle />);
+      const wrapper = mount(<TagTitle />);
 
       expect(wrapper.text().includes('This is a tag about dogs. This is the description field.')).toBe(true);
     });

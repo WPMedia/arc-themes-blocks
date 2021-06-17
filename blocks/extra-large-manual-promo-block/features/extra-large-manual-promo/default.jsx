@@ -18,47 +18,51 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
     <>
       <article className="container-fluid xl-large-promo xl-large-manual-promo">
         <div className="row">
-          {(customFields.showHeadline || customFields.showDescription
-            || customFields.showOverline)
+          {(customFields?.showOverline
+            || customFields?.showHeadline
+            || customFields?.showImage
+            || customFields?.showDescription)
           && (
             <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {(customFields.showOverline)
+              {customFields?.showOverline
                 ? (
                   <Overline
-                    customText={customFields.overline}
-                    customUrl={customFields.overlineURL}
+                    customText={customFields?.overline}
+                    customUrl={customFields?.overlineURL}
                   />
                 )
                 : null}
-
-              {(customFields.showHeadline && customFields.headline)
+              {customFields?.showHeadline
                 ? (
                   <PromoHeadline
-                    link={customFields.linkURL}
-                    text={customFields.headline}
-                    newTab={customFields.newTab}
+                    link={customFields?.linkURL}
+                    text={customFields?.headline}
+                    newTab={customFields?.newTab}
                     headingClassName="xl-promo-headline"
                     linkClassName="xl-promo-headline"
                   />
-                ) : null}
-
-              {(customFields.showImage && customFields.imageURL) ? (
-                <div {...searchableField('imageURL')}>
-                  <PromoImage
-                    {...customFields}
-                    customImageURL={customFields.imageURL}
-                    alt={customFields.headline}
-                    promoSize="XL"
-                  />
-                </div>
-              ) : null}
-              {(customFields.showDescription && customFields.description)
+                )
+                : null}
+              {customFields?.showImage
+                ? (
+                  <div {...searchableField('imageOverrideURL')}>
+                    <PromoImage
+                      {...customFields}
+                      customImageURL={customFields?.imageURL}
+                      alt={customFields?.headline}
+                      promoSize="XL"
+                    />
+                  </div>
+)
+                : null}
+              {customFields?.showDescription
                 ? (
                   <PromoDescription
                     className="description-text"
-                    text={customFields.description}
+                    text={customFields?.description}
                   />
-                ) : null}
+                )
+                : null}
             </div>
           )}
         </div>
@@ -70,11 +74,11 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
 
 const ExtraLargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
       <ExtraLargeManualPromoItem customFields={{ ...customFields }} />
     </LazyLoad>
   );

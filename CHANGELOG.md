@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
+
+**Note:** Version bump only for package fusion-news-theme-blocks
+
+
+
+
+
+## [5.13.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.0...v5.13.1) (2021-06-17)
+
+**Note:** Version bump only for package fusion-news-theme-blocks
+
+
+
+
+
+# [5.13.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.12.0...v5.13.0) (2021-06-17)
+
+
+### Bug Fixes
+
+* Remove use of latest in peer deps ([d6c94d0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/d6c94d0776ee5a6ea2978f54d438e449c8b3107c))
+
+
+### Features
+
+* Use primary font for nested p tags. Remove styled component param primary font ([1dc15a8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1dc15a8f7f32ea3d9c0647d1065af9f31c237c6d))
+
+
+### Performance Improvements
+
+* Remove unused package duplicate from top-level ([a34e296](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a34e296bece5b0113b29ce6ced3403ce019800d0))
+
+
+### Reverts
+
+* Revert "ci: Only run on canary block publish" ([8bb5b8f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8bb5b8f0224bc69edf312dc0abb4bfa9ea9b16f4))
+
+
+
+
+
 # [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
 
 

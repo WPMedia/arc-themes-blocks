@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/collections-content-source-block",
-  "version": "5.12.0",
+  "version": "5.13.2",
   "description": "Fusion News Theme collections content API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -26,5 +26,5 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/resizer-image-block": "*"
   },
-  "gitHead": "c150f57ab00cafdc8b9acd0c268ca0fdee496994"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

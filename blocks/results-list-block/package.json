@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/results-list-block",
-  "version": "5.12.0",
+  "version": "5.13.2",
   "description": "Fusion News Theme results list block",
   "author": "Rohit Gande <rohit.gande@washpost.com>",
   "contributors": [
@@ -36,5 +36,5 @@
     "@wpmedia/shared-styles": "*",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "c150f57ab00cafdc8b9acd0c268ca0fdee496994"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-author-content-source-block",
-  "version": "5.12.0",
+  "version": "5.13.2",
   "description": "Content source block for story feed queries by author",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -22,7 +22,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx sources"
   },
-  "gitHead": "c150f57ab00cafdc8b9acd0c268ca0fdee496994",
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
   "peerDependencies": {
     "@wpmedia/resizer-image-block": "*"
   },

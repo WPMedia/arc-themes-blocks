@@ -1,5 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
@@ -144,6 +145,8 @@ const SampleOutputType = ({
     ]),
   ].join(';');
 
+  const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
+
   return (
     <html lang={locale}>
       <head>
@@ -184,7 +187,7 @@ const SampleOutputType = ({
       <body>
         {comscoreNoScript(comscoreID)}
         {googleTagManagerNoScript(gtmID)}
-        <a className="skip-main" href="#main">Skip to content</a>
+        <a className="skip-main" href="#main">{phrases.t('default-output-block.skip-main')}</a>
         <div id="fusion-app" className="layout-section">{children}</div>
         <Fusion />
       </body>

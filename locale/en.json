@@ -27,6 +27,9 @@
 		"author-bio-block.social-whatsapp": "Connect on Whatsapp",
 		"author-bio-block.social-youtube": "Connect on Youtube"
 	},
+  "default-output-block": {
+    "default-output-block.skip-main": "Skip To Content"
+  },
 	"footer-block": {
 		"footer-block.facebook-link": "Facebook page",
 		"footer-block.rss-link": "RSS feed",

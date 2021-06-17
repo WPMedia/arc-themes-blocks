@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/lead-art-block",
-  "version": "5.13.1",
+  "version": "5.13.2",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washport.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -30,5 +30,5 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx features"
   },
-  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

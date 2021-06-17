@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/search-results-list-block",
-  "version": "5.13.1",
+  "version": "5.13.2",
   "description": "Fusion News Theme search results list block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -33,5 +33,5 @@
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
-  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

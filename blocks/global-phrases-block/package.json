@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/global-phrases-block",
-  "version": "5.13.0",
+  "version": "5.13.1",
   "description": "A package containing a list of translation phrases expected to be global.",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e",
+  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489",
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*"
   }

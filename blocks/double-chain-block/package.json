@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/double-chain-block",
-  "version": "5.13.0",
+  "version": "5.13.1",
   "description": "Double Chain – Arc Block",
   "author": "Luke Mason <luke.mason@washpost.com>",
   "contributors": [
@@ -29,5 +29,5 @@
     "test": "echo \"Error: run tests from root\" && exit 1",
     "lint": "eslint --ext js --ext jsx chains"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
 }

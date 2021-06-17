@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/byline-block",
-  "version": "5.13.0",
+  "version": "5.13.1",
   "description": "Fusion News Theme byline block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "contributors": [
@@ -31,5 +31,5 @@
     "@wpmedia/news-theme-css": "*",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
 }

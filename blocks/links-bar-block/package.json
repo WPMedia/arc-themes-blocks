@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/links-bar-block",
-  "version": "5.13.0",
+  "version": "5.13.1",
   "description": "Fusion News Theme links bar block",
   "author": "SangHee Kim <sanghee.kim@washpost.com>",
   "contributors": [
@@ -30,5 +30,5 @@
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
 }

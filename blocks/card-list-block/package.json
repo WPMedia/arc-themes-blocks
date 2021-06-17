@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/card-list-block",
-  "version": "5.13.0",
+  "version": "5.13.1",
   "description": "Fusion themes card list block.",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -29,5 +29,5 @@
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*"
   },
-  "gitHead": "8afcaeae3d9a0cc126a4a22a9b7fe766669aa88e"
+  "gitHead": "7571aebe67630c5bdfee80b001091bf8622cb489"
 }

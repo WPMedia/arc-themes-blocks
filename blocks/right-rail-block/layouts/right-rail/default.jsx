@@ -23,7 +23,6 @@ const RightRailLayout = ({ children }) => {
 
   return (
     <NewsTheme>
-      {/* <NewsTheme /> */}
       <header className="page-header">{navigation}</header>
       <section role="main" className="main">
         <div className="container layout-section">

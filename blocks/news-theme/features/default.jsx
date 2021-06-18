@@ -76,6 +76,11 @@ p {
   grid-gap: 2rem;
 }
 
+.left-article-section {
+  border-right: 1px solid #dadada;
+  padding: 0 2rem 0 0;
+}
+
 .col-xl-12 {
   grid-column-start: span 12;
 }

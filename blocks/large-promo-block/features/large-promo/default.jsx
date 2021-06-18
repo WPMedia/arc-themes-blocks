@@ -17,14 +17,7 @@ import {
   Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage, ThemeStyles,
 } from '@wpmedia/shared-styles';
 
-const StyledLargePromo = styled(ThemeStyles)`
-  display: inline-block;
-
-  img {
-    height: auto;
-    width: 100%;
-  }
-`;
+const StyledLargePromo = styled(ThemeStyles)``;
 
 const LargePromoItem = ({ customFields }) => {
   const themeContext = useContext(ThemeContext);
@@ -124,9 +117,14 @@ const LargePromoItem = ({ customFields }) => {
   const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
+  const themeValues = {
+    ...themeContext?.largePromo,
+    ...customFields?.themeSettings ? JSON.parse(customFields?.themeSettings) : {},
+  };
+
   return (
     <>
-      <StyledLargePromo as="article" theme={themeContext?.largePromo} className="container-fluid large-promo">
+      <StyledLargePromo as="article" theme={themeValues} className="container-fluid large-promo">
         <div className="row">
           {(!!videoEmbed
             || customFields?.showImage)
@@ -169,7 +167,7 @@ const LargePromoItem = ({ customFields }) => {
           && (
             <div className={textClass}>
               {customFields?.showOverline
-                ? <Overline styles={themeContext?.largePromo?.overline} story={content} editable />
+                ? <Overline styles={themeValues.overline} story={content} editable />
                 : null}
               {customFields?.showHeadline
                 ? <PromoHeadline styles={themeContext?.largePromo?.heading} content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
@@ -259,6 +257,9 @@ LargePromo.propTypes = {
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
     ...(videoPlayerCustomFields()),
+    themeSettings: PropTypes.json.tag({
+      label: 'Theme overrides',
+    }),
   }),
 
 };

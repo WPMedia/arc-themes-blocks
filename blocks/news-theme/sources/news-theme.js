@@ -11,12 +11,15 @@ const fetch = (query) => {
       lineHeight: '1.5',
     },
     overline: {
-      backgroundColor: 'rgb(243 163 163)',
-      color: 'rgb(255 255 255)',
       fontSize: '1.2rem',
       fontWeight: 'bold',
       padding: '0.25rem',
       hoverColor: 'rgb(0 0 0)',
+    },
+    largePromo: {
+      heading: {
+        fontSize: '1.25rem',
+      },
     },
     smallPromo: {
       heading: {
@@ -27,33 +30,30 @@ const fetch = (query) => {
     extraLargePromo: {
       heading: {
         fontSize: '3.25rem',
+        lineHeight: '1.2',
         textAlign: 'center',
       },
     },
-    'promo-label': {
-      large: {
-        backgroundColor: 'rgb(243 163 163)',
-        iconFill: 'rgb(255 255 255)',
+    cardList: {
+      heading: {
+        textDecoration: 'none',
       },
       small: {
-        backgroundColor: 'rgb(243 163 163)',
-        iconFill: 'rgb(255 255 255)',
+        heading: {
+          fontSize: '1rem',
+        },
       },
-      color: 'rgb(255 255 255)',
-      fontSize: '14px',
-    },
-    'card-list': {
-      backgroundColor: 'rgb(244 243 240)',
-      borderColor: 'rgb(243 163 163)',
-      borderStyle: 'none none none solid',
-      borderWidth: '5px',
-      boxShadow: 'none',
     },
   };
 
   const themesPerSite = {
     'the-gazette': {
       fontFamily: "'Poppins', 'Palatino', sans-serif",
+      overline: {
+        backgroundColor: 'rgb(243 163 163)',
+        color: 'rgb(255 255 255)',
+        padding: '0.25rem',
+      },
       largePromo: {
         borderColor: 'rgb(243 163 163)',
         borderStyle: 'none none none solid',
@@ -64,16 +64,30 @@ const fetch = (query) => {
           color: 'rgb(243 163 163)',
         },
         heading: {
+          fontSize: '1.25rem',
           textDecoration: 'none',
-          fontSize: '1.625rem',
         },
+      },
+      cardList: {
+        borderColor: 'rgb(243 163 163)',
+        borderStyle: 'none none none solid',
+        borderWidth: '5px',
+        boxShadow: 'none',
+        padding: '0 0 0 1rem',
       },
     },
     'the-sun': {
-      fontFamily: 'cursive',
+      fontFamily: 'Georgia',
       overline: {
-        fontSize: '2rem',
+        margin: '0 0 0.5rem 0',
+        padding: '0.5rem 0.5rem 0.5rem 0',
         fontWeight: '900',
+      },
+      largePromo: {
+        heading: {
+          fontSize: '1.25rem',
+          lineHeight: '1.4',
+        },
       },
     },
   };

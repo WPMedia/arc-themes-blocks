@@ -7,9 +7,12 @@ import {
 
 const Article = styled.article`
 display: flex;
+grid-gap: 2rem;
+
 &.horizontal.reverse {
   flex-direction: row-reverse;
 }
+
 &.vertical.reverse {
   flex-direction: column-reverse;
 }
@@ -25,8 +28,8 @@ display: flex;
 
 const Headline = styled(PromoHeadline)`
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  display: box;
+  box-orient: vertical;
   -webkit-line-clamp: 3;
   -moz-box-oriented: vertical;
   text-overflow: -o-ellipsis-lastline;
@@ -57,7 +60,7 @@ const SmallListItem = (props) => {
 
   return (
     <>
-      <Article key={id} className={`promo-container row ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
+      <Article key={id} className={`promo-container ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
         {showHeadlineSM ? (
           <Headline
             styles={themeContext?.smallPromo?.heading}

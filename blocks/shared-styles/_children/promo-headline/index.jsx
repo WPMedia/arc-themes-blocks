@@ -36,7 +36,7 @@ const PromoHeadline = (props) => {
   const editableItem = content?.headlines && editable ? editableContent(content, 'headlines.basic') : {};
 
   const theme = {
-    ...themeContext.heading,
+    ...themeContext?.heading,
     ...styles,
   };
 

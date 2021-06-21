@@ -36,7 +36,7 @@ const Overline = (props) => {
     editable,
     story,
     className = '',
-    styles,
+    styles = {},
   } = props;
 
   const sourceContent = story || globalContent || {};
@@ -82,7 +82,7 @@ const Overline = (props) => {
   const itemProps = {
     ...edit,
     theme: {
-      ...themeContext.overline,
+      ...themeContext?.overline,
       ...styles,
     },
     as: 'span',

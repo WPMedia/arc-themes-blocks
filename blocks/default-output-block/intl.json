@@ -1,5 +1,12 @@
 {
 	"default-output-block.skip-main": {
-		"en": "Skip To Content"
+		"de": "Skip To Content",
+		"en": "Skip To Content",
+		"es": "Skip To Content",
+		"fr": "Skip To Content",
+		"ja": "Skip To Content",
+		"ko": "Skip To Content",
+		"no": "Skip To Content",
+		"sv": "Skip To Content"
 	}
 }

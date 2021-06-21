@@ -1,23 +1,13 @@
 {
-	"header-nav-chain-block.links-element-aria-label": {
-		"de": "Top Links",
-		"en": "Top Links",
-		"es": "Top Links",
-		"fr": "Top Links",
-		"ja": "Top Links",
-		"ko": "Top Links",
-		"no": "Top Links",
-		"sv": "Top Links"
-	},
-	"header-nav-chain-block.querly-search-aria-label": {
-		"de": "Search",
-		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
-		"no": "Search",
-		"sv": "Search"
+	"header-nav-chain-block.sections-button": {
+		"de": "Ressorts",
+		"en": "Sections",
+		"es": "Secciones",
+		"fr": "Sections",
+		"ja": "セクション",
+		"ko": "섹션",
+		"no": "Meny",
+		"sv": "Meny"
 	},
 	"header-nav-chain-block.search-text": {
 		"de": "Suche",
@@ -28,16 +18,6 @@
 		"ko": "검색",
 		"no": "Søk",
 		"sv": "Sök"
-	},
-	"header-nav-chain-block.sections-button": {
-		"de": "Ressorts",
-		"en": "Sections",
-		"es": "Secciones",
-		"fr": "Sections",
-		"ja": "セクション",
-		"ko": "섹션",
-		"no": "Meny",
-		"sv": "Meny"
 	},
 	"header-nav-chain-block.sections-button-aria-label": {
 		"de": "Show %{item} sub sections",
@@ -58,5 +38,25 @@
 		"ko": "Sections Menu",
 		"no": "Sections Menu",
 		"sv": "Sections Menu"
+	},
+	"header-nav-chain-block.links-element-aria-label": {
+		"de": "Top Links",
+		"en": "Top Links",
+		"es": "Top Links",
+		"fr": "Top Links",
+		"ja": "Top Links",
+		"ko": "Top Links",
+		"no": "Top Links",
+		"sv": "Top Links"
+	},
+	"header-nav-chain-block.querly-search-aria-label": {
+		"de": "Search",
+		"en": "Search",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
+		"no": "Search",
+		"sv": "Search"
 	}
 }

@@ -31,7 +31,8 @@ jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
   Overline: () => <div />,
-  PrimaryFont: (props) => <div {...props} />,
+  Heading: ({ children }) => children,
+  HeadingSection: ({ children }) => children,
 }));
 
 describe('Card list', () => {
@@ -121,12 +122,8 @@ describe('Card list', () => {
         expect(wrapper.find('.card-list-container').length).toEqual(1);
       });
 
-      it('should render a title', () => {
-        expect(wrapper.find('div.card-list-title').length).toEqual(1);
-      });
-
       it('should render a title with the right text', () => {
-        expect(wrapper.find('div.card-list-title').text()).toEqual('Test Title');
+        expect(wrapper.find('.card-list-title').first().text()).toEqual('Test Title');
       });
 
       it('should render two anchor tags - one around image one for the title', () => {
@@ -157,7 +154,7 @@ describe('Card list', () => {
       });
 
       it('should render a main headline', () => {
-        expect(wrapper.find('div.card-list-headline').length).toEqual(1);
+        expect(wrapper.find('.card-list-headline').length).toEqual(1);
       });
 
       it('should render an author and a publish date section', () => {
@@ -210,8 +207,8 @@ describe('Card list', () => {
 
       it('should render a headline', () => {
         expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').length).toEqual(27);
-        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('PrimaryFont.headline-text').length).toEqual(27);
-        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('PrimaryFont.headline-text').first()
+        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('.headline-text').length).toEqual(27);
+        expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('.headline-text').first()
           .text()).toEqual('Jon’s Prod Story');
         expect(
           wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
@@ -268,7 +265,7 @@ describe('Card list', () => {
         expect(wrapper.find('.overline').length).toBe(0);
       });
       it('should render headline', () => {
-        expect(wrapper.find('PrimaryFont.card-list-headline').length).toBe(1);
+        expect(wrapper.find('.card-list-headline').length).toBe(1);
       });
       it('should render author-date', () => {
         expect(wrapper.find('.author-date').length).toBe(1);

@@ -26,10 +26,6 @@
       font-size: calculateRem(10px);
       line-height: calculateRem(16px);
 
-      .dot-separator {
-        color: transparent;
-      }
-
       .story-date {
         color: $ui-primary-font-color;
         display: inline;

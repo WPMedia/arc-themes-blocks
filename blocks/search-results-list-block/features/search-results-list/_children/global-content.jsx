@@ -3,11 +3,10 @@ import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
 import SearchResult from './search-result';
-import { extractImage } from './helpers';
 import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
@@ -27,8 +26,27 @@ class GlobalSearchResultsList extends React.Component {
       placeholderResizedImageOptions: {},
       focusItem: 0,
     };
-    this.locale = getProperties(this.arcSite).locale || 'en';
-    this.phrases = getTranslatedPhrases(this.locale);
+
+    const {
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale = 'en',
+    } = getProperties(props.arcSite) || {};
+
+    this.phrases = getTranslatedPhrases(locale);
+    this.websiteDomain = websiteDomain;
+    this.fallbackImage = fallbackImage;
+
+    this.imageProps = {
+      smallWidth: 158,
+      smallHeight: 89,
+      mediumWidth: 274,
+      mediumHeight: 154,
+      largeWidth: 274,
+      largeHeight: 154,
+      primaryLogoAlt,
+      breakpoints,
+      resizerURL,
+    };
+
     this.fetchPlaceholder();
     this.customSearchAction = props.customSearchAction || null;
     this.listItemRefs = {};
@@ -173,7 +191,7 @@ class GlobalSearchResultsList extends React.Component {
         <div className="results-list-container">
           {
             results && results.length > 0 && results.map((element) => {
-              const resizedImageOptions = extractImage(element.promoItems)
+              const resizedImageOptions = extractImageFromStory(element)
                 ? extractResizedParams(element)
                 : placeholderResizedImageOptions;
 
@@ -188,9 +206,9 @@ class GlobalSearchResultsList extends React.Component {
                     element={element}
                     arcSite={arcSite}
                     targetFallbackImage={targetFallbackImage}
-                    placeholderResizedImageOptions={placeholderResizedImageOptions}
                     resizedImageOptions={resizedImageOptions}
                     promoElements={promoElements}
+                    imageProps={this.imageProps}
                   />
                 </div>
               );

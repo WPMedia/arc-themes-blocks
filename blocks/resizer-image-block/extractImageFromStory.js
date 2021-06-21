@@ -22,10 +22,10 @@ const extractImageFromStory = (storyObject) => {
     return promoImage;
   }
 
-  if (promoItems.lead_art?.type === 'video') {
-    const videoPromo = extractImageFromPromo(promoItems.lead_art.promo_items);
-    if (videoPromo) {
-      return videoPromo;
+  if (promoItems.lead_art) {
+    const leadArtPromoImage = extractImageFromPromo(promoItems.lead_art.promo_items);
+    if (leadArtPromoImage) {
+      return leadArtPromoImage;
     }
   }
 

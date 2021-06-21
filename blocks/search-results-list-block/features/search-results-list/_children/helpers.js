@@ -9,8 +9,6 @@ const constructHref = (websiteUrl, arcSite) => {
     : `${websiteDomain}/${websiteUrl}`;
 };
 
-const extractImage = (promo) => promo && promo.basic && promo.basic.type === 'image' && promo.basic.url;
-
 const resolveDefaultPromoElements = (customFields = {}) => {
   const fields = {
     showHeadline: true,
@@ -30,4 +28,4 @@ const resolveDefaultPromoElements = (customFields = {}) => {
   }, fields);
 };
 
-export { constructHref, extractImage, resolveDefaultPromoElements };
+export { constructHref, resolveDefaultPromoElements };

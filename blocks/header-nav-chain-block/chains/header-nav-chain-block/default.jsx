@@ -138,6 +138,7 @@ const Nav = (props) => {
     shrinkDesktopNavivationHeight,
     showHorizontalSeperatorDots,
     ariaLabel,
+    ariaLabelLink,
   } = customFields;
 
   const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
@@ -402,7 +403,7 @@ const Nav = (props) => {
               hierarchy={horizontalLinksHierarchy}
               navBarColor={navColor}
               showHorizontalSeperatorDots={showDotSeparators}
-              ariaLabel={ariaLabel}
+              ariaLabel={ariaLabelLink}
             />
           )}
           <NavSection side="right" />
@@ -501,6 +502,11 @@ Nav.propTypes = {
       label: 'Aria-label',
       defaultValue: 'Sections Menu',
       description: 'The label is provided to assistive technologies to provide it with a unique name for the header nav landmark - defaults to "Sections Menu" if left blank',
+    }),
+    ariaLabelLink: PropTypes.string.tag({
+      label: 'Links Bar - Aria-label',
+      defaultValue: 'Top Links',
+      description: 'The label is provided to assistive technologies to provide it with a unique name for the header links nav landmark - defaults to "Top Links" if left blank',
     }),
     ...generateNavComponentPropTypes(),
   }),

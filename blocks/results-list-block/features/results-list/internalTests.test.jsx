@@ -20,6 +20,8 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
+  Heading: ({ children }) => <>{children}</>,
+  HeadingSection: ({ children }) => children,
 }));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({

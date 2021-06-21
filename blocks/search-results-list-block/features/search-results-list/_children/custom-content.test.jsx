@@ -31,14 +31,6 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
 }));
 
-const fullPromoElements = {
-  showHeadline: true,
-  showImage: true,
-  showDescription: true,
-  showByline: true,
-  showDate: true,
-};
-
 describe('The search results list', () => {
   describe('renders a search bar', () => {
     const { default: SearchResultsList } = require('./custom-content');
@@ -71,22 +63,11 @@ describe('The search results list', () => {
         });
 
         it('should call fetchContent when clicked', () => {
-          expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(0);
-          wrapper.find('.btn').at(0).simulate('click');
           expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
+          wrapper.find('.btn').at(0).simulate('click');
+          expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
         });
       });
-    });
-  });
-
-  it('should render a list of stories', () => {
-    const { default: SearchResultsList } = require('./custom-content');
-    SearchResultsList.prototype.fetchContent = jest.fn().mockReturnValue(mockReturnData);
-    const wrapper = shallow(<SearchResultsList arcSite="the-sun" promoElements={fullPromoElements} deployment={jest.fn((path) => path)} />);
-    wrapper.setState({ resultList: mockData }, () => {
-      wrapper.update();
-      expect(wrapper.find('.results-list-container').length).toEqual(1);
-      expect(wrapper.find('SearchResult').length).toEqual(28);
     });
   });
 
@@ -107,9 +88,9 @@ describe('The search results list', () => {
       });
 
       it('should call fetchContent when clicked', () => {
-        expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(1);
-        (wrapper.find('.see-more')).childAt(0).simulate('click');
         expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(2);
+        (wrapper.find('.see-more')).childAt(0).simulate('click');
+        expect(SearchResultsList.prototype.fetchStories.mock.calls.length).toEqual(3);
       });
     });
   });

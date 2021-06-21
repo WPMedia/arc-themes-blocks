@@ -20,8 +20,9 @@ jest.mock('fusion:themes', () => (
 ));
 
 jest.mock('@wpmedia/shared-styles', () => ({
-  PrimaryFont: ({ children }) => <div id="primary-font-mock">{ children }</div>,
   SecondaryFont: ({ children }) => <div id="secondary-font-mock">{ children }</div>,
+  Heading: ({ children }) => children,
+  HeadingSection: ({ children }) => children,
 }));
 
 describe('The numbered-list-block', () => {

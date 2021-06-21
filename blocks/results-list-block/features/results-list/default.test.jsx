@@ -33,8 +33,9 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
-  PrimaryFont: ({ children }) => <div id="primary-font-mock">{children}</div>,
   SecondaryFont: ({ children }) => <div id="secondary-font-mock">{children}</div>,
+  Heading: ({ children }) => <>{children}</>,
+  HeadingSection: ({ children }) => children,
 }));
 
 describe('The results list', () => {

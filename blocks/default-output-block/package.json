@@ -11,7 +11,8 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "output-types"
+    "output-types",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

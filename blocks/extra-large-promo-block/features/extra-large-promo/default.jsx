@@ -118,9 +118,13 @@ const ExtraLargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
+  if (!content || content === {}) {
+    return null;
+  }
+
   const videoEmbed = (customFields?.playVideoInPlace && extractVideoEmbedFromStory(content));
 
-  return content ? (
+  return (
     <>
       <article className="container-fluid xl-large-promo">
         <div className="row">
@@ -159,7 +163,10 @@ const ExtraLargePromoItem = ({ customFields }) => {
                 || (
                   customFields?.showImage
                   && (
-                    <div {...searchableField('imageOverrideURL')}>
+                    <div
+                      {...searchableField('imageOverrideURL')}
+                      suppressContentEditableWarning
+                    >
                       <PromoImage
                         content={content}
                         customImageURL={customFields.imageOverrideURL}
@@ -189,16 +196,17 @@ const ExtraLargePromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 const ExtraLargePromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
+  if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={shouldLazyLoad}>
       <ExtraLargePromoItem customFields={customFields} />
     </LazyLoad>
   );

@@ -1,0 +1,115 @@
+
+
+Searching 1981 files for "useEditableContent("
+
+/Users/schubachn/Source/fusion/documentation/api/react-hooks.md:
+   62  
+   63      // Retrieve two functions from the useEditableContent hook
+   64:     const { editableContent, editableField } = useEditableContent();
+   65  
+   66      return (
+   ..
+   87  export default () => {
+   88      const { globalContent: content } = useComponentContext();
+   89:     const { editableContent } = useEditableContent();
+   90  
+   91      return (
+
+/Users/schubachn/Source/fusion/documentation/recipes/content-testing.md:
+   95    const { contentService, contentConfigValues } = weatherConfig
+   96  
+   97:   const { editableField } = useEditableContent()
+   98    const weatherData = useContent({
+   99      source: contentService,
+  ...
+  143    const { contentService, contentConfigValues } = weatherConfig
+  144  
+  145:   const { editableField } = useEditableContent()
+  146    const { registerSuccessEvent } = useComponentContext()
+  147  
+
+/Users/schubachn/Source/fusion/engine/src/render/engines/jsx/components/consumer.js:
+  128    const WrappedComponent = (props) => {
+  129      const context = useFusionContext()
+  130:     const editableFns = useEditableContent()
+  131  
+  132      return React.createElement(
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/extra-large-manual-promo-block/features/extra-large-manual-promo/default.jsx:
+   13  const ExtraLargeManualPromoItem = ({ customFields }) => {
+   14    const { isAdmin } = useFusionContext();
+   15:   const { searchableField } = useEditableContent();
+   16  
+   17    return (
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/extra-large-promo-block/features/extra-large-promo/default.jsx:
+   21  const ExtraLargePromoItem = ({ customFields }) => {
+   22    const { arcSite, id, isAdmin } = useFusionContext();
+   23:   const { searchableField } = useEditableContent();
+   24  
+   25    const content = useContent({
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/large-manual-promo-block/features/large-manual-promo/default.jsx:
+   13  const LargeManualPromoItem = ({ customFields }) => {
+   14    const { isAdmin } = useFusionContext();
+   15:   const { searchableField } = useEditableContent();
+   16    const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
+   17  
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/large-promo-block/features/large-promo/default.jsx:
+   21  const LargePromoItem = ({ customFields }) => {
+   22    const { arcSite, id, isAdmin } = useFusionContext();
+   23:   const { searchableField } = useEditableContent();
+   24  
+   25    const content = useContent({
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/medium-manual-promo-block/features/medium-manual-promo/default.jsx:
+   11  const MediumManualPromoItem = ({ customFields }) => {
+   12    const { isAdmin } = useFusionContext();
+   13:   const { searchableField } = useEditableContent();
+   14  
+   15    const hasImage = customFields?.showImage && customFields?.imageURL;
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/medium-promo-block/features/medium-promo/default.jsx:
+   14  const MediumPromoItem = ({ customFields }) => {
+   15    const { arcSite, isAdmin } = useFusionContext();
+   16:   const { searchableField } = useEditableContent();
+   17  
+   18    const content = useContent({
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/shared-styles/_children/overline/index.jsx:
+   12  const Overline = (props) => {
+   13    const { globalContent, arcSite } = useFusionContext();
+   14:   const { editableContent } = useEditableContent();
+   15    const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
+   16    const {
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/shared-styles/_children/promo-description/index.jsx:
+   10      editable = true,
+   11    } = props;
+   12:   const { editableContent } = useEditableContent();
+   13  
+   14    const descriptionText = content?.description?.basic || text;
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/shared-styles/_children/promo-headline/index.jsx:
+   17      editable = true,
+   18    } = props;
+   19:   const { editableContent } = useEditableContent();
+   20    const { registerSuccessEvent } = useComponentContext();
+   21    const { arcSite } = useFusionContext();
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/small-manual-promo-block/features/small-manual-promo/default.jsx:
+   10  
+   11  const SmallManualPromoItem = ({ customFields }) => {
+   12:   const { searchableField } = useEditableContent();
+   13    const { isAdmin } = useFusionContext();
+   14  
+
+/Users/schubachn/Source/fusion-news-theme-blocks/blocks/small-promo-block/features/small-promo/default.jsx:
+   11  const SmallPromoItem = ({ customFields }) => {
+   12    const { arcSite, isAdmin } = useFusionContext();
+   13:   const { searchableField } = useEditableContent();
+   14  
+   15    const content = useContent({
+
+16 matches across 14 files

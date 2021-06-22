@@ -45,7 +45,7 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
                 : null}
               {customFields?.showImage
                 ? (
-                  <div {...searchableField('imageOverrideURL')}>
+                  <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
                     <PromoImage
                       {...customFields}
                       customImageURL={customFields?.imageURL}

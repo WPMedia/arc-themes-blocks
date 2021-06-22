@@ -112,10 +112,14 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
+  if (!content || content === {}) {
+    return null;
+  }
+
   const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
-  return content ? (
+  return (
     <>
       <article className="container-fluid large-promo">
         <div className="row">
@@ -137,7 +141,8 @@ const LargePromoItem = ({ customFields }) => {
               || (
                 customFields?.showImage
                 && (
-                  <div {...searchableField('imageOverrideURL')}>
+                  <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
+                  <span>test</span>
                     <PromoImage
                       content={content}
                       customImageURL={customFields.imageOverrideURL}
@@ -182,16 +187,17 @@ const LargePromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 const LargePromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
+  if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={shouldLazyLoad}>
       <LargePromoItem customFields={customFields} />
     </LazyLoad>
   );

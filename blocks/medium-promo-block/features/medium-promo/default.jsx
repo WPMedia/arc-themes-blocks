@@ -90,13 +90,21 @@ const MediumPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  return content ? (
+  if (!content || content === {}) {
+    return null;
+  }
+
+  return (
     <>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields?.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
           {customFields?.showImage
             ? (
-              <div className="image-link" {...searchableField('imageOverrideURL')}>
+              <div
+                className="image-link"
+                {...searchableField('imageOverrideURL')}
+                suppressContentEditableWarning
+              >
                 <PromoImage
                   content={content}
                   customImageURL={customFields?.imageOverrideURL}
@@ -135,16 +143,17 @@ const MediumPromoItem = ({ customFields }) => {
       </article>
       <hr />
     </>
-  ) : null;
+  );
 };
 
 const MediumPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
+  if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={shouldLazyLoad}>
       <MediumPromoItem customFields={customFields} />
     </LazyLoad>
   );

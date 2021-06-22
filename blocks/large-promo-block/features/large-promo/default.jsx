@@ -142,7 +142,6 @@ const LargePromoItem = ({ customFields }) => {
                 customFields?.showImage
                 && (
                   <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
-                  <span>test</span>
                     <PromoImage
                       content={content}
                       customImageURL={customFields.imageOverrideURL}

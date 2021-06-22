@@ -323,9 +323,10 @@ class ResultsList extends Component {
                   >
                     <Image
                       {...this.imageProps}
-                      url={imageURL !== '' ? imageURL : targetFallbackImage}
-                      alt={imageURL !== '' ? headlineText : this.imageProps?.primaryLogoAlt}
-                      resizedImageOptions={imageURL !== '' ? extractResizedParams(element) : placeholderResizedImageOptions}
+                      url={imageURL !== null ? imageURL : targetFallbackImage}
+                      alt={imageURL !== null ? headlineText : this.imageProps?.primaryLogoAlt}
+                      resizedImageOptions={imageURL !== null
+                        ? extractResizedParams(element) : placeholderResizedImageOptions}
                     />
                   </a>
                 </div>

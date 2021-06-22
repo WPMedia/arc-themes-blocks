@@ -217,9 +217,7 @@ describe('the links bar feature for the default output type', () => {
       })),
     }));
     const { default: LinksBar } = require('./default');
-    const wrapper = shallow(
-      <LinksBar customFields={{ ariaLabel: 'Links' }} />,
-    );
+    const wrapper = shallow(<LinksBar ariaLabel="Links" />);
 
     expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
   });

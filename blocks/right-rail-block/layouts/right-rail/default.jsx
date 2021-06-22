@@ -21,7 +21,7 @@ const RightRailLayout = ({ children }) => {
   return (
     <>
       <header className="page-header">{navigation}</header>
-      <section role="main" className="main">
+      <section role="main" id="main" className="main" tabIndex="-1">
         <div className="container layout-section">
           <div className="row">
             <div className="col-sm-xl-12 layout-section wrap-bottom">

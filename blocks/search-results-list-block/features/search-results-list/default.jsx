@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { HeadingSection } from '@wpmedia/shared-styles';
 import CustomSearchResultsList from './_children/custom-content';
 import GlobalContentSearch from './_children/global-content';
 import { resolveDefaultPromoElements } from './_children/helpers';
@@ -30,20 +31,24 @@ const SearchResultsListContainer = (
   if (showGlobalContent) {
     return (
       <LazyLoad enabled={lazyLoad && !isAdmin}>
-        <GlobalContentSearch
-          arcSite={arcSite}
-          customSearchAction={customSearchAction}
-          promoElements={resolveDefaultPromoElements(customFields)}
-        />
+        <HeadingSection>
+          <GlobalContentSearch
+            arcSite={arcSite}
+            customSearchAction={customSearchAction}
+            promoElements={resolveDefaultPromoElements(customFields)}
+          />
+        </HeadingSection>
       </LazyLoad>
     );
   }
   return (
     <LazyLoad enabled={lazyLoad && !isAdmin}>
-      <CustomSearchResultsList
-        arcSite={arcSite}
-        promoElements={resolveDefaultPromoElements(customFields)}
-      />
+      <HeadingSection>
+        <CustomSearchResultsList
+          arcSite={arcSite}
+          promoElements={resolveDefaultPromoElements(customFields)}
+        />
+      </HeadingSection>
     </LazyLoad>
   );
 };

@@ -79,7 +79,7 @@ const Overline = (props) => {
   itemProps.className = classNames.join(' ');
 
   return (url || text) ? (
-    <PrimaryFont {...itemProps}>
+    <PrimaryFont {...itemProps} suppressContentEditableWarning>
       {text}
     </PrimaryFont>
   ) : null;

@@ -20,6 +20,7 @@ const MediumManualPromoItem = ({ customFields }) => {
         <div
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
           {...searchableField('imageURL')}
+          suppressContentEditableWarning
         >
           {customFields?.showImage
             ? (

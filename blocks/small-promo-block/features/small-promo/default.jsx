@@ -75,6 +75,10 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
+  if (!content || content === {}) {
+    return null;
+  }
+
   const imagePosition = customFields?.imagePosition || 'right';
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 
@@ -89,7 +93,7 @@ const SmallPromoItem = ({ customFields }) => {
 
   const image = customFields?.showImage ? (
     <div style={{ position: isAdmin ? 'relative' : null }}>
-      <div {...searchableField('imageOverrideURL')}>
+      <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
         <PromoImage
           content={content}
           customImageURL={customFields.imageOverrideURL}
@@ -113,12 +117,13 @@ const SmallPromoItem = ({ customFields }) => {
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
   const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
+  if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <SmallPromoItem customFields={{ ...customFields }} />
+    <LazyLoad enabled={shouldLazyLoad}>
+      <SmallPromoItem customFields={customFields} />
     </LazyLoad>
   );
 };

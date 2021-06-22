@@ -167,7 +167,7 @@ const SimpleList = (props) => {
   const Wrapper = title ? HeadingSection : React.Fragment;
 
   return (
-    <Wrapper>
+    <>
       <div key={id} className="list-container layout-section">
         { title
           ? (
@@ -175,32 +175,32 @@ const SimpleList = (props) => {
               {title}
             </Heading>
           ) : null}
-        {
-        contentElements.reduce(unserializeStory(arcSite), []).map(({
-          id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
-        }) => (
-          <React.Fragment key={listItemId}>
-            <StoryItem
-              key={listItemId}
-              id={listItemId}
-              itemTitle={itemTitle}
-              imageURL={imageURL}
-              websiteURL={websiteURL}
-              websiteDomain={websiteDomain}
-              showHeadline={showHeadline}
-              showImage={showImage}
-              resizedImageOptions={resizedImageOptions}
-              placeholderResizedImageOptions={placeholderResizedImageOptions}
-              targetFallbackImage={targetFallbackImage}
-              arcSite={arcSite}
-              imageProps={imageProps}
-            />
-            <hr />
-          </React.Fragment>
-        ))
-      }
+        <Wrapper>
+          {contentElements.reduce(unserializeStory(arcSite), []).map(({
+            id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
+          }) => (
+            <React.Fragment key={listItemId}>
+              <StoryItem
+                key={listItemId}
+                id={listItemId}
+                itemTitle={itemTitle}
+                imageURL={imageURL}
+                websiteURL={websiteURL}
+                websiteDomain={websiteDomain}
+                showHeadline={showHeadline}
+                showImage={showImage}
+                resizedImageOptions={resizedImageOptions}
+                placeholderResizedImageOptions={placeholderResizedImageOptions}
+                targetFallbackImage={targetFallbackImage}
+                arcSite={arcSite}
+                imageProps={imageProps}
+              />
+              <hr />
+            </React.Fragment>
+          ))}
+        </Wrapper>
       </div>
-    </Wrapper>
+    </>
   );
 };
 

@@ -1,33 +1,30 @@
 import React from 'react';
+import getProperties from 'fusion:properties';
+
 import ArticleDate from '@wpmedia/date-block';
 import { Image } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams } from '@wpmedia/resizer-image-block';
-import { Byline, PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
-
-import getProperties from 'fusion:properties';
-import { extractImage } from './helpers';
+import { extractImageFromStory } from '@wpmedia/resizer-image-block';
+import { Byline, Heading, SecondaryFont } from '@wpmedia/shared-styles';
 
 const SearchResult = ({
   element,
   arcSite,
   targetFallbackImage,
-  placeholderResizedImageOptions,
+  resizedImageOptions,
   promoElements = {},
+  imageProps,
 }) => {
   const {
     description: { basic: descriptionText } = {},
     headlines: { basic: headlineText } = {},
     display_date: displayDate,
-    promo_items: promoItems,
     websites = {},
   } = element;
-
   if (!websites[arcSite]) {
     return null;
   }
 
   const url = websites[arcSite].website_url;
-  const resizedImageOptions = extractResizedParams(element);
   const {
     showHeadline,
     showImage,
@@ -38,71 +35,44 @@ const SearchResult = ({
 
   return (
     <div className="list-item" key={`result-card-${url}`}>
-      { showImage && (
+      {showImage ? (
         <div className="results-list--image-container mobile-order-2 mobile-image">
           <a href={url} className="list-anchor" aria-hidden="true" tabIndex="-1">
-            {extractImage(promoItems) ? (
-              <Image
-                url={extractImage(promoItems)}
-                alt={headlineText}
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
-                largeWidth={274}
-                largeHeight={154}
-                resizedImageOptions={resizedImageOptions}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-              />
-            ) : (
-              <Image
-                smallWidth={274}
-                smallHeight={154}
-                mediumWidth={274}
-                mediumHeight={154}
-                largeWidth={274}
-                largeHeight={154}
-                alt={getProperties(arcSite).primaryLogoAlt || ''}
-                url={targetFallbackImage}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-                resizedImageOptions={placeholderResizedImageOptions}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-              />
-            )}
+            <Image
+              {...imageProps}
+              url={extractImageFromStory(element)
+                ? extractImageFromStory(element) : targetFallbackImage}
+              alt={extractImageFromStory(element)
+                ? headlineText : getProperties(arcSite).primaryLogoAlt}
+              resizedImageOptions={resizedImageOptions}
+            />
           </a>
         </div>
-      )}
-      { showHeadline && (
+      ) : null}
+      {showHeadline ? (
         <div className="results-list--headline-container mobile-order-1">
           <a href={url} className="list-anchor">
-            <PrimaryFont
-              as="h2"
-              className="headline-text"
-            >
+            <Heading className="headline-text">
               {headlineText}
-            </PrimaryFont>
+            </Heading>
           </a>
         </div>
-      )}
-      { (showDescription || showDate || showByline) && (
+      ) : null}
+      {(showDescription || showDate || showByline) ? (
         <div className="results-list--description-author-container mobile-order-3">
-          { showDescription && (
-            <SecondaryFont
-              as="p"
-              className="description-text"
-            >
+          {showDescription ? (
+            <SecondaryFont as="p" className="description-text">
               {descriptionText}
             </SecondaryFont>
-          )}
-          { (showDate || showByline) && (
+          ) : null}
+          {(showDate || showByline) ? (
             <div className="results-list--author-date">
-              { showByline && <Byline content={element} list separator={showDate} font="Primary" /> }
-              { showDate && <ArticleDate classNames="story-date" date={displayDate} /> }
+              {showByline ? <Byline content={element} list separator={showDate} font="Primary" /> : null}
+              {showDate ? <ArticleDate classNames="story-date" date={displayDate} /> : null}
             </div>
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

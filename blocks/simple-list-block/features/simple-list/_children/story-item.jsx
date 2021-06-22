@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import { Heading } from '@wpmedia/shared-styles';
 import { Image } from '@wpmedia/engine-theme-sdk';
 
 const StoryItem = (props) => {
@@ -38,9 +38,9 @@ const StoryItem = (props) => {
           className="simple-list-headline-anchor"
           href={websiteURL}
         >
-          <PrimaryFont as="h2" className="simple-list-headline-text">
+          <Heading className="simple-list-headline-text">
             {itemTitle}
-          </PrimaryFont>
+          </Heading>
         </a>
       ) : null}
     </article>

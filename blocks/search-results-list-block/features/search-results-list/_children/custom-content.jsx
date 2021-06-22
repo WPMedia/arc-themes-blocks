@@ -5,6 +5,7 @@ import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
+import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import SearchResult from './search-result';
 
@@ -24,13 +25,34 @@ class CustomSearchResultsList extends React.Component {
     this.state = {
       storedList: {},
       resultList: {},
-      value: '',
+      value: props?.customFields?.searchContentConfig?.contentConfigValues?.query || '',
       page: 1,
       searchTerm: '',
       placeholderResizedImageOptions: {},
     };
-    this.phrases = getTranslatedPhrases(getProperties(props.arcSite).locale || 'en');
+
+    const {
+      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale = 'en',
+    } = getProperties(props.arcSite) || {};
+
+    this.phrases = getTranslatedPhrases(locale);
+    this.websiteDomain = websiteDomain;
+    this.fallbackImage = fallbackImage;
+
+    this.imageProps = {
+      smallWidth: 158,
+      smallHeight: 89,
+      mediumWidth: 274,
+      mediumHeight: 154,
+      largeWidth: 274,
+      largeHeight: 154,
+      primaryLogoAlt,
+      breakpoints,
+      resizerURL,
+    };
+
     this.fetchPlaceholder();
+    this.fetchStories();
   }
 
   getFallbackImageURL() {
@@ -150,16 +172,23 @@ class CustomSearchResultsList extends React.Component {
         </div>
         <div className="results-list-container">
           {
-            data && data.length > 0 && data.map((element) => (
-              <SearchResult
-                key={`result-card-${element._id}`}
-                element={element}
-                arcSite={arcSite}
-                targetFallbackImage={targetFallbackImage}
-                placeholderResizedImageOptions={placeholderResizedImageOptions}
-                promoElements={promoElements}
-              />
-            ))
+            data && data.length > 0 && data.map((element) => {
+              const resizedImageOptions = extractImageFromStory(element)
+                ? extractResizedParams(element)
+                : placeholderResizedImageOptions;
+
+              return (
+                <SearchResult
+                  key={`result-card-${element._id}`}
+                  element={element}
+                  arcSite={arcSite}
+                  targetFallbackImage={targetFallbackImage}
+                  resizedImageOptions={resizedImageOptions}
+                  promoElements={promoElements}
+                  imageProps={this.imageProps}
+                />
+              );
+            })
           }
           {
             !!(data && data.length > 0 && data.length < totalHits) && (

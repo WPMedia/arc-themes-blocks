@@ -9,16 +9,6 @@
 		"no": "Facebook page",
 		"sv": "Facebook page"
 	},
-	"footer-block.rss-link": {
-		"de": "RSS feed",
-		"en": "RSS feed",
-		"es": "RSS feed",
-		"fr": "RSS feed",
-		"ja": "RSS feed",
-		"ko": "RSS feed",
-		"no": "RSS feed",
-		"sv": "RSS feed"
-	},
 	"footer-block.twitter-link": {
 		"de": "Twitter feed",
 		"en": "Twitter feed",
@@ -28,5 +18,15 @@
 		"ko": "Twitter feed",
 		"no": "Twitter feed",
 		"sv": "Twitter feed"
+	},
+	"footer-block.rss-link": {
+		"de": "RSS feed",
+		"en": "RSS feed",
+		"es": "RSS feed",
+		"fr": "RSS feed",
+		"ja": "RSS feed",
+		"ko": "RSS feed",
+		"no": "RSS feed",
+		"sv": "RSS feed"
 	}
 }

@@ -31,7 +31,7 @@ const RightRailAdvancedLayout = ({ children }) => {
   return (
     <>
       <header className="page-header">{navigation}</header>
-      <section role="main" className="main">
+      <section role="main" id="main" className="main" tabIndex="-1">
         <div className="container layout-section">
           <div className="row">
             <div className="col-sm-xl-12 layout-section wrap-bottom">
@@ -43,7 +43,7 @@ const RightRailAdvancedLayout = ({ children }) => {
               <RenderChild Item={main} tabletPlacement="2" />
               <RenderChild Item={main2} tabletPlacement="4" />
             </section>
-            <section className="col-sm-md-12 col-lg-xl-4">
+            <section className="col-sm-md-12 col-lg-xl-4 layout-section">
               <RenderChild Item={rightRailTop} tabletPlacement="1" />
               <RenderChild Item={rightRailMiddle} tabletPlacement="3" />
               <RenderChild Item={rightRailBottom} tabletPlacement="5" />

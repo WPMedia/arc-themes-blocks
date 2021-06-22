@@ -6,6 +6,11 @@ import { mount } from 'enzyme';
 import { oneListItem, LineItemWithOutDescription } from '../mock-data';
 import SearchResult from './search-result';
 
+jest.mock('@wpmedia/date-block', () => ({
+  __esModule: true,
+  default: function ArticleDate() { return <div />; },
+}));
+
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -23,8 +28,8 @@ jest.mock('fusion:context', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   __esModule: true,
   Byline: () => <div />,
-  PrimaryFont: ({ children }) => <h2 className="headline-text">{children}</h2>,
   SecondaryFont: ({ children }) => <p className="description-text">{children}</p>,
+  Heading: ({ children }) => <>{children}</>,
 }));
 
 describe('The search results', () => {
@@ -46,7 +51,6 @@ describe('The search results', () => {
         element={element}
         arcSite="the-sun"
         targetFallbackImage="/resource/example.jpg"
-        placeholderResizedImageOptions={{}}
         promoElements={fullElements}
       />,
     );
@@ -72,8 +76,7 @@ describe('The search results', () => {
     it('should render a headline and a description', () => {
       expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
       expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('PrimaryFont').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('PrimaryFont')
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('Heading')
         .text()).toEqual('Article with a YouTube embed in it');
       expect(wrapper.find('.list-item').find('.results-list--description-author-container').find('p.description-text')
         .text()).toEqual('Test article for YouTube responsiveness');
@@ -110,7 +113,6 @@ describe('The search results', () => {
         element={element}
         arcSite="the-sun"
         targetFallbackImage="/resource/example.jpg"
-        placeholderResizedImageOptions={{}}
         promoElements={fullElements}
       />,
     );
@@ -122,8 +124,8 @@ describe('The search results', () => {
     it('should render a headline', () => {
       expect(wrapper.find('.list-item').find('.results-list--description-author-container').length).toEqual(1);
       expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('h2.headline-text').length).toEqual(1);
-      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('h2.headline-text')
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text').length).toEqual(1);
+      expect(wrapper.find('.list-item').find('.results-list--headline-container').find('.list-anchor').find('.headline-text')
         .text()).toEqual('Article with a YouTube embed in it');
     });
 
@@ -152,7 +154,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -175,7 +176,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -183,7 +183,7 @@ describe('The search results', () => {
       const headline = wrapper.find('.list-item').find('.results-list--headline-container');
       expect(headline.length).toEqual(1);
       expect(headline.find('.list-anchor').length).toEqual(1);
-      expect(headline.find('h2.headline-text').length).toEqual(1);
+      expect(headline.find('.headline-text').length).toEqual(1);
       expect(headline.text()).toEqual('Article with a YouTube embed in it');
     });
 
@@ -201,7 +201,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -227,7 +226,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -253,7 +251,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -278,7 +275,6 @@ describe('The search results', () => {
           element={element}
           arcSite="the-sun"
           targetFallbackImage="/resource/example.jpg"
-          placeholderResizedImageOptions={{}}
           promoElements={promoElements}
         />,
       );
@@ -305,7 +301,6 @@ describe('The search results', () => {
         element={element}
         arcSite="the-sun"
         targetFallbackImage="/resource/example.jpg"
-        placeholderResizedImageOptions={{}}
         promoElements={fullElements}
       />,
     );

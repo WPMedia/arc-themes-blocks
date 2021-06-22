@@ -1,14 +1,4 @@
 {
-	"alert-bar-block.close-button": {
-		"de": "Dismiss breaking news alert",
-		"en": "Dismiss breaking news alert",
-		"es": "Dismiss breaking news alert",
-		"fr": "Dismiss breaking news alert",
-		"ja": "Dismiss breaking news alert",
-		"ko": "Dismiss breaking news alert",
-		"no": "Dismiss breaking news alert",
-		"sv": "Dismiss breaking news alert"
-	},
 	"alert-bar-block.element-aria-label": {
 		"de": "Breaking News Alert",
 		"en": "Breaking News Alert",
@@ -18,5 +8,15 @@
 		"ko": "Breaking News Alert",
 		"no": "Breaking News Alert",
 		"sv": "Breaking News Alert"
+	},
+	"alert-bar-block.close-button": {
+		"de": "Dismiss breaking news alert",
+		"en": "Dismiss breaking news alert",
+		"es": "Dismiss breaking news alert",
+		"fr": "Dismiss breaking news alert",
+		"ja": "Dismiss breaking news alert",
+		"ko": "Dismiss breaking news alert",
+		"no": "Dismiss breaking news alert",
+		"sv": "Dismiss breaking news alert"
 	}
 }

@@ -56,7 +56,10 @@ const getResizerParam = (
       }
 
       thumborParam = thumborParam.fitIn(width, height).buildUrl();
-      const urlSuffix = originalUrl.replace('https://', '');
+      const urlSuffix = originalUrl
+        .replace('https://', '')
+        .replace('http://', '');
+
       return thumborParam
         .replace(resizerURL, '')
         .replace(urlSuffix, '');
@@ -73,7 +76,12 @@ const getResizerParam = (
       thumborParam = thumborParam.filter(focalPointFilter(focalPoint));
     }
     thumborParam = thumborParam.resize(width, height).buildUrl();
-    const urlSuffix = originalUrl.replace('https://', '');
+
+    // supports http and https
+    const urlSuffix = originalUrl
+      .replace('https://', '')
+      .replace('http://', '');
+
     const breakpointName = `${width}x${height}`;
     return thumborParam
       .replace(resizerURL, '')

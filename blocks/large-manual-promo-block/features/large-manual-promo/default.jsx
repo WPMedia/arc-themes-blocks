@@ -21,7 +21,11 @@ const LargeManualPromoItem = ({ customFields }) => {
         <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
           {(customFields?.showImage)
             ? (
-              <div className="col-sm-12 col-md-xl-6" {...searchableField('imageURL')}>
+              <div
+                className="col-sm-12 col-md-xl-6"
+                {...searchableField('imageURL')}
+                suppressContentEditableWarning
+              >
                 <PromoImage
                   {...customFields}
                   customImageURL={customFields?.imageURL}

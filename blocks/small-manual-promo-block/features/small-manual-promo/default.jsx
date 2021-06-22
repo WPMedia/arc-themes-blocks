@@ -30,7 +30,7 @@ const SmallManualPromoItem = ({ customFields }) => {
   const image = customFields?.showImage && customFields.imageURL
     ? (
       <div style={{ position: isAdmin ? 'relative' : null }}>
-        <div {...searchableField('imageURL')}>
+        <div {...searchableField('imageURL')} suppressContentEditableWarning>
           <PromoImage
             customImageURL={customFields.imageURL}
             alt={customFields.headline}

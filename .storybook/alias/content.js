@@ -1,5 +1,6 @@
 import { footerContentMock } from '../mock-content/footer';
 import { smallPromoMock } from '../mock-content/smallPromo';
+import { extraLargePromo } from '../mock-content/extraLargePromo';
 
 export const useEditableContent = () => {
 	return {
@@ -18,6 +19,10 @@ export const useContent = ({ query }) => {
 	if ( query.feature === 'small-promo' ) {
 		return smallPromoMock;
 	}
+
+  if (query.feature === 'extra-large-promo') {
+    return extraLargePromo;
+  }
 
 	if (query.raw_image_url === 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG' ) {
 		return {

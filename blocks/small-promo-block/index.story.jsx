@@ -11,6 +11,7 @@ const sampleData = {
   showHeadline: false,
   showImage: false,
   imagePosition: 'right',
+  imageRatio: '3:2',
   itemContentConfig: {
     contentService: 'abc',
     contentConfigValues: 'xyz',
@@ -20,6 +21,32 @@ const sampleData = {
 export const allFields = () => {
   const customFields = {
     ...sampleData,
+    showHeadline: true,
+    showImage: true,
+  };
+
+  return (
+    <SmallPromo customFields={customFields} />
+  );
+};
+
+export const image16x9 = () => {
+  const customFields = {
+    ...sampleData,
+    imageRatio: '16:9',
+    showHeadline: true,
+    showImage: true,
+  };
+
+  return (
+    <SmallPromo customFields={customFields} />
+  );
+};
+
+export const image4x3 = () => {
+  const customFields = {
+    ...sampleData,
+    imageRatio: '4:3',
     showHeadline: true,
     showImage: true,
   };

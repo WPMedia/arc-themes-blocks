@@ -2,6 +2,7 @@ import { footerContentMock } from '../mock-content/footer';
 import { smallPromoMock } from '../mock-content/smallPromo';
 import { mediumPromoMock } from '../mock-content/mediumPromo';
 import { extraLargePromo } from '../mock-content/extraLargePromo';
+import { largePromoMock } from '../mock-content/largePromo';
 
 export const useEditableContent = () => {
 	return {
@@ -23,6 +24,11 @@ export const useContent = ({ query }) => {
 	if ( query.feature === 'medium-promo' ) {
 		return mediumPromoMock;
 	}
+
+  if (query.feature === 'large-promo') {
+    return largePromoMock;
+  }
+  
 	if (query.feature === 'extra-large-promo') {
 		return extraLargePromo;
 	}

@@ -1,4 +1,5 @@
 import { footerContentMock } from '../mock-content/footer';
+import { smallPromoMock } from '../mock-content/smallPromo';
 
 export const useEditableContent = () => {
 	return {
@@ -8,8 +9,14 @@ export const useEditableContent = () => {
 };
 
 export const useContent = ({ query }) => {
+	if (!query) {
+		return {};
+	}
 	if ( query.feature === 'footer' ) {
 		return footerContentMock;
+	}
+	if ( query.feature === 'small-promo' ) {
+		return smallPromoMock;
 	}
 
 	if (query.raw_image_url === 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG' ) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import Medium from './features/medium-promo/default';
+import MediumPromo from './features/medium-promo/default';
 
 export default {
   title: 'Blocks/Medium Promo',
@@ -32,7 +32,7 @@ export const allFields = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -48,7 +48,7 @@ export const image4x3 = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -64,7 +64,7 @@ export const image3x2 = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -75,7 +75,7 @@ export const headlineOnly = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -86,7 +86,7 @@ export const imageOnly = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -97,7 +97,7 @@ export const descriptionOnly = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -108,7 +108,7 @@ export const byLineOnly = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -119,7 +119,7 @@ export const dateOnly = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -133,7 +133,7 @@ export const headingImageDescriptionByline = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -147,7 +147,7 @@ export const headingImageDescriptionDate = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -161,7 +161,7 @@ export const headingImageByLineDate = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -175,7 +175,7 @@ export const noImage = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -187,7 +187,7 @@ export const headingAndDescription = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -200,7 +200,7 @@ export const headingBylineAndDate = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -212,7 +212,7 @@ export const headingAndByLine = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };
 
@@ -224,6 +224,6 @@ export const headingAndDate = () => {
   };
 
   return (
-    <Medium customFields={customFields} />
+    <MediumPromo customFields={customFields} />
   );
 };

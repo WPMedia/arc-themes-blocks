@@ -5,7 +5,7 @@ import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Overline, PromoDescription, PromoHeadline, PromoImage,
+  HeadingSection, Overline, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
@@ -15,7 +15,7 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
   const { searchableField } = useEditableContent();
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid xl-large-promo xl-large-manual-promo">
         <div className="row">
           {(customFields?.showOverline
@@ -68,7 +68,7 @@ const ExtraLargeManualPromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

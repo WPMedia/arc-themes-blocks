@@ -140,7 +140,7 @@ describe('medium list item', () => {
     // finds description text
     expect(wrapper.find('PromoDescription').text()).toBe(descriptionText);
 
-    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
   });
 
   // it('headline has class headline-above when headline position is above', () => {
@@ -245,7 +245,7 @@ describe('medium list item', () => {
     // doesn't find a headline
     expect(wrapper.find('a.md-promo-headline').length).toBe(0);
 
-    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
   });
 
   it('renders image placeholder with empty props with bottom border', () => {
@@ -291,7 +291,7 @@ describe('medium list item', () => {
     expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(false);
 
-    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
   });
 
   it('renders image placeholder with empty props without bottom border', () => {
@@ -336,6 +336,6 @@ describe('medium list item', () => {
 
     expect(wrapper.find('hr').hasClass('hr-borderless')).toBe(true);
 
-    expect(wrapper.find('MediumListItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
   });
 });

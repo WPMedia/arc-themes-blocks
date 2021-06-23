@@ -103,7 +103,7 @@ describe('small image block', () => {
     expect(wrapper.find('PromoImage').length).toBe(1);
     expect(wrapper.find('Image').prop('url')).toBe(imageURL);
 
-    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
+    expect(wrapper.find('article > hr').length).toBe(1);
   });
 
   it('must renders neither title nor image with empty props, renders placeholder image', () => {
@@ -137,7 +137,7 @@ describe('small image block', () => {
     expect(wrapper.find('PromoImage').length).toBe(1);
     expect(wrapper.find('PromoImage').prop('url')).toBe(fallbackImage);
 
-    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
+    expect(wrapper.find('article > hr').length).toBe(1);
   });
 
   it('must render only title if showImageSM false', () => {
@@ -179,7 +179,7 @@ describe('small image block', () => {
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(1);
     expect(wrapper.find('h2.sm-promo-headline').text()).toBe(itemTitle);
     expect(wrapper.find('PromoImage').length).toBe(0);
-    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
+    expect(wrapper.find('article > hr').length).toBe(1);
   });
 
   it('must render only image if showHeadlinesSM false', () => {
@@ -219,7 +219,7 @@ describe('small image block', () => {
 
     expect(wrapper.find('h2.sm-promo-headline').length).toBe(0);
     expect(wrapper.find('PromoImage').length).toBe(1);
-    expect(wrapper.find('SmallListItem > article > hr').length).toBe(1);
+    expect(wrapper.find('article > hr').length).toBe(1);
   });
 
   it('must render with layout horizontal if image position is "left" or "right"', () => {

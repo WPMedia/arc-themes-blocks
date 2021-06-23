@@ -1,4 +1,5 @@
 import React from 'react';
+import HeadingSection from '../../headings/section';
 
 import '@wpmedia/shared-styles/scss/_small-promo.scss';
 
@@ -41,12 +42,12 @@ function SmallPromoContainer({ headline, image, imagePosition = 'right' }) {
   }
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid small-promo">
         {output}
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 }
 export default SmallPromoContainer;

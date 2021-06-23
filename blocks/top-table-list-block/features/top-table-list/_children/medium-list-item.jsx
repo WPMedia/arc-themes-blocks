@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Byline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, HeadingSection, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 const MediumListItem = (props) => {
@@ -12,7 +12,7 @@ const MediumListItem = (props) => {
   const showBottomBorder = (typeof customFields.showBottomBorderMD === 'undefined') ? true : customFields.showBottomBorderMD;
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid medium-promo" key={id}>
         <div className={`promo-item-margins medium-promo-wrapper ${customFields.showImageMD ? 'md-promo-image' : ''}`}>
           {customFields.showImageMD
@@ -61,7 +61,7 @@ const MediumListItem = (props) => {
         </div>
       </article>
       <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
-    </>
+    </HeadingSection>
   );
 };
 

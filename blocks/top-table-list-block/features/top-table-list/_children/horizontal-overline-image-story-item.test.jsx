@@ -104,7 +104,7 @@ describe('horizontal overline image story item', () => {
     expect(wrapper.find('a.lg-promo-headline').length).toBe(1);
     expect(wrapper.find('a.lg-promo-headline').prop('href')).toBe(websiteURL);
 
-    expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
     expect(wrapper.find('Image')).toHaveLength(1);
     expect(wrapper.find('VideoPlayer')).toHaveLength(0);
   });
@@ -194,7 +194,7 @@ describe('horizontal overline image story item', () => {
     // does not find overline
     expect(wrapper.find('a.overline').length).toBe(0);
 
-    expect(wrapper.find('HorizontalOverlineImageStoryItem > hr').length).toBe(1);
+    expect(wrapper.find('hr').length).toBe(1);
   });
 
   it('renders VideoPlayer when type "story" with video lead art', () => {

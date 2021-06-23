@@ -6,7 +6,7 @@ import {
   videoPlayerCustomFieldTags,
 } from '@wpmedia/engine-theme-sdk';
 import {
-  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, HeadingSection, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 const VerticalOverlineImageStoryItem = (props) => {
@@ -23,7 +23,7 @@ const VerticalOverlineImageStoryItem = (props) => {
     && extractVideoEmbedFromStory(element);
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid xl-large-promo" key={id}>
         <div className="promo-item-margins row xl-promo-padding-bottom">
           {(customFields?.showHeadlineXL
@@ -91,7 +91,7 @@ const VerticalOverlineImageStoryItem = (props) => {
         </div>
       </article>
       <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
-    </>
+    </HeadingSection>
   );
 };
 

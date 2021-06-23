@@ -6,7 +6,7 @@ import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Byline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, HeadingSection, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
@@ -95,7 +95,7 @@ const MediumPromoItem = ({ customFields }) => {
   }
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid medium-promo">
         <div className={`medium-promo-wrapper ${customFields?.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
           {customFields?.showImage
@@ -142,7 +142,7 @@ const MediumPromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

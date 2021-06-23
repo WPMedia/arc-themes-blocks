@@ -10,8 +10,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features",
-    "intl.json"
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -27,6 +26,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/byline-block": "*",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",

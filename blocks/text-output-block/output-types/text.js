@@ -4,7 +4,7 @@ const TextOutputType = ({ children }) => {
   const generateText = (child) => {
     if (Array.isArray(child)) return child.map(generateText).join('\n');
     return child;
-  }
+  };
   return generateText(children);
 };
 

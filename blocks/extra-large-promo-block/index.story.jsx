@@ -21,10 +21,6 @@ const allCustomFields = {
   pbInternal_cloneId: 'f0fCpmDYaTYpUa',
 };
 
-export const noRenderPromo = () => (
-  <Promo customFields={allCustomFields} />
-);
-
 export const allFields = () => {
   const updatedCustomFields = {
     ...allCustomFields,

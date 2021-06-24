@@ -3,6 +3,10 @@ import Promo from './features/large-promo/default';
 
 export default {
   title: 'Blocks/Large Promo',
+  parameters: {
+    // Set the viewports in Chromatic at a component level.
+    chromatic: { viewports: [320, 1200] },
+  },
 };
 
 const allCustomFields = {

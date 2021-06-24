@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 
 const imageRatioLabels = {
   '16:9': '16:9',

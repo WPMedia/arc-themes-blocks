@@ -1,4 +1,5 @@
 export default (site) => ({
+	resizerURL: 'https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer',
 	websiteDomain: '',
 	websiteName: '',
 	facebookPage: true,

@@ -1,5 +1,6 @@
 import React from 'react';
 import getProperties from 'fusion:properties';
+import { spaEnabledSiteIds } from 'fusion:environment';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
@@ -161,6 +162,7 @@ const SpaOutputType = ({
   return (
     <html lang={locale}>
       <head>
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {gtmID
           ? (<script dangerouslySetInnerHTML={{ __html: gtmScript }} />)
@@ -225,6 +227,6 @@ const SpaOutputType = ({
   );
 };
 
-SpaOutputType.spa = true;
+SpaOutputType.spa = spaEnabledSiteIds;
 
 export default SpaOutputType;

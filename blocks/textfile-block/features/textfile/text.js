@@ -1,11 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
+// capital Text used here because (Jason Young: editor saves that key into their db)
+// This file was changed from a jsx to js file
 const Textfile = ({ customFields }) => {
   const { Text = '' } = customFields || {};
-  return (
-    <>{ Text }</>
-  );
+  return Text;
 };
 
 Textfile.label = 'Text File – Arc Block';

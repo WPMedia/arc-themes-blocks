@@ -25,10 +25,10 @@ export const useContent = ({ query }) => {
 		return mediumPromoMock;
 	}
 
-  if (query.feature === 'large-promo') {
-    return largePromoMock;
-  }
-  
+	if (query.feature === 'large-promo') {
+		return largePromoMock;
+	}
+
 	if (query.feature === 'extra-large-promo') {
 		return extraLargePromo;
 	}

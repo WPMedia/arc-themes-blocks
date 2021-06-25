@@ -188,100 +188,98 @@ class CardList extends React.Component {
         ? (
           <HeadingSection>
             <div className="card-list-container">
-              <div className="simple-results-list-container">
-                {title
-                  ? (
-                    <Heading className="card-list-title">
-                      {title}
-                    </Heading>
-                  ) : null}
-                <Wrapper>
-                  <article
-                    className="list-item-simple"
-                    key={`card-list-${contentElements[0].websites[arcSite].website_url}`}
+              {title
+                ? (
+                  <Heading className="card-list-title">
+                    {title}
+                  </Heading>
+                ) : null}
+              <Wrapper>
+                <article
+                  className="list-item-simple"
+                  key={`card-list-${contentElements[0].websites[arcSite].website_url}`}
+                >
+                  <a
+                    href={contentElements[0].websites[arcSite].website_url}
+                    className="list-anchor card-list--link-container vertical-align-image"
+                    aria-hidden="true"
+                    tabIndex="-1"
                   >
+                    {extractImageFromStory(contentElements[0]) ? (
+                      <Image
+                        {...this.largeImageOptions}
+                        url={extractImageFromStory(contentElements[0])}
+                        alt={contentElements[0].headlines.basic}
+                        resizedImageOptions={extractResizedParams(contentElements[0])}
+                      />
+                    ) : (
+                      <Image
+                        {...this.largeImageOptions}
+                        url={targetFallbackImage}
+                        alt={this.siteProperties.primaryLogoAlt || ''}
+                        resizedImageOptions={placeholderResizedImageOptions}
+                      />
+                    )}
+                  </a>
+                  <Overline story={contentElements[0]} className="card-list-overline" />
+                  <Heading className="card-list-headline">
                     <a
                       href={contentElements[0].websites[arcSite].website_url}
-                      className="list-anchor card-list--link-container vertical-align-image"
-                      aria-hidden="true"
-                      tabIndex="-1"
+                      className="list-anchor vertical-align-image"
+                      id="card-list--headline-link"
                     >
-                      {extractImageFromStory(contentElements[0]) ? (
-                        <Image
-                          {...this.largeImageOptions}
-                          url={extractImageFromStory(contentElements[0])}
-                          alt={contentElements[0].headlines.basic}
-                          resizedImageOptions={extractResizedParams(contentElements[0])}
-                        />
-                      ) : (
-                        <Image
-                          {...this.largeImageOptions}
-                          url={targetFallbackImage}
-                          alt={this.siteProperties.primaryLogoAlt || ''}
-                          resizedImageOptions={placeholderResizedImageOptions}
-                        />
-                      )}
+                      {contentElements[0].headlines.basic}
                     </a>
-                    <Overline story={contentElements[0]} className="card-list-overline" />
-                    <Heading className="card-list-headline">
-                      <a
-                        href={contentElements[0].websites[arcSite].website_url}
-                        className="list-anchor vertical-align-image"
-                        id="card-list--headline-link"
+                  </Heading>
+                  <div className="author-date">
+                    <Byline content={contentElements[0]} list separator={showSeparator} font="Primary" />
+                    <ArticleDate
+                      classNames="story-date"
+                      date={contentElements[0].display_date}
+                    />
+                  </div>
+                </article>
+                {contentElements.slice(1).map((element) => {
+                  const {
+                    headlines: { basic: headlineText } = {},
+                  } = element;
+                  const imageURL = extractImageFromStory(element);
+                  const url = element.websites[arcSite].website_url;
+                  return (
+                    <React.Fragment key={`card-list-${url}`}>
+                      <hr />
+                      <article
+                        className="card-list-item card-list-item-margins"
+                        key={`card-list-${url}`}
+                        type="1"
                       >
-                        {contentElements[0].headlines.basic}
-                      </a>
-                    </Heading>
-                    <div className="author-date">
-                      <Byline content={contentElements[0]} list separator={showSeparator} font="Primary" />
-                      <ArticleDate
-                        classNames="story-date"
-                        date={contentElements[0].display_date}
-                      />
-                    </div>
-                  </article>
-                  {contentElements.slice(1).map((element) => {
-                    const {
-                      headlines: { basic: headlineText } = {},
-                    } = element;
-                    const imageURL = extractImageFromStory(element);
-                    const url = element.websites[arcSite].website_url;
-                    return (
-                      <React.Fragment key={`card-list-${url}`}>
-                        <hr />
-                        <article
-                          className="card-list-item card-list-item-margins"
-                          key={`card-list-${url}`}
-                          type="1"
+                        <a
+                          href={url}
+                          className="headline-list-anchor vertical-align-image"
                         >
-                          <a
-                            href={url}
-                            className="headline-list-anchor vertical-align-image"
-                          >
-                            <Heading className="headline-text">
-                              {headlineText}
-                            </Heading>
-                          </a>
-                          <a
-                            href={url}
-                            className="list-anchor-image vertical-align-image"
-                            aria-hidden="true"
-                            tabIndex="-1"
-                          >
-                            <Image
-                              {...this.samllImageOptions}
-                              url={imageURL || targetFallbackImage}
-                              alt={imageURL ? headlineText : this.siteProperties.primaryLogoAlt || ''}
-                              resizedImageOptions={imageURL
-                                ? extractResizedParams(element) : placeholderResizedImageOptions}
-                            />
-                          </a>
-                        </article>
-                      </React.Fragment>
-                    );
-                  })}
-                </Wrapper>
-              </div>
+                          <Heading className="headline-text">
+                            {headlineText}
+                          </Heading>
+                        </a>
+                        <a
+                          href={url}
+                          className="list-anchor-image vertical-align-image"
+                          aria-hidden="true"
+                          tabIndex="-1"
+                        >
+                          <Image
+                            {...this.samllImageOptions}
+                            url={imageURL || targetFallbackImage}
+                            alt={imageURL ? headlineText : this.siteProperties.primaryLogoAlt || ''}
+                            resizedImageOptions={imageURL
+                              ? extractResizedParams(element) : placeholderResizedImageOptions}
+                          />
+                        </a>
+                      </article>
+                    </React.Fragment>
+                  );
+                })}
+              </Wrapper>
             </div>
           </HeadingSection>
         ) : null

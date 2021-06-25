@@ -212,10 +212,6 @@ describe('Card list', () => {
           wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
         ).toEqual('/this/is/the/correct/url');
       });
-
-      it('should add the line divider when have multiple items', () => {
-        expect(wrapper.find('hr').length).toEqual(27);
-      });
     });
   });
 

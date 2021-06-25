@@ -247,7 +247,6 @@ class CardList extends React.Component {
                   const url = element.websites[arcSite].website_url;
                   return (
                     <React.Fragment key={`card-list-${url}`}>
-                      <hr />
                       <article
                         className="card-list-item card-list-item-margins"
                         key={`card-list-${url}`}

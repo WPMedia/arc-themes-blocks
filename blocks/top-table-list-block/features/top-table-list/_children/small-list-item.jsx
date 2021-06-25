@@ -50,7 +50,7 @@ const SmallListItem = (props) => {
       key={id}
       className={`top-table-list-small-promo small-promo ${colClasses} ${layout}`}
     >
-      <div className={`promo-container row ${layout} sm-promo-padding-btm`}>
+      <div className={`promo-container row ${layout} ${imagePosition === BELOW ? 'image-below' : ''} sm-promo-padding-btm`}>
         {imagePosition === ABOVE || imagePosition === LEFT ? (
           <>
             {Image}

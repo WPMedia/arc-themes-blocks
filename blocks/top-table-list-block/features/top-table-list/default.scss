@@ -49,17 +49,6 @@
     display: flex;
     column-gap: calculateRem(24px);
 
-    &.vertical {
-      flex-direction: column;
-      row-gap: calculateRem(24px);
-      margin-bottom: calculateRem(16px);
-
-      .promo-image {
-        display: block;
-        width: 100%;
-      }
-    }
-
     &.horizontal {
       .promo-headline {
         flex: 2;
@@ -67,6 +56,22 @@
 
       .promo-image {
         flex: 1;
+      }
+    }
+
+    &.vertical {
+      flex-direction: column;
+      flex-grow: 1;
+      row-gap: calculateRem(24px);
+      margin-bottom: calculateRem(16px);
+
+      .promo-image {
+        display: block;
+        width: 100%;
+      }
+
+      &.image-below .promo-image {
+        margin-top: auto;
       }
     }
 

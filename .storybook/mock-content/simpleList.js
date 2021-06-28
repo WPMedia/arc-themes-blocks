@@ -43,7 +43,7 @@ export const simpleListMock = {
 		{
 			_id: '3',
 			headlines: {
-				basic: 'Castle church tower'
+				basic: '7 questions about traveling to Australia during catastrophic fires, answered'
 			},
 			promo_items: {
 				basic: {

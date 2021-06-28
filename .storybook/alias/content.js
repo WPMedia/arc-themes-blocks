@@ -12,6 +12,7 @@ const featureMocks = {
 	'large-promo': largePromoMock,
 	'extra-large-promo': extraLargePromo,
 	'simple-list': simpleListMock,
+	'numbered-list': simpleListMock,
 }
 
 export const useEditableContent = () => {

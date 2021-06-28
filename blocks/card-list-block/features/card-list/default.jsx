@@ -34,7 +34,7 @@ class CardList extends React.Component {
       resizerURL: this.siteProperties?.resizerURL,
     };
 
-    this.samllImageOptions = {
+    this.smallImageOptions = {
       smallWidth: 105,
       smallHeight: 70,
       mediumWidth: 105,
@@ -267,7 +267,7 @@ class CardList extends React.Component {
                           tabIndex="-1"
                         >
                           <Image
-                            {...this.samllImageOptions}
+                            {...this.smallImageOptions}
                             url={imageURL || targetFallbackImage}
                             alt={imageURL ? headlineText : this.siteProperties.primaryLogoAlt || ''}
                             resizedImageOptions={imageURL

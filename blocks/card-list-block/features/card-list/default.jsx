@@ -122,7 +122,6 @@ class CardList extends React.Component {
                 url
                 resized_params {
                   377x283
-                  274x183
                   105x70
                 }
               }
@@ -133,7 +132,6 @@ class CardList extends React.Component {
                     url
                     resized_params {
                       377x283
-                      274x183
                       105x70
                     }
                   }

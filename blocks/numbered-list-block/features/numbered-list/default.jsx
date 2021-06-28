@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
-import PropTypes from 'prop-types';
-import Consumer from 'fusion:consumer';
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from '@arc-fusion/prop-types';
+import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
 import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
@@ -11,72 +12,52 @@ import {
   Heading, HeadingSection, SecondaryFont,
 } from '@wpmedia/shared-styles';
 
-@Consumer
-class NumberedList extends Component {
-  constructor(props) {
-    super(props);
-    const { lazyLoad = false } = props.customFields || {};
-    const {
-      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
-    } = getProperties(props.arcSite) || {};
+const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
+  let targetFallbackImage = fallbackImage;
 
-    this.arcSite = props.arcSite;
-    this.lazyLoad = lazyLoad;
-    this.isAdmin = props.isAdmin;
-    this.websiteDomain = websiteDomain;
-    this.fallbackImage = fallbackImage;
-    this.imageProps = {
-      smallWidth: 105,
-      smallHeight: 70,
-      mediumWidth: 105,
-      mediumHeight: 70,
-      largeWidth: 274,
-      largeHeight: 183,
-      primaryLogoAlt,
-      breakpoints,
-      resizerURL,
-    };
-
-    this.state = {
-      placeholderResizedImageOptions: {},
-    };
-
-    this.fetchPlaceholder();
-
-    // Fetch stories if lazyLoad is not enabled, the code is running on the server
-    if (!this.lazyLoad && isServerSide()) {
-      this.fetchStories();
-    }
+  if (!targetFallbackImage.includes('http')) {
+    targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
   }
 
-  componentDidMount() {
-    this.fetchStories();
-  }
+  return targetFallbackImage;
+};
 
-  getFallbackImageURL() {
-    const { deployment, contextPath } = this.props;
-    let targetFallbackImage = this.fallbackImage;
+const NumberedList = (props) => {
+  const {
+    arcSite,
+    customFields: {
+      listContentConfig: {
+        contentService = '',
+        contentConfigValues = {},
+      } = {},
+      title = '',
+      showHeadline = true,
+      showImage = true,
+    } = {},
+    placeholderResizedImageOptions,
+    targetFallbackImage,
+    imageProps,
+  } = props;
 
-    if (!targetFallbackImage.includes('http')) {
-      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
-    }
-
-    return targetFallbackImage;
-  }
-
-  fetchStories() {
-    const { customFields: { listContentConfig } } = this.props;
-    const { contentService, contentConfigValues } = listContentConfig;
-    this.fetchContent({
-      resultList: {
-        source: contentService,
-        query: { ...contentConfigValues, feature: 'numbered-list' },
-        filter: `{
-          content_elements {
-            _id,
-            headlines {
-              basic
+  const { content_elements: contentElements = [] } = useContent({
+    source: contentService,
+    query: { ...contentConfigValues, feature: 'numbered-list' },
+    filter: `{
+      content_elements {
+        _id,
+        headlines {
+          basic
+        }
+        promo_items {
+          basic {
+            type
+            url
+            resized_params {
+              274x183
+              105x70
             }
+          }
+          lead_art {
             promo_items {
               basic {
                 type
@@ -86,130 +67,123 @@ class NumberedList extends Component {
                   105x70
                 }
               }
-              lead_art {
-                promo_items {
-                  basic {
-                    type
-                    url
-                    resized_params {
-                      274x183
-                      105x70
-                    }
-                  }
-                }
-                type
-              }
             }
-            websites {
-              ${this.arcSite} {
-                website_url
-              }
-            }
+            type
           }
-        }`,
-      },
-    });
+        }
+        websites {
+          ${arcSite} {
+            website_url
+          }
+        }
+      }
+    }`,
+  }) || {};
+
+  const Wrapper = title ? HeadingSection : React.Fragment;
+
+  return (
+    <HeadingSection>
+      <div className="numbered-list-container layout-section">
+        {(title !== '' && contentElements.length) ? (
+          <Heading className="list-title">
+            {title}
+          </Heading>
+        ) : null }
+        <Wrapper>
+          {(contentElements.length) ? contentElements.map((element, i) => {
+            const {
+              headlines: { basic: headlineText } = {},
+              websites,
+            } = element;
+            const imageURL = extractImageFromStory(element);
+
+            if (!websites[arcSite]) {
+              return null;
+            }
+            const url = websites[arcSite].website_url;
+
+            return (
+              <React.Fragment key={`numbered-list-${element._id}`}>
+                <div className="numbered-list-item numbered-item-margins">
+                  {showHeadline ? (
+                    <a href={url} className="headline-list-anchor">
+                      <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
+                      <Heading className="headline-text">{headlineText}</Heading>
+                    </a>
+                  ) : null}
+                  {showImage ? (
+                    <a
+                      href={url}
+                      className="list-anchor-image vertical-align-image"
+                      aria-hidden="true"
+                      tabIndex="-1"
+                    >
+                      <Image
+                        {...imageProps}
+                        url={imageURL || targetFallbackImage}
+                        resizedImageOptions={imageURL
+                          ? extractResizedParams(element) : placeholderResizedImageOptions}
+                      />
+                    </a>
+                  ) : null}
+                </div>
+                <hr />
+              </React.Fragment>
+            );
+          }) : null}
+        </Wrapper>
+      </div>
+    </HeadingSection>
+  );
+};
+
+const NumberedListWrapper = ({ customFields }) => {
+  const {
+    id, arcSite, contextPath, deployment, isAdmin,
+  } = useFusionContext();
+  const {
+    websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+  } = getProperties(arcSite);
+
+  const targetFallbackImage = getFallbackImageURL({ deployment, contextPath, fallbackImage });
+  const imageProps = {
+    smallWidth: 105,
+    smallHeight: 70,
+    mediumWidth: 105,
+    mediumHeight: 70,
+    largeWidth: 274,
+    largeHeight: 183,
+    primaryLogoAlt,
+    breakpoints,
+    resizerURL,
+  };
+
+  const placeholderResizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+  });
+
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
   }
 
-  fetchPlaceholder() {
-    const targetFallbackImage = this.getFallbackImageURL();
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <NumberedList
+        id={id}
+        customFields={customFields}
+        placeholderResizedImageOptions={placeholderResizedImageOptions}
+        targetFallbackImage={targetFallbackImage}
+        websiteDomain={websiteDomain}
+        imageProps={imageProps}
+        arcSite={arcSite}
+      />
+    </LazyLoad>
+  );
+};
 
-    if (!targetFallbackImage.includes('/resources/')) {
-      this.fetchContent({
-        placeholderResizedImageOptions: {
-          source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-        },
-      });
-    }
-  }
-
-  render() {
-    if (this.lazyLoad && isServerSide() && !this.isAdmin) {
-      return null;
-    }
-
-    const {
-      customFields: {
-        showHeadline = true,
-        showImage = true,
-        title = '',
-      },
-      arcSite,
-    } = this.props;
-    const {
-      resultList: { content_elements: contentElements = [] } = {},
-      placeholderResizedImageOptions,
-    } = this.state;
-
-    const targetFallbackImage = this.getFallbackImageURL();
-
-    const Wrapper = title ? HeadingSection : React.Fragment;
-
-    const ListResults = () => (
-      <HeadingSection>
-        <div className="numbered-list-container layout-section">
-          {(title !== '' && contentElements.length) ? (
-            <Heading className="list-title">
-              {title}
-            </Heading>
-          ) : null }
-          <Wrapper>
-            {(contentElements.length) ? contentElements.map((element, i) => {
-              const {
-                headlines: { basic: headlineText } = {},
-                websites,
-              } = element;
-              const imageURL = extractImageFromStory(element);
-
-              if (!websites[arcSite]) {
-                return null;
-              }
-              const url = websites[arcSite].website_url;
-
-              return (
-                <React.Fragment key={`numbered-list-${url}`}>
-                  <div className="numbered-list-item numbered-item-margins">
-                    {showHeadline ? (
-                      <a href={url} className="headline-list-anchor">
-                        <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
-                        <Heading className="headline-text">{headlineText}</Heading>
-                      </a>
-                    ) : null}
-                    {showImage ? (
-                      <a
-                        href={url}
-                        className="list-anchor-image vertical-align-image"
-                        aria-hidden="true"
-                        tabIndex="-1"
-                      >
-                        <Image
-                          {...this.imageProps}
-                          url={imageURL || targetFallbackImage}
-                          resizedImageOptions={imageURL
-                            ? extractResizedParams(element) : placeholderResizedImageOptions}
-                        />
-                      </a>
-                    ) : null}
-                  </div>
-                  <hr />
-                </React.Fragment>
-              );
-            }) : null}
-          </Wrapper>
-        </div>
-      </HeadingSection>
-    );
-
-    return (
-      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <ListResults />
-      </LazyLoad>
-    );
-  }
-}
-
-NumberedList.propTypes = {
+NumberedListWrapper.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed').tag(
       {
@@ -236,6 +210,6 @@ NumberedList.propTypes = {
   }),
 };
 
-NumberedList.label = 'Numbered List – Arc Block';
+NumberedListWrapper.label = 'Numbered List – Arc Block';
 
-export default NumberedList;
+export default NumberedListWrapper;

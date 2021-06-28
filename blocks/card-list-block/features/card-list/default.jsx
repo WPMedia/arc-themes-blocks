@@ -39,8 +39,8 @@ class CardList extends React.Component {
       smallHeight: 70,
       mediumWidth: 105,
       mediumHeight: 70,
-      largeWidth: 274,
-      largeHeight: 183,
+      largeWidth: 105,
+      largeHeight: 70,
       breakpoints: this.siteProperties?.breakpoints,
       resizerURL: this.siteProperties?.resizerURL,
     };

@@ -19,38 +19,50 @@ const SmallListItem = (props) => {
   } = props;
 
   const storiesPerRow = (typeof storiesPerRowSM === 'undefined') ? 2 : storiesPerRowSM;
-  const showImage = showImageSM;
   const layout = imagePosition === ABOVE || imagePosition === BELOW ? 'vertical' : 'horizontal';
-  const isReverseLayout = (imagePosition === ABOVE || imagePosition === LEFT);
   const showBottomBorder = (typeof showBottomBorderSM === 'undefined') ? true : showBottomBorderSM;
 
   const colClassNum = (!!storiesPerRow && Math.floor(12 / storiesPerRow)) || 1;
   const colClasses = `col-sm-12 col-md-${colClassNum} col-lg-${colClassNum} col-xl-${colClassNum}`;
 
+  const Headline = showHeadlineSM ? (
+    <PromoHeadline
+      content={element}
+      className="headline-wrap"
+      linkClassName="sm-promo-headline"
+      headingClassName="sm-promo-headline"
+      editable={false}
+    />
+  ) : null;
+
+  const Image = showImageSM ? (
+    <PromoImage
+      content={element}
+      showPromoLabel
+      promoSize="SM"
+      imageRatio={imageRatioSM}
+      editable={false}
+    />
+  ) : null;
+
   return (
     <article
       key={id}
-      className={`top-table-list-small-promo small-promo ${colClasses}`}
+      className={`top-table-list-small-promo small-promo ${colClasses} ${layout}`}
     >
-      <div className={`promo-container row ${layout} ${isReverseLayout ? 'reverse' : ''} sm-promo-padding-btm`}>
-        {showHeadlineSM ? (
-          <PromoHeadline
-            content={element}
-            className="headline-wrap"
-            linkClassName="sm-promo-headline"
-            headingClassName="sm-promo-headline"
-            editable={false}
-          />
-        ) : null}
-        { showImage ? (
-          <PromoImage
-            content={element}
-            showPromoLabel
-            promoSize="SM"
-            imageRatio={imageRatioSM}
-            editable={false}
-          />
-        ) : null }
+      <div className={`promo-container row ${layout} ${imagePosition === BELOW ? 'image-below' : ''} sm-promo-padding-btm`}>
+        {imagePosition === ABOVE || imagePosition === LEFT ? (
+          <>
+            {Image}
+            {Headline}
+          </>
+        )
+          : (
+            <>
+              {Headline}
+              {Image}
+            </>
+          )}
       </div>
       <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
     </article>

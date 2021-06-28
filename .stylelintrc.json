@@ -24,6 +24,18 @@
           "none"
         ]
       }
+    ],
+    "value-no-vendor-prefix": [
+      true,
+      {
+        "ignore": ["-webkit-box"]
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["box-orient"]
+      }
     ]
   }
 }

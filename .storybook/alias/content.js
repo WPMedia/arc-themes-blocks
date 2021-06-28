@@ -3,6 +3,16 @@ import { smallPromoMock } from '../mock-content/smallPromo';
 import { mediumPromoMock } from '../mock-content/mediumPromo';
 import { extraLargePromo } from '../mock-content/extraLargePromo';
 import { largePromoMock } from '../mock-content/largePromo';
+import { simpleListMock } from '../mock-content/simpleList';
+
+const featureMocks = {
+	footer: footerContentMock,
+	'small-promo': smallPromoMock,
+	'medium-promo': mediumPromoMock,
+	'large-promo': largePromoMock,
+	'extra-large-promo': extraLargePromo,
+	'simple-list': simpleListMock,
+}
 
 export const useEditableContent = () => {
 	return {
@@ -15,22 +25,9 @@ export const useContent = ({ query }) => {
 	if (!query) {
 		return {};
 	}
-	if ( query.feature === 'footer' ) {
-		return footerContentMock;
-	}
-	if ( query.feature === 'small-promo' ) {
-		return smallPromoMock;
-	}
-	if ( query.feature === 'medium-promo' ) {
-		return mediumPromoMock;
-	}
 
-	if (query.feature === 'large-promo') {
-		return largePromoMock;
-	}
-
-	if (query.feature === 'extra-large-promo') {
-		return extraLargePromo;
+	if (featureMocks[query.feature]) {
+		return featureMocks[query.feature];
 	}
 
 	if (query.raw_image_url === 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG' ) {

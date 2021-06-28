@@ -87,6 +87,7 @@ jest.mock('fusion:context', () => ({
     customFields: {
       elementPlacement: { 1: 2, 2: 1 },
     },
+    deployment: jest.fn(() => {}),
   })),
 }));
 
@@ -113,29 +114,23 @@ describe('Simple list', () => {
 
     const customFields = {
       title: testText,
+      lazyLoad: false,
     };
 
-    const wrapper = mount(<SimpleList
-      customFields={customFields}
-      deployment={jest.fn((path) => path)}
-    />);
+    const wrapper = mount(<SimpleList customFields={customFields} />);
 
     expect(wrapper.find('.list-title').first().text()).toBe(testText);
   });
 
   it('should show no title if there is no title provided', () => {
-    SimpleList.prototype.fetchContent = jest.fn().mockReturnValue({});
-
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => mockOutput),
-    }));
-    const wrapper = mount(<SimpleList deployment={jest.fn((path) => path)} />);
+    const wrapper = mount(<SimpleList customFields={{ lazyLoad: false }} />);
 
     expect(wrapper.find('.list-title').length).toBe(0);
   });
 
   it('should fetch an array of data when content service is provided', () => {
     const customFields = {
+      lazyLoad: false,
       listContentConfig: {
         contentService: 'something',
         contentConfigValues: {
@@ -144,19 +139,14 @@ describe('Simple list', () => {
       },
     };
 
-    const wrapper = mount(<SimpleList
-      customFields={customFields}
-      arcSite="the-sun"
-      deployment={jest.fn((path) => path)}
-    />);
+    const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);
 
     expect(wrapper.find('StoryItem').length).toBe(2);
   });
 
   it('should not render items when no data provided', () => {
-    useContent.mockReturnValueOnce(null);
-
     const customFields = {
+      lazyLoad: false,
       listContentConfig: {
         contentService: 'something',
         contentConfigValues: {
@@ -164,12 +154,11 @@ describe('Simple list', () => {
         },
       },
     };
+    // Once for Placeholder, once for SimpleList data
+    useContent.mockReturnValueOnce(null);
+    useContent.mockReturnValueOnce(null);
 
-    const wrapper = mount(<SimpleList
-      customFields={customFields}
-      arcSite="the-sun"
-      deployment={jest.fn((path) => path)}
-    />);
+    const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);
 
     expect(wrapper.find('StoryItem').length).toBe(0);
   });
@@ -177,10 +166,7 @@ describe('Simple list', () => {
 
 describe('Simple list', () => {
   it('should render content only for the arcSite', () => {
-    const wrapper = mount(<SimpleList
-      arcSite="the-sun"
-      deployment={jest.fn((path) => path)}
-    />);
+    const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
 
     expect(wrapper.find('StoryItem')).toHaveLength(2);
   });

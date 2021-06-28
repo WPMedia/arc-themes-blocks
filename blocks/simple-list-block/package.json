@@ -22,6 +22,7 @@
     "directory": "blocks/simple-list-block"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*"

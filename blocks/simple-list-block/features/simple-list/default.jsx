@@ -38,10 +38,9 @@ const SimpleListWrapper = ({ customFields }) => {
     id, arcSite, contextPath, deployment, isAdmin,
   } = useFusionContext();
   const {
-    websiteDomain, primaryLogoAlt, breakpoints, resizerURL,
+    websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
   } = getProperties(arcSite);
 
-  const fallbackImage = 'resources/images/default_feed_image.jpg';
   const targetFallbackImage = getFallbackImageURL({ deployment, contextPath, fallbackImage });
   const imageProps = {
     smallWidth: 274,

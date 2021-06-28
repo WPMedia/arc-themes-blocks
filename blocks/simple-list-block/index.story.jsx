@@ -37,6 +37,19 @@ export const allFields = () => {
   );
 };
 
+export const noBlockTitle = () => {
+  const customFields = {
+    ...sampleData,
+    title: '',
+    showHeadline: true,
+    showImage: true,
+  };
+
+  return (
+    <SimpleList {...props} customFields={customFields} />
+  );
+};
+
 export const headlineOnly = () => {
   const customFields = {
     ...sampleData,
@@ -52,6 +65,16 @@ export const imageOnly = () => {
   const customFields = {
     ...sampleData,
     showImage: true,
+  };
+
+  return (
+    <SimpleList {...props} customFields={customFields} />
+  );
+};
+
+export const noImageNoHeadline = () => {
+  const customFields = {
+    ...sampleData,
   };
 
   return (

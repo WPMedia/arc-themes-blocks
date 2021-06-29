@@ -4,7 +4,7 @@ import { useEditableContent, useContent } from 'fusion:content';
 
 import { useFusionContext } from 'fusion:context';
 import {
-  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, HeadingSection, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 import {
   extractVideoEmbedFromStory,
@@ -125,7 +125,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
   const videoEmbed = (customFields?.playVideoInPlace && extractVideoEmbedFromStory(content));
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid xl-large-promo">
         <div className="row">
           {(customFields.showOverline
@@ -195,7 +195,7 @@ const ExtraLargePromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

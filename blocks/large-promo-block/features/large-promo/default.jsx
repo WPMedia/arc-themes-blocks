@@ -13,7 +13,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Byline, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
+  Byline, HeadingSection, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
@@ -120,7 +120,7 @@ const LargePromoItem = ({ customFields }) => {
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid large-promo">
         <div className="row">
           {(!!videoEmbed
@@ -185,7 +185,7 @@ const LargePromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

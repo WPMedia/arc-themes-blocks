@@ -14,30 +14,32 @@ exports[`SmallPromoContainer default to headline first dom structure by default 
     />
   }
 >
-  <article
-    className="container-fluid small-promo"
-  >
-    <div
-      className="row"
+  <HeadingSection>
+    <article
+      className="container-fluid small-promo"
     >
       <div
-        className="col-sm-xl-8"
+        className="row"
       >
-        <h1>
-          mockHeadline
-        </h1>
+        <div
+          className="col-sm-xl-8"
+        >
+          <h1>
+            mockHeadline
+          </h1>
+        </div>
+        <div
+          className="col-sm-xl-4"
+        >
+          <img
+            alt="mock image"
+            href="mocklink.jpg"
+          />
+        </div>
       </div>
-      <div
-        className="col-sm-xl-4"
-      >
-        <img
-          alt="mock image"
-          href="mocklink.jpg"
-        />
-      </div>
-    </div>
-  </article>
-  <hr />
+    </article>
+    <hr />
+  </HeadingSection>
 </SmallPromoContainer>
 `;
 
@@ -56,26 +58,28 @@ exports[`SmallPromoContainer render headline first if image position is below 1`
   }
   imagePosition="below"
 >
-  <article
-    className="container-fluid small-promo"
-  >
-    <div
-      className="col-sm-xl-8"
+  <HeadingSection>
+    <article
+      className="container-fluid small-promo"
     >
-      <h1>
-        mockHeadline
-      </h1>
-    </div>
-    <div
-      className="col-sm-xl-4"
-    >
-      <img
-        alt="mock image"
-        href="mocklink.jpg"
-      />
-    </div>
-  </article>
-  <hr />
+      <div
+        className="col-sm-xl-8"
+      >
+        <h1>
+          mockHeadline
+        </h1>
+      </div>
+      <div
+        className="col-sm-xl-4"
+      >
+        <img
+          alt="mock image"
+          href="mocklink.jpg"
+        />
+      </div>
+    </article>
+    <hr />
+  </HeadingSection>
 </SmallPromoContainer>
 `;
 
@@ -94,26 +98,28 @@ exports[`SmallPromoContainer render image first if image position is above 1`] =
   }
   imagePosition="above"
 >
-  <article
-    className="container-fluid small-promo"
-  >
-    <div
-      className="col-sm-xl-4"
+  <HeadingSection>
+    <article
+      className="container-fluid small-promo"
     >
-      <img
-        alt="mock image"
-        href="mocklink.jpg"
-      />
-    </div>
-    <div
-      className="col-sm-xl-8"
-    >
-      <h1>
-        mockHeadline
-      </h1>
-    </div>
-  </article>
-  <hr />
+      <div
+        className="col-sm-xl-4"
+      >
+        <img
+          alt="mock image"
+          href="mocklink.jpg"
+        />
+      </div>
+      <div
+        className="col-sm-xl-8"
+      >
+        <h1>
+          mockHeadline
+        </h1>
+      </div>
+    </article>
+    <hr />
+  </HeadingSection>
 </SmallPromoContainer>
 `;
 
@@ -132,30 +138,32 @@ exports[`SmallPromoContainer render image first if image position is on left 1`]
   }
   imagePosition="left"
 >
-  <article
-    className="container-fluid small-promo"
-  >
-    <div
-      className="row"
+  <HeadingSection>
+    <article
+      className="container-fluid small-promo"
     >
       <div
-        className="col-sm-xl-4"
+        className="row"
       >
-        <img
-          alt="mock image"
-          href="mocklink.jpg"
-        />
+        <div
+          className="col-sm-xl-4"
+        >
+          <img
+            alt="mock image"
+            href="mocklink.jpg"
+          />
+        </div>
+        <div
+          className="col-sm-xl-8"
+        >
+          <h1>
+            mockHeadline
+          </h1>
+        </div>
       </div>
-      <div
-        className="col-sm-xl-8"
-      >
-        <h1>
-          mockHeadline
-        </h1>
-      </div>
-    </div>
-  </article>
-  <hr />
+    </article>
+    <hr />
+  </HeadingSection>
 </SmallPromoContainer>
 `;
 
@@ -168,20 +176,22 @@ exports[`SmallPromoContainer renders with no image 1`] = `
   }
   imagePosition="above"
 >
-  <article
-    className="container-fluid small-promo"
-  >
-    <div
-      className="col-sm-xl-4"
-    />
-    <div
-      className="col-sm-xl-12"
+  <HeadingSection>
+    <article
+      className="container-fluid small-promo"
     >
-      <h1>
-        mockHeadline
-      </h1>
-    </div>
-  </article>
-  <hr />
+      <div
+        className="col-sm-xl-4"
+      />
+      <div
+        className="col-sm-xl-12"
+      >
+        <h1>
+          mockHeadline
+        </h1>
+      </div>
+    </article>
+    <hr />
+  </HeadingSection>
 </SmallPromoContainer>
 `;

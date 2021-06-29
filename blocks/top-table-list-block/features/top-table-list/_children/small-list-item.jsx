@@ -1,5 +1,5 @@
 import React from 'react';
-import { PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import { HeadingSection, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
 import {
   LEFT, RIGHT, ABOVE, BELOW,
 } from '../shared/imagePositionConstants';
@@ -46,26 +46,28 @@ const SmallListItem = (props) => {
   ) : null;
 
   return (
-    <article
-      key={id}
-      className={`top-table-list-small-promo small-promo ${colClasses} ${layout}`}
-    >
-      <div className={`promo-container row ${layout} ${imagePosition === BELOW ? 'image-below' : ''} sm-promo-padding-btm`}>
-        {imagePosition === ABOVE || imagePosition === LEFT ? (
-          <>
-            {Image}
-            {Headline}
-          </>
-        )
-          : (
+    <HeadingSection>
+      <article
+        key={id}
+        className={`top-table-list-small-promo small-promo ${colClasses} ${layout}`}
+      >
+        <div className={`promo-container row ${layout} ${imagePosition === BELOW ? 'image-below' : ''} sm-promo-padding-btm`}>
+          {imagePosition === ABOVE || imagePosition === LEFT ? (
             <>
-              {Headline}
               {Image}
+              {Headline}
             </>
-          )}
-      </div>
-      <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
-    </article>
+          )
+            : (
+              <>
+                {Headline}
+                {Image}
+              </>
+            )}
+        </div>
+        <hr className={!showBottomBorder ? 'hr-borderless' : ''} />
+      </article>
+    </HeadingSection>
   );
 };
 export default SmallListItem;

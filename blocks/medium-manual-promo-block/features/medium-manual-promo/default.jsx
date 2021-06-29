@@ -4,7 +4,9 @@ import { useFusionContext } from 'fusion:context';
 import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import { PromoDescription, PromoHeadline, PromoImage } from '@wpmedia/shared-styles';
+import {
+  HeadingSection, PromoDescription, PromoHeadline, PromoImage,
+} from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
@@ -15,7 +17,7 @@ const MediumManualPromoItem = ({ customFields }) => {
   const hasImage = customFields?.showImage && customFields?.imageURL;
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid medium-promo" style={{ position: isAdmin ? 'relative' : null }}>
         <div
           className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
@@ -51,7 +53,7 @@ const MediumManualPromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

@@ -5,7 +5,7 @@ import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  Overline, PromoDescription, PromoHeadline, PromoImage,
+  HeadingSection, Overline, PromoDescription, PromoHeadline, PromoImage,
 } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
@@ -16,7 +16,7 @@ const LargeManualPromoItem = ({ customFields }) => {
   const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
 
   return (
-    <>
+    <HeadingSection>
       <article className="container-fluid large-promo">
         <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
           {(customFields?.showImage)
@@ -72,7 +72,7 @@ const LargeManualPromoItem = ({ customFields }) => {
         </div>
       </article>
       <hr />
-    </>
+    </HeadingSection>
   );
 };
 

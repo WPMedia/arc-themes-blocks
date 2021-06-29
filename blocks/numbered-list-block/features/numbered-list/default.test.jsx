@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { useFusionContext } from 'fusion:context';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',

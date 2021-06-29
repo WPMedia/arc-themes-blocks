@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from '@arc-fusion/prop-types';
 import { useContent } from 'fusion:content';
+import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import { Heading, HeadingSection } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
-import Consumer from 'fusion:consumer';
 import StoryItem from './_children/story-item';
 import './simple-list.scss';
 
@@ -23,86 +23,60 @@ const unserializeStory = (arcSite) => (acc, storyObject) => {
   return acc;
 };
 
-@Consumer
-class SimpleListWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      placeholderResizedImageOptions: {},
-    };
-    const { lazyLoad = false } = props.customFields || {};
-    const {
-      websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
-    } = getProperties(props.arcSite) || {};
+const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
+  let targetFallbackImage = fallbackImage;
 
-    this.lazyLoad = lazyLoad;
-    this.isAdmin = props.isAdmin;
-    this.websiteDomain = websiteDomain;
-    this.fallbackImage = fallbackImage;
-    this.imageProps = {
-      smallWidth: 274,
-      smallHeight: 183,
-      mediumWidth: 274,
-      mediumHeight: 183,
-      largeWidth: 274,
-      largeHeight: 183,
-      primaryLogoAlt,
-      breakpoints,
-      resizerURL,
-    };
-
-    this.fetchPlaceholder();
+  if (!targetFallbackImage.includes('http')) {
+    targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
   }
 
-  getFallbackImageURL() {
-    const { deployment, contextPath } = this.props;
-    let targetFallbackImage = this.fallbackImage;
+  return targetFallbackImage;
+};
 
-    if (!targetFallbackImage.includes('http')) {
-      targetFallbackImage = deployment(`${contextPath}/${targetFallbackImage}`);
-    }
+const SimpleListWrapper = ({ customFields }) => {
+  const {
+    id, arcSite, contextPath, deployment, isAdmin,
+  } = useFusionContext();
+  const {
+    websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL,
+  } = getProperties(arcSite);
 
-    return targetFallbackImage;
+  const targetFallbackImage = getFallbackImageURL({ deployment, contextPath, fallbackImage });
+  const imageProps = {
+    smallWidth: 274,
+    smallHeight: 183,
+    mediumWidth: 274,
+    mediumHeight: 183,
+    largeWidth: 274,
+    largeHeight: 183,
+    primaryLogoAlt,
+    breakpoints,
+    resizerURL,
+  };
+
+  const placeholderResizedImageOptions = useContent({
+    source: 'resize-image-api',
+    query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+  });
+
+  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+    return null;
   }
 
-  fetchPlaceholder() {
-    const targetFallbackImage = this.getFallbackImageURL();
-
-    // using the fetchContent seems both more reliable
-    // and allows for conditional calls whereas useContent hook does not
-    if (!targetFallbackImage.includes('/resources/')) {
-      this.fetchContent({
-        placeholderResizedImageOptions: {
-          source: 'resize-image-api',
-          query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-        },
-      });
-    }
-  }
-
-  render() {
-    if (this.lazyLoad && isServerSide() && !this.isAdmin) { // On Server
-      return null;
-    }
-
-    const { placeholderResizedImageOptions } = this.state;
-    const targetFallbackImage = this.getFallbackImageURL();
-
-    return (
-      <LazyLoad enabled={this.lazyLoad && !this.isAdmin}>
-        <HeadingSection>
-          <SimpleList
-            {...this.props}
-            placeholderResizedImageOptions={placeholderResizedImageOptions}
-            targetFallbackImage={targetFallbackImage}
-            websiteDomain={this.websiteDomain}
-            imageProps={this.imageProps}
-          />
-        </HeadingSection>
-      </LazyLoad>
-    );
-  }
-}
+  return (
+    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+      <SimpleList
+        id={id}
+        customFields={customFields}
+        placeholderResizedImageOptions={placeholderResizedImageOptions}
+        targetFallbackImage={targetFallbackImage}
+        websiteDomain={websiteDomain}
+        imageProps={imageProps}
+        arcSite={arcSite}
+      />
+    </LazyLoad>
+  );
+};
 
 const SimpleList = (props) => {
   const {
@@ -117,7 +91,7 @@ const SimpleList = (props) => {
       showHeadline = true,
       showImage = true,
     } = {},
-    id,
+    id = '',
     placeholderResizedImageOptions,
     targetFallbackImage,
     imageProps,
@@ -167,40 +141,40 @@ const SimpleList = (props) => {
   const Wrapper = title ? HeadingSection : React.Fragment;
 
   return (
-    <>
-      <div key={id} className="list-container layout-section">
-        { title
-          ? (
-            <Heading className="list-title">
-              {title}
-            </Heading>
-          ) : null}
-        <Wrapper>
-          {contentElements.reduce(unserializeStory(arcSite), []).map(({
-            id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
-          }) => (
-            <React.Fragment key={listItemId}>
-              <StoryItem
-                key={listItemId}
-                id={listItemId}
-                itemTitle={itemTitle}
-                imageURL={imageURL}
-                websiteURL={websiteURL}
-                websiteDomain={websiteDomain}
-                showHeadline={showHeadline}
-                showImage={showImage}
-                resizedImageOptions={resizedImageOptions}
-                placeholderResizedImageOptions={placeholderResizedImageOptions}
-                targetFallbackImage={targetFallbackImage}
-                arcSite={arcSite}
-                imageProps={imageProps}
-              />
-              <hr />
-            </React.Fragment>
-          ))}
-        </Wrapper>
-      </div>
-    </>
+    <div key={id} className="list-container layout-section">
+      { title
+        ? (
+          <Heading className="list-title">
+            {title}
+          </Heading>
+        ) : null}
+      <Wrapper>
+        {
+        contentElements.reduce(unserializeStory(arcSite), []).map(({
+          id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
+        }) => (
+          <React.Fragment key={listItemId}>
+            <StoryItem
+              key={listItemId}
+              id={listItemId}
+              itemTitle={itemTitle}
+              imageURL={imageURL}
+              websiteURL={websiteURL}
+              websiteDomain={websiteDomain}
+              showHeadline={showHeadline}
+              showImage={showImage}
+              resizedImageOptions={resizedImageOptions}
+              placeholderResizedImageOptions={placeholderResizedImageOptions}
+              targetFallbackImage={targetFallbackImage}
+              arcSite={arcSite}
+              imageProps={imageProps}
+            />
+            <hr />
+          </React.Fragment>
+        ))
+      }
+      </Wrapper>
+    </div>
   );
 };
 

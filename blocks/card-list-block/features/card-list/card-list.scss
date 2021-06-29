@@ -3,13 +3,6 @@
   @include block-internal-spacing;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.14);
   padding-bottom: 1rem;
-
-  hr {
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
 }
 
 .card-list--link-container img {
@@ -79,7 +72,9 @@
   @include block-internal-spacing;
   display: flex;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 1rem 0 0;
+  margin: 0 16px;
+  border-top: 1px #dadada solid;
 
   .list-item-number {
     color: $ui-primary-font-color;

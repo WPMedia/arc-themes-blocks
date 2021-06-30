@@ -13,6 +13,7 @@ const featureMocks = {
 	'extra-large-promo': extraLargePromo,
 	'simple-list': simpleListMock,
 	'numbered-list': simpleListMock,
+	'card-list': simpleListMock,
 }
 
 export const useEditableContent = () => {
@@ -24,6 +25,10 @@ export const useEditableContent = () => {
 
 export const useContent = ({ query }) => {
 	if (!query) {
+		return {};
+	}
+
+	if (query.noData) {
 		return {};
 	}
 

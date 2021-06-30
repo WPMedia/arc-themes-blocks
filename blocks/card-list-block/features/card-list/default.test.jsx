@@ -3,12 +3,7 @@ import { mount } from 'enzyme';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
-import mockData,
-{
-  oneListItem,
-  withoutByline,
-  oneListItemWithoutSectionName,
-} from './mock-data';
+import mockData, { oneListItem } from './mock-data';
 
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => mockData),
@@ -218,26 +213,6 @@ describe('Card list', () => {
       expect(
         wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
       ).toEqual('/this/is/the/correct/url');
-    });
-  });
-
-  describe('render one list item correctly when list of authors is missing', () => {
-    const listContentConfig = {
-      contentConfigValues: {
-        offset: '0',
-        query: 'type:story',
-        size: '1',
-      },
-      contentService: 'story-feed-query',
-    };
-    const customFields = { listContentConfig };
-    const { default: CardList } = require('./default');
-
-    // CardList.prototype.fetchContent = jest.fn().mockReturnValue(withoutByline);
-    const wrapper = mount(<CardList customFields={customFields} />);
-
-    it('should render one parent wrapper', () => {
-      expect(wrapper.find('div.card-list-container').length).toEqual(1);
     });
   });
 

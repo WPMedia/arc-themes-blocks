@@ -44,7 +44,7 @@ export const noTitle = () => {
   );
 };
 
-export const noData = () => {
+export const titleAndNoContent = () => {
   const customFields = {
     listContentConfig: {
       contentService: 'content-api',

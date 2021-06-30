@@ -23,8 +23,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/byline-block": "*",
-    "@wpmedia/date-block": "*",
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*"

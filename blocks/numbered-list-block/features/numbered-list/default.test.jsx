@@ -126,7 +126,7 @@ describe('The numbered-list-block', () => {
         .text()).toEqual('Story with video as the Lead Art');
     });
 
-    it.only('should render elements only for arcSite', () => {
+    it('should render elements only for arcSite', () => {
       const { default: NumberedList } = require('./default');
       const listContentConfig = {
         contentConfigValues:

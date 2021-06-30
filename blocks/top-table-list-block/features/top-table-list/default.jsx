@@ -458,8 +458,6 @@ TopTableListWrapper.propTypes = {
   }),
 };
 
-TopTableListWrapper.lazy = true;
-
 TopTableListWrapper.label = 'Top Table List – Arc Block';
 
 export default TopTableListWrapper;

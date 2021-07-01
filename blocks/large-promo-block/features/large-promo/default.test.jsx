@@ -256,23 +256,6 @@ describe('the large promo feature', () => {
     wrapper.unmount();
   });
 
-  it('show image useContent for resizer parameter returns undefined if falsy', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      imageRatio: '4:3',
-      imageOverrideURL: 'overrideImage.jpg',
-    };
-
-    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
-
-    const wrapper = mount(<LargePromo customFields={myConfig} arcSite="dagen" />);
-
-    const image = wrapper.find('Image');
-    expect(image.length).toBe(0);
-    wrapper.unmount();
-  });
-
   it('returns null if null content', () => {
     const myConfig = {
       showHeadline: true,

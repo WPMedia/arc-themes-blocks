@@ -44,7 +44,7 @@ const PromoImage = ({
   if (
     (customImageURL && lazyLoad)
     || (customImageURL && isAdmin)
-    || (customImageURL && !isServerSide())) {
+    || isAdmin) {
     imageConfig = 'resize-image-api-client';
   } else if (customImageURL) {
     imageConfig = 'resize-image-api';
@@ -87,14 +87,11 @@ const PromoImage = ({
       />
     )
     : (
-      <PlaceholderImage
-        {...ratios}
-        client={imageConfig === 'resize-image-api-client'}
-      />
+      <PlaceholderImage client={imageConfig === 'resize-image-api-client'} />
     );
 
   return (
-    <div className="promo-image">
+    <div className="promo-image" key={imageURL}>
       {hasLink() ? withLink(ImageOrPlaceholder) : ImageOrPlaceholder}
       {showPromoLabel && promoType ? <PromoLabel type={promoType} size={promoLabelSize} /> : null}
     </div>

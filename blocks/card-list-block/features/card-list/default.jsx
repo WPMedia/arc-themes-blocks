@@ -30,6 +30,7 @@ const CardListItems = (props) => {
         contentConfigValues = {},
       } = {},
       title = '',
+      lazyLoad,
     } = {},
     placeholderResizedImageOptions,
     targetFallbackImage,
@@ -136,6 +137,8 @@ const CardListItems = (props) => {
                       url={extractImageFromStory(contentElements[0])}
                       alt={contentElements[0].headlines.basic}
                       resizedImageOptions={extractResizedParams(contentElements[0])}
+                      // if user elects lazy load, then disable arc static
+                      disableArcStatic={lazyLoad}
                     />
                   ) : (
                     <Image
@@ -143,6 +146,8 @@ const CardListItems = (props) => {
                       url={targetFallbackImage}
                       alt={largeImageProps.primaryLogoAlt || ''}
                       resizedImageOptions={placeholderResizedImageOptions}
+                      // if user elects lazy load, then disable arc static
+                      disableArcStatic={lazyLoad}
                     />
                   )}
                 </a>
@@ -199,6 +204,8 @@ const CardListItems = (props) => {
                           alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ''}
                           resizedImageOptions={imageURL
                             ? extractResizedParams(element) : placeholderResizedImageOptions}
+                          // if user elects lazy load, then disable arc static
+                          disableArcStatic={lazyLoad}
                         />
                       </a>
                     </article>

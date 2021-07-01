@@ -49,6 +49,7 @@ class PlaceholderImage extends React.Component {
       mediumHeight = 105,
       largeWidth = 105,
       largeHeight = 105,
+      lazyLoad,
     } = this.props;
     const { resizedImageOptions } = this.state;
 
@@ -69,6 +70,7 @@ class PlaceholderImage extends React.Component {
           largeHeight={largeHeight}
           resizedImageOptions={resizedImageOptions}
           resizerURL={getProperties(arcSite)?.resizerURL}
+          disableArcStatic={lazyLoad}
         />
       </>
     );

@@ -157,6 +157,7 @@ const NumberedListWrapper = ({ customFields }) => {
     primaryLogoAlt,
     breakpoints,
     resizerURL,
+    disableArcStatic: customFields.lazyLoad,
   };
 
   const placeholderResizedImageOptions = useContent({

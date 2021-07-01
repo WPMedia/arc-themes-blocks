@@ -44,7 +44,8 @@ const logos = {
   soundcloud: <SoundCloudIcon />,
 };
 
-const FullAuthorBioItem = () => {
+const FullAuthorBioItem = (props) => {
+  const { customFields: { lazyLoad } } = props;
   const { globalContent: content, arcSite } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
@@ -80,6 +81,7 @@ const FullAuthorBioItem = () => {
                 resizedImageOptions={content.authors[0].resized_params}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 breakpoints={getProperties(arcSite)?.breakpoints}
+                disableArcStatic={lazyLoad}
               />
             )
           }

@@ -49,6 +49,8 @@ class CustomSearchResultsList extends React.Component {
       primaryLogoAlt,
       breakpoints,
       resizerURL,
+      // lazy ?
+      disableArcStatic: props?.customFields.lazyLoad,
     };
 
     this.fetchPlaceholder();

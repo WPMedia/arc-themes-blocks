@@ -66,6 +66,7 @@ class ResultsList extends Component {
       primaryLogoAlt,
       breakpoints,
       resizerURL,
+      disableArcStatic: lazyLoad,
     };
 
     this.fetchPlaceholder();

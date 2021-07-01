@@ -32,7 +32,7 @@ import './author-bio.scss';
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
-const renderAuthorInfo = (author, arcSite) => {
+const renderAuthorInfo = (author, arcSite, lazyLoad) => {
   const {
     image: { url = '', alt_text: altText = '' },
     image,
@@ -55,12 +55,14 @@ const renderAuthorInfo = (author, arcSite) => {
           breakpoints={getProperties(arcSite)?.breakpoints}
           resizerURL={getProperties(arcSite)?.resizerURL}
           resizedImageOptions={resizedImageOptions}
+          disableArcStatic={lazyLoad}
         />
       ) : null
   );
 };
 
-const AuthorBioItems = () => {
+const AuthorBioItems = (props) => {
+  const { customFields: { lazyLoad } } = props;
   const { globalContent: content, arcSite } = useFusionContext();
   const {
     locale = 'en',
@@ -220,7 +222,7 @@ const AuthorBioItems = () => {
       authorList.push((
         <section key={(author.name) ? author.name : ''} className="authors">
           <section className="author">
-            {renderAuthorInfo(author, arcSite)}
+            {renderAuthorInfo(author, arcSite, lazyLoad)}
             <section className="descriptions">
               {authorNameWithHyperlink || authorName}
               {/* there will always be a description via conditional on 52 */}

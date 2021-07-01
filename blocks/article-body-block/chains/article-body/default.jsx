@@ -93,6 +93,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             largeHeight={0}
             breakpoints={getProperties(arcSite)?.breakpoints}
             resizerURL={getProperties(arcSite)?.resizerURL}
+            disableArcStatic={customFields.lazyLoad}
           />
           <figcaption>
             <ImageMetadata

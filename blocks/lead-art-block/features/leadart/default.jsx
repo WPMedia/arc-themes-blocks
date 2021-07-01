@@ -195,6 +195,7 @@ class LeadArt extends Component {
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
+                // static by default, no lazy load needed
               />
             </div>
             {lightbox}

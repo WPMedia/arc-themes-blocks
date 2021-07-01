@@ -43,11 +43,11 @@ class PlaceholderImage extends React.Component {
   render() {
     const {
       arcSite,
-      smallWidth = 600,
+      smallWidth = 800,
       smallHeight = 450,
-      mediumWidth = 600,
+      mediumWidth = 800,
       mediumHeight = 450,
-      largeWidth = 600,
+      largeWidth = 800,
       largeHeight = 450,
     } = this.props;
     const { resizedImageOptions } = this.state;

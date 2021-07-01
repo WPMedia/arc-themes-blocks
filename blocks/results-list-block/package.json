@@ -36,5 +36,9 @@
     "@wpmedia/shared-styles": "*",
     "styled-components": "^4.4.0"
   },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0"
+  }
 }

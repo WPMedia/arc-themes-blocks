@@ -118,10 +118,6 @@ const ExtraLargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  if (!content || content === {}) {
-    return null;
-  }
-
   const videoEmbed = (customFields?.playVideoInPlace && extractVideoEmbedFromStory(content));
 
   return (

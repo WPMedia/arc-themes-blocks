@@ -90,10 +90,6 @@ const MediumPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  if (!content || content === {}) {
-    return null;
-  }
-
   return (
     <HeadingSection>
       <article className="container-fluid medium-promo">

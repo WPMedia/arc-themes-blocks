@@ -75,10 +75,6 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  if (!content || content === {}) {
-    return null;
-  }
-
   const imagePosition = customFields?.imagePosition || 'right';
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 

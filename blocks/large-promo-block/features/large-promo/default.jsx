@@ -112,10 +112,6 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  if (!content || content === {}) {
-    return null;
-  }
-
   const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
 

@@ -116,6 +116,17 @@ describe('the large promo feature', () => {
     wrapper.unmount();
   });
 
+  it('should have no headline when show headline is false', () => {
+    useContent.mockReturnValueOnce(mockData);
+    const noImgConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: false,
+    };
+    const wrapper = mount(<LargePromo customFields={noImgConfig} />);
+    expect(wrapper.find('.lg-promo-headline')).toHaveLength(0);
+    wrapper.unmount();
+  });
+
   it('headline div should have class .col-sm-xl-12 when show image is false', () => {
     useContent.mockReturnValueOnce(mockData);
     const noImgConfig = {

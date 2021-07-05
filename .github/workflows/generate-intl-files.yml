@@ -7,6 +7,7 @@ on:
     types: [synchronize, opened]
     branches:
       - "TMEDIA-239-*"
+      - "TMEDIA-239-lokalise-github-action"
       - "lokalise-*"
 
 jobs:

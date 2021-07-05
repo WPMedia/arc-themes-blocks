@@ -3,7 +3,9 @@
 name: Generate intl json block files
 
 on:
-  push:
+  pull_request:
+    # synchronize	commit(s) pushed to the pull request
+    types: [synchronize, opened]
     branches:
       - 'lokalise*'
 

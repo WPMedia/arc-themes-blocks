@@ -3,10 +3,9 @@
 name: Generate intl json block files
 
 on:
-  pull_request:
-    types: [synchronize, opened]
+  push:
     branches:
-      - 'lokalise*'
+      - '*lokalise'
 
 jobs:
   build:

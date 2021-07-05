@@ -1,4 +1,34 @@
 {
+	"byline.and-text": {
+		"de": "und",
+		"en": "and",
+		"es": "y",
+		"fr": "et",
+		"ja": "및",
+		"ko": "및",
+		"no": "og",
+		"sv": "och"
+	},
+	"byline.by-text": {
+		"de": "Von",
+		"en": "By",
+		"es": "Por",
+		"fr": "Par",
+		"ja": "担当者：",
+		"ko": "저작자",
+		"no": "Av",
+		"sv": "Av"
+	},
+	"overline.sponsored-content": {
+		"de": "Sponsored Content",
+		"en": "Sponsored Content",
+		"es": "Sponsored Content",
+		"fr": "Contenu sponsorisé",
+		"ja": "Sponsored Content",
+		"ko": "Sponsored Content",
+		"no": "Sponsored Content",
+		"sv": "Sponsored Content"
+	},
 	"promo-label.gallery-text": {
 		"de": "Galerie",
 		"en": "Gallery",
@@ -18,35 +48,5 @@
 		"ko": "비디오",
 		"no": "Video",
 		"sv": "Video"
-	},
-	"byline.by-text": {
-		"de": "Von",
-		"en": "By",
-		"es": "Por",
-		"fr": "Par",
-		"ja": "担当者：",
-		"ko": "저작자",
-		"no": "Av",
-		"sv": "Av"
-	},
-	"byline.and-text": {
-		"de": "und",
-		"en": "and",
-		"es": "y",
-		"fr": "et",
-		"ja": "및",
-		"ko": "및",
-		"no": "og",
-		"sv": "och"
-	},
-	"overline.sponsored-content": {
-		"de": "Sponsored Content",
-		"en": "Sponsored Content",
-		"es": "Sponsored Content",
-		"fr": "Sponsored Content",
-		"ja": "Sponsored Content",
-		"ko": "Sponsored Content",
-		"no": "Sponsored Content",
-		"sv": "Sponsored Content"
 	}
 }

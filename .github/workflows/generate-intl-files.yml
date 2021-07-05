@@ -9,6 +9,11 @@ on:
       - "TMEDIA-239-*"
       - "TMEDIA-239-lokalise-github-action"
       - "lokalise-*"
+  push:
+    branches:
+      - "TMEDIA-239-*"
+      - "TMEDIA-239-lokalise-github-action"
+      - "lokalise-*"
 
 jobs:
   build:

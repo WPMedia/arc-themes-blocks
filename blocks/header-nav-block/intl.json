@@ -1,4 +1,14 @@
 {
+	"header-nav-block.search-text": {
+		"de": "Search",
+		"en": "Search",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
+		"no": "Søk",
+		"sv": "Sök"
+	},
 	"header-nav-block.sections-button": {
 		"de": "Sections",
 		"en": "Sections",
@@ -18,15 +28,5 @@
 		"ko": "Sign In",
 		"no": "Logg inn",
 		"sv": "Logga in"
-	},
-	"header-nav-block.search-text": {
-		"de": "Search",
-		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
-		"no": "Søk",
-		"sv": "Sök"
 	}
 }

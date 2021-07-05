@@ -1,6 +1,6 @@
 # .github/workflows/generate-intl-files.yml
 
-name: Generate intl.json block files
+name: Generate intl json block files
 
 on:
   pull_request:

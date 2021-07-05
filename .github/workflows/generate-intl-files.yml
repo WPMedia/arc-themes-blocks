@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
 
-      - name: Issues Details
+      - name: Run Generate intl
         run: npm run generate:intl
 
       # Add and commit the changed files

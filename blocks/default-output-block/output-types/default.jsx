@@ -196,13 +196,20 @@ const SampleOutputType = ({
   );
 };
 
-console.log(blocks);
+// if publisher wants no sites to be spa
+// then they do nothing. spaSites will be falsy undefined and fallsback to spa true,
+//  which won't do anything in isolation
 
-// include arr if true
-// false if
-// potential options
-// ["the-sun"]
-// false
-SampleOutputType.spa = blocks.spaSites ? blocks.spaSites : !!blocks.spaSites;
+// if publisher wants all sites to be spa
+// then they set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//  spaSites will be falsy undefined and fallback to spa true
+
+// if publisher wants to select which sites are spa
+// then set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//    and set in blocks.json spaSites: ["target-site-id"].
+//    spaSites will be a truthy array and set itself
+
+// fallback to true to ensure all site ids don't have to copy-pasted to blocks.json
+SampleOutputType.spa = blocks.spaSites ? blocks.spaSites : true;
 
 export default SampleOutputType;

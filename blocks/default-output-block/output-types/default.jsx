@@ -4,6 +4,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
+import blocks from '~/blocks.json';
 // this is blank import but used to inject scss
 import './default.scss';
 
@@ -194,5 +195,14 @@ const SampleOutputType = ({
     </html>
   );
 };
+
+console.log(blocks);
+
+// include arr if true
+// false if
+// potential options
+// ["the-sun"]
+// false
+SampleOutputType.spa = blocks.spaSites ? blocks.spaSites : !!blocks.spaSites;
 
 export default SampleOutputType;

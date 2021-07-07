@@ -32,17 +32,14 @@ const ReadMoreButton = styled.button`
   }
 `;
 
-const ResultsItem = React.memo(React.forwardRef((props, ref) => {
-  const {
-    arcSite,
-    element,
-    promoElements,
-    imageProps,
-    targetFallbackImage,
-    primaryLogoAlt,
-    placeholderResizedImageOptions,
-  } = props;
-
+const ResultsItem = React.memo(React.forwardRef(({
+  arcSite,
+  element,
+  promoElements,
+  imageProps,
+  targetFallbackImage,
+  placeholderResizedImageOptions,
+}, ref) => {
   const {
     description: { basic: descriptionText } = {},
     display_date: displayDate,
@@ -53,10 +50,7 @@ const ResultsItem = React.memo(React.forwardRef((props, ref) => {
   const imageURL = extractImageFromStory(element);
   const url = websites[arcSite].website_url;
   return (
-    <div
-      className="list-item"
-      ref={ref}
-    >
+    <div className="list-item" ref={ref}>
       {(promoElements.showImage)
         ? (
           <div className="results-list--image-container mobile-order-2 mobile-image">
@@ -69,7 +63,7 @@ const ResultsItem = React.memo(React.forwardRef((props, ref) => {
               <Image
                 {...imageProps}
                 url={imageURL !== null ? imageURL : targetFallbackImage}
-                alt={imageURL !== null ? headlineText : primaryLogoAlt}
+                alt={imageURL !== null ? headlineText : imageProps.primaryLogoAlt}
                 resizedImageOptions={imageURL !== null
                   ? extractResizedParams(element)
                   : placeholderResizedImageOptions}
@@ -318,16 +312,13 @@ const Results = () => {
       {viewableElements.map((element) => (
         <ResultsItem
           key={`result-card-${element._id}`}
+          ref={listItemRefs.current[element._id]}
           arcSite={arcSite}
           element={element}
           promoElements={promoElements}
           imageProps={imageProps}
           targetFallbackImage={targetFallbackImage}
-          primaryLogoAlt={primaryLogoAlt}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
-          ref={(ref) => {
-            listItemRefs.current[element._id] = ref;
-          }}
         />
       ))}
       {(viewableElements.length < resultList?.content_elements.length

@@ -1,0 +1,42 @@
+# .github/workflows/generate-intl-files.yml
+
+name: Generate intl json block files
+
+on:
+  push:
+    branches:
+      - 'lokalise*'
+    paths:
+      - locale/*.json
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Run Generate intl
+        run: npm run generate:intl
+
+      # Add and commit the changed files
+      - uses: EndBug/add-and-commit@v7.0.0
+        with:
+         message: 'Add block intl.json files'

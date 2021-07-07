@@ -5,7 +5,7 @@ import { useComponentContext, useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import getProperties from 'fusion:properties';
 import { extractImageFromStory, extractResizedParams, ratiosFor } from '@wpmedia/resizer-image-block';
-import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import PlaceholderImage from '@wpmedia/placeholder-image-block';
 import { PromoLabel } from '@wpmedia/shared-styles';
 import discoverPromoType from './discover';
@@ -44,7 +44,7 @@ const PromoImage = ({
   if (
     (customImageURL && lazyLoad)
     || (customImageURL && isAdmin)
-    || (customImageURL && !isServerSide())) {
+    || isAdmin) {
     imageConfig = 'resize-image-api-client';
   } else if (customImageURL) {
     imageConfig = 'resize-image-api';
@@ -87,14 +87,11 @@ const PromoImage = ({
       />
     )
     : (
-      <PlaceholderImage
-        {...ratios}
-        client={imageConfig === 'resize-image-api-client'}
-      />
+      <PlaceholderImage client={imageConfig === 'resize-image-api-client'} />
     );
 
   return (
-    <div className="promo-image">
+    <div className="promo-image" key={imageURL}>
       {hasLink() ? withLink(ImageOrPlaceholder) : ImageOrPlaceholder}
       {showPromoLabel && promoType ? <PromoLabel type={promoType} size={promoLabelSize} /> : null}
     </div>

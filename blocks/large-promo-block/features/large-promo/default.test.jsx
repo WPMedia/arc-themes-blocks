@@ -116,6 +116,17 @@ describe('the large promo feature', () => {
     wrapper.unmount();
   });
 
+  it('should have no headline when show headline is false', () => {
+    useContent.mockReturnValueOnce(mockData);
+    const noImgConfig = {
+      itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
+      showHeadline: false,
+    };
+    const wrapper = mount(<LargePromo customFields={noImgConfig} />);
+    expect(wrapper.find('.lg-promo-headline')).toHaveLength(0);
+    wrapper.unmount();
+  });
+
   it('headline div should have class .col-sm-xl-12 when show image is false', () => {
     useContent.mockReturnValueOnce(mockData);
     const noImgConfig = {
@@ -253,23 +264,6 @@ describe('the large promo feature', () => {
     const image = wrapper.find('Image');
     expect(image.length).toBe(1);
     expect(image.props().url).toEqual('overrideImage.jpg');
-    wrapper.unmount();
-  });
-
-  it('show image useContent for resizer parameter returns undefined if falsy', () => {
-    const myConfig = {
-      showHeadline: true,
-      showImage: true,
-      imageRatio: '4:3',
-      imageOverrideURL: 'overrideImage.jpg',
-    };
-
-    useContent.mockReturnValueOnce({}).mockReturnValueOnce(null);
-
-    const wrapper = mount(<LargePromo customFields={myConfig} arcSite="dagen" />);
-
-    const image = wrapper.find('Image');
-    expect(image.length).toBe(0);
     wrapper.unmount();
   });
 

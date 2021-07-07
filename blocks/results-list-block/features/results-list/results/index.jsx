@@ -32,16 +32,17 @@ const ReadMoreButton = styled.button`
   }
 `;
 
-const ResultsItem = React.memo(({
-  arcSite,
-  element,
-  promoElements,
-  imageProps,
-  targetFallbackImage,
-  primaryLogoAlt,
-  placeholderResizedImageOptions,
-  onRefInit,
-}) => {
+const ResultsItem = React.memo(React.forwardRef((props, ref) => {
+  const {
+    arcSite,
+    element,
+    promoElements,
+    imageProps,
+    targetFallbackImage,
+    primaryLogoAlt,
+    placeholderResizedImageOptions,
+  } = props;
+
   const {
     description: { basic: descriptionText } = {},
     display_date: displayDate,
@@ -54,7 +55,7 @@ const ResultsItem = React.memo(({
   return (
     <div
       className="list-item"
-      ref={onRefInit}
+      ref={ref}
     >
       {(promoElements.showImage)
         ? (
@@ -122,7 +123,7 @@ const ResultsItem = React.memo(({
         : null }
     </div>
   );
-});
+}));
 
 const Results = () => {
   const {
@@ -324,7 +325,7 @@ const Results = () => {
           targetFallbackImage={targetFallbackImage}
           primaryLogoAlt={primaryLogoAlt}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
-          onRefInit={(ref) => {
+          ref={(ref) => {
             listItemRefs.current[element._id] = ref;
           }}
         />

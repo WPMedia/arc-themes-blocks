@@ -258,7 +258,6 @@ describe('head content', () => {
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
 
-    console.log(wrapper.find('link').debug());
     expect(wrapper.find('link').at(2).html()).toMatch(/fonts.googleapis/);
   });
 

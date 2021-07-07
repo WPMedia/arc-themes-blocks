@@ -10,7 +10,7 @@ import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
-import { Image } from '@wpmedia/engine-theme-sdk';
+import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import {
   Byline,
@@ -18,7 +18,6 @@ import {
   SecondaryFont,
 } from '@wpmedia/shared-styles';
 import {
-  defaultResultList,
   reduceResultList,
   resolveDefaultPromoElements,
 } from './helpers';
@@ -39,9 +38,11 @@ const Results = () => {
     contextPath,
     customFields,
     deployment,
+    isAdmin,
   } = useFusionContext();
 
   const {
+    lazyLoad,
     listContentConfig: {
       contentService,
       contentConfigValues,
@@ -88,16 +89,7 @@ const Results = () => {
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
   });
 
-  const [resultList, alterResultList] = useReducer(reduceResultList, defaultResultList);
-  useEffect(() => {
-    const topItem = resultList.content_elements[queryOffset];
-    if (topItem?._id && listItemRefs.current[topItem?._id]) {
-      const focusLink = listItemRefs.current[topItem._id].querySelector('a:not([aria-hidden])');
-      if (focusLink) {
-        focusLink.focus();
-      }
-    }
-  }, [resultList, queryOffset]);
+  const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 
   const serviceQueryPage = useCallback((requestedOffset = 0) => {
     /*
@@ -105,35 +97,23 @@ const Results = () => {
       to *twice* the size.  When clicking on the more button, we will render
       the next size worth of items and load the next size from the server.
     */
+    const size = requestedOffset === configuredOffset
+      ? configuredSize * 2
+      : configuredSize;
+    const offset = requestedOffset === configuredOffset
+      ? configuredOffset
+      : requestedOffset + configuredSize;
     switch (contentService) {
       case 'story-feed-query': {
-        const size = requestedOffset === configuredOffset
-          ? configuredSize * 2
-          : configuredSize;
-        const offset = requestedOffset === configuredOffset
-          ? configuredOffset
-          : requestedOffset + configuredSize;
         return { offset, size };
       }
       case 'story-feed-author':
       case 'story-feed-sections':
       case 'story-feed-tag': {
-        const feedSize = requestedOffset === configuredOffset
-          ? configuredSize * 2
-          : configuredSize;
-        const feedOffset = requestedOffset === configuredOffset
-          ? configuredOffset
-          : requestedOffset + configuredSize;
-        return { feedOffset, feedSize };
+        return { feedOffset: offset, feedSize: size };
       }
       case 'content-api-collections': {
-        const size = requestedOffset === configuredOffset
-          ? configuredSize * 2
-          : configuredSize;
-        const from = requestedOffset === configuredOffset
-          ? configuredOffset
-          : requestedOffset + configuredSize;
-        return { from, size };
+        return { from: offset, size };
       }
       default: { break; }
     }
@@ -141,7 +121,7 @@ const Results = () => {
   }, [configuredOffset, configuredSize, contentService]);
 
   const requestedResultList = useContent({
-    source: contentService,
+    source: isServerSideLazy ? null : contentService,
     query: {
       ...contentConfigValues,
       feature: 'results-list',
@@ -204,6 +184,7 @@ const Results = () => {
       }
     }`,
   });
+  const [resultList, alterResultList] = useReducer(reduceResultList, requestedResultList);
 
   useEffect(() => {
     alterResultList({
@@ -212,13 +193,25 @@ const Results = () => {
     });
   }, [requestedResultList]);
 
+  useEffect(() => {
+    if (queryOffset !== configuredOffset) {
+      const topItem = resultList.content_elements[queryOffset - configuredOffset];
+      if (topItem?._id && listItemRefs.current[topItem?._id]) {
+        const focusLink = listItemRefs.current[topItem._id].querySelector('a:not([aria-hidden])');
+        if (focusLink) {
+          focusLink.focus();
+        }
+      }
+    }
+  }, [configuredOffset, queryOffset, resultList]);
+
   const promoElements = resolveDefaultPromoElements(customFields);
   const phrases = getTranslatedPhrases(locale || 'en');
 
   const viewableElements = resultList?.content_elements
     .slice(0, queryOffset + configuredSize - configuredOffset);
 
-  return viewableElements.length > 0 ? (
+  return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
       {viewableElements.map((element) => {
         const {

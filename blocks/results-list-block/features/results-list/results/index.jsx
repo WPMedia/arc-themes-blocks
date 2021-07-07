@@ -32,6 +32,98 @@ const ReadMoreButton = styled.button`
   }
 `;
 
+const ResultsItem = React.memo(({
+  arcSite,
+  element,
+  promoElements,
+  imageProps,
+  targetFallbackImage,
+  primaryLogoAlt,
+  placeholderResizedImageOptions,
+  onRefInit,
+}) => {
+  const {
+    description: { basic: descriptionText } = {},
+    display_date: displayDate,
+    headlines: { basic: headlineText } = {},
+    websites,
+  } = element;
+
+  const imageURL = extractImageFromStory(element);
+  const url = websites[arcSite].website_url;
+  return (
+    <div
+      className="list-item"
+      ref={onRefInit}
+    >
+      {(promoElements.showImage)
+        ? (
+          <div className="results-list--image-container mobile-order-2 mobile-image">
+            <a
+              href={url}
+              title={headlineText}
+              aria-hidden="true"
+              tabIndex="-1"
+            >
+              <Image
+                {...imageProps}
+                url={imageURL !== null ? imageURL : targetFallbackImage}
+                alt={imageURL !== null ? headlineText : primaryLogoAlt}
+                resizedImageOptions={imageURL !== null
+                  ? extractResizedParams(element)
+                  : placeholderResizedImageOptions}
+              />
+            </a>
+          </div>
+        )
+        : null}
+      {(promoElements.showHeadline)
+        ? (
+          <div className="results-list--headline-container mobile-order-1">
+            <a href={url} title={headlineText}>
+              <Heading className="headline-text">{headlineText}</Heading>
+            </a>
+          </div>
+        )
+        : null }
+      {(promoElements.showDescription || promoElements.showDate || promoElements.showByline)
+        ? (
+          <div className="results-list--description-author-container mobile-order-3">
+            {(promoElements.showDescription && descriptionText)
+              ? (
+                <a href={url} title={headlineText}>
+                  <SecondaryFont as="p" className="description-text">
+                    {descriptionText}
+                  </SecondaryFont>
+                </a>
+              )
+              : null}
+            {(promoElements.showDate || promoElements.showByline)
+              ? (
+                <div className="results-list--author-date">
+                  {(promoElements.showByline)
+                    ? (
+                      <Byline
+                        content={element}
+                        list
+                        separator={promoElements.showDate}
+                        font="Primary"
+                      />
+                    )
+                    : null }
+                  {(promoElements.showDate)
+                    ? <ArticleDate classNames="story-date" date={displayDate} />
+                    : null }
+                </div>
+              )
+              : null}
+          </div>
+        )
+        : null }
+    </div>
+  );
+});
+
 const Results = () => {
   const {
     arcSite,
@@ -49,15 +141,15 @@ const Results = () => {
     },
   } = customFields;
 
-  const {
+  const [{
     breakpoints,
     fallbackImage,
     locale,
     primaryLogoAlt,
     resizerURL,
-  } = getProperties(arcSite) || {};
+  }] = useState(getProperties(arcSite) || {});
 
-  const imageProps = {
+  const [imageProps] = useState({
     smallWidth: 158,
     smallHeight: 89,
     mediumWidth: 274,
@@ -67,29 +159,35 @@ const Results = () => {
     primaryLogoAlt,
     breakpoints,
     resizerURL,
-  };
+  });
 
-  const configuredOffset = parseInt(contentConfigValues.offset, 10)
+  const [configuredOffset] = useState(
+    parseInt(contentConfigValues.offset, 10)
     || parseInt(contentConfigValues.feedOffset, 10)
     || parseInt(contentConfigValues.from, 10)
-    || 0;
-  const configuredSize = parseInt(contentConfigValues.size, 10)
+    || 0,
+  );
+  const [configuredSize] = useState(
+    parseInt(contentConfigValues.size, 10)
     || parseInt(contentConfigValues.feedSize, 10)
-    || 10;
+    || 10,
+  );
 
   const [queryOffset, setQueryOffset] = useState(configuredOffset);
   const listItemRefs = useRef([]);
 
-  const targetFallbackImage = !(fallbackImage.includes('http'))
-    ? deployment(`${contextPath}/${fallbackImage}`)
-    : fallbackImage;
+  const [targetFallbackImage] = useState(
+    !(fallbackImage.includes('http'))
+      ? deployment(`${contextPath}/${fallbackImage}`)
+      : fallbackImage,
+  );
 
   const placeholderResizedImageOptions = useContent({
     source: !targetFallbackImage.includes('/resources/') ? 'resize-image-api' : null,
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
   });
 
-  const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
+  const [isServerSideLazy] = useState(lazyLoad && isServerSide() && !isAdmin);
 
   const serviceQueryPage = useCallback((requestedOffset = 0) => {
     /*
@@ -184,13 +282,16 @@ const Results = () => {
       }
     }`,
   });
+
   const [resultList, alterResultList] = useReducer(reduceResultList, requestedResultList);
 
   useEffect(() => {
-    alterResultList({
-      type: 'appendUnique',
-      data: requestedResultList,
-    });
+    if (requestedResultList) {
+      alterResultList({
+        type: 'appendUnique',
+        data: requestedResultList,
+      });
+    }
   }, [requestedResultList]);
 
   useEffect(() => {
@@ -205,104 +306,36 @@ const Results = () => {
     }
   }, [configuredOffset, queryOffset, resultList]);
 
-  const promoElements = resolveDefaultPromoElements(customFields);
-  const phrases = getTranslatedPhrases(locale || 'en');
+  const [promoElements] = useState(resolveDefaultPromoElements(customFields));
+  const [phrases] = useState(getTranslatedPhrases(locale || 'en'));
 
   const viewableElements = resultList?.content_elements
     .slice(0, queryOffset + configuredSize - configuredOffset);
 
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
-      {viewableElements.map((element) => {
-        const {
-          description: { basic: descriptionText } = {},
-          display_date: displayDate,
-          headlines: { basic: headlineText } = {},
-          websites,
-        } = element;
-
-        const imageURL = extractImageFromStory(element);
-        const url = websites[arcSite].website_url;
-        return (
-          <div
-            className="list-item"
-            key={`result-card-${url}`}
-            ref={(ref) => {
-              listItemRefs.current[element._id] = ref;
-            }}
-          >
-            {(promoElements.showImage)
-              ? (
-                <div className="results-list--image-container mobile-order-2 mobile-image">
-                  <a
-                    href={url}
-                    title={headlineText}
-                    aria-hidden="true"
-                    tabIndex="-1"
-                  >
-                    <Image
-                      {...imageProps}
-                      url={imageURL !== null ? imageURL : targetFallbackImage}
-                      alt={imageURL !== null ? headlineText : primaryLogoAlt}
-                      resizedImageOptions={imageURL !== null
-                        ? extractResizedParams(element)
-                        : placeholderResizedImageOptions}
-                    />
-                  </a>
-                </div>
-              )
-              : null}
-            {(promoElements.showHeadline)
-              ? (
-                <div className="results-list--headline-container mobile-order-1">
-                  <a href={url} title={headlineText}>
-                    <Heading className="headline-text">{headlineText}</Heading>
-                  </a>
-                </div>
-              )
-              : null }
-            {(promoElements.showDescription || promoElements.showDate || promoElements.showByline)
-              ? (
-                <div className="results-list--description-author-container mobile-order-3">
-                  {(promoElements.showDescription && descriptionText)
-                    ? (
-                      <a href={url} title={headlineText}>
-                        <SecondaryFont as="p" className="description-text">
-                          {descriptionText}
-                        </SecondaryFont>
-                      </a>
-                    )
-                    : null}
-                  {(promoElements.showDate || promoElements.showByline)
-                    ? (
-                      <div className="results-list--author-date">
-                        {(promoElements.showByline)
-                          ? (
-                            <Byline
-                              content={element}
-                              list
-                              separator={promoElements.showDate}
-                              font="Primary"
-                            />
-                          )
-                          : null }
-                        {(promoElements.showDate)
-                          ? <ArticleDate classNames="story-date" date={displayDate} />
-                          : null }
-                      </div>
-                    )
-                    : null}
-                </div>
-              )
-              : null }
-          </div>
-        );
-      })}
-      {viewableElements.length < resultList?.content_elements.length && (
+      {viewableElements.map((element) => (
+        <ResultsItem
+          key={`result-card-${element._id}`}
+          arcSite={arcSite}
+          element={element}
+          promoElements={promoElements}
+          imageProps={imageProps}
+          targetFallbackImage={targetFallbackImage}
+          primaryLogoAlt={primaryLogoAlt}
+          placeholderResizedImageOptions={placeholderResizedImageOptions}
+          onRefInit={(ref) => {
+            listItemRefs.current[element._id] = ref;
+          }}
+        />
+      ))}
+      {(viewableElements.length < resultList?.content_elements.length
+        || requestedResultList?.content_elements?.length > 0
+      ) && (
         <div className="see-more">
           <ReadMoreButton
             type="button"
-            onClick={() => setQueryOffset(queryOffset + configuredSize)}
+            onClick={() => setQueryOffset((oldOffset) => oldOffset + configuredSize)}
             className="btn btn-sm"
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}

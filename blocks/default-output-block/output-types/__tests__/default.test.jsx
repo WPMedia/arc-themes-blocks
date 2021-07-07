@@ -531,6 +531,7 @@ describe('queryly render conditions', () => {
 });
 
 describe('The spa property', () => {
+  // we're only expecting spaSites to be an array
   it('should be set as true if spaSites is undefined', () => {
     expect(configureSinglePageApp(undefined)).toStrictEqual(true);
   });

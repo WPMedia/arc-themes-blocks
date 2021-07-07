@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { shallow } from 'enzyme';
+import { configureSinglePageApp } from '../default';
 
 const dummyComp = () => <meta content="dummy" />;
 const mockFuntions = {
@@ -526,5 +527,24 @@ describe('queryly render conditions', () => {
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('queryly-search')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(2);
+  });
+});
+
+describe('The spa property', () => {
+  it('should be set as true if spaSites is undefined', () => {
+    expect(configureSinglePageApp(undefined)).toStrictEqual(true);
+  });
+  it('should be set to empty array if spaSites is an empty array', () => {
+    expect(configureSinglePageApp([])).toStrictEqual([]);
+  });
+  it('should be set to true if spaSites is false', () => {
+    expect(configureSinglePageApp(false)).toStrictEqual(true);
+  });
+  it('should be set to true if spaSites is true', () => {
+    expect(configureSinglePageApp(true)).toStrictEqual(true);
+  });
+  it('should be set to a one-item array if one site id is passed in to spaSites', () => {
+    const spaSites = ['the-sun'];
+    expect(configureSinglePageApp(spaSites)).toStrictEqual(spaSites);
   });
 });

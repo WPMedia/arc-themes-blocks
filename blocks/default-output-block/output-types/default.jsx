@@ -210,6 +210,10 @@ const SampleOutputType = ({
 //    spaSites will be a truthy array and set itself
 
 // fallback to true to ensure all site ids don't have to copy-pasted to blocks.json
-SampleOutputType.spa = blocks.spaSites ? blocks.spaSites : true;
+export function configureSinglePageApp(spaSites) {
+  return spaSites || true;
+}
+
+SampleOutputType.spa = configureSinglePageApp(blocks.spaSites);
 
 export default SampleOutputType;

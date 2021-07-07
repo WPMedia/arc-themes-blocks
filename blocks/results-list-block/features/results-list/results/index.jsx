@@ -112,7 +112,7 @@ const Results = () => {
           : configuredSize;
         const offset = requestedOffset === configuredOffset
           ? configuredOffset
-          : requestedOffset + configuredSize * 2;
+          : requestedOffset + configuredSize;
         return { offset, size };
       }
       case 'story-feed-author':
@@ -123,7 +123,7 @@ const Results = () => {
           : configuredSize;
         const feedOffset = requestedOffset === configuredOffset
           ? configuredOffset
-          : requestedOffset + configuredSize * 2;
+          : requestedOffset + configuredSize;
         return { feedOffset, feedSize };
       }
       case 'content-api-collections': {
@@ -132,7 +132,7 @@ const Results = () => {
           : configuredSize;
         const from = requestedOffset === configuredOffset
           ? configuredOffset
-          : requestedOffset + configuredSize * 2;
+          : requestedOffset + configuredSize;
         return { from, size };
       }
       default: { break; }
@@ -216,7 +216,7 @@ const Results = () => {
   const phrases = getTranslatedPhrases(locale || 'en');
 
   const viewableElements = resultList?.content_elements
-    .slice(0, queryOffset + configuredSize);
+    .slice(0, queryOffset + configuredSize - configuredOffset);
 
   return viewableElements.length > 0 ? (
     <div className="results-list-container">

@@ -285,7 +285,7 @@ describe('story-feed-query service', () => {
       expect.objectContaining({
         query: {
           feature: 'results-list',
-          offset: 3,
+          offset: 2,
           size: 1,
         },
       }),
@@ -345,7 +345,7 @@ describe('content-api-collections service', () => {
       expect.objectContaining({
         query: {
           feature: 'results-list',
-          from: 3,
+          from: 2,
           size: 1,
         },
       }),
@@ -405,7 +405,7 @@ describe('story-feed-author service', () => {
       expect.objectContaining({
         query: {
           feature: 'results-list',
-          feedOffset: 3,
+          feedOffset: 2,
           feedSize: 1,
         },
       }),
@@ -465,7 +465,7 @@ describe('story-feed-sections service', () => {
       expect.objectContaining({
         query: {
           feature: 'results-list',
-          feedOffset: 3,
+          feedOffset: 2,
           feedSize: 1,
         },
       }),
@@ -525,7 +525,7 @@ describe('story-feed-tag service', () => {
       expect.objectContaining({
         query: {
           feature: 'results-list',
-          feedOffset: 3,
+          feedOffset: 2,
           feedSize: 1,
         },
       }),

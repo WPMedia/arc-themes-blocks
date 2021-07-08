@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 
 import { LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { HeadingSection } from '@wpmedia/shared-styles';
@@ -14,13 +15,32 @@ import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 import Results from './results';
 
-const ResultsList = () => {
-  const { customFields, isAdmin } = useFusionContext();
+const ResultsList = ({ customFields }) => {
+  const fusionContext = useFusionContext();
+  const { arcSite, isAdmin } = fusionContext;
   const { lazyLoad } = customFields;
+  const fusionProperties = getProperties(arcSite) || {};
+  const imageProperties = {
+    smallWidth: 158,
+    smallHeight: 89,
+    mediumWidth: 274,
+    mediumHeight: 154,
+    largeWidth: 274,
+    largeHeight: 154,
+    primaryLogoAlt: fusionProperties.primaryLogoAlt,
+    breakpoints: fusionProperties.breakpoints,
+    resizerURL: fusionProperties.resizerURL,
+  };
+
   return (
     <LazyLoad enabled={lazyLoad && !isAdmin}>
       <HeadingSection>
-        <Results />
+        <Results
+          customFields={customFields}
+          fusionContext={fusionContext}
+          fusionProperties={fusionProperties}
+          imageProperties={imageProperties}
+        />
       </HeadingSection>
     </LazyLoad>
   );

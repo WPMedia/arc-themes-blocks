@@ -6,9 +6,7 @@ import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import getProperties from 'fusion:properties';
 import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
 
 import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
@@ -36,7 +34,7 @@ const ResultsItem = React.memo(React.forwardRef(({
   arcSite,
   element,
   promoElements,
-  imageProps,
+  imageProperties,
   targetFallbackImage,
   placeholderResizedImageOptions,
 }, ref) => {
@@ -61,9 +59,9 @@ const ResultsItem = React.memo(React.forwardRef(({
               tabIndex="-1"
             >
               <Image
-                {...imageProps}
+                {...imageProperties}
                 url={imageURL !== null ? imageURL : targetFallbackImage}
-                alt={imageURL !== null ? headlineText : imageProps.primaryLogoAlt}
+                alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
                 resizedImageOptions={imageURL !== null
                   ? extractResizedParams(element)
                   : placeholderResizedImageOptions}
@@ -119,15 +117,12 @@ const ResultsItem = React.memo(React.forwardRef(({
   );
 }));
 
-const Results = () => {
-  const {
-    arcSite,
-    contextPath,
-    customFields,
-    deployment,
-    isAdmin,
-  } = useFusionContext();
-
+const Results = ({
+  customFields,
+  fusionContext,
+  fusionProperties,
+  imageProperties,
+}) => {
   const {
     lazyLoad,
     listContentConfig: {
@@ -136,25 +131,17 @@ const Results = () => {
     },
   } = customFields;
 
-  const [{
-    breakpoints,
+  const {
+    arcSite,
+    contextPath,
+    deployment,
+    isAdmin,
+  } = fusionContext;
+
+  const {
     fallbackImage,
     locale,
-    primaryLogoAlt,
-    resizerURL,
-  }] = useState(getProperties(arcSite) || {});
-
-  const [imageProps] = useState({
-    smallWidth: 158,
-    smallHeight: 89,
-    mediumWidth: 274,
-    mediumHeight: 154,
-    largeWidth: 274,
-    largeHeight: 154,
-    primaryLogoAlt,
-    breakpoints,
-    resizerURL,
-  });
+  } = fusionProperties;
 
   const [configuredOffset] = useState(
     parseInt(contentConfigValues.offset, 10)
@@ -293,8 +280,9 @@ const Results = () => {
   useEffect(() => {
     setElementRefs((existingRefs) => {
       const refArray = existingRefs.concat(
-        requestedResultList.content_elements
-          .map(() => createRef()),
+        requestedResultList?.content_elements
+          ? requestedResultList.content_elements.map(() => createRef())
+          : [],
       );
       if (queryOffset !== configuredOffset) { // ignore the first item for focus purposes
         const topItem = queryOffset - configuredOffset;
@@ -321,6 +309,9 @@ const Results = () => {
   const viewableElements = resultList?.content_elements
     .slice(0, queryOffset + configuredSize - configuredOffset);
 
+  const isThereMore = requestedResultList?.next
+    || viewableElements?.length < resultList?.count - configuredOffset;
+
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
       {viewableElements.map((element, index) => (
@@ -330,14 +321,12 @@ const Results = () => {
           arcSite={arcSite}
           element={element}
           promoElements={promoElements}
-          imageProps={imageProps}
+          imageProperties={imageProperties}
           targetFallbackImage={targetFallbackImage}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
         />
       ))}
-      {(viewableElements.length < resultList?.content_elements.length
-        || requestedResultList?.content_elements?.length > 0
-      ) && (
+      {isThereMore && (
         <div className="see-more">
           <ReadMoreButton
             type="button"

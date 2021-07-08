@@ -17,27 +17,19 @@ jest.mock('fusion:context', () => ({
 
 describe('Results List', () => {
   it('should render Results if not lazy', () => {
-    useFusionContext.mockReturnValue({
-      customFields: {
-        lazyLoad: false,
-      },
-      isAdmin: false,
-    });
+    useFusionContext.mockReturnValue({ isAdmin: false });
+    const customFields = { lazyLoad: false };
 
-    const { unmount } = render(<ResultsList />);
+    const { unmount } = render(<ResultsList customFields={customFields} />);
     expect(screen.queryByText('Results')).toBeInTheDocument();
     unmount();
   });
 
   it('should render Results if lazy', () => {
-    useFusionContext.mockReturnValue({
-      customFields: {
-        lazyLoad: true,
-      },
-      isAdmin: false,
-    });
+    useFusionContext.mockReturnValue({ isAdmin: false });
+    const customFields = { lazyLoad: true };
 
-    const { unmount } = render(<ResultsList />);
+    const { unmount } = render(<ResultsList customFields={customFields} />);
     expect(screen.queryByText('Results')).toBeInTheDocument();
     unmount();
   });

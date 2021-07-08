@@ -16,10 +16,20 @@ import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import Results from './results';
 
 const ResultsList = ({ customFields }) => {
-  const fusionContext = useFusionContext();
-  const { arcSite, isAdmin } = fusionContext;
+  const {
+    arcSite,
+    contextPath,
+    deployment,
+    isAdmin,
+  } = useFusionContext();
   const { lazyLoad } = customFields;
-  const fusionProperties = getProperties(arcSite) || {};
+  const {
+    fallbackImage,
+    locale,
+    primaryLogoAlt,
+    breakpoints,
+    resizerURL,
+  } = getProperties(arcSite) || {};
   const imageProperties = {
     smallWidth: 158,
     smallHeight: 89,
@@ -27,9 +37,9 @@ const ResultsList = ({ customFields }) => {
     mediumHeight: 154,
     largeWidth: 274,
     largeHeight: 154,
-    primaryLogoAlt: fusionProperties.primaryLogoAlt,
-    breakpoints: fusionProperties.breakpoints,
-    resizerURL: fusionProperties.resizerURL,
+    primaryLogoAlt,
+    breakpoints,
+    resizerURL,
   };
 
   return (
@@ -37,8 +47,16 @@ const ResultsList = ({ customFields }) => {
       <HeadingSection>
         <Results
           customFields={customFields}
-          fusionContext={fusionContext}
-          fusionProperties={fusionProperties}
+          fusionContext={{
+            arcSite,
+            contextPath,
+            deployment,
+            isAdmin,
+          }}
+          fusionProperties={{
+            fallbackImage,
+            locale,
+          }}
           imageProperties={imageProperties}
         />
       </HeadingSection>

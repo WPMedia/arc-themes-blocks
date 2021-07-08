@@ -69,7 +69,7 @@ const ResultsItem = React.memo(React.forwardRef(({
             </a>
           </div>
         )
-        : null}
+        : null }
       {(promoElements.showHeadline)
         ? (
           <div className="results-list--headline-container mobile-order-1">
@@ -90,7 +90,7 @@ const ResultsItem = React.memo(React.forwardRef(({
                   </SecondaryFont>
                 </a>
               )
-              : null}
+              : null }
             {(promoElements.showDate || promoElements.showByline)
               ? (
                 <div className="results-list--author-date">
@@ -109,7 +109,7 @@ const ResultsItem = React.memo(React.forwardRef(({
                     : null }
                 </div>
               )
-              : null}
+              : null }
           </div>
         )
         : null }
@@ -143,32 +143,26 @@ const Results = ({
     locale,
   } = fusionProperties;
 
-  const [configuredOffset] = useState(
-    parseInt(contentConfigValues.offset, 10)
+  const configuredOffset = parseInt(contentConfigValues.offset, 10)
     || parseInt(contentConfigValues.feedOffset, 10)
     || parseInt(contentConfigValues.from, 10)
-    || 0,
-  );
-  const [configuredSize] = useState(
-    parseInt(contentConfigValues.size, 10)
+    || 0;
+  const configuredSize = parseInt(contentConfigValues.size, 10)
     || parseInt(contentConfigValues.feedSize, 10)
-    || 10,
-  );
+    || 10;
 
   const [queryOffset, setQueryOffset] = useState(configuredOffset);
 
-  const [targetFallbackImage] = useState(
-    !(fallbackImage.includes('http'))
-      ? deployment(`${contextPath}/${fallbackImage}`)
-      : fallbackImage,
-  );
+  const targetFallbackImage = !(fallbackImage.includes('http'))
+    ? deployment(`${contextPath}/${fallbackImage}`)
+    : fallbackImage;
 
   const placeholderResizedImageOptions = useContent({
     source: !targetFallbackImage.includes('/resources/') ? 'resize-image-api' : null,
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
   });
 
-  const [isServerSideLazy] = useState(lazyLoad && isServerSide() && !isAdmin);
+  const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 
   const serviceQueryPage = useCallback((requestedOffset = 0) => {
     /*

@@ -4,6 +4,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
+import blocks from '~/blocks.json';
 // this is blank import but used to inject scss
 import './default.scss';
 
@@ -194,5 +195,25 @@ const SampleOutputType = ({
     </html>
   );
 };
+
+// if publisher wants no sites to be spa
+// then they do nothing. spaSites will be falsy undefined and fallsback to spa true,
+//  which won't do anything in isolation
+
+// if publisher wants all sites to be spa
+// then they set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//  spaSites will be falsy undefined and fallback to spa true
+
+// if publisher wants to select which sites are spa
+// then set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//    and set in blocks.json spaSites: ["target-site-id"].
+//    spaSites will be a truthy array and set itself
+
+// fallback to true to ensure all site ids don't have to copy-pasted to blocks.json
+export function configureSinglePageApp(spaSites) {
+  return spaSites || true;
+}
+
+SampleOutputType.spa = configureSinglePageApp(blocks.spaSites);
 
 export default SampleOutputType;

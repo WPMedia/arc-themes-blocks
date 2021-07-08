@@ -235,6 +235,77 @@ describe('seeMore', () => {
   });
 });
 
+describe('focus', () => {
+  it('should not be set on the very first item on the page', () => {
+    useFusionContext.mockReturnValue({
+      arcSite: 'the-sun',
+      contextPath: '/pf',
+      customFields: {
+        lazyLoad: false,
+        listContentConfig: {
+          contentService: 'story-feed-query',
+          contentConfigValues: {
+            size: 1,
+            offset: 0,
+          },
+        },
+        showByline: false,
+        showDate: false,
+        showDescription: false,
+        showHeadline: true,
+        showImage: false,
+      },
+      deployment: jest.fn(),
+      isAdmin: false,
+    });
+
+    useContent
+      .mockReset()
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[0]);
+
+    const { unmount } = render(<Results />);
+    expect(screen.getByText(/test headline 1/i)).not.toHaveFocus();
+    unmount();
+  });
+
+  it('should be set on the first new item added', () => {
+    useFusionContext.mockReturnValue({
+      arcSite: 'the-sun',
+      contextPath: '/pf',
+      customFields: {
+        lazyLoad: false,
+        listContentConfig: {
+          contentService: 'story-feed-query',
+          contentConfigValues: {
+            size: 1,
+            offset: 0,
+          },
+        },
+        showByline: false,
+        showDate: false,
+        showDescription: false,
+        showHeadline: true,
+        showImage: false,
+      },
+      deployment: jest.fn(),
+      isAdmin: false,
+    });
+
+    useContent
+      .mockReset()
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[0])
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[1]);
+
+    const { unmount } = render(<Results />);
+    fireEvent.click(screen.getByText('See More'));
+    expect(screen.getByText(/test headline 2/i)).toHaveFocus();
+    unmount();
+  });
+});
+
 describe('story-feed-query service', () => {
   it('should call useContent with appropriate query parameters', () => {
     useFusionContext.mockReturnValue({

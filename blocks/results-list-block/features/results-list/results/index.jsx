@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useReducer, useRef, useState,
+  createRef, useCallback, useEffect, useReducer, useState,
 } from 'react';
 
 import ArticleDate from '@wpmedia/date-block';
@@ -169,7 +169,6 @@ const Results = () => {
   );
 
   const [queryOffset, setQueryOffset] = useState(configuredOffset);
-  const listItemRefs = useRef([]);
 
   const [targetFallbackImage] = useState(
     !(fallbackImage.includes('http'))
@@ -289,17 +288,32 @@ const Results = () => {
     }
   }, [requestedResultList]);
 
+  const [elementRefs, setElementRefs] = useState([]);
+  const [focalElement, setFocalElement] = useState(null);
   useEffect(() => {
-    if (queryOffset !== configuredOffset) {
-      const topItem = resultList.content_elements[queryOffset - configuredOffset];
-      if (topItem?._id && listItemRefs.current[topItem?._id]) {
-        const focusLink = listItemRefs.current[topItem._id].querySelector('a:not([aria-hidden])');
-        if (focusLink) {
-          focusLink.focus();
+    setElementRefs((existingRefs) => {
+      const refArray = existingRefs.concat(
+        resultList.content_elements
+          .map(() => createRef()),
+      );
+      if (queryOffset !== configuredOffset) { // ignore the first item for focus purposes
+        const topItem = queryOffset - configuredOffset;
+        if (refArray[topItem]) {
+          setFocalElement(refArray[topItem]);
         }
       }
-    }
+      return refArray;
+    });
   }, [configuredOffset, queryOffset, resultList]);
+
+  useEffect(() => {
+    if (focalElement?.current) {
+      const focusLink = focalElement.current.querySelector('a:not([aria-hidden])');
+      if (focusLink) {
+        focusLink.focus();
+      }
+    }
+  }, [focalElement]);
 
   const [promoElements] = useState(resolveDefaultPromoElements(customFields));
   const [phrases] = useState(getTranslatedPhrases(locale || 'en'));
@@ -309,10 +323,10 @@ const Results = () => {
 
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
-      {viewableElements.map((element) => (
+      {viewableElements.map((element, index) => (
         <ResultsItem
           key={`result-card-${element._id}`}
-          ref={listItemRefs.current[element._id]}
+          ref={elementRefs[index]}
           arcSite={arcSite}
           element={element}
           promoElements={promoElements}

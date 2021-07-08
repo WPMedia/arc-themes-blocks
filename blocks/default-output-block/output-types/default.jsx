@@ -65,13 +65,6 @@ const optimalFontLoading = (fontUrl, index = '') => (
       data-testid={`font-loading-url-${index}`}
       href={`${fontUrl}&display=swap`}
     />
-
-    <noscript>
-      <link
-        rel="stylesheet"
-        href={`${fontUrl}&display=swap`}
-      />
-    </noscript>
   </>
 );
 

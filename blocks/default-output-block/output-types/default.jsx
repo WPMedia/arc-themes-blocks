@@ -53,19 +53,49 @@ const googleTagManagerNoScript = (gtmID) => {
   );
 };
 
+const optimalFontLoading = (fontUrl, index = '') => (
+  <>
+    <link
+      rel="preload"
+      as="style"
+      href={`${fontUrl}&display=swap`}
+    />
+    <link
+      rel="stylesheet"
+      key={fontUrl}
+      data-testid={`font-loading-url-${index}`}
+      href={`${fontUrl}&display=swap`}
+    />
+  </>
+);
+
+// preconnect g static assumes google font, only supported in themes settings anyway
 const fontUrlLink = (fontUrl) => {
   // If fontURL is an array, then iterate over the array and build out the links
   if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
-    const fontLinks = [...new Set(fontUrl)].map((url, index) => (
-      <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={`${url}&display=swap`} />
-    ));
+    const fontLinks = [...new Set(fontUrl)].map((url, index) => optimalFontLoading(url, index));
+
     return (
-      <>{fontLinks}</>
+      <>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin
+        />
+        <>{fontLinks}</>
+      </>
     );
   }
   // Legacy support where fontUrl is a string
   return fontUrl ? (
-    <link rel="stylesheet" href={`${fontUrl}&display=swap`} />
+    <>
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin
+      />
+      {optimalFontLoading(fontUrl)}
+    </>
   ) : '';
 };
 

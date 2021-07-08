@@ -293,7 +293,7 @@ const Results = () => {
   useEffect(() => {
     setElementRefs((existingRefs) => {
       const refArray = existingRefs.concat(
-        resultList.content_elements
+        requestedResultList.content_elements
           .map(() => createRef()),
       );
       if (queryOffset !== configuredOffset) { // ignore the first item for focus purposes
@@ -304,7 +304,7 @@ const Results = () => {
       }
       return refArray;
     });
-  }, [configuredOffset, queryOffset, resultList]);
+  }, [configuredOffset, queryOffset, requestedResultList]);
 
   useEffect(() => {
     if (focalElement?.current) {

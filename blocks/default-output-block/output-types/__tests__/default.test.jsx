@@ -531,18 +531,12 @@ describe('queryly render conditions', () => {
 });
 
 describe('The spa property', () => {
-  // we're only expecting spaSites to be an array
+  // we're only expecting spaSites to be an array or undefined
   it('should be set as true if spaSites is undefined', () => {
     expect(configureSinglePageApp(undefined)).toStrictEqual(true);
   });
   it('should be set to empty array if spaSites is an empty array', () => {
     expect(configureSinglePageApp([])).toStrictEqual([]);
-  });
-  it('should be set to true if spaSites is false', () => {
-    expect(configureSinglePageApp(false)).toStrictEqual(true);
-  });
-  it('should be set to true if spaSites is true', () => {
-    expect(configureSinglePageApp(true)).toStrictEqual(true);
   });
   it('should be set to a one-item array if one site id is passed in to spaSites', () => {
     const spaSites = ['the-sun'];

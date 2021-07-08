@@ -114,7 +114,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').length).toBe(5);
+    expect(wrapper.find('link').length).toBe(4);
   });
 
   it('should have a MedataData component', () => {

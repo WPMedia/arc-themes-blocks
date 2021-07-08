@@ -80,7 +80,7 @@ const fontUrlLink = (fontUrl) => {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin
+          crossOrigin="true"
         />
         <>{fontLinks}</>
       </>
@@ -92,7 +92,7 @@ const fontUrlLink = (fontUrl) => {
       <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
-        crossOrigin
+        crossOrigin="true"
       />
       {optimalFontLoading(fontUrl)}
     </>

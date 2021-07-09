@@ -33,10 +33,14 @@ const ReadMoreButton = styled.button`
 const ResultsItem = React.memo(React.forwardRef(({
   arcSite,
   element,
-  promoElements,
   imageProperties,
   targetFallbackImage,
   placeholderResizedImageOptions,
+  showImage,
+  showByline,
+  showDescription,
+  showHeadline,
+  showDate,
 }, ref) => {
   const {
     description: { basic: descriptionText } = {},
@@ -48,8 +52,8 @@ const ResultsItem = React.memo(React.forwardRef(({
   const imageURL = extractImageFromStory(element);
   const url = websites[arcSite].website_url;
   return (
-    <div className="list-item" ref={ref}>
-      {(promoElements.showImage)
+    <div className="list-item" ref={ref} key={element._id}>
+      {(showImage)
         ? (
           <div className="results-list--image-container mobile-order-2 mobile-image">
             <a
@@ -70,7 +74,7 @@ const ResultsItem = React.memo(React.forwardRef(({
           </div>
         )
         : null}
-      {(promoElements.showHeadline)
+      {(showHeadline)
         ? (
           <div className="results-list--headline-container mobile-order-1">
             <a href={url} title={headlineText}>
@@ -79,10 +83,10 @@ const ResultsItem = React.memo(React.forwardRef(({
           </div>
         )
         : null }
-      {(promoElements.showDescription || promoElements.showDate || promoElements.showByline)
+      {(showDescription || showDate || showByline)
         ? (
           <div className="results-list--description-author-container mobile-order-3">
-            {(promoElements.showDescription && descriptionText)
+            {(showDescription && descriptionText)
               ? (
                 <a href={url} title={headlineText}>
                   <SecondaryFont as="p" className="description-text">
@@ -91,20 +95,20 @@ const ResultsItem = React.memo(React.forwardRef(({
                 </a>
               )
               : null}
-            {(promoElements.showDate || promoElements.showByline)
+            {(showDate || showByline)
               ? (
                 <div className="results-list--author-date">
-                  {(promoElements.showByline)
+                  {(showByline)
                     ? (
                       <Byline
                         content={element}
                         list
-                        separator={promoElements.showDate}
+                        separator={showDate}
                         font="Primary"
                       />
                     )
                     : null }
-                  {(promoElements.showDate)
+                  {(showDate)
                     ? <ArticleDate classNames="story-date" date={displayDate} />
                     : null }
                 </div>
@@ -298,7 +302,7 @@ const Results = ({
     }
   }, [focalElement]);
 
-  const [promoElements] = useState(resolveDefaultPromoElements(customFields));
+  const promoElements = resolveDefaultPromoElements(customFields);
   const phrases = getTranslatedPhrases(locale || 'en');
 
   const viewableElements = resultList?.content_elements
@@ -315,7 +319,12 @@ const Results = ({
           ref={elementRefs[index]}
           arcSite={arcSite}
           element={element}
-          promoElements={promoElements}
+          showImage={promoElements.showImage}
+          showByline={promoElements.showByline}
+          showDescription={promoElements.showDescription}
+          showHeadline={promoElements.showHeadline}
+          showDate={promoElements.showDate}
+          // promoElements={promoElements}
           imageProperties={imageProperties}
           targetFallbackImage={targetFallbackImage}
           placeholderResizedImageOptions={placeholderResizedImageOptions}

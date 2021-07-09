@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useFusionContext } from 'fusion:context';
+import getTranslatedPhrases from 'fusion:intl';
 import getProperties from 'fusion:properties';
 
-import { LazyLoad } from '@wpmedia/engine-theme-sdk';
+import { isServerSide, LazyLoad } from '@wpmedia/engine-theme-sdk';
 import { HeadingSection } from '@wpmedia/shared-styles';
 
 // shared with search results list
@@ -13,6 +14,7 @@ import '@wpmedia/shared-styles/scss/_results-list.scss';
 import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
 import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
+import { resolveDefaultPromoElements } from './results/helpers';
 import Results from './results';
 
 const ResultsList = ({ customFields }) => {
@@ -22,14 +24,20 @@ const ResultsList = ({ customFields }) => {
     deployment,
     isAdmin,
   } = useFusionContext();
-  const { lazyLoad } = customFields;
+  const {
+    lazyLoad,
+    listContentConfig: {
+      contentService,
+      contentConfigValues,
+    },
+  } = customFields;
   const {
     fallbackImage,
     locale,
     primaryLogoAlt,
     breakpoints,
     resizerURL,
-  } = getProperties(arcSite) || {};
+  } = getProperties(arcSite);
   const imageProperties = {
     smallWidth: 158,
     smallHeight: 89,
@@ -41,23 +49,38 @@ const ResultsList = ({ customFields }) => {
     breakpoints,
     resizerURL,
   };
+  const targetFallbackImage = !(fallbackImage.includes('http'))
+    ? deployment(`${contextPath}/${fallbackImage}`)
+    : fallbackImage;
+  const promoElements = resolveDefaultPromoElements(customFields);
+  const phrases = getTranslatedPhrases(locale || 'en');
+  const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
+  const configuredOffset = parseInt(contentConfigValues.offset, 10)
+    || parseInt(contentConfigValues.feedOffset, 10)
+    || parseInt(contentConfigValues.from, 10)
+    || 0;
+  const configuredSize = parseInt(contentConfigValues.size, 10)
+    || parseInt(contentConfigValues.feedSize, 10)
+    || 10;
 
   return (
     <LazyLoad enabled={lazyLoad && !isAdmin}>
       <HeadingSection>
         <Results
-          customFields={customFields}
-          fusionContext={{
-            arcSite,
-            contextPath,
-            deployment,
-            isAdmin,
-          }}
-          fusionProperties={{
-            fallbackImage,
-            locale,
-          }}
+          arcSite={arcSite}
+          configuredOffset={configuredOffset}
+          configuredSize={configuredSize}
+          contentConfigValues={contentConfigValues}
+          contentService={contentService}
           imageProperties={imageProperties}
+          isServerSideLazy={isServerSideLazy}
+          phrases={phrases}
+          showByline={promoElements.showByline}
+          showDate={promoElements.showDate}
+          showDescription={promoElements.showDescription}
+          showHeadline={promoElements.showHeadline}
+          showImage={promoElements.showImage}
+          targetFallbackImage={targetFallbackImage}
         />
       </HeadingSection>
     </LazyLoad>

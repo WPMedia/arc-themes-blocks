@@ -5,20 +5,16 @@ import React, {
 import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
 import { useContent } from 'fusion:content';
 
-import { Image, isServerSide } from '@wpmedia/engine-theme-sdk';
+import { Image } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import {
   Byline,
   Heading,
   SecondaryFont,
 } from '@wpmedia/shared-styles';
-import {
-  reduceResultList,
-  resolveDefaultPromoElements,
-} from './helpers';
+import { reduceResultList } from './helpers';
 
 const ReadMoreButton = styled.button`
   background-color: ${(props) => props.primaryColor};
@@ -33,10 +29,14 @@ const ReadMoreButton = styled.button`
 const ResultsItem = React.memo(React.forwardRef(({
   arcSite,
   element,
-  promoElements,
   imageProperties,
   targetFallbackImage,
   placeholderResizedImageOptions,
+  showByline,
+  showDate,
+  showDescription,
+  showHeadline,
+  showImage,
 }, ref) => {
   const {
     description: { basic: descriptionText } = {},
@@ -49,7 +49,7 @@ const ResultsItem = React.memo(React.forwardRef(({
   const url = websites[arcSite].website_url;
   return (
     <div className="list-item" ref={ref}>
-      {(promoElements.showImage)
+      {(showImage)
         ? (
           <div className="results-list--image-container mobile-order-2 mobile-image">
             <a
@@ -70,7 +70,7 @@ const ResultsItem = React.memo(React.forwardRef(({
           </div>
         )
         : null }
-      {(promoElements.showHeadline)
+      {(showHeadline)
         ? (
           <div className="results-list--headline-container mobile-order-1">
             <a href={url} title={headlineText}>
@@ -79,10 +79,10 @@ const ResultsItem = React.memo(React.forwardRef(({
           </div>
         )
         : null }
-      {(promoElements.showDescription || promoElements.showDate || promoElements.showByline)
+      {(showDescription || showDate || showByline)
         ? (
           <div className="results-list--description-author-container mobile-order-3">
-            {(promoElements.showDescription && descriptionText)
+            {(showDescription && descriptionText)
               ? (
                 <a href={url} title={headlineText}>
                   <SecondaryFont as="p" className="description-text">
@@ -91,20 +91,20 @@ const ResultsItem = React.memo(React.forwardRef(({
                 </a>
               )
               : null }
-            {(promoElements.showDate || promoElements.showByline)
+            {(showDate || showByline)
               ? (
                 <div className="results-list--author-date">
-                  {(promoElements.showByline)
+                  {(showByline)
                     ? (
                       <Byline
                         content={element}
                         list
-                        separator={promoElements.showDate}
+                        separator={showDate}
                         font="Primary"
                       />
                     )
                     : null }
-                  {(promoElements.showDate)
+                  {(showDate)
                     ? <ArticleDate classNames="story-date" date={displayDate} />
                     : null }
                 </div>
@@ -118,51 +118,27 @@ const ResultsItem = React.memo(React.forwardRef(({
 }));
 
 const Results = ({
-  customFields,
-  fusionContext,
-  fusionProperties,
+  arcSite,
+  configuredOffset,
+  configuredSize,
+  contentConfigValues,
+  contentService,
   imageProperties,
+  isServerSideLazy = false,
+  phrases,
+  showByline = false,
+  showDate = false,
+  showDescription = false,
+  showHeadline = false,
+  showImage = false,
+  targetFallbackImage,
 }) => {
-  const {
-    lazyLoad,
-    listContentConfig: {
-      contentService,
-      contentConfigValues,
-    },
-  } = customFields;
-
-  const {
-    arcSite,
-    contextPath,
-    deployment,
-    isAdmin,
-  } = fusionContext;
-
-  const {
-    fallbackImage,
-    locale,
-  } = fusionProperties;
-
-  const configuredOffset = parseInt(contentConfigValues.offset, 10)
-    || parseInt(contentConfigValues.feedOffset, 10)
-    || parseInt(contentConfigValues.from, 10)
-    || 0;
-  const configuredSize = parseInt(contentConfigValues.size, 10)
-    || parseInt(contentConfigValues.feedSize, 10)
-    || 10;
-
   const [queryOffset, setQueryOffset] = useState(configuredOffset);
-
-  const targetFallbackImage = !(fallbackImage.includes('http'))
-    ? deployment(`${contextPath}/${fallbackImage}`)
-    : fallbackImage;
 
   const placeholderResizedImageOptions = useContent({
     source: !targetFallbackImage.includes('/resources/') ? 'resize-image-api' : null,
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
   });
-
-  const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
 
   const serviceQueryPage = useCallback((requestedOffset = 0) => {
     /*
@@ -297,14 +273,15 @@ const Results = ({
     }
   }, [focalElement]);
 
-  const [promoElements] = useState(resolveDefaultPromoElements(customFields));
-  const [phrases] = useState(getTranslatedPhrases(locale || 'en'));
-
   const viewableElements = resultList?.content_elements
     .slice(0, queryOffset + configuredSize - configuredOffset);
 
   const isThereMore = requestedResultList?.next
     || viewableElements?.length < resultList?.count - configuredOffset;
+
+  const onReadMoreClick = useCallback(() => {
+    setQueryOffset((oldOffset) => oldOffset + configuredSize);
+  }, [configuredSize, setQueryOffset]);
 
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
@@ -314,21 +291,25 @@ const Results = ({
           ref={elementRefs[index]}
           arcSite={arcSite}
           element={element}
-          promoElements={promoElements}
           imageProperties={imageProperties}
-          targetFallbackImage={targetFallbackImage}
           placeholderResizedImageOptions={placeholderResizedImageOptions}
+          showByline={showByline}
+          showDate={showDate}
+          showDescription={showDescription}
+          showHeadline={showHeadline}
+          showImage={showImage}
+          targetFallbackImage={targetFallbackImage}
         />
       ))}
       {isThereMore && (
         <div className="see-more">
           <ReadMoreButton
+            aria-label={phrases.t('results-list-block.see-more-button-aria-label')}
             type="button"
-            onClick={() => setQueryOffset((oldOffset) => oldOffset + configuredSize)}
             className="btn btn-sm"
+            onClick={onReadMoreClick}
             primaryFont={getThemeStyle(arcSite)['primary-font-family']}
             primaryColor={getThemeStyle(arcSite)['primary-color']}
-            aria-label={phrases.t('results-list-block.see-more-button-aria-label')}
           >
             {phrases.t('results-list-block.see-more-button')}
           </ReadMoreButton>

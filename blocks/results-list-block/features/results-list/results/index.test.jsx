@@ -21,21 +21,11 @@ jest.mock('@wpmedia/shared-styles', () => ({
   SecondaryFont: () => <div>Font Sample Text - 123</div>,
 }));
 
-jest.mock('@wpmedia/resizer-image-block', () => ({
-  extractResizedParams: jest.fn(),
-  extractImageFromStory: jest.fn(),
-}));
-
-const fusionContext = {
-  arcSite: 'the-sun',
-  contextPath: '/pf',
-  deployment: jest.fn(),
-  isAdmin: false,
-};
+const fallbackImage = 'http://test/resources/fallback.jpg';
 
 const fusionProperties = {
   breakpoints: {},
-  fallbackImage: 'http://test/resources/fallback.jpg',
+  fallbackImage,
   locale: 'en',
   primaryLogoAlt: 'logo alt',
   resizerURL: 'https://resizer.me',
@@ -125,74 +115,27 @@ jest.mock('fusion:content', () => ({
   useContent: jest.fn(),
 }));
 
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../../intl.json')[phrase][locale]) })),
-}));
-
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 
-describe('getFallbackImageURL', () => {
-  it('should NOT call deployment with context path if http is contained in fallback image url', () => {
-    const mockDeployment = jest.fn();
-
-    const mockFusionContext = {
-      ...fusionContext,
-      deployment: mockDeployment,
-    };
-
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          size: 1,
-          offset: 0,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: true,
-    };
-
-    useContent
-      .mockReset()
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
-
-    const { unmount } = render(
-      <Results
-        customFields={customFields}
-        fusionContext={mockFusionContext}
-        fusionProperties={fusionProperties}
-        imageProperties={imageProperties}
-      />,
-    );
-    expect(mockDeployment).toHaveBeenCalledTimes(0);
-    unmount();
-  });
-});
+const mockPhrases = {
+  t: jest.fn((phraseString) => {
+    switch (phraseString) {
+      case 'results-list-block.see-more-button': {
+        return 'See More';
+      }
+      case 'results-list-block.see-more-button-aria-label': {
+        return 'button';
+      }
+      default: {
+        break;
+      }
+    }
+    return '';
+  }),
+};
 
 describe('seeMore', () => {
   it('should trigger a state update', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          size: 1,
-          offset: 0,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -202,10 +145,15 @@ describe('seeMore', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -220,22 +168,6 @@ describe('seeMore', () => {
   });
 
   it('should not show for the last items', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          offset: 0,
-          size: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -243,10 +175,15 @@ describe('seeMore', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -258,22 +195,6 @@ describe('seeMore', () => {
 
 describe('focus', () => {
   it('should not be set on the very first item on the page', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          size: 1,
-          offset: 0,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -281,10 +202,15 @@ describe('focus', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
     expect(screen.getByText(/test headline 1/i)).not.toHaveFocus();
@@ -292,22 +218,6 @@ describe('focus', () => {
   });
 
   it('should be set on the first new item added', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          size: 1,
-          offset: 0,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -317,10 +227,15 @@ describe('focus', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
     fireEvent.click(screen.getByText('See More'));
@@ -331,22 +246,6 @@ describe('focus', () => {
 
 describe('story-feed-query service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-query',
-        contentConfigValues: {
-          offset: 0,
-          size: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -356,10 +255,15 @@ describe('story-feed-query service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -392,22 +296,6 @@ describe('story-feed-query service', () => {
 
 describe('content-api-collections service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'content-api-collections',
-        contentConfigValues: {
-          from: 0,
-          size: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -417,10 +305,15 @@ describe('content-api-collections service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="content-api-collections"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -453,22 +346,6 @@ describe('content-api-collections service', () => {
 
 describe('story-feed-author service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-author',
-        contentConfigValues: {
-          feedOffset: 0,
-          feedSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -478,10 +355,15 @@ describe('story-feed-author service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-author"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -514,22 +396,6 @@ describe('story-feed-author service', () => {
 
 describe('story-feed-sections service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-sections',
-        contentConfigValues: {
-          feedOffset: 0,
-          feedSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -539,10 +405,15 @@ describe('story-feed-sections service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-sections"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -575,22 +446,6 @@ describe('story-feed-sections service', () => {
 
 describe('story-feed-tag service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'story-feed-tag',
-        contentConfigValues: {
-          feedOffset: 0,
-          feedSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -600,10 +455,15 @@ describe('story-feed-tag service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-tag"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -636,22 +496,6 @@ describe('story-feed-tag service', () => {
 
 describe('unknown service', () => {
   it('should call useContent with appropriate query parameters', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -661,10 +505,18 @@ describe('unknown service', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{
+          defaultOffset: 0,
+          defaultSize: 1,
+        }}
+        contentService="unknown"
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -685,22 +537,6 @@ describe('unknown service', () => {
 
 describe('Result parts', () => {
   it('should show byline if showByline', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: true,
-      showDate: false,
-      showDescription: false,
-      showHeadline: false,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -708,10 +544,15 @@ describe('Result parts', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService={null}
+        phrases={mockPhrases}
+        showByline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -721,22 +562,6 @@ describe('Result parts', () => {
   });
 
   it('should show the date if showDate', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: true,
-      showDescription: false,
-      showHeadline: false,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -744,10 +569,15 @@ describe('Result parts', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService={null}
+        phrases={mockPhrases}
+        showDate
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -757,22 +587,6 @@ describe('Result parts', () => {
   });
 
   it('should show the description if showDescription', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: true,
-      showHeadline: false,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -780,10 +594,15 @@ describe('Result parts', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService={null}
+        phrases={mockPhrases}
+        showDescription
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -793,22 +612,6 @@ describe('Result parts', () => {
   });
 
   it('should show headline if showHeadline', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: true,
-      showImage: false,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -816,10 +619,15 @@ describe('Result parts', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService={null}
+        phrases={mockPhrases}
+        showHeadline
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 
@@ -829,22 +637,6 @@ describe('Result parts', () => {
   });
 
   it('should show the image if showImage', () => {
-    const customFields = {
-      lazyLoad: false,
-      listContentConfig: {
-        contentService: 'unknown',
-        contentConfigValues: {
-          defaultOffset: 0,
-          defaultSize: 1,
-        },
-      },
-      showByline: false,
-      showDate: false,
-      showDescription: false,
-      showHeadline: false,
-      showImage: true,
-    };
-
     useContent
       .mockReset()
       .mockReturnValueOnce({})
@@ -852,10 +644,15 @@ describe('Result parts', () => {
 
     const { unmount } = render(
       <Results
-        customFields={customFields}
-        fusionContext={fusionContext}
-        fusionProperties={fusionProperties}
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService={null}
+        phrases={mockPhrases}
+        showImage
         imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
       />,
     );
 

@@ -55,12 +55,12 @@ const ResultsList = ({ customFields }) => {
   const promoElements = resolveDefaultPromoElements(customFields);
   const phrases = getTranslatedPhrases(locale || 'en');
   const isServerSideLazy = lazyLoad && isServerSide() && !isAdmin;
-  const configuredOffset = parseInt(contentConfigValues.offset, 10)
-    || parseInt(contentConfigValues.feedOffset, 10)
-    || parseInt(contentConfigValues.from, 10)
+  const configuredOffset = parseInt(contentConfigValues?.offset, 10)
+    || parseInt(contentConfigValues?.feedOffset, 10)
+    || parseInt(contentConfigValues?.from, 10)
     || 0;
-  const configuredSize = parseInt(contentConfigValues.size, 10)
-    || parseInt(contentConfigValues.feedSize, 10)
+  const configuredSize = parseInt(contentConfigValues?.size, 10)
+    || parseInt(contentConfigValues?.feedSize, 10)
     || 10;
 
   return (

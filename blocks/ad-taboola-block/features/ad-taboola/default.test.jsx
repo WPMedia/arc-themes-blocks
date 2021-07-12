@@ -66,7 +66,11 @@ describe('render Taboola widget', () => {
         container: 'tbl-widget',
       };
 
-      const wrapper = shallow(<AdTaboola metaValue={metaValueMock} customFields={customFields} isAdmin />);
+      const wrapper = shallow(<AdTaboola
+        metaValue={metaValueMock}
+        customFields={customFields}
+        isAdmin
+      />);
 
       expect(wrapper.find(TBL_WRAPPER).length).toBe(1);
       expect(wrapper.find('AdTaboola #tbl-widget').length).toBe(0);

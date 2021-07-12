@@ -76,4 +76,32 @@ describe('the double chain block', () => {
 
     expect(component).toBeEmptyRender();
   });
+
+  it('should render heading from custom field and children', () => {
+    const customFields = { columnOne: 1, heading: 'Double Chain Heading' };
+    const component = mount(
+      <DoubleChain customFields={customFields}>
+        <Comp1 />
+        <Comp2 />
+      </DoubleChain>,
+    );
+
+    expect(component.find('Heading').text()).toBe('Double Chain Heading');
+    expect(component.find('HeadingSection').exists()).toBe(true);
+    expect(component.find('.column-1').text()).toBe('1');
+  });
+
+  it('should not render heading from custom field and children', () => {
+    const customFields = { columnOne: 1 };
+    const component = mount(
+      <DoubleChain customFields={customFields}>
+        <Comp1 />
+        <Comp2 />
+      </DoubleChain>,
+    );
+
+    expect(component.find('Heading').exists()).toBe(false);
+    expect(component.find('HeadingSection').exists()).toBe(false);
+    expect(component.find('.column-1').text()).toBe('1');
+  });
 });

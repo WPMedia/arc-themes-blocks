@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -6,20 +7,23 @@ import { useContent } from 'fusion:content';
 
 import Results from './index';
 
-jest.mock('@wpmedia/date-block', () => ({
-  __esModule: true,
-  default: () => <div>Date Sample Text - 123</div>,
-}));
-
-jest.mock('@wpmedia/engine-theme-sdk', () => ({
-  Image: () => <div>Image Sample Text - 123</div>,
-}));
-
-jest.mock('@wpmedia/shared-styles', () => ({
-  Byline: () => <div>Byline Sample Text - 123</div>,
-  Heading: ({ children }) => <>{children}</>,
-  SecondaryFont: () => <div>Font Sample Text - 123</div>,
-}));
+jest.mock('./result-item', () => {
+  /* eslint-disable-next-line no-shadow */
+  const React = require('react');
+  return {
+    __esModule: true,
+    default: React.forwardRef(
+      (props, ref) => (
+        <div ref={ref}>
+          Result Item
+          { props.showHeadline
+            ? <a href="valid">{JSON.stringify(props)}</a>
+            : null}
+        </div>
+      ),
+    ),
+  };
+});
 
 const fallbackImage = 'http://test/resources/fallback.jpg';
 
@@ -157,11 +161,11 @@ describe('seeMore', () => {
       />,
     );
 
-    expect(screen.getAllByText(/test headline/i)).toHaveLength(1);
+    expect(screen.getAllByText(/Result Item/i)).toHaveLength(1);
 
     fireEvent.click(screen.getByText('See More'));
 
-    expect(screen.getAllByText(/test headline/i)).toHaveLength(2);
+    expect(screen.getAllByText(/Result Item/i)).toHaveLength(2);
 
     expect(useContent).toHaveBeenCalled();
     unmount();
@@ -213,7 +217,7 @@ describe('focus', () => {
         targetFallbackImage={fallbackImage}
       />,
     );
-    expect(screen.getByText(/test headline 1/i)).not.toHaveFocus();
+    expect(screen.getByText(/"_id":"element_1"/i)).not.toHaveFocus();
     unmount();
   });
 
@@ -239,7 +243,33 @@ describe('focus', () => {
       />,
     );
     fireEvent.click(screen.getByText('See More'));
-    expect(screen.getByText(/test headline 2/i)).toHaveFocus();
+    expect(screen.getByText(/"_id":"element_2"/i)).toHaveFocus();
+    unmount();
+  });
+
+  it('should not set focus if there is no link', () => {
+    useContent
+      .mockReset()
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[0])
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[1]);
+
+    const { unmount } = render(
+      <Results
+        arcSite="the-sun"
+        configuredOffset={0}
+        configuredSize={1}
+        contentConfigValues={{}}
+        contentService="story-feed-query"
+        phrases={mockPhrases}
+        imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
+        showDescription
+      />,
+    );
+    fireEvent.click(screen.getByText('See More'));
+    expect(screen.getAllByText(/Result Item/i)[1]).not.toHaveFocus();
     unmount();
   });
 });
@@ -535,128 +565,66 @@ describe('unknown service', () => {
   });
 });
 
-describe('Result parts', () => {
-  it('should show byline if showByline', () => {
+describe('lazy flags', () => {
+  it('should return nothing if isServerSideLazy is true', () => {
     useContent
       .mockReset()
       .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
+      .mockReturnValueOnce(mockContent[0])
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[1]);
 
     const { unmount } = render(
       <Results
         arcSite="the-sun"
         configuredOffset={0}
         configuredSize={1}
-        contentConfigValues={{}}
-        contentService={null}
-        phrases={mockPhrases}
-        showByline
-        imageProperties={imageProperties}
-        targetFallbackImage={fallbackImage}
-      />,
-    );
-
-    expect(screen.getAllByText(/Byline Sample Text - 123/i)).toHaveLength(1);
-
-    unmount();
-  });
-
-  it('should show the date if showDate', () => {
-    useContent
-      .mockReset()
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
-
-    const { unmount } = render(
-      <Results
-        arcSite="the-sun"
-        configuredOffset={0}
-        configuredSize={1}
-        contentConfigValues={{}}
-        contentService={null}
-        phrases={mockPhrases}
-        showDate
-        imageProperties={imageProperties}
-        targetFallbackImage={fallbackImage}
-      />,
-    );
-
-    expect(screen.getAllByText(/Date Sample Text - 123/i)).toHaveLength(1);
-
-    unmount();
-  });
-
-  it('should show the description if showDescription', () => {
-    useContent
-      .mockReset()
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
-
-    const { unmount } = render(
-      <Results
-        arcSite="the-sun"
-        configuredOffset={0}
-        configuredSize={1}
-        contentConfigValues={{}}
-        contentService={null}
-        phrases={mockPhrases}
-        showDescription
-        imageProperties={imageProperties}
-        targetFallbackImage={fallbackImage}
-      />,
-    );
-
-    expect(screen.getAllByText(/Font Sample Text - 123/i)).toHaveLength(1);
-
-    unmount();
-  });
-
-  it('should show headline if showHeadline', () => {
-    useContent
-      .mockReset()
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
-
-    const { unmount } = render(
-      <Results
-        arcSite="the-sun"
-        configuredOffset={0}
-        configuredSize={1}
-        contentConfigValues={{}}
-        contentService={null}
+        contentConfigValues={{
+          defaultOffset: 0,
+          defaultSize: 1,
+        }}
+        contentService="unknown"
         phrases={mockPhrases}
         showHeadline
         imageProperties={imageProperties}
         targetFallbackImage={fallbackImage}
+        isServerSideLazy
       />,
     );
 
-    expect(screen.getAllByText(/test headline/i)).toHaveLength(1);
+    expect(screen.queryByText(/Result Item/i)).not.toBeInTheDocument();
 
     unmount();
   });
+});
 
-  it('should show the image if showImage', () => {
+describe('fallback image', () => {
+  it('should return even if the fallback image is not a /resource/ path', () => {
     useContent
       .mockReset()
       .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0]);
+      .mockReturnValueOnce(mockContent[0])
+      .mockReturnValueOnce({})
+      .mockReturnValueOnce(mockContent[1]);
 
     const { unmount } = render(
       <Results
         arcSite="the-sun"
         configuredOffset={0}
         configuredSize={1}
-        contentConfigValues={{}}
-        contentService={null}
+        contentConfigValues={{
+          defaultOffset: 0,
+          defaultSize: 1,
+        }}
+        contentService="unknown"
         phrases={mockPhrases}
-        showImage
+        showHeadline
         imageProperties={imageProperties}
-        targetFallbackImage={fallbackImage}
+        targetFallbackImage="http://test/fallback.jpg"
       />,
     );
 
-    expect(screen.getAllByText(/Image Sample Text - 123/i)).toHaveLength(1);
+    expect(screen.queryByText(/"targetFallbackImage":"http:\/\/test\/fallback.jpg"/i)).toBeInTheDocument();
 
     unmount();
   });

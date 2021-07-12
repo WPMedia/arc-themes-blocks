@@ -2,18 +2,11 @@ import React, {
   createRef, useCallback, useEffect, useReducer, useState,
 } from 'react';
 
-import ArticleDate from '@wpmedia/date-block';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
 
-import { Image } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
-import {
-  Byline,
-  Heading,
-  SecondaryFont,
-} from '@wpmedia/shared-styles';
+import ResultItem from './result-item';
 import { reduceResultList } from './helpers';
 
 const ReadMoreButton = styled.button`
@@ -25,97 +18,6 @@ const ReadMoreButton = styled.button`
     background-color: ${(props) => props.primaryColor};
   }
 `;
-
-const ResultsItem = React.memo(React.forwardRef(({
-  arcSite,
-  element,
-  imageProperties,
-  targetFallbackImage,
-  placeholderResizedImageOptions,
-  showByline,
-  showDate,
-  showDescription,
-  showHeadline,
-  showImage,
-}, ref) => {
-  const {
-    description: { basic: descriptionText } = {},
-    display_date: displayDate,
-    headlines: { basic: headlineText } = {},
-    websites,
-  } = element;
-
-  const imageURL = extractImageFromStory(element);
-  const url = websites[arcSite].website_url;
-  return (
-    <div className="list-item" ref={ref}>
-      {(showImage)
-        ? (
-          <div className="results-list--image-container mobile-order-2 mobile-image">
-            <a
-              href={url}
-              title={headlineText}
-              aria-hidden="true"
-              tabIndex="-1"
-            >
-              <Image
-                {...imageProperties}
-                url={imageURL !== null ? imageURL : targetFallbackImage}
-                alt={imageURL !== null ? headlineText : imageProperties.primaryLogoAlt}
-                resizedImageOptions={imageURL !== null
-                  ? extractResizedParams(element)
-                  : placeholderResizedImageOptions}
-              />
-            </a>
-          </div>
-        )
-        : null }
-      {(showHeadline)
-        ? (
-          <div className="results-list--headline-container mobile-order-1">
-            <a href={url} title={headlineText}>
-              <Heading className="headline-text">{headlineText}</Heading>
-            </a>
-          </div>
-        )
-        : null }
-      {(showDescription || showDate || showByline)
-        ? (
-          <div className="results-list--description-author-container mobile-order-3">
-            {(showDescription && descriptionText)
-              ? (
-                <a href={url} title={headlineText}>
-                  <SecondaryFont as="p" className="description-text">
-                    {descriptionText}
-                  </SecondaryFont>
-                </a>
-              )
-              : null }
-            {(showDate || showByline)
-              ? (
-                <div className="results-list--author-date">
-                  {(showByline)
-                    ? (
-                      <Byline
-                        content={element}
-                        list
-                        separator={showDate}
-                        font="Primary"
-                      />
-                    )
-                    : null }
-                  {(showDate)
-                    ? <ArticleDate classNames="story-date" date={displayDate} />
-                    : null }
-                </div>
-              )
-              : null }
-          </div>
-        )
-        : null }
-    </div>
-  );
-}));
 
 const Results = ({
   arcSite,
@@ -140,7 +42,7 @@ const Results = ({
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
   });
 
-  const serviceQueryPage = useCallback((requestedOffset = 0) => {
+  const serviceQueryPage = useCallback((requestedOffset) => {
     /*
       This sets up a window view of the data starting from the initial index
       to *twice* the size.  When clicking on the more button, we will render
@@ -256,9 +158,7 @@ const Results = ({
       );
       if (queryOffset !== configuredOffset) { // ignore the first item for focus purposes
         const topItem = queryOffset - configuredOffset;
-        if (refArray[topItem]) {
-          setFocalElement(refArray[topItem]);
-        }
+        setFocalElement(refArray[topItem]);
       }
       return refArray;
     });
@@ -286,7 +186,7 @@ const Results = ({
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
       {viewableElements.map((element, index) => (
-        <ResultsItem
+        <ResultItem
           key={`result-card-${element._id}`}
           ref={elementRefs[index]}
           arcSite={arcSite}

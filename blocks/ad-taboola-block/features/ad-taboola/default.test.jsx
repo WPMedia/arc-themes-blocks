@@ -7,12 +7,14 @@ const TBL_WRAPPER = '.tbl-wrapper';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
+const metaValueMock = () => 'article';
+
 describe('render Taboola widget', () => {
   describe('when missing configuration parameters', () => {
     const { default: AdTaboola } = require('./default');
 
     it("must not render when there isn't parameters", () => {
-      const wrapper = shallow(<AdTaboola />);
+      const wrapper = shallow(<AdTaboola metaValue={metaValueMock} />);
 
       expect(wrapper.find('#tbl-widget').length).toBe(0);
       expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
@@ -20,7 +22,7 @@ describe('render Taboola widget', () => {
 
     it('must not render when only the publisher id is present', () => {
       getProperties.mockImplementation(() => ({ taboolaPublisherId: 'taboolaPublisherId' }));
-      const wrapper = shallow(<AdTaboola />);
+      const wrapper = shallow(<AdTaboola metaValue={metaValueMock} />);
 
       expect(wrapper.find('#tbl-widget').length).toBe(0);
       expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
@@ -32,7 +34,7 @@ describe('render Taboola widget', () => {
         container: 'tbl-widget',
       };
 
-      const wrapper = shallow(<AdTaboola customFields={customFields} />);
+      const wrapper = shallow(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
       expect(wrapper.find('#tbl-widget').length).toBe(0);
       expect(wrapper.find(TBL_WRAPPER).length).toBe(0);
     });
@@ -49,7 +51,7 @@ describe('render Taboola widget', () => {
         container: 'tbl-widget',
       };
 
-      const wrapper = shallow(<AdTaboola customFields={customFields} />);
+      const wrapper = shallow(<AdTaboola metaValue={metaValueMock} customFields={customFields} />);
 
       expect(wrapper.find('#tbl-widget').length).toBe(1);
       expect(wrapper.find('hr').length).toBe(1);
@@ -64,7 +66,11 @@ describe('render Taboola widget', () => {
         container: 'tbl-widget',
       };
 
-      const wrapper = shallow(<AdTaboola customFields={customFields} isAdmin />);
+      const wrapper = shallow(<AdTaboola
+        metaValue={metaValueMock}
+        customFields={customFields}
+        isAdmin
+      />);
 
       expect(wrapper.find(TBL_WRAPPER).length).toBe(1);
       expect(wrapper.find('AdTaboola #tbl-widget').length).toBe(0);

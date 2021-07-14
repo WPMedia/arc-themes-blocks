@@ -5,7 +5,6 @@ import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import styled from 'styled-components';
 import {
   Gallery,
   ImageMetadata,

@@ -1,11 +1,10 @@
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import { useAppContext } from 'fusion:context';
 import LeadArt from './default';
 
 const React = require('react');
-const { mount, shallow } = require('enzyme');
+const { shallow } = require('enzyme');
 
 describe('LeadArt', () => {
   afterEach(() => {

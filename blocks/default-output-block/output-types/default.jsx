@@ -56,7 +56,7 @@ const fontUrlLink = (fontUrl) => {
   // If fontURL is an array, then iterate over the array and build out the links
   if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
     const fontLinks = [...new Set(fontUrl)].map((url, index) => (
-      <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={`${url}&display=swap`} />
+      <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={url} />
     ));
     return (
       <>{fontLinks}</>
@@ -64,7 +64,7 @@ const fontUrlLink = (fontUrl) => {
   }
   // Legacy support where fontUrl is a string
   return fontUrl ? (
-    <link rel="stylesheet" href={`${fontUrl}&display=swap`} />
+    <link rel="stylesheet" href={fontUrl} />
   ) : '';
 };
 

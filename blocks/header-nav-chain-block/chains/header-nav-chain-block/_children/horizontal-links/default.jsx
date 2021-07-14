@@ -14,7 +14,6 @@ const LinkBarSpan = styled.span`
 
   a {
     font-family: ${(props) => props.primaryFont};
-    white-space: nowrap;
   }
 `;
 

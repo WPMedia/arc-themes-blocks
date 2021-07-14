@@ -291,40 +291,6 @@ describe('LeadArt', () => {
     expect(result).toEqual('');
   });
 
-  it('raw html type returns styled component  LeadArtWrapperDiv', () => {
-    const globalContent = {
-      promo_items: {
-        basic: {
-          type: 'raw_html',
-        },
-      },
-    };
-
-    const wrapper = mount(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    expect(wrapper.find('StyledComponent').at(0).prop('className')).toEqual('lead-art-wrapper');
-    wrapper.unmount();
-  });
-
-  it('image type returns styled component  LeadArtWrapperFigure', () => {
-    const globalContent = {
-      promo_items: {
-        lead_art: {
-          type: 'image',
-        },
-      },
-    };
-
-    useAppContext.mockImplementation(() => (
-      {
-        arcSite: {},
-      }));
-
-    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
-    const wrapper = mount(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    expect(wrapper.find('ImageMetadata').length).toEqual(1);
-    wrapper.unmount();
-  });
-
   it('setIsOpenToFalse sets isOpen to false', () => {
     const globalContent = {
       promo_items: {

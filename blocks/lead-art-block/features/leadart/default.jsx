@@ -19,12 +19,6 @@ import {
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import './leadart.scss';
 
-const LeadArtWrapperDiv = styled.div`
-  figcaption {
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
-
 /**
  * @file LeadArt is a React Class Component
  * @summary React component for displaying an image along with a control to present the image in a
@@ -115,13 +109,13 @@ class LeadArt extends Component {
         }
 
         return (
-          <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+          <div className="lead-art-wrapper">
             <div
               className="inner-content"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
-          </LeadArtWrapperDiv>
+          </div>
         );
       }
 

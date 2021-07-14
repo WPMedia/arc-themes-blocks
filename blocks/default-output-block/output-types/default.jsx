@@ -58,17 +58,18 @@ const optimalFontLoading = (fontUrl, index = '') => (
     <link
       rel="preload"
       as="style"
-      href={`${fontUrl}&display=swap`}
+      href={fontUrl}
     />
     <link
       rel="stylesheet"
       key={fontUrl}
       data-testid={`font-loading-url-${index}`}
-      href={`${fontUrl}&display=swap`}
+      href={fontUrl}
     />
   </>
 );
 
+// todo: this was not an ok assumption vv
 // preconnect g static assumes google font, only supported in themes settings anyway
 const fontUrlLink = (fontUrl) => {
   // If fontURL is an array, then iterate over the array and build out the links
@@ -77,6 +78,7 @@ const fontUrlLink = (fontUrl) => {
 
     return (
       <>
+        {/* if regex matches google font */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -87,6 +89,7 @@ const fontUrlLink = (fontUrl) => {
     );
   }
   // Legacy support where fontUrl is a string
+  /* if regex matches google font */
   return fontUrl ? (
     <>
       <link

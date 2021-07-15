@@ -1,23 +1,16 @@
-/* eslint-disable camelcase */
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import getThemeStyle from 'fusion:themes';
 import PropTypes from 'prop-types';
 
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 
 import { readCookie, saveCookie } from './cookies';
 
 import './alert-bar.scss';
 
-const AlertBarLink = styled.a`
-  &&& {
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
 @Consumer
 class AlertBar extends Component {
   constructor(props) {
@@ -160,13 +153,13 @@ class AlertBar extends Component {
           ref={this.alertRef}
           aria-label={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
         >
-          <AlertBarLink
+          <PrimaryFont
             href={websiteURL}
             className="article-link"
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+            as="a"
           >
             {headlines.basic}
-          </AlertBarLink>
+          </PrimaryFont>
           <button type="button" onClick={this.hideAlert} aria-label={this.phrases.t('alert-bar-block.close-button')}>
             <CloseIcon className="close" fill="white" />
           </button>

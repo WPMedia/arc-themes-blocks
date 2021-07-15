@@ -52,7 +52,8 @@ const StyledNav = styled.nav`
     transition: 0.5s;
     z-index: ${navZIdx};
 
-    &.nav-logo, & > .nav-logo {
+    &.nav-logo,
+    & > .nav-logo {
       img {
         height: auto;
         max-width: 240px;

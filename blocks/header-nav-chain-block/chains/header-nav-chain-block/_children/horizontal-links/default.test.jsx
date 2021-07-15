@@ -6,6 +6,11 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => input.toString()),
 }));
 
+jest.mock('@wpmedia/shared-styles', () => ({
+  __esModule: true,
+  PrimaryFont: (props) => <span {...props} />,
+}));
+
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   locale: 'en',
 }))));
@@ -34,29 +39,6 @@ describe('the links bar feature for the default output type', () => {
     }));
   });
 
-  it('should be a nav element', () => {
-    const { default: LinksBar } = require('./default');
-    jest.mock('fusion:content', () => ({
-      useContent: jest.fn(() => ({
-        children: [
-          {
-            _id: 'id_1',
-            name: 'test link 1',
-          },
-          {
-            _id: 'id_2',
-            name: 'test link 2',
-          },
-        ],
-      })),
-    }));
-    const wrapper = shallow(
-      <LinksBar customFields={{ navigationConfig: 'links' }} />,
-    );
-
-    expect(wrapper.children().at(0).type()).toBe('nav');
-  });
-
   it('should not have separator only one link', () => {
     const { default: LinksBar } = require('./default');
     jest.mock('fusion:content', () => ({
@@ -77,7 +59,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"Top Links\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span></nav>"',
+      '"<nav color=\\"#fff\\" class=\\"sc-bdVaJa hPRxrT horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span></nav>"',
     );
   });
 
@@ -109,7 +91,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"Top Links\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">  •  <a href=\\"id_3/\\" class=\\"sc-bdVaJa jLoscj\\">test link 3</a></span></nav>"',
+      '"<nav color=\\"#fff\\" class=\\"sc-bdVaJa hPRxrT horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">  •  <a href=\\"id_2/\\">test link 2</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">  •  <a href=\\"id_3/\\">test link 3</a></span></nav>"',
     );
   });
 
@@ -137,7 +119,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"horizontal-links-bar\\" aria-label=\\"Top Links\\"><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_1/\\" class=\\"sc-bdVaJa jLoscj\\">test link 1</a></span><span class=\\"sc-bwzfXH dtelAW horizontal-links-menu\\">    <a href=\\"id_2/\\" class=\\"sc-bdVaJa jLoscj\\">test link 2</a></span></nav>"',
+      '"<nav color=\\"#fff\\" class=\\"sc-bdVaJa hPRxrT horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_2/\\">test link 2</a></span></nav>"',
     );
   });
 
@@ -203,11 +185,12 @@ describe('the links bar feature for the default output type', () => {
       })),
     }));
     const { default: LinksBar } = require('./default');
-    const wrapper = shallow(
-      <LinksBar />,
-    );
+    const wrapper = shallow(<LinksBar />);
 
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Top Links');
+    expect(wrapper.find('.horizontal-links-bar').props()).toHaveProperty(
+      'aria-label',
+      'Top Links',
+    );
   });
 
   it('should render the block with the custom aria-label', () => {
@@ -219,6 +202,9 @@ describe('the links bar feature for the default output type', () => {
     const { default: LinksBar } = require('./default');
     const wrapper = shallow(<LinksBar ariaLabel="Links" />);
 
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
+    expect(wrapper.find('.horizontal-links-bar').props()).toHaveProperty(
+      'aria-label',
+      'Links',
+    );
   });
 });

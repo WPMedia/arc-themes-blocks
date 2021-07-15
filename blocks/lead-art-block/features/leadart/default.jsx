@@ -1,11 +1,10 @@
-/* eslint-disable camelcase, max-len */
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import styled from 'styled-components';
 import {
   Gallery,
   ImageMetadata,
@@ -16,20 +15,8 @@ import {
   videoPlayerCustomFields,
   FullscreenIcon,
 } from '@wpmedia/engine-theme-sdk';
-
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import './leadart.scss';
-
-const LeadArtWrapperDiv = styled.div`
-  figcaption {
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
-
-const LeadArtWrapperFigure = styled.figure`
-  figcaption {
-    font-family: ${(props) => props.primaryFont};
-  }
-`;
 
 /**
  * @file LeadArt is a React Class Component
@@ -121,13 +108,13 @@ class LeadArt extends Component {
         }
 
         return (
-          <LeadArtWrapperDiv className="lead-art-wrapper" primaryFont={getThemeStyle(arcSite)['primary-font-family']}>
+          <div className="lead-art-wrapper">
             <div
               className="inner-content"
               dangerouslySetInnerHTML={{ __html: lead_art.content }}
             />
             {lightbox}
-          </LeadArtWrapperDiv>
+          </div>
         );
       }
 
@@ -168,9 +155,8 @@ class LeadArt extends Component {
         );
 
         return (
-          <LeadArtWrapperFigure
+          <figure
             className="lead-art-wrapper"
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
           >
             <button
               type="button"
@@ -178,7 +164,9 @@ class LeadArt extends Component {
               onClick={this.setIsOpenToTrue}
             >
               <FullscreenIcon width="100%" height="100%" fill="#6B6B6B" />
-              {buttonLabel}
+              <PrimaryFont as="span">
+                {buttonLabel}
+              </PrimaryFont>
             </button>
             <div ref={this.imgRef}>
               <Image
@@ -204,7 +192,7 @@ class LeadArt extends Component {
               </figcaption>
             )}
 
-          </LeadArtWrapperFigure>
+          </figure>
         );
       } if (lead_art.type === 'gallery') {
         const galleryCubeClicks = getProperties(arcSite)?.galleryCubeClicks;

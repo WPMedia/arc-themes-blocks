@@ -3,17 +3,12 @@ import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import {
   // presentational component does not do data fetching
   VideoPlayer as VideoPlayerPresentational,
   videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
-import { PrimaryFont } from '@wpmedia/shared-styles';
-
-const DescriptionText = styled.p`
-  font-family: ${(props) => props.secondaryFont};
-`;
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 
 const AlertBadge = styled.span`
   background-color: #db0a07;
@@ -116,12 +111,12 @@ const VideoPlayer = (props) => {
       )}
       {description
         && (
-        <DescriptionText
-          secondaryFont={getThemeStyle(arcSite)['secondary-font-family']}
+        <SecondaryFont
+          as="p"
           className="description-text"
         >
           {description}
-        </DescriptionText>
+        </SecondaryFont>
         )}
     </div>
   );

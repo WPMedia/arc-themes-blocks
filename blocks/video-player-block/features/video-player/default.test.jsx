@@ -126,7 +126,7 @@ describe('VideoPlayer', () => {
 
     const titleText = 'Test Title';
     const descriptionText = 'Test Description';
-    const alertBadgeText = 'Test Alert  Badge';
+    const alertBadgeText = 'Test Alert Badge';
 
     const customFields = {
       inheritGlobalContent: false,
@@ -142,15 +142,12 @@ describe('VideoPlayer', () => {
       enableAutoplay
     />);
 
-    const expectedAlertBadge = 'Test Alert  Badge';
-    const expectedTitle = 'Test Title';
-    const expectedDescription = 'Test Description';
     const foundStyledComponents = wrapper.find('StyledComponent');
 
     expect(foundStyledComponents.length).toEqual(3);
-    expect(foundStyledComponents.at(0).text()).toEqual(expectedAlertBadge);
-    expect(foundStyledComponents.at(1).text()).toEqual(expectedTitle);
-    expect(foundStyledComponents.at(2).text()).toEqual(expectedDescription);
+    expect(foundStyledComponents.at(0).text()).toEqual(alertBadgeText);
+    expect(foundStyledComponents.at(1).text()).toEqual(titleText);
+    expect(foundStyledComponents.at(2).text()).toEqual(descriptionText);
   });
 
   it('if no video content, show empty space ', () => {

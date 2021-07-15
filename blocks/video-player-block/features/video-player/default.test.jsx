@@ -145,9 +145,10 @@ describe('VideoPlayer', () => {
     const foundStyledComponents = wrapper.find('StyledComponent');
 
     expect(foundStyledComponents.length).toEqual(3);
-    expect(foundStyledComponents.at(0).text()).toEqual(alertBadgeText);
-    expect(foundStyledComponents.at(1).text()).toEqual(titleText);
-    expect(foundStyledComponents.at(2).text()).toEqual(descriptionText);
+
+    expect(foundStyledComponents.find('span').text()).toEqual(alertBadgeText);
+    expect(foundStyledComponents.find('h2').text()).toEqual(titleText);
+    expect(foundStyledComponents.find('p').text()).toEqual(descriptionText);
   });
 
   it('if no video content, show empty space ', () => {

@@ -41,21 +41,19 @@ const FloatableImageContainer = styled.figure`
   }
 
   ${({ allowedFloatValue }) => allowedFloatValue && css`
-    width: 50%;
-    float: ${allowedFloatValue};
+    @media screen and (min-width: 48rem) {
+      width: 50%;
+      float: ${allowedFloatValue};
+    }
   `}
 
   ${({ allowedFloatValue }) => allowedFloatValue === 'left' && css`
-    margin-right: 1rem;
-
     @media screen and (min-width: 48rem) {
       margin-right: 1.5rem;
     }
   `}
 
   ${({ allowedFloatValue }) => allowedFloatValue === 'right' && css`
-    margin-left: 1rem;
-
     @media screen and (min-width: 48rem) {
       margin-left: 1.5rem;
     }

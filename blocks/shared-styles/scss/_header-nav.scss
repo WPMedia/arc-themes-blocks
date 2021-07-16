@@ -172,7 +172,7 @@ body.nav-open {
   flex-shrink: 0;
 
   &.light {
-    border-bottom: $border-width solid $border-rule-color;
+    border-bottom: $border-width solid #dadada;
   }
 
   * {

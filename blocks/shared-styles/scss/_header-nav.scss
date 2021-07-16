@@ -36,11 +36,11 @@ body.nav-open {
 
   &-dark {
     span {
-      color: $ui-btn-white-color;
+      color: #fff
     }
 
     svg > path {
-      fill: $ui-btn-white-color;
+      fill: #fff;
     }
 
     &.border {

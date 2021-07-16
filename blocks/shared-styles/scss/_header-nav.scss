@@ -4,7 +4,7 @@ $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
 $btn-padding: calculateRem(8px);
-$nav-search-border-color: $ui-light-gray;
+$nav-search-border-color: #dadada;
 $overlay-z-index: 2;
 $section-bg: #292929;
 $section-width: 329px;
@@ -63,7 +63,7 @@ body.nav-open {
     }
 
     &.border {
-      border: $border-width solid $ui-light-gray;
+      border: $border-width solid #dadada;
 
       &:hover {
         border: $border-width solid #575757;
@@ -129,7 +129,7 @@ body.nav-open {
     }
 
     &.light input {
-      border: $border-width solid $ui-light-gray;
+      border: $border-width solid #dadada;
     }
   }
 
@@ -462,7 +462,7 @@ body.nav-open {
         text-decoration: none;
 
         &:hover {
-          background-color: $ui-light-gray;
+          background-color: #dadada;
         }
       }
     }

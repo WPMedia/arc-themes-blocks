@@ -1,12 +1,8 @@
 $arrow-size: calculateRem(10px);
-$border-color-dull: rgba(255, 255, 255, 0.5);
-$border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
 $btn-size: calculateRem(32px);
 $btn-padding: calculateRem(8px);
-$nav-search-border-color: #dadada;
 $overlay-z-index: 2;
-$section-bg: #292929;
 $section-width: 329px;
 
 body.nav-open {
@@ -44,10 +40,10 @@ body.nav-open {
     }
 
     &.border {
-      border: $border-width solid $border-color-dull;
+      border: $border-width solid rgba(255, 255, 255, 0.5);
 
       &:hover {
-        border: $border-width solid $border-color-bright;
+        border: $border-width solid rgba(255, 255, 255, 1);
       }
     }
 
@@ -125,7 +121,7 @@ body.nav-open {
     }
 
     &.dark input {
-      border: $border-width solid $border-color-bright;
+      border: $border-width solid rgba(255, 255, 255, 1);
     }
 
     &.light input {
@@ -318,7 +314,7 @@ body.nav-open {
   }
 
   .inner-drawer-nav {
-    background-color: $section-bg;
+    background-color: #292929;
     display: flex;
     flex-direction: column;
     transition: transform 300ms ease-in-out;

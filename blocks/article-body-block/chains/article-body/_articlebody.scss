@@ -3,12 +3,12 @@
 }
 
 .article-body-wrapper {
-  color: $ui-primary-font-color;
+  color: #191919;
   margin-top: map-get($spacers, 'lg');
 
   a,
   a * {
-    @include link-color-active-hover($ui-primary-font-color);
+    @include link-color-active-hover(#191919);
   }
 
   & > h1,
@@ -126,7 +126,7 @@
     table {
       border: 1px solid $border-rule-color;
       border-collapse: collapse;
-      color: $ui-primary-font-color;
+      color: #191919;
       width: 100%;
 
       thead {
@@ -179,7 +179,7 @@
     }
 
     .citation-text {
-      color: $ui-primary-font-color;
+      color: #191919;
       display: block;
       font-size: calculateRem(16px);
       font-style: normal;
@@ -235,7 +235,7 @@
     margin: 0 0 map-get($spacers, 'md');
 
     a {
-      @include link-color-active-hover($ui-primary-font-color);
+      @include link-color-active-hover(#191919);
       text-decoration: none;
 
       &:active,

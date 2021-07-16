@@ -7,7 +7,6 @@ $nav-search-border-color: #dadada;
 $overlay-z-index: 2;
 $section-bg: #575757;
 $section-width: 315px;
-$submenu-link-color: $ui-dark-gray;
 
 .nav-block-search {
   display: flex;
@@ -201,11 +200,11 @@ $submenu-link-color: $ui-dark-gray;
 
     > li {
       > a {
-        color: $submenu-link-color;
+        color: #191919;
         padding: 8px 0;
 
         &:hover {
-          color: darken($submenu-link-color, 20%);
+          color: darken(#191919, 20%);
         }
       }
 

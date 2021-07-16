@@ -33,9 +33,23 @@ class ArticleDate extends Component {
 
   render() {
     const { displayDate } = this.state;
-    const { classNames } = this.props;
+    const {
+      classNames,
+      globalContent: {
+        display_date: globalDateString,
+      } = {},
+      date,
+    } = this.props;
+
+    const dateString = date || globalDateString;
+
     return (
-      <PrimaryFont as="time" key={displayDate} className={`date ${classNames}`} dateTime={displayDate}>
+      <PrimaryFont
+        as="time"
+        key={displayDate}
+        className={`date ${classNames}`}
+        dateTime={dateString}
+      >
         {displayDate}
       </PrimaryFont>
     );

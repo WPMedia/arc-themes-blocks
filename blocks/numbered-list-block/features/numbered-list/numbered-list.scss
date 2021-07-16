@@ -1,6 +1,7 @@
 .numbered-list-container {
   @include block-margin-bottom;
   @include block-internal-spacing;
+
   .list-title {
     color: $ui-primary-font-color;
     font-size: calculateRem(20px);

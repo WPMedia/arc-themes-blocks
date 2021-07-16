@@ -24,7 +24,7 @@ const PromoDate = (props) => {
     <PrimaryFont
       as="time"
       className={`promo-date ${className}`}
-      dateTime={formattedDate}
+      dateTime={displayDate}
     >
       {formattedDate}
     </PrimaryFont>

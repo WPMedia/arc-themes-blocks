@@ -55,18 +55,18 @@ body.nav-open {
 
   &-light {
     span {
-      color: $ui-medium-gray;
+      color: #575757;
     }
 
     svg > path {
-      fill: $ui-medium-gray;
+      fill: #575757;
     }
 
     &.border {
       border: $border-width solid $ui-light-gray;
 
       &:hover {
-        border: $border-width solid $ui-medium-gray;
+        border: $border-width solid #575757;
       }
     }
   }
@@ -402,7 +402,7 @@ body.nav-open {
 
       &:hover,
       &:active {
-        background: $ui-medium-gray;
+        background: #575757;
       }
     }
   }
@@ -453,7 +453,7 @@ body.nav-open {
 
     > li {
       > a {
-        color: $ui-medium-gray;
+        color: #575757;
         display: block;
         font-size: 16px;
         font-weight: bold;
@@ -506,7 +506,7 @@ body.nav-open {
     display: flex;
 
     path {
-      fill: $ui-medium-gray;
+      fill: #575757;
     }
   }
 }

@@ -83,14 +83,14 @@
   width: 24px;
 
   path {
-    fill: rgba($ui-medium-gray, 1);
+    fill: rgba(#575757, 1);
     transition: all 0.2s ease-in-out;
   }
 }
 
 .social-column:hover > svg {
   path {
-    fill: rgba($ui-medium-gray, 0.8);
+    fill: rgba(#575757, 0.8);
   }
 }
 

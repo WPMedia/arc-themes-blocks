@@ -7,6 +7,7 @@
 		"ja": "Send an email to %{authorName}",
 		"ko": "Send an email to %{authorName}",
 		"no": "Send an email to %{authorName}",
+		"pt": "Send an email to %{authorName}",
 		"sv": "Send an email to %{authorName}"
 	},
 	"author-bio-block.social-facebook": {
@@ -17,6 +18,7 @@
 		"ja": "Connect on Facebook",
 		"ko": "Connect on Facebook",
 		"no": "Connect on Facebook",
+		"pt": "Connect on Facebook",
 		"sv": "Connect on Facebook"
 	},
 	"author-bio-block.social-instagram": {
@@ -27,6 +29,7 @@
 		"ja": "Follow on Instagram",
 		"ko": "Follow on Instagram",
 		"no": "Follow on Instagram",
+		"pt": "Follow on Instagram",
 		"sv": "Follow on Instagram"
 	},
 	"author-bio-block.social-linkedin": {
@@ -37,6 +40,7 @@
 		"ja": "Connect on LinkedIn",
 		"ko": "Connect on LinkedIn",
 		"no": "Connect on LinkedIn",
+		"pt": "Connect on LinkedIn",
 		"sv": "Connect on LinkedIn"
 	},
 	"author-bio-block.social-medium": {
@@ -47,6 +51,7 @@
 		"ja": "Connect on Medium",
 		"ko": "Connect on Medium",
 		"no": "Connect on Medium",
+		"pt": "Connect on Medium",
 		"sv": "Connect on Medium"
 	},
 	"author-bio-block.social-pinterest": {
@@ -57,6 +62,7 @@
 		"ja": "Connect on Pinterest",
 		"ko": "Connect on Pinterest",
 		"no": "Connect on Pinterest",
+		"pt": "Connect on Pinterest",
 		"sv": "Connect on Pinterest"
 	},
 	"author-bio-block.social-reddit": {
@@ -67,6 +73,7 @@
 		"ja": "Connect on Reddit",
 		"ko": "Connect on Reddit",
 		"no": "Connect on Reddit",
+		"pt": "Connect on Reddit",
 		"sv": "Connect on Reddit"
 	},
 	"author-bio-block.social-rss": {
@@ -77,6 +84,7 @@
 		"ja": "Subscribe to %{authorName} RSS feed",
 		"ko": "Subscribe to %{authorName} RSS feed",
 		"no": "Subscribe to %{authorName} RSS feed",
+		"pt": "Subscribe to %{authorName} RSS feed",
 		"sv": "Subscribe to %{authorName} RSS feed"
 	},
 	"author-bio-block.social-snapchat": {
@@ -87,6 +95,7 @@
 		"ja": "Connect on Snapchat",
 		"ko": "Connect on Snapchat",
 		"no": "Connect on Snapchat",
+		"pt": "Connect on Snapchat",
 		"sv": "Connect on Snapchat"
 	},
 	"author-bio-block.social-soundcloud": {
@@ -97,6 +106,7 @@
 		"ja": "Listen to %{authorName} on SoundCloud",
 		"ko": "Listen to %{authorName} on SoundCloud",
 		"no": "Listen to %{authorName} on SoundCloud",
+		"pt": "Listen to %{authorName} on SoundCloud",
 		"sv": "Listen to %{authorName} on SoundCloud"
 	},
 	"author-bio-block.social-tumblr": {
@@ -107,6 +117,7 @@
 		"ja": "Connect on Tumblr",
 		"ko": "Connect on Tumblr",
 		"no": "Connect on Tumblr",
+		"pt": "Connect on Tumblr",
 		"sv": "Connect on Tumblr"
 	},
 	"author-bio-block.social-twitter": {
@@ -117,6 +128,7 @@
 		"ja": "Connect on Twitter",
 		"ko": "Connect on Twitter",
 		"no": "Connect on Twitter",
+		"pt": "Connect on Twitter",
 		"sv": "Connect on Twitter"
 	},
 	"author-bio-block.social-whatsapp": {
@@ -127,6 +139,7 @@
 		"ja": "Connect on Whatsapp",
 		"ko": "Connect on Whatsapp",
 		"no": "Connect on Whatsapp",
+		"pt": "Connect on Whatsapp",
 		"sv": "Connect on Whatsapp"
 	},
 	"author-bio-block.social-youtube": {
@@ -137,6 +150,7 @@
 		"ja": "Connect on Youtube",
 		"ko": "Connect on Youtube",
 		"no": "Connect on Youtube",
+		"pt": "Connect on Youtube",
 		"sv": "Connect on Youtube"
 	}
 }

@@ -7,8 +7,8 @@
 		"alert-bar-block.element-aria-label": "Breaking News Alert"
 	},
 	"article-body-block": {
-		"article-body-block.clarification": "説明",
-		"article-body-block.correction": "修正",
+		"article-body-block.clarification": "Clarification",
+		"article-body-block.correction": "Correction",
 		"article-body-block.interstitial-link-aria-label": "Open related story"
 	},
 	"author-bio-block": {
@@ -36,7 +36,7 @@
 		"footer-block.twitter-link": "Twitter feed"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "接続",
+		"full-author-bio-block.connect-text": "Connect",
 		"full-author-bio-block.social-email": "Email",
 		"full-author-bio-block.social-facebook": "Connect on Facebook",
 		"full-author-bio-block.social-instagram": "Follow on Instagram",
@@ -53,12 +53,12 @@
 		"full-author-bio-block.social-youtube": "Connect on Youtube"
 	},
 	"global-phrases-block": {
-		"global.gallery-autoplay-button": "自動再生",
+		"global.gallery-autoplay-button": "Autoplay",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
 		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
-		"global.gallery-expand-button": "展開",
-		"global.gallery-page-count-text": "%{current} \/ %{total}",
-		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
+		"global.gallery-expand-button": "Expand",
+		"global.gallery-page-count-text": "<span class='sr-only'>Image<\/span> %{current} of %{total}",
+		"global.gallery-pause-autoplay-button": "Pause autoplay",
 		"global.opens-in-new-window": "(Opens in new window)",
 		"global.social-email": "Email",
 		"global.social-facebook": "Facebook",
@@ -74,8 +74,8 @@
 	"header-nav-chain-block": {
 		"header-nav-chain-block.links-element-aria-label": "Top Links",
 		"header-nav-chain-block.querly-search-aria-label": "Search",
-		"header-nav-chain-block.search-text": "検索",
-		"header-nav-chain-block.sections-button": "セクション",
+		"header-nav-chain-block.search-text": "Search",
+		"header-nav-chain-block.sections-button": "Sections",
 		"header-nav-chain-block.sections-button-aria-label": "Show %{item} sub sections",
 		"header-nav-chain-block.sections-element-aria-label": "Sections Menu"
 	},
@@ -83,13 +83,13 @@
 		"links-bar-block.element-aria-label": "More Links"
 	},
 	"results-list-block": {
-		"results-list-block.see-more-button": "詳細",
+		"results-list-block.see-more-button": "See More",
 		"results-list-block.see-more-button-aria-label": "See More stories about this topic"
 	},
 	"search-results-list-block": {
-		"search-results-block.search-button": "検索",
-		"search-results-block.search-result-number": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
-		"search-results-block.see-more-button": "詳細",
+		"search-results-block.search-button": "Search",
+		"search-results-block.search-result-number": "%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
+		"search-results-block.see-more-button": "See More",
 		"search-results-block.see-more-button-aria-label": "See More stories about this topic",
 		"search-results-blocks.search-input-placeholder": "Enter your search terms"
 	},
@@ -97,10 +97,10 @@
 		"share-bar-block.share-button-aria-label": "Share current article via %{socialType}"
 	},
 	"shared-styles": {
-		"byline.and-text": "및",
-		"byline.by-text": "担当者：",
-		"overline.sponsored-content": "スポンサー付きコンテンツ",
-		"promo-label.gallery-text": "ギャラリー",
-		"promo-label.video-text": "ビデオ"
+		"byline.and-text": "and",
+		"byline.by-text": "By",
+		"overline.sponsored-content": "Sponsored Content",
+		"promo-label.gallery-text": "Gallery",
+		"promo-label.video-text": "Video"
 	}
 }

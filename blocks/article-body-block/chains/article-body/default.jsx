@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';

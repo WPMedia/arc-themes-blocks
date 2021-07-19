@@ -107,7 +107,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
       return (url && url.length > 0) ? (
         <figure
-          className={figureImageClassName}
+          className={`article-body-image-container ${figureImageClassName}`}
           key={key}
         >
           <Image

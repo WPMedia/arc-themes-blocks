@@ -59,10 +59,6 @@
   }
 
   figure {
-    @include block-margin-bottom;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
 
     p {
       font-size: calculateRem(14px);
@@ -278,6 +274,13 @@
     @include container-hr-separator;
   }
 
+}
+
+.article-body-image-container {
+  @include block-margin-bottom;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
 }
 
 .article-body-image-container--left-float {

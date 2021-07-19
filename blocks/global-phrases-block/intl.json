@@ -7,6 +7,7 @@
 		"ja": "自動再生",
 		"ko": "자동 재생",
 		"no": "Spill av",
+		"pt": "Autoplay",
 		"sv": "Spela upp"
 	},
 	"global.gallery-autoplay-label-start": {
@@ -17,6 +18,7 @@
 		"ja": "Start automatic slide show",
 		"ko": "Start automatic slide show",
 		"no": "Start automatic slide show",
+		"pt": "Start automatic slide show",
 		"sv": "Start automatic slide show"
 	},
 	"global.gallery-autoplay-label-stop": {
@@ -27,6 +29,7 @@
 		"ja": "Stop automatic slide show",
 		"ko": "Stop automatic slide show",
 		"no": "Stop automatic slide show",
+		"pt": "Stop automatic slide show",
 		"sv": "Stop automatic slide show"
 	},
 	"global.gallery-expand-button": {
@@ -37,6 +40,7 @@
 		"ja": "展開",
 		"ko": "더보기",
 		"no": "Utvid",
+		"pt": "Expand",
 		"sv": "Förstora"
 	},
 	"global.gallery-page-count-text": {
@@ -47,6 +51,7 @@
 		"ja": "%{current} / %{total}",
 		"ko": "%{current}/%개 보는 %{total}",
 		"no": "%{current} av %{total}",
+		"pt": "<span class='sr-only'>Image</span> %{current} of %{total}",
 		"sv": "%{current} av %{total}"
 	},
 	"global.gallery-pause-autoplay-button": {
@@ -57,6 +62,7 @@
 		"ja": "自動再生の一時停止",
 		"ko": "자동 재생 일시 중지",
 		"no": "Stopp",
+		"pt": "Pause autoplay",
 		"sv": "Pausa"
 	},
 	"global.opens-in-new-window": {
@@ -67,6 +73,7 @@
 		"ja": "(Opens in new window)",
 		"ko": "(Opens in new window)",
 		"no": "(Opens in new window)",
+		"pt": "(Opens in new window)",
 		"sv": "(Opens in new window)"
 	},
 	"global.social-email": {
@@ -77,6 +84,7 @@
 		"ja": "Email",
 		"ko": "Email",
 		"no": "Email",
+		"pt": "Email",
 		"sv": "Email"
 	},
 	"global.social-facebook": {
@@ -87,6 +95,7 @@
 		"ja": "Facebook",
 		"ko": "Facebook",
 		"no": "Facebook",
+		"pt": "Facebook",
 		"sv": "Facebook"
 	},
 	"global.social-linkedin": {
@@ -97,6 +106,7 @@
 		"ja": "LinkedIn",
 		"ko": "LinkedIn",
 		"no": "LinkedIn",
+		"pt": "LinkedIn",
 		"sv": "LinkedIn"
 	},
 	"global.social-pinterest": {
@@ -107,6 +117,7 @@
 		"ja": "Pinterest",
 		"ko": "Pinterest",
 		"no": "Pinterest",
+		"pt": "Pinterest",
 		"sv": "Pinterest"
 	},
 	"global.social-twitter": {
@@ -117,6 +128,7 @@
 		"ja": "Twitter",
 		"ko": "Twitter",
 		"no": "Twitter",
+		"pt": "Twitter",
 		"sv": "Twitter"
 	}
 }

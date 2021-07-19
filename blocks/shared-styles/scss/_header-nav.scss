@@ -78,6 +78,7 @@ body.nav-open {
 
   @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
     margin: 0;
+
     span {
       display: none;
     }

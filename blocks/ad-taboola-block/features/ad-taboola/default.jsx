@@ -118,7 +118,7 @@ class AdTaboola extends Component {
           <div
             className="tbl-wrapper"
             style={{
-              backgroundColor: '#FFEFD5',
+              backgroundColor: '#ffefd5',
               padding: '20px',
             }}
           >

@@ -7,6 +7,7 @@
 		"ja": "検索",
 		"ko": "검색",
 		"no": "Søk",
+		"pt": "Search",
 		"sv": "Sök"
 	},
 	"search-results-block.search-result-number": {
@@ -17,6 +18,7 @@
 		"ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
 		"ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
 		"no": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+		"pt": "%{smart_count} result for \"%{searchTerm}\" |||| %{smart_count} results for \"%{searchTerm}\"",
 		"sv": "%{smart_count} resultat för ”%{searchTerm}”"
 	},
 	"search-results-block.see-more-button": {
@@ -27,6 +29,7 @@
 		"ja": "詳細",
 		"ko": "자세히 보기",
 		"no": "Se mer",
+		"pt": "See More",
 		"sv": "Fler artiklar"
 	},
 	"search-results-block.see-more-button-aria-label": {
@@ -37,6 +40,7 @@
 		"ja": "See More stories about this topic",
 		"ko": "See More stories about this topic",
 		"no": "See More stories about this topic",
+		"pt": "See More stories about this topic",
 		"sv": "See More stories about this topic"
 	},
 	"search-results-blocks.search-input-placeholder": {
@@ -47,6 +51,7 @@
 		"ja": "Enter your search terms",
 		"ko": "Enter your search terms",
 		"no": "Enter your search terms",
+		"pt": "Enter your search terms",
 		"sv": "Enter your search terms"
 	}
 }

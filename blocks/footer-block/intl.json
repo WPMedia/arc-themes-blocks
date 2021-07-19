@@ -7,6 +7,7 @@
 		"ja": "Facebook page",
 		"ko": "Facebook page",
 		"no": "Facebook page",
+		"pt": "Facebook page",
 		"sv": "Facebook page"
 	},
 	"footer-block.rss-link": {
@@ -17,6 +18,7 @@
 		"ja": "RSS feed",
 		"ko": "RSS feed",
 		"no": "RSS feed",
+		"pt": "RSS feed",
 		"sv": "RSS feed"
 	},
 	"footer-block.twitter-link": {
@@ -27,6 +29,7 @@
 		"ja": "Twitter feed",
 		"ko": "Twitter feed",
 		"no": "Twitter feed",
+		"pt": "Twitter feed",
 		"sv": "Twitter feed"
 	}
 }

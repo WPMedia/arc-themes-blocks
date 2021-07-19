@@ -34,7 +34,7 @@ const StyledLink = styled.a`
 
 // IMPROVEMENT: margin and margin bottom rem is reusable
 const FloatableImageContainer = styled.figure`
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
 
   @media screen and (min-width: 48rem) {
     margin-bottom: 1.5rem;

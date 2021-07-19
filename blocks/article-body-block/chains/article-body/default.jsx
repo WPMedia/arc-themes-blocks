@@ -214,7 +214,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
       return (item.text && item.text.length > 0) ? (
         <Fragment key={key}>
-          <section className="correction container-margin-responsive-bottom">
+          <section className="correction">
             <h2 className="h6-primary">{labelText}</h2>
             <p>{item.text}</p>
           </section>

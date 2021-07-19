@@ -32,34 +32,6 @@ const StyledLink = styled.a`
   color: ${(props) => props.primaryColor};
 `;
 
-// IMPROVEMENT: margin and margin bottom rem is reusable
-const FloatableImageContainer = styled.figure`
-  margin: 0 0 1rem;
-
-  @media screen and (min-width: 48rem) {
-    margin-bottom: 1.5rem;
-  }
-
-  ${({ allowedFloatValue }) => allowedFloatValue && css`
-    @media screen and (min-width: 48rem) {
-      width: 50%;
-      float: ${allowedFloatValue};
-    }
-  `}
-
-  ${({ allowedFloatValue }) => allowedFloatValue === 'left' && css`
-    @media screen and (min-width: 48rem) {
-      margin-right: 1.5rem;
-    }
-  `}
-
-  ${({ allowedFloatValue }) => allowedFloatValue === 'right' && css`
-    @media screen and (min-width: 48rem) {
-      margin-left: 1.5rem;
-    }
-  `}
-`;
-
 function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
   const {
     _id: key = index, type, content,
@@ -118,6 +90,8 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
       // only left and right float supported
       const allowedFloatValue = alignment === 'left' || alignment === 'right' ? alignment : '';
 
+      let figureFloatClassName = '';
+
       if (allowedFloatValue) {
         // cut the image width in about half if left or right aligned
         // matched based on allowed widths
@@ -127,12 +101,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
           medium: 400,
           large: 768,
         };
+
+        figureFloatClassName = allowedFloatValue === 'left' ? 'article-body-image-container--left-float' : 'article-body-image-container--right-float';
       }
 
       return (url && url.length > 0) ? (
-        <FloatableImageContainer
+        <figure
+          className={figureFloatClassName}
           key={key}
-          allowedFloatValue={allowedFloatValue}
         >
           <Image
             resizedImageOptions={resizedImageOptions}
@@ -155,7 +131,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
               vanityCredits={vanityCredits}
             />
           </figcaption>
-        </FloatableImageContainer>
+        </figure>
       ) : null;
     }
 

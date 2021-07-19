@@ -59,6 +59,11 @@
   }
 
   figure {
+    @include block-margin-bottom;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+
     p {
       font-size: calculateRem(14px);
       line-height: 1rem;
@@ -273,4 +278,20 @@
     @include container-hr-separator;
   }
 
+}
+
+.article-body-image-container--left-float {
+  @media screen and (min-width: 48rem) {
+    width: 50%;
+    float: left;
+    margin-right: 1.5rem;
+  }
+}
+
+.article-body-image-container--right-float {
+  @media screen and (min-width: 48rem) {
+    width: 50%;
+    float: right;
+    margin-left: 1.5rem;
+  }
 }

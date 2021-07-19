@@ -283,7 +283,7 @@
   margin-top: 0;
 }
 
-.article-body-image-container--left-float {
+.article-body-image-container--mobile-left-float {
   @media screen and (min-width: 48rem) {
     width: 50%;
     float: left;
@@ -291,7 +291,7 @@
   }
 }
 
-.article-body-image-container--right-float {
+.article-body-image-container--mobile-right-float {
   @media screen and (min-width: 48rem) {
     width: 50%;
     float: right;

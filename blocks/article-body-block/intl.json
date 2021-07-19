@@ -7,6 +7,7 @@
 		"ja": "説明",
 		"ko": "설명",
 		"no": "Avklaring",
+		"pt": "Clarification",
 		"sv": "Klargörande"
 	},
 	"article-body-block.correction": {
@@ -17,6 +18,7 @@
 		"ja": "修正",
 		"ko": "정정",
 		"no": "Korreksjon",
+		"pt": "Correction",
 		"sv": "Korrektion"
 	},
 	"article-body-block.interstitial-link-aria-label": {
@@ -27,6 +29,7 @@
 		"ja": "Open related story",
 		"ko": "Open related story",
 		"no": "Open related story",
+		"pt": "Open related story",
 		"sv": "Open related story"
 	}
 }

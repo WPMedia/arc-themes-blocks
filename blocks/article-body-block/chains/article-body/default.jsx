@@ -90,7 +90,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
       // only left and right float supported
       const allowedFloatValue = alignment === 'left' || alignment === 'right' ? alignment : '';
 
-      let figureFloatClassName = '';
+      let figureImageClassName = '';
 
       if (allowedFloatValue) {
         // cut the image width in about half if left or right aligned
@@ -102,12 +102,12 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
           large: 768,
         };
 
-        figureFloatClassName = allowedFloatValue === 'left' ? 'article-body-image-container--left-float' : 'article-body-image-container--right-float';
+        figureImageClassName = allowedFloatValue === 'left' ? 'article-body-image-container--left-float' : 'article-body-image-container--right-float';
       }
 
       return (url && url.length > 0) ? (
         <figure
-          className={figureFloatClassName}
+          className={figureImageClassName}
           key={key}
         >
           <Image

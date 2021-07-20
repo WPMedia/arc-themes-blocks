@@ -77,19 +77,49 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         alt_text: altText,
         resized_params: resizedImageOptions = {},
         vanity_credits: vanityCredits,
+        // alignment not always present
+        alignment = '',
       } = item;
 
+      let widthsObject = {
+        small: 768,
+        medium: 1024,
+        large: 1440,
+      };
+
+      // only left and right float supported
+      const allowedFloatValue = alignment === 'left' || alignment === 'right' ? alignment : '';
+
+      let figureImageClassName = 'article-body-image-container';
+
+      if (allowedFloatValue) {
+        // cut the image width in about half if left or right aligned
+        // matched based on allowed widths
+        // the goal was to show 50% of width
+        widthsObject = {
+          small: 274,
+          medium: 400,
+          large: 768,
+        };
+
+        // add space after initial string ' '
+        figureImageClassName += allowedFloatValue === 'left' ? ' article-body-image-container--mobile-left-float' : ' article-body-image-container--mobile-right-float';
+      }
+
       return (url && url.length > 0) ? (
-        <figure key={key}>
+        <figure
+          className={figureImageClassName}
+          key={key}
+        >
           <Image
             resizedImageOptions={resizedImageOptions}
             url={url}
             alt={altText}
-            smallWidth={768}
+            smallWidth={widthsObject.small}
             smallHeight={0}
-            mediumWidth={1024}
+            mediumWidth={widthsObject.medium}
             mediumHeight={0}
-            largeWidth={1440}
+            largeWidth={widthsObject.large}
             largeHeight={0}
             breakpoints={getProperties(arcSite)?.breakpoints}
             resizerURL={getProperties(arcSite)?.resizerURL}

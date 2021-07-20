@@ -11,7 +11,7 @@ const VSpaceStyles = styled.div.attrs((props) => ({
   separatorColor: 'rgb(218 218 218)',
 }))`
   ${({ separator, space }) => space && `
-    > *:not(:last-child) {
+    > * {
       margin-bottom: ${(separator ? `calc(${space} * 2 + 1px)` : `${space}`)};
     }
   `}
@@ -26,7 +26,7 @@ const VSpaceStyles = styled.div.attrs((props) => ({
 
   /* For screens greater than X */
   @media screen and (min-width: ${({ breakpoint }) => breakpoint}) {
-    > *:not(:last-child) {
+    > * {
       margin-bottom: ${({ breakpointSpace, separator }) => (separator ? `calc(${breakpointSpace} * 2 + 1px)` : `${breakpointSpace}`)};
     }
 

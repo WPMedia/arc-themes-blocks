@@ -47,6 +47,13 @@ export const defaultValues = () => {
   );
 };
 
+export const twoChildren = () => (
+  <VSpace>
+    <div style={sampleBlockStyles} />
+    <div style={sampleBlockStyles} />
+  </VSpace>
+);
+
 export const defaultWithBlockAfter = () => (
   <>
     <VSpace>

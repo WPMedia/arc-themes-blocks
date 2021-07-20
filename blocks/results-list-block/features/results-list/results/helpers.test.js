@@ -7,17 +7,32 @@ describe('resolveDefaultPromoElements', () => {
   it('should use default custom fields as empty object', () => {
     const result = resolveDefaultPromoElements();
     const expectedResult = {
-      showByline: true, showDate: true, showDescription: true, showHeadline: true, showImage: true,
+      showByline: true,
+      showDate: true,
+      showDescription: true,
+      showHeadline: true,
+      showImage: true,
+      showOverline: false,
     };
     expect(result).toEqual(expectedResult);
   });
 
   it('should use valid passed field values when available', () => {
     const result = resolveDefaultPromoElements({
-      showByline: true, showDate: true, showDescription: true, showHeadline: true, showImage: false,
+      showByline: true,
+      showDate: true,
+      showDescription: true,
+      showHeadline: true,
+      showImage: false,
+      showOverline: false,
     });
     const expectedResult = {
-      showByline: true, showDate: true, showDescription: true, showHeadline: true, showImage: false,
+      showByline: true,
+      showDate: true,
+      showDescription: true,
+      showHeadline: true,
+      showImage: false,
+      showOverline: false,
     };
     expect(result).toEqual(expectedResult);
   });

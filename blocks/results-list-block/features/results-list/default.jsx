@@ -25,6 +25,8 @@ const ResultsList = ({ customFields }) => {
     isAdmin,
   } = useFusionContext();
   const {
+    overline,
+    overlineURL,
     lazyLoad,
     listContentConfig: {
       contentService,
@@ -74,12 +76,15 @@ const ResultsList = ({ customFields }) => {
           contentService={contentService}
           imageProperties={imageProperties}
           isServerSideLazy={isServerSideLazy}
+          overline={overline}
+          overlineURL={overlineURL}
           phrases={phrases}
           showByline={promoElements.showByline}
           showDate={promoElements.showDate}
           showDescription={promoElements.showDescription}
           showHeadline={promoElements.showHeadline}
           showImage={promoElements.showImage}
+          showOverline={promoElements.showOverline}
           targetFallbackImage={targetFallbackImage}
         />
       </HeadingSection>
@@ -95,41 +100,44 @@ ResultsList.propTypes = {
       group: 'Configure Content',
       label: 'Display Content Info',
     }),
-    showHeadline: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showByline: PropTypes.bool.tag(
-      {
-        label: 'Show byline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDate: PropTypes.bool.tag(
-      {
-        label: 'Show date',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    showOverline: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: false,
+      group: 'Show promo elements',
+    }),
+    overline: PropTypes.string.tag({
+      label: 'Overline',
+      group: 'Show promo elements',
+    }),
+    overlineURL: PropTypes.string.tag({
+      label: 'Overline URL',
+      group: 'Show promo elements',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showByline: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDate: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,

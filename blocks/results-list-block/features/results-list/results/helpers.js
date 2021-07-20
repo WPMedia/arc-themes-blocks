@@ -26,11 +26,12 @@ const reduceResultList = (state = defaultResultList, action) => {
 
 const resolveDefaultPromoElements = (customFields = {}) => {
   const fields = {
-    showHeadline: true,
-    showImage: true,
-    showDescription: true,
     showByline: true,
     showDate: true,
+    showDescription: true,
+    showHeadline: true,
+    showImage: true,
+    showOverline: false,
   };
   const fieldKeys = Object.keys(fields);
   return fieldKeys.reduce((acc, key) => {

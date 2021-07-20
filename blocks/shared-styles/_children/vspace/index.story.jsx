@@ -47,6 +47,31 @@ export const defaultValues = () => {
   );
 };
 
+export const defaultWithBlockAfter = () => (
+  <>
+    <VSpace>
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+    </VSpace>
+    <div style={{ backgroundColor: 'rgb(200 200 200)', height: '10vh' }} />
+  </>
+);
+
+export const nested = () => (
+  <VSpace>
+    <VSpace>
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+      <div style={sampleBlockStyles} />
+    </VSpace>
+    <div style={{ backgroundColor: 'rgb(200 200 200)', height: '10vh' }} />
+    <div style={{ backgroundColor: 'rgb(200 200 200)', height: '10vh' }} />
+  </VSpace>
+);
+
 export const noSeparator = () => (
   <VSpace childrenSeparator={false}>
     <div style={sampleBlockStyles} />
@@ -56,7 +81,7 @@ export const noSeparator = () => (
   </VSpace>
 );
 
-export const blockAfter = () => (
+export const noSeparatorBlockAfter = () => (
   <>
     <VSpace childrenSeparator={false}>
       <div style={sampleBlockStyles} />

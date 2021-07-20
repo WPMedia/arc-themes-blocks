@@ -16,8 +16,8 @@ const VSpaceStyles = styled.div.attrs((props) => ({
     }
   `}
 
-  ${({ separator, space, separatorColor }) => (separator && space) && `
-    > * {
+  ${({ separator, space, separatorColor }) => (separator) && `
+    > *:not(:last-child) {
       box-shadow:
         0 ${space} 0 0 rgb(255 255 255),
         0px calc(${space} + 1px) 0 0px ${separatorColor};
@@ -32,8 +32,8 @@ const VSpaceStyles = styled.div.attrs((props) => ({
 
     ${({
     separator, separatorColor, breakpointSpace,
-  }) => (separator && breakpointSpace) && `
-      > * {
+  }) => (separator) && `
+      > *:not(:last-child) {
         box-shadow:
           0 ${breakpointSpace} 0 0 rgb(255 255 255),
           0px calc(${breakpointSpace} + 1px) 0 0px ${separatorColor};

@@ -8,12 +8,15 @@ export const simpleListMock = {
 			promo_items: {
 				basic: {
 					resized_params: {
-						'105x70': "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						'274x183': 'Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/',
-						'377x283': "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+            '274x154': 'LBTiSxaxr1Eo-tEz9BKFCnZNArw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+            '274x183': 'Z3YDeb5U67phnWn-jjZ1D3raqLg=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+            '274x206': 'bg-hZozUyDasSC82dzGY6h7OzQE=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+            '400x225': '0h3vL_qyc8pjZN_cnwYgHECxICA=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+            '400x267': 'SBSiikbg6B9BLxiEqnZhBDbOelY=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+            '400x300': '4oA14YOFAWISqfWe7GayPCW-l9k=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/'
 					},
 					type: 'image',
-					url: 'https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg'
+					url: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG'
 				}
 			},
 			websites: {
@@ -30,12 +33,15 @@ export const simpleListMock = {
 			promo_items: {
 				basic: {
 					resized_params: {
-						'105x70': "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						'274x183': 'Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/',
-						'377x283': "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+				'274x154': 'LBTiSxaxr1Eo-tEz9BKFCnZNArw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x183': 'Z3YDeb5U67phnWn-jjZ1D3raqLg=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x206': 'bg-hZozUyDasSC82dzGY6h7OzQE=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x225': '0h3vL_qyc8pjZN_cnwYgHECxICA=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x267': 'SBSiikbg6B9BLxiEqnZhBDbOelY=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x300': '4oA14YOFAWISqfWe7GayPCW-l9k=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/'
 					},
 					type: 'image',
-					url: 'https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg'
+					url: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG'
 				}
 			},
 			websites: {
@@ -52,12 +58,15 @@ export const simpleListMock = {
 			promo_items: {
 				basic: {
 					resized_params: {
-						'105x70': "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						'274x183': 'Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/',
-						'377x283': "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+				'274x154': 'LBTiSxaxr1Eo-tEz9BKFCnZNArw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x183': 'Z3YDeb5U67phnWn-jjZ1D3raqLg=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x206': 'bg-hZozUyDasSC82dzGY6h7OzQE=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x225': '0h3vL_qyc8pjZN_cnwYgHECxICA=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x267': 'SBSiikbg6B9BLxiEqnZhBDbOelY=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x300': '4oA14YOFAWISqfWe7GayPCW-l9k=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/'
 					},
 					type: 'image',
-					url: 'https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg'
+					url: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG'
 				}
 			},
 			websites: {
@@ -74,12 +83,15 @@ export const simpleListMock = {
 			promo_items: {
 				basic: {
 					resized_params: {
-						'105x70': "toq6Dkqxl1xDvAHTWaO9c5qw4_o=filters:format(jpg):quality(70)/",
-						'274x183': 'Y9lCrjFoGrJZukqRLRMi5ntzkak=filters:format(jpg):quality(70)/',
-						'377x283': "fpRHXIzIpdkN2NZ-2GLSF8sl4Pk=filters:format(jpg):quality(70)/",
+				'274x154': 'LBTiSxaxr1Eo-tEz9BKFCnZNArw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x183': 'Z3YDeb5U67phnWn-jjZ1D3raqLg=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'274x206': 'bg-hZozUyDasSC82dzGY6h7OzQE=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x225': '0h3vL_qyc8pjZN_cnwYgHECxICA=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x267': 'SBSiikbg6B9BLxiEqnZhBDbOelY=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/',
+				'400x300': '4oA14YOFAWISqfWe7GayPCW-l9k=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/'
 					},
 					type: 'image',
-					url: 'https://d22ff27hdsy159.cloudfront.net/12-12-2019/t_42fd2e985d3f4b868b927ca58620a2ca_name_file_1280x720_2000_v3_1_.jpg'
+					url: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG'
 				}
 			},
 			websites: {

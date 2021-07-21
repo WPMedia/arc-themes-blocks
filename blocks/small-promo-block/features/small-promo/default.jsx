@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useContent, useEditableContent } from 'fusion:content';
+import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import {
-  PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
+  // PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
+  SmallPromoPresentation
 } from '@wpmedia/shared-styles';
 
 const SmallPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
+  const { arcSite } = useFusionContext();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -75,40 +75,7 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const imagePosition = customFields?.imagePosition || 'right';
-  const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
-
-  const headline = customFields?.showHeadline ? (
-    <PromoHeadline
-      content={content}
-      className={headlineMarginClass}
-      linkClassName="sm-promo-headline"
-      headingClassName="sm-promo-headline"
-    />
-  ) : null;
-
-  const image = customFields?.showImage ? (
-    <div style={{ position: isAdmin ? 'relative' : null }}>
-      <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
-        <PromoImage
-          content={content}
-          customImageURL={customFields.imageOverrideURL}
-          showPromoLabel
-          promoSize="SM"
-          imageRatio={customFields.imageRatio}
-          lazyLoad={customFields.lazyLoad}
-        />
-      </div>
-    </div>
-  ) : null;
-
-  return (
-    <SmallPromoContainer
-      headline={headline}
-      image={image}
-      imagePosition={imagePosition}
-    />
-  );
+  return <SmallPromoPresentation content={content} customFields={customFields} {...customFields} />;
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {

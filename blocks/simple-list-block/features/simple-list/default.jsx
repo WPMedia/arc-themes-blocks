@@ -4,24 +4,9 @@ import PropTypes from '@arc-fusion/prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
-import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
-import { Heading, HeadingSection } from '@wpmedia/shared-styles';
+import { Heading, HeadingSection, SmallPromoPresentation } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
-import StoryItem from './_children/story-item';
 import './simple-list.scss';
-
-const unserializeStory = (arcSite) => (acc, storyObject) => {
-  if (storyObject.websites?.[arcSite]) {
-    return acc.concat({
-      id: storyObject._id,
-      itemTitle: storyObject.headlines.basic,
-      imageURL: extractImageFromStory(storyObject) || '',
-      websiteURL: storyObject.websites[arcSite].website_url || '',
-      resizedImageOptions: extractResizedParams(storyObject),
-    });
-  }
-  return acc;
-};
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
   let targetFallbackImage = fallbackImage;
@@ -92,9 +77,6 @@ const SimpleList = (props) => {
       showImage = true,
     } = {},
     id = '',
-    placeholderResizedImageOptions,
-    targetFallbackImage,
-    imageProps,
   } = props;
 
   // need to inject the arc site here into use content
@@ -150,27 +132,8 @@ const SimpleList = (props) => {
         ) : null}
       <Wrapper>
         {
-        contentElements.reduce(unserializeStory(arcSite), []).map(({
-          id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
-        }) => (
-          <React.Fragment key={listItemId}>
-            <StoryItem
-              key={listItemId}
-              id={listItemId}
-              itemTitle={itemTitle}
-              imageURL={imageURL}
-              websiteURL={websiteURL}
-              websiteDomain={websiteDomain}
-              showHeadline={showHeadline}
-              showImage={showImage}
-              resizedImageOptions={resizedImageOptions}
-              placeholderResizedImageOptions={placeholderResizedImageOptions}
-              targetFallbackImage={targetFallbackImage}
-              arcSite={arcSite}
-              imageProps={imageProps}
-            />
-            <hr />
-          </React.Fragment>
+        contentElements.map((content) => (
+          <SmallPromoPresentation content={content} {...props.customFields} imagePosition="left" />
         ))
       }
       </Wrapper>

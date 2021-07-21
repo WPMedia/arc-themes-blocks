@@ -9,7 +9,7 @@ import { Image, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import './numbered-list.scss';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
 import {
-  Heading, HeadingSection, SecondaryFont,
+  Heading, HeadingSection, SecondaryFont, VSpace,
 } from '@wpmedia/shared-styles';
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
@@ -84,56 +84,57 @@ const NumberedList = (props) => {
 
   return (
     <HeadingSection>
-      <div className="numbered-list-container layout-section">
+      <VSpace breakpointSpace="md" className="numbered-list-container" childrenSeparator={false}>
         {(title !== '' && contentElements.length) ? (
           <Heading className="list-title">
             {title}
           </Heading>
         ) : null }
         <Wrapper>
-          {(contentElements.length) ? contentElements.map((element, i) => {
-            const {
-              headlines: { basic: headlineText } = {},
-              websites,
-            } = element;
-            const imageURL = extractImageFromStory(element);
+          <VSpace space="sm">
+            {(contentElements.length) ? contentElements.map((element, i) => {
+              const {
+                headlines: { basic: headlineText } = {},
+                websites,
+              } = element;
+              const imageURL = extractImageFromStory(element);
 
-            if (!websites[arcSite]) {
-              return null;
-            }
-            const url = websites[arcSite].website_url;
+              if (!websites[arcSite]) {
+                return null;
+              }
+              const url = websites[arcSite].website_url;
 
-            return (
-              <React.Fragment key={`numbered-list-${element._id}`}>
-                <div className="numbered-list-item numbered-item-margins">
-                  {showHeadline ? (
-                    <a href={url} className="headline-list-anchor">
-                      <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
-                      <Heading className="headline-text">{headlineText}</Heading>
-                    </a>
-                  ) : null}
-                  {showImage ? (
-                    <a
-                      href={url}
-                      className="list-anchor-image vertical-align-image"
-                      aria-hidden="true"
-                      tabIndex="-1"
-                    >
-                      <Image
-                        {...imageProps}
-                        url={imageURL || targetFallbackImage}
-                        resizedImageOptions={imageURL
-                          ? extractResizedParams(element) : placeholderResizedImageOptions}
-                      />
-                    </a>
-                  ) : null}
-                </div>
-                <hr />
-              </React.Fragment>
-            );
-          }) : null}
+              return (
+                <React.Fragment key={`numbered-list-${element._id}`}>
+                  <div className="numbered-list-item">
+                    {showHeadline ? (
+                      <a href={url} className="headline-list-anchor">
+                        <SecondaryFont as="p" className="list-item-number">{i + 1}</SecondaryFont>
+                        <Heading className="headline-text">{headlineText}</Heading>
+                      </a>
+                    ) : null}
+                    {showImage ? (
+                      <a
+                        href={url}
+                        className="list-anchor-image"
+                        aria-hidden="true"
+                        tabIndex="-1"
+                      >
+                        <Image
+                          {...imageProps}
+                          url={imageURL || targetFallbackImage}
+                          resizedImageOptions={imageURL
+                            ? extractResizedParams(element) : placeholderResizedImageOptions}
+                        />
+                      </a>
+                    ) : null}
+                  </div>
+                </React.Fragment>
+              );
+            }) : null}
+          </VSpace>
         </Wrapper>
-      </div>
+      </VSpace>
     </HeadingSection>
   );
 };

@@ -66,7 +66,7 @@ const layoutItem = (name) => (
 const layoutAreas = ['navigation', 'fullwidth1', 'main-1', 'main-2', 'rightrail-top', 'rightrail-middle', 'rightrail-bottom', 'fullwidth2', 'footer'];
 
 export const basic = () => (
-  <div id="fusion-app" class="layout-section">
+  <div id="fusion-app" className="layout-section">
     <RightRailAdvancedLayout
       children={layoutAreas.map((name) => layoutItem(name))}
     />

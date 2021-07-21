@@ -55,7 +55,7 @@ const ResultItem = React.memo(React.forwardRef(({
           </div>
         )
         : null }
-      {(showHeadline || showItemOverline)
+      {(showItemOverline || showHeadline)
         ? (
           <div className="results-list--headline-container mobile-order-1">
             {(showItemOverline)
@@ -65,9 +65,13 @@ const ResultItem = React.memo(React.forwardRef(({
                 />
               )
               : null}
-            <a href={url} title={headlineText}>
-              <Heading className="headline-text">{headlineText}</Heading>
-            </a>
+            {(showHeadline)
+              ? (
+                <a href={url} title={headlineText}>
+                  <Heading className="headline-text">{headlineText}</Heading>
+                </a>
+              )
+              : null}
           </div>
         )
         : null }

@@ -85,7 +85,6 @@ const ResultsList = ({ customFields }) => {
           showHeadline={promoElements.showHeadline}
           showImage={promoElements.showImage}
           showItemOverline={promoElements.showItemOverline}
-          showOverline={promoElements.showOverline}
           targetFallbackImage={targetFallbackImage}
         />
       </HeadingSection>
@@ -101,21 +100,8 @@ ResultsList.propTypes = {
       group: 'Configure Content',
       label: 'Display Content Info',
     }),
-    showOverline: PropTypes.bool.tag({
-      label: 'Show list overline',
-      defaultValue: false,
-      group: 'Show promo elements',
-    }),
-    overline: PropTypes.string.tag({
-      label: 'List Overline',
-      group: 'Show promo elements',
-    }),
-    overlineURL: PropTypes.string.tag({
-      label: 'List Overline URL',
-      group: 'Show promo elements',
-    }),
     showItemOverline: PropTypes.bool.tag({
-      label: 'Show item overlines',
+      label: 'Show overline',
       defaultValue: false,
       group: 'Show promo elements',
     }),

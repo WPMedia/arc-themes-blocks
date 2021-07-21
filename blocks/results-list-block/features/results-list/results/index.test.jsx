@@ -633,38 +633,3 @@ describe('fallback image', () => {
     unmount();
   });
 });
-
-describe('Overline element', () => {
-  it('should show the overline if showOverline', () => {
-    useContent
-      .mockReset()
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[0])
-      .mockReturnValueOnce({})
-      .mockReturnValueOnce(mockContent[1]);
-
-    const { unmount } = render(
-      <Results
-        arcSite="the-sun"
-        configuredOffset={0}
-        configuredSize={1}
-        contentConfigValues={{
-          defaultOffset: 0,
-          defaultSize: 1,
-        }}
-        contentService="unknown"
-        overline="Test Overline"
-        overlineUrl="www.testurl.com"
-        phrases={mockPhrases}
-        showHeadline
-        showOverline
-        imageProperties={imageProperties}
-        targetFallbackImage={fallbackImage}
-      />,
-    );
-
-    expect(screen.getAllByText(/Test Overline/i)).toHaveLength(1);
-
-    unmount();
-  });
-});

@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
 
-import { Overline } from '@wpmedia/shared-styles';
-
 import ResultItem from './result-item';
 import { reduceResultList } from './helpers';
 
@@ -29,8 +27,6 @@ const Results = ({
   contentService,
   imageProperties,
   isServerSideLazy = false,
-  overline,
-  overlineURL,
   phrases,
   showByline = false,
   showDate = false,
@@ -38,7 +34,6 @@ const Results = ({
   showHeadline = false,
   showImage = false,
   showItemOverline = false,
-  showOverline = false,
   targetFallbackImage,
 }) => {
   const [queryOffset, setQueryOffset] = useState(configuredOffset);
@@ -205,14 +200,6 @@ const Results = ({
 
   return (viewableElements?.length > 0 && !isServerSideLazy) ? (
     <div className="results-list-container">
-      {showOverline
-        ? (
-          <Overline
-            customText={overline}
-            customUrl={overlineURL}
-          />
-        )
-        : null}
       {viewableElements.map((element, index) => (
         <ResultItem
           key={`result-card-${element._id}`}

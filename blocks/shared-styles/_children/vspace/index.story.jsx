@@ -68,7 +68,7 @@ export const defaultWithBlockAfter = () => (
 
 export const nested = () => (
   <VSpace>
-    <VSpace>
+    <VSpace breakpointSpace="lg">
       <div style={sampleBlockStyles} />
       <div style={sampleBlockStyles} />
       <div style={sampleBlockStyles} />

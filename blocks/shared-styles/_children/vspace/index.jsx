@@ -6,12 +6,12 @@ import { framework } from '@wpmedia/news-theme-css/js/framework';
 const VSpaceStyles = styled.div.attrs((props) => ({
   space: framework.spacers[props.space] || '2rem',
   breakpoint: framework.gridBreakpoints[props.breakpoint] || '48rem',
-  breakpointSpace: framework.spacers[props.breakpointSpace] || '1.5rem',
+  breakpointSpace: framework.spacers[props.breakpointSpace] || '1rem',
   separator: props.childrenSeparator,
   separatorColor: 'rgb(218 218 218)',
 }))`
   ${({ separator, space }) => space && `
-    > * {
+    > *:not(:last-child) {
       margin-bottom: ${(separator ? `calc(${space} * 2 + 1px)` : `${space}`)};
     }
   `}
@@ -26,7 +26,7 @@ const VSpaceStyles = styled.div.attrs((props) => ({
 
   /* For screens greater than X */
   @media screen and (min-width: ${({ breakpoint }) => breakpoint}) {
-    > * {
+    > *:not(:last-child) {
       margin-bottom: ${({ breakpointSpace, separator }) => (separator ? `calc(${breakpointSpace} * 2 + 1px)` : `${breakpointSpace}`)};
     }
 
@@ -47,7 +47,7 @@ const VSpace = (props) => <VSpaceStyles {...props} />;
 VSpace.defaultProps = {
   space: 'lg',
   breakpoint: 'md',
-  breakpointSpace: 'md',
+  breakpointSpace: 'sm',
   childrenSeparator: true,
 };
 
@@ -57,5 +57,13 @@ VSpace.propTypes = {
   breakpointSpace: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
   childrenSeparator: PropTypes.bool,
 };
+
+// xxs: 4px
+// xs: 8px
+// sm: 16px
+// md: 24px
+// lg: 32px
+// xl: 48px
+// xxl: 64px
 
 export default VSpace;

@@ -1,18 +1,18 @@
-name: Release candidate blocks publish to rc tag
+name: Stable blocks publish to stable tag
 on:
   push:
     branches:
-      - rc
+      - stable
     # When all the path names match patterns in paths-ignore, the workflow will not run.
     # make sure CHANGELOG.MD and package.json are ignored
     paths-ignore:
       - "CHANGELOG.md"
       - "package.json"
 
-# Publishes rc builds with the dist tag of "rc"
+# Publishes stable builds with the dist tag of "stable" and
 jobs:
   publish:
-    name: rc block publish
+    name: Stable block publish
     runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
@@ -39,6 +39,11 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - name: Configure NPM
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+          echo '@WPMedia:registry=https://npm.pkg.github.com' >> .npmrc
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -51,10 +56,11 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Publish to rc
-        run: npm run release:rc
+      # iterates minor version
+      - name: Publish to stable
+        run: npm run release:stable
 
-      - name: Check rc failure status
+      - name: Check beta failure status
         uses: act10ns/slack@v1
         with:
           status: ${{ job.status }}

@@ -25,6 +25,7 @@
     "postinstall": "npx lerna clean -y",
     "release:beta": "lerna publish --dist-tag beta --canary --preid beta -y",
     "release:canary": "lerna publish --dist-tag canary --canary --preid canary -y",
+    "release:rc": "lerna publish --dist-tag rc --canary --preid rc -y",
     "release:stable": "lerna publish --dist-tag stable minor -y"
   },
   "husky": {

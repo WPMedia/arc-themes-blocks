@@ -3,11 +3,10 @@ on:
   push:
     branches:
       - rc
-    # When all the path names match patterns in paths-ignore, the workflow will not run.
-    # make sure CHANGELOG.MD and package.json are ignored
-    paths-ignore:
-      - "CHANGELOG.md"
-      - "package.json"
+    # only run on changes to these files
+    paths:
+      - "**.js"
+      - "**.jsx"
 
 # Publishes rc builds with the dist tag of "rc"
 jobs:

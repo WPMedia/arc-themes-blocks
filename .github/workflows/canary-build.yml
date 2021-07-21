@@ -3,15 +3,12 @@ on:
   push:
     branches:
       - canary
-    # When all the path names match patterns in paths-ignore, the workflow will not run.
-    # make sure CHANGELOG.MD and package.json are ignored
-    paths-ignore:
-      - "CHANGELOG.md"
-      - "package.json"
+    # only run on changes to these files
+    paths:
+      - "**.js"
+      - "**.jsx"
 
-# Publishes Canary builds with the dist tag of "canary" and
-# with a version of 0.0.0 with a short git SHA appended to
-# the end.
+# Publishes Canary builds with the dist tag of "canary"
 jobs:
   publish:
     name: Canary block publish

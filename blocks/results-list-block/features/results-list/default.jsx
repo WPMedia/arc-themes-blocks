@@ -25,8 +25,6 @@ const ResultsList = ({ customFields }) => {
     isAdmin,
   } = useFusionContext();
   const {
-    overline,
-    overlineURL,
     lazyLoad,
     listContentConfig: {
       contentService,
@@ -76,8 +74,6 @@ const ResultsList = ({ customFields }) => {
           contentService={contentService}
           imageProperties={imageProperties}
           isServerSideLazy={isServerSideLazy}
-          overline={overline}
-          overlineURL={overlineURL}
           phrases={phrases}
           showByline={promoElements.showByline}
           showDate={promoElements.showDate}

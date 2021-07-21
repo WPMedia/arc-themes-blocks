@@ -7,10 +7,6 @@ import { useContent } from 'fusion:content';
 
 import Results from './index';
 
-jest.mock('@wpmedia/shared-styles', () => ({
-  Overline: ({ customText, customUrl }) => <a href={customUrl}>{customText}</a>,
-}));
-
 jest.mock('./result-item', () => {
   /* eslint-disable-next-line no-shadow */
   const React = require('react');

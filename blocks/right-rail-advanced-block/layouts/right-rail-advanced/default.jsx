@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
+
+import { VSpace } from '@wpmedia/shared-styles';
+
 import './default.scss';
 
 const useFeatureList = () => {
@@ -29,43 +32,39 @@ const RightRailAdvancedLayout = ({ children }) => {
   const featureList = useFeatureList();
 
   return (
-    <>
+    <VSpace breakpointSpace="md" childrenSeparator={false} className="fusion-layout">
       <header className="page-header">{navigation}</header>
       <section role="main" id="main" className="main" tabIndex="-1">
-        <div className="container layout-section">
-          <div className="row">
-            <div className="col-sm-xl-12 layout-section wrap-bottom">
-              {fullwidth1}
-            </div>
+        <VSpace breakpointSpace="md" childrenSeparator={false} className="container">
+          <div className="col-sm-xl-12">
+            {fullwidth1}
           </div>
           <div className="row advanced-grid">
-            <section className="col-sm-md-12 col-lg-xl-8 advanced-grid-desktop-main-area">
+            <VSpace as="section" childrenSeparator={false} className="col-sm-md-12 col-lg-xl-8 advanced-grid-desktop-main-area">
               <RenderChild Item={main} tabletPlacement="2" />
-              <RenderChild Item={main2} tabletPlacement="4" />
-            </section>
-            <section className="col-sm-md-12 col-lg-xl-4 layout-section">
-              <RenderChild Item={rightRailTop} tabletPlacement="1" />
-              <RenderChild Item={rightRailMiddle} tabletPlacement="3" />
-              <RenderChild Item={rightRailBottom} tabletPlacement="5" />
-            </section>
+              {featureList['3'] > 0 ? <RenderChild Item={main2} tabletPlacement="4" /> : null}
+            </VSpace>
+            <VSpace as="section" breakpointSpace="md" childrenSeparator={false} className="col-sm-md-12 col-lg-xl-4">
+              {featureList['4'] > 0 ? <RenderChild Item={rightRailTop} tabletPlacement="1" /> : null}
+              {featureList['5'] > 0 ? <RenderChild Item={rightRailMiddle} tabletPlacement="3" /> : null}
+              {featureList['6'] > 0 ? <RenderChild Item={rightRailBottom} tabletPlacement="5" /> : null}
+            </VSpace>
           </div>
-          {featureList['7'] > 0 && (
-            <div className="row">
-              <div className="col-sm-xl-12 layout-section wrap-bottom">
-                {fullWidth2}
-              </div>
-            </div>
-          )}
-        </div>
+          {featureList['7'] > 0 ? (
+            <VSpace breakpointSpace="md" childrenSeparator={false} className="col-sm-xl-12">
+              {fullWidth2}
+            </VSpace>
+          ) : null}
+        </VSpace>
 
       </section>
       <footer>{footer}</footer>
-    </>
+    </VSpace>
   );
 };
 
 const RenderChild = ({ Item, tabletPlacement }) => (
-  <div className={`advanced-grid-${tabletPlacement} layout-section`}>{Item}</div>
+  <VSpace breakpointSpace="md" childrenSeparator={false} className={`advanced-grid-${tabletPlacement}`}>{Item}</VSpace>
 );
 
 RightRailAdvancedLayout.propTypes = {

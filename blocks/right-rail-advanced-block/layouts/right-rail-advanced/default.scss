@@ -4,7 +4,7 @@ body {
   width: 100%;
 }
 
-#fusion-app {
+.fusion-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,7 +41,12 @@ body {
 
 
 @media (max-width: 64rem) {
+  .row.advanced-grid {
+    grid-template-columns: auto;
+  }
+
   .advanced-grid {
+    margin: 0;
     gap: 0;
     grid:
       'rightrailtop'

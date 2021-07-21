@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useAppContext } from 'fusion:context';
 import './default.scss';
+import { VSpace } from '@wpmedia/shared-styles';
 
 const useFeatueList = () => {
   const { renderables } = useAppContext();
@@ -19,38 +20,33 @@ const RightRailLayout = ({ children }) => {
   const featureList = useFeatueList();
 
   return (
-    <>
+    <VSpace breakpointSpace="md" childrenSeparator={false} className="fusion-layout">
       <header className="page-header">{navigation}</header>
-      <section role="main" id="main" className="main" tabIndex="-1">
-        <div className="container layout-section">
-          <div className="row">
-            <div className="col-sm-xl-12 layout-section wrap-bottom">
-              {fullWidth1}
-            </div>
+      <VSpace space="lg" breakpointSpace="md" childrenSeparator={false} as="section" role="main" id="main" className="main" tabIndex="-1">
+        <VSpace breakpointSpace="md" childrenSeparator={false} className="container">
+          <div className="col-sm-xl-12">
+            {fullWidth1}
           </div>
 
-          <div className="row">
-            <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
+          <VSpace breakpointSpace="lg" childrenSeparator={false} className="row">
+            <div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm">
               {main}
             </div>
-            <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section wrap-bottom">
+            <aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm">
               {rightRail}
             </aside>
-          </div>
+          </VSpace>
 
           {featureList['4'] > 0 && (
-            <div className="row">
-              <div className="col-sm-xl-12 layout-section wrap-bottom">
-                {fullWidth2}
-              </div>
-            </div>
+          <div className="col-sm-xl-12">
+            {fullWidth2}
+          </div>
           )}
 
-        </div>
-
-      </section>
+        </VSpace>
+      </VSpace>
       <footer>{footer}</footer>
-    </>
+    </VSpace>
   );
 };
 

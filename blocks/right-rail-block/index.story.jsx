@@ -41,7 +41,7 @@ const layoutItem = (name) => <div style={getStyles(name)}>{name}</div>;
 const layoutAreas = ['navigation', 'fullWidth1', 'main', 'rightRail', 'fullWidth2', 'footer'];
 
 export const basic = () => (
-  <div id="fusion-app" className="layout-section">
+  <div id="fusion-app">
     <RightRailBlock
       children={layoutAreas.map((name) => layoutItem(name))}
     />

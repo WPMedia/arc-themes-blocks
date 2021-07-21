@@ -208,7 +208,7 @@ const SampleOutputType = ({
         {comscoreNoScript(comscoreID)}
         {googleTagManagerNoScript(gtmID)}
         <a className="skip-main" href="#main">{phrases.t('default-output-block.skip-main')}</a>
-        <div id="fusion-app" className="layout-section">{children}</div>
+        <div id="fusion-app">{children}</div>
         <Fusion />
       </body>
     </html>

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* Use arc proptypes and remove unnecessary intl.json file ([951380f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/951380fc958bb3b5d06bff14c63678e3c73317f4))
+
+
+### Performance Improvements
+
+* Filter out unnecessary promo info, depending on block usage like embed html ([7a15aec](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7a15aecaa7d19bb589604442ecf8a67e0f7c2b3c))
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/large-promo-block

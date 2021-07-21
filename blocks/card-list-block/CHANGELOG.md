@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Features
+
+* Remove unused widths and heights of image ([1efcffa](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1efcffad3157ef269cccd4759128fcf00b277baf))
+
+
+### Performance Improvements
+
+* Remove hr divider ([0795e35](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0795e353a26422cc59d264fd7bd9abc6db9747ec))
+* Remove unnecessary div wrapper ([4c40f7f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4c40f7f626e3b6f4c7d94f5ba019d9deb92c00f4))
+* Remove unnecessary npmignore ([a9c823a](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a9c823aade988af815a1f8a65be97bc219be978d))
+* This image can't get any bigger with css ... ([94945c0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/94945c0458d2e2906529cbf31ab7d404f2d4dc60))
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/card-list-block

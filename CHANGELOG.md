@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* Add classname for styled span link with font and color for the dot and text ([68d06a2](https://github.com/WPMedia/fusion-news-theme-blocks/commit/68d06a27a82d574547eb6101f063cee81b66041b))
+* Add format url helper from engine theme sdk ([6e1bb0f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6e1bb0f0bc50da75473eb80d1e10564ad77d427b))
+* Add layout section class to ensure spacing between elements ([8dec4a6](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8dec4a688bec6f14afa1729ae692eb6d9bc4a3e8))
+* Ensure all instances of https replacement works ([65f6398](https://github.com/WPMedia/fusion-news-theme-blocks/commit/65f639827ee555e506a3b75bafe930c92f75566a))
+* Focus on the link while tabbing through section title ([a1558a3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a1558a37d8635f63c95800781019bb5723434d5a))
+* Google font url optimization breaking preexisting fonts ([b2066dc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b2066dc72bf733a44953a02cac5637ba16f448da))
+* Remove use of latest in peer deps ([d6c94d0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/d6c94d0776ee5a6ea2978f54d438e449c8b3107c))
+* Run tests before building and publishing to prevent broken blocks from publish ([e657047](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e657047330178653de21238960c26a6fd8c32db5))
+* Update contrast level of copyright ([b93de5c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b93de5cd6a872b5648df7928948065e85e465175))
+* Update styles with calc rem ([6190c97](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6190c9771931de43c5208f78b92b72b7d3a92429))
+* Use arc fusion proptypes for storybook and no difference otherwise ([6555707](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6555707673bedf849b393854cfbbe270bc714dda))
+* Use arc proptypes and remove unnecessary intl.json file ([951380f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/951380fc958bb3b5d06bff14c63678e3c73317f4))
+* Use primary and secondary font rather than remaking styled components ([e4204fd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e4204fd1a79a5aba4adefbecbd6fe4e38b7c32a7))
+
+
+### Features
+
+* Add classname to reuse styles for the dot and the text of styled link ([eedadcc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/eedadcc620f2b18087e3210c997ad4accfab3c3f))
+* Allow http urls for resizer ([34b2061](https://github.com/WPMedia/fusion-news-theme-blocks/commit/34b2061cabf0a7b89627e5ca418ce8af461fd577))
+* Factor out format url and rename import to engine theme sdk ([a753ed4](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a753ed4f42cfab6830b48a9b7bda4e719dfba562))
+* Remove unused widths and heights of image ([1efcffa](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1efcffad3157ef269cccd4759128fcf00b277baf))
+* Use locale available in properties for html lang ([adee08c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/adee08c39b62d88f24020278f802a6b878742fed))
+* Use primary font for nested p tags. Remove styled component param primary font ([1dc15a8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1dc15a8f7f32ea3d9c0647d1065af9f31c237c6d))
+
+
+### Performance Improvements
+
+* Defer loading querly third-party script until dom loaded ([692b6e3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/692b6e3d5cd3f390862f5503561637aac3a9a45d))
+* Don't publish snapshot files in blocks ([dd6772e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dd6772e5ce203cfa62a89a881a1af5fde3b1852e)), closes [#806](https://github.com/WPMedia/fusion-news-theme-blocks/issues/806)
+* Factor out styled and arcsite usage for section title ([80d909c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/80d909c049e83ba428ce0880c219befd0e55c93e))
+* Filter out unnecessary promo info, depending on block usage like embed html ([7a15aec](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7a15aecaa7d19bb589604442ecf8a67e0f7c2b3c))
+* Remove hr divider ([0795e35](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0795e353a26422cc59d264fd7bd9abc6db9747ec))
+* Remove publishing of output type and other test files ([c95c97c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c95c97c18f458219664d9276c6f3caa7af963a8b)), closes [#799](https://github.com/WPMedia/fusion-news-theme-blocks/issues/799)
+* Remove unnecessary div wrapper ([4c40f7f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4c40f7f626e3b6f4c7d94f5ba019d9deb92c00f4))
+* Remove unnecessary npmignore ([a9c823a](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a9c823aade988af815a1f8a65be97bc219be978d))
+* Remove unused package duplicate from top-level ([a34e296](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a34e296bece5b0113b29ce6ced3403ce019800d0))
+* This image can't get any bigger with css ... ([94945c0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/94945c0458d2e2906529cbf31ab7d404f2d4dc60))
+
+
+### Reverts
+
+* Revert "ci: Only run on canary block publish" ([8bb5b8f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8bb5b8f0224bc69edf312dc0abb4bfa9ea9b16f4))
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package fusion-news-theme-blocks

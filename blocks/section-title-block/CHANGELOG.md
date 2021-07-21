@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* Add classname for styled span link with font and color for the dot and text ([68d06a2](https://github.com/WPMedia/fusion-news-theme-blocks/commit/68d06a27a82d574547eb6101f063cee81b66041b))
+* Add format url helper from engine theme sdk ([6e1bb0f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6e1bb0f0bc50da75473eb80d1e10564ad77d427b))
+* Focus on the link while tabbing through section title ([a1558a3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a1558a37d8635f63c95800781019bb5723434d5a))
+* Update styles with calc rem ([6190c97](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6190c9771931de43c5208f78b92b72b7d3a92429))
+
+
+### Features
+
+* Add classname to reuse styles for the dot and the text of styled link ([eedadcc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/eedadcc620f2b18087e3210c997ad4accfab3c3f))
+
+
+### Performance Improvements
+
+* Factor out styled and arcsite usage for section title ([80d909c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/80d909c049e83ba428ce0880c219befd0e55c93e))
+
+
+
+
+
 # [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
 
 

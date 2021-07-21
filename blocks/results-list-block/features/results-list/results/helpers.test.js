@@ -12,6 +12,7 @@ describe('resolveDefaultPromoElements', () => {
       showDescription: true,
       showHeadline: true,
       showImage: true,
+      showItemOverline: false,
       showOverline: false,
     };
     expect(result).toEqual(expectedResult);
@@ -24,6 +25,7 @@ describe('resolveDefaultPromoElements', () => {
       showDescription: true,
       showHeadline: true,
       showImage: false,
+      showItemOverline: false,
       showOverline: false,
     });
     const expectedResult = {
@@ -32,6 +34,7 @@ describe('resolveDefaultPromoElements', () => {
       showDescription: true,
       showHeadline: true,
       showImage: false,
+      showItemOverline: false,
       showOverline: false,
     };
     expect(result).toEqual(expectedResult);

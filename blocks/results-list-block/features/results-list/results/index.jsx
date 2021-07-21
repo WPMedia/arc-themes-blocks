@@ -37,6 +37,7 @@ const Results = ({
   showDescription = false,
   showHeadline = false,
   showImage = false,
+  showItemOverline = false,
   showOverline = false,
   targetFallbackImage,
 }) => {
@@ -106,6 +107,16 @@ const Results = ({
         headlines {
           basic
         }
+        label {
+          basic {
+            display
+            url
+            text
+          }
+        }
+        owner {
+          sponsored
+        }
         description {
           basic
         }
@@ -135,6 +146,10 @@ const Results = ({
         websites {
           ${arcSite} {
             website_url
+            website_section {
+              _id
+              name
+            }
           }
         }
       }
@@ -211,6 +226,7 @@ const Results = ({
           showDescription={showDescription}
           showHeadline={showHeadline}
           showImage={showImage}
+          showItemOverline={showItemOverline}
           targetFallbackImage={targetFallbackImage}
         />
       ))}

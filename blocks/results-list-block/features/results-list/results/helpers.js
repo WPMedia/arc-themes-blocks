@@ -31,6 +31,7 @@ const resolveDefaultPromoElements = (customFields = {}) => {
     showDescription: true,
     showHeadline: true,
     showImage: true,
+    showItemOverline: false,
     showOverline: false,
   };
   const fieldKeys = Object.keys(fields);

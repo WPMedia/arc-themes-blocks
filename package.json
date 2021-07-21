@@ -22,7 +22,10 @@
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
     "test:coverage": "jest --coverage",
     "generate:intl": "node locale/scripts/generate-intl.js",
-    "postinstall": "npx lerna clean -y"
+    "postinstall": "npx lerna clean -y",
+    "release:beta": "lerna publish --dist-tag beta --canary --preid beta -y",
+    "release:canary": "lerna publish --dist-tag canary --canary --preid canary -y",
+    "release:stable": "lerna publish --dist-tag stable minor -y"
   },
   "husky": {
     "hooks": {

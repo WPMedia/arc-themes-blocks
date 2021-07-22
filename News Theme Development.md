@@ -153,11 +153,10 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 
 ### `npm run release:stable`
 
-- Only publish packages to stable tag
-- "release:stable": "lerna publish --dist-tag stable -y", better because no force publishes and only changed ones 
-- ideally should go from: (done https://github.com/JackHowa/lerna-monorepo-components/runs/3126215436?check_suite_focus=true)
+- Only publish packages that have changed to stable tag
+- Ideally should version accordingly:
 
- - @JackHowa/headline: 1.2.5-canary.0 => 1.2.6
+ - @WPMedia/headline: 1.2.5-canary.0 => 1.2.6
 
 1. Pull the latest `canary` branch:
 

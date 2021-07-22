@@ -129,6 +129,35 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 
 ## Development Process
 
+### Release scripts (ran in github actions)
+
+#### `npm run release:canary` 
+
+- Only publish packages to canary tag
+- Publish packages based on only changes
+- Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
+
+
+#### `npm run release:beta` 
+
+- Only publish packages to beta
+- Publish packages based on only changes
+- Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
+
+
+#### `npm run release:rc` 
+
+- Only publish packages to rc
+- Publish packages based on only changes
+- Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
+
+### `npm run release:stable`
+
+- Only publish packages that have changed to stable tag
+- Note: We are versioning minor versions. In the future, we can look into breaking (major) changes for this. For example:
+
+ - @WPMedia/headline: 1.2.0-canary.0 => 1.3.0
+
 1. Pull the latest `canary` branch:
 
 ```sh
@@ -728,3 +757,6 @@ Ensure all node modules are cleared:
 ### Resources
 
 https://explainshell.com/
+- Fetch depth lerna issue https://stackoverflow.com/a/60184319/7491536
+- Lerna getting started https://github.com/lerna/lerna#getting-started
+- npmrc within the GitHub Action to push and pull https://viewsource.io/publishing-and-installing-private-github-packages-using-yarn-and-lerna/

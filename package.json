@@ -22,7 +22,11 @@
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
     "test:coverage": "jest --coverage",
     "generate:intl": "node locale/scripts/generate-intl.js",
-    "postinstall": "npx lerna clean -y"
+    "postinstall": "npx lerna clean -y",
+    "release:beta": "lerna publish --dist-tag beta --canary --preid beta -y",
+    "release:canary": "lerna publish --dist-tag canary --canary --preid canary -y",
+    "release:rc": "lerna publish --dist-tag rc --canary --preid rc -y",
+    "release:stable": "lerna publish --dist-tag stable minor -y"
   },
   "husky": {
     "hooks": {
@@ -67,7 +71,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
-    "lerna": "^3.18.3",
+    "lerna": "^4.0.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

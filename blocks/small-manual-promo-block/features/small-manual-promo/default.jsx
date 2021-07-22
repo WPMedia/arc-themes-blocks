@@ -7,11 +7,12 @@ import { SmallPromoPresentation } from '@wpmedia/shared-styles';
 
 const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
   const { isAdmin } = useFusionContext();
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
+    <LazyLoad enabled={shouldLazyLoad}>
       <SmallPromoPresentation customContent={customFields} {...customFields} />
     </LazyLoad>
   );

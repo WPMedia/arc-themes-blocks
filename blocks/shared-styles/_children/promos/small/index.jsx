@@ -7,7 +7,7 @@ import {
 } from '@wpmedia/shared-styles';
 
 const SmallPromoPresentation = ({
-  content = null, showHeadline, showImage, imagePosition, customFields,
+  content = null, showHeadline, showImage, imagePosition, customContent,
 }) => {
   const { searchableField } = useEditableContent();
   const { isAdmin } = useFusionContext();
@@ -18,12 +18,12 @@ const SmallPromoPresentation = ({
     ? (
       <PromoHeadline
         content={content}
-        text={customFields?.headline}
-        link={customFields?.linkURL}
+        text={customContent?.headline}
+        link={customContent?.linkURL}
         className={headlineMarginClass}
         linkClassName="sm-promo-headline"
         headingClassName="sm-promo-headline"
-        newTab={customFields?.newTab}
+        newTab={customContent?.newTab}
       />
     ) : null;
 
@@ -33,13 +33,13 @@ const SmallPromoPresentation = ({
         <div {...searchableField(imageSearchField)} suppressContentEditableWarning>
           <PromoImage
             content={content}
-            customImageURL={customFields?.[imageSearchField]}
-            alt={customFields?.headline}
+            customImageURL={customContent?.[imageSearchField]}
+            alt={customContent?.headline}
             promoSize="SM"
-            imageRatio={customFields?.imageRatio}
-            linkURL={customFields?.linkURL}
-            newTab={customFields?.newTab}
-            lazyLoad={customFields?.lazyLoad}
+            imageRatio={customContent?.imageRatio}
+            linkURL={customContent?.linkURL}
+            newTab={customContent?.newTab}
+            lazyLoad={customContent?.lazyLoad}
           />
         </div>
       </div>
@@ -61,7 +61,7 @@ SmallPromoPresentation.defaultProps = {
 };
 
 SmallPromoPresentation.propTypes = {
-  content: PropTypes.objectOf,
+  content: PropTypes.object,
   showHeadline: PropTypes.bool,
   showImage: PropTypes.bool,
   imagePosition: PropTypes.string,

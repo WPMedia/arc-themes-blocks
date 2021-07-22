@@ -12,7 +12,7 @@ const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <SmallPromoPresentation customFields={customFields} {...customFields} />
+      <SmallPromoPresentation customContent={customFields} {...customFields} />
     </LazyLoad>
   );
 };

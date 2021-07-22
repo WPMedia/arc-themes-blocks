@@ -72,7 +72,9 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  return <SmallPromoPresentation content={content} customFields={customFields} {...customFields} />;
+  return (
+    <SmallPromoPresentation content={content} customContent={customFields} {...customFields} />
+  );
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {

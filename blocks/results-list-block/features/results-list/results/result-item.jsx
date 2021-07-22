@@ -7,6 +7,7 @@ import {
   Byline,
   Heading,
   SecondaryFont,
+  Overline,
 } from '@wpmedia/shared-styles';
 
 const ResultItem = React.memo(React.forwardRef(({
@@ -20,6 +21,7 @@ const ResultItem = React.memo(React.forwardRef(({
   showDescription,
   showHeadline,
   showImage,
+  showItemOverline,
 }, ref) => {
   const {
     description: { basic: descriptionText } = {},
@@ -53,12 +55,23 @@ const ResultItem = React.memo(React.forwardRef(({
           </div>
         )
         : null }
-      {(showHeadline)
+      {(showItemOverline || showHeadline)
         ? (
           <div className="results-list--headline-container mobile-order-1">
-            <a href={url} title={headlineText}>
-              <Heading className="headline-text">{headlineText}</Heading>
-            </a>
+            {(showItemOverline)
+              ? (
+                <Overline
+                  story={element}
+                />
+              )
+              : null}
+            {(showHeadline)
+              ? (
+                <a href={url} title={headlineText}>
+                  <Heading className="headline-text">{headlineText}</Heading>
+                </a>
+              )
+              : null}
           </div>
         )
         : null }

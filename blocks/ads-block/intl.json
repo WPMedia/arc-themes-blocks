@@ -1,13 +1,13 @@
 {
 	"ads-block.ad-label": {
-		"de": "ADVERTISEMENT",
+		"de": "WERBUNG",
 		"en": "ADVERTISEMENT",
-		"es": "ADVERTISEMENT",
+		"es": "ANUNCIO",
 		"fr": "PUBLICITÉ",
-		"ja": "ADVERTISEMENT",
-		"ko": "ADVERTISEMENT",
-		"no": "ADVERTISEMENT",
-		"pt": "ADVERTISEMENT",
-		"sv": "ADVERTISEMENT"
+		"ja": "広告",
+		"ko": "광고",
+		"no": "ANNONSE",
+		"pt": "ANÚNCIO",
+		"sv": "REKLAM"
 	}
 }

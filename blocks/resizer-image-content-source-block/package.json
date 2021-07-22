@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/resizer-image-content-source-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Pass in a raw image url, get some size options for that image generated via thumbor-lite",
   "main": "index.js",
   "scripts": {

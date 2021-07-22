@@ -90,7 +90,7 @@ export const emptyStringBylineURL = () => {
       credits: {
         by: [{
           type: 'author',
-          name: 'No Name Url',
+          name: 'No Name URL',
           url: '',
           additional_properties: {
             original: {

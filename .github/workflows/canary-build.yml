@@ -54,8 +54,11 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
           echo '@WPMedia:registry=https://npm.pkg.github.com' >> .npmrc
 
-      - name: Install
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests
         run: npm run test

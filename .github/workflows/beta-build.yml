@@ -50,8 +50,11 @@ jobs:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
-      - name: Install
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests
         run: npm run test

@@ -81,3 +81,28 @@ export const noAuthors = () => {
     <Byline {...props} />
   );
 };
+
+export const noBylineURL = () => {
+  const props = {
+    separator: boolean('separator', true),
+    list: boolean('list', true),
+    content: {
+      credits: {
+        by: [{
+          type: 'author',
+          name: 'No Name Url',
+          url: '',
+          additional_properties: {
+            original: {
+              byline: 'SangHee Kim Byline',
+            },
+          },
+        }],
+      },
+    },
+  };
+
+  return (
+    <Byline {...props} />
+  );
+};

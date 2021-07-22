@@ -16,6 +16,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 jest.mock('@wpmedia/shared-styles', () => ({
   Byline: () => <div>Byline Sample Text - 123</div>,
   Heading: ({ children }) => <>{children}</>,
+  Overline: ({ customText, customUrl, story }) => <a href={customUrl || 'nourl'}>{customText || JSON.stringify(story)}</a>,
   SecondaryFont: () => <div>Font Sample Text - 123</div>,
 }));
 
@@ -37,7 +38,15 @@ const element = {
   description: { basic: 'Description 1' },
   display_date: '2021-01-01T00:01:00Z',
   headlines: { basic: 'Test headline 1' },
-  websites: { 'the-sun': { website_url: 'https://the-sun/1' } },
+  websites: {
+    'the-sun': {
+      website_url: 'https://the-sun/1',
+      website_section: {
+        _id: 'www.url.com',
+        name: 'Section',
+      },
+    },
+  },
   _id: 'element_1',
 };
 
@@ -126,6 +135,23 @@ describe('Result parts', () => {
     );
 
     expect(screen.getAllByText(/test headline/i)).toHaveLength(1);
+
+    unmount();
+  });
+
+  it('should show overline if showItemOverline', () => {
+    const { unmount } = render(
+      <ResultItem
+        arcSite="the-sun"
+        element={element}
+        imageProperties={imageProperties}
+        targetFallbackImage={fallbackImage}
+        placeholderResizedImageOptions={{}}
+        showItemOverline
+      />,
+    );
+
+    expect(screen.getAllByText(/"website_section"/i)).toHaveLength(1);
 
     unmount();
   });

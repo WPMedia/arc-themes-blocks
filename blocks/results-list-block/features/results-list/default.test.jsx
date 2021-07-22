@@ -6,7 +6,14 @@ import { useFusionContext } from 'fusion:context';
 import getTranslatedPhrases from 'fusion:intl';
 import getProperties from 'fusion:properties';
 
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
+
 import ResultsList from './default';
+
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  ...(jest.requireActual('@wpmedia/engine-theme-sdk')),
+  isServerSide: jest.fn(),
+}));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,
@@ -192,6 +199,8 @@ describe('isServerSideLazy flag', () => {
       },
     };
 
+    isServerSide.mockReturnValue(true);
+
     const { unmount } = render(<ResultsList customFields={customFields} />);
     expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
     unmount();
@@ -212,8 +221,32 @@ describe('isServerSideLazy flag', () => {
       },
     };
 
+    isServerSide.mockReturnValue(true);
+
     const { unmount } = render(<ResultsList customFields={customFields} />);
     expect(screen.queryByText(/"isServerSideLazy":false/i)).toBeInTheDocument();
+    unmount();
+  });
+  it('should be true if isServerSide is true, admin is false, and lazyload is false', () => {
+    useFusionContext.mockReturnValue({
+      arcSite: 'the-sun',
+      contextPath: '/pf',
+      deployment: jest.fn((path) => path),
+      isAdmin: false,
+    });
+
+    const customFields = {
+      lazyLoad: true,
+      listContentConfig: {
+        contentService: null,
+        contentConfigValues: {},
+      },
+    };
+
+    isServerSide.mockReturnValue(true);
+
+    const { unmount } = render(<ResultsList customFields={customFields} />);
+    expect(screen.queryByText(/"isServerSideLazy":true/i)).toBeInTheDocument();
     unmount();
   });
 });

@@ -80,6 +80,7 @@ const ResultsList = ({ customFields }) => {
           showDescription={promoElements.showDescription}
           showHeadline={promoElements.showHeadline}
           showImage={promoElements.showImage}
+          showItemOverline={promoElements.showItemOverline}
           targetFallbackImage={targetFallbackImage}
         />
       </HeadingSection>
@@ -95,41 +96,36 @@ ResultsList.propTypes = {
       group: 'Configure Content',
       label: 'Display Content Info',
     }),
-    showHeadline: PropTypes.bool.tag(
-      {
-        label: 'Show headline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showImage: PropTypes.bool.tag(
-      {
-        label: 'Show image',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDescription: PropTypes.bool.tag(
-      {
-        label: 'Show description',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showByline: PropTypes.bool.tag(
-      {
-        label: 'Show byline',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
-    showDate: PropTypes.bool.tag(
-      {
-        label: 'Show date',
-        defaultValue: true,
-        group: 'Show promo elements',
-      },
-    ),
+    showItemOverline: PropTypes.bool.tag({
+      label: 'Show overline',
+      defaultValue: false,
+      group: 'Show promo elements',
+    }),
+    showHeadline: PropTypes.bool.tag({
+      label: 'Show headline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showImage: PropTypes.bool.tag({
+      label: 'Show image',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDescription: PropTypes.bool.tag({
+      label: 'Show description',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showByline: PropTypes.bool.tag({
+      label: 'Show byline',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
+    showDate: PropTypes.bool.tag({
+      label: 'Show date',
+      defaultValue: true,
+      group: 'Show promo elements',
+    }),
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,

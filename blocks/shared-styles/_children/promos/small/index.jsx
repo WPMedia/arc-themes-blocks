@@ -7,8 +7,8 @@ import {
 } from '@wpmedia/shared-styles';
 
 const SmallPromoPresentation = ({
-                                  content = null, showHeadline, showImage, imagePosition, customFields,
-                                }) => {
+  content = null, showHeadline, showImage, imagePosition, customFields,
+}) => {
   const { searchableField } = useEditableContent();
   const { isAdmin } = useFusionContext();
   const imageSearchField = content ? 'imageOverrideURL' : 'imageURL';
@@ -64,6 +64,7 @@ SmallPromoPresentation.propTypes = {
   content: PropTypes.objectOf,
   showHeadline: PropTypes.bool,
   showImage: PropTypes.bool,
+  imagePosition: PropTypes.string,
 };
 
 export default SmallPromoPresentation;

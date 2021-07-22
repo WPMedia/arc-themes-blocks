@@ -25,6 +25,14 @@ export const useAppContext = () => ({
     props: { id: 5 },
     children: [1],
   }, {
+    collection: 'sections',
+    props: { id: 6 },
+    children: [1],
+  }, {
+    collection: 'sections',
+    props: { id: 7 },
+    children: [1],
+  }, {
     collection: 'feature',
     props: { id: 99 },
     children: [0],

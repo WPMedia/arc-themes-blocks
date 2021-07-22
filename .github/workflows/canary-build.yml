@@ -49,10 +49,13 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - name: Configure NPM
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+          echo '@WPMedia:registry=https://npm.pkg.github.com' >> .npmrc
+
       - name: Install
         run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests
         run: npm run test

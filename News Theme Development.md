@@ -154,9 +154,9 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 ### `npm run release:stable`
 
 - Only publish packages that have changed to stable tag
-- Ideally should version accordingly:
+- Note: We are versioning minor versions. In the future, we can look into breaking (major) changes for this. For example:
 
- - @WPMedia/headline: 1.2.5-canary.0 => 1.2.6
+ - @WPMedia/headline: 1.2.0-canary.0 => 1.3.0
 
 1. Pull the latest `canary` branch:
 

@@ -28,6 +28,7 @@ jobs:
           token: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Cache NPM files
+        id: cache
         uses: actions/cache@v2
         with:
           path: ~/.npm

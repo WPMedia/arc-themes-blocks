@@ -66,6 +66,8 @@ jobs:
 
       - name: Publish to canary
         run: npm run release:canary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Check failure status
         uses: act10ns/slack@v1

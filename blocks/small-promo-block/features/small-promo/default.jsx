@@ -6,9 +6,7 @@ import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { SmallPromoPresentation } from '@wpmedia/shared-styles';
 
-const SmallPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
-
+const SmallPromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
@@ -78,14 +76,14 @@ const SmallPromoItem = ({ customFields }) => {
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
-  const { isAdmin } = useFusionContext();
+  const { isAdmin, arcSite } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <SmallPromoItem customFields={customFields} />
+      <SmallPromoItem customFields={customFields} arcSite={arcSite} />
     </LazyLoad>
   );
 };

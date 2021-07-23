@@ -114,7 +114,7 @@ jobs:
             resizer-image-content-source-block
             placeholder-image-block
             event-tester-block
-            ad-taboola-bloc
+            ad-taboola-block
             a11y-testing-block
       - name: The job has failed, likely due to rate-limiting
         if: ${{ failure() }}

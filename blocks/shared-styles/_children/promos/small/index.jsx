@@ -7,23 +7,31 @@ import {
 } from '@wpmedia/shared-styles';
 
 const SmallPromoPresentation = ({
-  content = null, showHeadline, showImage, imagePosition, customContent,
+  content = null,
+  headline,
+  imagePosition = 'right',
+  imageRatio,
+  imageSearchField,
+  lazyLoad,
+  linkURL,
+  newTab,
+  showHeadline = true,
+  showImage = true,
 }) => {
   const { searchableField } = useEditableContent();
   const { isAdmin } = useFusionContext();
-  const imageSearchField = content ? 'imageOverrideURL' : 'imageURL';
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
 
   const headlineOutput = showHeadline
     ? (
       <PromoHeadline
         content={content}
-        text={customContent?.headline}
-        link={customContent?.linkURL}
+        text={headline}
+        link={linkURL}
         className={headlineMarginClass}
         linkClassName="sm-promo-headline"
         headingClassName="sm-promo-headline"
-        newTab={customContent?.newTab}
+        newTab={newTab}
       />
     ) : null;
 
@@ -33,13 +41,13 @@ const SmallPromoPresentation = ({
         <div {...searchableField(imageSearchField)} suppressContentEditableWarning>
           <PromoImage
             content={content}
-            customImageURL={customContent?.[imageSearchField]}
-            alt={customContent?.headline}
+            customImageURL={imageSearchField}
+            alt={headline}
             promoSize="SM"
-            imageRatio={customContent?.imageRatio}
-            linkURL={customContent?.linkURL}
-            newTab={customContent?.newTab}
-            lazyLoad={customContent?.lazyLoad}
+            imageRatio={imageRatio}
+            linkURL={linkURL}
+            newTab={newTab}
+            lazyLoad={lazyLoad}
           />
         </div>
       </div>
@@ -65,6 +73,10 @@ SmallPromoPresentation.propTypes = {
   showHeadline: PropTypes.bool,
   showImage: PropTypes.bool,
   imagePosition: PropTypes.string,
+  imageRatio: PropTypes.string,
+  lazyLoad: PropTypes.bool,
+  linkURL: PropTypes.string,
+  newTab: PropTypes.bool,
 };
 
 export default SmallPromoPresentation;

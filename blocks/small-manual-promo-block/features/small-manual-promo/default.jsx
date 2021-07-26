@@ -13,7 +13,7 @@ const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <SmallPromoPresentation customContent={customFields} {...customFields} />
+      <SmallPromoPresentation imageSearchField={customFields.imageURL} {...customFields} />
     </LazyLoad>
   );
 };

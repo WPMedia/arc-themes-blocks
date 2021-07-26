@@ -1,3 +1,4 @@
 h1.headline {
   line-height: calculateRem(48px);
+  margin-bottom: map-get($spacers, 'xs');
 }

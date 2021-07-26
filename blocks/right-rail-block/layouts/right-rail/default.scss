@@ -34,7 +34,7 @@ body {
     padding: 0;
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       border-right: 1px solid $border-rule-color;
-      padding: 0 map-get($spacers, 'lg') 0 0;
+      padding: 0 map-get($spacers, 'md') 0 0;
     }
   }
 

@@ -1,12 +1,26 @@
-/* eslint-disable import/no-unresolved */
-import source from '@arc-core-components/content-source_story-feed_tag-v4';
 import getResizedImageData from '@wpmedia/resizer-image-block';
 
+const params = {
+  tagSlug: 'text',
+  feedSize: 'number',
+  feedOffset: 'number',
+};
+
+const resolve = (key = {}) => {
+  const website = key['arc-site'];
+  const {
+    tagSlug,
+    feedOffset,
+    feedSize,
+  } = key;
+
+  return `/content/v4/search/published?q=taxonomy.tags.slug:${tagSlug}&size=${feedSize}&from=${feedOffset}&sort=display_date:desc&website=${website}`;
+};
+
 export default {
-  resolve: source.resolve,
-  schemaName: source.schemaName,
-  params: source.params,
-  // other options null use default functionality, such as filter quality
+  params,
+  resolve,
+  schemaName: 'ans-feed',
   transform: (data, query) => (
     getResizedImageData(
       data,

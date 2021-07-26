@@ -6,7 +6,9 @@ export default {
   title: 'Blocks/Overline',
   decorators: [withKnobs],
   // Disabling Snapshot of block as this block is currently an interface for Shared Styles/Overline
-  chromatic: { disableSnapshot: true },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  }
 };
 
 export const usingANSStoryObject = () => {

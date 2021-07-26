@@ -8,7 +8,7 @@ export default {
   // Disabling Snapshot of block as this block is currently an interface for Shared Styles/Overline
   parameters: {
     chromatic: { disableSnapshot: true },
-  }
+  },
 };
 
 export const usingANSStoryObject = () => {

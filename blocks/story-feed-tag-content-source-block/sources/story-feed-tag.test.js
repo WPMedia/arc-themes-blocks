@@ -17,6 +17,27 @@ describe('content source object', () => {
       expect(storyFeedTag.resolve(key)).toBe(endpoint);
     });
 
+    it('Throws error on empty string tag slug', () => {
+      const emptyTagSlug = '';
+
+      const options = {
+        feedOffset: 0,
+        feedSize: 5,
+        tagSlug: emptyTagSlug,
+      };
+
+      expect(() => storyFeedTag.resolve(options)).toThrow('tagSlug parameter is required');
+    });
+
+    it('Throws error on undefined tag slug', () => {
+      const options = {
+        feedOffset: 0,
+        feedSize: 5,
+      };
+
+      expect(() => storyFeedTag.resolve(options)).toThrow('tagSlug parameter is required');
+    });
+
     it('Returns error if no params', () => {
       expect(() => storyFeedTag.resolve()).toThrow('tagSlug parameter is required');
     });

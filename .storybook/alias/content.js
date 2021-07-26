@@ -1,9 +1,10 @@
-import { footerContentMock } from '../mock-content/footer';
-import { smallPromoMock } from '../mock-content/smallPromo';
-import { mediumPromoMock } from '../mock-content/mediumPromo';
 import { extraLargePromo } from '../mock-content/extraLargePromo';
+import { footerContentMock } from '../mock-content/footer';
 import { largePromoMock } from '../mock-content/largePromo';
+import { linksBarMock } from '../mock-content/linksBar';
+import { mediumPromoMock } from '../mock-content/mediumPromo';
 import { simpleListMock } from '../mock-content/simpleList';
+import { smallPromoMock } from '../mock-content/smallPromo';
 
 const featureMocks = {
 	footer: footerContentMock,
@@ -14,6 +15,7 @@ const featureMocks = {
 	'simple-list': simpleListMock,
 	'numbered-list': simpleListMock,
 	'card-list': simpleListMock,
+  'links-bar': linksBarMock,
 }
 
 export const useEditableContent = () => {
@@ -33,6 +35,9 @@ export const useContent = ({ query }) => {
 	}
 
 	if (featureMocks[query.feature]) {
+    if (typeof featureMocks[query.feature] === 'function') {
+      return featureMocks[query.feature](query);
+    }
 		return featureMocks[query.feature];
 	}
 

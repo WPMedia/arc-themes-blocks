@@ -82,7 +82,7 @@ export const noAuthors = () => {
   );
 };
 
-export const noBylineURL = () => {
+export const emptyStringBylineURL = () => {
   const props = {
     separator: boolean('separator', true),
     list: boolean('list', true),
@@ -90,7 +90,7 @@ export const noBylineURL = () => {
       credits: {
         by: [{
           type: 'author',
-          name: 'No Name Url',
+          name: 'No Name URL',
           url: '',
           additional_properties: {
             original: {

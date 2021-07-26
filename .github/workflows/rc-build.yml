@@ -28,6 +28,7 @@ jobs:
           token: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Cache NPM files
+        id: cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -39,14 +40,22 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - name: Configure NPM
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+          echo '@WPMedia:registry=https://npm.pkg.github.com' >> .npmrc
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
 
-      - name: Install
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests
         run: npm run test

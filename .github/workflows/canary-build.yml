@@ -28,6 +28,7 @@ jobs:
           token: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Cache NPM files
+        id: cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -49,7 +50,8 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-      - name: Install
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        # if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
@@ -59,6 +61,8 @@ jobs:
 
       - name: Publish to canary
         run: npm run release:canary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Check failure status
         uses: act10ns/slack@v1

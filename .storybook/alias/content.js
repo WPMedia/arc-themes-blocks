@@ -3,6 +3,7 @@ import { footerContentMock } from '../mock-content/footer';
 import { largePromoMock } from '../mock-content/largePromo';
 import { linksBarMock } from '../mock-content/linksBar';
 import { mediumPromoMock } from '../mock-content/mediumPromo';
+import { resultsList } from '../mock-content/resultsList';
 import { simpleListMock } from '../mock-content/simpleList';
 import { smallPromoMock } from '../mock-content/smallPromo';
 
@@ -16,6 +17,7 @@ const featureMocks = {
 	'numbered-list': simpleListMock,
 	'card-list': simpleListMock,
   'links-bar': linksBarMock,
+  'results-list': resultsList
 }
 
 export const useEditableContent = () => {

@@ -11,7 +11,8 @@ const SmallPromoPresentation = ({
   headline,
   imagePosition,
   imageRatio,
-  imageSearchField,
+  imageURL,
+  imageOverrideURL,
   lazyLoad,
   linkURL,
   newTab,
@@ -21,6 +22,8 @@ const SmallPromoPresentation = ({
   const { searchableField } = useEditableContent();
   const { isAdmin } = useFusionContext();
   const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
+  const imageSearchField = content ? 'imageOverrideURL' : 'imageURL';
+  const promoImageURL = content ? imageOverrideURL : imageURL;
 
   const headlineOutput = showHeadline
     ? (
@@ -41,7 +44,7 @@ const SmallPromoPresentation = ({
         <div {...searchableField(imageSearchField)} suppressContentEditableWarning>
           <PromoImage
             content={content}
-            customImageURL={imageSearchField}
+            customImageURL={promoImageURL}
             alt={headline}
             promoSize="SM"
             imageRatio={imageRatio}
@@ -78,6 +81,9 @@ SmallPromoPresentation.propTypes = {
   lazyLoad: PropTypes.bool,
   linkURL: PropTypes.string,
   newTab: PropTypes.bool,
+  headline: PropTypes.string,
+  imageURL: PropTypes.string,
+  imageOverrideURL: PropTypes.string,
 };
 
 export default SmallPromoPresentation;

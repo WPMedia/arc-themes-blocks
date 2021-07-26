@@ -71,11 +71,7 @@ const SmallPromoItem = ({ customFields, arcSite }) => {
   }) || null;
 
   return (
-    <SmallPromoPresentation
-      content={content}
-      imageSearchField={customFields.imageOverrideURL}
-      {...customFields}
-    />
+    <SmallPromoPresentation content={content} {...customFields} />
   );
 };
 

@@ -11,9 +11,10 @@ const SmallManualPromo = ({ customFields = { showImage: true, showHeadline: true
   if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
+
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <SmallPromoPresentation imageSearchField={customFields.imageURL} {...customFields} />
+      <SmallPromoPresentation {...customFields} />
     </LazyLoad>
   );
 };

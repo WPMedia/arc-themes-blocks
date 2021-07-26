@@ -13,7 +13,7 @@ const params = {
 */
 const pattern = (key = {}) => {
   const website = key['arc-site'] || 'Arc Site is not defined';
-  const { tagSlug, feedOffset, feedSize } = key;
+  const { tagSlug, feedOffset = 0, feedSize = 10 } = key;
 
   if (!tagSlug) {
     throw new Error('tagSlug parameter is required');

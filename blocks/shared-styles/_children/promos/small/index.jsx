@@ -7,16 +7,16 @@ import {
 } from '@wpmedia/shared-styles';
 
 const SmallPromoPresentation = ({
-  content = null,
+  content,
   headline,
-  imagePosition = 'right',
+  imagePosition,
   imageRatio,
   imageSearchField,
   lazyLoad,
   linkURL,
   newTab,
-  showHeadline = true,
-  showImage = true,
+  showHeadline,
+  showImage,
 }) => {
   const { searchableField } = useEditableContent();
   const { isAdmin } = useFusionContext();
@@ -63,6 +63,7 @@ const SmallPromoPresentation = ({
 };
 
 SmallPromoPresentation.defaultProps = {
+  content: null,
   showHeadline: true,
   showImage: true,
   imagePosition: 'right',

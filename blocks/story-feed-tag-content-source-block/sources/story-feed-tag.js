@@ -13,13 +13,15 @@ const params = {
 */
 const pattern = (key = {}) => {
   const website = key['arc-site'] || 'Arc Site is not defined';
-  const { tagSlug, feedOffset = 0, feedSize = 10 } = key;
+  const { tagSlug, feedOffset, feedSize } = key;
 
   if (!tagSlug) {
     throw new Error('tagSlug parameter is required');
   }
 
-  return `/content/v4/search/published?q=taxonomy.tags.slug:${tagSlug}&size=${feedSize}&from=${feedOffset}&sort=display_date:desc&website=${website}`;
+  // have to use inline due to content source
+  // defaults for feedSize 10 and feedOffset 0
+  return `/content/v4/search/published?q=taxonomy.tags.slug:${tagSlug}&size=${feedSize || 10}&from=${feedOffset || 0}&sort=display_date:desc&website=${website}`;
 };
 
 /**

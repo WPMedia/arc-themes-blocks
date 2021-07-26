@@ -21,4 +21,4 @@ Detail the data structure returned from this content source
 - Add the TTL of the content source
 
 ## Additional Considerations
-_See documentation [here](https://github.com/wapopartners/core-components/tree/dev/packages/content-source_story-feed_tag-v4)._
+

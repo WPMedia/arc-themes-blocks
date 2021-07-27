@@ -10,7 +10,7 @@ export default (site) => ({
 	lightBackgroundLogoAlt: 'light logo alt text',
 	primaryLogo: 'https://www.klartale.no/img/klartale/klartale-logo-new.svg',
 	primaryLogoAlt: 'primary logo alt text',
-	fallbackImage: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG',
+	fallbackImage: 'https://arc-anglerfish-staging-staging.s3.amazonaws.com/public/NA6FMAXWP5DR3FDZQ7SGJ3C3FE.png',
 	dateLocalization: {
 		language: 'en',
 		timeZone: 'America/New_York',

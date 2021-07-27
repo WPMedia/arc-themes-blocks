@@ -376,8 +376,6 @@ body.nav-open {
   }
 
   .section-menu {
-    height: 10px;
-    margin-top: 13px;
     padding: 0;
 
     > li {
@@ -411,25 +409,12 @@ body.nav-open {
   &.open {
     // dimmed background
     background: rgba(25, 25, 25, 0.5);
-    // total viewport height - header height
-    height: calc(100vh - 100px);
     overflow-y: scroll;
     transform: translate(0, 0);
     width: 100%;
 
-    .section-menu {
-      // total viewport height - header height - top margin style
-      height: calc(100vh - 100px - 13px);
-    }
-
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      // viewport height - top nav height
-      height: calc(100vh - 56px);
 
-      .section-menu {
-        // viewport height - search sub nav height - top nav height
-        height: calc(100vh - 48px - 56px);
-      }
       .inner-drawer-nav {
         width: 100vw;
       }

@@ -5,15 +5,12 @@ import { useFusionContext } from 'fusion:context';
 
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  Byline, HeadingSection, PromoDate, PromoDescription, PromoHeadline, PromoImage,
-} from '@wpmedia/shared-styles';
+import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
 const MediumPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
+  const { arcSite, } = useFusionContext();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -91,58 +88,13 @@ const MediumPromoItem = ({ customFields }) => {
   }) || null;
 
   return (
-    <HeadingSection>
-      <article className="container-fluid medium-promo">
-        <div className={`medium-promo-wrapper ${customFields?.showImage ? 'md-promo-image' : ''}`} style={{ position: isAdmin ? 'relative' : null }}>
-          {customFields?.showImage
-            ? (
-              <div
-                className="image-link"
-                {...searchableField('imageOverrideURL')}
-                suppressContentEditableWarning
-              >
-                <PromoImage
-                  content={content}
-                  customImageURL={customFields?.imageOverrideURL}
-                  showPromoLabel
-                  promoSize="MD"
-                  promoLabelSize="large"
-                  imageRatio={customFields?.imageRatio}
-                  lazyLoad={customFields?.lazyLoad}
-                />
-              </div>
-            )
-            : null}
-          {(customFields?.showHeadline
-            || customFields?.showDescription
-            || customFields?.showByline
-            || customFields?.showDate)
-          && (
-            <>
-              {customFields?.showHeadline
-                ? <PromoHeadline content={content} headingClassName="md-promo-headline-text" className="md-promo-headline" />
-                : null}
-              {(customFields?.showDescription
-                ? <PromoDescription className="description-text" content={content} />
-                : null)}
-              <div className="article-meta">
-                {customFields?.showByline
-                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
-                  : null}
-                {(customFields?.showDate)
-                  ? <PromoDate content={content} />
-                  : null}
-              </div>
-            </>
-          )}
-        </div>
-      </article>
-      <hr />
-    </HeadingSection>
+    <MediumPromoPresentation content={content} customFields={{ ...customFields }} />
   );
 };
 
 const MediumPromo = ({ customFields }) => {
+  console.log('customFields: ', customFields);
+
   const { isAdmin } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {

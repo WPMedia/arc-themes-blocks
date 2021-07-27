@@ -409,14 +409,17 @@ body.nav-open {
   }
 
   &.open {
+    // dimmed background
     background: rgba(25, 25, 25, 0.5);
-    height: 100vh;
+    // total viewport height - header height
+    height: calc(100vh - 100px);
     overflow-y: scroll;
     transform: translate(0, 0);
     width: 100%;
 
     .section-menu {
-      height: 100vh;
+      // total viewport height - header height - top margin style
+      height: calc(100vh - 100px - 13px);
     }
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {

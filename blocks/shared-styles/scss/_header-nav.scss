@@ -414,7 +414,6 @@ body.nav-open {
     width: 100%;
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-
       .inner-drawer-nav {
         width: 100vw;
       }

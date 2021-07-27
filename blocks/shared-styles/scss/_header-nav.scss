@@ -423,6 +423,13 @@ body.nav-open {
     }
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      // viewport height - top nav height
+      height: calc(100vh - 56px);
+
+      .section-menu {
+        // viewport height - search sub nav height - top nav height
+        height: calc(100vh - 48px - 56px);
+      }
       .inner-drawer-nav {
         width: 100vw;
       }

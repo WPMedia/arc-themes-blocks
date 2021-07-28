@@ -9,9 +9,7 @@ import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
-const MediumPromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
-
+const MediumPromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
@@ -93,14 +91,14 @@ const MediumPromoItem = ({ customFields }) => {
 };
 
 const MediumPromo = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
+  const { isAdmin, arcSite } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <MediumPromoItem customFields={customFields} />
+      <MediumPromoItem customFields={customFields} arcSite={arcSite}/>
     </LazyLoad>
   );
 };

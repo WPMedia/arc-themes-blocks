@@ -93,11 +93,6 @@ const MediumPromoPresentation = ({
   );
 };
 
-MediumPromoPresentation.defaultProps = {
-  content: null,
-  showHeadline: true,
-};
-
 MediumPromoPresentation.propTypes = {
   content: PropTypes.object,
   showHeadline: PropTypes.bool,

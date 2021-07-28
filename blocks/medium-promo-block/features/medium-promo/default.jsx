@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useEditableContent, useContent } from 'fusion:content';
+import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
@@ -93,8 +93,6 @@ const MediumPromoItem = ({ customFields }) => {
 };
 
 const MediumPromo = ({ customFields }) => {
-  console.log('customFields: ', customFields);
-
   const { isAdmin } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {

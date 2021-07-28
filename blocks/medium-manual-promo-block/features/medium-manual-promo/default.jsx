@@ -12,7 +12,7 @@ const MediumManualPromo = ({ customFields }) => {
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
-  console.log(customFields);
+
   return (
     <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
       <MediumPromoPresentation {...customFields} />

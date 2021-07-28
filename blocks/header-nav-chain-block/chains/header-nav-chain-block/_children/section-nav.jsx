@@ -44,8 +44,9 @@ const isSamePath = (current, menuLink) => {
   return false;
 };
 
+// $top-nav-stylistic-margin is the 13px variable in scss
 const StyledSectionMenuVariableHeight = styled.ul`
-  height: calc(100vh - ${(props) => props.navHeight}px);
+  height: calc(100vh - ${(props) => props.navHeight}px - 13px);
 `;
 
 /* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */

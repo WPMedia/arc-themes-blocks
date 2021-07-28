@@ -26,7 +26,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

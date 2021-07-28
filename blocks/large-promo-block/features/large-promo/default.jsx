@@ -1,26 +1,20 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useEditableContent, useContent } from 'fusion:content';
+import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 
 import {
-  extractVideoEmbedFromStory,
-  // presentational component does not do data fetching
-  VideoPlayer as VideoPlayerPresentational,
   LazyLoad,
   isServerSide,
   videoPlayerCustomFields,
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  Byline, HeadingSection, Overline, PromoDate, PromoDescription, PromoHeadline, PromoImage,
-} from '@wpmedia/shared-styles';
+import { LargePromoPresentation } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
 const LargePromoItem = ({ customFields }) => {
-  const { arcSite, id, isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
+  const { arcSite } = useFusionContext();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -112,76 +106,8 @@ const LargePromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
-  const videoEmbed = customFields?.playVideoInPlace && extractVideoEmbedFromStory(content);
-
   return (
-    <HeadingSection>
-      <article className="container-fluid large-promo">
-        <div className="row">
-          {(!!videoEmbed
-            || customFields?.showImage)
-          && (
-            <div className="col-sm-12 col-md-xl-6 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {(!!videoEmbed
-                && (
-                  <VideoPlayerPresentational
-                    id={id}
-                    embedMarkup={videoEmbed}
-                    enableAutoplay={false}
-                    shrinkToFit={customFields?.shrinkToFit}
-                    viewportPercentage={customFields?.viewportPercentage}
-                  />
-                )
-              )
-              || (
-                customFields?.showImage
-                && (
-                  <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
-                    <PromoImage
-                      content={content}
-                      customImageURL={customFields.imageOverrideURL}
-                      showPromoLabel
-                      promoSize="LG"
-                      promoLabelSize="large"
-                      imageRatio={customFields.imageRatio}
-                      lazyLoad={customFields.lazyLoad}
-                    />
-                  </div>
-                )
-              )}
-            </div>
-          )}
-          {(customFields?.showOverline
-            || customFields?.showHeadline
-            || customFields?.showDescription
-            || customFields?.showByline
-            || customFields?.showDate)
-          && (
-            <div className={textClass}>
-              {customFields?.showOverline
-                ? <Overline story={content} editable />
-                : null}
-              {customFields?.showHeadline
-                ? <PromoHeadline content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
-                : null}
-              {customFields?.showDescription
-                ? <PromoDescription className="description-text" content={content} />
-                : null}
-              <div className="article-meta">
-                {customFields?.showByline
-                  ? <Byline content={content} font="Primary" list separator={customFields.showDate} />
-                  : null}
-                {customFields?.showDate
-                  ? <PromoDate content={content} />
-                  : null}
-              </div>
-            </div>
-          )}
-        </div>
-      </article>
-      <hr />
-    </HeadingSection>
+    <LargePromoPresentation content={content} {...customFields} />
   );
 };
 

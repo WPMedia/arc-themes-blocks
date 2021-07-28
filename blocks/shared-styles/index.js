@@ -12,11 +12,13 @@ import SecondaryFont from './_children/secondary-font';
 import SmallPromoContainer from './_children/promo-helpers/small/container';
 import SmallPromoPresentation from './_children/promos/small';
 import SmallPromoStyles from './_children/promo-helpers/small/styles';
+import LargePromoPresentation from './_children/promos/large';
 
 export {
   Byline,
   Heading,
   HeadingSection,
+  LargePromoPresentation,
   Overline,
   PrimaryFont,
   PromoDate,

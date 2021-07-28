@@ -98,7 +98,7 @@ const MediumPromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <MediumPromoItem customFields={customFields} arcSite={arcSite}/>
+      <MediumPromoItem customFields={customFields} arcSite={arcSite} />
     </LazyLoad>
   );
 };

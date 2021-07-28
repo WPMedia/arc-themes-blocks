@@ -307,7 +307,6 @@ body.nav-open {
   scrollbar-width: none;
   top: 0;
   width: 0;
-  margin-bottom: 100px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -380,11 +379,6 @@ body.nav-open {
   .section-menu {
     margin-top: $top-nav-stylistic-margin;
     padding: 0;
-    
-    // > li:last-child {
-    //   padding-bottom: env(safe-area-inset-top, 15px);  
-    //   padding-bottom: 20px;
-    // }
 
     > li {
       font-weight: bold;
@@ -424,8 +418,6 @@ body.nav-open {
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       .inner-drawer-nav {
-        // takes into account the lower nav of safari
-        height: -webkit-fill-available;
         width: 100vw;
       }
     }

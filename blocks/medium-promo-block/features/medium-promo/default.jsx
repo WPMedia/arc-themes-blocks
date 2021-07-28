@@ -10,7 +10,7 @@ import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 import '@wpmedia/shared-styles/scss/_medium-promo.scss';
 
 const MediumPromoItem = ({ customFields }) => {
-  const { arcSite, } = useFusionContext();
+  const { arcSite } = useFusionContext();
 
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -88,7 +88,7 @@ const MediumPromoItem = ({ customFields }) => {
   }) || null;
 
   return (
-    <MediumPromoPresentation content={content} customFields={{ ...customFields }} />
+    <MediumPromoPresentation content={content} {...customFields} />
   );
 };
 

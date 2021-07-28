@@ -15,7 +15,7 @@ const MediumManualPromo = ({ customFields }) => {
   console.log(customFields);
   return (
     <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-      <MediumPromoPresentation customFields={{ ...customFields }} />
+      <MediumPromoPresentation {...customFields} />
     </LazyLoad>
   );
 };

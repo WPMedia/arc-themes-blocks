@@ -27,6 +27,7 @@ const MediumPromoPresentation = ({
   const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
   const promoImageURL = content ? imageOverrideURL : imageURL;
+  const imageSearchField = content ? 'imageOverrideURL' : 'imageURL';
 
   return (
     <HeadingSection>
@@ -36,7 +37,7 @@ const MediumPromoPresentation = ({
             ? (
               <div
                 className="image-link"
-                {...searchableField('imageOverrideURL')}
+                {...searchableField(imageSearchField)}
                 suppressContentEditableWarning
               >
                 <PromoImage
@@ -84,7 +85,7 @@ const MediumPromoPresentation = ({
 
 MediumPromoPresentation.defaultProps = {
   content: null,
-  // showHeadline: true,
+  showHeadline: true,
 };
 
 MediumPromoPresentation.propTypes = {

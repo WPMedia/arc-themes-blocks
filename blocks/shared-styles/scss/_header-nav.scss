@@ -405,11 +405,6 @@ body.nav-open {
     }
   }
 
-  &.closed {
-    // hide vertical overflow when closed
-    overflow-y: hidden;
-  }
-
   &.open {
     // dimmed background
     background: rgba(25, 25, 25, 0.5);
@@ -426,7 +421,8 @@ body.nav-open {
   }
 
   &.closed {
-    overflow: hidden;
+    // hide vertical overflow when closed
+    overflow-y: hidden;
     .section-menu {
       transition: height 100ms ease-in-out 600ms;
     }

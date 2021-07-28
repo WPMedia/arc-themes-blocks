@@ -23,6 +23,7 @@ const MediumPromoPresentation = ({
   imageURL,
   linkURL,
   lazyLoad,
+  newTab,
 }) => {
   const { isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
@@ -41,7 +42,7 @@ const MediumPromoPresentation = ({
                 suppressContentEditableWarning
               >
                 <PromoImage
-                  link={linkURL}
+                  linkURL={linkURL}
                   content={content}
                   customImageURL={promoImageURL}
                   showPromoLabel
@@ -61,7 +62,16 @@ const MediumPromoPresentation = ({
           && (
             <>
               {showHeadline
-                ? <PromoHeadline content={content} headingClassName="md-promo-headline-text" className="md-promo-headline" />
+                ? (
+                  <PromoHeadline
+                    link={linkURL}
+                    text={headline}
+                    newTab={newTab}
+                    content={content}
+                    headingClassName="md-promo-headline-text"
+                    className="md-promo-headline"
+                  />
+                )
                 : null}
               {(showDescription
                 ? <PromoDescription className="description-text" content={content} text={description} />
@@ -102,6 +112,7 @@ MediumPromoPresentation.propTypes = {
   imageURL: PropTypes.string,
   linkURL: PropTypes.string,
   lazyLoad: PropTypes.bool,
+  newTab: PropTypes.bool,
 };
 
 export default MediumPromoPresentation;

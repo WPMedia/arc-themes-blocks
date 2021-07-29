@@ -437,11 +437,12 @@ body.nav-open {
     width: 100%;
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      // on mobile, show dark background everywhere
+      background: $section-bg;
+
       .inner-drawer-nav {
         width: 100vw;
       }
-      // on mobile, show dark background everywhere
-      background: $section-bg;
     }
   }
 

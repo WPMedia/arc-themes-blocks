@@ -9,7 +9,6 @@ $overlay-z-index: 2;
 $section-bg: #292929;
 $section-width: 329px;
 $top-nav-stylistic-margin: 13px;
-$max-mobile-bottom-toolbar-height: 130px;
 $mouseover-link-preview-safe-area-height: 40px;
 
 body.nav-open {
@@ -31,9 +30,9 @@ body.nav-open {
   .section-menu--bottom-placeholder {
     // ensure bottom item is visible on mobile
     // height handles biggest notch on iphone 12 pro
-    height: $max-mobile-bottom-toolbar-height;
+    height: 130px;
     @supports (height: env(safe-area-inset-bottom)) {
-      height: calc(env(safe-area-inset-bottom) + $max-mobile-bottom-toolbar-height);
+      height: calc(env(safe-area-inset-bottom) + 130px);
     }
   }
 }

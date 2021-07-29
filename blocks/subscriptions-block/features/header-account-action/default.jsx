@@ -21,13 +21,13 @@ const HeaderAccountAction = () => {
   });
 
   useEffect(() => {
-    IdentitySDK.getUserProfile().then((userProfile) => {
+    Identity().getUserProfile().then((userProfile) => {
       setUser(userProfile);
       setLoggedIn(true);
     }).catch((e) => {
       setError(e);
     });
-  }, [IdentitySDK]);
+  }, []);
 
   const handleLogout = () => {
     IdentitySDK.logout().then(() => { setLoggedIn(false); setUser(null); });

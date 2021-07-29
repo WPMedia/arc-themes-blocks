@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
 import Identity from '../../components/Identity.js';
 
-const HeaderAccountAction = () => {
+const HeaderAccountAction = ({ customFields }) => {
+  const { loginURL } = customFields;
   const { arcSite } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
   const IdentitySDK = Identity();
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [loggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(false);
   const [error, setError] = useState();
 
   IdentitySDK.options({
@@ -21,19 +22,33 @@ const HeaderAccountAction = () => {
   });
 
   useEffect(() => {
-    Identity().getUserProfile().then((userProfile) => {
-      setUser(userProfile);
-      setLoggedIn(true);
-    }).catch((e) => {
-      setError(e);
-    });
+    const isLoggedIn = async () => {
+      setIsLoggedIn(await Identity().isLoggedIn());
+    };
+
+    isLoggedIn();
   }, []);
 
+  useEffect(() => {
+    if (loggedIn) {
+      Identity().getUserProfile().then((userProfile) => {
+        setUser(userProfile);
+      }).catch((e) => {
+        setError(e);
+      });
+    }
+  }, [loggedIn]);
+
   const handleLogout = () => {
-    IdentitySDK.logout().then(() => { setLoggedIn(false); setUser(null); });
+    IdentitySDK.logout().then(() => { setIsLoggedIn(false); setUser(null); });
   };
 
-  if (loggedIn) {
+  // Component is fully client side and will render Sign In link
+  // until we can check user's profile, if they are logged in will
+  // display their name.
+  // Should we display anything on first pass?
+
+  if (user && !error) {
     return (
       <div>
         <p>{user.displayName}</p>
@@ -42,22 +57,19 @@ const HeaderAccountAction = () => {
     );
   }
 
+  // What do we want to happen if there is an error?
   return (
     <div>
-      <a href="/account/login/">Sign In</a>
+      <a href={loginURL}>Sign In</a>
     </div>
   );
 };
 
-HeaderAccountAction.defaultProps = {
-  customFields: {
-    text: '',
-  },
-};
-
 HeaderAccountAction.propTypes = {
   customFields: PropTypes.shape({
-    text: PropTypes.string,
+    loginURL: PropTypes.string.tag({
+      defaultValue: '/account/login/',
+    }),
   }),
 };
 

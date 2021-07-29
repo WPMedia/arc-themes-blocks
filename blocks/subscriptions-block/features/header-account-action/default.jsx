@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-// import { User, UserContext, useIdentity } from '../../components/user';
-
-// import Identity from '@arc-publishing/sdk-identity';
 // eslint-disable-next-line import/extensions
 import Identity from '../../components/Identity.js';
 
@@ -18,37 +15,36 @@ const HeaderAccountAction = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState();
-  // const {
-  //   loggedIn, handleLogin, logOut, user, error,
-    // } = useIdentity(useIdentity);
 
   IdentitySDK.options({
     apiOrigin: subscriptions.identity.apiOrigin,
   });
 
-  const handleLogin = ({ username, password }) => {
-    IdentitySDK.login(username, password).then((userIdentity) => {
-      setUser(userIdentity);
+  useEffect(() => {
+    IdentitySDK.getUserProfile().then((userProfile) => {
+      setUser(userProfile);
       setLoggedIn(true);
     }).catch((e) => {
       setError(e);
     });
-  };
+  }, [IdentitySDK]);
 
   const handleLogout = () => {
     IdentitySDK.logout().then(() => { setLoggedIn(false); setUser(null); });
   };
 
   if (loggedIn) {
-    return <button type="button" onClick={handleLogout}>Log Me Out</button>;
+    return (
+      <div>
+        <p>{user.displayName}</p>
+        <button type="button" onClick={handleLogout}>Log Out</button>
+      </div>
+    );
   }
-
-  const errors = error ? <div>{error.message}</div> : null;
 
   return (
     <div>
-      <button type="button" onClick={() => handleLogin({ username: 'matthewroach', password: 'a password' })}>Log Me In</button>
-      {errors}
+      <a href="/account/login/">Sign In</a>
     </div>
   );
 };

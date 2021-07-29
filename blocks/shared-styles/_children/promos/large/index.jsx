@@ -143,7 +143,6 @@ LargePromoPresentation.propTypes = {
   linkURL: PropTypes.string,
   lazyLoad: PropTypes.bool,
   newTab: PropTypes.bool,
-  itemContentConfig: PropTypes.object,
   showByline: PropTypes.bool,
   showDate: PropTypes.bool,
   showDescription: PropTypes.bool,

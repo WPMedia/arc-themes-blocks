@@ -31,7 +31,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*",
-    "@wpmedia/video-player-block": "*"
+    "@wpmedia/video-player-block": "*",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

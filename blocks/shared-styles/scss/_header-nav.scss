@@ -404,7 +404,7 @@ body.nav-open {
       font-weight: bold;
       list-style: none;
       position: relative;
-      background-color: #292929;
+      background-color: $section-bg;
 
       > a {
         padding: 0 16px 0 20px;

@@ -29,7 +29,7 @@ module.exports = {
     'no-underscore-dangle': ['error', { allow: ['_website', '_id'] }],
     'import/no-extraneous-dependencies': 'off', // This might be fine. It's worth looking into at the very least.
     'import/no-unresolved': [2, {
-      ignore: ['react', '^fusion:.+$', '^@arc-test-org/.+$', '^@wpmedia/.+$', '~/blocks.json']
+      ignore: ['react', '^fusion:.+$', '^@arc-test-org/.+$', '^@arc-publishing/.+$', '^@wpmedia/.+$', '~/blocks.json']
     }],
     'react/forbid-prop-types': 'off',
     'react/prop-types': 'off', // We will want to be more granular with this I assume.
@@ -70,7 +70,7 @@ module.exports = {
     'jsx-a11y/role-supports-aria-props': 2,
     'jsx-a11y/scope': 2,
     'jsx-a11y/tabindex-no-positive': 2,
-    "react-hooks/rules-of-hooks": "error", 
+    "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error"
   },
 };

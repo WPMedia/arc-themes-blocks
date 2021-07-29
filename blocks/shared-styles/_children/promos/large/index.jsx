@@ -41,6 +41,7 @@ const LargePromoPresentation = ({
 
   const textClass = showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = playVideoInPlace && extractVideoEmbedFromStory(content);
+  const imageSearchField = content ? 'imageOverrideURL' : 'imageURL';
   const promoImageURL = content ? imageOverrideURL : imageURL;
 
   return (
@@ -65,7 +66,7 @@ const LargePromoPresentation = ({
               || (
                 showImage
                 && (
-                  <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
+                  <div {...searchableField(imageSearchField)} suppressContentEditableWarning>
                     <PromoImage
                       content={content}
                       customImageURL={promoImageURL}
@@ -74,7 +75,7 @@ const LargePromoPresentation = ({
                       promoSize="LG"
                       promoLabelSize="large"
                       imageRatio={imageRatio}
-                      lazyLoad={content || lazyLoad}
+                      lazyLoad={content && lazyLoad}
                       alt={headline}
                     />
                   </div>

@@ -13,9 +13,7 @@ import { LargePromoPresentation } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
-const LargePromoItem = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
-
+const LargePromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
@@ -112,14 +110,14 @@ const LargePromoItem = ({ customFields }) => {
 };
 
 const LargePromo = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
+  const { isAdmin, arcSite } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <LargePromoItem customFields={customFields} />
+      <LargePromoItem customFields={customFields} arcSite={arcSite} />
     </LazyLoad>
   );
 };

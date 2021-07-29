@@ -12,7 +12,7 @@ import {
   VideoPlayer as VideoPlayerPresentational,
 } from '@wpmedia/engine-theme-sdk';
 
-import '@wpmedia/shared-styles/scss/_medium-promo.scss';
+import '@wpmedia/shared-styles/scss/_large-promo.scss';
 
 const LargePromoPresentation = ({
   content,
@@ -28,12 +28,20 @@ const LargePromoPresentation = ({
   playVideoInPlace,
   shrinkToFit,
   viewportPercentage,
+  overline,
+  overlineURL,
+  imageURL,
+  linkURL,
+  newTab,
+  headline,
+  description,
 }) => {
   const { id, isAdmin } = useFusionContext();
   const { searchableField } = useEditableContent();
 
   const textClass = showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
   const videoEmbed = playVideoInPlace && extractVideoEmbedFromStory(content);
+  const promoImageURL = content ? imageOverrideURL : imageURL;
 
   return (
     <HeadingSection>
@@ -60,12 +68,14 @@ const LargePromoPresentation = ({
                   <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
                     <PromoImage
                       content={content}
-                      customImageURL={imageOverrideURL}
+                      customImageURL={promoImageURL}
+                      linkURL={linkURL}
                       showPromoLabel
                       promoSize="LG"
                       promoLabelSize="large"
                       imageRatio={imageRatio}
-                      lazyLoad={lazyLoad}
+                      lazyLoad={content || lazyLoad}
+                      alt={headline}
                     />
                   </div>
                 )
@@ -80,13 +90,29 @@ const LargePromoPresentation = ({
           && (
             <div className={textClass}>
               {showOverline
-                ? <Overline story={content} editable />
+                ? (
+                  <Overline
+                    story={content}
+                    editable
+                    customText={overline}
+                    customUrl={overlineURL}
+                  />
+                )
                 : null}
               {showHeadline
-                ? <PromoHeadline content={content} headingClassName="lg-promo-headline" linkClassName="lg-promo-headline" />
+                ? (
+                  <PromoHeadline
+                    content={content}
+                    headingClassName="lg-promo-headline"
+                    linkClassName="lg-promo-headline"
+                    link={linkURL}
+                    text={headline}
+                    newTab={newTab}
+                  />
+                )
                 : null}
               {showDescription
-                ? <PromoDescription className="description-text" content={content} />
+                ? <PromoDescription className="description-text" content={content} text={description} />
                 : null}
               <div className="article-meta">
                 {showByline
@@ -125,6 +151,8 @@ LargePromoPresentation.propTypes = {
   playVideoInPlace: PropTypes.bool,
   shrinkToFit: PropTypes.bool,
   viewportPercentage: PropTypes.string,
+  overline: PropTypes.string,
+  overlineURL: PropTypes.string,
 };
 
 export default LargePromoPresentation;

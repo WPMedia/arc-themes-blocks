@@ -102,7 +102,6 @@ describe('the SectionNav component', () => {
     const wrapper = shallow(<SectionNav><div className="child">Child Item</div></SectionNav>);
 
     expect(wrapper.find('.child')).toHaveLength(1);
-
     expect(wrapper.find('.section-menu')).toHaveLength(1);
   });
 

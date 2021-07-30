@@ -273,14 +273,15 @@ describe('the large promo presentational component', () => {
     const myConfig = {
       showHeadline: true,
       showOverline: true,
+      content: {
+        websites: { 'the-sun': { website_section: { _id: 'the-sun-ID', name: 'the-sun-name' } } },
+      },
     };
-    useContent.mockReturnValueOnce({ websites: { 'the-sun': { website_section: { _id: 'the-sun-ID', name: 'the-sun-name' } } } });
 
     const wrapper = mount(<LargePromoPresentation {...myConfig} />);
 
     const wrapperOverline = wrapper.find('Overline');
     expect(wrapperOverline.length).toBe(1);
-
     expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
     wrapper.unmount();
   });

@@ -30,13 +30,22 @@ const HeaderAccountAction = ({ customFields }) => {
   }, []);
 
   useEffect(() => {
+    let isActive = true;
+
     if (loggedIn) {
       Identity().getUserProfile().then((userProfile) => {
-        setUser(userProfile);
+        if (isActive) {
+          setUser(userProfile);
+        }
       }).catch((e) => {
-        setError(e);
+        if (isActive) {
+          setError(e);
+        }
       });
     }
+
+    // cancel subscription to useEffect
+    return () => { isActive = false; return null; };
   }, [loggedIn]);
 
   const handleLogout = () => {

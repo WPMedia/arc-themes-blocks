@@ -25,7 +25,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 }))));
 
 const config = {
-  itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
   showHeadline: true,
   showImage: true,
   showOverline: false,
@@ -60,9 +59,7 @@ describe('the large promo presentational component', () => {
     useFusionContext.mockReturnValue({
       arcSite: 'the-sun',
     });
-    console.log(config);
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
-    console.log(wrapper.html());
     expect(wrapper.find('a')).toHaveLength(2);
     wrapper.unmount();
   });

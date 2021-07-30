@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
@@ -375,6 +375,8 @@ const Nav = (props) => {
     );
   };
 
+  const rightNavSection = useMemo(() => <NavSection side="right" />, []);
+
   return (
     <StyledNav
       id="main-nav"
@@ -396,7 +398,7 @@ const Nav = (props) => {
           ariaLabel={ariaLabelLink}
         />
         )}
-        <NavSection side="right" />
+        {rightNavSection}
       </div>
 
       <StyledSectionDrawer

@@ -37,19 +37,27 @@ const LoginForm = ({ customFields }) => {
                   });
               }}
             >
-              <input
-                type="text"
-                id="username"
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                placeholder="Password"
-                type="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <label htmlFor="remember-me">
+              <div className="xpmedia-subs-input">
+                <label htmlFor="username">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="xpmedia-subs-input">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="xpmedia-subs-input">
+                <label htmlFor="remember-me">
+                  Remember Me
+                </label>
                 <input
                   name="remember-me"
                   checked={!!rememberMe}
@@ -58,9 +66,7 @@ const LoginForm = ({ customFields }) => {
                   className="checkbox"
                   onChange={() => setRememberMe(!rememberMe)}
                 />
-                {' '}
-                Remember Me
-              </label>
+              </div>
               <button type="submit">
                 Login
               </button>

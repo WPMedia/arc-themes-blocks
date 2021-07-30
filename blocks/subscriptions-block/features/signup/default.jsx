@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import PropTypes from '@arc-fusion/prop-types';
+import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import Identity from '../../components/Identity.js';
+import { useIdentity } from '../../components/Identity.js';
 
 export const SignUp = ({ customFields }) => {
   const { redirectURL } = customFields;
   const { arcSite } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
-  const IdentitySDK = Identity();
+
+  const { Identity, isInitialized } = useIdentity();
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -19,16 +21,17 @@ export const SignUp = ({ customFields }) => {
   const [email, setEmail] = useState();
   const [error, setError] = useState();
 
-  IdentitySDK.options({
-    apiOrigin: subscriptions.identity.apiOrigin,
-  });
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <section>
+      <h1>Sign Up</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          return IdentitySDK.signUp({
+          return Identity.signUp({
             userName: username,
             credentials: password,
           }, {
@@ -47,7 +50,7 @@ export const SignUp = ({ customFields }) => {
             });
         }}
       >
-        <div>
+        <div className="xpmedia-subs-input">
           <label htmlFor="username">Username</label>
           <input
             name="username"
@@ -57,7 +60,7 @@ export const SignUp = ({ customFields }) => {
           />
         </div>
 
-        <div>
+        <div className="xpmedia-subs-input">
           <label htmlFor="password">Password</label>
           <input
             name="password"
@@ -67,7 +70,7 @@ export const SignUp = ({ customFields }) => {
           />
         </div>
 
-        <div>
+        <div className="xpmedia-subs-input">
           <label htmlFor="email">Email</label>
           <input
             name="email"
@@ -77,22 +80,22 @@ export const SignUp = ({ customFields }) => {
           />
         </div>
 
-        <div>
+        <div className="xpmedia-subs-input">
           <label htmlFor="first-name">First Name</label>
           <input
             name="first-name"
             id="first-name"
-            type="first-name"
+            type="text"
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
 
-        <div>
+        <div className="xpmedia-subs-input">
           <label htmlFor="last-name">Last Name</label>
           <input
             name="last-name"
             id="last-name"
-            type="last-name"
+            type="text"
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>

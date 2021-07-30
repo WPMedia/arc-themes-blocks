@@ -56,12 +56,6 @@ describe('the large promo presentational component', () => {
     jest.clearAllMocks();
   });
 
-  it('should have 1 container fluid class', () => {
-    const wrapper = mount(<LargePromoPresentation {...config} />);
-    expect(wrapper.find('.container-fluid')).toHaveLength(1);
-    wrapper.unmount();
-  });
-
   it('should have two link elements by default', () => {
     useFusionContext.mockReturnValue({
       arcSite: 'the-sun',

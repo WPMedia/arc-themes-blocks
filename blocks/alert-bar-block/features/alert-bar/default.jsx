@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 import { PrimaryFont } from '@wpmedia/shared-styles';

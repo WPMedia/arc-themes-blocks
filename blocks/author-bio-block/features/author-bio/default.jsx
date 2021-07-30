@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
@@ -60,8 +60,15 @@ const renderAuthorInfo = (author, arcSite) => {
   );
 };
 
-const AuthorBioItems = () => {
+const AuthorBioItemsContainer = () => {
   const { globalContent: content, arcSite } = useFusionContext();
+
+  return (
+    <AuthorBioItems arcSite={arcSite} content={content} />
+  );
+};
+
+export const AuthorBioItems = ({ arcSite, content }) => {
   const {
     locale = 'en',
   } = getProperties(arcSite);
@@ -73,6 +80,7 @@ const AuthorBioItems = () => {
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
+    console.log(author, 'author');
     const { additional_properties: additionalProperties, name } = author;
     const { original } = additionalProperties;
 
@@ -258,7 +266,7 @@ const AuthorBio = ({ customFields = {} }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <AuthorBioItems customFields={{ ...customFields }} />
+      <AuthorBioItemsContainer />
     </LazyLoad>
   );
 };

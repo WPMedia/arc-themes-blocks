@@ -88,8 +88,6 @@ const authorObject = {
   twitter: 'janedoe',
   longBio: 'Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ',
   instagram: 'janedoe',
-  twitter: 'someusername',
-  facebook: 'someusername',
   rss: 'someusername',
   linkedin: 'someusername',
   reddit: 'someusername',

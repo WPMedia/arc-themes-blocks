@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
@@ -9,8 +7,6 @@ import { useIdentity } from '../../components/Identity.js';
 
 export const SignUp = ({ customFields }) => {
   const { redirectURL } = customFields;
-  const { arcSite } = useFusionContext();
-  const { subscriptions } = getProperties(arcSite);
 
   const { Identity, isInitialized } = useIdentity();
 

@@ -358,6 +358,9 @@ const Nav = (props) => {
     )
   );
 
+  // 56 pixels nav height on scroll
+  const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
+
   const MenuWidgets = () => {
     const navSection = 'menu';
     return (
@@ -428,7 +431,11 @@ const Nav = (props) => {
           }}
         >
           <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
-            <SectionNav sections={sections} isHidden={!isSectionDrawerOpen}>
+            <SectionNav
+              sections={sections}
+              isHidden={!isSectionDrawerOpen}
+              navHeight={scrollAdjustedNavHeight}
+            >
               <MenuWidgets />
             </SectionNav>
           </div>

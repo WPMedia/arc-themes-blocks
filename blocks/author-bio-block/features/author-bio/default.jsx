@@ -80,7 +80,6 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
   // Generate a list of author components
   const authors = by.reduce((authorList, author) => {
-    console.log(author, 'author');
     const { additional_properties: additionalProperties, name } = author;
     const { original } = additionalProperties;
 

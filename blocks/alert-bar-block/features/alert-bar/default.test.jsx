@@ -7,7 +7,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,
-  // where default aria label is defined live 
+  // where default aria label is defined live
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));
 

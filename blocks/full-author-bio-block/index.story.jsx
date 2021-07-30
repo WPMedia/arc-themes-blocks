@@ -122,8 +122,6 @@ export const noSocialAccounts = () => {
     twitter: '',
     longBio: '',
     instagram: '',
-    twitter: '',
-    facebook: '',
     rss: '',
     linkedin: '',
     reddit: '',

@@ -59,17 +59,17 @@ const HeaderAccountAction = ({ customFields }) => {
 
   if (user && !error) {
     return (
-      <div>
+      <div className="xpmedia-subs-header">
         <p>{user.displayName}</p>
-        <button type="button" onClick={handleLogout}>Log Out</button>
+        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">Log Out</button>
       </div>
     );
   }
 
   // What do we want to happen if there is an error?
   return (
-    <div>
-      <a href={loginURL}>Sign In</a>
+    <div className="xpmedia-subs-header">
+      <a href={loginURL} className="xpmedia-subs-header--button">Sign In</a>
     </div>
   );
 };

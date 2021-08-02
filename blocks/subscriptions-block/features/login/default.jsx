@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
@@ -7,12 +8,17 @@ import useIdentity from '../../components/Identity.js';
 
 const LoginForm = ({ customFields }) => {
   const { Identity, isInitialized } = useIdentity();
-  const { successUrl } = customFields;
+  const { successUrl, redirectToPreviousPage } = customFields;
+  let redirectURL = null;
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState();
+
+  if (redirectToPreviousPage && !isServerSide()) {
+    redirectURL = document?.referrer;
+  }
 
   return (
     <main>
@@ -28,7 +34,7 @@ const LoginForm = ({ customFields }) => {
                   rememberMe,
                 })
                   .then(() => {
-                    window.location.href = successUrl;
+                    window.location.href = redirectURL || successUrl;
                   })
                   .catch((err) => {
                     setError(err);
@@ -87,6 +93,11 @@ LoginForm.propTypes = {
   customFields: PropTypes.shape({
     successUrl: PropTypes.string.tag({
       defaultValue: '/account/profile/',
+      label: 'URL to redirect user after logging in',
+    }),
+    redirectToPreviousPage: PropTypes.bool.tag({
+      defaultValue: true,
+      label: 'Do you wish for the user to be redirected to the page they entered the login page from? This overrides success URL',
     }),
   }),
 };

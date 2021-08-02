@@ -1,12 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
 import { extractVideoEmbedFromStory } from '@wpmedia/engine-theme-sdk';
 import LargePromoPresentation from './index';
 
 const { default: mockData } = require('./mock-data');
-const { default: mockDataVideo } = require('./mock-data-video');
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
@@ -42,6 +39,7 @@ jest.mock('fusion:context', () => ({
 }));
 
 jest.mock('fusion:content', () => ({
+  // PromoImage should be mocked so we don't have to mock useContent...
   useContent: jest.fn(() => (mockData)),
   useEditableContent: jest.fn(() => ({
     editableContent: () => ({ contentEditable: 'true' }),
@@ -56,9 +54,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should have two link elements by default', () => {
-    useFusionContext.mockReturnValue({
-      arcSite: 'the-sun',
-    });
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
     expect(wrapper.find('a')).toHaveLength(2);
     wrapper.unmount();
@@ -79,7 +74,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should have one img when show image is true', () => {
-    useContent.mockReturnValueOnce(mockData);
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
     expect(wrapper.find('Image')).toHaveLength(1);
     wrapper.unmount();
@@ -106,14 +100,12 @@ describe('the large promo presentational component', () => {
   });
 
   it('Headline div should have class .col-md-xl-6 when show image is true', () => {
-    useContent.mockReturnValueOnce(mockData);
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
     expect(wrapper.find('.col-md-xl-6')).toHaveLength(2);
     wrapper.unmount();
   });
 
   it('should have no Image when show image is false', () => {
-    useContent.mockReturnValueOnce(mockData);
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
@@ -125,7 +117,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should have no headline when show headline is false', () => {
-    useContent.mockReturnValueOnce(mockData);
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: false,
@@ -136,7 +127,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('headline div should have class .col-sm-xl-12 when show image is false', () => {
-    useContent.mockReturnValueOnce(mockData);
     const noImgConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: true,
@@ -148,7 +138,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should only be one link when showHeadline is false and show image is true', () => {
-    useContent.mockReturnValueOnce(mockData);
     const noHeadlineConfig = {
       itemContentConfig: { contentService: 'ans-item', contentConfiguration: {} },
       showHeadline: false,
@@ -160,7 +149,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should have by default an 4:3 image ratio', () => {
-    useContent.mockReturnValueOnce(mockData);
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
     const img = wrapper.find('Image');
     expect(img.prop('largeHeight')).toBe(283);
@@ -168,7 +156,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should accept a 16:9 ratio', () => {
-    useContent.mockReturnValueOnce(mockData);
     const myConfig = { ...config, imageRatio: '16:9' };
     const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
     const img = wrapper.find('Image');
@@ -177,7 +164,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should accept a 3:2 ratio', () => {
-    useContent.mockReturnValueOnce(mockData);
     const myConfig = { ...config, imageRatio: '3:2' };
     const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
     const img = wrapper.find('Image');
@@ -186,7 +172,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('should accept a 4:3 ratio', () => {
-    useContent.mockReturnValueOnce(mockData);
     const myConfig = { ...config, imageRatio: '4:3' };
     const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
     const img = wrapper.find('Image');
@@ -195,8 +180,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('show ALL options if enabled', () => {
-    useContent.mockReturnValueOnce(mockData);
-
     const myConfig = {
       showHeadline: true,
       showImage: true,
@@ -220,8 +203,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('show ALL options if enabled', () => {
-    useContent.mockReturnValueOnce(mockData);
-
     const myConfig = {
       showHeadline: true,
       showImage: false,
@@ -244,8 +225,6 @@ describe('the large promo presentational component', () => {
   });
 
   it('show placeholder image if no image URL', () => {
-    useContent.mockReturnValueOnce({});
-
     const myConfig = {
       showHeadline: true,
       showImage: true,
@@ -282,8 +261,6 @@ describe('the large promo presentational component', () => {
       imageRatio: '4:3',
       imageOverrideURL: 'overrideImage.jpg',
     };
-
-    useContent.mockReturnValueOnce(undefined);
     const wrapper = mount(<LargePromoPresentation {...myConfig} arcSite="dagen" />);
     expect(wrapper).toEqual({});
     wrapper.unmount();
@@ -331,7 +308,6 @@ describe('the large promo presentational component', () => {
   describe('when "playVideoInPlace" custom field is "true"', () => {
     describe('when ANS content type is "story"', () => {
       it('should render Image when no video found in ANS lead art', () => {
-        useContent.mockReturnValueOnce(mockData);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
         const wrapper = mount(
           <LargePromoPresentation {...config} content={mockData} playVideoInPlace />,
@@ -341,16 +317,6 @@ describe('the large promo presentational component', () => {
       });
 
       it('should render VideoPlayer when video exists in ANS lead art', () => {
-        useContent.mockReturnValueOnce({
-          ...mockData,
-          promo_items: {
-            ...mockData.promo_items,
-            lead_art: {
-              type: 'video',
-              embed_html: '<div class="video-embed"></div>',
-            },
-          },
-        });
         const wrapper = mount(
           <LargePromoPresentation {...config} playVideoInPlace content={mockData} />,
         );
@@ -362,9 +328,6 @@ describe('the large promo presentational component', () => {
 
     describe('when ANS content type is "video"', () => {
       it('should render Image when no video embed found in ANS', () => {
-        const mockDataVideoNoEmbed = { ...mockData };
-        delete mockDataVideoNoEmbed.embed_html;
-        useContent.mockReturnValueOnce(mockDataVideoNoEmbed);
         extractVideoEmbedFromStory.mockReturnValueOnce(undefined);
         const wrapper = mount(
           <LargePromoPresentation {...config} playVideoInPlace content={mockData} />,
@@ -374,7 +337,6 @@ describe('the large promo presentational component', () => {
       });
 
       it('should render VideoPlayer when video embed exists in ANS', () => {
-        useContent.mockReturnValueOnce(mockDataVideo);
         const wrapper = mount(
           <LargePromoPresentation {...config} playVideoInPlace content={mockData} />,
         );

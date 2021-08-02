@@ -28,7 +28,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/global-phrases-block": "*",
     "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

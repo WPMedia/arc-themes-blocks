@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';

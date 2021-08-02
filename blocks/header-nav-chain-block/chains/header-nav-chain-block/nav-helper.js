@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 
 export const PLACEMENT_AREAS = {
   NAV_BAR: 'nav-bar',

@@ -26,7 +26,7 @@ Detail the data structure returned from this content source
 
 ```
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
 import { Image } from '@wpmedia/engine-theme-sdk';
 import { useContent } from 'fusion:content';

@@ -25,7 +25,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/resizer-image-block": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

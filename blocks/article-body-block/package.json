@@ -30,7 +30,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/video-player-block": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0",

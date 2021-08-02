@@ -25,7 +25,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0"

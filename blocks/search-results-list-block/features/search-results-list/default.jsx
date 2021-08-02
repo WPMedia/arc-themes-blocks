@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useAppContext, useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { HeadingSection } from '@wpmedia/shared-styles';

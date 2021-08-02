@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useFusionContext } from 'fusion:context';
 import { useContent } from 'fusion:content';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import {
   // presentational component does not do data fetching

@@ -2,7 +2,7 @@
 // TODO: The css classes referenced here need to be defined...
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import EmbedContainer from 'react-oembed-container';
 
 const Oembed = ({

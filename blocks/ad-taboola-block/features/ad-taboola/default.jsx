@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
 import PAGE_TYPE_TABOOLA_MAPPING from './constants/pageTypeTaboolaMapping';

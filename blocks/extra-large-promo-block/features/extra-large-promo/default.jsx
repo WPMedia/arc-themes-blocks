@@ -5,8 +5,6 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { ExtraLargePromoPresentation } from '@wpmedia/shared-styles';
 import {
-  // presentational component does not do data fetching
-  VideoPlayer as VideoPlayerPresentational,
   LazyLoad,
   isServerSide,
   videoPlayerCustomFields,
@@ -125,7 +123,7 @@ const ExtraLargePromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <ExtraLargePromoItem customFields={customFields}  arcSite={arcSite} />
+      <ExtraLargePromoItem customFields={customFields} arcSite={arcSite} />
     </LazyLoad>
   );
 };

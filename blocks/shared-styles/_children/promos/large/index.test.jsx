@@ -85,6 +85,26 @@ describe('the large promo presentational component', () => {
     wrapper.unmount();
   });
 
+  it('should have one img when show image is true with 4:3 default ratio', () => {
+    const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(283);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(212);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<LargePromoPresentation {...myConfig} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(251);
+  });
+
   it('Headline div should have class .col-md-xl-6 when show image is true', () => {
     useContent.mockReturnValueOnce(mockData);
     const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
@@ -284,6 +304,28 @@ describe('the large promo presentational component', () => {
     expect(wrapperOverline.length).toBe(1);
     expect(wrapperOverline.find('a.overline').text()).toEqual('the-sun-name');
     wrapper.unmount();
+  });
+
+  it('should only be one link when showOverline and showHeadline is false and show image is true', () => {
+    const noHeadlineConfig = {
+      showOverline: false,
+      showHeadline: false,
+      showImage: true,
+      showDescription: true,
+      headline: 'This is the headline',
+      description: 'This is the description',
+      overline: 'overline',
+      overlineURL: 'www.google.com',
+      imageURL: 'www.google.com/fake.png',
+      linkURL: 'www.google.com',
+    };
+    const wrapper = mount(<LargePromoPresentation {...noHeadlineConfig} content={mockData} />);
+    expect(wrapper.find('a')).toHaveLength(1);
+  });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<LargePromoPresentation {...config} content={mockData} />);
+    expect(wrapper.find('hr')).toHaveLength(1);
   });
 
   describe('when "playVideoInPlace" custom field is "true"', () => {

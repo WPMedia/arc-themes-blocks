@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useEditableContent, useContent } from 'fusion:content';
+import { useEditableContent } from 'fusion:content';
 
 import { useFusionContext } from 'fusion:context';
 import {
@@ -131,6 +131,27 @@ const ExtraLargePromoPresentation = ({
   );
 };
 
-ExtraLargePromoPresentation.propTypes = {};
+ExtraLargePromoPresentation.propTypes = {
+  content: PropTypes.object,
+  showOverline: PropTypes.string,
+  showHeadline: PropTypes.bool,
+  imageOverrideURL: PropTypes.string,
+  imageRatio: PropTypes.string,
+  showByline: PropTypes.bool,
+  showDate: PropTypes.bool,
+  showDescription: PropTypes.bool,
+  showImage: PropTypes.bool,
+  description: PropTypes.string,
+  headline: PropTypes.string,
+  imageURL: PropTypes.string,
+  linkURL: PropTypes.string,
+  lazyLoad: PropTypes.bool,
+  newTab: PropTypes.bool,
+  playVideoInPlace: PropTypes.bool,
+  viewportPercentage: PropTypes.bool,
+  overline: PropTypes.string,
+  overlineURL: PropTypes.string,
+  shrinkToFit: PropTypes.bool,
+};
 
 export default ExtraLargePromoPresentation;

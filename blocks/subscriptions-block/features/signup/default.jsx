@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import { useIdentity } from '../../components/Identity.js';
+import useIdentity from '../../components/Identity.js';
 
 export const SignUp = ({ customFields }) => {
   const { redirectURL } = customFields;
@@ -36,13 +36,13 @@ export const SignUp = ({ customFields }) => {
             displayName: `${firstName} ${lastName}`,
             email,
           })
-            .then((userIdentity) => {
-              console.log('success!', userIdentity);
+            .then(() => {
+              // console.log('success!', userIdentity);
               window.location = redirectURL;
             })
-            .catch((e) => {
-              console.error(e);
-              setError(e);
+            .catch((err) => {
+              // console.error(err);
+              setError(err);
             });
         }}
       >

@@ -1,39 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import Identity from '../../components/Identity.js';
+import useIdentity from '../../components/Identity.js';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;
-  const { arcSite } = useFusionContext();
-  const { subscriptions } = getProperties(arcSite);
-  const IdentitySDK = Identity();
+
+  const { Identity, isInitialized } = useIdentity();
 
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
 
-  IdentitySDK.options({
-    apiOrigin: subscriptions.identity.apiOrigin,
-  });
-
   useEffect(() => {
     const isLoggedIn = async () => {
-      setIsLoggedIn(await Identity().isLoggedIn());
+      setIsLoggedIn(await Identity.isLoggedIn());
     };
 
     isLoggedIn();
-  }, []);
+  }, [Identity]);
 
   useEffect(() => {
     let isActive = true;
 
     if (loggedIn) {
-      Identity().getUserProfile().then((userProfile) => {
+      Identity.getUserProfile().then((userProfile) => {
         if (isActive) {
           setUser(userProfile);
         }
@@ -46,11 +39,15 @@ const HeaderAccountAction = ({ customFields }) => {
 
     // cancel subscription to useEffect
     return () => { isActive = false; return null; };
-  }, [loggedIn]);
+  }, [Identity, loggedIn]);
 
   const handleLogout = () => {
-    IdentitySDK.logout().then(() => { setIsLoggedIn(false); setUser(null); });
+    Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
   };
+
+  if (!isInitialized) {
+    return null;
+  }
 
   // Component is fully client side and will render Sign In link
   // until we can check user's profile, if they are logged in will

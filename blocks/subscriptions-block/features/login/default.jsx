@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import { useIdentity } from '../../components/Identity.js';
+import useIdentity from '../../components/Identity.js';
 
 const LoginForm = ({ customFields }) => {
   const { Identity, isInitialized } = useIdentity();
@@ -12,7 +12,7 @@ const LoginForm = ({ customFields }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [rememberMe, setRememberMe] = useState(false);
-  const [err, setErr] = useState();
+  const [error, setError] = useState();
 
   return (
     <main>
@@ -30,10 +30,9 @@ const LoginForm = ({ customFields }) => {
                   .then(() => {
                     window.location.href = successUrl;
                   })
-                  .catch((error) => {
-                    setErr(error);
-                    console.log(error);
-                    alert('error');
+                  .catch((err) => {
+                    setError(err);
+                    // console.log(err);
                   });
               }}
             >
@@ -70,10 +69,10 @@ const LoginForm = ({ customFields }) => {
               <button type="submit">
                 Login
               </button>
-              {err && (
+              {error && (
                 <section>
-                  <p>{`Error logging in. Code: ${err.code}`}</p>
-                  {err.message && err.message.length < 100 && <p>{err.message}</p>}
+                  <p>{`Error logging in. Code: ${error.code}`}</p>
+                  {error.message && error.message.length < 100 && <p>{error.message}</p>}
                 </section>
               )}
             </form>

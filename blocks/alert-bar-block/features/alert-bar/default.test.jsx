@@ -7,6 +7,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,
+  // where default aria label is defined live
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));
 
@@ -109,7 +110,7 @@ describe('the alert can handle user interaction', () => {
       cached: content,
       fetched: new Promise((r) => r(content)),
     });
-    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    const wrapper = mount(<AlertBar arcSite="the-sun" />);
     jest.advanceTimersByTime(1000);
     wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(1);
@@ -142,7 +143,7 @@ describe('the alert can handle user interaction', () => {
       cached: content,
       fetched: new Promise((r) => r(content)),
     });
-    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    const wrapper = mount(<AlertBar arcSite="the-sun" />);
     jest.advanceTimersByTime(1000);
     wrapper.update();
     expect(wrapper.find('.alert-bar')).toHaveLength(1);
@@ -330,10 +331,11 @@ describe('when add the alert to main section', () => {
       cached: content,
       fetched: new Promise((r) => r(content)),
     });
-    const wrapper = shallow(<AlertBar arcSite="the-sun" />);
+    const wrapper = mount(<AlertBar arcSite="the-sun" />);
     jest.advanceTimersByTime(1000);
     wrapper.update();
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Breaking News Alert');
+    // default aria-label is Breaking News Alert
+    expect(wrapper.find('nav').props()['aria-label']).toBe('Breaking News Alert');
   });
 
   it('should render the block with the default aria-label if blank', () => {
@@ -359,10 +361,15 @@ describe('when add the alert to main section', () => {
       cached: content,
       fetched: new Promise((r) => r(content)),
     });
-    const wrapper = shallow(<AlertBar arcSite="the-sun" customFields={{ ariaLabel: '' }} />);
+
+    // custom field passed in to the component is an empty falsy string
+    const wrapper = mount(<AlertBar arcSite="the-sun" customFields={{ ariaLabel: '' }} />);
+
     jest.advanceTimersByTime(1000);
     wrapper.update();
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Breaking News Alert');
+
+    // this is from intl.json aria-label
+    expect(wrapper.find('nav').props()['aria-label']).toBe('Breaking News Alert');
   });
 
   it('should render the block with the custom aria-label', () => {
@@ -388,9 +395,12 @@ describe('when add the alert to main section', () => {
       cached: content,
       fetched: new Promise((r) => r(content)),
     });
-    const wrapper = shallow(<AlertBar arcSite="the-sun" customFields={{ ariaLabel: 'Breaking News' }} />);
+
+    // custom field passed in to the component is an empty falsy string
+    const wrapper = mount(<AlertBar arcSite="the-sun" customFields={{ ariaLabel: 'Breaking News from custom field' }} />);
+
     jest.advanceTimersByTime(1000);
     wrapper.update();
-    expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Breaking News');
+    expect(wrapper.find('nav').props()['aria-label']).toBe('Breaking News from custom field');
   });
 });

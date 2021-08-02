@@ -52,7 +52,11 @@ module.exports = {
     'jsx-a11y/iframe-has-title': 2,
     'jsx-a11y/img-redundant-alt': 'off',
     'jsx-a11y/interactive-supports-focus': 2,
-    'jsx-a11y/label-has-associated-control': 2,
+    'jsx-a11y/label-has-associated-control': [ 2, {
+      'required': {
+        'some': [ 'nesting', 'id' ]
+      }
+    }],
     'jsx-a11y/lang': 2,
     'jsx-a11y/media-has-caption': 'off',
     'jsx-a11y/mouse-events-have-key-events': 2,

@@ -4,7 +4,7 @@ import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import useIdentity from '../../components/Identity.js';
+import useIdentity from '../../components/Identity.jsx';
 
 const LoginForm = ({ customFields }) => {
   const { Identity, isInitialized } = useIdentity();
@@ -102,6 +102,6 @@ LoginForm.propTypes = {
   }),
 };
 
-LoginForm.label = 'Subscriptions Login Form - Arc Block';
+LoginForm.label = 'Identity Login - Arc Block';
 
 export default LoginForm;

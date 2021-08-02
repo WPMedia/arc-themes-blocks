@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
-import useIdentity from '../../components/Identity.js';
+import useIdentity from '../../components/Identity.jsx';
 
 export const SignUp = ({ customFields }) => {
   const { redirectURL } = customFields;
@@ -107,7 +107,7 @@ export const SignUp = ({ customFields }) => {
   );
 };
 
-SignUp.label = 'Subscriptions Sign Up Form - Arc Block';
+SignUp.label = 'Identity Sign Up - Arc Block';
 
 /*
   Custom Fields?
@@ -121,7 +121,7 @@ SignUp.label = 'Subscriptions Sign Up Form - Arc Block';
 SignUp.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
-      defaultValue: '/subscriptions/',
+      defaultValue: '/account/',
     }),
   }),
 };

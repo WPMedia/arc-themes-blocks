@@ -6,6 +6,7 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   LazyLoad: ({ children }) => <>{ children }</>,
   isServerSide: () => true,
 }));
+
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => {}),
   useEditableContent: jest.fn(() => ({

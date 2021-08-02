@@ -60,6 +60,12 @@ describe('the extra large promo feature', () => {
     }));
   });
 
+  // TODO: Address correct number of default links
+  // it('should have three link elements by default', () => {
+  //   const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
+  //   expect(wrapper.find('a')).toHaveLength(3);
+  // });
+
   it('should have two link elements by default', () => {
     const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
     expect(wrapper.find('a')).toHaveLength(2);
@@ -80,6 +86,26 @@ describe('the extra large promo feature', () => {
   it('should have one img when show image is true', () => {
     const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
     expect(wrapper.find('Image')).toHaveLength(1);
+  });
+
+  it('should have one img when show image is true with 4:3 default ratio', () => {
+    const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(600);
+  });
+
+  it('should accept a 16:9 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '16:9' };
+    const wrapper = mount(<ExtraLargePromoPresentation {...myConfig} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(450);
+  });
+
+  it('should accept a 3:2 image ratio', () => {
+    const myConfig = { ...config, imageRatio: '3:2' };
+    const wrapper = mount(<ExtraLargePromoPresentation {...myConfig} content={mockData} />);
+    expect(wrapper.find('Image')).toHaveLength(1);
+    expect(wrapper.find('Image').prop('largeHeight')).toBe(533);
   });
 
   it('should have no Overline when showOverline is false', () => {
@@ -299,6 +325,11 @@ describe('the extra large promo feature', () => {
     expect(wrapper.find('PlaceholderImage').length).toBe(1);
     expect(wrapper.find('Image').length).toBe(0);
     wrapper.unmount();
+  });
+
+  it('should have one line separator', () => {
+    const wrapper = mount(<ExtraLargePromoPresentation {...config} content={{}} />);
+    expect(wrapper.find('hr')).toHaveLength(1);
   });
 
   describe('when "playVideoInPlace" custom field is "true"', () => {

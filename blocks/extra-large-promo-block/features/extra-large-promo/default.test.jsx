@@ -17,7 +17,6 @@ jest.mock('fusion:content', () => ({
 describe('the extra large promo feature', () => {
   afterEach(() => {
     jest.resetModules();
-    jest.clearAllMocks();
   });
 
   it('should return null if lazyLoad on the server and not in the admin', () => {

@@ -19,11 +19,14 @@ const allCustomFieldData = {
   showDate: true,
 };
 
+const displayDate = 'August 03, 2021';
+
 export const showAllFields = () => {
   const customFieldData = allCustomFieldData;
   return (
     <Masthead
       customFields={customFieldData}
+      displayDate={displayDate}
     />
   );
 };
@@ -33,6 +36,7 @@ export const hideAllFields = () => {
   return (
     <Masthead
       customFields={customFieldData}
+      displayDate={displayDate}
     />
   );
 };
@@ -42,6 +46,57 @@ export const hideDate = () => {
   return (
     <Masthead
       customFields={customFieldData}
+      displayDate={displayDate}
+    />
+  );
+};
+
+export const emptyTagLine = () => {
+  const customFieldData = { ...allCustomFieldData, tagLine: '' };
+  return (
+    <Masthead
+      customFields={customFieldData}
+      displayDate={displayDate}
+    />
+  );
+};
+
+export const emptyPromoLinkText = () => {
+  const customFieldData = { ...allCustomFieldData, promoLinkText: '' };
+  return (
+    <Masthead
+      customFields={customFieldData}
+      displayDate={displayDate}
+    />
+  );
+};
+
+export const emptyPromoLinkURL = () => {
+  const customFieldData = { ...allCustomFieldData, promoLinkURL: '' };
+  return (
+    <Masthead
+      customFields={customFieldData}
+      displayDate={displayDate}
+    />
+  );
+};
+
+export const emptyLogoURL = () => {
+  const customFieldData = { ...allCustomFieldData, logoURL: '' };
+  return (
+    <Masthead
+      customFields={customFieldData}
+      displayDate={displayDate}
+    />
+  );
+};
+
+export const emptyTagLineAndLogoURL = () => {
+  const customFieldData = { ...allCustomFieldData, tagLine: '', logoURL: '' };
+  return (
+    <Masthead
+      customFields={customFieldData}
+      displayDate={displayDate}
     />
   );
 };

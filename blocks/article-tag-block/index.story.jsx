@@ -103,3 +103,21 @@ export const manyTags = () => {
     <ArticleTagItems content={tenData} arcSite="story-book" />
   );
 };
+
+export const reallyLongTagText = () => {
+  const reallyLongTagTextData = {
+    description: 'description',
+    slug: 'slug',
+    text: 'Llanfair­pwllgwyngyll­gogery­chwyrn­drobwll­llan­tysilio­gogo­goch news and features of the day here in this town',
+  };
+
+  const reallyLongTagData = {
+    taxonomy: {
+      tags: [reallyLongTagTextData],
+    },
+  };
+
+  return (
+    <ArticleTagItems content={reallyLongTagData} arcSite="story-book" />
+  );
+};

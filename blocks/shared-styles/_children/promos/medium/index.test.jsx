@@ -10,7 +10,6 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   isServerSide: () => true,
   localizeDateTime: jest.fn(() => new Date().toDateString()),
 }));
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
@@ -18,9 +17,7 @@ jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'the-sun',
   })),
-  useComponentContext: jest.fn(() => ({
-    registerSuccessEvent: () => ({}),
-  })),
+  useComponentContext: jest.fn(() => ({})),
 }));
 jest.mock('fusion:content', () => ({
   useContent: jest.fn(() => {}),

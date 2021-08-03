@@ -1,80 +1,11 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
-import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  HeadingSection, Overline, PromoDescription, PromoHeadline, PromoImage,
-} from '@wpmedia/shared-styles';
+import { LargePromoPresentation } from '@wpmedia/shared-styles';
 
 import '@wpmedia/shared-styles/scss/_large-promo.scss';
-
-const LargeManualPromoItem = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
-  const textClass = customFields?.showImage ? 'col-sm-12 col-md-xl-6 flex-col' : 'col-sm-xl-12 flex-col';
-
-  return (
-    <HeadingSection>
-      <article className="container-fluid large-promo">
-        <div className="row lg-promo-padding-bottom" style={{ position: isAdmin ? 'relative' : null }}>
-          {(customFields?.showImage)
-            ? (
-              <div
-                className="col-sm-12 col-md-xl-6"
-                {...searchableField('imageURL')}
-                suppressContentEditableWarning
-              >
-                <PromoImage
-                  {...customFields}
-                  customImageURL={customFields?.imageURL}
-                  alt={customFields?.headline}
-                  promoSize="LG"
-                />
-              </div>
-            )
-            : null}
-          {(customFields?.showOverline
-            || customFields?.showHeadline
-            || customFields?.showDescription)
-          && (
-            <div className={textClass}>
-              {customFields?.showOverline
-                ? (
-                  <Overline
-                    customText={customFields?.overline}
-                    customUrl={customFields?.overlineURL}
-                  />
-                )
-                : null}
-              {customFields?.showHeadline
-                ? (
-                  <PromoHeadline
-                    link={customFields?.linkURL}
-                    text={customFields?.headline}
-                    newTab={customFields?.newTab}
-                    headingClassName="lg-promo-headline"
-                    linkClassName="lg-promo-headline"
-                  />
-                )
-                : null}
-              {customFields?.showDescription
-                ? (
-                  <PromoDescription
-                    className="description-text"
-                    text={customFields?.description}
-                  />
-                )
-                : null}
-            </div>
-          )}
-        </div>
-      </article>
-      <hr />
-    </HeadingSection>
-  );
-};
 
 const LargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
@@ -83,7 +14,7 @@ const LargeManualPromo = ({ customFields }) => {
   }
   return (
     <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-      <LargeManualPromoItem customFields={{ ...customFields }} />
+      <LargePromoPresentation {...customFields} />
     </LazyLoad>
   );
 };

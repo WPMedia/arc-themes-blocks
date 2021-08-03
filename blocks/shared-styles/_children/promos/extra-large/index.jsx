@@ -45,7 +45,7 @@ const ExtraLargePromoPresentation = ({
 
   return (
     <HeadingSection>
-      <article className="container-fluid xl-large-promo">
+      <article className={`container-fluid xl-large-promo ${content ? '' : 'xl-large-manual-promo'}`}>
         <div className="row">
           {(showOverline
             || showHeadline

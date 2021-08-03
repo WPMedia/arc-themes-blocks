@@ -8,7 +8,7 @@ import useIdentity from '../../components/Identity.jsx';
 
 const LoginForm = ({ customFields }) => {
   const { Identity, isInitialized } = useIdentity();
-  const { successUrl, redirectToPreviousPage } = customFields;
+  const { successUrl, redirectToPreviousPage, resetPasswordURL } = customFields;
   let redirectURL = null;
 
   const [username, setUsername] = useState();
@@ -82,6 +82,7 @@ const LoginForm = ({ customFields }) => {
                 </section>
               )}
             </form>
+            {resetPasswordURL ? <a href={resetPasswordURL}>Reset password</a> : null}
           </>
         ) : null}
       </section>
@@ -98,6 +99,9 @@ LoginForm.propTypes = {
     redirectToPreviousPage: PropTypes.bool.tag({
       defaultValue: true,
       label: 'Do you wish for the user to be redirected to the page they entered the login page from? This overrides success URL',
+    }),
+    resetPasswordURL: PropTypes.string.tag({
+      defaultValue: '/account/reset/',
     }),
   }),
 };

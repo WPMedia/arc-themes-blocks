@@ -1,6 +1,6 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import { Masthead } from './features/masthead-block/default';
+import { MastheadPresentational } from './features/masthead-block/default';
 
 export default {
   title: 'Blocks/Masthead',
@@ -24,7 +24,7 @@ const displayDate = 'August 03, 2021';
 export const showAllFields = () => {
   const customFieldData = allCustomFieldData;
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -34,7 +34,7 @@ export const showAllFields = () => {
 export const hideAllFields = () => {
   const customFieldData = {};
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -44,7 +44,7 @@ export const hideAllFields = () => {
 export const hideDate = () => {
   const customFieldData = { ...allCustomFieldData, showDate: false };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -54,7 +54,7 @@ export const hideDate = () => {
 export const emptyTagLine = () => {
   const customFieldData = { ...allCustomFieldData, tagLine: '' };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -64,7 +64,7 @@ export const emptyTagLine = () => {
 export const emptyPromoLinkText = () => {
   const customFieldData = { ...allCustomFieldData, promoLinkText: '' };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -74,7 +74,7 @@ export const emptyPromoLinkText = () => {
 export const emptyPromoLinkURL = () => {
   const customFieldData = { ...allCustomFieldData, promoLinkURL: '' };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -84,7 +84,7 @@ export const emptyPromoLinkURL = () => {
 export const emptyLogoURL = () => {
   const customFieldData = { ...allCustomFieldData, logoURL: '' };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />
@@ -94,7 +94,7 @@ export const emptyLogoURL = () => {
 export const emptyTagLineAndLogoURL = () => {
   const customFieldData = { ...allCustomFieldData, tagLine: '', logoURL: '' };
   return (
-    <Masthead
+    <MastheadPresentational
       customFields={customFieldData}
       displayDate={displayDate}
     />

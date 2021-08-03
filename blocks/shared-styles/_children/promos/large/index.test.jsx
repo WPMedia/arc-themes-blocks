@@ -15,8 +15,6 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
   formatURL: jest.fn((input) => input.toString()),
 }));
 
-jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   fallbackImage: 'placeholder.jpg',
 }))));
@@ -33,9 +31,7 @@ const mockFusionContext = {
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => mockFusionContext),
-  useComponentContext: jest.fn(() => ({
-    registerSuccessEvent: () => ({}),
-  })),
+  useComponentContext: jest.fn(() => ({})),
 }));
 
 jest.mock('fusion:content', () => ({

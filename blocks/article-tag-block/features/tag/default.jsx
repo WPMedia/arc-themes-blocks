@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import styled from 'styled-components';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
@@ -12,8 +12,7 @@ const Tags = styled(LinkBackgroundHover)`
   background-color: ${(props) => props.primaryColor};
 `;
 
-const ArticleTagItems = () => {
-  const { arcSite, globalContent: content } = useFusionContext();
+export const ArticleTagItems = ({ content, arcSite }) => {
   const { 'primary-color': primaryColor } = getThemeStyle(arcSite);
   const defaultBackgroundColor = '#14689A';
   const { taxonomy: { tags = [] } = {} } = content;
@@ -43,6 +42,14 @@ const ArticleTagItems = () => {
   ) : null;
 };
 
+const ArticleTagsContainer = () => {
+  const { arcSite, globalContent: content } = useFusionContext();
+
+  return (
+    <ArticleTagItems arcSite={arcSite} content={content} />
+  );
+};
+
 const ArticleTags = ({ customFields = {} }) => {
   const { isAdmin } = useFusionContext();
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
@@ -50,7 +57,7 @@ const ArticleTags = ({ customFields = {} }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <ArticleTagItems customFields={{ ...customFields }} />
+      <ArticleTagsContainer />
     </LazyLoad>
   );
 };

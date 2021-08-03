@@ -60,17 +60,6 @@ describe('the extra large promo feature', () => {
     }));
   });
 
-  // TODO: Address correct number of default links
-  // it('should have three link elements by default', () => {
-  //   const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
-  //   expect(wrapper.find('a')).toHaveLength(3);
-  // });
-
-  it('should have two link elements by default', () => {
-    const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);
-    expect(wrapper.find('a')).toHaveLength(2);
-  });
-
   it('should link the headline to the current site website_url ANS property', () => {
     const url = mockData.websites['the-sun'].website_url;
     const wrapper = mount(<ExtraLargePromoPresentation {...config} content={mockData} />);

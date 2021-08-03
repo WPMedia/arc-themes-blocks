@@ -54,6 +54,9 @@ export const useFusionContext = () => ({
     headlines: {
       basic: 'An Article Headline',
     },
+    subheadlines: {
+      basic: "Sub Headline",
+    },
     authors: [
       {
         _id: 'janedoe',

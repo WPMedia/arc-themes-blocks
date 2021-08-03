@@ -26,6 +26,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import './full-author-bio.scss';
+import '@wpmedia/shared-styles/scss/_author-bio.scss';
 
 const logos = {
   email: <EnvelopeIcon />,

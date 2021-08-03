@@ -29,6 +29,7 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 
 import './author-bio.scss';
+import '@wpmedia/shared-styles/scss/_author-bio.scss';
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 

@@ -2,9 +2,7 @@ const params = {
   nonce: 'text',
 };
 
-const fetch = (key = {}) => {
-  return key;
-};
+const fetch = (key = {}) => key;
 
 export default {
   params,

@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/triple-chain-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Triple Chain – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -24,6 +24,8 @@
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*"
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/shared-styles": "*"
   }
 }

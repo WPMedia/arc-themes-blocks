@@ -29,6 +29,7 @@ module.exports = {
             'fusion:properties': './jest/mocks/properties.js',
             'fusion:static': './jest/mocks/static.js',
             'fusion:intl': './jest/mocks/intl.js',
+            '~/blocks.json': './jest/mocks/blocks.json',
           },
         }],
       ],

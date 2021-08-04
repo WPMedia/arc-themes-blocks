@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
+import PAGE_TYPE_TABOOLA_MAPPING from './constants/pageTypeTaboolaMapping';
 
-const taboolaLoader = (publisherID) => (
+const taboolaLoader = (publisherID, pageType) => (
   `window._taboola = window._taboola || [];
-    _taboola.push({article:'auto'});
+    _taboola.push({${pageType}:'auto'});
     !function (e, f, u, i) {
       if (!document.getElementById(i)){
         e.async = 1;
@@ -79,7 +80,16 @@ class AdTaboola extends Component {
       return;
     }
 
-    this.appendScript('tbl-loader', head, () => taboolaLoader(this.publisherID));
+    const { metaValue } = this.props;
+
+    const pageType = metaValue('page-type');
+
+    const taboolaValue = PAGE_TYPE_TABOOLA_MAPPING[pageType] || '';
+
+    // if taboola value empty falsy string, then do not include script
+    if (taboolaValue) {
+      this.appendScript('tbl-loader', head, () => taboolaLoader(this.publisherID, pageType));
+    }
   }
 
   insertFlusher() {
@@ -108,7 +118,7 @@ class AdTaboola extends Component {
           <div
             className="tbl-wrapper"
             style={{
-              backgroundColor: '#FFEFD5',
+              backgroundColor: '#ffefd5',
               padding: '20px',
             }}
           >

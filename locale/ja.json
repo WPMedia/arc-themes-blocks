@@ -1,106 +1,106 @@
 {
-	"shared-styles": {
-		"promo-label.gallery-text": "ギャラリー",
-		"promo-label.video-text": "ビデオ",
-		"byline.by-text": "担当者：",
-		"byline.and-text": "및",
-		"overline.sponsored-content": "Sponsored Content"
-	},
-	"article-body-block": {
-		"article-body-block.correction": "修正",
-		"article-body-block.clarification": "説明",
-		"article-body-block.interstitial-link-aria-label": "Open related story"
-	},
-	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "接続",
-		"full-author-bio-block.social-email": "Email",
-		"full-author-bio-block.social-twitter": "Connect on Twitter",
-		"full-author-bio-block.social-facebook": "Connect on Facebook",
-		"full-author-bio-block.social-instagram": "Follow on Instagram",
-		"full-author-bio-block.social-rss": "RSS Feed",
-		"full-author-bio-block.social-linkedin": "Connect on LinkedIn",
-		"full-author-bio-block.social-reddit": "Connect on Reddit",
-		"full-author-bio-block.social-youtube": "Connect on Youtube",
-		"full-author-bio-block.social-medium": "Connect on Medium",
-		"full-author-bio-block.social-tumblr": "Connect on Tumblr",
-		"full-author-bio-block.social-pinterest": "Connect on Pinterest",
-		"full-author-bio-block.social-snapchat": "Connect on Snapchat",
-		"full-author-bio-block.social-whatsapp": "Connect on Whatsapp",
-		"full-author-bio-block.social-soundcloud": "Listen on SoundCloud"
-	},
-	"global-phrases-block": {
-		"global.gallery-expand-button": "展開",
-		"global.gallery-page-count-text": "%{current} \/ %{total}",
-		"global.gallery-autoplay-button": "自動再生",
-		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
-		"global.social-twitter": "Twitter",
-		"global.social-facebook": "Facebook",
-		"global.social-linkedin": "LinkedIn",
-		"global.social-pinterest": "Pinterest",
-		"global.social-email": "Email",
-		"global.opens-in-new-window": "(Opens in new window)"
-	},
-	"header-nav-block": {
-		"header-nav-block.sections-button": "Sections",
-		"header-nav-block.sign-in-button": "Sign In",
-		"header-nav-block.search-text": "Search"
-	},
-	"header-nav-chain-block": {
-		"header-nav-chain-block.sections-button": "セクション",
-		"header-nav-chain-block.search-text": "検索",
-		"header-nav-chain-block.sections-button-aria-label": "Show %{item} sub sections",
-		"header-nav-chain-block.sections-element-aria-label": "Sections Menu",
-		"header-nav-chain-block.links-element-aria-label": "Top Links",
-		"header-nav-chain-block.querly-search-aria-label": "Search"
-	},
-	"results-list-block": {
-		"results-list-block.see-more-button": "詳細",
-		"results-list-block.see-more-button-aria-label": "See More stories about this topic"
-	},
-	"search-results-list-block": {
-		"search-results-block.search-button": "検索",
-		"search-results-block.search-result-number": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
-		"search-results-block.see-more-button": "詳細",
-		"search-results-block.see-more-button-aria-label": "See More stories about this topic",
-		"search-results-blocks.search-input-placeholder": "Enter your search terms"
-	},
-	"ads-block": {
-		"ads-block.ad-label": "ADVERTISEMENT"
-	},
-	"alert-bar-block": {
-		"alert-bar-block.element-aria-label": "Breaking News Alert",
-		"alert-bar-block.close-button": "Dismiss breaking news alert"
-	},
-	"footer-block": {
-		"footer-block.facebook-link": "Facebook page",
-		"footer-block.twitter-link": "Twitter feed",
-		"footer-block.rss-link": "RSS feed"
-	},
-	"links-bar-block": {
-		"links-bar-block.element-aria-label": "More Links"
-	},
-	"share-bar-block": {
-		"share-bar-block.share-button-aria-label": "Share current article via %{socialType}"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Send an email to %{authorName}",
-		"author-bio-block.social-rss": "Subscribe to %{authorName} RSS feed",
-		"author-bio-block.social-soundcloud": "Listen to %{authorName} on SoundCloud",
-		"author-bio-block.social-twitter": "Connect on Twitter",
-		"author-bio-block.social-facebook": "Connect on Facebook",
-		"author-bio-block.social-instagram": "Follow on Instagram",
-		"author-bio-block.social-linkedin": "Connect on LinkedIn",
-		"author-bio-block.social-reddit": "Connect on Reddit",
-		"author-bio-block.social-youtube": "Connect on Youtube",
-		"author-bio-block.social-medium": "Connect on Medium",
-		"author-bio-block.social-tumblr": "Connect on Tumblr",
-		"author-bio-block.social-pinterest": "Connect on Pinterest",
-		"author-bio-block.social-snapchat": "Connect on Snapchat",
-		"author-bio-block.social-whatsapp": "Connect on Whatsapp"
-	},
-	"default-output-block": {
-		"default-output-block.skip-main": "Skip To Content"
-	}
+    "shared-styles": {
+        "promo-label.gallery-text": "ギャラリー",
+        "promo-label.video-text": "ビデオ",
+        "byline.by-text": "担当者：",
+        "byline.and-text": "및",
+        "overline.sponsored-content": "スポンサー付きコンテンツ"
+    },
+    "article-body-block": {
+        "article-body-block.correction": "修正",
+        "article-body-block.clarification": "説明",
+        "article-body-block.interstitial-link-aria-label": "関連記事を開く"
+    },
+    "full-author-bio-block": {
+        "full-author-bio-block.connect-text": "接続",
+        "full-author-bio-block.social-email": "メールアドレス",
+        "full-author-bio-block.social-twitter": "Twitterで接続",
+        "full-author-bio-block.social-facebook": "Facebookで接続",
+        "full-author-bio-block.social-instagram": "Instagramでフォロー",
+        "full-author-bio-block.social-rss": "RSSフィード",
+        "full-author-bio-block.social-linkedin": "LinkedInで接続",
+        "full-author-bio-block.social-reddit": "Redditで接続",
+        "full-author-bio-block.social-youtube": "YouTubeで接続",
+        "full-author-bio-block.social-medium": "Mediumで接続",
+        "full-author-bio-block.social-tumblr": "Tumblrで接続",
+        "full-author-bio-block.social-pinterest": "Pinterestで接続",
+        "full-author-bio-block.social-snapchat": "Snapchatで接続",
+        "full-author-bio-block.social-whatsapp": "WhatsAppで接続",
+        "full-author-bio-block.social-soundcloud": "SoundCloudで聞く"
+    },
+    "global-phrases-block": {
+        "global.gallery-expand-button": "展開",
+        "global.gallery-page-count-text": "%{current} \/ %{total}",
+        "global.gallery-autoplay-button": "自動再生",
+        "global.gallery-pause-autoplay-button": "自動再生の一時停止",
+        "global.gallery-autoplay-label-start": "Start automatic slide show",
+        "global.gallery-autoplay-label-stop": "Stop automatic slide show",
+        "global.social-twitter": "Twitter",
+        "global.social-facebook": "Facebook",
+        "global.social-linkedin": "LinkedIn",
+        "global.social-pinterest": "Pinterest",
+        "global.social-email": "メールアドレス",
+        "global.opens-in-new-window": "（新しいウィンドウで開きます）"
+    },
+    "header-nav-block": {
+        "header-nav-block.sections-button": "Sections",
+        "header-nav-block.sign-in-button": "Sign In",
+        "header-nav-block.search-text": "Search"
+    },
+    "header-nav-chain-block": {
+        "header-nav-chain-block.sections-button": "Sections",
+        "header-nav-chain-block.search-text": "Search",
+        "header-nav-chain-block.sections-button-aria-label": "%{item}のサブセクションを表示",
+        "header-nav-chain-block.sections-element-aria-label": "セクションメニュー",
+        "header-nav-chain-block.links-element-aria-label": "トップリンク",
+        "header-nav-chain-block.querly-search-aria-label": "Search"
+    },
+    "results-list-block": {
+        "results-list-block.see-more-button": "詳細",
+        "results-list-block.see-more-button-aria-label": "このトピックに関するその他の記事を表示"
+    },
+    "search-results-list-block": {
+        "search-results-block.search-button": "Search",
+        "search-results-block.search-result-number": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
+        "search-results-block.see-more-button": "詳細",
+        "search-results-block.see-more-button-aria-label": "このトピックに関するその他の記事を表示",
+        "search-results-blocks.search-input-placeholder": "検索語句を入力"
+    },
+    "ads-block": {
+        "ads-block.ad-label": "広告"
+    },
+    "alert-bar-block": {
+        "alert-bar-block.element-aria-label": "ニュース速報アラート",
+        "alert-bar-block.close-button": "ニュース速報アラートを解除"
+    },
+    "footer-block": {
+        "footer-block.facebook-link": "Facebook ページ",
+        "footer-block.twitter-link": "Twitter フィード",
+        "footer-block.rss-link": "RSS feed"
+    },
+    "links-bar-block": {
+        "links-bar-block.element-aria-label": "その他のリンク"
+    },
+    "share-bar-block": {
+        "share-bar-block.share-button-aria-label": "現在の記事を%{socialType}で共有"
+    },
+    "author-bio-block": {
+        "author-bio-block.social-email": "%{authorName}にメールを送信",
+        "author-bio-block.social-rss": "%{authorName}のRSSフィードを登録",
+        "author-bio-block.social-soundcloud": "SoundCloudで%{authorName}を聞く",
+        "author-bio-block.social-twitter": "Twitterで接続",
+        "author-bio-block.social-facebook": "Facebookで接続",
+        "author-bio-block.social-instagram": "Instagramでフォロー",
+        "author-bio-block.social-linkedin": "LinkedInで接続",
+        "author-bio-block.social-reddit": "Redditで接続",
+        "author-bio-block.social-youtube": "YouTubeで接続",
+        "author-bio-block.social-medium": "Mediumで接続",
+        "author-bio-block.social-tumblr": "Tumblrで接続",
+        "author-bio-block.social-pinterest": "Pinterestで接続",
+        "author-bio-block.social-snapchat": "Snapchatで接続",
+        "author-bio-block.social-whatsapp": "WhatsAppで接続"
+    },
+    "default-output-block": {
+        "default-output-block.skip-main": "メインコンテンツにスキップ"
+    }
 }

@@ -7,6 +7,7 @@
 		"ja": "修正",
 		"ko": "정정",
 		"no": "Korreksjon",
+		"pt": "Correção",
 		"sv": "Korrektion"
 	},
 	"article-body-block.clarification": {
@@ -17,16 +18,18 @@
 		"ja": "説明",
 		"ko": "설명",
 		"no": "Avklaring",
+		"pt": "Clarificação",
 		"sv": "Klargörande"
 	},
 	"article-body-block.interstitial-link-aria-label": {
-		"de": "Open related story",
+		"de": "Ähnlichen Artikel öffnen",
 		"en": "Open related story",
-		"es": "Open related story",
-		"fr": "Open related story",
-		"ja": "Open related story",
-		"ko": "Open related story",
-		"no": "Open related story",
-		"sv": "Open related story"
+		"es": "Abrir historia relacionada",
+		"fr": "Ouvrir un article associé",
+		"ja": "関連記事を開く",
+		"ko": "관련 스토리 열기",
+		"no": "Åpne relatert historie",
+		"pt": "Abrir história relacionada",
+		"sv": "Öppna relaterad artikel"
 	}
 }

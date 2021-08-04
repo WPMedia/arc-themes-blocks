@@ -1,15 +1,13 @@
 {
   "name": "@wpmedia/article-tag-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Fusion Article Tag block",
-  "author": "Rohit Gande <rohit.gande@washpost.com>",
+  "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -27,7 +25,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "@wpmedia/shared-styles": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

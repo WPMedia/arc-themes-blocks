@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useContent, useEditableContent } from 'fusion:content';
+import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  PromoHeadline, PromoImage, SmallPromoContainer, SmallPromoStyles,
-} from '@wpmedia/shared-styles';
+import { SmallPromoPresentation } from '@wpmedia/shared-styles';
 
-const SmallPromoItem = ({ customFields }) => {
-  const { arcSite, isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
-
+const SmallPromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
@@ -75,51 +70,20 @@ const SmallPromoItem = ({ customFields }) => {
     }`,
   }) || null;
 
-  const imagePosition = customFields?.imagePosition || 'right';
-  const headlineMarginClass = SmallPromoStyles(imagePosition, 'headlineMargin');
-
-  const headline = customFields?.showHeadline ? (
-    <PromoHeadline
-      content={content}
-      className={headlineMarginClass}
-      linkClassName="sm-promo-headline"
-      headingClassName="sm-promo-headline"
-    />
-  ) : null;
-
-  const image = customFields?.showImage ? (
-    <div style={{ position: isAdmin ? 'relative' : null }}>
-      <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
-        <PromoImage
-          content={content}
-          customImageURL={customFields.imageOverrideURL}
-          showPromoLabel
-          promoSize="SM"
-          imageRatio={customFields.imageRatio}
-          lazyLoad={customFields.lazyLoad}
-        />
-      </div>
-    </div>
-  ) : null;
-
   return (
-    <SmallPromoContainer
-      headline={headline}
-      image={image}
-      imagePosition={imagePosition}
-    />
+    <SmallPromoPresentation content={content} {...customFields} />
   );
 };
 
 const SmallPromo = ({ customFields = { showImage: true, showHeadline: true, imageRatio: '3:2' } }) => {
-  const { isAdmin } = useFusionContext();
+  const { isAdmin, arcSite } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (shouldLazyLoad && isServerSide()) {
     return null;
   }
   return (
     <LazyLoad enabled={shouldLazyLoad}>
-      <SmallPromoItem customFields={customFields} />
+      <SmallPromoItem customFields={customFields} arcSite={arcSite} />
     </LazyLoad>
   );
 };

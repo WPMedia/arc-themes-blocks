@@ -4,17 +4,16 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import getThemeStyle from 'fusion:themes';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import Link from './_children/link';
 
 import './links-bar.scss';
 
-const LinkBarSpan = styled.span`
-  color: ${(props) => (props.navBarColor === 'light' ? '#000' : '#fff')};
+const ReadableTextNavigationBar = styled.nav`
+  color: ${(props) => (props.color)};
 
   a {
-    font-family: ${(props) => props.primaryFont};
-    white-space: nowrap;
+    color: ${(props) => (props.color)};
   }
 `;
 
@@ -50,44 +49,41 @@ const HorizontalLinksBar = ({
     && showHorizontalSeperatorDots
   );
 
-  const font = getThemeStyle(arcSite)['primary-font-family'];
+  // the interior links and spans need to contrast with nav color scheme
+  const readableContrastingColor = navBarColor === 'light' ? '#000' : '#fff';
 
   return (
-    <>
-      <nav
-        key={id}
-        className="horizontal-links-bar"
-        aria-label={ariaLabel || phrases.t('header-nav-chain-block.links-element-aria-label')}
-      >
-        {menuItems && menuItems.map((item, index) => (
-          <LinkBarSpan
-            className="horizontal-links-menu"
-            key={item._id}
-            primaryFont={font}
-            navBarColor={navBarColor}
-          >
-            {(index > 0 && showSeparator) ? '\u00a0 • \u00a0' : '\u00A0  \u00A0'}
-            {
+    <ReadableTextNavigationBar
+      key={id}
+      color={readableContrastingColor}
+      className="horizontal-links-bar"
+      aria-label={ariaLabel || phrases.t('header-nav-chain-block.links-element-aria-label')}
+    >
+      {menuItems && menuItems.map((item, index) => (
+        <PrimaryFont
+          as="span"
+          className="horizontal-links-menu"
+          key={item._id}
+        >
+          {(index > 0 && showSeparator) ? '\u00a0 • \u00a0' : '\u00A0  \u00A0'}
+          {
               item.node_type === 'link'
                 ? (
                   <Link
                     href={item.url}
                     name={item.display_name}
-                    navBarColor={navBarColor}
                   />
                 )
                 : (
                   <Link
                     href={item._id}
                     name={item.name}
-                    navBarColor={navBarColor}
                   />
                 )
             }
-          </LinkBarSpan>
-        ))}
-      </nav>
-    </>
+        </PrimaryFont>
+      ))}
+    </ReadableTextNavigationBar>
   );
 };
 

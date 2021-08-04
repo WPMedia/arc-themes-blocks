@@ -1,15 +1,13 @@
 {
   "name": "@wpmedia/htmlbox-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Fusion News Theme HTMLBox block",
-  "author": "Rohit Gande <rohit.gande@washpost.com>",
+  "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

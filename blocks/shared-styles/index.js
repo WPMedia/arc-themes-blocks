@@ -10,6 +10,7 @@ import PromoImage from './_children/promo-image';
 import PromoLabel from './_children/promo-label';
 import SecondaryFont from './_children/secondary-font';
 import SmallPromoContainer from './_children/promo-helpers/small/container';
+import SmallPromoPresentation from './_children/promos/small';
 import SmallPromoStyles from './_children/promo-helpers/small/styles';
 
 export {
@@ -25,5 +26,6 @@ export {
   PromoLabel,
   SecondaryFont,
   SmallPromoContainer,
+  SmallPromoPresentation,
   SmallPromoStyles,
 };

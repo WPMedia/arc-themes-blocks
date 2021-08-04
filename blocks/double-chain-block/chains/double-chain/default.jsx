@@ -1,15 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
+import { Heading, HeadingSection } from '@wpmedia/shared-styles';
+
+import '@wpmedia/shared-styles/scss/_chains.scss';
 
 const DoubleChain = ({ children, customFields }) => {
   if (children && children.length && children.length > 0) {
     // if no columnOne length set, then use the length of the children
     // if no length set, then all children will be put in column one
-    const { columnOne: columnOneLength = children.length } = customFields;
+    const {
+      columnOne: columnOneLength = children.length,
+      heading = null,
+    } = customFields;
 
     // check column one length not negative
     if (columnOneLength > 0) {
-      return (
+      const childrenOutput = (
         <div className="container-fluid double-chain chain-container">
           <div className="row wrap-bottom">
             <div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-1 reduce-internal-row-col-gap chain-col">
@@ -20,6 +26,17 @@ const DoubleChain = ({ children, customFields }) => {
             </div>
           </div>
         </div>
+      );
+
+      if (!heading) {
+        return childrenOutput;
+      }
+
+      return (
+        <HeadingSection>
+          <Heading className="chain-heading">{heading}</Heading>
+          {childrenOutput}
+        </HeadingSection>
       );
     }
   }
@@ -32,6 +49,9 @@ DoubleChain.label = 'Double Chain – Arc Block';
 DoubleChain.propTypes = {
   children: PropTypes.array,
   customFields: PropTypes.shape({
+    heading: PropTypes.string.tag({
+      label: 'Heading',
+    }),
     columnOne: PropTypes.number.isRequired.tag({
       label: 'Column one size',
       description: 'The number of features which will appear in the first column. The rest will go into the second column.',

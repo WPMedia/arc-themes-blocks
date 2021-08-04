@@ -1,0 +1,68 @@
+name: Stable blocks publish to stable tag
+on:
+  push:
+    branches:
+      - stable
+    # only run on changes to these files
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "*.scss"
+
+# Publishes stable builds with the dist tag of "stable" and
+jobs:
+  publish:
+    name: Stable block publish
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Set git username
+        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "Jack Howard"
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.NODE_AUTH_TOKEN }}
+
+      - name: Cache NPM files
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # pulls all tags (needed for lerna / semantic release to correctly version)
+      - name: Pull tags to give lerna access to git info
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: Run tests
+        run: npm run test
+
+      # iterates minor version
+      - name: Publish to stable
+        run: npm run release:stable
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: Check stable failure status
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+        if: failure()

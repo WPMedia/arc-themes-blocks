@@ -1,12 +1,13 @@
 {
 	"default-output-block.skip-main": {
-		"de": "Skip To Content",
-		"en": "Skip To Content",
-		"es": "Skip To Content",
-		"fr": "Skip To Content",
-		"ja": "Skip To Content",
-		"ko": "Skip To Content",
-		"no": "Skip To Content",
-		"sv": "Skip To Content"
+		"de": "Zum Hauptinhalt springen",
+		"en": "Skip to main content",
+		"es": "Omitir para ir al contenido principal",
+		"fr": "Passer au contenu principal",
+		"ja": "メインコンテンツにスキップ",
+		"ko": "메인 콘텐츠로 건너뛰기",
+		"no": "Hopp til hovedinnhold",
+		"pt": "Avançar para o conteúdo principal",
+		"sv": "Gå vidare till huvudinnehåll"
 	}
 }

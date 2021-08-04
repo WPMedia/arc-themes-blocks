@@ -1,8 +1,8 @@
 {
   "name": "@wpmedia/headline-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Fusion News Theme headline block",
-  "author": "Brent Miller <brent.miller@washport.com>",
+  "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",

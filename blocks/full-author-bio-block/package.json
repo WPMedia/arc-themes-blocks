@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/full-author-bio-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Fusion News Theme full author bio block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -26,7 +26,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "@arc-fusion/prop-types": "^0.1.5"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

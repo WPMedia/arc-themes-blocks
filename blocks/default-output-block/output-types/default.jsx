@@ -4,6 +4,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { MetaData } from '@wpmedia/engine-theme-sdk';
 
+import blocks from '~/blocks.json';
 // this is blank import but used to inject scss
 import './default.scss';
 
@@ -52,19 +53,38 @@ const googleTagManagerNoScript = (gtmID) => {
   );
 };
 
+const optimalFontLoading = (fontUrl, index = '') => (
+  <>
+    <link
+      rel="preload"
+      as="style"
+      href={fontUrl}
+    />
+    <link
+      rel="stylesheet"
+      key={fontUrl}
+      data-testid={`font-loading-url-${index}`}
+      href={fontUrl}
+    />
+  </>
+);
+
 const fontUrlLink = (fontUrl) => {
   // If fontURL is an array, then iterate over the array and build out the links
   if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
-    const fontLinks = [...new Set(fontUrl)].map((url, index) => (
-      <link rel="stylesheet" key={url} data-testid={`font-loading-url-${index}`} href={url} />
-    ));
+    const fontLinks = [...new Set(fontUrl)].map((url, index) => optimalFontLoading(url, index));
+
     return (
-      <>{fontLinks}</>
+      <>
+        <>{fontLinks}</>
+      </>
     );
   }
   // Legacy support where fontUrl is a string
   return fontUrl ? (
-    <link rel="stylesheet" href={fontUrl} />
+    <>
+      {optimalFontLoading(fontUrl)}
+    </>
   ) : '';
 };
 
@@ -194,5 +214,25 @@ const SampleOutputType = ({
     </html>
   );
 };
+
+// if publisher wants no sites to be spa
+// then they do nothing. spaSites will be falsy undefined and fallsback to spa true,
+//  which won't do anything in isolation
+
+// if publisher wants all sites to be spa
+// then they set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//  spaSites will be falsy undefined and fallback to spa true
+
+// if publisher wants to select which sites are spa
+// then set environment "FUSION_SERVICE_WORKER": true and use 2.8
+//    and set in blocks.json spaSites: ["target-site-id"].
+//    spaSites will be a truthy array and set itself
+
+// fallback to true to ensure all site ids don't have to copy-pasted to blocks.json
+export function configureSinglePageApp(spaSites) {
+  return spaSites || true;
+}
+
+SampleOutputType.spa = configureSinglePageApp(blocks.spaSites);
 
 export default SampleOutputType;

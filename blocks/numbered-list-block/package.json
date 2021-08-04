@@ -1,8 +1,8 @@
 {
   "name": "@wpmedia/numbered-list-block",
-  "version": "5.13.2",
+  "version": "5.14.1",
   "description": "Fusion News Theme numbered list block",
-  "author": "Rohit Gande <rohit.gande@washpost.com>",
+  "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",

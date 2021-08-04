@@ -40,11 +40,6 @@ jobs:
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
-      - name: Configure NPM
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
-          echo '@WPMedia:registry=https://npm.pkg.github.com' >> .npmrc
-
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -62,6 +57,7 @@ jobs:
 
       - name: Publish to rc
         run: npm run release:rc
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Check rc failure status
         uses: act10ns/slack@v1

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './styles.scss';
 
 // eslint-disable-next-line import/extensions
 import useIdentity from '../../components/Identity.jsx';
@@ -7,17 +6,18 @@ import useIdentity from '../../components/Identity.jsx';
 export const Profile = () => {
   const { Identity, isInitialized } = useIdentity();
 
-  if (!isInitialized) {
-    return null;
-  }
   useEffect(() => {
-    const fetchProfile = async () {
+    const fetchProfile = async () => {
       if (await Identity.isLoggedIn()) {
         await Identity.getUserProfile();
       }
-    }
+    };
     fetchProfile();
   }, [Identity]);
+
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <section>

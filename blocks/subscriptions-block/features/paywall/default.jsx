@@ -1,16 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import { useIdentity } from '@wpmedia/identity-block';
 import './styles.scss';
 
 const Paywall = ({ customFields }) => {
   const { signUpURL, loginURL } = customFields;
+  const { Identity } = useIdentity();
   const [showPaywall, setShowPaywall] = useState(false);
+  const [loggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    window.setInterval(() => {
-      setShowPaywall(true);
-    }, 5000);
-  }, []);
+    const isLoggedIn = async () => {
+      setIsLoggedIn(await Identity.isLoggedIn());
+    };
+
+    isLoggedIn();
+  }, [Identity]);
+
+  useEffect(() => {
+    let paywallTimeout = null;
+    if (!loggedIn) {
+      paywallTimeout = window.setInterval(() => {
+        setShowPaywall(true);
+      }, 5000);
+    }
+
+    // cancel subscription to useEffect
+    return () => { clearInterval(paywallTimeout); };
+  }, [loggedIn]);
 
   if (!showPaywall) {
     return null;

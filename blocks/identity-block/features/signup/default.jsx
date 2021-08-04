@@ -7,7 +7,8 @@ import './styles.scss';
 import useIdentity from '../../components/Identity.jsx';
 
 export const SignUp = ({ customFields }) => {
-  const { redirectURL, redirectToPreviousPage } = customFields;
+  let { redirectURL } = customFields;
+  const { redirectToPreviousPage } = customFields;
 
   const { Identity, isInitialized } = useIdentity();
 

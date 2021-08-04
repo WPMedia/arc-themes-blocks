@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { useIdentity } from '@wpmedia/identity-block';
 import './styles.scss';
+
+// eslint-disable-next-line import/extensions
+import useIdentity from '../../components/Identity.jsx';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;
@@ -77,6 +79,6 @@ HeaderAccountAction.propTypes = {
   }),
 };
 
-HeaderAccountAction.label = 'Subscriptions Header Account – Arc Block';
+HeaderAccountAction.label = 'Identity Header Account – Arc Block';
 
 export default HeaderAccountAction;

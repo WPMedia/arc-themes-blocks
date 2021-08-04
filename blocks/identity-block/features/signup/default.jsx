@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import './styles.scss';
 
 // eslint-disable-next-line import/extensions
 import useIdentity from '../../components/Identity.jsx';
 
 export const SignUp = ({ customFields }) => {
-  const { redirectURL } = customFields;
+  const { redirectURL, redirectToPreviousPage } = customFields;
 
   const { Identity, isInitialized } = useIdentity();
 
@@ -19,6 +20,10 @@ export const SignUp = ({ customFields }) => {
 
   if (!isInitialized) {
     return null;
+  }
+
+  if (redirectToPreviousPage && !isServerSide()) {
+    redirectURL = document?.referrer;
   }
 
   return (
@@ -121,7 +126,13 @@ SignUp.label = 'Identity Sign Up - Arc Block';
 SignUp.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
+      name: 'Redirect URL',
       defaultValue: '/account/',
+    }),
+    redirectToPreviousPage: PropTypes.bool.tag({
+      name: 'Redirect to previous page',
+      defaultValue: true,
+      description: 'Do you wish for the user to be redirected to the page they entered from before signing up? This overrides redirect URL',
     }),
   }),
 };

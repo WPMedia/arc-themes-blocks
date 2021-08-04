@@ -13,7 +13,7 @@ const ForgotPassword = ({ customFields }) => {
   const { globalContent } = useFusionContext();
   const { isInitialized } = useIdentity();
 
-  const { metadata: { q: passwordNonce } = {} } = globalContent;
+  const { nonce: passwordNonce } = globalContent;
 
   if (!isInitialized) {
     return null;

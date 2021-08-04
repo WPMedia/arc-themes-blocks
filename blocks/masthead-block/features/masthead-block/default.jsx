@@ -13,18 +13,14 @@ import HeaderContainerHideMobile from './_children/HeaderContainerHideMobile';
 
 import './masthead-block.scss';
 
-const Masthead = (props) => {
+// takes in a date from parent
+export const MastheadPresentational = (props) => {
   const {
     customFields: {
       tagLine, promoLinkURL, promoLinkText, logoURL, showDate,
     },
+    displayDate,
   } = props;
-  const { arcSite } = useFusionContext();
-
-  const {
-    dateLocalization: { language, timeZone, dateFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy' },
-  } = getProperties(arcSite);
-  const displayDate = localizeDate(new Date(), dateFormat, language, timeZone);
 
   return (
     <HeaderContainerHideMobile className="masthead-block-container">
@@ -57,9 +53,23 @@ const Masthead = (props) => {
   );
 };
 
-Masthead.label = 'Masthead – Arc Block';
+// need to get current time and format
+const MastheadContainer = (props) => {
+  const { arcSite } = useFusionContext();
+  const {
+    dateLocalization: { language, timeZone, dateFormat } = { language: 'en', timeZone: 'GMT', dateFormat: 'LLLL d, yyyy' },
+  } = getProperties(arcSite);
 
-Masthead.propTypes = {
+  const displayDate = localizeDate(new Date(), dateFormat, language, timeZone);
+
+  return (
+    <MastheadPresentational {...props} displayDate={displayDate} />
+  );
+};
+
+MastheadContainer.label = 'Masthead – Arc Block';
+
+MastheadContainer.propTypes = {
   customFields: PropTypes.shape({
     logoURL: PropTypes.string.tag({
       label: 'Logo URL',
@@ -84,4 +94,4 @@ Masthead.propTypes = {
   }),
 };
 
-export default Masthead;
+export default MastheadContainer;

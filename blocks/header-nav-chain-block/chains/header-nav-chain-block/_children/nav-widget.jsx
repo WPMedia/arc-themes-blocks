@@ -42,6 +42,7 @@ const NavWidget = ({
       <button
         type="button"
         onClick={menuButtonClickAction}
+        aria-label={phrases.t('header-nav-chain-block.sections-button')}
         className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}
       >
         <PrimaryFont as="span">{phrases.t('header-nav-chain-block.sections-button')}</PrimaryFont>

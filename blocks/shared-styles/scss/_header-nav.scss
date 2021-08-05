@@ -24,6 +24,13 @@ body.nav-open {
   // is not visible on hover over other links
   height: $mouseover-link-preview-safe-area-height;
   background-color: $section-bg;
+
+  // need to hide that hover and active color 
+  &:hover,
+  &:active {
+    // keep the same color unlike other list items
+    background: $section-bg !important;
+  }
 }
 
 @media screen and (max-width: map-get($grid-breakpoints, 'md')) {

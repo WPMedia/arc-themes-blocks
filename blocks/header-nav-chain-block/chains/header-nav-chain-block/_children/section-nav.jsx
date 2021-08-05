@@ -129,7 +129,7 @@ export default ({
       {children}
       <StyledSectionMenuVariableHeight navHeight={navHeight} className="section-menu">
         {active.map((item) => <SectionItem key={item._id} item={item} isHidden={isHidden} />)}
-        <div className="section-menu--bottom-placeholder" />
+        <li className="section-menu--bottom-placeholder" />
       </StyledSectionMenuVariableHeight>
     </>
   );

@@ -4,7 +4,7 @@
   font-size: calculateRem(20px);
   font-weight: bold;
   line-height: calculateRem(24px);
-  margin-bottom: map-get($spacers, 'xs');
+  padding-bottom: map-get($spacers, 'xs');
   text-decoration: none;
 
   &--link {

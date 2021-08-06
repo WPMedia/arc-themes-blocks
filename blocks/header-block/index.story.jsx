@@ -5,7 +5,7 @@ export default {
   title: 'Blocks/Header',
 };
 
-export const extralarge = () => {
+export const extraLarge = () => {
   const customFields = {
     text: 'Baby panda born at the zoo',
     size: 'Extra Large',

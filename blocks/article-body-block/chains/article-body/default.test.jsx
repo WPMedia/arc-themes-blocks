@@ -72,14 +72,12 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: {
-            elementPlacement: { 1: 2, 2: 1 },
-          },
         })),
       }));
+      const customFields = { elementPlacement: { 1: 2, 2: 1 } };
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
-        <ArticleBodyChain>
+        <ArticleBodyChain customFields={customFields}>
           <div>1</div>
           <div>2</div>
           <span>3</span>
@@ -141,14 +139,12 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: {
-            elementPlacement: { 1: 3, 2: 4, 3: 2 },
-          },
         })),
       }));
+      const customFields = { elementPlacement: { 1: 3, 2: 4, 3: 2 } };
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
-        <ArticleBodyChain>
+        <ArticleBodyChain customFields={customFields}>
           <div>1</div>
           <div>2</div>
           <span>3</span>
@@ -221,14 +217,12 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: {
-            elementPlacement: { 1: 3, 2: 4, 3: 2 },
-          },
         })),
       }));
+      const customFields = { elementPlacement: { 1: 3, 2: 4, 3: 2 } };
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
-        <ArticleBodyChain>
+        <ArticleBodyChain customFields={customFields}>
           <div>1</div>
           <div>2</div>
           <span>3</span>
@@ -285,16 +279,14 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: {
-            elementPlacement: { 1: 1, 2: 4 },
-          },
         })),
       }));
     });
+    const customFields = { elementPlacement: { 1: 1, 2: 4 } };
     it('should ignore the child with position greater than contentElement.length', () => {
       const { default: ArticleBodyChain } = require('./default');
       const wrapper = mount(
-        <ArticleBodyChain>
+        <ArticleBodyChain customFields={customFields}>
           <div>1</div>
           <div>2</div>
           <span>3</span>
@@ -349,7 +341,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
     });
@@ -393,7 +384,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
     });
@@ -505,7 +495,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
     });
@@ -658,7 +647,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -717,7 +705,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -786,7 +773,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -832,7 +818,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -871,7 +856,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
 
@@ -909,7 +893,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
 
@@ -964,7 +947,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1006,7 +988,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
 
@@ -1042,7 +1023,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1108,7 +1088,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1139,7 +1118,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1178,7 +1156,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1213,7 +1190,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1252,7 +1228,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1289,7 +1264,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1412,7 +1386,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1521,7 +1494,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1649,7 +1621,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1795,7 +1766,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -1930,7 +1900,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -2058,7 +2027,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -2151,7 +2119,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -2189,7 +2156,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');
@@ -2222,7 +2188,6 @@ describe('article-body chain', () => {
             ],
           },
           arcSite: 'the-sun',
-          customFields: { },
         })),
       }));
       const { default: ArticleBodyChain } = require('./default');

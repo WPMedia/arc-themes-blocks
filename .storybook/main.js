@@ -14,13 +14,14 @@ module.exports = {
 			...config.resolve,
 			alias: {
 				...config.resolve.alias,
-				'fusion:context':  path.resolve(__dirname, './alias/context.js'),
 				'fusion:consumer': path.resolve(__dirname, './alias/consumer.js'),
 				'fusion:content': path.resolve(__dirname, './alias/content.js'),
-				'fusion:themes':  path.resolve(__dirname, './alias/themes.js'),
-				'fusion:properties': path.resolve(__dirname, './alias/properties.js'),
+				'fusion:context':  path.resolve(__dirname, './alias/context.js'),
+				'fusion:environment': path.resolve(__dirname, './alias/environment.js'),
 				'fusion:intl': path.resolve(__dirname, './alias/intl.js'),
-				'fusion:environment': path.resolve(__dirname, './alias/environment.js')
+				'fusion:properties': path.resolve(__dirname, './alias/properties.js'),
+				'fusion:static':  path.resolve(__dirname, './alias/static.js'),
+        'fusion:themes':  path.resolve(__dirname, './alias/themes.js')
 			}
 		},
 		config.module.rules.push({

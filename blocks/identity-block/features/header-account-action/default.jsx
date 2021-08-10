@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
-import useIdentity from '../../components/Identity';
+// arc-publishing sdk identity outputs Identity.jsx
+// eslint-disable-next-line import/extensions
+import useIdentity from '../../components/Identity.jsx';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;

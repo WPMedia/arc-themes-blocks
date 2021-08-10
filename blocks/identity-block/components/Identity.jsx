@@ -5,12 +5,11 @@ import getProperties from 'fusion:properties';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 const useIdentity = () => {
-  // console.log('running hook...');
   const { arcSite } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
   const [isInit, setIsInit] = useState(() => !!Identity.apiOrigin);
-  // console.log('props...', arcSite, subscriptions, isInit);
   if (!isInit && arcSite && subscriptions?.identity?.apiOrigin) {
+    // todo: remove hard-coded arc and arc site
     const arcHeaders = { 'Arc-Organization': 'staging', 'Arc-Site': 'staging' };
     if (!isServerSide()) {
       if (!window.realFetch) {

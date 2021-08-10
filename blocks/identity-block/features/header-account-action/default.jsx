@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
-// eslint-disable-next-line import/extensions
-import useIdentity from '../../components/Identity.jsx';
+import useIdentity from '../../components/Identity';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;

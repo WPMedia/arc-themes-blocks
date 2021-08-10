@@ -1,0 +1,23 @@
+.xpmedia-subs-header {
+  align-items: center;
+  color: #fff;
+  font-size: 0.875rem;
+
+  &--button {
+    align-items: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: 2rem;
+    padding: 0 0.5rem;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+      border: 1px solid #fff;
+    }
+  }
+}

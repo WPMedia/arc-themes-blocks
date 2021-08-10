@@ -1,6 +1,6 @@
 .xpmedia-subs-header {
   align-items: center;
-  color: white;
+  color: #fff;
   font-size: 0.875rem;
 
   &--button {
@@ -8,7 +8,7 @@
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 2px;
-    color: white;
+    color: #fff;
     font-size: 0.875rem;
     font-weight: bold;
     height: 2rem;
@@ -16,8 +16,8 @@
     text-decoration: none;
 
     &:hover {
-      color: white;
-      border: 1px solid white;
+      color: #fff;
+      border: 1px solid #fff;
     }
   }
 }

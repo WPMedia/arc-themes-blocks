@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';

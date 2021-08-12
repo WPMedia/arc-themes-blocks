@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
@@ -289,15 +289,22 @@ const ArticleBody = styled.article`
   }
 `;
 
-const ArticleBodyChainItems = ({ children }) => {
+export const ArticleBodyChainPresentation = ({
+  children,
+  customFields = {},
+  context,
+}) => {
   const {
     globalContent: items = {},
-    customFields = {},
     arcSite,
     id,
-  } = useFusionContext();
+  } = context;
 
-  const { content_elements: contentElements = [], location } = items;
+  const {
+    content_elements: contentElements = [],
+    copyright,
+    location,
+  } = items;
   const { elementPlacement: adPlacementConfigObj = {} } = customFields;
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
@@ -336,10 +343,10 @@ const ArticleBodyChainItems = ({ children }) => {
 
       return parseArticleItem(contentElement, index, arcSite, phrases, id, customFields);
     }),
-    ...(items.copyright ? [parseArticleItem(
+    ...(copyright ? [parseArticleItem(
       {
         type: 'copyright',
-        content: items.copyright,
+        content: copyright,
       },
       'copyright-text',
       arcSite,
@@ -360,16 +367,23 @@ const ArticleBodyChainItems = ({ children }) => {
   );
 };
 
-const ArticleBodyChain = ({ customFields = {}, children }) => {
-  const { isAdmin } = useFusionContext();
-  if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
+const ArticleBodyChain = ({
+  children,
+  customFields = {},
+}) => {
+  const context = useFusionContext();
+  const { isAdmin } = context;
+  if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <ArticleBodyChainItems customFields={{ ...customFields }}>
+    <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
+      <ArticleBodyChainPresentation
+        context={context}
+        customFields={customFields}
+      >
         {children}
-      </ArticleBodyChainItems>
+      </ArticleBodyChainPresentation>
     </LazyLoad>
   );
 };

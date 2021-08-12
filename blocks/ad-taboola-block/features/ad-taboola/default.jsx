@@ -4,9 +4,9 @@ import getProperties from 'fusion:properties';
 import Consumer from 'fusion:consumer';
 import PAGE_TYPE_TABOOLA_MAPPING from './constants/pageTypeTaboolaMapping';
 
-const taboolaLoader = (publisherID, pageType) => (
+const taboolaLoader = (publisherID, taboolaValue) => (
   `window._taboola = window._taboola || [];
-    _taboola.push({${pageType}:'auto'});
+    _taboola.push({${taboolaValue}:'auto'});
     !function (e, f, u, i) {
       if (!document.getElementById(i)){
         e.async = 1;
@@ -88,7 +88,7 @@ class AdTaboola extends Component {
 
     // if taboola value empty falsy string, then do not include script
     if (taboolaValue) {
-      this.appendScript('tbl-loader', head, () => taboolaLoader(this.publisherID, pageType));
+      this.appendScript('tbl-loader', head, () => taboolaLoader(this.publisherID, taboolaValue));
     }
   }
 

@@ -1,4 +1,4 @@
-import styled from 'styled';
+import styled from 'styled-components';
 
 const StyledWarning = styled.div`
   background-color: #c30;

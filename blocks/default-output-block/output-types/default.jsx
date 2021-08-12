@@ -88,6 +88,14 @@ const fontUrlLink = (fontUrl) => {
   ) : '';
 };
 
+const paywallScript = (src) => {
+  if (!src) {
+    return null;
+  }
+
+  return <script defer src={src} />;
+};
+
 const SampleOutputType = ({
   children,
   contextPath,
@@ -118,6 +126,9 @@ const SampleOutputType = ({
     querylyId,
     querylyOrg,
     locale = 'en',
+    subscriptions: {
+      paywall: { src: paywallSrc }
+    }
   } = getProperties(arcSite);
 
   const chartBeatInline = `
@@ -202,6 +213,7 @@ const SampleOutputType = ({
         {comscoreID
           ? <script async data-integration="comscore" src="https://sb.scorecardresearch.com/beacon.js" />
           : null}
+        {paywallSrc ? paywallScript(paywallSrc) : null }
         {querylyCode(querylyId, querylyOrg, metaValue('page-type'))}
       </head>
       <body>

@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-sales": "^1.55.0"
+    "@arc-publishing/sdk-sales": "^1.55.0",
+    "is-url": "^1.2.0"
   }
 }

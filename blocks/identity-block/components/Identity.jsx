@@ -1,26 +1,32 @@
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Identity from '@arc-publishing/sdk-identity';
-// import { useFusionContext } from 'fusion:context';
-// import getProperties from 'fusion:properties';
-// import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
-const useIdentity = () => ({
-  Identity,
-  isInitialized: true,
-});
+const useIdentity = () => {
+  const { arcSite } = useFusionContext();
+  const { subscriptions } = getProperties(arcSite);
+  const [ isInit, setIsInit ] = useState(() => !!Identity.apiOrigin);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
 
-// keep skelton for future use
-// const useIdentity = () => ({
-// const { arcSite } = useFusionContext();
-// const { subscriptions } = getProperties(arcSite);
-// const [
-//   isInit,
-//   setIsInit
-// ] = useState(() => !!Identity.apiOrigin);
+  Identity.options({ apiOrigin: subscriptions?.identity?.apiOrigin });
+  setIsInit(true);
 
-// todo: add subscriptions logic
-// return ({
-//   Identity,
-//   isInitialized: true,
-// })};
+  useEffect(() => {
+    const loggedIn = async () => {
+      setIsLoggedIn(await Identity.isLoggedIn());
+    }
+    if (Identity) {
+      loggedIn();
+    }
+  }, [Identity, Identity.userIdentity]);
+
+  return {
+    Identity,
+    isLoggedIn,
+    isInitialized: isInit,
+  };
+};
+
 export default useIdentity;

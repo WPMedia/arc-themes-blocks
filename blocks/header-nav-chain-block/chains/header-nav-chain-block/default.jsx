@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
@@ -53,7 +53,7 @@ const StyledNav = styled.nav`
       max-width: 240px;
       width: auto;
       transition: 0.5s;
-      
+
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
         min-width: 40px;

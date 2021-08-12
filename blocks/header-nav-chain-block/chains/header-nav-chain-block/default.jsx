@@ -344,7 +344,6 @@ const Nav = (props) => {
         />
         )}
         {rightMemoizedNavSection}
-
       </div>
 
       <StyledSectionDrawer

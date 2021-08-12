@@ -12,6 +12,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
+  const [accountMenuToggle, setAccountMenu] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -46,6 +47,28 @@ const HeaderAccountAction = ({ customFields }) => {
 
   if (!isInitialized) {
     return null;
+  }
+
+  const AccountMenu = () => (
+    <ul className="menu">
+      <li className="menu-item">Manage Your Account</li>
+      <li className="menu-item">Log Out</li>
+    </ul>
+  );
+
+  const AccountDropdown = () => (
+    <div className="xpmedia-subs-header">
+      <button type="button" className="xpmedia-subs-header--button" onClick={() => setAccountMenu(!accountMenuToggle)}>
+        <span className="account-text">Account</span>
+      </button>
+      {
+          accountMenuToggle && <AccountMenu />
+      }
+    </div>
+  );
+
+  if (!loggedIn) { // Change default to `true` once we can check the api
+    return <AccountDropdown />;
   }
 
   // Component is fully client side and will render Sign In link

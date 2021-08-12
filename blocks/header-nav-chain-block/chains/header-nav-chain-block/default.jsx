@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useContent } from 'fusion:content';
@@ -317,6 +319,8 @@ const Nav = (props) => {
             key={`${id}_${breakpoint}_${i}`}
           >
             <NavWidget
+              // passes in props.children and props.id
+              // passing in props.children is linting violation
               {...props}
               type={navWidgetType}
               position={customFields[cFieldIndexKey]}
@@ -331,11 +335,11 @@ const Nav = (props) => {
   };
 
   const NavSection = ({ side }) => (
-    // istanbul ignore next
     !side ? null : (
       <div key={side} className={`nav-${side}`}>
         {
           // Support for deprecated 'signInOrder' custom field
+          // signInOrder is hidden now
           // "If" condition is for rendering "signIn" element
           // "Else" condition is for standard nav bar customization logic
           side === 'right'
@@ -378,6 +382,10 @@ const Nav = (props) => {
     );
   };
 
+  // memoizing as children props are causing re-renders
+  const rightMemoizedNavSection = useMemo(() => <NavSection side="right" />, []);
+  const leftMemoizedNavSection = useMemo(() => <NavSection side="left" />, []);
+
   return (
     <StyledNav
       id="main-nav"
@@ -389,7 +397,7 @@ const Nav = (props) => {
       aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
     >
       <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-        <NavSection side="left" />
+        {leftMemoizedNavSection}
         <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
         {displayLinks && (
         <HorizontalLinksBar
@@ -399,7 +407,8 @@ const Nav = (props) => {
           ariaLabel={ariaLabelLink}
         />
         )}
-        <NavSection side="right" />
+        {rightMemoizedNavSection}
+
       </div>
 
       <StyledSectionDrawer

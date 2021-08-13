@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import PropTypes from '@arc-fusion/prop-types';
+import getThemeStyle from 'fusion:themes';
+import { useFusionContext } from 'fusion:context';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;
+  const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
 
@@ -51,15 +55,20 @@ const HeaderAccountAction = ({ customFields }) => {
 
   const AccountMenu = () => (
     <ul className="menu">
-      <li className="menu-item">Manage Your Account</li>
-      <li className="menu-item">Log Out</li>
+      <PrimaryFont as="li" className="menu-item">Manage Your Account</PrimaryFont>
+      <PrimaryFont as="li" className="menu-item">Log Out</PrimaryFont>
     </ul>
   );
 
   const AccountDropdown = () => (
     <div className="xpmedia-subs-header">
       <button type="button" className="xpmedia-subs-header--button" onClick={() => setAccountMenu(!accountMenuToggle)}>
-        <span className="account-text">Account</span>
+        <PrimaryFont
+          as="span"
+          primaryColor={getThemeStyle(arcSite)['primary-color']}
+        >
+          Account
+        </PrimaryFont>
       </button>
       {
           accountMenuToggle && <AccountMenu />

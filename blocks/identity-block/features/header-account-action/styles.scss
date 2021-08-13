@@ -22,11 +22,25 @@
   }
 
   .menu {
+    display: inline;
+    position: absolute;
+    width: 211px;
+    height: 88px;
+    top: 50px;
+    right: 20px;
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+    border: solid 1px #dadada;
+    background-color: #fff;
+
     .menu-item {
       color: #000;
-      list-style: none;
-      width: 300px;
-      background-color: #fff;
+      width: 179px;
+      margin: 0 0 8px;
+      font-size: calculateRem(16px);
+      line-height: 1.5;
+      text-align: left;
     }
   }
 }

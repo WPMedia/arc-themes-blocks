@@ -3,6 +3,7 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import PropTypes from '@arc-fusion/prop-types';
 import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
+import { ChevronUpIcon, ChevronDownIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
@@ -17,6 +18,9 @@ const HeaderAccountAction = ({ customFields }) => {
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
   const [accountMenuToggle, setAccountMenu] = useState(false);
+
+  const accountIconSize = '16px';
+  const caretSize = '12px';
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -63,12 +67,21 @@ const HeaderAccountAction = ({ customFields }) => {
   const AccountDropdown = () => (
     <div className="xpmedia-subs-header">
       <button type="button" className="xpmedia-subs-header--button" onClick={() => setAccountMenu(!accountMenuToggle)}>
+        <UserIcon fill="#fff" height={accountIconSize} width={accountIconSize} />
         <PrimaryFont
           as="span"
           primaryColor={getThemeStyle(arcSite)['primary-color']}
+          className="account-text"
         >
           Account
         </PrimaryFont>
+        <span className="submenu-caret">
+          {
+            accountMenuToggle
+              ? <ChevronUpIcon fill="rgba(255, 255, 255, 0.5)" height={caretSize} width={caretSize} />
+              : <ChevronDownIcon fill="rgba(255, 255, 255, 0.5)" height={caretSize} width={caretSize} />
+          }
+        </span>
       </button>
       {
           accountMenuToggle && <AccountMenu />

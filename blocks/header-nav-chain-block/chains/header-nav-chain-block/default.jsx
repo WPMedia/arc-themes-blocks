@@ -1,7 +1,6 @@
-import React, {
-  useEffect, useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -20,14 +19,73 @@ import {
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
 import NavWidget from './_children/nav-widget';
-import HorizontalLinksBar from './_children/horizontal-links/default';
-import StyledNav from './_children/StyledNav';
-import StyledWarning from './_children/StyledWarning';
-import StyledSectionDrawer from './_children/StyledSectionDrawer';
 
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
+import HorizontalLinksBar from './_children/horizontal-links/default';
+
+/* Global Constants */
+// Since these values are used to coordinate multiple components, I thought I'd make them variables
+// so we could just change the vars instead of multiple CSS values
+const standardNavHeight = 56;
+const navZIdx = 9;
+const sectionZIdx = navZIdx - 1;
+
+/* Styled Components */
+const StyledNav = styled.nav`
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  margin-bottom: 0;
+  z-index: 1;
+  .news-theme-navigation-bar {
+    @media screen and (max-width: ${(props) => props.breakpoint}px) {
+      height: ${standardNavHeight}px;
+    }
+    @media screen and (min-width: ${(props) => props.breakpoint}px) {
+      height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+    }
+    background-color: ${(props) => props.navBarBackground};
+    transition: 0.5s;
+    z-index: ${navZIdx};
+  }
+  .nav-logo {
+    img {
+      height: auto;
+      max-width: 240px;
+      width: auto;
+      transition: 0.5s;
+      @media screen and (max-width: ${(props) => props.breakpoint}px) {
+        max-height: 40px;
+        min-width: 40px;
+      }
+      @media screen and (min-width: ${(props) => props.breakpoint}px) {
+        max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+        min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+      }
+    }
+  }
+`;
+
+const StyledSectionDrawer = styled.div`
+  z-index: ${sectionZIdx};
+  @media screen and (max-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${standardNavHeight}px;
+  }
+  @media screen and (min-width: ${(props) => props.breakpoint}px) {
+    margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+  }
+`;
+
+const StyledWarning = styled.div`
+  background-color: #c30;
+  color: #fff;
+  display: flex;
+  align-self: flex-start;
+  padding: 6px;
+`;
 
 /* Main Component */
 const Nav = (props) => {

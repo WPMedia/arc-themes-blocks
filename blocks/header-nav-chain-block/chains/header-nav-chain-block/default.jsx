@@ -217,7 +217,6 @@ const Nav = (props) => {
       <div key={side} className={`nav-${side}`}>
         {
           // Support for deprecated 'signInOrder' custom field
-          // signInOrder is hidden now
           // "If" condition is for rendering "signIn" element
           // "Else" condition is for standard nav bar customization logic
           side === 'right'

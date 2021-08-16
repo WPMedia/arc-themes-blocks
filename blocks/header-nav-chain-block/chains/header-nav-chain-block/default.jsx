@@ -19,7 +19,6 @@ import {
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
 import NavWidget from './_children/nav-widget';
-
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
@@ -40,6 +39,7 @@ const StyledNav = styled.nav`
   top: 0;
   margin-bottom: 0;
   z-index: 1;
+
   .news-theme-navigation-bar {
     @media screen and (max-width: ${(props) => props.breakpoint}px) {
       height: ${standardNavHeight}px;
@@ -51,12 +51,14 @@ const StyledNav = styled.nav`
     transition: 0.5s;
     z-index: ${navZIdx};
   }
+
   .nav-logo {
     img {
       height: auto;
       max-width: 240px;
       width: auto;
       transition: 0.5s;
+      
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
         min-width: 40px;

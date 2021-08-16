@@ -56,8 +56,6 @@ const NavWidget = ({
   );
 
   return predefinedWidget || (
-    // if "custom" widget type
-    // then checks for children and the zero-index position
     children
     && children.length > 0
     && position

@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useMemo, useState,
+  useEffect, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import { useContent } from 'fusion:content';
@@ -213,6 +213,7 @@ const Nav = (props) => {
   };
 
   const NavSection = ({ side }) => (
+    // istanbul ignore next
     !side ? null : (
       <div key={side} className={`nav-${side}`}>
         {

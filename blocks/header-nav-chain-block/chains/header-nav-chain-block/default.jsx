@@ -260,9 +260,6 @@ const Nav = (props) => {
     );
   };
 
-  // memoizing as children props are causing re-renders
-  const rightMemoizedNavSection = useMemo(() => <NavSection side="right" />, []);
-
   return (
     <StyledNav
       id="main-nav"
@@ -284,7 +281,7 @@ const Nav = (props) => {
           ariaLabel={ariaLabelLink}
         />
         )}
-        {rightMemoizedNavSection}
+        <NavSection side="right" />
       </div>
 
       <StyledSectionDrawer

@@ -7,7 +7,6 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import { useDebouncedCallback } from 'use-debounce';
 import FocusTrap from 'focus-trap-react';
 import {
   WIDGET_CONFIG,
@@ -106,7 +105,6 @@ const Nav = (props) => {
   const sections = (mainContent && mainContent.children) ? mainContent.children : [];
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
-  const [isLogoVisible, setLogoVisibility] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const closeNavigation = () => {
@@ -127,26 +125,6 @@ const Nav = (props) => {
     document.body.classList.toggle('nav-open');
   };
 
-  const onScrollEvent = (evt) => {
-    if (!evt) {
-      return;
-    }
-
-    const scrollTop = evt.target?.documentElement?.scrollTop;
-    if (typeof scrollTop === 'undefined') {
-      return;
-    }
-
-    if (scrollTop > 150) {
-      setLogoVisibility(true);
-    }
-    if (scrollTop < 30) {
-      setLogoVisibility(false);
-    }
-  };
-
-  const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
-
   // istanbul ignore next
   useEffect(() => {
     const handleEscKey = (event) => {
@@ -160,42 +138,6 @@ const Nav = (props) => {
       window.removeEventListener('keydown', handleEscKey);
     };
   }, []);
-
-  useEffect(() => {
-    const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
-    if (!mastHead) {
-      return undefined;
-    }
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    // on small viewports we do not need this
-    if (vw >= breakpoints.medium) {
-      window.addEventListener('scroll', onScrollDebounced);
-      return () => {
-        window.removeEventListener('scroll', onScrollDebounced);
-      };
-    }
-    // istanbul ignore next
-    return undefined;
-  }, [onScrollDebounced, breakpoints]);
-
-  useEffect(() => {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (vw < breakpoints.medium) {
-      setLogoVisibility(true);
-      return undefined;
-    }
-
-    const timerID = setTimeout(() => {
-      const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
-      if (!mastHead) {
-        setLogoVisibility(true);
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerID);
-    };
-  }, [breakpoints]);
 
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -256,14 +198,13 @@ const Nav = (props) => {
             key={`${id}_${breakpoint}_${i}`}
           >
             <NavWidget
-              // passes in props.children and props.id
-              // passing in props.children is linting violation
-              {...props}
               type={navWidgetType}
               position={customFields[cFieldIndexKey]}
               placement={placement}
               menuButtonClickAction={hamburgerClick}
-            />
+            >
+              {children}
+            </NavWidget>
           </div>,
         );
       }
@@ -334,7 +275,7 @@ const Nav = (props) => {
     >
       <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
         <NavSection side="left" />
-        <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
+        <NavLogo alignment={logoAlignment} />
         {displayLinks && (
         <HorizontalLinksBar
           hierarchy={horizontalLinksHierarchy}

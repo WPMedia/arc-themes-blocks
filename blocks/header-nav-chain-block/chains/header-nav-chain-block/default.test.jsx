@@ -92,9 +92,6 @@ describe('the header navigation feature for the default output type', () => {
   });
 
   describe('sections menu widgets/buttons', () => {
-    describe('sections menu default configuration', () => {
-    });
-
     describe('sections menu custom configuration', () => {
       const testSectionMenuWidget = (customFields, breakpoint) => {
         const TestComponent = jest.fn(() => <div id="test-component" />);

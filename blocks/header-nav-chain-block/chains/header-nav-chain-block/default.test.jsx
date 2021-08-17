@@ -89,7 +89,6 @@ describe('the header navigation feature for the default output type', () => {
         expect(widgetList.children()).toHaveLength(0);
       });
     });
-
   });
 
   describe('sections menu widgets/buttons', () => {

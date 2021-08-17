@@ -12,17 +12,17 @@ import {
   PLACEMENT_AREAS,
   NAV_BREAKPOINTS,
   getNavComponentPropTypeKey,
-  getNavComponentIndexPropTypeKey,
   generateNavComponentPropTypes,
   getNavComponentDefaultSelection,
 } from './nav-helper';
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
-import NavWidget from './_children/nav-widget';
+import HorizontalLinksBar from './_children/horizontal-links/default';
+import WidgetList from './_children/widget-list';
+import NavSection from './_children/nav-section';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
-import HorizontalLinksBar from './_children/horizontal-links/default';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -242,64 +242,6 @@ const Nav = (props) => {
     return userHasConfigured;
   };
 
-  const WidgetList = ({ id, breakpoint, placement }) => {
-    // istanbul ignore next
-    if (!id || !breakpoint) return null;
-    const { slotCounts } = WIDGET_CONFIG[placement];
-    const widgetList = [];
-    for (let i = 1; i <= slotCounts[breakpoint]; i += 1) {
-      const cFieldKey = getNavComponentPropTypeKey(id, breakpoint, i);
-      const cFieldIndexKey = getNavComponentIndexPropTypeKey(id, breakpoint, i);
-      const navWidgetType = getNavWidgetType(cFieldKey);
-      if (!!navWidgetType && navWidgetType !== 'none') {
-        widgetList.push(
-          <div
-            className="nav-widget"
-            key={`${id}_${breakpoint}_${i}`}
-          >
-            <NavWidget
-              type={navWidgetType}
-              position={customFields[cFieldIndexKey]}
-              placement={placement}
-              menuButtonClickAction={hamburgerClick}
-            >
-              {children}
-            </NavWidget>
-          </div>,
-        );
-      }
-    }
-    return widgetList;
-  };
-
-  const NavSection = ({ side }) => (
-    // istanbul ignore next
-    !side ? null : (
-      <div key={side} className={`nav-${side}`}>
-        {
-          // Support for deprecated 'signInOrder' custom field
-          // "If" condition is for rendering "signIn" element
-          // "Else" condition is for standard nav bar customization logic
-          side === 'right'
-          && !hasUserConfiguredNavItems()
-          && signInOrder
-          && Number.isInteger(signInOrder)
-          && children[signInOrder - 1]
-            ? children[signInOrder - 1]
-            : NAV_BREAKPOINTS.map((breakpoint) => (
-              <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-                <WidgetList
-                  id={side}
-                  breakpoint={breakpoint}
-                  placement={PLACEMENT_AREAS.NAV_BAR}
-                />
-              </div>
-            ))
-        }
-      </div>
-    )
-  );
-
   // 56 pixels nav height on scroll
   const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
 
@@ -310,8 +252,11 @@ const Nav = (props) => {
         {NAV_BREAKPOINTS.map((breakpoint) => (
           <div key={breakpoint} className={`nav-components--${breakpoint}`}>
             <WidgetList
-              id={navSection}
               breakpoint={breakpoint}
+              customFields={customFields}
+              getNavWidgetType={getNavWidgetType}
+              hamburgerClick={hamburgerClick}
+              id={navSection}
               placement={PLACEMENT_AREAS.SECTION_MENU}
             />
           </div>
@@ -331,7 +276,16 @@ const Nav = (props) => {
       aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
     >
       <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-        <NavSection side="left" />
+        <NavSection
+          customFields={customFields}
+          getNavWidgetType={getNavWidgetType}
+          hamburgerClick={hamburgerClick}
+          hasUserConfiguredNavItems={hasUserConfiguredNavItems}
+          side="left"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
         <NavLogo alignment={logoAlignment} />
         {displayLinks && (
         <HorizontalLinksBar
@@ -341,7 +295,16 @@ const Nav = (props) => {
           ariaLabel={ariaLabelLink}
         />
         )}
-        <NavSection side="right" />
+        <NavSection
+          customFields={customFields}
+          getNavWidgetType={getNavWidgetType}
+          hamburgerClick={hamburgerClick}
+          hasUserConfiguredNavItems={hasUserConfiguredNavItems}
+          side="right"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
       </div>
 
       <StyledSectionDrawer

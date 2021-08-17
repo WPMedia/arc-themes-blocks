@@ -5,7 +5,6 @@ import WidgetList from './widget-list';
 const MenuWidgets = ({
   children,
   customFields,
-  getNavWidgetType,
   menuButtonClickAction,
 }) => (
   <div key="menu" className="nav-menu">
@@ -14,7 +13,6 @@ const MenuWidgets = ({
         <WidgetList
           breakpoint={breakpoint}
           customFields={customFields}
-          getNavWidgetType={getNavWidgetType}
           id="menu"
           menuButtonClickAction={menuButtonClickAction}
           placement={PLACEMENT_AREAS.SECTION_MENU}

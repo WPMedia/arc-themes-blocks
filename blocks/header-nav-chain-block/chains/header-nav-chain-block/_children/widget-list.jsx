@@ -3,6 +3,7 @@ import {
   WIDGET_CONFIG,
   getNavComponentPropTypeKey,
   getNavComponentIndexPropTypeKey,
+  getNavWidgetType,
 } from '../nav-helper';
 import NavWidget from './nav-widget';
 
@@ -10,7 +11,6 @@ const WidgetList = ({
   breakpoint,
   children,
   customFields,
-  getNavWidgetType,
   id,
   menuButtonClickAction,
   placement,
@@ -22,7 +22,7 @@ const WidgetList = ({
   for (let i = 1; i <= slotCounts[breakpoint]; i += 1) {
     const cFieldKey = getNavComponentPropTypeKey(id, breakpoint, i);
     const cFieldIndexKey = getNavComponentIndexPropTypeKey(id, breakpoint, i);
-    const navWidgetType = getNavWidgetType(cFieldKey);
+    const navWidgetType = getNavWidgetType(cFieldKey, customFields);
     if (!!navWidgetType && navWidgetType !== 'none') {
       widgetList.push(
         <div

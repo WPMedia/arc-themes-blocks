@@ -125,19 +125,6 @@ describe('the header navigation feature for the default output type', () => {
 
   describe('sections menu widgets/buttons', () => {
     describe('sections menu default configuration', () => {
-      it('should render a search widget in the sections menu on mobile', () => {
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        const container = wrapper.find('#nav-sections .nav-menu');
-        expect(container.find('.nav-components--mobile').find(SearchBox)).toHaveLength(1);
-      });
-
-      it('should render nothing in the sections menu on desktop', () => {
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        const container = wrapper.find('#nav-sections .nav-menu');
-        const widgetList = container.find('.nav-components--desktop > WidgetList');
-        expect(widgetList).toHaveLength(1);
-        expect(widgetList.children()).toHaveLength(0);
-      });
     });
 
     describe('sections menu custom configuration', () => {

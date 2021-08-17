@@ -1,12 +1,10 @@
 import React from 'react';
-import { NAV_BREAKPOINTS, PLACEMENT_AREAS } from '../nav-helper';
+import { hasUserConfiguredNavItems, NAV_BREAKPOINTS, PLACEMENT_AREAS } from '../nav-helper';
 import WidgetList from './widget-list';
 
 const NavSection = ({
   children,
   customFields,
-  getNavWidgetType,
-  hasUserConfiguredNavItems,
   menuButtonClickAction,
   side,
   signInOrder,
@@ -19,7 +17,7 @@ const NavSection = ({
         // "If" condition is for rendering "signIn" element
         // "Else" condition is for standard nav bar customization logic
         side === 'right'
-        && !hasUserConfiguredNavItems(getNavWidgetType)
+        && !hasUserConfiguredNavItems(customFields)
         && signInOrder
         && Number.isInteger(signInOrder)
         && children[signInOrder - 1]
@@ -29,7 +27,6 @@ const NavSection = ({
               <WidgetList
                 breakpoint={breakpoint}
                 customFields={customFields}
-                getNavWidgetType={getNavWidgetType}
                 id={side}
                 menuButtonClickAction={menuButtonClickAction}
                 placement={PLACEMENT_AREAS.NAV_BAR}

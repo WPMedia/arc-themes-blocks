@@ -8,12 +8,7 @@ import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 import FocusTrap from 'focus-trap-react';
 import {
-  WIDGET_CONFIG,
-  PLACEMENT_AREAS,
-  NAV_BREAKPOINTS,
-  getNavComponentPropTypeKey,
   generateNavComponentPropTypes,
-  getNavComponentDefaultSelection,
 } from './nav-helper';
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
@@ -219,29 +214,6 @@ const Nav = (props) => {
     };
   }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, breakpoints]);
 
-  const getNavWidgetType = (fieldKey) => (
-    customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
-  );
-
-  const hasUserConfiguredNavItems = () => {
-    let userHasConfigured = false;
-    const {
-      slotCounts,
-      sections: navBarSections,
-    } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
-    navBarSections.forEach((side) => {
-      NAV_BREAKPOINTS.forEach((bpoint) => {
-        for (let i = 1; i <= slotCounts[bpoint]; i += 1) {
-          const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
-          const navWidgetType = getNavWidgetType(cFieldKey);
-          const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
-          if (!userHasConfigured && matchesDefault) userHasConfigured = true;
-        }
-      });
-    });
-    return userHasConfigured;
-  };
-
   // 56 pixels nav height on scroll
   const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
 
@@ -258,8 +230,6 @@ const Nav = (props) => {
       <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
         <NavSection
           customFields={customFields}
-          getNavWidgetType={getNavWidgetType}
-          hasUserConfiguredNavItems={hasUserConfiguredNavItems}
           menuButtonClickAction={menuButtonClickAction}
           side="left"
           signInOrder={signInOrder}
@@ -277,8 +247,6 @@ const Nav = (props) => {
         )}
         <NavSection
           customFields={customFields}
-          getNavWidgetType={getNavWidgetType}
-          hasUserConfiguredNavItems={hasUserConfiguredNavItems}
           menuButtonClickAction={menuButtonClickAction}
           side="right"
           signInOrder={signInOrder}
@@ -323,7 +291,6 @@ const Nav = (props) => {
             >
               <MenuWidgets
                 customFields={customFields}
-                getNavWidgetType={getNavWidgetType}
                 menuButtonClickAction={menuButtonClickAction}
               >
                 {children}

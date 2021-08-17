@@ -27,11 +27,9 @@ export const PaywallOfferBody = ({
   const [ pwOffer, setPwOffer ] = useState();
   useEffect(() => {
     const selectedOffer = pwOffer ? pwOffer : offer;
-    console.log('fffers', pwOffer, offer);
     if (selectedOffer) {
       setTitle(selectedOffer.pageTitle);
       setSubtitle(selectedOffer.pageSubTitle);
-      console.log('setting selectedOffer title', selectedOffer);
     }
   }, [ offer, pwOffer ]);
 
@@ -58,7 +56,6 @@ export const PaywallOfferBody = ({
   useEffect(() => {
     if (triggeredRule && triggeredRules) {
       if (triggeredRule.e && triggeredRule.e.length > 1) {
-        console.log('triggered rule setting', triggeredRule);
         setPw(triggeredRule.pw);
         return;
       }
@@ -67,13 +64,11 @@ export const PaywallOfferBody = ({
           .sort((a, b) => b.rt[1] - a.rt[1]);
         const triggered = triggeredz
           .find(rule => rule.e && rule.e.length > 1) || {};
-        console.log('looking at all rules...', triggeredz, triggered);
         setPw(triggered.pw);
         return;
       }
     }
   }, [ triggeredRule, triggeredRules ]);
-  console.log('triggered', paywallResults, triggeredRule, triggeredRules, pw);
 
   const isPwUrl = pw && isUrl(pw);
   const campaign = campaignCode ? campaignCode : !isPwUrl ? pw : 'default';
@@ -99,7 +94,7 @@ export const PaywallOfferBody = ({
         className="xpmedia-paywall--subtitle"
         dangerouslySetInnerHTML={{ __html: subtitle }}
       /> : null}
-      {offerURL || isPwUrl ? <a href={isPwUrl ? pw : `${offerURL}?_cid=${campaign}`} className="xpmedia-paywall--button">Subscribe</a> : null}
+      <a href={isPwUrl ? pw : `${offerURL}?_cid=${campaign}`} className="xpmedia-paywall--button">Subscribe</a>
     </>
   );
 };

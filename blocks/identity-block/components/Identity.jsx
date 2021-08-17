@@ -9,9 +9,29 @@ const useIdentity = () => {
   const { subscriptions } = getProperties(arcSite);
   const [ isInit, setIsInit ] = useState(() => !!Identity.apiOrigin);
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  if (!isInit && arcSite && subscriptions?.identity?.apiOrigin) {
+    const arcHeaders = { 'Arc-Organization': 'staging', 'Arc-Site': 'staging' };
+    if (!isServerSide()) {
+      if (!window.realFetch) {
+        window.realFetch = window.fetch;
+      }
+      window.fetch = (url, opts) => {
+        const modifiedOpts = {
+          ...opts,
+        };
 
-  Identity.options({ apiOrigin: subscriptions?.identity?.apiOrigin });
-  setIsInit(true);
+        if (/(retail|sales|identity)/.test(url)) {
+          modifiedOpts.headers = {
+            ...opts.headers,
+            ...arcHeaders,
+          };
+        }
+        return window.realFetch(url, modifiedOpts);
+      };
+    }
+    Identity.options({ apiOrigin: subscriptions?.identity?.apiOrigin });
+    setIsInit(true);
+  }
 
   useEffect(() => {
     const loggedIn = async () => {

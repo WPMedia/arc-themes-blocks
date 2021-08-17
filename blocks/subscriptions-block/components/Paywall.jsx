@@ -19,72 +19,82 @@ export const usePaywall = (options = {}) => {
   const { Identity, isInitialized } = useIdentity();
   const { arcSite, globalContent } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
-  const rules = window.ArcP._rules;
+  const rules = window && window.ArcP && window.ArcP._rules;
 
   useEffect(() => {
     const runPaywall = async () => {
-      const results = await window.ArcP.run({
+      const results = window && window.ArcP && await window.ArcP.run({
         Identity,
         apiOrigin: subscriptions.sales.apiOrigin,
         paywallFunction: (response) => {
           setTriggeredResults(response);
-          setIsPaywalled(true)
+          setIsPaywalled(true);
         },
         contentType: globalContent.type,
         contentIdentifier: globalContent.canonical_url,
         section: globalContent.taxonomy.primary_section._id,
         contentRestriction: globalContent.content_restrictions.content_code,
+        headers: {'arc-site': 'staging', 'arc-organization': 'staging'},
         ...options
       });
       setResults(results);
     };
-    if (Identity && isInitialized && !isServerSide()) {
+    if (Identity && isInitialized && !isServerSide() && !isPaywalled) {
       runPaywall();
     }
-  }, [Identity, isInitialized, isServerSide, globalContent.canonical_url]);
+  }, [Identity, isInitialized, isServerSide, isPaywalled, globalContent.canonical_url]);
 
   useEffect(() => {
     if (results) {
-      const ruleId = results.triggererd && results.triggered.id;
+      const ruleId = results.triggered && results.triggered.id;
       const rc = results.triggered && results.triggered.rc;
-      const triggeredRule = rules.find(rule => ruleId === rule.id);
-      const otherTriggeredRules = rules.filter(rule => rule.rt[1] < rc);
-      setTriggeredRule(triggeredRule);
-      setOtherTriggeredRules(otherTriggeredRules);
+      const newTriggeredRule = rules.find(rule => ruleId === rule.id);
+      const newOtherTriggeredRules = rules.filter(rule => rule.rt[1] < rc);
+      console.log('ok... ', triggeredRule, otherTriggeredRules, newTriggeredRule, newOtherTriggeredRules);
+      if (!triggeredRule || triggeredRule.id !== newTriggeredRule.id) {
+        setTriggeredRule(newTriggeredRule);
+      }
+      if ((!otherTriggeredRules.length && newOtherTriggeredRules.length) || (otherTriggeredRules !== newOtherTriggeredRules)) {
+        setOtherTriggeredRules(newOtherTriggeredRules);
+      }
     }
-  }, [results, rules ]);
+  }, [ results, rules ]);
 
   useEffect(() => {
-    if (triggeredRule && otherTriggeredRules) {
-      if (triggeredRule.e && triggeredRule.e.length > 1) {
+    if (triggeredRule || otherTriggeredRules) {
+      if (triggeredRule && triggeredRule.e && triggeredRule.e.length > 1) {
         setIsSignwall(false);
         return;
       }
-      if (otherTriggeredRules.length) {
+      if (otherTriggeredRules && otherTriggeredRules.length) {
         const paywallRule = otherTriggeredRules
           .sort((a, b) => b.rt[1] - a.rt[1])
           .find(rule => rule.e && rule.e.length > 1) || {};
 
         setIsSignwall(!paywallRule);
-        setTriggeredRule(paywallRule);
+        if (triggeredRule !== paywallRule) {
+          setTriggeredRule(paywallRule);
+        }
         return;
       }
-      if (triggeredRule.e && triggeredRule.e.length === 1) {
+      if (triggeredRule && triggeredRule.e && triggeredRule.e.length === 1) {
+        console.log('...setting signwall...', triggeredRule);
         setIsSignwall(true);
         return;
       }
     }
   }, [ triggeredRule, otherTriggeredRules ]);
-
+  console.log('triggered', triggeredRule, otherTriggeredRules, isSignwall, isPaywalled);
   return {
     isPaywalled,
     results,
     triggeredResults,
     triggeredRule,
     isSignwall,
+    getTriggeredRule: () => triggeredRule,
     getIsPaywalledStatus: () => isPaywalled,
     getPaywallResults: () => results,
-    ArcP: window.ArcP,
+    ArcP: window && window.ArcP,
     rules: rules,
   };
 };

@@ -46,6 +46,92 @@ export const allSizes = () => (
   />
 );
 
+export const allSizesNoOverline = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showOverlineXL: false,
+    showOverlineLG: false,
+  }}
+  />
+);
+
+export const allSizesNoHeadlines = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showHeadlineXL: false,
+    showHeadlineLG: false,
+    showHeadlineMD: false,
+    showHeadlineSM: false,
+  }}
+  />
+);
+
+export const allSizesNoDescriptions = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showDescriptionXL: false,
+    showDescriptionLG: false,
+    showDescriptionMD: false,
+  }}
+  />
+);
+
+export const allSizesNoImages = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showImageXL: false,
+    showImageLG: false,
+    showImageMD: false,
+    showImageSM: false,
+  }}
+  />
+);
+
+export const allSizesNoByLines = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showBylineXL: false,
+    showBylineLG: false,
+    showBylineMD: false,
+  }}
+  />
+);
+
+export const allSizesNoByDates = () => (
+  <TopTableList customFields={{
+    ...config,
+    extraLarge: 1,
+    large: 1,
+    medium: 1,
+    small: 2,
+    showDateXL: false,
+    showDateLG: false,
+    showDateMD: false,
+  }}
+  />
+);
+
+
 export const oneExtraLarge = () => (
   <TopTableList customFields={{
     ...config,

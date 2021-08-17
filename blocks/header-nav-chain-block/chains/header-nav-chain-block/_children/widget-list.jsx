@@ -11,8 +11,8 @@ const WidgetList = ({
   children,
   customFields,
   getNavWidgetType,
-  hamburgerClick,
   id,
+  menuButtonClickAction,
   placement,
 }) => {
   // istanbul ignore next
@@ -30,10 +30,10 @@ const WidgetList = ({
           key={`${id}_${breakpoint}_${i}`}
         >
           <NavWidget
-            type={navWidgetType}
-            position={customFields[cFieldIndexKey]}
+            menuButtonClickAction={menuButtonClickAction}
             placement={placement}
-            menuButtonClickAction={hamburgerClick}
+            position={customFields[cFieldIndexKey]}
+            type={navWidgetType}
           >
             {children}
           </NavWidget>

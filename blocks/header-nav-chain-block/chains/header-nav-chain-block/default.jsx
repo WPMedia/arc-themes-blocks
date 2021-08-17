@@ -18,8 +18,8 @@ import {
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
 import HorizontalLinksBar from './_children/horizontal-links/default';
-import WidgetList from './_children/widget-list';
 import NavSection from './_children/nav-section';
+import MenuWidgets from './_children/menu-widgets';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
@@ -180,7 +180,7 @@ const Nav = (props) => {
     closeNavigation();
   };
 
-  const hamburgerClick = () => {
+  const menuButtonClickAction = () => {
     setSectionDrawerOpen(!isSectionDrawerOpen);
     document.body.classList.toggle('nav-open');
   };
@@ -245,26 +245,6 @@ const Nav = (props) => {
   // 56 pixels nav height on scroll
   const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
 
-  const MenuWidgets = () => {
-    const navSection = 'menu';
-    return (
-      <div key={navSection} className={`nav-${navSection}`}>
-        {NAV_BREAKPOINTS.map((breakpoint) => (
-          <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-            <WidgetList
-              breakpoint={breakpoint}
-              customFields={customFields}
-              getNavWidgetType={getNavWidgetType}
-              hamburgerClick={hamburgerClick}
-              id={navSection}
-              placement={PLACEMENT_AREAS.SECTION_MENU}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <StyledNav
       id="main-nav"
@@ -279,8 +259,8 @@ const Nav = (props) => {
         <NavSection
           customFields={customFields}
           getNavWidgetType={getNavWidgetType}
-          hamburgerClick={hamburgerClick}
           hasUserConfiguredNavItems={hasUserConfiguredNavItems}
+          menuButtonClickAction={menuButtonClickAction}
           side="left"
           signInOrder={signInOrder}
         >
@@ -298,8 +278,8 @@ const Nav = (props) => {
         <NavSection
           customFields={customFields}
           getNavWidgetType={getNavWidgetType}
-          hamburgerClick={hamburgerClick}
           hasUserConfiguredNavItems={hasUserConfiguredNavItems}
+          menuButtonClickAction={menuButtonClickAction}
           side="right"
           signInOrder={signInOrder}
         >
@@ -341,7 +321,13 @@ const Nav = (props) => {
               isHidden={!isSectionDrawerOpen}
               navHeight={scrollAdjustedNavHeight}
             >
-              <MenuWidgets />
+              <MenuWidgets
+                customFields={customFields}
+                getNavWidgetType={getNavWidgetType}
+                menuButtonClickAction={menuButtonClickAction}
+              >
+                {children}
+              </MenuWidgets>
             </SectionNav>
           </div>
         </FocusTrap>

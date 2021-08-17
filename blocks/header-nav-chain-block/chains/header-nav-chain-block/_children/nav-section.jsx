@@ -6,8 +6,8 @@ const NavSection = ({
   children,
   customFields,
   getNavWidgetType,
-  hamburgerClick,
   hasUserConfiguredNavItems,
+  menuButtonClickAction,
   side,
   signInOrder,
 }) => (
@@ -30,8 +30,8 @@ const NavSection = ({
                 breakpoint={breakpoint}
                 customFields={customFields}
                 getNavWidgetType={getNavWidgetType}
-                hamburgerClick={hamburgerClick}
                 id={side}
+                menuButtonClickAction={menuButtonClickAction}
                 placement={PLACEMENT_AREAS.NAV_BAR}
               >
                 {children}

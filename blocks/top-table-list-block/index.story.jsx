@@ -131,7 +131,6 @@ export const allSizesNoByDates = () => (
   />
 );
 
-
 export const oneExtraLarge = () => (
   <TopTableList customFields={{
     ...config,

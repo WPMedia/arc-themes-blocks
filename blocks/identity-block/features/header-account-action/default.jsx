@@ -59,18 +59,22 @@ const HeaderAccountAction = ({ customFields }) => {
 
   const AccountMenu = () => (
     <ul className="menu">
-      <PrimaryFont as="li" className="menu-item">Manage Your Account</PrimaryFont>
-      <PrimaryFont as="li" className="menu-item">Log Out</PrimaryFont>
+      <li className="menu-item">
+        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">Manage Your Account</PrimaryFont>
+      </li>
+      <li className="menu-item">
+        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">Log Out</PrimaryFont>
+      </li>
     </ul>
   );
 
   const AccountDropdown = () => (
     <div className="xpmedia-subs-header">
-      <button type="button" className="xpmedia-subs-header--button" onClick={() => setAccountMenu(!accountMenuToggle)}>
-        <UserIcon fill="#fff" height={accountIconSize} width={accountIconSize} />
+      <button type="button" className="xpmedia-subs-header--button account-button" onClick={() => setAccountMenu(!accountMenuToggle)}>
+        <UserIcon fill={getThemeStyle(arcSite)['primary-color']} height={accountIconSize} width={accountIconSize} />
         <PrimaryFont
           as="span"
-          primaryColor={getThemeStyle(arcSite)['primary-color']}
+          fontColor="primary-color"
           className="account-text"
         >
           Account
@@ -78,8 +82,8 @@ const HeaderAccountAction = ({ customFields }) => {
         <span className="submenu-caret">
           {
             accountMenuToggle
-              ? <ChevronUpIcon fill="rgba(255, 255, 255, 0.5)" height={caretSize} width={caretSize} />
-              : <ChevronDownIcon fill="rgba(255, 255, 255, 0.5)" height={caretSize} width={caretSize} />
+              ? <ChevronUpIcon fill={getThemeStyle(arcSite)['primary-color']} height={caretSize} width={caretSize} />
+              : <ChevronDownIcon fill={getThemeStyle(arcSite)['primary-color']} height={caretSize} width={caretSize} />
           }
         </span>
       </button>

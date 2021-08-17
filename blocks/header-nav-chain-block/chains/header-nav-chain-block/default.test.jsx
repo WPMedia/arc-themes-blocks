@@ -90,37 +90,6 @@ describe('the header navigation feature for the default output type', () => {
       });
     });
 
-    // The 'signInOrder' custom field is deprecated but still necessary for compatibility
-    describe('when the signInOrder customField is set', () => {
-      describe('when no child component exists at the signInOrder index', () => {
-        it('should render nothing inside the .nav-right', () => {
-          const wrapper = mount(
-            <Navigation customFields={{ ...DEFAULT_SELECTIONS, signInOrder: 2 }}>
-              {[<button key={1} type="button">Sign In</button>]}
-            </Navigation>,
-          );
-          const widgetListMobile = wrapper.find('.nav-right > .nav-components--mobile > WidgetList');
-          const widgetListDesktop = wrapper.find('.nav-right > .nav-components--desktop > WidgetList');
-          expect(widgetListMobile).toHaveLength(1);
-          expect(widgetListDesktop).toHaveLength(1);
-          expect(widgetListMobile.children()).toHaveLength(0);
-          expect(widgetListDesktop.children()).toHaveLength(0);
-        });
-      });
-
-      describe('when a child component exists at the signInOrder index', () => {
-        it('should render the child component inside the .nav-right', () => {
-          const wrapper = mount(
-            <Navigation customFields={{ signInOrder: 1 }}>
-              {[<button key={1} type="button">Sign In</button>]}
-            </Navigation>,
-          );
-          const navRight = wrapper.find('.nav-right');
-          expect(navRight.children()).toHaveLength(1);
-          expect(navRight.find('button')).toHaveText('Sign In');
-        });
-      });
-    });
   });
 
   describe('sections menu widgets/buttons', () => {

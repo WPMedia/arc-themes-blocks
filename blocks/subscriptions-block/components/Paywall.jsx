@@ -27,7 +27,6 @@ export const usePaywall = (options = {}) => {
         Identity,
         apiOrigin: subscriptions.sales.apiOrigin,
         paywallFunction: (response) => {
-          console.log('paywall triggered', response);
           setTriggeredResults(response);
           setIsPaywalled(true);
         },
@@ -35,13 +34,12 @@ export const usePaywall = (options = {}) => {
         contentIdentifier: globalContent.canonical_url,
         section: globalContent.taxonomy.primary_section._id,
         contentRestriction: globalContent.content_restrictions.content_code,
-        headers: {'arc-site': 'staging', 'arc-organization': 'staging'},
+        headers: subscriptions.headers,
         ...options
       });
       setResults(results);
     };
     if (Identity && isInitialized && !isServerSide() && !isPaywalled) {
-      console.log('running paywall');
       runPaywall();
     }
   }, [Identity, isInitialized, isServerSide, isPaywalled, globalContent.canonical_url]);
@@ -52,7 +50,6 @@ export const usePaywall = (options = {}) => {
       const rc = results.triggered && results.triggered.rc;
       const newTriggeredRule = rules.find(rule => ruleId === rule.id);
       const newOtherTriggeredRules = rules.filter(rule => rule.rt[1] < rc);
-      console.log('ok... ', triggeredRule, otherTriggeredRules, newTriggeredRule, newOtherTriggeredRules);
       if (!triggeredRule || triggeredRule.id !== newTriggeredRule.id) {
         setTriggeredRule(newTriggeredRule);
       }
@@ -71,22 +68,19 @@ export const usePaywall = (options = {}) => {
       if (otherTriggeredRules && otherTriggeredRules.length) {
         const paywallRule = otherTriggeredRules
           .sort((a, b) => b.rt[1] - a.rt[1])
-          .find(rule => rule.e && rule.e.length > 1) || {};
-
+          .find(rule => rule.e && rule.e.length > 1);
         setIsSignwall(!paywallRule);
-        if (triggeredRule !== paywallRule) {
+        if (paywallRule && triggeredRule !== paywallRule) {
           setTriggeredRule(paywallRule);
         }
         return;
       }
       if (triggeredRule && triggeredRule.e && triggeredRule.e.length === 1) {
-        console.log('...setting signwall...', triggeredRule);
         setIsSignwall(true);
         return;
       }
     }
   }, [ triggeredRule, otherTriggeredRules ]);
-  console.log('triggered', triggeredRule, otherTriggeredRules, isSignwall, isPaywalled);
   return {
     isPaywalled,
     results,

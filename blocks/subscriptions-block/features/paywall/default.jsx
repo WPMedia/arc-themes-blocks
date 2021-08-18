@@ -30,7 +30,7 @@ const Paywall = ({
     <div className="xpmedia-paywall">
       <div className="xpmedia-paywall-container">
         {
-          isSignwall && !isLoggedIn ? (
+          isSignwall ? (
             <SignwallBody
               signUpURL={signUpURL}
               loginURL={loginURL}

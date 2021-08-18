@@ -1,11 +1,14 @@
 import React from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import './styles.scss';
+import { useIdentity } from '@wpmedia/identity-block';
 
 const SignwallBody = ({ signUpURL, loginURL }) => {
-  if (isServerSide()) {
+  const { Identity, isInitialized } = useIdentity();
+  if (!isInitialized && isServerSide()) {
     return null;
   }
+
 
   return (
     <>

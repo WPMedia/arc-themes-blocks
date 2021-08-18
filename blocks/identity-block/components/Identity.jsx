@@ -10,7 +10,7 @@ const useIdentity = () => {
   const [ isInit, setIsInit ] = useState(() => !!Identity.apiOrigin);
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   if (!isInit && arcSite && subscriptions?.identity?.apiOrigin) {
-    const arcHeaders = { 'Arc-Organization': 'staging', 'Arc-Site': 'staging' };
+    const arcHeaders = subscriptions.headers;
     if (!isServerSide()) {
       if (!window.realFetch) {
         window.realFetch = window.fetch;

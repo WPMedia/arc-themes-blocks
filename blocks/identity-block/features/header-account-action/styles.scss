@@ -9,15 +9,10 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 2px;
     color: #fff;
-    font-size: 1rem;
     font-weight: bold;
     height: 2rem;
     padding: 0 0.5rem;
     text-decoration: none;
-
-    .account-text {
-      padding: 0 8px;
-    }
 
     &:hover {
       color: #fff;
@@ -29,9 +24,26 @@
     background-color: #fff;
     transition: 500ms;
 
+    .account-text {
+      padding: 0 8px;
+    }
+
     &:hover {
       filter: brightness(0.85);
       cursor: default;
+    }
+
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      right: 16px;
+      position: relative;
+
+      .account-text {
+        display: none;
+      }
+
+      .submenu-caret {
+        display: none;
+      }
     }
   }
 
@@ -51,7 +63,7 @@
     .menu-item {
       width: 179px;
       margin: 0 0 8px;
-      font-size: 1rem;
+      font-size: 0.875rem;
       line-height: 1.5;
       text-align: left;
 
@@ -63,6 +75,10 @@
           cursor: default;
         }
       }
+    }
+
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      right: 16px;
     }
   }
 }

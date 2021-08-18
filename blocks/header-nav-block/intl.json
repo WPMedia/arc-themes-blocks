@@ -1,4 +1,15 @@
 {
+	"header-nav-block.search-text": {
+		"de": "Suche",
+		"en": "Search",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
+		"no": "Søk",
+		"pt": "Procurar",
+		"sv": "Sök"
+	},
 	"header-nav-block.sections-button": {
 		"de": "Rubriken",
 		"en": "Sections",
@@ -20,16 +31,5 @@
 		"no": "Logg inn",
 		"pt": "Iniciar sessão",
 		"sv": "Logga in"
-	},
-	"header-nav-block.search-text": {
-		"de": "Suche",
-		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
-		"no": "Søk",
-		"pt": "Procurar",
-		"sv": "Sök"
 	}
 }

@@ -25,6 +25,7 @@
   outline: none;
   padding: map-get($spacers, 'xs');
   width: 100%;
+
   &--error {
     border-color: $danger-color;
     color: $danger-color;
@@ -33,11 +34,13 @@
 
 .xpmedia-form-field-tip {
   color: $ui-medium-gray;
+
   > span {
     &::after {
       content: ' ';
     }
   }
+
   &--error {
     color: $danger-color;
   }

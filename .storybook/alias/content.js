@@ -6,6 +6,7 @@ import { mediumPromoMock } from '../mock-content/mediumPromo';
 import { resultsList } from '../mock-content/resultsList';
 import { simpleListMock } from '../mock-content/simpleList';
 import { smallPromoMock } from '../mock-content/smallPromo';
+import { topTableListMock } from '../mock-content/topTableList';
 
 const featureMocks = {
 	'footer': footerContentMock,
@@ -18,6 +19,7 @@ const featureMocks = {
 	'card-list': simpleListMock,
   'links-bar': linksBarMock,
   'results-list': resultsList,
+  'top-table-list': topTableListMock,
 }
 
 export const useEditableContent = () => {

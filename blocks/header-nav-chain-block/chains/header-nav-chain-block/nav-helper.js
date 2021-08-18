@@ -86,7 +86,6 @@ export const generateNavComponentIndexPropType = (section, breakpoint, position)
 });
 
 // istanbul ignore next
-// eslint-disable-next-line import/prefer-default-export
 export const generateNavComponentPropTypes = () => {
   const navComponentPropTypes = {};
   Object.keys(WIDGET_CONFIG).forEach((cfgKey) => {
@@ -95,8 +94,7 @@ export const generateNavComponentPropTypes = () => {
     } = WIDGET_CONFIG[cfgKey];
     sections.forEach((navSection) => {
       NAV_BREAKPOINTS.forEach((navBreakpoint) => {
-        // eslint-disable-next-line no-plusplus
-        for (let i = 1; i <= slotCounts[navBreakpoint]; i++) {
+        for (let i = 1; i <= slotCounts[navBreakpoint]; i += 1) {
           const itemSelectionKey = getNavComponentPropTypeKey(navSection, navBreakpoint, i);
           const itemIndexKey = getNavComponentIndexPropTypeKey(navSection, navBreakpoint, i);
           navComponentPropTypes[itemSelectionKey] = PropTypes.oneOf(options).tag(
@@ -110,4 +108,27 @@ export const generateNavComponentPropTypes = () => {
     });
   });
   return navComponentPropTypes;
+};
+
+export const getNavWidgetType = (fieldKey, customFields) => (
+  customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
+);
+
+export const hasUserConfiguredNavItems = (customFields) => {
+  let userHasConfigured = false;
+  const {
+    slotCounts,
+    sections: navBarSections,
+  } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
+  navBarSections.forEach((side) => {
+    NAV_BREAKPOINTS.forEach((bpoint) => {
+      for (let i = 1; i <= slotCounts[bpoint]; i += 1) {
+        const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
+        const navWidgetType = getNavWidgetType(cFieldKey, customFields);
+        const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
+        if (!userHasConfigured && matchesDefault) userHasConfigured = true;
+      }
+    });
+  });
+  return userHasConfigured;
 };

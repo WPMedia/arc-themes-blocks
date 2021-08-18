@@ -6,24 +6,18 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
-import { useDebouncedCallback } from 'use-debounce';
 import FocusTrap from 'focus-trap-react';
 import {
-  WIDGET_CONFIG,
-  PLACEMENT_AREAS,
-  NAV_BREAKPOINTS,
-  getNavComponentPropTypeKey,
-  getNavComponentIndexPropTypeKey,
   generateNavComponentPropTypes,
-  getNavComponentDefaultSelection,
 } from './nav-helper';
 import SectionNav from './_children/section-nav';
 import NavLogo from './_children/nav-logo';
-import NavWidget from './_children/nav-widget';
+import HorizontalLinksBar from './_children/horizontal-links/default';
+import NavSection from './_children/nav-section';
+import MenuWidgets from './_children/menu-widgets';
 // shares styles with header nav block
 // can modify styles in shared styles block
 import '@wpmedia/shared-styles/scss/_header-nav.scss';
-import HorizontalLinksBar from './_children/horizontal-links/default';
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -59,6 +53,7 @@ const StyledNav = styled.nav`
       max-width: 240px;
       width: auto;
       transition: 0.5s;
+      
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
         min-width: 40px;
@@ -73,7 +68,6 @@ const StyledNav = styled.nav`
 
 const StyledSectionDrawer = styled.div`
   z-index: ${sectionZIdx};
-
   @media screen and (max-width: ${(props) => props.breakpoint}px) {
     margin-top: ${standardNavHeight}px;
   }
@@ -166,7 +160,6 @@ const Nav = (props) => {
   const sections = (mainContent && mainContent.children) ? mainContent.children : [];
 
   const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
-  const [isLogoVisible, setLogoVisibility] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const closeNavigation = () => {
@@ -182,31 +175,10 @@ const Nav = (props) => {
     closeNavigation();
   };
 
-  const hamburgerClick = () => {
+  const menuButtonClickAction = () => {
     setSectionDrawerOpen(!isSectionDrawerOpen);
     document.body.classList.toggle('nav-open');
   };
-
-  // istanbul ignore next
-  const onScrollEvent = (evt) => {
-    if (!evt) {
-      return;
-    }
-
-    const scrollTop = evt.target?.documentElement?.scrollTop;
-    if (typeof scrollTop === 'undefined') {
-      return;
-    }
-
-    if (scrollTop > 150) {
-      setLogoVisibility(true);
-    }
-    if (scrollTop < 30) {
-      setLogoVisibility(false);
-    }
-  };
-
-  const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
 
   // istanbul ignore next
   useEffect(() => {
@@ -221,42 +193,6 @@ const Nav = (props) => {
       window.removeEventListener('keydown', handleEscKey);
     };
   }, []);
-
-  useEffect(() => {
-    const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
-    if (!mastHead) {
-      return undefined;
-    }
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    // on small viewports we do not need this
-    if (vw >= breakpoints.medium) {
-      window.addEventListener('scroll', onScrollDebounced);
-      return () => {
-        window.removeEventListener('scroll', onScrollDebounced);
-      };
-    }
-    // istanbul ignore next
-    return undefined;
-  }, [onScrollDebounced, breakpoints]);
-
-  useEffect(() => {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (vw < breakpoints.medium) {
-      setLogoVisibility(true);
-      return undefined;
-    }
-
-    const timerID = setTimeout(() => {
-      const mastHead = document.querySelector('.masthead-block-container .masthead-block-logo');
-      if (!mastHead) {
-        setLogoVisibility(true);
-      }
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerID);
-    };
-  }, [breakpoints]);
 
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -278,105 +214,8 @@ const Nav = (props) => {
     };
   }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, breakpoints]);
 
-  const getNavWidgetType = (fieldKey) => (
-    customFields[fieldKey] || getNavComponentDefaultSelection(fieldKey)
-  );
-
-  const hasUserConfiguredNavItems = () => {
-    let userHasConfigured = false;
-    const {
-      slotCounts,
-      sections: navBarSections,
-    } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
-    navBarSections.forEach((side) => {
-      NAV_BREAKPOINTS.forEach((bpoint) => {
-        for (let i = 1; i <= slotCounts[bpoint]; i += 1) {
-          const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
-          const navWidgetType = getNavWidgetType(cFieldKey);
-          const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
-          if (!userHasConfigured && matchesDefault) userHasConfigured = true;
-        }
-      });
-    });
-    return userHasConfigured;
-  };
-
-  const WidgetList = ({ id, breakpoint, placement }) => {
-    // istanbul ignore next
-    if (!id || !breakpoint) return null;
-    const { slotCounts } = WIDGET_CONFIG[placement];
-    const widgetList = [];
-    for (let i = 1; i <= slotCounts[breakpoint]; i += 1) {
-      const cFieldKey = getNavComponentPropTypeKey(id, breakpoint, i);
-      const cFieldIndexKey = getNavComponentIndexPropTypeKey(id, breakpoint, i);
-      const navWidgetType = getNavWidgetType(cFieldKey);
-      if (!!navWidgetType && navWidgetType !== 'none') {
-        widgetList.push(
-          <div
-            className="nav-widget"
-            key={`${id}_${breakpoint}_${i}`}
-          >
-            <NavWidget
-              {...props}
-              type={navWidgetType}
-              position={customFields[cFieldIndexKey]}
-              placement={placement}
-              menuButtonClickAction={hamburgerClick}
-            />
-          </div>,
-        );
-      }
-    }
-    return widgetList;
-  };
-
-  const NavSection = ({ side }) => (
-    // istanbul ignore next
-    !side ? null : (
-      <div key={side} className={`nav-${side}`}>
-        {
-          // Support for deprecated 'signInOrder' custom field
-          // "If" condition is for rendering "signIn" element
-          // "Else" condition is for standard nav bar customization logic
-          side === 'right'
-          && !hasUserConfiguredNavItems()
-          && signInOrder
-          && Number.isInteger(signInOrder)
-          && children[signInOrder - 1]
-            ? children[signInOrder - 1]
-            : NAV_BREAKPOINTS.map((breakpoint) => (
-              <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-                <WidgetList
-                  id={side}
-                  breakpoint={breakpoint}
-                  placement={PLACEMENT_AREAS.NAV_BAR}
-                />
-              </div>
-            ))
-        }
-      </div>
-    )
-  );
-
   // 56 pixels nav height on scroll
   const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
-
-  const MenuWidgets = () => {
-    const navSection = 'menu';
-    return (
-      <div key={navSection} className={`nav-${navSection}`}>
-        {NAV_BREAKPOINTS.map((breakpoint) => (
-          <div key={breakpoint} className={`nav-components--${breakpoint}`}>
-            <WidgetList
-              id={navSection}
-              breakpoint={breakpoint}
-              placement={PLACEMENT_AREAS.SECTION_MENU}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <StyledNav
@@ -389,8 +228,15 @@ const Nav = (props) => {
       aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
     >
       <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-        <NavSection side="left" />
-        <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
+        <NavSection
+          customFields={customFields}
+          menuButtonClickAction={menuButtonClickAction}
+          side="left"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
+        <NavLogo alignment={logoAlignment} />
         {displayLinks && (
         <HorizontalLinksBar
           hierarchy={horizontalLinksHierarchy}
@@ -399,7 +245,14 @@ const Nav = (props) => {
           ariaLabel={ariaLabelLink}
         />
         )}
-        <NavSection side="right" />
+        <NavSection
+          customFields={customFields}
+          menuButtonClickAction={menuButtonClickAction}
+          side="right"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
       </div>
 
       <StyledSectionDrawer
@@ -436,7 +289,12 @@ const Nav = (props) => {
               isHidden={!isSectionDrawerOpen}
               navHeight={scrollAdjustedNavHeight}
             >
-              <MenuWidgets />
+              <MenuWidgets
+                customFields={customFields}
+                menuButtonClickAction={menuButtonClickAction}
+              >
+                {children}
+              </MenuWidgets>
             </SectionNav>
           </div>
         </FocusTrap>

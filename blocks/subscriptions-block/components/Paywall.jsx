@@ -27,6 +27,7 @@ export const usePaywall = (options = {}) => {
         Identity,
         apiOrigin: subscriptions.sales.apiOrigin,
         paywallFunction: (response) => {
+          console.log('paywall triggered', response);
           setTriggeredResults(response);
           setIsPaywalled(true);
         },
@@ -40,6 +41,7 @@ export const usePaywall = (options = {}) => {
       setResults(results);
     };
     if (Identity && isInitialized && !isServerSide() && !isPaywalled) {
+      console.log('running paywall');
       runPaywall();
     }
   }, [Identity, isInitialized, isServerSide, isPaywalled, globalContent.canonical_url]);

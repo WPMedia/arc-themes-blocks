@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Performance Improvements
+
+* Don't publish snapshot files in blocks ([dd6772e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/dd6772e5ce203cfa62a89a881a1af5fde3b1852e)), closes [#806](https://github.com/WPMedia/fusion-news-theme-blocks/issues/806)
+* Filter out unnecessary promo info, depending on block usage like embed html ([7a15aec](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7a15aecaa7d19bb589604442ecf8a67e0f7c2b3c))
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/small-promo-block

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* Update contrast level of copyright ([b93de5c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b93de5cd6a872b5648df7928948065e85e465175))
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/footer-block

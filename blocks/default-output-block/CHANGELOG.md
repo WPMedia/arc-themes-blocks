@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
+### Bug Fixes
+
+* Google font url optimization breaking preexisting fonts ([b2066dc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b2066dc72bf733a44953a02cac5637ba16f448da))
+
+
+### Features
+
+* Use locale available in properties for html lang ([adee08c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/adee08c39b62d88f24020278f802a6b878742fed))
+
+
+### Performance Improvements
+
+* Defer loading querly third-party script until dom loaded ([692b6e3](https://github.com/WPMedia/fusion-news-theme-blocks/commit/692b6e3d5cd3f390862f5503561637aac3a9a45d))
+* Remove publishing of output type and other test files ([c95c97c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c95c97c18f458219664d9276c6f3caa7af963a8b)), closes [#799](https://github.com/WPMedia/fusion-news-theme-blocks/issues/799)
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/default-output-block

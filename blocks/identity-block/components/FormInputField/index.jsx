@@ -81,7 +81,9 @@ const FormInputField = ({
             { error
               ? <span>{errorMessage}</span>
               : null}
-            <span>{tip}</span>
+            { tip
+              ? <span>{tip}</span>
+              : null}
           </div>
         )
         : null}

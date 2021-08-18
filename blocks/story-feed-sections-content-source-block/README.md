@@ -17,6 +17,3 @@ Detail the data structure returned from this content source
 
 ## TTL
 - Add the TTL of the content source
-
-## Additional Considerations
-_See documentation [here](https://github.com/wapopartners/core-components/tree/dev/packages/content-source_story-feed_sections-v4)._

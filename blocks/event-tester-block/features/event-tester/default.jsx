@@ -13,6 +13,7 @@ import './event.scss';
 class EventTester extends Component {
   constructor(props) {
     super(props);
+
     EventEmitter.subscribe('galleryImageNext', (event) => this.galleryHandler(event));
     EventEmitter.subscribe('galleryImagePrevious', (event) => this.galleryHandler(event));
     EventEmitter.subscribe('galleryAutoplayStart', (event) => this.galleryHandler(event));

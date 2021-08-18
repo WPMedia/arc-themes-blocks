@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { shallow } from 'enzyme';
+import { configureSinglePageApp } from '../default';
 
 const dummyComp = () => <meta content="dummy" />;
 const mockFuntions = {
@@ -114,7 +115,7 @@ describe('renders a page', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').length).toBe(2);
+    expect(wrapper.find('link').length).toBe(3);
   });
 
   it('should have a MedataData component', () => {
@@ -257,7 +258,8 @@ describe('head content', () => {
     const wrapper = shallow(
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
     );
-    expect(wrapper.find('link').at(1).html()).toMatch(/fonts.googleapis/);
+
+    expect(wrapper.find('link').at(2).html()).toMatch(/fonts.googleapis/);
   });
 
   it('must not render nested scripts', () => {
@@ -526,5 +528,19 @@ describe('queryly render conditions', () => {
       <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('queryly-search')} {...mockFuntions} />,
     );
     expect(wrapper.find('script').find({ 'data-integration': 'queryly' }).length).toBe(2);
+  });
+});
+
+describe('The spa property', () => {
+  // we're only expecting spaSites to be an array or undefined
+  it('should be set as true if spaSites is undefined', () => {
+    expect(configureSinglePageApp(undefined)).toStrictEqual(true);
+  });
+  it('should be set to empty array if spaSites is an empty array', () => {
+    expect(configureSinglePageApp([])).toStrictEqual([]);
+  });
+  it('should be set to a one-item array if one site id is passed in to spaSites', () => {
+    const spaSites = ['the-sun'];
+    expect(configureSinglePageApp(spaSites)).toStrictEqual(spaSites);
   });
 });

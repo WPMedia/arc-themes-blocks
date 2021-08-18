@@ -8,9 +8,23 @@
     "**/node_modules/**",
     "**/package-lock.json"
   ],
+  "version": "independent",
   "command": {
     "publish": {
-      "registry": "https://npm.pkg.github.com"
+      "ignoreChanges": [
+        "package.json",
+        "CHANGELOG.md",
+        "package-lock.json"
+      ],
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "registry": "https://npm.pkg.github.com",
+      "allowBranch": [
+        "stable",
+        "beta",
+        "rc",
+        "canary"
+      ]
     }
   }
 }

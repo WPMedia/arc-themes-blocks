@@ -7,6 +7,7 @@
 		"ja": "展開",
 		"ko": "더보기",
 		"no": "Utvid",
+		"pt": "Expandir",
 		"sv": "Förstora"
 	},
 	"global.gallery-page-count-text": {
@@ -16,7 +17,8 @@
 		"fr": "%{current} de %{total}",
 		"ja": "%{current} / %{total}",
 		"ko": "%{current}/%개 보는 %{total}",
-		"no": "%{current} av %{total}",
+		"no": "<span class='sr-only'>Bilde</span> %{current} av %{total}",
+		"pt": "<span class='sr-only'>Imagem</span> %{current} de %{total}",
 		"sv": "%{current} av %{total}"
 	},
 	"global.gallery-autoplay-button": {
@@ -26,7 +28,8 @@
 		"fr": "Lecture automatique",
 		"ja": "自動再生",
 		"ko": "자동 재생",
-		"no": "Spill av",
+		"no": "Automatisk avspilling",
+		"pt": "Reprodução automática",
 		"sv": "Spela upp"
 	},
 	"global.gallery-pause-autoplay-button": {
@@ -36,7 +39,8 @@
 		"fr": "Mettre en pause la lecture automatique",
 		"ja": "自動再生の一時停止",
 		"ko": "자동 재생 일시 중지",
-		"no": "Stopp",
+		"no": "Sett automatisk avspilling på pause",
+		"pt": "Colocar a reprodução automática em pausa",
 		"sv": "Pausa"
 	},
 	"global.gallery-autoplay-label-start": {
@@ -46,7 +50,8 @@
 		"fr": "Start automatic slide show",
 		"ja": "Start automatic slide show",
 		"ko": "Start automatic slide show",
-		"no": "Start automatic slide show",
+		"no": "Start automatisk lysbildevisning",
+		"pt": "Iniciar apresentação automática de diapositivos",
 		"sv": "Start automatic slide show"
 	},
 	"global.gallery-autoplay-label-stop": {
@@ -56,7 +61,8 @@
 		"fr": "Stop automatic slide show",
 		"ja": "Stop automatic slide show",
 		"ko": "Stop automatic slide show",
-		"no": "Stop automatic slide show",
+		"no": "Stopp automatisk lysbildevisning",
+		"pt": "Parar apresentação automática de diapositivos",
 		"sv": "Stop automatic slide show"
 	},
 	"global.social-twitter": {
@@ -67,6 +73,7 @@
 		"ja": "Twitter",
 		"ko": "Twitter",
 		"no": "Twitter",
+		"pt": "Twitter",
 		"sv": "Twitter"
 	},
 	"global.social-facebook": {
@@ -77,6 +84,7 @@
 		"ja": "Facebook",
 		"ko": "Facebook",
 		"no": "Facebook",
+		"pt": "Facebook",
 		"sv": "Facebook"
 	},
 	"global.social-linkedin": {
@@ -87,6 +95,7 @@
 		"ja": "LinkedIn",
 		"ko": "LinkedIn",
 		"no": "LinkedIn",
+		"pt": "LinkedIn",
 		"sv": "LinkedIn"
 	},
 	"global.social-pinterest": {
@@ -97,26 +106,29 @@
 		"ja": "Pinterest",
 		"ko": "Pinterest",
 		"no": "Pinterest",
+		"pt": "Pinterest",
 		"sv": "Pinterest"
 	},
 	"global.social-email": {
-		"de": "Email",
+		"de": "E-Mail",
 		"en": "Email",
 		"es": "Email",
-		"fr": "Email",
-		"ja": "Email",
-		"ko": "Email",
-		"no": "Email",
-		"sv": "Email"
+		"fr": "E-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일",
+		"no": "E-post",
+		"pt": "E-mail",
+		"sv": "E-post"
 	},
 	"global.opens-in-new-window": {
-		"de": "(Opens in new window)",
+		"de": "(Wird in einem neuen Fenster geöffnet)",
 		"en": "(Opens in new window)",
-		"es": "(Opens in new window)",
-		"fr": "(Opens in new window)",
-		"ja": "(Opens in new window)",
-		"ko": "(Opens in new window)",
-		"no": "(Opens in new window)",
-		"sv": "(Opens in new window)"
+		"es": "(Se abre en una nueva ventana)",
+		"fr": "(S'ouvre dans une nouvelle fenêtre)",
+		"ja": "（新しいウィンドウで開きます）",
+		"ko": "(새 창에서 열기)",
+		"no": "(Åpnes i et nytt vindu)",
+		"pt": "(Abre numa nova janela)",
+		"sv": "(Öppnas i nytt fönster)"
 	}
 }

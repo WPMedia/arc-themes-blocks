@@ -1,62 +1,68 @@
 {
 	"header-nav-chain-block.sections-button": {
-		"de": "Ressorts",
+		"de": "Rubriken",
 		"en": "Sections",
-		"es": "Secciones",
+		"es": "Sections",
 		"fr": "Sections",
-		"ja": "セクション",
+		"ja": "Sections",
 		"ko": "섹션",
-		"no": "Meny",
+		"no": "Seksjoner",
+		"pt": "Secções",
 		"sv": "Meny"
 	},
 	"header-nav-chain-block.search-text": {
 		"de": "Suche",
 		"en": "Search",
-		"es": "Buscar",
-		"fr": "Rechercher",
-		"ja": "検索",
-		"ko": "검색",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
 		"no": "Søk",
+		"pt": "Procurar",
 		"sv": "Sök"
 	},
 	"header-nav-chain-block.sections-button-aria-label": {
-		"de": "Show %{item} sub sections",
+		"de": "%{item} Unterrubriken anzeigen",
 		"en": "Show %{item} sub sections",
-		"es": "Show %{item} sub sections",
-		"fr": "Show %{item} sub sections",
-		"ja": "Show %{item} sub sections",
-		"ko": "Show %{item} sub sections",
-		"no": "Show %{item} sub sections",
-		"sv": "Show %{item} sub sections"
+		"es": "Mostrar %{item} subsecciones",
+		"fr": "Afficher les sous-sections de %{item}",
+		"ja": "%{item}のサブセクションを表示",
+		"ko": "%{item}개의 하위 섹션 표시",
+		"no": "Vis %{item} underseksjoner",
+		"pt": "Mostrar %{item} sub secções",
+		"sv": "Visa %{item} underkategorier"
 	},
 	"header-nav-chain-block.sections-element-aria-label": {
-		"de": "Sections Menu",
+		"de": "Rubriken-Menü",
 		"en": "Sections Menu",
-		"es": "Sections Menu",
-		"fr": "Sections Menu",
-		"ja": "Sections Menu",
-		"ko": "Sections Menu",
-		"no": "Sections Menu",
-		"sv": "Sections Menu"
+		"es": "Menú de secciones",
+		"fr": "Menu des sections",
+		"ja": "セクションメニュー",
+		"ko": "섹션 메뉴",
+		"no": "Seksjoner-menyen",
+		"pt": "Menu Secções",
+		"sv": "Kategorimeny"
 	},
 	"header-nav-chain-block.links-element-aria-label": {
-		"de": "Top Links",
+		"de": "Relevanteste Links",
 		"en": "Top Links",
-		"es": "Top Links",
-		"fr": "Top Links",
-		"ja": "Top Links",
-		"ko": "Top Links",
-		"no": "Top Links",
-		"sv": "Top Links"
+		"es": "Mejores enlaces",
+		"fr": "Principaux liens",
+		"ja": "トップリンク",
+		"ko": "위쪽 링크",
+		"no": "Topplenker",
+		"pt": "Ligações em destaque",
+		"sv": "Topplänkar"
 	},
 	"header-nav-chain-block.querly-search-aria-label": {
-		"de": "Search",
+		"de": "Suche",
 		"en": "Search",
 		"es": "Search",
 		"fr": "Search",
 		"ja": "Search",
 		"ko": "Search",
-		"no": "Search",
-		"sv": "Search"
+		"no": "Søk",
+		"pt": "Procurar",
+		"sv": "Sök"
 	}
 }

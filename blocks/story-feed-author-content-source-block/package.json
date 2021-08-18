@@ -25,8 +25,5 @@
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
   "peerDependencies": {
     "@wpmedia/resizer-image-block": "*"
-  },
-  "dependencies": {
-    "@arc-core-components/content-source_story-feed_author-v4": "^1.0.6-beta.0"
   }
 }

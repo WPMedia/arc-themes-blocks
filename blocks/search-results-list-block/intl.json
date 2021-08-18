@@ -2,11 +2,12 @@
 	"search-results-block.search-button": {
 		"de": "Suche",
 		"en": "Search",
-		"es": "Buscar",
-		"fr": "Rechercher",
-		"ja": "検索",
-		"ko": "검색",
+		"es": "Search",
+		"fr": "Search",
+		"ja": "Search",
+		"ko": "Search",
 		"no": "Søk",
+		"pt": "Procurar",
 		"sv": "Sök"
 	},
 	"search-results-block.search-result-number": {
@@ -17,36 +18,40 @@
 		"ja": "%{searchTerm}\" の結果 %{smart_count} \" 件 |||| \"%{searchTerm}\" の結果 %{smart_count} 件",
 		"ko": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
 		"no": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+		"pt": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
 		"sv": "%{smart_count} resultat för ”%{searchTerm}”"
 	},
 	"search-results-block.see-more-button": {
 		"de": "Mehr anzeigen",
-		"en": "See More",
+		"en": "See more",
 		"es": "Ver más",
 		"fr": "En savoir plus",
 		"ja": "詳細",
 		"ko": "자세히 보기",
 		"no": "Se mer",
+		"pt": "Veja mais",
 		"sv": "Fler artiklar"
 	},
 	"search-results-block.see-more-button-aria-label": {
-		"de": "See More stories about this topic",
-		"en": "See More stories about this topic",
-		"es": "See More stories about this topic",
-		"fr": "See More stories about this topic",
-		"ja": "See More stories about this topic",
-		"ko": "See More stories about this topic",
-		"no": "See More stories about this topic",
-		"sv": "See More stories about this topic"
+		"de": "Sehen Sie sich weitere Artikel zu diesem Thema an",
+		"en": "See more stories about this topic",
+		"es": "Ver más historias sobre este tema",
+		"fr": "Voir plus d'articles concernant ce sujet",
+		"ja": "このトピックに関するその他の記事を表示",
+		"ko": "이 주제에 대한 스토리 더 보기",
+		"no": "Se flere historier om dette emnet",
+		"pt": "Veja mais histórias sobre este tópico",
+		"sv": "Se fler artiklar om detta ämne"
 	},
 	"search-results-blocks.search-input-placeholder": {
-		"de": "Enter your search terms",
+		"de": "Geben Sie Ihre Suchbegriffe ein",
 		"en": "Enter your search terms",
-		"es": "Enter your search terms",
-		"fr": "Enter your search terms",
-		"ja": "Enter your search terms",
-		"ko": "Enter your search terms",
-		"no": "Enter your search terms",
-		"sv": "Enter your search terms"
+		"es": "Introduzca sus términos de búsqueda",
+		"fr": "Entrez vos termes de recherche",
+		"ja": "検索語句を入力",
+		"ko": "검색어 입력",
+		"no": "Skriv inn søkeordene dine",
+		"pt": "Introduza os termos da sua pesquisa",
+		"sv": "Ange sökord"
 	}
 }

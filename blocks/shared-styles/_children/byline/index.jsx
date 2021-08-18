@@ -27,7 +27,7 @@ const Byline = (props) => {
     if (author.type === 'author') {
       /* eslint-disable-next-line camelcase */
       const authorName = author?.additional_properties?.original?.byline || author?.name;
-      const hasURL = Object.prototype.hasOwnProperty.call(author, 'url');
+      const hasURL = author?.url;
 
       // If the author has a url to their bio page, return an anchor tag to the bio.
       // If not, just return the string.

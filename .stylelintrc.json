@@ -34,7 +34,16 @@
     "property-no-vendor-prefix": [
       true,
       {
-        "ignoreProperties": ["box-orient"]
+        "ignoreProperties": [
+          "box-orient"
+        ]
+      }
+    ],
+    "media-feature-name-no-unknown": [
+      {
+        "ignoreMediaFeatureNames": [
+          "max-width"
+        ]
       }
     ]
   }

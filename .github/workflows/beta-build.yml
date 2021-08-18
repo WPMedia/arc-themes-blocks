@@ -3,46 +3,63 @@ on:
   push:
     branches:
       - beta
+    # only run on changes to these files
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "*.scss"
 
 # Publishes beta builds with the dist tag of "beta" and
-# with a version of 0.0.0 with a short git SHA appended to
-# the end.
 jobs:
   publish:
     name: Beta block publish
     runs-on: ubuntu-latest
     env:
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
+      - name: Set git username
+        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "Jack Howard"
+
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.NODE_AUTH_TOKEN }}
+
       - name: Cache NPM files
+        id: cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
+      # pulls all tags (needed for lerna / semantic release to correctly version)
+      - name: Pull tags to give lerna access to git info
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
-      - run: npm ci
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests
         run: npm run test
 
-      - name: Get current datetime for re-running publish if necessary
-        id: get-datetime
-        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
-
-      - name: Publish to beta tag with a short git SHA as the version
-        run: npx lerna publish 0.0.0-beta.$(git rev-parse --short HEAD).${{ steps.get-datetime.outputs.date }} --no-git-tag-version --no-push --dist-tag beta --yes
+      - name: Publish to beta
+        run: npm run release:beta
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
       - name: Check beta failure status
         uses: act10ns/slack@v1
         with:

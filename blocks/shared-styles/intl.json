@@ -7,6 +7,7 @@
 		"ja": "ギャラリー",
 		"ko": "갤러리",
 		"no": "Bildegalleri",
+		"pt": "Galeria",
 		"sv": "Bildspel"
 	},
 	"promo-label.video-text": {
@@ -17,6 +18,7 @@
 		"ja": "ビデオ",
 		"ko": "비디오",
 		"no": "Video",
+		"pt": "Vídeo",
 		"sv": "Video"
 	},
 	"byline.by-text": {
@@ -27,6 +29,7 @@
 		"ja": "担当者：",
 		"ko": "저작자",
 		"no": "Av",
+		"pt": "Por",
 		"sv": "Av"
 	},
 	"byline.and-text": {
@@ -37,16 +40,18 @@
 		"ja": "및",
 		"ko": "및",
 		"no": "og",
+		"pt": "e",
 		"sv": "och"
 	},
 	"overline.sponsored-content": {
-		"de": "Sponsored Content",
+		"de": "Werblicher Inhalt",
 		"en": "Sponsored Content",
-		"es": "Sponsored Content",
-		"fr": "Sponsored Content",
-		"ja": "Sponsored Content",
+		"es": "Contenido patrocinado",
+		"fr": "Contenu sponsorisé",
+		"ja": "スポンサー付きコンテンツ",
 		"ko": "Sponsored Content",
-		"no": "Sponsored Content",
-		"sv": "Sponsored Content"
+		"no": "Sponset innhold",
+		"pt": "Conteúdo patrocinado",
+		"sv": "Sponsrat innehåll"
 	}
 }

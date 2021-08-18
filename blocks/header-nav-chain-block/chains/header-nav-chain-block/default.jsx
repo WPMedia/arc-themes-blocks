@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -52,33 +51,27 @@ const StyledNav = styled.nav`
     background-color: ${(props) => props.navBarBackground};
     transition: 0.5s;
     z-index: ${navZIdx};
+  }
 
-    &.nav-logo, & > .nav-logo {
-      img {
-        height: auto;
-        max-width: 240px;
-        width: auto;
-        transition: 0.5s;
-        @media screen and (max-width: ${(props) => props.breakpoint}px) {
-          max-height: 40px;
-          min-width: 40px;
-        }
-        @media screen and (min-width: ${(props) => props.breakpoint}px) {
-          max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
-          min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
-        }
+  .nav-logo {
+    img {
+      height: auto;
+      max-width: 240px;
+      width: auto;
+      transition: 0.5s;
+      @media screen and (max-width: ${(props) => props.breakpoint}px) {
+        max-height: 40px;
+        min-width: 40px;
+      }
+      @media screen and (min-width: ${(props) => props.breakpoint}px) {
+        max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
+        min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
       }
     }
   }
-
-  * {
-    font-family: ${(props) => props.font};
-  }
-
 `;
 
 const StyledSectionDrawer = styled.div`
-  font-family: ${(props) => props.font};
   z-index: ${sectionZIdx};
 
   @media screen and (max-width: ${(props) => props.breakpoint}px) {
@@ -114,7 +107,6 @@ const Nav = (props) => {
 
   const {
     'primary-color': primaryColor = '#000',
-    'primary-font-family': primaryFont,
   } = getThemeStyle(arcSite);
 
   let backgroundColor = '#000';
@@ -298,7 +290,7 @@ const Nav = (props) => {
     } = WIDGET_CONFIG[PLACEMENT_AREAS.NAV_BAR];
     navBarSections.forEach((side) => {
       NAV_BREAKPOINTS.forEach((bpoint) => {
-        for (let i = 1; i <= slotCounts[bpoint]; i++) {
+        for (let i = 1; i <= slotCounts[bpoint]; i += 1) {
           const cFieldKey = getNavComponentPropTypeKey(side, bpoint, i);
           const navWidgetType = getNavWidgetType(cFieldKey);
           const matchesDefault = navWidgetType !== getNavComponentDefaultSelection(cFieldKey);
@@ -314,7 +306,7 @@ const Nav = (props) => {
     if (!id || !breakpoint) return null;
     const { slotCounts } = WIDGET_CONFIG[placement];
     const widgetList = [];
-    for (let i = 1; i <= slotCounts[breakpoint]; i++) {
+    for (let i = 1; i <= slotCounts[breakpoint]; i += 1) {
       const cFieldKey = getNavComponentPropTypeKey(id, breakpoint, i);
       const cFieldIndexKey = getNavComponentIndexPropTypeKey(id, breakpoint, i);
       const navWidgetType = getNavWidgetType(cFieldKey);
@@ -384,75 +376,71 @@ const Nav = (props) => {
   };
 
   return (
-    <>
-      <StyledNav
-        id="main-nav"
-        className={`${navColor === 'light' ? 'light' : 'dark'}`}
-        font={primaryFont}
-        navBarBackground={backgroundColor}
+    <StyledNav
+      id="main-nav"
+      className={`${navColor === 'light' ? 'light' : 'dark'}`}
+      navBarBackground={backgroundColor}
+      navHeight={navHeight}
+      scrolled={scrolled}
+      breakpoint={breakpoints.medium}
+      aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
+    >
+      <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
+        <NavSection side="left" />
+        <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
+        {displayLinks && (
+        <HorizontalLinksBar
+          hierarchy={horizontalLinksHierarchy}
+          navBarColor={navColor}
+          showHorizontalSeperatorDots={showDotSeparators}
+          ariaLabel={ariaLabelLink}
+        />
+        )}
+        <NavSection side="right" />
+      </div>
+
+      <StyledSectionDrawer
+        id="nav-sections"
+        className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
         navHeight={navHeight}
         scrolled={scrolled}
         breakpoint={breakpoints.medium}
-        aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
+        onClick={closeDrawer}
       >
-        <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-          <NavSection side="left" />
-          <NavLogo isVisible={isLogoVisible} alignment={logoAlignment} />
-          {displayLinks && (
-            <HorizontalLinksBar
-              hierarchy={horizontalLinksHierarchy}
-              navBarColor={navColor}
-              showHorizontalSeperatorDots={showDotSeparators}
-              ariaLabel={ariaLabelLink}
-            />
-          )}
-          <NavSection side="right" />
-        </div>
-
-        <StyledSectionDrawer
-          id="nav-sections"
-          className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
-          font={primaryFont}
-          navHeight={navHeight}
-          scrolled={scrolled}
-          breakpoint={breakpoints.medium}
-          onClick={closeDrawer}
-        >
-          <FocusTrap
-            active={isSectionDrawerOpen}
-            focusTrapOptions={{
-              allowOutsideClick: true,
-              returnFocusOnDeactivate: true,
-              onDeactivate: () => {
-                // Focus the next focusable element in the navbar
-                // Workaround for issue where 'nav-sections-btn' won't programatically focus
-                const focusElement = document.querySelector(`
+        <FocusTrap
+          active={isSectionDrawerOpen}
+          focusTrapOptions={{
+            allowOutsideClick: true,
+            returnFocusOnDeactivate: true,
+            onDeactivate: () => {
+              // Focus the next focusable element in the navbar
+              // Workaround for issue where 'nav-sections-btn' wont programatically focus
+              const focusElement = document.querySelector(`
                   #main-nav a:not(.nav-sections-btn),
                   #main-nav button:not(.nav-sections-btn)
                 `);
                 // istanbul ignore next
-                if (focusElement) {
-                  focusElement.focus();
-                  focusElement.blur();
-                }
-              },
-            }}
-          >
-            <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
-              <SectionNav sections={sections} isHidden={!isSectionDrawerOpen}>
-                <MenuWidgets />
-              </SectionNav>
-            </div>
-          </FocusTrap>
-        </StyledSectionDrawer>
+              if (focusElement) {
+                focusElement.focus();
+                focusElement.blur();
+              }
+            },
+          }}
+        >
+          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
+            <SectionNav sections={sections} isHidden={!isSectionDrawerOpen}>
+              <MenuWidgets />
+            </SectionNav>
+          </div>
+        </FocusTrap>
+      </StyledSectionDrawer>
 
-        {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
-          <StyledWarning>
-            In order to render horizontal links, the logo must be aligned to the left.
-          </StyledWarning>
-        )}
-      </StyledNav>
-    </>
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
+      <StyledWarning>
+        In order to render horizontal links, the logo must be aligned to the left.
+      </StyledWarning>
+      )}
+    </StyledNav>
   );
 };
 

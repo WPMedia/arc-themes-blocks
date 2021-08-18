@@ -1,26 +1,4 @@
 {
-	"global.gallery-expand-button": {
-		"de": "Erweitern",
-		"en": "Expand",
-		"es": "Expandir",
-		"fr": "Développer",
-		"ja": "展開",
-		"ko": "더보기",
-		"no": "Utvid",
-		"pt": "Expandir",
-		"sv": "Förstora"
-	},
-	"global.gallery-page-count-text": {
-		"de": "%{current} von %{total}",
-		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
-		"es": "%{current} de %{total}",
-		"fr": "%{current} de %{total}",
-		"ja": "%{current} / %{total}",
-		"ko": "%{current}/%개 보는 %{total}",
-		"no": "<span class='sr-only'>Bilde</span> %{current} av %{total}",
-		"pt": "<span class='sr-only'>Imagem</span> %{current} de %{total}",
-		"sv": "%{current} av %{total}"
-	},
 	"global.gallery-autoplay-button": {
 		"de": "Automatische Wiedergabe",
 		"en": "Autoplay",
@@ -31,17 +9,6 @@
 		"no": "Automatisk avspilling",
 		"pt": "Reprodução automática",
 		"sv": "Spela upp"
-	},
-	"global.gallery-pause-autoplay-button": {
-		"de": "Automatische Wiedergabe anhalten",
-		"en": "Pause autoplay",
-		"es": "Pausar reproducción automática",
-		"fr": "Mettre en pause la lecture automatique",
-		"ja": "自動再生の一時停止",
-		"ko": "자동 재생 일시 중지",
-		"no": "Sett automatisk avspilling på pause",
-		"pt": "Colocar a reprodução automática em pausa",
-		"sv": "Pausa"
 	},
 	"global.gallery-autoplay-label-start": {
 		"de": "Start automatic slide show",
@@ -65,16 +32,60 @@
 		"pt": "Parar apresentação automática de diapositivos",
 		"sv": "Stop automatic slide show"
 	},
-	"global.social-twitter": {
-		"de": "Twitter",
-		"en": "Twitter",
-		"es": "Twitter",
-		"fr": "Twitter",
-		"ja": "Twitter",
-		"ko": "Twitter",
-		"no": "Twitter",
-		"pt": "Twitter",
-		"sv": "Twitter"
+	"global.gallery-expand-button": {
+		"de": "Erweitern",
+		"en": "Expand",
+		"es": "Expandir",
+		"fr": "Développer",
+		"ja": "展開",
+		"ko": "더보기",
+		"no": "Utvid",
+		"pt": "Expandir",
+		"sv": "Förstora"
+	},
+	"global.gallery-page-count-text": {
+		"de": "%{current} von %{total}",
+		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
+		"es": "%{current} de %{total}",
+		"fr": "%{current} de %{total}",
+		"ja": "%{current} / %{total}",
+		"ko": "%{current}/%개 보는 %{total}",
+		"no": "<span class='sr-only'>Bilde</span> %{current} av %{total}",
+		"pt": "<span class='sr-only'>Imagem</span> %{current} de %{total}",
+		"sv": "%{current} av %{total}"
+	},
+	"global.gallery-pause-autoplay-button": {
+		"de": "Automatische Wiedergabe anhalten",
+		"en": "Pause autoplay",
+		"es": "Pausar reproducción automática",
+		"fr": "Mettre en pause la lecture automatique",
+		"ja": "自動再生の一時停止",
+		"ko": "자동 재생 일시 중지",
+		"no": "Sett automatisk avspilling på pause",
+		"pt": "Colocar a reprodução automática em pausa",
+		"sv": "Pausa"
+	},
+	"global.opens-in-new-window": {
+		"de": "(Wird in einem neuen Fenster geöffnet)",
+		"en": "(Opens in new window)",
+		"es": "(Se abre en una nueva ventana)",
+		"fr": "(S'ouvre dans une nouvelle fenêtre)",
+		"ja": "（新しいウィンドウで開きます）",
+		"ko": "(새 창에서 열기)",
+		"no": "(Åpnes i et nytt vindu)",
+		"pt": "(Abre numa nova janela)",
+		"sv": "(Öppnas i nytt fönster)"
+	},
+	"global.social-email": {
+		"de": "E-Mail",
+		"en": "Email",
+		"es": "Email",
+		"fr": "E-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일",
+		"no": "E-post",
+		"pt": "E-mail",
+		"sv": "E-post"
 	},
 	"global.social-facebook": {
 		"de": "Facebook",
@@ -109,26 +120,15 @@
 		"pt": "Pinterest",
 		"sv": "Pinterest"
 	},
-	"global.social-email": {
-		"de": "E-Mail",
-		"en": "Email",
-		"es": "Email",
-		"fr": "E-mail",
-		"ja": "メールアドレス",
-		"ko": "이메일",
-		"no": "E-post",
-		"pt": "E-mail",
-		"sv": "E-post"
-	},
-	"global.opens-in-new-window": {
-		"de": "(Wird in einem neuen Fenster geöffnet)",
-		"en": "(Opens in new window)",
-		"es": "(Se abre en una nueva ventana)",
-		"fr": "(S'ouvre dans une nouvelle fenêtre)",
-		"ja": "（新しいウィンドウで開きます）",
-		"ko": "(새 창에서 열기)",
-		"no": "(Åpnes i et nytt vindu)",
-		"pt": "(Abre numa nova janela)",
-		"sv": "(Öppnas i nytt fönster)"
+	"global.social-twitter": {
+		"de": "Twitter",
+		"en": "Twitter",
+		"es": "Twitter",
+		"fr": "Twitter",
+		"ja": "Twitter",
+		"ko": "Twitter",
+		"no": "Twitter",
+		"pt": "Twitter",
+		"sv": "Twitter"
 	}
 }

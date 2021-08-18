@@ -1,106 +1,106 @@
 {
-    "shared-styles": {
-        "promo-label.gallery-text": "Galería",
-        "promo-label.video-text": "Video",
-        "byline.by-text": "Por",
-        "byline.and-text": "y",
-        "overline.sponsored-content": "Contenido patrocinado"
-    },
-    "article-body-block": {
-        "article-body-block.correction": "Corrección",
-        "article-body-block.clarification": "Aclaración",
-        "article-body-block.interstitial-link-aria-label": "Abrir historia relacionada"
-    },
-    "full-author-bio-block": {
-        "full-author-bio-block.connect-text": "Conectar",
-        "full-author-bio-block.social-email": "Email",
-        "full-author-bio-block.social-twitter": "Conectar en Twitter",
-        "full-author-bio-block.social-facebook": "Conectar en Facebook",
-        "full-author-bio-block.social-instagram": "Seguir en Instagram",
-        "full-author-bio-block.social-rss": "Fuente RSS",
-        "full-author-bio-block.social-linkedin": "Conectar en LinkedIn",
-        "full-author-bio-block.social-reddit": "Conectar en Reddit",
-        "full-author-bio-block.social-youtube": "Conectar en YouTube",
-        "full-author-bio-block.social-medium": "Conectar en Medium",
-        "full-author-bio-block.social-tumblr": "Conectar en Tumblr",
-        "full-author-bio-block.social-pinterest": "Conectar en Pinterest",
-        "full-author-bio-block.social-snapchat": "Conectar en Snapchat",
-        "full-author-bio-block.social-whatsapp": "Conectar en WhatsApp",
-        "full-author-bio-block.social-soundcloud": "Escuchar en SoundCloud"
-    },
-    "global-phrases-block": {
-        "global.gallery-expand-button": "Expandir",
-        "global.gallery-page-count-text": "%{current} de %{total}",
-        "global.gallery-autoplay-button": "Reproducción automática",
-        "global.gallery-pause-autoplay-button": "Pausar reproducción automática",
-        "global.gallery-autoplay-label-start": "Start automatic slide show",
-        "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-        "global.social-twitter": "Twitter",
-        "global.social-facebook": "Facebook",
-        "global.social-linkedin": "LinkedIn",
-        "global.social-pinterest": "Pinterest",
-        "global.social-email": "Email",
-        "global.opens-in-new-window": "(Se abre en una nueva ventana)"
-    },
-    "header-nav-block": {
-        "header-nav-block.sections-button": "Sections",
-        "header-nav-block.sign-in-button": "Sign In",
-        "header-nav-block.search-text": "Search"
-    },
-    "header-nav-chain-block": {
-        "header-nav-chain-block.sections-button": "Sections",
-        "header-nav-chain-block.search-text": "Search",
-        "header-nav-chain-block.sections-button-aria-label": "Mostrar %{item} subsecciones",
-        "header-nav-chain-block.sections-element-aria-label": "Menú de secciones",
-        "header-nav-chain-block.links-element-aria-label": "Mejores enlaces",
-        "header-nav-chain-block.querly-search-aria-label": "Search"
-    },
-    "results-list-block": {
-        "results-list-block.see-more-button": "Ver más",
-        "results-list-block.see-more-button-aria-label": "Ver más historias sobre este tema"
-    },
-    "search-results-list-block": {
-        "search-results-block.search-button": "Search",
-        "search-results-block.search-result-number": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
-        "search-results-block.see-more-button": "Ver más",
-        "search-results-block.see-more-button-aria-label": "Ver más historias sobre este tema",
-        "search-results-blocks.search-input-placeholder": "Introduzca sus términos de búsqueda"
-    },
-    "ads-block": {
-        "ads-block.ad-label": "ANUNCIO"
-    },
-    "alert-bar-block": {
-        "alert-bar-block.element-aria-label": "Alerta noticias de última hora",
-        "alert-bar-block.close-button": "Rechazar alerta noticias de última hora"
-    },
-    "footer-block": {
-        "footer-block.facebook-link": "Página de Facebook",
-        "footer-block.twitter-link": "Fuente Twitter",
-        "footer-block.rss-link": "Fuente RSS"
-    },
-    "links-bar-block": {
-        "links-bar-block.element-aria-label": "Más enlaces"
-    },
-    "share-bar-block": {
-        "share-bar-block.share-button-aria-label": "Compartir el artículo actual mediante %{socialType}"
-    },
-    "author-bio-block": {
-        "author-bio-block.social-email": "Enviar un correo electrónico a %{authorName}",
-        "author-bio-block.social-rss": "Suscribirse a la fuente RSS de %{authorName}",
-        "author-bio-block.social-soundcloud": "Escuchar a %{authorName} en SoundCloud",
-        "author-bio-block.social-twitter": "Conectar en Twitter",
-        "author-bio-block.social-facebook": "Conectar en Facebook",
-        "author-bio-block.social-instagram": "Seguir en Instagram",
-        "author-bio-block.social-linkedin": "Conectar en LinkedIn",
-        "author-bio-block.social-reddit": "Conectar en Reddit",
-        "author-bio-block.social-youtube": "Conectar en YouTube",
-        "author-bio-block.social-medium": "Conectar en Medium",
-        "author-bio-block.social-tumblr": "Conectar en Tumblr",
-        "author-bio-block.social-pinterest": "Conectar en Pinterest",
-        "author-bio-block.social-snapchat": "Conectar en Snapchat",
-        "author-bio-block.social-whatsapp": "Conectar en WhatsApp"
-    },
-    "default-output-block": {
-        "default-output-block.skip-main": "Omitir para ir al contenido principal"
-    }
+	"ads-block": {
+		"ads-block.ad-label": "ANUNCIO"
+	},
+	"alert-bar-block": {
+		"alert-bar-block.close-button": "Rechazar alerta noticias de última hora",
+		"alert-bar-block.element-aria-label": "Alerta noticias de última hora"
+	},
+	"article-body-block": {
+		"article-body-block.clarification": "Aclaración",
+		"article-body-block.correction": "Corrección",
+		"article-body-block.interstitial-link-aria-label": "Abrir historia relacionada"
+	},
+	"author-bio-block": {
+		"author-bio-block.social-email": "Enviar un correo electrónico a %{authorName}",
+		"author-bio-block.social-facebook": "Conectar en Facebook",
+		"author-bio-block.social-instagram": "Seguir en Instagram",
+		"author-bio-block.social-linkedin": "Conectar en LinkedIn",
+		"author-bio-block.social-medium": "Conectar en Medium",
+		"author-bio-block.social-pinterest": "Conectar en Pinterest",
+		"author-bio-block.social-reddit": "Conectar en Reddit",
+		"author-bio-block.social-rss": "Suscribirse a la fuente RSS de %{authorName}",
+		"author-bio-block.social-snapchat": "Conectar en Snapchat",
+		"author-bio-block.social-soundcloud": "Escuchar a %{authorName} en SoundCloud",
+		"author-bio-block.social-tumblr": "Conectar en Tumblr",
+		"author-bio-block.social-twitter": "Conectar en Twitter",
+		"author-bio-block.social-whatsapp": "Conectar en WhatsApp",
+		"author-bio-block.social-youtube": "Conectar en YouTube"
+	},
+	"default-output-block": {
+		"default-output-block.skip-main": "Omitir para ir al contenido principal"
+	},
+	"footer-block": {
+		"footer-block.facebook-link": "Página de Facebook",
+		"footer-block.rss-link": "Fuente RSS",
+		"footer-block.twitter-link": "Fuente Twitter"
+	},
+	"full-author-bio-block": {
+		"full-author-bio-block.connect-text": "Conectar",
+		"full-author-bio-block.social-email": "Email",
+		"full-author-bio-block.social-facebook": "Conectar en Facebook",
+		"full-author-bio-block.social-instagram": "Seguir en Instagram",
+		"full-author-bio-block.social-linkedin": "Conectar en LinkedIn",
+		"full-author-bio-block.social-medium": "Conectar en Medium",
+		"full-author-bio-block.social-pinterest": "Conectar en Pinterest",
+		"full-author-bio-block.social-reddit": "Conectar en Reddit",
+		"full-author-bio-block.social-rss": "Fuente RSS",
+		"full-author-bio-block.social-snapchat": "Conectar en Snapchat",
+		"full-author-bio-block.social-soundcloud": "Escuchar en SoundCloud",
+		"full-author-bio-block.social-tumblr": "Conectar en Tumblr",
+		"full-author-bio-block.social-twitter": "Conectar en Twitter",
+		"full-author-bio-block.social-whatsapp": "Conectar en WhatsApp",
+		"full-author-bio-block.social-youtube": "Conectar en YouTube"
+	},
+	"global-phrases-block": {
+		"global.gallery-autoplay-button": "Reproducción automática",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-expand-button": "Expandir",
+		"global.gallery-page-count-text": "%{current} de %{total}",
+		"global.gallery-pause-autoplay-button": "Pausar reproducción automática",
+		"global.opens-in-new-window": "(Se abre en una nueva ventana)",
+		"global.social-email": "Email",
+		"global.social-facebook": "Facebook",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-pinterest": "Pinterest",
+		"global.social-twitter": "Twitter"
+	},
+	"header-nav-block": {
+		"header-nav-block.search-text": "Search",
+		"header-nav-block.sections-button": "Sections",
+		"header-nav-block.sign-in-button": "Sign In"
+	},
+	"header-nav-chain-block": {
+		"header-nav-chain-block.links-element-aria-label": "Mejores enlaces",
+		"header-nav-chain-block.querly-search-aria-label": "Search",
+		"header-nav-chain-block.search-text": "Search",
+		"header-nav-chain-block.sections-button": "Sections",
+		"header-nav-chain-block.sections-button-aria-label": "Mostrar %{item} subsecciones",
+		"header-nav-chain-block.sections-element-aria-label": "Menú de secciones"
+	},
+	"links-bar-block": {
+		"links-bar-block.element-aria-label": "Más enlaces"
+	},
+	"results-list-block": {
+		"results-list-block.see-more-button": "Ver más",
+		"results-list-block.see-more-button-aria-label": "Ver más historias sobre este tema"
+	},
+	"search-results-list-block": {
+		"search-results-block.search-button": "Buscar",
+		"search-results-block.search-result-number": "%{smart_count} resultado para \"%{searchTerm}\" |||| %{smart_count} resultados para \"%{searchTerm}\"",
+		"search-results-block.see-more-button": "Ver más",
+		"search-results-block.see-more-button-aria-label": "Ver más historias sobre este tema",
+		"search-results-blocks.search-input-placeholder": "Introduzca sus términos de búsqueda"
+	},
+	"share-bar-block": {
+		"share-bar-block.share-button-aria-label": "Compartir el artículo actual mediante %{socialType}"
+	},
+	"shared-styles": {
+		"byline.and-text": "y",
+		"byline.by-text": "Por",
+		"overline.sponsored-content": "Contenido patrocinado",
+		"promo-label.gallery-text": "Galería",
+		"promo-label.video-text": "Video"
+	}
 }

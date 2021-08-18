@@ -8,7 +8,7 @@ on:
       - "**.js"
       - "**.jsx"
       - "*.scss"
-      - "intl.json"
+      - "**/intl.json"
 
 # Publishes stable builds with the dist tag of "stable" and
 jobs:

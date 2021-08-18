@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-tag-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion Article Tag block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -25,9 +25,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0",
     "@wpmedia/shared-styles": "*",
-    "@arc-fusion/prop-types": "^0.1.5"
+    "styled-components": "^4.4.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

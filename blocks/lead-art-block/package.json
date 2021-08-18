@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/lead-art-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion News Theme lead art block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
@@ -21,8 +21,8 @@
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/video-player-block": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/shared-styles": "*",
+    "@wpmedia/video-player-block": "*"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",

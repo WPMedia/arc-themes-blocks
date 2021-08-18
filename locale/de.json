@@ -1,106 +1,106 @@
 {
-    "shared-styles": {
-        "promo-label.gallery-text": "Galerie",
-        "promo-label.video-text": "Video",
-        "byline.by-text": "Von",
-        "byline.and-text": "und",
-        "overline.sponsored-content": "Werblicher Inhalt"
-    },
-    "article-body-block": {
-        "article-body-block.correction": "Korrektur",
-        "article-body-block.clarification": "Klarstellung",
-        "article-body-block.interstitial-link-aria-label": "Ähnlichen Artikel öffnen"
-    },
-    "full-author-bio-block": {
-        "full-author-bio-block.connect-text": "Verbinden",
-        "full-author-bio-block.social-email": "E-Mail",
-        "full-author-bio-block.social-twitter": "Auf Twitter verbinden",
-        "full-author-bio-block.social-facebook": "Auf Facebook verbinden",
-        "full-author-bio-block.social-instagram": "Auf Instagram folgen",
-        "full-author-bio-block.social-rss": "RSS Feed",
-        "full-author-bio-block.social-linkedin": "Auf LinkedIn verbinden",
-        "full-author-bio-block.social-reddit": "Auf Reddit verbinden",
-        "full-author-bio-block.social-youtube": "Auf YouTube verbinden",
-        "full-author-bio-block.social-medium": "Auf Medium verbinden",
-        "full-author-bio-block.social-tumblr": "Auf Tumblr verbinden",
-        "full-author-bio-block.social-pinterest": "Auf Pinterest verbinden",
-        "full-author-bio-block.social-snapchat": "Auf Snapchat verbinden",
-        "full-author-bio-block.social-whatsapp": "Auf WhatsApp verbinden",
-        "full-author-bio-block.social-soundcloud": "Auf SoundCloud anhören"
-    },
-    "global-phrases-block": {
-        "global.gallery-expand-button": "Erweitern",
-        "global.gallery-page-count-text": "%{current} von %{total}",
-        "global.gallery-autoplay-button": "Automatische Wiedergabe",
-        "global.gallery-pause-autoplay-button": "Automatische Wiedergabe anhalten",
-        "global.gallery-autoplay-label-start": "Start automatic slide show",
-        "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-        "global.social-twitter": "Twitter",
-        "global.social-facebook": "Facebook",
-        "global.social-linkedin": "LinkedIn",
-        "global.social-pinterest": "Pinterest",
-        "global.social-email": "E-Mail",
-        "global.opens-in-new-window": "(Wird in einem neuen Fenster geöffnet)"
-    },
-    "header-nav-block": {
-        "header-nav-block.sections-button": "Rubriken",
-        "header-nav-block.sign-in-button": "Sign In",
-        "header-nav-block.search-text": "Suche"
-    },
-    "header-nav-chain-block": {
-        "header-nav-chain-block.sections-button": "Rubriken",
-        "header-nav-chain-block.search-text": "Suche",
-        "header-nav-chain-block.sections-button-aria-label": "%{item} Unterrubriken anzeigen",
-        "header-nav-chain-block.sections-element-aria-label": "Rubriken-Menü",
-        "header-nav-chain-block.links-element-aria-label": "Relevanteste Links",
-        "header-nav-chain-block.querly-search-aria-label": "Suche"
-    },
-    "results-list-block": {
-        "results-list-block.see-more-button": "Mehr anzeigen",
-        "results-list-block.see-more-button-aria-label": "Sehen Sie sich weitere Artikel zu diesem Thema an"
-    },
-    "search-results-list-block": {
-        "search-results-block.search-button": "Suche",
-        "search-results-block.search-result-number": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"",
-        "search-results-block.see-more-button": "Mehr anzeigen",
-        "search-results-block.see-more-button-aria-label": "Sehen Sie sich weitere Artikel zu diesem Thema an",
-        "search-results-blocks.search-input-placeholder": "Geben Sie Ihre Suchbegriffe ein"
-    },
-    "ads-block": {
-        "ads-block.ad-label": "WERBUNG"
-    },
-    "alert-bar-block": {
-        "alert-bar-block.element-aria-label": "Eilmeldungsalarm",
-        "alert-bar-block.close-button": "Eilmeldungsalarm verwerfen"
-    },
-    "footer-block": {
-        "footer-block.facebook-link": "Facebookseite",
-        "footer-block.twitter-link": "Twitter Feed",
-        "footer-block.rss-link": "RSS Feed"
-    },
-    "links-bar-block": {
-        "links-bar-block.element-aria-label": "Weitere Links"
-    },
-    "share-bar-block": {
-        "share-bar-block.share-button-aria-label": "Aktuellen Artikel über %{socialType} teilen"
-    },
-    "author-bio-block": {
-        "author-bio-block.social-email": "E-Mail an %{authorName} senden",
-        "author-bio-block.social-rss": "RSS Feed von %{authorName} abonnieren",
-        "author-bio-block.social-soundcloud": "%{authorName} auf SoundCloud anhören",
-        "author-bio-block.social-twitter": "Auf Twitter verbinden",
-        "author-bio-block.social-facebook": "Auf Facebook verbinden",
-        "author-bio-block.social-instagram": "Auf Instagram folgen",
-        "author-bio-block.social-linkedin": "Auf LinkedIn verbinden",
-        "author-bio-block.social-reddit": "Auf Reddit verbinden",
-        "author-bio-block.social-youtube": "Auf YouTube verbinden",
-        "author-bio-block.social-medium": "Auf Medium verbinden",
-        "author-bio-block.social-tumblr": "Auf Tumblr verbinden",
-        "author-bio-block.social-pinterest": "Auf Pinterest verbinden",
-        "author-bio-block.social-snapchat": "Auf Snapchat verbinden",
-        "author-bio-block.social-whatsapp": "Auf WhatsApp verbinden"
-    },
-    "default-output-block": {
-        "default-output-block.skip-main": "Zum Hauptinhalt springen"
-    }
+  "ads-block": {
+    "ads-block.ad-label": "WERBUNG"
+  },
+  "alert-bar-block": {
+    "alert-bar-block.close-button": "Eilmeldungsalarm verwerfen",
+    "alert-bar-block.element-aria-label": "Eilmeldungsalarm"
+  },
+  "article-body-block": {
+    "article-body-block.clarification": "Klarstellung",
+    "article-body-block.correction": "Korrektur",
+    "article-body-block.interstitial-link-aria-label": "Ähnlichen Artikel öffnen"
+  },
+  "author-bio-block": {
+    "author-bio-block.social-email": "E-Mail an %{authorName} senden",
+    "author-bio-block.social-facebook": "Auf Facebook verbinden",
+    "author-bio-block.social-instagram": "Auf Instagram folgen",
+    "author-bio-block.social-linkedin": "Auf LinkedIn verbinden",
+    "author-bio-block.social-medium": "Auf Medium verbinden",
+    "author-bio-block.social-pinterest": "Auf Pinterest verbinden",
+    "author-bio-block.social-reddit": "Auf Reddit verbinden",
+    "author-bio-block.social-rss": "RSS Feed von %{authorName} abonnieren",
+    "author-bio-block.social-snapchat": "Auf Snapchat verbinden",
+    "author-bio-block.social-soundcloud": "%{authorName} auf SoundCloud anhören",
+    "author-bio-block.social-tumblr": "Auf Tumblr verbinden",
+    "author-bio-block.social-twitter": "Auf Twitter verbinden",
+    "author-bio-block.social-whatsapp": "Auf WhatsApp verbinden",
+    "author-bio-block.social-youtube": "Auf YouTube verbinden"
+  },
+  "default-output-block": {
+    "default-output-block.skip-main": "Zum Hauptinhalt springen"
+  },
+  "footer-block": {
+    "footer-block.facebook-link": "Facebookseite",
+    "footer-block.rss-link": "RSS Feed",
+    "footer-block.twitter-link": "Twitter Feed"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "Verbinden",
+    "full-author-bio-block.social-email": "E-Mail",
+    "full-author-bio-block.social-facebook": "Auf Facebook verbinden",
+    "full-author-bio-block.social-instagram": "Auf Instagram folgen",
+    "full-author-bio-block.social-linkedin": "Auf LinkedIn verbinden",
+    "full-author-bio-block.social-medium": "Auf Medium verbinden",
+    "full-author-bio-block.social-pinterest": "Auf Pinterest verbinden",
+    "full-author-bio-block.social-reddit": "Auf Reddit verbinden",
+    "full-author-bio-block.social-rss": "RSS Feed",
+    "full-author-bio-block.social-snapchat": "Auf Snapchat verbinden",
+    "full-author-bio-block.social-soundcloud": "Auf SoundCloud anhören",
+    "full-author-bio-block.social-tumblr": "Auf Tumblr verbinden",
+    "full-author-bio-block.social-twitter": "Auf Twitter verbinden",
+    "full-author-bio-block.social-whatsapp": "Auf WhatsApp verbinden",
+    "full-author-bio-block.social-youtube": "Auf YouTube verbinden"
+  },
+  "global-phrases-block": {
+    "global.gallery-autoplay-button": "Automatische Wiedergabe",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
+    "global.gallery-expand-button": "Erweitern",
+    "global.gallery-page-count-text": "%{current} von %{total}",
+    "global.gallery-pause-autoplay-button": "Automatische Wiedergabe anhalten",
+    "global.opens-in-new-window": "(Wird in einem neuen Fenster geöffnet)",
+    "global.social-email": "E-Mail",
+    "global.social-facebook": "Facebook",
+    "global.social-linkedin": "LinkedIn",
+    "global.social-pinterest": "Pinterest",
+    "global.social-twitter": "Twitter"
+  },
+  "header-nav-block": {
+    "header-nav-block.search-text": "Suche",
+    "header-nav-block.sections-button": "Rubriken",
+    "header-nav-block.sign-in-button": "Sign In"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.links-element-aria-label": "Relevanteste Links",
+    "header-nav-chain-block.querly-search-aria-label": "Suche",
+    "header-nav-chain-block.search-text": "Suche",
+    "header-nav-chain-block.sections-button": "Rubriken",
+    "header-nav-chain-block.sections-button-aria-label": "%{item} Unterrubriken anzeigen",
+    "header-nav-chain-block.sections-element-aria-label": "Rubriken-Menü"
+  },
+  "links-bar-block": {
+    "links-bar-block.element-aria-label": "Weitere Links"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "Mehr anzeigen",
+    "results-list-block.see-more-button-aria-label": "Sehen Sie sich weitere Artikel zu diesem Thema an"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "Suche",
+    "search-results-block.search-result-number": "%{smart_count} Ergebnis für \"%{searchTerm}\" |||| %{smart_count} Ergebnisse für \"%{searchTerm}\"",
+    "search-results-block.see-more-button": "Mehr anzeigen",
+    "search-results-block.see-more-button-aria-label": "Sehen Sie sich weitere Artikel zu diesem Thema an",
+    "search-results-blocks.search-input-placeholder": "Geben Sie Ihre Suchbegriffe ein"
+  },
+  "share-bar-block": {
+    "share-bar-block.share-button-aria-label": "Aktuellen Artikel über %{socialType} teilen"
+  },
+  "shared-styles": {
+    "byline.and-text": "und",
+    "byline.by-text": "Von",
+    "overline.sponsored-content": "Werblicher Inhalt",
+    "promo-label.gallery-text": "Galerie",
+    "promo-label.video-text": "Video"
+  }
 }

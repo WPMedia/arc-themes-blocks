@@ -21,6 +21,7 @@ export const textFieldRequired = () => (
     label="Plain Text Field"
     name="field3"
     required
+    showDefaultError
   />
 );
 
@@ -42,21 +43,21 @@ export const textFieldTip = () => (
 
 export const textFieldTipError = () => (
   <FormInputField
-    isDefaultError
     label="Plain Text Field"
     name="field6"
     tip="Enter some text."
     required
+    showDefaultError
   />
 );
 
 export const textFieldCustomError = () => (
   <FormInputField
-    isDefaultError
     label="Plain Text Field"
     name="field7"
     tip="Enter some text."
     required
+    showDefaultError
     validationErrorMessage="This is a custom error."
   />
 );
@@ -72,31 +73,11 @@ export const emailField = () => (
 
 export const emailFieldError = () => (
   <FormInputField
-    isDefaultError
     defaultValue="my?invalid.email"
     name="field9"
+    showDefaultError
     type={FIELD_TYPES.EMAIL}
     label="Email Address"
-  />
-);
-
-export const textFieldMinSizeError = () => (
-  <FormInputField
-    isDefaultError
-    defaultValue="1"
-    name="field10"
-    label="Text Field (Minimum 3)"
-    minLength="3"
-  />
-);
-
-export const textFieldMaxSizeError = () => (
-  <FormInputField
-    isDefaultError
-    defaultValue="1234"
-    name="field11"
-    label="Text Field (Maximum 3)"
-    maxLength="3"
   />
 );
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 import { PrimaryFont } from '@wpmedia/shared-styles';
@@ -13,37 +13,38 @@ export const FIELD_TYPES = {
 
 const FormInputField = ({
   defaultValue = '',
-  isDefaultError = false,
   label,
-  minLength = 0,
-  maxLength = 0,
   name,
   onChange = () => {},
   placeholder,
   required = false,
+  showDefaultError = false,
   tip,
   type = FIELD_TYPES.TEXT,
   validationErrorMessage,
   validationPattern,
 }) => {
-  const [error, setError] = useState(isDefaultError);
-  const [errorMessage, setErrorMessage] = useState(validationErrorMessage);
+  const [valid, setValid] = useState(true);
+  const inputElement = useRef();
+
+  useEffect(() => {
+    if (validationErrorMessage) {
+      inputElement.current.setCustomValidity(validationErrorMessage);
+    }
+    if (inputElement.current && showDefaultError) {
+      setValid(inputElement.current.checkValidity());
+    }
+  }, [inputElement, showDefaultError, validationErrorMessage]);
 
   const handleBlur = (event) => {
-    setError(!!event.target.validationMessage);
-    setErrorMessage(event.target.validationMessage
-      ? validationErrorMessage || event.target.validationMessage
-      : '');
+    setValid(event.target.checkValidity());
   };
 
   const handleChange = (event) => {
-    if (error) {
-      setError(!!event.target.validationMessage);
-      setErrorMessage(event.target.validationMessage
-        ? validationErrorMessage || event.target.validationMessage
-        : '');
+    if (!valid) {
+      handleBlur(event);
     }
-    onChange(event);
+    onChange({ value: event.target.value });
   };
 
   const infoId = `id_${name}_error`;
@@ -51,14 +52,12 @@ const FormInputField = ({
 
   const fieldParameters = {
     ...(defaultValue ? { defaultValue } : {}),
-    ...(minLength ? { minLength } : {}),
-    ...(maxLength ? { maxLength } : {}),
     ...(name ? { name } : {}),
     ...(validationPattern ? { pattern: validationPattern } : {}),
     ...(placeholder ? { placeholder, 'aria-placeholder': placeholder } : {}),
     ...(required ? { required } : {}),
-    ...(tip || error ? { 'aria-describedby': infoId } : {}),
-    ...(error ? { 'aria-invalid': true } : {}),
+    ...(tip || !valid ? { 'aria-describedby': infoId } : {}),
+    ...(!valid ? { 'aria-invalid': true } : {}),
   };
 
   return (
@@ -72,25 +71,26 @@ const FormInputField = ({
       <input
         className={[
           'xpmedia-form-field-input',
-          ...(error ? ['xpmedia-form-field-input--error'] : []),
+          ...(!valid ? ['xpmedia-form-field-input--error'] : []),
         ].join(' ')}
         id={inputId}
         type={type}
         onBlur={handleBlur}
         onChange={handleChange}
+        ref={inputElement}
         {...fieldParameters}
       />
-      { tip || error
+      { tip || !valid
         ? (
           <div
             className={[
               'xpmedia-form-field-tip',
-              ...(error ? ['xpmedia-form-field-tip--error'] : []),
+              ...(!valid ? ['xpmedia-form-field-tip--error'] : []),
             ].join(' ')}
             id={infoId}
           >
-            { error && errorMessage
-              ? <span role="alert">{`${errorMessage} `}</span>
+            { !valid && inputElement.current?.validationMessage
+              ? <span role="alert">{`${inputElement.current.validationMessage} `}</span>
               : null}
             { tip
               ? <span>{tip}</span>
@@ -106,12 +106,10 @@ FormInputField.propTypes = {
   defaultValue: PropTypes.string,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  isDefaultError: PropTypes.bool,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  minLength: PropTypes.string,
-  maxLength: PropTypes.string,
   required: PropTypes.bool,
+  showDefaultError: PropTypes.bool,
   tip: PropTypes.string,
   type: PropTypes.oneOf(Object.values(FIELD_TYPES)),
   validationErrorMessage: PropTypes.string,

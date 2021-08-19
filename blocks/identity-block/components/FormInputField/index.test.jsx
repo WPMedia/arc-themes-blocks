@@ -26,7 +26,42 @@ describe('Form Input Field', () => {
       />,
     );
 
+    wrapper.find('input').simulate('blur');
+
+    expect(wrapper.find('error message')).not.toBe(null);
+  });
+
+  it('renders with an error by default', () => {
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        type={FIELD_TYPES.EMAIL}
+        defaultValue="invalid"
+        showDefaultError
+        validationErrorMessage="error message"
+      />,
+    );
+
+    expect(wrapper.find('error message')).not.toBe(null);
+  });
+
+  it('renders with an error only after blurring', () => {
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        type={FIELD_TYPES.EMAIL}
+        defaultValue="invalid"
+        validationErrorMessage="error message"
+      />,
+    );
+
+    expect(wrapper.find('error message')).not.toExist();
+
     wrapper.find('input').simulate('change');
+
+    expect(wrapper.find('error message')).not.toExist();
+
+    wrapper.find('input').simulate('blur');
 
     expect(wrapper.find('error message')).not.toBe(null);
   });
@@ -44,7 +79,7 @@ describe('Form Input Field', () => {
 
     expect(wrapper.find('should not be found after change')).not.toBe(null);
 
-    wrapper.find('input').simulate('change');
+    wrapper.find('input').simulate('blur');
 
     expect(wrapper.find('should not be found after change')).not.toExist();
     expect(wrapper.find('error message')).not.toBe(null);

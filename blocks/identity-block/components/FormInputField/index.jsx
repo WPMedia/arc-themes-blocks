@@ -89,11 +89,11 @@ const FormInputField = ({
             ].join(' ')}
             id={infoId}
           >
-            { error
+            { error && errorMessage
               ? <span role="alert">{`${errorMessage} `}</span>
               : null}
             { tip
-              ? <span role="tooltip">{tip}</span>
+              ? <span>{tip}</span>
               : null}
           </div>
         )

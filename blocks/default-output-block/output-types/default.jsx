@@ -93,7 +93,7 @@ const paywallScript = (src) => {
     return null;
   }
 
-  return <script defer src={src} />;
+  return <script defer src={src} data-tid="arcp" />;
 };
 
 const SampleOutputType = ({

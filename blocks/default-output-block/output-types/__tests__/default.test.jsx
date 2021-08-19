@@ -280,6 +280,36 @@ describe('head content', () => {
     );
     expect(wrapper.find('script').find({ 'data-integration': 'nativo-ad' }).length).toBe(0);
   });
+
+  it('should not render the paywall script', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType
+        deployment={jest.fn()}
+        metaValue={jest.fn().mockReturnValue('article')}
+        {...mockFuntions}
+      />
+    );
+    expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(1);
+  });
+
+
+  it('should render the paywall script', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      subscriptions: {
+        paywall: { src:'www.example.com' }
+      },
+    }))));
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType
+        deployment={jest.fn()}
+        metaValue={jest.fn().mockReturnValue('article')}
+        {...mockFuntions}
+      />
+    );
+    expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(1);
+  });
 });
 
 describe('body content', () => {

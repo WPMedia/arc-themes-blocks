@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 
-import { useIdentity } from '@wpmedia/identity-block';
 import {
   usePaywall,
 } from '../../components/Paywall';
 import SignwallBody from '../../components/SignwallBody';
-import PaywallOfferBody from '../../components/PaywallOfferBody';
+import { PaywallOfferBody } from '../../components/PaywallOfferBody';
 import '../../components/styles.scss';
 
 const Paywall = ({
-  customFields
+  customFields,
 }) => {
-  const { signUpURL, loginURL, offerURL, campaignCode } = customFields;
-  const { isLoggedIn } = useIdentity();
+  const {
+    signUpURL, loginURL, offerURL, campaignCode,
+  } = customFields;
   const {
     isPaywalled,
     isSignwall,
     triggeredRule = {},
-    ArcP
   } = usePaywall();
 
   if (!isPaywalled || isServerSide()) {
@@ -39,13 +38,13 @@ const Paywall = ({
             <PaywallOfferBody
               offerURL={offerURL}
               loginURL={loginURL}
-              campaignCode={triggeredRule.pw}
+              campaignCode={campaignCode || triggeredRule.pw}
             />
           )
         }
       </div>
     </div>
-  )
+  );
 };
 
 Paywall.label = 'Paywall - Arc Block';
@@ -59,11 +58,11 @@ Paywall.propTypes = {
       defaultValue: '/account/login/',
     }),
     offerURL: PropTypes.string.tag({
-      defaultValue: '/offer/'
+      defaultValue: '/offer/',
     }),
     campaignCode: PropTypes.string.tag({
-      defaultValue: ''
-    })
+      defaultValue: '',
+    }),
   }),
 };
 

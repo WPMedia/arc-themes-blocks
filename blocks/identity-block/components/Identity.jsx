@@ -7,8 +7,9 @@ import { isServerSide } from '@wpmedia/engine-theme-sdk';
 const useIdentity = () => {
   const { arcSite } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
-  const [ isInit, setIsInit ] = useState(() => !!Identity.apiOrigin);
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [isInit, setIsInit] = useState(() => !!Identity.apiOrigin);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   if (!isInit && arcSite && subscriptions?.identity?.apiOrigin) {
     const arcHeaders = subscriptions.headers;
     if (!isServerSide()) {
@@ -36,11 +37,11 @@ const useIdentity = () => {
   useEffect(() => {
     const loggedIn = async () => {
       setIsLoggedIn(await Identity.isLoggedIn());
-    }
+    };
     if (Identity) {
       loggedIn();
     }
-  }, [Identity, Identity.userIdentity]);
+  }, []);
 
   return {
     Identity,

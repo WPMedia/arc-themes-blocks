@@ -8,50 +8,53 @@ import { usePaywall } from './Paywall';
 export const PaywallOfferBody = ({
   loginURL,
   offerURL = '/offer/',
-  campaignCode
+  campaignCode,
 }) => {
-  const { isLoggedIn } = useIdentity();
+  const { isLoggedIn, Identity } = useIdentity();
   const [title, setTitle] = useState();
   const [subtitle, setSubtitle] = useState();
 
   const {
     results: paywallResults = {},
-    ArcP = {}
+    ArcP = {},
   } = usePaywall();
+  // eslint-disable-next-line no-underscore-dangle
   const rules = ArcP._rules || [];
-  const [ triggeredRule, setTriggeredRule ] = useState();
-  const [ triggeredRules, setTriggeredRules ] = useState([]);
-  const [ pw, setPw ] = useState();
+  const [triggeredRule, setTriggeredRule] = useState();
+  const [triggeredRules, setTriggeredRules] = useState([]);
+  const [pw, setPw] = useState();
 
-  const { offer, fetchOffer } = useOffer({campaignCode: campaignCode ? campaignCode : !isUrl(pw) ? pw : null});
-  const [ pwOffer, setPwOffer ] = useState();
+  const { offer, fetchOffer } = useOffer({
+    campaignCode: campaignCode || (!isUrl(pw) ? pw : null),
+  });
+  const [pwOffer, setPwOffer] = useState();
   useEffect(() => {
-    const selectedOffer = pwOffer ? pwOffer : offer;
+    const selectedOffer = pwOffer || offer;
     if (selectedOffer) {
       setTitle(selectedOffer.pageTitle);
       setSubtitle(selectedOffer.pageSubTitle);
     }
-  }, [ offer, pwOffer ]);
+  }, [offer, pwOffer]);
 
   useEffect(() => {
     const fetchNewOffer = async () => {
       setPwOffer(await fetchOffer(pw));
     };
-    if (pw && !isUrl(pw)) {
+    if (pw && !isUrl(pw) && (!pwOffer || pwOffer.pw !== pw)) {
       fetchNewOffer();
     }
-  }, [pw]);
+  }, [pw, fetchOffer, pwOffer]);
 
   useEffect(() => {
     const ruleId = paywallResults.triggered && paywallResults.triggered.id;
     const rc = paywallResults.triggered && paywallResults.triggered.rc;
     if (ruleId) {
-      const triggeredRule = rules.find(rule => ruleId === rule.id);
-      const triggeredRules = rules.filter(rule => rule.rt[1] < rc);
-      setTriggeredRule(triggeredRule);
-      setTriggeredRules(triggeredRules);
+      const newTriggeredRule = rules.find((rule) => ruleId === rule.id);
+      const newTriggeredRules = rules.filter((rule) => rule.rt[1] < rc);
+      setTriggeredRule(newTriggeredRule);
+      setTriggeredRules(newTriggeredRules);
     }
-  }, [paywallResults.triggered, rules ]);
+  }, [paywallResults.triggered, rules]);
 
   useEffect(() => {
     if (triggeredRule && triggeredRules) {
@@ -63,37 +66,49 @@ export const PaywallOfferBody = ({
         const triggeredz = triggeredRules
           .sort((a, b) => b.rt[1] - a.rt[1]);
         const triggered = triggeredz
-          .find(rule => rule.e && rule.e.length > 1) || {};
+          .find((rule) => rule.e && rule.e.length > 1) || {};
         setPw(triggered.pw);
-        return;
       }
     }
-  }, [ triggeredRule, triggeredRules ]);
+  }, [triggeredRule, triggeredRules]);
 
   const isPwUrl = pw && isUrl(pw);
-  const campaign = campaignCode ? campaignCode : !isPwUrl ? pw : 'default';
+  const campaign = campaignCode || (!isPwUrl ? pw : 'default');
   return (
     <>
       {loginURL && !isLoggedIn ? (
         <p className="xpmedia-paywall--header">
           Already a subscriber?
           {' '}
-          <a href={loginURL}>Sign In</a>
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await Identity.login('matthewkim93+test12345@gmail.com', 'Test12345!', { rememberMe: true });
+                window.location.reload();
+              } catch (e) {
+                // console.error(e);
+              }
+            }}
+          >
+            Sign In
+          </button>
         </p>
       ) : null}
 
-      {title ?
-        (
+      {title
+        ? (
           <p
             className="xpmedia-paywall--title"
             dangerouslySetInnerHTML={{ __html: title }}
           />
-        ) : "Subscribe to continue reading"
-      }
-      {subtitle ? <p
-        className="xpmedia-paywall--subtitle"
-        dangerouslySetInnerHTML={{ __html: subtitle }}
-      /> : null}
+        ) : 'Subscribe to continue reading'}
+      {subtitle ? (
+        <p
+          className="xpmedia-paywall--subtitle"
+          dangerouslySetInnerHTML={{ __html: subtitle }}
+        />
+      ) : null}
       <a href={isPwUrl ? pw : `${offerURL}?_cid=${campaign}`} className="xpmedia-paywall--button">Subscribe</a>
     </>
   );

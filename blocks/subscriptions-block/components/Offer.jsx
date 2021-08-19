@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
@@ -8,43 +8,39 @@ const OFFER_URL = '/retail/public/v1/offer/live/';
 
 export const offerService = ({
   apiOrigin,
-  campaignCode
-}) => {
-  return fetch(`${apiOrigin}${OFFER_URL}${campaignCode ? campaignCode : 'default'}`, {})
-    .then(res => res.json());
-};
-
+  campaignCode,
+}) => fetch(`${apiOrigin}${OFFER_URL}${campaignCode || 'default'}`, {})
+  .then((res) => res.json());
 
 export const useOffer = (options = {}) => {
   const { arcSite } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
-  const [ offer, setOffer ] = useState();
+  const [offer, setOffer] = useState();
   const [isFetching, setIsFetching] = useState(false);
   const {
-    campaignCode = ''
+    campaignCode = '',
   } = options;
 
-  const fetchOffer = async (campaignCode) => {
-    const offer = await offerService({
-      campaignCode,
-      apiOrigin: subscriptions.retail.apiOrigin
+  const fetchOffer = useCallback(async (code) => {
+    const offerResponse = await offerService({
+      campaignCode: code,
+      apiOrigin: subscriptions.retail.apiOrigin,
     });
-    setOffer(offer);
-    return offer;
-  };
+    setOffer(offerResponse);
+    return offerResponse;
+  }, [setOffer, subscriptions.retail.apiOrigin]);
 
   useEffect(() => {
     const fetchNewOffer = async () => {
-      setIsFetching(true)
-      const offer = await fetchOffer(campaignCode);
-      setOffer(offer);
+      setIsFetching(true);
+      const offerResponse = await fetchOffer(campaignCode);
+      setOffer(offerResponse);
       setIsFetching(false);
     };
     if (!offer && !isServerSide()) {
       fetchNewOffer();
     }
-
-  }, [campaignCode]);
+  }, [campaignCode, fetchOffer, offer]);
 
   return {
     offer,

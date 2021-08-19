@@ -5,15 +5,15 @@ import PropTypes from '@arc-fusion/prop-types';
 import {
   usePaywall,
 } from '../../components/Paywall';
-import PaywallOfferBody from '../../components/PaywallOfferBody';
+import { PaywallOfferBody } from '../../components/PaywallOfferBody';
 import '../../components/styles.scss';
 
 const OfferPaywall = ({
-  customFields
+  customFields,
 }) => {
   const { loginURL, offerURL, campaignCode } = customFields;
   const {
-    isPaywalled
+    isPaywalled,
   } = usePaywall();
 
   if (!isPaywalled || isServerSide()) {
@@ -30,7 +30,7 @@ const OfferPaywall = ({
         />
       </div>
     </div>
-  )
+  );
 };
 
 OfferPaywall.label = 'Offer Paywall - Arc Block';
@@ -41,11 +41,11 @@ OfferPaywall.propTypes = {
       defaultValue: '/account/login/',
     }),
     offerURL: PropTypes.string.tag({
-      defaultValue: '/offer/'
+      defaultValue: '/offer/',
     }),
     campaignCode: PropTypes.string.tag({
-      defaultValue: ''
-    })
+      defaultValue: '',
+    }),
   }),
 };
 

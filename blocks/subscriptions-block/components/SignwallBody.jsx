@@ -5,10 +5,10 @@ import { useIdentity } from '@wpmedia/identity-block';
 
 const SignwallBody = ({ signUpURL, loginURL }) => {
   const { Identity, isInitialized } = useIdentity();
+
   if (!isInitialized && isServerSide()) {
     return null;
   }
-
 
   return (
     <>
@@ -16,7 +16,19 @@ const SignwallBody = ({ signUpURL, loginURL }) => {
         <p className="xpmedia-paywall--header">
           Already have an account?
           {' '}
-          <a href={loginURL}>Sign In</a>
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await Identity.login('matthewkim93+test12345@gmail.com', 'Test12345!', { rememberMe: true });
+                window.location.reload();
+              } catch (e) {
+                // console.error(e);
+              }
+            }}
+          >
+            Sign In
+          </button>
         </p>
       ) : null}
 

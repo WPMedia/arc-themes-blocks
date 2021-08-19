@@ -127,8 +127,8 @@ const SampleOutputType = ({
     querylyOrg,
     locale = 'en',
     subscriptions: {
-      paywall: { src: paywallSrc }
-    }
+      paywall: { src: paywallSrc },
+    },
   } = getProperties(arcSite);
 
   const chartBeatInline = `

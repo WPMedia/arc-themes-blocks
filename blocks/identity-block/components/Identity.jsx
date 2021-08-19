@@ -1,26 +1,41 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import Identity from '@arc-publishing/sdk-identity';
-// import { useFusionContext } from 'fusion:context';
-// import getProperties from 'fusion:properties';
-// import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
-const useIdentity = () => ({
-  Identity,
-  isInitialized: true,
-});
+const useIdentity = () => {
+  const { arcSite } = useFusionContext();
+  const { subscriptions } = getProperties(arcSite);
+  const [isInit, setIsInit] = useState(() => !!Identity.apiOrigin);
+  if (!isInit && arcSite && subscriptions?.identity?.apiOrigin) {
+    const arcHeaders = subscriptions.headers;
+    if (!isServerSide()) {
+      if (!window.realFetch) {
+        window.realFetch = window.fetch;
+      }
+      window.fetch = (url, opts) => {
+        const modifiedOpts = {
+          ...opts,
+        };
 
-// keep skelton for future use
-// const useIdentity = () => ({
-// const { arcSite } = useFusionContext();
-// const { subscriptions } = getProperties(arcSite);
-// const [
-//   isInit,
-//   setIsInit
-// ] = useState(() => !!Identity.apiOrigin);
+        if (/(retail|sales|identity)/.test(url)) {
+          modifiedOpts.headers = {
+            ...opts.headers,
+            ...arcHeaders,
+          };
+        }
+        return window.realFetch(url, modifiedOpts);
+      };
+    }
+    Identity.options({ apiOrigin: subscriptions?.identity?.apiOrigin });
+    setIsInit(true);
+  }
 
-// todo: add subscriptions logic
-// return ({
-//   Identity,
-//   isInitialized: true,
-// })};
+  return {
+    Identity,
+    isInitialized: isInit,
+  };
+};
+
 export default useIdentity;

@@ -128,6 +128,8 @@ const SampleOutputType = ({
     locale = 'en',
     subscriptions: {
       paywall: { src: paywallSrc },
+    } = {
+      paywall: {}
     },
   } = getProperties(arcSite);
 

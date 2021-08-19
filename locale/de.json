@@ -102,5 +102,12 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "Zum Hauptinhalt springen"
-  }
+	},
+	"identity-block": {
+		"identity-block.email": "Email address",
+		"identity-block.password": "Password",
+		"identity-block.sign-up": "Sign up",
+		"identity-block.confirm-password": "Confirm password",
+		"identity-block.username": "Username"
+	}
 }

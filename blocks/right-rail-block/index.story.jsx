@@ -3,7 +3,7 @@ import React from 'react';
 import RightRailBlock from './layouts/right-rail/default';
 
 export default {
-  title: 'Blocks/Right Rail Block',
+  title: 'Layouts/Right Rail',
   parameters: {
     // Set the viewports in Chromatic at a component level.
     chromatic: { viewports: [320, 960, 1200, 1600] },

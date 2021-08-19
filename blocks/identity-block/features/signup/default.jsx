@@ -19,7 +19,9 @@ export const SignUp = ({ customFields, arcSite }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
-  const [error, setError] = useState();
+
+  // todo: use server-side validation
+  const [, setError] = useState();
 
   if (!isInitialized) {
     return null;
@@ -69,8 +71,16 @@ export const SignUp = ({ customFields, arcSite }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <p>{phrases.t('identity-block.confirm-password')}</p>
-        {/* include confirm password */}
+        <div className="xpmedia-subs-input">
+          <label htmlFor="confirm-password">{phrases.t('identity-block.confirm-password')}</label>
+          <input
+            name="confirm-password"
+            id="confirm-password"
+            type="password"
+            // todo: use shared style confirm password input
+            onChange={() => {}}
+          />
+        </div>
         <div className="xpmedia-subs-input">
           <label htmlFor="email">{phrases.t('identity-block.email')}</label>
           <input
@@ -82,12 +92,14 @@ export const SignUp = ({ customFields, arcSite }) => {
         </div>
 
         <button type="submit">{phrases.t('identity-block.sign-up')}</button>
+        {/*
+        todo: server-side validation
         {error ? (
           <section>
             <p>{`Error signing up. Code: ${error.code}`}</p>
             {error.message && error.message.length < 100 && <p>{error.message}</p>}
           </section>
-        ) : null}
+        ) : null} */}
       </form>
     </section>
   );

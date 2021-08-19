@@ -290,7 +290,7 @@ describe('head content', () => {
         {...mockFuntions}
       />
     );
-    expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(1);
+    expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(0);
   });
 
 

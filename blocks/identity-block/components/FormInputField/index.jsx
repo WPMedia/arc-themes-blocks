@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from '@arc-fusion/prop-types';
 
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
@@ -12,13 +13,13 @@ export const FIELD_TYPES = {
 
 const FormInputField = ({
   defaultValue = '',
-  label,
-  name,
   isDefaultError = false,
-  onChange = () => {},
-  placeholder,
+  label,
   minLength = 0,
   maxLength = 0,
+  name,
+  onChange = () => {},
+  placeholder,
   required = false,
   tip,
   type = FIELD_TYPES.TEXT,
@@ -45,26 +46,35 @@ const FormInputField = ({
     onChange(event);
   };
 
+  const infoId = `id_${name}_error`;
+  const inputId = `id_${name}_input`;
+
   const fieldParameters = {
     ...(defaultValue ? { defaultValue } : {}),
     ...(minLength ? { minLength } : {}),
     ...(maxLength ? { maxLength } : {}),
     ...(name ? { name } : {}),
     ...(validationPattern ? { pattern: validationPattern } : {}),
-    ...(placeholder ? { placeholder } : {}),
+    ...(placeholder ? { placeholder, 'aria-placeholder': placeholder } : {}),
     ...(required ? { required } : {}),
+    ...(tip || error ? { 'aria-describedby': infoId } : {}),
+    ...(error ? { 'aria-invalid': true } : {}),
   };
 
   return (
-    <PrimaryFont as="label" className="xpmedia-form-field">
-      { label
-        ? <div className="xpmedia-form-field-label">{label}</div>
-        : null}
+    <PrimaryFont as="div" className="xpmedia-form-field">
+      <label
+        className="xpmedia-form-field-label"
+        htmlFor={inputId}
+      >
+        {label}
+      </label>
       <input
         className={[
           'xpmedia-form-field-input',
           ...(error ? ['xpmedia-form-field-input--error'] : []),
         ].join(' ')}
+        id={inputId}
         type={type}
         onBlur={handleBlur}
         onChange={handleChange}
@@ -77,18 +87,35 @@ const FormInputField = ({
               'xpmedia-form-field-tip',
               ...(error ? ['xpmedia-form-field-tip--error'] : []),
             ].join(' ')}
+            id={infoId}
           >
             { error
-              ? <span>{errorMessage}</span>
+              ? <span role="alert">{`${errorMessage} `}</span>
               : null}
             { tip
-              ? <span>{tip}</span>
+              ? <span role="tooltip">{tip}</span>
               : null}
           </div>
         )
         : null}
     </PrimaryFont>
   );
+};
+
+FormInputField.propTypes = {
+  defaultValue: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isDefaultError: PropTypes.bool,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  minLength: PropTypes.string,
+  maxLength: PropTypes.string,
+  required: PropTypes.bool,
+  tip: PropTypes.string,
+  type: PropTypes.oneOf(Object.values(FIELD_TYPES)),
+  validationErrorMessage: PropTypes.string,
+  validationPattern: PropTypes.string,
 };
 
 export default FormInputField;

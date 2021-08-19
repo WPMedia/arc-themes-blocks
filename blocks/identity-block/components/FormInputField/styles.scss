@@ -2,7 +2,6 @@
   color: $ui-primary-font-color;
   display: block;
   font-size: calculateRem(20px);
-  line-height: 2.5;
   margin: map-get($spacers, 'md') 0;
 }
 
@@ -34,12 +33,6 @@
 
 .xpmedia-form-field-tip {
   color: $ui-medium-gray;
-
-  > span {
-    &::after {
-      content: ' ';
-    }
-  }
 
   &--error {
     color: $danger-color;

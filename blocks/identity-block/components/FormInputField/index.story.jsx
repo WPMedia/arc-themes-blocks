@@ -16,12 +16,6 @@ export const textField = () => (
   />
 );
 
-export const textFieldNoLabel = () => (
-  <FormInputField
-    name="field2"
-  />
-);
-
 export const textFieldRequired = () => (
   <FormInputField
     label="Plain Text Field"

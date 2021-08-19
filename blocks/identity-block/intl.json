@@ -1,0 +1,57 @@
+{
+	"identity-block.email": {
+		"de": "Email address",
+		"en": "Email address",
+		"es": "Email address",
+		"fr": "Email address",
+		"ja": "Email address",
+		"ko": "Email address",
+		"no": "Email address",
+		"pt": "Email address",
+		"sv": "Email address"
+	},
+	"identity-block.password": {
+		"de": "Password",
+		"en": "Password",
+		"es": "Password",
+		"fr": "Password",
+		"ja": "Password",
+		"ko": "Password",
+		"no": "Password",
+		"pt": "Password",
+		"sv": "Password"
+	},
+	"identity-block.sign-up": {
+		"de": "Sign up",
+		"en": "Sign up",
+		"es": "Sign up",
+		"fr": "Sign up",
+		"ja": "Sign up",
+		"ko": "Sign up",
+		"no": "Sign up",
+		"pt": "Sign up",
+		"sv": "Sign up"
+	},
+	"identity-block.confirm-password": {
+		"de": "Confirm password",
+		"en": "Confirm password",
+		"es": "Confirm password",
+		"fr": "Confirm password",
+		"ja": "Confirm password",
+		"ko": "Confirm password",
+		"no": "Confirm password",
+		"pt": "Confirm password",
+		"sv": "Confirm password"
+	},
+	"identity-block.username": {
+		"de": "Username",
+		"en": "Username",
+		"es": "Username",
+		"fr": "Username",
+		"ja": "Username",
+		"ko": "Username",
+		"no": "Username",
+		"pt": "Username",
+		"sv": "Username"
+	}
+}

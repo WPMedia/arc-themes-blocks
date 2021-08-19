@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
-import './styles.scss';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
 
 import useIdentity from '../../components/Identity';
 
-export const SignUp = ({ customFields }) => {
+import './styles.scss';
+
+export const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const { Identity, isInitialized } = useIdentity();
 
@@ -26,7 +31,7 @@ export const SignUp = ({ customFields }) => {
 
   return (
     <section>
-      <h1>Sign Up</h1>
+      <h1>{phrases.t('identity-block.sign-up')}</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -45,9 +50,7 @@ export const SignUp = ({ customFields }) => {
         }}
       >
         <div className="xpmedia-subs-input">
-          {/* 300081 - userName must be between 5 and 100 characters long */}
-          <p>userName must be between 5 and 100 characters long </p>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">{phrases.t('identity-block.username')}</label>
           <input
             name="username"
             id="username"
@@ -58,7 +61,7 @@ export const SignUp = ({ customFields }) => {
 
         <div className="xpmedia-subs-input">
           <p>At minimum, password should have 6 characters</p>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{phrases.t('identity-block.password')}</label>
           <input
             name="password"
             id="password"
@@ -66,10 +69,10 @@ export const SignUp = ({ customFields }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
+        <p>{phrases.t('identity-block.confirm-password')}</p>
+        {/* include confirm password */}
         <div className="xpmedia-subs-input">
-          <p>At minimum, needs to be valid email</p>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{phrases.t('identity-block.email')}</label>
           <input
             name="email"
             id="email"
@@ -78,7 +81,7 @@ export const SignUp = ({ customFields }) => {
           />
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit">{phrases.t('identity-block.sign-up')}</button>
         {error ? (
           <section>
             <p>{`Error signing up. Code: ${error.code}`}</p>

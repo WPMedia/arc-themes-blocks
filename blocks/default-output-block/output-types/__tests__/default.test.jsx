@@ -288,16 +288,15 @@ describe('head content', () => {
         deployment={jest.fn()}
         metaValue={jest.fn().mockReturnValue('article')}
         {...mockFuntions}
-      />
+      />,
     );
     expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(0);
   });
 
-
   it('should render the paywall script', () => {
     jest.mock('fusion:properties', () => (jest.fn(() => ({
       subscriptions: {
-        paywall: { src:'www.example.com' }
+        paywall: { src: 'www.example.com' },
       },
     }))));
     const { default: DefaultOutputType } = require('../default');
@@ -306,7 +305,7 @@ describe('head content', () => {
         deployment={jest.fn()}
         metaValue={jest.fn().mockReturnValue('article')}
         {...mockFuntions}
-      />
+      />,
     );
     expect(wrapper.find('script').find({ 'data-tid': 'arcp' }).length).toBe(1);
   });

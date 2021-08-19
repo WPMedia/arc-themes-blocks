@@ -129,7 +129,7 @@ const SampleOutputType = ({
     subscriptions: {
       paywall: { src: paywallSrc },
     } = {
-      paywall: {}
+      paywall: {},
     },
   } = getProperties(arcSite);
 

@@ -19,6 +19,10 @@ export const usePaywall = (options = {}) => {
   const { Identity, isInitialized } = useIdentity();
   const { arcSite, globalContent } = useFusionContext();
   const { subscriptions } = getProperties(arcSite);
+
+  if (isServerSide()) {
+    return null;
+  }
   const rules = window && window.ArcP && window.ArcP._rules;
 
   useEffect(() => {

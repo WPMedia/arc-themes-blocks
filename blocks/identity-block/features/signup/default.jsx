@@ -16,9 +16,10 @@ export const SignUp = ({ customFields, arcSite }) => {
 
   const { Identity, isInitialized } = useIdentity();
 
-  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [error, setError] = useState();
+
 
   // todo: use server-side validation
   const [, setError] = useState();

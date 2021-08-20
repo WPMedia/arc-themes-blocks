@@ -53,5 +53,8 @@
 		"no": "Username",
 		"pt": "Username",
 		"sv": "Username"
+	},
+	"identity-block.password-requirements": {
+		"en": "Please enter a valid password. Must have at least %{pwLowercase} letter(s). Must be at least %{pwMinLength} total characters. Must have at least %{pwPwNumbers} number(s). Must have at least %{pwSpecialCharacters} special characters. Must have at least %{pwUppercase} uppercase characters."
 	}
 }

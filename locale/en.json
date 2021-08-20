@@ -108,6 +108,7 @@
 		"identity-block.password": "Password",
 		"identity-block.sign-up": "Sign up",
 		"identity-block.confirm-password": "Confirm password",
-		"identity-block.username": "Username"
+		"identity-block.username": "Username",
+    "identity-block.password-requirements": "Please enter a valid password. Must have at least %{pwLowercase} letter(s). Must be at least %{pwMinLength} total characters. Must have at least %{pwPwNumbers} number(s). Must have at least %{pwSpecialCharacters} special characters. Must have at least %{pwUppercase} uppercase characters."
 	}
 }

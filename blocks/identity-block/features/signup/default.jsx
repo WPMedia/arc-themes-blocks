@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
@@ -18,11 +18,50 @@ export const SignUp = ({ customFields, arcSite }) => {
 
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [passwordRequirements, setPasswordRequirements] = useState({
+    status: 'initial',
+  });
+  // const [isPasswordValid, setIsPasswordValid] = useState(false);
+
   const [error, setError] = useState();
 
+  const passwordChangeHandler = (event) => {
+    setPassword(event.target.value);
+    // setIsPasswordValid(true);
 
-  // todo: use server-side validation
-  const [, setError] = useState();
+    // todo: check if password is valid
+    // I think Nick's doing this but we can at least get the requirements set
+  };
+
+  useEffect(() => {
+    const getConfig = async () => {
+      await Identity.getConfig()
+        .then((response) => {
+          const {
+            pwLowercase,
+            pwMinLength,
+            pwPwNumbers,
+            pwSpecialCharacters,
+            pwUppercase,
+          } = response;
+
+          setPasswordRequirements({
+            pwLowercase,
+            pwMinLength,
+            pwPwNumbers,
+            pwSpecialCharacters,
+            pwUppercase,
+            status: 'success',
+          });
+        })
+        .catch(() => setPasswordRequirements({ status: 'error' }));
+    };
+
+    if (Identity) {
+      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
+      getConfig();
+    }
+  }, [Identity]);
 
   if (!isInitialized) {
     return null;
@@ -32,6 +71,14 @@ export const SignUp = ({ customFields, arcSite }) => {
     redirectURL = document?.referrer;
   }
 
+  const {
+    pwLowercase,
+    pwMinLength,
+    pwPwNumbers,
+    pwSpecialCharacters,
+    pwUppercase,
+    status,
+  } = passwordRequirements;
   return (
     <section>
       <h1>{phrases.t('identity-block.sign-up')}</h1>
@@ -63,14 +110,21 @@ export const SignUp = ({ customFields, arcSite }) => {
         </div>
 
         <div className="xpmedia-subs-input">
-          <p>At minimum, password should have 6 characters</p>
+          {status === 'success' && phrases.t('identity-block.password-requirements', {
+            pwLowercase,
+            pwMinLength,
+            pwPwNumbers,
+            pwSpecialCharacters,
+            pwUppercase,
+          })}
           <label htmlFor="password">{phrases.t('identity-block.password')}</label>
           <input
             name="password"
             id="password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={passwordChangeHandler}
           />
+          {/* <p>{isPasswordValid ? 'Password is valid' : 'Password is invalid'}</p> */}
         </div>
         <div className="xpmedia-subs-input">
           <label htmlFor="confirm-password">{phrases.t('identity-block.confirm-password')}</label>

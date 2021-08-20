@@ -38,7 +38,7 @@ export const SignUp = ({ customFields, arcSite }) => {
         onSubmit={(e) => {
           e.preventDefault();
           return Identity.signUp({
-            userName: username,
+            userName: email,
             credentials: password,
           }, {
             email,
@@ -46,18 +46,18 @@ export const SignUp = ({ customFields, arcSite }) => {
             .then(() => {
               window.location = redirectURL;
             })
-            .catch((err) => {
-              setError(err);
+            .catch(() => {
+              setError('Something went wrong');
             });
         }}
       >
         <div className="xpmedia-subs-input">
-          <label htmlFor="username">{phrases.t('identity-block.username')}</label>
+          <label htmlFor="email">{phrases.t('identity-block.email')}</label>
           <input
-            name="username"
-            id="username"
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
+            name="email"
+            id="email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -81,25 +81,13 @@ export const SignUp = ({ customFields, arcSite }) => {
             onChange={() => {}}
           />
         </div>
-        <div className="xpmedia-subs-input">
-          <label htmlFor="email">{phrases.t('identity-block.email')}</label>
-          <input
-            name="email"
-            id="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
 
         <button type="submit">{phrases.t('identity-block.sign-up')}</button>
-        {/*
-        todo: server-side validation
         {error ? (
           <section>
-            <p>{`Error signing up. Code: ${error.code}`}</p>
-            {error.message && error.message.length < 100 && <p>{error.message}</p>}
+            <p>{error}</p>
           </section>
-        ) : null} */}
+        ) : null}
       </form>
     </section>
   );

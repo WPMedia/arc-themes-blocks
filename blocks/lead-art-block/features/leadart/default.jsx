@@ -227,6 +227,8 @@ class LeadArt extends Component {
 
 LeadArt.label = 'Lead Art – Arc Block';
 
+LeadArt.icon = 'picture-landscape';
+
 LeadArt.defaultProps = {
   customFields: {
     enableAutoplay: false,

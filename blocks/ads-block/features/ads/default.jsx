@@ -138,4 +138,7 @@ ArcAd.propTypes = {
 };
 
 ArcAd.label = 'Google Ad – Arc Block';
+
+ArcAd.icon = 'arc-ads';
+
 export default ArcAd;

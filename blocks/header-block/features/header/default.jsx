@@ -77,4 +77,6 @@ Header.propTypes = {
 
 Header.label = 'Header – Arc Block';
 
+Header.icon = 'arc-headline';
+
 export default Header;

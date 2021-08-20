@@ -69,6 +69,8 @@ const MastheadContainer = (props) => {
 
 MastheadContainer.label = 'Masthead – Arc Block';
 
+MastheadContainer.icon = 'arc-masthead';
+
 MastheadContainer.propTypes = {
   customFields: PropTypes.shape({
     logoURL: PropTypes.string.tag({

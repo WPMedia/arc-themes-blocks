@@ -168,4 +168,6 @@ VideoPlayer.propTypes = {
 
 VideoPlayer.label = 'Video Center Player - Arc Block';
 
+VideoPlayer.icon = 'video-player-adjust';
+
 export default VideoPlayer;

@@ -55,6 +55,8 @@ const SearchResultsListContainer = (
 
 SearchResultsListContainer.label = 'Search Results List – Arc Block';
 
+SearchResultsListContainer.icon = 'arc-list';
+
 SearchResultsListContainer.propTypes = {
   customFields: PropTypes.shape({
     searchContentConfig: PropTypes.contentConfig().tag({

@@ -460,4 +460,6 @@ TopTableListWrapper.propTypes = {
 
 TopTableListWrapper.label = 'Top Table List – Arc Block';
 
+TopTableListWrapper.icon = 'arc-list';
+
 export default TopTableListWrapper;

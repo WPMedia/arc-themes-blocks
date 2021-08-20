@@ -20,6 +20,8 @@ const SectionTitleContainer = (
 
 SectionTitleContainer.label = 'Section Title – Arc Block';
 
+SectionTitleContainer.icon = 'arc-headline';
+
 SectionTitleContainer.propTypes = {
   customFields: PropTypes.shape({
     sectionContentConfig: PropTypes.contentConfig().tag({

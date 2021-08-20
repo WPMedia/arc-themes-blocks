@@ -32,4 +32,6 @@ const TagTitle = () => {
 
 TagTitle.label = 'Tag Title - Arc Block';
 
+TagTitle.icon = 'arc-title';
+
 export default TagTitle;

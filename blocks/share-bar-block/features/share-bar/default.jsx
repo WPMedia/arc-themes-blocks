@@ -142,6 +142,8 @@ export const ShareBar = ({
 
 ShareBarContainer.label = 'Share Bar – Arc Block';
 
+ShareBarContainer.icon = 'share';
+
 ShareBarContainer.propTypes = {
   customFields: PropTypes.shape({
     email: PropTypes.bool.tag({

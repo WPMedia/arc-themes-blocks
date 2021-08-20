@@ -64,6 +64,8 @@ const ArticleTags = ({ customFields = {} }) => {
 
 ArticleTags.label = 'Tags Bar – Arc Block';
 
+ArticleTags.icon = 'tags';
+
 ArticleTags.propTypes = {
   customFields: PropTypes.shape({
     lazyLoad: PropTypes.bool.tag({

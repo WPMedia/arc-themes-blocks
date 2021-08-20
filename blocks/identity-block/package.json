@@ -10,6 +10,7 @@
     "features",
     "sources",
     "chains",
+    "layouts",
     "components"
   ],
   "publishConfig": {

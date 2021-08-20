@@ -21,6 +21,8 @@ const SingleChain = ({ children, customFields = {} }) => {
 
 SingleChain.label = 'Single Chain – Arc Block';
 
+SingleChain.icon = 'layout-none';
+
 SingleChain.propTypes = {
   children: PropTypes.array,
   customFields: PropTypes.shape({

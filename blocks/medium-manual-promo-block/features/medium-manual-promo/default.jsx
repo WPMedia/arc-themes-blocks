@@ -70,4 +70,6 @@ MediumManualPromo.propTypes = {
 
 MediumManualPromo.label = 'Medium Manual Promo – Arc Block';
 
+MediumManualPromo.icon = 'paragraph-bullets';
+
 export default MediumManualPromo;

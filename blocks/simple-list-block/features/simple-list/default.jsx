@@ -209,4 +209,6 @@ SimpleListWrapper.propTypes = {
 
 SimpleListWrapper.label = 'Simple List – Arc Block';
 
+SimpleListWrapper.icon = 'arc-list';
+
 export default SimpleListWrapper;

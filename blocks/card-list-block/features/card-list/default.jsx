@@ -274,6 +274,8 @@ const CardList = ({ customFields }) => {
 
 CardList.label = 'Card List – Arc Block';
 
+CardList.icon = 'arc-list';
+
 CardList.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed').tag(

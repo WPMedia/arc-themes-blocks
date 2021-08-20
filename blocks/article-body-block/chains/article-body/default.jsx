@@ -406,4 +406,6 @@ ArticleBodyChain.propTypes = {
 
 ArticleBodyChain.label = 'Article Body – Arc Block';
 
+ArticleBodyChain.icon = 'arc-article';
+
 export default ArticleBodyChain;

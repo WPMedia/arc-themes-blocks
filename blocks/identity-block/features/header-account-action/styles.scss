@@ -35,7 +35,8 @@
 
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
       right: 16px;
-      position: relative;
+      position: absolute;
+      margin-left: 16px;
 
       .account-text {
         display: none;
@@ -47,7 +48,7 @@
     }
   }
 
-  .menu {
+  .account-menu {
     display: inline;
     position: absolute;
     width: 211px;

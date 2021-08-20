@@ -2,10 +2,10 @@
 	"search-results-block.search-button": {
 		"de": "Suche",
 		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
 		"no": "Søk",
 		"pt": "Procurar",
 		"sv": "Sök"

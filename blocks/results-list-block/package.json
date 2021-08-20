@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/results-list-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion News Theme results list block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
@@ -28,14 +28,14 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/byline-block": "*",
     "@wpmedia/date-block": "*",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/global-phrases-block": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0",
-    "@arc-fusion/prop-types": "^0.1.5"
+    "styled-components": "^4.4.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

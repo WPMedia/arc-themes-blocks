@@ -3,7 +3,7 @@ import React from 'react';
 import RightRailAdvancedLayout from './layouts/right-rail-advanced/default';
 
 export default {
-  title: 'Blocks/Right Rail Advanced Block',
+  title: 'Layouts/Right Rail Advanced',
   parameters: {
     // Set the viewports in Chromatic at a component level.
     chromatic: { viewports: [320, 960, 1200, 1600] },

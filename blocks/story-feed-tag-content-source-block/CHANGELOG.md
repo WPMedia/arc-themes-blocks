@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.15.0 (2021-08-18)
+
+
+### Bug Fixes
+
+* Add defaults for feedsize and feed offset per feedback ([ddd18fe](https://github.com/WPMedia/fusion-news-theme-blocks/commit/ddd18feb1f2ec61c0a4f84e1511711fa23f67448)), closes [/github.com/WPMedia/fusion-news-theme-blocks/pull/1004#discussion_r676715925](https://github.com//github.com/WPMedia/fusion-news-theme-blocks/pull/1004/issues/discussion_r676715925)
+* Use default params inline rather than undefined fallback ([f0e22c7](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f0e22c75faf2d4e155b621f5f766d628c9dfacfa))
+
+
+### Features
+
+* Throw error if tag slug not present ([0130297](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0130297e094e082ac53a8b4784e5001aa8a05f80))
+
+
+### Performance Improvements
+
+* Use story-feed tag inline rather than import via package ([ecf9c1a](https://github.com/WPMedia/fusion-news-theme-blocks/commit/ecf9c1a87f7367dee5af706065445cde7b367944))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+**Note:** Version bump only for package @wpmedia/story-feed-tag-content-source-block
+
+
+
+
+
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/story-feed-tag-content-source-block

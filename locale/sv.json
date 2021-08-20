@@ -1,106 +1,106 @@
 {
-    "shared-styles": {
-        "promo-label.gallery-text": "Bildspel",
-        "promo-label.video-text": "Video",
-        "byline.by-text": "Av",
-        "byline.and-text": "och",
-        "overline.sponsored-content": "Sponsrat innehåll"
-    },
-    "article-body-block": {
-        "article-body-block.correction": "Korrektion",
-        "article-body-block.clarification": "Klargörande",
-        "article-body-block.interstitial-link-aria-label": "Öppna relaterad artikel"
-    },
-    "full-author-bio-block": {
-        "full-author-bio-block.connect-text": "Följ",
-        "full-author-bio-block.social-email": "E-post",
-        "full-author-bio-block.social-twitter": "Kontakta via Twitter",
-        "full-author-bio-block.social-facebook": "Kontakta via Facebook",
-        "full-author-bio-block.social-instagram": "Följ på Instagram",
-        "full-author-bio-block.social-rss": "RSS-kanal",
-        "full-author-bio-block.social-linkedin": "Kontakta via LinkedIn",
-        "full-author-bio-block.social-reddit": "Kontakta via Reddit",
-        "full-author-bio-block.social-youtube": "Kontakta via YouTube",
-        "full-author-bio-block.social-medium": "Kontakta via Medium",
-        "full-author-bio-block.social-tumblr": "Kontakta via Tumblr",
-        "full-author-bio-block.social-pinterest": "Kontakta via Pinterest",
-        "full-author-bio-block.social-snapchat": "Kontakta via Snapchat",
-        "full-author-bio-block.social-whatsapp": "Kontakta via WhatsApp",
-        "full-author-bio-block.social-soundcloud": "Lyssna på SoundCloud"
-    },
-    "global-phrases-block": {
-        "global.gallery-expand-button": "Förstora",
-        "global.gallery-page-count-text": "%{current} av %{total}",
-        "global.gallery-autoplay-button": "Spela upp",
-        "global.gallery-pause-autoplay-button": "Pausa",
-        "global.gallery-autoplay-label-start": "Start automatic slide show",
-        "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-        "global.social-twitter": "Twitter",
-        "global.social-facebook": "Facebook",
-        "global.social-linkedin": "LinkedIn",
-        "global.social-pinterest": "Pinterest",
-        "global.social-email": "E-post",
-        "global.opens-in-new-window": "(Öppnas i nytt fönster)"
-    },
-    "header-nav-block": {
-        "header-nav-block.sections-button": "Meny",
-        "header-nav-block.sign-in-button": "Logga in",
-        "header-nav-block.search-text": "Sök"
-    },
-    "header-nav-chain-block": {
-        "header-nav-chain-block.sections-button": "Meny",
-        "header-nav-chain-block.search-text": "Sök",
-        "header-nav-chain-block.sections-button-aria-label": "Visa %{item} underkategorier",
-        "header-nav-chain-block.sections-element-aria-label": "Kategorimeny",
-        "header-nav-chain-block.links-element-aria-label": "Topplänkar",
-        "header-nav-chain-block.querly-search-aria-label": "Sök"
-    },
-    "results-list-block": {
-        "results-list-block.see-more-button": "Fler artiklar",
-        "results-list-block.see-more-button-aria-label": "Se fler artiklar om detta ämne"
-    },
-    "search-results-list-block": {
-        "search-results-block.search-button": "Sök",
-        "search-results-block.search-result-number": "%{smart_count} resultat för ”%{searchTerm}”",
-        "search-results-block.see-more-button": "Fler artiklar",
-        "search-results-block.see-more-button-aria-label": "Se fler artiklar om detta ämne",
-        "search-results-blocks.search-input-placeholder": "Ange sökord"
-    },
-    "ads-block": {
-        "ads-block.ad-label": "REKLAM"
-    },
-    "alert-bar-block": {
-        "alert-bar-block.element-aria-label": "Senaste nytt",
-        "alert-bar-block.close-button": "Ignorera avisering om senaste nytt"
-    },
-    "footer-block": {
-        "footer-block.facebook-link": "Facebook-sida",
-        "footer-block.twitter-link": "Twitter-flöde",
-        "footer-block.rss-link": "RSS-kanal"
-    },
-    "links-bar-block": {
-        "links-bar-block.element-aria-label": "Fler länkar"
-    },
-    "share-bar-block": {
-        "share-bar-block.share-button-aria-label": "Dela aktuell artikel via %{socialType}"
-    },
-    "author-bio-block": {
-        "author-bio-block.social-email": "Skicka e-post till %{authorName}",
-        "author-bio-block.social-rss": "Prenumerera på %{authorName}s RSS-kanal",
-        "author-bio-block.social-soundcloud": "Lyssna på %{authorName} på SoundCloud",
-        "author-bio-block.social-twitter": "Kontakta via Twitter",
-        "author-bio-block.social-facebook": "Kontakta via Facebook",
-        "author-bio-block.social-instagram": "Följ på Instagram",
-        "author-bio-block.social-linkedin": "Kontakta via LinkedIn",
-        "author-bio-block.social-reddit": "Anslut via Reddit",
-        "author-bio-block.social-youtube": "Kontakta via YouTube",
-        "author-bio-block.social-medium": "Kontakta via Medium",
-        "author-bio-block.social-tumblr": "Kontakta via Tumblr",
-        "author-bio-block.social-pinterest": "Kontakta via Pinterest",
-        "author-bio-block.social-snapchat": "Kontakta via Snapchat",
-        "author-bio-block.social-whatsapp": "Kontakta via WhatsApp"
-    },
-    "default-output-block": {
-        "default-output-block.skip-main": "Gå vidare till huvudinnehåll"
-    }
+  "shared-styles": {
+    "promo-label.gallery-text": "Bildspel",
+    "promo-label.video-text": "Video",
+    "byline.by-text": "Av",
+    "byline.and-text": "och",
+    "overline.sponsored-content": "Sponsrat innehåll"
+  },
+  "article-body-block": {
+    "article-body-block.correction": "Korrektion",
+    "article-body-block.clarification": "Klargörande",
+    "article-body-block.interstitial-link-aria-label": "Öppna relaterad artikel"
+  },
+  "full-author-bio-block": {
+    "full-author-bio-block.connect-text": "Följ",
+    "full-author-bio-block.social-email": "E-post",
+    "full-author-bio-block.social-twitter": "Kontakta via Twitter",
+    "full-author-bio-block.social-facebook": "Kontakta via Facebook",
+    "full-author-bio-block.social-instagram": "Följ på Instagram",
+    "full-author-bio-block.social-rss": "RSS-kanal",
+    "full-author-bio-block.social-linkedin": "Kontakta via LinkedIn",
+    "full-author-bio-block.social-reddit": "Kontakta via Reddit",
+    "full-author-bio-block.social-youtube": "Kontakta via YouTube",
+    "full-author-bio-block.social-medium": "Kontakta via Medium",
+    "full-author-bio-block.social-tumblr": "Kontakta via Tumblr",
+    "full-author-bio-block.social-pinterest": "Kontakta via Pinterest",
+    "full-author-bio-block.social-snapchat": "Kontakta via Snapchat",
+    "full-author-bio-block.social-whatsapp": "Kontakta via WhatsApp",
+    "full-author-bio-block.social-soundcloud": "Lyssna på SoundCloud"
+  },
+  "global-phrases-block": {
+    "global.gallery-expand-button": "Förstora",
+    "global.gallery-page-count-text": "%{current} av %{total}",
+    "global.gallery-autoplay-button": "Spela upp",
+    "global.gallery-pause-autoplay-button": "Pausa",
+    "global.gallery-autoplay-label-start": "Start automatic slide show",
+    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
+    "global.social-twitter": "Twitter",
+    "global.social-facebook": "Facebook",
+    "global.social-linkedin": "LinkedIn",
+    "global.social-pinterest": "Pinterest",
+    "global.social-email": "E-post",
+    "global.opens-in-new-window": "(Öppnas i nytt fönster)"
+  },
+  "header-nav-block": {
+    "header-nav-block.sections-button": "Meny",
+    "header-nav-block.sign-in-button": "Logga in",
+    "header-nav-block.search-text": "Sök"
+  },
+  "header-nav-chain-block": {
+    "header-nav-chain-block.sections-button": "Meny",
+    "header-nav-chain-block.search-text": "Sök",
+    "header-nav-chain-block.sections-button-aria-label": "Visa %{item} underkategorier",
+    "header-nav-chain-block.sections-element-aria-label": "Kategorimeny",
+    "header-nav-chain-block.links-element-aria-label": "Topplänkar",
+    "header-nav-chain-block.querly-search-aria-label": "Sök"
+  },
+  "results-list-block": {
+    "results-list-block.see-more-button": "Fler artiklar",
+    "results-list-block.see-more-button-aria-label": "Se fler artiklar om detta ämne"
+  },
+  "search-results-list-block": {
+    "search-results-block.search-button": "Sök",
+    "search-results-block.search-result-number": "%{smart_count} resultat för ”%{searchTerm}”",
+    "search-results-block.see-more-button": "Fler artiklar",
+    "search-results-block.see-more-button-aria-label": "Se fler artiklar om detta ämne",
+    "search-results-blocks.search-input-placeholder": "Ange sökord"
+  },
+  "ads-block": {
+    "ads-block.ad-label": "REKLAM"
+  },
+  "alert-bar-block": {
+    "alert-bar-block.element-aria-label": "Senaste nytt",
+    "alert-bar-block.close-button": "Ignorera avisering om senaste nytt"
+  },
+  "footer-block": {
+    "footer-block.facebook-link": "Facebook-sida",
+    "footer-block.twitter-link": "Twitter-flöde",
+    "footer-block.rss-link": "RSS-kanal"
+  },
+  "links-bar-block": {
+    "links-bar-block.element-aria-label": "Fler länkar"
+  },
+  "share-bar-block": {
+    "share-bar-block.share-button-aria-label": "Dela aktuell artikel via %{socialType}"
+  },
+  "author-bio-block": {
+    "author-bio-block.social-email": "Skicka e-post till %{authorName}",
+    "author-bio-block.social-rss": "Prenumerera på %{authorName}s RSS-kanal",
+    "author-bio-block.social-soundcloud": "Lyssna på %{authorName} på SoundCloud",
+    "author-bio-block.social-twitter": "Kontakta via Twitter",
+    "author-bio-block.social-facebook": "Kontakta via Facebook",
+    "author-bio-block.social-instagram": "Följ på Instagram",
+    "author-bio-block.social-linkedin": "Kontakta via LinkedIn",
+    "author-bio-block.social-reddit": "Anslut via Reddit",
+    "author-bio-block.social-youtube": "Kontakta via YouTube",
+    "author-bio-block.social-medium": "Kontakta via Medium",
+    "author-bio-block.social-tumblr": "Kontakta via Tumblr",
+    "author-bio-block.social-pinterest": "Kontakta via Pinterest",
+    "author-bio-block.social-snapchat": "Kontakta via Snapchat",
+    "author-bio-block.social-whatsapp": "Kontakta via WhatsApp"
+  },
+  "default-output-block": {
+    "default-output-block.skip-main": "Gå vidare till huvudinnehåll"
+  }
 }

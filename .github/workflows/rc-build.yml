@@ -8,6 +8,7 @@ on:
       - "**.js"
       - "**.jsx"
       - "*.scss"
+      - "**/intl.json"
 
 # Publishes rc builds with the dist tag of "rc"
 jobs:

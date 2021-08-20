@@ -1,7 +1,9 @@
-.xl-large-promo {
-  .xl-promo-headline {
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      margin-bottom: map-get($spacers, 'xs');
+.top-table-list-section-extra_large {
+  .xl-large-promo {
+    .xl-promo-headline {
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        margin-bottom: map-get($spacers, 'xs');
+      }
     }
   }
 }

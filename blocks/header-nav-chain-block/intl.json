@@ -1,7 +1,7 @@
 {
 	"header-nav-chain-block.sections-button": {
 		"de": "Rubriken",
-		"en": "Sections",
+		"en": "Sections", 
 		"es": "Sections",
 		"fr": "Sections",
 		"ja": "Sections",
@@ -13,10 +13,10 @@
 	"header-nav-chain-block.search-text": {
 		"de": "Suche",
 		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
 		"no": "Søk",
 		"pt": "Procurar",
 		"sv": "Sök"

@@ -41,6 +41,7 @@ const NavWidget = ({
     )) || (type === 'menu' && (
       <button
         type="button"
+        // passed down from default.jsx
         onClick={menuButtonClickAction}
         aria-label={phrases.t('header-nav-chain-block.sections-button')}
         className={`nav-btn nav-sections-btn border transparent ${navColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'}`}

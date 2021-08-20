@@ -49,6 +49,33 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
+  useEffect(() => {
+    const closeMenuOnClick = (event) => {
+      if (event.target.closest('.menu')) {
+        return;
+      }
+      setAccountMenu(false);
+    };
+
+    window.addEventListener('click', closeMenuOnClick, true);
+    return () => {
+      window.removeEventListener('click', closeMenuOnClick);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.keyCode === 27) {
+        setAccountMenu(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscKey, true);
+    return () => {
+      window.removeEventListener('keydown', handleEscKey);
+    };
+  }, []);
+
   const handleLogout = () => {
     Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
   };
@@ -58,7 +85,7 @@ const HeaderAccountAction = ({ customFields }) => {
   }
 
   const AccountMenu = () => (
-    <ul className="menu">
+    <ul className="account-menu">
       <li className="menu-item">
         <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">Manage Your Account</PrimaryFont>
       </li>
@@ -93,7 +120,7 @@ const HeaderAccountAction = ({ customFields }) => {
     </div>
   );
 
-  if (!loggedIn) { // Change default to `true` once we can check the api
+  if (!loggedIn) { // TODO: Change default to `true` once we can check the api
     return <AccountDropdown />;
   }
 

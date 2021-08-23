@@ -8,7 +8,7 @@ import useIdentity from '../../components/Identity';
 
 import './styles.scss';
 
-export const SignUp = ({ customFields, arcSite }) => {
+const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;
   const { locale = 'en' } = getProperties(arcSite);

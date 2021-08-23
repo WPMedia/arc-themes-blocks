@@ -82,4 +82,6 @@ LargeManualPromo.propTypes = {
 
 LargeManualPromo.label = 'Large Manual Promo – Arc Block';
 
+LargeManualPromo.icon = 'paragraph-bullets';
+
 export default LargeManualPromo;

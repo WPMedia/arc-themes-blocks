@@ -273,6 +273,8 @@ const AuthorBio = ({ customFields = {} }) => {
 
 AuthorBio.label = 'Short Author Bio – Arc Block';
 
+AuthorBio.icon = 'paragraph-normal';
+
 AuthorBio.propTypes = {
   customFields: PropTypes.shape({
     lazyLoad: PropTypes.bool.tag({

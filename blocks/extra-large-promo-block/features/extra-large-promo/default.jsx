@@ -200,4 +200,6 @@ ExtraLargePromo.propTypes = {
 
 ExtraLargePromo.label = 'Extra Large Promo – Arc Block';
 
+ExtraLargePromo.icon = 'paragraph-bullets';
+
 export default ExtraLargePromo;

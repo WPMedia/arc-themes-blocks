@@ -18,6 +18,8 @@ const HTMLBox = ({ id }) => {
 
 HTMLBox.label = 'HTML Box – Arc Block';
 
+HTMLBox.icon = 'programming-language-html';
+
 HTMLBox.propTypes = {
   customFields: PropTypes.shape({
     HTML: PropTypes.richtext,

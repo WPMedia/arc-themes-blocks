@@ -73,4 +73,6 @@ SmallManualPromo.propTypes = {
 
 SmallManualPromo.label = 'Small Manual Promo – Arc Block';
 
+SmallManualPromo.icon = 'paragraph-bullets';
+
 export default SmallManualPromo;

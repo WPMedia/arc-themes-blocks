@@ -141,15 +141,16 @@ const SimpleList = (props) => {
   const Wrapper = title ? HeadingSection : React.Fragment;
 
   return (
-    <div key={id} className="list-container layout-section">
-      { title
-        ? (
-          <Heading className="list-title">
-            {title}
-          </Heading>
-        ) : null}
-      <Wrapper>
-        {
+    <HeadingSection>
+      <div key={id} className="list-container layout-section">
+        { title
+          ? (
+            <Heading className="list-title">
+              {title}
+            </Heading>
+          ) : null}
+        <Wrapper>
+          {
         contentElements.reduce(unserializeStory(arcSite), []).map(({
           id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions,
         }) => (
@@ -173,8 +174,9 @@ const SimpleList = (props) => {
           </React.Fragment>
         ))
       }
-      </Wrapper>
-    </div>
+        </Wrapper>
+      </div>
+    </HeadingSection>
   );
 };
 
@@ -206,5 +208,7 @@ SimpleListWrapper.propTypes = {
 };
 
 SimpleListWrapper.label = 'Simple List – Arc Block';
+
+SimpleListWrapper.icon = 'arc-list';
 
 export default SimpleListWrapper;

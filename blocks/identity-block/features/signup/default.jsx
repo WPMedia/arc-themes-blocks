@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import FormInputField from '../../components/FormInputField';
+import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
@@ -23,10 +23,6 @@ export const SignUp = ({ customFields, arcSite }) => {
   });
 
   const [error, setError] = useState();
-
-  const passwordChangeHandler = (event) => {
-    setPassword(event.target.value);
-  };
 
   useEffect(() => {
     const getConfig = async () => {
@@ -103,7 +99,7 @@ export const SignUp = ({ customFields, arcSite }) => {
           required
           showDefaultError={false}
           tip=""
-          type="email"
+          type={FIELD_TYPES.EMAIL}
           // todo add translation
           validationErrorMessage="Please enter a valid email address"
           validationPattern=""
@@ -112,12 +108,12 @@ export const SignUp = ({ customFields, arcSite }) => {
           defaultValue=""
           label={phrases.t('identity-block.password')}
           name="password"
-          onChange={passwordChangeHandler}
+          onChange={(event) => setPassword(event.target.value)}
           placeholder=""
           required
           showDefaultError={false}
           tip=""
-          type="password"
+          type={FIELD_TYPES.PASSWORD}
           // todo add translation
           validationErrorMessage={status === 'success' && phrases.t('identity-block.password-requirements', {
             pwLowercase,

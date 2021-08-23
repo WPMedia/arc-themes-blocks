@@ -82,37 +82,27 @@ export const SignUp = ({ customFields, arcSite }) => {
           }, {
             email,
           })
-            .then(() => {
-              window.location = redirectURL;
-            })
-            .catch(() => {
-              setError('Something went wrong');
-            });
+            .then(() => { window.location = redirectURL; })
+            .catch(() => setError('Something went wrong'));
         }}
       >
         <FormInputField
-          defaultValue=""
           label={phrases.t('identity-block.email')}
           name="email"
           onChange={(e) => setEmail(e.target.value)}
-          placeholder=""
           required
           showDefaultError={false}
-          tip=""
           type={FIELD_TYPES.EMAIL}
           // todo add translation
           validationErrorMessage="Please enter a valid email address"
           validationPattern=""
         />
         <FormInputField
-          defaultValue=""
           label={phrases.t('identity-block.password')}
           name="password"
           onChange={(event) => setPassword(event.target.value)}
-          placeholder=""
           required
           showDefaultError={false}
-          tip=""
           type={FIELD_TYPES.PASSWORD}
           // todo add translation
           validationErrorMessage={status === 'success' && phrases.t('identity-block.password-requirements', {

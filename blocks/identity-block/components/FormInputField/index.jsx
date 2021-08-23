@@ -25,25 +25,34 @@ const FormInputField = ({
   validationPattern,
 }) => {
   const [valid, setValid] = useState(true);
+  const [initialBlur, setInitialBlur] = useState(false);
   const inputElement = useRef();
+
+  useEffect(() => {
+    if (initialBlur) {
+      setValid(inputElement.current?.checkValidity());
+    }
+  }, [initialBlur, validationPattern]);
 
   useEffect(() => {
     if (validationErrorMessage) {
       inputElement.current.setCustomValidity(validationErrorMessage);
     }
-    if (inputElement.current && showDefaultError) {
-      setValid(inputElement.current.checkValidity());
-    }
-  }, [inputElement, showDefaultError, validationErrorMessage]);
+  }, [inputElement, validationErrorMessage]);
 
-  const handleBlur = (event) => {
-    setValid(event.target.checkValidity());
+  useEffect(() => {
+    if (showDefaultError) {
+      setValid(inputElement.current?.checkValidity());
+    }
+  }, [inputElement, showDefaultError]);
+
+  const handleBlur = () => {
+    setInitialBlur(true);
+    setValid(inputElement.current?.checkValidity());
   };
 
   const handleChange = (event) => {
-    if (!valid) {
-      handleBlur(event);
-    }
+    setValid(inputElement.current?.checkValidity());
     onChange({ value: event.target.value });
   };
 
@@ -52,7 +61,6 @@ const FormInputField = ({
 
   const fieldParameters = {
     ...(defaultValue ? { defaultValue } : {}),
-    ...(name ? { name } : {}),
     ...(validationPattern ? { pattern: validationPattern } : {}),
     ...(placeholder ? { placeholder, 'aria-placeholder': placeholder } : {}),
     ...(required ? { required } : {}),
@@ -74,6 +82,7 @@ const FormInputField = ({
           ...(!valid ? ['xpmedia-form-field-input--error'] : []),
         ].join(' ')}
         id={inputId}
+        name={name}
         type={type}
         onBlur={handleBlur}
         onChange={handleChange}

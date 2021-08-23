@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-
+import FormInputField from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
@@ -21,16 +21,11 @@ export const SignUp = ({ customFields, arcSite }) => {
   const [passwordRequirements, setPasswordRequirements] = useState({
     status: 'initial',
   });
-  // const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const [error, setError] = useState();
 
   const passwordChangeHandler = (event) => {
     setPassword(event.target.value);
-    // setIsPasswordValid(true);
-
-    // todo: check if password is valid
-    // I think Nick's doing this but we can at least get the requirements set
   };
 
   useEffect(() => {
@@ -99,44 +94,41 @@ export const SignUp = ({ customFields, arcSite }) => {
             });
         }}
       >
-        <div className="xpmedia-subs-input">
-          <label htmlFor="email">{phrases.t('identity-block.email')}</label>
-          <input
-            name="email"
-            id="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="xpmedia-subs-input">
-          {status === 'success' && phrases.t('identity-block.password-requirements', {
+        <FormInputField
+          defaultValue=""
+          label={phrases.t('identity-block.email')}
+          name="email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder=""
+          required
+          showDefaultError={false}
+          tip=""
+          type="email"
+          // todo add translation
+          validationErrorMessage="Please enter a valid email address"
+          validationPattern=""
+        />
+        <FormInputField
+          defaultValue=""
+          label={phrases.t('identity-block.password')}
+          name="password"
+          onChange={passwordChangeHandler}
+          placeholder=""
+          required
+          showDefaultError={false}
+          tip=""
+          type="password"
+          // todo add translation
+          validationErrorMessage={status === 'success' && phrases.t('identity-block.password-requirements', {
             pwLowercase,
             pwMinLength,
             pwPwNumbers,
             pwSpecialCharacters,
             pwUppercase,
           })}
-          <label htmlFor="password">{phrases.t('identity-block.password')}</label>
-          <input
-            name="password"
-            id="password"
-            type="password"
-            onChange={passwordChangeHandler}
-          />
-          {/* <p>{isPasswordValid ? 'Password is valid' : 'Password is invalid'}</p> */}
-        </div>
-        <div className="xpmedia-subs-input">
-          <label htmlFor="confirm-password">{phrases.t('identity-block.confirm-password')}</label>
-          <input
-            name="confirm-password"
-            id="confirm-password"
-            type="password"
-            // todo: use shared style confirm password input
-            onChange={() => {}}
-          />
-        </div>
-
+          // todo: take in validation pattern regex
+          validationPattern=""
+        />
         <button type="submit">{phrases.t('identity-block.sign-up')}</button>
         {error ? (
           <section>

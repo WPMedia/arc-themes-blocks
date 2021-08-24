@@ -26,7 +26,7 @@ describe('Form Input Field', () => {
       />,
     );
 
-    wrapper.find('input').simulate('change');
+    wrapper.find('input').at(0).simulate('blur');
 
     expect(wrapper.text().includes('error message')).toBe(true);
   });
@@ -61,14 +61,14 @@ describe('Form Input Field', () => {
       <FormInputField
         name="test"
         type={FIELD_TYPES.EMAIL}
-        defaultValue="invalid"
+        defaultValue="invali"
         validationErrorMessage="error message"
       />,
     );
 
     expect(wrapper.find('span')).not.toExist();
 
-    wrapper.find('input').at(0).simulate('change');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'invalid' } });
     wrapper.find('input').at(0).simulate('blur');
 
     expect(wrapper.find('span').length).toBe(1);
@@ -87,7 +87,7 @@ describe('Form Input Field', () => {
 
     expect(wrapper.text().includes('should be found before/after change')).toBe(true);
 
-    wrapper.find('input').at(0).simulate('change');
+    wrapper.find('input').at(0).simulate('blur');
 
     expect(wrapper.text().includes('should be found before/after change')).toBe(true);
     expect(wrapper.text().includes('error message')).toBe(true);
@@ -103,7 +103,7 @@ describe('Form Input Field', () => {
       />,
     );
 
-    wrapper.find('input').at(0).simulate('change');
+    wrapper.find('input').at(0).simulate('blur');
 
     expect(wrapper.text().includes('error message')).toBe(true);
   });

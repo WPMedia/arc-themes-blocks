@@ -25,34 +25,27 @@ const FormInputField = ({
   validationPattern,
 }) => {
   const [valid, setValid] = useState(true);
-  const [initialBlur, setInitialBlur] = useState(false);
+  const [value, setValue] = useState(defaultValue);
+  const [initialBlur, setInitialBlur] = useState(showDefaultError);
   const inputElement = useRef();
 
   useEffect(() => {
     if (initialBlur) {
-      setValid(inputElement.current?.checkValidity());
+      inputElement.current.setCustomValidity('');
+      const isValid = inputElement.current?.checkValidity();
+      if (!isValid && validationErrorMessage) {
+        inputElement.current.setCustomValidity(validationErrorMessage);
+      }
+      setValid(isValid);
     }
-  }, [initialBlur, validationPattern]);
-
-  useEffect(() => {
-    if (validationErrorMessage) {
-      inputElement.current.setCustomValidity(validationErrorMessage);
-    }
-  }, [inputElement, validationErrorMessage]);
-
-  useEffect(() => {
-    if (showDefaultError) {
-      setValid(inputElement.current?.checkValidity());
-    }
-  }, [inputElement, showDefaultError]);
+  }, [initialBlur, inputElement, validationErrorMessage, validationPattern, value]);
 
   const handleBlur = () => {
     setInitialBlur(true);
-    setValid(inputElement.current?.checkValidity());
   };
 
   const handleChange = (event) => {
-    setValid(inputElement.current?.checkValidity());
+    setValue(event.target.value);
     onChange({ value: event.target.value });
   };
 
@@ -60,7 +53,7 @@ const FormInputField = ({
   const inputId = `id_${name}_input`;
 
   const fieldParameters = {
-    ...(defaultValue ? { defaultValue } : {}),
+    ...(defaultValue !== '' ? { defaultValue } : {}),
     ...(validationPattern ? { pattern: validationPattern } : {}),
     ...(placeholder ? { placeholder, 'aria-placeholder': placeholder } : {}),
     ...(required ? { required } : {}),

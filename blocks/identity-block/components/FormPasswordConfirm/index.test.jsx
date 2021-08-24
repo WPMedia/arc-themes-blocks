@@ -24,7 +24,7 @@ describe('Form Password Confirm', () => {
       validationErrorMessage="Please enter something"
     />);
 
-    wrapper.find('input[name="field1"]').at(0).simulate('change');
+    wrapper.find('input[name="field1"]').at(0).simulate('blur');
 
     expect(wrapper.text().includes('Please enter something')).toBe(true);
   });
@@ -39,6 +39,7 @@ describe('Form Password Confirm', () => {
 
     wrapper.find('input').at(0).instance().value = 'thisIsMyPassword';
     wrapper.find('input').at(1).simulate('change', { target: { value: 'thisIsMyPassword!' } });
+    wrapper.find('input').at(1).simulate('blur');
 
     expect(wrapper.text().includes('Must match password')).toBe(true);
   });

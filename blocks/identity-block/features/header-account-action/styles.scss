@@ -1,6 +1,6 @@
 .xpmedia-subs-header {
   align-items: center;
-  color: #fff;
+  color: $ui-btn-white-color;
   font-size: 0.875rem;
 
   &--button {
@@ -8,20 +8,20 @@
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 4px !important;
-    color: #fff;
+    color: $ui-btn-white-color;
     font-weight: bold;
     height: 2rem;
     padding: 0 0.5rem;
     text-decoration: none;
 
     &:hover {
-      color: #fff;
-      border: 1px solid #fff;
+      color: $ui-btn-white-color;
+      border: 1px solid $ui-btn-white-color;
     }
   }
 
   .account-button {
-    background-color: #fff;
+    background-color: $ui-btn-white-color;
     transition: 500ms;
 
     .account-text {
@@ -59,7 +59,7 @@
     border-radius: 4px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
     border: solid 1px #dadada;
-    background-color: #fff;
+    background-color: $ui-btn-white-color;
 
     .menu-item {
       width: 179px;

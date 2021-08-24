@@ -31,7 +31,9 @@ const FormInputField = ({
 
   useEffect(() => {
     if (initialBlur) {
-      inputElement.current.setCustomValidity('');
+      if (validationErrorMessage) {
+        inputElement.current.setCustomValidity('');
+      }
       const isValid = inputElement.current?.checkValidity();
       if (!isValid && validationErrorMessage) {
         inputElement.current.setCustomValidity(validationErrorMessage);

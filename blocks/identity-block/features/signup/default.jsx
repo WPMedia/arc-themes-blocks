@@ -3,6 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
 
@@ -72,7 +73,11 @@ const SignUp = ({ customFields, arcSite }) => {
   } = passwordRequirements;
   return (
     <section>
-      <h1>{phrases.t('identity-block.sign-up')}</h1>
+      <PrimaryFont
+        as="h1"
+      >
+        {phrases.t('identity-block.sign-up')}
+      </PrimaryFont>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -113,10 +118,20 @@ const SignUp = ({ customFields, arcSite }) => {
           // todo: take in validation pattern regex
           validationPattern=""
         />
-        <button type="submit">{phrases.t('identity-block.sign-up')}</button>
+        <PrimaryFont
+          as="button"
+          className="xpmedia-subs-filled-button xpmedia-subs-medium-button"
+          type="submit"
+        >
+          {phrases.t('identity-block.sign-up')}
+        </PrimaryFont>
         {error ? (
           <section>
-            <p>{error}</p>
+            <PrimaryFont
+              as="p"
+            >
+              {error}
+            </PrimaryFont>
           </section>
         ) : null}
       </form>

@@ -8,3 +8,18 @@
     width: 100%;
   }
 }
+
+.xpmedia-subs-filled-button {
+  // primary color for arc subs
+  background-color: #183bb6;
+  color: $ui-btn-white-color;
+  border: none;
+}
+
+.xpmedia-subs-medium-button {
+  padding: map-get($spacers, 'sm');
+  width: 100%;
+  line-height: 1.5;
+  font-size: calculateRem(16px);
+  border-radius: calculateRem(4px);
+}

@@ -20,12 +20,12 @@ body.nav-open {
 }
 
 .section-menu--bottom-placeholder {
-  // on desktop, on the left, the bottom link
+  // on desktop, on the left, the bottom link 
   // is not visible on hover over other links
   height: $mouseover-link-preview-safe-area-height;
   background-color: $section-bg;
 
-  // need to hide that hover and active color
+  // need to hide that hover and active color 
   &:hover,
   &:active {
     // keep the same color unlike other list items

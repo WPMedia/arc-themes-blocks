@@ -11,8 +11,6 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 
-import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-
 const ExtraLargePromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,

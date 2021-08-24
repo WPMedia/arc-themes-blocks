@@ -3,7 +3,7 @@ import React from 'react';
 import FormInputField, { FIELD_TYPES } from '.';
 
 export default {
-  title: 'Blocks/Identity/InputField',
+  title: 'Blocks/Identity/Components/InputField',
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },

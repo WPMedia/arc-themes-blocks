@@ -7,13 +7,13 @@ describe('Form Input Field', () => {
   it('renders with a label', () => {
     const wrapper = mount(<FormInputField name="test" label="label text" />);
 
-    expect(wrapper.find('label text')).not.toBe(null);
+    expect(wrapper.text().includes('label text')).toBe(true);
   });
 
   it('renders with a tip', () => {
     const wrapper = mount(<FormInputField name="test" tip="tip text" />);
 
-    expect(wrapper.find('tip text')).not.toBe(null);
+    expect(wrapper.text().includes('tip text')).toBe(true);
   });
 
   it('renders with an error', () => {
@@ -26,9 +26,20 @@ describe('Form Input Field', () => {
       />,
     );
 
-    wrapper.find('input').simulate('blur');
+    wrapper.find('input').at(0).simulate('blur');
 
-    expect(wrapper.find('error message')).not.toBe(null);
+    expect(wrapper.text().includes('error message')).toBe(true);
+  });
+
+  it('renders with a placeholder', () => {
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        placeholder="Placeholder"
+      />,
+    );
+
+    expect(wrapper.find('input[placeholder="Placeholder"]').length).toBe(1);
   });
 
   it('renders with an error by default', () => {
@@ -42,28 +53,25 @@ describe('Form Input Field', () => {
       />,
     );
 
-    expect(wrapper.find('error message')).not.toBe(null);
+    expect(wrapper.text().includes('error message')).toBe(true);
   });
 
-  it('renders with an error only after blurring', () => {
+  it('renders with an error after changing', () => {
     const wrapper = mount(
       <FormInputField
         name="test"
         type={FIELD_TYPES.EMAIL}
-        defaultValue="invalid"
+        defaultValue="invali"
         validationErrorMessage="error message"
       />,
     );
 
-    expect(wrapper.find('error message')).not.toExist();
+    expect(wrapper.find('span')).not.toExist();
 
-    wrapper.find('input').simulate('change');
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'invalid' } });
+    wrapper.find('input').at(0).simulate('blur');
 
-    expect(wrapper.find('error message')).not.toExist();
-
-    wrapper.find('input').simulate('blur');
-
-    expect(wrapper.find('error message')).not.toBe(null);
+    expect(wrapper.find('span').length).toBe(1);
   });
 
   it('renders with an error overriding tip', () => {
@@ -72,16 +80,46 @@ describe('Form Input Field', () => {
         name="test"
         type={FIELD_TYPES.EMAIL}
         defaultValue="invalid"
-        tip="should not be found after change"
+        tip="should be found before/after change"
         validationErrorMessage="error message"
       />,
     );
 
-    expect(wrapper.find('should not be found after change')).not.toBe(null);
+    expect(wrapper.text().includes('should be found before/after change')).toBe(true);
 
-    wrapper.find('input').simulate('blur');
+    wrapper.find('input').at(0).simulate('blur');
 
-    expect(wrapper.find('should not be found after change')).not.toExist();
-    expect(wrapper.find('error message')).not.toBe(null);
+    expect(wrapper.text().includes('should be found before/after change')).toBe(true);
+    expect(wrapper.text().includes('error message')).toBe(true);
+  });
+
+  it('renders with an error on custom patterns', () => {
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        defaultValue="invalid"
+        validationErrorMessage="error message"
+        validationPattern="^valid$"
+      />,
+    );
+
+    wrapper.find('input').at(0).simulate('blur');
+
+    expect(wrapper.text().includes('error message')).toBe(true);
+  });
+
+  it('renders with an error on blank required', () => {
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        required
+        validationErrorMessage="error message"
+        validationPattern="^valid$"
+      />,
+    );
+
+    wrapper.find('input').at(0).simulate('blur');
+
+    expect(wrapper.text().includes('error message')).toBe(true);
   });
 });

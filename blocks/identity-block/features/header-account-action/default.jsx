@@ -19,7 +19,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
-  const [accountMenuToggle, setAccountMenu] = useState(false);
+  const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
@@ -102,7 +102,7 @@ const HeaderAccountAction = ({ customFields }) => {
 
   const AccountDropdown = () => (
     <div className="xpmedia-subs-header">
-      <button type="button" className="xpmedia-subs-header--button account-button" onClick={() => setAccountMenu(!accountMenuToggle)}>
+      <button type="button" className="xpmedia-subs-header--button account-button" onClick={() => setAccountMenu(!isAccountMenuOpen)}>
         <UserIcon fill={getThemeStyle(arcSite)['primary-color']} height={accountIconSize} width={accountIconSize} />
         <PrimaryFont
           as="span"
@@ -113,14 +113,14 @@ const HeaderAccountAction = ({ customFields }) => {
         </PrimaryFont>
         <span className="submenu-caret">
           {
-            accountMenuToggle
+            isAccountMenuOpen
               ? <ChevronUpIcon fill={getThemeStyle(arcSite)['primary-color']} height={caretSize} width={caretSize} />
               : <ChevronDownIcon fill={getThemeStyle(arcSite)['primary-color']} height={caretSize} width={caretSize} />
           }
         </span>
       </button>
       {
-          accountMenuToggle && <AccountMenu />
+          isAccountMenuOpen && <AccountMenu />
       }
     </div>
   );

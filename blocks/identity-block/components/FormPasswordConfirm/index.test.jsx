@@ -37,7 +37,8 @@ describe('Form Password Confirm', () => {
       name="field1"
     />);
 
-    wrapper.find('input').at(0).instance().value = 'thisIsMyPassword';
+    wrapper.find('input').at(0).instance().value = 'thisIsNotMyPassword';
+    wrapper.find('input').at(0).simulate('change', { target: { value: 'thisIsMyPassword' } });
     wrapper.find('input').at(1).simulate('change', { target: { value: 'thisIsMyPassword!' } });
     wrapper.find('input').at(1).simulate('blur');
 

@@ -35,7 +35,7 @@ const FormPasswordConfirm = ({
   };
 
   return (
-    <div>
+    <>
       <FormInputField
         {...fieldParameters}
         label={label}
@@ -52,7 +52,7 @@ const FormPasswordConfirm = ({
         type={FIELD_TYPES.PASSWORD}
         validationPattern={`^${password}$`}
       />
-    </div>
+    </>
   );
 };
 

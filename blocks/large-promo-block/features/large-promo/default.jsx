@@ -11,8 +11,6 @@ import {
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { LargePromoPresentation } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_large-promo.scss';
-
 const LargePromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,

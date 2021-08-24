@@ -5,8 +5,6 @@ import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { LargePromoPresentation } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_large-promo.scss';
-
 const LargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
@@ -81,5 +79,7 @@ LargeManualPromo.propTypes = {
 };
 
 LargeManualPromo.label = 'Large Manual Promo – Arc Block';
+
+LargeManualPromo.icon = 'paragraph-bullets';
 
 export default LargeManualPromo;

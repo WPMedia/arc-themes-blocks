@@ -90,6 +90,8 @@ const ResultsList = ({ customFields }) => {
 
 ResultsList.label = 'Results List – Arc Block';
 
+ResultsList.icon = 'arc-list';
+
 ResultsList.propTypes = {
   customFields: PropTypes.shape({
     listContentConfig: PropTypes.contentConfig('ans-feed').tag({

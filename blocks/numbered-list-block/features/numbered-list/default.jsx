@@ -212,4 +212,6 @@ NumberedListWrapper.propTypes = {
 
 NumberedListWrapper.label = 'Numbered List – Arc Block';
 
+NumberedListWrapper.icon = 'arc-list';
+
 export default NumberedListWrapper;

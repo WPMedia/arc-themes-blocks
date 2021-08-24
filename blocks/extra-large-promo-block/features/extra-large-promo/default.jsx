@@ -11,8 +11,6 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 
-import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-
 const ExtraLargePromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -199,5 +197,7 @@ ExtraLargePromo.propTypes = {
 };
 
 ExtraLargePromo.label = 'Extra Large Promo – Arc Block';
+
+ExtraLargePromo.icon = 'paragraph-bullets';
 
 export default ExtraLargePromo;

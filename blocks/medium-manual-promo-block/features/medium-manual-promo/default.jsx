@@ -5,8 +5,6 @@ import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-
 const MediumManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
@@ -69,5 +67,7 @@ MediumManualPromo.propTypes = {
 };
 
 MediumManualPromo.label = 'Medium Manual Promo – Arc Block';
+
+MediumManualPromo.icon = 'paragraph-bullets';
 
 export default MediumManualPromo;

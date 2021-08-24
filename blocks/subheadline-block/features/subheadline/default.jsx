@@ -50,4 +50,6 @@ SubHeadline.propTypes = {
 
 SubHeadline.label = 'Subheadline – Arc Block';
 
+SubHeadline.icon = 'arc-subheadline';
+
 export default SubHeadline;

@@ -46,6 +46,8 @@ const DoubleChain = ({ children, customFields }) => {
 
 DoubleChain.label = 'Double Chain – Arc Block';
 
+DoubleChain.icon = 'arc-double-chain';
+
 DoubleChain.propTypes = {
   children: PropTypes.array,
   customFields: PropTypes.shape({

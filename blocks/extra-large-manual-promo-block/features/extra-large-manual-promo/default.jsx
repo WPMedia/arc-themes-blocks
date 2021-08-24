@@ -5,8 +5,6 @@ import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { ExtraLargePromoPresentation } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-
 const ExtraLargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
@@ -90,5 +88,7 @@ ExtraLargeManualPromo.propTypes = {
 };
 
 ExtraLargeManualPromo.label = 'Extra Large Manual Promo – Arc Block';
+
+ExtraLargeManualPromo.icon = 'paragraph-bullets';
 
 export default ExtraLargeManualPromo;

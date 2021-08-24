@@ -7,8 +7,6 @@ import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
 import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-
 const MediumPromoItem = ({ customFields, arcSite }) => {
   const content = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
@@ -149,5 +147,7 @@ MediumPromo.propTypes = {
 };
 
 MediumPromo.label = 'Medium Promo – Arc Block';
+
+MediumPromo.icon = 'paragraph-bullets';
 
 export default MediumPromo;

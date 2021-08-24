@@ -53,7 +53,7 @@ const StyledNav = styled.nav`
       max-width: 240px;
       width: auto;
       transition: 0.5s;
-      
+
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
         min-width: 40px;
@@ -366,5 +366,7 @@ Nav.propTypes = {
 };
 
 Nav.label = 'Navigation - Arc Chain';
+
+Nav.icon = 'arc-navigation';
 
 export default Nav;

@@ -93,8 +93,7 @@ const SignUp = ({ customFields, arcSite }) => {
           required
           showDefaultError={false}
           type={FIELD_TYPES.EMAIL}
-          // todo add translation
-          validationErrorMessage="Please enter a valid email address"
+          validationErrorMessage={phrases.t('identity-block.email-requirements')}
           validationPattern=""
         />
         <FormInputField
@@ -104,7 +103,6 @@ const SignUp = ({ customFields, arcSite }) => {
           required
           showDefaultError={false}
           type={FIELD_TYPES.PASSWORD}
-          // todo add translation
           validationErrorMessage={status === 'success' && phrases.t('identity-block.password-requirements', {
             pwLowercase,
             pwMinLength,

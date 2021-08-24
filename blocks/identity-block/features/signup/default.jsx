@@ -9,6 +9,17 @@ import useIdentity from '../../components/Identity';
 
 import './styles.scss';
 
+function validatePasswordRegex(
+  pwLowercase,
+  pwMinLength,
+  pwPwNumbers,
+  pwSpecialCharacters,
+  pwUppercase,
+) {
+  // eslint-disable-next-line no-useless-escape
+  return `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\d@$!%*?&]{${pwMinLength},}$`;
+}
+
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;
@@ -94,29 +105,33 @@ const SignUp = ({ customFields, arcSite }) => {
         <FormInputField
           label={phrases.t('identity-block.email')}
           name="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={setEmail}
           required
           showDefaultError={false}
           type={FIELD_TYPES.EMAIL}
           validationErrorMessage={phrases.t('identity-block.email-requirements')}
-          validationPattern=""
         />
         <FormInputField
           label={phrases.t('identity-block.password')}
           name="password"
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={setPassword}
           required
           showDefaultError={false}
           type={FIELD_TYPES.PASSWORD}
-          validationErrorMessage={status === 'success' && phrases.t('identity-block.password-requirements', {
+          validationErrorMessage={status === 'success' ? phrases.t('identity-block.password-requirements', {
             pwLowercase,
             pwMinLength,
             pwPwNumbers,
             pwSpecialCharacters,
             pwUppercase,
-          })}
-          // todo: take in validation pattern regex
-          validationPattern=""
+          }) : ''}
+          validationPattern={validatePasswordRegex(
+            pwLowercase,
+            pwMinLength,
+            pwPwNumbers,
+            pwSpecialCharacters,
+            pwUppercase,
+          )}
         />
         <PrimaryFont
           as="button"

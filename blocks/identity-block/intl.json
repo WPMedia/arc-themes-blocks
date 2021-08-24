@@ -1,0 +1,82 @@
+{
+	"identity-block.email": {
+		"de": "Email address",
+		"en": "Email address",
+		"es": "Email address",
+		"fr": "Email address",
+		"ja": "Email address",
+		"ko": "Email address",
+		"no": "Email address",
+		"sv": "Email address"
+	},
+	"identity-block.password": {
+		"de": "Password",
+		"en": "Password",
+		"es": "Password",
+		"fr": "Password",
+		"ja": "Password",
+		"ko": "Password",
+		"no": "Password",
+		"sv": "Password"
+	},
+	"identity-block.sign-up": {
+		"de": "Sign up",
+		"en": "Sign up",
+		"es": "Sign up",
+		"fr": "Sign up",
+		"ja": "Sign up",
+		"ko": "Sign up",
+		"no": "Sign up",
+		"sv": "Sign up"
+	},
+	"identity-block.confirm-password": {
+		"de": "Confirm password",
+		"en": "Confirm password",
+		"es": "Confirm password",
+		"fr": "Confirm password",
+		"ja": "Confirm password",
+		"ko": "Confirm password",
+		"no": "Confirm password",
+		"sv": "Confirm password"
+	},
+	"identity-block.username": {
+		"de": "Username",
+		"en": "Username",
+		"es": "Username",
+		"fr": "Username",
+		"ja": "Username",
+		"ko": "Username",
+		"no": "Username",
+		"sv": "Username"
+	},
+	"identity-block.account": {
+		"de": "Account",
+		"en": "Account",
+		"es": "Account",
+		"fr": "Account",
+		"ja": "Account",
+		"ko": "Account",
+		"no": "Account",
+		"sv": "Account"
+	},
+	"identity-block.manage-account": {
+		"de": "Manage Your Account",
+		"en": "Manage Your Account",
+		"es": "Manage Your Account",
+		"fr": "Manage Your Account",
+		"ja": "Manage Your Account",
+		"ko": "Manage Your Account",
+		"no": "Manage Your Account",
+		"sv": "Manage Your Account"
+	},
+	"identity-block.log-out": {
+		"de": "Log Out",
+		"en": "Log Out",
+		"es": "Log Out",
+		"fr": "Log Out",
+		"ja": "Log Out",
+		"ko": "Log Out",
+		"no": "Log Out",
+		"sv": "Log Out"
+	}
+}

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import PropTypes from '@arc-fusion/prop-types';
+import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { ChevronUpIcon, ChevronDownIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
 import useIdentity from '../../components/Identity';
@@ -18,6 +20,9 @@ const HeaderAccountAction = ({ customFields }) => {
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
   const [accountMenuToggle, setAccountMenu] = useState(false);
+
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const accountIconSize = '16px';
   const caretSize = '12px';
@@ -87,10 +92,10 @@ const HeaderAccountAction = ({ customFields }) => {
   const AccountMenu = () => (
     <ul className="account-menu">
       <li className="menu-item">
-        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">Manage Your Account</PrimaryFont>
+        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">{phrases.t('identity-block.manage-account')}</PrimaryFont>
       </li>
       <li className="menu-item">
-        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">Log Out</PrimaryFont>
+        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">{phrases.t('identity-block.log-out')}</PrimaryFont>
       </li>
     </ul>
   );
@@ -104,7 +109,7 @@ const HeaderAccountAction = ({ customFields }) => {
           fontColor="primary-color"
           className="account-text"
         >
-          Account
+          {phrases.t('identity-block.account')}
         </PrimaryFont>
         <span className="submenu-caret">
           {
@@ -133,7 +138,7 @@ const HeaderAccountAction = ({ customFields }) => {
     return (
       <div className="xpmedia-subs-header">
         <p>{user.displayName}</p>
-        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">Log Out</button>
+        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">{phrases.t('identity-block.account')}</button>
       </div>
     );
   }

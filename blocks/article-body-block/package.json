@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/article-body-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion News Theme article body block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "contributors": [
@@ -27,6 +27,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/video-player-block": "*",

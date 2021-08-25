@@ -58,4 +58,6 @@ class ArticleDate extends Component {
 
 ArticleDate.label = 'Date – Arc Block';
 
+ArticleDate.icon = 'calendar';
+
 export default ArticleDate;

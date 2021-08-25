@@ -1,0 +1,10 @@
+.author-bio {
+  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
+    margin-top: map-get($spacers, 'md');
+  }
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin-top: map-get($spacers, 'sm');
+  }
+
+  @include block-margin-bottom;
+}

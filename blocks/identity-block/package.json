@@ -1,0 +1,39 @@
+{
+  "name": "@wpmedia/identity-block",
+  "version": "5.14.1",
+  "description": "Fusion themes identity block.",
+  "author": "ARC XP",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features",
+    "sources",
+    "chains",
+    "layouts",
+    "components"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/identity-block"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  },
+  "dependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@arc-publishing/sdk-identity": "^1.55.0"
+  }
+}

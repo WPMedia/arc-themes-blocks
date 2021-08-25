@@ -214,4 +214,6 @@ Footer.propTypes = {
 
 Footer.label = 'Footer – Arc Block';
 
+Footer.icon = 'arc-footer';
+
 export default Footer;

@@ -102,13 +102,13 @@ describe('the SectionNav component', () => {
     const wrapper = shallow(<SectionNav><div className="child">Child Item</div></SectionNav>);
 
     expect(wrapper.find('.child')).toHaveLength(1);
-    expect(wrapper.find('ul.section-menu')).toHaveLength(1);
+    expect(wrapper.find('.section-menu')).toHaveLength(1);
   });
 
   it('should render a .section-menu list', () => {
     const wrapper = shallow(<SectionNav />);
 
-    expect(wrapper.find('ul.section-menu')).toHaveLength(1);
+    expect(wrapper.find('.section-menu')).toHaveLength(1);
   });
 
   it('should render the correct number of active .section-item elements', () => {

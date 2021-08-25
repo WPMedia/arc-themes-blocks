@@ -1,8 +1,16 @@
 .ts-byline {
   $self: &;
   color: #191919;
-  font-size: 1.25rem;
-  line-height: 2.5rem;
+  font-size: 1.125rem;
+  line-height: 2rem;
+
+  margin-bottom: 0;
+
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+  }
+
 
   &--list {
     display: inline;

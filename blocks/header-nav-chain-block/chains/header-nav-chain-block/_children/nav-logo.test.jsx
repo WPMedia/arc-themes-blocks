@@ -17,12 +17,10 @@ jest.mock('fusion:context', () => ({
 
 describe('<NavLogo/>', () => {
   it('renders left-aligned logo', () => {
-    const wrapper = mount(<NavLogo alignment="left" isVisible />);
+    const wrapper = mount(<NavLogo alignment="left" />);
     const navLogo = wrapper.find('.nav-logo');
     expect(navLogo).toHaveLength(1);
     expect(navLogo.hasClass('nav-logo-left')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-show')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-hidden')).toBe(false);
     expect(navLogo.hasClass('svg-logo')).toBe(false);
 
     const navLogoLink = navLogo.find('a');
@@ -36,12 +34,10 @@ describe('<NavLogo/>', () => {
   });
 
   it('renders right-aligned logo', () => {
-    const wrapper = mount(<NavLogo alignment="right" isVisible />);
+    const wrapper = mount(<NavLogo alignment="right" />);
     const navLogo = wrapper.find('.nav-logo');
     expect(navLogo).toHaveLength(1);
     expect(navLogo.hasClass('nav-logo-right')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-show')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-hidden')).toBe(false);
     expect(navLogo.hasClass('svg-logo')).toBe(false);
 
     const navLogoLink = navLogo.find('a');
@@ -67,8 +63,6 @@ describe('<NavLogo/>', () => {
     const navLogo = wrapper.find('.nav-logo');
     expect(navLogo).toHaveLength(1);
     expect(navLogo.hasClass('nav-logo-left')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-show')).toBe(true);
-    expect(navLogo.hasClass('nav-logo-hidden')).toBe(false);
     expect(navLogo.hasClass('svg-logo')).toBe(true);
 
     const navLogoLink = navLogo.find('a');
@@ -81,7 +75,7 @@ describe('<NavLogo/>', () => {
     expect(navLogoImg.prop('alt')).toEqual('NavBar SVG logo');
   });
 
-  it('renders non-visible logo', () => {
+  it('renders non-visible logo by default', () => {
     const wrapper = mount(<NavLogo alignment="left" isVisible={false} />);
     const navLogo = wrapper.find('.nav-logo');
     expect(navLogo).toHaveLength(1);

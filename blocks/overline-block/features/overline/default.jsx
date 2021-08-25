@@ -6,4 +6,6 @@ const Overline = () => <OverlineOutput />;
 
 Overline.label = 'Overline – Arc Block';
 
+Overline.icon = 'arc-overline';
+
 export default Overline;

@@ -4,7 +4,7 @@
 
 .article-body-wrapper {
   color: $ui-primary-font-color;
-  margin-top: map-get($spacers, 'lg');
+  margin-top: map-get($spacers, 'sm');
 
   a,
   a * {

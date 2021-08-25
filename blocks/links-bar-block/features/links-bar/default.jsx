@@ -68,6 +68,8 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 
 LinksBar.label = 'Links Bar – Arc Block';
 
+LinksBar.icon = 'hyperlink-3';
+
 LinksBar.propTypes = {
   customFields: PropTypes.shape({
     navigationConfig: PropTypes.contentConfig('navigation-hierarchy').tag({

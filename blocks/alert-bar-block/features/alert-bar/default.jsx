@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Consumer from 'fusion:consumer';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 
 import { CloseIcon } from '@wpmedia/engine-theme-sdk';
 import { PrimaryFont } from '@wpmedia/shared-styles';
@@ -10,6 +10,45 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import { readCookie, saveCookie } from './cookies';
 
 import './alert-bar.scss';
+
+export const AlertBarPresentational = (props) => {
+  const {
+    alertRef,
+    barAriaLabel,
+    closeAriaLabel,
+    hideAlertHandler,
+    content,
+    arcSite,
+  } = props;
+
+  const { content_elements: elements = [] } = content;
+  const article = elements[0] || {};
+  const { websites = {}, headlines = {} } = article;
+  const { website_url: websiteURL = '' } = websites[arcSite] || {};
+
+  return (
+    <nav
+      className="alert-bar"
+      ref={alertRef}
+      aria-label={barAriaLabel}
+    >
+      <PrimaryFont
+        href={websiteURL}
+        className="article-link"
+        as="a"
+      >
+        {headlines.basic}
+      </PrimaryFont>
+      <button
+        type="button"
+        onClick={hideAlertHandler}
+        aria-label={closeAriaLabel}
+      >
+        <CloseIcon className="close" fill="white" />
+      </button>
+    </nav>
+  );
+};
 
 @Consumer
 class AlertBar extends Component {
@@ -141,35 +180,25 @@ class AlertBar extends Component {
 
     const { arcSite, customFields = {} } = this.props;
     const { ariaLabel } = customFields;
-    const { content_elements: elements = [] } = content;
-    const article = elements[0] || {};
-    const { websites = {}, headlines = {} } = article;
-    const { website_url: websiteURL = '' } = websites[arcSite] || {};
 
     return (
       !!content?.content_elements?.length && visible && (
-        <nav
-          className="alert-bar"
-          ref={this.alertRef}
-          aria-label={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
-        >
-          <PrimaryFont
-            href={websiteURL}
-            className="article-link"
-            as="a"
-          >
-            {headlines.basic}
-          </PrimaryFont>
-          <button type="button" onClick={this.hideAlert} aria-label={this.phrases.t('alert-bar-block.close-button')}>
-            <CloseIcon className="close" fill="white" />
-          </button>
-        </nav>
+        <AlertBarPresentational
+          alertRef={this.alertRef}
+          barAriaLabel={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
+          closeAriaLabel={this.phrases.t('alert-bar-block.close-button')}
+          hideAlertHandler={this.hideAlert}
+          content={content}
+          arcSite={arcSite}
+        />
       )
     );
   }
 }
 
 AlertBar.label = 'Alert Bar – Arc Block';
+
+AlertBar.icon = 'alarm-bell-ring';
 
 AlertBar.propTypes = {
   customFields: PropTypes.shape({

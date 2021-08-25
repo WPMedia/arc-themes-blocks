@@ -4,8 +4,10 @@ import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 import { UserIcon } from '@wpmedia/engine-theme-sdk';
 
+// handle non-dynamic styling not based on theme styles
 import './styles.scss';
 
+// naming comes from zeplin docs for types
 export const BUTTON_STYLES = {
   FILLED: 'FILLED',
   OUTLINED: 'OUTLINED',
@@ -52,6 +54,7 @@ const StyledDynamicButton = styled.button`
   }};
 `;
 
+// get the class name for the button based on the button size based on mocks
 const matchButtonSizeWithClass = (matchedButtonSize) => {
   switch (matchedButtonSize) {
     case BUTTON_SIZES.SMALL:

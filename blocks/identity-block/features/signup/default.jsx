@@ -16,8 +16,7 @@ function validatePasswordRegex(
   pwSpecialCharacters,
   pwUppercase,
 ) {
-  // eslint-disable-next-line no-useless-escape
-  return `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\d@$!%*?&]{${pwMinLength},}$`;
+  return `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\\d@$!%*?&]{${pwMinLength},}$`;
 }
 
 const SignUp = ({ customFields, arcSite }) => {

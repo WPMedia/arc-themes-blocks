@@ -1,0 +1,24 @@
+.xpmedia-subs-button {
+  width: 100%;
+  border-radius: calculateRem(4px);
+  font-size: calculateRem(16px);
+  font-weight: bold;
+  line-height: 1.5;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+}
+
+.xpmedia-subs-button--small {
+  padding: calculateRem(4px);
+}
+
+.xpmedia-subs-button--medium {
+  padding: calculateRem(12px);
+}
+
+.xpmedia-subs-button--large {
+  padding: calculateRem(16px);
+}
+

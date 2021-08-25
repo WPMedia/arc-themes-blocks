@@ -21,6 +21,10 @@ export const Outlined = () => (
   <Button buttonStyle={BUTTON_STYLES.OUTLINED} text="Sign up" />
 );
 
+export const WhiteBackgroundFilled = () => (
+  <Button buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED} text="Sign up" />
+);
+
 export const OutlineSmall = () => (
   <Button buttonStyle={BUTTON_STYLES.OUTLINED} buttonSize={BUTTON_SIZES.SMALL} text="Sign up" />
 );

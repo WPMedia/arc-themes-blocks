@@ -9,6 +9,7 @@ import './styles.scss';
 export const BUTTON_STYLES = {
   FILLED: 'FILLED',
   OUTLINED: 'OUTLINED',
+  WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
 };
 
 export const BUTTON_SIZES = {
@@ -25,19 +26,26 @@ export const BUTTON_TYPES = {
 
 const StyledDynamicButton = styled.button`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
-  border: 1px solid ${({ arcSite }) => getThemeStyle(arcSite)['primary-color']};
 
   ${({ matchedButtonStyle, arcSite }) => {
     switch (matchedButtonStyle) {
+      case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
+        return `
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: ${getThemeStyle(arcSite)['primary-color']};
+        `;
       case BUTTON_STYLES.OUTLINED:
         return `
           background-color: transparent;
+          border-color: ${getThemeStyle(arcSite)['primary-color']};
           color: ${getThemeStyle(arcSite)['primary-color']};
         `;
       case BUTTON_STYLES.FILLED:
       default:
         return `
           background-color: ${getThemeStyle(arcSite)['primary-color']};
+          border-color: ${getThemeStyle(arcSite)['primary-color']};
           color: #ffffff;
         `;
     }
@@ -84,7 +92,11 @@ function Button(props) {
         Icon = (
           // todo: width and height for large and medium icons are different
           // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
-          <UserIcon />
+          <UserIcon
+            height={16}
+            width={16}
+            fill={getThemeStyle(arcSite)['primary-color']}
+          />
         );
         break;
       default:

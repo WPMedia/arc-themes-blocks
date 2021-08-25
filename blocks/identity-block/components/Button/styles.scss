@@ -5,6 +5,10 @@
   font-weight: bold;
   line-height: 1.5;
 
+  // border color managed in styled component
+  border-style: solid;
+  border-width: calculateRem(1px);
+
   &:hover {
     filter: brightness(0.85);
   }

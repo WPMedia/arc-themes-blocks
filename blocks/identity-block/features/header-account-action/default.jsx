@@ -6,9 +6,19 @@ import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import { ChevronUpIcon, ChevronDownIcon, UserIcon } from '@wpmedia/engine-theme-sdk';
+import styled from 'styled-components';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
+
+const StyledMenuItemLink = styled.a`
+  font-family: ${(props) => props.primaryFont};
+  color: ${(props) => props.primaryColor};
+
+  &:hover {
+    color: ${(props) => props.primaryColor};
+  }
+`;
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL } = customFields;
@@ -35,6 +45,7 @@ const HeaderAccountAction = ({ customFields }) => {
     isLoggedIn();
   }, [Identity]);
 
+  // For setting user
   useEffect(() => {
     let isActive = true;
 
@@ -54,6 +65,7 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
+  // For closing the account menu on a click outside of the menu
   useEffect(() => {
     const closeMenuOnClick = (event) => {
       if (event.target.closest('.menu')) {
@@ -68,6 +80,7 @@ const HeaderAccountAction = ({ customFields }) => {
     };
   }, []);
 
+  // For closing the menu when hitting the `esc` key, accessibility concern
   useEffect(() => {
     const handleEscKey = (event) => {
       if (event.keyCode === 27) {
@@ -92,10 +105,26 @@ const HeaderAccountAction = ({ customFields }) => {
   const AccountMenu = () => (
     <ul className="account-menu">
       <li className="menu-item">
-        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">{phrases.t('identity-block.manage-account')}</PrimaryFont>
+        <StyledMenuItemLink
+          href="localhost"
+          className="menu-item-link"
+          arcSite={arcSite}
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          primaryColor={getThemeStyle(arcSite)['primary-color']}
+        >
+          {phrases.t('identity-block.manage-account')}
+        </StyledMenuItemLink>
       </li>
       <li className="menu-item">
-        <PrimaryFont as="a" href="localhost" className="menu-item-link" fontColor="primary-color">{phrases.t('identity-block.log-out')}</PrimaryFont>
+        <StyledMenuItemLink
+          href="localhost"
+          className="menu-item-link"
+          arcSite={arcSite}
+          primaryFont={getThemeStyle(arcSite)['primary-font-family']}
+          primaryColor={getThemeStyle(arcSite)['primary-color']}
+        >
+          {phrases.t('identity-block.log-out')}
+        </StyledMenuItemLink>
       </li>
     </ul>
   );

@@ -104,7 +104,8 @@ const SignUp = ({ customFields, arcSite }) => {
         <FormInputField
           label={phrases.t('identity-block.email')}
           name="email"
-          onChange={setEmail}
+          // onChange({ value: event.target.value });
+          onChange={(inputObject) => setEmail(inputObject.value)}
           required
           showDefaultError={false}
           type={FIELD_TYPES.EMAIL}
@@ -113,7 +114,7 @@ const SignUp = ({ customFields, arcSite }) => {
         <FormInputField
           label={phrases.t('identity-block.password')}
           name="password"
-          onChange={setPassword}
+          onChange={(inputObject) => setPassword(inputObject.value)}
           required
           showDefaultError={false}
           type={FIELD_TYPES.PASSWORD}

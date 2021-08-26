@@ -58,6 +58,7 @@ jobs:
 
       - name: Publish to rc
         run: npm run release:rc
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Check rc failure status

@@ -58,12 +58,12 @@ const StyledDynamicButton = styled.button`
 const matchButtonSizeWithClass = (matchedButtonSize) => {
   switch (matchedButtonSize) {
     case BUTTON_SIZES.SMALL:
-      return 'xpmedia-subs-button--small';
+      return 'xpmedia-button--small';
     case BUTTON_SIZES.LARGE:
-      return 'xpmedia-subs-button--large';
+      return 'xpmedia-button--large';
     case BUTTON_SIZES.MEDIUM:
     default:
-      return 'xpmedia-subs-button--medium';
+      return 'xpmedia-button--medium';
   }
 };
 
@@ -112,7 +112,7 @@ function Button(props) {
     <StyledDynamicButton
       arcSite={arcSite}
       matchedButtonStyle={matchedButtonStyle}
-      className={`xpmedia-subs-button ${matchedButtonSizeClass}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}`}
     >
       {
         matchedButtonType === BUTTON_TYPES.ICON_ONLY ? (

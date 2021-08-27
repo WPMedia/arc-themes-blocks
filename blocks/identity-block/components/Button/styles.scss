@@ -1,4 +1,4 @@
-.xpmedia-subs-button {
+.xpmedia-button {
   width: 100%;
   border-radius: calculateRem(4px);
   font-size: calculateRem(16px);
@@ -16,15 +16,15 @@
   }
 }
 
-.xpmedia-subs-button--small {
+.xpmedia-button--small {
   padding: calculateRem(4px);
 }
 
-.xpmedia-subs-button--medium {
+.xpmedia-button--medium {
   padding: calculateRem(12px);
 }
 
-.xpmedia-subs-button--large {
+.xpmedia-button--large {
   padding: calculateRem(16px);
 }
 

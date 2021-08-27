@@ -3,7 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: calculateRem(4px);
+
+  // if a tag, then hide decoration
+  text-decoration: none;
+
+  // override nav header
+  border-radius: calculateRem(4px) !important;
   font-size: calculateRem(16px);
   font-weight: bold;
   line-height: 1.5;
@@ -24,7 +29,7 @@
 }
 
 .xpmedia-button--small {
-  padding: calculateRem(4px);
+  padding: calculateRem(4px) calculateRem(10px);
 }
 
 .xpmedia-button--medium {

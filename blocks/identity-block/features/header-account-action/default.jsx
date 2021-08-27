@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import useIdentity from '../../components/Identity';
+import Button, { BUTTON_SIZES, BUTTON_STYLES, BUTTON_TYPES } from '../../components/Button';
 
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
-  const { loginURL } = customFields;
+  const { loginURL, createAccountURL } = customFields;
 
   const { Identity, isInitialized } = useIdentity();
 
@@ -64,8 +65,30 @@ const HeaderAccountAction = ({ customFields }) => {
 
   // What do we want to happen if there is an error?
   return (
-    <div className="xpmedia-subs-header">
-      <a href={loginURL} className="xpmedia-subs-header--button">Sign In</a>
+    <div className="xpmedia-subs-header--logged-out-header">
+      <Button
+        // add translation
+        text="Sign up"
+        buttonSize={BUTTON_SIZES.SMALL}
+        buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+        buttonType={BUTTON_TYPES.LABEL_ONLY}
+        // add translation
+        ariaLabel="Sign up"
+        href={createAccountURL}
+        as="a"
+      />
+      <Button
+        // add translation
+        text="Login"
+        buttonSize={BUTTON_SIZES.SMALL}
+        buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+        buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+        iconType="user"
+        // add translation
+        ariaLabel="Login"
+        href={loginURL}
+        as="a"
+      />
     </div>
   );
 };
@@ -74,6 +97,9 @@ HeaderAccountAction.propTypes = {
   customFields: PropTypes.shape({
     loginURL: PropTypes.string.tag({
       defaultValue: '/account/login/',
+    }),
+    createAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/create-account/',
     }),
   }),
 };

@@ -13,6 +13,7 @@ export const BUTTON_STYLES = {
   FILLED: 'FILLED',
   OUTLINED: 'OUTLINED',
   WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
+  OUTLINED_GREY: 'OUTLINED_GREY',
 };
 
 export const BUTTON_SIZES = {
@@ -27,6 +28,7 @@ export const BUTTON_TYPES = {
   LABEL_AND_ICON: 'LABEL_AND_ICON',
 };
 
+// hover overrides link hover global style
 const StyledDynamicButton = styled.button.attrs((props) => ({
   arcSite: props.arcSite,
   buttonStyle: props.buttonStyle,
@@ -40,12 +42,30 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
           background-color: #ffffff;
           border-color: #ffffff;
           color: ${getThemeStyle(arcSite)['primary-color']};
+
+          &:hover {
+            color: ${getThemeStyle(arcSite)['primary-color']};
+          }
         `;
       case BUTTON_STYLES.OUTLINED:
         return `
           background-color: transparent;
           border-color: ${getThemeStyle(arcSite)['primary-color']};
           color: ${getThemeStyle(arcSite)['primary-color']};
+
+          &:hover {
+            color: ${getThemeStyle(arcSite)['primary-color']};
+          }
+        `;
+      case BUTTON_STYLES.OUTLINED_GREY:
+        return `
+          background-color: transparent;
+          border-color: rgba(255, 255, 255, 0.5);
+          color: #ffffff;
+
+          &:hover {
+            color: #ffffff;
+          }
         `;
       case BUTTON_STYLES.FILLED:
       default:
@@ -53,6 +73,10 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
           background-color: ${getThemeStyle(arcSite)['primary-color']};
           border-color: ${getThemeStyle(arcSite)['primary-color']};
           color: #ffffff;
+
+          &:hover {
+            color: #ffffff;
+          }
         `;
     }
   }}
@@ -103,6 +127,8 @@ function Button(props) {
     text,
     ariaLabel,
     type,
+    href,
+    as,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
@@ -135,6 +161,8 @@ function Button(props) {
       className={`xpmedia-button ${matchedButtonSizeClass}`}
       aria-label={ariaLabel}
       type={type}
+      href={href}
+      as={as}
     >
       {renderButtonContents(buttonType, text, Icon)}
     </StyledDynamicButton>
@@ -148,15 +176,19 @@ Button.propTypes = {
   iconType: PropTypes.oneOf(['user']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string.isRequired,
+
+  // for if button
   type: PropTypes.string,
+
+  // for if a tag
+  href: PropTypes.string,
 };
 
 Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
   buttonStyle: BUTTON_STYLES.FILLED,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
-  iconType: '',
-  type: 'button',
+  iconType: 'user',
 };
 
 export default Button;

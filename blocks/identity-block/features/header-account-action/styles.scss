@@ -1,23 +1,11 @@
 .xpmedia-subs-header {
-  align-items: center;
-  color: #fff;
-  font-size: 0.875rem;
+  display: flex;
+}
 
-  &--button {
-    align-items: center;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 2px;
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: bold;
-    height: 2rem;
-    padding: 0 0.5rem;
-    text-decoration: none;
+.xpmedia-subs-header--logged-out-header {
+  display: flex;
 
-    &:hover {
-      color: #fff;
-      border: 1px solid #fff;
-    }
+  a {
+    margin: calculateRem(12px);
   }
 }

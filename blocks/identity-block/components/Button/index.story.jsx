@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { BUTTON_STYLES, BUTTON_SIZES } from '.';
+import Button, { BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES } from '.';
 
 export default {
   title: 'Blocks/Identity/Components/Button',
@@ -55,5 +55,31 @@ export const UserIconWithLabel = () => (
     buttonSize={BUTTON_SIZES.LARGE}
     text="Sign up"
     iconType="user"
+  />
+);
+
+export const IconOnly = () => (
+  <Button
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    text="Sign up"
+    iconType="user"
+    buttonStyle={BUTTON_STYLES.OUTLINED}
+  />
+);
+
+export const IconWithLabel = () => (
+  <Button
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    text="Sign up"
+    iconType="user"
+    buttonStyle={BUTTON_STYLES.OUTLINED}
+  />
+);
+
+export const LabelOnly = () => (
+  <Button
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+    buttonStyle={BUTTON_STYLES.OUTLINED}
   />
 );

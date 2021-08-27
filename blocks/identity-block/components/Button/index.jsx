@@ -70,6 +70,25 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
   }
 };
 
+function renderButtonContents(matchedButtonType, text, iconComponent) {
+  switch (matchedButtonType) {
+    case BUTTON_TYPES.LABEL_ONLY:
+      return (text);
+    case BUTTON_TYPES.ICON_ONLY:
+      return (iconComponent);
+    case BUTTON_TYPES.LABEL_AND_ICON:
+    default:
+      return (
+        <>
+          <div className="xpmedia-button--left-icon-container">
+            {iconComponent}
+          </div>
+          {text}
+        </>
+      );
+  }
+}
+
 function Button(props) {
   const { arcSite } = useFusionContext();
 
@@ -77,7 +96,8 @@ function Button(props) {
     buttonSize,
     buttonStyle,
     buttonType,
-    children,
+    // todo: take in children and handle
+    // children,
     iconType = '',
     text,
     ariaLabel,
@@ -121,19 +141,7 @@ function Button(props) {
       aria-label={ariaLabel}
       type={type}
     >
-      {
-        matchedButtonType === BUTTON_TYPES.ICON_ONLY ? (
-          <>
-            {Icon}
-          </>
-        ) : (
-          <>
-            {Icon}
-            {text}
-          </>
-        )
-      }
-      {children}
+      {renderButtonContents(matchedButtonType, text, Icon)}
     </StyledDynamicButton>
   );
 }

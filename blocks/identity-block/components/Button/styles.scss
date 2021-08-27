@@ -1,5 +1,8 @@
 .xpmedia-button {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: calculateRem(4px);
   font-size: calculateRem(16px);
   font-weight: bold;
@@ -14,6 +17,10 @@
     // see css filter docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
     filter: brightness(0.85);
   }
+}
+
+.xpmedia-button--left-icon-container {
+  padding-right: calculateRem(8px);
 }
 
 .xpmedia-button--small {

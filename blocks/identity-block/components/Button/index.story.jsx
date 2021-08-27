@@ -90,3 +90,24 @@ export const CustomAriaLabel = () => (
     ariaLabel="Opens login window"
   />
 );
+
+export const CustomSubmitType = () => (
+  <Button
+    text="Type Submit"
+    type="submit"
+  />
+);
+
+export const CustomButtonType = () => (
+  <Button
+    text="Type Button"
+    type="button"
+  />
+);
+
+export const ButtonResetType = () => (
+  <Button
+    text="Type Reset"
+    type="reset"
+  />
+);

@@ -51,7 +51,7 @@ const StyledDynamicButton = styled.button`
           color: #ffffff;
         `;
     }
-  }};
+  }}
 `;
 
 // get the class name for the button based on the button size based on mocks

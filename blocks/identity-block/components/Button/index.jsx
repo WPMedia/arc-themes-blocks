@@ -26,7 +26,10 @@ export const BUTTON_TYPES = {
   LABEL_AND_ICON: 'LABEL_AND_ICON',
 };
 
-const StyledDynamicButton = styled.button`
+const StyledDynamicButton = styled.button.attrs((props) => ({
+  arcSite: props.arcSite,
+  matchedButtonStyle: props.matchedButtonStyle,
+}))`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
 
   ${({ matchedButtonStyle, arcSite }) => {

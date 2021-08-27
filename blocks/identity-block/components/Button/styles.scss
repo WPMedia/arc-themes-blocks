@@ -1,0 +1,37 @@
+.xpmedia-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calculateRem(4px);
+  font-size: calculateRem(16px);
+  font-weight: bold;
+  line-height: 1.5;
+
+  // border color managed in styled component
+  border-style: solid;
+  border-width: calculateRem(1px);
+
+  &:hover {
+    // darkens all nested elements on hover
+    // see css filter docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+    filter: brightness(0.85);
+  }
+}
+
+.xpmedia-button--left-icon-container {
+  padding-right: calculateRem(8px);
+}
+
+.xpmedia-button--small {
+  padding: calculateRem(4px);
+}
+
+.xpmedia-button--medium {
+  padding: calculateRem(12px);
+}
+
+.xpmedia-button--large {
+  padding: calculateRem(16px);
+}
+

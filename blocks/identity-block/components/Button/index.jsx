@@ -76,7 +76,7 @@ function Button(props) {
     buttonType,
     children,
     iconType = '',
-    text = '',
+    text,
   } = props;
 
   const matchedButtonSize = BUTTON_SIZES[buttonSize] || BUTTON_SIZES.MEDIUM;

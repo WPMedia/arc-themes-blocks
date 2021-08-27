@@ -9,10 +9,6 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Button text="" />
-);
-
 export const Filled = () => (
   <Button buttonStyle={BUTTON_STYLES.FILLED} text="Sign up" />
 );

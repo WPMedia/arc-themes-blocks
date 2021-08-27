@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
 import { UserIcon } from '@wpmedia/engine-theme-sdk';
@@ -28,12 +29,12 @@ export const BUTTON_TYPES = {
 
 const StyledDynamicButton = styled.button.attrs((props) => ({
   arcSite: props.arcSite,
-  matchedButtonStyle: props.matchedButtonStyle,
+  buttonStyle: props.buttonStyle,
 }))`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
 
-  ${({ matchedButtonStyle, arcSite }) => {
-    switch (matchedButtonStyle) {
+  ${({ buttonStyle, arcSite }) => {
+    switch (buttonStyle) {
       case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
         return `
           background-color: #ffffff;
@@ -104,13 +105,7 @@ function Button(props) {
     type,
   } = props;
 
-  const matchedButtonSize = BUTTON_SIZES[buttonSize] || BUTTON_SIZES.MEDIUM;
-
-  const matchedButtonSizeClass = matchButtonSizeWithClass(matchedButtonSize);
-
-  const matchedButtonStyle = BUTTON_STYLES[buttonStyle] || BUTTON_STYLES.FILLED;
-
-  const matchedButtonType = BUTTON_TYPES[buttonType] || BUTTON_TYPES.LABEL_ONLY;
+  const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
 
   let Icon = null;
 
@@ -136,14 +131,32 @@ function Button(props) {
   return (
     <StyledDynamicButton
       arcSite={arcSite}
-      matchedButtonStyle={matchedButtonStyle}
+      buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
       aria-label={ariaLabel}
       type={type}
     >
-      {renderButtonContents(matchedButtonType, text, Icon)}
+      {renderButtonContents(buttonType, text, Icon)}
     </StyledDynamicButton>
   );
 }
+
+Button.propTypes = {
+  buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
+  buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
+  buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
+  iconType: PropTypes.oneOf(['user']),
+  text: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+Button.defaultProps = {
+  buttonSize: BUTTON_SIZES.MEDIUM,
+  buttonStyle: BUTTON_STYLES.FILLED,
+  buttonType: BUTTON_TYPES.LABEL_ONLY,
+  iconType: '',
+  type: 'button',
+};
 
 export default Button;

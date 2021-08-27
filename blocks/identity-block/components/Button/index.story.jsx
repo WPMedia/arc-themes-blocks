@@ -49,7 +49,7 @@ export const LongText = () => (
   />
 );
 
-export const UserIconWithLabel = () => (
+export const UserIconWithLabelOutline = () => (
   <Button
     buttonStyle={BUTTON_STYLES.OUTLINED}
     buttonSize={BUTTON_SIZES.LARGE}
@@ -58,7 +58,7 @@ export const UserIconWithLabel = () => (
   />
 );
 
-export const IconOnly = () => (
+export const IconOnlyOutlined = () => (
   <Button
     buttonType={BUTTON_TYPES.ICON_ONLY}
     text="Sign up"
@@ -80,7 +80,6 @@ export const LabelOnly = () => (
   <Button
     buttonType={BUTTON_TYPES.LABEL_ONLY}
     text="Sign up"
-    buttonStyle={BUTTON_STYLES.OUTLINED}
   />
 );
 

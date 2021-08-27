@@ -80,6 +80,7 @@ function Button(props) {
     children,
     iconType = '',
     text,
+    ariaLabel,
   } = props;
 
   const matchedButtonSize = BUTTON_SIZES[buttonSize] || BUTTON_SIZES.MEDIUM;
@@ -116,6 +117,7 @@ function Button(props) {
       arcSite={arcSite}
       matchedButtonStyle={matchedButtonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
+      aria-label={ariaLabel}
     >
       {
         matchedButtonType === BUTTON_TYPES.ICON_ONLY ? (

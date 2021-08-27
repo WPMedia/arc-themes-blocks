@@ -83,3 +83,10 @@ export const LabelOnly = () => (
     buttonStyle={BUTTON_STYLES.OUTLINED}
   />
 );
+
+export const CustomAriaLabel = () => (
+  <Button
+    text="Login"
+    ariaLabel="Opens login window"
+  />
+);

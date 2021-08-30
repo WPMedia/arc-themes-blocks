@@ -135,6 +135,20 @@ function Button(props) {
 
   let Icon = null;
 
+  let iconHeightWidth = 16;
+
+  switch (buttonSize) {
+    case BUTTON_SIZES.LARGE:
+      iconHeightWidth = 26;
+      break;
+    case BUTTON_SIZES.MEDIUM:
+      iconHeightWidth = 24;
+      break;
+    case BUTTON_SIZES.SMALL:
+    default:
+      iconHeightWidth = 16;
+  }
+
   if (iconType) {
     switch (iconType) {
       case 'user':
@@ -142,8 +156,8 @@ function Button(props) {
           // todo: width and height for large and medium icons are different
           // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
           <UserIcon
-            height={16}
-            width={16}
+            height={iconHeightWidth}
+            width={iconHeightWidth}
             fill={getThemeStyle(arcSite)['primary-color']}
           />
         );

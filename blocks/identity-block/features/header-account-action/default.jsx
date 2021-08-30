@@ -72,25 +72,39 @@ const HeaderAccountAction = ({ customFields }) => {
   // What do we want to happen if there is an error?
   return (
     <div className="xpmedia-subs-header--logged-out-header">
-      <Button
-        text={phrases.t('identity-block.sign-up')}
-        buttonSize={BUTTON_SIZES.SMALL}
-        buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
-        buttonType={BUTTON_TYPES.LABEL_ONLY}
-        ariaLabel={phrases.t('identity-block.sign-up')}
-        href={createAccountURL}
-        as="a"
-      />
-      <Button
-        text={phrases.t('identity-block.log-in')}
-        buttonSize={BUTTON_SIZES.SMALL}
-        buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
-        buttonType={BUTTON_TYPES.LABEL_AND_ICON}
-        iconType="user"
-        ariaLabel={phrases.t('identity-block.log-in')}
-        href={loginURL}
-        as="a"
-      />
+      <div className="xpmedia-subs-header--desktop-logged-out-header">
+        <Button
+          ariaLabel={phrases.t('identity-block.sign-up')}
+          // should be an a tag if it's a link
+          as="a"
+          buttonSize={BUTTON_SIZES.SMALL}
+          buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+          buttonType={BUTTON_TYPES.LABEL_ONLY}
+          href={createAccountURL}
+          text={phrases.t('identity-block.sign-up')}
+        />
+        <Button
+          ariaLabel={phrases.t('identity-block.log-in')}
+          // should be an a tag if it's a link
+          as="a"
+          buttonSize={BUTTON_SIZES.SMALL}
+          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+          buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+          href={loginURL}
+          iconType="user"
+          text={phrases.t('identity-block.log-in')}
+        />
+      </div>
+      <div className="xpmedia-subs-header--mobile-logged-out-header">
+        <Button
+          // should be button if toggleable
+          as="button"
+          buttonSize={BUTTON_SIZES.SMALL}
+          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+          buttonType={BUTTON_TYPES.ICON_ONLY}
+          iconType="user"
+        />
+      </div>
     </div>
   );
 };

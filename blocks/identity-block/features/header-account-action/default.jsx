@@ -130,7 +130,7 @@ const HeaderAccountAction = ({ customFields }) => {
   );
 
   const AccountDropdown = () => (
-    <div className="xpmedia-subs-header">
+    <div className="xpmedia-subs-header account-dropdown">
       <button type="button" className="xpmedia-subs-header--button account-button" onClick={() => setAccountMenu(!isAccountMenuOpen)}>
         <UserIcon fill={getThemeStyle(arcSite)['primary-color']} height={accountIconSize} width={accountIconSize} />
         <PrimaryFont

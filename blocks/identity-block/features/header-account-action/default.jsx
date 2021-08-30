@@ -99,9 +99,11 @@ HeaderAccountAction.propTypes = {
   customFields: PropTypes.shape({
     loginURL: PropTypes.string.tag({
       defaultValue: '/account/login/',
+      label: 'Log In URL',
     }),
     createAccountURL: PropTypes.string.tag({
-      defaultValue: '/account/create-account/',
+      defaultValue: '/account/signup/',
+      label: 'Sign Up URL',
     }),
   }),
 };

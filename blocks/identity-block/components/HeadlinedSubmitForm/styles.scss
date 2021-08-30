@@ -1,14 +1,14 @@
+.xpmedia-form-headline {
+  border-bottom: 1px solid $border-rule-color;
+  padding-bottom: map-get($spacers, 'sm');
+  margin-bottom: map-get($spacers, 'sm');
+  text-align: center;
+  width: 100%;
+}
+
 .xpmedia-form-submittable {
   border-bottom: 1px solid $border-rule-color;
   margin-bottom: map-get($spacers, 'sm');
-
-  .xpmedia-form-headline {
-    border-bottom: 1px solid $border-rule-color;
-    padding-bottom: map-get($spacers, 'sm');
-    margin-bottom: map-get($spacers, 'sm');
-    text-align: center;
-    width: 100%;
-  }
 
   .xpmedia-form-field {
     margin: map-get($spacers, 'md') 0;

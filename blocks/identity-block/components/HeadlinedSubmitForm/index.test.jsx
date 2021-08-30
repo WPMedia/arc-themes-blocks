@@ -52,4 +52,18 @@ describe('Headlined Submit Form', () => {
       inputField: 'valid@email.com',
     });
   });
+
+  it('shows a form error is text is passed in', () => {
+    const wrapper = mount(
+      <HeadlinedSubmitForm
+        headline="Sign Up"
+        buttonLabel="Submit"
+        formErrorText="This should show up in the error field"
+      >
+        <input name="inputField" type="email" defaultValue="valid@email.com" />
+      </HeadlinedSubmitForm>,
+    );
+
+    expect(wrapper.find('.xpmedia-form-error').at(0).text().includes('This should show up in the error field'));
+  });
 });

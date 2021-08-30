@@ -2,6 +2,14 @@
   border-bottom: 1px solid $border-rule-color;
   margin-bottom: map-get($spacers, 'sm');
 
+  .xpmedia-form-headline {
+    border-bottom: 1px solid $border-rule-color;
+    padding-bottom: map-get($spacers, 'sm');
+    margin-bottom: map-get($spacers, 'sm');
+    text-align: center;
+    width: 100%;
+  }
+
   .xpmedia-form-field {
     margin: map-get($spacers, 'md') 0;
 
@@ -13,28 +21,27 @@
       margin-bottom: map-get($spacers, 'sm');
     }
   }
+
+  .xpmedia-button {
+    margin: map-get($spacers, 'md') 0;
+  }
 }
 
-.xpmedia-form-headline {
-  border-bottom: 1px solid $border-rule-color;
-  padding-bottom: map-get($spacers, 'sm');
-  margin-bottom: map-get($spacers, 'sm');
-  text-align: center;
-  width: 100%;
-}
-
-.xpmedia-form-filled-button {
-  margin: map-get($spacers, 'md') 0;
-  // primary color for arc subs
-  background-color: #183bb6;
-  color: $ui-btn-white-color;
-  border: 0;
-}
-
-.xpmedia-form-medium-button {
-  padding: map-get($spacers, 'sm');
-  width: 100%;
-  line-height: 1.5;
+.xpmedia-form-error {
+  color: $danger-color;
   font-size: calculateRem(16px);
-  border-radius: calculateRem(4px);
+  margin: map-get($spacers, 'md') 0;
+
+  p {
+    display: flex;
+    line-height: 1.5;
+
+    svg {
+      display: block;
+      flex: 0 0 1em;
+      height: 1em;
+      margin: 0.125em 0.3125em 0 0;
+      width: 1em;
+    }
+  }
 }

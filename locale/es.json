@@ -102,5 +102,9 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "Omitir para ir al contenido principal"
+  },
+  "identity-block": {
+    "identity-block.sign-up": "Sign Up",
+    "identity-block.log-in": "Log In"
   }
 }

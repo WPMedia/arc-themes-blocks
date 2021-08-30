@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import { useFusionContext } from 'fusion:context';
 import useIdentity from '../../components/Identity';
 import Button, { BUTTON_SIZES, BUTTON_STYLES, BUTTON_TYPES } from '../../components/Button';
 
@@ -7,8 +10,11 @@ import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL, createAccountURL } = customFields;
+  const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
+  const { locale } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
@@ -67,25 +73,21 @@ const HeaderAccountAction = ({ customFields }) => {
   return (
     <div className="xpmedia-subs-header--logged-out-header">
       <Button
-        // add translation
-        text="Sign up"
+        text={phrases.t('identity-block.sign-up')}
         buttonSize={BUTTON_SIZES.SMALL}
         buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
         buttonType={BUTTON_TYPES.LABEL_ONLY}
-        // add translation
-        ariaLabel="Sign up"
+        ariaLabel={phrases.t('identity-block.sign-up')}
         href={createAccountURL}
         as="a"
       />
       <Button
-        // add translation
-        text="Login"
+        text={phrases.t('identity-block.log-in')}
         buttonSize={BUTTON_SIZES.SMALL}
         buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
         buttonType={BUTTON_TYPES.LABEL_AND_ICON}
         iconType="user"
-        // add translation
-        ariaLabel="Login"
+        ariaLabel={phrases.t('identity-block.log-in')}
         href={loginURL}
         as="a"
       />

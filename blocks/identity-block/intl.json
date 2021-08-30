@@ -1,0 +1,22 @@
+{
+	"identity-block.sign-up": {
+		"de": "Sign Up",
+		"en": "Sign Up",
+		"es": "Sign Up",
+		"fr": "Sign Up",
+		"ja": "Sign Up",
+		"ko": "Sign Up",
+		"no": "Sign Up",
+		"sv": "Sign Up"
+	},
+	"identity-block.log-in": {
+		"de": "Log In",
+		"en": "Log In",
+		"es": "Log In",
+		"fr": "Log In",
+		"ja": "Log In",
+		"ko": "Log In",
+		"no": "Log In",
+		"sv": "Log In"
+	}
+}

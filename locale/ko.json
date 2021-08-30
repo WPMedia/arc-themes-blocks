@@ -102,5 +102,9 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "메인 콘텐츠로 건너뛰기"
+  },
+  "identity-block": {
+    "identity-block.sign-up": "Sign Up",
+    "identity-block.log-in": "Log In"
   }
 }

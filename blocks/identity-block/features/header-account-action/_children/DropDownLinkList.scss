@@ -1,0 +1,17 @@
+.xpmedia-subs-header-dropdown--open {
+  // todo: figure out actual height from top
+  top: calc(100% + 3px);
+  position: absolute;
+  padding: calculateRem(16px);
+}
+
+// this is dependent upon the classnames of the parent navs in the header-nav-chain
+// if parent is nav-right, then the dropdown should be right aligned
+.nav-right .xpmedia-subs-header-dropdown--open {
+  right: -2px;
+}
+
+// if parent is nav-left, then the dropdown should be left aligned
+.nav-left .xpmedia-subs-header-dropdown--open {
+  left: -2px;
+}

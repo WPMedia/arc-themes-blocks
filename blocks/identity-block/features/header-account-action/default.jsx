@@ -7,6 +7,8 @@ import useIdentity from '../../components/Identity';
 import Button, { BUTTON_SIZES, BUTTON_STYLES, BUTTON_TYPES } from '../../components/Button';
 
 import './styles.scss';
+import DropdownLinkList from './_children/DropdownLinkList';
+import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL, createAccountURL } = customFields;
@@ -19,6 +21,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
+  const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -103,7 +106,22 @@ const HeaderAccountAction = ({ customFields }) => {
           buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
+          onClick={() => setAccountMenu(!isAccountMenuOpen)}
+          // for button accessibility
+          type="button"
         />
+        {isAccountMenuOpen && (
+          <DropdownLinkList>
+            <DropDownLinkListItem
+              href={createAccountURL}
+              text={phrases.t('identity-block.sign-up')}
+            />
+            <DropDownLinkListItem
+              href={loginURL}
+              text={phrases.t('identity-block.log-in')}
+            />
+          </DropdownLinkList>
+        )}
       </div>
     </div>
   );

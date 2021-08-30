@@ -118,17 +118,16 @@ function Button(props) {
   const { arcSite } = useFusionContext();
 
   const {
+    ariaLabel,
+    as,
     buttonSize,
     buttonStyle,
     buttonType,
-    // todo: take in children and handle
-    // children,
-    iconType = '',
-    text,
-    ariaLabel,
-    type,
     href,
-    as,
+    iconType = '',
+    onClick,
+    text,
+    type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
@@ -174,9 +173,14 @@ function Button(props) {
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
       aria-label={ariaLabel}
+      // only for button
       type={type}
+      // only for link
       href={href}
+      // determines element tag type
       as={as}
+      // only button
+      onClick={onClick}
     >
       {renderButtonContents(buttonType, text, Icon)}
     </StyledDynamicButton>

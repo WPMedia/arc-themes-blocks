@@ -5,7 +5,8 @@
 .xpmedia-subs-header--logged-out-header {
   display: flex;
 
-  a {
-    margin: calculateRem(12px);
+  > a, button {
+    // should be 16px between buttons
+    margin: calculateRem(8px);
   }
 }

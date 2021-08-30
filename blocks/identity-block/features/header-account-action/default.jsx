@@ -5,10 +5,10 @@ import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import useIdentity from '../../components/Identity';
 import Button, { BUTTON_SIZES, BUTTON_STYLES, BUTTON_TYPES } from '../../components/Button';
-
-import './styles.scss';
 import DropdownLinkList from './_children/DropdownLinkList';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
+
+import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
   const { loginURL, createAccountURL } = customFields;

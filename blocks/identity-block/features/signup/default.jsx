@@ -3,9 +3,9 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import { PrimaryFont } from '@wpmedia/shared-styles';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
+import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 
 import './styles.scss';
 
@@ -22,7 +22,7 @@ function validatePasswordRegex(
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;
-  const { locale = 'en' } = getProperties(arcSite);
+  const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const { Identity, isInitialized } = useIdentity();
@@ -82,75 +82,55 @@ const SignUp = ({ customFields, arcSite }) => {
     status,
   } = passwordRequirements;
   return (
-    <section>
-      <PrimaryFont
-        as="h1"
-      >
-        {phrases.t('identity-block.sign-up')}
-      </PrimaryFont>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          return Identity.signUp({
-            userName: email,
-            credentials: password,
-          }, {
-            email,
-          })
-            .then(() => { window.location = redirectURL; })
-            .catch(() => setError('Something went wrong'));
-        }}
-      >
-        <FormInputField
-          label={phrases.t('identity-block.email')}
-          name="email"
+    <HeadlinedSubmitForm
+      headline={phrases.t('identity-block.sign-up')}
+      buttonLabel={phrases.t('identity-block.sign-up')}
+      onSubmit={(e) => {
+        e.preventDefault();
+        return Identity.signUp({
+          userName: email,
+          credentials: password,
+        }, {
+          email,
+        })
+          .then(() => { window.location = redirectURL; })
+          .catch(() => setError('Something went wrong'));
+      }}
+      formErrorText={error}
+    >
+      <FormInputField
+        label={phrases.t('identity-block.email')}
+        name="email"
           // onChange({ value: event.target.value });
-          onChange={(inputObject) => setEmail(inputObject.value)}
-          required
-          showDefaultError={false}
-          type={FIELD_TYPES.EMAIL}
-          validationErrorMessage={phrases.t('identity-block.email-requirements')}
-        />
-        <FormInputField
-          label={phrases.t('identity-block.password')}
-          name="password"
-          onChange={(inputObject) => setPassword(inputObject.value)}
-          required
-          showDefaultError={false}
-          type={FIELD_TYPES.PASSWORD}
-          validationErrorMessage={status === 'success' ? phrases.t('identity-block.password-requirements', {
-            pwLowercase,
-            pwMinLength,
-            pwPwNumbers,
-            pwSpecialCharacters,
-            pwUppercase,
-          }) : ''}
-          validationPattern={validatePasswordRegex(
-            pwLowercase,
-            pwMinLength,
-            pwPwNumbers,
-            pwSpecialCharacters,
-            pwUppercase,
-          )}
-        />
-        <PrimaryFont
-          as="button"
-          className="xpmedia-subs-filled-button xpmedia-subs-medium-button"
-          type="submit"
-        >
-          {phrases.t('identity-block.sign-up')}
-        </PrimaryFont>
-        {error ? (
-          <section>
-            <PrimaryFont
-              as="p"
-            >
-              {error}
-            </PrimaryFont>
-          </section>
-        ) : null}
-      </form>
-    </section>
+        onChange={(inputObject) => setEmail(inputObject.value)}
+        required
+        showDefaultError={false}
+        type={FIELD_TYPES.EMAIL}
+        validationErrorMessage={phrases.t('identity-block.email-requirements')}
+      />
+      <FormInputField
+        label={phrases.t('identity-block.password')}
+        name="password"
+        onChange={(inputObject) => setPassword(inputObject.value)}
+        required
+        showDefaultError={false}
+        type={FIELD_TYPES.PASSWORD}
+        validationErrorMessage={status === 'success' ? phrases.t('identity-block.password-requirements', {
+          pwLowercase,
+          pwMinLength,
+          pwPwNumbers,
+          pwSpecialCharacters,
+          pwUppercase,
+        }) : ''}
+        validationPattern={validatePasswordRegex(
+          pwLowercase,
+          pwMinLength,
+          pwPwNumbers,
+          pwSpecialCharacters,
+          pwUppercase,
+        )}
+      />
+    </HeadlinedSubmitForm>
   );
 };
 

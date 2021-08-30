@@ -14,15 +14,21 @@ const StyledLinkWithHover = styled.a`
   }
 `;
 
-function DropDownLinkListItem({ text, href }) {
+function DropDownLinkListItem({ text, href, isLastItem }) {
   const { arcSite } = useFusionContext();
 
   return (
-    <li>
+    <li
+      className={`${
+        isLastItem
+          ? 'xpmedia-subs-header-dropdown-list-item--last-item'
+          : 'xpmedia-subs-header-dropdown-list-item'
+      }`}
+    >
       <StyledLinkWithHover
         arcSite={arcSite}
         href={href}
-        className="xpmedia-subs-header-dropdown-list-item"
+        className="xpmedia-subs-header-dropdown-list-item-link"
       >
         {text}
       </StyledLinkWithHover>

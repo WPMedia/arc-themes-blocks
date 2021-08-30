@@ -1,4 +1,12 @@
 .xpmedia-subs-header-dropdown-list-item {
+  padding-bottom: calculateRem(8px);
+}
+
+.xpmedia-subs-header-dropdown-list-item--last-item {
+  padding-bottom: 0;
+}
+
+.xpmedia-subs-header-dropdown-list-item-link {
   text-decoration: none;
   font-size: calculateRem(14px);
 

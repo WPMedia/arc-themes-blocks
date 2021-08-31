@@ -76,27 +76,31 @@ const HeaderAccountAction = ({ customFields }) => {
   return (
     <div className="xpmedia-subs-header--logged-out-header">
       <div className="xpmedia-subs-header--desktop-logged-out-header">
-        <Button
-          ariaLabel={phrases.t('identity-block.sign-up')}
-          // should be an a tag if it's a link
-          as="a"
-          buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
-          buttonType={BUTTON_TYPES.LABEL_ONLY}
-          href={createAccountURL}
-          text={phrases.t('identity-block.sign-up')}
-        />
-        <Button
-          ariaLabel={phrases.t('identity-block.log-in')}
-          // should be an a tag if it's a link
-          as="a"
-          buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
-          buttonType={BUTTON_TYPES.LABEL_AND_ICON}
-          href={loginURL}
-          iconType="user"
-          text={phrases.t('identity-block.log-in')}
-        />
+        {createAccountURL ? (
+          <Button
+            ariaLabel={phrases.t('identity-block.sign-up')}
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+            buttonType={BUTTON_TYPES.LABEL_ONLY}
+            href={createAccountURL}
+            text={phrases.t('identity-block.sign-up')}
+          />
+        ) : null}
+        {loginURL ? (
+          <Button
+            ariaLabel={phrases.t('identity-block.log-in')}
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+            href={loginURL}
+            iconType="user"
+            text={phrases.t('identity-block.log-in')}
+          />
+        ) : null}
       </div>
       <div className="xpmedia-subs-header--mobile-logged-out-header">
         <Button
@@ -112,16 +116,24 @@ const HeaderAccountAction = ({ customFields }) => {
         />
         {isAccountMenuOpen && (
           <DropdownLinkList>
-            <DropDownLinkListItem
-              href={createAccountURL}
-              text={phrases.t('identity-block.sign-up')}
-              isLastItem={false}
-            />
-            <DropDownLinkListItem
-              href={loginURL}
-              text={phrases.t('identity-block.log-in')}
-              isLastItem
-            />
+            {
+              createAccountURL ? (
+                <DropDownLinkListItem
+                  href={createAccountURL}
+                  text={phrases.t('identity-block.sign-up')}
+                  isLastItem={false}
+                />
+              ) : null
+            }
+            {
+              loginURL ? (
+                <DropDownLinkListItem
+                  href={loginURL}
+                  text={phrases.t('identity-block.log-in')}
+                  isLastItem
+                />
+              ) : null
+            }
           </DropdownLinkList>
         )}
       </div>

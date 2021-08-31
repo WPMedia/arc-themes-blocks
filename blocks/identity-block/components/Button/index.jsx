@@ -123,11 +123,8 @@ function Button(props) {
     buttonSize,
     buttonStyle,
     buttonType,
-    href,
     iconType = '',
-    onClick,
     text,
-    type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
@@ -170,17 +167,11 @@ function Button(props) {
   return (
     <StyledDynamicButton
       arcSite={arcSite}
+      aria-label={ariaLabel || text}
+      as={as}
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
-      aria-label={ariaLabel || text}
-      // only for button
-      type={type}
-      // only for link
-      href={href}
-      // determines element tag type
-      as={as}
-      // only button
-      onClick={onClick}
+      {...props}
     >
       {renderButtonContents(buttonType, text, Icon)}
     </StyledDynamicButton>

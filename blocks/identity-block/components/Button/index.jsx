@@ -30,31 +30,32 @@ export const BUTTON_TYPES = {
 
 // hover overrides link hover global style
 const StyledDynamicButton = styled.button.attrs((props) => ({
-  arcSite: props.arcSite,
   buttonStyle: props.buttonStyle,
+  primaryColor: props.primaryColor,
+  fontFamily: props.fontFamily,
 }))`
-  font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
+  font-family: ${({ fontFamily }) => fontFamily};
 
-  ${({ buttonStyle, arcSite }) => {
+  ${({ buttonStyle, primaryColor }) => {
     switch (buttonStyle) {
       case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
         return `
           background-color: #ffffff;
           border-color: #ffffff;
-          color: ${getThemeStyle(arcSite)['primary-color']};
+          color: ${primaryColor};
 
           &:hover {
-            color: ${getThemeStyle(arcSite)['primary-color']};
+            color: ${primaryColor};
           }
         `;
       case BUTTON_STYLES.OUTLINED:
         return `
           background-color: transparent;
-          border-color: ${getThemeStyle(arcSite)['primary-color']};
-          color: ${getThemeStyle(arcSite)['primary-color']};
+          border-color: ${primaryColor};
+          color: ${primaryColor};
 
           &:hover {
-            color: ${getThemeStyle(arcSite)['primary-color']};
+            color: ${primaryColor};
           }
         `;
       case BUTTON_STYLES.OUTLINED_GREY:
@@ -70,8 +71,8 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
       case BUTTON_STYLES.FILLED:
       default:
         return `
-          background-color: ${getThemeStyle(arcSite)['primary-color']};
-          border-color: ${getThemeStyle(arcSite)['primary-color']};
+          background-color: ${primaryColor};
+          border-color: ${primaryColor};
           color: #ffffff;
 
           &:hover {
@@ -133,6 +134,9 @@ function Button(props) {
 
   let iconHeightWidth = 16;
 
+  const primaryColor = getThemeStyle(arcSite)['primary-color'];
+  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+
   switch (buttonSize) {
     case BUTTON_SIZES.LARGE:
       iconHeightWidth = 26;
@@ -154,7 +158,7 @@ function Button(props) {
           <UserIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={getThemeStyle(arcSite)['primary-color']}
+            fill={primaryColor}
           />
         );
         break;
@@ -171,6 +175,8 @@ function Button(props) {
       as={as}
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
+      fontFamily={primaryFont}
+      primaryColor={primaryColor}
       {...props}
     >
       {renderButtonContents(buttonType, text, Icon)}

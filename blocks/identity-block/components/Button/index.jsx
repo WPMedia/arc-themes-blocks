@@ -167,7 +167,7 @@ function Button(props) {
   return (
     <StyledDynamicButton
       arcSite={arcSite}
-      aria-label={ariaLabel || text}
+      aria-label={buttonStyle === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}

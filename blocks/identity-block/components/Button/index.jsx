@@ -172,7 +172,7 @@ function Button(props) {
       arcSite={arcSite}
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}`}
-      aria-label={ariaLabel}
+      aria-label={ariaLabel || text}
       // only for button
       type={type}
       // only for link
@@ -193,7 +193,7 @@ Button.propTypes = {
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
   iconType: PropTypes.oneOf(['user']),
   text: PropTypes.string.isRequired,
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
 
   // for if button
   type: PropTypes.string,

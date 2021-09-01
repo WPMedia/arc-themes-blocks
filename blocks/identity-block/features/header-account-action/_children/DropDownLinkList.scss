@@ -20,3 +20,11 @@
 .nav-left .xpmedia-subs-header-dropdown--open {
   left: calculateRem(16px);
 }
+
+.xpmedia-subs-header-dropdown-list-item {
+  padding-bottom: calculateRem(8px);
+}
+
+.xpmedia-subs-header-dropdown-list-item:last-of-type {
+  padding-bottom: 0;
+}

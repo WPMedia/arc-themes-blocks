@@ -124,7 +124,6 @@ const HeaderAccountAction = ({ customFields }) => {
                 <DropDownLinkListItem
                   href={createAccountURL}
                   text={phrases.t('identity-block.sign-up')}
-                  isLastItem={false}
                 />
               ) : null
             }
@@ -133,7 +132,6 @@ const HeaderAccountAction = ({ customFields }) => {
                 <DropDownLinkListItem
                   href={loginURL}
                   text={phrases.t('identity-block.log-in')}
-                  isLastItem
                 />
               ) : null
             }

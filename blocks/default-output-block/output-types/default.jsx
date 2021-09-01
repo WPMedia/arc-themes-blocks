@@ -88,6 +88,23 @@ const fontUrlLink = (fontUrl) => {
   ) : '';
 };
 
+const multiSiteCSS = (arcSite) => {
+  const site = {
+    'the-sun': `
+      :root {
+        --xpmedia-block-list-background-color: var(--xpmedia-global-color-gray-50);
+
+        --xpmedia-component-overline-text-color: green;
+        --xpmedia-component-overline-font-size: var(--xpmedia-global-font-size-200, 1rem);
+        --xpmedia-component-overline-font-weight: var(--xpmedia-global-font-weight-regular);
+        --xpmedia-component-overline-line-height: var(--xpmedia-global-font-line-height-medium);
+
+      }
+    `,
+  };
+  return site[arcSite] || '';
+};
+
 const SampleOutputType = ({
   children,
   contextPath,
@@ -203,6 +220,11 @@ const SampleOutputType = ({
           ? <script async data-integration="comscore" src="https://sb.scorecardresearch.com/beacon.js" />
           : null}
         {querylyCode(querylyId, querylyOrg, metaValue('page-type'))}
+
+        {/* <link rel="stylesheet" href="theme-settings/${arcsite}.css" /> */}
+        <style id="css-var-demo">
+          {multiSiteCSS(arcSite)}
+        </style>
       </head>
       <body>
         {comscoreNoScript(comscoreID)}

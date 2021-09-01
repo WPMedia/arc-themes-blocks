@@ -1,0 +1,6 @@
+.xpmedia-headline {
+  color: var(--xpmedia-component-headline-text-color);
+  font-size: var(--xpmedia-component-headline-font-size);
+  font-weight: var(--xpmedia-component-headline-font-weight);
+  line-height: var(--xpmedia-component-headline-line-height);
+}

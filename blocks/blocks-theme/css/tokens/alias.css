@@ -1,0 +1,9 @@
+:root {
+
+  --xpmedia-primary-color: var(--xpmedia-global-color-gray-100);
+  --xpmedia-background-color: var(--xpmedia-global-color-white);
+
+  --xpmedia-text-color: var(--xpmedia-global-color-gray-900);
+  --xpmedia-primary-font-family: var(--xpmedia-global-font-family-base);
+
+}

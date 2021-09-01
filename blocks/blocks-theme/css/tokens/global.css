@@ -1,0 +1,66 @@
+:root {
+
+  /* Colors */
+  --xpmedia-global-color-black: rgb(0 0 0);
+  --xpmedia-global-color-white: rgb(255 255 255);
+  --xpmedia-global-color-gray-50: rgb(218 218 218);
+  --xpmedia-global-color-gray-100: rgb(87 87 87);
+  --xpmedia-global-color-gray-900: rgb(25 25 25);
+
+  /* Fonts */
+  --xpmedia-global-font-family-base: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --xpmedia-global-font-family-serif: Georgia, Times, Times New Roman, serif;
+  --xpmedia-global-font-family-code: monospace;
+  --xpmedia-global-font-weight-thin: 100;
+  --xpmedia-global-font-weight-ultra-light: 200;
+  --xpmedia-global-font-weight-light: 300;
+  --xpmedia-global-font-weight-regular: 400;
+  --xpmedia-global-font-weight-medium: 500;
+  --xpmedia-global-font-weight-semi-bold: 600;
+  --xpmedia-global-font-weight-bold: 700;
+  --xpmedia-global-font-weight-extra-bold: 800;
+  --xpmedia-global-font-weight-black: 900;
+  --xpmedia-global-font-style-regular: normal;
+  --xpmedia-global-font-style-italic: italic;
+
+  --xpmedia-global-font-line-height-large: 1.7;
+  --xpmedia-global-font-line-height-medium: 1.5;
+  --xpmedia-global-font-line-height-small: 1.3;
+
+  --xpmedia-global-font-size-50: 12px;
+  --xpmedia-global-font-size-75: 14px;
+  --xpmedia-global-font-size-100: 16px;
+  --xpmedia-global-font-size-150: 18px;
+  --xpmedia-global-font-size-200: 19px;
+  --xpmedia-global-font-size-300: 22px;
+  --xpmedia-global-font-size-400: 24px;
+  --xpmedia-global-font-size-500: 28px;
+  --xpmedia-global-font-size-600: 36px;
+
+  /* Text */
+  --xpmedia-global-text-decoration-none: none;
+
+  /* Opacity */
+  --xpmedia-global-opacity-100: 1;
+  --xpmedia-global-opacity-90: 0.9;
+  --xpmedia-global-opacity-80: 0.8;
+  --xpmedia-global-opacity-75: 0.75;
+  --xpmedia-global-opacity-60: 0.6;
+  --xpmedia-global-opacity-50: 0.5;
+  --xpmedia-global-opacity-45: 0.45;
+  --xpmedia-global-opacity-40: 0.4;
+  --xpmedia-global-opacity-30: 0.3;
+  --xpmedia-global-opacity-25: 0.25;
+  --xpmedia-global-opacity-20: 0.2;
+  --xpmedia-global-opacity-15: 0.15;
+  --xpmedia-global-opacity-10: 0.1;
+
+  /* Spacing */
+  --xpmedia-global-spacing-xxl: 64px;
+  --xpmedia-global-spacing-xl: 48px;
+  --xpmedia-global-spacing-lg: 32px;
+  --xpmedia-global-spacing-md: 24px;
+  --xpmedia-global-spacing-sm: 16px;
+  --xpmedia-global-spacing-xs: 8px;
+  --xpmedia-global-spacing-xxs: 4px;
+}

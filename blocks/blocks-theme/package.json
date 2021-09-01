@@ -1,0 +1,34 @@
+{
+  "name": "@wpmedia/blocks-theme",
+  "version": "5.15.0",
+  "description": "Blocks Theme",
+  "author": "ARC XP",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "components",
+    "features",
+    "chains",
+    "layouts"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/blocks-theme"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {
+  },
+  "bugs": {
+    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+  },
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+}

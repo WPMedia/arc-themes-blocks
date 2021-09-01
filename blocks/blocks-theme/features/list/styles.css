@@ -1,0 +1,8 @@
+.xpmedia-b-list {
+  /* --xpmedia-component-overline-text-color: red; */
+  /* --xpmedia-component-overline-text-color: var(--xpmedia-component-list-overline-text-color); */
+
+  /* background-color: var(--xpmedia-global-color-gray-50); */
+
+  background-color: var(--xpmedia-block-list-background-color);
+}

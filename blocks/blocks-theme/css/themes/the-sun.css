@@ -1,0 +1,10 @@
+/* The Sun - Site Theme */
+:root {
+
+  /* Overline */
+  --xpmedia-component-overline-text-color: green;
+  --xpmedia-component-overline-font-size: var(--xpmedia-global-font-size-500, 1rem);
+  --xpmedia-component-overline-font-weight: var(--xpmedia-global-font-weight-regular);
+  --xpmedia-component-overline-line-height: var(--xpmedia-global-font-line-height-medium);
+
+}

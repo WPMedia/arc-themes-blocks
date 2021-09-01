@@ -1,15 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import Headline from '../../components/headline';
 import Overline from '../../components/overline';
 
-// import './styles.scss';
 import './styles.css';
-
-const StyledList = styled.div`
-  --xpmedia-component-overline-text-color: green;
-`;
 
 const List = () => (
   <div className="xpmedia-b-list">

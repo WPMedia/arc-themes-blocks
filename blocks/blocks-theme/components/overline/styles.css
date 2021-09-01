@@ -6,27 +6,3 @@
   line-height: var(--xpmedia-component-overline-line-height);
   text-decoration: var(--xpmedia-component-overline-text-decoration);
 }
-
-/*
-.xpmedia-overline-badge {
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  background: red;
-  border-radius: 10px;
-  padding: 1rem;
-  display: block;
-} */
-
-
-
-
-.xpmedia-overline-badge {
-  color: var(--xpmedia-component-overlinebadge-text-color);
-  font-weight: var(--xpmedia-component-overlinebadge-font-weight);
-  font-size: var(--xpmedia-component-overlinebadge-font-size);
-  background-color: var(--xpmedia-component-overlinebadge-background-color, var(--xpmedia-primary-color));
-  border-radius: 10px;
-  padding: 1rem;
-  display: block;
-}

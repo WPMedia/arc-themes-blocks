@@ -11,7 +11,7 @@ const Overline = (props) => {
     className = '',
   } = props;
 
-  const classNames = ['xpmedia-overline-badge', ...className].join(' ');
+  const classNames = ['xpmedia-overline', ...className].join(' ');
 
   if (url) {
     return <a href={formatURL(url)} className={classNames}>{text}</a>;

@@ -1,9 +1,0 @@
-@mixin setProps($prop, $value) {
-  #{$prop}: $value;
-}
-
-.xpmedia-list {
-  @include setProps('--xpmedia-component-overline-text-color', orange);
-
-  background-color: var(--xpmedia-block-list-background-color, var(--xpmedia-global-color-gray-50));
-}

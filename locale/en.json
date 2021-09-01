@@ -105,6 +105,8 @@
   },
   "identity-block": {
     "identity-block.sign-up": "Sign Up",
-    "identity-block.log-in": "Log In"
+    "identity-block.log-in": "Log In",
+    "identity-block.show-sign-up-login": "Open to show sign in and log in options",
+    "identity-block.hide-sign-up-login": "Close to hide sign in and log in options"
   }
 }

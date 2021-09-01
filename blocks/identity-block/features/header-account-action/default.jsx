@@ -106,11 +106,14 @@ const HeaderAccountAction = ({ customFields }) => {
         <Button
           // should be button if toggleable
           as="button"
+          aria-expanded={isAccountMenuOpen}
+          aria-label={isAccountMenuOpen ? phrases.t('identity-block.show-sign-up-login') : phrases.t('identity-block.hide-sign-up-login')}
           buttonSize={BUTTON_SIZES.SMALL}
           buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}
+          text={isAccountMenuOpen ? phrases.t('identity-block.show-sign-up-login') : phrases.t('identity-block.hide-sign-up-login')}
           // for button accessibility
           type="button"
         />

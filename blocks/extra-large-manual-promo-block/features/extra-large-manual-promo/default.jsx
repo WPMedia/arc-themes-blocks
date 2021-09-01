@@ -1,85 +1,19 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
-import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  HeadingSection, Overline, PromoDescription, PromoHeadline, PromoImage,
-} from '@wpmedia/shared-styles';
-
-import '@wpmedia/shared-styles/scss/_extra-large-promo.scss';
-
-const ExtraLargeManualPromoItem = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
-
-  return (
-    <HeadingSection>
-      <article className="container-fluid xl-large-promo xl-large-manual-promo">
-        <div className="row">
-          {(customFields?.showOverline
-            || customFields?.showHeadline
-            || customFields?.showImage
-            || customFields?.showDescription)
-          && (
-            <div className="col-sm-xl-12 flex-col" style={{ position: isAdmin ? 'relative' : null }}>
-              {customFields?.showOverline
-                ? (
-                  <Overline
-                    customText={customFields?.overline}
-                    customUrl={customFields?.overlineURL}
-                  />
-                )
-                : null}
-              {customFields?.showHeadline
-                ? (
-                  <PromoHeadline
-                    link={customFields?.linkURL}
-                    text={customFields?.headline}
-                    newTab={customFields?.newTab}
-                    headingClassName="xl-promo-headline"
-                    linkClassName="xl-promo-headline"
-                  />
-                )
-                : null}
-              {customFields?.showImage
-                ? (
-                  <div {...searchableField('imageOverrideURL')} suppressContentEditableWarning>
-                    <PromoImage
-                      {...customFields}
-                      customImageURL={customFields?.imageURL}
-                      alt={customFields?.headline}
-                      promoSize="XL"
-                    />
-                  </div>
-)
-                : null}
-              {customFields?.showDescription
-                ? (
-                  <PromoDescription
-                    className="description-text"
-                    text={customFields?.description}
-                  />
-                )
-                : null}
-            </div>
-          )}
-        </div>
-      </article>
-      <hr />
-    </HeadingSection>
-  );
-};
+import { ExtraLargePromoPresentation } from '@wpmedia/shared-styles';
 
 const ExtraLargeManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
+  const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
-    <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-      <ExtraLargeManualPromoItem customFields={{ ...customFields }} />
+    <LazyLoad enabled={shouldLazyLoad}>
+      <ExtraLargePromoPresentation {...customFields} />
     </LazyLoad>
   );
 };
@@ -154,5 +88,7 @@ ExtraLargeManualPromo.propTypes = {
 };
 
 ExtraLargeManualPromo.label = 'Extra Large Manual Promo – Arc Block';
+
+ExtraLargeManualPromo.icon = 'paragraph-bullets';
 
 export default ExtraLargeManualPromo;

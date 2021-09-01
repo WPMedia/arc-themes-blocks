@@ -1,70 +1,19 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
-import { useEditableContent } from 'fusion:content';
 import { LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 import { imageRatioCustomField } from '@wpmedia/resizer-image-block';
-import {
-  HeadingSection, PromoDescription, PromoHeadline, PromoImage,
-} from '@wpmedia/shared-styles';
-
-import '@wpmedia/shared-styles/scss/_medium-promo.scss';
-
-const MediumManualPromoItem = ({ customFields }) => {
-  const { isAdmin } = useFusionContext();
-  const { searchableField } = useEditableContent();
-
-  const hasImage = customFields?.showImage && customFields?.imageURL;
-
-  return (
-    <HeadingSection>
-      <article className="container-fluid medium-promo" style={{ position: isAdmin ? 'relative' : null }}>
-        <div
-          className={`medium-promo-wrapper ${hasImage ? 'md-promo-image' : ''}`}
-          {...searchableField('imageURL')}
-          suppressContentEditableWarning
-        >
-          {customFields?.showImage
-            ? (
-              <div className="image-link">
-                <PromoImage
-                  {...customFields}
-                  customImageURL={customFields?.imageURL}
-                  alt={customFields?.headline}
-                  promoSize="MD"
-                />
-              </div>
-            )
-            : null}
-          {customFields?.showHeadline
-            ? (
-              <PromoHeadline
-                link={customFields?.linkURL}
-                text={customFields?.headline}
-                newTab={customFields?.newTab}
-                headingClassName="md-promo-headline-text"
-                className="md-promo-headline"
-              />
-            )
-            : null}
-          {customFields?.showDescription
-            ? <PromoDescription className="description-text" text={customFields?.description} />
-            : null}
-        </div>
-      </article>
-      <hr />
-    </HeadingSection>
-  );
-};
+import { MediumPromoPresentation } from '@wpmedia/shared-styles';
 
 const MediumManualPromo = ({ customFields }) => {
   const { isAdmin } = useFusionContext();
   if (customFields?.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
+
   return (
     <LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-      <MediumManualPromoItem customFields={{ ...customFields }} />
+      <MediumPromoPresentation {...customFields} />
     </LazyLoad>
   );
 };
@@ -118,5 +67,7 @@ MediumManualPromo.propTypes = {
 };
 
 MediumManualPromo.label = 'Medium Manual Promo – Arc Block';
+
+MediumManualPromo.icon = 'paragraph-bullets';
 
 export default MediumManualPromo;

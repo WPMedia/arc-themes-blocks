@@ -1,0 +1,6 @@
+.xpmedia-single-column-layout {
+  // Designs show XL spacing, but due to spacing applied at
+  // default output type md + md = xl (24 + 24 = 48)
+  margin: map-get($spacers, 'md') auto;
+  max-width: calculateRem(590px);
+}

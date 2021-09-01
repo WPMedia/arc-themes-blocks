@@ -152,6 +152,8 @@ class AdTaboola extends Component {
 
 AdTaboola.label = 'Taboola Ad – Arc Block';
 
+AdTaboola.icon = 'arc-ads';
+
 AdTaboola.propTypes = {
   customFields: PropTypes.shape({
     placement: PropTypes.string.tag({

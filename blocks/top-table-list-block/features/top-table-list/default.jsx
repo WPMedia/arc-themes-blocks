@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useContent } from 'fusion:content';
 import Consumer from 'fusion:consumer';
 import { useFusionContext } from 'fusion:context';
@@ -88,7 +88,7 @@ class TopTableListWrapper extends Component {
 }
 
 // components end
-const TopTableList = (props) => {
+export const TopTableList = (props) => {
   const {
     customFields: {
       listContentConfig: { contentService = '', contentConfigValues = {} } = {},
@@ -459,5 +459,7 @@ TopTableListWrapper.propTypes = {
 };
 
 TopTableListWrapper.label = 'Top Table List – Arc Block';
+
+TopTableListWrapper.icon = 'arc-list';
 
 export default TopTableListWrapper;

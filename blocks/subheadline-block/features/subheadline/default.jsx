@@ -1,14 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 
 import './subheadline.scss';
 
-const SubHeadline = () => {
-  const { globalContent: content, customFields = {} } = useFusionContext();
-  const { valueToDisplay = 'Subheadline' } = customFields;
-  const value = (valueToDisplay === 'Description') ? content?.description?.basic
+const DISPLAY_VALUES = {
+  SUB_HEADLINE: 'Subheadline',
+  DESCRIPTION: 'Description',
+};
+
+export const SubHeadlinePresentation = ({
+  content,
+  valueToDisplay = DISPLAY_VALUES.SUB_HEADLINE,
+}) => {
+  const value = (valueToDisplay === DISPLAY_VALUES.DESCRIPTION)
+    ? content?.description?.basic
     : content?.subheadlines?.basic;
   return (
     !!value && (
@@ -21,11 +28,19 @@ const SubHeadline = () => {
   );
 };
 
+const SubHeadline = () => {
+  const { globalContent: content, customFields = {} } = useFusionContext();
+  return (
+    <SubHeadlinePresentation
+      content={content}
+      valueToDisplay={customFields?.valueToDisplay}
+    />
+  );
+};
+
 SubHeadline.propTypes = {
   customFields: PropTypes.shape({
-    valueToDisplay: PropTypes.oneOf([
-      'Subheadline', 'Description',
-    ]).tag({
+    valueToDisplay: PropTypes.oneOf(Object.values(DISPLAY_VALUES)).tag({
       label: 'Value to display',
       group: 'Content Configuration',
       defaultValue: 'Subheadline',
@@ -34,5 +49,7 @@ SubHeadline.propTypes = {
 };
 
 SubHeadline.label = 'Subheadline – Arc Block';
+
+SubHeadline.icon = 'arc-subheadline';
 
 export default SubHeadline;

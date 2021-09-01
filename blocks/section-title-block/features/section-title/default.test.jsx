@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 // two classes for testing purposes
 jest.mock('./_children/global-content', () => class GlobalContentSectionTitle {});
 jest.mock('./_children/custom-content', () => class CustomContentSectionTitle {});
-jest.mock('prop-types', () => ({
+jest.mock('@arc-fusion/prop-types', () => ({
   bool: true,
   shape: () => {},
   contentConfig: () => {},

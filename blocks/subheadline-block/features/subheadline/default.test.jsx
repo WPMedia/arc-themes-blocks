@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { useFusionContext } from 'fusion:context';
 import SubHeadline from './default';
 
@@ -18,9 +18,8 @@ jest.mock('fusion:context', () => ({
 describe('the subheadline feature for the default output type', () => {
   describe('when subheadline content from globalContent is present', () => {
     it('should dangerously set the innerHTML to the subheadline content', () => {
-      const wrapper = shallow(<SubHeadline />);
-
-      expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'subheadline for our story' });
+      const wrapper = mount(<SubHeadline />);
+      expect(wrapper.find('h2.sub-headline').at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'subheadline for our story' });
     });
   });
 
@@ -43,8 +42,8 @@ describe('the subheadline feature for the default output type', () => {
     });
 
     it('should dangerously set the innerHTML to the subheadline content using description.basic', () => {
-      const wrapper = shallow(<SubHeadline />);
-      expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'description for our story' });
+      const wrapper = mount(<SubHeadline />);
+      expect(wrapper.find('h2.sub-headline').at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'description for our story' });
     });
   });
 
@@ -67,8 +66,8 @@ describe('the subheadline feature for the default output type', () => {
     });
 
     it('should dangerously set the innerHTML to the subheadline content using subheadlines.basic', () => {
-      const wrapper = shallow(<SubHeadline />);
-      expect(wrapper.at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'subheadline for our story' });
+      const wrapper = mount(<SubHeadline />);
+      expect(wrapper.find('h2.sub-headline').at(0).prop('dangerouslySetInnerHTML')).toStrictEqual({ __html: 'subheadline for our story' });
     });
   });
 
@@ -78,7 +77,7 @@ describe('the subheadline feature for the default output type', () => {
     });
 
     it('should render nothing', () => {
-      const wrapper = shallow(<SubHeadline />);
+      const wrapper = mount(<SubHeadline />);
 
       expect(wrapper).toBeEmptyRender();
     });

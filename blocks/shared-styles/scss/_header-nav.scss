@@ -8,12 +8,39 @@ $nav-search-border-color: $ui-light-gray;
 $overlay-z-index: 2;
 $section-bg: #292929;
 $section-width: 329px;
+$top-nav-stylistic-margin: 13px;
+$mouseover-link-preview-safe-area-height: 40px;
 
 body.nav-open {
   overflow-y: hidden;
 
   .main {
     z-index: -1;
+  }
+}
+
+.section-menu--bottom-placeholder {
+  // on desktop, on the left, the bottom link 
+  // is not visible on hover over other links
+  height: $mouseover-link-preview-safe-area-height;
+  background-color: $section-bg;
+
+  // need to hide that hover and active color 
+  &:hover,
+  &:active {
+    // keep the same color unlike other list items
+    background: $section-bg !important;
+  }
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+  .section-menu--bottom-placeholder {
+    // ensure bottom item is visible on mobile
+    // height handles biggest notch on iphone 12 pro
+    height: 130px;
+    @supports (height: env(safe-area-inset-bottom)) {
+      height: calc(env(safe-area-inset-bottom) + 130px);
+    }
   }
 }
 
@@ -376,14 +403,14 @@ body.nav-open {
   }
 
   .section-menu {
-    height: 10px;
-    margin-top: 13px;
+    margin-top: $top-nav-stylistic-margin;
     padding: 0;
 
     > li {
       font-weight: bold;
       list-style: none;
       position: relative;
+      background-color: $section-bg;
 
       > a {
         padding: 0 16px 0 20px;
@@ -408,17 +435,17 @@ body.nav-open {
   }
 
   &.open {
+    // dimmed background on desktop
     background: rgba(25, 25, 25, 0.5);
-    height: 100vh;
+    // scroll and show vertical overflow when open
     overflow-y: scroll;
     transform: translate(0, 0);
     width: 100%;
 
-    .section-menu {
-      height: 100vh;
-    }
-
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      // on mobile, show dark background everywhere
+      background: $section-bg;
+
       .inner-drawer-nav {
         width: 100vw;
       }
@@ -426,6 +453,9 @@ body.nav-open {
   }
 
   &.closed {
+    // hide vertical overflow when closed
+    overflow-y: hidden;
+
     .section-menu {
       transition: height 100ms ease-in-out 600ms;
     }

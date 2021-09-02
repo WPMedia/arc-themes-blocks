@@ -49,9 +49,10 @@ const HeadlinedSubmitForm = ({
           buttonStyle={BUTTON_STYLES.FILLED}
           buttonSize={BUTTON_SIZES.MEDIUM}
           text={buttonLabel}
+          type="submit"
         />
         {formErrorText ? (
-          <section className="xpmedia-form-error">
+          <section className="xpmedia-form-error" role="alert">
             <PrimaryFont as="p">
               <svg fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path

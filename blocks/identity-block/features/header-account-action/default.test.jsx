@@ -28,9 +28,10 @@ it('shows sign in url and create account url', () => {
     arcSite: 'arcxp',
   });
 
-  const wrapper = mount(<HeaderAccountAction customFields={{ 
-    loginURL: 'https://www.google.com', createAccountURL: 'https://www.google.com' 
-    }} />);
+  const wrapper = mount(<HeaderAccountAction customFields={{
+    loginURL: 'https://www.google.com', createAccountURL: 'https://www.google.com',
+  }}
+  />);
 
   expect(wrapper.html()).not.toBe(null);
   expect(wrapper.find('div.xpmedia-subs-header--logged-out-header')).toHaveLength(1);

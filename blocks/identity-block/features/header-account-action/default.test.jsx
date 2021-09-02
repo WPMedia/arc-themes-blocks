@@ -4,7 +4,6 @@ import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 
 import HeaderAccountAction from './default';
-import { act } from 'react-dom/test-utils';
 
 describe('Subscriptions HeaderAccountAction', () => {
   getProperties.mockImplementation(() => ({

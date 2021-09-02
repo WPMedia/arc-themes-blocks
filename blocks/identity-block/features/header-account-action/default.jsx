@@ -7,7 +7,6 @@ import {
   Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
 } from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
-import DropdownLinkList from './_children/DropdownLinkList';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
@@ -120,7 +119,7 @@ const HeaderAccountAction = ({ customFields }) => {
           type="button"
         />
         {isAccountMenuOpen && (
-          <DropdownLinkList>
+          <ul className="xpmedia-subs-header-dropdown--open">
             {
               createAccountURL ? (
                 <DropDownLinkListItem
@@ -137,7 +136,7 @@ const HeaderAccountAction = ({ customFields }) => {
                 />
               ) : null
             }
-          </DropdownLinkList>
+          </ul>
         )}
       </div>
     </div>

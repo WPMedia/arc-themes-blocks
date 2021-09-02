@@ -126,6 +126,7 @@ function Button(props) {
     buttonType,
     iconType = '',
     text,
+    fullWidth,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
@@ -174,7 +175,7 @@ function Button(props) {
       aria-label={buttonStyle === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
       fontFamily={primaryFont}
       primaryColor={primaryColor}
       {...props}

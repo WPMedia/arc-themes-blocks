@@ -23,6 +23,10 @@
   }
 }
 
+.xpmedia-button--full-width {
+  width: 100%;
+}
+
 .xpmedia-button--left-icon-container {
   display: flex;
   padding-right: calculateRem(8px);

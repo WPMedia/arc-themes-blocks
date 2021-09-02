@@ -28,16 +28,20 @@ export const BUTTON_TYPES = {
   LABEL_AND_ICON: 'LABEL_AND_ICON',
 };
 
+// istanbul ignoring because we don't have a good way to test styled components yet
 // hover overrides link hover global style
 const StyledDynamicButton = styled.button.attrs((props) => ({
   buttonStyle: props.buttonStyle,
   primaryColor: props.primaryColor,
   fontFamily: props.fontFamily,
 }))`
+  /* istanbul ignore next */
   font-family: ${({ fontFamily }) => fontFamily};
 
   ${({ buttonStyle, primaryColor }) => {
+    // istanbul ignore next
     switch (buttonStyle) {
+      // istanbul ignore next
       case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
         return `
           background-color: #ffffff;
@@ -49,6 +53,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
           }
         `;
       case BUTTON_STYLES.OUTLINED:
+        // istanbul ignore next
         return `
           background-color: transparent;
           border-color: ${primaryColor};
@@ -59,6 +64,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
           }
         `;
       case BUTTON_STYLES.OUTLINED_GREY:
+        // istanbul ignore next
         return `
           background-color: transparent;
           border-color: rgba(255, 255, 255, 0.5);
@@ -70,6 +76,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         `;
       case BUTTON_STYLES.FILLED:
       default:
+        // istanbul ignore next
         return `
           background-color: ${primaryColor};
           border-color: ${primaryColor};
@@ -98,12 +105,7 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
 
 function renderButtonContents(matchedButtonType, text, iconComponent) {
   switch (matchedButtonType) {
-    case BUTTON_TYPES.LABEL_ONLY:
-      return (text);
-    case BUTTON_TYPES.ICON_ONLY:
-      return (iconComponent);
     case BUTTON_TYPES.LABEL_AND_ICON:
-    default:
       return (
         <>
           <div className="xpmedia-button--left-icon-container">
@@ -112,6 +114,11 @@ function renderButtonContents(matchedButtonType, text, iconComponent) {
           {text}
         </>
       );
+    case BUTTON_TYPES.ICON_ONLY:
+      return (iconComponent);
+    case BUTTON_TYPES.LABEL_ONLY:
+    default:
+      return (text);
   }
 }
 
@@ -124,7 +131,7 @@ function Button(props) {
     buttonSize,
     buttonStyle,
     buttonType,
-    iconType = '',
+    iconType,
     text,
     fullWidth,
   } = props;
@@ -189,7 +196,7 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.oneOf(['user']),
+  iconType: PropTypes.string,
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
 
@@ -204,7 +211,7 @@ Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
   buttonStyle: BUTTON_STYLES.FILLED,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
-  iconType: 'user',
+  iconType: '',
 };
 
 export default Button;

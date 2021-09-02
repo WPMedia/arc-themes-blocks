@@ -70,7 +70,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"',
+      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH hpMxrq links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"',
     );
   });
 
@@ -101,7 +101,7 @@ describe('the links bar feature for the default output type', () => {
     );
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bdVaJa bFuGRU links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"',
+      '"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH hpMxrq links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bwzfXH hpMxrq links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bwzfXH hpMxrq links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"',
     );
   });
 

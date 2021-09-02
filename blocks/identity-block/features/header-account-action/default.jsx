@@ -3,8 +3,10 @@ import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
+import {
+  Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
+} from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
-import Button, { BUTTON_SIZES, BUTTON_STYLES, BUTTON_TYPES } from '../../components/Button';
 import DropdownLinkList from './_children/DropdownLinkList';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
 

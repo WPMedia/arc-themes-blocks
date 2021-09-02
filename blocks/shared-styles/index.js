@@ -1,3 +1,4 @@
+import Button, { BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES } from './_children/button';
 import Byline from './_children/byline';
 import Heading from './_children/headings/heading';
 import HeadingSection from './_children/headings/section';
@@ -17,6 +18,10 @@ import ExtraLargePromoPresentation from './_children/promos/extra-large';
 import LargePromoPresentation from './_children/promos/large';
 
 export {
+  BUTTON_SIZES,
+  BUTTON_STYLES,
+  BUTTON_TYPES,
+  Button,
   Byline,
   ExtraLargePromoPresentation,
   Heading,

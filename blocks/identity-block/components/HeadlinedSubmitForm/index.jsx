@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-
-import { PrimaryFont } from '@wpmedia/shared-styles';
-import Button, { BUTTON_STYLES, BUTTON_SIZES } from '../Button';
+import {
+  Button, BUTTON_STYLES, BUTTON_SIZES, PrimaryFont,
+} from '@wpmedia/shared-styles';
 
 import './styles.scss';
 

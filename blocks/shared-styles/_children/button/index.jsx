@@ -134,6 +134,7 @@ function Button(props) {
     iconType,
     text,
     fullWidth,
+    type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
@@ -144,6 +145,8 @@ function Button(props) {
 
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+
+  const elementType = !type && as === undefined ? 'button' : null;
 
   switch (buttonSize) {
     case BUTTON_SIZES.LARGE:
@@ -185,6 +188,7 @@ function Button(props) {
       className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
       font={primaryFont}
       primaryColor={primaryColor}
+      type={elementType}
       {...props}
     >
       {renderButtonContents(buttonType, text, Icon)}

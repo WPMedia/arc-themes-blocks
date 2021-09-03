@@ -97,16 +97,17 @@ export const CustomSubmitType = () => (
   />
 );
 
-export const CustomButtonType = () => (
-  <Button
-    text="Type Button"
-    type="button"
-  />
-);
-
 export const ButtonResetType = () => (
   <Button
     text="Type Reset"
     type="reset"
+  />
+);
+
+export const aLinkButton = () => (
+  <Button
+    text="Type Reset"
+    as="a"
+    href="https://arcxp.com"
   />
 );

@@ -1,4 +1,5 @@
 .xpmedia-overline {
+  background-color: var(--xpmedia-component-overline-background-color);
   color: var(--xpmedia-component-overline-text-color);
   display: inline-block;
   font-size: var(--xpmedia-component-overline-font-size);

@@ -1,0 +1,10 @@
+{
+  "global": {
+    "color": {
+      "gray-100": "rgb(200 200 200)"
+    }
+  },
+  "alias": {
+    "primary-color": "global.color.gray-100"
+  }
+}

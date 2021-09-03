@@ -1,8 +1,11 @@
 .xpmedia-b-list {
-  /* --xpmedia-component-overline-text-color: red; */
-  /* --xpmedia-component-overline-text-color: var(--xpmedia-component-list-overline-text-color); */
-
-  /* background-color: var(--xpmedia-global-color-gray-50); */
+  /*
+    If the var value is not valid the overline component
+    text color is removed.
+    We can not have this - will require to only set these
+    overrides if we need to change the child component
+  */
+  --xpmedia-component-overline-text-color: var(--xpmedia-block-list-component-overline-text-color);
 
   background-color: var(--xpmedia-block-list-background-color);
 }

@@ -8,6 +8,8 @@ import blocks from '~/blocks.json';
 // this is blank import but used to inject scss
 import './default.scss';
 
+import '@wpmedia/blocks-theme/css/index.css';
+
 const querylyCode = (querylyId, querylyOrg, pageType) => {
   if (!querylyId) {
     return null;
@@ -92,13 +94,16 @@ const multiSiteCSS = (arcSite) => {
   const site = {
     'the-sun': `
       :root {
-        --xpmedia-block-list-background-color: var(--xpmedia-global-color-gray-50);
 
+        /* Custom Overline Settings */
+        --xpmedia-component-overline-background-color: var(--xpmedia-global-color-white);
         --xpmedia-component-overline-text-color: green;
         --xpmedia-component-overline-font-size: var(--xpmedia-global-font-size-200, 1rem);
         --xpmedia-component-overline-font-weight: var(--xpmedia-global-font-weight-regular);
         --xpmedia-component-overline-line-height: var(--xpmedia-global-font-line-height-medium);
 
+        /* Custom Block List Settings */
+        --xpmedia-block-list-background-color: var(--xpmedia-global-color-gray-50);
       }
     `,
   };

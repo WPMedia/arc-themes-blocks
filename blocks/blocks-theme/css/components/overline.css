@@ -1,0 +1,11 @@
+/* Overline */
+:root {
+
+  --xpmedia-component-overline-background-color: var(--xpmedia-primary-color);
+	--xpmedia-component-overline-text-color: var(--xpmedia-global-color-white);
+	--xpmedia-component-overline-font-size: var(--xpmedia-global-font-size-100, 1rem);
+	--xpmedia-component-overline-font-weight: var(--xpmedia-global-font-weight-black);
+	--xpmedia-component-overline-line-height: var(--xpmedia-global-font-line-height-medium);
+	--xpmedia-component-overline-text-decoration: var(--xpmedia-global-text-decoration-none);
+
+}

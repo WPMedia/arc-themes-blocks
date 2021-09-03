@@ -1,0 +1,19 @@
+{
+  "list": {
+    "color": "red",
+
+
+    "component": {
+      "overline": {
+        "color": "green"
+      },
+
+
+      "headline": {
+
+      }
+    }
+
+
+  }
+}

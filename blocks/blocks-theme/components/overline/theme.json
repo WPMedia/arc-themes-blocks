@@ -1,5 +1,12 @@
 {
   "overline": {
-    "color": "global.color.gray-100"
+    "background-color": "red",
+    "color": "global.color.gray-100",
+    "font-size": "20rem",
+    "font-weight": "bold",
+    "border-radius": "10px"
+  },
+  "overline:active": {
+    "background-color": "orange"
   }
 }

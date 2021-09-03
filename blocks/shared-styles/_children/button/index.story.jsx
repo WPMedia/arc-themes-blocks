@@ -3,7 +3,7 @@ import React from 'react';
 import Button, { BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES } from '.';
 
 export default {
-  title: 'Blocks/Identity/Components/Button',
+  title: 'Shared Styles/Button',
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },

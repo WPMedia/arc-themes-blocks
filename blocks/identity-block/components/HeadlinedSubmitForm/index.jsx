@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import {
+  Button, BUTTON_STYLES, BUTTON_SIZES, PrimaryFont,
+} from '@wpmedia/shared-styles';
 import { ErrorIcon } from '@wpmedia/engine-theme-sdk';
-
-import Button, { BUTTON_STYLES, BUTTON_SIZES } from '../Button';
 
 import './styles.scss';
 
@@ -48,8 +47,9 @@ const HeadlinedSubmitForm = ({
       >
         {children}
         <Button
-          buttonStyle={BUTTON_STYLES.FILLED}
           buttonSize={BUTTON_SIZES.MEDIUM}
+          buttonStyle={BUTTON_STYLES.FILLED}
+          fullWidth
           text={buttonLabel}
           type="submit"
         />

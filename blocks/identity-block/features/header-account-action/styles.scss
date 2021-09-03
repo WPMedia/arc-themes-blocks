@@ -1,23 +1,57 @@
 .xpmedia-subs-header {
-  align-items: center;
-  color: #fff;
-  font-size: 0.875rem;
+  display: flex;
+}
 
-  &--button {
-    align-items: center;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 2px;
-    color: #fff;
-    font-size: 0.875rem;
-    font-weight: bold;
-    height: 2rem;
-    padding: 0 0.5rem;
-    text-decoration: none;
+.xpmedia-subs-header--logged-out-header {
+  display: flex;
+}
 
-    &:hover {
-      color: #fff;
-      border: 1px solid #fff;
-    }
+// hide a tag links button for mobile
+.xpmedia-subs-header--desktop-logged-out-header {
+  // uses a tags
+  > a {
+    // should be 16px between buttons
+    margin: calculateRem(8px);
   }
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    display: none;
+  }
+}
+
+.xpmedia-subs-header--mobile-logged-out-header {
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    display: none;
+  }
+}
+
+.xpmedia-subs-header-dropdown--open {
+  top: calc(100%);
+  position: absolute;
+  padding: calculateRem(16px);
+  background-color: #fff;
+  border: calculateRem(1px) solid #dadada;
+  border-radius: calculateRem(4px);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+// this is dependent upon the classnames of the parent navs in the header-nav-chain
+// if parent is nav-right, then the dropdown should be right aligned
+.nav-right .xpmedia-subs-header-dropdown--open {
+  right: calculateRem(16px);
+}
+
+// if parent is nav-left, then the dropdown should be left aligned
+.nav-left .xpmedia-subs-header-dropdown--open {
+  left: calculateRem(16px);
+}
+
+.xpmedia-subs-header-dropdown-list-item {
+  padding-bottom: calculateRem(8px);
+}
+
+.xpmedia-subs-header-dropdown-list-item:last-of-type {
+  padding-bottom: 0;
 }

@@ -102,5 +102,17 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "Hopp til hovedinnhold"
+  },
+  "identity-block": {
+    "identity-block.email": "Email address",
+    "identity-block.password": "Password",
+    "identity-block.sign-up": "Sign Up",
+    "identity-block.confirm-password": "Confirm password",
+    "identity-block.username": "Username",
+    "identity-block.account": "Account",
+    "identity-block.manage-account": "Manage Your Account",
+    "identity-block.log-out": "Log Out",
+    "identity-block.log-in": "Log In",
+    "identity-block.login-options": "Log in options"
   }
 }

@@ -1,10 +1,14 @@
 .xpmedia-button {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: calculateRem(4px);
-  font-size: calculateRem(16px);
+
+  // if a tag, then hide decoration
+  text-decoration: none;
+
+  // override nav header
+  border-radius: calculateRem(4px) !important;
+  font-size: calculateRem(14px);
   font-weight: bold;
   line-height: 1.5;
 
@@ -19,12 +23,17 @@
   }
 }
 
+.xpmedia-button--full-width {
+  width: 100%;
+}
+
 .xpmedia-button--left-icon-container {
+  display: flex;
   padding-right: calculateRem(8px);
 }
 
 .xpmedia-button--small {
-  padding: calculateRem(4px);
+  padding: calculateRem(8px);
 }
 
 .xpmedia-button--medium {

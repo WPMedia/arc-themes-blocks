@@ -11,7 +11,8 @@
     "sources",
     "chains",
     "layouts",
-    "components"
+    "components",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

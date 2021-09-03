@@ -3,7 +3,7 @@ import React from 'react';
 import Button, { BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES } from '.';
 
 export default {
-  title: 'Blocks/Identity/Components/Button',
+  title: 'Shared Styles/Button',
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },
@@ -97,16 +97,17 @@ export const CustomSubmitType = () => (
   />
 );
 
-export const CustomButtonType = () => (
-  <Button
-    text="Type Button"
-    type="button"
-  />
-);
-
 export const ButtonResetType = () => (
   <Button
     text="Type Reset"
     type="reset"
+  />
+);
+
+export const aLinkButton = () => (
+  <Button
+    text="Type Reset"
+    as="a"
+    href="https://arcxp.com"
   />
 );

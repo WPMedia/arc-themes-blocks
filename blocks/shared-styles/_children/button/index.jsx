@@ -13,6 +13,7 @@ export const BUTTON_STYLES = {
   FILLED: 'FILLED',
   OUTLINED: 'OUTLINED',
   WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
+  OUTLINED_GREY: 'OUTLINED_GREY',
 };
 
 export const BUTTON_SIZES = {
@@ -27,32 +28,63 @@ export const BUTTON_TYPES = {
   LABEL_AND_ICON: 'LABEL_AND_ICON',
 };
 
+// istanbul ignoring because we don't have a good way to test styled components yet
+// hover overrides link hover global style
 const StyledDynamicButton = styled.button.attrs((props) => ({
-  arcSite: props.arcSite,
   buttonStyle: props.buttonStyle,
+  primaryColor: props.primaryColor,
+  font: props.font,
 }))`
-  font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
+  /* istanbul ignore next */
+  font-family: ${({ font }) => font};
 
-  ${({ buttonStyle, arcSite }) => {
+  ${({ buttonStyle, primaryColor }) => {
+    // istanbul ignore next
     switch (buttonStyle) {
+      // istanbul ignore next
       case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
         return `
           background-color: #ffffff;
           border-color: #ffffff;
-          color: ${getThemeStyle(arcSite)['primary-color']};
+          color: ${primaryColor};
+
+          &:hover {
+            color: ${primaryColor};
+          }
         `;
       case BUTTON_STYLES.OUTLINED:
+        // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: ${getThemeStyle(arcSite)['primary-color']};
-          color: ${getThemeStyle(arcSite)['primary-color']};
+          border-color: ${primaryColor};
+          color: ${primaryColor};
+
+          &:hover {
+            color: ${primaryColor};
+          }
+        `;
+      case BUTTON_STYLES.OUTLINED_GREY:
+        // istanbul ignore next
+        return `
+          background-color: transparent;
+          border-color: rgba(255, 255, 255, 0.5);
+          color: #ffffff;
+
+          &:hover {
+            color: #ffffff;
+          }
         `;
       case BUTTON_STYLES.FILLED:
       default:
+        // istanbul ignore next
         return `
-          background-color: ${getThemeStyle(arcSite)['primary-color']};
-          border-color: ${getThemeStyle(arcSite)['primary-color']};
+          background-color: ${primaryColor};
+          border-color: ${primaryColor};
           color: #ffffff;
+
+          &:hover {
+            color: #ffffff;
+          }
         `;
     }
   }}
@@ -73,12 +105,7 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
 
 function renderButtonContents(matchedButtonType, text, iconComponent) {
   switch (matchedButtonType) {
-    case BUTTON_TYPES.LABEL_ONLY:
-      return (text);
-    case BUTTON_TYPES.ICON_ONLY:
-      return (iconComponent);
     case BUTTON_TYPES.LABEL_AND_ICON:
-    default:
       return (
         <>
           <div className="xpmedia-button--left-icon-container">
@@ -87,6 +114,11 @@ function renderButtonContents(matchedButtonType, text, iconComponent) {
           {text}
         </>
       );
+    case BUTTON_TYPES.ICON_ONLY:
+      return (iconComponent);
+    case BUTTON_TYPES.LABEL_ONLY:
+    default:
+      return (text);
   }
 }
 
@@ -94,20 +126,39 @@ function Button(props) {
   const { arcSite } = useFusionContext();
 
   const {
+    ariaLabel,
+    as,
     buttonSize,
     buttonStyle,
     buttonType,
-    // todo: take in children and handle
-    // children,
-    iconType = '',
+    iconType,
     text,
-    ariaLabel,
+    fullWidth,
     type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
 
   let Icon = null;
+
+  let iconHeightWidth = 16;
+
+  const primaryColor = getThemeStyle(arcSite)['primary-color'];
+  const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
+
+  const elementType = !type && as === undefined ? 'button' : null;
+
+  switch (buttonSize) {
+    case BUTTON_SIZES.LARGE:
+      iconHeightWidth = 26;
+      break;
+    case BUTTON_SIZES.MEDIUM:
+      iconHeightWidth = 24;
+      break;
+    case BUTTON_SIZES.SMALL:
+    default:
+      iconHeightWidth = 16;
+  }
 
   if (iconType) {
     switch (iconType) {
@@ -116,9 +167,9 @@ function Button(props) {
           // todo: width and height for large and medium icons are different
           // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
           <UserIcon
-            height={16}
-            width={16}
-            fill={getThemeStyle(arcSite)['primary-color']}
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={primaryColor}
           />
         );
         break;
@@ -131,10 +182,14 @@ function Button(props) {
   return (
     <StyledDynamicButton
       arcSite={arcSite}
+      aria-label={buttonType === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
+      as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}`}
-      aria-label={ariaLabel}
-      type={type}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
+      font={primaryFont}
+      primaryColor={primaryColor}
+      type={elementType}
+      {...props}
     >
       {renderButtonContents(buttonType, text, Icon)}
     </StyledDynamicButton>
@@ -145,10 +200,15 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.oneOf(['user']),
+  iconType: PropTypes.string,
   text: PropTypes.string.isRequired,
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: PropTypes.string,
+
+  // for if button
   type: PropTypes.string,
+
+  // for if a tag
+  href: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -156,7 +216,6 @@ Button.defaultProps = {
   buttonStyle: BUTTON_STYLES.FILLED,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
   iconType: '',
-  type: 'button',
 };
 
 export default Button;

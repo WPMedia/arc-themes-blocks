@@ -76,7 +76,7 @@ const HeaderAccountAction = ({ customFields }) => {
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
-            text={phrases.t('identity-block.manage-account')}
+            text={phrases.t('identity-block.account')}
             type="button"
           />
         </div>

@@ -33,10 +33,10 @@ export const BUTTON_TYPES = {
 const StyledDynamicButton = styled.button.attrs((props) => ({
   buttonStyle: props.buttonStyle,
   primaryColor: props.primaryColor,
-  fontFamily: props.fontFamily,
+  font: props.font,
 }))`
   /* istanbul ignore next */
-  font-family: ${({ fontFamily }) => fontFamily};
+  font-family: ${({ font }) => font};
 
   ${({ buttonStyle, primaryColor }) => {
     // istanbul ignore next
@@ -183,7 +183,7 @@ function Button(props) {
       as={as}
       buttonStyle={buttonStyle}
       className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
-      fontFamily={primaryFont}
+      font={primaryFont}
       primaryColor={primaryColor}
       {...props}
     >

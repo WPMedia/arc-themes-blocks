@@ -113,7 +113,7 @@ const HeaderAccountAction = ({ customFields }) => {
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}
-          text={!isAccountMenuOpen ? phrases.t('identity-block.show-sign-up-login') : phrases.t('identity-block.hide-sign-up-login')}
+          text={phrases.t('identity-block.login-options')}
           // for button accessibility
           type="button"
         />

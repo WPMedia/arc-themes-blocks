@@ -19,10 +19,7 @@
 		"no": "Log In",
 		"sv": "Log In"
 	},
-	"identity-block.show-sign-up-login": {
-		"en": "Open to show sign in and log in options"
-	},
-	"identity-block.hide-sign-up-login": {
-		"en": "Close to hide sign in and log in options"
+	"identity-block.login-options": {
+		"en": "Log in options"
 	}
 }

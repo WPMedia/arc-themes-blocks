@@ -51,9 +51,9 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  const handleLogout = () => {
-    Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
-  };
+  // const handleLogout = () => {
+  //   Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
+  // };
 
   if (!isInitialized) {
     return null;
@@ -66,17 +66,53 @@ const HeaderAccountAction = ({ customFields }) => {
 
   if (user && !error) {
     return (
-      <div className="xpmedia-subs-header">
-        <p>{user.displayName}</p>
-        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">Log Out</button>
+      <div className="xpmedia-subs-header--header">
+        <div className="xpmedia-subs-header--desktop-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+            iconType="user"
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.manage-account')}
+            type="button"
+          />
+        </div>
+        <div className="xpmedia-subs-header--mobile-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.ICON_ONLY}
+            iconType="user"
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.login-options')}
+            type="button"
+          />
+        </div>
+        {isAccountMenuOpen && (
+          <ul className="xpmedia-subs-header-dropdown--open">
+            <DropDownLinkListItem
+              href="/"
+              text={phrases.t('identity-block.manage-account')}
+            />
+            <DropDownLinkListItem
+              href="/"
+              text={phrases.t('identity-block.log-out')}
+            />
+          </ul>
+        )}
       </div>
     );
   }
 
   // What do we want to happen if there is an error?
   return (
-    <div className="xpmedia-subs-header--logged-out-header">
-      <div className="xpmedia-subs-header--desktop-logged-out-header">
+    <div className="xpmedia-subs-header--header">
+      <div className="xpmedia-subs-header--desktop-header">
         {createAccountURL ? (
           <Button
             // should be an a tag if it's a link
@@ -101,7 +137,7 @@ const HeaderAccountAction = ({ customFields }) => {
           />
         ) : null}
       </div>
-      <div className="xpmedia-subs-header--mobile-logged-out-header">
+      <div className="xpmedia-subs-header--mobile-header">
         <Button
           // should be button if toggleable
           as="button"

@@ -79,7 +79,6 @@ const HeaderAccountAction = ({ customFields }) => {
       <div className="xpmedia-subs-header--desktop-logged-out-header">
         {createAccountURL ? (
           <Button
-            ariaLabel={phrases.t('identity-block.sign-up')}
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
@@ -91,7 +90,6 @@ const HeaderAccountAction = ({ customFields }) => {
         ) : null}
         {loginURL ? (
           <Button
-            ariaLabel={phrases.t('identity-block.log-in')}
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}

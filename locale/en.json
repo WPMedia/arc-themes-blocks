@@ -102,14 +102,17 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "Skip to main content"
-	},
-	"identity-block": {
-		"identity-block.email": "Email address",
-		"identity-block.password": "Password",
-		"identity-block.sign-up": "Sign up",
-		"identity-block.confirm-password": "Confirm password",
-		"identity-block.username": "Username",
-    "identity-block.password-requirements": "Please enter a valid password. Must have at least %{pwLowercase} letter(s). Must be at least %{pwMinLength} total characters. Must have at least %{pwPwNumbers} number(s). Must have at least %{pwSpecialCharacters} special characters. Must have at least %{pwUppercase} uppercase characters.",
-    "identity-block.email-requirements": "Please enter a valid email address"
-	}
+  },
+  "identity-block": {
+    "identity-block.email": "Email address",
+    "identity-block.password": "Password",
+    "identity-block.sign-up": "Sign Up",
+    "identity-block.confirm-password": "Confirm password",
+    "identity-block.username": "Username",
+    "identity-block.account": "Account",
+    "identity-block.manage-account": "Manage Your Account",
+    "identity-block.log-out": "Log Out",
+    "identity-block.log-in": "Log In",
+    "identity-block.login-options": "Log in options"
+  }
 }

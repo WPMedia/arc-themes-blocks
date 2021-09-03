@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import { useFusionContext } from 'fusion:context';
+import {
+  Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
+} from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
+import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
-  const { loginURL } = customFields;
+  const { loginURL, createAccountURL } = customFields;
+  const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
+  const { locale } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
+  const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -64,8 +75,67 @@ const HeaderAccountAction = ({ customFields }) => {
 
   // What do we want to happen if there is an error?
   return (
-    <div className="xpmedia-subs-header">
-      <a href={loginURL} className="xpmedia-subs-header--button">Sign In</a>
+    <div className="xpmedia-subs-header--logged-out-header">
+      <div className="xpmedia-subs-header--desktop-logged-out-header">
+        {createAccountURL ? (
+          <Button
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+            buttonType={BUTTON_TYPES.LABEL_ONLY}
+            href={createAccountURL}
+            text={phrases.t('identity-block.sign-up')}
+          />
+        ) : null}
+        {loginURL ? (
+          <Button
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+            href={loginURL}
+            iconType="user"
+            text={phrases.t('identity-block.log-in')}
+          />
+        ) : null}
+      </div>
+      <div className="xpmedia-subs-header--mobile-logged-out-header">
+        <Button
+          // should be button if toggleable
+          as="button"
+          aria-expanded={isAccountMenuOpen}
+          buttonSize={BUTTON_SIZES.SMALL}
+          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+          buttonType={BUTTON_TYPES.ICON_ONLY}
+          iconType="user"
+          onClick={() => setAccountMenu(!isAccountMenuOpen)}
+          text={phrases.t('identity-block.login-options')}
+          // for button accessibility
+          type="button"
+        />
+        {isAccountMenuOpen && (
+          <ul className="xpmedia-subs-header-dropdown--open">
+            {
+              createAccountURL ? (
+                <DropDownLinkListItem
+                  href={createAccountURL}
+                  text={phrases.t('identity-block.sign-up')}
+                />
+              ) : null
+            }
+            {
+              loginURL ? (
+                <DropDownLinkListItem
+                  href={loginURL}
+                  text={phrases.t('identity-block.log-in')}
+                />
+              ) : null
+            }
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
@@ -74,6 +144,11 @@ HeaderAccountAction.propTypes = {
   customFields: PropTypes.shape({
     loginURL: PropTypes.string.tag({
       defaultValue: '/account/login/',
+      label: 'Log In URL',
+    }),
+    createAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/signup/',
+      label: 'Sign Up URL',
     }),
   }),
 };

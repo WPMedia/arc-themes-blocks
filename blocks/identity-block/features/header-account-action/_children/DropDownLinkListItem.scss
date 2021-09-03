@@ -1,0 +1,10 @@
+.xpmedia-subs-header-dropdown-list-item-link {
+  text-decoration: none;
+  font-size: calculateRem(14px);
+
+  &:hover {
+    // darkens all nested elements on hover
+    // see css filter docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+    filter: brightness(0.85);
+  }
+}

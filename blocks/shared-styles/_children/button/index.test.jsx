@@ -67,7 +67,7 @@ it('renders with classname full width', () => {
 it('shows text if no aria label as aria label', () => {
   const wrapper = mount(<Button
     text="Show this as aria label"
-    buttonStyle={BUTTON_TYPES.ICON_ONLY}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
   />);
 
   expect(wrapper.find('button').prop('aria-label')).toEqual('Show this as aria label');

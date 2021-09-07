@@ -6,7 +6,7 @@ import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 const useIdentity = () => {
   const { arcSite } = useFusionContext();
-  const { subscriptions } = getProperties(arcSite);
+  const { api } = getProperties(arcSite);
   const [isInit, setIsInit] = useState(() => !!Identity.apiOrigin);
   if (!isInit && arcSite && api?.identity?.origin) {
     if (!isServerSide()) {
@@ -26,7 +26,7 @@ const useIdentity = () => {
         return window.realFetch(url, modifiedOpts);
       };
     }
-    Identity.options({ apiOrigin: api?.identity?.origin });
+    Identity.options({ apiOrigin: api.identity.origin });
     setIsInit(true);
   }
 

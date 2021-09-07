@@ -19,6 +19,26 @@ function validatePasswordRegex(
   return `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\\d@$!%*?&]{${pwMinLength},}$`;
 }
 
+function showPasswordValidationMessage(
+  pwLowercase,
+  pwMinLength,
+  pwPwNumbers,
+  pwSpecialCharacters,
+  pwUppercase,
+  phrases,
+) {
+  // only show requirement if greater than 0 integer
+  // adds space in the beginning if requirement is shown
+  const lowercaseRequirementText = pwLowercase > 0 ? ` ${phrases.t('identity-block.password-requirements-lowercase', { requirementCount: pwLowercase })}` : '';
+  const charactersRequirementText = pwMinLength > 0 ? ` ${phrases.t('identity-block.password-requirements-characters', { requirementCount: pwMinLength })}` : '';
+  const numbersRequirementText = pwPwNumbers > 0 ? ` ${phrases.t('identity-block.password-requirements-numbers', { requirementCount: pwPwNumbers })}` : '';
+  const specialRequirementText = pwSpecialCharacters > 0 ? ` ${phrases.t('identity-block.password-requirements-special', { requirementCount: pwSpecialCharacters })}` : '';
+  const uppercaseRequirementText = pwUppercase > 0 ? ` ${phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase })}` : '';
+
+  // Show basic password requirement first no matter what presumably
+  return `${phrases.t('identity-block.password-requirements')}${lowercaseRequirementText}${charactersRequirementText}${numbersRequirementText}${specialRequirementText}${uppercaseRequirementText}`;
+}
+
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;
@@ -74,13 +94,23 @@ const SignUp = ({ customFields, arcSite }) => {
   }
 
   const {
+    pwLowercase = 0,
+    pwMinLength = 0,
+    pwPwNumbers = 0,
+    pwSpecialCharacters = 0,
+    pwUppercase = 0,
+    status,
+  } = passwordRequirements;
+
+  const passwordValidationMessage = showPasswordValidationMessage(
     pwLowercase,
     pwMinLength,
     pwPwNumbers,
     pwSpecialCharacters,
     pwUppercase,
-    status,
-  } = passwordRequirements;
+    phrases,
+  );
+
   return (
     <HeadlinedSubmitForm
       headline={phrases.t('identity-block.sign-up')}
@@ -101,7 +131,7 @@ const SignUp = ({ customFields, arcSite }) => {
       <FormInputField
         label={phrases.t('identity-block.email')}
         name="email"
-          // onChange({ value: event.target.value });
+        // onChange({ value: event.target.value });
         onChange={(inputObject) => setEmail(inputObject.value)}
         required
         showDefaultError={false}
@@ -115,13 +145,7 @@ const SignUp = ({ customFields, arcSite }) => {
         required
         showDefaultError={false}
         type={FIELD_TYPES.PASSWORD}
-        validationErrorMessage={status === 'success' ? phrases.t('identity-block.password-requirements', {
-          pwLowercase,
-          pwMinLength,
-          pwPwNumbers,
-          pwSpecialCharacters,
-          pwUppercase,
-        }) : ''}
+        validationErrorMessage={status === 'success' ? passwordValidationMessage : ''}
         validationPattern={validatePasswordRegex(
           pwLowercase,
           pwMinLength,

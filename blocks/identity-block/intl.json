@@ -110,8 +110,23 @@
     "sv": "Log in options"
   },
 	"identity-block.password-requirements": {
-		"en": "Please enter a valid password. Must have at least %{pwLowercase} letter(s). Must be at least %{pwMinLength} total characters. Must have at least %{pwPwNumbers} number(s). Must have at least %{pwSpecialCharacters} special characters. Must have at least %{pwUppercase} uppercase characters."
+		"en": "Please enter a valid password."
 	},
+  "identity-block.password-requirements-lowercase": {
+    "en": "Must have at least %{requirementCount} letter(s)."
+  },
+  "identity-block.password-requirements-characters": {
+    "en": "Must be at least %{requirementCount} total characters."
+  },
+  "identity-block.password-requirements-numbers": {
+    "en": "Must have at least %{requirementCount} number(s)."
+  },
+  "identity-block.password-requirements-special": {
+    "en": "Must have at least %{requirementCount} special character(s)."
+  },
+  "identity-block.password-requirements-uppercase": {
+    "en": "Must have at least %{requirementCount} uppercase character(s)."
+  },
 	"identity-block.email-requirements": {
 		"en": "Please enter a valid email address"
 	}

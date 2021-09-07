@@ -1,18 +1,17 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import getProperties from 'fusion:properties';
 import { useFusionContext } from 'fusion:context';
 
 import HeaderAccountAction from './default';
 
+jest.mock('../../components/Identity', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({ isInitialized: true, isLoggedIn: () => true })),
+}));
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
 describe('Subscriptions HeaderAccountAction', () => {
-  getProperties.mockImplementation(() => ({
-    subscriptions: {
-      identity: {
-        apiOrigin: 'link',
-      },
-    },
-  }));
   it('renders', () => {
     useFusionContext.mockReturnValueOnce({
       arcSite: 'arcxp',

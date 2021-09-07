@@ -21,7 +21,6 @@ const useIdentity = () => {
         if (/(retail|sales|identity)/.test(url)) {
           modifiedOpts.headers = {
             ...opts.headers,
-            ...arcHeaders,
           };
         }
         return window.realFetch(url, modifiedOpts);

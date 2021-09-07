@@ -9,3 +9,7 @@
 
   background-color: var(--xpmedia-block-list-background-color);
 }
+
+.xpmedia-b-list-item {
+  margin: var(--xpmedia-block-list-item-margin);
+}

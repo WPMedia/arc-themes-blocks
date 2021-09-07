@@ -8,19 +8,19 @@ import './styles.css';
 const List = () => (
   <div className="xpmedia-b-list">
     <h2>List Block</h2>
-    <div>
+    <div className="xpmedia-b-list-item">
       <Overline text="Overline Text" />
       <Headline text="Headline 1" />
     </div>
-    <div>
+    <div className="xpmedia-b-list-item">
       <Overline text="Overline Text" />
       <Headline text="Headline 2" />
     </div>
-    <div>
+    <div className="xpmedia-b-list-item">
       <Overline text="Overline Text" />
       <Headline text="Headline 3" />
     </div>
-    <div>
+    <div className="xpmedia-b-list-item">
       <Overline text="Overline Text" />
       <Headline text="Headline 4" />
     </div>

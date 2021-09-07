@@ -104,6 +104,8 @@ const multiSiteCSS = (arcSite) => {
 
         /* Custom Block List Settings */
         --xpmedia-block-list-background-color: var(--xpmedia-global-color-gray-50);
+
+        --xpmedia-block-list-item-margin: 2rem 0;
       }
     `,
   };

@@ -6,6 +6,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
+import account from '../account/default';
 
 import './styles.scss';
 
@@ -58,7 +59,7 @@ const Login = ({ customFields, arcSite }) => {
   }
 
   return (
-    <section>
+    <section className="xpmedia-subs-login-form">
       <PrimaryFont
         as="h1"
         className="xpmedia-subs-login-title"
@@ -118,7 +119,7 @@ Login.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
-      defaultValue: '/account/',
+      defaultValue: '/account/profile/?_website=the-gazette',
     }),
     redirectToPreviousPage: PropTypes.bool.tag({
       name: 'Redirect to previous page',

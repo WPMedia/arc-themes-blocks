@@ -17,7 +17,7 @@ describe('Subscriptions HeaderAccountAction', () => {
     useFusionContext.mockReturnValueOnce({
       arcSite: 'arcxp',
     });
-    const wrapper = mount(<HeaderAccountAction customFields={{ loginURL: '' }} />);
+    const wrapper = mount(<HeaderAccountAction customFields={{ loginURL: '', createAccountURL: '' }} />);
 
     expect(wrapper.html()).not.toBe(null);
   });

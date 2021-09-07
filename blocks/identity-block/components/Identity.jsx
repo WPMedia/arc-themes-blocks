@@ -27,7 +27,7 @@ const useIdentity = () => {
         return window.realFetch(url, modifiedOpts);
       };
     }
-    Identity.options({ apiOrigin: subscriptions?.identity?.apiOrigin });
+    Identity.options({ apiOrigin: api?.identity?.origin });
     setIsInit(true);
   }
 

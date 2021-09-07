@@ -9,7 +9,6 @@ const useIdentity = () => {
   const { subscriptions } = getProperties(arcSite);
   const [isInit, setIsInit] = useState(() => !!Identity.apiOrigin);
   if (!isInit && arcSite && api?.identity?.origin) {
-    const arcHeaders = subscriptions.headers;
     if (!isServerSide()) {
       if (!window.realFetch) {
         window.realFetch = window.fetch;

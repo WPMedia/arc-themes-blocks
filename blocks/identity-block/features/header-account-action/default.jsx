@@ -3,9 +3,12 @@ import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
+
+import { ChevronDownIcon, ChevronUpIcon } from '@wpmedia/engine-theme-sdk';
 import {
   Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
 } from '@wpmedia/shared-styles';
+
 import useIdentity from '../../components/Identity';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
@@ -76,7 +79,14 @@ const HeaderAccountAction = ({ customFields }) => {
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
-            text={phrases.t('identity-block.account')}
+            text={(
+              <>
+                {phrases.t('identity-block.account')}
+                { isAccountMenuOpen
+                  ? <ChevronUpIcon width="1em" height="1em" fill="currentColor" />
+                  : <ChevronDownIcon width="1em" height="1em" fill="currentColor" />}
+              </>
+            )}
             type="button"
           />
         </div>

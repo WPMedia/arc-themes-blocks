@@ -92,6 +92,7 @@ const Login = ({ customFields, arcSite }) => {
           required
           showDefaultError={false}
           type={FIELD_TYPES.PASSWORD}
+          validationErrorMessage={phrases.t('identity-block.password-requirements')}
         />
         <PrimaryFont
           as="button"

@@ -1,17 +1,29 @@
+.xpmedia-subs-login {
+  max-width: 37rem;
+  margin: 3rem auto 0;
+}
+
 .xpmedia-subs-login-form {
-  max-width: calculateRem(592px);
-  margin: auto;
+  margin-top: 1rem;
+  > .xpmedia-form-field {
+    margin-bottom: 1.5rem;
+
+    input {
+      padding: 0.5rem;
+      width: 100%;
+    }
+  }
 }
 
 .xpmedia-subs-login-title {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .xpmedia-subs-input {
   > * {
     margin-bottom: 1rem;
   }
-
   input {
     padding: 0.5rem;
     width: 100%;
@@ -31,4 +43,5 @@
   line-height: 1.5;
   font-size: calculateRem(16px);
   border-radius: calculateRem(4px);
+  margin-bottom: 1.5rem;
 }

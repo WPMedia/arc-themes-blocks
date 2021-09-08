@@ -6,7 +6,6 @@ import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
-import account from '../account/default';
 
 import './styles.scss';
 
@@ -25,7 +24,7 @@ const Login = ({ customFields, arcSite }) => {
     status: 'initial'
   });
   const [error, setError] = useState();
-  console.log('recatpcha config', recaptchaConfig);
+
   useEffect(() => {
     const getConfig = async () => {
       await Identity.getConfig()
@@ -59,14 +58,16 @@ const Login = ({ customFields, arcSite }) => {
   }
 
   return (
-    <section className="xpmedia-subs-login-form">
+    <section className="xpmedia-subs-login">
       <PrimaryFont
         as="h1"
         className="xpmedia-subs-login-title"
       >
-        {phrases.t('identity-block.login')}
+        {phrases.t('identity-block.log-in')}
       </PrimaryFont>
+      <hr />
       <form
+        className="xpmedia-subs-login-form"
         onSubmit={(e) => {
           e.preventDefault();
           console.log('submitting', email, password);
@@ -97,7 +98,7 @@ const Login = ({ customFields, arcSite }) => {
           className="xpmedia-subs-filled-button xpmedia-subs-medium-button"
           type="submit"
         >
-          {phrases.t('identity-block.login')}
+          {phrases.t('identity-block.log-in')}
         </PrimaryFont>
         {error ? (
           <section>

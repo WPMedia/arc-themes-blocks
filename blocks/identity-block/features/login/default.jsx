@@ -3,7 +3,10 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+
 import { PrimaryFont } from '@wpmedia/shared-styles';
+import ReCaptcha from 'react-google-recaptcha';
+
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
 
@@ -17,13 +20,20 @@ const Login = ({ customFields, arcSite }) => {
 
   const { Identity, isInitialized } = useIdentity();
 
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
+  const [ password, setPassword ] = useState();
+  const [ email, setEmail ] = useState();
+
+  const [ recaptchaToken, setRecaptchaToken ] = useState();
   const [ recaptchaConfig, setRecaptchaConfig ] = useState({
     signinRecaptcha: false,
     status: 'initial'
   });
-  const [error, setError] = useState();
+
+  const [ error, setError ] = useState();
+
+  if (redirectToPreviousPage && !isServerSide()) {
+    redirectURL = document?.referrer;
+  }
 
   useEffect(() => {
     const getConfig = async () => {
@@ -49,12 +59,20 @@ const Login = ({ customFields, arcSite }) => {
     }
   }, [Identity]);
 
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+      const isLoggedIn = await Identity.isLoggedIn();
+      if (isLoggedIn) {
+        window.location = redirectURL;
+      }
+    };
+    if (Identity) {
+      checkLoggedInStatus();
+    }
+  }, [Identity]);
+
   if (!isInitialized) {
     return null;
-  }
-
-  if (redirectToPreviousPage && !isServerSide()) {
-    redirectURL = document?.referrer;
   }
 
   return (
@@ -70,8 +88,7 @@ const Login = ({ customFields, arcSite }) => {
         className="xpmedia-subs-login-form"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log('submitting', email, password);
-          return Identity.login(email, password, { rememberMe: true })
+          return Identity.login(email, password, { rememberMe: true, recaptchaToken })
             .then(() => { window.location = redirectURL; })
             .catch(() => setError('Something went wrong'));
         }}
@@ -94,6 +111,16 @@ const Login = ({ customFields, arcSite }) => {
           type={FIELD_TYPES.PASSWORD}
           validationErrorMessage={phrases.t('identity-block.password-requirements')}
         />
+        {
+          recaptchaConfig.signinRecaptcha ? (
+            <section className="xpmedia-subs-login-recaptcha">
+              <ReCaptcha
+                sitekey={recaptchaConfig.recaptchaSiteKey}
+                onChange={setRecaptchaToken}
+              />
+            </section>
+          ) : null
+        }
         <PrimaryFont
           as="button"
           className="xpmedia-subs-filled-button xpmedia-subs-medium-button"
@@ -121,7 +148,7 @@ Login.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
-      defaultValue: '/account/profile/?_website=the-gazette',
+      defaultValue: '/account/profile/',
     }),
     redirectToPreviousPage: PropTypes.bool.tag({
       name: 'Redirect to previous page',

@@ -2,12 +2,9 @@
   display: flex;
 }
 
-.xpmedia-subs-header--header {
-  display: flex;
-}
-
 // hide a tag links button for mobile
-.xpmedia-subs-header--desktop-header {
+.xpmedia-subs-header--desktop-logged-out-header {
+  display: flex;
   // uses a tags
   > a {
     // should be 16px between buttons

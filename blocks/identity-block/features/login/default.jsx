@@ -4,11 +4,12 @@ import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import { PrimaryFont } from '@wpmedia/shared-styles';
 import ReCaptcha from 'react-google-recaptcha';
 
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
+import SocialSignOn from '../../components/SocialSignOn';
+
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
@@ -123,6 +124,7 @@ const Login = ({ customFields, arcSite }) => {
           ) : null
         }
       </HeadlinedSubmitForm>
+      <SocialSignOn />
       <section className="xpmedia-subs-login-footer">
         <a href={forgotPasswordURL}>{phrases.t('identity-block.forgot-password')}</a>
         <a href={signupURL}>{phrases.t('identity-block.signup-cta')}</a>

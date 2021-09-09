@@ -10,26 +10,7 @@ import FormPasswordConfirm from '../../components/FormPasswordConfirm';
 import validatePasswordPattern from '../../utils/validate-password-pattern';
 
 import './styles.scss';
-
-function showPasswordValidationMessage(
-  pwLowercase,
-  pwMinLength,
-  pwPwNumbers,
-  pwSpecialCharacters,
-  pwUppercase,
-  phrases,
-) {
-  // only show requirement if greater than 0 integer
-  // adds space in the beginning if requirement is shown
-  const lowercaseRequirementText = pwLowercase > 0 ? ` ${phrases.t('identity-block.password-requirements-lowercase', { requirementCount: pwLowercase })}` : '';
-  const charactersRequirementText = pwMinLength > 0 ? ` ${phrases.t('identity-block.password-requirements-characters', { requirementCount: pwMinLength })}` : '';
-  const numbersRequirementText = pwPwNumbers > 0 ? ` ${phrases.t('identity-block.password-requirements-numbers', { requirementCount: pwPwNumbers })}` : '';
-  const specialRequirementText = pwSpecialCharacters > 0 ? ` ${phrases.t('identity-block.password-requirements-special', { requirementCount: pwSpecialCharacters })}` : '';
-  const uppercaseRequirementText = pwUppercase > 0 ? ` ${phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase })}` : '';
-
-  // Show basic password requirement first no matter what presumably
-  return `${phrases.t('identity-block.password-requirements')}${lowercaseRequirementText}${charactersRequirementText}${numbersRequirementText}${specialRequirementText}${uppercaseRequirementText}`;
-}
+import passwordValidationMessage from '../../utils/password-validation-message';
 
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
@@ -92,14 +73,31 @@ const SignUp = ({ customFields, arcSite }) => {
     status,
   } = passwordRequirements;
 
-  const passwordValidationMessage = showPasswordValidationMessage(
-    pwLowercase,
-    pwMinLength,
-    pwPwNumbers,
-    pwSpecialCharacters,
-    pwUppercase,
-    phrases,
-  );
+  const passwordErrorMessage = passwordValidationMessage({
+    defaultMessage: phrases.t('identity-block.password-requirements'),
+    options: {
+      lowercase: {
+        value: pwLowercase,
+        message: phrases.t('identity-block.password-requirements-lowercase', { requirementCount: pwLowercase }),
+      },
+      minLength: {
+        value: pwMinLength,
+        message: phrases.t('identity-block.password-requirements-characters', { requirementCount: pwMinLength }),
+      },
+      uppercase: {
+        value: pwUppercase,
+        message: phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase }),
+      },
+      numbers: {
+        value: pwPwNumbers,
+        message: phrases.t('identity-block.password-requirements-numbers', { requirementCount: pwPwNumbers }),
+      },
+      specialCharacters: {
+        value: pwSpecialCharacters,
+        message: phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase }),
+      },
+    },
+  });
 
   return (
     <HeadlinedSubmitForm
@@ -126,7 +124,7 @@ const SignUp = ({ customFields, arcSite }) => {
       <FormPasswordConfirm
         name="password"
         label={phrases.t('identity-block.password')}
-        validationErrorMessage={status === 'success' ? passwordValidationMessage : ''}
+        validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
         validationPattern={validatePasswordPattern(
           pwLowercase,
           pwMinLength,

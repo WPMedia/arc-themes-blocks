@@ -114,6 +114,13 @@
     "identity-block.manage-account": "Manage Your Account",
     "identity-block.log-out": "Log Out",
     "identity-block.log-in": "Log In",
-    "identity-block.login-options": "Log in options"
+    "identity-block.login-options": "Log in options",
+    "identity-block.password-requirements": "Please enter a valid password.",
+    "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+    "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+    "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+    "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+    "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+    "identity-block.email-requirements": "Please enter a valid email address"
   }
 }

@@ -8,7 +8,7 @@ import useIdentity from './Identity';
 jest.mock('@arc-publishing/sdk-identity', () => ({
   __esModule: true,
   default: {
-    apiOrigins: 'http://origin/',
+    apiOrigin: '',
     options: jest.fn(),
   },
 }));
@@ -31,19 +31,22 @@ jest.mock('fusion:context', () => ({
 }));
 
 describe('Identity useIdentity Hook', () => {
-  it('returns itself and initializes', () => {
+  it('returns itself and changes the option to http://origin', () => {
+    const Test = () => {
+      const { Identity } = useIdentity();
+      expect(Identity).toBe(IdentityObject);
+      return <div />;
+    };
+    mount(<Test />);
+    expect(IdentityObject.options).toHaveBeenLastCalledWith({ apiOrigin: 'http://origin/' });
+  });
+
+  it('initializes', () => {
     const testInitialization = jest.fn();
 
     const Test = () => {
-      const {
-        Identity,
-        isInitialized,
-      } = useIdentity();
-
-      expect(Identity).toBe(IdentityObject);
-
+      const { isInitialized } = useIdentity();
       testInitialization(isInitialized);
-
       return <div />;
     };
 

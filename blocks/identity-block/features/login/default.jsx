@@ -8,6 +8,7 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import ReCaptcha from 'react-google-recaptcha';
 
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
+import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import useIdentity from '../../components/Identity';
 
 import './styles.scss';
@@ -77,21 +78,16 @@ const Login = ({ customFields, arcSite }) => {
 
   return (
     <section className="xpmedia-subs-login">
-      <PrimaryFont
-        as="h1"
-        className="xpmedia-subs-login-title"
-      >
-        {phrases.t('identity-block.log-in')}
-      </PrimaryFont>
-      <hr />
-      <form
-        className="xpmedia-subs-login-form"
+      <HeadlinedSubmitForm
+        headline={phrases.t('identity-block.log-in')}
+        buttonLabel={phrases.t('identity-block.log-in')}
         onSubmit={(e) => {
           e.preventDefault();
           return Identity.login(email, password, { rememberMe: true, recaptchaToken })
             .then(() => { window.location = redirectURL; })
             .catch(() => setError('Something went wrong'));
         }}
+        formErrorText={error}
       >
         <FormInputField
           label={phrases.t('identity-block.email')}
@@ -121,23 +117,7 @@ const Login = ({ customFields, arcSite }) => {
             </section>
           ) : null
         }
-        <PrimaryFont
-          as="button"
-          className="xpmedia-subs-filled-button xpmedia-subs-medium-button"
-          type="submit"
-        >
-          {phrases.t('identity-block.log-in')}
-        </PrimaryFont>
-        {error ? (
-          <section>
-            <PrimaryFont
-              as="p"
-            >
-              {error}
-            </PrimaryFont>
-          </section>
-        ) : null}
-      </form>
+      </HeadlinedSubmitForm>
     </section>
   );
 };
@@ -154,6 +134,14 @@ Login.propTypes = {
       name: 'Redirect to previous page',
       defaultValue: true,
       description: 'Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL',
+    }),
+    forgotPasswordURL: PropTypes.string.tag({
+      name: 'Forgot password URL',
+      defaultValue: '/account/forgot-password/'
+    }),
+    signupURL: PropTypes.string.tag({
+      name: 'Sign Up URL',
+      defaultValue: '/account/sign-up/'
     }),
   }),
 };

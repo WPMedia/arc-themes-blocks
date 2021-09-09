@@ -20,7 +20,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [error, setError] = useState();
   const [isAccountMenuOpen, setAccountMenu] = useState(false);
 

@@ -120,7 +120,7 @@ const HeaderAccountAction = ({ customFields }) => {
   // What do we want to happen if there is an error?
   return (
     <>
-      <div className="xpmedia-subs-header--desktop-logged-out-header">
+      <div className="xpmedia-subs-header--desktop-header">
         {createAccountURL ? (
           <Button
             // should be an a tag if it's a link

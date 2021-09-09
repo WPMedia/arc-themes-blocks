@@ -8,9 +8,9 @@ import useIdentity from '../../components/Identity';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import FormPasswordConfirm from '../../components/FormPasswordConfirm';
 import validatePasswordPattern from '../../utils/validate-password-pattern';
+import passwordValidationMessage from '../../utils/password-validation-message';
 
 import './styles.scss';
-import passwordValidationMessage from '../../utils/password-validation-message';
 
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;

@@ -112,7 +112,7 @@ const SignUp = ({ customFields, arcSite }) => {
         email,
       })
         .then(() => { window.location = redirectURL; })
-        .catch(() => setError('Something went wrong'))}
+        .catch(() => setError(phrases.t('identity-block.sign-up-form-error')))}
       formErrorText={error}
     >
       <FormInputField

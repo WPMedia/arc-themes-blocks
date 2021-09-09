@@ -132,5 +132,8 @@
 	},
 	"identity-block.email-requirements": {
 		"en": "Please enter a valid email address"
+	},
+	"identity-block.sign-up-form-error": {
+		"en": "There's been an error creating your account"
 	}
 }

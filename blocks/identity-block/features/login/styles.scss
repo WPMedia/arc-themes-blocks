@@ -4,14 +4,14 @@
 }
 
 .xpmedia-subs-login-recaptcha {
-  margin-bottom: 1.5rem;
+  margin-bottom: map-get($spacers, 'md');
   justify-content: center;
   display: flex;
 }
 
 .xpmedia-subs-input {
   > * {
-    margin-bottom: 1rem;
+    margin-bottom: map-get($spacers, 'sm');
   }
   input {
     padding: 0.5rem;
@@ -32,5 +32,25 @@
   line-height: 1.5;
   font-size: calculateRem(16px);
   border-radius: calculateRem(4px);
-  margin-bottom: 1.5rem;
+  margin-bottom: map-get($spacers, 'md');
 }
+
+.xpmedia-subs-login-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > a {
+    color: $ui-primary-font-color;
+    margin-bottom: map-get($spacers, 'md');
+    @include link-color-active-hover($ui-primary-font-color);
+    text-decoration: none;
+    line-height: 1.5rem;
+    font-size: 1rem;
+
+    &:active,
+    &:hover {
+      border-bottom: 1px solid #7f7f7f;
+    }
+  }
+}
+

@@ -15,7 +15,12 @@ import './styles.scss';
 
 const Login = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
-  const { redirectToPreviousPage } = customFields;
+  const {
+    redirectToPreviousPage,
+    forgotPasswordURL,
+    signupURL,
+  } = customFields;
+
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
@@ -118,6 +123,10 @@ const Login = ({ customFields, arcSite }) => {
           ) : null
         }
       </HeadlinedSubmitForm>
+      <section className="xpmedia-subs-login-footer">
+        <a href={forgotPasswordURL}>{phrases.t('identity-block.forgot-password')}</a>
+        <a href={signupURL}>{phrases.t('identity-block.signup-cta')}</a>
+      </section>
     </section>
   );
 };

@@ -8,7 +8,7 @@
 
 .xpmedia-form-submittable {
   border-bottom: 1px solid $border-rule-color;
-  margin-bottom: map-get($spacers, 'sm');
+  margin-bottom: map-get($spacers, 'md');
 
   .xpmedia-form-field {
     margin: map-get($spacers, 'md') 0;
@@ -18,7 +18,7 @@
     }
 
     &:last-of-type {
-      margin-bottom: map-get($spacers, 'sm');
+      margin-bottom: map-get($spacers, 'md');
     }
   }
 

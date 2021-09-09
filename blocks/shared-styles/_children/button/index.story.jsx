@@ -111,3 +111,13 @@ export const aLinkButton = () => (
     href="https://arcxp.com"
   />
 );
+
+export const dualIconButton = () => (
+  <Button
+    text="Two icons"
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    buttonStyle={BUTTON_STYLES.OUTLINED}
+    iconType="user"
+    secondaryIconType="chevron-up"
+  />
+);

@@ -33,5 +33,5 @@ it('shows sign in url and create account url', () => {
   />);
 
   expect(wrapper.html()).not.toBe(null);
-  expect(wrapper.find('div.xpmedia-subs-header--logged-out-header')).toHaveLength(1);
+  expect(wrapper.find('div.xpmedia-subs-header--desktop-logged-out-header')).toHaveLength(1);
 });

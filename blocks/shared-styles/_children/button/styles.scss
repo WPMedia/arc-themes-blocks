@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
   // if a tag, then hide decoration
   text-decoration: none;
@@ -43,4 +44,3 @@
 .xpmedia-button--large {
   padding: calculateRem(16px);
 }
-

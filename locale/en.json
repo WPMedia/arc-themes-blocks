@@ -108,6 +108,7 @@
     "identity-block.password": "Password",
     "identity-block.sign-up": "Sign Up",
     "identity-block.confirm-password": "Confirm password",
+    "identity-block.confirm-password-error": "Passwords must match",
     "identity-block.username": "Username",
     "identity-block.account": "Account",
     "identity-block.manage-account": "Manage Your Account",

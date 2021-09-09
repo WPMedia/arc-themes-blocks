@@ -10,8 +10,6 @@ import FormPasswordConfirm from '../../components/FormPasswordConfirm';
 import validatePasswordPattern from '../../utils/validate-password-pattern';
 import passwordValidationMessage from '../../utils/password-validation-message';
 
-import './styles.scss';
-
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
   const { redirectToPreviousPage } = customFields;

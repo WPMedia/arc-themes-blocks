@@ -17,4 +17,9 @@ export default (site) => ({
 		dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		dateFormat: 'LLLL d, yyyy',
 	},
+  api: {
+    identity: {
+      origin: 'abc'
+    }
+  }
 });

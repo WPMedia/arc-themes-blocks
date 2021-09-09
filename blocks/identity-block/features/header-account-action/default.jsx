@@ -3,7 +3,6 @@ import PropTypes from '@arc-fusion/prop-types';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
-import { ChevronDownIcon, ChevronUpIcon } from '@wpmedia/engine-theme-sdk';
 import {
   Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
 } from '@wpmedia/shared-styles';
@@ -21,7 +20,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   const [error, setError] = useState();
   const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
@@ -74,17 +73,11 @@ const HeaderAccountAction = ({ customFields }) => {
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
             buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
-            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+            buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
             iconType="user"
+            secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
-            text={(
-              <>
-                {phrases.t('identity-block.account')}
-                { isAccountMenuOpen
-                  ? <ChevronUpIcon width="1em" height="1em" fill="currentColor" />
-                  : <ChevronDownIcon width="1em" height="1em" fill="currentColor" />}
-              </>
-            )}
+            text={phrases.t('identity-block.account')}
             type="button"
           />
         </div>
@@ -95,7 +88,7 @@ const HeaderAccountAction = ({ customFields }) => {
             buttonSize={BUTTON_SIZES.SMALL}
             buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
             buttonType={BUTTON_TYPES.ICON_ONLY}
-            iconType="user"
+            leftIconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
             text={phrases.t('identity-block.login-options')}
             type="button"

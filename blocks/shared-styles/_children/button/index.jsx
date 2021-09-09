@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
-import { UserIcon } from '@wpmedia/engine-theme-sdk';
+import { UserIcon, ChevronDownIcon, ChevronUpIcon } from '@wpmedia/engine-theme-sdk';
 
 // handle non-dynamic styling not based on theme styles
 import './styles.scss';
@@ -26,6 +26,50 @@ export const BUTTON_TYPES = {
   LABEL_ONLY: 'LABEL_ONLY',
   ICON_ONLY: 'ICON_ONLY',
   LABEL_AND_ICON: 'LABEL_AND_ICON',
+  LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
+};
+
+const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, primaryColor) => {
+  let Icon = null;
+
+  if (iconTypeString) {
+    switch (iconTypeString) {
+      case 'user':
+        Icon = (
+          // todo: width and height for large and medium icons are different
+          // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
+          <UserIcon
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={primaryColor}
+          />
+        );
+        break;
+      case 'chevron-up':
+        Icon = (
+          <ChevronUpIcon
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={primaryColor}
+          />
+        );
+        break;
+      case 'chevron-down':
+        Icon = (
+          <ChevronDownIcon
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={primaryColor}
+          />
+        );
+        break;
+      default:
+        Icon = null;
+        break;
+    }
+  }
+
+  return Icon;
 };
 
 // istanbul ignoring because we don't have a good way to test styled components yet
@@ -103,8 +147,20 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
   }
 };
 
-function renderButtonContents(matchedButtonType, text, iconComponent) {
+function renderButtonContents(matchedButtonType, text, iconComponent, secondaryIconComponent) {
   switch (matchedButtonType) {
+    case BUTTON_TYPES.LABEL_AND_TWO_ICONS:
+      return (
+        <>
+          <div className="xpmedia-button--left-icon-container">
+            {iconComponent}
+          </div>
+          {text}
+          <div className="xpmedia-button--right-icon-container">
+            {secondaryIconComponent}
+          </div>
+        </>
+      );
     case BUTTON_TYPES.LABEL_AND_ICON:
       return (
         <>
@@ -131,15 +187,14 @@ function Button(props) {
     buttonSize,
     buttonStyle,
     buttonType,
-    iconType,
-    text,
     fullWidth,
+    iconType,
+    secondaryIconType,
+    text,
     type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
-
-  let Icon = null;
 
   let iconHeightWidth = 16;
 
@@ -160,24 +215,16 @@ function Button(props) {
       iconHeightWidth = 16;
   }
 
-  if (iconType) {
-    switch (iconType) {
-      case 'user':
-        Icon = (
-          // todo: width and height for large and medium icons are different
-          // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
-          <UserIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={primaryColor}
-          />
-        );
-        break;
-      default:
-        Icon = null;
-        break;
-    }
-  }
+  const PrimaryIcon = iconTypeStringToIconTypeComponent(
+    iconType,
+    iconHeightWidth,
+    primaryColor,
+  );
+  const SecondaryIcon = iconTypeStringToIconTypeComponent(
+    secondaryIconType,
+    iconHeightWidth,
+    primaryColor,
+  );
 
   return (
     <StyledDynamicButton
@@ -191,7 +238,7 @@ function Button(props) {
       type={elementType}
       {...props}
     >
-      {renderButtonContents(buttonType, text, Icon)}
+      {renderButtonContents(buttonType, text, PrimaryIcon, SecondaryIcon)}
     </StyledDynamicButton>
   );
 }

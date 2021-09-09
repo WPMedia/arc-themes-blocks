@@ -16,12 +16,6 @@
   }
 }
 
-.xpmedia-subs-header--desktop-header {
-  button svg {
-    margin: 0 0.25em 0 0.5em;
-  }
-}
-
 .xpmedia-subs-header--mobile-header {
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     display: none;

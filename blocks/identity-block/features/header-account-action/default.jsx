@@ -56,9 +56,14 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  // const handleLogout = () => {
-  //   Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
-  // };
+  const handleLogout = (e) => {
+    if (e.key === 'Enter') {
+      Identity.logout().then(() => {
+        setIsLoggedIn(false);
+        setUser(null);
+      });
+    }
+  };
 
   if (!isInitialized) {
     return null;
@@ -107,6 +112,8 @@ const HeaderAccountAction = ({ customFields }) => {
             />
             <DropDownLinkListItem
               href={logoutURL}
+              onClick={handleLogout}
+              onKeyDown={handleLogout}
               text={phrases.t('identity-block.log-out')}
             />
           </ul>

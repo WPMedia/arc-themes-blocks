@@ -22,15 +22,15 @@
 		"sv": "Password"
 	},
 	"identity-block.sign-up": {
-		"de": "Sign Up",
-		"en": "Sign Up",
-		"es": "Sign Up",
-		"fr": "Sign Up",
-		"ja": "Sign Up",
-		"ko": "Sign Up",
-		"no": "Sign Up",
-		"pt": "Sign Up",
-		"sv": "Sign Up"
+		"de": "Sign up",
+		"en": "Sign up",
+		"es": "Sign up",
+		"fr": "Sign up",
+		"ja": "Sign up",
+		"ko": "Sign up",
+		"no": "Sign up",
+		"pt": "Sign up",
+		"sv": "Sign up"
 	},
 	"identity-block.confirm-password": {
 		"de": "Confirm password",
@@ -110,30 +110,102 @@
 		"sv": "Log in options"
 	},
 	"identity-block.confirm-password-error": {
-		"en": "Passwords must match"
+		"de": "Passwords must match",
+		"en": "Passwords must match",
+		"es": "Passwords must match",
+		"fr": "Passwords must match",
+		"ja": "Passwords must match",
+		"ko": "Passwords must match",
+		"no": "Passwords must match",
+		"pt": "Passwords must match",
+		"sv": "Passwords must match"
 	},
 	"identity-block.password-requirements": {
-		"en": "Please enter a valid password."
+		"de": "Please enter a valid password.",
+		"en": "Please enter a valid password.",
+		"es": "Please enter a valid password.",
+		"fr": "Please enter a valid password.",
+		"ja": "Please enter a valid password.",
+		"ko": "Please enter a valid password.",
+		"no": "Please enter a valid password.",
+		"pt": "Please enter a valid password.",
+		"sv": "Please enter a valid password."
 	},
 	"identity-block.password-requirements-lowercase": {
-		"en": "Must have at least %{requirementCount} letter(s)."
+		"de": "Must have at least %{requirementCount} letter(s).",
+		"en": "Must have at least %{requirementCount} letter(s).",
+		"es": "Must have at least %{requirementCount} letter(s).",
+		"fr": "Must have at least %{requirementCount} letter(s).",
+		"ja": "Must have at least %{requirementCount} letter(s).",
+		"ko": "Must have at least %{requirementCount} letter(s).",
+		"no": "Must have at least %{requirementCount} letter(s).",
+		"pt": "Must have at least %{requirementCount} letter(s).",
+		"sv": "Must have at least %{requirementCount} letter(s)."
 	},
 	"identity-block.password-requirements-characters": {
-		"en": "Must be at least %{requirementCount} total characters."
+		"de": "Must be at least %{requirementCount} total characters.",
+		"en": "Must be at least %{requirementCount} total characters.",
+		"es": "Must be at least %{requirementCount} total characters.",
+		"fr": "Must be at least %{requirementCount} total characters.",
+		"ja": "Must be at least %{requirementCount} total characters.",
+		"ko": "Must be at least %{requirementCount} total characters.",
+		"no": "Must be at least %{requirementCount} total characters.",
+		"pt": "Must be at least %{requirementCount} total characters.",
+		"sv": "Must be at least %{requirementCount} total characters."
 	},
 	"identity-block.password-requirements-numbers": {
-		"en": "Must have at least %{requirementCount} number(s)."
+		"de": "Must have at least %{requirementCount} number(s).",
+		"en": "Must have at least %{requirementCount} number(s).",
+		"es": "Must have at least %{requirementCount} number(s).",
+		"fr": "Must have at least %{requirementCount} number(s).",
+		"ja": "Must have at least %{requirementCount} number(s).",
+		"ko": "Must have at least %{requirementCount} number(s).",
+		"no": "Must have at least %{requirementCount} number(s).",
+		"pt": "Must have at least %{requirementCount} number(s).",
+		"sv": "Must have at least %{requirementCount} number(s)."
 	},
 	"identity-block.password-requirements-special": {
-		"en": "Must have at least %{requirementCount} special character(s)."
+		"de": "Must have at least %{requirementCount} special character(s).",
+		"en": "Must have at least %{requirementCount} special character(s).",
+		"es": "Must have at least %{requirementCount} special character(s).",
+		"fr": "Must have at least %{requirementCount} special character(s).",
+		"ja": "Must have at least %{requirementCount} special character(s).",
+		"ko": "Must have at least %{requirementCount} special character(s).",
+		"no": "Must have at least %{requirementCount} special character(s).",
+		"pt": "Must have at least %{requirementCount} special character(s).",
+		"sv": "Must have at least %{requirementCount} special character(s)."
 	},
 	"identity-block.password-requirements-uppercase": {
-		"en": "Must have at least %{requirementCount} uppercase character(s)."
+		"de": "Must have at least %{requirementCount} uppercase character(s).",
+		"en": "Must have at least %{requirementCount} uppercase character(s).",
+		"es": "Must have at least %{requirementCount} uppercase character(s).",
+		"fr": "Must have at least %{requirementCount} uppercase character(s).",
+		"ja": "Must have at least %{requirementCount} uppercase character(s).",
+		"ko": "Must have at least %{requirementCount} uppercase character(s).",
+		"no": "Must have at least %{requirementCount} uppercase character(s).",
+		"pt": "Must have at least %{requirementCount} uppercase character(s).",
+		"sv": "Must have at least %{requirementCount} uppercase character(s)."
 	},
 	"identity-block.email-requirements": {
-		"en": "Please enter a valid email address"
+		"de": "Please enter a valid email address",
+		"en": "Please enter a valid email address",
+		"es": "Please enter a valid email address",
+		"fr": "Please enter a valid email address",
+		"ja": "Please enter a valid email address",
+		"ko": "Please enter a valid email address",
+		"no": "Please enter a valid email address",
+		"pt": "Please enter a valid email address",
+		"sv": "Please enter a valid email address"
 	},
 	"identity-block.sign-up-form-error": {
-		"en": "There's been an error creating your account"
+		"de": "There's been an error creating your account",
+		"en": "There's been an error creating your account",
+		"es": "There's been an error creating your account",
+		"fr": "There's been an error creating your account",
+		"ja": "There's been an error creating your account",
+		"ko": "There's been an error creating your account",
+		"no": "There's been an error creating your account",
+		"pt": "There's been an error creating your account",
+		"sv": "There's been an error creating your account"
 	}
 }

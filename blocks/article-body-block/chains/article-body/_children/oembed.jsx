@@ -29,7 +29,7 @@ const Oembed = ({
           );
           return (
             // eslint-disable-next-line no-useless-escape
-            <div className={`oembed | margin_centered oembed-${element.subtype} ${responsiveClass} flex-container-row\ 
+            <div className={`oembed | margin_centered oembed-${element.subtype} ${responsiveClass} flex-container-row\
 justify_center`}
             >
               <amp-twitter
@@ -106,7 +106,7 @@ justify_center`}
   // If element is a subtype of youtube or vimeo, and this is not an AMP page,
   // add responsive video classes
   const marginClasses = !isLeadArt && !isAmp ? 'margin_top_md margin_bottom_md' : '';
-  const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses} block-margin-bottom`;
+  const cssClasses = `oembed-${element.subtype} ${responsiveClass} container_row ${marginClasses} block-margin-bottom chromatic-ignore`;
   const outputElement = output();
   if (typeof outputElement === 'string') {
     return <div className={cssClasses} dangerouslySetInnerHTML={{ __html: outputElement }} />;

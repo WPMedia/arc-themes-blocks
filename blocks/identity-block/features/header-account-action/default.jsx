@@ -12,7 +12,12 @@ import DropDownLinkListItem from './_children/DropDownLinkListItem';
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
-  const { loginURL, createAccountURL } = customFields;
+  const {
+    createAccountURL,
+    loginURL,
+    logoutURL,
+    manageAccountURL,
+  } = customFields;
   const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
@@ -97,11 +102,11 @@ const HeaderAccountAction = ({ customFields }) => {
         {isAccountMenuOpen && (
           <ul className="xpmedia-subs-header-dropdown--open">
             <DropDownLinkListItem
-              href="/"
+              href={manageAccountURL}
               text={phrases.t('identity-block.manage-account')}
             />
             <DropDownLinkListItem
-              href="/"
+              href={logoutURL}
               text={phrases.t('identity-block.log-out')}
             />
           </ul>
@@ -186,6 +191,14 @@ HeaderAccountAction.propTypes = {
     createAccountURL: PropTypes.string.tag({
       defaultValue: '/account/signup/',
       label: 'Sign Up URL',
+    }),
+    logoutURL: PropTypes.string.tag({
+      defaultValue: '/account/logout/',
+      label: 'Log Out URL',
+    }),
+    manageAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/',
+      label: 'Manage Account URL',
     }),
   }),
 };

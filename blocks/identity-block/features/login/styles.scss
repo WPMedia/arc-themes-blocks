@@ -1,56 +1,18 @@
-.xpmedia-subs-login {
-  max-width: 37rem;
-  margin: 3rem auto 0;
-}
-
-.xpmedia-subs-login-recaptcha {
-  margin-bottom: map-get($spacers, 'md');
-  justify-content: center;
-  display: flex;
-}
-
-.xpmedia-subs-input {
-  > * {
-    margin-bottom: map-get($spacers, 'sm');
-  }
-  input {
-    padding: 0.5rem;
-    width: 100%;
-  }
-}
-
-.xpmedia-subs-filled-button {
-  // primary color for arc subs
-  background-color: #183bb6;
-  color: $ui-btn-white-color;
-  border: 0;
-}
-
-.xpmedia-subs-medium-button {
-  padding: map-get($spacers, 'sm');
-  width: 100%;
-  line-height: 1.5;
-  font-size: calculateRem(16px);
-  border-radius: calculateRem(4px);
-  margin-bottom: map-get($spacers, 'md');
-}
-
 .xpmedia-subs-login-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   > a {
+    @include link-color-active-hover($ui-primary-font-color);
     color: $ui-primary-font-color;
     margin-bottom: map-get($spacers, 'md');
-    @include link-color-active-hover($ui-primary-font-color);
     text-decoration: none;
-    line-height: 1.5rem;
     font-size: 1rem;
 
     &:active,
     &:hover {
-      border-bottom: 1px solid #7f7f7f;
+      text-decoration: underline;
     }
   }
 }
-

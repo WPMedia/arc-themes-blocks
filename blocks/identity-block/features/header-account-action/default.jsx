@@ -98,7 +98,7 @@ const HeaderAccountAction = ({ customFields }) => {
             buttonSize={BUTTON_SIZES.SMALL}
             buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
             buttonType={BUTTON_TYPES.ICON_ONLY}
-            leftIconType="user"
+            iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
             text={phrases.t('identity-block.login-options')}
             type="button"

@@ -6,7 +6,7 @@ import { useFusionContext } from 'fusion:context';
 import './DropDownLinkListItem.scss';
 
 const StyledLinkWithHover = styled.a`
-  font-family: ${({ fontFamily }) => fontFamily};
+  font-family: ${({ font }) => font};
   color: ${({ primaryColor }) => primaryColor};
 
   &:hover {
@@ -17,7 +17,7 @@ const StyledLinkWithHover = styled.a`
 function DropDownLinkListItem({ text, href }) {
   const { arcSite } = useFusionContext();
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
-  const fontFamily = getThemeStyle(arcSite)['primary-font-family'];
+  const font = getThemeStyle(arcSite)['primary-font-family'];
 
   return (
     <li
@@ -27,7 +27,7 @@ function DropDownLinkListItem({ text, href }) {
         className="xpmedia-subs-header-dropdown-list-item-link"
         href={href}
         primaryColor={primaryColor}
-        fontFamily={fontFamily}
+        font={font}
       >
         {text}
       </StyledLinkWithHover>

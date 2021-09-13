@@ -60,8 +60,6 @@ const HeaderAccountAction = ({ customFields }) => {
     if (e.key === 'Enter' || e.type === 'click') {
       e.preventDefault();
       Identity.logout().then(() => {
-        setIsLoggedIn(false);
-        setUser(null);
         window.location = e.target.href;
       });
     }

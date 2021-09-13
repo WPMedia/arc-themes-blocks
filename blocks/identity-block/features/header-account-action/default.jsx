@@ -111,7 +111,6 @@ const HeaderAccountAction = ({ customFields }) => {
             />
             <DropDownListButton
               onClick={handleLogout}
-              onKeyDown={handleLogout}
               type="button"
               text={phrases.t('identity-block.log-out')}
             />

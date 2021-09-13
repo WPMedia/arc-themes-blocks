@@ -2,12 +2,9 @@
   display: flex;
 }
 
-.xpmedia-subs-header--logged-out-header {
-  display: flex;
-}
-
 // hide a tag links button for mobile
-.xpmedia-subs-header--desktop-logged-out-header {
+.xpmedia-subs-header--desktop-header {
+  display: flex;
   // uses a tags
   > a {
     // should be 16px between buttons
@@ -19,7 +16,7 @@
   }
 }
 
-.xpmedia-subs-header--mobile-logged-out-header {
+.xpmedia-subs-header--mobile-header {
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     display: none;
   }

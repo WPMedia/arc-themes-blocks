@@ -6,38 +6,9 @@ import getTranslatedPhrases from 'fusion:intl';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import useIdentity from '../../components/Identity';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
-
-import './styles.scss';
-
-function validatePasswordRegex(
-  pwLowercase,
-  pwMinLength,
-  pwPwNumbers,
-  pwSpecialCharacters,
-  pwUppercase,
-) {
-  return `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\\d@$!%*?&]{${pwMinLength},}$`;
-}
-
-function showPasswordValidationMessage(
-  pwLowercase,
-  pwMinLength,
-  pwPwNumbers,
-  pwSpecialCharacters,
-  pwUppercase,
-  phrases,
-) {
-  // only show requirement if greater than 0 integer
-  // adds space in the beginning if requirement is shown
-  const lowercaseRequirementText = pwLowercase > 0 ? ` ${phrases.t('identity-block.password-requirements-lowercase', { requirementCount: pwLowercase })}` : '';
-  const charactersRequirementText = pwMinLength > 0 ? ` ${phrases.t('identity-block.password-requirements-characters', { requirementCount: pwMinLength })}` : '';
-  const numbersRequirementText = pwPwNumbers > 0 ? ` ${phrases.t('identity-block.password-requirements-numbers', { requirementCount: pwPwNumbers })}` : '';
-  const specialRequirementText = pwSpecialCharacters > 0 ? ` ${phrases.t('identity-block.password-requirements-special', { requirementCount: pwSpecialCharacters })}` : '';
-  const uppercaseRequirementText = pwUppercase > 0 ? ` ${phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase })}` : '';
-
-  // Show basic password requirement first no matter what presumably
-  return `${phrases.t('identity-block.password-requirements')}${lowercaseRequirementText}${charactersRequirementText}${numbersRequirementText}${specialRequirementText}${uppercaseRequirementText}`;
-}
+import FormPasswordConfirm from '../../components/FormPasswordConfirm';
+import validatePasswordPattern from '../../utils/validate-password-pattern';
+import passwordValidationMessage from '../../utils/password-validation-message';
 
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
@@ -47,8 +18,6 @@ const SignUp = ({ customFields, arcSite }) => {
 
   const { Identity, isInitialized } = useIdentity();
 
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
   const [passwordRequirements, setPasswordRequirements] = useState({
     status: 'initial',
   });
@@ -102,57 +71,67 @@ const SignUp = ({ customFields, arcSite }) => {
     status,
   } = passwordRequirements;
 
-  const passwordValidationMessage = showPasswordValidationMessage(
-    pwLowercase,
-    pwMinLength,
-    pwPwNumbers,
-    pwSpecialCharacters,
-    pwUppercase,
-    phrases,
-  );
+  const passwordErrorMessage = passwordValidationMessage({
+    defaultMessage: phrases.t('identity-block.password-requirements'),
+    options: {
+      lowercase: {
+        value: pwLowercase,
+        message: phrases.t('identity-block.password-requirements-lowercase', { requirementCount: pwLowercase }),
+      },
+      minLength: {
+        value: pwMinLength,
+        message: phrases.t('identity-block.password-requirements-characters', { requirementCount: pwMinLength }),
+      },
+      uppercase: {
+        value: pwUppercase,
+        message: phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase }),
+      },
+      numbers: {
+        value: pwPwNumbers,
+        message: phrases.t('identity-block.password-requirements-numbers', { requirementCount: pwPwNumbers }),
+      },
+      specialCharacters: {
+        value: pwSpecialCharacters,
+        message: phrases.t('identity-block.password-requirements-uppercase', { requirementCount: pwUppercase }),
+      },
+    },
+  });
 
   return (
     <HeadlinedSubmitForm
       headline={phrases.t('identity-block.sign-up')}
       buttonLabel={phrases.t('identity-block.sign-up')}
-      onSubmit={(e) => {
-        e.preventDefault();
-        return Identity.signUp({
-          userName: email,
-          credentials: password,
-        }, {
-          email,
-        })
-          .then(() => { window.location = redirectURL; })
-          .catch(() => setError('Something went wrong'));
-      }}
+      onSubmit={({ email, password }) => Identity.signUp({
+        userName: email,
+        credentials: password,
+      }, {
+        email,
+      })
+        .then(() => { window.location = redirectURL; })
+        .catch(() => setError(phrases.t('identity-block.sign-up-form-error')))}
       formErrorText={error}
     >
       <FormInputField
         label={phrases.t('identity-block.email')}
         name="email"
-        // onChange({ value: event.target.value });
-        onChange={(inputObject) => setEmail(inputObject.value)}
         required
         showDefaultError={false}
         type={FIELD_TYPES.EMAIL}
         validationErrorMessage={phrases.t('identity-block.email-requirements')}
       />
-      <FormInputField
-        label={phrases.t('identity-block.password')}
+      <FormPasswordConfirm
         name="password"
-        onChange={(inputObject) => setPassword(inputObject.value)}
-        required
-        showDefaultError={false}
-        type={FIELD_TYPES.PASSWORD}
-        validationErrorMessage={status === 'success' ? passwordValidationMessage : ''}
-        validationPattern={validatePasswordRegex(
+        label={phrases.t('identity-block.password')}
+        validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
+        validationPattern={validatePasswordPattern(
           pwLowercase,
           pwMinLength,
           pwPwNumbers,
           pwSpecialCharacters,
           pwUppercase,
         )}
+        confirmLabel={phrases.t('identity-block.confirm-password')}
+        confirmValidationErrorMessage={phrases.t('identity-block.confirm-password-error')}
       />
     </HeadlinedSubmitForm>
   );

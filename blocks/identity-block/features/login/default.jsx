@@ -9,8 +9,6 @@ import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import useIdentity from '../../components/Identity';
 
-import './styles.scss';
-
 const Login = ({ customFields }) => {
   let { redirectURL } = customFields;
   const {

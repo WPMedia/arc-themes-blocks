@@ -45,7 +45,7 @@ describe('Subscriptions HeaderAccountAction', () => {
     />);
 
     expect(wrapper.html()).not.toBe(null);
-    expect(wrapper.find('div.xpmedia-subs-header--desktop-logged-out-header')).toHaveLength(1);
+    expect(wrapper.find('div.xpmedia-subs-header--desktop-header')).toHaveLength(1);
   });
 
   it('toggles the submenu when clicking on the mobile header button', () => {
@@ -61,10 +61,10 @@ describe('Subscriptions HeaderAccountAction', () => {
       />,
     );
 
-    wrapper.find('.xpmedia-subs-header--mobile-logged-out-header button').simulate('click');
+    wrapper.find('.xpmedia-subs-header--mobile-header button').simulate('click');
     expect(wrapper.find('.xpmedia-subs-header-dropdown--open').length).toBe(1);
 
-    wrapper.find('.xpmedia-subs-header--mobile-logged-out-header button').simulate('click');
+    wrapper.find('.xpmedia-subs-header--mobile-header button').simulate('click');
     expect(wrapper.find('.xpmedia-subs-header-dropdown--open').length).toBe(0);
   });
 });

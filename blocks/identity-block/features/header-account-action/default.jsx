@@ -12,7 +12,12 @@ import DropDownLinkListItem from './_children/DropDownLinkListItem';
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
-  const { loginURL, createAccountURL } = customFields;
+  const {
+    createAccountURL,
+    loginURL,
+    logoutURL,
+    manageAccountURL,
+  } = customFields;
   const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
@@ -51,8 +56,13 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  const handleLogout = () => {
-    Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
+  const handleLogout = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      e.preventDefault();
+      Identity.logout().then(() => {
+        window.location = e.target.href;
+      });
+    }
   };
 
   if (!isInitialized) {
@@ -66,9 +76,48 @@ const HeaderAccountAction = ({ customFields }) => {
 
   if (user && !error) {
     return (
-      <div className="xpmedia-subs-header">
-        <p>{user.displayName}</p>
-        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">Log Out</button>
+      <div className="xpmedia-subs-header--header">
+        <div className="xpmedia-subs-header--desktop-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+            iconType="user"
+            secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.account')}
+            type="button"
+          />
+        </div>
+        <div className="xpmedia-subs-header--mobile-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonType={BUTTON_TYPES.ICON_ONLY}
+            iconType="user"
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.login-options')}
+            type="button"
+          />
+        </div>
+        {isAccountMenuOpen && (
+          <ul className="xpmedia-subs-header-dropdown--open">
+            <DropDownLinkListItem
+              href={manageAccountURL}
+              text={phrases.t('identity-block.manage-account')}
+            />
+            <DropDownLinkListItem
+              href={logoutURL}
+              onClick={handleLogout}
+              onKeyUp={handleLogout}
+              text={phrases.t('identity-block.log-out')}
+            />
+          </ul>
+        )}
       </div>
     );
   }
@@ -76,7 +125,7 @@ const HeaderAccountAction = ({ customFields }) => {
   // What do we want to happen if there is an error?
   return (
     <>
-      <div className="xpmedia-subs-header--desktop-logged-out-header">
+      <div className="xpmedia-subs-header--desktop-header">
         {createAccountURL ? (
           <Button
             // should be an a tag if it's a link
@@ -101,7 +150,7 @@ const HeaderAccountAction = ({ customFields }) => {
           />
         ) : null}
       </div>
-      <div className="xpmedia-subs-header--mobile-logged-out-header">
+      <div className="xpmedia-subs-header--mobile-header">
         <Button
           // should be button if toggleable
           as="button"
@@ -149,6 +198,14 @@ HeaderAccountAction.propTypes = {
     createAccountURL: PropTypes.string.tag({
       defaultValue: '/account/signup/',
       label: 'Sign Up URL',
+    }),
+    logoutURL: PropTypes.string.tag({
+      defaultValue: '/account/logout/',
+      label: 'Log Out URL',
+    }),
+    manageAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/',
+      label: 'Manage Account URL',
     }),
   }),
 };

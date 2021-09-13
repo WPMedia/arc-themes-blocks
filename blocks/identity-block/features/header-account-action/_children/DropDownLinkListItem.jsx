@@ -14,8 +14,12 @@ const StyledLinkWithHover = styled.a`
   }
 `;
 
-function DropDownLinkListItem({ text, href }) {
+function DropDownLinkListItem(props) {
   const { arcSite } = useFusionContext();
+  const {
+    text,
+    href,
+  } = props;
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
   const font = getThemeStyle(arcSite)['primary-font-family'];
 
@@ -28,6 +32,7 @@ function DropDownLinkListItem({ text, href }) {
         href={href}
         primaryColor={primaryColor}
         font={font}
+        {...props}
       >
         {text}
       </StyledLinkWithHover>

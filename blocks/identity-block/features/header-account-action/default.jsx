@@ -57,10 +57,12 @@ const HeaderAccountAction = ({ customFields }) => {
   }, [Identity, loggedIn]);
 
   const handleLogout = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.type === 'click') {
+      e.preventDefault();
       Identity.logout().then(() => {
         setIsLoggedIn(false);
         setUser(null);
+        window.location = e.target.href;
       });
     }
   };

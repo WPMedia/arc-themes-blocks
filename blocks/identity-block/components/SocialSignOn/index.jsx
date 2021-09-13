@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useIdentity from '../Identity';
 
@@ -6,6 +6,10 @@ const SocialSignOn = ({
 
 }) => {
   const { Identity } = useIdentity();
+  const config = Identity?.configOptions ?? {};
+
+  const [ isGoogleInitialized, setIsGoogleInitialized ] = useState(false);
+  const [ isFacebookInitialized, setIsFacebookInitialized ] = useState(false);
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -16,11 +20,18 @@ const SocialSignOn = ({
     }
   }, [Identity]);
 
+  useEffect(() => {
+    const initializeGoogle = async () => {
+      await Identity.initGoogleLogin(null, {});
+    };
+    if (config.googleClientId && !isGoogleInitialized) {
+      initializeGoogle();
+    }
+  }, [config.googleClientId, isGoogleInitialized]);
+
   if (!Identity) {
     return null;
   }
-
-  const config = Identity.configOptions ? Identity.configOptions : {};
 
   if (!config.facebookAppId && !config.googleClientId) {
     return null;
@@ -30,7 +41,7 @@ const SocialSignOn = ({
   return (
     <section>
       {
-        config.googleClientId ? (<div>google button</div>) : null
+        config.googleClientId ? <div id="google-sign-in-button" /> : null
       }
       {
         config.facebookAppId ? (<div>facebook button </div>) : null

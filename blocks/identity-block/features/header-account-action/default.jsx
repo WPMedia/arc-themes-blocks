@@ -8,6 +8,7 @@ import {
 } from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
+import DropDownListButton from './_children/DropDownListButton';
 
 import './styles.scss';
 
@@ -56,13 +57,11 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  const handleLogout = (e) => {
-    if (e.key === 'Enter') {
-      Identity.logout().then(() => {
-        setIsLoggedIn(false);
-        setUser(null);
-      });
-    }
+  const handleLogout = () => {
+    Identity.logout().then(() => {
+      // set location to logoutURL
+      window.location.href = logoutURL;
+    });
   };
 
   if (!isInitialized) {
@@ -110,10 +109,10 @@ const HeaderAccountAction = ({ customFields }) => {
               href={manageAccountURL}
               text={phrases.t('identity-block.manage-account')}
             />
-            <DropDownLinkListItem
-              href={logoutURL}
+            <DropDownListButton
               onClick={handleLogout}
               onKeyDown={handleLogout}
+              type="button"
               text={phrases.t('identity-block.log-out')}
             />
           </ul>

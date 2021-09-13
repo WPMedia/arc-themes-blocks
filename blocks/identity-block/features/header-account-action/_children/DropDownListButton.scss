@@ -1,0 +1,17 @@
+.xpmedia-subs-header-dropdown-list-item-button {
+  // undo button styles
+  background: none;
+  border: none;
+  padding: 0;
+
+  font-size: calculateRem(14px);
+
+  &:hover {
+    // darkens all nested elements on hover
+    // see css filter docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+    filter: brightness(0.85);
+
+    // add text decoration
+    text-decoration: underline;
+  }
+}

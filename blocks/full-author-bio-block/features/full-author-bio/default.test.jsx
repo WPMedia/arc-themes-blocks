@@ -56,7 +56,6 @@ jest.mock('fusion:context', () => ({
           longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
           slug: 'jane-doe',
           instagram: 'janedoe',
-          linkedin: '',
           native_app_rendering: false,
           fuzzy_match: false,
           contributor: false,

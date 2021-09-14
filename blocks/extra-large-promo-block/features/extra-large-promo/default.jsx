@@ -16,7 +16,6 @@ const ExtraLargePromoItem = ({ customFields, arcSite }) => {
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? {
-        'arc-site': arcSite,
         feature: 'extra-large-promo',
         ...customFields.itemContentConfig.contentConfigValues,
       }

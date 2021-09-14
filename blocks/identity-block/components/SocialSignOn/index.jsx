@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import useIdentity from '../Identity';
 
-const SocialSignOn = ({
-
-}) => {
+const SocialSignOn = ({}) => {
   const { Identity } = useIdentity();
   const config = Identity?.configOptions ?? {};
 
@@ -22,10 +20,16 @@ const SocialSignOn = ({
 
   useEffect(() => {
     const initializeGoogle = async () => {
-      await Identity.initGoogleLogin(null, {});
+      await Identity.initGoogleLogin(null, {
+        width: 500,
+        height: 32,
+        onSuccess: console.log,
+        onFailure: console.log
+      });
     };
     if (config.googleClientId && !isGoogleInitialized) {
       initializeGoogle();
+      setIsGoogleInitialized(true);
     }
   }, [config.googleClientId, isGoogleInitialized]);
 
@@ -37,7 +41,6 @@ const SocialSignOn = ({
     return null;
   }
 
-  console.log('config opts', Identity.configOptions);
   return (
     <section>
       {

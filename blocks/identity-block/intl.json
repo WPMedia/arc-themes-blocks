@@ -207,5 +207,16 @@
 		"no": "There's been an error creating your account",
 		"pt": "There's been an error creating your account",
 		"sv": "There's been an error creating your account"
+	},
+	"identity-block.login-form-error": {
+		"de": "There's been an error logging you in",
+		"en": "There's been an error logging you in",
+		"es": "There's been an error logging you in",
+		"fr": "There's been an error logging you in",
+		"ja": "There's been an error logging you in",
+		"ko": "There's been an error logging you in",
+		"no": "There's been an error logging you in",
+		"pt": "There's been an error logging you in",
+		"sv": "There's been an error logging you in"
 	}
 }

@@ -122,6 +122,7 @@
     "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
     "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
     "identity-block.email-requirements": "Please enter a valid email address",
-    "identity-block.sign-up-form-error": "There's been an error creating your account"
+    "identity-block.sign-up-form-error": "There's been an error creating your account",
+    "identity-block.login-form-error": "There's been an error logging you in"
   }
 }

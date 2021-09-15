@@ -84,4 +84,11 @@ describe('Validate Password', () => {
     expect(pattern.test('ABC123!')).toBe(false);
     expect(pattern.test('')).toBe(false);
   });
+  it('passes non-sequentially 2 character-long amount', () => {
+    const pattern = new RegExp(validatePasswordPattern(0, 2, 0, 0, 0));
+
+    expect(pattern.test('f f')).toBe(true);
+
+    expect(pattern.test('')).toBe(false);
+  });
 });

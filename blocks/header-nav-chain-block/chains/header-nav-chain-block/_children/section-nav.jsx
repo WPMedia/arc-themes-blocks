@@ -3,6 +3,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { ChevronRightIcon } from '@wpmedia/engine-theme-sdk';
+import styled from 'styled-components';
 import Link from './link';
 
 function hasChildren(node) { return node.children && node.children.length > 0; }
@@ -42,6 +43,11 @@ const isSamePath = (current, menuLink) => {
   }
   return false;
 };
+
+// $top-nav-stylistic-margin is the 13px variable in scss
+const StyledSectionMenuVariableHeight = styled.ul`
+  height: calc(100vh - ${(props) => props.navHeight}px - 13px);
+`;
 
 /* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 // Disabled a11y eslint is valid here as the div isn't focusable
@@ -113,15 +119,18 @@ const SubSectionMenu = ({
   );
 };
 
-export default ({ children = [], sections = [], isHidden = false }) => {
+export default ({
+  children = [], sections = [], isHidden = false, navHeight,
+}) => {
   const active = sections.filter((s) => !s.inactive);
 
   return (
     <>
       {children}
-      <ul className="section-menu">
+      <StyledSectionMenuVariableHeight navHeight={navHeight} className="section-menu">
         {active.map((item) => <SectionItem key={item._id} item={item} isHidden={isHidden} />)}
-      </ul>
+        <li className="section-menu--bottom-placeholder" />
+      </StyledSectionMenuVariableHeight>
     </>
   );
 };

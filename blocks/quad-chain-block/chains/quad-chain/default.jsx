@@ -58,6 +58,8 @@ const QuadChain = ({ children, customFields }) => {
 
 QuadChain.label = 'Quad Chain – Arc Block';
 
+QuadChain.icon = 'arc-quad-chain';
+
 QuadChain.propTypes = {
   children: PropTypes.array,
   customFields: PropTypes.shape({

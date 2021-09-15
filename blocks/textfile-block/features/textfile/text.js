@@ -9,6 +9,8 @@ const Textfile = ({ customFields }) => {
 
 Textfile.label = 'Text File – Arc Block';
 
+Textfile.icon = 'notes-paper-text';
+
 Textfile.propTypes = {
   customFields: PropTypes.shape({
     // eslint-disable-next-line react/no-typos

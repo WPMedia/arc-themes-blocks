@@ -15,5 +15,7 @@ const HeadlineContainer = () => {
 
 HeadlineContainer.label = 'Headline – Arc Block';
 
+HeadlineContainer.icon = 'arc-headline';
+
 // maintain default export of container
 export default HeadlineContainer;

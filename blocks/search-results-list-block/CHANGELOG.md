@@ -5,10 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/search-results-list-block@5.15.0...@wpmedia/search-results-list-block@5.16.0) (2021-08-18)
 
-
-
 ## 5.14.1 (2021-07-21)
-
 
 
 ## 5.11.1-hotfix.0 (2021-04-23)
@@ -31,11 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 5.9.4 (2021-01-14)
 
 
-
-
-
 # 5.15.0 (2021-08-18)
-
 
 
 ## 5.14.1 (2021-07-21)

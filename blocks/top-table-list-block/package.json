@@ -22,6 +22,7 @@
     "directory": "blocks/top-table-list-block"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/resizer-image-block": "*",

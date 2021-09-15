@@ -5,33 +5,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-block@5.15.0...@wpmedia/header-nav-block@5.16.0) (2021-08-18)
 
-
-
 ## 5.14.1 (2021-07-21)
 
-
-
 ## 5.11.1-hotfix.0 (2021-04-23)
-
 
 ### Features
 
 * Factor out format url and rename import to engine theme sdk ([a753ed4](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a753ed4f42cfab6830b48a9b7bda4e719dfba562))
 
-
-
 ## 5.10.3-hotfix.0 (2021-04-12)
-
-
-
-
 
 # 5.15.0 (2021-08-18)
 
 
-
 ## 5.14.1 (2021-07-21)
-
 
 
 ## 5.11.1-hotfix.0 (2021-04-23)

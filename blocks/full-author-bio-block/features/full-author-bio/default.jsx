@@ -26,6 +26,7 @@ import {
 } from '@wpmedia/engine-theme-sdk';
 import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import './full-author-bio.scss';
+import '@wpmedia/shared-styles/scss/_author-bio.scss';
 
 const logos = {
   email: <EnvelopeIcon />,
@@ -44,14 +45,15 @@ const logos = {
   soundcloud: <SoundCloudIcon />,
 };
 
-const FullAuthorBioItem = () => {
-  const { globalContent: content, arcSite } = useFusionContext();
+export const FullAuthorBioPresentational = (props) => {
+  const { arcSite, content } = props;
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const socials = [];
   if (content.authors) {
     Object.keys(content.authors[0]).forEach((item) => {
+      // todo: check that the value found here is not an empty string
       if (Object.keys(logos).includes(item)) {
         socials.push(item);
       }
@@ -59,14 +61,9 @@ const FullAuthorBioItem = () => {
   }
 
   return (
-    !!(
-      content
-      && content.authors
-      && content.authors[0]
-    ) && (
-      <>
-        <div className="image-container">
-          {
+    <>
+      <div className="image-container">
+        {
             (content.authors[0].image) && (
               <Image
                 url={content.authors[0].image}
@@ -83,38 +80,38 @@ const FullAuthorBioItem = () => {
               />
             )
           }
-        </div>
-        <div>
-          <PrimaryFont
-            as="div"
-            className="author-content"
-          >
-            {
+      </div>
+      <div>
+        <PrimaryFont
+          as="div"
+          className="author-content"
+        >
+          {
               (content.authors[0].byline) ? (
                 <h1 className="author-name">{content.authors[0].byline}</h1>
               ) : null
             }
-            {
+          {
               (content.authors[0].role) ? (
                 <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
               ) : null
             }
-            {
+          {
               (content.authors[0].bio || content.authors[0].longBio) ? (
                 <SecondaryFont className="author-bio">
                   {content.authors[0].longBio || content.authors[0].bio}
                 </SecondaryFont>
               ) : null
             }
-          </PrimaryFont>
-        </div>
+        </PrimaryFont>
+      </div>
 
-        <div className="social-container">
-          <p className="connect-label">
-            <strong>{phrases.t('full-author-bio-block.connect-text')}</strong>
-          </p>
-          <div className="social-items">
-            {
+      <div className="social-container">
+        <p className="connect-label">
+          <strong>{phrases.t('full-author-bio-block.connect-text')}</strong>
+        </p>
+        <div className="social-items">
+          {
               socials.map((item) => (
                 <a
                   className={`social-column ${item}`}
@@ -126,9 +123,25 @@ const FullAuthorBioItem = () => {
                 </a>
               ))
             }
-          </div>
         </div>
-      </>
+      </div>
+    </>
+  );
+};
+
+const FullAuthorBioItem = () => {
+  const { globalContent: content, arcSite } = useFusionContext();
+
+  return (
+    !!(
+      content
+      && content.authors
+      && content.authors[0]
+    ) && (
+      <FullAuthorBioPresentational
+        arcSite={arcSite}
+        content={content}
+      />
     )
   );
 };
@@ -146,6 +159,8 @@ const FullAuthorBio = ({ customFields = {} }) => {
 };
 
 FullAuthorBio.label = 'FullAuthorBio – Arc Block';
+
+FullAuthorBio.icon = 'paragraph-image-right';
 
 FullAuthorBio.propTypes = {
   customFields: PropTypes.shape({

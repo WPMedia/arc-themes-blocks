@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import Consumer from 'fusion:consumer';
 import getThemeStyle from 'fusion:themes';
 import getProperties from 'fusion:properties';
@@ -226,6 +226,8 @@ class LeadArt extends Component {
 }
 
 LeadArt.label = 'Lead Art – Arc Block';
+
+LeadArt.icon = 'picture-landscape';
 
 LeadArt.defaultProps = {
   customFields: {

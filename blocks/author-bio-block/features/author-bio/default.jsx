@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getThemeStyle from 'fusion:themes';
 import getTranslatedPhrases from 'fusion:intl';
@@ -29,6 +29,7 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import getProperties from 'fusion:properties';
 
 import './author-bio.scss';
+import '@wpmedia/shared-styles/scss/_author-bio.scss';
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
@@ -60,8 +61,15 @@ const renderAuthorInfo = (author, arcSite) => {
   );
 };
 
-const AuthorBioItems = () => {
+const AuthorBioItemsContainer = () => {
   const { globalContent: content, arcSite } = useFusionContext();
+
+  return (
+    <AuthorBioItems arcSite={arcSite} content={content} />
+  );
+};
+
+export const AuthorBioItems = ({ arcSite, content }) => {
   const {
     locale = 'en',
   } = getProperties(arcSite);
@@ -258,12 +266,14 @@ const AuthorBio = ({ customFields = {} }) => {
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <AuthorBioItems customFields={{ ...customFields }} />
+      <AuthorBioItemsContainer />
     </LazyLoad>
   );
 };
 
 AuthorBio.label = 'Short Author Bio – Arc Block';
+
+AuthorBio.icon = 'paragraph-normal';
 
 AuthorBio.propTypes = {
   customFields: PropTypes.shape({

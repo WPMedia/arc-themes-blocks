@@ -133,4 +133,6 @@ SmallPromo.propTypes = {
 
 SmallPromo.label = 'Small Promo – Arc Block';
 
+SmallPromo.icon = 'paragraph-bullets';
+
 export default SmallPromo;

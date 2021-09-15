@@ -91,4 +91,10 @@ describe('Validate Password', () => {
 
     expect(pattern.test('')).toBe(false);
   });
+  it('passes on complicated two character-long non-sequential requirements', () => {
+    const pattern = new RegExp(validatePasswordPattern(2, 12, 2, 2, 2));
+
+    expect(pattern.test('Abc123!Abc123!')).toBe(true);
+    expect(pattern.test('ffff')).toBe(false);
+  });
 });

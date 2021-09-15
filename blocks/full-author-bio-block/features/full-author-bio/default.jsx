@@ -28,6 +28,25 @@ import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import './full-author-bio.scss';
 import '@wpmedia/shared-styles/scss/_author-bio.scss';
 
+// update constants if update available icons
+const SUPPORTED_SOCIALS_KEYS = [
+  'email',
+  'twitter',
+  'facebook',
+  'instagram',
+  'rss',
+  'linkedin',
+  'reddit',
+  'youtube',
+  'medium',
+  'tumblr',
+  'pinterest',
+  'snapchat',
+  'whatsapp',
+  'soundcloud',
+];
+
+// update constants above if update new components
 const logos = {
   email: <EnvelopeIcon />,
   twitter: <TwitterIcon />,
@@ -52,10 +71,22 @@ export const FullAuthorBioPresentational = (props) => {
 
   const socials = [];
   if (content.authors) {
-    Object.keys(content.authors[0]).forEach((item) => {
-      // todo: check that the value found here is not an empty string
-      if (Object.keys(logos).includes(item)) {
-        socials.push(item);
+    // get keys and values author object
+    /*
+      // don't render non social key and value
+      longBio: 'Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ',
+
+      // render social key with a truthy value
+      instagram: 'janedoe',
+      rss: 'someusername',
+
+      // don't render social key with a falsy value
+      linkedin: '',
+      twitter: null,
+    */
+    Object.entries(content.authors[0]).forEach(([socialMediaNameKey, socialMediaValue]) => {
+      if (SUPPORTED_SOCIALS_KEYS.includes(socialMediaNameKey) && socialMediaValue) {
+        socials.push(socialMediaNameKey);
       }
     });
   }

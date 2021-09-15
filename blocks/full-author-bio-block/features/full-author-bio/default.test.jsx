@@ -273,3 +273,56 @@ describe('the full author bio block', () => {
     });
   });
 });
+
+describe('when there are falsy values as social media links', () => {
+  it('should not render null value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            twitter: null,
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
+  });
+  it('should not render empty string value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            twitter: '',
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
+  });
+  it('should not render if no key social value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
+  });
+});

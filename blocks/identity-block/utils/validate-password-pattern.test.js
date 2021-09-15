@@ -108,4 +108,11 @@ describe('Validate Password', () => {
     expect(pattern.test('Abc123!Abc123!')).toBe(true);
     expect(pattern.test('ffff')).toBe(false);
   });
+  it('Takes matching special characters', () => {
+    const pattern = new RegExp(validatePasswordPattern(0, 1, 0, 7, 0));
+
+    expect(pattern.test('@$!%*?&')).toBe(true);
+    expect(pattern.test('---------')).toBe(false);
+    expect(pattern.test('^^^^^^^^^^^^^^^^^^^^^^^')).toBe(false);
+  });
 });

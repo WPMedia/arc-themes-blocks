@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/date-block@5.15.0...@wpmedia/date-block@5.16.0) (2021-09-15)
+
+
+### Features
+
+* Use valid datetime on time element ([9ff926d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9ff926d459bb599d497a15de70a0e6f1c3db36be))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

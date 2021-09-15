@@ -208,6 +208,12 @@ describe('the full author bio block', () => {
 
         expect(wrapper.find('.rss')).toHaveLength(1);
       });
+      it('should render noreferrer and new tab with link', () => {
+        const wrapper = mount(<FullAuthorBio />);
+
+        expect(wrapper.find('.rss').props().rel).toEqual('noopener noreferrer');
+        expect(wrapper.find('.rss').props().target).toEqual('_blank');
+      });
     });
 
     describe('when the twitter link is not present', () => {

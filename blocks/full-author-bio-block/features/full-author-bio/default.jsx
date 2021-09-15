@@ -146,8 +146,10 @@ export const FullAuthorBioPresentational = (props) => {
               socials.map((item) => (
                 <a
                   className={`social-column ${item}`}
-                  key={item}
                   href={constructSocialURL(item, content.authors[0][item])}
+                  key={item}
+                  rel="noopener noreferrer"
+                  target="_blank"
                   title={phrases.t(`full-author-bio-block.social-${item.toLowerCase()}`)}
                 >
                   {logos[item]}

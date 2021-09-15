@@ -4,6 +4,6 @@ const validatePasswordPattern = (
   pwPwNumbers,
   pwSpecialCharacters,
   pwUppercase,
-) => `^(?=.*[a-z]{${pwLowercase},})(?=.*[A-Z]{${pwUppercase},})(?=.*\\d{${pwPwNumbers},})(?=.*[@$!%*?&]{${pwSpecialCharacters},})[A-Za-z\\d@$!%*?&]{${pwMinLength},}`;
+) => `^(?=(?:.*[a-z]){${pwLowercase},})(?=(?:.*[A-Z]){${pwUppercase},})(?=(?:.*\\d){${pwPwNumbers},})(?=(?:.*[@$!%*?&]){${pwSpecialCharacters},})[A-Za-z\\d@$!%*?&]{${pwMinLength},}`;
 
 export default validatePasswordPattern;

@@ -36,10 +36,46 @@ describe('Validate Password', () => {
     expect(pattern.test('')).toBe(false);
   });
 
-  it('length 12, at least 1 lowercase and 1 uppercase', () => {
-    const pattern = new RegExp(validatePasswordPattern(1, 12, 0, 0, 1));
+  it('length 12, at least non-sequentially 2 lowercase, 1 uppercase', () => {
+    const pattern = new RegExp(validatePasswordPattern(2, 12, 0, 0, 1));
 
-    expect(pattern.test('aBCDEFABCDEF')).toBe(true);
+    expect(pattern.test('aBCDEFABCDEFa')).toBe(true);
+
+    expect(pattern.test('ABCDEFABCDEF')).toBe(false);
+    expect(pattern.test('Abc123!')).toBe(false);
+    expect(pattern.test('abc123')).toBe(false);
+    expect(pattern.test('abc123!')).toBe(false);
+    expect(pattern.test('ABC123!')).toBe(false);
+    expect(pattern.test('')).toBe(false);
+  });
+  it('length 12, at least 1 lowercase, non-sequentially 2 uppercase', () => {
+    const pattern = new RegExp(validatePasswordPattern(1, 12, 0, 0, 2));
+
+    expect(pattern.test('BaaaaaaaaaaaaaaaaaaB')).toBe(true);
+
+    expect(pattern.test('ABCDEFABCDEF')).toBe(false);
+    expect(pattern.test('Abc123!')).toBe(false);
+    expect(pattern.test('abc123')).toBe(false);
+    expect(pattern.test('abc123!')).toBe(false);
+    expect(pattern.test('ABC123!')).toBe(false);
+    expect(pattern.test('')).toBe(false);
+  });
+  it('length 12 at least non-sequentially 2 digits, 1 lowercase', () => {
+    const pattern = new RegExp(validatePasswordPattern(1, 12, 2, 0, 0));
+
+    expect(pattern.test('1aaaaaaaaaaaaaaaaaa1')).toBe(true);
+
+    expect(pattern.test('ABCDEFABCDEF')).toBe(false);
+    expect(pattern.test('Abc123!')).toBe(false);
+    expect(pattern.test('abc123')).toBe(false);
+    expect(pattern.test('abc123!')).toBe(false);
+    expect(pattern.test('ABC123!')).toBe(false);
+    expect(pattern.test('')).toBe(false);
+  });
+  it('length 12 at least non-sequentially 2 special characters, 1 lowercase', () => {
+    const pattern = new RegExp(validatePasswordPattern(1, 12, 0, 2, 0));
+
+    expect(pattern.test('!aaaaaaaaaaaaaaaaa&')).toBe(true);
 
     expect(pattern.test('ABCDEFABCDEF')).toBe(false);
     expect(pattern.test('Abc123!')).toBe(false);

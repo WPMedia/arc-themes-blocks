@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/card-list-block@5.15.0...@wpmedia/card-list-block@5.16.0) (2021-09-15)
+
+
+### Bug Fixes
+
+* Update height to match incoming image ([351b48b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/351b48b4c1e2b6b20e48360fbe0e66c3df1f7776))
+
+
+### Features
+
+* Remove unused widths and heights of image ([1efcffa](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1efcffad3157ef269cccd4759128fcf00b277baf))
+
+
+### Performance Improvements
+
+* Remove hr divider ([0795e35](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0795e353a26422cc59d264fd7bd9abc6db9747ec))
+* Remove unnecessary div wrapper ([4c40f7f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4c40f7f626e3b6f4c7d94f5ba019d9deb92c00f4))
+* Remove unnecessary npmignore ([a9c823a](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a9c823aade988af815a1f8a65be97bc219be978d))
+* This image can't get any bigger with css ... ([94945c0](https://github.com/WPMedia/fusion-news-theme-blocks/commit/94945c0458d2e2906529cbf31ab7d404f2d4dc60))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+### Performance Improvements
+
+* Ignore test files in features folder ([b2a344f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b2a344f96d92b63d25658ab70ec9ec63633fcf6f))
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
+
+
+### Reverts
+
+* Revert "adding update package files" ([b9c1808](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b9c1808b609ec5adc63e176873df14db95444df3))
+
+
+
+# 5.9.0-canary.0 (2020-10-14)
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

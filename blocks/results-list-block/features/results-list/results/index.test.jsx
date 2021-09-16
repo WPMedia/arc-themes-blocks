@@ -557,6 +557,8 @@ describe('unknown service', () => {
           feature: 'results-list',
           defaultOffset: 0,
           defaultSize: 1,
+          offset: 0,
+          size: 2,
         },
       }),
     );

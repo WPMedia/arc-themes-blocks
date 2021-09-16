@@ -158,12 +158,20 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
             </li>
           )) : [];
 
+          if (columnItems.length === 0) {
+            return null;
+          }
+
           return (
             <div
               className="footer-section col-sm-12 col-md-6 col-lg-xl-3"
               key={column._id}
             >
-              <PrimaryFont as="h4" className="footer-header">{(column.name) ? column.name : ''}</PrimaryFont>
+              {
+                (column.name) ? (
+                  <PrimaryFont as="h4" className="footer-header">{column.name}</PrimaryFont>
+                ) : null
+              }
               <PrimaryFont as="ul">{columnItems}</PrimaryFont>
             </div>
           );

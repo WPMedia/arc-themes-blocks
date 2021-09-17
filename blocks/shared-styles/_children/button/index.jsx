@@ -14,6 +14,8 @@ export const BUTTON_STYLES = {
   OUTLINED: 'OUTLINED',
   WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
   OUTLINED_GREY: 'OUTLINED_GREY',
+  SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
+  SECONDARY_OUTLINE_REVERSE: 'SECONDARY_OUTLINE_REVERSE',
 };
 
 export const BUTTON_SIZES = {
@@ -35,7 +37,22 @@ const iconTypeStringToIconTypeComponent = (
   let Icon = null;
 
   // use white if primary color is being used
-  const iconColor = buttonStyle === BUTTON_STYLES.FILLED ? '#fff' : primaryColor;
+  let iconColor = primaryColor;
+
+  switch (buttonStyle) {
+    case BUTTON_STYLES.FILLED:
+    case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
+      iconColor = '#fff';
+      break;
+    case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
+      iconColor = primaryColor;
+      break;
+    case BUTTON_STYLES.SECONDARY_OUTLINE:
+      iconColor = '#191919';
+      break;
+    default:
+      iconColor = primaryColor;
+  }
 
   if (iconTypeString) {
     switch (iconTypeString) {
@@ -121,6 +138,28 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 
           &:hover {
             color: #ffffff;
+          }
+        `;
+      case BUTTON_STYLES.SECONDARY_OUTLINE:
+        // istanbul ignore next
+        return `
+          background-color: transparent;
+          border-color: #dadada;
+          color: #191919;
+
+          &:hover {
+            color: #191919;
+          }
+        `;
+      case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
+        // istanbul ignore next
+        return `
+          background-color: transparent;
+          border-color: #fff;
+          color: #fff;
+
+          &:hover {
+            color: #fff;
           }
         `;
       case BUTTON_STYLES.FILLED:

@@ -9,6 +9,7 @@ export default {
   },
 };
 
+// start primary filled
 export const PrimaryFilledLabel = () => (
   <Button
     buttonStyle={BUTTON_STYLES.FILLED}
@@ -44,16 +45,127 @@ export const PrimaryFilledDualIcon = () => (
     secondaryIconType="chevron-up"
   />
 );
+// end primary filled
+
+// start primary filled reverse
+export const PrimaryFilledReverseLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const PrimaryFilledReverseIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
+    text="Sign up"
+  />
+);
+
+export const PrimaryFilledReverseIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const PrimaryFilledReverseDualIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    iconType="user"
+    text="Sign up"
+    secondaryIconType="chevron-up"
+  />
+);
+// end primary filled reverse
+
+// start secondary outline
+export const SecondaryOutlineLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const SecondaryOutlineIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
+    text="Sign up"
+  />
+);
+
+export const SecondaryOutlineIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const SecondaryOutlineDualIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    iconType="user"
+    text="Sign up"
+    secondaryIconType="chevron-up"
+  />
+);
+// end secondary outline
+
+// start secondary outline reverse
+export const SecondaryOutlineReverseLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const SecondaryOutlineReverseIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
+    text="Sign up"
+  />
+);
+
+export const SecondaryOutlineReverseIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const SecondaryOutlineReverseDualIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    iconType="user"
+    text="Sign up"
+    secondaryIconType="chevron-up"
+  />
+);
+// end secondary outline reverse
 
 export const Outlined = () => (
   <Button
     buttonStyle={BUTTON_STYLES.OUTLINED}
     text="Sign up"
   />
-);
-
-export const WhiteBackgroundFilled = () => (
-  <Button buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED} text="Sign up" />
 );
 
 export const OutlineSmall = () => (

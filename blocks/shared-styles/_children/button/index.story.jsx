@@ -9,12 +9,47 @@ export default {
   },
 };
 
-export const Filled = () => (
-  <Button buttonStyle={BUTTON_STYLES.FILLED} text="Sign up" />
+export const PrimaryFilledLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonTypes={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const PrimaryFilledIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
+    text="Sign up"
+  />
+);
+
+export const PrimaryFilledIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const PrimaryFilledDualIcon = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    iconType="user"
+    text="Sign up"
+    secondaryIconType="chevron-up"
+  />
 );
 
 export const Outlined = () => (
-  <Button buttonStyle={BUTTON_STYLES.OUTLINED} text="Sign up" />
+  <Button
+    buttonStyle={BUTTON_STYLES.OUTLINED}
+    text="Sign up"
+  />
 );
 
 export const WhiteBackgroundFilled = () => (

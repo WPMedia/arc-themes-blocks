@@ -29,8 +29,13 @@ export const BUTTON_TYPES = {
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
 };
 
-const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, primaryColor) => {
+const iconTypeStringToIconTypeComponent = (
+  iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
+) => {
   let Icon = null;
+
+  // use white if primary color is being used
+  const iconColor = buttonStyle === BUTTON_STYLES.FILLED ? '#fff' : primaryColor;
 
   if (iconTypeString) {
     switch (iconTypeString) {
@@ -41,7 +46,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <UserIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -50,7 +55,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <ChevronUpIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -59,7 +64,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <ChevronDownIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -219,11 +224,13 @@ function Button(props) {
     iconType,
     iconHeightWidth,
     primaryColor,
+    buttonStyle,
   );
   const SecondaryIcon = iconTypeStringToIconTypeComponent(
     secondaryIconType,
     iconHeightWidth,
     primaryColor,
+    buttonStyle,
   );
 
   return (

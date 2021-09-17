@@ -14,6 +14,10 @@ export const parameters = {
         value: "#ffffff",
       },
       {
+        name: "grey",
+        value: "grey",
+      },
+      {
         name: "primary",
         value: "rgb(255, 105, 180)",
       }

@@ -36,7 +36,6 @@ const iconTypeStringToIconTypeComponent = (
 ) => {
   let Icon = null;
 
-  // use white if primary color is being used
   let iconColor = primaryColor;
 
   switch (buttonStyle) {

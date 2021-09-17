@@ -21,7 +21,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
-  const { locale } = getProperties(arcSite);
+  const { locale, navColor = 'dark' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
@@ -82,7 +82,8 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            // Account: Secondary Outline Reverse, Secondary Outline if Light nav
+            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE}
             buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
             iconType="user"
             secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
@@ -96,7 +97,8 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            // Mobile: Primary Filled Reverse, Primary Filled if Light nav (Icon only)
+            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
             buttonType={BUTTON_TYPES.ICON_ONLY}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -131,7 +133,8 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+            // Sign Up: Primary Filled Reverse, Primary Filled if Light nav (Label only)
+            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
             buttonType={BUTTON_TYPES.LABEL_ONLY}
             href={createAccountURL}
             text={phrases.t('identity-block.sign-up')}
@@ -142,7 +145,8 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            // Log In: Secondary Outline Reverse, Secondary Outline if Light nav (Icon & Label)
+            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE}
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             href={loginURL}
             iconType="user"
@@ -156,7 +160,8 @@ const HeaderAccountAction = ({ customFields }) => {
           as="button"
           aria-expanded={isAccountMenuOpen}
           buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+          // Mobile: Primary Filled Reverse, Primary Filled if Light nav (Icon only)
+          buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}

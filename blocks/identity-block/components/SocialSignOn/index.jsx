@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import useIdentity from '../Identity';
 
-const SocialSignOn = ({}) => {
+const SocialSignOn = () => {
   const { Identity } = useIdentity();
   const config = Identity?.configOptions ?? {};
 
-  const [ isGoogleInitialized, setIsGoogleInitialized ] = useState(false);
-  const [ isFacebookInitialized, setIsFacebookInitialized ] = useState(false);
+  const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);
+  // const [ isFacebookInitialized, setIsFacebookInitialized ] = useState(false);
 
   useEffect(() => {
     const fetchConfig = async () => {
       await Identity.getConfig();
-    }
+    };
     if (!Identity && !Identity.configOptions) {
       fetchConfig();
     }
@@ -24,14 +24,14 @@ const SocialSignOn = ({}) => {
         width: 500,
         height: 32,
         onSuccess: console.log,
-        onFailure: console.log
+        onFailure: console.log,
       });
     };
     if (config.googleClientId && !isGoogleInitialized) {
       initializeGoogle();
       setIsGoogleInitialized(true);
     }
-  }, [config.googleClientId, isGoogleInitialized]);
+  }, [Identity, config.googleClientId, isGoogleInitialized]);
 
   if (!Identity) {
     return null;

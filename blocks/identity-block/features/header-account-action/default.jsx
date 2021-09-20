@@ -13,7 +13,7 @@ import './styles.scss';
 
 function getInvertedButtonTheme(navColor, navBarBackground) {
   if (navBarBackground === 'primary-color') {
-    return BUTTON_STYLES.WHITE_BACKGROUND_FILLED;
+    return BUTTON_STYLES.PRIMARY_REVERSE;
   }
 
   return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.PRIMARY;

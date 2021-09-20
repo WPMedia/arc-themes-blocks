@@ -47,45 +47,45 @@ export const PrimaryDualIcon = () => (
 );
 // end primary
 
-// start primary filled reverse
-export const PrimaryFilledReverseLabel = () => (
+// start primary reverse
+export const PrimaryReverseLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_ONLY}
     text="Sign up"
   />
 );
 
-export const PrimaryFilledReverseIconAndLabel = () => (
+export const PrimaryReverseIconAndLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
     iconType="user"
     text="Sign up"
   />
 );
 
-export const PrimaryFilledReverseIcon = () => (
+export const PrimaryReverseIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY_REVERSE}
     buttonType={BUTTON_TYPES.ICON_ONLY}
     iconType="user"
     ariaLabel="Sign up"
   />
 );
 
-export const PrimaryFilledReverseDualIcon = () => (
+export const PrimaryReverseDualIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
     iconType="user"
     text="Sign up"
     secondaryIconType="chevron-up"
   />
 );
-// end primary filled reverse
+// end primary reverse
 
-// start secondary outline
+// start secondary
 export const SecondaryOutlineLabel = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
@@ -121,9 +121,9 @@ export const SecondaryOutlineDualIcon = () => (
     secondaryIconType="chevron-up"
   />
 );
-// end secondary outline
+// end secondary
 
-// start secondary outline reverse
+// start secondary reverse
 export const SecondaryOutlineReverseLabel = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
@@ -159,7 +159,7 @@ export const SecondaryOutlineReverseDualIcon = () => (
     secondaryIconType="chevron-up"
   />
 );
-// end secondary outline reverse
+// end secondary reverse
 
 export const Outlined = () => (
   <Button

@@ -11,8 +11,8 @@ import './styles.scss';
 // naming comes from zeplin docs for types
 export const BUTTON_STYLES = {
   PRIMARY: 'PRIMARY',
+  PRIMARY_REVERSE: 'PRIMARY_REVERSE',
   OUTLINED: 'OUTLINED',
-  WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
   OUTLINED_GREY: 'OUTLINED_GREY',
   SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
   SECONDARY_OUTLINE_REVERSE: 'SECONDARY_OUTLINE_REVERSE',
@@ -44,7 +44,7 @@ const iconTypeStringToIconTypeComponent = (
     case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
       iconColor = '#fff';
       break;
-    case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
+    case BUTTON_STYLES.PRIMARY_REVERSE:
       iconColor = primaryColor;
       break;
     case BUTTON_STYLES.SECONDARY_OUTLINE:
@@ -109,7 +109,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
     // istanbul ignore next
     switch (buttonStyle) {
       // istanbul ignore next
-      case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
+      case BUTTON_STYLES.PRIMARY_REVERSE:
         return `
           background-color: #ffffff;
           border-color: #ffffff;

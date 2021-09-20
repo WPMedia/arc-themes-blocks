@@ -14,8 +14,6 @@ export const BUTTON_STYLES = {
   PRIMARY_REVERSE: 'PRIMARY_REVERSE',
   SECONDARY: 'SECONDARY',
   SECONDARY_REVERSE: 'SECONDARY_REVERSE',
-  OUTLINED: 'OUTLINED',
-  OUTLINED_GREY: 'OUTLINED_GREY',
   WHITE_BACKGROUND_DARK_TEXT: 'WHITE_BACKGROUND_DARK_TEXT',
 };
 
@@ -117,28 +115,6 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 
           &:hover {
             color: ${primaryColor};
-          }
-        `;
-      case BUTTON_STYLES.OUTLINED:
-        // istanbul ignore next
-        return `
-          background-color: transparent;
-          border-color: ${primaryColor};
-          color: ${primaryColor};
-
-          &:hover {
-            color: ${primaryColor};
-          }
-        `;
-      case BUTTON_STYLES.OUTLINED_GREY:
-        // istanbul ignore next
-        return `
-          background-color: transparent;
-          border-color: rgba(255, 255, 255, 0.5);
-          color: #ffffff;
-
-          &:hover {
-            color: #ffffff;
           }
         `;
       case BUTTON_STYLES.SECONDARY:

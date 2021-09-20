@@ -20,11 +20,11 @@ function getInvertedButtonTheme(navColor, navBarBackground) {
 }
 
 function getOutlineButtonTheme(navColor, navBarBackground) {
-  if (navBarBackground === 'primary-color') {
-    return BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE;
+  if (navBarBackground === 'primary-color' || navColor === 'dark') {
+    return BUTTON_STYLES.SECONDARY_REVERSE;
   }
 
-  return navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE;
+  return BUTTON_STYLES.SECONDARY_OUTLINE;
 }
 
 const HeaderAccountAction = ({ customFields }) => {

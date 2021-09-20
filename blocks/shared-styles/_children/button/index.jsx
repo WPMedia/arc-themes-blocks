@@ -12,10 +12,10 @@ import './styles.scss';
 export const BUTTON_STYLES = {
   PRIMARY: 'PRIMARY',
   PRIMARY_REVERSE: 'PRIMARY_REVERSE',
+  SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
+  SECONDARY_REVERSE: 'SECONDARY_REVERSE',
   OUTLINED: 'OUTLINED',
   OUTLINED_GREY: 'OUTLINED_GREY',
-  SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
-  SECONDARY_OUTLINE_REVERSE: 'SECONDARY_OUTLINE_REVERSE',
   WHITE_BACKGROUND_DARK_TEXT: 'WHITE_BACKGROUND_DARK_TEXT',
 };
 
@@ -41,7 +41,7 @@ const iconTypeStringToIconTypeComponent = (
 
   switch (buttonStyle) {
     case BUTTON_STYLES.PRIMARY:
-    case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
+    case BUTTON_STYLES.SECONDARY_REVERSE:
       iconColor = '#fff';
       break;
     case BUTTON_STYLES.PRIMARY_REVERSE:
@@ -152,7 +152,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
             color: #191919;
           }
         `;
-      case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
+      case BUTTON_STYLES.SECONDARY_REVERSE:
         // istanbul ignore next
         return `
           background-color: transparent;

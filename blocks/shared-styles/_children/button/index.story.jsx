@@ -86,7 +86,7 @@ export const PrimaryReverseDualIcon = () => (
 // end primary reverse
 
 // start secondary
-export const SecondaryOutlineLabel = () => (
+export const SecondaryLabel = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
     buttonType={BUTTON_TYPES.LABEL_ONLY}
@@ -94,7 +94,7 @@ export const SecondaryOutlineLabel = () => (
   />
 );
 
-export const SecondaryOutlineIconAndLabel = () => (
+export const SecondaryIconAndLabel = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
@@ -103,7 +103,7 @@ export const SecondaryOutlineIconAndLabel = () => (
   />
 );
 
-export const SecondaryOutlineIcon = () => (
+export const SecondaryIcon = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
     buttonType={BUTTON_TYPES.ICON_ONLY}
@@ -112,7 +112,7 @@ export const SecondaryOutlineIcon = () => (
   />
 );
 
-export const SecondaryOutlineDualIcon = () => (
+export const SecondaryDualIcon = () => (
   <Button
     buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
     buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
@@ -124,35 +124,35 @@ export const SecondaryOutlineDualIcon = () => (
 // end secondary
 
 // start secondary reverse
-export const SecondaryOutlineReverseLabel = () => (
+export const SecondaryReverseLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonStyle={BUTTON_STYLES.SECONDARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_ONLY}
     text="Sign up"
   />
 );
 
-export const SecondaryOutlineReverseIconAndLabel = () => (
+export const SecondaryReverseIconAndLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonStyle={BUTTON_STYLES.SECONDARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
     iconType="user"
     text="Sign up"
   />
 );
 
-export const SecondaryOutlineReverseIcon = () => (
+export const SecondaryReverseIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonStyle={BUTTON_STYLES.SECONDARY_REVERSE}
     buttonType={BUTTON_TYPES.ICON_ONLY}
     iconType="user"
     ariaLabel="Sign up"
   />
 );
 
-export const SecondaryOutlineReverseDualIcon = () => (
+export const SecondaryReverseDualIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE}
+    buttonStyle={BUTTON_STYLES.SECONDARY_REVERSE}
     buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
     iconType="user"
     text="Sign up"

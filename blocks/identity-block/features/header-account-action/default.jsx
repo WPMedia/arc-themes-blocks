@@ -11,6 +11,22 @@ import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
 
+function getSignUpButtonTheme(navColor, navBarBackground) {
+  if (navBarBackground === 'primary-color') {
+    return BUTTON_STYLES.WHITE_BACKGROUND_FILLED;
+  }
+
+  return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.FILLED;
+}
+
+function getLoginButtonTheme(navColor, navBarBackground) {
+  if (navBarBackground === 'primary-color') {
+    return BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE;
+  }
+
+  return navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE;
+}
+
 const HeaderAccountAction = ({ customFields }) => {
   const {
     createAccountURL,
@@ -21,7 +37,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
-  const { locale, navColor = 'dark' } = getProperties(arcSite);
+  const { locale, navColor = 'dark', navBarBackground } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
@@ -133,8 +149,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            // Sign Up: Primary Filled Reverse, Primary Filled if Light nav (Label only)
-            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
+            buttonStyle={getSignUpButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_ONLY}
             href={createAccountURL}
             text={phrases.t('identity-block.sign-up')}
@@ -145,8 +160,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            // Log In: Secondary Outline Reverse, Secondary Outline if Light nav (Icon & Label)
-            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE}
+            buttonStyle={getLoginButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             href={loginURL}
             iconType="user"

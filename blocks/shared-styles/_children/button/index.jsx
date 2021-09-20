@@ -16,6 +16,7 @@ export const BUTTON_STYLES = {
   OUTLINED_GREY: 'OUTLINED_GREY',
   SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
   SECONDARY_OUTLINE_REVERSE: 'SECONDARY_OUTLINE_REVERSE',
+  WHITE_BACKGROUND_DARK_TEXT: 'WHITE_BACKGROUND_DARK_TEXT',
 };
 
 export const BUTTON_SIZES = {
@@ -47,6 +48,7 @@ const iconTypeStringToIconTypeComponent = (
       iconColor = primaryColor;
       break;
     case BUTTON_STYLES.SECONDARY_OUTLINE:
+    case BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT:
       iconColor = '#191919';
       break;
     default:
@@ -159,6 +161,17 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 
           &:hover {
             color: #fff;
+          }
+        `;
+      case BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT:
+        // istanbul ignore next
+        return `
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: #191919;
+
+          &:hover {
+            color: #191919;
           }
         `;
       case BUTTON_STYLES.FILLED:

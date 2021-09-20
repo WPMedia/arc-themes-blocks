@@ -11,12 +11,12 @@ import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
 
-function getInvertedButtonTheme(navColor, navBarBackground) {
+function getNavSpecificPrimaryButtonTheme(navColor, navBarBackground) {
   if (navBarBackground === 'primary-color') {
     return BUTTON_STYLES.PRIMARY_REVERSE;
   }
 
-  return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.PRIMARY;
+  return navColor === 'dark' ? BUTTON_STYLES.DEFAULT : BUTTON_STYLES.PRIMARY;
 }
 
 function getNavSpecificSecondaryButtonTheme(navColor, navBarBackground) {
@@ -112,7 +112,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.ICON_ONLY}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -147,7 +147,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_ONLY}
             href={createAccountURL}
             text={phrases.t('identity-block.sign-up')}
@@ -172,7 +172,7 @@ const HeaderAccountAction = ({ customFields }) => {
           as="button"
           aria-expanded={isAccountMenuOpen}
           buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
+          buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}

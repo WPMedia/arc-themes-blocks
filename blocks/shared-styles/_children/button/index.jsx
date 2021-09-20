@@ -14,7 +14,7 @@ export const BUTTON_STYLES = {
   PRIMARY_REVERSE: 'PRIMARY_REVERSE',
   SECONDARY: 'SECONDARY',
   SECONDARY_REVERSE: 'SECONDARY_REVERSE',
-  WHITE_BACKGROUND_DARK_TEXT: 'WHITE_BACKGROUND_DARK_TEXT',
+  DEFAULT: 'DEFAULT',
 };
 
 export const BUTTON_SIZES = {
@@ -46,11 +46,9 @@ const iconTypeStringToIconTypeComponent = (
       iconColor = primaryColor;
       break;
     case BUTTON_STYLES.SECONDARY:
-    case BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT:
-      iconColor = '#191919';
-      break;
+    case BUTTON_STYLES.DEFAULT:
     default:
-      iconColor = primaryColor;
+      iconColor = '#191919';
   }
 
   if (iconTypeString) {
@@ -139,19 +137,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
             color: #fff;
           }
         `;
-      case BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT:
-        // istanbul ignore next
-        return `
-          background-color: #ffffff;
-          border-color: #ffffff;
-          color: #191919;
-
-          &:hover {
-            color: #191919;
-          }
-        `;
       case BUTTON_STYLES.PRIMARY:
-      default:
         // istanbul ignore next
         return `
           background-color: ${primaryColor};
@@ -160,6 +146,18 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 
           &:hover {
             color: #ffffff;
+          }
+        `;
+      case BUTTON_STYLES.DEFAULT:
+      default:
+        // istanbul ignore next
+        return `
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: #191919;
+
+          &:hover {
+            color: #191919;
           }
         `;
     }
@@ -294,7 +292,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
-  buttonStyle: BUTTON_STYLES.PRIMARY,
+  buttonStyle: BUTTON_STYLES.DEFAULT,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
   iconType: '',
 };

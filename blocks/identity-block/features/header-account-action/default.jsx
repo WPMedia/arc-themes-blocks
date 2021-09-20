@@ -4,28 +4,16 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import {
-  Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
+  Button,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  getNavSpecificSecondaryButtonTheme,
+  getNavSpecificPrimaryButtonTheme,
 } from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
-
-function getNavSpecificPrimaryButtonTheme(navColor, navBarBackground) {
-  if (navBarBackground === 'primary-color') {
-    return BUTTON_STYLES.PRIMARY_REVERSE;
-  }
-
-  return navColor === 'dark' ? BUTTON_STYLES.DEFAULT : BUTTON_STYLES.PRIMARY;
-}
-
-function getNavSpecificSecondaryButtonTheme(navColor, navBarBackground) {
-  if (navBarBackground === 'primary-color' || navColor === 'dark') {
-    return BUTTON_STYLES.SECONDARY_REVERSE;
-  }
-
-  return BUTTON_STYLES.SECONDARY;
-}
 
 const HeaderAccountAction = ({ customFields }) => {
   const {

@@ -3,7 +3,12 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
-import { UserIcon, ChevronDownIcon, ChevronUpIcon } from '@wpmedia/engine-theme-sdk';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  HamburgerMenuIcon,
+  UserIcon,
+} from '@wpmedia/engine-theme-sdk';
 
 // handle non-dynamic styling not based on theme styles
 import './styles.scss';
@@ -28,6 +33,7 @@ export const BUTTON_TYPES = {
   ICON_ONLY: 'ICON_ONLY',
   LABEL_AND_ICON: 'LABEL_AND_ICON',
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
+  LABEL_AND_RIGHT_ICON: 'LABEL_AND_RIGHT_ICON',
 };
 
 const iconTypeStringToIconTypeComponent = (
@@ -76,6 +82,15 @@ const iconTypeStringToIconTypeComponent = (
       case 'chevron-down':
         Icon = (
           <ChevronDownIcon
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={iconColor}
+          />
+        );
+        break;
+      case 'hamburger-menu':
+        Icon = (
+          <HamburgerMenuIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
             fill={iconColor}
@@ -200,6 +215,15 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           {text}
         </>
       );
+    case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
+      return (
+        <>
+          {text}
+          <div className="xpmedia-button--right-icon-container">
+            {iconComponent}
+          </div>
+        </>
+      );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
@@ -214,6 +238,7 @@ function Button(props) {
   const {
     ariaLabel,
     as,
+    additionalClassNames,
     buttonSize,
     buttonStyle,
     buttonType,
@@ -264,7 +289,7 @@ function Button(props) {
       aria-label={buttonType === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}${additionalClassNames ? ` ${additionalClassNames}` : ''}`}
       font={primaryFont}
       primaryColor={primaryColor}
       type={elementType}

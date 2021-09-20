@@ -99,29 +99,6 @@ body.nav-open {
   }
 }
 
-.nav-sections-btn {
-  align-items: center;
-  display: flex;
-
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    margin: 0;
-
-    span {
-      display: none;
-    }
-  }
-
-  > span,
-  > img {
-    flex: 0;
-  }
-
-  > span {
-    font-size: calculateRem(14px);
-    font-weight: bold;
-    padding-right: 8px;
-  }
-}
 
 .nav-search {
   align-items: center;

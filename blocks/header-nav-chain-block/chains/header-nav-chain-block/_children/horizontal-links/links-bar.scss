@@ -1,11 +1,11 @@
 .horizontal-links-bar.horizontal-links-bar {
   align-items: center;
+  display: flex;
   flex: 1 1 auto;
   overflow: hidden;
   text-align: left;
   height: 100%;
   width: auto;
-  display: flex;
   flex-wrap: wrap;
   margin-right: calculateRem(16px);
 

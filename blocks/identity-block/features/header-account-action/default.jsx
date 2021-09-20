@@ -11,7 +11,7 @@ import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
 
-function getSignUpButtonTheme(navColor, navBarBackground) {
+function getInvertedButtonTheme(navColor, navBarBackground) {
   if (navBarBackground === 'primary-color') {
     return BUTTON_STYLES.WHITE_BACKGROUND_FILLED;
   }
@@ -19,7 +19,7 @@ function getSignUpButtonTheme(navColor, navBarBackground) {
   return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.FILLED;
 }
 
-function getLoginButtonTheme(navColor, navBarBackground) {
+function getOutlineButtonTheme(navColor, navBarBackground) {
   if (navBarBackground === 'primary-color') {
     return BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE;
   }
@@ -98,8 +98,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            // Account: Secondary Outline Reverse, Secondary Outline if Light nav
-            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE : BUTTON_STYLES.SECONDARY_OUTLINE}
+            buttonStyle={getOutlineButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
             iconType="user"
             secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
@@ -113,8 +112,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            // Mobile: Primary Filled Reverse, Primary Filled if Light nav (Icon only)
-            buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
+            buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.ICON_ONLY}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -149,7 +147,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getSignUpButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_ONLY}
             href={createAccountURL}
             text={phrases.t('identity-block.sign-up')}
@@ -160,7 +158,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getLoginButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getOutlineButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             href={loginURL}
             iconType="user"
@@ -174,8 +172,7 @@ const HeaderAccountAction = ({ customFields }) => {
           as="button"
           aria-expanded={isAccountMenuOpen}
           buttonSize={BUTTON_SIZES.SMALL}
-          // Mobile: Primary Filled Reverse, Primary Filled if Light nav (Icon only)
-          buttonStyle={navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_FILLED : BUTTON_STYLES.FILLED}
+          buttonStyle={getInvertedButtonTheme(navColor, navBarBackground)}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}

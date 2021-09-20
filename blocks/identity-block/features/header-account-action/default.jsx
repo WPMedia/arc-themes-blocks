@@ -19,12 +19,12 @@ function getInvertedButtonTheme(navColor, navBarBackground) {
   return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.PRIMARY;
 }
 
-function getOutlineButtonTheme(navColor, navBarBackground) {
+function getNavSpecificSecondaryButtonTheme(navColor, navBarBackground) {
   if (navBarBackground === 'primary-color' || navColor === 'dark') {
     return BUTTON_STYLES.SECONDARY_REVERSE;
   }
 
-  return BUTTON_STYLES.SECONDARY_OUTLINE;
+  return BUTTON_STYLES.SECONDARY;
 }
 
 const HeaderAccountAction = ({ customFields }) => {
@@ -98,7 +98,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getOutlineButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
             iconType="user"
             secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
@@ -158,7 +158,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getOutlineButtonTheme(navColor, navBarBackground)}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             href={loginURL}
             iconType="user"

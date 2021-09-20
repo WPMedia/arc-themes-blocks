@@ -88,7 +88,7 @@ export const PrimaryReverseDualIcon = () => (
 // start secondary
 export const SecondaryLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonStyle={BUTTON_STYLES.SECONDARY}
     buttonType={BUTTON_TYPES.LABEL_ONLY}
     text="Sign up"
   />
@@ -96,7 +96,7 @@ export const SecondaryLabel = () => (
 
 export const SecondaryIconAndLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonStyle={BUTTON_STYLES.SECONDARY}
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
     iconType="user"
     text="Sign up"
@@ -105,7 +105,7 @@ export const SecondaryIconAndLabel = () => (
 
 export const SecondaryIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonStyle={BUTTON_STYLES.SECONDARY}
     buttonType={BUTTON_TYPES.ICON_ONLY}
     iconType="user"
     ariaLabel="Sign up"
@@ -114,7 +114,7 @@ export const SecondaryIcon = () => (
 
 export const SecondaryDualIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.SECONDARY_OUTLINE}
+    buttonStyle={BUTTON_STYLES.SECONDARY}
     buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
     iconType="user"
     text="Sign up"

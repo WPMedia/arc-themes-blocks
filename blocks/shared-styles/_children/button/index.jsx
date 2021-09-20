@@ -12,7 +12,7 @@ import './styles.scss';
 export const BUTTON_STYLES = {
   PRIMARY: 'PRIMARY',
   PRIMARY_REVERSE: 'PRIMARY_REVERSE',
-  SECONDARY_OUTLINE: 'SECONDARY_OUTLINE',
+  SECONDARY: 'SECONDARY',
   SECONDARY_REVERSE: 'SECONDARY_REVERSE',
   OUTLINED: 'OUTLINED',
   OUTLINED_GREY: 'OUTLINED_GREY',
@@ -47,7 +47,7 @@ const iconTypeStringToIconTypeComponent = (
     case BUTTON_STYLES.PRIMARY_REVERSE:
       iconColor = primaryColor;
       break;
-    case BUTTON_STYLES.SECONDARY_OUTLINE:
+    case BUTTON_STYLES.SECONDARY:
     case BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT:
       iconColor = '#191919';
       break;
@@ -141,7 +141,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
             color: #ffffff;
           }
         `;
-      case BUTTON_STYLES.SECONDARY_OUTLINE:
+      case BUTTON_STYLES.SECONDARY:
         // istanbul ignore next
         return `
           background-color: transparent;

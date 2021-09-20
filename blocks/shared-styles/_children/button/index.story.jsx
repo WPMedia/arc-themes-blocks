@@ -9,43 +9,43 @@ export default {
   },
 };
 
-// start primary filled
-export const PrimaryFilledLabel = () => (
+// start primary
+export const PrimaryLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonTypes={BUTTON_TYPES.LABEL_ONLY}
     text="Sign up"
   />
 );
 
-export const PrimaryFilledIconAndLabel = () => (
+export const PrimaryIconAndLabel = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
     iconType="user"
     text="Sign up"
   />
 );
 
-export const PrimaryFilledIcon = () => (
+export const PrimaryIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonType={BUTTON_TYPES.ICON_ONLY}
     iconType="user"
     ariaLabel="Sign up"
   />
 );
 
-export const PrimaryFilledDualIcon = () => (
+export const PrimaryDualIcon = () => (
   <Button
-    buttonStyle={BUTTON_STYLES.FILLED}
+    buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
     iconType="user"
     text="Sign up"
     secondaryIconType="chevron-up"
   />
 );
-// end primary filled
+// end primary
 
 // start primary filled reverse
 export const PrimaryFilledReverseLabel = () => (

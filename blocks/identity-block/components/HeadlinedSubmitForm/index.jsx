@@ -48,7 +48,7 @@ const HeadlinedSubmitForm = ({
         {children}
         <Button
           buttonSize={BUTTON_SIZES.MEDIUM}
-          buttonStyle={BUTTON_STYLES.FILLED}
+          buttonStyle={BUTTON_STYLES.PRIMARY}
           fullWidth
           text={buttonLabel}
           type="submit"

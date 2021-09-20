@@ -16,7 +16,7 @@ function getInvertedButtonTheme(navColor, navBarBackground) {
     return BUTTON_STYLES.WHITE_BACKGROUND_FILLED;
   }
 
-  return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.FILLED;
+  return navColor === 'dark' ? BUTTON_STYLES.WHITE_BACKGROUND_DARK_TEXT : BUTTON_STYLES.PRIMARY;
 }
 
 function getOutlineButtonTheme(navColor, navBarBackground) {

@@ -10,7 +10,7 @@ import './styles.scss';
 
 // naming comes from zeplin docs for types
 export const BUTTON_STYLES = {
-  FILLED: 'FILLED',
+  PRIMARY: 'PRIMARY',
   OUTLINED: 'OUTLINED',
   WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
   OUTLINED_GREY: 'OUTLINED_GREY',
@@ -40,7 +40,7 @@ const iconTypeStringToIconTypeComponent = (
   let iconColor = primaryColor;
 
   switch (buttonStyle) {
-    case BUTTON_STYLES.FILLED:
+    case BUTTON_STYLES.PRIMARY:
     case BUTTON_STYLES.SECONDARY_OUTLINE_REVERSE:
       iconColor = '#fff';
       break;
@@ -174,7 +174,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
             color: #191919;
           }
         `;
-      case BUTTON_STYLES.FILLED:
+      case BUTTON_STYLES.PRIMARY:
       default:
         // istanbul ignore next
         return `
@@ -318,7 +318,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
-  buttonStyle: BUTTON_STYLES.FILLED,
+  buttonStyle: BUTTON_STYLES.PRIMARY,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
   iconType: '',
 };

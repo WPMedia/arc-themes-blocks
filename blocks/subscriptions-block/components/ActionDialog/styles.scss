@@ -1,0 +1,79 @@
+.xpmedia-action-dialog {
+  display: grid;
+  grid-template-columns: map-get($spacers, 'md') repeat(6, 1fr) map-get($spacers, 'md');
+  grid-template-rows: auto;
+  margin: map-get($spacers, 'xxl') auto;
+  text-align: center;
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    margin: map-get($spacers, 'xl') auto;
+  }
+
+  .xpmedia-action-dialog-reason-prompt {
+    color: $ui-medium-gray;
+    grid-column: 3/7;
+    line-height: 1rem;
+    font-size: 0.875rem;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+
+  .xpmedia-action-dialog-link-prompt {
+    color: $ui-medium-gray;
+    grid-column: 3/7;
+    line-height: 1rem;
+    font-size: 0.875rem;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .xpmedia-action-dialog-link-prompt-pre-link {
+      color: inherit;
+
+      &::after {
+        content: ' ';
+      }
+    }
+
+    .xpmedia-action-dialog-link-prompt-link {
+      color: inherit;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .xpmedia-action-dialog-headline {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    grid-column: 2/8;
+    margin: map-get($spacers, 'sm') 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+  }
+
+  .xpmedia-action-dialog-subheadline {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    grid-column: 2/8;
+    margin: map-get($spacers, 'sm') 0 0 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .xpmedia-button {
+    grid-column: 2/8;
+    margin-top: map-get($spacers, 'lg');
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      grid-column: 3/7;
+    }
+  }
+}

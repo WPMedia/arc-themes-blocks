@@ -5,7 +5,7 @@ import SubscriptionDialog from '.';
 export default {
   title: 'Blocks/Subscriptions/Components/Action Dialog',
   parameters: {
-    chromatic: { viewports: [320, 1025, 1200] },
+    chromatic: { viewports: [320, 1023, 1200] },
   },
 };
 

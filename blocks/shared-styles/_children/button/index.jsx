@@ -7,6 +7,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   HamburgerMenuIcon,
+  SearchIcon,
   UserIcon,
 } from '@wpmedia/engine-theme-sdk';
 
@@ -91,6 +92,15 @@ const iconTypeStringToIconTypeComponent = (
       case 'hamburger-menu':
         Icon = (
           <HamburgerMenuIcon
+            height={iconHeightWidth}
+            width={iconHeightWidth}
+            fill={iconColor}
+          />
+        );
+        break;
+      case 'search':
+        Icon = (
+          <SearchIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
             fill={iconColor}

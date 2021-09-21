@@ -35,13 +35,7 @@ const NavWidget = ({
         alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
       />
     )) || (type === 'queryly' && (
-      <QuerylySearch
-        theme={
-        placement === PLACEMENT_AREAS.SECTION_MENU
-          ? 'dark' : navColor
-        }
-        label={phrases.t('header-nav-chain-block.search-text')}
-      />
+      <QuerylySearch />
     )) || (type === 'menu' && (
       <Button
         additionalClassNames="nav-sections-btn"

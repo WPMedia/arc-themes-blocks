@@ -11,39 +11,37 @@ import {
 
 import './styles.scss';
 
-const ActionDialog = ({
+const SubscriptionDialog = ({
   actionText,
   actionUrl,
   reasonPromptText,
   headlineText,
-  linkAriaLabel,
   linkText,
   linkPromptText,
   linkUrl,
   subHeadlineText,
 }) => (
-  <PrimaryFont as="div" className="xpmedia-action-dialog">
+  <PrimaryFont as="div" className="xpmedia-subscription-dialog">
     {reasonPromptText
       ? (
         <div
-          className="xpmedia-action-dialog-reason-prompt"
+          className="xpmedia-subscription-dialog-reason-prompt"
           dangerouslySetInnerHTML={{ __html: reasonPromptText }}
         />
       )
       : null}
-    <div className="xpmedia-action-dialog-link-prompt">
+    <div className="xpmedia-subscription-dialog-link-prompt">
       {linkPromptText
         ? (
           <span
-            className="xpmedia-action-dialog-link-prompt-pre-link"
+            className="xpmedia-subscription-dialog-link-prompt-pre-link"
             dangerouslySetInnerHTML={{ __html: linkPromptText }}
           />
         )
         : null}
       <a
-        className="xpmedia-action-dialog-link-prompt-link"
+        className="xpmedia-subscription-dialog-link-prompt-link"
         href={linkUrl}
-        {...(linkAriaLabel ? { 'aria-label': linkAriaLabel } : {})}
       >
         {linkText}
       </a>
@@ -51,7 +49,7 @@ const ActionDialog = ({
     {headlineText
       ? (
         <h2
-          className="xpmedia-action-dialog-headline"
+          className="xpmedia-subscription-dialog-headline"
           dangerouslySetInnerHTML={{ __html: headlineText }}
         />
       )
@@ -59,7 +57,7 @@ const ActionDialog = ({
     {subHeadlineText
       ? (
         <h3
-          className="xpmedia-action-dialog-subheadline"
+          className="xpmedia-subscription-dialog-subheadline"
           dangerouslySetInnerHTML={{ __html: subHeadlineText }}
         />
       )
@@ -79,7 +77,7 @@ const ActionDialog = ({
   </PrimaryFont>
 );
 
-ActionDialog.propTypes = {
+SubscriptionDialog.propTypes = {
   actionText: PropTypes.string,
   actionUrl: PropTypes.string,
   reasonPromptText: PropTypes.string,
@@ -90,4 +88,4 @@ ActionDialog.propTypes = {
   subHeadlineText: PropTypes.string,
 };
 
-export default ActionDialog;
+export default SubscriptionDialog;

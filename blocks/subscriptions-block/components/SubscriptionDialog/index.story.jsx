@@ -1,16 +1,16 @@
 import React from 'react';
 
-import ActionDialog from '.';
+import SubscriptionDialog from '.';
 
 export default {
   title: 'Blocks/Subscriptions/Components/Action Dialog',
   parameters: {
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 1025, 1200] },
   },
 };
 
 export const allFields = () => (
-  <ActionDialog
+  <SubscriptionDialog
     actionText="Subscribe"
     actionUrl="#"
     reasonPromptText="Subscribe to continue reading Storybook documents."
@@ -23,14 +23,14 @@ export const allFields = () => (
 );
 
 export const minimalFields = () => (
-  <ActionDialog
+  <SubscriptionDialog
     linkText="Link"
     linkUrl="#"
   />
 );
 
 export const withButton = () => (
-  <ActionDialog
+  <SubscriptionDialog
     actionAriaLabel="ariaAction"
     actionText="Subscribe"
     actionUrl="#"
@@ -40,16 +40,15 @@ export const withButton = () => (
 );
 
 export const withReason = () => (
-  <ActionDialog
+  <SubscriptionDialog
     reasonPromptText="That is restricted."
-    linkAriaLabel="log in"
     linkText="Log In"
     linkUrl="#"
   />
 );
 
 export const withLinkPrompt = () => (
-  <ActionDialog
+  <SubscriptionDialog
     linkPromptText="You must Log in."
     linkText="Log In"
     linkUrl="#"
@@ -57,7 +56,7 @@ export const withLinkPrompt = () => (
 );
 
 export const withHeadline = () => (
-  <ActionDialog
+  <SubscriptionDialog
     headlineText="This is a headline!"
     linkText="This is a link"
     linkUrl="#"
@@ -65,7 +64,7 @@ export const withHeadline = () => (
 );
 
 export const withSubheadline = () => (
-  <ActionDialog
+  <SubscriptionDialog
     subHeadlineText="This is a subheadline!"
     linkText="This is a link"
     linkUrl="#"

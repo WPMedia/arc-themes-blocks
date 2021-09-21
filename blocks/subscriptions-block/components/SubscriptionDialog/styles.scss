@@ -1,0 +1,83 @@
+.xpmedia-subscription-dialog {
+  display: grid;
+  grid-template-columns: map-get($spacers, 'md') repeat(10, 1fr) map-get($spacers, 'md');
+  grid-template-rows: auto;
+  // this could be defined here or at the parent level
+  // margin: map-get($spacers, 'xxl') auto;
+  text-align: center;
+  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+    grid-template-columns: repeat(12, 1fr);
+    // this could be defined here or at the parent level
+    // margin: map-get($spacers, 'xl') auto;
+  }
+
+  .xpmedia-subscription-dialog-reason-prompt,
+  .xpmedia-subscription-dialog-link-prompt {
+    color: $ui-medium-gray;
+    grid-column: 3/11;
+    line-height: 1rem;
+    font-size: 0.875rem;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      grid-column: 5/9;
+    }
+  }
+
+  .xpmedia-subscription-dialog-link-prompt {
+    .xpmedia-subscription-dialog-link-prompt-pre-link {
+      color: inherit;
+
+      &::after {
+        content: ' ';
+      }
+    }
+
+    .xpmedia-subscription-dialog-link-prompt-link {
+      color: inherit;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .xpmedia-subscription-dialog-headline {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    grid-column: 2/12;
+    margin: map-get($spacers, 'sm') 0 0 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      grid-column: 4/10;
+    }
+  }
+
+  .xpmedia-subscription-dialog-subheadline {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    grid-column: 2/12;
+    margin: map-get($spacers, 'sm') 0 0 0;
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      font-size: 1.25rem;
+    }
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      grid-column: 4/10;
+    }
+  }
+
+  .xpmedia-button {
+    grid-column: 2/12;
+    margin-top: map-get($spacers, 'lg');
+    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
+      grid-column: 5/9;
+    }
+  }
+}

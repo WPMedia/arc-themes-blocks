@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ActionDialog from '.';
+import SubscriptionDialog from '.';
 
-describe('ActionDialog', () => {
+describe('SubscriptionDialog', () => {
   it('renders with minimal required properties', () => {
     const wrapper = mount(
-      <ActionDialog
+      <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
       />,
@@ -17,10 +17,9 @@ describe('ActionDialog', () => {
 
   it('renders the button as a link', () => {
     const wrapper = mount(
-      <ActionDialog
+      <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
-        linkAriaLabel="aria label"
         actionText="Press Me!"
         actionUrl="/"
       />,
@@ -32,7 +31,7 @@ describe('ActionDialog', () => {
 
   it('renders the headers', () => {
     const wrapper = mount(
-      <ActionDialog
+      <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
         headlineText="Headline 1"
@@ -40,31 +39,31 @@ describe('ActionDialog', () => {
       />,
     );
 
-    expect(wrapper.find('.xpmedia-action-dialog-headline').at(0).text()).toEqual('Headline 1');
-    expect(wrapper.find('.xpmedia-action-dialog-subheadline').at(0).text()).toEqual('Headline 2');
+    expect(wrapper.find('.xpmedia-subscription-dialog-headline').at(0).text()).toEqual('Headline 1');
+    expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').at(0).text()).toEqual('Headline 2');
   });
 
   it('renders the reason', () => {
     const wrapper = mount(
-      <ActionDialog
+      <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
         reasonPromptText="You need to do this."
       />,
     );
 
-    expect(wrapper.find('.xpmedia-action-dialog-reason-prompt').at(0).text()).toEqual('You need to do this.');
+    expect(wrapper.find('.xpmedia-subscription-dialog-reason-prompt').at(0).text()).toEqual('You need to do this.');
   });
 
   it('renders the link prompt text', () => {
     const wrapper = mount(
-      <ActionDialog
+      <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
         linkPromptText="You should log in."
       />,
     );
 
-    expect(wrapper.find('.xpmedia-action-dialog-link-prompt-pre-link').at(0).text()).toEqual('You should log in.');
+    expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-pre-link').at(0).text()).toEqual('You should log in.');
   });
 });

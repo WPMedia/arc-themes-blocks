@@ -3,7 +3,7 @@ import React from 'react';
 import SubscriptionDialog from '.';
 
 export default {
-  title: 'Blocks/Subscriptions/Components/Action Dialog',
+  title: 'Blocks/Subscriptions/Components/Subscription Dialog',
   parameters: {
     chromatic: { viewports: [320, 1023, 1200] },
   },

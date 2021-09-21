@@ -13,12 +13,12 @@ export const allFields = () => (
   <SubscriptionDialog
     actionText="Subscribe"
     actionUrl="#"
-    reasonPromptText="Subscribe to continue reading Storybook documents."
-    headlineText="Get every storybook item for only $9 a month"
+    reasonPrompt="Subscribe to continue reading Storybook documents."
+    headline="Get every storybook item for only $9 a month"
     linkText="Log In"
-    linkPromptText="Already a Storybook patron?"
+    linkPrompt="Already a Storybook patron?"
     linkUrl="#"
-    subHeadlineText="You may <b>think</b> you want to cancel, but deep down you know you don't."
+    subHeadline="You may <b>think</b> you want to cancel, but deep down you know you don't."
   />
 );
 
@@ -41,7 +41,7 @@ export const withButton = () => (
 
 export const withReason = () => (
   <SubscriptionDialog
-    reasonPromptText="That is restricted."
+    reasonPrompt="That is restricted."
     linkText="Log In"
     linkUrl="#"
   />
@@ -49,7 +49,7 @@ export const withReason = () => (
 
 export const withLinkPrompt = () => (
   <SubscriptionDialog
-    linkPromptText="You must Log in."
+    linkPrompt="You must Log in."
     linkText="Log In"
     linkUrl="#"
   />
@@ -57,7 +57,7 @@ export const withLinkPrompt = () => (
 
 export const withHeadline = () => (
   <SubscriptionDialog
-    headlineText="This is a headline!"
+    headline="This is a headline!"
     linkText="This is a link"
     linkUrl="#"
   />
@@ -65,7 +65,7 @@ export const withHeadline = () => (
 
 export const withSubheadline = () => (
   <SubscriptionDialog
-    subHeadlineText="This is a subheadline!"
+    subHeadline="This is a subheadline!"
     linkText="This is a link"
     linkUrl="#"
   />

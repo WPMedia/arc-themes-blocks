@@ -2,13 +2,11 @@
   display: grid;
   grid-template-columns: map-get($spacers, 'md') repeat(10, 1fr) map-get($spacers, 'md');
   grid-template-rows: auto;
-  // this could be defined here or at the parent level
-  // margin: map-get($spacers, 'xxl') auto;
+  margin: map-get($spacers, 'xxl') auto;
   text-align: center;
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     grid-template-columns: repeat(12, 1fr);
-    // this could be defined here or at the parent level
-    // margin: map-get($spacers, 'xl') auto;
+    margin: map-get($spacers, 'xl') auto;
   }
 
   .xpmedia-subscription-dialog-reason-prompt,
@@ -19,6 +17,7 @@
     font-size: 0.875rem;
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: 1rem;
+      grid-column: 4/10;
       line-height: 1.5rem;
     }
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
@@ -76,6 +75,9 @@
   .xpmedia-button {
     grid-column: 2/12;
     margin-top: map-get($spacers, 'lg');
+    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      grid-column: 4/10;
+    }
     @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
       grid-column: 5/9;
     }

@@ -14,28 +14,28 @@ import './styles.scss';
 const SubscriptionDialog = ({
   actionText,
   actionUrl,
-  reasonPromptText,
-  headlineText,
+  reasonPrompt,
+  headline,
   linkText,
-  linkPromptText,
+  linkPrompt,
   linkUrl,
-  subHeadlineText,
+  subHeadline,
 }) => (
   <PrimaryFont as="div" className="xpmedia-subscription-dialog">
-    {reasonPromptText
+    {reasonPrompt
       ? (
         <div
           className="xpmedia-subscription-dialog-reason-prompt"
-          dangerouslySetInnerHTML={{ __html: reasonPromptText }}
+          dangerouslySetInnerHTML={{ __html: reasonPrompt }}
         />
       )
       : null}
     <div className="xpmedia-subscription-dialog-link-prompt">
-      {linkPromptText
+      {linkPrompt
         ? (
           <span
             className="xpmedia-subscription-dialog-link-prompt-pre-link"
-            dangerouslySetInnerHTML={{ __html: linkPromptText }}
+            dangerouslySetInnerHTML={{ __html: linkPrompt }}
           />
         )
         : null}
@@ -46,19 +46,19 @@ const SubscriptionDialog = ({
         {linkText}
       </a>
     </div>
-    {headlineText
+    {headline
       ? (
         <h2
           className="xpmedia-subscription-dialog-headline"
-          dangerouslySetInnerHTML={{ __html: headlineText }}
+          dangerouslySetInnerHTML={{ __html: headline }}
         />
       )
       : null}
-    {subHeadlineText
+    {subHeadline
       ? (
         <h3
           className="xpmedia-subscription-dialog-subheadline"
-          dangerouslySetInnerHTML={{ __html: subHeadlineText }}
+          dangerouslySetInnerHTML={{ __html: subHeadline }}
         />
       )
       : null}
@@ -80,12 +80,24 @@ const SubscriptionDialog = ({
 SubscriptionDialog.propTypes = {
   actionText: PropTypes.string,
   actionUrl: PropTypes.string,
-  reasonPromptText: PropTypes.string,
-  headlineText: PropTypes.string,
+  reasonPrompt: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
+  headline: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
   linkText: PropTypes.string.isRequired,
-  linkPromptText: PropTypes.string,
+  linkPrompt: PropTypes.string,
   linkUrl: PropTypes.string.isRequired,
-  subHeadlineText: PropTypes.string,
+  subHeadline: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
 };
 
 export default SubscriptionDialog;

@@ -29,17 +29,51 @@ describe('SubscriptionDialog', () => {
     expect(wrapper.find('a').at(1).prop('href')).toEqual('/');
   });
 
-  it('renders the headers', () => {
+  it('does not render if required action part is missing', () => {
     const wrapper = mount(
       <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
-        headlineText="Headline 1"
-        subHeadlineText="Headline 2"
+        actionText="Press Me!"
+      />,
+    );
+
+    expect(wrapper.find('a').length).toEqual(1);
+  });
+
+  it('does not render if other required action part is missing', () => {
+    const wrapper = mount(
+      <SubscriptionDialog
+        linkText="Log in"
+        linkUrl="/"
+        actionUrl="/"
+      />,
+    );
+
+    expect(wrapper.find('a').length).toEqual(1);
+  });
+
+  it('renders the headline', () => {
+    const wrapper = mount(
+      <SubscriptionDialog
+        linkText="Log in"
+        linkUrl="/"
+        headline="Headline 1"
       />,
     );
 
     expect(wrapper.find('.xpmedia-subscription-dialog-headline').at(0).text()).toEqual('Headline 1');
+  });
+
+  it('renders the subheadlines', () => {
+    const wrapper = mount(
+      <SubscriptionDialog
+        linkText="Log in"
+        linkUrl="/"
+        subHeadline="Headline 2"
+      />,
+    );
+
     expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').at(0).text()).toEqual('Headline 2');
   });
 
@@ -48,7 +82,7 @@ describe('SubscriptionDialog', () => {
       <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
-        reasonPromptText="You need to do this."
+        reasonPrompt="You need to do this."
       />,
     );
 
@@ -60,7 +94,7 @@ describe('SubscriptionDialog', () => {
       <SubscriptionDialog
         linkText="Log in"
         linkUrl="/"
-        linkPromptText="You should log in."
+        linkPrompt="You should log in."
       />,
     );
 

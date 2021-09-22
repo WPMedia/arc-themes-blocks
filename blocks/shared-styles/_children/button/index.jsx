@@ -205,15 +205,6 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           {text}
         </>
       );
-    case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
-      return (
-        <>
-          {text}
-          <div className="xpmedia-button--right-icon-container">
-            {iconComponent}
-          </div>
-        </>
-      );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
@@ -228,7 +219,6 @@ function Button(props) {
   const {
     ariaLabel,
     as,
-    additionalClassNames,
     buttonSize,
     buttonStyle,
     buttonType,
@@ -279,7 +269,7 @@ function Button(props) {
       aria-label={buttonType === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}${additionalClassNames ? ` ${additionalClassNames}` : ''}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
       font={primaryFont}
       primaryColor={primaryColor}
       type={elementType}

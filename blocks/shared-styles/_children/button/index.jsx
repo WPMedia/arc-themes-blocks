@@ -3,17 +3,22 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import getThemeStyle from 'fusion:themes';
 import { useFusionContext } from 'fusion:context';
-import { UserIcon, ChevronDownIcon, ChevronUpIcon } from '@wpmedia/engine-theme-sdk';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  UserIcon,
+} from '@wpmedia/engine-theme-sdk';
 
 // handle non-dynamic styling not based on theme styles
 import './styles.scss';
 
 // naming comes from zeplin docs for types
 export const BUTTON_STYLES = {
-  FILLED: 'FILLED',
-  OUTLINED: 'OUTLINED',
-  WHITE_BACKGROUND_FILLED: 'WHITE_BACKGROUND_FILLED',
-  OUTLINED_GREY: 'OUTLINED_GREY',
+  PRIMARY: 'PRIMARY',
+  PRIMARY_REVERSE: 'PRIMARY_REVERSE',
+  SECONDARY: 'SECONDARY',
+  SECONDARY_REVERSE: 'SECONDARY_REVERSE',
+  DEFAULT: 'DEFAULT',
 };
 
 export const BUTTON_SIZES = {
@@ -27,10 +32,29 @@ export const BUTTON_TYPES = {
   ICON_ONLY: 'ICON_ONLY',
   LABEL_AND_ICON: 'LABEL_AND_ICON',
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
+  LABEL_AND_RIGHT_ICON: 'LABEL_AND_RIGHT_ICON',
 };
 
-const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, primaryColor) => {
+const iconTypeStringToIconTypeComponent = (
+  iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
+) => {
   let Icon = null;
+
+  let iconColor = primaryColor;
+
+  switch (buttonStyle) {
+    case BUTTON_STYLES.PRIMARY:
+    case BUTTON_STYLES.SECONDARY_REVERSE:
+      iconColor = '#fff';
+      break;
+    case BUTTON_STYLES.PRIMARY_REVERSE:
+      iconColor = primaryColor;
+      break;
+    case BUTTON_STYLES.SECONDARY:
+    case BUTTON_STYLES.DEFAULT:
+    default:
+      iconColor = '#191919';
+  }
 
   if (iconTypeString) {
     switch (iconTypeString) {
@@ -41,7 +65,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <UserIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -50,7 +74,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <ChevronUpIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -59,7 +83,7 @@ const iconTypeStringToIconTypeComponent = (iconTypeString, iconHeightWidth, prim
           <ChevronDownIcon
             height={iconHeightWidth}
             width={iconHeightWidth}
-            fill={primaryColor}
+            fill={iconColor}
           />
         );
         break;
@@ -86,7 +110,7 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
     // istanbul ignore next
     switch (buttonStyle) {
       // istanbul ignore next
-      case BUTTON_STYLES.WHITE_BACKGROUND_FILLED:
+      case BUTTON_STYLES.PRIMARY_REVERSE:
         return `
           background-color: #ffffff;
           border-color: #ffffff;
@@ -96,30 +120,29 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
             color: ${primaryColor};
           }
         `;
-      case BUTTON_STYLES.OUTLINED:
+      case BUTTON_STYLES.SECONDARY:
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: ${primaryColor};
-          color: ${primaryColor};
+          border-color: #dadada;
+          color: #191919;
 
           &:hover {
-            color: ${primaryColor};
+            color: #191919;
           }
         `;
-      case BUTTON_STYLES.OUTLINED_GREY:
+      case BUTTON_STYLES.SECONDARY_REVERSE:
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: rgba(255, 255, 255, 0.5);
-          color: #ffffff;
+          border-color: #fff;
+          color: #fff;
 
           &:hover {
-            color: #ffffff;
+            color: #fff;
           }
         `;
-      case BUTTON_STYLES.FILLED:
-      default:
+      case BUTTON_STYLES.PRIMARY:
         // istanbul ignore next
         return `
           background-color: ${primaryColor};
@@ -128,6 +151,18 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 
           &:hover {
             color: #ffffff;
+          }
+        `;
+      case BUTTON_STYLES.DEFAULT:
+      default:
+        // istanbul ignore next
+        return `
+          background-color: #ffffff;
+          border-color: #ffffff;
+          color: #191919;
+
+          &:hover {
+            color: #191919;
           }
         `;
     }
@@ -170,6 +205,15 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           {text}
         </>
       );
+    case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
+      return (
+        <>
+          {text}
+          <div className="xpmedia-button--right-icon-container">
+            {iconComponent}
+          </div>
+        </>
+      );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
@@ -184,6 +228,7 @@ function Button(props) {
   const {
     ariaLabel,
     as,
+    additionalClassNames,
     buttonSize,
     buttonStyle,
     buttonType,
@@ -219,11 +264,13 @@ function Button(props) {
     iconType,
     iconHeightWidth,
     primaryColor,
+    buttonStyle,
   );
   const SecondaryIcon = iconTypeStringToIconTypeComponent(
     secondaryIconType,
     iconHeightWidth,
     primaryColor,
+    buttonStyle,
   );
 
   return (
@@ -232,7 +279,7 @@ function Button(props) {
       aria-label={buttonType === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}${additionalClassNames ? ` ${additionalClassNames}` : ''}`}
       font={primaryFont}
       primaryColor={primaryColor}
       type={elementType}
@@ -260,7 +307,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
-  buttonStyle: BUTTON_STYLES.FILLED,
+  buttonStyle: BUTTON_STYLES.DEFAULT,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
   iconType: '',
 };

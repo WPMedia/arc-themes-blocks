@@ -34,6 +34,11 @@ export const BUTTON_TYPES = {
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
 };
 
+// names based on zeplin docs
+const UI_WHITE_COLOR = '#fff';
+const UI_LIGHT_GRAY_COLOR = '#dadada';
+const UI_DARK_GRAY_COLOR = '#191919';
+
 const iconTypeStringToIconTypeComponent = (
   iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
 ) => {
@@ -44,7 +49,7 @@ const iconTypeStringToIconTypeComponent = (
   switch (buttonStyle) {
     case BUTTON_STYLES.PRIMARY:
     case BUTTON_STYLES.SECONDARY_REVERSE:
-      iconColor = '#fff';
+      iconColor = UI_WHITE_COLOR;
       break;
     case BUTTON_STYLES.PRIMARY_REVERSE:
       iconColor = primaryColor;
@@ -52,7 +57,7 @@ const iconTypeStringToIconTypeComponent = (
     case BUTTON_STYLES.SECONDARY:
     case BUTTON_STYLES.DEFAULT:
     default:
-      iconColor = '#191919';
+      iconColor = UI_DARK_GRAY_COLOR;
   }
 
   if (iconTypeString) {
@@ -111,8 +116,8 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
       // istanbul ignore next
       case BUTTON_STYLES.PRIMARY_REVERSE:
         return `
-          background-color: #fff;
-          border-color: #fff;
+          background-color: ${UI_WHITE_COLOR};
+          border-color: ${UI_WHITE_COLOR};
           color: ${primaryColor};
 
           &:hover {
@@ -123,22 +128,22 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: #dadada;
-          color: #191919;
+          border-color: ${UI_LIGHT_GRAY_COLOR};
+          color: ${UI_DARK_GRAY_COLOR};
 
           &:hover {
-            color: #191919;
+            color: ${UI_DARK_GRAY_COLOR};
           }
         `;
       case BUTTON_STYLES.SECONDARY_REVERSE:
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: #fff;
-          color: #fff;
+          border-color: ${UI_WHITE_COLOR};
+          color: ${UI_WHITE_COLOR};
 
           &:hover {
-            color: #fff;
+            color: ${UI_WHITE_COLOR};
           }
         `;
       case BUTTON_STYLES.PRIMARY:
@@ -146,22 +151,22 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         return `
           background-color: ${primaryColor};
           border-color: ${primaryColor};
-          color: #fff;
+          color: ${UI_WHITE_COLOR};
 
           &:hover {
-            color: #fff;
+            color: ${UI_WHITE_COLOR};
           }
         `;
       case BUTTON_STYLES.DEFAULT:
       default:
         // istanbul ignore next
         return `
-          background-color: #fff;
-          border-color: #fff;
-          color: #191919;
+          background-color: ${UI_WHITE_COLOR};
+          border-color: ${UI_WHITE_COLOR};
+          color: ${UI_DARK_GRAY_COLOR};
 
           &:hover {
-            color: #191919;
+            color: ${UI_DARK_GRAY_COLOR};
           }
         `;
     }

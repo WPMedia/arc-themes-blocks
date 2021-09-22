@@ -19,7 +19,7 @@ jest.mock('fusion:intl', () => jest.fn(
 const testQuerylySearch = ({
   root, label = 'test-translation',
 }) => {
-  const container = root.find('.xpmedia-button ');
+  const container = root.find('.xpmedia-button');
   expect(container).toHaveLength(1);
 
   const button = container.find('button');

@@ -32,7 +32,6 @@ export const BUTTON_TYPES = {
   ICON_ONLY: 'ICON_ONLY',
   LABEL_AND_ICON: 'LABEL_AND_ICON',
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
-  LABEL_AND_RIGHT_ICON: 'LABEL_AND_RIGHT_ICON',
 };
 
 const iconTypeStringToIconTypeComponent = (

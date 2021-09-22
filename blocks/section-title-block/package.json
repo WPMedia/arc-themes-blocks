@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/section-title-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion News Theme section title block",
   "author": "Beltran Caliz <beltran.caliz@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -23,10 +23,10 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*",
-    "@arc-fusion/prop-types": "^0.1.5"
+    "@wpmedia/shared-styles": "*"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

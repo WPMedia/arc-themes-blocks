@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/ad-taboola-block@5.15.0...@wpmedia/ad-taboola-block@5.16.0) (2021-09-15)
+
+
+### Bug Fixes
+
+* Use taboola value not pagetype value fix typo ([3e3be78](https://github.com/WPMedia/fusion-news-theme-blocks/commit/3e3be7816b2b30bf4fa532936931903fca290a6a))
+
+
+### Features
+
+* Add taboola page type checking ([a15b298](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a15b2981ab6c24f27170a8f186696524f9696e03))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

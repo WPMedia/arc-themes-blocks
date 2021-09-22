@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/full-author-bio-block@5.15.0...@wpmedia/full-author-bio-block@5.16.0) (2021-09-15)
+
+
+### Features
+
+* Add basic storybook with arc fusion proptypes ([092d479](https://github.com/WPMedia/fusion-news-theme-blocks/commit/092d479d9c1f3dd7524d07f75a61dc3cc2e8d494))
+* Add presentational component for handling storybook and add documentation comment ([b9506cc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b9506cc410cdac36b6eaf08ae3a4501f042108ee))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

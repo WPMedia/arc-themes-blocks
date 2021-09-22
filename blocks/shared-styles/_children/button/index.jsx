@@ -111,8 +111,8 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
       // istanbul ignore next
       case BUTTON_STYLES.PRIMARY_REVERSE:
         return `
-          background-color: #ffffff;
-          border-color: #ffffff;
+          background-color: #fff;
+          border-color: #fff;
           color: ${primaryColor};
 
           &:hover {
@@ -146,18 +146,18 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         return `
           background-color: ${primaryColor};
           border-color: ${primaryColor};
-          color: #ffffff;
+          color: #fff;
 
           &:hover {
-            color: #ffffff;
+            color: #fff;
           }
         `;
       case BUTTON_STYLES.DEFAULT:
       default:
         // istanbul ignore next
         return `
-          background-color: #ffffff;
-          border-color: #ffffff;
+          background-color: #fff;
+          border-color: #fff;
           color: #191919;
 
           &:hover {

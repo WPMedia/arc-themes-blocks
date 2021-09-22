@@ -7,7 +7,7 @@ on:
     paths:
       - "**.js"
       - "**.jsx"
-      - "*.scss"
+      - "**.scss"
       - "**/intl.json"
 
 # Publishes beta builds with the dist tag of "beta" and

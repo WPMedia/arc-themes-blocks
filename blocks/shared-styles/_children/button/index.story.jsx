@@ -177,12 +177,6 @@ export const PrimaryLarge = () => (
   />
 );
 
-export const LongText = () => (
-  <Button
-    text="Sign up to get the very best experience and this other really long work and such and more and even more text.Sign up to get the very best experience and this other really long work and such and more and even more text."
-  />
-);
-
 export const CustomAriaLabel = () => (
   <Button
     text="Login"

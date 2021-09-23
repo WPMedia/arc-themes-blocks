@@ -59,24 +59,20 @@ const iconTypeStringToIconTypeComponent = (
   }
 
   const icons = {
-    user: <UserIcon
-      height={iconHeightWidth}
-      width={iconHeightWidth}
-      fill={iconColor}
-    />,
-    'chevron-up': <ChevronUpIcon
-      height={iconHeightWidth}
-      width={iconHeightWidth}
-      fill={iconColor}
-    />,
-    'chevron-down': <ChevronDownIcon
-      height={iconHeightWidth}
-      width={iconHeightWidth}
-      fill={iconColor}
-    />,
+    user: UserIcon,
+    'chevron-up': ChevronUpIcon,
+    'chevron-down': ChevronDownIcon,
   };
 
-  return icons[iconTypeString] || null;
+  const iconProps = {
+    height: iconHeightWidth,
+    width: iconHeightWidth,
+    fill: iconColor,
+  };
+
+  const Icon = icons[iconTypeString] || null;
+
+  return Icon ? <Icon {...iconProps} /> : null;
 };
 
 // istanbul ignoring because we don't have a good way to test styled components yet

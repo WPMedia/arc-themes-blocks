@@ -42,8 +42,6 @@ const UI_DARK_GRAY_COLOR = '#191919';
 const iconTypeStringToIconTypeComponent = (
   iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
 ) => {
-  let Icon = null;
-
   let iconColor = primaryColor;
 
   switch (buttonStyle) {
@@ -60,44 +58,25 @@ const iconTypeStringToIconTypeComponent = (
       iconColor = UI_DARK_GRAY_COLOR;
   }
 
-  if (iconTypeString) {
-    switch (iconTypeString) {
-      case 'user':
-        Icon = (
-          // todo: width and height for large and medium icons are different
-          // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
-          <UserIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'chevron-up':
-        Icon = (
-          <ChevronUpIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'chevron-down':
-        Icon = (
-          <ChevronDownIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      default:
-        Icon = null;
-        break;
-    }
-  }
+  const icons = {
+    user: <UserIcon
+      height={iconHeightWidth}
+      width={iconHeightWidth}
+      fill={iconColor}
+    />,
+    'chevron-up': <ChevronUpIcon
+      height={iconHeightWidth}
+      width={iconHeightWidth}
+      fill={iconColor}
+    />,
+    'chevron-down': <ChevronDownIcon
+      height={iconHeightWidth}
+      width={iconHeightWidth}
+      fill={iconColor}
+    />,
+  };
 
-  return Icon;
+  return icons[iconTypeString] || null;
 };
 
 // istanbul ignoring because we don't have a good way to test styled components yet

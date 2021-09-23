@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/video-player-block@5.15.0...@wpmedia/video-player-block@5.16.0) (2021-09-15)
+
+
+### Performance Improvements
+
+* Reuse secondary and primary font rather than duplicating styled components ([9c201a4](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9c201a4a8076204aea8b09bfc0445d8f85aef9f2))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

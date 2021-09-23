@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/ads-block@5.15.0...@wpmedia/ads-block@5.16.0) (2021-09-15)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+### Bug Fixes
+
+* Match default value to a designated block ([991238b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/991238b273c59c092090adffc1b88133b287a812))
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+### Bug Fixes
+
+* Remove exhaustive hooks issue and remove unnecessary eslint ignore ([8bed4ab](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8bed4ab8524ff27814023ca85af2613307a2510d))
+
+
+### Performance Improvements
+
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+* Remove testfiles from package with nested npmignore to override files declaration ([7af4ec9](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7af4ec9b0973341302934d001886bd68bf64ad78))
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 

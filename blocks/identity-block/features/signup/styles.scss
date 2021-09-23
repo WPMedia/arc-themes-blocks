@@ -1,25 +1,4 @@
-.xpmedia-subs-input {
-  > * {
-    margin-bottom: 1rem;
-  }
-
-  input {
-    padding: 0.5rem;
-    width: 100%;
-  }
-}
-
-.xpmedia-subs-filled-button {
-  // primary color for arc subs
-  background-color: #183bb6;
-  color: $ui-btn-white-color;
-  border: 0;
-}
-
-.xpmedia-subs-medium-button {
-  padding: map-get($spacers, 'sm');
-  width: 100%;
-  line-height: 1.5;
-  font-size: calculateRem(16px);
-  border-radius: calculateRem(4px);
+.xpmedia-subs-signup {
+  max-width: 37rem;
+  margin: 3rem auto 0;
 }

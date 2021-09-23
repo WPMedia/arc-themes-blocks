@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import useIdentity from '../Identity';
 import './styles.scss';
 
-const SocialSignOn = () => {
+const SocialSignOn = ({ onError, redirectURL }) => {
   const { Identity } = useIdentity();
   const config = Identity?.configOptions ?? {};
 
@@ -14,11 +13,9 @@ const SocialSignOn = () => {
     window.onFacebookSignOn = async () => {
       try {
         await Identity.facebookSignOn();
-        // history.push('/profile');
-        // window.location = redirectURL;
+        window.location = redirectURL;
       } catch (e) {
-        // setErr(e);
-        // TODO: Deal with error messaging
+        onError();
       }
     };
   }
@@ -40,8 +37,8 @@ const SocialSignOn = () => {
       await Identity.initGoogleLogin(null, {
         width: 300,
         height: 48,
-        onSuccess: console.log, // Need to redirect
-        onFailure: console.log, // TODO: Deal with error messaging
+        onSuccess: () => { window.location = redirectURL; },
+        onFailure: () => { onError(); },
       });
     };
     if (config.googleClientId && !isGoogleInitialized) {
@@ -56,7 +53,9 @@ const SocialSignOn = () => {
     config.facebookAppId,
     config.googleClientId,
     isFacebookInitialized,
-    isGoogleInitialized]);
+    isGoogleInitialized,
+    onError,
+    redirectURL]);
 
   if (!Identity) {
     return null;

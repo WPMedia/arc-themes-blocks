@@ -1,14 +1,114 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import SocialSignOnComponent from '../../components/SocialSignOn';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import ReCaptcha from 'react-google-recaptcha';
+import SocialSignOn from '../../components/SocialSignOn';
+import useIdentity from '../../components/Identity';
+import './styles.scss';
 
-const SocialSignOn = () => {
-  return <SocialSignOnComponent />;
+const SocialSignOnBlock = ({ customFields }) => {
+  let { redirectURL } = customFields;
+  const {
+    redirectToPreviousPage,
+    loggedInPageLocation,
+  } = customFields;
+
+  const { isAdmin, arcSite } = useFusionContext();
+  const { locale } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
+
+  const { Identity, isInitialized } = useIdentity();
+
+  const [setRecaptchaToken] = useState();
+  const [recaptchaConfig, setRecaptchaConfig] = useState({
+    signinRecaptcha: false,
+    status: 'initial',
+  });
+
+  const [error, setError] = useState();
+
+  if (redirectToPreviousPage && !isServerSide()) {
+    redirectURL = document?.referrer;
+  }
+
+  useEffect(() => {
+    if (Identity) {
+      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
+      Identity.getConfig()
+        .then((response) => {
+          const {
+            signinRecaptcha,
+            recaptchaSiteKey,
+          } = response;
+
+          setRecaptchaConfig({
+            signinRecaptcha,
+            recaptchaSiteKey,
+            status: 'success',
+          });
+        }).catch(() => setRecaptchaConfig({ status: 'error' }));
+    }
+  }, [Identity, phrases]);
+
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+      const isLoggedIn = await Identity.isLoggedIn();
+      if (isLoggedIn) {
+        window.location = loggedInPageLocation;
+      }
+    };
+    if (Identity && !isAdmin) {
+      checkLoggedInStatus();
+    }
+  }, [Identity, loggedInPageLocation, isAdmin]);
+
+  if (!isInitialized) {
+    return null;
+  }
+
+  return (
+    <section className="xpmedia-subs-social-sign-on">
+      {
+          recaptchaConfig.signinRecaptcha ? (
+            <section className="xpmedia-subs-login-recaptcha">
+              <ReCaptcha
+                sitekey={recaptchaConfig.recaptchaSiteKey}
+                onChange={setRecaptchaToken}
+              />
+            </section>
+          ) : null
+        }
+      <SocialSignOn
+        onError={() => { setError(phrases.t('identity-block.login-form-error')); }}
+        redirectURL={redirectURL}
+      />
+      {error && <div className="social-sign-on-error">{error}</div> }
+    </section>
+  );
 };
 
-SocialSignOn.label = 'Identity Social Sign On - Arc Block';
+SocialSignOnBlock.label = 'Identity Social Sign On - Arc Block';
 
-SocialSignOn.propTypes = {
-}
+SocialSignOnBlock.propTypes = {
+  customFields: PropTypes.shape({
+    redirectURL: PropTypes.string.tag({
+      name: 'Redirect URL',
+      defaultValue: '/account/profile/',
+    }),
+    redirectToPreviousPage: PropTypes.bool.tag({
+      name: 'Redirect to previous page',
+      defaultValue: true,
+      description: 'Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL',
+    }),
+    loggedInPageLocation: PropTypes.string.tag({
+      name: 'Logged In URL',
+      defaultValue: '/account/',
+      description: 'The URL to which a user would be redirected to if logged in an vist a page with the login form on',
+    }),
+  }),
+};
 
-export default SocialSignOn;
+export default SocialSignOnBlock;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
@@ -11,58 +12,51 @@ import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import SocialSignOn from '../../components/SocialSignOn';
 
 import useIdentity from '../../components/Identity';
-
 import './styles.scss';
 
-const Login = ({ customFields, arcSite }) => {
+const Login = ({ customFields }) => {
   let { redirectURL } = customFields;
   const {
     redirectToPreviousPage,
+    loggedInPageLocation,
     forgotPasswordURL,
     signupURL,
   } = customFields;
 
-  const { locale = 'en' } = getProperties(arcSite);
+  const { isAdmin, arcSite } = useFusionContext();
+  const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const { Identity, isInitialized } = useIdentity();
 
-  const [ password, setPassword ] = useState();
-  const [ email, setEmail ] = useState();
-
-  const [ recaptchaToken, setRecaptchaToken ] = useState();
-  const [ recaptchaConfig, setRecaptchaConfig ] = useState({
+  const [recaptchaToken, setRecaptchaToken] = useState();
+  const [recaptchaConfig, setRecaptchaConfig] = useState({
     signinRecaptcha: false,
-    status: 'initial'
+    status: 'initial',
   });
 
-  const [ error, setError ] = useState();
+  const [error, setError] = useState();
 
   if (redirectToPreviousPage && !isServerSide()) {
     redirectURL = document?.referrer;
   }
 
   useEffect(() => {
-    const getConfig = async () => {
-      await Identity.getConfig()
+    if (Identity) {
+      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
+      Identity.getConfig()
         .then((response) => {
           const {
             signinRecaptcha,
-            recaptchaSiteKey
+            recaptchaSiteKey,
           } = response;
 
           setRecaptchaConfig({
             signinRecaptcha,
             recaptchaSiteKey,
-            status: 'success'
+            status: 'success',
           });
-        })
-        .catch(() => setRecaptchaConfig({ status: 'error' }));
-    };
-
-    if (Identity) {
-      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
-      getConfig();
+        }).catch(() => setRecaptchaConfig({ status: 'error' }));
     }
   }, [Identity]);
 
@@ -70,13 +64,13 @@ const Login = ({ customFields, arcSite }) => {
     const checkLoggedInStatus = async () => {
       const isLoggedIn = await Identity.isLoggedIn();
       if (isLoggedIn) {
-        window.location = redirectURL;
+        window.location = loggedInPageLocation;
       }
     };
-    if (Identity) {
+    if (Identity && !isAdmin) {
       checkLoggedInStatus();
     }
-  }, [Identity]);
+  }, [Identity, loggedInPageLocation, isAdmin]);
 
   if (!isInitialized) {
     return null;
@@ -87,18 +81,15 @@ const Login = ({ customFields, arcSite }) => {
       <HeadlinedSubmitForm
         headline={phrases.t('identity-block.log-in')}
         buttonLabel={phrases.t('identity-block.log-in')}
-        onSubmit={(e) => {
-          e.preventDefault();
-          return Identity.login(email, password, { rememberMe: true, recaptchaToken })
-            .then(() => { window.location = redirectURL; })
-            .catch(() => setError('Something went wrong'));
-        }}
+        onSubmit={({ email, password }) => Identity
+          .login(email, password, { rememberMe: true, recaptchaToken })
+          .then(() => { window.location = redirectURL; })
+          .catch(() => setError(phrases.t('identity-block.login-form-error')))}
         formErrorText={error}
       >
         <FormInputField
           label={phrases.t('identity-block.email')}
           name="email"
-          onChange={(inputObject) => setEmail(inputObject.value)}
           required
           showDefaultError={false}
           type={FIELD_TYPES.EMAIL}
@@ -107,11 +98,9 @@ const Login = ({ customFields, arcSite }) => {
         <FormInputField
           label={phrases.t('identity-block.password')}
           name="password"
-          onChange={(inputObject) => setPassword(inputObject.value)}
           required
           showDefaultError={false}
           type={FIELD_TYPES.PASSWORD}
-          validationErrorMessage={phrases.t('identity-block.password-requirements')}
         />
         {
           recaptchaConfig.signinRecaptcha ? (
@@ -124,7 +113,10 @@ const Login = ({ customFields, arcSite }) => {
           ) : null
         }
       </HeadlinedSubmitForm>
-      <SocialSignOn />
+      <SocialSignOn
+        onError={() => { setError(phrases.t('identity-block.sign-up-form-error')); }}
+        redirectURL={redirectURL}
+      />
       <section className="xpmedia-subs-login-footer">
         <a href={forgotPasswordURL}>{phrases.t('identity-block.forgot-password')}</a>
         <a href={signupURL}>{phrases.t('identity-block.signup-cta')}</a>
@@ -146,13 +138,18 @@ Login.propTypes = {
       defaultValue: true,
       description: 'Do you wish for the user to be redirected to the page they entered from before logging in? This overrides redirect URL',
     }),
+    loggedInPageLocation: PropTypes.string.tag({
+      name: 'Logged In URL',
+      defaultValue: '/account/',
+      description: 'The URL to which a user would be redirected to if logged in an vist a page with the login form on',
+    }),
     forgotPasswordURL: PropTypes.string.tag({
       name: 'Forgot password URL',
-      defaultValue: '/account/forgot-password/'
+      defaultValue: '/account/forgot-password/',
     }),
     signupURL: PropTypes.string.tag({
       name: 'Sign Up URL',
-      defaultValue: '/account/sign-up/'
+      defaultValue: '/account/sign-up/',
     }),
   }),
 };

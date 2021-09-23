@@ -11,7 +11,6 @@ const SmallPromoItem = ({ customFields, arcSite }) => {
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? {
-        'arc-site': arcSite,
         feature: 'small-promo',
         ...customFields.itemContentConfig.contentConfigValues,
       }

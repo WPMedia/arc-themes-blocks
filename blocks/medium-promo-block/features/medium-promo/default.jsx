@@ -12,7 +12,6 @@ const MediumPromoItem = ({ customFields, arcSite }) => {
     source: customFields?.itemContentConfig?.contentService ?? null,
     query: customFields?.itemContentConfig?.contentConfigValues
       ? {
-        'arc-site': arcSite,
         feature: 'medium-promo',
         ...customFields?.itemContentConfig?.contentConfigValues,
       }

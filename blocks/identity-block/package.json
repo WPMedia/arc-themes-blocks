@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/identity-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Fusion themes identity block.",
   "author": "ARC XP",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -12,6 +12,7 @@
     "chains",
     "layouts",
     "components",
+    "utils",
     "intl.json"
   ],
   "publishConfig": {
@@ -28,7 +29,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/shared-styles": "*"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

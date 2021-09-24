@@ -9,8 +9,6 @@ import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import FormPasswordConfirm from '../../components/FormPasswordConfirm';
 import validatePasswordPattern from '../../utils/validate-password-pattern';
 import passwordValidationMessage from '../../utils/password-validation-message';
-import SocialSignOn from '../../components/SocialSignOn';
-import './styles.scss';
 
 const SignUp = ({ customFields, arcSite }) => {
   let { redirectURL } = customFields;
@@ -100,48 +98,42 @@ const SignUp = ({ customFields, arcSite }) => {
   });
 
   return (
-    <section className="xpmedia-subs-signup">
-      <HeadlinedSubmitForm
-        headline={phrases.t('identity-block.sign-up')}
-        buttonLabel={phrases.t('identity-block.sign-up')}
-        onSubmit={({ email, password }) => Identity.signUp({
-          userName: email,
-          credentials: password,
-        }, {
-          email,
-        })
-          .then(() => { window.location = redirectURL; })
-          .catch(() => setError(phrases.t('identity-block.sign-up-form-error')))}
-        formErrorText={error}
-      >
-        <FormInputField
-          label={phrases.t('identity-block.email')}
-          name="email"
-          required
-          showDefaultError={false}
-          type={FIELD_TYPES.EMAIL}
-          validationErrorMessage={phrases.t('identity-block.email-requirements')}
-        />
-        <FormPasswordConfirm
-          name="password"
-          label={phrases.t('identity-block.password')}
-          validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
-          validationPattern={validatePasswordPattern(
-            pwLowercase,
-            pwMinLength,
-            pwPwNumbers,
-            pwSpecialCharacters,
-            pwUppercase,
-          )}
-          confirmLabel={phrases.t('identity-block.confirm-password')}
-          confirmValidationErrorMessage={phrases.t('identity-block.confirm-password-error')}
-        />
-      </HeadlinedSubmitForm>
-      <SocialSignOn
-        onError={() => { setError(phrases.t('identity-block.sign-up-form-error')); }}
-        redirectURL={redirectURL}
+    <HeadlinedSubmitForm
+      headline={phrases.t('identity-block.sign-up')}
+      buttonLabel={phrases.t('identity-block.sign-up')}
+      onSubmit={({ email, password }) => Identity.signUp({
+        userName: email,
+        credentials: password,
+      }, {
+        email,
+      })
+        .then(() => { window.location = redirectURL; })
+        .catch(() => setError(phrases.t('identity-block.sign-up-form-error')))}
+      formErrorText={error}
+    >
+      <FormInputField
+        label={phrases.t('identity-block.email')}
+        name="email"
+        required
+        showDefaultError={false}
+        type={FIELD_TYPES.EMAIL}
+        validationErrorMessage={phrases.t('identity-block.email-requirements')}
       />
-    </section>
+      <FormPasswordConfirm
+        name="password"
+        label={phrases.t('identity-block.password')}
+        validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
+        validationPattern={validatePasswordPattern(
+          pwLowercase,
+          pwMinLength,
+          pwPwNumbers,
+          pwSpecialCharacters,
+          pwUppercase,
+        )}
+        confirmLabel={phrases.t('identity-block.confirm-password')}
+        confirmValidationErrorMessage={phrases.t('identity-block.confirm-password-error')}
+      />
+    </HeadlinedSubmitForm>
   );
 };
 

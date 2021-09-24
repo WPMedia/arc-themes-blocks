@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { isServerSide, ErrorIcon } from '@wpmedia/engine-theme-sdk';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import ReCaptcha from 'react-google-recaptcha';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import SocialSignOn from '../../components/SocialSignOn';
 import useIdentity from '../../components/Identity';
 import './styles.scss';
@@ -22,12 +22,6 @@ const SocialSignOnBlock = ({ customFields }) => {
 
   const { Identity, isInitialized } = useIdentity();
 
-  const [setRecaptchaToken] = useState();
-  const [recaptchaConfig, setRecaptchaConfig] = useState({
-    signinRecaptcha: false,
-    status: 'initial',
-  });
-
   const [error, setError] = useState();
 
   if (redirectToPreviousPage && !isServerSide()) {
@@ -35,21 +29,12 @@ const SocialSignOnBlock = ({ customFields }) => {
   }
 
   useEffect(() => {
+    const getConfig = async () => {
+      await Identity.getConfig();
+    };
     if (Identity) {
       // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
-      Identity.getConfig()
-        .then((response) => {
-          const {
-            signinRecaptcha,
-            recaptchaSiteKey,
-          } = response;
-
-          setRecaptchaConfig({
-            signinRecaptcha,
-            recaptchaSiteKey,
-            status: 'success',
-          });
-        }).catch(() => setRecaptchaConfig({ status: 'error' }));
+      getConfig();
     }
   }, [Identity, phrases]);
 
@@ -71,21 +56,18 @@ const SocialSignOnBlock = ({ customFields }) => {
 
   return (
     <section className="xpmedia-subs-social-sign-on">
-      {
-          recaptchaConfig.signinRecaptcha ? (
-            <section className="xpmedia-subs-login-recaptcha">
-              <ReCaptcha
-                sitekey={recaptchaConfig.recaptchaSiteKey}
-                onChange={setRecaptchaToken}
-              />
-            </section>
-          ) : null
-        }
       <SocialSignOn
         onError={() => { setError(phrases.t('identity-block.login-form-error')); }}
         redirectURL={redirectURL}
       />
-      {error && <div className="social-sign-on-error">{error}</div> }
+      {error ? (
+        <section className="xpmedia-social-sign-on-error" role="alert">
+          <PrimaryFont as="p">
+            <ErrorIcon />
+            {error}
+          </PrimaryFont>
+        </section>
+      ) : null}
     </section>
   );
 };

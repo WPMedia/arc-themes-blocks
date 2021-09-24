@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import useIdentity from '../Identity';
 import './styles.scss';
 
 const SocialSignOn = ({ onError, redirectURL }) => {
   const { Identity } = useIdentity();
-  const config = Identity?.configOptions ?? {};
+  const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
 
   const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);
   const [isFacebookInitialized, setIsFacebookInitialized] = useState(false);
 
-  if (!window.onFacebookSignOn) {
+  if (!isServerSide() && !window.onFacebookSignOn) {
     window.onFacebookSignOn = async () => {
       try {
         await Identity.facebookSignOn();
@@ -23,8 +24,9 @@ const SocialSignOn = ({ onError, redirectURL }) => {
   useEffect(() => {
     const fetchConfig = async () => {
       await Identity.getConfig();
+      setConfig(Identity.configOptions);
     };
-    if (!Identity && !Identity.configOptions) {
+    if (Identity && !Identity.configOptions) {
       fetchConfig();
     }
   }, [Identity]);
@@ -87,7 +89,5 @@ const SocialSignOn = ({ onError, redirectURL }) => {
     </section>
   );
 };
-
-SocialSignOn.displayName = 'SocialSignOn';
 
 export default SocialSignOn;

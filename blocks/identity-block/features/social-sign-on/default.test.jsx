@@ -6,14 +6,6 @@ import useIdentity from '../../components/Identity';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
 
-jest.mock('react-google-recaptcha', () => function ReCaptcha() {
-  return (
-    <div>
-      ReCaptcha
-    </div>
-  );
-});
-
 jest.mock('../../components/Identity');
 
 const defaultCustomFields = {

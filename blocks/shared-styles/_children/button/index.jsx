@@ -279,8 +279,8 @@ Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
   buttonStyle: BUTTON_STYLES.DEFAULT,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
-  iconType: '',
-  secondaryIconType: '',
+  iconType: 'user',
+  secondaryIconType: 'user',
 };
 
 export default Button;

@@ -73,7 +73,7 @@ export default ({
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-search ${isSearchBarOpen ? 'open' : ''} ${navColor === 'light' ? 'light' : 'dark'}`;
+  const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}${navColor === 'light' ? ' light' : ' dark'}`;
   const buttonStyle = isSearchBarOpen
     ? getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)
     : getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);

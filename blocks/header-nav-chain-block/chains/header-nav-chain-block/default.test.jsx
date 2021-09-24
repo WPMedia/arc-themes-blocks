@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Navigation from './default';
-import SearchBox from './_children/search-box';
 import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from './nav-helper';
 
 jest.mock('focus-trap-react', () => ({ children }) => children);

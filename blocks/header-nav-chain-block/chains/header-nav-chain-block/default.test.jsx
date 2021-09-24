@@ -63,7 +63,7 @@ describe('the header navigation feature for the default output type', () => {
         expect(navLeftDesktop).toHaveLength(1);
         const searchWidget = navLeftDesktop.find('.nav-search');
         expect(searchWidget).toHaveLength(1);
-        const menuWidget = navLeftDesktop.find('.nav-sections-btn');
+        const menuWidget = navLeftDesktop.find('.nav-sections-btn button');
         expect(menuWidget).toHaveLength(1);
       });
 
@@ -71,7 +71,7 @@ describe('the header navigation feature for the default output type', () => {
         const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
         const navLeftDesktop = wrapper.find('.nav-left > .nav-components--mobile');
         expect(navLeftDesktop).toHaveLength(1);
-        const menuWidget = navLeftDesktop.find('.nav-sections-btn');
+        const menuWidget = navLeftDesktop.find('.nav-sections-btn button');
         expect(menuWidget).toHaveLength(1);
       });
 
@@ -297,12 +297,12 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      expect(wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn')).toHaveLength(1);
+      expect(wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button')).toHaveLength(1);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
     });
 
@@ -310,7 +310,7 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
       wrapper.find('div#nav-sections').simulate('click', { target: { closest: () => false } });
@@ -321,7 +321,7 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
       wrapper.find('div#nav-sections').simulate('click', { target: { closest: () => true } });

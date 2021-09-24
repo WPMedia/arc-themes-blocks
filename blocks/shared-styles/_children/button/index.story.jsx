@@ -174,14 +174,10 @@ export const PrimaryLarge = () => (
     buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonSize={BUTTON_SIZES.LARGE}
     text="Sign up"
+    secondaryIconType="chevron-up"
   />
 );
-
-export const LongText = () => (
-  <Button
-    text="Sign up to get the very best experience and this other really long work and such and more and even more text.Sign up to get the very best experience and this other really long work and such and more and even more text."
-  />
-);
+// end secondary reverse
 
 export const CustomAriaLabel = () => (
   <Button

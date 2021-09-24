@@ -37,17 +37,20 @@ export const BUTTON_TYPES = {
   LABEL_AND_RIGHT_ICON: 'LABEL_AND_RIGHT_ICON',
 };
 
+// names based on zeplin docs
+const UI_WHITE_COLOR = '#fff';
+const UI_LIGHT_GRAY_COLOR = '#dadada';
+const UI_DARK_GRAY_COLOR = '#191919';
+
 const iconTypeStringToIconTypeComponent = (
   iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
 ) => {
-  let Icon = null;
-
   let iconColor = primaryColor;
 
   switch (buttonStyle) {
     case BUTTON_STYLES.PRIMARY:
     case BUTTON_STYLES.SECONDARY_REVERSE:
-      iconColor = '#fff';
+      iconColor = UI_WHITE_COLOR;
       break;
     case BUTTON_STYLES.PRIMARY_REVERSE:
       iconColor = primaryColor;
@@ -55,65 +58,26 @@ const iconTypeStringToIconTypeComponent = (
     case BUTTON_STYLES.SECONDARY:
     case BUTTON_STYLES.DEFAULT:
     default:
-      iconColor = '#191919';
+      iconColor = UI_DARK_GRAY_COLOR;
   }
 
-  if (iconTypeString) {
-    switch (iconTypeString) {
-      case 'user':
-        Icon = (
-          // todo: width and height for large and medium icons are different
-          // https://app.zeplin.io/project/603fa53e2626ed1592e7c0e6/screen/60411633bdf9b380a0f087ca
-          <UserIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'chevron-up':
-        Icon = (
-          <ChevronUpIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'chevron-down':
-        Icon = (
-          <ChevronDownIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'hamburger-menu':
-        Icon = (
-          <HamburgerMenuIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      case 'search':
-        Icon = (
-          <SearchIcon
-            height={iconHeightWidth}
-            width={iconHeightWidth}
-            fill={iconColor}
-          />
-        );
-        break;
-      default:
-        Icon = null;
-        break;
-    }
-  }
+  const icons = {
+    'chevron-down': ChevronDownIcon,
+    'chevron-up': ChevronUpIcon,
+    'hamburger-menu': HamburgerMenuIcon,
+    search: SearchIcon,
+    user: UserIcon,
+  };
 
-  return Icon;
+  const iconProps = {
+    height: iconHeightWidth,
+    width: iconHeightWidth,
+    fill: iconColor,
+  };
+
+  const Icon = icons[iconTypeString] || null;
+
+  return Icon ? <Icon {...iconProps} /> : null;
 };
 
 // istanbul ignoring because we don't have a good way to test styled components yet
@@ -132,8 +96,8 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
       // istanbul ignore next
       case BUTTON_STYLES.PRIMARY_REVERSE:
         return `
-          background-color: #ffffff;
-          border-color: #ffffff;
+          background-color: ${UI_WHITE_COLOR};
+          border-color: ${UI_WHITE_COLOR};
           color: ${primaryColor};
 
           &:hover {
@@ -144,22 +108,22 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: #dadada;
-          color: #191919;
+          border-color: ${UI_LIGHT_GRAY_COLOR};
+          color: ${UI_DARK_GRAY_COLOR};
 
           &:hover {
-            color: #191919;
+            color: ${UI_DARK_GRAY_COLOR};
           }
         `;
       case BUTTON_STYLES.SECONDARY_REVERSE:
         // istanbul ignore next
         return `
           background-color: transparent;
-          border-color: #fff;
-          color: #fff;
+          border-color: ${UI_WHITE_COLOR};
+          color: ${UI_WHITE_COLOR};
 
           &:hover {
-            color: #fff;
+            color: ${UI_WHITE_COLOR};
           }
         `;
       case BUTTON_STYLES.PRIMARY:
@@ -167,22 +131,22 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
         return `
           background-color: ${primaryColor};
           border-color: ${primaryColor};
-          color: #ffffff;
+          color: ${UI_WHITE_COLOR};
 
           &:hover {
-            color: #ffffff;
+            color: ${UI_WHITE_COLOR};
           }
         `;
       case BUTTON_STYLES.DEFAULT:
       default:
         // istanbul ignore next
         return `
-          background-color: #ffffff;
-          border-color: #ffffff;
-          color: #191919;
+          background-color: ${UI_WHITE_COLOR};
+          border-color: ${UI_WHITE_COLOR};
+          color: ${UI_DARK_GRAY_COLOR};
 
           &:hover {
-            color: #191919;
+            color: ${UI_DARK_GRAY_COLOR};
           }
         `;
     }
@@ -314,7 +278,8 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.string,
+  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
+  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
 
@@ -329,7 +294,8 @@ Button.defaultProps = {
   buttonSize: BUTTON_SIZES.MEDIUM,
   buttonStyle: BUTTON_STYLES.DEFAULT,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
-  iconType: '',
+  iconType: 'user',
+  secondaryIconType: 'user',
 };
 
 export default Button;

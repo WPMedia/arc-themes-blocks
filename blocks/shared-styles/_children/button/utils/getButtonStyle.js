@@ -5,7 +5,7 @@ function getNavSpecificPrimaryButtonTheme(navColor, navBarBackground) {
     return BUTTON_STYLES.PRIMARY_REVERSE;
   }
 
-  return navColor === 'dark' ? BUTTON_STYLES.DEFAULT : BUTTON_STYLES.PRIMARY;
+  return navColor === 'light' ? BUTTON_STYLES.PRIMARY : BUTTON_STYLES.DEFAULT;
 }
 
 function getNavSpecificSecondaryButtonTheme(navColor, navBarBackground) {

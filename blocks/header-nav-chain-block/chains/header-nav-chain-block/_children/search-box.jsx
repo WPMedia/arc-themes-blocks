@@ -1,9 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SearchIcon } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import {
+  Button,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  getNavSpecificPrimaryButtonTheme,
+  getNavSpecificSecondaryButtonTheme,
+} from '@wpmedia/shared-styles';
 
 export default ({
-  alwaysOpen = false, iconSize = 16, placeholderText, navBarColor = 'dark', customSearchAction = null,
+  alwaysOpen = false, placeholderText, customSearchAction = null,
 }) => {
+  const { arcSite } = useFusionContext();
+  const {
+    locale = 'en',
+    navBarBackground,
+    navColor = 'dark',
+  } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
+
   const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
   const [isSearchBarPending, setSearchBarPending] = useState(false);
   const searchInput = useRef(null);
@@ -56,22 +73,26 @@ export default ({
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-search ${isSearchBarOpen ? 'open' : ''} ${navBarColor === 'light' ? 'light' : 'dark'}`;
-  const btnClassNames = `nav-btn ${navBarColor === 'light' ? 'nav-btn-light' : 'nav-btn-dark'} transparent${!isSearchBarOpen ? ' border' : ''}`;
-  const iconFill = isSearchBarOpen ? '#666666' : null;
+  const navClassNames = `nav-search ${isSearchBarOpen ? 'open' : ''} ${navColor === 'light' ? 'light' : 'dark'}`;
+  const buttonStyle = isSearchBarOpen
+    ? getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)
+    : getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
 
   return (
     <div className={navClassNames}>
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
-      <button
-        className={btnClassNames}
+      <Button
+        aria-label={phrases.t('header-nav-chain-block.search-text')}
+        buttonSize={BUTTON_SIZES.SMALL}
+        buttonStyle={buttonStyle}
+        buttonType={BUTTON_TYPES.ICON_ONLY}
+        disabled={isSearchBarPending}
+        iconType="search"
         onClick={handleClick}
         onMouseDown={handleSearchBtnMousedown}
-        disabled={isSearchBarPending}
+        text={phrases.t('header-nav-chain-block.search-text')}
         type="button"
-      >
-        <SearchIcon fill={iconFill} height={iconSize} width={iconSize} />
-      </button>
+      />
     </div>
   );
 };

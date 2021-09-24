@@ -115,19 +115,6 @@ body.nav-open {
       width: 100%;
     }
 
-    button {
-      border: 0;
-      margin: 0;
-      padding-right: 12px;
-      position: absolute;
-      right: 0;
-    }
-
-    > .nav-btn-dark > svg > path {
-      fill: #292929;
-      opacity: 0.6;
-    }
-
     &.dark input {
       border: $border-width solid $border-color-bright;
     }
@@ -145,25 +132,7 @@ body.nav-open {
     line-height: 20px;
     margin: 0;
     padding: 0;
-    transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
     width: 0;
-  }
-
-  &.queryly > .nav-btn {
-    padding: 0;
-
-    label {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-items: center;
-      align-content: center;
-      padding-left: $btn-padding;
-      padding-right: $btn-padding;
-      cursor: pointer;
-    }
   }
 }
 

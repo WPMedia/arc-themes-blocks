@@ -278,8 +278,8 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
-  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
+  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down', 'hamburger-menu', 'search']),
+  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down', 'hamburger-menu', 'search']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
 

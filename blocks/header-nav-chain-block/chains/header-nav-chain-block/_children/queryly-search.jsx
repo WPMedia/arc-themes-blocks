@@ -31,7 +31,7 @@ const QuerylySearch = () => {
       aria-label={phrases.t('header-nav-chain-block.search-text')}
       buttonSize={BUTTON_SIZES.SMALL}
       buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-      buttondType={BUTTON_TYPES.ICON_ONLY}
+      buttonType={BUTTON_TYPES.ICON_ONLY}
       iconType="search"
       onClick={querylySearchClick}
       text={phrases.t('header-nav-chain-block.search-text')}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import PropTypes from '@arc-fusion/prop-types';
 import useIdentity from '../Identity';
 import './styles.scss';
 
@@ -88,6 +89,11 @@ const SocialSignOn = ({ onError, redirectURL }) => {
       }
     </section>
   );
+};
+
+SocialSignOn.propTypes = {
+  redirectURL: PropTypes.string.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
 export default SocialSignOn;

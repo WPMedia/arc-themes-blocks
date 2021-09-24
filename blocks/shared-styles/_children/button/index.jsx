@@ -263,7 +263,8 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.string,
+  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
+  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
 
@@ -279,6 +280,7 @@ Button.defaultProps = {
   buttonStyle: BUTTON_STYLES.DEFAULT,
   buttonType: BUTTON_TYPES.LABEL_ONLY,
   iconType: '',
+  secondaryIconType: '',
 };
 
 export default Button;

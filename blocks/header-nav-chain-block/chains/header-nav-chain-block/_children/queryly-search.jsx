@@ -21,9 +21,9 @@ const querylySearchClick = () => {
 const QuerylySearch = () => {
   const { arcSite } = useFusionContext();
   const {
-    locale = 'en',
+    locale,
     navBarBackground,
-    navColor = 'dark',
+    navColor,
   } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
   return (

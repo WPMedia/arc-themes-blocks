@@ -291,46 +291,6 @@ describe('the header navigation feature for the default output type', () => {
       });
     });
   });
-  describe('nav color scheme', () => {
-    describe('when the nav color is set to "dark"', () => {
-      it('should set the "dark" class on the component', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('#main-nav')).toHaveClassName('dark');
-      });
-
-      it('should set all buttons to use the light color scheme', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-dark')).toEqual(true);
-      });
-
-      it('should pass the navColor to the SearchBox', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'dark');
-      });
-    });
-
-    describe('when the nav color is set to "light"', () => {
-      it('should set the "light" class on the component', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('#main-nav')).toHaveClassName('light');
-      });
-      it('should set all buttons to use the light color scheme', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-light')).toEqual(true);
-      });
-
-      it('should pass the navColor to the SearchBox', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'light');
-      });
-    });
-  });
 
   describe('hamburger menu', () => {
     it('opens and closes with the sections button', () => {

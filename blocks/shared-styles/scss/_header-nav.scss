@@ -106,6 +106,17 @@ body.nav-open {
   justify-content: center;
   position: relative;
 
+  input {
+    border: 0;
+    border-radius: calculateRem(4px) !important;
+    box-shadow: none;
+    font-size: 0.9em;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    width: 0;
+  }
+
   &.open {
     input {
       font-size: 16px;
@@ -122,17 +133,6 @@ body.nav-open {
     &.light input {
       border: $border-width solid $ui-light-gray;
     }
-  }
-
-  input {
-    border: 0;
-    border-radius: calculateRem(4px) !important;
-    box-shadow: none;
-    font-size: 0.9em;
-    line-height: 20px;
-    margin: 0;
-    padding: 0;
-    width: 0;
   }
 }
 

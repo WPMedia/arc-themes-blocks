@@ -179,13 +179,6 @@ export const PrimaryLarge = () => (
 );
 // end secondary reverse
 
-export const CustomAriaLabel = () => (
-  <Button
-    text="Login"
-    ariaLabel="Opens login window"
-  />
-);
-
 export const CustomSubmitType = () => (
   <Button
     text="Type Submit"

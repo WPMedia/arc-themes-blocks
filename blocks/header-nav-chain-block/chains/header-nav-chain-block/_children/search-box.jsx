@@ -5,8 +5,8 @@ import getTranslatedPhrases from 'fusion:intl';
 import {
   Button,
   BUTTON_SIZES,
+  BUTTON_STYLES,
   BUTTON_TYPES,
-  getNavSpecificPrimaryButtonTheme,
   getNavSpecificSecondaryButtonTheme,
 } from '@wpmedia/shared-styles';
 
@@ -75,7 +75,7 @@ export default ({
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
   const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}${navColor === 'light' ? ' light' : ' dark'}`;
   const buttonStyle = isSearchBarOpen
-    ? getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)
+    ? BUTTON_STYLES.DEFAULT
     : getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
 
   return (

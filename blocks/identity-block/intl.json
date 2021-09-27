@@ -218,27 +218,5 @@
 		"no": "There's been an error logging you in",
 		"pt": "There's been an error logging you in",
 		"sv": "There's been an error logging you in"
-	},
-  "identity-block.forgot-password": {
-    "de": "Forgot your password?",
-    "en": "Forgot your password?",
-    "es": "Forgot your password?",
-    "fr": "Forgot your password?",
-    "ja": "Forgot your password?",
-    "ko": "Forgot your password?",
-    "no": "Forgot your password?",
-    "pt": "Forgot your password?",
-    "sv": "Forgot your password?"
-  },
-  "identity-block.signup-cta": {
-    "de":  "I'm new. Sign up for an account.",
-    "en":  "I'm new. Sign up for an account.",
-    "es":  "I'm new. Sign up for an account.",
-    "fr":  "I'm new. Sign up for an account.",
-    "ja":  "I'm new. Sign up for an account.",
-    "ko":  "I'm new. Sign up for an account.",
-    "no":  "I'm new. Sign up for an account.",
-    "pt":  "I'm new. Sign up for an account.",
-    "sv":  "I'm new. Sign up for an account."
-  }
+	}
 }

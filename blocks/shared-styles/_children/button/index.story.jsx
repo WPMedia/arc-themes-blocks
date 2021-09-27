@@ -177,13 +177,6 @@ export const PrimaryLarge = () => (
   />
 );
 
-export const CustomAriaLabel = () => (
-  <Button
-    text="Login"
-    ariaLabel="Opens login window"
-  />
-);
-
 export const CustomSubmitType = () => (
   <Button
     text="Type Submit"

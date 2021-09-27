@@ -67,7 +67,7 @@ const SubscriptionDialog = ({
         <Button
           as="a"
           buttonSize={BUTTON_SIZES.LARGE}
-          buttonStyle={BUTTON_STYLES.FILLED}
+          buttonStyle={BUTTON_STYLES.PRIMARY}
           buttonType={BUTTON_TYPES.LABEL_ONLY}
           href={actionUrl}
           text={actionText}

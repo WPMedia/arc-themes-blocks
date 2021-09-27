@@ -36,7 +36,7 @@ const SocialSignOnBlock = ({ customFields }) => {
       // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
       getConfig();
     }
-  }, [Identity, phrases]);
+  }, [Identity]);
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {

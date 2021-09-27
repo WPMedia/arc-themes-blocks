@@ -23,7 +23,7 @@ const QuerylySearch = () => {
   const {
     locale,
     navBarBackground,
-    navColor,
+    navColor = 'dark',
   } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
   return (

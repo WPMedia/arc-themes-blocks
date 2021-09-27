@@ -2,7 +2,7 @@ $arrow-size: calculateRem(10px);
 $border-color-dull: rgba(255, 255, 255, 0.5);
 $border-color-bright: rgba(255, 255, 255, 1);
 $border-width: 1px;
-$btn-size: calculateRem(32px);
+$btn-size: calculateRem(34px);
 $btn-padding: calculateRem(8px);
 $nav-search-border-color: $ui-light-gray;
 $overlay-z-index: 2;
@@ -126,7 +126,7 @@ body.nav-open {
 
   input {
     border: 0;
-    border-radius: 2px;
+    border-radius: calculateRem(4px) !important;
     box-shadow: none;
     font-size: 0.9em;
     line-height: 20px;

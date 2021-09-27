@@ -47,7 +47,6 @@ const NavWidget = ({
         onClick={menuButtonClickAction}
         text={phrases.t('header-nav-chain-block.sections-button')}
         type="button"
-
       />
     ))
   );

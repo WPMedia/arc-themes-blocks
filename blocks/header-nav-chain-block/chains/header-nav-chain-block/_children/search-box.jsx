@@ -10,6 +10,8 @@ import {
   getNavSpecificSecondaryButtonTheme,
 } from '@wpmedia/shared-styles';
 
+import './search-box.scss';
+
 export default ({
   alwaysOpen = false, placeholderText, customSearchAction = null,
 }) => {
@@ -73,7 +75,7 @@ export default ({
   };
 
   const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-  const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}${navColor === 'light' ? ' light' : ' dark'}`;
+  const navClassNames = `nav-search${isSearchBarOpen ? ' open' : ''}`;
   const buttonStyle = isSearchBarOpen
     ? BUTTON_STYLES.DEFAULT
     : getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
@@ -83,6 +85,7 @@ export default ({
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
       <Button
         aria-label={phrases.t('header-nav-chain-block.search-text')}
+        additionalClassNames="search-box--right-absolute-positioned"
         buttonSize={BUTTON_SIZES.SMALL}
         buttonStyle={buttonStyle}
         buttonType={BUTTON_TYPES.ICON_ONLY}

@@ -38,12 +38,12 @@ const SmallPromoItem = ({ customFields, arcSite }) => {
               type
               url
               resized_params {
-                400x300
-                400x267
-                400x225
-                274x206
-                274x183
-                274x154
+                800x600
+                800x533
+                800x450
+                600x450
+                600x400
+                600x338
               }
             }
           }
@@ -52,12 +52,12 @@ const SmallPromoItem = ({ customFields, arcSite }) => {
           type
           url
           resized_params {
-            400x300
-            400x267
-            400x225
-            274x206
-            274x183
-            274x154
+            800x600
+            800x533
+            800x450
+            600x450
+            600x400
+            600x338
           }
         }
       }

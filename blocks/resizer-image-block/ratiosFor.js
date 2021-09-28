@@ -25,9 +25,9 @@ const sizes = {
   },
   SM: {
     options: [
-      { kind: 'small', width: 274 },
-      { kind: 'medium', width: 274 },
-      { kind: 'large', width: 400 },
+      { kind: 'small', width: 600 },
+      { kind: 'medium', width: 800 },
+      { kind: 'large', width: 600 },
     ],
     defaultRatio: '3:2',
   },

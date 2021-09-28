@@ -161,10 +161,31 @@ export const SecondaryReverseDualIcon = () => (
 );
 // end secondary reverse
 
-export const PrimarySmall = () => (
+export const PrimarySmallLabelOnly = () => (
   <Button
     buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const PrimarySmallIconOnly = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.PRIMARY}
+    buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const PrimarySmallIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.PRIMARY}
+    buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
     text="Sign up"
   />
 );

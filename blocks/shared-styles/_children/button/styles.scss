@@ -40,12 +40,15 @@
 
 .xpmedia-button--small {
   padding: calculateRem(8px);
+  height: calculateRem(32px);
 }
 
 .xpmedia-button--medium {
   padding: calculateRem(12px);
+  height: calculateRem(48px);
 }
 
 .xpmedia-button--large {
   padding: calculateRem(16px);
+  height: calculateRem(64px);
 }

@@ -3,22 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
 # 5.15.0 (2021-09-15)
 
 
 
 ## 5.14.1 (2021-07-21)
-
-
-
-## 5.11.1-hotfix.0 (2021-04-23)
-
-
-
-## 5.10.3-hotfix.0 (2021-04-12)
-
-**Note:** Version bump only for package @wpmedia/headline-block
-
 
 
 

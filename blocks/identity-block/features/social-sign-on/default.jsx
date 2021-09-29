@@ -78,7 +78,7 @@ SocialSignOnBlock.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
-      defaultValue: '/account/profile/',
+      defaultValue: '/account/',
     }),
     redirectToPreviousPage: PropTypes.bool.tag({
       name: 'Redirect to previous page',

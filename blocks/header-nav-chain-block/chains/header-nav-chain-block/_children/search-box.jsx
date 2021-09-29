@@ -85,7 +85,7 @@ export default ({
       <input ref={searchInput} onBlur={() => { setShouldSearchOpen(false); }} onKeyDown={handleKey} type="text" placeholder={placeholderText} />
       <Button
         aria-label={phrases.t('header-nav-chain-block.search-text')}
-        additionalClassNames="search-box--right-absolute-positioned"
+        additionalClassNames={isSearchBarOpen ? 'search-box--right-absolute-positioned' : ''}
         buttonSize={BUTTON_SIZES.SMALL}
         buttonStyle={buttonStyle}
         buttonType={BUTTON_TYPES.ICON_ONLY}

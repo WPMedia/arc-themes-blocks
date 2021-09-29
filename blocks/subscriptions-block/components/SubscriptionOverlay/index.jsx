@@ -52,7 +52,6 @@ const SubscriptionOverlay = ({ children }) => {
       role="alert"
     >
       <div
-        aria-live="assertive"
         className="xpmedia-subscription-overlay-content"
         onWheel={(event) => {
           setScrollDelta(event.deltaY);

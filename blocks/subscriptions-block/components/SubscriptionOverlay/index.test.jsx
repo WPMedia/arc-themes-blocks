@@ -22,7 +22,6 @@ describe('SubscriptionOverlay', () => {
     );
 
     expect(wrapper.find('.xpmedia-subscription-overlay').at(0).prop('role')).toEqual('alert');
-    expect(wrapper.find('.xpmedia-subscription-overlay-content').at(0).prop('aria-live')).toEqual('assertive');
   });
 
   it('renders a child in the appropriate container', () => {

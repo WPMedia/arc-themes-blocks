@@ -17,6 +17,7 @@ const LongArticle = () => {
   };
   return (
     <article style={textStyle}>
+      <button type="button">Focusable element</button>
       <p style={textStyle}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum tincidunt
         placerat. Integer bibendum, libero sed rhoncus dapibus, ipsum nulla condimentum est, in

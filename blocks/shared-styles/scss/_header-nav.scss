@@ -20,12 +20,12 @@ body.nav-open {
 }
 
 .section-menu--bottom-placeholder {
-  // on desktop, on the left, the bottom link 
+  // on desktop, on the left, the bottom link
   // is not visible on hover over other links
   height: $mouseover-link-preview-safe-area-height;
   background-color: $section-bg;
 
-  // need to hide that hover and active color 
+  // need to hide that hover and active color
   &:hover,
   &:active {
     // keep the same color unlike other list items
@@ -99,35 +99,23 @@ body.nav-open {
   }
 }
 
-.nav-sections-btn {
-  align-items: center;
-  display: flex;
-
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    margin: 0;
-
-    span {
-      display: none;
-    }
-  }
-
-  > span,
-  > img {
-    flex: 0;
-  }
-
-  > span {
-    font-size: calculateRem(14px);
-    font-weight: bold;
-    padding-right: 8px;
-  }
-}
 
 .nav-search {
   align-items: center;
   display: flex;
   justify-content: center;
   position: relative;
+
+  input {
+    border: 0;
+    border-radius: calculateRem(4px) !important;
+    box-shadow: none;
+    font-size: 0.9em;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    width: 0;
+  }
 
   &.open {
     input {
@@ -138,54 +126,12 @@ body.nav-open {
       width: 100%;
     }
 
-    button {
-      border: 0;
-      margin: 0;
-      padding-right: 12px;
-      position: absolute;
-      right: 0;
-    }
-
-    > .nav-btn-dark > svg > path {
-      fill: #292929;
-      opacity: 0.6;
-    }
-
     &.dark input {
       border: $border-width solid $border-color-bright;
     }
 
     &.light input {
       border: $border-width solid $ui-light-gray;
-    }
-  }
-
-  input {
-    border: 0;
-    border-radius: 2px;
-    box-shadow: none;
-    font-size: 0.9em;
-    line-height: 20px;
-    margin: 0;
-    padding: 0;
-    transition: all 0.25s cubic-bezier(0.49, 0.37, 0.45, 0.71);
-    width: 0;
-  }
-
-  &.queryly > .nav-btn {
-    padding: 0;
-
-    label {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      justify-items: center;
-      align-content: center;
-      padding-left: $btn-padding;
-      padding-right: $btn-padding;
-      cursor: pointer;
     }
   }
 }
@@ -222,6 +168,7 @@ body.nav-open {
 
     &:last-child {
       margin-right: 0;
+      flex-shrink: 0;
     }
   }
 

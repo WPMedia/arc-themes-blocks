@@ -3,7 +3,7 @@ const path = require('path');
 // Export a function. Accept the base config as the only param.
 module.exports = {
   stories: ['../stories/*.stories.@(js|jsx|mdx|tsx)', '../blocks/**/*.story.@(js|jsx|mdx|tsx)' ],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-docs', '@storybook/addon-knobs'],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-docs', '@storybook/addon-knobs', '@storybook/addon-essentials'],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.

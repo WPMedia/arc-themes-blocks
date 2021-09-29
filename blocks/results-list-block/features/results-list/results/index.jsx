@@ -56,9 +56,6 @@ const Results = ({
       ? configuredOffset
       : requestedOffset + configuredSize;
     switch (contentService) {
-      case 'story-feed-query': {
-        return { offset, size };
-      }
       case 'story-feed-author':
       case 'story-feed-sections':
       case 'story-feed-tag': {
@@ -69,7 +66,7 @@ const Results = ({
       }
       default: { break; }
     }
-    return {};
+    return { offset, size };
   }, [configuredOffset, configuredSize, contentService]);
 
   const requestedResultList = useContent({
@@ -191,8 +188,11 @@ const Results = ({
   const viewableElements = resultList?.content_elements
     .slice(0, queryOffset + configuredSize - configuredOffset);
 
-  const isThereMore = requestedResultList?.next
-    || viewableElements?.length < resultList?.count - configuredOffset;
+  const fullListLength = resultList?.count
+    ? resultList?.count - configuredOffset
+    : resultList?.content_elements.length;
+
+  const isThereMore = requestedResultList?.next || viewableElements?.length < fullListLength;
 
   const onReadMoreClick = useCallback(() => {
     setQueryOffset((oldOffset) => oldOffset + configuredSize);

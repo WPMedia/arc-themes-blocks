@@ -1,3 +1,4 @@
+import Button, { BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES } from './_children/button';
 import Byline from './_children/byline';
 import Heading from './_children/headings/heading';
 import HeadingSection from './_children/headings/section';
@@ -15,8 +16,16 @@ import SmallPromoPresentation from './_children/promos/small';
 import SmallPromoStyles from './_children/promo-helpers/small/styles';
 import ExtraLargePromoPresentation from './_children/promos/extra-large';
 import LargePromoPresentation from './_children/promos/large';
+import {
+  getNavSpecificSecondaryButtonTheme,
+  getNavSpecificPrimaryButtonTheme,
+} from './_children/button/utils/getButtonStyle';
 
 export {
+  BUTTON_SIZES,
+  BUTTON_STYLES,
+  BUTTON_TYPES,
+  Button,
   Byline,
   ExtraLargePromoPresentation,
   Heading,
@@ -34,4 +43,6 @@ export {
   SmallPromoContainer,
   SmallPromoPresentation,
   SmallPromoStyles,
+  getNavSpecificSecondaryButtonTheme,
+  getNavSpecificPrimaryButtonTheme,
 };

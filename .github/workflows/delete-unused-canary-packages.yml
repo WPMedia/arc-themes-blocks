@@ -116,6 +116,8 @@ jobs:
             event-tester-block
             ad-taboola-block
             a11y-testing-block
+            identity-block
+            subscriptions-block
       - name: The job has failed, likely due to rate-limiting
         if: ${{ failure() }}
         run: exit 1

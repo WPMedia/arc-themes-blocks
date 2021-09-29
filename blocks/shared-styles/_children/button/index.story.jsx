@@ -223,7 +223,7 @@ export const aLinkButton = () => (
 );
 
 export const labelIconButtonAndIconOnly = () => (
-  <>
+  <div style={{ display: 'flex' }}>
     <Button
       buttonStyle={BUTTON_STYLES.PRIMARY}
       buttonType={BUTTON_TYPES.LABEL_AND_ICON}
@@ -237,5 +237,5 @@ export const labelIconButtonAndIconOnly = () => (
       text="Sign up"
       iconType="user"
     />
-  </>
+  </div>
 );

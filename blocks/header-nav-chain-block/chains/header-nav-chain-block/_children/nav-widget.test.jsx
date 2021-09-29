@@ -41,7 +41,6 @@ describe('<NavWidget/>', () => {
     const searchWidget = wrapper.find(SearchBox);
     expect(searchWidget).toHaveLength(1);
     expect(searchWidget.prop('iconSize')).toEqual(cfg?.iconSize);
-    expect(searchWidget.prop('navBarColor')).toEqual('light');
     expect(searchWidget.prop('placeholderText')).toEqual('test-translation');
     expect(searchWidget.prop('customSearchAction')).toEqual(customSearchAction);
     expect(searchWidget.prop('alwaysOpen')).toEqual(cfg.expandSearch);
@@ -78,7 +77,6 @@ describe('<NavWidget/>', () => {
     expect(wrapper).toHaveLength(1);
     const querylyWidget = wrapper.find(QuerylySearch);
     expect(querylyWidget).toHaveLength(1);
-    expect(querylyWidget.prop('theme')).toEqual('light');
   });
 
   it('renders nav widget - queryly search w/ "section-menu" placement', () => {
@@ -91,7 +89,6 @@ describe('<NavWidget/>', () => {
     expect(wrapper).toHaveLength(1);
     const querylyWidget = wrapper.find(QuerylySearch);
     expect(querylyWidget).toHaveLength(1);
-    expect(querylyWidget.prop('theme')).toEqual('dark');
   });
 
   it('renders nav widget - section menu', () => {
@@ -104,7 +101,6 @@ describe('<NavWidget/>', () => {
     );
     expect(wrapper).toHaveLength(1);
     const menuWidget = wrapper.find('button.nav-sections-btn');
-    expect(menuWidget.hasClass('nav-btn-light')).toBe(true);
     expect(menuWidget).toHaveLength(1);
     expect(menuWidget.prop('onClick')).toEqual(menuButtonClick);
   });

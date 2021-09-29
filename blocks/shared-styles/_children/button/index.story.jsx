@@ -161,10 +161,31 @@ export const SecondaryReverseDualIcon = () => (
 );
 // end secondary reverse
 
-export const PrimarySmall = () => (
+export const PrimarySmallLabelOnly = () => (
   <Button
     buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.LABEL_ONLY}
+    text="Sign up"
+  />
+);
+
+export const PrimarySmallIconOnly = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.PRIMARY}
+    buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.ICON_ONLY}
+    iconType="user"
+    ariaLabel="Sign up"
+  />
+);
+
+export const PrimarySmallIconAndLabel = () => (
+  <Button
+    buttonStyle={BUTTON_STYLES.PRIMARY}
+    buttonSize={BUTTON_SIZES.SMALL}
+    buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+    iconType="user"
     text="Sign up"
   />
 );
@@ -174,8 +195,10 @@ export const PrimaryLarge = () => (
     buttonStyle={BUTTON_STYLES.PRIMARY}
     buttonSize={BUTTON_SIZES.LARGE}
     text="Sign up"
+    secondaryIconType="chevron-up"
   />
 );
+// end secondary reverse
 
 export const CustomSubmitType = () => (
   <Button
@@ -197,4 +220,22 @@ export const aLinkButton = () => (
     as="a"
     href="https://arcxp.com"
   />
+);
+
+export const labelIconButtonAndIconOnly = () => (
+  <div style={{ display: 'flex' }}>
+    <Button
+      buttonStyle={BUTTON_STYLES.PRIMARY}
+      buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+      text="Sign up"
+      iconType="user"
+    />
+    <Button
+      buttonStyle={BUTTON_STYLES.PRIMARY}
+      buttonType={BUTTON_TYPES.ICON_ONLY}
+      ariaLabel="Sign up"
+      text="Sign up"
+      iconType="user"
+    />
+  </div>
 );

@@ -221,3 +221,21 @@ export const aLinkButton = () => (
     href="https://arcxp.com"
   />
 );
+
+export const labelIconButtonAndIconOnly = () => (
+  <>
+    <Button
+      buttonStyle={BUTTON_STYLES.PRIMARY}
+      buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+      text="Sign up"
+      iconType="user"
+    />
+    <Button
+      buttonStyle={BUTTON_STYLES.PRIMARY}
+      buttonType={BUTTON_TYPES.ICON_ONLY}
+      ariaLabel="Sign up"
+      text="Sign up"
+      iconType="user"
+    />
+  </>
+);

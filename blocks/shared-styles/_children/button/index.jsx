@@ -6,6 +6,8 @@ import { useFusionContext } from 'fusion:context';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
+  HamburgerMenuIcon,
+  SearchIcon,
   UserIcon,
 } from '@wpmedia/engine-theme-sdk';
 
@@ -32,6 +34,7 @@ export const BUTTON_TYPES = {
   ICON_ONLY: 'ICON_ONLY',
   LABEL_AND_ICON: 'LABEL_AND_ICON',
   LABEL_AND_TWO_ICONS: 'LABEL_AND_TWO_ICONS',
+  LABEL_AND_RIGHT_ICON: 'LABEL_AND_RIGHT_ICON',
 };
 
 // names based on zeplin docs
@@ -59,9 +62,11 @@ const iconTypeStringToIconTypeComponent = (
   }
 
   const icons = {
-    user: UserIcon,
-    'chevron-up': ChevronUpIcon,
     'chevron-down': ChevronDownIcon,
+    'chevron-up': ChevronUpIcon,
+    'hamburger-menu': HamburgerMenuIcon,
+    search: SearchIcon,
+    user: UserIcon,
   };
 
   const iconProps = {
@@ -184,6 +189,15 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           {text}
         </>
       );
+    case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
+      return (
+        <>
+          {text}
+          <div className="xpmedia-button--right-icon-container">
+            {iconComponent}
+          </div>
+        </>
+      );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
@@ -198,6 +212,7 @@ function Button(props) {
   const {
     ariaLabel,
     as,
+    additionalClassNames,
     buttonSize,
     buttonStyle,
     buttonType,
@@ -248,7 +263,7 @@ function Button(props) {
       aria-label={buttonType === BUTTON_TYPES.ICON_ONLY ? (ariaLabel || text) : null}
       as={as}
       buttonStyle={buttonStyle}
-      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}`}
+      className={`xpmedia-button ${matchedButtonSizeClass}${fullWidth ? ' xpmedia-button--full-width' : ''}${additionalClassNames ? ` ${additionalClassNames}` : ''}`}
       font={primaryFont}
       primaryColor={primaryColor}
       type={elementType}
@@ -263,8 +278,8 @@ Button.propTypes = {
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   buttonStyle: PropTypes.oneOf(Object.values(BUTTON_STYLES)),
   buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
-  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down']),
+  iconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down', 'hamburger-menu', 'search']),
+  secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down', 'hamburger-menu', 'search']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
 

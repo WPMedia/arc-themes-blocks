@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 import useIdentity from '../Identity';
@@ -7,9 +7,10 @@ import './styles.scss';
 const SocialSignOn = ({ onError, redirectURL }) => {
   const { Identity } = useIdentity();
   const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
-
   const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);
   const [isFacebookInitialized, setIsFacebookInitialized] = useState(false);
+
+  const isGoogleReset = useRef(false);
 
   if (!isServerSide() && !window.onFacebookSignOn) {
     window.onFacebookSignOn = async () => {
@@ -40,7 +41,13 @@ const SocialSignOn = ({ onError, redirectURL }) => {
       await Identity.initGoogleLogin(null, {
         width: 300,
         height: 48,
-        onSuccess: () => { window.location = redirectURL; },
+        onSuccess: () => {
+          if (!isGoogleReset.current) {
+            isGoogleReset.current = true;
+          } else {
+            window.location = redirectURL;
+          }
+        },
         onFailure: () => { onError(); },
       });
     };
@@ -77,7 +84,8 @@ const SocialSignOn = ({ onError, redirectURL }) => {
         config.facebookAppId ? (
           <div
             className="fb-login-button"
-            data-width="512"
+            data-width="300"
+            data-height="48"
             data-size="large"
             data-button-type="login_with"
             data-scope="public_profile,email"

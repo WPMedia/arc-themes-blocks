@@ -1,8 +1,10 @@
 .xpmedia-social-signin-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   > div {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
 }

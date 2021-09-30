@@ -9,6 +9,7 @@ const SecondaryFontStyles = styled.div.attrs((props) => ({
   backgroundColor: props.backgroundColor || null,
 }))`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['secondary-font-family']};
+  color: var(--color-font-secondary, 'gray');
 
   ${({ arcSite, fontColor }) => fontColor && `
     color: ${getThemeStyle(arcSite)[fontColor]};

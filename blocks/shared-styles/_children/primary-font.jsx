@@ -9,6 +9,7 @@ const PrimaryFontStyles = styled.div.attrs((props) => ({
   backgroundColor: props.backgroundColor || null,
 }))`
   font-family: ${({ arcSite }) => getThemeStyle(arcSite)['primary-font-family']};
+  color: var(--color-font-base, 'black');
 
   ${({ arcSite, fontColor }) => fontColor && `
     color: ${getThemeStyle(arcSite)[fontColor]};

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+**Note:** Version bump only for package @wpmedia/a11y-testing-block
+
+
+
+
+
 # [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
 
 **Note:** Version bump only for package @wpmedia/a11y-testing-block

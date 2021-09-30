@@ -34,9 +34,6 @@ const SocialSignOn = ({ onError, redirectURL }) => {
   }, [Identity]);
 
   useEffect(() => {
-    const initializeFacebook = async () => {
-      await Identity.initFacebookLogin(null);
-    };
     const initializeGoogle = async () => {
       await Identity.initGoogleLogin(null, {
         width: 300,
@@ -55,17 +52,23 @@ const SocialSignOn = ({ onError, redirectURL }) => {
       initializeGoogle();
       setIsGoogleInitialized(true);
     }
+  }, [Identity,
+    config.googleClientId,
+    isGoogleInitialized,
+    onError,
+    redirectURL]);
+
+  useEffect(() => {
+    const initializeFacebook = async () => {
+      await Identity.initFacebookLogin(null);
+    };
     if (config.facebookAppId && !isFacebookInitialized) {
       initializeFacebook();
       setIsFacebookInitialized(true);
     }
   }, [Identity,
     config.facebookAppId,
-    config.googleClientId,
-    isFacebookInitialized,
-    isGoogleInitialized,
-    onError,
-    redirectURL]);
+    isFacebookInitialized]);
 
   if (!Identity) {
     return null;

@@ -66,7 +66,7 @@ const Login = ({ customFields }) => {
       formErrorText={error}
     >
       <FormInputField
-        autoComplete="email"
+        autoComplete="off"
         label={phrases.t('identity-block.email')}
         name="email"
         required

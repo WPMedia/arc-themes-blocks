@@ -204,7 +204,7 @@ HeaderAccountAction.propTypes = {
       label: 'Sign Up URL',
     }),
     logoutURL: PropTypes.string.tag({
-      defaultValue: '/account/logout/',
+      defaultValue: '/',
       label: 'Log Out URL',
     }),
     manageAccountURL: PropTypes.string.tag({

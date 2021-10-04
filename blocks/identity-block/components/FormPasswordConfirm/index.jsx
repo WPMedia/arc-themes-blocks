@@ -19,22 +19,22 @@ const FormPasswordConfirm = ({
   const [password, setPassword] = useState('');
 
   const fieldParameters = {
+    ...(autoComplete ? { autoComplete } : {}),
     ...(placeholder ? { placeholder } : {}),
     ...(showDefaultError ? { showDefaultError } : {}),
     ...(tip ? { tip } : {}),
     ...(validationErrorMessage ? { validationErrorMessage } : {}),
     ...(validationPattern ? { validationPattern } : {}),
-    ...(autoComplete ? { autoComplete } : {}),
   };
 
   const confirmFieldParameters = {
+    ...(autoComplete ? { autoComplete } : {}),
     ...(confirmPlaceholder ? { placeholder: confirmPlaceholder } : {}),
     ...(showDefaultError ? { showDefaultError } : {}),
     ...(confirmTip ? { tip: confirmTip } : {}),
     ...(confirmValidationErrorMessage
       ? { validationErrorMessage: confirmValidationErrorMessage }
       : {}),
-    ...(autoComplete ? { autoComplete } : {}),
   };
 
   return (

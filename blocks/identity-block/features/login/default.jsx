@@ -66,6 +66,7 @@ const Login = ({ customFields }) => {
       formErrorText={error}
     >
       <FormInputField
+        autoComplete="email"
         label={phrases.t('identity-block.email')}
         name="email"
         required
@@ -74,6 +75,7 @@ const Login = ({ customFields }) => {
         validationErrorMessage={phrases.t('identity-block.email-requirements')}
       />
       <FormInputField
+        autoComplete="current-password"
         label={phrases.t('identity-block.password')}
         name="password"
         required

@@ -1,0 +1,39 @@
+@import 'helpers';
+
+:root {
+  /* Global Tokens */
+  @each $name, $value in $global {
+    --global-#{$name}: #{$value};
+  }
+
+
+  /* Alias Tokens */
+  @each $name, $value in $alias {
+    --#{$name}: #{$value};
+  }
+
+
+  /* Component Tokens */
+  @each $componentName, $componentItem in $components {
+    @if type-of($componentItem) == map {
+      @each $cProperty, $cValue in $componentItem {
+        @if type-of($cValue) != map {
+          --c-#{$componentName}-#{$cProperty}: #{$cValue};
+        }
+      }
+    }
+  }
+
+  /* Block Tokens */
+  @each $blockName, $blockItem in $block {
+    @if type-of($blockItem) == map {
+      @each $bProperty, $bValue in $blockItem {
+        // @debug type-of($bProperty) $bProperty;
+        // @debug type-of($bValue) $bValue;
+        @if type-of($bValue) != map {
+          --b-#{$blockName}-#{$bProperty}: #{$bValue};
+        }
+      }
+    }
+  }
+}

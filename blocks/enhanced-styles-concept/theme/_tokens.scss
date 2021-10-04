@@ -1,0 +1,73 @@
+@use "sass:map";
+
+// Global Tokens
+$global: (
+	"gray-50": rgb(218 218 218),
+	"gray-100": rgb(87 87 87),
+	"gray-900": rgb(25 25 25),
+
+  "blue-500": rgb(79 93 117),
+  "blue-600": rgb(80 103 127),
+
+  "spacing-25": 4px,
+  "spacing-50": 8px,
+  "spacing-100": 16px,
+  "spacing-150": 24px,
+  "spacing-200": 32px,
+
+  "font-weight-100": 100,
+	"font-weight-400": 400,
+	"font-weight-700": 700,
+	"font-weight-900": 900,
+);
+
+
+// Alias Tokens
+$alias: (
+  "primary-color": var(--global-blue-500),
+  "primary-font-family": "Arial",
+  "secondary-font-family": "Times New Roman",
+);
+
+
+// Component Tokens
+$components: (
+  "link": (
+    "color": inherit,
+    "font-size": inherit,
+    "text-decoration": none,
+  ),
+  "link-hover": (
+    "color": var(--global-blue-500),
+    "text-decoration": underline,
+  ),
+  "overline": (
+    "background-color": transparent,
+    "border-color": "transparent transparent var(--primary-color) transparent",
+    "border-style": "solid",
+    "border-width": "0 0 1px 0",
+    "font-weight": 200,
+    "color": inherit,
+  ),
+  "date": (
+    "background-color": transparent,
+    "color": inherit,
+    "font-weight": var(--global-font-weight-700),
+  )
+);
+
+// Blocks Tokens
+$block: (
+  "list": (
+    "components": (
+      "date": (
+        "font-weight": 900,
+      )
+    )
+  ),
+  "links-bar": (
+    "font-size": 14px,
+    "font-family": "var(--primary-font-family)",
+    "margin-bottom": "var(--global-spacing-150)",
+  )
+);

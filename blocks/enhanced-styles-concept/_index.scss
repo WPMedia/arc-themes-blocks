@@ -1,0 +1,18 @@
+@use "sass:map";
+
+.b-list {
+  //
+  // CSS Variables
+  // For components within a block that have specific styling these
+  // need to be redfined - example if overline within list block
+  // is to have a different color ->
+  // --overline-background-color: #{$overline-background-color};
+  @include blockComponents("list");
+
+  //
+  // background-color: $list-background-color;
+  // background-color: var(map.get($block, "list", "background-color"));
+  // background-color: blockVar("list", "background-color");
+
+  @include blockProperties("list");
+}

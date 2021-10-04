@@ -1,0 +1,9 @@
+@use "sass:map";
+
+.c-link {
+  @include componentProperties("link");
+
+  &:hover {
+    @include componentProperties("link-hover");
+  }
+}

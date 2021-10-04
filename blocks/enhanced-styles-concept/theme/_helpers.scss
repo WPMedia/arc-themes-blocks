@@ -1,0 +1,57 @@
+@use "sass:map";
+
+//
+// Used to set the nest components CSS Variable overrides at the block level
+// When a block has components nested within, and those components has
+// different styles to the default component styles they are overridden
+// use CSS Variables
+//
+// --c-date-font-weight: 900
+//
+@mixin blockComponents($blockName) {
+  @each $name, $value in map.get($block, $blockName, "components") {
+    @if type-of($value) == map {
+      @each $a, $b in $value {
+        --c-#{$name}-#{$a}: #{$b};
+      }
+    }
+  }
+}
+
+//
+// Ouput all the blocks properties in the format
+// CSSProperty: CSSVariable
+// background-color: var(--b-list-background-color);
+//
+@mixin blockProperties($blockName, $others...) {
+  @each $name, $value in map.get($block, $blockName, $others...) {
+    @if type-of($value) != map {
+      #{$name}: #{$value};
+    }
+  }
+}
+
+//
+// Output all the component values in format
+// CSSProperty: CSSVariable
+// background-color: var(--c-overline-background-color);
+//
+@mixin componentProperties($component) {
+  @each $name, $value in map.get($components, $component) {
+    #{$name}: componentVar($component, $name);
+  }
+}
+
+//
+// Return the CSS Variable for a component item
+//
+@function componentVar($component, $item) {
+  @return var(--c-#{$component}-#{$item});
+}
+
+//
+// Return the CSS Variable for a block item
+//
+@function blockVar($block, $item) {
+  @return var(--c-#{$block}-#{$item});
+}

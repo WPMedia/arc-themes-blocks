@@ -1,24 +1,17 @@
+@use "sass:map";
+
 .links-bar {
-  @include block-margin-bottom;
+  // Include the component overrides for the block
+  @include blockComponents("links-bar");
+
+  // Include all the block settings
+  @include blockProperties("links-bar");
+
   align-items: center;
   text-align: left;
   width: 100%;
+
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     text-align: center;
-  }
-
-  .links-menu {
-    padding: 8px 0;
-
-    a {
-      @include link-color-active-hover($ui-primary-font-color);
-      color: $ui-primary-font-color;
-      font-size: 14px;
-      height: 100%;
-      line-height: 14px;
-      margin: 8px 0;
-      text-align: center;
-      text-decoration: none;
-    }
   }
 }

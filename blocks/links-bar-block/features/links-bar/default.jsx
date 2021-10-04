@@ -4,8 +4,8 @@ import { useContent } from 'fusion:content';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import { PrimaryFont } from '@wpmedia/shared-styles';
-import Link from './_children/link';
+
+import Link from '@wpmedia/enhanced-styles-concept/components/link';
 
 import './links-bar.scss';
 
@@ -43,11 +43,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
         aria-label={ariaLabel || phrases.t('links-bar-block.element-aria-label')}
       >
         {menuItems && menuItems.map((item, index) => (
-          <PrimaryFont
-            as="span"
-            className="links-menu"
-            key={item._id}
-          >
+          <React.Fragment key={item._id}>
             {
               item.node_type === 'link'
                 ? (
@@ -58,7 +54,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
                 )
             }
             {(content.children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : ''}
-          </PrimaryFont>
+          </React.Fragment>
         ))}
       </nav>
       <hr />

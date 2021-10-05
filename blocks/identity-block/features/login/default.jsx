@@ -100,7 +100,7 @@ Login.propTypes = {
     loggedInPageLocation: PropTypes.string.tag({
       name: 'Logged In URL',
       defaultValue: '/account/',
-      description: 'TThe URL to which a user would be redirected to if visiting a login page when already logged in.',
+      description: 'The URL to which a user would be redirected to if visiting a login page when already logged in.',
     }),
   }),
 };

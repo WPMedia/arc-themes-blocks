@@ -5,14 +5,14 @@ import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 const offerService = ({
   origin,
-  code,
+  campaignCode = 'default',
   endpoint,
-}) => fetch(`${origin}${endpoint}${code || 'default'}`, {})
+}) => fetch(`${origin}${endpoint}${campaignCode || 'default'}`, {})
   .then((res) => res.json());
 
 const useOffer = ({ campaignCode }) => {
   const { arcSite } = useFusionContext();
-  const { api: { retail: { origin = null, endpoint } } } = getProperties(arcSite);
+  const { api: { retail: { origin, endpoint } } } = getProperties(arcSite);
   const [offer, setOffer] = useState(null);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -20,7 +20,7 @@ const useOffer = ({ campaignCode }) => {
   const fetchOffer = useCallback(async (code) => {
     try {
       const offerResponse = await offerService({
-        code,
+        campaignCode: code,
         origin,
         endpoint,
       });
@@ -39,7 +39,11 @@ const useOffer = ({ campaignCode }) => {
       setIsFetching(false);
     };
     if (!offer && !isServerSide()) {
-      fetchNewOffer();
+      if (!origin || !endpoint) {
+        setError('Origin or endpoint properties not set in api.retail for this environment.');
+      } else {
+        fetchNewOffer();
+      }
     }
   }, [campaignCode, fetchOffer, offer]);
 

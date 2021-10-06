@@ -107,6 +107,7 @@ global.fetch = jest.fn(() => Promise.resolve({
 
 let container = null;
 beforeEach(() => {
+  jest.clearAllMocks();
   fetch.mockClear();
   container = document.createElement('div');
   document.body.appendChild(container);
@@ -130,8 +131,8 @@ it('useOffer hook runs correctly', async () => {
   expect(container.textContent).toBe('Default subscription');
 });
 
-it('useOffer hook handles an error state', async () => {
-  global.fetch = jest.fn(() => Promise.reject('Error #2'));
+it('useOffer hook handles an error state during fetch', async () => {
+  global.fetch = jest.fn(() => Promise.reject(new Error('Error #2')));
 
   act(() => {
     render(<TestOfferComponent code={{

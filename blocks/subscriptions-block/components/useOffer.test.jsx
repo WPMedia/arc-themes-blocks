@@ -129,3 +129,17 @@ it('useOffer hook runs correctly', async () => {
   await act(() => sleep(500));
   expect(container.textContent).toBe('Default subscription');
 });
+
+it('useOffer hook handles an error state', async () => {
+  global.fetch = jest.fn(() => Promise.reject('Error #2'));
+
+  act(() => {
+    render(<TestOfferComponent code={{
+      campaignCode: 'default',
+    }}
+    />, container);
+  });
+  expect(container.textContent).toBe('Fetching');
+  await act(() => sleep(500));
+  expect(container.textContent).toContain('Error #2');
+});

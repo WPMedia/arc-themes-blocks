@@ -1,7 +1,7 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useFusionContext} from 'fusion:context';
+import { useCallback, useEffect, useState } from 'react';
+import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
-import {isServerSide} from '@wpmedia/engine-theme-sdk';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 const offerService = ({
   origin,

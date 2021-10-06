@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
@@ -19,11 +19,13 @@ const useOffer = ({ campaignCode }) => {
 
   const fetchOffer = useCallback(async (code) => {
     try {
-      return await offerService({
+      const offerResponse = await offerService({
         code,
         origin,
         endpoint,
       });
+      setOffer(offerResponse);
+      return offerResponse;
     } catch (err) {
       setError(`Error in fetching retail offers: ${err.toString()}`);
     }
@@ -33,8 +35,7 @@ const useOffer = ({ campaignCode }) => {
   useEffect(() => {
     const fetchNewOffer = async () => {
       setIsFetching(true);
-      const offerResponse = await fetchOffer(campaignCode);
-      setOffer(offerResponse);
+      await fetchOffer(campaignCode);
       setIsFetching(false);
     };
     if (!offer && !isServerSide()) {

@@ -45,7 +45,7 @@ const useOffer = ({ campaignCode }) => {
         fetchNewOffer();
       }
     }
-  }, [campaignCode, fetchOffer, offer]);
+  }, [campaignCode, endpoint, fetchOffer, offer, origin]);
 
   return {
     error,

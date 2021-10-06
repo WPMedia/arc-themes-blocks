@@ -3,26 +3,16 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
-// TODO: Perhaps this should go in blocks.json as an endpoint entry for the retail API:
-/**
-"api": {
-  "retail": {
-    "origin": "https://corecomponents-the-sun-prod.api.cdn.arcpublishing.com",
-    "endpoint": "/retail/public/v1/offer/live/"
-  }
-}
- * */
-const OFFER_URL = '/retail/public/v1/offer/live/';
-
 const offerService = ({
-  apiOrigin,
-  campaignCode,
-}) => fetch(`${apiOrigin}${OFFER_URL}${campaignCode || 'default'}`, {})
+  origin,
+  code,
+  endpoint,
+}) => fetch(`${origin}${endpoint}${code || 'default'}`, {})
   .then((res) => res.json());
 
 const useOffer = ({ campaignCode }) => {
   const { arcSite } = useFusionContext();
-  const { api: { retail: { origin = null } } } = getProperties(arcSite);
+  const { api: { retail: { origin = null, endpoint } } } = getProperties(arcSite);
   const [offer, setOffer] = useState(null);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -31,15 +21,16 @@ const useOffer = ({ campaignCode }) => {
     let offerResponse = null;
     try {
       offerResponse = await offerService({
-        campaignCode: code,
-        apiOrigin: origin,
+        code,
+        origin,
+        endpoint,
       });
       setOffer(offerResponse);
     } catch (err) {
       setError(`Error in fetching retail offers: ${err.toString()}`);
     }
     return offerResponse;
-  }, [setOffer, origin]);
+  }, [origin, endpoint]);
 
   useEffect(() => {
     const fetchNewOffer = async () => {

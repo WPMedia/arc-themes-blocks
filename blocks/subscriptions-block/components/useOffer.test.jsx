@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import useOffer from './Offer';
+import useOffer from './useOffer';
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -17,6 +17,7 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   api: {
     retail: {
       origin: 'https://corecomponents-arc-demo-3-prod.api.cdn.arcpublishing.com',
+      endpoint: '/retail/public/v1/offer/live/',
     },
   },
 }))));

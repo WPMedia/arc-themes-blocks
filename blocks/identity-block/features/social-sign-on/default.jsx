@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { isServerSide, ErrorIcon } from '@wpmedia/engine-theme-sdk';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-
-import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
-import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
+import { PrimaryFont } from '@wpmedia/shared-styles';
+import SocialSignOn from '../../components/SocialSignOn';
 import useIdentity from '../../components/Identity';
+import './styles.scss';
 
-const Login = ({ customFields }) => {
+const SocialSignOnBlock = ({ customFields }) => {
   let { redirectURL } = customFields;
   const {
     redirectToPreviousPage,
@@ -32,7 +32,6 @@ const Login = ({ customFields }) => {
     const getConfig = async () => {
       await Identity.getConfig();
     };
-
     if (Identity) {
       // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
       getConfig();
@@ -56,37 +55,26 @@ const Login = ({ customFields }) => {
   }
 
   return (
-    <HeadlinedSubmitForm
-      headline={phrases.t('identity-block.log-in')}
-      buttonLabel={phrases.t('identity-block.log-in')}
-      onSubmit={({ email, password }) => Identity
-        .login(email, password)
-        .then(() => { window.location = redirectURL; })
-        .catch(() => setError(phrases.t('identity-block.login-form-error')))}
-      formErrorText={error}
-    >
-      <FormInputField
-        label={phrases.t('identity-block.email')}
-        name="email"
-        required
-        showDefaultError={false}
-        type={FIELD_TYPES.EMAIL}
-        validationErrorMessage={phrases.t('identity-block.email-requirements')}
+    <section className="xpmedia-subs-social-sign-on">
+      <SocialSignOn
+        onError={() => { setError(phrases.t('identity-block.login-form-error')); }}
+        redirectURL={redirectURL}
       />
-      <FormInputField
-        label={phrases.t('identity-block.password')}
-        name="password"
-        required
-        showDefaultError={false}
-        type={FIELD_TYPES.PASSWORD}
-      />
-    </HeadlinedSubmitForm>
+      {error ? (
+        <section className="xpmedia-social-sign-on-error" role="alert">
+          <PrimaryFont as="p">
+            <ErrorIcon />
+            {error}
+          </PrimaryFont>
+        </section>
+      ) : null}
+    </section>
   );
 };
 
-Login.label = 'Identity Login - Arc Block';
+SocialSignOnBlock.label = 'Identity Social Sign On - Arc Block';
 
-Login.propTypes = {
+SocialSignOnBlock.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
@@ -100,9 +88,9 @@ Login.propTypes = {
     loggedInPageLocation: PropTypes.string.tag({
       name: 'Logged In URL',
       defaultValue: '/account/',
-      description: 'The URL to which a user would be redirected to if visiting a login page when already logged in.',
+      description: 'The URL to which a user would be redirected to if logged in an vist a page with the login form on',
     }),
   }),
 };
 
-export default Login;
+export default SocialSignOnBlock;

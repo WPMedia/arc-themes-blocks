@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 //
 // Used to set the nest components CSS Variable overrides at the block level
@@ -9,7 +9,7 @@
 // --c-date-font-weight: 900
 //
 @mixin blockComponents($blockName) {
-  @each $name, $value in map.get($block, $blockName, "components") {
+  @each $name, $value in map.get($block, $blockName, 'components') {
     @if type-of($value) == map {
       @each $a, $b in $value {
         --c-#{$name}-#{$a}: #{$b};

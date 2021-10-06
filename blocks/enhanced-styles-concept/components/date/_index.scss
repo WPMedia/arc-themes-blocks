@@ -1,7 +1,7 @@
-@use "sass:map";
+@use 'sass:map';
 
 .c-date {
   // background-color: var(map.get($components, "date", "background-color"));
   // background-color: componentVar("date", "background-color");
-  @include componentProperties("date");
+  @include componentProperties('date');
 }

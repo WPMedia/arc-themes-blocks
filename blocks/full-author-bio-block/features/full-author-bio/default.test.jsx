@@ -208,6 +208,12 @@ describe('the full author bio block', () => {
 
         expect(wrapper.find('.rss')).toHaveLength(1);
       });
+      it('should render noreferrer and new tab with link', () => {
+        const wrapper = mount(<FullAuthorBio />);
+
+        expect(wrapper.find('.rss').props().rel).toEqual('noopener noreferrer');
+        expect(wrapper.find('.rss').props().target).toEqual('_blank');
+      });
     });
 
     describe('when the twitter link is not present', () => {
@@ -271,5 +277,58 @@ describe('the full author bio block', () => {
 
       expect(wrapper).toBeEmptyRender();
     });
+  });
+});
+
+describe('when there are falsy values as social media links', () => {
+  it('should not render null value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            twitter: null,
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
+  });
+  it('should not render empty string value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            twitter: '',
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
+  });
+  it('should not render if no key social value', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            instagram: 'yay',
+            _id: 'janedoe',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(1);
   });
 });

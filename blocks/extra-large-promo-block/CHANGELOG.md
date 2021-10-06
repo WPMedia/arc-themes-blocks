@@ -10,6 +10,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 5.14.1 (2021-07-21)
 
 
+# [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
+
+
 ### Bug Fixes
 
 * Use arc fusion proptypes for storybook and no difference otherwise ([6555707](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6555707673bedf849b393854cfbbe270bc714dda))
@@ -74,9 +77,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Performance Improvements
 
 * Filter out unnecessary promo info, depending on block usage like embed html ([7a15aec](https://github.com/WPMedia/fusion-news-theme-blocks/commit/7a15aecaa7d19bb589604442ecf8a67e0f7c2b3c))
-
-
-
 
 
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)

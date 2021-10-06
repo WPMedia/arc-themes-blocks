@@ -19,7 +19,6 @@ const AlertBadge = styled.span`
 `;
 
 const VideoPromo = ({ customFields }) => {
-  const { arcSite } = useFusionContext();
   const {
     autoplay,
     inheritGlobalContent,
@@ -34,9 +33,7 @@ const VideoPromo = ({ customFields }) => {
 
   const customContent = useContent({
     source: customFields?.itemContentConfig?.contentService ?? null,
-    query: customFields?.itemContentConfig?.contentConfigValues
-      ? { 'arc-site': arcSite, ...customFields.itemContentConfig.contentConfigValues }
-      : null,
+    query: customFields?.itemContentConfig?.contentConfigValues ?? null,
   });
 
   const content = inheritGlobalContent ? globalContent : customContent;

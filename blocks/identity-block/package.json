@@ -11,7 +11,9 @@
     "sources",
     "chains",
     "layouts",
-    "components"
+    "components",
+    "utils",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -27,7 +29,8 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*"
+    "@wpmedia/engine-theme-sdk": "*",
+    "@wpmedia/shared-styles": "*"
   },
   "bugs": {
     "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"

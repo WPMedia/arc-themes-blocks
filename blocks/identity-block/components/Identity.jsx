@@ -1,26 +1,22 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import Identity from '@arc-publishing/sdk-identity';
-// import { useFusionContext } from 'fusion:context';
-// import getProperties from 'fusion:properties';
-// import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
 
-const useIdentity = () => ({
-  Identity,
-  isInitialized: true,
-});
+const useIdentity = () => {
+  const { arcSite } = useFusionContext();
+  const { api } = getProperties(arcSite);
+  const [isInit, setIsInit] = useState(!!Identity.apiOrigin);
 
-// keep skelton for future use
-// const useIdentity = () => ({
-// const { arcSite } = useFusionContext();
-// const { subscriptions } = getProperties(arcSite);
-// const [
-//   isInit,
-//   setIsInit
-// ] = useState(() => !!Identity.apiOrigin);
+  if (!isInit && arcSite && api?.identity?.origin) {
+    Identity.options({ apiOrigin: api.identity.origin });
+    setIsInit(true);
+  }
 
-// todo: add subscriptions logic
-// return ({
-//   Identity,
-//   isInitialized: true,
-// })};
+  return {
+    Identity,
+    isInitialized: isInit,
+  };
+};
+
 export default useIdentity;

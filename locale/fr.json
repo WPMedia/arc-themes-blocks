@@ -102,5 +102,27 @@
   },
   "default-output-block": {
     "default-output-block.skip-main": "Passer au contenu principal"
+  },
+  "identity-block": {
+    "identity-block.email": "Email address",
+    "identity-block.password": "Password",
+    "identity-block.sign-up": "Sign up",
+    "identity-block.confirm-password": "Confirm password",
+    "identity-block.username": "Username",
+    "identity-block.account": "Account",
+    "identity-block.manage-account": "Manage Your Account",
+    "identity-block.log-out": "Log Out",
+    "identity-block.log-in": "Log In",
+    "identity-block.login-options": "Log in options",
+    "identity-block.confirm-password-error": "Passwords must match",
+    "identity-block.password-requirements": "Please enter a valid password.",
+    "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+    "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+    "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+    "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+    "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+    "identity-block.email-requirements": "Please enter a valid email address",
+    "identity-block.sign-up-form-error": "There's been an error creating your account",
+    "identity-block.login-form-error": "There's been an error logging you in"
   }
 }

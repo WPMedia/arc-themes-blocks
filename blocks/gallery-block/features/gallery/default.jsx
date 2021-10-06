@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from '@arc-fusion/prop-types';
 import { useContent } from 'fusion:content';
 import { useFusionContext, useAppContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
@@ -8,14 +8,14 @@ import getTranslatedPhrases from 'fusion:intl';
 
 import { Gallery, LazyLoad, isServerSide } from '@wpmedia/engine-theme-sdk';
 
-const GalleryFeatureItem = (
-  {
-    customFields: {
-      inheritGlobalContent,
-      galleryContentConfig,
-    } = {},
-  },
-) => {
+export const GalleryPresentation = ({
+  arcSite,
+  customFields: {
+    inheritGlobalContent,
+    galleryContentConfig,
+  } = {},
+  globalContent = {},
+}) => {
   let AdBlock;
 
   try {
@@ -31,9 +31,7 @@ const GalleryFeatureItem = (
     AdBlock = () => <p>Ad block not found</p>;
   }
 
-  const { arcSite } = useFusionContext();
   const { resizerURL, galleryCubeClicks, locale = 'en' } = getProperties(arcSite);
-  const { globalContent = {} } = useAppContext();
   const phrases = getTranslatedPhrases(locale);
   const content = useContent(galleryContentConfig ? {
     source: galleryContentConfig.contentService,
@@ -71,13 +69,19 @@ const GalleryFeatureItem = (
 };
 
 const GalleryFeature = ({ customFields = {} }) => {
-  const { isAdmin } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
+  const { globalContent } = useAppContext();
+
   if (customFields.lazyLoad && isServerSide() && !isAdmin) { // On Server
     return null;
   }
   return (
     <LazyLoad enabled={customFields.lazyLoad && !isAdmin}>
-      <GalleryFeatureItem customFields={{ ...customFields }} />
+      <GalleryPresentation
+        arcSite={arcSite}
+        customFields={customFields}
+        globalContent={globalContent}
+      />
     </LazyLoad>
   );
 };

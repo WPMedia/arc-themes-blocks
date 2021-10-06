@@ -1,17 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import { useFusionContext } from 'fusion:context';
+import {
+  Button,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  getNavSpecificSecondaryButtonTheme,
+  getNavSpecificPrimaryButtonTheme,
+} from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
+import DropDownLinkListItem from './_children/DropDownLinkListItem';
 
 import './styles.scss';
 
 const HeaderAccountAction = ({ customFields }) => {
-  const { loginURL } = customFields;
+  const {
+    createAccountURL,
+    loginURL,
+    logoutURL,
+    manageAccountURL,
+  } = customFields;
+  const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
+  const { locale, navColor = 'dark', navBarBackground } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
   const [error, setError] = useState();
+  const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -40,8 +60,13 @@ const HeaderAccountAction = ({ customFields }) => {
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  const handleLogout = () => {
-    Identity.logout().then(() => { setIsLoggedIn(false); setUser(null); });
+  const handleLogout = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      e.preventDefault();
+      Identity.logout().then(() => {
+        window.location = e.target.href;
+      });
+    }
   };
 
   if (!isInitialized) {
@@ -55,18 +80,116 @@ const HeaderAccountAction = ({ customFields }) => {
 
   if (user && !error) {
     return (
-      <div className="xpmedia-subs-header">
-        <p>{user.displayName}</p>
-        <button type="button" onClick={handleLogout} className="xpmedia-subs-header--button">Log Out</button>
+      <div className="xpmedia-subs-header--header">
+        <div className="xpmedia-subs-header--desktop-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
+            buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+            iconType="user"
+            secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.account')}
+            type="button"
+          />
+        </div>
+        <div className="xpmedia-subs-header--mobile-header">
+          <Button
+            aria-expanded={isAccountMenuOpen}
+            as="button"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+            buttonType={BUTTON_TYPES.ICON_ONLY}
+            iconType="user"
+            onClick={() => setAccountMenu(!isAccountMenuOpen)}
+            text={phrases.t('identity-block.login-options')}
+            type="button"
+          />
+        </div>
+        {isAccountMenuOpen && (
+          <ul className="xpmedia-subs-header-dropdown--open">
+            <DropDownLinkListItem
+              href={manageAccountURL}
+              text={phrases.t('identity-block.manage-account')}
+            />
+            <DropDownLinkListItem
+              href={logoutURL}
+              onClick={handleLogout}
+              onKeyUp={handleLogout}
+              text={phrases.t('identity-block.log-out')}
+            />
+          </ul>
+        )}
       </div>
     );
   }
 
   // What do we want to happen if there is an error?
   return (
-    <div className="xpmedia-subs-header">
-      <a href={loginURL} className="xpmedia-subs-header--button">Sign In</a>
-    </div>
+    <>
+      <div className="xpmedia-subs-header--desktop-header">
+        {createAccountURL ? (
+          <Button
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+            buttonType={BUTTON_TYPES.LABEL_ONLY}
+            href={createAccountURL}
+            text={phrases.t('identity-block.sign-up')}
+          />
+        ) : null}
+        {loginURL ? (
+          <Button
+            // should be an a tag if it's a link
+            as="a"
+            buttonSize={BUTTON_SIZES.SMALL}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
+            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+            href={loginURL}
+            iconType="user"
+            text={phrases.t('identity-block.log-in')}
+          />
+        ) : null}
+      </div>
+      <div className="xpmedia-subs-header--mobile-header">
+        <Button
+          // should be button if toggleable
+          as="button"
+          aria-expanded={isAccountMenuOpen}
+          buttonSize={BUTTON_SIZES.SMALL}
+          buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+          buttonType={BUTTON_TYPES.ICON_ONLY}
+          iconType="user"
+          onClick={() => setAccountMenu(!isAccountMenuOpen)}
+          text={phrases.t('identity-block.login-options')}
+          // for button accessibility
+          type="button"
+        />
+        {isAccountMenuOpen && (
+          <ul className="xpmedia-subs-header-dropdown--open">
+            {
+              createAccountURL ? (
+                <DropDownLinkListItem
+                  href={createAccountURL}
+                  text={phrases.t('identity-block.sign-up')}
+                />
+              ) : null
+            }
+            {
+              loginURL ? (
+                <DropDownLinkListItem
+                  href={loginURL}
+                  text={phrases.t('identity-block.log-in')}
+                />
+              ) : null
+            }
+          </ul>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -74,6 +197,19 @@ HeaderAccountAction.propTypes = {
   customFields: PropTypes.shape({
     loginURL: PropTypes.string.tag({
       defaultValue: '/account/login/',
+      label: 'Log In URL',
+    }),
+    createAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/signup/',
+      label: 'Sign Up URL',
+    }),
+    logoutURL: PropTypes.string.tag({
+      defaultValue: '/account/logout/',
+      label: 'Log Out URL',
+    }),
+    manageAccountURL: PropTypes.string.tag({
+      defaultValue: '/account/',
+      label: 'Manage Account URL',
     }),
   }),
 };

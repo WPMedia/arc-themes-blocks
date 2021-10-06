@@ -1,0 +1,25 @@
+
+/**
+ * Do not edit directly
+ * Generated on Wed, 06 Oct 2021 18:58:08 GMT
+ */
+
+$list-components-date-font-weight: 900 !default;
+$links-bar-font-size: 14px !default;
+$links-bar-font-family: Arial !default;
+$links-bar-margin-bottom: 24px !default;
+
+$block: (
+  'list': (
+    'components': (
+      'date': (
+        'font-weight': $list-components-date-font-weight
+      )
+    )
+  ),
+  'links-bar': (
+    'font-size': $links-bar-font-size,
+    'font-family': $links-bar-font-family,
+    'margin-bottom': $links-bar-margin-bottom
+  )
+);

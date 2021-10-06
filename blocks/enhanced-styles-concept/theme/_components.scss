@@ -1,0 +1,45 @@
+
+/**
+ * Do not edit directly
+ * Generated on Wed, 06 Oct 2021 18:58:08 GMT
+ */
+
+$link-color: inherit !default;
+$link-font-size: inherit !default;
+$link-text-decoration: none !default;
+$link-hover-color: rgb(79 93 117) !default;
+$link-hover-text-decoration: underline !default;
+$overline-background-color: transparent !default;
+$overline-border-color: transparent transparent rgb(79 93 117) transparent !default;
+$overline-border-style: solid !default;
+$overline-border-width: 0 0 1px 0 !default;
+$overline-font-weight: 200 !default;
+$overline-color: inherit !default;
+$date-background-color: transparent !default;
+$date-color: inherit !default;
+$date-font-weight: 700 !default;
+
+$components: (
+  'link': (
+    'color': $link-color,
+    'font-size': $link-font-size,
+    'text-decoration': $link-text-decoration
+  ),
+  'link-hover': (
+    'color': $link-hover-color,
+    'text-decoration': $link-hover-text-decoration
+  ),
+  'overline': (
+    'background-color': $overline-background-color,
+    'border-color': $overline-border-color,
+    'border-style': $overline-border-style,
+    'border-width': $overline-border-width,
+    'font-weight': $overline-font-weight,
+    'color': $overline-color
+  ),
+  'date': (
+    'background-color': $date-background-color,
+    'color': $date-color,
+    'font-weight': $date-font-weight
+  )
+);

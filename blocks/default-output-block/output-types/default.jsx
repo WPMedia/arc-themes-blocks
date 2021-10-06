@@ -101,6 +101,7 @@ const SampleOutputType = ({
 }) => {
   const { globalContent, arcSite } = useFusionContext();
   const {
+    api: { retail: { script: retailScript } } = { retail: {} },
     websiteName,
     websiteDomain,
     twitterUsername,
@@ -201,6 +202,9 @@ const SampleOutputType = ({
           : null}
         {comscoreID
           ? <script async data-integration="comscore" src="https://sb.scorecardresearch.com/beacon.js" />
+          : null}
+        {retailScript
+          ? <script defer data-integration="arcp" data-tid="arcp" src={retailScript} />
           : null}
         {querylyCode(querylyId, querylyOrg, metaValue('page-type'))}
       </head>

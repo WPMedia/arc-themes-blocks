@@ -544,3 +544,36 @@ describe('The spa property', () => {
     expect(configureSinglePageApp(spaSites)).toStrictEqual(spaSites);
   });
 });
+
+describe('retail api script render conditions', () => {
+  beforeAll(() => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({
+      api: {
+        retail: {
+          script: '/retail/script.js',
+        },
+      },
+    }))));
+  });
+  afterAll(() => {
+    jest.resetModules();
+  });
+
+  it('must render when site property is present', () => {
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('script').find({ 'data-integration': 'arcp' }).length).toBe(1);
+  });
+
+  it('must not render when property is missing', () => {
+    jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+
+    const { default: DefaultOutputType } = require('../default');
+    const wrapper = shallow(
+      <DefaultOutputType deployment={jest.fn()} metaValue={jest.fn().mockReturnValue('article')} {...mockFuntions} />,
+    );
+    expect(wrapper.find('script').find({ 'data-integration': 'arcp' }).length).toBe(0);
+  });
+});

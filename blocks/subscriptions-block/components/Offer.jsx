@@ -23,15 +23,21 @@ const offerService = ({
 const useOffer = ({ campaignCode }) => {
   const { arcSite } = useFusionContext();
   const { api: { retail: { origin = null } } } = getProperties(arcSite);
-  const [offer, setOffer] = useState();
+  const [offer, setOffer] = useState(null);
+  const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
 
   const fetchOffer = useCallback(async (code) => {
-    const offerResponse = await offerService({
-      campaignCode: code,
-      apiOrigin: origin,
-    });
-    setOffer(offerResponse);
+    let offerResponse = null;
+    try {
+      offerResponse = await offerService({
+        campaignCode: code,
+        apiOrigin: origin,
+      });
+      setOffer(offerResponse);
+    } catch (err) {
+      setError(`Error in fetching retail offers: ${err.toString()}`);
+    }
     return offerResponse;
   }, [setOffer, origin]);
 
@@ -48,6 +54,7 @@ const useOffer = ({ campaignCode }) => {
   }, [campaignCode, fetchOffer, offer]);
 
   return {
+    error,
     offer,
     isFetching,
     fetchOffer,

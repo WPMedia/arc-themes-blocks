@@ -80,9 +80,18 @@ const testOfferResponse = {
 };
 
 function TestOfferComponent({ code }) {
-  const { offer, isFetching } = useOffer({
+  const { offer, isFetching, error } = useOffer({
     campaignCode: code,
   });
+  if (error) {
+    return (
+      <div>
+        Error:
+        {' '}
+        {error}
+      </div>
+    );
+  }
   if (isFetching || !offer) {
     return <div>Fetching</div>;
   }

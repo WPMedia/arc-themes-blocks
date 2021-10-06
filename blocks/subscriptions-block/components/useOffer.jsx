@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useFusionContext } from 'fusion:context';
+import {useCallback, useEffect, useState} from 'react';
+import {useFusionContext} from 'fusion:context';
 import getProperties from 'fusion:properties';
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
+import {isServerSide} from '@wpmedia/engine-theme-sdk';
 
 const offerService = ({
   origin,
@@ -19,13 +19,11 @@ const useOffer = ({ campaignCode }) => {
 
   const fetchOffer = useCallback(async (code) => {
     try {
-      const offerResponse = await offerService({
+      return await offerService({
         code,
         origin,
         endpoint,
       });
-      setOffer(offerResponse);
-      return offerResponse;
     } catch (err) {
       setError(`Error in fetching retail offers: ${err.toString()}`);
     }

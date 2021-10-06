@@ -18,18 +18,18 @@ const useOffer = ({ campaignCode }) => {
   const [isFetching, setIsFetching] = useState(true);
 
   const fetchOffer = useCallback(async (code) => {
-    let offerResponse = null;
     try {
-      offerResponse = await offerService({
+      const offerResponse = await offerService({
         code,
         origin,
         endpoint,
       });
       setOffer(offerResponse);
+      return offerResponse;
     } catch (err) {
       setError(`Error in fetching retail offers: ${err.toString()}`);
     }
-    return offerResponse;
+    return null;
   }, [origin, endpoint]);
 
   useEffect(() => {

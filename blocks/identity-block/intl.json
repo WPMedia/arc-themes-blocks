@@ -218,5 +218,27 @@
 		"no": "There's been an error logging you in",
 		"pt": "There's been an error logging you in",
 		"sv": "There's been an error logging you in"
+	},
+	"identity-block.login-links-login": {
+		"de": "Already have an account? Log in.",
+		"en": "Already have an account? Log in.",
+		"es": "Already have an account? Log in.",
+		"fr": "Already have an account? Log in.",
+		"ja": "Already have an account? Log in.",
+		"ko": "Already have an account? Log in.",
+		"no": "Already have an account? Log in.",
+		"pt": "Already have an account? Log in.",
+		"sv": "Already have an account? Log in."
+	},
+	"identity-block.login-links-signup": {
+		"de": "Sign up for an account.",
+		"en": "Sign up for an account.",
+		"es": "Sign up for an account.",
+		"fr": "Sign up for an account.",
+		"ja": "Sign up for an account.",
+		"ko": "Sign up for an account.",
+		"no": "Sign up for an account.",
+		"pt": "Sign up for an account.",
+		"sv": "Sign up for an account."
 	}
 }

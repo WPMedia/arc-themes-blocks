@@ -35,6 +35,8 @@ const LoginLinks = ({ customFields }) => {
 
 LoginLinks.label = 'Identity Login Links - Arc Block';
 
+LoginLinks.icon = 'laptop-help-message';
+
 LoginLinks.propTypes = {
   customFields: PropTypes.shape({
     showLogin: PropTypes.bool.tag({

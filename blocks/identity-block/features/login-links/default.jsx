@@ -40,18 +40,22 @@ LoginLinks.propTypes = {
     showLogin: PropTypes.bool.tag({
       name: 'Show Login link',
       defaultValue: false,
+      group: 'Login',
     }),
     loginURL: PropTypes.string.tag({
       name: 'Login URL',
       defaultValue: defaultLoginURL,
+      group: 'Login',
     }),
     showSignUp: PropTypes.bool.tag({
       name: 'Show Sign up link',
       defaultValue: false,
+      group: 'Sign Up',
     }),
     signUpURL: PropTypes.string.tag({
       name: 'Sign Up URL',
       defaultValue: defaultSignUpURL,
+      group: 'Sign Up',
     }),
   }),
 };

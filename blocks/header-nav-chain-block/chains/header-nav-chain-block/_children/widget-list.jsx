@@ -34,6 +34,7 @@ const WidgetList = ({
             placement={placement}
             position={customFields[cFieldIndexKey]}
             type={navWidgetType}
+            breakpoint={breakpoint}
           >
             {children}
           </NavWidget>

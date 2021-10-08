@@ -206,6 +206,7 @@ HeaderAccountAction.propTypes = {
     logoutURL: PropTypes.string.tag({
       defaultValue: '/',
       label: 'Log Out URL',
+      description: 'The URL to which a user would be redirected to after clicking Log Out from the navigation.',
     }),
     manageAccountURL: PropTypes.string.tag({
       defaultValue: '/account/',

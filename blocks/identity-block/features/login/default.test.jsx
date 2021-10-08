@@ -59,5 +59,8 @@ describe('Subscriptions Login Feature', () => {
     expect(wrapper.find('form.xpmedia-form-submittable')).toHaveLength(1);
     expect(wrapper.find('input.xpmedia-form-field-input')).toHaveLength(2);
     expect(wrapper.find('form.xpmedia-form-submittable button')).toHaveLength(1);
+
+    expect(wrapper.find('input.xpmedia-form-field-input').at(0).prop('autoComplete')).toBe('email');
+    expect(wrapper.find('input.xpmedia-form-field-input').at(1).prop('autoComplete')).toBe('current-password');
   });
 });

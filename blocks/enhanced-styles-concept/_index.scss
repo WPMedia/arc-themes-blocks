@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 .b-list {
   //
@@ -7,12 +7,8 @@
   // need to be redfined - example if overline within list block
   // is to have a different color ->
   // --overline-background-color: #{$overline-background-color};
-  @include blockComponents("list");
+  @include block-components('list');
 
-  //
-  // background-color: $list-background-color;
-  // background-color: var(map.get($block, "list", "background-color"));
-  // background-color: blockVar("list", "background-color");
-
-  @include blockProperties("list");
+  // Output all the list block CSS theme properties and values
+  @include block-properties('list');
 }

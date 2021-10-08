@@ -1,5 +1,5 @@
-@use "sass:map";
+@use 'sass:map';
 
 .c-overline {
-  @include componentProperties("overline");
+  @include component-properties('overline');
 }

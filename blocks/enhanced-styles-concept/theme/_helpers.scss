@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 //
 // Used to set the nest components CSS Variable overrides at the block level
@@ -8,8 +8,8 @@
 //
 // --c-date-font-weight: 900
 //
-@mixin blockComponents($blockName) {
-  @each $name, $value in map.get($block, $blockName, "components") {
+@mixin block-components($blockName) {
+  @each $name, $value in map.get($block, $blockName, 'components') {
     @if type-of($value) == map {
       @each $a, $b in $value {
         --c-#{$name}-#{$a}: #{$b};
@@ -23,7 +23,7 @@
 // CSSProperty: CSSVariable
 // background-color: var(--b-list-background-color);
 //
-@mixin blockProperties($blockName, $others...) {
+@mixin block-properties($blockName, $others...) {
   @each $name, $value in map.get($block, $blockName, $others...) {
     @if type-of($value) != map {
       #{$name}: #{$value};
@@ -36,22 +36,22 @@
 // CSSProperty: CSSVariable
 // background-color: var(--c-overline-background-color);
 //
-@mixin componentProperties($component) {
+@mixin component-properties($component) {
   @each $name, $value in map.get($components, $component) {
-    #{$name}: componentVar($component, $name);
+    #{$name}: component-var($component, $name);
   }
 }
 
 //
 // Return the CSS Variable for a component item
 //
-@function componentVar($component, $item) {
+@function component-var($component, $item) {
   @return var(--c-#{$component}-#{$item});
 }
 
 //
 // Return the CSS Variable for a block item
 //
-@function blockVar($block, $item) {
+@function block-var($block, $item) {
   @return var(--c-#{$block}-#{$item});
 }

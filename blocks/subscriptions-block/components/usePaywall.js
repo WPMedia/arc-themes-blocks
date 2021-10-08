@@ -18,15 +18,16 @@ const usePaywall = () => {
   const [isSignwall, setIsSignwall] = useState();
 
   // eslint-disable-next-line no-underscore-dangle
-  const rules = window?.ArcP?._rules;
+  const rules = (!isServerSide() && window?.ArcP?._rules) || [];
 
   const apiOrigin = api?.retail?.origin;
 
   useEffect(() => {
     const runPaywall = async () => {
       setResults(
+        // Subs ArcP.run assumes https://, so we need to strip it from the endpoint origin.
         await window?.ArcP?.run({
-          apiOrigin,
+          apiOrigin: apiOrigin.replace(/^https?:\/\//i, ''),
           contentIdentifier: globalContent.canonical_url,
           contentRestriction: globalContent.content_restrictions.content_code,
           contentType: globalContent.type,

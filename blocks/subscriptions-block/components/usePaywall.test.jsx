@@ -207,7 +207,7 @@ describe('Identity usePaywall Hook', () => {
       return (
         <div>
           { paywallObject?.isPaywalled ? <div className="isPaywalled" /> : null }
-          { registrationRules ? <div className="registrationRules" /> : null }
+          { registrationRules?.length ? <div className="registrationRules" /> : null }
         </div>
       );
     };
@@ -222,7 +222,7 @@ describe('Identity usePaywall Hook', () => {
       return (
         <div>
           { paywallObject?.isPaywalled ? <div className="isPaywalled" /> : null }
-          { subscribeRules ? <div className="subscribeRules" /> : null }
+          { subscribeRules?.length ? <div className="subscribeRules" /> : null }
         </div>
       );
     };

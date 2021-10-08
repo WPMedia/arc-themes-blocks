@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import DateComponent from '../../components/date';
+import { DateComponent } from '@wpmedia/theme-components';
 
 const POCDate = () => (
   <DateComponent text="Friday 1st October 2021" />

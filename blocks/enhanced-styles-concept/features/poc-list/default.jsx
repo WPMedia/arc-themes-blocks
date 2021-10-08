@@ -2,8 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 // import { useFusionContext } from 'fusion:context';
 
-import OverlineComponent from '../../components/overline';
-import DateComponent from '../../components/date';
+import { OverlineComponent, DateComponent } from '@wpmedia/theme-components';
 
 const POCList = () => (
   <div className="b-list">

@@ -1,0 +1,27 @@
+{
+  "name": "@wpmedia/theme-components",
+  "version": "5.15.0",
+  "description": "Fusion Themes Components",
+  "author": "",
+  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "features"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "directory": "blocks/theme-components"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "lint": "eslint --ext js --ext jsx features"
+  },
+  "peerDependencies": {},
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+}

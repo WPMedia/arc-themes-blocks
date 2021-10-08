@@ -112,6 +112,7 @@ const SignUp = ({ customFields, arcSite }) => {
       formErrorText={error}
     >
       <FormInputField
+        autoComplete="off"
         label={phrases.t('identity-block.email')}
         name="email"
         required
@@ -120,6 +121,7 @@ const SignUp = ({ customFields, arcSite }) => {
         validationErrorMessage={phrases.t('identity-block.email-requirements')}
       />
       <FormPasswordConfirm
+        autoComplete="new-password"
         name="password"
         label={phrases.t('identity-block.password')}
         validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}

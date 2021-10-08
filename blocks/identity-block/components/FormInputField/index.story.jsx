@@ -111,3 +111,23 @@ export const multipleFields = () => (
     />
   </form>
 );
+
+export const autoCompleteOff = () => (
+  <FormInputField
+    defaultValue=""
+    name="email"
+    type={FIELD_TYPES.EMAIL}
+    label="Email Address"
+    autoComplete="off"
+  />
+);
+
+export const autoCompleteNewPassword = () => (
+  <FormInputField
+    defaultValue=""
+    name="password-new-one"
+    type={FIELD_TYPES.PASSWORD}
+    label="Password"
+    autoComplete="new-password"
+  />
+);

@@ -1,11 +1,11 @@
-@use "sass:map";
+@use 'sass:map';
 
 .links-bar {
   // Include the component overrides for the block
-  @include blockComponents("links-bar");
+  @include block-components('links-bar');
 
   // Include all the block settings
-  @include blockProperties("links-bar");
+  @include block-properties('links-bar');
 
   align-items: center;
   text-align: left;

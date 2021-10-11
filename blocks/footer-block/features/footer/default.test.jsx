@@ -83,7 +83,7 @@ const mockPayload = {
     },
     {
       _id: 'get-us',
-      name: '',
+      name: '', // empty name should not render due to accessibility requirement
       children: [
         {
           display_name: 'Why Our Product',
@@ -98,8 +98,9 @@ const mockPayload = {
       ],
     },
     {
-      _id: 'blank-colum',
-      name: '',
+      _id: 'blank-column',
+      name: '', // Empty string header name
+      // no children items
     },
   ],
 };
@@ -151,7 +152,10 @@ describe('the footer feature for the default output type', () => {
   it('should have 5 column headers', () => {
     const wrapper = mount(<Footer customFields={{ navigationConfig: { contentService: 'footer-service', contentConfiguration: {} } }} />);
 
-    expect(wrapper.find('h4.footer-header')).toHaveLength(5);
+    // there are only 4 columns with any non-empty string data
+    // two of the 5 objects have empty string names
+    // therefore those h4 elements should not render if no content is present
+    expect(wrapper.find('h4.footer-header')).toHaveLength(3);
   });
 
   it('should have 12 column items', () => {

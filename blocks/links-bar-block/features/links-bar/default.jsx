@@ -5,7 +5,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import Link from '@wpmedia/enhanced-styles-concept/components/link';
+import { Link } from '@wpmedia/theme-components';
 
 import './links-bar.scss';
 

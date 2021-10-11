@@ -42,7 +42,8 @@ const usePaywall = () => {
     };
     if (
       apiOrigin
-      && globalContent.canonical_url
+      && globalContent?.canonical_url
+      && globalContent?.content_restrictions?.content_code
       && Identity
       && !isPaywalled
       && !isServerSide()
@@ -52,8 +53,8 @@ const usePaywall = () => {
   }, [
     apiOrigin,
     globalContent.canonical_url,
-    globalContent.content_restrictions.content_code,
-    globalContent.taxonomy.primary_section._id,
+    globalContent.content_restrictions,
+    globalContent.taxonomy.primary_section,
     globalContent.type,
     isPaywalled,
   ]);
@@ -104,7 +105,16 @@ const usePaywall = () => {
   );
 
   if (isServerSide()) {
-    return null;
+    return {
+      campaignCode: undefined,
+      getRegistrationRules: undefined,
+      getSubscribeRules: undefined,
+      isPaywalled: false,
+      isSignwall: false,
+      results: undefined,
+      rules: undefined,
+      triggeredRule: undefined,
+    };
   }
 
   return {

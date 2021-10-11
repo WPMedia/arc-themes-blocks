@@ -86,7 +86,7 @@ const Login = ({ customFields }) => {
   );
 };
 
-Login.label = 'Identity Login - Arc Block';
+Login.label = 'Identity Log In - Arc Block';
 
 Login.propTypes = {
   customFields: PropTypes.shape({

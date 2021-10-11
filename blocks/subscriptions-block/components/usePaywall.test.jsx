@@ -1,6 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
+import { useFusionContext } from 'fusion:context';
+
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 import usePaywall from './usePaywall';
@@ -30,7 +32,7 @@ jest.mock('fusion:properties', () => jest.fn(
 
 jest.mock('fusion:context', () => ({
   __esModule: true,
-  useFusionContext: () => ({
+  useFusionContext: jest.fn(() => ({
     arcSite: 'TestSite',
     globalContent: {
       canonical_url: 'http://canonical/',
@@ -44,7 +46,7 @@ jest.mock('fusion:context', () => ({
       },
       type: 'contentType',
     },
-  }),
+  })),
 }));
 
 global.window.ArcP = {
@@ -228,5 +230,33 @@ describe('Identity usePaywall Hook', () => {
     };
     const wrapper = shallow(<Test />);
     await expect(wrapper.find('.subscribeRules').length).toBe(1);
+  });
+
+  it('handles content without restrictions', () => {
+    useFusionContext.mockReturnValue({
+      arcSite: 'TestSite',
+      globalContent: {
+        canonical_url: 'http://canonical/',
+        taxonomy: {
+          primary_section: {
+            _id: 'primary_section_id',
+          },
+        },
+        type: 'contentType',
+      },
+    });
+
+    const Test = () => {
+      const paywallObject = usePaywall();
+      return (
+        <div>
+          { paywallObject?.isPaywalled ? <div className="isPaywalled" /> : null }
+        </div>
+      );
+    };
+    const wrapper = shallow(<Test />);
+    expect(wrapper.find('.isPaywalled').length).toBe(0);
+
+    useFusionContext.mockReset();
   });
 });

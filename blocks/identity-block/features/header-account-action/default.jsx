@@ -4,7 +4,11 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useFusionContext } from 'fusion:context';
 import {
-  Button, BUTTON_STYLES, BUTTON_SIZES, BUTTON_TYPES,
+  Button,
+  BUTTON_SIZES,
+  BUTTON_TYPES,
+  getNavSpecificSecondaryButtonTheme,
+  getNavSpecificPrimaryButtonTheme,
 } from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
 import DropDownLinkListItem from './_children/DropDownLinkListItem';
@@ -21,7 +25,7 @@ const HeaderAccountAction = ({ customFields }) => {
   const { arcSite } = useFusionContext();
 
   const { Identity, isInitialized } = useIdentity();
-  const { locale } = getProperties(arcSite);
+  const { locale, navColor = 'dark', navBarBackground } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const [loggedIn, setIsLoggedIn] = useState(false);
@@ -82,7 +86,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
             iconType="user"
             secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
@@ -96,7 +100,7 @@ const HeaderAccountAction = ({ customFields }) => {
             aria-expanded={isAccountMenuOpen}
             as="button"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.ICON_ONLY}
             iconType="user"
             onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -131,7 +135,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.OUTLINED_GREY}
+            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_ONLY}
             href={createAccountURL}
             text={phrases.t('identity-block.sign-up')}
@@ -142,7 +146,7 @@ const HeaderAccountAction = ({ customFields }) => {
             // should be an a tag if it's a link
             as="a"
             buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
             buttonType={BUTTON_TYPES.LABEL_AND_ICON}
             href={loginURL}
             iconType="user"
@@ -156,7 +160,7 @@ const HeaderAccountAction = ({ customFields }) => {
           as="button"
           aria-expanded={isAccountMenuOpen}
           buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={BUTTON_STYLES.WHITE_BACKGROUND_FILLED}
+          buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
           buttonType={BUTTON_TYPES.ICON_ONLY}
           iconType="user"
           onClick={() => setAccountMenu(!isAccountMenuOpen)}
@@ -200,8 +204,9 @@ HeaderAccountAction.propTypes = {
       label: 'Sign Up URL',
     }),
     logoutURL: PropTypes.string.tag({
-      defaultValue: '/account/logout/',
+      defaultValue: '/',
       label: 'Log Out URL',
+      description: 'The URL to which a user would be redirected to after clicking Log Out from the navigation.',
     }),
     manageAccountURL: PropTypes.string.tag({
       defaultValue: '/account/',

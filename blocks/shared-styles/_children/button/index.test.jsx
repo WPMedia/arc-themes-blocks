@@ -72,3 +72,45 @@ it('shows text if no aria label as aria label', () => {
 
   expect(wrapper.find('button').prop('aria-label')).toEqual('Show this as aria label');
 });
+
+it('renders label and two icons', () => {
+  const wrapper = mount(<Button
+    buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+    text="Hello button and two icons"
+    iconType="user"
+    secondaryIconType="user"
+  />);
+
+  expect(wrapper.find('.xpmedia-button--left-icon-container').length).toBe(1);
+  expect(wrapper.find('.xpmedia-button--right-icon-container').length).toBe(1);
+  expect(wrapper.find('svg')).toHaveLength(2);
+});
+
+it('renders label and right icon', () => {
+  const wrapper = mount(<Button
+    buttonType={BUTTON_TYPES.LABEL_AND_RIGHT_ICON}
+    text="Hello button and right icon"
+    iconType="user"
+  />);
+
+  expect(wrapper.find('.xpmedia-button--right-icon-container').length).toBe(1);
+  expect(wrapper.find('.xpmedia-button--left-icon-container').length).toBe(0);
+  expect(wrapper.find('svg')).toHaveLength(1);
+});
+
+it('defaults to button type', () => {
+  const wrapper = mount(<Button />);
+
+  expect(wrapper.find('button').prop('type')).toEqual('button');
+});
+
+it('Uses specified type for button', () => {
+  const wrapper = mount(<Button type="submit" />);
+
+  expect(wrapper.find('button').prop('type')).toEqual('submit');
+});
+
+it('passes in additional classes', () => {
+  const wrapper = mount(<Button additionalClassNames="my-custom-class" />);
+  expect(wrapper.find('button').prop('className')).toContain('my-custom-class');
+});

@@ -66,6 +66,7 @@ const Login = ({ customFields }) => {
       formErrorText={error}
     >
       <FormInputField
+        autoComplete="email"
         label={phrases.t('identity-block.email')}
         name="email"
         required
@@ -74,6 +75,7 @@ const Login = ({ customFields }) => {
         validationErrorMessage={phrases.t('identity-block.email-requirements')}
       />
       <FormInputField
+        autoComplete="current-password"
         label={phrases.t('identity-block.password')}
         name="password"
         required
@@ -90,7 +92,7 @@ Login.propTypes = {
   customFields: PropTypes.shape({
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
-      defaultValue: '/account/profile/',
+      defaultValue: '/account/',
     }),
     redirectToPreviousPage: PropTypes.bool.tag({
       name: 'Redirect to previous page',
@@ -100,7 +102,7 @@ Login.propTypes = {
     loggedInPageLocation: PropTypes.string.tag({
       name: 'Logged In URL',
       defaultValue: '/account/',
-      description: 'The URL to which a user would be redirected to if logged in an vist a page with the login form on',
+      description: 'The URL to which a user would be redirected to if visiting a login page when already logged in.',
     }),
   }),
 };

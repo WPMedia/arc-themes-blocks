@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FormInputField, { FIELD_TYPES } from '../FormInputField';
 
 const FormPasswordConfirm = ({
+  autoComplete,
   confirmLabel,
   confirmPlaceholder,
   confirmTip,
@@ -18,6 +19,7 @@ const FormPasswordConfirm = ({
   const [password, setPassword] = useState('');
 
   const fieldParameters = {
+    ...(autoComplete ? { autoComplete } : {}),
     ...(placeholder ? { placeholder } : {}),
     ...(showDefaultError ? { showDefaultError } : {}),
     ...(tip ? { tip } : {}),
@@ -26,6 +28,7 @@ const FormPasswordConfirm = ({
   };
 
   const confirmFieldParameters = {
+    ...(autoComplete ? { autoComplete } : {}),
     ...(confirmPlaceholder ? { placeholder: confirmPlaceholder } : {}),
     ...(showDefaultError ? { showDefaultError } : {}),
     ...(confirmTip ? { tip: confirmTip } : {}),

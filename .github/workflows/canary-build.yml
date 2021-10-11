@@ -7,7 +7,7 @@ on:
     paths:
       - "**.js"
       - "**.jsx"
-      - "*.scss"
+      - "**.scss"
       - "**/intl.json"
 
 # Publishes Canary builds with the dist tag of "canary"
@@ -28,15 +28,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.NODE_AUTH_TOKEN }}
 
-      - name: Cache NPM files
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
       # pulls all tags (needed for lerna / semantic release to correctly version)
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -52,7 +43,6 @@ jobs:
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
       - name: Clean install (CI) dependencies if lockfile (above) changed
-        # if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

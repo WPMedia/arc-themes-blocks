@@ -55,3 +55,16 @@
 @function block-var($block, $item) {
   @return var(--c-#{$block}-#{$item});
 }
+
+//
+// Setters
+//
+@mixin set-alias($items) {
+  $defaultAlias: $alias;
+  $alias: map.deep-merge($defaultAlias, $items) !global;
+}
+
+@mixin set-components($items) {
+  $defaultComponents: $components;
+  $components: map.deep-merge($defaultComponents, $items) !global;
+}

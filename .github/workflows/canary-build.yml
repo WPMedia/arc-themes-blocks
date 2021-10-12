@@ -9,7 +9,7 @@ on:
       - "**.jsx"
       - "**.scss"
       - "**/intl.json"
-      - "README.md"
+      - "**/README.md"
 
 # Publishes Canary builds with the dist tag of "canary"
 jobs:

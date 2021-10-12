@@ -9,7 +9,7 @@ on:
       - "**.jsx"
       - "**.scss"
       - "**/intl.json"
-      - "README.md"
+      - "**/README.md"
 
 # Publishes beta builds with the dist tag of "beta" and
 jobs:

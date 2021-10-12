@@ -9,7 +9,7 @@ on:
       - "**.jsx"
       - "**.scss"
       - "**/intl.json"
-      - "README.md"
+      - "**/README.md"
 
 # Publishes rc builds with the dist tag of "rc"
 jobs:

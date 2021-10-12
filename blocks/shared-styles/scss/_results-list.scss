@@ -51,11 +51,8 @@
   margin-bottom: map-get($spacers, 'xl');
   margin-top: map-get($spacers, 'xl');
   text-align: center;
-
-  > button {
-    height: 48px;
-    width: 213px;
-  }
+  display: flex;
+  justify-content: center;
 
   .visuallyHidden {
     border: 0;

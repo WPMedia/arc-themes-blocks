@@ -2,22 +2,11 @@ import React, {
   createRef, useCallback, useEffect, useReducer, useState,
 } from 'react';
 
-import styled from 'styled-components';
-import getThemeStyle from 'fusion:themes';
 import { useContent } from 'fusion:content';
 
+import { Button, BUTTON_STYLES, BUTTON_TYPES } from '@wpmedia/shared-styles';
 import ResultItem from './result-item';
 import { reduceResultList } from './helpers';
-
-const ReadMoreButton = styled.button`
-  background-color: ${(props) => props.primaryColor};
-  font-family: ${(props) => props.primaryFont};
-
-  &:not(:disabled):not(.disabled):active:hover,
-  &:not(:disabled):not(.disabled):hover:hover {
-    background-color: ${(props) => props.primaryColor};
-  }
-`;
 
 const Results = ({
   arcSite,
@@ -219,16 +208,13 @@ const Results = ({
       ))}
       {isThereMore && (
         <div className="see-more">
-          <ReadMoreButton
-            aria-label={phrases.t('results-list-block.see-more-button-aria-label')}
-            type="button"
-            className="btn btn-sm"
+          <Button
+            ariaLabel={phrases.t('results-list-block.see-more-button-aria-label')}
+            buttonStyle={BUTTON_STYLES.PRIMARY}
+            buttonTypes={BUTTON_TYPES.LABEL_ONLY}
             onClick={onReadMoreClick}
-            primaryFont={getThemeStyle(arcSite)['primary-font-family']}
-            primaryColor={getThemeStyle(arcSite)['primary-color']}
-          >
-            {phrases.t('results-list-block.see-more-button')}
-          </ReadMoreButton>
+            text={phrases.t('results-list-block.see-more-button')}
+          />
         </div>
       )}
     </div>

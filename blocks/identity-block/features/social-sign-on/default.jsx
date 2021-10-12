@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { isServerSide, ErrorIcon } from '@wpmedia/engine-theme-sdk';
+import { ErrorIcon } from '@wpmedia/engine-theme-sdk';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import SocialSignOn from '../../components/SocialSignOn';
-import useIdentity from '../../components/Identity';
 import './styles.scss';
+import useLogin from '../../components/useLogin';
+import useIdentity from '../../components/Identity';
 
 const SocialSignOnBlock = ({ customFields }) => {
-  let { redirectURL } = customFields;
   const {
+    redirectURL,
     redirectToPreviousPage,
     loggedInPageLocation,
   } = customFields;
@@ -20,35 +21,16 @@ const SocialSignOnBlock = ({ customFields }) => {
   const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
-  const { Identity, isInitialized } = useIdentity();
+  const { isInitialized } = useIdentity();
 
   const [error, setError] = useState();
 
-  if (redirectToPreviousPage && !isServerSide()) {
-    redirectURL = document?.referrer;
-  }
-
-  useEffect(() => {
-    const getConfig = async () => {
-      await Identity.getConfig();
-    };
-    if (Identity) {
-      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
-      getConfig();
-    }
-  }, [Identity]);
-
-  useEffect(() => {
-    const checkLoggedInStatus = async () => {
-      const isLoggedIn = await Identity.isLoggedIn();
-      if (isLoggedIn) {
-        window.location = loggedInPageLocation;
-      }
-    };
-    if (Identity && !isAdmin) {
-      checkLoggedInStatus();
-    }
-  }, [Identity, loggedInPageLocation, isAdmin]);
+  const { loginRedirect } = useLogin({
+    isAdmin,
+    redirectURL,
+    redirectToPreviousPage,
+    loggedInPageLocation,
+  });
 
   if (!isInitialized) {
     return null;
@@ -58,7 +40,7 @@ const SocialSignOnBlock = ({ customFields }) => {
     <section className="xpmedia-subs-social-sign-on">
       <SocialSignOn
         onError={() => { setError(phrases.t('identity-block.login-form-error')); }}
-        redirectURL={redirectURL}
+        redirectURL={loginRedirect}
       />
       {error ? (
         <section className="xpmedia-social-sign-on-error" role="alert">

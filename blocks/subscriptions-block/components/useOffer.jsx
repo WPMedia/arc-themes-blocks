@@ -10,7 +10,7 @@ const offerService = ({
 }) => fetch(`${origin}${endpoint}${campaignCode || 'default'}`, {})
   .then((res) => res.json());
 
-const useOffer = ({ campaignCode = null }) => {
+const useOffer = ({ campaignCode }) => {
   const { arcSite } = useFusionContext();
   const { api: { retail: { origin, endpoint } } } = getProperties(arcSite);
   const [offer, setOffer] = useState(null);

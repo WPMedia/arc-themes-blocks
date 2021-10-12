@@ -1,4 +1,4 @@
-import { isServerSide } from '@wpmedia/engine-theme-sdk/dist/cjs/utils';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import { useEffect } from 'react';
 import { useIdentity } from '..';
 

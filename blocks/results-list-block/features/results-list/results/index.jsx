@@ -1,10 +1,9 @@
 import React, {
   createRef, useCallback, useEffect, useReducer, useState,
 } from 'react';
-
+import { Button, BUTTON_STYLES, BUTTON_TYPES } from '@wpmedia/shared-styles';
 import { useContent } from 'fusion:content';
 
-import { Button, BUTTON_STYLES, BUTTON_TYPES } from '@wpmedia/shared-styles';
 import ResultItem from './result-item';
 import { reduceResultList } from './helpers';
 

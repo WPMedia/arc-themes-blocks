@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import getProperties from 'fusion:properties';
 import QuerylySearch from './queryly-search';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
@@ -21,7 +22,30 @@ jest.mock('fusion:intl', () => jest.fn(
 describe('<QuerylySearch/>', () => {
   it('renders', () => {
     const wrapper = mount(<QuerylySearch />);
+    expect(wrapper.find('Button').length).toBe(1);
+  });
 
+  it('renders secondary reverse white always for placement section-menu', () => {
+    getProperties.mockImplementation(() => ({
+      locale: 'en',
+      navBarBackground: '',
+      navColor: 'light',
+    }));
+    const wrapper = mount(<QuerylySearch placement="section-menu" />);
+    expect(wrapper.find('path').prop('fill')).toBe('#fff');
+    expect(wrapper.find('Button').length).toBe(1);
+  });
+
+  it('renders not white button with nav color background without placement override', () => {
+    getProperties.mockImplementation(() => ({
+      locale: 'en',
+      navBarBackground: '',
+      navColor: 'light',
+    }));
+
+    const wrapper = mount(<QuerylySearch />);
+
+    expect(wrapper.find('path').prop('fill')).toBe('#191919');
     expect(wrapper.find('Button').length).toBe(1);
   });
 

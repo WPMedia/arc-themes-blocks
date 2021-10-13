@@ -36,7 +36,10 @@ const NavWidget = ({
         alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
       />
     )) || (type === 'queryly' && (
-      <QuerylySearch />
+      <QuerylySearch
+        // passing in placement for nav-spcific styling
+        placement={placement}
+      />
     )) || (type === 'menu' && (
       <Button
         additionalClassNames="nav-sections-btn"

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 
-import isUrl from 'is-url/index';
+import isUrl from 'is-url';
 import usePaywall from '../../components/usePaywall';
 import PaywallOfferBody from '../../components/PaywallOfferBody';
 import useOffer from '../../components/useOffer';

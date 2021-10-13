@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
@@ -8,10 +7,11 @@ import getTranslatedPhrases from 'fusion:intl';
 import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import useIdentity from '../../components/Identity';
+import useLogin from '../../components/useLogin';
 
 const Login = ({ customFields }) => {
-  let { redirectURL } = customFields;
   const {
+    redirectURL,
     redirectToPreviousPage,
     loggedInPageLocation,
   } = customFields;
@@ -24,32 +24,12 @@ const Login = ({ customFields }) => {
 
   const [error, setError] = useState();
 
-  if (redirectToPreviousPage && !isServerSide()) {
-    redirectURL = document?.referrer;
-  }
-
-  useEffect(() => {
-    const getConfig = async () => {
-      await Identity.getConfig();
-    };
-
-    if (Identity) {
-      // https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/arc-identity-v1.json#/Tenant_Configuration/get
-      getConfig();
-    }
-  }, [Identity]);
-
-  useEffect(() => {
-    const checkLoggedInStatus = async () => {
-      const isLoggedIn = await Identity.isLoggedIn();
-      if (isLoggedIn) {
-        window.location = loggedInPageLocation;
-      }
-    };
-    if (Identity && !isAdmin) {
-      checkLoggedInStatus();
-    }
-  }, [Identity, loggedInPageLocation, isAdmin]);
+  const { loginRedirect } = useLogin({
+    isAdmin,
+    redirectURL,
+    redirectToPreviousPage,
+    loggedInPageLocation,
+  });
 
   if (!isInitialized) {
     return null;
@@ -61,7 +41,7 @@ const Login = ({ customFields }) => {
       buttonLabel={phrases.t('identity-block.log-in')}
       onSubmit={({ email, password }) => Identity
         .login(email, password)
-        .then(() => { window.location = redirectURL; })
+        .then(() => { window.location = loginRedirect; })
         .catch(() => setError(phrases.t('identity-block.login-form-error')))}
       formErrorText={error}
     >
@@ -86,7 +66,7 @@ const Login = ({ customFields }) => {
   );
 };
 
-Login.label = 'Identity Login - Arc Block';
+Login.label = 'Identity Log In - Arc Block';
 
 Login.propTypes = {
   customFields: PropTypes.shape({

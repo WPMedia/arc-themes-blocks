@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from '@testing-library/react';
 import Paywall from './default';
 import usePaywall from '../../components/usePaywall';
 import { useIdentity } from '../../../identity-block';
@@ -8,7 +9,7 @@ import useOffer from '../../components/useOffer';
 jest.mock('../../components/useOffer');
 jest.mock('../../../identity-block');
 jest.mock('../../components/usePaywall');
-jest.mock('../../components/PaywallOfferBody', () => () => <paywall-offer-body />);
+jest.mock('../../components/SubscriptionOverlay', () => () => <subscription-overlay />);
 
 useOffer.mockReturnValue({
   offer: {
@@ -97,14 +98,23 @@ describe('The OfferPaywall feature', () => {
     const wrapper = mount(
       <Paywall
         customFields={{
-          loginURL: '/login',
-          offerURL: '/offer',
+          reasonPrompt: 'Subscribe to continue reading.',
+          linkPrompt: 'Already a subscriber?',
+          linkText: 'Log In.',
+          linkUrl: '/account/login',
+          actionText: 'Subscribe',
+          offerURL: '/offer/',
           campaignCode: 'default',
         }}
       />,
     );
 
-    expect(wrapper.containsMatchingElement(<paywall-offer-body />)).toEqual(true);
+    act(() => {
+      jest.runAllTimers();
+      wrapper.setProps({});
+    });
+
+    expect(wrapper.containsMatchingElement(<subscription-overlay />)).toEqual(true);
   });
 
   it('does not render PaywallOfferBody component when isPaywalled is false', () => {
@@ -114,13 +124,21 @@ describe('The OfferPaywall feature', () => {
     const wrapper = mount(
       <Paywall
         customFields={{
-          loginURL: '/login',
-          offerURL: '/offer',
+          reasonPrompt: 'Subscribe to continue reading.',
+          linkPrompt: 'Already a subscriber?',
+          linkText: 'Log In.',
+          linkUrl: '/account/login',
+          actionText: 'Subscribe',
+          offerURL: '/offer/',
           campaignCode: 'default',
         }}
       />,
     );
+    act(() => {
+      jest.runAllTimers();
+      wrapper.setProps({});
+    });
 
-    expect(wrapper.containsMatchingElement(<paywall-offer-body />)).toEqual(false);
+    expect(wrapper.containsMatchingElement(<subscription-overlay />)).toEqual(false);
   });
 });

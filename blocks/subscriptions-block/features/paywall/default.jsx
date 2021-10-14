@@ -81,7 +81,7 @@ const Paywall = ({
    *  Return null if server side, not paywalled, doesn't have an offer to show
    *  or if the user is logged in.
    */
-  if (isServerSide() || !isPaywalled || !selectedOffer || isLoggedIn) {
+  if (isServerSide() || !isPaywalled || isLoggedIn || !selectedOffer) {
     return null;
   }
 

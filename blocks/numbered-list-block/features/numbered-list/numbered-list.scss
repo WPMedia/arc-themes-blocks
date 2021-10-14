@@ -13,7 +13,7 @@
     margin-bottom: 0;
     margin-top: 0;
   }
-  
+
 }
 
 .vertical-align-image > picture > img {
@@ -35,7 +35,8 @@
   }
 
   .list-anchor-image {
-    flex: 0 0 25%;
+    flex: 0 0 calc(25% + 16px);
+    padding-left: calculateRem(16px);
     text-decoration: none;
 
     img {
@@ -48,9 +49,8 @@
     @include link-color-active-hover($ui-primary-font-color);
     color: $ui-primary-font-color;
     display: flex;
-    padding-right: calculateRem(16px);
     text-decoration: none;
-    flex: 0 0 75%;
+    flex-grow: 1;
 
     .headline-text {
       font-size: calculateRem(16px);
@@ -62,10 +62,6 @@
 
 .numbered-item-margins {
   @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     margin-bottom: 1rem;
     margin-top: 1rem;
   }

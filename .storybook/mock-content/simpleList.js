@@ -25,7 +25,7 @@ export const simpleListMock = {
 		{
 			_id: '2',
 			headlines: {
-				basic: 'Castle church tower'
+				basic: 'Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower'
 			},
 			promo_items: {
 				basic: {

@@ -3,98 +3,18 @@ import { mount } from 'enzyme';
 import { act } from '@testing-library/react';
 import Paywall from './default';
 import usePaywall from '../../components/usePaywall';
-import { useIdentity } from '../../../identity-block';
-import useOffer from '../../components/useOffer';
 
 jest.mock('../../components/useOffer');
 jest.mock('../../../identity-block');
 jest.mock('../../components/usePaywall');
-jest.mock('../../components/SubscriptionOverlay', () => () => <subscription-overlay />);
-
-useOffer.mockReturnValue({
-  offer: {
-    pageTitle: 'this the offer title',
-    pageSubTitle: 'this the offer subtitle',
-  },
-  fetchOffer: () => ({
-    pageTitle: 'this the offer title',
-    pageSubTitle: 'this the offer subtitle',
-  }),
-});
-
-usePaywall.mockReturnValue({
-  isPaywalled: true,
-  triggeredRule: {
-    e: [
-      true,
-    ],
-    pw: 'allaccess',
-    rt: [
-      '>',
-      1,
-    ],
-    id: 103,
-    budget: {
-      id: 95,
-      budgetType: 'Calendar',
-      calendarType: 'Monthly',
-      calendarWeekDay: null,
-      rollingType: null,
-      rollingDays: null,
-      rollingHours: null,
-    },
-  },
-  rules: [
-    {
-      e: [
-        true,
-      ],
-      pw: 'allaccess',
-      rt: [
-        '>',
-        1,
-      ],
-      id: 103,
-      budget: {
-        id: 95,
-        budgetType: 'Calendar',
-        calendarType: 'Monthly',
-        calendarWeekDay: null,
-        rollingType: null,
-        rollingDays: null,
-        rollingHours: null,
-      },
-    },
-    {
-      e: [
-        true,
-        'premium',
-      ],
-      pw: 'allaccess',
-      rt: [
-        '>',
-        1,
-      ],
-      id: 104,
-      budget: {
-        id: 96,
-        budgetType: 'Calendar',
-        calendarType: 'Monthly',
-        calendarWeekDay: null,
-        rollingType: null,
-        rollingDays: null,
-        rollingHours: null,
-      },
-    },
-  ],
-});
+jest.mock('../../components/PaywallOffer', () => () => <paywall-offer />);
 
 describe('The OfferPaywall feature', () => {
-  it('renders PaywallOfferBody component when isPaywalled is true', () => {
-    useIdentity.mockReturnValue({
-      isLoggedIn: false,
+  it('renders PaywallOfferBody component when isPaywalled is true and isRegwall is false', () => {
+    usePaywall.mockReturnValue({
+      isPaywalled: true,
+      isRegwall: false,
     });
-
     const wrapper = mount(
       <Paywall
         customFields={{
@@ -114,12 +34,13 @@ describe('The OfferPaywall feature', () => {
       wrapper.setProps({});
     });
 
-    expect(wrapper.containsMatchingElement(<subscription-overlay />)).toEqual(true);
+    expect(wrapper.containsMatchingElement(<paywall-offer />)).toEqual(true);
   });
 
-  it('does not render PaywallOfferBody component when isPaywalled is false', () => {
+  it('does not render PaywallOfferBody component when isPaywalled is false or if isRegwall is true', () => {
     usePaywall.mockReturnValue({
       isPaywalled: false,
+      isRegwall: true,
     });
     const wrapper = mount(
       <Paywall
@@ -139,6 +60,6 @@ describe('The OfferPaywall feature', () => {
       wrapper.setProps({});
     });
 
-    expect(wrapper.containsMatchingElement(<subscription-overlay />)).toEqual(false);
+    expect(wrapper.containsMatchingElement(<paywall-offer />)).toEqual(false);
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import OfferPaywall from './default';
+import Paywall from './default';
 import usePaywall from '../../components/usePaywall';
 import { useIdentity } from '../../../identity-block';
 import useOffer from '../../components/useOffer';
@@ -95,7 +95,7 @@ describe('The OfferPaywall feature', () => {
     });
 
     const wrapper = mount(
-      <OfferPaywall
+      <Paywall
         customFields={{
           loginURL: '/login',
           offerURL: '/offer',
@@ -112,7 +112,7 @@ describe('The OfferPaywall feature', () => {
       isPaywalled: false,
     });
     const wrapper = mount(
-      <OfferPaywall
+      <Paywall
         customFields={{
           loginURL: '/login',
           offerURL: '/offer',

@@ -36,4 +36,4 @@ OR
 This block does not emit any events.
 
 ## Additional Considerations
-- This block is using arcads@6. See [here](https://github.com/washingtonpost/ArcAds) for more info on the library. It is a DFP wrapper created by Arc Publishing with publishers in mind.
+- This block is using arcads@4. See [here](https://github.com/washingtonpost/ArcAds) for more info on the library. It is a DFP wrapper created by Arc Publishing with publishers in mind. 

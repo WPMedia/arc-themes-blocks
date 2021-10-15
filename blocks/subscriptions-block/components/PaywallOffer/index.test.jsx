@@ -88,16 +88,13 @@ usePaywall.mockReturnValue({
 });
 
 /**
- * Need to mock this otherwise Jest sends out annoying warning:
- * Warning: useLayoutEffect does nothing on the server,
- * because its effect cannot be encoded into the server renderer's output format.
+ * Below I pass usePortal to false that will in return
+ * pass this down to the Subscription Overlay.
+ * This boolean prevents ReactDOM.createPortal from being used.
+ * Just checking with isServerSide doesn't work.  Jest and Enzyme
+ * still have poor support for ReactDOM.createPortal, so we need a way
+ * to conditionally render ReactDOM.createPortal.
  */
-// jest.mock('../blockBodyScroll', () => ({ children }) => (
-//   <>
-//     { children }
-//   </>
-// ));
-
 describe('The PaywallOffer component ', () => {
   it('renders with correct markup', () => {
     const wrapper = render(
@@ -109,6 +106,7 @@ describe('The PaywallOffer component ', () => {
         actionText="Subscribe"
         offerURL="/offer/"
         campaignCode="default"
+        usePortal={false}
       />,
     );
     expect(wrapper.html()).toBe('<div class="xpmedia-subscription-overlay-content"><div class="sc-kEYyzF ftIOvi xpmedia-subscription-dialog"><div class="xpmedia-subscription-dialog-reason-prompt">Subscribe to continue reading.</div><div class="xpmedia-subscription-dialog-link-prompt"><span class="xpmedia-subscription-dialog-link-prompt-pre-link">Already a subscriber?</span><a class="xpmedia-subscription-dialog-link-prompt-link" href="/account/login">Log In.</a></div><h2 class="xpmedia-subscription-dialog-headline">this the offer title</h2><h3 class="xpmedia-subscription-dialog-subheadline">this the offer subtitle</h3><a class="sc-hMqMXs gxyfPb xpmedia-button xpmedia-button--large" href="/offer/?_cid=default">Subscribe</a></div></div>');

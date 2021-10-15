@@ -16,6 +16,7 @@ const PaywallOffer = ({
   actionText,
   offerURL,
   campaignCode,
+  usePortal = true,
 }) => {
   const {
     campaignCode: initialCampaignCode,
@@ -87,7 +88,7 @@ const PaywallOffer = ({
     ? payWallCode : `${offerURL}?_cid=${campaign}`;
 
   return (
-    <SubscriptionOverlay>
+    <SubscriptionOverlay usePortal={usePortal}>
       <SubscriptionDialog
         reasonPrompt={reasonPrompt}
         linkPrompt={linkPrompt}

@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
 import Navigation from './default';
-import SearchBox from './_children/search-box';
 import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from './nav-helper';
 
 jest.mock('focus-trap-react', () => ({ children }) => children);
@@ -63,7 +62,7 @@ describe('the header navigation feature for the default output type', () => {
         expect(navLeftDesktop).toHaveLength(1);
         const searchWidget = navLeftDesktop.find('.nav-search');
         expect(searchWidget).toHaveLength(1);
-        const menuWidget = navLeftDesktop.find('.nav-sections-btn');
+        const menuWidget = navLeftDesktop.find('.nav-sections-btn button');
         expect(menuWidget).toHaveLength(1);
       });
 
@@ -71,7 +70,7 @@ describe('the header navigation feature for the default output type', () => {
         const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
         const navLeftDesktop = wrapper.find('.nav-left > .nav-components--mobile');
         expect(navLeftDesktop).toHaveLength(1);
-        const menuWidget = navLeftDesktop.find('.nav-sections-btn');
+        const menuWidget = navLeftDesktop.find('.nav-sections-btn button');
         expect(menuWidget).toHaveLength(1);
       });
 
@@ -291,58 +290,18 @@ describe('the header navigation feature for the default output type', () => {
       });
     });
   });
-  describe('nav color scheme', () => {
-    describe('when the nav color is set to "dark"', () => {
-      it('should set the "dark" class on the component', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('#main-nav')).toHaveClassName('dark');
-      });
-
-      it('should set all buttons to use the light color scheme', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-dark')).toEqual(true);
-      });
-
-      it('should pass the navColor to the SearchBox', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'dark' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'dark');
-      });
-    });
-
-    describe('when the nav color is set to "light"', () => {
-      it('should set the "light" class on the component', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('#main-nav')).toHaveClassName('light');
-      });
-      it('should set all buttons to use the light color scheme', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find('.nav-btn.nav-sections-btn').every('.nav-btn-light')).toEqual(true);
-      });
-
-      it('should pass the navColor to the SearchBox', () => {
-        getProperties.mockImplementation(() => ({ navColor: 'light' }));
-        const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-        expect(wrapper.find(SearchBox).first()).toHaveProp('navBarColor', 'light');
-      });
-    });
-  });
 
   describe('hamburger menu', () => {
     it('opens and closes with the sections button', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      expect(wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn')).toHaveLength(1);
+      expect(wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button')).toHaveLength(1);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
     });
 
@@ -350,7 +309,7 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
       wrapper.find('div#nav-sections').simulate('click', { target: { closest: () => false } });
@@ -361,7 +320,7 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(true);
 
-      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn').simulate('click');
+      wrapper.find('.nav-left > .nav-components--desktop .nav-sections-btn button').simulate('click');
       expect(wrapper.find('div#nav-sections').hasClass('open')).toBe(true);
 
       wrapper.find('div#nav-sections').simulate('click', { target: { closest: () => true } });

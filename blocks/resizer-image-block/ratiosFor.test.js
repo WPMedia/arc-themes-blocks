@@ -46,22 +46,22 @@ describe('validates arithmatic for ratios', () => {
 
     it('default values for LG', () => {
       const ratios = ratiosFor('LG');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(206);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(206);
-      expect(ratios.largeWidth).toBe(377);
-      expect(ratios.largeHeight).toBe(283);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('450');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('600');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('377');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('283');
     });
 
     it('default values for MD', () => {
       const ratios = ratiosFor('MD');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(154);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(225);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('338');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('450');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('400');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('225');
     });
 
     it('default values for SM', () => {
@@ -106,58 +106,58 @@ describe('validates arithmatic for ratios', () => {
 
     it('LG on 16:9', () => {
       const ratios = ratiosFor('LG', '16:9');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.largeWidth).toBe(377);
-      expect(ratios.largeHeight).toBe(212);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('338');
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('338');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('377');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('212');
     });
     it('LG on 4:3', () => {
       const ratios = ratiosFor('LG', '4:3');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(206);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(206);
-      expect(ratios.largeWidth).toBe(377);
-      expect(ratios.largeHeight).toBe(283);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('450');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('600');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('377');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('283');
     });
     it('LG on 3:2', () => {
       const ratios = ratiosFor('LG', '3:2');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(183);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(183);
-      expect(ratios.largeWidth).toBe(377);
-      expect(ratios.largeHeight).toBe(251);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('400');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('533');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('377');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('251');
     });
 
     it('MD on 16:9', () => {
       const ratios = ratiosFor('MD', '16:9');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(225);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('338');
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('338');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('400');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('225');
     });
     it('MD on 4:3', () => {
       const ratios = ratiosFor('MD', '4:3');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(206);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(206);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(300);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('450');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('600');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('400');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('300');
     });
     it('MD on 3:2', () => {
       const ratios = ratiosFor('MD', '3:2');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(183);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(183);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(267);
+      expect(ratios.smallWidth).toMatchInlineSnapshot('600');
+      expect(ratios.smallHeight).toMatchInlineSnapshot('400');
+      expect(ratios.mediumWidth).toMatchInlineSnapshot('800');
+      expect(ratios.mediumHeight).toMatchInlineSnapshot('533');
+      expect(ratios.largeWidth).toMatchInlineSnapshot('400');
+      expect(ratios.largeHeight).toMatchInlineSnapshot('267');
     });
 
     it('SM on 16:9', () => {

@@ -67,3 +67,16 @@ ManualBlock.label = 'Manual Block – Arc Block';
 
 export default ManualBlock;
 ```
+
+The following urls are allowed by default to be resized on the client-side: 
+
+```
+  'images.arcpublishing.com',
+  's3.amazonaws.com/arc-authors/',
+  'static.themebuilder.aws.arc.pub',
+  'themebuilder-api-uploads-ap-northeast-1.s3.amazonaws.com',
+  'themebuilder-api-uploads-eu-central-1.s3.amazonaws.com',
+  'themebuilder-api-uploads-us-east-1.s3.amazonaws.com',
+  'themebuilder-api-uploads.s3.amazonaws.com',
+```
+

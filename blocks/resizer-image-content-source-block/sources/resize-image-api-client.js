@@ -1,7 +1,15 @@
 import { allowedImageDomains as ALLOWED_IMAGE_DOMAINS } from 'fusion:environment';
 import getResizedImageData from '@wpmedia/resizer-image-block';
 
-const ARCDomains = ['images.arcpublishing.com', 's3.amazonaws.com/arc-authors/'];
+const ARCDomains = [
+  'images.arcpublishing.com',
+  's3.amazonaws.com/arc-authors/',
+  'static.themebuilder.aws.arc.pub',
+  'themebuilder-api-uploads-ap-northeast-1.s3.amazonaws.com',
+  'themebuilder-api-uploads-eu-central-1.s3.amazonaws.com',
+  'themebuilder-api-uploads-us-east-1.s3.amazonaws.com',
+  'themebuilder-api-uploads.s3.amazonaws.com',
+];
 
 const params = {
   // has to be an external image

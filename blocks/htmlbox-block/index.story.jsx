@@ -8,4 +8,4 @@ export default {
   },
 };
 
-export const LoremIpsum = () => <HTMLBox />;
+export const SampleHTML = () => <HTMLBox />;

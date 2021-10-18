@@ -15,7 +15,7 @@ const usePaywall = () => {
   const [results, setResults] = useState();
   const [triggeredRule, setTriggeredRule] = useState();
   const [otherTriggeredRules, setOtherTriggeredRules] = useState([]);
-  const [isSignwall, setIsSignwall] = useState();
+  const [isRegwalled, setIsRegwalled] = useState();
 
   // eslint-disable-next-line no-underscore-dangle
   const rules = (!isServerSide() && window?.ArcP?._rules) || [];
@@ -75,21 +75,21 @@ const usePaywall = () => {
   useEffect(() => {
     if (triggeredRule || otherTriggeredRules) {
       if (triggeredRule?.e?.length > 1) {
-        setIsSignwall(false);
+        setIsRegwalled(false);
         return;
       }
       if (otherTriggeredRules?.length) {
         const paywallRule = otherTriggeredRules
           .sort((a, b) => b.rt[1] - a.rt[1])
           .find((rule) => rule?.e?.length > 1);
-        setIsSignwall(!paywallRule);
+        setIsRegwalled(!paywallRule);
         if (paywallRule && triggeredRule !== paywallRule) {
           setTriggeredRule(paywallRule);
         }
         return;
       }
       if (triggeredRule?.e?.length === 1) {
-        setIsSignwall(true);
+        setIsRegwalled(true);
       }
     }
   }, [triggeredRule, otherTriggeredRules]);
@@ -110,7 +110,7 @@ const usePaywall = () => {
       getRegistrationRules: undefined,
       getSubscribeRules: undefined,
       isPaywalled: false,
-      isSignwall: false,
+      isRegwalled: false,
       results: undefined,
       rules: undefined,
       triggeredRule: undefined,
@@ -122,7 +122,7 @@ const usePaywall = () => {
     getRegistrationRules,
     getSubscribeRules,
     isPaywalled,
-    isSignwall,
+    isRegwalled,
     results,
     rules,
     triggeredRule,

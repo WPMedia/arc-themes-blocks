@@ -63,7 +63,7 @@ const VideoPlayer = (props) => {
   const fetchDataQuery = websiteURL ? {
     website_url: websiteURL,
     site: arcSite,
-  } : (contentConfigValues && { 'arc-site': arcSite, ...contentConfigValues }) || null;
+  } : contentConfigValues || null;
 
   const fetchedData = useContent({
     source: fetchSource,

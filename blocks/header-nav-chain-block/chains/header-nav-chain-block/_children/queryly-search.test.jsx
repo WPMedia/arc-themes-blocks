@@ -1,9 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import getProperties from 'fusion:properties';
 import QuerylySearch from './queryly-search';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({
   locale: 'en',
+  navBarBackground: '',
+  navColor: 'dark',
 }))));
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
@@ -16,55 +19,60 @@ jest.mock('fusion:intl', () => jest.fn(
   }),
 ));
 
-const testQuerylySearch = ({
-  root, theme, iconSize = 16, label = 'test-translation',
-}) => {
-  const container = root.find('.nav-search');
-  expect(container).toHaveLength(1);
-  expect(container).toHaveClassName(theme);
-  expect(container).toHaveClassName('queryly');
-  const navBtn = container.find('button.nav-btn');
-  expect(navBtn).toHaveLength(1);
-  expect(navBtn).toHaveClassName(`nav-btn-${theme}`);
-  expect(navBtn).toHaveClassName('border');
-  expect(navBtn).toHaveClassName('transparent');
-  const querylyLabel = navBtn.find('label');
-  expect(querylyLabel).toHaveLength(1);
-  expect(querylyLabel.prop('htmlFor')).toEqual('queryly_toggle');
-  const searchIcon = querylyLabel.find('SearchIcon');
-  expect(searchIcon).toHaveLength(1);
-  expect(searchIcon.prop('height')).toEqual(iconSize);
-  expect(searchIcon.prop('width')).toEqual(iconSize);
-
-  const button = container.find('button');
-  expect(button.prop('aria-label')).toBe(label);
-};
-
 describe('<QuerylySearch/>', () => {
-  it('renders with default props', () => {
-    const wrapper = shallow(<QuerylySearch />);
-    testQuerylySearch({ root: wrapper, theme: 'dark' });
+  it('renders', () => {
+    const wrapper = mount(<QuerylySearch />);
+    expect(wrapper.find('Button').length).toBe(1);
   });
 
-  it('renders with dark theme and default icon size', () => {
-    const wrapper = shallow(<QuerylySearch theme="dark" />);
-    testQuerylySearch({ root: wrapper, theme: 'dark' });
+  it('renders secondary reverse white always for placement section-menu', () => {
+    getProperties.mockImplementation(() => ({
+      locale: 'en',
+      navBarBackground: '',
+      navColor: 'light',
+    }));
+    const wrapper = mount(<QuerylySearch placement="section-menu" />);
+    expect(wrapper.find('path').prop('fill')).toBe('#fff');
+    expect(wrapper.find('Button').length).toBe(1);
   });
 
-  it('renders with light theme and default icon size', () => {
-    const wrapper = shallow(<QuerylySearch theme="light" />);
-    testQuerylySearch({ root: wrapper, theme: 'light' });
+  it('renders not white button with nav color background without placement override', () => {
+    getProperties.mockImplementation(() => ({
+      locale: 'en',
+      navBarBackground: '',
+      navColor: 'light',
+    }));
+
+    const wrapper = mount(<QuerylySearch />);
+
+    expect(wrapper.find('path').prop('fill')).toBe('#191919');
+    expect(wrapper.find('Button').length).toBe(1);
   });
 
-  it('renders with custom icon size', () => {
-    const wrapper = shallow(<QuerylySearch theme="dark" iconSize={24} />);
-    testQuerylySearch({ root: wrapper, theme: 'dark', iconSize: 24 });
-  });
+  it('affects the querly toggle on click', () => {
+    const MockQuerlyToggle = () => (
+      <input
+        type="checkbox"
+        id="queryly_toggle"
+        checked={false}
+        onChange={() => {}}
+      />
+    );
 
-  it('custom label', () => {
-    const wrapper = shallow(<QuerylySearch theme="dark" iconSize={24} label="Suche" />);
-    testQuerylySearch({
-      root: wrapper, theme: 'dark', iconSize: 24, label: 'Suche',
-    });
+    // via https://stackoverflow.com/a/43734834/7491536
+    // in order to use document.body queries, have to attach to body
+    // not ideal using getElementById within a react component
+    const wrapper = mount(
+      <>
+        <MockQuerlyToggle />
+        <QuerylySearch />
+      </>, { attachTo: document.body },
+    );
+    const inputMock = wrapper.find('input#queryly_toggle');
+    expect(inputMock.props().checked).toBe(false);
+    const button = wrapper.find('Button');
+
+    button.simulate('click');
+    expect(inputMock.props().checked).toBe(false);
   });
 });

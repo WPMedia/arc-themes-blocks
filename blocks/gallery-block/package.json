@@ -25,6 +25,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*"
   },

@@ -133,7 +133,7 @@ const ExtraLargePromoPresentation = ({
 
 ExtraLargePromoPresentation.propTypes = {
   content: PropTypes.object,
-  showOverline: PropTypes.string,
+  showOverline: PropTypes.bool,
   showHeadline: PropTypes.bool,
   imageOverrideURL: PropTypes.string,
   imageRatio: PropTypes.string,

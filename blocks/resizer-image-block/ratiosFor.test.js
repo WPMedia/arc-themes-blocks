@@ -66,12 +66,12 @@ describe('validates arithmatic for ratios', () => {
 
     it('default values for SM', () => {
       const ratios = ratiosFor('SM');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(183);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(183);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(267);
+      expect(ratios.smallWidth).toBe(600);
+      expect(ratios.smallHeight).toBe(400);
+      expect(ratios.mediumWidth).toBe(800);
+      expect(ratios.mediumHeight).toBe(533);
+      expect(ratios.largeWidth).toBe(600);
+      expect(ratios.largeHeight).toBe(400);
     });
   });
 
@@ -162,30 +162,30 @@ describe('validates arithmatic for ratios', () => {
 
     it('SM on 16:9', () => {
       const ratios = ratiosFor('SM', '16:9');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(154);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(225);
+      expect(ratios.smallWidth).toBe(600);
+      expect(ratios.smallHeight).toBe(338);
+      expect(ratios.mediumWidth).toBe(800);
+      expect(ratios.mediumHeight).toBe(450);
+      expect(ratios.largeWidth).toBe(600);
+      expect(ratios.largeHeight).toBe(338);
     });
     it('SM on 4:3', () => {
       const ratios = ratiosFor('SM', '4:3');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(206);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(206);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(300);
+      expect(ratios.smallWidth).toBe(600);
+      expect(ratios.smallHeight).toBe(450);
+      expect(ratios.mediumWidth).toBe(800);
+      expect(ratios.mediumHeight).toBe(600);
+      expect(ratios.largeWidth).toBe(600);
+      expect(ratios.largeHeight).toBe(450);
     });
     it('SM on 3:2', () => {
       const ratios = ratiosFor('SM', '3:2');
-      expect(ratios.smallWidth).toBe(274);
-      expect(ratios.smallHeight).toBe(183);
-      expect(ratios.mediumWidth).toBe(274);
-      expect(ratios.mediumHeight).toBe(183);
-      expect(ratios.largeWidth).toBe(400);
-      expect(ratios.largeHeight).toBe(267);
+      expect(ratios.smallWidth).toBe(600);
+      expect(ratios.smallHeight).toBe(400);
+      expect(ratios.mediumWidth).toBe(800);
+      expect(ratios.mediumHeight).toBe(533);
+      expect(ratios.largeWidth).toBe(600);
+      expect(ratios.largeHeight).toBe(400);
     });
   });
 });

@@ -5,7 +5,6 @@
   justify-content: center;
 
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-
     &--1 {
       grid-template-columns: minmax(auto, 600px);
     }

@@ -3,6 +3,100 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-chain-block@5.18.0...@wpmedia/header-nav-chain-block@5.19.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* Add aria label to missing button per accessibility test ([b618af6](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b618af6415261dbbce0ee28d10c393999b38e87c))
+* Add back fallback dark ([1b685b1](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1b685b111a751e089ff9836694e05302a73029ad))
+* Add back top nav list stylistic margin ([6540ee1](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6540ee1eefe753e7fb685394c8ed3fa55ed165b6))
+* Add breakpoint prop. Toggle icon only and right icon and text. Alphabetize props ([46e9462](https://github.com/WPMedia/fusion-news-theme-blocks/commit/46e9462c01e9b75869a7f1a268fdeb2f6749d6f1))
+* Add quick fix based on previous find within timebox along with comments ([456bade](https://github.com/WPMedia/fusion-news-theme-blocks/commit/456badeb629de008092706c18eda1716214d4089))
+* Ensure absolute position only displays on open ([26818e1](https://github.com/WPMedia/fusion-news-theme-blocks/commit/26818e1dc0e9de2604dafd9ec38ff528f93da0b4)), closes [/github.com/WPMedia/fusion-news-theme-blocks/pull/1102#discussion_r718384180](https://github.com//github.com/WPMedia/fusion-news-theme-blocks/pull/1102/issues/discussion_r718384180)
+* Ensure accessibility issue is addressed by making inner list items to have li not div ([2fde36e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/2fde36e186ee4bace81d7f6aa2ca8daab70f3e73))
+* Ensure bottom link is visible on mobile phones and on desktop on mouseover with placeholder div ([6fb4a78](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6fb4a783a42d70103a699fe8cecf4fd3a07272d9))
+* Ensure icontype proptypes match and typo fix for button type ([9ee81dd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9ee81dd61821dbd69cdf20a1b7a0b64916e2ea09))
+* Ensure import works for styled components oops ([606df66](https://github.com/WPMedia/fusion-news-theme-blocks/commit/606df66e645a2bff62cbfd12b6470f398916fb02))
+* Ensure that in the section-menu, the querly button is always white border, white text, and transparent background ([9f63f2c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9f63f2c33515da5f544550fefa56822dd5bd77f8))
+* Remove magic numbers, remove hard-coded top margin. Take in dynamic height ([670b851](https://github.com/WPMedia/fusion-news-theme-blocks/commit/670b851290ff4df30e3f82d0f500346ec88b1198))
+* Remove memoized nav section ([986fe8c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/986fe8ccfde7c265c37aaab3b470f287f39536c4))
+* Remove newline unnecessary ([0838e61](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0838e613489d94fccbc33933438f42d0fbf4d6cb))
+* Update color of button for input on show ([17e6c0e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/17e6c0ea73813abdb0191029e1c0b3b43a91b832))
+
+
+### Features
+
+* Add custom css for absolutely positioned button ([03af54e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/03af54e9fa11a5ba9648d9e2f965dd56fcb72bec))
+* Add querly search icon reusable button ([c0a8365](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c0a83656f7263cea4052d6606b3b09c32e42514e))
+* Add reusable button to nav sections and remove overriding styles ([9cf2b81](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9cf2b81a071c37731b3e4bdba663b3dd1ee8921b))
+* Refactor helper props functions out. Makes for easier testing. ([31c34e2](https://github.com/WPMedia/fusion-news-theme-blocks/commit/31c34e2c7c1a83f417ccb9c57ae38409b9408991))
+* Update arc search button based on reusable button ([2a78a2f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/2a78a2f5ef898efaf9e6e2723f4d265411814794))
+
+
+### Performance Improvements
+
+* Factor out children handling to ensure re-renders as expected on scroll ([2720022](https://github.com/WPMedia/fusion-news-theme-blocks/commit/2720022b64eba72cd59e12df3f63826df03d0cfe))
+* Refactor to use isLogoVisible within state that it's needed of navlogo child ([12f4bfe](https://github.com/WPMedia/fusion-news-theme-blocks/commit/12f4bfe29e3c219e915155dd0c194ddb60b82b7a))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+### Features
+
+* Refactor primary font out where necessary, fix linting error, remove unused react fragments ([3ba8b3f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/3ba8b3f172951f4f46269c7ec5a8ddb10a1c493b))
+* Simplify and optimize primary font and usage composition for header nav chain ([e4c6b5d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e4c6b5d92fac79efcd72f02ef9257907dc3f9c3e))
+* Use proper primary font for sections top head ([5d2d994](https://github.com/WPMedia/fusion-news-theme-blocks/commit/5d2d9948a5b45977ead6fe6dd3fd94783fe8adf5))
+
+
+### Performance Improvements
+
+* Remove duplicate nowrap declaration ([337f76d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/337f76de8c6b598360840746e7d6ba51103a5a81))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+### Features
+
+* Factor out format url and rename import to engine theme sdk ([a753ed4](https://github.com/WPMedia/fusion-news-theme-blocks/commit/a753ed4f42cfab6830b48a9b7bda4e719dfba562))
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+### Bug Fixes
+
+* Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
+* Add primary color ([970685b](https://github.com/WPMedia/fusion-news-theme-blocks/commit/970685b442eb6f62bad6d75e023a04a955e7e244))
+* Ensure button is disabled from submitting ([1de53d8](https://github.com/WPMedia/fusion-news-theme-blocks/commit/1de53d89e047a9cadefcb1a786fcaefc0a5a48b3))
+
+
+### Performance Improvements
+
+* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/fusion-news-theme-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
+
+
+
+# 5.9.0-canary.0 (2020-10-14)
+
+
+
+
+
 # [5.18.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-chain-block@5.17.0...@wpmedia/header-nav-chain-block@5.18.0) (2021-09-22)
 
 

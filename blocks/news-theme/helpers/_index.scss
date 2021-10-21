@@ -60,11 +60,11 @@
 // Setters
 //
 @mixin set-alias($items) {
-  $defaultAlias: $alias;
-  $alias: map.deep-merge($defaultAlias, $items) !global;
+  $default-alias: $alias;
+  $alias: map.deep-merge($default-alias, $items) !global;
 }
 
 @mixin set-components($items) {
-  $defaultComponents: $components;
-  $components: map.deep-merge($defaultComponents, $items) !global;
+  $default-components: $components;
+  $components: map.deep-merge($default-components, $items) !global;
 }

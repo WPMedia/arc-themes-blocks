@@ -4,7 +4,13 @@ import PropTypes from '@arc-fusion/prop-types';
 import './styles.scss';
 
 const GridList = ({ children }) => {
-  const additionalClass = children.length > 3 ? `xpmedia-subscription-grid-list--${children.length}` : '';
+  const childCount = React.Children.count(children);
+  const additionalClass = childCount ? `xpmedia-subscription-grid-list--${childCount}` : '';
+
+  if (!children) {
+    return null;
+  }
+
   return (
     <div className={`xpmedia-subscription-grid-list ${additionalClass}`}>
       {children}

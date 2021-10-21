@@ -9,6 +9,19 @@ export default {
   },
 };
 
+export const singleItem = () => (
+  <GridList>
+    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
+  </GridList>
+);
+
+export const twoItems = () => (
+  <GridList>
+    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
+    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
+  </GridList>
+);
+
 export const threeItems = () => (
   <GridList>
     <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />

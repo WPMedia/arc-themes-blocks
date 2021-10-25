@@ -1,6 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { act } from '@testing-library/react';
+
+import getProperties from 'fusion:properties';
+
 import Paywall from './default';
 import usePaywall from '../../components/usePaywall';
 
@@ -15,24 +17,18 @@ describe('The OfferPaywall feature', () => {
       isPaywalled: true,
       isRegwall: false,
     });
+    getProperties.mockReturnValue({
+      locale: 'en',
+    });
     const wrapper = mount(
       <Paywall
         customFields={{
-          reasonPrompt: 'Subscribe to continue reading.',
-          linkPrompt: 'Already a subscriber?',
-          linkText: 'Log In.',
-          linkUrl: '/account/login',
-          actionText: 'Subscribe',
-          offerURL: '/offer/',
           campaignCode: 'default',
+          linkUrl: '/account/login',
+          offerURL: '/offer/',
         }}
       />,
     );
-
-    act(() => {
-      jest.runAllTimers();
-      wrapper.setProps({});
-    });
 
     expect(wrapper.containsMatchingElement(<paywall-offer />)).toEqual(true);
   });
@@ -42,23 +38,18 @@ describe('The OfferPaywall feature', () => {
       isPaywalled: false,
       isRegwall: true,
     });
+    getProperties.mockReturnValue({
+      locale: 'en',
+    });
     const wrapper = mount(
       <Paywall
         customFields={{
-          reasonPrompt: 'Subscribe to continue reading.',
-          linkPrompt: 'Already a subscriber?',
-          linkText: 'Log In.',
-          linkUrl: '/account/login',
-          actionText: 'Subscribe',
-          offerURL: '/offer/',
           campaignCode: 'default',
+          linkUrl: '/account/login',
+          offerURL: '/offer/',
         }}
       />,
     );
-    act(() => {
-      jest.runAllTimers();
-      wrapper.setProps({});
-    });
 
     expect(wrapper.containsMatchingElement(<paywall-offer />)).toEqual(false);
   });

@@ -88,6 +88,16 @@ const fontUrlLink = (fontUrl) => {
   ) : '';
 };
 
+const getCanonicalDomain = (globalContent) => {
+  if (!globalContent) {
+    return null;
+  }
+
+  const canonicalSiteProperties = getProperties(globalContent?.canonical_website);
+
+  return canonicalSiteProperties?.websiteDomain || null;
+};
+
 const SampleOutputType = ({
   children,
   contextPath,
@@ -179,6 +189,7 @@ const SampleOutputType = ({
           globalContent={globalContent}
           websiteName={websiteName}
           websiteDomain={websiteDomain}
+          canonicalDomain={getCanonicalDomain(globalContent)}
           twitterUsername={twitterUsername}
           resizerURL={resizerURL}
           arcSite={arcSite}

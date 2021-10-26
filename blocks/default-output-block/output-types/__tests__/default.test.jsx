@@ -19,7 +19,6 @@ describe('the default output type', () => {
   beforeAll(() => {
     jest.mock('fusion:context', () => ({
       useFusionContext: jest.fn(() => ({
-        globalContent: {},
         arcSite: 'the-sun',
       })),
     }));

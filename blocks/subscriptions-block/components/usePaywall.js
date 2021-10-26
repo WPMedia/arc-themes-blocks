@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 
-import Identity from '@arc-publishing/sdk-identity';
+import { useIdentity } from '@wpmedia/identity-block';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
 const usePaywall = () => {
@@ -11,8 +11,10 @@ const usePaywall = () => {
   const { api } = getProperties(arcSite);
 
   const [campaignCode, setCampaignCode] = useState();
+  const [results, setResults] = useState();
   const [isPaywalled, setIsPaywalled] = useState(false);
   const [triggeredRule, setTriggeredRule] = useState();
+  const { Identity, isInitialized: isIdentityInitialized } = useIdentity();
 
   // eslint-disable-next-line no-underscore-dangle
   const rules = (!isServerSide() && window?.ArcP?._rules) || [];
@@ -21,7 +23,7 @@ const usePaywall = () => {
   useEffect(() => {
     const runPaywall = async () => {
       // Subs ArcP.run assumes https://, so we need to strip it from the endpoint origin.
-      const results = await window?.ArcP?.run({
+      setResults(await window?.ArcP?.run({
         apiOrigin: apiOrigin.replace(/^https?:\/\//i, ''),
         contentIdentifier: globalContent.canonical_url,
         contentRestriction: globalContent.content_restrictions.content_code,
@@ -32,45 +34,49 @@ const usePaywall = () => {
           setIsPaywalled(true);
         },
         section: globalContent.taxonomy?.primary_section._id,
-      });
-
-      if (results?.triggered) {
-        const { id: triggerId, rc: triggerCount } = results.triggered;
-
-        const triggeringRule = rules.find(({ id }) => triggerId === id);
-
-        // we currently only support rule triggers of ['>', count]
-        const triggerableRules = ({ rt: [op, count] }) => op === '>' && triggerCount > count;
-        const byDescendingTriggerCount = ({ rt: [, a] }, { rt: [, b] }) => b - a;
-        const withRestrictedStatus = ({ e: [hasOpportunity, skuId] }) => hasOpportunity && !!skuId;
-
-        const paywallableRule = rules
-          .filter(triggerableRules)
-          .sort(byDescendingTriggerCount)
-          .find(withRestrictedStatus);
-
-        setTriggeredRule(paywallableRule && paywallableRule !== triggeringRule
-          ? paywallableRule
-          : triggeringRule);
-      }
+      }));
     };
+
     if (
       apiOrigin
       && globalContent.canonical_url
       && globalContent.content_restrictions?.content_code
-      && Identity
+      && isIdentityInitialized
       && !isPaywalled
       && !isServerSide()
-      && rules?.length
     ) {
       runPaywall();
     }
   }, [
     apiOrigin,
     globalContent,
+    Identity,
+    isIdentityInitialized,
     isPaywalled,
     rules,
   ]);
+
+  useEffect(() => {
+    if (results?.triggered && rules?.length) {
+      const { id: triggerId, rc: triggerCount } = results.triggered;
+
+      const triggeringRule = rules.find(({ id }) => triggerId === id);
+
+      // we currently only support rule triggers of ['>', count]
+      const triggerableRules = ({ rt: [op, count] }) => op === '>' && triggerCount > count;
+      const byDescendingTriggerCount = ({ rt: [, a] }, { rt: [, b] }) => b - a;
+      const withRestrictedStatus = ({ e: [hasOpportunity, skuId] }) => hasOpportunity && !!skuId;
+
+      const paywallableRule = rules
+        .filter(triggerableRules)
+        .sort(byDescendingTriggerCount)
+        .find(withRestrictedStatus);
+
+      setTriggeredRule(paywallableRule && paywallableRule !== triggeringRule
+        ? paywallableRule
+        : triggeringRule);
+    }
+  }, [results, rules]);
 
   if (isServerSide()) {
     return {

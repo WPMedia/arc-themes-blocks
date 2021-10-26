@@ -9,13 +9,14 @@ import SubscriptionDialog from '../SubscriptionDialog';
 const isPaywallCampaignURL = (payWallCode) => payWallCode && isUrl(payWallCode);
 
 const PaywallOffer = ({
-  reasonPrompt,
+  actionText,
+  actionUrl,
+  campaignCode,
+  displayMode,
   linkPrompt,
   linkText,
   linkUrl,
-  actionText,
-  offerURL,
-  campaignCode,
+  reasonPrompt,
   usePortal = true,
 }) => {
   const {
@@ -84,20 +85,20 @@ const PaywallOffer = ({
    * we just set the campaign code to "default"
    */
   const campaign = campaignCode || (!isPaywallCampaignURL(payWallCode) ? payWallCode : 'default');
-  const actionUrl = isPaywallCampaignURL(payWallCode)
-    ? payWallCode : `${offerURL}?_cid=${campaign}`;
 
   return (
-    <SubscriptionOverlay usePortal={usePortal}>
+    <SubscriptionOverlay displayMode={displayMode} usePortal={usePortal}>
       <SubscriptionDialog
-        reasonPrompt={reasonPrompt}
+        actionText={actionText}
+        actionUrl={isPaywallCampaignURL(payWallCode)
+          ? payWallCode
+          : `${actionUrl}?_cid=${campaign}`}
+        headline={selectedOffer.pageTitle}
         linkPrompt={linkPrompt}
         linkText={linkText}
         linkUrl={linkUrl}
-        headline={selectedOffer.pageTitle}
+        reasonPrompt={reasonPrompt}
         subHeadline={selectedOffer.pageSubTitle}
-        actionUrl={actionUrl}
-        actionText={actionText}
       />
     </SubscriptionOverlay>
   );

@@ -23,9 +23,19 @@ describe('The OfferPaywall feature', () => {
     const wrapper = mount(
       <Paywall
         customFields={{
+          adminViewState: 'hide',
+          displayMode: '',
           campaignCode: 'default',
+          linkText: 'Log In.',
           linkUrl: '/account/login',
-          offerURL: '/offer/',
+          payActionText: 'Subscribe',
+          payActionUrl: '/offer/',
+          payReasonPrompt: 'Pay Reason',
+          registerActionText: '/Register/Action',
+          registerActionUrl: '/Register/Action',
+          registerHeaderText: 'Register Now',
+          registerSubHeaderText: 'to gain access',
+          registerReasonPrompt: 'Register Reason',
         }}
       />,
     );
@@ -44,9 +54,19 @@ describe('The OfferPaywall feature', () => {
     const wrapper = mount(
       <Paywall
         customFields={{
+          adminViewState: 'hide',
+          displayMode: '',
           campaignCode: 'default',
+          linkText: 'Log In.',
           linkUrl: '/account/login',
-          offerURL: '/offer/',
+          payActionText: 'Subscribe',
+          payActionUrl: '/offer/',
+          payReasonPrompt: 'Pay Reason',
+          registerActionText: '/Register/Action',
+          registerActionUrl: '/Register/Action',
+          registerHeaderText: 'Register Now',
+          registerSubHeaderText: 'to gain access',
+          registerReasonPrompt: 'Register Reason',
         }}
       />,
     );

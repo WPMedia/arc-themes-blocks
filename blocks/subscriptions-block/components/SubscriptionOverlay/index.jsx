@@ -16,6 +16,11 @@ export const Portal = ({ children }) => {
  * Portals are not currently supported by the server renderer.
  *
  * Just checking for isServerSide is not enough.
+ *
+ * `displayMode` param is unused at this time.
+ *   We implemented 'bottomHalf' below.
+ *   It can be ['bottomHalf', 'full', 'modal'].
+ *
  */
 const SubscriptionOverlay = ({ children, usePortal = true }) => {
   const overlayRef = useRef();

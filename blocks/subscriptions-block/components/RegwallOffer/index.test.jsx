@@ -4,9 +4,7 @@ import isUrl from 'is-url';
 
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
-import PaywallOffer from '.';
-import usePaywall from '../usePaywall';
-import useOffer from '../useOffer';
+import RegwallOffer from '.';
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
@@ -18,27 +16,6 @@ jest.mock('is-url', () => ({
   default: jest.fn(() => false),
 }));
 
-jest.mock('../../components/useOffer');
-jest.mock('../../../identity-block');
-jest.mock('../../components/usePaywall');
-
-useOffer.mockReturnValue({
-  offer: {
-    pageTitle: 'this the offer title',
-    pageSubTitle: 'this the offer subtitle',
-  },
-  fetchOffer: () => ({
-    pageTitle: 'this the offer title',
-    pageSubTitle: 'this the offer subtitle',
-  }),
-});
-
-usePaywall.mockReturnValue({
-  campaignCode: 'default',
-  isPaywalled: true,
-  isRegisterwalled: false,
-});
-
 /**
  * Below I pass usePortal to false that will in return
  * pass this down to the Subscription Overlay.
@@ -47,18 +24,20 @@ usePaywall.mockReturnValue({
  * still have poor support for ReactDOM.createPortal, so we need a way
  * to conditionally render ReactDOM.createPortal.
  */
-describe('The PaywallOffer component ', () => {
+describe('The RegwallOffer component ', () => {
   it('returns null if serverSide', () => {
     isServerSide.mockReturnValue(true);
     const wrapper = render(
-      <PaywallOffer
+      <RegwallOffer
         actionText="Subscribe"
-        actionUrl="/offer/"
+        actionUrl="/account/signup"
         campaignCode="defaultish"
+        headlineText="Headline"
         linkPrompt="Already a subscriber?"
         linkText="Log In."
         linkUrl="/account/login"
         reasonPrompt="Subscribe to continue reading."
+        subheadlineText="Subheadline"
         usePortal={false}
       />,
     );
@@ -68,14 +47,15 @@ describe('The PaywallOffer component ', () => {
 
   it('renders with correct markup', () => {
     const wrapper = render(
-      <PaywallOffer
+      <RegwallOffer
         actionText="Subscribe"
-        actionUrl="/offer/"
-        campaignCode="defaultish"
+        actionUrl="/account/signup"
+        headlineText="Headline"
         linkPrompt="Already a subscriber?"
         linkText="Log In."
         linkUrl="/account/login"
         reasonPrompt="Subscribe to continue reading."
+        subheadlineText="Subheadline"
         usePortal={false}
       />,
     );
@@ -83,24 +63,36 @@ describe('The PaywallOffer component ', () => {
     expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-pre-link').text()).toEqual('Already a subscriber?');
     expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-link').text()).toEqual('Log In.');
     expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-link').prop('href')).toEqual('/account/login');
-    expect(wrapper.find('.xpmedia-subscription-dialog-headline').text()).toEqual('this the offer title');
-    expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').text()).toEqual('this the offer subtitle');
+    expect(wrapper.find('.xpmedia-subscription-dialog-headline').text()).toEqual('Headline');
+    expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').text()).toEqual('Subheadline');
     expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?_cid=defaultish');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=default');
   });
 
-  it('renders campaignCode if its a url', () => {
+  it('renders with default campaignCode', () => {
+    const wrapper = render(
+      <RegwallOffer
+        actionText="Subscribe"
+        actionUrl="/account/signup"
+        usePortal={false}
+      />,
+    );
+    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=default');
+  });
+
+  it('renders campaignCode if its provided', () => {
     isUrl.mockReturnValue(true);
     const wrapper = render(
-      <PaywallOffer
+      <RegwallOffer
         actionText="Subscribe"
-        actionUrl="/offer/"
+        actionUrl="/account/signup"
         campaignCode="./"
         usePortal={false}
       />,
     );
     expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?_cid=./');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=./');
     isUrl.mockReset();
   });
 });

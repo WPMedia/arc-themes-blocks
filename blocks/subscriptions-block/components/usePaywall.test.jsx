@@ -14,6 +14,14 @@ jest.mock('@arc-publishing/sdk-identity', () => ({
   },
 }));
 
+jest.mock('@wpmedia/identity-block', () => ({
+  __esModule: true,
+  useIdentity: jest.fn(() => ({
+    Identity: {},
+    isInitialized: true,
+  })),
+}));
+
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   __esModule: true,
   isServerSide: jest.fn(() => false),
@@ -77,6 +85,28 @@ const getPaywallObject = () => {
 };
 
 describe('Identity usePaywall Hook', () => {
+  beforeEach(() => {
+    useFusionContext.mockReturnValue({
+      arcSite: 'TestSite1',
+      globalContent: {
+        canonical_url: 'http://canonical/',
+        content_restrictions: {
+          content_code: 'restriction_content_code',
+        },
+        taxonomy: {
+          primary_section: {
+            _id: 'primary_section_id',
+          },
+        },
+        type: 'contentType',
+      },
+    });
+  });
+
+  afterEach(() => {
+    useFusionContext.mockReset();
+  });
+
   it('initially renders with paywall flag', () => {
     const paywallObject = getPaywallObject();
     expect(paywallObject.isPaywalled).toBe(true);
@@ -99,30 +129,12 @@ describe('Identity usePaywall Hook', () => {
     const paywallObject = getPaywallObject();
     expect(paywallObject.isPaywalled).toBe(false);
   });
-
-  it('handles content without restrictions', () => {
-    useFusionContext.mockReturnValue({
-      arcSite: 'TestSite',
-      globalContent: {
-        canonical_url: 'http://canonical/',
-        taxonomy: {
-          primary_section: {
-            _id: 'primary_section_id',
-          },
-        },
-        type: 'contentType',
-      },
-    });
-    const paywallObject = getPaywallObject();
-    expect(paywallObject.isPaywalled).toBe(false);
-    useFusionContext.mockReset();
-  });
 });
 
 describe('Identity usePaywall Hook rule handling', () => {
   beforeEach(() => {
     useFusionContext.mockReturnValue({
-      arcSite: 'TestSite',
+      arcSite: 'TestSite3',
       globalContent: {
         canonical_url: 'http://canonical/',
         content_restrictions: {
@@ -136,6 +148,10 @@ describe('Identity usePaywall Hook rule handling', () => {
         type: 'contentType',
       },
     });
+  });
+
+  afterEach(() => {
+    useFusionContext.mockReset();
   });
 
   it('handles simple paywalled rule', () => {

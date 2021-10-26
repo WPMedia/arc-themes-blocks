@@ -240,49 +240,5 @@
 		"no": "Sign up for an account.",
 		"pt": "Sign up for an account.",
 		"sv": "Sign up for an account."
-	},
-	"identity-block.paywall-button-text": {
-		"de": "Subscribe",
-		"en": "Subscribe",
-		"es": "Subscribe",
-		"fr": "Subscribe",
-		"ja": "Subscribe",
-		"ko": "Subscribe",
-		"no": "Subscribe",
-		"pt": "Subscribe",
-		"sv": "Subscribe"
-	},
-	"identity-block.paywall-link-prompt": {
-		"de": "Already a subscriber?",
-		"en": "Already a subscriber?",
-		"es": "Already a subscriber?",
-		"fr": "Already a subscriber?",
-		"ja": "Already a subscriber?",
-		"ko": "Already a subscriber?",
-		"no": "Already a subscriber?",
-		"pt": "Already a subscriber?",
-		"sv": "Already a subscriber?"
-	},
-	"identity-block.paywall-link-text": {
-		"de": "Log In.",
-		"en": "Log In.",
-		"es": "Log In.",
-		"fr": "Log In.",
-		"ja": "Log In.",
-		"ko": "Log In.",
-		"no": "Log In.",
-		"pt": "Log In.",
-		"sv": "Log In."
-	},
-	"identity-block.paywall-reason-prompt": {
-		"de": "Subscribe to continue reading.",
-		"en": "Subscribe to continue reading.",
-		"es": "Subscribe to continue reading.",
-		"fr": "Subscribe to continue reading.",
-		"ja": "Subscribe to continue reading.",
-		"ko": "Subscribe to continue reading.",
-		"no": "Subscribe to continue reading.",
-		"pt": "Subscribe to continue reading.",
-		"sv": "Subscribe to continue reading."
 	}
 }

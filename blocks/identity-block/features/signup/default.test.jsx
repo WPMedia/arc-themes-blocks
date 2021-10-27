@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Signup from './default';
 import useIdentity from '../../components/Identity';
 
@@ -20,9 +20,13 @@ describe('With initialized identity', () => {
   it('renders something', () => {
     useIdentity.mockImplementation(() => ({ isInitialized: true }));
 
-    const wrapper = shallow(<Signup
+    const wrapper = mount(<Signup
       customFields={{ redirectURL: '/sign-up', redirectToPreviousPage: true }}
     />);
+
+    expect(wrapper.find('input.xpmedia-form-field-input').at(0).prop('autoComplete')).toBe('off');
+    expect(wrapper.find('input.xpmedia-form-field-input').at(1).prop('autoComplete')).toBe('new-password');
+    expect(wrapper.find('input.xpmedia-form-field-input').at(2).prop('autoComplete')).toBe('new-password');
 
     expect(wrapper.html()).toBeTruthy();
   });

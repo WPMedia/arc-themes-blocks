@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/subscriptions-block",
-  "version": "5.15.0",
+  "version": "5.16.0",
   "description": "Fusion themes subscriptions block.",
   "author": "ARC XP",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-sales": "^1.55.0"
+    "@arc-publishing/sdk-sales": "^1.55.0",
+    "is-url": "^1.2.4"
   }
 }

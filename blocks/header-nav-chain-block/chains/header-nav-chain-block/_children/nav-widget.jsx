@@ -13,12 +13,13 @@ import QuerylySearch from './queryly-search';
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from '../nav-helper';
 
 const NavWidget = ({
-  type,
-  position = 0,
+  breakpoint,
   children = [],
-  placement = PLACEMENT_AREAS.NAV_BAR,
   customSearchAction,
   menuButtonClickAction,
+  placement = PLACEMENT_AREAS.NAV_BAR,
+  position = 0,
+  type,
 }) => {
   const { arcSite } = useFusionContext();
   const { navColor = 'dark', navBarBackground, locale } = getProperties(arcSite);
@@ -35,14 +36,17 @@ const NavWidget = ({
         alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
       />
     )) || (type === 'queryly' && (
-      <QuerylySearch />
+      <QuerylySearch
+        // passing in placement for nav-spcific styling
+        placement={placement}
+      />
     )) || (type === 'menu' && (
       <Button
         additionalClassNames="nav-sections-btn"
         aria-label={phrases.t('header-nav-chain-block.sections-button')}
         buttonSize={BUTTON_SIZES.SMALL}
         buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-        buttonType={BUTTON_TYPES.LABEL_AND_RIGHT_ICON}
+        buttonType={breakpoint === 'desktop' ? BUTTON_TYPES.LABEL_AND_RIGHT_ICON : BUTTON_TYPES.ICON_ONLY}
         iconType="hamburger-menu"
         onClick={menuButtonClickAction}
         text={phrases.t('header-nav-chain-block.sections-button')}

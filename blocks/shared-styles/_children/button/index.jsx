@@ -282,6 +282,7 @@ Button.propTypes = {
   secondaryIconType: PropTypes.oneOf(['user', 'chevron-up', 'chevron-down', 'hamburger-menu', 'search']),
   text: PropTypes.string.isRequired,
   ariaLabel: PropTypes.string,
+  fullWidth: PropTypes.bool,
 
   // for if button
   type: PropTypes.string,

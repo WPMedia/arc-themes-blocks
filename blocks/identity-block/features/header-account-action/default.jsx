@@ -64,7 +64,7 @@ const HeaderAccountAction = ({ customFields }) => {
     if (e.key === 'Enter' || e.type === 'click') {
       e.preventDefault();
       Identity.logout().then(() => {
-        window.location = e.target.href;
+        window.location = logoutURL;
       });
     }
   };
@@ -117,7 +117,6 @@ const HeaderAccountAction = ({ customFields }) => {
             <DropDownLinkListItem
               href={logoutURL}
               onClick={handleLogout}
-              onKeyUp={handleLogout}
               text={phrases.t('identity-block.log-out')}
             />
           </ul>
@@ -204,8 +203,9 @@ HeaderAccountAction.propTypes = {
       label: 'Sign Up URL',
     }),
     logoutURL: PropTypes.string.tag({
-      defaultValue: '/account/logout/',
+      defaultValue: '/',
       label: 'Log Out URL',
+      description: 'The URL to which a user would be redirected to after clicking Log Out from the navigation.',
     }),
     manageAccountURL: PropTypes.string.tag({
       defaultValue: '/account/',

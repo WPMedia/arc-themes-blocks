@@ -105,6 +105,37 @@ describe('<NavWidget/>', () => {
     expect(menuWidget.prop('onClick')).toEqual(menuButtonClick);
   });
 
+  it('renders nav widget - section menu with svg and container text, with desktop breakpoint', () => {
+    const menuButtonClick = jest.fn(() => {});
+    const wrapper = mount(
+      <NavWidget
+        type="menu"
+        menuButtonClickAction={menuButtonClick}
+        breakpoint="desktop"
+      />,
+    );
+
+    const menuWidget = wrapper.find('button.nav-sections-btn');
+    expect(menuWidget.text()).toBe('test-translation');
+    expect(menuWidget.find('.xpmedia-button--right-icon-container').length).toBe(1);
+    expect(menuWidget.find('svg')).toHaveLength(1);
+  });
+
+  it('renders nav widget - section menu with svg icon and without text container, with mobile breakpoint', () => {
+    const menuButtonClick = jest.fn(() => {});
+    const wrapper = mount(
+      <NavWidget
+        type="menu"
+        menuButtonClickAction={menuButtonClick}
+        breakpoint="mobile"
+      />,
+    );
+    const menuWidget = wrapper.find('button.nav-sections-btn');
+    expect(menuWidget.find('.xpmedia-button--right-icon-container').length).toBe(0);
+    expect(menuWidget.find('svg')).toHaveLength(1);
+    expect(menuWidget.text()).toBe('');
+  });
+
   it('renders nav widget - custom with child component', () => {
     const ChildComponent = () => <div>something</div>;
     const wrapper = mount(

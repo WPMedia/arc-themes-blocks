@@ -20,11 +20,21 @@ const OfferCard = ({
 }) => (
   <PrimaryFont as="div" className="xpmedia-subscription-offer-card">
     {headline
-      ? <h2 className="xpmedia-subscription-offer-card--headline">{headline}</h2>
+      ? (
+        <h2
+          className="xpmedia-subscription-offer-card--headline"
+          dangerouslySetInnerHTML={{ __html: headline }}
+        />
+      )
       : null}
 
     {subHeadline
-      ? <h3 className="xpmedia-subscription-offer-card--subheadline">{subHeadline}</h3>
+      ? (
+        <h3
+          className="xpmedia-subscription-offer-card--subheadline"
+          dangerouslySetInnerHTML={{ __html: subHeadline }}
+        />
+      )
       : null}
 
     {actionText && actionEvent
@@ -34,6 +44,7 @@ const OfferCard = ({
           buttonStyle={BUTTON_STYLES.PRIMARY}
           fullWidth
           text={actionText}
+          isHTMLText
           onClick={actionEvent}
         />
       )
@@ -47,7 +58,7 @@ const OfferCard = ({
               <span className="xpmedia-subscription-offer-card--feature-item-icon">
                 <CheckIcon width="16" height="16" />
               </span>
-              {feat.featureText}
+              <span dangerouslySetInnerHTML={{ __html: feat.featureText }} />
             </li>
           ))}
         </ul>

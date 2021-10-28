@@ -18,7 +18,9 @@
     margin-top: 2rem;
     max-width: 90%;
   }
-  h1, h1 * {
+
+  h1,
+  h1 * {
     font-weight: 700;
     font-size: 3.25rem;
     line-height: 3.5rem;
@@ -28,7 +30,9 @@
       line-height: 2.5rem;
     }
   }
-  h2, h2 * {
+
+  h2,
+  h2 * {
     font-size: 1.875rem;
     line-height: 2rem;
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {

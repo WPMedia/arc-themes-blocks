@@ -89,7 +89,6 @@ const StyledDynamicButton = styled.button.attrs((props) => ({
 }))`
   /* istanbul ignore next */
   font-family: ${({ font }) => font};
-  cursor: pointer;
 
   ${({ buttonStyle, primaryColor }) => {
     // istanbul ignore next

@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import Identity from '@arc-publishing/sdk-identity';
 import Sales from '@arc-publishing/sdk-sales';
-import isUrl from 'is-url';
 import useOffer from '../../components/useOffer';
 import GridList from '../../components/GridList';
 import OfferCard from '../../components/OfferCard';
@@ -24,32 +23,22 @@ const Offer = ({
   const { api } = getProperties(arcSite);
 
   Sales.options({
-    apiOrigin: api.retail.origin,
+    apiOrigin: api?.retail?.origin || '',
     Identity,
   });
 
-  const searchParams = new URLSearchParams(window.location.href);
-  const selectedCampaignCode = searchParams.has('campaign') ? searchParams.get('campaign') : campaignCode;
+  let selectedCampaignCode = campaignCode || 'default';
 
-  const { offer, fetchOffer } = useOffer({
+  if (!isServerSide()) {
+    const searchParams = new URLSearchParams(window.location.search.substring(1));
+    selectedCampaignCode = searchParams.has('campaign') ? searchParams.get('campaign') : campaignCode;
+  }
+
+  const { offer } = useOffer({
     campaignCode: selectedCampaignCode,
   });
-  const payWallOffer = useRef(offer);
-  const [selectedOffer, setSelectedOffer] = useState(payWallOffer.current);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const fetchNewOffer = async () => {
-      payWallOffer.current = await fetchOffer(selectedCampaignCode);
-      if (payWallOffer.current) {
-        setSelectedOffer(payWallOffer.current);
-      }
-    };
-    if (selectedCampaignCode && !isUrl(selectedCampaignCode)
-      && (!payWallOffer.current || payWallOffer.current.pw !== selectedCampaignCode)) {
-      fetchNewOffer();
-    }
-  }, [selectedCampaignCode, fetchOffer]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getIsLoggedIn = async () => {
     const response = await Identity.isLoggedIn();
@@ -60,7 +49,7 @@ const Offer = ({
     getIsLoggedIn();
   }, []);
 
-  if (isServerSide() || !selectedOffer) {
+  if (isServerSide() || !offer) {
     return null;
   }
 
@@ -68,8 +57,8 @@ const Offer = ({
     const offers = [];
     let x;
     let y;
-    if (selectedOffer.products) {
-      const { products } = selectedOffer;
+    if (offer.products) {
+      const { products } = offer;
       for (x = 0; x < products.length; x += 1) {
         const { pricingStrategies: strategies } = products[x];
         for (y = 0; y < strategies.length; y += 1) {
@@ -96,6 +85,7 @@ const Offer = ({
                   .then(() => {
                     if (isLoggedIn) {
                       window.location.href = checkoutURL;
+                      return;
                     }
                     window.location.href = `${loginURL}?redirect=${checkoutURL}`;
                   });
@@ -112,8 +102,8 @@ const Offer = ({
   return (
     <div className="xpmedia-subscription-offer-wrapper layout-section wrap-bottom">
       <div className="xpmedia-subscription-offer-headings">
-        <h1 dangerouslySetInnerHTML={{ __html: selectedOffer.pageTitle }} />
-        <h2 dangerouslySetInnerHTML={{ __html: selectedOffer.pageSubTitle }} />
+        <h1 dangerouslySetInnerHTML={{ __html: offer.pageTitle }} />
+        <h2 dangerouslySetInnerHTML={{ __html: offer.pageSubTitle }} />
       </div>
 
       <div className="margin-md-top">

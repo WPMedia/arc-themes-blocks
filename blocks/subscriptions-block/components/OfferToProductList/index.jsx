@@ -73,6 +73,7 @@ const OfferToProductList = ({
 
 OfferToProductList.propTypes = {
   offer: PropTypes.any,
+  isLoggedIn: PropTypes.bool,
   loginURL: PropTypes.string,
   checkoutURL: PropTypes.string,
 };

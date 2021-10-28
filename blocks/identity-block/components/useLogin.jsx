@@ -1,5 +1,4 @@
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useIdentity } from '..';
 
 const useLogin = ({
@@ -9,19 +8,19 @@ const useLogin = ({
   loggedInPageLocation,
 }) => {
   const { Identity } = useIdentity();
-  let redirectToURL = redirectURL;
-  let redirectQueryParam = null;
+  const [redirectToURL, setRedirectToURL] = useState(redirectURL);
+  const [redirectQueryParam, setRedirectQueryParam] = useState(null);
 
-  if (!isServerSide()) {
+  useEffect(() => {
     if (window?.location?.search) {
       const searchParams = new URLSearchParams(window.location.search.substring(1));
-      redirectQueryParam = searchParams.get('redirect');
+      setRedirectQueryParam(searchParams.get('redirect'));
     }
 
     if (redirectToPreviousPage && document?.referrer) {
-      redirectToURL = document.referrer;
+      setRedirectToURL(document.referrer);
     }
-  }
+  }, [redirectQueryParam, redirectToPreviousPage]);
 
   useEffect(() => {
     const getConfig = async () => {

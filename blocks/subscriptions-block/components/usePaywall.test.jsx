@@ -17,7 +17,9 @@ jest.mock('@arc-publishing/sdk-identity', () => ({
 jest.mock('@wpmedia/identity-block', () => ({
   __esModule: true,
   useIdentity: jest.fn(() => ({
-    Identity: {},
+    Identity: {
+      isLoggedIn: jest.fn(() => Promise.resolve(true)),
+    },
     isInitialized: true,
   })),
 }));
@@ -125,9 +127,10 @@ describe('Identity usePaywall Hook', () => {
   });
 
   it('returns null if there are no results', () => {
-    window.ArcP.run.mockImplementationOnce(() => null);
+    window.ArcP.run.mockImplementation(() => null);
     const paywallObject = getPaywallObject();
     expect(paywallObject.isPaywalled).toBe(false);
+    window.ArcP.run.mockReset();
   });
 });
 

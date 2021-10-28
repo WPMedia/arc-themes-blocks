@@ -96,7 +96,7 @@ Paywall.propTypes = {
       'full',
       'modal',
     ]).tag({
-      defaultValue: 'hide',
+      defaultValue: 'bottomHalf',
       description: 'Determines how the dialog will present itself to the user when required.',
       hidden: true,
       label: 'Paywall Display Mode',
@@ -112,7 +112,7 @@ Paywall.propTypes = {
     }),
     linkUrl: PropTypes.string.tag({
       label: 'Log In link URL',
-      defaultValue: '/account/login',
+      defaultValue: '/account/login/',
     }),
 
     payActionText: PropTypes.string.tag({
@@ -154,7 +154,7 @@ Paywall.propTypes = {
     registerReasonPrompt: PropTypes.string.tag({
       group: 'Registration Wall',
       label: 'Reason prompt text',
-      defaultValue: 'Subscribe to continue reading.',
+      defaultValue: 'Register to continue reading.',
     }),
   }),
 };

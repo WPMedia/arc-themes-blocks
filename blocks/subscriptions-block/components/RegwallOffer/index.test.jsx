@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'enzyme';
-import isUrl from 'is-url';
 
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
@@ -31,7 +30,6 @@ describe('The RegwallOffer component ', () => {
       <RegwallOffer
         actionText="Subscribe"
         actionUrl="/account/signup"
-        campaignCode="defaultish"
         headlineText="Headline"
         linkPrompt="Already a subscriber?"
         linkText="Log In."
@@ -66,33 +64,6 @@ describe('The RegwallOffer component ', () => {
     expect(wrapper.find('.xpmedia-subscription-dialog-headline').text()).toEqual('Headline');
     expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').text()).toEqual('Subheadline');
     expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=default');
-  });
-
-  it('renders with default campaignCode', () => {
-    const wrapper = render(
-      <RegwallOffer
-        actionText="Subscribe"
-        actionUrl="/account/signup"
-        usePortal={false}
-      />,
-    );
-    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=default');
-  });
-
-  it('renders campaignCode if its provided', () => {
-    isUrl.mockReturnValue(true);
-    const wrapper = render(
-      <RegwallOffer
-        actionText="Subscribe"
-        actionUrl="/account/signup"
-        campaignCode="./"
-        usePortal={false}
-      />,
-    );
-    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup?_cid=./');
-    isUrl.mockReset();
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/account/signup');
   });
 });

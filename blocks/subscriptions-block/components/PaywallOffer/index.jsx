@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import isUrl from 'is-url';
-import usePaywall from '../usePaywall';
 import useOffer from '../useOffer';
 import SubscriptionOverlay from '../SubscriptionOverlay';
 import SubscriptionDialog from '../SubscriptionDialog';
@@ -19,15 +18,11 @@ const PaywallOffer = ({
   reasonPrompt,
   usePortal = true,
 }) => {
-  const {
-    campaignCode: initialCampaignCode,
-  } = usePaywall();
-
   // the paywall code (otherwise known as a campaign code)
   const [payWallCode, setPayWallCode] = useState();
 
   const { offer, fetchOffer } = useOffer({
-    campaignCode: campaignCode || (!isUrl(initialCampaignCode) ? initialCampaignCode : null),
+    campaignCode: campaignCode || null,
   });
 
   /**
@@ -50,10 +45,9 @@ const PaywallOffer = ({
    * to "default"
    */
   useEffect(() => {
-    const campaign = campaignCode
-      || (!isPaywallCampaignURL(initialCampaignCode) ? initialCampaignCode : 'default');
+    const campaign = campaignCode || 'default';
     setPayWallCode(campaign);
-  }, [campaignCode, initialCampaignCode]);
+  }, [campaignCode]);
 
   // This will grab the offer corresponding to the paywall code
   useEffect(() => {
@@ -63,10 +57,14 @@ const PaywallOffer = ({
         setSelectedOffer(payWallOffer.current);
       }
     };
-    if (payWallCode && !isUrl(payWallCode)
+    if (payWallCode
+      && !isUrl(payWallCode)
       && (!payWallOffer.current || payWallOffer.current.pw !== payWallCode)) {
       fetchNewOffer();
     }
+    return () => {
+      payWallOffer.current = null;
+    };
   }, [payWallCode, fetchOffer]);
 
   /**

@@ -13,12 +13,19 @@ const usePaywall = () => {
   const [campaignCode, setCampaignCode] = useState();
   const [results, setResults] = useState();
   const [isPaywalled, setIsPaywalled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [triggeredRule, setTriggeredRule] = useState();
   const { Identity, isInitialized: isIdentityInitialized } = useIdentity();
 
   // eslint-disable-next-line no-underscore-dangle
   const rules = (!isServerSide() && window?.ArcP?._rules) || [];
   const apiOrigin = api?.retail?.origin;
+
+  useEffect(() => {
+    if (isIdentityInitialized) {
+      Identity.isLoggedIn().then(setIsLoggedIn);
+    }
+  }, [Identity, isIdentityInitialized]);
 
   useEffect(() => {
     const runPaywall = async () => {
@@ -53,7 +60,6 @@ const usePaywall = () => {
     Identity,
     isIdentityInitialized,
     isPaywalled,
-    rules,
   ]);
 
   useEffect(() => {
@@ -62,21 +68,25 @@ const usePaywall = () => {
 
       const triggeringRule = rules.find(({ id }) => triggerId === id);
 
-      // we currently only support rule triggers of ['>', count]
-      const triggerableRules = ({ rt: [op, count] }) => op === '>' && triggerCount > count;
-      const byDescendingTriggerCount = ({ rt: [, a] }, { rt: [, b] }) => b - a;
-      const withRestrictedStatus = ({ e: [hasOpportunity, skuId] }) => hasOpportunity && !!skuId;
+      if (triggeringRule?.e?.length === 1 && isLoggedIn) {
+        // we currently only support rule triggers of ['>', count]
+        const triggerableRules = ({ rt: [op, count] }) => op === '>' && triggerCount > count;
+        const byDescendingTriggerCount = ({ rt: [, a] }, { rt: [, b] }) => b - a;
+        const withRestrictedStatus = ({ e: [hasOpportunity, skuId] }) => hasOpportunity && !!skuId;
 
-      const paywallableRule = rules
-        .filter(triggerableRules)
-        .sort(byDescendingTriggerCount)
-        .find(withRestrictedStatus);
+        const paywallableRule = rules
+          .filter(triggerableRules)
+          .sort(byDescendingTriggerCount)
+          .find(withRestrictedStatus);
 
-      setTriggeredRule(paywallableRule && paywallableRule !== triggeringRule
-        ? paywallableRule
-        : triggeringRule);
+        setTriggeredRule(paywallableRule && paywallableRule !== triggeringRule
+          ? paywallableRule
+          : triggeringRule);
+      } else {
+        setTriggeredRule(triggeringRule);
+      }
     }
-  }, [results, rules]);
+  }, [results, rules, isLoggedIn]);
 
   if (isServerSide()) {
     return {

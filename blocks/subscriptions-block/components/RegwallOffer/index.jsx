@@ -7,7 +7,6 @@ import SubscriptionDialog from '../SubscriptionDialog';
 const RegwallOffer = ({
   actionText,
   actionUrl,
-  campaignCode = 'default',
   displayMode,
   headlineText,
   linkPrompt,
@@ -25,7 +24,7 @@ const RegwallOffer = ({
     <SubscriptionOverlay displayMode={displayMode} usePortal={usePortal}>
       <SubscriptionDialog
         actionText={actionText}
-        actionUrl={`${actionUrl}?_cid=${campaignCode}`}
+        actionUrl={actionUrl}
         headline={headlineText}
         linkPrompt={linkPrompt}
         linkText={linkText}

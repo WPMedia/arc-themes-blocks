@@ -123,7 +123,7 @@ Offer.propTypes = {
       defaultValue: 'default',
     }),
     loginURL: PropTypes.string.tag({
-      defaultValue: '/login/',
+      defaultValue: '/account/login/',
     }),
     checkoutURL: PropTypes.string.tag({
       defaultValue: '/checkout/',

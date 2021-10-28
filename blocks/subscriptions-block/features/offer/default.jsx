@@ -55,26 +55,26 @@ const Offer = ({
 
   const buildOffers = () => {
     const offers = [];
-    let x;
-    let y;
+    let productIdx;
+    let strategiesIdx;
     if (offer.products) {
       const { products } = offer;
-      for (x = 0; x < products.length; x += 1) {
-        const { pricingStrategies: strategies } = products[x];
-        for (y = 0; y < strategies.length; y += 1) {
-          const features = (typeof products[x].attributes !== 'undefined' && products[x].attributes.length !== 0)
-            ? products[x].attributes.map((feature) => ({
+      for (productIdx = 0; productIdx < products.length; productIdx += 1) {
+        const { pricingStrategies: strategies } = products[productIdx];
+        for (strategiesIdx = 0; strategiesIdx < strategies.length; strategiesIdx += 1) {
+          const features = (typeof products[productIdx].attributes !== 'undefined' && products[productIdx].attributes.length !== 0)
+            ? products[productIdx].attributes.map((feature) => ({
               featureText: feature.value,
             }))
             : [];
-          const { sku } = products[x];
-          const { priceCode } = strategies[y];
+          const { sku } = products[productIdx];
+          const { priceCode } = strategies[strategiesIdx];
           offers.push(
             <OfferCard
-              key={strategies[y].pricingStrategyId}
-              subHeadline={strategies[y].description}
-              headline={strategies[y].name}
-              actionText={strategies[y].summary}
+              key={strategies[strategiesIdx].pricingStrategyId}
+              subHeadline={strategies[strategiesIdx].description}
+              headline={strategies[strategiesIdx].name}
+              actionText={strategies[strategiesIdx].summary}
               actionEvent={() => {
                 Sales.clearCart()
                   .then(() => Sales.addItemToCart([{

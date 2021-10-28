@@ -1,10 +1,5 @@
 /* eslint-disable no-console */
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line no-unused-vars
-import arcads from 'arcads';
 import ArcAdsInstance, { logEvent } from './index';
-
-jest.mock('arcads');
 
 const siteProperties = {
   dfpId: 1234,

@@ -18,10 +18,11 @@ const OfferCard = ({
   actionEvent,
   features = [],
 }) => (
-  <PrimaryFont as="div" className="xpmedia-subscription-offer-card">
+  <div className="xpmedia-subscription-offer-card">
     {headline
       ? (
-        <h2
+        <PrimaryFont
+          as="h2"
           className="xpmedia-subscription-offer-card--headline"
           dangerouslySetInnerHTML={{ __html: headline }}
         />
@@ -30,7 +31,8 @@ const OfferCard = ({
 
     {subHeadline
       ? (
-        <h3
+        <PrimaryFont
+          as="h3"
           className="xpmedia-subscription-offer-card--subheadline"
           dangerouslySetInnerHTML={{ __html: subHeadline }}
         />
@@ -63,7 +65,7 @@ const OfferCard = ({
           ))}
         </ul>
       ) : null}
-  </PrimaryFont>
+  </div>
 );
 
 OfferCard.propTypes = {

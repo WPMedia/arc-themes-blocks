@@ -35,12 +35,12 @@ const OfferToProductList = ({
           const { sku } = products[productIdx];
           const { priceCode } = strategies[strategiesIdx];
           offers.push(
-            <OfferCard
-              key={strategies[strategiesIdx].pricingStrategyId}
-              subHeadline={strategies[strategiesIdx].description}
-              headline={strategies[strategiesIdx].name}
-              actionText={strategies[strategiesIdx].summary}
-              actionEvent={() => {
+            {
+              key: strategies[strategiesIdx].pricingStrategyId,
+              subHeadline: strategies[strategiesIdx].description,
+              headline: strategies[strategiesIdx].name,
+              actionText: strategies[strategiesIdx].summary,
+              actionEvent: () => {
                 Sales.clearCart()
                   .then(() => Sales.addItemToCart([{
                     sku,
@@ -54,9 +54,9 @@ const OfferToProductList = ({
                     }
                     window.location.href = `${loginURL}?redirect=${checkoutURL}`;
                   });
-              }}
-              features={features}
-            />,
+              },
+              features,
+            },
           );
         }
       }
@@ -64,9 +64,20 @@ const OfferToProductList = ({
     return offers;
   };
 
+  const builtOffers = buildOffers();
+
   return (
     <GridList>
-      {buildOffers()}
+      {builtOffers.map((builtOffer) => (
+        <OfferCard
+          key={builtOffer.key}
+          subHeadline={builtOffer.subHeadline}
+          headline={builtOffer.headline}
+          actionText={builtOffer.actionText}
+          actionEvent={builtOffer.actionEvent}
+          features={builtOffer.features}
+        />
+      ))}
     </GridList>
   );
 };

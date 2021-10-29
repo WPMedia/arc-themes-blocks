@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 import Identity from '@arc-publishing/sdk-identity';
+import { PrimaryFont, SecondaryFont } from '@wpmedia/shared-styles';
 import useOffer from '../../components/useOffer';
 import OfferToProductList from '../../components/OfferToProductList';
 import './styles.scss';
@@ -43,11 +44,17 @@ const Offer = ({
 
   return (
     <div className="xpmedia-subscription-offer-wrapper layout-section wrap-bottom">
-      {!isFetching && offer && (
+      {!isFetching && offer ? (
         <>
           <div className="xpmedia-subscription-offer-headings">
-            <h1 dangerouslySetInnerHTML={{ __html: offer.pageTitle }} />
-            <h2 dangerouslySetInnerHTML={{ __html: offer.pageSubTitle }} />
+            <PrimaryFont
+              dangerouslySetInnerHTML={{ __html: offer.pageTitle }}
+              as="h1"
+            />
+            <SecondaryFont
+              dangerouslySetInnerHTML={{ __html: offer.pageTitle }}
+              as="h2"
+            />
           </div>
 
           <div className="margin-md-top">
@@ -59,7 +66,7 @@ const Offer = ({
             />
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 };

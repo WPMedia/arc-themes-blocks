@@ -18,7 +18,7 @@ const OfferCard = ({
   actionEvent,
   features = [],
 }) => (
-  <div className="xpmedia-subscription-offer-card">
+  <PrimaryFont as="div" className="xpmedia-subscription-offer-card">
     {headline
       ? (
         <PrimaryFont
@@ -65,7 +65,7 @@ const OfferCard = ({
           ))}
         </ul>
       ) : null}
-  </div>
+  </PrimaryFont>
 );
 
 OfferCard.propTypes = {

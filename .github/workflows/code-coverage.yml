@@ -12,5 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

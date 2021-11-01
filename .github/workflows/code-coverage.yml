@@ -37,5 +37,7 @@ jobs:
 
       - name: Report Coverage
         uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
+        env:
+          NPM_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

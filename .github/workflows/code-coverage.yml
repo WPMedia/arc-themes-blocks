@@ -16,11 +16,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      # - name: Setup Node with 12
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: "12"
-      #     registry-url: "https://npm.pkg.github.com"
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          registry-url: "https://npm.pkg.github.com"
 
       # - name: Cache Node Modules
       #   id: cache
@@ -38,6 +37,6 @@ jobs:
       - name: Report Coverage
         uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
         env:
-          NPM_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

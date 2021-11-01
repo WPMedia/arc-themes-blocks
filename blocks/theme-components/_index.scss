@@ -1,3 +1,7 @@
+// Output the theme tokens to CSS Variables
+@import './scss/theme';
+
+// Output each components CSS
 @import './components/date';
 @import './components/overline';
 @import './components/link/';

@@ -10,7 +10,7 @@ const isPaywallCampaignURL = (payWallCode) => payWallCode && isUrl(payWallCode);
 const PaywallOffer = ({
   actionText,
   actionUrl,
-  campaignCode,
+  campaignCode = null,
   displayMode,
   linkPrompt,
   linkText,
@@ -21,9 +21,7 @@ const PaywallOffer = ({
   // the paywall code (otherwise known as a campaign code)
   const [payWallCode, setPayWallCode] = useState();
 
-  const { offer, fetchOffer } = useOffer({
-    campaignCode: campaignCode || null,
-  });
+  const { offer, fetchOffer } = useOffer({ campaignCode });
 
   /**
    * payWallOffer is the most updated offer that is returned from
@@ -83,7 +81,7 @@ const PaywallOffer = ({
    * we just set the campaign code to "default"
    */
   const campaign = campaignCode || (!isPaywallCampaignURL(payWallCode) ? payWallCode : 'default');
-  const actionUrlFinal = campaign === 'default'
+  const actionUrlFinal = !campaign || campaign === 'default'
     ? actionUrl
     : `${actionUrl}?campaign=${campaign}`;
 

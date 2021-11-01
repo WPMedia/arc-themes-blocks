@@ -103,4 +103,18 @@ describe('The PaywallOffer component ', () => {
     expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?campaign=./');
     isUrl.mockReset();
   });
+
+  it('renders without a query param if campaignCode is not passed', () => {
+    isUrl.mockReturnValue(true);
+    const wrapper = render(
+      <PaywallOffer
+        actionText="Subscribe"
+        actionUrl="/offer/"
+        usePortal={false}
+      />,
+    );
+    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/');
+    isUrl.mockReset();
+  });
 });

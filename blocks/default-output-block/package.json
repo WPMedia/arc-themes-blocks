@@ -1,7 +1,7 @@
 {
   "name": "@wpmedia/default-output-block",
   "version": "5.15.0",
-  "description": "Fusion News Theme default output type",
+  "description": "Fusion Theme default output type",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "contributors": [
     "Jack Howard <jack.howard@washpost.com>",

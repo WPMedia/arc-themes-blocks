@@ -1,7 +1,7 @@
 {
   "name": "@wpmedia/a11y-testing-block",
   "version": "5.14.1",
-  "description": "Fusion News Theme A11y Testing block",
+  "description": "Fusion Theme A11y Testing block",
   "author": "Brent Miller <brent.miller@washpost.com>",
   "homepage": "https://github.com/WPMedia/fusion-theme-blocks",
   "license": "CC-BY-NC-ND",

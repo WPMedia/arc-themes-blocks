@@ -1,5 +1,5 @@
 # `@wpmedia/author-bio-block`
-_Author Short Biography block for Fusion News Theme_
+_Author Short Biography block for Fusion Theme_
 
 ## Acceptance Criteria
 - Add AC relevant to the block

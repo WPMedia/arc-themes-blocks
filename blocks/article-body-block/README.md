@@ -1,5 +1,5 @@
 # `@wpmedia/article-body-block`
-_Fusion News Theme article-body block_
+_Fusion Theme article-body block_
 
 // TODO: add badge for passing/failing tests
 

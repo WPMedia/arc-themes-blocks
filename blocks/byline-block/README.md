@@ -1,6 +1,6 @@
 # `@wpmedia/byline-block`
 
-Byline block for Fusion News Theme
+Byline block for Fusion Theme
 
 ## Acceptance Criteria
 - If there's one author, it will return `By <author>`

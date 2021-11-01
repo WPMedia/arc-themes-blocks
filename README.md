@@ -1,8 +1,8 @@
-# Fusion News Theme blocks
+# Fusion Theme blocks
 
 >**[Please See Wiki If You Can't Find What You're Looking For](https://github.com/WPMedia/fusion-theme-blocks/wiki), Like [Rolling Back If You Have Publish Issues](https://github.com/WPMedia/fusion-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)**
 
-This is the lerna-managed monorepo for the blocks that make up the Fusion News Theme.
+This is the lerna-managed monorepo for the blocks that make up the Fusion Theme.
 
 This monorepo is a collection of packages for blocks. Blocks are versioned together.
 

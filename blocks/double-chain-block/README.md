@@ -1,5 +1,5 @@
 # `@wpmedia/double-chain-block`
-Fusion News Theme double-chain block. Takes in a number of how many items to be put in column one. The rest go in column two. Negative numbers here will yield nothing.
+Fusion Theme double-chain block. Takes in a number of how many items to be put in column one. The rest go in column two. Negative numbers here will yield nothing.
 
 ## Acceptance Criteria
 - Places features within the Double Chain within two columns. 

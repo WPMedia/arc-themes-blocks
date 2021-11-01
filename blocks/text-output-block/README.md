@@ -1,5 +1,5 @@
 # `@wpmedia/text-output-block`
-_Fusion News Theme text output type. Please provide a 1-2 sentence description of what the block is and what it does._
+_Fusion Theme text output type. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria
 - Add AC relevant to the block

@@ -1,5 +1,5 @@
 # `@wpmedia/results-list-block`
-_Results List block for Fusion News Theme. Displays a results list where each result card will have a description, headline, byline block and publish date. ._
+_Results List block for Fusion Theme. Displays a results list where each result card will have a description, headline, byline block and publish date. ._
 
 ## Acceptance Criteria
 - If there's one author, it will return `By <author>`

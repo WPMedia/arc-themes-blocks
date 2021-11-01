@@ -1,5 +1,5 @@
 # `@wpmedia/header-nav-block`
-_Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site service._
+_Footer block for the Fusion Theme. This will pull the data from the footer hierarchy from the organization's site service._
 
 ## Acceptance Criteria
 - Add AC relevant to the block

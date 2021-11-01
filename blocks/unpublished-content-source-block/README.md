@@ -1,5 +1,5 @@
 # `@wpmedia/unpublished-content-source-block`
-_Fusion News Theme unpublished API content source block. Please provide a 1-2 sentence description of what the block is and what it does._
+_Fusion Theme unpublished API content source block. Please provide a 1-2 sentence description of what the block is and what it does._
 
 ## Acceptance Criteria
 - Add AC relevant to the block

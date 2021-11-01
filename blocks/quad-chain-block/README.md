@@ -1,5 +1,5 @@
 # `@wpmedia/triple-chain-block`
-_Fusion News Theme quad-chain block. Utilizes bootstrap's three column approach on anything but small size._
+_Fusion Theme quad-chain block. Utilizes bootstrap's three column approach on anything but small size._
 
 ## Acceptance Criteria
 - Takes in a number of how many items to be put in column one, two, and three. The rest go in column four. Negative numbers here will yield nothing.

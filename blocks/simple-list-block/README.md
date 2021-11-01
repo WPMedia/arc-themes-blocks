@@ -1,5 +1,5 @@
 # `@wpmedia/simple-list-block`
-_Fusion News Theme Simple List block is a dynamically-sized list with items of a title and image. The list itself also has a title._
+_Fusion Theme Simple List block is a dynamically-sized list with items of a title and image. The list itself also has a title._
 
 ## Acceptance Criteria
 - As a Themes customer, I can place a Simple List Block on my PageBuilder pages and templates, so that I can showcase most read or editor's picks content to my readers.

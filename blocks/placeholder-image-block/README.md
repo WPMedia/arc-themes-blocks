@@ -1,5 +1,5 @@
 # `@wpmedia/placeholder-image-block`
-_Fusion News Theme placeholder image. The intended use is to take the feature pack fallback image, as an external url or relative path._
+_Fusion Theme placeholder image. The intended use is to take the feature pack fallback image, as an external url or relative path._
 
 ## Acceptance Criteria
 - Add AC relevant to the block

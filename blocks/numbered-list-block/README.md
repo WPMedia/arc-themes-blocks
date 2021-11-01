@@ -1,5 +1,5 @@
 # `@wpmedia/numbered-list-block`
-_Numbered List block for Fusion News Theme. Displays a numbered list where each list item will have a number, headline and an Image._
+_Numbered List block for Fusion Theme. Displays a numbered list where each list item will have a number, headline and an Image._
 
 ## Acceptance Criteria
 - Add AC relevant to the block

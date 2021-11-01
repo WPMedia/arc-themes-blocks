@@ -1,5 +1,5 @@
 # `@wpmedia/triple-chain-block`
-_Fusion News Theme triple-chain block. Utilizes bootstrap's three column approach on anything but small size. Takes in a number of how many items to be put in column one and two. The rest go in column three. Negative numbers here will yield nothing._
+_Fusion Theme triple-chain block. Utilizes bootstrap's three column approach on anything but small size. Takes in a number of how many items to be put in column one and two. The rest go in column three. Negative numbers here will yield nothing._
 
 ## Acceptance Criteria
 - Places features within the Triple Chain within three equal columns. 

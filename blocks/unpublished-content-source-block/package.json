@@ -1,7 +1,7 @@
 {
   "name": "@wpmedia/unpublished-content-source-block",
   "version": "5.14.1",
-  "description": "Fusion News Theme unpublished API content source block",
+  "description": "Fusion Theme unpublished API content source block",
   "author": "beltrancaliz <beltran.caliz@washpost.com>",
   "contributors": [
     "Jack Howard <jack.howard@washpost.com>"

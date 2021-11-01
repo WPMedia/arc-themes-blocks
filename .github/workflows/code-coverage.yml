@@ -10,7 +10,10 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
       - uses: actions/checkout@v1
+
+      - name: Report Coverage
       - uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}

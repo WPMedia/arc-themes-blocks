@@ -35,12 +35,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       # - name: Run tests with coverage
-        # run: npm run test:coverage
+      #   run: npm run test:coverage
 
-      - name: Jest coverage report
-        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Jest Annotations & Coverage
+        uses: mattallty/jest-github-action@v1.0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          changes-only: true
 
       - name: Check linting
         run: npm run lint

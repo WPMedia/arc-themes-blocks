@@ -166,7 +166,13 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
   }
 };
 
-function renderButtonContents(matchedButtonType, text, iconComponent, secondaryIconComponent) {
+function renderButtonContents(
+  matchedButtonType,
+  text,
+  iconComponent,
+  secondaryIconComponent,
+  isHTMLText = false,
+) {
   switch (matchedButtonType) {
     case BUTTON_TYPES.LABEL_AND_TWO_ICONS:
       return (
@@ -174,7 +180,9 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           <div className="xpmedia-button--left-icon-container">
             {iconComponent}
           </div>
-          {text}
+          { isHTMLText
+            ? <span dangerouslySetInnerHTML={{ __html: text }} />
+            : text}
           <div className="xpmedia-button--right-icon-container">
             {secondaryIconComponent}
           </div>
@@ -186,13 +194,17 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
           <div className="xpmedia-button--left-icon-container">
             {iconComponent}
           </div>
-          {text}
+          { isHTMLText
+            ? <span dangerouslySetInnerHTML={{ __html: text }} />
+            : text}
         </>
       );
     case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
       return (
         <>
-          {text}
+          { isHTMLText
+            ? <span dangerouslySetInnerHTML={{ __html: text }} />
+            : text}
           <div className="xpmedia-button--right-icon-container">
             {iconComponent}
           </div>
@@ -202,7 +214,13 @@ function renderButtonContents(matchedButtonType, text, iconComponent, secondaryI
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
     default:
-      return (text);
+      return (
+        <>
+          { isHTMLText
+            ? <span dangerouslySetInnerHTML={{ __html: text }} />
+            : text}
+        </>
+      );
   }
 }
 
@@ -220,6 +238,7 @@ function Button(props) {
     iconType,
     secondaryIconType,
     text,
+    isHTMLText = false,
     type,
   } = props;
 
@@ -269,7 +288,7 @@ function Button(props) {
       type={elementType}
       {...props}
     >
-      {renderButtonContents(buttonType, text, PrimaryIcon, SecondaryIcon)}
+      {renderButtonContents(buttonType, text, PrimaryIcon, SecondaryIcon, isHTMLText)}
     </StyledDynamicButton>
   );
 }

@@ -16,9 +16,8 @@ const props = {
 describe('OfferCard', () => {
   it('renders all fields', () => {
     const wrapper = mount(<OfferCard {...props} />);
-
-    expect(wrapper.find('.xpmedia-subscription-offer-card--headline').text()).toEqual(props.headline);
-    expect(wrapper.find('.xpmedia-subscription-offer-card--subheadline').text()).toEqual(props.subHeadline);
+    expect(wrapper.find('h2.xpmedia-subscription-offer-card--headline').text()).toEqual(props.headline);
+    expect(wrapper.find('h3.xpmedia-subscription-offer-card--subheadline').text()).toEqual(props.subHeadline);
     expect(wrapper.find('button').exists()).toBe(true);
     expect(wrapper.find('.xpmedia-subscription-offer-card--feature-item').length).toBe(props.features.length);
     expect(wrapper.find('.xpmedia-subscription-offer-card--feature-item').at(0).text()).toBe(props.features[0].featureText);

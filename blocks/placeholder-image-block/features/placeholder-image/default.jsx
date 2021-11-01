@@ -24,6 +24,7 @@ const PlaceholderImage = ({ client = false }) => {
   } = getProperties(arcSite);
 
   const targetFallbackImage = getFallbackImageURL({ deployment, contextPath, fallbackImage });
+  const absoluteImageURL = targetFallbackImage.includes('http');
   const imageProps = {
     url: targetFallbackImage,
     smallWidth: 800,
@@ -37,12 +38,12 @@ const PlaceholderImage = ({ client = false }) => {
     resizerURL,
   };
 
-  const placeholderResizedImageOptions = useContent({
+  const placeholderResizedImageOptions = useContent(absoluteImageURL ? {
     source: client ? 'resize-image-api-client' : 'resize-image-api',
     query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-  });
+  } : {});
 
-  if (!placeholderResizedImageOptions) {
+  if (!placeholderResizedImageOptions && absoluteImageURL) {
     return null;
   }
 

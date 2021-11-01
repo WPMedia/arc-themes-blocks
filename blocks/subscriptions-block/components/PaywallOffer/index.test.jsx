@@ -86,7 +86,7 @@ describe('The PaywallOffer component ', () => {
     expect(wrapper.find('.xpmedia-subscription-dialog-headline').text()).toEqual('this the offer title');
     expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').text()).toEqual('this the offer subtitle');
     expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?_cid=defaultish');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?campaign=defaultish');
   });
 
   it('renders campaignCode if its a url', () => {
@@ -100,7 +100,7 @@ describe('The PaywallOffer component ', () => {
       />,
     );
     expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
-    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?_cid=./');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?campaign=./');
     isUrl.mockReset();
   });
 });

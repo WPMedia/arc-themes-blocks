@@ -85,7 +85,7 @@ const PaywallOffer = ({
   const campaign = campaignCode || (!isPaywallCampaignURL(payWallCode) ? payWallCode : 'default');
   const actionUrlFinal = campaign === 'default'
     ? actionUrl
-    : `${actionUrl}?campaign=${campaign}`
+    : `${actionUrl}?campaign=${campaign}`;
 
   return (
     <SubscriptionOverlay displayMode={displayMode} usePortal={usePortal}>

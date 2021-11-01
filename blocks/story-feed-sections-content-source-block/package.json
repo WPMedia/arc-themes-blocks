@@ -3,7 +3,7 @@
   "version": "5.15.0",
   "description": "Content source block for story feed queries by section",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-theme-blocks.git",
     "directory": "blocks/story-feed-sections-content-source-block"
   },
   "scripts": {

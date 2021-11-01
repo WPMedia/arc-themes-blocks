@@ -3,7 +3,7 @@
   "version": "5.16.0",
   "description": "Fusion News Theme Large Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-theme-blocks",
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-theme-blocks.git",
     "directory": "blocks/large-promo-block"
   },
   "scripts": {

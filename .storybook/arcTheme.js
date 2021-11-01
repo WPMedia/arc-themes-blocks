@@ -41,7 +41,7 @@ export default create({
   inputBorderRadius: 4,
 
   brandTitle: 'Theme Blocks',
-  brandUrl: 'https://github.com/WPMedia/fusion-news-theme-blocks',
+  brandUrl: 'https://github.com/WPMedia/fusion-theme-blocks',
   // todo: change this to a legitimate image url
   // brandImage: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
 });

@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "git+https://github.com/WPMedia/fusion-theme-blocks.git",
     "directory": "blocks/resizer-image-block"
   },
   "publishConfig": {
@@ -25,9 +25,9 @@
   "author": "Jack Howard <jack.howard@washpost.com>",
   "license": "CC-BY-NC-ND-4.0",
   "bugs": {
-    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
+    "url": "https://github.com/WPMedia/fusion-theme-blocks/issues"
   },
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/fusion-theme-blocks#readme",
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*",

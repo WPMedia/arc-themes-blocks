@@ -3,7 +3,7 @@
   "version": "5.16.0",
   "description": "Fusion News Theme Video Promo block",
   "author": "Cheng-Hsin Weng <cheng-hsin.weng@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/fusion-theme-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/fusion-theme-blocks.git",
     "directory": "blocks/video-promo-block"
   },
   "scripts": {

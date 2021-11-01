@@ -1,0 +1,16 @@
+name: 'coverage'
+
+on:
+  pull_request:
+    # synchronize	commit(s) pushed to the pull request
+    types: [synchronize, opened]
+
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

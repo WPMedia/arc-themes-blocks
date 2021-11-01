@@ -34,16 +34,16 @@ describe('PromoDate', () => {
     expect(wrapper.html()).toBe(null);
   });
 
-  // it('renders custom text', () => {
-  //   const props = {
-  //     date: '2019-08-11T16:45:33.209Z',
-  //   };
+  it('renders custom text', () => {
+    const props = {
+      date: '2019-08-11T16:45:33.209Z',
+    };
 
-  //   const wrapper = mount(<PromoDate {...props} />);
+    const wrapper = mount(<PromoDate {...props} />);
 
-  //   expect(wrapper.find('time').text()).toBe('Sun Aug 11 2019');
-  //   expect(wrapper.find('time').prop('dateTime')).toBe('2019-08-11T16:45:33.209Z');
-  // });
+    expect(wrapper.find('time').text()).toBe('Sun Aug 11 2019');
+    expect(wrapper.find('time').prop('dateTime')).toBe('2019-08-11T16:45:33.209Z');
+  });
 
   // it('renders description from ANS Story object', () => {
   //   const props = {

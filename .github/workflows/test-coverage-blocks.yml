@@ -35,6 +35,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests with coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         run: npm run test:coverage
 
       - name: Check linting

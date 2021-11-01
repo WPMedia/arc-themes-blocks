@@ -1,4 +1,4 @@
-name: Test + Coverage and Linitng
+name: Test News Theme Blocks
 
 on:
   pull_request:
@@ -35,6 +35,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Jest coverage report
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
 
       - name: Check linting

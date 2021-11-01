@@ -1,4 +1,4 @@
-name: 'coverage'
+name: Code Coverage
 
 on:
   pull_request:
@@ -9,13 +9,21 @@ on:
 jobs:
   coverage:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+
+      - name: Setup Node with 12
+        uses: actions/setup-node@v1
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
 
       - name: Report Coverage
         uses: artiomtr/jest-coverage-report-action@v2.0-rc.5
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

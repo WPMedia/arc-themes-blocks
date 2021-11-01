@@ -1,4 +1,4 @@
-name: Test News Theme Blocks
+name: Test + Coverage and Linitng
 
 on:
   pull_request:

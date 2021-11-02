@@ -1,8 +1,22 @@
 import React from 'react';
 import { render } from 'enzyme';
-import PaywallOffer from './index';
+import isUrl from 'is-url';
+
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
+
+import PaywallOffer from '.';
 import usePaywall from '../usePaywall';
 import useOffer from '../useOffer';
+
+jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  __esModule: true,
+  isServerSide: jest.fn(() => false),
+}));
+
+jest.mock('is-url', () => ({
+  __esModule: true,
+  default: jest.fn(() => false),
+}));
 
 jest.mock('../../components/useOffer');
 jest.mock('../../../identity-block');
@@ -20,71 +34,9 @@ useOffer.mockReturnValue({
 });
 
 usePaywall.mockReturnValue({
+  campaignCode: 'default',
   isPaywalled: true,
-  isRegwalled: false,
-  triggeredRule: {
-    e: [
-      true,
-    ],
-    pw: 'allaccess',
-    rt: [
-      '>',
-      1,
-    ],
-    id: 103,
-    budget: {
-      id: 95,
-      budgetType: 'Calendar',
-      calendarType: 'Monthly',
-      calendarWeekDay: null,
-      rollingType: null,
-      rollingDays: null,
-      rollingHours: null,
-    },
-  },
-  rules: [
-    {
-      e: [
-        true,
-      ],
-      pw: 'allaccess',
-      rt: [
-        '>',
-        1,
-      ],
-      id: 103,
-      budget: {
-        id: 95,
-        budgetType: 'Calendar',
-        calendarType: 'Monthly',
-        calendarWeekDay: null,
-        rollingType: null,
-        rollingDays: null,
-        rollingHours: null,
-      },
-    },
-    {
-      e: [
-        true,
-        'premium',
-      ],
-      pw: 'allaccess',
-      rt: [
-        '>',
-        1,
-      ],
-      id: 104,
-      budget: {
-        id: 96,
-        budgetType: 'Calendar',
-        calendarType: 'Monthly',
-        calendarWeekDay: null,
-        rollingType: null,
-        rollingDays: null,
-        rollingHours: null,
-      },
-    },
-  ],
+  isRegisterwalled: false,
 });
 
 /**
@@ -96,19 +48,73 @@ usePaywall.mockReturnValue({
  * to conditionally render ReactDOM.createPortal.
  */
 describe('The PaywallOffer component ', () => {
-  it('renders with correct markup', () => {
+  it('returns null if serverSide', () => {
+    isServerSide.mockReturnValue(true);
     const wrapper = render(
       <PaywallOffer
-        reasonPrompt="Subscribe to continue reading."
+        actionText="Subscribe"
+        actionUrl="/offer/"
+        campaignCode="defaultish"
         linkPrompt="Already a subscriber?"
         linkText="Log In."
         linkUrl="/account/login"
-        actionText="Subscribe"
-        offerURL="/offer/"
-        campaignCode="default"
+        reasonPrompt="Subscribe to continue reading."
         usePortal={false}
       />,
     );
-    expect(wrapper.html()).toBe('<div class="xpmedia-subscription-overlay-content"><div class="sc-kEYyzF ftIOvi xpmedia-subscription-dialog"><div class="xpmedia-subscription-dialog-reason-prompt">Subscribe to continue reading.</div><div class="xpmedia-subscription-dialog-link-prompt"><span class="xpmedia-subscription-dialog-link-prompt-pre-link">Already a subscriber?</span><a class="xpmedia-subscription-dialog-link-prompt-link" href="/account/login">Log In.</a></div><h2 class="xpmedia-subscription-dialog-headline">this the offer title</h2><h3 class="xpmedia-subscription-dialog-subheadline">this the offer subtitle</h3><a class="sc-hMqMXs gxyfPb xpmedia-button xpmedia-button--large" href="/offer/?_cid=default">Subscribe</a></div></div>');
+    expect(wrapper.html()).toBe(null);
+    isServerSide.mockReset();
+  });
+
+  it('renders with correct markup', () => {
+    const wrapper = render(
+      <PaywallOffer
+        actionText="Subscribe"
+        actionUrl="/offer/"
+        campaignCode="defaultish"
+        linkPrompt="Already a subscriber?"
+        linkText="Log In."
+        linkUrl="/account/login"
+        reasonPrompt="Subscribe to continue reading."
+        usePortal={false}
+      />,
+    );
+    expect(wrapper.find('.xpmedia-subscription-dialog-reason-prompt').text()).toEqual('Subscribe to continue reading.');
+    expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-pre-link').text()).toEqual('Already a subscriber?');
+    expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-link').text()).toEqual('Log In.');
+    expect(wrapper.find('.xpmedia-subscription-dialog-link-prompt-link').prop('href')).toEqual('/account/login');
+    expect(wrapper.find('.xpmedia-subscription-dialog-headline').text()).toEqual('this the offer title');
+    expect(wrapper.find('.xpmedia-subscription-dialog-subheadline').text()).toEqual('this the offer subtitle');
+    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?campaign=defaultish');
+  });
+
+  it('renders campaignCode if its a url', () => {
+    isUrl.mockReturnValue(true);
+    const wrapper = render(
+      <PaywallOffer
+        actionText="Subscribe"
+        actionUrl="/offer/"
+        campaignCode="./"
+        usePortal={false}
+      />,
+    );
+    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/?campaign=./');
+    isUrl.mockReset();
+  });
+
+  it('renders without a query param if campaignCode is not passed', () => {
+    isUrl.mockReturnValue(true);
+    const wrapper = render(
+      <PaywallOffer
+        actionText="Subscribe"
+        actionUrl="/offer/"
+        usePortal={false}
+      />,
+    );
+    expect(wrapper.find('.xpmedia-button').text()).toEqual('Subscribe');
+    expect(wrapper.find('.xpmedia-button').prop('href')).toEqual('/offer/');
+    isUrl.mockReset();
   });
 });

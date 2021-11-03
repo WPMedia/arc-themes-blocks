@@ -8,6 +8,7 @@ import './DropDownLinkListItem.scss';
 const StyledLinkWithHover = styled.a`
   font-family: ${({ font }) => font};
   color: ${({ primaryColor }) => primaryColor};
+  cursor: pointer;
 
   &:hover {
     color: ${({ primaryColor }) => primaryColor};

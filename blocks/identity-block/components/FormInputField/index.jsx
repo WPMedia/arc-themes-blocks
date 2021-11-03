@@ -12,6 +12,7 @@ export const FIELD_TYPES = {
 };
 
 const FormInputField = ({
+  autoComplete,
   defaultValue = '',
   label,
   name,
@@ -55,6 +56,7 @@ const FormInputField = ({
   const inputId = `id_${name}_input`;
 
   const fieldParameters = {
+    ...(autoComplete ? { autoComplete } : {}),
     ...(defaultValue !== '' ? { defaultValue } : {}),
     ...(validationPattern ? { pattern: validationPattern } : {}),
     ...(placeholder ? { placeholder, 'aria-placeholder': placeholder } : {}),

@@ -6,7 +6,7 @@ export default (site) => ({
 	twitterUsername: true,
 	rssUrl: true,
 	copyrightText: true,
-	lightBackgroundLogo: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
+	lightBackgroundLogo: 'https://design.arcxp.com/arc-glyph-light.svg',
 	lightBackgroundLogoAlt: 'light logo alt text',
 	primaryLogo: 'https://www.klartale.no/img/klartale/klartale-logo-new.svg',
 	primaryLogoAlt: 'primary logo alt text',

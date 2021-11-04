@@ -171,56 +171,48 @@ function renderButtonContents(
   text,
   iconComponent,
   secondaryIconComponent,
-  isHTMLText = false,
+  isHTMLText,
 ) {
+  const buttonText = isHTMLText
+    ? <span dangerouslySetInnerHTML={{ __html: text }} />
+    : text;
+
   switch (matchedButtonType) {
     case BUTTON_TYPES.LABEL_AND_TWO_ICONS:
       return (
         <>
-          <div className="xpmedia-button--left-icon-container">
+          <span className="xpmedia-button--left-icon-container">
             {iconComponent}
-          </div>
-          { isHTMLText
-            ? <span dangerouslySetInnerHTML={{ __html: text }} />
-            : text}
-          <div className="xpmedia-button--right-icon-container">
+          </span>
+          {buttonText}
+          <span className="xpmedia-button--right-icon-container">
             {secondaryIconComponent}
-          </div>
+          </span>
         </>
       );
     case BUTTON_TYPES.LABEL_AND_ICON:
       return (
         <>
-          <div className="xpmedia-button--left-icon-container">
+          <span className="xpmedia-button--left-icon-container">
             {iconComponent}
-          </div>
-          { isHTMLText
-            ? <span dangerouslySetInnerHTML={{ __html: text }} />
-            : text}
+          </span>
+          {buttonText}
         </>
       );
     case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
       return (
         <>
-          { isHTMLText
-            ? <span dangerouslySetInnerHTML={{ __html: text }} />
-            : text}
-          <div className="xpmedia-button--right-icon-container">
+          {buttonText}
+          <span className="xpmedia-button--right-icon-container">
             {iconComponent}
-          </div>
+          </span>
         </>
       );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
     default:
-      return (
-        <>
-          { isHTMLText
-            ? <span dangerouslySetInnerHTML={{ __html: text }} />
-            : text}
-        </>
-      );
+      return (buttonText);
   }
 }
 

@@ -15,7 +15,7 @@ const getPaymentInfo = ({
   origin,
   endpoint,
   priceCode,
-}) => fetch(`${origin}${endpoint}${priceCode}/1/1635969177000`, {})
+}) => fetch(`${origin}${endpoint}${priceCode}/1/${new Date().getTime()}`, {})
   .then((res) => res.json());
 
 const Cart = ({ offerURL }) => {

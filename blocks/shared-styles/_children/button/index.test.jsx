@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Button from '.';
-import { BUTTON_SIZES, BUTTON_TYPES } from '../..';
+import { BUTTON_SIZES, BUTTON_TYPES, BUTTON_STYLES } from '../..';
 
 it('renders medium button by default', () => {
   const wrapper = mount(<Button />);
@@ -21,6 +21,30 @@ it('renders small button if buttonSize is small', () => {
   expect(wrapper.find('button').prop('className')).toContain('xpmedia-button--small');
 });
 
+it('renders button as primary reverse', () => {
+  const wrapper = mount(<Button buttonStyle={BUTTON_STYLES.PRIMARY_REVERSE} />);
+
+  expect(wrapper.find('button').prop('className')).toContain('xpmedia-button xpmedia-button--medium');
+});
+
+it('renders button as secondary', () => {
+  const wrapper = mount(<Button buttonStyle={BUTTON_STYLES.SECONDARY} />);
+
+  expect(wrapper.find('button').prop('className')).toContain('xpmedia-button xpmedia-button--medium');
+});
+
+it('renders button as secondary reverse', () => {
+  const wrapper = mount(<Button buttonStyle={BUTTON_STYLES.SECONDARY_REVERSE} />);
+
+  expect(wrapper.find('button').prop('className')).toContain('xpmedia-button xpmedia-button--medium');
+});
+
+it('renders button text using HTML', () => {
+  const wrapper = mount(<Button isHTMLText text="<span>Button Text</span>" />);
+
+  expect(wrapper.find('button span').text()).toBe('Button Text');
+});
+
 it('renders a label and a found user icon for buttonType', () => {
   const wrapper = mount(<Button
     buttonType={BUTTON_TYPES.LABEL_AND_ICON}
@@ -28,7 +52,7 @@ it('renders a label and a found user icon for buttonType', () => {
     iconType="user"
   />);
 
-  expect(wrapper.find('div').prop('className')).toContain('xpmedia-button--left-icon-container');
+  expect(wrapper.find('.xpmedia-button--left-icon-container').exists()).toBe(true);
   expect(wrapper.find('svg')).toHaveLength(1);
 });
 
@@ -39,7 +63,7 @@ it('renders a label and a found user icon for buttonType', () => {
     iconType="something else"
   />);
 
-  expect(wrapper.find('div').prop('className')).toContain('xpmedia-button--left-icon-container');
+  expect(wrapper.find('.xpmedia-button--left-icon-container').exists()).toBe(true);
   expect(wrapper.find('svg')).toHaveLength(0);
   expect(wrapper.text()).toEqual('Hello button and icon');
 });
@@ -89,6 +113,7 @@ it('renders label and two icons', () => {
 it('renders label and right icon', () => {
   const wrapper = mount(<Button
     buttonType={BUTTON_TYPES.LABEL_AND_RIGHT_ICON}
+    buttonStyle={BUTTON_STYLES.PRIMARY}
     text="Hello button and right icon"
     iconType="user"
   />);

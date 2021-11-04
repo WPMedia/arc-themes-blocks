@@ -10,7 +10,7 @@
   border: 1px solid $border-rule-color;
   padding: map-get($spacers, 'xs');
 
-  > * + *  {
+  > * + * {
     border-top: 1px solid $border-rule-color;
   }
 }

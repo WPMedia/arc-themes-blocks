@@ -10,7 +10,8 @@
     "features",
     "sources",
     "chains",
-    "components"
+    "components",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

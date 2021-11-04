@@ -1,0 +1,68 @@
+{
+	"checkout-block.headline": {
+		"de": "Review Subscription Order",
+		"en": "Review Subscription Order",
+		"es": "Review Subscription Order",
+		"fr": "Review Subscription Order",
+		"ja": "Review Subscription Order",
+		"ko": "Review Subscription Order",
+		"no": "Review Subscription Order",
+		"pt": "Review Subscription Order",
+		"sv": "Review Subscription Order"
+	},
+	"checkout-block.back-to-offer-page": {
+		"de": "Back to subcription selection",
+		"en": "Back to subcription selection",
+		"es": "Back to subcription selection",
+		"fr": "Back to subcription selection",
+		"ja": "Back to subcription selection",
+		"ko": "Back to subcription selection",
+		"no": "Back to subcription selection",
+		"pt": "Back to subcription selection",
+		"sv": "Back to subcription selection"
+	},
+	"checkout-block.order-summary": {
+		"de": "Order Summary",
+		"en": "Order Summary",
+		"es": "Order Summary",
+		"fr": "Order Summary",
+		"ja": "Order Summary",
+		"ko": "Order Summary",
+		"no": "Order Summary",
+		"pt": "Order Summary",
+		"sv": "Order Summary"
+	},
+	"checkout-block.due-today": {
+		"de": "Due today",
+		"en": "Due today",
+		"es": "Due today",
+		"fr": "Due today",
+		"ja": "Due today",
+		"ko": "Due today",
+		"no": "Due today",
+		"pt": "Due today",
+		"sv": "Due today"
+	},
+	"checkout-block.plus-sales-tax": {
+		"de": "Plus applicable sales tax",
+		"en": "Plus applicable sales tax",
+		"es": "Plus applicable sales tax",
+		"fr": "Plus applicable sales tax",
+		"ja": "Plus applicable sales tax",
+		"ko": "Plus applicable sales tax",
+		"no": "Plus applicable sales tax",
+		"pt": "Plus applicable sales tax",
+		"sv": "Plus applicable sales tax"
+	},
+	"checkout-block.empty-cart-message": {
+		"de": "Select from one of our offers",
+		"en": "Select from one of our offers",
+		"es": "Select from one of our offers",
+		"fr": "Select from one of our offers",
+		"ja": "Select from one of our offers",
+		"ko": "Select from one of our offers",
+		"no": "Select from one of our offers",
+		"pt": "Select from one of our offers",
+		"sv": "Select from one of our offers"
+	}
+}

@@ -126,5 +126,13 @@
     "identity-block.login-form-error": "There's been an error logging you in",
     "identity-block.login-links-login": "Already have an account? Log in.",
     "identity-block.login-links-signup": "Sign up for an account."
+  },
+  "subscriptions-block": {
+    "checkout-block.headline": "Review Subscription Order",
+    "checkout-block.back-to-offer-page": "Back to subcription selection",
+    "checkout-block.order-summary": "Order Summary",
+    "checkout-block.due-today": "Due today",
+    "checkout-block.plus-sales-tax": "Plus applicable sales tax",
+    "checkout-block.empty-cart-message": "Select from one of our offers"
   }
 }

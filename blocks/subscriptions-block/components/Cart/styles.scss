@@ -1,0 +1,32 @@
+.xpmedia-subscriptions-cart {
+  margin-top: map-get($spacers, 'lg');
+
+  &-title {
+    margin-bottom: map-get($spacers, 'md');
+  }
+}
+
+.xpmedia-subscriptions-cart-items {
+  border: 1px solid $border-rule-color;
+  padding: map-get($spacers, 'xs');
+
+  > * + *  {
+    border-top: 1px solid $border-rule-color;
+  }
+}
+
+.xpmedia-subscriptions-cart-item {
+  color: $ui-medium-gray;
+  font-size: calculateRem(16px);
+  margin: 0 map-get($spacers, 'xxs');
+  padding: map-get($spacers, 'xxs') 0;
+
+  &--name {
+    font-size: calculateRem(20px);
+    font-weight: bold;
+  }
+
+  &--info {
+    font-size: calculateRem(12px);
+  }
+}

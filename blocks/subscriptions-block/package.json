@@ -11,6 +11,7 @@
     "sources",
     "chains",
     "components",
+    "utils",
     "intl.json"
   ],
   "publishConfig": {

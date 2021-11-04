@@ -11,15 +11,15 @@
 		"sv": "Review Subscription Order"
 	},
 	"checkout-block.back-to-offer-page": {
-		"de": "Back to subcription selection",
-		"en": "Back to subcription selection",
-		"es": "Back to subcription selection",
-		"fr": "Back to subcription selection",
-		"ja": "Back to subcription selection",
-		"ko": "Back to subcription selection",
-		"no": "Back to subcription selection",
-		"pt": "Back to subcription selection",
-		"sv": "Back to subcription selection"
+		"de": "Back to subscription selection",
+		"en": "Back to subscription selection",
+		"es": "Back to subscription selection",
+		"fr": "Back to subscription selection",
+		"ja": "Back to subscription selection",
+		"ko": "Back to subscription selection",
+		"no": "Back to subscription selection",
+		"pt": "Back to subscription selection",
+		"sv": "Back to subscription selection"
 	},
 	"checkout-block.order-summary": {
 		"de": "Order Summary",

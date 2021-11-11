@@ -3,7 +3,7 @@ import React from 'react';
 import { DateComponent } from '@wpmedia/theme-components';
 
 const POCDate = () => (
-  <DateComponent text="Friday 1st October 2021" />
+  <DateComponent text={new Date().toGMTString()} />
 );
 
 POCDate.label = 'POC Date Block – Arc Block';

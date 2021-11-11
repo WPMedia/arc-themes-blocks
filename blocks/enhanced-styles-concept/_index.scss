@@ -12,3 +12,9 @@
   // Output all the list block CSS theme properties and values
   @include block-properties('list');
 }
+
+.b-list-item {
+  @include block-components('list-item');
+
+  @include block-properties('list-item');
+}

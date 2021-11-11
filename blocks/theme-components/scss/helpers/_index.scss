@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 
 //
 // Used to set the nest components CSS Variable overrides at the block level
@@ -9,7 +10,13 @@
 // --c-date-font-weight: 900
 //
 @mixin block-components($blockName) {
-  @each $name, $value in map.get($block, $blockName, 'components') {
+  @if list.length(map.get($tokens, 'desktop', 'block', $blockName, 'components')) == 0 {
+    @warn 'Block "#{$blockName}" has components map with no values';
+  }
+  @each $name, $value in map.get($tokens, 'desktop', 'block', $blockName, 'components') {
+    @if list.length($value) == 0 {
+      @warn 'Block "#{$blockName}" has component "#{$name}" with no values';
+    }
     @if type-of($value) == map {
       @each $a, $b in $value {
         --c-#{$name}-#{$a}: #{$b};
@@ -24,9 +31,10 @@
 // background-color: var(--b-list-background-color);
 //
 @mixin block-properties($blockName, $others...) {
-  @each $name, $value in map.get($block, $blockName, $others...) {
+  @each $name, $value in map.get($tokens, 'desktop', 'block', $blockName, $others...) {
     @if type-of($value) != map {
-      #{$name}: #{$value};
+      // #{$name}: #{$value};
+      #{$name}: block-var($blockName, $name);
     }
   }
 }
@@ -37,7 +45,10 @@
 // background-color: var(--c-overline-background-color);
 //
 @mixin component-properties($component) {
-  @each $name, $value in map.get($components, $component) {
+  @if map.has-key($tokens, 'desktop', 'components', $component) == false {
+    @warn 'Properties for component "#{$component}" not found.';
+  }
+  @each $name, $value in map.get($tokens, 'desktop', 'components', $component) {
     #{$name}: component-var($component, $name);
   }
 }
@@ -53,7 +64,7 @@
 // Return the CSS Variable for a block item
 //
 @function block-var($block, $item) {
-  @return var(--c-#{$block}-#{$item});
+  @return var(--b-#{$block}-#{$item});
 }
 
 //

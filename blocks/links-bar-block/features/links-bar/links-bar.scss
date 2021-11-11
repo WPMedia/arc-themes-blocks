@@ -8,10 +8,5 @@
   @include block-properties('links-bar');
 
   align-items: center;
-  text-align: left;
   width: 100%;
-
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    text-align: center;
-  }
 }

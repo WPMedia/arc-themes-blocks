@@ -1,5 +1,7 @@
 @use 'sass:map';
 
 .c-date {
+
   @include component-properties('date');
+  display: inline-block;
 }

@@ -1,113 +1,139 @@
 $breakpoints: (
-  desktop: 'min-width: 0px',
-  tablet: 'max-width: 800px',
-  mobile: 'max-width: 400px'
+	desktop: 'min-width: 0px',
+	tablet: 'max-width: 800px',
+	mobile: 'max-width: 400px'
 );
 
 // Global Tokens
 $global: (
-  'gray-50': rgb(218 218 218),
-  'gray-100': rgb(87 87 87),
-  'gray-900': rgb(25 25 25),
+	'gray-50': rgb(218 218 218),
+	'gray-100': rgb(87 87 87),
+	'gray-900': rgb(25 25 25),
 
-  'blue-500': rgb(79 93 117),
-  'blue-600': rgb(80 103 127),
+	'blue-500': rgb(79 93 117),
+	'blue-600': rgb(80 103 127),
 
-  'spacing-25': 4px,
-  'spacing-50': 8px,
-  'spacing-100': 16px,
-  'spacing-150': 24px,
-  'spacing-200': 32px,
+	'spacing-25': 4px,
+	'spacing-50': 8px,
+	'spacing-100': 16px,
+	'spacing-150': 24px,
+	'spacing-200': 32px,
 
-  'font-weight-100': 100,
-  'font-weight-200': 200,
-  'font-weight-300': 300,
-  'font-weight-400': 400,
-  'font-weight-500': 500,
-  'font-weight-600': 600,
-  'font-weight-700': 700,
-  'font-weight-800': 800,
-  'font-weight-900': 900,
+	'font-weight-100': 100,
+	'font-weight-200': 200,
+	'font-weight-300': 300,
+	'font-weight-400': 400,
+	'font-weight-500': 500,
+	'font-weight-600': 600,
+	'font-weight-700': 700,
+	'font-weight-800': 800,
+	'font-weight-900': 900,
 
-  'font-size-100': 0.75rem,
-  'font-size-200': 0.875rem,
-  'font-size-300': 1rem,
-  'font-size-400': 1.125rem,
-  'font-size-500': 1.375rem,
-  'font-size-600': 1.625rem,
-  'font-size-700': 1.875rem,
-  'font-size-800': 2.25rem,
-  'font-size-900': 2.75rem,
+	'font-size-100': 0.75rem,
+	'font-size-200': 0.875rem,
+	'font-size-300': 1rem,
+	'font-size-400': 1.125rem,
+	'font-size-500': 1.375rem,
+	'font-size-600': 1.625rem,
+	'font-size-700': 1.875rem,
+	'font-size-800': 2.25rem,
+	'font-size-900': 2.75rem,
 );
 
 $alias: (
-  'primary-color': var(--global-blue-500),
-  'primary-font-family': 'Work Sans',
-  'secondary-font-family': 'Times New Roman',
+	'primary-color': var(--global-blue-500),
+	'primary-font-family': 'Poppins',
+	'secondary-font-family': 'Times New Roman',
 
-  'font-size-tiny': var(--global-font-size-100),
-  'font-size-small': var(--global-font-size-200),
-  'font-size-body': var(--global-font-size-300),
+	'font-size-tiny': var(--global-font-size-100),
+	'font-size-small': var(--global-font-size-200),
+	'font-size-body': var(--global-font-size-300),
 );
 
 $tokens: (
-  desktop: (
-    // Alias Tokens
-    alias: (),
-    // Component Tokens
-    components: (
-      'body': (
-        'font-family': var(--primary-font-family),
-        'font-size': var(--font-size-body),
-      ),
-      'date': (
-        'background-color': transparent,
-        'color': inherit,
-        'font-weight': var(--global-font-weight-400),
-      ),
-      'heading': (
-        'font-size': inherit,
-        'font-weight': var(--global-font-weight-700),
-        'line-height': 1.5,
-      ),
-      'link': (
-        'color': inherit,
-        'font-size': inherit,
-        'text-decoration': none,
-      ),
-      'link-hover': (
-        'color': var(--global-blue-500),
-        'text-decoration': underline,
-      ),
-      'overline': (
-        'background-color': transparent,
-        'border-color': 'transparent transparent var(--primary-color) transparent',
-        'border-style': 'solid',
-        'border-width': '0 0 1px 0',
-        'font-weight': var(--global-font-weight-700),
-        'color': inherit,
-      ),
-    ),
+	desktop: (
+		// Alias Tokens
+		alias: (),
+		// Component Tokens
+		components: (
+			'body': (
+				'font-family': var(--primary-font-family),
+				'font-size': var(--font-size-body),
+			),
+			'date': (
+				'background-color': transparent,
+				'color': inherit,
+				'font-family': var(--secondary-font-family),
+				'font-weight': var(--global-font-weight-400),
+			),
+			'heading': (
+				'font-size': inherit,
+				'font-weight': var(--global-font-weight-700),
+				'line-height': 1.5,
+			),
+			'link': (
+				'color': inherit,
+				'font-size': inherit,
+				'line-height': 1.5,
+				'text-decoration': underline,
+			),
+			'link-hover': (
+				'color': var(--global-blue-500),
+				'text-decoration': underline,
+			),
+			'overline': (
+				'background-color': inherit,
+				'font-weight': var(--global-font-weight-900),
+			),
+			'paragraph': (
+				'font-size': var(--font-size-body),
+				'line-height': 1.5,
+			),
+			'grid': (
+				'gap': var(--global-spacing-100),
+				'grid-template-columns': 'repeat(12, 1fr)'
+			),
+			'stack': (
+				'gap': var(--global-spacing-100),
+			)
+		),
 
-    // Blocks Tokens
-    block: (
-      'links-bar': (
-        'text-align': center,
-      )
-    ),
-  ),
-  tablet: (
-    alias: (),
-    components: (),
-    block: (
-      'links-bar': (
-        'text-align': left,
-      )
-    ),
-  ),
-  mobile: (
-    alias: (),
-    components: (),
-    block: (),
-  )
+		// Blocks Tokens
+		block: (
+			'links-bar': (
+				'text-align': center,
+			),
+			'list': (
+				'components': (
+					'heading': (
+						'font-size': var(--global-font-size-700),
+					),
+					'stack': (
+						'gap': var(--global-spacing-100),
+					),
+				),
+			),
+			'list-item': (
+				'components': (
+					'heading': (
+						'font-size': var(--global-font-size-600),
+					),
+				),
+			),
+		),
+	),
+	tablet: (
+		alias: (),
+		components: (),
+		block: (
+			'links-bar': (
+				'text-align': left,
+			)
+		),
+	),
+	mobile: (
+		alias: (),
+		components: (),
+		block: (),
+	)
 );

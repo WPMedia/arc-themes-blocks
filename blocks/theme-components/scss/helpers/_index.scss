@@ -79,3 +79,8 @@
   $default-components: $components;
   $components: map.deep-merge($default-components, $items) !global;
 }
+
+@mixin merge-tokens($items) {
+  $default-tokens: $tokens;
+  $tokens: map.deep-merge($default-tokens, $items) !global;
+}

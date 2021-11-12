@@ -1,7 +1,4 @@
-@use 'sass:map';
-
 .c-overline {
-
   @include component-properties('overline');
   display: inline-block;
   align-self: baseline;

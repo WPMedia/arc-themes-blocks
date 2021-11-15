@@ -47,10 +47,15 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
             {
               item.node_type === 'link'
                 ? (
-                  <Link href={item.url} name={item.display_name} />
+                  <Link href={item.url}>
+                    {item.display_name}
+                  </Link>
                 )
                 : (
-                  <Link href={item._id} name={item.name} />
+                  <Link href={item._id}>
+
+                    {item.name}
+                  </Link>
                 )
             }
             {(content.children.length !== index + 1 && showSeparator) ? '\u00a0 • \u00a0' : ''}

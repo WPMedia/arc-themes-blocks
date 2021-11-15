@@ -3,7 +3,7 @@ import React from 'react';
 // import { useFusionContext } from 'fusion:context';
 
 import {
-  OverlineComponent, DateComponent, Grid, GridItem, Heading, Stack, ParagraphComponent,
+  Overline, DateComponent, Grid, GridItem, Heading, Stack, Paragraph,
 } from '@wpmedia/theme-components';
 
 const POCList = () => (
@@ -16,10 +16,10 @@ const POCList = () => (
       </GridItem>
       <GridItem columns="span 6">
         <Stack>
-          <OverlineComponent text="News" />
+          <Overline>News</Overline>
           <Heading>In Albania, age-old traditions and Mediterranean beaches on the cheap</Heading>
-          <ParagraphComponent text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
-          <DateComponent text={new Date().toGMTString()} />
+          <Paragraph text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
+          <DateComponent date={new Date().toGMTString()} />
         </Stack>
       </GridItem>
     </Grid>
@@ -30,10 +30,10 @@ const POCList = () => (
       </GridItem>
       <GridItem columns="span 6">
         <Stack>
-          <OverlineComponent text="Sports" />
+          <Overline text="Sports">Sports</Overline>
           <Heading>On an action-packed Bahamas vacation, off the beach and into high gear</Heading>
-          <ParagraphComponent text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
-          <DateComponent text={new Date().toGMTString()} />
+          <Paragraph text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
+          <DateComponent date={new Date().toGMTString()} />
         </Stack>
       </GridItem>
     </Grid>
@@ -44,10 +44,10 @@ const POCList = () => (
       </GridItem>
       <GridItem columns="span 6">
         <Stack>
-          <OverlineComponent text="Business" />
+          <Overline text="Business">Business</Overline>
           <Heading>Five affordable destinations for a do-it-yourself wellness vacation</Heading>
-          <ParagraphComponent text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
-          <DateComponent text={new Date().toGMTString()} />
+          <Paragraph text="Let's get him. That was the day I invented time travel. I remember it vividly. I was standing on the edge of my toilet hanging a clock, the porces was wet, I slipped, hit my head on the edge of the sink." />
+          <DateComponent date={new Date().toGMTString()} />
         </Stack>
       </GridItem>
     </Grid>

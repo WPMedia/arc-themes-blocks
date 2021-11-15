@@ -3,9 +3,8 @@ import React from 'react';
 // import { useFusionContext } from 'fusion:context';
 
 import {
-  OverlineComponent, DateComponent, Grid, GridItem, Heading, Stack,
+  OverlineComponent, DateComponent, Grid, GridItem, Heading, Stack, ParagraphComponent,
 } from '@wpmedia/theme-components';
-import { ParagraphComponent } from '../../../theme-components';
 
 const POCList = () => (
   <Stack className="b-list">

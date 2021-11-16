@@ -11,10 +11,10 @@ const POCList = () => (
     <Heading>List Block Title</Heading>
 
     <Grid className="b-list-item">
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <img src="https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG" alt="" />
       </GridItem>
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <Stack>
           <Overline>News</Overline>
           <Heading>In Albania, age-old traditions and Mediterranean beaches on the cheap</Heading>
@@ -25,10 +25,10 @@ const POCList = () => (
     </Grid>
 
     <Grid className="b-list-item">
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <img src="https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/resizer/bxyzP5k6X1SlPFU52RAqDpsIjC0=/400x225/filters:format(jpg):quality(70):focal(4490x120:4500x130)/cloudfront-us-east-1.images.arcpublishing.com/corecomponents/OF7ZQ6IECJFRDHXPIFCRWAXMVI.JPG" alt="" />
       </GridItem>
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <Stack>
           <Overline text="Sports">Sports</Overline>
           <Heading>On an action-packed Bahamas vacation, off the beach and into high gear</Heading>
@@ -39,10 +39,10 @@ const POCList = () => (
     </Grid>
 
     <Grid className="b-list-item">
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <img src="https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/resizer/ZGMUIqbFmEkXpjH0v1MZ1DjFlf0=/400x225/filters:format(png):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/corecomponents/56KEAQ7TZZHITMQB5MIW7F5ELM.png" alt="" />
       </GridItem>
-      <GridItem columns="span 6">
+      <GridItem desktop="span 6">
         <Stack>
           <Overline text="Business">Business</Overline>
           <Heading>Five affordable destinations for a do-it-yourself wellness vacation</Heading>

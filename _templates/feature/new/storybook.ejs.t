@@ -12,4 +12,4 @@ export default {
   },
 };
 
-export const Basic = () => <%= h.changeCase.pascal(block_name) %>;
+export const Basic = () => <<%= h.changeCase.pascal(block_name) %> />;

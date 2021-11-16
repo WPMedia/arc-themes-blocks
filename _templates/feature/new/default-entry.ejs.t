@@ -6,11 +6,11 @@ import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 function <%= h.changeCase.pascal(block_name) %>(props) {
-	return (
-		<div>
-			<p>Hello</p>
-		</div>
-	)
+  return (
+    <div>
+      <p>Hello</p>
+    </div>
+  );
 }
 
 <%= h.changeCase.pascal(block_name) %>.label = '<%= h.changeCase.title( block_name ) %> – Arc Block';

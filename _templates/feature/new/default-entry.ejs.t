@@ -25,17 +25,12 @@ function <%= h.changeCase.pascal(block_name) %>(props) {
   );
 }
 
-// todo: update this example linked because the code is not valid
-// PageBuilder Engine reads the block name from the label
-// https://redirector.arcpublishing.com/alc/arc-products/pagebuilder/fusion/developer-documentation/feature-api/#Static-Values
 <%= h.changeCase.pascal(block_name) %>.label = '<%= h.changeCase.title( block_name ) %> – Arc Block';
 
 // find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
 <%= h.changeCase.pascal(block_name) %>.icon = 'shopping-bag-smile';
 
 <%= h.changeCase.pascal(block_name) %>.propTypes = {
-  // custom fields syntax can be found in ALC
-  // https://redirector.arcpublishing.com/alc/arc-products/pagebuilder/fusion/developer-documentation/custom-fields/
   customFields: PropTypes.shape({
     showIcon: PropTypes.boolean.tag({
       name: 'Show icon?',

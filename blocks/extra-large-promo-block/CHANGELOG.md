@@ -5,6 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/extra-large-promo-block@5.15.0...@wpmedia/extra-large-promo-block@5.16.0) (2021-10-20)
 
+
 # 5.15.0 (2021-09-15)
 
 

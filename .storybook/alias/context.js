@@ -49,6 +49,7 @@ export const useFusionContext = () => ({
     pinterest: true,
     twitter: true,
     linkedIn: true,
+    HTML: '<h1>Sample HTML</h1><p>This is sentence <strong>one</strong>.</p><p>This is sentence <em>two</em>.</p>'
   },
   globalContent: {
     headlines: {

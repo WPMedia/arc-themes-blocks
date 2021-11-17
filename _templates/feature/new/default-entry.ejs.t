@@ -5,21 +5,30 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/features/<%= h.inflec
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+
 // icons and other utilities can be found in the engine theme sdk storybook
 // https://beta--5eed0506faad4f0022fedf95.chromatic.com/
 import {
   EnvelopeIcon,
 } from '@wpmedia/engine-theme-sdk';
 
-function <%= h.changeCase.pascal(block_name) %>(props) {
+function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
   // for intro material on consuming react props
   // https://reactjs.org/docs/components-and-props.html
-  const { customFields } = props;
   const { showIcon } = customFields;
+
+  // get properties from context for using translations in intl.json
+  // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
+  const { arcSite } = useFusionContext();
+  const { locale = 'en' } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   return (
     <div>
-      <p>Hello</p>
+      <p>{phrases.t('<%= h.inflection.dasherize(block_name) %>-block.hello-text')}</p>
       {showIcon && <EnvelopeIcon />}
     </div>
   );

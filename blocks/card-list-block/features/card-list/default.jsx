@@ -30,6 +30,8 @@ const CardListItems = (props) => {
         contentConfigValues = {},
       } = {},
       title = '',
+      offsetOverride = 0,
+      displayAmount,
     } = {},
     placeholderResizedImageOptions,
     targetFallbackImage,
@@ -99,17 +101,28 @@ const CardListItems = (props) => {
     }`,
   }) || {};
 
+  let contentItems = contentElements.reduce((acc, element, index) => {
+    if (element.websites?.[arcSite] && index >= offsetOverride) {
+      return acc.concat(element);
+    }
+    return acc;
+  }, []);
+
+  if (displayAmount) {
+    contentItems = contentItems.slice(0, displayAmount);
+  }
+
   const Wrapper = title ? HeadingSection : React.Fragment;
 
   const showSeparator = !!(
-    contentElements[0]
-    && contentElements[0].credits
-    && contentElements[0].credits.by
-    && contentElements[0].credits.by.length !== 0
+    contentItems[0]
+    && contentItems[0].credits
+    && contentItems[0].credits.by
+    && contentItems[0].credits.by.length !== 0
   );
 
   return (
-    (contentElements.length > 0
+    (contentItems.length > 0
       ? (
         <HeadingSection>
           <div className="card-list-container">
@@ -122,20 +135,20 @@ const CardListItems = (props) => {
             <Wrapper>
               <article
                 className="list-item-simple"
-                key={`card-list-${contentElements[0].websites[arcSite].website_url}`}
+                key={`card-list-${contentItems[0].websites[arcSite].website_url}`}
               >
                 <a
-                  href={contentElements[0].websites[arcSite].website_url}
+                  href={contentItems[0].websites[arcSite].website_url}
                   className="list-anchor card-list--link-container vertical-align-image"
                   aria-hidden="true"
                   tabIndex="-1"
                 >
-                  {extractImageFromStory(contentElements[0]) ? (
+                  {extractImageFromStory(contentItems[0]) ? (
                     <Image
                       {...largeImageProps}
-                      url={extractImageFromStory(contentElements[0])}
-                      alt={contentElements[0].headlines.basic}
-                      resizedImageOptions={extractResizedParams(contentElements[0])}
+                      url={extractImageFromStory(contentItems[0])}
+                      alt={contentItems[0].headlines.basic}
+                      resizedImageOptions={extractResizedParams(contentItems[0])}
                     />
                   ) : (
                     <Image
@@ -146,25 +159,25 @@ const CardListItems = (props) => {
                     />
                   )}
                 </a>
-                <Overline story={contentElements[0]} className="card-list-overline" />
+                <Overline story={contentItems[0]} className="card-list-overline" />
                 <Heading className="card-list-headline">
                   <a
-                    href={contentElements[0].websites[arcSite].website_url}
+                    href={contentItems[0].websites[arcSite].website_url}
                     className="list-anchor vertical-align-image"
                     id="card-list--headline-link"
                   >
-                    {contentElements[0].headlines.basic}
+                    {contentItems[0].headlines.basic}
                   </a>
                 </Heading>
                 <div className="author-date">
-                  <Byline content={contentElements[0]} list separator={showSeparator} font="Primary" />
+                  <Byline content={contentItems[0]} list separator={showSeparator} font="Primary" />
                   <PromoDate
                     className="story-date"
-                    date={contentElements[0].display_date}
+                    date={contentItems[0].display_date}
                   />
                 </div>
               </article>
-              {contentElements.slice(1).map((element) => {
+              {contentItems.slice(1).map((element) => {
                 const {
                   headlines: { basic: headlineText } = {},
                 } = element;
@@ -278,13 +291,22 @@ CardList.icon = 'arc-list';
 
 CardList.propTypes = {
   customFields: PropTypes.shape({
+    title: PropTypes.string,
     listContentConfig: PropTypes.contentConfig('ans-feed').tag(
       {
         group: 'Configure Content',
         label: 'Display Content Info',
       },
     ),
-    title: PropTypes.string,
+    offsetOverride: PropTypes.number.tag({
+      group: 'Configure Content',
+      label: 'Offset Override',
+      defaultValue: 0,
+    }),
+    displayAmount: PropTypes.number.tag({
+      group: 'Configure Content',
+      label: 'Amount of items to display',
+    }),
     lazyLoad: PropTypes.bool.tag({
       name: 'Lazy Load block?',
       defaultValue: false,

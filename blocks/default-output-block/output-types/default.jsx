@@ -185,6 +185,7 @@ const SampleOutputType = ({
           arcSite={arcSite}
           facebookAdmins={facebookAdmins}
           fallbackImage={fallbackImage}
+          outputCanonicalLink
         />
         {fontUrlLink(fontUrl)}
         <CssLinks />

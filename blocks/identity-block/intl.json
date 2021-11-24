@@ -240,5 +240,14 @@
 		"no": "Sign up for an account.",
 		"pt": "Sign up for an account.",
 		"sv": "Sign up for an account."
-	}
+	},
+	"identity-block.account-information": {
+        "de": "Account Information",
+        "es": "Account Information",
+        "fr": "Account Information",
+        "ja": "Account Information",
+        "no": "Account Information",
+        "pt": "Account Information",
+        "sv": "Account Information"
+    }
 }

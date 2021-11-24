@@ -1,25 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import { useIdentity } from '../..';
 
 function AccountManagement({ customFields }) {
   const { redirectURL } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
-  const { arcSite } = useFusionContext();
+  const { arcSite, isAdmin } = useFusionContext();
   const { locale = 'en' } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
-  // if logged in redirect to the url provided in customFields
-  console.log(redirectURL, 'redirect url');
+  const { isInitialized, Identity } = useIdentity();
 
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+      const isLoggedIn = await Identity.isLoggedIn();
+      if (isLoggedIn) {
+        window.location = redirectURL;
+      }
+    };
+    if (Identity && !isAdmin) {
+      checkLoggedInStatus();
+    }
+  }, [Identity, isAdmin, redirectURL]);
+
+  if (!isInitialized) {
+    return null;
+  }
+
+  // if logged in, return account info
   return (
     <h1>
-      {phrases.t('account-management-block.account-information')}
+      {phrases.t('identity-block.account-information')}
     </h1>
   );
 }

@@ -14,17 +14,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Ensure bottom link is visible on mobile phones and on desktop on mouseover with placeholder div ([6fb4a78](https://github.com/WPMedia/fusion-news-theme-blocks/commit/6fb4a783a42d70103a699fe8cecf4fd3a07272d9))
 * Ensure icontype proptypes match and typo fix for button type ([9ee81dd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9ee81dd61821dbd69cdf20a1b7a0b64916e2ea09))
 * Ensure that in the section-menu, the querly button is always white border, white text, and transparent background ([9f63f2c](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9f63f2c33515da5f544550fefa56822dd5bd77f8))
-* Remove newline unnecessary ([0838e61](https://github.com/WPMedia/fusion-news-theme-blocks/commit/0838e613489d94fccbc33933438f42d0fbf4d6cb))
-* Update color of button for input on show ([17e6c0e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/17e6c0ea73813abdb0191029e1c0b3b43a91b832))
-
-
-### Features
-
-* Add custom css for absolutely positioned button ([03af54e](https://github.com/WPMedia/fusion-news-theme-blocks/commit/03af54e9fa11a5ba9648d9e2f965dd56fcb72bec))
-* Add querly search icon reusable button ([c0a8365](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c0a83656f7263cea4052d6606b3b09c32e42514e))
-* Add reusable button to nav sections and remove overriding styles ([9cf2b81](https://github.com/WPMedia/fusion-news-theme-blocks/commit/9cf2b81a071c37731b3e4bdba663b3dd1ee8921b))
-* Update arc search button based on reusable button ([2a78a2f](https://github.com/WPMedia/fusion-news-theme-blocks/commit/2a78a2f5ef898efaf9e6e2723f4d265411814794))
-
 
 # [5.18.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-chain-block@5.17.0...@wpmedia/header-nav-chain-block@5.18.0) (2021-09-22)
 

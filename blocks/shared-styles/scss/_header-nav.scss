@@ -126,6 +126,11 @@ body.nav-open {
       width: 100%;
     }
 
+    button {
+      background: transparent;
+      border: transparent;
+    }
+
     &.dark input {
       border: $border-width solid $border-color-bright;
     }
@@ -150,14 +155,6 @@ body.nav-open {
 
   * {
     display: flex;
-  }
-
-  button {
-    border-radius: 2px;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   > div {

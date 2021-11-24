@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/numbered-list-block@5.16.0...@wpmedia/numbered-list-block@5.17.0) (2021-11-17)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+**Note:** Version bump only for package @wpmedia/numbered-list-block
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/numbered-list-block@5.15.0...@wpmedia/numbered-list-block@5.16.0) (2021-09-15)
 
 

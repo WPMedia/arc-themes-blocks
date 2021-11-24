@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/subscriptions-block",
-  "version": "5.16.0",
+  "version": "5.17.0",
   "description": "Fusion themes subscriptions block.",
   "author": "ARC XP",
   "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
@@ -10,7 +10,9 @@
     "features",
     "sources",
     "chains",
-    "components"
+    "components",
+    "utils",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

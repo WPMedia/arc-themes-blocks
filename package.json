@@ -17,7 +17,7 @@
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook -p 60001",
     "test": "jest",
-    "test:watch": "npm run test -- --watchAll",
+    "test:watch": "npm run test -- --watch -o --coverage",
     "latest-stable-parity": "lerna exec --no-bail --parallel -- npm dist-tag add \\${LERNA_PACKAGE_NAME}@$(node -e \"console.log(require('./lerna.json').version)\") stable",
     "build-storybook": "build-storybook -c .storybook -o news-theme-blocks",
     "test:coverage": "jest --coverage",

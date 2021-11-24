@@ -1,138 +1,138 @@
 {
-  "shared-styles": {
-    "promo-label.gallery-text": "Bildegalleri",
-    "promo-label.video-text": "Video",
-    "byline.by-text": "Av",
-    "byline.and-text": "og",
-    "overline.sponsored-content": "Sponset innhold"
-  },
-  "article-body-block": {
-    "article-body-block.correction": "Korreksjon",
-    "article-body-block.clarification": "Avklaring",
-    "article-body-block.interstitial-link-aria-label": "Åpne relatert historie"
-  },
-  "full-author-bio-block": {
-    "full-author-bio-block.connect-text": "Opprett kontakt",
-    "full-author-bio-block.social-email": "E-post",
-    "full-author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
-    "full-author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
-    "full-author-bio-block.social-instagram": "Følg på Instagram",
-    "full-author-bio-block.social-rss": "RSS-feed",
-    "full-author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
-    "full-author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
-    "full-author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
-    "full-author-bio-block.social-medium": "Oppnå kontakt på Medium",
-    "full-author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
-    "full-author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
-    "full-author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
-    "full-author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp",
-    "full-author-bio-block.social-soundcloud": "Lytt på SoundCloud"
-  },
-  "global-phrases-block": {
-    "global.gallery-expand-button": "Utvid",
-    "global.gallery-page-count-text": "<span class='sr-only'>Bilde<\/span> %{current} av %{total}",
-    "global.gallery-autoplay-button": "Automatisk avspilling",
-    "global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
-    "global.gallery-autoplay-label-start": "Start automatisk lysbildevisning",
-    "global.gallery-autoplay-label-stop": "Stopp automatisk lysbildevisning",
-    "global.social-twitter": "Twitter",
-    "global.social-facebook": "Facebook",
-    "global.social-linkedin": "LinkedIn",
-    "global.social-pinterest": "Pinterest",
-    "global.social-email": "E-post",
-    "global.opens-in-new-window": "(Åpnes i et nytt vindu)"
-  },
-  "header-nav-block": {
-    "header-nav-block.sections-button": "Seksjoner",
-    "header-nav-block.sign-in-button": "Logg inn",
-    "header-nav-block.search-text": "Søk"
-  },
-  "header-nav-chain-block": {
-    "header-nav-chain-block.sections-button": "Seksjoner",
-    "header-nav-chain-block.search-text": "Søk",
-    "header-nav-chain-block.sections-button-aria-label": "Vis %{item} underseksjoner",
-    "header-nav-chain-block.sections-element-aria-label": "Seksjoner-menyen",
-    "header-nav-chain-block.links-element-aria-label": "Topplenker",
-    "header-nav-chain-block.querly-search-aria-label": "Søk"
-  },
-  "results-list-block": {
-    "results-list-block.see-more-button": "Se mer",
-    "results-list-block.see-more-button-aria-label": "Se flere historier om dette emnet"
-  },
-  "search-results-list-block": {
-    "search-results-block.search-button": "Søk",
-    "search-results-block.search-result-number": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
-    "search-results-block.see-more-button": "Se mer",
-    "search-results-block.see-more-button-aria-label": "Se flere historier om dette emnet",
-    "search-results-blocks.search-input-placeholder": "Skriv inn søkeordene dine"
-  },
-  "ads-block": {
-    "ads-block.ad-label": "ANNONSE"
-  },
-  "alert-bar-block": {
-    "alert-bar-block.element-aria-label": "Nyhetsvarsel",
-    "alert-bar-block.close-button": "Avvis nyhetsvarsel"
-  },
-  "footer-block": {
-    "footer-block.facebook-link": "Facebook-side",
-    "footer-block.twitter-link": "Twitter-feed",
-    "footer-block.rss-link": "RSS-feed"
-  },
-  "links-bar-block": {
-    "links-bar-block.element-aria-label": "Flere lenker"
-  },
-  "share-bar-block": {
-    "share-bar-block.share-button-aria-label": "Del gjeldende artikkel via %{socialType}"
-  },
-  "author-bio-block": {
-    "author-bio-block.social-email": "Send en e-post til %{authorName}",
-    "author-bio-block.social-rss": "Abonner på %{authorName}s RSS-feed",
-    "author-bio-block.social-soundcloud": "Lytt til %{authorName} på SoundCloud",
-    "author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
-    "author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
-    "author-bio-block.social-instagram": "Følg på Instagram",
-    "author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
-    "author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
-    "author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
-    "author-bio-block.social-medium": "Oppnå kontakt på Medium",
-    "author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
-    "author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
-    "author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
-    "author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp"
-  },
-  "default-output-block": {
-    "default-output-block.skip-main": "Hopp til hovedinnhold"
-  },
-  "identity-block": {
-    "identity-block.email": "Email address",
-    "identity-block.password": "Password",
-    "identity-block.sign-up": "Sign up",
-    "identity-block.confirm-password": "Confirm password",
-    "identity-block.username": "Username",
-    "identity-block.account": "Account",
-    "identity-block.manage-account": "Manage Your Account",
-    "identity-block.log-out": "Log Out",
-    "identity-block.log-in": "Log In",
-    "identity-block.login-options": "Log in options",
-    "identity-block.confirm-password-error": "Passwords must match",
-    "identity-block.password-requirements": "Please enter a valid password.",
-    "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
-    "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
-    "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
-    "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
-    "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
-    "identity-block.email-requirements": "Please enter a valid email address",
-    "identity-block.sign-up-form-error": "There's been an error creating your account",
-    "identity-block.login-form-error": "There's been an error logging you in",
-    "identity-block.login-links-login": "Already have an account? Log in.",
-    "identity-block.login-links-signup": "Sign up for an account."
-  },
-  "subscriptions-block": {
-    "checkout-block.headline": "Review Subscription Order",
-    "checkout-block.back-to-offer-page": "Back to subscription selection",
-    "checkout-block.order-summary": "Order Summary",
-    "checkout-block.due-today": "Due today",
-    "checkout-block.plus-sales-tax": "Plus applicable sales tax",
-    "checkout-block.empty-cart-message": "Select from one of our offers"
-  }
+    "shared-styles": {
+        "promo-label.gallery-text": "Bildegalleri",
+        "promo-label.video-text": "Video",
+        "byline.by-text": "Av",
+        "byline.and-text": "og",
+        "overline.sponsored-content": "Sponset innhold"
+    },
+    "article-body-block": {
+        "article-body-block.correction": "Korreksjon",
+        "article-body-block.clarification": "Avklaring",
+        "article-body-block.interstitial-link-aria-label": "Åpne relatert historie"
+    },
+    "full-author-bio-block": {
+        "full-author-bio-block.connect-text": "Opprett kontakt",
+        "full-author-bio-block.social-email": "E-post",
+        "full-author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
+        "full-author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
+        "full-author-bio-block.social-instagram": "Følg på Instagram",
+        "full-author-bio-block.social-rss": "RSS-feed",
+        "full-author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
+        "full-author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
+        "full-author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
+        "full-author-bio-block.social-medium": "Oppnå kontakt på Medium",
+        "full-author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
+        "full-author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
+        "full-author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
+        "full-author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp",
+        "full-author-bio-block.social-soundcloud": "Lytt på SoundCloud"
+    },
+    "global-phrases-block": {
+        "global.gallery-expand-button": "Utvid",
+        "global.gallery-page-count-text": "<span class='sr-only'>Bilde<\/span> %{current} av %{total}",
+        "global.gallery-autoplay-button": "Automatisk avspilling",
+        "global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
+        "global.gallery-autoplay-label-start": "Start automatisk lysbildevisning",
+        "global.gallery-autoplay-label-stop": "Stopp automatisk lysbildevisning",
+        "global.social-twitter": "Twitter",
+        "global.social-facebook": "Facebook",
+        "global.social-linkedin": "LinkedIn",
+        "global.social-pinterest": "Pinterest",
+        "global.social-email": "E-post",
+        "global.opens-in-new-window": "(Åpnes i et nytt vindu)"
+    },
+    "header-nav-block": {
+        "header-nav-block.sections-button": "Seksjoner",
+        "header-nav-block.sign-in-button": "Logg inn",
+        "header-nav-block.search-text": "Søk"
+    },
+    "header-nav-chain-block": {
+        "header-nav-chain-block.sections-button": "Seksjoner",
+        "header-nav-chain-block.search-text": "Søk",
+        "header-nav-chain-block.sections-button-aria-label": "Vis %{item} underseksjoner",
+        "header-nav-chain-block.sections-element-aria-label": "Seksjoner-menyen",
+        "header-nav-chain-block.links-element-aria-label": "Topplenker",
+        "header-nav-chain-block.querly-search-aria-label": "Søk"
+    },
+    "results-list-block": {
+        "results-list-block.see-more-button": "Se mer",
+        "results-list-block.see-more-button-aria-label": "Se flere historier om dette emnet"
+    },
+    "search-results-list-block": {
+        "search-results-block.search-button": "Søk",
+        "search-results-block.search-result-number": "%{smart_count} treff for \"%{searchTerm}\" |||| %{smart_count} treff for \"%{searchTerm}\"",
+        "search-results-block.see-more-button": "Se mer",
+        "search-results-block.see-more-button-aria-label": "Se flere historier om dette emnet",
+        "search-results-blocks.search-input-placeholder": "Skriv inn søkeordene dine"
+    },
+    "ads-block": {
+        "ads-block.ad-label": "ANNONSE"
+    },
+    "alert-bar-block": {
+        "alert-bar-block.element-aria-label": "Nyhetsvarsel",
+        "alert-bar-block.close-button": "Avvis nyhetsvarsel"
+    },
+    "footer-block": {
+        "footer-block.facebook-link": "Facebook-side",
+        "footer-block.twitter-link": "Twitter-feed",
+        "footer-block.rss-link": "RSS-feed"
+    },
+    "links-bar-block": {
+        "links-bar-block.element-aria-label": "Flere lenker"
+    },
+    "share-bar-block": {
+        "share-bar-block.share-button-aria-label": "Del gjeldende artikkel via %{socialType}"
+    },
+    "author-bio-block": {
+        "author-bio-block.social-email": "Send en e-post til %{authorName}",
+        "author-bio-block.social-rss": "Abonner på %{authorName}s RSS-feed",
+        "author-bio-block.social-soundcloud": "Lytt til %{authorName} på SoundCloud",
+        "author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
+        "author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
+        "author-bio-block.social-instagram": "Følg på Instagram",
+        "author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
+        "author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
+        "author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
+        "author-bio-block.social-medium": "Oppnå kontakt på Medium",
+        "author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
+        "author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
+        "author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
+        "author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp"
+    },
+    "default-output-block": {
+        "default-output-block.skip-main": "Hopp til hovedinnhold"
+    },
+    "identity-block": {
+        "identity-block.email": "Email address",
+        "identity-block.password": "Password",
+        "identity-block.sign-up": "Sign Up",
+        "identity-block.confirm-password": "Confirm password",
+        "identity-block.username": "Username",
+        "identity-block.account": "Account",
+        "identity-block.manage-account": "Manage Your Account",
+        "identity-block.log-out": "Log Out",
+        "identity-block.log-in": "Log In",
+        "identity-block.login-options": "Log in options",
+        "identity-block.confirm-password-error": "Passwords must match",
+        "identity-block.password-requirements": "Please enter a valid password.",
+        "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+        "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+        "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+        "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+        "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+        "identity-block.email-requirements": "Please enter a valid email address",
+        "identity-block.sign-up-form-error": "There's been an error creating your account",
+        "identity-block.login-form-error": "There's been an error logging you in",
+        "identity-block.login-links-login": "Already have an account? Log in.",
+        "identity-block.login-links-signup": "Sign up for an account."
+    },
+    "subscriptions-block": {
+        "checkout-block.headline": "Review Subscription Order",
+        "checkout-block.back-to-offer-page": "Back to subscription selection",
+        "checkout-block.order-summary": "Order Summary",
+        "checkout-block.due-today": "Due today",
+        "checkout-block.plus-sales-tax": "Plus applicable sales tax",
+        "checkout-block.empty-cart-message": "Select from one of our offers"
+    }
 }

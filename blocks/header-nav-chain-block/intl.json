@@ -2,9 +2,9 @@
 	"header-nav-chain-block.sections-button": {
 		"de": "Rubriken",
 		"en": "Sections",
-		"es": "Sections",
+		"es": "Secciones",
 		"fr": "Sections",
-		"ja": "Sections",
+		"ja": "セクション",
 		"ko": "섹션",
 		"no": "Seksjoner",
 		"pt": "Secções",
@@ -57,10 +57,10 @@
 	"header-nav-chain-block.querly-search-aria-label": {
 		"de": "Suche",
 		"en": "Search",
-		"es": "Search",
-		"fr": "Search",
-		"ja": "Search",
-		"ko": "Search",
+		"es": "Buscar",
+		"fr": "Rechercher",
+		"ja": "検索",
+		"ko": "검색",
 		"no": "Søk",
 		"pt": "Procurar",
 		"sv": "Sök"

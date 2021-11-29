@@ -13,7 +13,7 @@ export const emailField = () => (
   <EditableFormInput
     initialValue="test"
     error=""
-    label="Email"
-    validationMessage="test"
+    label="Email address"
+    validationMessage="Please enter a valid email address"
   />
 );

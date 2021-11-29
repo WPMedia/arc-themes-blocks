@@ -5,15 +5,19 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useIdentity } from '../..';
+import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
 
-export function AccountManagementPresentational({ header }) {
+export function AccountManagementPresentational({ header, children }) {
   return (
-    <h1>{header}</h1>
+    <div>
+      <h1>{header}</h1>
+      {children}
+    </div>
   );
 }
 
 function AccountManagement({ customFields }) {
-  const { redirectURL } = customFields;
+  const { redirectURL, showEmail } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -43,7 +47,13 @@ function AccountManagement({ customFields }) {
 
   // if logged in, return account info
   return (
-    <AccountManagementPresentational header={header} />
+    <AccountManagementPresentational header={header}>
+      {
+        showEmail && (
+          <EmailEditableFieldContainer />
+        )
+      }
+    </AccountManagementPresentational>
   );
 }
 
@@ -56,6 +66,11 @@ AccountManagement.propTypes = {
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
       defaultValue: '/account/login/',
+    }),
+    showEmail: PropTypes.bool.tag({
+      // this is to to show or hide the editable input thing and non-editable text
+      name: 'Enable Email Address Editing',
+      defaultValue: false,
     }),
   }),
 };

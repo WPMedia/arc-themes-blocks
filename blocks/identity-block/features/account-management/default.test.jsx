@@ -65,4 +65,12 @@ describe('Account management', () => {
       expect(wrapper.html()).toBe(null);
     });
   });
+  it('shows email input editable field if showing email', () => {
+    const wrapper = mount(<AccountManagement customFields={{ showEmail: true }} />);
+    expect(wrapper.find('section').length).toBe(1);
+  });
+  it('hides email input editable field if showing email', () => {
+    const wrapper = mount(<AccountManagement customFields={{ showEmail: false }} />);
+    expect(wrapper.find('section').length).toBe(0);
+  });
 });

@@ -20,7 +20,7 @@ function AccountManagement({ customFields }) {
   useEffect(() => {
     const checkLoggedInStatus = async () => {
       const isLoggedIn = await Identity.isLoggedIn();
-      if (isLoggedIn) {
+      if (!isLoggedIn) {
         window.location = redirectURL;
       }
     };
@@ -43,7 +43,7 @@ function AccountManagement({ customFields }) {
 
 AccountManagement.label = 'Account Management - Profile';
 
-AccountManagement.icon = 'monitor-use';
+AccountManagement.icon = 'monitor-user';
 
 AccountManagement.propTypes = {
   customFields: PropTypes.shape({

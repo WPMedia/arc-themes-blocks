@@ -6,13 +6,19 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useIdentity } from '../..';
 
+export function AccountManagementPresentational({ header }) {
+  return (
+    <h1>{header}</h1>
+  );
+}
+
 function AccountManagement({ customFields }) {
   const { redirectURL } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
   const { arcSite, isAdmin } = useFusionContext();
-  const { locale = 'en' } = getProperties(arcSite);
+  const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   const { isInitialized, Identity } = useIdentity();
@@ -33,11 +39,11 @@ function AccountManagement({ customFields }) {
     return null;
   }
 
+  const header = phrases.t('identity-block.account-information');
+
   // if logged in, return account info
   return (
-    <h1>
-      {phrases.t('identity-block.account-information')}
-    </h1>
+    <AccountManagementPresentational header={header} />
   );
 }
 

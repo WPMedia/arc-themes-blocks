@@ -12,14 +12,13 @@ export default {
 
 export const emailField = () => (
   <EditableFormInput
-    initialValue="test"
-    error=""
+    initialValue="jennylopez@email.com"
     label="Email address"
   >
     <FormInputField
       type={FIELD_TYPES.EMAIL}
       label="Email address"
-      defaultValue="test"
+      defaultValue="jennylopez@email.com"
       showDefaultError={false}
       required
       autoComplete="email"

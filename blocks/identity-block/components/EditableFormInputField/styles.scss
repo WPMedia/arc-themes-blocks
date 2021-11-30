@@ -15,3 +15,33 @@
     padding: 0 5px 0 0;
   }
 }
+
+.editable-form-input--label-text {
+  font-size: calculateRem(16px);
+  line-height: 1.5;
+  margin: map-get($spacers, 'xxs') 0;
+  font-weight: bold;
+  flex: 1;
+}
+
+.editable-form-input--value-text {
+  font-size: calculateRem(16px);
+  line-height: 1.5;
+}
+
+.editable-form-input--edit-button-link {
+  background: none;
+  border: none;
+  padding: 0;
+
+  font-size: 1 rem;
+  line-height: 1.5;
+  text-decoration-line: underline;
+
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.editable-form-input--label-container {
+  display: flex;
+}

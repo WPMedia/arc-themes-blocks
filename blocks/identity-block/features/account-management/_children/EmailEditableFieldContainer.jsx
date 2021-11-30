@@ -5,7 +5,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import EditableFieldPresentational from '../../../components/EditableFormInputField';
 import FormInputField, { FIELD_TYPES } from '../../../components/FormInputField';
 
-function EmailEditableFieldContainer({ error, email }) {
+function EmailEditableFieldContainer({ email }) {
   const { arcSite } = useFusionContext();
   const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
@@ -16,7 +16,6 @@ function EmailEditableFieldContainer({ error, email }) {
   return (
     <EditableFieldPresentational
       initialValue={email}
-      error={error}
       label={formEmailLabel}
     >
       <FormInputField

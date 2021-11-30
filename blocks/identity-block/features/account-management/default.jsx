@@ -18,7 +18,6 @@ export function AccountManagementPresentational({ header, children }) {
 
 function AccountManagement({ customFields }) {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
 
   const { redirectURL, showEmail } = customFields;
 
@@ -50,11 +49,13 @@ function AccountManagement({ customFields }) {
 
         if (loggedInEmail) {
           setEmail(loggedInEmail);
-        } else {
-          setError('No email found');
         }
-      })
-      .catch((e) => setError(e.message));
+        // todo: in future ticket, handle errors
+        // else {
+        //   setError('No email found');
+        // }
+      });
+      // .catch((e) => setError(e.message));
 
     if (!isAdmin) {
       Identity.isLoggedIn().then((isLoggedIn) => {
@@ -76,7 +77,7 @@ function AccountManagement({ customFields }) {
     <AccountManagementPresentational header={header}>
       {
         showEmail && (
-          <EmailEditableFieldContainer email={email} error={error} />
+          <EmailEditableFieldContainer email={email} />
         )
       }
     </AccountManagementPresentational>

@@ -5,7 +5,7 @@ export default (site) => ({
 	facebookPage: true,
 	twitterUsername: true,
 	rssUrl: true,
-	copyrightText: true,
+	copyrightText: 'The Prophet © 1994 - 2019',
 	lightBackgroundLogo: 'https://design.arcxp.com/arc-glyph-light.svg',
 	lightBackgroundLogoAlt: 'light logo alt text',
 	primaryLogo: 'https://www.klartale.no/img/klartale/klartale-logo-new.svg',

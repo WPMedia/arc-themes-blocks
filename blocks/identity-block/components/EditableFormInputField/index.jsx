@@ -1,6 +1,5 @@
 import { Button, BUTTON_STYLES, BUTTON_TYPES } from '@wpmedia/shared-styles';
 import React, { useState } from 'react';
-import FormInputField, { FIELD_TYPES } from '../FormInputField';
 
 import './styles.scss';
 
@@ -8,7 +7,7 @@ function EditableFieldPresentational({
   initialValue,
   error,
   label,
-  validationMessage,
+  children,
 }) {
   const [isEditable, setIsEditable] = useState(false);
   return (
@@ -17,16 +16,7 @@ function EditableFieldPresentational({
         {
         isEditable ? (
           <>
-            <FormInputField
-              type={FIELD_TYPES.EMAIL}
-              label={label}
-              defaultValue={initialValue}
-              showDefaultError={false}
-              required
-              autoComplete="email"
-              name="email"
-              validationErrorMessage={validationMessage}
-            />
+            {children}
             <div className="editable-form-input--button-container">
               <div>
                 <Button
@@ -48,21 +38,25 @@ function EditableFieldPresentational({
             </div>
           </>
         ) : (
-          <p>
-            {initialValue}
-          </p>
+          <>
+            <p>{label}</p>
+            <p>
+              {initialValue}
+            </p>
+          </>
         )
       }
         {error && (<p>{error}</p>)}
         {
-        !isEditable && (
-        <button
-          type="button"
-          onClick={() => setIsEditable(true)}
-        >
-          Edit
-        </button>
-        )
+        !isEditable
+          && (
+            <button
+              type="button"
+              onClick={() => setIsEditable(true)}
+            >
+              Edit
+            </button>
+          )
         }
       </div>
     </section>

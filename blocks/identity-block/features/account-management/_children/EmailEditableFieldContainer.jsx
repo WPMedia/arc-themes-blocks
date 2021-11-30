@@ -4,6 +4,7 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { useIdentity } from '../../..';
 import EditableFieldPresentational from '../../../components/EditableFormInputField';
+import FormInputField, { FIELD_TYPES } from '../../../components/FormInputField';
 
 function EmailEditableFieldContainer() {
   const [email, setEmail] = useState('');
@@ -47,7 +48,18 @@ function EmailEditableFieldContainer() {
       error={error}
       label={formEmailLabel}
       emailRequirements={emailRequirements}
-    />
+    >
+      <FormInputField
+        type={FIELD_TYPES.EMAIL}
+        label={formEmailLabel}
+        defaultValue={email}
+        showDefaultError={false}
+        required
+        autoComplete="email"
+        name="email"
+        validationErrorMessage={emailRequirements}
+      />
+    </EditableFieldPresentational>
   );
 }
 

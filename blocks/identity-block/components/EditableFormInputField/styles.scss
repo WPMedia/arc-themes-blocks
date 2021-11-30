@@ -1,17 +1,17 @@
 .editable-form-input {
-    border: 1px solid #DADADA;
-    border-radius: 4px;
+  border: 1px solid #dadada;
+  border-radius: 4px;
 }
 
 .editable-form-input--internal {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .editable-form-input--button-container {
-    display: flex;
-    padding: 16px 0 0 0;
+  display: flex;
+  padding: 16px 0 0;
 
-    div:first-child {
-        padding: 0 5px 0 0;
-    }
+  div:first-child {
+    padding: 0 5px 0 0;
+  }
 }

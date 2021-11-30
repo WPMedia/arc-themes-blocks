@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 import { useFusionContext } from 'fusion:context';
@@ -17,6 +17,9 @@ export function AccountManagementPresentational({ header, children }) {
 }
 
 function AccountManagement({ customFields }) {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
   const { redirectURL, showEmail } = customFields;
 
   // get properties from context for using translations in intl.json
@@ -39,6 +42,29 @@ function AccountManagement({ customFields }) {
     }
   }, [Identity, isAdmin, redirectURL]);
 
+  useEffect(() => {
+    const getProfile = () => Identity
+      .getUserProfile()
+      .then((profileObject) => {
+        const { email: loggedInEmail } = profileObject;
+
+        if (loggedInEmail) {
+          setEmail(loggedInEmail);
+        } else {
+          setError('No email found');
+        }
+      })
+      .catch((e) => setError(e.message));
+
+    if (!isAdmin) {
+      Identity.isLoggedIn().then((isLoggedIn) => {
+        if (isLoggedIn) {
+          getProfile();
+        }
+      });
+    }
+  }, [setEmail, Identity, isAdmin]);
+
   if (!isInitialized) {
     return null;
   }
@@ -50,7 +76,7 @@ function AccountManagement({ customFields }) {
     <AccountManagementPresentational header={header}>
       {
         showEmail && (
-          <EmailEditableFieldContainer />
+          <EmailEditableFieldContainer email={email} error={error} />
         )
       }
     </AccountManagementPresentational>

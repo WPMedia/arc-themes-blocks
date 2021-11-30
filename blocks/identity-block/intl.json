@@ -242,13 +242,25 @@
 		"sv": "Sign up for an account."
 	},
 	"identity-block.account-information": {
-        "de": "Account Information",
-        "es": "Account Information",
-        "fr": "Account Information",
-        "ja": "Account Information",
-        "no": "Account Information",
-        "pt": "Account Information",
-        "sv": "Account Information",
-		"en": "Account Information"
-    }
+		"de": "Account Information",
+		"en": "Account Information",
+		"es": "Account Information",
+		"fr": "Account Information",
+		"ja": "Account Information",
+		"ko": "Account Information",
+		"no": "Account Information",
+		"pt": "Account Information",
+		"sv": "Account Information"
+	},
+	"identity-block.edit": {
+		"de": "Edit",
+		"en": "Edit",
+		"es": "Edit",
+		"fr": "Edit",
+		"ja": "Edit",
+		"ko": "Edit",
+		"no": "Edit",
+		"pt": "Edit",
+		"sv": "Edit"
+	}
 }

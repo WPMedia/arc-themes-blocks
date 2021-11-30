@@ -12,11 +12,13 @@ function EmailEditableFieldContainer({ email }) {
 
   const formEmailLabel = phrases.t('identity-block.email');
   const emailRequirements = phrases.t('identity-block.email-requirements');
+  const editText = phrases.t('identity-block.edit');
 
   return (
     <EditableFieldPresentational
       initialValue={email}
       label={formEmailLabel}
+      editText={editText}
     >
       <FormInputField
         type={FIELD_TYPES.EMAIL}

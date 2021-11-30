@@ -19,6 +19,7 @@ function EditableFieldPresentational({
   initialValue,
   label,
   children,
+  editText,
 }) {
   const { arcSite } = useFusionContext();
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
@@ -67,7 +68,7 @@ function EditableFieldPresentational({
                       onClick={() => setIsEditable(true)}
                       color={primaryColor}
                     >
-                      Edit
+                      {editText}
                     </ButtonLink>
                   )
                 }

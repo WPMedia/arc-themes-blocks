@@ -18,7 +18,6 @@ function EmailEditableFieldContainer({ error, email }) {
       initialValue={email}
       error={error}
       label={formEmailLabel}
-      emailRequirements={emailRequirements}
     >
       <FormInputField
         type={FIELD_TYPES.EMAIL}

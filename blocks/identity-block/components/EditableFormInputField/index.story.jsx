@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EditableFormInput from '.';
+import FormInputField, { FIELD_TYPES } from '../FormInputField';
 
 export default {
   title: 'Blocks/Identity/Components/EditableFormInput',
@@ -14,6 +15,16 @@ export const emailField = () => (
     initialValue="test"
     error=""
     label="Email address"
-    validationMessage="Please enter a valid email address"
-  />
+  >
+    <FormInputField
+      type={FIELD_TYPES.EMAIL}
+      label="Email address"
+      defaultValue="test"
+      showDefaultError={false}
+      required
+      autoComplete="email"
+      name="email"
+      validationErrorMessage="Please enter a valid email address"
+    />
+  </EditableFormInput>
 );

@@ -50,4 +50,42 @@ describe('Editable form input field', () => {
     expect(wrapper.find('.editable-form-input--value-text').length).toBe(0);
     expect(wrapper.find('.editable-form-input--value-text').length).toBe(0);
   });
+
+  it('does not submit if the input is invalid', () => {
+    const callback = jest.fn(() => Promise.resolve());
+
+    const wrapper = mount(
+      <ConditionalFormContainer
+        onSubmit={callback}
+        setIsEditable={() => {}}
+        showForm
+      >
+        <input name="inputField" type="email" defaultValue="invalid" />
+      </ConditionalFormContainer>,
+    );
+
+    wrapper.find('form').simulate('submit');
+
+    expect(callback).not.toHaveBeenCalled();
+  });
+
+  it('does submit if the input is valid', () => {
+    const callback = jest.fn(() => Promise.resolve());
+
+    const wrapper = mount(
+      <ConditionalFormContainer
+        onSubmit={callback}
+        showForm
+        setIsEditable={() => {}}
+      >
+        <input name="inputField" type="email" defaultValue="valid@email.com" />
+      </ConditionalFormContainer>,
+    );
+
+    wrapper.find('form').simulate('submit');
+
+    expect(callback).toHaveBeenCalledWith({
+      inputField: 'valid@email.com',
+    });
+  });
 });

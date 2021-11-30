@@ -17,7 +17,7 @@ const ButtonLink = styled.button`
 
 // handles submit and display of form
 // will toggle back to not editable upon successful submit
-function ConditionalFormContainer({
+export function ConditionalFormContainer({
   showForm, children, onSubmit, setIsEditable,
 }) {
   const formRef = useRef();

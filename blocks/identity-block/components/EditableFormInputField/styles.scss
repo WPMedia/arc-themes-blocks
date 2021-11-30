@@ -33,11 +33,8 @@
   background: none;
   border: none;
   padding: 0;
-
-  font-size: 1 rem;
+  font-size: calculateRem(16px);
   line-height: 1.5;
-  text-decoration-line: underline;
-
   text-decoration: underline;
   cursor: pointer;
 }

@@ -29,12 +29,6 @@ function AccountManagement({ customFields }) {
 
   const { isInitialized, Identity } = useIdentity();
 
-  const handleEmailUpdate = ({ email: newEmail }) => Identity
-    .updateUserProfile({ email: newEmail })
-    .then((profileObject) => {
-      setEmail(profileObject.email);
-    });
-
   useEffect(() => {
     const checkLoggedInStatus = async () => {
       const isLoggedIn = await Identity.isLoggedIn();
@@ -83,7 +77,10 @@ function AccountManagement({ customFields }) {
     <AccountManagementPresentational header={header}>
       {
         showEmail && (
-          <EmailEditableFieldContainer email={email} onSubmit={handleEmailUpdate} />
+          <EmailEditableFieldContainer
+            email={email}
+            setEmail={setEmail}
+          />
         )
       }
     </AccountManagementPresentational>

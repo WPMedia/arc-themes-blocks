@@ -85,14 +85,24 @@ function PasswordEditableFieldContainer({ email, hasPassword }) {
     },
   });
 
-  const handlePasswordUpdate = ({ 'current-password': oldPassword, password: newPassword }) => Identity
-    .updatePassword(oldPassword, newPassword)
-    .then(() => {
-      setError(false);
-    }).catch(() => {
-      setError(phrases.t('identity-block.update-password-error'));
-      throw new Error();
-    });
+  const handlePasswordUpdate = ({ 'current-password': oldPassword, password: newPassword }) => {
+    if (hasPassword) {
+      return Identity
+        .updatePassword(oldPassword, newPassword)
+        .then(() => {
+          setError(false);
+        }).catch(() => {
+          setError(phrases.t('identity-block.update-password-error'));
+          throw new Error();
+        });
+    }
+    return Identity.signUp(
+      { userName: email, credentials: newPassword },
+      { email },
+    )
+      .then(() => setError(false))
+      .catch(() => setError(phrases.t('identity-block.sign-up-form-error')));
+  };
 
   const handleCancelEdit = () => {
     setError(false);

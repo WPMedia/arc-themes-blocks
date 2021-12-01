@@ -108,7 +108,7 @@ function PasswordEditableFieldContainer({ email, hasPassword }) {
     setError(false);
   };
 
-  const passwordValue = hasPassword ? phrases.t('identity-block.password') : phrases.t('identity-block.add-password');
+  const passwordValue = hasPassword ? phrases.t('identity-block.password-placeholder') : phrases.t('identity-block.add-password');
 
   return (
     <EditableFieldPresentational

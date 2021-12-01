@@ -1,19 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { ErrorIcon } from '@wpmedia/engine-theme-sdk';
 import {
   Button, BUTTON_STYLES, BUTTON_TYPES, PrimaryFont,
 } from '@wpmedia/shared-styles';
-import getThemeStyle from 'fusion:themes';
-import { useFusionContext } from 'fusion:context';
-import styled from 'styled-components';
+
 import './styles.scss';
-
-const ButtonLink = styled.button`
-  color: ${(props) => props.color};
-
-  &:hover {
-    color: ${(props) => props.color};
-  }
-`;
 
 // handles submit and display of form
 // will toggle back to not editable upon successful submit
@@ -39,16 +30,11 @@ export function ConditionalFormContainer({
   };
 
   return (
-    <>
-      {
-        showForm ? (
-          <form onSubmit={handleSubmit} ref={formRef}>
-            {children}
-          </form>
-        )
-          : (<>{ children }</>)
-      }
-    </>
+    showForm ? (
+      <form onSubmit={handleSubmit} ref={formRef}>
+        {children}
+      </form>
+    ) : <>{children}</>
   );
 }
 
@@ -58,10 +44,12 @@ function EditableFieldPresentational({
   children,
   editText,
   onSubmit,
+  cancelEdit,
+  formErrorText,
+  cancelText,
+  saveText,
 }) {
-  const { arcSite } = useFusionContext();
-  const primaryColor = getThemeStyle(arcSite)['primary-color'];
-  const [isEditable, setIsEditable] = useState(false);
+  const [isEditable, setIsEditable] = useState(!!formErrorText);
   return (
     <PrimaryFont as="section" className="editable-form-input">
       <ConditionalFormContainer
@@ -74,51 +62,57 @@ function EditableFieldPresentational({
             isEditable ? (
               <>
                 {children}
+                {formErrorText ? (
+                  <section className="xpmedia-form-error" role="alert">
+                    <PrimaryFont as="p">
+                      <ErrorIcon />
+                      {formErrorText}
+                    </PrimaryFont>
+                  </section>
+                ) : null}
                 <div className="editable-form-input--button-container">
-                  <div>
-                    <Button
-                      buttonStyle={BUTTON_STYLES.SECONDARY}
-                      buttonTypes={BUTTON_TYPES.LABEL_ONLY}
-                      onClick={() => setIsEditable(false)}
-                      text="Cancel"
-                      type="button"
-                    />
-                  </div>
-                  <div>
-                    <Button
-                      buttonStyle={BUTTON_STYLES.PRIMARY}
-                      buttonTypes={BUTTON_TYPES.LABEL_ONLY}
-                      text="Save"
-                      type="submit"
-                    />
-                  </div>
+                  <Button
+                    buttonStyle={BUTTON_STYLES.SECONDARY}
+                    buttonTypes={BUTTON_TYPES.LABEL_ONLY}
+                    onClick={() => {
+                      if (cancelEdit) {
+                        cancelEdit();
+                      }
+                      setIsEditable(false);
+                    }}
+                    text={cancelText}
+                    type="button"
+                  />
+                  <Button
+                    buttonStyle={BUTTON_STYLES.PRIMARY}
+                    buttonTypes={BUTTON_TYPES.LABEL_ONLY}
+                    text={saveText}
+                    type="submit"
+                  />
                 </div>
               </>
             ) : (
               <>
                 <div className="editable-form-input--label-container">
-                  <p
-                    className="editable-form-input--label-text"
-                  >
+                  <p className="editable-form-input--label-text">
                     {label}
                   </p>
                   {
                     !isEditable
                       && (
-                        <ButtonLink
+                        <PrimaryFont
+                          as="button"
                           className="editable-form-input--edit-button-link"
                           type="button"
                           onClick={() => setIsEditable(true)}
-                          color={primaryColor}
+                          fontColor="primary-color"
                         >
                           {editText}
-                        </ButtonLink>
+                        </PrimaryFont>
                       )
                     }
                 </div>
-                <p
-                  className="editable-form-input--value-text"
-                >
+                <p className="editable-form-input--value-text">
                   {initialValue}
                 </p>
               </>

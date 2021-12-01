@@ -15,6 +15,8 @@ export const emailField = () => (
     initialValue="jennylopez@email.com"
     label="Email address"
     editText="Edit"
+    saveText="Save"
+    cancelText="Cancel"
   >
     <FormInputField
       type={FIELD_TYPES.EMAIL}

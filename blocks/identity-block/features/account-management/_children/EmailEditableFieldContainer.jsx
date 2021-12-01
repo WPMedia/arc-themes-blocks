@@ -13,6 +13,8 @@ function EmailEditableFieldContainer({ email, onSubmit }) {
   const formEmailLabel = phrases.t('identity-block.email');
   const emailRequirements = phrases.t('identity-block.email-requirements');
   const editText = phrases.t('identity-block.edit');
+  const saveText = phrases.t('identity-block.save');
+  const cancelText = phrases.t('identity-block.cancel');
 
   return (
     <EditableFieldPresentational
@@ -20,6 +22,8 @@ function EmailEditableFieldContainer({ email, onSubmit }) {
       label={formEmailLabel}
       editText={editText}
       onSubmit={onSubmit}
+      saveText={saveText}
+      cancelText={cancelText}
     >
       <FormInputField
         type={FIELD_TYPES.EMAIL}

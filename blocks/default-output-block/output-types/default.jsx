@@ -99,7 +99,7 @@ const SampleOutputType = ({
   MetaTags,
   metaValue,
 }) => {
-  const { globalContent, arcSite } = useFusionContext();
+  const { globalContent, arcSite, requestUri } = useFusionContext();
   const {
     api,
     websiteName,
@@ -174,18 +174,19 @@ const SampleOutputType = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <MetaData
-          MetaTag={MetaTag}
-          MetaTags={MetaTags}
-          metaValue={metaValue}
-          globalContent={globalContent}
-          websiteName={websiteName}
-          websiteDomain={websiteDomain}
-          twitterUsername={twitterUsername}
-          resizerURL={resizerURL}
           arcSite={arcSite}
           facebookAdmins={facebookAdmins}
           fallbackImage={fallbackImage}
+          globalContent={globalContent}
           outputCanonicalLink
+          MetaTag={MetaTag}
+          MetaTags={MetaTags}
+          metaValue={metaValue}
+          requestUri={requestUri}
+          resizerURL={resizerURL}
+          twitterUsername={twitterUsername}
+          websiteName={websiteName}
+          websiteDomain={websiteDomain}
         />
         {fontUrlLink(fontUrl)}
         <CssLinks />

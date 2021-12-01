@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.15.0 (2021-11-17)
+
+
+### Bug Fixes
+
+* Allow themebuilder specified urls for images ([c3019ad](https://github.com/WPMedia/fusion-news-theme-blocks/commit/c3019adbb652061ca752bc1bdeabe7154009f678))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+
+
+
 # [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
 
 **Note:** Version bump only for package @wpmedia/resizer-image-content-source-block

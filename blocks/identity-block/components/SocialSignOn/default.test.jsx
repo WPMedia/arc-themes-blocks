@@ -15,6 +15,63 @@ describe('Subscriptions Social Login Component', () => {
     );
     expect(uninitializedWrapper.html()).toBe(null);
   });
+
+  it('renders nothing if config settings are false', () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => false,
+      Identity: {
+        configOptions: {
+          googleClientId: false,
+          facebookAppId: false,
+        },
+      },
+    }));
+
+    const wrapper = shallow(
+      <SocialSignOn onError={() => null} redirectURL="#" />,
+    );
+    expect(wrapper.html()).toBe(null);
+  });
+
+  it('renders only Google button', () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => false,
+      Identity: {
+        configOptions: {
+          googleClientId: true,
+          facebookAppId: false,
+        },
+      },
+    }));
+
+    const wrapper = shallow(
+      <SocialSignOn onError={() => null} redirectURL="#" />,
+    );
+    expect(wrapper.find('#google-sign-in-button')).toHaveLength(1);
+    expect(wrapper.find('.fb-login-button')).toHaveLength(0);
+  });
+
+  it('renders only Facebook button', () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => false,
+      Identity: {
+        configOptions: {
+          googleClientId: false,
+          facebookAppId: true,
+        },
+      },
+    }));
+
+    const wrapper = shallow(
+      <SocialSignOn onError={() => null} redirectURL="#" />,
+    );
+    expect(wrapper.find('#google-sign-in-button')).toHaveLength(0);
+    expect(wrapper.find('.fb-login-button')).toHaveLength(1);
+  });
+
   it('renders', () => {
     useIdentity.mockImplementation(() => ({
       isInitialized: true,
@@ -43,6 +100,7 @@ describe('Subscriptions Social Login Component', () => {
     );
     expect(wrapper.html()).not.toBe(null);
   });
+
   it('renders placeholders for Google and Facebook sign-in buttons', () => {
     let wrapper;
     useIdentity.mockImplementation(() => ({

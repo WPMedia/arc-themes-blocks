@@ -33,7 +33,7 @@ const NumberedList = (props) => {
       title = '',
       showHeadline = true,
       showImage = true,
-    } = {},
+    },
     placeholderResizedImageOptions,
     targetFallbackImage,
     imageProps,
@@ -93,7 +93,7 @@ const NumberedList = (props) => {
         <Wrapper>
           {(contentElements.length) ? contentElements.map((element, i) => {
             const {
-              headlines: { basic: headlineText } = {},
+              headlines: { basic: headlineText = '' } = {},
               websites,
             } = element;
             const imageURL = extractImageFromStory(element);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import useIdentity from '../../components/Identity';
 import AccountManagement, { AccountManagementPresentational } from './default';
@@ -65,12 +65,24 @@ describe('Account management', () => {
       expect(wrapper.html()).toBe(null);
     });
   });
+
   it('shows email input editable field if showing email', () => {
-    const wrapper = mount(<AccountManagement customFields={{ showEmail: true }} />);
-    expect(wrapper.find('section').length).toBe(1);
+    const wrapper = shallow(<AccountManagement customFields={{ showEmail: true }} />);
+    expect(wrapper.find('EmailEditableFieldContainer').length).toBe(1);
   });
+
   it('hides email input editable field if showing email', () => {
-    const wrapper = mount(<AccountManagement customFields={{ showEmail: false }} />);
-    expect(wrapper.find('section').length).toBe(0);
+    const wrapper = shallow(<AccountManagement customFields={{ showEmail: false }} />);
+    expect(wrapper.find('EmailEditableFieldContainer').length).toBe(0);
+  });
+
+  it('shows password input editable field if showing password', () => {
+    const wrapper = shallow(<AccountManagement customFields={{ showPassword: true }} />);
+    expect(wrapper.find('PasswordEditableFieldContainer').length).toBe(1);
+  });
+
+  it('hides password input editable field if showing password', () => {
+    const wrapper = shallow(<AccountManagement customFields={{ showPassword: false }} />);
+    expect(wrapper.find('PasswordEditableFieldContainer').length).toBe(0);
   });
 });

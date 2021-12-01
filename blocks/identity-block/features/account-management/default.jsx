@@ -7,6 +7,7 @@ import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import { useIdentity } from '../..';
 import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
+import PasswordEditableFieldContainer from './_children/PasswordEditableFieldContainer';
 
 import './styles.scss';
 
@@ -21,8 +22,9 @@ export function AccountManagementPresentational({ header, children }) {
 
 function AccountManagement({ customFields }) {
   const [email, setEmail] = useState('');
+  const [hasPassword, setHasPassword] = useState();
 
-  const { redirectURL, showEmail } = customFields;
+  const { redirectURL, showEmail, showPassword } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -48,11 +50,15 @@ function AccountManagement({ customFields }) {
     const getProfile = () => Identity
       .getUserProfile()
       .then((profileObject) => {
-        const { email: loggedInEmail } = profileObject;
+        const { email: loggedInEmail, identities } = profileObject;
 
         if (loggedInEmail) {
           setEmail(loggedInEmail);
         }
+
+        const passwordProfile = identities.filter(({ type }) => type === 'Password' || type === 'Identity');
+
+        setHasPassword(passwordProfile?.length > 0);
         // todo: in future ticket, handle errors
         // else {
         //   setError('No email found');
@@ -86,6 +92,12 @@ function AccountManagement({ customFields }) {
           />
         )
       }
+      {showPassword ? (
+        <PasswordEditableFieldContainer
+          email={email}
+          hasPassword={hasPassword}
+        />
+      ) : null}
     </AccountManagementPresentational>
   );
 }
@@ -103,6 +115,11 @@ AccountManagement.propTypes = {
     showEmail: PropTypes.bool.tag({
       // this is to to show or hide the editable input thing and non-editable text
       name: 'Enable Email Address Editing',
+      defaultValue: false,
+    }),
+    showPassword: PropTypes.bool.tag({
+      // this is to to show or hide the editable input thing and non-editable text
+      name: 'Enable Password Editing',
       defaultValue: false,
     }),
   }),

@@ -9,11 +9,9 @@ import FormPasswordConfirm from '../../../components/FormPasswordConfirm';
 import passwordValidationMessage from '../../../utils/password-validation-message';
 import validatePasswordPattern from '../../../utils/validate-password-pattern';
 
-function PasswordEditableFieldContainer({ email, hasPassword }) {
+function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) {
   const [error, setError] = useState(false);
-  const [passwordRequirements, setPasswordRequirements] = useState({
-    status: 'initial',
-  });
+  const [passwordRequirements, setPasswordRequirements] = useState({});
 
   const { arcSite } = useFusionContext();
   const { locale } = getProperties(arcSite);
@@ -22,33 +20,16 @@ function PasswordEditableFieldContainer({ email, hasPassword }) {
   const { Identity } = useIdentity();
 
   useEffect(() => {
-    const getConfig = async () => {
-      await Identity.getConfig()
-        .then((response) => {
-          const {
-            pwLowercase,
-            pwMinLength,
-            pwPwNumbers,
-            pwSpecialCharacters,
-            pwUppercase,
-          } = response;
-
-          setPasswordRequirements({
-            pwLowercase,
-            pwMinLength,
-            pwPwNumbers,
-            pwSpecialCharacters,
-            pwUppercase,
-            status: 'success',
-          });
-        })
-        .catch(() => setPasswordRequirements({ status: 'error' }));
-    };
+    const getConfigInfo = () => Identity.getConfig()
+      .then((response) => {
+        setPasswordRequirements(response);
+      })
+      .catch(() => setPasswordRequirements({ status: 'error' }));
 
     if (Identity) {
-      getConfig();
+      getConfigInfo();
     }
-  }, [Identity]);
+  }, [setPasswordRequirements, Identity]);
 
   const {
     pwLowercase = 0,
@@ -100,7 +81,10 @@ function PasswordEditableFieldContainer({ email, hasPassword }) {
       { userName: email, credentials: newPassword },
       { email },
     )
-      .then(() => setError(false))
+      .then(() => {
+        setHasPassword(true);
+        setError(false);
+      })
       .catch(() => setError(phrases.t('identity-block.sign-up-form-error')));
   };
 
@@ -118,6 +102,8 @@ function PasswordEditableFieldContainer({ email, hasPassword }) {
       onSubmit={handlePasswordUpdate}
       formErrorText={error}
       cancelEdit={handleCancelEdit}
+      saveText={phrases.t('identity-block.save')}
+      cancelText={phrases.t('identity-block.cancel')}
     >
       {hasPassword ? (
         <>

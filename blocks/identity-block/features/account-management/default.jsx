@@ -21,6 +21,8 @@ export function AccountManagementPresentational({ header, children }) {
 }
 
 function AccountManagement({ customFields }) {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [hasPassword, setHasPassword] = useState();
 
@@ -35,12 +37,13 @@ function AccountManagement({ customFields }) {
   const { isInitialized, Identity } = useIdentity();
 
   useEffect(() => {
-    const checkLoggedInStatus = async () => {
-      const isLoggedIn = await Identity.isLoggedIn();
+    const checkLoggedInStatus = () => Identity.isLoggedIn().then((isLoggedIn) => {
       if (!isLoggedIn) {
         window.location = redirectURL;
+        return;
       }
-    };
+      setLoggedIn(true);
+    });
     if (Identity && !isAdmin) {
       checkLoggedInStatus();
     }
@@ -63,19 +66,17 @@ function AccountManagement({ customFields }) {
         // else {
         //   setError('No email found');
         // }
+
+        setIsLoading(false);
       });
       // .catch((e) => setError(e.message));
 
-    if (!isAdmin) {
-      Identity.isLoggedIn().then((isLoggedIn) => {
-        if (isLoggedIn) {
-          getProfile();
-        }
-      });
+    if (!isAdmin && loggedIn) {
+      getProfile();
     }
-  }, [setEmail, Identity, isAdmin]);
+  }, [loggedIn, setEmail, Identity, isAdmin]);
 
-  if (!isInitialized) {
+  if (!isInitialized || isLoading) {
     return null;
   }
 
@@ -96,6 +97,7 @@ function AccountManagement({ customFields }) {
         <PasswordEditableFieldContainer
           email={email}
           hasPassword={hasPassword}
+          setHasPassword={setHasPassword}
         />
       ) : null}
     </AccountManagementPresentational>

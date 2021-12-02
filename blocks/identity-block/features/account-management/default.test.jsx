@@ -36,7 +36,7 @@ describe('Account management', () => {
 
   it('renders header text', () => {
     const wrapper = mount(<AccountManagementPresentational header="header" />);
-    expect(wrapper.find('h1').text()).toEqual('header');
+    expect(wrapper.find('h2').text()).toEqual('header');
   });
 
   it('should render account management if logged in and initialized', async () => {
@@ -44,7 +44,7 @@ describe('Account management', () => {
       const wrapper = await mount(
         <AccountManagement customFields={{}} />,
       );
-      expect(wrapper.find('h1').text()).toEqual('Account Information');
+      expect(wrapper.find('h2').text()).toEqual('Account Information');
     });
   });
 

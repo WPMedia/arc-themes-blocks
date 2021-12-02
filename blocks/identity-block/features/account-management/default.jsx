@@ -4,13 +4,16 @@ import PropTypes from '@arc-fusion/prop-types';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import { useIdentity } from '../..';
 import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
 
+import './styles.scss';
+
 export function AccountManagementPresentational({ header, children }) {
   return (
-    <div>
-      <h1>{header}</h1>
+    <div className="account-management-layout">
+      <PrimaryFont as="h2">{header}</PrimaryFont>
       {children}
     </div>
   );

@@ -76,7 +76,7 @@ function AccountManagement({ customFields }) {
     }
   }, [loggedIn, setEmail, Identity, isAdmin]);
 
-  if (!isInitialized || isLoading) {
+  if (!isInitialized || (isLoading && !isAdmin)) {
     return null;
   }
 

@@ -30,7 +30,7 @@ describe('PasswordEditableFieldContainer', () => {
     jest.restoreAllMocks();
   });
 
-  it.only('should render component with Add Password label', async () => {
+  it('should render component with Add Password label', async () => {
     useIdentity.mockImplementation(() => ({
       Identity: {
         getConfig: getConfigMock,
@@ -48,7 +48,7 @@ describe('PasswordEditableFieldContainer', () => {
     expect(wrapper.find('.editable-form-input--value-text').text()).toBe('Add Password');
   });
 
-  it.only('should render component with password placeholder label', async () => {
+  it('should render component with password placeholder label', async () => {
     useIdentity.mockImplementation(() => ({
       Identity: {
         getConfig: getConfigMock,
@@ -64,5 +64,45 @@ describe('PasswordEditableFieldContainer', () => {
     await getConfigMock;
     wrapper.update();
     expect(wrapper.find('.editable-form-input--value-text').text()).toBe('**********');
+  });
+
+  it('renders current password field and password confirm fields when hasPassword and editing', async () => {
+    useIdentity.mockImplementation(() => ({
+      Identity: {
+        getConfig: getConfigMock,
+      },
+    }));
+
+    let wrapper;
+    await act(async () => {
+      wrapper = await mount(
+        <PasswordEditableFieldContainer hasPassword />,
+      );
+    });
+    await getConfigMock;
+    wrapper.update();
+    expect(wrapper.find('.editable-form-input--value-text').text()).toBe('**********');
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('input').length).toBe(3);
+  });
+
+  it('renders only password confirm fields when NOT hasPassword and editing', async () => {
+    useIdentity.mockImplementation(() => ({
+      Identity: {
+        getConfig: getConfigMock,
+      },
+    }));
+
+    let wrapper;
+    await act(async () => {
+      wrapper = await mount(
+        <PasswordEditableFieldContainer />,
+      );
+    });
+    await getConfigMock;
+    wrapper.update();
+    expect(wrapper.find('.editable-form-input--value-text').text()).toBe('Add Password');
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('input').length).toBe(2);
   });
 });

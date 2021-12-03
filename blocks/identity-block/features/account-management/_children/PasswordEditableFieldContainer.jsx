@@ -12,6 +12,7 @@ import validatePasswordPattern from '../../../utils/validate-password-pattern';
 function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) {
   const [error, setError] = useState(false);
   const [passwordRequirements, setPasswordRequirements] = useState({});
+  const [configStatus, setConfigStatus] = useState('loading');
 
   const { arcSite } = useFusionContext();
   const { locale } = getProperties(arcSite);
@@ -23,8 +24,9 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
     const getConfigInfo = () => Identity.getConfig()
       .then((response) => {
         setPasswordRequirements(response);
+        setConfigStatus('success');
       })
-      .catch(() => setPasswordRequirements({ status: 'error' }));
+      .catch(() => setConfigStatus('error'));
 
     if (Identity) {
       getConfigInfo();
@@ -37,7 +39,6 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
     pwPwNumbers = 0,
     pwSpecialCharacters = 0,
     pwUppercase = 0,
-    status,
   } = passwordRequirements;
 
   const passwordErrorMessage = passwordValidationMessage({
@@ -77,10 +78,12 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
           throw new Error();
         });
     }
-    return Identity.signUp(
-      { userName: email, credentials: newPassword },
-      { email },
-    )
+
+    return Identity
+      .signUp(
+        { userName: email, credentials: newPassword },
+        { email },
+      )
       .then(() => {
         setHasPassword(true);
         setError(false);
@@ -120,7 +123,7 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
             autoComplete="new-password"
             name="password"
             label={phrases.t('identity-block.new-password')}
-            validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
+            validationErrorMessage={configStatus === 'success' ? passwordErrorMessage : ''}
             validationPattern={validatePasswordPattern(
               pwLowercase,
               pwMinLength,
@@ -138,7 +141,7 @@ function PasswordEditableFieldContainer({ email, hasPassword, setHasPassword }) 
             autoComplete="new-password"
             name="password"
             label={phrases.t('identity-block.new-password')}
-            validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
+            validationErrorMessage={configStatus === 'success' ? passwordErrorMessage : ''}
             validationPattern={validatePasswordPattern(
               pwLowercase,
               pwMinLength,

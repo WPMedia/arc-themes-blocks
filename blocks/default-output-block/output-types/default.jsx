@@ -175,6 +175,15 @@ const SampleOutputType = ({
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <MetaData
           arcSite={arcSite}
+          canonicalDomain={
+            /*
+             * Overriding specific page types here for primary website article sources if available
+             * author, homepage, *search, section, and tag will still go to the current site domain
+             */
+            metaValue('page-type')?.match(/^(article|gallery|video)$/)
+              ? getProperties(globalContent?.canonical_website)?.websiteDomain || null
+              : null
+          }
           facebookAdmins={facebookAdmins}
           fallbackImage={fallbackImage}
           globalContent={globalContent}

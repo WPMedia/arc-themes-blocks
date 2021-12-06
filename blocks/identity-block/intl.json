@@ -350,5 +350,16 @@
 		"no": "There's been an error updating your password",
 		"pt": "There's been an error updating your password",
 		"sv": "There's been an error updating your password"
+	},
+	"identity-block.connected-accounts": {
+		"de": "Connected Accounts",
+		"en": "Connected Accounts",
+		"es": "Connected Accounts",
+		"fr": "Connected Accounts",
+		"ja": "Connected Accounts",
+		"ko": "Connected Accounts",
+		"no": "Connected Accounts",
+		"pt": "Connected Accounts",
+		"sv": "Connected Accounts"
 	}
 }

@@ -135,7 +135,8 @@
 		"identity-block.add-password": "Add Password",
 		"identity-block.new-password": "New Password",
 		"identity-block.current-password": "Current Password",
-		"identity-block.update-password-error": "There's been an error updating your password"
+		"identity-block.update-password-error": "There's been an error updating your password",
+		"identity-block.connected-accounts": "Connected Accounts"
 	},
 	"subscriptions-block": {
 		"checkout-block.headline": "Review Subscription Order",

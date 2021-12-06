@@ -10,12 +10,14 @@ describe('Editable form input field', () => {
     );
     expect(wrapper.find('form').length).toBe(1);
   });
+
   it('conditional form does not render a form when show form not elected', () => {
     const wrapper = mount(
       <ConditionalFormContainer showForm={false} />,
     );
     expect(wrapper.find('form').length).toBe(0);
   });
+
   it('editable form field shows initial value, label, and edit button when not editable and hides children', () => {
     const wrapper = mount(
       <EditableFormInputField
@@ -33,6 +35,24 @@ describe('Editable form input field', () => {
     expect(wrapper.find('button.editable-form-input--edit-button-link').text()).toBe('edit text');
     expect(wrapper.find('#test-child').length).toBe(0);
   });
+
+  it('shows error text if passed in with formErrorText prop', () => {
+    const wrapper = mount(
+      <EditableFormInputField
+        initialValue="initial value"
+        editText="edit text"
+        label="label"
+        onSubmit={() => {}}
+        formErrorText="Error Text"
+      >
+        <p id="test-child">Test child</p>
+      </EditableFormInputField>,
+    );
+
+    expect(wrapper.find('#test-child').length).toBe(1);
+    expect(wrapper.find('.xpmedia-form-error').text()).toBe('Error Text');
+  });
+
   it('editable form field hides edit button when editable and shows children', async () => {
     const wrapper = mount(
       <EditableFormInputField
@@ -87,5 +107,34 @@ describe('Editable form input field', () => {
     expect(callback).toHaveBeenCalledWith({
       inputField: 'valid@email.com',
     });
+  });
+
+  it('calls passed in cancelEdit function when using cancel button', () => {
+    const callback = jest.fn();
+
+    const wrapper = mount(
+      <EditableFormInputField
+        cancelEdit={callback}
+        formErrorText="Error"
+      >
+        <input name="inputField" type="email" defaultValue="invalid" />
+      </EditableFormInputField>,
+    );
+
+    wrapper.find('button[type="button"]').simulate('click');
+
+    expect(callback).toHaveBeenCalled();
+  });
+
+  it('calls passed in cancelEdit function when using cancel button', () => {
+    const wrapper = mount(
+      <EditableFormInputField
+        formErrorText="Error"
+      >
+        <input name="inputField" type="email" defaultValue="invalid" />
+      </EditableFormInputField>,
+    );
+
+    expect(wrapper.find('.xpmedia-form-error').text()).toBe('Error');
   });
 });

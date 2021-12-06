@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import useIdentity from '../../components/Identity';
 import AccountManagement, { AccountManagementPresentational } from './default';
@@ -10,26 +10,19 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
 
 jest.mock('../../components/Identity');
 
+jest.mock('./_children/PasswordEditableFieldContainer', () => () => {
+  const MockName = 'password-editable-field-container-mock';
+  return <MockName />;
+});
+
 jest.mock('fusion:intl', () => ({
   __esModule: true,
   default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
 }));
 
-const loginMock = jest.fn(() => Promise.resolve({}));
+const userProfileMock = jest.fn(() => Promise.resolve({ email: 'test@domain.com', identities: [] }));
 
 describe('Account management', () => {
-  beforeEach(async () => {
-    useIdentity.mockImplementation(() => ({
-      isInitialized: true,
-      isLoggedIn: () => true,
-      Identity: {
-        isLoggedIn: jest.fn(async () => false),
-        getConfig: jest.fn(async () => ({})),
-        login: loginMock,
-      },
-    }));
-  });
-
   afterAll(() => {
     jest.restoreAllMocks();
   });
@@ -40,12 +33,26 @@ describe('Account management', () => {
   });
 
   it('should render account management if logged in and initialized', async () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => true,
+      Identity: {
+        isLoggedIn: jest.fn(async () => true),
+        getConfig: jest.fn(async () => ({})),
+        getUserProfile: userProfileMock,
+      },
+    }));
+
+    let wrapper;
     await act(async () => {
-      const wrapper = await mount(
+      wrapper = await mount(
         <AccountManagement customFields={{}} />,
       );
-      expect(wrapper.find('h2').text()).toEqual('Account Information');
     });
+    await userProfileMock;
+    wrapper.update();
+
+    expect(wrapper.find('h2').text()).toEqual('Account Information');
   });
 
   it('should not render if not logged in and not initialized', async () => {
@@ -58,19 +65,67 @@ describe('Account management', () => {
       },
     }));
 
+    let wrapper;
     await act(async () => {
-      const wrapper = await mount(
+      wrapper = await mount(
         <AccountManagement customFields={{}} />,
       );
-      expect(wrapper.html()).toBe(null);
     });
+    wrapper.update();
+    expect(wrapper.html()).toBe(null);
   });
-  it('shows email input editable field if showing email', () => {
-    const wrapper = mount(<AccountManagement customFields={{ showEmail: true }} />);
-    expect(wrapper.find('section').length).toBe(1);
+
+  it('shows email input editable field if showing email', async () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => true,
+      Identity: {
+        isLoggedIn: jest.fn(async () => true),
+        getConfig: jest.fn(async () => ({})),
+        getUserProfile: userProfileMock,
+      },
+    }));
+
+    let wrapper;
+    await act(async () => {
+      wrapper = await mount(
+        <AccountManagement customFields={{ showEmail: true }} />,
+      );
+    });
+    await userProfileMock;
+    wrapper.update();
+    expect(wrapper.find('EmailEditableFieldContainer').length).toBe(1);
   });
+
   it('hides email input editable field if showing email', () => {
-    const wrapper = mount(<AccountManagement customFields={{ showEmail: false }} />);
-    expect(wrapper.find('section').length).toBe(0);
+    const wrapper = shallow(<AccountManagement customFields={{ showEmail: false }} />);
+    expect(wrapper.find('EmailEditableFieldContainer').length).toBe(0);
+  });
+
+  it('shows password input editable field if showing password', async () => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: true,
+      isLoggedIn: () => true,
+      Identity: {
+        isLoggedIn: jest.fn(async () => true),
+        getConfig: jest.fn(async () => ({})),
+        getUserProfile: userProfileMock,
+      },
+    }));
+
+    let wrapper;
+    await act(async () => {
+      wrapper = await mount(
+        <AccountManagement customFields={{ showPassword: true }} />,
+      );
+    });
+    await userProfileMock;
+    wrapper.update();
+    expect(wrapper.find('password-editable-field-container-mock').length).toBe(1);
+  });
+
+  it('hides password input editable field if showing password', () => {
+    const wrapper = shallow(<AccountManagement customFields={{ showPassword: false }} />);
+    expect(wrapper.find('PasswordEditableFieldContainer').length).toBe(0);
   });
 });

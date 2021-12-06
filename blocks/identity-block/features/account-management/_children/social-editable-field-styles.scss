@@ -5,7 +5,7 @@
   font-size: calculateRem(16px);
   line-height: 1.5;
   cursor: pointer;
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .social-field--disconnect-link {
@@ -15,33 +15,33 @@
   font-size: calculateRem(16px);
   line-height: 1.5;
   cursor: pointer;
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .social-field--connected-label-text {
   line-height: 1.5;
-	font-size: calculateRem(16px);
+  font-size: calculateRem(16px);
 }
 
 .social-field--container {
-	border-style: solid;
-	border-width: 1px;
-	border-radius: calculateRem(4px);
-	// border-color is handled by styled components
+  border-style: solid;
+  border-width: 1px;
+  border-radius: calculateRem(4px);
+  // border-color is handled by styled components
 
-	padding: 1rem;
-	text-align: center;
+  padding: 1rem;
+  text-align: center;
 
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .social-field--found-username-text {
-	font-size: calculateRem(16px);
-	line-height: 1.5;
-	font-weight: bold;
+  font-size: calculateRem(16px);
+  line-height: 1.5;
+  font-weight: bold;
 }
 
 .social-field--label-text-container {
-	padding-left: calculateRem(8px);
+  padding-left: calculateRem(8px);
 }

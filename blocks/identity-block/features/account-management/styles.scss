@@ -1,0 +1,3 @@
+.account-management-layout > * + * {
+  margin-top: map-get($spacers, 'xs');
+}

@@ -1,19 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from '@arc-fusion/prop-types';
 
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import { PrimaryFont } from '@wpmedia/shared-styles';
 import { useIdentity } from '../..';
+import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
+import PasswordEditableFieldContainer from './_children/PasswordEditableFieldContainer';
 
-export function AccountManagementPresentational({ header }) {
+import './styles.scss';
+
+export function AccountManagementPresentational({ header, children }) {
   return (
-    <h1>{header}</h1>
+    <div className="account-management-layout">
+      <PrimaryFont as="h2">{header}</PrimaryFont>
+      {children}
+    </div>
   );
 }
 
 function AccountManagement({ customFields }) {
-  const { redirectURL } = customFields;
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [email, setEmail] = useState('');
+  const [hasPassword, setHasPassword] = useState();
+
+  const { redirectURL, showEmail, showPassword } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -24,18 +37,46 @@ function AccountManagement({ customFields }) {
   const { isInitialized, Identity } = useIdentity();
 
   useEffect(() => {
-    const checkLoggedInStatus = async () => {
-      const isLoggedIn = await Identity.isLoggedIn();
+    const checkLoggedInStatus = () => Identity.isLoggedIn().then((isLoggedIn) => {
       if (!isLoggedIn) {
         window.location = redirectURL;
+        return;
       }
-    };
+      setLoggedIn(true);
+    });
     if (Identity && !isAdmin) {
       checkLoggedInStatus();
     }
   }, [Identity, isAdmin, redirectURL]);
 
-  if (!isInitialized) {
+  useEffect(() => {
+    const getProfile = () => Identity
+      .getUserProfile()
+      .then((profileObject) => {
+        const { email: loggedInEmail, identities } = profileObject;
+
+        if (loggedInEmail) {
+          setEmail(loggedInEmail);
+        }
+
+        const passwordProfile = identities.filter(({ type }) => type === 'Password' || type === 'Identity');
+
+        setHasPassword(passwordProfile?.length > 0);
+        // todo: in future ticket, handle errors
+        // else {
+        //   setError('No email found');
+        // }
+
+        setIsLoading(false);
+      });
+      // .catch((e) => setError(e.message));
+
+    if (!isAdmin && loggedIn) {
+      getProfile();
+    }
+  }, [loggedIn, setEmail, Identity, isAdmin]);
+
+  if (!isInitialized || (isLoading && !isAdmin)) {
     return null;
   }
 
@@ -43,7 +84,23 @@ function AccountManagement({ customFields }) {
 
   // if logged in, return account info
   return (
-    <AccountManagementPresentational header={header} />
+    <AccountManagementPresentational header={header}>
+      {
+        showEmail && (
+          <EmailEditableFieldContainer
+            email={email}
+            setEmail={setEmail}
+          />
+        )
+      }
+      {showPassword ? (
+        <PasswordEditableFieldContainer
+          email={email}
+          hasPassword={hasPassword}
+          setHasPassword={setHasPassword}
+        />
+      ) : null}
+    </AccountManagementPresentational>
   );
 }
 
@@ -56,6 +113,16 @@ AccountManagement.propTypes = {
     redirectURL: PropTypes.string.tag({
       name: 'Redirect URL',
       defaultValue: '/account/login/',
+    }),
+    showEmail: PropTypes.bool.tag({
+      // this is to to show or hide the editable input thing and non-editable text
+      name: 'Enable Email Address Editing',
+      defaultValue: false,
+    }),
+    showPassword: PropTypes.bool.tag({
+      // this is to to show or hide the editable input thing and non-editable text
+      name: 'Enable Password Editing',
+      defaultValue: false,
     }),
   }),
 };

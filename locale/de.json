@@ -126,7 +126,16 @@
 		"identity-block.login-form-error": "There's been an error logging you in",
 		"identity-block.login-links-login": "Already have an account? Log in.",
 		"identity-block.login-links-signup": "Sign up for an account.",
-		"identity-block.account-information": "Account Information"
+		"identity-block.account-information": "Account Information",
+		"identity-block.edit": "Edit",
+		"identity-block.save": "Save",
+		"identity-block.cancel": "Cancel",
+		"identity-block.update-email-error": "There's been an error updating your email address",
+		"identity-block.password-placeholder": "**********",
+		"identity-block.add-password": "Add Password",
+		"identity-block.new-password": "New Password",
+		"identity-block.current-password": "Current Password",
+		"identity-block.update-password-error": "There's been an error updating your password"
 	},
 	"subscriptions-block": {
 		"checkout-block.headline": "Review Subscription Order",

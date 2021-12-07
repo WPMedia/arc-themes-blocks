@@ -363,12 +363,36 @@
 		"sv": "Connected Accounts"
 	},
 	"identity-block.connect-account": {
-		"en": "Connected as %{email}"
+		"de": "Connected as %{email}",
+		"en": "Connected as %{email}",
+		"es": "Connected as %{email}",
+		"fr": "Connected as %{email}",
+		"ja": "Connected as %{email}",
+		"ko": "Connected as %{email}",
+		"no": "Connected as %{email}",
+		"pt": "Connected as %{email}",
+		"sv": "Connected as %{email}"
 	},
 	"identity-block.disconnect-account": {
-		"en": "Disconnect"
+		"de": "Disconnect",
+		"en": "Disconnect",
+		"es": "Disconnect",
+		"fr": "Disconnect",
+		"ja": "Disconnect",
+		"ko": "Disconnect",
+		"no": "Disconnect",
+		"pt": "Disconnect",
+		"sv": "Disconnect"
 	},
 	"identity-block.connect-platform": {
-		"en": "Connect %{platform}"
+		"de": "Connect %{platform}",
+		"en": "Connect %{platform}",
+		"es": "Connect %{platform}",
+		"fr": "Connect %{platform}",
+		"ja": "Connect %{platform}",
+		"ko": "Connect %{platform}",
+		"no": "Connect %{platform}",
+		"pt": "Connect %{platform}",
+		"sv": "Connect %{platform}"
 	}
 }

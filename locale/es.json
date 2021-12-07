@@ -136,7 +136,10 @@
 		"identity-block.new-password": "New Password",
 		"identity-block.current-password": "Current Password",
 		"identity-block.update-password-error": "There's been an error updating your password",
-		"identity-block.connected-accounts": "Connected Accounts"
+		"identity-block.connected-accounts": "Connected Accounts",
+		"identity-block.connect-account": "Connected as %{email}",
+		"identity-block.disconnect-account": "Disconnect",
+		"identity-block.connect-platform": "Connect %{platform}"
 	},
 	"subscriptions-block": {
 		"checkout-block.headline": "Review Subscription Order",

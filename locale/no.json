@@ -134,6 +134,16 @@
 		"checkout-block.order-summary": "Order Summary",
 		"checkout-block.due-today": "Due today",
 		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
-		"checkout-block.empty-cart-message": "Select from one of our offers"
+		"checkout-block.empty-cart-message": "Select from one of our offers",
+    "checkout-block.contact-info": "Contact Info",
+    "checkout-block.email": "Email address",
+    "checkout-block.email-requirements": "Please enter a valid email address",
+    "checkout-block.first-name": "First name",
+    "checkout-block.first-name-requirements": "Please enter first name",
+    "checkout-block.last-name": "Last name",
+    "checkout-block.last-name-requirements": "Please enter last name",
+    "checkout-block.continue-to-checkout": "Continue to Checkout",
+    "checkout-block.country": "Country or region",
+    "checkout-block.country-requirements": "Please select country or region"
 	}
 }

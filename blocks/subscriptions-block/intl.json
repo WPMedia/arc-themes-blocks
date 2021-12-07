@@ -64,5 +64,124 @@
 		"no": "Select from one of our offers",
 		"pt": "Select from one of our offers",
 		"sv": "Select from one of our offers"
+	},
+	"checkout-block.contact-info": {
+		"de": "Contact Info",
+		"en": "Contact Info",
+		"es": "Contact Info",
+		"fr": "Contact Info",
+		"ja": "Contact Info",
+		"ko": "Contact Info",
+		"no": "Contact Info",
+		"pt": "Contact Info",
+		"sv": "Contact Info"
+	},
+	"checkout-block.email": {
+		"de": "Email address",
+		"en": "Email address",
+		"es": "Email address",
+		"fr": "Email address",
+		"ja": "Email address",
+		"ko": "Email address",
+		"no": "Email address",
+		"pt": "Email address",
+		"sv": "Email address"
+	},
+	"checkout-block.email-requirements": {
+		"de": "Please enter a valid email address",
+		"en": "Please enter a valid email address",
+		"es": "Please enter a valid email address",
+		"fr": "Please enter a valid email address",
+		"ja": "Please enter a valid email address",
+		"ko": "Please enter a valid email address",
+		"no": "Please enter a valid email address",
+		"pt": "Please enter a valid email address",
+		"sv": "Please enter a valid email address"
+	},
+	"checkout-block.first-name": {
+		"de": "First name",
+		"en": "First name",
+		"es": "First name",
+		"fr": "First name",
+		"ja": "First name",
+		"ko": "First name",
+		"no": "First name",
+		"pt": "First name",
+		"sv": "First name"
+	},
+	"checkout-block.first-name-requirements": {
+		"de": "Please enter first name",
+		"en": "Please enter first name",
+		"es": "Please enter first name",
+		"fr": "Please enter first name",
+		"ja": "Please enter first name",
+		"ko": "Please enter first name",
+		"no": "Please enter first name",
+		"pt": "Please enter first name",
+		"sv": "Please enter first name"
+	},
+	"checkout-block.last-name": {
+		"de": "Last name",
+		"en": "Last name",
+		"es": "Last name",
+		"fr": "Last name",
+		"ja": "Last name",
+		"ko": "Last name",
+		"no": "Last name",
+		"pt": "Last name",
+		"sv": "Last name"
+	},
+	"checkout-block.last-name-requirements": {
+		"de": "Please enter last name",
+		"en": "Please enter last name",
+		"es": "Please enter last name",
+		"fr": "Please enter last name",
+		"ja": "Please enter last name",
+		"ko": "Please enter last name",
+		"no": "Please enter last name",
+		"pt": "Please enter last name",
+		"sv": "Please enter last name"
+	},
+	"checkout-block.continue-to-checkout": {
+		"de": "Continue to Checkout",
+		"en": "Continue to Checkout",
+		"es": "Continue to Checkout",
+		"fr": "Continue to Checkout",
+		"ja": "Continue to Checkout",
+		"ko": "Continue to Checkout",
+		"no": "Continue to Checkout",
+		"pt": "Continue to Checkout",
+		"sv": "Continue to Checkout"
+	},
+	"checkout-block.country": {
+		"de": "Country or region",
+		"en": "Country or region",
+		"es": "Country or region",
+		"fr": "Country or region",
+		"ja": "Country or region",
+		"ko": "Country or region",
+		"no": "Country or region",
+		"pt": "Country or region",
+		"sv": "Country or region"
+	},
+	"checkout-block.country-requirements": {
+		"de": "Please select country or region",
+		"en": "Please select country or region",
+		"es": "Please select country or region",
+		"fr": "Please select country or region",
+		"ja": "Please select country or region",
+		"ko": "Please select country or region",
+		"no": "Please select country or region",
+		"pt": "Please select country or region",
+		"sv": "Please select country or region"
+	},
+	"checkout-block.identity-social": {
+		"en": "Connected as"
+	},
+	"checkout-block.identity-email": {
+		"en": "Signed in as"
+	},
+	"checkout-block.identity-sign-out": {
+		"en": "Sign out"
 	}
 }

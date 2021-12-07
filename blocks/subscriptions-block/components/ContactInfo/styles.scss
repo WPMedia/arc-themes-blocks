@@ -1,0 +1,51 @@
+.xpmedia-subscriptions-contact-info {
+  margin-top: map-get($spacers, 'lg');
+
+  &-title {
+    margin-bottom: map-get($spacers, 'md');
+  }
+
+  .identity-row {
+    width: 100%;
+    display: inline-flex;
+    align-content: center;
+    line-height: 1.3rem;
+    margin-bottom: map-get($spacers, 'md');
+  }
+
+  .sign-out-btn {
+    padding: 0;
+    display: inline-block;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    margin: 0 0 0 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  span.identity-icon {
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  span.identity-icon svg.googleIdentity {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  span.identity-icon svg.facebookIdentity {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .row {
+    margin-bottom: map-get($spacers, 'md');
+  }
+
+  button.checkout-btn {
+    margin-top: map-get($spacers, 'md');
+  }
+}

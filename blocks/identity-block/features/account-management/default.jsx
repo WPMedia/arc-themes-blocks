@@ -112,28 +112,27 @@ function AccountManagement({ customFields }) {
           ) : null
         }
       </AccountManagementPresentational>
-      {showSocialProfile ? (
-        <AccountManagementPresentational header={socialProfileHeader}>
-          <SocialEditableFieldContainer
+      {
+        showSocialProfile ? (
+          <AccountManagementPresentational header={socialProfileHeader}>
+            <SocialEditableFieldContainer
             // google provides the email if logged in with them
-            foundUsername={hasGoogle ? email : ''}
-            identityType="Google"
-            // we don't have google logo https://5eed0506faad4f0022fedf95-lxwzobzehr.chromatic.com/?path=/story/icon--all-icons-resize
-            // todo: add disconnect and connect funcs
-          />
-          <SocialEditableFieldContainer
-            // fb provides the email if logged in with them
-            foundUsername={hasFacebook ? email : ''}
-            identityType="Facebook"
-            // todo: add disconnect and connec funcs
-          >
-            <FacebookIcon
-              // fb blue according to mocks
-              fill="#1877F2"
+              foundUsername={hasGoogle ? email : ''}
+              identityType="Google"
             />
-          </SocialEditableFieldContainer>
-        </AccountManagementPresentational>
-      ) : null}
+            <SocialEditableFieldContainer
+            // fb provides the email if logged in with them
+              foundUsername={hasFacebook ? email : ''}
+              identityType="Facebook"
+            >
+              <FacebookIcon
+              // fb blue according to mocks
+                fill="#1877F2"
+              />
+            </SocialEditableFieldContainer>
+          </AccountManagementPresentational>
+        ) : null
+      }
     </>
   );
 }

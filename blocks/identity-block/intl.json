@@ -361,5 +361,14 @@
 		"no": "Connected Accounts",
 		"pt": "Connected Accounts",
 		"sv": "Connected Accounts"
+	},
+	"identity-block.connect-account": {
+		"en": "Connected as %{email}"
+	},
+	"identity-block.disconnect-account": {
+		"en": "Disconnect"
+	},
+	"identity-block.connect-platform": {
+		"en": "Connect %{platform}"
 	}
 }

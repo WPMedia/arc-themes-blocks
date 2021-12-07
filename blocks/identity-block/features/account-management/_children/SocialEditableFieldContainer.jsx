@@ -3,35 +3,26 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import './social-editable-field-styles.scss';
 
 function SocialEditableFieldContainer({
-  foundUsername, identityType, onDisconnectFunction,
+  text,
+  onDisconnectFunction,
+  isConnected,
+  disconnectText,
 }) {
-  // if username found then show the username?
-  const isConnected = Boolean(foundUsername);
-
-  // get connect translated
   return (
     <div
       className="social-field--container"
     >
-      {
-        isConnected ? (
-          <div className="social-field--label-text-container">
-            <PrimaryFont
-              as="span"
-              fontColor="primary-color"
-              className="social-field--connected-label-text"
-            >
-              Connected as
-              {' '}
-            </PrimaryFont>
-            <PrimaryFont
-              as="span"
-              fontColor="primary-color"
-              className="social-field--bold-text"
-            >
-              {foundUsername}
-              {' '}
-            </PrimaryFont>
+      <div className="social-field--label-text-container">
+        <PrimaryFont
+          as="span"
+          fontColor="primary-color"
+          className="social-field--connected-label-text"
+        >
+          {text}
+          {isConnected ? ' ' : ''}
+        </PrimaryFont>
+        {
+          isConnected ? (
             <PrimaryFont
               as="button"
               className="social-field--disconnect-link"
@@ -39,23 +30,11 @@ function SocialEditableFieldContainer({
               onClick={onDisconnectFunction}
               fontColor="primary-color"
             >
-              Disconnect
+              {disconnectText}
             </PrimaryFont>
-          </div>
-        ) : (
-          <div className="social-field--label-text-container">
-            <PrimaryFont
-              as="span"
-              className="social-field--bold-text"
-              fontColor="primary-color"
-            >
-              Connect
-              {' '}
-              {identityType}
-            </PrimaryFont>
-          </div>
-        )
-    }
+          ) : null
+        }
+      </div>
     </div>
   );
 }

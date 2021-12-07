@@ -89,6 +89,10 @@ function AccountManagement({ customFields }) {
 
   const header = phrases.t('identity-block.account-information');
   const socialProfileHeader = phrases.t('identity-block.connected-accounts');
+  const socialText = phrases.t('identity-block.connect-account', { email });
+  const disconnectText = phrases.t('identity-block.disconnect-account');
+  const facebookConnectText = phrases.t('identity-block.connect-platform', { platform: 'Facebook' });
+  const googleConnectText = phrases.t('identity-block.connect-platform', { platform: 'Google' });
 
   // cause re-render to re-check if identity has social identity
   const unlinkFacebook = () => Identity.unlinkSocialIdentity('facebook').then(() => setHasFacebook(false));
@@ -129,15 +133,17 @@ function AccountManagement({ customFields }) {
             />
             <SocialEditableFieldContainer
               // google provides the email if logged in with them
-              foundUsername={hasGoogle ? email : ''}
-              identityType="Google"
               onDisconnectFunction={unlinkGoogle}
+              text={hasGoogle ? socialText : googleConnectText}
+              disconnectText={disconnectText}
+              isConnected={hasGoogle}
             />
             <SocialEditableFieldContainer
               // fb provides the email if logged in with them
-              foundUsername={hasFacebook ? email : ''}
-              identityType="Facebook"
               onDisconnectFunction={unlinkFacebook}
+              text={hasFacebook ? socialText : facebookConnectText}
+              disconnectText={disconnectText}
+              isConnected={hasFacebook}
             />
           </AccountManagementPresentational>
         ) : null

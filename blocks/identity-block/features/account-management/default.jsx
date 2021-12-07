@@ -58,7 +58,6 @@ function AccountManagement({ customFields }) {
     const getProfile = () => Identity
       .getUserProfile()
       .then((profileObject) => {
-        console.log(profileObject);
         const { email: loggedInEmail, identities } = profileObject;
 
         if (loggedInEmail) {
@@ -91,6 +90,13 @@ function AccountManagement({ customFields }) {
   const header = phrases.t('identity-block.account-information');
   const socialProfileHeader = phrases.t('identity-block.connected-accounts');
 
+  // cause re-render to re-check if identity has social identity
+  const unlinkFacebook = () => Identity.unlinkSocialIdentity('facebook').then(() => setHasFacebook(false));
+  const unlinkGoogle = () => Identity.unlinkSocialIdentity('google').then(() => setHasGoogle(false));
+
+  // get current because social sign in has reload and need to re-render page anyway
+  const currentUrl = window.location.href;
+
   // if logged in, return account info
   return (
     <>
@@ -117,18 +123,21 @@ function AccountManagement({ customFields }) {
         showSocialProfile ? (
           <AccountManagementPresentational header={socialProfileHeader}>
             <SocialSignOn
-              onError={() => { console.log(phrases.t('identity-block.login-form-error')); }}
-              redirectURL=""
+              // todo: error-handling within connected accounts
+              onError={() => {}}
+              redirectURL={currentUrl}
             />
             <SocialEditableFieldContainer
               // google provides the email if logged in with them
               foundUsername={hasGoogle ? email : ''}
               identityType="Google"
+              onDisconnectFunction={unlinkGoogle}
             />
             <SocialEditableFieldContainer
               // fb provides the email if logged in with them
               foundUsername={hasFacebook ? email : ''}
               identityType="Facebook"
+              onDisconnectFunction={unlinkFacebook}
             />
           </AccountManagementPresentational>
         ) : null

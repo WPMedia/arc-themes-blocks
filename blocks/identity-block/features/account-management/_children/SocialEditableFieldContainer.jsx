@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import styled from 'styled-components';
 import getThemeStyle from 'fusion:themes';
@@ -9,10 +9,11 @@ const StyledContainer = styled.div`
   border-color: ${(props) => props.borderColor};
 `;
 
-// todo: add disconnect and connect funcs
-function SocialEditableFieldContainer({ foundUsername, children, identityType }) {
+function SocialEditableFieldContainer({
+  foundUsername, identityType, onDisconnectFunction,
+}) {
   // if username found then show the username?
-  const [isConnected, setIsConnected] = useState(Boolean(foundUsername));
+  const isConnected = Boolean(foundUsername);
   const { arcSite } = useFusionContext();
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
 
@@ -22,7 +23,6 @@ function SocialEditableFieldContainer({ foundUsername, children, identityType })
       borderColor={primaryColor}
       className="social-field--container"
     >
-      {children}
       {
         isConnected ? (
           <div className="social-field--label-text-container">
@@ -37,7 +37,7 @@ function SocialEditableFieldContainer({ foundUsername, children, identityType })
             <PrimaryFont
               as="span"
               fontColor="primary-color"
-              className="social-field--found-username-text"
+              className="social-field--bold-text"
             >
               {foundUsername}
               {' '}
@@ -46,7 +46,7 @@ function SocialEditableFieldContainer({ foundUsername, children, identityType })
               as="button"
               className="social-field--disconnect-link"
               type="button"
-              onClick={() => setIsConnected(false)}
+              onClick={onDisconnectFunction}
               fontColor="primary-color"
             >
               Disconnect
@@ -55,10 +55,8 @@ function SocialEditableFieldContainer({ foundUsername, children, identityType })
         ) : (
           <div className="social-field--label-text-container">
             <PrimaryFont
-              as="button"
-              className="social-field--connect-link"
-              type="button"
-              onClick={() => setIsConnected(true)}
+              as="span"
+              className="social-field--bold-text"
               fontColor="primary-color"
             >
               Connect

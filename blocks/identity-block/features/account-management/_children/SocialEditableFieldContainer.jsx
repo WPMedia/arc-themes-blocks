@@ -9,19 +9,16 @@ function SocialEditableFieldContainer({
   disconnectText,
 }) {
   return (
-    <div
-      className="social-field--container"
-    >
-      <div className="social-field--label-text-container">
-        <PrimaryFont
-          as="span"
-          fontColor="primary-color"
-          className="social-field--connected-label-text"
-        >
-          {text}
-          {isConnected ? ' ' : ''}
-        </PrimaryFont>
-        {
+    <>
+      <PrimaryFont
+        as="span"
+        fontColor="primary-color"
+        className="social-field--connected-label-text"
+      >
+        {text}
+        {isConnected ? ' ' : ''}
+      </PrimaryFont>
+      {
           isConnected ? (
             <PrimaryFont
               as="button"
@@ -34,8 +31,7 @@ function SocialEditableFieldContainer({
             </PrimaryFont>
           ) : null
         }
-      </div>
-    </div>
+    </>
   );
 }
 

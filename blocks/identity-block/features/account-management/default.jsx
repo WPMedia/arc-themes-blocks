@@ -8,8 +8,8 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import { useIdentity } from '../..';
 import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
 import PasswordEditableFieldContainer from './_children/PasswordEditableFieldContainer';
-import SocialSignOn from '../../components/SocialSignOn';
-import SocialEditableFieldContainer from './_children/SocialEditableFieldContainer';
+import SocialEditableSection from './_children/SocialEditableSection';
+
 import './styles.scss';
 
 export function AccountManagementPresentational({ header, children }) {
@@ -83,23 +83,16 @@ function AccountManagement({ customFields }) {
     }
   }, [loggedIn, setEmail, Identity, isAdmin]);
 
+  // cause re-render to re-check if identity has social identity
+  const unlinkFacebook = () => Identity.unlinkSocialIdentity('facebook').then(() => setHasFacebook(false));
+  const unlinkGoogle = () => Identity.unlinkSocialIdentity('google').then(() => setHasGoogle(false));
+
   if (!isInitialized || (isLoading && !isAdmin)) {
     return null;
   }
 
   const header = phrases.t('identity-block.account-information');
   const socialProfileHeader = phrases.t('identity-block.connected-accounts');
-  const socialText = phrases.t('identity-block.connect-account', { email });
-  const disconnectText = phrases.t('identity-block.disconnect-account');
-  const facebookConnectText = phrases.t('identity-block.connect-platform', { platform: 'Facebook' });
-  const googleConnectText = phrases.t('identity-block.connect-platform', { platform: 'Google' });
-
-  // cause re-render to re-check if identity has social identity
-  const unlinkFacebook = () => Identity.unlinkSocialIdentity('facebook').then(() => setHasFacebook(false));
-  const unlinkGoogle = () => Identity.unlinkSocialIdentity('google').then(() => setHasGoogle(false));
-
-  // get current because social sign in has reload and need to re-render page anyway
-  const currentUrl = window.location.href;
 
   // if logged in, return account info
   return (
@@ -126,24 +119,12 @@ function AccountManagement({ customFields }) {
       {
         showSocialProfile ? (
           <AccountManagementPresentational header={socialProfileHeader}>
-            <SocialSignOn
-              // todo: error-handling within connected accounts
-              onError={() => {}}
-              redirectURL={currentUrl}
-            />
-            <SocialEditableFieldContainer
-              // google provides the email if logged in with them
-              onDisconnectFunction={unlinkGoogle}
-              text={hasGoogle ? socialText : googleConnectText}
-              disconnectText={disconnectText}
-              isConnected={hasGoogle}
-            />
-            <SocialEditableFieldContainer
-              // fb provides the email if logged in with them
-              onDisconnectFunction={unlinkFacebook}
-              text={hasFacebook ? socialText : facebookConnectText}
-              disconnectText={disconnectText}
-              isConnected={hasFacebook}
+            <SocialEditableSection
+              email={email}
+              hasGoogle={hasGoogle}
+              hasFacebook={hasFacebook}
+              unlinkFacebook={unlinkFacebook}
+              unlinkGoogle={unlinkGoogle}
             />
           </AccountManagementPresentational>
         ) : null

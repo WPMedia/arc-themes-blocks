@@ -5,10 +5,10 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
-import { FacebookIcon } from '@wpmedia/engine-theme-sdk';
 import { useIdentity } from '../..';
 import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
 import PasswordEditableFieldContainer from './_children/PasswordEditableFieldContainer';
+import SocialSignOn from '../../components/SocialSignOn';
 import SocialEditableFieldContainer from './_children/SocialEditableFieldContainer';
 import './styles.scss';
 
@@ -58,6 +58,7 @@ function AccountManagement({ customFields }) {
     const getProfile = () => Identity
       .getUserProfile()
       .then((profileObject) => {
+        console.log(profileObject);
         const { email: loggedInEmail, identities } = profileObject;
 
         if (loggedInEmail) {
@@ -115,21 +116,20 @@ function AccountManagement({ customFields }) {
       {
         showSocialProfile ? (
           <AccountManagementPresentational header={socialProfileHeader}>
+            <SocialSignOn
+              onError={() => { console.log(phrases.t('identity-block.login-form-error')); }}
+              redirectURL=""
+            />
             <SocialEditableFieldContainer
-            // google provides the email if logged in with them
+              // google provides the email if logged in with them
               foundUsername={hasGoogle ? email : ''}
               identityType="Google"
             />
             <SocialEditableFieldContainer
-            // fb provides the email if logged in with them
+              // fb provides the email if logged in with them
               foundUsername={hasFacebook ? email : ''}
               identityType="Facebook"
-            >
-              <FacebookIcon
-              // fb blue according to mocks
-                fill="#1877F2"
-              />
-            </SocialEditableFieldContainer>
+            />
           </AccountManagementPresentational>
         ) : null
       }

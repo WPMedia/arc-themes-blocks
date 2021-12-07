@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import './styles.scss';
 import FacebookSignIn from './_children/FacebookSignIn';
 import GoogleSignIn from './_children/GoogleSignIn';
+import './styles.scss';
 
 import useSocialSignIn from './utils/useSocialSignIn';
 

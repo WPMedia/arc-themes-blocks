@@ -14,14 +14,8 @@
 }
 
 .social-field--container {
-  border-style: solid;
-  border-width: 1px;
-  border-radius: calculateRem(4px);
-  // border-color is handled by styled components
-
   padding: 1rem;
   text-align: center;
-
   display: flex;
   justify-content: center;
 }

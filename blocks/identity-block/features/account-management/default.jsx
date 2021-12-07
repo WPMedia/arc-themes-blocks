@@ -95,20 +95,22 @@ function AccountManagement({ customFields }) {
     <>
       <AccountManagementPresentational header={header}>
         {
-        showEmail && (
-          <EmailEditableFieldContainer
-            email={email}
-            setEmail={setEmail}
-          />
-        )
-      }
-        {showPassword ? (
-          <PasswordEditableFieldContainer
-            email={email}
-            hasPassword={hasPassword}
-            setHasPassword={setHasPassword}
-          />
-        ) : null}
+          showEmail && (
+            <EmailEditableFieldContainer
+              email={email}
+              setEmail={setEmail}
+            />
+          )
+        }
+        {
+          showPassword ? (
+            <PasswordEditableFieldContainer
+              email={email}
+              hasPassword={hasPassword}
+              setHasPassword={setHasPassword}
+            />
+          ) : null
+        }
       </AccountManagementPresentational>
       {showSocialProfile ? (
         <AccountManagementPresentational header={socialProfileHeader}>

@@ -7,7 +7,7 @@ const FacebookIdentityIcon = () => (
     height="48"
     enableBackground="new 0 0 291.319 291.319"
     viewBox="0 0 291.319 291.319"
-    className="facebookIdentity"
+    className="facebook-identity"
   >
     <path
       fill="#3B5998"

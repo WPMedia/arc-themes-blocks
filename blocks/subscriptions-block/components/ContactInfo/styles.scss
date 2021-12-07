@@ -16,7 +16,7 @@
   .sign-out-btn {
     padding: 0;
     display: inline-block;
-    border: none;
+    border: hidden;
     background: none;
     font-size: 1rem;
     margin: 0 0 0 1rem;
@@ -24,19 +24,19 @@
     cursor: pointer;
   }
 
-  span.identity-icon {
+  .identity-icon {
     display: inline-block;
     height: 1rem;
     width: 1rem;
     margin-right: 0.5rem;
   }
 
-  span.identity-icon svg.googleIdentity {
+  .identity-icon .google-identity {
     width: 1rem;
     height: 1rem;
   }
 
-  span.identity-icon svg.facebookIdentity {
+  .identity-icon .facebook-identity {
     width: 1.2rem;
     height: 1.2rem;
   }
@@ -45,7 +45,7 @@
     margin-bottom: map-get($spacers, 'md');
   }
 
-  button.checkout-btn {
+  .checkout-btn {
     margin-top: map-get($spacers, 'md');
   }
 }

@@ -6,8 +6,8 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import countryCodes from './countryCodes';
-import GoogleIcon from './GoogleIdentityIcon';
-import FacebookIcon from './FacebookIdentityIcon';
+import GoogleIcon from './google.svg';
+import FacebookIcon from './facebook.svg';
 import './styles.scss';
 
 const ContactInfo = ({ callback, user, logoutCallback }) => {
@@ -39,6 +39,21 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
   const { arcSite } = useFusionContext();
   const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
+  const getTranslatedCountries = countryCodes.map((entry) => ({
+    code: entry.code,
+    name: phrases.t(entry.key),
+  }));
+
+  const signOutBtn = () => (
+    <button
+      type="button"
+      className="sign-out-btn"
+      onClick={handleLogout}
+    >
+      {phrases.t('checkout-block.identity-sign-out')}
+    </button>
+  );
+
   return (
     <form onSubmit={handleSubmit} ref={formRef} className="xpmedia-subscriptions-contact-info">
       <PrimaryFont as="h2" className="xpmedia-subscriptions-contact-info-title">
@@ -63,56 +78,28 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
               <>
                 {user.identities[0].type.toLowerCase() === 'google' && (
                   <>
-                    <span className="identity-icon">
-                      <GoogleIcon />
-                    </span>
+                    <img alt="Google" title="Google" className="identity-icon" src={GoogleIcon} />
                     <span>
-                      {phrases.t('checkout-block.identity-social')}
-                      {' '}
-                      <b>{`${user.email}`}</b>
+                      {phrases.t('checkout-block.identity-social', { email: user.email })}
                     </span>
-                    <button
-                      type="button"
-                      className="sign-out-btn"
-                      onClick={handleLogout}
-                    >
-                      {phrases.t('checkout-block.identity-sign-out')}
-                    </button>
+                    {signOutBtn}
                   </>
                 )}
                 {user.identities[0].type.toLowerCase() === 'facebook' && (
                   <>
-                    <span className="identity-icon">
-                      <FacebookIcon />
-                    </span>
+                    <img alt="Facebook" title="Facebook" className="identity-icon" src={FacebookIcon} />
                     <span>
-                      {phrases.t('checkout-block.identity-social')}
-                      {' '}
-                      <b>{`${user.email}`}</b>
+                      {phrases.t('checkout-block.identity-social', { email: user.email })}
                     </span>
-                    <button
-                      type="button"
-                      className="sign-out-btn"
-                      onClick={handleLogout}
-                    >
-                      {phrases.t('checkout-block.identity-sign-out')}
-                    </button>
+                    {signOutBtn}
                   </>
                 )}
                 {user.identities[0].type.toLowerCase() === 'password' && (
                   <>
                     <span>
-                      {phrases.t('checkout-block.identity-email')}
-                      {' '}
-                      <b>{user.email}</b>
+                      {phrases.t('checkout-block.identity-email', { email: user.email })}
                     </span>
-                    <button
-                      type="button"
-                      className="sign-out-btn"
-                      onClick={handleLogout}
-                    >
-                      {phrases.t('checkout-block.identity-sign-out')}
-                    </button>
+                    {signOutBtn}
                   </>
                 )}
               </>
@@ -152,7 +139,7 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
             name="country"
             required
             onChange={(value) => { handleInputChange('country', value); }}
-            options={countryCodes}
+            options={getTranslatedCountries}
             optionValueKey="code"
             optionLabelKey="name"
             defaultValue=""

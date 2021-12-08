@@ -44,7 +44,7 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
     name: phrases.t(entry.key),
   }));
 
-  const signOutBtn = () => (
+  const signOutBtn = (
     <button
       type="button"
       className="sign-out-btn"

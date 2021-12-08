@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import useIdentity from '../../Identity';
 
-function useSocialSignIn(redirectURL, onError) {
+function useSocialSignIn(redirectURL, onError = () => {}) {
   const { Identity } = useIdentity();
   const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
   const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);

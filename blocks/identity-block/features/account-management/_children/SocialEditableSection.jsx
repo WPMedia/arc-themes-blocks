@@ -20,7 +20,7 @@ function SocialEditableSection({
     isGoogleInitialized,
     facebookAppId,
     googleClientId,
-  } = useSocialSignIn(currentUrl, () => {}); // todo: error handle
+  } = useSocialSignIn(currentUrl);
 
   const { arcSite } = useFusionContext();
   const { locale } = getProperties(arcSite);

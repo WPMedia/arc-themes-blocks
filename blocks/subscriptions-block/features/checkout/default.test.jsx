@@ -94,7 +94,6 @@ describe('Checkout Feature', () => {
 
     expect(updateUserProfileMock).toHaveBeenCalled();
 
-
     expect(wrapper.find('ContactInfo').exists()).toBe(false);
     expect(wrapper.find('PaymentInfo').exists()).toBe(true);
   });

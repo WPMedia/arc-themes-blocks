@@ -9,7 +9,7 @@ function SocialEditableFieldContainer({
   disconnectText,
 }) {
   return (
-    <>
+    <div>
       <PrimaryFont
         as="span"
         fontColor="primary-color"
@@ -31,7 +31,7 @@ function SocialEditableFieldContainer({
             </PrimaryFont>
           ) : null
         }
-    </>
+    </div>
   );
 }
 

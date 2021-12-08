@@ -7,6 +7,8 @@ import FacebookSignIn from '../../../components/SocialSignOn/_children/FacebookS
 import GoogleSignIn from '../../../components/SocialSignOn/_children/GoogleSignIn';
 import SocialEditableFieldContainer from './SocialEditableFieldContainer';
 
+import './social-editable-section-styles.scss';
+
 function SocialEditableSection({
   email, hasGoogle, hasFacebook, unlinkFacebook, unlinkGoogle,
 }) {
@@ -33,27 +35,35 @@ function SocialEditableSection({
     <>
       {
         isFacebookInitialized && facebookAppId ? (
-          <div>
-            <FacebookSignIn />
-            <SocialEditableFieldContainer
-              onDisconnectFunction={unlinkFacebook}
-              text={hasFacebook ? socialText : facebookConnectText}
-              disconnectText={disconnectText}
-              isConnected={hasFacebook}
-            />
+          <div className="social-editable-section--container">
+            <div className="social-editable-section--left-item">
+              <FacebookSignIn />
+            </div>
+            <div className="social-editable-section--right-item">
+              <SocialEditableFieldContainer
+                onDisconnectFunction={unlinkFacebook}
+                text={hasFacebook ? socialText : facebookConnectText}
+                disconnectText={disconnectText}
+                isConnected={hasFacebook}
+              />
+            </div>
           </div>
         ) : null
       }
       {
         isGoogleInitialized && googleClientId ? (
-          <div>
-            <GoogleSignIn />
-            <SocialEditableFieldContainer
-              onDisconnectFunction={unlinkGoogle}
-              text={hasGoogle ? socialText : googleConnectText}
-              disconnectText={disconnectText}
-              isConnected={hasGoogle}
-            />
+          <div className="social-editable-section--container">
+            <div className="social-editable-section--left-item">
+              <GoogleSignIn />
+            </div>
+            <div className="social-editable-section--right-item">
+              <SocialEditableFieldContainer
+                onDisconnectFunction={unlinkGoogle}
+                text={hasGoogle ? socialText : googleConnectText}
+                disconnectText={disconnectText}
+                isConnected={hasGoogle}
+              />
+            </div>
           </div>
         ) : null
       }

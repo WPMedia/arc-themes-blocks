@@ -5,8 +5,10 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { PrimaryFont } from '@wpmedia/shared-styles';
 import useIdentity from '@wpmedia/identity-block/components/Identity';
+import useSales from '../../components/useSales';
 import Cart from '../../components/Cart';
 import ContactInfo from '../../components/ContactInfo';
+import PaymentInfo from './_children/PaymentInfo';
 
 import './styles.scss';
 
@@ -16,10 +18,17 @@ const Checkout = ({
   const {
     offerURL,
   } = customFields;
-
-  const { Identity } = useIdentity();
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
+  const [orderNumber, setOrderNumber] = useState();
+  const [showPaymentScreen, setShowPaymentScreen] = useState(false);
+  const [payment, setPayment] = useState();
+
+  const { Identity } = useIdentity();
+  const { Sales } = useSales();
+
+  const { arcSite } = useFusionContext();
+  const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
 
   useEffect(() => {
     const isLoggedIn = async () => {
@@ -46,18 +55,28 @@ const Checkout = ({
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
-  const contactCallback = (contactInfo) => {
-    console.log('Contact info returned from user: ', contactInfo);
-  };
-
   const logoutCallback = () => {
     Identity.logout().then(() => {
       setUser(false);
     });
   };
-
-  const { arcSite } = useFusionContext();
-  const phrases = getTranslatedPhrases(getProperties(arcSite).locale || 'en');
+  const createNewOrder = ({
+    email, firstName, lastName, country,
+  }) => {
+    if (user) {
+      Identity.updateUserProfile({ firstName, lastName });
+    }
+    Sales.createNewOrder({ country }, email).then((order) => {
+      setOrderNumber(order.orderNumber);
+      Sales.getPaymentOptions().then((paymentOptions) => {
+        Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID)
+          .then((paymentObject) => {
+            setPayment(paymentObject);
+            setShowPaymentScreen(true);
+          });
+      });
+    });
+  };
 
   return (
     <PrimaryFont as="div" className="xpmedia-subscriptions-checkout">
@@ -65,12 +84,16 @@ const Checkout = ({
       <a href={offerURL} className="xpmedia-subscriptions-checkout--backlink">{phrases.t('checkout-block.back-to-offer-page')}</a>
 
       <Cart offerURL={offerURL} />
-      <ContactInfo
-        callback={contactCallback}
-        user={user}
-        logoutCallback={logoutCallback}
-      />
 
+      {!showPaymentScreen
+        ? (
+          <ContactInfo
+            callback={createNewOrder}
+            user={user}
+            logoutCallback={logoutCallback}
+          />
+        )
+        : <PaymentInfo orderNumber={orderNumber} paymentDetails={payment} />}
     </PrimaryFont>
   );
 };

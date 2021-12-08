@@ -31,8 +31,8 @@ function useSocialSignIn(redirectURL, onError) {
   }, [Identity]);
 
   useEffect(() => {
-    const initializeGoogle = async () => {
-      await Identity.initGoogleLogin(null, {
+    const initializeGoogle = async (googleClientId) => {
+      await Identity.initGoogleLogin(googleClientId, {
         width: 300,
         height: 48,
         onSuccess: () => {
@@ -46,7 +46,7 @@ function useSocialSignIn(redirectURL, onError) {
       });
     };
     if (config.googleClientId && !isGoogleInitialized) {
-      initializeGoogle();
+      initializeGoogle(config.googleClientId);
       setIsGoogleInitialized(true);
     }
   }, [Identity,

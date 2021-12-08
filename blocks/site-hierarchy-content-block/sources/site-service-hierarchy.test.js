@@ -48,6 +48,12 @@ describe('the site-service-hierarchy content source block', () => {
     expect(data._id).toEqual('/');
   });
 
+  it('when a hierarchy is provided and no sectionId', () => {
+    const data = contentSource.transform({ _id: '/' }, { hierarchy: 'links-bar', uri: '/test/test' });
+
+    expect(data._id).toEqual('/');
+  });
+
   it('when a hierarchy is not provided and sectionId is provided that matches the API data then the data is returned', () => {
     const data = contentSource.transform({ _id: '/sectionId' }, { hierarchy: '', sectionId: '/sectionId' });
 

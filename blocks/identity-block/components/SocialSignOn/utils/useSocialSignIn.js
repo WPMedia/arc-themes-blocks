@@ -31,8 +31,8 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
   }, [Identity]);
 
   useEffect(() => {
-    const initializeGoogle = async (googleClientId) => {
-      await Identity.initGoogleLogin(googleClientId, {
+    const initializeGoogle = async () => {
+      await Identity.initGoogleLogin(null, {
         width: 300,
         height: 48,
         onSuccess: () => {
@@ -46,7 +46,7 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
       });
     };
     if (config.googleClientId && !isGoogleInitialized) {
-      initializeGoogle(config.googleClientId);
+      initializeGoogle();
       setIsGoogleInitialized(true);
     }
   }, [Identity,
@@ -66,6 +66,15 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
   }, [Identity,
     config.facebookAppId,
     isFacebookInitialized]);
+
+  // if (!Identity) {
+  //   return {
+  //     facebookAppId: '',
+  //     googleClientId: '',
+  //     isFacebookInitialized: false,
+  //     isGoogleInitialized: false,
+  //   };
+  // }
 
   return {
     facebookAppId: config.facebookAppId,

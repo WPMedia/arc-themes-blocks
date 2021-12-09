@@ -7,7 +7,7 @@ describe('SocialEditableFieldContainer', () => {
     const wrapper = mount(<SocialEditableFieldContainer
       text="Connected user"
       onDisconnectFunction={() => {}}
-      isConnected
+      showDisconnectButton
       disconnectText="disconnect test"
     />);
     expect(wrapper.find('button').text()).toBe('disconnect test');
@@ -19,7 +19,7 @@ describe('SocialEditableFieldContainer', () => {
     const wrapper = mount(<SocialEditableFieldContainer
       text="Disconnected user"
       onDisconnectFunction={() => {}}
-      isConnected={false}
+      showDisconnectButton={false}
       disconnectText="disconnect test"
     />);
 

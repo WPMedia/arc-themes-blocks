@@ -99,7 +99,7 @@ const SampleOutputType = ({
   MetaTags,
   metaValue,
 }) => {
-  const { globalContent, arcSite } = useFusionContext();
+  const { globalContent, arcSite, requestUri } = useFusionContext();
   const {
     api,
     websiteName,
@@ -174,17 +174,28 @@ const SampleOutputType = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href={deployment(`${contextPath}/resources/favicon.ico`)} />
         <MetaData
+          arcSite={arcSite}
+          canonicalDomain={
+            /*
+             * Overriding specific page types here for primary website article sources if available
+             * author, homepage, *search, section, and tag will still go to the current site domain
+             */
+            metaValue('page-type')?.match(/^(article|gallery|video)$/)
+              ? getProperties(globalContent?.canonical_website)?.websiteDomain || null
+              : null
+          }
+          facebookAdmins={facebookAdmins}
+          fallbackImage={fallbackImage}
+          globalContent={globalContent}
+          outputCanonicalLink
           MetaTag={MetaTag}
           MetaTags={MetaTags}
           metaValue={metaValue}
-          globalContent={globalContent}
+          requestUri={requestUri}
+          resizerURL={resizerURL}
+          twitterUsername={twitterUsername}
           websiteName={websiteName}
           websiteDomain={websiteDomain}
-          twitterUsername={twitterUsername}
-          resizerURL={resizerURL}
-          arcSite={arcSite}
-          facebookAdmins={facebookAdmins}
-          fallbackImage={fallbackImage}
         />
         {fontUrlLink(fontUrl)}
         <CssLinks />

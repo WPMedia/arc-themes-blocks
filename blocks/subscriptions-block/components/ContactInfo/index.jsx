@@ -78,7 +78,13 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
               <>
                 {user.identities[0].type.toLowerCase() === 'google' && (
                   <>
-                    <img alt="Google" title="Google" className="identity-icon" src={GoogleIcon} />
+                    <img
+                      alt="Google"
+                      title="Google"
+                      className="identity-icon"
+                      src={GoogleIcon}
+                      data-testid="google-icon"
+                    />
                     <span>
                       {phrases.t('checkout-block.identity-social', { email: user.email })}
                     </span>
@@ -87,7 +93,13 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
                 )}
                 {user.identities[0].type.toLowerCase() === 'facebook' && (
                   <>
-                    <img alt="Facebook" title="Facebook" className="identity-icon" src={FacebookIcon} />
+                    <img
+                      alt="Facebook"
+                      title="Facebook"
+                      className="identity-icon"
+                      src={FacebookIcon}
+                      data-testid="facebook-icon"
+                    />
                     <span>
                       {phrases.t('checkout-block.identity-social', { email: user.email })}
                     </span>
@@ -151,6 +163,7 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
       </div>
 
       <Button
+        data-testid="contact-form-submit-btn"
         buttonSize={BUTTON_SIZES.MEDIUM}
         buttonStyle={BUTTON_STYLES.PRIMARY}
         fullWidth

@@ -31,4 +31,91 @@ describe('ContactInfo', () => {
     expect(wrapper.find('input').length).toEqual(3);
     expect(wrapper.find('button').length).toEqual(1);
   });
+  it('Does not call form callback when form is not filled out', () => {
+    const mockCallBack = jest.fn();
+    const wrapper = mount(
+      <ContactInfo
+        callback={mockCallBack}
+        user={false}
+        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+      />,
+    );
+    const btn = wrapper.find('Button');
+    btn.simulate('click');
+    expect(mockCallBack.mock.calls.length).toEqual(0);
+  });
+  it('renders sign out button when user is signed in', () => {
+    const wrapper = mount(
+      <ContactInfo
+        callback={() => { console.log('Contact info returned back to parent.'); }}
+        user={{
+          email: 'arcuser@gmail.com',
+          firstName: 'Arc',
+          lastName: 'Xp',
+          identities: [{
+            type: 'Google',
+          }],
+        }}
+        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+      />,
+    );
+
+    expect(wrapper.find('.sign-out-btn').exists()).toBe(true);
+  });
+  it('renders text and icon indicating user is signed in through Google', () => {
+    const wrapper = mount(
+      <ContactInfo
+        callback={() => { console.log('Contact info returned back to parent.'); }}
+        user={{
+          email: 'arcuser@gmail.com',
+          firstName: 'Arc',
+          lastName: 'Xp',
+          identities: [{
+            type: 'Google',
+          }],
+        }}
+        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+      />,
+    );
+
+    expect(wrapper.find('.identity-row').exists()).toBe(true);
+    expect(wrapper.find("[data-testid='google-icon']").length).toBe(1);
+  });
+  it('renders text and icon indicating user is signed in through Facebook', () => {
+    const wrapper = mount(
+      <ContactInfo
+        callback={() => { console.log('Contact info returned back to parent.'); }}
+        user={{
+          email: 'arcuser@gmail.com',
+          firstName: 'Arc',
+          lastName: 'Xp',
+          identities: [{
+            type: 'Facebook',
+          }],
+        }}
+        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+      />,
+    );
+
+    expect(wrapper.find('.identity-row').exists()).toBe(true);
+    expect(wrapper.find("[data-testid='facebook-icon']").length).toBe(1);
+  });
+  it('renders text indicating user is signed in through password', () => {
+    const wrapper = mount(
+      <ContactInfo
+        callback={() => { console.log('Contact info returned back to parent.'); }}
+        user={{
+          email: 'arcuser@gmail.com',
+          firstName: 'Arc',
+          lastName: 'Xp',
+          identities: [{
+            type: 'password',
+          }],
+        }}
+        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+      />,
+    );
+
+    expect(wrapper.find('.identity-row').exists()).toBe(true);
+  });
 });

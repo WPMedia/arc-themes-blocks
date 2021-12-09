@@ -20,8 +20,6 @@ function SocialEditableSection({
   const currentUrl = window.location.href;
 
   const {
-    isFacebookInitialized,
-    isGoogleInitialized,
     facebookAppId,
     googleClientId,
   } = useSocialSignIn(currentUrl);
@@ -38,7 +36,7 @@ function SocialEditableSection({
   return (
     <>
       {
-        isGoogleInitialized && googleClientId ? (
+        googleClientId ? (
           <div className="social-editable-section--container">
             <div className="social-editable-section--left-item">
               <GoogleSignIn />
@@ -55,7 +53,7 @@ function SocialEditableSection({
         ) : null
       }
       {
-        isFacebookInitialized && facebookAppId ? (
+        facebookAppId ? (
           <div className="social-editable-section--container">
             <div className="social-editable-section--left-item">
               <FacebookSignIn />

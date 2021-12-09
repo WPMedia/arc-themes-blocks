@@ -6,15 +6,6 @@ import useIdentity from '../Identity';
 jest.mock('../Identity');
 
 describe('Subscriptions Social Login Component', () => {
-  it('renders nothing if identity not initialized', () => {
-    useIdentity.mockImplementation(() => ({ isInitialized: false }));
-
-    const uninitializedWrapper = shallow(
-      <SocialSignOn onError={() => null} redirectURL="#" />,
-    );
-    expect(uninitializedWrapper.html()).toBe(null);
-  });
-
   it('renders nothing if config settings are false', () => {
     useIdentity.mockImplementation(() => ({
       isInitialized: true,
@@ -33,7 +24,8 @@ describe('Subscriptions Social Login Component', () => {
     const wrapper = shallow(
       <SocialSignOn onError={() => null} redirectURL="#" />,
     );
-    expect(wrapper.html()).toBe(null);
+    // don't render any facebook stuff, only show wrapper
+    expect(wrapper.html()).toBe('<section class="xpmedia-social-signin-wrapper"></section>');
   });
 
   it('renders only Google button', () => {

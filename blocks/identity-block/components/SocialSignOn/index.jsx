@@ -8,18 +8,9 @@ import useSocialSignIn from './utils/useSocialSignIn';
 
 const SocialSignOn = ({ onError, redirectURL }) => {
   const {
-    isFacebookInitialized,
-    isGoogleInitialized,
     facebookAppId,
     googleClientId,
   } = useSocialSignIn(redirectURL, onError);
-
-  // if one is ready, and the other isn't, done loading
-  const isLoading = !(isFacebookInitialized || isGoogleInitialized);
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <section className="xpmedia-social-signin-wrapper">

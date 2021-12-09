@@ -18,8 +18,6 @@ jest.mock('fusion:intl', () => ({
 describe('SocialEditableSection', () => {
   it('should render facebook and google with google and facebook app id', () => {
     useSocialSignIn.mockImplementation(() => ({
-      isFacebookInitialized: true,
-      isGoogleInitialized: true,
       facebookAppId: '123',
       googleClientId: '456',
     }));
@@ -30,22 +28,18 @@ describe('SocialEditableSection', () => {
   });
   it('should not render facebook and google without id', () => {
     useSocialSignIn.mockImplementation(() => ({
-      isFacebookInitialized: false,
-      isGoogleInitialized: false,
-      facebookAppId: '123',
-      googleClientId: '456',
+      facebookAppId: '',
+      googleClientId: '',
     }));
 
     const wrapper = shallow(<SocialEditableSection />);
     expect(wrapper.find('FacebookSignIn')).toHaveLength(0);
     expect(wrapper.find('GoogleSignIn')).toHaveLength(0);
   });
-  it('should render facebook only with google uninitialized', () => {
+  it('should render facebook only with google no id', () => {
     useSocialSignIn.mockImplementation(() => ({
-      isFacebookInitialized: true,
-      isGoogleInitialized: false,
       facebookAppId: '123',
-      googleClientId: '456',
+      googleClientId: '',
     }));
 
     const wrapper = mount(<SocialEditableSection />);

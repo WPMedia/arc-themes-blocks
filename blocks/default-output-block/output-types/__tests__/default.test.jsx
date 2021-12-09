@@ -485,6 +485,7 @@ describe('queryly render conditions', () => {
       useFusionContext: jest.fn(() => ({
         globalContent: {},
         arcSite: 'the-sun',
+        requestUri: '/queryly-search/?query=test%20search',
       })),
     }));
 

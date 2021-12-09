@@ -11,8 +11,8 @@ export default {
 
 export const contactInfo = () => (
   <ContactInfo
-    callback={() => { console.log('Contact info returned back to parent.'); }}
+    callback={() => 0}
     user={false}
-    logoutCallback={() => { console.log('Request sign out from parent.'); }}
+    logoutCallback={() => 0}
   />
 );

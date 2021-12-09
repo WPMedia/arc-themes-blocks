@@ -46,8 +46,9 @@ const Checkout = ({
     return () => { isActive = false; return null; };
   }, [Identity, loggedIn]);
 
+  // eslint-disable-next-line no-unused-vars
   const contactCallback = (contactInfo) => {
-    console.log('Contact info returned from user: ', contactInfo);
+    // TODO: Do something with the contact info
   };
 
   const logoutCallback = () => {

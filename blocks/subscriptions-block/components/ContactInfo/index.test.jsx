@@ -19,11 +19,13 @@ describe('ContactInfo', () => {
   });
 
   it('renders form and associated inputs', () => {
+    const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
-        callback={() => { console.log('Contact info returned back to parent.'); }}
+        callback={mockCallBack}
         user={false}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
 
@@ -33,11 +35,12 @@ describe('ContactInfo', () => {
   });
   it('Does not call form callback when form is not filled out', () => {
     const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
         callback={mockCallBack}
         user={false}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
     const btn = wrapper.find('Button');
@@ -45,9 +48,11 @@ describe('ContactInfo', () => {
     expect(mockCallBack.mock.calls.length).toEqual(0);
   });
   it('renders sign out button when user is signed in', () => {
+    const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
-        callback={() => { console.log('Contact info returned back to parent.'); }}
+        callback={mockCallBack}
         user={{
           email: 'arcuser@gmail.com',
           firstName: 'Arc',
@@ -56,16 +61,18 @@ describe('ContactInfo', () => {
             type: 'Google',
           }],
         }}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
 
     expect(wrapper.find('.sign-out-btn').exists()).toBe(true);
   });
   it('renders text and icon indicating user is signed in through Google', () => {
+    const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
-        callback={() => { console.log('Contact info returned back to parent.'); }}
+        callback={mockCallBack}
         user={{
           email: 'arcuser@gmail.com',
           firstName: 'Arc',
@@ -74,7 +81,7 @@ describe('ContactInfo', () => {
             type: 'Google',
           }],
         }}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
 
@@ -82,9 +89,11 @@ describe('ContactInfo', () => {
     expect(wrapper.find("[data-testid='google-icon']").length).toBe(1);
   });
   it('renders text and icon indicating user is signed in through Facebook', () => {
+    const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
-        callback={() => { console.log('Contact info returned back to parent.'); }}
+        callback={mockCallBack}
         user={{
           email: 'arcuser@gmail.com',
           firstName: 'Arc',
@@ -93,7 +102,7 @@ describe('ContactInfo', () => {
             type: 'Facebook',
           }],
         }}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
 
@@ -101,9 +110,11 @@ describe('ContactInfo', () => {
     expect(wrapper.find("[data-testid='facebook-icon']").length).toBe(1);
   });
   it('renders text indicating user is signed in through password', () => {
+    const mockCallBack = jest.fn();
+    const mockCallBack2 = jest.fn();
     const wrapper = mount(
       <ContactInfo
-        callback={() => { console.log('Contact info returned back to parent.'); }}
+        callback={mockCallBack}
         user={{
           email: 'arcuser@gmail.com',
           firstName: 'Arc',
@@ -112,7 +123,7 @@ describe('ContactInfo', () => {
             type: 'password',
           }],
         }}
-        logoutCallback={() => { console.log('Request sign out from parent.'); }}
+        logoutCallback={mockCallBack2}
       />,
     );
 

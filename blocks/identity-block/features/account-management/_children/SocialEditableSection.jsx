@@ -10,7 +10,11 @@ import SocialEditableFieldContainer from './SocialEditableFieldContainer';
 import './social-editable-section-styles.scss';
 
 function SocialEditableSection({
-  hasGoogle, hasFacebook, unlinkFacebook, unlinkGoogle,
+  hasFacebook,
+  hasGoogle,
+  hasPasswordAccount,
+  unlinkFacebook,
+  unlinkGoogle,
 }) {
   // get current because social sign in has reload and need to re-render page anyway
   const currentUrl = window.location.href;
@@ -44,7 +48,7 @@ function SocialEditableSection({
                 onDisconnectFunction={unlinkGoogle}
                 text={hasGoogle ? socialText : googleConnectText}
                 disconnectText={disconnectText}
-                isConnected={hasGoogle}
+                showDisconnectButton={hasGoogle && hasPasswordAccount}
               />
             </div>
           </div>
@@ -61,7 +65,7 @@ function SocialEditableSection({
                 onDisconnectFunction={unlinkFacebook}
                 text={hasFacebook ? socialText : facebookConnectText}
                 disconnectText={disconnectText}
-                isConnected={hasFacebook}
+                showDisconnectButton={hasFacebook && hasPasswordAccount}
               />
             </div>
           </div>

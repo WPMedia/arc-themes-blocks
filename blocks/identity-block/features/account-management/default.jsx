@@ -124,6 +124,7 @@ function AccountManagement({ customFields }) {
               hasFacebook={hasFacebook}
               unlinkFacebook={unlinkFacebook}
               unlinkGoogle={unlinkGoogle}
+              hasPasswordAccount={hasPassword}
             />
           </AccountManagementPresentational>
         ) : null

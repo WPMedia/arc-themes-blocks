@@ -5,7 +5,7 @@ import './social-editable-field-styles.scss';
 function SocialEditableFieldContainer({
   text,
   onDisconnectFunction,
-  isConnected,
+  showDisconnectButton,
   disconnectText,
 }) {
   return (
@@ -16,20 +16,20 @@ function SocialEditableFieldContainer({
         className="social-field--connected-label-text"
       >
         {text}
-        {isConnected ? ' ' : ''}
+        {showDisconnectButton ? ' ' : ''}
       </PrimaryFont>
       {
-          isConnected ? (
-            <PrimaryFont
-              as="button"
-              className="social-field--disconnect-link"
-              type="button"
-              onClick={onDisconnectFunction}
-              fontColor="primary-color"
-            >
-              {disconnectText}
-            </PrimaryFont>
-          ) : null
+        showDisconnectButton ? (
+          <PrimaryFont
+            as="button"
+            className="social-field--disconnect-link"
+            type="button"
+            onClick={onDisconnectFunction}
+            fontColor="primary-color"
+          >
+            {disconnectText}
+          </PrimaryFont>
+        ) : null
         }
     </div>
   );

@@ -137,7 +137,7 @@
 		"identity-block.current-password": "Current Password",
 		"identity-block.update-password-error": "There's been an error updating your password",
 		"identity-block.connected-accounts": "Connected Accounts",
-		"identity-block.connect-account": "Connected as %{email}",
+		"identity-block.connect-account": "Connected",
 		"identity-block.disconnect-account": "Disconnect",
 		"identity-block.connect-platform": "Connect %{platform}"
 	},

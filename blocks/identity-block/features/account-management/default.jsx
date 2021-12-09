@@ -120,7 +120,6 @@ function AccountManagement({ customFields }) {
         showSocialProfile ? (
           <AccountManagementPresentational header={socialProfileHeader}>
             <SocialEditableSection
-              email={email}
               hasGoogle={hasGoogle}
               hasFacebook={hasFacebook}
               unlinkFacebook={unlinkFacebook}

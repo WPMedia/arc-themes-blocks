@@ -65,6 +65,6 @@ describe('SocialEditableSection', () => {
       hasFacebook
       hasGoogle
     />);
-    expect(wrapper.find('span').at(0).text()).toEqual('Connected as %{email} ');
+    expect(wrapper.find('span').at(0).text()).toEqual('Connected ');
   });
 });

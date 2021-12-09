@@ -10,7 +10,7 @@ import SocialEditableFieldContainer from './SocialEditableFieldContainer';
 import './social-editable-section-styles.scss';
 
 function SocialEditableSection({
-  email, hasGoogle, hasFacebook, unlinkFacebook, unlinkGoogle,
+  hasGoogle, hasFacebook, unlinkFacebook, unlinkGoogle,
 }) {
   // get current because social sign in has reload and need to re-render page anyway
   const currentUrl = window.location.href;
@@ -26,7 +26,7 @@ function SocialEditableSection({
   const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
-  const socialText = phrases.t('identity-block.connect-account', { email });
+  const socialText = phrases.t('identity-block.connect-account');
   const disconnectText = phrases.t('identity-block.disconnect-account');
   const facebookConnectText = phrases.t('identity-block.connect-platform', { platform: 'Facebook' });
   const googleConnectText = phrases.t('identity-block.connect-platform', { platform: 'Google' });

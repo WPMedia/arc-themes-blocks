@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { FormInputField, FIELD_TYPES } from '@wpmedia/shared-styles';
 import EditableFormInput from '.';
-import FormInputField, { FIELD_TYPES } from '../FormInputField';
 
 export default {
   title: 'Blocks/Identity/Components/EditableFormInput',

@@ -139,7 +139,11 @@ export const TopTableList = (props) => {
           basic
         }
         label {
-          basic
+          basic {
+            display
+            url
+            text
+          }
         }
         owner {
           sponsored

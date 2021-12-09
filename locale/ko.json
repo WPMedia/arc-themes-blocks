@@ -1,138 +1,148 @@
 {
-  "shared-styles": {
-    "promo-label.gallery-text": "갤러리",
-    "promo-label.video-text": "비디오",
-    "byline.by-text": "저작자",
-    "byline.and-text": "및",
-    "overline.sponsored-content": "Sponsored Content"
-  },
-  "article-body-block": {
-    "article-body-block.correction": "정정",
-    "article-body-block.clarification": "설명",
-    "article-body-block.interstitial-link-aria-label": "관련 스토리 열기"
-  },
-  "full-author-bio-block": {
-    "full-author-bio-block.connect-text": "연결",
-    "full-author-bio-block.social-email": "이메일",
-    "full-author-bio-block.social-twitter": "Twitter에서 연결",
-    "full-author-bio-block.social-facebook": "Facebook에서 연결",
-    "full-author-bio-block.social-instagram": "Instagram에서 팔로우",
-    "full-author-bio-block.social-rss": "RSS 피드",
-    "full-author-bio-block.social-linkedin": "LinkedIn에서 연결",
-    "full-author-bio-block.social-reddit": "Reddit에서 연결",
-    "full-author-bio-block.social-youtube": "YouTube에서 연결",
-    "full-author-bio-block.social-medium": "Medium에서 연결",
-    "full-author-bio-block.social-tumblr": "Tumblr에서 연결",
-    "full-author-bio-block.social-pinterest": "Pinterest에서 연결",
-    "full-author-bio-block.social-snapchat": "Snapchat에서 연결",
-    "full-author-bio-block.social-whatsapp": "WhatsApp에서 연결",
-    "full-author-bio-block.social-soundcloud": "SoundCloud에서 듣기"
-  },
-  "global-phrases-block": {
-    "global.gallery-expand-button": "더보기",
-    "global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
-    "global.gallery-autoplay-button": "자동 재생",
-    "global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
-    "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "global.social-twitter": "Twitter",
-    "global.social-facebook": "Facebook",
-    "global.social-linkedin": "LinkedIn",
-    "global.social-pinterest": "Pinterest",
-    "global.social-email": "이메일",
-    "global.opens-in-new-window": "(새 창에서 열기)"
-  },
-  "header-nav-block": {
-    "header-nav-block.sections-button": "Sections",
-    "header-nav-block.sign-in-button": "Sign In",
-    "header-nav-block.search-text": "Search"
-  },
-  "header-nav-chain-block": {
-    "header-nav-chain-block.sections-button": "섹션",
-    "header-nav-chain-block.search-text": "검색",
-    "header-nav-chain-block.sections-button-aria-label": "%{item}개의 하위 섹션 표시",
-    "header-nav-chain-block.sections-element-aria-label": "섹션 메뉴",
-    "header-nav-chain-block.links-element-aria-label": "위쪽 링크",
-    "header-nav-chain-block.querly-search-aria-label": "Search"
-  },
-  "results-list-block": {
-    "results-list-block.see-more-button": "자세히 보기",
-    "results-list-block.see-more-button-aria-label": "이 주제에 대한 스토리 더 보기"
-  },
-  "search-results-list-block": {
-    "search-results-block.search-button": "검색",
-    "search-results-block.search-result-number": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
-    "search-results-block.see-more-button": "자세히 보기",
-    "search-results-block.see-more-button-aria-label": "이 주제에 대한 스토리 더 보기",
-    "search-results-blocks.search-input-placeholder": "검색어 입력"
-  },
-  "ads-block": {
-    "ads-block.ad-label": "광고"
-  },
-  "alert-bar-block": {
-    "alert-bar-block.element-aria-label": "속보 알림",
-    "alert-bar-block.close-button": "속보 알림 해제"
-  },
-  "footer-block": {
-    "footer-block.facebook-link": "Facebook 페이지",
-    "footer-block.twitter-link": "Twitter 피드",
-    "footer-block.rss-link": "RSS 피드"
-  },
-  "links-bar-block": {
-    "links-bar-block.element-aria-label": "링크 더 보기"
-  },
-  "share-bar-block": {
-    "share-bar-block.share-button-aria-label": "%{socialType}을(를) 통해 현재 기사 공유"
-  },
-  "author-bio-block": {
-    "author-bio-block.social-email": "%{authorName}(으)로 이메일 보내기",
-    "author-bio-block.social-rss": "%{authorName} RSS 피드 구독",
-    "author-bio-block.social-soundcloud": "SoundCloud에서 %{authorName} 듣기",
-    "author-bio-block.social-twitter": "Twitter에서 연결",
-    "author-bio-block.social-facebook": "Facebook에서 연결",
-    "author-bio-block.social-instagram": "Instagram에서 팔로우",
-    "author-bio-block.social-linkedin": "LinkedIn에서 연결",
-    "author-bio-block.social-reddit": "Reddit에서 연결",
-    "author-bio-block.social-youtube": "YouTube에서 연결",
-    "author-bio-block.social-medium": "Medium에서 연결",
-    "author-bio-block.social-tumblr": "Tumblr에서 연결",
-    "author-bio-block.social-pinterest": "Pinterest에서 연결",
-    "author-bio-block.social-snapchat": "Snapchat에서 연결",
-    "author-bio-block.social-whatsapp": "WhatsApp에서 연결"
-  },
-  "default-output-block": {
-    "default-output-block.skip-main": "메인 콘텐츠로 건너뛰기"
-  },
-  "identity-block": {
-    "identity-block.email": "Email address",
-    "identity-block.password": "Password",
-    "identity-block.sign-up": "Sign up",
-    "identity-block.confirm-password": "Confirm password",
-    "identity-block.username": "Username",
-    "identity-block.account": "Account",
-    "identity-block.manage-account": "Manage Your Account",
-    "identity-block.log-out": "Log Out",
-    "identity-block.log-in": "Log In",
-    "identity-block.login-options": "Log in options",
-    "identity-block.confirm-password-error": "Passwords must match",
-    "identity-block.password-requirements": "Please enter a valid password.",
-    "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
-    "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
-    "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
-    "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
-    "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
-    "identity-block.email-requirements": "Please enter a valid email address",
-    "identity-block.sign-up-form-error": "There's been an error creating your account",
-    "identity-block.login-form-error": "There's been an error logging you in",
-    "identity-block.login-links-login": "Already have an account? Log in.",
-    "identity-block.login-links-signup": "Sign up for an account."
-  },
-  "subscriptions-block": {
-    "checkout-block.headline": "Review Subscription Order",
-    "checkout-block.back-to-offer-page": "Back to subscription selection",
-    "checkout-block.order-summary": "Order Summary",
-    "checkout-block.due-today": "Due today",
-    "checkout-block.plus-sales-tax": "Plus applicable sales tax",
-    "checkout-block.empty-cart-message": "Select from one of our offers"
-  }
+	"shared-styles": {
+		"promo-label.gallery-text": "갤러리",
+		"promo-label.video-text": "비디오",
+		"byline.by-text": "저작자",
+		"byline.and-text": "및",
+		"overline.sponsored-content": "Sponsored Content"
+	},
+	"article-body-block": {
+		"article-body-block.correction": "정정",
+		"article-body-block.clarification": "설명",
+		"article-body-block.interstitial-link-aria-label": "관련 스토리 열기"
+	},
+	"full-author-bio-block": {
+		"full-author-bio-block.connect-text": "연결",
+		"full-author-bio-block.social-email": "이메일 전송",
+		"full-author-bio-block.social-twitter": "Twitter에서 연결",
+		"full-author-bio-block.social-facebook": "Facebook에서 연결",
+		"full-author-bio-block.social-instagram": "Instagram에서 팔로우",
+		"full-author-bio-block.social-rss": "RSS 피드",
+		"full-author-bio-block.social-linkedin": "LinkedIn에서 연결",
+		"full-author-bio-block.social-reddit": "Reddit에서 연결",
+		"full-author-bio-block.social-youtube": "YouTube에서 연결",
+		"full-author-bio-block.social-medium": "Medium에서 연결",
+		"full-author-bio-block.social-tumblr": "Tumblr에서 연결",
+		"full-author-bio-block.social-pinterest": "Pinterest에서 연결",
+		"full-author-bio-block.social-snapchat": "Snapchat에서 연결",
+		"full-author-bio-block.social-whatsapp": "WhatsApp에서 연결",
+		"full-author-bio-block.social-soundcloud": "SoundCloud에서 듣기"
+	},
+	"global-phrases-block": {
+		"global.gallery-expand-button": "더보기",
+		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
+		"global.gallery-autoplay-button": "자동 재생",
+		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.social-twitter": "Twitter",
+		"global.social-facebook": "Facebook",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-pinterest": "Pinterest",
+		"global.social-email": "이메일 전송",
+		"global.opens-in-new-window": "(새 창에서 열기)"
+	},
+	"header-nav-block": {
+		"header-nav-block.sections-button": "섹션",
+		"header-nav-block.sign-in-button": "Sign In",
+		"header-nav-block.search-text": "검색"
+	},
+	"header-nav-chain-block": {
+		"header-nav-chain-block.sections-button": "섹션",
+		"header-nav-chain-block.search-text": "검색",
+		"header-nav-chain-block.sections-button-aria-label": "%{item}개의 하위 섹션 표시",
+		"header-nav-chain-block.sections-element-aria-label": "섹션 메뉴",
+		"header-nav-chain-block.links-element-aria-label": "위쪽 링크",
+		"header-nav-chain-block.querly-search-aria-label": "검색"
+	},
+	"results-list-block": {
+		"results-list-block.see-more-button": "자세히 보기",
+		"results-list-block.see-more-button-aria-label": "이 주제에 대한 스토리 더 보기"
+	},
+	"search-results-list-block": {
+		"search-results-block.search-button": "검색",
+		"search-results-block.search-result-number": "\"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개 |||| \"%{searchTerm}\"에 대한 검색 결과 %{smart_count}개",
+		"search-results-block.see-more-button": "자세히 보기",
+		"search-results-block.see-more-button-aria-label": "이 주제에 대한 스토리 더 보기",
+		"search-results-blocks.search-input-placeholder": "검색어 입력"
+	},
+	"ads-block": {
+		"ads-block.ad-label": "광고"
+	},
+	"alert-bar-block": {
+		"alert-bar-block.element-aria-label": "속보 알림",
+		"alert-bar-block.close-button": "속보 알림 해제"
+	},
+	"footer-block": {
+		"footer-block.facebook-link": "Facebook 페이지",
+		"footer-block.twitter-link": "Twitter 피드",
+		"footer-block.rss-link": "RSS 피드"
+	},
+	"links-bar-block": {
+		"links-bar-block.element-aria-label": "링크 더 보기"
+	},
+	"share-bar-block": {
+		"share-bar-block.share-button-aria-label": "%{socialType}을(를) 통해 현재 기사 공유"
+	},
+	"author-bio-block": {
+		"author-bio-block.social-email": "%{authorName}(으)로 이메일 보내기",
+		"author-bio-block.social-rss": "%{authorName} RSS 피드 구독",
+		"author-bio-block.social-soundcloud": "SoundCloud에서 %{authorName} 듣기",
+		"author-bio-block.social-twitter": "Twitter에서 연결",
+		"author-bio-block.social-facebook": "Facebook에서 연결",
+		"author-bio-block.social-instagram": "Instagram에서 팔로우",
+		"author-bio-block.social-linkedin": "LinkedIn에서 연결",
+		"author-bio-block.social-reddit": "Reddit에서 연결",
+		"author-bio-block.social-youtube": "YouTube에서 연결",
+		"author-bio-block.social-medium": "Medium에서 연결",
+		"author-bio-block.social-tumblr": "Tumblr에서 연결",
+		"author-bio-block.social-pinterest": "Pinterest에서 연결",
+		"author-bio-block.social-snapchat": "Snapchat에서 연결",
+		"author-bio-block.social-whatsapp": "WhatsApp에서 연결"
+	},
+	"default-output-block": {
+		"default-output-block.skip-main": "메인 콘텐츠로 건너뛰기"
+	},
+	"identity-block": {
+		"identity-block.email": "이메일 주소",
+		"identity-block.password": "비밀번호",
+		"identity-block.sign-up": "Sign Up",
+		"identity-block.confirm-password": "Confirm password",
+		"identity-block.username": "사용자 이름",
+		"identity-block.account": "Account",
+		"identity-block.manage-account": "Manage Your Account",
+		"identity-block.log-out": "로그아웃",
+		"identity-block.log-in": "Log In",
+		"identity-block.login-options": "Log in options",
+		"identity-block.confirm-password-error": "Passwords must match",
+		"identity-block.password-requirements": "Please enter a valid password.",
+		"identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+		"identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+		"identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+		"identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+		"identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+		"identity-block.email-requirements": "Please enter a valid email address",
+		"identity-block.sign-up-form-error": "There's been an error creating your account",
+		"identity-block.login-form-error": "There's been an error logging you in",
+		"identity-block.login-links-login": "Already have an account? Log in.",
+		"identity-block.login-links-signup": "Sign up for an account.",
+		"identity-block.account-information": "Account Information",
+		"identity-block.edit": "Edit",
+		"identity-block.save": "Save",
+		"identity-block.cancel": "Cancel",
+		"identity-block.update-email-error": "There's been an error updating your email address",
+		"identity-block.password-placeholder": "**********",
+		"identity-block.add-password": "Add Password",
+		"identity-block.new-password": "New Password",
+		"identity-block.current-password": "Current Password",
+		"identity-block.update-password-error": "There's been an error updating your password"
+	},
+	"subscriptions-block": {
+		"checkout-block.headline": "Review Subscription Order",
+		"checkout-block.back-to-offer-page": "Back to subscription selection",
+		"checkout-block.order-summary": "Order Summary",
+		"checkout-block.due-today": "Due today",
+		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.empty-cart-message": "Select from one of our offers"
+	}
 }

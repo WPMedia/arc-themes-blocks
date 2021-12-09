@@ -1,138 +1,148 @@
 {
-  "shared-styles": {
-    "promo-label.gallery-text": "Galerie",
-    "promo-label.video-text": "Vidéo",
-    "byline.by-text": "Par",
-    "byline.and-text": "et",
-    "overline.sponsored-content": "Contenu sponsorisé"
-  },
-  "article-body-block": {
-    "article-body-block.correction": "Correction",
-    "article-body-block.clarification": "Précision",
-    "article-body-block.interstitial-link-aria-label": "Ouvrir un article associé"
-  },
-  "full-author-bio-block": {
-    "full-author-bio-block.connect-text": "Connecter",
-    "full-author-bio-block.social-email": "E-mail",
-    "full-author-bio-block.social-twitter": "Se connecter sur Twitter",
-    "full-author-bio-block.social-facebook": "Se connecter sur Facebook",
-    "full-author-bio-block.social-instagram": "Suivre sur Instagram",
-    "full-author-bio-block.social-rss": "Flux RSS",
-    "full-author-bio-block.social-linkedin": "Se connecter sur LinkedIn",
-    "full-author-bio-block.social-reddit": "Se connecter sur Reddit",
-    "full-author-bio-block.social-youtube": "Se connecter sur YouTube",
-    "full-author-bio-block.social-medium": "Se connecter sur Medium",
-    "full-author-bio-block.social-tumblr": "Se connecter sur Tumblr",
-    "full-author-bio-block.social-pinterest": "Se connecter sur Pinterest",
-    "full-author-bio-block.social-snapchat": "Se connecter sur Snapchat",
-    "full-author-bio-block.social-whatsapp": "Se connecter sur WhatsApp",
-    "full-author-bio-block.social-soundcloud": "Écouter sur SoundCloud"
-  },
-  "global-phrases-block": {
-    "global.gallery-expand-button": "Développer",
-    "global.gallery-page-count-text": "%{current} de %{total}",
-    "global.gallery-autoplay-button": "Lecture automatique",
-    "global.gallery-pause-autoplay-button": "Mettre en pause la lecture automatique",
-    "global.gallery-autoplay-label-start": "Start automatic slide show",
-    "global.gallery-autoplay-label-stop": "Stop automatic slide show",
-    "global.social-twitter": "Twitter",
-    "global.social-facebook": "Facebook",
-    "global.social-linkedin": "LinkedIn",
-    "global.social-pinterest": "Pinterest",
-    "global.social-email": "E-mail",
-    "global.opens-in-new-window": "(S'ouvre dans une nouvelle fenêtre)"
-  },
-  "header-nav-block": {
-    "header-nav-block.sections-button": "Sections",
-    "header-nav-block.sign-in-button": "Sign In",
-    "header-nav-block.search-text": "Rechercher"
-  },
-  "header-nav-chain-block": {
-    "header-nav-chain-block.sections-button": "Sections",
-    "header-nav-chain-block.search-text": "Rechercher",
-    "header-nav-chain-block.sections-button-aria-label": "Afficher les sous-sections de %{item}",
-    "header-nav-chain-block.sections-element-aria-label": "Menu des sections",
-    "header-nav-chain-block.links-element-aria-label": "Principaux liens",
-    "header-nav-chain-block.querly-search-aria-label": "Search"
-  },
-  "results-list-block": {
-    "results-list-block.see-more-button": "En savoir plus",
-    "results-list-block.see-more-button-aria-label": "Voir plus d'articles concernant ce sujet"
-  },
-  "search-results-list-block": {
-    "search-results-block.search-button": "Rechercher",
-    "search-results-block.search-result-number": "%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
-    "search-results-block.see-more-button": "En savoir plus",
-    "search-results-block.see-more-button-aria-label": "Voir plus d'articles concernant ce sujet",
-    "search-results-blocks.search-input-placeholder": "Entrez vos termes de recherche"
-  },
-  "ads-block": {
-    "ads-block.ad-label": "PUBLICITÉ"
-  },
-  "alert-bar-block": {
-    "alert-bar-block.element-aria-label": "Alerte de dernière minute",
-    "alert-bar-block.close-button": "Ignorer l'alerte de dernière minute"
-  },
-  "footer-block": {
-    "footer-block.facebook-link": "Page Facebook",
-    "footer-block.twitter-link": "Flux Twitter",
-    "footer-block.rss-link": "Flux RSS"
-  },
-  "links-bar-block": {
-    "links-bar-block.element-aria-label": "Plus de liens"
-  },
-  "share-bar-block": {
-    "share-bar-block.share-button-aria-label": "Partager l'article en cours via %{socialType}"
-  },
-  "author-bio-block": {
-    "author-bio-block.social-email": "Envoyer un e-mail à %{authorName}",
-    "author-bio-block.social-rss": "S'abonner au flux RSS de %{authorName}",
-    "author-bio-block.social-soundcloud": "Écouter %{authorName} sur SoundCloud",
-    "author-bio-block.social-twitter": "Se connecter sur Twitter",
-    "author-bio-block.social-facebook": "Se connecter sur Facebook",
-    "author-bio-block.social-instagram": "Suivre sur Instagram",
-    "author-bio-block.social-linkedin": "Se connecter sur LinkedIn",
-    "author-bio-block.social-reddit": "Se connecter sur Reddit",
-    "author-bio-block.social-youtube": "Se connecter sur YouTube",
-    "author-bio-block.social-medium": "Se connecter sur Medium",
-    "author-bio-block.social-tumblr": "Se connecter sur Tumblr",
-    "author-bio-block.social-pinterest": "Se connecter sur Pinterest",
-    "author-bio-block.social-snapchat": "Se connecter sur Snapchat",
-    "author-bio-block.social-whatsapp": "Se connecter sur WhatsApp"
-  },
-  "default-output-block": {
-    "default-output-block.skip-main": "Passer au contenu principal"
-  },
-  "identity-block": {
-    "identity-block.email": "Email address",
-    "identity-block.password": "Password",
-    "identity-block.sign-up": "Sign up",
-    "identity-block.confirm-password": "Confirm password",
-    "identity-block.username": "Username",
-    "identity-block.account": "Account",
-    "identity-block.manage-account": "Manage Your Account",
-    "identity-block.log-out": "Log Out",
-    "identity-block.log-in": "Log In",
-    "identity-block.login-options": "Log in options",
-    "identity-block.confirm-password-error": "Passwords must match",
-    "identity-block.password-requirements": "Please enter a valid password.",
-    "identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
-    "identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
-    "identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
-    "identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
-    "identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
-    "identity-block.email-requirements": "Please enter a valid email address",
-    "identity-block.sign-up-form-error": "There's been an error creating your account",
-    "identity-block.login-form-error": "There's been an error logging you in",
-    "identity-block.login-links-login": "Already have an account? Log in.",
-    "identity-block.login-links-signup": "Sign up for an account."
-  },
-  "subscriptions-block": {
-    "checkout-block.headline": "Review Subscription Order",
-    "checkout-block.back-to-offer-page": "Back to subscription selection",
-    "checkout-block.order-summary": "Order Summary",
-    "checkout-block.due-today": "Due today",
-    "checkout-block.plus-sales-tax": "Plus applicable sales tax",
-    "checkout-block.empty-cart-message": "Select from one of our offers"
-  }
+	"shared-styles": {
+		"promo-label.gallery-text": "Galerie",
+		"promo-label.video-text": "Vidéo",
+		"byline.by-text": "Par",
+		"byline.and-text": "et",
+		"overline.sponsored-content": "Contenu sponsorisé"
+	},
+	"article-body-block": {
+		"article-body-block.correction": "Correction",
+		"article-body-block.clarification": "Précision",
+		"article-body-block.interstitial-link-aria-label": "Ouvrir un article associé"
+	},
+	"full-author-bio-block": {
+		"full-author-bio-block.connect-text": "Connecter",
+		"full-author-bio-block.social-email": "E-mail",
+		"full-author-bio-block.social-twitter": "Se connecter sur Twitter",
+		"full-author-bio-block.social-facebook": "Se connecter sur Facebook",
+		"full-author-bio-block.social-instagram": "Suivre sur Instagram",
+		"full-author-bio-block.social-rss": "Flux RSS",
+		"full-author-bio-block.social-linkedin": "Se connecter sur LinkedIn",
+		"full-author-bio-block.social-reddit": "Se connecter sur Reddit",
+		"full-author-bio-block.social-youtube": "Se connecter sur YouTube",
+		"full-author-bio-block.social-medium": "Se connecter sur Medium",
+		"full-author-bio-block.social-tumblr": "Se connecter sur Tumblr",
+		"full-author-bio-block.social-pinterest": "Se connecter sur Pinterest",
+		"full-author-bio-block.social-snapchat": "Se connecter sur Snapchat",
+		"full-author-bio-block.social-whatsapp": "Se connecter sur WhatsApp",
+		"full-author-bio-block.social-soundcloud": "Écouter sur SoundCloud"
+	},
+	"global-phrases-block": {
+		"global.gallery-expand-button": "Développer",
+		"global.gallery-page-count-text": "%{current} de %{total}",
+		"global.gallery-autoplay-button": "Lecture automatique",
+		"global.gallery-pause-autoplay-button": "Mettre en pause la lecture automatique",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.social-twitter": "Twitter",
+		"global.social-facebook": "Facebook",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-pinterest": "Pinterest",
+		"global.social-email": "E-mail",
+		"global.opens-in-new-window": "(S'ouvre dans une nouvelle fenêtre)"
+	},
+	"header-nav-block": {
+		"header-nav-block.sections-button": "Sections",
+		"header-nav-block.sign-in-button": "Sign In",
+		"header-nav-block.search-text": "Rechercher"
+	},
+	"header-nav-chain-block": {
+		"header-nav-chain-block.sections-button": "Sections",
+		"header-nav-chain-block.search-text": "Rechercher",
+		"header-nav-chain-block.sections-button-aria-label": "Afficher les sous-sections de %{item}",
+		"header-nav-chain-block.sections-element-aria-label": "Menu des sections",
+		"header-nav-chain-block.links-element-aria-label": "Principaux liens",
+		"header-nav-chain-block.querly-search-aria-label": "Rechercher"
+	},
+	"results-list-block": {
+		"results-list-block.see-more-button": "En savoir plus",
+		"results-list-block.see-more-button-aria-label": "Voir plus d'articles concernant ce sujet"
+	},
+	"search-results-list-block": {
+		"search-results-block.search-button": "Rechercher",
+		"search-results-block.search-result-number": "%{smart_count} résultat pour \"%{searchTerm}\" |||| %{smart_count} résultats pour \"%{searchTerm}\"",
+		"search-results-block.see-more-button": "En savoir plus",
+		"search-results-block.see-more-button-aria-label": "Voir plus d'articles concernant ce sujet",
+		"search-results-blocks.search-input-placeholder": "Entrez vos termes de recherche"
+	},
+	"ads-block": {
+		"ads-block.ad-label": "PUBLICITÉ"
+	},
+	"alert-bar-block": {
+		"alert-bar-block.element-aria-label": "Alerte de dernière minute",
+		"alert-bar-block.close-button": "Ignorer l'alerte de dernière minute"
+	},
+	"footer-block": {
+		"footer-block.facebook-link": "Page Facebook",
+		"footer-block.twitter-link": "Flux Twitter",
+		"footer-block.rss-link": "Flux RSS"
+	},
+	"links-bar-block": {
+		"links-bar-block.element-aria-label": "Plus de liens"
+	},
+	"share-bar-block": {
+		"share-bar-block.share-button-aria-label": "Partager l'article en cours via %{socialType}"
+	},
+	"author-bio-block": {
+		"author-bio-block.social-email": "Envoyer un e-mail à %{authorName}",
+		"author-bio-block.social-rss": "S'abonner au flux RSS de %{authorName}",
+		"author-bio-block.social-soundcloud": "Écouter %{authorName} sur SoundCloud",
+		"author-bio-block.social-twitter": "Se connecter sur Twitter",
+		"author-bio-block.social-facebook": "Se connecter sur Facebook",
+		"author-bio-block.social-instagram": "Suivre sur Instagram",
+		"author-bio-block.social-linkedin": "Se connecter sur LinkedIn",
+		"author-bio-block.social-reddit": "Se connecter sur Reddit",
+		"author-bio-block.social-youtube": "Se connecter sur YouTube",
+		"author-bio-block.social-medium": "Se connecter sur Medium",
+		"author-bio-block.social-tumblr": "Se connecter sur Tumblr",
+		"author-bio-block.social-pinterest": "Se connecter sur Pinterest",
+		"author-bio-block.social-snapchat": "Se connecter sur Snapchat",
+		"author-bio-block.social-whatsapp": "Se connecter sur WhatsApp"
+	},
+	"default-output-block": {
+		"default-output-block.skip-main": "Passer au contenu principal"
+	},
+	"identity-block": {
+		"identity-block.email": "Adresse e-mail",
+		"identity-block.password": "Mot de passe",
+		"identity-block.sign-up": "Sign Up",
+		"identity-block.confirm-password": "Confirm password",
+		"identity-block.username": "Nom d’utilisateur",
+		"identity-block.account": "Account",
+		"identity-block.manage-account": "Manage Your Account",
+		"identity-block.log-out": "Déconnexion",
+		"identity-block.log-in": "Log In",
+		"identity-block.login-options": "Log in options",
+		"identity-block.confirm-password-error": "Passwords must match",
+		"identity-block.password-requirements": "Please enter a valid password.",
+		"identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+		"identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+		"identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+		"identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+		"identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+		"identity-block.email-requirements": "Please enter a valid email address",
+		"identity-block.sign-up-form-error": "There's been an error creating your account",
+		"identity-block.login-form-error": "There's been an error logging you in",
+		"identity-block.login-links-login": "Already have an account? Log in.",
+		"identity-block.login-links-signup": "Sign up for an account.",
+		"identity-block.account-information": "Account Information",
+		"identity-block.edit": "Edit",
+		"identity-block.save": "Save",
+		"identity-block.cancel": "Cancel",
+		"identity-block.update-email-error": "There's been an error updating your email address",
+		"identity-block.password-placeholder": "**********",
+		"identity-block.add-password": "Add Password",
+		"identity-block.new-password": "New Password",
+		"identity-block.current-password": "Current Password",
+		"identity-block.update-password-error": "There's been an error updating your password"
+	},
+	"subscriptions-block": {
+		"checkout-block.headline": "Review Subscription Order",
+		"checkout-block.back-to-offer-page": "Back to subscription selection",
+		"checkout-block.order-summary": "Order Summary",
+		"checkout-block.due-today": "Due today",
+		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.empty-cart-message": "Select from one of our offers"
+	}
 }

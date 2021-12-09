@@ -1,36 +1,36 @@
 {
 	"identity-block.email": {
-		"de": "Email address",
+		"de": "E-Mail-Adresse",
 		"en": "Email address",
-		"es": "Email address",
-		"fr": "Email address",
-		"ja": "Email address",
-		"ko": "Email address",
+		"es": "Dirección de correo electrónico",
+		"fr": "Adresse e-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일 주소",
 		"no": "Email address",
 		"pt": "Email address",
 		"sv": "Email address"
 	},
 	"identity-block.password": {
-		"de": "Password",
+		"de": "Passwort",
 		"en": "Password",
-		"es": "Password",
-		"fr": "Password",
-		"ja": "Password",
-		"ko": "Password",
+		"es": "Contraseña",
+		"fr": "Mot de passe",
+		"ja": "パスワード",
+		"ko": "비밀번호",
 		"no": "Password",
 		"pt": "Password",
 		"sv": "Password"
 	},
 	"identity-block.sign-up": {
-		"de": "Sign up",
-		"en": "Sign up",
-		"es": "Sign up",
-		"fr": "Sign up",
-		"ja": "Sign up",
-		"ko": "Sign up",
-		"no": "Sign up",
-		"pt": "Sign up",
-		"sv": "Sign up"
+		"de": "Sign Up",
+		"en": "Sign Up",
+		"es": "Sign Up",
+		"fr": "Sign Up",
+		"ja": "Sign Up",
+		"ko": "Sign Up",
+		"no": "Sign Up",
+		"pt": "Sign Up",
+		"sv": "Sign Up"
 	},
 	"identity-block.confirm-password": {
 		"de": "Confirm password",
@@ -44,12 +44,12 @@
 		"sv": "Confirm password"
 	},
 	"identity-block.username": {
-		"de": "Username",
+		"de": "Benutzername",
 		"en": "Username",
-		"es": "Username",
-		"fr": "Username",
-		"ja": "Username",
-		"ko": "Username",
+		"es": "Nombre de usuario",
+		"fr": "Nom d’utilisateur",
+		"ja": "ユーザー名",
+		"ko": "사용자 이름",
 		"no": "Username",
 		"pt": "Username",
 		"sv": "Username"
@@ -77,12 +77,12 @@
 		"sv": "Manage Your Account"
 	},
 	"identity-block.log-out": {
-		"de": "Log Out",
+		"de": "Ausloggen",
 		"en": "Log Out",
-		"es": "Log Out",
-		"fr": "Log Out",
-		"ja": "Log Out",
-		"ko": "Log Out",
+		"es": "Cerrar sesión",
+		"fr": "Déconnexion",
+		"ja": "ログアウト",
+		"ko": "로그아웃",
 		"no": "Log Out",
 		"pt": "Log Out",
 		"sv": "Log Out"
@@ -240,5 +240,115 @@
 		"no": "Sign up for an account.",
 		"pt": "Sign up for an account.",
 		"sv": "Sign up for an account."
+	},
+	"identity-block.account-information": {
+		"de": "Account Information",
+		"en": "Account Information",
+		"es": "Account Information",
+		"fr": "Account Information",
+		"ja": "Account Information",
+		"ko": "Account Information",
+		"no": "Account Information",
+		"pt": "Account Information",
+		"sv": "Account Information"
+	},
+	"identity-block.edit": {
+		"de": "Edit",
+		"en": "Edit",
+		"es": "Edit",
+		"fr": "Edit",
+		"ja": "Edit",
+		"ko": "Edit",
+		"no": "Edit",
+		"pt": "Edit",
+		"sv": "Edit"
+	},
+	"identity-block.save": {
+		"de": "Save",
+		"en": "Save",
+		"es": "Save",
+		"fr": "Save",
+		"ja": "Save",
+		"ko": "Save",
+		"no": "Save",
+		"pt": "Save",
+		"sv": "Save"
+	},
+	"identity-block.cancel": {
+		"de": "Cancel",
+		"en": "Cancel",
+		"es": "Cancel",
+		"fr": "Cancel",
+		"ja": "Cancel",
+		"ko": "Cancel",
+		"no": "Cancel",
+		"pt": "Cancel",
+		"sv": "Cancel"
+	},
+	"identity-block.update-email-error": {
+		"de": "There's been an error updating your email address",
+		"en": "There's been an error updating your email address",
+		"es": "There's been an error updating your email address",
+		"fr": "There's been an error updating your email address",
+		"ja": "There's been an error updating your email address",
+		"ko": "There's been an error updating your email address",
+		"no": "There's been an error updating your email address",
+		"pt": "There's been an error updating your email address",
+		"sv": "There's been an error updating your email address"
+	},
+	"identity-block.password-placeholder": {
+		"de": "**********",
+		"en": "**********",
+		"es": "**********",
+		"fr": "**********",
+		"ja": "**********",
+		"ko": "**********",
+		"no": "**********",
+		"pt": "**********",
+		"sv": "**********"
+	},
+	"identity-block.add-password": {
+		"de": "Add Password",
+		"en": "Add Password",
+		"es": "Add Password",
+		"fr": "Add Password",
+		"ja": "Add Password",
+		"ko": "Add Password",
+		"no": "Add Password",
+		"pt": "Add Password",
+		"sv": "Add Password"
+	},
+	"identity-block.new-password": {
+		"de": "New Password",
+		"en": "New Password",
+		"es": "New Password",
+		"fr": "New Password",
+		"ja": "New Password",
+		"ko": "New Password",
+		"no": "New Password",
+		"pt": "New Password",
+		"sv": "New Password"
+	},
+	"identity-block.current-password": {
+		"de": "Current Password",
+		"en": "Current Password",
+		"es": "Current Password",
+		"fr": "Current Password",
+		"ja": "Current Password",
+		"ko": "Current Password",
+		"no": "Current Password",
+		"pt": "Current Password",
+		"sv": "Current Password"
+	},
+	"identity-block.update-password-error": {
+		"de": "There's been an error updating your password",
+		"en": "There's been an error updating your password",
+		"es": "There's been an error updating your password",
+		"fr": "There's been an error updating your password",
+		"ja": "There's been an error updating your password",
+		"ko": "There's been an error updating your password",
+		"no": "There's been an error updating your password",
+		"pt": "There's been an error updating your password",
+		"sv": "There's been an error updating your password"
 	}
 }

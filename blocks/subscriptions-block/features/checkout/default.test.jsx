@@ -97,4 +97,16 @@ describe('Checkout Feature', () => {
     expect(wrapper.find('ContactInfo').exists()).toBe(false);
     expect(wrapper.find('PaymentInfo').exists()).toBe(true);
   });
+
+  it('renders a contact info form', () => {
+    const wrapper = mount(
+      <Checkout
+        customFields={{
+          offerURL: '/offer-url/',
+        }}
+      />,
+    );
+
+    expect(wrapper.find('.xpmedia-subscriptions-contact-info').exists()).toBe(true);
+  });
 });

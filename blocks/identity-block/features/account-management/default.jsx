@@ -96,7 +96,7 @@ function AccountManagement({ customFields }) {
 
   // if logged in, return account info
   return (
-    <>
+    <div className="account-management-layout--wrapper">
       <AccountManagementPresentational header={header}>
         {
           showEmail && (
@@ -129,7 +129,7 @@ function AccountManagement({ customFields }) {
           </AccountManagementPresentational>
         ) : null
       }
-    </>
+    </div>
   );
 }
 

@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import {
+  FIELD_TYPES, FormInputField,
+} from '@wpmedia/shared-styles';
 import { useIdentity } from '../../..';
 import EditableFieldPresentational from '../../../components/EditableFormInputField';
-import FormInputField, { FIELD_TYPES } from '../../../components/FormInputField';
 
 function EmailEditableFieldContainer({ email, setEmail }) {
   const [formErrorText, setFormErrorText] = useState(null);

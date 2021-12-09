@@ -4,8 +4,6 @@ import useIdentity from '../../Identity';
 function useSocialSignIn(redirectURL, onError = () => {}) {
   const { Identity } = useIdentity();
   const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
-  const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);
-  const [isFacebookInitialized, setIsFacebookInitialized] = useState(false);
 
   const isGoogleReset = useRef(false);
 
@@ -18,7 +16,7 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
         onError();
       }
     };
-  });
+  }, [Identity, onError, redirectURL]);
 
   useEffect(() => {
     const fetchConfig = async () => {
@@ -45,42 +43,33 @@ function useSocialSignIn(redirectURL, onError = () => {}) {
         onFailure: () => { onError(); },
       });
     };
-    if (config.googleClientId && !isGoogleInitialized) {
+    if (config.googleClientId) {
       initializeGoogle();
-      setIsGoogleInitialized(true);
     }
-  }, [Identity,
+  }, [
+    Identity,
     config.googleClientId,
-    isGoogleInitialized,
     onError,
-    redirectURL]);
+    redirectURL,
+  ]);
 
   useEffect(() => {
     const initializeFacebook = async () => {
       await Identity.initFacebookLogin(null);
     };
-    if (config.facebookAppId && !isFacebookInitialized) {
+    if (config.facebookAppId) {
       initializeFacebook();
-      setIsFacebookInitialized(true);
     }
-  }, [Identity,
+  }, [
+    Identity,
     config.facebookAppId,
-    isFacebookInitialized]);
-
-  // if (!Identity) {
-  //   return {
-  //     facebookAppId: '',
-  //     googleClientId: '',
-  //     isFacebookInitialized: false,
-  //     isGoogleInitialized: false,
-  //   };
-  // }
+  ]);
 
   return {
+    // if facebook and google setup with subs,
+    // then they will have a truthy value here
     facebookAppId: config.facebookAppId,
     googleClientId: config.googleClientId,
-    isFacebookInitialized,
-    isGoogleInitialized,
   };
 }
 

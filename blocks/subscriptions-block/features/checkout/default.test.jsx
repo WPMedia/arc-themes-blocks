@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Checkout from './default';
 
 jest.mock('fusion:properties', () => (jest.fn(() => ({ api: { retail: { origin: '' } } }))));
@@ -21,5 +21,17 @@ describe('The Offer feature', () => {
 
     expect(wrapper.find('a').prop('href')).toBe('/offer-url/');
     expect(wrapper.find('Cart').exists()).toBe(true);
+  });
+
+  it('renders a contact info form', () => {
+    const wrapper = mount(
+      <Checkout
+        customFields={{
+          offerURL: '/offer-url/',
+        }}
+      />,
+    );
+
+    expect(wrapper.find('.xpmedia-subscriptions-contact-info').exists()).toBe(true);
   });
 });

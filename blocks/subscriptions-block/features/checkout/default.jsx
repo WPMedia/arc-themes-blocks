@@ -17,6 +17,7 @@ const Checkout = ({
 }) => {
   const {
     offerURL,
+    successURL,
   } = customFields;
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
@@ -93,7 +94,13 @@ const Checkout = ({
             logoutCallback={logoutCallback}
           />
         )
-        : <PaymentInfo orderNumber={orderNumber} paymentDetails={payment} />}
+        : (
+          <PaymentInfo
+            orderNumber={orderNumber}
+            paymentDetails={payment}
+            successURL={successURL}
+          />
+        )}
     </PrimaryFont>
   );
 };
@@ -106,6 +113,9 @@ Checkout.propTypes = {
   customFields: PropTypes.shape({
     offerURL: PropTypes.string.tag({
       defaultValue: '/offer/',
+    }),
+    successURL: PropTypes.string.tag({
+      defaultValue: '/',
     }),
   }),
 };

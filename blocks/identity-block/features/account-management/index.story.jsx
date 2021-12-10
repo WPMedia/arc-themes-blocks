@@ -8,14 +8,20 @@ export default {
   },
 };
 
-export const withFoundUsername = () => (
+export const withConnectedAccountWithDisconnectButton = () => (
   <SocialEditableFieldContainer
-    foundUsername="jennylopez@gmail.com"
+    text="Connected"
+    onDisconnectFunction={() => {}}
+    showDisconnectButton
+    disconnectText="Disconnect"
   />
 );
 
-export const withoutFoundUsername = () => (
+export const withConnectedAccountWithoutDisconnectButton = () => (
   <SocialEditableFieldContainer
-    foundUsername=""
+    text="Connected"
+    onDisconnectFunction={() => {}}
+    showDisconnectButton={false}
+    disconnectText="Disconnect"
   />
 );

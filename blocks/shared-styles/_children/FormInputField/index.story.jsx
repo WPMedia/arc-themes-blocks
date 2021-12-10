@@ -131,3 +131,28 @@ export const autoCompleteNewPassword = () => (
     autoComplete="new-password"
   />
 );
+
+export const selectField = () => (
+  <FormInputField
+    defaultValue=""
+    name="selectField"
+    type={FIELD_TYPES.SELECT}
+    options={[
+      {
+        code: '',
+        name: 'Please select value',
+      },
+      {
+        code: 'US',
+        name: 'United States',
+      },
+      {
+        code: 'CA',
+        name: 'Canada',
+      },
+    ]}
+    optionValueKey="code"
+    optionLabelKey="name"
+    label="Select"
+  />
+);

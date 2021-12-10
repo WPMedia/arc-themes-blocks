@@ -20,6 +20,9 @@ jest.mock('fusion:intl', () => ({
 describe('Checkout Feature', () => {
   it('renders link, cart and contact info', () => {
     useIdentity.mockImplementation(() => ({
+      getSignedInIdentity: jest.fn((user) => user?.identities?.reduce(
+        (prev, current) => ((prev.lastLoginDate > current.lastLoginDate) ? prev : current),
+      ) || null),
       Identity: {
         isLoggedIn: jest.fn(async () => false),
       },
@@ -49,6 +52,9 @@ describe('Checkout Feature', () => {
     const updateUserProfileMock = jest.fn();
 
     useIdentity.mockImplementation(() => ({
+      getSignedInIdentity: jest.fn((user) => user?.identities?.reduce(
+        (prev, current) => ((prev.lastLoginDate > current.lastLoginDate) ? prev : current),
+      ) || null),
       Identity: {
         isLoggedIn: jest.fn(async () => true),
         getUserProfile: jest.fn(() => userProfile),

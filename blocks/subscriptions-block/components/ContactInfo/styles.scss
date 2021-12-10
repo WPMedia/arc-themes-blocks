@@ -10,7 +10,6 @@
     display: inline-flex;
     align-content: center;
     line-height: 1.3rem;
-    margin-bottom: map-get($spacers, 'md');
   }
 
   .sign-out-btn {
@@ -43,6 +42,11 @@
 
   .row {
     margin-bottom: map-get($spacers, 'md');
+  }
+
+  .row:last-of-type {
+    padding-bottom: map-get($spacers, 'md');
+    border-bottom: 1px solid $border-rule-color;
   }
 
   .checkout-btn {

@@ -350,5 +350,49 @@
 		"no": "There's been an error updating your password",
 		"pt": "There's been an error updating your password",
 		"sv": "There's been an error updating your password"
+	},
+	"identity-block.connected-accounts": {
+		"de": "Connected Accounts",
+		"en": "Connected Accounts",
+		"es": "Connected Accounts",
+		"fr": "Connected Accounts",
+		"ja": "Connected Accounts",
+		"ko": "Connected Accounts",
+		"no": "Connected Accounts",
+		"pt": "Connected Accounts",
+		"sv": "Connected Accounts"
+	},
+	"identity-block.connect-account": {
+		"de": "Connected",
+		"en": "Connected",
+		"es": "Connected",
+		"fr": "Connected",
+		"ja": "Connected",
+		"ko": "Connected",
+		"no": "Connected",
+		"pt": "Connected",
+		"sv": "Connected"
+	},
+	"identity-block.disconnect-account": {
+		"de": "Disconnect",
+		"en": "Disconnect",
+		"es": "Disconnect",
+		"fr": "Disconnect",
+		"ja": "Disconnect",
+		"ko": "Disconnect",
+		"no": "Disconnect",
+		"pt": "Disconnect",
+		"sv": "Disconnect"
+	},
+	"identity-block.connect-platform": {
+		"de": "Connect %{platform}",
+		"en": "Connect %{platform}",
+		"es": "Connect %{platform}",
+		"fr": "Connect %{platform}",
+		"ja": "Connect %{platform}",
+		"ko": "Connect %{platform}",
+		"no": "Connect %{platform}",
+		"pt": "Connect %{platform}",
+		"sv": "Connect %{platform}"
 	}
 }

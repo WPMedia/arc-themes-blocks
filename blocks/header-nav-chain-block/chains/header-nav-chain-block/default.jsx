@@ -50,17 +50,14 @@ const StyledNav = styled.nav`
   .nav-logo {
     img {
       height: auto;
-      max-width: 240px;
       width: auto;
       transition: 0.5s;
 
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
-        min-width: 40px;
       }
       @media screen and (min-width: ${(props) => props.breakpoint}px) {
         max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
-        min-width: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
       }
     }
   }

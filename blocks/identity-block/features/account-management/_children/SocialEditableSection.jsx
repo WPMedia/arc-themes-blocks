@@ -38,10 +38,10 @@ function SocialEditableSection({
       {
         googleClientId ? (
           <div className="social-editable-section--container">
-            <div className="social-editable-section--left-item">
+            <div className="social-editable-section--item">
               <GoogleSignIn />
             </div>
-            <div className="social-editable-section--right-item">
+            <div className="social-editable-section--item">
               <SocialEditableFieldContainer
                 onDisconnectFunction={unlinkGoogle}
                 text={hasGoogle ? socialText : googleConnectText}
@@ -55,10 +55,10 @@ function SocialEditableSection({
       {
         facebookAppId ? (
           <div className="social-editable-section--container">
-            <div className="social-editable-section--left-item">
+            <div className="social-editable-section--item">
               <FacebookSignIn />
             </div>
-            <div className="social-editable-section--right-item">
+            <div className="social-editable-section--item">
               <SocialEditableFieldContainer
                 onDisconnectFunction={unlinkFacebook}
                 text={hasFacebook ? socialText : facebookConnectText}

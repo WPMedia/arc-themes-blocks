@@ -1,19 +1,8 @@
 .social-editable-section--container {
   display: flex;
   align-items: center;
-
 }
 
-.social-editable-section--left-item {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  padding: calculateRem(4px);
-}
-
-.social-editable-section--right-item {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
+.social-editable-section--item {
   padding: calculateRem(4px);
 }

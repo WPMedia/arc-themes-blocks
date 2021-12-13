@@ -2,7 +2,7 @@
 
 ## Setup
 
-All of the themes-related packages reside in the GitHub Package Registry. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/arc-themes-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for a step-by-step setup.
+All of the themes-related packages reside in the GitHub Package Registry. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/arc-themes-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation](https://github.com/WPMedia/arc-themes-feature-pack#how-to-do-local-themes-development) for a step-by-step setup.
 
 To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
 
@@ -44,7 +44,7 @@ The grid layout part of the framework is a simple row/column grid. It uses CSS G
 
 The majority of the framework is documented using KSS (<https://github.com/kss-node/kss-node>). This allows for a style guide to be generated and to show markup examples in the compiled CSS (which may be hard to infer from the Sass alone, especially for the grid column classes). This is stored in the /styleguide folder of the project. Opening up /news-theme-css/styleguide/index.html in a browser will show you the main page of the documentation.
 
-While the style guide will provide a good overview, it's advisable to review the Sass files as well to have a proper understanding of its usage. For example, if you look in scss/\_variables.scss you will see variables such as `$primary-font-family` and `$secondary-font-family`. These variables use the Sass notation `!default` at the end so that they can be over-ridden in the themes file, `blocks.json`, located in the fusion-news-theme repository. (We will talk about `blocks.json` more in the fusion-news-theme section.). Also, if you look in scss/\_breakpoints.scss you will see Sass maps for breakpoints and spacing. These maps are leveraged with the Sass function, `map-get`, in component Sass code to set spacing and media queries.
+While the style guide will provide a good overview, it's advisable to review the Sass files as well to have a proper understanding of its usage. For example, if you look in scss/\_variables.scss you will see variables such as `$primary-font-family` and `$secondary-font-family`. These variables use the Sass notation `!default` at the end so that they can be over-ridden in the themes file, `blocks.json`, located in the arc-themes-feature-pack repository. (We will talk about `blocks.json` more in the arc-themes-feature-pack section.). Also, if you look in scss/\_breakpoints.scss you will see Sass maps for breakpoints and spacing. These maps are leveraged with the Sass function, `map-get`, in component Sass code to set spacing and media queries.
 
 news-theme-css is provided to the other parts of the system as an NPM package. For more information on the build and publishing process for this repository, please see the readme.md for the project: <https://github.com/WPMedia/news-theme-css/blob/stable/readme.md>
 
@@ -58,13 +58,13 @@ For contributing to that repo, please see its contributing guidelines.
 
 The arc-themes-blocks repo is located at: <https://github.com/WPMedia/arc-themes-blocks>. In a typical client setup, you have a feature pack repository and inside you have a components directory where you store your code for feature, chains, etc. In our theme's environment, the majority of these components will be stored in this repo instead. We refer to these external components as "blocks." The components directory in the feature pack will be reserved for custom components that the client might build. This separation from the feature pack will allow the customer to pick and choose the components that they want added in their site. Also, because arc-themes-blocks is a multi-repo (using Lerna), any unused components will not be part of the client bundle.
 
-As indicated from the diagram above, arc-themes-blocks is dependent on the engine-theme-sdk and news-theme-css packages. As you will see in the fusion-news-theme section, we have a way to set theming properties (color, font-family, etc). To set these properties, we are using styled components to inject these values into the component.
+As indicated from the diagram above, arc-themes-blocks is dependent on the engine-theme-sdk and news-theme-css packages. As you will see in the arc-themes-feature-pack section, we have a way to set theming properties (color, font-family, etc). To set these properties, we are using styled components to inject these values into the component.
 
 The development process is similar engine-theme-sdk, except when it comes time to publish, you need to follow the Lerna publish procedure. For more information, see the repo's read me: <https://github.com/WPMedia/arc-themes-blocks/blob/stable/README.md>
 
-Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (arc-themes-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
+Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/arc-themes-feature-pack#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (arc-themes-feature-pack) and also in the blocks repo (arc-themes-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
 
-Local development work on  arc-themes-blocks can be set up so that the changes you make on your local arc-themes-blocks  can be manifested within another local client code base, or Fusion-News-Theme.
+Local development work on arc-themes-blocks can be set up so that the changes you make on your local arc-themes-blocks  can be manifested within another local client code base, or arc-themes-feature-pack.
 
 As of 10/13/2020, In arc-themes-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
 ```sh
@@ -74,7 +74,7 @@ npm install
 ```
 Then restart fusion from within client dir. NOTE: Running with `-l` will link all blocks. If you want to only link some blocks, please use `npx fusion start -f -l @wpmedia/card-list-block,@wpmedia/top-table-list-block`, for example, to link card list block and the top table list block. You can see their package names' in the block's package.json.
 
-(fusion-news-theme):
+(arc-themes-feature-pack):
 ```sh
 npx fusion start -l
 ```
@@ -93,7 +93,7 @@ To check if blocks are being properly linked, run:
 - [ ] The block has a valid file path. Please see [documentation](https://github.com/WPMedia/fusion/blob/2.7/documentation/recipes/creating-feature-component.md) for best practices around file paths and development
 - [ ] The block is locally linked to ensure tests and linking run as expected. See `package.json`'s `dependencies` field for examples
 - [ ] Your new block has a readme that describes its purpose. The `blocks/results-list-block/README.md` is pretty good.
-- [ ] Your devDependencies in the block's package.json are installed in the `Fusion-News-Theme` or elsewhere. `devDependencies` are not installed by the [Fusion block installer](https://github.com/WPMedia/fusion/blob/2.7/engine/scripts/block-installer.js#L57)
+- [ ] Your devDependencies in the block's package.json are installed in the `arc-themes-feature-pack` or elsewhere. `devDependencies` are not installed by the [Fusion block installer](https://github.com/WPMedia/fusion/blob/2.7/engine/scripts/block-installer.js#L57)
 - [ ] You have a valid `jest.config.js` in your package to ensure that any tests (and they should exist) are run
 
 ```js
@@ -186,14 +186,14 @@ In the development process this takes care of doing the work and getting your ch
 
 If you need to create a feature pack to set either `BLOCK_DIST_TAG` to a specific tag, or update blocks you wish to have deployed or change site settings you need to:
 
-1. Have the Fusion-News-Theme repo `master` branch checked out - https://github.com/WPMedia/Fusion-News-Theme
+1. Have the arc-themes-feature-pack repo `master` branch checked out - https://github.com/WPMedia/arc-themes-feature-pack
 2. Update the relevant files
   * For `BLOCK_DIST_TAG` this is set in `/environment/index.json`
   * Changing blocks - update the `blocks` array in `/blocks.json`
   * Changing default site settings - update the `values.default.siteProperties` in `/blocks.json`
   * Changing a specific sites settings - update the `values.sites.{SITE-NAME}.siteProperties` in `/blocks.json`
 3. Create a feature pack zip
-  * In terminal in the root of the Fusion-News-Theme repo run `npx fusion zip`
+  * In terminal in the root of the arc-themes-feature-pack repo run `npx fusion zip`
   * A new zip file will be added to `/dist/` folder named in a date format eg `2021-03-26-13-56-25.zip`
 4. Upload zip file to the relevant environment using Fusion deployer, using "upload bundle" - http://redirector.arcpublishing.com/deployments/fusion/
 5. Once uploded, using three dots menu on your uploaded item choose "Deploy"
@@ -309,9 +309,9 @@ For info on rebasing, see [tutorial](https://www.atlassian.com/git/tutorials/rew
 
 For background on lerna conventional graduate and diffing, see [lerna versioning docs](https://github.com/lerna/lerna/blob/master/commands/version/README.md).
 
-### fusion-news-theme
+### arc-themes-feature-pack
 
-The fusion-news-theme repo is located at: <https://github.com/WPMedia/Fusion-News-Theme>.
+The arc-themes-feature-pack repo is located at: <https://github.com/WPMedia/arc-themes-feature-pack>.
 
 It is like a typical feature pack in regards that it has the same directory structure; you can add assets in the resource directory, etc. However as mentioned above, currently there are no components residing in this repo. The way this feature pack knows what components to use is through a new special file in the root of the repo called `blocks.json`. blocks.json is a special file that Fusion (Hydrate versions) knows to look for and run specific internal build commands to bring everything together. blocks.json is the glue that brings it all together.
 
@@ -327,7 +327,7 @@ Below describes the various properties that are in blocks.json and their purpose
 | **sassVariableOverrides** | In addition to using styled components to set theme properties, we also want the css framework to pick up on the custom settings and over-ride the appropriate Sass default properties. Fusion handles the override process internally. |
 | **values** | This is where we set the custom theme values for the site. There are two main areas: default and per site. |
 
-To see a configured blocks.json, go to <https://github.com/WPMedia/Fusion-News-Theme/blob/master/blocks.json>
+To see a configured blocks.json, go to <https://github.com/WPMedia/arc-themes-feature-pack/blob/master/blocks.json>
 
 Since this is the feature pack there is no publishing process. In fact, when you build and deploy, this just like a traditional feature pack: i.e. `npx fusion zip`.
 
@@ -400,7 +400,7 @@ EventEmitter.subscribe("galleryImagePrevious", event =>
 
 1. In your local env, make sure you have a plaintext resizer key in the bundle repo. That plaintext resizer should be the decrypted from the hash in the environment folder `resizerKey`. Decryption cannot happen locally. This local .env file will live in the `[feature pack]/environment/index.json` -- it can be decrypted using admin with `[https://yoursite.arcpublishing.com]/deployment/fusion/secrets`.
 
-_Fusion-News-Theme/.env_
+_arc-themes-feature-pack/.env_
 
 ```
 resizerKey=[no brackets, should be decrypted resizer key in the env index]
@@ -465,7 +465,7 @@ const CustomImageBlock = ({ rawImageURL }) => {
 export default CustomImageBlock;
 ```
 
-_Fusion-News-Theme/blocks.json_
+_arc-themes-feature-pack/blocks.json_
 
 ```json
   "blocks": [
@@ -540,7 +540,7 @@ const ImageItem = ({ contentElement }) => (
 
 5. Add breakpoints based on expected device size (ie, mobile, tablet, desktop) for resizer image media queries.
 
-_Fusion-News-Theme/blocks.json_
+_arc-themes-feature-pack/blocks.json_
 
 ```json
   "values": {
@@ -625,7 +625,7 @@ Both values `resizerURL` and `resizerKey` will be accessible via fusion getter m
 
 The resizerKey will only accessed via this helper. For security, this helper is accessed only server-side. To prevent possible misuse, this helper also has a window check to prevent client-side use.
 
-_Fusion-News-Theme/blocks.json_
+_arc-themes-feature-pack/blocks.json_
 
 ```json
     "blocks": [

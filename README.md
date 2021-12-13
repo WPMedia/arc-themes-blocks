@@ -1,4 +1,4 @@
-# Fusion News Theme blocks
+# Arc Themes blocks
 
 >**[Please See Wiki If You Can't Find What You're Looking For](https://github.com/WPMedia/arc-themes-blocks/wiki), Like [Rolling Back If You Have Publish Issues](https://github.com/WPMedia/arc-themes-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)**
 
@@ -9,6 +9,7 @@ This monorepo is a collection of packages for blocks. Blocks are versioned toget
 **if you're looking for local news theme block development, go to [news theme development markdown doc](/News%20Theme%20Development.md)**
 
 **if you're looking for local blocks setup instructions with the Arc Themes Feature Page, go to [the prerequisites and 9-step quick guide](https://github.com/WPMedia/arc-themes-feature-pack#prerequisites)**
+
 ## `dist-tags`
 
 

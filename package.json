@@ -1,12 +1,12 @@
 {
-  "name": "fusion-news-theme-blocks",
+  "name": "arc-themes-blocks",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com:WPMedia/arc-themes-blocks.git",
     "directory": "blocks/article-body-block"
   },
   "private": true,

@@ -7,7 +7,7 @@ import { create } from "@storybook/theming/create";
 
 */
 export default create({
-  // see documentation for themes 
+  // see documentation for themes
   // https://storybook.js.org/docs/configurations/theming/
   base: 'light',
 
@@ -41,7 +41,7 @@ export default create({
   inputBorderRadius: 4,
 
   brandTitle: 'Theme Blocks',
-  brandUrl: 'https://github.com/WPMedia/fusion-news-theme-blocks',
+  brandUrl: 'https://github.com/WPMedia/arc-themes-blocks',
   // todo: change this to a legitimate image url
   // brandImage: 'https://arcdesignsystem.com/img/arc-logo-black.svg',
 });

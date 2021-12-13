@@ -26,10 +26,6 @@ This document will go over the overall architecture of themes, a more detailed l
 
 ## Theme Architecture
 
-The image below shows the four repositories that go into building out the News theme. We will describe each repository and the role it plays.
-
-![themes blocks are related themes styles and feature pack](theme_architecture.png "diagram")
-
 ### news-theme-css
 
 The news-theme-css repo is located at: <https://github.com/WPMedia/news-theme-css>. This Sass based repository provides the foundation CSS for the news theme and also holds some of the styling for components in the other news theme repositories. The main responsibilities, however, are:

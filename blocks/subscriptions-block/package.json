@@ -3,7 +3,7 @@
   "version": "5.18.0",
   "description": "Fusion themes subscriptions block.",
   "author": "ARC XP",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/subscriptions-block"
   },
   "scripts": {
@@ -29,9 +29,6 @@
   },
   "peerDependencies": {
     "@wpmedia/identity-block": "*"
-  },
-  "bugs": {
-    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
   },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",

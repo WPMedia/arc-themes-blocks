@@ -2,7 +2,7 @@
 
 ## Setup
 
-All of the themes-related packages reside in the GitHub Package Registry. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/fusion-news-theme-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for a step-by-step setup.
+All of the themes-related packages reside in the GitHub Package Registry. This means that you are now able to manage the packages directly in GitHub (for example, this repo's packages reside [here](https://github.com/WPMedia/arc-themes-blocks/packages)), as well as incorporate GitHub Actions. You also need to make sure that you are setup with enabling SSO if you're pushing to the repo. [Please follow](https://help.github.com/en/github/authenticating-to-github/authorizing-a-personal-access-token-for-use-with-saml-single-sign-on) GitHub docs. If you don't, you'll get errors that the blocks can't be installed when trying to run `npx fusion start` in your local feature blocks repo. See [documentation](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for a step-by-step setup.
 
 To set up this repo for local development and deployment, you'll have to set up your .npmrc like so:
 
@@ -54,19 +54,19 @@ The engine-theme-sdk is located at: <https://github.com/WPMedia/engine-theme-sdk
 
 For contributing to that repo, please see its contributing guidelines.
 
-### fusion-news-theme-blocks
+### arc-themes-blocks
 
-The fusion-news-theme-blocks repo is located at: <https://github.com/WPMedia/fusion-news-theme-blocks>. In a typical client setup, you have a feature pack repository and inside you have a components directory where you store your code for feature, chains, etc. In our theme's environment, the majority of these components will be stored in this repo instead. We refer to these external components as "blocks." The components directory in the feature pack will be reserved for custom components that the client might build. This separation from the feature pack will allow the customer to pick and choose the components that they want added in their site. Also, because fusion-news-them-blocks is a multi-repo (using Lerna), any unused components will not be part of the client bundle.
+The arc-themes-blocks repo is located at: <https://github.com/WPMedia/arc-themes-blocks>. In a typical client setup, you have a feature pack repository and inside you have a components directory where you store your code for feature, chains, etc. In our theme's environment, the majority of these components will be stored in this repo instead. We refer to these external components as "blocks." The components directory in the feature pack will be reserved for custom components that the client might build. This separation from the feature pack will allow the customer to pick and choose the components that they want added in their site. Also, because fusion-news-them-blocks is a multi-repo (using Lerna), any unused components will not be part of the client bundle.
 
-As indicated from the diagram above, fusion-news-theme-blocks is dependent on the engine-theme-sdk and news-theme-css packages. As you will see in the fusion-news-theme section, we have a way to set theming properties (color, font-family, etc). To set these properties, we are using styled components to inject these values into the component.
+As indicated from the diagram above, arc-themes-blocks is dependent on the engine-theme-sdk and news-theme-css packages. As you will see in the fusion-news-theme section, we have a way to set theming properties (color, font-family, etc). To set these properties, we are using styled components to inject these values into the component.
 
-The development process is similar engine-theme-sdk, except when it comes time to publish, you need to follow the Lerna publish procedure. For more information, see the repo's read me: <https://github.com/WPMedia/fusion-news-theme-blocks/blob/stable/README.md>
+The development process is similar engine-theme-sdk, except when it comes time to publish, you need to follow the Lerna publish procedure. For more information, see the repo's read me: <https://github.com/WPMedia/arc-themes-blocks/blob/stable/README.md>
 
-Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (fusion-news-theme-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
+Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/Fusion-News-Theme#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (Fusion-News-Theme) and also in the blocks repo (arc-themes-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
 
-Local development work on  fusion-news-theme-blocks can be set up so that the changes you make on your local fusion-news-theme-blocks  can be manifested within another local client code base, or Fusion-News-Theme.
+Local development work on  arc-themes-blocks can be set up so that the changes you make on your local arc-themes-blocks  can be manifested within another local client code base, or Fusion-News-Theme.
 
-As of 10/13/2020, In fusion-news-theme-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
+As of 10/13/2020, In arc-themes-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
 ```sh
 cd blocks/header-nav-chain-block
 check .npmrc file here exists
@@ -87,7 +87,7 @@ To check if blocks are being properly linked, run:
 
   NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
 
-### Creating New Block Checklist 
+### Creating New Block Checklist
 
 - [ ] Make sure it is added to the `names` field of `.github/workflows/delete-unused-canary-packages.yml`. Please add the block name (without org name WPMedia, similar to others) to the last step's name field as there can only be 20 packages per step.
 - [ ] The block has a valid file path. Please see [documentation](https://github.com/WPMedia/fusion/blob/2.7/documentation/recipes/creating-feature-component.md) for best practices around file paths and development
@@ -131,21 +131,21 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 
 ### Release scripts (ran in github actions)
 
-#### `npm run release:canary` 
+#### `npm run release:canary`
 
 - Only publish packages to canary tag
 - Publish packages based on only changes
 - Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
 
 
-#### `npm run release:beta` 
+#### `npm run release:beta`
 
 - Only publish packages to beta
 - Publish packages based on only changes
 - Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
 
 
-#### `npm run release:rc` 
+#### `npm run release:rc`
 
 - Only publish packages to rc
 - Publish packages based on only changes
@@ -204,9 +204,9 @@ If you need to create a feature pack to set either `BLOCK_DIST_TAG` to a specifi
 
 ### How To Publish
 
-Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta`, `stable`, `rc`, or other desired tags. The tags and publish GitHub Actions can be tracked by looking at the [Actions tab on the GitHub UI](https://github.com/WPMedia/fusion-news-theme-blocks/actions) and within the .github folder within the repository.
+Merge into `canary` branch to publish to canary tag. Please reach out to arc block maintainers to talk about publishing into `beta`, `stable`, `rc`, or other desired tags. The tags and publish GitHub Actions can be tracked by looking at the [Actions tab on the GitHub UI](https://github.com/WPMedia/arc-themes-blocks/actions) and within the .github folder within the repository.
 
-WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/fusion-news-theme-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
+WARNING: If you need help rolling back publish, please see the wiki [How A Dev Can Rollback Published Version](https://github.com/WPMedia/arc-themes-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)
 
 ---
 
@@ -217,7 +217,7 @@ RC Release is the contents of the canary branch once signed off - Canary -> RC
 1. Ensure canary is signed off with all RC tickets merged in
 2. `git checkout canary && git remote update --prune origin && git reset --hard origin/canary` - Checkout canary and reset your local to remote canary
 3. `git push origin canary:rc -f`
-4. Check GitHub action used to publish rc tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/rc-build.yml
+4. Check GitHub action used to publish rc tag for success - https://github.com/WPMedia/arc-themes-blocks/actions/workflows/rc-build.yml
 
 Any environment with the `BLOCK_DIST_TAG=rc` will get the updated blocks on next deploy
 
@@ -229,7 +229,7 @@ Beta Release is the contents of the RC branch once signed off - RC -> Beta
 1. Enusre RC is ready - All PR's/hotfixes made against RC are merged in
 2. `git checkout rc && git remote update --prune origin && git reset --hard origin/rc` - Checkout rc and reset your local to remote rc
 3. `git push origin rc:beta -f`
-4. Check GitHub action used to publish beta tag for success - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/beta-build.yml
+4. Check GitHub action used to publish beta tag for success - https://github.com/WPMedia/arc-themes-blocks/actions/workflows/beta-build.yml
 
 Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on next deploy
 
@@ -239,7 +239,7 @@ Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on ne
 Stable Release is the contents of the beta branch once signed off - beta -> stable
 
 1. Create a Pull Request from Beta -> Stable
-    * https://github.com/WPMedia/fusion-news-theme-blocks/compare/stable...beta?expand=1
+    * https://github.com/WPMedia/arc-themes-blocks/compare/stable...beta?expand=1
     * Resolve any conflicts
 2. Get pull request approved and merged
 3. Get latest stable code locally - `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
@@ -249,7 +249,7 @@ Stable Release is the contents of the beta branch once signed off - beta -> stab
     * Make sure all blocks have been graduated or promoted.
     * Check that there is a commit in your local for the next version - created by the `npx lerna` command
     * `git push origin stable`
-    * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/fusion-news-theme-blocks/actions/workflows/stable-dist-tag.yml
+    * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/arc-themes-blocks/actions/workflows/stable-dist-tag.yml
 5. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
     * `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
     * `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
@@ -321,9 +321,9 @@ Below describes the various properties that are in blocks.json and their purpose
 | --- | --- |
 | **org** | The organization name of the NPM repo. Used internally by Fusion i.e. "@wpmedia/" |
 | **useLocal** | true \| false. Used in local development (see the local dev section below). This will soon be replaced by a more conventual npm link process, so this property will eventually be removed. |
-| **blocks** | This array lists all the blocks that are to be made available to the site. Any block that is in the fusion-news-theme-blocks repo, but not listed here will not be available and will also not be included in the client bundle. |
+| **blocks** | This array lists all the blocks that are to be made available to the site. Any block that is in the arc-themes-blocks repo, but not listed here will not be available and will also not be included in the client bundle. |
 | **cssFramework** | The CSS framework package being used. For News theme, it is the news-theme-css package. |
-| **cssImport** | Specifies the main Sass file entry point into the framework. This is leveraged by fusion to automatically import the framework into each of the block's source file in fusion-news-theme-blocks during build time. So, in other words, you do not have to explicitly import the css framework in your blocks source code. |
+| **cssImport** | Specifies the main Sass file entry point into the framework. This is leveraged by fusion to automatically import the framework into each of the block's source file in arc-themes-blocks during build time. So, in other words, you do not have to explicitly import the css framework in your blocks source code. |
 | **sassVariableOverrides** | In addition to using styled components to set theme properties, we also want the css framework to pick up on the custom settings and over-ride the appropriate Sass default properties. Fusion handles the override process internally. |
 | **values** | This is where we set the custom theme values for the site. There are two main areas: default and per site. |
 
@@ -333,7 +333,7 @@ Since this is the feature pack there is no publishing process. In fact, when you
 
 For canary we are currently using this environment: <https://corecomponents.arcpublishing.com/pf/admin/app/browse/pages.html>.
 
-Unless you are adding new resources or custom components in this repo, you do not need to follow a PR process. Usually, you will be creating a new block in fusion-news-theme-blocks and once that has gone through the PR process and pushed to stable and published, all you'll need to do here is make sure its listed in the blocks section of `blocks.json`. If it's not listed, cause it new for example, then feel free to add it and commit immediately to stable. Then, create a build and deploy to the environment for design and general testing. If, however, you are doing something more custom then follow these procedures:
+Unless you are adding new resources or custom components in this repo, you do not need to follow a PR process. Usually, you will be creating a new block in arc-themes-blocks and once that has gone through the PR process and pushed to stable and published, all you'll need to do here is make sure its listed in the blocks section of `blocks.json`. If it's not listed, cause it new for example, then feel free to add it and commit immediately to stable. Then, create a build and deploy to the environment for design and general testing. If, however, you are doing something more custom then follow these procedures:
 
 1.  First create a branch off stable for what you want to work on.
 2.  Once changes are completed, then add, commit, push all changes to your branch on GitHub.
@@ -406,7 +406,7 @@ _Fusion-News-Theme/.env_
 resizerKey=[no brackets, should be decrypted resizer key in the env index]
 ```
 
-fusion-news-theme-blocks/environment/index.json\*
+arc-themes-blocks/environment/index.json\*
 
 ```json
 
@@ -419,7 +419,7 @@ fusion-news-theme-blocks/environment/index.json\*
 
 2. Ensure you have your corresponding resizer url for the resizer key for your org. This can also be managed on a per site basis.
 
-_fusion-news-theme-blocks/environment/index.json_
+_arc-themes-blocks/environment/index.json_
 
 ```json
 
@@ -432,7 +432,7 @@ _fusion-news-theme-blocks/environment/index.json_
 
 3. If you are creating a custom block using the engine-theme-sdk Image component, you will need to import and pass in the resizerURL so that the thumbor url can be recreated.
 
-_fusion-news-theme-blocks/blocks/custom-image-block/index.js_
+_arc-themes-blocks/blocks/custom-image-block/index.js_
 
 ```jsx
 import getProperties from "fusion:properties";
@@ -556,7 +556,7 @@ _Fusion-News-Theme/blocks.json_
   }
 ```
 
-_fusion-news-theme-blocks/blocks/custom-image-block/index.js_
+_arc-themes-blocks/blocks/custom-image-block/index.js_
 
 ```jsx
 import { Image } from "@wpmedia/engine-theme-sdk";
@@ -637,7 +637,7 @@ _Fusion-News-Theme/blocks.json_
 
 ```
 
-_fusion-news-theme-blocks/blocks/resizer-image-block/index.js_
+_arc-themes-blocks/blocks/resizer-image-block/index.js_
 
 ```js
 import { resizerURL, resizerKey } from "fusion:environment";
@@ -688,7 +688,7 @@ const getResizerParam = (
 
 #### Check you're in top-level directory
 
-`pwd` -> /Users/user/sites/fusion-news-theme-blocks
+`pwd` -> /Users/user/sites/arc-themes-blocks
 
 #### Ensure you have latest version
 

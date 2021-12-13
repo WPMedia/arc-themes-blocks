@@ -3,6 +3,7 @@ import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import getProperties from 'fusion:properties';
 import getThemeStyle from 'fusion:themes';
+import { useFusionContext } from 'fusion:context';
 import Navigation from './default';
 import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from './nav-helper';
 
@@ -351,6 +352,57 @@ describe('the header navigation feature for the default output type', () => {
       );
 
       expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
+    });
+  });
+  describe('primary image', () => {
+    it('shown without deployment function prefix if external http url', () => {
+      getProperties.mockReturnValueOnce({
+        primaryLogo: 'http://www.example.com/logo.png',
+      });
+      useFusionContext.mockReturnValueOnce({
+        contextPath: 'pf',
+        deployment: jest.fn(() => ({})).mockReturnValue('rendered-from-deployment'),
+      });
+
+      const wrapper = mount(
+        <Navigation customFields={DEFAULT_SELECTIONS} />,
+      );
+
+      const navLogoImg = wrapper.find('.nav-logo img');
+      expect(navLogoImg).toHaveLength(1);
+      expect(navLogoImg.prop('src')).toEqual('http://www.example.com/logo.png');
+    });
+    it('shows image rendered from depoyment function if no http or base64 found', () => {
+      getProperties.mockReturnValueOnce({
+        primaryLogo: 'resources/images/logo.png',
+      });
+      useFusionContext.mockReturnValueOnce({
+        contextPath: 'pf',
+        deployment: jest.fn(() => ({})).mockReturnValue('rendered-from-deployment'),
+      });
+      const wrapper = mount(
+        <Navigation customFields={DEFAULT_SELECTIONS} />,
+      );
+
+      const navLogoImg = wrapper.find('.nav-logo img');
+      expect(navLogoImg).toHaveLength(1);
+      expect(navLogoImg.prop('src')).toEqual('rendered-from-deployment');
+    });
+    it('shows image with deployment function used with base64', () => {
+      getProperties.mockReturnValueOnce({
+        primaryLogo: 'base64, iVBORw0KGgoAAAANSUhEUgAAAAUA',
+      });
+      useFusionContext.mockReturnValueOnce({
+        contextPath: 'pf',
+        deployment: jest.fn(() => ({})).mockReturnValue('rendered-from-deployment'),
+      });
+      const wrapper = mount(
+        <Navigation customFields={DEFAULT_SELECTIONS} />,
+      );
+
+      const navLogoImg = wrapper.find('.nav-logo img');
+      expect(navLogoImg).toHaveLength(1);
+      expect(navLogoImg.prop('src')).toEqual('base64, iVBORw0KGgoAAAANSUhEUgAAAAUA');
     });
   });
 });

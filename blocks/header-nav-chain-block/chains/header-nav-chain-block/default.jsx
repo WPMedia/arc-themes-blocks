@@ -81,18 +81,156 @@ const StyledWarning = styled.div`
   padding: 6px;
 `;
 
+export function PresentationalNav(props) {
+  const {
+    ariaLabelLink,
+    backgroundColor,
+    mediumBreakpoint,
+    children,
+    closeDrawer,
+    customFields,
+    displayLinks,
+    horizontalLinksHierarchy,
+    isAdmin,
+    isSectionDrawerOpen,
+    logoAlignment,
+    menuButtonClickAction,
+    navColor,
+    navColorClass,
+    navHeight,
+    scrollAdjustedNavHeight,
+    scrolled,
+    sectionAriaLabel,
+    sections,
+    showDotSeparators,
+    signInOrder,
+    primaryLogoPath,
+    primaryLogoAlt,
+  } = props;
+  return (
+    <StyledNav
+      id="main-nav"
+      className={navColorClass}
+      navBarBackground={backgroundColor}
+      navHeight={navHeight}
+      scrolled={scrolled}
+      // hard-coded to medium-breakpoint
+      breakpoint={mediumBreakpoint}
+      aria-label={sectionAriaLabel}
+    >
+      <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
+        <NavSection
+          customFields={customFields}
+          menuButtonClickAction={menuButtonClickAction}
+          side="left"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
+        <NavLogo
+          alignment={logoAlignment}
+          imageSource={primaryLogoPath}
+          imageAltText={primaryLogoAlt}
+          mediumBreakpoint={mediumBreakpoint}
+        />
+        {displayLinks && (
+        <HorizontalLinksBar
+          hierarchy={horizontalLinksHierarchy}
+          navBarColor={navColor}
+          showHorizontalSeperatorDots={showDotSeparators}
+          ariaLabel={ariaLabelLink}
+        />
+        )}
+        <NavSection
+          customFields={customFields}
+          menuButtonClickAction={menuButtonClickAction}
+          side="right"
+          signInOrder={signInOrder}
+        >
+          {children}
+        </NavSection>
+      </div>
+
+      <StyledSectionDrawer
+        id="nav-sections"
+        className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
+        navHeight={navHeight}
+        scrolled={scrolled}
+        // hard-coded to medium breakpoint
+        breakpoint={mediumBreakpoint}
+        onClick={closeDrawer}
+      >
+        <FocusTrap
+          active={isSectionDrawerOpen}
+          focusTrapOptions={{
+            allowOutsideClick: true,
+            returnFocusOnDeactivate: true,
+            onDeactivate: () => {
+            // Focus the next focusable element in the navbar
+            // Workaround for issue where 'nav-sections-btn' wont programatically focus
+              const focusElement = document.querySelector(`
+                #main-nav a:not(.nav-sections-btn),
+                #main-nav button:not(.nav-sections-btn)
+              `);
+              // istanbul ignore next
+              if (focusElement) {
+                focusElement.focus();
+                focusElement.blur();
+              }
+            },
+          }}
+        >
+          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
+            <SectionNav
+              sections={sections}
+              isHidden={!isSectionDrawerOpen}
+              navHeight={scrollAdjustedNavHeight}
+            >
+              <MenuWidgets
+                customFields={customFields}
+                menuButtonClickAction={menuButtonClickAction}
+              >
+                {children}
+              </MenuWidgets>
+            </SectionNav>
+          </div>
+        </FocusTrap>
+      </StyledSectionDrawer>
+
+      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
+      <StyledWarning>
+        In order to render horizontal links, the logo must be aligned to the left.
+      </StyledWarning>
+      )}
+    </StyledNav>
+  );
+}
 /* Main Component */
 const Nav = (props) => {
   const {
-    arcSite, isAdmin,
+    arcSite,
+    isAdmin,
+    deployment,
+    contextPath,
   } = useFusionContext();
 
   const {
     navColor,
-    breakpoints = { small: 0, medium: 768, large: 992 },
+    breakpoints = { medium: 768 },
     navBarBackground,
     locale = 'en',
+    primaryLogo,
+    primaryLogoAlt,
   } = getProperties(arcSite);
+
+  const mediumBreakpoint = breakpoints.medium;
+
+  // Check if URL is absolute/base64
+  const primaryLogoPath = primaryLogo && (
+    primaryLogo.indexOf('http') === 0
+      || primaryLogo.indexOf('base64') === 0
+      ? primaryLogo : deployment(`${contextPath}/${primaryLogo}`)
+  );
 
   const phrases = getTranslatedPhrases(locale);
 
@@ -193,7 +331,7 @@ const Nav = (props) => {
 
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (!shrinkDesktopNavivationHeight || vw < breakpoints.medium) {
+    if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {
       return undefined;
     }
     const handleScroll = () => {
@@ -209,100 +347,40 @@ const Nav = (props) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, breakpoints]);
+  }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
 
   // 56 pixels nav height on scroll
   const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
+  const navColorClass = (navColor === 'light') ? 'light' : 'dark';
+  const sectionAriaLabel = ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label');
 
   return (
-    <StyledNav
-      id="main-nav"
-      className={`${navColor === 'light' ? 'light' : 'dark'}`}
-      navBarBackground={backgroundColor}
+    <PresentationalNav
+      ariaLabelLink={ariaLabelLink}
+      backgroundColor={backgroundColor}
+      mediumBreakpoint={mediumBreakpoint}
+      closeDrawer={closeDrawer}
+      customFields={customFields}
+      displayLinks={displayLinks}
+      horizontalLinksHierarchy={horizontalLinksHierarchy}
+      isAdmin={isAdmin}
+      isSectionDrawerOpen={isSectionDrawerOpen}
+      logoAlignment={logoAlignment}
+      menuButtonClickAction={menuButtonClickAction}
+      navColor={navColor}
+      navColorClass={navColorClass}
       navHeight={navHeight}
+      scrollAdjustedNavHeight={scrollAdjustedNavHeight}
       scrolled={scrolled}
-      breakpoint={breakpoints.medium}
-      aria-label={ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label')}
+      sectionAriaLabel={sectionAriaLabel}
+      sections={sections}
+      showDotSeparators={showDotSeparators}
+      signInOrder={signInOrder}
+      primaryLogoPath={primaryLogoPath}
+      primaryLogoAlt={primaryLogoAlt}
     >
-      <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-        <NavSection
-          customFields={customFields}
-          menuButtonClickAction={menuButtonClickAction}
-          side="left"
-          signInOrder={signInOrder}
-        >
-          {children}
-        </NavSection>
-        <NavLogo alignment={logoAlignment} />
-        {displayLinks && (
-        <HorizontalLinksBar
-          hierarchy={horizontalLinksHierarchy}
-          navBarColor={navColor}
-          showHorizontalSeperatorDots={showDotSeparators}
-          ariaLabel={ariaLabelLink}
-        />
-        )}
-        <NavSection
-          customFields={customFields}
-          menuButtonClickAction={menuButtonClickAction}
-          side="right"
-          signInOrder={signInOrder}
-        >
-          {children}
-        </NavSection>
-      </div>
-
-      <StyledSectionDrawer
-        id="nav-sections"
-        className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
-        navHeight={navHeight}
-        scrolled={scrolled}
-        breakpoint={breakpoints.medium}
-        onClick={closeDrawer}
-      >
-        <FocusTrap
-          active={isSectionDrawerOpen}
-          focusTrapOptions={{
-            allowOutsideClick: true,
-            returnFocusOnDeactivate: true,
-            onDeactivate: () => {
-              // Focus the next focusable element in the navbar
-              // Workaround for issue where 'nav-sections-btn' wont programatically focus
-              const focusElement = document.querySelector(`
-                  #main-nav a:not(.nav-sections-btn),
-                  #main-nav button:not(.nav-sections-btn)
-                `);
-                // istanbul ignore next
-              if (focusElement) {
-                focusElement.focus();
-                focusElement.blur();
-              }
-            },
-          }}
-        >
-          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
-            <SectionNav
-              sections={sections}
-              isHidden={!isSectionDrawerOpen}
-              navHeight={scrollAdjustedNavHeight}
-            >
-              <MenuWidgets
-                customFields={customFields}
-                menuButtonClickAction={menuButtonClickAction}
-              >
-                {children}
-              </MenuWidgets>
-            </SectionNav>
-          </div>
-        </FocusTrap>
-      </StyledSectionDrawer>
-
-      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
-      <StyledWarning>
-        In order to render horizontal links, the logo must be aligned to the left.
-      </StyledWarning>
-      )}
-    </StyledNav>
+      {children}
+    </PresentationalNav>
   );
 };
 

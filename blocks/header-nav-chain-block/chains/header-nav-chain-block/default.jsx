@@ -26,6 +26,8 @@ const standardNavHeight = 56;
 const navZIdx = 9;
 const sectionZIdx = navZIdx - 1;
 
+// max-width 100% fills the available space on smaller viewports
+// max-width 240px is the biggest the icon will grow to on larger viewports
 /* Styled Components */
 const StyledNav = styled.nav`
   align-items: center;
@@ -56,7 +58,6 @@ const StyledNav = styled.nav`
 
       @media screen and (max-width: ${(props) => props.breakpoint}px) {
         max-height: 40px;
-        // fills available space, overrides max width 240px
         max-width: 100%;
       }
       @media screen and (min-width: ${(props) => props.breakpoint}px) {

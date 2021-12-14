@@ -21,11 +21,12 @@ const Checkout = ({
   } = customFields;
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
+  const [signedInIdentity, setSignedInIdentity] = useState(false);
   const [orderNumber, setOrderNumber] = useState();
   const [showPaymentScreen, setShowPaymentScreen] = useState(false);
   const [payment, setPayment] = useState();
 
-  const { Identity } = useIdentity();
+  const { Identity, getSignedInIdentity } = useIdentity();
   const { Sales } = useSales();
 
   const { arcSite } = useFusionContext();
@@ -46,6 +47,7 @@ const Checkout = ({
       Identity.getUserProfile().then((userProfile) => {
         if (isActive) {
           setUser(userProfile);
+          setSignedInIdentity(getSignedInIdentity(userProfile));
         }
       }).catch(() => {
         setUser(false);
@@ -54,7 +56,7 @@ const Checkout = ({
 
     // cancel subscription to useEffect
     return () => { isActive = false; return null; };
-  }, [Identity, loggedIn]);
+  }, [Identity, getSignedInIdentity, loggedIn]);
 
   const logoutCallback = () => {
     Identity.logout().then(() => {
@@ -91,6 +93,7 @@ const Checkout = ({
           <ContactInfo
             callback={createNewOrder}
             user={user}
+            signedInIdentity={signedInIdentity}
             logoutCallback={logoutCallback}
           />
         )

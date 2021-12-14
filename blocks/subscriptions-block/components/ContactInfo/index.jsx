@@ -10,7 +10,9 @@ import GoogleIcon from './google.svg';
 import FacebookIcon from './facebook.svg';
 import './styles.scss';
 
-const ContactInfo = ({ callback, user, logoutCallback }) => {
+const ContactInfo = ({
+  callback, user, signedInIdentity, logoutCallback,
+}) => {
   const formRef = useRef();
   const entriesRef = useRef({});
 
@@ -54,70 +56,81 @@ const ContactInfo = ({ callback, user, logoutCallback }) => {
     </button>
   );
 
+  const identityInfo = () => {
+    if (user && signedInIdentity) {
+      const type = signedInIdentity.type.toLowerCase();
+      switch (type) {
+        case 'google':
+          return (
+            <div className="identity-row">
+              <img
+                alt="Google"
+                title="Google"
+                className="identity-icon"
+                src={GoogleIcon}
+                data-testid="google-icon"
+              />
+              <span>
+                {phrases.t('checkout-block.identity-social', { email: user.email })}
+              </span>
+              {signOutBtn}
+            </div>
+          );
+        case 'facebook':
+          return (
+            <div className="identity-row">
+              <img
+                alt="Facebook"
+                title="Facebook"
+                className="identity-icon"
+                src={FacebookIcon}
+                data-testid="facebook-icon"
+              />
+              <span>
+                {phrases.t('checkout-block.identity-social', { email: user.email })}
+              </span>
+              {signOutBtn}
+            </div>
+          );
+        case 'password':
+          return (
+            <div className="identity-row">
+              <span>
+                {phrases.t('checkout-block.identity-email', { email: user.email })}
+              </span>
+              {signOutBtn}
+            </div>
+          );
+        default:
+          return null;
+      }
+    }
+    return null;
+  };
+
   return (
     <form onSubmit={handleSubmit} ref={formRef} className="xpmedia-subscriptions-contact-info">
       <PrimaryFont as="h2" className="xpmedia-subscriptions-contact-info-title">
         {phrases.t('checkout-block.contact-info')}
       </PrimaryFont>
 
-      <FormInputField
-        autoComplete="email"
-        label={phrases.t('checkout-block.email')}
-        name="email"
-        defaultValue={user && user.email ? user.email : ''}
-        hidden={!!(user && user.email)}
-        required
-        onChange={(value) => { handleInputChange('email', value); }}
-        showDefaultError={false}
-        type={FIELD_TYPES.EMAIL}
-        validationErrorMessage={phrases.t('checkout-block.email-requirements')}
-      />
-      {user && user.email && (
-        <div className="identity-row">
-            {user?.identities?.[0]?.type && (
-              <>
-                {user.identities[0].type.toLowerCase() === 'google' && (
-                  <>
-                    <img
-                      alt="Google"
-                      title="Google"
-                      className="identity-icon"
-                      src={GoogleIcon}
-                      data-testid="google-icon"
-                    />
-                    <span>
-                      {phrases.t('checkout-block.identity-social', { email: user.email })}
-                    </span>
-                    {signOutBtn}
-                  </>
-                )}
-                {user.identities[0].type.toLowerCase() === 'facebook' && (
-                  <>
-                    <img
-                      alt="Facebook"
-                      title="Facebook"
-                      className="identity-icon"
-                      src={FacebookIcon}
-                      data-testid="facebook-icon"
-                    />
-                    <span>
-                      {phrases.t('checkout-block.identity-social', { email: user.email })}
-                    </span>
-                    {signOutBtn}
-                  </>
-                )}
-                {user.identities[0].type.toLowerCase() === 'password' && (
-                  <>
-                    <span>
-                      {phrases.t('checkout-block.identity-email', { email: user.email })}
-                    </span>
-                    {signOutBtn}
-                  </>
-                )}
-              </>
-            )}
+      <div className="row">
+        <div className="col-sm-xl-12">
+          <FormInputField
+            autoComplete="email"
+            label={phrases.t('checkout-block.email')}
+            name="email"
+            defaultValue={user && user.email ? user.email : ''}
+            hidden={!!(user && user.email)}
+            required
+            onChange={(value) => { handleInputChange('email', value); }}
+            showDefaultError={false}
+            type={FIELD_TYPES.EMAIL}
+            validationErrorMessage={phrases.t('checkout-block.email-requirements')}
+          />
+          {identityInfo()}
         </div>
-      )}
+      </div>
       <div className="row">
         <div className="col-md-xl-6 col-sm-12">
           <FormInputField

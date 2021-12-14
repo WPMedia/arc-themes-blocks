@@ -1,100 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import useIdentity from '../Identity';
+import FacebookSignIn from './_children/FacebookSignIn';
+import GoogleSignIn from './_children/GoogleSignIn';
 import './styles.scss';
 
+import useSocialSignIn from './utils/useSocialSignIn';
+
 const SocialSignOn = ({ onError, redirectURL }) => {
-  const { Identity } = useIdentity();
-  const [config, setConfig] = useState(() => Identity?.configOptions ?? {});
-  const [isGoogleInitialized, setIsGoogleInitialized] = useState(false);
-  const [isFacebookInitialized, setIsFacebookInitialized] = useState(false);
-
-  const isGoogleReset = useRef(false);
-
-  useEffect(() => {
-    window.onFacebookSignOn = async () => {
-      try {
-        await Identity.facebookSignOn();
-        window.location = redirectURL;
-      } catch (e) {
-        onError();
-      }
-    };
-  });
-
-  useEffect(() => {
-    const fetchConfig = async () => {
-      await Identity.getConfig();
-      setConfig(Identity.configOptions);
-    };
-    if (Identity && !Identity.configOptions) {
-      fetchConfig();
-    }
-  }, [Identity]);
-
-  useEffect(() => {
-    const initializeGoogle = async () => {
-      await Identity.initGoogleLogin(null, {
-        width: 300,
-        height: 48,
-        onSuccess: () => {
-          if (!isGoogleReset.current) {
-            isGoogleReset.current = true;
-          } else {
-            window.location = redirectURL;
-          }
-        },
-        onFailure: () => { onError(); },
-      });
-    };
-    if (config.googleClientId && !isGoogleInitialized) {
-      initializeGoogle();
-      setIsGoogleInitialized(true);
-    }
-  }, [Identity,
-    config.googleClientId,
-    isGoogleInitialized,
-    onError,
-    redirectURL]);
-
-  useEffect(() => {
-    const initializeFacebook = async () => {
-      await Identity.initFacebookLogin(null);
-    };
-    if (config.facebookAppId && !isFacebookInitialized) {
-      initializeFacebook();
-      setIsFacebookInitialized(true);
-    }
-  }, [Identity,
-    config.facebookAppId,
-    isFacebookInitialized]);
-
-  if (!Identity) {
-    return null;
-  }
-
-  if (!config.facebookAppId && !config.googleClientId) {
-    return null;
-  }
+  const {
+    facebookAppId,
+    googleClientId,
+  } = useSocialSignIn(redirectURL, onError);
 
   return (
     <section className="xpmedia-social-signin-wrapper">
       {
-        config.googleClientId ? <div id="google-sign-in-button" /> : null
+        googleClientId ? <GoogleSignIn /> : null
       }
       {
-        config.facebookAppId ? (
-          <div
-            className="fb-login-button"
-            data-width="300"
-            data-height="48"
-            data-size="large"
-            data-button-type="login_with"
-            data-scope="public_profile,email"
-            data-auto-logout-link="false"
-            data-use-continue-as="true"
-            data-onlogin="window.onFacebookSignOn()"
-          />
+        facebookAppId ? (
+          <FacebookSignIn />
         ) : null
       }
     </section>

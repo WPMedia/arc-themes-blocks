@@ -3,7 +3,7 @@
   "version": "5.15.0",
   "description": "Fusion themes block containing a right-rail layout.",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/right-rail-block"
   },
   "scripts": {

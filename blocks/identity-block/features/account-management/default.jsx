@@ -8,6 +8,7 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import { useIdentity } from '../..';
 import EmailEditableFieldContainer from './_children/EmailEditableFieldContainer';
 import PasswordEditableFieldContainer from './_children/PasswordEditableFieldContainer';
+import SocialEditableSection from './_children/SocialEditableSection';
 
 import './styles.scss';
 
@@ -25,8 +26,12 @@ function AccountManagement({ customFields }) {
   const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [hasPassword, setHasPassword] = useState();
+  const [hasGoogle, setHasGoogle] = useState(false);
+  const [hasFacebook, setHasFacebook] = useState(false);
 
-  const { redirectURL, showEmail, showPassword } = customFields;
+  const {
+    redirectURL, showEmail, showPassword, showSocialProfile,
+  } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -62,6 +67,8 @@ function AccountManagement({ customFields }) {
         const passwordProfile = identities.filter(({ type }) => type === 'Password' || type === 'Identity');
 
         setHasPassword(passwordProfile?.length > 0);
+        setHasGoogle(identities.filter(({ type }) => type === 'Google').length > 0);
+        setHasFacebook(identities.filter(({ type }) => type === 'Facebook').length > 0);
         // todo: in future ticket, handle errors
         // else {
         //   setError('No email found');
@@ -76,31 +83,53 @@ function AccountManagement({ customFields }) {
     }
   }, [loggedIn, setEmail, Identity, isAdmin]);
 
+  // cause re-render to re-check if identity has social identity
+  const unlinkFacebook = () => Identity.unlinkSocialIdentity('facebook').then(() => setHasFacebook(false));
+  const unlinkGoogle = () => Identity.unlinkSocialIdentity('google').then(() => setHasGoogle(false));
+
   if (!isInitialized || (isLoading && !isAdmin)) {
     return null;
   }
 
   const header = phrases.t('identity-block.account-information');
+  const socialProfileHeader = phrases.t('identity-block.connected-accounts');
 
   // if logged in, return account info
   return (
-    <AccountManagementPresentational header={header}>
+    <div className="account-management-layout--wrapper">
+      <AccountManagementPresentational header={header}>
+        {
+          showEmail && (
+            <EmailEditableFieldContainer
+              email={email}
+              setEmail={setEmail}
+            />
+          )
+        }
+        {
+          showPassword ? (
+            <PasswordEditableFieldContainer
+              email={email}
+              hasPassword={hasPassword}
+              setHasPassword={setHasPassword}
+            />
+          ) : null
+        }
+      </AccountManagementPresentational>
       {
-        showEmail && (
-          <EmailEditableFieldContainer
-            email={email}
-            setEmail={setEmail}
-          />
-        )
+        showSocialProfile ? (
+          <AccountManagementPresentational header={socialProfileHeader}>
+            <SocialEditableSection
+              hasGoogle={hasGoogle}
+              hasFacebook={hasFacebook}
+              unlinkFacebook={unlinkFacebook}
+              unlinkGoogle={unlinkGoogle}
+              hasPasswordAccount={hasPassword}
+            />
+          </AccountManagementPresentational>
+        ) : null
       }
-      {showPassword ? (
-        <PasswordEditableFieldContainer
-          email={email}
-          hasPassword={hasPassword}
-          setHasPassword={setHasPassword}
-        />
-      ) : null}
-    </AccountManagementPresentational>
+    </div>
   );
 }
 
@@ -122,6 +151,11 @@ AccountManagement.propTypes = {
     showPassword: PropTypes.bool.tag({
       // this is to to show or hide the editable input thing and non-editable text
       name: 'Enable Password Editing',
+      defaultValue: false,
+    }),
+    showSocialProfile: PropTypes.bool.tag({
+      // this is to to show or hide the editable social inputs non-editable text
+      name: 'Enable Social Profile Editing',
       defaultValue: false,
     }),
   }),

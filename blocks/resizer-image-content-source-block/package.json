@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/resizer-image-content-source-block"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "files": [
     "sources"
   ],

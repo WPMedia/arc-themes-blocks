@@ -6,7 +6,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
   "name": "@wpmedia/<%= h.inflection.dasherize(block_name) %>-block",
   "version": "0.1.0",
   "description": "<%= h.changeCase.title( block_name ) %> Block",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -19,7 +19,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/<%= h.inflection.dasherize(block_name) %>-block"
   },
   "peerDependencies": {
@@ -27,4 +27,3 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
     "@wpmedia/engine-theme-sdk": "*"
   }
 }
-

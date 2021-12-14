@@ -2,7 +2,7 @@ import React from 'react';
 import { PresentationalNav } from './chains/header-nav-chain-block/default';
 
 export default {
-  title: 'Chains/HeaderNavChainBlock',
+  title: 'Chains/Header Nav Block',
   parameters: {
     chromatic: {
       viewports: [320, 1200],

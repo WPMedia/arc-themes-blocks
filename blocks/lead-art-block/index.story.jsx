@@ -15,7 +15,15 @@ const leadArtImage = {
   type: 'image',
   caption: 'Reimagining a tried-and-true staple can invigorate the senses. Tired of tomato soup with grilled cheese? Why not try a hearty gazpacho with a caprese focaccia?',
   credits: {
-    affiliation: [],
+    affiliation: [{
+      name: 'Affiliation Name',
+    }],
+    by: [{
+      type: 'author',
+      name: 'Author Name',
+      org: 'Author Org',
+      slug: '',
+    }],
   },
   subtitle: 'Switching It Up',
   url: 'https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/47JS2DECTBGPZDHNCYVFQFKWLQ.jpg',
@@ -131,6 +139,23 @@ export const gallery = () => {
   );
 };
 
+export const galleryNoTitleCaptionCredits = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtGallery,
+    },
+  };
+  const customFields = {
+    displayTitle: false,
+    displayCaption: false,
+    displayCredit: false,
+  };
+  return (
+    <LeadArt globalContent={globalContent} customFields={customFields} />
+  );
+};
+
 export const image = () => {
   const globalContent = {
     arcSite: 'story-book',
@@ -140,6 +165,58 @@ export const image = () => {
   };
   return (
     <LeadArt globalContent={globalContent} />
+  );
+};
+
+export const imageNoTitle = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtImage,
+    },
+  };
+
+  return (
+    <LeadArt globalContent={globalContent} customFields={{ displayTitle: false }} />
+  );
+};
+
+export const imageNoTitleCaption = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtImage,
+    },
+  };
+
+  return (
+    <LeadArt
+      globalContent={globalContent}
+      customFields={{
+        displayTitle: false,
+        displayCaption: false,
+      }}
+    />
+  );
+};
+
+export const imageNoTitleCaptionCredits = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtImage,
+    },
+  };
+
+  return (
+    <LeadArt
+      globalContent={globalContent}
+      customFields={{
+        displayTitle: false,
+        displayCaption: false,
+        displayCredits: false,
+      }}
+    />
   );
 };
 

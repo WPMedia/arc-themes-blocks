@@ -256,19 +256,19 @@ LeadArt.propTypes = {
     }),
     ...(videoPlayerCustomFields()),
     displayTitle: PropTypes.bool.tag({
-      description: 'This display option applies to all Lead Art media types: Images, Gallery, and Video',
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
       label: 'Display Title',
       defaultValue: true,
       group: 'Display Options',
     }),
     displayCaption: PropTypes.bool.tag({
-      description: 'This display option applies to all Lead Art media types: Images, Gallery, and Video',
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
       label: 'Display Caption',
       defaultValue: true,
       group: 'Display Options',
     }),
     displayCredits: PropTypes.bool.tag({
-      description: 'This display option applies to all Lead Art media types: Images, Gallery, and Video',
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
       label: 'Display Credits',
       defaultValue: true,
       group: 'Display Options',

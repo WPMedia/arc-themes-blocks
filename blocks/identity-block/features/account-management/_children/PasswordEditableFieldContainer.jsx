@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
+import {
+  FIELD_TYPES, FormInputField,
+} from '@wpmedia/shared-styles';
 import { useIdentity } from '../../..';
 import EditableFieldPresentational from '../../../components/EditableFormInputField';
-import FormInputField, { FIELD_TYPES } from '../../../components/FormInputField';
 import FormPasswordConfirm from '../../../components/FormPasswordConfirm';
 import passwordValidationMessage from '../../../utils/password-validation-message';
 import validatePasswordPattern from '../../../utils/validate-password-pattern';

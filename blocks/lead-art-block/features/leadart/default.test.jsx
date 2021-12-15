@@ -53,93 +53,26 @@ describe('LeadArt', () => {
     expect(wrapper.find('ReactImageLightbox').length).toEqual(1);
   });
 
-  // it('renders video lead art type without playthrough', () => {
-  //   const globalContent = {
-  //     promo_items: {
-  //       lead_art: {
-  //         type: 'video',
-  //       },
-  //     },
-  //   };
+  it('renders video lead art type without playthrough', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'video',
+        },
+      },
+    };
 
-  //   const wrapper = shallow(
-  //     <LeadArt
-  //       arcSite="the-sun"
-  //       globalContent={globalContent}
-  //       customFields={{ playthrough: false }}
-  //     />,
-  //   );
-  //   const vidPlayer = wrapper.find('VideoPlayer');
-  //   expect(vidPlayer.length).toEqual(1);
-  //   expect(vidPlayer.props().customFields.playthrough).toBeFalsy();
-  // });
-
-  // not sure if these tests are reliable
-  // it('renders video lead art type with playthrough', () => {
-  //   const globalContent = {
-  //     promo_items: {
-  //       lead_art: {
-  //         type: 'video',
-  //         embedHTML: 'here',
-  //       },
-  //     },
-  //   };
-
-  //   const wrapper = shallow(
-  //     <LeadArt
-  //       arcSite="the-sun"
-  //       globalContent={globalContent}
-  //       customFields={{ playthrough: true }}
-  //     />,
-  //   );
-  //   const vidPlayer = wrapper.find('VideoPlayer');
-  //   expect(vidPlayer.length).toEqual(1);
-  //   expect(vidPlayer.props().customFields.playthrough).toBeDefined();
-  //   expect(vidPlayer.props().customFields.playthrough).toEqual(true);
-  // });
-
-  // it('renders video lead art type without auto-play', () => {
-  //   const globalContent = {
-  //     promo_items: {
-  //       lead_art: {
-  //         type: 'video',
-  //       },
-  //     },
-  //   };
-
-  //   const wrapper = shallow(
-  //     <LeadArt
-  //       arcSite="the-sun"
-  //       globalContent={globalContent}
-  //       customFields={{ enableAutoplay: false }}
-  //     />,
-  //   );
-  //   const vidPlayer = wrapper.find('VideoPlayer');
-  //   expect(vidPlayer.length).toEqual(1);
-  //   expect(vidPlayer.prop('enableAutoplay')).toBeFalsy();
-  // });
-
-  // it('renders video lead art type with auto-play', () => {
-  //   const globalContent = {
-  //     promo_items: {
-  //       lead_art: {
-  //         type: 'video',
-  //       },
-  //     },
-  //   };
-
-  //   const wrapper = shallow(
-  //     <LeadArt
-  //       arcSite="the-sun"
-  //       globalContent={globalContent}
-  //       customFields={{ enableAutoplay: true }}
-  //     />,
-  //   );
-  //   const vidPlayer = wrapper.find('VideoPlayer');
-  //   expect(vidPlayer.length).toEqual(1);
-  //   expect(vidPlayer.prop('enableAutoplay')).toBeDefined();
-  //   expect(vidPlayer.prop('enableAutoplay')).toEqual(true);
-  // });
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{ playthrough: false }}
+      />,
+    );
+    const vidPlayer = wrapper.find('VideoPlayer');
+    expect(vidPlayer.length).toEqual(1);
+    expect(vidPlayer.props().customFields.playthrough).toBeFalsy();
+  });
 
   it('renders image type', () => {
     const globalContent = {
@@ -153,6 +86,28 @@ describe('LeadArt', () => {
     LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
     const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
     expect(wrapper.find('ImageMetadata').length).toEqual(1);
+  });
+
+  it('renders image type and no meta data', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'image',
+        },
+      },
+    };
+
+    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
+    const wrapper = shallow(<LeadArt
+      arcSite="the-sun"
+      globalContent={globalContent}
+      customFields={{
+        hideTitle: true,
+        hideCaption: true,
+        hideCredits: true,
+      }}
+    />);
+    expect(wrapper.find('ImageMetadata').length).toEqual(0);
   });
 
   it('renders gallery lead image type', () => {

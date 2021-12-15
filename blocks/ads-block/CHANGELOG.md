@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/ads-block@5.18.2...@wpmedia/ads-block@5.19.0) (2021-12-15)
+
+**Note:** Version bump only for package @wpmedia/ads-block
+
+
+
+
+
 ## [5.18.2](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/ads-block@5.18.1...@wpmedia/ads-block@5.18.2) (2021-12-15)
 
 **Note:** Version bump only for package @wpmedia/ads-block

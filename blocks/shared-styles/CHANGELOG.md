@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.20.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/shared-styles@5.19.0...@wpmedia/shared-styles@5.20.0) (2021-12-15)
+
+**Note:** Version bump only for package @wpmedia/shared-styles
+
+
+
+
+
 # [5.19.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/shared-styles@5.18.0...@wpmedia/shared-styles@5.19.0) (2021-12-15)
 
 

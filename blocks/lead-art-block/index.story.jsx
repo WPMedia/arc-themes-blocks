@@ -139,23 +139,6 @@ export const gallery = () => {
   );
 };
 
-export const galleryNoTitleCaptionCredits = () => {
-  const globalContent = {
-    arcSite: 'story-book',
-    promo_items: {
-      lead_art: leadArtGallery,
-    },
-  };
-  const customFields = {
-    displayTitle: false,
-    displayCaption: false,
-    displayCredit: false,
-  };
-  return (
-    <LeadArt globalContent={globalContent} customFields={customFields} />
-  );
-};
-
 export const image = () => {
   const globalContent = {
     arcSite: 'story-book',
@@ -177,7 +160,7 @@ export const imageNoTitle = () => {
   };
 
   return (
-    <LeadArt globalContent={globalContent} customFields={{ displayTitle: false }} />
+    <LeadArt globalContent={globalContent} customFields={{ hideTitle: true }} />
   );
 };
 
@@ -193,8 +176,8 @@ export const imageNoTitleCaption = () => {
     <LeadArt
       globalContent={globalContent}
       customFields={{
-        displayTitle: false,
-        displayCaption: false,
+        hideTitle: true,
+        hideCaption: true,
       }}
     />
   );
@@ -212,9 +195,9 @@ export const imageNoTitleCaptionCredits = () => {
     <LeadArt
       globalContent={globalContent}
       customFields={{
-        displayTitle: false,
-        displayCaption: false,
-        displayCredits: false,
+        hideTitle: true,
+        hideCaption: true,
+        hideCredits: true,
       }}
     />
   );

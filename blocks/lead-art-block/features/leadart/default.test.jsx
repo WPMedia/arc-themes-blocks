@@ -102,9 +102,9 @@ describe('LeadArt', () => {
       arcSite="the-sun"
       globalContent={globalContent}
       customFields={{
-        displayTitle: false,
-        displayCaption: false,
-        displayCredits: false,
+        hideTitle: true,
+        hideCaption: true,
+        hideCredits: true,
       }}
     />);
     expect(wrapper.find('ImageMetadata').length).toEqual(0);

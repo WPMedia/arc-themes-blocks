@@ -65,7 +65,7 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
-    const { displayTitle = true, displayCaption = true, displayCredits = true } = customFields;
+    const { hideTitle = false, hideCaption = false, hideCredits = false } = customFields;
 
     let AdBlock;
 
@@ -142,7 +142,7 @@ class LeadArt extends Component {
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
                   onCloseRequest={this.setIsOpenToFalse}
-                  imageCaption={displayCaption ? lead_art.caption : null}
+                  imageCaption={!hideCaption ? lead_art.caption : null}
                 />
               )}
             </>
@@ -151,9 +151,9 @@ class LeadArt extends Component {
 
         caption = (
           <ImageMetadata
-            subtitle={displayTitle ? lead_art.subtitle : null}
-            caption={displayCaption ? lead_art.caption : null}
-            credits={displayCredits ? lead_art.credits : null}
+            subtitle={!hideTitle ? lead_art.subtitle : null}
+            caption={!hideCaption ? lead_art.caption : null}
+            credits={!hideCredits ? lead_art.credits : null}
           />
         );
 
@@ -189,7 +189,7 @@ class LeadArt extends Component {
               />
             </div>
             {lightbox}
-            {(displayTitle || displayCaption || displayCredits) ? (
+            {(!hideTitle || !hideCaption || !hideCredits) ? (
               <figcaption>
                 {caption}
               </figcaption>
@@ -218,9 +218,9 @@ class LeadArt extends Component {
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (<AdBlock />)}
             interstitialClicks={interstitialClicks}
-            displayTitle={displayTitle}
-            displayCaption={displayCaption}
-            displayCredits={displayCredits}
+            displayTitle={!hideTitle}
+            displayCaption={!hideCaption}
+            displayCredits={!hideCredits}
           />
         );
       }
@@ -255,22 +255,22 @@ LeadArt.propTypes = {
       group: 'Video',
     }),
     ...(videoPlayerCustomFields()),
-    displayTitle: PropTypes.bool.tag({
+    hideTitle: PropTypes.bool.tag({
       description: 'This display option applies to Lead Art media types: Images and Gallery',
-      label: 'Display Title',
-      defaultValue: true,
+      label: 'Hide Title',
+      defaultValue: false,
       group: 'Display Options',
     }),
-    displayCaption: PropTypes.bool.tag({
+    hideCaption: PropTypes.bool.tag({
       description: 'This display option applies to Lead Art media types: Images and Gallery',
-      label: 'Display Caption',
-      defaultValue: true,
+      label: 'Hide Caption',
+      defaultValue: false,
       group: 'Display Options',
     }),
-    displayCredits: PropTypes.bool.tag({
+    hideCredits: PropTypes.bool.tag({
       description: 'This display option applies to Lead Art media types: Images and Gallery',
-      label: 'Display Credits',
-      defaultValue: true,
+      label: 'Hide Credits',
+      defaultValue: false,
       group: 'Display Options',
     }),
   }),

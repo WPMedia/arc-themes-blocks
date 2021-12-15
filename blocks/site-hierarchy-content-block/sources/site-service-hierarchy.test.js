@@ -48,6 +48,12 @@ describe('the site-service-hierarchy content source block', () => {
     expect(data._id).toEqual('/');
   });
 
+  it('when a hierarchy is provided and no sectionId', () => {
+    const data = contentSource.transform({ _id: '/' }, { hierarchy: 'links-bar', uri: '/test/test' });
+
+    expect(data._id).toEqual('/');
+  });
+
   it('when a hierarchy is not provided and sectionId is provided that matches the API data then the data is returned', () => {
     const data = contentSource.transform({ _id: '/sectionId' }, { hierarchy: '', sectionId: '/sectionId' });
 
@@ -56,5 +62,15 @@ describe('the site-service-hierarchy content source block', () => {
 
   it('when a hierarchy is not provided and sectionId is provided that does not match the API data a 404 is thrown', () => {
     expect(() => contentSource.transform({ _id: '/' }, { hierarchy: '', sectionId: '/sectionId' })).toThrow(Error);
+  });
+
+  it('when a uri does not match section a 404 is thrown', () => {
+    expect(() => contentSource.transform({ _id: '/' }, { hierarchy: '', sectionId: '/sectionId', uri: '/' })).toThrow(Error);
+  });
+
+  it('when uri and section match return data', () => {
+    const data = contentSource.transform({ _id: '/sectionId' }, { hierarchy: 'hierarchy', sectionId: '/sectionId', uri: '/sectionId' });
+
+    expect(data._id).toEqual('/sectionId');
   });
 });

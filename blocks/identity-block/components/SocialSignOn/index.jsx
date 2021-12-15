@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import PropTypes from '@arc-fusion/prop-types';
 import useIdentity from '../Identity';
 import './styles.scss';
@@ -12,7 +11,7 @@ const SocialSignOn = ({ onError, redirectURL }) => {
 
   const isGoogleReset = useRef(false);
 
-  if (!isServerSide() && !window.onFacebookSignOn) {
+  useEffect(() => {
     window.onFacebookSignOn = async () => {
       try {
         await Identity.facebookSignOn();
@@ -21,7 +20,7 @@ const SocialSignOn = ({ onError, redirectURL }) => {
         onError();
       }
     };
-  }
+  });
 
   useEffect(() => {
     const fetchConfig = async () => {

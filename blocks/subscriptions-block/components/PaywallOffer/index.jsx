@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import isUrl from 'is-url';
-import usePaywall from '../usePaywall';
 import useOffer from '../useOffer';
 import SubscriptionOverlay from '../SubscriptionOverlay';
 import SubscriptionDialog from '../SubscriptionDialog';
@@ -9,25 +8,20 @@ import SubscriptionDialog from '../SubscriptionDialog';
 const isPaywallCampaignURL = (payWallCode) => payWallCode && isUrl(payWallCode);
 
 const PaywallOffer = ({
-  reasonPrompt,
+  actionText,
+  actionUrl,
+  campaignCode = null,
+  displayMode,
   linkPrompt,
   linkText,
   linkUrl,
-  actionText,
-  offerURL,
-  campaignCode,
+  reasonPrompt,
   usePortal = true,
 }) => {
-  const {
-    campaignCode: initialCampaignCode,
-  } = usePaywall();
-
   // the paywall code (otherwise known as a campaign code)
   const [payWallCode, setPayWallCode] = useState();
 
-  const { offer, fetchOffer } = useOffer({
-    campaignCode: campaignCode || (!isUrl(initialCampaignCode) ? initialCampaignCode : null),
-  });
+  const { offer, fetchOffer } = useOffer({ campaignCode });
 
   /**
    * payWallOffer is the most updated offer that is returned from
@@ -49,10 +43,9 @@ const PaywallOffer = ({
    * to "default"
    */
   useEffect(() => {
-    const campaign = campaignCode
-      || (!isPaywallCampaignURL(initialCampaignCode) ? initialCampaignCode : 'default');
+    const campaign = campaignCode || 'default';
     setPayWallCode(campaign);
-  }, [campaignCode, initialCampaignCode]);
+  }, [campaignCode]);
 
   // This will grab the offer corresponding to the paywall code
   useEffect(() => {
@@ -62,10 +55,14 @@ const PaywallOffer = ({
         setSelectedOffer(payWallOffer.current);
       }
     };
-    if (payWallCode && !isUrl(payWallCode)
+    if (payWallCode
+      && !isUrl(payWallCode)
       && (!payWallOffer.current || payWallOffer.current.pw !== payWallCode)) {
       fetchNewOffer();
     }
+    return () => {
+      payWallOffer.current = null;
+    };
   }, [payWallCode, fetchOffer]);
 
   /**
@@ -84,20 +81,23 @@ const PaywallOffer = ({
    * we just set the campaign code to "default"
    */
   const campaign = campaignCode || (!isPaywallCampaignURL(payWallCode) ? payWallCode : 'default');
-  const actionUrl = isPaywallCampaignURL(payWallCode)
-    ? payWallCode : `${offerURL}?_cid=${campaign}`;
+  const actionUrlFinal = !campaign || campaign === 'default'
+    ? actionUrl
+    : `${actionUrl}?campaign=${campaign}`;
 
   return (
-    <SubscriptionOverlay usePortal={usePortal}>
+    <SubscriptionOverlay displayMode={displayMode} usePortal={usePortal}>
       <SubscriptionDialog
-        reasonPrompt={reasonPrompt}
+        actionText={actionText}
+        actionUrl={isPaywallCampaignURL(payWallCode)
+          ? payWallCode
+          : actionUrlFinal}
+        headline={selectedOffer.pageTitle}
         linkPrompt={linkPrompt}
         linkText={linkText}
         linkUrl={linkUrl}
-        headline={selectedOffer.pageTitle}
+        reasonPrompt={reasonPrompt}
         subHeadline={selectedOffer.pageSubTitle}
-        actionUrl={actionUrl}
-        actionText={actionText}
       />
     </SubscriptionOverlay>
   );

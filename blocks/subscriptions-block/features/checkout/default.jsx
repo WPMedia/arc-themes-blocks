@@ -25,6 +25,7 @@ const Checkout = ({
   const [orderNumber, setOrderNumber] = useState();
   const [showPaymentScreen, setShowPaymentScreen] = useState(false);
   const [payment, setPayment] = useState();
+  const [paymentMethodID, setPaymentMethodID] = useState();
 
   const { Identity, getSignedInIdentity } = useIdentity();
   const { Sales } = useSales();
@@ -72,9 +73,12 @@ const Checkout = ({
     Sales.createNewOrder({ country }, email).then((order) => {
       setOrderNumber(order.orderNumber);
       Sales.getPaymentOptions().then((paymentOptions) => {
+        const newPaymentMethodID = paymentOptions[0].paymentMethodID;
         Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID)
           .then((paymentObject) => {
             setPayment(paymentObject);
+            // setting here but not by design
+            setPaymentMethodID(newPaymentMethodID);
             setShowPaymentScreen(true);
           });
       });
@@ -102,6 +106,7 @@ const Checkout = ({
             orderNumber={orderNumber}
             paymentDetails={payment}
             successURL={successURL}
+            paymentMethodID={paymentMethodID}
           />
         )}
     </PrimaryFont>

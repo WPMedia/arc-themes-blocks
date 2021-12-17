@@ -2,7 +2,15 @@
 	margin-top: calculateRem(24px);
 }
 
+.payment-form--container {
+	margin-top: calculateRem(24px);
+}
+
 .payment-form--hr {
-	margin-top: calculateRem(14px);
+	margin-top: calculateRem(32px);
 	margin-bottom: calculateRem(32px);
+}
+
+.payment-form--stripe-input-container {
+	margin: calculateRem(4px);
 }

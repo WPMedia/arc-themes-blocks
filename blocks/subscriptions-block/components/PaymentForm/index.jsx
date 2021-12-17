@@ -74,7 +74,7 @@ function PaymentForm({
   };
 
   return (
-    <PrimaryFont as="div">
+    <PrimaryFont as="div" className="payment-form--container">
       <h2 className="payment-form--title">
         {formTitle}
       </h2>
@@ -83,8 +83,10 @@ function PaymentForm({
           className="xpmedia-form-field-label"
         >
           {formLabel}
-          <CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
         </label>
+        <div className="payment-form--stripe-input-container">
+          <CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
+        </div>
         <hr className="payment-form--hr" />
         <Button
           buttonSize={BUTTON_SIZES.MEDIUM}

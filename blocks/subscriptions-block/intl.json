@@ -2891,5 +2891,38 @@
 		"no": "Zimbabwe",
 		"pt": "Zimbabwe",
 		"sv": "Zimbabwe"
+	},
+	"subscriptions-block.credit-card-information": {
+		"de": "Payment Method and Information",
+		"en": "Payment Method and Information",
+		"es": "Payment Method and Information",
+		"fr": "Payment Method and Information",
+		"ja": "Payment Method and Information",
+		"ko": "Payment Method and Information",
+		"no": "Payment Method and Information",
+		"pt": "Payment Method and Information",
+		"sv": "Payment Method and Information"
+	},
+	"subscriptions-block.payment-information": {
+		"de": "Credit card information",
+		"en": "Credit card information",
+		"es": "Credit card information",
+		"fr": "Credit card information",
+		"ja": "Credit card information",
+		"ko": "Credit card information",
+		"no": "Credit card information",
+		"pt": "Credit card information",
+		"sv": "Credit card information"
+	},
+	"subscriptions-block.submit-payment": {
+		"de": "Purchase Subscription",
+		"en": "Purchase Subscription",
+		"es": "Purchase Subscription",
+		"fr": "Purchase Subscription",
+		"ja": "Purchase Subscription",
+		"ko": "Purchase Subscription",
+		"no": "Purchase Subscription",
+		"pt": "Purchase Subscription",
+		"sv": "Purchase Subscription"
 	}
 }

@@ -3,7 +3,10 @@ import {
   Elements,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import PaymentForm from './PaymentForm';
+import { useFusionContext } from 'fusion:context';
+import getProperties from 'fusion:properties';
+import getTranslatedPhrases from 'fusion:intl';
+import PaymentForm from '../../../../components/PaymentForm';
 
 const PaymentInfo = ({
   orderNumber,
@@ -15,6 +18,14 @@ const PaymentInfo = ({
 
   // initialized payment doc https://redirector.arcpublishing.com/alc/docs/api/arc-sdks/interfaces/_sdk_sales_src_sdk_order_.initializedpayment.html
   const { parameter2: stripeKey, parameter1: clientSecret } = paymentDetails;
+
+  const { arcSite } = useFusionContext();
+  const { locale } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
+
+  const formLabel = phrases.t('subscriptions-block.credit-card-information');
+  const formTitle = phrases.t('subscriptions-block.payment-information');
+  const submitText = phrases.t('subscriptions-block.submit-payment');
 
   // load stripe key via payment details stripe key string
   useEffect(() => {
@@ -29,10 +40,13 @@ const PaymentInfo = ({
       <Elements stripe={stripeInstance}>
         <PaymentForm
           clientSecret={clientSecret}
+          formLabel={formLabel}
+          formTitle={formTitle}
           orderNumber={orderNumber}
           paymentMethodID={paymentMethodID}
-          successURL={successURL}
           stripeInstance={stripeInstance}
+          submitText={submitText}
+          successURL={successURL}
         />
       </Elements>
     );

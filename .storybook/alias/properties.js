@@ -20,6 +20,9 @@ export default (site) => ({
   api: {
     identity: {
       origin: 'abc'
-    }
+    },
+		retail: {
+			origin: 'abc'
+		}
   }
 });

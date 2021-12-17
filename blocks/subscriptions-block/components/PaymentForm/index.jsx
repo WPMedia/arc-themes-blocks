@@ -3,23 +3,22 @@ import Sales from '@arc-publishing/sdk-sales';
 import {
   CardElement, useElements,
 } from '@stripe/react-stripe-js';
+import {
+  PrimaryFont,
+  Button,
+  BUTTON_SIZES,
+  BUTTON_STYLES,
+} from '@wpmedia/shared-styles';
+
+import './styles.scss';
 
 const CARD_ELEMENT_OPTIONS = {
-  // style: {
-  //   base: {
-  //     color: '#32325d',
-  //     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-  //     fontSmoothing: 'antialiased',
-  //     fontSize: '16px',
-  //     '::placeholder': {
-  //       color: '#aab7c4',
-  //     },
-  //   },
-  //   invalid: {
-  //     color: '#fa755a',
-  //     iconColor: '#fa755a',
-  //   },
-  // },
+  style: {
+    base: {
+      color: '#575757',
+      fontSize: '16px',
+    },
+  },
 };
 
 function PaymentForm({
@@ -28,6 +27,9 @@ function PaymentForm({
   paymentMethodID,
   clientSecret,
   stripeInstance,
+  formTitle,
+  formLabel,
+  submitText,
 }) {
   const [formStatus, setFormStatus] = useState('idle');
 
@@ -72,18 +74,31 @@ function PaymentForm({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
-      <button
-        type="submit"
-        disabled={formStatus === 'processing' || formStatus === 'success'}
-      >
-        Submit
-      </button>
-      {formStatus === 'processing' && <p>Processing...</p>}
-      {formStatus === 'error' && <p>There was an error. Please try again.</p>}
-      {formStatus === 'success' && <p>Payment successful!</p>}
-    </form>
+    <PrimaryFont as="div">
+      <h2 className="payment-form--title">
+        {formTitle}
+      </h2>
+      <form onSubmit={handleSubmit} className="payment-form--form">
+        <label
+          className="xpmedia-form-field-label"
+        >
+          {formLabel}
+          <CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
+        </label>
+        <hr className="payment-form--hr" />
+        <Button
+          buttonSize={BUTTON_SIZES.MEDIUM}
+          buttonStyle={BUTTON_STYLES.PRIMARY}
+          fullWidth
+          text={submitText}
+          type="submit"
+          disabled={formStatus === 'processing' || formStatus === 'success'}
+        />
+        {formStatus === 'processing' && <p>Processing...</p>}
+        {formStatus === 'error' && <p>There was an error. Please try again.</p>}
+        {formStatus === 'success' && <p>Payment successful!</p>}
+      </form>
+    </PrimaryFont>
   );
 }
 

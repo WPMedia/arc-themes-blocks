@@ -96,9 +96,6 @@ function PaymentForm({
           type="submit"
           disabled={formStatus === 'processing' || formStatus === 'success'}
         />
-        {formStatus === 'processing' && <p>Processing...</p>}
-        {formStatus === 'error' && <p>There was an error. Please try again.</p>}
-        {formStatus === 'success' && <p>Payment successful!</p>}
       </form>
     </PrimaryFont>
   );

@@ -77,7 +77,6 @@ const Checkout = ({
         Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID)
           .then((paymentObject) => {
             setPayment(paymentObject);
-            // setting here but not by design
             setPaymentMethodID(newPaymentMethodID);
             setShowPaymentScreen(true);
           });

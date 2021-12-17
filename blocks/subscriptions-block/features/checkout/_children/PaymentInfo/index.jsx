@@ -1,112 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import Sales from '@arc-publishing/sdk-sales';
 import {
-  Elements, CardElement, useStripe, useElements,
+  Elements,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-
-const CARD_ELEMENT_OPTIONS = {
-  // style: {
-  //   base: {
-  //     color: '#32325d',
-  //     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-  //     fontSmoothing: 'antialiased',
-  //     fontSize: '16px',
-  //     '::placeholder': {
-  //       color: '#aab7c4',
-  //     },
-  //   },
-  //   invalid: {
-  //     color: '#fa755a',
-  //     iconColor: '#fa755a',
-  //   },
-  // },
-};
-
-function PaymentForm({
-  orderNumber,
-  successURL,
-  paymentMethodID,
-  clientSecret,
-}) {
-  const [formStatus, setFormStatus] = useState('idle');
-  const elements = useElements();
-  const stripe = useStripe();
-
-  const handleSubmit = async (
-    event,
-  ) => {
-    event.preventDefault();
-
-    setFormStatus('processing');
-    const cardElement = elements.getElement('card');
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: {}, // todo: collect other info? eg. name, email, etc.
-    });
-
-    if (error) {
-      setFormStatus('error');
-      return;
-    }
-
-    const result = await stripe.confirmCardSetup(clientSecret, {
-      payment_method: paymentMethod.id,
-    });
-
-    if (result.error) {
-      setFormStatus('error');
-    } else {
-      await Sales.finalizePayment(
-        orderNumber,
-        paymentMethodID,
-        result.setupIntent.id,
-      );
-      setFormStatus('success');
-      window.location.href = successURL;
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <CardElement options={CARD_ELEMENT_OPTIONS} name="card" />
-      <button type="submit" disabled={formStatus === 'processing' || formStatus === 'success'}>Submit</button>
-      {formStatus === 'processing' && <p>Processing...</p>}
-      {formStatus === 'error' && <p>There was an error. Please try again.</p>}
-      {formStatus === 'success' && <p>Payment successful!</p>}
-    </form>
-  );
-}
+import PaymentForm from './PaymentForm';
 
 const PaymentInfo = ({
-  successURL, paymentDetails, orderNumber, paymentMethodID,
+  orderNumber,
+  paymentDetails,
+  paymentMethodID,
+  successURL,
 }) => {
-  const [stripePromise, setStripePromise] = useState(null);
+  const [stripeInstance, setStripeInstance] = useState(null);
+
+  // initialized payment doc https://redirector.arcpublishing.com/alc/docs/api/arc-sdks/interfaces/_sdk_sales_src_sdk_order_.initializedpayment.html
   const { parameter2: stripeKey, parameter1: clientSecret } = paymentDetails;
 
-  // load stripe key via payment details
+  // load stripe key via payment details stripe key string
   useEffect(() => {
-    const initPayment = async () => {
-      try {
-        // looks like pk string
-        loadStripe(stripeKey).then((data) => setStripePromise(data));
-      } catch (e) {
-        console.log(e); // todo: error handling
-      }
-    };
-    initPayment();
+    // stripe docs https://stripe.com/docs/stripe-js/react#elements-provider
+    loadStripe(stripeKey)
+      .then((newStripePromise) => setStripeInstance(newStripePromise));
   }, [stripeKey]);
 
-  if (stripePromise) {
+  if (stripeInstance) {
+    // elements wrapper has to contain any stripe hooks
     return (
-      <Elements stripe={stripePromise}>
+      <Elements stripe={stripeInstance}>
         <PaymentForm
-          orderNumber={orderNumber}
-          successURL={successURL}
-          paymentMethodID={paymentMethodID}
           clientSecret={clientSecret}
+          orderNumber={orderNumber}
+          paymentMethodID={paymentMethodID}
+          successURL={successURL}
+          stripeInstance={stripeInstance}
         />
       </Elements>
     );

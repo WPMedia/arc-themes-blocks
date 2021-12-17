@@ -105,8 +105,8 @@ const Checkout = ({
           <PaymentInfo
             orderNumber={orderNumber}
             paymentDetails={payment}
-            successURL={successURL}
             paymentMethodID={paymentMethodID}
+            successURL={successURL}
           />
         )}
     </PrimaryFont>
@@ -124,6 +124,7 @@ Checkout.propTypes = {
     }),
     successURL: PropTypes.string.tag({
       defaultValue: '/',
+      label: 'Success URL',
     }),
   }),
 };

@@ -21,6 +21,13 @@ const CARD_ELEMENT_OPTIONS = {
   },
 };
 
+const FORM_STATUS = {
+  IDLE: 'idle',
+  PROCESSING: 'processing',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
 function PaymentForm({
   orderNumber,
   successURL,
@@ -31,7 +38,7 @@ function PaymentForm({
   formLabel,
   submitText,
 }) {
-  const [formStatus, setFormStatus] = useState('idle');
+  const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
 
   // stripe hooks have to be within Elements wrapper
   // https://stripe.com/docs/stripe-js/react#useelements-hook
@@ -42,7 +49,7 @@ function PaymentForm({
   ) => {
     event.preventDefault();
 
-    setFormStatus('processing');
+    setFormStatus(FORM_STATUS.PROCESSING);
     const cardElement = elements.getElement('card');
 
     const { error, paymentMethod } = await stripeInstance.createPaymentMethod({
@@ -52,7 +59,7 @@ function PaymentForm({
     });
 
     if (error) {
-      setFormStatus('error');
+      setFormStatus(FORM_STATUS.ERROR);
       return;
     }
 
@@ -72,7 +79,7 @@ function PaymentForm({
     }
 
     if (result.error) {
-      setFormStatus('error');
+      setFormStatus(FORM_STATUS.ERROR);
       return;
     }
 
@@ -84,10 +91,10 @@ function PaymentForm({
         result.paymentIntent.id,
       );
       if (nonZeroPriceOutput.status === 'Paid') {
-        setFormStatus('success');
+        setFormStatus(FORM_STATUS.SUCCESS);
         window.location.href = successURL;
       } else {
-        setFormStatus('error');
+        setFormStatus(FORM_STATUS.ERROR);
       }
     } else {
       const zeroPriceOutput = await Sales.finalizePayment(
@@ -98,10 +105,10 @@ function PaymentForm({
       );
       // even if no money changes hands, still shows status 'Paid'
       if (zeroPriceOutput.status === 'Paid') {
-        setFormStatus('success');
+        setFormStatus(FORM_STATUS.SUCCESS);
         window.location.href = successURL;
       } else {
-        setFormStatus('error');
+        setFormStatus(FORM_STATUS.ERROR);
       }
     }
   };
@@ -127,7 +134,9 @@ function PaymentForm({
           fullWidth
           text={submitText}
           type="submit"
-          disabled={formStatus === 'processing' || formStatus === 'success'}
+          disabled={
+            formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS
+          }
         />
       </form>
     </PrimaryFont>

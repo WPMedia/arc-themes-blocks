@@ -1,7 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import PaymentInfo from './index';
+
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
 
 jest.mock('fusion:intl', () => ({
   __esModule: true,
@@ -9,11 +13,18 @@ jest.mock('fusion:intl', () => ({
 }));
 
 describe('PaymentInfo', () => {
-  it('renders', () => {
-    const wrapper = shallow(
-      <PaymentInfo />,
+  it('renders null if no stripe promise', () => {
+    const wrapper = mount(
+      <PaymentInfo
+        orderNumber={1}
+        paymentDetails={{
+          parameter1: 'client_secret',
+          parameter2: 'stripe_key',
+        }}
+        paymentMethodID={1}
+        successURL="https://success.url"
+      />,
     );
-
-    expect(wrapper.html()).not.toBe(null);
+    expect(wrapper.html()).toBe(null);
   });
 });

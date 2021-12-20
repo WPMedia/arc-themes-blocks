@@ -17,6 +17,7 @@ const Checkout = ({
 }) => {
   const {
     offerURL,
+    successURL,
   } = customFields;
   const [loggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(false);
@@ -24,6 +25,7 @@ const Checkout = ({
   const [orderNumber, setOrderNumber] = useState();
   const [showPaymentScreen, setShowPaymentScreen] = useState(false);
   const [payment, setPayment] = useState();
+  const [paymentMethodID, setPaymentMethodID] = useState();
 
   const { Identity, getSignedInIdentity } = useIdentity();
   const { Sales } = useSales();
@@ -71,9 +73,11 @@ const Checkout = ({
     Sales.createNewOrder({ country }, email).then((order) => {
       setOrderNumber(order.orderNumber);
       Sales.getPaymentOptions().then((paymentOptions) => {
+        const newPaymentMethodID = paymentOptions[0].paymentMethodID;
         Sales.initializePayment(order.orderNumber, paymentOptions[0].paymentMethodID)
           .then((paymentObject) => {
             setPayment(paymentObject);
+            setPaymentMethodID(newPaymentMethodID);
             setShowPaymentScreen(true);
           });
       });
@@ -96,7 +100,14 @@ const Checkout = ({
             logoutCallback={logoutCallback}
           />
         )
-        : <PaymentInfo orderNumber={orderNumber} paymentDetails={payment} />}
+        : (
+          <PaymentInfo
+            orderNumber={orderNumber}
+            paymentDetails={payment}
+            paymentMethodID={paymentMethodID}
+            successURL={successURL}
+          />
+        )}
     </PrimaryFont>
   );
 };
@@ -109,6 +120,10 @@ Checkout.propTypes = {
   customFields: PropTypes.shape({
     offerURL: PropTypes.string.tag({
       defaultValue: '/offer/',
+    }),
+    successURL: PropTypes.string.tag({
+      defaultValue: '/',
+      label: 'Success URL',
     }),
   }),
 };

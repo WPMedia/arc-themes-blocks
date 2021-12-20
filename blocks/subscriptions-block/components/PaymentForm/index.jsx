@@ -30,7 +30,7 @@ const FORM_STATUS = {
 
 function PaymentForm({
   orderNumber,
-  successURL,
+  successURL = '/', // fallback if no successURL is provided
   paymentMethodID,
   clientSecret,
   stripeInstance,

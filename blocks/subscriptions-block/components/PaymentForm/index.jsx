@@ -56,18 +56,46 @@ function PaymentForm({
       return;
     }
 
-    const result = await stripeInstance.confirmCardSetup(clientSecret, {
-      payment_method: paymentMethod.id,
-    });
+    let result;
+
+    // if order of $0 there's a different stripe logic
+    const totalOrder = Sales.currentOrder.total;
+
+    if (totalOrder > 0) {
+      result = await stripeInstance.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+    } else {
+      result = await stripeInstance.confirmCardSetup(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+    }
 
     if (result.error) {
       setFormStatus('error');
-    } else {
-      await Sales.finalizePayment(
+      return;
+    }
+
+    if (totalOrder > 0) {
+      const nonZeroPriceOutput = await Sales.finalizePayment(
         orderNumber,
         paymentMethodID,
+        // using paymentIntent here for greater than 0
+        result.paymentIntent.id,
+      );
+      // todo: remove logging once we can validate logic
+      console.log('nonZeroPriceOutput', nonZeroPriceOutput);
+      setFormStatus('success');
+      window.location.href = successURL;
+    } else {
+      const zeroPriceOutput = await Sales.finalizePayment(
+        orderNumber,
+        paymentMethodID,
+        // using setupIntent here for 0
         result.setupIntent.id,
       );
+      // todo: remove logging once we can validate logic
+      console.log(zeroPriceOutput, 'zeroPriceOutput');
       setFormStatus('success');
       window.location.href = successURL;
     }

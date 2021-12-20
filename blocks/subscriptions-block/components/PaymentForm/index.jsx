@@ -83,10 +83,12 @@ function PaymentForm({
         // using paymentIntent here for greater than 0
         result.paymentIntent.id,
       );
-      // todo: remove logging once we can validate logic
-      console.log('nonZeroPriceOutput', nonZeroPriceOutput);
-      setFormStatus('success');
-      window.location.href = successURL;
+      if (nonZeroPriceOutput.status === 'Paid') {
+        setFormStatus('success');
+        window.location.href = successURL;
+      } else {
+        setFormStatus('error');
+      }
     } else {
       const zeroPriceOutput = await Sales.finalizePayment(
         orderNumber,
@@ -94,10 +96,13 @@ function PaymentForm({
         // using setupIntent here for 0
         result.setupIntent.id,
       );
-      // todo: remove logging once we can validate logic
-      console.log(zeroPriceOutput, 'zeroPriceOutput');
-      setFormStatus('success');
-      window.location.href = successURL;
+      // even if no money changes hands, still shows status 'Paid'
+      if (zeroPriceOutput.status === 'Paid') {
+        setFormStatus('success');
+        window.location.href = successURL;
+      } else {
+        setFormStatus('error');
+      }
     }
   };
 

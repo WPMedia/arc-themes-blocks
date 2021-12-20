@@ -2924,5 +2924,16 @@
 		"no": "Purchase Subscription",
 		"pt": "Purchase Subscription",
 		"sv": "Purchase Subscription"
+	},
+	"subscriptions-block.payment-error": {
+		"de": "There was an error processing your payment.",
+		"en": "There was an error processing your payment.",
+		"es": "There was an error processing your payment.",
+		"fr": "There was an error processing your payment.",
+		"ja": "There was an error processing your payment.",
+		"ko": "There was an error processing your payment.",
+		"no": "There was an error processing your payment.",
+		"pt": "There was an error processing your payment.",
+		"sv": "There was an error processing your payment."
 	}
 }

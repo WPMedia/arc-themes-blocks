@@ -23,6 +23,7 @@ const PaymentInfo = ({
   const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
+  const formErrorText = phrases.t('subscriptions-block.payment-error');
   const formLabel = phrases.t('subscriptions-block.credit-card-information');
   const formTitle = phrases.t('subscriptions-block.payment-information');
   const submitText = phrases.t('subscriptions-block.submit-payment');
@@ -40,6 +41,7 @@ const PaymentInfo = ({
       <Elements stripe={stripeInstance}>
         <PaymentForm
           clientSecret={clientSecret}
+          formErrorText={formErrorText}
           formLabel={formLabel}
           formTitle={formTitle}
           orderNumber={orderNumber}

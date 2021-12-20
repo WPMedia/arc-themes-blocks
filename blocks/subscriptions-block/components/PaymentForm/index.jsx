@@ -3,6 +3,7 @@ import Sales from '@arc-publishing/sdk-sales';
 import {
   CardElement, useElements,
 } from '@stripe/react-stripe-js';
+import { ErrorIcon } from '@wpmedia/engine-theme-sdk';
 import {
   PrimaryFont,
   Button,
@@ -37,6 +38,7 @@ function PaymentForm({
   formTitle,
   formLabel,
   submitText,
+  formErrorText,
 }) {
   const [formStatus, setFormStatus] = useState(FORM_STATUS.IDLE);
 
@@ -138,6 +140,14 @@ function PaymentForm({
             formStatus === FORM_STATUS.PROCESSING || formStatus === FORM_STATUS.SUCCESS
           }
         />
+        {formStatus === FORM_STATUS.ERROR ? (
+          <section className="xpmedia-form-error" role="alert">
+            <PrimaryFont as="p">
+              <ErrorIcon />
+              {formErrorText}
+            </PrimaryFont>
+          </section>
+        ) : null}
       </form>
     </PrimaryFont>
   );

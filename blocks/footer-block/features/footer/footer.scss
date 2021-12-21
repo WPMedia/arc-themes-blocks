@@ -143,18 +143,18 @@ footer {
       font-size: calculateRem(16px);
       line-height: calculateRem(24px);
     }
+  }
+}
 
-    .footer-item {
-      margin: map-get($spacers, 'xs') 0;
+.footer-item {
+  margin: map-get($spacers, 'xs') 0;
 
-      @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-        margin: calculateRem(12px) 0;
-      }
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    margin: calculateRem(12px) 0;
+  }
 
-      > a {
-        color: $ui-medium-gray;
-        text-decoration: none;
-      }
-    }
+  > a {
+    color: $ui-medium-gray;
+    text-decoration: none;
   }
 }

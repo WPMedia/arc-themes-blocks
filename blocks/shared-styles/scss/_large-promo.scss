@@ -24,9 +24,9 @@
 
   .lg-promo-headline {
     @include link-color-active-hover($ui-primary-font-color);
-    font-size: calculateRem(22px);
+    font-size: calculateRem(24px);
     font-weight: bold;
-    line-height: calculateRem(24px);
+    line-height: calculateRem(32px);
     margin-bottom: map-get($spacers, 'xs');
     text-decoration: none;
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {

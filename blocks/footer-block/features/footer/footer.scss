@@ -26,7 +26,8 @@ footer {
 
   .copyright {
     color: #6c7778;
-    font-size: calculateRem(14px);
+    font-size: calculateRem(16px);
+    line-height: calculateRem(24px);
     text-align: center;
     vertical-align: middle;
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
@@ -126,8 +127,8 @@ footer {
   }
 
   .footer-section {
-
-    font-size: 14px;
+    font-size: calculateRem(16px);
+    line-height: cacluateRem(24px);
     justify-self: left;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -139,13 +140,13 @@ footer {
 
     .footer-header {
       font-weight: bold;
-      font-size: calculateRem(14px);
-      line-height: calculateRem(21px);
+      font-size: calculateRem(16px);
+      line-height: calculateRem(24px);
     }
 
     .footer-item {
       margin: map-get($spacers, 'xs') 0;
-
+      // font-size: 20px;
       > a {
         color: $ui-medium-gray;
         text-decoration: none;

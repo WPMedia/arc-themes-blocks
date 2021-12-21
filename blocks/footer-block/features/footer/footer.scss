@@ -150,6 +150,7 @@ footer {
       @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
         margin: calculateRem(12px) 0;
       }
+
       > a {
         color: $ui-medium-gray;
         text-decoration: none;

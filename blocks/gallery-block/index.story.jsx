@@ -1,4 +1,5 @@
 import React from 'react';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { GalleryPresentation } from './features/gallery/default';
 
 export default {
@@ -6,6 +7,7 @@ export default {
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },
+  decorators: [withKnobs],
 };
 
 const mockGallery = {
@@ -89,6 +91,29 @@ export const withPassedInContent = () => {
   const mockCustomFields = {
     inheritGlobalContent: true,
     galleryContentConfig: {},
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const withHiddenContentOptions = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideTitle: boolean('Hide Title', false),
+    hideCaption: boolean('Hide Caption', false),
+    hideCredits: boolean('Hide Credits', false),
   };
 
   return (

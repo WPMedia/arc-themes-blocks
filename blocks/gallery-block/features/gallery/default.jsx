@@ -67,9 +67,9 @@ export const GalleryPresentation = ({
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (<AdBlock />)}
       interstitialClicks={interstitialClicks}
-      hideTitle={hideTitle}
-      hideCaption={hideCaption}
-      hideCredits={hideCredits}
+      displayTitle={!hideTitle}
+      displayCaption={!hideCaption}
+      displayCredits={!hideCredits}
     />
   );
 };

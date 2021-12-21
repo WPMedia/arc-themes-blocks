@@ -104,7 +104,7 @@ GalleryFeature.propTypes = {
   }),
 };
 
-GalleryFeature.label = 'Gallery – Arc Block';
+GalleryFeature.label = 'Gallery - Arc Block';
 
 GalleryFeature.icon = 'picture-polaroid-landscape';
 

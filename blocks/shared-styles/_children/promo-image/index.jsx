@@ -62,6 +62,9 @@ const PromoImage = ({
 
   const hasLink = () => content?.websites?.[arcSite]?.website_url || linkURL;
 
+  const PromoLabelElement = (showPromoLabel && promoType)
+    ? <PromoLabel type={promoType} size={promoLabelSize} /> : null;
+
   const withLink = (item) => (
     <a
       href={content?.websites?.[arcSite]?.website_url || linkURL}
@@ -77,23 +80,28 @@ const PromoImage = ({
 
   const ImageOrPlaceholder = imageURL && resizedImageOptions
     ? (
-      <Image
-        url={imageURL}
-        alt={content && content.headlines ? content.headlines.basic : alt}
-        {...ratios}
-        breakpoints={getProperties(arcSite)?.breakpoints}
-        resizerURL={getProperties(arcSite)?.resizerURL}
-        resizedImageOptions={resizedImageOptions}
-      />
+      <>
+        <Image
+          url={imageURL}
+          alt={content && content.headlines ? content.headlines.basic : alt}
+          {...ratios}
+          breakpoints={getProperties(arcSite)?.breakpoints}
+          resizerURL={getProperties(arcSite)?.resizerURL}
+          resizedImageOptions={resizedImageOptions}
+        />
+        {PromoLabelElement}
+      </>
     )
     : (
-      <PlaceholderImage client={imageConfig === 'resize-image-api-client'} />
+      <>
+        <PlaceholderImage client={imageConfig === 'resize-image-api-client'} />
+        {PromoLabelElement}
+      </>
     );
 
   return (
     <div className="promo-image" key={imageURL}>
       {hasLink() ? withLink(ImageOrPlaceholder) : ImageOrPlaceholder}
-      {showPromoLabel && promoType ? <PromoLabel type={promoType} size={promoLabelSize} /> : null}
     </div>
   );
 };

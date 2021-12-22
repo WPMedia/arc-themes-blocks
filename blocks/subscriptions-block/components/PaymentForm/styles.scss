@@ -12,5 +12,5 @@
 }
 
 .payment-form--stripe-input-container {
-  margin: calculateRem(4px);
+  margin: calculateRem(8px) calculateRem(4px) calculateRem(4px) calculateRem(4px);
 }

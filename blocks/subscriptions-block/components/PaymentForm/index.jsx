@@ -117,9 +117,9 @@ function PaymentForm({
 
   return (
     <PrimaryFont as="div" className="payment-form--container">
-      <h2 className="payment-form--title">
+      <PrimaryFont as="h2" className="payment-form--title">
         {formTitle}
-      </h2>
+      </PrimaryFont>
       <form onSubmit={handleSubmit} className="payment-form--form">
         <label
           className="xpmedia-form-field-label"

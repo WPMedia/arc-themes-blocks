@@ -1,5 +1,4 @@
 import React from 'react';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { GalleryPresentation } from './features/gallery/default';
 
 export default {
@@ -7,7 +6,6 @@ export default {
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },
-  decorators: [withKnobs],
 };
 
 const mockGallery = {

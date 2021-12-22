@@ -20,6 +20,18 @@ export const withLinkAndLabel = () => {
   );
 };
 
+export const withLinkAndSmallLabel = () => {
+  const props = {
+    customImageURL,
+    showPromoLabel: true,
+    content: { type: 'gallery', websites: { 'story-book': { website_url: 'https://arcxp.com' } } },
+  };
+
+  return (
+    <PromoImage {...props} />
+  );
+};
+
 export const withLinkAndNoLabel = () => {
   const props = {
     customImageURL,

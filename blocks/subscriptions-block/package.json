@@ -33,6 +33,8 @@
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@arc-publishing/sdk-sales": "^1.55.0",
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.22.0",
     "is-url": "^1.2.4"
   }
 }

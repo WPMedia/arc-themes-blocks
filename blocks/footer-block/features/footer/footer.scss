@@ -15,6 +15,8 @@ footer {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  font-size: calculateRem(16px);
+  line-height: cacluateRem(24px);
 
   //Fix for IE 11 and non grid browsers
   .legacy-footer-row {
@@ -39,8 +41,6 @@ footer {
 
   .copyright {
     color: #6c7778;
-    font-size: calculateRem(16px);
-    line-height: calculateRem(24px);
     text-align: center;
     vertical-align: middle;
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
@@ -140,8 +140,6 @@ footer {
   }
 
   .footer-section {
-    font-size: calculateRem(16px);
-    line-height: cacluateRem(24px);
     justify-self: left;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -152,9 +150,9 @@ footer {
     }
 
     .footer-header {
+      font-size: inherit;
+      line-height: inherit;
       font-weight: bold;
-      font-size: calculateRem(16px);
-      line-height: calculateRem(24px);
     }
   }
 }

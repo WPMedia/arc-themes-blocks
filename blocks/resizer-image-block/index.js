@@ -369,6 +369,7 @@ const getResizedImageData = (
     resizerURL,
     imageWidths,
     compressedParams: shouldCompressImageParams,
+    // filterQuality should be moved to the options object and other functions to make use of option
   });
 };
 

@@ -329,7 +329,8 @@ export const extractResizedParams = (storyObject) => storyObject?.promo_items?.b
 */
 const getResizedImageData = (
   data,
-  filterQuality = 70,
+  // underscore added to mean it is unused
+  _filterQuality,
   onlyUrl = false,
   respectAspectRatio = false,
   arcSite,

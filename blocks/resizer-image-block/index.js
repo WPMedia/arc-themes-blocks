@@ -368,9 +368,7 @@ const getResizedImageData = (
     resizerURL,
     imageWidths,
     compressedParams: shouldCompressImageParams,
-  }, filterQuality);
-  // Note: filterQuality is passed in but never used...
-  // Should be moved to the options object and other functions to make use of option
+  });
 };
 
 export default getResizedImageData;

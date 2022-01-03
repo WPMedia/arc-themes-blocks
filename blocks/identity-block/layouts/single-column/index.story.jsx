@@ -30,7 +30,7 @@ const layoutItemStyles = {
 const getStyles = (name) => {
   const defaults = layoutItemStyles.default;
 
-  return { ...defaults, ...layoutItemStyles[name] } || defaults;
+  return { ...defaults, ...layoutItemStyles[name] };
 };
 
 const layoutItem = (name) => <div style={getStyles(name)}>{name}</div>;

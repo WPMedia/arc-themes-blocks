@@ -1,5 +1,10 @@
 $alert-bar-height: 56px;
 
+.alert-bar--empty {
+  height: $alert-bar-height;
+  width: 100%;
+}
+
 .alert-bar {
   align-items: center;
   background-color: $danger-color;

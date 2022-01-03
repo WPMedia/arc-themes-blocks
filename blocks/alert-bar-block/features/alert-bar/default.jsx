@@ -17,14 +17,14 @@ export const AlertBarPresentational = (props) => {
     barAriaLabel,
     closeAriaLabel,
     hideAlertHandler,
-    content,
-    arcSite,
+    headline,
+    filledIn,
+    websiteURL,
   } = props;
 
-  const { content_elements: elements = [] } = content;
-  const article = elements[0] || {};
-  const { websites = {}, headlines = {} } = article;
-  const { website_url: websiteURL = '' } = websites[arcSite] || {};
+  if (!filledIn) {
+    return <div className="alert-bar--empty" />;
+  }
 
   return (
     <nav
@@ -37,7 +37,7 @@ export const AlertBarPresentational = (props) => {
         className="article-link"
         as="a"
       >
-        {headlines.basic}
+        {headline}
       </PrimaryFont>
       <button
         type="button"
@@ -72,14 +72,12 @@ class AlertBar extends Component {
       this.state = {
         content: cached,
         visible: this.checkAlertVisible(cached),
-        hidden: true,
       };
       fetched.then(this.updateContent);
     } else {
       this.state = {
         content: cached,
         visible: false,
-        hidden: true,
       };
     }
   }
@@ -101,17 +99,13 @@ class AlertBar extends Component {
       fetched.then(this.updateContent);
     }, 120000);
 
-    // need to delay a bit the first render, to let the browser settle the layout
-    // or the initial animation will now execute
-    window.setTimeout(this.showAlert, 500);
-
     const { visible } = this.state;
     this.engageAlert(visible);
   }
 
   componentDidUpdate(_prevProps, prevState) {
-    const { visible, hidden } = this.state;
-    if ((visible !== prevState.visible) || (hidden !== prevState.hidden)) {
+    const { visible } = this.state;
+    if ((visible !== prevState.visible)) {
       if (visible) {
         this.engageAlert();
       } else {
@@ -122,10 +116,6 @@ class AlertBar extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timeID);
-  }
-
-  showAlert = () => {
-    this.setState({ hidden: false });
   }
 
   engageAlert = () => {
@@ -172,26 +162,30 @@ class AlertBar extends Component {
   }
 
   render() {
-    const { content = {}, visible, hidden } = this.state;
-
-    if (hidden) {
-      return null;
-    }
+    const { content = {}, visible } = this.state;
 
     const { arcSite, customFields = {} } = this.props;
     const { ariaLabel } = customFields;
 
+    const { content_elements: elements = [] } = content;
+    const article = elements[0] || {};
+    const { websites = {}, headlines = {} } = article;
+    const { website_url: websiteURL = '' } = websites[arcSite] || {};
+
+    const { basic: basicHeadline = '' } = headlines;
+
+    const showFilledInAlertBar = !!content?.content_elements?.length && visible && basicHeadline !== '';
+
     return (
-      !!content?.content_elements?.length && visible && (
-        <AlertBarPresentational
-          alertRef={this.alertRef}
-          barAriaLabel={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
-          closeAriaLabel={this.phrases.t('alert-bar-block.close-button')}
-          hideAlertHandler={this.hideAlert}
-          content={content}
-          arcSite={arcSite}
-        />
-      )
+      <AlertBarPresentational
+        alertRef={this.alertRef}
+        barAriaLabel={ariaLabel || this.phrases.t('alert-bar-block.element-aria-label')}
+        closeAriaLabel={this.phrases.t('alert-bar-block.close-button')}
+        filledIn={showFilledInAlertBar}
+        headline={basicHeadline}
+        hideAlertHandler={this.hideAlert}
+        websiteURL={websiteURL}
+      />
     );
   }
 }

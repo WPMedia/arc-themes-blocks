@@ -15,7 +15,12 @@ const resolve = (key = {}) => {
     from,
     size,
   } = key;
-  return `content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${size}` : ''}&published=true`;
+  let updatedSize = size;
+  // Max collection size is 20
+  // See: https://redirector.arcpublishing.com/alc/docs/swagger/?url=./arc-products/content-api.json
+  // Want to ensure size is capped at 20 to prevent an error.
+  if (updatedSize && updatedSize > 9) updatedSize = size < 20 ? size : 20;
+  return `content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${updatedSize}` : ''}&published=true`;
 };
 
 export default {

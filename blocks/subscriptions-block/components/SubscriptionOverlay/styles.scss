@@ -7,6 +7,8 @@
   position: fixed;
   right: 0;
   top: 0;
+  height: 100vh;
+  z-index: 1;
 
   .xpmedia-subscription-overlay-content {
     align-items: center;
@@ -17,5 +19,10 @@
     max-height: 75vh;
     min-height: 50vh;
     overflow: auto;
+
+    .xpmedia-subscription-dialog {
+      width: 100%;
+      max-width: 80vw;
+    }
   }
 }

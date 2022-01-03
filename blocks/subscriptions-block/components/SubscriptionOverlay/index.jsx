@@ -1,8 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react';
-
+import * as ReactDOM from 'react-dom';
 import './styles.scss';
+import { isServerSide } from '@wpmedia/engine-theme-sdk';
 
-const SubscriptionOverlay = ({ children }) => {
+export const Portal = ({ children }) => {
+  if (isServerSide()) return null;
+
+  return ReactDOM.createPortal(children, document.body);
+};
+
+/**
+ * The usePortal param should always be true, with the exception
+ * of unit testing where portal needs to be false to prevent
+ * jest and enzyme errors because
+ * Portals are not currently supported by the server renderer.
+ *
+ * Just checking for isServerSide is not enough.
+ *
+ * `displayMode` param is unused at this time.
+ *   We implemented 'bottomHalf' below.
+ *   It can be ['bottomHalf', 'full', 'modal'].
+ *
+ */
+const SubscriptionOverlay = ({ children, usePortal = true }) => {
   const overlayRef = useRef();
   const contentRef = useRef();
   const [scrollDelta, setScrollDelta] = useState(0);
@@ -35,7 +55,7 @@ const SubscriptionOverlay = ({ children }) => {
     }
   }, [contentRef, overlayRef, scrollDelta]);
 
-  return (
+  const renderInternalOverlay = () => (
     <section
       className="xpmedia-subscription-overlay"
       ref={overlayRef}
@@ -69,6 +89,23 @@ const SubscriptionOverlay = ({ children }) => {
       </div>
     </section>
   );
+
+  const renderOverlay = () => {
+    if (!usePortal || isServerSide()) {
+      return (
+        <>
+          {renderInternalOverlay()}
+        </>
+      );
+    }
+    return (
+      <Portal>
+        {renderInternalOverlay()}
+      </Portal>
+    );
+  };
+
+  return renderOverlay();
 };
 
 export default SubscriptionOverlay;

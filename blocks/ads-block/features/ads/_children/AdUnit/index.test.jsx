@@ -4,7 +4,6 @@ import AdUnit from './index';
 import ArcAdsInstance from '../ArcAdsInstance';
 import { setPageTargeting } from '../../ad-helper';
 
-jest.mock('arcads');
 jest.mock('../../ad-helper');
 
 const mockInitArcAds = jest.fn();

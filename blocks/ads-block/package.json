@@ -1,9 +1,9 @@
 {
   "name": "@wpmedia/ads-block",
-  "version": "5.16.0",
+  "version": "5.19.0",
   "description": "> TODO: description",
   "author": "nealmalkani <nealm939@gmail.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "ISC",
   "main": "index.js",
   "files": [
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/ads-block"
   },
   "scripts": {
@@ -24,7 +24,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "dependencies": {
-    "arcads": "^6.0.0",
+    "arcads": "6.1.1",
     "lazy-child": "^0.2.0"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"

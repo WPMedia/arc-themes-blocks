@@ -1,12 +1,12 @@
 {
   "name": "@wpmedia/site-hierarchy-content-block",
-  "version": "5.14.1",
+  "version": "5.16.0",
   "description": "Block containing a site service hierarchy content source",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "contributors": [
     "Jack Howard <jack.howard@washpost.com>"
   ],
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "directories": {
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/site-hierarchy-content-block"
   },
   "scripts": {

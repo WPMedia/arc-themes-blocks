@@ -9,16 +9,16 @@ const sizes = {
   },
   LG: {
     options: [
-      { kind: 'small', width: 274 },
-      { kind: 'medium', width: 274 },
+      { kind: 'small', width: 600 },
+      { kind: 'medium', width: 800 },
       { kind: 'large', width: 377 },
     ],
     defaultRatio: '4:3',
   },
   MD: {
     options: [
-      { kind: 'small', width: 274 },
-      { kind: 'medium', width: 274 },
+      { kind: 'small', width: 600 },
+      { kind: 'medium', width: 800 },
       { kind: 'large', width: 400 },
     ],
     defaultRatio: '16:9',

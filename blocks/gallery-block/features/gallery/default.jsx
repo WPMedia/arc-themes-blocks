@@ -13,6 +13,9 @@ export const GalleryPresentation = ({
   customFields: {
     inheritGlobalContent,
     galleryContentConfig,
+    hideTitle = false,
+    hideCaption = false,
+    hideCredits = false,
   } = {},
   globalContent = {},
 }) => {
@@ -64,6 +67,9 @@ export const GalleryPresentation = ({
       pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
       adElement={/* istanbul ignore next */ () => (<AdBlock />)}
       interstitialClicks={interstitialClicks}
+      displayTitle={!hideTitle}
+      displayCaption={!hideCaption}
+      displayCredits={!hideCredits}
     />
   );
 };
@@ -101,10 +107,25 @@ GalleryFeature.propTypes = {
       defaultValue: false,
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
+    hideTitle: PropTypes.bool.tag({
+      label: 'Hide Title',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
+    hideCaption: PropTypes.bool.tag({
+      name: 'Hide Caption',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
+    hideCredits: PropTypes.bool.tag({
+      label: 'Hide Credits',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
   }),
 };
 
-GalleryFeature.label = 'Gallery – Arc Block';
+GalleryFeature.label = 'Gallery - Arc Block';
 
 GalleryFeature.icon = 'picture-polaroid-landscape';
 

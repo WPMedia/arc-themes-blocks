@@ -1,6 +1,13 @@
 .promo-image {
   position: relative;
 
+  img {
+    display: block;
+    height: auto;
+    vertical-align: middle;
+    width: 100%;
+  }
+
   .promo-label {
     .label {
       color: #fff;

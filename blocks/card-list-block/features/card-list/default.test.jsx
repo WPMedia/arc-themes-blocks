@@ -78,7 +78,41 @@ describe('Card list', () => {
     const { default: CardList } = require('./default');
     const wrapper = mount(<CardList customFields={customFields} />);
     expect(wrapper.find('.card-list-container').length).toEqual(1);
-    expect(wrapper.find('article.card-list-item').length).toEqual(27);
+    expect(wrapper.find('article.card-list-item').length).toEqual(8);
+  });
+
+  it('should only render amout of stories based on displayAmount', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type:story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig, displayAmount: 5 };
+
+    const { default: CardList } = require('./default');
+    const wrapper = mount(<CardList customFields={customFields} />);
+    expect(wrapper.find('.card-list-container').length).toEqual(1);
+    expect(wrapper.find('article.card-list-item').length).toEqual(4);
+  });
+
+  it('should render first item based on offsetOverride', () => {
+    const listContentConfig = {
+      contentConfigValues: {
+        offset: '0',
+        query: 'type:story',
+        size: '30',
+      },
+      contentService: 'story-feed-query',
+    };
+    const customFields = { listContentConfig, offsetOverride: 1 };
+
+    const { default: CardList } = require('./default');
+    const wrapper = mount(<CardList customFields={customFields} />);
+
+    expect(wrapper.find('.card-list-headline').text()).toBe('2nd Story Title');
   });
 
   it('should render a list of stories only for the arcSite', () => {
@@ -94,13 +128,13 @@ describe('Card list', () => {
 
     const { default: CardList } = require('./default');
     jest.mock('fusion:context', () => ({
-      useFusionContext: jest.fn(() => ({ arcSite: 'dagen', deployment: jest.fn(() => {}) })),
+      useFusionContext: jest.fn(() => ({ arcSite: 'the-mercury', deployment: jest.fn(() => {}) })),
     }));
     useContent.mockReturnValueOnce(null);
     useContent.mockReturnValueOnce(oneListItem);
     const wrapper = mount(<CardList customFields={customFields} />);
     expect(wrapper.find('.card-list-container').length).toEqual(1);
-    expect(wrapper.find('article.card-list-item').length).toEqual(0);
+    expect(wrapper.find('article.card-list-item').length).toEqual(5);
     expect(wrapper.find('article.list-item-simple').length).toEqual(1);
   });
 
@@ -158,7 +192,7 @@ describe('Card list', () => {
     });
 
     it('should render a main headline', () => {
-      expect(wrapper.find('.card-list-headline').length).toEqual(1);
+      expect(wrapper.find('.card-list-headline').text()).toBe('Article with a YouTube embed in it');
     });
 
     it('should render an author and a publish date section', () => {
@@ -202,14 +236,14 @@ describe('Card list', () => {
     });
 
     it('should render a parent for headline and a description', () => {
-      expect(wrapper.find('article.card-list-item').length).toEqual(27);
+      expect(wrapper.find('article.card-list-item').length).toEqual(8);
     });
 
     it('should render a headline', () => {
-      expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').length).toEqual(27);
-      expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('.headline-text').length).toEqual(27);
+      expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').length).toEqual(8);
+      expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('.headline-text').length).toEqual(8);
       expect(wrapper.find('article.card-list-item').find('a.headline-list-anchor').find('.headline-text').first()
-        .text()).toEqual('Jon’s Prod Story');
+        .text()).toEqual('2nd Story Title');
       expect(
         wrapper.find('article.card-list-item').find('.headline-list-anchor').at(0).prop('href'),
       ).toEqual('/this/is/the/correct/url');

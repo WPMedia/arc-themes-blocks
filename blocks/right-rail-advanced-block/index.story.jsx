@@ -51,7 +51,7 @@ const layoutItemStyles = {
 const getStyles = (name) => {
   const defaults = layoutItemStyles.default;
 
-  return { ...defaults, ...layoutItemStyles[name] } || defaults;
+  return { ...defaults, ...layoutItemStyles[name] };
 };
 
 const renderChildren = (name) => layoutItemStyles[name]?.children || null;

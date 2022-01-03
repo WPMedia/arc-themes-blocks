@@ -1,16 +1,18 @@
 {
   "name": "@wpmedia/subscriptions-block",
-  "version": "5.15.0",
+  "version": "5.19.0",
   "description": "Fusion themes subscriptions block.",
   "author": "ARC XP",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks#readme",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "features",
     "sources",
     "chains",
-    "components"
+    "components",
+    "utils",
+    "intl.json"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -18,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/subscriptions-block"
   },
   "scripts": {
@@ -28,11 +30,11 @@
   "peerDependencies": {
     "@wpmedia/identity-block": "*"
   },
-  "bugs": {
-    "url": "https://github.com/WPMedia/fusion-news-theme-blocks/issues"
-  },
   "dependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@arc-publishing/sdk-sales": "^1.55.0"
+    "@arc-publishing/sdk-sales": "^1.55.0",
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.22.0",
+    "is-url": "^1.2.4"
   }
 }

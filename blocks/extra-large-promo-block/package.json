@@ -1,9 +1,9 @@
 {
   "name": "@wpmedia/extra-large-promo-block",
-  "version": "5.15.0",
+  "version": "5.16.0",
   "description": "Fusion News Theme Extra Large Promo block",
   "author": "Brent Miller <brent.miller@washpost.com>",
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/extra-large-promo-block"
   },
   "scripts": {

@@ -45,7 +45,7 @@ const UI_DARK_GRAY_COLOR = '#191919';
 const iconTypeStringToIconTypeComponent = (
   iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
 ) => {
-  let iconColor = primaryColor;
+  let iconColor;
 
   switch (buttonStyle) {
     case BUTTON_STYLES.PRIMARY:
@@ -166,43 +166,53 @@ const matchButtonSizeWithClass = (matchedButtonSize) => {
   }
 };
 
-function renderButtonContents(matchedButtonType, text, iconComponent, secondaryIconComponent) {
+function renderButtonContents(
+  matchedButtonType,
+  text,
+  iconComponent,
+  secondaryIconComponent,
+  isHTMLText,
+) {
+  const buttonText = isHTMLText
+    ? <span dangerouslySetInnerHTML={{ __html: text }} />
+    : text;
+
   switch (matchedButtonType) {
     case BUTTON_TYPES.LABEL_AND_TWO_ICONS:
       return (
         <>
-          <div className="xpmedia-button--left-icon-container">
+          <span className="xpmedia-button--left-icon-container">
             {iconComponent}
-          </div>
-          {text}
-          <div className="xpmedia-button--right-icon-container">
+          </span>
+          {buttonText}
+          <span className="xpmedia-button--right-icon-container">
             {secondaryIconComponent}
-          </div>
+          </span>
         </>
       );
     case BUTTON_TYPES.LABEL_AND_ICON:
       return (
         <>
-          <div className="xpmedia-button--left-icon-container">
+          <span className="xpmedia-button--left-icon-container">
             {iconComponent}
-          </div>
-          {text}
+          </span>
+          {buttonText}
         </>
       );
     case BUTTON_TYPES.LABEL_AND_RIGHT_ICON:
       return (
         <>
-          {text}
-          <div className="xpmedia-button--right-icon-container">
+          {buttonText}
+          <span className="xpmedia-button--right-icon-container">
             {iconComponent}
-          </div>
+          </span>
         </>
       );
     case BUTTON_TYPES.ICON_ONLY:
       return (iconComponent);
     case BUTTON_TYPES.LABEL_ONLY:
     default:
-      return (text);
+      return (buttonText);
   }
 }
 
@@ -220,12 +230,13 @@ function Button(props) {
     iconType,
     secondaryIconType,
     text,
+    isHTMLText = false,
     type,
   } = props;
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
 
-  let iconHeightWidth = 16;
+  let iconHeightWidth;
 
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];
@@ -269,7 +280,7 @@ function Button(props) {
       type={elementType}
       {...props}
     >
-      {renderButtonContents(buttonType, text, PrimaryIcon, SecondaryIcon)}
+      {renderButtonContents(buttonType, text, PrimaryIcon, SecondaryIcon, isHTMLText)}
     </StyledDynamicButton>
   );
 }

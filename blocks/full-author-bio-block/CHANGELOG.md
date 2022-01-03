@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/full-author-bio-block@5.18.0...@wpmedia/full-author-bio-block@5.19.0) (2021-12-15)
+
+**Note:** Version bump only for package @wpmedia/full-author-bio-block
+
+
+
+
+
+# [5.18.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/full-author-bio-block@5.17.0...@wpmedia/full-author-bio-block@5.18.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* Do not render if null or empty string for value ([4e7afa5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4e7afa5a4a9348005394053ac291e666316c2576))
+
+
+### Features
+
+* Add basic storybook with arc fusion proptypes ([092d479](https://github.com/WPMedia/fusion-news-theme-blocks/commit/092d479d9c1f3dd7524d07f75a61dc3cc2e8d494))
+* Add presentational component for handling storybook and add documentation comment ([b9506cc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b9506cc410cdac36b6eaf08ae3a4501f042108ee))
+* Open social links in a new tab ([e39eb64](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e39eb6422cfee37b537a765a5ff0fdceff5bf1ff))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+
+
+
+# [5.17.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/full-author-bio-block@5.16.0...@wpmedia/full-author-bio-block@5.17.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* Do not render if null or empty string for value ([4e7afa5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/4e7afa5a4a9348005394053ac291e666316c2576))
+
+
+### Features
+
+* Add basic storybook with arc fusion proptypes ([092d479](https://github.com/WPMedia/fusion-news-theme-blocks/commit/092d479d9c1f3dd7524d07f75a61dc3cc2e8d494))
+* Add presentational component for handling storybook and add documentation comment ([b9506cc](https://github.com/WPMedia/fusion-news-theme-blocks/commit/b9506cc410cdac36b6eaf08ae3a4501f042108ee))
+* Open social links in a new tab ([e39eb64](https://github.com/WPMedia/fusion-news-theme-blocks/commit/e39eb6422cfee37b537a765a5ff0fdceff5bf1ff))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/full-author-bio-block@5.15.0...@wpmedia/full-author-bio-block@5.16.0) (2021-09-15)
 
 

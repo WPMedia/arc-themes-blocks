@@ -27,12 +27,8 @@
     "release:canary": "lerna publish --dist-tag canary --canary --preid canary -y",
     "release:rc": "lerna publish --dist-tag rc --canary --preid rc -y",
     "release:stable": "lerna publish --dist-tag stable minor -y",
-    "generate:feature": "hygen feature new"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run test:coverage && npm run lint"
-    }
+    "generate:feature": "hygen feature new",
+    "test:staged": "CI=true jest --findRelatedTests"
   },
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
@@ -72,12 +68,13 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^2.4.0",
     "glob": "^7.1.7",
-    "husky": "^3.0.4",
+    "husky": "^7.0.4",
     "hygen": "^6.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-enzyme": "^7.1.0",
     "lerna": "^4.0.0",
+    "lint-staged": "^12.1.5",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -168,5 +165,8 @@
     "defaults",
     "not op_mini all",
     "not IE 11"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,jsx}": ["npm run test:staged"]
+  }
 }

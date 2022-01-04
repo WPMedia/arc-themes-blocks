@@ -4,6 +4,9 @@ on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
+    # only prs targeting canary
+    # test:changed-feature-branch currently only targets canary for changed files
+    branches: [canary]
 
 jobs:
   ensure_minimum_test_coverage_linting:
@@ -14,6 +17,11 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        # checking out canary per https://dev.to/bnb/jest-and-the-changedsince-flag-in-github-actions-ci-468i
+      - run: |
+          git fetch --no-tags --depth=1 origin canary
+          git checkout -b master
+          git checkout ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1
@@ -34,8 +42,11 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Run tests with coverage
-        run: npm run test:coverage
+      - name: Run tests on changed since canary with coverage
+        run: npm run test:changed-feature-branch
+        # don't show tests in progress here
+        # env:
+        #   CI: true
 
       - name: Check linting
         run: npm run lint

@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
+# this is only for targeting canary at the moment
 
-npm run lint
+npm run test:changed-feature-branch

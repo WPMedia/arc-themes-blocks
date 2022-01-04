@@ -51,22 +51,7 @@
   margin-bottom: map-get($spacers, 'xl');
   margin-top: map-get($spacers, 'xl');
   text-align: center;
-
-  > button {
-    height: 48px;
-    width: 213px;
-  }
-
-  .visuallyHidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-  }
+  display: flex;
+  justify-content: center;
 }
 

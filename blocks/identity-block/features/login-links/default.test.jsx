@@ -26,4 +26,10 @@ describe('LoginLinks', () => {
     expect(wrapper.find('a').length).toBe(1);
     expect(wrapper.find('a').prop('href')).toBe('/account/signup/');
   });
+
+  it('renders only forgot password link', () => {
+    const wrapper = mount(<LoginLinks customFields={{ showForgot: true }} />);
+    expect(wrapper.find('a').length).toBe(1);
+    expect(wrapper.find('a').prop('href')).toBe('/account/forgot-password/');
+  });
 });

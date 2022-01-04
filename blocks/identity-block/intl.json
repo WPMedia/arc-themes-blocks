@@ -230,6 +230,17 @@
 		"pt": "Already have an account? Log in.",
 		"sv": "Already have an account? Log in."
 	},
+	"identity-block.login-links-forgot": {
+		"de": "Forgot Password?",
+		"en": "Forgot Password?",
+		"es": "Forgot Password?",
+		"fr": "Forgot Password?",
+		"ja": "Forgot Password?",
+		"ko": "Forgot Password?",
+		"no": "Forgot Password?",
+		"pt": "Forgot Password?",
+		"sv": "Forgot Password?"
+	},
 	"identity-block.login-links-signup": {
 		"de": "Sign up for an account.",
 		"en": "Sign up for an account.",
@@ -251,6 +262,72 @@
 		"no": "Account Information",
 		"pt": "Account Information",
 		"sv": "Account Information"
+	},
+	"identity-block.forgot-password-headline": {
+		"de": "Forgot Password",
+		"en": "Forgot Password",
+		"es": "Forgot Password",
+		"fr": "Forgot Password",
+		"ja": "Forgot Password",
+		"ko": "Forgot Password",
+		"no": "Forgot Password",
+		"pt": "Forgot Password",
+		"sv": "Forgot Password"
+	},
+	"identity-block.forgot-password-headline-submitted": {
+		"de": "Check your email to reset your password",
+		"en": "Check your email to reset your password",
+		"es": "Check your email to reset your password",
+		"fr": "Check your email to reset your password",
+		"ja": "Check your email to reset your password",
+		"ko": "Check your email to reset your password",
+		"no": "Check your email to reset your password",
+		"pt": "Check your email to reset your password",
+		"sv": "Check your email to reset your password"
+	},
+	"identity-block.forgot-password-instruction": {
+		"de": "Enter the email you use for your account",
+		"en": "Enter the email you use for your account",
+		"es": "Enter the email you use for your account",
+		"fr": "Enter the email you use for your account",
+		"ja": "Enter the email you use for your account",
+		"ko": "Enter the email you use for your account",
+		"no": "Enter the email you use for your account",
+		"pt": "Enter the email you use for your account",
+		"sv": "Enter the email you use for your account"
+	},
+	"identity-block.forgot-password-instruction-submitted": {
+		"de": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"en": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"es": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"fr": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"ja": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"ko": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"no": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"pt": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"sv": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password."
+	},
+	"identity-block.forgot-password-submit": {
+		"de": "Send",
+		"en": "Send",
+		"es": "Send",
+		"fr": "Send",
+		"ja": "Send",
+		"ko": "Send",
+		"no": "Send",
+		"pt": "Send",
+		"sv": "Send"
+	},
+	"identity-block.forgot-password-error": {
+		"de": "There was an error processing your request.",
+		"en": "There was an error processing your request.",
+		"es": "There was an error processing your request.",
+		"fr": "There was an error processing your request.",
+		"ja": "There was an error processing your request.",
+		"ko": "There was an error processing your request.",
+		"no": "There was an error processing your request.",
+		"pt": "There was an error processing your request.",
+		"sv": "There was an error processing your request."
 	},
 	"identity-block.edit": {
 		"de": "Edit",

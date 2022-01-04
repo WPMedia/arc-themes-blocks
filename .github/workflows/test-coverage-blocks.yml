@@ -17,12 +17,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
         # checking out canary per https://dev.to/bnb/jest-and-the-changedsince-flag-in-github-actions-ci-468i
         # tried higher depth of fetch
+        # tried checking out the branches themselves
+        # git checkout -b canary
+        # git checkout ${{ github.event.pull_request.head.ref }}
       - run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/* # fetches all branches
-          git checkout -b canary
-          git checkout ${{ github.event.pull_request.head.ref }}
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1

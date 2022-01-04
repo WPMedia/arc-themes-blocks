@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Byline } from '@wpmedia/shared-styles';
 
-const ArticleByline = () => <Byline font="Primary" />;
+const ArticleByline = () => <p>by</p>
 
 ArticleByline.label = 'Byline – Arc Block';
 

@@ -20,7 +20,7 @@ jobs:
         # checking out canary per https://dev.to/bnb/jest-and-the-changedsince-flag-in-github-actions-ci-468i
       - run: |
           git fetch --no-tags --depth=1 origin canary
-          git checkout -b master
+          git checkout -b canary
           git checkout ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node with 12

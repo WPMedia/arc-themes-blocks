@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        # checking out canary per https://dev.to/bnb/jest-and-the-changedsince-flag-in-github-actions-ci-468i
+      - run: |
+          git fetch --no-tags --depth=1 origin canary
+          git checkout canary # checkout to compare against
+          git rev-parse --short HEAD~2
+          git checkout ${GITHUB_REF##*/}
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1

@@ -21,7 +21,7 @@ jobs:
       - run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/* # fetches all branches
           git checkout canary # checkout to compare against 
-          git checkout {{ github.event.pull_request.head.ref }} 
+          git checkout ${{ github.event.pull_request.head.ref }} 
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1

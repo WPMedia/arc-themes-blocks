@@ -121,6 +121,8 @@ const CardListItems = (props) => {
     && contentItems[0].credits.by.length !== 0
   );
 
+  return null;
+
   return (
     (contentItems.length > 0
       ? (

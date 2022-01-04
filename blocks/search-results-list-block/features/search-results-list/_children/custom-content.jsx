@@ -6,7 +6,9 @@ import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 import { SearchIcon } from '@wpmedia/engine-theme-sdk';
 import { extractResizedParams, extractImageFromStory } from '@wpmedia/resizer-image-block';
-import { PrimaryFont } from '@wpmedia/shared-styles';
+import {
+  Button, BUTTON_STYLES, BUTTON_TYPES, PrimaryFont,
+} from '@wpmedia/shared-styles';
 import SearchResult from './search-result';
 
 // shared with results list
@@ -193,16 +195,13 @@ class CustomSearchResultsList extends React.Component {
           {
             !!(data && data.length > 0 && data.length < totalHits) && (
               <div className="see-more">
-                <PrimaryFont
-                  as="button"
-                  type="button"
+                <Button
+                  ariaLabel={this.phrases.t('search-results-block.see-more-button-aria-label')}
+                  buttonStyle={BUTTON_STYLES.PRIMARY}
+                  buttonTypes={BUTTON_TYPES.LABEL_ONLY}
+                  text={this.phrases.t('search-results-block.see-more-button')}
                   onClick={() => this.fetchStories(true)}
-                  className="btn btn-sm"
-                  backgroundColor="primary-color"
-                  aria-label={this.phrases.t('search-results-block.see-more-button-aria-label')}
-                >
-                  {this.phrases.t('search-results-block.see-more-button')}
-                </PrimaryFont>
+                />
               </div>
             )
           }

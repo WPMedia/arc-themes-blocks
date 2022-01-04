@@ -84,7 +84,7 @@ describe('The search results list', () => {
       });
 
       it('should have invisible text for accessibility purposes', () => {
-        expect((wrapper.find('.see-more')).childAt(0).prop('aria-label').length).not.toBe(0);
+        expect((wrapper.find('.see-more')).childAt(0).prop('ariaLabel').length).not.toBe(0);
       });
 
       it('should call fetchContent when clicked', () => {

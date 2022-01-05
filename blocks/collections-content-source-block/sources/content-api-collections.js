@@ -47,7 +47,7 @@ const fetch = (key = {}) => {
     }).then((nextContent) => {
       existingData.content_elements = [
         ...existingData.content_elements,
-        ...nextContent.content_elements,
+        ...nextContent?.content_elements,
       ];
       return existingData;
     });

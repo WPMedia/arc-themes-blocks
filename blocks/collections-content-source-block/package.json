@@ -26,5 +26,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/resizer-image-block": "*"
   },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
+  "dependencies": {
+    "request-promise-native": "^1.0.9"
+  }
 }

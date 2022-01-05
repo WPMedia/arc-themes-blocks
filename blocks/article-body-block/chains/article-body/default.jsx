@@ -138,10 +138,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
     case 'interstitial_link': {
       const { url } = item;
+      // ensures both url and content are truthy
+      // if either is falsy then return null
+      // if url is an empty string "" (falsy) then return null
       if (!(url && content)) return null;
       const beforeContent = '[&nbsp;';
       const afterContent = '&nbsp;]';
-      return (url && url.length > 0) ? (
+
+      return (
         <Fragment key={key}>
           <p className="interstitial-link block-margin-bottom">
             <span dangerouslySetInnerHTML={{ __html: beforeContent }} />
@@ -154,7 +158,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             <span dangerouslySetInnerHTML={{ __html: afterContent }} />
           </p>
         </Fragment>
-      ) : null;
+      );
     }
 
     case 'raw_html': {

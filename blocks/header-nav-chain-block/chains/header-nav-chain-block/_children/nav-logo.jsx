@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
 import { useDebouncedCallback } from 'use-debounce';
 
-const NavLogo = ({ alignment }) => {
-  const { arcSite, deployment, contextPath } = useFusionContext();
-  const {
-    primaryLogo, primaryLogoAlt,
-    breakpoints = { small: 0, medium: 768, large: 992 },
-  } = getProperties(arcSite);
+const NavLogo = ({
+  alignment,
+  mediumBreakpoint,
+  imageAltText,
+  imageSource,
+}) => {
   const [isLogoVisible, setLogoVisibility] = useState(false);
 
   const onScrollEvent = (evt) => {
@@ -38,7 +36,7 @@ const NavLogo = ({ alignment }) => {
     }
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     // on small viewports we do not need this
-    if (vw >= breakpoints.medium) {
+    if (vw >= mediumBreakpoint) {
       window.addEventListener('scroll', onScrollDebounced);
       return () => {
         window.removeEventListener('scroll', onScrollDebounced);
@@ -46,11 +44,11 @@ const NavLogo = ({ alignment }) => {
     }
     // istanbul ignore next
     return undefined;
-  }, [onScrollDebounced, breakpoints]);
+  }, [onScrollDebounced, mediumBreakpoint]);
 
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (vw < breakpoints.medium) {
+    if (vw < mediumBreakpoint) {
       setLogoVisibility(true);
       return undefined;
     }
@@ -65,25 +63,20 @@ const NavLogo = ({ alignment }) => {
     return () => {
       clearTimeout(timerID);
     };
-  }, [breakpoints]);
+  }, [mediumBreakpoint]);
 
-  // Check if URL is absolute/base64
-  const primaryLogoPath = primaryLogo && (
-    primaryLogo.indexOf('http') === 0
-    || primaryLogo.indexOf('base64') === 0
-      ? primaryLogo : deployment(`${contextPath}/${primaryLogo}`)
-  );
   const isLogoSVG = (
-    !!primaryLogoPath
-    && String(primaryLogoPath).endsWith('.svg')
+    !!imageSource
+    && String(imageSource).endsWith('.svg')
   );
+
   return (
     <div className={`nav-logo nav-logo-${alignment} ${isLogoVisible ? 'nav-logo-show' : 'nav-logo-hidden'} ${isLogoSVG ? 'svg-logo' : ''}`}>
-      <a href="/" title={primaryLogoAlt}>
-        {!!primaryLogoPath && (
+      <a href="/" title={imageAltText}>
+        {!!imageSource && (
           <img
-            src={primaryLogoPath}
-            alt={primaryLogoAlt || ''}
+            src={imageSource}
+            alt={imageAltText || ''}
           />
         )}
       </a>

@@ -1,19 +1,19 @@
 {
   "name": "@wpmedia/placeholder-image-block",
-  "version": "5.15.0",
+  "version": "5.17.0",
   "description": "Returns a placeholder image based on the fallback image in feature pack",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/placeholder-image-block"
   },
   "keywords": [

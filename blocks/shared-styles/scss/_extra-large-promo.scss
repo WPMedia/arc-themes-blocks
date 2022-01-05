@@ -3,11 +3,6 @@
 
   a {
     color: $ui-primary-font-color;
-    position: relative;
-  }
-
-  a > picture > img {
-    vertical-align: middle;
   }
 
   .overline {
@@ -47,11 +42,6 @@
       font-size: calculateRem(16px);
       line-height: calculateRem(24px);
     }
-  }
-
-  img {
-    height: auto;
-    width: 100%;
   }
 
   .article-meta {

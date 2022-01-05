@@ -1,12 +1,12 @@
 {
   "name": "@wpmedia/top-table-list-block",
-  "version": "5.16.0",
+  "version": "5.18.0",
   "description": "Top Table List – Arc Block",
   "author": "Jack Howard <jack.howard@washpost.com>",
   "contributors": [
     "Beltran Caliz <beltran.caliz@washpost.com>"
   ],
-  "homepage": "https://github.com/WPMedia/fusion-news-theme-blocks",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/WPMedia/fusion-news-theme-blocks.git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/top-table-list-block"
   },
   "peerDependencies": {

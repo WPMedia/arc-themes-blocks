@@ -4,7 +4,7 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
+import { FormInputField, FIELD_TYPES } from '@wpmedia/shared-styles';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import useIdentity from '../../components/Identity';
 import useLogin from '../../components/useLogin';

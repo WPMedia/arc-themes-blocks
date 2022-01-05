@@ -3,12 +3,7 @@
 
   a {
     color: $ui-primary-font-color;
-    position: relative;
     text-decoration: none;
-
-    img {
-      vertical-align: middle;
-    }
   }
 
   .md-promo-headline {
@@ -54,10 +49,8 @@
   }
 
   picture img {
-    height: auto;
-    max-width: 100px;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      max-width: calc(100%);
+    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+      max-width: 100px;
     }
   }
 

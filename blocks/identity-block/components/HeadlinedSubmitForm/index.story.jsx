@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { FormInputField, FIELD_TYPES } from '@wpmedia/shared-styles';
 import HeadlinedSubmitForm from '.';
-import FormInputField, { FIELD_TYPES } from '../FormInputField';
 import FormPasswordConfirm from '../FormPasswordConfirm';
 
 export default {

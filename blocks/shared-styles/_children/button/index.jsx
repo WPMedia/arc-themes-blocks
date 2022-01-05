@@ -45,7 +45,7 @@ const UI_DARK_GRAY_COLOR = '#191919';
 const iconTypeStringToIconTypeComponent = (
   iconTypeString, iconHeightWidth, primaryColor, buttonStyle,
 ) => {
-  let iconColor = primaryColor;
+  let iconColor;
 
   switch (buttonStyle) {
     case BUTTON_STYLES.PRIMARY:
@@ -236,7 +236,7 @@ function Button(props) {
 
   const matchedButtonSizeClass = matchButtonSizeWithClass(buttonSize);
 
-  let iconHeightWidth = 16;
+  let iconHeightWidth;
 
   const primaryColor = getThemeStyle(arcSite)['primary-color'];
   const primaryFont = getThemeStyle(arcSite)['primary-font-family'];

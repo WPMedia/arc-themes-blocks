@@ -97,20 +97,15 @@ function EditableFieldPresentational({
                   <p className="editable-form-input--label-text">
                     {label}
                   </p>
-                  {
-                    !isEditable
-                      && (
-                        <PrimaryFont
-                          as="button"
-                          className="editable-form-input--edit-button-link"
-                          type="button"
-                          onClick={() => setIsEditable(true)}
-                          fontColor="primary-color"
-                        >
-                          {editText}
-                        </PrimaryFont>
-                      )
-                    }
+                  <PrimaryFont
+                    as="button"
+                    className="editable-form-input--edit-button-link"
+                    type="button"
+                    onClick={() => setIsEditable(true)}
+                    fontColor="primary-color"
+                  >
+                    {editText}
+                  </PrimaryFont>
                 </div>
                 <p className="editable-form-input--value-text">
                   {initialValue}

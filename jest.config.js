@@ -17,14 +17,6 @@ module.exports = {
       functions: 85,
       lines: 85,
     },
-    // if an output type breaks, the page doesn't load
-    // this should be higher, really
-    'blocks/default-output-block/output-types': {
-      statements: 86,
-      branches: 80,
-      functions: 100,
-      lines: 85,
-    },
   },
   collectCoverageFrom: [
     '**/(features|chains|layouts|sources|output-types|_children|components|utils)/**/*.{js,jsx}',

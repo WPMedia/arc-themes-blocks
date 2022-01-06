@@ -35,7 +35,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&website=the-sun&from=20&size=0&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&website=the-sun&from=20&size=0&published=true');
     });
   });
 
@@ -49,7 +49,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&website=the-sun&from=20&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&website=the-sun&from=20&published=true');
     });
   });
 
@@ -62,7 +62,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&website=the-sun&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&website=the-sun&published=true');
     });
   });
 
@@ -76,7 +76,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&website=the-sun&size=0&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&website=the-sun&size=0&published=true');
     });
   });
 
@@ -89,7 +89,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&website=the-sun&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&website=the-sun&published=true');
     });
   });
 
@@ -103,7 +103,7 @@ describe('the collections content source block', () => {
         'arc-site': 'the-sun',
       });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?content_alias=test_alias&website=the-sun&from=20&size=0&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?content_alias=test_alias&website=the-sun&from=20&size=0&published=true');
     });
   });
 
@@ -111,7 +111,7 @@ describe('the collections content source block', () => {
     it('should not build a url with a website', async () => {
       const contentSourceRequest = await contentSource.fetch({ _id: 'test' });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?_id=test&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?_id=test&published=true');
     });
   });
 
@@ -119,7 +119,7 @@ describe('the collections content source block', () => {
     it('should not build a url with an id and website', async () => {
       const contentSourceRequest = await contentSource.fetch({ });
 
-      expect(contentSourceRequest.url).toEqual('content/v4/collections?content_alias=undefined&published=true');
+      expect(contentSourceRequest.url).toEqual('/content/v4/collections?content_alias=undefined&published=true');
     });
   });
 });

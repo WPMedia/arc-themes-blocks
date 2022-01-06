@@ -26,7 +26,7 @@ const fetch = (key = {}) => {
   if (updatedSize && updatedSize > 9) updatedSize = size < 20 ? size : 20;
 
   return axios({
-    url: `${CONTENT_BASE}content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${updatedSize}` : ''}&published=true`,
+    url: `${CONTENT_BASE}/content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${updatedSize}` : ''}&published=true`,
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,

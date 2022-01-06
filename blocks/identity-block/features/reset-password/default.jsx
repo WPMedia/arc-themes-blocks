@@ -17,29 +17,20 @@ import './styles.scss';
 
 const defaultSuccessURL = '/account/login/';
 
-const ResetPassword = ({ customFields }) => {
-  const {
-    successActionURL = defaultSuccessURL,
-  } = customFields;
-
+export const ResetPasswordPresentation = ({
+  isAdmin = false,
+  phrases,
+  successActionURL,
+}) => {
   const { Identity, isInitialized } = useIdentity();
-  const { arcSite } = useFusionContext();
-  const { locale } = getProperties(arcSite);
-  const phrases = getTranslatedPhrases(locale);
 
   const [error, setError] = useState();
-  const [nonce, setNonce] = useState();
   const [passwordRequirements, setPasswordRequirements] = useState({ status: 'initial' });
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    // eslint doesn't handle globalThis yet, but this is appropriate
-    /* global globalThis */
-    const params = new URLSearchParams(globalThis.location.search);
-    if (params.has('nonce')) {
-      setNonce(params.get('nonce'));
-    }
-  }, []);
+  // eslint doesn't handle globalThis yet, but this is appropriate
+  /* global globalThis */
+  const nonce = new URLSearchParams(globalThis.location.search).get('nonce');
 
   useEffect(() => {
     const getConfig = async () => {
@@ -106,53 +97,71 @@ const ResetPassword = ({ customFields }) => {
     },
   });
 
-  if (!isInitialized || !nonce) {
-    return null;
-  }
+  if (isAdmin || (isInitialized && nonce)) {
+    if (submitted) {
+      return (
+        <HeadlinedSubmitForm
+          headline={phrases.t('identity-block.reset-password-headline-submitted')}
+          buttonLabel={phrases.t('identity-block.reset-password-submit-submitted')}
+          onSubmit={() => { window.location.assign(successActionURL); }}
+        >
+          <PrimaryFont className="xpmedia-reset-password-instruction">
+            {phrases.t('identity-block.reset-password-instruction-submitted')}
+          </PrimaryFont>
+        </HeadlinedSubmitForm>
+      );
+    }
 
-  if (submitted) {
     return (
       <HeadlinedSubmitForm
-        headline={phrases.t('identity-block.reset-password-headline-submitted')}
-        buttonLabel={phrases.t('identity-block.reset-password-submit-submitted')}
-        onSubmit={() => { window.location.assign(successActionURL); }}
+        headline={phrases.t('identity-block.reset-password-headline')}
+        buttonLabel={phrases.t('identity-block.reset-password-submit')}
+        onSubmit={({ newPassword }) => {
+          if (!isAdmin) {
+            Identity
+              .resetPassword(nonce, newPassword)
+              .then(() => { setSubmitted(true); })
+              .catch(() => setError(phrases.t('identity-block.reset-password-error')));
+          }
+        }}
+        formErrorText={error}
       >
         <PrimaryFont className="xpmedia-reset-password-instruction">
-          {phrases.t('identity-block.reset-password-instruction-submitted')}
+          {phrases.t('identity-block.reset-password-instruction')}
         </PrimaryFont>
+        <FormPasswordConfirm
+          autoComplete="new-password"
+          name="newPassword"
+          label={phrases.t('identity-block.password')}
+          validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
+          validationPattern={validatePasswordPattern(
+            pwLowercase,
+            pwMinLength,
+            pwPwNumbers,
+            pwSpecialCharacters,
+            pwUppercase,
+          )}
+          confirmLabel={phrases.t('identity-block.confirm-password')}
+          confirmValidationErrorMessage={phrases.t('identity-block.confirm-password-error')}
+        />
       </HeadlinedSubmitForm>
     );
   }
+  return null;
+};
+
+const ResetPassword = ({ customFields }) => {
+  const { successActionURL = defaultSuccessURL } = customFields;
+  const { arcSite, isAdmin } = useFusionContext();
+  const { locale } = getProperties(arcSite);
+  const phrases = getTranslatedPhrases(locale);
 
   return (
-    <HeadlinedSubmitForm
-      headline={phrases.t('identity-block.reset-password-headline')}
-      buttonLabel={phrases.t('identity-block.reset-password-submit')}
-      onSubmit={({ newPassword }) => Identity
-        .resetPassword(nonce, newPassword)
-        .then(() => { setSubmitted(true); })
-        .catch(() => setError(phrases.t('identity-block.reset-password-error')))}
-      formErrorText={error}
-    >
-      <PrimaryFont className="xpmedia-reset-password-instruction">
-        {phrases.t('identity-block.reset-password-instruction')}
-      </PrimaryFont>
-      <FormPasswordConfirm
-        autoComplete="new-password"
-        name="newPassword"
-        label={phrases.t('identity-block.password')}
-        validationErrorMessage={status === 'success' ? passwordErrorMessage : ''}
-        validationPattern={validatePasswordPattern(
-          pwLowercase,
-          pwMinLength,
-          pwPwNumbers,
-          pwSpecialCharacters,
-          pwUppercase,
-        )}
-        confirmLabel={phrases.t('identity-block.confirm-password')}
-        confirmValidationErrorMessage={phrases.t('identity-block.confirm-password-error')}
-      />
-    </HeadlinedSubmitForm>
+    <ResetPasswordPresentation
+      isAdmin={isAdmin}
+      phrases={phrases}
+      successActionURL={successActionURL}
+    />
   );
 };
 

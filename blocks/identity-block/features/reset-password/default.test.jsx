@@ -1,61 +1,92 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import ResetPassword from './default';
 
+import ResetPassword, { ResetPasswordPresentation } from './default';
 import FormPasswordConfirm from '../../components/FormPasswordConfirm';
 import useIdentity from '../../components/Identity';
 
-const resetMock = jest.fn(() => Promise.resolve());
-const resetFailMock = jest.fn(() => Promise.reject());
-const defaultCustomFields = { successActionURL: '/account/login/' };
+const successActionURL = '/account/login/';
+
+jest.mock('../../components/FormPasswordConfirm');
+jest.mock('../../components/Identity');
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({
     arcSite: 'arc-demo-5',
   })),
 }));
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
-    t: jest.fn((phrase) => ({
-      'identity-block.email': 'Email',
-      'identity-block.email-requirements': 'Email Required',
-      'identity-block.reset-password-error': 'Uh oh!',
-      'identity-block.reset-password-headline': 'Headline',
-      'identity-block.reset-password-headline-submitted': 'Congratulations!',
-      'identity-block.reset-password-instruction': 'Do the email thing',
-      'identity-block.reset-password-instruction-submitted': 'You did the thing!',
-      'identity-block.reset-password-submit': 'Submit',
-      'identity-block.reset-password-submit-submitted': 'Submit Again',
-      undefined: '',
-    }[phrase])),
-  })),
-}));
-jest.mock('../../components/FormPasswordConfirm');
-jest.mock('../../components/Identity');
+jest.mock('fusion:properties', () => (jest.fn(() => ({
+  locale: 'en',
+}))));
 
-describe('Identity Password Reset Feature - unInitialized', () => {
+FormPasswordConfirm.mockImplementation(() => (
+  <input name="newPassword" defaultValue="notTestingThisComponent" />
+));
+
+const phrases = {
+  t: (phrase) => ({
+    'identity-block.confirm-password': 'Confirm Password',
+    'identity-block.confirm-password-error': 'Passwords must match',
+    'identity-block.password': 'Password',
+    'identity-block.password-requirements': 'Passwords must meet our strict requirements.',
+    'identity-block.password-requirements-characters': 'Characters',
+    'identity-block.password-requirements-lowercase': 'Lowercase',
+    'identity-block.password-requirements-numbers': 'Numbers',
+    'identity-block.password-requirements-uppercase': 'Uppercase',
+    'identity-block.reset-password-error': 'There was an error with your password',
+    'identity-block.reset-password-headline': 'Create your new password',
+    'identity-block.reset-password-headline-submitted': 'New password saved',
+    'identity-block.reset-password-instruction': 'Enter a new password for your account.',
+    'identity-block.reset-password-instruction-submitted': 'Your new password has been saved.',
+    'identity-block.reset-password-submit': 'Continue',
+    'identity-block.reset-password-submit-submitted': 'Continue to Login',
+  }[phrase]),
+};
+
+const resetPasswordMock = jest.fn(() => Promise.resolve());
+const resetPasswordMockFail = jest.fn(() => Promise.reject());
+
+const Identity = {
+  getConfig: () => Promise.resolve({}),
+  resetPassword: resetPasswordMock,
+};
+
+describe('Identity Password Reset Feature - wrapper', () => {
   beforeAll(() => {
-    window.history.pushState({}, '', '/test?nonce=abcd');
     useIdentity.mockImplementation(() => ({
       isInitialized: false,
-      Identity: {
-        getConfig: () => Promise.resolve({}),
-        resetPassword: () => Promise.resolve({}),
-      },
+      Identity,
     }));
   });
   afterAll(() => {
-    window.history.back();
+    jest.restoreAllMocks();
+  });
+  it('renders', () => {
+    const wrapper = shallow(
+      <ResetPassword customFields={{ successActionURL }} />,
+    );
+    expect(wrapper.html()).not.toBe(null);
+  });
+});
+
+window.history.pushState({}, '', '/?nonce=abcd');
+
+describe('Identity Password Reset Feature - unInitialized', () => {
+  beforeAll(() => {
+    useIdentity.mockImplementation(() => ({
+      isInitialized: false,
+      Identity,
+    }));
+  });
+  afterAll(() => {
     jest.restoreAllMocks();
   });
 
   it('renders nothing if identity not initialized', async (done) => {
     await act(async () => {
       const wrapper = await mount(
-        <ResetPassword customFields={defaultCustomFields} />,
+        <ResetPasswordPresentation phrases={phrases} successActionUrl={successActionURL} />,
       );
       expect(wrapper.html()).toBe(null);
       done();
@@ -64,36 +95,33 @@ describe('Identity Password Reset Feature - unInitialized', () => {
 });
 
 describe('Identity Password Reset Feature', () => {
-  const mockResponse = jest.fn();
+  const assignMock = jest.fn();
   let wrapper;
 
-  beforeEach(async () => {
-    window.history.pushState({}, '', '/?nonce=abcd');
+  beforeAll(async () => {
     useIdentity.mockImplementation(() => ({
       isInitialized: true,
-      Identity: {
-        getConfig: () => Promise.resolve({}),
-        resetPassword: resetMock,
-      },
+      Identity,
     }));
-    FormPasswordConfirm.mockImplementation(() => (<input name="newPassword" defaultValue="notTestingThisComponent" />));
     Object.defineProperty(window, 'location', {
       value: {
         ...window.location,
-        assign: mockResponse,
+        assign: assignMock,
       },
       writable: true,
     });
 
     await act(async () => {
-      wrapper = await mount(<ResetPassword customFields={defaultCustomFields} />);
+      wrapper = await mount(
+        <ResetPasswordPresentation phrases={phrases} successActionUrl={successActionURL} />,
+      );
     });
+    wrapper.update();
     wrapper.update();
     wrapper.update();
   });
 
-  afterEach(() => {
-    window.history.back();
+  afterAll(() => {
     jest.restoreAllMocks();
   });
 
@@ -102,51 +130,49 @@ describe('Identity Password Reset Feature', () => {
   });
 
   it('shows submit form', () => {
-    expect(wrapper.text().includes('Headline')).toBe(true);
-    expect(wrapper.text().includes('Do the email thing')).toBe(true);
-    expect(wrapper.text().includes('Submit')).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-headline'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-instruction'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-submit'))).toBe(true);
   });
 
-  it('uses updates the page on submit and redirects the user to login when done', async () => {
-    await act(async () => {
-      wrapper.find('input[name="newPassword"]').instance().value = '01PASSword!@';
-      wrapper.find('form').simulate('submit');
-      await resetMock;
-      expect(resetMock).toHaveBeenCalled();
-    });
-    expect(wrapper.text().includes('Congratulations!')).toBe(true);
-    expect(wrapper.text().includes('You did the thing!')).toBe(true);
-    expect(wrapper.text().includes('Submit Again')).toBe(true);
+  it('updates the page on submit and redirects the user to login when done', async () => {
     await act(async () => {
       wrapper.find('form').simulate('submit');
+      await resetPasswordMock;
+      expect(resetPasswordMock).toHaveBeenCalled();
     });
-    expect(mockResponse).toHaveBeenCalledWith(defaultCustomFields.successActionURL);
+    wrapper.update();
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-headline-submitted'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-instruction-submitted'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-submit-submitted'))).toBe(true);
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    expect(assignMock).toHaveBeenCalled();
   });
 });
 
-describe('Identity Password Reset Feature - Failing', () => {
+describe('Identity Password Reset Feature - Failing reset request', () => {
   let wrapper;
 
-  beforeEach(async () => {
-    window.history.pushState({}, '', '/?nonce=abcd');
+  beforeAll(async () => {
+    resetPasswordMock.mockImplementation(resetPasswordMockFail);
     useIdentity.mockImplementation(() => ({
       isInitialized: true,
-      Identity: {
-        getConfig: () => Promise.resolve({}),
-        resetPassword: resetFailMock,
-      },
+      Identity,
     }));
-    FormPasswordConfirm.mockImplementation(() => (<input name="newPassword" defaultValue="notTestingThisComponent" />));
 
     await act(async () => {
-      wrapper = await mount(<ResetPassword customFields={defaultCustomFields} />);
+      wrapper = await mount(
+        <ResetPasswordPresentation phrases={phrases} successActionUrl={successActionURL} />,
+      );
     });
+    wrapper.update();
     wrapper.update();
     wrapper.update();
   });
 
-  afterEach(() => {
-    window.history.back();
+  afterAll(() => {
     jest.restoreAllMocks();
   });
 
@@ -155,19 +181,20 @@ describe('Identity Password Reset Feature - Failing', () => {
   });
 
   it('shows submit form', () => {
-    expect(wrapper.text().includes('Headline')).toBe(true);
-    expect(wrapper.text().includes('Do the email thing')).toBe(true);
-    expect(wrapper.text().includes('Submit')).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-headline'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-instruction'))).toBe(true);
+    expect(wrapper.text().includes(phrases.t('identity-block.reset-password-submit'))).toBe(true);
   });
 
-  it('uses updates the page on submit', async () => {
+  it('updates the page on submit to failing state', async () => {
     await act(async () => {
-      wrapper.find('input[name="newPassword"]').instance().value = '01PASSword!@';
       wrapper.find('form').simulate('submit');
-      await resetFailMock;
-      expect(resetFailMock).toHaveBeenCalled();
+      await resetPasswordMock;
+      expect(resetPasswordMock).toHaveBeenCalled();
     });
     wrapper.update();
     expect(wrapper.find('section.xpmedia-form-error')).toHaveLength(1);
   });
 });
+
+window.history.back();

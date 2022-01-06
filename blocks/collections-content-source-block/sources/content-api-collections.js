@@ -1,4 +1,4 @@
-import request from 'request-promise-native';
+import axios from 'axios';
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from 'fusion:environment';
 import getResizedImageData from '@wpmedia/resizer-image-block';
 
@@ -25,26 +25,28 @@ const fetch = (key = {}) => {
   // Want to ensure size is capped at 20 to prevent an error.
   if (updatedSize && updatedSize > 9) updatedSize = size < 20 ? size : 20;
 
-  return request({
-    uri: `${CONTENT_BASE}content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${updatedSize}` : ''}&published=true`,
-    auth: {
-      bearer: ARC_ACCESS_TOKEN,
+  return axios({
+    url: `${CONTENT_BASE}content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}${from ? `&from=${from}` : ''}${size ? `&size=${updatedSize}` : ''}&published=true`,
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
     },
-    json: true,
-  }).then((content) => {
+    method: 'GET',
+  }).then(({ data: content }) => {
     if (getNext === 'false') {
       return content;
     }
 
     const existingData = content;
 
-    return request({
-      uri: `${CONTENT_BASE}content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}&from=${updatedSize}${size ? `&size=${updatedSize}` : ''}&published=true`,
-      auth: {
-        bearer: ARC_ACCESS_TOKEN,
+    return axios({
+      url: `${CONTENT_BASE}content/v4/collections?${_id ? `_id=${_id}` : `content_alias=${contentAlias}`}${site ? `&website=${site}` : ''}&from=${updatedSize}${size ? `&size=${updatedSize}` : ''}&published=true`,
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
       },
-      json: true,
-    }).then((nextContent) => {
+      method: 'GET',
+    }).then(({ data: nextContent }) => {
       existingData.content_elements = [
         ...existingData.content_elements,
         ...nextContent?.content_elements,

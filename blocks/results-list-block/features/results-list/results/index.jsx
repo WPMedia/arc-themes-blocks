@@ -50,7 +50,7 @@ const Results = ({
         return { feedOffset: offset, feedSize: size };
       }
       case 'content-api-collections': {
-        return { from: offset, size, getNext: true };
+        return { from: offset, size: configuredSize, getNext: true };
       }
       default: { break; }
     }

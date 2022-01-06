@@ -7,7 +7,6 @@ const params = {
   content_alias: 'text',
   from: 'text',
   size: 'text',
-  getNext: 'text',
 };
 
 const fetch = (key = {}) => {

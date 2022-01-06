@@ -15,7 +15,6 @@ describe('the collections content source block', () => {
       _id: 'text',
       content_alias: 'text',
       from: 'text',
-      getNext: 'text',
       size: 'text',
     });
   });

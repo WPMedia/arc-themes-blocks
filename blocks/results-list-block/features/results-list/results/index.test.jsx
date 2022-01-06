@@ -353,7 +353,7 @@ describe('content-api-collections service', () => {
         query: {
           feature: 'results-list',
           from: 0,
-          size: 2,
+          size: 1,
           getNext: true,
         },
       }),

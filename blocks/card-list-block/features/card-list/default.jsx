@@ -27,7 +27,7 @@ const CardListItems = (props) => {
     customFields: {
       listContentConfig: {
         contentService = '',
-        contentConfigValues = {},
+        contentConfigValues,
       } = {},
       title = '',
       offsetOverride = 0,
@@ -40,7 +40,7 @@ const CardListItems = (props) => {
   } = props;
 
   // need to inject the arc site here into use content
-  const { content_elements: contentElements = [] } = useContent({
+  const { content_elements: contentElements } = useContent({
     source: contentService,
     query: { ...contentConfigValues, feature: 'card-list' },
     filter: `{
@@ -99,7 +99,7 @@ const CardListItems = (props) => {
         }
       }
     }`,
-  }) || {};
+  });
 
   let contentItems = contentElements.reduce((acc, element, index) => {
     if (element.websites?.[arcSite] && index >= offsetOverride) {
@@ -107,6 +107,8 @@ const CardListItems = (props) => {
     }
     return acc;
   }, []);
+
+  // console.log(contentItems[0].story);
 
   if (displayAmount) {
     contentItems = contentItems.slice(0, displayAmount);
@@ -120,8 +122,6 @@ const CardListItems = (props) => {
     && contentItems[0].credits.by
     && contentItems[0].credits.by.length !== 0
   );
-
-  return null;
 
   return (
     (contentItems.length > 0
@@ -181,7 +181,7 @@ const CardListItems = (props) => {
               </article>
               {contentItems.slice(1).map((element) => {
                 const {
-                  headlines: { basic: headlineText } = {},
+                  headlines: { basic: headlineText },
                 } = element;
                 const imageURL = extractImageFromStory(element);
                 const url = element.websites[arcSite]?.website_url;

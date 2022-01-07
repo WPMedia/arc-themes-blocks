@@ -1,4 +1,4 @@
-name: Test News Theme Blocks Linting And Testing Everything
+name: Test Blocks and Linting - Everything
 
 on:
   pull_request:

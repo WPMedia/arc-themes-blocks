@@ -30,7 +30,7 @@
     "generate:feature": "hygen feature new",
     "prepare": "husky install",
     "test:changed-feature-branch": "jest --changedSince=origin/canary --coverage --passWithNoTests",
-    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/canary | grep -E \"(.js$|.jsx$)\")"
+    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/canary | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")"
   },
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {

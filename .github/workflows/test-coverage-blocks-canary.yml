@@ -1,11 +1,12 @@
-name: Test Blocks and Linting - Everything
+name: Test Blocks - Changed from Canary Base
 
 on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
-    # ignores prs to canary, runs on other branches
-    branches: [stable, rc, beta]
+    # only prs targeting canary
+    # test:changed-feature-branch currently only targets canary for changed files
+    branches: [canary]
 
 jobs:
   ensure_minimum_test_coverage_linting:
@@ -16,6 +17,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          #  0 indicates all history for all branches and tags
+          fetch-depth: 0
 
       - name: Setup Node with 12
         uses: actions/setup-node@v1
@@ -36,9 +40,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      # all tests run
-      - name: Run tests with coverage
-        run: npm run test:coverage
+      - name: Run tests on changed since canary with coverage
+        run: npm run test:changed-feature-branch
 
       - name: Check linting
         run: npm run lint

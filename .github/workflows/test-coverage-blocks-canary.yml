@@ -1,4 +1,4 @@
-name: Test News Theme Blocks Against Canary Base
+name: Test Blocks - Changed from Canary Base
 
 on:
   pull_request:

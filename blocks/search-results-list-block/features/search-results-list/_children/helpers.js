@@ -1,14 +1,3 @@
-import getProperties from 'fusion:properties';
-
-const constructHref = (websiteUrl, arcSite) => {
-  const {
-    websiteDomain,
-  } = getProperties(arcSite);
-  return (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-    ? `https://corecomponents-the-gazette-prod.cdn.arcpublishing.com/${websiteUrl}`
-    : `${websiteDomain}/${websiteUrl}`;
-};
-
 const resolveDefaultPromoElements = (customFields = {}) => {
   const fields = {
     showHeadline: true,
@@ -28,4 +17,5 @@ const resolveDefaultPromoElements = (customFields = {}) => {
   }, fields);
 };
 
-export { constructHref, resolveDefaultPromoElements };
+// eslint-disable-next-line import/prefer-default-export
+export { resolveDefaultPromoElements };

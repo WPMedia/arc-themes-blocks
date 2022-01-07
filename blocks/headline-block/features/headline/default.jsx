@@ -5,6 +5,7 @@ import Headline from './_children/headline';
 
 // container handles data fetching, connection to fusion
 const HeadlineContainer = () => {
+  console.log('this should fail linting')
   // get headlines basic
   const { globalContent } = useFusionContext();
 

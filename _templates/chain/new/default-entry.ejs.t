@@ -4,23 +4,9 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/chains/<%= h.inflecti
 ---
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
-import { Heading, HeadingSection } from '@wpmedia/shared-styles';
 
-import '@wpmedia/shared-styles/scss/_chains.scss';
-
-const <%= h.changeCase.pascal(block_name) %> = ({ children, customFields = {} }) => {
-  const { heading = null } = customFields;
-
-  if (!heading) {
-    return <>{children}</>;
-  }
-
-  return (
-    <HeadingSection>
-      <Heading className="chain-heading">{heading}</Heading>
-      {children}
-    </HeadingSection>
-  );
+const <%= h.changeCase.pascal(block_name) %> = ({ children }) => {
+  return <>{children}</>;
 };
 
 <%= h.changeCase.pascal(block_name) %>.label = '<%= h.changeCase.title( block_name ) %> - Arc Block';
@@ -29,11 +15,6 @@ const <%= h.changeCase.pascal(block_name) %> = ({ children, customFields = {} })
 
 <%= h.changeCase.pascal(block_name) %>.propTypes = {
   children: PropTypes.array,
-  customFields: PropTypes.shape({
-    heading: PropTypes.string.tag({
-      label: 'Heading',
-    }),
-  }),
 };
 
 export default <%= h.changeCase.pascal(block_name) %>;

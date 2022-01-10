@@ -23,8 +23,6 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
     "directory": "blocks/<%= h.inflection.dasherize(block_name) %>-block"
   },
   "peerDependencies": {
-    "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/shared-styles": "*"
+    "@arc-fusion/prop-types": "^0.1.5"
   }
 }

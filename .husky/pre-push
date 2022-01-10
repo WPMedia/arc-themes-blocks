@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
-# changed-feature-branch is only for targeting canary at the moment
-# todo: run lint only on changed files 
+# this only for targeting canary at the moment 
 # fetching latest changes to ensure the origin/canary is up to date
-npm run lint && git fetch -a --depth 100 && npm run test:changed-feature-branch
+git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch

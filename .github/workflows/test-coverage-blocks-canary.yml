@@ -1,4 +1,4 @@
-name: Test Blocks - Changed from Canary Base
+name: Test Blocks And Linting - Changed from Canary Base
 
 on:
   pull_request:
@@ -43,8 +43,8 @@ jobs:
       - name: Run tests on changed since canary with coverage
         run: npm run test:changed-feature-branch
 
-      - name: Check linting
-        run: npm run lint
+      - name: Check linting of changed since canary
+        run: npm run lint:changed-feature-branch
 
       - name: Check failure status
         uses: act10ns/slack@v1

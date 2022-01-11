@@ -25,7 +25,9 @@ const getResizerParam = (
   originalUrl,
   breakpoint,
   format,
-  filterQuality = 70,
+  // unused variable
+  // todo: allow customers to pass in their own filter quality
+  _filterQuality,
   respectAspectRatio = false,
   resizerURL,
   focalPoint,
@@ -46,7 +48,7 @@ const getResizerParam = (
       thumborParam = thumbor
         .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
         /* have to keep png for transparency effect */
-        .filter(`quality(100)`)
+        .filter('quality(100)')
         .filter('fill(white)')
         /* todo: enable background color in angler fish resizer api */
         .filter('background_color(white)');
@@ -70,7 +72,7 @@ const getResizerParam = (
     thumborParam = thumbor
       .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
       .filter(`format(${formatFileType})`)
-      .filter(`quality(100)`);
+      .filter('quality(100)');
 
     if (focalPoint) {
       thumborParam = thumborParam.filter(focalPointFilter(focalPoint));

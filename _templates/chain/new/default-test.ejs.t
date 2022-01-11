@@ -18,7 +18,6 @@ describe('<%= h.changeCase.title( block_name ) %>', () => {
       );
 
       expect(wrapper.text()).toBe(testText);
-      expect(wrapper.find('HeadingSection').exists()).toBe(false);
       expect(wrapper.html()).toBe(`<p>${testText}</p>`);
     });
 

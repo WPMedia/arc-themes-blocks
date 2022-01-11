@@ -46,7 +46,7 @@ const getResizerParam = (
       thumborParam = thumbor
         .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
         /* have to keep png for transparency effect */
-        .filter(`quality(${filterQuality})`)
+        .filter(`quality(100)`)
         .filter('fill(white)')
         /* todo: enable background color in angler fish resizer api */
         .filter('background_color(white)');
@@ -70,7 +70,7 @@ const getResizerParam = (
     thumborParam = thumbor
       .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ''))
       .filter(`format(${formatFileType})`)
-      .filter(`quality(${filterQuality})`);
+      .filter(`quality(100)`);
 
     if (focalPoint) {
       thumborParam = thumborParam.filter(focalPointFilter(focalPoint));
@@ -164,7 +164,7 @@ export const getResizerParams = (
       output[key] = output[key].replace(/\//, '');
 
       if (compressedParams) {
-        output[key] = output[key].replace(':format(jpg):quality(70)', ':cm=t');
+        output[key] = output[key].replace(':format(jpg):quality(100)', ':cm=t');
       }
     }
   });

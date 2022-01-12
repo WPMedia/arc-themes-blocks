@@ -28,6 +28,7 @@
     "release:rc": "lerna publish --dist-tag rc --canary --preid rc -y",
     "release:stable": "lerna publish --dist-tag stable minor -y",
     "generate:feature": "hygen feature new",
+    "generate:chain": "hygen chain new",
     "prepare": "husky install",
     "test:changed-feature-branch": "jest --changedSince=origin/canary --coverage --passWithNoTests",
     "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/canary | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",

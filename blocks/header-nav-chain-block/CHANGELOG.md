@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.21.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/header-nav-chain-block@5.20.0...@wpmedia/header-nav-chain-block@5.21.0) (2021-12-15)
+
+**Note:** Version bump only for package @wpmedia/header-nav-chain-block
+
+
+
+
+
+# [5.20.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-chain-block@5.19.0...@wpmedia/header-nav-chain-block@5.20.0) (2021-12-15)
+
+**Note:** Version bump only for package @wpmedia/header-nav-chain-block
+
+
+
+
+
 # [5.19.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/header-nav-chain-block@5.18.0...@wpmedia/header-nav-chain-block@5.19.0) (2021-10-20)
 
 

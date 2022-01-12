@@ -8,12 +8,15 @@ import { PrimaryFont } from '@wpmedia/shared-styles';
 import './styles.scss';
 
 const defaultLoginURL = '/account/login/';
+const defaultForgotURL = '/account/forgot-password/';
 const defaultSignUpURL = '/account/signup/';
 
 const LoginLinks = ({ customFields }) => {
   const {
     showLogin = false,
     loginURL = defaultLoginURL,
+    showForgot = false,
+    forgotURL = defaultForgotURL,
     showSignUp = false,
     signUpURL = defaultSignUpURL,
   } = customFields;
@@ -21,13 +24,14 @@ const LoginLinks = ({ customFields }) => {
   const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
-  if (!showLogin && !showSignUp) {
+  if (!showLogin && !showForgot && !showSignUp) {
     return null;
   }
 
   return (
     <PrimaryFont as="div" className="xpmedia-identity-login-links">
       {showLogin ? <a href={loginURL}>{phrases.t('identity-block.login-links-login')}</a> : null}
+      {showForgot ? <a href={forgotURL}>{phrases.t('identity-block.login-links-forgot')}</a> : null}
       {showSignUp ? <a href={signUpURL}>{phrases.t('identity-block.login-links-signup')}</a> : null}
     </PrimaryFont>
   );
@@ -48,6 +52,16 @@ LoginLinks.propTypes = {
       name: 'Login URL',
       defaultValue: defaultLoginURL,
       group: 'Login',
+    }),
+    showForgot: PropTypes.bool.tag({
+      name: 'Show Forgot Password link',
+      defaultValue: false,
+      group: 'Forgot Password',
+    }),
+    forgotURL: PropTypes.string.tag({
+      name: 'Forgot Password URL',
+      defaultValue: defaultForgotURL,
+      group: 'Forgot Password',
     }),
     showSignUp: PropTypes.bool.tag({
       name: 'Show Sign up link',

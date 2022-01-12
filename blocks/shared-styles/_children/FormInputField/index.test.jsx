@@ -10,6 +10,35 @@ describe('Form Input Field', () => {
     expect(wrapper.text().includes('label text')).toBe(true);
   });
 
+  it('renders with a select input', () => {
+    const mockSelectOptions = [
+      {
+        code: '',
+        name: 'Please select value',
+      },
+      {
+        code: 'US',
+        name: 'United States',
+      },
+      {
+        code: 'CA',
+        name: 'Canada',
+      },
+    ];
+    const wrapper = mount(
+      <FormInputField
+        name="test"
+        type={FIELD_TYPES.SELECT}
+        options={mockSelectOptions}
+        optionValueKey="code"
+        optionLabelKey="name"
+        label="label text"
+      />,
+    );
+
+    expect(wrapper.find('option').length).toEqual(3);
+  });
+
   it('renders with a tip', () => {
     const wrapper = mount(<FormInputField name="test" tip="tip text" />);
 

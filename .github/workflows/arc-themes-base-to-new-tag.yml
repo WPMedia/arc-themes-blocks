@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       target_release_tag:
-        description: 'Base tag (eg, 1.18 if arc-themes-release-1.18 -> arc-themes-release-1.19)'
+        description: 'Base tag (eg, 1.18 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)'
         required: true
       new_release_tag:
-        description: 'New tag (eg, 1.19 if arc-themes-release-1.18 -> arc-themes-release-1.19)'
+        description: 'New tag (eg, 1.19 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)'
         required: true
 
 jobs:
@@ -44,8 +44,8 @@ jobs:
     # previous and any future jobs need this needs property
     needs: validate_tags
     env: 
-      TARGET_RELEASE_TAG: arc-themes-release-${{ github.event.inputs.target_release_tag }}
-      NEW_RELEASE_TAG: arc-themes-release-${{ github.event.inputs.new_release_tag }}
+      TARGET_RELEASE_TAG: arc-themes-release-version-${{ github.event.inputs.target_release_tag }}
+      NEW_RELEASE_TAG: arc-themes-release-version-${{ github.event.inputs.new_release_tag }}
     
     steps:
       - name: Checkout repo

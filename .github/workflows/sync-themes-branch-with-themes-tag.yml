@@ -1,0 +1,51 @@
+name: Publish to themes target tag based off of themes branch name
+on:
+  push:
+    branches:
+      # only run on branch names that match:
+      # arc-themes-release-{numbers}.{numbers} per product
+      - arc-themes-release-[0-9]+\.[0-9]+
+    # only run on changes to these files
+    paths:
+      - "**.js"
+      - "**.jsx"
+      - "**.scss"
+      - "**/intl.json"
+      - "**/README.md"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name
+    steps:
+      - name: Set git username
+        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "Jack Howard"
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.NODE_AUTH_TOKEN }}
+        
+      # pulls all tags (needed for lerna / semantic release to correctly version)
+      - name: Pull tags to give lerna access to git info
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Clean install (CI) dependencies if lockfile (above) changed
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+
+      - name: Run all tests
+        run: npm run test
+
+      - name: Publish to target tag based off of branch name
+        run: npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y

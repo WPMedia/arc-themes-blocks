@@ -5,8 +5,6 @@ import getProperties from 'fusion:properties';
 
 const TBL_WRAPPER = '.tbl-wrapper';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-
 const metaValueMock = () => 'article';
 
 describe('render Taboola widget', () => {

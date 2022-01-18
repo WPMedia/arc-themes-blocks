@@ -3,20 +3,6 @@ import { useFusionContext } from 'fusion:context';
 import { shallow, mount } from 'enzyme';
 import ArcAd from './default';
 
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  locale: 'en',
-}))));
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    arcSite: 'dagen',
-  })),
-}));
-jest.mock('fusion:intl', () => jest.fn(
-  () => ({
-    t: jest.fn(() => 'ADVERTISEMENT'),
-  }),
-));
-
 const SITE_PROPS_MOCK = {
   breakpoints: {
     small: 0,
@@ -155,7 +141,7 @@ describe('<ArcAd>', () => {
       const container = wrapper.find('.arcad-feature');
       expect(container).toHaveLength(1);
       expect(container.prop('displayAdLabel')).toBe(false);
-      expect(container.prop('adLabel')).toEqual('ADVERTISEMENT');
+      expect(container.prop('adLabel')).toEqual('ads-block.ad-label');
     });
 
     it('renders advertisement label when enabled', () => {
@@ -163,7 +149,7 @@ describe('<ArcAd>', () => {
       const container = wrapper.find('.arcad-feature');
       expect(container).toHaveLength(1);
       expect(container.prop('displayAdLabel')).toBe(true);
-      expect(container.prop('adLabel')).toEqual('ADVERTISEMENT');
+      expect(container.prop('adLabel')).toEqual('ads-block.ad-label');
     });
 
     it('renders custom advertisement label', () => {

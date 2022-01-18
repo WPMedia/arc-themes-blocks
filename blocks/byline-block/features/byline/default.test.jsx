@@ -1,14 +1,7 @@
-const React = require('react');
-const { mount } = require('enzyme');
-
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
+import React from 'react';
+import { mount } from 'enzyme';
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
 
 jest.mock('fusion:context', () => ({
   useFusionContext: jest.fn(() => ({

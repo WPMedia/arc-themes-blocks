@@ -7,11 +7,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   resizerURL: 'https://resizer.me',
 }))));
 
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
-
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
   Image: () => <div />,
   ImageMetadata: () => <div />,
@@ -910,19 +905,6 @@ describe('article-body chain', () => {
   });
 
   describe('correction text is rendered correctly', () => {
-    const correctionText = 'Correction!!';
-    const clarificationText = 'Clarification!!!!';
-
-    const mockPhrases = {
-      'article-body-block.clarification': clarificationText,
-      'article-body-block.correction': correctionText,
-    };
-
-    jest.mock('fusion:intl', () => ({
-      __esModule: true,
-      default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
-    }));
-
     it('should render correction text', () => {
       jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
       jest.mock('fusion:context', () => ({
@@ -959,7 +941,7 @@ describe('article-body chain', () => {
       );
       expect(wrapper.find('.correction')).toHaveLength(1);
       const correctionLabel = wrapper.find('.correction h2');
-      expect(correctionLabel.text()).toBe(correctionText);
+      expect(correctionLabel.text()).toBe('article-body-block.correction');
       expect(correctionLabel).toHaveLength(1);
       expect(wrapper.find('.correction p')).toHaveLength(1);
     });
@@ -998,7 +980,7 @@ describe('article-body chain', () => {
       expect(wrapper.find('.correction')).toHaveLength(1);
 
       const correctionLabel = wrapper.find('.correction h2');
-      expect(correctionLabel.text()).toBe(clarificationText);
+      expect(correctionLabel.text()).toBe('article-body-block.clarification');
     });
 
     it('should not render correction when no data is provided', () => {

@@ -351,7 +351,6 @@ describe('when add the alert to main section', () => {
     jest.advanceTimersByTime(1000);
     wrapper.update();
 
-    // this is from intl.json aria-label
     expect(wrapper.find('nav').props()['aria-label']).toBe('alert-bar-block.element-aria-label');
   });
 

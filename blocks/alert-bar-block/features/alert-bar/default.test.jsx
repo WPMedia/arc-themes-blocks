@@ -1,15 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-
+import AlertBar from './default';
 jest.mock('fusion:themes', () => jest.fn(() => ({})));
-
-jest.mock('fusion:properties', () => (jest.fn(() => ({}))));
-
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  // where default aria label is defined live
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
 
 describe('the alert bar feature for the default output type', () => {
   beforeEach(() => {
@@ -20,7 +12,6 @@ describe('the alert bar feature for the default output type', () => {
   });
 
   it('should render the alert bar with link and headline if collection returns a story', () => {
-    const { default: AlertBar } = require('./default');
     const customFields = {
       refreshIntervals: 120,
     };
@@ -60,7 +51,6 @@ describe('the alert bar feature for the default output type', () => {
   });
 
   it('should not render the alert bar if there is no story', () => {
-    const { default: AlertBar } = require('./default');
     const customFields = {
       refreshIntervals: 120,
     };
@@ -88,7 +78,6 @@ describe('the alert can handle user interaction', () => {
     jest.useFakeTimers();
   });
   it('must hide when click the close button', () => {
-    const { default: AlertBar } = require('./default');
     const content = {
       _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
       type: 'collection',
@@ -119,7 +108,6 @@ describe('the alert can handle user interaction', () => {
   });
 
   it("must set a cookie with the headline text when it's dismissed", () => {
-    const { default: AlertBar } = require('./default');
     const cookieText = 'This is a test headline for cookie';
     const encodedCookie = 'arcblock_alert-bar=This%20is%20a%20test%20headline%20for%20cookie';
     const content = {
@@ -153,7 +141,6 @@ describe('the alert can handle user interaction', () => {
   });
 
   it('must not render alert when cookie matches the headline text', () => {
-    const { default: AlertBar } = require('./default');
     const cookieText = 'cookie with text';
     const encodedCookie = 'arcblock_alert-bar=cookie%20with%20text';
 
@@ -202,7 +189,6 @@ describe('when add the alert to the header-nav-chain', () => {
         <div className="main" />
       </div>
     );
-    const { default: AlertBar } = require('./default');
     const customFields = {
       refreshIntervals: 120,
     };
@@ -263,7 +249,6 @@ describe('when add the alert to main section', () => {
         <div className="main">{children}</div>
       </div>
     );
-    const { default: AlertBar } = require('./default');
     const customFields = {
       refreshIntervals: 120,
     };
@@ -309,7 +294,6 @@ describe('when add the alert to main section', () => {
   });
 
   it('should render the block with the default aria-label', () => {
-    const { default: AlertBar } = require('./default');
     const content = {
       _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
       type: 'collection',
@@ -334,12 +318,11 @@ describe('when add the alert to main section', () => {
     const wrapper = mount(<AlertBar arcSite="the-sun" />);
     jest.advanceTimersByTime(1000);
     wrapper.update();
-    // default aria-label is Breaking News Alert
-    expect(wrapper.find('nav').props()['aria-label']).toBe('Breaking News Alert');
+    // default aria-label is alert-bar-block.element-aria-label
+    expect(wrapper.find('nav').props()['aria-label']).toBe('alert-bar-block.element-aria-label');
   });
 
   it('should render the block with the default aria-label if blank', () => {
-    const { default: AlertBar } = require('./default');
     const content = {
       _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
       type: 'collection',
@@ -369,11 +352,10 @@ describe('when add the alert to main section', () => {
     wrapper.update();
 
     // this is from intl.json aria-label
-    expect(wrapper.find('nav').props()['aria-label']).toBe('Breaking News Alert');
+    expect(wrapper.find('nav').props()['aria-label']).toBe('alert-bar-block.element-aria-label');
   });
 
   it('should render the block with the custom aria-label', () => {
-    const { default: AlertBar } = require('./default');
     const content = {
       _id: 'VTKOTRJXEVATHG7MELTPZ2RIBU',
       type: 'collection',

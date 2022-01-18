@@ -38,11 +38,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   locale: 'en',
 }))));
 
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
-
 describe('Given the list of author(s) from the article', () => {
   it('should return null if lazyLoad on the server and not in the admin', () => {
     const { default: AuthorBio } = require('./default');

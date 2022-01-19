@@ -106,7 +106,6 @@ class LeadArt extends Component {
           </>
         );
 
-
         return (
           <div className="lead-art-wrapper">
             <div
@@ -145,7 +144,6 @@ class LeadArt extends Component {
             )}
           </>
         );
-
 
         caption = (
           <ImageMetadata

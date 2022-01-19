@@ -56,7 +56,7 @@ jobs:
     needs: publish
     # checks for presence of "1." in branch name already matching criteria arc-themes-release-version-[0-9]+\.[0-9]+
     # contains('Hello', 'ello') -> returns true docs https://docs.github.com/en/actions/learn-github-actions/expressions#contains
-    if: contains(github.ref_name, '1.')
+    if: contains(github.ref_name, '-1.')
     env:
       NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name

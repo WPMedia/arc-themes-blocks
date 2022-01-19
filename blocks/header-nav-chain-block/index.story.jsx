@@ -111,3 +111,29 @@ export const squareLogo = () => (
     primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
   />
 );
+
+export const centerLogo = () => (
+  <PresentationalNav
+    backgroundColor="#fddede"
+    mediumBreakpoint={768}
+    closeDrawer={() => {}}
+    customFields={CUSTOM_FIELDS_BASE}
+    displayLinks
+    horizontalLinksHierarchy="horizontal-links"
+    isAdmin={false}
+    isSectionDrawerOpen={false}
+    logoAlignment="center"
+    menuButtonClickAction={() => { }}
+    navColor="light"
+    navColorClass="light"
+    navHeight={100}
+    scrollAdjustedNavHeight={100}
+    scrolled={false}
+    sectionAriaLabel="Menu des sections"
+    sections={[]}
+    showDotSeparators={false}
+    signInOrder={1}
+    primaryLogoPath="https://place-hold.it/100x100"
+    primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
+  />
+);

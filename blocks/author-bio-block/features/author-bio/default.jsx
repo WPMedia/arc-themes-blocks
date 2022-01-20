@@ -89,10 +89,10 @@ export const AuthorBioItems = ({ arcSite, content }) => {
     // Also check for their bio, which means that they are a staff
     if (
       author.description
-      && author.description.length > 0
-      && original
-      && original.bio
-      && original.bio.length > 0
+            && author.description.length > 0
+            && original
+            && original.bio
+            && original.bio.length > 0
     ) {
       // A loop to generate the list of social media links.
       // If no url is provided, then the social link will be skipped.
@@ -111,7 +111,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
                 primaryColor={PrimaryColor}
                 {...otherProps}
               >
-                {children}
+                { children }
               </MediaLinksStyled>
             );
 

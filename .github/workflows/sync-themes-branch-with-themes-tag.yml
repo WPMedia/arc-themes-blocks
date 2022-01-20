@@ -72,3 +72,4 @@ jobs:
 
       - name: Tag 1.x release with canary 
         run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.SYNCED_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} canary) || exit 0'
+        

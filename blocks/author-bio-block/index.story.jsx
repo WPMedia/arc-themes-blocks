@@ -250,6 +250,5 @@ export const emptyImageObject = () => {
     credits: { by: [authorObjectWithoutImage] },
   };
 
-  console.log(authorObjectWithoutImage);
   return (<AuthorBioItems content={data} />);
-}
+};

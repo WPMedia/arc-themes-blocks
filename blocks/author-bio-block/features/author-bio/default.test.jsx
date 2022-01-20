@@ -304,6 +304,37 @@ describe('Given the list of author(s) from the article', () => {
     expect(wrapper.find('img')).toHaveLength(0);
   });
 
+  it('should not show an image if there is no image object', () => {
+    const { default: AuthorBio } = require('./default');
+
+    jest.mock('fusion:context', () => ({
+      useFusionContext: jest.fn(() => ({
+        arcSite: 'the-sun',
+        globalContent: {
+          credits: {
+            by: [{
+              type: 'author',
+              name: 'Sara Carothers',
+              description: 'description',
+              additional_properties: {
+                original: {
+                  _id: 'saracarothers',
+                  byline: 'Sara Lynn Carothers',
+                  bio_page: '/author/sara-carothers/',
+                  bio: 'Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ',
+                },
+              },
+              social_links: [],
+            }],
+          },
+        },
+      })),
+    }));
+
+    const wrapper = mount(<AuthorBio />);
+    expect(wrapper.find('img')).toHaveLength(0);
+  });
+
   it('should show social icons for youtube, tumblr, Medium, Reddit, Pinterest, snap, whatsapp, facebook, rss, soundcloud not the mail fallback', () => {
     const { default: AuthorBio } = require('./default');
 

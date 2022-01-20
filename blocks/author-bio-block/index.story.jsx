@@ -242,3 +242,14 @@ export const notFoundSocialMedia = () => {
   };
   return (<AuthorBioItems content={data} />);
 };
+
+export const emptyImageObject = () => {
+  const { image, ...authorObjectWithoutImage } = authorObject;
+
+  const data = {
+    credits: { by: [authorObjectWithoutImage] },
+  };
+
+  console.log(authorObjectWithoutImage);
+  return (<AuthorBioItems content={data} />);
+}

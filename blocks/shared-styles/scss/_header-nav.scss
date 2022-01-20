@@ -233,6 +233,14 @@ body.nav-open {
   }
 
   &.logo {
+    &-center .nav-logo {
+      margin: 0 calculateRem(16px) 0 calculateRem(16px);
+
+      a {
+        justify-content: center;
+      }
+    }
+
     &-left {
       .nav-logo {
         justify-content: flex-start;
@@ -253,19 +261,6 @@ body.nav-open {
       }
     }
 
-    &-center {
-      > div {
-        flex: 1;
-
-        &.nav-logo {
-          margin: 0 calculateRem(16px) 0 calculateRem(16px);
-
-          a {
-            justify-content: center;
-          }
-        }
-      }
-    }
   }
 }
 

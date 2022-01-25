@@ -286,7 +286,6 @@ describe('LeadArt', () => {
 
     LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
     const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    console.log(wrapper.debug());
     expect(wrapper.find('Image').prop('loading')).toBe('eager');
   });
 
@@ -307,7 +306,7 @@ describe('LeadArt', () => {
         customFields={{
           loadingStrategy: 'lazy',
         }}
-      />
+      />,
     );
     expect(wrapper.find('Image').prop('loading')).toBe('eager');
   });

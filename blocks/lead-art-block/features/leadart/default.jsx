@@ -65,7 +65,12 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
-    const { hideTitle = false, hideCaption = false, hideCredits = false } = customFields;
+    const {
+      hideTitle = false,
+      hideCaption = false,
+      hideCredits = false,
+      imageLoadingStrategy = 'eager',
+    } = customFields;
 
     let AdBlock;
 
@@ -186,6 +191,7 @@ class LeadArt extends Component {
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
+                loading={imageLoadingStrategy} // eager by default, otherwise lazy
               />
             </div>
             {lightbox}
@@ -273,6 +279,18 @@ LeadArt.propTypes = {
       defaultValue: false,
       group: 'Display Options',
     }),
+    imageLoadingStrategy: PropTypes.oneOf([
+      'lazy', 'eager',
+    ]).tag(
+      {
+        label: 'Image Loading Strategy',
+        defaultValue: 'eager',
+        labels: {
+          eager: 'Eager',
+          lazy: 'Lazy',
+        },
+      },
+    ),
   }),
 };
 

@@ -151,6 +151,30 @@ export const image = () => {
   );
 };
 
+export const imageDefaultNativeEagerLoading = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtImage,
+    },
+  };
+  return (
+    <LeadArt globalContent={globalContent} customFields={{ imageLoadingStrategy: 'eager' }} />
+  );
+};
+
+export const imageNativeLazyLoading = () => {
+  const globalContent = {
+    arcSite: 'story-book',
+    promo_items: {
+      lead_art: leadArtImage,
+    },
+  };
+  return (
+    <LeadArt globalContent={globalContent} customFields={{ imageLoadingStrategy: 'lazy' }} />
+  );
+};
+
 export const imageNoTitle = () => {
   const globalContent = {
     arcSite: 'story-book',

@@ -74,8 +74,11 @@ class LeadArt extends Component {
 
     let AdBlock;
 
+    // todo: refactor dynamic loading of another block
     try {
+      /* istanbul ignore next */
       const { default: AdFeature } = require('@wpmedia/ads-block');
+      /* istanbul ignore next */
       AdBlock = () => (
         <AdFeature customFields={{
           adType: '300x250_gallery',
@@ -84,6 +87,7 @@ class LeadArt extends Component {
         />
       );
     } catch (e) {
+      /* istanbul ignore next */
       AdBlock = () => <p>Ad block not found</p>;
     }
 
@@ -221,7 +225,7 @@ class LeadArt extends Component {
             controlsFont={getThemeStyle(arcSite)['primary-font-family']}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
-            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            pageCountPhrase={/* istanbul ignore next */ (current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (<AdBlock />)}
             interstitialClicks={interstitialClicks}
             displayTitle={!hideTitle}

@@ -305,7 +305,8 @@ describe('LeadArt', () => {
       customFields={{
         // can be empty string if no option picked
         loadingStrategy: '',
-      }} />);
+      }}
+    />);
     expect(wrapper.find('Image').prop('loading')).toBe('eager');
   });
 

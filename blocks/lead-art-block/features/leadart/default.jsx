@@ -77,7 +77,6 @@ class LeadArt extends Component {
 
     let AdBlock;
 
-    // todo: refactor dynamic loading of another block
     try {
       /* istanbul ignore next */
       const { default: AdFeature } = require('@wpmedia/ads-block');

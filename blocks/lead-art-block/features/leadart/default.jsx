@@ -69,8 +69,11 @@ class LeadArt extends Component {
       hideTitle = false,
       hideCaption = false,
       hideCredits = false,
-      imageLoadingStrategy = 'eager',
+      imageLoadingStrategy,
     } = customFields;
+
+    // handles empty string for selecting no option and undefined for default
+    const allowedImageLoadingStrategy = imageLoadingStrategy ? imageLoadingStrategy : 'eager';
 
     let AdBlock;
 
@@ -195,7 +198,7 @@ class LeadArt extends Component {
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
-                loading={imageLoadingStrategy} // eager by default, otherwise lazy
+                loading={allowedImageLoadingStrategy} // eager by default, otherwise lazy
               />
             </div>
             {lightbox}

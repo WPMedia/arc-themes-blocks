@@ -291,6 +291,7 @@ LeadArt.propTypes = {
       {
         label: 'Image Loading Strategy',
         defaultValue: 'eager',
+        group: 'Display Options',
         labels: {
           eager: 'Eager',
           lazy: 'Lazy',

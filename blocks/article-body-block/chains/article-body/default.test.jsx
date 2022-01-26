@@ -2293,12 +2293,12 @@ describe('article-body chain', () => {
             content_elements: [
               {
                 _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
-                type: 'text',
+                type: 'copyright',
                 additional_properties: {
                   comments: [],
                   inline_comments: [],
                 },
-                content: 'Paragraph with Copyright Following',
+                content: '',
               },
             ],
           },
@@ -2314,6 +2314,67 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('article.article-body-wrapper').find('p.body-copyright').length).toEqual(0);
+    });
+  });
+
+  describe('Renders text type', () => {
+    it('should render text type', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Paragraph with Copyright Following',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-paragraph').length).toEqual(1);
+    });
+    it('should not render text type if no content', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: '',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-paragraph').length).toEqual(0);
     });
   });
 });

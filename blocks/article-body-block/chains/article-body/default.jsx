@@ -112,23 +112,27 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
       if (url) {
         const ArticleBodyImage = () => (
+          <Image
+            resizedImageOptions={resizedImageOptions}
+            url={url}
+            alt={altText}
+            smallWidth={widthsObject.small}
+            smallHeight={0}
+            mediumWidth={widthsObject.medium}
+            mediumHeight={0}
+            largeWidth={widthsObject.large}
+            largeHeight={0}
+            breakpoints={getProperties(arcSite)?.breakpoints}
+            resizerURL={getProperties(arcSite)?.resizerURL}
+          />
+        );
+
+        const ArticleBodyImageContainer = ({ children }) => (
           <figure
             className={figureImageClassName}
             key={key}
           >
-            <Image
-              resizedImageOptions={resizedImageOptions}
-              url={url}
-              alt={altText}
-              smallWidth={widthsObject.small}
-              smallHeight={0}
-              mediumWidth={widthsObject.medium}
-              mediumHeight={0}
-              largeWidth={widthsObject.large}
-              largeHeight={0}
-              breakpoints={getProperties(arcSite)?.breakpoints}
-              resizerURL={getProperties(arcSite)?.resizerURL}
-            />
+            {children}
             <figcaption>
               <ImageMetadata
                 subtitle={subtitle}
@@ -143,16 +147,19 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         // if link url then make entire image clickable
         if (link) {
           return (
-            <a
-              href={link}
-              aria-hidden="true"
-              tabIndex="-1"
-            >
-              <ArticleBodyImage />
-            </a>
+            <ArticleBodyImageContainer>
+              <a href={link}>
+                <ArticleBodyImage />
+              </a>
+            </ArticleBodyImageContainer>
           );
         }
-        return <ArticleBodyImage />;
+
+        return (
+          <ArticleBodyImageContainer>
+            <ArticleBodyImage />
+          </ArticleBodyImageContainer>
+        );
       }
       return null;
     }

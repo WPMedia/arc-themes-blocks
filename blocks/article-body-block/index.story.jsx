@@ -601,6 +601,30 @@ export const contentImage = () => {
   );
 };
 
+export const imageWithLinkContainer = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        {
+          ...mockImage,
+          additional_properties: {
+            ...mockImage.additional_properties,
+            link: 'https://wwww.arcxp.com',
+          },
+        },
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+    />
+  );
+};
+
 export const contentInterstitial = () => {
   const mockContext = {
     ...mockContextBase,

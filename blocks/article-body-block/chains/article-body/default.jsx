@@ -79,7 +79,11 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         vanity_credits: vanityCredits,
         // alignment not always present
         alignment = '',
+        additional_properties: additionalProperties = {},
       } = item;
+
+      // link url set in composer
+      const { link = '' } = additionalProperties;
 
       let widthsObject = {
         small: 768,
@@ -106,34 +110,51 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         figureImageClassName += allowedFloatValue === 'left' ? ' article-body-image-container--mobile-left-float' : ' article-body-image-container--mobile-right-float';
       }
 
-      return (url && url.length > 0) ? (
-        <figure
-          className={figureImageClassName}
-          key={key}
-        >
-          <Image
-            resizedImageOptions={resizedImageOptions}
-            url={url}
-            alt={altText}
-            smallWidth={widthsObject.small}
-            smallHeight={0}
-            mediumWidth={widthsObject.medium}
-            mediumHeight={0}
-            largeWidth={widthsObject.large}
-            largeHeight={0}
-            breakpoints={getProperties(arcSite)?.breakpoints}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-          />
-          <figcaption>
-            <ImageMetadata
-              subtitle={subtitle}
-              caption={caption}
-              credits={credits}
-              vanityCredits={vanityCredits}
+      if (url) {
+        const ArticleBodyImage = () => (
+          <figure
+            className={figureImageClassName}
+            key={key}
+          >
+            <Image
+              resizedImageOptions={resizedImageOptions}
+              url={url}
+              alt={altText}
+              smallWidth={widthsObject.small}
+              smallHeight={0}
+              mediumWidth={widthsObject.medium}
+              mediumHeight={0}
+              largeWidth={widthsObject.large}
+              largeHeight={0}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+              resizerURL={getProperties(arcSite)?.resizerURL}
             />
-          </figcaption>
-        </figure>
-      ) : null;
+            <figcaption>
+              <ImageMetadata
+                subtitle={subtitle}
+                caption={caption}
+                credits={credits}
+                vanityCredits={vanityCredits}
+              />
+            </figcaption>
+          </figure>
+        );
+
+        // if link url then make entire image clickable
+        if (link) {
+          return (
+            <a
+              href={link}
+              aria-hidden="true"
+              tabIndex="-1"
+            >
+              <ArticleBodyImage />
+            </a>
+          );
+        }
+        return <ArticleBodyImage />;
+      }
+      return null;
     }
 
     case 'interstitial_link': {

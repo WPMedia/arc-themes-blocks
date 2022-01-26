@@ -6,6 +6,7 @@ export default {
   parameters: {
     chromatic: {
       viewports: [320, 1200],
+      delay: 300,
     },
   },
 };

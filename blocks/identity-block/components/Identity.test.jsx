@@ -55,4 +55,34 @@ describe('Identity useIdentity Hook', () => {
     expect(testInitialization).toHaveBeenCalledWith(false);
     expect(testInitialization).toHaveBeenLastCalledWith(true);
   });
+  it('The getSignedInIdentity utility function returns the current signed in identity', () => {
+    const testUser = {
+      identities: [
+        {
+          userName: '93284374387433',
+          passwordReset: false,
+          type: 'Facebook',
+          lastLoginDate: 1639164734000,
+          locked: false,
+        },
+        {
+          userName: '106487204473538668210',
+          passwordReset: false,
+          type: 'Google',
+          lastLoginDate: 1639164736000,
+          locked: false,
+        },
+      ],
+    };
+
+    const Test = () => {
+      const { getSignedInIdentity } = useIdentity();
+      const getCurrent = getSignedInIdentity(testUser);
+      return <div className={`${getCurrent.type}`} />;
+    };
+
+    const wrapper = mount(<Test />);
+
+    expect(wrapper.find('.Google').exists()).toBe(true);
+  });
 });

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow-callback, max-len */
 import React from 'react';
 import { shallow } from 'enzyme';
 import mockData, { oneListItem } from '../mock-data';
@@ -93,5 +92,30 @@ describe('The search results list', () => {
       const wrapper = shallow(<SearchResultsList globalContent={oneListItem} arcSite="the-sun" deployment={jest.fn((path) => path)} />);
       expect(wrapper.find('.see-more').childAt(0).length).toEqual(1);
     });
+  });
+  it('should register search input change', () => {
+    const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
+    const wrapper = shallow(<SearchResultsList
+      globalContent={oneListItem}
+      arcSite="the-sun"
+      deployment={jest.fn((path) => path)}
+    />);
+
+    wrapper.find('.search-bar').simulate('change', { target: { value: 'test' } });
+    expect(wrapper.state().value).toEqual('test');
+  });
+  it('click see more button', () => {
+    const { default: SearchResultsList } = require('./global-content');
+    SearchResultsList.prototype.fetchContent = jest.fn();
+    const wrapper = shallow(
+      <SearchResultsList
+        globalContent={oneListItem}
+        arcSite="the-sun"
+        deployment={jest.fn((path) => path)}
+      />,
+    );
+    wrapper.find('.see-more > Button').simulate('click');
+    expect(wrapper.state().page).toEqual(2);
   });
 });

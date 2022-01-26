@@ -20,6 +20,7 @@ import {
   getNavSpecificSecondaryButtonTheme,
   getNavSpecificPrimaryButtonTheme,
 } from './_children/button/utils/getButtonStyle';
+import FormInputField, { FIELD_TYPES } from './_children/FormInputField';
 
 export {
   BUTTON_SIZES,
@@ -45,4 +46,6 @@ export {
   SmallPromoStyles,
   getNavSpecificSecondaryButtonTheme,
   getNavSpecificPrimaryButtonTheme,
+  FormInputField,
+  FIELD_TYPES,
 };

@@ -1,7 +1,22 @@
+.footer-item {
+  margin: map-get($spacers, 'xs') 0;
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+    margin: calculateRem(12px) 0;
+  }
+
+  > a {
+    color: $ui-medium-gray;
+    text-decoration: none;
+  }
+}
+
 footer {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  font-size: calculateRem(16px);
+  line-height: cacluateRem(24px);
 
   //Fix for IE 11 and non grid browsers
   .legacy-footer-row {
@@ -26,7 +41,6 @@ footer {
 
   .copyright {
     color: #6c7778;
-    font-size: calculateRem(14px);
     text-align: center;
     vertical-align: middle;
     @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
@@ -126,8 +140,6 @@ footer {
   }
 
   .footer-section {
-
-    font-size: 14px;
     justify-self: left;
 
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
@@ -138,18 +150,11 @@ footer {
     }
 
     .footer-header {
+      font-size: inherit;
+      line-height: inherit;
       font-weight: bold;
-      font-size: calculateRem(14px);
-      line-height: calculateRem(21px);
-    }
-
-    .footer-item {
-      margin: map-get($spacers, 'xs') 0;
-
-      > a {
-        color: $ui-medium-gray;
-        text-decoration: none;
-      }
     }
   }
 }
+
+

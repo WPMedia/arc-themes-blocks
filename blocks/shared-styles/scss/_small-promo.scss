@@ -14,16 +14,10 @@
 
   a {
     color: $ui-primary-font-color;
-    position: relative;
 
     h2 {
       display: inline;
     }
-  }
-
-  a > picture > img {
-    vertical-align: middle;
-    width: 100%;
   }
 
   .sm-promo-headline {
@@ -37,11 +31,6 @@
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       padding: 0;
     }
-  }
-
-  img {
-    height: auto;
-    max-width: 100%;
   }
 
   .flex-col {

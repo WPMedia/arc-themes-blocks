@@ -329,7 +329,8 @@ export const extractResizedParams = (storyObject) => storyObject?.promo_items?.b
 */
 const getResizedImageData = (
   data,
-  filterQuality = 70,
+  // underscore added to mean it is unused
+  _filterQuality,
   onlyUrl = false,
   respectAspectRatio = false,
   arcSite,
@@ -368,9 +369,8 @@ const getResizedImageData = (
     resizerURL,
     imageWidths,
     compressedParams: shouldCompressImageParams,
-  }, filterQuality);
-  // Note: filterQuality is passed in but never used...
-  // Should be moved to the options object and other functions to make use of option
+    // filterQuality should be moved to the options object and other functions to make use of option
+  });
 };
 
 export default getResizedImageData;

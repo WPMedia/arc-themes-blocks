@@ -3,7 +3,7 @@ import PropTypes from '@arc-fusion/prop-types';
 import { isServerSide } from '@wpmedia/engine-theme-sdk';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
-import FormInputField, { FIELD_TYPES } from '../../components/FormInputField';
+import { FormInputField, FIELD_TYPES } from '@wpmedia/shared-styles';
 import useIdentity from '../../components/Identity';
 import HeadlinedSubmitForm from '../../components/HeadlinedSubmitForm';
 import FormPasswordConfirm from '../../components/FormPasswordConfirm';

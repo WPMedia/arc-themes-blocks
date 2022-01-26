@@ -65,6 +65,7 @@ class LeadArt extends Component {
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
+    const { hideTitle = false, hideCaption = false, hideCredits = false } = customFields;
 
     let AdBlock;
 
@@ -131,7 +132,9 @@ class LeadArt extends Component {
             }}
           />
         );
-      } if (lead_art.type === 'image') {
+      }
+
+      if (lead_art.type === 'image') {
         if (buttonPosition !== 'hidden') {
           lightbox = (
             <>
@@ -139,7 +142,7 @@ class LeadArt extends Component {
                 <Lightbox
                   mainSrc={this.lightboxImgHandler()}
                   onCloseRequest={this.setIsOpenToFalse}
-                  imageCaption={lead_art.caption}
+                  imageCaption={!hideCaption ? lead_art.caption : null}
                 />
               )}
             </>
@@ -148,9 +151,9 @@ class LeadArt extends Component {
 
         caption = (
           <ImageMetadata
-            subtitle={lead_art.subtitle}
-            caption={lead_art.caption}
-            credits={lead_art.credits}
+            subtitle={!hideTitle ? lead_art.subtitle : null}
+            caption={!hideCaption ? lead_art.caption : null}
+            credits={!hideCredits ? lead_art.credits : null}
           />
         );
 
@@ -186,11 +189,11 @@ class LeadArt extends Component {
               />
             </div>
             {lightbox}
-            {caption && (
+            {(!hideTitle || !hideCaption || !hideCredits) ? (
               <figcaption>
                 {caption}
               </figcaption>
-            )}
+            ) : null}
 
           </figure>
         );
@@ -215,6 +218,9 @@ class LeadArt extends Component {
             pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (<AdBlock />)}
             interstitialClicks={interstitialClicks}
+            displayTitle={!hideTitle}
+            displayCaption={!hideCaption}
+            displayCredits={!hideCredits}
           />
         );
       }
@@ -249,6 +255,24 @@ LeadArt.propTypes = {
       group: 'Video',
     }),
     ...(videoPlayerCustomFields()),
+    hideTitle: PropTypes.bool.tag({
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
+      label: 'Hide Title',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
+    hideCaption: PropTypes.bool.tag({
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
+      label: 'Hide Caption',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
+    hideCredits: PropTypes.bool.tag({
+      description: 'This display option applies to Lead Art media types: Images and Gallery',
+      label: 'Hide Credits',
+      defaultValue: false,
+      group: 'Display Options',
+    }),
   }),
 };
 

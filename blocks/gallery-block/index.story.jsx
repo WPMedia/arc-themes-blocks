@@ -99,3 +99,133 @@ export const withPassedInContent = () => {
     />
   );
 };
+
+export const hideCaption = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideCaption: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const hideCredits = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideCredits: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const hideTitle = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideTitle: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const hideTitleAndCaption = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideTitle: true,
+    hideCaption: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const hideCaptionAndCredits = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideCaption: true,
+    hideCredits: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};
+
+export const hideCaptionAndCreditsAndTitle = () => {
+  const mockGlobalContent = {
+    ...mockGallery,
+    ...mockContextGlobalContent,
+  };
+
+  const mockCustomFields = {
+    inheritGlobalContent: true,
+    galleryContentConfig: {},
+    hideCaption: true,
+    hideCredits: true,
+    hideTitle: true,
+  };
+
+  return (
+    <GalleryPresentation
+      arcSite="StoryBook Site"
+      globalContent={mockGlobalContent}
+      customFields={mockCustomFields}
+    />
+  );
+};

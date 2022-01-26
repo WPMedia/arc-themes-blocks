@@ -73,7 +73,7 @@ class LeadArt extends Component {
     } = customFields;
 
     // handles empty string for selecting no option and undefined for default
-    const allowedImageLoadingStrategy = imageLoadingStrategy ? imageLoadingStrategy : 'eager';
+    const allowedImageLoadingStrategy = imageLoadingStrategy || 'eager';
 
     let AdBlock;
 

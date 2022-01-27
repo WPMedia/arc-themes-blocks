@@ -73,6 +73,7 @@
       'image description';
     grid-template-columns: minmax(0, calc(35%)) 1fr;
     grid-template-rows: min-content 1fr;
+    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
 
     &.no-image {
       grid-template-areas:

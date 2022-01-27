@@ -274,4 +274,61 @@ describe('LeadArt', () => {
     wrapper.update();
     expect(wrapper.state('isOpen')).toBeTruthy();
   });
+
+  it('renders eager loading strategy by default', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'image',
+        },
+      },
+    };
+
+    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
+    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
+    expect(wrapper.find('Image').prop('loading')).toBe('eager');
+  });
+
+  it('renders lazy loading strategy of eager if no option picked', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'image',
+        },
+      },
+    };
+
+    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
+    const wrapper = shallow(<LeadArt
+      arcSite="the-sun"
+      globalContent={globalContent}
+      customFields={{
+        // can be empty string if no option picked
+        loadingStrategy: '',
+      }}
+    />);
+    expect(wrapper.find('Image').prop('loading')).toBe('eager');
+  });
+
+  it('renders lazy loading strategy if picked', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'image',
+        },
+      },
+    };
+
+    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
+    const wrapper = shallow(
+      <LeadArt
+        arcSite="the-sun"
+        globalContent={globalContent}
+        customFields={{
+          loadingStrategy: 'lazy',
+        }}
+      />,
+    );
+    expect(wrapper.find('Image').prop('loading')).toBe('eager');
+  });
 });

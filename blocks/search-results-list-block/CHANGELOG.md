@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/search-results-list-block@5.17.0...@wpmedia/search-results-list-block@5.18.0) (2022-01-26)
+
+
+### Features
+
+* Update using search results button reusable theme button ([1127f2a](https://github.com/WPMedia/arc-themes-blocks/commit/1127f2af80ad9995f6e6239d6552468732b461ac))
+
+
+### Performance Improvements
+
+* Remove styled-components as a peer dep ([3ffb06b](https://github.com/WPMedia/arc-themes-blocks/commit/3ffb06b681d5f00199cba32771acaf29a1bb0575))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+### Performance Improvements
+
+* Don't publish snapshot files in blocks ([dd6772e](https://github.com/WPMedia/arc-themes-blocks/commit/dd6772e5ce203cfa62a89a881a1af5fde3b1852e)), closes [#806](https://github.com/WPMedia/arc-themes-blocks/issues/806)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+
+
+
 # [5.17.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/search-results-list-block@5.16.0...@wpmedia/search-results-list-block@5.17.0) (2021-09-15)
 
 

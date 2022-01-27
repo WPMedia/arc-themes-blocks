@@ -4,7 +4,7 @@ import { ArticleBodyChainPresentation } from './chains/article-body/default';
 export default {
   title: 'Chains/Article Body Chain',
   parameters: {
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 1200], diffThreshold: 0.2 },
   },
 };
 

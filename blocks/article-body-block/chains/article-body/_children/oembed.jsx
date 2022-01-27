@@ -8,9 +8,10 @@ const Oembed = ({
   // If element is a subtype of youtube or vimeo,
   // add responsive video classes
   // embed-responsive-16by9, etc are custom classes in news-theme-css
-  const responsiveClass = (['youtube', 'vimeo'].indexOf(element.subtype) !== -1) ? 'embed-responsive embed-responsive-16by9' : '';
+  const responsiveClass = (['youtube', 'vimeo'].indexOf(element.subtype) !== -1) ? 'embed-responsive embed-responsive-16by9 ' : '';
 
-  const cssClasses = `${responsiveClass} block-margin-bottom`;
+  // space added above so as to prevent unnecessary whitespace
+  const cssClasses = `${responsiveClass}block-margin-bottom`;
 
   return (
     <div className={cssClasses}>

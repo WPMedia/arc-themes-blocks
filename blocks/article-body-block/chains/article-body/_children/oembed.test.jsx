@@ -10,8 +10,8 @@ describe('the article body OEmbed component', () => {
       },
     }}
     />);
-    expect(wrapper.find('.embed-responsive-16by9').length).toEqual(0);
 
+    expect(wrapper.find('.embed-responsive-16by9').length).toEqual(0);
     expect(wrapper.html()).toContain('<div>Hello</div>');
   });
 
@@ -28,6 +28,7 @@ describe('the article body OEmbed component', () => {
         }}
       />,
     );
+
     expect(wrapper.find('.embed-responsive-16by9').length).toEqual(1);
   });
 });

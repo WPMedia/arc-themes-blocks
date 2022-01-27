@@ -10,6 +10,24 @@ describe('the article body OEmbed component', () => {
       },
     }}
     />);
+    expect(wrapper.find('.embed-responsive-16by9').length).toEqual(0);
+
     expect(wrapper.html()).toContain('<div>Hello</div>');
+  });
+
+  it('renders wide css class if type youtube', () => {
+    const wrapper = mount(
+      <Oembed
+        element={{
+          type: 'oembed_response',
+          subtype: 'youtube',
+          _id: '3OYDYWUAK5D4XP5WJ6PLS4KHYQ',
+          raw_oembed: {
+            html: '<iframe width="480" height="270" src="https://www.youtube.com/embed/817CYL6KuGo?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+          },
+        }}
+      />,
+    );
+    expect(wrapper.find('.embed-responsive-16by9').length).toEqual(1);
   });
 });

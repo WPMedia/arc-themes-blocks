@@ -61,7 +61,7 @@ class LeadArt extends Component {
 
   render() {
     const {
-      isOpen, buttonPosition, content, buttonLabel,
+      isOpen, content, buttonLabel,
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
@@ -99,25 +99,23 @@ class LeadArt extends Component {
       let caption = null;
 
       if (lead_art.type === 'raw_html') {
-        if (buttonPosition !== 'hidden') {
-          // this could be figure and figcaption, a react component
-          const mainContent = (
-            <>
-              <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-            </>
-          );
-          lightbox = (
-            <>
-              {isOpen && (
-                <Lightbox
-                  mainSrc={mainContent}
-                  onCloseRequest={this.setIsOpenToFalse}
-                  showImageCaption={false}
-                />
-              )}
-            </>
-          );
-        }
+        // this could be figure and figcaption, a react component
+        const mainContent = (
+          <>
+            <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+          </>
+        );
+        lightbox = (
+          <>
+            {isOpen && (
+              <Lightbox
+                mainSrc={mainContent}
+                onCloseRequest={this.setIsOpenToFalse}
+                showImageCaption={false}
+              />
+            )}
+          </>
+        );
 
         return (
           <div className="lead-art-wrapper">
@@ -146,19 +144,17 @@ class LeadArt extends Component {
       }
 
       if (lead_art.type === 'image') {
-        if (buttonPosition !== 'hidden') {
-          lightbox = (
-            <>
-              {isOpen && (
-                <Lightbox
-                  mainSrc={this.lightboxImgHandler()}
-                  onCloseRequest={this.setIsOpenToFalse}
-                  imageCaption={!hideCaption ? lead_art.caption : null}
-                />
-              )}
-            </>
-          );
-        }
+        lightbox = (
+          <>
+            {isOpen && (
+              <Lightbox
+                mainSrc={this.lightboxImgHandler()}
+                onCloseRequest={this.setIsOpenToFalse}
+                imageCaption={!hideCaption ? lead_art.caption : null}
+              />
+            )}
+          </>
+        );
 
         caption = (
           <ImageMetadata

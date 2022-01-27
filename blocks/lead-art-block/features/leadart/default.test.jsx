@@ -146,36 +146,6 @@ describe('LeadArt', () => {
     expect(wrapper).toEqual({});
   });
 
-  it('if raw html type has buttonPosition as hidden return null lightbox', () => {
-    const globalContent = {
-      promo_items: {
-        basic: {
-          type: 'raw_html',
-        },
-      },
-    };
-
-    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    wrapper.setState({ buttonPosition: 'hidden', isOpen: true });
-    wrapper.update();
-    expect(wrapper.find('ReactImageLightbox').length).toEqual(0);
-  });
-
-  it('if image type has buttonPosition as hidden return null lightbox', () => {
-    const globalContent = {
-      promo_items: {
-        basic: {
-          type: 'image',
-        },
-      },
-    };
-
-    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    wrapper.setState({ buttonPosition: 'hidden', isOpen: true });
-    wrapper.update();
-    expect(wrapper.find('ReactImageLightbox').length).toEqual(0);
-  });
-
   it('uses english phrases if no locale available', () => {
     getProperties.mockImplementation(() => (
       { locale: undefined }));

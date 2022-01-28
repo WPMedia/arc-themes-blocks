@@ -125,6 +125,22 @@ describe('LeadArt', () => {
     expect(wrapper.find('Gallery').length).toEqual(1);
   });
 
+  it('renders gallery with an empty ans headline if no basic headline provided', () => {
+    const globalContent = {
+      promo_items: {
+        lead_art: {
+          type: 'gallery',
+          headlines: {},
+        },
+      },
+    };
+
+    LeadArt.prototype.imgRef = { current: { querySelector: jest.fn() } };
+    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
+    expect(wrapper.find('Gallery').length).toEqual(1);
+    expect(wrapper.find('Gallery').props().ansHeadline).toEqual('');
+  });
+
   it('returns null if invalid lead art type', () => {
     const globalContent = {
       promo_items: {
@@ -144,36 +160,6 @@ describe('LeadArt', () => {
 
     const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
     expect(wrapper).toEqual({});
-  });
-
-  it('if raw html type has buttonPosition as hidden return null lightbox', () => {
-    const globalContent = {
-      promo_items: {
-        basic: {
-          type: 'raw_html',
-        },
-      },
-    };
-
-    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    wrapper.setState({ buttonPosition: 'hidden', isOpen: true });
-    wrapper.update();
-    expect(wrapper.find('ReactImageLightbox').length).toEqual(0);
-  });
-
-  it('if image type has buttonPosition as hidden return null lightbox', () => {
-    const globalContent = {
-      promo_items: {
-        basic: {
-          type: 'image',
-        },
-      },
-    };
-
-    const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-    wrapper.setState({ buttonPosition: 'hidden', isOpen: true });
-    wrapper.update();
-    expect(wrapper.find('ReactImageLightbox').length).toEqual(0);
   });
 
   it('uses english phrases if no locale available', () => {

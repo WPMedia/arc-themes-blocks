@@ -37,6 +37,15 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
     _id: key = index, type, content,
   } = item;
 
+  const {
+    hideImageTitle = false,
+    hideImageCaption = false,
+    hideImageCredits = false,
+    hideGalleryTitle = false,
+    hideGalleryCaption = false,
+    hideGalleryCredits = false,
+  } = customFields;
+
   // TODO: Split each type into a separate reusable component
   switch (type) {
     case 'text': {
@@ -130,15 +139,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         const ArticleBodyImageContainer = ({ children }) => (
           <figure
             className={figureImageClassName}
-            key={key}
           >
             {children}
             <figcaption>
               <ImageMetadata
-                subtitle={subtitle}
-                caption={caption}
-                credits={credits}
-                vanityCredits={vanityCredits}
+                subtitle={!hideImageTitle ? subtitle : null}
+                caption={!hideImageCaption ? caption : null}
+                credits={!hideImageCredits ? credits : null}
+                vanityCredits={!hideImageCredits ? vanityCredits : null}
               />
             </figcaption>
           </figure>
@@ -147,7 +155,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         // if link url then make entire image clickable
         if (link) {
           return (
-            <ArticleBodyImageContainer>
+            <ArticleBodyImageContainer key={key}>
               <a href={link}>
                 <ArticleBodyImage />
               </a>
@@ -156,7 +164,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
         }
 
         return (
-          <ArticleBodyImageContainer>
+          <ArticleBodyImageContainer key={key}>
             <ArticleBodyImage />
           </ArticleBodyImageContainer>
         );
@@ -286,7 +294,10 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
             expandPhrase={phrases.t('global.gallery-expand-button')}
             autoplayPhrase={phrases.t('global.gallery-autoplay-button')}
             pausePhrase={phrases.t('global.gallery-pause-autoplay-button')}
-            pageCountPhrase={(current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+            pageCountPhrase={/* istanbul ignore next */ (current, total) => phrases.t('global.gallery-page-count-text', { current, total })}
+            displayTitle={!hideGalleryTitle}
+            displayCaption={!hideGalleryCaption}
+            displayCredits={!hideGalleryCredits}
           />
         </section>
       );
@@ -431,6 +442,42 @@ ArticleBodyChain.propTypes = {
       description: 'Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.',
     }),
     ...(videoPlayerCustomFields()),
+    hideImageTitle: PropTypes.bool.tag({
+      description: 'This display option applies to all Images in the Article Body.',
+      label: 'Hide Title',
+      defaultValue: false,
+      group: 'Image Display Options',
+    }),
+    hideImageCaption: PropTypes.bool.tag({
+      description: 'This display option applies to all Images in the Article Body.',
+      label: 'Hide Caption',
+      defaultValue: false,
+      group: 'Image Display Options',
+    }),
+    hideImageCredits: PropTypes.bool.tag({
+      description: 'This display option applies to all Images in the Article Body.',
+      label: 'Hide Credits',
+      defaultValue: false,
+      group: 'Image Display Options',
+    }),
+    hideGalleryTitle: PropTypes.bool.tag({
+      description: 'This display option applies to all Galleries in the Article Body',
+      label: 'Hide Title',
+      defaultValue: false,
+      group: 'Gallery Display Options',
+    }),
+    hideGalleryCaption: PropTypes.bool.tag({
+      description: 'This display option applies to all Galleries in the Article Body',
+      label: 'Hide Caption',
+      defaultValue: false,
+      group: 'Gallery Display Options',
+    }),
+    hideGalleryCredits: PropTypes.bool.tag({
+      description: 'This display option applies to all Galleries in the Article Body',
+      label: 'Hide Credits',
+      defaultValue: false,
+      group: 'Gallery Display Options',
+    }),
   }),
 };
 

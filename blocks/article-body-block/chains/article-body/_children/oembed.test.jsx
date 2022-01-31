@@ -5,6 +5,19 @@ import Oembed from './oembed';
 describe('the article body OEmbed component', () => {
   it('renders passed in html', () => {
     const wrapper = mount(<Oembed element={{
+      subtype: 'other',
+      raw_oembed: {
+        html: '<div>Hello</div>',
+      },
+    }}
+    />);
+
+    expect(wrapper.find('.embed-responsive-16by9').length).toEqual(0);
+    expect(wrapper.html()).toContain('<div>Hello</div>');
+  });
+
+  it('renders when no subtype element key', () => {
+    const wrapper = mount(<Oembed element={{
       raw_oembed: {
         html: '<div>Hello</div>',
       },

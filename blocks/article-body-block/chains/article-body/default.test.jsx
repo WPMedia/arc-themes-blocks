@@ -13,6 +13,7 @@ jest.mock('fusion:intl', () => ({
 }));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  VideoPlayer: () => <div />,
   Image: () => <div />,
   ImageMetadata: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
@@ -415,26 +416,14 @@ describe('article-body chain', () => {
                 content_elements: [{
                   type: 'text',
                   content: 'A pull quote is for pulling out an individual quote from your story, to highlight it to the reader.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'HKJ3ZUOCFZBEJJZWGVQZXE6PR1Q',
                 }, {
                   type: 'text',
                   content: 'Pull quotes can have multiple paragraphs.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'LQH5LHMNX5BHJJNDTGGAXUT2O3Y',
                 }, {
                   type: 'text',
                   content: 'Here’s a third paragraph.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: '3E3BCEBT23NAR7EEGXWI42RZSYQ',
                 }],
                 subtype: 'pullquote',
@@ -452,44 +441,33 @@ describe('article-body chain', () => {
                 content_elements: [{
                   type: 'text',
                   content: 'A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'F6UMSFZWKNANBH5QV5A44CRSRGI',
                 }, {
                   type: 'text',
                   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'ULIZJUZ3PZ6CHHKO42KZUZMASDU',
+                }, {
+                  _id: 'NFS4D2FLDBEURJ2J7257O6ATBY',
+                  items: [{
+                    _id: 'H22DDRIVWJGNZEVUAPI5YWFJP4',
+                    content: 'List item?',
+                    type: 'text',
+                  }],
+                  list_type: 'unordered',
+                  type: 'list',
                 }, {
                   type: 'text',
                   content: 'Proin massa massa, suscipit et pretium vitae, posuere non turpis. Phasellus vel augue non mi dapibus congue vel vel eros. Cras id mattis metus, eget varius justo. Morbi quis erat quam.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'UNSELKNBF8BCVRCYKHGIG3FND44',
                 }, {
                   type: 'text',
                   content: 'Quisque tristique facilisis lorem, nec interdum nisi tristique vel. Donec dapibus ac velit quis consequat. Donec hendrerit purus risus, congue convallis risus vehicula non. Morbi mi nisi, hendrerit sit amet ornare a, scelerisque posuere nunc. Aliquam metus odio, finibus non pulvinar non, venenatis sit amet sem.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'KWMRNJ6DJ5D12HJHGFNZF52JGIFI',
                 }],
                 subtype: 'blockquote',
                 citation: {
                   type: 'text',
                   content: 'Lorem Ipsum Generator',
-                },
-                additional_properties: {
-                  _id: '4RTIZEM4Y5CFXI344IF3RO64DCYA',
-                  comments: [],
                 },
               },
             ],
@@ -2375,6 +2353,33 @@ describe('article-body chain', () => {
       );
 
       expect(wrapper.find('article.article-body-wrapper').find('p.body-paragraph').length).toEqual(0);
+    });
+  });
+
+  describe('Renders Video type', () => {
+    it('should render Vidoe type', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'video',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('VideoPlayer').length).toEqual(1);
     });
   });
 });

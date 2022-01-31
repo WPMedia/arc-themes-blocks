@@ -14,8 +14,6 @@ import SearchResult from './search-result';
 // shared with results list
 // to modify, go to the shared styles block
 import '@wpmedia/shared-styles/scss/_results-list.scss';
-import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
-import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 // not shared with results list
 import './search-results-list.scss';

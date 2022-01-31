@@ -11,8 +11,6 @@ import { HeadingSection } from '@wpmedia/shared-styles';
 // shared with search results list
 // to modify, go to the shared styles block
 import '@wpmedia/shared-styles/scss/_results-list.scss';
-import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
-import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 
 import { resolveDefaultPromoElements } from './results/helpers';
 import Results from './results';

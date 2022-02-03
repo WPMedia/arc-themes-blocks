@@ -1,5 +1,5 @@
 # `@wpmedia/header-nav-chain-block`
-_Please provide a 1-2 sentence description of what the block is and what it does._
+This block is intended to be used as the header navigation chain block. 
 
 ## Acceptance Criteria
 - Add AC relevant to the block

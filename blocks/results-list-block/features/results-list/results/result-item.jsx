@@ -33,10 +33,10 @@ const ResultItem = React.memo(React.forwardRef(({
   const imageURL = extractImageFromStory(element);
   const url = websites[arcSite].website_url;
   return (
-    <div className="list-item" ref={ref}>
+    <div className={`list-item ${!showImage ? 'no-image' : ''}`} ref={ref}>
       {(showImage)
         ? (
-          <div className="results-list--image-container mobile-order-2 mobile-image">
+          <div className="results-list--image-container">
             <a
               href={url}
               title={headlineText}
@@ -57,7 +57,7 @@ const ResultItem = React.memo(React.forwardRef(({
         : null }
       {(showItemOverline || showHeadline)
         ? (
-          <div className="results-list--headline-container mobile-order-1">
+          <div className="results-list--headline-container">
             {(showItemOverline)
               ? (
                 <Overline
@@ -77,7 +77,7 @@ const ResultItem = React.memo(React.forwardRef(({
         : null }
       {(showDescription || showDate || showByline)
         ? (
-          <div className="results-list--description-author-container mobile-order-3">
+          <div className="results-list--description-author-container">
             {(showDescription && descriptionText)
               ? (
                 <a href={url} title={headlineText}>

@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/lead-art-block@5.16.0...@wpmedia/lead-art-block@5.17.0) (2022-01-26)
+
+
+### Features
+
+* Use primary font for expand span. Remove unnecessary primary font call. ([40c0e9a](https://github.com/WPMedia/arc-themes-blocks/commit/40c0e9ad1dd56662ceaf48a7f43a6af5eea49d09))
+
+
+### Performance Improvements
+
+* Remove unnecessary figcaption declaration of primary font ([7bc03b3](https://github.com/WPMedia/arc-themes-blocks/commit/7bc03b3ff7c8b325ffc47b32e09fa541656dcf27))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/lead-art-block@5.15.0...@wpmedia/lead-art-block@5.16.0) (2021-09-15)
 
 

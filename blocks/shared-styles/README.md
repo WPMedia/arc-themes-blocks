@@ -1,5 +1,5 @@
 # `@wpmedia/shared-styles`
-_Block containing shared styles (sass file partials)._
+This block is reused by others for the time being.
 
 ## Acceptance Criteria
 - Add AC relevant to the block

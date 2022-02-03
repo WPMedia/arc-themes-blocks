@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+# this only for targeting arc-themes-release-version-1.19 at the moment 
+# fetching latest changes to ensure the origin/arc-themes-release-version-1.19 is up to date
+git fetch -a --depth 100 && npm run lint:changed-feature-branch && npm run test:changed-feature-branch

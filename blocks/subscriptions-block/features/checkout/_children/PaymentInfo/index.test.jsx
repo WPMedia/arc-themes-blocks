@@ -7,11 +7,6 @@ jest.mock('fusion:properties', () => (jest.fn(() => ({
   locale: 'en',
 }))));
 
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn(() => ({ t: jest.fn((phrase) => phrase) })),
-}));
-
 describe('PaymentInfo', () => {
   it('renders null if no stripe promise', () => {
     const wrapper = mount(

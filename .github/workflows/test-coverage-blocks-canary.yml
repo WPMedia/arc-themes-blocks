@@ -1,4 +1,4 @@
-name: Test Blocks And Linting - Changed from Canary Base
+name: Test Blocks And Linting - Changed from themes release base
 
 on:
   pull_request:
@@ -6,7 +6,10 @@ on:
     types: [synchronize, opened]
     # only prs targeting canary
     # test:changed-feature-branch currently only targets canary for changed files
-    branches: [canary]
+    branches:
+      - canary
+      # arc-themes-release-version-{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+
 
 jobs:
   ensure_minimum_test_coverage_linting:
@@ -31,7 +34,7 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: ~/.npm
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Clean install (CI) dependencies if lockfile (above) changed
@@ -40,10 +43,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
-      - name: Run tests on changed since canary with coverage
+      - name: Run tests on changed since base themes release
         run: npm run test:changed-feature-branch
 
-      - name: Check linting of changed since canary
+      - name: Check linting of changed since base themes release
         run: npm run lint:changed-feature-branch
 
       - name: Check failure status

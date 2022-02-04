@@ -12,9 +12,7 @@
 .top-table-list-section-large {
   .large-promo {
     .lg-promo-headline {
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-top: - map-get($spacers, 'xs');
-      }
+      padding-top: map-get($spacers, 'xs');
     }
   }
 }

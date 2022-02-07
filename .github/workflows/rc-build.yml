@@ -43,7 +43,7 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: node_modules
           key: node-modules-${{ hashFiles('package-lock.json') }}
 
       - name: Clean install (CI) dependencies if lockfile (above) changed

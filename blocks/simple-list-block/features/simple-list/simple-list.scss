@@ -12,7 +12,7 @@
     line-height: calculateRem(24px);
   }
 
-  a > picture > img {
+  a > picture > img { /* stylelint-disable-line */
     vertical-align: middle;
   }
 
@@ -31,7 +31,7 @@
       flex: 0 0 33%;
       text-decoration: none;
 
-      img {
+      img { /* stylelint-disable-line */
         height: auto;
         object-fit: cover;
         width: 100%;
@@ -45,13 +45,19 @@
       padding-left: calculateRem(16px);
       text-decoration: none;
 
-      .simple-list-headline-text {
+      .simple-list-headline-text { /* stylelint-disable-line */
         font-size: calculateRem(16px);
         font-weight: normal;
         line-height: calculateRem(24px);
-        max-height: 72px;
         overflow: hidden;
+        /*
+          Webkit prefix to make line clamp for is needed as of Feb, 2022,
+          although these prefixes work in Chrome, FF, Safari, Android Mobile and Edge
+         */
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
       }
     }
   }

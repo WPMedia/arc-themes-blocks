@@ -11,33 +11,11 @@ describe('the article body List component', () => {
           type: 'text',
           content: 'Indented under 2',
           _id: 'IOY3SN76GVFI3MUDN3PX4V32AA',
-          additional_properties: {
-            comments: [
-
-            ],
-            inline_comments: [
-
-            ],
-          },
-          block_properties: {
-
-          },
         },
         {
           type: 'text',
           content: 'Another thing indented under 2',
           _id: 'MX643WWQPZCYZHTZYMHCIML6SU',
-          additional_properties: {
-            comments: [
-
-            ],
-            inline_comments: [
-
-            ],
-          },
-          block_properties: {
-
-          },
         },
       ],
       _id: 'PSQTOBXAGZGKNOSBMOAUJ6EYSA',
@@ -58,33 +36,11 @@ describe('the article body List component', () => {
           type: 'text',
           content: 'Indented under 2',
           _id: 'OWQEXQT6N5BTPF2CDZYVND6IAQ',
-          additional_properties: {
-            comments: [
-
-            ],
-            inline_comments: [
-
-            ],
-          },
-          block_properties: {
-
-          },
         },
         {
           type: 'text',
           content: 'Another thing indented under 2',
           _id: 'UG52XTXHHRDN5KUPKCGTKE4NMM',
-          additional_properties: {
-            comments: [
-
-            ],
-            inline_comments: [
-
-            ],
-          },
-          block_properties: {
-
-          },
         },
       ],
       _id: 'FLXZDZLOFRGNLMALFGLJGLDPAM',
@@ -109,33 +65,11 @@ describe('the article body List component', () => {
               type: 'text',
               content: 'Indented under 2',
               _id: 'IOY3SN76GVFI3MUDN3PX4V32AA',
-              additional_properties: {
-                comments: [
-
-                ],
-                inline_comments: [
-
-                ],
-              },
-              block_properties: {
-
-              },
             },
             {
               type: 'text',
               content: 'Another thing indented under 2',
               _id: 'MX643WWQPZCYZHTZYMHCIML6SU',
-              additional_properties: {
-                comments: [
-
-                ],
-                inline_comments: [
-
-                ],
-              },
-              block_properties: {
-
-              },
             },
           ],
           _id: 'PSQTOBXAGZGKNOSBMOAUJ6EYSA',
@@ -144,17 +78,6 @@ describe('the article body List component', () => {
           type: 'text',
           content: 'Another thing indented under 3',
           _id: 'UG52XTXHHRDN5KUPKCGTKE4NMM',
-          additional_properties: {
-            comments: [
-
-            ],
-            inline_comments: [
-
-            ],
-          },
-          block_properties: {
-
-          },
         },
       ],
       _id: 'FLXZDZLOFRGNLMALFGLJGLDPAM',

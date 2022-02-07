@@ -529,6 +529,29 @@ export const contentGallery = () => {
   );
 };
 
+export const contentGalleryNoTitleCaptionOrCredits = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        mockGallery,
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+      customFields={{
+        hideGalleryTitle: true,
+        hideGalleryCaption: true,
+        hideGalleryCredits: true,
+      }}
+    />
+  );
+};
+
 export const contentHeader2 = () => {
   const mockContext = {
     ...mockContextBase,
@@ -597,6 +620,29 @@ export const contentImage = () => {
   return (
     <ArticleBodyChainPresentation
       context={mockContext}
+    />
+  );
+};
+
+export const contentImageNoTitleCaptionOrCredits = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        mockImage,
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+      customFields={{
+        hideImageTitle: true,
+        hideImageCaption: true,
+        hideImageCredits: true,
+      }}
     />
   );
 };

@@ -13,6 +13,7 @@ jest.mock('fusion:intl', () => ({
 }));
 
 jest.mock('@wpmedia/engine-theme-sdk', () => ({
+  VideoPlayer: () => <div />,
   Image: () => <div />,
   ImageMetadata: () => <div />,
   LazyLoad: ({ children }) => <>{ children }</>,
@@ -415,26 +416,14 @@ describe('article-body chain', () => {
                 content_elements: [{
                   type: 'text',
                   content: 'A pull quote is for pulling out an individual quote from your story, to highlight it to the reader.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'HKJ3ZUOCFZBEJJZWGVQZXE6PR1Q',
                 }, {
                   type: 'text',
                   content: 'Pull quotes can have multiple paragraphs.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'LQH5LHMNX5BHJJNDTGGAXUT2O3Y',
                 }, {
                   type: 'text',
                   content: 'Here’s a third paragraph.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: '3E3BCEBT23NAR7EEGXWI42RZSYQ',
                 }],
                 subtype: 'pullquote',
@@ -452,44 +441,33 @@ describe('article-body chain', () => {
                 content_elements: [{
                   type: 'text',
                   content: 'A block quote is for when you’re citing another text at length. It’s important that it’s formatted differently so that readers know you’re quoting from another source. Block quotes an have multiple paragraphs – this one has 4 total.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'F6UMSFZWKNANBH5QV5A44CRSRGI',
                 }, {
                   type: 'text',
                   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nulla ligula, lobortis egestas urna vel, pulvinar dapibus nunc. Nulla rutrum, ligula ac rutrum tempor, erat lectus posuere ipsum, quis facilisis velit neque quis erat.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'ULIZJUZ3PZ6CHHKO42KZUZMASDU',
+                }, {
+                  _id: 'NFS4D2FLDBEURJ2J7257O6ATBY',
+                  items: [{
+                    _id: 'H22DDRIVWJGNZEVUAPI5YWFJP4',
+                    content: 'List item?',
+                    type: 'text',
+                  }],
+                  list_type: 'unordered',
+                  type: 'list',
                 }, {
                   type: 'text',
                   content: 'Proin massa massa, suscipit et pretium vitae, posuere non turpis. Phasellus vel augue non mi dapibus congue vel vel eros. Cras id mattis metus, eget varius justo. Morbi quis erat quam.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'UNSELKNBF8BCVRCYKHGIG3FND44',
                 }, {
                   type: 'text',
                   content: 'Quisque tristique facilisis lorem, nec interdum nisi tristique vel. Donec dapibus ac velit quis consequat. Donec hendrerit purus risus, congue convallis risus vehicula non. Morbi mi nisi, hendrerit sit amet ornare a, scelerisque posuere nunc. Aliquam metus odio, finibus non pulvinar non, venenatis sit amet sem.',
-                  additional_properties: {
-                    comments: [],
-                    inline_comments: [],
-                  },
                   _id: 'KWMRNJ6DJ5D12HJHGFNZF52JGIFI',
                 }],
                 subtype: 'blockquote',
                 citation: {
                   type: 'text',
                   content: 'Lorem Ipsum Generator',
-                },
-                additional_properties: {
-                  _id: '4RTIZEM4Y5CFXI344IF3RO64DCYA',
-                  comments: [],
                 },
               },
             ],
@@ -1279,6 +1257,89 @@ describe('article-body chain', () => {
   });
 
   describe('Render image correctly', () => {
+    const MOCK_IMAGE_DATA = {
+      _id: 'CITIAYX2ERDOPP2TPJGEUV7SNQ',
+      additional_properties: {
+        fullSizeResizeUrl: '/photo/resize/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+        galleries: [
+          {
+            headlines: {
+              basic: 'A day at the beach',
+            },
+            _id: 'ZMTIFZGC2NCYTDVU7GIGHJKEUY',
+          },
+        ],
+        ingestionMethod: 'manual',
+        keywords: [
+
+        ],
+        mime_type: 'image/jpeg',
+        originalName: 'DeathtoStock_EnergyandSerenity4.jpg',
+        originalUrl: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+        owner: 'sara.carothers@washpost.com',
+        proxyUrl: '/photo/resize/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+        published: true,
+        resizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+        restricted: false,
+        thumbnailResizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/aMX7W71KcKyhfbNdL5RBDpt4RY8=/300x0/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+        version: 1,
+        comments: [
+
+        ],
+        _id: 'VRN2LG34XNDX5MZD64SPU4UNYY',
+      },
+      address: {
+
+      },
+      alt_text: 'A person walks down a path with their surfboard towards the ocean.',
+      caption: "Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
+      created_date: '2019-07-09T22:26:02Z',
+      credits: {
+        affiliation: [
+          {
+            name: 'Death to Stock Photo',
+            type: 'author',
+          },
+        ],
+        by: [
+          {
+            byline: 'Brett Danielsen (custom credit)',
+            name: 'Brett Danielsen',
+            type: 'author',
+          },
+        ],
+      },
+      distributor: {
+        mode: 'reference',
+        reference_id: '508c6d12-f2bb-47db-a836-b2b5de225c43',
+      },
+      height: 3744,
+      image_type: 'photograph',
+      last_updated_date: '2019-07-09T22:29:42Z',
+      licensable: false,
+      owner: {
+        id: 'corecomponents',
+        sponsored: false,
+      },
+      source: {
+        name: 'Death to Stock Photo',
+        source_type: 'stock',
+        edit_url: 'https://corecomponents.arcpublishing.com/photo/CITIAYX2ERDOPP2TPJGEUV7SNQ',
+        system: 'Anglerfish',
+      },
+      subtitle: 'Australia surf trip',
+      taxonomy: {
+        associated_tasks: [
+
+        ],
+      },
+      type: 'image',
+      url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
+      version: '0.9.0',
+      width: 5616,
+      resized_params: { '1440x0': '' },
+    };
+
     it('should render image with figcaption and author', () => {
       jest.mock('fusion:properties', () => (jest.fn(() => ({
         resizerURL: 'https://fake.cdn.com/resizer',
@@ -1301,88 +1362,7 @@ describe('article-body chain', () => {
             type: 'story',
             version: '0.10.2',
             content_elements: [
-              {
-                _id: 'CITIAYX2ERDOPP2TPJGEUV7SNQ',
-                additional_properties: {
-                  fullSizeResizeUrl: '/photo/resize/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                  galleries: [
-                    {
-                      headlines: {
-                        basic: 'A day at the beach',
-                      },
-                      _id: 'ZMTIFZGC2NCYTDVU7GIGHJKEUY',
-                    },
-                  ],
-                  ingestionMethod: 'manual',
-                  keywords: [
-
-                  ],
-                  mime_type: 'image/jpeg',
-                  originalName: 'DeathtoStock_EnergyandSerenity4.jpg',
-                  originalUrl: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                  owner: 'sara.carothers@washpost.com',
-                  proxyUrl: '/photo/resize/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                  published: true,
-                  resizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/x3tXYyoI4592s_zt6DAIHhv2kEw=/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                  restricted: false,
-                  thumbnailResizeUrl: 'http://thumbor-prod-us-east-1.photo.aws.arc.pub/aMX7W71KcKyhfbNdL5RBDpt4RY8=/300x0/arc-anglerfish-arc2-prod-corecomponents/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                  version: 1,
-                  comments: [
-
-                  ],
-                  _id: 'VRN2LG34XNDX5MZD64SPU4UNYY',
-                },
-                address: {
-
-                },
-                alt_text: 'A person walks down a path with their surfboard towards the ocean.',
-                caption: "Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break. ",
-                created_date: '2019-07-09T22:26:02Z',
-                credits: {
-                  affiliation: [
-                    {
-                      name: 'Death to Stock Photo',
-                      type: 'author',
-                    },
-                  ],
-                  by: [
-                    {
-                      byline: 'Brett Danielsen (custom credit)',
-                      name: 'Brett Danielsen',
-                      type: 'author',
-                    },
-                  ],
-                },
-                distributor: {
-                  mode: 'reference',
-                  reference_id: '508c6d12-f2bb-47db-a836-b2b5de225c43',
-                },
-                height: 3744,
-                image_type: 'photograph',
-                last_updated_date: '2019-07-09T22:29:42Z',
-                licensable: false,
-                owner: {
-                  id: 'corecomponents',
-                  sponsored: false,
-                },
-                source: {
-                  name: 'Death to Stock Photo',
-                  source_type: 'stock',
-                  edit_url: 'https://corecomponents.arcpublishing.com/photo/CITIAYX2ERDOPP2TPJGEUV7SNQ',
-                  system: 'Anglerfish',
-                },
-                subtitle: 'Australia surf trip',
-                taxonomy: {
-                  associated_tasks: [
-
-                  ],
-                },
-                type: 'image',
-                url: 'https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg',
-                version: '0.9.0',
-                width: 5616,
-                resized_params: { '1440x0': '' },
-              },
+              MOCK_IMAGE_DATA,
             ],
           },
           arcSite: 'the-sun',
@@ -2044,6 +2024,119 @@ describe('article-body chain', () => {
       expect(figureElClassNames.includes('article-body-image-container--mobile-left-float')).toBe(false);
       expect(figureElClassNames.includes('article-body-image-container')).toBe(true);
     });
+    it('should render a link url around the image if one is available', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              {
+                ...MOCK_IMAGE_DATA,
+                additional_properties: {
+                  ...MOCK_IMAGE_DATA.additional_properties,
+                  link: 'https://wwww.arcxp.com',
+                },
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('a').prop('href')).toEqual('https://wwww.arcxp.com');
+    });
+    it('still renders image without additional_properties', () => {
+      const {
+        additional_properties: _additionalProperties,
+        ...mockDataWithoutAdditionalProperties
+      } = MOCK_IMAGE_DATA;
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              mockDataWithoutAdditionalProperties,
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      const figureEl = wrapper.find('figure');
+      expect(figureEl).toHaveLength(1);
+      expect(figureEl.find('Image')).toHaveLength(1);
+      const figCaptionEl = figureEl.find('figcaption');
+      expect(figCaptionEl).toHaveLength(1);
+    });
+    it('renders alignment float right image', () => {
+      jest.mock('fusion:context', () => ({
+        useAppContext: jest.fn(() => ({
+          globalContent: {
+            content_elements: [
+              {
+                caption: 'my cool caption',
+                subtitle: 'my cool subtitle',
+              },
+            ],
+          },
+        })),
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: '22ACHIRFI5CD5GRFON6AL3JSJE',
+            type: 'story',
+            version: '0.10.2',
+            content_elements: [
+              {
+                ...MOCK_IMAGE_DATA,
+                alignment: 'right',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('figure.article-body-image-container--mobile-right-float').length).toBe(1);
+    });
   });
 
   describe('Render divider correctly', () => {
@@ -2178,12 +2271,12 @@ describe('article-body chain', () => {
             content_elements: [
               {
                 _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
-                type: 'text',
+                type: 'copyright',
                 additional_properties: {
                   comments: [],
                   inline_comments: [],
                 },
-                content: 'Paragraph with Copyright Following',
+                content: '',
               },
             ],
           },
@@ -2199,6 +2292,94 @@ describe('article-body chain', () => {
         </ArticleBodyChain>,
       );
       expect(wrapper.find('article.article-body-wrapper').find('p.body-copyright').length).toEqual(0);
+    });
+  });
+
+  describe('Renders text type', () => {
+    it('should render text type', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: 'Paragraph with Copyright Following',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-paragraph').length).toEqual(1);
+    });
+    it('should not render text type if no content', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'text',
+                additional_properties: {
+                  comments: [],
+                  inline_comments: [],
+                },
+                content: '',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('article.article-body-wrapper').find('p.body-paragraph').length).toEqual(0);
+    });
+  });
+
+  describe('Renders Video type', () => {
+    it('should render Vidoe type', () => {
+      jest.mock('fusion:context', () => ({
+        useFusionContext: jest.fn(() => ({
+          globalContent: {
+            _id: 'NGGXZJ4HAJH5DI3SS65EVBMEMQ',
+            type: 'story',
+            version: '0.10.6',
+            content_elements: [
+              {
+                _id: 'TLF25CWTCBBOHOVFPK4C2RR5JA',
+                type: 'video',
+              },
+            ],
+          },
+          arcSite: 'the-sun',
+        })),
+      }));
+      const { default: ArticleBodyChain } = require('./default');
+      const wrapper = mount(
+        <ArticleBodyChain />,
+      );
+
+      expect(wrapper.find('VideoPlayer').length).toEqual(1);
     });
   });
 });

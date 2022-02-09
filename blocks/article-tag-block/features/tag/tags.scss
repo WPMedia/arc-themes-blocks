@@ -16,12 +16,12 @@
   color: #fff;
   display: flex;
   font-size: 0.75rem;
-  height: 1.5rem;
   justify-content: center;
   line-height: calculateRem(24px);
   margin: 0.5rem;
   padding: 0 0.9375rem;
   text-decoration: none;
+  text-align: center;
   @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
     line-height: 0.875rem;
   }

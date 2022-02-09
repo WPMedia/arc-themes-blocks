@@ -5,7 +5,7 @@ export default {
   title: 'Chains/Header Nav Block',
   parameters: {
     chromatic: {
-      viewports: [320, 1200],
+      viewports: [320, 1200, 1800],
       delay: 300,
     },
   },

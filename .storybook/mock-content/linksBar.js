@@ -38,8 +38,8 @@ export const linksBarMock = (query) => {
         }
       ],
     }
-  }
+  };
 
   return mocks[query.hierarchy] || mocks.noData;
 
-}
+};

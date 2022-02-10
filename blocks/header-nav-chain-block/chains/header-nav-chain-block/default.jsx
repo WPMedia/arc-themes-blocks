@@ -169,7 +169,7 @@ export function PresentationalNav(props) {
           focusTrapOptions={{
             allowOutsideClick: true,
             returnFocusOnDeactivate: true,
-            onDeactivate: () => {
+            onDeactivate: /* istanbul ignore next */ () => {
             // Focus the next focusable element in the navbar
             // Workaround for issue where 'nav-sections-btn' wont programatically focus
               const focusElement = document.querySelector(`
@@ -182,9 +182,16 @@ export function PresentationalNav(props) {
                 focusElement.blur();
               }
             },
+            fallbackFocus: /* istanbul ignore next */ () => document.getElementById('nav-sections'),
           }}
         >
-          <div className="inner-drawer-nav" style={{ zIndex: 10 }}>
+          {/**
+           * Need to disable tabindex lint as this is a fallback for when section menu
+           * has no items and FocusTrap requires at least one tabable element
+           * which would be the follow container thats used wuth `fallbackFocus`
+          */}
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+          <div className="inner-drawer-nav" style={{ zIndex: 10 }} tabIndex={!sections.length ? '-1' : null}>
             <SectionNav
               sections={sections}
               isHidden={!isSectionDrawerOpen}
@@ -333,6 +340,7 @@ const Nav = (props) => {
     };
   }, []);
 
+  // istanbul ignore next
   useEffect(() => {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {

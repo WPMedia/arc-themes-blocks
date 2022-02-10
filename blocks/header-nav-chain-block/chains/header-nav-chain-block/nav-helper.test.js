@@ -26,6 +26,11 @@ describe('nav-helper', () => {
       const result = getNavComponentLabel('left', 'desktop', 1);
       expect(result).toEqual('Left Component 1 - Desktop');
     });
+
+    it('returns nav item custom field label', () => {
+      const result = getNavComponentLabel('right', 'desktop', 1);
+      expect(result).toEqual('Right Component 1 - Desktop');
+    });
   });
 
   describe('getNavComponentPropTypeKey()', () => {

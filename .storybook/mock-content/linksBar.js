@@ -1,12 +1,11 @@
 export const linksBarMock = (query) => {
-
   const mocks = {
     noData: { children: [] },
     oneLink: {
       children: [{
         _id: 'id_1',
         name: 'test link 1',
-      }]
+      }],
     },
     twoLinks: {
       children: [
@@ -18,7 +17,7 @@ export const linksBarMock = (query) => {
           _id: 'id_2',
           name: 'test link 2',
         },
-      ]
+      ],
     },
     threeLinks: {
       children: [
@@ -35,11 +34,10 @@ export const linksBarMock = (query) => {
           node_type: 'link',
           url: '/',
           display_name: 'Link Text',
-        }
+        },
       ],
-    }
-  }
+    },
+  };
 
   return mocks[query.hierarchy] || mocks.noData;
-
-}
+};

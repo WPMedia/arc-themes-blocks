@@ -20,7 +20,7 @@ export default {
     _id: 'text',
   },
   transform: (data, query) => {
-    if (data && data.basic && typeof Array.isArray(data.basic)) {
+    if (data && data.basic && Array.isArray(data.basic)) {
       return {
         content_elements: data.basic.map((ele) => (
           getResizedImageData(

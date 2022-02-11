@@ -27,7 +27,9 @@
     line-height: calculateRem(32px);
     margin-bottom: map-get($spacers, 'xs');
     text-decoration: none;
+    padding-top: map-get($spacers, 'xs');
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+      padding-top: 0;
       font-size: calculateRem(26px);
       line-height: calculateRem(32px);
     }

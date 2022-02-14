@@ -9,7 +9,7 @@ import <%= h.changeCase.pascal(feature_name) %> from './features/<%= h.inflectio
 // for more info on storybook and using the component explorer
 // https://storybook.js.org/
 export default {
-  title: 'Blocks/<%= h.changeCase.title(block_name) %>',
+  title: 'Blocks/<%= h.changeCase.title(block_name) %> Content Source',
   parameters: {
     chromatic: { viewports: [320, 1200] },
   },

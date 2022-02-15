@@ -56,6 +56,17 @@
         line-height: calculateRem(14px);
       }
     }
+
+    a {
+      display: inline-block;
+      padding-top: map-get($spacers, 'xs');
+      padding-bottom: map-get($spacers, 'sm');
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
   .flex-col {

@@ -20,7 +20,7 @@
     font-size: calculateRem(32px);
     font-weight: bold;
     line-height: calculateRem(36px);
-    margin-bottom: map-get($spacers, 'md');
+    padding-bottom: map-get($spacers, 'md');
     text-align: center;
     text-decoration: none;
     width: 100%;
@@ -28,6 +28,7 @@
     @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
       font-size: calculateRem(52px);
       line-height: calculateRem(56px);
+      padding-bottom: 0;
       margin-bottom: map-get($spacers, 'sm');
     }
   }
@@ -50,10 +51,21 @@
       line-height: calculateRem(14px);
 
       @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-top: 0;
         font-size: calculateRem(14px);
         line-height: calculateRem(16px);
       }
     }
+
+    a {
+      display: inline-block;
+      padding-top: map-get($spacers, 'xs');
+
+      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
+        padding-top: 0;
+      }
+    }
+
   }
 
   .flex-col {

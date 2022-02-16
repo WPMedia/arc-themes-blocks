@@ -26,7 +26,21 @@ export const simpleListMock = {
     {
       _id: '2',
       headlines: {
-        basic: 'Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower Castle church tower',
+        basic: `Maces congue nibh purus, vitae sollicitudin nulla lacinia in. Nulla sodales,
+eros ut gravida elementum, lectus turpis porttitor felis, id rutrum ligula tellus eu ante.
+Morbi eleifend ex auctor, vestibulum elit in, dictum dolor.
+Mauris pharetra accumsan neque sed vehicula.
+Sed vitae elit ac ex aliquam facilisis.
+Ut molestie consectetur dui quis facilisis.
+Donec egestas bibendum massa vel lacinia.
+Etiam tincidunt non felis at gravida. Ut interdum, nisi sed consequat eleifend,
+sapien ipsum dictum velit, vitae rhoncus sem augue ac sapien. Vestibulum rutrum
+molestie viverra. Integer mollis eros eu tincidunt cursus. Sed ac nibh sed justo
+vestibulum malesuada a eu odio. Etiam et nibh aliquet, posuere ligula eget,
+tincidunt diam. In odio risus, rutrum sed sem nec, vestibulum varius purus.
+Maecenas vehicula, sem a maximus varius, nulla ipsum imperdiet erat,
+sit amet varius erat nunc a enim. Curabitur nulla lacus, posuere et enim sit amet,
+commodo consequat lectus.`,
       },
       promo_items: {
         basic: {

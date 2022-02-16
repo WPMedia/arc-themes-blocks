@@ -1,6 +1,6 @@
 ---
 # helper funcs https://www.hygen.io/docs/templates/#helpers-and-inflections
-to: blocks/<%= h.inflection.dasherize(block_name) %>-block/features/<%= h.inflection.dasherize(block_name) %>/default.jsx
+to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/features/<%= h.inflection.dasherize(feature_name) %>/default.jsx
 ---
 import React from 'react';
 import PropTypes from '@arc-fusion/prop-types';
@@ -15,7 +15,7 @@ import {
   EnvelopeIcon,
 } from '@wpmedia/engine-theme-sdk';
 
-function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
+function <%= h.changeCase.pascal(feature_name) %>({ customFields }) {
   // for intro material on consuming react props
   // https://reactjs.org/docs/components-and-props.html
   const { showIcon } = customFields;
@@ -28,18 +28,18 @@ function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
 
   return (
     <div>
-      <p>{phrases.t('<%= h.inflection.dasherize(block_name) %>-block.hello-text')}</p>
+      <p>{phrases.t('<%= h.inflection.dasherize(feature_name) %>-block.hello-text')}</p>
       {showIcon && <EnvelopeIcon />}
     </div>
   );
 }
 
-<%= h.changeCase.pascal(block_name) %>.label = '<%= h.changeCase.title( block_name ) %> – Arc Block';
+<%= h.changeCase.pascal(feature_name) %>.label = '<%= h.changeCase.title( feature_name ) %> – Arc Block';
 
 // find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
-<%= h.changeCase.pascal(block_name) %>.icon = 'shopping-bag-smile';
+<%= h.changeCase.pascal(feature_name) %>.icon = 'shopping-bag-smile';
 
-<%= h.changeCase.pascal(block_name) %>.propTypes = {
+<%= h.changeCase.pascal(feature_name) %>.propTypes = {
   customFields: PropTypes.shape({
     showIcon: PropTypes.boolean.tag({
       name: 'Show icon?',
@@ -48,4 +48,4 @@ function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
   }),
 };
 
-export default <%= h.changeCase.pascal(block_name) %>;
+export default <%= h.changeCase.pascal(feature_name) %>;

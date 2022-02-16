@@ -86,7 +86,9 @@ class CustomSearchResultsList extends React.Component {
     searchContentConfig.contentConfigValues.query = value;
     // If 'See More' button is pressed
     if (additionalStoryAmount) {
-      this.state.page += 1;
+      this.setState((existingState) => ({
+        page: existingState.page + 1,
+      }));
       const { page } = this.state;
       searchContentConfig.contentConfigValues.page = page.toString();
       this.fetchContent({
@@ -105,7 +107,9 @@ class CustomSearchResultsList extends React.Component {
         },
       });
     } else {
-      this.state.page = 1;
+      this.setState({
+        page: 1,
+      });
       searchContentConfig.contentConfigValues.page = '1';
       this.fetchContent({
         resultList: {
@@ -122,7 +126,9 @@ class CustomSearchResultsList extends React.Component {
         },
       });
     }
-    this.state.searchTerm = value;
+    this.setState({
+      searchTerm: value,
+    });
   }
 
   render() {

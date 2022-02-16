@@ -112,7 +112,9 @@ class GlobalSearchResultsList extends React.Component {
       currentCount = resultList?.data?.length;
     }
     // Get results from new page
-    this.state.page += 1;
+    this.setState((existingState) => ({
+      page: existingState.page + 1,
+    }));
     this.fetchContent({
       resultList: {
         source: 'search-api',

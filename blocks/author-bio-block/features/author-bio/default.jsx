@@ -35,14 +35,15 @@ const MediaLinksStyled = styled(LinkSVGHover)``;
 
 const renderAuthorInfo = (author, arcSite) => {
   const {
-    image: { url = '', alt_text: altText = '' },
-    image,
+    image = {},
     name,
     resized_params: resizedImageOptions,
   } = author;
 
+  const { url = '', alt_text: altText = '' } = image;
+
   return (
-    image && url
+    url
       ? (
         <Image
           url={url}

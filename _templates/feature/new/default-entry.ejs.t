@@ -23,7 +23,7 @@ function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
   const { arcSite } = useFusionContext();
-  const { locale = 'en' } = getProperties(arcSite);
+  const { locale } = getProperties(arcSite);
   const phrases = getTranslatedPhrases(locale);
 
   return (

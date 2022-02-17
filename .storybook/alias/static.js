@@ -1,3 +1,4 @@
 import React from 'react';
 
-export default ({children}) => (<div>{children}</div>);
+// eslint-disable-next-line react/jsx-filename-extension
+export default ({ children }) => (<div>{children}</div>);

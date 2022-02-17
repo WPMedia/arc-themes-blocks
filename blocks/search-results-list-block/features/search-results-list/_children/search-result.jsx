@@ -34,9 +34,9 @@ const SearchResult = ({
   } = promoElements;
 
   return (
-    <div className="list-item" key={`result-card-${url}`}>
+    <div className={`list-item ${!showImage ? 'no-image' : ''}`} key={`result-card-${url}`}>
       {showImage ? (
-        <div className="results-list--image-container mobile-order-2 mobile-image">
+        <div className="results-list--image-container">
           <a href={url} className="list-anchor" aria-hidden="true" tabIndex="-1">
             <Image
               {...imageProps}
@@ -50,7 +50,7 @@ const SearchResult = ({
         </div>
       ) : null}
       {showHeadline ? (
-        <div className="results-list--headline-container mobile-order-1">
+        <div className="results-list--headline-container">
           <a href={url} className="list-anchor">
             <Heading className="headline-text">
               {headlineText}
@@ -59,7 +59,7 @@ const SearchResult = ({
         </div>
       ) : null}
       {(showDescription || showDate || showByline) ? (
-        <div className="results-list--description-author-container mobile-order-3">
+        <div className="results-list--description-author-container">
           {showDescription ? (
             <SecondaryFont as="p" className="description-text">
               {descriptionText}

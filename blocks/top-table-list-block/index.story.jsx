@@ -4,7 +4,7 @@ import { TopTableList } from './features/top-table-list/default';
 export default {
   title: 'Blocks/Top Table List',
   parameters: {
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 768, 1200] },
   },
 };
 

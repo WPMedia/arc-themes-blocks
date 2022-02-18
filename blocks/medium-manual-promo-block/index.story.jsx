@@ -7,7 +7,7 @@ export default {
   decorators: [withKnobs],
   parameters: {
     // Set the viewports in Chromatic at a component level.
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 768, 1200] },
   },
 };
 

@@ -8,7 +8,7 @@
   margin-top: map-get($spacers, 'lg');
 
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    margin-top: map-get($spacers, 'sm');
+    margin-top: 0;
   }
 }
 
@@ -39,6 +39,10 @@
 
 .author-name {
   margin-bottom: map-get($spacers, 'xs');
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+    margin-top: map-get($spacers, 'sm');
+  }
 }
 
 .author-title {

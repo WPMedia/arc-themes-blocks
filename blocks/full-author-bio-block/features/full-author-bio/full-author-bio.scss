@@ -5,11 +5,6 @@
 .full-author-bio--details {
   display: flex;
   flex-wrap: wrap;
-  margin-top: map-get($spacers, 'lg');
-
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    margin-top: 0;
-  }
 }
 
 .image-container {

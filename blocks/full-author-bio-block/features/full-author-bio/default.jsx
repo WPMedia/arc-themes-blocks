@@ -70,95 +70,85 @@ export const FullAuthorBioPresentational = (props) => {
   const phrases = getTranslatedPhrases(locale);
 
   const socials = [];
-  if (content.authors) {
-    // get keys and values author object
-    /*
-      // don't render non social key and value
-      longBio: 'Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ',
+  // get keys and values author object
+  /*
+    // don't render non social key and value
+    longBio: 'Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ',
 
-      // render social key with a truthy value
-      instagram: 'janedoe',
-      rss: 'someusername',
+    // render social key with a truthy value
+    instagram: 'janedoe',
+    rss: 'someusername',
 
-      // don't render social key with a falsy value
-      linkedin: '',
-      twitter: null,
-    */
-    Object.entries(content.authors[0]).forEach(([socialMediaNameKey, socialMediaValue]) => {
-      if (SUPPORTED_SOCIALS_KEYS.includes(socialMediaNameKey) && socialMediaValue) {
-        socials.push(socialMediaNameKey);
-      }
-    });
-  }
+    // don't render social key with a falsy value
+    linkedin: '',
+    twitter: null,
+  */
+  Object.entries(content.authors[0]).forEach(([socialMediaNameKey, socialMediaValue]) => {
+    if (SUPPORTED_SOCIALS_KEYS.includes(socialMediaNameKey) && socialMediaValue) {
+      socials.push(socialMediaNameKey);
+    }
+  });
 
   return (
-    <>
-      <div className="image-container">
-        {
-            (content.authors[0].image) && (
-              <Image
-                url={content.authors[0].image}
-                alt={(content.authors[0].byline) ? content.authors[0].byline : ''}
-                smallWidth={158}
-                smallHeight={158}
-                mediumWidth={158}
-                mediumHeight={158}
-                largeWidth={158}
-                largeHeight={158}
-                resizedImageOptions={content.authors[0].resized_params}
-                resizerURL={getProperties(arcSite)?.resizerURL}
-                breakpoints={getProperties(arcSite)?.breakpoints}
-              />
-            )
-          }
-      </div>
-      <div>
+    <div className="full-author-bio">
+      <div className="full-author-bio--details">
+        <div className="image-container">
+          {(content.authors[0].image) ? (
+            <Image
+              url={content.authors[0].image}
+              alt={(content.authors[0].byline) ? content.authors[0].byline : ''}
+              smallWidth={158}
+              smallHeight={158}
+              mediumWidth={158}
+              mediumHeight={158}
+              largeWidth={158}
+              largeHeight={158}
+              resizedImageOptions={content.authors[0].resized_params}
+              resizerURL={getProperties(arcSite)?.resizerURL}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+            />
+          ) : null}
+        </div>
         <PrimaryFont
           as="div"
           className="author-content"
         >
-          {
-              (content.authors[0].byline) ? (
-                <h1 className="author-name">{content.authors[0].byline}</h1>
-              ) : null
-            }
-          {
-              (content.authors[0].role) ? (
-                <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
-              ) : null
-            }
-          {
-              (content.authors[0].bio || content.authors[0].longBio) ? (
-                <SecondaryFont className="author-bio">
-                  {content.authors[0].longBio || content.authors[0].bio}
-                </SecondaryFont>
-              ) : null
-            }
+          {(content.authors[0].byline) ? (
+            <h1 className="author-name">{content.authors[0].byline}</h1>
+          ) : null}
+          {(content.authors[0].role) ? (
+            <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
+          ) : null}
+          {(content.authors[0].bio || content.authors[0].longBio) ? (
+            <SecondaryFont className="author-bio">
+              {content.authors[0].longBio || content.authors[0].bio}
+            </SecondaryFont>
+          ) : null}
         </PrimaryFont>
       </div>
 
-      <div className="social-container">
-        <p className="connect-label">
-          <strong>{phrases.t('full-author-bio-block.connect-text')}</strong>
-        </p>
-        <div className="social-items">
-          {
-              socials.map((item) => (
-                <a
-                  className={`social-column ${item}`}
-                  href={constructSocialURL(item, content.authors[0][item])}
-                  key={item}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  title={phrases.t(`full-author-bio-block.social-${item.toLowerCase()}`)}
-                >
-                  {logos[item]}
-                </a>
-              ))
-            }
+      {socials.length ? (
+        <div className="social-container">
+          <p className="connect-label">
+            <strong>{phrases.t('full-author-bio-block.connect-text')}</strong>
+          </p>
+          <div className="social-items">
+            {socials.map((item) => (
+              <a
+                className={`social-column ${item}`}
+                href={constructSocialURL(item, content.authors[0][item])}
+                key={item}
+                rel="noopener noreferrer"
+                target="_blank"
+                title={phrases.t(`full-author-bio-block.social-${item.toLowerCase()}`)}
+              >
+                {logos[item]}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-    </>
+      ) : null}
+    </div>
   );
 };
 

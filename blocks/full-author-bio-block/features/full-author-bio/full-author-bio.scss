@@ -1,12 +1,25 @@
+.full-author-bio {
+  border-bottom: 1px solid $border-rule-color;
+}
+
+.full-author-bio--details {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: map-get($spacers, 'lg');
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+    margin-top: 0;
+  }
+}
+
 .image-container {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
     float: none;
+    margin-right: 0;
     text-align: center;
     width: 100%;
   }
-  float: left;
   margin-right: map-get($spacers, 'md');
-  margin-top: map-get($spacers, 'lg');
   width: 30%;
 
   img {
@@ -25,11 +38,11 @@
 }
 
 .author-name {
+  margin-bottom: map-get($spacers, 'xs');
+
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
     margin-top: map-get($spacers, 'sm');
   }
-  margin-bottom: map-get($spacers, 'xs');
-  margin-top: map-get($spacers, 'lg');
 }
 
 .author-title {
@@ -42,7 +55,6 @@
     padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
     text-align: center;
   }
-  border-bottom: 1px solid $border-rule-color;
   border-top: 1px solid $border-rule-color;
   display: flex;
   flex-direction: row;

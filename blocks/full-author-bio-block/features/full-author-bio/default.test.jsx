@@ -30,57 +30,57 @@ jest.mock('@wpmedia/engine-theme-sdk', () => ({
 }));
 
 jest.mock('fusion:themes', () => (jest.fn(() => ({}))));
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    globalContent: {
-      authors: [
-        {
-          _id: 'janedoe',
-          firstName: 'Jane',
-          lastName: 'Doe',
-          secondLastName: 'Deo',
-          byline: 'Jane Da Doe',
-          role: 'Senior Product Manager',
-          image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
-          email: 'jane@doe.com',
-          facebook: 'https://facebook.com/janedoe',
-          affiliations: '',
-          education: [],
-          awards: [],
-          books: [],
-          podcasts: [],
-          rss: 'somersslink',
-          twitter: 'janedoe',
-          bio_page: '/author/jane doe/',
-          bio: 'Jane Doe is a senior product manager for Arc Publishing. This is a short bio. ',
-          longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
-          slug: 'jane-doe',
-          instagram: 'janedoe',
-          native_app_rendering: false,
-          fuzzy_match: false,
-          contributor: false,
-          status: true,
-          last_updated_date: '2019-01-24T23:15:45.348Z',
-          type: 'author',
-          resized_params: {
-            '158x158': '',
-          },
-        },
-      ],
-      last: 'c2FyYWNhcm90aGVycw==',
-      more: false,
-      _id: 'aea0c7ea37263d5d663cbb6844a506d39dfb7e02a76ab932d6e740c4e2807906',
-    },
-  })),
-}));
 
-describe('the full author bio block', () => {
-  it('should return null if lazyLoad on the server and not in the admin', () => {
-    const wrapper = mount(<FullAuthorBio customFields={{ lazyLoad: true }} />);
-    expect(wrapper.html()).toBe(null);
+describe('Full author bio block', () => {
+  describe('lazy load and isAdmin', () => {
+    it('should return null if lazyLoad on the server and not in the admin', () => {
+      const wrapper = mount(<FullAuthorBio customFields={{ lazyLoad: true }} />);
+      expect(wrapper.html()).toBe(null);
+    });
+
+    it('should not return null if lazyLoad on the server and isAdmin', () => {
+      useFusionContext.mockImplementation(() => ({
+        isAdmin: true,
+        globalContent: {
+          authors: [
+            {
+              _id: 'janedoe',
+              firstName: 'Jane',
+            },
+          ],
+        },
+      }));
+      const wrapper = mount(<FullAuthorBio customFields={{ lazyLoad: true }} />);
+      expect(wrapper.html()).not.toBe(null);
+    });
   });
 
   describe('when fields from globalContent are present', () => {
+    beforeEach(() => {
+      useFusionContext.mockImplementation(() => ({
+        arcSite: 'no-site',
+        globalContent: {
+          authors: [
+            {
+              _id: 'janedoe',
+              firstName: 'Jane',
+              lastName: 'Doe',
+              byline: 'Jane Da Doe',
+              role: 'Senior Product Manager',
+              image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
+              resized_params: { '158x158': '' },
+              email: 'jane@doe.com',
+              facebook: 'https://facebook.com/janedoe',
+              rss: 'somersslink',
+              twitter: 'janedoe',
+              longBio: 'Jane Doe is a senior product manager for Arc Publishing. \nShe works on Arc Themes',
+              instagram: 'janedoe',
+            },
+          ],
+        },
+      }));
+    });
+
     it('should render a h1', () => {
       const wrapper = mount(<FullAuthorBio />);
 
@@ -147,7 +147,6 @@ describe('the full author bio block', () => {
               _id: 'janedoe',
               firstName: 'Jane',
               lastName: 'Doe',
-              byline: 'Jane Da Doe',
               role: 'Senior Product Manager',
               image: 'https://s3.amazonaws.com/arc-authors/corecomponents/b80bd029-16d8-4a28-a874-78fc07ebc14a.jpg',
               resized_params: { '158x158': '' },
@@ -298,6 +297,7 @@ describe('when there are falsy values as social media links', () => {
     expect(wrapper.find('.twitter')).toHaveLength(0);
     expect(wrapper.find('.instagram')).toHaveLength(1);
   });
+
   it('should not render empty string value', () => {
     useFusionContext.mockImplementation(() => ({
       arcSite: 'no-site',
@@ -315,6 +315,7 @@ describe('when there are falsy values as social media links', () => {
     expect(wrapper.find('.twitter')).toHaveLength(0);
     expect(wrapper.find('.instagram')).toHaveLength(1);
   });
+
   it('should not render if no key social value', () => {
     useFusionContext.mockImplementation(() => ({
       arcSite: 'no-site',
@@ -330,5 +331,26 @@ describe('when there are falsy values as social media links', () => {
     const wrapper = mount(<FullAuthorBio />);
     expect(wrapper.find('.twitter')).toHaveLength(0);
     expect(wrapper.find('.instagram')).toHaveLength(1);
+    expect(wrapper.find('.social-container')).toHaveLength(1);
+  });
+
+  it('should not render social elements when no socials', () => {
+    useFusionContext.mockImplementation(() => ({
+      arcSite: 'no-site',
+      globalContent: {
+        authors: [
+          {
+            _id: 'janedoe',
+          },
+          {
+            _id: 'janedoes',
+          },
+        ],
+      },
+    }));
+    const wrapper = mount(<FullAuthorBio />);
+    expect(wrapper.find('.twitter')).toHaveLength(0);
+    expect(wrapper.find('.instagram')).toHaveLength(0);
+    expect(wrapper.find('.social-container')).toHaveLength(0);
   });
 });

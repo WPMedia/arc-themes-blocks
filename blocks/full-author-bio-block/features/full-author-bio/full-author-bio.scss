@@ -5,16 +5,21 @@
 .full-author-bio--details {
   display: flex;
   flex-wrap: wrap;
+  margin-top: map-get($spacers, 'lg');
+
+  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
+    margin-top: map-get($spacers, 'sm');
+  }
 }
 
 .image-container {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
     float: none;
+    margin-right: 0;
     text-align: center;
     width: 100%;
   }
   margin-right: map-get($spacers, 'md');
-  margin-top: map-get($spacers, 'lg');
   width: 30%;
 
   img {
@@ -33,11 +38,7 @@
 }
 
 .author-name {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    margin-top: map-get($spacers, 'sm');
-  }
   margin-bottom: map-get($spacers, 'xs');
-  margin-top: map-get($spacers, 'lg');
 }
 
 .author-title {

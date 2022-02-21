@@ -1,3 +1,7 @@
+.full-author-bio {
+  border-bottom: 1px solid $border-rule-color;
+}
+
 .image-container {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
     float: none;
@@ -42,7 +46,6 @@
     padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
     text-align: center;
   }
-  border-bottom: 1px solid $border-rule-color;
   border-top: 1px solid $border-rule-color;
   display: flex;
   flex-direction: row;

@@ -2,13 +2,17 @@
   border-bottom: 1px solid $border-rule-color;
 }
 
+.full-author-bio--details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .image-container {
   @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
     float: none;
     text-align: center;
     width: 100%;
   }
-  float: left;
   margin-right: map-get($spacers, 'md');
   margin-top: map-get($spacers, 'lg');
   width: 30%;

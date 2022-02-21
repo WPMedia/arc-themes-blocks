@@ -91,39 +91,41 @@ export const FullAuthorBioPresentational = (props) => {
 
   return (
     <div className="full-author-bio">
-      <div className="image-container">
-        {(content.authors[0].image) ? (
-          <Image
-            url={content.authors[0].image}
-            alt={(content.authors[0].byline) ? content.authors[0].byline : ''}
-            smallWidth={158}
-            smallHeight={158}
-            mediumWidth={158}
-            mediumHeight={158}
-            largeWidth={158}
-            largeHeight={158}
-            resizedImageOptions={content.authors[0].resized_params}
-            resizerURL={getProperties(arcSite)?.resizerURL}
-            breakpoints={getProperties(arcSite)?.breakpoints}
-          />
-        ) : null}
+      <div className="full-author-bio--details">
+        <div className="image-container">
+          {(content.authors[0].image) ? (
+            <Image
+              url={content.authors[0].image}
+              alt={(content.authors[0].byline) ? content.authors[0].byline : ''}
+              smallWidth={158}
+              smallHeight={158}
+              mediumWidth={158}
+              mediumHeight={158}
+              largeWidth={158}
+              largeHeight={158}
+              resizedImageOptions={content.authors[0].resized_params}
+              resizerURL={getProperties(arcSite)?.resizerURL}
+              breakpoints={getProperties(arcSite)?.breakpoints}
+            />
+          ) : null}
+        </div>
+        <PrimaryFont
+          as="div"
+          className="author-content"
+        >
+          {(content.authors[0].byline) ? (
+            <h1 className="author-name">{content.authors[0].byline}</h1>
+          ) : null}
+          {(content.authors[0].role) ? (
+            <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
+          ) : null}
+          {(content.authors[0].bio || content.authors[0].longBio) ? (
+            <SecondaryFont className="author-bio">
+              {content.authors[0].longBio || content.authors[0].bio}
+            </SecondaryFont>
+          ) : null}
+        </PrimaryFont>
       </div>
-      <PrimaryFont
-        as="div"
-        className="author-content"
-      >
-        {(content.authors[0].byline) ? (
-          <h1 className="author-name">{content.authors[0].byline}</h1>
-        ) : null}
-        {(content.authors[0].role) ? (
-          <h2 className="author-title h4-primary">{content.authors[0].role}</h2>
-        ) : null}
-        {(content.authors[0].bio || content.authors[0].longBio) ? (
-          <SecondaryFont className="author-bio">
-            {content.authors[0].longBio || content.authors[0].bio}
-          </SecondaryFont>
-        ) : null}
-      </PrimaryFont>
 
       {socials.length ? (
         <div className="social-container">

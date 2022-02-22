@@ -1,4 +1,4 @@
-# News Theme Developers Guide
+# Arc Themes Block Developers Guide
 
 ## Setup
 

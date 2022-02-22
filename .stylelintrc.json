@@ -5,7 +5,8 @@
   "extends": [
     "stylelint-config-recommended",
     "stylelint-config-styled-components",
-    "stylelint-config-sass-guidelines"
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-prettier"
   ],
   "rules": {
     "max-nesting-depth": 5,

@@ -1,3 +1,3 @@
-import NumberedList from './features/numbered-list/default';
+import NumberedList from "./features/numbered-list/default";
 
 export default NumberedList;

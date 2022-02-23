@@ -1,13 +1,14 @@
-import ShareBarContainer, { ShareBar } from './features/share-bar/default';
-import { select, text, boolean } from '@storybook/addon-knobs';
+import ShareBarContainer, { ShareBar } from "./features/share-bar/default";
+import { select, text, boolean } from "@storybook/addon-knobs";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 
 <Meta
-  title="Blocks/Share Bar"
-  component={ShareBarContainer}
-  parameters={{
-    chromatic: { viewports: [960, 1200] }
-  }} />
+	title="Blocks/Share Bar"
+	component={ShareBarContainer}
+	parameters={{
+		chromatic: { viewports: [960, 1200] },
+	}}
+/>
 
 # Share Bar
 
@@ -20,38 +21,34 @@ To import it into a block:
 ```jsx
 // functional component without global content
 // using named import statement
-import { ShareBar } from '@wpmedia/share-bar-block';
+import { ShareBar } from "@wpmedia/share-bar-block";
 
 const mockPhrases = { t: (key) => key };
 
 const AnotherComponentWithoutGlobalContent = () => (
-  <ShareBar
-    customFields={{
-      email:  true,
-      facebook:  true,
-      pinterest:  true,
-      twitter:  true,
-      linkedIn:  true,
-    }}
-    websiteName={'Man Bites Dog'}
-    websiteDomain={'https://www.thesun.com/'}
-    websiteUrl={ '/2019/07/15/global-kitchen-sink-article/'}
-    headlineString={'The Sun'}
-    phrases={mockPhrases}
-  />
-)
-
+	<ShareBar
+		customFields={{
+			email: true,
+			facebook: true,
+			pinterest: true,
+			twitter: true,
+			linkedIn: true,
+		}}
+		websiteName={"Man Bites Dog"}
+		websiteDomain={"https://www.thesun.com/"}
+		websiteUrl={"/2019/07/15/global-kitchen-sink-article/"}
+		headlineString={"The Sun"}
+		phrases={mockPhrases}
+	/>
+);
 ```
 
 ```jsx
 // functional component using global content
 // using default import to get the ShareBarContainer
-import ShareBar  from '@wpmedia/share-bar-block';
+import ShareBar from "@wpmedia/share-bar-block";
 
-const AnotherComponentWithGlobalContent = () => (
-  <ShareBar />
-)
-
+const AnotherComponentWithGlobalContent = () => <ShareBar />;
 ```
 
 ## Props
@@ -63,34 +60,34 @@ const AnotherComponentWithGlobalContent = () => (
 ** Custom ShareBar **
 
 <Preview>
-  <Story name="Custom ShareBar" height="700px">
-     <ShareBar
-        customFields={{
-            email: boolean('Email', true),
-            facebook: boolean('Facebook', true),
-            pinterest: boolean('Pinterest', true),
-            twitter: boolean('Twitter', true),
-            linkedIn: boolean('Linkedin', true),
-        }}
-        websiteName={text('headlineString', 'Man Bites Dog')}
-        websiteDomain={text('websiteDomain', 'https://www.thesun.com/')}
-        websiteUrl={text('websiteUrl', '/2019/07/15/global-kitchen-sink-article/')}
-        headlineString={text('websiteName', 'The Sun')}
-        phrases={{ t: (key) => key }}
-     />
-  </Story>
+	<Story name="Custom ShareBar" height="700px">
+		<ShareBar
+			customFields={{
+				email: boolean("Email", true),
+				facebook: boolean("Facebook", true),
+				pinterest: boolean("Pinterest", true),
+				twitter: boolean("Twitter", true),
+				linkedIn: boolean("Linkedin", true),
+			}}
+			websiteName={text("headlineString", "Man Bites Dog")}
+			websiteDomain={text("websiteDomain", "https://www.thesun.com/")}
+			websiteUrl={text("websiteUrl", "/2019/07/15/global-kitchen-sink-article/")}
+			headlineString={text("websiteName", "The Sun")}
+			phrases={{ t: (key) => key }}
+		/>
+	</Story>
 </Preview>
 
 ** No share buttons **
 
 <Preview>
-  <Story name="No Share Buttons" height="700px">
-     <ShareBar
-        websiteName={text('headlineString', 'Man Bites Dog')}
-        websiteDomain={text('websiteDomain', 'https://www.thesun.com/')}
-        websiteUrl={text('websiteUrl', '/2019/07/15/global-kitchen-sink-article/')}
-        headlineString={text('websiteName', 'The Sun')}
-        phrases={{ t: (key) => key }}
-     />
-  </Story>
+	<Story name="No Share Buttons" height="700px">
+		<ShareBar
+			websiteName={text("headlineString", "Man Bites Dog")}
+			websiteDomain={text("websiteDomain", "https://www.thesun.com/")}
+			websiteUrl={text("websiteUrl", "/2019/07/15/global-kitchen-sink-article/")}
+			headlineString={text("websiteName", "The Sun")}
+			phrases={{ t: (key) => key }}
+		/>
+	</Story>
 </Preview>

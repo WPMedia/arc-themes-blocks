@@ -1,25 +1,25 @@
 .promo-image {
-  position: relative;
+	position: relative;
 
-  img {
-    display: block;
-    height: auto;
-    vertical-align: middle;
-    width: 100%;
-  }
+	img {
+		display: block;
+		height: auto;
+		vertical-align: middle;
+		width: 100%;
+	}
 
-  .promo-label {
-    .label {
-      color: #fff;
-      margin-left: 8px;
-      flex-grow: 0;
-      font-size: 12px;
-      font-weight: bold;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.5;
-      letter-spacing: normal;
-      height: 18px;
-    }
-  }
+	.promo-label {
+		.label {
+			color: #fff;
+			margin-left: 8px;
+			flex-grow: 0;
+			font-size: 12px;
+			font-weight: bold;
+			font-stretch: normal;
+			font-style: normal;
+			line-height: 1.5;
+			letter-spacing: normal;
+			height: 18px;
+		}
+	}
 }

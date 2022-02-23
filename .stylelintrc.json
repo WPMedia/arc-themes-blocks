@@ -1,51 +1,43 @@
 {
-  "plugins": [
-    "stylelint-no-unsupported-browser-features"
-  ],
-  "extends": [
-    "stylelint-config-recommended",
-    "stylelint-config-styled-components",
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-prettier"
-  ],
-  "rules": {
-    "max-nesting-depth": 5,
-    "plugin/no-unsupported-browser-features": [
-      true,
-      {
-        "ignore": ["css-sticky","multicolumn"],
-        "severity": "warning"
-      }
-    ],
-    "font-family-no-missing-generic-family-keyword": null,
-    "order/properties-alphabetical-order": null,
-    "declaration-property-value-disallowed-list": [
-      {
-        "border": [
-          "none"
-        ]
-      }
-    ],
-    "value-no-vendor-prefix": [
-      true,
-      {
-        "ignore": ["-webkit-box"]
-      }
-    ],
-    "property-no-vendor-prefix": [
-      true,
-      {
-        "ignoreProperties": [
-          "box-orient"
-        ]
-      }
-    ],
-    "media-feature-name-no-unknown": [
-      {
-        "ignoreMediaFeatureNames": [
-          "max-width"
-        ]
-      }
-    ]
-  }
+	"plugins": ["stylelint-no-unsupported-browser-features"],
+	"extends": [
+		"stylelint-config-recommended",
+		"stylelint-config-styled-components",
+		"stylelint-config-sass-guidelines",
+		"stylelint-config-prettier"
+	],
+	"rules": {
+		"max-nesting-depth": 5,
+		"plugin/no-unsupported-browser-features": [
+			true,
+			{
+				"ignore": ["css-sticky", "multicolumn"],
+				"severity": "warning"
+			}
+		],
+		"font-family-no-missing-generic-family-keyword": null,
+		"order/properties-alphabetical-order": null,
+		"declaration-property-value-disallowed-list": [
+			{
+				"border": ["none"]
+			}
+		],
+		"value-no-vendor-prefix": [
+			true,
+			{
+				"ignore": ["-webkit-box"]
+			}
+		],
+		"property-no-vendor-prefix": [
+			true,
+			{
+				"ignoreProperties": ["box-orient"]
+			}
+		],
+		"media-feature-name-no-unknown": [
+			{
+				"ignoreMediaFeatureNames": ["max-width"]
+			}
+		]
+	}
 }

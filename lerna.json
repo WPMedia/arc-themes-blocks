@@ -1,30 +1,15 @@
 {
-  "packages": [
-    "blocks/*",
-    "components/*"
-  ],
-  "version": "5.14.1",
-  "ignoreChanges": [
-    "**/node_modules/**",
-    "**/package-lock.json"
-  ],
-  "version": "independent",
-  "command": {
-    "publish": {
-      "ignoreChanges": [
-        "package.json",
-        "CHANGELOG.md",
-        "package-lock.json"
-      ],
-      "conventionalCommits": true,
-      "message": "chore(release): publish",
-      "registry": "https://npm.pkg.github.com",
-      "allowBranch": [
-        "stable",
-        "beta",
-        "rc",
-        "canary"
-      ]
-    }
-  }
+	"packages": ["blocks/*", "components/*"],
+	"version": "5.14.1",
+	"ignoreChanges": ["**/node_modules/**", "**/package-lock.json"],
+	"version": "independent",
+	"command": {
+		"publish": {
+			"ignoreChanges": ["package.json", "CHANGELOG.md", "package-lock.json"],
+			"conventionalCommits": true,
+			"message": "chore(release): publish",
+			"registry": "https://npm.pkg.github.com",
+			"allowBranch": ["stable", "beta", "rc", "canary"]
+		}
+	}
 }

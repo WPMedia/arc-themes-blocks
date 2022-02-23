@@ -1,88 +1,86 @@
 html,
 body {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 
 #fusion-app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 .page-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 9;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	z-index: 9;
 }
 
 .main {
-  flex-grow: 1;
-  transition: padding-top 0.3s linear;
-  width: 100%;
+	flex-grow: 1;
+	transition: padding-top 0.3s linear;
+	width: 100%;
 
-
-  @media screen and (max-width: 95rem) and (min-width: 90rem) {
-    .container {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-  }
+	@media screen and (max-width: 95rem) and (min-width: 90rem) {
+		.container {
+			margin-left: 5%;
+			margin-right: 5%;
+		}
+	}
 }
 
 .advanced-grid-desktop-main-area {
-  padding: 0;
-  @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
-    border-right: 1px solid $border-rule-color;
-    padding: 0 map-get($spacers, 'lg') 0 0;
-  }
+	padding: 0;
+	@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+		border-right: 1px solid $border-rule-color;
+		padding: 0 map-get($spacers, "lg") 0 0;
+	}
 }
 
-
 @media (max-width: 64rem) {
-  .row.advanced-grid {
-    grid-template-columns: auto;
-  }
+	.row.advanced-grid {
+		grid-template-columns: auto;
+	}
 
-  .advanced-grid {
-    margin: 0;
-    gap: 0;
-    grid:
-      'rightrailtop'
-      'main'
-      'rightrailmiddle'
-      'main2'
-      'rightrailbottom';
-  }
+	.advanced-grid {
+		margin: 0;
+		gap: 0;
+		grid:
+			"rightrailtop"
+			"main"
+			"rightrailmiddle"
+			"main2"
+			"rightrailbottom";
+	}
 
-  .advanced-grid-1 {
-    grid-area: rightrailtop;
-  }
+	.advanced-grid-1 {
+		grid-area: rightrailtop;
+	}
 
-  .advanced-grid-2 {
-    grid-area: main;
-  }
+	.advanced-grid-2 {
+		grid-area: main;
+	}
 
-  .advanced-grid-3 {
-    grid-area: rightrailmiddle;
-  }
+	.advanced-grid-3 {
+		grid-area: rightrailmiddle;
+	}
 
-  .advanced-grid-4 {
-    grid-area: main2;
-  }
+	.advanced-grid-4 {
+		grid-area: main2;
+	}
 
-  .advanced-grid-5 {
-    grid-area: rightrailbottom;
-  }
+	.advanced-grid-5 {
+		grid-area: rightrailbottom;
+	}
 
-  [class*=advanced-grid-] {
-    width: 100%;
-    min-width: 2rem;
-    max-width: 64rem;
-  }
+	[class*="advanced-grid-"] {
+		width: 100%;
+		min-width: 2rem;
+		max-width: 64rem;
+	}
 
-  .advanced-grid > section {
-    display: contents;
-  }
+	.advanced-grid > section {
+		display: contents;
+	}
 }

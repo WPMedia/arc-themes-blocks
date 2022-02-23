@@ -3,6 +3,4 @@ node_modules
 coverage
 .npmrc
 **/.DS_Store
-.vscode/*
 *.log
-!.vscode/extensions.json

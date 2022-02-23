@@ -85,5 +85,10 @@ describe('the related-content content source block', () => {
       contentSource.transform({ basic: '' }, {});
       expect(mockFn.mock.calls.length).toBe(0);
     });
+    it('should not call getResizedImageData if data is a truthy string', () => {
+      const { default: contentSource } = require('./related-content');
+      contentSource.transform({ basic: 'ff' }, {});
+      expect(mockFn.mock.calls.length).toBe(0);
+    });
   });
 });

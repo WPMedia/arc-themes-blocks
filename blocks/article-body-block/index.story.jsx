@@ -4,7 +4,7 @@ import { ArticleBodyChainPresentation } from './chains/article-body/default';
 export default {
   title: 'Chains/Article Body Chain',
   parameters: {
-    chromatic: { viewports: [320, 1200] },
+    chromatic: { viewports: [320, 1200], diffThreshold: 0.2 },
   },
 };
 
@@ -529,6 +529,29 @@ export const contentGallery = () => {
   );
 };
 
+export const contentGalleryNoTitleCaptionOrCredits = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        mockGallery,
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+      customFields={{
+        hideGalleryTitle: true,
+        hideGalleryCaption: true,
+        hideGalleryCredits: true,
+      }}
+    />
+  );
+};
+
 export const contentHeader2 = () => {
   const mockContext = {
     ...mockContextBase,
@@ -590,6 +613,53 @@ export const contentImage = () => {
       ...mockContextGlobalContent,
       content_elements: [
         mockImage,
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+    />
+  );
+};
+
+export const contentImageNoTitleCaptionOrCredits = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        mockImage,
+      ],
+    },
+  };
+
+  return (
+    <ArticleBodyChainPresentation
+      context={mockContext}
+      customFields={{
+        hideImageTitle: true,
+        hideImageCaption: true,
+        hideImageCredits: true,
+      }}
+    />
+  );
+};
+
+export const imageWithLinkContainer = () => {
+  const mockContext = {
+    ...mockContextBase,
+    globalContent: {
+      ...mockContextGlobalContent,
+      content_elements: [
+        {
+          ...mockImage,
+          additional_properties: {
+            ...mockImage.additional_properties,
+            link: 'https://wwww.arcxp.com',
+          },
+        },
       ],
     },
   };

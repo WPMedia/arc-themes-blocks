@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const footerContentMock = {
   children: [
     {
@@ -101,4 +102,4 @@ export const footerContentMock = {
       name: '',
     },
   ],
-}
+};

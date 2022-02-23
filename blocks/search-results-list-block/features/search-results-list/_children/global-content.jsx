@@ -10,8 +10,6 @@ import {
 
 import SearchResult from './search-result';
 import '@wpmedia/shared-styles/scss/_results-list.scss';
-import '@wpmedia/shared-styles/scss/_results-list-desktop.scss';
-import '@wpmedia/shared-styles/scss/_results-list-mobile.scss';
 import './search-results-list.scss';
 
 @Consumer

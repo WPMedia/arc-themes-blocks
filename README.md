@@ -1,7 +1,5 @@
 # Arc Themes blocks
 
->**[Please See Wiki If You Can't Find What You're Looking For](https://github.com/WPMedia/arc-themes-blocks/wiki), Like [Rolling Back If You Have Publish Issues](https://github.com/WPMedia/arc-themes-blocks/wiki/How-To-%22Rollback%22-From-A-Published-Version)**
-
 This is the lerna-managed monorepo for the blocks that make up the Fusion News Theme.
 
 This monorepo is a collection of packages for blocks. Blocks are versioned together.
@@ -12,10 +10,11 @@ This monorepo is a collection of packages for blocks. Blocks are versioned toget
 
 ## `dist-tags`
 
+Please see the release notes in Confluence if you are a Themes developer. 
 
 This package has been published with a number of dist-tags meant for different purposes:
 
-- `stable`: This tag should be equivalent to `latest` and the process for maintaining parity _should_ be automated with a [Github Action workflow found here](/.github/workflows/stable-dist-tag.yml). If that workflow doesn't work or the versions tagged by `latest` and `stable` do not match you can run `npm run latest-stable-parity` to fix that.
+- `stable`: This is client-facing release. 
 - `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. [More information can be found here.](/News%20Theme%20Development.md#arc-themes-blocks)
 - `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `canary` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-canary`).
 - `rc`: This stands for release candidate. This is not client-facing.

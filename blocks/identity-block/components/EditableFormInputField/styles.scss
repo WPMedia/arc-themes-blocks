@@ -1,44 +1,44 @@
 .editable-form-input {
-  border: 1px solid #dadada;
-  border-radius: 4px;
+	border: 1px solid #dadada;
+	border-radius: 4px;
 }
 
 .editable-form-input--internal {
-  padding: 1rem;
+	padding: 1rem;
 }
 
 .editable-form-input--button-container {
-  display: flex;
-  padding: 16px 0 0;
+	display: flex;
+	padding: 16px 0 0;
 
-  button:first-child {
-    margin: 0 5px 0 0;
-  }
+	button:first-child {
+		margin: 0 5px 0 0;
+	}
 }
 
 .editable-form-input--label-text {
-  font-size: calculateRem(16px);
-  line-height: 1.5;
-  margin: map-get($spacers, 'xxs') 0;
-  font-weight: bold;
-  flex: 1;
+	font-size: calculateRem(16px);
+	line-height: 1.5;
+	margin: map-get($spacers, "xxs") 0;
+	font-weight: bold;
+	flex: 1;
 }
 
 .editable-form-input--value-text {
-  font-size: calculateRem(16px);
-  line-height: 1.5;
+	font-size: calculateRem(16px);
+	line-height: 1.5;
 }
 
 .editable-form-input--edit-button-link {
-  background: none;
-  border: 0;
-  padding: 0;
-  font-size: calculateRem(16px);
-  line-height: 1.5;
-  text-decoration: underline;
-  cursor: pointer;
+	background: none;
+	border: 0;
+	padding: 0;
+	font-size: calculateRem(16px);
+	line-height: 1.5;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .editable-form-input--label-container {
-  display: flex;
+	display: flex;
 }

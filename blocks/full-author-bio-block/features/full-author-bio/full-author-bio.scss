@@ -1,107 +1,119 @@
-.image-container {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    float: none;
-    text-align: center;
-    width: 100%;
-  }
-  float: left;
-  margin-right: map-get($spacers, 'md');
-  margin-top: map-get($spacers, 'lg');
-  width: 30%;
+.full-author-bio {
+	border-bottom: 1px solid $border-rule-color;
+}
 
-  img {
-    border-radius: 100%;
-    max-height: 180px;
-    width: auto;
-  }
+.full-author-bio--details {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: map-get($spacers, "lg");
+
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		margin-top: 0;
+	}
+}
+
+.image-container {
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		float: none;
+		margin-right: 0;
+		text-align: center;
+		width: 100%;
+	}
+	margin-right: map-get($spacers, "md");
+	width: 30%;
+
+	img {
+		border-radius: 100%;
+		max-height: 180px;
+		width: auto;
+	}
 }
 
 .author-content {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    width: 100%;
-  }
-  display: inline-block;
-  width: 64%;
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		width: 100%;
+	}
+	display: inline-block;
+	width: 64%;
 }
 
 .author-name {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    margin-top: map-get($spacers, 'sm');
-  }
-  margin-bottom: map-get($spacers, 'xs');
-  margin-top: map-get($spacers, 'lg');
+	margin-bottom: map-get($spacers, "xs");
+
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		margin-top: map-get($spacers, "sm");
+	}
 }
 
 .author-title {
-  margin-bottom: map-get($spacers, 'xs');
+	margin-bottom: map-get($spacers, "xs");
 }
 
 .social-container {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    justify-content: flex-start;
-    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') 0;
-    text-align: center;
-  }
-  border-bottom: 1px solid $border-rule-color;
-  border-top: 1px solid $border-rule-color;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: map-get($spacers, 'xs');
-  padding: map-get($spacers, 'md') 0 map-get($spacers, 'md') 0;
-  text-align: center;
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		justify-content: flex-start;
+		padding: map-get($spacers, "sm") 0 map-get($spacers, "sm") 0;
+		text-align: center;
+	}
+	border-top: 1px solid $border-rule-color;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: map-get($spacers, "xs");
+	padding: map-get($spacers, "md") 0 map-get($spacers, "md") 0;
+	text-align: center;
 }
 
 .social-items {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    justify-content: center;
-  }
-  display: flex;
-  flex: 1 0 200px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		justify-content: center;
+	}
+	display: flex;
+	flex: 1 0 200px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 }
 
 .social-column {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    margin: 0 map-get($spacers, 'xs');
-  }
-  display: flex;
-  flex: 0 0 40px;
-  flex-direction: column;
-  height: 40px;
-  justify-content: center;
-  margin: 0 0 0 map-get($spacers, 'xs');
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		margin: 0 map-get($spacers, "xs");
+	}
+	display: flex;
+	flex: 0 0 40px;
+	flex-direction: column;
+	height: 40px;
+	justify-content: center;
+	margin: 0 0 0 map-get($spacers, "xs");
 }
 
 .social-column > svg {
-  display: block;
-  height: auto;
-  margin: 0 auto;
-  width: 24px;
+	display: block;
+	height: auto;
+	margin: 0 auto;
+	width: 24px;
 
-  path {
-    fill: rgba($ui-medium-gray, 1);
-    transition: all 0.2s ease-in-out;
-  }
+	path {
+		fill: rgba($ui-medium-gray, 1);
+		transition: all 0.2s ease-in-out;
+	}
 }
 
 .social-column:hover > svg {
-  path {
-    fill: rgba($ui-medium-gray, 0.8);
-  }
+	path {
+		fill: rgba($ui-medium-gray, 0.8);
+	}
 }
 
 .connect-label {
-  @media screen and (max-width: map-get($grid-breakpoints, 'lg')) {
-    flex: 0 0 100%;
-    text-align: center;
-  }
-  display: flex;
-  flex: 1 0 200px;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
+	@media screen and (max-width: map-get($grid-breakpoints, "lg")) {
+		flex: 0 0 100%;
+		text-align: center;
+	}
+	display: flex;
+	flex: 1 0 200px;
+	flex-direction: column;
+	justify-content: center;
+	text-align: left;
 }

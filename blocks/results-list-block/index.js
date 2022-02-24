@@ -1,3 +1,3 @@
-import ResultsList from './features/results-list/default';
+import ResultsList from "./features/results-list/default";
 
 export default ResultsList;

@@ -1,27 +1,35 @@
 # `@wpmedia/resizer-image-content-source-block`
+
 _This is specifically to make sure that resized image urls are available at themes' `blocks.json` widths._
 
 ## Acceptance Criteria
+
 - Add AC relevant to the block
 
 ## Endpoint
+
 - Add the endpoint that this content source is hitting
 
 ## ANS Schema
+
 Detail the data structure returned from this content source
 
 ### ANS Fields
+
 - n/a
 
 ## Configurable Params
+
 | **Param** | **Type** | **Description** |
-|---|---|---|
-| **param** |  |  |
+| --------- | -------- | --------------- |
+| **param** |          |                 |
 
 ## TTL
+
 - Add the TTL of the content source
 
 ## Additional Considerations
+
 ### Usage
 
 ```
@@ -68,7 +76,7 @@ ManualBlock.label = 'Manual Block – Arc Block';
 export default ManualBlock;
 ```
 
-The following urls are allowed by default to be resized on the client-side: 
+The following urls are allowed by default to be resized on the client-side:
 
 ```
   'images.arcpublishing.com',
@@ -79,4 +87,3 @@ The following urls are allowed by default to be resized on the client-side:
   'themebuilder-api-uploads-us-east-1.s3.amazonaws.com',
   'themebuilder-api-uploads.s3.amazonaws.com',
 ```
-

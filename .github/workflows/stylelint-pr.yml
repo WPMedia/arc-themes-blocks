@@ -43,6 +43,6 @@ jobs:
           github_token: ${{ secrets.github_token }}
           fail_on_error: true
           reporter: github-pr-review
-          filter_mode: 'diff_context'
-          stylelint_config: '.stylelintrc.json'
-          stylelint_input: '**/*.(scss|jsx)'
+          filter_mode: "diff_context"
+          stylelint_config: ".stylelintrc.json"
+          stylelint_input: "**/*.(scss|jsx)"

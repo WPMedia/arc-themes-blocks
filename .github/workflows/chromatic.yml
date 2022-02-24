@@ -1,6 +1,6 @@
 # .github/workflows/chromatic.yml
 
-name: 'Chromatic'
+name: "Chromatic"
 
 # Event for the workflow
 on:

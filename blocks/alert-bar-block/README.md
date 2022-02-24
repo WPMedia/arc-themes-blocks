@@ -1,17 +1,21 @@
 # `@wpmedia/alert-bar-block`
+
 _This is the alert bar block that feeds from the `alert-bar-content-source-block`. It will refresh every 30 seconds by default, but the content source will return cached results every two minutes. This is to not overwhelm the content API with simultaneous refreshes for any less intervals._
 
 ## Acceptance Criteria
+
 - Add AC relevant to the block
 
 ## Props
-| **Prop** | **Required** | **Type** | **Description** |
-|---|---|---|---|
-| **required prop** | yes | | |
-| **optional prop** | no | | |
-| **contentConfig example** | | | Please specify which content sources are compatible |
+
+| **Prop**                  | **Required** | **Type** | **Description**                                     |
+| ------------------------- | ------------ | -------- | --------------------------------------------------- |
+| **required prop**         | yes          |          |                                                     |
+| **optional prop**         | no           |          |                                                     |
+| **contentConfig example** |              |          | Please specify which content sources are compatible |
 
 ## ANS Schema
+
 This block consumes data returned from the `alert-bar-content-source-block` content source. The following is an example of that response.
 
 ```js
@@ -44,11 +48,12 @@ This block consumes data returned from the `alert-bar-content-source-block` cont
    revision: { branch: 'default', published: true },
    last_updated_date: '1970-01-01T00:00:00.000Z',
    created_date: '1970-01-01T00:00:00.000Z',
-   website: 'the-sun' 
+   website: 'the-sun'
 }
 ```
 
 ### ANS fields
+
 - `content_elements[0]` only uses first content element. used to check whether to render headline
 - `content_elements[0].websites[arcSite]` Uses `website_url`
 - `content_elements[0].headlines.basic`
@@ -70,16 +75,19 @@ This block consumes data returned from the `alert-bar-content-source-block` cont
 ```
 
 ## Internationalization fields
+
 - Add all internationalization fields used in the block
 
 ## Events
+
 Blocks can emit events. The following is a list of events that are emitted by this block.
 
-| **Event Name** | **Description** |
-|---|---|
-| **eventName** | Describe the event |
+| **Event Name** | **Description**    |
+| -------------- | ------------------ |
+| **eventName**  | Describe the event |
 
 ### Event Listening
+
 Include block specific instructions for event listening.
 
 OR
@@ -87,4 +95,5 @@ OR
 This block does not emit any events.
 
 ## Additional Considerations
+
 _Optional_

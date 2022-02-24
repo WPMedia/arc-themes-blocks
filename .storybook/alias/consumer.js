@@ -1,5 +1,5 @@
 function Consumer() {
-  return null;
+	return null;
 }
 
 export default Consumer;

@@ -1,8 +1,5 @@
-const extractImageFromPromo = (promoItem) => (
-  (promoItem?.basic?.type === 'image' && promoItem?.basic?.url)
-    ? promoItem.basic.url
-    : null
-);
+const extractImageFromPromo = (promoItem) =>
+	promoItem?.basic?.type === "image" && promoItem?.basic?.url ? promoItem.basic.url : null;
 
 /**
  * Helper to resolve an image from an story.
@@ -12,24 +9,24 @@ const extractImageFromPromo = (promoItem) => (
  * @return an string with the image URL or null if not found
  */
 const extractImageFromStory = (storyObject) => {
-  const { promo_items: promoItems } = (storyObject || {});
-  if (!promoItems) {
-    return null;
-  }
+	const { promo_items: promoItems } = storyObject || {};
+	if (!promoItems) {
+		return null;
+	}
 
-  const promoImage = extractImageFromPromo(promoItems);
-  if (promoImage) {
-    return promoImage;
-  }
+	const promoImage = extractImageFromPromo(promoItems);
+	if (promoImage) {
+		return promoImage;
+	}
 
-  if (promoItems.lead_art) {
-    const leadArtPromoImage = extractImageFromPromo(promoItems.lead_art.promo_items);
-    if (leadArtPromoImage) {
-      return leadArtPromoImage;
-    }
-  }
+	if (promoItems.lead_art) {
+		const leadArtPromoImage = extractImageFromPromo(promoItems.lead_art.promo_items);
+		if (leadArtPromoImage) {
+			return leadArtPromoImage;
+		}
+	}
 
-  return null;
+	return null;
 };
 
 export default extractImageFromStory;

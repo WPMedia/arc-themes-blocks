@@ -265,7 +265,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					return <Quote key={key} element={item} />;
 			}
 		case "video":
-			console.log("video", item);
 			return (
 				<section key={key} className="block-margin-bottom">
 					<VideoPlayerPresentational
@@ -278,7 +277,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						displayCredits={!hideVideoCredits}
 						subtitle="subtitle"
 						caption="caption"
-						credits={{}}
+						credits={item.credits}
 					/>
 				</section>
 			);

@@ -28,7 +28,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.NODE_AUTH_TOKEN }}
-        
+
       # pulls all tags (needed for lerna / semantic release to correctly version)
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -59,7 +59,7 @@ jobs:
         run: npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-  
+
   tag_canary_if_1x:
     runs-on: ubuntu-latest
     # has to run publish job first successfully
@@ -77,12 +77,10 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
-      - name: Tag 1.x release with canary 
+      - name: Tag 1.x release with canary
         run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.SYNCED_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} canary) || exit 0'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-
-        

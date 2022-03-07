@@ -1,3 +1,3 @@
-import Overline from './features/overline/default';
+import Overline from "./features/overline/default";
 
 export default Overline;

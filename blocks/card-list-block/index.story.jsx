@@ -1,59 +1,53 @@
-import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
-import CardList from './features/card-list/default';
+import React from "react";
+import { withKnobs } from "@storybook/addon-knobs";
+import CardList from "./features/card-list/default";
 
 export default {
-  title: 'Blocks/Card List',
-  decorators: [withKnobs],
-  parameters: {
-    // Set the viewports in Chromatic at a component level.
-    chromatic: { viewports: [320, 1200] },
-  },
+	title: "Blocks/Card List",
+	decorators: [withKnobs],
+	parameters: {
+		// Set the viewports in Chromatic at a component level.
+		chromatic: { viewports: [320, 1200] },
+	},
 };
 
 const props = {
-  deployment: (x) => x,
+	deployment: (x) => x,
 };
 
 const sampleData = {
-  listContentConfig: {
-    contentService: 'content-api',
-    contentConfigValues: {},
-  },
-  title: 'Card List Headline',
+	listContentConfig: {
+		contentService: "content-api",
+		contentConfigValues: {},
+	},
+	title: "Card List Headline",
 };
 
 export const allFields = () => {
-  const customFields = {
-    ...sampleData,
-  };
+	const customFields = {
+		...sampleData,
+	};
 
-  return (
-    <CardList {...props} customFields={customFields} />
-  );
+	return <CardList {...props} customFields={customFields} />;
 };
 
 export const noTitle = () => {
-  const customFields = {
-    ...sampleData,
-    title: null,
-  };
+	const customFields = {
+		...sampleData,
+		title: null,
+	};
 
-  return (
-    <CardList {...props} customFields={customFields} />
-  );
+	return <CardList {...props} customFields={customFields} />;
 };
 
 export const titleAndNoContent = () => {
-  const customFields = {
-    listContentConfig: {
-      contentService: 'content-api',
-      contentConfigValues: { noData: true },
-    },
-    title: 'Card List with No Data',
-  };
+	const customFields = {
+		listContentConfig: {
+			contentService: "content-api",
+			contentConfigValues: { noData: true },
+		},
+		title: "Card List with No Data",
+	};
 
-  return (
-    <CardList customFields={customFields} />
-  );
+	return <CardList customFields={customFields} />;
 };

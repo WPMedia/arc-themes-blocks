@@ -1,34 +1,34 @@
 .double-chain {
-  .small-promo {
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      .row.sm-promo-padding-btm {
-        padding-top: 0;
-      }
-    }
-    display: block;
+	.small-promo {
+		@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+			.row.sm-promo-padding-btm {
+				padding-top: 0;
+			}
+		}
+		display: block;
 
-    .col-sm-xl-4 {
-      text-align: right;
-    }
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      display: inline-block;
-    }
+		.col-sm-xl-4 {
+			text-align: right;
+		}
+		@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+			display: inline-block;
+		}
 
-    &:nth-child(2n+0) {
-      margin-right: 0;
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-right: map-get($spacers, 'md');
-      }
-    }
+		&:nth-child(2n + 0) {
+			margin-right: 0;
+			@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+				margin-right: map-get($spacers, "md");
+			}
+		}
 
-    .row {
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) and (max-width: map-get($grid-breakpoints-max, 'lg')) {
-        grid-column-gap: 0;
+		.row {
+			@media only screen and (min-width: map-get($grid-breakpoints, "md")) and (max-width: map-get($grid-breakpoints-max, "lg")) {
+				grid-column-gap: 0;
 
-        img {
-          max-width: 90%;
-        }
-      }
-    }
-  }
+				img {
+					max-width: 90%;
+				}
+			}
+		}
+	}
 }

@@ -1,19 +1,19 @@
 name: Tag New Arc Theme Release
-on: 
+on:
   workflow_dispatch:
     inputs:
       target_release_tag:
-        description: 'Base tag (eg, 1.18 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)'
+        description: "Base tag (eg, 1.18 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)"
         required: true
       new_release_tag:
-        description: 'New tag (eg, 1.19 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)'
+        description: "New tag (eg, 1.19 if arc-themes-release-version-1.18 -> arc-themes-release-version-1.19)"
         required: true
 
 jobs:
   validate_tags:
     name: Validate release numbers
     runs-on: ubuntu-latest
-    # ensure new and target release tags match regex: 
+    # ensure new and target release tags match regex:
     # {numbers}.{numbers} requirement per product
     steps:
       - name: Check target release tag name
@@ -22,7 +22,7 @@ jobs:
           if [[ ${{ github.event.inputs.target_release_tag }} =~ ^([0-9]+)\.([0-9]+)\.?$ ]]; then
               echo ::set-output name=match::true
           fi
-      
+
       - name: Check new release tag name
         id: check-new-tag
         run: |
@@ -43,10 +43,10 @@ jobs:
     runs-on: ubuntu-latest
     # previous and any future jobs need this needs property
     needs: validate_tags
-    env: 
+    env:
       TARGET_RELEASE_TAG: arc-themes-release-version-${{ github.event.inputs.target_release_tag }}
       NEW_RELEASE_TAG: arc-themes-release-version-${{ github.event.inputs.new_release_tag }}
-    
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -54,9 +54,9 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
-          
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
+
       - name: Get version of target tag and point the new tag to that version
         run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.TARGET_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} ${{ env.NEW_RELEASE_TAG }}) || exit 0'
         env:

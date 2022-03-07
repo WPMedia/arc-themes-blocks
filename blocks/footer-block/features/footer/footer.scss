@@ -1,160 +1,159 @@
 .footer-item {
-  margin: map-get($spacers, 'xs') 0;
+	margin: map-get($spacers, "xs") 0;
 
-  @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-    margin: calculateRem(12px) 0;
-  }
+	@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+		margin: calculateRem(12px) 0;
+	}
 
-  > a {
-    color: $ui-medium-gray;
-    text-decoration: none;
-  }
+	> a {
+		color: $ui-medium-gray;
+		text-decoration: none;
+	}
 }
 
 footer {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  font-size: calculateRem(16px);
-  line-height: cacluateRem(24px);
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	font-size: calculateRem(16px);
+	line-height: cacluateRem(24px);
 
-  //Fix for IE 11 and non grid browsers
-  .legacy-footer-row {
-    justify-content: space-around;
-    @supports (display: grid) {
-      justify-content: initial;
-      row-gap: 1rem;
-    }
-  }
+	//Fix for IE 11 and non grid browsers
+	.legacy-footer-row {
+		justify-content: space-around;
+		@supports (display: grid) {
+			justify-content: initial;
+			row-gap: 1rem;
+		}
+	}
 
-  .container {
-    @media screen and (max-width: 95rem) and (min-width: 90rem) {
-      margin-left: 5%;
-      margin-right: 5%;
-    }
-  }
+	.container {
+		@media screen and (max-width: 95rem) and (min-width: 90rem) {
+			margin-left: 5%;
+			margin-right: 5%;
+		}
+	}
 
-  .section-separator {
-    border-bottom: 1px solid #babdc2;
-    border-top: 1px solid #babdc2;
-  }
+	.section-separator {
+		border-bottom: 1px solid #babdc2;
+		border-top: 1px solid #babdc2;
+	}
 
-  .copyright {
-    color: #6c7778;
-    text-align: center;
-    vertical-align: middle;
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      margin-bottom: map-get($spacers, 'md');
-      margin-top: map-get($spacers, 'md');
-    }
-  }
+	.copyright {
+		color: #6c7778;
+		text-align: center;
+		vertical-align: middle;
+		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+			margin-bottom: map-get($spacers, "md");
+			margin-top: map-get($spacers, "md");
+		}
+	}
 
-  #copyright-top {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      display: none;
-    }
-  }
+	#copyright-top {
+		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+			display: none;
+		}
+	}
 
-  #copyright-bottom {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      display: block;
-    }
-    display: none;
-  }
+	#copyright-bottom {
+		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+			display: block;
+		}
+		display: none;
+	}
 
-  .primaryLogo {
-    text-align: center;
-  }
+	.primaryLogo {
+		text-align: center;
+	}
 
-  .footer-row {
-    display: table;
-    padding: map-get($spacers, 'xs') 0;
-    width: 100%;
-  }
+	.footer-row {
+		display: table;
+		padding: map-get($spacers, "xs") 0;
+		width: 100%;
+	}
 
-  .social-column {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      display: table-cell;
-      text-align: center;
-      width: 100%;
-    }
-    display: inline-block;
-    vertical-align: middle;
-    width: 16.6%;
-  }
+	.social-column {
+		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+			display: table-cell;
+			text-align: center;
+			width: 100%;
+		}
+		display: inline-block;
+		vertical-align: middle;
+		width: 16.6%;
+	}
 
-  .copyright-column {
-    @media screen and (max-width: map-get($grid-breakpoints, 'md')) {
-      display: table-cell;
-      text-align: center;
-      width: 100%;
-    }
-    display: inline-block;
-    text-align: center;
-    width: 66.6%;
-  }
+	.copyright-column {
+		@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+			display: table-cell;
+			text-align: center;
+			width: 100%;
+		}
+		display: inline-block;
+		text-align: center;
+		width: 66.6%;
+	}
 
-  .socialBtn-container {
-    align-items: center;
-    border-radius: calculateRem(5px);
-    display: inline-flex;
-    justify-content: space-between;
-    margin-left: -(map-get($spacers, 'xs'));
+	.socialBtn-container {
+		align-items: center;
+		border-radius: calculateRem(5px);
+		display: inline-flex;
+		justify-content: space-between;
+		margin-left: -(map-get($spacers, "xs"));
 
-    a {
-      align-self: center;
-      display: inline-block;
-      flex: auto;
-      padding: map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs') map-get($spacers, 'xs');
+		a {
+			align-self: center;
+			display: inline-block;
+			flex: auto;
+			padding: map-get($spacers, "xs") map-get($spacers, "xs") map-get($spacers, "xs")
+				map-get($spacers, "xs");
 
-      &:last-child {
-        border-right: none;
-      }
+			&:last-child {
+				border-right: none;
+			}
 
-      svg {
-        display: block;
-        height: auto;
-        margin: 0 auto;
-        width: 24px;
-      }
+			svg {
+				display: block;
+				height: auto;
+				margin: 0 auto;
+				width: 24px;
+			}
 
-      // svg path {
-      //   fill: $primary-color;
-      // }
+			// svg path {
+			//   fill: $primary-color;
+			// }
 
-      // &:hover {
-      //   svg path {
-      //     fill: $primary-color;
-      //   }
-      // }
-    }
-  }
+			// &:hover {
+			//   svg path {
+			//     fill: $primary-color;
+			//   }
+			// }
+		}
+	}
 
-  .footer-logo {
-    height: 24px;
-    width: auto;
+	.footer-logo {
+		height: 24px;
+		width: auto;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      height: 32px;
-    }
-  }
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			height: 32px;
+		}
+	}
 
-  .footer-section {
-    justify-self: left;
+	.footer-section {
+		justify-self: left;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      justify-self: left;
-    }
-    @media screen and (min-width: map-get($grid-breakpoints, 'lg')) {
-      justify-self: center;
-    }
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			justify-self: left;
+		}
+		@media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+			justify-self: center;
+		}
 
-    .footer-header {
-      font-size: inherit;
-      line-height: inherit;
-      font-weight: bold;
-    }
-  }
+		.footer-header {
+			font-size: inherit;
+			line-height: inherit;
+			font-weight: bold;
+		}
+	}
 }
-
-

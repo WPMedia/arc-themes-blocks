@@ -1,69 +1,77 @@
 .list-container {
-  @include block-margin-bottom;
-  @include block-internal-spacing;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
+	@include block-margin-bottom;
+	@include block-internal-spacing;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
 
-  .list-title {
-    color: $ui-primary-font-color;
-    font-size: calculateRem(20px);
-    font-weight: bold;
-    line-height: calculateRem(24px);
-  }
+	.list-title {
+		color: $ui-primary-font-color;
+		font-size: calculateRem(20px);
+		font-weight: bold;
+		line-height: calculateRem(24px);
+	}
 
-  a > picture > img {
-    vertical-align: middle;
-  }
+	a > picture > img {
+		// stylelint-disable-line
+		vertical-align: middle;
+	}
 
-  hr {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
+	hr {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
 
-  .list-item-simple {
-    @include block-internal-spacing;
-    display: flex;
-    justify-content: flex-start;
-    min-height: 72px;
+	.list-item-simple {
+		@include block-internal-spacing;
+		display: flex;
+		justify-content: flex-start;
+		min-height: 72px;
 
-    .simple-list-anchor {
-      flex: 0 0 33%;
-      text-decoration: none;
+		.simple-list-anchor {
+			flex: 0 0 33%;
+			text-decoration: none;
 
-      img {
-        height: auto;
-        object-fit: cover;
-        width: 100%;
-      }
-    }
+			img {
+				// stylelint-disable-line
+				height: auto;
+				object-fit: cover;
+				width: 100%;
+			}
+		}
 
-    .simple-list-headline-anchor {
-      @include link-color-active-hover($ui-primary-font-color);
-      color: $ui-primary-font-color;
-      display: flex;
-      padding-left: calculateRem(16px);
-      text-decoration: none;
+		.simple-list-headline-anchor {
+			@include link-color-active-hover($ui-primary-font-color);
+			color: $ui-primary-font-color;
+			display: flex;
+			padding-left: calculateRem(16px);
+			text-decoration: none;
 
-      .simple-list-headline-text {
-        font-size: calculateRem(16px);
-        font-weight: normal;
-        line-height: calculateRem(24px);
-        max-height: 72px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
+			.simple-list-headline-text {
+				// stylelint-disable-line
+				font-size: calculateRem(16px);
+				font-weight: normal;
+				line-height: calculateRem(24px);
+				overflow: hidden;
+				// Webkit prefix to make line clamp for is needed as of Feb, 2022,
+				// although these prefixes work in Chrome, FF, Safari, Android Mobile and Edge
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				height: fit-content; // stylelint-disable-line
+			}
+		}
+	}
 }
 
 .simple-list-item-margins {
-  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
+	@media screen and (min-width: map-get($grid-breakpoints, "sm")) {
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
+	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
 }

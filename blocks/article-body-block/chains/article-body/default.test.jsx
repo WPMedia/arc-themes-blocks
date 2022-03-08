@@ -248,6 +248,26 @@ describe("article-body chain", () => {
 			expect(wrapper.find("article.article-body-wrapper").find("span")).toHaveLength(1);
 			expect(wrapper.find("article.article-body-wrapper").find("div")).toHaveLength(0);
 		});
+		it("should not render on lazy load set and is server side on engine theme sdk is true", () => {
+			const customFields = { lazyLoad: true };
+			jest.mock("@wpmedia/engine-theme-sdk", () => ({
+				VideoPlayer: () => <div />,
+				Image: () => <div />,
+				ImageMetadata: () => <div />,
+				LazyLoad: ({ children }) => <>{children}</>,
+				isServerSide: () => true,
+			}));
+			const { default: ArticleBodyChain } = require("./default");
+			const wrapper = mount(
+				<ArticleBodyChain customFields={customFields}>
+					<div>1</div>
+					<div>2</div>
+					<span>3</span>
+				</ArticleBodyChain>
+			);
+			expect(wrapper.find("article.article-body-wrapper")).toHaveLength(0);
+			expect(wrapper.html()).toBeNull();
+		});
 	});
 
 	describe("when it is initialized with elementPlacement greater than contentElements length", () => {
@@ -2394,6 +2414,12 @@ describe("article-body chain", () => {
 							{
 								_id: "TLF25CWTCBBOHOVFPK4C2RR5JA",
 								type: "video",
+								headlines: {
+									basic: "Title",
+								},
+								description: {
+									basic: "Caption",
+								},
 							},
 						],
 					},

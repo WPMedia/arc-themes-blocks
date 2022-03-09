@@ -141,6 +141,12 @@ const leadArtVideo = {
 			},
 		],
 	},
+	headlines: {
+		basic: "Title",
+	},
+	description: {
+		basic: "Caption",
+	},
 	subtitles: {},
 	embed_html:
 		'<div class="powa" id="powa-ba52f779-47be-46b9-8bd5-58dcb4318101" data-org="corecomponents" data-env="prod" data-uuid="ba52f779-47be-46b9-8bd5-58dcb4318101" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>',

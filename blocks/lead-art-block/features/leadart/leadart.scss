@@ -11,7 +11,7 @@
 	figcaption {
 		margin-top: map-get($spacers, "xs");
 
-		p.image-metadata {
+		.image-metadata {
 			font-size: calculateRem(14px);
 			line-height: calculateRem(24px);
 			margin: 8px 0;

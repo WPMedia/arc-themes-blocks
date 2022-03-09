@@ -21,16 +21,7 @@ const AlertBadge = styled.span`
 	font-weight: bold;
 `;
 
-// same logic as embed html
-// if inherit global content
-//    then use that
-// else if title and description passed in and truthy
-//    use those next
-// else if electing to use fetched data based off config
-//    use fetched data
-// else
-// 	  return empty strings for title and description
-function getFetchedPassedOrInheritedTitleDescription(
+function getFetchedPassedOrInheritedTitleDescriptionCaption(
 	globalContent,
 	inheritGlobalContent,
 	title,
@@ -41,6 +32,15 @@ function getFetchedPassedOrInheritedTitleDescription(
 	let headlineBasic;
 	let descriptionBasic;
 
+	// same logic as embed html
+	// if inherit global content
+	//    then use that
+	// else if title and description passed in and truthy
+	//    use those next
+	// else if electing to use fetched data based off config
+	//    use fetched data
+	// else
+	// 	  return empty strings for title and description
 	if (inheritGlobalContent) {
 		headlineBasic = globalContent?.headlines?.basic;
 		descriptionBasic = globalContent?.description?.basic;
@@ -52,9 +52,19 @@ function getFetchedPassedOrInheritedTitleDescription(
 		descriptionBasic = fetchedData?.description?.basic;
 	}
 
+	let credits;
+
+	// since credits can't be passed in, the fallback is to use the fetched data
+	if (inheritGlobalContent) {
+		credits = globalContent?.credits || {};
+	} else {
+		credits = fetchedData?.credits || {};
+	}
+
 	return {
 		headlineBasic: headlineBasic || "",
 		descriptionBasic: descriptionBasic || "",
+		credits,
 	};
 }
 
@@ -118,14 +128,17 @@ const VideoPlayer = (props) => {
 		}
 	});
 
-	const { headlineBasic, descriptionBasic } = getFetchedPassedOrInheritedTitleDescription(
-		globalContent,
-		inheritGlobalContent,
-		title,
-		description,
-		doFetch,
-		fetchedData
-	);
+	const { headlineBasic, descriptionBasic, credits } =
+		getFetchedPassedOrInheritedTitleDescriptionCaption(
+			globalContent,
+			inheritGlobalContent,
+			title,
+			description,
+			doFetch,
+			fetchedData
+		);
+
+	console.log(credits, "credits");
 
 	return (
 		<div className="container-fluid">
@@ -155,7 +168,7 @@ const VideoPlayer = (props) => {
 					displayCredits={!hideVideoCredits}
 					subtitle={headlineBasic}
 					caption={descriptionBasic}
-					credits={globalContent.credits}
+					credits={credits}
 				/>
 			)}
 			{description && (

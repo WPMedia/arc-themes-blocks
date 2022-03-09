@@ -68,9 +68,6 @@ class LeadArt extends Component {
 			hideCaption = false,
 			hideCredits = false,
 			imageLoadingStrategy,
-			hideVideoTitle = false,
-			hideVideoCaption = false,
-			hideVideoCredits = false,
 		} = customFields;
 
 		// handles empty string for selecting no option and undefined for default
@@ -138,9 +135,9 @@ class LeadArt extends Component {
 						customFields={{
 							playthrough: !!customFields?.playthrough,
 						}}
-						displayTitle={!hideVideoTitle}
-						displayCaption={!hideVideoCaption}
-						displayCredits={!hideVideoCredits}
+						displayTitle={!hideTitle}
+						displayCaption={!hideCaption}
+						displayCredits={!hideCredits}
 						subtitle={lead_art?.headlines?.basic}
 						caption={lead_art?.description?.basic}
 						credits={lead_art.credits}
@@ -263,19 +260,22 @@ LeadArt.propTypes = {
 		}),
 		...videoPlayerCustomFields(),
 		hideTitle: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Title",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCaption: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Caption",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCredits: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Display Options",
@@ -288,24 +288,6 @@ LeadArt.propTypes = {
 				eager: "Eager",
 				lazy: "Lazy",
 			},
-		}),
-		hideVideoTitle: PropTypes.bool.tag({
-			description: "This display option applies to all Videos in the Lead Art block",
-			label: "Hide Title",
-			defaultValue: false,
-			group: "Video Display Options",
-		}),
-		hideVideoCaption: PropTypes.bool.tag({
-			description: "This display option applies to all Videos in the Lead Art block",
-			label: "Hide Caption",
-			defaultValue: false,
-			group: "Video Display Options",
-		}),
-		hideVideoCredits: PropTypes.bool.tag({
-			description: "This display option applies to all Videos in the Lead Art block",
-			label: "Hide Credits",
-			defaultValue: false,
-			group: "Video Display Options",
 		}),
 	}),
 };

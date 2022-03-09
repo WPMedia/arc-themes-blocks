@@ -57,6 +57,12 @@ describe("LeadArt", () => {
 			promo_items: {
 				lead_art: {
 					type: "video",
+					headlines: {
+						basic: "Title",
+					},
+					description: {
+						basic: "Description",
+					},
 				},
 			},
 		};

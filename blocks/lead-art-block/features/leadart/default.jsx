@@ -68,6 +68,9 @@ class LeadArt extends Component {
 			hideCaption = false,
 			hideCredits = false,
 			imageLoadingStrategy,
+			hideVideoTitle = false,
+			hideVideoCaption = false,
+			hideVideoCredits = false,
 		} = customFields;
 
 		// handles empty string for selecting no option and undefined for default
@@ -135,6 +138,12 @@ class LeadArt extends Component {
 						customFields={{
 							playthrough: !!customFields?.playthrough,
 						}}
+						displayTitle={!hideVideoTitle}
+						displayCaption={!hideVideoCaption}
+						displayCredits={!hideVideoCredits}
+						subtitle={lead_art.headlines.basic}
+						caption={lead_art.description.basic}
+						credits={lead_art.credits}
 					/>
 				);
 			}
@@ -279,6 +288,24 @@ LeadArt.propTypes = {
 				eager: "Eager",
 				lazy: "Lazy",
 			},
+		}),
+		hideVideoTitle: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Lead Art block",
+			label: "Hide Title",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCaption: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Lead Art block",
+			label: "Hide Caption",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCredits: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Lead Art block",
+			label: "Hide Credits",
+			defaultValue: false,
+			group: "Video Display Options",
 		}),
 	}),
 };

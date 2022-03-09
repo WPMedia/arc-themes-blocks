@@ -141,8 +141,8 @@ class LeadArt extends Component {
 						displayTitle={!hideVideoTitle}
 						displayCaption={!hideVideoCaption}
 						displayCredits={!hideVideoCredits}
-						subtitle={lead_art.headlines.basic}
-						caption={lead_art.description.basic}
+						subtitle={lead_art?.headlines?.basic}
+						caption={lead_art?.description?.basic}
 						credits={lead_art.credits}
 					/>
 				);

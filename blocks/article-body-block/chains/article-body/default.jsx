@@ -275,8 +275,8 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						displayTitle={!hideVideoTitle}
 						displayCaption={!hideVideoCaption}
 						displayCredits={!hideVideoCredits}
-						subtitle={item.headlines.basic}
-						caption={item.description.basic}
+						subtitle={item?.headlines?.basic}
+						caption={item?.description?.basic}
 						credits={item.credits}
 					/>
 				</section>

@@ -1,9 +1,11 @@
-name: Test News Theme Blocks
+name: Test Blocks and Linting - Everything
 
 on:
   pull_request:
     # synchronize	commit(s) pushed to the pull request
     types: [synchronize, opened]
+    # ignores prs to canary, runs on other branches
+    branches: [stable, rc, beta]
 
 jobs:
   ensure_minimum_test_coverage_linting:
@@ -34,6 +36,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
+      # all tests run
       - name: Run tests with coverage
         run: npm run test:coverage
 

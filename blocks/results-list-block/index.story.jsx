@@ -100,6 +100,14 @@ export const withShowItemOverline = () => {
   );
 };
 
+export const withHeadlineAndDescription = () => {
+  const data = { ...sampleData, showHeadline: true, showDescription: true };
+
+  return (
+    <ResultsListBlock customFields={data} />
+  );
+};
+
 export const withLazyLoadDisabledAndBylineDateHeadlineImage = () => {
   const data = {
     ...sampleData,

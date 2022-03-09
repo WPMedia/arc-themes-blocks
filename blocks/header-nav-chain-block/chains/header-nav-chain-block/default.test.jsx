@@ -328,6 +328,7 @@ describe('the header navigation feature for the default output type', () => {
       expect(wrapper.find('div#nav-sections').hasClass('closed')).toBe(false);
     });
   });
+
   describe('primary color background color option', () => {
     it('if has navBarBackground as primary color, use primary color as background color', () => {
       getProperties.mockImplementation(() => ({ navColor: 'light', navBarBackground: 'primary-color' }));
@@ -336,7 +337,15 @@ describe('the header navigation feature for the default output type', () => {
       const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
       expect(wrapper.find('StyledComponent').at(0).prop('navBarBackground')).toEqual('#1B6FA6');
     });
+
+    it('if has navColor as light', () => {
+      getProperties.mockImplementation(() => ({ navColor: 'light' }));
+
+      const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
+      expect(wrapper.find('StyledComponent').at(0).prop('navBarBackground')).toEqual('#fff');
+    });
   });
+
   describe('dealing with accessibility and screen readers', () => {
     it('should render the block with the default aria-label', () => {
       const wrapper = mount(
@@ -354,6 +363,7 @@ describe('the header navigation feature for the default output type', () => {
       expect(wrapper.find('nav').props()).toHaveProperty('aria-label', 'Links');
     });
   });
+
   describe('primary image', () => {
     it('shown without deployment function prefix if external http url', () => {
       getProperties.mockReturnValueOnce({
@@ -372,6 +382,7 @@ describe('the header navigation feature for the default output type', () => {
       expect(navLogoImg).toHaveLength(1);
       expect(navLogoImg.prop('src')).toEqual('http://www.example.com/logo.png');
     });
+
     it('shows image rendered from depoyment function if no http or base64 found', () => {
       getProperties.mockReturnValueOnce({
         primaryLogo: 'resources/images/logo.png',
@@ -388,6 +399,7 @@ describe('the header navigation feature for the default output type', () => {
       expect(navLogoImg).toHaveLength(1);
       expect(navLogoImg.prop('src')).toEqual('rendered-from-deployment');
     });
+
     it('shows image with deployment function used with base64', () => {
       getProperties.mockReturnValueOnce({
         primaryLogo: 'base64, iVBORw0KGgoAAAANSUhEUgAAAAUA',

@@ -329,6 +329,83 @@
 		"pt": "There was an error processing your request.",
 		"sv": "There was an error processing your request."
 	},
+	"identity-block.reset-password-headline": {
+		"de": "Create your new password",
+		"en": "Create your new password",
+		"es": "Create your new password",
+		"fr": "Create your new password",
+		"ja": "Create your new password",
+		"ko": "Create your new password",
+		"no": "Create your new password",
+		"pt": "Create your new password",
+		"sv": "Create your new password"
+	},
+	"identity-block.reset-password-headline-submitted": {
+		"de": "New password saved",
+		"en": "New password saved",
+		"es": "New password saved",
+		"fr": "New password saved",
+		"ja": "New password saved",
+		"ko": "New password saved",
+		"no": "New password saved",
+		"pt": "New password saved",
+		"sv": "New password saved"
+	},
+	"identity-block.reset-password-instruction": {
+		"de": "Enter a new password for your account.",
+		"en": "Enter a new password for your account.",
+		"es": "Enter a new password for your account.",
+		"fr": "Enter a new password for your account.",
+		"ja": "Enter a new password for your account.",
+		"ko": "Enter a new password for your account.",
+		"no": "Enter a new password for your account.",
+		"pt": "Enter a new password for your account.",
+		"sv": "Enter a new password for your account."
+	},
+	"identity-block.reset-password-instruction-submitted": {
+		"de": "Your new password has been saved.",
+		"en": "Your new password has been saved.",
+		"es": "Your new password has been saved.",
+		"fr": "Your new password has been saved.",
+		"ja": "Your new password has been saved.",
+		"ko": "Your new password has been saved.",
+		"no": "Your new password has been saved.",
+		"pt": "Your new password has been saved.",
+		"sv": "Your new password has been saved."
+	},
+	"identity-block.reset-password-submit": {
+		"de": "Continue",
+		"en": "Continue",
+		"es": "Continue",
+		"fr": "Continue",
+		"ja": "Continue",
+		"ko": "Continue",
+		"no": "Continue",
+		"pt": "Continue",
+		"sv": "Continue"
+	},
+	"identity-block.reset-password-submit-submitted": {
+		"de": "Continue to log in",
+		"en": "Continue to log in",
+		"es": "Continue to log in",
+		"fr": "Continue to log in",
+		"ja": "Continue to log in",
+		"ko": "Continue to log in",
+		"no": "Continue to log in",
+		"pt": "Continue to log in",
+		"sv": "Continue to log in"
+	},
+	"identity-block.reset-password-error": {
+		"de": "There was an error processing your request.",
+		"en": "There was an error processing your request.",
+		"es": "There was an error processing your request.",
+		"fr": "There was an error processing your request.",
+		"ja": "There was an error processing your request.",
+		"ko": "There was an error processing your request.",
+		"no": "There was an error processing your request.",
+		"pt": "There was an error processing your request.",
+		"sv": "There was an error processing your request."
+	},
 	"identity-block.edit": {
 		"de": "Edit",
 		"en": "Edit",

@@ -61,16 +61,26 @@ class LeadArt extends Component {
 
   render() {
     const {
-      isOpen, buttonPosition, content, buttonLabel,
+      isOpen, content, buttonLabel,
     } = this.state;
 
     const { arcSite, customFields, id } = this.props;
-    const { hideTitle = false, hideCaption = false, hideCredits = false } = customFields;
+    const {
+      hideTitle = false,
+      hideCaption = false,
+      hideCredits = false,
+      imageLoadingStrategy,
+    } = customFields;
+
+    // handles empty string for selecting no option and undefined for default
+    const allowedImageLoadingStrategy = imageLoadingStrategy || 'eager';
 
     let AdBlock;
 
     try {
+      /* istanbul ignore next */
       const { default: AdFeature } = require('@wpmedia/ads-block');
+      /* istanbul ignore next */
       AdBlock = () => (
         <AdFeature customFields={{
           adType: '300x250_gallery',
@@ -79,6 +89,7 @@ class LeadArt extends Component {
         />
       );
     } catch (e) {
+      /* istanbul ignore next */
       AdBlock = () => <p>Ad block not found</p>;
     }
 
@@ -88,25 +99,23 @@ class LeadArt extends Component {
       let caption = null;
 
       if (lead_art.type === 'raw_html') {
-        if (buttonPosition !== 'hidden') {
-          // this could be figure and figcaption, a react component
-          const mainContent = (
-            <>
-              <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-            </>
-          );
-          lightbox = (
-            <>
-              {isOpen && (
-                <Lightbox
-                  mainSrc={mainContent}
-                  onCloseRequest={this.setIsOpenToFalse}
-                  showImageCaption={false}
-                />
-              )}
-            </>
-          );
-        }
+        // this could be figure and figcaption, a react component
+        const mainContent = (
+          <>
+            <div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+          </>
+        );
+        lightbox = (
+          <>
+            {isOpen && (
+              <Lightbox
+                mainSrc={mainContent}
+                onCloseRequest={this.setIsOpenToFalse}
+                showImageCaption={false}
+              />
+            )}
+          </>
+        );
 
         return (
           <div className="lead-art-wrapper">
@@ -135,19 +144,17 @@ class LeadArt extends Component {
       }
 
       if (lead_art.type === 'image') {
-        if (buttonPosition !== 'hidden') {
-          lightbox = (
-            <>
-              {isOpen && (
-                <Lightbox
-                  mainSrc={this.lightboxImgHandler()}
-                  onCloseRequest={this.setIsOpenToFalse}
-                  imageCaption={!hideCaption ? lead_art.caption : null}
-                />
-              )}
-            </>
-          );
-        }
+        lightbox = (
+          <>
+            {isOpen && (
+              <Lightbox
+                mainSrc={this.lightboxImgHandler()}
+                onCloseRequest={this.setIsOpenToFalse}
+                imageCaption={!hideCaption ? lead_art.caption : null}
+              />
+            )}
+          </>
+        );
 
         caption = (
           <ImageMetadata
@@ -186,6 +193,7 @@ class LeadArt extends Component {
                 breakpoints={getProperties(arcSite)?.breakpoints}
                 resizerURL={getProperties(arcSite)?.resizerURL}
                 resizedImageOptions={lead_art.resized_params}
+                loading={allowedImageLoadingStrategy} // eager by default, otherwise lazy
               />
             </div>
             {lightbox}
@@ -215,7 +223,7 @@ class LeadArt extends Component {
             controlsFont={getThemeStyle(arcSite)['primary-font-family']}
             autoplayPhrase={this.phrases.t('global.gallery-autoplay-button')}
             pausePhrase={this.phrases.t('global.gallery-pause-autoplay-button')}
-            pageCountPhrase={(current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
+            pageCountPhrase={/* istanbul ignore next */ (current, total) => this.phrases.t('global.gallery-page-count-text', { current, total })}
             adElement={/* istanbul ignore next */ () => (<AdBlock />)}
             interstitialClicks={interstitialClicks}
             displayTitle={!hideTitle}
@@ -273,6 +281,19 @@ LeadArt.propTypes = {
       defaultValue: false,
       group: 'Display Options',
     }),
+    imageLoadingStrategy: PropTypes.oneOf([
+      'lazy', 'eager',
+    ]).tag(
+      {
+        label: 'Image Loading Strategy',
+        defaultValue: 'eager',
+        group: 'Display Options',
+        labels: {
+          eager: 'Eager',
+          lazy: 'Lazy',
+        },
+      },
+    ),
   }),
 };
 

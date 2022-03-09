@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/related-content-content-source-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Content source block to get stories related content.",
   "author": "nelson fernandez <nelson.fernandez@washpost.com>",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",

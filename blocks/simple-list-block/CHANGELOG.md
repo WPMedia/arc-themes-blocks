@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/simple-list-block@5.15.0...@wpmedia/simple-list-block@5.16.0) (2022-03-09)
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+### Performance Improvements
+
+* Ignore test files in features folder ([b2a344f](https://github.com/WPMedia/arc-themes-blocks/commit/b2a344f96d92b63d25658ab70ec9ec63633fcf6f))
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/arc-themes-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/arc-themes-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
+
+
+### Reverts
+
+* Revert "adding update package files" ([b9c1808](https://github.com/WPMedia/arc-themes-blocks/commit/b9c1808b609ec5adc63e176873df14db95444df3))
+
+
+
+# 5.9.0-canary.0 (2020-10-14)
+
+
+
+
+
 # 5.15.0 (2021-09-15)
 
 

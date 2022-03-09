@@ -204,6 +204,24 @@ VideoPlayer.propTypes = {
 			defaultValue: false,
 			group: "Video Settings",
 		}),
+		hideVideoTitle: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Title",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCaption: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Caption",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCredits: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Credits",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
 		...videoPlayerCustomFields(),
 		title: PropTypes.string.tag({
 			label: "Title",
@@ -218,29 +236,9 @@ VideoPlayer.propTypes = {
 			group: "Display settings",
 		}),
 	}),
+
 	embedMarkup: PropTypes.string,
 	enableAutoplay: PropTypes.bool,
-	// eslint-disable-next-line react/no-unused-prop-types
-	hideVideoTitle: PropTypes.bool.tag({
-		description: "This display option applies to all Videos in the Video Center Player block",
-		label: "Hide Title",
-		defaultValue: false,
-		group: "Video Display Options",
-	}),
-	// eslint-disable-next-line react/no-unused-prop-types
-	hideVideoCaption: PropTypes.bool.tag({
-		description: "This display option applies to all Videos in the Video Center Player block",
-		label: "Hide Caption",
-		defaultValue: false,
-		group: "Video Display Options",
-	}),
-	// eslint-disable-next-line react/no-unused-prop-types
-	hideVideoCredits: PropTypes.bool.tag({
-		description: "This display option applies to all Videos in the Video Center Player block",
-		label: "Hide Credits",
-		defaultValue: false,
-		group: "Video Display Options",
-	}),
 };
 
 VideoPlayer.label = "Video Center Player - Arc Block";

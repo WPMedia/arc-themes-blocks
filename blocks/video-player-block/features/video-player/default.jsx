@@ -138,8 +138,6 @@ const VideoPlayer = (props) => {
 			fetchedData
 		);
 
-	console.log(credits, "credits");
-
 	return (
 		<div className="container-fluid">
 			{alertBadge && (

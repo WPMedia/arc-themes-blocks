@@ -6,7 +6,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "chains",
+    "layouts",
     "intl.json"
   ],
   "publishConfig": {

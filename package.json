@@ -158,7 +158,7 @@
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
     "@wpmedia/simple-list-block": "file:blocks/simple-list-block",
     "@wpmedia/single-chain-block": "file:blocks/single-chain-block",
-    "@wpmedia/single-column-layout-block": "file:blocks/single-column-layout-block",
+    "@wpmedia/single-column-layout-block@local": "file:blocks/single-column-layout-block",
     "@wpmedia/site-hierarchy-content-block": "file:blocks/site-hierarchy-content-block",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
-const LAYOUT_CLASS_NAME = "single-column-regular";
+const LAYOUT_CLASS_NAME = "b-single-column-regular";
 
 const SingleColumnRegular = ({ children }) => {
 	const [navigation, main, footer] = React.Children.toArray(children);

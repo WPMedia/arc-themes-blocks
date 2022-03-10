@@ -21,6 +21,53 @@ const AlertBadge = styled.span`
 	font-weight: bold;
 `;
 
+function getFetchedPassedOrInheritedTitleDescriptionCaption(
+	globalContent,
+	inheritGlobalContent,
+	title,
+	description,
+	doFetch,
+	fetchedData
+) {
+	let headlineBasic;
+	let descriptionBasic;
+
+	// same logic as embed html
+	// if inherit global content
+	//    then use that
+	// else if title and description passed in and truthy
+	//    use those next
+	// else if electing to use fetched data based off config
+	//    use fetched data
+	// else
+	// 	  return empty strings for title and description
+	if (inheritGlobalContent) {
+		headlineBasic = globalContent?.headlines?.basic;
+		descriptionBasic = globalContent?.description?.basic;
+	} else if (title && description) {
+		headlineBasic = title;
+		descriptionBasic = description;
+	} else if (doFetch) {
+		headlineBasic = fetchedData?.headlines?.basic;
+		descriptionBasic = fetchedData?.description?.basic;
+	}
+
+	let credits;
+
+	// since credits can't be passed in, the fallback is to use the fetched data
+	if (inheritGlobalContent) {
+		credits = globalContent?.credits || {};
+	} else {
+		credits = fetchedData?.credits || {};
+	}
+
+	return {
+		headlineBasic: headlineBasic || "",
+		descriptionBasic: descriptionBasic || "",
+		credits,
+	};
+}
+
 const VideoPlayer = (props) => {
 	const { customFields = {}, embedMarkup, enableAutoplay = false } = props;
 
@@ -32,6 +79,9 @@ const VideoPlayer = (props) => {
 		title,
 		description,
 		websiteURL,
+		hideVideoTitle = false,
+		hideVideoCaption = false,
+		hideVideoCredits = false,
 	} = customFields;
 
 	const { id, globalContent = {}, arcSite } = useFusionContext();
@@ -78,6 +128,16 @@ const VideoPlayer = (props) => {
 		}
 	});
 
+	const { headlineBasic, descriptionBasic, credits } =
+		getFetchedPassedOrInheritedTitleDescriptionCaption(
+			globalContent,
+			inheritGlobalContent,
+			title,
+			description,
+			doFetch,
+			fetchedData
+		);
+
 	return (
 		<div className="container-fluid">
 			{alertBadge && (
@@ -101,6 +161,12 @@ const VideoPlayer = (props) => {
 						autoplay,
 						playthrough,
 					}}
+					displayTitle={!hideVideoTitle}
+					displayCaption={!hideVideoCaption}
+					displayCredits={!hideVideoCredits}
+					subtitle={headlineBasic}
+					caption={descriptionBasic}
+					credits={credits}
 				/>
 			)}
 			{description && (
@@ -138,6 +204,24 @@ VideoPlayer.propTypes = {
 			defaultValue: false,
 			group: "Video Settings",
 		}),
+		hideVideoTitle: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Title",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCaption: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Caption",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCredits: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Video Center Player block",
+			label: "Hide Credits",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
 		...videoPlayerCustomFields(),
 		title: PropTypes.string.tag({
 			label: "Title",
@@ -152,6 +236,7 @@ VideoPlayer.propTypes = {
 			group: "Display settings",
 		}),
 	}),
+
 	embedMarkup: PropTypes.string,
 	enableAutoplay: PropTypes.bool,
 };

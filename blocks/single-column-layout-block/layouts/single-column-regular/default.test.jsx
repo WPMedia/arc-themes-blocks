@@ -39,13 +39,13 @@ describe("Single Column Regular Layout", () => {
 		});
 
 		it("should render null when null is the child", () => {
-			render(<SingleColumnRegular>{null}</SingleColumnRegular>);
-			expect(screen.queryByText(testText)).not.toBeInTheDocument();
+			const { container } = render(<SingleColumnRegular>{null}</SingleColumnRegular>);
+			expect(container).toBeEmptyDOMElement();
 		});
 
 		it("should render null when no child", () => {
-			render(<SingleColumnRegular />);
-			expect(screen.queryByText(testText)).not.toBeInTheDocument();
+			const { container } = render(<SingleColumnRegular />);
+			expect(container).toBeEmptyDOMElement();
 		});
 	});
 });

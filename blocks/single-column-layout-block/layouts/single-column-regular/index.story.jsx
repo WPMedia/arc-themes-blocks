@@ -30,15 +30,14 @@ const styles2 = {
 };
 
 const Navigation = () => <div style={styles}>Navigation</div>;
-const Comp1 = () => <div style={styles2}>1</div>;
-const Comp2 = () => <div style={styles2}>2</div>;
+const Component = ({ children }) => <div style={styles2}>{children}</div>;
 const Footer = () => <div style={styles}>Footer</div>;
 
 export const layoutWithOneChild = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
 		<>
-			<Comp1 />
+			<Component>Main 1</Component>
 		</>
 		<Footer />
 	</SingleColumnRegularLayout>
@@ -48,8 +47,8 @@ export const layoutWithTwoChildren = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
 		<>
-			<Comp1 />
-			<Comp2 />
+			<Component>Main 1</Component>
+			<Component>Main 2</Component>
 		</>
 		<Footer />
 	</SingleColumnRegularLayout>

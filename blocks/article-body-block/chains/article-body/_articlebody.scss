@@ -46,15 +46,13 @@
 		}
 	}
 
-	.gallery {
-		.image-metadata {
-			font-size: calculateRem(14px);
-			line-height: calculateRem(24px);
-			margin: 8px 0;
+	.image-metadata {
+		font-size: calculateRem(14px);
+		line-height: calculateRem(24px);
+		margin: 8px 0;
 
-			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
-				line-height: calculateRem(20px);
-			}
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			line-height: calculateRem(20px);
 		}
 	}
 

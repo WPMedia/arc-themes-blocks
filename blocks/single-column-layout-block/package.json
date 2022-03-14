@@ -1,0 +1,24 @@
+{
+  "name": "@wpmedia/single-column-layout-block",
+  "version": "0.1.0",
+  "description": "Single Column Layout Block",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "layouts",
+    "intl.json"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+    "directory": "blocks/single-column-layout-block"
+  },
+  "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5"
+  }
+}

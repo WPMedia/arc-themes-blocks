@@ -6,7 +6,12 @@ module.exports = {
 				modules: "commonjs",
 			},
 		],
-		"@babel/preset-react",
+		[
+			"@babel/preset-react",
+			{
+				runtime: "automatic",
+			},
+		],
 	],
 	env: {
 		test: {

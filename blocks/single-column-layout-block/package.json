@@ -4,8 +4,9 @@
   "description": "Single Column Layout Block",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+    "_index.scss",
     "layouts",
     "intl.json"
   ],

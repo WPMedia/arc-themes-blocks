@@ -14,6 +14,6 @@ export default {
   },
 };
 
-export const ShowIcon = () => <<%= h.changeCase.pascal(block_name) %> customFields={{ showIcon: true }} />;
+export const showHeading = () => <<%= h.changeCase.pascal(block_name) %> customFields={{ showHeading: true }} />;
 
-export const HideIcon = () => <<%= h.changeCase.pascal(block_name) %> customFields={{ showIcon: false }} />;
+export const hideHeading = () => <<%= h.changeCase.pascal(block_name) %> customFields={{ showHeading: false }} />;

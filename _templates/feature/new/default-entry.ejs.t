@@ -9,16 +9,18 @@ import { useFusionContext } from 'fusion:context';
 import getProperties from 'fusion:properties';
 import getTranslatedPhrases from 'fusion:intl';
 
-// icons and other utilities can be found in the engine theme sdk storybook
-// https://beta--5eed0506faad4f0022fedf95.chromatic.com/
+// Arc Themes Components - Base set of components used to compose blocks
+// https://github.com/WPMedia/arc-themes-components/
 import {
-  EnvelopeIcon,
-} from '@wpmedia/engine-theme-sdk';
+  Heading,
+} from '@wpmedia/arc-themes-components';
+
+const BLOCK_CLASS_NAME = "b-<%= h.inflection.dasherize(block_name) %>";
 
 function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
   // for intro material on consuming react props
   // https://reactjs.org/docs/components-and-props.html
-  const { showIcon } = customFields;
+  const { showHeading } = customFields;
 
   // get properties from context for using translations in intl.json
   // See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -27,9 +29,10 @@ function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
   const phrases = getTranslatedPhrases(locale);
 
   return (
-    <div>
-      <p>{phrases.t('<%= h.inflection.dasherize(block_name) %>-block.hello-text')}</p>
-      {showIcon && <EnvelopeIcon />}
+    <div className={`${BLOCK_CLASS_NAME}`}>
+      {showHeading ? <Heading>
+        {phrases.t('<%= h.inflection.dasherize(block_name) %>-block.hello-text')}
+      </Heading> : null}
     </div>
   );
 }
@@ -41,8 +44,8 @@ function <%= h.changeCase.pascal(block_name) %>({ customFields }) {
 
 <%= h.changeCase.pascal(block_name) %>.propTypes = {
   customFields: PropTypes.shape({
-    showIcon: PropTypes.boolean.tag({
-      name: 'Show icon?',
+    showHeading: PropTypes.boolean.tag({
+      name: 'Show Heading?',
       defaultValue: false,
     }),
   }),

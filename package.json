@@ -63,6 +63,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "@wpmedia/arc-themes-components": "arc-themes-release-version-2.00",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
     "babel-eslint": "^10.0.2",

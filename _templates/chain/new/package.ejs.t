@@ -8,8 +8,9 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
   "description": "<%= h.changeCase.title( block_name ) %> Block",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+    "_index.scss",
     "chains",
     "intl.json"
   ],

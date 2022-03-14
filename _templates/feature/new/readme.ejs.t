@@ -5,9 +5,6 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/README.md
 # @wpmedia/<%= h.inflection.dasherize(block_name) %>-block
 _Please provide a 1-2 sentence description of what the @wpmedia/<%= h.inflection.dasherize(block_name) %>-block is and what it does._
 
-## Acceptance Criteria
-- Add AC relevant to the block
-
 ## Props
 | **Prop** | **Required** | **Type** | **Descripton** |
 |---|---|---|---|

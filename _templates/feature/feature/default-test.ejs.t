@@ -8,25 +8,10 @@ import '@testing-library/jest-dom/extend-expect';
 
 import <%= h.changeCase.pascal(feature_name) %> from './default';
 
-jest.mock('fusion:context', () => ({
-  useFusionContext: jest.fn(() => ({
-    arcSite: 'dagen',
-  })),
-}));
-
-jest.mock('fusion:properties', () => (jest.fn(() => ({
-  locale: 'en',
-}))));
-
-jest.mock('fusion:intl', () => ({
-  __esModule: true,
-  default: jest.fn((locale) => ({ t: jest.fn((phrase) => require('../../intl.json')[phrase][locale]) })),
-}));
-
 describe('<%= h.changeCase.title( feature_name ) %>', () => {
   it('should render', () => {
-    const { unmount } = render(<<%= h.changeCase.pascal(feature_name) %> customFields={{ showIcon: true }} />);
-    expect(screen.queryByText('Hello World')).toBeInTheDocument();
+    const { unmount } = render(<<%= h.changeCase.pascal(feature_name) %> customFields={{ showHeading: true }} />);
+    expect(screen.queryByText('<%= h.inflection.dasherize(block_name) %>-block.hello-text')).toBeInTheDocument();
     unmount();
   });
 });

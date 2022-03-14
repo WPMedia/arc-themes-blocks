@@ -1,17 +1,13 @@
----
-# helper funcs https://www.hygen.io/docs/templates/#helpers-and-inflections
-to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
----
 {
-  "name": "@wpmedia/<%= h.inflection.dasherize(block_name) %>-block",
+  "name": "@wpmedia/single-column-layout-block",
   "version": "0.1.0",
-  "description": "<%= h.changeCase.title( block_name ) %> Block",
+  "description": "Single Column Layout Block",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
     "_index.scss",
-    "chains",
+    "layouts",
     "intl.json"
   ],
   "publishConfig": {
@@ -21,7 +17,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/package.json
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/<%= h.inflection.dasherize(block_name) %>-block"
+    "directory": "blocks/single-column-layout-block"
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5"

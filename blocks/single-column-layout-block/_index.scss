@@ -5,7 +5,7 @@
 }
 
 .b-single-column-regular {
-	/* stylelint-disable order/order */
+	// stylelint-disable order/order
 	max-width: 90rem; // 1440px
 	margin: auto;
 	@include scss.block-properties("single-column-regular");

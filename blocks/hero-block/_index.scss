@@ -1,0 +1,40 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-hero {
+	display: grid;
+	grid-template: "hero";
+	justify-content: center;
+
+	@include scss.block-properties("hero");
+	@include scss.block-components("hero");
+
+	> * {
+		grid-area: hero;
+	}
+
+	&--left {
+		width: 100%;
+
+		@include scss.block-properties("hero-left");
+		@include scss.block-components("hero-left");
+	}
+
+	&--center {
+		@include scss.block-properties("hero-center");
+		@include scss.block-components("hero-center");
+	}
+
+	&--light {
+		@include scss.block-properties("hero-light");
+		@include scss.block-components("hero-light");
+	}
+
+	&--subheadline {
+		@include scss.block-properties("hero-subheadline");
+	}
+
+	&--text {
+		place-self: center;
+		max-width: 75rem;
+	}
+}

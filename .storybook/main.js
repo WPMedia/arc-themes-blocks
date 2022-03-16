@@ -32,26 +32,33 @@ module.exports = {
 			},
 		};
 
-		config.module.rules.push({
-			test: /\.scss$/,
-			use: [
-				"style-loader",
-				"css-loader",
-				{
-					loader: "sass-loader",
-					options: {
-						prependData: () => `
+		config.module.rules.push(
+			{
+				test: /\.scss$/,
+				use: [
+					"style-loader",
+					"css-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							prependData: () => `
               @import '~@wpmedia/news-theme-css/scss';
 
               // Should look for a better way to do this ->
               // This should be defaulted in the news-theme-css repo too!
               $theme-primary-font-family: $primary-font-family !default;
             `,
+						},
 					},
-				},
-			],
-			include: path.resolve(__dirname, "../"),
-		});
+				],
+				include: path.resolve(__dirname, "../"),
+			},
+			{
+				test: /\.(js|jsx)$/,
+				include: path.resolve(__dirname, "../node_modules/@wpmedia/arc-themes-components"),
+				use: ["babel-loader"],
+			}
+		);
 
 		// Return the altered config
 		return config;

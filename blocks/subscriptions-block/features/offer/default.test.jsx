@@ -26,7 +26,7 @@ const sampleOffer = {
 			canRenew: true,
 			canRestart: true,
 			canStart: true,
-			name: "allaccesfffs",
+			name: "allaccess",
 			validFrom: 1632146400000,
 			validUntil: null,
 		},

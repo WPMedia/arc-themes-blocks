@@ -5,6 +5,7 @@ import Consumer from "fusion:consumer";
 import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+import Static from "fusion:static";
 import {
 	Gallery,
 	ImageMetadata,
@@ -118,7 +119,12 @@ class LeadArt extends Component {
 
 				return (
 					<div className="lead-art-wrapper">
-						<div className="inner-content" dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+						<Static id={lead_art._id}>
+							<div
+								className="inner-content"
+								dangerouslySetInnerHTML={{ __html: lead_art.content }}
+							/>
+						</Static>
 						{lightbox}
 					</div>
 				);
@@ -135,12 +141,6 @@ class LeadArt extends Component {
 						customFields={{
 							playthrough: !!customFields?.playthrough,
 						}}
-						displayTitle={!hideTitle}
-						displayCaption={!hideCaption}
-						displayCredits={!hideCredits}
-						subtitle={lead_art?.headlines?.basic}
-						caption={lead_art?.description?.basic}
-						credits={lead_art.credits}
 					/>
 				);
 			}
@@ -260,22 +260,19 @@ LeadArt.propTypes = {
 		}),
 		...videoPlayerCustomFields(),
 		hideTitle: PropTypes.bool.tag({
-			description:
-				"This display option applies to Lead Art media types: Images, Gallery, and Video",
+			description: "This display option applies to Lead Art media types: Images and Gallery",
 			label: "Hide Title",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCaption: PropTypes.bool.tag({
-			description:
-				"This display option applies to Lead Art media types: Images, Gallery, and Video",
+			description: "This display option applies to Lead Art media types: Images and Gallery",
 			label: "Hide Caption",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCredits: PropTypes.bool.tag({
-			description:
-				"This display option applies to Lead Art media types: Images, Gallery, and Video",
+			description: "This display option applies to Lead Art media types: Images and Gallery",
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Display Options",

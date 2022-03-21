@@ -1,5 +1,5 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";
@@ -251,7 +251,7 @@ describe("The Offer feature", () => {
 			fetchOffer: () => null,
 		});
 
-		const wrapper = shallow(
+		const wrapper = mount(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",
@@ -267,7 +267,7 @@ describe("The Offer feature", () => {
 	it("returns null on serverside", () => {
 		isServerSide.mockReturnValue(true);
 
-		const wrapper = shallow(
+		const wrapper = mount(
 			<Offer
 				customFields={{
 					campaignCode: "allaccess",

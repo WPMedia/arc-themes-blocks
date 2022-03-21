@@ -5,6 +5,7 @@ import Consumer from "fusion:consumer";
 import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+import Static from "fusion:static";
 import {
 	Gallery,
 	ImageMetadata,
@@ -118,7 +119,12 @@ class LeadArt extends Component {
 
 				return (
 					<div className="lead-art-wrapper">
-						<div className="inner-content" dangerouslySetInnerHTML={{ __html: lead_art.content }} />
+						<Static id={lead_art._id}>
+							<div
+								className="inner-content"
+								dangerouslySetInnerHTML={{ __html: lead_art.content }}
+							/>
+						</Static>
 						{lightbox}
 					</div>
 				);

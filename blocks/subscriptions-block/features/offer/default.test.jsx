@@ -5,14 +5,16 @@ import Offer from "./default";
 import useOffer from "../../components/useOffer";
 import OfferCard from "../../components/OfferCard";
 
+const HEADLINE_TEXT = "Get access today!";
+const SUBHEADLINE_TEXT = "Subscribe to any of our sections";
 const sampleOffer = {
 	name: "All Products Offer",
 	disclaimerText: "<p>Terms apply</p>",
 	largeImage: null,
 	mediumImage: null,
 	smallImage: null,
-	pageSubTitle: "<p>Get access today!</p>",
-	pageTitle: "<p>Subscribe to any of our sections</p>",
+	pageSubTitle: `<p>${SUBHEADLINE_TEXT}</p>`,
+	pageTitle: `<p>${HEADLINE_TEXT}</p>`,
 	templateName: "a",
 	campaigns: [
 		{
@@ -205,5 +207,24 @@ describe("The Offer feature", () => {
 		});
 
 		expect(wrapper.find(OfferCard)).toHaveLength(4);
+	});
+	it("renders sub-headline and subheadline", () => {
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					campaignCode: "allaccess",
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		const headline = wrapper.find(".xpmedia-subscription-offer-headings h1");
+
+		const subHeadline = wrapper.find(".xpmedia-subscription-offer-headings h2");
+
+		expect(headline.text()).toEqual(HEADLINE_TEXT);
+
+		expect(subHeadline.text()).toEqual(SUBHEADLINE_TEXT);
 	});
 });

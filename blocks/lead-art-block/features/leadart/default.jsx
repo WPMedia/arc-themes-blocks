@@ -99,24 +99,6 @@ class LeadArt extends Component {
 			let caption = null;
 
 			if (lead_art.type === "raw_html") {
-				// this could be figure and figcaption, a react component
-				const mainContent = (
-					<>
-						<div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-					</>
-				);
-				lightbox = (
-					<>
-						{isOpen && (
-							<Lightbox
-								mainSrc={mainContent}
-								onCloseRequest={this.setIsOpenToFalse}
-								showImageCaption={false}
-							/>
-						)}
-					</>
-				);
-
 				return (
 					<div className="lead-art-wrapper">
 						<Static id={lead_art._id}>
@@ -125,7 +107,6 @@ class LeadArt extends Component {
 								dangerouslySetInnerHTML={{ __html: lead_art.content }}
 							/>
 						</Static>
-						{lightbox}
 					</div>
 				);
 			}

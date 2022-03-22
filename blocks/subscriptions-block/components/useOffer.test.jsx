@@ -165,6 +165,22 @@ it("useOffer hook runs correctly", async () => {
 	expect(container.textContent).toBe("Default subscription");
 });
 
+it("use offer uses fallback default string", async () => {
+	act(() => {
+		render(
+			<TestOfferComponent
+				code={{
+					campaignCode: "",
+				}}
+			/>,
+			container
+		);
+	});
+	expect(container.textContent).toBe("Fetching");
+	await act(() => sleep(500));
+	expect(container.textContent).toBe("Default subscription");
+});
+
 it("useOffer hook handles an error state during fetch", async () => {
 	global.fetch = jest.fn(() => Promise.reject(new Error("Error #2")));
 

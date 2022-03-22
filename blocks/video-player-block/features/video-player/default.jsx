@@ -56,14 +56,14 @@ function getFetchedPassedOrInheritedTitleDescriptionCaption(
 
 	// since credits can't be passed in, the fallback is to use the fetched data
 	if (inheritGlobalContent) {
-		credits = globalContent?.credits || {};
+		credits = globalContent?.credits || null;
 	} else {
-		credits = fetchedData?.credits || {};
+		credits = fetchedData?.credits || null;
 	}
 
 	return {
-		headlineBasic: headlineBasic || "",
-		descriptionBasic: descriptionBasic || "",
+		headlineBasic: headlineBasic || null,
+		descriptionBasic: descriptionBasic || null,
 		credits,
 	};
 }

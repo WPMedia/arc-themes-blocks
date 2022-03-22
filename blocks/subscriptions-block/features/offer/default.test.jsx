@@ -3,7 +3,6 @@ import { mount } from "enzyme";
 import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";
-import OfferCard from "../../components/OfferCard";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	...jest.requireActual("@wpmedia/engine-theme-sdk"),
@@ -210,7 +209,7 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.find(OfferCard)).toHaveLength(4);
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
 	});
 	it("renders sub-headline and subheadline", () => {
 		const wrapper = mount(
@@ -242,7 +241,7 @@ describe("The Offer feature", () => {
 		);
 
 		expect(wrapper.html()).not.toBeNull();
-		expect(wrapper.find(OfferCard)).toHaveLength(4);
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
 	});
 	it("is fetching and does not return offers", () => {
 		useOffer.mockReturnValue({
@@ -261,7 +260,7 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		expect(wrapper.find(OfferCard)).toHaveLength(0);
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(0);
 		expect(wrapper.find(".xpmedia-subscription-offer-headings")).toHaveLength(0);
 	});
 	it("returns null on serverside", () => {

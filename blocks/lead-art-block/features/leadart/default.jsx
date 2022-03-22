@@ -141,6 +141,12 @@ class LeadArt extends Component {
 						customFields={{
 							playthrough: !!customFields?.playthrough,
 						}}
+						displayTitle={!hideTitle}
+						displayCaption={!hideCaption}
+						displayCredits={!hideCredits}
+						subtitle={lead_art?.headlines?.basic}
+						caption={lead_art?.description?.basic}
+						credits={lead_art.credits}
 					/>
 				);
 			}
@@ -260,19 +266,22 @@ LeadArt.propTypes = {
 		}),
 		...videoPlayerCustomFields(),
 		hideTitle: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Title",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCaption: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Caption",
 			defaultValue: false,
 			group: "Display Options",
 		}),
 		hideCredits: PropTypes.bool.tag({
-			description: "This display option applies to Lead Art media types: Images and Gallery",
+			description:
+				"This display option applies to Lead Art media types: Images, Gallery, and Video",
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Display Options",

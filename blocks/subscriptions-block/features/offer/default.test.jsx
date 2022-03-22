@@ -4,6 +4,9 @@ import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";
 
+jest.spyOn(URLSearchParams.prototype, "get").mockReturnValue("some value");
+jest.spyOn(URLSearchParams.prototype, "has").mockReturnValue(false);
+
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	...jest.requireActual("@wpmedia/engine-theme-sdk"),
 	isServerSide: jest.fn(),
@@ -242,6 +245,20 @@ describe("The Offer feature", () => {
 
 		expect(wrapper.html()).not.toBeNull();
 		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
+	});
+	it("uses the fallback campaign code if url params does not have campaign present", () => {
+		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(true);
+
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		expect(wrapper.html()).not.toBeNull();
 	});
 	it("is fetching and does not return offers", () => {
 		useOffer.mockReturnValue({

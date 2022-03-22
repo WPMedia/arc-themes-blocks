@@ -44,7 +44,7 @@ const Offer = ({ customFields }) => {
 				<>
 					<div className="xpmedia-subscription-offer-headings">
 						<PrimaryFont dangerouslySetInnerHTML={{ __html: offer.pageTitle }} as="h1" />
-						<SecondaryFont dangerouslySetInnerHTML={{ __html: offer.pageTitle }} as="h2" />
+						<SecondaryFont dangerouslySetInnerHTML={{ __html: offer.pageSubTitle }} as="h2" />
 					</div>
 
 					<div className="margin-md-top">

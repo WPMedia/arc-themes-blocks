@@ -5,6 +5,7 @@ import Consumer from "fusion:consumer";
 import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+import Static from "fusion:static";
 import {
 	Gallery,
 	ImageMetadata,
@@ -98,28 +99,14 @@ class LeadArt extends Component {
 			let caption = null;
 
 			if (lead_art.type === "raw_html") {
-				// this could be figure and figcaption, a react component
-				const mainContent = (
-					<>
-						<div dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-					</>
-				);
-				lightbox = (
-					<>
-						{isOpen && (
-							<Lightbox
-								mainSrc={mainContent}
-								onCloseRequest={this.setIsOpenToFalse}
-								showImageCaption={false}
-							/>
-						)}
-					</>
-				);
-
 				return (
 					<div className="lead-art-wrapper">
-						<div className="inner-content" dangerouslySetInnerHTML={{ __html: lead_art.content }} />
-						{lightbox}
+						<Static id={lead_art._id}>
+							<div
+								className="inner-content"
+								dangerouslySetInnerHTML={{ __html: lead_art.content }}
+							/>
+						</Static>
 					</div>
 				);
 			}

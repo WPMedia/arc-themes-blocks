@@ -37,21 +37,6 @@ describe("LeadArt", () => {
 		expect(wrapper.find(".lead-art-wrapper").length).toEqual(1);
 	});
 
-	it("renders html lead art type lightbox if button pos is not hidden", () => {
-		const globalContent = {
-			promo_items: {
-				basic: {
-					type: "raw_html",
-				},
-			},
-		};
-
-		const wrapper = shallow(<LeadArt arcSite="the-sun" globalContent={globalContent} />);
-		wrapper.setState({ buttonPosition: "true", isOpen: true });
-		wrapper.update();
-		expect(wrapper.find("ReactImageLightbox").length).toEqual(1);
-	});
-
 	it("renders video lead art type without playthrough", () => {
 		const globalContent = {
 			promo_items: {

@@ -49,6 +49,7 @@ const MediumPromoPresentation = ({
 						>
 							<PromoImage
 								linkURL={linkURL}
+								newTab={newTab}
 								content={content}
 								customImageURL={promoImageURL}
 								showPromoLabel

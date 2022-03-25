@@ -42,7 +42,7 @@ module.exports = {
 					{
 						loader: "sass-loader",
 						options: {
-							prependData: () => `
+							additionalData: `
               @import '~@wpmedia/news-theme-css/scss';
 
               // Should look for a better way to do this ->

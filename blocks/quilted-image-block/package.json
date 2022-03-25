@@ -1,0 +1,26 @@
+{
+  "name": "@wpmedia/quilted-image-block",
+  "version": "0.1.0",
+  "description": "Quilted Image Block",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "",
+  "files": [
+    "_index.scss",
+    "features",
+    "intl.json"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+    "directory": "blocks/quilted-image-block"
+  },
+  "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@wpmedia/arc-themes-components": "*"
+  }
+}

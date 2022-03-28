@@ -249,7 +249,7 @@ export const rawHtml = () => {
 		promo_items: {
 			lead_art: {
 				type: "raw_html",
-				content: "Some basic <i>html in italics</i>",
+				content: "Some basic <em>html in italics</em>",
 			},
 		},
 	};

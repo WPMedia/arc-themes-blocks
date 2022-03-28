@@ -1,6 +1,10 @@
 .promo-image {
 	position: relative;
 
+	picture {
+		width: 100%;
+	}
+
 	img {
 		display: block;
 		height: auto;

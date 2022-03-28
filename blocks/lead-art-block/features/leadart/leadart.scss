@@ -8,6 +8,10 @@
 	position: relative;
 	width: 100%;
 
+	picture {
+		width: 100%;
+	}
+
 	figcaption {
 		margin-top: map-get($spacers, "xs");
 

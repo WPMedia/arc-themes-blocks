@@ -9,7 +9,7 @@ import {
 	Heading,
 	HeadingSection,
 	Image,
-	Link,
+	Button,
 	Paragraph,
 	Stack,
 } from "@wpmedia/arc-themes-components";
@@ -41,43 +41,54 @@ function QuiltedImage({ customFields }) {
 	// const { locale } = getProperties(arcSite);
 	// const phrases = getTranslatedPhrases(locale);
 
-	const cssClasses = [
+	// Account for "dark" or "light" variants y
+	/*
+  const cssClasses = [
 		BLOCK_CLASS_NAME,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
+  */
 
 	return (
-		<div className={cssClasses}>
+		<div className={`${BLOCK_CLASS_NAME}`}>
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
-				<Stack direction="horizontal">
-					<div>
-						{/*
+				<Stack>
+					<Stack direction="horizontal">
+						<div className="b-quilted-image--panel">
+							{/*
               TODO : Determine if other data should be used for image alt text or if image
               title or description needs to be brought in via searchable hooks, e.g. searchableField.
               https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/api/react-hooks.md?version=3.1
             */}
-						<Image src={image1URL} alt={overlayText1} />
-						<Stack>
-							<Paragraph>{overlayText1}</Paragraph>
-							<Link href={link1Action}>{link1Text}</Link>
-						</Stack>
-					</div>
-					<div>
-						<Image src={image2URL} alt={overlayText2} />
-						<Stack>
-							<Paragraph>{overlayText2}</Paragraph>
-							<Link href={link2Action}>{link2Text}</Link>
+							<Image src={image1URL} alt={overlayText1} />
+							<Stack className="b-quilted-image--overlay">
+								<Paragraph>{overlayText1}</Paragraph>
+								<Button variant={link1TextVariant} href={link1Action}>
+									{link1Text}
+								</Button>
+							</Stack>
+						</div>
+						<div className="b-quilted-image--panel">
+							<Image src={image2URL} alt={overlayText2} />
+							<Stack className="b-quilted-image--overlay">
+								<Paragraph>{overlayText2}</Paragraph>
+								<Button variant={link2TextVariant} href={link2Action}>
+									{link2Text}
+								</Button>
+							</Stack>
+						</div>
+					</Stack>
+					<div className="b-quilted-image--panel">
+						<Image src={image3URL} alt={overlayText3} />
+						<Stack className="b-quilted-image--overlay">
+							<Paragraph>{overlayText3}</Paragraph>
+							<Button variant={link3TextVariant} href={link3Action}>
+								{link3Text}
+							</Button>
 						</Stack>
 					</div>
 				</Stack>
-				<div>
-					<Image src={image3URL} alt={overlayText3} />
-					<Stack>
-						<Paragraph>{overlayText3}</Paragraph>
-						<Link href={link3Action}>{link3Text}</Link>
-					</Stack>
-				</div>
 			</HeadingSection>
 		</div>
 	);

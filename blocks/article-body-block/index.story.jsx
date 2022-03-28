@@ -231,7 +231,7 @@ const mockPullQuote = {
 
 const mockRawHtml = {
 	_id: "raw_html_id",
-	content: "Raw <i>HTML Content</i>",
+	content: "Raw <em>HTML Content</em>",
 	type: "raw_html",
 };
 

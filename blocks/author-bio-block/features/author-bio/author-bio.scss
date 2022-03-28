@@ -12,11 +12,14 @@
 		text-decoration: none;
 	}
 
+	picture {
+		min-width: calculateRem(84px);
+	}
+
 	img {
 		border-radius: 100%;
 		height: calculateRem(84px);
 		margin: map-get($spacers, "xs");
-		min-width: calculateRem(84px);
 	}
 
 	.descriptions {

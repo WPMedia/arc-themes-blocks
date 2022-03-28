@@ -18,21 +18,26 @@ const BLOCK_CLASS_NAME = "b-quilted-image";
 function QuiltedImage({ customFields }) {
 	const {
 		headline,
-		variant = "dark",
 		image1URL,
 		overlayText1,
+		overlayText1Variant = "dark",
 		link1Text,
 		// NOTE : Link href properties currently need a default or "startsWith of undefined" error is raised.
 		// https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.00/src/components/link/index.jsx#L22
 		link1Action = "",
+		link1TextVariant = "dark",
 		image2URL,
 		overlayText2,
+		overlayText2Variant = "dark",
 		link2Text,
 		link2Action = "",
+		link2TextVariant = "dark",
 		image3URL,
 		overlayText3,
+		overlayText3Variant = "dark",
 		link3Text,
 		link3Action = "",
+		link3TextVariant = "dark",
 	} = customFields;
 
 	// get properties from context for using translations in intl.json
@@ -106,10 +111,6 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			description: "Headline text describing all images",
 		}),
-		variant: PropTypes.oneOf(["dark", "light"]).tag({
-			defaultValue: "dark",
-			label: "Content Style",
-		}),
 		image1URL: PropTypes.string.tag({
 			label: "Image URL",
 			searchable: "image",
@@ -121,6 +122,11 @@ QuiltedImage.propTypes = {
 			description: "Overlay text appearing within the image.",
 			group: "Image 1",
 		}).isRequired,
+		overlayText1Variant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Overlay Text Color",
+			defaultValue: "dark",
+			group: "Image 1",
+		}),
 		link1Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image's button.",
@@ -131,6 +137,11 @@ QuiltedImage.propTypes = {
 			description: "Destination URL when image's button is clicked.",
 			group: "Image 1",
 		}).isRequired,
+		link1TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Button Color",
+			defaultValue: "dark",
+			group: "Image 1",
+		}),
 		image2URL: PropTypes.string.tag({
 			label: "Image URL",
 			searchable: "image",
@@ -142,6 +153,11 @@ QuiltedImage.propTypes = {
 			description: "Overlay text appearing within the image.",
 			group: "Image 2",
 		}).isRequired,
+		overlayText2Variant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Overlay Text Color",
+			defaultValue: "dark",
+			group: "Image 2",
+		}),
 		link2Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image button.",
@@ -152,6 +168,11 @@ QuiltedImage.propTypes = {
 			description: "Destination URL when image button is clicked.",
 			group: "Image 2",
 		}).isRequired,
+		link2TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Button Color",
+			defaultValue: "dark",
+			group: "Image 2",
+		}),
 		image3URL: PropTypes.string.tag({
 			label: "Image URL",
 			searchable: "image",
@@ -163,6 +184,11 @@ QuiltedImage.propTypes = {
 			description: "Overlay text appearing within the image.",
 			group: "Image 3",
 		}).isRequired,
+		overlayText3Variant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Overlay Text Color",
+			defaultValue: "dark",
+			group: "Image 3",
+		}),
 		link3Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image button.",
@@ -173,6 +199,11 @@ QuiltedImage.propTypes = {
 			description: "Destination URL when image button is clicked.",
 			group: "Image 3",
 		}).isRequired,
+		link3TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+			label: "Button Color",
+			defaultValue: "dark",
+			group: "Image 3",
+		}),
 	}),
 };
 

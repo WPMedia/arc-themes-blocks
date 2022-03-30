@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useContent } from "fusion:content";
-import { useFusionContext } from "fusion:context";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
@@ -41,9 +39,7 @@ function QuiltedImage({ customFields }) {
 	} = customFields;
 
 	// Translate user-facing variant name into values component is expecting.
-	const getButtonVariant = (value) => {
-		return value === "dark" ? "primary" : "secondary";
-	};
+	const getButtonVariant = (value) => (value === "dark" ? "primary" : "secondary");
 
 	// get properties from context for using translations in intl.json
 	// See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -72,7 +68,7 @@ function QuiltedImage({ customFields }) {
               https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/api/react-hooks.md?version=3.1
             */}
 							<Image src={image1URL} alt={overlay1Text} />
-							<Stack className="b-quilted-image--overlay" inline={true}>
+							<Stack className="b-quilted-image--overlay" inline>
 								<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
 									{overlay1Text}
 								</Paragraph>
@@ -88,8 +84,8 @@ function QuiltedImage({ customFields }) {
 						</div>
 						<div className="b-quilted-image--media-panel">
 							<Image src={image2URL} alt={overlay2Text} />
-							<Stack className="b-quilted-image--overlay" inline={true}>
-								<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
+							<Stack className="b-quilted-image--overlay" inline>
+								<Paragraph className={`b-quilted-image--overlay-text-${overlay2TextVariant}`}>
 									{overlay2Text}
 								</Paragraph>
 								<Button
@@ -104,8 +100,8 @@ function QuiltedImage({ customFields }) {
 					</Stack>
 					<div className="b-quilted-image--media-panel">
 						<Image src={image3URL} alt={overlay3Text} />
-						<Stack className="b-quilted-image--overlay" inline={true}>
-							<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
+						<Stack className="b-quilted-image--overlay" inline>
+							<Paragraph className={`b-quilted-image--overlay-text-${overlay3TextVariant}`}>
 								{overlay3Text}
 							</Paragraph>
 							<Button variant={getButtonVariant(button3Variant)} size="small" href={button3Action}>

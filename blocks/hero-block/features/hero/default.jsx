@@ -20,7 +20,10 @@ function Hero({ customFields }) {
 		alignment = "center",
 		description,
 		headline,
-		imageURL,
+		imageURLDesktop,
+		imageURLMobile,
+		desktopMediaBreakpoint,
+		imageAltText,
 		link1Action,
 		link1Text,
 		link1Type,
@@ -38,7 +41,11 @@ function Hero({ customFields }) {
 
 	return (
 		<div className={classes}>
-			<Image className="b-hero--image" src={imageURL} alt="" />
+			<picture>
+				<source srcSet={imageURLDesktop} media={`(${desktopMediaBreakpoint})`} />
+				<img className="b-hero--image" src={imageURLMobile} alt={imageAltText} />
+			</picture>
+
 			<Stack
 				data-style-layout={layout}
 				alignment={alignment}
@@ -94,9 +101,27 @@ Hero.propTypes = {
 			defaultValue: "dark",
 			label: "Content Style",
 		}),
-		imageURL: PropTypes.string.tag({
-			label: "Image URL",
+		imageURLDesktop: PropTypes.string.tag({
+			label: "Image URL for Desktop",
 			searchable: "image",
+		}),
+		desktopMediaBreakpoint: PropTypes.oneOf([
+			"min-width: 800px",
+			"min-width: 700px",
+			"min-width: 600px",
+			"min-width: 500px",
+		]).tag({
+			defaultValue: "min-width: 800px",
+			label:
+				"Image Breakpoint: Enter the media query that will determine when the desktop picture is shown over the mobile version.",
+		}),
+		imageURLMobile: PropTypes.string.tag({
+			label: "Image URL for Mobile",
+			searchable: "image",
+		}),
+		imageAltText: PropTypes.string.tag({
+			defaultValue: "",
+			label: "Alt text for both the mobile and desktop image",
 		}),
 		headline: PropTypes.string,
 		subHeadline: PropTypes.string,

@@ -15,10 +15,6 @@ Please see the release notes in Confluence if you are a Themes developer.
 This package has been published with a number of dist-tags meant for different purposes:
 
 - `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle
-- `stable`: This is client-facing release.
-- `beta`: These are prerelease builds published with the `npx lerna publish --preid beta --pre-dist-tag beta` command from the `beta` branch. [More information can be found here.](/Theme%20Development.md#arc-themes-blocks)
-- `canary`: These builds are generated with [this Github Action](/.github/workflows/canary-build.yml) on every push to the `canary` branch. These builds don't follow the normal versioning scheme, instead they are published as version `0.0.0` appended with the short commit ID for the commit being built from (ex. `0.0.0-canary`).
-- `rc`: This stands for release candidate. This is not client-facing.
 - `hotfix`: As you may have guessed, these builds are meant for hotfixes. [More information about how these builds are made can be found here.](/Theme%20Development.md#publish-hotfix)
 - `latest`: This dist tag is deprecated. As with all other NPM packages, this is the default dist-tag. Whenever a non-prerelease block gets published, it is published with this tag.
 

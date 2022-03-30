@@ -73,6 +73,7 @@ const LargePromoPresentation = ({
 											content={content}
 											customImageURL={promoImageURL}
 											linkURL={linkURL}
+											newTab={newTab}
 											showPromoLabel
 											promoSize="LG"
 											promoLabelSize="large"

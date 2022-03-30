@@ -5,6 +5,7 @@ const path = require("path");
 module.exports = {
 	stories: ["../stories/*.stories.@(js|jsx|mdx|tsx)", "../blocks/**/*.story.@(js|jsx|mdx|tsx)"],
 	addons: [
+		"@etchteam/storybook-addon-css-variables-theme",
 		"@storybook/addon-a11y",
 		"@storybook/addon-docs",
 		"@storybook/addon-knobs",
@@ -41,7 +42,7 @@ module.exports = {
 					{
 						loader: "sass-loader",
 						options: {
-							prependData: () => `
+							additionalData: `
               @import '~@wpmedia/news-theme-css/scss';
 
               // Should look for a better way to do this ->

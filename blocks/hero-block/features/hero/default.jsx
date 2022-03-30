@@ -16,6 +16,7 @@ const BLOCK_CLASS_NAME = "b-hero";
 
 function Hero({ customFields }) {
 	const {
+		layout = "overlay",
 		alignment = "center",
 		description,
 		headline,
@@ -39,8 +40,9 @@ function Hero({ customFields }) {
 		<div className={classes}>
 			<Image className="b-hero--image" src={imageURL} alt="" />
 			<Stack
+				data-style-layout={layout}
 				alignment={alignment}
-				className={`${BLOCK_CLASS_NAME}--text ${
+				className={`${BLOCK_CLASS_NAME}--text ${layout} ${
 					alignment === "left" ? `${BLOCK_CLASS_NAME}--left` : `${BLOCK_CLASS_NAME}--center`
 				}`}
 			>
@@ -79,9 +81,14 @@ Hero.icon = "picture-double-shapes";
 
 Hero.propTypes = {
 	customFields: PropTypes.shape({
+		layout: PropTypes.oneOf(["overlay", "stacked"]).tag({
+			defaultValue: "overlay",
+			label:
+				"Layout configuration. Overlay is text on top of the image and stacked is the text under the image.",
+		}),
 		alignment: PropTypes.oneOf(["center", "left"]).tag({
 			defaultValue: "center",
-			label: "Content Alignment over the image",
+			label: "Content Alignment over the image. Applies to overlay layout only. ",
 		}),
 		variant: PropTypes.oneOf(["dark", "light"]).tag({
 			defaultValue: "dark",

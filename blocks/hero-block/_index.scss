@@ -27,10 +27,13 @@
 		@include scss.block-components("hero-text");
 	}
 
-	&--text[data-style-direction="stacked"] {
+	&--text.stacked {
 		grid-area: info;
 		place-self: center;
 		max-width: 100%;
+
+		@include scss.block-properties("hero-text-stacked");
+		@include scss.block-components("hero-text-stacked");
 	}
 
 	&--left {

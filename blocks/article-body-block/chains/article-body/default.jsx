@@ -44,6 +44,9 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideGalleryTitle = false,
 		hideGalleryCaption = false,
 		hideGalleryCredits = false,
+		hideVideoTitle = false,
+		hideVideoCaption = false,
+		hideVideoCredits = false,
 	} = customFields;
 
 	// TODO: Split each type into a separate reusable component
@@ -269,6 +272,12 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						embedMarkup={item.embed_html}
 						shrinkToFit={customFields?.shrinkToFit}
 						viewportPercentage={customFields?.viewportPercentage}
+						displayTitle={!hideVideoTitle}
+						displayCaption={!hideVideoCaption}
+						displayCredits={!hideVideoCredits}
+						subtitle={item?.headlines?.basic}
+						caption={item?.description?.basic}
+						credits={item.credits}
 					/>
 				</section>
 			);
@@ -468,6 +477,24 @@ ArticleBodyChain.propTypes = {
 			label: "Hide Credits",
 			defaultValue: false,
 			group: "Gallery Display Options",
+		}),
+		hideVideoTitle: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Article Body",
+			label: "Hide Title",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCaption: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Article Body",
+			label: "Hide Caption",
+			defaultValue: false,
+			group: "Video Display Options",
+		}),
+		hideVideoCredits: PropTypes.bool.tag({
+			description: "This display option applies to all Videos in the Article Body",
+			label: "Hide Credits",
+			defaultValue: false,
+			group: "Video Display Options",
 		}),
 	}),
 };

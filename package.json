@@ -146,6 +146,7 @@
     "@wpmedia/overline-block": "file:blocks/overline-block",
     "@wpmedia/placeholder-image-block": "file:blocks/placeholder-image-block",
     "@wpmedia/quad-chain-block": "file:blocks/quad-chain-block",
+    "@wpmedia/quilted-image": "file:blocks/quilted-image-block",
     "@wpmedia/related-content-content-source-block": "file:blocks/related-content-content-source-block",
     "@wpmedia/resizer-image-block": "file:blocks/resizer-image-block",
     "@wpmedia/resizer-image-content-source-block": "file:blocks/resizer-image-content-source-block",

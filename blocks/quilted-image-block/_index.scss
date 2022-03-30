@@ -1,9 +1,5 @@
 @use "@wpmedia/arc-themes-components/scss";
 
-/* 
-
-*/
-
 .b-quilted-image {
 	@include scss.block-properties("quilted-image");
 	@include scss.block-components("quilted-image");

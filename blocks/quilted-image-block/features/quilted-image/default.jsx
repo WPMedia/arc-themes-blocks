@@ -19,26 +19,31 @@ function QuiltedImage({ customFields }) {
 	const {
 		headline,
 		image1URL,
-		overlayText1,
-		overlayText1Variant = "dark",
-		link1Text,
+		overlay1Text,
+		overlay1TextVariant = "dark",
+		button1Text,
 		// NOTE : Link href properties currently need a default or "startsWith of undefined" error is raised.
 		// https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.00/src/components/link/index.jsx#L22
-		link1Action = "",
-		link1TextVariant = "dark",
+		button1Action = "",
+		button1Variant = "dark",
 		image2URL,
-		overlayText2,
-		overlayText2Variant = "dark",
-		link2Text,
-		link2Action = "",
-		link2TextVariant = "dark",
+		overlay2Text,
+		overlay2TextVariant = "dark",
+		button2Text,
+		button2Action = "",
+		button2Variant = "dark",
 		image3URL,
-		overlayText3,
-		overlayText3Variant = "dark",
-		link3Text,
-		link3Action = "",
-		link3TextVariant = "dark",
+		overlay3Text,
+		overlay3TextVariant = "dark",
+		button3Text,
+		button3Action = "",
+		button3Variant = "dark",
 	} = customFields;
+
+	// Translate user-facing variant name into values component is expecting.
+	const getButtonVariant = (value) => {
+		return value === "dark" ? "primary" : "secondary";
+	};
 
 	// get properties from context for using translations in intl.json
 	// See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
@@ -60,36 +65,51 @@ function QuiltedImage({ customFields }) {
 				{headline ? <Heading>{headline}</Heading> : null}
 				<Stack>
 					<Stack direction="horizontal">
-						<div className="b-quilted-image--panel">
+						<div className="b-quilted-image--media-panel">
 							{/*
               TODO : Determine if other data should be used for image alt text or if image
               title or description needs to be brought in via searchable hooks, e.g. searchableField.
               https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/api/react-hooks.md?version=3.1
             */}
-							<Image src={image1URL} alt={overlayText1} />
-							<Stack className="b-quilted-image--overlay">
-								<Paragraph>{overlayText1}</Paragraph>
-								<Button variant={link1TextVariant} href={link1Action}>
-									{link1Text}
+							<Image src={image1URL} alt={overlay1Text} />
+							<Stack className="b-quilted-image--overlay" inline={true}>
+								<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
+									{overlay1Text}
+								</Paragraph>
+								{/* TODO : Change button names as per https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.00/src/components/button/index.jsx  */}
+								<Button
+									variant={getButtonVariant(button1Variant)}
+									size="small"
+									href={button1Action}
+								>
+									{button1Text}
 								</Button>
 							</Stack>
 						</div>
-						<div className="b-quilted-image--panel">
-							<Image src={image2URL} alt={overlayText2} />
-							<Stack className="b-quilted-image--overlay">
-								<Paragraph>{overlayText2}</Paragraph>
-								<Button variant={link2TextVariant} href={link2Action}>
-									{link2Text}
+						<div className="b-quilted-image--media-panel">
+							<Image src={image2URL} alt={overlay2Text} />
+							<Stack className="b-quilted-image--overlay" inline={true}>
+								<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
+									{overlay2Text}
+								</Paragraph>
+								<Button
+									variant={getButtonVariant(button2Variant)}
+									size="small"
+									href={button2Action}
+								>
+									{button2Text}
 								</Button>
 							</Stack>
 						</div>
 					</Stack>
-					<div className="b-quilted-image--panel">
-						<Image src={image3URL} alt={overlayText3} />
-						<Stack className="b-quilted-image--overlay">
-							<Paragraph>{overlayText3}</Paragraph>
-							<Button variant={link3TextVariant} href={link3Action}>
-								{link3Text}
+					<div className="b-quilted-image--media-panel">
+						<Image src={image3URL} alt={overlay3Text} />
+						<Stack className="b-quilted-image--overlay" inline={true}>
+							<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
+								{overlay3Text}
+							</Paragraph>
+							<Button variant={getButtonVariant(button3Variant)} size="small" href={button3Action}>
+								{button3Text}
 							</Button>
 						</Stack>
 					</div>
@@ -117,27 +137,27 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio.",
 			group: "Image 1",
 		}).isRequired,
-		overlayText1: PropTypes.string.tag({
+		overlay1Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
 			group: "Image 1",
 		}).isRequired,
-		overlayText1Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay1TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 1",
 		}),
-		link1Text: PropTypes.string.tag({
+		button1Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image's button.",
 			group: "Image 1",
 		}).isRequired,
-		link1Action: PropTypes.string.tag({
+		button1Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image's button is clicked.",
 			group: "Image 1",
 		}).isRequired,
-		link1TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		button1Variant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Button Color",
 			defaultValue: "dark",
 			group: "Image 1",
@@ -148,27 +168,27 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 2",
 		}).isRequired,
-		overlayText2: PropTypes.string.tag({
+		overlay2Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
 			group: "Image 2",
 		}).isRequired,
-		overlayText2Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay2TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 2",
 		}),
-		link2Text: PropTypes.string.tag({
+		button2Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image button.",
 			group: "Image 2",
 		}).isRequired,
-		link2Action: PropTypes.string.tag({
+		button2Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
 			group: "Image 2",
 		}).isRequired,
-		link2TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		button2Variant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Button Color",
 			defaultValue: "dark",
 			group: "Image 2",
@@ -179,27 +199,27 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 3",
 		}).isRequired,
-		overlayText3: PropTypes.string.tag({
+		overlay3Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
 			group: "Image 3",
 		}).isRequired,
-		overlayText3Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay3TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 3",
 		}),
-		link3Text: PropTypes.string.tag({
+		button3Text: PropTypes.string.tag({
 			label: "Button Text",
 			description: "Text appearing on image button.",
 			group: "Image 3",
 		}).isRequired,
-		link3Action: PropTypes.string.tag({
+		button3Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
 			group: "Image 3",
 		}).isRequired,
-		link3TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		button3Variant: PropTypes.oneOf(["dark", "light"]).tag({
 			label: "Button Color",
 			defaultValue: "dark",
 			group: "Image 3",

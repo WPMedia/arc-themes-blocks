@@ -1,15 +1,25 @@
 @use "@wpmedia/arc-themes-components/scss";
 
+/* 
+
+*/
+
 .b-quilted-image {
 	@include scss.block-properties("quilted-image");
 	@include scss.block-components("quilted-image");
 }
-.b-quilted-image--light {
-	@include scss.block-properties("quilted-image--light");
-	@include scss.block-components("quilted-image--light");
+
+.b-quilted-image--overlay-text-light {
+	@include scss.block-properties("quilted-image--overlay-text-light");
+	@include scss.block-components("quilted-image--overlay-text-light");
 }
 
-.b-quilted-image--panel {
+.b-quilted-image--overlay-text-dark {
+	@include scss.block-properties("quilted-image--overlay-text-dark");
+	@include scss.block-components("quilted-image--overlay-text-dark");
+}
+
+.b-quilted-image--media-panel {
 	@include scss.block-properties("quilted-image--media-panel");
 	@include scss.block-components("quilted-image--media-panel");
 	flex: 1;
@@ -17,8 +27,8 @@
 }
 
 .b-quilted-image--overlay {
-	@include scss.block-properties("quilted-image--overlay-content");
-	@include scss.block-components("quilted-image--overlay-content");
+	@include scss.block-properties("quilted-image--overlay");
+	@include scss.block-components("quilted-image--overlay");
 	position: absolute;
 	left: 2rem;
 	bottom: 2rem;

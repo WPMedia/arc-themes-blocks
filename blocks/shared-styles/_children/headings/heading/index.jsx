@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import LevelContext from '../context';
+import LevelContext from "../context";
 
-import PrimaryFont from '../../primary-font';
-import SecondaryFont from '../../secondary-font';
+import PrimaryFont from "../../primary-font";
+import SecondaryFont from "../../secondary-font";
 
-const FONT = 'Secondary';
+const FONT = "Secondary";
 
 const Heading = (props) => (
-  <LevelContext.Consumer>
-    {(level) => {
-      const headingTag = `h${Math.min(level, 6)}`;
-      const FontType = props.font === FONT ? SecondaryFont : PrimaryFont;
-      return <FontType as={headingTag} {...props} />;
-    }}
-  </LevelContext.Consumer>
+	<LevelContext.Consumer>
+		{(level) => {
+			const headingTag = `h${Math.min(level, 6)}`;
+			const FontType = props.font === FONT ? SecondaryFont : PrimaryFont;
+			return <FontType as={headingTag} {...props} />;
+		}}
+	</LevelContext.Consumer>
 );
 
 Heading.defaultProps = {
-  font: 'Primary',
+	font: "Primary",
 };
 
 Heading.propTypes = {
-  font: PropTypes.oneOf(['Primary', 'Secondary']),
+	font: PropTypes.oneOf(["Primary", "Secondary"]),
 };
 
 export default Heading;

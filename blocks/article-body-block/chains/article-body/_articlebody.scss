@@ -1,299 +1,294 @@
 .image-metadata .title {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .article-body-wrapper {
-  color: $ui-primary-font-color;
-  margin-top: map-get($spacers, 'sm');
+	color: $ui-primary-font-color;
+	margin-top: map-get($spacers, "sm");
 
-  a,
-  a * {
-    @include link-color-active-hover($ui-primary-font-color);
-  }
+	a,
+	a * {
+		@include link-color-active-hover($ui-primary-font-color);
+	}
 
-  & > h1,
-  & > h2,
-  & > h3,
-  & > h4,
-  & > h5,
-  & > h6 {
-    @include block-margin-bottom;
-  }
+	& > h1,
+	& > h2,
+	& > h3,
+	& > h4,
+	& > h5,
+	& > h6 {
+		@include block-margin-bottom;
+	}
 
-  ul,
-  ol {
-    @include block-margin-bottom;
-    font-size: calculateRem(16px);
-    letter-spacing: 0.1px;
-    line-height: calculateRem(24px);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-  }
+	ul,
+	ol {
+		@include block-margin-bottom;
+		font-size: calculateRem(16px);
+		letter-spacing: 0.1px;
+		line-height: calculateRem(24px);
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 0;
+	}
 
-  p {
-    @include block-margin-bottom;
-    font-size: calculateRem(18px);
-    letter-spacing: 0.1px;
-    line-height: calculateRem(32px);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+	p {
+		@include block-margin-bottom;
+		font-size: calculateRem(18px);
+		letter-spacing: 0.1px;
+		line-height: calculateRem(32px);
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 0;
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      font-size: calculateRem(20px);
-      line-height: calculateRem(40px);
-    }
-  }
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			font-size: calculateRem(20px);
+			line-height: calculateRem(40px);
+		}
+	}
 
-  .gallery {
-    .image-metadata {
-      font-size: calculateRem(14px);
-      line-height: calculateRem(24px);
-      margin: 8px 0;
+	.image-metadata {
+		font-size: calculateRem(14px);
+		line-height: calculateRem(24px);
+		margin: 8px 0;
 
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        line-height: calculateRem(20px);
-      }
-    }
-  }
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			line-height: calculateRem(20px);
+		}
+	}
 
-  figure {
-    p {
-      font-size: calculateRem(14px);
-      line-height: 1rem;
-      margin: 8px 0;
-    }
-  }
+	figure {
+		p {
+			font-size: calculateRem(14px);
+			line-height: 1rem;
+			margin: 8px 0;
+		}
+	}
 
-  ul {
-    list-style-position: inside;
-    list-style-type: disc;
-  }
+	ul {
+		list-style-position: inside;
+		list-style-type: disc;
+	}
 
-  ol {
-    list-style-position: inside;
-    list-style-type: decimal;
-  }
+	ol {
+		list-style-position: inside;
+		list-style-type: decimal;
+	}
 
-  ul ul,
-  ol ul {
-    list-style-position: inside;
-    list-style-type: circle;
-    margin-left: map-get($spacers, 'sm');
-  }
+	ul ul,
+	ol ul {
+		list-style-position: inside;
+		list-style-type: circle;
+		margin-left: map-get($spacers, "sm");
+	}
 
-  ol ol,
-  ul ol {
-    list-style-position: inside;
-    list-style-type: lower-latin;
-    margin-left: map-get($spacers, 'sm');
-  }
+	ol ol,
+	ul ol {
+		list-style-position: inside;
+		list-style-type: lower-latin;
+		margin-left: map-get($spacers, "sm");
+	}
 
-  ol ol,
-  ul ol,
-  ol ul,
-  ul ul {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
+	ol ol,
+	ul ol,
+	ol ul,
+	ul ul {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
 
-  li {
-    font-size: calculateRem(18px);
-    line-height: calculateRem(32px);
-    margin: 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      font-size: calculateRem(20px);
-      line-height: calculateRem(40px);
-      margin: 0;
-    }
-  }
+	li {
+		font-size: calculateRem(18px);
+		line-height: calculateRem(32px);
+		margin: 0;
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			font-size: calculateRem(20px);
+			line-height: calculateRem(40px);
+			margin: 0;
+		}
+	}
 
-  .table-wrapper {
-    @include block-margin-bottom;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    overflow-x: auto;
+	.table-wrapper {
+		@include block-margin-bottom;
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 0;
+		overflow-x: auto;
 
-    table {
-      border: 1px solid $border-rule-color;
-      border-collapse: collapse;
-      color: $ui-primary-font-color;
-      width: 100%;
+		table {
+			border: 1px solid $border-rule-color;
+			border-collapse: collapse;
+			color: $ui-primary-font-color;
+			width: 100%;
 
-      thead {
-        background-color: #eee;
-        border: 2px solid $border-rule-color;
-      }
+			thead {
+				background-color: #eee;
+				border: 2px solid $border-rule-color;
+			}
 
-      th,
-      td {
-        border: 1px solid $border-rule-color;
-        padding: map-get($spacers, 'xxs') map-get($spacers, 'xs');
-        text-align: center;
-      }
+			th,
+			td {
+				border: 1px solid $border-rule-color;
+				padding: map-get($spacers, "xxs") map-get($spacers, "xs");
+				text-align: center;
+			}
 
-      td {
-        font-size: calculateRem(17px);
-        font-style: normal;
-        font-weight: normal;
-      }
+			td {
+				font-size: calculateRem(17px);
+				font-style: normal;
+				font-weight: normal;
+			}
 
-      th {
-        font-size: calculateRem(17px);
-        font-style: normal;
-        font-weight: bold;
-        white-space: nowrap;
-      }
-    }
-  }
+			th {
+				font-size: calculateRem(17px);
+				font-style: normal;
+				font-weight: bold;
+				white-space: nowrap;
+			}
+		}
+	}
 
-  blockquote {
-    @include block-margin-bottom;
-    box-shadow: inset 5px 0 0 0 #1f2d3d;
-    font-size: calculateRem(18px);
-    font-style: italic;
-    font-weight: normal;
-    line-height: calculateRem(32px);
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding: map-get($spacers, 'sm') 0 map-get($spacers, 'sm') map-get($spacers, 'md');
-    text-align: left;
+	blockquote {
+		@include block-margin-bottom;
+		box-shadow: inset 5px 0 0 0 #1f2d3d;
+		font-size: calculateRem(18px);
+		font-style: italic;
+		font-weight: normal;
+		line-height: calculateRem(32px);
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 0;
+		padding: map-get($spacers, "sm") 0 map-get($spacers, "sm") map-get($spacers, "md");
+		text-align: left;
 
-    p {
-      font-size: calculateRem(18px);
-      font-style: italic;
-      font-weight: normal;
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        line-height: calculateRem(32px);
-      }
-    }
+		p {
+			font-size: calculateRem(18px);
+			font-style: italic;
+			font-weight: normal;
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				line-height: calculateRem(32px);
+			}
+		}
 
-    .citation-text {
-      color: $ui-primary-font-color;
-      display: block;
-      font-size: calculateRem(16px);
-      font-style: normal;
-      font-weight: normal;
-      line-height: calculateRem(24px);
-      text-align: left;
-    }
+		.citation-text {
+			color: $ui-primary-font-color;
+			display: block;
+			font-size: calculateRem(16px);
+			font-style: normal;
+			font-weight: normal;
+			line-height: calculateRem(24px);
+			text-align: left;
+		}
 
-    *:not(:first-child) {
-      margin-bottom: 0;
-      margin-top: calculateRem(24px);
-    }
-  }
+		*:not(:first-child) {
+			margin-bottom: 0;
+			margin-top: calculateRem(24px);
+		}
+	}
 
-  .pullquote {
-    box-shadow: inset 0 -5px 0 0 $ui-light-gray, inset 0 5px 0 0 $ui-light-gray;
-    font-size: calculateRem(19px);
-    font-weight: bold;
-    line-height: calculateRem(24px);
-    padding: map-get($spacers, 'lg') 0 map-get($spacers, 'md');
-    text-align: center;
+	.pullquote {
+		box-shadow: inset 0 -5px 0 0 $ui-light-gray, inset 0 5px 0 0 $ui-light-gray;
+		font-size: calculateRem(19px);
+		font-weight: bold;
+		line-height: calculateRem(24px);
+		padding: map-get($spacers, "lg") 0 map-get($spacers, "md");
+		text-align: center;
 
-    p {
-      font-size: calculateRem(19px);
-      font-weight: bold;
-      line-height: calculateRem(24px);
-      text-align: center;
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        font-size: calculateRem(26px);
-        line-height: calculateRem(32px);
-      }
-    }
+		p {
+			font-size: calculateRem(19px);
+			font-weight: bold;
+			line-height: calculateRem(24px);
+			text-align: center;
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				font-size: calculateRem(26px);
+				line-height: calculateRem(32px);
+			}
+		}
 
-    .citation-text {
-      font-size: calculateRem(18px);
-      line-height: calculateRem(32px);
-      text-align: center;
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        font-size: calculateRem(16px);
-        line-height: calculateRem(24px);
-      }
-    }
+		.citation-text {
+			font-size: calculateRem(18px);
+			line-height: calculateRem(32px);
+			text-align: center;
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				font-size: calculateRem(16px);
+				line-height: calculateRem(24px);
+			}
+		}
 
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      font-size: calculateRem(26px);
-      line-height: calculateRem(32px);
-    }
-  }
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			font-size: calculateRem(26px);
+			line-height: calculateRem(32px);
+		}
+	}
 
-  .interstitial-link {
-    display: block;
-    font-style: italic;
-    margin: 0 0 map-get($spacers, 'md');
+	.interstitial-link {
+		display: block;
+		font-style: italic;
+		margin: 0 0 map-get($spacers, "md");
 
-    a {
-      @include link-color-active-hover($ui-primary-font-color);
-      text-decoration: none;
+		a {
+			@include link-color-active-hover($ui-primary-font-color);
+			text-decoration: none;
 
-      &:active,
-      &:hover {
-        border-bottom: 1px solid #7f7f7f;
-      }
+			&:active,
+			&:hover {
+				border-bottom: 1px solid #7f7f7f;
+			}
+		}
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			margin-bottom: map-get($spacers, "lg");
+		}
+	}
 
-    }
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      margin-bottom: map-get($spacers, 'lg');
-    }
+	.correction {
+		@include block-margin-bottom;
+		box-shadow: inset 0 -1px 0 0 $ui-light-gray;
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 0;
 
-  }
+		padding: map-get($spacers, "sm") 0;
 
-  .correction {
-    @include block-margin-bottom;
-    box-shadow: inset 0 -1px 0 0 $ui-light-gray;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
+		p {
+			color: $ui-medium-gray;
+			display: inline;
+			font-size: calculateRem(18px);
+			font-style: italic;
+			font-weight: normal;
+			line-height: calculateRem(24px);
+			margin: 0;
+		}
 
-    padding: map-get($spacers, 'sm') 0;
+		h2 {
+			font-style: italic;
+			text-transform: uppercase;
+		}
+	}
 
-    p {
-      color: $ui-medium-gray;
-      display: inline;
-      font-size: calculateRem(18px);
-      font-style: italic;
-      font-weight: normal;
-      line-height: calculateRem(24px);
-      margin: 0;
-    }
-
-    h2 {
-      font-style: italic;
-      text-transform: uppercase;
-    }
-  }
-
-  .divider {
-    @include container-vertial-spacing;
-    @include container-hr-separator;
-  }
-
+	.divider {
+		@include container-vertial-spacing;
+		@include container-hr-separator;
+	}
 }
 
 .article-body-image-container {
-  @include block-margin-bottom;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
+	@include block-margin-bottom;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
 }
 
 .article-body-image-container--mobile-left-float {
-  @media screen and (min-width: 48rem) {
-    width: 50%;
-    float: left;
-    margin-right: 1.5rem;
-  }
+	@media screen and (min-width: 48rem) {
+		width: 50%;
+		float: left;
+		margin-right: 1.5rem;
+	}
 }
 
 .article-body-image-container--mobile-right-float {
-  @media screen and (min-width: 48rem) {
-    width: 50%;
-    float: right;
-    margin-left: 1.5rem;
-  }
+	@media screen and (min-width: 48rem) {
+		width: 50%;
+		float: right;
+		margin-left: 1.5rem;
+	}
 }

@@ -1,18 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import ContactInfo from '.';
+import ContactInfo from ".";
 
 export default {
-  title: 'Blocks/Subscriptions/Components/Contact Info',
-  parameters: {
-    chromatic: { viewports: [320, 1200] },
-  },
+	title: "Blocks/Subscriptions/Components/Contact Info",
+	parameters: {
+		chromatic: { viewports: [320, 1200] },
+	},
 };
 
 export const contactInfo = () => (
-  <ContactInfo
-    callback={() => 0}
-    user={false}
-    logoutCallback={() => 0}
-  />
+	<ContactInfo callback={() => 0} user={false} logoutCallback={() => 0} />
 );

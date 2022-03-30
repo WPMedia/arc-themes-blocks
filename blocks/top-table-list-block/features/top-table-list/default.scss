@@ -1,129 +1,128 @@
 .top-table-list-section-extra_large {
-  .xl-large-promo {
-    .xl-promo-headline {
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-bottom: map-get($spacers, 'xs');
-      }
-    }
-  }
+	.xl-large-promo {
+		.xl-promo-headline {
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				margin-bottom: map-get($spacers, "xs");
+			}
+		}
+	}
 }
 
-
 .top-table-list-section-large {
-  .large-promo {
-    .lg-promo-headline {
-      padding-top: map-get($spacers, 'xs');
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-top: 0;
-        margin-top: - map-get($spacers, 'xs');
-      }
-    }
-  }
+	.large-promo {
+		.lg-promo-headline {
+			padding-top: map-get($spacers, "xs");
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				padding-top: 0;
+				margin-top: -(map-get($spacers, "xs"));
+			}
+		}
+	}
 }
 
 .top-table-list-section-medium {
-  .medium-promo {
-    .md-promo-headline {
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        margin-bottom: map-get($spacers, 'xs');
-        margin-top: - map-get($spacers, 'xs');
-      }
-    }
-  }
+	.medium-promo {
+		.md-promo-headline {
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				margin-bottom: map-get($spacers, "xs");
+				margin-top: -(map-get($spacers, "xs"));
+			}
+		}
+	}
 }
 
 .top-table-list-small-promo {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  hr {
-    margin-top: auto;
-    margin-bottom: calculateRem(16px);
-  }
+	hr {
+		margin-top: auto;
+		margin-bottom: calculateRem(16px);
+	}
 
-  .promo-container {
-    display: flex;
-    column-gap: calculateRem(24px);
+	.promo-container {
+		display: flex;
+		column-gap: calculateRem(24px);
 
-    &.horizontal {
-      margin-bottom: calculateRem(16px);
+		&.horizontal {
+			margin-bottom: calculateRem(16px);
 
-      .promo-headline {
-        flex: 2;
-      }
+			.promo-headline {
+				flex: 2;
+			}
 
-      .promo-image {
-        flex: 1;
-      }
-    }
+			.promo-image {
+				flex: 1;
+			}
+		}
 
-    &.vertical {
-      flex-direction: column;
-      flex-grow: 1;
-      row-gap: calculateRem(24px);
-      margin-bottom: calculateRem(16px);
+		&.vertical {
+			flex-direction: column;
+			flex-grow: 1;
+			row-gap: calculateRem(24px);
+			margin-bottom: calculateRem(16px);
 
-      .promo-image {
-        display: block;
-        width: 100%;
-      }
+			.promo-image {
+				display: block;
+				width: 100%;
+			}
 
-      &.image-below .promo-image {
-        margin-top: auto;
-      }
-    }
+			&.image-below .promo-image {
+				margin-top: auto;
+			}
+		}
 
-    &.sm-promo-padding-btm {
-      @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        padding-top: 0;
-      }
-    }
-  }
+		&.sm-promo-padding-btm {
+			@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+				padding-top: 0;
+			}
+		}
+	}
 
-  .sm-promo-headline {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    -moz-box-oriented: vertical;
-    /* opera */
-    text-overflow: -o-ellipsis-lastline;
-  }
+	.sm-promo-headline {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		-moz-box-oriented: vertical;
+		/* opera */
+		text-overflow: -o-ellipsis-lastline;
+	}
 
-  &.wrap-bottom {
-    margin-bottom: 0 !important;
+	&.wrap-bottom {
+		margin-bottom: 0 !important;
 
-    @media only screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      margin-bottom: inherit;
-    }
-  }
+		@media only screen and (min-width: map-get($grid-breakpoints, "md")) {
+			margin-bottom: inherit;
+		}
+	}
 }
 
 .top-table-list-container {
-  &.wrap-bottom {
-    margin-bottom: inherit !important;
-  }
+	&.wrap-bottom {
+		margin-bottom: inherit !important;
+	}
 
-  .image-wrapper {
-    position: relative;
+	.image-wrapper {
+		position: relative;
 
-    img {
-      vertical-align: middle;
-    }
-  }
+		img {
+			vertical-align: middle;
+		}
+	}
 
-  .hr-borderless {
-    visibility: hidden;
-  }
+	.hr-borderless {
+		visibility: hidden;
+	}
 }
 
 .promo-item-margins {
-  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-  }
+	@media screen and (min-width: map-get($grid-breakpoints, "sm")) {
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
+	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		margin-bottom: 1.5rem;
+		margin-top: 1.5rem;
+	}
 }

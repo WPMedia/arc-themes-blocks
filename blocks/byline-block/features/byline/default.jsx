@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { Byline } from '@wpmedia/shared-styles';
+import { Byline } from "@wpmedia/shared-styles";
 
 const ArticleByline = () => <Byline font="Primary" />;
 
-ArticleByline.label = 'Byline – Arc Block';
+ArticleByline.label = "Byline – Arc Block";
 
-ArticleByline.icon = 'user-question';
+ArticleByline.icon = "user-question";
 
 export default ArticleByline;

@@ -1,11 +1,7 @@
-const TIMEZONE = 'America/Chicago';
+const TIMEZONE = "America/Chicago";
 
-const resizerKey = '%{FKDFJK}';
+const resizerKey = "%{FKDFJK}";
 
-const searchKey = 'ABCDEF';
+const searchKey = "ABCDEF";
 
-export {
-  TIMEZONE,
-  resizerKey,
-  searchKey,
-};
+export { TIMEZONE, resizerKey, searchKey };

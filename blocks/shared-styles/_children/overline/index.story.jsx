@@ -1,57 +1,51 @@
-import React from 'react';
-import { withKnobs, text } from '@storybook/addon-knobs';
-import Overline from './index';
+import React from "react";
+import { withKnobs, text } from "@storybook/addon-knobs";
+import Overline from "./index";
 
 export default {
-  title: 'Shared Styles/Overline',
-  decorators: [withKnobs],
+	title: "Shared Styles/Overline",
+	decorators: [withKnobs],
 };
 
 export const usingANSStoryObject = () => {
-  const content = {
-    websites: {
-      'story-book': {
-        website_section: {
-          _id: text('websites[arcSite].website_section._id', '/news/'),
-          name: text('websites[arcSite].website_section.name', 'News'),
-        },
-      },
-    },
-  };
+	const content = {
+		websites: {
+			"story-book": {
+				website_section: {
+					_id: text("websites[arcSite].website_section._id", "/news/"),
+					name: text("websites[arcSite].website_section.name", "News"),
+				},
+			},
+		},
+	};
 
-  return (
-    <Overline story={content} className={text('className', '')} />
-  );
+	return <Overline story={content} className={text("className", "")} />;
 };
 
 export const sponsoredContentOutput = () => {
-  const content = {
-    owner: {
-      sponsored: true,
-    },
-    websites: {
-      'story-book': {
-        website_section: {
-          _id: text('websites[arcSite].website_section._id', '/news/'),
-          name: text('websites[arcSite].website_section.name', 'News'),
-        },
-      },
-    },
-  };
+	const content = {
+		owner: {
+			sponsored: true,
+		},
+		websites: {
+			"story-book": {
+				website_section: {
+					_id: text("websites[arcSite].website_section._id", "/news/"),
+					name: text("websites[arcSite].website_section.name", "News"),
+				},
+			},
+		},
+	};
 
-  return (
-    <Overline story={content} className={text('className', '')} />
-  );
+	return <Overline story={content} className={text("className", "")} />;
 };
 
 export const customLinkTextAndUrl = () => {
-  const props = {
-    customText: text('customText', 'Overline Text'),
-    customUrl: text('customUrl', 'https://arcxp.com'),
-    className: text('className', ''),
-  };
+	const props = {
+		customText: text("customText", "Overline Text"),
+		customUrl: text("customUrl", "https://arcxp.com"),
+		className: text("className", ""),
+	};
 
-  return (
-    <Overline {...props} />
-  );
+	return <Overline {...props} />;
 };

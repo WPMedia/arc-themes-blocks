@@ -4,7 +4,7 @@ on:
     branches:
       - stable
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 # Every time a package is published to this repo:
 #   1. Get the 'latest' version number from lerna.json
@@ -20,8 +20,8 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
       - name: Install lerna
         run: npm i -g lerna
       - name: Get the latest version from lerna.json and tag all stable blocks with that

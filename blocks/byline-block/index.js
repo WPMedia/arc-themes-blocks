@@ -1,3 +1,3 @@
-import Byline from './features/byline/default';
+import Byline from "./features/byline/default";
 
 export default Byline;

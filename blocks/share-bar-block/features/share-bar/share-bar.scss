@@ -1,24 +1,24 @@
 .ts-share-bar {
-  border-radius: 0 5px 5px 0;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  position: fixed;
-  top: 200px;
-  width: 44px;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	position: fixed;
+	top: 200px;
+	width: 44px;
 
-  @media screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1rem}) {
-    visibility: hidden;
-  }
+	@media screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 1rem}) {
+		visibility: hidden;
+	}
 
-  &__button {
-    background: none !important;
-    border: 0;
-    cursor: pointer;
-    margin: 5px;
-    padding: 0 !important;
-  }
+	&__button {
+		background: none !important;
+		border: 0;
+		cursor: pointer;
+		margin: 5px;
+		padding: 0 !important;
+	}
 }

@@ -1,5 +1,5 @@
-import Footer from './features/footer/default';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Footer from "./features/footer/default";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 
 <Meta title="Blocks/Footer" component={Footer} />
 
@@ -12,37 +12,39 @@ The `Footer` block will pull the data from the footer hierarchy from the organiz
 To import it into a block:
 
 ```jsx
-import Footer from '@wpmedia/footer-block';
+import Footer from "@wpmedia/footer-block";
 
 const CustomFooterBlock = () => (
-  <Footer
-      customFields={{
-          navigationConfig: {
-              contentService: 'footer-service',
-              contentConfiguration: {}
-          }
-      }}
-  />
-)
+	<Footer
+		customFields={{
+			navigationConfig: {
+				contentService: "footer-service",
+				contentConfiguration: {},
+			},
+		}}
+	/>
+);
 ```
 
 ## Props
+
 <Props of={Footer} />
 
 ## Stories
 
 ** Footer **
+
 <Preview>
-  <Story name="Default Layout">
-    <footer>
-      <Footer
-        customFields={{
-          navigationConfig: {
-            contentService: 'footer-service',
-            contentConfiguration: {}
-          }
-        }}
-      />
-    </footer>
-  </Story>
+	<Story name="Default Layout">
+		<footer>
+			<Footer
+				customFields={{
+					navigationConfig: {
+						contentService: "footer-service",
+						contentConfiguration: {},
+					},
+				}}
+			/>
+		</footer>
+	</Story>
 </Preview>

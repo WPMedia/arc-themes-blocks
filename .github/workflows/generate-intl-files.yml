@@ -5,7 +5,7 @@ name: Generate intl json block files
 on:
   push:
     branches:
-      - 'lokalise*'
+      - "lokalise*"
     paths:
       - locale/*.json
 
@@ -40,4 +40,4 @@ jobs:
       # Add and commit the changed files
       - uses: EndBug/add-and-commit@v7.0.0
         with:
-         message: 'Add block intl.json files'
+          message: "Add block intl.json files"

@@ -1,9 +1,9 @@
-import PropTypes from '@arc-fusion/prop-types';
+import PropTypes from "@arc-fusion/prop-types";
 
 const imageRatioLabels = {
-  '16:9': '16:9',
-  '3:2': '3:2',
-  '4:3': '4:3',
+	"16:9": "16:9",
+	"3:2": "3:2",
+	"4:3": "4:3",
 };
 
 const imageRatiosKeys = Object.keys(imageRatioLabels);
@@ -25,15 +25,15 @@ const imageRatiosKeys = Object.keys(imageRatioLabels);
  * @return A property object to be use on CustomFields
  */
 const imageRatioCustomField = (element, group, defaultValue) => {
-  const elementTextProp = {
-    [`${element}`]: PropTypes.oneOf(imageRatiosKeys).tag({
-      labels: imageRatioLabels,
-      name: 'Image ratio',
-      defaultValue,
-      group,
-    }),
-  };
-  return { ...elementTextProp };
+	const elementTextProp = {
+		[`${element}`]: PropTypes.oneOf(imageRatiosKeys).tag({
+			labels: imageRatioLabels,
+			name: "Image ratio",
+			defaultValue,
+			group,
+		}),
+	};
+	return { ...elementTextProp };
 };
 
 export default imageRatioCustomField;

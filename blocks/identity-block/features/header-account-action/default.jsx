@@ -1,219 +1,213 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from '@arc-fusion/prop-types';
-import getProperties from 'fusion:properties';
-import getTranslatedPhrases from 'fusion:intl';
-import { useFusionContext } from 'fusion:context';
+import React, { useEffect, useState } from "react";
+import PropTypes from "@arc-fusion/prop-types";
+import getProperties from "fusion:properties";
+import getTranslatedPhrases from "fusion:intl";
+import { useFusionContext } from "fusion:context";
 import {
-  Button,
-  BUTTON_SIZES,
-  BUTTON_TYPES,
-  getNavSpecificSecondaryButtonTheme,
-  getNavSpecificPrimaryButtonTheme,
-} from '@wpmedia/shared-styles';
-import useIdentity from '../../components/Identity';
-import DropDownLinkListItem from './_children/DropDownLinkListItem';
+	Button,
+	BUTTON_SIZES,
+	BUTTON_TYPES,
+	getNavSpecificSecondaryButtonTheme,
+	getNavSpecificPrimaryButtonTheme,
+} from "@wpmedia/shared-styles";
+import useIdentity from "../../components/Identity";
+import DropDownLinkListItem from "./_children/DropDownLinkListItem";
 
-import './styles.scss';
+import "./styles.scss";
 
 const HeaderAccountAction = ({ customFields }) => {
-  const {
-    createAccountURL,
-    loginURL,
-    logoutURL,
-    manageAccountURL,
-  } = customFields;
-  const { arcSite } = useFusionContext();
+	const { createAccountURL, loginURL, logoutURL, manageAccountURL } = customFields;
+	const { arcSite } = useFusionContext();
 
-  const { Identity, isInitialized } = useIdentity();
-  const { locale, navColor = 'dark', navBarBackground } = getProperties(arcSite);
-  const phrases = getTranslatedPhrases(locale);
+	const { Identity, isInitialized } = useIdentity();
+	const { locale, navColor = "dark", navBarBackground } = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale);
 
-  const [loggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(false);
-  const [error, setError] = useState();
-  const [isAccountMenuOpen, setAccountMenu] = useState(false);
+	const [loggedIn, setIsLoggedIn] = useState(false);
+	const [user, setUser] = useState(false);
+	const [error, setError] = useState();
+	const [isAccountMenuOpen, setAccountMenu] = useState(false);
 
-  useEffect(() => {
-    const isLoggedIn = async () => {
-      setIsLoggedIn(await Identity.isLoggedIn());
-    };
+	useEffect(() => {
+		const isLoggedIn = async () => {
+			setIsLoggedIn(await Identity.isLoggedIn());
+		};
 
-    isLoggedIn();
-  }, [Identity]);
+		isLoggedIn();
+	}, [Identity]);
 
-  useEffect(() => {
-    let isActive = true;
+	useEffect(() => {
+		let isActive = true;
 
-    if (loggedIn) {
-      Identity.getUserProfile().then((userProfile) => {
-        if (isActive) {
-          setUser(userProfile);
-        }
-      }).catch((e) => {
-        if (isActive) {
-          setError(e);
-        }
-      });
-    }
+		if (loggedIn) {
+			Identity.getUserProfile()
+				.then((userProfile) => {
+					if (isActive) {
+						setUser(userProfile);
+					}
+				})
+				.catch((e) => {
+					if (isActive) {
+						setError(e);
+					}
+				});
+		}
 
-    // cancel subscription to useEffect
-    return () => { isActive = false; return null; };
-  }, [Identity, loggedIn]);
+		// cancel subscription to useEffect
+		return () => {
+			isActive = false;
+			return null;
+		};
+	}, [Identity, loggedIn]);
 
-  const handleLogout = (e) => {
-    if (e.key === 'Enter' || e.type === 'click') {
-      e.preventDefault();
-      Identity.logout().then(() => {
-        window.location = logoutURL;
-      });
-    }
-  };
+	const handleLogout = (e) => {
+		if (e.key === "Enter" || e.type === "click") {
+			e.preventDefault();
+			Identity.logout().then(() => {
+				window.location = logoutURL;
+			});
+		}
+	};
 
-  if (!isInitialized) {
-    return null;
-  }
+	if (!isInitialized) {
+		return null;
+	}
 
-  // Component is fully client side and will render Sign In link
-  // until we can check user's profile, if they are logged in will
-  // display their name.
-  // Should we display anything on first pass?
+	// Component is fully client side and will render Sign In link
+	// until we can check user's profile, if they are logged in will
+	// display their name.
+	// Should we display anything on first pass?
 
-  if (user && !error) {
-    return (
-      <div className="xpmedia-subs-header--header">
-        <div className="xpmedia-subs-header--desktop-header">
-          <Button
-            aria-expanded={isAccountMenuOpen}
-            as="button"
-            buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-            buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
-            iconType="user"
-            secondaryIconType={isAccountMenuOpen ? 'chevron-up' : 'chevron-down'}
-            onClick={() => setAccountMenu(!isAccountMenuOpen)}
-            text={phrases.t('identity-block.account')}
-            type="button"
-          />
-        </div>
-        <div className="xpmedia-subs-header--mobile-header">
-          <Button
-            aria-expanded={isAccountMenuOpen}
-            as="button"
-            buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-            buttonType={BUTTON_TYPES.ICON_ONLY}
-            iconType="user"
-            onClick={() => setAccountMenu(!isAccountMenuOpen)}
-            text={phrases.t('identity-block.login-options')}
-            type="button"
-          />
-        </div>
-        {isAccountMenuOpen && (
-          <ul className="xpmedia-subs-header-dropdown--open">
-            <DropDownLinkListItem
-              href={manageAccountURL}
-              text={phrases.t('identity-block.manage-account')}
-            />
-            <DropDownLinkListItem
-              href={logoutURL}
-              onClick={handleLogout}
-              text={phrases.t('identity-block.log-out')}
-            />
-          </ul>
-        )}
-      </div>
-    );
-  }
+	if (user && !error) {
+		return (
+			<div className="xpmedia-subs-header--header">
+				<div className="xpmedia-subs-header--desktop-header">
+					<Button
+						aria-expanded={isAccountMenuOpen}
+						as="button"
+						buttonSize={BUTTON_SIZES.SMALL}
+						buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
+						buttonType={BUTTON_TYPES.LABEL_AND_TWO_ICONS}
+						iconType="user"
+						secondaryIconType={isAccountMenuOpen ? "chevron-up" : "chevron-down"}
+						onClick={() => setAccountMenu(!isAccountMenuOpen)}
+						text={phrases.t("identity-block.account")}
+						type="button"
+					/>
+				</div>
+				<div className="xpmedia-subs-header--mobile-header">
+					<Button
+						aria-expanded={isAccountMenuOpen}
+						as="button"
+						buttonSize={BUTTON_SIZES.SMALL}
+						buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+						buttonType={BUTTON_TYPES.ICON_ONLY}
+						iconType="user"
+						onClick={() => setAccountMenu(!isAccountMenuOpen)}
+						text={phrases.t("identity-block.login-options")}
+						type="button"
+					/>
+				</div>
+				{isAccountMenuOpen && (
+					<ul className="xpmedia-subs-header-dropdown--open">
+						<DropDownLinkListItem
+							href={manageAccountURL}
+							text={phrases.t("identity-block.manage-account")}
+						/>
+						<DropDownLinkListItem
+							href={logoutURL}
+							onClick={handleLogout}
+							text={phrases.t("identity-block.log-out")}
+						/>
+					</ul>
+				)}
+			</div>
+		);
+	}
 
-  // What do we want to happen if there is an error?
-  return (
-    <>
-      <div className="xpmedia-subs-header--desktop-header">
-        {createAccountURL ? (
-          <Button
-            // should be an a tag if it's a link
-            as="a"
-            buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-            buttonType={BUTTON_TYPES.LABEL_ONLY}
-            href={createAccountURL}
-            text={phrases.t('identity-block.sign-up')}
-          />
-        ) : null}
-        {loginURL ? (
-          <Button
-            // should be an a tag if it's a link
-            as="a"
-            buttonSize={BUTTON_SIZES.SMALL}
-            buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-            buttonType={BUTTON_TYPES.LABEL_AND_ICON}
-            href={loginURL}
-            iconType="user"
-            text={phrases.t('identity-block.log-in')}
-          />
-        ) : null}
-      </div>
-      <div className="xpmedia-subs-header--mobile-header">
-        <Button
-          // should be button if toggleable
-          as="button"
-          aria-expanded={isAccountMenuOpen}
-          buttonSize={BUTTON_SIZES.SMALL}
-          buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
-          buttonType={BUTTON_TYPES.ICON_ONLY}
-          iconType="user"
-          onClick={() => setAccountMenu(!isAccountMenuOpen)}
-          text={phrases.t('identity-block.login-options')}
-          // for button accessibility
-          type="button"
-        />
-        {isAccountMenuOpen && (
-          <ul className="xpmedia-subs-header-dropdown--open">
-            {
-              createAccountURL ? (
-                <DropDownLinkListItem
-                  href={createAccountURL}
-                  text={phrases.t('identity-block.sign-up')}
-                />
-              ) : null
-            }
-            {
-              loginURL ? (
-                <DropDownLinkListItem
-                  href={loginURL}
-                  text={phrases.t('identity-block.log-in')}
-                />
-              ) : null
-            }
-          </ul>
-        )}
-      </div>
-    </>
-  );
+	// What do we want to happen if there is an error?
+	return (
+		<>
+			<div className="xpmedia-subs-header--desktop-header">
+				{createAccountURL ? (
+					<Button
+						// should be an a tag if it's a link
+						as="a"
+						buttonSize={BUTTON_SIZES.SMALL}
+						buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+						buttonType={BUTTON_TYPES.LABEL_ONLY}
+						href={createAccountURL}
+						text={phrases.t("identity-block.sign-up")}
+					/>
+				) : null}
+				{loginURL ? (
+					<Button
+						// should be an a tag if it's a link
+						as="a"
+						buttonSize={BUTTON_SIZES.SMALL}
+						buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
+						buttonType={BUTTON_TYPES.LABEL_AND_ICON}
+						href={loginURL}
+						iconType="user"
+						text={phrases.t("identity-block.log-in")}
+					/>
+				) : null}
+			</div>
+			<div className="xpmedia-subs-header--mobile-header">
+				<Button
+					// should be button if toggleable
+					as="button"
+					aria-expanded={isAccountMenuOpen}
+					buttonSize={BUTTON_SIZES.SMALL}
+					buttonStyle={getNavSpecificPrimaryButtonTheme(navColor, navBarBackground)}
+					buttonType={BUTTON_TYPES.ICON_ONLY}
+					iconType="user"
+					onClick={() => setAccountMenu(!isAccountMenuOpen)}
+					text={phrases.t("identity-block.login-options")}
+					// for button accessibility
+					type="button"
+				/>
+				{isAccountMenuOpen && (
+					<ul className="xpmedia-subs-header-dropdown--open">
+						{createAccountURL ? (
+							<DropDownLinkListItem
+								href={createAccountURL}
+								text={phrases.t("identity-block.sign-up")}
+							/>
+						) : null}
+						{loginURL ? (
+							<DropDownLinkListItem href={loginURL} text={phrases.t("identity-block.log-in")} />
+						) : null}
+					</ul>
+				)}
+			</div>
+		</>
+	);
 };
 
 HeaderAccountAction.propTypes = {
-  customFields: PropTypes.shape({
-    loginURL: PropTypes.string.tag({
-      defaultValue: '/account/login/',
-      label: 'Log In URL',
-    }),
-    createAccountURL: PropTypes.string.tag({
-      defaultValue: '/account/signup/',
-      label: 'Sign Up URL',
-    }),
-    logoutURL: PropTypes.string.tag({
-      defaultValue: '/',
-      label: 'Log Out URL',
-      description: 'The URL to which a user would be redirected to after clicking Log Out from the navigation.',
-    }),
-    manageAccountURL: PropTypes.string.tag({
-      defaultValue: '/account/',
-      label: 'Manage Account URL',
-    }),
-  }),
+	customFields: PropTypes.shape({
+		loginURL: PropTypes.string.tag({
+			defaultValue: "/account/login/",
+			label: "Log In URL",
+		}),
+		createAccountURL: PropTypes.string.tag({
+			defaultValue: "/account/signup/",
+			label: "Sign Up URL",
+		}),
+		logoutURL: PropTypes.string.tag({
+			defaultValue: "/",
+			label: "Log Out URL",
+			description:
+				"The URL to which a user would be redirected to after clicking Log Out from the navigation.",
+		}),
+		manageAccountURL: PropTypes.string.tag({
+			defaultValue: "/account/",
+			label: "Manage Account URL",
+		}),
+	}),
 };
 
-HeaderAccountAction.label = 'Identity Header Account – Arc Block';
+HeaderAccountAction.label = "Identity Header Account – Arc Block";
 
 export default HeaderAccountAction;

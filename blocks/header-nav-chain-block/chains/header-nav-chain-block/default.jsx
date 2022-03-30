@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from '@arc-fusion/prop-types';
-import styled from 'styled-components';
-import { useContent } from 'fusion:content';
-import { useFusionContext } from 'fusion:context';
-import getProperties from 'fusion:properties';
-import getThemeStyle from 'fusion:themes';
-import getTranslatedPhrases from 'fusion:intl';
-import FocusTrap from 'focus-trap-react';
-import {
-  generateNavComponentPropTypes,
-} from './nav-helper';
-import SectionNav from './_children/section-nav';
-import NavLogo from './_children/nav-logo';
-import HorizontalLinksBar from './_children/horizontal-links/default';
-import NavSection from './_children/nav-section';
-import MenuWidgets from './_children/menu-widgets';
+import React, { useEffect, useState } from "react";
+import PropTypes from "@arc-fusion/prop-types";
+import styled from "styled-components";
+import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import getThemeStyle from "fusion:themes";
+import getTranslatedPhrases from "fusion:intl";
+import FocusTrap from "focus-trap-react";
+import { generateNavComponentPropTypes } from "./nav-helper";
+import SectionNav from "./_children/section-nav";
+import NavLogo from "./_children/nav-logo";
+import HorizontalLinksBar from "./_children/horizontal-links/default";
+import NavSection from "./_children/nav-section";
+import MenuWidgets from "./_children/menu-widgets";
 // shares styles with header nav block
 // can modify styles in shared styles block
-import '@wpmedia/shared-styles/scss/_header-nav.scss';
+import "@wpmedia/shared-styles/scss/_header-nav.scss";
 
 /* Global Constants */
 // Since these values are used to coordinate multiple components, I thought I'd make them variables
@@ -30,262 +28,261 @@ const sectionZIdx = navZIdx - 1;
 // max-width 240px is the biggest the icon will grow to on larger viewports
 /* Styled Components */
 const StyledNav = styled.nav`
-  align-items: center;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  margin-bottom: 0;
-  z-index: 1;
+	align-items: center;
+	width: 100%;
+	position: sticky;
+	top: 0;
+	margin-bottom: 0;
+	z-index: 1;
 
-  .news-theme-navigation-bar {
-    @media screen and (max-width: ${(props) => props.breakpoint}px) {
-      height: ${standardNavHeight}px;
-    }
-    @media screen and (min-width: ${(props) => props.breakpoint}px) {
-      height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-    }
-    background-color: ${(props) => props.navBarBackground};
-    transition: 0.5s;
-    z-index: ${navZIdx};
-  }
+	.news-theme-navigation-bar {
+		@media screen and (max-width: ${(props) => props.breakpoint}px) {
+			height: ${standardNavHeight}px;
+		}
+		@media screen and (min-width: ${(props) => props.breakpoint}px) {
+			height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+		}
+		background-color: ${(props) => props.navBarBackground};
+		transition: 0.5s;
+		z-index: ${navZIdx};
+	}
 
-  .nav-logo {
-    img {
-      height: auto;
-      max-width: 240px;
-      width: auto;
-      transition: 0.5s;
+	.nav-logo {
+		img {
+			height: auto;
+			max-width: 240px;
+			width: auto;
+			transition: 0.5s;
 
-      @media screen and (max-width: ${(props) => props.breakpoint}px) {
-        max-height: 40px;
-        max-width: 100%;
-      }
-      @media screen and (min-width: ${(props) => props.breakpoint}px) {
-        max-height: ${(props) => (props.scrolled ? (standardNavHeight - 16) : (props.navHeight - 16))}px;
-      }
-    }
-  }
+			@media screen and (max-width: ${(props) => props.breakpoint}px) {
+				max-height: 40px;
+				max-width: 100%;
+			}
+			@media screen and (min-width: ${(props) => props.breakpoint}px) {
+				max-height: ${(props) =>
+					props.scrolled ? standardNavHeight - 16 : props.navHeight - 16}px;
+			}
+		}
+	}
 `;
 
 const StyledSectionDrawer = styled.div`
-  z-index: ${sectionZIdx};
-  @media screen and (max-width: ${(props) => props.breakpoint}px) {
-    margin-top: ${standardNavHeight}px;
-  }
-  @media screen and (min-width: ${(props) => props.breakpoint}px) {
-    margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-  }
+	z-index: ${sectionZIdx};
+	@media screen and (max-width: ${(props) => props.breakpoint}px) {
+		margin-top: ${standardNavHeight}px;
+	}
+	@media screen and (min-width: ${(props) => props.breakpoint}px) {
+		margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+	}
 `;
 
 const StyledWarning = styled.div`
-  background-color: #c30;
-  color: #fff;
-  display: flex;
-  align-self: flex-start;
-  padding: 6px;
+	background-color: #c30;
+	color: #fff;
+	display: flex;
+	align-self: flex-start;
+	padding: 6px;
 `;
 
 export function PresentationalNav(props) {
-  const {
-    ariaLabelLink,
-    backgroundColor,
-    mediumBreakpoint,
-    children,
-    closeDrawer,
-    customFields,
-    displayLinks,
-    horizontalLinksHierarchy,
-    isAdmin,
-    isSectionDrawerOpen,
-    logoAlignment,
-    menuButtonClickAction,
-    navColor,
-    navColorClass,
-    navHeight,
-    scrollAdjustedNavHeight,
-    scrolled,
-    sectionAriaLabel,
-    sections,
-    showDotSeparators,
-    signInOrder,
-    primaryLogoPath,
-    primaryLogoAlt,
-  } = props;
-  return (
-    <StyledNav
-      id="main-nav"
-      className={navColorClass}
-      navBarBackground={backgroundColor}
-      navHeight={navHeight}
-      scrolled={scrolled}
-      // hard-coded to medium-breakpoint
-      breakpoint={mediumBreakpoint}
-      aria-label={sectionAriaLabel}
-    >
-      <div className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${displayLinks ? 'horizontal-links' : ''}`}>
-        <NavSection
-          customFields={customFields}
-          menuButtonClickAction={menuButtonClickAction}
-          side="left"
-          signInOrder={signInOrder}
-        >
-          {children}
-        </NavSection>
-        <NavLogo
-          alignment={logoAlignment}
-          imageSource={primaryLogoPath}
-          imageAltText={primaryLogoAlt}
-          mediumBreakpoint={mediumBreakpoint}
-        />
-        {displayLinks && (
-        <HorizontalLinksBar
-          hierarchy={horizontalLinksHierarchy}
-          navBarColor={navColor}
-          showHorizontalSeperatorDots={showDotSeparators}
-          ariaLabel={ariaLabelLink}
-        />
-        )}
-        <NavSection
-          customFields={customFields}
-          menuButtonClickAction={menuButtonClickAction}
-          side="right"
-          signInOrder={signInOrder}
-        >
-          {children}
-        </NavSection>
-      </div>
+	const {
+		ariaLabelLink,
+		backgroundColor,
+		mediumBreakpoint,
+		children,
+		closeDrawer,
+		customFields,
+		displayLinks,
+		horizontalLinksHierarchy,
+		isAdmin,
+		isSectionDrawerOpen,
+		logoAlignment,
+		menuButtonClickAction,
+		navColor,
+		navColorClass,
+		navHeight,
+		scrollAdjustedNavHeight,
+		scrolled,
+		sectionAriaLabel,
+		sections,
+		showDotSeparators,
+		signInOrder,
+		primaryLogoPath,
+		primaryLogoAlt,
+	} = props;
+	return (
+		<StyledNav
+			id="main-nav"
+			className={navColorClass}
+			navBarBackground={backgroundColor}
+			navHeight={navHeight}
+			scrolled={scrolled}
+			// hard-coded to medium-breakpoint
+			breakpoint={mediumBreakpoint}
+			aria-label={sectionAriaLabel}
+		>
+			<div
+				className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${
+					displayLinks ? "horizontal-links" : ""
+				}`}
+			>
+				<NavSection
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="left"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+				<NavLogo
+					alignment={logoAlignment}
+					imageSource={primaryLogoPath}
+					imageAltText={primaryLogoAlt}
+					mediumBreakpoint={mediumBreakpoint}
+				/>
+				{displayLinks && (
+					<HorizontalLinksBar
+						hierarchy={horizontalLinksHierarchy}
+						navBarColor={navColor}
+						showHorizontalSeperatorDots={showDotSeparators}
+						ariaLabel={ariaLabelLink}
+					/>
+				)}
+				<NavSection
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="right"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+			</div>
 
-      <StyledSectionDrawer
-        id="nav-sections"
-        className={`nav-sections ${isSectionDrawerOpen ? 'open' : 'closed'}`}
-        navHeight={navHeight}
-        scrolled={scrolled}
-        // hard-coded to medium breakpoint
-        breakpoint={mediumBreakpoint}
-        onClick={closeDrawer}
-      >
-        <FocusTrap
-          active={isSectionDrawerOpen}
-          focusTrapOptions={{
-            allowOutsideClick: true,
-            returnFocusOnDeactivate: true,
-            onDeactivate: /* istanbul ignore next */ () => {
-            // Focus the next focusable element in the navbar
-            // Workaround for issue where 'nav-sections-btn' wont programatically focus
-              const focusElement = document.querySelector(`
+			<StyledSectionDrawer
+				id="nav-sections"
+				className={`nav-sections ${isSectionDrawerOpen ? "open" : "closed"}`}
+				navHeight={navHeight}
+				scrolled={scrolled}
+				// hard-coded to medium breakpoint
+				breakpoint={mediumBreakpoint}
+				onClick={closeDrawer}
+			>
+				<FocusTrap
+					active={isSectionDrawerOpen}
+					focusTrapOptions={{
+						allowOutsideClick: true,
+						returnFocusOnDeactivate: true,
+						onDeactivate: /* istanbul ignore next */ () => {
+							// Focus the next focusable element in the navbar
+							// Workaround for issue where 'nav-sections-btn' wont programatically focus
+							const focusElement = document.querySelector(`
                 #main-nav a:not(.nav-sections-btn),
                 #main-nav button:not(.nav-sections-btn)
               `);
-              // istanbul ignore next
-              if (focusElement) {
-                focusElement.focus();
-                focusElement.blur();
-              }
-            },
-            fallbackFocus: /* istanbul ignore next */ () => document.getElementById('nav-sections'),
-          }}
-        >
-          {/**
-           * Need to disable tabindex lint as this is a fallback for when section menu
-           * has no items and FocusTrap requires at least one tabable element
-           * which would be the follow container thats used wuth `fallbackFocus`
-          */}
-          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
-          <div className="inner-drawer-nav" style={{ zIndex: 10 }} tabIndex={!sections.length ? '-1' : null}>
-            <SectionNav
-              sections={sections}
-              isHidden={!isSectionDrawerOpen}
-              navHeight={scrollAdjustedNavHeight}
-            >
-              <MenuWidgets
-                customFields={customFields}
-                menuButtonClickAction={menuButtonClickAction}
-              >
-                {children}
-              </MenuWidgets>
-            </SectionNav>
-          </div>
-        </FocusTrap>
-      </StyledSectionDrawer>
+							// istanbul ignore next
+							if (focusElement) {
+								focusElement.focus();
+								focusElement.blur();
+							}
+						},
+						fallbackFocus: /* istanbul ignore next */ () => document.getElementById("nav-sections"),
+					}}
+				>
+					{/**
+					 * Need to disable tabindex lint as this is a fallback for when section menu
+					 * has no items and FocusTrap requires at least one tabable element
+					 * which would be the follow container that's used with `fallbackFocus`
+					 */}
+					<div
+						className="inner-drawer-nav"
+						style={{ zIndex: 10 }}
+						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+						tabIndex={!sections.length ? "-1" : null}
+					>
+						<SectionNav
+							sections={sections}
+							isHidden={!isSectionDrawerOpen}
+							navHeight={scrollAdjustedNavHeight}
+						>
+							<MenuWidgets
+								customFields={customFields}
+								menuButtonClickAction={menuButtonClickAction}
+							>
+								{children}
+							</MenuWidgets>
+						</SectionNav>
+					</div>
+				</FocusTrap>
+			</StyledSectionDrawer>
 
-      {(horizontalLinksHierarchy && logoAlignment !== 'left' && isAdmin) && (
-      <StyledWarning>
-        In order to render horizontal links, the logo must be aligned to the left.
-      </StyledWarning>
-      )}
-    </StyledNav>
-  );
+			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin && (
+				<StyledWarning>
+					In order to render horizontal links, the logo must be aligned to the left.
+				</StyledWarning>
+			)}
+		</StyledNav>
+	);
 }
 /* Main Component */
 const Nav = (props) => {
-  const {
-    arcSite,
-    isAdmin,
-    deployment,
-    contextPath,
-  } = useFusionContext();
+	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
-  const {
-    navColor,
-    breakpoints = { medium: 768 },
-    navBarBackground,
-    locale = 'en',
-    primaryLogo,
-    primaryLogoAlt,
-  } = getProperties(arcSite);
+	const {
+		navColor,
+		breakpoints = { medium: 768 },
+		navBarBackground,
+		locale = "en",
+		primaryLogo,
+		primaryLogoAlt,
+	} = getProperties(arcSite);
 
-  const mediumBreakpoint = breakpoints.medium;
+	const mediumBreakpoint = breakpoints.medium;
 
-  // Check if URL is absolute/base64
-  const primaryLogoPath = primaryLogo && (
-    primaryLogo.indexOf('http') === 0
-      || primaryLogo.indexOf('base64') === 0
-      ? primaryLogo : deployment(`${contextPath}/${primaryLogo}`)
-  );
+	// Check if URL is absolute/base64
+	const primaryLogoPath =
+		primaryLogo &&
+		(primaryLogo.indexOf("http") === 0 || primaryLogo.indexOf("base64") === 0
+			? primaryLogo
+			: deployment(`${contextPath}/${primaryLogo}`));
 
-  const phrases = getTranslatedPhrases(locale);
+	const phrases = getTranslatedPhrases(locale);
 
-  const {
-    'primary-color': primaryColor = '#000',
-  } = getThemeStyle(arcSite);
+	const { "primary-color": primaryColor = "#000" } = getThemeStyle(arcSite);
 
-  let backgroundColor = '#000';
+	let backgroundColor = "#000";
 
-  if (navBarBackground === 'primary-color') {
-    backgroundColor = primaryColor;
-  } else if (navColor === 'light') {
-    backgroundColor = '#fff';
-  }
+	if (navBarBackground === "primary-color") {
+		backgroundColor = primaryColor;
+	} else if (navColor === "light") {
+		backgroundColor = "#fff";
+	}
 
-  const {
-    children = [],
-    customFields,
-  } = props;
-  const {
-    hierarchy,
-    signInOrder,
-    logoAlignment = 'center',
-    horizontalLinksHierarchy,
-    desktopNavivationStartHeight,
-    shrinkDesktopNavivationHeight,
-    showHorizontalSeperatorDots,
-    ariaLabel,
-    ariaLabelLink,
-  } = customFields;
+	const { children = [], customFields } = props;
+	const {
+		hierarchy,
+		signInOrder,
+		logoAlignment = "center",
+		horizontalLinksHierarchy,
+		desktopNavivationStartHeight,
+		shrinkDesktopNavivationHeight,
+		showHorizontalSeperatorDots,
+		ariaLabel,
+		ariaLabelLink,
+	} = customFields;
 
-  const displayLinks = horizontalLinksHierarchy && logoAlignment === 'left';
+	const displayLinks = horizontalLinksHierarchy && logoAlignment === "left";
 
-  const navHeight = desktopNavivationStartHeight || 56;
+	const navHeight = desktopNavivationStartHeight || 56;
 
-  const showDotSeparators = showHorizontalSeperatorDots ?? true;
+	const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
-  const mainContent = useContent({
-    source: 'site-service-hierarchy',
-    query: {
-      hierarchy,
-      feature: 'header-nav-chain',
-    },
-    filter: `{
+	const mainContent = useContent({
+		source: "site-service-hierarchy",
+		query: {
+			hierarchy,
+			feature: "header-nav-chain",
+		},
+		filter: `{
       children {
         _id
         node_type
@@ -301,159 +298,162 @@ const Nav = (props) => {
         }
       }
     }`,
-  });
+	});
 
-  const sections = (mainContent && mainContent.children) ? mainContent.children : [];
+	const sections = mainContent && mainContent.children ? mainContent.children : [];
 
-  const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+	const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 
-  const closeNavigation = () => {
-    setSectionDrawerOpen(false);
-    document.body.classList.remove('nav-open');
-  };
+	const closeNavigation = () => {
+		setSectionDrawerOpen(false);
+		document.body.classList.remove("nav-open");
+	};
 
-  const closeDrawer = (event) => {
-    const ele = event.target;
-    if (ele.closest('.inner-drawer-nav')) {
-      return;
-    }
-    closeNavigation();
-  };
+	const closeDrawer = (event) => {
+		const ele = event.target;
+		if (ele.closest(".inner-drawer-nav")) {
+			return;
+		}
+		closeNavigation();
+	};
 
-  const menuButtonClickAction = () => {
-    setSectionDrawerOpen(!isSectionDrawerOpen);
-    document.body.classList.toggle('nav-open');
-  };
+	const menuButtonClickAction = () => {
+		setSectionDrawerOpen(!isSectionDrawerOpen);
+		document.body.classList.toggle("nav-open");
+	};
 
-  // istanbul ignore next
-  useEffect(() => {
-    const handleEscKey = (event) => {
-      if (event.keyCode === 27) {
-        closeNavigation();
-      }
-    };
+	// istanbul ignore next
+	useEffect(() => {
+		const handleEscKey = (event) => {
+			if (event.keyCode === 27) {
+				closeNavigation();
+			}
+		};
 
-    window.addEventListener('keydown', handleEscKey, true);
-    return () => {
-      window.removeEventListener('keydown', handleEscKey);
-    };
-  }, []);
+		window.addEventListener("keydown", handleEscKey, true);
+		return () => {
+			window.removeEventListener("keydown", handleEscKey);
+		};
+	}, []);
 
-  // istanbul ignore next
-  useEffect(() => {
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {
-      return undefined;
-    }
-    const handleScroll = () => {
-      const pageOffset = window.pageYOffset;
-      if (pageOffset > shrinkDesktopNavivationHeight) {
-        setScrolled(true);
-      } else if (pageOffset < (shrinkDesktopNavivationHeight - desktopNavivationStartHeight)) {
-        setScrolled(false);
-      }
-    };
+	// istanbul ignore next
+	useEffect(() => {
+		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+		if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {
+			return undefined;
+		}
+		const handleScroll = () => {
+			const pageOffset = window.pageYOffset;
+			if (pageOffset > shrinkDesktopNavivationHeight) {
+				setScrolled(true);
+			} else if (pageOffset < shrinkDesktopNavivationHeight - desktopNavivationStartHeight) {
+				setScrolled(false);
+			}
+		};
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
 
-  // 56 pixels nav height on scroll
-  const scrollAdjustedNavHeight = (scrolled) ? 56 : navHeight;
-  const navColorClass = (navColor === 'light') ? 'light' : 'dark';
-  const sectionAriaLabel = ariaLabel || phrases.t('header-nav-chain-block.sections-element-aria-label');
+	// 56 pixels nav height on scroll
+	const scrollAdjustedNavHeight = scrolled ? 56 : navHeight;
+	const navColorClass = navColor === "light" ? "light" : "dark";
+	const sectionAriaLabel =
+		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
-  return (
-    <PresentationalNav
-      ariaLabelLink={ariaLabelLink}
-      backgroundColor={backgroundColor}
-      mediumBreakpoint={mediumBreakpoint}
-      closeDrawer={closeDrawer}
-      customFields={customFields}
-      displayLinks={displayLinks}
-      horizontalLinksHierarchy={horizontalLinksHierarchy}
-      isAdmin={isAdmin}
-      isSectionDrawerOpen={isSectionDrawerOpen}
-      logoAlignment={logoAlignment}
-      menuButtonClickAction={menuButtonClickAction}
-      navColor={navColor}
-      navColorClass={navColorClass}
-      navHeight={navHeight}
-      scrollAdjustedNavHeight={scrollAdjustedNavHeight}
-      scrolled={scrolled}
-      sectionAriaLabel={sectionAriaLabel}
-      sections={sections}
-      showDotSeparators={showDotSeparators}
-      signInOrder={signInOrder}
-      primaryLogoPath={primaryLogoPath}
-      primaryLogoAlt={primaryLogoAlt}
-    >
-      {children}
-    </PresentationalNav>
-  );
+	return (
+		<PresentationalNav
+			ariaLabelLink={ariaLabelLink}
+			backgroundColor={backgroundColor}
+			mediumBreakpoint={mediumBreakpoint}
+			closeDrawer={closeDrawer}
+			customFields={customFields}
+			displayLinks={displayLinks}
+			horizontalLinksHierarchy={horizontalLinksHierarchy}
+			isAdmin={isAdmin}
+			isSectionDrawerOpen={isSectionDrawerOpen}
+			logoAlignment={logoAlignment}
+			menuButtonClickAction={menuButtonClickAction}
+			navColor={navColor}
+			navColorClass={navColorClass}
+			navHeight={navHeight}
+			scrollAdjustedNavHeight={scrollAdjustedNavHeight}
+			scrolled={scrolled}
+			sectionAriaLabel={sectionAriaLabel}
+			sections={sections}
+			showDotSeparators={showDotSeparators}
+			signInOrder={signInOrder}
+			primaryLogoPath={primaryLogoPath}
+			primaryLogoAlt={primaryLogoAlt}
+		>
+			{children}
+		</PresentationalNav>
+	);
 };
 
 /** Nav PropTypes */
 
 Nav.propTypes = {
-  customFields: PropTypes.shape({
-    hierarchy: PropTypes.string.tag({
-      label: 'Sections Menu hierarchy',
-      defaultValue: '',
-      group: 'Configure content',
-    }),
-    signInOrder: PropTypes.number.tag({
-      hidden: true,
-    }),
-    logoAlignment: PropTypes.oneOf([
-      'center', 'left',
-    ]).tag({
-      label: 'Logo alignment',
-      group: 'Logo',
-      defaultValue: 'center',
-    }),
-    horizontalLinksHierarchy: PropTypes.string.tag({
-      label: 'Horizontal Links hierarchy',
-      group: 'Configure content',
-    }),
-    desktopNavivationStartHeight: PropTypes.number.tag({
-      label: 'Starting desktop navigation bar height',
-      description: 'Select the height of the navigation bar (in px) when the user first opens a page on desktop. Must be between 56 and 200.',
-      group: 'Logo',
-      max: 200,
-      min: 56,
-      defaultValue: 56,
-    }),
-    shrinkDesktopNavivationHeight: PropTypes.number.tag({
-      label: 'Shrink navigation bar after scrolling',
-      description: 'How far should the user scroll (in px) until the navigation height shrinks back to standard size (56px) on desktop? Must be greater than the value configured for "Starting desktop navigation bar height".',
-      group: 'Logo',
-      min: 56,
-    }),
-    showHorizontalSeperatorDots: PropTypes.bool.tag({
-      label: 'Display dots between horizontal links',
-      group: 'Display',
-      defaultValue: true,
-    }),
-    ariaLabel: PropTypes.string.tag({
-      label: 'Aria-label',
-      defaultValue: 'Sections Menu',
-      description: 'The label is provided to assistive technologies to provide it with a unique name for the header nav landmark - defaults to "Sections Menu" if left blank',
-    }),
-    ariaLabelLink: PropTypes.string.tag({
-      label: 'Links Bar - Aria-label',
-      defaultValue: 'Top Links',
-      description: 'The label is provided to assistive technologies to provide it with a unique name for the header links nav landmark - defaults to "Top Links" if left blank',
-    }),
-    ...generateNavComponentPropTypes(),
-  }),
+	customFields: PropTypes.shape({
+		hierarchy: PropTypes.string.tag({
+			label: "Sections Menu hierarchy",
+			defaultValue: "",
+			group: "Configure content",
+		}),
+		signInOrder: PropTypes.number.tag({
+			hidden: true,
+		}),
+		logoAlignment: PropTypes.oneOf(["center", "left"]).tag({
+			label: "Logo alignment",
+			group: "Logo",
+			defaultValue: "center",
+		}),
+		horizontalLinksHierarchy: PropTypes.string.tag({
+			label: "Horizontal Links hierarchy",
+			group: "Configure content",
+		}),
+		desktopNavivationStartHeight: PropTypes.number.tag({
+			label: "Starting desktop navigation bar height",
+			description:
+				"Select the height of the navigation bar (in px) when the user first opens a page on desktop. Must be between 56 and 200.",
+			group: "Logo",
+			max: 200,
+			min: 56,
+			defaultValue: 56,
+		}),
+		shrinkDesktopNavivationHeight: PropTypes.number.tag({
+			label: "Shrink navigation bar after scrolling",
+			description:
+				'How far should the user scroll (in px) until the navigation height shrinks back to standard size (56px) on desktop? Must be greater than the value configured for "Starting desktop navigation bar height".',
+			group: "Logo",
+			min: 56,
+		}),
+		showHorizontalSeperatorDots: PropTypes.bool.tag({
+			label: "Display dots between horizontal links",
+			group: "Display",
+			defaultValue: true,
+		}),
+		ariaLabel: PropTypes.string.tag({
+			label: "Aria-label",
+			defaultValue: "Sections Menu",
+			description:
+				'The label is provided to assistive technologies to provide it with a unique name for the header nav landmark - defaults to "Sections Menu" if left blank',
+		}),
+		ariaLabelLink: PropTypes.string.tag({
+			label: "Links Bar - Aria-label",
+			defaultValue: "Top Links",
+			description:
+				'The label is provided to assistive technologies to provide it with a unique name for the header links nav landmark - defaults to "Top Links" if left blank',
+		}),
+		...generateNavComponentPropTypes(),
+	}),
 };
 
-Nav.label = 'Navigation - Arc Chain';
+Nav.label = "Navigation - Arc Chain";
 
-Nav.icon = 'arc-navigation';
+Nav.icon = "arc-navigation";
 
 export default Nav;

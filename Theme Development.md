@@ -1,4 +1,4 @@
-# News Theme Developers Guide
+# Arc Themes Block Developers Guide
 
 ## Setup
 
@@ -60,28 +60,33 @@ The development process is similar engine-theme-sdk, except when it comes time t
 
 Note: When creating a bundle, you will need a `.npmrc` file in your feature pack that has credentials accessed to the GitHub Package Registry. Please see [guide](https://github.com/WPMedia/arc-themes-feature-pack#how-to-do-local-themes-development) for more info on what you need in the `.npmrc` in the feature pack (arc-themes-feature-pack) and also in the blocks repo (arc-themes-blocks) for local development. There's also more info on `npx fusion zip` for creating a bundle on the fusion-cli repo [readme](https://github.com/WPMedia/fusion-cli#commands).
 
-Local development work on arc-themes-blocks can be set up so that the changes you make on your local arc-themes-blocks  can be manifested within another local client code base, or arc-themes-feature-pack.
+Local development work on arc-themes-blocks can be set up so that the changes you make on your local arc-themes-blocks can be manifested within another local client code base, or arc-themes-feature-pack.
 
 As of 10/13/2020, In arc-themes-blocks, Blocks/header-nav-chain-block use-debounce which needs to be installed manually. Navigate to this block, copy .npmrc file to this dir, do npm install, the (re)start fusion. You can also look into setting up a [global npmrc configuration](https://docs.npmjs.com/cli-commands/config.html).
+
 ```sh
 cd blocks/header-nav-chain-block
 check .npmrc file here exists
 npm install
 ```
+
 Then restart fusion from within client dir. NOTE: Running with `-l` will link all blocks. If you want to only link some blocks, please use `npx fusion start -f -l @wpmedia/card-list-block,@wpmedia/top-table-list-block`, for example, to link card list block and the top table list block. You can see their package names' in the block's package.json.
 
 (arc-themes-feature-pack):
+
 ```sh
 npx fusion start -l
 ```
 
 To check if blocks are being properly linked, run:
+
 ```sh
  cat .fusion/docker-compose.yml
- ```
-  If blocks linking was successful, you'll see the listing for volumes with all the block names linked.
+```
 
-  NOTE:  'npm fusion' will use the  globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
+If blocks linking was successful, you'll see the listing for volumes with all the block names linked.
+
+NOTE: 'npm fusion' will use the globally available fusion, but using 'npx fusion' will use the local fusion available from within the folder
 
 ### Creating New Block Checklist
 
@@ -94,16 +99,17 @@ To check if blocks are being properly linked, run:
 
 ```js
 // cool-new-block/jest.config.js
-const base = require('../../jest/jest.config.base');
+const base = require("../../jest/jest.config.base");
 
 module.exports = {
-  ...base,
+	...base,
 };
 ```
 
 ### Internationalization
 
-Phrase translations may be added via an intl.json file for each block to contain the phrases that block needs. For example  this is the intl.json file for results list block:
+Phrase translations may be added via an intl.json file for each block to contain the phrases that block needs. For example this is the intl.json file for results list block:
+
 ```sh
 {
    "results-list-block.see-more-button":{
@@ -113,7 +119,9 @@ Phrase translations may be added via an intl.json file for each block to contain
    }
 }
 ```
-Common phrases needed across multiple blocks are declared in global-phrases-block.  In order for the intl.json files to be included in a build, it must be included in the lists for a block in that blocks package.json file:
+
+Common phrases needed across multiple blocks are declared in global-phrases-block. In order for the intl.json files to be included in a build, it must be included in the lists for a block in that blocks package.json file:
+
 ```sh
   "files": [
     "features",
@@ -133,13 +141,11 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 - Publish packages based on only changes
 - Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
 
-
 #### `npm run release:beta`
 
 - Only publish packages to beta
 - Publish packages based on only changes
 - Iterates the prerelease version using `--canary` arg that allows prerelease (not necessarily canary)
-
 
 #### `npm run release:rc`
 
@@ -152,7 +158,7 @@ Common phrases needed across multiple blocks are declared in global-phrases-bloc
 - Only publish packages that have changed to stable tag
 - Note: We are versioning minor versions. In the future, we can look into breaking (major) changes for this. For example:
 
- - @WPMedia/headline: 1.2.0-canary.0 => 1.3.0
+- @WPMedia/headline: 1.2.0-canary.0 => 1.3.0
 
 1. Pull the latest `canary` branch:
 
@@ -175,8 +181,8 @@ git checkout -b TMEDIA-[jira ticket num]-[brief description of feature]
 
 In the development process this takes care of doing the work and getting your changes into the `canary` tag. In order to see your changes on a live environment for QA you will need to use the Fusion deployer to either deploy a new bundle or duplicate an existing one - http://redirector.arcpublishing.com/deployments/fusion/
 
-* If you have a running bundle on your environment you can "Duplicate" the bundle and wait for it to build, then "Promote" it to be live - options are under the three vertical dots menu on the deployer page
-* If you do not have a bundle that has the `BLOCK_DIST_TAG` set to `canary` you will need to create a bundle, upload and then "Deploy"
+- If you have a running bundle on your environment you can "Duplicate" the bundle and wait for it to build, then "Promote" it to be live - options are under the three vertical dots menu on the deployer page
+- If you do not have a bundle that has the `BLOCK_DIST_TAG` set to `canary` you will need to create a bundle, upload and then "Deploy"
 
 ### Creating a feature pack
 
@@ -184,19 +190,22 @@ If you need to create a feature pack to set either `BLOCK_DIST_TAG` to a specifi
 
 1. Have the arc-themes-feature-pack repo `master` branch checked out - https://github.com/WPMedia/arc-themes-feature-pack
 2. Update the relevant files
-  * For `BLOCK_DIST_TAG` this is set in `/environment/index.json`
-  * Changing blocks - update the `blocks` array in `/blocks.json`
-  * Changing default site settings - update the `values.default.siteProperties` in `/blocks.json`
-  * Changing a specific sites settings - update the `values.sites.{SITE-NAME}.siteProperties` in `/blocks.json`
+
+- For `BLOCK_DIST_TAG` this is set in `/environment/index.json`
+- Changing blocks - update the `blocks` array in `/blocks.json`
+- Changing default site settings - update the `values.default.siteProperties` in `/blocks.json`
+- Changing a specific sites settings - update the `values.sites.{SITE-NAME}.siteProperties` in `/blocks.json`
+
 3. Create a feature pack zip
-  * In terminal in the root of the arc-themes-feature-pack repo run `npx fusion zip`
-  * A new zip file will be added to `/dist/` folder named in a date format eg `2021-03-26-13-56-25.zip`
+
+- In terminal in the root of the arc-themes-feature-pack repo run `npx fusion zip`
+- A new zip file will be added to `/dist/` folder named in a date format eg `2021-03-26-13-56-25.zip`
+
 4. Upload zip file to the relevant environment using Fusion deployer, using "upload bundle" - http://redirector.arcpublishing.com/deployments/fusion/
 5. Once uploded, using three dots menu on your uploaded item choose "Deploy"
 6. You'll see your bundle listing in the "Running" list, once it's finished deploying you are then able to promote it to make it a live bundle
-  * If you do not promote it you can see access the bundle using the `d={VERSION}` query param - https://{URL-TO-YOUR-SITE}/?d=725
 
-
+- If you do not promote it you can see access the bundle using the `d={VERSION}` query param - https://{URL-TO-YOUR-SITE}/?d=725
 
 ### How To Publish
 
@@ -217,7 +226,6 @@ RC Release is the contents of the canary branch once signed off - Canary -> RC
 
 Any environment with the `BLOCK_DIST_TAG=rc` will get the updated blocks on next deploy
 
-
 ## Creating a Beta Release
 
 Beta Release is the contents of the RC branch once signed off - RC -> Beta
@@ -229,28 +237,27 @@ Beta Release is the contents of the RC branch once signed off - RC -> Beta
 
 Any environment with the `BLOCK_DIST_TAG=beta` will get the updated blocks on next deploy
 
-
 ## Creating a stable Release
 
 Stable Release is the contents of the beta branch once signed off - beta -> stable
 
 1. Create a Pull Request from Beta -> Stable
-    * https://github.com/WPMedia/arc-themes-blocks/compare/stable...beta?expand=1
-    * Resolve any conflicts
+   - https://github.com/WPMedia/arc-themes-blocks/compare/stable...beta?expand=1
+   - Resolve any conflicts
 2. Get pull request approved and merged
 3. Get latest stable code locally - `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
 4. Releasing blocks to stable is a manual step
-    * Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
-    * Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
-    * Make sure all blocks have been graduated or promoted.
-    * Check that there is a commit in your local for the next version - created by the `npx lerna` command
-    * `git push origin stable`
-    * GitHub action is used to make latest and stable parity - https://github.com/WPMedia/arc-themes-blocks/actions/workflows/stable-dist-tag.yml
+   - Clean your local folder and install dependencies - `npx lerna clean -y && rm -rf node_modules && npm i && npx lerna clean -y`
+   - Publish the blocks - `npx lerna publish --conventional-commits --conventional-graduate`
+   - Make sure all blocks have been graduated or promoted.
+   - Check that there is a commit in your local for the next version - created by the `npx lerna` command
+   - `git push origin stable`
+   - GitHub action is used to make latest and stable parity - https://github.com/WPMedia/arc-themes-blocks/actions/workflows/stable-dist-tag.yml
 5. Merge the last commit from `stable` to `canary` - This should only be the commit that bumps the version numbers.
-    * `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
-    * `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
-    * `git cherry-pick {SHA OF LAST COMMIT IN STABLE}` - Commit should be the commit that bumps the version number.
-    * `git push origin canary`
+   - `git checkout stable && git remote update --prune origin && git reset --hard origin/stable`
+   - `git checkout canary && git remote update --prune origin && git reset --hard origin/canary`
+   - `git cherry-pick {SHA OF LAST COMMIT IN STABLE}` - Commit should be the commit that bumps the version number.
+   - `git push origin canary`
 
 Any environment with the `BLOCK_DIST_TAG=stable` will get the updated blocks on next deploy
 
@@ -267,12 +274,12 @@ If an issue is found in stable this is a production issue, and requires a hotfix
 2. `git checkout -b RC-Hotfix-ticket-123` - Create a hotfix branch
 3. Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `stable`
 4. release feature branch changes as `@hotfix` from stable.
-    * `npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
+   - `npx lerna publish --force-publish --preid hotfix --pre-dist-tag hotfix`
 5. Create feature pack with @hotfix blocks to test
 6. Upon successful QA, merge pull request, graduate the “hotfix” release to latest in the same publish workflow
-    * `git pull origin stable`
-    * `npx lerna publish --conventional-commits --conventional-graduate`
-    * `git push origin stable`
+   - `git pull origin stable`
+   - `npx lerna publish --conventional-commits --conventional-graduate`
+   - `git push origin stable`
 7. Merge `stable` to `canary`
 8. Merge hotfix branch `RC-Hotfix-ticket-123` to `beta`
 
@@ -283,19 +290,18 @@ Any environment with the `BLOCK_DIST_TAG=hotfix` will get the updated blocks on 
 RC and Beta are used within non production environments and follow a different flow to stable. **But** require each hotfix merged into them to land back into `canary`.
 
 RC example flow -
-* `git pull origin rc` - Pull remote branch to ensure you have most upto date code
-* `git checkout -b RC-Hotfix-ticket-123` - Create a branch for hotfix
-* Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `rc`
-* PR Approved - Merge PR via the GitHub UI then:
-  * `git checkout canary && git reset --hard origin/canary`
-  * `git merge RC-Hotfix-ticket-123` - Merges the hotfix onto canary
-  * `git push origin canary` - Pushes the changes to canary
 
+- `git pull origin rc` - Pull remote branch to ensure you have most upto date code
+- `git checkout -b RC-Hotfix-ticket-123` - Create a branch for hotfix
+- Open pull request of your branch and target it to the relevant branch - `RC-Hotfix-ticket-123` -> `rc`
+- PR Approved - Merge PR via the GitHub UI then:
+  - `git checkout canary && git reset --hard origin/canary`
+  - `git merge RC-Hotfix-ticket-123` - Merges the hotfix onto canary
+  - `git push origin canary` - Pushes the changes to canary
 
 ## Git Diagram
 
 ![Themes Git Flow](themes-git-flow.png "diagram")
-
 
 ### Other Information
 
@@ -313,15 +319,15 @@ It is like a typical feature pack in regards that it has the same directory stru
 
 Below describes the various properties that are in blocks.json and their purpose:
 
-| **Property** | **Description** |
-| --- | --- |
-| **org** | The organization name of the NPM repo. Used internally by Fusion i.e. "@wpmedia/" |
-| **useLocal** | true \| false. Used in local development (see the local dev section below). This will soon be replaced by a more conventual npm link process, so this property will eventually be removed. |
-| **blocks** | This array lists all the blocks that are to be made available to the site. Any block that is in the arc-themes-blocks repo, but not listed here will not be available and will also not be included in the client bundle. |
-| **cssFramework** | The CSS framework package being used. For News theme, it is the news-theme-css package. |
-| **cssImport** | Specifies the main Sass file entry point into the framework. This is leveraged by fusion to automatically import the framework into each of the block's source file in arc-themes-blocks during build time. So, in other words, you do not have to explicitly import the css framework in your blocks source code. |
-| **sassVariableOverrides** | In addition to using styled components to set theme properties, we also want the css framework to pick up on the custom settings and over-ride the appropriate Sass default properties. Fusion handles the override process internally. |
-| **values** | This is where we set the custom theme values for the site. There are two main areas: default and per site. |
+| **Property**              | **Description**                                                                                                                                                                                                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **org**                   | The organization name of the NPM repo. Used internally by Fusion i.e. "@wpmedia/"                                                                                                                                                                                                                                  |
+| **useLocal**              | true \| false. Used in local development (see the local dev section below). This will soon be replaced by a more conventual npm link process, so this property will eventually be removed.                                                                                                                         |
+| **blocks**                | This array lists all the blocks that are to be made available to the site. Any block that is in the arc-themes-blocks repo, but not listed here will not be available and will also not be included in the client bundle.                                                                                          |
+| **cssFramework**          | The CSS framework package being used. For News theme, it is the news-theme-css package.                                                                                                                                                                                                                            |
+| **cssImport**             | Specifies the main Sass file entry point into the framework. This is leveraged by fusion to automatically import the framework into each of the block's source file in arc-themes-blocks during build time. So, in other words, you do not have to explicitly import the css framework in your blocks source code. |
+| **sassVariableOverrides** | In addition to using styled components to set theme properties, we also want the css framework to pick up on the custom settings and over-ride the appropriate Sass default properties. Fusion handles the override process internally.                                                                            |
+| **values**                | This is where we set the custom theme values for the site. There are two main areas: default and per site.                                                                                                                                                                                                         |
 
 To see a configured blocks.json, go to <https://github.com/WPMedia/arc-themes-feature-pack/blob/master/blocks.json>
 
@@ -357,14 +363,14 @@ The EventEmitter object, located in `@wpmedia/engine-theme-sdk` can be used to p
 
 These Gallery events are:
 
-|  |  |
-| --- | --- |
-| galleryImageNext | When the next button is pressed. If the autoplay property of the event is true, the gallery is executing in autoplay mode |
-| galleryImagePrevious | When the next button is pressed. |
-| galleryAutoplayStart | When the autoplay button is pressed |
-| galleryAutoplayStop | When the autoplay button is pressed and the autoplay mode was enabled. If the gallery reach the end of the playlist will stop and generate this event too |
-| galleryExpandEnter | When the expand button is pressed |
-| galleryExpandExit | When the close button on the lightbox is pressed |
+|                      |                                                                                                                                                           |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| galleryImageNext     | When the next button is pressed. If the autoplay property of the event is true, the gallery is executing in autoplay mode                                 |
+| galleryImagePrevious | When the next button is pressed.                                                                                                                          |
+| galleryAutoplayStart | When the autoplay button is pressed                                                                                                                       |
+| galleryAutoplayStop  | When the autoplay button is pressed and the autoplay mode was enabled. If the gallery reach the end of the playlist will stop and generate this event too |
+| galleryExpandEnter   | When the expand button is pressed                                                                                                                         |
+| galleryExpandExit    | When the close button on the lightbox is pressed                                                                                                          |
 
 If you wanted to listen to these events, the first thing is to import the EventEmitter object into the block:
 
@@ -375,21 +381,19 @@ import { EventEmitter } from "@wpmedia/engine-theme-sdk";
 Then create a callback function such as:
 
 ```jsx
-const myGalleryImageNext = event => {
-  console.log("Here is the event: ", event);
+const myGalleryImageNext = (event) => {
+	console.log("Here is the event: ", event);
 };
-const myGalleryImagePrevious = event => {
-  console.log("Here is the event: ", event);
+const myGalleryImagePrevious = (event) => {
+	console.log("Here is the event: ", event);
 };
 ```
 
 Then use you use your callback in subscribing to the event:
 
 ```jsx
-EventEmitter.subscribe("galleryImageNext", event => myGalleryImageNext(event));
-EventEmitter.subscribe("galleryImagePrevious", event =>
-  myGalleryImagePrevious(event)
-);
+EventEmitter.subscribe("galleryImageNext", (event) => myGalleryImageNext(event));
+EventEmitter.subscribe("galleryImagePrevious", (event) => myGalleryImagePrevious(event));
 ```
 
 ### Secure Image Resizing Quickstart
@@ -436,26 +440,26 @@ import { useContent } from "fusion:content";
 import { Image } from "@wpmedia/engine-theme-sdk";
 
 const CustomImageBlock = ({ rawImageURL }) => {
-  const resizedImageOptions = useContent({
-    source: "resize-image-api",
-    query: { raw_image_url: rawImageURL }
-  });
+	const resizedImageOptions = useContent({
+		source: "resize-image-api",
+		query: { raw_image_url: rawImageURL },
+	});
 
-  return (
-    <Image
-      resizerURL={getProperties().resizerURL}
-      resizedImageOptions={resizedImageOptions}
-      url={rawImageURL}
-      alt={"This is a placeholder placeholder"}
-      // 16:9 aspect ratio
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={400}
-      largeHeight={225}
-    />
-  );
+	return (
+		<Image
+			resizerURL={getProperties().resizerURL}
+			resizedImageOptions={resizedImageOptions}
+			url={rawImageURL}
+			alt={"This is a placeholder placeholder"}
+			// 16:9 aspect ratio
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={400}
+			largeHeight={225}
+		/>
+	);
 };
 
 export default CustomImageBlock;
@@ -492,17 +496,16 @@ There's also a helper in the package to extract the `resized_params` values.
 import getResizedImageData from "@wpmedia/resizer-image-block";
 
 export default {
-  resolve: params => `/content/v4/search/published?q=${params.query || "*"}`,
-  schemaName: "ans-feed",
-  params: {
-    query: "text",
-    size: "number",
-    offset: "number"
-  },
-  // other options null use default functionality, such as filter quality
-  // need query arcsite if resizer is utilizes different resizer urls per site
-  transform: (data, query) =>
-    getResizedImageData(data, null, null, null, query["arc-site"])
+	resolve: (params) => `/content/v4/search/published?q=${params.query || "*"}`,
+	schemaName: "ans-feed",
+	params: {
+		query: "text",
+		size: "number",
+		offset: "number",
+	},
+	// other options null use default functionality, such as filter quality
+	// need query arcsite if resizer is utilizes different resizer urls per site
+	transform: (data, query) => getResizedImageData(data, null, null, null, query["arc-site"]),
 };
 ```
 
@@ -511,26 +514,24 @@ import { Image } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams } from "@wpmedia/resizer-image-block";
 
 function extractImage(promo) {
-  return (
-    promo && promo.basic && promo.basic.type === "image" && promo.basic.url
-  );
+	return promo && promo.basic && promo.basic.type === "image" && promo.basic.url;
 }
 
 // ans schema content element
 const ImageItem = ({ contentElement }) => (
-  <Image
-    // results list is 16:9 by default
-    resizedImageOptions={extractResizedParams(element)}
-    url={extractImage(element.promo_items)}
-    alt={"This is a placeholder placeholder"}
-    smallWidth={158}
-    smallHeight={89}
-    mediumWidth={274}
-    mediumHeight={154}
-    largeWidth={274}
-    largeHeight={154}
-    resizerURL={resizerURL}
-  />
+	<Image
+		// results list is 16:9 by default
+		resizedImageOptions={extractResizedParams(element)}
+		url={extractImage(element.promo_items)}
+		alt={"This is a placeholder placeholder"}
+		smallWidth={158}
+		smallHeight={89}
+		mediumWidth={274}
+		mediumHeight={154}
+		largeWidth={274}
+		largeHeight={154}
+		resizerURL={resizerURL}
+	/>
 );
 ```
 
@@ -559,29 +560,29 @@ import { Image } from "@wpmedia/engine-theme-sdk";
 import getProperties from "fusion:properties";
 
 const CustomImageBlock = ({ rawImageURL }) => {
-  const resizedImageOptions = useContent({
-    source: "resize-image-api",
-    query: { raw_image_url: rawImageURL }
-  });
+	const resizedImageOptions = useContent({
+		source: "resize-image-api",
+		query: { raw_image_url: rawImageURL },
+	});
 
-  const { breakpoints } = getProperties(arcSite);
+	const { breakpoints } = getProperties(arcSite);
 
-  return (
-    <Image
-      resizerURL={resizerURL}
-      resizedImageOptions={resizedImageOptions}
-      url={rawImageURL}
-      alt={"This is a placeholder placeholder"}
-      // 16:9 aspect ratio
-      smallWidth={274}
-      smallHeight={154}
-      mediumWidth={274}
-      mediumHeight={154}
-      largeWidth={400}
-      largeHeight={225}
-      breakpoints={breakpoints}
-    />
-  );
+	return (
+		<Image
+			resizerURL={resizerURL}
+			resizedImageOptions={resizedImageOptions}
+			url={rawImageURL}
+			alt={"This is a placeholder placeholder"}
+			// 16:9 aspect ratio
+			smallWidth={274}
+			smallHeight={154}
+			mediumWidth={274}
+			mediumHeight={154}
+			largeWidth={400}
+			largeHeight={225}
+			breakpoints={breakpoints}
+		/>
+	);
 };
 
 export default CustomImageBlock;
@@ -591,25 +592,31 @@ Will translate to
 
 ```html
 <picture class="Image__StyledPicture-sc-8yioqf-0 dRTDJJ">
-  <source
-    srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/400x225/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG"
-    media="screen and (min-width: 992px)"
-  />
-  <source
-    srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG"
-    media="screen and (min-width: 768px)"
-  />
-  <source
-    srcset="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG"
-    media="screen and (min-width: 0px)"
-  />
+	<source
+		srcset="
+			https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/400x225/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG
+		"
+		media="screen and (min-width: 992px)"
+	/>
+	<source
+		srcset="
+			https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG
+		"
+		media="screen and (min-width: 768px)"
+	/>
+	<source
+		srcset="
+			https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG
+		"
+		media="screen and (min-width: 0px)"
+	/>
 
-  <img
-    alt="In Albania, age-old traditions and Mediterranean beaches on the cheap "
-    src="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG"
-    width="274"
-    height="183"
-  />
+	<img
+		alt="In Albania, age-old traditions and Mediterranean beaches on the cheap "
+		src="https://corecomponents-the-prophet-prod.cdn.arcpublishing.com/resizer/cHsSQh--J1kseMQKbpP8c5crG20=/274x183/filters:format(jpg):quality(70)/arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG"
+		width="274"
+		height="183"
+	/>
 </picture>
 ```
 
@@ -638,30 +645,24 @@ _arc-themes-blocks/blocks/resizer-image-block/index.js_
 ```js
 import { resizerURL, resizerKey } from "fusion:environment";
 
-const getResizerParam = (
-  originalUrl,
-  targetWidth,
-  targetHeight,
-  filterQuality,
-  format
-) => {
-  if (typeof window === "undefined") {
-    const Thumbor = require("thumbor-lite");
+const getResizerParam = (originalUrl, targetWidth, targetHeight, filterQuality, format) => {
+	if (typeof window === "undefined") {
+		const Thumbor = require("thumbor-lite");
 
-    const thumbor = new Thumbor(resizerKey, resizerURL);
+		const thumbor = new Thumbor(resizerKey, resizerURL);
 
-    thumborParam = thumbor
-      .setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ""))
-      .filter(`format(${format})`)
-      .filter(`quality(${filterQuality})`)
-      .resize(targetWidth, targetHeight)
-      .buildUrl();
+		thumborParam = thumbor
+			.setImagePath(originalUrl.replace(/(^\w+:|^)\/\//, ""))
+			.filter(`format(${format})`)
+			.filter(`quality(${filterQuality})`)
+			.resize(targetWidth, targetHeight)
+			.buildUrl();
 
-    // url to securely access thumbor image
-    return thumborParam;
-  }
+		// url to securely access thumbor image
+		return thumborParam;
+	}
 
-  return null;
+	return null;
 };
 ```
 
@@ -753,6 +754,7 @@ Ensure all node modules are cleared:
 ### Resources
 
 https://explainshell.com/
+
 - Fetch depth lerna issue https://stackoverflow.com/a/60184319/7491536
 - Lerna getting started https://github.com/lerna/lerna#getting-started
 - npmrc within the GitHub Action to push and pull https://viewsource.io/publishing-and-installing-private-github-packages-using-yarn-and-lerna/

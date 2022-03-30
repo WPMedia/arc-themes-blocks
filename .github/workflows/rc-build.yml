@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: "12"
           registry-url: "https://npm.pkg.github.com"
-      
+
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v2

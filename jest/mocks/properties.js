@@ -1,3 +1,3 @@
 export default jest.fn(() => ({
-  locale: 'en',
+	locale: "en",
 }));

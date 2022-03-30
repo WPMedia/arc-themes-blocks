@@ -37,7 +37,7 @@ function Hero({ customFields }) {
 
 	return (
 		<div className={classes}>
-			<Image src={imageURL} alt="" />
+			<Image className="b-hero--image" src={imageURL} alt="" />
 			<Stack
 				alignment={alignment}
 				className={`${BLOCK_CLASS_NAME}--text ${
@@ -45,16 +45,17 @@ function Hero({ customFields }) {
 				}`}
 			>
 				<HeadingSection>
-					{headline ? <Heading>{headline}</Heading> : null}
+					{headline ? <Heading className="b-hero--headline">{headline}</Heading> : null}
 					{subHeadline ? (
 						<HeadingSection>
 							<Heading className="b-hero--subheadline">{subHeadline}</Heading>
 						</HeadingSection>
 					) : null}
-					{description ? <Paragraph>{description}</Paragraph> : null}
+					{description ? <Paragraph className="b-hero--paragraph">{description}</Paragraph> : null}
 
 					{(link1Action && link1Text) || (link2Action && link2Text) ? (
 						<Stack
+							className="b-hero--buttonrow"
 							direction="horizontal"
 							justification={alignment === "center" ? "center" : "start"}
 						>

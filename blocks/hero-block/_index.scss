@@ -2,7 +2,9 @@
 
 .b-hero {
 	display: grid;
-	grid-template: "hero";
+	grid-template:
+		"hero"
+		"info";
 	justify-content: center;
 
 	@include scss.block-properties("hero");
@@ -10,6 +12,25 @@
 
 	> * {
 		grid-area: hero;
+	}
+
+	&--image {
+		@include scss.block-properties("hero-image");
+		@include scss.block-components("hero-image");
+	}
+
+	&--text {
+		place-self: center;
+		max-width: 24rem;
+
+		@include scss.block-properties("hero-text");
+		@include scss.block-components("hero-text");
+	}
+
+	&--text[data-style-direction="stacked"] {
+		grid-area: info;
+		place-self: center;
+		max-width: 100%;
 	}
 
 	&--left {
@@ -24,17 +45,32 @@
 		@include scss.block-components("hero-center");
 	}
 
+	&--center > * {
+		text-align: center;
+	}
+
 	&--light {
 		@include scss.block-properties("hero-light");
 		@include scss.block-components("hero-light");
 	}
 
-	&--subheadline {
-		@include scss.block-properties("hero-subheadline");
+	&--headline {
+		@include scss.block-properties("hero-headline");
+		@include scss.block-components("hero-headline");
 	}
 
-	&--text {
-		place-self: center;
-		max-width: 75rem;
+	&--subheadline {
+		@include scss.block-properties("hero-subheadline");
+		@include scss.block-components("hero-subheadline");
+	}
+
+	&--paragraph {
+		@include scss.block-properties("hero-paragraph");
+		@include scss.block-components("hero-paragraph");
+	}
+
+	&--buttonrow {
+		@include scss.block-properties("hero-buttonrow");
+		@include scss.block-components("hero-buttonrow");
 	}
 }

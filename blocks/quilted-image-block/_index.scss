@@ -5,6 +5,21 @@
 	@include scss.block-components("quilted-image");
 }
 
+.b-quilted-image--wrapper {
+	display: grid;
+
+	.b-quilted-image--wrapper--bottom {
+		grid-area: bottom;
+	}
+
+	.b-quilted-image--wrapper--top {
+		grid-area: top;
+	}
+
+	@include scss.block-properties("quilted-image--wrapper");
+	@include scss.block-components("quilted-image--wrapper");
+}
+
 .b-quilted-image--overlay-text-light {
 	@include scss.block-properties("quilted-image--overlay-text-light");
 	@include scss.block-components("quilted-image--overlay-text-light");
@@ -16,16 +31,15 @@
 }
 
 .b-quilted-image--media-panel {
+	position: relative;
 	@include scss.block-properties("quilted-image--media-panel");
 	@include scss.block-components("quilted-image--media-panel");
-	flex: 1;
-	position: relative;
 }
 
 .b-quilted-image--overlay {
-	@include scss.block-properties("quilted-image--overlay");
-	@include scss.block-components("quilted-image--overlay");
 	position: absolute;
 	left: 2rem;
 	bottom: 2rem;
+	@include scss.block-properties("quilted-image--overlay");
+	@include scss.block-components("quilted-image--overlay");
 }

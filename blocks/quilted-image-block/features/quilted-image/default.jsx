@@ -7,6 +7,7 @@ import {
 	Heading,
 	HeadingSection,
 	Image,
+	Link,
 	Button,
 	Paragraph,
 	Stack,
@@ -16,100 +17,85 @@ const BLOCK_CLASS_NAME = "b-quilted-image";
 function QuiltedImage({ customFields }) {
 	const {
 		headline,
+		fullWidthImage,
 		image1URL,
+		image1AspectRatio,
 		overlay1Text,
-		overlay1TextVariant = "dark",
+		overlay1TextVariant,
 		button1Text,
-		// NOTE : Link href properties currently need a default or "startsWith of undefined" error is raised.
-		// https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.00/src/components/link/index.jsx#L22
-		button1Action = "",
-		button1Variant = "dark",
+		item1Action,
+		button1Variant,
 		image2URL,
+		image2AspectRatio,
 		overlay2Text,
-		overlay2TextVariant = "dark",
+		overlay2TextVariant,
 		button2Text,
-		button2Action = "",
-		button2Variant = "dark",
+		item2Action,
+		button2Variant,
 		image3URL,
+		image3AspectRatio,
 		overlay3Text,
-		overlay3TextVariant = "dark",
+		overlay3TextVariant,
 		button3Text,
-		button3Action = "",
-		button3Variant = "dark",
+		item3Action,
+		button3Variant,
 	} = customFields;
 
-	// Translate user-facing variant name into values component is expecting.
-	const getButtonVariant = (value) => (value === "dark" ? "primary" : "secondary");
-
-	// get properties from context for using translations in intl.json
-	// See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
-	// const { arcSite } = useFusionContext();
-	// const { locale } = getProperties(arcSite);
-	// const phrases = getTranslatedPhrases(locale);
-
-	// Account for "dark" or "light" variants y
-	/*
-  const cssClasses = [
-		BLOCK_CLASS_NAME,
-		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
-	].join(" ");
-  */
-
 	return (
-		<div className={`${BLOCK_CLASS_NAME}`}>
+		<div className={BLOCK_CLASS_NAME}>
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
-				<Stack>
-					<Stack direction="horizontal">
-						<div className="b-quilted-image--media-panel">
-							{/*
-              TODO : Determine if other data should be used for image alt text or if image
-              title or description needs to be brought in via searchable hooks, e.g. searchableField.
-              https://corecomponents.arcpublishing.com/alc/arc-products/pagebuilder/fusion/documentation/api/react-hooks.md?version=3.1
-            */}
-							<Image src={image1URL} alt={overlay1Text} />
-							<Stack className="b-quilted-image--overlay" inline>
+				<div className="b-quilted-image--wrapper">
+					<Link
+						href={item1Action || "#"}
+						className={`b-quilted-image--media-panel  ${
+							fullWidthImage === "top" ? "b-quilted-image--wrapper--top" : ""
+						}`}
+					>
+						<Image src={image1URL} style={{ aspectRatio: image1AspectRatio }} />
+						<Stack className="b-quilted-image--overlay" inline>
+							{overlay1Text ? (
 								<Paragraph className={`b-quilted-image--overlay-text-${overlay1TextVariant}`}>
 									{overlay1Text}
 								</Paragraph>
-								{/* TODO : Change button names as per https://github.com/WPMedia/arc-themes-components/blob/arc-themes-release-version-2.00/src/components/button/index.jsx  */}
-								<Button
-									variant={getButtonVariant(button1Variant)}
-									size="small"
-									href={button1Action}
-								>
-									{button1Text}
-								</Button>
-							</Stack>
-						</div>
-						<div className="b-quilted-image--media-panel">
-							<Image src={image2URL} alt={overlay2Text} />
-							<Stack className="b-quilted-image--overlay" inline>
+							) : null}
+							<Button variant={button1Variant} size="small" assistiveHidden>
+								{button1Text}
+							</Button>
+						</Stack>
+					</Link>
+					<Link href={item2Action || "#"} className="b-quilted-image--media-panel">
+						<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
+						<Stack className="b-quilted-image--overlay" inline>
+							{overlay2Text ? (
 								<Paragraph className={`b-quilted-image--overlay-text-${overlay2TextVariant}`}>
 									{overlay2Text}
 								</Paragraph>
-								<Button
-									variant={getButtonVariant(button2Variant)}
-									size="small"
-									href={button2Action}
-								>
-									{button2Text}
-								</Button>
-							</Stack>
-						</div>
-					</Stack>
-					<div className="b-quilted-image--media-panel">
-						<Image src={image3URL} alt={overlay3Text} />
+							) : null}
+							<Button variant={button2Variant} size="small" assistiveHidden>
+								{button2Text}
+							</Button>
+						</Stack>
+					</Link>
+					<Link
+						href={item3Action || "#"}
+						className={`b-quilted-image--media-panel ${
+							fullWidthImage === "bottom" ? "b-quilted-image--wrapper--bottom" : ""
+						}`}
+					>
+						<Image src={image3URL} style={{ aspectRatio: image3AspectRatio }} />
 						<Stack className="b-quilted-image--overlay" inline>
-							<Paragraph className={`b-quilted-image--overlay-text-${overlay3TextVariant}`}>
-								{overlay3Text}
-							</Paragraph>
-							<Button variant={getButtonVariant(button3Variant)} size="small" href={button3Action}>
+							{overlay3Text ? (
+								<Paragraph className={`b-quilted-image--overlay-text-${overlay3TextVariant}`}>
+									{overlay3Text}
+								</Paragraph>
+							) : null}
+							<Button variant={button3Variant} size="small" assistiveHidden>
 								{button3Text}
 							</Button>
 						</Stack>
-					</div>
-				</Stack>
+					</Link>
+				</div>
 			</HeadingSection>
 		</div>
 	);
@@ -117,7 +103,6 @@ function QuiltedImage({ customFields }) {
 
 QuiltedImage.label = "Quilted Image - Arc Block";
 
-// find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
 QuiltedImage.icon = "picture-polaroid-album-1";
 
 QuiltedImage.propTypes = {
@@ -127,12 +112,25 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			description: "Headline text describing all images",
 		}),
+		fullWidthImage: PropTypes.oneOf(["top", "bottom"]).tag({
+			label: "Full Width Image Location",
+			defaultValue: "top",
+		}),
 		image1URL: PropTypes.string.tag({
 			label: "Image URL",
 			searchable: "image",
 			description: "URL of first image, displayed at 4:3 aspect ratio.",
 			group: "Image 1",
 		}).isRequired,
+		image1AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
+			labels: {
+				"16/9": "16:9",
+				"4/3": "4:3",
+			},
+			defaultValue: "4/3",
+			hidden: true,
+			group: "Image 1",
+		}),
 		overlay1Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
@@ -148,14 +146,14 @@ QuiltedImage.propTypes = {
 			description: "Text appearing on image's button.",
 			group: "Image 1",
 		}).isRequired,
-		button1Action: PropTypes.string.tag({
+		item1Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image's button is clicked.",
 			group: "Image 1",
 		}).isRequired,
-		button1Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		button1Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
 			label: "Button Color",
-			defaultValue: "dark",
+			defaultValue: "primary",
 			group: "Image 1",
 		}),
 		image2URL: PropTypes.string.tag({
@@ -164,6 +162,15 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 2",
 		}).isRequired,
+		image2AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
+			labels: {
+				"16/9": "16:9",
+				"4/3": "4:3",
+			},
+			defaultValue: "4/3",
+			hidden: true,
+			group: "Image 2",
+		}),
 		overlay2Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
@@ -179,14 +186,14 @@ QuiltedImage.propTypes = {
 			description: "Text appearing on image button.",
 			group: "Image 2",
 		}).isRequired,
-		button2Action: PropTypes.string.tag({
+		item2Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
 			group: "Image 2",
 		}).isRequired,
-		button2Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		button2Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
 			label: "Button Color",
-			defaultValue: "dark",
+			defaultValue: "primary",
 			group: "Image 2",
 		}),
 		image3URL: PropTypes.string.tag({
@@ -195,6 +202,15 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 3",
 		}).isRequired,
+		image3AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
+			labels: {
+				"16/9": "16:9",
+				"4/3": "4:3",
+			},
+			defaultValue: "16/9",
+			hidden: true,
+			group: "Image 3",
+		}),
 		overlay3Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
@@ -210,14 +226,14 @@ QuiltedImage.propTypes = {
 			description: "Text appearing on image button.",
 			group: "Image 3",
 		}).isRequired,
-		button3Action: PropTypes.string.tag({
+		item3Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
 			group: "Image 3",
 		}).isRequired,
-		button3Variant: PropTypes.oneOf(["dark", "light"]).tag({
+		button3Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
 			label: "Button Color",
-			defaultValue: "dark",
+			defaultValue: "primary",
 			group: "Image 3",
 		}),
 	}),

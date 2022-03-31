@@ -2,7 +2,7 @@
 
 .b-hero {
 	display: grid;
-	grid-template:
+	grid-template-areas:
 		"hero"
 		"info";
 	justify-content: center;
@@ -19,6 +19,11 @@
 		@include scss.block-components("hero-image");
 	}
 
+	&--image-stacked {
+		@include scss.block-properties("hero-image-stacked");
+		@include scss.block-components("hero-image-stacked");
+	}
+
 	&--text {
 		place-self: center;
 		max-width: 24rem;
@@ -27,7 +32,7 @@
 		@include scss.block-components("hero-text");
 	}
 
-	&--text.stacked {
+	&--stacked {
 		grid-area: info;
 		place-self: center;
 		max-width: 100%;
@@ -57,19 +62,9 @@
 		@include scss.block-components("hero-light");
 	}
 
-	&--headline {
-		@include scss.block-properties("hero-headline");
-		@include scss.block-components("hero-headline");
-	}
-
 	&--subheadline {
 		@include scss.block-properties("hero-subheadline");
 		@include scss.block-components("hero-subheadline");
-	}
-
-	&--paragraph {
-		@include scss.block-properties("hero-paragraph");
-		@include scss.block-components("hero-paragraph");
 	}
 
 	&--buttonrow {

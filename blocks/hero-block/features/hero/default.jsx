@@ -3,14 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
-import {
-	Button,
-	Heading,
-	HeadingSection,
-	Image,
-	Paragraph,
-	Stack,
-} from "@wpmedia/arc-themes-components";
+import { Button, Heading, HeadingSection, Paragraph, Stack } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-hero";
 
@@ -43,28 +36,35 @@ function Hero({ customFields }) {
 		<div className={classes}>
 			<picture>
 				<source srcSet={imageURLDesktop} media={`(${desktopMediaBreakpoint})`} />
-				<img className="b-hero--image" src={imageURLMobile} alt={imageAltText} />
+				<img
+					className={
+						layout === "stacked"
+							? `${BLOCK_CLASS_NAME}--image-stacked`
+							: `${BLOCK_CLASS_NAME}--image`
+					}
+					src={imageURLMobile}
+					alt={imageAltText}
+				/>
 			</picture>
 
 			<Stack
-				data-style-layout={layout}
 				alignment={alignment}
-				className={`${BLOCK_CLASS_NAME}--text ${layout} ${
+				className={`${BLOCK_CLASS_NAME}--text ${BLOCK_CLASS_NAME}--${layout} ${
 					alignment === "left" ? `${BLOCK_CLASS_NAME}--left` : `${BLOCK_CLASS_NAME}--center`
 				}`}
 			>
 				<HeadingSection>
-					{headline ? <Heading className="b-hero--headline">{headline}</Heading> : null}
+					{headline ? <Heading>{headline}</Heading> : null}
 					{subHeadline ? (
 						<HeadingSection>
-							<Heading className="b-hero--subheadline">{subHeadline}</Heading>
+							<Heading className={`${BLOCK_CLASS_NAME}--subheadline`}>{subHeadline}</Heading>
 						</HeadingSection>
 					) : null}
-					{description ? <Paragraph className="b-hero--paragraph">{description}</Paragraph> : null}
+					{description ? <Paragraph>{description}</Paragraph> : null}
 
 					{(link1Action && link1Text) || (link2Action && link2Text) ? (
 						<Stack
-							className="b-hero--buttonrow"
+							className={`${BLOCK_CLASS_NAME}--buttonrow`}
 							direction="horizontal"
 							justification={alignment === "center" ? "center" : "start"}
 						>

@@ -265,13 +265,14 @@
 					height: auto,
 					width: 100%,
 				),
-				hero-text: (
-					max-width: 24rem,
-				),
 				hero-left: (
 					padding: 0 var(--global-spacing-3),
 				),
+				hero-text-overlay: (
+					max-width: 24rem,
+				),
 				hero-text-stacked: (
+					max-width: 24rem,
 					margin-top: var(--global-spacing-3),
 					gap: var(--global-spacing-3),
 				),
@@ -308,17 +309,18 @@
 					height: auto,
 					width: 100%,
 				),
+				hero-text-overlay: (
+					max-width: 100%,
+				),
 				hero-image-stacked: (
 					height: auto,
 					width: 100%,
-				),
-				hero-text: (
-					max-width: 100%,
 				),
 				hero-left: (
 					padding: 0 var(--global-spacing-3) 0 var(--global-spacing-15),
 				),
 				hero-text-stacked: (
+					max-width: 100%,
 					margin-top: var(--global-spacing-3),
 					gap: var(--global-spacing-3),
 				),

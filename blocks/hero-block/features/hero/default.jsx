@@ -48,7 +48,7 @@ function Hero({ customFields }) {
 			</picture>
 
 			<Stack
-				className={`${BLOCK_CLASS_NAME}--text ${BLOCK_CLASS_NAME}--${layout} ${
+				className={`${BLOCK_CLASS_NAME}--${layout} ${
 					alignment === "left" ? `${BLOCK_CLASS_NAME}--left` : `${BLOCK_CLASS_NAME}--center`
 				}`}
 			>

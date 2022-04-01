@@ -24,12 +24,12 @@
 		@include scss.block-components("hero-image-stacked");
 	}
 
-	&--text {
+	&--overlay {
 		place-self: center;
 		max-width: 24rem;
 
-		@include scss.block-properties("hero-text");
-		@include scss.block-components("hero-text");
+		@include scss.block-properties("hero-text-overlay");
+		@include scss.block-components("hero-text-overlay");
 	}
 
 	&--stacked {

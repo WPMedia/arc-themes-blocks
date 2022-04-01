@@ -76,7 +76,10 @@ class CustomSearchResultsList extends React.Component {
 			this.fetchContent({
 				placeholderResizedImageOptions: {
 					source: "resize-image-api",
-					query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+					query: {
+						raw_image_url: targetFallbackImage,
+						respect_aspect_ratio: true,
+					},
 				},
 			});
 		}
@@ -91,9 +94,7 @@ class CustomSearchResultsList extends React.Component {
 		searchContentConfig.contentConfigValues.query = value;
 		// If 'See More' button is pressed
 		if (additionalStoryAmount) {
-			this.setState((existingState) => ({
-				page: existingState.page + 1,
-			}));
+			this.state.page += 1;
 			const { page } = this.state;
 			searchContentConfig.contentConfigValues.page = page.toString();
 			this.fetchContent({
@@ -112,9 +113,7 @@ class CustomSearchResultsList extends React.Component {
 				},
 			});
 		} else {
-			this.setState({
-				page: 1,
-			});
+			this.state.page = 1;
 			searchContentConfig.contentConfigValues.page = "1";
 			this.fetchContent({
 				resultList: {
@@ -131,9 +130,7 @@ class CustomSearchResultsList extends React.Component {
 				},
 			});
 		}
-		this.setState({
-			searchTerm: value,
-		});
+		this.state.searchTerm = value;
 	}
 
 	render() {

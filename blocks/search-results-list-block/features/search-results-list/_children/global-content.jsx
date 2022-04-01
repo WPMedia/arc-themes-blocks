@@ -94,7 +94,10 @@ class GlobalSearchResultsList extends React.Component {
 			this.fetchContent({
 				placeholderResizedImageOptions: {
 					source: "resize-image-api",
-					query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
+					query: {
+						raw_image_url: targetFallbackImage,
+						respect_aspect_ratio: true,
+					},
 				},
 			});
 		}
@@ -115,9 +118,7 @@ class GlobalSearchResultsList extends React.Component {
 			currentCount = resultList?.data?.length;
 		}
 		// Get results from new page
-		this.setState((existingState) => ({
-			page: existingState.page + 1,
-		}));
+		this.state.page += 1;
 		this.fetchContent({
 			resultList: {
 				source: "search-api",

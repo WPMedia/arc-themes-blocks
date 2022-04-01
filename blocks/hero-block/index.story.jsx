@@ -10,6 +10,94 @@ export default {
 	},
 };
 
-export const showHeading = () => <Hero customFields={{ showHeading: true }} />;
+export const showOverlayCenter = () => (
+	<Hero
+		customFields={{
+			layout: "overlay",
+			alignment: "center",
+			variant: "light",
+			imageURLDesktop: "/hero_desktop-progressive.jpeg",
+			desktopMediaBreakpoint: "min-width: 800px",
+			imageURLMobile: "/hero_mobile-progressive.jpeg",
+			imageAltText: "Picture of man in the forest",
+			headline: "All The Fall Things",
+			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
+			description: "Versatile. Slightly-cooler temps and light layers.",
+			link1Action: "/mens",
+			link1Text: "Shop Men",
+			link1Type: "secondary",
+			link2Action: "/womans",
+			link2Text: "Shop Women",
+			link2Type: "secondary",
+		}}
+	/>
+);
 
-export const hideHeading = () => <Hero customFields={{ showHeading: false }} />;
+export const showOverlayLeft = () => (
+	<Hero
+		customFields={{
+			layout: "overlay",
+			alignment: "left",
+			variant: "light",
+			imageURLDesktop: "/hero_desktop-progressive.jpeg",
+			desktopMediaBreakpoint: "min-width: 800px",
+			imageURLMobile: "/hero_mobile-progressive.jpeg",
+			imageAltText: "Picture of man in the forest",
+			headline: "All The Fall Things",
+			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
+			description: "Versatile. Slightly-cooler temps and light layers.",
+			link1Action: "/mens",
+			link1Text: "Shop Men",
+			link1Type: "secondary",
+			link2Action: "/womans",
+			link2Text: "Shop Women",
+			link2Type: "secondary",
+		}}
+	/>
+);
+
+export const showButtonVariants = () => (
+	<Hero
+		customFields={{
+			layout: "overlay",
+			alignment: "left",
+			variant: "light",
+			imageURLDesktop: "/hero_desktop-progressive.jpeg",
+			desktopMediaBreakpoint: "min-width: 800px",
+			imageURLMobile: "/hero_mobile-progressive.jpeg",
+			imageAltText: "Picture of man in the forest",
+			headline: "All The Fall Things",
+			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
+			description: "Versatile. Slightly-cooler temps and light layers.",
+			link1Action: "/mens",
+			link1Text: "Shop Men",
+			link1Type: "primary",
+			link2Action: "/womans",
+			link2Text: "Shop Women",
+			link2Type: "secondary",
+		}}
+	/>
+);
+
+export const showStackedCenter = () => (
+	<Hero
+		customFields={{
+			layout: "stacked",
+			alignment: "center",
+			variant: "dark",
+			imageURLDesktop: "/hero_desktop-progressive.jpeg",
+			desktopMediaBreakpoint: "min-width: 800px",
+			imageURLMobile: "/hero_mobile-progressive.jpeg",
+			imageAltText: "Picture of man in the forest",
+			headline: "All The Fall Things",
+			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
+			description: "Versatile. Slightly-cooler temps and light layers.",
+			link1Action: "/mens",
+			link1Text: "Shop Men",
+			link1Type: "primary",
+			link2Action: "/womans",
+			link2Text: "Shop Women",
+			link2Type: "primary",
+		}}
+	/>
+);

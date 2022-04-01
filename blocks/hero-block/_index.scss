@@ -43,7 +43,6 @@
 
 	&--left {
 		width: 100%;
-
 		@include scss.block-properties("hero-left");
 		@include scss.block-components("hero-left");
 	}

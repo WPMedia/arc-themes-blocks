@@ -30,7 +30,7 @@ describe("Hero", () => {
 		expect(screen.queryByText("My description")).not.toBeInTheDocument();
 	});
 
-	it("should not render buttons", () => {
+	it("should not render button links", () => {
 		const { container } = render(
 			<Hero
 				customFields={{
@@ -41,7 +41,7 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelectorAll("button")).toHaveLength(0);
+		expect(container.querySelectorAll("a")).toHaveLength(0);
 	});
 
 	it("should render 1 link", () => {
@@ -211,5 +211,29 @@ describe("Hero", () => {
 			/>
 		);
 		expect(container.querySelector("source").getAttribute("media")).toBe("(min-width: 800px)");
+	});
+
+	it("should set correct alt text for the image", () => {
+		const { container } = render(
+			<Hero
+				customFields={{
+					alignment: "left",
+					imageURL: "image",
+					desktopMediaBreakpoint: "min-width: 800px",
+					imageAltText: "¿Dónde está la biblioteca?",
+					headline: "My Headline",
+					subHeadline: "My Sub Headline",
+					description: "My description",
+					link1Action: "#",
+					link1Text: "For Him",
+					link1Type: "secondary",
+					link2Action: "#",
+					link2Text: "For Her",
+					link2Type: "secondary",
+					variant: "light",
+				}}
+			/>
+		);
+		expect(container.querySelector("img").getAttribute("alt")).toBe("¿Dónde está la biblioteca?");
 	});
 });

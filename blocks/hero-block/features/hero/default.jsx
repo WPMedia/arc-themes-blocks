@@ -68,12 +68,16 @@ function Hero({ customFields }) {
 							direction="horizontal"
 							justification={alignment === "center" ? "center" : "start"}
 						>
-							<Button href={link1Action} variant={link1Type}>
-								{link1Text}
-							</Button>
-							<Button href={link2Action} variant={link2Type}>
-								{link2Text}
-							</Button>
+							{link1Action && link1Text && (
+								<Button href={link1Action} variant={link1Type}>
+									{link1Text}
+								</Button>
+							)}
+							{link2Action && link2Text && (
+								<Button href={link2Action} variant={link2Type}>
+									{link2Text}
+								</Button>
+							)}
 						</Stack>
 					) : null}
 				</HeadingSection>

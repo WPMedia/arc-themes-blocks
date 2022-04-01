@@ -79,6 +79,26 @@ export const showButtonVariants = () => (
 	/>
 );
 
+export const showOnlyOneButton = () => (
+	<Hero
+		customFields={{
+			layout: "overlay",
+			alignment: "left",
+			variant: "light",
+			imageURLDesktop: "/hero_desktop-progressive.jpeg",
+			desktopMediaBreakpoint: "min-width: 800px",
+			imageURLMobile: "/hero_mobile-progressive.jpeg",
+			imageAltText: "Picture of man in the forest",
+			headline: "All The Fall Things",
+			subHeadline: "Versatile. Slightly-cooler temps and light layers.",
+			description: "Versatile. Slightly-cooler temps and light layers.",
+			link1Action: "/mens",
+			link1Text: "Shop Men",
+			link1Type: "primary",
+		}}
+	/>
+);
+
 export const showStackedCenter = () => (
 	<Hero
 		customFields={{

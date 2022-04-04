@@ -3,6 +3,7 @@ import Hero from "./features/hero/default";
 
 // for more info on storybook and using the component explorer
 // https://storybook.js.org/
+
 export default {
 	title: "Blocks/Hero",
 	parameters: {

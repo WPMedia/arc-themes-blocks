@@ -5,7 +5,6 @@
 	),
 	$global: (
 		"white": #ffffff,
-
 		"blue-1": #ebefff,
 		"blue-2": #b0c3f2,
 		"blue-3": #7aa2e5,
@@ -16,7 +15,6 @@
 		"blue-8": #062665,
 		"blue-9": #021443,
 		"blue-10": #000721,
-
 		"red-1": #ff8a8a,
 		"red-2": #e65555,
 		"red-3": #ce2929,
@@ -27,7 +25,6 @@
 		"red-8": #520000,
 		"red-9": #3a0000,
 		"red-10": #210000,
-
 		"orange-1": #fa714b,
 		"orange-2": #e24f23,
 		"orange-3": #c93302,
@@ -38,7 +35,6 @@
 		"orange-8": #4f1900,
 		"orange-9": #371200,
 		"orange-10": #1f0b00,
-
 		"green-1": #80d971,
 		"green-2": #57c244,
 		"green-3": #34ab1f,
@@ -49,7 +45,6 @@
 		"green-8": #083800,
 		"green-9": #052100,
 		"green-10": #020a00,
-
 		"neutral-1": #e6efff,
 		"neutral-2": #c3cfe3,
 		"neutral-3": #a3b0c6,
@@ -60,7 +55,6 @@
 		"neutral-8": #232b39,
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
-
 		"spacing-1": 0.25em,
 		// 4px
 		"spacing-2": 0.5em,
@@ -92,7 +86,6 @@
 		"spacing-15": 7em,
 		// 112px
 		"spacing-16": 7.5em,
-
 		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
@@ -103,7 +96,6 @@
 		"font-weight-7": 700,
 		"font-weight-8": 800,
 		"font-weight-9": 900,
-
 		"font-size-1": 0.75rem,
 		// 12px
 		"font-size-2": 0.875rem,
@@ -133,7 +125,6 @@
 		"font-size-14": 3.75rem,
 		// 60px
 		"font-size-15": 4rem,
-
 		// 64px
 		"line-height-1": 1em,
 		// 16px
@@ -148,7 +139,6 @@
 		"line-height-6": 3.5rem,
 		// 56px
 		"line-height-7": 3.75rem,
-
 		// 60px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -156,7 +146,6 @@
 		"z-index-3": 50,
 		"z-index-4": 100,
 		"z-index-5": 500,
-
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
@@ -237,12 +226,13 @@
 			blocks: (
 				hero: (
 					color: var(--global-neutral-10),
+					gap: var(--global-spacing-3),
 					components: (
 						button: (
 							text-decoration: none,
 						),
 						stack: (
-							gap: var(--global-spacing-2),
+							gap: var(--global-spacing-3),
 						),
 						heading: (
 							font-size: var(--global-font-size-8),
@@ -269,11 +259,10 @@
 					padding: 0 var(--global-spacing-3),
 				),
 				hero-text-overlay: (
-					max-width: 24rem,
+					max-width: 85%,
 				),
 				hero-text-stacked: (
 					max-width: 24rem,
-					margin-top: var(--global-spacing-3),
 					gap: var(--global-spacing-3),
 				),
 				hero-subheadline: (
@@ -281,7 +270,6 @@
 					line-height: var(--global-line-height-2),
 				),
 				hero-buttonrow: (
-					margin-top: var(--global-spacing-3),
 					gap: var(--global-spacing-3),
 				),
 			),
@@ -291,13 +279,14 @@
 			components: (),
 			blocks: (
 				hero: (
+					gap: var(--global-spacing-4),
 					components: (
 						stack: (
 							gap: var(--global-spacing-3),
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-7),
+							line-height: none,
 						),
 						paragraph: (
 							font-size: var(--global-font-size-3),
@@ -312,6 +301,10 @@
 				hero-text-overlay: (
 					max-width: 100%,
 				),
+				hero-text-stacked: (
+					max-width: 65%,
+					gap: var(--global-spacing-4),
+				),
 				hero-image-stacked: (
 					height: auto,
 					width: 100%,
@@ -319,17 +312,11 @@
 				hero-left: (
 					padding: 0 var(--global-spacing-3) 0 var(--global-spacing-15),
 				),
-				hero-text-stacked: (
-					max-width: 100%,
-					margin-top: var(--global-spacing-3),
-					gap: var(--global-spacing-3),
-				),
 				hero-subheadline: (
 					font-size: var(--global-font-size-8),
-					line-height: var(--global-line-height-3),
+					line-height: none,
 				),
 				hero-buttonrow: (
-					margin-top: var(--global-spacing-3),
 					gap: var(--global-spacing-3),
 				),
 			),

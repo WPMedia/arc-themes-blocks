@@ -3,9 +3,10 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
 import { MetaData } from "@wpmedia/engine-theme-sdk";
-import { Stack } from "@wpmedia/arc-themes-components";
 
 import blocks from "~/blocks.json";
+// this is blank import but used to inject scss
+import "./default.scss";
 
 const querylyCode = (querylyId, querylyOrg, pageType) => {
 	if (!querylyId) {
@@ -13,15 +14,9 @@ const querylyCode = (querylyId, querylyOrg, pageType) => {
 	}
 	return (
 		<>
-			<script
-				key="querylySearch"
-				defer
-				data-integration="queryly"
-				src="https://www.queryly.com/js/queryly.v4.min.js"
-			/>
+			<script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
 			{pageType === "queryly-search" ? (
 				<script
-					key="querylySearchAdvanced"
 					defer
 					data-integration="queryly"
 					src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`}
@@ -67,13 +62,8 @@ const googleTagManagerNoScript = (gtmID) => {
 
 const optimalFontLoading = (fontUrl, index = "") => (
 	<>
-		<link key={`fontLinkPreload_${fontUrl}`} rel="preload" as="style" href={fontUrl} />
-		<link
-			key={`fontLink_${fontUrl}`}
-			rel="stylesheet"
-			data-testid={`font-loading-url-${index}`}
-			href={fontUrl}
-		/>
+		<link rel="preload" as="style" href={fontUrl} />
+		<link rel="stylesheet" key={fontUrl} data-testid={`font-loading-url-${index}`} href={fontUrl} />
 	</>
 );
 
@@ -82,10 +72,14 @@ const fontUrlLink = (fontUrl) => {
 	if (fontUrl && Array.isArray(fontUrl) && fontUrl.length > 0) {
 		const fontLinks = [...new Set(fontUrl)].map((url, index) => optimalFontLoading(url, index));
 
-		return fontLinks;
+		return (
+			<>
+				<>{fontLinks}</>
+			</>
+		);
 	}
 	// Legacy support where fontUrl is a string
-	return fontUrl ? optimalFontLoading(fontUrl) : "";
+	return fontUrl ? <>{optimalFontLoading(fontUrl)}</> : "";
 };
 
 const SampleOutputType = ({
@@ -214,23 +208,16 @@ const SampleOutputType = ({
 				/>
 				{gaID ? (
 					<script
-						key={gaID}
 						async
 						data-integration="googleAnalyticsTag"
 						src={`https://www.googletagmanager.com/gtag/js?id=${gaID}`}
 					/>
 				) : null}
 				{nativoIntegration ? (
-					<script
-						key="nativo-ad"
-						async
-						data-integration="nativo-ad"
-						src="https://s.ntv.io/serve/load.js"
-					/>
+					<script async data-integration="nativo-ad" src="https://s.ntv.io/serve/load.js" />
 				) : null}
 				{chartBeatAccountId && chartBeatDomain ? (
 					<script
-						key={`chartBeat_${chartBeatAccountId}`}
 						async
 						data-integration="chartbeat"
 						src="https://static.chartbeat.com/js/chartbeat.js"
@@ -238,14 +225,13 @@ const SampleOutputType = ({
 				) : null}
 				{comscoreID ? (
 					<script
-						key={`comScore_${comscoreID}`}
 						async
 						data-integration="comscore"
 						src="https://sb.scorecardresearch.com/beacon.js"
 					/>
 				) : null}
 				{api?.retail?.script ? (
-					<script key="retailScript" defer data-integration="arcp" src={api?.retail?.script} />
+					<script defer data-integration="arcp" src={api?.retail?.script} />
 				) : null}
 				{querylyCode(querylyId, querylyOrg, metaValue("page-type"))}
 			</head>
@@ -255,9 +241,9 @@ const SampleOutputType = ({
 				<a className="skip-main" href="#main">
 					{phrases.t("default-output-block.skip-main")}
 				</a>
-				<Stack id="fusion-app" className="b-application">
+				<div id="fusion-app" className="layout-section">
 					{children}
-				</Stack>
+				</div>
 				<Fusion />
 			</body>
 		</html>

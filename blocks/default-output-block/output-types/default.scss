@@ -1,9 +1,3 @@
-@use "@wpmedia/arc-themes-components/scss";
-
-.b-application {
-	@include scss.block-properties("application");
-}
-
 // do not delete this as it's used to inject scss
 .skip-main {
 	left: -999px;

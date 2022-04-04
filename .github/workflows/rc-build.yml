@@ -17,17 +17,13 @@ jobs:
     name: rc block publish
     runs-on: ubuntu-latest
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-      - name: Set git username
-        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "Jack Howard"
-
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.NODE_AUTH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # pulls all tags (needed for lerna / semantic release to correctly version)
       - name: Pull tags to give lerna access to git info
@@ -50,15 +46,18 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
         run: npm run test
 
       - name: Publish to rc
-        run: npm run release:rc
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npm run release:rc
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check rc failure status
         uses: act10ns/slack@v1

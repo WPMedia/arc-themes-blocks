@@ -11,6 +11,7 @@ module.exports = {
 		"@storybook/addon-knobs",
 		"@storybook/addon-essentials",
 	],
+	staticDirs: ["../resources"],
 	webpackFinal: async (config) => {
 		// `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
 		// You can change the configuration based on that.

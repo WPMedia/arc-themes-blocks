@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { useFusionContext } from "fusion:context";
@@ -12,22 +12,16 @@ const querylyCode = (querylyId, querylyOrg, pageType) => {
 		return null;
 	}
 	return (
-		<>
-			<script
-				key="querylySearch"
-				defer
-				data-integration="queryly"
-				src="https://www.queryly.com/js/queryly.v4.min.js"
-			/>
+		<Fragment key="querylySearch">
+			<script defer data-integration="queryly" src="https://www.queryly.com/js/queryly.v4.min.js" />
 			{pageType === "queryly-search" ? (
 				<script
-					key="querylySearchAdvanced"
 					defer
 					data-integration="queryly"
 					src={`https://www.queryly.com/js/${querylyOrg}-advanced-search.js`}
 				/>
 			) : null}
-		</>
+		</Fragment>
 	);
 };
 
@@ -66,15 +60,10 @@ const googleTagManagerNoScript = (gtmID) => {
 };
 
 const optimalFontLoading = (fontUrl, index = "") => (
-	<>
-		<link key={`fontLinkPreload_${fontUrl}`} rel="preload" as="style" href={fontUrl} />
-		<link
-			key={`fontLink_${fontUrl}`}
-			rel="stylesheet"
-			data-testid={`font-loading-url-${index}`}
-			href={fontUrl}
-		/>
-	</>
+	<Fragment key={`fontLinkPreload_${fontUrl}_${index}`}>
+		<link rel="preload" as="style" href={fontUrl} />
+		<link rel="stylesheet" data-testid={`font-loading-url-${index}`} href={fontUrl} />
+	</Fragment>
 );
 
 const fontUrlLink = (fontUrl) => {

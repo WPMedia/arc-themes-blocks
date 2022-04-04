@@ -1,1 +1,244 @@
-@use "@wpmedia/arc-themes-components/scss";
+@use "@wpmedia/arc-themes-components/scss" with (
+	$breakpoints: (
+		default: "min-width: 0",
+		desktop: "min-width: 48rem",
+	),
+	$global: (
+		"white": #ffffff,
+		"blue-1": #ebefff,
+		"blue-2": #b0c3f2,
+		"blue-3": #7aa2e5,
+		"blue-4": #4a89d8,
+		"blue-5": #1e78cb,
+		"blue-6": #1458a9,
+		"blue-7": #0c3d87,
+		"blue-8": #062665,
+		"blue-9": #021443,
+		"blue-10": #000721,
+		"red-1": #ff8a8a,
+		"red-2": #e65555,
+		"red-3": #ce2929,
+		"red-4": #b50505,
+		"red-5": #9c0000,
+		"red-6": #840000,
+		"red-7": #6b0000,
+		"red-8": #520000,
+		"red-9": #3a0000,
+		"red-10": #210000,
+		"orange-1": #fa714b,
+		"orange-2": #e24f23,
+		"orange-3": #c93302,
+		"orange-4": #b12e00,
+		"orange-5": #982a00,
+		"orange-6": #802500,
+		"orange-7": #682000,
+		"orange-8": #4f1900,
+		"orange-9": #371200,
+		"orange-10": #1f0b00,
+		"green-1": #80d971,
+		"green-2": #57c244,
+		"green-3": #34ab1f,
+		"green-4": #189402,
+		"green-5": #137d00,
+		"green-6": #0f6600,
+		"green-7": #0c4f00,
+		"green-8": #083800,
+		"green-9": #052100,
+		"green-10": #020a00,
+		"neutral-1": #e6efff,
+		"neutral-2": #c3cfe3,
+		"neutral-3": #a3b0c6,
+		"neutral-4": #8593aa,
+		"neutral-5": #69778e,
+		"neutral-6": #4f5c71,
+		"neutral-7": #384355,
+		"neutral-8": #232b39,
+		"neutral-9": #10151c,
+		"neutral-10": #000000,
+		"spacing-1": 0.25em,
+		// 4px
+		"spacing-2": 0.5em,
+		// 8px
+		"spacing-3": 1em,
+		// 16px
+		"spacing-4": 1.5em,
+		// 24px
+		"spacing-5": 2em,
+		// 32px
+		"spacing-6": 2.5em,
+		// 40px
+		"spacing-7": 3em,
+		// 48px
+		"spacing-8": 3.5em,
+		// 56px
+		"spacing-9": 4em,
+		// 64px
+		"spacing-10": 4.5em,
+		// 72px
+		"spacing-11": 5em,
+		// 80px
+		"spacing-12": 5.5em,
+		// 88px
+		"spacing-13": 6em,
+		// 96px
+		"spacing-14": 6.5em,
+		// 104px
+		"spacing-15": 7em,
+		// 112px
+		"spacing-16": 7.5em,
+		// 120px
+		"font-weight-1": 100,
+		"font-weight-2": 200,
+		"font-weight-3": 300,
+		"font-weight-4": 400,
+		"font-weight-5": 500,
+		"font-weight-6": 600,
+		"font-weight-7": 700,
+		"font-weight-8": 800,
+		"font-weight-9": 900,
+		"font-size-1": 0.75rem,
+		// 12px
+		"font-size-2": 0.875rem,
+		// 14px
+		"font-size-3": 1rem,
+		// 16px
+		"font-size-4": 1.125rem,
+		// 18px
+		"font-size-5": 1.1875rem,
+		// 19px
+		"font-size-6": 1.375rem,
+		// 22px
+		"font-size-7": 1.5rem,
+		// 24px
+		"font-size-8": 1.75rem,
+		// 28px
+		"font-size-9": 2.25rem,
+		// 36px
+		"font-size-10": 2.75rem,
+		// 48px?
+		"line-height-1": 1em,
+		"line-height-2": 1.5em,
+		"line-height-3": 2em,
+		"line-height-4": 2.5em,
+		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
+		"z-index-1": 1,
+		"z-index-2": 10,
+		"z-index-3": 50,
+		"z-index-4": 100,
+		"z-index-5": 500,
+		"border-radius-1": 0.25em,
+	),
+	$alias: (
+		primary-color: var(--global-neutral-10),
+		secondary-color: var(--global-neutral-1),
+		primary-font-family: "Inter",
+	),
+	$tokens: (
+		default: (
+			components: (
+				body: (
+					font-family: var(--primary-font-family),
+					font-size: var(--global-font-size-3),
+				),
+				stack: (
+					color: initial,
+					gap: initial,
+				),
+				heading: (
+					color: initial,
+					font-size: initial,
+					font-weight: var(--global-font-weight-7),
+				),
+				paragraph: (
+					font-size: initial,
+				),
+				button: (
+					border: 1px solid transparent,
+					border-radius: var(--global-border-radius-1),
+					font-size: var(--global-font-size-3),
+					font-weight: var(--global-font-weight-7),
+					gap: var(--global-spacing-2),
+					text-decoration: initial,
+				),
+				button-small: (
+					padding: var(--global-spacing-1) var(--global-spacing-3),
+				),
+				button-medium: (
+					padding: calc(var(--global-spacing-2) + var(--global-spacing-1)) var(--global-spacing-3),
+				),
+				button-large: (
+					padding: var(--global-spacing-3),
+				),
+				button-default: (
+					background-color: var(--global-white),
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-primary: (
+					background-color: var(--primary-color),
+					color: var(--global-white),
+				),
+				button-primary-hover: (
+					background-color: var(--global-blue-7),
+				),
+				button-primary-reverse: (
+					background-color: transparent,
+					border-color: var(--primary-color),
+					color: var(--primary-color),
+				),
+				button-primary-reverse-hover: (
+					border-color: var(--global-blue-7),
+					color: var(--global-blue-7),
+				),
+				button-secondary: (
+					background-color: var(--global-white),
+					color: var(--global-neutral-10),
+				),
+				button-secondary-hover: (
+					background-color: var(--global-neutral-2),
+				),
+				button-secondary-reverse: (
+					background-color: transparent,
+					color: var(--global-white),
+				),
+				button-secondary-reverse-hover: (
+					border-color: var(--global-neutral-2),
+					color: var(--global-neutral-2),
+				),
+			),
+			blocks: (
+				quilted-image--wrapper: (
+					gap: var(--global-spacing-5),
+					grid-template-areas: "top" "middle" "bottom",
+					grid-auto-flow: "column",
+				),
+				quilted-image--overlay-text-light: (
+					color: var(--global-neutral-1),
+				),
+				quilted-image--overlay-text-dark: (
+					color: var(--global-neutral-10),
+				),
+				quilted-image--overlay: (
+					left: var(--global-spacing-5),
+					bottom: var(--global-spacing-5),
+					font-weight: var(--global-font-weight-7),
+					font-size: var(--global-font-size-4),
+					components: (
+						stack: (
+							gap: var(--global-spacing-3),
+						),
+					),
+				),
+			),
+		),
+		desktop: (
+			blocks: (
+				quilted-image--wrapper: (
+					grid-template-areas: "top top" "bottom bottom",
+				),
+			),
+		),
+	)
+);
+
+@use "../../blocks/quilted-image-block";

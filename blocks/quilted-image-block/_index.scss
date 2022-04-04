@@ -10,10 +10,16 @@
 
 	.b-quilted-image--wrapper--bottom {
 		grid-area: bottom;
+		img {
+			width: 100%;
+		}
 	}
 
 	.b-quilted-image--wrapper--top {
 		grid-area: top;
+		img {
+			width: 100%;
+		}
 	}
 
 	@include scss.block-properties("quilted-image--wrapper");

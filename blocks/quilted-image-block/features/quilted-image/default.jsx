@@ -114,7 +114,7 @@ QuiltedImage.propTypes = {
 		}),
 		fullWidthImage: PropTypes.oneOf(["top", "bottom"]).tag({
 			label: "Full Width Image Location",
-			defaultValue: "top",
+			defaultValue: "bottom",
 		}),
 		image1URL: PropTypes.string.tag({
 			label: "Image URL",
@@ -134,6 +134,7 @@ QuiltedImage.propTypes = {
 		overlay1Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
+			defaultValue: "",
 			group: "Image 1",
 		}).isRequired,
 		overlay1TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
@@ -149,6 +150,7 @@ QuiltedImage.propTypes = {
 		item1Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image's button is clicked.",
+			defaultValue: "",
 			group: "Image 1",
 		}).isRequired,
 		button1Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
@@ -174,6 +176,7 @@ QuiltedImage.propTypes = {
 		overlay2Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
+			defaultValue: "",
 			group: "Image 2",
 		}).isRequired,
 		overlay2TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
@@ -189,6 +192,7 @@ QuiltedImage.propTypes = {
 		item2Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
+			defaultValue: "",
 			group: "Image 2",
 		}).isRequired,
 		button2Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
@@ -214,6 +218,7 @@ QuiltedImage.propTypes = {
 		overlay3Text: PropTypes.string.tag({
 			label: "Overlay Text",
 			description: "Overlay text appearing within the image.",
+			defaultValue: "",
 			group: "Image 3",
 		}).isRequired,
 		overlay3TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
@@ -229,6 +234,7 @@ QuiltedImage.propTypes = {
 		item3Action: PropTypes.string.tag({
 			label: "Button Click URL",
 			description: "Destination URL when image button is clicked.",
+			defaultValue: "",
 			group: "Image 3",
 		}).isRequired,
 		button3Variant: PropTypes.oneOf(["primary", "secondary"]).tag({

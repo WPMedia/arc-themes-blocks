@@ -73,12 +73,12 @@ function Hero({ customFields }) {
 							justification={alignment === "center" ? "center" : "start"}
 						>
 							{link1Action && link1Text ? (
-								<Button href={link1Action} variant={link1Type}>
+								<Button href={link1Action} variant={link1Type} size="large">
 									{link1Text}
 								</Button>
 							) : null}
 							{link2Action && link2Text ? (
-								<Button href={link2Action} variant={link2Type}>
+								<Button href={link2Action} variant={link2Type} size="large">
 									{link2Text}
 								</Button>
 							) : null}

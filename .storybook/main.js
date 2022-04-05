@@ -5,6 +5,7 @@ const path = require("path");
 module.exports = {
 	stories: ["../stories/*.stories.@(js|jsx|mdx|tsx)", "../blocks/**/*.story.@(js|jsx|mdx|tsx)"],
 	addons: [
+		"@etchteam/storybook-addon-css-variables-theme",
 		"@storybook/addon-a11y",
 		"@storybook/addon-docs",
 		"@storybook/addon-knobs",
@@ -32,26 +33,33 @@ module.exports = {
 			},
 		};
 
-		config.module.rules.push({
-			test: /\.scss$/,
-			use: [
-				"style-loader",
-				"css-loader",
-				{
-					loader: "sass-loader",
-					options: {
-						prependData: () => `
+		config.module.rules.push(
+			{
+				test: /\.scss$/,
+				use: [
+					"style-loader",
+					"css-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							additionalData: `
               @import '~@wpmedia/news-theme-css/scss';
 
               // Should look for a better way to do this ->
               // This should be defaulted in the news-theme-css repo too!
               $theme-primary-font-family: $primary-font-family !default;
             `,
+						},
 					},
-				},
-			],
-			include: path.resolve(__dirname, "../"),
-		});
+				],
+				include: path.resolve(__dirname, "../"),
+			},
+			{
+				test: /\.(js|jsx)$/,
+				include: path.resolve(__dirname, "../node_modules/@wpmedia/arc-themes-components"),
+				use: ["babel-loader"],
+			}
+		);
 
 		// Return the altered config
 		return config;

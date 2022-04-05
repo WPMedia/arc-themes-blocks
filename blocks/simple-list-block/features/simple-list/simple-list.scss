@@ -12,6 +12,10 @@
 		line-height: calculateRem(24px);
 	}
 
+	picture {
+		width: 100%;
+	}
+
 	a > picture > img {
 		// stylelint-disable-line
 		vertical-align: middle;

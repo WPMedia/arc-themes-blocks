@@ -12,6 +12,10 @@
 		text-decoration: none;
 	}
 
+	picture {
+		min-width: auto;
+	}
+
 	img {
 		border-radius: 100%;
 		height: calculateRem(84px);

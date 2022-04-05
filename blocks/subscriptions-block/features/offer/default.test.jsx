@@ -1,18 +1,27 @@
 import React from "react";
 import { mount } from "enzyme";
-import { act } from "@testing-library/react";
+import { isServerSide } from "@wpmedia/engine-theme-sdk";
 import Offer from "./default";
 import useOffer from "../../components/useOffer";
-import OfferCard from "../../components/OfferCard";
 
+jest.spyOn(URLSearchParams.prototype, "get").mockReturnValue("some value");
+jest.spyOn(URLSearchParams.prototype, "has").mockReturnValue(false);
+
+jest.mock("@wpmedia/engine-theme-sdk", () => ({
+	...jest.requireActual("@wpmedia/engine-theme-sdk"),
+	isServerSide: jest.fn(),
+}));
+
+const HEADLINE_TEXT = "Get access today!";
+const SUBHEADLINE_TEXT = "Subscribe to any of our sections";
 const sampleOffer = {
 	name: "All Products Offer",
 	disclaimerText: "<p>Terms apply</p>",
 	largeImage: null,
 	mediumImage: null,
 	smallImage: null,
-	pageSubTitle: "<p>Get access today!</p>",
-	pageTitle: "<p>Subscribe to any of our sections</p>",
+	pageSubTitle: `<p>${SUBHEADLINE_TEXT}</p>`,
+	pageTitle: `<p>${HEADLINE_TEXT}</p>`,
 	templateName: "a",
 	campaigns: [
 		{
@@ -186,7 +195,10 @@ jest.mock("../../components/useOffer");
 useOffer.mockReturnValue({
 	offer: sampleOffer,
 	fetchOffer: () => sampleOffer,
+	isFetching: false,
 });
+
+isServerSide.mockReturnValue(false);
 
 describe("The Offer feature", () => {
 	it("renders the correct number of offer cards", () => {
@@ -200,10 +212,87 @@ describe("The Offer feature", () => {
 			/>
 		);
 
-		act(() => {
-			wrapper.setProps({});
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
+	});
+	it("renders sub-headline and subheadline", () => {
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					campaignCode: "allaccess",
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		const headline = wrapper.find(".xpmedia-subscription-offer-headings h1");
+
+		const subHeadline = wrapper.find(".xpmedia-subscription-offer-headings h2");
+
+		expect(headline.text()).toEqual(HEADLINE_TEXT);
+
+		expect(subHeadline.text()).toEqual(SUBHEADLINE_TEXT);
+	});
+	it("uses fallback campaign code", () => {
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		expect(wrapper.html()).not.toBeNull();
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(4);
+	});
+	it("uses the fallback campaign code if url params does not have campaign present", () => {
+		jest.spyOn(URLSearchParams.prototype, "has").mockReturnValueOnce(true);
+
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		expect(wrapper.html()).not.toBeNull();
+	});
+	it("is fetching and does not return offers", () => {
+		useOffer.mockReturnValue({
+			isFetching: true,
+			offer: null,
+			fetchOffer: () => null,
 		});
 
-		expect(wrapper.find(OfferCard)).toHaveLength(4);
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					campaignCode: "allaccess",
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		expect(wrapper.find("div.xpmedia-subscription-offer-card")).toHaveLength(0);
+		expect(wrapper.find(".xpmedia-subscription-offer-headings")).toHaveLength(0);
+	});
+	it("returns null on serverside", () => {
+		isServerSide.mockReturnValue(true);
+
+		const wrapper = mount(
+			<Offer
+				customFields={{
+					campaignCode: "allaccess",
+					loginURL: "/login/",
+					checkoutURL: "/checkout/",
+				}}
+			/>
+		);
+
+		expect(wrapper.html()).toBeNull();
 	});
 });

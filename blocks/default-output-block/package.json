@@ -12,6 +12,7 @@
   "main": "index.js",
   "files": [
     "output-types",
+    "_index.scss",
     "intl.json"
   ],
   "publishConfig": {

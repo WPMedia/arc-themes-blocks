@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 // Arc Themes Components - Base set of components used to compose blocks
@@ -29,8 +29,11 @@ function Hero({ customFields }) {
 
 	const classes = [
 		BLOCK_CLASS_NAME,
+		`${BLOCK_CLASS_NAME}--${layout}`,
 		variant === "dark" ? `${BLOCK_CLASS_NAME}--dark` : `${BLOCK_CLASS_NAME}--light`,
 	].join(" ");
+
+	const HeadingWrapper = headline ? HeadingSection : Fragment;
 
 	return (
 		<div className={classes}>
@@ -39,8 +42,8 @@ function Hero({ customFields }) {
 				<img
 					className={
 						layout === "stacked"
-							? `${BLOCK_CLASS_NAME}--image-stacked`
-							: `${BLOCK_CLASS_NAME}--image`
+							? `${BLOCK_CLASS_NAME}__image--stacked`
+							: `${BLOCK_CLASS_NAME}__image`
 					}
 					src={imageURLMobile}
 					alt={imageAltText}
@@ -48,22 +51,24 @@ function Hero({ customFields }) {
 			</picture>
 
 			<Stack
-				className={`${BLOCK_CLASS_NAME}--${layout} ${
-					alignment === "left" ? `${BLOCK_CLASS_NAME}--left` : `${BLOCK_CLASS_NAME}--center`
+				className={`${BLOCK_CLASS_NAME}__text--${layout} ${
+					alignment === "left"
+						? `${BLOCK_CLASS_NAME}__text--left`
+						: `${BLOCK_CLASS_NAME}__text--center`
 				}`}
 			>
-				<HeadingSection>
+				<HeadingWrapper>
 					{headline ? <Heading>{headline}</Heading> : null}
 					{subHeadline ? (
 						<HeadingSection>
-							<Heading className={`${BLOCK_CLASS_NAME}--subheadline`}>{subHeadline}</Heading>
+							<Heading className={`${BLOCK_CLASS_NAME}__subheadline`}>{subHeadline}</Heading>
 						</HeadingSection>
 					) : null}
 					{description ? <Paragraph>{description}</Paragraph> : null}
 
 					{(link1Action && link1Text) || (link2Action && link2Text) ? (
 						<Stack
-							className={`${BLOCK_CLASS_NAME}--buttonrow`}
+							className={`${BLOCK_CLASS_NAME}__buttonrow`}
 							direction="horizontal"
 							justification={alignment === "center" ? "center" : "start"}
 						>
@@ -79,7 +84,7 @@ function Hero({ customFields }) {
 							) : null}
 						</Stack>
 					) : null}
-				</HeadingSection>
+				</HeadingWrapper>
 			</Stack>
 		</div>
 	);

@@ -141,8 +141,8 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelectorAll(".b-hero--left")).toHaveLength(0);
-		expect(container.querySelectorAll(".b-hero--center")).toHaveLength(1);
+		expect(container.querySelectorAll(".b-hero__text--left")).toHaveLength(0);
+		expect(container.querySelectorAll(".b-hero__text--center")).toHaveLength(1);
 	});
 
 	it("should render left alignment layout when specified", () => {
@@ -163,8 +163,8 @@ describe("Hero", () => {
 				}}
 			/>
 		);
-		expect(container.querySelectorAll(".b-hero--center")).toHaveLength(0);
-		expect(container.querySelectorAll(".b-hero--left")).toHaveLength(1);
+		expect(container.querySelectorAll(".b-hero__text--center")).toHaveLength(0);
+		expect(container.querySelectorAll(".b-hero__text--left")).toHaveLength(1);
 	});
 
 	it("should render light variant when specified", () => {

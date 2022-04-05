@@ -59,9 +59,11 @@ function QuiltedImage({ customFields }) {
 									{overlay1Text}
 								</Paragraph>
 							) : null}
-							{button1Text ? <Button variant={button1Variant} size="small" assistiveHidden>
-								{button1Text}
-							</Button> : null}
+							{button1Text ? (
+								<Button variant={button1Variant} size="small" assistiveHidden>
+									{button1Text}
+								</Button>
+							) : null}
 						</Stack>
 					</Link>
 					<Link href={item2Action || "#"} className={`${BLOCK_CLASS_NAME}--media-panel`}>
@@ -72,9 +74,11 @@ function QuiltedImage({ customFields }) {
 									{overlay2Text}
 								</Paragraph>
 							) : null}
-							<Button variant={button2Variant} size="small" assistiveHidden>
-								{button2Text}
-							</Button>
+							{button2Text ? (
+								<Button variant={button2Variant} size="small" assistiveHidden>
+									{button2Text}
+								</Button>
+							) : null}
 						</Stack>
 					</Link>
 					<Link
@@ -90,9 +94,11 @@ function QuiltedImage({ customFields }) {
 									{overlay3Text}
 								</Paragraph>
 							) : null}
-							<Button variant={button3Variant} size="small" assistiveHidden>
-								{button3Text}
-							</Button>
+							{button3Text ? (
+								<Button variant={button3Variant} size="small" assistiveHidden>
+									{button3Text}
+								</Button>
+							) : null}
 						</Stack>
 					</Link>
 				</div>

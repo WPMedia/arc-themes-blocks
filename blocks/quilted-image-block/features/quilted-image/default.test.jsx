@@ -100,6 +100,21 @@ describe("Quilted Image", () => {
 		}
 	});
 
+	it("should not render button components if 'Button Text' custom fields are empty strings.", () => {
+		const { container } = render(
+			<QuiltedImage
+				customFields={{
+					...FILLED_IN_CUSTOM_FIELDS,
+					button1Text: "",
+					button2Text: "",
+					button3Text: "",
+				}}
+			/>
+		);
+		const linkElements = container.querySelectorAll("p.c-button");
+		expect(linkElements.length).toBe(0);
+	});
+
 	it("should not render paragraph components if 'Overlay Text' custom fields are empty strings.", () => {
 		const { container } = render(
 			<QuiltedImage

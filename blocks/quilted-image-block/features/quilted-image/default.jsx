@@ -14,6 +14,13 @@ import {
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-quilted-image";
+const ASPECT_RATIO_MAP = {
+	"16/9": "16:9",
+	"4/3": "4:3",
+};
+const OVERLAY_TEXT_VARIANTS = ["dark", "light"];
+const BUTTON_VARIANTS = ["primary", "secondary"];
+
 function QuiltedImage({ customFields }) {
 	const {
 		headline,
@@ -128,11 +135,8 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio.",
 			group: "Image 1",
 		}).isRequired,
-		image1AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
-			labels: {
-				"16/9": "16:9",
-				"4/3": "4:3",
-			},
+		image1AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+			labels: ASPECT_RATIO_MAP,
 			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 1",
@@ -143,7 +147,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 1",
 		}).isRequired,
-		overlay1TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay1TextVariant: PropTypes.oneOf(OVERLAY_TEXT_VARIANTS).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 1",
@@ -159,7 +163,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 1",
 		}).isRequired,
-		button1Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
+		button1Variant: PropTypes.oneOf(BUTTON_VARIANTS).tag({
 			label: "Button Color",
 			defaultValue: "primary",
 			group: "Image 1",
@@ -170,11 +174,8 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 2",
 		}).isRequired,
-		image2AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
-			labels: {
-				"16/9": "16:9",
-				"4/3": "4:3",
-			},
+		image2AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+			labels: ASPECT_RATIO_MAP,
 			defaultValue: "4/3",
 			hidden: true,
 			group: "Image 2",
@@ -185,7 +186,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 2",
 		}).isRequired,
-		overlay2TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay2TextVariant: PropTypes.oneOf(OVERLAY_TEXT_VARIANTS).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 2",
@@ -201,7 +202,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 2",
 		}).isRequired,
-		button2Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
+		button2Variant: PropTypes.oneOf(BUTTON_VARIANTS).tag({
 			label: "Button Color",
 			defaultValue: "primary",
 			group: "Image 2",
@@ -212,11 +213,8 @@ QuiltedImage.propTypes = {
 			description: "URL of first image, displayed at 4:3 aspect ratio on desktop displays.",
 			group: "Image 3",
 		}).isRequired,
-		image3AspectRatio: PropTypes.oneOf(["16/9", "4/3"]).tag({
-			labels: {
-				"16/9": "16:9",
-				"4/3": "4:3",
-			},
+		image3AspectRatio: PropTypes.oneOf(Object.keys(ASPECT_RATIO_MAP)).tag({
+			labels: ASPECT_RATIO_MAP,
 			defaultValue: "16/9",
 			hidden: true,
 			group: "Image 3",
@@ -227,7 +225,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 3",
 		}).isRequired,
-		overlay3TextVariant: PropTypes.oneOf(["dark", "light"]).tag({
+		overlay3TextVariant: PropTypes.oneOf(OVERLAY_TEXT_VARIANTS).tag({
 			label: "Overlay Text Color",
 			defaultValue: "dark",
 			group: "Image 3",
@@ -243,7 +241,7 @@ QuiltedImage.propTypes = {
 			defaultValue: "",
 			group: "Image 3",
 		}).isRequired,
-		button3Variant: PropTypes.oneOf(["primary", "secondary"]).tag({
+		button3Variant: PropTypes.oneOf(BUTTON_VARIANTS).tag({
 			label: "Button Color",
 			defaultValue: "primary",
 			group: "Image 3",

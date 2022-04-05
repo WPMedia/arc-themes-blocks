@@ -25,7 +25,7 @@ const FILLED_IN_CUSTOM_FIELDS = {
 	button2Variant: "primary",
 	image3URL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/QLMIYN6QXRFC7MEQXCLYIUASZI.jpg",
-	image3AspectRatiom: "16/9",
+	image3AspectRatio: "16/9",
 	overlay3Text: "Overlay Text 3",
 	overlay3TextVariant: "dark",
 	button3Text: "Button 3 Text",

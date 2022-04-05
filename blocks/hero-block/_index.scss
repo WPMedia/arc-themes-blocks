@@ -2,56 +2,20 @@
 
 .b-hero {
 	display: grid;
-	grid-template-areas:
-		"hero"
-		"info";
+	grid-template-areas: "hero";
 	justify-content: center;
-	gap: 2rem;
 
 	> * {
 		grid-area: hero;
 	}
 
-	&--image {
-		@include scss.block-properties("hero-image");
-		@include scss.block-components("hero-image");
-	}
-
-	&--image-stacked {
-		@include scss.block-properties("hero-image-stacked");
-		@include scss.block-components("hero-image-stacked");
-	}
-
-	&--overlay {
-		place-self: center;
-		max-width: 24rem;
-
-		@include scss.block-properties("hero-text-overlay");
-		@include scss.block-components("hero-text-overlay");
-	}
-
 	&--stacked {
-		grid-area: info;
-		place-self: center;
-		max-width: 100%;
+		grid-template-areas:
+			"hero"
+			"info";
 
-		@include scss.block-properties("hero-text-stacked");
-		@include scss.block-components("hero-text-stacked");
-	}
-
-	&--left {
-		width: 100%;
-		@include scss.block-properties("hero-left");
-		@include scss.block-components("hero-left");
-	}
-
-	&--center {
-		@include scss.block-properties("hero-center");
-		@include scss.block-components("hero-center");
-	}
-
-	&--center > * {
-		text-align: center;
+		@include scss.block-properties("hero-stacked");
+		@include scss.block-components("hero-stacked");
 	}
 
 	&--light {
@@ -59,12 +23,51 @@
 		@include scss.block-components("hero-light");
 	}
 
-	&--subheadline {
+	&__image {
+		@include scss.block-properties("hero-image");
+		@include scss.block-components("hero-image");
+	}
+
+	&__image--stacked {
+		@include scss.block-properties("hero-image-stacked");
+		@include scss.block-components("hero-image-stacked");
+	}
+
+	&__text--overlay {
+		place-self: center;
+
+		@include scss.block-properties("hero-text-overlay");
+		@include scss.block-components("hero-text-overlay");
+	}
+
+	&__text--stacked {
+		grid-area: info;
+		place-self: center;
+
+		@include scss.block-properties("hero-text-stacked");
+		@include scss.block-components("hero-text-stacked");
+	}
+
+	&__text--left {
+		width: 100%;
+		@include scss.block-properties("hero-text-left");
+		@include scss.block-components("hero-text-left");
+	}
+
+	&__text--center {
+		> * {
+			text-align: center;
+		}
+		@include scss.block-properties("hero-text-center");
+		@include scss.block-components("hero-text-center");
+	}
+
+	&__subheadline {
 		@include scss.block-properties("hero-subheadline");
 		@include scss.block-components("hero-subheadline");
 	}
 
-	&--buttonrow {
+	&__buttonrow {
 		@include scss.block-properties("hero-buttonrow");
 		@include scss.block-components("hero-buttonrow");
 	}

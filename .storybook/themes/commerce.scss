@@ -224,9 +224,11 @@
 				),
 			),
 			blocks: (
+				hero-stacked: (
+					gap: var(--global-spacing-4),
+				),
 				hero: (
 					color: var(--global-neutral-10),
-					gap: var(--global-spacing-3),
 					components: (
 						button: (
 							text-decoration: none,
@@ -255,24 +257,17 @@
 					height: auto,
 					width: 100%,
 				),
-				hero-left: (
-					max-width: 90%,
+				hero-text-left: (
+					max-width: 100%,
 					justify-self: flex-start,
 					padding: 0 var(--global-spacing-3),
-				),
-				hero-text-overlay: (
-					max-width: 85%,
 				),
 				hero-text-stacked: (
 					max-width: 24rem,
 				),
 				hero-subheadline: (
 					font-size: var(--global-font-size-6),
-					line-height: var(--global-line-height-2),
 					font-weight: var(--global-font-weight-4),
-				),
-				hero-buttonrow: (
-					gap: var(--global-spacing-3),
 				),
 			),
 		),
@@ -281,11 +276,10 @@
 			components: (),
 			blocks: (
 				hero: (
-					gap: var(--global-spacing-4),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-11),
-							line-height: none,
+							line-height: inherit,
 						),
 						paragraph: (
 							font-size: var(--global-font-size-3),
@@ -299,24 +293,13 @@
 				),
 				hero-text-stacked: (
 					max-width: 65%,
-					gap: var(--global-spacing-4),
 				),
-				hero-left: (
+				hero-text-left: (
 					max-width: 65%,
-					justify-self: flex-start,
 					padding: 0 var(--global-spacing-3) 0 var(--global-spacing-15),
-				),
-				hero-text-overlay: (
-					max-width: 100%,
-				),
-				hero-image-stacked: (
-					height: auto,
-					width: 100%,
 				),
 				hero-subheadline: (
 					font-size: var(--global-font-size-8),
-					font-weight: var(--global-font-weight-4),
-					line-height: none,
 				),
 			),
 		),

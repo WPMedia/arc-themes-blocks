@@ -1,3 +1,3 @@
 # `@wpmedia/default-output-block`
 
-Fusion News Theme default output type.
+A default output type for Themes

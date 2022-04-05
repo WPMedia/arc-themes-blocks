@@ -59,9 +59,9 @@ function QuiltedImage({ customFields }) {
 									{overlay1Text}
 								</Paragraph>
 							) : null}
-							<Button variant={button1Variant} size="small" assistiveHidden>
+							{button1Text ? <Button variant={button1Variant} size="small" assistiveHidden>
 								{button1Text}
-							</Button>
+							</Button> : null}
 						</Stack>
 					</Link>
 					<Link href={item2Action || "#"} className={`${BLOCK_CLASS_NAME}--media-panel`}>

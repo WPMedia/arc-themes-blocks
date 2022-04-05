@@ -265,7 +265,6 @@
 				),
 				hero-text-stacked: (
 					max-width: 24rem,
-					gap: var(--global-spacing-3),
 				),
 				hero-subheadline: (
 					font-size: var(--global-font-size-6),
@@ -318,9 +317,6 @@
 					font-size: var(--global-font-size-8),
 					font-weight: var(--global-font-weight-4),
 					line-height: none,
-				),
-				hero-buttonrow: (
-					gap: var(--global-spacing-3),
 				),
 			),
 		),

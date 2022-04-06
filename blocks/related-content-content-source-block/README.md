@@ -1,11 +1,12 @@
 # `@wpmedia/related-content-content-source-block`
-_Content source block to get stories related content, using the story Id as key._ 
+
+_Content source block to get stories related content, using the story Id as key._
 
 ## Configurable Params
-| **Param** | **Type** | **Required** | **Description** |
-|---|---|---|---|
-| **_id** | String | true | Story ID go get related content from (ex: CMVOSB2VCRDIBPC356BF2AXBFI) |
 
+| **Param** | **Type** | **Required** | **Description**                                                       |
+| --------- | -------- | ------------ | --------------------------------------------------------------------- |
+| **\_id**  | String   | true         | Story ID go get related content from (ex: CMVOSB2VCRDIBPC356BF2AXBFI) |
 
 ## API Reference
 
@@ -229,4 +230,3 @@ const relatedContent = useContent({
   "_id": "CMVOSB2VCRDIBPC356BF2AXBFI"
 }
 ```
-

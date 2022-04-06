@@ -17,18 +17,14 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name
     steps:
-      - name: Set git username
-        run: git config --global user.email "jack.howard@washpost.com" && git config --global user.name "Jack Howard"
-
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.NODE_AUTH_TOKEN }}
-        
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       # pulls all tags (needed for lerna / semantic release to correctly version)
       - name: Pull tags to give lerna access to git info
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
@@ -50,16 +46,19 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run all tests
         run: npm run test
 
       - name: Publish to target tag based off of branch name
-        run: npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npx lerna publish --dist-tag ${{ env.SYNCED_RELEASE_TAG }} --canary --preid ${{ env.SYNCED_RELEASE_TAG }} -y
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-  
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   tag_canary_if_1x:
     runs-on: ubuntu-latest
     # has to run publish job first successfully
@@ -68,7 +67,6 @@ jobs:
     # contains('Hello', 'ello') -> returns true docs https://docs.github.com/en/actions/learn-github-actions/expressions#contains
     if: contains(github.ref_name, '-1.')
     env:
-      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       SYNCED_RELEASE_TAG: ${{ github.ref_name }} # targets branch name ref_name
     steps:
       - name: Checkout repo
@@ -77,12 +75,13 @@ jobs:
       - name: Setup Node and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: "12"
+          registry-url: "https://npm.pkg.github.com"
 
-      - name: Tag 1.x release with canary 
-        run: npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.SYNCED_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} canary) || exit 0'
+      - name: Tag 1.x release with canary
+        run: |
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR"
+          npx lerna exec --stream --no-bail --concurrency 1 -- 'PKG_VERSION=$(npm view ${LERNA_PACKAGE_NAME}@${{ env.SYNCED_RELEASE_TAG }} version); [ -n "$PKG_VERSION" ] && (npm dist-tag add ${LERNA_PACKAGE_NAME}@${PKG_VERSION} canary) || exit 0'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-
-        
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

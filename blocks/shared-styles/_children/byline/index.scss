@@ -1,42 +1,41 @@
 .ts-byline {
-  $self: &;
-  color: #191919;
-  font-size: 1.125rem;
-  line-height: 2rem;
+	$self: &;
+	color: #191919;
+	font-size: 1.125rem;
+	line-height: 2rem;
 
-  margin-bottom: 0;
+	margin-bottom: 0;
 
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    font-size: 1.25rem;
-    line-height: 2.5rem;
-  }
+	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		font-size: 1.25rem;
+		line-height: 2.5rem;
+	}
 
+	&--list {
+		display: inline;
+		font-size: 0.875rem;
+		line-height: 1rem;
 
-  &--list {
-    display: inline;
-    font-size: 0.875rem;
-    line-height: 1rem;
+		#{$self}__by {
+			color: #3b3b3b;
+			margin-right: 0;
+		}
 
-    #{$self}__by {
-      color: #3b3b3b;
-      margin-right: 0;
-    }
+		#{$self}__names {
+			color: #434343;
+		}
+	}
 
-    #{$self}__names {
-      color: #434343;
-    }
-  }
+	.dot-separator {
+		margin: 0 0.5em;
+	}
 
-  .dot-separator {
-    margin: 0 0.5em;
-  }
+	a {
+		color: $ui-primary-font-color;
+		text-decoration: none;
+	}
 
-  a {
-    color: $ui-primary-font-color;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
+	a:hover {
+		text-decoration: underline;
+	}
 }

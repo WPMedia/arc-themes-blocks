@@ -1,3 +1,3 @@
 export default {
-  useContent: jest.fn(),
+	useContent: jest.fn(),
 };

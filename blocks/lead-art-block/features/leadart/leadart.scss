@@ -1,55 +1,52 @@
 .lead-art-wrapper {
-  @include block-margin-bottom;
-  display: block;
-  height: auto;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  position: relative;
-  width: 100%;
+	@include block-margin-bottom;
+	display: block;
+	height: auto;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	position: relative;
+	width: 100%;
 
-  figcaption {
-    margin-top: map-get($spacers, 'xs');
+	figcaption {
+		margin-top: map-get($spacers, "xs");
 
-    p.image-metadata {
-      color: $image-caption-rule-color;
-      font-size: calculateRem(14px);
-      line-height: calculateRem(24px);
-      margin: 8px 0;
+		.image-metadata {
+			font-size: calculateRem(14px);
+			line-height: calculateRem(24px);
+			margin: 8px 0;
 
-      @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-        line-height: calculateRem(20px);
-      }
-    }
-  }
+			@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+				line-height: calculateRem(20px);
+			}
+		}
+	}
 
+	.btn-full-screen {
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		font-size: calculateRem(14px);
+		line-height: calculateRem(18px);
+		margin: map-get($spacers, "xs") 0;
+		padding-left: 0;
 
-  .btn-full-screen {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    font-size: calculateRem(14px);
-    line-height: calculateRem(18px);
-    margin: map-get($spacers, 'xs') 0;
-    padding-left: 0;
+		svg {
+			fill: $ui-medium-gray;
+			height: 1rem;
+			margin-right: 4px;
+			width: 1rem;
+		}
+	}
 
-    svg {
-      fill: $ui-medium-gray;
-      height: 1rem;
-      margin-right: 4px;
-      width: 1rem;
-    }
-  }
-
-  img,
-  div.innerContent {
-    border: 0;
-    display: block;
-    height: auto;
-    position: relative;
-    vertical-align: middle;
-    width: 100%;
-  }
-
+	img,
+	div.innerContent {
+		border: 0;
+		display: block;
+		height: auto;
+		position: relative;
+		vertical-align: middle;
+		width: 100%;
+	}
 }

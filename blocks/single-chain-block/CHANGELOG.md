@@ -5,190 +5,99 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/single-chain-block@5.15.0...@wpmedia/single-chain-block@5.16.0) (2021-09-15)
 
-
-
 ## 5.11.1-hotfix.0 (2021-04-23)
-
-
 
 ## 5.10.3-hotfix.0 (2021-04-12)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 # 5.15.0 (2021-08-18)
 
-
-
 ## 5.14.1 (2021-07-21)
 
-
-
 ## 5.11.1-hotfix.0 (2021-04-23)
-
-
 
 ## 5.10.3-hotfix.0 (2021-04-12)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 # [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 ## [5.13.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.1...v5.13.2) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 ## [5.13.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.13.0...v5.13.1) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 # [5.13.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.12.0...v5.13.0) (2021-06-17)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 # [5.12.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.12.0) (2021-05-19)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 ## [5.11.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.11.1) (2021-04-26)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 ## [5.10.3](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.3-hotfix.0...v5.10.3) (2021-04-13)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 ## [5.10.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.0...v5.10.2) (2021-03-30)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 ## [5.10.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.10.0...v5.10.1) (2021-03-30)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 ## [5.9.2](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.1...v5.9.2) (2021-01-14)
-
 
 ### Bug Fixes
 
-* Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
-
+- Add missing npmignores ([48b1db5](https://github.com/WPMedia/fusion-news-theme-blocks/commit/48b1db52de6d88f573b591748570bb83e94a9f34))
 
 ### Performance Improvements
 
-* Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
-
-
-
-
+- Remove chains' test files, especially header nav ([fa07cdd](https://github.com/WPMedia/fusion-news-theme-blocks/commit/fa07cddcf54a302aae3fbc58624c1571a56d6ab4))
 
 ## [5.9.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0...v5.9.1) (2020-12-16)
 
-
 ### Performance Improvements
 
-* Use peer dependencies especially for content sources that've changed ([8ecf0bf](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8ecf0bfae486eba3334baf93cf54846deb12dd5d))
-
-
+- Use peer dependencies especially for content sources that've changed ([8ecf0bf](https://github.com/WPMedia/fusion-news-theme-blocks/commit/8ecf0bfae486eba3334baf93cf54846deb12dd5d))
 
 # [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
-
-
-
-
 
 # [5.9.0-canary.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.9.0-beta.0...v5.9.0-canary.0) (2020-10-14)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 # [5.6.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.6.0-beta.0...v5.6.0) (2020-09-09)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 ## [5.5.1](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.5.1-beta.0...v5.5.1) (2020-08-26)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 # [5.4.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.4.0-beta.0...v5.4.0) (2020-08-10)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 # [5.3.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.3.0-beta.0...v5.3.0) (2020-07-23)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
 
-
-
-
-
 # [5.2.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.2.0-beta.0...v5.2.0) (2020-07-09)
 
 **Note:** Version bump only for package @wpmedia/single-chain-block
-
-
-
-
 
 ## [5.0.11](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.0.11-beta.0...v5.0.11) (2020-06-15)
 

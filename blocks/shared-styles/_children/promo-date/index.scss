@@ -1,11 +1,11 @@
 .promo-date {
-  color: $ui-medium-gray;
+	color: $ui-medium-gray;
 
-  font-size: calculateRem(14px);
-  line-height: calculateRem(14px);
+	font-size: calculateRem(14px);
+	line-height: calculateRem(14px);
 
-  @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-    font-size: calculateRem(14px);
-    line-height: calculateRem(16px);
-  }
+	@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+		font-size: calculateRem(14px);
+		line-height: calculateRem(16px);
+	}
 }

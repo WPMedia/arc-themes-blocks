@@ -1,44 +1,23 @@
 # @wpmedia/hero-block
 
-_Please provide a 1-2 sentence description of what the @wpmedia/hero-block is and what it does._
-
-## Props
-
-| **Prop**          | **Required** | **Type** | **Descripton** |
-| ----------------- | ------------ | -------- | -------------- |
-| **required prop** | yes          |          |                |
-| **optional prop** | no           |          |                |
+The @wpmedia/hero-block provides a large background visual that is used behind a minimal textual and call-to-action
+context to give a strong emotional and aesthetic feel to the whole page/content. The textual context includes a
+headline, sub-headline and paragraph. The call-to-action context provides actions for the user to take.
+The image selected should hold the whole emotional and aesthetic feel concept together, while the textual and call-to-action
+contexts should provide the clarity to the message that is being conveyed.
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+- No ANS schema is used in this block
 
 ### ANS Fields
 
-- `Add all ANS fields used in the block`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
+- No ANS fields are used in this block
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+- @wpmedia/hero-block currently emits no events.
 
 ### Event Listening
 
-Include block specific intructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+- @wpmedia/hero-block currently does not emit any events.

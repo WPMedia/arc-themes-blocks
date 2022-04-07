@@ -190,36 +190,12 @@ describe("Hero", () => {
 		expect(container.querySelectorAll(".b-hero--light")).toHaveLength(1);
 	});
 
-	it("should set correct media break point", () => {
-		const { container } = render(
-			<Hero
-				customFields={{
-					alignment: "left",
-					imageURL: "image",
-					desktopMediaBreakpoint: "min-width: 800px",
-					headline: "My Headline",
-					subHeadline: "My Sub Headline",
-					description: "My description",
-					link1Action: "#",
-					link1Text: "For Him",
-					link1Type: "secondary",
-					link2Action: "#",
-					link2Text: "For Her",
-					link2Type: "secondary",
-					variant: "light",
-				}}
-			/>
-		);
-		expect(container.querySelector("source").getAttribute("media")).toBe("(min-width: 800px)");
-	});
-
 	it("should set correct alt text for the image", () => {
 		const { container } = render(
 			<Hero
 				customFields={{
 					alignment: "left",
 					imageURL: "image",
-					desktopMediaBreakpoint: "min-width: 800px",
 					imageAltText: "¿Dónde está la biblioteca?",
 					headline: "My Headline",
 					subHeadline: "My Sub Headline",

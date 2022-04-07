@@ -7,6 +7,8 @@ import { Button, Heading, HeadingSection, Paragraph, Stack } from "@wpmedia/arc-
 
 const BLOCK_CLASS_NAME = "b-hero";
 
+const DESKTOP_PHOTO_BREAKPOINT = "(min-width: 700px)";
+
 function Hero({ customFields }) {
 	const {
 		layout = "overlay",
@@ -15,7 +17,6 @@ function Hero({ customFields }) {
 		headline,
 		imageURLDesktop,
 		imageURLMobile,
-		desktopMediaBreakpoint,
 		imageAltText,
 		link1Action,
 		link1Text,
@@ -38,7 +39,7 @@ function Hero({ customFields }) {
 	return (
 		<div className={classes}>
 			<picture>
-				<source srcSet={imageURLDesktop} media={`(${desktopMediaBreakpoint})`} />
+				<source srcSet={imageURLDesktop} media={DESKTOP_PHOTO_BREAKPOINT} />
 				<img
 					className={
 						layout === "stacked"
@@ -98,12 +99,14 @@ Hero.propTypes = {
 	customFields: PropTypes.shape({
 		layout: PropTypes.oneOf(["overlay", "stacked"]).tag({
 			defaultValue: "overlay",
-			label:
-				"Layout configuration. Overlay is text on top of the image and stacked is the text under the image.",
+			description: "Overlay is text on top of the image and stacked is the text under the image.",
+			label: "Layout configuration",
 		}),
 		alignment: PropTypes.oneOf(["center", "left"]).tag({
 			defaultValue: "center",
-			label: "Content Alignment over the image. Applies to overlay layout only. ",
+			description:
+				"How the content should be aligned over the image. Applies to overlay layout only.",
+			label: "Content Alignment",
 		}),
 		variant: PropTypes.oneOf(["dark", "light"]).tag({
 			defaultValue: "dark",
@@ -111,25 +114,18 @@ Hero.propTypes = {
 		}),
 		imageURLDesktop: PropTypes.string.tag({
 			label: "Image URL for Desktop",
+			description: "Select an image appropriate for desktop sized screens.",
 			searchable: "image",
-		}),
-		desktopMediaBreakpoint: PropTypes.oneOf([
-			"min-width: 800px",
-			"min-width: 700px",
-			"min-width: 600px",
-			"min-width: 500px",
-		]).tag({
-			defaultValue: "min-width: 800px",
-			label:
-				"Image Breakpoint: Enter the media query that will determine when the desktop picture is shown over the mobile version.",
 		}),
 		imageURLMobile: PropTypes.string.tag({
 			label: "Image URL for Mobile",
+			description: "Select an image appropriate for mobile sized screens.",
 			searchable: "image",
 		}),
 		imageAltText: PropTypes.string.tag({
 			defaultValue: "",
-			label: "Alt text for both the mobile and desktop image",
+			description: "The alt text that will be applied for both the mobile and desktop image.",
+			label: "Image alt text",
 		}),
 		headline: PropTypes.string,
 		subHeadline: PropTypes.string,

@@ -250,8 +250,8 @@
 					color: var(--global-white),
 				),
 				hero-image: (
-					height: 65vh,
-					width: fit-content,
+					max-height: 65vh,
+					width: 100%,
 				),
 				hero-image-stacked: (
 					height: auto,
@@ -288,7 +288,7 @@
 					),
 				),
 				hero-image: (
-					height: auto,
+					max-height: auto,
 					width: 100%,
 				),
 				hero-text-stacked: (

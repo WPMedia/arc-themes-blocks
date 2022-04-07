@@ -55,26 +55,26 @@ describe("Quilted Image", () => {
 		expect(screen.queryByText("Quilted Image Block Headline")).not.toBeInTheDocument();
 	});
 
-	it("should render 'b-quilted-image--wrapper--top' className on the first link when 'top' is selected for 'fullWidthImage' custom field value.", () => {
+	it("should render 'b-quilted-image__wrapper-top' className on the first link when 'top' is selected for 'fullWidthImage' custom field value.", () => {
 		const { container } = render(
 			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "top" }} />
 		);
 		const firstLinkElement = container.querySelectorAll("a")[0];
 		expect(firstLinkElement.getAttribute("class")).toBe(
-			"c-link b-quilted-image--media-panel  b-quilted-image--wrapper--top"
+			"c-link b-quilted-image__media-panel  b-quilted-image__wrapper-top"
 		);
 		const thirdLinkElement = container.querySelectorAll("a")[2];
-		expect(thirdLinkElement.getAttribute("class")).toBe("c-link b-quilted-image--media-panel ");
+		expect(thirdLinkElement.getAttribute("class")).toBe("c-link b-quilted-image__media-panel ");
 	});
-	it("should render 'b-quilted-image--wrapper--bottom' className for third link when 'bottom' is selected for 'fullWidthImage' custom field value.", () => {
+	it("should render 'b-quilted-image__wrapper-bottom' className for third link when 'bottom' is selected for 'fullWidthImage' custom field value.", () => {
 		const { container } = render(
 			<QuiltedImage customFields={{ ...FILLED_IN_CUSTOM_FIELDS, fullWidthImage: "bottom" }} />
 		);
 		const linkElement1 = container.querySelectorAll("a")[0];
-		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image--media-panel  ");
+		expect(linkElement1.getAttribute("class")).toBe("c-link b-quilted-image__media-panel  ");
 		const linkElement3 = container.querySelectorAll("a")[2];
 		expect(linkElement3.getAttribute("class")).toBe(
-			"c-link b-quilted-image--media-panel b-quilted-image--wrapper--bottom"
+			"c-link b-quilted-image__media-panel b-quilted-image__wrapper-bottom"
 		);
 	});
 
@@ -82,7 +82,7 @@ describe("Quilted Image", () => {
 		NOTE : This test was written to overcome an unanticipated issue and should not be needed.
            The "Overlay Action" custom fields all have a default value of "". 
 	*/
-	it("should give links with className 'b-quilted-image--media-panel' an href value of '#' 'Overlay Action' custom fields are empty strings.", () => {
+	it("should give links with className 'b-quilted-image__media-panel' an href value of '#' 'Overlay Action' custom fields are empty strings.", () => {
 		const { container } = render(
 			<QuiltedImage
 				customFields={{
@@ -95,7 +95,7 @@ describe("Quilted Image", () => {
 		);
 
 		for (let i = 0; i < 3; i += 1) {
-			const linkElement = container.querySelectorAll("a.b-quilted-image--media-panel")[i];
+			const linkElement = container.querySelectorAll("a.b-quilted-image__media-panel")[i];
 			expect(linkElement.getAttribute("href")).toBe("#");
 		}
 	});

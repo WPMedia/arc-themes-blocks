@@ -5,49 +5,58 @@
 	@include scss.block-components("quilted-image");
 }
 
-.b-quilted-image--wrapper {
+.b-quilted-image__wrapper {
 	display: grid;
 
-	.b-quilted-image--wrapper--bottom {
+	@include scss.block-properties("quilted-image__wrapper");
+	@include scss.block-components("quilted-image__wrapper");
+
+	.b-quilted-image__wrapper-bottom {
 		grid-area: bottom;
 
 		img {
 			width: 100%;
 		}
+
+		@include scss.block-properties("quilted-image__wrapper-bottom");
+		@include scss.block-components("quilted-image__wrapper-bottom");
 	}
 
-	.b-quilted-image--wrapper--top {
+	.b-quilted-image__wrapper-top {
 		grid-area: top;
 
 		img {
 			width: 100%;
 		}
+		@include scss.block-properties("quilted-image__wrapper-top");
+		@include scss.block-components("quilted-image__wrapper-top");
 	}
 
-	@include scss.block-properties("quilted-image--wrapper");
-	@include scss.block-components("quilted-image--wrapper");
+	@include scss.block-properties("quilted-image__wrapper");
+	@include scss.block-components("quilted-image__wrapper");
 }
 
-.b-quilted-image--overlay-text-light {
-	@include scss.block-properties("quilted-image--overlay-text-light");
-	@include scss.block-components("quilted-image--overlay-text-light");
+.b-quilted-image__overlay-text--light {
+	@include scss.block-properties("quilted-image__overlay-text--light");
+	@include scss.block-components("quilted-image__overlay-text--light");
 }
 
-.b-quilted-image--overlay-text-dark {
-	@include scss.block-properties("quilted-image--overlay-text-dark");
-	@include scss.block-components("quilted-image--overlay-text-dark");
+.b-quilted-image__overlay-text--dark {
+	@include scss.block-properties("quilted-image__overlay-text--dark");
+	@include scss.block-components("quilted-image__overlay-text--dark");
 }
 
-.b-quilted-image--media-panel {
+.b-quilted-image__media-panel {
 	position: relative;
-	@include scss.block-properties("quilted-image--media-panel");
-	@include scss.block-components("quilted-image--media-panel");
+	@include scss.block-properties("quilted-image__media-panel");
+	@include scss.block-components("quilted-image__media-panel");
 }
 
-.b-quilted-image--overlay {
+.b-quilted-image__overlay {
+	gap: 1rem;
 	position: absolute;
 	left: 2rem;
 	bottom: 2rem;
-	@include scss.block-properties("quilted-image--overlay");
-	@include scss.block-components("quilted-image--overlay");
+	@include scss.block-properties("quilted-image__overlay");
+	@include scss.block-components("quilted-image__overlay");
 }

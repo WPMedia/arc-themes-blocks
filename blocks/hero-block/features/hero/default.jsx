@@ -111,6 +111,7 @@ Hero.propTypes = {
 		variant: PropTypes.oneOf(["dark", "light"]).tag({
 			defaultValue: "dark",
 			label: "Content Style",
+			description: "Select a light or dark theme for the content area.",
 		}),
 		imageURLDesktop: PropTypes.string.tag({
 			label: "Image URL for Desktop",
@@ -127,34 +128,53 @@ Hero.propTypes = {
 			description: "The alt text that will be applied for both the mobile and desktop image.",
 			label: "Image alt text",
 		}),
-		headline: PropTypes.string,
-		subHeadline: PropTypes.string,
-		description: PropTypes.string,
+		headline: PropTypes.string.tag({
+			label: "Headline Text",
+			description: "The headline for the text area of the hero block.",
+			required: true,
+		}),
+		subHeadline: PropTypes.string.tag({
+			label: "Sub-Headline Text",
+			description: "The sub-headline for the text area of the hero block.",
+		}),
+		description: PropTypes.string.tag({
+			label: "Description Text",
+			description: "The description for the text area of the hero block.",
+		}),
 		link1Action: PropTypes.string.tag({
 			group: "Button 1",
-			label: "Button Link href",
+			label: "Button #1 Link Url",
+			description: "The url this button links to.",
+			required: true,
 		}),
 		link1Text: PropTypes.string.tag({
 			group: "Button 1",
-			label: "Button Link Text",
+			label: "Button #1 Text",
+			description: "The text displayed on the button.",
+			required: true,
 		}),
 		link1Type: PropTypes.oneOf(["primary", "secondary"]).tag({
 			group: "Button 1",
 			defaultValue: "secondary",
-			label: "Type of link Button",
+			label: "Button #1 Type",
+			required: true,
+			description: "Select a style for this button.",
 		}),
 		link2Action: PropTypes.string.tag({
 			group: "Button 2",
-			label: "Button Link href",
+			label: "Button #2 Link Url",
+			description: "The url this button links to.",
 		}),
 		link2Text: PropTypes.string.tag({
 			group: "Button 2",
-			label: "Button Link Text",
+			label: "Button #2 Text",
+			description: "The text displayed on the button.",
 		}),
 		link2Type: PropTypes.oneOf(["primary", "secondary"]).tag({
 			group: "Button 2",
 			defaultValue: "secondary",
-			label: "Type of link Button",
+			label: "Button #2 Type",
+			description: "Select a style for this button.",
 		}),
 	}),
 };

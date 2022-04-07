@@ -23,6 +23,11 @@
 		@include scss.block-components("hero-light");
 	}
 
+	&--dark {
+		@include scss.block-properties("hero-dark");
+		@include scss.block-components("hero-dark");
+	}
+
 	&__image {
 		@include scss.block-properties("hero-image");
 		@include scss.block-components("hero-image");

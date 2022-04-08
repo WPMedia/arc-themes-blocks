@@ -234,6 +234,59 @@
 				),
 			),
 			blocks: (
+				hero-stacked: (
+					gap: var(--global-spacing-4),
+				),
+				hero: (
+					color: var(--global-neutral-10),
+					components: (
+						button: (
+							text-decoration: none,
+						),
+						stack: (
+							gap: var(--global-spacing-3),
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-7),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+					),
+				),
+				hero-light: (
+					color: var(--global-white),
+				),
+				hero-dark: (
+					color: var(--global-neutral-10),
+				),
+				hero-image: (
+					max-height: 65vh,
+					width: 100%,
+				),
+				hero-image-stacked: (
+					height: auto,
+					width: 100%,
+				),
+				hero-text-left: (
+					max-width: 100%,
+					justify-self: flex-start,
+					padding: 0 var(--global-spacing-3),
+				),
+				hero-text-stacked: (
+					max-width: 24rem,
+				),
+				hero-subheadline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
 				quilted-image: (
 					components: (
 						heading: (
@@ -282,6 +335,37 @@
 			alias: (),
 			components: (),
 			blocks: (
+				hero: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-14),
+							line-height: var(--global-line-height-10),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				hero-image: (
+					max-height: auto,
+					width: 100%,
+				),
+				hero-text-stacked: (
+					max-width: 65%,
+				),
+				hero-text-left: (
+					max-width: 65%,
+					padding: 0 var(--global-spacing-3) 0 var(--global-spacing-15),
+				),
+				hero-subheadline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-6),
+						),
+					),
+				),
 				quilted-image: (
 					components: (
 						heading: (
@@ -312,3 +396,4 @@
 );
 
 @use "@wpmedia/quilted-image-block";
+@use "@wpmedia/hero-block";

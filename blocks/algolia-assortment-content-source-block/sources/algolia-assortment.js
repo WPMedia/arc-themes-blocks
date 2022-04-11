@@ -2,16 +2,22 @@ import algoliasearch from "algoliasearch/lite";
 import { algoliaSearchKey, algoliaAppId } from "fusion:environment";
 
 const params = {
-	input: "text",
+	filters: "text",
+	index: "text",
+	query: "text",
+	ruleContexts: "text",
 };
 
-const fetch = async (key = {}) => {
+const fetch = async ({ filters, index, query, ruleContexts }) => {
 	const client = algoliasearch(algoliaAppId, algoliaSearchKey);
-	const index = client.initIndex("instant_search");
+
+	const clientSearchIndex = client.initIndex(index);
 	try {
-		const { hits } = await index.search(key.query, {
-			ruleContext: key.ruleContext,
-			filters: key.filter,
+		const { hits } = await clientSearchIndex.search(query, {
+			// array of strings
+			// https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/
+			ruleContexts: [ruleContexts],
+			filters,
 		});
 		return hits;
 	} catch (err) {

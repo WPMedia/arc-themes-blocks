@@ -179,7 +179,8 @@
     "@wpmedia/triple-chain-block": "file:blocks/triple-chain-block",
     "@wpmedia/unpublished-content-source-block": "file:blocks/unpublished-content-source-block",
     "@wpmedia/video-player-block": "file:blocks/video-player-block",
-    "@wpmedia/video-promo-block": "file:blocks/video-promo-block"
+    "@wpmedia/video-promo-block": "file:blocks/video-promo-block",
+    "algoliasearch": "^4.13.0"
   },
   "browserslist": [
     "defaults",

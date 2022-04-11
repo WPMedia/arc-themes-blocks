@@ -16,5 +16,8 @@
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/algolia-assortment-content-source-block"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.13.0"
   }
 }

@@ -35,8 +35,17 @@
 			}
 		],
 		"media-feature-name-no-unknown": [
+			true,
 			{
 				"ignoreMediaFeatureNames": ["max-width"]
+			}
+		],
+		"order/order": [
+			"declarations",
+			"rules",
+			{
+				"type": "at-rule",
+				"name": "include"
 			}
 		]
 	}

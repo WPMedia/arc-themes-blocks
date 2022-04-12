@@ -10,7 +10,17 @@ const params = {
 	page: "number",
 };
 
-const fetch = async ({ filters, hitsPerPage, index, page, query, ruleContexts }) => {
+const fetch = async (contentSourceParameters) => {
+	const { filters, index, query, ruleContexts } = contentSourceParameters;
+	let { hitsPerPage, page } = contentSourceParameters;
+
+	// parameters in content source are defined as null by default
+	if (hitsPerPage === null) {
+		hitsPerPage = 20;
+	}
+	if (page === null) {
+		page = 0;
+	}
 	const client = algoliasearch(algoliaAppId, algoliaSearchKey);
 
 	const clientSearchIndex = client.initIndex(index);

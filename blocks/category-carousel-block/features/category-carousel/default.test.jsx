@@ -31,7 +31,7 @@ describe("Category Carousel", () => {
 		unmount();
 	});
 
-	it("should render th optional header", () => {
+	it("should render the optional header", () => {
 		const { unmount } = render(
 			<CategoryCarousel
 				customFields={{
@@ -58,6 +58,40 @@ describe("Category Carousel", () => {
 	it("should render nothing for less than 4 items", () => {
 		const { unmount } = render(<CategoryCarousel customFields={{ headerText: "Heading Text" }} />);
 		expect(screen.queryByText("Heading Text")).not.toBeInTheDocument();
+		unmount();
+	});
+
+	it("should not render incomplete items", () => {
+		const { unmount } = render(
+			<CategoryCarousel
+				customFields={{
+					imageUrl_0: "#",
+					label_0: "Test 1",
+					linkUrl_0: "#",
+					imageUrl_1: "#",
+					label_1: "Test 2",
+					linkUrl_1: "#",
+					imageUrl_2: "#",
+					label_2: "Test 3",
+					linkUrl_2: "#",
+					imageUrl_3: "#",
+					label_3: "Test 4",
+					linkUrl_3: "#",
+					label_4: "Incomplete 1",
+					linkUrl_4: "#",
+					imageUrl_5: "#",
+					label_5: "Incomplete 2",
+					imageUrl_6: "#",
+					label_6: "ummm",
+					linkUrl_6: "/incomplete/3",
+				}}
+			/>
+		);
+		expect(screen.queryByText("Test 1")).toBeInTheDocument();
+		expect(screen.queryByText("Test 2")).toBeInTheDocument();
+		expect(screen.queryByText("Test 3")).toBeInTheDocument();
+		expect(screen.queryByText("Test 4")).toBeInTheDocument();
+		expect(screen.queryAllByRole("group").length).toBe(4);
 		unmount();
 	});
 

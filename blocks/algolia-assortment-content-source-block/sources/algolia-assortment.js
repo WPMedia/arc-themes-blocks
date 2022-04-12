@@ -6,9 +6,11 @@ const params = {
 	index: "text",
 	query: "text",
 	ruleContexts: "text",
+	hitsPerPage: "number",
+	page: "number",
 };
 
-const fetch = async ({ filters, index, query, ruleContexts }) => {
+const fetch = async ({ filters, hitsPerPage, index, page, query, ruleContexts }) => {
 	const client = algoliasearch(algoliaAppId, algoliaSearchKey);
 
 	const clientSearchIndex = client.initIndex(index);
@@ -18,6 +20,8 @@ const fetch = async ({ filters, index, query, ruleContexts }) => {
 			// https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/
 			ruleContexts: [ruleContexts],
 			filters,
+			hitsPerPage,
+			page,
 		});
 		return hits;
 	} catch (err) {

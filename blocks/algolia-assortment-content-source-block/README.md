@@ -1,10 +1,10 @@
 # @wpmedia/algolia-assortment-content-source-block
 
-The Algolia assortment content source block allows you to display products from an Algolia index.
+The Algolia assortment content source block allows you to display products from an Algolia index. See Algolia docs for more content info: https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/#algolia-records
 
 ## ANS Schema
 
-See algolia for more content info: https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/#algolia-records
+not applicable
 
 ## Configurable Params
 

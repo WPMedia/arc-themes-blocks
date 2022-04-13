@@ -17,6 +17,10 @@ not applicable
     page: "number", // default 0
 ```
 
+For more information on filters syntax, see: https://www.algolia.com/doc/api-reference/api-parameters/filters/
+
+For more information on rule contexts syntax, see: https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/
+
 ## TTL
 
 - `120`

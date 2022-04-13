@@ -67,6 +67,7 @@
     "@wpmedia/arc-themes-components": "arc-themes-release-version-2.00",
     "@wpmedia/engine-theme-sdk": "canary",
     "@wpmedia/news-theme-css": "stable",
+    "algoliasearch": "^4.13.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^26.2.0",
     "babel-loader": "^8.2.4",

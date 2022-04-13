@@ -1,0 +1,23 @@
+{
+  "name": "@wpmedia/algolia-assortment-content-source-block",
+  "version": "0.1.0",
+  "description": "Algolia Assortment Content Source Block",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "sources"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+    "directory": "blocks/algolia-assortment-content-source-block"
+  },
+  "dependencies": {
+    "algoliasearch": "^4.13.0"
+  }
+}

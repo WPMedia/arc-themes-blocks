@@ -4,7 +4,6 @@ import PropTypes from "@arc-fusion/prop-types";
 import { Carousel, Heading, Icon } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
-
 const MIN_SLIDES = 4;
 const MAX_SLIDES = 12;
 

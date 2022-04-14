@@ -1,0 +1,11 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-story-carousel {
+	@include scss.block-properties("story-carousel");
+	@include scss.block-components("story-carousel");
+}
+
+.b-story-carousel__story-card {
+	@include scss.block-properties("story-carousel__story-card");
+	@include scss.block-components("story-carousel__story-card");
+}

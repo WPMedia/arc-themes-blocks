@@ -5,7 +5,57 @@
 	@include scss.block-components("story-carousel");
 }
 
+.b-story-carousel__story-card-5-plus {
+	// Can't do this!  Needs to be in the theme
+	.c-carousel__slide {
+		flex: 0 0 calc(85% - 2rem);
+
+		@media (min-width: 48rem) {
+			flex: 0 0 calc(23% - 2rem);
+		}
+
+		// How can we set the above in the theme??  This has to be configured. Needs to be reverted for mobile
+		//
+		//@include scss.block-properties("story-carousel__story-card-4-plus");
+		//@include scss.block-components("story-carousel__story-card-5-plus");
+	}
+}
+
+.b-story-carousel__story-card-4-less {
+	.c-carousel__actions {
+		visibility: hidden;
+
+		// How can we set the above in the theme??
+		//
+		//@include scss.block-properties("story-carousel__story-card-4-less");
+		//@include scss.block-components("story-carousel__story-card-4-less");
+	}
+}
+
 .b-story-carousel__story-card {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+
+	img {
+		width: 100%;
+	}
+
 	@include scss.block-properties("story-carousel__story-card");
 	@include scss.block-components("story-carousel__story-card");
+}
+
+.b-story-carousel__story-card-header {
+	--story-card-header-truncation: "none";
+
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-moz-box-oriented: vertical;
+	/* opera */
+	text-overflow: -o-ellipsis-lastline;
+
+	@include scss.component-properties("story-carousel__story-card-header");
+
+	-webkit-line-clamp: var(--story-card-header-truncation);
 }

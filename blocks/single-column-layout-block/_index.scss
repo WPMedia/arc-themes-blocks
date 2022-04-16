@@ -6,6 +6,7 @@
 
 .b-single-column-regular {
 	max-width: 90rem; // 1440px
+	width: 100%;
 	margin: auto;
 	@include scss.block-properties("single-column-regular");
 }

@@ -4,7 +4,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/source
 ---
 import contentSource from './<%= h.inflection.dasherize(block_name) %>';
 
-describe('Test <%= h.changeCase.title(content_source_name) %> content source', () => {
+describe('Test <%= h.changeCase.title(block_name) %> content source', () => {
   it('should build the correct url', () => {
     const key = {
       'arc-site': 'arc-site',

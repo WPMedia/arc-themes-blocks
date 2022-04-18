@@ -52,7 +52,7 @@ function CategoryCarousel({ customFields }) {
 		.filter((fields) => fields.imageUrl && fields.label && fields.linkUrl);
 
 	return validCategoryData.length >= MIN_SLIDES ? (
-		<div className={`${BLOCK_CLASS_NAME}`}>
+		<div className={BLOCK_CLASS_NAME}>
 			{headerText ? <Heading>{headerText}</Heading> : null}
 			<Carousel
 				id="category-carousel"

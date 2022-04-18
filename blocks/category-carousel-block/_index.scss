@@ -2,4 +2,5 @@
 
 .b-category-carousel {
 	@include scss.block-properties("category-carousel");
+	@include scss.block-components("category-carousel");
 }

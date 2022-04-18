@@ -1,11 +1,14 @@
 import React from "react";
-import PropTypes from "@arc-fusion/prop-types";
+import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Heading, Icon } from "@wpmedia/arc-themes-components";
+import PropTypes from "@arc-fusion/prop-types";
+import { Carousel, Heading, Icon, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
 const MIN_SLIDES = 4;
-const MAX_SLIDES = 12;
+const MAX_SLIDES = 15;
 
 const customFieldGroups = Array(MAX_SLIDES)
 	.fill(MIN_SLIDES)
@@ -36,6 +39,10 @@ const mergeObjectArray = (accumulator, item) => ({ ...accumulator, ...item });
 function CategoryCarousel({ customFields }) {
 	const { headerText } = customFields;
 
+	const { arcSite } = useFusionContext();
+	const { locale = "en" } = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale);
+
 	const validCategoryData = customFieldGroups
 		.map((fieldDefinition) =>
 			Object.keys(fieldDefinition)
@@ -49,19 +56,30 @@ function CategoryCarousel({ customFields }) {
 			{headerText ? <Heading>{headerText}</Heading> : null}
 			<Carousel
 				id="category-carousel"
-				label="Categories"
+				label={phrases.t("category-carousel.aria-label")}
 				slidesToShow={MIN_SLIDES}
-				nextButton={<Icon name="ArrowRight">Next</Icon>}
-				previousButton={<Icon name="ArrowLeft">Previous</Icon>}
+				nextButton={
+					<Carousel.Button>
+						<Icon name="ArrowRight">{phrases.t("category-carousel.right-arrow-label")}</Icon>
+					</Carousel.Button>
+				}
+				previousButton={
+					<Carousel.Button>
+						<Icon name="ArrowLeft">{phrases.t("category-carousel.left-arrow-label")}</Icon>
+					</Carousel.Button>
+				}
 			>
 				{validCategoryData.map(({ imageUrl, label, linkUrl }, index, allItems) => (
 					<Carousel.Item
-						label={`Slide ${index + 1} of ${allItems.length}`}
+						label={`${phrases.t("category-carousel.slide-indicator", {
+							current: index + 1,
+							maximum: allItems.length,
+						})}`}
 						key={`${imageUrl}_${label}_${linkUrl}`}
 					>
 						<a href={linkUrl}>
-							<img src={imageUrl} alt="" />
-							{label}
+							<Image src={imageUrl} alt="" />
+							<span>{label}</span>
 						</a>
 					</Carousel.Item>
 				))}

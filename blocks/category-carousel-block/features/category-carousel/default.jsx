@@ -8,7 +8,7 @@ import { Carousel, Heading, Icon, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
 const MIN_SLIDES = 4;
-const MAX_SLIDES = 15;
+const MAX_SLIDES = 12;
 
 const customFieldGroups = Array(MAX_SLIDES)
 	.fill(MIN_SLIDES)

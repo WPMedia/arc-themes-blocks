@@ -141,6 +141,7 @@ describe("Category Carousel", () => {
 				}}
 			/>
 		);
+
 		expect(screen.queryByText("Test 1")).toBeInTheDocument();
 		expect(screen.queryByText("Test 2")).toBeInTheDocument();
 		expect(screen.queryByText("Test 3")).toBeInTheDocument();

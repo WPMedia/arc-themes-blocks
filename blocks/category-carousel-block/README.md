@@ -1,44 +1,45 @@
 # @wpmedia/category-carousel-block
 
-_Please provide a 1-2 sentence description of what the @wpmedia/category-carousel-block is and what it does._
+A user configurable carousel block with a minumum of 4 and a maximum of 12 slides.
 
 ## Props
 
-| **Prop**          | **Required** | **Type** | **Descripton** |
-| ----------------- | ------------ | -------- | -------------- |
-| **required prop** | yes          |          |                |
-| **optional prop** | no           |          |                |
+| **Prop**     | **Required** | **Type**        | **Descripton**            |
+| ------------ | ------------ | --------------- | ------------------------- |
+| customFields | yes          | PropTypes.shape | Pagebuilder Custom Fields |
+
+### customFields
+
+| **Prop**         | **Required** | **Type**         | **Descripton**        |
+| ---------------- | ------------ | ---------------- | --------------------- |
+| headerText       | no           | PropTypes.string | Carsousel Header text |
+| imageUrl\_[0-11] | yes\*        | PropTypes.string | Slide image url.      |
+| label\_[0-11]    | yes\*        | PropTypes.string | Slide label.          |
+| linkUrl\_[0-11]  | yes\*        | PropTypes.string | Slide link url.       |
+
+- First four are required. Each slide index must include all three to be considered valid.
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+N/A
 
 ### ANS Fields
 
-- `Add all ANS fields used in the block`
+N/A
 
 ## Internationalization fields
 
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
+| Phrase key                            | Default (English)                |
+| ------------------------------------- | -------------------------------- |
+| `category-carousel.aria-label`        | `Categories`                     |
+| `category-carousel.right-arrow-label` | `Next`                           |
+| `category-carousel.left-arrow-label`  | `Previous`                       |
+| `category-carousel.slide-indicator`   | `Slide %{current} of %{maximum}` |
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+N/A
 
 ### Event Listening
 
-Include block specific intructions for event listening.
-
-OR
-
 This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._

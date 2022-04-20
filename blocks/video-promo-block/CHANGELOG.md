@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/video-promo-block@5.16.0...@wpmedia/video-promo-block@5.17.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Remove use of latest in peer deps ([d6c94d0](https://github.com/WPMedia/arc-themes-blocks/commit/d6c94d0776ee5a6ea2978f54d438e449c8b3107c))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/video-promo-block@5.15.0...@wpmedia/video-promo-block@5.16.0) (2021-10-20)
 
 ### Bug Fixes

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/masthead-block@5.15.0...@wpmedia/masthead-block@5.16.0) (2022-04-20)
+
+
+### Features
+
+* Rename component for clarity and linting ([5d85d25](https://github.com/WPMedia/arc-themes-blocks/commit/5d85d255300e67759b4378bec4a18f1f1f07dd09))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+### Features
+
+* Use primary font for nested p tags. Remove styled component param primary font ([1dc15a8](https://github.com/WPMedia/arc-themes-blocks/commit/1dc15a8f7f32ea3d9c0647d1065af9f31c237c6d))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # 5.15.0 (2021-09-15)
 
 ### Features

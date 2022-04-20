@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.20.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/results-list-block@5.19.0...@wpmedia/results-list-block@5.20.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Use primary and secondary font rather than remaking styled components ([e4204fd](https://github.com/WPMedia/arc-themes-blocks/commit/e4204fd1a79a5aba4adefbecbd6fe4e38b7c32a7))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+## 5.9.4 (2021-01-14)
+
+
+### Performance Improvements
+
+* Ignore test files in features folder ([b2a344f](https://github.com/WPMedia/arc-themes-blocks/commit/b2a344f96d92b63d25658ab70ec9ec63633fcf6f))
+* Remove mock feature files ([bdd5a3b](https://github.com/WPMedia/arc-themes-blocks/commit/bdd5a3bc942ac93a97623bf5c1fdd3aec264aa6f))
+* Use peerDependencies for all blocks ([f20c44d](https://github.com/WPMedia/arc-themes-blocks/commit/f20c44d18c9b07ce0ed0e5ff05d401eaca69a9f5))
+
+
+
+# 5.9.0-canary.0 (2020-10-14)
+
+
+
+# 5.7.0 (2020-09-23)
+
+
+### Bug Fixes
+
+* Use nested canary versions of engine theme sdk issue ([89fdb48](https://github.com/WPMedia/arc-themes-blocks/commit/89fdb48fef1c437e6149ee4a646c27f5ef781fb9))
+
+
+### Features
+
+* Use canary instead of latest for block dependencies that are blocks ([d63e9fd](https://github.com/WPMedia/arc-themes-blocks/commit/d63e9fd224449149fb925a056be8538a3c34162f))
+
+
+### Reverts
+
+* Revert "Syncing translations from themes-i8n repo" ([2f35491](https://github.com/WPMedia/arc-themes-blocks/commit/2f35491ee2a663cc83351565dfebde4f4ffeffbd))
+
+
+
+# 5.6.0 (2020-09-09)
+
+
+
+
+
 # [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/results-list-block@5.18.0...@wpmedia/results-list-block@5.19.0) (2022-03-09)
 
 

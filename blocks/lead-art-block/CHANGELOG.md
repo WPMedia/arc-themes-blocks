@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/lead-art-block@5.18.0...@wpmedia/lead-art-block@5.19.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Add fallbacks as if there's no caption there will be no description object even ([a4350b4](https://github.com/WPMedia/arc-themes-blocks/commit/a4350b469a6820defad734ddeb42b608a8ac8c22))
+* Falls back to eager if empty string picked ([131564d](https://github.com/WPMedia/arc-themes-blocks/commit/131564daad2b587cac9443d496c0c12ef453c376))
+* Follow ac of taking in proptypes and reusing the hide title for all media items ([2b560c0](https://github.com/WPMedia/arc-themes-blocks/commit/2b560c0297240d93fa8e999c9581368839ffe01b))
+* Handle empty string option picked for arc inputs ([a0f2e27](https://github.com/WPMedia/arc-themes-blocks/commit/a0f2e27a341d7cf7927b7624be4d6cd47976a24f))
+* Remove inaccessible contrast-level color in favor of working, accessible image metadata color ([c10d6b8](https://github.com/WPMedia/arc-themes-blocks/commit/c10d6b800ee3cb32a1eb7750d947c5f8cec2ad45))
+
+
+### Features
+
+* Add default image loading eager strategy ([af77e9c](https://github.com/WPMedia/arc-themes-blocks/commit/af77e9c7e47be6e93c33b84ebf6569a3a8d20f2f))
+* Add static for lead art handling of non-lightbox images ([5a98886](https://github.com/WPMedia/arc-themes-blocks/commit/5a988868ceeb88be9c89826d2b52ca6db42cafba))
+* Take in hide video title for lead art block ([2b4c206](https://github.com/WPMedia/arc-themes-blocks/commit/2b4c206ad692f28ff97c5522085e83e5f804bf0a))
+* Update to include loading strategy under display options per Jenae feedback ([a584841](https://github.com/WPMedia/arc-themes-blocks/commit/a5848415fe6616e954ffb8fcc6821cae118b9695))
+* Use primary font for expand span. Remove unnecessary primary font call. ([40c0e9a](https://github.com/WPMedia/arc-themes-blocks/commit/40c0e9ad1dd56662ceaf48a7f43a6af5eea49d09))
+
+
+### Performance Improvements
+
+* Remove unnecessary figcaption declaration of primary font ([7bc03b3](https://github.com/WPMedia/arc-themes-blocks/commit/7bc03b3ff7c8b325ffc47b32e09fa541656dcf27))
+
+
+### Reverts
+
+* Revert selectively "feat: Add static for lead art handling of non-lightbox images" ([0cfc77f](https://github.com/WPMedia/arc-themes-blocks/commit/0cfc77fedda8f92f489ed293478c90d6847ad3d5))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+
+
 # [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/lead-art-block@5.17.0...@wpmedia/lead-art-block@5.18.0) (2022-03-09)
 
 

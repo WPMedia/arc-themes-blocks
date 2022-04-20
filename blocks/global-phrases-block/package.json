@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/global-phrases-block",
-  "version": "5.17.0",
+  "version": "5.18.0",
   "description": "A package containing a list of translation phrases expected to be global.",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",

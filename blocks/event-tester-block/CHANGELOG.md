@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/event-tester-block@5.15.0...@wpmedia/event-tester-block@5.16.0) (2022-04-20)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+**Note:** Version bump only for package @wpmedia/event-tester-block
+
+
+
+
+
 # 5.15.0 (2021-08-18)
 
 ## 5.14.1 (2021-07-21)

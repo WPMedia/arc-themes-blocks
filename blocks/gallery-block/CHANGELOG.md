@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/gallery-block@5.16.0...@wpmedia/gallery-block@5.18.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Update unrecognized string ([fcb11c9](https://github.com/WPMedia/arc-themes-blocks/commit/fcb11c91e830338df4910645ac311ebbc36f06ff))
+* Use correct gallery props for display and hide info ([0c6d4bf](https://github.com/WPMedia/arc-themes-blocks/commit/0c6d4bfc426213f83548df770b3410286d719918))
+
+
+### Features
+
+* Add storybook for toggling hiding and showing options ([ba63c47](https://github.com/WPMedia/arc-themes-blocks/commit/ba63c478ef3978e25a2cab61274ebdf0fd06058d))
+* Take in hide options for custom fields ([966dfbe](https://github.com/WPMedia/arc-themes-blocks/commit/966dfbea6e48c71dd20de8bf3a18b0a27305413b))
+
+
+
+## 5.14.1 (2021-07-21)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+
+
 # [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/gallery-block@5.16.0...@wpmedia/gallery-block@5.17.0) (2022-01-26)
 
 ### Bug Fixes

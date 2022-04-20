@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/video-player-block@5.17.0...@wpmedia/video-player-block@5.18.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Reorder the proptypes so that the spread is below the group so that the proptypes work with arc ([37ca5d0](https://github.com/WPMedia/arc-themes-blocks/commit/37ca5d0912b4cc763f9d9b23904fcdf078603c43))
+
+
+### Features
+
+* Add caption logic for fetching as well with videos ([91db356](https://github.com/WPMedia/arc-themes-blocks/commit/91db35613cf7de4eb38c41c5219fd4a0f2d54f23))
+* Take in fetched as well as hard-coded data from video player ([8cc4f5d](https://github.com/WPMedia/arc-themes-blocks/commit/8cc4f5d553631a6edfdf5999b5fdf0bd0649c96c))
+
+
+### Performance Improvements
+
+* Reuse secondary and primary font rather than duplicating styled components ([9c201a4](https://github.com/WPMedia/arc-themes-blocks/commit/9c201a4a8076204aea8b09bfc0445d8f85aef9f2))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # [5.17.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/video-player-block@5.16.0...@wpmedia/video-player-block@5.17.0) (2021-10-20)
 
 ### Performance Improvements

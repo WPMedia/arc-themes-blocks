@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/double-chain-block@5.16.0...@wpmedia/double-chain-block@5.17.0) (2022-04-20)
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+**Note:** Version bump only for package @wpmedia/double-chain-block
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/double-chain-block@5.15.0...@wpmedia/double-chain-block@5.16.0) (2021-09-15)
 
 ## 5.11.1-hotfix.0 (2021-04-23)

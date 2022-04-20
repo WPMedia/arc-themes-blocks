@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/alert-bar-block@5.16.0...@wpmedia/alert-bar-block@5.17.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* Use arc proptypes ([84b18f1](https://github.com/WPMedia/arc-themes-blocks/commit/84b18f1f76e686d81dc01d8e3ce797cd2cc10b1b))
+
+
+### Features
+
+* Use primary font shared style rather than contradictory style tags ([6282096](https://github.com/WPMedia/arc-themes-blocks/commit/62820960f706ac3583eece982509ab6fae483c8a))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+
+
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/alert-bar-block@5.15.0...@wpmedia/alert-bar-block@5.16.0) (2021-09-15)
 
 ### Bug Fixes

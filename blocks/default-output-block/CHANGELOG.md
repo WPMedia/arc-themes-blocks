@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/default-output-block@5.16.0...@wpmedia/default-output-block@5.18.0) (2022-04-20)
+
+
+### Features
+
+* Set output canonical link to true ([d6df416](https://github.com/WPMedia/arc-themes-blocks/commit/d6df416358a847f6152b5bf43319429e2ac1e8b5))
+
+
+
+
+
 # [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/default-output-block@5.16.0...@wpmedia/default-output-block@5.17.0) (2022-01-26)
 
 ### Features

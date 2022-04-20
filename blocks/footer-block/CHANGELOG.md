@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/footer-block@5.17.0...@wpmedia/footer-block@5.19.0) (2022-04-20)
+
+
+### Features
+
+* Fix lighthouse tapability rating, standardize sizing based on mocks ([bcff27e](https://github.com/WPMedia/arc-themes-blocks/commit/bcff27ed5a0f25e3f4d3e9dc00c517b2a2ee2a36))
+* On smaller screens, increase the margin between links ([66d7612](https://github.com/WPMedia/arc-themes-blocks/commit/66d7612c487f97d02e43c44aa3309315e845fd01))
+
+
+
+
+
 # [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/footer-block@5.17.0...@wpmedia/footer-block@5.18.0) (2022-01-26)
 
 ### Features

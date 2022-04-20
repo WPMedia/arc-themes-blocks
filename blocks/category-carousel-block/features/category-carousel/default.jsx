@@ -40,7 +40,7 @@ function CategoryCarousel({ customFields }) {
 	const { headerText } = customFields;
 
 	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
+	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const validCategoryData = customFieldGroups
@@ -57,7 +57,6 @@ function CategoryCarousel({ customFields }) {
 			<Carousel
 				id="category-carousel"
 				label={phrases.t("category-carousel.aria-label")}
-				slidesToShow={MIN_SLIDES}
 				nextButton={
 					<Carousel.Button>
 						<Icon name="ArrowRight">{phrases.t("category-carousel.right-arrow-label")}</Icon>
@@ -79,7 +78,7 @@ function CategoryCarousel({ customFields }) {
 					>
 						<a href={linkUrl}>
 							<Image src={imageUrl} alt="" />
-							<span>{label}</span>
+							<div className={`${BLOCK_CLASS_NAME}__title`}>{label}</div>
 						</a>
 					</Carousel.Item>
 				))}
@@ -90,8 +89,7 @@ function CategoryCarousel({ customFields }) {
 
 CategoryCarousel.label = "Category Carousel – Arc Block";
 
-// find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
-CategoryCarousel.icon = "arc-quad-chain";
+CategoryCarousel.icon = "ui-browser-slider";
 
 CategoryCarousel.propTypes = {
 	customFields: PropTypes.shape({

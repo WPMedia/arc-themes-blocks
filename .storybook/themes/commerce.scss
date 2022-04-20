@@ -234,6 +234,23 @@
 				),
 			),
 			blocks: (
+				category-carousel: (
+					components: (
+						heading: (
+							display: -webkit-box,
+							overflow: hidden,
+							text-overflow: ellipsis,
+							-webkit-box-orient: vertical,
+							-webkit-line-clamp: 2,
+						),
+						carousel: (
+							--slides: 1,
+						),
+						carousel-actions: (
+							display: none,
+						),
+					),
+				),
 				hero-stacked: (
 					gap: var(--global-spacing-4),
 				),
@@ -335,6 +352,16 @@
 			alias: (),
 			components: (),
 			blocks: (
+				category-carousel: (
+					components: (
+						carousel: (
+							--slides: 4,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+					),
+				),
 				hero: (
 					components: (
 						heading: (
@@ -395,5 +422,6 @@
 	)
 );
 
-@use "../../blocks/quilted-image-block";
+@use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/quilted-image-block";

@@ -1,50 +1,50 @@
-import React from 'react';
+import React from "react";
 
-import GridList from '.';
+import GridList from ".";
 
 export default {
-  title: 'Blocks/Subscriptions/Components/Grid List',
-  parameters: {
-    chromatic: { viewports: [320, 1200] },
-  },
+	title: "Blocks/Subscriptions/Components/Grid List",
+	parameters: {
+		chromatic: { viewports: [320, 1200] },
+	},
 };
 
 export const singleItem = () => (
-  <GridList>
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-  </GridList>
+	<GridList>
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+	</GridList>
 );
 
 export const twoItems = () => (
-  <GridList>
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-  </GridList>
+	<GridList>
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+	</GridList>
 );
 
 export const threeItems = () => (
-  <GridList>
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-  </GridList>
+	<GridList>
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+	</GridList>
 );
 
 export const fourItems = () => (
-  <GridList>
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-  </GridList>
+	<GridList>
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+	</GridList>
 );
 
 export const fiveItems = () => (
-  <GridList>
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-    <div style={{ background: 'rgb(200 200 200)', height: '5vh' }} />
-  </GridList>
+	<GridList>
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+		<div style={{ background: "rgb(200 200 200)", height: "5vh" }} />
+	</GridList>
 );

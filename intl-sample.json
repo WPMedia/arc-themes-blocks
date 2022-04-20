@@ -1,12 +1,12 @@
 {
-  "block-name.greeting": {
-    "en": "Hi",
-    "es": "Hola",
-    "de": "Hallo",
-    "fr": "salut",
-    "ja": "こんにちは",
-    "ko": "안녕",
-    "no": "Hei",
-    "sv": "Hej"
-  }
+	"block-name.greeting": {
+		"en": "Hi",
+		"es": "Hola",
+		"de": "Hallo",
+		"fr": "salut",
+		"ja": "こんにちは",
+		"ko": "안녕",
+		"no": "Hei",
+		"sv": "Hej"
+	}
 }

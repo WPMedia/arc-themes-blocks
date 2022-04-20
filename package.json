@@ -35,9 +35,13 @@
     "generate:content-source:content-source": "hygen content-source content-source",
     "generate:content-source:feature": "hygen content-source feature",
     "prepare": "husky install",
-    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-1.19 --coverage --passWithNoTests",
-    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-1.19 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
-    "lint:changed-feature-branch:fix": "npm run lint:changed-feature-branch -- --fix"
+    "test:changed-feature-branch": "jest --changedSince=origin/arc-themes-release-version-1.20 --coverage --passWithNoTests",
+    "lint:changed-feature-branch": "eslint --max-warnings 0 --no-error-on-unmatched-pattern $(git diff --name-only origin/arc-themes-release-version-1.20 | grep -E \"(.js$|.jsx$)\" || echo \"no js/jsx files changed\")",
+    "lint:changed-feature-branch:fix": "npm run lint:changed-feature-branch -- --fix",
+    "format": "prettier --write ."
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   },
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
@@ -69,8 +73,9 @@
     "chromatic": "^5.10.2",
     "css-loader": "^3.5.3",
     "enzyme": "^3.10.0",
-    "eslint": "^6.6.0",
+    "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.14.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -83,7 +88,9 @@
     "jest": "^26.2.0",
     "jest-enzyme": "^7.1.0",
     "lerna": "^4.0.0",
+    "lint-staged": "^12.3.4",
     "node-sass": "^4.14.1",
+    "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-oembed-container": "^1.0.0",
@@ -92,6 +99,7 @@
     "style-loader": "^1.2.1",
     "styled-components": "^4.4.1",
     "stylelint": "^13.3.3",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-sass-guidelines": "^7.0.0",
     "stylelint-config-styled-components": "^0.1.1",

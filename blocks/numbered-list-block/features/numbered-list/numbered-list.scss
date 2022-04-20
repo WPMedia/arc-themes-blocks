@@ -1,68 +1,67 @@
 .numbered-list-container {
-  @include block-margin-bottom;
-  @include block-internal-spacing;
+	@include block-margin-bottom;
+	@include block-internal-spacing;
 
-  .list-title {
-    color: $ui-primary-font-color;
-    font-size: calculateRem(20px);
-    font-weight: bold;
-    line-height: calculateRem(24px);
-  }
+	.list-title {
+		color: $ui-primary-font-color;
+		font-size: calculateRem(20px);
+		font-weight: bold;
+		line-height: calculateRem(24px);
+	}
 
-  hr {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-
+	hr {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
 }
 
 .vertical-align-image > picture > img {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 .numbered-list-item {
-  @include block-internal-spacing;
-  display: flex;
-  justify-content: space-between;
+	@include block-internal-spacing;
+	display: flex;
+	justify-content: space-between;
 
-  .list-item-number {
-    color: $ui-dark-secondary-color;
-    flex: 0 0 calculateRem(40px);
-    font-size: calculateRem(20px);
-    font-weight: bold;
-    line-height: calculateRem(24px);
-    text-align: left;
-  }
+	.list-item-number {
+		color: $ui-dark-secondary-color;
+		flex: 0 0 calculateRem(40px);
+		font-size: calculateRem(20px);
+		font-weight: bold;
+		line-height: calculateRem(24px);
+		text-align: left;
+	}
 
-  .list-anchor-image {
-    flex: 0 0 calc(25% + 16px);
-    padding-left: calculateRem(16px);
-    text-decoration: none;
+	.list-anchor-image {
+		flex: 0 0 calc(25% + 16px);
+		padding-left: calculateRem(16px);
+		text-decoration: none;
 
-    img {
-      height: auto;
-      width: 100%;
-    }
-  }
+		img {
+			height: auto;
+			width: 100%;
+		}
+	}
 
-  .headline-list-anchor {
-    @include link-color-active-hover($ui-primary-font-color);
-    color: $ui-primary-font-color;
-    display: flex;
-    text-decoration: none;
-    flex-grow: 1;
+	.headline-list-anchor {
+		@include link-color-active-hover($ui-primary-font-color);
+		color: $ui-primary-font-color;
+		display: flex;
+		text-decoration: none;
+		flex-grow: 1;
 
-    .headline-text {
-      font-size: calculateRem(16px);
-      font-weight: normal;
-      line-height: calculateRem(24px);
-    }
-  }
+		.headline-text {
+			font-size: calculateRem(16px);
+			font-weight: normal;
+			line-height: calculateRem(24px);
+		}
+	}
 }
 
 .numbered-item-margins {
-  @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
+	@media screen and (min-width: map-get($grid-breakpoints, "sm")) {
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+	}
 }

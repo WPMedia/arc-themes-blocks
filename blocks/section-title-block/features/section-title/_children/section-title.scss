@@ -1,16 +1,15 @@
 .section-title {
-  color: $ui-primary-font-color;
-  display: block;
-  font-weight: bold;
+	color: $ui-primary-font-color;
+	display: block;
+	font-weight: bold;
 }
 
 .section-container {
-  margin-top: map-get($spacers, 'sm');
+	margin-top: map-get($spacers, "sm");
 }
 
 .section-title--styled-link {
-  font-size: calculateRem(14px);
-  color: $ui-primary-font-color;
-  text-decoration: none;
+	font-size: calculateRem(14px);
+	color: $ui-primary-font-color;
+	text-decoration: none;
 }
-

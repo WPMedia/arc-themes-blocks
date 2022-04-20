@@ -1,69 +1,68 @@
 .authors {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  .author {
-    display: flex;
-    flex-direction: row;
-  }
+	.author {
+		display: flex;
+		flex-direction: row;
+	}
 
-  a {
-    margin: 0;
-    text-decoration: none;
-  }
+	a {
+		margin: 0;
+		text-decoration: none;
+	}
 
-  img {
-    border-radius: 100%;
-    height: calculateRem(84px);
-    margin: map-get($spacers, 'xs');
-    min-width: calculateRem(84px);
-  }
+	img {
+		border-radius: 100%;
+		height: calculateRem(84px);
+		margin: map-get($spacers, "xs");
+		min-width: calculateRem(84px);
+	}
 
-  .descriptions {
-    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      width: 100%; //For IE 11
-    }
-    display: flex;
-    flex-direction: column;
-    margin: map-get($spacers, 'xs');
+	.descriptions {
+		@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+			width: 100%; //For IE 11
+		}
+		display: flex;
+		flex-direction: column;
+		margin: map-get($spacers, "xs");
 
-    .socialButtons {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: map-get($spacers, 'xs');
+		.socialButtons {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			margin-top: map-get($spacers, "xs");
 
-      a {
-        height: map-get($spacers, 'md');
-        margin-right: map-get($spacers, 'xs');
-        text-align: center;
-        text-decoration: none;
-        width: map-get($spacers, 'md');
-      }
-    }
-  }
+			a {
+				height: map-get($spacers, "md");
+				margin-right: map-get($spacers, "xs");
+				text-align: center;
+				text-decoration: none;
+				width: map-get($spacers, "md");
+			}
+		}
+	}
 
-  .authorName {
-    font-size: calculateRem(18px);
-    font-weight: bold;
-    line-height: calculateRem(32px);
-    margin: map-get($spacers, 'xxs') 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      font-size: calculateRem(14px);
-      line-height: calculateRem(24px);
-    }
-  }
+	.authorName {
+		font-size: calculateRem(18px);
+		font-weight: bold;
+		line-height: calculateRem(32px);
+		margin: map-get($spacers, "xxs") 0;
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			font-size: calculateRem(14px);
+			line-height: calculateRem(24px);
+		}
+	}
 
-  p {
-    margin: map-get($spacers, 'xxs') 0;
-    @media screen and (min-width: map-get($grid-breakpoints, 'sm')) {
-      font-size: calculateRem(18px);
-      line-height: calculateRem(32px);
-    }
-    @media screen and (min-width: map-get($grid-breakpoints, 'md')) {
-      font-size: calculateRem(14px);
-      line-height: calculateRem(24px);
-    }
-  }
-
+	p {
+		margin: map-get($spacers, "xxs") 0;
+		@media screen and (min-width: map-get($grid-breakpoints, "sm")) {
+			font-size: calculateRem(18px);
+			line-height: calculateRem(32px);
+		}
+		@media screen and (min-width: map-get($grid-breakpoints, "md")) {
+			font-size: calculateRem(14px);
+			line-height: calculateRem(24px);
+		}
+	}
 }

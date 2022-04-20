@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import { Overline as OverlineOutput } from '@wpmedia/shared-styles';
+import { Overline as OverlineOutput } from "@wpmedia/shared-styles";
 
 const Overline = () => <OverlineOutput />;
 
-Overline.label = 'Overline – Arc Block';
+Overline.label = "Overline – Arc Block";
 
-Overline.icon = 'arc-overline';
+Overline.icon = "arc-overline";
 
 export default Overline;

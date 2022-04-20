@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.23.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/header-nav-chain-block@5.22.0...@wpmedia/header-nav-chain-block@5.23.0) (2022-03-09)
+
+
+### Bug Fixes
+
+* Remove hard-coded  min width from image ([1ce4a97](https://github.com/WPMedia/arc-themes-blocks/commit/1ce4a97bc945fc36b7f4d7fb16f0d25b4b09cc26))
+* Use arc fusion proptypes to ensure sb loads well on first load ([5217fc2](https://github.com/WPMedia/arc-themes-blocks/commit/5217fc263b4521fc70d634e6defb1bc5a3de74b4))
+
+
+### Features
+
+* Add back max-width for desktop. Use max-width 100% to override on smaller than medium breakpoints ([eeba442](https://github.com/WPMedia/arc-themes-blocks/commit/eeba4423c81c7f660f20717fa5a9a3d7fa8ef16d))
+* Update docs to trigger publish after botched auth publish https://github.com/WPMedia/arc-themes-blocks/runs/4884068576?check_suite_focus=true ([89c6df1](https://github.com/WPMedia/arc-themes-blocks/commit/89c6df188c57cc520a41343a48f0fa98a0c3a260))
+
+
+
+
+
 # [5.22.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/header-nav-chain-block@5.21.0...@wpmedia/header-nav-chain-block@5.22.0) (2022-01-26)
 
 ### Bug Fixes

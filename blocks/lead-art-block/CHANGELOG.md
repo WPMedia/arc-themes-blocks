@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/lead-art-block@5.17.0...@wpmedia/lead-art-block@5.18.0) (2022-03-09)
+
+
+### Bug Fixes
+
+* Falls back to eager if empty string picked ([131564d](https://github.com/WPMedia/arc-themes-blocks/commit/131564daad2b587cac9443d496c0c12ef453c376))
+* Handle empty string option picked for arc inputs ([a0f2e27](https://github.com/WPMedia/arc-themes-blocks/commit/a0f2e27a341d7cf7927b7624be4d6cd47976a24f))
+
+
+### Features
+
+* Add default image loading eager strategy ([af77e9c](https://github.com/WPMedia/arc-themes-blocks/commit/af77e9c7e47be6e93c33b84ebf6569a3a8d20f2f))
+* Update to include loading strategy under display options per Jenae feedback ([a584841](https://github.com/WPMedia/arc-themes-blocks/commit/a5848415fe6616e954ffb8fcc6821cae118b9695))
+* Use primary font for expand span. Remove unnecessary primary font call. ([40c0e9a](https://github.com/WPMedia/arc-themes-blocks/commit/40c0e9ad1dd56662ceaf48a7f43a6af5eea49d09))
+
+
+### Performance Improvements
+
+* Remove unnecessary figcaption declaration of primary font ([7bc03b3](https://github.com/WPMedia/arc-themes-blocks/commit/7bc03b3ff7c8b325ffc47b32e09fa541656dcf27))
+
+
+
+## 5.11.1-hotfix.0 (2021-04-23)
+
+
+
+## 5.10.3-hotfix.0 (2021-04-12)
+
+
+
+# 5.10.0 (2021-02-17)
+
+
+
+
+
 # [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/lead-art-block@5.16.0...@wpmedia/lead-art-block@5.17.0) (2022-01-26)
 
 ### Features

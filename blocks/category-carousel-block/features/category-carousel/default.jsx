@@ -1,10 +1,10 @@
 import React from "react";
-import { useFusionContext } from "fusion:context";
+import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { Carousel, Heading, Icon, Image } from "@wpmedia/arc-themes-components";
+import { Carousel, Heading, HeadingSection, Icon, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
 const MIN_SLIDES = 4;
@@ -39,6 +39,7 @@ const mergeObjectArray = (accumulator, item) => ({ ...accumulator, ...item });
 function CategoryCarousel({ customFields }) {
 	const { headerText } = customFields;
 
+	const { id } = useComponentContext();
 	const { arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -52,38 +53,42 @@ function CategoryCarousel({ customFields }) {
 		.filter((fields) => fields.imageUrl && fields.label && fields.linkUrl);
 
 	return validCategoryData.length >= MIN_SLIDES ? (
-		<div className={BLOCK_CLASS_NAME}>
-			{headerText ? <Heading>{headerText}</Heading> : null}
-			<Carousel
-				id="category-carousel"
-				label={phrases.t("category-carousel.aria-label")}
-				nextButton={
-					<Carousel.Button>
-						<Icon name="ArrowRight">{phrases.t("category-carousel.right-arrow-label")}</Icon>
-					</Carousel.Button>
-				}
-				previousButton={
-					<Carousel.Button>
-						<Icon name="ArrowLeft">{phrases.t("category-carousel.left-arrow-label")}</Icon>
-					</Carousel.Button>
-				}
-			>
-				{validCategoryData.map(({ imageUrl, label, linkUrl }, index, allItems) => (
-					<Carousel.Item
-						label={`${phrases.t("category-carousel.slide-indicator", {
-							current: index + 1,
-							maximum: allItems.length,
-						})}`}
-						key={`${imageUrl}_${label}_${linkUrl}`}
-					>
-						<a href={linkUrl}>
-							<Image src={imageUrl} alt="" />
-							<div className={`${BLOCK_CLASS_NAME}__title`}>{label}</div>
-						</a>
-					</Carousel.Item>
-				))}
-			</Carousel>
-		</div>
+		<HeadingSection>
+			<div className={BLOCK_CLASS_NAME}>
+				{headerText ? <Heading>{headerText}</Heading> : null}
+				<Carousel
+					id={id}
+					label={phrases.t("category-carousel.aria-label")}
+					nextButton={
+						<Carousel.Button id={id}>
+							<Icon name="ArrowRight" />
+							{phrases.t("category-carousel.right-arrow-label")}
+						</Carousel.Button>
+					}
+					previousButton={
+						<Carousel.Button id={id}>
+							<Icon name="ArrowLeft" />
+							{phrases.t("category-carousel.left-arrow-label")}
+						</Carousel.Button>
+					}
+				>
+					{validCategoryData.map(({ imageUrl, label, linkUrl }, index, allItems) => (
+						<Carousel.Item
+							label={`${phrases.t("category-carousel.slide-indicator", {
+								current: index + 1,
+								maximum: allItems.length,
+							})}`}
+							key={`${imageUrl}_${label}_${linkUrl}`}
+						>
+							<a href={linkUrl}>
+								<Image src={imageUrl} alt="" />
+								<div className={`${BLOCK_CLASS_NAME}__title`}>{label}</div>
+							</a>
+						</Carousel.Item>
+					))}
+				</Carousel>
+			</div>
+		</HeadingSection>
 	) : null;
 }
 

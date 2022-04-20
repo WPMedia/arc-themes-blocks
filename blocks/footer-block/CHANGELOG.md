@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/footer-block@5.18.0...@wpmedia/footer-block@5.19.0) (2022-04-20)
+
+**Note:** Version bump only for package @wpmedia/footer-block
+
 # [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/footer-block@5.17.0...@wpmedia/footer-block@5.18.0) (2022-01-26)
 
 ### Features

@@ -3,17 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/collections-content-source-block@5.15.0...@wpmedia/collections-content-source-block@5.16.0) (2022-04-20)
+
+**Note:** Version bump only for package @wpmedia/collections-content-source-block
+
 # 5.15.0 (2022-03-09)
-
-
 
 ## 5.14.1 (2021-07-21)
 
 **Note:** Version bump only for package @wpmedia/collections-content-source-block
-
-
-
-
 
 # [5.14.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/v5.11.1-hotfix.0...v5.14.0) (2021-07-21)
 

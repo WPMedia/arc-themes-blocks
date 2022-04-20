@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.20.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/header-nav-block@5.19.0...@wpmedia/header-nav-block@5.20.0) (2022-04-20)
+
+**Note:** Version bump only for package @wpmedia/header-nav-block
+
 # [5.19.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/header-nav-block@5.18.0...@wpmedia/header-nav-block@5.19.0) (2021-12-15)
 
 **Note:** Version bump only for package @wpmedia/header-nav-block

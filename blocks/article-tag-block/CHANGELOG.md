@@ -3,21 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/article-tag-block@5.16.0...@wpmedia/article-tag-block@5.17.0) (2022-03-09)
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/article-tag-block@5.17.0...@wpmedia/article-tag-block@5.18.0) (2022-04-20)
 
+**Note:** Version bump only for package @wpmedia/article-tag-block
+
+# [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/article-tag-block@5.16.0...@wpmedia/article-tag-block@5.17.0) (2022-03-09)
 
 ### Features
 
-* Use primary font parent ([c31220c](https://github.com/WPMedia/arc-themes-blocks/commit/c31220c614bee451d076c2f6031d13b202e99bed))
-* Use primary font style for tags ([aa98191](https://github.com/WPMedia/arc-themes-blocks/commit/aa981916d46df1ae132030babcd17b56ba83aeff))
-
-
+- Use primary font parent ([c31220c](https://github.com/WPMedia/arc-themes-blocks/commit/c31220c614bee451d076c2f6031d13b202e99bed))
+- Use primary font style for tags ([aa98191](https://github.com/WPMedia/arc-themes-blocks/commit/aa981916d46df1ae132030babcd17b56ba83aeff))
 
 ## 5.11.1-hotfix.0 (2021-04-23)
-
-
-
-
 
 # [5.16.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/article-tag-block@5.15.0...@wpmedia/article-tag-block@5.16.0) (2021-09-15)
 

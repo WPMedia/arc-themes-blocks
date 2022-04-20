@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/links-bar-block@5.17.0...@wpmedia/links-bar-block@5.18.0) (2022-04-20)
+
+**Note:** Version bump only for package @wpmedia/links-bar-block
+
 # [5.17.0](https://github.com/WPMedia/fusion-news-theme-blocks/compare/@wpmedia/links-bar-block@5.16.0...@wpmedia/links-bar-block@5.17.0) (2021-10-20)
 
 ## 5.11.1-hotfix.0 (2021-04-23)

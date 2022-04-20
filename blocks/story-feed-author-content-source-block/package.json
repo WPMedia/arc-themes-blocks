@@ -1,6 +1,6 @@
 {
   "name": "@wpmedia/story-feed-author-content-source-block",
-  "version": "5.14.1",
+  "version": "5.15.0",
   "description": "Content source block for story feed queries by author",
   "author": "Joe Grosspietsch <joe.grosspietsch@washpost.com>",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",

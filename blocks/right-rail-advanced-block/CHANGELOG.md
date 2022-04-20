@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/right-rail-advanced-block@5.17.0...@wpmedia/right-rail-advanced-block@5.18.0) (2022-04-20)
+
+**Note:** Version bump only for package @wpmedia/right-rail-advanced-block
+
 # [5.17.0](https://github.com/WPMedia/arc-themes-blocks/compare/@wpmedia/right-rail-advanced-block@5.16.0...@wpmedia/right-rail-advanced-block@5.17.0) (2022-01-26)
 
 ### Bug Fixes

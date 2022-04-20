@@ -82,7 +82,7 @@ function CategoryCarousel({ customFields }) {
 						>
 							<a href={linkUrl}>
 								<Image src={imageUrl} alt="" />
-								<div className={`${BLOCK_CLASS_NAME}__title`}>{label}</div>
+								<div className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</div>
 							</a>
 						</Carousel.Item>
 					))}

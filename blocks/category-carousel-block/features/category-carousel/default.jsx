@@ -55,7 +55,9 @@ function CategoryCarousel({ customFields }) {
 	return validCategoryData.length >= MIN_SLIDES ? (
 		<HeadingSection>
 			<div className={BLOCK_CLASS_NAME}>
-				{headerText ? <Heading>{headerText}</Heading> : null}
+				{headerText ? (
+					<Heading className={`${BLOCK_CLASS_NAME}__title`}>{headerText}</Heading>
+				) : null}
 				<Carousel
 					id={id}
 					label={phrases.t("category-carousel.aria-label")}

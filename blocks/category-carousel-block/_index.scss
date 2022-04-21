@@ -1,6 +1,10 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-category-carousel {
+	&__title {
+		@include scss.block-properties("category-carousel-title");
+	}
+
 	&__slide {
 		text-decoration: none;
 		color: inherit;
@@ -9,8 +13,6 @@
 	}
 
 	&__slide-title {
-		font-size: var(--global-font-size-3);
-
 		@include scss.block-properties("category-carousel-slide-title");
 	}
 

@@ -257,7 +257,7 @@
 							// (48 + 32 + 1220 + 32 + 48) / 1440
 						),
 						heading: (
-							--heading-truncation: 2,
+							-webkit-line-clamp: 2,
 						),
 						icon: (
 							height: var(--global-font-size-9),

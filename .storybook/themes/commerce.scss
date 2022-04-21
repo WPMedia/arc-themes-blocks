@@ -247,6 +247,7 @@
 						carousel-track: (
 							gap: var(--global-spacing-5),
 							max-width: 84.7%,
+							// 1220 / 1440
 						),
 						carousel-actions: (
 							display: none,
@@ -269,6 +270,7 @@
 					margin-left: auto,
 					margin-right: auto,
 					max-width: 84.7%,
+					// 1220 / 1440
 				),
 				category-carousel-slide-title: (
 					font-size: var(--global-font-size-2),

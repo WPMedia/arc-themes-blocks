@@ -21,7 +21,6 @@ const StoryCarousel = ({
 		leftArrowLabel,
 		itemHeaderTruncationLines = 0,
 		itemDescriptionTruncationLines = 0,
-		slidesToShow = 4,
 	},
 }) => {
 	// const desktopBreakPoint = useRef(0);
@@ -56,7 +55,6 @@ const StoryCarousel = ({
 				<Carousel
 					id={identifier}
 					label={carouselLabel}
-					slidesToShow={slidesToShow}
 					nextButton={
 						<Carousel.Button id={identifier} label={rightArrowLabel}>
 							<Icon name="ArrowRight" />

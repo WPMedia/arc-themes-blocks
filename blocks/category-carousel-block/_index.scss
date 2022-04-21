@@ -1,15 +1,19 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-category-carousel {
+	&__slide {
+		text-decoration: none;
+		color: inherit;
+
+		@include scss.block-properties("category-carousel-slide");
+	}
+
 	&__slide-title {
-		display: -webkit-box;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		font-size: var(--global-font-size-3);
 
 		@include scss.block-properties("category-carousel-slide-title");
 	}
+
 	@include scss.block-properties("category-carousel");
 	@include scss.block-components("category-carousel");
 }

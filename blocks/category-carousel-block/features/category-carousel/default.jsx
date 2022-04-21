@@ -60,15 +60,13 @@ function CategoryCarousel({ customFields }) {
 					id={id}
 					label={phrases.t("category-carousel.aria-label")}
 					nextButton={
-						<Carousel.Button id={id}>
-							<Icon name="ArrowRight" />
-							{phrases.t("category-carousel.right-arrow-label")}
+						<Carousel.Button id={id} label={phrases.t("category-carousel.right-arrow-label")}>
+							<Icon name="ChevronRight" />
 						</Carousel.Button>
 					}
 					previousButton={
-						<Carousel.Button id={id}>
-							<Icon name="ArrowLeft" />
-							{phrases.t("category-carousel.left-arrow-label")}
+						<Carousel.Button id={id} label={phrases.t("category-carousel.left-arrow-label")}>
+							<Icon name="ChevronLeft" />
 						</Carousel.Button>
 					}
 				>
@@ -80,10 +78,12 @@ function CategoryCarousel({ customFields }) {
 							})}`}
 							key={`${imageUrl}_${label}_${linkUrl}`}
 						>
-							<a href={linkUrl}>
-								<Image src={imageUrl} alt="" />
-								<div className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</div>
-							</a>
+							<HeadingSection>
+								<a className={`${BLOCK_CLASS_NAME}__slide`} href={linkUrl}>
+									<Image src={imageUrl} alt="" />
+									<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
+								</a>
+							</HeadingSection>
 						</Carousel.Item>
 					))}
 				</Carousel>

@@ -148,6 +148,98 @@ const mockCollectionContent = {
 	website: "arc-commerce",
 };
 
+const mockCollectionContent2 = {
+	_id: "WSXWGYQUHVHCHN556DSSNHHZQA",
+	type: "collection",
+	canonical_website: "arc-commerce",
+	content_elements: [
+		{
+			_id: "QYAHXVDGZRBIVGHXDN6YEBUQIM",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					_id: "H3DHE37DORE7FH34X7V24ORNWI",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+		{
+			_id: "ETUI72TJM5BVHCVWRJJEX45WCU",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					_id: "Y4RECTW6GBEDXFK6LHBYMQ2HUY",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+		{
+			_id: "YVL7ZRMJWFAJBPQ4UJR2G3CGOA",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+		{
+			_id: "UQMQJXJEVRAUHANSPDUZU3HQSI",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					_id: "QCSVIRNLGBCT7LWXIMVOHBANHA",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+		{
+			_id: "ETUI72TJM5BVHCVWRJJEX45ACU",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					_id: "Y4RECTW6GBEDXFK6LHBYMQ2HUY",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+		{
+			_id: "UQMQJXJEVRAUHANSPDUZU3HQPK",
+			type: "story",
+			version: "0.10.7",
+			headlines: {},
+			description: {},
+			promo_items: {
+				basic: {
+					_id: "QCSVIRNLGBCT7LWXIMVOHBANHA",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+		},
+	],
+	website: "arc-commerce",
+};
+
 const mockPhrases = {
 	"global.story-carousel.aria-label": "Stories",
 	"global.story-carousel.right-arrow-label": "Next",
@@ -209,6 +301,27 @@ describe("Story Carousel", () => {
 		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(6);
 	});
 
+	it("should not render card headlines or paragraphs when they are not in the content", () => {
+		const mockCustomFields = {
+			inheritGlobalContent: true,
+			carouselContentConfig: {},
+		};
+
+		const mockGlobalContent = {
+			...mockCollectionContent2,
+			...mockContextGlobalContent,
+		};
+
+		const { container } = render(
+			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
+		);
+
+		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
+		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
+			0
+		);
+	});
+
 	it("should render the optional header", () => {
 		const mockCustomFields = {
 			inheritGlobalContent: true,
@@ -268,5 +381,40 @@ describe("Story Carousel", () => {
 
 		const firstHeader = container.querySelector(".b-story-carousel__story-card .c-paragraph");
 		expect(firstHeader.getAttribute("data-testid")).toBe("3");
+	});
+
+	it("should not render in testing when inheritGlobalContent is set to false", () => {
+		const mockCustomFields = {
+			inheritGlobalContent: false,
+			carouselContentConfig: {},
+		};
+
+		const mockGlobalContent = {
+			...mockCollectionContent,
+			...mockContextGlobalContent,
+		};
+
+		const { container } = render(
+			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
+		);
+
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+	});
+
+	it("should not render in testing when inheritGlobalContent is not set at all", () => {
+		const mockCustomFields = {
+			carouselContentConfig: {},
+		};
+
+		const mockGlobalContent = {
+			...mockCollectionContent,
+			...mockContextGlobalContent,
+		};
+
+		const { container } = render(
+			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
+		);
+
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
 	});
 });

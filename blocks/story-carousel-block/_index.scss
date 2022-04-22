@@ -1,33 +1,23 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-story-carousel {
+	&__main-title {
+		@include scss.block-properties("category-carousel-title");
+		@include scss.block-components("category-carousel-title");
+	}
+
 	&__story-card {
 		display: flex;
 		flex-direction: column;
 		text-decoration: none;
+		padding: 0;
 
 		img {
 			width: 100%;
 		}
 
-		@include scss.block-properties("story-carousel__story-card");
-		@include scss.block-components("story-carousel__story-card");
-	}
-
-	&__story-card-header {
-		--story-card-header-truncation: "none";
-
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-moz-box-oriented: vertical;
-		/* opera */
-		text-overflow: -o-ellipsis-lastline;
-
-		@include scss.block-properties("story-carousel__story-card-header");
-		@include scss.component-properties("story-carousel__story-card-header");
-
-		-webkit-line-clamp: var(--story-card-header-truncation);
+		@include scss.block-properties("story-carousel-card");
+		@include scss.block-components("story-carousel-card");
 	}
 
 	@include scss.block-properties("story-carousel");

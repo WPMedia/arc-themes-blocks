@@ -1,0 +1,46 @@
+{
+	"story-carousel.aria-label": {
+		"de": "Stories",
+		"en": "Stories",
+		"es": "Stories",
+		"fr": "Stories",
+		"ja": "Stories",
+		"ko": "Stories",
+		"no": "Stories",
+		"pt": "Stories",
+		"sv": "Stories"
+	},
+	"story-carousel.right-arrow-label": {
+		"de": "Next",
+		"en": "Next",
+		"es": "Next",
+		"fr": "Next",
+		"ja": "Next",
+		"ko": "Next",
+		"no": "Next",
+		"pt": "Next",
+		"sv": "Next"
+	},
+	"story-carousel.left-arrow-label": {
+		"de": "Previous",
+		"en": "Previous",
+		"es": "Previous",
+		"fr": "Previous",
+		"ja": "Previous",
+		"ko": "Previous",
+		"no": "Previous",
+		"pt": "Previous",
+		"sv": "Previous"
+	},
+	"story-carousel.slide-indicator": {
+		"de": "Slide %{current} of %{maximum}",
+		"en": "Slide %{current} of %{maximum}",
+		"es": "Slide %{current} of %{maximum}",
+		"fr": "Slide %{current} of %{maximum}",
+		"ja": "Slide %{current} of %{maximum}",
+		"ko": "Slide %{current} of %{maximum}",
+		"no": "Slide %{current} of %{maximum}",
+		"pt": "Slide %{current} of %{maximum}",
+		"sv": "Slide %{current} of %{maximum}"
+	}
+}

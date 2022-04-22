@@ -72,12 +72,16 @@ const StoryCarousel = ({
 									<Heading
 										className={`${BLOCK_CLASS_NAME}__story-card-header`}
 										truncationLines={itemHeaderTruncationLines}
+										data-testid={itemHeaderTruncationLines}
 									>
 										{item.headlines.basic}
 									</Heading>
 								) : null}
 								{item.description?.basic ? (
-									<Paragraph truncationLines={itemDescriptionTruncationLines}>
+									<Paragraph
+										truncationLines={itemDescriptionTruncationLines}
+										data-testid={itemDescriptionTruncationLines}
+									>
 										{item.description.basic}
 									</Paragraph>
 								) : null}

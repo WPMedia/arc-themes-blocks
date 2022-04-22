@@ -1,6 +1,5 @@
 import React from "react";
 import StoryCarousel from "./features/story-carousel/default";
-import { GalleryPresentation } from "@wpmedia/gallery-block/features/gallery/default";
 
 export default {
 	title: "Blocks/Story Carousel",

@@ -4,7 +4,14 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { Carousel, Heading, HeadingSection, Icon, Image } from "@wpmedia/arc-themes-components";
+import {
+	Carousel,
+	Heading,
+	HeadingSection,
+	Icon,
+	Image,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-category-carousel";
 const MIN_SLIDES = 4;
@@ -54,7 +61,7 @@ function CategoryCarousel({ customFields }) {
 
 	return validCategoryData.length >= MIN_SLIDES ? (
 		<HeadingSection>
-			<div className={BLOCK_CLASS_NAME}>
+			<Stack className={BLOCK_CLASS_NAME}>
 				{headerText ? (
 					<Heading className={`${BLOCK_CLASS_NAME}__title`}>{headerText}</Heading>
 				) : null}
@@ -80,16 +87,20 @@ function CategoryCarousel({ customFields }) {
 							})}`}
 							key={`${imageUrl}_${label}_${linkUrl}`}
 						>
-							<HeadingSection>
-								<a className={`${BLOCK_CLASS_NAME}__slide`} href={linkUrl}>
+							<a className={`${BLOCK_CLASS_NAME}__slide`} href={linkUrl}>
+								<Stack>
 									<Image src={imageUrl} alt="" />
-									<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
-								</a>
-							</HeadingSection>
+									{label ? (
+										<HeadingSection>
+											<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
+										</HeadingSection>
+									) : null}
+								</Stack>
+							</a>
 						</Carousel.Item>
 					))}
 				</Carousel>
-			</div>
+			</Stack>
 		</HeadingSection>
 	) : null;
 }

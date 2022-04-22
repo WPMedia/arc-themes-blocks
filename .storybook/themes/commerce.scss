@@ -92,7 +92,6 @@
 		"spacing-15": 7em,
 		// 112px
 		"spacing-16": 7.5em,
-
 		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
@@ -166,6 +165,14 @@
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
+		"layout-max-width": 1440px,
+		"layout-content-max-width": 1220px,
+		// --layout-content-scale-width identifies the
+		// inner document width for header and content
+		// alignment.  It accounts for a minimum width
+		// that has (--global-spacing-5 / 2) margins
+		"layout-content-scale-width":
+			min(calc(100vw - var(--global-spacing-5)), calc(1220 / 1440 * 100%)),
 		"primary-color": var(--global-neutral-10),
 		"primary-font-family": "Inter",
 	),
@@ -235,26 +242,38 @@
 			),
 			blocks: (
 				category-carousel: (
+					gap: var(--global-spacing-2),
 					components: (
 						carousel: (
 							--slides: 1,
-						),
-						carousel-button: (
-							border-radius: var(--global-spacing-1),
-							background-color: var(--global-neutral-1),
-							padding: 0.75em,
-						),
-						carousel-track: (
-							gap: var(--global-spacing-5),
-							max-width: 84.7%,
-							// 1220 / 1440
 						),
 						carousel-actions: (
 							display: none,
 							padding-left: var(--global-spacing-3),
 							padding-right: var(--global-spacing-3),
-							max-width: 95.8%,
-							// (48 + 32 + 1220 + 32 + 48) / 1440
+							// The width should place the action buttons
+							// near the edge of the category responsively
+							//
+							// width is derived from adding
+							//   --layout-content-max-width
+							//   two button widths (--global-font-size-9)
+							//   two button margins (--global-font-size-5)
+							// then divding those by
+							//   --layout-max-width
+							// using the following formula
+							//   (48 + 32 + 1220 + 32 + 48) / 1440
+							width: 95.8%,
+						),
+						carousel-button: (
+							box-shadow: var(--global-box-shadow-1),
+							border-radius: var(--global-spacing-1),
+							background-color: var(--global-white),
+							height: var(--global-spacing-7),
+							width: var(--global-spacing-7),
+						),
+						carousel-track: (
+							gap: var(--global-spacing-2),
+							width: var(--layout-content-scale-width),
 						),
 						heading: (
 							-webkit-line-clamp: 2,
@@ -269,11 +288,14 @@
 					font-size: var(--global-font-size-7),
 					margin-left: auto,
 					margin-right: auto,
-					max-width: 84.7%,
-					// 1220 / 1440
+					width: var(--layout-content-scale-width),
 				),
-				category-carousel-slide-title: (
-					font-size: var(--global-font-size-2),
+				category-carousel-slide: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-1),
+						),
+					),
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-4),
@@ -383,6 +405,9 @@
 						),
 						carousel-actions: (
 							display: flex,
+						),
+						carousel-track: (
+							gap: var(--global-spacing-5),
 						),
 					),
 				),

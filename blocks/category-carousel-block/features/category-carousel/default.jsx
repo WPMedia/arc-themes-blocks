@@ -91,11 +91,9 @@ function CategoryCarousel({ customFields }) {
 							<a className={`${BLOCK_CLASS_NAME}__slide`} href={linkUrl}>
 								<Stack>
 									<Image src={imageUrl} alt="" />
-									{label ? (
-										<HeadingSection>
-											<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
-										</HeadingSection>
-									) : null}
+									<HeadingSection>
+										<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
+									</HeadingSection>
 								</Stack>
 							</a>
 						</Carousel.Item>

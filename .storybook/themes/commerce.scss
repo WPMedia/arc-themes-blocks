@@ -168,7 +168,7 @@
 	$alias: (
 		"primary-color": var(--global-neutral-10),
 		"primary-font-family": "Inter",
-		"layout-content-max-width": 1216px,
+		"layout-content-max-width": 1216,
 	),
 	$tokens: (
 		default: (
@@ -290,7 +290,7 @@
 				),
 				quilted-image: (
 					margin: 0 auto,
-					max-width: var(--layout-content-max-width),
+					max-width: calc(var(--layout-content-max-width) * 1px),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),

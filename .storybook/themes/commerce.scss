@@ -166,9 +166,20 @@
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
+		"layout-max-width": 1440,
+		"layout-content-max-width": 1216,
+		//
+		// --layout-content-scale-width identifies the inner document width for header and content
+		// alignment.  It accounts for a minimum width that has (--global-spacing-5 / 2) margins
+		//
+		"layout-content-scale-width":
+			min(
+				calc(100vw - var(--global-spacing-5)),
+				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
+			),
 		"primary-color": var(--global-neutral-10),
 		"primary-font-family": "Inter",
-		"layout-content-max-width": 1216px,
+		"layout-content-max-width": 1216,
 	),
 	$tokens: (
 		default: (
@@ -176,9 +187,6 @@
 				body: (
 					font-family: var(--primary-font-family),
 					font-size: var(--global-font-size-4),
-				),
-				heading: (
-					font-weight: var(--global-font-weight-7),
 				),
 				button: (
 					border: 1px solid transparent,
@@ -233,8 +241,67 @@
 					border-color: var(--global-neutral-2),
 					color: var(--global-neutral-2),
 				),
+				carousel: (
+					--slides: 1,
+				),
+				carousel-actions: (
+					display: none,
+					padding-left: var(--global-spacing-3),
+					padding-right: var(--global-spacing-3),
+					//
+					// The width should place the action buttons near the edge of the carousel responsively
+					//
+					// width is derived from adding
+					//   --layout-content-max-width
+					//   2x button widths (--global-font-size-9)
+					//   2x button margins (--global-font-size-5)
+					// then dividing those by
+					//   --layout-max-width
+					// using the formula: (48 + 32 + 1216 + 32 + 48) / 1440
+					//
+					width: calc(calc(var(--layout-content-max-width) + 160) / var(--layout-max-width) * 100%),
+				),
+				carousel-button: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: var(--global-spacing-1),
+					background-color: var(--global-white),
+					height: var(--global-spacing-7),
+					width: var(--global-spacing-7),
+				),
+				carousel-track: (
+					gap: var(--global-spacing-2),
+					width: var(--layout-content-scale-width),
+				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
 			),
 			blocks: (
+				category-carousel: (
+					gap: var(--global-spacing-2),
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+						),
+						icon: (
+							height: var(--global-font-size-9),
+							width: var(--global-font-size-9),
+						),
+					),
+				),
+				category-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				category-carousel-slide: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-1),
+						),
+					),
+				),
 				hero-stacked: (
 					gap: var(--global-spacing-4),
 				),
@@ -290,7 +357,7 @@
 				),
 				quilted-image: (
 					margin: 0 auto,
-					max-width: var(--layout-content-max-width),
+					max-width: calc(var(--layout-content-max-width) * 1px),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),
@@ -336,8 +403,24 @@
 		),
 		desktop: (
 			alias: (),
-			components: (),
+			components: (
+				carousel: (
+					--slides: 4,
+				),
+				carousel-actions: (
+					display: flex,
+				),
+				carousel-track: (
+					gap: var(--global-spacing-5),
+				),
+			),
 			blocks: (
+				category-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
+				category-carousel-slide-title: (
+					font-size: var(--global-font-size-3),
+				),
 				hero: (
 					components: (
 						heading: (
@@ -398,5 +481,6 @@
 	)
 );
 
-@use "../../blocks/quilted-image-block";
+@use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/quilted-image-block";

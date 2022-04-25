@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
@@ -50,6 +50,7 @@ function CategoryCarousel({ customFields }) {
 	const { arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
+	const Wrapper = headerText ? HeadingSection : Fragment;
 
 	const validCategoryData = customFieldGroups
 		.map((fieldDefinition) =>
@@ -60,7 +61,7 @@ function CategoryCarousel({ customFields }) {
 		.filter((fields) => fields.imageUrl && fields.label && fields.linkUrl);
 
 	return validCategoryData.length >= MIN_SLIDES ? (
-		<HeadingSection>
+		<Wrapper>
 			<Stack className={BLOCK_CLASS_NAME}>
 				{headerText ? (
 					<Heading className={`${BLOCK_CLASS_NAME}__title`}>{headerText}</Heading>
@@ -101,7 +102,7 @@ function CategoryCarousel({ customFields }) {
 					))}
 				</Carousel>
 			</Stack>
-		</HeadingSection>
+		</Wrapper>
 	) : null;
 }
 

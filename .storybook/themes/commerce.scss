@@ -61,37 +61,38 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		"spacing-1": 0.25em,
+		"spacing-1": 0.25rem,
 		// 4px
-		"spacing-2": 0.5em,
+		"spacing-2": 0.5rem,
 		// 8px
-		"spacing-3": 1em,
+		"spacing-3": 1rem,
 		// 16px
-		"spacing-4": 1.5em,
+		"spacing-4": 1.5rem,
 		// 24px
-		"spacing-5": 2em,
+		"spacing-5": 2rem,
 		// 32px
-		"spacing-6": 2.5em,
+		"spacing-6": 2.5rem,
 		// 40px
-		"spacing-7": 3em,
+		"spacing-7": 3rem,
 		// 48px
-		"spacing-8": 3.5em,
+		"spacing-8": 3.5rem,
 		// 56px
-		"spacing-9": 4em,
+		"spacing-9": 4rem,
 		// 64px
-		"spacing-10": 4.5em,
+		"spacing-10": 4.5rem,
 		// 72px
-		"spacing-11": 5em,
+		"spacing-11": 5rem,
 		// 80px
-		"spacing-12": 5.5em,
+		"spacing-12": 5.5rem,
 		// 88px
-		"spacing-13": 6em,
+		"spacing-13": 6rem,
 		// 96px
-		"spacing-14": 6.5em,
+		"spacing-14": 6.5rem,
 		// 104px
-		"spacing-15": 7em,
+		"spacing-15": 7rem,
 		// 112px
-		"spacing-16": 7.5em,
+		"spacing-16": 7.5rem,
+
 		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
@@ -132,7 +133,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -153,7 +153,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -184,7 +183,7 @@
 			components: (
 				body: (
 					font-family: var(--primary-font-family),
-					font-size: var(--global-font-size-3),
+					font-size: var(--global-font-size-4),
 				),
 				button: (
 					border: 1px solid transparent,
@@ -354,6 +353,8 @@
 					),
 				),
 				quilted-image: (
+					margin: 0 auto,
+					max-width: calc(var(--layout-content-max-width) * 1px),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),

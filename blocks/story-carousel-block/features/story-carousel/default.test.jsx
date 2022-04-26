@@ -348,18 +348,6 @@ const mockCollectionContent4 = {
 	website: "arc-commerce",
 };
 
-const mockPhrases = {
-	"global.story-carousel.aria-label": "Stories",
-	"global.story-carousel.right-arrow-label": "Next",
-	"global.story-carousel.left-arrow-label": "Previous",
-	"global.story-carousel.slide-indicator": "Slide %{current} of %{maximum}",
-};
-
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
-}));
-
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 jest.mock("fusion:context", () => ({

@@ -1,12 +1,13 @@
 {
   "name": "@wpmedia/story-carousel-block",
   "version": "0.1.0",
-  "description": "Hero Block",
+  "description": "Story Carousel Block",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
     "_index.scss",
+    "intl.json",
     "features"
   ],
   "publishConfig": {

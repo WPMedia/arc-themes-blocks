@@ -10,11 +10,9 @@ A ANS feed enabled carousel block.
 
 ### customFields
 
-| **Prop**                       | **Required** | **Type**         | **Description**                                                         |
-| ------------------------------ | ------------ | ---------------- | ----------------------------------------------------------------------- |
-| headerText                     | no           | PropTypes.string | Carousel Header text                                                    |
-| itemHeaderTruncationLines      | no           | PropTypes.string | Number of lines to show in the card header before being truncated.      |
-| itemDescriptionTruncationLines | no           | PropTypes.string | Number of lines to show in the card description before being truncated. |
+| **Prop**   | **Required** | **Type**         | **Description**      |
+| ---------- | ------------ | ---------------- | -------------------- |
+| headerText | no           | PropTypes.string | Carousel Header text |
 
 ## ANS Schema
 

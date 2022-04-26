@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import {
 	Carousel,
@@ -71,65 +71,67 @@ const StoryCarousel = ({
 	const { content_elements: elements = [] } = content;
 	if (!elements.length) return null;
 
+	const Wrapper = headerText ? HeadingSection : Fragment;
+
 	return (
-		<Stack className={BLOCK_CLASS_NAME}>
-			{headerText && headerText.trim() !== "" ? (
-				<HeadingSection>
+		<Wrapper>
+			<Stack className={BLOCK_CLASS_NAME}>
+				{headerText ? (
 					<Heading className={`${BLOCK_CLASS_NAME}__main-title`}>{headerText}</Heading>
-				</HeadingSection>
-			) : null}
+				) : null}
 
-			<Carousel
-				id={id}
-				label={phrases.t("story-carousel.aria-label")}
-				nextButton={
-					<Carousel.Button id={id} label={phrases.t("story-carousel.right-arrow-label")}>
-						<Icon name="ChevronRight" />
-					</Carousel.Button>
-				}
-				previousButton={
-					<Carousel.Button id={id} label={phrases.t("story-carousel.left-arrow-label")}>
-						<Icon name="ChevronLeft" />
-					</Carousel.Button>
-				}
-			>
-				{elements.map((item, index) => {
-					const {
-						headlines: { basic: headlineText = null } = {},
-						description: { basic: descriptionText = null } = {},
-						websites,
-					} = item;
-					const imageURL = getImageFromANS(item);
-
-					if (!websites[arcSite]) {
-						return null;
+				<Carousel
+					id={id}
+					label={phrases.t("story-carousel.aria-label")}
+					nextButton={
+						<Carousel.Button id={id} label={phrases.t("story-carousel.right-arrow-label")}>
+							<Icon name="ChevronRight" />
+						</Carousel.Button>
 					}
-					const url = websites[arcSite].website_url;
+					previousButton={
+						<Carousel.Button id={id} label={phrases.t("story-carousel.left-arrow-label")}>
+							<Icon name="ChevronLeft" />
+						</Carousel.Button>
+					}
+				>
+					{elements.map((item, index) => {
+						const {
+							headlines: { basic: headlineText = null } = {},
+							description: { basic: descriptionText = null } = {},
+							websites,
+						} = item;
+						const imageURL = getImageFromANS(item);
 
-					return (
-						<Carousel.Item
-							key={item._id}
-							label={`${phrases.t("story-carousel.slide-indicator", {
-								current: index + 1,
-								maximum: elements.length,
-							})}`}
-						>
-							<a className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
-								<Image alt={headlineText ? "" : headlineText} src={imageURL} />
-								{headlineText ? (
-									<HeadingSection>
-										<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
-											{headlineText}
-										</Heading>
-									</HeadingSection>
-								) : null}
-								{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
-							</a>
-						</Carousel.Item>
-					);
-				})}
-			</Carousel>
-		</Stack>
+						if (!websites[arcSite]) {
+							return null;
+						}
+						const url = websites[arcSite].website_url;
+
+						return (
+							<Carousel.Item
+								key={item._id}
+								label={`${phrases.t("story-carousel.slide-indicator", {
+									current: index + 1,
+									maximum: elements.length,
+								})}`}
+							>
+								<a className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
+									<Image alt={headlineText ? "" : headlineText} src={imageURL} />
+									{headlineText ? (
+										<HeadingSection>
+											<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
+												{headlineText}
+											</Heading>
+										</HeadingSection>
+									) : null}
+									{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
+								</a>
+							</Carousel.Item>
+						);
+					})}
+				</Carousel>
+			</Stack>
+		</Wrapper>
 	);
 };
 

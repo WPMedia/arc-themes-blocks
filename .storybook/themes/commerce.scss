@@ -402,11 +402,8 @@
 							--slides: 1,
 						),
 						carousel-actions: (
-							display: none,
-							padding-left: var(--global-spacing-3),
-							padding-right: var(--global-spacing-4),
-							max-width: 95.8%,
 							margin-top: 0,
+							// Need to have the setting here so desktop gets included
 						),
 						carousel-track: (
 							gap: var(--global-spacing-5),
@@ -528,7 +525,6 @@
 							--slides: 4,
 						),
 						carousel-actions: (
-							display: flex,
 							margin-top: -7rem,
 						),
 						carousel-track: (

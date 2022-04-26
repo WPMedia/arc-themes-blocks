@@ -115,7 +115,7 @@ const StoryCarousel = ({
 							})}`}
 						>
 							<a className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
-								<Image alt={headlineText} src={imageURL} />
+								<Image alt={headlineText ? "" : headlineText} src={imageURL} />
 								{headlineText ? (
 									<HeadingSection>
 										<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>

@@ -2,8 +2,8 @@
 
 .b-story-carousel {
 	&__main-title {
-		@include scss.block-properties("category-carousel-title");
-		@include scss.block-components("category-carousel-title");
+		@include scss.block-properties("story-carousel-title");
+		@include scss.block-components("story-carousel-title");
 	}
 
 	&__story-card {

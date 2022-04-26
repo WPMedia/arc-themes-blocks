@@ -61,37 +61,37 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		"spacing-1": 0.25em,
+		"spacing-1": 0.25rem,
 		// 4px
-		"spacing-2": 0.5em,
+		"spacing-2": 0.5rem,
 		// 8px
-		"spacing-3": 1em,
+		"spacing-3": 1rem,
 		// 16px
-		"spacing-4": 1.5em,
+		"spacing-4": 1.5rem,
 		// 24px
-		"spacing-5": 2em,
+		"spacing-5": 2rem,
 		// 32px
-		"spacing-6": 2.5em,
+		"spacing-6": 2.5rem,
 		// 40px
-		"spacing-7": 3em,
+		"spacing-7": 3rem,
 		// 48px
-		"spacing-8": 3.5em,
+		"spacing-8": 3.5rem,
 		// 56px
-		"spacing-9": 4em,
+		"spacing-9": 4rem,
 		// 64px
-		"spacing-10": 4.5em,
+		"spacing-10": 4.5rem,
 		// 72px
-		"spacing-11": 5em,
+		"spacing-11": 5rem,
 		// 80px
-		"spacing-12": 5.5em,
+		"spacing-12": 5.5rem,
 		// 88px
-		"spacing-13": 6em,
+		"spacing-13": 6rem,
 		// 96px
-		"spacing-14": 6.5em,
+		"spacing-14": 6.5rem,
 		// 104px
-		"spacing-15": 7em,
+		"spacing-15": 7rem,
 		// 112px
-		"spacing-16": 7.5em,
+		"spacing-16": 7.5rem,
 
 		// 120px
 		"font-weight-1": 100,
@@ -133,7 +133,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -154,7 +153,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -166,6 +164,17 @@
 		"border-radius-1": 0.25em,
 	),
 	$alias: (
+		"layout-max-width": 1440,
+		"layout-content-max-width": 1216,
+		//
+		// --layout-content-scale-width identifies the inner document width for header and content
+		// alignment.  It accounts for a minimum width that has (--global-spacing-5 / 2) margins
+		//
+		"layout-content-scale-width":
+			min(
+				calc(100vw - var(--global-spacing-5)),
+				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
+			),
 		"primary-color": var(--global-neutral-10),
 		"primary-font-family": "Inter",
 	),
@@ -174,10 +183,7 @@
 			components: (
 				body: (
 					font-family: var(--primary-font-family),
-					font-size: var(--global-font-size-3),
-				),
-				heading: (
-					font-weight: var(--global-font-weight-7),
+					font-size: var(--global-font-size-4),
 				),
 				button: (
 					border: 1px solid transparent,
@@ -232,8 +238,67 @@
 					border-color: var(--global-neutral-2),
 					color: var(--global-neutral-2),
 				),
+				carousel: (
+					--slides: 1,
+				),
+				carousel-actions: (
+					display: none,
+					padding-left: var(--global-spacing-3),
+					padding-right: var(--global-spacing-3),
+					//
+					// The width should place the action buttons near the edge of the carousel responsively
+					//
+					// width is derived from adding
+					//   --layout-content-max-width
+					//   2x button widths (--global-font-size-9)
+					//   2x button margins (--global-font-size-5)
+					// then dividing those by
+					//   --layout-max-width
+					// using the formula: (48 + 32 + 1216 + 32 + 48) / 1440
+					//
+					width: calc(calc(var(--layout-content-max-width) + 160) / var(--layout-max-width) * 100%),
+				),
+				carousel-button: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: var(--global-spacing-1),
+					background-color: var(--global-white),
+					height: var(--global-spacing-7),
+					width: var(--global-spacing-7),
+				),
+				carousel-track: (
+					gap: var(--global-spacing-2),
+					width: var(--layout-content-scale-width),
+				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
 			),
 			blocks: (
+				category-carousel: (
+					gap: var(--global-spacing-2),
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+						),
+						icon: (
+							height: var(--global-font-size-9),
+							width: var(--global-font-size-9),
+						),
+					),
+				),
+				category-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				category-carousel-slide: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-1),
+						),
+					),
+				),
 				hero-stacked: (
 					gap: var(--global-spacing-4),
 				),
@@ -288,6 +353,8 @@
 					),
 				),
 				quilted-image: (
+					margin: 0 auto,
+					max-width: calc(var(--layout-content-max-width) * 1px),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),
@@ -341,12 +408,6 @@
 							max-width: 95.8%,
 							margin-top: 0,
 						),
-						carousel-button: (
-							border-radius: var(--global-spacing-1),
-							background-color: var(--global-white),
-							box-shadow: 0px 0px 16px 0px #19191966,
-							padding: 0.75em,
-						),
 						carousel-track: (
 							gap: var(--global-spacing-5),
 							max-width: 84.7%,
@@ -358,7 +419,7 @@
 					),
 					gap: 0.5rem,
 				),
-				category-carousel-title: (
+				story-carousel-title: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),
@@ -366,7 +427,7 @@
 							font-weight: var(--global-font-weight-7),
 						),
 					),
-					padding-left: 0,
+					margin-left: 0,
 				),
 				story-carousel-card: (
 					components: (
@@ -388,8 +449,24 @@
 		),
 		desktop: (
 			alias: (),
-			components: (),
+			components: (
+				carousel: (
+					--slides: 4,
+				),
+				carousel-actions: (
+					display: flex,
+				),
+				carousel-track: (
+					gap: var(--global-spacing-5),
+				),
+			),
 			blocks: (
+				category-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
+				category-carousel-slide-title: (
+					font-size: var(--global-font-size-3),
+				),
 				hero: (
 					components: (
 						heading: (
@@ -460,7 +537,7 @@
 						),
 					),
 				),
-				category-carousel-title: (
+				story-carousel-title: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-7),
@@ -468,13 +545,14 @@
 							font-weight: var(--global-font-weight-7),
 						),
 					),
-					padding-left: 6rem,
+					margin-left: 8%,
 				),
 			),
 		),
 	)
 );
 
-@use "../../blocks/quilted-image-block";
+@use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/quilted-image-block";
 @use "../../blocks/story-carousel-block";

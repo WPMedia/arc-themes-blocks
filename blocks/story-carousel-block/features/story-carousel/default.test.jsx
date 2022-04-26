@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-
+import { useContent } from "fusion:content";
 import StoryCarousel from "./default";
 
 const testImageURL = "dummy.png";
@@ -33,6 +33,12 @@ const mockCollectionContent = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "ETUI72TJM5BVHCVWRJJEX45WCU",
@@ -54,6 +60,12 @@ const mockCollectionContent = {
 					_id: "Y4RECTW6GBEDXFK6LHBYMQ2HUY",
 					type: "image",
 					url: testImageURL,
+				},
+			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
 				},
 			},
 		},
@@ -78,6 +90,12 @@ const mockCollectionContent = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "UQMQJXJEVRAUHANSPDUZU3HQSI",
@@ -97,6 +115,12 @@ const mockCollectionContent = {
 					_id: "QCSVIRNLGBCT7LWXIMVOHBANHA",
 					type: "image",
 					url: testImageURL,
+				},
+			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
 				},
 			},
 		},
@@ -122,6 +146,12 @@ const mockCollectionContent = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "UQMQJXJEVRAUHANSPDUZU3HQPK",
@@ -141,6 +171,12 @@ const mockCollectionContent = {
 					_id: "QCSVIRNLGBCT7LWXIMVOHBANHA",
 					type: "image",
 					url: testImageURL,
+				},
+			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
 				},
 			},
 		},
@@ -166,6 +202,12 @@ const mockCollectionContent2 = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "ETUI72TJM5BVHCVWRJJEX45WCU",
@@ -180,6 +222,12 @@ const mockCollectionContent2 = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "YVL7ZRMJWFAJBPQ4UJR2G3CGOA",
@@ -191,6 +239,12 @@ const mockCollectionContent2 = {
 				basic: {
 					type: "image",
 					url: testImageURL,
+				},
+			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
 				},
 			},
 		},
@@ -207,6 +261,12 @@ const mockCollectionContent2 = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 		{
 			_id: "ETUI72TJM5BVHCVWRJJEX45ACU",
@@ -219,6 +279,12 @@ const mockCollectionContent2 = {
 					_id: "Y4RECTW6GBEDXFK6LHBYMQ2HUY",
 					type: "image",
 					url: testImageURL,
+				},
+			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
 				},
 			},
 		},
@@ -235,8 +301,50 @@ const mockCollectionContent2 = {
 					url: testImageURL,
 				},
 			},
+			websites: {
+				"arc-commerce": {
+					website_url:
+						"/2022/04/15/blazing-your-trail-why-the-best-sport-jacket-strategy-is-variety/",
+				},
+			},
 		},
 	],
+	website: "arc-commerce",
+};
+
+const mockCollectionContent3 = {
+	_id: "WSXWGYQUHVHCHN556DSSNHHZQA",
+	type: "collection",
+	canonical_website: "arc-commerce",
+	content_elements: [
+		{
+			_id: "ETUI72TJM5BVHCVWRJJEX45WCU",
+			type: "story",
+			version: "0.10.7",
+			headlines: {
+				basic: "test headline",
+			},
+			description: {
+				basic: "test description",
+			},
+			promo_items: {
+				basic: {
+					_id: "Y4RECTW6GBEDXFK6LHBYMQ2HUY",
+					type: "image",
+					url: testImageURL,
+				},
+			},
+			websites: {},
+		},
+	],
+	website: "arc-commerce",
+};
+
+const mockCollectionContent4 = {
+	_id: "WSXWGYQUHVHCHN556DSSNHHZQA",
+	type: "collection",
+	canonical_website: "arc-commerce",
+	content_elements: [],
 	website: "arc-commerce",
 };
 
@@ -252,69 +360,98 @@ jest.mock("fusion:intl", () => ({
 	default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
 }));
 
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-		resizerURL: "https://fake.cdn.com/resizer",
-	}))
-);
+jest.mock("fusion:properties", () => jest.fn(() => ({})));
 
 jest.mock("fusion:context", () => ({
 	useComponentContext: jest.fn(() => []),
-	useAppContext: jest.fn(() => ({
-		globalContent: {
-			...mockCollectionContent,
-		},
-	})),
+	useAppContext: jest.fn(() => ({})),
 	useFusionContext: jest.fn(() => ({
-		arcSite: "the-sun",
+		arcSite: "arc-commerce",
 	})),
 }));
 
 jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => []),
+	useContent: jest.fn(() => {}),
+	useFusionContext: jest.fn(() => {}),
 }));
-
-const mockContextGlobalContent = {
-	copyright: "&copy;2021 - Big Media",
-	location: "Thatoneplace, ST",
-	id: "globalContent_id",
-};
 
 describe("Story Carousel", () => {
 	it("should render", () => {
+		useContent.mockReturnValue(mockCollectionContent2);
+
 		const mockCustomFields = {
-			inheritGlobalContent: true,
-			carouselContentConfig: {},
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
 		};
 
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
-
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 
 		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(1);
 		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(6);
 	});
 
-	it("should not render card headlines or paragraphs when they are not in the content", () => {
+	it("should not render when content_elements is empty", () => {
+		useContent.mockReturnValue(mockCollectionContent4);
+
 		const mockCustomFields = {
-			inheritGlobalContent: true,
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+	});
+
+	it("should not render when carouselContentConfig is not configured", () => {
+		useContent.mockReturnValue({});
+
+		const mockCustomFields = {
 			carouselContentConfig: {},
+			headerText: "This is a header",
 		};
 
-		const mockGlobalContent = {
-			...mockCollectionContent2,
-			...mockContextGlobalContent,
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+	});
+
+	it("should not render when carouselContentConfig is missing", () => {
+		useContent.mockReturnValue({});
+
+		const mockCustomFields = {
+			headerText: "This is a header",
 		};
 
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+	});
+
+	it("should not render card headlines or paragraphs when they are not in the content", () => {
+		useContent.mockReturnValue(mockCollectionContent2);
+
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 
 		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
 		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
@@ -322,99 +459,76 @@ describe("Story Carousel", () => {
 		);
 	});
 
-	it("should render the optional header", () => {
+	it("should render card headlines or paragraphs when they are in the content", () => {
+		useContent.mockReturnValue(mockCollectionContent);
+
 		const mockCustomFields = {
-			inheritGlobalContent: true,
-			carouselContentConfig: {},
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(6);
+		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
+			6
+		);
+	});
+
+	it("should not render the optional header", () => {
+		useContent.mockReturnValue(mockCollectionContent2);
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		expect(container.querySelectorAll(".b-story-carousel__main-title")).toHaveLength(0);
+	});
+
+	it("should render the optional header", () => {
+		useContent.mockReturnValue(mockCollectionContent2);
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
 			headerText: "This is a header",
 		};
 
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
-
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 
 		expect(container.querySelectorAll(".b-story-carousel__main-title")).toHaveLength(1);
 	});
 
-	it("should render the optional header truncation", () => {
+	it("should not render card if website information is not present in content", () => {
+		useContent.mockReturnValue(mockCollectionContent3);
+
 		const mockCustomFields = {
-			inheritGlobalContent: true,
-			carouselContentConfig: {},
-			headerText: "This is a header",
-			itemHeaderTruncationLines: 2,
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
 		};
 
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
+		expect(container.querySelectorAll(".b-story-carousel__story-card-header")).toHaveLength(0);
+		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
+			0
 		);
-
-		const firstHeader = container.querySelector(".b-story-carousel__story-card-header");
-		expect(firstHeader.getAttribute("data-testid")).toBe("2");
-	});
-
-	it("should render the optional description truncation", () => {
-		const mockCustomFields = {
-			inheritGlobalContent: true,
-			carouselContentConfig: {},
-			headerText: "This is a header",
-			itemDescriptionTruncationLines: 3,
-		};
-
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
-
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
-
-		const firstHeader = container.querySelector(".b-story-carousel__story-card .c-paragraph");
-		expect(firstHeader.getAttribute("data-testid")).toBe("3");
-	});
-
-	it("should not render in testing when inheritGlobalContent is set to false", () => {
-		const mockCustomFields = {
-			inheritGlobalContent: false,
-			carouselContentConfig: {},
-		};
-
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
-
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
-
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
-	});
-
-	it("should not render in testing when inheritGlobalContent is not set at all", () => {
-		const mockCustomFields = {
-			carouselContentConfig: {},
-		};
-
-		const mockGlobalContent = {
-			...mockCollectionContent,
-			...mockContextGlobalContent,
-		};
-
-		const { container } = render(
-			<StoryCarousel globalContent={mockGlobalContent} customFields={mockCustomFields} />
-		);
-
-		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
 	});
 });

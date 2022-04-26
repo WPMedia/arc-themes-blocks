@@ -429,11 +429,13 @@
 				story-carousel-card: (
 					components: (
 						heading: (
+							-webkit-line-clamp: 2,
 							font-size: var(--global-font-size-3),
 							line-height: var(--global-line-height-3),
 							color: var(--global-neutral-10),
 						),
 						paragraph: (
+							-webkit-line-clamp: 3,
 							font-weight: var(--global-font-weight-4),
 							font-size: var(--global-font-size-3),
 							line-height: var(--global-line-height-3),

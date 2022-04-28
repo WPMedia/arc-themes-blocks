@@ -7,6 +7,7 @@ import { resultsList } from "../mock-content/resultsList";
 import { simpleListMock } from "../mock-content/simpleList";
 import { smallPromoMock } from "../mock-content/smallPromo";
 import { topTableListMock } from "../mock-content/topTableList";
+import { storyCarouselMock } from "../mock-content/storyCarousel";
 
 const featureMocks = {
 	footer: footerContentMock,
@@ -20,6 +21,7 @@ const featureMocks = {
 	"links-bar": linksBarMock,
 	"results-list": resultsList,
 	"top-table-list": topTableListMock,
+	"story-carousel": storyCarouselMock,
 };
 
 export const useEditableContent = () => ({

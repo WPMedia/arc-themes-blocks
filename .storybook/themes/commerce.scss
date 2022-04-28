@@ -133,6 +133,7 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
+
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -153,6 +154,7 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
+
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -188,8 +190,8 @@
 				button: (
 					border: 1px solid transparent,
 					border-radius: var(--global-border-radius-1),
-					font-size: var(--global-font-size-4),
-					line-height: var(--global-line-height-4),
+					font-size: var(--global-font-size-3),
+					line-height: var(--global-line-height-3),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
 				),
@@ -201,6 +203,7 @@
 				),
 				button-large: (
 					padding: var(--global-spacing-3),
+					font-size: var(--global-font-size-4),
 				),
 				button-default: (
 					background-color: var(--global-white),
@@ -238,6 +241,9 @@
 					border-color: var(--global-neutral-2),
 					color: var(--global-neutral-2),
 				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
 				carousel: (
 					--slides: 1,
 				),
@@ -269,9 +275,6 @@
 					gap: var(--global-spacing-2),
 					width: var(--layout-content-scale-width),
 				),
-				heading: (
-					font-weight: var(--global-font-weight-7),
-				),
 			),
 			blocks: (
 				category-carousel: (
@@ -298,6 +301,9 @@
 							gap: var(--global-spacing-1),
 						),
 					),
+				),
+				category-carousel-slide-title: (
+					font-size: var(--global-font-size-2),
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-4),
@@ -390,11 +396,43 @@
 							gap: var(--global-spacing-3),
 							align-items: start,
 						),
-						button: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
+					),
+				),
+				story-carousel: (
+					components: (
+						carousel: (
+							--slides: 1,
+						),
+						carousel-actions: (
+							margin-top: 0,
+							// Need to have the setting here so desktop gets included
 						),
 					),
+					gap: var(--global-spacing-2),
+				),
+				story-carousel-title: (
+					font-size: var(--global-font-size-7),
+					margin-left: auto,
+					margin-right: auto,
+					width: var(--layout-content-scale-width),
+				),
+				story-carousel-card: (
+					components: (
+						heading: (
+							-webkit-line-clamp: 2,
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-neutral-10),
+						),
+						paragraph: (
+							-webkit-line-clamp: 3,
+							font-weight: var(--global-font-weight-4),
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+							color: var(--global-neutral-5),
+						),
+					),
+					gap: var(--global-spacing-1),
 				),
 			),
 		),
@@ -473,6 +511,19 @@
 				quilted-image__wrapper: (
 					grid-template-areas: "top top" "bottom bottom",
 				),
+				story-carousel: (
+					components: (
+						carousel: (
+							--slides: 4,
+						),
+						carousel-actions: (
+							margin-top: -7rem,
+						),
+					),
+				),
+				story-carousel-title: (
+					font-size: var(--global-font-size-11),
+				),
 			),
 		),
 	)
@@ -481,3 +532,4 @@
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/quilted-image-block";
+@use "../../blocks/story-carousel-block";

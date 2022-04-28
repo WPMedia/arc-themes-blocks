@@ -166,6 +166,7 @@
     "@wpmedia/site-hierarchy-content-block": "file:blocks/site-hierarchy-content-block",
     "@wpmedia/small-manual-promo-block": "file:blocks/small-manual-promo-block",
     "@wpmedia/small-promo-block": "file:blocks/small-promo-block",
+    "@wpmedia/story-carousel-block": "file:blocks/story-carousel-block",
     "@wpmedia/story-feed-author-content-source-block": "file:blocks/story-feed-author-content-source-block",
     "@wpmedia/story-feed-query-content-source-block": "file:blocks/story-feed-query-content-source-block",
     "@wpmedia/story-feed-sections-content-source-block": "file:blocks/story-feed-sections-content-source-block",

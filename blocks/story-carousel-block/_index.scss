@@ -1,0 +1,25 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-story-carousel {
+	&__main-title {
+		@include scss.block-properties("story-carousel-title");
+		@include scss.block-components("story-carousel-title");
+	}
+
+	&__story-card {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		padding: 0;
+
+		img {
+			width: 100%;
+		}
+
+		@include scss.block-properties("story-carousel-card");
+		@include scss.block-components("story-carousel-card");
+	}
+
+	@include scss.block-properties("story-carousel");
+	@include scss.block-components("story-carousel");
+}

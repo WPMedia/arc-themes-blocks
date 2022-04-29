@@ -116,17 +116,23 @@ const StoryCarousel = ({
 									maximum: elements.length,
 								})}`}
 							>
-								<Link className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
-									<Image alt={headlineText ? "" : headlineText} src={imageURL} />
-									{headlineText ? (
-										<HeadingSection>
-											<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
-												{headlineText}
-											</Heading>
-										</HeadingSection>
-									) : null}
-									{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
-								</Link>
+								{({ viewable }) => (
+									<Link
+										className={`${BLOCK_CLASS_NAME}__story-card`}
+										href={url}
+										assistiveHidden={viewable ? null : true}
+									>
+										<Image alt={headlineText ? "" : headlineText} src={imageURL} />
+										{headlineText ? (
+											<HeadingSection>
+												<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
+													{headlineText}
+												</Heading>
+											</HeadingSection>
+										) : null}
+										{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
+									</Link>
+								)}
 							</Carousel.Item>
 						);
 					})}

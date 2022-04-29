@@ -8,6 +8,7 @@ import {
 	Carousel,
 	Heading,
 	HeadingSection,
+	Link,
 	Icon,
 	Image,
 	Stack,
@@ -88,14 +89,20 @@ function CategoryCarousel({ customFields }) {
 							})}`}
 							key={`${imageUrl}_${label}_${linkUrl}`}
 						>
-							<a className={`${BLOCK_CLASS_NAME}__slide`} href={linkUrl}>
-								<Stack>
-									<Image src={imageUrl} alt="" />
-									<HeadingSection>
-										<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
-									</HeadingSection>
-								</Stack>
-							</a>
+							{({ viewable }) => (
+								<Link
+									className={`${BLOCK_CLASS_NAME}__slide`}
+									href={linkUrl}
+									assistiveHidden={viewable ? null : true}
+								>
+									<Stack>
+										<Image src={imageUrl} alt="" />
+										<HeadingSection>
+											<Heading className={`${BLOCK_CLASS_NAME}__slide-title`}>{label}</Heading>
+										</HeadingSection>
+									</Stack>
+								</Link>
+							)}
 						</Carousel.Item>
 					))}
 				</Carousel>

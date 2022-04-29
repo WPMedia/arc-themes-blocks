@@ -5,6 +5,7 @@ import {
 	Image,
 	Icon,
 	Heading,
+	Link,
 	Paragraph,
 	Stack,
 	HeadingSection,
@@ -115,7 +116,7 @@ const StoryCarousel = ({
 									maximum: elements.length,
 								})}`}
 							>
-								<a className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
+								<Link className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
 									<Image alt={headlineText ? "" : headlineText} src={imageURL} />
 									{headlineText ? (
 										<HeadingSection>
@@ -125,7 +126,7 @@ const StoryCarousel = ({
 										</HeadingSection>
 									) : null}
 									{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
-								</a>
+								</Link>
 							</Carousel.Item>
 						);
 					})}

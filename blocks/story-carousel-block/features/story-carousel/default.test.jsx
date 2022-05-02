@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
 import StoryCarousel from "./default";
 
 const testImageURL = "dummy.png";
@@ -518,5 +519,22 @@ describe("Story Carousel", () => {
 		expect(container.querySelectorAll(".b-story-carousel__story-card .c-paragraph")).toHaveLength(
 			0
 		);
+	});
+
+	it("should display warning when content is under 4 items", () => {
+		useContent.mockReturnValue(mockCollectionContent3);
+		useFusionContext.mockReturnValueOnce({ isAdmin: true });
+
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+		expect(container.querySelectorAll("p")).toHaveLength(1);
 	});
 });

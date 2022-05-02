@@ -25,10 +25,9 @@ const StoryCarousel = ({
 	},
 }) => {
 	const { id } = useComponentContext();
-	const { arcSite } = useFusionContext();
+	const { arcSite, isAdmin } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
-
 	const content =
 		useContent({
 			source: contentService,
@@ -71,6 +70,15 @@ const StoryCarousel = ({
 
 	const { content_elements: elements = [] } = content;
 	if (!elements.length) return null;
+	// if fewer than 4 elements, then render error message to admin
+	if (elements.length < 4 && isAdmin) {
+		return <p style={{ color: "red" }}>This feature requires 4 stories to display.</p>;
+	}
+
+	// if fewer than 4 elements, then render nothing to reader
+	if (elements.length < 4) {
+		return null;
+	}
 
 	const Wrapper = headerText ? HeadingSection : Fragment;
 

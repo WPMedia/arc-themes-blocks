@@ -537,4 +537,27 @@ describe("Story Carousel", () => {
 		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
 		expect(container.querySelectorAll("p")).toHaveLength(1);
 	});
+	it("should display warning when content is under 4 items", () => {
+		// when content has fewer than 4 items
+		useContent.mockReturnValue(mockCollectionContent3);
+		// mocking fusion context once in this test
+		useFusionContext.mockReturnValueOnce({ isAdmin: false });
+
+		const mockCustomFields = {
+			carouselContentConfig: {
+				contentService: "something",
+				contentConfigValues: {
+					query: "some query",
+				},
+			},
+		};
+
+		const { container } = render(<StoryCarousel customFields={mockCustomFields} />);
+
+		// render nothing
+		// the b-story carousel comes from existing tests
+		expect(container.querySelectorAll("p")).toHaveLength(0);
+		expect(container.querySelectorAll(".b-story-carousel")).toHaveLength(0);
+		expect(container.querySelectorAll(".c-carousel__slide")).toHaveLength(0);
+	});
 });

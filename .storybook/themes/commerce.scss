@@ -65,33 +65,35 @@
 		// 4px
 		"spacing-2": 0.5rem,
 		// 8px
-		"spacing-3": 1rem,
+		"spacing-3": 0.75rem,
+		// 12px
+		"spacing-4": 1rem,
 		// 16px
-		"spacing-4": 1.5rem,
+		"spacing-5": 1.5rem,
 		// 24px
-		"spacing-5": 2rem,
+		"spacing-6": 2rem,
 		// 32px
-		"spacing-6": 2.5rem,
+		"spacing-7": 2.5rem,
 		// 40px
-		"spacing-7": 3rem,
+		"spacing-8": 3rem,
 		// 48px
-		"spacing-8": 3.5rem,
+		"spacing-9": 3.5rem,
 		// 56px
-		"spacing-9": 4rem,
+		"spacing-10": 4rem,
 		// 64px
-		"spacing-10": 4.5rem,
+		"spacing-11": 4.5rem,
 		// 72px
-		"spacing-11": 5rem,
+		"spacing-12": 5rem,
 		// 80px
-		"spacing-12": 5.5rem,
+		"spacing-13": 5.5rem,
 		// 88px
-		"spacing-13": 6rem,
+		"spacing-14": 6rem,
 		// 96px
-		"spacing-14": 6.5rem,
+		"spacing-15": 6.5rem,
 		// 104px
-		"spacing-15": 7rem,
+		"spacing-16": 7rem,
 		// 112px
-		"spacing-16": 7.5rem,
+		"spacing-17": 7.5rem,
 
 		// 120px
 		"font-weight-1": 100,
@@ -170,11 +172,11 @@
 		"layout-content-max-width": 1216,
 		//
 		// --layout-content-scale-width identifies the inner document width for header and content
-		// alignment.  It accounts for a minimum width that has (--global-spacing-5 / 2) margins
+		// alignment.  It accounts for a minimum width that has (--global-spacing-6 / 2) margins
 		//
 		"layout-content-scale-width":
 			min(
-				calc(100vw - var(--global-spacing-5)),
+				calc(100vw - var(--global-spacing-6)),
 				calc(var(--layout-content-max-width) / var(--layout-max-width) * 100%)
 			),
 		"primary-color": var(--global-neutral-10),
@@ -196,13 +198,13 @@
 					gap: var(--global-spacing-2),
 				),
 				button-small: (
-					padding: var(--global-spacing-1) var(--global-spacing-3),
+					padding: var(--global-spacing-1) var(--global-spacing-4),
 				),
 				button-medium: (
-					padding: calc(var(--global-spacing-2) + var(--global-spacing-1)) var(--global-spacing-3),
+					padding: var(--global-spacing-3) var(--global-spacing-4),
 				),
 				button-large: (
-					padding: var(--global-spacing-3),
+					padding: var(--global-spacing-4),
 					font-size: var(--global-font-size-4),
 				),
 				button-default: (
@@ -249,8 +251,8 @@
 				),
 				carousel-actions: (
 					display: none,
-					padding-left: var(--global-spacing-3),
-					padding-right: var(--global-spacing-3),
+					padding-left: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
 					//
 					// The width should place the action buttons near the edge of the carousel responsively
 					//
@@ -268,8 +270,8 @@
 					box-shadow: var(--global-box-shadow-1),
 					border-radius: var(--global-spacing-1),
 					background-color: var(--global-white),
-					height: var(--global-spacing-7),
-					width: var(--global-spacing-7),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
@@ -306,7 +308,7 @@
 					font-size: var(--global-font-size-2),
 				),
 				hero-stacked: (
-					gap: var(--global-spacing-4),
+					gap: var(--global-spacing-5),
 				),
 				hero: (
 					color: var(--global-neutral-10),
@@ -315,7 +317,7 @@
 							text-decoration: none,
 						),
 						stack: (
-							gap: var(--global-spacing-3),
+							gap: var(--global-spacing-4),
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
@@ -344,7 +346,7 @@
 				hero-text-left: (
 					max-width: 100%,
 					justify-self: flex-start,
-					padding: 0 var(--global-spacing-3),
+					padding: 0 var(--global-spacing-4),
 				),
 				hero-text-stacked: (
 					max-width: 24rem,
@@ -367,12 +369,12 @@
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-4),
 							margin-bottom: var(--global-spacing-2),
-							margin-left: var(--global-spacing-3),
+							margin-left: var(--global-spacing-4),
 						),
 					),
 				),
 				quilted-image__wrapper: (
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-6),
 					grid-template-areas: "top" "middle" "bottom",
 					grid-auto-flow: "column",
 				),
@@ -383,9 +385,9 @@
 					color: var(--global-neutral-10),
 				),
 				quilted-image__overlay: (
-					left: var(--global-spacing-3),
-					bottom: var(--global-spacing-3),
-					padding-right: var(--global-spacing-3),
+					left: var(--global-spacing-4),
+					bottom: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
 					components: (
 						paragraph: (
 							font-weight: var(--global-font-weight-7),
@@ -393,7 +395,7 @@
 							font-size: var(--global-font-size-5),
 						),
 						stack: (
-							gap: var(--global-spacing-3),
+							gap: var(--global-spacing-4),
 							align-items: start,
 						),
 					),
@@ -446,7 +448,7 @@
 					display: flex,
 				),
 				carousel-track: (
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-6),
 				),
 			),
 			blocks: (
@@ -477,7 +479,7 @@
 				),
 				hero-text-left: (
 					max-width: 65%,
-					padding: 0 var(--global-spacing-3) 0 var(--global-spacing-15),
+					padding: 0 var(--global-spacing-4) 0 var(--global-spacing-16),
 				),
 				hero-subheadline: (
 					components: (
@@ -497,14 +499,14 @@
 					),
 				),
 				quilted-image__overlay: (
-					left: var(--global-spacing-5),
-					bottom: var(--global-spacing-5),
+					left: var(--global-spacing-6),
+					bottom: var(--global-spacing-6),
 					components: (
 						paragraph: (
 							font-size: var(--global-font-size-7),
 						),
 						stack: (
-							gap: var(--global-spacing-5),
+							gap: var(--global-spacing-6),
 						),
 					),
 				),

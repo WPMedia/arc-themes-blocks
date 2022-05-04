@@ -2,7 +2,7 @@
 
 A carousel block to display product assortments (rules) from Algolia.
 
-The block is dependent on the PageBuilder Product Assortment integration to enable selecting the assortment to display.
+The block is dependent on the PageBuilder Product Assortment integration to enable selecting the assortment to display within the block.
 
 ## Props
 

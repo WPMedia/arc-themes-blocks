@@ -435,5 +435,11 @@
     "category-carousel.right-arrow-label": "Next",
     "category-carousel.left-arrow-label": "Previous",
     "category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+  },
+  "product-assortment-carousel-block": {
+    "product-assortment-carousel.aria-label": "Products",
+    "product-assortment-carousel.right-arrow-label": "Next",
+    "product-assortment-carousel.left-arrow-label": "Previous",
+    "product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
   }
 }

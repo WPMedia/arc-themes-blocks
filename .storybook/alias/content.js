@@ -8,6 +8,7 @@ import { simpleListMock } from "../mock-content/simpleList";
 import { smallPromoMock } from "../mock-content/smallPromo";
 import { topTableListMock } from "../mock-content/topTableList";
 import { storyCarouselMock } from "../mock-content/storyCarousel";
+import { algoliaProductMock } from "../mock-content/algoliaProduct";
 
 const featureMocks = {
 	footer: footerContentMock,
@@ -22,6 +23,7 @@ const featureMocks = {
 	"results-list": resultsList,
 	"top-table-list": topTableListMock,
 	"story-carousel": storyCarouselMock,
+	"product-assortment-carousel": algoliaProductMock,
 };
 
 export const useEditableContent = () => ({

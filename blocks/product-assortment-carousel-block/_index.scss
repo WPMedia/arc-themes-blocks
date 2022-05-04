@@ -1,0 +1,30 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-product-assortment-carousel {
+	&__main-title {
+		@include scss.block-properties("product-assortment-carousel-title");
+		@include scss.block-components("product-assortment-carousel-title");
+	}
+
+	&__product {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		padding: 0;
+
+		img {
+			width: 100%;
+		}
+
+		@include scss.block-properties("product-assortment-carousel-product");
+		@include scss.block-components("product-assortment-carousel-product");
+	}
+
+	&__product-single-price {
+		@include scss.block-properties("product-assortment-carousel-product-single-price");
+		@include scss.block-components("product-assortment-carousel-product-single-price");
+	}
+
+	@include scss.block-properties("product-assortment-carousel");
+	@include scss.block-components("product-assortment-carousel");
+}

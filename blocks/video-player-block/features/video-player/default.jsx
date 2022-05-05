@@ -6,6 +6,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import {
+	formatPowaVideoEmbed,
 	Heading,
 	HeadingSection,
 	MediaItem,
@@ -14,8 +15,6 @@ import {
 	Stack,
 	Video,
 } from "@wpmedia/arc-themes-components";
-
-import formatEmbedMarkup from "./util/formatEmbedMarkup";
 
 const BLOCK_CLASS_NAME = "b-video-player";
 
@@ -153,12 +152,11 @@ function VideoPlayer({ customFields = {} }) {
 				caption: !hideVideoCaption ? captionDescription : null,
 				credit: !hideVideoCredits ? contentSource?.credits : null,
 				description,
-				embedMarkup: formatEmbedMarkup(
-					contentSource?.embed_html,
+				embedMarkup: formatPowaVideoEmbed(contentSource?.embed_html, {
 					autoplay,
 					playthrough,
-					1 / aspectRatio
-				),
+					aspectRatio: 1 / aspectRatio,
+				}),
 				captionTitle,
 				hideVideoTitle,
 				title,

@@ -423,5 +423,23 @@
     "subscriptions-block.payment-information": "Credit card information",
     "subscriptions-block.submit-payment": "Purchase Subscription",
     "subscriptions-block.payment-error": "There was an error processing your payment."
+  },
+  "story-carousel-block": {
+    "story-carousel.aria-label": "Stories",
+    "story-carousel.right-arrow-label": "Next",
+    "story-carousel.left-arrow-label": "Previous",
+    "story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+  },
+  "category-carousel-block": {
+    "category-carousel.aria-label": "Categories",
+    "category-carousel.right-arrow-label": "Next",
+    "category-carousel.left-arrow-label": "Previous",
+    "category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+  },
+  "product-assortment-carousel-block": {
+    "product-assortment-carousel.aria-label": "Products",
+    "product-assortment-carousel.right-arrow-label": "Next",
+    "product-assortment-carousel.left-arrow-label": "Previous",
+    "product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
   }
 }

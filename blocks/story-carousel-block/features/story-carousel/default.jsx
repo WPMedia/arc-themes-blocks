@@ -5,6 +5,7 @@ import {
 	Image,
 	Icon,
 	Heading,
+	Link,
 	Paragraph,
 	Stack,
 	HeadingSection,
@@ -24,10 +25,9 @@ const StoryCarousel = ({
 	},
 }) => {
 	const { id } = useComponentContext();
-	const { arcSite } = useFusionContext();
+	const { arcSite, isAdmin } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
-
 	const content =
 		useContent({
 			source: contentService,
@@ -70,6 +70,15 @@ const StoryCarousel = ({
 
 	const { content_elements: elements = [] } = content;
 	if (!elements.length) return null;
+	// if fewer than 4 elements, then render error message to admin
+	if (elements.length < 4 && isAdmin) {
+		return <p style={{ color: "red" }}>This feature requires 4 stories to display.</p>;
+	}
+
+	// if fewer than 4 elements, then render nothing to reader
+	if (elements.length < 4) {
+		return null;
+	}
 
 	const Wrapper = headerText ? HeadingSection : Fragment;
 
@@ -115,17 +124,23 @@ const StoryCarousel = ({
 									maximum: elements.length,
 								})}`}
 							>
-								<a className={`${BLOCK_CLASS_NAME}__story-card`} href={url}>
-									<Image alt={headlineText ? "" : headlineText} src={imageURL} />
-									{headlineText ? (
-										<HeadingSection>
-											<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
-												{headlineText}
-											</Heading>
-										</HeadingSection>
-									) : null}
-									{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
-								</a>
+								{({ viewable }) => (
+									<Link
+										className={`${BLOCK_CLASS_NAME}__story-card`}
+										href={url}
+										assistiveHidden={viewable ? null : true}
+									>
+										<Image alt={headlineText ? "" : headlineText} src={imageURL} />
+										{headlineText ? (
+											<HeadingSection>
+												<Heading className={`${BLOCK_CLASS_NAME}__story-card-header`}>
+													{headlineText}
+												</Heading>
+											</HeadingSection>
+										) : null}
+										{descriptionText ? <Paragraph>{descriptionText}</Paragraph> : null}
+									</Link>
+								)}
 							</Carousel.Item>
 						);
 					})}

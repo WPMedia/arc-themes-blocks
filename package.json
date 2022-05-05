@@ -147,6 +147,7 @@
     "@wpmedia/numbered-list-block": "file:blocks/numbered-list-block",
     "@wpmedia/overline-block": "file:blocks/overline-block",
     "@wpmedia/placeholder-image-block": "file:blocks/placeholder-image-block",
+    "@wpmedia/product-assortment-carousel-block": "file:blocks/product-assortment-carousel-block",
     "@wpmedia/quad-chain-block": "file:blocks/quad-chain-block",
     "@wpmedia/quilted-image-block": "file:blocks/quilted-image-block",
     "@wpmedia/related-content-content-source-block": "file:blocks/related-content-content-source-block",

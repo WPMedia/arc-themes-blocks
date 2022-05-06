@@ -403,7 +403,7 @@
 				single-column-regular: (
 					components: (
 						stack: (
-							gap: var(--global-spacing-16),
+							gap: var(--global-spacing-12),
 						),
 					),
 				),
@@ -519,6 +519,13 @@
 				),
 				quilted-image__wrapper: (
 					grid-template-areas: "top top" "bottom bottom",
+				),
+				single-column-regular: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-16),
+						),
+					),
 				),
 				story-carousel: (
 					components: (

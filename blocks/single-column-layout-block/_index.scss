@@ -9,6 +9,7 @@
 	width: 100%;
 	margin: auto;
 	@include scss.block-properties("single-column-regular");
+	@include scss.block-components("single-column-regular");
 }
 
 .b-single-column-regular-footer {

@@ -400,6 +400,13 @@
 						),
 					),
 				),
+				single-column-regular: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-16),
+						),
+					),
+				),
 				story-carousel: (
 					components: (
 						carousel: (
@@ -535,3 +542,4 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/single-column-layout-block";

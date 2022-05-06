@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { Stack } from "@wpmedia/arc-themes-components";
 
 const LAYOUT_CLASS_NAME = "b-single-column-regular";
 
@@ -10,9 +11,9 @@ const SingleColumnRegular = ({ children }) => {
 		<>
 			{navigation ? <header className={`${LAYOUT_CLASS_NAME}-header`}>{navigation}</header> : null}
 			{main ? (
-				<section role="main" id="main" className={`${LAYOUT_CLASS_NAME}`} tabIndex="-1">
+				<Stack role="main" id="main" className={LAYOUT_CLASS_NAME} tabIndex="-1">
 					{main}
-				</section>
+				</Stack>
 			) : null}
 			{footer ? <footer className={`${LAYOUT_CLASS_NAME}-footer`}>{footer}</footer> : null}
 		</>

@@ -53,7 +53,7 @@ function QuiltedImage({ customFields }) {
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
-					{image1URL && item1Action && overlay1Text ? (
+					{image1URL && item1Action && overlay1Text && button1Text ? (
 						<Link
 							href={item1Action}
 							className={`${BLOCK_CLASS_NAME}__media-panel  ${
@@ -71,7 +71,7 @@ function QuiltedImage({ customFields }) {
 							</Stack>
 						</Link>
 					) : null}
-					{image2URL && item2Action && overlay2Text ? (
+					{image2URL && item2Action && overlay2Text && button2Text ? (
 						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
 							<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
 							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
@@ -84,7 +84,7 @@ function QuiltedImage({ customFields }) {
 							</Stack>
 						</Link>
 					) : null}
-					{image3URL && item3Action && overlay3Text ? (
+					{image3URL && item3Action && overlay3Text && button3Text ? (
 						<Link
 							href={item3Action}
 							className={`${BLOCK_CLASS_NAME}__media-panel ${

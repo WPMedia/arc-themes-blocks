@@ -2,6 +2,7 @@
 
 .b-single-column-regular-header {
 	@include scss.block-properties("single-column-regular-header");
+	@include scss.block-components("single-column-regular-header");
 }
 
 .b-single-column-regular {
@@ -14,4 +15,5 @@
 
 .b-single-column-regular-footer {
 	@include scss.block-properties("single-column-regular-footer");
+	@include scss.block-components("single-column-regular-footer");
 }

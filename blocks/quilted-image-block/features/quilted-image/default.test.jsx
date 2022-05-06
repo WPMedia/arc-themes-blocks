@@ -78,11 +78,7 @@ describe("Quilted Image", () => {
 		);
 	});
 
-	/* 
-		NOTE : This test was written to overcome an unanticipated issue and should not be needed.
-           The "Overlay Action" custom fields all have a default value of "". 
-	*/
-	it("should give links with className 'b-quilted-image__media-panel' an href value of '#' 'Overlay Action' custom fields are empty strings.", () => {
+	it("should not render any media panels if one of three needed props custom fields are empty strings.", () => {
 		const { container } = render(
 			<QuiltedImage
 				customFields={{
@@ -94,10 +90,8 @@ describe("Quilted Image", () => {
 			/>
 		);
 
-		for (let i = 0; i < 3; i += 1) {
-			const linkElement = container.querySelectorAll("a.b-quilted-image__media-panel")[i];
-			expect(linkElement.getAttribute("href")).toBe("#");
-		}
+		const mediaPanels = container.querySelectorAll("a.b-quilted-image__media-panel");
+		expect(mediaPanels.length).toBe(0);
 	});
 
 	it("should not render button components if 'Button Text' custom fields are empty strings.", () => {

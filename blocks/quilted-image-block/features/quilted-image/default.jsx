@@ -53,61 +53,55 @@ function QuiltedImage({ customFields }) {
 			<HeadingSection>
 				{headline ? <Heading>{headline}</Heading> : null}
 				<div className={`${BLOCK_CLASS_NAME}__wrapper`}>
-					<Link
-						href={item1Action || "#"}
-						className={`${BLOCK_CLASS_NAME}__media-panel  ${
-							fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
-						}`}
-					>
-						<Image src={image1URL} style={{ aspectRatio: image1AspectRatio }} />
-						<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-							{overlay1Text ? (
+					{image1URL && item1Action && overlay1Text ? (
+						<Link
+							href={item1Action}
+							className={`${BLOCK_CLASS_NAME}__media-panel  ${
+								fullWidthImage === "top" ? `${BLOCK_CLASS_NAME}__wrapper-top` : ""
+							}`}
+						>
+							<Image src={image1URL} style={{ aspectRatio: image1AspectRatio }} />
+							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay1TextVariant}`}>
 									{overlay1Text}
 								</Paragraph>
-							) : null}
-							{button1Text ? (
 								<Button variant={button1Variant} size="small" assistiveHidden>
 									{button1Text}
 								</Button>
-							) : null}
-						</Stack>
-					</Link>
-					<Link href={item2Action || "#"} className={`${BLOCK_CLASS_NAME}__media-panel`}>
-						<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
-						<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-							{overlay2Text ? (
+							</Stack>
+						</Link>
+					) : null}
+					{image2URL && item2Action && overlay2Text ? (
+						<Link href={item2Action} className={`${BLOCK_CLASS_NAME}__media-panel`}>
+							<Image src={image2URL} style={{ aspectRatio: image2AspectRatio }} />
+							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay2TextVariant}`}>
 									{overlay2Text}
 								</Paragraph>
-							) : null}
-							{button2Text ? (
 								<Button variant={button2Variant} size="small" assistiveHidden>
 									{button2Text}
 								</Button>
-							) : null}
-						</Stack>
-					</Link>
-					<Link
-						href={item3Action || "#"}
-						className={`${BLOCK_CLASS_NAME}__media-panel ${
-							fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
-						}`}
-					>
-						<Image src={image3URL} style={{ aspectRatio: image3AspectRatio }} />
-						<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
-							{overlay3Text ? (
+							</Stack>
+						</Link>
+					) : null}
+					{image3URL && item3Action && overlay3Text ? (
+						<Link
+							href={item3Action}
+							className={`${BLOCK_CLASS_NAME}__media-panel ${
+								fullWidthImage === "bottom" ? `${BLOCK_CLASS_NAME}__wrapper-bottom` : ""
+							}`}
+						>
+							<Image src={image3URL} style={{ aspectRatio: image3AspectRatio }} />
+							<Stack className={`${BLOCK_CLASS_NAME}__overlay`} inline>
 								<Paragraph className={`${BLOCK_CLASS_NAME}__overlay-text--${overlay3TextVariant}`}>
 									{overlay3Text}
 								</Paragraph>
-							) : null}
-							{button3Text ? (
 								<Button variant={button3Variant} size="small" assistiveHidden>
 									{button3Text}
 								</Button>
-							) : null}
-						</Stack>
-					</Link>
+							</Stack>
+						</Link>
+					) : null}
 				</div>
 			</HeadingSection>
 		</div>

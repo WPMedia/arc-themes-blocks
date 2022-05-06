@@ -8,19 +8,19 @@ const SingleColumnRegular = ({ children }) => {
 	const [navigation, main, footer] = React.Children.toArray(children);
 
 	return (
-		<Stack>
+		<Stack className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack role="heading" className={`${LAYOUT_CLASS_NAME}-header`}>
+				<Stack role="heading" className={`${LAYOUT_CLASS_NAME}__header`}>
 					{navigation}
 				</Stack>
 			) : null}
 			{main ? (
-				<Stack role="main" id="main" className={LAYOUT_CLASS_NAME} tabIndex="-1">
+				<Stack role="main" id="main" className={`${LAYOUT_CLASS_NAME}__main`} tabIndex="-1">
 					{main}
 				</Stack>
 			) : null}
 			{footer ? (
-				<Stack role="contentinfo" className={`${LAYOUT_CLASS_NAME}-footer`}>
+				<Stack role="contentinfo" className={`${LAYOUT_CLASS_NAME}__footer`}>
 					{footer}
 				</Stack>
 			) : null}

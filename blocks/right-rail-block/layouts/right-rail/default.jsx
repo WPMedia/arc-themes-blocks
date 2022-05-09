@@ -26,7 +26,7 @@ const RightRailLayout = ({ children }) => {
 				{navigation}
 			</Stack>
 			<Stack role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
-				<div>{fullWidth1}</div>
+				<div className={`${LAYOUT_CLASS_NAME}__main-item`}>{fullWidth1}</div>
 
 				<div>
 					<div>{main}</div>
@@ -34,9 +34,7 @@ const RightRailLayout = ({ children }) => {
 				</div>
 
 				{featureList["4"] > 0 && (
-					<div className="row">
-						<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth2}</div>
-					</div>
+					<div className={`${LAYOUT_CLASS_NAME}__extra-main-item`}>{fullWidth2}</div>
 				)}
 			</Stack>
 			<Stack className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</Stack>

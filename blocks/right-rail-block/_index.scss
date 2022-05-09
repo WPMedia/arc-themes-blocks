@@ -18,4 +18,9 @@
 		@include scss.block-properties("right-rail-footer");
 		@include scss.block-components("right-rail-footer");
 	}
+
+	&__extra-main-item {
+		@include scss.block-properties("right-rail-extra-main-item");
+		@include scss.block-components("right-rail-extra-main-item");
+	}
 }

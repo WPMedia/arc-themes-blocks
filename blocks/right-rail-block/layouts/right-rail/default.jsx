@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useAppContext } from "fusion:context";
 import "./default.scss";
+import { Stack } from "@wpmedia/arc-themes-components";
+
+const LAYOUT_CLASS_NAME = "b-right-rail";
 
 const useFeatueList = () => {
 	const { renderables } = useAppContext();
@@ -19,8 +22,10 @@ const RightRailLayout = ({ children }) => {
 	const featureList = useFeatueList();
 
 	return (
-		<>
-			<header className="page-header">{navigation}</header>
+		<Stack className={LAYOUT_CLASS_NAME}>
+			<Stack role="banner" className="page-header">
+				{navigation}
+			</Stack>
 			<section role="main" id="main" className="main" tabIndex="-1">
 				<div className="container layout-section">
 					<div className="row">
@@ -44,7 +49,7 @@ const RightRailLayout = ({ children }) => {
 				</div>
 			</section>
 			<footer>{footer}</footer>
-		</>
+		</Stack>
 	);
 };
 

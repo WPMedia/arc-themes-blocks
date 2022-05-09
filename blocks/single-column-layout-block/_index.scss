@@ -1,13 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-single-column-regular {
-	@include scss.block-properties("single-column-regular");
-	@include scss.block-components("single-column-regular");
-
 	&__header {
 		@include scss.block-properties("single-column-regular-header");
 		@include scss.block-components("single-column-regular-header");
 	}
+
 	&__main {
 		max-width: 90rem; // 1440px
 		width: 100%;
@@ -15,8 +13,11 @@
 		@include scss.block-properties("single-column-regular-main");
 		@include scss.block-components("single-column-regular-main");
 	}
+
 	&__footer {
 		@include scss.block-properties("single-column-regular-footer");
 		@include scss.block-components("single-column-regular-footer");
 	}
+	@include scss.block-properties("single-column-regular");
+	@include scss.block-components("single-column-regular");
 }

@@ -7,9 +7,8 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "layouts",
+    "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",

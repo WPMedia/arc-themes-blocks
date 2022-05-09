@@ -9,6 +9,11 @@
 		@include scss.block-components("right-rail-header");
 	}
 
+	&__main-item {
+		@include scss.block-properties("right-rail-main-item");
+		@include scss.block-components("right-rail-main-item");
+	}
+
 	&__main {
 		@include scss.block-properties("right-rail-main");
 		@include scss.block-components("right-rail-main");
@@ -19,8 +24,23 @@
 		@include scss.block-components("right-rail-footer");
 	}
 
+	&__main-interior-item {
+		@include scss.block-properties("right-rail-main-interior-item");
+		@include scss.block-components("right-rail-main-interior-item");
+	}
+
+	&__main-side-rail {
+		@include scss.block-properties("right-rail-main-side-rail");
+		@include scss.block-components("right-rail-main-side-rail");
+	}
+
 	&__extra-main-item {
 		@include scss.block-properties("right-rail-extra-main-item");
 		@include scss.block-components("right-rail-extra-main-item");
+	}
+
+	&__rail-container {
+		@include scss.block-properties("right-rail-rail-container");
+		@include scss.block-components("right-rail-rail-container");
 	}
 }

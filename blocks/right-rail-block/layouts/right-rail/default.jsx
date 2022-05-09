@@ -28,9 +28,9 @@ const RightRailLayout = ({ children }) => {
 			<Stack role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
 				<div className={`${LAYOUT_CLASS_NAME}__main-item`}>{fullWidth1}</div>
 
-				<div>
-					<div>{main}</div>
-					<aside>{rightRail}</aside>
+				<div className={`${LAYOUT_CLASS_NAME}__rail-container`}>
+					<div className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</div>
+					<aside className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>{rightRail}</aside>
 				</div>
 
 				{featureList["4"] > 0 && (

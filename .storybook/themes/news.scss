@@ -190,10 +190,31 @@
 				right-rail-extra-main-item: (
 					margin: 0 0 var(--global-spacing-6) 0,
 				),
+				right-rail-rail-container: (
+					gap: var(--global-spacing-6),
+					display: flex,
+					flex-direction: column,
+				),
+				right-rail-main-side-rail: (
+					flex: initial,
+				),
+				right-rail-main-interior-item: (
+					flex: initial,
+				),
 			),
 		),
 		desktop: (
-			blocks: (),
+			blocks: (
+				right-rail-rail-container: (
+					flex-direction: row,
+				),
+				right-rail-main-side-rail: (
+					flex: 1,
+				),
+				right-rail-main-interior-item: (
+					flex: 2,
+				),
+			),
 		),
 	)
 );

@@ -7,10 +7,13 @@ const LAYOUT_CLASS_NAME = "b-single-column-regular";
 const SingleColumnRegular = ({ children }) => {
 	const [navigation, main, footer] = React.Children.toArray(children);
 
+	if (!navigation && !main && !footer) {
+		return null;
+	}
 	return (
 		<Stack className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack role="heading" className={`${LAYOUT_CLASS_NAME}__header`}>
+				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__header`}>
 					{navigation}
 				</Stack>
 			) : null}

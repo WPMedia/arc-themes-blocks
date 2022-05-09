@@ -1,1 +1,21 @@
 @use "@wpmedia/arc-themes-components/scss";
+
+.b-right-rail {
+	@include scss.block-properties("right-rail");
+	@include scss.block-components("right-rail");
+
+	&__header {
+		@include scss.block-properties("right-rail-header");
+		@include scss.block-components("right-rail-header");
+	}
+
+	&__main {
+		@include scss.block-properties("right-rail-main");
+		@include scss.block-components("right-rail-main");
+	}
+
+	&__footer {
+		@include scss.block-properties("right-rail-footer");
+		@include scss.block-components("right-rail-footer");
+	}
+}

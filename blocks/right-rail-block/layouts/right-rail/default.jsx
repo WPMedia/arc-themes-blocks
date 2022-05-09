@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useAppContext } from "fusion:context";
-import "./default.scss";
 import { Stack } from "@wpmedia/arc-themes-components";
 
 const LAYOUT_CLASS_NAME = "b-right-rail";
@@ -23,32 +22,24 @@ const RightRailLayout = ({ children }) => {
 
 	return (
 		<Stack className={LAYOUT_CLASS_NAME}>
-			<Stack role="banner" className="page-header">
+			<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__header`}>
 				{navigation}
 			</Stack>
-			<section role="main" id="main" className="main" tabIndex="-1">
-				<div className="container layout-section">
-					<div className="row">
-						<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth1}</div>
-					</div>
+			<Stack role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
+				<div>{fullWidth1}</div>
 
-					<div className="row">
-						<div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
-							{main}
-						</div>
-						<aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section wrap-bottom">
-							{rightRail}
-						</aside>
-					</div>
-
-					{featureList["4"] > 0 && (
-						<div className="row">
-							<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth2}</div>
-						</div>
-					)}
+				<div>
+					<div>{main}</div>
+					<aside>{rightRail}</aside>
 				</div>
-			</section>
-			<footer>{footer}</footer>
+
+				{featureList["4"] > 0 && (
+					<div className="row">
+						<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth2}</div>
+					</div>
+				)}
+			</Stack>
+			<Stack className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</Stack>
 		</Stack>
 	);
 };

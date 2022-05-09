@@ -1,9 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-right-rail {
-	@include scss.block-properties("right-rail");
-	@include scss.block-components("right-rail");
-
 	&__header {
 		@include scss.block-properties("right-rail-header");
 		@include scss.block-components("right-rail-header");
@@ -43,4 +40,6 @@
 		@include scss.block-properties("right-rail-rail-container");
 		@include scss.block-components("right-rail-rail-container");
 	}
+	@include scss.block-properties("right-rail");
+	@include scss.block-components("right-rail");
 }

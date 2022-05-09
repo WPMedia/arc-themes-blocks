@@ -191,15 +191,18 @@
 					margin: 0 0 var(--global-spacing-6) 0,
 				),
 				right-rail-rail-container: (
-					gap: var(--global-spacing-6),
 					display: flex,
 					flex-direction: column,
+					gap: var(--global-spacing-6),
 				),
 				right-rail-main-side-rail: (
 					flex: initial,
+					padding: initial,
 				),
 				right-rail-main-interior-item: (
 					flex: initial,
+					padding: initial,
+					border-right: initial,
 				),
 			),
 		),
@@ -207,12 +210,16 @@
 			blocks: (
 				right-rail-rail-container: (
 					flex-direction: row,
+					gap: 0,
 				),
 				right-rail-main-side-rail: (
+					padding: 0 0 0 var(--global-spacing-6),
 					flex: 1,
 				),
 				right-rail-main-interior-item: (
+					border-right: 1px solid #dadada,
 					flex: 2,
+					padding: 0 var(--global-spacing-6) 0 0,
 				),
 			),
 		),

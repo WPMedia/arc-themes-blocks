@@ -1,11 +1,12 @@
 import React from "react";
 
-// import { useFusionContext } from "fusion:context";
-// import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import { useContent } from "fusion:content";
 
 import PropTypes from "@arc-fusion/prop-types";
 
 import {
+	formatCredits,
 	formatPowaVideoEmbed,
 	Heading,
 	HeadingSection,
@@ -38,12 +39,7 @@ const videoLayouts = {
 						<Heading>{title}</Heading>
 					</HeadingSection>
 				) : null}
-				<MediaItem
-					caption={caption}
-					className="media-item"
-					credit={credit}
-					title={!hideVideoTitle && captionTitle}
-				>
+				<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
 					<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
 				</MediaItem>
 			</Stack>
@@ -62,12 +58,7 @@ const videoLayouts = {
 		title,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME}__feature`}>
-			<MediaItem
-				caption={caption}
-				className="media-item"
-				credit={credit}
-				title={!hideVideoTitle && captionTitle}
-			>
+			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
 				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
 			</MediaItem>
 			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
@@ -95,44 +86,26 @@ function VideoPlayer({ customFields = {} }) {
 		inheritGlobalContent,
 		playthrough,
 		title,
-		// websiteURL,
+		websiteURL,
 	} = customFields;
 
-	//
-	// THIS IS NOT PRODUCTION CODE !!
-	//
-	// Temporary mock until we can get content-api online
-	// With this code commented out, the tests are fatal at this time
-	//
-	// const { globalContent = {}, arcSite } = useFusionContext();
-	//
-	// const fetchQuery = websiteURL
-	//   ? { website_url: websiteURL, site: arcSite }
-	//   : customFields?.itemContentConfig?.contentConfigValues || null;
-	//
-	// // Support for deprecated 'websiteURL' custom field (use 'content-api' & URL for fetch)
-	// const fetchSource = websiteURL
-	//   ? "content-api"
-	//   : customFields?.itemContentConfig?.contentService || null;
-	//
-	// const fetchedData = useContent({
-	//   query: inheritGlobalContent ? null : fetchQuery,
-	//   source: inheritGlobalContent ? null : fetchSource,
-	// });
-	//
-	// const contentSource = inheritGlobalContent ? globalContent : fetchedData;
-	const contentSource = {
-		embed_html:
-			'<div class="powa" id="powa-e924e51b-db94-492e-8346-02283' +
-			'a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346' +
-			'-02283a126943" data-aspect-ratio="0.5625" data-api="prod"><script src="//d2w3jw6424abwq' +
-			'.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>',
-		credits: "credits",
-		headlines: { basic: "headline" },
-		descriptions: { basic: "description" },
-	};
-	//
-	//
+	const { globalContent = {}, arcSite } = useFusionContext();
+
+	const fetchQuery = websiteURL
+		? { website_url: websiteURL, site: arcSite }
+		: customFields?.itemContentConfig?.contentConfigValues || null;
+
+	// Support for deprecated 'websiteURL' custom field (use 'content-api' & URL for fetch)
+	const fetchSource = websiteURL
+		? "content-api"
+		: customFields?.itemContentConfig?.contentService || null;
+
+	const fetchedData = useContent({
+		query: inheritGlobalContent ? null : fetchQuery,
+		source: inheritGlobalContent ? null : fetchSource,
+	});
+
+	const contentSource = inheritGlobalContent ? globalContent : fetchedData;
 
 	const captionTitle = inheritGlobalContent
 		? contentSource?.headlines?.basic
@@ -150,7 +123,7 @@ function VideoPlayer({ customFields = {} }) {
 				alertBadge,
 				aspectRatio,
 				caption: !hideVideoCaption ? captionDescription : null,
-				credit: !hideVideoCredits ? contentSource?.credits : null,
+				credit: !hideVideoCredits ? formatCredits(contentSource?.credits) : null,
 				description,
 				embedMarkup: formatPowaVideoEmbed(contentSource?.embed_html, {
 					autoplay,

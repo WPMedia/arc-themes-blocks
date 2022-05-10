@@ -10,6 +10,8 @@ jest.mock("@wpmedia/arc-themes-components", () => {
 	const original = jest.requireActual("@wpmedia/arc-themes-components");
 	return {
 		...original,
+		formatCredits: (value) => value,
+		formatPowaVideoEmbed: (value) => value,
 		Video: ({ embedMarkup }) => <div dangerouslySetInnerHTML={{ __html: embedMarkup }} />,
 	};
 });

@@ -403,9 +403,6 @@
 				single-column-regular-main: (
 					components: (
 						stack: (
-							max-width: calc(var(--layout-max-width) * 1px),
-							width: 100%,
-							margin: auto,
 							gap: var(--global-spacing-11),
 						),
 					),

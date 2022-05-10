@@ -4,6 +4,7 @@
   "description": "Content source block for Content API queries",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
+  "main": "",
   "files": [
     "sources"
   ],

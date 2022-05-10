@@ -400,6 +400,13 @@
 						),
 					),
 				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-11),
+						),
+					),
+				),
 				story-carousel: (
 					components: (
 						carousel: (
@@ -513,6 +520,13 @@
 				quilted-image__wrapper: (
 					grid-template-areas: "top top" "bottom bottom",
 				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-16),
+						),
+					),
+				),
 				story-carousel: (
 					components: (
 						carousel: (
@@ -535,4 +549,6 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/single-column-layout-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/right-rail-advanced-block";

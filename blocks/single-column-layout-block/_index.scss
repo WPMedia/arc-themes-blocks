@@ -7,6 +7,9 @@
 	}
 
 	&__main {
+		max-width: 90rem; // 1440px
+		width: 100%;
+		margin: auto;
 		@include scss.block-properties("single-column-regular-main");
 		@include scss.block-components("single-column-regular-main");
 	}

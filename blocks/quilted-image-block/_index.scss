@@ -47,12 +47,12 @@
 	display: grid;
 	grid-template-areas: "overlay";
 
-	@include scss.block-properties("quilted-image__media-panel");
-	@include scss.block-components("quilted-image__media-panel");
-
 	> * {
 		grid-area: overlay;
 	}
+
+	@include scss.block-properties("quilted-image__media-panel");
+	@include scss.block-components("quilted-image__media-panel");
 }
 
 .b-quilted-image__overlay {

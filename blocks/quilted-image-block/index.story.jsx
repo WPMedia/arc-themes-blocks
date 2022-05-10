@@ -63,3 +63,23 @@ export const lightTextColorOnOverlay = () => (
 		}}
 	/>
 );
+
+export const itemsNotRenderedWithoutActionCustomFields = () => (
+	<QuiltedImage
+		customFields={{
+			...customFields,
+			item1Action: "",
+			item2Action: "",
+			item3Action: "",
+		}}
+	/>
+);
+
+export const item1NotRenderedWithoutTextOverlay = () => (
+	<QuiltedImage
+		customFields={{
+			...customFields,
+			overlay1Text: "",
+		}}
+	/>
+);

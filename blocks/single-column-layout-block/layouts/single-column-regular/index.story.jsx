@@ -19,18 +19,8 @@ const styles = {
 	border: "1px solid rgb(200, 200, 200)",
 };
 
-// with enhanced styling not being active,
-// we need to manually define these styles for the content items.
-// - from styles.scss
-
-const styles2 = {
-	...styles,
-	maxWidth: "90rem",
-	margin: "auto",
-};
-
 const Navigation = () => <div style={styles}>Navigation</div>;
-const Component = ({ children }) => <div style={styles2}>{children}</div>;
+const Component = ({ children }) => <div style={styles}>{children}</div>;
 const Footer = () => <div style={styles}>Footer</div>;
 
 export const layoutWithOneChild = () => (

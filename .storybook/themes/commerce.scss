@@ -404,6 +404,9 @@
 					components: (
 						stack: (
 							gap: var(--global-spacing-11),
+							max-width: var(--layout-max-width),
+							width: 100%,
+							margin: auto,
 						),
 					),
 				),

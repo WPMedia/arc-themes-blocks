@@ -5,7 +5,7 @@ import { Grid, Stack } from "@wpmedia/arc-themes-components";
 
 const LAYOUT_CLASS_NAME = "b-right-rail";
 
-const useFeatueList = () => {
+const useFeatureList = () => {
 	const { renderables } = useAppContext();
 	const featureList = {};
 	renderables.forEach((renderable) => {
@@ -17,8 +17,9 @@ const useFeatueList = () => {
 };
 
 const RightRailLayout = ({ children }) => {
-	const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] = children;
-	const featureList = useFeatueList();
+	const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] =
+		React.Children.toArray(children);
+	const featureList = useFeatureList();
 
 	return (
 		<div className={LAYOUT_CLASS_NAME}>

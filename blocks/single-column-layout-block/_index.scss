@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-single-column-regular {
-	&__header {
-		@include scss.block-properties("single-column-regular-header");
-		@include scss.block-components("single-column-regular-header");
+	&__navigation {
+		@include scss.block-properties("single-column-regular-navigation");
+		@include scss.block-components("single-column-regular-navigation");
 	}
 
 	&__main {

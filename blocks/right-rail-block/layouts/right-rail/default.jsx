@@ -44,7 +44,7 @@ const RightRailLayout = ({ children }) => {
 					<div className={`${LAYOUT_CLASS_NAME}__extra-main-item`}>{fullWidth2}</div>
 				) : null}
 			</section>
-			<footer className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</footer>
+			{footer ? <footer className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</footer> : null}
 		</div>
 	);
 };

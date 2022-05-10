@@ -54,7 +54,7 @@
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
-				right-rail-header: (
+				right-rail-navigation: (
 					position: sticky,
 					top: 0,
 					width: 100%,
@@ -92,7 +92,7 @@
 		),
 		desktop: (
 			blocks: (
-				right-rail-header: (
+				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
 				),
 				right-rail-rail-container: (

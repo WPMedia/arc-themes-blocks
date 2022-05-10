@@ -1,9 +1,9 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-right-rail {
-	&__header {
-		@include scss.block-properties("right-rail-header");
-		@include scss.block-components("right-rail-header");
+	&__navigation {
+		@include scss.block-properties("right-rail-navigation");
+		@include scss.block-components("right-rail-navigation");
 	}
 
 	&__main-item {

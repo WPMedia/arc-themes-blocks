@@ -31,9 +31,9 @@
 		@include scss.block-components("right-rail-main-side-rail");
 	}
 
-	&__extra-main-item {
-		@include scss.block-properties("right-rail-extra-main-item");
-		@include scss.block-components("right-rail-extra-main-item");
+	&__full-width-2 {
+		@include scss.block-properties("right-rail-full-width-2");
+		@include scss.block-components("right-rail-full-width-2");
 	}
 
 	&__rail-container {

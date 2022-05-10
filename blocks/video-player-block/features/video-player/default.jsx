@@ -74,12 +74,12 @@ const videoLayouts = {
 	),
 };
 
-function VideoPlayer({ customFields = {} }) {
+function VideoPlayer({ customFields = {}, embedMarkup }) {
 	const {
 		alertBadge,
 		autoplay,
 		description,
-		displayStyle,
+		displayStyle = "inlineVideo",
 		hideVideoCaption,
 		hideVideoCredits,
 		hideVideoTitle,
@@ -117,18 +117,19 @@ function VideoPlayer({ customFields = {} }) {
 
 	const aspectRatio = 16 / 9;
 	const renderVideoLayout = videoLayouts[displayStyle];
+	const powaMarkup = contentSource?.embed_html || embedMarkup;
 
-	return contentSource?.embed_html
+	return powaMarkup
 		? renderVideoLayout({
 				alertBadge,
 				aspectRatio,
 				caption: !hideVideoCaption ? captionDescription : null,
 				credit: !hideVideoCredits ? formatCredits(contentSource?.credits) : null,
 				description,
-				embedMarkup: formatPowaVideoEmbed(contentSource?.embed_html, {
+				embedMarkup: formatPowaVideoEmbed(powaMarkup, {
 					autoplay,
 					playthrough,
-					aspectRatio: 1 / aspectRatio,
+					aspectRatio: 1 / aspectRatio, // format aspect is reversed
 				}),
 				captionTitle,
 				hideVideoTitle,
@@ -203,6 +204,7 @@ VideoPlayer.propTypes = {
 			group: "Display settings",
 		}),
 	}),
+	embedMarkup: PropTypes.string,
 };
 
 VideoPlayer.label = "Video Center Player - Arc Block";

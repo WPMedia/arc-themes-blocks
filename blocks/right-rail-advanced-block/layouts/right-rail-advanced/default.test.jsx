@@ -113,6 +113,11 @@ const renderablesNoFullWidth2 = [
 		props: { id: 9 },
 		children: [1],
 	},
+	{
+		collection: "sections",
+		props: { id: 10 },
+		children: [], // length falsy
+	},
 ];
 
 describe("the right rail layout for the default output type", () => {
@@ -132,11 +137,34 @@ describe("the right rail layout for the default output type", () => {
 			</RightRailAdvancedLayout>
 		);
 
-		expect(wrapper.find("header")).toHaveHTML(
-			'<header class="page-header"><div id="navigation"></div></header>'
-		);
+		expect(wrapper.find(".b-right-rail-advanced__navigation")).toMatchInlineSnapshot(`
+		<Stack
+		  alignment="unset"
+		  className="b-right-rail-advanced__navigation"
+		  direction="vertical"
+		  divider={false}
+		  inline={false}
+		  justification="start"
+		  role="banner"
+		  wrap="nowrap"
+		>
+		  <div
+		    id="navigation"
+		    key=".0"
+		  />
+		</Stack>
+	`);
 		expect(wrapper.find("#fullWidth2").exists()).toBe(true);
-		expect(wrapper.find("footer")).toHaveHTML('<footer><div id="footer"></div></footer>');
+		expect(wrapper.find("footer")).toMatchInlineSnapshot(`
+		<footer
+		  className="b-right-rail-advanced__footer"
+		>
+		  <div
+		    id="footer"
+		    key=".8"
+		  />
+		</footer>
+	`);
 	});
 
 	it("should not show fullWidth2 section", () => {
@@ -155,10 +183,38 @@ describe("the right rail layout for the default output type", () => {
 			</RightRailAdvancedLayout>
 		);
 
-		expect(wrapper.find("header")).toHaveHTML(
-			'<header class="page-header"><div id="navigation"></div></header>'
-		);
+		expect(wrapper.find(".b-right-rail-advanced__navigation")).toMatchInlineSnapshot(`
+		<Stack
+		  alignment="unset"
+		  className="b-right-rail-advanced__navigation"
+		  direction="vertical"
+		  divider={false}
+		  inline={false}
+		  justification="start"
+		  role="banner"
+		  wrap="nowrap"
+		>
+		  <div
+		    id="navigation"
+		    key=".0"
+		  />
+		</Stack>
+	`);
 		expect(wrapper.find("#fullWidth2").exists()).toBe(false);
-		expect(wrapper.find("footer")).toHaveHTML('<footer><div id="footer"></div></footer>');
+		expect(wrapper.find("footer")).toMatchInlineSnapshot(`
+		<footer
+		  className="b-right-rail-advanced__footer"
+		>
+		  <div
+		    id="footer"
+		    key=".8"
+		  />
+		</footer>
+	`);
+	});
+	it("should not render a navigation component if none exists", () => {
+		useAppContext.mockReturnValue({ renderables: allRenderables });
+		const wrapper = shallow(<RightRailAdvancedLayout />);
+		expect(wrapper.find("#navigation").exists()).toBe(false);
 	});
 });

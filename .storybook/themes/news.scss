@@ -38,6 +38,16 @@
 		// 112px
 		"spacing-17": 7.5rem,
 	),
+	$alias: (
+		// Layout
+		"layout-max-width": 1440,
+		"content-max-width": 1216,
+		"content-scale-width":
+			min(
+				calc(100vw - var(--global-spacing-6)),
+				calc(var(--content-max-width) / var(--layout-max-width) * 100%)
+			),
+	),
 	$tokens: (
 		default: (
 			blocks: (
@@ -49,27 +59,29 @@
 					top: 0,
 					width: 100%,
 					z-index: 9,
+					margin: 0 0 var(--global-spacing-5) 0,
+				),
+				right-rail-main-item: (
+					margin: 0 0 var(--global-spacing-5) 0,
 				),
 				right-rail-main: (
 					gap: var(--global-spacing-6),
-					flex-grow: 1,
-					transition: padding-top 0.3s linear,
-					margin: 0 5% 0 5%,
+					max-width: var(--content-scale-width),
+					width: 100%,
+					margin: auto,
 				),
 				right-rail-extra-main-item: (
-					margin: 0 0 var(--global-spacing-6) 0,
+					margin: var(--global-spacing-6) 0 0 0,
 				),
 				right-rail-rail-container: (
-					display: flex,
-					flex-direction: column,
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
 					gap: var(--global-spacing-6),
 				),
 				right-rail-main-side-rail: (
-					flex: initial,
 					padding: initial,
 				),
 				right-rail-main-interior-item: (
-					flex: initial,
 					padding: initial,
 					border-right: initial,
 				),
@@ -77,18 +89,20 @@
 		),
 		desktop: (
 			blocks: (
+				right-rail-header: (
+					padding: 0 0 var(--global-spacing-8) 0,
+				),
 				right-rail-rail-container: (
-					flex-direction: row,
-					gap: 0,
+					grid-template-columns: 2fr 1fr,
+					gap: initial,
+					grid-template-rows: initial,
 				),
 				right-rail-main-side-rail: (
 					padding: 0 0 0 var(--global-spacing-6),
-					flex: 1,
 				),
 				right-rail-main-interior-item: (
 					border-right: 1px solid #dadada,
-					flex: 2,
-					padding: 0 var(--global-spacing-6) var(--global-spacing-5) 0,
+					padding: 0 var(--global-spacing-6) 0 0,
 				),
 			),
 		),

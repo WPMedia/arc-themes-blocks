@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useAppContext } from "fusion:context";
-import { Stack } from "@wpmedia/arc-themes-components";
+import { Grid, Stack } from "@wpmedia/arc-themes-components";
 
 const LAYOUT_CLASS_NAME = "b-right-rail";
 
@@ -21,24 +21,31 @@ const RightRailLayout = ({ children }) => {
 	const featureList = useFeatueList();
 
 	return (
-		<Stack className={LAYOUT_CLASS_NAME}>
-			<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__header`}>
-				{navigation}
-			</Stack>
-			<Stack role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
-				<div className={`${LAYOUT_CLASS_NAME}__main-item`}>{fullWidth1}</div>
+		<div className={LAYOUT_CLASS_NAME}>
+			{navigation ? (
+				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__header`}>
+					{navigation}
+				</Stack>
+			) : null}
 
-				<div className={`${LAYOUT_CLASS_NAME}__rail-container`}>
-					<div className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</div>
-					<aside className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>{rightRail}</aside>
-				</div>
+			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
+				{fullWidth1 ? (
+					<Stack className={`${LAYOUT_CLASS_NAME}__main-item`}>{fullWidth1}</Stack>
+				) : null}
 
-				{featureList["4"] > 0 && (
+				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
+					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</Stack>
+					<Stack role="complementary" className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>
+						{rightRail}
+					</Stack>
+				</Grid>
+
+				{featureList["4"] > 0 ? (
 					<div className={`${LAYOUT_CLASS_NAME}__extra-main-item`}>{fullWidth2}</div>
-				)}
-			</Stack>
-			<Stack className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</Stack>
-		</Stack>
+				) : null}
+			</section>
+			<footer className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</footer>
+		</div>
 	);
 };
 

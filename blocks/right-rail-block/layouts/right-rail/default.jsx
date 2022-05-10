@@ -30,7 +30,7 @@ const RightRailLayout = ({ children }) => {
 
 			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
 				{fullWidth1 ? (
-					<Stack className={`${LAYOUT_CLASS_NAME}__main-item`}>{fullWidth1}</Stack>
+					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullWidth1}</Stack>
 				) : null}
 
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>

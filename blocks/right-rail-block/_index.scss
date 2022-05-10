@@ -6,9 +6,9 @@
 		@include scss.block-components("right-rail-navigation");
 	}
 
-	&__main-item {
-		@include scss.block-properties("right-rail-main-item");
-		@include scss.block-components("right-rail-main-item");
+	&__full-width-1 {
+		@include scss.block-properties("right-rail-full-width-1");
+		@include scss.block-components("right-rail-full-width-1");
 	}
 
 	&__main {

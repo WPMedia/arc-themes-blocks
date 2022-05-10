@@ -61,4 +61,12 @@ describe("the content api source block", () => {
 			expect(url).toEqual("/content/v4/?website_url=undefined");
 		});
 	});
+
+	describe("when a parameter is NOT provided", () => {
+		it("should have an undefined website_url", () => {
+			const url = contentApi.resolve();
+
+			expect(url).toEqual("/content/v4/?website_url=undefined");
+		});
+	});
 });

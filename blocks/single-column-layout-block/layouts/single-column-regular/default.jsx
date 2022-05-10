@@ -1,21 +1,33 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { Stack } from "@wpmedia/arc-themes-components";
 
 const LAYOUT_CLASS_NAME = "b-single-column-regular";
 
 const SingleColumnRegular = ({ children }) => {
 	const [navigation, main, footer] = React.Children.toArray(children);
 
+	if (!navigation && !main && !footer) {
+		return null;
+	}
 	return (
-		<>
-			{navigation ? <header className={`${LAYOUT_CLASS_NAME}-header`}>{navigation}</header> : null}
-			{main ? (
-				<section role="main" id="main" className={`${LAYOUT_CLASS_NAME}`} tabIndex="-1">
-					{main}
-				</section>
+		<Stack className={LAYOUT_CLASS_NAME}>
+			{navigation ? (
+				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+					{navigation}
+				</Stack>
 			) : null}
-			{footer ? <footer className={`${LAYOUT_CLASS_NAME}-footer`}>{footer}</footer> : null}
-		</>
+			{main ? (
+				<Stack role="main" id="main" className={`${LAYOUT_CLASS_NAME}__main`} tabIndex="-1">
+					{main}
+				</Stack>
+			) : null}
+			{footer ? (
+				<Stack role="contentinfo" className={`${LAYOUT_CLASS_NAME}__footer`}>
+					{footer}
+				</Stack>
+			) : null}
+		</Stack>
 	);
 };
 

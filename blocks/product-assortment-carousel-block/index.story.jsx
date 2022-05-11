@@ -11,7 +11,20 @@ export default {
 };
 
 export const withHeader = () => (
-	<ProductAssortmentCarousel customFields={{ headerText: "Product Assortment Carousel" }} />
+	<ProductAssortmentCarousel
+		customFields={{
+			headerText: "Product Assortment Carousel",
+			assortmentCondition:
+				'{"anchoring":"contains","pattern":"boot","alternatives":true,"context":"Boots"}',
+		}}
+	/>
 );
 
-export const withOutHeader = () => <ProductAssortmentCarousel customFields={{}} />;
+export const withOutHeader = () => (
+	<ProductAssortmentCarousel
+		customFields={{
+			assortmentCondition:
+				'{"anchoring":"contains","pattern":"boot","alternatives":true,"context":"Boots"}',
+		}}
+	/>
+);

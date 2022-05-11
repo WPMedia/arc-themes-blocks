@@ -130,7 +130,7 @@ describe("VideoPlayer", () => {
 
 		expect(wrapper.find("Heading").text()).toEqual(title);
 		expect(wrapper.find("MediaItem")).toExist();
-		expect(wrapper.find("Pill").text()).toEqual(alertBadge);
+		expect(wrapper.find("Badge").text()).toEqual(alertBadge);
 		expect(wrapper.find("Paragraph").text()).toEqual(description);
 		expect(wrapper.find("Video")).toExist();
 	});
@@ -185,7 +185,7 @@ describe("VideoPlayer", () => {
 
 		expect(wrapper.find("Heading").text()).toEqual(title);
 		expect(wrapper.find("MediaItem")).toExist();
-		expect(wrapper.find("Pill").text()).toEqual(alertBadge);
+		expect(wrapper.find("Badge").text()).toEqual(alertBadge);
 		expect(wrapper.find("Paragraph").text()).toEqual(description);
 		expect(wrapper.find("Video")).toExist();
 	});

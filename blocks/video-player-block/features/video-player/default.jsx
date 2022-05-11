@@ -12,7 +12,7 @@ import {
 	HeadingSection,
 	MediaItem,
 	Paragraph,
-	Pill,
+	Badge,
 	Stack,
 	Video,
 } from "@wpmedia/arc-themes-components";
@@ -32,7 +32,7 @@ const videoLayouts = {
 		title,
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME}__inline`}>
-			{alertBadge ? <Pill>{alertBadge}</Pill> : null}
+			{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
 			<Stack className={`${BLOCK_CLASS_NAME}__inline-video`}>
 				{title ? (
 					<HeadingSection>
@@ -62,7 +62,7 @@ const videoLayouts = {
 				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
 			</MediaItem>
 			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
-				{alertBadge ? <Pill>{alertBadge}</Pill> : null}
+				{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
 				{title ? (
 					<HeadingSection>
 						<Heading>{title}</Heading>

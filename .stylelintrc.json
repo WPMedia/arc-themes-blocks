@@ -47,6 +47,7 @@
 				"type": "at-rule",
 				"name": "include"
 			}
-		]
+		],
+		"selector-class-pattern": null
 	}
 }

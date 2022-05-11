@@ -26,9 +26,9 @@
 		@include scss.block-components("right-rail-main-interior-item");
 	}
 
-	&__main-side-rail {
-		@include scss.block-properties("right-rail-main-side-rail");
-		@include scss.block-components("right-rail-main-side-rail");
+	&__main-right-rail {
+		@include scss.block-properties("right-rail-main-right-rail");
+		@include scss.block-components("right-rail-main-right-rail");
 	}
 
 	&__full-width-2 {

@@ -36,7 +36,7 @@ const RightRailLayout = ({ children }) => {
 
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
 					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</Stack>
-					<Stack className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>{rightRail}</Stack>
+					<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail`}>{rightRail}</Stack>
 				</Grid>
 
 				{featureList["4"] > 0 ? (

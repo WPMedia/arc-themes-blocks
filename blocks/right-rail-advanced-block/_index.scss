@@ -31,9 +31,9 @@
 		@include scss.block-components("right-rail-advanced-main-interior-item");
 	}
 
-	&__main-side-rail {
-		@include scss.block-properties("right-rail-advanced-main-side-rail");
-		@include scss.block-components("right-rail-advanced-main-side-rail");
+	&__main-right-rail {
+		@include scss.block-properties("right-rail-advanced-main-right-rail");
+		@include scss.block-components("right-rail-advanced-main-right-rail");
 	}
 
 	&__rail-container {
@@ -51,19 +51,19 @@
 		@include scss.block-components("right-rail-advanced-main-interior-item-2");
 	}
 
-	&__main-side-rail-top {
-		@include scss.block-properties("right-rail-advanced-main-side-rail-top");
-		@include scss.block-components("right-rail-advanced-main-side-rail-top");
+	&__main-right-rail-top {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-top");
+		@include scss.block-components("right-rail-advanced-main-right-rail-top");
 	}
 
-	&__main-side-rail-middle {
-		@include scss.block-properties("right-rail-advanced-main-side-rail-middle");
-		@include scss.block-components("right-rail-advanced-main-side-rail-middle");
+	&__main-right-rail-middle {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-middle");
+		@include scss.block-components("right-rail-advanced-main-right-rail-middle");
 	}
 
-	&__main-side-rail-bottom {
-		@include scss.block-properties("right-rail-advanced-main-side-rail-bottom");
-		@include scss.block-components("right-rail-advanced-main-side-rail-bottom");
+	&__main-right-rail-bottom {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-bottom");
+		@include scss.block-components("right-rail-advanced-main-right-rail-bottom");
 	}
 
 	@include scss.block-properties("right-rail-advanced");

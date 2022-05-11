@@ -213,7 +213,7 @@ describe("the right rail layout for the default output type", () => {
 	`);
 	});
 	it("should not render a navigation component if none exists", () => {
-		useAppContext.mockReturnValue({ renderables: allRenderables });
+		useAppContext.mockReturnValue({ renderables: [] });
 		const wrapper = shallow(<RightRailAdvancedLayout />);
 		expect(wrapper.find("#navigation").exists()).toBe(false);
 	});

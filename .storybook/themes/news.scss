@@ -40,13 +40,9 @@
 	),
 	$alias: (
 		// Layout
-		"layout-max-width": 1440,
-		"content-max-width": 1216,
-		"content-scale-width":
-			min(
-				calc(100vw - var(--global-spacing-6)),
-				calc(var(--content-max-width) / var(--layout-max-width) * 100%)
-			),
+		"layout-max-width": 1600,
+		"content-max-width": 1440,
+		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 	),
 	$tokens: (
 		default: (
@@ -66,8 +62,8 @@
 				),
 				right-rail-main: (
 					gap: var(--global-spacing-6),
-					max-width: calc(var(--layout-max-width) * 1px),
-					width: 100%,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
 					margin: auto,
 				),
 				right-rail-full-width-2: (
@@ -103,8 +99,8 @@
 				),
 				right-rail-advanced-main: (
 					gap: var(--global-spacing-6),
-					max-width: calc(var(--layout-max-width) * 1px),
-					width: 100%,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
 					margin: auto,
 				),
 				right-rail-advanced-full-width-2: (

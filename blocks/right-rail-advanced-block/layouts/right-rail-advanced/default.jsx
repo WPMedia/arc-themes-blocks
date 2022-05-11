@@ -48,7 +48,7 @@ const RightRailAdvancedLayout = ({ children }) => {
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-1`}>{main}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-2`}>{main2}</Stack>
 					</Stack>
-					<Stack role="complementary" className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>
+					<Stack className={`${LAYOUT_CLASS_NAME}__main-side-rail`}>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-side-rail-top`}>{rightRailTop}</Stack>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-side-rail-middle`}>
 							{rightRailMiddle}

@@ -116,6 +116,7 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		: (title && description) || contentSource?.description?.basic;
 
 	const aspectRatio = 16 / 9;
+
 	const renderVideoLayout = videoLayouts[displayStyle];
 	const powaMarkup = contentSource?.embed_html || embedMarkup;
 

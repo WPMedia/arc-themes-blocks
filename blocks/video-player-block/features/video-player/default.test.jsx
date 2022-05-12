@@ -203,7 +203,7 @@ describe("VideoPlayer", () => {
 			credits: "credits should render",
 			embed_html: testEmbed,
 			headlines: { basic: "this headline should not render" },
-			descriptions: { basic: "this description should not render" },
+			description: { basic: "this description should not render" },
 		};
 		useFusionContext.mockImplementation(() => ({ globalContent }));
 		useContent.mockImplementation(() => globalContent);
@@ -236,7 +236,7 @@ describe("VideoPlayer", () => {
 			credits: "credits",
 			embed_html: testEmbed,
 			headlines: { basic: "this headline should render" },
-			descriptions: { basic: "this description should render" },
+			description: { basic: "this description should render" },
 		};
 		useFusionContext.mockImplementation(() => ({ globalContent }));
 
@@ -266,7 +266,7 @@ describe("VideoPlayer", () => {
 			credits: "credits",
 			embed_html: testEmbed,
 			headlines: { basic: "this headline should not render" },
-			descriptions: { basic: "this description should not render" },
+			description: { basic: "this description should not render" },
 		};
 		useFusionContext.mockImplementation(() => ({ globalContent }));
 

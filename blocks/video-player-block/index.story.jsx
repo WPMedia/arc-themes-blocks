@@ -38,33 +38,33 @@ export const withDescription = () => (
 );
 
 export const featureVideoOnly = () => (
-	<VideoPlayer embedMarkup={embedMarkup} customFields={{ displayMode: "featureVideo" }} />
+	<VideoPlayer embedMarkup={embedMarkup} customFields={{ displayStyle: "featureVideo" }} />
 );
 
 export const featureAlertTitleAndDescription = () => (
 	<VideoPlayer
 		embedMarkup={embedMarkup}
-		customFields={{ ...customFields, displayMode: "featureVideo" }}
+		customFields={{ ...customFields, displayStyle: "featureVideo" }}
 	/>
 );
 
 export const featureAlertBadge = () => (
 	<VideoPlayer
 		embedMarkup={embedMarkup}
-		customFields={{ alertBadge: customFields.alertBadge, displayMode: "featureVideo" }}
+		customFields={{ alertBadge: customFields.alertBadge, displayStyle: "featureVideo" }}
 	/>
 );
 
 export const featureWithTitle = () => (
 	<VideoPlayer
 		embedMarkup={embedMarkup}
-		customFields={{ title: customFields.title, displayMode: "featureVideo" }}
+		customFields={{ title: customFields.title, displayStyle: "featureVideo" }}
 	/>
 );
 
 export const featureWithDescription = () => (
 	<VideoPlayer
 		embedMarkup={embedMarkup}
-		customFields={{ description: customFields.description, displayMode: "featureVideo" }}
+		customFields={{ description: customFields.description, displayStyle: "featureVideo" }}
 	/>
 );

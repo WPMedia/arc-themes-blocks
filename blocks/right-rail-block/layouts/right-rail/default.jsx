@@ -24,7 +24,7 @@ const RightRailLayout = ({ children }) => {
 	return (
 		<div className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
 					{navigation}
 				</Stack>
 			) : null}
@@ -36,14 +36,20 @@ const RightRailLayout = ({ children }) => {
 
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
 					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</Stack>
-					<Stack className={`${LAYOUT_CLASS_NAME}__main-right-rail`}>{rightRail}</Stack>
+					<Stack as="aside" className={`${LAYOUT_CLASS_NAME}__main-right-rail`}>
+						{rightRail}
+					</Stack>
 				</Grid>
 
 				{featureList["4"] > 0 ? (
 					<div className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</div>
 				) : null}
 			</section>
-			{footer ? <footer className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</footer> : null}
+			{footer ? (
+				<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
+					{footer}
+				</Stack>
+			) : null}
 		</div>
 	);
 };

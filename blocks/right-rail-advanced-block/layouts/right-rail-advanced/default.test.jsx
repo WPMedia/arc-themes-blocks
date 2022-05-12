@@ -140,12 +140,12 @@ describe("the right rail layout for the default output type", () => {
 		expect(wrapper.find(".b-right-rail-advanced__navigation")).toMatchInlineSnapshot(`
 		<Stack
 		  alignment="unset"
+		  as="header"
 		  className="b-right-rail-advanced__navigation"
 		  direction="vertical"
 		  divider={false}
 		  inline={false}
 		  justification="start"
-		  role="banner"
 		  wrap="nowrap"
 		>
 		  <div
@@ -155,16 +155,7 @@ describe("the right rail layout for the default output type", () => {
 		</Stack>
 	`);
 		expect(wrapper.find("#fullWidth2").exists()).toBe(true);
-		expect(wrapper.find("footer")).toMatchInlineSnapshot(`
-		<footer
-		  className="b-right-rail-advanced__footer"
-		>
-		  <div
-		    id="footer"
-		    key=".8"
-		  />
-		</footer>
-	`);
+		expect(wrapper.find(".b-right-rail-advanced__footer").exists()).toBe(true);
 	});
 
 	it("should not show fullWidth2 section", () => {
@@ -186,12 +177,12 @@ describe("the right rail layout for the default output type", () => {
 		expect(wrapper.find(".b-right-rail-advanced__navigation")).toMatchInlineSnapshot(`
 		<Stack
 		  alignment="unset"
+		  as="header"
 		  className="b-right-rail-advanced__navigation"
 		  direction="vertical"
 		  divider={false}
 		  inline={false}
 		  justification="start"
-		  role="banner"
 		  wrap="nowrap"
 		>
 		  <div
@@ -201,16 +192,7 @@ describe("the right rail layout for the default output type", () => {
 		</Stack>
 	`);
 		expect(wrapper.find("#fullWidth2").exists()).toBe(false);
-		expect(wrapper.find("footer")).toMatchInlineSnapshot(`
-		<footer
-		  className="b-right-rail-advanced__footer"
-		>
-		  <div
-		    id="footer"
-		    key=".8"
-		  />
-		</footer>
-	`);
+		expect(wrapper.find(".b-right-rail-advanced__footer").exists()).toBe(true);
 	});
 	it("should not render a navigation component if none exists", () => {
 		useAppContext.mockReturnValue({ renderables: [] });

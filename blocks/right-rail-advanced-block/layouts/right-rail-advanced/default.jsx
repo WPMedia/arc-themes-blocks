@@ -33,7 +33,7 @@ const RightRailAdvancedLayout = ({ children }) => {
 	return (
 		<div className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
 					{navigation}
 				</Stack>
 			) : null}
@@ -62,7 +62,11 @@ const RightRailAdvancedLayout = ({ children }) => {
 					<div className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</div>
 				) : null}
 			</section>
-			{footer ? <footer className={`${LAYOUT_CLASS_NAME}__footer`}>{footer}</footer> : null}
+			{footer ? (
+				<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
+					{footer}
+				</Stack>
+			) : null}
 		</div>
 	);
 };

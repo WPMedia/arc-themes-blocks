@@ -1,1 +1,188 @@
-@use "@wpmedia/arc-themes-components/scss";
+@use "@wpmedia/arc-themes-components/scss" with (
+	$breakpoints: (
+		default: "min-width: 0",
+		desktop: "min-width: 48rem",
+	),
+	$global: (
+		"spacing-1": 0.25rem,
+		// 4px
+		"spacing-2": 0.5rem,
+		// 8px
+		"spacing-3": 0.75rem,
+		// 12px
+		"spacing-4": 1rem,
+		// 16px
+		"spacing-5": 1.5rem,
+		// 24px
+		"spacing-6": 2rem,
+		// 32px
+		"spacing-7": 2.5rem,
+		// 40px
+		"spacing-8": 3rem,
+		// 48px
+		"spacing-9": 3.5rem,
+		// 56px
+		"spacing-10": 4rem,
+		// 64px
+		"spacing-11": 4.5rem,
+		// 72px
+		"spacing-12": 5rem,
+		// 80px
+		"spacing-13": 5.5rem,
+		// 88px
+		"spacing-14": 6rem,
+		// 96px
+		"spacing-15": 6.5rem,
+		// 104px
+		"spacing-16": 7rem,
+		// 112px
+		"spacing-17": 7.5rem,
+	),
+	$alias: (
+		// Layout
+		"layout-max-width": 1600,
+		"content-max-width": 1440,
+		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
+	),
+	$tokens: (
+		default: (
+			blocks: (
+				right-rail: (
+					gap: var(--global-spacing-6),
+				),
+				right-rail-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+					margin: 0 0 var(--global-spacing-5) 0,
+				),
+				right-rail-full-width-1: (
+					margin: 0 0 var(--global-spacing-5) 0,
+				),
+				right-rail-main: (
+					gap: var(--global-spacing-6),
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
+				),
+				right-rail-full-width-2: (
+					margin: var(--global-spacing-6) 0 0 0,
+				),
+				right-rail-rail-container: (
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
+					gap: var(--global-spacing-6),
+				),
+				right-rail-main-right-rail: (
+					padding: initial,
+				),
+				right-rail-main-interior-item: (
+					padding: initial,
+					border-right: initial,
+				),
+				right-rail-footer: (
+					margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
+				),
+				right-rail-advanced: (
+					gap: var(--global-spacing-6),
+				),
+				right-rail-advanced-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+					margin: 0 0 var(--global-spacing-5) 0,
+				),
+				right-rail-advanced-full-width-1: (
+					margin: 0 0 var(--global-spacing-5) 0,
+				),
+				right-rail-advanced-main: (
+					gap: var(--global-spacing-6),
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
+				),
+				right-rail-advanced-full-width-2: (
+					margin: var(--global-spacing-6) 0 0 0,
+				),
+				right-rail-advanced-rail-container: (
+					grid-template-areas: "main-right-rail-top" "main-interior-item-1" "main-right-rail-middle"
+						"main-interior-item-2" "main-right-rail-bottom",
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
+					grid-auto-rows: auto,
+					gap: var(--global-spacing-6),
+				),
+				right-rail-advanced-main-right-rail: (
+					padding: initial,
+					gap: var(--global-spacing-5),
+					display: contents,
+				),
+				right-rail-advanced-main-interior-item: (
+					padding: initial,
+					border-right: initial,
+					gap: var(--global-spacing-5),
+					display: contents,
+				),
+				right-rail-advanced-footer: (
+					margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
+				),
+				right-rail-advanced-main-interior-item-1: (
+					grid-area: main-interior-item-1,
+				),
+				right-rail-advanced-main-interior-item-2: (
+					grid-area: main-interior-item-2,
+				),
+				right-rail-advanced-main-right-rail-top: (
+					grid-area: main-right-rail-top,
+				),
+				right-rail-advanced-main-right-rail-middle: (
+					grid-area: main-right-rail-middle,
+				),
+				right-rail-advanced-main-right-rail-bottom: (
+					grid-area: main-right-rail-bottom,
+				),
+			),
+		),
+		desktop: (
+			blocks: (
+				right-rail-navigation: (
+					padding: 0 0 var(--global-spacing-8) 0,
+				),
+				right-rail-rail-container: (
+					grid-template-columns: 2fr 1fr,
+					gap: 0,
+					grid-template-rows: initial,
+				),
+				right-rail-main-right-rail: (
+					padding: 0 0 0 var(--global-spacing-6),
+				),
+				right-rail-main-interior-item: (
+					border-right: 1px solid #dadada,
+					padding: 0 var(--global-spacing-6) 0 0,
+				),
+				right-rail-advanced-navigation: (
+					padding: 0 0 var(--global-spacing-8) 0,
+				),
+				right-rail-advanced-rail-container: (
+					grid-template-columns: 2fr 1fr,
+					gap: 0,
+					grid-template-rows: initial,
+				),
+				right-rail-advanced-main-right-rail: (
+					padding: 0 0 0 var(--global-spacing-6),
+					display: flex,
+				),
+				right-rail-advanced-main-interior-item: (
+					border-right: 1px solid #dadada,
+					padding: 0 var(--global-spacing-6) 0 0,
+					display: flex,
+				),
+			),
+		),
+	)
+);
+
+@use "../../blocks/right-rail-block";
+@use "../../blocks/right-rail-advanced-block";

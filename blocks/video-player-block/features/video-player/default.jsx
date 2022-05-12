@@ -112,8 +112,8 @@ function VideoPlayer({ customFields = {}, embedMarkup }) {
 		: (description && title) || contentSource?.headlines?.basic;
 
 	const captionDescription = inheritGlobalContent
-		? contentSource?.descriptions?.basic
-		: (title && description) || contentSource?.descriptions?.basic;
+		? contentSource?.description?.basic
+		: (title && description) || contentSource?.description?.basic;
 
 	const aspectRatio = 16 / 9;
 	const renderVideoLayout = videoLayouts[displayStyle];

@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-single-chain {
+	@include scss.block-components("single-chain");
+	@include scss.block-properties("single-chain");
+}

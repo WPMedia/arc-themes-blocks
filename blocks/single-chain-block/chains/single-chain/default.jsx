@@ -1,21 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Heading, HeadingSection } from "@wpmedia/shared-styles";
+import { Heading, HeadingSection, Stack } from "@wpmedia/arc-themes-components";
 
-import "@wpmedia/shared-styles/scss/_chains.scss";
+const BLOCK_CLASS_NAME = "b-single-chain";
 
 const SingleChain = ({ children, customFields = {} }) => {
 	const { heading = null } = customFields;
 
-	if (!heading) {
-		return <>{children}</>;
-	}
+	const Wrapper = heading ? HeadingSection : Fragment;
 
 	return (
-		<HeadingSection>
-			<Heading className="chain-heading">{heading}</Heading>
-			{children}
-		</HeadingSection>
+		<Wrapper>
+			<Stack direction="vertical" className={BLOCK_CLASS_NAME}>
+				<HeadingSection>
+					<Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading>
+					{children}
+				</HeadingSection>
+			</Stack>
+		</Wrapper>
 	);
 };
 

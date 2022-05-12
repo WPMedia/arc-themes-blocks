@@ -8,9 +8,6 @@
 .b-quilted-image__wrapper {
 	display: grid;
 
-	@include scss.block-properties("quilted-image__wrapper");
-	@include scss.block-components("quilted-image__wrapper");
-
 	.b-quilted-image__wrapper-bottom {
 		grid-area: bottom;
 
@@ -47,16 +44,18 @@
 }
 
 .b-quilted-image__media-panel {
-	position: relative;
+	display: grid;
+	grid-template-areas: "overlay";
+
+	> * {
+		grid-area: overlay;
+	}
+
 	@include scss.block-properties("quilted-image__media-panel");
 	@include scss.block-components("quilted-image__media-panel");
 }
 
 .b-quilted-image__overlay {
-	gap: 1rem;
-	position: absolute;
-	left: 2rem;
-	bottom: 2rem;
 	@include scss.block-properties("quilted-image__overlay");
 	@include scss.block-components("quilted-image__overlay");
 }

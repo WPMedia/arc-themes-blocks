@@ -6,25 +6,20 @@ const BLOCK_CLASS_NAME = "b-header";
 
 function Header(props) {
 	const { customFields: { size, text } = {} } = props;
-	switch (size) {
-		case "Extra Large":
-			return (
-				<Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--extra-large`}>{text}</Heading>
-			);
-		case "Large":
-			return <Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--large`}>{text}</Heading>;
-		case "Small":
-			return (
-				<Heading as="h5" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--small`}>
-					{text}
-				</Heading>
-			);
-		case "Medium":
-		default:
-			return (
-				<Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--medium`}>{text}</Heading>
-			);
+	let blockModifier = "";
+
+	if (size === "Extra Large") {
+		blockModifier = `${BLOCK_CLASS_NAME}--extra-large`;
+	} else if (size === "Large") {
+		blockModifier = `${BLOCK_CLASS_NAME}--large`;
+	} else if (size === "Small") {
+		blockModifier = `${BLOCK_CLASS_NAME}--small`;
+	} else {
+		// if medium or empty then use medium
+		blockModifier = `${BLOCK_CLASS_NAME}--medium`;
 	}
+
+	return <Heading className={`${BLOCK_CLASS_NAME} ${blockModifier}`}>{text}</Heading>;
 }
 
 Header.propTypes = {

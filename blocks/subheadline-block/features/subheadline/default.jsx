@@ -32,7 +32,7 @@ SubHeadline.propTypes = {
 		valueToDisplay: PropTypes.oneOf(Object.values(DISPLAY_VALUES)).tag({
 			label: "Value to display",
 			group: "Content Configuration",
-			defaultValue: "Subheadline",
+			defaultValue: "",
 		}),
 	}),
 };

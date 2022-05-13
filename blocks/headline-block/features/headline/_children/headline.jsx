@@ -1,5 +1,4 @@
 import React from "react";
-import { Heading } from "@wpmedia/arc-themes-components";
 
 // presentational component handles only visual
 const Headline = ({ headlineString }) =>
@@ -8,7 +7,8 @@ const Headline = ({ headlineString }) =>
     then render null
   */
 	headlineString !== "" ? (
-		<Heading
+		<h1
+			className="b-headline"
 			// dangerouslySetInnerHTML seems to be a pattern for blocks
 			dangerouslySetInnerHTML={{ __html: headlineString }}
 		/>

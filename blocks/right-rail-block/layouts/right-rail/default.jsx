@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useAppContext } from "fusion:context";
-import "./default.scss";
+import { Grid, Stack } from "@wpmedia/arc-themes-components";
 
-const useFeatueList = () => {
+const LAYOUT_CLASS_NAME = "b-right-rail";
+
+const useFeatureList = () => {
 	const { renderables } = useAppContext();
 	const featureList = {};
 	renderables.forEach((renderable) => {
@@ -15,36 +17,40 @@ const useFeatueList = () => {
 };
 
 const RightRailLayout = ({ children }) => {
-	const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] = children;
-	const featureList = useFeatueList();
+	const [navigation, fullWidth1, main, rightRail, fullWidth2, footer] =
+		React.Children.toArray(children);
+	const featureList = useFeatureList();
 
 	return (
-		<>
-			<header className="page-header">{navigation}</header>
-			<section role="main" id="main" className="main" tabIndex="-1">
-				<div className="container layout-section">
-					<div className="row">
-						<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth1}</div>
-					</div>
+		<div className={LAYOUT_CLASS_NAME}>
+			{navigation ? (
+				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+					{navigation}
+				</Stack>
+			) : null}
 
-					<div className="row">
-						<div className="col-sm-md-12 col-lg-xl-8 left-article-section ie-flex-100-percent-sm layout-section">
-							{main}
-						</div>
-						<aside className="col-sm-md-12 col-lg-xl-4 right-article-section ie-flex-100-percent-sm layout-section wrap-bottom">
-							{rightRail}
-						</aside>
-					</div>
+			<section role="main" tabIndex="-1" className={`${LAYOUT_CLASS_NAME}__main`}>
+				{fullWidth1 ? (
+					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullWidth1}</Stack>
+				) : null}
 
-					{featureList["4"] > 0 && (
-						<div className="row">
-							<div className="col-sm-xl-12 layout-section wrap-bottom">{fullWidth2}</div>
-						</div>
-					)}
-				</div>
+				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
+					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>{main}</Stack>
+					<Stack as="aside" className={`${LAYOUT_CLASS_NAME}__main-right-rail`}>
+						{rightRail}
+					</Stack>
+				</Grid>
+
+				{featureList["4"] > 0 ? (
+					<div className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</div>
+				) : null}
 			</section>
-			<footer>{footer}</footer>
-		</>
+			{footer ? (
+				<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
+					{footer}
+				</Stack>
+			) : null}
+		</div>
 	);
 };
 

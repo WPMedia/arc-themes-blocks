@@ -1,0 +1,20 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-quad-chain {
+	&__heading {
+		@include scss.block-components("quad-chain-heading");
+		@include scss.block-properties("quad-chain-heading");
+	}
+	&__children-grid {
+		@include scss.block-components("quad-chain-children-grid");
+		@include scss.block-properties("quad-chain-children-grid");
+	}
+
+	&__child-item {
+		@include scss.block-components("quad-chain-child-item");
+		@include scss.block-properties("quad-chain-child-item");
+	}
+
+	@include scss.block-components("quad-chain");
+	@include scss.block-properties("quad-chain");
+}

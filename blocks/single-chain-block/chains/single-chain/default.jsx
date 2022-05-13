@@ -12,10 +12,10 @@ const SingleChain = ({ children, customFields = {} }) => {
 	return (
 		<Wrapper>
 			<Stack direction="vertical" className={BLOCK_CLASS_NAME}>
-				<HeadingSection>
-					<Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading>
+				{heading ? <Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading> : null}
+				<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__children-stack`}>
 					{children}
-				</HeadingSection>
+				</Stack>
 			</Stack>
 		</Wrapper>
 	);

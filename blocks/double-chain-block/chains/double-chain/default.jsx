@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Heading, HeadingSection } from "@wpmedia/shared-styles";
+import { Heading, HeadingSection, Stack, Grid } from "@wpmedia/arc-themes-components";
 
-import "@wpmedia/shared-styles/scss/_chains.scss";
+const BLOCK_CLASS_NAME = "b-double-chain";
 
 const DoubleChain = ({ children, customFields }) => {
 	if (children && children.length && children.length > 0) {
@@ -13,27 +13,33 @@ const DoubleChain = ({ children, customFields }) => {
 		// check column one length not negative
 		if (columnOneLength > 0) {
 			const childrenOutput = (
-				<div className="container-fluid double-chain chain-container">
-					<div className="row wrap-bottom">
-						<div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-1 reduce-internal-row-col-gap chain-col">
-							{children.slice(0, columnOneLength)}
-						</div>
-						<div className="col-sm-12 col-md-xl-6 ie-flex-100-percent-sm column-2 reduce-internal-row-col-gap chain-col">
-							{children.slice(columnOneLength)}
-						</div>
-					</div>
-				</div>
+				<Grid className={`${BLOCK_CLASS_NAME}__children-grid`}>
+					<Stack
+						data-testid="column-1"
+						direction="vertical"
+						className={`${BLOCK_CLASS_NAME}__child-item`}
+					>
+						{children.slice(0, columnOneLength)}
+					</Stack>
+					<Stack
+						data-testid="column-2"
+						direction="vertical"
+						className={`${BLOCK_CLASS_NAME}__child-item`}
+					>
+						{children.slice(columnOneLength)}
+					</Stack>
+				</Grid>
 			);
 
-			if (!heading) {
-				return childrenOutput;
-			}
-
 			return (
-				<HeadingSection>
-					<Heading className="chain-heading">{heading}</Heading>
-					{childrenOutput}
-				</HeadingSection>
+				<Stack direction="vertical" className={BLOCK_CLASS_NAME}>
+					<HeadingSection>
+						{heading ? (
+							<Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading>
+						) : null}
+						{childrenOutput}
+					</HeadingSection>
+				</Stack>
 			);
 		}
 	}

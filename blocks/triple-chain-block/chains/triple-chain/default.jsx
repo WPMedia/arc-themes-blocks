@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Heading, HeadingSection } from "@wpmedia/shared-styles";
+import { Heading, HeadingSection, Stack, Grid } from "@wpmedia/arc-themes-components";
 
-import "@wpmedia/shared-styles/scss/_chains.scss";
+const BLOCK_CLASS_NAME = "b-triple-chain";
 
 const TripleChain = ({ children, customFields }) => {
 	if (children && children.length && children.length > 0) {
@@ -19,30 +19,28 @@ const TripleChain = ({ children, customFields }) => {
 			const endOfColumnTwoIndex = columnOneLength + columnTwoLength;
 
 			const childrenOutput = (
-				<div className="container-fluid triple-chain chain-container">
-					<div className="row wrap-bottom">
-						<div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
-							{children.slice(0, columnOneLength)}
-						</div>
-						<div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
-							{children.slice(columnOneLength, endOfColumnTwoIndex)}
-						</div>
-						<div className="col-sm-12 col-md-xl-4 ie-flex-100-percent-sm reduce-internal-row-col-gap chain-col">
-							{children.slice(endOfColumnTwoIndex)}
-						</div>
-					</div>
-				</div>
+				<Grid className={`${BLOCK_CLASS_NAME}__children-grid`}>
+					<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__child-item`}>
+						{children.slice(0, columnOneLength)}
+					</Stack>
+					<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__child-item`}>
+						{children.slice(columnOneLength, endOfColumnTwoIndex)}
+					</Stack>
+					<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__child-item`}>
+						{children.slice(endOfColumnTwoIndex)}
+					</Stack>
+				</Grid>
 			);
 
-			if (!heading) {
-				return childrenOutput;
-			}
-
 			return (
-				<HeadingSection>
-					<Heading className="chain-heading">{heading}</Heading>
-					{childrenOutput}
-				</HeadingSection>
+				<Stack direction="vertical" className={BLOCK_CLASS_NAME}>
+					<HeadingSection>
+						{heading ? (
+							<Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading>
+						) : null}
+						{childrenOutput}
+					</HeadingSection>
+				</Stack>
 			);
 		}
 	}

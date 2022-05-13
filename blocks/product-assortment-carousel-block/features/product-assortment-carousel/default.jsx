@@ -53,15 +53,17 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 
 	const content =
 		useContent({
-			source: "algolia-assortment",
-			query: {
-				feature: "product-assortment-carousel",
-				index: assortmentIndex,
-				query: assortmentQuery?.pattern,
-				ruleContexts: assortmentQuery?.context,
-				filters: assortmentQuery?.filters,
-				hitsPerPage: itemsToDisplay,
-			},
+			source: assortmentCondition ? "algolia-assortment" : null,
+			query: assortmentCondition
+				? {
+						feature: "product-assortment-carousel",
+						index: assortmentIndex,
+						query: assortmentQuery?.pattern,
+						ruleContexts: assortmentQuery?.context,
+						filters: assortmentQuery?.filters,
+						hitsPerPage: itemsToDisplay,
+				  }
+				: {},
 		}) || [];
 
 	if (isAdmin && (content.length < MIN_SLIDES || content.length > MAX_SLIDES)) {

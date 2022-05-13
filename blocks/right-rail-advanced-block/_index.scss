@@ -1,0 +1,71 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-right-rail-advanced {
+	&__navigation {
+		@include scss.block-properties("right-rail-advanced-navigation");
+		@include scss.block-components("right-rail-advanced-navigation");
+	}
+
+	&__full-width-1 {
+		@include scss.block-properties("right-rail-advanced-full-width-1");
+		@include scss.block-components("right-rail-advanced-full-width-1");
+	}
+
+	&__main {
+		@include scss.block-properties("right-rail-advanced-main");
+		@include scss.block-components("right-rail-advanced-main");
+	}
+
+	&__footer {
+		@include scss.block-properties("right-rail-advanced-footer");
+		@include scss.block-components("right-rail-advanced-footer");
+	}
+
+	&__full-width-2 {
+		@include scss.block-properties("right-rail-advanced-full-width-2");
+		@include scss.block-components("right-rail-advanced-full-width-2");
+	}
+
+	&__main-interior-item {
+		@include scss.block-properties("right-rail-advanced-main-interior-item");
+		@include scss.block-components("right-rail-advanced-main-interior-item");
+	}
+
+	&__main-right-rail {
+		@include scss.block-properties("right-rail-advanced-main-right-rail");
+		@include scss.block-components("right-rail-advanced-main-right-rail");
+	}
+
+	&__rail-container {
+		@include scss.block-properties("right-rail-advanced-rail-container");
+		@include scss.block-components("right-rail-advanced-rail-container");
+	}
+
+	&__main-interior-item-1 {
+		@include scss.block-properties("right-rail-advanced-main-interior-item-1");
+		@include scss.block-components("right-rail-advanced-main-interior-item-1");
+	}
+
+	&__main-interior-item-2 {
+		@include scss.block-properties("right-rail-advanced-main-interior-item-2");
+		@include scss.block-components("right-rail-advanced-main-interior-item-2");
+	}
+
+	&__main-right-rail-top {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-top");
+		@include scss.block-components("right-rail-advanced-main-right-rail-top");
+	}
+
+	&__main-right-rail-middle {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-middle");
+		@include scss.block-components("right-rail-advanced-main-right-rail-middle");
+	}
+
+	&__main-right-rail-bottom {
+		@include scss.block-properties("right-rail-advanced-main-right-rail-bottom");
+		@include scss.block-components("right-rail-advanced-main-right-rail-bottom");
+	}
+
+	@include scss.block-properties("right-rail-advanced");
+	@include scss.block-components("right-rail-advanced");
+}

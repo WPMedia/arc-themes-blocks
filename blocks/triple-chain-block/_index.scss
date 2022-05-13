@@ -1,0 +1,21 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-triple-chain {
+	&__heading {
+		@include scss.block-components("triple-chain-heading");
+		@include scss.block-properties("triple-chain-heading");
+	}
+
+	&__children-grid {
+		@include scss.block-components("triple-chain-children-grid");
+		@include scss.block-properties("triple-chain-children-grid");
+	}
+
+	&__child-item {
+		@include scss.block-components("triple-chain-child-item");
+		@include scss.block-properties("triple-chain-child-item");
+	}
+
+	@include scss.block-components("triple-chain");
+	@include scss.block-properties("triple-chain");
+}

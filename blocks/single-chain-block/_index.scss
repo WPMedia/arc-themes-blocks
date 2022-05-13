@@ -1,6 +1,15 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-single-chain {
+	&__heading {
+		@include scss.block-components("single-chain-heading");
+		@include scss.block-properties("single-chain-heading");
+	}
+	&__children-stack {
+		@include scss.block-components("single-chain-children-stack");
+		@include scss.block-properties("single-chain-children-stack");
+	}
+
 	@include scss.block-components("single-chain");
 	@include scss.block-properties("single-chain");
 }

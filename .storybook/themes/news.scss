@@ -37,6 +37,68 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
+
+		// 120px
+		"font-weight-1": 100,
+		"font-weight-2": 200,
+		"font-weight-3": 300,
+		"font-weight-4": 400,
+		"font-weight-5": 500,
+		"font-weight-6": 600,
+		"font-weight-7": 700,
+		"font-weight-8": 800,
+		"font-weight-9": 900,
+
+		"font-size-1": 0.625rem,
+		// 10px
+		"font-size-2": 0.75rem,
+		// 12px
+		"font-size-3": 0.875rem,
+		// 14px
+		"font-size-4": 1rem,
+		// 16px
+		"font-size-5": 1.125rem,
+		// 18px
+		"font-size-6": 1.1875rem,
+		// 19px
+		"font-size-7": 1.25rem,
+		// 20px
+		"font-size-8": 1.375rem,
+		// 22px
+		"font-size-9": 1.5rem,
+		// 24px
+		"font-size-10": 1.75rem,
+		// 28px
+		"font-size-11": 2rem,
+		// 32px
+		"font-size-12": 2.25rem,
+		// 36px
+		"font-size-13": 2.56rem,
+		// 41px
+		"font-size-14": 3rem,
+		// 48px
+		"font-size-15": 3.25rem,
+
+		// 52px
+		"line-height-1": 0.875rem,
+		// 14px
+		"line-height-2": 1rem,
+		// 16px
+		"line-height-3": 1.25rem,
+		// 20px
+		"line-height-4": 1.5rem,
+		// 24px
+		"line-height-5": 2rem,
+		// 32px
+		"line-height-6": 2.125rem,
+		// 34px
+		"line-height-7": 2.5rem,
+		// 40px
+		"line-height-8": 3rem,
+		// 48px
+		"line-height-9": 3.5rem,
+		// 56px
+		"line-height-10": 3.875rem,
 	),
 	$alias: (
 		// Layout
@@ -145,12 +207,78 @@
 				),
 				single-chain: (
 					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
 						heading: (
-							font-size: var(--global-font-size-7),
-							line-height: var(--global-line-height-4),
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
 							font-weight: var(--global-font-weight-7),
 						),
 					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-5),
+				),
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr,
+					grid-column-gap: 0,
+					grid-row-gap: var(--global-spacing-5),
+				),
+				double-chain-child-item: (
+					gap: var(--global-spacing-5),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr,
+					grid-column-gap: 0,
+					grid-row-gap: var(--global-spacing-5),
+				),
+				triple-chain-child-item: (
+					gap: var(--global-spacing-5),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr,
+					grid-column-gap: 0,
+					grid-row-gap: var(--global-spacing-5),
+				),
+				quad-chain-child-item: (
+					gap: var(--global-spacing-5),
 				),
 			),
 		),
@@ -188,6 +316,49 @@
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
 				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-6),
+				),
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr 1fr,
+					grid-column-gap: var(--global-spacing-6),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr,
+					grid-column-gap: var(--global-spacing-6),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr 1fr,
+					grid-column-gap: var(--global-spacing-6),
+				),
 			),
 		),
 	)
@@ -195,3 +366,7 @@
 
 @use "../../blocks/right-rail-block";
 @use "../../blocks/right-rail-advanced-block";
+@use "../../blocks/single-chain-block";
+@use "../../blocks/double-chain-block";
+@use "../../blocks/triple-chain-block";
+@use "../../blocks/quad-chain-block";

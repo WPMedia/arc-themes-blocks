@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import { useFusionContext } from "fusion:context";
 import Header from "./default";
 

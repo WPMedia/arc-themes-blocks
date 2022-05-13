@@ -47,6 +47,9 @@
 	$tokens: (
 		default: (
 			blocks: (
+				headline: (
+					line-height: var(--global-line-height-9),
+				),
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
@@ -186,3 +189,4 @@
 
 @use "../../blocks/right-rail-block";
 @use "../../blocks/right-rail-advanced-block";
+@use "../../blocks/headline-block";

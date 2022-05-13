@@ -1,0 +1,10 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-header {
+	&--extra-large {
+		@include scss.block-components("header-extra-large");
+		@include scss.block-properties("header-extra-large");
+	}
+	@include scss.block-components("header");
+	@include scss.block-properties("header");
+}

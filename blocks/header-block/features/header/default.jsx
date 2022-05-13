@@ -1,57 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Consumer from "fusion:consumer";
-import "./header.scss";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import { Heading } from "@wpmedia/arc-themes-components";
 
-@Consumer
-class Header extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+const BLOCK_CLASS_NAME = "b-header";
 
-	getHeader(text) {
-		const { customFields: { size } = {} } = this.props;
-		switch (size) {
-			case "Extra Large":
-				return (
-					<PrimaryFont as="h2" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Large":
-				return (
-					<PrimaryFont as="h3" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Medium":
-				return (
-					<PrimaryFont as="h4" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Small":
-				return (
-					<PrimaryFont as="h5" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			default:
-				return (
-					<PrimaryFont as="h4" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-		}
-	}
-
-	render() {
-		const {
-			customFields: { text = "" },
-		} = this.props;
-		return this.getHeader(text);
+function Header(props) {
+	const { customFields: { size, text } = {} } = props;
+	switch (size) {
+		case "Extra Large":
+			return (
+				<Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--extra-large`}>{text}</Heading>
+			);
+		case "Large":
+			return <Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--large`}>{text}</Heading>;
+		case "Small":
+			return (
+				<Heading as="h5" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--small`}>
+					{text}
+				</Heading>
+			);
+		case "Medium":
+		default:
+			return (
+				<Heading className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--medium`}>{text}</Heading>
+			);
 	}
 }
 

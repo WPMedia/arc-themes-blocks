@@ -5,6 +5,7 @@
 	),
 	$global: (
 		"white": #ffffff,
+		"black": #000000,
 
 		"blue-1": #ebefff,
 		"blue-2": #b0c3f2,
@@ -277,6 +278,17 @@
 					gap: var(--global-spacing-2),
 					width: var(--layout-content-scale-width),
 				),
+				media-item-fig-caption: (
+					color: var(--global-neutral-5),
+					font-size: var(--global-font-size-2),
+					line-height: var(--global-line-height-2),
+				),
+				video: (
+					margin: auto,
+				),
+				video-frame: (
+					background-color: var(--global-black),
+				),
 			),
 			blocks: (
 				category-carousel: (
@@ -443,6 +455,67 @@
 					),
 					gap: var(--global-spacing-1),
 				),
+				video-player: (
+					components: (
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+					),
+				),
+				video-player-feature: (
+					gap: 0,
+					components: (
+						media-item-fig-caption: (
+							margin-bottom: var(--global-spacing-2),
+							margin-left: var(--global-spacing-4),
+							margin-right: var(--global-spacing-4),
+							margin-top: var(--global-spacing-2),
+						),
+					),
+				),
+				video-player-feature-meta: (
+					margin: auto,
+					width: var(--content-scale-width),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						stack: (
+							gap: var(--global-spacing-3),
+						),
+					),
+				),
+				video-player-inline: (
+					gap: var(--global-spacing-3),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-9),
+							line-height: var(--global-line-height-5),
+						),
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+						media-item-fig-caption: (
+							margin-bottom: 0,
+							margin-left: 0,
+							margin-right: 0,
+							margin-top: var(--global-spacing-2),
+						),
+						stack: (
+							gap: 0,
+						),
+					),
+				),
+				video-player-inline-video: (
+					gap: 0,
+				),
 			),
 		),
 		desktop: (
@@ -539,6 +612,26 @@
 				),
 				story-carousel-title: (
 					font-size: var(--global-font-size-11),
+				),
+				video-player-feature-meta: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				video-player-inline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+					),
 				),
 			),
 		),

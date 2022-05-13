@@ -1,182 +1,143 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+
 import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
+
 import PropTypes from "@arc-fusion/prop-types";
-import styled from "styled-components";
+
 import {
-	// presentational component does not do data fetching
-	VideoPlayer as VideoPlayerPresentational,
-	videoPlayerCustomFields,
-} from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont, SecondaryFont } from "@wpmedia/shared-styles";
+	formatCredits,
+	formatPowaVideoEmbed,
+	Heading,
+	HeadingSection,
+	MediaItem,
+	Paragraph,
+	Badge,
+	Stack,
+	Video,
+} from "@wpmedia/arc-themes-components";
 
-const AlertBadge = styled.span`
-	background-color: #db0a07;
-	border-radius: 1.5rem;
-	color: #fff;
-	display: inline-block;
-	padding: 0.3rem 0.8rem;
-	font-size: 0.75rem;
-	line-height: 1;
-	font-weight: bold;
-`;
+const BLOCK_CLASS_NAME = "b-video-player";
 
-function getFetchedPassedOrInheritedTitleDescriptionCaption(
-	globalContent,
-	inheritGlobalContent,
-	title,
-	description,
-	doFetch,
-	fetchedData
-) {
-	let headlineBasic;
-	let descriptionBasic;
+const videoLayouts = {
+	inlineVideo: ({
+		alertBadge,
+		aspectRatio,
+		caption,
+		credit,
+		description,
+		embedMarkup,
+		captionTitle,
+		hideVideoTitle,
+		title,
+	}) => (
+		<Stack className={`${BLOCK_CLASS_NAME}__inline`}>
+			{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
+			<Stack className={`${BLOCK_CLASS_NAME}__inline-video`}>
+				{title ? (
+					<HeadingSection>
+						<Heading>{title}</Heading>
+					</HeadingSection>
+				) : null}
+				<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
+					<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+				</MediaItem>
+			</Stack>
+			{description ? <Paragraph>{description}</Paragraph> : null}
+		</Stack>
+	),
+	featureVideo: ({
+		alertBadge,
+		aspectRatio,
+		caption,
+		credit,
+		description,
+		embedMarkup,
+		captionTitle,
+		hideVideoTitle,
+		title,
+	}) => (
+		<Stack className={`${BLOCK_CLASS_NAME}__feature`}>
+			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
+				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+			</MediaItem>
+			<Stack className={`${BLOCK_CLASS_NAME}__feature-meta`}>
+				{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
+				{title ? (
+					<HeadingSection>
+						<Heading>{title}</Heading>
+					</HeadingSection>
+				) : null}
+				{description ? <Paragraph>{description}</Paragraph> : null}
+			</Stack>
+		</Stack>
+	),
+};
 
-	// same logic as embed html
-	// if inherit global content
-	//    then use that
-	// else if title and description passed in and truthy
-	//    use those next
-	// else if electing to use fetched data based off config
-	//    use fetched data
-	// else
-	// 	  return empty strings for title and description
-	if (inheritGlobalContent) {
-		headlineBasic = globalContent?.headlines?.basic;
-		descriptionBasic = globalContent?.description?.basic;
-	} else if (title && description) {
-		headlineBasic = title;
-		descriptionBasic = description;
-	} else if (doFetch) {
-		headlineBasic = fetchedData?.headlines?.basic;
-		descriptionBasic = fetchedData?.description?.basic;
-	}
-
-	let credits;
-
-	// since credits can't be passed in, the fallback is to use the fetched data
-	if (inheritGlobalContent) {
-		credits = globalContent?.credits || null;
-	} else {
-		credits = fetchedData?.credits || null;
-	}
-
-	return {
-		headlineBasic: headlineBasic || null,
-		descriptionBasic: descriptionBasic || null,
-		credits,
-	};
-}
-
-const VideoPlayer = (props) => {
-	const { customFields = {}, embedMarkup, enableAutoplay = false } = props;
-
+function VideoPlayer({ customFields = {}, embedMarkup }) {
 	const {
+		alertBadge,
 		autoplay,
+		description,
+		displayStyle = "inlineVideo",
+		hideVideoCaption,
+		hideVideoCredits,
+		hideVideoTitle,
 		inheritGlobalContent,
 		playthrough,
-		alertBadge,
 		title,
-		description,
 		websiteURL,
-		hideVideoTitle = false,
-		hideVideoCaption = false,
-		hideVideoCredits = false,
 	} = customFields;
 
-	const { id, globalContent = {}, arcSite } = useFusionContext();
-	const videoRef = useRef(id);
-	let embedHTML = "";
-	let doFetch = false;
+	const { globalContent = {}, arcSite } = useFusionContext();
 
-	// If it's inheriting from global content, use the html from the content
-	if (inheritGlobalContent) {
-		embedHTML = globalContent?.embed_html;
-	} else if (embedMarkup) {
-		// If there is an embed html being passed in from a parent, use that
-		embedHTML = embedMarkup;
-	} else {
-		doFetch = true;
-	}
+	const fetchQuery = websiteURL
+		? { website_url: websiteURL, site: arcSite }
+		: customFields?.itemContentConfig?.contentConfigValues || null;
 
-	// In all other scenarios, fetch from the provided url and content api
-	const customFieldSource = customFields?.itemContentConfig?.contentService ?? null;
-	const contentConfigValues = customFields?.itemContentConfig?.contentConfigValues;
 	// Support for deprecated 'websiteURL' custom field (use 'content-api' & URL for fetch)
-	const fetchSource = doFetch ? (!!websiteURL && "content-api") || customFieldSource : null;
-	const fetchDataQuery = websiteURL
-		? {
-				website_url: websiteURL,
-				site: arcSite,
-		  }
-		: contentConfigValues || null;
+	const fetchSource = websiteURL
+		? "content-api"
+		: customFields?.itemContentConfig?.contentService || null;
 
 	const fetchedData = useContent({
-		source: fetchSource,
-		query: fetchDataQuery,
+		query: inheritGlobalContent ? null : fetchQuery,
+		source: inheritGlobalContent ? null : fetchSource,
 	});
 
-	embedHTML = doFetch ? fetchedData && fetchedData.embed_html : embedHTML;
+	const contentSource = inheritGlobalContent ? globalContent : fetchedData;
 
-	useEffect(() => {
-		if (document.getElementById(`video-${videoRef.current}`)) {
-			const powaEl = document.getElementById(`video-${videoRef.current}`).firstElementChild;
+	const captionTitle = inheritGlobalContent
+		? contentSource?.headlines?.basic
+		: (description && title) || contentSource?.headlines?.basic;
 
-			if (powaEl) {
-				if (window.powaBoot) window.powaBoot();
-			}
-		}
-	});
+	const captionDescription = inheritGlobalContent
+		? contentSource?.description?.basic
+		: (title && description) || contentSource?.description?.basic;
 
-	const { headlineBasic, descriptionBasic, credits } =
-		getFetchedPassedOrInheritedTitleDescriptionCaption(
-			globalContent,
-			inheritGlobalContent,
-			title,
-			description,
-			doFetch,
-			fetchedData
-		);
+	const aspectRatio = 16 / 9;
 
-	return (
-		<div className="container-fluid">
-			{alertBadge && (
-				<div className="padding-sm-bottom">
-					<AlertBadge>{alertBadge}</AlertBadge>
-				</div>
-			)}
-			{title && (
-				<PrimaryFont as="h2" className="xl-promo-headline">
-					{title}
-				</PrimaryFont>
-			)}
-			{embedHTML && (
-				<VideoPlayerPresentational
-					id={id}
-					embedMarkup={embedHTML}
-					enableAutoplay={enableAutoplay}
-					shrinkToFit={customFields?.shrinkToFit}
-					viewportPercentage={customFields?.viewportPercentage}
-					customFields={{
-						autoplay,
-						playthrough,
-					}}
-					displayTitle={!hideVideoTitle}
-					displayCaption={!hideVideoCaption}
-					displayCredits={!hideVideoCredits}
-					subtitle={headlineBasic}
-					caption={descriptionBasic}
-					credits={credits}
-				/>
-			)}
-			{description && (
-				<SecondaryFont as="p" className="description-text">
-					{description}
-				</SecondaryFont>
-			)}
-		</div>
-	);
-};
+	const renderVideoLayout = videoLayouts[displayStyle];
+	const powaMarkup = contentSource?.embed_html || embedMarkup;
+
+	return powaMarkup
+		? renderVideoLayout({
+				alertBadge,
+				aspectRatio,
+				caption: !hideVideoCaption ? captionDescription : null,
+				credit: !hideVideoCredits ? formatCredits(contentSource?.credits) : null,
+				description,
+				embedMarkup: formatPowaVideoEmbed(powaMarkup, {
+					autoplay,
+					playthrough,
+					"aspect-ratio": 1 / aspectRatio, // format aspect is reversed
+				}),
+				captionTitle,
+				hideVideoTitle,
+				title,
+		  })
+		: null;
+}
 
 VideoPlayer.propTypes = {
 	customFields: PropTypes.shape({
@@ -208,21 +169,20 @@ VideoPlayer.propTypes = {
 			description: "This display option applies to all Videos in the Video Center Player block",
 			label: "Hide Title",
 			defaultValue: false,
-			group: "Video Display Options",
+			group: "Video Subtext Options",
 		}),
 		hideVideoCaption: PropTypes.bool.tag({
 			description: "This display option applies to all Videos in the Video Center Player block",
 			label: "Hide Caption",
 			defaultValue: false,
-			group: "Video Display Options",
+			group: "Video Subtext Options",
 		}),
 		hideVideoCredits: PropTypes.bool.tag({
 			description: "This display option applies to all Videos in the Video Center Player block",
 			label: "Hide Credits",
 			defaultValue: false,
-			group: "Video Display Options",
+			group: "Video Subtext Options",
 		}),
-		...videoPlayerCustomFields(),
 		title: PropTypes.string.tag({
 			label: "Title",
 			group: "Display settings",
@@ -235,10 +195,17 @@ VideoPlayer.propTypes = {
 			label: "Alert Badge",
 			group: "Display settings",
 		}),
+		displayStyle: PropTypes.oneOf(Object.keys(videoLayouts)).tag({
+			defaultValue: "inlineVideo",
+			label: "Video Display Style",
+			labels: {
+				inlineVideo: "Inline Video",
+				featureVideo: "Feature Video",
+			},
+			group: "Display settings",
+		}),
 	}),
-
 	embedMarkup: PropTypes.string,
-	enableAutoplay: PropTypes.bool,
 };
 
 VideoPlayer.label = "Video Center Player - Arc Block";

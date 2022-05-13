@@ -5,14 +5,17 @@
 		@include scss.block-components("header-extra-large");
 		@include scss.block-properties("header-extra-large");
 	}
+
 	&--large {
 		@include scss.block-components("header-large");
 		@include scss.block-properties("header-large");
 	}
+
 	&--medium {
 		@include scss.block-components("header-medium");
 		@include scss.block-properties("header-medium");
 	}
+
 	&--small {
 		@include scss.block-components("header-small");
 		@include scss.block-properties("header-small");

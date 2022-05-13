@@ -23,15 +23,6 @@ describe("The header block", () => {
 			expect(wrapper.length).toEqual(1);
 			expect(wrapper.text()).toEqual("Header");
 		});
-
-		it("should have the appropriate class", () => {
-			const customFields = {
-				text: "Header",
-				size: "Extra Large",
-			};
-			const wrapper = shallow(<Header customFields={customFields} />);
-			expect(wrapper).toHaveProp("className", "b-header b-header--extra-large");
-		});
 	});
 
 	describe("when an Extra Large size prop is provided", () => {
@@ -45,26 +36,21 @@ describe("The header block", () => {
 		useFusionContext.mockImplementation(() => mockStory);
 		const wrapper = mount(<Header customFields={customFields} />);
 		it("should render a header with Extra Large text", () => {
-			expect(wrapper.length).toEqual(1);
-			expect(wrapper.props().customFields.size).toEqual("Extra Large");
 			expect(wrapper.text()).toEqual("Extra Large Header");
-			expect(wrapper.find("h1").length).toEqual(1);
 			const extraLargeHeader = wrapper.find(".b-header--extra-large");
 			expect(extraLargeHeader).toExist();
 		});
 	});
 
 	describe("when a Large size prop is provided", () => {
-		const customFields = {
-			text: "Large Header",
-			size: "Large",
-		};
-		const wrapper = mount(<Header customFields={customFields} />);
 		it("should render a header with Large text", () => {
-			expect(wrapper.length).toEqual(1);
-			expect(wrapper.props().customFields.size).toEqual("Large");
+			const customFields = {
+				text: "Large Header",
+				size: "Large",
+			};
+			const wrapper = mount(<Header customFields={customFields} />);
+
 			expect(wrapper.text()).toEqual("Large Header");
-			expect(wrapper.find("h1").length).toEqual(1);
 			const largeHeader = wrapper.find(".b-header--large");
 			expect(largeHeader).toExist();
 		});
@@ -80,7 +66,6 @@ describe("The header block", () => {
 			expect(wrapper.length).toEqual(1);
 			expect(wrapper.props().customFields.size).toEqual("Medium");
 			expect(wrapper.text()).toEqual("Medium Header");
-			expect(wrapper.find("h1").length).toEqual(1);
 			const mediumHeader = wrapper.find(".b-header--medium");
 			expect(mediumHeader).toExist();
 		});
@@ -96,7 +81,6 @@ describe("The header block", () => {
 			expect(wrapper.length).toEqual(1);
 			expect(wrapper.props().customFields.size).toEqual("Small");
 			expect(wrapper.text()).toEqual("Small Header");
-			expect(wrapper.find("h1").length).toEqual(1);
 
 			const smallHeader = wrapper.find(".b-header--small");
 			expect(smallHeader).toExist();
@@ -113,7 +97,6 @@ describe("The header block", () => {
 			expect(wrapper.length).toEqual(1);
 			expect(wrapper.props().customFields.size).toEqual("");
 			expect(wrapper.text()).toEqual("Header");
-			expect(wrapper.find("h1").length).toEqual(1);
 
 			const mediumHeader = wrapper.find(".b-header--medium");
 			expect(mediumHeader).toExist();
@@ -131,7 +114,6 @@ describe("The header block", () => {
 			expect(wrapper.props().customFields.size).toEqual("");
 			expect(wrapper.props().customFields.text).toEqual("");
 			expect(wrapper.text()).toEqual("");
-			expect(wrapper.find("h1").length).toEqual(1);
 
 			const mediumHeader = wrapper.find(".b-header--medium");
 			expect(mediumHeader).toExist();
@@ -142,7 +124,6 @@ describe("The header block", () => {
 it("if no custom fields provided, should fallback to an empty object and render defaults", () => {
 	const wrapper = mount(<Header />);
 	expect(wrapper.text()).toEqual("");
-	expect(wrapper.find("h1").length).toEqual(1);
 	const mediumHeader = wrapper.find(".b-header--medium");
 	expect(mediumHeader).toExist();
 });

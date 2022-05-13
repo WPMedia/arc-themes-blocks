@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Heading } from "@wpmedia/arc-themes-components";
+import { Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-header";
 
@@ -19,7 +19,11 @@ function Header(props) {
 		blockModifier = `${BLOCK_CLASS_NAME}--medium`;
 	}
 
-	return <Heading className={`${BLOCK_CLASS_NAME} ${blockModifier}`}>{text}</Heading>;
+	return (
+		<HeadingSection>
+			<Heading className={`${BLOCK_CLASS_NAME} ${blockModifier}`}>{text}</Heading>
+		</HeadingSection>
+	);
 }
 
 Header.propTypes = {

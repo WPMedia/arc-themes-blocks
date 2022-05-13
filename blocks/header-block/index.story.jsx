@@ -18,3 +18,27 @@ export const showExtraLargeHeader = () => (
 		}}
 	/>
 );
+export const showLargeHeader = () => (
+	<Header
+		customFields={{
+			text: "Large Header",
+			size: "Large",
+		}}
+	/>
+);
+export const showMediumHeader = () => (
+	<Header
+		customFields={{
+			text: "Medium Header",
+			size: "Medium",
+		}}
+	/>
+);
+export const showSmallHeader = () => (
+	<Header
+		customFields={{
+			text: "Small Header",
+			size: "Small",
+		}}
+	/>
+);

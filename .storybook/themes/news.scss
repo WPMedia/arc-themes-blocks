@@ -4,6 +4,8 @@
 		desktop: "min-width: 48rem",
 	),
 	$global: (
+		"black": #000000,
+
 		"spacing-1": 0.25rem,
 		// 4px
 		"spacing-2": 0.5rem,
@@ -37,6 +39,58 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
+
+		"font-size-1": 0.625rem,
+		// 10px
+		"font-size-2": 0.75rem,
+		// 12px
+		"font-size-3": 0.875rem,
+		// 14px
+		"font-size-4": 1rem,
+		// 16px
+		"font-size-5": 1.125rem,
+		// 18px
+		"font-size-6": 1.1875rem,
+		// 19px
+		"font-size-7": 1.25rem,
+		// 20px
+		"font-size-8": 1.375rem,
+		// 22px
+		"font-size-9": 1.5rem,
+		// 24px
+		"font-size-10": 1.75rem,
+		// 28px
+		"font-size-11": 2rem,
+		// 32px
+		"font-size-12": 2.25rem,
+		// 36px
+		"font-size-13": 2.56rem,
+		// 41px
+		"font-size-14": 3rem,
+		// 48px
+		"font-size-15": 3.25rem,
+
+		// 52px
+		"line-height-1": 0.875rem,
+		// 14px
+		"line-height-2": 1rem,
+		// 16px
+		"line-height-3": 1.25rem,
+		// 20px
+		"line-height-4": 1.5rem,
+		// 24px
+		"line-height-5": 2rem,
+		// 32px
+		"line-height-6": 2.125rem,
+		// 34px
+		"line-height-7": 2.5rem,
+		// 40px
+		"line-height-8": 3rem,
+		// 48px
+		"line-height-9": 3.5rem,
+		// 56px
+		"line-height-10": 3.875rem,
+		// 62px
 	),
 	$alias: (
 		// Layout
@@ -46,6 +100,19 @@
 	),
 	$tokens: (
 		default: (
+			components: (
+				media-item-fig-caption: (
+					color: var(--global-neutral-5),
+					font-size: var(--global-font-size-2),
+					line-height: var(--global-line-height-2),
+				),
+				video: (
+					margin: auto,
+				),
+				video-frame: (
+					background-color: var(--global-black),
+				),
+			),
 			blocks: (
 				headline: (
 					line-height: var(--global-line-height-9),
@@ -148,6 +215,67 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				video-player: (
+					components: (
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+					),
+				),
+				video-player-feature: (
+					gap: 0,
+					components: (
+						media-item-fig-caption: (
+							margin-bottom: var(--global-spacing-2),
+							margin-left: var(--global-spacing-4),
+							margin-right: var(--global-spacing-4),
+							margin-top: var(--global-spacing-2),
+						),
+					),
+				),
+				video-player-feature-meta: (
+					margin: auto,
+					width: var(--content-scale-width),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						stack: (
+							gap: var(--global-spacing-3),
+						),
+					),
+				),
+				video-player-inline: (
+					gap: var(--global-spacing-3),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-9),
+							line-height: var(--global-line-height-5),
+						),
+						media-item: (
+							width: 100%,
+							margin: auto,
+						),
+						media-item-fig-caption: (
+							margin-bottom: 0,
+							margin-left: 0,
+							margin-right: 0,
+							margin-top: var(--global-spacing-2),
+						),
+						stack: (
+							gap: 0,
+						),
+					),
+				),
+				video-player-inline-video: (
+					gap: 0,
+				),
 			),
 		),
 		desktop: (
@@ -183,6 +311,26 @@
 					border-right: 1px solid #dadada,
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
+				),
+				video-player-feature-meta: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				video-player-inline: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+					),
 				),
 			),
 		),

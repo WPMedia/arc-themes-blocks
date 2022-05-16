@@ -123,6 +123,11 @@
 				),
 			),
 			blocks: (
+				headline: (
+					line-height: var(--global-line-height-9),
+					font-size: var(--global-font-size-13),
+					font-weight: var(--global-font-weight-7),
+				),
 				right-rail: (
 					gap: var(--global-spacing-6),
 				),
@@ -353,3 +358,4 @@
 
 @use "../../blocks/right-rail-block";
 @use "../../blocks/right-rail-advanced-block";
+@use "../../blocks/headline-block";

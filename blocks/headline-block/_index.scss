@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-headline {
+	@include scss.block-components("headline");
+	@include scss.block-properties("headline");
+}

@@ -220,8 +220,8 @@
 					grid-area: main-right-rail-bottom,
 				),
 				subheadline: (
-					font-size: var(--global-font-size-9),
-					line-height: var(--global-line-height-5),
+					font-size: var(--global-font-size-5),
+					line-height: var(--global-line-height-4),
 					font-weight: var(--global-font-weight-7),
 				),
 				video-player: (
@@ -322,8 +322,9 @@
 					display: flex,
 				),
 				subheadline: (
-					font-size: var(--global-font-size-6),
-					line-height: var(--global-line-height-5),
+					font-size: var(--global-font-size-7),
+					line-height: var(--global-line-height-9),
+					font-weight: var(--global-font-weight-7),
 				),
 				video-player-feature-meta: (
 					components: (

@@ -26,9 +26,7 @@ describe("the headline feature for the default output type", () => {
 			const { default: Headline } = require("./default");
 			const wrapper = mount(<Headline />);
 
-			expect(wrapper.find("h1")).toHaveClassName("headline");
-			// checking for styled component class
-			expect(wrapper.find("h1").hasClass(/sc-/)).toBe(true);
+			expect(wrapper.find("h1")).toHaveClassName("b-headline");
 		});
 
 		it("should dangerously set the innerHTML to the headline content", () => {

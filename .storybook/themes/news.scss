@@ -215,10 +215,192 @@
 	$tokens: (
 		default: (
 			components: (
+				attribution: (
+					color: var(--text-color),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+				),
+				body: (
+					color: var(--text-color),
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+				),
+				button: (
+					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-radius: var(--global-border-radius-1),
+					font-weight: var(--global-font-weight-7),
+					gap: var(--global-spacing-2),
+				),
+				button-small: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					padding: var(--global-spacing-1) var(--global-spacing-4),
+				),
+				button-medium: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					padding: var(--global-spacing-3) var(--global-spacing-4),
+				),
+				button-large: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+					padding: var(--global-spacing-4),
+				),
+				button-default: (
+					background-color: var(--global-white),
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-primary: (
+					background-color: var(--color-primary),
+					color: var(--global-white),
+				),
+				button-primary-hover: (
+					background-color: var(--global-neutral-7),
+				),
+				button-primary-reverse: (
+					background-color: transparent,
+					border-color: var(--color-primary),
+					color: var(--color-primary),
+				),
+				button-primary-reverse-hover: (
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-secondary: (
+					background-color: var(--global-white),
+					color: var(--global-black),
+				),
+				button-secondary-hover: (
+					background-color: var(--global-neutral-7),
+					color: var(--global-white),
+				),
+				button-secondary-reverse: (
+					background-color: transparent,
+					border-color: var(--global-white),
+					color: var(--global-white),
+				),
+				button-secondary-reverse-hover: (
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				carousel: (
+					--slides: 1,
+				),
+				carousel-actions: (
+					display: none,
+					padding-left: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
+				),
+				carousel-button: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: var(--global-spacing-1),
+					background-color: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
+				),
+				carousel-track: (
+					gap: var(--global-spacing-2),
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
+				date: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
+				icon: (
+					fill: var(--icon-fill-color),
+					height: var(--global-spacing-5),
+					width: var(--global-spacing-5),
+				),
+				input: (
+					align-items: flex-start,
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-1),
+				),
+				input-input: (
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
+					border-radius: var(--global-border-radius-1),
+					padding: var(--global-spacing-2) var(--global-spacing-4),
+				),
+				input-input-focus: (
+					outline: solid 2px var(--form-border-color),
+					outline-offset: 1px,
+				),
+				input-label: (
+					font-weight: var(--global-font-weight-7),
+				),
+				input-error-input: (
+					border-color: var(--form-border-color-danger),
+				),
+				input-error-input-focus: (
+					outline-color: var(--form-border-color-danger),
+				),
+				input-success-input: (
+					border-color: var(--form-border-color-success),
+				),
+				input-success-input-focus: (
+					outline-color: var(--form-border-color-success),
+				),
+				input-warning-input: (
+					border-color: var(--form-border-color-warning),
+				),
+				input-warning-input-focus: (
+					outline-color: var(--form-border-color-warning),
+				),
+				link: (
+					color: var(--color-primary),
+				),
+				media-item: (
+					align-items: flex-start,
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-1),
+				),
 				media-item-fig-caption: (
-					color: var(--global-neutral-5),
+					color: var(--text-color-subtle),
+					font-size: var(--body-font-size-tiny),
+					line-height: var(--body-line-height-tiny),
+				),
+				media-item-title: (
+					font-weight: var(--global-font-weight-7),
+				),
+				overline: (
+					color: var(--text-color),
+					font-size: var(--global-font-size-7),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-4),
+					text-decoration: none,
+				),
+				paragraph: (
+					font-family: var(--font-family-secondary),
+				),
+				pill: (
+					background-color: var(--color-primary),
+					border-radius: 2em,
+					color: var(--global-white),
 					font-size: var(--global-font-size-2),
 					line-height: var(--global-line-height-2),
+					padding: var(--global-spacing-1) var(--global-spacing-4),
+					text-decoration: none,
+				),
+				pill-hover: (
+					background-color: var(--global-neutral-7),
+				),
+				stack-divider-vertical: (
+					border-bottom: var(--global-border-width-1) var(--global-border-style-1)
+						var(--border-color),
+				),
+				stack-divider-horizontal: (
+					border: none,
+					border-left: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
+					width: 1px,
+					height: auto,
 				),
 				video: (
 					margin: auto,
@@ -393,6 +575,24 @@
 			),
 		),
 		desktop: (
+			alias: (
+				"body-font-size": var(--global-font-size-4),
+				"body-font-size-small": var(--global-font-size-3),
+				"body-line-height-small": var(--global-line-height-3),
+				"body-font-size-tiny": var(--global-font-size-2),
+				"body-line-height-tiny": var(--global-line-height-2),
+			),
+			components: (
+				carousel: (
+					--slides: 4,
+				),
+				carousel-actions: (
+					display: flex,
+				),
+				carousel-track: (
+					gap: var(--global-spacing-6),
+				),
+			),
 			blocks: (
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,

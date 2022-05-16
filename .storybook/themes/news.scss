@@ -5,6 +5,62 @@
 	),
 	$global: (
 		"black": #000000,
+		"white": #ffffff,
+
+		"blue-1": #ebefff,
+		"blue-2": #b0c3f2,
+		"blue-3": #7aa2e5,
+		"blue-4": #4a89d8,
+		"blue-5": #1e78cb,
+		"blue-6": #1458a9,
+		"blue-7": #0c3d87,
+		"blue-8": #062665,
+		"blue-9": #021443,
+		"blue-10": #000721,
+
+		"red-1": #ff8a8a,
+		"red-2": #e65555,
+		"red-3": #ce2929,
+		"red-4": #b50505,
+		"red-5": #9c0000,
+		"red-6": #840000,
+		"red-7": #6b0000,
+		"red-8": #520000,
+		"red-9": #3a0000,
+		"red-10": #210000,
+
+		"orange-1": #fa714b,
+		"orange-2": #e24f23,
+		"orange-3": #c93302,
+		"orange-4": #b12e00,
+		"orange-5": #982a00,
+		"orange-6": #802500,
+		"orange-7": #682000,
+		"orange-8": #4f1900,
+		"orange-9": #371200,
+		"orange-10": #1f0b00,
+
+		"green-1": #80d971,
+		"green-2": #57c244,
+		"green-3": #34ab1f,
+		"green-4": #189402,
+		"green-5": #137d00,
+		"green-6": #0f6600,
+		"green-7": #0c4f00,
+		"green-8": #083800,
+		"green-9": #052100,
+		"green-10": #020a00,
+
+		"neutral-1": #e6efff,
+		"neutral-2": #c3cfe3,
+		"neutral-3": #a3b0c6,
+		"neutral-4": #8593aa,
+		"neutral-5": #69778e,
+		"neutral-6": #4f5c71,
+		"neutral-7": #384355,
+		"neutral-8": #232b39,
+		"neutral-9": #10151c,
+		"neutral-10": #000000,
 
 		"spacing-1": 0.25rem,
 		// 4px
@@ -39,6 +95,16 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
+		// 120px
+		"font-weight-1": 100,
+		"font-weight-2": 200,
+		"font-weight-3": 300,
+		"font-weight-4": 400,
+		"font-weight-5": 500,
+		"font-weight-6": 600,
+		"font-weight-7": 700,
+		"font-weight-8": 800,
+		"font-weight-9": 900,
 
 		"font-size-1": 0.625rem,
 		// 10px
@@ -69,7 +135,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -91,6 +156,16 @@
 		// 56px
 		"line-height-10": 3.875rem,
 		// 62px
+		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
+		"z-index-1": 1,
+		"z-index-2": 10,
+		"z-index-3": 50,
+		"z-index-4": 100,
+		"z-index-5": 500,
+
+		"border-radius-1": 0.25em,
+		"border-style-1": solid,
+		"border-width-1": 1px,
 	),
 	$alias: (
 		// Layout

@@ -121,9 +121,11 @@ describe("The header block", () => {
 	});
 });
 
-it("if no custom fields provided, should fallback to an empty object and render defaults", () => {
-	const wrapper = mount(<Header />);
-	expect(wrapper.text()).toEqual("");
-	const mediumHeader = wrapper.find(".b-header--medium");
-	expect(mediumHeader).toExist();
+describe("when no custom fields provided", () => {
+	it("should fallback to an empty object and render defaults", () => {
+		const wrapper = mount(<Header />);
+		expect(wrapper.text()).toEqual("");
+		const mediumHeader = wrapper.find(".b-header--medium");
+		expect(mediumHeader).toExist();
+	});
 });

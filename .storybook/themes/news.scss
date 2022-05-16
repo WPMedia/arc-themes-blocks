@@ -254,8 +254,7 @@
 				),
 				double-chain-children-grid: (
 					grid-template-columns: 1fr,
-					grid-column-gap: 0,
-					grid-row-gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5),
 				),
 				double-chain-child-item: (
 					gap: var(--global-spacing-5),
@@ -274,8 +273,7 @@
 				),
 				triple-chain-children-grid: (
 					grid-template-columns: 1fr,
-					grid-column-gap: 0,
-					grid-row-gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5),
 				),
 				triple-chain-child-item: (
 					gap: var(--global-spacing-5),
@@ -294,8 +292,7 @@
 				),
 				quad-chain-children-grid: (
 					grid-template-columns: 1fr,
-					grid-column-gap: 0,
-					grid-row-gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5),
 				),
 				quad-chain-child-item: (
 					gap: var(--global-spacing-5),

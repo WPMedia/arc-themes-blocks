@@ -14,18 +14,10 @@ const DoubleChain = ({ children, customFields }) => {
 		if (columnOneLength > 0) {
 			const childrenOutput = (
 				<Grid className={`${BLOCK_CLASS_NAME}__children-grid`}>
-					<Stack
-						data-testid="column-1"
-						direction="vertical"
-						className={`${BLOCK_CLASS_NAME}__child-item`}
-					>
+					<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__child-item`}>
 						{children.slice(0, columnOneLength)}
 					</Stack>
-					<Stack
-						data-testid="column-2"
-						direction="vertical"
-						className={`${BLOCK_CLASS_NAME}__child-item`}
-					>
+					<Stack direction="vertical" className={`${BLOCK_CLASS_NAME}__child-item`}>
 						{children.slice(columnOneLength)}
 					</Stack>
 				</Grid>

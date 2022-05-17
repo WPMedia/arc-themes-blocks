@@ -10,6 +10,8 @@ on:
       - canary
       # arc-themes-release-version-{numbers}.{numbers} per product
       - arc-themes-release-version-[0-9]+\.[0-9]+
+      # arc-themes-release-version-{numbers}.{numbers}.{numbers} per product
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
 
 jobs:
   ensure_minimum_test_coverage_linting:

@@ -5,6 +5,62 @@
 	),
 	$global: (
 		"black": #000000,
+		"white": #ffffff,
+
+		"blue-1": #ebefff,
+		"blue-2": #b0c3f2,
+		"blue-3": #7aa2e5,
+		"blue-4": #4a89d8,
+		"blue-5": #1e78cb,
+		"blue-6": #1458a9,
+		"blue-7": #0c3d87,
+		"blue-8": #062665,
+		"blue-9": #021443,
+		"blue-10": #000721,
+
+		"red-1": #ff8a8a,
+		"red-2": #e65555,
+		"red-3": #ce2929,
+		"red-4": #b50505,
+		"red-5": #9c0000,
+		"red-6": #840000,
+		"red-7": #6b0000,
+		"red-8": #520000,
+		"red-9": #3a0000,
+		"red-10": #210000,
+
+		"orange-1": #fa714b,
+		"orange-2": #e24f23,
+		"orange-3": #c93302,
+		"orange-4": #b12e00,
+		"orange-5": #982a00,
+		"orange-6": #802500,
+		"orange-7": #682000,
+		"orange-8": #4f1900,
+		"orange-9": #371200,
+		"orange-10": #1f0b00,
+
+		"green-1": #80d971,
+		"green-2": #57c244,
+		"green-3": #34ab1f,
+		"green-4": #189402,
+		"green-5": #137d00,
+		"green-6": #0f6600,
+		"green-7": #0c4f00,
+		"green-8": #083800,
+		"green-9": #052100,
+		"green-10": #020a00,
+
+		"neutral-1": #e6efff,
+		"neutral-2": #c3cfe3,
+		"neutral-3": #a3b0c6,
+		"neutral-4": #8593aa,
+		"neutral-5": #69778e,
+		"neutral-6": #4f5c71,
+		"neutral-7": #384355,
+		"neutral-8": #232b39,
+		"neutral-9": #10151c,
+		"neutral-10": #000000,
 
 		"spacing-1": 0.25rem,
 		// 4px
@@ -39,6 +95,16 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
+		// 120px
+		"font-weight-1": 100,
+		"font-weight-2": 200,
+		"font-weight-3": 300,
+		"font-weight-4": 400,
+		"font-weight-5": 500,
+		"font-weight-6": 600,
+		"font-weight-7": 700,
+		"font-weight-8": 800,
+		"font-weight-9": 900,
 
 		"font-size-1": 0.625rem,
 		// 10px
@@ -69,7 +135,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -91,20 +156,251 @@
 		// 56px
 		"line-height-10": 3.875rem,
 		// 62px
+		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
+		"z-index-1": 1,
+		"z-index-2": 10,
+		"z-index-3": 50,
+		"z-index-4": 100,
+		"z-index-5": 500,
+
+		"border-radius-1": 0.25em,
+		"border-style-1": solid,
+		"border-width-1": 1px,
 	),
 	$alias: (
+		// Font families
+		"font-family-primary": "Abel",
+		"font-family-secondary": "",
+		// Colors
+		"color-primary": var(--global-black),
+		"text-color": var(--global-neutral-8),
+		"text-color-subtle": var(--global-neutral-5),
+		"text-color-warning": var(--global-orange-9),
+		"text-color-danger": var(--global-red-9),
+		"text-color-success": var(--global-green-9),
+		"background-color": var(--global-white),
+		"background-color-warning": var(--global-orange-1),
+		"background-color-danger": var(--global-red-1),
+		"background-color-success": var(--global-green-1),
+		"icon-fill-color": var(--global-neutral-8),
+		"icon-fill-color-subtle": var(--global-neutral-5),
+		"border-color": var(--global-neutral-4),
+		"form-background-color": var(--global-white),
+		"form-border-color": var(--global-neutral-5),
+		"form-border-color-primary": var(--global-blue-5),
+		"form-border-color-warning": var(--global-orange-2),
+		"form-border-color-danger": var(--global-red-4),
+		"form-border-color-success": var(--global-green-5),
+		// Typography
+		// body
+		"body-font-weight": var(--global-font-weight-4),
+		"body-font-size": var(--global-font-size-3),
+		"body-line-height": var(--global-line-height-4),
+		// body : small
+		"body-font-weight-small": var(--global-font-weight-4),
+		"body-font-size-small": var(--global-font-size-2),
+		"body-line-height-small": var(--global-line-height-2),
+		// body : tiny
+		"body-font-weight-tiny": var(--global-font-weight-4),
+		"body-font-size-tiny": var(--global-font-size-1),
+		"body-line-height-tiny": var(--global-line-height-1),
 		// Layout
 		"layout-max-width": 1600,
 		"content-max-width": 1440,
+		//
+		// --content-scale-width identifies the inner document width for header and content
+		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 	),
 	$tokens: (
 		default: (
 			components: (
+				attribution: (
+					color: var(--text-color),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+				),
+				body: (
+					color: var(--text-color),
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+				),
+				button: (
+					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-radius: var(--global-border-radius-1),
+					font-weight: var(--global-font-weight-7),
+					gap: var(--global-spacing-2),
+				),
+				button-small: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					padding: var(--global-spacing-1) var(--global-spacing-4),
+				),
+				button-medium: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					padding: var(--global-spacing-3) var(--global-spacing-4),
+				),
+				button-large: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+					padding: var(--global-spacing-4),
+				),
+				button-default: (
+					background-color: var(--global-white),
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-primary: (
+					background-color: var(--color-primary),
+					color: var(--global-white),
+				),
+				button-primary-hover: (
+					background-color: var(--global-neutral-7),
+				),
+				button-primary-reverse: (
+					background-color: transparent,
+					border-color: var(--color-primary),
+					color: var(--color-primary),
+				),
+				button-primary-reverse-hover: (
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				button-secondary: (
+					background-color: var(--global-white),
+					color: var(--global-black),
+				),
+				button-secondary-hover: (
+					background-color: var(--global-neutral-7),
+					color: var(--global-white),
+				),
+				button-secondary-reverse: (
+					background-color: transparent,
+					border-color: var(--global-white),
+					color: var(--global-white),
+				),
+				button-secondary-reverse-hover: (
+					border-color: var(--global-neutral-7),
+					color: var(--global-neutral-7),
+				),
+				carousel: (
+					--slides: 1,
+				),
+				carousel-actions: (
+					display: none,
+					padding-left: var(--global-spacing-4),
+					padding-right: var(--global-spacing-4),
+				),
+				carousel-button: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: var(--global-spacing-1),
+					background-color: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
+				),
+				carousel-track: (
+					gap: var(--global-spacing-2),
+					max-width: var(--content-scale-width),
+					width: 100%,
+				),
+				date: (
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+				),
+				heading: (
+					font-weight: var(--global-font-weight-7),
+				),
+				icon: (
+					fill: var(--icon-fill-color),
+					height: var(--global-spacing-5),
+					width: var(--global-spacing-5),
+				),
+				input: (
+					align-items: flex-start,
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-1),
+				),
+				input-input: (
+					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
+					border-radius: var(--global-border-radius-1),
+					padding: var(--global-spacing-2) var(--global-spacing-4),
+				),
+				input-input-focus: (
+					outline: solid 2px var(--form-border-color),
+					outline-offset: 1px,
+				),
+				input-label: (
+					font-weight: var(--global-font-weight-7),
+				),
+				input-error-input: (
+					border-color: var(--form-border-color-danger),
+				),
+				input-error-input-focus: (
+					outline-color: var(--form-border-color-danger),
+				),
+				input-success-input: (
+					border-color: var(--form-border-color-success),
+				),
+				input-success-input-focus: (
+					outline-color: var(--form-border-color-success),
+				),
+				input-warning-input: (
+					border-color: var(--form-border-color-warning),
+				),
+				input-warning-input-focus: (
+					outline-color: var(--form-border-color-warning),
+				),
+				link: (
+					color: var(--color-primary),
+				),
+				media-item: (
+					align-items: stretch,
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-1),
+				),
 				media-item-fig-caption: (
-					color: var(--global-neutral-5),
+					color: var(--text-color-subtle),
+					font-size: var(--body-font-size-tiny),
+					line-height: var(--body-line-height-tiny),
+				),
+				media-item-title: (
+					font-weight: var(--global-font-weight-7),
+				),
+				overline: (
+					color: var(--text-color),
+					font-size: var(--global-font-size-7),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-4),
+					text-decoration: none,
+				),
+				paragraph: (
+					font-family: var(--font-family-secondary),
+				),
+				pill: (
+					background-color: var(--color-primary),
+					border-radius: 2em,
+					color: var(--global-white),
 					font-size: var(--global-font-size-2),
 					line-height: var(--global-line-height-2),
+					padding: var(--global-spacing-1) var(--global-spacing-4),
+					text-decoration: none,
+				),
+				pill-hover: (
+					background-color: var(--global-neutral-7),
+				),
+				stack-divider-vertical: (
+					border-bottom: var(--global-border-width-1) var(--global-border-style-1)
+						var(--border-color),
+				),
+				stack-divider-horizontal: (
+					border: none,
+					border-left: var(--global-border-width-1) var(--global-border-style-1) var(--border-color),
+					width: 1px,
+					height: auto,
 				),
 				video: (
 					margin: auto,
@@ -298,6 +594,24 @@
 			),
 		),
 		desktop: (
+			alias: (
+				"body-font-size": var(--global-font-size-4),
+				"body-font-size-small": var(--global-font-size-3),
+				"body-line-height-small": var(--global-line-height-3),
+				"body-font-size-tiny": var(--global-font-size-2),
+				"body-line-height-tiny": var(--global-line-height-2),
+			),
+			components: (
+				carousel: (
+					--slides: 4,
+				),
+				carousel-actions: (
+					display: flex,
+				),
+				carousel-track: (
+					gap: var(--global-spacing-6),
+				),
+			),
 			blocks: (
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
@@ -372,7 +686,15 @@
 	)
 );
 
+
+@use "../../blocks/category-carousel-block";
+@use "../../blocks/headline-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
+@use "../../blocks/hero-block";
+@use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/single-column-layout-block";
+@use "../../blocks/story-carousel-block";
+@use "../../blocks/video-player-block";

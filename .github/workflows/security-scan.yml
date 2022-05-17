@@ -2,20 +2,22 @@ name: "Code security scanning"
 
 on:
   push:
-    branches: 
+    branches:
       - stable
       - beta
       - canary
       - rc
       - arc-themes-release-version-[0-9]+\.[0-9]+
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: 
+    branches:
       - stable
       - beta
       - canary
       - rc
       - arc-themes-release-version-[0-9]+\.[0-9]+
+      - arc-themes-release-version-[0-9]+\.[0-9]+\.[0-9]+
 
 jobs:
   analyze:

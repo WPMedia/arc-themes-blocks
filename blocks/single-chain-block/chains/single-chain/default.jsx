@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Children } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { Heading, HeadingSection, Stack } from "@wpmedia/arc-themes-components";
 
@@ -6,6 +6,10 @@ const BLOCK_CLASS_NAME = "b-single-chain";
 
 const SingleChain = ({ children, customFields = {} }) => {
 	const { heading = null } = customFields;
+
+	if (!heading && Children.count(children) === 0) {
+		return null;
+	}
 
 	const Wrapper = heading ? HeadingSection : Fragment;
 

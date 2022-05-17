@@ -357,7 +357,7 @@
 					color: var(--color-primary),
 				),
 				media-item: (
-					align-items: flex-start,
+					align-items: stretch,
 					display: flex,
 					flex-direction: column,
 					gap: var(--global-spacing-1),

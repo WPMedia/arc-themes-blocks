@@ -40,12 +40,12 @@ const QuadChain = ({ children, customFields }) => {
 
 			return (
 				<Stack direction="vertical" className={BLOCK_CLASS_NAME}>
-					<HeadingSection>
-						{heading ? (
+					{heading ? (
+						<HeadingSection>
 							<Heading className={`${BLOCK_CLASS_NAME}__heading`}>{heading}</Heading>
-						) : null}
-						{childrenOutput}
-					</HeadingSection>
+						</HeadingSection>
+					) : null}
+					{childrenOutput}
 				</Stack>
 			);
 		}

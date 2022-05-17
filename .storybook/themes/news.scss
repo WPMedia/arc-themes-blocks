@@ -802,17 +802,18 @@
 );
 
 @use "../../blocks/category-carousel-block";
-@use "../../blocks/right-rail-block";
-@use "../../blocks/right-rail-advanced-block";
-@use "../../blocks/single-chain-block";
 @use "../../blocks/double-chain-block";
-@use "../../blocks/triple-chain-block";
-@use "../../blocks/quad-chain-block";
+@use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
+@use "../../blocks/right-rail-block";
+@use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

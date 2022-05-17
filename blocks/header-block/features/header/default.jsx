@@ -1,58 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Consumer from "fusion:consumer";
-import "./header.scss";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import { Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 
-@Consumer
-class Header extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
+const BLOCK_CLASS_NAME = "b-header";
+
+function Header(props) {
+	const { customFields: { size, text } = {} } = props;
+	let blockModifier = "";
+
+	if (size === "Extra Large") {
+		blockModifier = `${BLOCK_CLASS_NAME}--extra-large`;
+	} else if (size === "Large") {
+		blockModifier = `${BLOCK_CLASS_NAME}--large`;
+	} else if (size === "Small") {
+		blockModifier = `${BLOCK_CLASS_NAME}--small`;
+	} else {
+		// if medium or empty then use medium
+		blockModifier = `${BLOCK_CLASS_NAME}--medium`;
 	}
 
-	getHeader(text) {
-		const { customFields: { size } = {} } = this.props;
-		switch (size) {
-			case "Extra Large":
-				return (
-					<PrimaryFont as="h2" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Large":
-				return (
-					<PrimaryFont as="h3" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Medium":
-				return (
-					<PrimaryFont as="h4" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			case "Small":
-				return (
-					<PrimaryFont as="h5" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-			default:
-				return (
-					<PrimaryFont as="h4" className="header-block">
-						{text}
-					</PrimaryFont>
-				);
-		}
-	}
-
-	render() {
-		const {
-			customFields: { text = "" },
-		} = this.props;
-		return this.getHeader(text);
-	}
+	return (
+		<HeadingSection>
+			<Heading className={`${BLOCK_CLASS_NAME} ${blockModifier}`}>{text}</Heading>
+		</HeadingSection>
+	);
 }
 
 Header.propTypes = {

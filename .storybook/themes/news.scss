@@ -410,6 +410,25 @@
 				),
 			),
 			blocks: (
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-5),
+				),
+				double-chain-child-item: (
+					gap: var(--global-spacing-5),
+				),
 				header: (
 					font-weight: var(--global-font-weight-7),
 				),
@@ -433,6 +452,25 @@
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-5),
+				),
+				quad-chain-child-item: (
+					gap: var(--global-spacing-5),
 				),
 				right-rail: (
 					gap: var(--global-spacing-6),
@@ -545,25 +583,6 @@
 				single-chain-children-stack: (
 					gap: var(--global-spacing-5),
 				),
-				double-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
-						),
-					),
-				),
-				double-chain-children-grid: (
-					grid-template-columns: 1fr,
-					gap: var(--global-spacing-5),
-				),
-				double-chain-child-item: (
-					gap: var(--global-spacing-5),
-				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -581,25 +600,6 @@
 					gap: var(--global-spacing-5),
 				),
 				triple-chain-child-item: (
-					gap: var(--global-spacing-5),
-				),
-				quad-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
-						),
-					),
-				),
-				quad-chain-children-grid: (
-					grid-template-columns: 1fr,
-					gap: var(--global-spacing-5),
-				),
-				quad-chain-child-item: (
 					gap: var(--global-spacing-5),
 				),
 				video-player: (
@@ -685,6 +685,17 @@
 				),
 			),
 			blocks: (
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr 1fr,
+					gap: var(--global-spacing-6),
+				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
 					line-height: var(--global-line-height-7),
@@ -700,6 +711,17 @@
 				header-small: (
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr 1fr,
+					gap: var(--global-spacing-6),
 				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
@@ -743,17 +765,6 @@
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),
 				),
-				double-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				double-chain-children-grid: (
-					grid-template-columns: 1fr 1fr,
-					gap: var(--global-spacing-6),
-				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -763,17 +774,6 @@
 				),
 				triple-chain-children-grid: (
 					grid-template-columns: 1fr 1fr 1fr,
-					gap: var(--global-spacing-6),
-				),
-				quad-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-					),
-				),
-				quad-chain-children-grid: (
-					grid-template-columns: 1fr 1fr 1fr 1fr,
 					gap: var(--global-spacing-6),
 				),
 				video-player-feature-meta: (

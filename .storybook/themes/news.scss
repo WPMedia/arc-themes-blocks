@@ -419,6 +419,25 @@
 				),
 			),
 			blocks: (
+				header: (
+					font-weight: var(--global-font-weight-7),
+				),
+				header-extra-large: (
+					font-size: var(--global-font-size-9),
+					line-height: var(--global-line-height-5),
+				),
+				header-large: (
+					font-size: var(--global-font-size-7),
+					line-height: var(--global-line-height-4),
+				),
+				header-medium: (
+					font-size: var(--global-font-size-5),
+					line-height: var(--global-line-height-4),
+				),
+				header-small: (
+					font-size: var(--global-font-size-7),
+					line-height: var(--global-line-height-3),
+				),
 				headline: (
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
@@ -608,6 +627,22 @@
 				),
 			),
 			blocks: (
+				header-extra-large: (
+					font-size: var(--global-font-size-12),
+					line-height: var(--global-line-height-7),
+				),
+				header-large: (
+					font-size: var(--global-font-size-11),
+					line-height: var(--global-line-height-6),
+				),
+				header-medium: (
+					font-size: var(--global-font-size-7),
+					line-height: var(--global-line-height-9),
+				),
+				header-small: (
+					font-size: var(--global-font-size-4),
+					line-height: var(--global-line-height-4),
+				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
 				),
@@ -671,6 +706,7 @@
 );
 
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/quilted-image-block";

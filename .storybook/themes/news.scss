@@ -557,6 +557,11 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				subheadline: (
+					font-size: var(--global-font-size-5),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-4),
+				),
 				video-player: (
 					components: (
 						media-item: (
@@ -687,6 +692,11 @@
 					border-right: 1px solid #dadada,
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
+				),
+				subheadline: (
+					font-size: var(--global-font-size-7),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-5),
 				),
 				video-player-feature-meta: (
 					components: (

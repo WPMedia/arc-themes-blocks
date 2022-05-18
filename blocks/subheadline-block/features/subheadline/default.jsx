@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-
-import "./subheadline.scss";
+import { Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 
 const DISPLAY_VALUES = {
 	SUB_HEADLINE: "Subheadline",
@@ -18,15 +16,11 @@ export const SubHeadlinePresentation = ({
 		valueToDisplay === DISPLAY_VALUES.DESCRIPTION
 			? content?.description?.basic
 			: content?.subheadlines?.basic;
-	return (
-		!!value && (
-			<PrimaryFont
-				as="h2"
-				className="h4-primary sub-headline"
-				dangerouslySetInnerHTML={{ __html: value }}
-			/>
-		)
-	);
+	return value ? (
+		<HeadingSection>
+			<Heading className="b-subheadline" dangerouslySetInnerHTML={{ __html: value }} />
+		</HeadingSection>
+	) : null;
 };
 
 const SubHeadline = () => {

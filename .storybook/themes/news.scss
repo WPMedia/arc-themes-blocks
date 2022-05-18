@@ -437,6 +437,28 @@
 				),
 			),
 			blocks: (
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				double-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				double-chain-child-item-empty: (
+					display: contents,
+				),
 				header: (
 					font-weight: var(--global-font-weight-7),
 				),
@@ -460,6 +482,28 @@
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				quad-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				quad-chain-child-item-empty: (
+					display: contents,
 				),
 				right-rail: (
 					gap: var(--global-spacing-6),
@@ -557,6 +601,43 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-6),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				triple-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				triple-chain-child-item-empty: (
+					display: contents,
+				),
 				subheadline: (
 					font-size: var(--global-font-size-5),
 					font-weight: var(--global-font-weight-7),
@@ -645,6 +726,20 @@
 				),
 			),
 			blocks: (
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				double-chain-child-item-empty: (
+					display: initial,
+				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
 					line-height: var(--global-line-height-7),
@@ -660,6 +755,20 @@
 				header-small: (
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				quad-chain-child-item-empty: (
+					display: initial,
 				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
@@ -693,6 +802,30 @@
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
 				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-5),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				triple-chain-child-item-empty: (
+					display: initial,
+				),
 				subheadline: (
 					font-size: var(--global-font-size-7),
 					font-weight: var(--global-font-weight-7),
@@ -724,12 +857,16 @@
 );
 
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

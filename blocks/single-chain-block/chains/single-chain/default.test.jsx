@@ -16,7 +16,6 @@ describe("single chain", () => {
 
 			expect(wrapper.text()).toBe(testText);
 			expect(wrapper.find("HeadingSection").exists()).toBe(false);
-			expect(wrapper.html()).toBe(`<p>${testText}</p>`);
 		});
 
 		it("should render null when null is the child", () => {

@@ -220,6 +220,33 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
+				badge: (
+					align-self: baseline,
+					border-radius: 2em,
+					color: var(--global-white),
+					font-size: var(--body-font-size-tiny),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--body-line-height-tiny),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				badge-danger: (
+					background-color: var(--form-border-color-danger),
+				),
+				badge-default: (
+					background-color: var(--text-color),
+				),
+				badge-light: (
+					background-color: var(--text-color-subtle),
+				),
+				badge-primary: (
+					background-color: var(--color-primary),
+				),
+				badge-success: (
+					background-color: var(--form-border-color-success),
+				),
+				badge-warning: (
+					background-color: var(--form-border-color-warning),
+				),
 				body: (
 					color: var(--text-color),
 					font-family: var(--font-family-primary),

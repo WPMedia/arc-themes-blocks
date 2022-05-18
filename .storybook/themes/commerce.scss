@@ -285,6 +285,11 @@
 				),
 				video: (
 					margin: auto,
+					components: (
+						badge: (
+							align-self: baseline,
+						),
+					),
 				),
 				video-frame: (
 					background-color: var(--global-black),

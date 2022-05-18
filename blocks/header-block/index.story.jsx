@@ -42,3 +42,11 @@ export const showSmallHeader = () => (
 		}}
 	/>
 );
+export const showAllHeaders = () => (
+	<>
+		<Header customFields={{ text: "Extra Large Header", size: "Extra Large" }} />
+		<Header customFields={{ text: "Large Header", size: "Large" }} />
+		<Header customFields={{ text: "Medium Header", size: "Medium" }} />
+		<Header customFields={{ text: "Small Header", size: "Small" }} />
+	</>
+);

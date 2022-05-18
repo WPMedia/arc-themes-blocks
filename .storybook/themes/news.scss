@@ -221,6 +221,7 @@
 					line-height: var(--body-line-height-small),
 				),
 				badge: (
+					align-self: baseline,
 					border-radius: 2em,
 					color: var(--global-white),
 					font-size: var(--body-font-size-tiny),
@@ -558,9 +559,6 @@
 				),
 				video-player: (
 					components: (
-						badge: (
-							align-self: baseline,
-						),
 						media-item: (
 							width: 100%,
 							margin: auto,

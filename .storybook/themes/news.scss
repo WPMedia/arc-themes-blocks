@@ -558,6 +558,9 @@
 				),
 				video-player: (
 					components: (
+						badge: (
+							align-self: baseline,
+						),
 						media-item: (
 							width: 100%,
 							margin: auto,

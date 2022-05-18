@@ -638,6 +638,11 @@
 				triple-chain-child-item-empty: (
 					display: contents,
 				),
+				subheadline: (
+					font-size: var(--global-font-size-5),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-4),
+				),
 				video-player: (
 					components: (
 						media-item: (
@@ -821,6 +826,11 @@
 				triple-chain-child-item-empty: (
 					display: initial,
 				),
+				subheadline: (
+					font-size: var(--global-font-size-7),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-5),
+				),
 				video-player-feature-meta: (
 					components: (
 						heading: (
@@ -853,8 +863,8 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
-@use "../../blocks/right-rail-block";
 @use "../../blocks/right-rail-advanced-block";
+@use "../../blocks/right-rail-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

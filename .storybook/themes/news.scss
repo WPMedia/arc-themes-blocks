@@ -424,10 +424,13 @@
 				),
 				double-chain-children-grid: (
 					grid-template-columns: 1fr,
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
 				),
 				double-chain-child-item: (
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
+				),
+				double-chain-child-item-empty: (
+					display: contents,
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),
@@ -467,10 +470,13 @@
 				),
 				quad-chain-children-grid: (
 					grid-template-columns: 1fr,
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
 				),
 				quad-chain-child-item: (
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
+				),
+				quad-chain-child-item-empty: (
+					display: contents,
 				),
 				right-rail: (
 					gap: var(--global-spacing-6),
@@ -597,10 +603,13 @@
 				),
 				triple-chain-children-grid: (
 					grid-template-columns: 1fr,
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
 				),
 				triple-chain-child-item: (
-					gap: var(--global-spacing-5),
+					gap: var(--global-spacing-5) 0,
+				),
+				triple-chain-child-item-empty: (
+					display: contents,
 				),
 				video-player: (
 					components: (
@@ -694,7 +703,10 @@
 				),
 				double-chain-children-grid: (
 					grid-template-columns: 1fr 1fr,
-					gap: var(--global-spacing-6),
+					gap: 0 var(--global-spacing-6),
+				),
+				double-chain-child-item-empty: (
+					display: initial,
 				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
@@ -721,7 +733,10 @@
 				),
 				quad-chain-children-grid: (
 					grid-template-columns: 1fr 1fr 1fr 1fr,
-					gap: var(--global-spacing-6),
+					gap: 0 var(--global-spacing-6),
+				),
+				quad-chain-child-item-empty: (
+					display: initial,
 				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
@@ -774,7 +789,10 @@
 				),
 				triple-chain-children-grid: (
 					grid-template-columns: 1fr 1fr 1fr,
-					gap: var(--global-spacing-6),
+					gap: 0 var(--global-spacing-6),
+				),
+				triple-chain-child-item-empty: (
+					display: initial,
 				),
 				video-player-feature-meta: (
 					components: (

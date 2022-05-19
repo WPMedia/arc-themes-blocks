@@ -1,6 +1,7 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
-import Chain from "./default";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import QuadChain from "./default";
 
 describe("the quad chain block", () => {
 	const Comp1 = () => <div>1</div>;
@@ -9,80 +10,80 @@ describe("the quad chain block", () => {
 	const Comp4 = () => <div>4</div>;
 
 	it("should only render if there are children", () => {
-		const component = shallow(<Chain />);
-		expect(component).toBeEmptyRender();
+		const { container } = render(<QuadChain />);
+		expect(container.querySelectorAll(".b-quad-chain")).toHaveLength(0);
 	});
 
 	it("should put all features into the first column by default", () => {
 		const customFields = {};
-		const component = shallow(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</Chain>
+			</QuadChain>
 		);
-		expect(component).not.toBeEmptyRender();
+		expect(container.querySelectorAll(".b-quad-chain")).toHaveLength(1);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-		expect(columnOne.children().length).toBe(4);
-		expect(columnTwo.children().length).toBe(0);
+		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(4);
+		expect(col2.querySelectorAll("div")).toHaveLength(0);
 	});
 
 	it("should be able to accept a number in the custom field, and that number of features within the chain should appear in the first column. ", () => {
 		const customFields = { columnOne: 2, columnTwo: 2, columnThree: 0 };
-		const component = mount(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</Chain>
+			</QuadChain>
 		);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
+		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
 
-		expect(columnOne.text()).toEqual("12");
-		expect(columnTwo.text()).toEqual("34");
+		expect(col1.querySelectorAll("div")).toHaveLength(2);
+		expect(col2.querySelectorAll("div")).toHaveLength(2);
 	});
 
 	it("should be able to accept numbers in the custom field, any additional features in the chain should be placed in the fourth column. ", () => {
 		const customFields = { columnOne: 1, columnTwo: 1, columnThree: 1 };
-		const component = mount(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</Chain>
+			</QuadChain>
 		);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-		const columnThree = component.find(".row").children().at(2);
-		const columnFour = component.find(".row").children().at(3);
+		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
+		const col3 = container.querySelectorAll(".b-quad-chain__child-item")[2];
+		const col4 = container.querySelectorAll(".b-quad-chain__child-item")[3];
 
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
-		expect(columnThree.text()).toEqual("3");
-		expect(columnFour.text()).toEqual("4");
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
+		expect(col3.querySelectorAll("div")).toHaveLength(1);
+		expect(col4.querySelectorAll("div")).toHaveLength(1);
 	});
 
 	it("should render nothing if negative column 1 amount", () => {
 		const customFields = { columnOne: -10 };
-		const component = mount(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 				<Comp3 />
 				<Comp4 />
-			</Chain>
+			</QuadChain>
 		);
 
-		expect(component).toBeEmptyRender();
+		expect(container.querySelectorAll(".b-quad-chain__child-item")).toHaveLength(0);
 	});
 
 	it("should render heading from custom field and children", () => {
@@ -91,38 +92,36 @@ describe("the quad chain block", () => {
 			columnTwo: 1,
 			heading: "Quad Chain Heading",
 		};
-		const component = mount(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</Chain>
+			</QuadChain>
 		);
 
-		expect(component.find("Heading").text()).toBe("Quad Chain Heading");
-		expect(component.find("HeadingSection").exists()).toBe(true);
-
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
+		expect(container.querySelectorAll(".b-quad-chain__heading")).toHaveLength(1);
+		expect(container.querySelector(".b-quad-chain__heading").textContent).toBe(
+			"Quad Chain Heading"
+		);
+		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
 	});
 
 	it("should not render heading from custom field and children", () => {
 		const customFields = { columnOne: 1, columnTwo: 1 };
-		const component = mount(
-			<Chain customFields={customFields}>
+		const { container } = render(
+			<QuadChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
-			</Chain>
+			</QuadChain>
 		);
 
-		expect(component.find("Heading").exists()).toBe(false);
-		expect(component.find("HeadingSection").exists()).toBe(false);
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
+		expect(container.querySelectorAll(".b-quad-chain__heading")).toHaveLength(0);
+		const col1 = container.querySelectorAll(".b-quad-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-quad-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
 	});
 });

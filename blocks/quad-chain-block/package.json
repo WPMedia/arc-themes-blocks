@@ -7,6 +7,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
+    "_index.scss",
     "chains"
   ],
   "keywords": [
@@ -29,7 +30,6 @@
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/arc-themes-components": "*"
   }
 }

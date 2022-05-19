@@ -198,7 +198,7 @@
 		"form-border-color-danger": var(--global-red-4),
 		"form-border-color-success": var(--global-green-5),
 		// Border Radius
-		"border-radius-default": var(--global-border-radius-1),
+		"border-radius": var(--global-border-radius-1),
 		"border-radius-pill": var(--global-border-radius-2),
 		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
@@ -265,7 +265,7 @@
 				),
 				button: (
 					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
-					border-radius: var(--border-radius-default),
+					border-radius: var(--border-radius),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
 				),
@@ -332,7 +332,7 @@
 				),
 				carousel-button: (
 					box-shadow: var(--global-box-shadow-1),
-					border-radius: var(--border-radius-default),
+					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
 					width: var(--global-spacing-8),
@@ -362,7 +362,7 @@
 				),
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
-					border-radius: var(--border-radius-default),
+					border-radius: var(--border-radius),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
 				),
 				input-small-input: (

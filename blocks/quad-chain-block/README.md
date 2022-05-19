@@ -47,5 +47,3 @@ OR
 This block does not emit any events.
 
 ## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._

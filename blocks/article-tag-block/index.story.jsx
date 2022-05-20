@@ -103,6 +103,36 @@ export const manyTags = () => {
 	return <ArticleTagItems content={tenData} arcSite="story-book" />;
 };
 
+export const manyTagsOddLength = () => {
+	const tags = [
+		"dogs",
+		"cats",
+		"Impeachment Process",
+		"Google",
+		"Russia",
+		"2020 Olympics",
+		"Gift Guide",
+		"This is a long tag",
+		"Here's another",
+		"More tags",
+		"So many tags",
+		"Trending",
+	];
+
+	const tagsData = tags.map((x) => ({
+		description: `tag ${x}`,
+		slug: `tag-${x}`,
+		text: x,
+	}));
+	const tenData = {
+		taxonomy: {
+			tags: tagsData,
+		},
+	};
+
+	return <ArticleTagItems content={tenData} arcSite="story-book" />;
+};
+
 export const reallyLongTagText = () => {
 	const reallyLongTagTextData = {
 		description: "description",

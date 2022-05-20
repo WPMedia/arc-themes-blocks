@@ -10,13 +10,7 @@ export const ArticleTagItems = ({ content }) => {
 	const { taxonomy: { tags = [] } = {} } = content;
 
 	return tags.length ? (
-		<Stack
-			className={BLOCK_CLASS_NAME}
-			direction="horizontal"
-			wrap="wrap"
-			alignment="center"
-			justification="center"
-		>
+		<Stack className={BLOCK_CLASS_NAME} direction="horizontal" wrap="wrap" justification="center">
 			{tags.map((tag) => {
 				// fallback to "" because some tags don't have a slug
 				const { slug = "" } = tag;

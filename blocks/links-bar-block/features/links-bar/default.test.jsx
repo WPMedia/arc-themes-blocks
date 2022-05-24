@@ -71,7 +71,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
+			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
 		);
 	});
 
@@ -100,7 +100,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"`
+			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"/\\">Link Text</a></span></nav><hr/>"`
 		);
 	});
 
@@ -134,9 +134,9 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
-		expect(wrapper.find("span.links-menu")).toHaveLength(4);
-		expect(wrapper.find("span.links-menu a:not([target])")).toHaveLength(3);
-		expect(wrapper.find('span.links-menu a[target="_blank"]')).toHaveLength(1);
+		expect(wrapper.find(".b-links-bar-menu")).toHaveLength(4);
+		expect(wrapper.find(".b-links-bar a:not([target])")).toHaveLength(3);
+		expect(wrapper.find('.b-links-bar a[target="_blank"]')).toHaveLength(1);
 	});
 
 	it("should have no menu item if no content is returned", () => {

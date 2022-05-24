@@ -1,4 +1,4 @@
-.links-bar {
+.b-links-bar {
 	@include block-margin-bottom;
 	align-items: center;
 	text-align: left;
@@ -7,9 +7,8 @@
 		text-align: center;
 	}
 
-	.links-menu {
+	&-menu {
 		padding: 8px 0;
-
 		a {
 			@include link-color-active-hover($ui-primary-font-color);
 			color: $ui-primary-font-color;

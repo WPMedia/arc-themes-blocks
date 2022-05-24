@@ -4,10 +4,10 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import Link from "./_children/link";
-
+import { Link } from "@wpmedia/arc-themes-components";
 import "./links-bar.scss";
+
+const BLOCK_CLASS_NAME = "b-links-bar";
 
 const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 	const content = useContent({
@@ -35,19 +35,23 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 		<>
 			<nav
 				key={id}
-				className="links-bar"
+				className={BLOCK_CLASS_NAME}
 				aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
 			>
 				{menuItems &&
 					menuItems.map((item, index) => (
-						<PrimaryFont as="span" className="links-menu" key={item._id}>
+						<span className={`${BLOCK_CLASS_NAME}-menu`}>
 							{item.node_type === "link" ? (
-								<Link href={item.url} name={item.display_name} />
+								<Link href={item.url} className={BLOCK_CLASS_NAME} opensInNewTab>
+									{item.display_name}
+								</Link>
 							) : (
-								<Link href={item._id} name={item.name} />
+								<Link href={item._id} className={BLOCK_CLASS_NAME} opensInNewTab>
+									{item.name}
+								</Link>
 							)}
 							{content.children.length !== index + 1 && showSeparator ? "\u00a0 • \u00a0" : ""}
-						</PrimaryFont>
+						</span>
 					))}
 			</nav>
 			<hr />

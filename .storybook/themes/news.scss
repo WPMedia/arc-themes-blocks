@@ -6,7 +6,6 @@
 	$global: (
 		"black": #000000,
 		"white": #ffffff,
-
 		"blue-1": #ebefff,
 		"blue-2": #b0c3f2,
 		"blue-3": #7aa2e5,
@@ -17,7 +16,6 @@
 		"blue-8": #062665,
 		"blue-9": #021443,
 		"blue-10": #000721,
-
 		"red-1": #ff8a8a,
 		"red-2": #e65555,
 		"red-3": #ce2929,
@@ -28,7 +26,6 @@
 		"red-8": #520000,
 		"red-9": #3a0000,
 		"red-10": #210000,
-
 		"orange-1": #fa714b,
 		"orange-2": #e24f23,
 		"orange-3": #c93302,
@@ -39,7 +36,6 @@
 		"orange-8": #4f1900,
 		"orange-9": #371200,
 		"orange-10": #1f0b00,
-
 		"green-1": #80d971,
 		"green-2": #57c244,
 		"green-3": #34ab1f,
@@ -50,7 +46,6 @@
 		"green-8": #083800,
 		"green-9": #052100,
 		"green-10": #020a00,
-
 		"neutral-1": #e6efff,
 		"neutral-2": #c3cfe3,
 		"neutral-3": #a3b0c6,
@@ -61,7 +56,6 @@
 		"neutral-8": #232b39,
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
-
 		"spacing-1": 0.25rem,
 		// 4px
 		"spacing-2": 0.5rem,
@@ -95,7 +89,6 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
-
 		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
@@ -106,7 +99,6 @@
 		"font-weight-7": 700,
 		"font-weight-8": 800,
 		"font-weight-9": 900,
-
 		"font-size-1": 0.625rem,
 		// 10px
 		"font-size-2": 0.75rem,
@@ -136,7 +128,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -157,7 +148,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -165,11 +155,9 @@
 		"z-index-3": 50,
 		"z-index-4": 100,
 		"z-index-5": 500,
-
 		"border-radius-1": 0.25rem,
 		"border-radius-2": 20rem,
 		"border-radius-3": 100vmax,
-
 		"border-style-1": solid,
 		"border-width-1": 1px,
 	),
@@ -456,6 +444,18 @@
 				),
 			),
 			blocks: (
+				byline: (
+					font-size: var(--body-font-weight),
+					line-height: var(--body-line-height),
+					components: (
+						link: (
+							text-decoration: none,
+						),
+						link-hover: (
+							text-decoration: underline,
+						),
+					),
+				),
 				double-chain: (
 					components: (
 						stack: (

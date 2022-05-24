@@ -1,35 +1,26 @@
 {
-  "name": "@wpmedia/byline-block",
-  "version": "5.15.0",
-  "description": "Fusion News Theme byline block",
-  "author": "SangHee Kim <sanghee.kim@washpost.com>",
-  "contributors": [
-    "Jack Howard <jack.howard@washpost.com>"
-  ],
-  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
-  "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
-  "files": [
-    "features",
-    "intl.json"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/byline-block"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
-  "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "styled-components": "^4.4.0"
-  },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+	"name": "@wpmedia/byline-block",
+	"version": "5.15.0",
+	"description": "Fusion News Theme byline block",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"features",
+		"intl.json"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/byline-block"
+	},
+	"peerDependencies": {
+		"@wpmedia/arc-themes-components": "*"
+	},
+	"gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

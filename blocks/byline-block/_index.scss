@@ -1,0 +1,16 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-byline {
+	&__by {
+		@include scss.block-components("byline-by");
+		@include scss.block-properties("byline-by");
+	}
+
+	&__names {
+		@include scss.block-components("byline-names");
+		@include scss.block-properties("byline-names");
+	}
+
+	@include scss.block-components("byline");
+	@include scss.block-properties("byline");
+}

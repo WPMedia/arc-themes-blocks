@@ -31,7 +31,7 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/video-player-block": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^5.3.5"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0",

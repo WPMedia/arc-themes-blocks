@@ -97,7 +97,7 @@
     "sass-loader": "^8.0.2",
     "storybook-readme": "^5.0.9",
     "style-loader": "^1.2.1",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.3.5",
     "stylelint": "^13.3.3",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^3.0.0",

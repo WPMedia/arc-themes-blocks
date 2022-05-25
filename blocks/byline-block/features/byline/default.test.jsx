@@ -4,7 +4,7 @@ import { useFusionContext } from "fusion:context";
 
 import { render } from "@testing-library/react";
 
-import Byline from ".";
+import Byline from "./default";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:themes", () => jest.fn(() => ({})));

@@ -502,18 +502,7 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
-				overline: (
-					components: (
-						overline: (
-							color: var(--text-color),
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							text-decoration: none,
-							transition: color 0.3s ease,
-						),
-					),
-				),
+				overline: (),
 				quad-chain: (
 					components: (
 						stack: (

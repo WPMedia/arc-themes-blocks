@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-overline {
+	@include scss.block-components("overline");
+	@include scss.block-properties("overline");
+}

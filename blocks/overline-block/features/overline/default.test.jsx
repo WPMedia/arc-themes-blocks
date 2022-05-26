@@ -1,7 +1,6 @@
 import React from "react";
+import { shallow, mount } from "enzyme";
 import { useFusionContext } from "fusion:context";
-import { render } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import Overline from "./default";
 
 const mockContextObj = {
@@ -19,10 +18,21 @@ const mockContextObj = {
 	},
 };
 
+jest.mock("@wpmedia/engine-theme-sdk", () => ({
+	formatURL: jest.fn((input) => input.toString()),
+}));
+
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => mockContextObj),
+}));
+
+jest.mock("fusion:intl", () => ({
+	__esModule: true,
+	default: jest.fn((locale) => ({
+		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
+	})),
 }));
 
 jest.mock("fusion:content", () => ({
@@ -34,13 +44,15 @@ jest.mock("fusion:content", () => ({
 describe("overline feature for default output type", () => {
 	describe("when website_section content from globalContent is present", () => {
 		it("should render an a", () => {
-			const { container } = render(<Overline />);
-			expect(container.querySelectorAll("a")).toHaveLength(1);
+			const wrapper = mount(<Overline />);
+
+			expect(wrapper.find("a")).toHaveClassName("b-overline");
 		});
 
 		it("should dangerously set the inner HTML to the website_section content", () => {
-			const { container } = render(<Overline />);
-			expect(container.querySelector("a").textContent).toContain("News");
+			const wrapper = mount(<Overline />);
+
+			expect(wrapper.text()).toMatch("News");
 		});
 
 		it("should render only text if label do not have url", () => {
@@ -65,10 +77,10 @@ describe("overline feature for default output type", () => {
 				},
 			};
 			useFusionContext.mockImplementation(() => mockStory);
-			const { container } = render(<Overline />);
-			expect(container.querySelector("span").textContent).toContain(
-				mockStory.globalContent.label.basic.text
-			);
+			const wrapper = mount(<Overline />);
+
+			expect(wrapper.find("span")).toHaveClassName("b-overline");
+			expect(wrapper.find("span").text()).toEqual(mockStory.globalContent.label.basic.text);
 		});
 	});
 
@@ -91,8 +103,9 @@ describe("overline feature for default output type", () => {
 			});
 
 			it("should display the label name instead of the website section name", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelector("a").textContent).toContain("EXCLUSIVE");
+				const wrapper = mount(<Overline />);
+
+				expect(wrapper.text()).toMatch("EXCLUSIVE");
 			});
 		});
 
@@ -112,14 +125,16 @@ describe("overline feature for default output type", () => {
 			});
 
 			it("should display the label name instead of the website section name", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelector("span").textContent).toContain("EXCLUSIVE");
+				const wrapper = mount(<Overline />);
+
+				expect(wrapper.text()).toMatch("EXCLUSIVE");
 			});
 
 			it("should render as text", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelectorAll("span")).toHaveLength(1);
-				expect(container.querySelectorAll("a")).toHaveLength(0);
+				const wrapper = shallow(<Overline />);
+
+				expect(wrapper.at(0).prop("className")).toEqual("b-overline");
+				expect(wrapper.at(0).prop("href")).toBeFalsy();
 			});
 		});
 
@@ -139,14 +154,15 @@ describe("overline feature for default output type", () => {
 			});
 
 			it("should display the label name instead of the website section name", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelector("span").textContent).toContain("EXCLUSIVE");
+				const wrapper = mount(<Overline />);
+				expect(wrapper.text()).toMatch("EXCLUSIVE");
 			});
 
 			it("should render as text", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelectorAll("span")).toHaveLength(1);
-				expect(container.querySelectorAll("a")).toHaveLength(0);
+				const wrapper = shallow(<Overline />);
+
+				expect(wrapper.at(0).prop("className")).toEqual("b-overline");
+				expect(wrapper.at(0).prop("href")).toBeFalsy();
 			});
 		});
 
@@ -168,8 +184,9 @@ describe("overline feature for default output type", () => {
 			});
 
 			it("should dangerously set the inner HTML to the website_section content", () => {
-				const { container } = render(<Overline />);
-				expect(container.querySelector("a").textContent).toContain("News");
+				const wrapper = mount(<Overline />);
+
+				expect(wrapper.text()).toMatch("News");
 			});
 		});
 	});
@@ -180,9 +197,9 @@ describe("overline feature for default output type", () => {
 		});
 
 		it("should not render anything", () => {
-			const { container } = render(<Overline />);
-			expect(container.querySelectorAll("span")).toHaveLength(0);
-			expect(container.querySelectorAll("a")).toHaveLength(0);
+			const wrapper = mount(<Overline />);
+
+			expect(wrapper).toBeEmptyRender();
 		});
 	});
 });

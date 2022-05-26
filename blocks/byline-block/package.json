@@ -1,7 +1,7 @@
 {
 	"name": "@wpmedia/byline-block",
 	"version": "5.15.0",
-	"description": "Fusion News Theme byline block",
+	"description": "Byline - Display the authors for a given item from ANS using global content",
 	"author": "Arc XP - Themes",
 	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
 	"license": "CC-BY-NC-ND-4.0",

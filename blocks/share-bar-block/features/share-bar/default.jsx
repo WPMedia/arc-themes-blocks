@@ -1,26 +1,14 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { Button, Icon, Stack } from "@wpmedia/arc-themes-components";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
-import {
-	EnvelopeIcon,
-	LinkedInAltIcon,
-	PinterestAltIcon,
-	TwitterIcon,
-	FacebookIcon,
-} from "@wpmedia/engine-theme-sdk";
-
-import "./share-bar.scss";
+const BLOCK_CLASS_NAME = "b-share-bar";
 
 function encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social) {
-	// If this is a local dev, then return the domain as localhost - otherwise use the site properties
-	const location =
-		typeof window !== "undefined" && window.location.hostname === "localhost"
-			? "https://corecomponents-the-gazette-prod.cdn.arcpublishing.com"
-			: websiteDomain;
-	const encodedUrl = encodeURI(`${location}${websiteUrl}`);
+	const encodedUrl = encodeURI(`${websiteDomain}${websiteUrl}`);
 
 	switch (social) {
 		case "facebook":
@@ -60,21 +48,35 @@ const share = {
 	},
 };
 
-function getLogoComponent(type) {
+const getLogoComponent = (type) => {
+	const iconDimensions = {
+		height: 24,
+		width: 24,
+	};
+
 	switch (type) {
 		case "facebook":
-			return <FacebookIcon fill="#4267B2" />;
+			return (
+				<Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} {...iconDimensions} />
+			);
 		case "linkedIn":
-			return <LinkedInAltIcon fill="#2867B2" />;
+			return (
+				<Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} {...iconDimensions} />
+			);
 		case "pinterest":
-			return <PinterestAltIcon fill="#BD081C" />;
+			return (
+				<Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} {...iconDimensions} />
+			);
 		case "twitter":
-			return <TwitterIcon fill="#1DA1F2" />;
-		default:
+			return <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} {...iconDimensions} />;
 		case "email":
-			return <EnvelopeIcon fill="#C72A22" />;
+			return (
+				<Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} {...iconDimensions} />
+			);
+		default:
+			return null;
 	}
-}
+};
 
 const ShareBarContainer = () => {
 	const {
@@ -111,22 +113,20 @@ export const ShareBar = ({
 		if (customFields[social]) {
 			const encodedTitle = encodeURIComponent(headlineString);
 			const encodedUrl = encodeSocialUrl(websiteDomain, websiteUrl, encodedTitle, social);
-
 			const socialType = phrases.t(`global.social-${social.toLowerCase()}`);
 
 			shareButtons.push(
-				<button
+				<Button
+					className={`${BLOCK_CLASS_NAME}__${social.toLowerCase()}`}
 					key={social}
 					id={`article-share-${social}`}
-					aria-label={phrases.t("share-bar-block.share-button-aria-label", {
+					accessibilityLabel={phrases.t("share-bar-block.share-button-aria-label", {
 						socialType,
 					})}
-					type="button"
-					className="ts-share-bar__button"
 					onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
 				>
 					{getLogoComponent(social)}
-				</button>
+				</Button>
 			);
 		}
 	});
@@ -135,7 +135,17 @@ export const ShareBar = ({
 		return null;
 	}
 
-	return <div className="ts-share-bar">{shareButtons}</div>;
+	return (
+		<Stack
+			className={BLOCK_CLASS_NAME}
+			alignment="center"
+			direction="vertical"
+			gap="0"
+			justification="center"
+		>
+			{shareButtons}
+		</Stack>
+	);
 };
 
 ShareBarContainer.label = "Share Bar – Arc Block";

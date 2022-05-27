@@ -456,6 +456,18 @@
 				),
 			),
 			blocks: (
+				byline: (
+					font-size: var(--body-font-weight),
+					line-height: var(--body-line-height),
+					components: (
+						link: (
+							text-decoration: none,
+						),
+						link-hover: (
+							text-decoration: underline,
+						),
+					),
+				),
 				double-chain: (
 					components: (
 						stack: (

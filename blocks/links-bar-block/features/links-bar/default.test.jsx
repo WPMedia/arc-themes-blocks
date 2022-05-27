@@ -99,6 +99,8 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
+		console.log("wrapper..1", wrapper);
+
 		expect(wrapper.html()).toMatchInlineSnapshot(
 			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar\\" href=\\"/\\">Link Text</a></span></nav><hr/>"`
 		);

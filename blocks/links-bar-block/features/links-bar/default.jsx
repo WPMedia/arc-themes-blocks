@@ -5,7 +5,6 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { Link } from "@wpmedia/arc-themes-components";
-import "./links-bar.scss";
 
 const BLOCK_CLASS_NAME = "b-links-bar";
 
@@ -42,11 +41,11 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 					menuItems.map((item, index) => (
 						<span className={`${BLOCK_CLASS_NAME}-menu`}>
 							{item.node_type === "link" ? (
-								<Link href={item.url} className={BLOCK_CLASS_NAME} opensInNewTab>
+								<Link href={item.url} className={`${BLOCK_CLASS_NAME}-menu-link`} opensInNewTab>
 									{item.display_name}
 								</Link>
 							) : (
-								<Link href={item._id} className={BLOCK_CLASS_NAME} opensInNewTab>
+								<Link href={item._id} className={`${BLOCK_CLASS_NAME}-menu-link`} opensInNewTab>
 									{item.name}
 								</Link>
 							)}

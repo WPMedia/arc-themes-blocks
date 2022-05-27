@@ -591,6 +591,24 @@
 				video-player-inline-video: (
 					gap: 0,
 				),
+				links-bar: (
+					margin: 0 0 var(--global-spacing-5) 0,
+					align-items: flex-start,
+					text-align: left,
+					width: 100%,
+				),
+				links-bar-menu: (
+					padding: var(--global-spacing-8) 0,
+				),
+				links-bar-menu-link: (
+					font-size: var(--global-font-size-14),
+					// height: 100%,
+					// line-height: var(--global-font-size-14),
+					// margin: var(--global-spacing-8) 0,
+					// text-align: center,
+					text-decoration: none,
+					font-family: var(--font-family-primary),
+				),
 			),
 		),
 		desktop: (
@@ -681,6 +699,23 @@
 						),
 					),
 				),
+				links-bar: (
+					margin: 0 0 var(--global-spacing-5) 0,
+					align-items: flex-start,
+					text-align: left,
+					width: 100%,
+				),
+				links-bar-menu: (
+					padding: var(--global-spacing-8) 0,
+				),
+				links-bar-menu-link: (
+					font-size: var(--global-font-size-14),
+					height: 100%,
+					line-height: var(--global-font-size-14),
+					margin: var(--global-spacing-8) 0,
+					text-align: center,
+					text-decoration: none,
+				),
 			),
 		),
 	)
@@ -696,3 +731,4 @@
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/video-player-block";
+@use "../../blocks/links-bar-block";

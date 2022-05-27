@@ -62,9 +62,6 @@ export const useFusionContext = () => ({
 		HTML: "<h1>Sample HTML</h1><p>This is sentence <strong>one</strong>.</p><p>This is sentence <em>two</em>.</p>",
 	},
 	globalContent: {
-		headlines: {
-			basic: "An Article Headline",
-		},
 		authors: [
 			{
 				_id: "janedoe",
@@ -153,6 +150,31 @@ export const useFusionContext = () => ({
 				soundcloud: "someusername",
 			},
 		],
+		credits: {
+			by: [
+				{
+					type: "author",
+					additional_properties: {
+						original: {
+							byline: "Additional Properties - Original - Byline",
+						},
+					},
+				},
+				{
+					type: "author",
+					name: "Jane Doe",
+					url: "#",
+				},
+				{
+					type: "author",
+					name: "John Doe",
+					url: "#",
+				},
+			],
+		},
+		headlines: {
+			basic: "An Article Headline",
+		},
 		label: {
 			basic: {
 				display: true,

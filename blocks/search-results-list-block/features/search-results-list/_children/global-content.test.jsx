@@ -21,13 +21,6 @@ jest.mock("fusion:intl", () => ({
 	})),
 }));
 
-jest.mock("@wpmedia/byline-block", () => ({
-	__esModule: true,
-	default: function Byline(props, children) {
-		return <div {...props}>{children}</div>;
-	},
-}));
-
 jest.mock("@wpmedia/date-block", () => ({
 	__esModule: true,
 	default: function ArticleDate(props, children) {
@@ -38,6 +31,7 @@ jest.mock("@wpmedia/date-block", () => ({
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	__esModule: true,
 	Image: () => <div />,
+	SearchIcon: () => <div />,
 }));
 
 describe("The search results list", () => {

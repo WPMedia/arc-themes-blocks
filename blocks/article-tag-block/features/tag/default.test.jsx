@@ -2,8 +2,13 @@ import React from "react";
 import { mount } from "enzyme";
 
 describe("the article tag block", () => {
-	jest.mock("fusion:properties", () => jest.fn(() => ({})));
-
+	jest.mock("@wpmedia/engine-theme-sdk", () => ({
+		LazyLoad: ({ children }) => <>{children}</>,
+	}));
+	jest.mock("@wpmedia/arc-themes-components", () => ({
+		...jest.requireActual("@wpmedia/arc-themes-components"),
+		isServerSide: () => true,
+	}));
 	describe("when the global content has an array of tags in its taxonomy", () => {
 		const mockReturnData = {
 			arcSite: "the-sun",
@@ -49,7 +54,7 @@ describe("the article tag block", () => {
 		it("should render a parent container for the tags", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("div.tags-holder").length).toEqual(1);
+			expect(wrapper.find("div.b-article-tag").length).toEqual(1);
 		});
 
 		it("should render a tag element for each tag in the array", () => {
@@ -93,11 +98,14 @@ describe("the article tag block", () => {
 			}));
 		});
 
+		// pill will not render a link if none provided
 		it("should render tags with correct href", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").at(0).props().href).toBe("#");
-			expect(wrapper.children().find("a").at(1).props().href).toBe("#");
+			expect(wrapper.find("span").length).toBe(2);
+
+			// no a tags rendered any more
+			expect(wrapper.find("a").length).toBe(0);
 		});
 	});
 

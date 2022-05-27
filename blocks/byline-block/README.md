@@ -60,8 +60,6 @@ This block does not emit any events.
 
 ## Additional Considerations
 
-_This is optional. Please add an additional context that would be important to know in order to use this block._
-
 If there's one author, it will return `By <author>`
 If there are two authors, it will return `By <author_0> and <author_1>`
 If there are three or more authors, it will return with the pattern `By <author_0>, <author_1>, ... <author_(n-1)> and <author_(n)>`

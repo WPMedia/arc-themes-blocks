@@ -620,6 +620,15 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				share-bar: (
+					border-radius: initial,
+					display: none,
+					left: initial,
+					padding: initial,
+					position: initial,
+					top: initial,
+					width: initial,
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -822,6 +831,58 @@
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
 				),
+				share-bar: (
+					border-radius: 0 5px 5px 0,
+					display: flex,
+					left: 0,
+					padding: 10px 0,
+					position: fixed,
+					top: 200px,
+					width: 44px,
+					components: (
+						button-medium: (
+							background: transparent,
+							border-width: 0,
+							margin: 5px,
+							padding: 0,
+						),
+					),
+				),
+				share-bar-facebook: (
+					components: (
+						icon: (
+							fill: #4267b2,
+						),
+					),
+				),
+				share-bar-linkedin: (
+					components: (
+						icon: (
+							fill: #2867b2,
+						),
+					),
+				),
+				share-bar-pinterest: (
+					components: (
+						icon: (
+							fill: #bd081c,
+						),
+					),
+				),
+				share-bar-twitter: (
+					components: (
+						icon: (
+							fill: #1da1f2,
+						),
+					),
+				),
+				share-bar-email: (
+					components: (
+						icon: (
+							fill: #c72a22,
+						),
+					),
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -885,6 +946,7 @@
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/share-bar-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

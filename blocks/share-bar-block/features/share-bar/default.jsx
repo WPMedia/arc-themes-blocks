@@ -48,26 +48,21 @@ const share = {
 	},
 };
 
-const getLogoComponent = (type) => {
-	switch (type) {
-		case "facebook":
-			return <Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} />;
-		case "linkedIn":
-			return <Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} />;
-		case "pinterest":
-			return <Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} />;
-		case "twitter":
-			return <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} />;
-		default:
-		case "email":
-			return <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} />;
-	}
+const getLogoComponent = {
+	facebook: <Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} />,
+	linkedIn: <Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} />,
+	pinterest: <Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} />,
+	twitter: <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} />,
+	email: <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} />,
 };
 
 const ShareBarContainer = () => {
 	const {
 		customFields,
-		globalContent: { headlines: { basic: headlineString = "" }, website_url: websiteUrl = "" } = {},
+		globalContent: {
+			headlines: { basic: headlineString = "" },
+			website_url: websiteUrl = "",
+		},
 		arcSite,
 	} = useFusionContext();
 
@@ -88,7 +83,7 @@ const ShareBarContainer = () => {
 };
 
 export const ShareBar = ({
-	customFields = {},
+	customFields,
 	websiteName,
 	websiteDomain,
 	websiteUrl,
@@ -112,7 +107,7 @@ export const ShareBar = ({
 					})}
 					onClick={() => share[social](encodedUrl, encodedTitle, websiteName)}
 				>
-					{getLogoComponent(social)}
+					{getLogoComponent[social]}
 				</Button>
 			);
 		}

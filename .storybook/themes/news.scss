@@ -491,9 +491,6 @@
 					display: contents,
 				),
 				footer: (
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
-					margin: auto,
 					gap: var(--global-spacing-5),
 					grid-template-columns: 1fr,
 				),

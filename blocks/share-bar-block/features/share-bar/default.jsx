@@ -69,12 +69,11 @@ const getLogoComponent = (type) => {
 			);
 		case "twitter":
 			return <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} {...iconDimensions} />;
+		default:
 		case "email":
 			return (
 				<Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} {...iconDimensions} />
 			);
-		default:
-			return null;
 	}
 };
 

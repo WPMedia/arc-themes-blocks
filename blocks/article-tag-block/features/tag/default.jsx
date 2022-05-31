@@ -18,7 +18,7 @@ export const ArticleTagItems = ({ content }) => {
 				const href = slug !== "" ? encodeURI(`/tags/${slug}/`) : "";
 
 				return (
-					<Pill key={tag.text} href={href} className={`${BLOCK_CLASS_NAME}__item`}>
+					<Pill key={tag.text} href={href}>
 						{tag.text}
 					</Pill>
 				);

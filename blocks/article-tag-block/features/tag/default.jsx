@@ -16,7 +16,6 @@ export const ArticleTagItems = ({ content }) => {
 				const { slug = "" } = tag;
 
 				// pill won't render an a tag if falsy href like ""
-				// instead renders a span
 				const href = slug !== "" ? encodeURI(`/tags/${slug}/`) : "";
 
 				return (

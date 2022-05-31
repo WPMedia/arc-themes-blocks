@@ -154,12 +154,6 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 				</p>
 			</div>
 			*/}
-			<div>
-				{/* If small screen, show copyright under border */}
-				<p className="copyright" id="copyright-bottom" style={{ width: "100%" }}>
-					{copyrightText}
-				</p>
-			</div>
 			<div className="row legacy-footer-row">
 				{/* The columns are 2D arrays of columns x column items. Iterate through both */}
 				{footerColumns.map((column) => {

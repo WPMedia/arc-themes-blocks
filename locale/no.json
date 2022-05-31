@@ -441,5 +441,8 @@
     "product-assortment-carousel.right-arrow-label": "Next",
     "product-assortment-carousel.left-arrow-label": "Previous",
     "product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+  },
+  "overline-block": {
+    "overline-sponsored-content": "Sponset innhold"
   }
 }

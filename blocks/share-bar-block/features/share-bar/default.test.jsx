@@ -96,7 +96,6 @@ describe("Share Bar", () => {
 				phrases={mockPhrases}
 			/>
 		);
-
 		expect(container.firstChild).toBeNull();
 	});
 
@@ -232,6 +231,10 @@ describe("Share Bar", () => {
 	describe("Share Bar Container", () => {
 		beforeEach(() => {
 			jest.clearAllMocks();
+			getTranslatedPhrases.mockImplementation(() => ({}));
+		});
+
+		it("Should call ShareBar", () => {
 			useFusionContext.mockImplementation(() => ({
 				arcSite: "the-sun",
 				customFields: {},
@@ -247,10 +250,35 @@ describe("Share Bar", () => {
 				websiteDomain: "",
 				websiteName: "",
 			}));
-			getTranslatedPhrases.mockImplementation(() => ({}));
+			render(<ShareBarContainer />);
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			expect(container.firstChild).not.toBeNull();
 		});
-
-		it("Should call ShareBar", () => {
+		it("Should call ShareBar with unexpected contexts", () => {
+			useFusionContext.mockImplementation(() => ({
+				arcSite: "the-sun",
+				customFields: {},
+				globalContent: {
+					headlines: {
+						basic: undefined,
+					},
+					website_url: undefined,
+				},
+			}));
+			getProperties.mockImplementation(() => ({
+				locale: undefined,
+				websiteDomain: "",
+				websiteName: "",
+			}));
 			render(<ShareBarContainer />);
 			const { container } = render(
 				<ShareBar

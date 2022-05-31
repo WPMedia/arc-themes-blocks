@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-footer {
+	@include scss.block-components("footer");
+	@include scss.block-properties("footer");
+}

@@ -16,6 +16,7 @@ import {
 } from "@wpmedia/engine-theme-sdk";
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import "./footer.scss";
+import { Grid } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-footer";
 
@@ -118,7 +119,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 	);
 
 	return (
-		<div className={BLOCK_CLASS_NAME}>
+		<Grid className={BLOCK_CLASS_NAME}>
 			<div className="section-separator">
 				<section className="footer-header">
 					<div className="footer-row">
@@ -145,6 +146,14 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 					</div>
 				</section>
 			</div>
+			{/*
+				<div>
+				If small screen, show copyright under border
+				<p className="copyright" id="copyright-bottom" style={{ width: "100%" }}>
+					{copyrightText}
+				</p>
+			</div>
+			*/}
 			<div>
 				{/* If small screen, show copyright under border */}
 				<p className="copyright" id="copyright-bottom" style={{ width: "100%" }}>
@@ -191,7 +200,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 					/>
 				</div>
 			) : null}
-		</div>
+		</Grid>
 	);
 };
 

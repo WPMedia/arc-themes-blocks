@@ -20,6 +20,7 @@
     "directory": "blocks/article-tag-block"
   },
   "peerDependencies": {
+    "@wpmedia/engine-theme-sdk": "*",
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/arc-themes-components": "*"
   },

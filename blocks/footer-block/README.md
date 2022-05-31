@@ -1,18 +1,18 @@
-# `@wpmedia/header-nav-block`
+# `@wpmedia/footer-block`
 
 _Footer block for the Fusion News Theme. This will pull the data from the footer hierarchy from the organization's site service._
 
 ## Acceptance Criteria
 
-- Add AC relevant to the block
+- Lazy loads if specified in the block configuration
+- Displays the footer hierarchy content
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                            | **Required** | **Type** | **Description**                                                                                                        |
+| ----------------------------------- | ------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| lazyLoad                            | yes          | boolean  | Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user. |
+| navigation-hierarchy content source |              |          |                                                                                                                        |
 
 ## ANS Schema
 
@@ -30,21 +30,15 @@ Available through `useContent`
 
 ## Internationalization fields
 
-- Add all internationalization fields used in the block
+- rss-link
+- facebook-link
+- twitter-link
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+n/a
 
 ### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
 
 This block does not emit any events.
 

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React from "react";
 import Consumer from "fusion:consumer";
 import getProperties from "fusion:properties";

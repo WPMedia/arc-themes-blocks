@@ -17,6 +17,8 @@ import {
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import "./footer.scss";
 
+const BLOCK_CLASS_NAME = "b-footer";
+
 export const StyledSocialContainer = styled.div`
 	border: ${(props) => (props.hasSocialLinks ? "1px" : "0")} solid ${(props) => props.primaryColor};
 	fill: ${(props) => props.primaryColor};
@@ -116,7 +118,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 	);
 
 	return (
-		<div className="container layout-section">
+		<div className={BLOCK_CLASS_NAME}>
 			<div className="section-separator">
 				<section className="footer-header">
 					<div className="footer-row">

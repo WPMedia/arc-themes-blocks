@@ -15,7 +15,6 @@ export const ArticleTagItems = ({ content }) => {
 				// fallback to "" because some tags don't have a slug
 				const { slug = "" } = tag;
 
-				// pill won't render an a tag if falsy href like ""
 				const href = slug !== "" ? encodeURI(`/tags/${slug}/`) : "";
 
 				return (

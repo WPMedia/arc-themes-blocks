@@ -48,7 +48,7 @@ describe("the article tag block", () => {
 				lazyLoad: true,
 			};
 			const wrapper = mount(<ArticleTags customFields={config} />);
-			expect(wrapper.html()).toBe(null);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 
 		it("should render a parent container for the tags", () => {
@@ -57,17 +57,17 @@ describe("the article tag block", () => {
 			expect(wrapper.find("div.b-article-tag").length).toEqual(1);
 		});
 
-		it("should render a tag element for each tag in the array", () => {
+		it("should render a pill for each tag in the array", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").length).toEqual(2);
+			expect(wrapper.children().find(".c-pill").length).toEqual(2);
 		});
 
 		it("should render tags with their correct href", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").at(0).props().href).toBe("/tags/dogs%20slug/");
-			expect(wrapper.children().find("a").at(1).props().href).toBe("/tags/cats%20slug/");
+			expect(wrapper.children().find(".c-pill").at(0).props().href).toBe("/tags/dogs%20slug/");
+			expect(wrapper.children().find(".c-pill").at(1).props().href).toBe("/tags/cats%20slug/");
 		});
 	});
 
@@ -98,14 +98,11 @@ describe("the article tag block", () => {
 			}));
 		});
 
-		// pill will not render a link if none provided
-		it("should render tags with correct href", () => {
+		it("should render pill components", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.find("span").length).toBe(2);
-
-			// no a tags rendered any more
-			expect(wrapper.find("a").length).toBe(0);
+			const tags = wrapper.find(".c-pill");
+			expect(tags.length).toBe(2);
 		});
 	});
 
@@ -130,7 +127,7 @@ describe("the article tag block", () => {
 		it("should not render anything", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find(".tags-holder").length).toEqual(0);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 	});
 
@@ -151,7 +148,7 @@ describe("the article tag block", () => {
 		it("should not render anything", () => {
 			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find(".tags-holder").length).toEqual(0);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 	});
 });

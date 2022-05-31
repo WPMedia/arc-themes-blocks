@@ -456,6 +456,18 @@
 				),
 			),
 			blocks: (
+				byline: (
+					font-size: var(--body-font-weight),
+					line-height: var(--body-line-height),
+					components: (
+						link: (
+							text-decoration: none,
+						),
+						link-hover: (
+							text-decoration: underline,
+						),
+					),
+				),
 				double-chain: (
 					components: (
 						stack: (
@@ -502,6 +514,7 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				overline: (),
 				quad-chain: (
 					components: (
 						stack: (
@@ -946,6 +959,7 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";

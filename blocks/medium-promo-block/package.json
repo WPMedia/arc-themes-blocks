@@ -24,7 +24,6 @@
   },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/byline-block": "*",
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/resizer-image-block": "*",

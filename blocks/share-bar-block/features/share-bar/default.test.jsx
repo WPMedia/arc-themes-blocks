@@ -1,8 +1,11 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import getProperties from "fusion:properties";
+import { useFusionContext } from "fusion:context";
+import getTranslatedPhrases from "fusion:intl";
 // presentational component not container
-import { ShareBar } from "./default";
+import ShareBarContainer, { ShareBar } from "./default";
 
 const mockPhrases = { t: jest.fn((phrase) => phrase) };
 const websiteDomain = "https://www.thesun.com/";
@@ -76,7 +79,7 @@ describe("Share Bar", () => {
 		expect(linkedinButton).toHaveLength(1);
 	});
 
-	it("should not show social buttons that are marked as false", () => {
+	it("should not show any social buttons if all are marked as false", () => {
 		customFields.email = false;
 		customFields.facebook = false;
 		customFields.pinterest = false;
@@ -93,6 +96,173 @@ describe("Share Bar", () => {
 				phrases={mockPhrases}
 			/>
 		);
+
 		expect(container.firstChild).toBeNull();
+	});
+
+	describe("Social Buttons Interactions", () => {
+		it("should open a new window when Email button is clicked", async () => {
+			customFields.email = true;
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			global.open = jest.fn();
+			await fireEvent(
+				container.querySelector("#article-share-email"),
+				new MouseEvent("click", {
+					bubbles: true,
+					cancelable: true,
+				})
+			);
+			await expect(window.open).toBeCalled();
+			expect(window.location.origin).toEqual("http://localhost");
+		});
+
+		it("should open a new window when Facebook button is clicked", async () => {
+			customFields.facebook = true;
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			global.open = jest.fn();
+			await fireEvent(
+				container.querySelector("#article-share-facebook"),
+				new MouseEvent("click", {
+					bubbles: true,
+					cancelable: true,
+				})
+			);
+			await expect(window.open).toBeCalled();
+			expect(window.location.origin).toEqual("http://localhost");
+		});
+
+		it("should open a new window when Pinterest button is clicked", async () => {
+			customFields.pinterest = true;
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			global.open = jest.fn();
+			await fireEvent(
+				container.querySelector("#article-share-pinterest"),
+				new MouseEvent("click", {
+					bubbles: true,
+					cancelable: true,
+				})
+			);
+			await expect(window.open).toBeCalled();
+			expect(window.location.origin).toEqual("http://localhost");
+		});
+
+		it("should open a new window when Twitter button is clicked", async () => {
+			customFields.twitter = true;
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			global.open = jest.fn();
+			await fireEvent(
+				container.querySelector("#article-share-twitter"),
+				new MouseEvent("click", {
+					bubbles: true,
+					cancelable: true,
+				})
+			);
+			await expect(window.open).toBeCalled();
+			expect(window.location.origin).toEqual("http://localhost");
+		});
+
+		it("should open a new window when LinkedIn button is clicked", async () => {
+			customFields.linkedIn = true;
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			global.open = jest.fn();
+			await fireEvent(
+				container.querySelector("#article-share-linkedIn"),
+				new MouseEvent("click", {
+					bubbles: true,
+					cancelable: true,
+				})
+			);
+			await expect(window.open).toBeCalled();
+			expect(window.location.origin).toEqual("http://localhost");
+		});
+
+		/*
+			const facebookButton = container.querySelector("#article-share-facebook");
+			const pinterestButton = container.querySelector("#article-share-pinterest");
+			const twitterButton = container.querySelector("#article-share-twitter");
+			const linkedinButton = container.querySelector("#article-share-linkedIn");
+			*/
+	});
+
+	describe("Share Bar Container", () => {
+		beforeEach(() => {
+			jest.clearAllMocks();
+			useFusionContext.mockImplementation(() => ({
+				arcSite: "the-sun",
+				customFields: {},
+				globalContent: {
+					headlines: {
+						basic: "",
+					},
+					website_url: "",
+				},
+			}));
+			getProperties.mockImplementation(() => ({
+				locale: "en",
+				websiteDomain: "",
+				websiteName: "",
+			}));
+			getTranslatedPhrases.mockImplementation(() => ({}));
+		});
+
+		it("Should call ShareBar", () => {
+			render(<ShareBarContainer />);
+			const { container } = render(
+				<ShareBar
+					customFields={customFields}
+					websiteName={websiteName}
+					websiteDomain={websiteDomain}
+					websiteUrl={websiteUrl}
+					headlineString={headlineString}
+					phrases={mockPhrases}
+				/>
+			);
+			expect(container.firstChild).not.toBeNull();
+		});
 	});
 });

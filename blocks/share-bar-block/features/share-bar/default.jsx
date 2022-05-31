@@ -49,31 +49,18 @@ const share = {
 };
 
 const getLogoComponent = (type) => {
-	const iconDimensions = {
-		height: 24,
-		width: 24,
-	};
-
 	switch (type) {
 		case "facebook":
-			return (
-				<Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} {...iconDimensions} />
-			);
+			return <Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} />;
 		case "linkedIn":
-			return (
-				<Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} {...iconDimensions} />
-			);
+			return <Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} />;
 		case "pinterest":
-			return (
-				<Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} {...iconDimensions} />
-			);
+			return <Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} />;
 		case "twitter":
-			return <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} {...iconDimensions} />;
+			return <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} />;
 		default:
 		case "email":
-			return (
-				<Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} {...iconDimensions} />
-			);
+			return <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} />;
 	}
 };
 
@@ -85,6 +72,7 @@ const ShareBarContainer = () => {
 	} = useFusionContext();
 
 	const { websiteDomain, websiteName, locale = "en" } = getProperties(arcSite);
+
 	const phrases = getTranslatedPhrases(locale);
 
 	return (

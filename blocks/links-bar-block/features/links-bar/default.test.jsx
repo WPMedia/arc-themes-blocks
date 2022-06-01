@@ -133,7 +133,6 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
-		console.log(wrapper);
 		expect(wrapper.find(".b-links-bar-menu")).toHaveLength(4);
 		expect(wrapper.find(".b-links-bar a:not([target])")).toHaveLength(2);
 		expect(wrapper.find('.b-links-bar a[target="_blank"]')).toHaveLength(2);

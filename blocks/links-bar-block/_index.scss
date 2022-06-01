@@ -1,14 +1,14 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-links-bar {
-	@include scss.block-components("links-bar");
-	@include scss.block-properties("links-bar");
 	&-menu {
-		@include scss.block-components("links-bar-menu");
-		@include scss.block-properties("links-bar-menu");
 		a {
 			@include scss.block-components("links-bar-menu-link");
 			@include scss.block-properties("links-bar-menu-link");
 		}
+		@include scss.block-components("links-bar-menu");
+		@include scss.block-properties("links-bar-menu");
 	}
+	@include scss.block-components("links-bar");
+	@include scss.block-properties("links-bar");
 }

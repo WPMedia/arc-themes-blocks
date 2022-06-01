@@ -127,12 +127,10 @@ describe("the article tag block", () => {
 		});
 
 		beforeEach(() => {
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "the-sun",
-					globalContent: {},
-				})),
-			}));
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				globalContent: {},
+			});
 		});
 
 		it("should not render anything", () => {

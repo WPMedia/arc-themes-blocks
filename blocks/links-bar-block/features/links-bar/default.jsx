@@ -39,13 +39,13 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 			>
 				{menuItems &&
 					menuItems.map((item, index) => (
-						<span className={`${BLOCK_CLASS_NAME}-menu`}>
+						<span className={`${BLOCK_CLASS_NAME}-menu`} key={index}>
 							{item.node_type === "link" ? (
-								<Link href={item.url} className={`${BLOCK_CLASS_NAME}-menu-link`} opensInNewTab>
+								<Link href={item.url} className={`${BLOCK_CLASS_NAME}-menu-link`} openInNewTab>
 									{item.display_name}
 								</Link>
 							) : (
-								<Link href={item._id} className={`${BLOCK_CLASS_NAME}-menu-link`} opensInNewTab>
+								<Link href={item._id} className={`${BLOCK_CLASS_NAME}-menu-link`}>
 									{item.name}
 								</Link>
 							)}

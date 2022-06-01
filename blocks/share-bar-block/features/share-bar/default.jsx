@@ -83,7 +83,7 @@ const ShareBarContainer = () => {
 };
 
 export const ShareBar = ({
-	customFields,
+	customFields = {},
 	websiteName,
 	websiteDomain,
 	websiteUrl,

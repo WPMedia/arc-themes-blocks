@@ -2,13 +2,13 @@
 
 .b-masthead {
 	&__logo {
-		@include scss.block-components("masthead-logo");
-		@include scss.block-properties("masthead-logo");
-
 		img {
 			@include scss.block-components("masthead-logo-image");
 			@include scss.block-properties("masthead-logo-image");
 		}
+
+		@include scss.block-components("masthead-logo");
+		@include scss.block-properties("masthead-logo");
 	}
 
 	&__content {

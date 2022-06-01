@@ -634,13 +634,44 @@
 					grid-area: main-right-rail-bottom,
 				),
 				share-bar: (
-					border-radius: initial,
-					display: none,
-					left: initial,
-					padding: initial,
-					position: initial,
-					top: initial,
-					width: initial,
+					box-shadow: (
+						0 4px 8px 0 rgba(0, 0, 0, 0.2),
+						0 6px 20px 0 rgba(0, 0, 0, 0.19),
+					),
+					border-radius: 0 5px 5px 0,
+					display: flex,
+					left: 0,
+					padding: 15px 0,
+					position: fixed,
+					top: 200px,
+					width: 44px,
+					components: (
+						button-medium: (
+							background: transparent,
+							border-width: 0,
+							padding: 0,
+							text-align: center,
+						),
+						icon: (
+							height: var(--global-spacing-5),
+							width: var(--global-spacing-5),
+						),
+					),
+				),
+				share-bar-facebook: (
+					fill: #4267b2,
+				),
+				share-bar-linkedin: (
+					fill: #2867b2,
+				),
+				share-bar-pinterest: (
+					fill: #bd081c,
+				),
+				share-bar-twitter: (
+					fill: #1da1f2,
+				),
+				share-bar-envelope: (
+					fill: #c72a22,
 				),
 				single-chain: (
 					components: (
@@ -845,60 +876,7 @@
 					display: flex,
 				),
 				share-bar: (
-					border-radius: 0 5px 5px 0,
 					display: flex,
-					left: 0,
-					padding: 10px 0,
-					position: fixed,
-					top: 200px,
-					width: 44px,
-					components: (
-						button-medium: (
-							background: transparent,
-							border-width: 0,
-							margin: 5px,
-							padding: 0,
-						),
-						icon: (
-							height: var(--global-font-size-9),
-							width: var(--global-font-size-9),
-						),
-					),
-				),
-				share-bar-facebook: (
-					components: (
-						icon: (
-							fill: #4267b2,
-						),
-					),
-				),
-				share-bar-linkedin: (
-					components: (
-						icon: (
-							fill: #2867b2,
-						),
-					),
-				),
-				share-bar-pinterest: (
-					components: (
-						icon: (
-							fill: #bd081c,
-						),
-					),
-				),
-				share-bar-twitter: (
-					components: (
-						icon: (
-							fill: #1da1f2,
-						),
-					),
-				),
-				share-bar-email: (
-					components: (
-						icon: (
-							fill: #c72a22,
-						),
-					),
 				),
 				single-chain: (
 					components: (

@@ -99,6 +99,20 @@ describe("Share Bar", () => {
 		expect(container.firstChild).toBeNull();
 	});
 
+	it("should not render if custom fields are undefined", () => {
+		const { container } = render(
+			<ShareBar
+				customFields={undefined}
+				websiteName={websiteName}
+				websiteDomain={websiteDomain}
+				websiteUrl={websiteUrl}
+				headlineString={headlineString}
+				phrases={mockPhrases}
+			/>
+		);
+		expect(container.firstChild).toBeNull();
+	});
+
 	describe("Social Buttons Interactions", () => {
 		it("should open a new window when Email button is clicked", async () => {
 			customFields.email = true;
@@ -219,13 +233,6 @@ describe("Share Bar", () => {
 			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
 		});
-
-		/*
-			const facebookButton = container.querySelector("#article-share-facebook");
-			const pinterestButton = container.querySelector("#article-share-pinterest");
-			const twitterButton = container.querySelector("#article-share-twitter");
-			const linkedinButton = container.querySelector("#article-share-linkedIn");
-			*/
 	});
 
 	describe("Share Bar Container", () => {

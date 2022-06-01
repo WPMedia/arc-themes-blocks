@@ -1,0 +1,41 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-masthead {
+	&__logo {
+		@include scss.block-components("masthead-logo");
+		@include scss.block-properties("masthead-logo");
+
+		img {
+			@include scss.block-components("masthead-logo-image");
+			@include scss.block-properties("masthead-logo-image");
+		}
+	}
+
+	&__content {
+		@include scss.block-components("masthead-content");
+		@include scss.block-properties("masthead-content");
+	}
+
+	&__date {
+		@include scss.block-components("masthead-date");
+		@include scss.block-properties("masthead-date");
+	}
+
+	&__tagline {
+		@include scss.block-components("masthead-tagline");
+		@include scss.block-properties("masthead-tagline");
+	}
+
+	&__link {
+		@include scss.block-components("masthead-link");
+		@include scss.block-properties("masthead-link");
+	}
+
+	&__divider {
+		@include scss.block-components("masthead-divider");
+		@include scss.block-properties("masthead-divider");
+	}
+
+	@include scss.block-components("masthead");
+	@include scss.block-properties("masthead");
+}

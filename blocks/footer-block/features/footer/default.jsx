@@ -66,7 +66,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 					title={phrases.t("footer-block.facebook-link")}
 					target="_blank"
 					rel="noopener noreferrer"
-					href={facebookPage || ""}
+					href={facebookPage}
 				>
 					<Icon name="Facebook" />
 				</Link>
@@ -90,7 +90,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 					title={phrases.t("footer-block.rss-link")}
 					target="_blank"
 					rel="noopener noreferrer"
-					href={rssUrl || ""}
+					href={rssUrl}
 				>
 					<Icon name="Rss" />
 				</Link>

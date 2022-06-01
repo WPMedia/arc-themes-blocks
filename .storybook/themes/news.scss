@@ -502,15 +502,20 @@
 					border-bottom: 1px solid var(--global-neutral-4),
 				),
 				footer-social-links: (
-					background-color: var(--color-primary),
+					border: 1px solid var(--color-primary),
+					border-radius: var(--border-radius),
+					margin: var(--global-spacing-2),
 					components: (
 						link: (
 							padding: var(--global-spacing-2),
 						),
 						icon: (
-							fill: var(--global-white),
+							fill: var(--color-primary),
 						),
 					),
+				),
+				footer-social-link-not-last: (
+					border-right: 1px solid var(--color-primary),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),

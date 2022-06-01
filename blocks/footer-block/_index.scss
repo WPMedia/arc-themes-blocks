@@ -14,7 +14,13 @@
 	&__social-links {
 		@include scss.block-components("footer-social-links");
 		@include scss.block-properties("footer-social-links");
+
+		a:not(:last-child) {
+			@include scss.block-components("footer-social-link-not-last");
+			@include scss.block-properties("footer-social-link-not-last");
+		}
 	}
+
 	@include scss.block-components("footer");
 	@include scss.block-properties("footer");
 }

@@ -1,5 +1,6 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import TripleChain from "./default";
 
 describe("the triple chain block", () => {
@@ -9,13 +10,13 @@ describe("the triple chain block", () => {
 	const Comp4 = () => <div>4</div>;
 
 	it("should only render if there are children", () => {
-		const component = shallow(<TripleChain />);
-		expect(component).toBeEmptyRender();
+		const { container } = render(<TripleChain />);
+		expect(container.querySelectorAll(".b-triple-chain")).toHaveLength(0);
 	});
 
 	it("should put all features into the first column by default", () => {
 		const customFields = {};
-		const component = shallow(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
@@ -23,17 +24,17 @@ describe("the triple chain block", () => {
 				<Comp4 />
 			</TripleChain>
 		);
-		expect(component).not.toBeEmptyRender();
+		expect(container.querySelectorAll(".b-triple-chain")).toHaveLength(1);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-		expect(columnOne.children().length).toBe(4);
-		expect(columnTwo.children().length).toBe(0);
+		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(4);
+		expect(col2.querySelectorAll("div")).toHaveLength(0);
 	});
 
 	it("should be able to accept a number in the custom field, and that number of features within the chain should appear in the first column. ", () => {
 		const customFields = { columnOne: 2, columnTwo: 2 };
-		const component = mount(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
@@ -42,16 +43,16 @@ describe("the triple chain block", () => {
 			</TripleChain>
 		);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
+		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
 
-		expect(columnOne.text()).toEqual("12");
-		expect(columnTwo.text()).toEqual("34");
+		expect(col1.querySelectorAll("div")).toHaveLength(2);
+		expect(col2.querySelectorAll("div")).toHaveLength(2);
 	});
 
 	it("should be able to accept numbers in the custom field, any additional features in the chain should be placed in the third column. ", () => {
 		const customFields = { columnOne: 1, columnTwo: 1 };
-		const component = mount(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
@@ -60,19 +61,18 @@ describe("the triple chain block", () => {
 			</TripleChain>
 		);
 
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-		const columnThree = component.find(".row").children().at(2);
+		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
+		const col3 = container.querySelectorAll(".b-triple-chain__child-item")[2];
 
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
-
-		expect(columnThree.text()).toEqual("34");
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
+		expect(col3.querySelectorAll("div")).toHaveLength(2);
 	});
 
 	it("should render nothing if negative column 1 amount", () => {
 		const customFields = { columnOne: -10 };
-		const component = mount(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
@@ -81,7 +81,7 @@ describe("the triple chain block", () => {
 			</TripleChain>
 		);
 
-		expect(component).toBeEmptyRender();
+		expect(container.querySelectorAll(".b-triple-chain__child-item")).toHaveLength(0);
 	});
 
 	it("should render heading from custom field and children", () => {
@@ -90,38 +90,36 @@ describe("the triple chain block", () => {
 			columnTwo: 1,
 			heading: "Triple Chain Heading",
 		};
-		const component = mount(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 			</TripleChain>
 		);
 
-		expect(component.find("Heading").text()).toBe("Triple Chain Heading");
-		expect(component.find("HeadingSection").exists()).toBe(true);
-
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
+		expect(container.querySelectorAll(".b-triple-chain__heading")).toHaveLength(1);
+		expect(container.querySelector(".b-triple-chain__heading").textContent).toBe(
+			"Triple Chain Heading"
+		);
+		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
 	});
 
 	it("should not render heading from custom field and children", () => {
 		const customFields = { columnOne: 1, columnTwo: 1 };
-		const component = mount(
+		const { container } = render(
 			<TripleChain customFields={customFields}>
 				<Comp1 />
 				<Comp2 />
 			</TripleChain>
 		);
 
-		expect(component.find("Heading").exists()).toBe(false);
-		expect(component.find("HeadingSection").exists()).toBe(false);
-		const columnOne = component.find(".row").children().at(0);
-		const columnTwo = component.find(".row").children().at(1);
-
-		expect(columnOne.text()).toEqual("1");
-		expect(columnTwo.text()).toEqual("2");
+		expect(container.querySelectorAll(".b-triple-chain__heading")).toHaveLength(0);
+		const col1 = container.querySelectorAll(".b-triple-chain__child-item")[0];
+		const col2 = container.querySelectorAll(".b-triple-chain__child-item")[1];
+		expect(col1.querySelectorAll("div")).toHaveLength(1);
+		expect(col2.querySelectorAll("div")).toHaveLength(1);
 	});
 });

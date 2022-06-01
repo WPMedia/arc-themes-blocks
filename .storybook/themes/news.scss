@@ -95,6 +95,7 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
+
 		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
@@ -135,6 +136,7 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
+
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -155,6 +157,7 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
+
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -163,7 +166,10 @@
 		"z-index-4": 100,
 		"z-index-5": 500,
 
-		"border-radius-1": 0.25em,
+		"border-radius-1": 0.25rem,
+		"border-radius-2": 20rem,
+		"border-radius-3": 100vmax,
+
 		"border-style-1": solid,
 		"border-width-1": 1px,
 	),
@@ -191,11 +197,15 @@
 		"form-border-color-warning": var(--global-orange-2),
 		"form-border-color-danger": var(--global-red-4),
 		"form-border-color-success": var(--global-green-5),
+		// Border Radius
+		"border-radius": var(--global-border-radius-1),
+		"border-radius-pill": var(--global-border-radius-2),
+		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
 		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-4),
+		"body-line-height": var(--global-line-height-3),
 		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-2),
@@ -220,6 +230,33 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
+				badge: (
+					align-self: baseline,
+					border-radius: var(--border-radius-pill),
+					color: var(--global-white),
+					font-size: var(--body-font-size-tiny),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--body-line-height-tiny),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				badge-danger: (
+					background-color: var(--form-border-color-danger),
+				),
+				badge-default: (
+					background-color: var(--text-color),
+				),
+				badge-light: (
+					background-color: var(--text-color-subtle),
+				),
+				badge-primary: (
+					background-color: var(--color-primary),
+				),
+				badge-success: (
+					background-color: var(--form-border-color-success),
+				),
+				badge-warning: (
+					background-color: var(--form-border-color-warning),
+				),
 				body: (
 					color: var(--text-color),
 					font-family: var(--font-family-primary),
@@ -228,7 +265,7 @@
 				),
 				button: (
 					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
-					border-radius: var(--global-border-radius-1),
+					border-radius: var(--border-radius),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
 				),
@@ -295,7 +332,7 @@
 				),
 				carousel-button: (
 					box-shadow: var(--global-box-shadow-1),
-					border-radius: var(--global-spacing-1),
+					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
 					width: var(--global-spacing-8),
@@ -325,8 +362,11 @@
 				),
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
-					border-radius: var(--global-border-radius-1),
+					border-radius: var(--border-radius),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
+				),
+				input-small-input: (
+					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				input-input-focus: (
 					outline: solid 2px var(--form-border-color),
@@ -356,11 +396,17 @@
 				link: (
 					color: var(--color-primary),
 				),
+				link-active: (
+					text-decoration: none,
+				),
+				link-hover: (
+					text-decoration: none,
+				),
 				media-item: (
 					align-items: stretch,
 					display: flex,
 					flex-direction: column,
-					gap: var(--global-spacing-1),
+					gap: var(--global-spacing-2),
 				),
 				media-item-fig-caption: (
 					color: var(--text-color-subtle),
@@ -382,7 +428,7 @@
 				),
 				pill: (
 					background-color: var(--color-primary),
-					border-radius: 2em,
+					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--global-font-size-2),
 					line-height: var(--global-line-height-2),
@@ -410,6 +456,40 @@
 				),
 			),
 			blocks: (
+				byline: (
+					font-size: var(--body-font-weight),
+					line-height: var(--body-line-height),
+					components: (
+						link: (
+							text-decoration: none,
+						),
+						link-hover: (
+							text-decoration: underline,
+						),
+					),
+				),
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				double-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				double-chain-child-item-empty: (
+					display: contents,
+				),
 				header: (
 					font-weight: var(--global-font-weight-7),
 				),
@@ -426,13 +506,36 @@
 					line-height: var(--global-line-height-4),
 				),
 				header-small: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--global-font-size-3),
 					line-height: var(--global-line-height-3),
 				),
 				headline: (
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
+				),
+				overline: (),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				quad-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				quad-chain-child-item-empty: (
+					display: contents,
 				),
 				right-rail: (
 					gap: var(--global-spacing-6),
@@ -530,6 +633,48 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-6),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr,
+					gap: var(--global-spacing-6) 0,
+				),
+				triple-chain-child-item: (
+					gap: var(--global-spacing-6) 0,
+				),
+				triple-chain-child-item-empty: (
+					display: contents,
+				),
+				subheadline: (
+					font-size: var(--global-font-size-5),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-4),
+				),
 				video-player: (
 					components: (
 						media-item: (
@@ -612,6 +757,7 @@
 		desktop: (
 			alias: (
 				"body-font-size": var(--global-font-size-4),
+				"body-line-height": var(--global-line-height-4),
 				"body-font-size-small": var(--global-font-size-3),
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
@@ -629,6 +775,20 @@
 				),
 			),
 			blocks: (
+				double-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				double-chain-children-grid: (
+					grid-template-columns: 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				double-chain-child-item-empty: (
+					display: initial,
+				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
 					line-height: var(--global-line-height-7),
@@ -639,11 +799,25 @@
 				),
 				header-medium: (
 					font-size: var(--global-font-size-7),
-					line-height: var(--global-line-height-9),
+					line-height: var(--global-line-height-5),
 				),
 				header-small: (
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+				),
+				quad-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				quad-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				quad-chain-child-item-empty: (
+					display: initial,
 				),
 				right-rail-navigation: (
 					padding: 0 0 var(--global-spacing-8) 0,
@@ -676,6 +850,35 @@
 					border-right: 1px solid #dadada,
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
+				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				single-chain-children-stack: (
+					gap: var(--global-spacing-5),
+				),
+				triple-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				triple-chain-children-grid: (
+					grid-template-columns: 1fr 1fr 1fr,
+					gap: 0 var(--global-spacing-5),
+				),
+				triple-chain-child-item-empty: (
+					display: initial,
+				),
+				subheadline: (
+					font-size: var(--global-font-size-7),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-5),
 				),
 				video-player-feature-meta: (
 					components: (
@@ -718,13 +921,18 @@
 );
 
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/overline-block";
+@use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";
 @use "../../blocks/links-bar-block";

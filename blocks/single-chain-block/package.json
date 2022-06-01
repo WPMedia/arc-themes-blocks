@@ -5,8 +5,9 @@
   "author": "Jack Howard <jack.howard@washpost.com>",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+    "_index.scss",
     "chains"
   ],
   "publishConfig": {
@@ -25,7 +26,6 @@
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95",
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/arc-themes-components": "*"
   }
 }

@@ -1,0 +1,26 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-double-chain {
+	&__heading {
+		@include scss.block-components("double-chain-heading");
+		@include scss.block-properties("double-chain-heading");
+	}
+
+	&__children-grid {
+		@include scss.block-components("double-chain-children-grid");
+		@include scss.block-properties("double-chain-children-grid");
+	}
+
+	&__child-item {
+		&:empty {
+			@include scss.block-components("quad-chain-child-item-empty");
+			@include scss.block-properties("quad-chain-child-item-empty");
+		}
+
+		@include scss.block-components("double-chain-child-item");
+		@include scss.block-properties("double-chain-child-item");
+	}
+
+	@include scss.block-components("double-chain");
+	@include scss.block-properties("double-chain");
+}

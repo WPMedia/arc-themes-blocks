@@ -19,9 +19,7 @@ describe("the subheadline feature for the default output type", () => {
 	describe("when subheadline content from globalContent is present", () => {
 		it("should dangerously set the innerHTML to the subheadline content", () => {
 			const wrapper = mount(<SubHeadline />);
-			expect(wrapper.find("h2.sub-headline").at(0).prop("dangerouslySetInnerHTML")).toStrictEqual({
-				__html: "subheadline for our story",
-			});
+			expect(wrapper.text()).toEqual("subheadline for our story");
 		});
 	});
 
@@ -45,9 +43,7 @@ describe("the subheadline feature for the default output type", () => {
 
 		it("should dangerously set the innerHTML to the subheadline content using description.basic", () => {
 			const wrapper = mount(<SubHeadline />);
-			expect(wrapper.find("h2.sub-headline").at(0).prop("dangerouslySetInnerHTML")).toStrictEqual({
-				__html: "description for our story",
-			});
+			expect(wrapper.text()).toEqual("description for our story");
 		});
 	});
 
@@ -71,9 +67,7 @@ describe("the subheadline feature for the default output type", () => {
 
 		it("should dangerously set the innerHTML to the subheadline content using subheadlines.basic", () => {
 			const wrapper = mount(<SubHeadline />);
-			expect(wrapper.find("h2.sub-headline").at(0).prop("dangerouslySetInnerHTML")).toStrictEqual({
-				__html: "subheadline for our story",
-			});
+			expect(wrapper.text()).toEqual("subheadline for our story");
 		});
 	});
 

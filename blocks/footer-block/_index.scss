@@ -3,4 +3,16 @@
 .b-footer {
 	@include scss.block-components("footer");
 	@include scss.block-properties("footer");
+	&__top-container {
+		@include scss.block-components("footer-top-container");
+		@include scss.block-properties("footer-top-container");
+	}
+	&__copyright-text {
+		@include scss.block-components("footer-copyright-text");
+		@include scss.block-properties("footer-copyright-text");
+	}
+	&__social-links {
+		@include scss.block-components("footer-social-links");
+		@include scss.block-properties("footer-social-links");
+	}
 }

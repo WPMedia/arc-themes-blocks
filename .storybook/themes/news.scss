@@ -491,8 +491,26 @@
 					display: contents,
 				),
 				footer: (
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
 					gap: var(--global-spacing-5),
 					grid-template-columns: 1fr,
+				),
+				footer-top-container: (
+					border-top: 1px solid var(--global-neutral-4),
+					border-bottom: 1px solid var(--global-neutral-4),
+				),
+				footer-social-links: (
+					background-color: var(--color-primary),
+					components: (
+						link: (
+							padding: var(--global-spacing-2),
+						),
+						icon: (
+							fill: var(--global-white),
+						),
+					),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),

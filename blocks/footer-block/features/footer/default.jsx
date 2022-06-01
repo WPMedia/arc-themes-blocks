@@ -1,33 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import getThemeStyle from "fusion:themes";
-import Link from "@wpmedia/links-bar-block";
-import {
-	FacebookAltIcon,
-	TwitterIcon,
-	RssIcon,
-	LazyLoad,
-	isServerSide,
-} from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import "./footer.scss";
-import { Grid } from "@wpmedia/arc-themes-components";
+import { Grid, Icon, Paragraph, Stack, Link } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-footer";
-
-export const StyledSocialContainer = styled.div`
-	border: ${(props) => (props.hasSocialLinks ? "1px" : "0")} solid ${(props) => props.primaryColor};
-	fill: ${(props) => props.primaryColor};
-
-	a {
-		border-right: 1px solid ${(props) => props.primaryColor};
-	}
-`;
 
 const FooterItem = ({ customFields: { navigationConfig } }) => {
 	const { arcSite, deployment, contextPath } = useFusionContext();
@@ -80,38 +62,38 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 	const socialButtons = (
 		<>
 			{facebookPage ? (
-				<a
+				<Link
 					title={phrases.t("footer-block.facebook-link")}
 					target="_blank"
 					rel="noopener noreferrer"
-					href={facebookPage}
+					href={facebookPage || ""}
 				>
-					<FacebookAltIcon fill={getThemeStyle(arcSite)["primary-color"]} />
-				</a>
+					<Icon name="Facebook" />
+				</Link>
 			) : (
 				""
 			)}
 			{twitterUsername ? (
-				<a
+				<Link
 					title={phrases.t("footer-block.twitter-link")}
 					target="_blank"
 					rel="noopener noreferrer"
 					href={`https://twitter.com/${twitterUsername}`}
 				>
-					<TwitterIcon fill={getThemeStyle(arcSite)["primary-color"]} />
-				</a>
+					<Icon name="Twitter" />
+				</Link>
 			) : (
 				""
 			)}
 			{rssUrl ? (
-				<a
+				<Link
 					title={phrases.t("footer-block.rss-link")}
 					target="_blank"
 					rel="noopener noreferrer"
-					href={rssUrl}
+					href={rssUrl || ""}
 				>
-					<RssIcon fill={getThemeStyle(arcSite)["primary-color"]} />
-				</a>
+					<Icon name="Rss" />
+				</Link>
 			) : (
 				""
 			)}
@@ -120,40 +102,15 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 
 	return (
 		<Grid className={BLOCK_CLASS_NAME}>
-			<div className="section-separator">
-				<section className="footer-header">
-					<div className="footer-row">
-						<div className="social-column">
-							<StyledSocialContainer
-								className="socialBtn-container"
-								primaryColor={getThemeStyle(arcSite)["primary-color"]}
-								hasSocialLinks={!!(facebookPage || twitterUsername || rssUrl)}
-							>
-								{socialButtons}
-							</StyledSocialContainer>
-						</div>
-						<div className="copyright-column">
-							{/* If large screen, show copyright over border */}
-							<PrimaryFont
-								as="p"
-								className="copyright"
-								id="copyright-top"
-								style={{ width: "100%" }}
-							>
-								{copyrightText}
-							</PrimaryFont>
-						</div>
-					</div>
-				</section>
-			</div>
-			{/*
-				<div>
-				If small screen, show copyright under border
-				<p className="copyright" id="copyright-bottom" style={{ width: "100%" }}>
-					{copyrightText}
-				</p>
-			</div>
-			*/}
+			<Stack as="section" className={`${BLOCK_CLASS_NAME}__top-container`} direction="horizontal">
+				{facebookPage || twitterUsername || rssUrl ? (
+					<Stack className={`${BLOCK_CLASS_NAME}__social-links`} direction="horizontal">
+						{socialButtons}
+					</Stack>
+				) : null}
+				<Paragraph>{copyrightText}</Paragraph>
+				<Stack className={`${BLOCK_CLASS_NAME}__login-container`} />
+			</Stack>
 			<div className="row legacy-footer-row">
 				{/* The columns are 2D arrays of columns x column items. Iterate through both */}
 				{footerColumns.map((column) => {

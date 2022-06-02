@@ -62,7 +62,7 @@ const ShareBarContainer = () => {
 		globalContent: {
 			headlines: { basic: headlineString = "" },
 			website_url: websiteUrl = "",
-		},
+		} = {},
 		arcSite,
 	} = useFusionContext();
 

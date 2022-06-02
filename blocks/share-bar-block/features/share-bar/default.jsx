@@ -53,7 +53,7 @@ const getLogoComponent = {
 	linkedIn: <Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} />,
 	pinterest: <Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} />,
 	twitter: <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} />,
-	email: <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__envelope`} />,
+	email: <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__email`} />,
 };
 
 const ShareBarContainer = () => {

@@ -1,7 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-share-bar {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	@include scss.block-properties("share-bar");
 	@include scss.block-components("share-bar");
 }
@@ -26,7 +25,7 @@
 	@include scss.block-components("share-bar-twitter");
 }
 
-.b-share-bar__email {
-	@include scss.block-properties("share-bar-email");
-	@include scss.block-components("share-bar-email");
+.b-share-bar__envelope {
+	@include scss.block-properties("share-bar-envelope");
+	@include scss.block-components("share-bar-envelope");
 }

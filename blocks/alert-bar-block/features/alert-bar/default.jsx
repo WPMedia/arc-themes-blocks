@@ -1,35 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, createRef, forwardRef } from "react";
+
 import Consumer from "fusion:consumer";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import PropTypes from "@arc-fusion/prop-types";
 
-import { CloseIcon } from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import PropTypes from "@arc-fusion/prop-types";
+import { Button, Icon, isServerSide, Link } from "@wpmedia/arc-themes-components";
 
 import { readCookie, saveCookie } from "./cookies";
 
-import "./alert-bar.scss";
+const BLOCK_CLASS_NAME = "b-alert-bar";
 
-export const AlertBarPresentational = (props) => {
-	const { alertRef, barAriaLabel, closeAriaLabel, hideAlertHandler, content, arcSite } = props;
-
-	const { content_elements: elements = [] } = content;
-	const article = elements[0] || {};
-	const { websites = {}, headlines = {} } = article;
-	const { website_url: websiteURL = "" } = websites[arcSite] || {};
-
-	return (
-		<nav className="alert-bar" ref={alertRef} aria-label={barAriaLabel}>
-			<PrimaryFont href={websiteURL} className="article-link" as="a">
-				{headlines.basic}
-			</PrimaryFont>
-			<button type="button" onClick={hideAlertHandler} aria-label={closeAriaLabel}>
-				<CloseIcon className="close" fill="white" />
-			</button>
+export const AlertBarPresentational = forwardRef(
+	({ barAriaLabel, closeAriaLabel, hideAlertHandler, url, linkText }, ref) => (
+		<nav aria-label={barAriaLabel} className={BLOCK_CLASS_NAME} ref={ref}>
+			<Link href={url}>{linkText}</Link>
+			<Button accessibilityLabel={closeAriaLabel} onClick={hideAlertHandler}>
+				<Icon name="Close" />
+			</Button>
 		</nav>
-	);
-};
+	)
+);
 
 @Consumer
 class AlertBar extends Component {
@@ -45,23 +36,21 @@ class AlertBar extends Component {
 			},
 		});
 
-		this.alertRef = React.createRef();
+		this.alertRef = createRef();
 		this.phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 
-		if (typeof window !== "undefined") {
+		if (isServerSide()) {
+			this.state = {
+				content: cached,
+				visible: false,
+			};
+		} else {
 			this.cookie = readCookie();
 			this.state = {
 				content: cached,
 				visible: this.checkAlertVisible(cached),
-				hidden: true,
 			};
 			fetched.then(this.updateContent);
-		} else {
-			this.state = {
-				content: cached,
-				visible: false,
-				hidden: true,
-			};
 		}
 	}
 
@@ -69,8 +58,6 @@ class AlertBar extends Component {
 		const { arcSite } = this.props;
 		// The content source will always return an array with one story in it
 		this.timeID = window.setInterval(() => {
-			// Use getContent instead of fetchContent because it will otherwise only
-			// return cached contents, as of March 25.
 			const { fetched } = this.getContent({
 				sourceName: "alert-bar-collections",
 				query: {
@@ -81,55 +68,11 @@ class AlertBar extends Component {
 			});
 			fetched.then(this.updateContent);
 		}, 120000);
-
-		// need to delay a bit the first render, to let the browser settle the layout
-		// or the initial animation will now execute
-		window.setTimeout(this.showAlert, 500);
-
-		const { visible } = this.state;
-		this.engageAlert(visible);
-	}
-
-	componentDidUpdate(_prevProps, prevState) {
-		const { visible, hidden } = this.state;
-		if (visible !== prevState.visible || hidden !== prevState.hidden) {
-			if (visible) {
-				this.engageAlert();
-			} else {
-				this.disengageAlert();
-			}
-		}
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.timeID);
 	}
-
-	showAlert = () => {
-		this.setState({ hidden: false });
-	};
-
-	engageAlert = () => {
-		if (!this.alertRef.current) {
-			return;
-		}
-		// the has-alert class is added to the page-header ONLY if the alert-bar
-		// is inside it. if not, nothing is needed
-		const header = this.alertRef.current.closest(".page-header");
-		if (!header) {
-			return;
-		}
-
-		header.classList.add("has-alert");
-	};
-
-	disengageAlert = () => {
-		const header = document.body.getElementsByClassName("page-header")[0];
-		if (!header) {
-			return;
-		}
-		header.classList.remove("has-alert");
-	};
 
 	updateContent = (content) => {
 		this.cookie = readCookie();
@@ -144,35 +87,28 @@ class AlertBar extends Component {
 	};
 
 	hideAlert = () => {
-		const { content = {} } = this.state;
+		const { content } = this.state;
 		const story = content?.content_elements?.[0]?.headlines?.basic;
 		saveCookie(story);
 		this.setState({ visible: false });
 	};
 
 	render() {
-		const { content = {}, visible, hidden } = this.state;
-
-		if (hidden) {
-			return null;
-		}
-
+		const { content, visible } = this.state;
 		const { arcSite, customFields = {} } = this.props;
 		const { ariaLabel } = customFields;
+		const article = content?.content_elements?.[0];
 
-		return (
-			!!content?.content_elements?.length &&
-			visible && (
-				<AlertBarPresentational
-					alertRef={this.alertRef}
-					barAriaLabel={ariaLabel || this.phrases.t("alert-bar-block.element-aria-label")}
-					closeAriaLabel={this.phrases.t("alert-bar-block.close-button")}
-					hideAlertHandler={this.hideAlert}
-					content={content}
-					arcSite={arcSite}
-				/>
-			)
-		);
+		return article && visible ? (
+			<AlertBarPresentational
+				barAriaLabel={ariaLabel || this.phrases.t("alert-bar-block.element-aria-label")}
+				closeAriaLabel={this.phrases.t("alert-bar-block.close-button")}
+				hideAlertHandler={this.hideAlert}
+				linkText={article?.headlines?.basic}
+				ref={this.alertRef}
+				url={article?.websites?.[arcSite]?.website_url}
+			/>
+		) : null;
 	}
 }
 

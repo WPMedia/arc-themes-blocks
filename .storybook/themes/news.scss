@@ -456,6 +456,33 @@
 				),
 			),
 			blocks: (
+				alert-bar: (
+					align-items: center,
+					background-color: var(--background-color-danger),
+					display: flex,
+					flex-wrap: nowrap,
+					justify-content: space-between,
+					padding-left: var(--global-spacing-4),
+					line-height: var(--global-line-height-9),
+					components: (
+						button-default: (
+							background: none,
+							border: none,
+							color: var(--text-color-danger),
+							flex: 0 0 auto,
+						),
+						link: (
+							color: var(--text-color-danger),
+							display: block,
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-2),
+							overflow: hidden,
+							text-decoration: none,
+							text-overflow: ellipsis,
+							white-space: nowrap,
+						),
+					),
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -888,6 +915,7 @@
 	)
 );
 
+@use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";

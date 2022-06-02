@@ -55,4 +55,13 @@ describe("the collections content source block", () => {
 			expect(content.content_elements.length).toBe(0);
 		});
 	});
+
+	describe("when a collection returns no data", () => {
+		it("it should throw an error", () => {
+			const throwsError = () => {
+				contentSource.transform();
+			};
+			expect(throwsError).toThrow("Not found");
+		});
+	});
 });

@@ -11,102 +11,55 @@ export default {
 	},
 };
 
-const mockHeadlineObject = {
-	headlines: {
-		basic: "7 questions about traveling to Australia during catastrophic fires, answered",
-	},
-	websites: {
-		"story-book": {
-			website_url: "https://storybook.js.org",
-		},
-	},
-};
+const headlineText = "7 questions about traveling to Australia during catastrophic fires, answered";
+const longHeadlineText =
+	"This is a really long headline, especially with the longest word pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis";
+const linkUrl = "https://storybook.js.org";
 
-export const headlineAndLink = () => {
-	const contentPaylod = {
-		content_elements: [mockHeadlineObject],
-	};
+export const headlineAndLink = () => (
+	<AlertBarPresentational
+		alertRef={null}
+		arcSite="story-book"
+		barAriaLabel="Alert bar"
+		closeAriaLabel="Close"
+		hideAlertHandler={null}
+		linkText={headlineText}
+		url={linkUrl}
+	/>
+);
 
-	return (
-		<AlertBarPresentational
-			alertRef={null}
-			barAriaLabel="Alert bar"
-			closeAriaLabel="Close"
-			hideAlertHandler={null}
-			arcSite="story-book"
-			content={contentPaylod}
-		/>
-	);
-};
+export const noHeadlineAndWithLink = () => (
+	<AlertBarPresentational
+		alertRef={null}
+		arcSite="story-book"
+		barAriaLabel="Alert bar"
+		closeAriaLabel="Close"
+		hideAlertHandler={null}
+		linkText=""
+		url={linkUrl}
+	/>
+);
 
-export const noHeadlineAndWithLink = () => {
-	const noHeadlineObject = {
-		...mockHeadlineObject,
-		headlines: {
-			basic: "",
-		},
-	};
-	const contentPaylod = {
-		content_elements: [noHeadlineObject],
-	};
+export const headlineAndNoLink = () => (
+	<AlertBarPresentational
+		alertRef={null}
+		arcSite="story-book"
+		barAriaLabel="Alert bar"
+		closeAriaLabel="Close"
+		hideAlertHandler={null}
+		linkText={headlineText}
+		url=""
+	/>
+);
 
-	return (
-		<AlertBarPresentational
-			alertRef={null}
-			barAriaLabel="Alert bar"
-			closeAriaLabel="Close"
-			hideAlertHandler={null}
-			arcSite="story-book"
-			content={contentPaylod}
-		/>
-	);
-};
-
-export const headlineAndNoLink = () => {
-	const noLinkObject = {
-		...mockHeadlineObject,
-		websites: {
-			"story-book": {
-				website_url: "",
-			},
-		},
-	};
-	const contentPaylod = {
-		content_elements: [noLinkObject],
-	};
-
-	return (
-		<AlertBarPresentational
-			alertRef={null}
-			barAriaLabel="Alert bar"
-			closeAriaLabel="Close"
-			hideAlertHandler={null}
-			arcSite="story-book"
-			content={contentPaylod}
-		/>
-	);
-};
-
-export const headlineWithReallyLongText = () => {
-	const longHeadlineObject = {
-		...mockHeadlineObject,
-		headlines: {
-			basic:
-				"This is a really long headline, especially with the longest word pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis",
-		},
-	};
-	const contentPaylod = {
-		content_elements: [longHeadlineObject],
-	};
-
-	return (
-		<AlertBarPresentational
-			alertRef={null}
-			barAriaLabel="Alert bar"
-			closeAriaLabel="Close"
-			hideAlertHandler={null}
-			arcSite="story-book"
-			content={contentPaylod}
-		/>
-	);
-};
+export const headlineWithReallyLongText = () => (
+	<AlertBarPresentational
+		alertRef={null}
+		arcSite="story-book"
+		barAriaLabel="Alert bar"
+		closeAriaLabel="Close"
+		hideAlertHandler={null}
+		linkText={longHeadlineText}
+		url={linkUrl}
+	/>
+);

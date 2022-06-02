@@ -456,6 +456,13 @@
 				),
 			),
 			blocks: (
+				article-tag: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-4),
+  						),
+					),
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -889,6 +896,7 @@
 	)
 );
 
+@use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";

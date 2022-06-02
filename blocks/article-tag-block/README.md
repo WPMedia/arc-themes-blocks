@@ -1,11 +1,11 @@
 # `@wpmedia/article-tag-block`
 
-_Fusion News Article Tags block_
+Article Tag Block renders a list of Pills.
 
 ## Acceptance Criteria
 
-- If there is a tags array, it will render anchor tags with href set to Tags Slug and clickable text set to Tag Text.
-- If there is a tags array and slug is missing for tags, it will render anchor tags with href set to '#' and clickable text set to Tag Text.
+- If there is a tags array, it will render a Pill component with clickable text set to Tag Text.
+- If there is a tags array and slug is missing for tags, it will render a Pill component.
 - If the tags array is empty, it will not render anything.
 - If taxonomy section is missing, it will not render anything.
 
@@ -37,7 +37,7 @@ taxonomy: {
 
 ### ANS Fields
 
-- `taxonomy.tags[x].slug` Detects for '#' as href for fallback
+- `taxonomy.tags[x].slug` Detects for '' as href for fallback
 - `taxonomy.tags[x].text` Required to be string
 
 ```js
@@ -45,8 +45,8 @@ taxonomy: {
 	taxonomy: {
 		tags: [
 			{
-				slug: "sportsball",
-				text: "Sports!",
+				slug: "sports",
+				text: "Sports",
 			},
 			{
 				slug: "#",

@@ -33,7 +33,6 @@ describe("Share Bar", () => {
 			/>
 		);
 		const buttons = getAllByRole("button");
-
 		expect(buttons).toHaveLength(5);
 	});
 

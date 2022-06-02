@@ -101,7 +101,6 @@ export const ShareBar = ({
 				<Button
 					className={`${BLOCK_CLASS_NAME}__${social.toLowerCase()}`}
 					key={social}
-					id={`article-share-${social}`}
 					accessibilityLabel={phrases.t("share-bar-block.share-button-aria-label", {
 						socialType,
 					})}

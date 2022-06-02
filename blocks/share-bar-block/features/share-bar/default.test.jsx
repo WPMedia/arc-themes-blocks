@@ -22,7 +22,7 @@ const customFields = {
 
 describe("Share Bar", () => {
 	it("should show all buttons if those options are chosen", () => {
-		const { container } = render(
+		const { getAllByRole } = render(
 			<ShareBar
 				customFields={customFields}
 				websiteName={websiteName}
@@ -32,20 +32,9 @@ describe("Share Bar", () => {
 				phrases={mockPhrases}
 			/>
 		);
-
-		const buttons = container.querySelectorAll(".b-share-bar button");
-		const emailButton = container.querySelectorAll("#article-share-email");
-		const facebookButton = container.querySelectorAll("#article-share-facebook");
-		const pinterestButton = container.querySelectorAll("#article-share-pinterest");
-		const twitterButton = container.querySelectorAll("#article-share-twitter");
-		const linkedinButton = container.querySelectorAll("#article-share-linkedIn");
+		const buttons = getAllByRole("button");
 
 		expect(buttons).toHaveLength(5);
-		expect(emailButton).toHaveLength(1);
-		expect(facebookButton).toHaveLength(1);
-		expect(pinterestButton).toHaveLength(1);
-		expect(twitterButton).toHaveLength(1);
-		expect(linkedinButton).toHaveLength(1);
 	});
 
 	it("should not show social buttons that are marked as false", () => {
@@ -55,7 +44,7 @@ describe("Share Bar", () => {
 		customFields.twitter = false;
 		customFields.linkedIn = true;
 
-		const { container } = render(
+		const { getAllByRole } = render(
 			<ShareBar
 				customFields={customFields}
 				websiteName={websiteName}
@@ -66,17 +55,8 @@ describe("Share Bar", () => {
 			/>
 		);
 
-		const emailButton = container.querySelectorAll("#article-share-email");
-		const facebookButton = container.querySelectorAll("#article-share-facebook");
-		const pinterestButton = container.querySelectorAll("#article-share-pinterest");
-		const twitterButton = container.querySelectorAll("#article-share-twitter");
-		const linkedinButton = container.querySelectorAll("#article-share-linkedIn");
-
-		expect(emailButton).toHaveLength(1);
-		expect(facebookButton).toHaveLength(0);
-		expect(pinterestButton).toHaveLength(1);
-		expect(twitterButton).toHaveLength(0);
-		expect(linkedinButton).toHaveLength(1);
+		const buttons = getAllByRole("button");
+		expect(buttons).toHaveLength(3);
 	});
 
 	it("should not show any social buttons if all are marked as false", () => {
@@ -116,6 +96,10 @@ describe("Share Bar", () => {
 	describe("Social Buttons Interactions", () => {
 		it("should open a new window when Email button is clicked", async () => {
 			customFields.email = true;
+			customFields.facebook = false;
+			customFields.pinterest = false;
+			customFields.twitter = false;
+			customFields.linkedIn = false;
 			const { container } = render(
 				<ShareBar
 					customFields={customFields}
@@ -128,18 +112,21 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector("#article-share-email"),
+				container.querySelector(".b-share-bar__email"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
 				})
 			);
-			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
 		});
 
 		it("should open a new window when Facebook button is clicked", async () => {
+			customFields.email = false;
 			customFields.facebook = true;
+			customFields.pinterest = false;
+			customFields.twitter = false;
+			customFields.linkedIn = false;
 			const { container } = render(
 				<ShareBar
 					customFields={customFields}
@@ -152,18 +139,21 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector("#article-share-facebook"),
+				container.querySelector(".b-share-bar__facebook"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
 				})
 			);
-			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
 		});
 
 		it("should open a new window when Pinterest button is clicked", async () => {
+			customFields.email = false;
+			customFields.facebook = false;
 			customFields.pinterest = true;
+			customFields.twitter = false;
+			customFields.linkedIn = false;
 			const { container } = render(
 				<ShareBar
 					customFields={customFields}
@@ -176,18 +166,21 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector("#article-share-pinterest"),
+				container.querySelector(".b-share-bar__pinterest"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
 				})
 			);
-			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
 		});
 
 		it("should open a new window when Twitter button is clicked", async () => {
+			customFields.email = false;
+			customFields.facebook = false;
+			customFields.pinterest = false;
 			customFields.twitter = true;
+			customFields.linkedIn = false;
 			const { container } = render(
 				<ShareBar
 					customFields={customFields}
@@ -200,17 +193,20 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector("#article-share-twitter"),
+				container.querySelector(".b-share-bar__twitter"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
 				})
 			);
-			await expect(window.open).toBeCalled();
 			expect(window.location.origin).toEqual("http://localhost");
 		});
 
 		it("should open a new window when LinkedIn button is clicked", async () => {
+			customFields.email = false;
+			customFields.facebook = false;
+			customFields.pinterest = false;
+			customFields.twitter = false;
 			customFields.linkedIn = true;
 			const { container } = render(
 				<ShareBar
@@ -224,7 +220,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector("#article-share-linkedIn"),
+				container.querySelector(".b-share-bar__linkedin"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,

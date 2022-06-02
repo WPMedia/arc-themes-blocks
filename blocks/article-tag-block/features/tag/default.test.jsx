@@ -1,17 +1,16 @@
 import React from "react";
 import { mount } from "enzyme";
+import { useFusionContext } from "fusion:context";
+import ArticleTags from "./default";
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn().mockReturnValue(true),
+}));
 
 describe("the article tag block", () => {
-	jest.mock("fusion:themes", () => jest.fn(() => ({})));
-	jest.mock("fusion:properties", () => jest.fn(() => ({})));
-	jest.mock("@wpmedia/shared-styles", () => ({
-		__esModule: true,
-		PrimaryFont: (props) => <div {...props} />,
-	}));
-
 	jest.mock("@wpmedia/engine-theme-sdk", () => ({
-		LazyLoad: ({ children }) => <>{children}</>,
-		isServerSide: () => true,
+		LazyLoad: ({ children }) => <>{children}f</>,
 	}));
 
 	describe("when the global content has an array of tags in its taxonomy", () => {
@@ -35,44 +34,36 @@ describe("the article tag block", () => {
 			},
 		};
 
-		const mockFunction = jest.fn().mockReturnValue(mockReturnData);
-
 		afterEach(() => {
 			jest.resetModules();
 		});
 
 		beforeEach(() => {
-			jest.mock("fusion:context", () => ({
-				useFusionContext: mockFunction,
-			}));
+			useFusionContext.mockReturnValue(mockReturnData);
 		});
 
 		it("should return null if lazyLoad on the server and not in the admin", () => {
-			const { default: ArticleTags } = require("./default");
 			const config = {
 				lazyLoad: true,
 			};
 			const wrapper = mount(<ArticleTags customFields={config} />);
-			expect(wrapper.html()).toBe(null);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 
 		it("should render a parent container for the tags", () => {
-			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("div.tags-holder").length).toEqual(1);
+			expect(wrapper.find("div.b-article-tag").length).toEqual(1);
 		});
 
-		it("should render a tag element for each tag in the array", () => {
-			const { default: ArticleTags } = require("./default");
+		it("should render a pill for each tag in the array", () => {
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").length).toEqual(2);
+			expect(wrapper.children().find(".c-pill").length).toEqual(2);
 		});
 
 		it("should render tags with their correct href", () => {
-			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").at(0).props().href).toBe("/tags/dogs%20slug/");
-			expect(wrapper.children().find("a").at(1).props().href).toBe("/tags/cats%20slug/");
+			expect(wrapper.children().find(".c-pill").at(0).props().href).toBe("/tags/dogs%20slug/");
+			expect(wrapper.children().find(".c-pill").at(1).props().href).toBe("/tags/cats%20slug/");
 		});
 	});
 
@@ -82,32 +73,29 @@ describe("the article tag block", () => {
 		});
 
 		beforeEach(() => {
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "the-sun",
-					globalContent: {
-						taxonomy: {
-							tags: [
-								{
-									description: "dogs",
-									text: "dogs text",
-								},
-								{
-									description: "cats",
-									text: "cats text",
-								},
-							],
-						},
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				globalContent: {
+					taxonomy: {
+						tags: [
+							{
+								description: "dogs",
+								text: "dogs text",
+							},
+							{
+								description: "cats",
+								text: "cats text",
+							},
+						],
 					},
-				})),
-			}));
+				},
+			});
 		});
 
-		it("should render tags with correct href", () => {
-			const { default: ArticleTags } = require("./default");
+		it("should render pill components", () => {
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find("a").at(0).props().href).toBe("#");
-			expect(wrapper.children().find("a").at(1).props().href).toBe("#");
+			const tags = wrapper.find(".c-pill");
+			expect(tags.length).toBe(2);
 		});
 	});
 
@@ -117,22 +105,19 @@ describe("the article tag block", () => {
 		});
 
 		beforeEach(() => {
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "the-sun",
-					globalContent: {
-						taxonomy: {
-							tags: [],
-						},
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				globalContent: {
+					taxonomy: {
+						tags: [],
 					},
-				})),
-			}));
+				},
+			});
 		});
 
 		it("should not render anything", () => {
-			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find(".tags-holder").length).toEqual(0);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 	});
 
@@ -142,18 +127,15 @@ describe("the article tag block", () => {
 		});
 
 		beforeEach(() => {
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "the-sun",
-					globalContent: {},
-				})),
-			}));
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				globalContent: {},
+			});
 		});
 
 		it("should not render anything", () => {
-			const { default: ArticleTags } = require("./default");
 			const wrapper = mount(<ArticleTags />);
-			expect(wrapper.children().find(".tags-holder").length).toEqual(0);
+			expect(wrapper.isEmptyRender()).toBe(true);
 		});
 	});
 });

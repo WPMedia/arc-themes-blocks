@@ -6,7 +6,7 @@ export const linksBarMock = (query) => {
 			children: [
 				{
 					_id: "id_1",
-					name: "Link 1",
+					name: "test link 1",
 				},
 			],
 		},
@@ -14,11 +14,11 @@ export const linksBarMock = (query) => {
 			children: [
 				{
 					_id: "id_1",
-					name: "Link 1",
+					name: "test link 1",
 				},
 				{
 					_id: "id_2",
-					name: "Link 2",
+					name: "test link 2",
 				},
 			],
 		},
@@ -26,17 +26,17 @@ export const linksBarMock = (query) => {
 			children: [
 				{
 					_id: "id_1",
-					name: "Link 1",
+					name: "test link 1",
 				},
 				{
 					_id: "id_2",
-					name: "Link 2",
+					name: "test link 2",
 				},
 				{
 					_id: "id_3",
 					node_type: "link",
 					url: "/",
-					display_name: "Link 3",
+					display_name: "Link Text 3",
 				},
 			],
 		},

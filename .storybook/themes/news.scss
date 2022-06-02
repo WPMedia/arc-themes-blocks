@@ -460,7 +460,7 @@
 					components: (
 						stack: (
 							gap: var(--global-spacing-4),
-  						),
+						),
 					),
 				),
 				byline: (
@@ -933,6 +933,7 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/links-bar-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
@@ -943,4 +944,3 @@
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";
-@use "../../blocks/links-bar-block";

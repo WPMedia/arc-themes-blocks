@@ -111,7 +111,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector(".b-share-bar__email"),
+				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -138,7 +138,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector(".b-share-bar__facebook"),
+				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -165,7 +165,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector(".b-share-bar__pinterest"),
+				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -192,7 +192,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector(".b-share-bar__twitter"),
+				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,
@@ -219,7 +219,7 @@ describe("Share Bar", () => {
 			);
 			global.open = jest.fn();
 			await fireEvent(
-				container.querySelector(".b-share-bar__linkedin"),
+				container.querySelector("button"),
 				new MouseEvent("click", {
 					bubbles: true,
 					cancelable: true,

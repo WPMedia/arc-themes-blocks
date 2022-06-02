@@ -13,7 +13,7 @@ const Byline = () => {
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 	const bylineNodes = formatAuthors(globalContent?.credits?.by, phrases.t("byline-block.and-text"));
 
-	return bylineNodes ? (
+	return bylineNodes?.length > 0 ? (
 		<Attribution className={`${BLOCK_CLASS_NAME}`}>
 			<span className={`${BLOCK_CLASS_NAME}__by`}>{phrases.t("byline-block.by-text")}</span>{" "}
 			<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>

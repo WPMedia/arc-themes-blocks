@@ -14,10 +14,6 @@ jest.mock("fusion:intl", () => ({
 		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
 	})),
 }));
-jest.mock("@wpmedia/arc-themes-components", () => ({
-	Attribution: jest.fn(({ children }) => children),
-	formatAuthors: jest.fn((a) => JSON.stringify(a)),
-}));
 
 describe("Given byline", () => {
 	it("should return a prefix and name element", () => {
@@ -37,15 +33,7 @@ describe("Given byline", () => {
 		});
 
 		const { container } = render(<Byline />);
-		expect(container.textContent).toEqual(
-			`By ${JSON.stringify([
-				{
-					type: "author",
-					name: "John Doe",
-					url: "/author/john-doe",
-				},
-			])}`
-		);
+		expect(container.textContent).toEqual("By John Doe");
 	});
 
 	it("should return nothing if the credits are not provided", () => {
@@ -53,6 +41,19 @@ describe("Given byline", () => {
 			arcSite: "the-sun",
 			globalContent: {
 				credits: {},
+			},
+		});
+		const { container } = render(<Byline />);
+		expect(container.firstChild).toBe(null);
+	});
+
+	it("should return nothing if the by array is empty", () => {
+		useFusionContext.mockReturnValueOnce({
+			arcSite: "the-sun",
+			globalContent: {
+				credits: {
+					by: [],
+				},
 			},
 		});
 		const { container } = render(<Byline />);

@@ -49,20 +49,25 @@ const share = {
 };
 
 const getLogoComponent = {
-	facebook: <Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} />,
-	linkedIn: <Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} />,
-	pinterest: <Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} />,
-	twitter: <Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} />,
-	email: <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__email`} />,
+	facebook: (
+		<Icon name="Facebook" className={`${BLOCK_CLASS_NAME}__facebook`} height={22} width={22} />
+	),
+	linkedIn: (
+		<Icon name="LinkedIn" className={`${BLOCK_CLASS_NAME}__linkedin`} height={22} width={22} />
+	),
+	pinterest: (
+		<Icon name="Pinterest" className={`${BLOCK_CLASS_NAME}__pinterest`} height={22} width={22} />
+	),
+	twitter: (
+		<Icon name="Twitter" className={`${BLOCK_CLASS_NAME}__twitter`} height={22} width={22} />
+	),
+	email: <Icon name="Envelope" className={`${BLOCK_CLASS_NAME}__email`} height={22} width={22} />,
 };
 
 const ShareBarContainer = () => {
 	const {
 		customFields,
-		globalContent: {
-			headlines: { basic: headlineString = "" },
-			website_url: websiteUrl = "",
-		} = {},
+		globalContent: { headlines: { basic: headlineString = "" }, website_url: websiteUrl = "" } = {},
 		arcSite,
 	} = useFusionContext();
 
@@ -120,6 +125,7 @@ export const ShareBar = ({
 			className={BLOCK_CLASS_NAME}
 			alignment="center"
 			direction="vertical"
+			gap="8px"
 			justification="center"
 		>
 			{shareButtons}

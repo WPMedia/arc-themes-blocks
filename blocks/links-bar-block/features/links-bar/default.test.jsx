@@ -71,7 +71,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar-menu-link\\" href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
+			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
 		);
 	});
 
@@ -100,7 +100,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar-menu-link\\" href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar-menu-link\\" href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"b-links-bar-menu\\"><a class=\\"c-link b-links-bar-menu-link\\" href=\\"/\\" rel=\\"noreferrer\\" target=\\"_blank\\">Link Text<span class=\\"visually-hidden\\">Opens in new window</span></a></span></nav><hr/>"`
+			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"/\\" rel=\\"noreferrer\\" target=\\"_blank\\">Link Text<span class=\\"visually-hidden\\">Opens in new window</span></a></span></nav><hr/>"`
 		);
 	});
 
@@ -133,7 +133,7 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
-		expect(wrapper.find(".b-links-bar-menu")).toHaveLength(4);
+		expect(wrapper.find(".b-links-bar__menu")).toHaveLength(4);
 		expect(wrapper.find(".b-links-bar a:not([target])")).toHaveLength(2);
 		expect(wrapper.find('.b-links-bar a[target="_blank"]')).toHaveLength(2);
 	});

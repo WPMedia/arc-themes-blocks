@@ -36,7 +36,7 @@ export const linksBarMock = (query) => {
 					_id: "id_3",
 					node_type: "link",
 					url: "/",
-					display_name: "Link Text 3",
+					display_name: "Link Text",
 				},
 			],
 		},

@@ -634,14 +634,12 @@
 					grid-area: main-right-rail-bottom,
 				),
 				share-bar: (
-					box-shadow: (
-						0 4px 8px 0 rgba(0, 0, 0, 0.2),
-						0 6px 20px 0 rgba(0, 0, 0, 0.19),
-					),
+					background: var(--background-color),
+					box-shadow: var(--global-box-shadow-1),
 					border-radius: 0 var(--border-radius) var(--border-radius) 0,
 					display: none,
 					left: 0,
-					padding: 9px 0,
+					padding: var(--global-spacing-4) 0,
 					position: fixed,
 					top: 200px,
 					width: 44px,
@@ -649,25 +647,26 @@
 						button-medium: (
 							background: transparent,
 							border-width: 0,
-							padding: 7px 10px,
+							padding: 0 10px,
 							text-align: center,
+							width: 44px,
 						),
 					),
 				),
 				share-bar-facebook: (
-					fill: #4267b2,
+					fill: #415993,
 				),
 				share-bar-linkedin: (
-					fill: #2867b2,
+					fill: #3076b0,
 				),
 				share-bar-pinterest: (
-					fill: #bd081c,
+					fill: #ad2526,
 				),
 				share-bar-twitter: (
-					fill: #1da1f2,
+					fill: #6baae8,
 				),
 				share-bar-envelope: (
-					fill: #c72a22,
+					fill: #b61818,
 				),
 				single-chain: (
 					components: (

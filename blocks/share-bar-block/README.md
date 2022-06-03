@@ -1,19 +1,10 @@
 # `@wpmedia/share-bar-block`
 
-This is the share bar block for the news theme, written as a functional component. Users can choose from five options to display on the share bar:
-
-1. email
-2. Facebook
-3. Pinterest
-4. Linkedin
-5. Twitter
-
-Clicking on each button will open up a new window for the respective share type.
+_This is the share bar block for the news theme, written as a functional component. Users can choose out of five options (email, facebook, pinterest, linkedin, twitter) which selection of share buttons will be displayed on articles. Clicking on each button will open up a new window._
 
 ## Acceptance Criteria
 
-This block requires that the ANS fields listed below are in a page's `globalContent`. Otherwise the headline
-and URL is not available for sharing.
+- Add AC relevant to the block
 
 ## Props
 
@@ -25,7 +16,7 @@ and URL is not available for sharing.
 
 ## ANS Schema
 
-The share block will need the basic headline and website URL from the page's `globalContent`.
+Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
 
@@ -34,21 +25,26 @@ The share block will need the basic headline and website URL from the page's `gl
 
 ## Internationalization fields
 
-| Phrase key              | Default (English)                           |
-| ----------------------- | ------------------------------------------- |
-| share-button-aria-label | "Share current article via `%{socialType}`" |
-
-**Note:** The `%{socialType}` value is taken from Internationalization fields in the
-[global-phrases-block](https://github.com/WPMedia/arc-themes-blocks/tree/arc-themes-release-version-2.0.1/blocks/global-phrases-block).
+| Phrase key | Default (English)     |
+| ---------- | --------------------- |
+| `key`      | `english translation` |
 
 ## Events
 
 Blocks can emit events. The following is a list of events that are emitted by this block.
 
-| **Event Name** | **Description**                                                     |
-| -------------- | ------------------------------------------------------------------- |
-| `window.open`  | A share window is opened when any of the share buttons are clicked. |
+| **Event Name** | **Description**    |
+| -------------- | ------------------ |
+| **eventName**  | Describe the event |
 
 ### Event Listening
 
-Each button listens for a click event to open a share window.
+Include block specific instructions for event listening.
+
+OR
+
+This block does not emit any events.
+
+## Additional Considerations
+
+_This is optional. Please add an additional context that would be important to know in order to use this block._

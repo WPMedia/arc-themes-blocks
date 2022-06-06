@@ -62,9 +62,8 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 		<>
 			{facebookPage ? (
 				<Link
-					title={phrases.t("footer-block.facebook-link")}
-					target="_blank"
-					rel="noopener noreferrer"
+					supplementalText={phrases.t("footer-block.facebook-link")}
+					openInNewTab
 					href={facebookPage}
 				>
 					<Icon name="Facebook" />
@@ -74,9 +73,8 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 			)}
 			{twitterUsername ? (
 				<Link
-					title={phrases.t("footer-block.twitter-link")}
-					target="_blank"
-					rel="noopener noreferrer"
+					supplementalText={phrases.t("footer-block.twitter-link")}
+					openInNewTab
 					href={`https://twitter.com/${twitterUsername}`}
 				>
 					<Icon name="Twitter" />
@@ -85,12 +83,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 				""
 			)}
 			{rssUrl ? (
-				<Link
-					title={phrases.t("footer-block.rss-link")}
-					target="_blank"
-					rel="noopener noreferrer"
-					href={rssUrl}
-				>
+				<Link supplementalText={phrases.t("footer-block.rss-link")} openInNewTab href={rssUrl}>
 					<Icon name="Rss" />
 				</Link>
 			) : (
@@ -116,9 +109,9 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 						? column.children.map((item) => (
 								<li className="footer-item" key={item._id}>
 									{item.node_type === "link" ? (
-										<Link href={item.url} name={item.display_name} />
+										<Link href={item.url}>{item.display_name}</Link>
 									) : (
-										<Link href={item._id} name={item.name} />
+										<Link href={item._id}>{item.name}</Link>
 									)}
 								</li>
 						  ))

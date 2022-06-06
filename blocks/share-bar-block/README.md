@@ -1,6 +1,6 @@
 # `@wpmedia/share-bar-block`
 
-This is the share bar block for the news theme, written as a functional component. Users can choose from five options to display on the share bar:
+This is the share bar block for displaying icons to allow the page to be shared, written as a functional component. Users can choose from five options to display on the share bar:
 
 1. email
 2. Facebook

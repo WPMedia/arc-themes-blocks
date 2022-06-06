@@ -26,6 +26,6 @@
 }
 
 .b-share-bar__email {
-	@include scss.block-properties("share-bar-envelope");
-	@include scss.block-components("share-bar-envelope");
+	@include scss.block-properties("share-bar-email");
+	@include scss.block-components("share-bar-email");
 }

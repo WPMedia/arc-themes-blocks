@@ -40,15 +40,3 @@ The share block will need the basic headline and website URL from the page's `gl
 
 **Note:** The `%{socialType}` value is taken from Internationalization fields in the
 [global-phrases-block](https://github.com/WPMedia/arc-themes-blocks/tree/arc-themes-release-version-2.0.1/blocks/global-phrases-block).
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**                                                     |
-| -------------- | ------------------------------------------------------------------- |
-| `window.open`  | A share window is opened when any of the share buttons are clicked. |
-
-### Event Listening
-
-Each button listens for a click event to open a share window.

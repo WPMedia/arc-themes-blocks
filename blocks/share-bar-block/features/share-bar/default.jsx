@@ -125,7 +125,6 @@ export const ShareBar = ({
 			className={BLOCK_CLASS_NAME}
 			alignment="center"
 			direction="vertical"
-			gap="8px"
 			justification="center"
 		>
 			{shareButtons}

@@ -1,0 +1,31 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-share-bar {
+	@include scss.block-properties("share-bar");
+	@include scss.block-components("share-bar");
+}
+
+.b-share-bar__facebook {
+	@include scss.block-properties("share-bar-facebook");
+	@include scss.block-components("share-bar-facebook");
+}
+
+.b-share-bar__linkedin {
+	@include scss.block-properties("share-bar-linkedin");
+	@include scss.block-components("share-bar-linkedin");
+}
+
+.b-share-bar__pinterest {
+	@include scss.block-properties("share-bar-pinterest");
+	@include scss.block-components("share-bar-pinterest");
+}
+
+.b-share-bar__twitter {
+	@include scss.block-properties("share-bar-twitter");
+	@include scss.block-components("share-bar-twitter");
+}
+
+.b-share-bar__email {
+	@include scss.block-properties("share-bar-email");
+	@include scss.block-components("share-bar-email");
+}

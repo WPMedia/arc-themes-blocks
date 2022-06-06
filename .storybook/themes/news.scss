@@ -686,6 +686,39 @@
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
 				),
+				share-bar: (
+					background: var(--background-color),
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: 0 var(--border-radius) var(--border-radius) 0,
+					display: none,
+					gap: var(--global-spacing-2),
+					left: 0,
+					padding: var(--global-spacing-4) 0,
+					position: fixed,
+					top: 200px,
+					components: (
+						button-medium: (
+							background: transparent,
+							border-width: 0,
+							padding: 0 var(--global-spacing-3),
+						),
+					),
+				),
+				share-bar-facebook: (
+					fill: #415993,
+				),
+				share-bar-linkedin: (
+					fill: #3076b0,
+				),
+				share-bar-pinterest: (
+					fill: #ad2526,
+				),
+				share-bar-twitter: (
+					fill: #6baae8,
+				),
+				share-bar-email: (
+					fill: #b61818,
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -891,6 +924,9 @@
 					padding: 0 var(--global-spacing-6) 0 0,
 					display: flex,
 				),
+				share-bar: (
+					display: flex,
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -957,6 +993,7 @@
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/share-bar-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

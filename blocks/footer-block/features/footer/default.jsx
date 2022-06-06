@@ -6,7 +6,6 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 import { PrimaryFont } from "@wpmedia/shared-styles";
-import "./footer.scss";
 import { Grid, Icon, Paragraph, Stack, Link } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-footer";
@@ -108,8 +107,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 						{socialButtons}
 					</Stack>
 				) : null}
-				<Paragraph>{copyrightText}</Paragraph>
-				<Stack className={`${BLOCK_CLASS_NAME}__login-container`} />
+				<Paragraph className={`${BLOCK_CLASS_NAME}__top-copyright-text`}>{copyrightText}</Paragraph>
 			</Stack>
 			<div className="row legacy-footer-row">
 				{/* The columns are 2D arrays of columns x column items. Iterate through both */}

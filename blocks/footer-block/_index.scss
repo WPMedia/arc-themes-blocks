@@ -6,9 +6,9 @@
 		@include scss.block-properties("footer-top-container");
 	}
 
-	&__copyright-text {
-		@include scss.block-components("footer-copyright-text");
-		@include scss.block-properties("footer-copyright-text");
+	&__top-copyright-text {
+		@include scss.block-components("footer-top-copyright-text");
+		@include scss.block-properties("footer-top-copyright-text");
 	}
 
 	&__social-links {

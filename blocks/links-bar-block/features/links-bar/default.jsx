@@ -4,7 +4,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Link } from "@wpmedia/arc-themes-components";
+import { Link, Separator } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-links-bar";
 
@@ -49,7 +49,14 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 									{item.name}
 								</Link>
 							)}
-							{content.children.length !== index + 1 && showSeparator ? "\u00a0 • \u00a0" : ""}
+							{/* {content.children.length !== index + 1 && showSeparator ? "\u00a0 • \u00a0" : ""} */}
+							{content.children.length !== index + 1 && showSeparator ? (
+								<span className={`${BLOCK_CLASS_NAME}__menu-link-seperator`}>
+									<Separator />
+								</span>
+							) : (
+								""
+							)}
 						</span>
 					))}
 			</nav>

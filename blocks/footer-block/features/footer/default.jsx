@@ -6,7 +6,7 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import getThemeStyle from "fusion:themes";
-
+import Link from "@wpmedia/links-bar-block";
 import {
 	FacebookAltIcon,
 	TwitterIcon,
@@ -16,9 +16,6 @@ import {
 } from "@wpmedia/engine-theme-sdk";
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import "./footer.scss";
-
-// switch to component link when footer converting to V2
-import Link from "./_children/link";
 
 export const StyledSocialContainer = styled.div`
 	border: ${(props) => (props.hasSocialLinks ? "1px" : "0")} solid ${(props) => props.primaryColor};

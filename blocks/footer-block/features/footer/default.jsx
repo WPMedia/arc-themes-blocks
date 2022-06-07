@@ -94,14 +94,14 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 
 	return (
 		<Grid className={BLOCK_CLASS_NAME}>
-			<Stack as="section" className={`${BLOCK_CLASS_NAME}__top-container`} direction="horizontal">
+			<section className={`${BLOCK_CLASS_NAME}__top-container`}>
 				{facebookPage || twitterUsername || rssUrl ? (
 					<Stack className={`${BLOCK_CLASS_NAME}__social-links`} direction="horizontal">
 						{socialButtons}
 					</Stack>
 				) : null}
-				<Paragraph className={`${BLOCK_CLASS_NAME}__top-copyright-text`}>{copyrightText}</Paragraph>
-			</Stack>
+				<Paragraph>{copyrightText}</Paragraph>
+			</section>
 			<div className="row legacy-footer-row">
 				{/* The columns are 2D arrays of columns x column items. Iterate through both */}
 				{footerColumns.map((column) => {

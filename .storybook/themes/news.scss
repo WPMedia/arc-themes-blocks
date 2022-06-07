@@ -456,6 +456,13 @@
 				),
 			),
 			blocks: (
+				article-tag: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -547,6 +554,51 @@
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
+				),
+				masthead: (
+					border-bottom: 2px solid var(--global-neutral-8),
+					color: var(--text-color),
+					display: none,
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-tiny),
+					gap: var(--global-spacing-4),
+				),
+				masthead-logo: (
+					display: flex,
+					justify-content: center,
+				),
+				masthead-logo-image: (
+					max-height: 64px,
+					object-fit: contain,
+					vertical-align: middle,
+				),
+				masthead-content: (
+					display: flex,
+					justify-content: space-evenly,
+				),
+				masthead-date: (
+					align-items: flex-end,
+					display: flex,
+					font-weight: var(--global-font-weight-7),
+					justify-content: flex-start,
+					flex: 1 1 0%,
+				),
+				masthead-tagline: (
+					align-items: flex-end,
+					display: flex,
+					flex: 1 1 0%,
+					text-align: center,
+				),
+				masthead-link: (
+					align-items: flex-end,
+					display: flex,
+					justify-content: flex-end,
+					flex: 1 1 0%,
+				),
+				masthead-divider: (
+					margin: 0,
+					padding: 0,
 				),
 				overline: (),
 				quad-chain: (
@@ -837,6 +889,9 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
+				masthead: (
+					display: flex,
+				),
 				quad-chain: (
 					components: (
 						stack: (
@@ -937,12 +992,14 @@
 	)
 );
 
+@use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/footer-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/masthead-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";

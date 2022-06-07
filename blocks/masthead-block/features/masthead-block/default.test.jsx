@@ -1,9 +1,6 @@
 import React from "react";
-import { mount } from "enzyme";
-import getThemeStyle from "fusion:themes";
+import { render, screen } from "@testing-library/react";
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import { localizeDate } from "@wpmedia/engine-theme-sdk";
 import Masthead from "./default";
 
 const mockContextObj = {
@@ -19,49 +16,34 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 }));
 
 describe("the masthead block", () => {
-	getProperties.mockImplementation(() => ({
-		dateLocalization: {
-			language: "en",
-			timeZone: "America/New_York",
-			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
-			dateFormat: "LLLL d, yyyy",
-		},
-	}));
 	useFusionContext.mockImplementation(() => mockContextObj);
-	getThemeStyle.mockImplementation(() => ({
-		"primary-font-family": "Papyrus",
-	}));
-	localizeDate.mockImplementation(() => new Date().toDateString());
 
 	it("hides image if none passed in", () => {
-		const wrapper = mount(<Masthead customFields={{ logoURL: "" }} />);
+		render(<Masthead customFields={{ logoURL: "" }} />);
 
-		expect(wrapper.find("img").length).toEqual(0);
+		expect(screen.queryByRole("img")).toBeNull();
 	});
-	it("shows image if passed in", () => {
-		const wrapper = mount(<Masthead customFields={{ logoURL: "something.jpg" }} />);
 
-		expect(wrapper.find("img").length).toEqual(1);
+	it("shows image if passed in", () => {
+		render(<Masthead customFields={{ logoURL: "something.jpg" }} />);
+
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("hides promo if no promo link text with link", () => {
-		const wrapper = mount(
-			<Masthead customFields={{ promoLinkText: "", promoLinkURL: "google.com" }} />
-		);
+		render(<Masthead customFields={{ promoLinkText: "", promoLinkURL: "google.com" }} />);
 
-		expect(wrapper.find("a").length).toEqual(0);
+		expect(screen.queryByRole("link")).toBeNull();
 	});
 
 	it("hides promo if no promo url text with text", () => {
-		const wrapper = mount(
-			<Masthead customFields={{ promoLinkText: "the facebook", promoLinkURL: "" }} />
-		);
+		render(<Masthead customFields={{ promoLinkText: "the facebook", promoLinkURL: "" }} />);
 
-		expect(wrapper.find("a").length).toEqual(0);
+		expect(screen.queryByText("the facebook")).not.toBeTruthy();
 	});
 
 	it("shows promo if  promo url text with text", () => {
-		const wrapper = mount(
+		render(
 			<Masthead
 				customFields={{
 					promoLinkText: "the facebook",
@@ -70,21 +52,23 @@ describe("the masthead block", () => {
 			/>
 		);
 
-		expect(wrapper.find("a").length).toEqual(1);
+		expect(screen.queryByText("the facebook")).toBeTruthy();
 	});
+
 	it("shows text if showdate is true", () => {
-		const wrapper = mount(<Masthead customFields={{ showDate: true }} />);
+		render(<Masthead customFields={{ showDate: true }} />);
 
-		expect(wrapper.find("div p").text().length > 0).toEqual(true);
+		expect(screen.queryByText(new Date().toDateString())).toBeTruthy();
 	});
-	it("does not show text if showdate is false", () => {
-		const wrapper = mount(<Masthead customFields={{ showDate: false }} />);
 
-		expect(wrapper.text()).toEqual("");
+	it("does not show text if showdate is false", () => {
+		render(<Masthead customFields={{ showDate: false }} />);
+
+		expect(screen.queryByText(new Date().toDateString())).not.toBeTruthy();
 	});
 
 	it("shows tagline", () => {
-		const wrapper = mount(<Masthead customFields={{ tagLine: "If it bleeds, it leads" }} />);
-		expect(wrapper.text()).toEqual("If it bleeds, it leads");
+		render(<Masthead customFields={{ tagLine: "Tag Line text" }} />);
+		expect(screen.queryByText("Tag Line text")).toBeTruthy();
 	});
 });

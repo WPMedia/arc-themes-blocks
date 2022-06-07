@@ -2,11 +2,12 @@
   "name": "@wpmedia/masthead-block",
   "version": "5.15.0",
   "description": "Masthead – Arc Block",
-  "author": "Jack Howard <jack.howard@washpost.com>",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+    "_index.scss",
     "features"
   ],
   "publishConfig": {
@@ -14,14 +15,8 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
+    "@wpmedia/arc-themes-components": "*",
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "repository": {
     "type": "git",

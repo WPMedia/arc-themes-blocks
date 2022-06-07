@@ -49,14 +49,11 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 									{item.name}
 								</Link>
 							)}
-							{/* {content.children.length !== index + 1 && showSeparator ? "\u00a0 • \u00a0" : ""} */}
 							{content.children.length !== index + 1 && showSeparator ? (
 								<span className={`${BLOCK_CLASS_NAME}__menu-link-seperator`}>
 									<Separator />
 								</span>
-							) : (
-								""
-							)}
+							) : null}
 						</span>
 					))}
 			</nav>

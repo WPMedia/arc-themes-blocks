@@ -2,14 +2,14 @@
   "name": "@wpmedia/overline-block",
   "version": "5.16.0",
   "description": "Fusion themes block containing an overline block.",
-  "author": "Beltran Caliz <beltran.caliz@washpost.com>",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
-    "features",
-    "chains",
-    "layouts"
+    "_index.scss",
+    "intl.json",
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -25,8 +25,7 @@
     "lint": "eslint --ext js --ext jsx features"
   },
   "peerDependencies": {
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/arc-themes-components": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

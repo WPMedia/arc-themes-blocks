@@ -1,39 +1,29 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import styled from "styled-components";
 import { useFusionContext } from "fusion:context";
-import getThemeStyle from "fusion:themes";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { LinkBackgroundHover } from "@wpmedia/news-theme-css/js/styled/linkHovers";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import "./tags.scss";
+import { isServerSide, Pill, Stack } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
-const Tags = styled(LinkBackgroundHover)`
-	background-color: ${(props) => props.primaryColor};
-`;
+const BLOCK_CLASS_NAME = "b-article-tag";
 
-export const ArticleTagItems = ({ content, arcSite }) => {
-	const { "primary-color": primaryColor } = getThemeStyle(arcSite);
-	const defaultBackgroundColor = "#14689A";
+export const ArticleTagItems = ({ content }) => {
 	const { taxonomy: { tags = [] } = {} } = content;
 
 	return tags.length ? (
-		<PrimaryFont as="div" className="tags-holder">
+		<Stack className={BLOCK_CLASS_NAME} direction="horizontal" wrap="wrap" justification="center">
 			{tags.map((tag) => {
-				const slug = tag.slug || "#";
-				const href = slug !== "#" ? encodeURI(`/tags/${slug}/`) : "#";
+				// fallback to "" because some tags don't have a slug
+				const { slug = "" } = tag;
+
+				const href = slug !== "" ? encodeURI(`/tags/${slug}/`) : "";
+
 				return (
-					<Tags
-						key={tag.text}
-						className="tags"
-						href={href}
-						primaryColor={primaryColor || defaultBackgroundColor}
-					>
+					<Pill key={tag.text} href={href}>
 						{tag.text}
-					</Tags>
+					</Pill>
 				);
 			})}
-		</PrimaryFont>
+		</Stack>
 	) : null;
 };
 

@@ -4,14 +4,9 @@ import getProperties from "fusion:properties";
 import { useFusionContext } from "fusion:context";
 import { localizeDate } from "@wpmedia/engine-theme-sdk";
 
-// styles
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import MastheadItemsContainer from "./_children/MastheadItemsContainer";
-import HeightConstrainedImageContainer from "./_children/HeightConstrainedImageContainer";
-import GenericDivider from "./_children/GenericDivider";
-import HeaderContainerHideMobile from "./_children/HeaderContainerHideMobile";
+import { Link, Paragraph, Stack } from "@wpmedia/arc-themes-components";
 
-import "./masthead-block.scss";
+const BLOCK_CLASS_NAME = "b-masthead";
 
 // takes in a date from parent
 export const MastheadPresentational = (props) => {
@@ -21,43 +16,28 @@ export const MastheadPresentational = (props) => {
 	} = props;
 
 	return (
-		<HeaderContainerHideMobile className="masthead-block-container">
-			{logoURL && (
-				<HeightConstrainedImageContainer className="masthead-block-logo">
-					<picture>
-						<img src={logoURL} alt="Masthead logo" />
-					</picture>
-				</HeightConstrainedImageContainer>
-			)}
-			<MastheadItemsContainer>
-				<div>
-					{showDate && (
-						<PrimaryFont as="p" className="masthead-block--text">
-							{displayDate}
-						</PrimaryFont>
-					)}
+		<Stack className={BLOCK_CLASS_NAME}>
+			{logoURL ? (
+				<div className={`${BLOCK_CLASS_NAME}__logo`}>
+					<img src={logoURL} alt="Masthead logo" />
 				</div>
-				<div>
-					{tagLine && (
-						<PrimaryFont as="p" className="masthead-block--text">
-							{tagLine}
-						</PrimaryFont>
-					)}
-				</div>
-				<div>
-					{promoLinkURL && promoLinkText && (
-						<PrimaryFont
-							as="a"
-							href={promoLinkURL}
-							className="masthead-block--text masthead-block--promo-link"
-						>
+			) : null}
+			<div className={`${BLOCK_CLASS_NAME}__content`}>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__date`}>
+					{showDate ? <>{displayDate}</> : null}
+				</Paragraph>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__tagline`}>
+					{tagLine ? <>{tagLine}</> : null}
+				</Paragraph>
+				<div className={`${BLOCK_CLASS_NAME}__link`}>
+					{promoLinkURL && promoLinkText ? (
+						<Link href={promoLinkURL} className="masthead-block--text masthead-block--promo-link">
 							{promoLinkText}
-						</PrimaryFont>
-					)}
+						</Link>
+					) : null}
 				</div>
-			</MastheadItemsContainer>
-			<GenericDivider color="#000A12" size={2} />
-		</HeaderContainerHideMobile>
+			</div>
+		</Stack>
 	);
 };
 

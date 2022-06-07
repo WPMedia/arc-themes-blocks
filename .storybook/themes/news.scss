@@ -354,6 +354,9 @@
 					height: var(--global-spacing-5),
 					width: var(--global-spacing-5),
 				),
+				image: (
+					max-width: 100%,
+				),
 				input: (
 					align-items: flex-start,
 					display: flex,

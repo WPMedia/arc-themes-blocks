@@ -1,0 +1,590 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+body.nav-open {
+	overflow-y: hidden;
+
+	.main {
+		z-index: -1;
+	}
+}
+
+.b-header-nav-chain {
+	align-items: center;
+	width: 100%;
+	position: sticky;
+	top: 0;
+	margin-bottom: 0;
+	z-index: 1;
+
+	.news-theme-navigation-bar {
+		@media screen and (max-width: 768px) {
+			height: 56px;
+		}
+		@media screen and (min-width: 768px) {
+			// May need a new "scroll" class here....but how to decide if it's set to scroll or not?
+			// height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+			height: 100px;
+		}
+		background-color: rgb(253, 222, 222);
+		transition: 0.5s;
+		z-index: 9;
+	}
+
+	.nav-logo {
+		img {
+			height: auto;
+			max-width: 240px;
+			width: auto;
+			transition: 0.5s;
+
+			@media screen and (max-width: 768px) {
+				max-height: 40px;
+				max-width: 100%;
+			}
+
+			@media screen and (min-width: 768px) {
+				// max-height: ${(props) => props.scrolled ? standardNavHeight - 16 : props.navHeight - 16}px;
+			}
+		}
+	}
+
+	@include scss.block-components("header-nav-chain");
+	@include scss.block-properties("header-nav-chain");
+}
+
+//$arrow-size: 10px;
+//$border-color-dull: rgba(255, 255, 255, 0.5);
+//$border-color-bright: rgba(255, 255, 255, 1);
+//$border-width: 1px;
+//$btn-size: 32px;
+//$btn-padding: 8px;
+//$nav-search-border-color: #dadada;
+//$overlay-z-index: 2;
+//$section-bg: #292929;
+//$section-width: 329px;
+//$top-nav-stylistic-margin: 13px;
+//$mouseover-link-preview-safe-area-height: 40px;
+
+.section-menu--bottom-placeholder {
+	// on desktop, on the left, the bottom link
+	// is not visible on hover over other links
+	height: 40px;
+	background-color: #292929;
+
+	// need to hide that hover and active color
+	&:hover,
+	&:active {
+		// keep the same color unlike other list items
+		background: #292929 !important;
+	}
+}
+
+@media screen and (max-width: 48rem) {
+	.section-menu--bottom-placeholder {
+		// ensure bottom item is visible on mobile
+		// height handles biggest notch on iphone 12 pro
+		height: 130px;
+		@supports (height: env(safe-area-inset-bottom)) {
+			height: calc(env(safe-area-inset-bottom) + 130px);
+		}
+	}
+}
+
+.nav-btn {
+	align-items: center;
+	border: 0;
+	height: 32px;
+	position: relative;
+	white-space: nowrap;
+	padding-left: 8px;
+	padding-right: 8px;
+
+	&.border {
+		transition: border 100ms linear;
+	}
+
+	&.transparent {
+		background-color: transparent;
+	}
+
+	&-dark {
+		span {
+			color: #fff;
+		}
+
+		svg > path {
+			fill: #fff;
+		}
+
+		&.border {
+			border: 1px solid rgba(255, 255, 255, 0.5);
+
+			&:hover {
+				border: 1px solid rgba(255, 255, 255, 1);
+			}
+		}
+	}
+
+	&-light {
+		span {
+			color: #575757;
+		}
+
+		svg > path {
+			fill: #575757;
+		}
+
+		&.border {
+			border: 1px solid #dadada;
+
+			&:hover {
+				border: 1px solid #dadada;
+			}
+		}
+	}
+}
+
+.nav-search {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	position: relative;
+
+	input {
+		border: 0;
+		border-radius: 4px !important;
+		box-shadow: none;
+		font-size: 0.9em;
+		line-height: 20px;
+		margin: 0;
+		padding: 0;
+		width: 0;
+	}
+
+	&.open {
+		input {
+			font-size: 16px;
+			height: 32px;
+			line-height: 24px;
+			padding: 4px 32px 4px 11px;
+			width: 100%;
+		}
+
+		button {
+			background: transparent;
+			border: transparent;
+		}
+
+		&.dark input {
+			border: 1px solid rgba(255, 255, 255, 1);
+		}
+
+		&.light input {
+			border: 1px solid #dadada;
+		}
+	}
+}
+
+.news-theme-navigation-container {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 20px;
+	position: relative;
+	flex-shrink: 0;
+
+	&.light {
+		border-bottom: 1px solid #dadada;
+	}
+
+	* {
+		display: flex;
+	}
+
+	> div {
+		align-items: center;
+		display: flex;
+		text-align: center;
+		margin-right: 16px;
+
+		&:last-child {
+			margin-right: 0;
+			flex-shrink: 0;
+		}
+	}
+
+	.nav-left,
+	.nav-right {
+		.nav-components--mobile {
+			display: none;
+			align-items: center;
+		}
+
+		.nav-components--desktop {
+			display: inherit;
+			align-items: center;
+		}
+
+		@media screen and (max-width: 48rem) {
+			.nav-components--mobile {
+				display: inherit;
+			}
+
+			.nav-components--desktop {
+				display: none;
+			}
+		}
+
+		.nav-widget {
+			margin-right: 16px;
+		}
+
+		.nav-widget:last-child {
+			margin-right: 0;
+		}
+	}
+
+	.nav-left {
+		justify-content: flex-start;
+		flex-shrink: 0;
+	}
+
+	.nav-right {
+		justify-content: flex-end;
+	}
+
+	.nav-logo {
+		justify-content: center;
+	}
+
+	.nav-logo.svg-logo {
+		flex: 0 1 auto;
+
+		img {
+			height: 100%;
+		}
+	}
+
+	.nav-logo-hidden {
+		opacity: 0;
+		transition: opacity 800ms ease, visibility 0s ease 800ms;
+		visibility: hidden;
+	}
+
+	.nav-logo-show {
+		opacity: 1;
+		transition: opacity 800ms ease, visibility 0s ease 0s;
+		visibility: visible;
+	}
+
+	&.logo {
+		&-center .nav-logo {
+			margin: 0 16px 0 16px;
+
+			a {
+				justify-content: center;
+			}
+		}
+
+		&-left {
+			.nav-logo {
+				justify-content: flex-start;
+
+				@media screen and (max-width: 48rem) {
+					flex: 1;
+				}
+
+				a {
+					justify-content: flex-start;
+				}
+			}
+
+			&:not(.horizontal-links) {
+				.nav-logo {
+					flex: 1;
+				}
+			}
+		}
+	}
+}
+
+.nav-sections {
+	background: rgba(25, 25, 25, 0);
+	flex-direction: column;
+	-ms-overflow-style: none;
+	position: absolute;
+	scrollbar-width: none;
+	top: 0;
+	width: 0;
+
+	z-index: 8;
+	@media screen and (max-width: 48rem) {
+		margin-top: 56px;
+	}
+	@media screen and (min-width: 48rem) {
+		// margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	@media screen and (max-width: 48rem) {
+		.subsection-container {
+			display: none;
+		}
+	}
+
+	.inner-drawer-nav {
+		background-color: #292929;
+		display: flex;
+		flex-direction: column;
+		transition: transform 300ms ease-in-out;
+		width: 329px;
+
+		.nav-menu {
+			.nav-widget {
+				.nav-search {
+					justify-content: flex-start;
+
+					input {
+						flex: 1;
+					}
+
+					&.open {
+						input {
+							height: 48px;
+						}
+
+						&.dark {
+							border: 0;
+						}
+					}
+				}
+			}
+
+			& > .nav-components {
+				&--mobile,
+				&--desktop {
+					& > .nav-widget {
+						margin-top: 16px;
+						padding: 0 20px;
+					}
+				}
+
+				&--mobile {
+					display: none;
+				}
+
+				&--desktop {
+					display: inherit;
+				}
+
+				@media screen and (max-width: 48rem) {
+					&--desktop {
+						display: none;
+					}
+
+					&--mobile {
+						display: inherit;
+					}
+				}
+			}
+		}
+	}
+
+	.section-menu {
+		margin-top: 13px;
+		padding: 0;
+
+		> li {
+			font-weight: bold;
+			list-style: none;
+			position: relative;
+			background-color: #292929;
+
+			> a {
+				padding: 0 16px 0 20px;
+			}
+
+			.subsection-anchor a,
+			> a {
+				align-items: center;
+				color: #fff;
+				display: block;
+				font-size: 16px;
+				justify-content: space-between;
+				line-height: 40px;
+				text-decoration: none;
+			}
+
+			&:hover,
+			&:active {
+				background: #575757;
+			}
+		}
+	}
+
+	&.open {
+		// dimmed background on desktop
+		background: rgba(25, 25, 25, 0.5);
+		// scroll and show vertical overflow when open
+		overflow-y: scroll;
+		transform: translate(0, 0);
+		width: 100%;
+
+		@media screen and (max-width: 48rem) {
+			// on mobile, show dark background everywhere
+			background: #292929;
+
+			.inner-drawer-nav {
+				width: 100vw;
+			}
+		}
+	}
+
+	&.closed {
+		// hide vertical overflow when closed
+		overflow-y: hidden;
+
+		.section-menu {
+			transition: height 100ms ease-in-out 600ms;
+		}
+
+		.inner-drawer-nav {
+			transform: translate(-329px, 0);
+		}
+	}
+
+	.subsection-container {
+		display: none;
+		flex-direction: column;
+		position: relative;
+
+		&.open {
+			display: flex;
+		}
+	}
+
+	.subsection-menu {
+		background: #fff;
+		list-style: none;
+		margin: 0;
+		padding: 4px 0;
+
+		> li {
+			> a {
+				color: #575757;
+				display: block;
+				font-size: 16px;
+				font-weight: bold;
+				line-height: 24px;
+				padding: 8px 16px 8px 20px;
+				text-decoration: none;
+
+				&:hover {
+					background-color: #dadada;
+				}
+			}
+		}
+	}
+
+	.subsection-anchor {
+		align-content: center;
+		cursor: pointer;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		line-height: 40px;
+		padding: 0 16px 0 20px;
+
+		svg {
+			transform: rotate(90deg);
+		}
+
+		&.open {
+			svg {
+				transform: rotate(-90deg);
+			}
+
+			path {
+				fill: #fff;
+			}
+		}
+
+		&:hover {
+			path {
+				fill: #fff;
+			}
+		}
+	}
+
+	.submenu-caret {
+		align-self: center;
+		appearance: none;
+		background: transparent;
+		border: 0;
+		display: flex;
+
+		path {
+			fill: #575757;
+		}
+	}
+}
+
+.horizontal-links-bar {
+	color: #000;
+
+	a {
+		color: #000;
+	}
+
+	&.light {
+		color: #000;
+	}
+
+	&.dark {
+		color: #fff;
+	}
+
+	align-items: center;
+	display: flex;
+	flex: 1 1 auto;
+	overflow: hidden;
+	text-align: left;
+	height: 100%;
+	width: auto;
+	flex-wrap: wrap;
+	margin-right: 16px;
+
+	@media screen and (max-width: 48rem) {
+		display: none;
+	}
+}
+
+.horizontal-links-menu {
+	align-items: center;
+	display: flex;
+	font-size: 14px;
+	height: 100%;
+	justify-content: center;
+
+	a {
+		color: #191919;
+		line-height: 14px;
+		margin: 8px 0;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+
+		&:active,
+		&:hover {
+			color: lighten(#191919, 40%);
+		}
+	}
+}
+
+.search-box--right-absolute-positioned {
+	position: absolute;
+	right: 0;
+}

@@ -1,21 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { PrimaryFont } from "@wpmedia/shared-styles";
 import Link from "./_children/link";
-
-import "./links-bar.scss";
-
-const ReadableTextNavigationBar = styled.nav`
-	color: ${(props) => props.color};
-
-	a {
-		color: ${(props) => props.color};
-	}
-`;
 
 const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDots, ariaLabel }) => {
 	const { id, arcSite } = useFusionContext();
@@ -51,7 +40,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
 	const readableContrastingColor = navBarColor === "light" ? "#000" : "#fff";
 
 	return (
-		<ReadableTextNavigationBar
+		<nav
 			key={id}
 			color={readableContrastingColor}
 			className="horizontal-links-bar"
@@ -68,7 +57,7 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
 						)}
 					</PrimaryFont>
 				))}
-		</ReadableTextNavigationBar>
+		</nav>
 	);
 };
 

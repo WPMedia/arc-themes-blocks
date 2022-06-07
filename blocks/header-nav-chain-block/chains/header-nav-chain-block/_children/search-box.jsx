@@ -10,8 +10,6 @@ import {
 	getNavSpecificSecondaryButtonTheme,
 } from "@wpmedia/shared-styles";
 
-import "./search-box.scss";
-
 export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
 	const { arcSite } = useFusionContext();
 	const { locale = "en", navBarBackground, navColor = "dark" } = getProperties(arcSite);

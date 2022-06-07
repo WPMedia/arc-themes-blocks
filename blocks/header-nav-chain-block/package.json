@@ -2,11 +2,12 @@
   "name": "@wpmedia/header-nav-chain-block",
   "version": "5.22.0",
   "description": "Fusion News Theme header nav chain block",
-  "author": "Jack Howard <jack.howard@washpost.com>",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+	"_index.scss",
     "chains",
     "intl.json"
   ],
@@ -28,7 +29,8 @@
     "@wpmedia/engine-theme-sdk": "*",
     "@wpmedia/news-theme-css": "*",
     "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+	"@wpmedia/arc-themes-components": "*"
   },
   "dependencies": {
     "focus-trap-react": "^8.4.2",

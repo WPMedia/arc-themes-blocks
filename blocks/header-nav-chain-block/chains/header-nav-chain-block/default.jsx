@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import styled from "styled-components";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -13,76 +12,30 @@ import NavLogo from "./_children/nav-logo";
 import HorizontalLinksBar from "./_children/horizontal-links/default";
 import NavSection from "./_children/nav-section";
 import MenuWidgets from "./_children/menu-widgets";
-// shares styles with header nav block
-// can modify styles in shared styles block
-import "@wpmedia/shared-styles/scss/_header-nav.scss";
 
-/* Global Constants */
-// Since these values are used to coordinate multiple components, I thought I'd make them variables
-// so we could just change the vars instead of multiple CSS values
-const standardNavHeight = 56;
-const navZIdx = 9;
-const sectionZIdx = navZIdx - 1;
+const BLOCK_CLASS_NAME = "b-header-nav-chain";
 
-// max-width 100% fills the available space on smaller viewports
-// max-width 240px is the biggest the icon will grow to on larger viewports
-/* Styled Components */
-const StyledNav = styled.nav`
-	align-items: center;
-	width: 100%;
-	position: sticky;
-	top: 0;
-	margin-bottom: 0;
-	z-index: 1;
+// const StyledWarning = styled.div`
+// 	background-color: #c30;
+// 	color: #fff;
+// 	display: flex;
+// 	align-self: flex-start;
+// 	padding: 6px;
+// `;
 
-	.news-theme-navigation-bar {
-		@media screen and (max-width: ${(props) => props.breakpoint}px) {
-			height: ${standardNavHeight}px;
-		}
-		@media screen and (min-width: ${(props) => props.breakpoint}px) {
-			height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-		}
-		background-color: ${(props) => props.navBarBackground};
-		transition: 0.5s;
-		z-index: ${navZIdx};
-	}
-
-	.nav-logo {
-		img {
-			height: auto;
-			max-width: 240px;
-			width: auto;
-			transition: 0.5s;
-
-			@media screen and (max-width: ${(props) => props.breakpoint}px) {
-				max-height: 40px;
-				max-width: 100%;
-			}
-			@media screen and (min-width: ${(props) => props.breakpoint}px) {
-				max-height: ${(props) =>
-					props.scrolled ? standardNavHeight - 16 : props.navHeight - 16}px;
-			}
-		}
-	}
-`;
-
-const StyledSectionDrawer = styled.div`
-	z-index: ${sectionZIdx};
-	@media screen and (max-width: ${(props) => props.breakpoint}px) {
-		margin-top: ${standardNavHeight}px;
-	}
-	@media screen and (min-width: ${(props) => props.breakpoint}px) {
-		margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-	}
-`;
-
-const StyledWarning = styled.div`
-	background-color: #c30;
-	color: #fff;
-	display: flex;
-	align-self: flex-start;
-	padding: 6px;
-`;
+const Warning = ({ children }) => (
+	<div
+		style={{
+			backgroundColor: "#c30",
+			color: "#fff",
+			display: "flex",
+			alignSelf: "flex-start",
+			padding: "6px",
+		}}
+	>
+		{children}
+	</div>
+);
 
 export function PresentationalNav(props) {
 	const {
@@ -111,14 +64,14 @@ export function PresentationalNav(props) {
 		primaryLogoAlt,
 	} = props;
 	return (
-		<StyledNav
+		<nav
 			id="main-nav"
-			className={navColorClass}
-			navBarBackground={backgroundColor}
-			navHeight={navHeight}
-			scrolled={scrolled}
-			// hard-coded to medium-breakpoint
-			breakpoint={mediumBreakpoint}
+			className={`${BLOCK_CLASS_NAME} ${navColorClass}`}
+			// navBarBackground={backgroundColor}
+			// navHeight={navHeight}
+			// scrolled={scrolled}
+			// // hard-coded to medium-breakpoint
+			// breakpoint={mediumBreakpoint}
 			aria-label={sectionAriaLabel}
 		>
 			<div
@@ -158,13 +111,10 @@ export function PresentationalNav(props) {
 				</NavSection>
 			</div>
 
-			<StyledSectionDrawer
+			<div
 				id="nav-sections"
 				className={`nav-sections ${isSectionDrawerOpen ? "open" : "closed"}`}
-				navHeight={navHeight}
-				scrolled={scrolled}
-				// hard-coded to medium breakpoint
-				breakpoint={mediumBreakpoint}
+				role="menubar"
 				onClick={closeDrawer}
 			>
 				<FocusTrap
@@ -213,14 +163,14 @@ export function PresentationalNav(props) {
 						</SectionNav>
 					</div>
 				</FocusTrap>
-			</StyledSectionDrawer>
+			</div>
 
 			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin && (
-				<StyledWarning>
+				<Warning>
 					In order to render horizontal links, the logo must be aligned to the left.
-				</StyledWarning>
+				</Warning>
 			)}
-		</StyledNav>
+		</nav>
 	);
 }
 /* Main Component */

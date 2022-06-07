@@ -3,7 +3,6 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { ChevronRightIcon } from "@wpmedia/engine-theme-sdk";
-import styled from "styled-components";
 import Link from "./link";
 
 function hasChildren(node) {
@@ -48,9 +47,23 @@ const isSamePath = (current, menuLink) => {
 };
 
 // $top-nav-stylistic-margin is the 13px variable in scss
-const StyledSectionMenuVariableHeight = styled.ul`
-	height: calc(100vh - ${(props) => props.navHeight}px - 13px);
-`;
+
+// TODO: This is need to be fixed properly -- instead of hardcoded
+// const StyledSectionMenuVariableHeight = styled.ul`
+// 	height: calc(100vh - ${(props) => props.navHeight}px - 13px);
+// `;
+
+// TODO: Defaulting to 100 until we figure out what to do with this navHeight prop
+const SectionMenuVariableHeight = ({ navHeight = 100, className, children }) => (
+	<ul
+		className={className}
+		style={{
+			height: `calc(100vh - ${navHeight}px - 13px)`,
+		}}
+	>
+		{children}
+	</ul>
+);
 
 /* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 // Disabled a11y eslint is valid here as the div isn't focusable
@@ -130,16 +143,15 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden }) => {
 
 export default ({ children = [], sections = [], isHidden = false, navHeight }) => {
 	const active = sections.filter((s) => !s.inactive);
-
 	return (
 		<>
 			{children}
-			<StyledSectionMenuVariableHeight navHeight={navHeight} className="section-menu">
+			<SectionMenuVariableHeight navHeight={navHeight} className="section-menu">
 				{active.map((item) => (
 					<SectionItem key={item._id} item={item} isHidden={isHidden} />
 				))}
 				<li className="section-menu--bottom-placeholder" />
-			</StyledSectionMenuVariableHeight>
+			</SectionMenuVariableHeight>
 		</>
 	);
 };

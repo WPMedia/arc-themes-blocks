@@ -1,7 +1,7 @@
 import React from "react";
 import unescapeHtml from "../shared/unescape-html";
 
-const Table = ({ element }) => {
+const Table = ({ element, classPrefix }) => {
 	const { header, rows } = element;
 
 	const tableHeaders = header.map((headerItem) => (
@@ -23,7 +23,7 @@ const Table = ({ element }) => {
 
 	return (
 		<div className="table-wrapper">
-			<table>
+			<table className={`${classPrefix}__table`}>
 				<thead>
 					<tr>{tableHeaders}</tr>
 				</thead>

@@ -202,8 +202,7 @@ describe("the article body Blockquote component", () => {
 		};
 
 		const { default: Quote } = require("./quote");
-		const wrapper = mount(<Quote element={blockquote} className="my-custom-classname" />);
-		expect(wrapper.find("blockquote.my-custom-classname").length).toBe(1);
+		const wrapper = mount(<Quote element={blockquote} />);
 		expect(wrapper.find("blockquote").find("p").length).toBe(2);
 		expect(wrapper.find("blockquote").find("span").length).toBe(1);
 	});

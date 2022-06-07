@@ -1,9 +1,9 @@
 import React from "react";
 
-import { PrimaryFont, SecondaryFont } from "@wpmedia/shared-styles";
+import { Paragraph, Stack } from "@wpmedia/arc-themes-components";
 import List from "./list";
 
-export default ({ element, className }) => {
+export default ({ className = "blockquote", classPrefix, element }) => {
 	const { content_elements: contentElements = [], citation = {}, _id: elementId } = element;
 
 	// Only allow text and list contentElement types
@@ -13,13 +13,7 @@ export default ({ element, className }) => {
 			contentItem.type === "text" &&
 			Object.prototype.hasOwnProperty.call(contentItem, "content")
 		) {
-			quoteItems.push(
-				<SecondaryFont
-					as="p"
-					key={contentItem._id}
-					dangerouslySetInnerHTML={{ __html: contentItem.content }}
-				/>
-			);
+			quoteItems.push(<Paragraph key={contentItem._id}>{contentItem.content}</Paragraph>);
 		}
 		if (contentItem.type === "list") {
 			const { list_type: listType, items: listItems } = contentItem;
@@ -35,20 +29,21 @@ export default ({ element, className }) => {
 		quoteItems.push(
 			// doesn't look like it has id
 			// via https://github.com/washingtonpost/ans-schema/search?p=2&q=citation&unscoped_q=citation
-			<PrimaryFont as="span" key={citation.content} className="citation-text">
+			<span key={citation.content} className={`${classPrefix}__citation`}>
 				&mdash; &nbsp;
 				{citation.content}
-			</PrimaryFont>
+			</span>
 		);
 	}
 
 	return (
-		<blockquote
+		<Stack
+			as="blockquote"
 			key={elementId}
-			className={className}
+			className={`${classPrefix}__${className}`}
 			cite={element.citation && element.citation.content}
 		>
 			{quoteItems}
-		</blockquote>
+		</Stack>
 	);
 };

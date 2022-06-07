@@ -176,7 +176,7 @@
 	$alias: (
 		// Font families
 		"font-family-primary": "Abel",
-		"font-family-secondary": "",
+		"font-family-secondary": "Georgia",
 		// Colors
 		"color-primary": var(--global-black),
 		"text-color": var(--global-neutral-8),
@@ -456,6 +456,170 @@
 				),
 			),
 			blocks: (
+				article-body: (
+					font-family: var(--font-family-secondary),
+					font-size: var(--global-font-size-5),
+					gap: var(--global-spacing-6),
+					components: (
+						link: (
+							color: var(--color-primary),
+						),
+						stack-divider-vertical: (
+							border-bottom-color: #dadada,
+						),
+						carousel: (),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+					),
+				),
+				article-body-blockquote: (
+					box-shadow: inset 5px 0 0 0 #1f2d3d,
+					font-style: italic,
+					gap: var(--global-spacing-6),
+					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
+					text-align: left,
+				),
+				article-body-citation: (
+					font-family: var(--font-family-primary),
+					font-style: normal,
+					font-size: 16px,
+				),
+				article-body-correction: (
+					box-shadow: inset 0 -1px 0 0 #dadada,
+					font-style: italic,
+					components: (
+						heading: (
+							text-transform: uppercase,
+						),
+					),
+				),
+				article-body-divider: (
+					height: 1px,
+				),
+				article-body-gallery: (
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-8),
+							width: var(--global-spacing-8),
+						),
+						carousel-button-next: (
+							background-color: transparent,
+							box-shadow: none,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+							box-shadow: none,
+						),
+						carousel-expand-autoplay-container: (
+							gap: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							background-color: transparent,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--global-font-size-3),
+							height: auto,
+							width: auto,
+						),
+						carousel-button-toggle-auto-play: (
+							background-color: transparent,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--global-font-size-3),
+							height: auto,
+							width: auto,
+						),
+						media-item: (
+							background-color: var(--global-neutral-9),
+							gap: 0,
+							justify-content: center,
+							width: 100%,
+						),
+						media-item-fig-caption: (
+							background-color: var(--global-white),
+							padding-top: var(--global-spacing-2),
+						),
+						image: (
+							align-self: center,
+							object-fit: contain,
+							min-height: 25vh,
+							max-height: 75vh,
+							max-width: 100%,
+						),
+					),
+				),
+				article-body-full-screen-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-stop-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-start-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-image: (),
+				article-body-image-float-left: (
+					width: 50%,
+					float: left,
+					margin-right: var(--global-spacing-5),
+				),
+				article-body-image-float-right: (
+					width: 50%,
+					float: right,
+					margin-right: var(--global-spacing-5),
+				),
+				article-body-interstitial-link: (
+					font-family: var(--font-family-secondary),
+					font-style: italic,
+					components: (
+						link: (
+							border-bottom: 1px solid var(--color-primary),
+							color: var(--color-primary),
+						),
+					),
+				),
+				article-body-table: (
+					text-align: center,
+					width: 100%,
+				),
+				article-body-table-thead: (
+					background-color: #eee,
+					border: 2px solid #dadada,
+				),
+				article-body-table-th: (
+					border: 1px solid #dadada,
+					font-weight: bold,
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-td: (
+					border: 1px solid #dadada,
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-pullquote: (
+					box-shadow: (
+						inset 0 -5px 0 0 #dadada,
+						inset 0 5px 0 0 #dadada,
+					),
+					gap: var(--global-spacing-6),
+					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
+					text-align: center,
+					components: (
+						paragraph: (
+							font-style: italic,
+							font-size: 26px,
+							font-weight: bold,
+						),
+					),
+				),
 				article-tag: (
 					components: (
 						stack: (
@@ -981,6 +1145,7 @@
 	)
 );
 
+@use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";

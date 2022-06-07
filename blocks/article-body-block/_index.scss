@@ -1,0 +1,101 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-article-body {
+	ul {
+		list-style-position: inside;
+		list-style-type: disc;
+	}
+
+	ol {
+		list-style-position: inside;
+		list-style-type: decimal;
+	}
+
+	&__blockquote {
+		@include scss.block-components("article-body-blockquote");
+		@include scss.block-properties("article-body-blockquote");
+	}
+
+	&__citation {
+		@include scss.block-components("article-body-citation");
+		@include scss.block-properties("article-body-citation");
+	}
+
+	&__correction {
+		@include scss.block-components("article-body-correction");
+		@include scss.block-properties("article-body-correction");
+	}
+
+	&__divider {
+		@include scss.block-components("article-body-divider");
+		@include scss.block-properties("article-body-divider");
+	}
+
+	&__gallery {
+		@include scss.block-components("article-body-gallery");
+		@include scss.block-properties("article-body-gallery");
+	}
+
+	&__full-screen-icon {
+		@include scss.block-components("article-body-full-screen-icon");
+		@include scss.block-properties("article-body-full-screen-icon");
+	}
+
+	&__start-icon {
+		@include scss.block-components("article-body-start-icon");
+		@include scss.block-properties("article-body-start-icon");
+	}
+
+	&__stop-icon {
+		@include scss.block-components("article-body-stop-icon");
+		@include scss.block-properties("article-body-stop-icon");
+	}
+
+	&__image {
+		@include scss.block-components("article-body-image");
+		@include scss.block-properties("article-body-image");
+	}
+
+	&__image-float-left {
+		@include scss.block-components("article-body-image-float-left");
+		@include scss.block-properties("article-body-image-float-left");
+	}
+
+	&__image-float-right {
+		@include scss.block-components("article-body-image-float-right");
+		@include scss.block-properties("article-body-image-float-right");
+	}
+
+	&__interstitial-link {
+		@include scss.block-components("article-body-interstitial-link");
+		@include scss.block-properties("article-body-interstitial-link");
+	}
+
+	&__pullquote {
+		@include scss.block-components("article-body-pullquote");
+		@include scss.block-properties("article-body-pullquote");
+	}
+
+	&__table {
+		thead {
+			@include scss.block-components("article-body-table-thead");
+			@include scss.block-properties("article-body-table-thead");
+		}
+
+		th {
+			@include scss.block-components("article-body-table-th");
+			@include scss.block-properties("article-body-table-th");
+		}
+
+		td {
+			@include scss.block-components("article-body-table-td");
+			@include scss.block-properties("article-body-table-td");
+		}
+
+		@include scss.block-components("article-body-table");
+		@include scss.block-properties("article-body-table");
+	}
+
+	@include scss.block-components("article-body");
+	@include scss.block-properties("article-body");
+}

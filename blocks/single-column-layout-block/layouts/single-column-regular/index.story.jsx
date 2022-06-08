@@ -24,16 +24,13 @@ const Component = ({ children }) => <div style={styles}>{children}</div>;
 const Footer = () => <div style={styles}>Footer</div>;
 
 export const oneChildInBody = () => (
-	<SingleColumnRegularLayout
-		children={[
-			Navigation,
-			null,
-			<>
-				<Component>Body 1</Component>
-			</>,
-			Footer,
-		]}
-	/>
+	<SingleColumnRegularLayout>
+		<Navigation />
+		<>
+			<Component>Body 1</Component>
+		</>
+		<Footer />
+	</SingleColumnRegularLayout>
 );
 
 export const childrenInBody = () => (
@@ -42,8 +39,8 @@ export const childrenInBody = () => (
 		<>
 			<Component>Body 1</Component>
 			<Component>Body 2</Component>
-			<Footer />
 		</>
+		<Footer />
 	</SingleColumnRegularLayout>
 );
 

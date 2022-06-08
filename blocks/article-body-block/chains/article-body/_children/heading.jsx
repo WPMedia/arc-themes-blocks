@@ -1,6 +1,6 @@
 import React from "react";
 
-const Heading = ({ element, classPrefix }) => {
+const Heading = ({ element, classPrefix = "" }) => {
 	const defaultHeaderLevel = 2;
 	const HeadingLevel = `h${element.level ? element.level : defaultHeaderLevel}`;
 

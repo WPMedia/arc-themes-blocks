@@ -20,7 +20,7 @@ describe("the article body Heading component", () => {
 		expect(wrapper.find("h3").length).toBe(1);
 		expect(wrapper.find("h3").text()).toMatch("Heading 3 - bold italic underline hyperlink");
 		expect(wrapper.find("h3").html()).toMatchInlineSnapshot(
-			`"<h3 class=\\"undefined__h3\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h3>"`
+			`"<h3 class=\\"__h3\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h3>"`
 		);
 	});
 
@@ -40,7 +40,7 @@ describe("the article body Heading component", () => {
 		const wrapper = mount(<Heading element={headingData} />);
 		expect(wrapper.find("h2").length).toBe(1);
 		expect(wrapper.find("h2").html()).toMatchInlineSnapshot(
-			`"<h2 class=\\"undefined__h2\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h2>"`
+			`"<h2 class=\\"__h2\\">Heading 3 - <b>bold</b> <i>italic</i> <u>underline</u> <a href=\\"https://www.washingtonpost.com/\\" target=\\"_blank\\">hyperlink</a></h2>"`
 		);
 		expect(wrapper.find("h2").text()).toMatch("Heading 3 - bold italic underline hyperlink");
 	});

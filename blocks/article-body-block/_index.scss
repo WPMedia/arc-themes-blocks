@@ -6,6 +6,10 @@
 		@include scss.block-properties("article-body-children");
 	}
 
+	a {
+		@include scss.block-properties("article-body-link");
+	}
+
 	&__h2 {
 		@include scss.block-properties("article-body-h2");
 	}

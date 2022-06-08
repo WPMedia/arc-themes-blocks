@@ -477,6 +477,9 @@
 						),
 					),
 				),
+				article-body-link: (
+					color: var(--color-primary),
+				),
 				article-body-h2: (
 					font-size: var(--global-font-size-11),
 				),
@@ -498,6 +501,11 @@
 					gap: var(--global-spacing-6),
 					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
 					text-align: left,
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-5),
+						),
+					),
 				),
 				article-body-children: (
 					margin-bottom: var(--global-spacing-6),
@@ -513,7 +521,7 @@
 					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-5),
+							font-size: var(--global-font-size-3),
 							text-transform: uppercase,
 						),
 						paragraph: (
@@ -676,7 +684,7 @@
 					components: (
 						paragraph: (
 							font-style: italic,
-							font-size: 26px,
+							font-size: var(--global-font-size-7),
 							font-weight: bold,
 						),
 					),
@@ -1093,6 +1101,27 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
+				),
+				article-body-correction: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				article-body-blockquote: (
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
+				article-body-pullquote: (
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-11),
+						),
+					),
 				),
 				double-chain: (
 					components: (

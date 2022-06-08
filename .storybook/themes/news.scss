@@ -508,7 +508,7 @@
 					),
 				),
 				article-body-children: (
-					margin-bottom: var(--global-spacing-6),
+					margin-bottom: var(--global-spacing-4),
 				),
 				article-body-citation: (
 					font-family: var(--font-family-primary),
@@ -1081,6 +1081,9 @@
 			blocks: (
 				article-body: (
 					font-size: var(--global-font-size-7),
+				),
+				article-body-children: (
+					margin-bottom: var(--global-spacing-5),
 				),
 				article-body-h2: (
 					font-size: var(--global-font-size-14),

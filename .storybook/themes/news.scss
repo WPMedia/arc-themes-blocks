@@ -363,7 +363,7 @@
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
 					border-radius: var(--border-radius),
-					padding: var(--global-spacing-2) var(--global-spacing-4),
+					padding: var(--global-spacing-4) var(--global-spacing-2),
 				),
 				input-small-input: (
 					padding: var(--global-spacing-1) var(--global-spacing-2),
@@ -490,6 +490,13 @@
 						),
 					),
 				),
+				article-tag: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -548,6 +555,53 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				masthead: (
+					border-bottom: 2px solid var(--global-neutral-8),
+					color: var(--text-color),
+					display: none,
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-tiny),
+					gap: var(--global-spacing-4),
+				),
+				masthead-logo: (
+					display: flex,
+					justify-content: center,
+				),
+				masthead-logo-image: (
+					max-height: 64px,
+					object-fit: contain,
+					vertical-align: middle,
+				),
+				masthead-content: (
+					display: flex,
+					justify-content: space-evenly,
+				),
+				masthead-date: (
+					align-items: flex-end,
+					display: flex,
+					font-weight: var(--global-font-weight-7),
+					justify-content: flex-start,
+					flex: 1 1 0%,
+				),
+				masthead-tagline: (
+					align-items: flex-end,
+					display: flex,
+					flex: 1 1 0%,
+					font-family: var(--font-family-primary),
+					text-align: center,
+				),
+				masthead-link: (
+					align-items: flex-end,
+					display: flex,
+					justify-content: flex-end,
+					flex: 1 1 0%,
+				),
+				masthead-divider: (
+					margin: 0,
+					padding: 0,
+				),
+				overline: (),
 				quad-chain: (
 					components: (
 						stack: (
@@ -665,6 +719,39 @@
 				),
 				right-rail-advanced-main-right-rail-bottom: (
 					grid-area: main-right-rail-bottom,
+				),
+				share-bar: (
+					background: var(--background-color),
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: 0 var(--border-radius) var(--border-radius) 0,
+					display: none,
+					gap: var(--global-spacing-2),
+					left: 0,
+					padding: var(--global-spacing-4) 0,
+					position: fixed,
+					top: 200px,
+					components: (
+						button-medium: (
+							background: transparent,
+							border-width: 0,
+							padding: 0 var(--global-spacing-3),
+						),
+					),
+				),
+				share-bar-facebook: (
+					fill: #415993,
+				),
+				share-bar-linkedin: (
+					fill: #3076b0,
+				),
+				share-bar-pinterest: (
+					fill: #ad2526,
+				),
+				share-bar-twitter: (
+					fill: #6baae8,
+				),
+				share-bar-email: (
+					fill: #b61818,
 				),
 				single-chain: (
 					components: (
@@ -822,6 +909,9 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
+				masthead: (
+					display: flex,
+				),
 				quad-chain: (
 					components: (
 						stack: (
@@ -866,6 +956,9 @@
 				right-rail-advanced-main-interior-item: (
 					border-right: 1px solid #dadada,
 					padding: 0 var(--global-spacing-6) 0 0,
+					display: flex,
+				),
+				share-bar: (
 					display: flex,
 				),
 				single-chain: (
@@ -923,15 +1016,19 @@
 );
 
 @use "../../blocks/alert-bar-block";
+@use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/masthead-block";
+@use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
+@use "../../blocks/share-bar-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

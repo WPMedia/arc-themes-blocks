@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-article-tag {
+	@include scss.block-components("article-tag");
+	@include scss.block-properties("article-tag");
+}

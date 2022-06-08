@@ -2105,7 +2105,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			expect(wrapper.find("article").find("p.body-copyright").last().text()).toEqual(
+			expect(wrapper.find("article").find(".b-article-body__copyright").last().text()).toEqual(
 				"Copyright 2021 - Copyright Holder"
 			);
 		});
@@ -2166,7 +2166,7 @@ describe("article-body chain", () => {
 
 			const wrapper = mount(<ArticleBodyChain />);
 
-			expect(wrapper.find("article").find("p.body-paragraph").length).toEqual(1);
+			expect(wrapper.find("article").find("p").length).toEqual(1);
 		});
 		it("should not render text type if no content", () => {
 			useFusionContext.mockImplementation(() => ({

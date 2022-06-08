@@ -3,17 +3,17 @@
 .b-links-bar {
 	&__menu {
 		a {
-			@include scss.block-components("links-bar__menu-link");
-			@include scss.block-properties("links-bar__menu-link");
+			@include scss.block-components("links-bar-menu-link");
+			@include scss.block-properties("links-bar-menu-link");
 		}
 
 		span {
-			@include scss.block-components("links-bar__menu-link-seperator");
-			@include scss.block-properties("links-bar__menu-link-seperator");
+			@include scss.block-components("links-bar-menu-link-seperator");
+			@include scss.block-properties("links-bar-menu-link-seperator");
 		}
 
-		@include scss.block-components("links-bar__menu");
-		@include scss.block-properties("links-bar__menu");
+		@include scss.block-components("links-bar-menu");
+		@include scss.block-properties("links-bar-menu");
 	}
 
 	@include scss.block-components("links-bar");

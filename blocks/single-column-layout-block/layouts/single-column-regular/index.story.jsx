@@ -23,22 +23,53 @@ const Navigation = () => <div style={styles}>Navigation</div>;
 const Component = ({ children }) => <div style={styles}>{children}</div>;
 const Footer = () => <div style={styles}>Footer</div>;
 
-export const layoutWithOneChild = () => (
+export const oneChildInBody = () => (
+	<SingleColumnRegularLayout
+		children={[
+			Navigation,
+			null,
+			<>
+				<Component>Body 1</Component>
+			</>,
+			Footer,
+		]}
+	/>
+);
+
+export const childrenInBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
 		<>
-			<Component>Main 1</Component>
+			<Component>Body 1</Component>
+			<Component>Body 2</Component>
+			<Footer />
+		</>
+	</SingleColumnRegularLayout>
+);
+
+export const oneChildInFullWidthAndBody = () => (
+	<SingleColumnRegularLayout>
+		<Navigation />
+		<>
+			<Component>Body 1</Component>
+		</>
+		<>
+			<Component>Full Width 1</Component>
 		</>
 		<Footer />
 	</SingleColumnRegularLayout>
 );
 
-export const layoutWithTwoChildren = () => (
+export const childrenInFullWidthAndBody = () => (
 	<SingleColumnRegularLayout>
 		<Navigation />
 		<>
-			<Component>Main 1</Component>
-			<Component>Main 2</Component>
+			<Component>Body 1</Component>
+			<Component>Body 2</Component>
+		</>
+		<>
+			<Component>Full Width 1</Component>
+			<Component>Full Width 2</Component>
 		</>
 		<Footer />
 	</SingleColumnRegularLayout>

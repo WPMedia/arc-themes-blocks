@@ -212,7 +212,7 @@
 		"body-line-height-small": var(--global-line-height-2),
 		// body : tiny
 		"body-font-weight-tiny": var(--global-font-weight-4),
-		"body-font-size-tiny": var(--global-font-size-1),
+		"body-font-size-tiny": var(--global-font-size-2),
 		"body-line-height-tiny": var(--global-line-height-1),
 		// Layout
 		"layout-max-width": 1600,
@@ -461,7 +461,7 @@
 			blocks: (
 				article-body: (
 					font-family: var(--font-family-secondary),
-					font-size: var(--global-font-size-5),
+					font-size: var(--global-font-size-4),
 					components: (
 						link: (
 							color: var(--color-primary),

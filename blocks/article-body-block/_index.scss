@@ -1,14 +1,37 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-article-body {
+	> * {
+		@include scss.block-components("article-body-children");
+		@include scss.block-properties("article-body-children");
+	}
+
+	&__h2 {
+		@include scss.block-properties("article-body-h2");
+	}
+
+	&__h3 {
+		@include scss.block-properties("article-body-h3");
+	}
+
+	&__h4 {
+		@include scss.block-properties("article-body-h4");
+	}
+
+	&__h5 {
+		@include scss.block-properties("article-body-h5");
+	}
+
+	&__h6 {
+		@include scss.block-properties("article-body-h6");
+	}
+
 	ul {
-		list-style-position: inside;
-		list-style-type: disc;
+		@include scss.block-properties("article-body-ul");
 	}
 
 	ol {
-		list-style-position: inside;
-		list-style-type: decimal;
+		@include scss.block-properties("article-body-ol");
 	}
 
 	&__blockquote {
@@ -24,6 +47,11 @@
 	&__correction {
 		@include scss.block-components("article-body-correction");
 		@include scss.block-properties("article-body-correction");
+	}
+
+	&__copyright {
+		@include scss.block-components("article-body-copyright");
+		@include scss.block-properties("article-body-copyright");
 	}
 
 	&__divider {

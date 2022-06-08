@@ -1544,9 +1544,8 @@ describe("article-body chain", () => {
 				"Australia's great ocean road is home to the kind of stuff you see in magazines and always wish you could visit one day: Twelve Apostles, Koalas, Kangaroos, surf towns, Bells Beach and Point Break."
 			);
 			expect(figureEl.prop("title")).toMatch("Australia surf trip");
-			// const vanityCredits = figureEl.prop("vanityCredits");
-			// expect(vanityCredits?.by).toHaveLength(0);
-			// expect(vanityCredits?.affiliation).toHaveLength(0);
+			const authorCredits = figureEl.prop("credit");
+			expect(authorCredits).not.toBeTruthy();
 		});
 
 		it("should override photographer and credit by using vanity_credits", () => {
@@ -1677,7 +1676,7 @@ describe("article-body chain", () => {
 			);
 			expect(figureEl.prop("title")).toMatch("Australia surf trip");
 			const authorCredits = figureEl.prop("credit");
-			expect(authorCredits).toEqual("(Brett Danielsen/Death to Stock Photo)");
+			expect(authorCredits).toEqual("(Here's my vanity photographer/Here's my vanity credit)");
 		});
 
 		it("should render a left float if position left for an image", () => {

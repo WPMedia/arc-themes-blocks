@@ -16,7 +16,6 @@ import {
 	Link,
 	MediaItem,
 	Paragraph,
-	Stack,
 	Video,
 } from "@wpmedia/arc-themes-components";
 
@@ -47,18 +46,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
-				<Paragraph
-					key={key}
-					className="body-paragraph"
-					dangerouslySetInnerHTML={{ __html: content }}
-				/>
+				<Paragraph key={key} dangerouslySetInnerHTML={{ __html: content }} />
 			) : null;
 		}
 		case "copyright": {
 			return content && content.length > 0 ? (
 				<Paragraph
 					key={key}
-					className="body-copyright"
+					className={`${BLOCK_CLASS_NAME}__copyright`}
 					dangerouslySetInnerHTML={{ __html: content }}
 				/>
 			) : null;
@@ -75,7 +70,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				caption,
 				credits,
 				alt_text: altText,
-				// vanity_credits: vanityCredits,
+				vanity_credits: vanityCredits,
 				// alignment not always present
 				alignment = "",
 				additional_properties: additionalProperties = {},
@@ -99,8 +94,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 
 			if (url) {
 				const ArticleBodyImage = () => <Image src={url} alt={altText} />;
-				const formattedCredits = formatCredits(credits);
-				// vanityCredits need to be accounted for
+				const formattedCredits = formatCredits(vanityCredits || credits);
 
 				const ArticleBodyImageContainer = ({ children }) => (
 					<MediaItem
@@ -193,7 +187,9 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		}
 
 		case "header":
-			return item.content && item.content.length > 0 ? <Header key={key} element={item} /> : null;
+			return item.content && item.content.length > 0 ? (
+				<Header key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
+			) : null;
 
 		case "oembed_response": {
 			return item.raw_oembed ? <Oembed key={key} element={item} /> : null;
@@ -233,6 +229,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					<Carousel
 						id={key}
 						className={`${BLOCK_CLASS_NAME}__gallery`}
+						label={item?.description?.basic || "Gallery"}
 						slidesToShow={1}
 						autoplayPhraseLabels={{
 							start: phrases.t("global.gallery-autoplay-label-start"),
@@ -264,13 +261,14 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						{item.content_elements.map((i, itemIndex) => (
 							<Carousel.Item
 								label={phrases.t("global.gallery-page-count-text", { itemIndex, total })}
+								key={`gallery-item-${i.url}`}
 							>
 								<MediaItem
 									caption={!hideGalleryCaption ? i.caption : null}
 									credit={!hideGalleryCredits ? formatCredits(i.credits) : null}
 									title={!hideGalleryTitle ? i.subtitle : null}
 								>
-									<Image src={i.url} alt={i.alt_text} width="800" />
+									<Image src={i.url} alt={i.alt_text} width={800} />
 								</MediaItem>
 							</Carousel.Item>
 						))}
@@ -347,11 +345,7 @@ export const ArticleBodyChainPresentation = ({ children, customFields = {}, cont
 			: []),
 	];
 
-	return (
-		<Stack as="article" className={BLOCK_CLASS_NAME}>
-			{articleBody}
-		</Stack>
-	);
+	return <article className={BLOCK_CLASS_NAME}>{articleBody}</article>;
 };
 
 const ArticleBodyChain = ({ children, customFields = {} }) => {

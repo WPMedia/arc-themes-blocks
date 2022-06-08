@@ -462,13 +462,13 @@
 				article-body: (
 					font-family: var(--font-family-secondary),
 					font-size: var(--global-font-size-5),
-					gap: var(--global-spacing-6),
 					components: (
 						link: (
 							color: var(--color-primary),
 						),
-						stack-divider-vertical: (
-							border-bottom-color: #dadada,
+						paragraph: (
+							display: block,
+							overflow: initial,
 						),
 						carousel: (),
 						carousel-track: (
@@ -477,12 +477,30 @@
 						),
 					),
 				),
+				article-body-h2: (
+					font-size: var(--global-font-size-11),
+				),
+				article-body-h3: (
+					font-size: var(--global-font-size-10),
+				),
+				article-body-h4: (
+					font-size: var(--global-font-size-9),
+				),
+				article-body-h5: (
+					font-size: var(--global-font-size-7),
+				),
+				article-body-h6: (
+					font-size: var(--global-font-size-5),
+				),
 				article-body-blockquote: (
 					box-shadow: inset 5px 0 0 0 #1f2d3d,
 					font-style: italic,
 					gap: var(--global-spacing-6),
 					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
 					text-align: left,
+				),
+				article-body-children: (
+					margin-bottom: var(--global-spacing-6),
 				),
 				article-body-citation: (
 					font-family: var(--font-family-primary),
@@ -492,13 +510,19 @@
 				article-body-correction: (
 					box-shadow: inset 0 -1px 0 0 #dadada,
 					font-style: italic,
+					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
+							font-size: var(--global-font-size-5),
 							text-transform: uppercase,
+						),
+						paragraph: (
+							color: var(--global-neutral-6),
 						),
 					),
 				),
 				article-body-divider: (
+					background-color: #dadada,
 					height: 1px,
 				),
 				article-body-gallery: (
@@ -555,6 +579,14 @@
 					height: var(--global-spacing-4),
 					width: var(--global-spacing-4),
 				),
+				article-body-ul: (
+					list-style-position: inside,
+					list-style-type: disc,
+				),
+				article-body-ol: (
+					list-style-position: inside,
+					list-style-type: decimal,
+				),
 				article-body-stop-icon: (
 					fill: var(--text-color),
 					height: var(--global-spacing-4),
@@ -574,7 +606,7 @@
 				article-body-image-float-right: (
 					width: 50%,
 					float: right,
-					margin-right: var(--global-spacing-5),
+					margin-left: var(--global-spacing-5),
 				),
 				article-body-interstitial-link: (
 					font-family: var(--font-family-secondary),
@@ -1008,6 +1040,9 @@
 				),
 			),
 			blocks: (
+				article-body: (
+					font-size: var(--global-font-size-7),
+				),
 				double-chain: (
 					components: (
 						stack: (

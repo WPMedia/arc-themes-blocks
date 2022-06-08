@@ -823,21 +823,13 @@
 					gap: 0,
 				),
 				links-bar: (
-					align-items: flex-start,
-					text-align: left,
-					width: 100%,
-				),
-				links-bar__menu: (
-					padding: var(--global-spacing-8) 0,
+					display: flex,
+					justify-content: center,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				links-bar__menu-link: (
-					line-height: var(--global-line-height-4),
-					margin: var(--global-spacing-8) 0,
-					text-align: center,
 					text-decoration: none,
-				),
-				links-bar__menu-link-seperator: (
-					margin: 0 var(--global-spacing-2),
 				),
 			),
 		),
@@ -994,20 +986,13 @@
 					),
 				),
 				links-bar: (
-					align-items: flex-start,
-					text-align: center,
-					width: 100%,
-				),
-				links-bar__menu: (
-					padding: var(--global-spacing-2) 0,
+					display: flex,
+					justify-content: center,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				links-bar__menu-link: (
-					line-height: var(--global-line-height-4),
-					text-align: center,
 					text-decoration: none,
-				),
-				links-bar__menu-link-seperator: (
-					margin: 0 var(--global-spacing-2),
 				),
 			),
 		),

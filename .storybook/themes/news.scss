@@ -541,6 +541,7 @@
 						),
 						carousel-button-enter-full-screen: (
 							background-color: transparent,
+							border: none,
 							box-shadow: none,
 							color: var(--text-color),
 							font-size: var(--global-font-size-3),
@@ -578,6 +579,8 @@
 					),
 				),
 				article-body-gallery-additional-next: (
+					border: none,
+					display: none,
 					height: var(--global-spacing-6),
 					width: var(--global-spacing-6),
 					components: (
@@ -589,6 +592,8 @@
 					),
 				),
 				article-body-gallery-additional-previous: (
+					border: none,
+					display: none,
 					height: var(--global-spacing-6),
 					width: var(--global-spacing-6),
 					components: (
@@ -1082,6 +1087,12 @@
 				),
 				article-body-h6: (
 					font-size: var(--global-font-size-7),
+				),
+				article-body-gallery-additional-next: (
+					display: block,
+				),
+				article-body-gallery-additional-previous: (
+					display: block,
 				),
 				double-chain: (
 					components: (

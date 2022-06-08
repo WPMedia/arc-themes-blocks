@@ -231,6 +231,16 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						className={`${BLOCK_CLASS_NAME}__gallery`}
 						label={item?.description?.basic || "Gallery"}
 						slidesToShow={1}
+						additionalNextButton={
+							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-next`}>
+								<Icon name="ChevronRight" />
+							</button>
+						}
+						additionalPreviousButton={
+							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-previous`}>
+								<Icon name="ChevronLeft" />
+							</button>
+						}
 						autoplayPhraseLabels={{
 							start: phrases.t("global.gallery-autoplay-label-start"),
 							stop: phrases.t("global.gallery-autoplay-label-stop"),
@@ -243,6 +253,8 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 								{phrases.t("global.gallery-expand-button")}
 							</button>
 						}
+						showAdditionalSlideControls
+						showLabel
 						startAutoplayIcon={<Icon name="Play" className={`${BLOCK_CLASS_NAME}__start-icon`} />}
 						startAutoplayText={phrases.t("global.gallery-autoplay-button")}
 						stopAutoplayIcon={<Icon name="Pause" className={`${BLOCK_CLASS_NAME}__stop-icon`} />}

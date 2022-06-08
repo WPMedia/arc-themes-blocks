@@ -471,6 +471,9 @@
 							overflow: initial,
 						),
 						carousel: (),
+						carousel-actions: (
+							display: flex,
+						),
 						carousel-track: (
 							gap: initial,
 							max-width: initial,

@@ -457,29 +457,36 @@
 			),
 			blocks: (
 				alert-bar: (
-					align-items: center,
-					background-color: var(--background-color-danger),
+					align-items: flex-start,
+					background-color: var(--global-red-4),
 					display: flex,
 					flex-wrap: nowrap,
 					justify-content: space-between,
-					padding-left: var(--global-spacing-4),
 					line-height: var(--global-line-height-9),
 					components: (
 						button-default: (
 							background: none,
 							border: none,
-							color: var(--text-color-danger),
 							flex: 0 0 auto,
 						),
+						button-large: (
+							margin-bottom: var(--global-spacing-1),
+							margin-top: var(--global-spacing-1),
+						),
 						link: (
-							color: var(--text-color-danger),
-							display: block,
+							color: var(--global-white),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-2),
-							overflow: hidden,
+							line-height: var(--global-line-height-3),
+							padding-bottom: var(--global-spacing-5),
+							padding-left: var(--global-spacing-4),
+							padding-right: var(--global-spacing-5),
+							padding-top: var(--global-spacing-5),
 							text-decoration: none,
-							text-overflow: ellipsis,
-							white-space: nowrap,
+						),
+						icon: (
+							fill: var(--global-white),
 						),
 					),
 				),
@@ -911,6 +918,7 @@
 	)
 );
 
+@use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/quilted-image-block";

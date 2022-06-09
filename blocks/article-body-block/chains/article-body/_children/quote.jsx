@@ -3,8 +3,9 @@ import React from "react";
 import { Paragraph, Stack } from "@wpmedia/arc-themes-components";
 import List from "./list";
 
-export default ({ className = "blockquote", classPrefix, element }) => {
+export default ({ type = "blockquote", classPrefix, element }) => {
 	const { content_elements: contentElements = [], citation = {}, _id: elementId } = element;
+	const className = classPrefix ? `${classPrefix}__${type}` : null;
 
 	// Only allow text and list contentElement types
 	const quoteItems = [];
@@ -26,10 +27,11 @@ export default ({ className = "blockquote", classPrefix, element }) => {
 		citation.content !== undefined &&
 		citation.content !== ""
 	) {
+		const citeClassName = classPrefix ? `${classPrefix}__citation` : null;
 		quoteItems.push(
 			// doesn't look like it has id
 			// via https://github.com/washingtonpost/ans-schema/search?p=2&q=citation&unscoped_q=citation
-			<span key={citation.content} className={`${classPrefix}__citation`}>
+			<span key={citation.content} className={citeClassName}>
 				&mdash; &nbsp;
 				{citation.content}
 			</span>
@@ -40,7 +42,7 @@ export default ({ className = "blockquote", classPrefix, element }) => {
 		<Stack
 			as="blockquote"
 			key={elementId}
-			className={`${classPrefix}__${className}`}
+			className={className}
 			cite={element.citation && element.citation.content}
 		>
 			{quoteItems}

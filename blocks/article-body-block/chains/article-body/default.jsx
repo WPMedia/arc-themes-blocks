@@ -196,9 +196,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		case "quote":
 			switch (item.subtype) {
 				case "pullquote":
-					return (
-						<Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} className="pullquote" />
-					);
+					return <Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} type="pullquote" />;
 
 				case "blockquote":
 				default:

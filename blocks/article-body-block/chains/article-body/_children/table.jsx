@@ -3,6 +3,7 @@ import unescapeHtml from "../shared/unescape-html";
 
 const Table = ({ element, classPrefix }) => {
 	const { header, rows } = element;
+	const className = classPrefix ? `${classPrefix}__table` : null;
 
 	const tableHeaders = header.map((headerItem) => (
 		// eslint-disable-next-line jsx-a11y/control-has-associated-label
@@ -23,7 +24,7 @@ const Table = ({ element, classPrefix }) => {
 
 	return (
 		<div className="table-wrapper">
-			<table className={`${classPrefix}__table`}>
+			<table className={className}>
 				<thead>
 					<tr>{tableHeaders}</tr>
 				</thead>

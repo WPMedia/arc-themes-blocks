@@ -14,7 +14,7 @@ const SingleColumnRegular = ({ children }) => {
 	return (
 		<Stack className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack as="header" role="banner" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
 					{navigation}
 				</Stack>
 			) : null}

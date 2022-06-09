@@ -23,8 +23,7 @@
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/arc-themes-components": "*",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/video-player-block": "*"
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0",

@@ -463,6 +463,7 @@
 					flex-wrap: nowrap,
 					justify-content: space-between,
 					line-height: var(--global-line-height-9),
+					word-break: break-word,
 					components: (
 						button-default: (
 							background: none,

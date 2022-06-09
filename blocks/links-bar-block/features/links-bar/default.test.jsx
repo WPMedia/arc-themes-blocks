@@ -17,10 +17,6 @@ jest.mock("fusion:intl", () => ({
 	})),
 }));
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
-
 describe("the links bar feature for the default output type", () => {
 	afterEach(() => {
 		jest.resetModules();

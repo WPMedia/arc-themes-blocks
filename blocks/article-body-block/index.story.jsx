@@ -120,7 +120,7 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
 			width: 5616,
 		},
 	],

@@ -5,7 +5,7 @@ import { Stack } from "@wpmedia/arc-themes-components";
 const LAYOUT_CLASS_NAME = "b-single-column-regular";
 
 const SingleColumnRegular = ({ children }) => {
-	const [navigation, body, fullWidth, footer] = React.Children.toArray(children);
+	const [navigation, fullWidth, body, footer] = React.Children.toArray(children);
 
 	if (!navigation && !body && !fullWidth && !footer) {
 		return null;

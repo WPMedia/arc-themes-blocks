@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad, isServerSide, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
@@ -159,12 +158,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const { list_type: listType, items: listItems } = item;
 			// eslint-disable-next-line arrow-body-style
 			return listItems && listItems.length > 0 ? (
-				<List
-					key={key}
-					listType={listType}
-					listItems={listItems}
-					primaryColor={getThemeStyle(arcSite)["primary-color"]}
-				/>
+				<List key={key} listType={listType} listItems={listItems} />
 			) : null;
 		}
 

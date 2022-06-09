@@ -51,9 +51,9 @@ describe("the links bar feature for the default output type", () => {
 				],
 			})),
 		}));
-		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
+		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
-		expect(wrapper.children().at(0).type()).toBe("nav");
+		expect(wrapper.find("nav")).toBeTruthy();
 	});
 
 	it("should not have separator when only one link", () => {
@@ -71,7 +71,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"nowrap\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
 		);
 	});
 
@@ -100,7 +100,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"b-links-bar\\" aria-label=\\"More Links\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"b-links-bar__menu-link-seperator\\"><span class=\\"c-separator\\"></span></span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_2\\">test link 2</a></span><span class=\\"b-links-bar__menu-link-seperator\\"><span class=\\"c-separator\\"></span></span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"/\\">Link Text</a></span></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"nowrap\\"><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"b-links-bar__menu-link-seperator\\"><span class=\\"c-separator\\"></span></span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"id_2\\">test link 2</a></span><span class=\\"b-links-bar__menu-link-seperator\\"><span class=\\"c-separator\\"></span></span><span class=\\"b-links-bar__menu\\"><a class=\\"c-link b-links-bar__menu-link\\" href=\\"/\\">Link Text</a></span></nav><hr/>"`
 		);
 	});
 
@@ -159,7 +159,7 @@ describe("the links bar feature for the default output type", () => {
 		const { default: LinksBar } = require("./default");
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "More Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "More Links");
 	});
 
 	it("should render the block with the default aria-label if custom field is empty", () => {
@@ -173,7 +173,7 @@ describe("the links bar feature for the default output type", () => {
 			<LinksBar customFields={{ navigationConfig: "links", ariaLabel: "" }} />
 		);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "More Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "More Links");
 	});
 
 	it("should render the block with the custom aria-label", () => {
@@ -187,6 +187,6 @@ describe("the links bar feature for the default output type", () => {
 			<LinksBar customFields={{ navigationConfig: "links", ariaLabel: "Links" }} />
 		);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "Links");
 	});
 });

@@ -4,7 +4,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { Link, Separator } from "@wpmedia/arc-themes-components";
+import { Link, Stack, Separator } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-links-bar";
 
@@ -32,14 +32,17 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 
 	return (
 		<>
-			<nav
-				key={id}
+			<Stack
 				className={BLOCK_CLASS_NAME}
+				justification="center"
+				direction="row"
+				as="nav"
+				key={id}
 				aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
 			>
 				{menuItems &&
 					menuItems.map((item, index) => (
-						<>
+						<React.Fragment key={item._id}>
 							<span className={`${BLOCK_CLASS_NAME}__menu`} key={item._id}>
 								{item.node_type === "link" ? (
 									<Link href={item.url} className={`${BLOCK_CLASS_NAME}__menu-link`}>
@@ -56,9 +59,9 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 									<Separator />
 								</span>
 							) : null}
-						</>
+						</React.Fragment>
 					))}
-			</nav>
+			</Stack>
 			<hr />
 		</>
 	);

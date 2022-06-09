@@ -458,7 +458,7 @@
 			blocks: (
 				alert-bar: (
 					align-items: flex-start,
-					background-color: var(--global-red-4),
+					background-color: var(--global-red-5),
 					display: flex,
 					flex-wrap: nowrap,
 					justify-content: space-between,
@@ -808,6 +808,13 @@
 				),
 			),
 			blocks: (
+				alert-bar: (
+					components: (
+						link: (
+							font-size: var(--body-font-size),
+						),
+					),
+				),
 				category-carousel-title: (
 					font-size: var(--global-font-size-11),
 				),

@@ -1,76 +1,18 @@
 # `@wpmedia/article-body-block`
 
-_Fusion News Theme article-body block_
-
-// TODO: add badge for passing/failing tests
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
-
-## Props
-
-| **Prop**          | **Required** | **Type** | **Description** |
-| ----------------- | ------------ | -------- | --------------- |
-| **required prop** | yes          |          |                 |
-| **optional prop** | no           |          |                 |
-
-### ANS Schema
-
-## ANS fields
-
-- Add all ANS fields used in the block
+Article Body Block - Used to render a Composer article via Global Content
 
 ## Internationalization fields
 
-- Add all internationalization fields used in the block
-
-| Phrase key                             | Default (English)        |
-| -------------------------------------- | ------------------------ |
-| `global.gallery-expand-button`         | `Expand`                 |
-| `global.gallery-autoplay-button`       | `%{current} of %{total}` |
-| `global.gallery-pause-autoplay-button` | `Autoplay`               |
-| `global.gallery-page-count-text`       | `Pause autoplay`         |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-### ANS fields
-
-- `content_elements`
-- `content_elements[x].type` Check how many paragraphs included
-- `content_elements[x].content` Creates article body with included content
-
-```js
-{
-	content_elements: [
-		{
-			type: "text",
-			_id: "123",
-			type: "text",
-			content: "<h1>this is my first paragraph</h1>",
-		},
-		{
-			type: "not text",
-		},
-	];
-}
-```
+| Phrase key                                        | Default (English)      |
+| ------------------------------------------------- | ---------------------- |
+| `article-body-block.correction`                   | Correction             |
+| `article-body-block.clarification`                | Clarification          |
+| `article-body-block.interstitial-link-aria-label` | Open releated story    |
+| `global.gallery-expand-button`                    | Expand                 |
+| `global.gallery-autoplay-button`                  | %{current} of %{total} |
+| `global.gallery-pause-autoplay-button`            | Autoplay               |
+| `global.gallery-page-count-text`                  | Pause autoplay         |
 
 ### Example ANS Schema
 
@@ -330,7 +272,7 @@ This block does not emit any events.
 ## Event Listening
 
 When the content of an article-body contains a gallery component, the Gallery will emit events for when the next or previous image is viewed.
-These events are named `galleryImageNext` and `galleryImagePrevious` respectively.  
+These events are named `galleryImageNext` and `galleryImagePrevious` respectively.
 <br /><br />
 If you want to listen to these events, the first thing is to import the EventEmitter object
 into your code:<br /><br />

@@ -92,7 +92,7 @@ describe("the article body List component", () => {
 			],
 			_id: "FLXZDZLOFRGNLMALFGLJGLDPAM",
 		};
-		const { default: List } = require("./list");
+
 		const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
 		expect(wrapper.find("ol").length).toBe(1);
 		expect(wrapper.children().find("ul").length).toBe(1);

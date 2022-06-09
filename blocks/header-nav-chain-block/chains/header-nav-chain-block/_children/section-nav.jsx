@@ -2,19 +2,25 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { ChevronRightIcon } from "@wpmedia/engine-theme-sdk";
-import Link from "./link";
+import { Link, formatURL, Icon } from "@wpmedia/arc-themes-components";
 
 function hasChildren(node) {
 	return node.children && node.children.length > 0;
 }
 
-const SectionAnchor = ({ item, isHidden }) =>
-	item.node_type === "link" ? (
-		<Link href={item.url} name={item.display_name} isHidden={isHidden} />
-	) : (
-		<Link href={item._id} name={item.name} isHidden={isHidden} />
+const LinkBuilder = ({ item, isHidden }) => {
+	const linkUrl = item.node_type === "link" ? item.url : item._id;
+	const linkText = item.node_type === "link" ? item.display_name : item.name;
+	const externalUrl = /(http(s?)):\/\//i.test(linkUrl);
+	const formattedURL = formatURL(linkUrl);
+	return (
+		<Link href={formattedURL} openInNewTab={externalUrl} assistiveHidden={isHidden}>
+			{linkText}
+		</Link>
 	);
+};
+
+const SectionAnchor = ({ item, isHidden }) => <LinkBuilder item={item} isHidden={isHidden} />;
 
 const onClickSubsection = (evt) => {
 	const t = evt.target;
@@ -75,6 +81,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden }) => {
 	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
+	// TODO: Switch this to a component button
 	return (
 		<div className={`subsection-anchor ${isOpen ? "open" : ""}`} onClick={onClickSubsection}>
 			<SectionAnchor item={item} isHidden={isHidden} />
@@ -88,7 +95,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden }) => {
 				aria-controls={`header_sub_section_${item._id.replace("/", "")}`}
 				{...(isHidden ? { tabIndex: -1 } : {})}
 			>
-				<ChevronRightIcon height={20} width={20} />
+				<Icon name="ChevronRight" height={20} width={20} />
 			</button>
 		</div>
 	);
@@ -124,11 +131,7 @@ const SectionItem = ({ item, isHidden }) => {
 const SubSectionMenu = ({ items, isOpen, id, isHidden }) => {
 	const itemsList = items.map((item) => (
 		<li className="subsection-item" key={item._id}>
-			{item.node_type === "link" ? (
-				<Link href={item.url} name={item.display_name} isHidden={isHidden} />
-			) : (
-				<Link href={item._id} name={item.name} isHidden={isHidden} />
-			)}
+			<LinkBuilder item={item} isHidden={isHidden} />
 		</li>
 	));
 

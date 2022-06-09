@@ -2,12 +2,7 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import {
-	Button,
-	getNavSpecificSecondaryButtonTheme,
-	BUTTON_TYPES,
-	BUTTON_SIZES,
-} from "@wpmedia/shared-styles";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 import SearchBox from "./search-box";
 import QuerylySearch from "./queryly-search";
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
@@ -43,19 +38,34 @@ const NavWidget = ({
 			/>
 		)) ||
 		(type === "menu" && (
+			// TODO: Convert navColor and navBarBackground to themed styles
+			// TODO: What to do with Breakpoints?
+			// <Button
+			// 	additionalClassNames="nav-sections-btn"
+			// 	aria-label={phrases.t("header-nav-chain-block.sections-button")}
+			// 	buttonSize={BUTTON_SIZES.SMALL}
+			// 	buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
+			// 	buttonType={
+			// 		breakpoint === "desktop" ? BUTTON_TYPES.LABEL_AND_RIGHT_ICON : BUTTON_TYPES.ICON_ONLY
+			// 	}
+			// 	iconType="hamburger-menu"
+			// 	onClick={menuButtonClickAction}
+			// 	text={phrases.t("header-nav-chain-block.sections-button")}
+			// 	type="button"
+			// />
+
 			<Button
-				additionalClassNames="nav-sections-btn"
-				aria-label={phrases.t("header-nav-chain-block.sections-button")}
-				buttonSize={BUTTON_SIZES.SMALL}
-				buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-				buttonType={
-					breakpoint === "desktop" ? BUTTON_TYPES.LABEL_AND_RIGHT_ICON : BUTTON_TYPES.ICON_ONLY
-				}
-				iconType="hamburger-menu"
+				className="nav-sections-btn"
+				size="small"
+				iconRight={<Icon name="HamburgerMenu" width="16" height="16" />}
 				onClick={menuButtonClickAction}
-				text={phrases.t("header-nav-chain-block.sections-button")}
+				accessibilityLabel={phrases.t("header-nav-chain-block.sections-button")}
 				type="button"
-			/>
+			>
+				{breakpoint === "desktop" ? (
+					<>{phrases.t("header-nav-chain-block.sections-button")}</>
+				) : null}
+			</Button>
 		));
 
 	return (

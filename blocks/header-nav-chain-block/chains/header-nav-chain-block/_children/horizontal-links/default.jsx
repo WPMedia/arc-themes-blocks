@@ -3,8 +3,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import Link from "./_children/link";
+import { Link, formatURL } from "@wpmedia/arc-themes-components";
 
 const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDots, ariaLabel }) => {
 	const { id, arcSite } = useFusionContext();
@@ -39,6 +38,23 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
 	// the interior links and spans need to contrast with nav color scheme
 	const readableContrastingColor = navBarColor === "light" ? "#000" : "#fff";
 
+	const LinkBuilder = ({ item }) => {
+		const linkUrl = item.node_type === "link" ? item.url : item._id;
+		const linkText = item.node_type === "link" ? item.display_name : item.name;
+		const externalUrl = /(http(s?)):\/\//i.test(linkUrl);
+		const formattedURL = formatURL(linkUrl);
+
+		return (
+			<Link href={formattedURL} openInNewTab={externalUrl}>
+				{linkText}
+			</Link>
+		);
+	};
+	/**
+	TODO:
+ The horizontal-links-menu class will need to include the primary font token as
+ it was using the PrimaryFont component from shared styles
+ * */
 	return (
 		<nav
 			key={id}
@@ -48,14 +64,10 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
 		>
 			{menuItems &&
 				menuItems.map((item, index) => (
-					<PrimaryFont as="span" className="horizontal-links-menu" key={item._id}>
+					<span className="horizontal-links-menu" key={item._id}>
 						{index > 0 && showSeparator ? "\u00a0 • \u00a0" : "\u00A0  \u00A0"}
-						{item.node_type === "link" ? (
-							<Link href={item.url} name={item.display_name} />
-						) : (
-							<Link href={item._id} name={item.name} />
-						)}
-					</PrimaryFont>
+						<LinkBuilder item={item} />
+					</span>
 				))}
 		</nav>
 	);

@@ -2,13 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import {
-	Button,
-	BUTTON_SIZES,
-	BUTTON_STYLES,
-	BUTTON_TYPES,
-	getNavSpecificSecondaryButtonTheme,
-} from "@wpmedia/shared-styles";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 
 export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
 	const { arcSite } = useFusionContext();
@@ -68,9 +62,10 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 
 	const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
 	const navClassNames = `nav-search${isSearchBarOpen ? " open" : ""}`;
-	const buttonStyle = isSearchBarOpen
-		? BUTTON_STYLES.DEFAULT
-		: getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
+	// TODO: Figure out what to do with navColor and navBarBackground
+	// const buttonStyle = isSearchBarOpen
+	// 	? BUTTON_STYLES.DEFAULT
+	// 	: getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
 
 	return (
 		<div className={navClassNames}>
@@ -83,17 +78,27 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				type="text"
 				placeholder={placeholderText}
 			/>
+			{/* <Button */}
+			{/*	aria-label={phrases.t("header-nav-chain-block.search-text")} */}
+			{/*	additionalClassNames={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""} */}
+			{/*	buttonSize={BUTTON_SIZES.SMALL} */}
+			{/*	buttonStyle={buttonStyle} */}
+			{/*	buttonType={BUTTON_TYPES.ICON_ONLY} */}
+			{/*	disabled={isSearchBarPending} */}
+			{/*	iconType="search" */}
+			{/*	onClick={handleClick} */}
+			{/*	onMouseDown={handleSearchBtnMousedown} */}
+			{/*	text={phrases.t("header-nav-chain-block.search-text")} */}
+			{/*	type="button" */}
+			{/* /> */}
 			<Button
-				aria-label={phrases.t("header-nav-chain-block.search-text")}
-				additionalClassNames={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
-				buttonSize={BUTTON_SIZES.SMALL}
-				buttonStyle={buttonStyle}
-				buttonType={BUTTON_TYPES.ICON_ONLY}
+				className={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
+				size="small"
 				disabled={isSearchBarPending}
-				iconType="search"
+				iconRight={<Icon name="Search" width="16" height="16" />}
 				onClick={handleClick}
 				onMouseDown={handleSearchBtnMousedown}
-				text={phrases.t("header-nav-chain-block.search-text")}
+				accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
 				type="button"
 			/>
 		</div>

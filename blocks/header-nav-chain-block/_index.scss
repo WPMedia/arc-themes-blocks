@@ -588,3 +588,23 @@ body.nav-open {
 	position: absolute;
 	right: 0;
 }
+
+.nav-sections-btn {
+	background-color: transparent;
+	border-color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	cursor: pointer;
+	padding: 0.5rem;
+	height: 2rem;
+
+	// Target this as Icon in the theme
+	svg {
+		fill: rgb(255, 255, 255);
+		height: 15px;
+		width: 15px;
+	}
+}

@@ -612,8 +612,14 @@
 					align-items: center,
 					display: flex,
 					justify-content: center,
-					object-fit: contain,
 					max-height: 75vh,
+					components: (
+						image: (
+							height: auto,
+							max-height: 100%,
+							max-width: 100%,
+						),
+					),
 				),
 				article-body-full-screen-icon: (
 					fill: var(--text-color),

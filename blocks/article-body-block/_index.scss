@@ -93,6 +93,11 @@
 		@include scss.block-properties("article-body-stop-icon");
 	}
 
+	&__image-wrapper {
+		@include scss.block-components("article-body-image-wrapper");
+		@include scss.block-properties("article-body-image-wrapper");
+	}
+
 	&__image {
 		@include scss.block-components("article-body-image");
 		@include scss.block-properties("article-body-image");

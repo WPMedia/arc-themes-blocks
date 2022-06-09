@@ -272,7 +272,9 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 									credit={!hideGalleryCredits ? formatCredits(i.credits) : null}
 									title={!hideGalleryTitle ? i.subtitle : null}
 								>
-									<Image src={i.url} alt={i.alt_text} width={800} />
+									<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
+										<Image src={i.url} alt={i.alt_text} width={800} />
+									</div>
 								</MediaItem>
 							</Carousel.Item>
 						))}

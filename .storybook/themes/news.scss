@@ -580,13 +580,6 @@
 							background-color: var(--global-white),
 							padding-top: var(--global-spacing-2),
 						),
-						image: (
-							align-self: center,
-							object-fit: contain,
-							min-height: 25vh,
-							max-height: 75vh,
-							max-width: 100%,
-						),
 					),
 				),
 				article-body-gallery-additional-next: (
@@ -615,6 +608,14 @@
 						),
 					),
 				),
+				article-body-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					height: 100vh,
+					object-fit: contain,
+					max-height: 75vh,
+				),
 				article-body-full-screen-icon: (
 					fill: var(--text-color),
 					height: var(--global-spacing-4),
@@ -638,7 +639,13 @@
 					height: var(--global-spacing-4),
 					width: var(--global-spacing-4),
 				),
-				article-body-image: (),
+				article-body-image: (
+					components: (
+						image: (
+							max-width: 100%,
+						),
+					),
+				),
 				article-body-image-float-left: (
 					width: 50%,
 					float: left,

@@ -1,5 +1,7 @@
-const React = require("react");
-const { mount } = require("enzyme");
+import React from "react";
+import { mount } from "enzyme";
+
+import Quote from "./quote";
 
 jest.mock("@wpmedia/shared-styles", () => ({
 	__esModule: true,
@@ -20,7 +22,6 @@ describe("the article body Blockquote component", () => {
 			},
 		};
 
-		const { default: Quote } = require("./quote");
 		const wrapper = mount(<Quote element={blockquote} />);
 		expect(wrapper.find("blockquote").find("p").length).toBe(0);
 	});
@@ -82,7 +83,6 @@ describe("the article body Blockquote component", () => {
 			},
 		};
 
-		const { default: Quote } = require("./quote");
 		const wrapper = mount(<Quote element={blockquote} />);
 		expect(wrapper.find("blockquote").find("p").length).toBe(2);
 		expect(wrapper.find("blockquote").find("span").length).toBe(1);
@@ -145,7 +145,6 @@ describe("the article body Blockquote component", () => {
 			},
 		};
 
-		const { default: Quote } = require("./quote");
 		const wrapper = mount(<Quote element={blockquote} />);
 		expect(wrapper.find("blockquote").find("p").length).toBe(2);
 		expect(wrapper.find("blockquote").find("span").length).toBe(0);
@@ -201,7 +200,6 @@ describe("the article body Blockquote component", () => {
 			},
 		};
 
-		const { default: Quote } = require("./quote");
 		const wrapper = mount(<Quote element={blockquote} />);
 		expect(wrapper.find("blockquote").find("p").length).toBe(2);
 		expect(wrapper.find("blockquote").find("span").length).toBe(1);

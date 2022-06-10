@@ -1,21 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 
-const Heading = ({ element, primaryColor }) => {
+const Heading = ({ element, classPrefix = "" }) => {
 	const defaultHeaderLevel = 2;
 	const HeadingLevel = `h${element.level ? element.level : defaultHeaderLevel}`;
-	const StyledHeading = styled(HeadingLevel)`
-		a {
-			color: ${(props) => props.primaryColor};
-		}
-		/* stylelint-disable-next-line no-missing-end-of-source-newline */
-	`;
+	const className = classPrefix ? `${classPrefix}__${HeadingLevel}` : null;
 
 	return (
-		<StyledHeading
-			dangerouslySetInnerHTML={{ __html: element.content }}
-			primaryColor={primaryColor}
-		/>
+		<HeadingLevel className={className} dangerouslySetInnerHTML={{ __html: element.content }} />
 	);
 };
 

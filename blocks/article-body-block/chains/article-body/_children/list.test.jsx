@@ -1,5 +1,7 @@
-const React = require("react");
-const { mount } = require("enzyme");
+import React from "react";
+import { mount } from "enzyme";
+
+import List from "./list";
 
 describe("the article body List component", () => {
 	it("should render unordered list correctly", () => {
@@ -20,14 +22,14 @@ describe("the article body List component", () => {
 			],
 			_id: "PSQTOBXAGZGKNOSBMOAUJ6EYSA",
 		};
-		const { default: List } = require("./list");
+
 		const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
 		expect(wrapper.find("ul").length).toBe(1);
 		expect(wrapper.find("ul").childAt(0).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Indented under 2</li>"`
+			`"<li>Indented under 2</li>"`
 		);
 		expect(wrapper.find("ul").childAt(1).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Another thing indented under 2</li>"`
+			`"<li>Another thing indented under 2</li>"`
 		);
 	});
 
@@ -49,14 +51,14 @@ describe("the article body List component", () => {
 			],
 			_id: "FLXZDZLOFRGNLMALFGLJGLDPAM",
 		};
-		const { default: List } = require("./list");
+
 		const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
 		expect(wrapper.find("ol").length).toBe(1);
 		expect(wrapper.find("ol").childAt(0).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Indented under 2</li>"`
+			`"<li>Indented under 2</li>"`
 		);
 		expect(wrapper.find("ol").childAt(1).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Another thing indented under 2</li>"`
+			`"<li>Another thing indented under 2</li>"`
 		);
 	});
 
@@ -90,20 +92,19 @@ describe("the article body List component", () => {
 			],
 			_id: "FLXZDZLOFRGNLMALFGLJGLDPAM",
 		};
-		const { default: List } = require("./list");
+
 		const wrapper = mount(<List listType={listContent.list_type} listItems={listContent.items} />);
 		expect(wrapper.find("ol").length).toBe(1);
 		expect(wrapper.children().find("ul").length).toBe(1);
 		expect(wrapper.children().find("li").length).toBe(3);
-		expect(wrapper.find("ul").childAt(0).type().target).toEqual("li");
 		expect(wrapper.find("ul").childAt(0).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Indented under 2</li>"`
+			`"<li>Indented under 2</li>"`
 		);
 		expect(wrapper.find("ul").childAt(1).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Another thing indented under 2</li>"`
+			`"<li>Another thing indented under 2</li>"`
 		);
 		expect(wrapper.find("ol").childAt(1).html()).toMatchInlineSnapshot(
-			`"<li class=\\"sc-bdVaJa kyxDVy\\">Another thing indented under 3</li>"`
+			`"<li>Another thing indented under 3</li>"`
 		);
 	});
 });

@@ -1114,6 +1114,9 @@
 				video-player-inline-video: (
 					gap: 0,
 				),
+				links-bar: (
+					gap: var(--global-spacing-2),
+				),
 			),
 		),
 		desktop: (
@@ -1333,6 +1336,7 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";

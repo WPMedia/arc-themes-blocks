@@ -785,7 +785,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			expect(wrapper.find(".embed-responsive")).toHaveLength(1);
+			expect(wrapper.find(".b-article-body__embed-responsive")).toHaveLength(1);
 		});
 
 		it("should not render anything when no data is provided", () => {
@@ -825,7 +825,7 @@ describe("article-body chain", () => {
 					<span>3</span>
 				</ArticleBodyChain>
 			);
-			expect(wrapper.find(".embed-responsive")).toHaveLength(0);
+			expect(wrapper.find(".b-article-body__embed-responsive")).toHaveLength(0);
 		});
 	});
 

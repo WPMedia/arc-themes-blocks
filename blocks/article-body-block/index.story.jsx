@@ -251,6 +251,24 @@ const mockOEmbed = {
 	type: "oembed_response",
 };
 
+const mockYouTube = {
+	type: "oembed_response",
+	subtype: "youtube",
+	_id: "3OYDYWUAK5D4XP5WJ6PLS4KHYQ",
+	raw_oembed: {
+		html: '<iframe width="200" height="113" src="https://www.youtube.com/embed/817CYL6KuGo?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+	},
+	referent: {
+		id: "https://www.youtube.com/watch?v=817CYL6KuGo",
+		provider: "https://www.youtube.com/oembed?url=",
+		referent_properties: {
+			additional_properties: {},
+		},
+		service: "oembed",
+		type: "youtube",
+	},
+};
+
 const mockPullQuote = {
 	_id: "pull_quote_id",
 	citation: {
@@ -448,6 +466,7 @@ export const allRenderTypes = () => {
 				mockList,
 				mockListUnordered,
 				mockOEmbed,
+				mockYouTube,
 				mockPullQuote,
 				mockRawHtml,
 				mockTable,

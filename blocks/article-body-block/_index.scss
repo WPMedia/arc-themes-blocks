@@ -98,6 +98,19 @@
 		@include scss.block-properties("article-body-image-wrapper");
 	}
 
+	&__embed-responsive {
+		@include scss.block-components("article-body-embed-responsive");
+		@include scss.block-properties("article-body-embed-responsive");
+
+		iframe,
+		embed,
+		object,
+		video {
+			@include scss.block-components("article-body-embed-responsive-item");
+			@include scss.block-properties("article-body-embed-responsive-item");
+		}
+	}
+
 	&__image {
 		@include scss.block-components("article-body-image");
 		@include scss.block-properties("article-body-image");

@@ -186,7 +186,9 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			) : null;
 
 		case "oembed_response": {
-			return item.raw_oembed ? <Oembed key={key} element={item} /> : null;
+			return item.raw_oembed ? (
+				<Oembed key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
+			) : null;
 		}
 
 		case "table": {

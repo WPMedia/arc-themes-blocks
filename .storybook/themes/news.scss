@@ -459,6 +459,41 @@
 				),
 			),
 			blocks: (
+				alert-bar: (
+					align-items: flex-start,
+					background-color: var(--global-red-5),
+					display: flex,
+					flex-wrap: nowrap,
+					justify-content: space-between,
+					line-height: var(--global-line-height-9),
+					word-break: break-word,
+					components: (
+						button-default: (
+							background: none,
+							border: none,
+							flex: 0 0 auto,
+						),
+						button-large: (
+							margin-bottom: var(--global-spacing-1),
+							margin-top: var(--global-spacing-1),
+						),
+						link: (
+							color: var(--global-white),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-3),
+							padding-bottom: var(--global-spacing-5),
+							padding-left: var(--global-spacing-4),
+							padding-right: var(--global-spacing-5),
+							padding-top: var(--global-spacing-5),
+							text-decoration: none,
+						),
+						icon: (
+							fill: var(--global-white),
+  					),
+  				),
+    		),
 				article-body: (
 					font-family: var(--font-family-secondary),
 					font-size: var(--global-font-size-4),
@@ -1102,6 +1137,13 @@
 				),
 			),
 			blocks: (
+				alert-bar: (
+					components: (
+						link: (
+							font-size: var(--body-font-size),
+						),
+  				),
+  			),
 				article-body: (
 					font-size: var(--global-font-size-7),
 				),
@@ -1283,6 +1325,7 @@
 	)
 );
 
+@use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";

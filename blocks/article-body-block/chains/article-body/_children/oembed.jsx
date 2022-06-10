@@ -2,20 +2,16 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import EmbedContainer from "react-oembed-container";
 
-const Oembed = ({ element }) => {
+const Oembed = ({ element, classPrefix = "" }) => {
 	// If element is a subtype of youtube or vimeo,
 	// add responsive video classes
-	// embed-responsive-16by9, etc are custom classes in news-theme-css
-	const responsiveClass =
+	const className =
 		["youtube", "vimeo"].indexOf(element.subtype) !== -1
-			? "embed-responsive embed-responsive-16by9 "
-			: "";
-
-	// space added above so as to prevent unnecessary whitespace
-	const cssClasses = `${responsiveClass}block-margin-bottom`;
+			? `${classPrefix}__embed-responsive`
+			: null;
 
 	return (
-		<div className={cssClasses}>
+		<div className={className}>
 			<EmbedContainer markup={element.raw_oembed.html}>
 				<div dangerouslySetInnerHTML={{ __html: element.raw_oembed.html }} />
 			</EmbedContainer>

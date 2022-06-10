@@ -8,7 +8,7 @@ const testText = "Single Column Regular Layout";
 
 describe("Single Column Regular Layout", () => {
 	describe("when it is first rendered", () => {
-		it("should render the content in the header (role banner) when the first child is provided", () => {
+		it("should render content into the header (role banner) section when the one child is provided", () => {
 			render(
 				<SingleColumnRegular>
 					<h1>{testText}</h1>
@@ -17,7 +17,7 @@ describe("Single Column Regular Layout", () => {
 			expect(screen.getByRole("banner")).toHaveTextContent(testText);
 		});
 
-		it("should render content into the main when two children are provided", () => {
+		it("should render content into the main (role main) section when two children are provided", () => {
 			render(
 				<SingleColumnRegular>
 					<></>
@@ -27,9 +27,21 @@ describe("Single Column Regular Layout", () => {
 			expect(screen.getByRole("main")).toHaveTextContent(testText);
 		});
 
-		it("should render a content into the contentinfo (footer) when three children are provided", () => {
+		it("should render content into the main (role main) section when three children are provided", () => {
 			render(
 				<SingleColumnRegular>
+					<></>
+					<></>
+					<p>{testText}</p>
+				</SingleColumnRegular>
+			);
+			expect(screen.getByRole("main")).toHaveTextContent(testText);
+		});
+
+		it("should render a content into the contentinfo (footer) when four children are provided", () => {
+			render(
+				<SingleColumnRegular>
+					<></>
 					<></>
 					<></>
 					<div>{testText}</div>

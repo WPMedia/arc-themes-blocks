@@ -176,7 +176,7 @@
 	$alias: (
 		// Font families
 		"font-family-primary": "Abel",
-		"font-family-secondary": "",
+		"font-family-secondary": "Georgia",
 		// Colors
 		"color-primary": var(--global-black),
 		"text-color": var(--global-neutral-8),
@@ -212,7 +212,7 @@
 		"body-line-height-small": var(--global-line-height-2),
 		// body : tiny
 		"body-font-weight-tiny": var(--global-font-weight-4),
-		"body-font-size-tiny": var(--global-font-size-1),
+		"body-font-size-tiny": var(--global-font-size-2),
 		"body-line-height-tiny": var(--global-line-height-1),
 		// Layout
 		"layout-max-width": 1600,
@@ -354,6 +354,9 @@
 					height: var(--global-spacing-5),
 					width: var(--global-spacing-5),
 				),
+				image: (
+					max-width: 100%,
+				),
 				input: (
 					align-items: flex-start,
 					display: flex,
@@ -488,6 +491,260 @@
 						),
 						icon: (
 							fill: var(--global-white),
+  					),
+  				),
+    		),
+				article-body: (
+					font-family: var(--font-family-secondary),
+					font-size: var(--global-font-size-4),
+					components: (
+						link: (
+							color: var(--color-primary),
+						),
+						paragraph: (
+							display: block,
+							overflow: initial,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+					),
+				),
+				article-body-link: (
+					color: var(--color-primary),
+				),
+				article-body-h2: (
+					font-size: var(--global-font-size-11),
+				),
+				article-body-h3: (
+					font-size: var(--global-font-size-10),
+				),
+				article-body-h4: (
+					font-size: var(--global-font-size-9),
+				),
+				article-body-h5: (
+					font-size: var(--global-font-size-7),
+				),
+				article-body-h6: (
+					font-size: var(--global-font-size-5),
+				),
+				article-body-blockquote: (
+					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
+					font-style: italic,
+					gap: var(--global-spacing-6),
+					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
+					text-align: left,
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				article-body-children: (
+					margin-bottom: var(--global-spacing-5),
+				),
+				article-body-citation: (
+					font-family: var(--font-family-primary),
+					font-style: normal,
+					font-size: var(--global-font-size-4),
+				),
+				article-body-correction: (
+					box-shadow: inset 0 -1px 0 0 var(--border-color),
+					font-style: italic,
+					padding-bottom: var(--global-spacing-6),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-3),
+							text-transform: uppercase,
+						),
+						paragraph: (
+							color: var(--global-neutral-6),
+						),
+					),
+				),
+				article-body-embed-responsive: (
+					aspect-ratio: 16 / 9,
+					width: 100%,
+				),
+				article-body-embed-responsive-item: (
+					aspect-ratio: 16 / 9,
+					height: auto,
+					width: 100%,
+				),
+				article-body-divider: (
+					background-color: var(--border-color),
+					height: 1px,
+				),
+				article-body-gallery: (
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-8),
+							width: var(--global-spacing-8),
+						),
+						carousel-button: (
+							background-color: transparent,
+							box-shadow: none,
+						),
+						carousel-expand-autoplay-container: (
+							gap: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							background-color: transparent,
+							border: none,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--global-font-size-3),
+							height: auto,
+							width: auto,
+						),
+						carousel-button-toggle-auto-play: (
+							background-color: transparent,
+							box-shadow: none,
+							color: var(--text-color),
+							font-size: var(--global-font-size-3),
+							height: auto,
+							width: auto,
+						),
+						carousel-image-counter: (
+							font-size: var(--global-font-size-3),
+						),
+						media-item: (
+							background-color: var(--global-neutral-9),
+							gap: 0,
+							justify-content: center,
+							width: 100%,
+						),
+						media-item-fig-caption: (
+							background-color: var(--global-white),
+							padding-top: var(--global-spacing-2),
+						),
+					),
+				),
+				article-body-gallery-additional-next: (
+					border: none,
+					display: none,
+					height: var(--global-spacing-6),
+					width: var(--global-spacing-6),
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				article-body-gallery-additional-previous: (
+					border: none,
+					display: none,
+					height: var(--global-spacing-6),
+					width: var(--global-spacing-6),
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				article-body-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					components: (
+						image: (
+							height: auto,
+							max-height: 100%,
+							max-width: 100%,
+						),
+					),
+				),
+				article-body-full-screen-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-ul: (
+					list-style-position: inside,
+					list-style-type: disc,
+				),
+				article-body-ol: (
+					list-style-position: inside,
+					list-style-type: decimal,
+				),
+				article-body-stop-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-start-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-image: (
+					components: (
+						image: (
+							max-width: 100%,
+						),
+					),
+				),
+				article-body-image-float-left: (
+					width: 50%,
+					float: left,
+					margin-right: var(--global-spacing-5),
+				),
+				article-body-image-float-right: (
+					width: 50%,
+					float: right,
+					margin-left: var(--global-spacing-5),
+				),
+				article-body-interstitial-link: (
+					font-family: var(--font-family-secondary),
+					font-style: italic,
+					components: (
+						link: (
+							border-bottom: 1px solid var(--color-primary),
+							color: var(--color-primary),
+						),
+					),
+				),
+				article-body-table: (
+					font-family: var(--font-family-primary),
+					text-align: center,
+					width: 100%,
+				),
+				article-body-table-thead: (
+					background-color: var(--global-neutral-4),
+					border: 2px solid var(--border-color),
+				),
+				article-body-table-th: (
+					border: 1px solid var(--border-color),
+					font-weight: bold,
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-td: (
+					border: 1px solid var(--border-color),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-pullquote: (
+					box-shadow: (
+						inset 0 -5px 0 0 var(--border-color),
+						inset 0 5px 0 0 var(--border-color),
+					),
+					gap: var(--global-spacing-6),
+					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
+					text-align: center,
+					components: (
+						paragraph: (
+							font-style: italic,
+							font-size: var(--global-font-size-7),
+							font-weight: bold,
 						),
 					),
 				),
@@ -885,6 +1142,51 @@
 						link: (
 							font-size: var(--body-font-size),
 						),
+  				),
+  			),
+				article-body: (
+					font-size: var(--global-font-size-7),
+				),
+				article-body-h2: (
+					font-size: var(--global-font-size-14),
+				),
+				article-body-h3: (
+					font-size: var(--global-font-size-13),
+				),
+				article-body-h4: (
+					font-size: var(--global-font-size-12),
+				),
+				article-body-h5: (
+					font-size: var(--global-font-size-11),
+				),
+				article-body-h6: (
+					font-size: var(--global-font-size-7),
+				),
+				article-body-gallery-additional-next: (
+					display: block,
+				),
+				article-body-gallery-additional-previous: (
+					display: block,
+				),
+				article-body-correction: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				article-body-blockquote: (
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
+				article-body-pullquote: (
+					components: (
+						paragraph: (
+							font-size: var(--global-font-size-11),
+						),
 					),
 				),
 				double-chain: (
@@ -1024,6 +1326,7 @@
 );
 
 @use "../../blocks/alert-bar-block";
+@use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";

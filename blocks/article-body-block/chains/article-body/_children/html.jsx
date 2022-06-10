@@ -1,21 +1,10 @@
 import React from "react";
 import Static from "fusion:static";
-import styled from "styled-components";
 
-const StyledDiv = styled.div`
-	a {
-		color: ${(props) => props.primaryColor};
-	}
-`;
-
-const HTML = ({ id, content, primaryColor }) =>
+const HTML = ({ className, content, id }) =>
 	!content ? null : (
 		<Static id={`article-html-block-${id}`}>
-			<StyledDiv
-				className="block-margin-bottom"
-				dangerouslySetInnerHTML={{ __html: content }}
-				primaryColor={primaryColor}
-			/>
+			<div className={className} dangerouslySetInnerHTML={{ __html: content }} />
 		</Static>
 	);
 

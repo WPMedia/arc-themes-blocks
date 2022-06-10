@@ -136,7 +136,12 @@ describe("the links bar feature for the default output type", () => {
 	it("should have no menu item if no content is returned", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -148,7 +153,12 @@ describe("the links bar feature for the default output type", () => {
 	it("should render the block with the default aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -160,7 +170,12 @@ describe("the links bar feature for the default output type", () => {
 	it("should render the block with the default aria-label if custom field is empty", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -174,7 +189,12 @@ describe("the links bar feature for the default output type", () => {
 	it("should render the block with the custom aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");

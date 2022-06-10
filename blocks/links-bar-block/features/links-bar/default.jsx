@@ -40,23 +40,15 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 				key={id}
 				aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
 			>
-				{menuItems &&
+				{menuItems?.length > 0 &&
 					menuItems.map((item, index) => (
 						<React.Fragment key={item._id}>
 							{item.node_type === "link" ? (
-								<Link href={item.url} className={`${BLOCK_CLASS_NAME}__menu-link`}>
-									{item.display_name}
-								</Link>
+								<Link href={item.url}>{item.display_name}</Link>
 							) : (
-								<Link href={item._id} className={`${BLOCK_CLASS_NAME}__menu-link`}>
-									{item.name}
-								</Link>
+								<Link href={item._id}>{item.name}</Link>
 							)}
-							{content.children.length !== index + 1 && showSeparator ? (
-								<span className={`${BLOCK_CLASS_NAME}__menu-link-seperator`}>
-									<Separator />
-								</span>
-							) : null}
+							{content.children.length !== index + 1 && showSeparator ? <Separator /> : null}
 						</React.Fragment>
 					))}
 			</Stack>

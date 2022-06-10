@@ -491,9 +491,9 @@
 						),
 						icon: (
 							fill: var(--global-white),
-  					),
-  				),
-    		),
+						),
+					),
+				),
 				article-body: (
 					font-family: var(--font-family-secondary),
 					font-size: var(--global-font-size-4),
@@ -1026,6 +1026,13 @@
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),
 				),
+				tag-title: (
+					components: (
+						heading: (),
+						paragraph: (),
+						stack: (),
+					),
+				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -1142,8 +1149,8 @@
 						link: (
 							font-size: var(--body-font-size),
 						),
-  				),
-  			),
+					),
+				),
 				article-body: (
 					font-size: var(--global-font-size-7),
 				),
@@ -1343,5 +1350,6 @@
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/tag-title-block";
 @use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

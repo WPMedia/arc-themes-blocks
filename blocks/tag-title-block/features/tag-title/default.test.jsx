@@ -1,6 +1,8 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import { useFusionContext } from "fusion:context";
+import "@testing-library/jest-dom/extend-expect";
+
 import TagTitle from "./default";
 
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
@@ -25,41 +27,27 @@ jest.mock("fusion:context", () => ({
 describe("the tag title feature for the default output type", () => {
 	describe("when tag title content from globalContent is present", () => {
 		it("should render an h1", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("h1")).toHaveClassName("tag-name");
+			render(<TagTitle />);
+			expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
 		});
 
 		it("should render a p", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("p")).toHaveClassName("tag-description");
+			const { container } = render(<TagTitle />);
+			expect(container.querySelector("p")).toBeInTheDocument();
 		});
 
 		it("should set the name content", () => {
-			const wrapper = mount(<TagTitle />);
+			render(<TagTitle />);
 
-			expect(wrapper.text().includes("Dogs")).toBe(true);
+			expect(screen.getByText("Dogs")).toBeInTheDocument();
 		});
 
 		it("should set the description content", () => {
-			const wrapper = mount(<TagTitle />);
+			render(<TagTitle />);
 
 			expect(
-				wrapper.text().includes("This is a tag about dogs. This is the description field.")
-			).toBe(true);
-		});
-
-		it("should set a styled components class on the rendered h1", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("h1").hasClass(/sc-/)).toBe(true);
-		});
-
-		it("should set a styled components class on the rendered p", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("p").hasClass(/sc-/)).toBe(true);
+				screen.getByText("This is a tag about dogs. This is the description field.")
+			).toBeInTheDocument();
 		});
 	});
 
@@ -82,15 +70,13 @@ describe("the tag title feature for the default output type", () => {
 		});
 
 		it("should NOT render a description", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("p")).toHaveLength(0);
+			const { container } = render(<TagTitle />);
+			expect(container.querySelector("p")).not.toBeInTheDocument();
 		});
 
 		it("should render a name", () => {
-			const wrapper = mount(<TagTitle />);
-
-			expect(wrapper.find("h1")).toHaveLength(1);
+			render(<TagTitle />);
+			expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
 		});
 	});
 
@@ -100,9 +86,9 @@ describe("the tag title feature for the default output type", () => {
 		});
 
 		it("should NOT render anything", () => {
-			const wrapper = mount(<TagTitle />);
+			const { container } = render(<TagTitle />);
 
-			expect(wrapper).toBeEmptyRender();
+			expect(container.firstChild).toBe(null);
 		});
 	});
 });

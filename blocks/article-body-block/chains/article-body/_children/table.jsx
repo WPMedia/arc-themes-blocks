@@ -1,8 +1,9 @@
 import React from "react";
 import unescapeHtml from "../shared/unescape-html";
 
-const Table = ({ element }) => {
+const Table = ({ element, classPrefix }) => {
 	const { header, rows } = element;
+	const className = classPrefix ? `${classPrefix}__table` : null;
 
 	const tableHeaders = header.map((headerItem) => (
 		// eslint-disable-next-line jsx-a11y/control-has-associated-label
@@ -22,14 +23,12 @@ const Table = ({ element }) => {
 	});
 
 	return (
-		<div className="table-wrapper">
-			<table>
-				<thead>
-					<tr>{tableHeaders}</tr>
-				</thead>
-				<tbody>{tableRows}</tbody>
-			</table>
-		</div>
+		<table className={className}>
+			<thead>
+				<tr>{tableHeaders}</tr>
+			</thead>
+			<tbody>{tableRows}</tbody>
+		</table>
 	);
 };
 

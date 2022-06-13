@@ -1,15 +1,13 @@
 {
   "name": "@wpmedia/article-body-block",
   "version": "5.17.0",
-  "description": "Fusion News Theme article body block",
-  "author": "Brent Miller <brent.miller@washpost.com>",
-  "contributors": [
-    "Beltran Caliz <beltran.caliz@washpost.com>"
-  ],
+  "description": "Article body block",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
+   "_index.scss",
     "chains",
     "intl.json"
   ],
@@ -22,16 +20,10 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/article-body-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/video-player-block": "*",
-    "styled-components": "^4.4.0"
+    "@wpmedia/arc-themes-components": "*",
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "dependencies": {
     "react-oembed-container": "^1.0.0",

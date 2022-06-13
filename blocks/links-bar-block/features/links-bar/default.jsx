@@ -4,10 +4,9 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import Link from "./_children/link";
+import { Link, Stack, Separator } from "@wpmedia/arc-themes-components";
 
-import "./links-bar.scss";
+const BLOCK_CLASS_NAME = "b-links-bar";
 
 const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 	const content = useContent({
@@ -33,24 +32,30 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 
 	return (
 		<>
-			<nav
-				key={id}
-				className="links-bar"
-				aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
-			>
-				{menuItems &&
-					menuItems.map((item, index) => (
-						<PrimaryFont as="span" className="links-menu" key={item._id}>
-							{item.node_type === "link" ? (
-								<Link href={item.url} name={item.display_name} />
-							) : (
-								<Link href={item._id} name={item.name} />
-							)}
-							{content.children.length !== index + 1 && showSeparator ? "\u00a0 • \u00a0" : ""}
-						</PrimaryFont>
-					))}
-			</nav>
-			<hr />
+			{menuItems.length > 0 && (
+				<>
+					<Stack
+						className={BLOCK_CLASS_NAME}
+						justification="center"
+						direction="row"
+						as="nav"
+						key={id}
+						aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
+					>
+						{menuItems.map((item, index) => (
+							<React.Fragment key={item._id}>
+								{item.node_type === "link" ? (
+									<Link href={item.url}>{item.display_name}</Link>
+								) : (
+									<Link href={item._id}>{item.name}</Link>
+								)}
+								{content.children.length !== index + 1 && showSeparator ? <Separator /> : null}
+							</React.Fragment>
+						))}
+					</Stack>
+					<hr />
+				</>
+			)}
 		</>
 	);
 };

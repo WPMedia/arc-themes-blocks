@@ -136,7 +136,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -1028,9 +1027,18 @@
 				),
 				tag-title: (
 					components: (
-						heading: (),
-						paragraph: (),
-						stack: (),
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-family: var(--font-family-primary),
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
 					),
 				),
 				triple-chain: (

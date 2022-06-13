@@ -491,9 +491,9 @@
 						),
 						icon: (
 							fill: var(--global-white),
-  					),
-  				),
-    		),
+						),
+					),
+				),
 				article-body: (
 					font-family: var(--font-family-secondary),
 					font-size: var(--global-font-size-4),
@@ -843,7 +843,7 @@
 					flex: 1 1 0%,
 				),
 				masthead-tagline: (
-					align-items: flex-end,
+					align-self: center,
 					display: flex,
 					flex: 1 1 0%,
 					font-family: var(--font-family-primary),
@@ -1145,8 +1145,8 @@
 						link: (
 							font-size: var(--body-font-size),
 						),
-  				),
-  			),
+					),
+				),
 				article-body: (
 					font-size: var(--global-font-size-7),
 				),

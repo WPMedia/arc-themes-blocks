@@ -13,7 +13,7 @@ Uses the Link, Separator, and Stack components from Arc Themes Components.
 
 ## ANS Schema
 
-N/A
+"navigation-hierarchy" is the schema. It uses the content source block @wpmedia/site-hierarchy-content-block.
 
 ### ANS Fields
 

@@ -8,7 +8,7 @@ export const TagTitleOutput = ({ data }) =>
 	// Check if tag exists
 	data && data.Payload && data.Payload[0] ? (
 		<Stack className={BLOCK_CLASS_NAME} direction="vertical">
-			<Heading>{data.Payload[0].name}</Heading>
+			{data.Payload[0].name ? <Heading>{data.Payload[0].name}</Heading> : null}
 			{
 				// Only display description if present
 				data.Payload[0].description ? <Paragraph>{data.Payload[0].description}</Paragraph> : null

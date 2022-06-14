@@ -347,6 +347,7 @@
 					line-height: var(--body-line-height-small),
 				),
 				heading: (
+					font-family: var(--font-family-primary),
 					font-weight: var(--global-font-weight-7),
 				),
 				icon: (
@@ -859,6 +860,36 @@
 					margin: 0,
 					padding: 0,
 				),
+				numbered-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				numbered-list-items: (
+					gap: var(--global-spacing-4),
+				),
+				numbered-list-item: (
+					gap: var(--global-spacing-5),
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-4),
+						),
+						link: (
+							flex: 1,
+						),
+						paragraph: (
+							font-family: var(--font-family-secondary),
+							font-size: var(--global-font-size-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				numbered-list-item-image: (
+					max-width: 25%,
+				),
 				overline: (),
 				quad-chain: (
 					components: (
@@ -1338,6 +1369,7 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";

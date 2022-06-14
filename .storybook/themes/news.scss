@@ -346,6 +346,7 @@
 					line-height: var(--body-line-height-small),
 				),
 				heading: (
+					font-family: var(--font-family-primary),
 					font-weight: var(--global-font-weight-7),
 				),
 				icon: (
@@ -1028,7 +1029,6 @@
 				tag-title: (
 					components: (
 						heading: (
-							font-family: var(--font-family-primary),
 							font-size: var(--global-font-size-13),
 							line-height: var(--global-line-height-8),
 						),

@@ -26,14 +26,19 @@ jest.mock("fusion:context", () => ({
 
 describe("the tag title feature for the default output type", () => {
 	describe("when tag title content from globalContent is present", () => {
-		it("should render an h1", () => {
-			render(<TagTitle />);
-			expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+		it("should assign block class", () => {
+			const { container } = render(<TagTitle />);
+			expect(container.querySelector(".b-tag-title")).toBeInTheDocument();
 		});
 
-		it("should render a p", () => {
+		it("should render a heading component", () => {
 			const { container } = render(<TagTitle />);
-			expect(container.querySelector("p")).toBeInTheDocument();
+			expect(container.querySelector(".c-heading")).toBeInTheDocument();
+		});
+
+		it("should render a paragraph component", () => {
+			const { container } = render(<TagTitle />);
+			expect(container.querySelector(".c-paragraph")).toBeInTheDocument();
 		});
 
 		it("should set the name content", () => {
@@ -71,12 +76,12 @@ describe("the tag title feature for the default output type", () => {
 
 		it("should NOT render a description", () => {
 			const { container } = render(<TagTitle />);
-			expect(container.querySelector("p")).not.toBeInTheDocument();
+			expect(container.querySelector(".c-paragraph")).not.toBeInTheDocument();
 		});
 
 		it("should render a name", () => {
-			render(<TagTitle />);
-			expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+			const { container } = render(<TagTitle />);
+			expect(container.querySelector(".c-heading")).toBeInTheDocument();
 		});
 	});
 

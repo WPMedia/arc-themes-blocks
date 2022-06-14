@@ -843,9 +843,9 @@
 					flex: 1 1 0%,
 				),
 				masthead-tagline: (
-					align-self: center,
 					display: flex,
 					flex: 1 1 0%,
+					justify-content: center,
 					font-family: var(--font-family-primary),
 					text-align: center,
 				),

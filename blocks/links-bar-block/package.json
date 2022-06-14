@@ -20,10 +20,6 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/links-bar-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/arc-themes-components": "*"

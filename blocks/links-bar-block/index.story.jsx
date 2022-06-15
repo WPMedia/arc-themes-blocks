@@ -38,3 +38,11 @@ export const threeLinks = () => (
 		}}
 	/>
 );
+
+export const tenLinks = () => (
+	<LinksBar
+		customFields={{
+			navigationConfig: { contentConfigValues: { hierarchy: "tenLinks" } },
+		}}
+	/>
+);

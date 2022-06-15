@@ -136,7 +136,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -1057,6 +1056,21 @@
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),
 				),
+				tag-title: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+					),
+				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -1379,5 +1393,6 @@
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/tag-title-block";
 @use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

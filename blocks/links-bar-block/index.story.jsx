@@ -5,6 +5,11 @@ import LinksBar from "./features/links-bar/default";
 export default {
 	title: "Blocks/Links Bar",
 	decorators: [withKnobs],
+	parameters: {
+		chromatic: {
+			viewports: [320, 1200],
+		},
+	},
 };
 
 export const noData = () => (

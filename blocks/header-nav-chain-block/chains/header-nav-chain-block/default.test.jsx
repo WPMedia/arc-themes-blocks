@@ -40,7 +40,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
+			const navBar = wrapper.find(".nav-bar");
 			expect(navBar.hasClass("horizontal-links")).toBe(true);
 			expect(navBar.hasClass("logo-left")).toBe(true);
 			const linksBar = navBar.find("HorizontalLinksBar");
@@ -55,7 +55,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
+			const navBar = wrapper.find(".b-header-nav-chain__nav-container");
 			expect(navBar.hasClass("horizontal-links")).toBe(false);
 			expect(navBar.hasClass("logo-center")).toBe(true);
 			expect(navBar.find("HorizontalLinksBar")).toHaveLength(0);

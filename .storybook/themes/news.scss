@@ -521,6 +521,371 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				header-nav-chain: (
+					align-items: center,
+					width: 100%,
+					position: sticky,
+					top: 0,
+					margin-bottom: 0,
+					z-index: 1,
+				),
+				header-nav-chain-nav-container: (
+					background-color: rgb(253, 222, 222),
+					transition: 0.5s,
+					z-index: 9,
+					align-items: center,
+					display: flex,
+					justify-content: space-between,
+					padding: 8px 20px,
+					position: relative,
+					flex-shrink: 0,
+					height: 56px,
+				),
+				header-nav-chain-nav-container-children: (
+					align-items: center,
+					display: flex,
+					text-align: center,
+					margin-right: 16px,
+				),
+				header-nav-chain-nav-container-children-last-child: (
+					margin-right: 0,
+					flex-shrink: 0,
+				),
+				header-nav-chain-nav-container-light: (
+					border-bottom: 1px solid #dadada,
+				),
+				header-nav-chain-nav-container-left: (
+					justify-content: flex-start,
+					flex-shrink: 0,
+				),
+				header-nav-chain-nav-container-right: (
+					justify-content: flex-end,
+				),
+				header-nav-chain-nav-container-components-mobile: (
+					align-items: center,
+					display: inherit,
+				),
+				header-nav-chain-nav-container-components-desktop: (
+					align-items: center,
+					display: none,
+				),
+				header-nav-chain-nav-container-widget: (
+					margin-right: 16px,
+				),
+				header-nav-chain-nav-container-widget-last: (
+					margin-right: 0,
+				),
+				header-nav-chain-nav-container-with-logo-hidden: (
+					opacity: 0,
+					transition: (
+						opacity 800ms ease,
+						visibility 0s ease 800ms,
+					),
+					visibility: hidden,
+				),
+				header-nav-chain-nav-container-with-logo-show: (
+					opacity: 1,
+					transition: (
+						opacity 800ms ease,
+						visibility 0s ease 800ms,
+					),
+					visibility: visible,
+				),
+				header-nav-chain-nav-container-with-logo-center: (
+					margin: 0 16px 0 16px,
+				),
+				header-nav-chain-nav-container-with-logo-center-links: (
+					justify-content: center,
+				),
+				header-nav-chain-nav-container-with-logo-left: (
+					justify-content: flex-start,
+					flex: 1,
+				),
+				header-nav-chain-nav-container-with-logo-left-links: (
+					justify-content: flex-start,
+				),
+				header-nav-chain-nav-container-logo: (
+					justify-content: center,
+				),
+				header-nav-chain-nav-container-logo-img: (
+					height: auto,
+					width: auto,
+					transition: 0.5s,
+					max-height: 40px,
+					max-width: 100%,
+				),
+				header-nav-chain-nav-container-logo-svg: (
+					flex: 0 1 auto,
+				),
+				header-nav-chain-nav-container-logo-svg-img: (
+					height: 100%,
+				),
+				header-nav-chain-nav-button: (
+					align-items: center,
+					border: 0,
+					height: 32px,
+					position: relative,
+					white-space: nowrap,
+					padding-left: 8px,
+					padding-right: 8px,
+				),
+				header-nav-chain-nav-button-dark: (),
+				header-nav-chain-nav-button-dark-span: (
+					color: #fff,
+				),
+				header-nav-chain-nav-button-dark-svg-fill: (
+					fill: #fff,
+				),
+				header-nav-chain-nav-button-dark-border: (
+					border: 1px solid rgba(255, 255, 255, 0.5),
+				),
+				header-nav-chain-nav-button-dark-border-hover: (
+					border: 1px solid rgba(255, 255, 255, 1),
+				),
+				header-nav-chain-nav-button-light: (),
+				header-nav-chain-nav-button-light-span: (
+					color: #575757,
+				),
+				header-nav-chain-nav-button-light-svg-fill: (
+					fill: #575757,
+				),
+				header-nav-chain-nav-button-light-border: (
+					border: 1px solid #dadada,
+				),
+				header-nav-chain-nav-button-light-border-hover: (
+					border: 1px solid #dadada,
+				),
+				header-nav-chain-nav-search: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					position: relative,
+				),
+				header-nav-chain-nav-search-input: (
+					border: 0,
+					border-radius: 4px !important,
+					box-shadow: none,
+					font-size: 0.9em,
+					line-height: 20px,
+					margin: 0,
+					padding: 0,
+					width: 0,
+				),
+				header-nav-chain-nav-search-input-open: (
+					font-size: 16px,
+					height: 32px,
+					line-height: 24px,
+					padding: 4px 32px 4px 11px,
+					width: 100%,
+				),
+				header-nav-chain-nav-search-input-dark-open: (
+					border: 1px solid rgba(255, 255, 255, 1),
+				),
+				header-nav-chain-nav-search-input-light-open: (
+					border: 1px solid #dadada,
+				),
+				header-nav-chain-nav-search-button-open: (
+					background: transparent,
+					border: transparent,
+				),
+				header-nav-chain-nav-sections: (
+					background: rgba(25, 25, 25, 0),
+					flex-direction: column,
+					-ms-overflow-style: none,
+					position: absolute,
+					scrollbar-width: none,
+					top: 0,
+					width: 0,
+					z-index: 8,
+					margin-top: 56px,
+				),
+				header-nav-chain-nav-sections-open: (
+					overflow-y: scroll,
+					transform: translate(0, 0),
+					width: 100%,
+					background: #292929,
+				),
+				header-nav-chain-inner-drawer: (
+					background-color: #292929,
+					display: flex,
+					flex-direction: column,
+					transition: transform 300ms ease-in-out,
+					width: 329px,
+				),
+				header-nav-chain-inner-drawer-open: (
+					width: 100vw,
+				),
+				header-nav-chain-inner-drawer-components-mobile: (
+					display: inherit,
+				),
+				header-nav-chain-inner-drawer-components-desktop: (
+					display: none,
+				),
+				header-nav-chain-inner-drawer-components-widgets: (
+					margin-top: 16px,
+					padding: 0 20px,
+				),
+				header-nav-chain-inner-drawer-search: (
+					justify-content: flex-start,
+				),
+				header-nav-chain-inner-drawer-search-input: (
+					flex: 1,
+				),
+				header-nav-chain-inner-drawer-search-input-open: (
+					height: 48px,
+				),
+				header-nav-chain-inner-drawer-search-input-dark: (
+					border: 0,
+				),
+				header-nav-chain-section-menu: (
+					margin-top: 13px,
+					padding: 0,
+				),
+				header-nav-chain-section-menu-li: (
+					font-weight: bold,
+					list-style: none,
+					position: relative,
+					background-color: #292929,
+				),
+				header-nav-chain-section-menu-li-hover-active: (
+					background: #575757,
+				),
+				header-nav-chain-section-menu-li-a: (
+					padding: 0 16px 0 20px,
+					align-items: center,
+					color: #fff,
+					display: block,
+					font-size: 16px,
+					justify-content: space-between,
+					line-height: 40px,
+					text-decoration: none,
+				),
+				header-nav-chain-section-button: (
+					background-color: transparent,
+					border-color: rgb(255, 255, 255),
+					color: rgb(255, 255, 255),
+					display: flex,
+					align-items: center,
+					justify-content: center,
+					flex-shrink: 0,
+					cursor: pointer,
+					padding: 0.5rem,
+					height: 2rem,
+				),
+				header-nav-chain-section-button-svg: (
+					fill: rgb(255, 255, 255),
+					height: 15px,
+					width: 15px,
+				),
+				header-nav-chain-section-bottom-placeholder: (
+					height: 130px,
+					background-color: #292929,
+				),
+				header-nav-chain-section-bottom-placeholder-safe-area-inset-bottom: (
+					height: calc(env(safe-area-inset-bottom) + 130px),
+				),
+				header-nav-chain-subsection-container: (
+					display: none,
+					flex-direction: column,
+					position: relative,
+				),
+				header-nav-chain-subsection-container-open: (
+					display: flex,
+				),
+				header-nav-chain-subsection-menu: (
+					background: #fff,
+					list-style: none,
+					margin: 0,
+					padding: 4px 0,
+				),
+				header-nav-chain-subsection-menu-a: (
+					color: #575757,
+					display: block,
+					font-size: 16px,
+					font-weight: bold,
+					line-height: 24px,
+					padding: 8px 16px 8px 20px,
+					text-decoration: none,
+				),
+				header-nav-chain-subsection-menu-a-hover: (
+					background-color: #dadada,
+				),
+				header-nav-chain-subsection-anchor: (
+					align-content: center,
+					cursor: pointer,
+					display: flex,
+					flex-direction: row,
+					justify-content: space-between,
+					line-height: 40px,
+					padding: 0 16px 0 20px,
+				),
+				header-nav-chain-subsection-anchor-a: (
+					align-items: center,
+					color: #fff,
+					display: block,
+					font-size: 16px,
+					justify-content: space-between,
+					line-height: 40px,
+					text-decoration: none,
+				),
+				header-nav-chain-subsection-anchor-svg: (
+					transform: rotate(90deg),
+				),
+				header-nav-chain-subsection-anchor-svg-open: (
+					transform: rotate(-90deg),
+				),
+				header-nav-chain-subsection-anchor-svg-fill: (
+					fill: #fff,
+				),
+				header-nav-chain-submenu-caret: (
+					align-self: center,
+					appearance: none,
+					background: transparent,
+					border: 0,
+					display: flex,
+				),
+				header-nav-chain-submenu-caret-fill: (
+					fill: #575757,
+				),
+				header-nav-chain-horizontal-links-bar: (
+					color: #000,
+					align-items: center,
+					display: none,
+					flex: 1 1 auto,
+					overflow: hidden,
+					text-align: left,
+					height: 100%,
+					width: auto,
+					flex-wrap: wrap,
+					margin-right: 16px,
+				),
+				header-nav-chain-horizontal-links-bar-a: (
+					color: #000,
+				),
+				header-nav-chain-horizontal-links-bar-light: (
+					color: #000,
+				),
+				header-nav-chain-horizontal-links-bar-dark: (
+					color: #fff,
+				),
+				header-nav-chain-horizontal-links-menu: (
+					align-items: center,
+					display: flex,
+					font-size: 14px,
+					height: 100%,
+					justify-content: center,
+				),
+				header-nav-chain-horizontal-links-menu-a: (
+					color: #191919,
+					line-height: 14px,
+					margin: 8px 0,
+					text-align: center,
+					text-decoration: none,
+					white-space: nowrap,
+				),
+				header-nav-chain-horizontal-links-menu-active-hover: (
+					color: lighten(#191919, 40%),
+				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
 					color: var(--text-color),
@@ -874,6 +1239,44 @@
 				header-small: (
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+				),
+				header-nav-chain-nav-container: (
+					height: 100px,
+				),
+				header-nav-chain-nav-container-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-nav-container-components-desktop: (
+					display: flex,
+				),
+				header-nav-chain-nav-container-with-logo-left: (
+					flex: inherit,
+				),
+				header-nav-chain-nav-container-logo-img: (
+					max-width: 240px,
+					max-height: 84px,
+				),
+				header-nav-chain-nav-sections: (
+					margin-top: 100px,
+				),
+				header-nav-chain-nav-sections-open: (
+					background: rgba(25, 25, 25, 0.5),
+				),
+				header-nav-chain-inner-drawer-open: (
+					width: 329px,
+				),
+				header-nav-chain-inner-drawer-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-inner-drawer-components-desktop: (
+					display: inherit,
+				),
+				header-nav-chain-section-bottom-placeholder: (
+					height: 40px,
+					background-color: #292929,
+				),
+				header-nav-chain-horizontal-links-bar: (
+					display: flex,
 				),
 				masthead: (
 					display: flex,

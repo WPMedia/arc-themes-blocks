@@ -75,8 +75,8 @@ export function PresentationalNav(props) {
 			aria-label={sectionAriaLabel}
 		>
 			<div
-				className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${
-					displayLinks ? "horizontal-links" : ""
+				className={`${BLOCK_CLASS_NAME}__nav-container logo-${logoAlignment} ${
+					displayLinks ? "has-horizontal-links" : ""
 				}`}
 			>
 				<NavSection

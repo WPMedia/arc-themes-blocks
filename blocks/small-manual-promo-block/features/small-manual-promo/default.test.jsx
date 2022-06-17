@@ -1,7 +1,5 @@
 import React from "react";
-import { render, screen, logRoles } from "@testing-library/react";
-import { useFusionContext } from "fusion:context";
-import { isServerSide } from "@wpmedia/arc-themes-components";
+import { render, screen } from "@testing-library/react";
 import SmallManualPromo from "./default";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({

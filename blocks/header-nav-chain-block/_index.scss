@@ -1,0 +1,21 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-header-nav-chain {
+	@include scss.block-components("header-nav-chain");
+	@include scss.block-properties("header-nav-chain");
+
+	&__logo {
+		img {
+			@include scss.block-components("header-nav-chain-logo-image");
+			@include scss.block-properties("header-nav-chain-logo-image");
+		}
+
+		@include scss.block-components("header-nav-chain-logo");
+		@include scss.block-properties("header-nav-chain-logo");
+	}
+
+	&__links-list {
+		@include scss.block-components("header-nav-chain-links-list");
+		@include scss.block-properties("header-nav-chain-links-list");
+	}
+}

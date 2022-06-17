@@ -2,18 +2,12 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import {
-	Button,
-	getNavSpecificSecondaryButtonTheme,
-	BUTTON_TYPES,
-	BUTTON_SIZES,
-} from "@wpmedia/shared-styles";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 import SearchBox from "./search-box";
 import QuerylySearch from "./queryly-search";
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
 
 const NavWidget = ({
-	breakpoint,
 	children = [],
 	customSearchAction,
 	menuButtonClickAction,
@@ -22,7 +16,7 @@ const NavWidget = ({
 	type,
 }) => {
 	const { arcSite } = useFusionContext();
-	const { navColor = "dark", navBarBackground, locale } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	if (!type || type === "none") return null;
 
@@ -30,7 +24,6 @@ const NavWidget = ({
 		(type === "search" && (
 			<SearchBox
 				iconSize={WIDGET_CONFIG[placement]?.iconSize}
-				navBarColor={navColor}
 				placeholderText={phrases.t("header-nav-chain-block.search-text")}
 				customSearchAction={customSearchAction}
 				alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
@@ -44,18 +37,14 @@ const NavWidget = ({
 		)) ||
 		(type === "menu" && (
 			<Button
-				additionalClassNames="nav-sections-btn"
 				aria-label={phrases.t("header-nav-chain-block.sections-button")}
-				buttonSize={BUTTON_SIZES.SMALL}
-				buttonStyle={getNavSpecificSecondaryButtonTheme(navColor, navBarBackground)}
-				buttonType={
-					breakpoint === "desktop" ? BUTTON_TYPES.LABEL_AND_RIGHT_ICON : BUTTON_TYPES.ICON_ONLY
-				}
-				iconType="hamburger-menu"
 				onClick={menuButtonClickAction}
-				text={phrases.t("header-nav-chain-block.sections-button")}
-				type="button"
-			/>
+				iconLeft={<Icon name="HamburgerMenu" />}
+				variant="secondary-reverse"
+				size="small"
+			>
+				{phrases.t("header-nav-chain-block.sections-button")}
+			</Button>
 		));
 
 	return (

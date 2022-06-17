@@ -2,19 +2,19 @@ import React from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+// todo: remove chevron and use themes components
 import { ChevronRightIcon } from "@wpmedia/engine-theme-sdk";
-import styled from "styled-components";
-import Link from "./link";
+import { Link, Stack } from "@wpmedia/arc-themes-components";
 
 function hasChildren(node) {
 	return node.children && node.children.length > 0;
 }
 
 const SectionAnchor = ({ item, isHidden }) =>
-	item.node_type === "link" ? (
-		<Link href={item.url} name={item.display_name} isHidden={isHidden} />
+	item.node_type === "link" && !isHidden ? (
+		<Link href={item.url}>{item.display_name}</Link>
 	) : (
-		<Link href={item._id} name={item.name} isHidden={isHidden} />
+		<Link href={item._id}>{item.name}</Link>
 	);
 
 const onClickSubsection = (evt) => {
@@ -46,11 +46,6 @@ const isSamePath = (current, menuLink) => {
 	}
 	return false;
 };
-
-// $top-nav-stylistic-margin is the 13px variable in scss
-const StyledSectionMenuVariableHeight = styled.ul`
-	height: calc(100vh - ${(props) => props.navHeight}px - 13px);
-`;
 
 /* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 // Disabled a11y eslint is valid here as the div isn't focusable
@@ -128,18 +123,18 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden }) => {
 	);
 };
 
-export default ({ children = [], sections = [], isHidden = false, navHeight }) => {
+export default ({ children = [], sections = [], isHidden = false }) => {
 	const active = sections.filter((s) => !s.inactive);
 
 	return (
 		<>
 			{children}
-			<StyledSectionMenuVariableHeight navHeight={navHeight} className="section-menu">
+			<Stack>
 				{active.map((item) => (
 					<SectionItem key={item._id} item={item} isHidden={isHidden} />
 				))}
 				<li className="section-menu--bottom-placeholder" />
-			</StyledSectionMenuVariableHeight>
+			</Stack>
 		</>
 	);
 };

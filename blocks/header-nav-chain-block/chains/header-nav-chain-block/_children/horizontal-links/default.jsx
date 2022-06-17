@@ -1,23 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import Link from "./_children/link";
+import { Stack, Link, Separator } from "@wpmedia/arc-themes-components";
 
-import "./links-bar.scss";
-
-const ReadableTextNavigationBar = styled.nav`
-	color: ${(props) => props.color};
-
-	a {
-		color: ${(props) => props.color};
-	}
-`;
-
-const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDots, ariaLabel }) => {
+const HorizontalLinksBar = ({
+	hierarchy,
+	showHorizontalSeperatorDots: showHorizontalSeparatorDots,
+	ariaLabel,
+}) => {
 	const { id, arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -44,31 +36,34 @@ const HorizontalLinksBar = ({ hierarchy, navBarColor, showHorizontalSeperatorDot
 		content &&
 		content.children &&
 		content.children.length > 1 &&
-		showHorizontalSeperatorDots
+		showHorizontalSeparatorDots
 	);
 
-	// the interior links and spans need to contrast with nav color scheme
-	const readableContrastingColor = navBarColor === "light" ? "#000" : "#fff";
+	// don't show menu items container if there are no menu items
+	if (menuItems.length === 0) {
+		return null;
+	}
 
 	return (
-		<ReadableTextNavigationBar
+		<Stack
 			key={id}
-			color={readableContrastingColor}
-			className="horizontal-links-bar"
+			direction="horizontal"
+			className="b-header-nav-chain__links-list"
+			alignment="center"
+			wrap="wrap"
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}
 		>
-			{menuItems &&
-				menuItems.map((item, index) => (
-					<PrimaryFont as="span" className="horizontal-links-menu" key={item._id}>
-						{index > 0 && showSeparator ? "\u00a0 • \u00a0" : "\u00A0  \u00A0"}
-						{item.node_type === "link" ? (
-							<Link href={item.url} name={item.display_name} />
-						) : (
-							<Link href={item._id} name={item.name} />
-						)}
-					</PrimaryFont>
-				))}
-		</ReadableTextNavigationBar>
+			{menuItems.map((item, index) => (
+				<>
+					{index > 0 && showSeparator ? <Separator /> : null}
+					{item.node_type === "link" ? (
+						<Link href={item.url}>{item.display_name}</Link>
+					) : (
+						<Link href={item._id}>{item.name}</Link>
+					)}
+				</>
+			))}
+		</Stack>
 	);
 };
 

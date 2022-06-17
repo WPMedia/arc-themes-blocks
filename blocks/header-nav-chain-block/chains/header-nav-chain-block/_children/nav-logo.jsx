@@ -1,8 +1,10 @@
+import { Link } from "@wpmedia/arc-themes-components";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-const NavLogo = ({ alignment, mediumBreakpoint, imageAltText, imageSource }) => {
-	const [isLogoVisible, setLogoVisibility] = useState(false);
+const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource }) => {
+	// eslint-disable-next-line no-unused-vars
+	const [_isLogoVisible, setLogoVisibility] = useState(false);
 
 	const onScrollEvent = (evt) => {
 		if (!evt) {
@@ -60,18 +62,10 @@ const NavLogo = ({ alignment, mediumBreakpoint, imageAltText, imageSource }) => 
 		};
 	}, [mediumBreakpoint]);
 
-	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
-
 	return (
-		<div
-			className={`nav-logo nav-logo-${alignment} ${
-				isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"
-			} ${isLogoSVG ? "svg-logo" : ""}`}
-		>
-			<a href="/" title={imageAltText}>
-				{!!imageSource && <img src={imageSource} alt={imageAltText || ""} />}
-			</a>
-		</div>
+		<Link href="/" title={imageAltText} className="b-header-nav-chain__logo">
+			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}
+		</Link>
 	);
 };
 

@@ -1,0 +1,27 @@
+{
+	"name": "@wpmedia/cross-feature-comm-block",
+	"version": "0.1.0",
+	"description": "Cross Feature Comm Block",
+	"author": "Arc XP - Themes",
+	"homepage": "https://github.com/WPMedia/arc-themes-blocks",
+	"license": "CC-BY-NC-ND-4.0",
+	"main": "",
+	"files": [
+		"features",
+		"layouts",
+		"utils"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+		"directory": "blocks/cross-feature-comm-block"
+	},
+	"peerDependencies": {
+		"@arc-fusion/prop-types": "^0.1.5",
+		"@wpmedia/arc-themes-components": "*"
+	}
+}

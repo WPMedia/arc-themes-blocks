@@ -122,6 +122,7 @@
     "@wpmedia/card-list-block": "file:blocks/card-list-block",
     "@wpmedia/content-api-source-block": "file:blocks/content-api-source-block",
     "@wpmedia/collections-content-source-block": "file:blocks/collections-content-source-block",
+    "@wpmedia/cross-feature-comm-block": "file:blocks/cross-feature-comm-block",
     "@wpmedia/date-block": "file:blocks/date-block",
     "@wpmedia/default-output-block": "file:blocks/default-output-block",
     "@wpmedia/double-chain-block": "file:blocks/double-chain-block",

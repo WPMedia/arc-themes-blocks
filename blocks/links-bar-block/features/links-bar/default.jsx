@@ -41,6 +41,7 @@ const LinksBar = ({ customFields: { navigationConfig = {}, ariaLabel } }) => {
 						as="nav"
 						key={id}
 						aria-label={ariaLabel || phrases.t("links-bar-block.element-aria-label")}
+						wrap="wrap"
 					>
 						{menuItems.map((item, index) => (
 							<React.Fragment key={item._id}>

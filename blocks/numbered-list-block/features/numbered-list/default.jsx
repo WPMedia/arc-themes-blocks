@@ -5,10 +5,19 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
-import { Image, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import "./numbered-list.scss";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Heading, HeadingSection, SecondaryFont } from "@wpmedia/shared-styles";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	getImageFromANS,
+	isServerSide,
+	Heading,
+	HeadingSection,
+	Image,
+	Link,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-numbered-list";
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
@@ -29,7 +38,6 @@ const NumberedList = (props) => {
 			showHeadline = true,
 			showImage = true,
 		},
-		placeholderResizedImageOptions,
 		targetFallbackImage,
 		imageProps,
 	} = props;
@@ -80,58 +88,46 @@ const NumberedList = (props) => {
 
 	return (
 		<HeadingSection>
-			<div className="numbered-list-container layout-section">
-				{title !== "" && contentElements.length ? (
-					<Heading className="list-title">{title}</Heading>
-				) : null}
+			<Stack className={BLOCK_CLASS_NAME}>
+				{title !== "" && contentElements.length ? <Heading>{title}</Heading> : null}
 				<Wrapper>
-					{contentElements.length
-						? contentElements.map((element, i) => {
-								const { headlines: { basic: headlineText = "" } = {}, websites } = element;
-								const imageURL = extractImageFromStory(element);
+					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
+						{contentElements.length
+							? contentElements.map((element, i) => {
+									const { headlines: { basic: headlineText = "" } = {}, websites } = element;
+									const imageURL = getImageFromANS(element);
 
-								if (!websites[arcSite]) {
-									return null;
-								}
-								const url = websites[arcSite].website_url;
+									if (!websites[arcSite]) {
+										return null;
+									}
+									const url = websites[arcSite].website_url;
 
-								return (
-									<React.Fragment key={`numbered-list-${element._id}`}>
-										<div className="numbered-list-item numbered-item-margins">
-											{showHeadline ? (
-												<a href={url} className="headline-list-anchor">
-													<SecondaryFont as="p" className="list-item-number">
-														{i + 1}
-													</SecondaryFont>
-													<Heading className="headline-text">{headlineText}</Heading>
-												</a>
-											) : null}
-											{showImage ? (
-												<a
-													href={url}
-													className="list-anchor-image vertical-align-image"
-													aria-hidden="true"
-													tabIndex="-1"
-												>
-													<Image
-														{...imageProps}
-														url={imageURL || targetFallbackImage}
-														resizedImageOptions={
-															imageURL
-																? extractResizedParams(element)
-																: placeholderResizedImageOptions
-														}
-													/>
-												</a>
-											) : null}
-										</div>
-										<hr />
-									</React.Fragment>
-								);
-						  })
-						: null}
+									return (
+										<React.Fragment key={`numbered-list-${element._id}`}>
+											<Stack className={`${BLOCK_CLASS_NAME}__item`} direction="horizontal">
+												<Paragraph>{i + 1}</Paragraph>
+												{showHeadline ? (
+													<Link href={url}>
+														<Heading>{headlineText}</Heading>
+													</Link>
+												) : null}
+												{showImage ? (
+													<Link
+														className={`${BLOCK_CLASS_NAME}__item-image`}
+														href={url}
+														assistiveHidden={showHeadline}
+													>
+														<Image {...imageProps} src={imageURL || targetFallbackImage} />
+													</Link>
+												) : null}
+											</Stack>
+										</React.Fragment>
+									);
+							  })
+							: null}
+					</Stack>
 				</Wrapper>
-			</div>
+			</Stack>
 		</HeadingSection>
 	);
 };
@@ -146,6 +142,8 @@ const NumberedListWrapper = ({ customFields }) => {
 		contextPath,
 		fallbackImage,
 	});
+
+	// Resizer V1 values - will need updated when implementing v2 resizer
 	const imageProps = {
 		smallWidth: 105,
 		smallHeight: 70,

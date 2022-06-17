@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-tag-title {
+	@include scss.block-components("tag-title");
+	@include scss.block-properties("tag-title");
+}

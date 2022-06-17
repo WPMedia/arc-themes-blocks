@@ -1,23 +1,81 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { SmallPromoPresentation } from "@wpmedia/shared-styles";
+import {
+	formatURL,
+	Heading,
+	HeadingSection,
+	Image,
+	isServerSide,
+	Link,
+	MediaItem,
+	Stack,
+} from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
-const SmallManualPromo = ({
-	customFields = { showImage: true, showHeadline: true, imageRatio: "3:2" },
-}) => {
+const BLOCK_CLASS_NAME = "b-small-manual-promo";
+
+const SmallManualPromo = ({ customFields }) => {
+	const {
+		headline,
+		imagePosition,
+		imageRatio,
+		imageURL,
+		lazyLoad,
+		linkURL,
+		newTab,
+		showHeadline,
+		showImage,
+	} = customFields;
 	const { isAdmin } = useFusionContext();
-	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
-		// On Server
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
+	const PromoImage = () =>
+		showImage ? (
+			<MediaItem>
+				<Image alt={headline} src={imageURL} data-aspect-ratio={imageRatio.replace(":", "/")} />
+			</MediaItem>
+		) : null;
+
+	const PromoHeading = () =>
+		showHeadline ? (
+			<Heading>
+				{linkURL ? (
+					<Link href={formatURL(linkURL)} openInNewTab={newTab}>
+						{headline}
+					</Link>
+				) : (
+					headline
+				)}
+			</Heading>
+		) : null;
+
+	const orientation = ["above", "below"].includes(imagePosition) ? "vertical" : "horizontal";
+
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
-			<SmallPromoPresentation {...customFields} />
+			<HeadingSection>
+				<Stack
+					as="article"
+					direction={orientation}
+					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${orientation}`}
+				>
+					{["below", "right"].includes(imagePosition) ? (
+						<>
+							<PromoHeading />
+							<PromoImage />
+						</>
+					) : (
+						<>
+							<PromoImage />
+							<PromoHeading />
+						</>
+					)}
+				</Stack>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -63,7 +121,11 @@ SmallManualPromo.propTypes = {
 				below: "Image Below",
 			},
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "3:2"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

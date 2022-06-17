@@ -1,50 +1,25 @@
 # `@wpmedia/numbered-list-block`
 
-_Numbered List block for Fusion News Theme. Displays a numbered list where each list item will have a number, headline and an Image._
+Displays a numbered list where each list item will have a number, headline and an Image.
 
-## Acceptance Criteria
+## Custom Fields
 
-- Add AC relevant to the block
-
-## Props
-
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**     | **Required** | **Type** | **Description**                                               |
+| ------------ | ------------ | -------- | ------------------------------------------------------------- |
+| title        |              | string   | Used to add a title above the list items                      |
+| showHeadline |              | boolean  | To denote if the headline for each story item should be shown |
+| showImage    |              | boolean  | To denote if the image for each story item should be shown    |
+| lazyLoad     |              | boolean  | To denote if the block should be rendered client side only    |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+The block relies on an ANS Data in the Feed format with the following fields
 
 ### ANS Fields
 
 - `content_elements.headlines.basic`
 - `content_elements.promo_items`
 - `content_elements.websites[arcSite].website_url`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
 
 ## Additional Considerations
 

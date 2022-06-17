@@ -17,10 +17,6 @@ jest.mock("fusion:intl", () => ({
 	})),
 }));
 
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	formatURL: jest.fn((input) => input.toString()),
-}));
-
 describe("the links bar feature for the default output type", () => {
 	afterEach(() => {
 		jest.resetModules();
@@ -51,9 +47,9 @@ describe("the links bar feature for the default output type", () => {
 				],
 			})),
 		}));
-		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
+		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
-		expect(wrapper.children().at(0).type()).toBe("nav");
+		expect(wrapper.find("nav")).toBeTruthy();
 	});
 
 	it("should not have separator when only one link", () => {
@@ -71,7 +67,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_1\\">test link 1</a></span></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></nav><hr/>"`
 		);
 	});
 
@@ -100,7 +96,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav class=\\"links-bar\\" aria-label=\\"More Links\\"><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_1\\">test link 1</a>  •  </span><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"id_2\\">test link 2</a>  •  </span><span class=\\"sc-bwzfXH lbyqlI links-menu\\"><a href=\\"/\\">Link Text</a></span></nav><hr/>"`
+			`"<nav aria-label=\\"More Links\\" class=\\"c-stack b-links-bar\\" data-style-direction=\\"row\\" data-style-justification=\\"center\\" data-style-alignment=\\"unset\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"/\\">Link Text</a></nav><hr/>"`
 		);
 	});
 
@@ -133,16 +129,19 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
-
-		expect(wrapper.find("span.links-menu")).toHaveLength(4);
-		expect(wrapper.find("span.links-menu a:not([target])")).toHaveLength(3);
-		expect(wrapper.find('span.links-menu a[target="_blank"]')).toHaveLength(1);
+		expect(wrapper.find(".b-links-bar a:not([target])")).toHaveLength(3);
+		expect(wrapper.find('.b-links-bar a[target="_blank"]')).toHaveLength(1);
 	});
 
 	it("should have no menu item if no content is returned", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -154,19 +153,29 @@ describe("the links bar feature for the default output type", () => {
 	it("should render the block with the default aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
 		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "More Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "More Links");
 	});
 
 	it("should render the block with the default aria-label if custom field is empty", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -174,13 +183,18 @@ describe("the links bar feature for the default output type", () => {
 			<LinksBar customFields={{ navigationConfig: "links", ariaLabel: "" }} />
 		);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "More Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "More Links");
 	});
 
 	it("should render the block with the custom aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
@@ -188,6 +202,6 @@ describe("the links bar feature for the default output type", () => {
 			<LinksBar customFields={{ navigationConfig: "links", ariaLabel: "Links" }} />
 		);
 
-		expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "Links");
+		expect(wrapper.find("Stack").props()).toHaveProperty("aria-label", "Links");
 	});
 });

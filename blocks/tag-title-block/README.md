@@ -1,50 +1,20 @@
 # `@wpmedia/tag-title-block`
 
-_Fusion News Theme tag title block. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+_The Tag Title block displays the name and description of a tag and is intended to be used as a header feature on an Tags page._
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                  | **Required** | **Type**      | **Description** |
+| ------------------------- | ------------ | ------------- | --------------- |
+| **required prop**         | yes          | globalContent |                 |
+| **optional prop**         | no           |               |                 |
+| **contentConfig example** |              |               | Tags API        |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+The Tag Title block uses global content from a tags response in order to render.
 
 ### ANS Fields
 
 - `content.Payload[0].name`
 - `content.Payload[0].description`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._

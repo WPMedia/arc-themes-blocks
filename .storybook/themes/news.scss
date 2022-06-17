@@ -136,7 +136,6 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -347,6 +346,7 @@
 					line-height: var(--body-line-height-small),
 				),
 				heading: (
+					font-family: var(--font-family-primary),
 					font-weight: var(--global-font-weight-7),
 				),
 				icon: (
@@ -843,9 +843,9 @@
 					flex: 1 1 0%,
 				),
 				masthead-tagline: (
-					align-items: flex-end,
 					display: flex,
 					flex: 1 1 0%,
+					justify-content: center,
 					font-family: var(--font-family-primary),
 					text-align: center,
 				),
@@ -858,6 +858,36 @@
 				masthead-divider: (
 					margin: 0,
 					padding: 0,
+				),
+				numbered-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				numbered-list-items: (
+					gap: var(--global-spacing-4),
+				),
+				numbered-list-item: (
+					gap: var(--global-spacing-5),
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-4),
+						),
+						link: (
+							flex: 1,
+						),
+						paragraph: (
+							font-family: var(--font-family-secondary),
+							font-size: var(--global-font-size-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				numbered-list-item-image: (
+					max-width: 25%,
 				),
 				overline: (),
 				quad-chain: (
@@ -1046,6 +1076,21 @@
 				small-manual-promo-vertical: (
 					gap: var(--global-spacing-5),
 				),
+				tag-title: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-13),
+							line-height: var(--global-line-height-8),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+					),
+				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -1133,6 +1178,9 @@
 				),
 				video-player-inline-video: (
 					gap: 0,
+				),
+				links-bar: (
+					gap: var(--global-spacing-2),
 				),
 			),
 		),
@@ -1353,7 +1401,9 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";
 @use "../../blocks/quilted-image-block";
@@ -1364,5 +1414,6 @@
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/small-manual-promo-block";
 @use "../../blocks/story-carousel-block";
+@use "../../blocks/tag-title-block";
 @use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

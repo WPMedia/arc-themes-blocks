@@ -43,6 +43,11 @@ export const emptyTagLine = () => {
 	return <MastheadPresentational customFields={customFieldData} displayDate={displayDate} />;
 };
 
+export const shortTagLine = () => {
+	const customFieldData = { ...allCustomFieldData, tagLine: "Arc XP" };
+	return <MastheadPresentational customFields={customFieldData} displayDate={displayDate} />;
+};
+
 export const emptyPromoLinkText = () => {
 	const customFieldData = { ...allCustomFieldData, promoLinkText: "" };
 	return <MastheadPresentational customFields={customFieldData} displayDate={displayDate} />;

@@ -491,9 +491,9 @@
 						),
 						icon: (
 							fill: var(--global-white),
-  					),
-  				),
-    		),
+						),
+					),
+				),
 				article-body: (
 					font-family: var(--font-family-secondary),
 					font-size: var(--global-font-size-4),
@@ -1026,6 +1026,23 @@
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),
 				),
+				small-manual-promo: (
+					components: (
+						image: (
+							flex: 1,
+							aspect-ratio: attr(aspect-ratio),
+						),
+						heading: (
+							flex: 2,
+						),
+					),
+				),
+				small-manual-promo-horizontal: (
+					gap: var(--global-spacing-6),
+				),
+				small-manual-promo-vertical: (
+					gap: var(--global-spacing-5),
+				),
 				triple-chain: (
 					components: (
 						stack: (
@@ -1142,8 +1159,8 @@
 						link: (
 							font-size: var(--body-font-size),
 						),
-  				),
-  			),
+					),
+				),
 				article-body: (
 					font-size: var(--global-font-size-7),
 				),
@@ -1342,6 +1359,7 @@
 @use "../../blocks/share-bar-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
+@use "../../blocks/small-manual-promo-block";
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/triple-chain-block";
 @use "../../blocks/video-player-block";

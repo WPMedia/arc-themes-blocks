@@ -1,0 +1,16 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-small-manual-promo {
+	&__horizontal {
+		@include scss.block-properties("small-manual-promo-horizontal");
+		@include scss.block-components("small-manual-promo-horizontal");
+	}
+
+	&__vertical {
+		@include scss.block-properties("small-manual-promo-vertical");
+		@include scss.block-components("small-manual-promo-vertical");
+	}
+
+	@include scss.block-properties("small-manual-promo");
+	@include scss.block-components("small-manual-promo");
+}

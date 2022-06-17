@@ -5,25 +5,29 @@ import { Stack } from "@wpmedia/arc-themes-components";
 const LAYOUT_CLASS_NAME = "b-single-column-regular";
 
 const SingleColumnRegular = ({ children }) => {
-	const [navigation, main, footer] = React.Children.toArray(children);
+	const [navigation, fullWidth, body, footer] = React.Children.toArray(children);
 
-	if (!navigation && !main && !footer) {
+	if (!navigation && !body && !fullWidth && !footer) {
 		return null;
 	}
+
 	return (
 		<Stack className={LAYOUT_CLASS_NAME}>
 			{navigation ? (
-				<Stack role="banner" className={`${LAYOUT_CLASS_NAME}__navigation`}>
+				<Stack as="header" className={`${LAYOUT_CLASS_NAME}__navigation`}>
 					{navigation}
 				</Stack>
 			) : null}
-			{main ? (
-				<Stack role="main" id="main" className={`${LAYOUT_CLASS_NAME}__main`} tabIndex="-1">
-					{main}
+			{body || fullWidth ? (
+				<Stack as="main" id="main" className={`${LAYOUT_CLASS_NAME}__main`} tabIndex="-1">
+					{fullWidth ? (
+						<Stack className={`${LAYOUT_CLASS_NAME}__full-width`}>{fullWidth}</Stack>
+					) : null}
+					{body ? <Stack className={`${LAYOUT_CLASS_NAME}__body`}>{body}</Stack> : null}
 				</Stack>
 			) : null}
 			{footer ? (
-				<Stack role="contentinfo" className={`${LAYOUT_CLASS_NAME}__footer`}>
+				<Stack as="footer" className={`${LAYOUT_CLASS_NAME}__footer`}>
 					{footer}
 				</Stack>
 			) : null}
@@ -39,6 +43,6 @@ SingleColumnRegular.propTypes = {
 	children: PropTypes.array,
 };
 
-SingleColumnRegular.sections = ["navigation", "main", "footer"];
+SingleColumnRegular.sections = ["navigation", "fullWidth", "body", "footer"];
 
 export default SingleColumnRegular;

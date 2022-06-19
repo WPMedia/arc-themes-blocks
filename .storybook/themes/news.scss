@@ -479,6 +479,7 @@
 					max-height: var(--global-spacing-7),
 				),
 				header-nav-chain-links-list: (
+					display: none,
 					gap: var(--global-spacing-2),
 					height: 100%,
 					components: (
@@ -1219,6 +1220,9 @@
 				),
 			),
 			blocks: (
+				header-nav-chain-links-list: (
+					display: flex,
+				),
 				alert-bar: (
 					components: (
 						link: (

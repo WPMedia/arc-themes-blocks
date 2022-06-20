@@ -25,39 +25,24 @@
 		}
 
 		&.open {
-			// TODO: Need to resolve this...check if inner-drawer-nav's open class is in sync with flyout's open class
-			@media screen and (max-width: 48rem) {
-				.inner-drawer-nav {
-					width: 100vw;
-				}
-			}
-
 			@include scss.block-components("header-nav-chain-flyout-overlay-open");
 			@include scss.block-properties("header-nav-chain-flyout-overlay-open");
 		}
 
 		&.closed {
-			// hide vertical overflow when closed
-			overflow-y: hidden;
-
 			.section-menu {
 				transition: height 100ms ease-in-out 600ms;
 			}
 
-			.inner-drawer-nav {
-				//transform: translate(-$section-width, 0);
-			}
+			@include scss.block-components("header-nav-chain-flyout-overlay-closed");
+			@include scss.block-properties("header-nav-chain-flyout-overlay-closed");
 		}
 
 		@include scss.block-components("header-nav-chain-flyout-overlay");
 		@include scss.block-properties("header-nav-chain-flyout-overlay");
 	}
 
-	.inner-drawer-nav {
-		background-color: #575757;
-		transition: transform 300ms ease-in-out;
-		width: 315px;
-
+	&__flyout-nav-wrapper {
 		.nav-menu {
 			.nav-widget {
 				.nav-search {
@@ -107,43 +92,89 @@
 				}
 			}
 		}
-	}
 
-	@media screen and (max-width: 48rem) {
-		.subsection-container {
-			display: none;
+		&.open {
+			@include scss.block-components("header-nav-chain-flyout-nav-wrapper-open");
+			@include scss.block-properties("header-nav-chain-flyout-nav-wrapper-open");
 		}
+
+		&.closed {
+			@include scss.block-components("header-nav-chain-flyout-nav-wrapper-closed");
+			@include scss.block-properties("header-nav-chain-flyout-nav-wrapper-closed");
+		}
+
+		@include scss.block-components("header-nav-chain-flyout-nav-wrapper");
+		@include scss.block-properties("header-nav-chain-flyout-nav-wrapper");
 	}
 
-	.section-menu {
-		margin-top: 13px;
-		padding: 0;
-
+	&__flyout-nav {
 		> li {
-			font-weight: bold;
-			list-style: none;
-			position: relative;
-			background-color: #575757;
-
-			> a {
-				padding: 0 16px 0 20px;
-			}
-
-			.subsection-anchor a,
-			> a {
-				align-items: center;
-				color: #fff;
-				display: block;
-				font-size: 16px;
-				justify-content: space-between;
-				line-height: 40px;
-				text-decoration: none;
-			}
+			//> a {
+			//padding-top: 0;
+			//padding-right: 16px;
+			//padding-left: 20px;
+			//padding-bottom: 0;
+			//}
+			//
+			//.subsection-anchor a,
+			//> a {
+			//align-items: center;
+			//color: #fff;
+			//display: block;
+			//font-size: 16px;
+			//justify-content: space-between;
+			//line-height: 40px;
+			//text-decoration: none;
+			//}
 
 			&:hover,
 			&:active {
 				background: #575757;
 			}
+		}
+
+		@include scss.block-components("header-nav-chain-flyout-nav");
+		@include scss.block-properties("header-nav-chain-flyout-nav");
+	}
+
+	.subsection-anchor {
+		align-content: center;
+		cursor: pointer;
+		justify-content: space-between;
+		line-height: 40px;
+		padding-right: 16px;
+		padding-left: 20px;
+
+		a {
+			padding: 0;
+		}
+
+		&.open {
+			svg {
+				transform: rotate(-180deg);
+			}
+
+			path {
+				fill: #fff;
+			}
+		}
+
+		&:hover {
+			path {
+				fill: #fff;
+			}
+		}
+	}
+
+	.submenu-caret {
+		align-self: center;
+		appearance: none;
+		background: transparent;
+		border: 0;
+		display: flex;
+
+		path {
+			fill: #ffffff;
 		}
 	}
 
@@ -154,6 +185,12 @@
 
 		&.open {
 			display: flex;
+		}
+	}
+
+	@media screen and (max-width: 48rem) {
+		.subsection-container {
+			display: none;
 		}
 	}
 
@@ -177,48 +214,6 @@
 					background-color: #dadada;
 				}
 			}
-		}
-	}
-
-	.subsection-anchor {
-		align-content: center;
-		cursor: pointer;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		line-height: 40px;
-		padding: 0 16px 0 20px;
-
-		svg {
-			transform: rotate(90deg);
-		}
-
-		&.open {
-			svg {
-				transform: rotate(-90deg);
-			}
-
-			path {
-				fill: #fff;
-			}
-		}
-
-		&:hover {
-			path {
-				fill: #fff;
-			}
-		}
-	}
-
-	.submenu-caret {
-		align-self: center;
-		appearance: none;
-		background: transparent;
-		border: 0;
-		display: flex;
-
-		path {
-			fill: #575757;
 		}
 	}
 }

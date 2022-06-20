@@ -118,14 +118,16 @@ export function PresentationalNav(props) {
 					 * which would be the follow container that's used with `fallbackFocus`
 					 */}
 					<Stack
-						className="inner-drawer-nav"
+						className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
+							isSectionDrawerOpen ? "open" : "closed"
+						}`}
 						direction="vertical"
 						justification="start"
-						style={{ zIndex: 10 }}
 						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 						tabIndex={!sections.length ? "-1" : null}
 					>
 						<SectionNav
+							blockClass={BLOCK_CLASS_NAME}
 							sections={sections}
 							isHidden={!isSectionDrawerOpen}
 							navHeight={scrollAdjustedNavHeight}

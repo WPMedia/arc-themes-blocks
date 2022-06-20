@@ -511,6 +511,46 @@
 					transform: translate(0, 0),
 					width: 100%,
 				),
+				header-nav-chain-flyout-overlay-closed: (
+					// hide vertical overflow when closed
+					overflow-y: hidden,
+					width: 0,
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					z-index: 10,
+					background-color: #575757,
+					transition: transform 300ms ease-in-out,
+					width: 100vw,
+				),
+				header-nav-chain-flyout-nav-wrapper-open: (
+					gap: 12px,
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-100vw, 0),
+				),
+				header-nav-chain-flyout-nav: (
+					gap: 0,
+					font-weight: bold,
+					list-style: none,
+					position: relative,
+					background-color: #575757,
+
+					components: (
+						link: (
+							// color: var(--color-primary),
+							width: 100%,
+							padding-right: 16px,
+							padding-left: 20px,
+							align-items: center,
+							color: #fff,
+							display: block,
+							font-size: 16px,
+							justify-content: space-between,
+							line-height: 40px,
+							text-decoration: none,
+						),
+					),
+				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -1242,6 +1282,12 @@
 				),
 				header-nav-chain-flyout-overlay-open: (
 					background: rgba(25, 25, 25, 0.5),
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					width: 315px,
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-315px, 0),
 				),
 				alert-bar: (
 					components: (

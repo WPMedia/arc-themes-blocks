@@ -84,7 +84,6 @@ export function PresentationalNav(props) {
 				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
 				direction="vertical"
 				justification="start"
-				gap="0"
 				navHeight={navHeight}
 				scrolled={scrolled}
 				// hard-coded to medium breakpoint
@@ -122,7 +121,6 @@ export function PresentationalNav(props) {
 						className="inner-drawer-nav"
 						direction="vertical"
 						justification="start"
-						gap="1rem"
 						style={{ zIndex: 10 }}
 						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 						tabIndex={!sections.length ? "-1" : null}

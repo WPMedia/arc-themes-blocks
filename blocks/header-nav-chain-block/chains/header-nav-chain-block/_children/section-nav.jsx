@@ -129,7 +129,7 @@ export default ({ children = [], sections = [], isHidden = false }) => {
 	return (
 		<>
 			{children}
-			<Stack>
+			<Stack className="section-menu">
 				{active.map((item) => (
 					<SectionItem key={item._id} item={item} isHidden={isHidden} />
 				))}

@@ -50,19 +50,6 @@ describe("the small manual promo feature", () => {
 		}));
 	});
 
-	/*
-	it("should have 1 container fluid class", () => {
-		render(<SmallManualPromo customFields={customFields} />);
-		expect(wrapper.find(".container-fluid")).toHaveLength(1);
-	});
-	*/
-
-	/*
-		useFusionContext.mockImplementationOnce(() => ({
-			isAdmin: true,
-		}));
-		*/
-
 	it("should have one image when showImage is true", () => {
 		render(<SmallManualPromo customFields={customFields} />);
 		expect(screen.queryByRole("img", { name: "test image" })).not.toBeNull();

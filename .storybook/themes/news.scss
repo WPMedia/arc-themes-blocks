@@ -1059,14 +1059,14 @@
 				small-manual-promo: (
 					components: (
 						media-item: (
-							flex: 1 0 min-content,
+							max-width: 33%,
 						),
 						image: (
 							display: inline,
 							aspect-ratio: attr(aspect-ratio),
 						),
 						heading: (
-							flex: 2 0 min-content,
+							flex: 1,
 						),
 					),
 				),

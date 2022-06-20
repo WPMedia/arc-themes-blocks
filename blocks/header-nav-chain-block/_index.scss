@@ -18,4 +18,207 @@
 		@include scss.block-components("header-nav-chain-links-list");
 		@include scss.block-properties("header-nav-chain-links-list");
 	}
+
+	&__flyout-overlay {
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		@media screen and (max-width: 48rem) {
+			.subsection-container {
+				display: none;
+			}
+		}
+
+		.inner-drawer-nav {
+			background-color: #575757;
+			transition: transform 300ms ease-in-out;
+			width: 315px;
+
+			.nav-menu {
+				.nav-widget {
+					.nav-search {
+						justify-content: flex-start;
+
+						input {
+							flex: 1;
+						}
+
+						&.open {
+							input {
+								height: 48px;
+							}
+
+							&.dark {
+								border: 0;
+							}
+						}
+					}
+				}
+
+				& > .nav-components {
+					&--mobile,
+					&--desktop {
+						& > .nav-widget {
+							margin-top: 16px;
+							padding: 0 20px;
+						}
+					}
+
+					&--mobile {
+						display: none;
+					}
+
+					&--desktop {
+						display: inherit;
+					}
+
+					@media screen and (max-width: 48rem) {
+						&--desktop {
+							display: none;
+						}
+
+						&--mobile {
+							display: inherit;
+						}
+					}
+				}
+			}
+		}
+
+		.section-menu {
+			margin-top: 13px;
+			padding: 0;
+
+			> li {
+				font-weight: bold;
+				list-style: none;
+				position: relative;
+				background-color: #575757;
+
+				> a {
+					padding: 0 16px 0 20px;
+				}
+
+				.subsection-anchor a,
+				> a {
+					align-items: center;
+					color: #fff;
+					display: block;
+					font-size: 16px;
+					justify-content: space-between;
+					line-height: 40px;
+					text-decoration: none;
+				}
+
+				&:hover,
+				&:active {
+					background: #575757;
+				}
+			}
+		}
+
+		&.open {
+			// TODO: Need to resolve this...check if inner-drawer-nav's open class is in sync with flyout's open class
+			@media screen and (max-width: 48rem) {
+				.inner-drawer-nav {
+					width: 100vw;
+				}
+			}
+
+			@include scss.block-components("header-nav-chain-flyout-overlay-open");
+			@include scss.block-properties("header-nav-chain-flyout-overlay-open");
+		}
+
+		&.closed {
+			// hide vertical overflow when closed
+			overflow-y: hidden;
+
+			.section-menu {
+				transition: height 100ms ease-in-out 600ms;
+			}
+
+			.inner-drawer-nav {
+				//transform: translate(-$section-width, 0);
+			}
+		}
+
+		.subsection-container {
+			display: none;
+			flex-direction: column;
+			position: relative;
+
+			&.open {
+				display: flex;
+			}
+		}
+
+		.subsection-menu {
+			background: #fff;
+			list-style: none;
+			margin: 0;
+			padding: 4px 0;
+
+			> li {
+				> a {
+					color: #575757;
+					display: block;
+					font-size: 16px;
+					font-weight: bold;
+					line-height: 24px;
+					padding: 8px 16px 8px 20px;
+					text-decoration: none;
+
+					&:hover {
+						background-color: #dadada;
+					}
+				}
+			}
+		}
+
+		.subsection-anchor {
+			align-content: center;
+			cursor: pointer;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			line-height: 40px;
+			padding: 0 16px 0 20px;
+
+			svg {
+				transform: rotate(90deg);
+			}
+
+			&.open {
+				svg {
+					transform: rotate(-90deg);
+				}
+
+				path {
+					fill: #fff;
+				}
+			}
+
+			&:hover {
+				path {
+					fill: #fff;
+				}
+			}
+		}
+
+		.submenu-caret {
+			align-self: center;
+			appearance: none;
+			background: transparent;
+			border: 0;
+			display: flex;
+
+			path {
+				fill: #575757;
+			}
+		}
+
+		@include scss.block-components("header-nav-chain-flyout-overlay");
+		@include scss.block-properties("header-nav-chain-flyout-overlay");
+	}
 }

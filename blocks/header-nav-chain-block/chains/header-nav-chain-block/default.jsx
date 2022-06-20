@@ -79,9 +79,12 @@ export function PresentationalNav(props) {
 				{children}
 			</NavSection>
 
-			<Button
-				id="nav-sections"
-				className={`nav-sections ${isSectionDrawerOpen ? "open" : "closed"}`}
+			<Stack
+				id="flyout-overlay"
+				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
+				direction="vertical"
+				justification="start"
+				gap="0"
 				navHeight={navHeight}
 				scrolled={scrolled}
 				// hard-coded to medium breakpoint
@@ -95,7 +98,7 @@ export function PresentationalNav(props) {
 						returnFocusOnDeactivate: true,
 						onDeactivate: /* istanbul ignore next */ () => {
 							// Focus the next focusable element in the navbar
-							// Workaround for issue where 'nav-sections-btn' wont programatically focus
+							// Workaround for issue where 'nav-sections-btn' wont programmatically focus
 							const focusElement = document.querySelector(`
                 #main-nav a:not(.nav-sections-btn),
                 #main-nav button:not(.nav-sections-btn)
@@ -106,7 +109,8 @@ export function PresentationalNav(props) {
 								focusElement.blur();
 							}
 						},
-						fallbackFocus: /* istanbul ignore next */ () => document.getElementById("nav-sections"),
+						fallbackFocus: /* istanbul ignore next */ () =>
+							document.getElementById("flyout-overlay"),
 					}}
 				>
 					{/**
@@ -114,8 +118,11 @@ export function PresentationalNav(props) {
 					 * has no items and FocusTrap requires at least one tabable element
 					 * which would be the follow container that's used with `fallbackFocus`
 					 */}
-					<div
+					<Stack
 						className="inner-drawer-nav"
+						direction="vertical"
+						justification="start"
+						gap="1rem"
 						style={{ zIndex: 10 }}
 						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 						tabIndex={!sections.length ? "-1" : null}
@@ -132,9 +139,9 @@ export function PresentationalNav(props) {
 								{children}
 							</MenuWidgets>
 						</SectionNav>
-					</div>
+					</Stack>
 				</FocusTrap>
-			</Button>
+			</Stack>
 
 			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
 				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>

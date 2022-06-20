@@ -494,6 +494,23 @@
 						),
 					),
 				),
+				header-nav-chain-flyout-overlay: (
+					margin-top: 64px,
+					z-index: 8,
+					background: rgba(25, 25, 25, 0),
+					-ms-overflow-style: none,
+					position: absolute,
+					scrollbar-width: none,
+					left: 0,
+					top: 0,
+					width: 0,
+				),
+				header-nav-chain-flyout-overlay-open: (
+					background: #575757,
+					overflow-y: scroll,
+					transform: translate(0, 0),
+					width: 100%,
+				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -1222,6 +1239,9 @@
 			blocks: (
 				header-nav-chain-links-list: (
 					display: flex,
+				),
+				header-nav-chain-flyout-overlay-open: (
+					background: rgba(25, 25, 25, 0.5),
 				),
 				alert-bar: (
 					components: (

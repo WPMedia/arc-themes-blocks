@@ -87,16 +87,25 @@
 		@include scss.block-properties("header-nav-chain-flyout-nav");
 	}
 
+	.search-box--right-absolute-positioned {
+		position: absolute;
+		right: 0;
+		height: 3rem;
+	}
+
 	.nav-menu {
 		.nav-widget {
 			.nav-search {
 				justify-content: flex-start;
+				position: relative;
 
 				input {
 					flex: 1;
+					padding: 4px 2rem 4px 11px;
 				}
 
 				&.open {
+					display: flex;
 					input {
 						height: 48px;
 					}

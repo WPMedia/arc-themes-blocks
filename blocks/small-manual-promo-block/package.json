@@ -19,10 +19,6 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/small-manual-promo-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
     "@wpmedia/engine-theme-sdk": "*"

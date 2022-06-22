@@ -1,27 +1,31 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import SmallManualPromo from "./default";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => children,
 }));
+
 jest.mock("@wpmedia/arc-themes-components", () => ({
-	formatURL: jest.fn(),
-	Heading: ({ children }) => <h1>{children}</h1>,
-	HeadingSection: ({ children }) => children,
-	Image: (props) => {
-		const { url, "data-aspect-ratio": dataAspectRatio } = props;
-		return <img src={url} alt="test image" data-aspect-ratio={dataAspectRatio} />;
-	},
+	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	Link: ({ children }) => children,
-	MediaItem: ({ children }) => children,
-	Stack: ({ children }) => <article>{children}</article>,
+}));
+
+jest.mock("fusion:content", () => ({
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => {},
+		useFusionContext: jest.fn(() => ({
+			isAdmin: false,
+		})),
+	})),
 }));
 
 jest.mock("fusion:context", () => ({
-	useFusionContext: jest.fn(() => ({
-		isAdmin: false,
+	useFusionContext: jest.fn(() => ({})),
+	useComponentContext: jest.fn(() => ({
+		registerSuccessEvent: () => ({}),
 	})),
 }));
 
@@ -52,12 +56,12 @@ describe("the small manual promo feature", () => {
 
 	it("should have one image when showImage is true", () => {
 		render(<SmallManualPromo customFields={customFields} />);
-		expect(screen.queryByRole("img", { name: "test image" })).not.toBeNull();
+		expect(screen.queryByRole("img", { name: "This is the headline" })).not.toBeNull();
 	});
 
 	it("should have no image when showImage is false", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, showImage: false }} />);
-		expect(screen.queryByRole("img", { name: "test image" })).toBeNull();
+		expect(screen.queryByRole("img", { name: "This is the headline" })).toBeNull();
 	});
 
 	it("should have no headline when showHeadline is false", () => {
@@ -66,6 +70,7 @@ describe("the small manual promo feature", () => {
 	});
 
 	it("should return null on server-side render from PageBuilder Editor when lazyload is true", () => {
+		isServerSide.mockImplementationOnce(() => true);
 		const { container } = render(
 			<SmallManualPromo customFields={{ ...customFields, lazyLoad: true }} />
 		);
@@ -75,8 +80,8 @@ describe("the small manual promo feature", () => {
 	it("should render image first when imagePosition is set to above", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "above" }} />);
 		const stack = screen.queryByRole("article");
-		const image = screen.queryByRole("img", { name: "test image" });
-		expect(stack.firstChild).toBe(image);
+		const figure = screen.queryByRole("figure");
+		expect(stack.firstChild).toBe(figure);
 	});
 
 	it("should render heading first when imagePosition is set to below", () => {
@@ -89,8 +94,8 @@ describe("the small manual promo feature", () => {
 	it("should render image first when imagePosition is set to left", () => {
 		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "left" }} />);
 		const stack = screen.queryByRole("article");
-		const image = screen.queryByRole("img", { name: "test image" });
-		expect(stack.firstChild).toBe(image);
+		const figure = screen.queryByRole("figure");
+		expect(stack.firstChild).toBe(figure);
 	});
 
 	it("should render heading first when imagePosition is set to right", () => {

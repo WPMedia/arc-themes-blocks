@@ -1057,24 +1057,22 @@
 					gap: var(--global-spacing-6),
 				),
 				small-manual-promo: (
-					components: (
-						media-item: (
-							flex: 1 0 min-content,
-						),
-						image: (
-							display: inline,
-							aspect-ratio: attr(aspect-ratio),
-						),
-						heading: (
-							flex: 2 0 min-content,
-						),
-					),
-				),
-				small-manual-promo-horizontal: (
-					gap: var(--global-spacing-6),
-				),
-				small-manual-promo-vertical: (
+					display: grid,
 					gap: var(--global-spacing-5),
+				),
+				small-manual-promo-above: (
+					grid-template-columns: 1fr,
+				),
+				small-manual-promo-below: (
+					grid-template-columns: 1fr,
+				),
+				small-manual-promo-left: (
+					gap: var(--global-spacing-6),
+					grid-template-columns: 1fr 2fr,
+				),
+				small-manual-promo-right: (
+					gap: var(--global-spacing-6),
+					grid-template-columns: 2fr 1fr,
 				),
 				tag-title: (
 					components: (

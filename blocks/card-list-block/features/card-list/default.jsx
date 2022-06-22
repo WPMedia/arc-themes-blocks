@@ -4,8 +4,8 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { Image, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
+import { getImageFromANS, Image, isServerSide } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import { Byline, Heading, HeadingSection, Overline, PromoDate } from "@wpmedia/shared-styles";
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
@@ -27,7 +27,6 @@ const CardListItems = (props) => {
 			offsetOverride = 0,
 			displayAmount,
 		} = {},
-		placeholderResizedImageOptions,
 		targetFallbackImage,
 		largeImageProps,
 		smallImageProps,
@@ -131,19 +130,17 @@ const CardListItems = (props) => {
 							aria-hidden="true"
 							tabIndex="-1"
 						>
-							{extractImageFromStory(contentItems[0]) ? (
+							{getImageFromANS(contentItems[0]) ? (
 								<Image
 									{...largeImageProps}
-									url={extractImageFromStory(contentItems[0])}
+									src={getImageFromANS(contentItems[0])}
 									alt={contentItems[0].headlines.basic}
-									resizedImageOptions={extractResizedParams(contentItems[0])}
 								/>
 							) : (
 								<Image
 									{...largeImageProps}
-									url={targetFallbackImage}
+									src={targetFallbackImage}
 									alt={largeImageProps.primaryLogoAlt || ""}
-									resizedImageOptions={placeholderResizedImageOptions}
 								/>
 							)}
 						</a>
@@ -164,7 +161,7 @@ const CardListItems = (props) => {
 					</article>
 					{contentItems.slice(1).map((element) => {
 						const { headlines: { basic: headlineText } = {} } = element;
-						const imageURL = extractImageFromStory(element);
+						const imageURL = getImageFromANS(element);
 						const url = element.websites[arcSite]?.website_url;
 						if (!url) {
 							return null;
@@ -185,9 +182,6 @@ const CardListItems = (props) => {
 											{...smallImageProps}
 											url={imageURL || targetFallbackImage}
 											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-											resizedImageOptions={
-												imageURL ? extractResizedParams(element) : placeholderResizedImageOptions
-											}
 										/>
 									</a>
 								</article>
@@ -211,6 +205,7 @@ const CardList = ({ customFields }) => {
 		fallbackImage,
 	});
 
+	// retain for V2
 	const largeImageProps = {
 		smallWidth: 377,
 		smallHeight: 283,
@@ -223,6 +218,7 @@ const CardList = ({ customFields }) => {
 		resizerURL,
 	};
 
+	// retain for V2
 	const smallImageProps = {
 		smallWidth: 105,
 		smallHeight: 70,

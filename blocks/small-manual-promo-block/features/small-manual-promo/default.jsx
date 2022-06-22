@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
+import { useEditableContent } from "fusion:content";
+import { useComponentContext, useFusionContext } from "fusion:context";
 import {
 	formatURL,
 	Heading,
@@ -9,42 +10,38 @@ import {
 	isServerSide,
 	Link,
 	MediaItem,
-	Stack,
+	Grid,
 } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-small-manual-promo";
 
 const SmallManualPromo = ({ customFields }) => {
-	const {
-		headline,
-		imagePosition,
-		imageRatio,
-		imageURL,
-		lazyLoad,
-		linkURL,
-		newTab,
-		showHeadline,
-		showImage,
-	} = customFields;
+	const { headline, imagePosition, imageURL, lazyLoad, linkURL, newTab, showHeadline, showImage } =
+		customFields;
+	const { registerSuccessEvent } = useComponentContext();
 	const { isAdmin } = useFusionContext();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
+
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
-	const PromoImage = () =>
-		showImage ? (
-			<MediaItem>
-				<Image alt={headline} src={imageURL} data-aspect-ratio={imageRatio.replace(":", "/")} />
+	const PromoImage = () => {
+		const { searchableField } = useEditableContent();
+
+		return showImage ? (
+			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+				<Image alt={headline} src={imageURL} searchableField />
 			</MediaItem>
 		) : null;
+	};
 
 	const PromoHeading = () =>
 		showHeadline ? (
 			<Heading>
 				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab}>
+					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
 						{headline}
 					</Link>
 				) : (
@@ -53,15 +50,12 @@ const SmallManualPromo = ({ customFields }) => {
 			</Heading>
 		) : null;
 
-	const orientation = ["above", "below"].includes(imagePosition) ? "vertical" : "horizontal";
-
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Stack
-					as="article"
-					direction={orientation}
-					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${orientation}`}
+				<Grid
+					role="article"
+					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${imagePosition}`}
 				>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
@@ -74,7 +68,7 @@ const SmallManualPromo = ({ customFields }) => {
 							<PromoHeading />
 						</>
 					)}
-				</Stack>
+				</Grid>
 			</HeadingSection>
 		</LazyLoad>
 	);

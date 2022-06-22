@@ -7,7 +7,6 @@ import getProperties from "fusion:properties";
 import { Image, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
 import { Byline, Heading, HeadingSection, Overline, PromoDate } from "@wpmedia/shared-styles";
-import "./card-list.scss";
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;

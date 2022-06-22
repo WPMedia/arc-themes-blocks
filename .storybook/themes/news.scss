@@ -518,7 +518,7 @@
 				),
 				header-nav-chain-flyout-nav-wrapper: (
 					z-index: 10,
-					background-color: #575757,
+					background-color: #292929,
 					transition: transform 300ms ease-in-out,
 					width: 100vw,
 				),
@@ -533,7 +533,6 @@
 					font-weight: bold,
 					list-style: none,
 					position: relative,
-					background-color: #575757,
 
 					components: (
 						link: (
@@ -549,6 +548,9 @@
 							line-height: 40px,
 							text-decoration: none,
 						),
+						link-hover: (),
+						link-active: (),
+						link-visited: (),
 					),
 				),
 				alert-bar: (

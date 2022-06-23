@@ -55,7 +55,7 @@ const SmallManualPromo = ({ customFields }) => {
 			<HeadingSection>
 				<Grid
 					role="article"
-					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${imagePosition}`}
+					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}
 				>
 					{["below", "right"].includes(imagePosition) ? (
 						<>

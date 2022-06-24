@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export const useCustomEvent = (eventName, eventListener, dependencies = []) => {
+const useCustomEvent = (eventName, eventListener, dependencies = []) => {
 	useEffect(() => {
 		if (window && eventName && eventListener) {
 			window.addEventListener(eventName, eventListener);

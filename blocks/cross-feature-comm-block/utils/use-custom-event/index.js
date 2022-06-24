@@ -8,6 +8,7 @@ const useCustomEvent = (eventName, eventListener) => {
 				window.removeEventListener(eventName, eventListener);
 			};
 		}
+		return () => {};
 	}, [eventListener, eventName]);
 
 	return (customEventName = eventName, detail) => {

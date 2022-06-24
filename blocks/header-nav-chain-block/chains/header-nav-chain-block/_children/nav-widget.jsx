@@ -42,6 +42,7 @@ const NavWidget = ({
 				iconLeft={<Icon name="HamburgerMenu" />}
 				variant="secondary-reverse"
 				size="small"
+				className="menu-btn"
 			>
 				{phrases.t("header-nav-chain-block.sections-button")}
 			</Button>

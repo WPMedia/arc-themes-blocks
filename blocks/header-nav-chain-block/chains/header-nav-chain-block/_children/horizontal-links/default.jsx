@@ -47,6 +47,7 @@ const HorizontalLinksBar = ({
 	return (
 		<Stack
 			key={id}
+			as="nav"
 			direction="horizontal"
 			className="b-header-nav-chain__links-list"
 			alignment="center"

@@ -3,10 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import FocusTrap from "focus-trap-react";
-import { Button, Stack } from "@wpmedia/arc-themes-components";
+import { Stack } from "@wpmedia/arc-themes-components";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
 import NavLogo from "./_children/nav-logo";
@@ -29,8 +28,6 @@ export function PresentationalNav(props) {
 		isSectionDrawerOpen,
 		logoAlignment,
 		menuButtonClickAction,
-		navColor,
-		navHeight,
 		scrollAdjustedNavHeight,
 		scrolled,
 		sectionAriaLabel,
@@ -48,43 +45,49 @@ export function PresentationalNav(props) {
 			direction="horizontal"
 			alignment="center"
 		>
-			<NavSection
-				customFields={customFields}
-				menuButtonClickAction={menuButtonClickAction}
-				side="left"
-				signInOrder={signInOrder}
+			<Stack
+				direction="horizontal"
+				alignment="center"
+				className={`${BLOCK_CLASS_NAME}__top-layout`}
 			>
-				{children}
-			</NavSection>
-			<NavLogo
-				alignment={logoAlignment}
-				imageSource={primaryLogoPath}
-				imageAltText={primaryLogoAlt}
-				mediumBreakpoint={mediumBreakpoint}
-			/>
-			{displayLinks ? (
-				<HorizontalLinksBar
-					hierarchy={horizontalLinksHierarchy}
-					navBarColor={navColor}
-					showHorizontalSeperatorDots={showDotSeparators}
-					ariaLabel={ariaLabelLink}
+				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="left"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+				<NavLogo
+					blockClassName={BLOCK_CLASS_NAME}
+					alignment={logoAlignment}
+					imageSource={primaryLogoPath}
+					imageAltText={primaryLogoAlt}
+					mediumBreakpoint={mediumBreakpoint}
 				/>
-			) : null}
-			<NavSection
-				customFields={customFields}
-				menuButtonClickAction={menuButtonClickAction}
-				side="right"
-				signInOrder={signInOrder}
-			>
-				{children}
-			</NavSection>
-
+				{displayLinks ? (
+					<HorizontalLinksBar
+						hierarchy={horizontalLinksHierarchy}
+						showHorizontalSeperatorDots={showDotSeparators}
+						ariaLabel={ariaLabelLink}
+					/>
+				) : null}
+				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="right"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+			</Stack>
 			<Stack
 				id="flyout-overlay"
 				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
 				direction="vertical"
 				justification="start"
-				navHeight={navHeight}
 				scrolled={scrolled}
 				// hard-coded to medium breakpoint
 				breakpoint={mediumBreakpoint}
@@ -154,9 +157,7 @@ const Nav = (props) => {
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
 	const {
-		navColor,
 		breakpoints = { medium: 768 },
-		navBarBackground,
 		locale = "en",
 		primaryLogo,
 		primaryLogoAlt,
@@ -172,16 +173,6 @@ const Nav = (props) => {
 			: deployment(`${contextPath}/${primaryLogo}`));
 
 	const phrases = getTranslatedPhrases(locale);
-
-	const { "primary-color": primaryColor = "#000" } = getThemeStyle(arcSite);
-
-	let backgroundColor = "#000";
-
-	if (navBarBackground === "primary-color") {
-		backgroundColor = primaryColor;
-	} else if (navColor === "light") {
-		backgroundColor = "#fff";
-	}
 
 	const { children = [], customFields } = props;
 	const {
@@ -286,14 +277,12 @@ const Nav = (props) => {
 
 	// 56 pixels nav height on scroll
 	const scrollAdjustedNavHeight = scrolled ? 56 : navHeight;
-	const navColorClass = navColor === "light" ? "light" : "dark";
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
-			backgroundColor={backgroundColor}
 			mediumBreakpoint={mediumBreakpoint}
 			closeDrawer={closeDrawer}
 			customFields={customFields}
@@ -303,8 +292,6 @@ const Nav = (props) => {
 			isSectionDrawerOpen={isSectionDrawerOpen}
 			logoAlignment={logoAlignment}
 			menuButtonClickAction={menuButtonClickAction}
-			navColor={navColor}
-			navColorClass={navColorClass}
 			navHeight={navHeight}
 			scrollAdjustedNavHeight={scrollAdjustedNavHeight}
 			scrolled={scrolled}

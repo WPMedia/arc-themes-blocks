@@ -2,10 +2,17 @@ import React from "react";
 import { hasUserConfiguredNavItems, NAV_BREAKPOINTS, PLACEMENT_AREAS } from "../nav-helper";
 import WidgetList from "./widget-list";
 
-const NavSection = ({ children, customFields, menuButtonClickAction, side, signInOrder }) =>
+const NavSection = ({
+	children,
+	customFields,
+	menuButtonClickAction,
+	side,
+	signInOrder,
+	blockClassName,
+}) =>
 	// istanbul ignore next
 	!side ? null : (
-		<div key={side} className={`nav-${side}`}>
+		<div key={side} className={`${blockClassName}__nav-${side}`}>
 			{
 				// Support for deprecated 'signInOrder' custom field
 				// "If" condition is for rendering "signIn" element

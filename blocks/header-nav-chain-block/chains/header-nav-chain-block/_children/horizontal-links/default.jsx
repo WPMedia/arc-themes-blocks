@@ -9,6 +9,7 @@ const HorizontalLinksBar = ({
 	hierarchy,
 	showHorizontalSeperatorDots: showHorizontalSeparatorDots,
 	ariaLabel,
+	blockClass,
 }) => {
 	const { id, arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
@@ -49,7 +50,7 @@ const HorizontalLinksBar = ({
 			key={id}
 			as="nav"
 			direction="horizontal"
-			className=`${BLOCK_CLASS_NAME}__links-list`
+			className={`${blockClass}__links-list`}
 			alignment="center"
 			wrap="wrap"
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}

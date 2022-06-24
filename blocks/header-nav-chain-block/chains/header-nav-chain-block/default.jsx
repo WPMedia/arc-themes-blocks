@@ -71,6 +71,7 @@ export function PresentationalNav(props) {
 						hierarchy={horizontalLinksHierarchy}
 						showHorizontalSeperatorDots={showDotSeparators}
 						ariaLabel={ariaLabelLink}
+						blockClass={BLOCK_CLASS_NAME}
 					/>
 				) : null}
 				<NavSection

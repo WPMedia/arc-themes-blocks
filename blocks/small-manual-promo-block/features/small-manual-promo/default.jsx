@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
 import {
 	formatURL,
 	Heading,
@@ -20,7 +21,7 @@ const SmallManualPromo = ({ customFields }) => {
 	const { headline, imagePosition, imageURL, lazyLoad, linkURL, newTab, showHeadline, showImage } =
 		customFields;
 	const { registerSuccessEvent } = useComponentContext();
-	const { isAdmin } = useFusionContext();
+	const { arcSite, isAdmin } = useFusionContext();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	if (shouldLazyLoad && isServerSide()) {
@@ -29,10 +30,10 @@ const SmallManualPromo = ({ customFields }) => {
 
 	const PromoImage = () => {
 		const { searchableField } = useEditableContent();
-
+		const { fallbackImage } = getProperties(arcSite);
 		return showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				<Image alt={headline} src={imageURL} searchableField />
+				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
 			</MediaItem>
 		) : null;
 	};

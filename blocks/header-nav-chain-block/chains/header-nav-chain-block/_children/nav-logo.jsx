@@ -2,7 +2,7 @@ import { Link } from "@wpmedia/arc-themes-components";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource }) => {
+const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [_isLogoVisible, setLogoVisibility] = useState(false);
 
@@ -63,7 +63,7 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource }) => {
 	}, [mediumBreakpoint]);
 
 	return (
-		<Link href="/" title={imageAltText} className="b-header-nav-chain__logo">
+		<Link href="/" title={imageAltText} className={`${blockClassName}__logo`}>
 			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}
 		</Link>
 	);

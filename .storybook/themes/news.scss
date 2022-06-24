@@ -220,6 +220,9 @@
 		// --content-scale-width identifies the inner document width for header and content
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
+		"header-nav-chain-height-mobile": 64px,
+		"header-nav-chain-height-desktop": 100px,
+		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0),
 	),
 	$tokens: (
 		default: (
@@ -461,9 +464,11 @@
 			blocks: (
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: 64px,
-					gap: var(--global-spacing-2),
-					padding: 0 var(--global-spacing-5),
+					height: var(--header-nav-chain-height-mobile),
+					padding: var(--global-spacing-2) var(--global-spacing-4),
+					font-weight: var(--global-font-weight-7),
+					font-size: var(--global-font-size-4),
+					line-height: var(--global-line-height-4),
 					components: (
 						icon: (
 							fill: var(--global-white),
@@ -472,15 +477,95 @@
 						),
 						button: (
 							height: var(--global-spacing-7),
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						button-small: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
 						),
 					),
+				),
+				header-nav-chain-top-layout: (
+					width: 100%,
+					gap: var(--global-spacing-5),
+					components: (
+						stack: (
+							justify-content: space-between,
+							align-items: center,
+							text-align: center,
+						),
+					),
+				),
+				header-nav-chain-top-layout-last-child: (
+					margin-right: 0,
+					flex-shrink: 0,
+				),
+				header-nav-chain-top-nav-left: (
+					justify-content: flex-start,
+					flex-shrink: 0,
+				),
+				header-nav-chain-top-nav-right: (
+					display: flex,
+					justify-content: flex-end,
+					flex: 1 0 auto,
+				),
+				header-nav-chain-top-nav-components-mobile: (
+					align-items: center,
+					display: flex,
+				),
+				header-nav-chain-top-nav-components-desktop: (
+					align-items: center,
+					display: none,
+					gap: var(--global-spacing-4),
+				),
+				header-nav-chain-top-nav-widget: (),
+				header-nav-chain-top-nav-widget-last-child: (),
+				header-nav-chain-top-nav-menu-button: (),
+				header-nav-chain-top-nav-menu-button-text: (
+					display: none,
+				),
+				header-nav-chain-logo: (
+					max-height: var(--global-spacing-7),
+					justify-self: center,
+					flex: 1 0 auto,
 				),
 				header-nav-chain-logo-image: (
 					max-height: var(--global-spacing-7),
 				),
+				header-nav-chain-nav-search: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					position: relative,
+				),
+				header-nav-chain-nav-search-input: (
+					padding: 0,
+					width: 0,
+				),
+				header-nav-chain-nav-search-input-open: (
+					font-size: var(--global-font-size-4),
+					height: var(--global-spacing-7),
+					line-height: var(--global-line-height-4),
+					padding: 4px 24px 4px 11px,
+					width: 100%,
+				),
+				header-nav-chain-nav-search-button: (
+					background: transparent,
+					border: transparent,
+					cursor: pointer,
+				),
 				header-nav-chain-links-list: (
+					display: none,
 					gap: var(--global-spacing-2),
-					height: 100%,
+					height: var(--global-spacing-8),
+					flex: 0 3 auto,
+					overflow: hidden,
+					text-align: left,
+					width: auto,
+					flex-wrap: wrap,
 					components: (
 						link: (
 							color: var(--global-white),
@@ -490,6 +575,133 @@
 						),
 						separator: (
 							color: var(--global-white),
+						),
+					),
+				),
+				header-nav-chain-flyout-overlay: (
+					margin-top: var(--header-nav-chain-height-mobile),
+					z-index: 8,
+					background: var(--header-nav-chain-overlay-background-color),
+					// Design needs to provide an overlay alias token
+					-ms-overflow-style: none,
+					// Remove?
+					position: absolute,
+					scrollbar-width: none,
+					left: 0,
+					top: 0,
+					width: 0,
+				),
+				header-nav-chain-flyout-overlay-open: (
+					background: var(--global-black),
+					overflow-y: scroll,
+					transform: translate(0, 0),
+					width: 100%,
+				),
+				header-nav-chain-flyout-overlay-closed: (
+					// hide vertical overflow when closed
+					overflow-y: hidden,
+					width: 0,
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					z-index: 10,
+					background: var(--global-black),
+					transition: transform 300ms ease-in-out,
+					width: 100vw,
+				),
+				header-nav-chain-flyout-nav-wrapper-open: (
+					gap: var(--global-spacing-4),
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-100vw, 0),
+				),
+				header-nav-chain-flyout-menu: (),
+				header-nav-chain-flyout-nav: (
+					gap: 0,
+					font-weight: bold,
+					list-style: none,
+					position: relative,
+
+					components: (
+						link: (
+							width: 100%,
+							padding-left: var(--global-spacing-5),
+							padding-right: var(--global-spacing-10),
+							align-items: center,
+							color: var(--global-white),
+							font-weight: var(--global-font-weight-7),
+							display: block,
+							font-size: var(--global-font-size-4),
+							justify-content: space-between,
+							line-height: var(--global-line-height-7),
+							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--global-white),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-item: (
+					height: var(--global-spacing-8),
+				),
+				header-nav-chain-flyout-nav-item-hover-active: (
+					background-color: var(--global-neutral-7),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor: (
+					height: var(--global-spacing-8),
+					components: (
+						stack: (
+							align-content: center,
+							cursor: pointer,
+							justify-content: space-between,
+							line-height: var(--global-line-height-7),
+							padding-right: var(--global-spacing-4),
+							padding-left: var(--global-spacing-4),
+						),
+						link: (
+							padding-left: var(--global-spacing-2),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor-fill: (
+					fill: var(--icon-fill-color-subtle),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor-open: (
+					background-color: var(--global-neutral-7),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor-open-fill: (
+					fill: var(--global-white),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor-hover-fill: (
+					fill: var(--global-white),
+				),
+				header-nav-chain-flyout-nav-subsection-container: (
+					display: none,
+					flex-direction: column,
+					position: relative,
+				),
+				header-nav-chain-flyout-nav-subsection-container-open: (
+					display: flex,
+				),
+				header-nav-chain-flyout-nav-subsection-menu: (
+					background: var(--global-white),
+					list-style: none,
+					margin: 0,
+					padding: "var(--global-spacing-1), 0",
+				),
+				header-nav-chain-flyout-nav-subsection-menu-links: (
+					padding: 8px 16px 8px 20px,
+					components: (
+						link: (
+							color: var(--global-black),
+							display: block,
+							font-size: var(--global-spacing-4),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--global-white),
+							background-color: var(--global-neutral-6),
 						),
 					),
 				),
@@ -1219,6 +1431,45 @@
 				),
 			),
 			blocks: (
+				header-nav-chain: (
+					background-color: var(--global-black),
+					height: var(--header-nav-chain-height-desktop),
+					padding: var(--global-spacing-3) var(--global-spacing-5),
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-5),
+							width: var(--global-spacing-5),
+						),
+						button: (
+							height: var(--global-spacing-7),
+						),
+					),
+				),
+				header-nav-chain-top-nav-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-top-nav-components-desktop: (
+					display: flex,
+				),
+				header-nav-chain-top-nav-menu-button-text: (
+					display: inline,
+				),
+				header-nav-chain-links-list: (
+					display: flex,
+				),
+				header-nav-chain-flyout-overlay: (
+					margin-top: var(--header-nav-chain-height-desktop),
+				),
+				header-nav-chain-flyout-overlay-open: (
+					background: var(--header-nav-chain-overlay-background-color),
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					width: 315px,
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-315px, 0),
+				),
 				alert-bar: (
 					components: (
 						link: (

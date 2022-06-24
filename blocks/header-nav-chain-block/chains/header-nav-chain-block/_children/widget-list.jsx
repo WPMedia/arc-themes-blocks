@@ -7,10 +7,16 @@ import {
 } from "../nav-helper";
 import NavWidget from "./nav-widget";
 
-const WidgetList = ({ children, customFields, id, menuButtonClickAction, placement }) => {
+const WidgetList = ({
+	breakpoint,
+	children,
+	customFields,
+	id,
+	menuButtonClickAction,
+	placement,
+}) => {
 	// istanbul ignore next
-	const breakpoint = "desktop";
-	if (!id) return null;
+	if (!id || !breakpoint) return null;
 	const { slotCounts } = WIDGET_CONFIG[placement];
 	const widgetList = [];
 	for (let i = 1; i <= slotCounts[breakpoint]; i += 1) {
@@ -19,15 +25,17 @@ const WidgetList = ({ children, customFields, id, menuButtonClickAction, placeme
 		const navWidgetType = getNavWidgetType(cFieldKey, customFields);
 		if (!!navWidgetType && navWidgetType !== "none") {
 			widgetList.push(
-				<NavWidget
-					menuButtonClickAction={menuButtonClickAction}
-					placement={placement}
-					position={customFields[cFieldIndexKey]}
-					type={navWidgetType}
-					breakpoint={breakpoint}
-				>
-					{children}
-				</NavWidget>
+				<div className="nav-widget" key={`${id}_${breakpoint}_${i}`}>
+					<NavWidget
+						menuButtonClickAction={menuButtonClickAction}
+						placement={placement}
+						position={customFields[cFieldIndexKey]}
+						type={navWidgetType}
+						breakpoint={breakpoint}
+					>
+						{children}
+					</NavWidget>
+				</div>
 			);
 		}
 	}

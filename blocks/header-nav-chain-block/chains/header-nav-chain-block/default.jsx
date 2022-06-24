@@ -3,10 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import FocusTrap from "focus-trap-react";
-import { Button, Stack } from "@wpmedia/arc-themes-components";
+import { Stack } from "@wpmedia/arc-themes-components";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
 import NavLogo from "./_children/nav-logo";
@@ -29,8 +28,6 @@ export function PresentationalNav(props) {
 		isSectionDrawerOpen,
 		logoAlignment,
 		menuButtonClickAction,
-		navColor,
-		navHeight,
 		scrollAdjustedNavHeight,
 		scrolled,
 		sectionAriaLabel,
@@ -48,41 +45,49 @@ export function PresentationalNav(props) {
 			direction="horizontal"
 			alignment="center"
 		>
-			<NavSection
-				customFields={customFields}
-				menuButtonClickAction={menuButtonClickAction}
-				side="left"
-				signInOrder={signInOrder}
+			<Stack
+				direction="horizontal"
+				alignment="center"
+				className={`${BLOCK_CLASS_NAME}__top-layout`}
 			>
-				{children}
-			</NavSection>
-			<NavLogo
-				alignment={logoAlignment}
-				imageSource={primaryLogoPath}
-				imageAltText={primaryLogoAlt}
-				mediumBreakpoint={mediumBreakpoint}
-			/>
-			{displayLinks ? (
-				<HorizontalLinksBar
-					hierarchy={horizontalLinksHierarchy}
-					navBarColor={navColor}
-					showHorizontalSeperatorDots={showDotSeparators}
-					ariaLabel={ariaLabelLink}
+				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="left"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+				<NavLogo
+					blockClassName={BLOCK_CLASS_NAME}
+					alignment={logoAlignment}
+					imageSource={primaryLogoPath}
+					imageAltText={primaryLogoAlt}
+					mediumBreakpoint={mediumBreakpoint}
 				/>
-			) : null}
-			<NavSection
-				customFields={customFields}
-				menuButtonClickAction={menuButtonClickAction}
-				side="right"
-				signInOrder={signInOrder}
-			>
-				{children}
-			</NavSection>
-
-			<Button
-				id="nav-sections"
-				className={`nav-sections ${isSectionDrawerOpen ? "open" : "closed"}`}
-				navHeight={navHeight}
+				{displayLinks ? (
+					<HorizontalLinksBar
+						hierarchy={horizontalLinksHierarchy}
+						showHorizontalSeperatorDots={showDotSeparators}
+						ariaLabel={ariaLabelLink}
+					/>
+				) : null}
+				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
+					customFields={customFields}
+					menuButtonClickAction={menuButtonClickAction}
+					side="right"
+					signInOrder={signInOrder}
+				>
+					{children}
+				</NavSection>
+			</Stack>
+			<Stack
+				id="flyout-overlay"
+				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
+				direction="vertical"
+				justification="start"
 				scrolled={scrolled}
 				// hard-coded to medium breakpoint
 				breakpoint={mediumBreakpoint}
@@ -95,7 +100,7 @@ export function PresentationalNav(props) {
 						returnFocusOnDeactivate: true,
 						onDeactivate: /* istanbul ignore next */ () => {
 							// Focus the next focusable element in the navbar
-							// Workaround for issue where 'nav-sections-btn' wont programatically focus
+							// Workaround for issue where 'nav-sections-btn' wont programmatically focus
 							const focusElement = document.querySelector(`
                 #main-nav a:not(.nav-sections-btn),
                 #main-nav button:not(.nav-sections-btn)
@@ -106,7 +111,8 @@ export function PresentationalNav(props) {
 								focusElement.blur();
 							}
 						},
-						fallbackFocus: /* istanbul ignore next */ () => document.getElementById("nav-sections"),
+						fallbackFocus: /* istanbul ignore next */ () =>
+							document.getElementById("flyout-overlay"),
 					}}
 				>
 					{/**
@@ -114,13 +120,17 @@ export function PresentationalNav(props) {
 					 * has no items and FocusTrap requires at least one tabable element
 					 * which would be the follow container that's used with `fallbackFocus`
 					 */}
-					<div
-						className="inner-drawer-nav"
-						style={{ zIndex: 10 }}
+					<Stack
+						className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
+							isSectionDrawerOpen ? "open" : "closed"
+						}`}
+						direction="vertical"
+						justification="start"
 						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 						tabIndex={!sections.length ? "-1" : null}
 					>
 						<SectionNav
+							blockClass={BLOCK_CLASS_NAME}
 							sections={sections}
 							isHidden={!isSectionDrawerOpen}
 							navHeight={scrollAdjustedNavHeight}
@@ -132,9 +142,9 @@ export function PresentationalNav(props) {
 								{children}
 							</MenuWidgets>
 						</SectionNav>
-					</div>
+					</Stack>
 				</FocusTrap>
-			</Button>
+			</Stack>
 
 			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
 				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
@@ -147,9 +157,7 @@ const Nav = (props) => {
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
 	const {
-		navColor,
 		breakpoints = { medium: 768 },
-		navBarBackground,
 		locale = "en",
 		primaryLogo,
 		primaryLogoAlt,
@@ -165,16 +173,6 @@ const Nav = (props) => {
 			: deployment(`${contextPath}/${primaryLogo}`));
 
 	const phrases = getTranslatedPhrases(locale);
-
-	const { "primary-color": primaryColor = "#000" } = getThemeStyle(arcSite);
-
-	let backgroundColor = "#000";
-
-	if (navBarBackground === "primary-color") {
-		backgroundColor = primaryColor;
-	} else if (navColor === "light") {
-		backgroundColor = "#fff";
-	}
 
 	const { children = [], customFields } = props;
 	const {
@@ -279,14 +277,12 @@ const Nav = (props) => {
 
 	// 56 pixels nav height on scroll
 	const scrollAdjustedNavHeight = scrolled ? 56 : navHeight;
-	const navColorClass = navColor === "light" ? "light" : "dark";
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
-			backgroundColor={backgroundColor}
 			mediumBreakpoint={mediumBreakpoint}
 			closeDrawer={closeDrawer}
 			customFields={customFields}
@@ -296,8 +292,6 @@ const Nav = (props) => {
 			isSectionDrawerOpen={isSectionDrawerOpen}
 			logoAlignment={logoAlignment}
 			menuButtonClickAction={menuButtonClickAction}
-			navColor={navColor}
-			navColorClass={navColorClass}
 			navHeight={navHeight}
 			scrollAdjustedNavHeight={scrollAdjustedNavHeight}
 			scrolled={scrolled}

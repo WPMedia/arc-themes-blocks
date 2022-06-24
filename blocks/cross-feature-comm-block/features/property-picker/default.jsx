@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import useCustomEvent from "../../utils/use-custom-event";
-
-const CollapsableContainer = ({ children, title }) => {
-	const [showContent, setShowContent] = useState(true);
-	return (
-		<div style={{ display: "flex", flexDirection: "column" }}>
-			<button type="button" onClick={() => setShowContent(!showContent)}>
-				{showContent ? `--- ${title} ---` : `-+- ${title} -+-`}
-			</button>
-			{showContent ? children : null}
-		</div>
-	);
-};
 
 const Section = ({ children, message, title }) => (
 	<section
@@ -32,10 +20,9 @@ const Section = ({ children, message, title }) => (
 	</section>
 );
 
-const Color = ({ color, setPreferredColor, currentColor }) => (
+const Color = ({ color, currentColor, ...rest }) => (
 	<div
-		key={color}
-		onClick={() => setPreferredColor(color)}
+		{...rest}
 		style={{
 			backgroundColor: color,
 			borderRadius: "1em",
@@ -66,36 +53,32 @@ function PropertyPicker() {
 	return (
 		<>
 			<Section title="Events Example" message={message}>
-				<CollapsableContainer title="Color">
-					<fieldset>
-						<legend>Pick from available colors:</legend>
-						{localData.potentialColors.map((color) => (
-							<Color
-								color={color}
-								currentColor={localData?.color}
-								key={color}
-								setPreferredColor={(color) => dispatchEvent("userPickedColor", { color })}
+				<fieldset>
+					<legend>Pick from available colors:</legend>
+					{localData.potentialColors.map((color) => (
+						<Color
+							color={color}
+							currentColor={localData?.color}
+							key={color}
+							onClick={() => dispatchEvent("userPickedColor", { color })}
+						/>
+					))}
+				</fieldset>
+				<fieldset>
+					<legend>Pick from available sizes:</legend>
+					{localData.potentialSizes.map((size) => (
+						<label key={size} style={{ display: "block", margin: "0.25em" }}>
+							<input
+								checked={localData.current?.size === size}
+								onClick={() => dispatchEvent("userPickedSize", { size })}
+								readOnly
+								type="radio"
+								value={size}
 							/>
-						))}
-					</fieldset>
-				</CollapsableContainer>
-				<CollapsableContainer title="Size">
-					<fieldset>
-						<legend>Pick from available sizes:</legend>
-						{localData.potentialSizes.map((size) => (
-							<label key={size} style={{ display: "block", margin: "0.25em" }}>
-								<input
-									checked={localData.current?.size === size}
-									onClick={() => dispatchEvent("userPickedSize", { size })}
-									readOnly
-									type="radio"
-									value={size}
-								/>
-								{size}
-							</label>
-						))}
-					</fieldset>
-				</CollapsableContainer>
+							{size}
+						</label>
+					))}
+				</fieldset>
 			</Section>
 		</>
 	);

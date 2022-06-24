@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useCustomEvent = (eventName, eventListener, dependencies = []) => {
+const useCustomEvent = (eventName, eventListener) => {
 	useEffect(() => {
 		if (window && eventName && eventListener) {
 			window.addEventListener(eventName, eventListener);
@@ -8,7 +8,7 @@ const useCustomEvent = (eventName, eventListener, dependencies = []) => {
 				window.removeEventListener(eventName, eventListener);
 			};
 		}
-	}, [...dependencies, eventListener, eventName]);
+	}, [eventListener, eventName]);
 
 	return (customEventName = eventName, detail) => {
 		window?.dispatchEvent(new CustomEvent(customEventName, { detail }));

@@ -53,10 +53,7 @@ const SmallManualPromo = ({ customFields }) => {
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Grid
-					role="article"
-					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}
-				>
+				<Grid as="article" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
 							<PromoHeading />

@@ -1,24 +1,19 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import "./tag-title.scss";
-import { PrimaryFont } from "@wpmedia/shared-styles";
+import { Heading, Paragraph, Stack } from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-tag-title";
 
 export const TagTitleOutput = ({ data }) =>
 	// Check if tag exists
 	data && data.Payload && data.Payload[0] ? (
-		<>
-			<PrimaryFont as="h1" className="tag-name">
-				{data.Payload[0].name}
-			</PrimaryFont>
+		<Stack className={BLOCK_CLASS_NAME} direction="vertical">
+			{data.Payload[0].name ? <Heading>{data.Payload[0].name}</Heading> : null}
 			{
 				// Only display description if present
-				data.Payload[0].description ? (
-					<PrimaryFont as="p" className="tag-description">
-						{data.Payload[0].description}
-					</PrimaryFont>
-				) : null
+				data.Payload[0].description ? <Paragraph>{data.Payload[0].description}</Paragraph> : null
 			}
-		</>
+		</Stack>
 	) : null;
 
 const TagTitle = () => {

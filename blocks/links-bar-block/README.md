@@ -1,22 +1,19 @@
-# `@wpmedia/header-nav-block`
+# `@wpmedia/links-bar-block`
 
-_This is the links bar block for the news theme, written as a functional component. It pulls the menu data from the site service content source.# Name of Block_
+The block has links with separators between them. The block takes in display name and destination of the links.
 
-## Acceptance Criteria
-
-- Add AC relevant to the block
+Uses the Link, Separator, and Stack components from Arc Themes Components.
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                                  | **Required** | **Type** | **Description**                                                                  |
+| ----------------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------- |
+| ‘Navigation’ content navigation-hierarchy | yes          | content  | ‘hierarchy’ - default is an empty field; ‘sectionId' - default is an empty field |
+| Arial-label                               | no           | string   | open field with default of “Breaking News Alert” and existing help text          |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+"navigation-hierarchy" is the schema. It uses the content source block @wpmedia/site-hierarchy-content-block.
 
 ### ANS Fields
 
@@ -28,26 +25,14 @@ Outline any schema information requirements necessary to know for ths block
 
 ## Internationalization fields
 
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
+| Phrase key                           | Default (English) |
+| ------------------------------------ | ----------------- |
+| `links-bar-block.element-aria-label` | `More Links`      |
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+N/A
 
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+N/A

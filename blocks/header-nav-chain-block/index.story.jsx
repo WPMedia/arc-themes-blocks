@@ -198,6 +198,36 @@ export const leftLogoWithLinksDark = () => (
 	/>
 );
 
+export const leftLogoWithLinksAndSearch = () => (
+	<PresentationalNav
+		backgroundColor="#000"
+		mediumBreakpoint={768}
+		closeDrawer={() => {}}
+		customFields={{
+			...CUSTOM_FIELDS_BASE,
+			leftComponentDesktop1: "menu",
+			leftComponentDesktop2: "search",
+			leftComponentMobile1: "menu",
+		}}
+		displayLinks
+		horizontalLinksHierarchy="horizontal-links"
+		isAdmin={false}
+		logoAlignment="left"
+		menuButtonClickAction={() => {}}
+		navColor="dark"
+		navColorClass="dark"
+		navHeight={100}
+		scrollAdjustedNavHeight={100}
+		scrolled={false}
+		sectionAriaLabel="Menu des sections"
+		sections={headerNavMock}
+		showDotSeparators={false}
+		signInOrder={1}
+		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
+	/>
+);
+
 export const sectionMenuOpen = () => (
 	<PresentationalNav
 		backgroundColor="#fddede"
@@ -230,6 +260,41 @@ export const sectionMenuOpenDark = () => (
 		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
+		displayLinks
+		horizontalLinksHierarchy="horizontal-links"
+		isAdmin={false}
+		isSectionDrawerOpen
+		logoAlignment="left"
+		menuButtonClickAction={() => {}}
+		navColor="dark"
+		navColorClass="dark"
+		navHeight={100}
+		scrollAdjustedNavHeight={100}
+		scrolled={false}
+		sectionAriaLabel="Menu des sections"
+		sections={headerNavMock}
+		showDotSeparators={false}
+		signInOrder={1}
+		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
+	/>
+);
+
+export const sectionMenuOpenWithSearch = () => (
+	<PresentationalNav
+		backgroundColor="#000"
+		mediumBreakpoint={768}
+		closeDrawer={() => {}}
+		customFields={{
+			...CUSTOM_FIELDS_BASE,
+			leftComponentDesktop1: "search",
+			leftComponentDesktop2: "menu",
+			leftComponentMobile1: "menu",
+			menuComponentDesktop1: "search",
+			menuComponentDesktop2: "queryly",
+			menuComponentMobile1: "search",
+			menuComponentMobile2: "queryly",
+		}}
 		displayLinks
 		horizontalLinksHierarchy="horizontal-links"
 		isAdmin={false}

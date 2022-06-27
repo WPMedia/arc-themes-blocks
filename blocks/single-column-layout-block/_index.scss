@@ -6,6 +6,11 @@
 		@include scss.block-components("single-column-regular-navigation");
 	}
 
+	&__main {
+		@include scss.block-properties("single-column-regular-main");
+		@include scss.block-components("single-column-regular-main");
+	}
+
 	&__full-width {
 		width: 100%;
 		margin: auto;

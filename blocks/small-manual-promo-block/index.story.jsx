@@ -19,6 +19,7 @@ const sampleData = {
 	showHeadline: false,
 	showImage: false,
 	imagePosition: "right",
+	imageRatio: "3:2",
 };
 
 export const allFields = () => {

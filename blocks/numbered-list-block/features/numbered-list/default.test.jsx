@@ -1,74 +1,67 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import { useContent } from "fusion:content";
+import { useFusionContext } from "fusion:context";
+import { isServerSide } from "@wpmedia/arc-themes-components";
+import mockData from "./mock-data";
+
+import NumberedList from "./default";
 
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
+		primaryLogoAlt: "test",
 	}))
 );
-
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <img alt="test" />,
-	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
-}));
-const { default: mockData } = require("./mock-data");
 
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => mockData),
 }));
 
-jest.mock("fusion:context", () => ({
-	useFusionContext: jest.fn(() => ({
-		arcSite: "the-sun",
-		deployment: jest.fn((x) => x),
-		isAdmin: false,
-	})),
+jest.mock("@wpmedia/engine-theme-sdk", () => ({
+	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
-jest.mock("fusion:themes", () => () => ({
-	"primary-font-family": "fontPrimary",
-	"secondary-font-family": "fontSecondary",
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(),
 }));
 
-jest.mock("@wpmedia/shared-styles", () => ({
-	SecondaryFont: ({ children }) => <div id="secondary-font-mock">{children}</div>,
-	Heading: ({ children }) => children,
-	HeadingSection: ({ children }) => children,
-}));
+const listContentConfig = {
+	contentConfigValues: {
+		offset: "0",
+		query: "type:story",
+		size: "30",
+	},
+	contentService: "story-feed-query",
+};
 
 describe("The numbered-list-block", () => {
+	beforeEach(() => {
+		useFusionContext.mockReturnValue({
+			arcSite: "the-sun",
+			contextPath: "pf",
+			deployment: jest.fn((x) => x),
+			isAdmin: false,
+		});
+	});
+
 	describe("render a list of numbered-list-items", () => {
 		it("should render null if isServerSide and lazyLoad enabled", () => {
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
 				showImage: true,
 				lazyLoad: true,
 			};
+			isServerSide.mockReturnValue(true);
 
-			const { default: NumberedList } = require("./default");
-			const wrapper = mount(<NumberedList customFields={customFields} />);
-			expect(wrapper.html()).toBe(null);
+			const { container } = render(<NumberedList customFields={customFields} />);
+			expect(container.firstChild).toBeNull();
 		});
 
 		it("should render in Admin with lazyLoad enabled", () => {
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
@@ -76,225 +69,79 @@ describe("The numbered-list-block", () => {
 				lazyLoad: true,
 			};
 
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "the-sun",
-					deployment: jest.fn((x) => x),
-					isAdmin: true,
-				})),
-			}));
+			useFusionContext.mockReturnValue({
+				arcSite: "the-sun",
+				deployment: jest.fn((x) => x),
+				isAdmin: true,
+			});
 
-			const { default: NumberedList } = require("./default");
-			const wrapper = mount(<NumberedList customFields={customFields} />);
-			expect(wrapper.html()).not.toBe(null);
+			const { container } = render(<NumberedList customFields={customFields} />);
+			expect(container.firstChild).not.toBeNull();
 		});
 
 		it("should render list item with headline, image and a number", () => {
-			const { default: NumberedList } = require("./default");
 			const customFields = {
 				lazyLoad: false,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".numbered-list-container").childAt(0).type()).toEqual("div");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-item-number").length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".list-item-number")
-					.children()
-					.text()
-			).toEqual("1");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".headline-list-anchor").length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".headline-list-anchor")
-					.find(".headline-text")
-			).toHaveLength(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").length
-			).toEqual(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").find("Image")
-					.length
-			).toEqual(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").find("Image")
-			).toHaveProp(
-				"url",
-				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg"
-			);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".headline-list-anchor")
-					.find(".headline-text")
-					.children()
-					.text()
-			).toEqual("Article with only promo_items.basic");
+			expect(screen.getByText("1")).toBeInTheDocument();
+			expect(screen.getByText("Article with only promo_items.basic")).toBeInTheDocument();
+			const image = screen.queryAllByRole("img", { hidden: true });
+			expect(image).toBeTruthy();
+
+			unmount();
 		});
 
 		it("should not show headline", () => {
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: false,
 				showImage: true,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".numbered-list-container").childAt(0).type()).toEqual("div");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-item-number").length
-			).toEqual(0);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").length
-			).toEqual(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").find("Image")
-					.length
-			).toEqual(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").find("Image")
-			).toHaveProp(
-				"url",
-				"https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/K6FTNMOXBBDS5HHTYTAV7LNEF4.jpg"
-			);
+			expect(screen.getByText("1")).toBeInTheDocument();
+			expect(screen.queryByText("Article with only promo_items.basic")).not.toBeInTheDocument();
+
+			unmount();
 		});
 
 		it("should not show image", () => {
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
 				showImage: false,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".numbered-list-container").childAt(0).type()).toEqual("div");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-item-number").length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".list-item-number")
-					.children()
-					.text()
-			).toEqual("1");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".headline-list-anchor").length
-			).toEqual(1);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".headline-list-anchor")
-					.find(".headline-text")
-			).toHaveLength(1);
-			expect(
-				wrapper.find(".numbered-list-container").childAt(0).find(".list-anchor-image").length
-			).toEqual(0);
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(0)
-					.find(".headline-list-anchor")
-					.find(".headline-text")
-					.children()
-					.text()
-			).toEqual("Article with only promo_items.basic");
+			expect(screen.getByText("1")).toBeInTheDocument();
+			expect(screen.queryByText("Article with only promo_items.basic")).toBeInTheDocument();
+			const image = screen.queryAllByRole("img", { hidden: true });
+			expect(image.length).toBe(0);
+
+			unmount();
 		});
 
 		it("should render a placeholder image", () => {
-			jest.mock("fusion:properties", () =>
-				jest.fn(() => ({
-					fallbackImage: "http://placeholder.jpg",
-				}))
-			);
-
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
 				showImage: true,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
+			expect(screen.getByText("1")).toBeInTheDocument();
+			const image = document.querySelectorAll("img[src='pf/placeholder.jpg']");
+			expect(image.length).toBeTruthy();
 
-			expect(wrapper.find(".list-title").exists()).toBe(false);
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".numbered-list-container").childAt(4).type()).toEqual("div");
-			expect(
-				wrapper.find(".numbered-list-container").childAt(4).find(".list-anchor-image").length
-			).toEqual(1);
-			const placeholderImage = wrapper
-				.find(".numbered-list-container")
-				.childAt(4)
-				.find(".list-anchor-image")
-				.children();
-			// the placeholder component is mocked globally in jest mocks with this alt tag
-			expect(placeholderImage.html()).toEqual('<img alt="test">');
-			expect(
-				wrapper
-					.find(".numbered-list-container")
-					.childAt(6)
-					.find(".headline-list-anchor")
-					.find(".headline-text")
-					.children()
-					.text()
-			).toEqual("Story with video as the Lead Art");
+			unmount();
 		});
 
 		it("should render a title from custom field", () => {
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				title: "Numbered List Title",
 				listContentConfig,
@@ -302,55 +149,36 @@ describe("The numbered-list-block", () => {
 				showImage: true,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(wrapper.find(".list-title").exists()).toBe(true);
+			expect(screen.queryByText("Numbered List Title")).toBeInTheDocument();
+
+			unmount();
 		});
 
 		it("should render elements only for arcSite", () => {
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
 				showImage: true,
 			};
 
-			jest.mock("fusion:context", () => ({
-				useFusionContext: jest.fn(() => ({
-					arcSite: "dagen",
-					deployment: jest.fn(() => {}),
-				})),
-			}));
+			useFusionContext.mockReturnValue({
+				arcSite: "dagen",
+				deployment: jest.fn(() => {}),
+			});
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
-
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".numbered-list-item").length).toEqual(1);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
+			expect(screen.queryByText("Article with only promo_items.basic")).toBeInTheDocument();
+			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
+			unmount();
 		});
 	});
 
 	describe("not render list items", () => {
 		it("should render no list if no list items present", () => {
-			jest.mock("fusion:content", () => ({
-				useContent: jest.fn(() => {}),
-			}));
-			const { default: NumberedList } = require("./default");
-			const listContentConfig = {
-				contentConfigValues: {
-					offset: "0",
-					query: "type:story",
-					size: "30",
-				},
-				contentService: "story-feed-query",
-			};
+			useContent.mockReturnValue({});
+
 			const customFields = {
 				listContentConfig,
 				showHeadline: true,
@@ -358,10 +186,12 @@ describe("The numbered-list-block", () => {
 				lazyLoad: false,
 			};
 
-			const wrapper = mount(<NumberedList customFields={customFields} />);
+			const { unmount } = render(<NumberedList customFields={customFields} />);
 
-			expect(wrapper.find(".numbered-list-container").length).toEqual(1);
-			expect(wrapper.find(".list-item-number").exists()).toBe(false);
+			expect(screen.queryByText("Article with a YouTube embed in it")).not.toBeInTheDocument();
+			expect(screen.queryByText("Story with video as the Lead Art")).not.toBeInTheDocument();
+
+			unmount();
 		});
 	});
 });

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }) => {
-	// eslint-disable-next-line no-unused-vars
-	const [_isLogoVisible, setLogoVisibility] = useState(false);
+	const [isLogoVisible, setLogoVisibility] = useState(false);
 
 	const onScrollEvent = (evt) => {
 		if (!evt) {
@@ -63,7 +62,12 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 	}, [mediumBreakpoint]);
 
 	return (
-		<Link href="/" title={imageAltText} className={`${blockClassName}__logo`}>
+		<Link
+			href="/"
+			title={imageAltText}
+			className={`${blockClassName}__logo ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"}`}
+			assistiveHidden={!isLogoVisible}
+		>
 			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}
 		</Link>
 	);

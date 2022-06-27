@@ -38,6 +38,7 @@ export function PresentationalNav(props) {
 	} = props;
 	return (
 		<Stack
+			as="nav"
 			id="main-nav"
 			className={BLOCK_CLASS_NAME}
 			aria-label={sectionAriaLabel}

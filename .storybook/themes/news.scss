@@ -221,7 +221,7 @@
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 		"header-nav-chain-height": 64px,
-		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0),
+		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
 	),
 	$tokens: (
 		default: (
@@ -940,7 +940,6 @@
 					scrollbar-width: none,
 					left: 0,
 					top: 0,
-					width: 0,
 				),
 				header-nav-chain-flyout-overlay-open: (
 					background: var(--global-black),
@@ -967,6 +966,7 @@
 				),
 				header-nav-chain-flyout-menu: (),
 				header-nav-chain-flyout-nav: (
+					height: calc((100vh - var(--header-nav-chain-height)) - var(--global-spacing-4)),
 					gap: 0,
 					font-weight: bold,
 					list-style: none,
@@ -992,6 +992,7 @@
 					),
 				),
 				header-nav-chain-flyout-nav-item: (
+					background-color: var(--global-black),
 					min-height: var(--global-spacing-8),
 				),
 				header-nav-chain-flyout-nav-item-hover-active: (

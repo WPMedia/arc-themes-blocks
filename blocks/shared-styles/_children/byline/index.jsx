@@ -23,6 +23,7 @@ const Byline = (props) => {
 	const FontType = font === DEFAULT_FONT ? SecondaryFont : PrimaryFont;
 
 	const by = content?.credits?.by || globalContent?.credits?.by || [];
+
 	const authors =
 		by.length > 0 &&
 		by

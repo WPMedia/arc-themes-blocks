@@ -4,9 +4,23 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { getImageFromANS, Image, isServerSide } from "@wpmedia/arc-themes-components";
-import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { Byline, Heading, HeadingSection, Overline, PromoDate } from "@wpmedia/shared-styles";
+import getTranslatedPhrases from "fusion:intl";
+import {
+	Attribution,
+	Date,
+	formatAuthors,
+	formatUrl,
+	getImageFromANS,
+	HeadingSection,
+	Heading,
+	Image,
+	isServerSide,
+	Link,
+	Overline,
+	Stack,
+	Separator,
+} from "@wpmedia/arc-themes-components";
+import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
@@ -30,6 +44,11 @@ const CardListItems = (props) => {
 		targetFallbackImage,
 		largeImageProps,
 		smallImageProps,
+		dateLocalization: { language, timeZone, dateFormat } = {
+			language: "en",
+			timeZone: "GMT",
+			dateFormat: "LLLL d, yyyy",
+		},
 	} = props;
 
 	// need to inject the arc site here into use content
@@ -108,96 +127,157 @@ const CardListItems = (props) => {
 
 	const Wrapper = title ? HeadingSection : React.Fragment;
 
-	const showSeparator = !!(
-		contentItems[0] &&
-		contentItems[0].credits &&
-		contentItems[0].credits.by &&
-		contentItems[0].credits.by.length !== 0
-	);
+	/* -------------Start Main Story Properties -------------------- */
+	const sourceContent = contentElements[0];
+	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+
+	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
+	const highlightedImageUrl = getImageFromANS(sourceContent);
+
+	/* Author Formatting */
+	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("byline-block.and-text"));
+	const hasAuthor = !!bylineNodes.length;
+
+	/* Overline */
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (sourceContent.label && sourceContent.label.basic) || {};
+	const shouldUseLabel = !!labelDisplay;
+
+	console.log("sourceContent", sourceContent);
+
+	const { _id: sectionUrl, name: sectionText } =
+		(sourceContent.websites &&
+			sourceContent.websites[arcSite] &&
+			sourceContent.websites[arcSite].website_section) ||
+		{};
+
+	console.log("sectionText", sectionText);
+
+	// Default to websites object data
+	let [text, url] = [sectionText, sectionUrl];
+
+	if (sourceContent?.owner?.sponsored) {
+		text = sourceContent?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		url = null;
+	} else if (shouldUseLabel) {
+		[text, url] = [labelText, labelUrl];
+	}
+
+	console.log("text", text);
+
+	/* ------------- End Main Story Properties --------------------- */
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
-			<div className="card-list-container">
-				{title ? <Heading className="card-list-title">{title}</Heading> : null}
+			<Stack /* className="card-list-container" */>
+				{title ? <Heading /* className="card-list-title" */>{title}</Heading> : null}
 				<Wrapper>
-					<article
-						className="list-item-simple"
-						key={`card-list-${contentItems[0].websites[arcSite].website_url}`}
-					>
-						<a
-							href={contentItems[0].websites[arcSite].website_url}
-							className="list-anchor card-list--link-container vertical-align-image"
-							aria-hidden="true"
-							tabIndex="-1"
+					<Stack divider>
+						<article
+							// className="list-item-simple"
+							key={`card-list-${sourceContent.websites[arcSite].website_url}`}
 						>
-							{getImageFromANS(contentItems[0]) ? (
-								<Image
-									{...largeImageProps}
-									src={getImageFromANS(contentItems[0])}
-									alt={contentItems[0].headlines.basic}
-								/>
-							) : (
-								<Image
-									{...largeImageProps}
-									src={targetFallbackImage}
-									alt={largeImageProps.primaryLogoAlt || ""}
-								/>
-							)}
-						</a>
-						<Overline story={contentItems[0]} className="card-list-overline" />
-						<Heading className="card-list-headline">
-							<a
-								href={contentItems[0].websites[arcSite].website_url}
-								className="list-anchor vertical-align-image"
-								id="card-list--headline-link"
+							<Link
+								href={sourceContent.websites[arcSite].website_url}
+								// className="list-anchor card-list--link-container vertical-align-image"
+								aria-hidden="true"
+								tabIndex="-1"
 							>
-								{contentItems[0].headlines.basic}
-							</a>
-						</Heading>
-						<div className="author-date">
-							<Byline content={contentItems[0]} list separator={showSeparator} font="Primary" />
-							<PromoDate className="story-date" date={contentItems[0].display_date} />
-						</div>
-					</article>
-					{contentItems.slice(1).map((element) => {
-						const { headlines: { basic: headlineText } = {} } = element;
-						const imageURL = getImageFromANS(element);
-						const url = element.websites[arcSite]?.website_url;
-						if (!url) {
-							return null;
-						}
-						return (
-							<React.Fragment key={`card-list-${url}`}>
-								<article className="card-list-item" key={`card-list-${url}`}>
-									<a href={url} className="headline-list-anchor vertical-align-image">
-										<Heading className="headline-text">{headlineText}</Heading>
-									</a>
-									<a
-										href={url}
-										className="list-anchor-image vertical-align-image"
-										aria-hidden="true"
-										tabIndex="-1"
-									>
-										<Image
-											{...smallImageProps}
-											url={imageURL || targetFallbackImage}
-											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-										/>
-									</a>
-								</article>
-							</React.Fragment>
-						);
-					})}
+								<Image
+									{...largeImageProps}
+									src={highlightedImageUrl || targetFallbackImage}
+									alt={
+										sourceContent.headlines.basic
+											? sourceContent.headlines.basic
+											: largeImageProps.primaryLogoAlt || ""
+									}
+								/>
+							</Link>
+							{url || text ? (
+								<Overline href={url ? formatUrl(url) : null} /* className="card-list-overline" */>
+									{text}
+								</Overline>
+							) : null}
+							<Heading /* className="card-list-headline" */>
+								<Link
+									href={sourceContent.websites[arcSite].website_url}
+									// className="list-anchor vertical-align-image"
+									// id="card-list--headline-link"
+								>
+									{sourceContent.headlines.basic}
+								</Link>
+							</Heading>
+							<Attribution /* className="author-date" */>
+								{hasAuthor ? (
+									<>
+										<span /* className={`${BLOCK_CLASS_NAME}__by`} */>
+											{phrases.t("byline-block.by-text")}
+										</span>{" "}
+										<span /* className={`${BLOCK_CLASS_NAME}__names`} */>{bylineNodes}</span>
+										<Separator />
+									</>
+								) : null}
+								<Date
+									/* className="story-date" */ dateTime={sourceContent.display_date}
+									dateString={displayDate}
+								/>
+							</Attribution>
+						</article>
+						{contentItems.slice(1).map((element) => {
+							const { headlines: { basic: headlineText } = {} } = element;
+							const imageURL = getImageFromANS(element);
+							const websiteUrl = element.websites[arcSite]?.website_url;
+							if (!websiteUrl) {
+								return null;
+							}
+							return (
+								<React.Fragment key={`card-list-${websiteUrl}`}>
+									<article /* className="card-list-item" */ key={`card-list-${websiteUrl}`}>
+										<Stack direction="horizontal">
+											<Link
+												href={
+													websiteUrl
+												} /* className="headline-list-anchor vertical-align-image" */
+											>
+												<Heading /* className="headline-text" */>{headlineText}</Heading>
+											</Link>
+											<Link
+												href={websiteUrl}
+												// className="list-anchor-image vertical-align-image"
+												aria-hidden="true"
+												tabIndex="-1"
+											>
+												<Image
+													{...smallImageProps}
+													src={imageURL || targetFallbackImage}
+													alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
+												/>
+											</Link>
+										</Stack>
+									</article>
+								</React.Fragment>
+							);
+						})}
+					</Stack>
 				</Wrapper>
-			</div>
+			</Stack>
 		</HeadingSection>
 	) : null;
 };
 
 const CardList = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL } =
-		getProperties(arcSite);
+	const {
+		websiteDomain,
+		fallbackImage,
+		primaryLogoAlt,
+		breakpoints,
+		resizerURL,
+		dateLocalization,
+	} = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
@@ -246,6 +326,7 @@ const CardList = ({ customFields }) => {
 			<CardListItems
 				id={id}
 				customFields={customFields}
+				dateLocalization={dateLocalization}
 				placeholderResizedImageOptions={placeholderResizedImageOptions}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}

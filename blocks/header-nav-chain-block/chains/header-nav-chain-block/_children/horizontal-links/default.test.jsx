@@ -59,7 +59,7 @@ describe("the links bar feature for the default output type", () => {
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav color=\\"#fff\\" class=\\"sc-bdVaJa dQNWyJ horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span></nav>"`
+			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span></nav>"`
 		);
 	});
 
@@ -88,7 +88,7 @@ describe("the links bar feature for the default output type", () => {
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav color=\\"#fff\\" class=\\"sc-bdVaJa dQNWyJ horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">  •  <a href=\\"id_2/\\">test link 2</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">  •  <a href=\\"id_3/\\">test link 3</a></span></nav>"`
+			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"horizontal-links-menu\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span><span class=\\"horizontal-links-menu\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_3\\">test link 3</a></span></nav>"`
 		);
 	});
 
@@ -113,7 +113,7 @@ describe("the links bar feature for the default output type", () => {
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav color=\\"#fff\\" class=\\"sc-bdVaJa dQNWyJ horizontal-links-bar\\" aria-label=\\"Top Links\\"><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_1/\\">test link 1</a></span><span as=\\"span\\" class=\\"horizontal-links-menu\\">    <a href=\\"id_2/\\">test link 2</a></span></nav>"`
+			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span></nav>"`
 		);
 	});
 
@@ -167,24 +167,71 @@ describe("the links bar feature for the default output type", () => {
 	it("should render the block with the default aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+					{
+						_id: "id_2",
+						name: "test link 2",
+					},
+					{
+						_id: "id_3",
+						node_type: "link",
+						url: "/",
+						display_name: "Link Text",
+					},
+					{
+						_id: "id_4",
+						node_type: "link",
+						url: "http://arcpublishing.com",
+						display_name: "Link Text",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
-		const wrapper = shallow(<LinksBar />);
-
-		expect(wrapper.find(".horizontal-links-bar").props()).toHaveProperty("aria-label", "Top Links");
+		const wrapper = shallow(<LinksBar blockClass="b-header-nav-chain" />);
+		expect(wrapper.find(".b-header-nav-chain__links-list").props()).toHaveProperty(
+			"aria-label",
+			"Top Links"
+		);
 	});
 
 	it("should render the block with the custom aria-label", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => ({
-				children: [],
+				children: [
+					{
+						_id: "id_1",
+						name: "test link 1",
+					},
+					{
+						_id: "id_2",
+						name: "test link 2",
+					},
+					{
+						_id: "id_3",
+						node_type: "link",
+						url: "/",
+						display_name: "Link Text",
+					},
+					{
+						_id: "id_4",
+						node_type: "link",
+						url: "http://arcpublishing.com",
+						display_name: "Link Text",
+					},
+				],
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
-		const wrapper = shallow(<LinksBar ariaLabel="Links" />);
+		const wrapper = shallow(<LinksBar blockClass="b-header-nav-chain" ariaLabel="Links" />);
 
-		expect(wrapper.find(".horizontal-links-bar").props()).toHaveProperty("aria-label", "Links");
+		expect(wrapper.find(".b-header-nav-chain__links-list").props()).toHaveProperty(
+			"aria-label",
+			"Links"
+		);
 	});
 });

@@ -40,9 +40,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
-			expect(navBar.hasClass("horizontal-links")).toBe(true);
-			expect(navBar.hasClass("logo-left")).toBe(true);
+			const navBar = wrapper.find(".b-header-nav-chain");
 			const linksBar = navBar.find("HorizontalLinksBar");
 			expect(linksBar).toHaveLength(1);
 			expect(linksBar.prop("hierarchy")).toEqual(cFields.horizontalLinksHierarchy);
@@ -55,9 +53,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
-			expect(navBar.hasClass("horizontal-links")).toBe(false);
-			expect(navBar.hasClass("logo-center")).toBe(true);
+			const navBar = wrapper.find(".b-header-nav-chain");
 			expect(navBar.find("HorizontalLinksBar")).toHaveLength(0);
 		});
 	});
@@ -66,32 +62,40 @@ describe("the header navigation feature for the default output type", () => {
 		describe("nav-bar default configuration", () => {
 			it("should render search and sections menu in the top-left navbar on desktop", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const navLeftDesktop = wrapper.find(".nav-left > .nav-components--desktop");
+				const navLeftDesktop = wrapper.find(
+					".b-header-nav-chain__nav-left > .nav-components--desktop"
+				);
 				expect(navLeftDesktop).toHaveLength(1);
 				const searchWidget = navLeftDesktop.find(".nav-search");
 				expect(searchWidget).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".nav-sections-btn button");
+				const menuWidget = navLeftDesktop.find(".menu-btn button");
 				expect(menuWidget).toHaveLength(1);
 			});
 
 			it("should render sections menu in the top-left navbar on mobile", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const navLeftDesktop = wrapper.find(".nav-left > .nav-components--mobile");
+				const navLeftDesktop = wrapper.find(
+					".b-header-nav-chain__nav-left > .nav-components--mobile"
+				);
 				expect(navLeftDesktop).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".nav-sections-btn button");
+				const menuWidget = navLeftDesktop.find(".menu-btn button");
 				expect(menuWidget).toHaveLength(1);
 			});
 
 			it("should render nothing inside the .nav-right on desktop", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const widgetList = wrapper.find(".nav-right > .nav-components--desktop > WidgetList");
+				const widgetList = wrapper.find(
+					".b-header-nav-chain__nav-right > .nav-components--desktop > WidgetList"
+				);
 				expect(widgetList).toHaveLength(1);
 				expect(widgetList.children()).toHaveLength(0);
 			});
 
 			it("should render nothing inside the .nav-right on mobile", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const widgetList = wrapper.find(".nav-right > .nav-components--mobile > WidgetList");
+				const widgetList = wrapper.find(
+					".b-header-nav-chain__nav-right > .nav-components--mobile > WidgetList"
+				);
 				expect(widgetList).toHaveLength(1);
 				expect(widgetList.children()).toHaveLength(0);
 			});

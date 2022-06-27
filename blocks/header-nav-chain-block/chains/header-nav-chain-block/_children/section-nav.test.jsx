@@ -102,19 +102,12 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 describe("the SectionNav component", () => {
 	it("should render children", () => {
 		const wrapper = shallow(
-			<SectionNav>
+			<SectionNav blockClass="b-header-nav-chain">
 				<div className="child">Child Item</div>
 			</SectionNav>
 		);
 
 		expect(wrapper.find(".child")).toHaveLength(1);
-		expect(wrapper.find(".section-menu")).toHaveLength(1);
-	});
-
-	it("should render a .section-menu list", () => {
-		const wrapper = shallow(<SectionNav />);
-
-		expect(wrapper.find(".section-menu")).toHaveLength(1);
 	});
 
 	it("should render the correct number of active .section-item elements", () => {
@@ -148,23 +141,26 @@ describe("the SectionNav component", () => {
 			const wrapper = mount(<SectionNav sections={items} />);
 			const numSubsectionContainers = items.filter((i) => i.children && i.children.length).length;
 
-			expect(wrapper.find(".subsection-container")).toHaveLength(numSubsectionContainers); // one of the 3 items is inactive
+			expect(wrapper.find("SubSectionAnchor")).toHaveLength(numSubsectionContainers); // one of the 3 items is inactive
 		});
 
 		it("should render the correct number of active .subsection-item elements", () => {
-			const wrapper = mount(<SectionNav sections={items} />);
+			const wrapper = mount(<SectionNav sections={items} blockClass="b-header-nav-chain" />);
 			const numActiveSubItems = items[0].children.length;
-
-			expect(wrapper.find(".subsection-container").at(0).find("li.subsection-item")).toHaveLength(
+			expect(wrapper.find("SectionItem").at(0).find("li.subsection-item")).toHaveLength(
 				numActiveSubItems
 			);
 		});
 
 		it("should render the text for a subsection link node correctly", () => {
-			const wrapper = mount(<SectionNav sections={items} />);
+			const wrapper = mount(<SectionNav sections={items} blockClass="b-header-nav-chain" />);
 
 			expect(
-				wrapper.find(".subsection-container").at(0).find("li.subsection-item > Link").at(0)
+				wrapper
+					.find(".b-header-nav-chain__subsection-container")
+					.at(0)
+					.find("li.subsection-item > Link")
+					.at(0)
 			).toIncludeText("Basketball");
 		});
 
@@ -173,7 +169,7 @@ describe("the SectionNav component", () => {
 			const section = wrapper.find("li.section-item").at(3);
 
 			expect(section.find("Link > a")).toHaveProp("target", "_blank");
-			expect(section.find("Link > a")).toHaveProp("rel", "noopener noreferrer");
+			expect(section.find("Link > a")).toHaveProp("rel", "noreferrer");
 		});
 
 		it('submenu "caret" button sets open class correctly on parent', () => {

@@ -29,7 +29,6 @@ export function PresentationalNav(props) {
 		logoAlignment,
 		menuButtonClickAction,
 		scrollAdjustedNavHeight,
-		scrolled,
 		sectionAriaLabel,
 		sections,
 		showDotSeparators,
@@ -89,7 +88,6 @@ export function PresentationalNav(props) {
 				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
 				direction="vertical"
 				justification="start"
-				scrolled={scrolled}
 				// hard-coded to medium breakpoint
 				breakpoint={mediumBreakpoint}
 				onClick={closeDrawer}

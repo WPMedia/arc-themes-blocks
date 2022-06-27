@@ -56,14 +56,14 @@ const HorizontalLinksBar = ({
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}
 		>
 			{menuItems.map((item, index) => (
-				<>
+				<span className="horizontal-links-menu" key={item._id}>
 					{index > 0 && showSeparator ? <Separator /> : null}
 					{item.node_type === "link" ? (
 						<Link href={item.url}>{item.display_name}</Link>
 					) : (
 						<Link href={item._id}>{item.name}</Link>
 					)}
-				</>
+				</span>
 			))}
 		</Stack>
 	);

@@ -110,11 +110,11 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClass }) => {
 	const itemsList = items.map((item) => (
 		<li className="subsection-item" key={item._id}>
 			{item.node_type === "link" ? (
-				<Link href={item.url} isHidden={isHidden}>
+				<Link href={item.url} assistiveHidden={isHidden}>
 					{item.display_name}
 				</Link>
 			) : (
-				<Link href={item._id} isHidden={isHidden}>
+				<Link href={item._id} assistiveHidden={isHidden}>
 					{item.name}
 				</Link>
 			)}

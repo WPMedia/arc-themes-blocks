@@ -82,7 +82,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				onMouseDown={handleSearchBtnMousedown}
 				type="button"
 			>
-				<Icon name="Search" width="24" height="24" />
+				<Icon name="Search" width={24} height={24} />
 			</Button>
 		</div>
 	);

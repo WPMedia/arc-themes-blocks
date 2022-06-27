@@ -220,8 +220,7 @@
 		// --content-scale-width identifies the inner document width for header and content
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
-		"header-nav-chain-height-mobile": 64px,
-		"header-nav-chain-height-desktop": 100px,
+		"header-nav-chain-height": 64px,
 		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0),
 	),
 	$tokens: (
@@ -818,7 +817,7 @@
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height-mobile),
+					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
 					font-weight: var(--global-font-weight-7),
 					font-size: var(--global-font-size-4),
@@ -883,8 +882,6 @@
 				),
 				header-nav-chain-logo: (
 					max-height: var(--global-spacing-7),
-					justify-self: center,
-					flex: 1 0 auto,
 				),
 				header-nav-chain-logo-image: (
 					max-height: var(--global-spacing-7),
@@ -933,7 +930,7 @@
 					),
 				),
 				header-nav-chain-flyout-overlay: (
-					margin-top: var(--header-nav-chain-height-mobile),
+					margin-top: var(--header-nav-chain-height),
 					z-index: 8,
 					background: var(--header-nav-chain-overlay-background-color),
 					// Design needs to provide an overlay alias token
@@ -978,8 +975,8 @@
 					components: (
 						link: (
 							width: 100%,
-							padding-left: var(--global-spacing-5),
-							padding-right: var(--global-spacing-10),
+							padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
+								var(--global-spacing-5),
 							align-items: center,
 							color: var(--global-white),
 							font-weight: var(--global-font-weight-7),
@@ -995,7 +992,7 @@
 					),
 				),
 				header-nav-chain-flyout-nav-item: (
-					height: var(--global-spacing-8),
+					min-height: var(--global-spacing-8),
 				),
 				header-nav-chain-flyout-nav-item-hover-active: (
 					background-color: var(--global-neutral-7),
@@ -1008,11 +1005,6 @@
 							cursor: pointer,
 							justify-content: space-between,
 							line-height: var(--global-line-height-7),
-							padding-right: var(--global-spacing-4),
-							padding-left: var(--global-spacing-4),
-						),
-						link: (
-							padding-left: var(--global-spacing-2),
 						),
 					),
 				),
@@ -1038,12 +1030,6 @@
 				),
 				header-nav-chain-flyout-nav-subsection-menu: (
 					background: var(--global-white),
-					list-style: none,
-					margin: 0,
-					padding: "var(--global-spacing-1), 0",
-				),
-				header-nav-chain-flyout-nav-subsection-menu-links: (
-					padding: 8px 16px 8px 20px,
 					components: (
 						link: (
 							color: var(--global-black),
@@ -1051,6 +1037,8 @@
 							font-size: var(--global-spacing-4),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-4),
+							padding: var(--global-spacing-2) var(--global-spacing-4) var(--global-spacing-2)
+								var(--global-spacing-5),
 							text-decoration: none,
 						),
 						link-hover: (
@@ -1418,6 +1406,7 @@
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-2),
+				"header-nav-chain-height": 100px,
 			),
 			components: (
 				carousel: (
@@ -1515,7 +1504,7 @@
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height-desktop),
+					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-3) var(--global-spacing-5),
 					components: (
 						icon: (
@@ -1541,7 +1530,7 @@
 					display: flex,
 				),
 				header-nav-chain-flyout-overlay: (
-					margin-top: var(--header-nav-chain-height-desktop),
+					margin-top: var(--header-nav-chain-height),
 				),
 				header-nav-chain-flyout-overlay-open: (
 					background: var(--header-nav-chain-overlay-background-color),

@@ -78,11 +78,12 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
 				className={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
 				variant="secondary-reverse"
-				iconLeft={<Icon name="Search" width="24" height="24" />}
 				onClick={handleClick}
 				onMouseDown={handleSearchBtnMousedown}
 				type="button"
-			/>
+			>
+				<Icon name="Search" width="24" height="24" />
+			</Button>
 		</div>
 	);
 };

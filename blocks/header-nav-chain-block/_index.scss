@@ -273,12 +273,5 @@
 	&__subsection-menu {
 		@include scss.block-components("header-nav-chain-flyout-nav-subsection-menu");
 		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-menu");
-
-		> li {
-			> a {
-				@include scss.block-components("header-nav-chain-flyout-nav-subsection-menu-links");
-				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-menu-links");
-			}
-		}
 	}
 }

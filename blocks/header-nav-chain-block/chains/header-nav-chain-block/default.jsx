@@ -120,30 +120,35 @@ export function PresentationalNav(props) {
 					 * Need to disable tabindex lint as this is a fallback for when section menu
 					 * has no items and FocusTrap requires at least one tabable element
 					 * which would be the follow container that's used with `fallbackFocus`
+					 *
+					 * Div needed as Stack does not forward Ref - this causes Focus Trap
+					 * library to throw errors without the div
 					 */}
-					<Stack
-						className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
-							isSectionDrawerOpen ? "open" : "closed"
-						}`}
-						direction="vertical"
-						justification="start"
-						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-						tabIndex={!sections.length ? "-1" : null}
-					>
-						<SectionNav
-							blockClass={BLOCK_CLASS_NAME}
-							sections={sections}
-							isHidden={!isSectionDrawerOpen}
-							navHeight={scrollAdjustedNavHeight}
+					<div>
+						<Stack
+							className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
+								isSectionDrawerOpen ? "open" : "closed"
+							}`}
+							direction="vertical"
+							justification="start"
+							// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+							tabIndex={!sections.length ? "-1" : null}
 						>
-							<MenuWidgets
-								customFields={customFields}
-								menuButtonClickAction={menuButtonClickAction}
+							<SectionNav
+								blockClass={BLOCK_CLASS_NAME}
+								sections={sections}
+								isHidden={!isSectionDrawerOpen}
+								navHeight={scrollAdjustedNavHeight}
 							>
-								{children}
-							</MenuWidgets>
-						</SectionNav>
-					</Stack>
+								<MenuWidgets
+									customFields={customFields}
+									menuButtonClickAction={menuButtonClickAction}
+								>
+									{children}
+								</MenuWidgets>
+							</SectionNav>
+						</Stack>
+					</div>
 				</FocusTrap>
 			</Stack>
 

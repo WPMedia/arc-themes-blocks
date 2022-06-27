@@ -95,6 +95,10 @@
 	}
 
 	&__links-list {
+		.horizontal-links-menu {
+			display: flex;
+			gap: 0.5rem;
+		}
 		@include scss.block-components("header-nav-chain-links-list");
 		@include scss.block-properties("header-nav-chain-links-list");
 	}

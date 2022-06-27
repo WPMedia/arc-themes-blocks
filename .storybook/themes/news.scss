@@ -911,7 +911,7 @@
 				header-nav-chain-links-list: (
 					display: none,
 					gap: var(--global-spacing-2),
-					height: var(--global-spacing-8),
+					height: var(--global-spacing-5),
 					flex: 0 3 auto,
 					overflow: hidden,
 					text-align: left,
@@ -928,6 +928,10 @@
 							color: var(--global-white),
 						),
 					),
+				),
+				header-nav-chain-links-list-item: (
+					display: flex,
+					gap: var(--global-spacing-2),
 				),
 				header-nav-chain-flyout-overlay: (
 					margin-top: var(--header-nav-chain-height),

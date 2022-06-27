@@ -39,7 +39,7 @@ const NavWidget = ({
 			<Button
 				aria-label={phrases.t("header-nav-chain-block.sections-button")}
 				onClick={menuButtonClickAction}
-				iconLeft={<Icon name="HamburgerMenu" />}
+				iconRight={<Icon name="HamburgerMenu" />}
 				variant="secondary-reverse"
 				size="small"
 				className="menu-btn"

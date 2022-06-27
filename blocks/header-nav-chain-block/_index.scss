@@ -1,20 +1,7 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-header-nav-chain {
-	@include scss.block-components("header-nav-chain");
-	@include scss.block-properties("header-nav-chain");
-
 	&__top-layout {
-		//> * {
-		//  //@include scss.block-components("header-nav-chain-top-layout");
-		//  //@include scss.block-properties("header-nav-chain-top-layout");
-		//
-		//  &:last-child {
-		//	@include scss.block-components("header-nav-chain-top-layout-last-child");
-		//	@include scss.block-properties("header-nav-chain-top-layout-last-child");
-		//  }
-		//}
-
 		@include scss.block-components("header-nav-chain-top-layout");
 		@include scss.block-properties("header-nav-chain-top-layout");
 	}
@@ -52,20 +39,17 @@
 		}
 
 		.menu-btn {
-			@include scss.block-components("header-nav-chain-top-nav-menu-button");
-			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
-
 			span {
 				@include scss.block-components("header-nav-chain-top-nav-menu-button-text");
 				@include scss.block-properties("header-nav-chain-top-nav-menu-button-text");
 			}
+
+			@include scss.block-components("header-nav-chain-top-nav-menu-button");
+			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
 		}
 	}
 
 	.nav-search {
-		@include scss.block-components("header-nav-chain-nav-search");
-		@include scss.block-properties("header-nav-chain-nav-search");
-
 		input {
 			@include scss.block-components("header-nav-chain-nav-search-input");
 			@include scss.block-properties("header-nav-chain-nav-search-input");
@@ -82,6 +66,9 @@
 				@include scss.block-properties("header-nav-chain-nav-search-button");
 			}
 		}
+
+		@include scss.block-components("header-nav-chain-nav-search");
+		@include scss.block-properties("header-nav-chain-nav-search");
 	}
 
 	&__logo {
@@ -141,32 +128,29 @@
 		@include scss.block-properties("header-nav-chain-flyout-nav-wrapper");
 	}
 
-	/* stylelint-disable */
 	.nav-menu {
-		.nav-widget {
-			.nav-search {
-				justify-content: flex-start;
-				position: relative;
+		.nav-search {
+			justify-content: flex-start;
+			position: relative;
+
+			input {
+				flex: 1;
+				padding: 4px 2rem 4px 11px;
+			}
+
+			&.open {
+				display: flex;
 
 				input {
-					flex: 1;
-					padding: 4px 2rem 4px 11px;
-				}
-
-				&.open {
-					display: flex;
-
-					input {
-						height: 48px;
-					}
+					height: 48px;
 				}
 			}
 		}
 
-		& > .nav-components {
+		.nav-components {
 			&--mobile,
 			&--desktop {
-				& > .nav-widget {
+				.nav-widget {
 					margin-top: 16px;
 					padding: 0 20px;
 				}
@@ -194,17 +178,17 @@
 		@include scss.block-components("header-nav-chain-flyout-menu");
 		@include scss.block-properties("header-nav-chain-flyout-menu");
 	}
-	/* stylelint-enable */
+
 	&__flyout-nav {
 		> li {
-			@include scss.block-components("header-nav-chain-flyout-nav-item");
-			@include scss.block-properties("header-nav-chain-flyout-nav-item");
-
 			&:hover,
 			&:active {
 				@include scss.block-components("header-nav-chain-flyout-nav-item-hover-active");
 				@include scss.block-properties("header-nav-chain-flyout-nav-item-hover-active");
 			}
+
+			@include scss.block-components("header-nav-chain-flyout-nav-item");
+			@include scss.block-properties("header-nav-chain-flyout-nav-item");
 		}
 
 		@include scss.block-components("header-nav-chain-flyout-nav");
@@ -224,11 +208,7 @@
 		}
 	}
 
-	/* stylelint-disable */
 	&__subsection-anchor {
-		@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor");
-		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor");
-
 		.submenu-caret {
 			align-self: center;
 			appearance: none;
@@ -237,9 +217,6 @@
 			display: flex;
 
 			svg {
-				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-fill");
-				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-fill");
-
 				&:hover {
 					@include scss.block-components(
 						"header-nav-chain-flyout-nav-subsection-anchor-hover-fill"
@@ -248,34 +225,42 @@
 						"header-nav-chain-flyout-nav-subsection-anchor-hover-fill"
 					);
 				}
+
+				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-fill");
+				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-fill");
+			}
+
+			&.open {
+				svg {
+					transform: rotate(-180deg);
+					@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
+					@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
+				}
+
+				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open");
+				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open");
 			}
 		}
 
-		&.open {
-			svg {
-				transform: rotate(-180deg);
-				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
-				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
-			}
-
-			@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open");
-			@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open");
-		}
+		@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor");
+		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor");
 	}
-	/* stylelint-enable */
 
 	&__subsection-container {
-		@include scss.block-components("header-nav-chain-flyout-nav-subsection-container");
-		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-container");
-
 		&.open {
 			@include scss.block-components("header-nav-chain-flyout-nav-subsection-container-open");
 			@include scss.block-properties("header-nav-chain-flyout-nav-subsection-container-open");
 		}
+
+		@include scss.block-components("header-nav-chain-flyout-nav-subsection-container");
+		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-container");
 	}
 
 	&__subsection-menu {
 		@include scss.block-components("header-nav-chain-flyout-nav-subsection-menu");
 		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-menu");
 	}
+
+	@include scss.block-components("header-nav-chain");
+	@include scss.block-properties("header-nav-chain");
 }

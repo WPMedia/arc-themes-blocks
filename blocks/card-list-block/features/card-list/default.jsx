@@ -136,6 +136,8 @@ const CardListItems = (props) => {
 							{extractImageFromStory(contentItems[0]) ? (
 								<Image
 									{...largeImageProps}
+									width={377}
+									height={283}
 									src={extractImageFromStory(contentItems[0])}
 									alt={contentItems[0].headlines.basic}
 									resizedImageOptions={extractResizedParams(contentItems[0])}
@@ -143,6 +145,8 @@ const CardListItems = (props) => {
 							) : (
 								<Image
 									{...largeImageProps}
+									width={377}
+									height={283}
 									src={targetFallbackImage}
 									alt={largeImageProps.primaryLogoAlt || ""}
 									resizedImageOptions={placeholderResizedImageOptions}
@@ -179,6 +183,8 @@ const CardListItems = (props) => {
 								>
 									<Image
 										{...smallImageProps}
+										height={105}
+										width={70}
 										src={imageURL || targetFallbackImage}
 										alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
 										resizedImageOptions={
@@ -207,24 +213,12 @@ const CardList = ({ customFields }) => {
 	});
 
 	const largeImageProps = {
-		smallWidth: 377,
-		smallHeight: 283,
-		mediumWidth: 377,
-		mediumHeight: 283,
-		largeWidth: 377,
-		largeHeight: 283,
 		primaryLogoAlt,
 		breakpoints,
 		resizerURL,
 	};
 
 	const smallImageProps = {
-		smallWidth: 105,
-		smallHeight: 70,
-		mediumWidth: 105,
-		mediumHeight: 70,
-		largeWidth: 105,
-		largeHeight: 70,
 		primaryLogoAlt,
 		breakpoints,
 		resizerURL,

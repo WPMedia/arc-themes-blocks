@@ -767,6 +767,33 @@
 						),
 					),
 				),
+				card-list: (
+					background-color: pink,
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-7),
+							// 20 px
+							line-height: var(--global-line-height-4),
+							//24px
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				card-list-items: (
+					background-color: green,
+					components: (),
+				),
+				card-list-main-item: (
+					background-color: yellow,
+					components: (),
+				),
+				card-list-title: (
+					background-color: gainsboro,
+					components: (),
+				),
 				double-chain: (
 					components: (
 						stack: (
@@ -1394,6 +1421,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";

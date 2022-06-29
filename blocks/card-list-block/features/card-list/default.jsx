@@ -22,6 +22,8 @@ import {
 } from "@wpmedia/arc-themes-components";
 import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
 
+const BLOCK_CLASS_NAME = "b-card-list";
+
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
 
@@ -146,15 +148,11 @@ const CardListItems = (props) => {
 	} = (sourceContent.label && sourceContent.label.basic) || {};
 	const shouldUseLabel = !!labelDisplay;
 
-	console.log("sourceContent", sourceContent);
-
 	const { _id: sectionUrl, name: sectionText } =
 		(sourceContent.websites &&
 			sourceContent.websites[arcSite] &&
 			sourceContent.websites[arcSite].website_section) ||
 		{};
-
-	console.log("sectionText", sectionText);
 
 	// Default to websites object data
 	let [text, url] = [sectionText, sectionUrl];
@@ -166,18 +164,22 @@ const CardListItems = (props) => {
 		[text, url] = [labelText, labelUrl];
 	}
 
-	console.log("text", text);
-
 	/* ------------- End Main Story Properties --------------------- */
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
-			<Stack /* className="card-list-container" */>
-				{title ? <Heading /* className="card-list-title" */>{title}</Heading> : null}
+			<Stack className={BLOCK_CLASS_NAME}>
+				{title ? (
+					<Heading className={`${BLOCK_CLASS_NAME}__title`} /* className="card-list-title" */>
+						{title}
+					</Heading>
+				) : null}
 				<Wrapper>
 					<Stack divider>
-						<article
+						<Stack
+							as="article"
 							// className="list-item-simple"
+							className={`${BLOCK_CLASS_NAME}__main-item`}
 							key={`card-list-${sourceContent.websites[arcSite].website_url}`}
 						>
 							<Link
@@ -225,7 +227,7 @@ const CardListItems = (props) => {
 									dateString={displayDate}
 								/>
 							</Attribution>
-						</article>
+						</Stack>
 						{contentItems.slice(1).map((element) => {
 							const { headlines: { basic: headlineText } = {} } = element;
 							const imageURL = getImageFromANS(element);
@@ -234,31 +236,30 @@ const CardListItems = (props) => {
 								return null;
 							}
 							return (
-								<React.Fragment key={`card-list-${websiteUrl}`}>
-									<article /* className="card-list-item" */ key={`card-list-${websiteUrl}`}>
-										<Stack direction="horizontal">
-											<Link
-												href={
-													websiteUrl
-												} /* className="headline-list-anchor vertical-align-image" */
-											>
-												<Heading /* className="headline-text" */>{headlineText}</Heading>
-											</Link>
-											<Link
-												href={websiteUrl}
-												// className="list-anchor-image vertical-align-image"
-												aria-hidden="true"
-												tabIndex="-1"
-											>
-												<Image
-													{...smallImageProps}
-													src={imageURL || targetFallbackImage}
-													alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-												/>
-											</Link>
-										</Stack>
-									</article>
-								</React.Fragment>
+								<Stack
+									key={`card-list-${websiteUrl}`}
+									as="article"
+									className={`${BLOCK_CLASS_NAME}__items`}
+									direction="horizontal"
+								>
+									<Link
+										href={websiteUrl} /* className="headline-list-anchor vertical-align-image" */
+									>
+										<Heading /* className="headline-text" */>{headlineText}</Heading>
+									</Link>
+									<Link
+										href={websiteUrl}
+										// className="list-anchor-image vertical-align-image"
+										aria-hidden="true"
+										tabIndex="-1"
+									>
+										<Image
+											{...smallImageProps}
+											src={imageURL || targetFallbackImage}
+											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
+										/>
+									</Link>
+								</Stack>
 							);
 						})}
 					</Stack>

@@ -1,6 +1,5 @@
 import React from "react";
 import { mount } from "enzyme";
-import getProperties from "fusion:properties";
 import QuerylySearch from "./queryly-search";
 
 jest.mock("fusion:properties", () =>

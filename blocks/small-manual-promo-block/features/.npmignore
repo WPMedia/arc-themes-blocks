@@ -1,4 +1,1 @@
-*.test.js
 *.test.jsx
-mock*.*
-*.snap

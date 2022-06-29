@@ -1,23 +1,73 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { SmallPromoPresentation } from "@wpmedia/shared-styles";
+import { useEditableContent } from "fusion:content";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import {
+	formatURL,
+	Heading,
+	HeadingSection,
+	Image,
+	isServerSide,
+	Link,
+	MediaItem,
+	Grid,
+} from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
-const SmallManualPromo = ({
-	customFields = { showImage: true, showHeadline: true, imageRatio: "3:2" },
-}) => {
-	const { isAdmin } = useFusionContext();
-	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
-		// On Server
+const BLOCK_CLASS_NAME = "b-small-manual-promo";
+
+const SmallManualPromo = ({ customFields }) => {
+	const { headline, imagePosition, imageURL, lazyLoad, linkURL, newTab, showHeadline, showImage } =
+		customFields;
+	const { registerSuccessEvent } = useComponentContext();
+	const { arcSite, isAdmin } = useFusionContext();
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+
+	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
+	const PromoImage = () => {
+		const { searchableField } = useEditableContent();
+		const { fallbackImage } = getProperties(arcSite);
+		return showImage ? (
+			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+			</MediaItem>
+		) : null;
+	};
+
+	const PromoHeading = () =>
+		showHeadline ? (
+			<Heading>
+				{linkURL ? (
+					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+						{headline}
+					</Link>
+				) : (
+					headline
+				)}
+			</Heading>
+		) : null;
+
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
-			<SmallPromoPresentation {...customFields} />
+			<HeadingSection>
+				<Grid as="article" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}>
+					{["below", "right"].includes(imagePosition) ? (
+						<>
+							<PromoHeading />
+							<PromoImage />
+						</>
+					) : (
+						<>
+							<PromoImage />
+							<PromoHeading />
+						</>
+					)}
+				</Grid>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -63,7 +113,11 @@ SmallManualPromo.propTypes = {
 				below: "Image Below",
 			},
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "3:2"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

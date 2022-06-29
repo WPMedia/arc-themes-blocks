@@ -35,7 +35,8 @@
 
 		&.closed {
 			.section-menu {
-				transition: height 100ms ease-in-out 600ms;
+				@include scss.block-components("header-nav-chain-flyout-overlay-closed-transition");
+				@include scss.block-properties("header-nav-chain-flyout-overlay-closed-transition");
 			}
 
 			@include scss.block-components("header-nav-chain-flyout-overlay-closed");
@@ -64,21 +65,13 @@
 
 		.nav-components {
 			&--mobile {
-				display: none;
+				@include scss.block-components("header-nav-chain-flyout-nav-components-mobile");
+				@include scss.block-properties("header-nav-chain-flyout-nav-components-mobile");
 			}
 
 			&--desktop {
-				display: inherit;
-			}
-
-			@media screen and (max-width: 48rem) {
-				&--desktop {
-					display: none;
-				}
-
-				&--mobile {
-					display: inherit;
-				}
+				@include scss.block-components("header-nav-chain-flyout-nav-components-desktop");
+				@include scss.block-properties("header-nav-chain-flyout-nav-components-desktop");
 			}
 		}
 
@@ -217,6 +210,16 @@
 	}
 
 	&__logo {
+		&.nav-logo-show {
+			@include scss.block-components("header-nav-chain-logo-show");
+			@include scss.block-properties("header-nav-chain-logo-show");
+		}
+
+		&.nav-logo-hidden {
+			@include scss.block-components("header-nav-chain-logo-hidden");
+			@include scss.block-properties("header-nav-chain-logo-hidden");
+		}
+
 		img {
 			@include scss.block-components("header-nav-chain-logo-image");
 			@include scss.block-properties("header-nav-chain-logo-image");

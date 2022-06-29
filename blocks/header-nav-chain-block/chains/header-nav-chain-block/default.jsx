@@ -36,15 +36,12 @@ export function PresentationalNav(props) {
 		primaryLogoPath,
 		primaryLogoAlt,
 	} = props;
+	const styles = {
+		height: scrollAdjustedNavHeight,
+		transition: "height .3s linear",
+	};
 	return (
-		<Stack
-			as="nav"
-			id="main-nav"
-			className={BLOCK_CLASS_NAME}
-			aria-label={sectionAriaLabel}
-			direction="horizontal"
-			alignment="center"
-		>
+		<nav id="main-nav" className={BLOCK_CLASS_NAME} aria-label={sectionAriaLabel} style={styles}>
 			<Stack
 				direction="horizontal"
 				alignment="center"
@@ -154,7 +151,7 @@ export function PresentationalNav(props) {
 			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
 				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
 			) : null}
-		</Stack>
+		</nav>
 	);
 }
 /* Main Component */
@@ -194,8 +191,6 @@ const Nav = (props) => {
 
 	const displayLinks = horizontalLinksHierarchy && logoAlignment === "left";
 
-	const navHeight = desktopNavivationStartHeight || 56;
-
 	const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
 	const mainContent = useContent({
@@ -226,6 +221,9 @@ const Nav = (props) => {
 
 	const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [navHeight, setNavHeight] = useState(
+		desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert"
+	);
 
 	const closeNavigation = () => {
 		setSectionDrawerOpen(false);
@@ -261,27 +259,41 @@ const Nav = (props) => {
 
 	// istanbul ignore next
 	useEffect(() => {
-		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {
-			return undefined;
-		}
-		const handleScroll = () => {
+		const handleScrollOrResize = () => {
+			const isDesktop = window.matchMedia(`(min-width: ${mediumBreakpoint}px)`).matches;
 			const pageOffset = window.pageYOffset;
-			if (pageOffset > shrinkDesktopNavivationHeight) {
-				setScrolled(true);
-			} else if (pageOffset < shrinkDesktopNavivationHeight - desktopNavivationStartHeight) {
+			if (!isDesktop) {
 				setScrolled(false);
+				setNavHeight("revert");
+			} else if (!shrinkDesktopNavivationHeight) {
+				setScrolled(false);
+				setNavHeight(desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert");
+			} else if (pageOffset > shrinkDesktopNavivationHeight) {
+				setNavHeight(
+					shrinkDesktopNavivationHeight ? `${shrinkDesktopNavivationHeight}px` : "revert"
+				);
+				setScrolled(true);
+			} else if (pageOffset < desktopNavivationStartHeight) {
+				setScrolled(false);
+				setNavHeight(desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert");
 			}
+		};
+		const handleScroll = () => {
+			handleScrollOrResize();
+		};
+
+		const handleResize = () => {
+			handleScrollOrResize();
 		};
 
 		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("resize", handleResize);
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("resize", handleResize);
 		};
 	}, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
 
-	// 56 pixels nav height on scroll
-	const scrollAdjustedNavHeight = scrolled ? 56 : navHeight;
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
@@ -297,8 +309,7 @@ const Nav = (props) => {
 			isSectionDrawerOpen={isSectionDrawerOpen}
 			logoAlignment={logoAlignment}
 			menuButtonClickAction={menuButtonClickAction}
-			navHeight={navHeight}
-			scrollAdjustedNavHeight={scrollAdjustedNavHeight}
+			scrollAdjustedNavHeight={navHeight}
 			scrolled={scrolled}
 			sectionAriaLabel={sectionAriaLabel}
 			sections={sections}

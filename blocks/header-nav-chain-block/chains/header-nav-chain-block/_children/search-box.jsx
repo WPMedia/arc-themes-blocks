@@ -78,6 +78,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
 				className={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
 				variant="secondary-reverse"
+				size="small"
 				onClick={handleClick}
 				onMouseDown={handleSearchBtnMousedown}
 				type="button"

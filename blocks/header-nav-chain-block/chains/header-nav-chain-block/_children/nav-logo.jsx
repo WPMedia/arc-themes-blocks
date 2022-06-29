@@ -27,7 +27,7 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 	const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
 
 	useEffect(() => {
-		const mastHead = document.querySelector(".masthead-block-container .masthead-block-logo");
+		const mastHead = document.querySelector(".b-masthead .b-masthead__logo");
 		if (!mastHead) {
 			return undefined;
 		}
@@ -52,7 +52,7 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 		}
 
 		const timerID = setTimeout(() => {
-			const mastHead = document.querySelector(".masthead-block-container .masthead-block-logo");
+			const mastHead = document.querySelector(".b-masthead .b-masthead__logo");
 			if (!mastHead) {
 				setLogoVisibility(true);
 			}
@@ -64,11 +64,15 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 		};
 	}, [mediumBreakpoint]);
 
+	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
+
 	return (
 		<Link
 			href="/"
 			title={imageAltText}
-			className={`${blockClassName}__logo ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"}`}
+			className={`${blockClassName}__logo  ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${
+				isLogoSVG ? "svg-logo" : ""
+			}`}
 			assistiveHidden={!isLogoVisible}
 		>
 			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}

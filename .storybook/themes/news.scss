@@ -822,6 +822,16 @@
 					font-weight: var(--global-font-weight-7),
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+					transform: translateZ(0),
+					// Hardware acceleration performance on height adjustments
+					justify-content: center,
+					display: flex,
+					align-items: center,
+					width: 100%,
+					position: sticky,
+					top: 0px,
+					margin-bottom: 0px,
+					z-index: 1,
 					components: (
 						icon: (
 							fill: var(--global-white),
@@ -882,6 +892,22 @@
 				),
 				header-nav-chain-logo: (
 					max-height: var(--global-spacing-7),
+				),
+				header-nav-chain-logo-hidden: (
+					opacity: 0,
+					transition: (
+						opacity 0.8s ease,
+						visibility 0s ease 0s,
+					),
+					visibility: hidden,
+				),
+				header-nav-chain-logo-show: (
+					opacity: 1,
+					transition: (
+						opacity 0.8s ease,
+						visibility 0s ease 0s,
+					),
+					visibility: visible,
 				),
 				header-nav-chain-logo-image: (
 					max-height: var(--global-spacing-7),
@@ -956,6 +982,9 @@
 					overflow-y: hidden,
 					width: 0,
 				),
+				header-nav-chain-flyout-overlay-closed-transition: (
+					transition: height 100ms ease-in-out 600ms,
+				),
 				header-nav-chain-flyout-nav-wrapper: (
 					z-index: 10,
 					background: var(--global-black),
@@ -972,6 +1001,12 @@
 					margin-top: var(--global-spacing-3),
 					padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
 						var(--global-spacing-5),
+				),
+				header-nav-chain-flyout-nav-components-mobile: (
+					display: inherit,
+				),
+				header-nav-chain-flyout-nav-components-desktop: (
+					display: none,
 				),
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height)) - var(--global-spacing-4)),
@@ -1548,6 +1583,12 @@
 				),
 				header-nav-chain-flyout-nav-wrapper-closed: (
 					transform: translate(-315px, 0),
+				),
+				header-nav-chain-flyout-nav-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-flyout-nav-components-desktop: (
+					display: inherit,
 				),
 				masthead: (
 					display: flex,

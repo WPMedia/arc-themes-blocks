@@ -5,6 +5,11 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import mockData, { oneListItem } from "./mock-data";
 
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => true),
+}));
+
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => mockData),
 }));
@@ -26,18 +31,8 @@ jest.mock("fusion:properties", () =>
 );
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div />,
 	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
-}));
-
-jest.mock("@wpmedia/shared-styles", () => ({
-	__esModule: true,
-	Byline: () => <div />,
-	Overline: () => <div />,
-	Heading: ({ children }) => children,
-	HeadingSection: ({ children }) => children,
-	PromoDate: () => <div />,
+	localizeDate: jest.fn(() => "date"),
 }));
 
 describe("Card list", () => {

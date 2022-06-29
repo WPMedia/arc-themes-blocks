@@ -14,9 +14,6 @@ import {
 	HeadingSection,
 	Image,
 	Paragraph,
-	Attribution,
-	Separator,
-	Date,
 	Stack,
 } from "@wpmedia/arc-themes-components";
 import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
@@ -42,9 +39,6 @@ const LargeManualPromo = ({ customFields }) => {
 		showOverline,
 		showDescription,
 		overlineURL,
-		author,
-		dateTime,
-		dateString,
 		hideImageCaption,
 		hideImageCredits,
 		hideImageTitle,
@@ -75,7 +69,7 @@ const LargeManualPromo = ({ customFields }) => {
 
 	const PromoHeading = () =>
 		showHeadline ? (
-			<Heading className={`${BLOCK_CLASS_NAME}__heading`}>
+			<Heading>
 				{linkURL ? (
 					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
 						{headline}
@@ -89,31 +83,14 @@ const LargeManualPromo = ({ customFields }) => {
 	const PromoOverline = () => {
 		if (showOverline) {
 			if (overlineURL) {
-				return (
-					<Overline href={overlineURL} className={`${BLOCK_CLASS_NAME}__overline`}>
-						{overline}
-					</Overline>
-				);
+				return <Overline href={overlineURL}>{overline}</Overline>;
 			}
-			return <Overline className={`${BLOCK_CLASS_NAME}__overline`}>{overline}</Overline>;
+			return <Overline>{overline}</Overline>;
 		}
 		return null;
 	};
 
-	const PromoDescription = () =>
-		showDescription ? (
-			<Paragraph className={`${BLOCK_CLASS_NAME}__description`}>{description}</Paragraph>
-		) : null;
-
-	const PromoAttribution = () => (
-		<Attribution className={`${BLOCK_CLASS_NAME}__attributes`}>
-			<span>Authors: {author}</span>
-			&nbsp;
-			<Separator />
-			&nbsp;
-			<Date dateTime={dateTime} dateString={dateString} />
-		</Attribution>
-	);
+	const PromoDescription = () => (showDescription ? <Paragraph>{description}</Paragraph> : null);
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -127,7 +104,6 @@ const LargeManualPromo = ({ customFields }) => {
 						<PromoOverline />
 						<PromoHeading />
 						<PromoDescription />
-						<PromoAttribution />
 					</Stack>
 				</Grid>
 			</HeadingSection>
@@ -165,14 +141,6 @@ LargeManualPromo.propTypes = {
 		newTab: PropTypes.bool.tag({
 			label: "Open in new tab",
 			defaultValue: false,
-			group: "Configure Content",
-		}),
-		author: PropTypes.string.tag({
-			label: "Author",
-			group: "Configure Content",
-		}),
-		dateTime: PropTypes.string.tag({
-			label: "DateTime",
 			group: "Configure Content",
 		}),
 		dateString: PropTypes.string.tag({

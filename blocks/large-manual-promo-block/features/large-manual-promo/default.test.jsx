@@ -5,7 +5,6 @@ import {
 	MediaItem,
 	Heading,
 	Overline,
-	Attribution,
 	Paragraph,
 	Link,
 } from "@wpmedia/arc-themes-components";
@@ -134,11 +133,6 @@ describe("the large promo feature", () => {
 	it("should render Paragraph component when showDescription is true", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Paragraph)).toHaveLength(1);
-	});
-
-	it("should render Attribution component", () => {
-		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Attribution)).toHaveLength(1);
 	});
 
 	it("should not render Overline, Header, MediaItem when corresponding show props are false", () => {

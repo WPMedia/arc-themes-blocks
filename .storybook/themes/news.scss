@@ -781,6 +781,11 @@
 						stack: (
 							gap: var(--global-spacing-4),
 						),
+						overline: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-7),
+							line-height: var(--global-line-height-4),
+						),
 					),
 				),
 				card-list-title: (

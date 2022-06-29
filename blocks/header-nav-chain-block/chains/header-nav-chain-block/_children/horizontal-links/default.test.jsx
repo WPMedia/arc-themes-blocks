@@ -22,11 +22,6 @@ jest.mock("fusion:context", () => ({
 		arcSite: "dagen",
 	})),
 }));
-jest.mock("fusion:intl", () =>
-	jest.fn(() => ({
-		t: jest.fn(() => "Top Links"),
-	}))
-);
 
 describe("the links bar feature for the default output type", () => {
 	afterEach(() => {
@@ -55,11 +50,15 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = shallow(
-			<LinksBar customFields={{ navigationConfig: "links" }} showHorizontalSeperatorDots />
+			<LinksBar
+				blockClass="b-header-nav-chain"
+				customFields={{ navigationConfig: "links" }}
+				showHorizontalSeperatorDots
+			/>
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span></nav>"`
+			`"<nav aria-label=\\"header-nav-chain-block.links-element-aria-label\\" class=\\"c-stack b-header-nav-chain__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"b-header-nav-chain__links-list-item\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span></nav>"`
 		);
 	});
 
@@ -84,11 +83,15 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = shallow(
-			<LinksBar customFields={{ navigationConfig: "links" }} showHorizontalSeperatorDots />
+			<LinksBar
+				blockClass="b-header-nav-chain"
+				customFields={{ navigationConfig: "links" }}
+				showHorizontalSeperatorDots
+			/>
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"horizontal-links-menu\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span><span class=\\"horizontal-links-menu\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_3\\">test link 3</a></span></nav>"`
+			`"<nav aria-label=\\"header-nav-chain-block.links-element-aria-label\\" class=\\"c-stack b-header-nav-chain__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"b-header-nav-chain__links-list-item\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"b-header-nav-chain__links-list-item\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span><span class=\\"b-header-nav-chain__links-list-item\\"><span class=\\"c-separator\\"></span><a class=\\"c-link\\" href=\\"id_3\\">test link 3</a></span></nav>"`
 		);
 	});
 
@@ -109,11 +112,15 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = shallow(
-			<LinksBar customFields={{ navigationConfig: "links" }} showHorizontalSeperatorDots={false} />
+			<LinksBar
+				blockClass="b-header-nav-chain"
+				customFields={{ navigationConfig: "links" }}
+				showHorizontalSeperatorDots={false}
+			/>
 		);
 
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<nav aria-label=\\"Top Links\\" class=\\"c-stack undefined__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"horizontal-links-menu\\"><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span></nav>"`
+			`"<nav aria-label=\\"header-nav-chain-block.links-element-aria-label\\" class=\\"c-stack b-header-nav-chain__links-list\\" data-style-direction=\\"horizontal\\" data-style-justification=\\"start\\" data-style-alignment=\\"center\\" data-style-inline=\\"false\\" data-style-wrap=\\"wrap\\"><span class=\\"b-header-nav-chain__links-list-item\\"><a class=\\"c-link\\" href=\\"id_1\\">test link 1</a></span><span class=\\"b-header-nav-chain__links-list-item\\"><a class=\\"c-link\\" href=\\"id_2\\">test link 2</a></span></nav>"`
 		);
 	});
 
@@ -145,11 +152,17 @@ describe("the links bar feature for the default output type", () => {
 				],
 			})),
 		}));
-		const wrapper = mount(<LinksBar customFields={{ navigationConfig: "links" }} />);
+		const wrapper = mount(
+			<LinksBar blockClass="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
+		);
 
-		expect(wrapper.find("span.horizontal-links-menu")).toHaveLength(4);
-		expect(wrapper.find("span.horizontal-links-menu a:not([target])")).toHaveLength(3);
-		expect(wrapper.find('span.horizontal-links-menu a[target="_blank"]')).toHaveLength(1);
+		expect(wrapper.find("span.b-header-nav-chain__links-list-item")).toHaveLength(4);
+		expect(wrapper.find("span.b-header-nav-chain__links-list-item a:not([target])")).toHaveLength(
+			3
+		);
+		expect(
+			wrapper.find('span.b-header-nav-chain__links-list-item a[target="_blank"]')
+		).toHaveLength(1);
 	});
 
 	it("should have no menu item if no content is returned", () => {
@@ -159,7 +172,9 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
-		const wrapper = shallow(<LinksBar customFields={{ navigationConfig: "links" }} />);
+		const wrapper = shallow(
+			<LinksBar blockClass="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
+		);
 
 		expect(wrapper.find("nav > span")).toHaveLength(0);
 	});
@@ -195,7 +210,7 @@ describe("the links bar feature for the default output type", () => {
 		const wrapper = shallow(<LinksBar blockClass="b-header-nav-chain" />);
 		expect(wrapper.find(".b-header-nav-chain__links-list").props()).toHaveProperty(
 			"aria-label",
-			"Top Links"
+			"header-nav-chain-block.links-element-aria-label"
 		);
 	});
 

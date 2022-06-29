@@ -771,6 +771,7 @@
 					box-shadow: var(--global-box-shadow-1),
 					border-radius: 0 var(--border-radius) var(--border-radius) 0,
 					padding: var(--global-spacing-4),
+					background-color: var(--background-color),
 					components: (
 						heading: (
 							font-weight: var(--global-font-weight-7),
@@ -792,6 +793,15 @@
 							max-height: 40vh,
 							object-fit: cover,
 							width: 100%,
+						),
+					),
+				),
+				card-list-secondary-item: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+							font-weight: var(--global-font-weight-4),
 						),
 					),
 				),

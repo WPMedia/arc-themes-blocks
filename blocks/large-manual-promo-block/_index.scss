@@ -1,0 +1,36 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-large-manual-promo {
+	&__info {
+		@include scss.block-properties("large-manual-promo-info");
+		@include scss.block-components("large-manual-promo-info");
+	}
+
+	&__heading {
+		@include scss.block-properties("large-manual-promo-right-heading");
+		@include scss.block-components("large-manual-promo-right-heading");
+	}
+
+	&__badge {
+		@include scss.block-properties("large-manual-promo-right-badge");
+		@include scss.block-components("large-manual-promo-right-badge");
+	}
+
+	&__overline {
+		@include scss.block-properties("large-manual-promo-overline");
+		@include scss.block-components("large-manual-promo-overline");
+	}
+
+	&__description {
+		@include scss.block-properties("large-manual-promo-description");
+		@include scss.block-components("large-manual-promo-description");
+	}
+
+	&__attributes {
+		@include scss.block-properties("large-manual-promo-attributes");
+		@include scss.block-components("large-manual-promo-attributes");
+	}
+
+	@include scss.block-components("large-manual-promo");
+	@include scss.block-properties("large-manual-promo");
+}

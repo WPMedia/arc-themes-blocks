@@ -1,19 +1,136 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import { useEditableContent } from "fusion:content";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	formatURL,
+	isServerSide,
+	Overline,
+	MediaItem,
+	Grid,
+	Link,
+	Heading,
+	HeadingSection,
+	Image,
+	Paragraph,
+	Attribution,
+	Separator,
+	Date,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { LargePromoPresentation } from "@wpmedia/shared-styles";
+
+const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
 const LargeManualPromo = ({ customFields }) => {
 	const { isAdmin } = useFusionContext();
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
+	const {
+		headline,
+		imagePosition,
+		imageURL,
+		lazyLoad,
+		caption,
+		credits,
+		subtitle,
+		linkURL,
+		newTab,
+		showHeadline,
+		showImage,
+		description,
+		overline,
+		showOverline,
+		showDescription,
+		overlineURL,
+		author,
+		dateTime,
+		dateString,
+		hideImageCaption,
+		hideImageCredits,
+		hideImageTitle,
+	} = customFields;
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+	const { registerSuccessEvent } = useComponentContext();
+
+	if (shouldLazyLoad && isServerSide()) {
 		// On Server
 		return null;
 	}
+
+	const PromoImage = () => {
+		const { searchableField } = useEditableContent();
+
+		return showImage ? (
+			<MediaItem
+				caption={!hideImageCaption ? caption : null}
+				credit={!hideImageCredits ? credits : null}
+				title={!hideImageTitle ? subtitle : null}
+				{...searchableField("imageURL")}
+				suppressContentEditableWarning
+			>
+				<Image alt={headline} src={imageURL} searchableField />
+			</MediaItem>
+		) : null;
+	};
+
+	const PromoHeading = () =>
+		showHeadline ? (
+			<Heading className={`${BLOCK_CLASS_NAME}__heading`}>
+				{linkURL ? (
+					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+						{headline}
+					</Link>
+				) : (
+					headline
+				)}
+			</Heading>
+		) : null;
+
+	const PromoOverline = () => {
+		if (showOverline) {
+			if (overlineURL) {
+				return (
+					<Overline href={overlineURL} className={`${BLOCK_CLASS_NAME}__overline`}>
+						{overline}
+					</Overline>
+				);
+			}
+			return <Overline className={`${BLOCK_CLASS_NAME}__overline`}>{overline}</Overline>;
+		}
+		return null;
+	};
+
+	const PromoDescription = () =>
+		showDescription ? (
+			<Paragraph className={`${BLOCK_CLASS_NAME}__description`}>{description}</Paragraph>
+		) : null;
+
+	const PromoAttribution = () => (
+		<Attribution className={`${BLOCK_CLASS_NAME}__attributes`}>
+			<span>Authors: {author}</span>
+			&nbsp;
+			<Separator />
+			&nbsp;
+			<Date dateTime={dateTime} dateString={dateString} />
+		</Attribution>
+	);
+
 	return (
-		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-			<LargePromoPresentation {...customFields} />
+		<LazyLoad enabled={shouldLazyLoad}>
+			<HeadingSection>
+				<Grid
+					role="article"
+					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${imagePosition}`}
+				>
+					<PromoImage />
+					<Stack className={`${BLOCK_CLASS_NAME}__info`}>
+						<PromoOverline />
+						<PromoHeading />
+						<PromoDescription />
+						<PromoAttribution />
+					</Stack>
+				</Grid>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -48,6 +165,18 @@ LargeManualPromo.propTypes = {
 		newTab: PropTypes.bool.tag({
 			label: "Open in new tab",
 			defaultValue: false,
+			group: "Configure Content",
+		}),
+		author: PropTypes.string.tag({
+			label: "Author",
+			group: "Configure Content",
+		}),
+		dateTime: PropTypes.string.tag({
+			label: "DateTime",
+			group: "Configure Content",
+		}),
+		dateString: PropTypes.string.tag({
+			label: "dateString",
 			group: "Configure Content",
 		}),
 		showOverline: PropTypes.bool.tag({

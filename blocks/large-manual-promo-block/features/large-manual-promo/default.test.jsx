@@ -1,13 +1,27 @@
 import React from "react";
 import { mount } from "enzyme";
+import {
+	Grid,
+	MediaItem,
+	Heading,
+	Overline,
+	Attribution,
+	Paragraph,
+	Link,
+} from "@wpmedia/arc-themes-components";
 import LargeManualPromo from "./default";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	Image: () => <div />,
 	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
 	formatURL: jest.fn((input) => input.toString()),
 }));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => true),
+}));
+
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
@@ -61,8 +75,39 @@ describe("the large promo feature", () => {
 		expect(wrapper.html()).toBe(null);
 	});
 
-	it("should have 1 container fluid class", () => {
+	it("should have 1 container Grid component", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(".container-fluid")).toHaveLength(1);
+		expect(wrapper.find(Grid)).toHaveLength(1);
+	});
+
+	it("should render MediaItem component when showImage is true", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(MediaItem)).toHaveLength(1);
+	});
+
+	it("should render Overline component when showOverline is true", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(Overline)).toHaveLength(1);
+	});
+
+	it("should render Heading component when showHeadline is true", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(Heading)).toHaveLength(1);
+	});
+
+	it("should render Heading inside the Link component when linkURL is provided", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(Heading)).toHaveLength(1);
+		expect(wrapper.find(Link)).toHaveLength(1);
+	});
+
+	it("should render Paragraph component when showDescription is true", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(Paragraph)).toHaveLength(1);
+	});
+
+	it("should render Attribution component", () => {
+		const wrapper = mount(<LargeManualPromo customFields={config} />);
+		expect(wrapper.find(Attribution)).toHaveLength(1);
 	});
 });

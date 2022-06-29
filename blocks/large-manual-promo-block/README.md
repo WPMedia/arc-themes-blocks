@@ -2,10 +2,6 @@
 
 _Block containing a large manual promo component. Please provide a 1-2 sentence description of what the block is and what it does._
 
-## Acceptance Criteria
-
-- Add AC relevant to the block
-
 ## Props
 
 | **Prop**                  | **Required** | **Type** | **Description**                                     |

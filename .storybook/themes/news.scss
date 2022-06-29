@@ -1162,6 +1162,22 @@
 				links-bar: (
 					gap: var(--global-spacing-2),
 				),
+				large-manual-promo: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+						paragraph: (
+							gap: var(--global-spacing-4),
+						),
+						attribution: (
+							gap: var(--global-spacing-2),
+						),
+						badge: (
+							width: fit-content,
+						),
+					),
+				),
 			),
 		),
 		desktop: (
@@ -1368,6 +1384,25 @@
 						),
 					),
 				),
+				large-manual-promo: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+						paragraph: (
+							gap: var(--global-spacing-4),
+						),
+						attribution: (
+							gap: var(--global-spacing-2),
+						),
+						badge: (
+							width: fit-content,
+						),
+					),
+				),
+				large-manual-promo-info: (
+					margin-left: var(--global-spacing-4),
+				),
 			),
 		),
 	)
@@ -1381,6 +1416,7 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/numbered-list-block";

@@ -1,54 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-header-nav-chain {
-	&__top-layout {
-		@include scss.block-components("header-nav-chain-top-layout");
-		@include scss.block-properties("header-nav-chain-top-layout");
-	}
-
-	&__nav-left {
-		@include scss.block-components("header-nav-chain-top-nav-left");
-		@include scss.block-properties("header-nav-chain-top-nav-left");
-	}
-
-	&__nav-right {
-		@include scss.block-components("header-nav-chain-top-nav-right");
-		@include scss.block-properties("header-nav-chain-top-nav-right");
-	}
-
-	&__nav-left,
-	&__nav-right {
-		.nav-components--mobile {
-			@include scss.block-components("header-nav-chain-top-nav-components-mobile");
-			@include scss.block-properties("header-nav-chain-top-nav-components-mobile");
-		}
-
-		.nav-components--desktop {
-			@include scss.block-components("header-nav-chain-top-nav-components-desktop");
-			@include scss.block-properties("header-nav-chain-top-nav-components-desktop");
-		}
-
-		.nav-widget {
-			@include scss.block-components("header-nav-chain-top-nav-widget");
-			@include scss.block-properties("header-nav-chain-top-nav-widget");
-		}
-
-		.nav-widget:last-child {
-			@include scss.block-components("header-nav-chain-top-nav-widget-last-child");
-			@include scss.block-properties("header-nav-chain-top-nav-widget-last-child");
-		}
-
-		.menu-btn {
-			span {
-				@include scss.block-components("header-nav-chain-top-nav-menu-button-text");
-				@include scss.block-properties("header-nav-chain-top-nav-menu-button-text");
-			}
-
-			@include scss.block-components("header-nav-chain-top-nav-menu-button");
-			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
-		}
-	}
-
 	.nav-search {
 		input {
 			@include scss.block-components("header-nav-chain-nav-search-input");
@@ -69,25 +21,6 @@
 
 		@include scss.block-components("header-nav-chain-nav-search");
 		@include scss.block-properties("header-nav-chain-nav-search");
-	}
-
-	&__logo {
-		img {
-			@include scss.block-components("header-nav-chain-logo-image");
-			@include scss.block-properties("header-nav-chain-logo-image");
-		}
-
-		@include scss.block-components("header-nav-chain-logo");
-		@include scss.block-properties("header-nav-chain-logo");
-	}
-
-	&__links-list {
-		.horizontal-links-menu {
-			display: flex;
-			gap: 0.5rem;
-		}
-		@include scss.block-components("header-nav-chain-links-list");
-		@include scss.block-properties("header-nav-chain-links-list");
 	}
 
 	&__flyout-overlay {
@@ -124,38 +57,12 @@
 			@include scss.block-properties("header-nav-chain-flyout-nav-wrapper-closed");
 		}
 
-		@include scss.block-components("header-nav-chain-flyout-nav-wrapper");
-		@include scss.block-properties("header-nav-chain-flyout-nav-wrapper");
-	}
-
-	.nav-menu {
-		.nav-search {
-			justify-content: flex-start;
-			position: relative;
-
-			input {
-				flex: 1;
-				padding: 4px 2rem 4px 11px;
-			}
-
-			&.open {
-				display: flex;
-
-				input {
-					height: 48px;
-				}
-			}
+		.nav-widget {
+			@include scss.block-components("header-nav-chain-flyout-nav-widgets");
+			@include scss.block-properties("header-nav-chain-flyout-nav-widgets");
 		}
 
 		.nav-components {
-			&--mobile,
-			&--desktop {
-				.nav-widget {
-					margin-top: 16px;
-					padding: 0 20px;
-				}
-			}
-
 			&--mobile {
 				display: none;
 			}
@@ -175,8 +82,8 @@
 			}
 		}
 
-		@include scss.block-components("header-nav-chain-flyout-menu");
-		@include scss.block-properties("header-nav-chain-flyout-menu");
+		@include scss.block-components("header-nav-chain-flyout-nav-wrapper");
+		@include scss.block-properties("header-nav-chain-flyout-nav-wrapper");
 	}
 
 	&__flyout-nav {
@@ -259,6 +166,73 @@
 	&__subsection-menu {
 		@include scss.block-components("header-nav-chain-flyout-nav-subsection-menu");
 		@include scss.block-properties("header-nav-chain-flyout-nav-subsection-menu");
+	}
+
+	&__top-layout {
+		@include scss.block-components("header-nav-chain-top-layout");
+		@include scss.block-properties("header-nav-chain-top-layout");
+	}
+
+	&__nav-left {
+		@include scss.block-components("header-nav-chain-top-nav-left");
+		@include scss.block-properties("header-nav-chain-top-nav-left");
+	}
+
+	&__nav-right {
+		@include scss.block-components("header-nav-chain-top-nav-right");
+		@include scss.block-properties("header-nav-chain-top-nav-right");
+	}
+
+	&__nav-left,
+	&__nav-right {
+		.nav-components--mobile {
+			@include scss.block-components("header-nav-chain-top-nav-components-mobile");
+			@include scss.block-properties("header-nav-chain-top-nav-components-mobile");
+		}
+
+		.nav-components--desktop {
+			@include scss.block-components("header-nav-chain-top-nav-components-desktop");
+			@include scss.block-properties("header-nav-chain-top-nav-components-desktop");
+		}
+
+		.nav-widget {
+			@include scss.block-components("header-nav-chain-top-nav-widget");
+			@include scss.block-properties("header-nav-chain-top-nav-widget");
+		}
+
+		.nav-widget:last-child {
+			@include scss.block-components("header-nav-chain-top-nav-widget-last-child");
+			@include scss.block-properties("header-nav-chain-top-nav-widget-last-child");
+		}
+
+		.menu-btn {
+			span {
+				@include scss.block-components("header-nav-chain-top-nav-menu-button-text");
+				@include scss.block-properties("header-nav-chain-top-nav-menu-button-text");
+			}
+
+			@include scss.block-components("header-nav-chain-top-nav-menu-button");
+			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
+		}
+	}
+
+	&__logo {
+		img {
+			@include scss.block-components("header-nav-chain-logo-image");
+			@include scss.block-properties("header-nav-chain-logo-image");
+		}
+
+		@include scss.block-components("header-nav-chain-logo");
+		@include scss.block-properties("header-nav-chain-logo");
+	}
+
+	&__links-list {
+		.horizontal-links-menu {
+			display: flex;
+			gap: 0.5rem;
+		}
+		@include scss.block-components("header-nav-chain-links-list");
+		@include scss.block-properties("header-nav-chain-links-list");
 	}
 
 	@include scss.block-components("header-nav-chain");

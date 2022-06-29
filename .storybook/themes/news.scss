@@ -968,7 +968,11 @@
 				header-nav-chain-flyout-nav-wrapper-closed: (
 					transform: translate(-100vw, 0),
 				),
-				header-nav-chain-flyout-menu: (),
+				header-nav-chain-flyout-nav-widgets: (
+					margin-top: var(--global-spacing-3),
+					padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
+						var(--global-spacing-5),
+				),
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height)) - var(--global-spacing-4)),
 					gap: 0,

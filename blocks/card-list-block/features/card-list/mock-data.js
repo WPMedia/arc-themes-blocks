@@ -29,7 +29,7 @@ export const oneListItem = {
 				meta_title: "",
 			},
 			owner: {
-				sponsored: false,
+				sponsored: true,
 				id: "corecomponents",
 			},
 			content_restrictions: {
@@ -10918,6 +10918,7 @@ export default {
 			website: "the-sun",
 			website_url: "/2019/09/17/article-without-a-subheadline/",
 		},
+		{},
 	],
 	additional_properties: {
 		took: 11,

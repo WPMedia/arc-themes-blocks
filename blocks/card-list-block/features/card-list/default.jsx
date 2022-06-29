@@ -211,7 +211,6 @@ const CardListItems = (props) => {
 								{hasAuthor ? (
 									<>
 										<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
-										<span>{"  "}</span>
 										<Separator />
 									</>
 								) : null}

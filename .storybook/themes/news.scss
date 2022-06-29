@@ -786,6 +786,9 @@
 							font-size: var(--global-font-size-7),
 							line-height: var(--global-line-height-4),
 						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
 					),
 				),
 				card-list-title: (

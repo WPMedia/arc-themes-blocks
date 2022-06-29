@@ -770,8 +770,8 @@
 				card-list: (
 					box-shadow: var(--global-box-shadow-1),
 					border-radius: 0 var(--border-radius) var(--border-radius) 0,
-					padding: var(--global-spacing-4),
 					background-color: var(--background-color),
+					padding: var(--global-spacing-4) 0,
 					components: (
 						heading: (
 							font-weight: var(--global-font-weight-7),
@@ -783,9 +783,11 @@
 						),
 					),
 				),
-				card-list-main-item-link: (
-					margin-left: -16px,
-					margin-right: -16px,
+				card-list-title: (
+					padding: 0 var(--global-spacing-4),
+				),
+				card-list-list: (
+					padding: 0 var(--global-spacing-4),
 				),
 				card-list-main-item: (
 					components: (
@@ -795,6 +797,9 @@
 							width: 100%,
 						),
 					),
+				),
+				card-list-main-item-text-container: (
+					gap: var(--global-spacing-2),
 				),
 				card-list-secondary-item: (
 					components: (

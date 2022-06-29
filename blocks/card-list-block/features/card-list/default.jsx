@@ -4,9 +4,22 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import getTranslatedPhrases from "fusion:intl";
+import { LazyLoad, isServerSide, localizeDate } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Heading, HeadingSection, Image, Link, Stack } from "@wpmedia/arc-themes-components";
+import {
+	Attribution,
+	Date,
+	formatAuthors,
+	formatUrl,
+	Heading,
+	HeadingSection,
+	Image,
+	Link,
+	Overline,
+	Separator,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-card-list";
 
@@ -98,6 +111,10 @@ const CardListItems = (props) => {
     }`,
 		}) || {};
 
+	if (contentElements.length === 0) {
+		return null;
+	}
+
 	let contentItems = contentElements.reduce((acc, element, index) => {
 		if (element.websites?.[arcSite] && index >= offsetOverride) {
 			return acc.concat(element);
@@ -109,60 +126,73 @@ const CardListItems = (props) => {
 		contentItems = contentItems.slice(0, displayAmount);
 	}
 
-	// const Wrapper = title ? HeadingSection : React.Fragment;
+	const sourceContent = contentElements[0];
+	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 
-	// const showSeparator = !!(
-	// 	contentItems[0] &&
-	// 	contentItems[0].credits &&
-	// 	contentItems[0].credits.by &&
-	// 	contentItems[0].credits.by.length !== 0
-	// );
+	// Start Overline data
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (sourceContent.label && sourceContent.label.basic) || {};
+	const shouldUseLabel = !!labelDisplay;
+
+	const { _id: sectionUrl, name: sectionText } =
+		(sourceContent.websites &&
+			sourceContent.websites[arcSite] &&
+			sourceContent.websites[arcSite].website_section) ||
+		{};
+
+	// Default to websites object data
+	let [text, url] = [sectionText, sectionUrl];
+
+	if (sourceContent?.owner?.sponsored) {
+		text = sourceContent?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		url = null;
+	} else if (shouldUseLabel) {
+		[text, url] = [labelText, labelUrl];
+	}
+	// End Overline data
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
 			<Stack className={BLOCK_CLASS_NAME}>
-				{title ? <Heading>{title}</Heading> : null}
-				<Stack divider>
+				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
+				<Link assistiveHidden href={sourceContent.websites[arcSite].website_url}>
+					{extractImageFromStory(sourceContent) ? (
+						<Image
+							{...largeImageProps}
+							width={377}
+							height={283}
+							src={extractImageFromStory(sourceContent)}
+							alt={sourceContent.headlines.basic}
+							resizedImageOptions={extractResizedParams(sourceContent)}
+						/>
+					) : (
+						<Image
+							{...largeImageProps}
+							width={377}
+							height={283}
+							src={targetFallbackImage}
+							alt={largeImageProps.primaryLogoAlt || ""}
+							resizedImageOptions={placeholderResizedImageOptions}
+						/>
+					)}
+				</Link>
+				<Stack className={`${BLOCK_CLASS_NAME}__list`} divider>
 					<Stack
 						as="article"
 						className={`${BLOCK_CLASS_NAME}__main-item`}
-						key={`card-list-${contentItems[0].websites[arcSite].website_url}`}
+						key={`card-list-${sourceContent.websites[arcSite].website_url}`}
 					>
-						<Link
-							assistiveHidden
-							className={`${BLOCK_CLASS_NAME}__main-item-link`}
-							href={contentItems[0].websites[arcSite].website_url}
-						>
-							{extractImageFromStory(contentItems[0]) ? (
-								<Image
-									{...largeImageProps}
-									width={377}
-									height={283}
-									src={extractImageFromStory(contentItems[0])}
-									alt={contentItems[0].headlines.basic}
-									resizedImageOptions={extractResizedParams(contentItems[0])}
-								/>
-							) : (
-								<Image
-									{...largeImageProps}
-									width={377}
-									height={283}
-									src={targetFallbackImage}
-									alt={largeImageProps.primaryLogoAlt || ""}
-									resizedImageOptions={placeholderResizedImageOptions}
-								/>
-							)}
-						</Link>
-						{/* <Overline story={contentItems[0]} /> */}
-						<Heading>
-							<Link href={contentItems[0].websites[arcSite].website_url}>
-								{contentItems[0].headlines.basic}
-							</Link>
-						</Heading>
-						{/* <div>
-						<Byline content={contentItems[0]} list separator={showSeparator} font="Primary" />
-						<PromoDate date={contentItems[0].display_date} />
-					</div> */}
+						<Stack className={`${BLOCK_CLASS_NAME}__main-item-text-container`}>
+							{url || text ? <Overline href={url ? formatUrl(url) : null}>{text}</Overline> : null}
+							<Heading>
+								<Link href={contentItems[0].websites[arcSite].website_url}>
+									{contentItems[0].headlines.basic}
+								</Link>
+							</Heading>
+						</Stack>
 					</Stack>
 					{contentItems.slice(1).map((element) => {
 						const { headlines: { basic: headlineText } = {} } = element;

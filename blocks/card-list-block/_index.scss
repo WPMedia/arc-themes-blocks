@@ -1,14 +1,24 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-card-list {
+	&__title {
+		@include scss.block-components("card-list-title");
+		@include scss.block-properties("card-list-title");
+	}
+
+	&__list {
+		@include scss.block-components("card-list-list");
+		@include scss.block-properties("card-list-list");
+	}
+
 	&__main-item {
 		@include scss.block-components("card-list-main-item");
 		@include scss.block-properties("card-list-main-item");
 	}
 
-	&__main-item-link {
-		@include scss.block-components("card-list-main-item-link");
-		@include scss.block-properties("card-list-main-item-link");
+	&__main-item-text-container {
+		@include scss.block-components("card-list-main-item-text-container");
+		@include scss.block-properties("card-list-main-item-text-container");
 	}
 
 	&__secondary-item {

@@ -85,9 +85,33 @@ describe("the large promo feature", () => {
 		expect(wrapper.find(MediaItem)).toHaveLength(1);
 	});
 
+	it("MediaItem component should not render caption, credeits and title when hideImageCaption, hideImageCredits and hideImageTitle props are true", () => {
+		const wrapper = mount(
+			<LargeManualPromo
+				customFields={{
+					...config,
+					hideImageCaption: true,
+					hideImageCredits: true,
+					hideImageTitle: true,
+				}}
+			/>
+		);
+		const { caption, credit, title } = wrapper.find(MediaItem).props();
+		expect(caption).toBe(null);
+		expect(credit).toBe(null);
+		expect(title).toBe(null);
+	});
+
 	it("should render Overline component when showOverline is true", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Overline)).toHaveLength(1);
+	});
+
+	it("should render Overline component without href when showOverline is true and overlineURL prop is not provided", () => {
+		const wrapper = mount(<LargeManualPromo customFields={{ ...config, overlineURL: "" }} />);
+		const overline = wrapper.find(Overline);
+		expect(overline).toHaveLength(1);
+		expect(overline.props().href).toBeUndefined();
 	});
 
 	it("should render Heading component when showHeadline is true", () => {
@@ -95,10 +119,16 @@ describe("the large promo feature", () => {
 		expect(wrapper.find(Heading)).toHaveLength(1);
 	});
 
-	it("should render Heading inside the Link component when linkURL is provided", () => {
+	it("should render Link component inside the Header component when linkURL is provided", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Heading)).toHaveLength(1);
 		expect(wrapper.find(Link)).toHaveLength(1);
+	});
+
+	it("should not render Link inside the Header component when linkURL is not provided", () => {
+		const wrapper = mount(<LargeManualPromo customFields={{ ...config, linkURL: "" }} />);
+		expect(wrapper.find(Heading)).toHaveLength(1);
+		expect(wrapper.find(Link)).toHaveLength(0);
 	});
 
 	it("should render Paragraph component when showDescription is true", () => {
@@ -109,5 +139,23 @@ describe("the large promo feature", () => {
 	it("should render Attribution component", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Attribution)).toHaveLength(1);
+	});
+
+	it("should not render Overline, Header, MediaItem when corresponding show props are false", () => {
+		const wrapper = mount(
+			<LargeManualPromo
+				customFields={{
+					...config,
+					showImage: false,
+					showDescription: false,
+					showHeadline: false,
+					showOverline: false,
+				}}
+			/>
+		);
+		expect(wrapper.find(Heading)).toHaveLength(0);
+		expect(wrapper.find(Overline)).toHaveLength(0);
+		expect(wrapper.find(Paragraph)).toHaveLength(0);
+		expect(wrapper.find(MediaItem)).toHaveLength(0);
 	});
 });

@@ -21,6 +21,11 @@
 		@include scss.block-properties("card-list-main-item-text-container");
 	}
 
+	&__main-item-image-link {
+		@include scss.block-components("card-list-main-item-image-link");
+		@include scss.block-properties("card-list-main-item-image-link");
+	}
+
 	&__secondary-item {
 		@include scss.block-components("card-list-secondary-item");
 		@include scss.block-properties("card-list-secondary-item");

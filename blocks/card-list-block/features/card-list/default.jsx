@@ -168,12 +168,7 @@ const CardListItems = (props) => {
 							return null;
 						}
 						return (
-							<Stack
-								as="article"
-								className={`${BLOCK_CLASS_NAME}__secondary-item`}
-								key={`card-list-${url}`}
-								direction="horizontal"
-							>
+							<Stack as="article" key={`card-list-${url}`} direction="horizontal">
 								<Link href={url} className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}>
 									<Heading>{headlineText}</Heading>
 								</Link>

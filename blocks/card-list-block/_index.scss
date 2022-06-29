@@ -11,11 +11,6 @@
 		@include scss.block-properties("card-list-main-item-link");
 	}
 
-	&__secondary-item {
-		@include scss.block-components("card-list-secondary-item");
-		@include scss.block-properties("card-list-secondary-item");
-	}
-
 	&__secondary-item-image-link {
 		@include scss.block-components("card-list-secondary-item-image-link");
 		@include scss.block-properties("card-list-secondary-item-image-link");

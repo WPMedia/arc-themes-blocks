@@ -928,6 +928,22 @@
 					margin: 0,
 					padding: 0,
 				),
+				medium-manual-promo: (
+					display: block,
+					components: (
+						media-item: (
+							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-5),
+							margin: 0 0 var(--global-spacing-4) 0,
+						),
+					),
+				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -1394,6 +1410,30 @@
 				masthead: (
 					display: flex,
 				),
+				medium-manual-promo: (
+					display: grid,
+					grid-template-columns: 1fr 2fr,
+					column-gap: var(--global-spacing-6),
+					row-gap: var(--global-spacing-4),
+					grid-template-areas: "mediaitem heading" "mediaitem description",
+					components: (
+						media-item: (
+							grid-area: "mediaitem",
+							margin: 0,
+							float: none,
+							max-width: 100%,
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							grid-area: "heading",
+							line-height: var(--global-line-height-4),
+							margin: 0,
+						),
+						paragraph: (
+							grid-area: "paragraph",
+						),
+					),
+				),
 				quad-chain: (
 					components: (
 						stack: (
@@ -1533,6 +1573,7 @@
 @use "../../blocks/hero-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/medium-manual-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";

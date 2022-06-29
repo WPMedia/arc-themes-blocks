@@ -122,7 +122,7 @@ const CardListItems = (props) => {
 		<HeadingSection>
 			<Stack className={BLOCK_CLASS_NAME}>
 				{title ? <Heading>{title}</Heading> : null}
-				<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
+				<Stack divider>
 					<Stack
 						as="article"
 						className={`${BLOCK_CLASS_NAME}__main-item`}

@@ -1,6 +1,6 @@
 # `@wpmedia/extra-large-manual-promo-block`
 
-Extra Large Manual Promo Block provides a way for a PageBuilder user to create a promo item and manually configure the teaxt and image used therein.
+Extra Large Manual Promo Block provides a way for a PageBuilder user to create a promo item and manually configure the text and image used therein.
 
 ## Props
 

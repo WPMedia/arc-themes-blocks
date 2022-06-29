@@ -46,6 +46,11 @@ const CardListItems = (props) => {
 		targetFallbackImage,
 		largeImageProps,
 		smallImageProps,
+		dateLocalization: { language, timeZone, dateFormat } = {
+			language: "en",
+			timeZone: "GMT",
+			dateFormat: "LLLL d, yyyy",
+		},
 	} = props;
 
 	// need to inject the arc site here into use content
@@ -129,6 +134,12 @@ const CardListItems = (props) => {
 	const sourceContent = contentElements[0];
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 
+	const displayDate = localizeDate(sourceContent.display_date, dateFormat, language, timeZone);
+
+	/* Author Formatting */
+	const bylineNodes = formatAuthors(sourceContent?.credits?.by, phrases.t("byline-block.and-text"));
+	const hasAuthor = !!bylineNodes.length;
+
 	// Start Overline data
 	const {
 		display: labelDisplay,
@@ -158,7 +169,11 @@ const CardListItems = (props) => {
 		<HeadingSection>
 			<Stack className={BLOCK_CLASS_NAME}>
 				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
-				<Link assistiveHidden href={sourceContent.websites[arcSite].website_url}>
+				<Link
+					assistiveHidden
+					className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
+					href={sourceContent.websites[arcSite].website_url}
+				>
 					{extractImageFromStory(sourceContent) ? (
 						<Image
 							{...largeImageProps}
@@ -192,28 +207,38 @@ const CardListItems = (props) => {
 									{contentItems[0].headlines.basic}
 								</Link>
 							</Heading>
+							<Attribution>
+								{hasAuthor ? (
+									<>
+										<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
+										<span>{"  "}</span>
+										<Separator />
+									</>
+								) : null}
+								<Date dateTime={sourceContent.display_date} dateString={displayDate} />
+							</Attribution>
 						</Stack>
 					</Stack>
 					{contentItems.slice(1).map((element) => {
 						const { headlines: { basic: headlineText } = {} } = element;
 						const imageURL = extractImageFromStory(element);
-						const url = element.websites[arcSite]?.website_url;
-						if (!url) {
+						const itemUrl = element.websites[arcSite]?.website_url;
+						if (!itemUrl) {
 							return null;
 						}
 						return (
 							<Stack
 								as="article"
 								className={`${BLOCK_CLASS_NAME}__secondary-item`}
-								key={`card-list-${url}`}
+								key={`card-list-${itemUrl}`}
 								direction="horizontal"
 							>
-								<Link href={url} className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}>
+								<Link href={itemUrl} className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}>
 									<Heading>{headlineText}</Heading>
 								</Link>
 								<Link
 									assistiveHidden
-									href={url}
+									href={itemUrl}
 									className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
 								>
 									<Image

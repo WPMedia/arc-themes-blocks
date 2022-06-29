@@ -1,22 +1,34 @@
 # `@wpmedia/extra-large-manual-promo-block`
 
-_Block containing an extra large manual promo component. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+Extra Large Manual Promo Block provides a way for a PageBuilder user to create a promo item and manually configure the teaxt and image used therein.
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**     | **Required** | **Type** | **Description**                  |
+| ------------ | ------------ | -------- | -------------------------------- |
+| customFields | yes          | Shape    | PageBuilder custom fields values |
+
+### Custom Fields
+
+| **Prop**        | **Required** | **Type** | **Description**                                                                         |
+| --------------- | ------------ | -------- | --------------------------------------------------------------------------------------- |
+| headline        | no           | String   | The Headline text to display                                                            |
+| description     | no           | String   | The Description text to display                                                         |
+| overline        | no           | String   | The Overline text to display                                                            |
+| overlineURL     | no           | Url      | The url used for the overline navigation                                                |
+| imageURL        | no           | Url      | The url used for the image to be displayed                                              |
+| linkURL         | no           | Url      | The url used for navigating when the healine or image is clicked                        |
+| newTab          | no           | Boolean  | Flag to determine if links should open in a new window/tab                              |
+| showOverline    | no           | Boolean  | Flag to determine if the Overline portion is displayed                                  |
+| showHeadline    | no           | Boolean  | Flag to determine if the Headline portion is displayed                                  |
+| showImage       | no           | Boolean  | Flag to determine if the Image portion is displayed                                     |
+| showDescription | no           | Boolean  | Flag to determine if the Description portion is displayed                               |
+| imageRatio      | no           | String   | The suggested image dimension ratio (width:height)                                      |
+| lazyLoad        | no           | Boolean  | Prevent the block from being loaded on the page until it is nearly in-view for the user |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+- n/a
 
 ### ANS Fields
 
@@ -28,20 +40,8 @@ Outline any schema information requirements necessary to know for ths block
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+This block does not emit any events.
 
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_Configuration (including content) is handled through proptypes in the PB editor_
+This block does not listen to any events.

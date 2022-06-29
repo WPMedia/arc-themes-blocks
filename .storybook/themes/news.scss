@@ -813,6 +813,9 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				links-bar: (
+					gap: var(--global-spacing-2),
+				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
 					color: var(--text-color),
@@ -1177,8 +1180,25 @@
 				video-player-inline-video: (
 					gap: 0,
 				),
-				links-bar: (
-					gap: var(--global-spacing-2),
+				xl-manual-promo: (
+					grid-template-rows: 1fr,
+					components: (
+						heading: (
+							font-family: var(--font-family-primary),
+							font-size: var(--global-font-size-10),
+							font-weight: var(--global-font-weight-7),
+							line-height: 1.3,
+						),
+						link: (
+							font-family: inherit,
+							font-size: inherit,
+							font-weight: inherit,
+							line-height: inherit,
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
 				),
 			),
 		),
@@ -1386,6 +1406,23 @@
 						),
 					),
 				),
+				xl-manual-promo: (
+					components: (
+						heading: (
+							display: flex,
+							font-size: var(--global-font-size-13),
+							justify-content: center,
+							line-height: 1.2,
+						),
+						overline: (
+							display: flex,
+							justify-content: center,
+						),
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
 			),
 		),
 	)
@@ -1396,6 +1433,7 @@
 @use "../../blocks/article-tag-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
+@use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";

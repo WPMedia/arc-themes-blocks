@@ -5,6 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }) => {
 	const [isLogoVisible, setLogoVisibility] = useState(false);
 
+	// istanbul ignore next
 	const onScrollEvent = (evt) => {
 		if (!evt) {
 			return;
@@ -34,6 +35,7 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 		// on small viewports we do not need this
 		if (vw >= mediumBreakpoint) {
 			window.addEventListener("scroll", onScrollDebounced);
+			// istanbul ignore next
 			return () => {
 				window.removeEventListener("scroll", onScrollDebounced);
 			};
@@ -56,6 +58,7 @@ const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }
 			}
 		}, 1000);
 
+		// istanbul ignore next
 		return () => {
 			clearTimeout(timerID);
 		};

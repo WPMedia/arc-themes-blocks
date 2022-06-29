@@ -3,7 +3,7 @@ import { mount } from "enzyme";
 import getThemeStyle from "fusion:themes";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import mockData, { oneListItem } from "./mock-data";
+import mockData, { oneListItem, oneListItemDisplayLabel, twoListItemNoSiteUrl } from "./mock-data";
 import CardList from "./default";
 
 jest.mock("@wpmedia/arc-themes-components", () => ({
@@ -36,7 +36,6 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
 	localizeDate: jest.fn(() => "date"),
 }));
-
 describe("Card list", () => {
 	it("should render null if isServerSide and lazyLoad enabled", () => {
 		const listContentConfig = {
@@ -264,6 +263,28 @@ describe("Card list", () => {
 			expect(wrapper.find(".b-card-list__secondary-item-heading-link").at(0).prop("href")).toEqual(
 				"/this/is/the/correct/url"
 			);
+		});
+	});
+
+	describe("render one list item with display label overline", () => {
+		useContent.mockReturnValueOnce(null);
+		useContent.mockReturnValueOnce(oneListItemDisplayLabel);
+
+		const wrapper = mount(<CardList customFields={{}} />);
+
+		it("should render an overline using the label data if sourceContent.label.display is true and there is no owner", () => {
+			expect(wrapper.find(".c-overline").text()).toEqual("Display Label");
+		});
+	});
+
+	describe("render one list item without a secondary item for a bad site website_url", () => {
+		useContent.mockReturnValueOnce(null);
+		useContent.mockReturnValueOnce(twoListItemNoSiteUrl);
+
+		const wrapper = mount(<CardList customFields={{}} />);
+
+		it("should render an overline using the label data if sourceContent.label.display is true and there is no owner", () => {
+			expect(wrapper.find(".b-card-list__secondary-item")).not.toExist();
 		});
 	});
 });

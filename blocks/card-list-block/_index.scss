@@ -1,0 +1,36 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-card-list {
+	&__items {
+		@include scss.block-components("card-list-items");
+		@include scss.block-properties("card-list-items");
+	}
+
+	&__main-item {
+		@include scss.block-components("card-list-main-item");
+		@include scss.block-properties("card-list-main-item");
+	}
+
+	&__main-item-link {
+		@include scss.block-components("card-list-main-item-link");
+		@include scss.block-properties("card-list-main-item-link");
+	}
+
+	&__secondary-item {
+		@include scss.block-components("card-list-secondary-item");
+		@include scss.block-properties("card-list-secondary-item");
+	}
+
+	&__secondary-item-image-link {
+		@include scss.block-components("card-list-secondary-item-image-link");
+		@include scss.block-properties("card-list-secondary-item-image-link");
+	}
+
+	&__secondary-item-heading-link {
+		@include scss.block-components("card-list-secondary-item-heading-link");
+		@include scss.block-properties("card-list-secondary-item-heading-link");
+	}
+
+	@include scss.block-components("card-list");
+	@include scss.block-properties("card-list");
+}

@@ -4,10 +4,11 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import { Image, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Byline, Heading, HeadingSection, Overline, PromoDate } from "@wpmedia/shared-styles";
-import "./card-list.scss";
+import { Heading, HeadingSection, Image, Link, Stack } from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-card-list";
 
 const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 	let targetFallbackImage = fallbackImage;
@@ -108,61 +109,57 @@ const CardListItems = (props) => {
 		contentItems = contentItems.slice(0, displayAmount);
 	}
 
-	const Wrapper = title ? HeadingSection : React.Fragment;
+	// const Wrapper = title ? HeadingSection : React.Fragment;
 
-	const showSeparator = !!(
-		contentItems[0] &&
-		contentItems[0].credits &&
-		contentItems[0].credits.by &&
-		contentItems[0].credits.by.length !== 0
-	);
+	// const showSeparator = !!(
+	// 	contentItems[0] &&
+	// 	contentItems[0].credits &&
+	// 	contentItems[0].credits.by &&
+	// 	contentItems[0].credits.by.length !== 0
+	// );
 
 	return contentItems.length > 0 ? (
 		<HeadingSection>
-			<div className="card-list-container">
-				{title ? <Heading className="card-list-title">{title}</Heading> : null}
-				<Wrapper>
-					<article
-						className="list-item-simple"
+			<Stack className={BLOCK_CLASS_NAME}>
+				{title ? <Heading>{title}</Heading> : null}
+				<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
+					<Stack
+						as="article"
+						className={`${BLOCK_CLASS_NAME}__main-item`}
 						key={`card-list-${contentItems[0].websites[arcSite].website_url}`}
 					>
-						<a
+						<Link
+							assistiveHidden
+							className={`${BLOCK_CLASS_NAME}__main-item-link`}
 							href={contentItems[0].websites[arcSite].website_url}
-							className="list-anchor card-list--link-container vertical-align-image"
-							aria-hidden="true"
-							tabIndex="-1"
 						>
 							{extractImageFromStory(contentItems[0]) ? (
 								<Image
 									{...largeImageProps}
-									url={extractImageFromStory(contentItems[0])}
+									src={extractImageFromStory(contentItems[0])}
 									alt={contentItems[0].headlines.basic}
 									resizedImageOptions={extractResizedParams(contentItems[0])}
 								/>
 							) : (
 								<Image
 									{...largeImageProps}
-									url={targetFallbackImage}
+									src={targetFallbackImage}
 									alt={largeImageProps.primaryLogoAlt || ""}
 									resizedImageOptions={placeholderResizedImageOptions}
 								/>
 							)}
-						</a>
-						<Overline story={contentItems[0]} className="card-list-overline" />
-						<Heading className="card-list-headline">
-							<a
-								href={contentItems[0].websites[arcSite].website_url}
-								className="list-anchor vertical-align-image"
-								id="card-list--headline-link"
-							>
+						</Link>
+						{/* <Overline story={contentItems[0]} /> */}
+						<Heading>
+							<Link href={contentItems[0].websites[arcSite].website_url}>
 								{contentItems[0].headlines.basic}
-							</a>
+							</Link>
 						</Heading>
-						<div className="author-date">
-							<Byline content={contentItems[0]} list separator={showSeparator} font="Primary" />
-							<PromoDate className="story-date" date={contentItems[0].display_date} />
-						</div>
-					</article>
+						{/* <div>
+						<Byline content={contentItems[0]} list separator={showSeparator} font="Primary" />
+						<PromoDate date={contentItems[0].display_date} />
+					</div> */}
+					</Stack>
 					{contentItems.slice(1).map((element) => {
 						const { headlines: { basic: headlineText } = {} } = element;
 						const imageURL = extractImageFromStory(element);
@@ -171,32 +168,34 @@ const CardListItems = (props) => {
 							return null;
 						}
 						return (
-							<React.Fragment key={`card-list-${url}`}>
-								<article className="card-list-item" key={`card-list-${url}`}>
-									<a href={url} className="headline-list-anchor vertical-align-image">
-										<Heading className="headline-text">{headlineText}</Heading>
-									</a>
-									<a
-										href={url}
-										className="list-anchor-image vertical-align-image"
-										aria-hidden="true"
-										tabIndex="-1"
-									>
-										<Image
-											{...smallImageProps}
-											url={imageURL || targetFallbackImage}
-											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-											resizedImageOptions={
-												imageURL ? extractResizedParams(element) : placeholderResizedImageOptions
-											}
-										/>
-									</a>
-								</article>
-							</React.Fragment>
+							<Stack
+								as="article"
+								className={`${BLOCK_CLASS_NAME}__secondary-item`}
+								key={`card-list-${url}`}
+								direction="horizontal"
+							>
+								<Link href={url} className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}>
+									<Heading>{headlineText}</Heading>
+								</Link>
+								<Link
+									assistiveHidden
+									href={url}
+									className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
+								>
+									<Image
+										{...smallImageProps}
+										src={imageURL || targetFallbackImage}
+										alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
+										resizedImageOptions={
+											imageURL ? extractResizedParams(element) : placeholderResizedImageOptions
+										}
+									/>
+								</Link>
+							</Stack>
 						);
 					})}
-				</Wrapper>
-			</div>
+				</Stack>
+			</Stack>
 		</HeadingSection>
 	) : null;
 };

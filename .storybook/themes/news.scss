@@ -767,6 +767,40 @@
 						),
 					),
 				),
+				card-list: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: 0 var(--border-radius) var(--border-radius) 0,
+					padding: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-7),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				card-list-main-item-link: (
+					margin-left: -16px,
+					margin-right: -16px,
+				),
+				card-list-main-item: (
+					components: (
+						image: (
+							max-height: 40vh,
+							object-fit: cover,
+							width: 100%,
+						),
+					),
+				),
+				card-list-secondary-item-heading-link: (
+					width: 75%,
+				),
+				card-list-secondary-item-image-link: (
+					width: 25%,
+				),
 				double-chain: (
 					components: (
 						stack: (
@@ -1394,6 +1428,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/header-block";

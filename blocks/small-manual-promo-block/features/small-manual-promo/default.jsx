@@ -37,7 +37,12 @@ const SmallManualPromo = ({ customFields }) => {
 			</MediaItem>
 		) : null;
 		return showImage && linkURL ? (
-			<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+			<Link
+				href={formatURL(linkURL)}
+				openInNewTab={newTab}
+				onClick={registerSuccessEvent}
+				assistiveHidden
+			>
 				{ImageDisplay}
 			</Link>
 		) : (

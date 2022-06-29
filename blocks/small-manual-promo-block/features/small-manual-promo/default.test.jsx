@@ -56,7 +56,9 @@ describe("the small manual promo feature", () => {
 
 	it("should have one image when showImage is true", () => {
 		render(<SmallManualPromo customFields={customFields} />);
-		expect(screen.queryByRole("img", { name: "This is the headline" })).not.toBeNull();
+		expect(
+			screen.queryByRole("img", { name: "This is the headline", hidden: true })
+		).not.toBeNull();
 	});
 
 	it("should have no image when showImage is false", () => {

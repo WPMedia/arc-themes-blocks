@@ -21,21 +21,21 @@ const NavWidget = ({
 	if (!type || type === "none") return null;
 
 	const predefinedWidget =
-		(type === "search" && (
+		(type === "search" ? (
 			<SearchBox
 				iconSize={WIDGET_CONFIG[placement]?.iconSize}
 				placeholderText={phrases.t("header-nav-chain-block.search-text")}
 				customSearchAction={customSearchAction}
 				alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
 			/>
-		)) ||
-		(type === "queryly" && (
+		) : null) ||
+		(type === "queryly" ? (
 			<QuerylySearch
 				// passing in placement for nav-spcific styling
 				placement={placement}
 			/>
-		)) ||
-		(type === "menu" && (
+		) : null) ||
+		(type === "menu" ? (
 			<Button
 				aria-label={phrases.t("header-nav-chain-block.sections-button")}
 				onClick={menuButtonClickAction}
@@ -46,7 +46,7 @@ const NavWidget = ({
 			>
 				{phrases.t("header-nav-chain-block.sections-button")}
 			</Button>
-		));
+		) : null);
 
 	return (
 		predefinedWidget ||

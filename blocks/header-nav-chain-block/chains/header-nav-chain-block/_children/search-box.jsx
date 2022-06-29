@@ -61,7 +61,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 	};
 
 	const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-	const navClassNames = `nav-search${isSearchBarOpen ? " open" : ""}`;
+	const navClassNames = `nav-search${isSearchBarOpen ? " open " : ""}`;
 
 	return (
 		<div className={navClassNames}>

@@ -16,11 +16,6 @@ jest.mock("fusion:context", () => ({
 		arcSite: "dagen",
 	})),
 }));
-jest.mock("fusion:intl", () =>
-	jest.fn(() => ({
-		t: jest.fn(() => "test-translation"),
-	}))
-);
 
 describe("<NavWidget/>", () => {
 	it('renders null when type "none"', () => {
@@ -40,7 +35,7 @@ describe("<NavWidget/>", () => {
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
-		expect(searchWidget.prop("placeholderText")).toEqual("test-translation");
+		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
 		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
@@ -56,7 +51,7 @@ describe("<NavWidget/>", () => {
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
-		expect(searchWidget.prop("placeholderText")).toEqual("test-translation");
+		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
 		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
@@ -92,7 +87,7 @@ describe("<NavWidget/>", () => {
 		);
 
 		const menuWidget = wrapper.find("button.menu-btn");
-		expect(menuWidget.text()).toBe("test-translation");
+		expect(menuWidget.text()).toBe("header-nav-chain-block.sections-button");
 		expect(menuWidget.find("Icon").length).toBe(1);
 		expect(menuWidget.find("svg")).toHaveLength(1);
 	});
@@ -104,7 +99,7 @@ describe("<NavWidget/>", () => {
 				type="custom"
 				position={1}
 				// eslint-disable-next-line react/no-children-prop
-				children={[<ChildComponent />]}
+				children={[<ChildComponent key="child-test" />]}
 			/>
 		);
 		expect(wrapper).toBeDefined();

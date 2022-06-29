@@ -31,16 +31,17 @@ const SmallManualPromo = ({ customFields }) => {
 	const PromoImage = () => {
 		const { searchableField } = useEditableContent();
 		const { fallbackImage } = getProperties(arcSite);
-		return showImage && linkURL ? (
-			<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
-				<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-					<Image alt={headline} src={imageURL || fallbackImage} searchableField />
-				</MediaItem>
-			</Link>
-		) : (
+		const ImageDisplay = showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
 			</MediaItem>
+		) : null;
+		return showImage && linkURL ? (
+			<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+				{ImageDisplay}
+			</Link>
+		) : (
+			ImageDisplay
 		);
 	};
 

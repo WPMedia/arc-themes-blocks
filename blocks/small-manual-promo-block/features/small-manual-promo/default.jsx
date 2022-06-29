@@ -63,10 +63,17 @@ const SmallManualPromo = ({ customFields }) => {
 			</Heading>
 		) : null;
 
+	const containerClassNames = [
+		BLOCK_CLASS_NAME,
+		!showImage || !showHeadline ? null : `${BLOCK_CLASS_NAME}--${imagePosition}`,
+	]
+		.filter((classString) => classString)
+		.join(" ");
+
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Grid as="article" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}>
+				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
 							<PromoHeading />

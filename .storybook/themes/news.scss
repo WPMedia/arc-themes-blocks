@@ -789,6 +789,14 @@
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
+						attribution: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						date: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
 					),
 				),
 				card-list-title: (

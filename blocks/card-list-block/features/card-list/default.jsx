@@ -10,7 +10,7 @@ import {
 	Attribution,
 	Date,
 	formatAuthors,
-	formatUrl,
+	formatURL,
 	getImageFromANS,
 	Heading,
 	HeadingSection,

@@ -66,7 +66,7 @@ const MediumManualPromo = ({ customFields }) => {
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Grid className={BLOCK_CLASS_NAME}>
+				<Grid as="article" className={BLOCK_CLASS_NAME}>
 					<PromoImage />
 					<PromoHeading />
 					<PromoDescription />

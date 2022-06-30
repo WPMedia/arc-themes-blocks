@@ -33,7 +33,6 @@ const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 
 	return targetFallbackImage;
 };
-// f
 const CardListItems = (props) => {
 	const {
 		arcSite,

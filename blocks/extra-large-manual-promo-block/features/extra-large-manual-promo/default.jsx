@@ -4,17 +4,18 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
 import {
+	Conditional,
 	Heading,
 	HeadingSection,
 	Image,
 	isServerSide,
+	Link,
 	MediaItem,
 	Overline,
 	Paragraph,
 	Stack,
 } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import OptionalLink from "./optional-link";
 
 const BLOCK_CLASS_NAME = "b-xl-manual-promo";
 
@@ -50,22 +51,32 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 						{showHeadline ? (
 							<HeadingSection>
 								<Heading>
-									<OptionalLink href={linkURL} openInNewTab={newTab}>
+									<Conditional
+										component={Link}
+										condition={linkURL}
+										href={linkURL}
+										openInNewTab={newTab}
+									>
 										{headline}
-									</OptionalLink>
+									</Conditional>
 								</Heading>
 							</HeadingSection>
 						) : null}
 						{showImage ? (
 							<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-								<OptionalLink href={linkURL} openInNewTab={newTab}>
+								<Conditional
+									component={Link}
+									condition={linkURL}
+									href={linkURL}
+									openInNewTab={newTab}
+								>
 									<Image
 										alt={headline}
 										src={imageURL || fallbackImage}
 										searchableField
 										data-aspect-ratio={imageRatio?.replace(":", "/")}
 									/>
-								</OptionalLink>
+								</Conditional>
 							</MediaItem>
 						) : null}
 						{showDescription ? <Paragraph>{description}</Paragraph> : null}

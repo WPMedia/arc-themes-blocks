@@ -48,8 +48,6 @@ export const wideLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -74,8 +72,6 @@ export const tallLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -100,8 +96,6 @@ export const squareLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -126,8 +120,6 @@ export const centerLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="center"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -158,34 +150,6 @@ export const leftLogoWithLinks = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
-		sectionAriaLabel="Menu des sections"
-		sections={[]}
-		showDotSeparators
-		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/86x36"
-		primaryLogoAlt="Shows dimensions of 86 by 36."
-	/>
-);
-
-export const leftLogoWithLinksDark = () => (
-	<PresentationalNav
-		backgroundColor="#000"
-		mediumBreakpoint={768}
-		closeDrawer={() => {}}
-		customFields={CUSTOM_FIELDS_BASE_2}
-		displayLinks
-		horizontalLinksHierarchy="tenLinks"
-		isAdmin={false}
-		isSectionDrawerOpen={false}
-		logoAlignment="left"
-		menuButtonClickAction={() => {}}
-		navColor="dark"
-		navColorClass="dark"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -199,36 +163,31 @@ export const leftLogoWithLinksDark = () => (
 );
 
 export const leftLogoWithLinksAndSearch = () => (
-	<div>
-		<PresentationalNav
-			backgroundColor="#000"
-			mediumBreakpoint={768}
-			closeDrawer={() => {}}
-			customFields={{
-				...CUSTOM_FIELDS_BASE,
-				leftComponentDesktop1: "menu",
-				leftComponentDesktop2: "search",
-				leftComponentMobile1: "menu",
-			}}
-			displayLinks
-			horizontalLinksHierarchy="horizontal-links"
-			isAdmin={false}
-			logoAlignment="left"
-			menuButtonClickAction={() => {}}
-			navColor="dark"
-			navColorClass="dark"
-			navHeight={100}
-			scrollAdjustedNavHeight={100}
-			scrolled={false}
-			sectionAriaLabel="Menu des sections"
-			sections={headerNavMock}
-			showDotSeparators={false}
-			signInOrder={1}
-			primaryLogoPath="https://place-hold.it/1200x150"
-			primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
-		/>
-		<div style={{ height: "200vh", backgroundColor: "hotpink" }}> </div>
-	</div>
+	<PresentationalNav
+		backgroundColor="#000"
+		mediumBreakpoint={768}
+		closeDrawer={() => {}}
+		customFields={{
+			...CUSTOM_FIELDS_BASE,
+			leftComponentDesktop1: "menu",
+			leftComponentDesktop2: "search",
+			leftComponentMobile1: "menu",
+		}}
+		displayLinks
+		horizontalLinksHierarchy="horizontal-links"
+		isAdmin={false}
+		logoAlignment="left"
+		menuButtonClickAction={() => {}}
+		navHeight={100}
+		scrollAdjustedNavHeight={100}
+		scrolled={false}
+		sectionAriaLabel="Menu des sections"
+		sections={headerNavMock}
+		showDotSeparators={false}
+		signInOrder={1}
+		primaryLogoPath="https://place-hold.it/1200x150"
+		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
+	/>
 );
 
 export const sectionMenuOpen = () => (
@@ -243,34 +202,6 @@ export const sectionMenuOpen = () => (
 		isSectionDrawerOpen
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="light"
-		navColorClass="light"
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
-		sectionAriaLabel="Menu des sections"
-		sections={headerNavMock}
-		showDotSeparators={false}
-		signInOrder={1}
-		primaryLogoPath="https://place-hold.it/1200x150"
-		primaryLogoAlt="Shows dimensions of 1200 by 150 for testing purposes"
-	/>
-);
-
-export const sectionMenuOpenDark = () => (
-	<PresentationalNav
-		backgroundColor="#000"
-		mediumBreakpoint={768}
-		closeDrawer={() => {}}
-		customFields={CUSTOM_FIELDS_BASE}
-		displayLinks
-		horizontalLinksHierarchy="horizontal-links"
-		isAdmin={false}
-		isSectionDrawerOpen
-		logoAlignment="left"
-		menuButtonClickAction={() => {}}
-		navColor="dark"
-		navColorClass="dark"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}
@@ -304,8 +235,6 @@ export const sectionMenuOpenWithSearch = () => (
 		isSectionDrawerOpen
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navColor="dark"
-		navColorClass="dark"
 		navHeight={100}
 		scrollAdjustedNavHeight={100}
 		scrolled={false}

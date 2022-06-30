@@ -1411,27 +1411,15 @@
 					display: flex,
 				),
 				medium-manual-promo: (
-					display: grid,
-					grid-template-columns: 1fr 2fr,
-					column-gap: var(--global-spacing-6),
-					row-gap: var(--global-spacing-4),
-					grid-template-areas: "mediaitem paragraph" "mediaitem paragraph",
 					components: (
 						media-item: (
-							grid-area: "mediaitem",
-							margin: 0,
-							float: none,
-							max-width: 100%,
+							float: left,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
-							grid-area: "heading",
 							line-height: var(--global-line-height-4),
-							margin: 0,
 						),
-						paragraph: (
-							grid-area: "paragraph",
-						),
+						paragraph: (),
 					),
 				),
 				quad-chain: (

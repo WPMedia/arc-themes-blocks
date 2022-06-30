@@ -9,7 +9,6 @@ import CardList from "./default";
 jest.mock("@wpmedia/arc-themes-components", () => ({
 	...jest.requireActual("@wpmedia/arc-themes-components"),
 	isServerSide: jest.fn(() => true),
-	formatUrl: jest.fn((url) => url.toString()),
 }));
 
 jest.mock("fusion:content", () => ({

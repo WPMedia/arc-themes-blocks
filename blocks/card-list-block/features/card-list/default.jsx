@@ -204,7 +204,7 @@ const CardListItems = (props) => {
 						>
 							<Stack className={`${BLOCK_CLASS_NAME}__main-item-text-container`}>
 								{url || text ? (
-									<Overline href={url ? formatUrl(url) : null}>{text}</Overline>
+									<Overline href={url ? formatURL(url) : null}>{text}</Overline>
 								) : null}
 								<Heading>
 									<Link href={contentItems[0].websites[arcSite].website_url}>

@@ -9,7 +9,7 @@ jest.mock("fusion:context", () => ({
 }));
 
 describe("the extra large promo feature - OptionalLink", () => {
-	it("should return null if lazyLoad on the server and not in the admin", () => {
+	it("should return the children if there is no url", () => {
 		const { container } = render(
 			<OptionalLink>
 				<div>child node</div>
@@ -18,7 +18,7 @@ describe("the extra large promo feature - OptionalLink", () => {
 		expect(container.firstChild).toBe(screen.getByText("child node"));
 	});
 
-	it("should return null if lazyLoad on the server and not in the admin", () => {
+	it("should return the link containing the children if there is a url", () => {
 		const { container } = render(
 			<OptionalLink href="#">
 				<div>child node</div>

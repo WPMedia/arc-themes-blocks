@@ -74,7 +74,6 @@ describe("Card list", () => {
 			offsetOverride: 100,
 		};
 		useContent.mockReturnValueOnce(null);
-		useContent.mockReturnValueOnce(null);
 
 		const wrapper = mount(<CardList customFields={customFields} />);
 
@@ -146,7 +145,6 @@ describe("Card list", () => {
 				deployment: jest.fn(() => {}),
 			})),
 		}));
-		useContent.mockReturnValueOnce(null);
 		useContent.mockReturnValueOnce(oneListItem);
 		const wrapper = mount(<CardList customFields={customFields} />);
 		expect(wrapper.find("Stack.b-card-list").length).toEqual(1);
@@ -169,7 +167,6 @@ describe("Card list", () => {
 			"primary-font-family": "Papyrus",
 		}));
 
-		useContent.mockReturnValueOnce(null);
 		useContent.mockReturnValueOnce(oneListItem);
 		const wrapper = mount(<CardList customFields={customFields} />);
 
@@ -266,7 +263,6 @@ describe("Card list", () => {
 	});
 
 	describe("render one list item with display label overline", () => {
-		useContent.mockReturnValueOnce(null);
 		useContent.mockReturnValueOnce(oneListItemDisplayLabel);
 
 		const wrapper = mount(<CardList customFields={{}} />);
@@ -277,7 +273,6 @@ describe("Card list", () => {
 	});
 
 	describe("render one list item without a secondary item for a bad site website_url", () => {
-		useContent.mockReturnValueOnce(null);
 		useContent.mockReturnValueOnce(twoListItemNoSiteUrl);
 
 		const wrapper = mount(<CardList customFields={{}} />);

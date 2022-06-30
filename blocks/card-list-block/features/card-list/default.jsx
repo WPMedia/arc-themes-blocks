@@ -42,10 +42,8 @@ const CardListItems = (props) => {
 			offsetOverride = 0,
 			displayAmount,
 		},
-		placeholderResizedImageOptions,
 		targetFallbackImage,
-		largeImageProps,
-		smallImageProps,
+		primaryLogoAlt,
 		dateLocalization: { language, timeZone, dateFormat } = {
 			language: "en",
 			timeZone: "GMT",
@@ -179,7 +177,6 @@ const CardListItems = (props) => {
 					>
 						{getImageFromANS(sourceContent) ? (
 							<Image
-								{...largeImageProps}
 								width={377}
 								height={283}
 								src={getImageFromANS(sourceContent)}
@@ -187,12 +184,10 @@ const CardListItems = (props) => {
 							/>
 						) : (
 							<Image
-								{...largeImageProps}
 								width={377}
 								height={283}
 								src={targetFallbackImage}
-								alt={largeImageProps.primaryLogoAlt || ""}
-								resizedImageOptions={placeholderResizedImageOptions}
+								alt={primaryLogoAlt || ""}
 							/>
 						)}
 					</Link>
@@ -248,14 +243,10 @@ const CardListItems = (props) => {
 										className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
 									>
 										<Image
-											{...smallImageProps}
 											height={105}
 											width={70}
 											src={imageURL || targetFallbackImage}
-											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-											resizedImageOptions={
-												imageURL ? getImageFromANS(element) : placeholderResizedImageOptions
-											}
+											alt={imageURL ? headlineText : primaryLogoAlt || ""}
 										/>
 									</Link>
 								</Stack>
@@ -270,30 +261,12 @@ const CardListItems = (props) => {
 
 const CardList = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL } =
-		getProperties(arcSite);
+	const { websiteDomain, fallbackImage, primaryLogoAlt } = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
 		contextPath,
 		fallbackImage,
-	});
-
-	const largeImageProps = {
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
-
-	const smallImageProps = {
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
-
-	const placeholderResizedImageOptions = useContent({
-		source: "resize-image-api",
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
 	});
 
 	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
@@ -306,11 +279,9 @@ const CardList = ({ customFields }) => {
 			<CardListItems
 				id={id}
 				customFields={customFields}
-				placeholderResizedImageOptions={placeholderResizedImageOptions}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}
-				largeImageProps={largeImageProps}
-				smallImageProps={smallImageProps}
+				primaryLogoAlt={primaryLogoAlt}
 				arcSite={arcSite}
 			/>
 		</LazyLoad>

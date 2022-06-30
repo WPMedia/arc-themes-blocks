@@ -40,7 +40,7 @@ export const noTitle = () => {
 	return <CardList {...props} customFields={customFields} />;
 };
 
-export const titleAndNoContent = () => {
+export const titleAndNoContentRenderingNothing = () => {
 	const customFields = {
 		listContentConfig: {
 			contentService: "content-api",

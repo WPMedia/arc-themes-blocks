@@ -1062,6 +1062,13 @@
 				small-manual-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
+					grid-template-columns: 1fr,
+					components: (
+						heading: (
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
+						),
+					),
 				),
 				small-manual-promo-above: (
 					grid-template-columns: 1fr,

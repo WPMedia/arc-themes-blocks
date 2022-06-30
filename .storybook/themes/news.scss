@@ -942,6 +942,10 @@
 							line-height: var(--global-line-height-4),
 							margin: 0 0 var(--global-spacing-4) 0,
 						),
+						paragraph: (
+							line-height: var(--global-line-height-4),
+							font-size: var(--global-font-size-4),
+						),
 					),
 				),
 				numbered-list: (

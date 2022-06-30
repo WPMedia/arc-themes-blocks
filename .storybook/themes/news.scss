@@ -929,7 +929,6 @@
 					padding: 0,
 				),
 				medium-manual-promo: (
-					display: block,
 					components: (
 						media-item: (
 							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
@@ -1418,12 +1417,12 @@
 					components: (
 						media-item: (
 							float: left,
-							margin: 0 var(--global-spacing-4) var(--global-spacing-4) 0,
+							margin: 0 var(--global-spacing-6) var(--global-spacing-6) 0,
 							max-width: 35%,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-4),
+							line-height: var(--global-line-height-7),
 						),
 						paragraph: (),
 					),

@@ -1181,18 +1181,13 @@
 					gap: var(--global-spacing-2),
 				),
 				large-manual-promo: (
+					gap: var(--global-spacing-4),
 					components: (
 						stack: (
-							gap: var(--global-spacing-2),
+							gap: var(--global-spacing-4),
 						),
 						paragraph: (
 							gap: var(--global-spacing-4),
-						),
-						attribution: (
-							gap: var(--global-spacing-2),
-						),
-						badge: (
-							width: fit-content,
 						),
 					),
 				),
@@ -1402,8 +1397,8 @@
 						),
 					),
 				),
-				large-manual-promo-info: (
-					margin-left: var(--global-spacing-4),
+				large-manual-promo: (
+					gap: var(--global-spacing-6),
 				),
 			),
 		),

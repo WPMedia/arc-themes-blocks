@@ -24,12 +24,8 @@ const LargeManualPromo = ({ customFields }) => {
 	const { isAdmin } = useFusionContext();
 	const {
 		headline,
-		imagePosition,
 		imageURL,
 		lazyLoad,
-		caption,
-		credits,
-		subtitle,
 		linkURL,
 		newTab,
 		showHeadline,
@@ -39,9 +35,6 @@ const LargeManualPromo = ({ customFields }) => {
 		showOverline,
 		showDescription,
 		overlineURL,
-		hideImageCaption,
-		hideImageCredits,
-		hideImageTitle,
 	} = customFields;
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 	const { registerSuccessEvent } = useComponentContext();
@@ -55,13 +48,7 @@ const LargeManualPromo = ({ customFields }) => {
 		const { searchableField } = useEditableContent();
 
 		return showImage ? (
-			<MediaItem
-				caption={!hideImageCaption ? caption : null}
-				credit={!hideImageCredits ? credits : null}
-				title={!hideImageTitle ? subtitle : null}
-				{...searchableField("imageURL")}
-				suppressContentEditableWarning
-			>
+			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 				<Image alt={headline} src={imageURL} searchableField />
 			</MediaItem>
 		) : null;
@@ -95,10 +82,7 @@ const LargeManualPromo = ({ customFields }) => {
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Grid
-					role="article"
-					className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__${imagePosition}`}
-				>
+				<Grid role="article" className={BLOCK_CLASS_NAME}>
 					<PromoImage />
 					<Stack className={`${BLOCK_CLASS_NAME}__info`}>
 						<PromoOverline />
@@ -141,10 +125,6 @@ LargeManualPromo.propTypes = {
 		newTab: PropTypes.bool.tag({
 			label: "Open in new tab",
 			defaultValue: false,
-			group: "Configure Content",
-		}),
-		dateString: PropTypes.string.tag({
-			label: "dateString",
 			group: "Configure Content",
 		}),
 		showOverline: PropTypes.bool.tag({

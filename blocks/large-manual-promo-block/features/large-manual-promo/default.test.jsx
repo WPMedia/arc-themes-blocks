@@ -84,23 +84,6 @@ describe("the large promo feature", () => {
 		expect(wrapper.find(MediaItem)).toHaveLength(1);
 	});
 
-	it("MediaItem component should not render caption, credeits and title when hideImageCaption, hideImageCredits and hideImageTitle props are true", () => {
-		const wrapper = mount(
-			<LargeManualPromo
-				customFields={{
-					...config,
-					hideImageCaption: true,
-					hideImageCredits: true,
-					hideImageTitle: true,
-				}}
-			/>
-		);
-		const { caption, credit, title } = wrapper.find(MediaItem).props();
-		expect(caption).toBe(null);
-		expect(credit).toBe(null);
-		expect(title).toBe(null);
-	});
-
 	it("should render Overline component when showOverline is true", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Overline)).toHaveLength(1);

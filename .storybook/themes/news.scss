@@ -1415,7 +1415,7 @@
 					grid-template-columns: 1fr 2fr,
 					column-gap: var(--global-spacing-6),
 					row-gap: var(--global-spacing-4),
-					grid-template-areas: "mediaitem heading" "mediaitem description",
+					grid-template-areas: "mediaitem paragraph" "mediaitem paragraph",
 					components: (
 						media-item: (
 							grid-area: "mediaitem",

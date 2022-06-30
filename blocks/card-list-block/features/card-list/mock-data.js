@@ -655,6 +655,50 @@ export const oneListItem = {
 	_id: "e3de4e3edcc50753f0879e4aba393e5b8857d9b8c9f58ccda5b3c42488d66286",
 };
 
+export const oneListItemDisplayLabel = {
+	...oneListItem,
+	content_elements: [
+		{
+			...oneListItem.content_elements[0],
+			label: {
+				basic: {
+					display: true,
+					text: "Display Label",
+					url: "http://url.domain/",
+				},
+			},
+			owner: {},
+			website_url: undefined,
+		},
+	],
+};
+
+export const twoListItemNoSiteUrl = {
+	...oneListItem,
+	content_elements: [
+		{
+			...oneListItem.content_elements[0],
+			label: {
+				basic: {
+					display: true,
+					text: "Display Label",
+					url: "http://url.domain/",
+				},
+			},
+			owner: {},
+		},
+		{
+			...oneListItem.content_elements[0],
+			websites: {
+				"the-sun": {
+					...oneListItem.content_elements[0].websites["the-sun"],
+					website_url: undefined,
+				},
+			},
+		},
+	],
+};
+
 export default {
 	type: "results",
 	version: "0.6.0",

@@ -42,7 +42,7 @@ const CardListItems = (props) => {
 			title = "",
 			offsetOverride = 0,
 			displayAmount,
-		} = {},
+		},
 		placeholderResizedImageOptions,
 		targetFallbackImage,
 		largeImageProps,

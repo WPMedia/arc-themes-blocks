@@ -31,11 +31,23 @@ const SmallManualPromo = ({ customFields }) => {
 	const PromoImage = () => {
 		const { searchableField } = useEditableContent();
 		const { fallbackImage } = getProperties(arcSite);
-		return showImage ? (
+		const ImageDisplay = showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
 			</MediaItem>
 		) : null;
+		return showImage && linkURL ? (
+			<Link
+				href={formatURL(linkURL)}
+				openInNewTab={newTab}
+				onClick={registerSuccessEvent}
+				assistiveHidden
+			>
+				{ImageDisplay}
+			</Link>
+		) : (
+			ImageDisplay
+		);
 	};
 
 	const PromoHeading = () =>
@@ -51,10 +63,17 @@ const SmallManualPromo = ({ customFields }) => {
 			</Heading>
 		) : null;
 
+	const containerClassNames = [
+		BLOCK_CLASS_NAME,
+		!showImage || !showHeadline ? null : `${BLOCK_CLASS_NAME}--${imagePosition}`,
+	]
+		.filter((classString) => classString)
+		.join(" ");
+
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<Grid as="article" className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--${imagePosition}`}>
+				<Grid as="article" className={containerClassNames}>
 					{["below", "right"].includes(imagePosition) ? (
 						<>
 							<PromoHeading />

@@ -5,6 +5,7 @@ import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
 	formatURL,
+	Grid,
 	Heading,
 	HeadingSection,
 	Image,
@@ -65,11 +66,11 @@ const MediumManualPromo = ({ customFields }) => {
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<article className={BLOCK_CLASS_NAME}>
+				<Grid className={BLOCK_CLASS_NAME}>
 					<PromoImage />
 					<PromoHeading />
 					<PromoDescription />
-				</article>
+				</Grid>
 			</HeadingSection>
 		</LazyLoad>
 	);

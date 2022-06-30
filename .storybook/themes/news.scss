@@ -860,18 +860,14 @@
 					padding: 0,
 				),
 				medium-manual-promo: (
-					display: block,
 					components: (
 						media-item: (
-							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
-							float: right,
 							max-width: 100px,
 						),
 						heading: (
 							font-size: var(--global-font-size-7),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-5),
-							margin: 0 0 var(--global-spacing-4) 0,
+							line-height: var(--global-line-height-4),
 						),
 					),
 				),

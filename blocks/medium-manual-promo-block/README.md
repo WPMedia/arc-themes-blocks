@@ -1,10 +1,6 @@
 # `@wpmedia/medium-manual-promo-block`
 
-_Block containing a medium manual promo component. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+The medium manual promo block allows images and text to be set manually to override content
 
 ## Props
 
@@ -28,22 +24,6 @@ Outline any schema information requirements necessary to know for ths block
 | ---------- | --------------------- |
 | `key`      | `english translation` |
 
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
 This block does not emit any events.
-
-## Additional Considerations
-
-_Configuration (including content) is handled through proptypes in the PB editor._

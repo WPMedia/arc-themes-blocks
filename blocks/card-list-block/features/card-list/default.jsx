@@ -6,20 +6,20 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad, localizeDate } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
 import {
 	Attribution,
 	Date,
 	formatAuthors,
 	formatUrl,
+	getImageFromANS,
 	Heading,
 	HeadingSection,
 	Image,
+	isServerSide,
 	Link,
 	Overline,
 	Separator,
 	Stack,
-	isServerSide,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-card-list";
@@ -175,14 +175,13 @@ const CardListItems = (props) => {
 					className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
 					href={sourceContent.websites[arcSite].website_url}
 				>
-					{extractImageFromStory(sourceContent) ? (
+					{getImageFromANS(sourceContent) ? (
 						<Image
 							{...largeImageProps}
 							width={377}
 							height={283}
-							src={extractImageFromStory(sourceContent)}
+							src={getImageFromANS(sourceContent)}
 							alt={sourceContent.headlines.basic}
-							resizedImageOptions={extractResizedParams(sourceContent)}
 						/>
 					) : (
 						<Image
@@ -221,7 +220,7 @@ const CardListItems = (props) => {
 					</Stack>
 					{contentItems.slice(1).map((element) => {
 						const { headlines: { basic: headlineText } = {} } = element;
-						const imageURL = extractImageFromStory(element);
+						const imageURL = getImageFromANS(element);
 						const itemUrl = element.websites[arcSite]?.website_url;
 						if (!itemUrl) {
 							return null;
@@ -248,7 +247,7 @@ const CardListItems = (props) => {
 										src={imageURL || targetFallbackImage}
 										alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
 										resizedImageOptions={
-											imageURL ? extractResizedParams(element) : placeholderResizedImageOptions
+											imageURL ? getImageFromANS(element) : placeholderResizedImageOptions
 										}
 									/>
 								</Link>

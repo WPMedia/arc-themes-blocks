@@ -120,6 +120,8 @@ const CardListItems = (props) => {
 		return null;
 	}
 
+	const Wrapper = title ? HeadingSection : React.Fragment;
+
 	let contentItems = contentElements.reduce((acc, element, index) => {
 		if (element.websites?.[arcSite] && index >= offsetOverride) {
 			return acc.concat(element);
@@ -169,91 +171,98 @@ const CardListItems = (props) => {
 		<HeadingSection>
 			<Stack className={BLOCK_CLASS_NAME}>
 				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
-				<Link
-					assistiveHidden
-					className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
-					href={sourceContent.websites[arcSite].website_url}
-				>
-					{getImageFromANS(sourceContent) ? (
-						<Image
-							{...largeImageProps}
-							width={377}
-							height={283}
-							src={getImageFromANS(sourceContent)}
-							alt={sourceContent.headlines.basic}
-						/>
-					) : (
-						<Image
-							{...largeImageProps}
-							width={377}
-							height={283}
-							src={targetFallbackImage}
-							alt={largeImageProps.primaryLogoAlt || ""}
-							resizedImageOptions={placeholderResizedImageOptions}
-						/>
-					)}
-				</Link>
-				<Stack className={`${BLOCK_CLASS_NAME}__list`} divider>
-					<Stack
-						as="article"
-						className={`${BLOCK_CLASS_NAME}__main-item`}
-						key={`card-list-${sourceContent.websites[arcSite].website_url}`}
+				<Wrapper>
+					<Link
+						assistiveHidden
+						className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
+						href={sourceContent.websites[arcSite].website_url}
 					>
-						<Stack className={`${BLOCK_CLASS_NAME}__main-item-text-container`}>
-							{url || text ? <Overline href={url ? formatUrl(url) : null}>{text}</Overline> : null}
-							<Heading>
-								<Link href={contentItems[0].websites[arcSite].website_url}>
-									{contentItems[0].headlines.basic}
-								</Link>
-							</Heading>
-							<Attribution>
-								{hasAuthor ? (
-									<>
-										<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
-										<Separator />
-									</>
+						{getImageFromANS(sourceContent) ? (
+							<Image
+								{...largeImageProps}
+								width={377}
+								height={283}
+								src={getImageFromANS(sourceContent)}
+								alt={sourceContent.headlines.basic}
+							/>
+						) : (
+							<Image
+								{...largeImageProps}
+								width={377}
+								height={283}
+								src={targetFallbackImage}
+								alt={largeImageProps.primaryLogoAlt || ""}
+								resizedImageOptions={placeholderResizedImageOptions}
+							/>
+						)}
+					</Link>
+					<Stack className={`${BLOCK_CLASS_NAME}__list`} divider>
+						<Stack
+							as="article"
+							className={`${BLOCK_CLASS_NAME}__main-item`}
+							key={`card-list-${sourceContent.websites[arcSite].website_url}`}
+						>
+							<Stack className={`${BLOCK_CLASS_NAME}__main-item-text-container`}>
+								{url || text ? (
+									<Overline href={url ? formatUrl(url) : null}>{text}</Overline>
 								) : null}
-								<Date dateTime={sourceContent.display_date} dateString={displayDate} />
-							</Attribution>
-						</Stack>
-					</Stack>
-					{contentItems.slice(1).map((element) => {
-						const { headlines: { basic: headlineText } = {} } = element;
-						const imageURL = getImageFromANS(element);
-						const itemUrl = element.websites[arcSite]?.website_url;
-						if (!itemUrl) {
-							return null;
-						}
-						return (
-							<Stack
-								as="article"
-								className={`${BLOCK_CLASS_NAME}__secondary-item`}
-								key={`card-list-${itemUrl}`}
-								direction="horizontal"
-							>
-								<Link href={itemUrl} className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}>
-									<Heading>{headlineText}</Heading>
-								</Link>
-								<Link
-									assistiveHidden
-									href={itemUrl}
-									className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
-								>
-									<Image
-										{...smallImageProps}
-										height={105}
-										width={70}
-										src={imageURL || targetFallbackImage}
-										alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
-										resizedImageOptions={
-											imageURL ? getImageFromANS(element) : placeholderResizedImageOptions
-										}
-									/>
-								</Link>
+								<Heading>
+									<Link href={contentItems[0].websites[arcSite].website_url}>
+										{contentItems[0].headlines.basic}
+									</Link>
+								</Heading>
+								<Attribution>
+									{hasAuthor ? (
+										<>
+											<span>{phrases.t("byline-block.by-text")}</span> <span>{bylineNodes}</span>
+											<Separator />
+										</>
+									) : null}
+									<Date dateTime={sourceContent.display_date} dateString={displayDate} />
+								</Attribution>
 							</Stack>
-						);
-					})}
-				</Stack>
+						</Stack>
+						{contentItems.slice(1).map((element) => {
+							const { headlines: { basic: headlineText } = {} } = element;
+							const imageURL = getImageFromANS(element);
+							const itemUrl = element.websites[arcSite]?.website_url;
+							if (!itemUrl) {
+								return null;
+							}
+							return (
+								<Stack
+									as="article"
+									className={`${BLOCK_CLASS_NAME}__secondary-item`}
+									key={`card-list-${itemUrl}`}
+									direction="horizontal"
+								>
+									<Link
+										href={itemUrl}
+										className={`${BLOCK_CLASS_NAME}__secondary-item-heading-link`}
+									>
+										<Heading>{headlineText}</Heading>
+									</Link>
+									<Link
+										assistiveHidden
+										href={itemUrl}
+										className={`${BLOCK_CLASS_NAME}__secondary-item-image-link`}
+									>
+										<Image
+											{...smallImageProps}
+											height={105}
+											width={70}
+											src={imageURL || targetFallbackImage}
+											alt={imageURL ? headlineText : smallImageProps.primaryLogoAlt || ""}
+											resizedImageOptions={
+												imageURL ? getImageFromANS(element) : placeholderResizedImageOptions
+											}
+										/>
+									</Link>
+								</Stack>
+							);
+						})}
+					</Stack>
+				</Wrapper>
 			</Stack>
 		</HeadingSection>
 	) : null;

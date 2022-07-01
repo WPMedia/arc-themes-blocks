@@ -84,7 +84,7 @@ const LargeManualPromo = ({ customFields }) => {
 			<HeadingSection>
 				<Grid role="article" className={BLOCK_CLASS_NAME}>
 					<PromoImage />
-					<Stack className={`${BLOCK_CLASS_NAME}__info`}>
+					<Stack>
 						<PromoOverline />
 						<PromoHeading />
 						<PromoDescription />

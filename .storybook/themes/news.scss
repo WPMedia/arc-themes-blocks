@@ -1285,8 +1285,14 @@
 						stack: (
 							gap: var(--global-spacing-4),
 						),
+						overline: (
+							font-size: var(--global-font-size-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+						),
 						paragraph: (
-							gap: var(--global-spacing-4),
+							font-size: var(--global-font-size-4),
 						),
 					),
 				),
@@ -1512,6 +1518,14 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
+					components: (
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+						heading: (
+							font-size: var(--global-font-size-12),
+						),
+					),
 				),
 				xl-manual-promo: (
 					components: (

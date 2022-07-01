@@ -1,15 +1,13 @@
 {
   "name": "@wpmedia/large-manual-promo-block",
   "version": "5.15.0",
-  "description": "Fusion News Theme Large Manual Promo block",
+  "description": "Large Manual Promo block",
   "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
     "features",
-    "chains",
-    "layouts",
     "_index.scss"
   ],
   "publishConfig": {
@@ -23,7 +21,6 @@
   },
   "peerDependencies": {
     "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/resizer-image-block": "*",
     "@wpmedia/arc-themes-components": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"

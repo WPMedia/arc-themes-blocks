@@ -1,6 +1,6 @@
 # `@wpmedia/large-manual-promo-block`
 
-This large manual promo block displays a outline, headline, description and image.
+This large manual promo block displays an outline, headline, description and image.
 
 ## Props
 
@@ -8,7 +8,7 @@ This large manual promo block displays a outline, headline, description and imag
 | -------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------ | --- |
 | **customFields.headline**        | no           | String   | Headline text to be displayed                                                        |
 | **customFields.description**     | no           | String   | description text to be displayed                                                     |
-| **customFields.outline**         | no           | String   | Outlineline text to be displayed                                                     |
+| **customFields.outline**         | no           | String   | Outline text to be displayed                                                         |
 | **customFields.overlineURL**     | no           | String   | URL of overline to display.                                                          |
 | **customFields.imageURL**        | no           | String   | URL of image to display. Image selection from Photo Center is an option.             |
 | **customFields.linkURL**         | no           | String   | Navigation URL for when the headline or image is clicked.                            |

@@ -4,6 +4,7 @@ import { useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import {
+	Conditional,
 	formatURL,
 	Heading,
 	HeadingSection,
@@ -31,44 +32,46 @@ const MediumManualPromo = ({ customFields }) => {
 	} = customFields;
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const { fallbackImage } = getProperties(arcSite);
 	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
-
-	const PromoImage = () => {
-		const { searchableField } = useEditableContent();
-		const { fallbackImage } = getProperties(arcSite);
-		return showImage ? (
-			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				<Image alt={headline} src={imageURL || fallbackImage} searchableField />
-			</MediaItem>
-		) : null;
-	};
-
-	const PromoHeading = () =>
-		showHeadline ? (
-			<Heading>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
-						{headline}
-					</Link>
-				) : (
-					headline
-				)}
-			</Heading>
-		) : null;
-
-	const PromoDescription = () => (showDescription ? <Paragraph>{description}</Paragraph> : null);
-
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<article className={BLOCK_CLASS_NAME}>
-					<PromoImage />
-					<PromoHeading />
-					<PromoDescription />
+					{showImage ? (
+						<Conditional
+							component={Link}
+							condition={linkURL}
+							href={formatURL(linkURL)}
+							openInNewTab={newTab}
+							onClick={registerSuccessEvent}
+						>
+							<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+								<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+							</MediaItem>
+						</Conditional>
+					) : null}
+					{showHeadline ? (
+						<Heading>
+							{linkURL ? (
+								<Conditional
+									component={Link}
+									condition={linkURL}
+									href={formatURL(linkURL)}
+									openInNewTab={newTab}
+									onClick={registerSuccessEvent}
+								>
+									{headline}
+								</Conditional>
+							) : null}
+						</Heading>
+					) : null}
+					{showDescription ? <Paragraph>{description}</Paragraph> : null}
 				</article>
 			</HeadingSection>
 		</LazyLoad>

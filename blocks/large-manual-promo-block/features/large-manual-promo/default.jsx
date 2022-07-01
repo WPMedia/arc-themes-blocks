@@ -16,7 +16,6 @@ import {
 	Paragraph,
 	Stack,
 } from "@wpmedia/arc-themes-components";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
 
 const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
@@ -147,7 +146,11 @@ LargeManualPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "4:3",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

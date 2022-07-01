@@ -1287,12 +1287,15 @@
 						),
 						overline: (
 							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
 						),
 						heading: (
 							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-4),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
 						),
 					),
 				),
@@ -1524,6 +1527,7 @@
 						),
 						heading: (
 							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
 						),
 					),
 				),

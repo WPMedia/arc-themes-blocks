@@ -767,6 +767,72 @@
 						),
 					),
 				),
+				card-list: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: 0 var(--border-radius) var(--border-radius) 0,
+					background-color: var(--background-color),
+					padding: var(--global-spacing-4) 0,
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+						overline: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--body-font-size),
+							line-height: var(--global-line-height-4),
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
+						attribution: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						date: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+					),
+				),
+				card-list-title: (
+					padding: 0 var(--global-spacing-4),
+					font-size: var(--global-font-size-7),
+				),
+				card-list-list: (
+					padding: 0 var(--global-spacing-4),
+				),
+				card-list-main-item-image-link: (
+					components: (
+						image: (
+							max-height: 40vh,
+							object-fit: cover,
+							width: 100%,
+						),
+					),
+				),
+				card-list-main-item-text-container: (
+					gap: var(--global-spacing-2),
+				),
+				card-list-secondary-item: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+							font-weight: var(--global-font-weight-4),
+						),
+					),
+				),
+				card-list-secondary-item-heading-link: (
+					width: 100%,
+				),
+				card-list-secondary-item-image-link: (
+					max-width: 105px,
+				),
 				double-chain: (
 					components: (
 						stack: (
@@ -1295,6 +1361,13 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
+				card-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
 					line-height: var(--global-line-height-7),
@@ -1437,6 +1510,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/extra-large-manual-promo-block";

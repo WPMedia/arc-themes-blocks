@@ -775,7 +775,7 @@
 					components: (
 						heading: (
 							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-7),
+							font-size: var(--global-font-size-5),
 							line-height: var(--global-line-height-4),
 						),
 						stack: (
@@ -783,7 +783,7 @@
 						),
 						overline: (
 							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-7),
+							font-size: var(--body-font-size),
 							line-height: var(--global-line-height-4),
 						),
 						separator: (
@@ -1366,6 +1366,13 @@
 				),
 				double-chain-child-item-empty: (
 					display: initial,
+				),
+				card-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
 				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),

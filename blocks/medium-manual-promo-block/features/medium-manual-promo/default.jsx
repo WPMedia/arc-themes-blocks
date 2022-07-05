@@ -44,17 +44,17 @@ const MediumManualPromo = ({ customFields }) => {
 			<HeadingSection>
 				<article className={BLOCK_CLASS_NAME}>
 					{showImage ? (
-						<Conditional
-							component={Link}
-							condition={linkURL}
-							href={formatURL(linkURL)}
-							openInNewTab={newTab}
-							onClick={registerSuccessEvent}
-						>
-							<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+						<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+							>
 								<Image alt={headline} src={imageURL || fallbackImage} searchableField />
-							</MediaItem>
-						</Conditional>
+							</Conditional>
+						</MediaItem>
 					) : null}
 					{showHeadline ? (
 						<Heading>

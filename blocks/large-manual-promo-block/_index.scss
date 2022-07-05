@@ -4,6 +4,7 @@
 	@include scss.block-components("large-manual-promo");
 	@include scss.block-properties("large-manual-promo");
 }
+
 .b-large-manual-promo__text {
 	@include scss.block-components("large-manual-promo-text");
 	@include scss.block-properties("large-manual-promo-text");

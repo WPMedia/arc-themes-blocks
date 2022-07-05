@@ -183,7 +183,7 @@ const Nav = (props) => {
 		logoAlignment = "center",
 		horizontalLinksHierarchy,
 		desktopNavivationStartHeight,
-		shrinkDesktopNavivationHeight,
+		shrinkDesktopNavivationHeight: shrinkDesktopNavigationHeight,
 		showHorizontalSeperatorDots,
 		ariaLabel,
 		ariaLabelLink,
@@ -265,13 +265,11 @@ const Nav = (props) => {
 			if (!isDesktop) {
 				setScrolled(false);
 				setNavHeight("revert");
-			} else if (!shrinkDesktopNavivationHeight) {
+			} else if (!shrinkDesktopNavigationHeight) {
 				setScrolled(false);
 				setNavHeight(desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert");
-			} else if (pageOffset > shrinkDesktopNavivationHeight) {
-				setNavHeight(
-					shrinkDesktopNavivationHeight ? `${shrinkDesktopNavivationHeight}px` : "revert"
-				);
+			} else if (pageOffset > shrinkDesktopNavigationHeight) {
+				setNavHeight(`${shrinkDesktopNavigationHeight}px`);
 				setScrolled(true);
 			} else if (pageOffset < desktopNavivationStartHeight) {
 				setScrolled(false);
@@ -292,7 +290,7 @@ const Nav = (props) => {
 			window.removeEventListener("scroll", handleScroll);
 			window.removeEventListener("resize", handleResize);
 		};
-	}, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
+	}, [shrinkDesktopNavigationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
 
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");

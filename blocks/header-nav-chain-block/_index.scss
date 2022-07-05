@@ -2,13 +2,13 @@
 
 .b-header-nav-chain {
 	&--scrolled {
-		@include scss.block-components("header-nav-chain-nav-chain-scrolled");
-		@include scss.block-properties("header-nav-chain-nav-chain-scrolled");
+		@include scss.block-components("header-nav-chain-scrolled");
+		@include scss.block-properties("header-nav-chain-scrolled");
 	}
 
 	&--not-scrolled {
-		@include scss.block-components("header-nav-chain-nav-chain-not-scrolled");
-		@include scss.block-properties("header-nav-chain-nav-chain-not-scrolled");
+		@include scss.block-components("header-nav-chain-not-scrolled");
+		@include scss.block-properties("header-nav-chain-not-scrolled");
 	}
 
 	.nav-search {

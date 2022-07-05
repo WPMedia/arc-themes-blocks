@@ -883,7 +883,6 @@
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
 					font-weight: var(--global-font-weight-7),
 					font-size: var(--global-font-size-4),
@@ -916,6 +915,12 @@
 							line-height: var(--global-line-height-4),
 						),
 					),
+				),
+				header-nav-chain-not-scrolled: (
+					height: var(--header-nav-chain-height),
+				),
+				header-nav-chain-scrolled: (
+					height: var(--header-nav-chain-height),
 				),
 				header-nav-chain-top-layout: (
 					width: 100%,
@@ -1697,7 +1702,6 @@
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-3) var(--global-spacing-5),
 					components: (
 						icon: (
@@ -1709,6 +1713,12 @@
 							height: var(--global-spacing-7),
 						),
 					),
+				),
+				header-nav-chain-not-scrolled: (
+					height: var(--header-nav-chain-height),
+				),
+				header-nav-chain-scrolled: (
+					height: var(--header-nav-chain-height),
 				),
 				header-nav-chain-top-nav-components-mobile: (
 					display: none,

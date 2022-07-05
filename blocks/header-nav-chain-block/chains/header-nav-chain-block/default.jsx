@@ -26,9 +26,9 @@ export function PresentationalNav(props) {
 		horizontalLinksHierarchy,
 		isAdmin,
 		isSectionDrawerOpen,
+		isScrolled,
 		logoAlignment,
 		menuButtonClickAction,
-		scrollAdjustedNavHeight,
 		sectionAriaLabel,
 		sections,
 		showDotSeparators,
@@ -36,12 +36,15 @@ export function PresentationalNav(props) {
 		primaryLogoPath,
 		primaryLogoAlt,
 	} = props;
-	const styles = {
-		height: scrollAdjustedNavHeight,
-		transition: "height .3s linear",
-	};
+
 	return (
-		<nav id="main-nav" className={BLOCK_CLASS_NAME} aria-label={sectionAriaLabel} style={styles}>
+		<nav
+			id="main-nav"
+			className={`${BLOCK_CLASS_NAME} ${
+				isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : `${BLOCK_CLASS_NAME}--not-scrolled`
+			}`}
+			aria-label={sectionAriaLabel}
+		>
 			<Stack
 				direction="horizontal"
 				alignment="center"
@@ -134,7 +137,6 @@ export function PresentationalNav(props) {
 								blockClass={BLOCK_CLASS_NAME}
 								sections={sections}
 								isHidden={!isSectionDrawerOpen}
-								navHeight={scrollAdjustedNavHeight}
 							>
 								<MenuWidgets
 									customFields={customFields}
@@ -156,6 +158,7 @@ export function PresentationalNav(props) {
 }
 /* Main Component */
 const Nav = (props) => {
+	const [isScrolled, setIsScrolled] = useState(false);
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
 	const {
@@ -182,8 +185,6 @@ const Nav = (props) => {
 		signInOrder,
 		logoAlignment = "center",
 		horizontalLinksHierarchy,
-		desktopNavivationStartHeight,
-		shrinkDesktopNavivationHeight: shrinkDesktopNavigationHeight,
 		showHorizontalSeperatorDots,
 		ariaLabel,
 		ariaLabelLink,
@@ -220,10 +221,6 @@ const Nav = (props) => {
 	const sections = mainContent && mainContent.children ? mainContent.children : [];
 
 	const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
-	const [scrolled, setScrolled] = useState(false);
-	const [navHeight, setNavHeight] = useState(
-		desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert"
-	);
 
 	const closeNavigation = () => {
 		setSectionDrawerOpen(false);
@@ -257,40 +254,18 @@ const Nav = (props) => {
 		};
 	}, []);
 
+	// on scroll, change the class of the nav to make it the scrolled height
+	// it can never go back
 	// istanbul ignore next
 	useEffect(() => {
-		const handleScrollOrResize = () => {
-			const isDesktop = window.matchMedia(`(min-width: ${mediumBreakpoint}px)`).matches;
-			const pageOffset = window.pageYOffset;
-			if (!isDesktop) {
-				setScrolled(false);
-				setNavHeight("revert");
-			} else if (!shrinkDesktopNavigationHeight) {
-				setScrolled(false);
-				setNavHeight(desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert");
-			} else if (pageOffset > shrinkDesktopNavigationHeight) {
-				setNavHeight(`${shrinkDesktopNavigationHeight}px`);
-				setScrolled(true);
-			} else if (pageOffset < desktopNavivationStartHeight) {
-				setScrolled(false);
-				setNavHeight(desktopNavivationStartHeight ? `${desktopNavivationStartHeight}px` : "revert");
-			}
-		};
 		const handleScroll = () => {
-			handleScrollOrResize();
+			setIsScrolled(true);
 		};
-
-		const handleResize = () => {
-			handleScrollOrResize();
-		};
-
 		window.addEventListener("scroll", handleScroll);
-		window.addEventListener("resize", handleResize);
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
-			window.removeEventListener("resize", handleResize);
 		};
-	}, [shrinkDesktopNavigationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
+	}, []);
 
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
@@ -307,8 +282,7 @@ const Nav = (props) => {
 			isSectionDrawerOpen={isSectionDrawerOpen}
 			logoAlignment={logoAlignment}
 			menuButtonClickAction={menuButtonClickAction}
-			scrollAdjustedNavHeight={navHeight}
-			scrolled={scrolled}
+			isScrolled={isScrolled}
 			sectionAriaLabel={sectionAriaLabel}
 			sections={sections}
 			showDotSeparators={showDotSeparators}
@@ -341,22 +315,6 @@ Nav.propTypes = {
 		horizontalLinksHierarchy: PropTypes.string.tag({
 			label: "Horizontal Links hierarchy",
 			group: "Configure content",
-		}),
-		desktopNavivationStartHeight: PropTypes.number.tag({
-			label: "Starting desktop navigation bar height",
-			description:
-				"Select the height of the navigation bar (in px) when the user first opens a page on desktop. Must be between 56 and 200.",
-			group: "Logo",
-			max: 200,
-			min: 56,
-			defaultValue: 56,
-		}),
-		shrinkDesktopNavivationHeight: PropTypes.number.tag({
-			label: "Shrink navigation bar after scrolling",
-			description:
-				'How far should the user scroll (in px) until the navigation height shrinks back to standard size (56px) on desktop? Must be greater than the value configured for "Starting desktop navigation bar height".',
-			group: "Logo",
-			min: 56,
 		}),
 		showHorizontalSeperatorDots: PropTypes.bool.tag({
 			label: "Display dots between horizontal links",

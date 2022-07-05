@@ -97,20 +97,16 @@
 	}
 
 	.search-box--right-absolute-positioned {
-		@include scss.block-components("header-nav-chain-nav-search-box-position");
-		@include scss.block-properties("header-nav-chain-nav-search-box-position");
-
 		svg {
 			@include scss.block-components("header-nav-chain-nav-search-box-svg");
 			@include scss.block-properties("header-nav-chain-nav-search-box-svg");
 		}
+		@include scss.block-components("header-nav-chain-nav-search-box-position");
+		@include scss.block-properties("header-nav-chain-nav-search-box-position");
 	}
 
 	&__subsection-anchor {
 		.submenu-caret {
-			@include scss.block-components("header-nav-chain-flyout-nav-subsection-caret");
-			@include scss.block-properties("header-nav-chain-flyout-nav-subsection-caret");
-
 			svg {
 				&:hover {
 					@include scss.block-components(
@@ -135,6 +131,8 @@
 				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open");
 				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open");
 			}
+			@include scss.block-components("header-nav-chain-flyout-nav-subsection-caret");
+			@include scss.block-properties("header-nav-chain-flyout-nav-subsection-caret");
 		}
 
 		@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor");
@@ -199,13 +197,13 @@
 				@include scss.block-properties("header-nav-chain-top-nav-menu-button-text");
 			}
 
-			@include scss.block-components("header-nav-chain-top-nav-menu-button");
-			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
-
 			&:hover {
 				@include scss.block-components("header-nav-chain-top-nav-menu-button-hover");
 				@include scss.block-properties("header-nav-chain-top-nav-menu-button-hover");
 			}
+
+			@include scss.block-components("header-nav-chain-top-nav-menu-button");
+			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
 		}
 	}
 

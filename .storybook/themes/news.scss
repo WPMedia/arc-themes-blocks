@@ -1096,7 +1096,6 @@
 					font-weight: bold,
 					list-style: none,
 					position: relative,
-
 					components: (
 						link: (
 							width: 100%,
@@ -1182,6 +1181,7 @@
 							background-color: var(--global-neutral-6),
 						),
 					),
+				),
 				links-bar: (
 					gap: var(--global-spacing-2),
 				),

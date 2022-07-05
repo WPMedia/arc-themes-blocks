@@ -1,3 +1,5 @@
+@use "sass:list";
+
 @use "@wpmedia/arc-themes-components/scss" with (
 	$breakpoints: (
 		default: "min-width: 0",
@@ -929,21 +931,34 @@
 					padding: 0,
 				),
 				medium-manual-promo: (
+					display: initial,
+					gap: var(--global-spacing-4),
+					grid-template-columns: 35% 65%,
 					components: (
 						media-item: (
-							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
 							float: right,
+							grid-column: 1,
+							grid-row: list.slash(1, span 2),
+							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
 							max-width: 100px,
 						),
 						heading: (
 							font-size: var(--global-font-size-7),
 							font-weight: var(--global-font-weight-7),
+							grid-column-start: 2,
+							grid-column-end: 2,
+							grid-row-start: 1,
+							grid-row-end: 1,
 							line-height: var(--global-line-height-4),
 							margin: 0 0 var(--global-spacing-4) 0,
 						),
 						paragraph: (
-							line-height: var(--global-line-height-4),
 							font-size: var(--global-font-size-4),
+							grid-column-start: 2,
+							grid-column-end: 2,
+							grid-row-start: 2,
+							grid-row-end: 2,
+							line-height: var(--global-line-height-4),
 						),
 					),
 				),
@@ -1414,15 +1429,18 @@
 					display: flex,
 				),
 				medium-manual-promo: (
+					display: grid,
+					gap: var(--global-spacing-4) var(--global-spacing-6),
 					components: (
 						media-item: (
-							float: left,
-							margin: 0 var(--global-spacing-6) var(--global-spacing-6) 0,
-							max-width: 35%,
+							float: none,
+							margin: 0,
+							max-width: none,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-7),
+							margin: 0,
 						),
 					),
 				),

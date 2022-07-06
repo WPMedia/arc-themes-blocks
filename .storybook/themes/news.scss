@@ -7,9 +7,9 @@
 		"black": #000000,
 		"white": #ffffff,
 
-		"blue-1": #ebefff,
-		"blue-2": #b0c3f2,
-		"blue-3": #7aa2e5,
+		"blue-1": #f2f5ff,
+		"blue-2": #c5d4fa,
+		"blue-3": #8fb3f0,
 		"blue-4": #4a89d8,
 		"blue-5": #1e78cb,
 		"blue-6": #1458a9,
@@ -18,9 +18,9 @@
 		"blue-9": #021443,
 		"blue-10": #000721,
 
-		"red-1": #ff8a8a,
-		"red-2": #e65555,
-		"red-3": #ce2929,
+		"red-1": #ffe4e4,
+		"red-2": #faa7a7,
+		"red-3": #d84e4e,
 		"red-4": #b50505,
 		"red-5": #9c0000,
 		"red-6": #840000,
@@ -29,9 +29,9 @@
 		"red-9": #3a0000,
 		"red-10": #210000,
 
-		"orange-1": #fa714b,
-		"orange-2": #e24f23,
-		"orange-3": #c93302,
+		"orange-1": #fff4ea,
+		"orange-2": #ffd7b2,
+		"orange-3": #dc6e4a,
 		"orange-4": #b12e00,
 		"orange-5": #982a00,
 		"orange-6": #802500,
@@ -40,9 +40,9 @@
 		"orange-9": #371200,
 		"orange-10": #1f0b00,
 
-		"green-1": #80d971,
-		"green-2": #57c244,
-		"green-3": #34ab1f,
+		"green-1": #ebfce9,
+		"green-2": #a4e299,
+		"green-3": #5dbe4b,
 		"green-4": #189402,
 		"green-5": #137d00,
 		"green-6": #0f6600,
@@ -51,9 +51,9 @@
 		"green-9": #052100,
 		"green-10": #020a00,
 
-		"neutral-1": #e6efff,
-		"neutral-2": #c3cfe3,
-		"neutral-3": #a3b0c6,
+		"neutral-1": #eef4ff,
+		"neutral-2": #d3dceb,
+		"neutral-3": #b3bfd2,
 		"neutral-4": #8593aa,
 		"neutral-5": #69778e,
 		"neutral-6": #4f5c71,
@@ -136,6 +136,7 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
+
 		// 52px
 		"line-height-1": 0.875rem,
 		// 14px
@@ -180,22 +181,21 @@
 		"color-primary": var(--global-black),
 		"text-color": var(--global-neutral-8),
 		"text-color-subtle": var(--global-neutral-5),
-		"text-color-warning": var(--global-orange-9),
-		"text-color-danger": var(--global-red-9),
-		"text-color-success": var(--global-green-9),
 		"background-color": var(--global-white),
-		"background-color-warning": var(--global-orange-1),
-		"background-color-danger": var(--global-red-1),
-		"background-color-success": var(--global-green-1),
 		"icon-fill-color": var(--global-neutral-8),
 		"icon-fill-color-subtle": var(--global-neutral-5),
 		"border-color": var(--global-neutral-4),
 		"form-background-color": var(--global-white),
 		"form-border-color": var(--global-neutral-5),
 		"form-border-color-primary": var(--global-blue-5),
-		"form-border-color-warning": var(--global-orange-2),
-		"form-border-color-danger": var(--global-red-4),
-		"form-border-color-success": var(--global-green-5),
+		"status-color-success": var(--global-green-5),
+		"status-color-success-subtle": var(--global-green-1),
+		"status-color-warning": var(--global-orange-5),
+		"status-color-warning-subtle": var(--global-orange-1),
+		"status-color-danger": var(--global-red-5),
+		"status-color-danger-subtle": var(--global-red-1),
+		"status-color-info": var(--global-blue-5),
+		"status-color-info-subtle": var(--global-blue-1),
 		// Border Radius
 		"border-radius": var(--global-border-radius-1),
 		"border-radius-pill": var(--global-border-radius-2),
@@ -241,7 +241,7 @@
 					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				badge-danger: (
-					background-color: var(--form-border-color-danger),
+					background-color: var(--status-color-danger),
 				),
 				badge-default: (
 					background-color: var(--text-color),
@@ -253,10 +253,10 @@
 					background-color: var(--color-primary),
 				),
 				badge-success: (
-					background-color: var(--form-border-color-success),
+					background-color: var(--status-color-success),
 				),
 				badge-warning: (
-					background-color: var(--form-border-color-warning),
+					background-color: var(--status-color-warning),
 				),
 				body: (
 					color: var(--text-color),
@@ -381,22 +381,22 @@
 					font-weight: var(--global-font-weight-7),
 				),
 				input-error-input: (
-					border-color: var(--form-border-color-danger),
+					border-color: var(--status-color-danger),
 				),
 				input-error-input-focus: (
-					outline-color: var(--form-border-color-danger),
+					outline-color: var(--status-color-danger),
 				),
 				input-success-input: (
-					border-color: var(--form-border-color-success),
+					border-color: var(--status-color-success),
 				),
 				input-success-input-focus: (
-					outline-color: var(--form-border-color-success),
+					outline-color: var(--status-color-success),
 				),
 				input-warning-input: (
-					border-color: var(--form-border-color-warning),
+					border-color: var(--status-color-warning),
 				),
 				input-warning-input-focus: (
-					outline-color: var(--form-border-color-warning),
+					outline-color: var(--status-color-warning),
 				),
 				link: (
 					color: var(--color-primary),
@@ -769,6 +769,72 @@
 						),
 					),
 				),
+				card-list: (
+					box-shadow: var(--global-box-shadow-1),
+					border-radius: 0 var(--border-radius) var(--border-radius) 0,
+					background-color: var(--background-color),
+					padding: var(--global-spacing-4) 0,
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+						overline: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--body-font-size),
+							line-height: var(--global-line-height-4),
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
+						),
+						attribution: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+						date: (
+							font-size: var(--global-font-size-3),
+							line-height: var(--global-line-height-3),
+						),
+					),
+				),
+				card-list-title: (
+					padding: 0 var(--global-spacing-4),
+					font-size: var(--global-font-size-7),
+				),
+				card-list-list: (
+					padding: 0 var(--global-spacing-4),
+				),
+				card-list-main-item-image-link: (
+					components: (
+						image: (
+							max-height: 40vh,
+							object-fit: cover,
+							width: 100%,
+						),
+					),
+				),
+				card-list-main-item-text-container: (
+					gap: var(--global-spacing-2),
+				),
+				card-list-secondary-item: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+							font-weight: var(--global-font-weight-4),
+						),
+					),
+				),
+				card-list-secondary-item-heading-link: (
+					width: 100%,
+				),
+				card-list-secondary-item-image-link: (
+					max-width: 105px,
+				),
 				double-chain: (
 					components: (
 						stack: (
@@ -1117,6 +1183,33 @@
 						),
 					),
 				),
+				large-manual-promo: (
+					gap: var(--global-spacing-4),
+				),
+				large-manual-promo-text: (
+					--grid-template-columns: 1fr,
+					grid-template-rows: auto 1fr,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-4),
+						),
+						overline: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				links-bar: (
+					gap: var(--global-spacing-2),
+				),
 				masthead: (
 					border-bottom: 2px solid var(--global-neutral-8),
 					color: var(--text-color),
@@ -1345,6 +1438,13 @@
 				share-bar-email: (
 					fill: #b61818,
 				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-11),
+						),
+					),
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -1363,6 +1463,13 @@
 				small-manual-promo: (
 					display: grid,
 					gap: var(--global-spacing-5),
+					grid-template-columns: 1fr,
+					components: (
+						heading: (
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
+						),
+					),
 				),
 				small-manual-promo-above: (
 					grid-template-columns: 1fr,
@@ -1481,8 +1588,24 @@
 				video-player-inline-video: (
 					gap: 0,
 				),
-				links-bar: (
-					gap: var(--global-spacing-2),
+				xl-manual-promo: (
+					components: (
+						heading: (
+							font-family: var(--font-family-primary),
+							font-size: var(--global-font-size-10),
+							font-weight: var(--global-font-weight-7),
+							line-height: 1.3,
+						),
+						link: (
+							font-family: inherit,
+							font-size: inherit,
+							font-weight: inherit,
+							line-height: inherit,
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
 				),
 			),
 		),
@@ -1574,6 +1697,13 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
+				card-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				header-extra-large: (
 					font-size: var(--global-font-size-12),
 					line-height: var(--global-line-height-7),
@@ -1589,6 +1719,18 @@
 				header-small: (
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
+				),
+				large-manual-promo: (
+					gap: var(--global-spacing-6),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
+						),
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+					),
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
@@ -1687,6 +1829,13 @@
 				share-bar: (
 					display: flex,
 				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-16),
+						),
+					),
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -1736,6 +1885,23 @@
 						),
 					),
 				),
+				xl-manual-promo: (
+					components: (
+						heading: (
+							align-self: center,
+							font-size: var(--global-font-size-15),
+							justify-content: center,
+							line-height: 1.2,
+						),
+						overline: (
+							display: flex,
+							justify-content: center,
+						),
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
 			),
 		),
 	)
@@ -1744,12 +1910,15 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
+@use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/numbered-list-block";

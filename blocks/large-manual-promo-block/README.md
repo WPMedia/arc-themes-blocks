@@ -1,49 +1,32 @@
 # `@wpmedia/large-manual-promo-block`
 
-_Block containing a large manual promo component. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+This large manual promo block displays a outline, headline, description and image.
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                         | **Required** | **Type** | **Description**                                                                      |
+| -------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------ | --- |
+| **customFields.headline**        | no           | String   | Headline text to be displayed                                                        |
+| **customFields.description**     | no           | String   | description text to be displayed                                                     |
+| **customFields.outline**         | no           | String   | Outlineline text to be displayed                                                     |
+| **customFields.overlineURL**     | no           | String   | URL of overline to display.                                                          |
+| **customFields.imageURL**        | no           | String   | URL of image to display. Image selection from Photo Center is an option.             |
+| **customFields.linkURL**         | no           | String   | Navigation URL for when the headline or image is clicked.                            |
+| **customFields.newTab**          | no           | Boolean  | Navigation URL will or will not open in a new browser tab. Default value is `false`. |
+| **customFields.showHeadline**    | no           | Boolean  | Do or do not display the headline text. Default value is `true`.                     |
+| **customFields.showDescription** | no           | Boolean  | Do or do not display the description text. Default value is `true`.                  |
+| **customFields.showOverline**    | no           | Boolean  | Do or do not display the overline text. Default value is `true`.                     |
+| **customFields.showImage**       | no           | Boolean  | Do or do not display the image. Default value is `true`.                             |     |
+| **customFields.lazyLoad**        | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is false.      |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
+- n/a - all content is manually-entered in custom fields.
 
 ### ANS Fields
 
-- n/a manual `customFields`
+- n/a - all content is manually-entered in custom fields.
 
 ## Internationalization fields
 
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_Configuration (including content) is handled through proptypes in the PB editor._
+n/a

@@ -56,7 +56,9 @@ describe("the small manual promo feature", () => {
 
 	it("should have one image when showImage is true", () => {
 		render(<SmallManualPromo customFields={customFields} />);
-		expect(screen.queryByRole("img", { name: "This is the headline" })).not.toBeNull();
+		expect(
+			screen.queryByRole("img", { name: "This is the headline", hidden: true })
+		).not.toBeNull();
 	});
 
 	it("should have no image when showImage is false", () => {
@@ -78,7 +80,11 @@ describe("the small manual promo feature", () => {
 	});
 
 	it("should render image first when imagePosition is set to above", () => {
-		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "above" }} />);
+		render(
+			<SmallManualPromo
+				customFields={{ ...customFields, imagePosition: "above", linkURL: undefined }}
+			/>
+		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
 		expect(stack.firstChild).toBe(figure);
@@ -92,7 +98,11 @@ describe("the small manual promo feature", () => {
 	});
 
 	it("should render image first when imagePosition is set to left", () => {
-		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "left" }} />);
+		render(
+			<SmallManualPromo
+				customFields={{ ...customFields, imagePosition: "left", linkURL: undefined }}
+			/>
+		);
 		const stack = screen.queryByRole("article");
 		const figure = screen.queryByRole("figure");
 		expect(stack.firstChild).toBe(figure);

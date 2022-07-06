@@ -128,3 +128,17 @@ export const reallyLongText = () => {
 
 	return <MediumManualPromo customFields={customFields} />;
 };
+
+export const shortHeadlineLongDescription = () => {
+	const customFields = {
+		...sampleData,
+		headline: "This is a really long headline.",
+		description:
+			"This is a really long description. This is a really long description. This is a really long descriptionThis is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long descriptionThis is a really long description. This is a really long description. This is a really long description. This is a really long description.",
+		showHeadline: true,
+		showImage: true,
+		showDescription: true,
+	};
+
+	return <MediumManualPromo customFields={customFields} />;
+};

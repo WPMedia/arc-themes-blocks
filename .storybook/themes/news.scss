@@ -929,33 +929,19 @@
 					padding: 0,
 				),
 				medium-manual-promo: (
-					display: initial,
-					grid-template-columns: 35% 65%,
 					components: (
 						media-item: (
 							float: right,
-							grid-column: 1,
-							grid-row-start: 1,
-							grid-row-end: span 2,
 							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
 							max-width: 100px,
 						),
 						heading: (
 							font-size: var(--global-font-size-7),
 							font-weight: var(--global-font-weight-7),
-							grid-column-start: 2,
-							grid-column-end: 2,
-							grid-row-start: 1,
-							grid-row-end: 1,
 							line-height: var(--global-line-height-4),
-							margin: 0 0 var(--global-spacing-4) 0,
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
-							grid-column-start: 2,
-							grid-column-end: 2,
-							grid-row-start: 2,
-							grid-row-end: 2,
 							line-height: var(--global-line-height-4),
 						),
 					),
@@ -1427,18 +1413,14 @@
 					display: flex,
 				),
 				medium-manual-promo: (
-					display: grid,
-					gap: var(--global-spacing-4) var(--global-spacing-6),
 					components: (
 						media-item: (
-							float: none,
-							margin: 0,
-							max-width: none,
+							float: left,
+							max-width: 33%,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-7),
-							margin: 0,
 						),
 					),
 				),

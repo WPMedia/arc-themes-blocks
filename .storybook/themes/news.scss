@@ -938,6 +938,9 @@
 							font-size: var(--global-font-size-7),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-4),
+							// hard-coded based on previous implementation and product requirements for such
+							width: 68%,
+							margin-bottom: var(--global-spacing-4),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
@@ -1416,13 +1419,15 @@
 						media-item: (
 							float: left,
 							margin: 0,
-							// margin: 0 var(--global-spacing-4) var(--global-spacing-4) 0,
 							max-width: 33%,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-7),
+							// hard-coded based on previous implementation and product requirements for such
 							margin-left: 39%,
+							width: 60%,
+							margin-bottom: var(--global-spacing-5),
 						),
 						paragraph: (
 							margin-left: 39%,

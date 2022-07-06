@@ -1,19 +1,97 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { LargePromoPresentation } from "@wpmedia/shared-styles";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import { useEditableContent } from "fusion:content";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	formatURL,
+	isServerSide,
+	Overline,
+	MediaItem,
+	Grid,
+	Link,
+	Heading,
+	HeadingSection,
+	Image,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
 const LargeManualPromo = ({ customFields }) => {
 	const { isAdmin } = useFusionContext();
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
+	const {
+		headline,
+		imageURL,
+		lazyLoad,
+		linkURL,
+		newTab,
+		showHeadline,
+		showImage,
+		description,
+		overline,
+		showOverline,
+		showDescription,
+		overlineURL,
+	} = customFields;
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+	const { registerSuccessEvent } = useComponentContext();
+
+	if (shouldLazyLoad && isServerSide()) {
 		// On Server
 		return null;
 	}
+
+	const PromoImage = () => {
+		const { searchableField } = useEditableContent();
+
+		return showImage ? (
+			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+				<Image alt={headline} src={imageURL} searchableField />
+			</MediaItem>
+		) : null;
+	};
+
+	const PromoHeading = () =>
+		showHeadline ? (
+			<Heading>
+				{linkURL ? (
+					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+						{headline}
+					</Link>
+				) : (
+					headline
+				)}
+			</Heading>
+		) : null;
+
+	const PromoOverline = () => {
+		if (showOverline) {
+			if (overlineURL) {
+				return <Overline href={overlineURL}>{overline}</Overline>;
+			}
+			return <Overline>{overline}</Overline>;
+		}
+		return null;
+	};
+
+	const PromoDescription = () => (showDescription ? <Paragraph>{description}</Paragraph> : null);
+
 	return (
-		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-			<LargePromoPresentation {...customFields} />
+		<LazyLoad enabled={shouldLazyLoad}>
+			<HeadingSection>
+				<Grid role="article" className={BLOCK_CLASS_NAME}>
+					<PromoImage />
+					<Grid className={`${BLOCK_CLASS_NAME}__text`}>
+						<PromoOverline />
+						<Stack>
+							<PromoHeading />
+							<PromoDescription />
+						</Stack>
+					</Grid>
+				</Grid>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -70,7 +148,11 @@ LargeManualPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "4:3",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

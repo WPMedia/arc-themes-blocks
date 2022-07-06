@@ -932,7 +932,6 @@
 					components: (
 						media-item: (
 							float: right,
-							margin: 0 0 var(--global-spacing-4) var(--global-spacing-4),
 							max-width: 100px,
 						),
 						heading: (
@@ -1416,12 +1415,18 @@
 					components: (
 						media-item: (
 							float: left,
-							margin: 0 var(--global-spacing-4) var(--global-spacing-4) 0,
+							margin: 0,
+							// margin: 0 var(--global-spacing-4) var(--global-spacing-4) 0,
 							max-width: 33%,
 						),
 						heading: (
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-7),
+							margin-left: 39%,
+						),
+						paragraph: (
+							margin-left: 39%,
+							display: block,
 						),
 					),
 				),

@@ -1416,6 +1416,7 @@
 					components: (
 						media-item: (
 							float: left,
+							margin: 0 var(--global-spacing-4) var(--global-spacing-4) 0,
 							max-width: 33%,
 						),
 						heading: (

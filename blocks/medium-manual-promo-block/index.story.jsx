@@ -132,7 +132,7 @@ export const reallyLongText = () => {
 export const shortHeadlineLongDescription = () => {
 	const customFields = {
 		...sampleData,
-		headline: "This is a really long headline.",
+		headline: "This is a short headline.",
 		description:
 			"This is a really long description. This is a really long description. This is a really long descriptionThis is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long description. This is a really long descriptionThis is a really long description. This is a really long description. This is a really long description. This is a really long description.",
 		showHeadline: true,

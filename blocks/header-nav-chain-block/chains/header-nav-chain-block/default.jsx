@@ -10,7 +10,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
 import NavLogo from "./_children/nav-logo";
-import HorizontalLinksBar from "./_children/horizontal-links/default";
+import NavLinksBar from "./_children/nav-links/default";
 import NavSection from "./_children/nav-section";
 import MenuWidgets from "./_children/menu-widgets";
 
@@ -66,7 +66,7 @@ export function PresentationalNav(props) {
 					mediumBreakpoint={mediumBreakpoint}
 				/>
 				{displayLinks ? (
-					<HorizontalLinksBar
+					<NavLinksBar
 						hierarchy={horizontalLinksHierarchy}
 						showHorizontalSeperatorDots={showDotSeparators}
 						ariaLabel={ariaLabelLink}

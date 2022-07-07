@@ -5,7 +5,7 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { Stack, Link, Separator } from "@wpmedia/arc-themes-components";
 
-const HorizontalLinksBar = ({
+const NavLinksBar = ({
 	hierarchy,
 	showHorizontalSeperatorDots: showHorizontalSeparatorDots,
 	ariaLabel,
@@ -69,4 +69,4 @@ const HorizontalLinksBar = ({
 	);
 };
 
-export default HorizontalLinksBar;
+export default NavLinksBar;

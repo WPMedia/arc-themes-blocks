@@ -33,7 +33,7 @@ describe("the header navigation feature for the default output type", () => {
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
 			const navBar = wrapper.find(".b-header-nav-chain");
-			const linksBar = navBar.find("HorizontalLinksBar");
+			const linksBar = navBar.find("NavLinksBar");
 			expect(linksBar).toHaveLength(1);
 			expect(linksBar.prop("hierarchy")).toEqual(cFields.horizontalLinksHierarchy);
 		});

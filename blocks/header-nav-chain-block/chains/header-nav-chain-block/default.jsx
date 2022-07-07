@@ -261,7 +261,7 @@ const Nav = (props) => {
 		const handleScroll = () => {
 			setIsScrolled(true);
 		};
-		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
@@ -273,7 +273,6 @@ const Nav = (props) => {
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
-			mediumBreakpoint={mediumBreakpoint}
 			closeDrawer={closeDrawer}
 			customFields={customFields}
 			displayLinks={displayLinks}

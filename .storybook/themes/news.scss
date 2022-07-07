@@ -920,7 +920,9 @@
 					height: var(--header-nav-chain-height),
 				),
 				header-nav-chain-scrolled: (
-					height: var(--header-nav-chain-height),
+					// if you change the height here it will set the height to be the scrolled height
+					// we want to use the tokens not the props to set height in v2
+					height: 40px,
 				),
 				header-nav-chain-top-layout: (
 					width: 100%,
@@ -1715,7 +1717,8 @@
 					height: var(--header-nav-chain-height),
 				),
 				header-nav-chain-scrolled: (
-					height: var(--header-nav-chain-height),
+					// this is the new scrolled height
+					height: 64px,
 				),
 				header-nav-chain-top-nav-components-mobile: (
 					display: none,

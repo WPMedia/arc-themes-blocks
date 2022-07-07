@@ -42,7 +42,9 @@ const MediumManualPromo = ({ customFields }) => {
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
-				<article className={BLOCK_CLASS_NAME}>
+				<article
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
+				>
 					{showImage ? (
 						<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 							<Conditional

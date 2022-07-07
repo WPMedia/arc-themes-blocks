@@ -52,7 +52,7 @@ describe("the medium promo feature", () => {
 	it("should render all fields", () => {
 		const wrapper = mount(<MediumManualPromo customFields={customFieldData} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
+			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
 		);
 	});
 
@@ -74,7 +74,7 @@ describe("the medium promo feature", () => {
 		};
 		const wrapper = mount(<MediumManualPromo customFields={fallbackImage} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"http://fallback.img\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
+			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"http://fallback.img\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
 		);
 	});
 
@@ -85,7 +85,7 @@ describe("the medium promo feature", () => {
 		};
 		const wrapper = mount(<MediumManualPromo customFields={noDescription} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2></article>"`
+			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2></article>"`
 		);
 	});
 
@@ -96,7 +96,7 @@ describe("the medium promo feature", () => {
 		};
 		const wrapper = mount(<MediumManualPromo customFields={noHeadline} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><p class=\\"c-paragraph\\">Description</p></article>"`
+			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><p class=\\"c-paragraph\\">Description</p></article>"`
 		);
 	});
 
@@ -107,7 +107,7 @@ describe("the medium promo feature", () => {
 		};
 		const wrapper = mount(<MediumManualPromo customFields={noHeadline} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><figure class=\\"c-media-item\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></figure><h2 class=\\"c-heading\\"></h2><p class=\\"c-paragraph\\">Description</p></article>"`
+			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></figure><h2 class=\\"c-heading\\"></h2><p class=\\"c-paragraph\\">Description</p></article>"`
 		);
 	});
 });

@@ -48,7 +48,13 @@ const LargeManualPromo = ({ customFields }) => {
 
 		return showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				<Image alt={headline} src={imageURL} searchableField />
+				{linkURL ? (
+					<Link href={formatURL(linkURL)} openInNewTab={newTab}>
+						<Image alt={headline} src={imageURL} searchableField />
+					</Link>
+				) : (
+					<Image alt={headline} src={imageURL} searchableField />
+				)}
 			</MediaItem>
 		) : null;
 	};

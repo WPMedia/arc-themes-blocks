@@ -29,8 +29,6 @@ const CUSTOM_FIELDS_BASE = {
 	leftComponentCustomIndexDesktop2: null,
 	showHorizontalSeperatorDots: false,
 	menuComponentMobile1: "none",
-	desktopNavivationStartHeight: 100,
-	shrinkDesktopNavivationHeight: 25,
 	ariaLabel: "",
 	menuComponentDesktop1: "none",
 	menuComponentMobile2: "none",
@@ -38,8 +36,6 @@ const CUSTOM_FIELDS_BASE = {
 
 export const wideLogo = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
 		displayLinks
@@ -48,9 +44,6 @@ export const wideLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={[]}
 		showDotSeparators={false}
@@ -62,8 +55,6 @@ export const wideLogo = () => (
 
 export const tallLogo = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
 		displayLinks
@@ -72,9 +63,6 @@ export const tallLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={[]}
 		showDotSeparators={false}
@@ -86,8 +74,6 @@ export const tallLogo = () => (
 
 export const squareLogo = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
 		displayLinks
@@ -96,9 +82,6 @@ export const squareLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={[]}
 		showDotSeparators={false}
@@ -110,8 +93,6 @@ export const squareLogo = () => (
 
 export const centerLogo = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
 		displayLinks
@@ -120,9 +101,26 @@ export const centerLogo = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="center"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
+		sectionAriaLabel="Menu des sections"
+		sections={[]}
+		showDotSeparators={false}
+		signInOrder={1}
+		primaryLogoPath="https://place-hold.it/100x100"
+		primaryLogoAlt="Shows dimensions of 100 by 100 for tall testing purposes"
+	/>
+);
+
+export const scrolledNav = () => (
+	<PresentationalNav
+		isScrolled
+		closeDrawer={() => {}}
+		customFields={CUSTOM_FIELDS_BASE}
+		displayLinks
+		horizontalLinksHierarchy="horizontal-links"
+		isAdmin={false}
+		isSectionDrawerOpen={false}
+		logoAlignment="center"
+		menuButtonClickAction={() => {}}
 		sectionAriaLabel="Menu des sections"
 		sections={[]}
 		showDotSeparators={false}
@@ -140,8 +138,6 @@ CUSTOM_FIELDS_BASE_2.rightComponentDesktop2 = "menu";
 
 export const leftLogoWithLinks = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE_2}
 		displayLinks
@@ -150,9 +146,6 @@ export const leftLogoWithLinks = () => (
 		isSectionDrawerOpen={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={[]}
 		showDotSeparators
@@ -164,8 +157,6 @@ export const leftLogoWithLinks = () => (
 
 export const leftLogoWithLinksAndSearch = () => (
 	<PresentationalNav
-		backgroundColor="#000"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={{
 			...CUSTOM_FIELDS_BASE,
@@ -178,9 +169,6 @@ export const leftLogoWithLinksAndSearch = () => (
 		isAdmin={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={headerNavMock}
 		showDotSeparators={false}
@@ -192,8 +180,6 @@ export const leftLogoWithLinksAndSearch = () => (
 
 export const sectionMenuOpen = () => (
 	<PresentationalNav
-		backgroundColor="#fddede"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
 		displayLinks
@@ -202,9 +188,6 @@ export const sectionMenuOpen = () => (
 		isSectionDrawerOpen
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={headerNavMock}
 		showDotSeparators={false}
@@ -216,8 +199,6 @@ export const sectionMenuOpen = () => (
 
 export const sectionMenuOpenWithSearch = () => (
 	<PresentationalNav
-		backgroundColor="#000"
-		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={{
 			...CUSTOM_FIELDS_BASE,
@@ -235,9 +216,6 @@ export const sectionMenuOpenWithSearch = () => (
 		isSectionDrawerOpen
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}
-		navHeight={100}
-		scrollAdjustedNavHeight={100}
-		scrolled={false}
 		sectionAriaLabel="Menu des sections"
 		sections={headerNavMock}
 		showDotSeparators={false}

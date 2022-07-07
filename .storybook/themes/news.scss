@@ -221,6 +221,7 @@
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
 		"header-nav-chain-height": 64px,
+		"header-nav-chain-height-scrolled": 64px,
 		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
 	),
 	$tokens: (
@@ -883,12 +884,12 @@
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
 					font-weight: var(--global-font-weight-7),
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 					transform: translateZ(0),
+					height: var(--header-nav-chain-height),
 					// Hardware acceleration performance on height adjustments
 					justify-content: center,
 					display: flex,
@@ -916,6 +917,9 @@
 							line-height: var(--global-line-height-4),
 						),
 					),
+				),
+				header-nav-chain-scrolled: (
+					height: var(--header-nav-chain-height-scrolled),
 				),
 				header-nav-chain-top-layout: (
 					width: 100%,
@@ -950,9 +954,6 @@
 					display: none,
 					gap: var(--global-spacing-4),
 				),
-				header-nav-chain-top-nav-widget: (),
-				header-nav-chain-top-nav-widget-last-child: (),
-				header-nav-chain-top-nav-menu-button: (),
 				header-nav-chain-top-nav-menu-button-hover: (
 					border: 1px solid var(--global-white),
 					color: var(--global-white),
@@ -1096,7 +1097,6 @@
 					font-weight: bold,
 					list-style: none,
 					position: relative,
-
 					components: (
 						link: (
 							width: 100%,
@@ -1180,30 +1180,6 @@
 						link-active: (
 							color: var(--global-white),
 							background-color: var(--global-neutral-6),
-						),
-					),
-				),
-				large-manual-promo: (
-					gap: var(--global-spacing-4),
-				),
-				large-manual-promo-text: (
-					--grid-template-columns: 1fr,
-					grid-template-rows: auto 1fr,
-					components: (
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-4),
-						),
-						overline: (
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-5),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
 						),
 					),
 				),
@@ -1618,6 +1594,7 @@
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-2),
 				"header-nav-chain-height": 100px,
+				"header-nav-chain-height-scrolled": 64px,
 			),
 			components: (
 				carousel: (
@@ -1720,22 +1697,10 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
-				large-manual-promo: (
-					gap: var(--global-spacing-6),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-12),
-							line-height: var(--global-line-height-7),
-						),
-						overline: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
 				header-nav-chain: (
 					background-color: var(--global-black),
-					height: var(--header-nav-chain-height),
 					padding: var(--global-spacing-3) var(--global-spacing-5),
+					height: var(--header-nav-chain-height),
 					components: (
 						icon: (
 							fill: var(--global-white),
@@ -1746,6 +1711,9 @@
 							height: var(--global-spacing-7),
 						),
 					),
+				),
+				header-nav-chain-scrolled: (
+					height: var(--header-nav-chain-height-scrolled),
 				),
 				header-nav-chain-top-nav-components-mobile: (
 					display: none,
@@ -1918,7 +1886,6 @@
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
-@use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/numbered-list-block";

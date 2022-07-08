@@ -6,11 +6,6 @@
 		@include scss.block-properties("header-nav-chain-scrolled");
 	}
 
-	&--not-scrolled {
-		@include scss.block-components("header-nav-chain-not-scrolled");
-		@include scss.block-properties("header-nav-chain-not-scrolled");
-	}
-
 	.nav-search {
 		input {
 			@include scss.block-components("header-nav-chain-nav-search-input");

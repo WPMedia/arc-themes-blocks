@@ -15,6 +15,7 @@ import {
 	Image,
 	Paragraph,
 	Stack,
+	Conditional,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-large-manual-promo";
@@ -48,13 +49,9 @@ const LargeManualPromo = ({ customFields }) => {
 
 		return showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab}>
-						<Image alt={headline} src={imageURL} searchableField />
-					</Link>
-				) : (
+				<Conditional href={formatURL(linkURL)} openInNewTab={newTab} component={Link}>
 					<Image alt={headline} src={imageURL} searchableField />
-				)}
+				</Conditional>
 			</MediaItem>
 		) : null;
 	};
@@ -62,13 +59,15 @@ const LargeManualPromo = ({ customFields }) => {
 	const PromoHeading = () =>
 		showHeadline ? (
 			<Heading>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
-						{headline}
-					</Link>
-				) : (
-					headline
-				)}
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					{headline}
+				</Conditional>
 			</Heading>
 		) : null;
 

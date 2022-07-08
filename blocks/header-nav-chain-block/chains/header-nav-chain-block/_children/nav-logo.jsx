@@ -2,7 +2,7 @@ import { Link } from "@wpmedia/arc-themes-components";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-const NavLogo = ({ mediumBreakpoint, imageAltText, imageSource, blockClassName }) => {
+const NavLogo = ({ mediumBreakpoint = 768, imageAltText, imageSource, blockClassName }) => {
 	const [isLogoVisible, setLogoVisibility] = useState(false);
 
 	// istanbul ignore next

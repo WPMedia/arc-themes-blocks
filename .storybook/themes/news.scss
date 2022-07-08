@@ -962,7 +962,6 @@
 					display: none,
 				),
 				header-nav-chain-logo: (
-					flex: initial,
 					max-height: var(--global-spacing-7),
 				),
 				header-nav-chain-logo-hidden: (
@@ -1751,9 +1750,6 @@
 				),
 				header-nav-chain-links-list: (
 					display: flex,
-				),
-				header-nav-chain-logo: (
-					flex: 1 0 auto,
 				),
 				header-nav-chain-flyout-overlay: (
 					margin-top: var(--header-nav-chain-height),

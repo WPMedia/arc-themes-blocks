@@ -19,7 +19,6 @@ const BLOCK_CLASS_NAME = "b-header-nav-chain";
 export function PresentationalNav(props) {
 	const {
 		ariaLabelLink,
-		mediumBreakpoint,
 		children,
 		closeDrawer,
 		customFields,
@@ -63,7 +62,6 @@ export function PresentationalNav(props) {
 					alignment={logoAlignment}
 					imageSource={primaryLogoPath}
 					imageAltText={primaryLogoAlt}
-					mediumBreakpoint={mediumBreakpoint}
 				/>
 				{displayLinks ? (
 					<NavLinksBar
@@ -88,8 +86,6 @@ export function PresentationalNav(props) {
 				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
 				direction="vertical"
 				justification="start"
-				// hard-coded to medium breakpoint
-				breakpoint={mediumBreakpoint}
 				onClick={closeDrawer}
 			>
 				<FocusTrap
@@ -247,8 +243,7 @@ const Nav = (props) => {
 	}, []);
 
 	const handleScroll = () => {
-		const pageOffset = window.pageYOffset;
-		setIsScrolled(pageOffset > 0);
+		setIsScrolled(window.pageYOffset > 0);
 	};
 	const [onScrollDebounced] = useDebouncedCallback(handleScroll, 100);
 

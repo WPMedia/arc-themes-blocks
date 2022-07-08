@@ -879,6 +879,30 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				large-manual-promo: (
+					gap: var(--global-spacing-4),
+				),
+				large-manual-promo-text: (
+					--grid-template-columns: 1fr,
+					grid-template-rows: auto 1fr,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-4),
+						),
+						overline: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
 				links-bar: (
 					gap: var(--global-spacing-2),
 				),
@@ -1417,6 +1441,18 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
+				large-manual-promo: (
+					gap: var(--global-spacing-6),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
+						),
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				masthead: (
 					display: flex,
 				),
@@ -1585,6 +1621,7 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/medium-manual-promo-block";

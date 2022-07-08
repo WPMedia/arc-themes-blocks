@@ -104,7 +104,7 @@ describe("the large promo feature", () => {
 	it("should render Link component inside the Header component when linkURL is provided", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Heading)).toHaveLength(1);
-		expect(wrapper.find(Link)).toHaveLength(2);
+		expect(wrapper.find(Link)).toHaveLength(1);
 	});
 
 	it("should not render Link inside the Header component when linkURL is not provided", () => {

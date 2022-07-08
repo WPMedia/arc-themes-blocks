@@ -2,17 +2,19 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useComponentContext, useFusionContext } from "fusion:context";
 import { useEditableContent } from "fusion:content";
+import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
-	formatURL,
+	Conditional,
+	Image,
 	isServerSide,
-	Overline,
-	MediaItem,
+	formatURL,
 	Grid,
-	Link,
 	Heading,
 	HeadingSection,
-	Image,
+	Link,
+	MediaItem,
+	Overline,
 	Paragraph,
 	Stack,
 } from "@wpmedia/arc-themes-components";
@@ -22,20 +24,22 @@ const BLOCK_CLASS_NAME = "b-large-manual-promo";
 const LargeManualPromo = ({ customFields }) => {
 	const { isAdmin } = useFusionContext();
 	const {
+		description,
 		headline,
 		imageURL,
 		lazyLoad,
 		linkURL,
 		newTab,
+		overline,
+		overlineURL,
+		showDescription,
 		showHeadline,
 		showImage,
-		description,
-		overline,
 		showOverline,
-		showDescription,
-		overlineURL,
 	} = customFields;
 	const shouldLazyLoad = lazyLoad && !isAdmin;
+	const { arcSite } = useFusionContext();
+	const { fallbackImage } = getProperties(arcSite);
 	const { registerSuccessEvent } = useComponentContext();
 
 	if (shouldLazyLoad && isServerSide()) {
@@ -48,13 +52,15 @@ const LargeManualPromo = ({ customFields }) => {
 
 		return showImage ? (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab}>
-						<Image alt={headline} src={imageURL} searchableField />
-					</Link>
-				) : (
-					<Image alt={headline} src={imageURL} searchableField />
-				)}
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+				</Conditional>
 			</MediaItem>
 		) : null;
 	};
@@ -63,12 +69,16 @@ const LargeManualPromo = ({ customFields }) => {
 		showHeadline ? (
 			<Heading>
 				{linkURL ? (
-					<Link href={formatURL(linkURL)} openInNewTab={newTab} onClick={registerSuccessEvent}>
+					<Conditional
+						component={Link}
+						condition={linkURL}
+						href={formatURL(linkURL)}
+						openInNewTab={newTab}
+						onClick={registerSuccessEvent}
+					>
 						{headline}
-					</Link>
-				) : (
-					headline
-				)}
+					</Conditional>
+				) : null}
 			</Heading>
 		) : null;
 

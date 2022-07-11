@@ -30,7 +30,7 @@ describe("the large promo feature", () => {
 
 	it("should have 1 container fluid class", () => {
 		const wrapper = mount(<LargePromo customFields={{}} />);
-		expect(wrapper.find(".b-large-promo")).toHaveLength(1);
+		expect(wrapper.find(".b-large-promo")).toHaveLength(2);
 		wrapper.unmount();
 	});
 });

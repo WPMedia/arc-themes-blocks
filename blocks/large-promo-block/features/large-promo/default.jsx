@@ -5,7 +5,7 @@ import getProperties from "fusion:properties";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { LazyLoad, localizeDate, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, localizeDateTime, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -20,7 +20,7 @@ import {
 	Overline,
 	Heading,
 	Paragraph,
-	Date,
+	Date as DateDisplay,
 	formatAuthors,
 	Attribution,
 	Separator,
@@ -137,7 +137,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
-		dateLocalization: { language, timeZone, dateFormat } = {
+		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
 			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
@@ -175,7 +175,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	}
 	// End Overline data
 
-	const displayDate = localizeDate(content?.display_date, dateFormat, language, timeZone);
+	const displayDate = localizeDateTime(
+		new Date(content?.display_date),
+		dateTimeFormat,
+		language,
+		timeZone
+	);
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")
@@ -236,7 +241,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 									) : null}
 									{showByline && showDate ? <Separator /> : null}
 									{showDate ? (
-										<Date dateTime={content.display_date} dateString={displayDate} />
+										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
 									) : null}
 								</Stack>
 							) : null}

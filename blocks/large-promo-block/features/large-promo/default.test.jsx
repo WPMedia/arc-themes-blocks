@@ -127,10 +127,11 @@ describe("Large Promo", () => {
 				}}
 			/>
 		);
+
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019")).not.toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -153,7 +154,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019")).not.toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -176,7 +177,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019")).toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -199,7 +200,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019")).not.toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).not.toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -222,7 +223,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
-		expect(screen.queryByText("December 02, 2019")).not.toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -245,7 +246,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
-		expect(screen.queryByText("December 02, 2019")).not.toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);
@@ -263,7 +264,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
-		expect(screen.queryByText("December 02, 2019")).toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
 		expect(container.querySelector(".b-large-promo__meta")).toBeNull();
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
@@ -293,7 +294,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText("overline.sponsored-content")).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
-		expect(screen.queryByText("December 02, 2019")).toBeNull();
+		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).not.toContain(
 			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, byline-block.and-text John M Doe"
 		);

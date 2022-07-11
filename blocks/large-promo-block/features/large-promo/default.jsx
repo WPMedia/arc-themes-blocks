@@ -1,13 +1,47 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import getTranslatedPhrases from "fusion:intl";
+import getProperties from "fusion:properties";
 import { useContent, useEditableContent } from "fusion:content";
-import { useFusionContext } from "fusion:context";
+import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { LazyLoad, isServerSide, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import LargePromoPresentation from "./_children/large-promo-presentation";
+import { LazyLoad, localizeDate, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
+import {
+	Conditional,
+	Grid,
+	HeadingSection,
+	Image,
+	Link,
+	MediaItem,
+	Stack,
+	formatURL,
+	getImageFromANS,
+	isServerSide,
+	Overline,
+	Heading,
+	Paragraph,
+	Date,
+	formatAuthors,
+	Attribution,
+	Separator,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-large-promo";
 
 const LargePromoItem = ({ customFields, arcSite }) => {
+	const {
+		imageOverrideURL,
+		// playVideoInPlace,
+		showByline,
+		showDate,
+		showDescription,
+		showHeadline,
+		showImage,
+		showOverline,
+		// shrinkToFit,
+		// viewportPercentage,
+	} = customFields;
+
 	const content =
 		useContent({
 			source: customFields?.itemContentConfig?.contentService ?? null,
@@ -98,23 +132,126 @@ const LargePromoItem = ({ customFields, arcSite }) => {
       }
     }`,
 		}) || null;
-	const { id, isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
+
+	const { id } = useFusionContext();
+	const { editableContent, searchableField } = useEditableContent();
+	const { registerSuccessEvent } = useComponentContext();
+	const {
+		dateLocalization: { language, timeZone, dateFormat } = {
+			language: "en",
+			timeZone: "GMT",
+			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+		},
+	} = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+	const bylineNodes = formatAuthors(content?.credits?.by, phrases.t("byline-block.and-text"));
+
+	// show the override url over the content image if it's present
+	// get the image from content if no override
+	const targetImage = imageOverrideURL || getImageFromANS(content);
+
+	// Start Overline data
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (content?.label && content?.label?.basic) || {};
+	const shouldUseLabel = !!labelDisplay;
+
+	const { _id: sectionUrl, name: sectionText } =
+		(content?.websites &&
+			content?.websites[arcSite] &&
+			content?.websites[arcSite].website_section) ||
+		{};
+
+	// Default to websites object data
+	let [text, url] = [sectionText, sectionUrl];
+
+	if (content?.owner?.sponsored) {
+		text = content?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		url = null;
+	} else if (shouldUseLabel) {
+		[text, url] = [labelText, labelUrl];
+	}
+	// End Overline data
+
+	const displayDate = localizeDate(content?.display_date, dateFormat, language, timeZone);
+
+	const editableDescription = content?.description
+		? editableContent(content, "description.basic")
+		: {};
 
 	return (
-		<LargePromoPresentation
-			content={content}
-			id={id}
-			isAdmin={isAdmin}
-			searchableField={searchableField}
-			{...customFields}
-		/>
+		<HeadingSection>
+			<Grid as="article" className={BLOCK_CLASS_NAME}>
+				{showImage ? (
+					<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+						<Conditional
+							component={Link}
+							condition={content?.websites?.[arcSite]?.website_url}
+							href={formatURL(content?.websites?.[arcSite]?.website_url)}
+							onClick={registerSuccessEvent}
+							assisstiveHidden
+						>
+							<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+						</Conditional>
+					</MediaItem>
+				) : null}
+				{showOverline || showHeadline || showDescription || showByline || showDate ? (
+					<Grid className={`${BLOCK_CLASS_NAME}__text`}>
+						{showOverline && (url || text) ? (
+							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
+						) : null}
+						<Stack>
+							{showHeadline ? (
+								<Heading>
+									<Conditional
+										component={Link}
+										condition={content?.websites?.[arcSite]?.website_url}
+										href={formatURL(content?.websites?.[arcSite]?.website_url)}
+										onClick={registerSuccessEvent}
+									>
+										{content?.headlines?.basic}
+									</Conditional>
+								</Heading>
+							) : null}
+							{showDescription ? (
+								<Paragraph suppressContentEditableWarning {...editableDescription}>
+									{content?.description?.basic}
+								</Paragraph>
+							) : null}
+							{showByline || showDate ? (
+								<Stack
+									className={`${BLOCK_CLASS_NAME}__meta`}
+									direction="horizontal"
+									alignment="center"
+								>
+									{showByline && bylineNodes?.length > 0 ? (
+										<Attribution>
+											<span className={`${BLOCK_CLASS_NAME}__by`}>
+												{phrases.t("byline-block.by-text")}
+											</span>{" "}
+											<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
+										</Attribution>
+									) : null}
+									{showByline && showDate ? <Separator /> : null}
+									{showDate ? (
+										<Date dateTime={content.display_date} dateString={displayDate} />
+									) : null}
+								</Stack>
+							) : null}
+						</Stack>
+					</Grid>
+				) : null}
+			</Grid>
+		</HeadingSection>
 	);
 };
 
 const LargePromo = ({ customFields }) => {
 	const { isAdmin, arcSite } = useFusionContext();
 	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
+
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
@@ -166,7 +303,11 @@ LargePromo.propTypes = {
 			group: "Image",
 			searchable: "image",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "4:3",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		playVideoInPlace: PropTypes.bool.tag({
 			label: "Play video in place",
 			group: "Art",

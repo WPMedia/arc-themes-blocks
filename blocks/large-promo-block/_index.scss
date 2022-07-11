@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-large-promo {
+	@include scss.block-components("large-promo");
+	@include scss.block-properties("large-promo");
+}

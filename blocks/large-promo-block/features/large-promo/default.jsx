@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useContent } from "fusion:content";
+import { useContent, useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 
 import { LazyLoad, isServerSide, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
 import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { LargePromoPresentation } from "@wpmedia/shared-styles";
+import LargePromoPresentation from "./_children/large-promo-presentation";
 
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const content =
@@ -98,8 +98,18 @@ const LargePromoItem = ({ customFields, arcSite }) => {
       }
     }`,
 		}) || null;
+	const { id, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
 
-	return <LargePromoPresentation content={content} {...customFields} />;
+	return (
+		<LargePromoPresentation
+			content={content}
+			id={id}
+			isAdmin={isAdmin}
+			searchableField={searchableField}
+			{...customFields}
+		/>
+	);
 };
 
 const LargePromo = ({ customFields }) => {

@@ -86,16 +86,18 @@ const SmallPromo = ({ customFields }) => {
 	}`,
 		}) || null;
 
+	if (!customFields?.itemContentConfig) return null;
+
+	if (shouldLazyLoad && isServerSide()) {
+		return null;
+	}
+
 	const linkURL = content?.websites?.[arcSite]?.website_url;
 	const imageURL =
 		content.promo_items?.basic?.type === "image" && content.promo_items?.basic?.url
 			? content.promo_items.basic.url
 			: null;
 	const headline = content?.description?.basic;
-
-	if (shouldLazyLoad && isServerSide()) {
-		return null;
-	}
 
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);

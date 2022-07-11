@@ -15,8 +15,8 @@ This large manual promo block displays a outline, headline, description and imag
 | **customFields.newTab**          | no           | Boolean  | Navigation URL will or will not open in a new browser tab. Default value is `false`. |
 | **customFields.showHeadline**    | no           | Boolean  | Do or do not display the headline text. Default value is `true`.                     |
 | **customFields.showDescription** | no           | Boolean  | Do or do not display the description text. Default value is `true`.                  |
-| **customFields.showOverline**    | no           | Boolean  | Do or do not display the overline text. Default value is `true`.                     |
-| **customFields.showImage**       | no           | Boolean  | Do or do not display the image. Default value is `true`.                             |     |
+| **customFields.showOverline**    | no           | Boolean  | Do or do not display the overline text. Default value is `true`                      |
+| **customFields.showImage**       | no           | Boolean  | Do or do not display the image. Default value is `true`                              |     |
 | **customFields.lazyLoad**        | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is false.      |
 
 ## ANS Schema

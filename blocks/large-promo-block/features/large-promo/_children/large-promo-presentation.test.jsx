@@ -28,7 +28,7 @@ describe("LargePromoPresentation", () => {
 				content={{
 					promo_items: {
 						basic: {
-							url: "content-image.jpg",
+							url: "https://arcxp.com/content-image.jpg",
 							type: "image",
 						},
 					},
@@ -37,5 +37,9 @@ describe("LargePromoPresentation", () => {
 		);
 
 		expect(container.getElementsByClassName("c-image").length).toBe(1);
+		// may need to be less specific about implementation here
+		expect(container.getElementsByClassName("c-image").item(0).src).toBe(
+			"https://arcxp.com/content-image.jpg"
+		);
 	});
 });

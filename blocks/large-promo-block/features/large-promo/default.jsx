@@ -133,7 +133,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
     }`,
 		}) || null;
 
-	const { id } = useFusionContext();
+	// const { id } = useFusionContext();
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {

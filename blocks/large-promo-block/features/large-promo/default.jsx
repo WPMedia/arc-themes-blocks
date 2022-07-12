@@ -226,11 +226,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								</Paragraph>
 							) : null}
 							{showByline || showDate ? (
-								<Stack
-									className={`${BLOCK_CLASS_NAME}__meta`}
-									direction="horizontal"
-									alignment="center"
-								>
+								<div className={`${BLOCK_CLASS_NAME}__meta`}>
 									{showByline && bylineNodes?.length > 0 ? (
 										<Attribution>
 											<span className={`${BLOCK_CLASS_NAME}__by`}>
@@ -243,7 +239,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 									{showDate ? (
 										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
 									) : null}
-								</Stack>
+								</div>
 							) : null}
 						</Stack>
 					</Grid>

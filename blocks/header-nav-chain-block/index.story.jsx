@@ -120,8 +120,6 @@ export const centerLogo = () => (
 		mediumBreakpoint={768}
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
-		displayLinks
-		horizontalLinksHierarchy="horizontal-links"
 		isAdmin={false}
 		isSectionDrawerOpen={false}
 		logoAlignment="center"

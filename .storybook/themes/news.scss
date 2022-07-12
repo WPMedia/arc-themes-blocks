@@ -905,6 +905,17 @@
 						),
 					),
 				),
+				large-promo-meta: (
+					display: inline,
+					components: (
+						attribution: (
+							display: inline,
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
 				),

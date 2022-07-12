@@ -160,6 +160,11 @@
 	}
 
 	&__top-layout {
+		&--center-logo {
+			@include scss.block-components("header-nav-chain-top-layout-center-logo");
+			@include scss.block-properties("header-nav-chain-top-layout-center-logo");
+		}
+
 		@include scss.block-components("header-nav-chain-top-layout");
 		@include scss.block-properties("header-nav-chain-top-layout");
 	}

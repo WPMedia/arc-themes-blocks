@@ -922,15 +922,13 @@
 					height: var(--header-nav-chain-height-scrolled),
 				),
 				header-nav-chain-top-layout: (
+					align-items: center,
+					display: flex,
 					width: 100%,
 					gap: var(--global-spacing-5),
-					components: (
-						stack: (
-							justify-content: space-between,
-							align-items: center,
-							text-align: center,
-						),
-					),
+				),
+				header-nav-chain-top-layout-center-logo: (
+					justify-content: space-between,
 				),
 				header-nav-chain-top-layout-last-child: (
 					margin-right: 0,
@@ -943,7 +941,8 @@
 				header-nav-chain-top-nav-right: (
 					display: flex,
 					justify-content: flex-end,
-					flex: 1 0 auto,
+					flex-shrink: 0,
+					margin-right: 0,
 				),
 				header-nav-chain-top-nav-components-mobile: (
 					align-items: center,
@@ -962,6 +961,7 @@
 					display: none,
 				),
 				header-nav-chain-logo: (
+					flex-shrink: 0,
 					max-height: var(--global-spacing-7),
 				),
 				header-nav-chain-logo-hidden: (

@@ -43,10 +43,10 @@ export function PresentationalNav(props) {
 			className={`${BLOCK_CLASS_NAME} ${isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : ``}`}
 			aria-label={sectionAriaLabel}
 		>
-			<Stack
-				direction="horizontal"
-				alignment="center"
-				className={`${BLOCK_CLASS_NAME}__top-layout`}
+			<div
+				className={`${BLOCK_CLASS_NAME}__top-layout ${
+					logoAlignment === "center" ? `${BLOCK_CLASS_NAME}__top-layout--center-logo` : ``
+				}`}
 			>
 				<NavSection
 					blockClassName={BLOCK_CLASS_NAME}
@@ -59,7 +59,6 @@ export function PresentationalNav(props) {
 				</NavSection>
 				<NavLogo
 					blockClassName={BLOCK_CLASS_NAME}
-					alignment={logoAlignment}
 					imageSource={primaryLogoPath}
 					imageAltText={primaryLogoAlt}
 				/>
@@ -80,7 +79,7 @@ export function PresentationalNav(props) {
 				>
 					{children}
 				</NavSection>
-			</Stack>
+			</div>
 			<Stack
 				id="flyout-overlay"
 				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}

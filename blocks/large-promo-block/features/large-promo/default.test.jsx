@@ -269,6 +269,18 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
+	it('should not render Image if "showImage" is false', () => {
+		render(
+			<LargePromo
+				customFields={{
+					showImage: false,
+				}}
+			/>
+		);
+
+		expect(screen.queryByRole("img")).toBeNull();
+	});
+
 	it("should not render sponsored content for overline", () => {
 		useContent.mockReturnValueOnce({
 			owner: {

@@ -136,7 +136,7 @@ export default ({ children = [], sections = [], isHidden = false, blockClass }) 
 	return (
 		<>
 			{children}
-			<Stack className={`${blockClass}__flyout-nav`} as="nav">
+			<Stack className={`${blockClass}__flyout-nav`} as="ul">
 				{active.map((item) => (
 					<SectionItem key={item._id} item={item} isHidden={isHidden} blockClass={blockClass} />
 				))}

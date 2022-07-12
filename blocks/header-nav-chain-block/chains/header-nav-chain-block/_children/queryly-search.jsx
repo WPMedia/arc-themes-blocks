@@ -21,12 +21,6 @@ const QuerylySearch = () => {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	// if in section-menu, then use white always SECONDARY_REVERSE for the button
-	// const placementSpecificButtonStyle =
-	// 	placement === "section-menu"
-	// 		? BUTTON_STYLES.SECONDARY_REVERSE
-	// 		: getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
-
 	return (
 		<Button
 			aria-label={phrases.t("header-nav-chain-block.search-text")}

@@ -12,6 +12,7 @@ import {
 	Link,
 	MediaItem,
 	Grid,
+	getImageFromANS,
 } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
@@ -93,11 +94,8 @@ const SmallPromo = ({ customFields }) => {
 	}
 
 	const linkURL = content?.websites?.[arcSite]?.website_url;
-	const imageURL =
-		content.promo_items?.basic?.type === "image" && content.promo_items?.basic?.url
-			? content.promo_items.basic.url
-			: null;
-	const headline = content?.description?.basic;
+	const imageURL = getImageFromANS(content);
+	const headline = content?.headlines?.basic;
 
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);

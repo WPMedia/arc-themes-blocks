@@ -12,7 +12,8 @@ const Heading = (props) => (
 	<LevelContext.Consumer>
 		{(level) => {
 			const headingTag = `h${Math.min(level, 6)}`;
-			const FontType = props.font === FONT ? SecondaryFont : PrimaryFont;
+			const { font } = props;
+			const FontType = font === FONT ? SecondaryFont : PrimaryFont;
 			return <FontType as={headingTag} {...props} />;
 		}}
 	</LevelContext.Consumer>

@@ -217,7 +217,14 @@ export default {
 		},
 	},
 	display_date: "2020-01-30T14:47:46.926Z",
-	credits: { by: [[Object]] },
+	credits: {
+		by: [
+			{
+				type: "author",
+				name: "Example Author",
+			},
+		],
+	},
 	subtype: "right-rail-template",
 	first_publish_date: "2020-01-30T23:47:48.013Z",
 	websites: {

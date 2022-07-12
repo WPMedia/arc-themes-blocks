@@ -92,3 +92,23 @@ export const imageAndDescription = () => {
 
 	return <Promo customFields={updatedCustomFields} />;
 };
+
+export const withGalleryLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		content: { type: "gallery" },
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};
+
+export const withVideoLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		content: { type: "video" },
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};

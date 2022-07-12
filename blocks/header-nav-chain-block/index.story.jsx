@@ -95,8 +95,6 @@ export const centerLogo = () => (
 	<PresentationalNav
 		closeDrawer={() => {}}
 		customFields={CUSTOM_FIELDS_BASE}
-		displayLinks
-		horizontalLinksHierarchy="horizontal-links"
 		isAdmin={false}
 		isSectionDrawerOpen={false}
 		logoAlignment="center"

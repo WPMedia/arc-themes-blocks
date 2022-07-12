@@ -1256,6 +1256,32 @@
 					margin: 0,
 					padding: 0,
 				),
+				medium-manual-promo: (
+					components: (
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							margin-bottom: var(--global-spacing-4),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				medium-manual-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							width: 68%,
+						),
+					),
+				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -1771,6 +1797,8 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
+				),
+				large-manual-promo-text: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-12),
@@ -1783,6 +1811,34 @@
 				),
 				masthead: (
 					display: flex,
+				),
+				medium-manual-promo: (
+					components: (
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-7),
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				medium-manual-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							margin-left: 39%,
+							width: 60%,
+						),
+						paragraph: (
+							margin-left: 39%,
+						),
+					),
 				),
 				quad-chain: (
 					components: (
@@ -1925,6 +1981,7 @@
 @use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/medium-manual-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";

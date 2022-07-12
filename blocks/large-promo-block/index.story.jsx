@@ -92,3 +92,45 @@ export const imageAndDescription = () => {
 
 	return <Promo customFields={updatedCustomFields} />;
 };
+
+/*
+ 	note: 
+	`content` from `customFields` prop is overriding content from useContent because "return <LargePromoPresentation content={content} {...customFields} />;" in the stories below.
+	
+	In order for storybook to test the following, this logic would need to be maintained or the mock data would need to be updated.
+*/
+
+export const withGalleryLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		content: { type: "gallery" },
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};
+
+export const withVideoLabelAndImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		showImage: true,
+		content: { type: "video" },
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};
+
+export const playVideoInPlaceOfImage = () => {
+	const updatedCustomFields = {
+		...allCustomFields,
+		// playVideoInPlace will override showImage
+		showImage: true,
+		playVideoInPlace: true,
+		content: {
+			embed_html: `<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>`,
+			type: "video",
+		},
+	};
+
+	return <Promo customFields={updatedCustomFields} />;
+};

@@ -20,5 +20,8 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/packag
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block"
+  },
+  "dependencies": {
+    "axios": "^0.26.0"
   }
 }

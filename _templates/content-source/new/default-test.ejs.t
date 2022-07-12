@@ -4,24 +4,35 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/source
 ---
 import contentSource from './<%= h.inflection.dasherize(block_name) %>';
 
-describe('Test <%= h.changeCase.title(block_name) %> content source', () => {
-  it('should build the correct url', () => {
-    const key = {
-      'arc-site': 'arc-site',
-      input: 'test-input',
-    };
-    const url = contentSource.resolve(key);
+jest.mock("fusion:environment", () => ({
+	CONTENT_BASE: "",
+}));
 
-    expect(url).toEqual(`${key['arc-site']}-${key.input}`);
+jest.mock("axios", () => ({
+	__esModule: true,
+	default: jest.fn((data) => Promise.resolve({ data })),
+}));
+
+describe('Test <%= h.changeCase.title(block_name) %> content source', () => {
+  it('should build the correct url', async () => {
+	 const key = {
+		'arc-site': 'arc-site',
+		input: 'test-input',
+	 };
+	const contentSourceRequest = await contentSource.fetch(key);
+
+	expect(contentSourceRequest.url).toEqual(
+		`/-- API - ENDPOINT URI HERE --?website=${key["arc-site"]}`
+	);
   });
 
   it('should tansform data', () => {
-    const key = {
-      'arc-site': 'arc-site',
-      input: 'test-input',
-    };
-    const dataTransform = contentSource.transform(key);
+	 const key = {
+		'arc-site': 'arc-site',
+		input: 'test-input',
+	 };
+	 const dataTransform = contentSource.transform(key);
 
-    expect(dataTransform).toEqual(key);
+	 expect(dataTransform).toEqual(key);
   });
 });

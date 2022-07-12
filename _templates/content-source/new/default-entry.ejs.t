@@ -2,20 +2,30 @@
 # helper funcs https://www.hygen.io/docs/templates/#helpers-and-inflections
 to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/sources/<%= h.inflection.dasherize(block_name) %>.js
 ---
+import axios from "axios";
+import { CONTENT_BASE, ARC_ACCESS_TOKEN } from "fusion:environment";
+
 const params = {
   input: 'text',
 };
 
-const resolve = (key) => {
+const fetch = (key) => {
   const {
     input, 'arc-site': arcSite,
   } = key;
 
-  return `${arcSite}-${input}`;
+	return axios({
+		url: `${CONTENT_BASE}/-- API - ENDPOINT URI HERE --?website=${arcSite}`,
+		headers: {
+			'content-type': 'application/json',
+			Authorization: `Bearer ${ARC_ACCESS_TOKEN}`,
+		},
+		method: 'GET',
+	}).then(({ data: content }) => content);
 };
 
 export default {
-  resolve,
+  fetch,
   params,
   transform: (data) => data,
 };

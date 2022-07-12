@@ -879,6 +879,30 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
+				large-manual-promo: (
+					gap: var(--global-spacing-4),
+				),
+				large-manual-promo-text: (
+					--grid-template-columns: 1fr,
+					grid-template-rows: auto 1fr,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-4),
+						),
+						overline: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
 				links-bar: (
 					gap: var(--global-spacing-2),
 				),
@@ -927,6 +951,32 @@
 				masthead-divider: (
 					margin: 0,
 					padding: 0,
+				),
+				medium-manual-promo: (
+					components: (
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							margin-bottom: var(--global-spacing-4),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
+				medium-manual-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							width: 68%,
+						),
+					),
 				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
@@ -1413,8 +1463,50 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
+				large-manual-promo: (
+					gap: var(--global-spacing-6),
+				),
+				large-manual-promo-text: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
+						),
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				masthead: (
 					display: flex,
+				),
+				medium-manual-promo: (
+					components: (
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-7),
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				medium-manual-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							margin-left: 39%,
+							width: 60%,
+						),
+						paragraph: (
+							margin-left: 39%,
+						),
+					),
 				),
 				quad-chain: (
 					components: (
@@ -1571,8 +1663,10 @@
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/large-manual-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/medium-manual-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";
 @use "../../blocks/quad-chain-block";

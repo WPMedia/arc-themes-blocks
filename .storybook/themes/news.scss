@@ -441,9 +441,6 @@
 				pill-hover: (
 					background-color: var(--global-neutral-7),
 				),
-				separator: (
-					padding: 0 var(--global-spacing-2),
-				),
 				stack-divider-vertical: (
 					border-bottom: var(--global-border-width-1) var(--global-border-style-1)
 						var(--border-color),
@@ -788,6 +785,9 @@
 							font-weight: var(--global-font-weight-7),
 							font-size: var(--body-font-size),
 							line-height: var(--global-line-height-4),
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
 						),
 						attribution: (
 							font-size: var(--global-font-size-3),
@@ -1292,6 +1292,9 @@
 							font-size: inherit,
 							font-weight: inherit,
 							line-height: inherit,
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
 						),
 						stack: (
 							gap: var(--global-spacing-4),

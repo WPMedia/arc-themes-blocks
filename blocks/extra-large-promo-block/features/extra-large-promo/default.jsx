@@ -190,14 +190,12 @@ const ExtraLargePromo = ({ customFields }) => {
 	const MediaImage = () =>
 		showImage ? (
 			<Conditional component={Link} condition={contentUrl} href={contentUrl}>
-				{(
-					<Image
-						alt={content?.headlines?.basic}
-						src={promoImageURL || fallbackImage}
-						searchableField
-						data-aspect-ratio={imageRatio?.replace(":", "/")}
-					/>
-				) || null}
+				<Image
+					alt={content?.headlines?.basic}
+					src={promoImageURL || fallbackImage}
+					searchableField
+					data-aspect-ratio={imageRatio?.replace(":", "/")}
+				/>
 			</Conditional>
 		) : null;
 

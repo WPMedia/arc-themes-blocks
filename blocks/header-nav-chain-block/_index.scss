@@ -2,6 +2,16 @@
 
 .b-header-nav-chain {
 	&--scrolled {
+		.b-header-nav-chain__flyout-nav-wrapper {
+			@include scss.block-components("header-nav-chain-scrolled-flyout-nav");
+			@include scss.block-properties("header-nav-chain-scrolled-flyout-nav");
+		}
+
+		.b-header-nav-chain__flyout-overlay {
+			@include scss.block-components("header-nav-chain-scrolled-flyout-overlay");
+			@include scss.block-properties("header-nav-chain-scrolled-flyout-overlay");
+		}
+
 		@include scss.block-components("header-nav-chain-scrolled");
 		@include scss.block-properties("header-nav-chain-scrolled");
 	}

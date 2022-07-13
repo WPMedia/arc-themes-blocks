@@ -337,7 +337,11 @@
 					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
-					width: var(--global-spacing-8),
+					width: auto,
+					padding: 0 var(--global-spacing-2),
+					display: flex,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
@@ -1041,6 +1045,9 @@
 					display: flex,
 					gap: var(--global-spacing-2),
 				),
+				header-nav-chain-scrolled-flyout-overlay: (
+					margin-top: var(--header-nav-chain-height-scrolled),
+				),
 				header-nav-chain-flyout-overlay: (
 					margin-top: var(--header-nav-chain-height),
 					z-index: 8,
@@ -1055,7 +1062,7 @@
 					display: none,
 				),
 				header-nav-chain-flyout-overlay-open: (
-					background: var(--global-black),
+					background: var(--header-nav-chain-overlay-background-color),
 					overflow-y: scroll,
 					transform: translate(0, 0),
 					width: 100%,
@@ -1090,6 +1097,9 @@
 				),
 				header-nav-chain-flyout-nav-components-desktop: (
 					display: none,
+				),
+				header-nav-chain-scrolled-flyout-nav: (
+					height: calc((100vh - var(--header-nav-chain-height-scrolled)) - var(--global-spacing-4)),
 				),
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height)) - var(--global-spacing-4)),
@@ -1776,12 +1786,6 @@
 				),
 				header-nav-chain-links-list: (
 					display: flex,
-				),
-				header-nav-chain-flyout-overlay: (
-					margin-top: var(--header-nav-chain-height),
-				),
-				header-nav-chain-flyout-overlay-open: (
-					background: var(--header-nav-chain-overlay-background-color),
 				),
 				header-nav-chain-flyout-nav-wrapper: (
 					width: 315px,

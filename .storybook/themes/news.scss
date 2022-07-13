@@ -1496,12 +1496,11 @@
 				medium-manual-promo-show-image: (
 					components: (
 						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							margin-left: 39%,
-							width: 60%,
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
 						),
 						paragraph: (
-							margin-left: 39%,
+							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

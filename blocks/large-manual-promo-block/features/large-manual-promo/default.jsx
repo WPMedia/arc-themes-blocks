@@ -78,7 +78,9 @@ const LargeManualPromo = ({ customFields }) => {
 					>
 						{headline}
 					</Conditional>
-				) : null}
+				) : (
+					headline
+				)}
 			</Heading>
 		) : null;
 

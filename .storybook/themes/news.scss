@@ -879,15 +879,13 @@
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
 				),
-				large-promo: (
+				large-manual-promo: (
 					gap: var(--global-spacing-4),
 				),
-				large-promo-text: (
+				large-manual-promo-text: (
+					--grid-template-columns: 1fr,
 					grid-template-rows: auto 1fr,
 					components: (
-						grid: (
-							template-columns: 1fr,
-						),
 						heading: (
 							font-size: var(--global-font-size-10),
 							line-height: var(--global-line-height-4),
@@ -905,6 +903,33 @@
 						),
 					),
 				),
+				large-promo: (
+					gap: var(--global-spacing-4),
+				),
+				large-promo-icon-label: (
+					align-items: center,
+					padding: var(--global-spacing-2),
+					background-color: rgb(255, 105, 180),
+					border: 0,
+					border-radius: var(--global-spacing-2),
+					bottom: var(--global-spacing-2),
+					margin-left: var(--global-spacing-2),
+					position: absolute,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				large-promo-label: (
+					margin-left: var(--global-spacing-2),
+					color: var(--global-white),
+				),
+				large-promo-media: (
+					position: relative,
+				),
 				large-promo-meta: (
 					display: inline,
 					components: (
@@ -916,15 +941,10 @@
 						),
 					),
 				),
-				large-manual-promo: (
-					gap: var(--global-spacing-4),
-				),
-				large-manual-promo-text: (
+				large-promo-text: (
+					--grid-template-columns: 1fr,
 					grid-template-rows: auto 1fr,
 					components: (
-						grid: (
-							template-columns: 1fr,
-						),
 						heading: (
 							font-size: var(--global-font-size-10),
 							line-height: var(--global-line-height-4),
@@ -1480,10 +1500,8 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
-				large-promo: (
+				large-manual-promo: (
 					gap: var(--global-spacing-6),
-				),
-				large-promo-text: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-12),
@@ -1494,10 +1512,10 @@
 						),
 					),
 				),
-				large-manual-promo: (
+				large-promo: (
 					gap: var(--global-spacing-6),
 				),
-				large-manual-promo-text: (
+				large-promo-text: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-12),

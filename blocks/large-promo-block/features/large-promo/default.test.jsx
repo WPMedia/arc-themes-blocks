@@ -312,4 +312,17 @@ describe("Large Promo", () => {
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
+
+	it("should render video or image icon label", () => {
+		const { container } = render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					showImageOrVideoLabel: true,
+					showVideoLabel: true,
+				}}
+			/>
+		);
+		expect(container.querySelector(".b-large-promo__icon_label")).not.toBeNull();
+	});
 });

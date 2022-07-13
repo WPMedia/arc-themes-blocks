@@ -10,6 +10,7 @@ import {
 	Conditional,
 	Grid,
 	HeadingSection,
+	Icon,
 	Image,
 	Link,
 	MediaItem,
@@ -38,6 +39,9 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showHeadline,
 		showImage,
 		showOverline,
+		showVideoLabel,
+		showImageOrVideoLabel,
+		imageOrVideoLabelText,
 		// shrinkToFit,
 		// viewportPercentage,
 	} = customFields;
@@ -190,7 +194,11 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
 				{showImage ? (
-					<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+					<MediaItem
+						className={`${BLOCK_CLASS_NAME}__media`}
+						{...searchableField("imageURL")}
+						suppressContentEditableWarning
+					>
 						<Conditional
 							component={Link}
 							condition={content?.websites?.[arcSite]?.website_url}
@@ -199,6 +207,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							assisstiveHidden
 						>
 							<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+							{showImageOrVideoLabel ? (
+								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+									<Icon name={showVideoLabel ? "Play" : "Camera"} />
+									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
+								</div>
+							) : null}
 						</Conditional>
 					</MediaItem>
 				) : null}

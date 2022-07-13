@@ -105,6 +105,10 @@ export const withGalleryLabelAndImage = () => {
 		...allCustomFields,
 		showImage: true,
 		content: { type: "gallery" },
+		showDescription: true,
+		imageOrVideoLabelText: "promo-label.gallery-text",
+		showImageOrVideoLabel: true,
+		showVideoLabel: false,
 	};
 
 	return <Promo customFields={updatedCustomFields} />;
@@ -115,6 +119,10 @@ export const withVideoLabelAndImage = () => {
 		...allCustomFields,
 		showImage: true,
 		content: { type: "video" },
+		showDescription: true,
+		imageOrVideoLabelText: "promo-label.video-text",
+		showImageOrVideoLabel: true,
+		showVideoLabel: true,
 	};
 
 	return <Promo customFields={updatedCustomFields} />;

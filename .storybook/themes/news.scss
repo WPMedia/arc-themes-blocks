@@ -490,10 +490,8 @@
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-3),
-							padding-bottom: var(--global-spacing-5),
-							padding-left: var(--global-spacing-4),
-							padding-right: var(--global-spacing-5),
-							padding-top: var(--global-spacing-5),
+							padding: var(--global-spacing-5) var(--global-spacing-5) var(--global-spacing-5)
+								var(--global-spacing-4),
 							text-decoration: none,
 						),
 						icon: (

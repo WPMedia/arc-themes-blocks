@@ -68,19 +68,15 @@ const LargeManualPromo = ({ customFields }) => {
 	const PromoHeading = () =>
 		showHeadline ? (
 			<Heading>
-				{linkURL ? (
-					<Conditional
-						component={Link}
-						condition={linkURL}
-						href={formatURL(linkURL)}
-						openInNewTab={newTab}
-						onClick={registerSuccessEvent}
-					>
-						{headline}
-					</Conditional>
-				) : (
-					headline
-				)}
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					{headline}
+				</Conditional>
 			</Heading>
 		) : null;
 

@@ -58,19 +58,18 @@ const MediumManualPromo = ({ customFields }) => {
 							</Conditional>
 						</MediaItem>
 					) : null}
-					{showHeadline ? (
+
+					{showHeadline && headline ? (
 						<Heading>
-							{linkURL ? (
-								<Conditional
-									component={Link}
-									condition={linkURL}
-									href={formatURL(linkURL)}
-									openInNewTab={newTab}
-									onClick={registerSuccessEvent}
-								>
-									{headline}
-								</Conditional>
-							) : null}
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+							>
+								{headline}
+							</Conditional>
 						</Heading>
 					) : null}
 					{showDescription ? <Paragraph>{description}</Paragraph> : null}

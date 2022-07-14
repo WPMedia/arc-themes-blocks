@@ -402,6 +402,7 @@
 				),
 				link: (
 					color: var(--color-primary),
+					text-decoration: underline,
 				),
 				link-active: (
 					text-decoration: none,
@@ -474,7 +475,7 @@
 					components: (
 						button-default: (
 							background: none,
-							border: none,
+							border-width: none,
 							flex: 0 0 auto,
 						),
 						button-large: (
@@ -1142,9 +1143,13 @@
 					position: fixed,
 					top: 200px,
 					components: (
-						button-medium: (
-							background: transparent,
+						button: (
+							background-color: transparent,
+						),
+						button-default: (
 							border-width: 0,
+						),
+						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
 					),

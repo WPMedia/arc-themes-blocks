@@ -25,6 +25,7 @@ import {
 	formatAuthors,
 	Attribution,
 	Separator,
+	Video,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-large-promo";
@@ -32,7 +33,7 @@ const BLOCK_CLASS_NAME = "b-large-promo";
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
 		imageOverrideURL,
-		// playVideoInPlace,
+		playVideoInPlace,
 		showByline,
 		showDate,
 		showDescription,
@@ -42,6 +43,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showVideoLabel,
 		showImageOrVideoLabel,
 		imageOrVideoLabelText,
+		aspectRatio,
 		// shrinkToFit,
 		// viewportPercentage,
 	} = customFields;
@@ -206,10 +208,18 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							onClick={registerSuccessEvent}
 							assisstiveHidden
 						>
-							<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+							{playVideoInPlace ? (
+								<Video
+									aspectRatio={aspectRatio}
+									className={`${BLOCK_CLASS_NAME}__video`}
+									embedMarkup={customFields?.content?.embed_html}
+								/>
+							) : (
+								<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+							)}
 							{showImageOrVideoLabel ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Camera"} />
+									<Icon name={showVideoLabel ? "Play" : "Instagram"} fill="#FFFFF" />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
 								</div>
 							) : null}

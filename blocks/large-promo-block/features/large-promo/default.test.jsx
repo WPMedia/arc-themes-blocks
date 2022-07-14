@@ -313,7 +313,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
-	it("should render video or image icon label", () => {
+	it("should render image icon label", () => {
 		const { container } = render(
 			<LargePromo
 				customFields={{
@@ -324,5 +324,18 @@ describe("Large Promo", () => {
 			/>
 		);
 		expect(container.querySelector(".b-large-promo__icon_label")).not.toBeNull();
+	});
+
+	it("should render video player media when 'playVideoInPlace' prop is passed", () => {
+		const { container } = render(
+			<LargePromo
+				customFields={{
+					showImage: true,
+					showVideoLabel: true,
+					playVideoInPlace: true,
+				}}
+			/>
+		);
+		expect(container.querySelector(".b-large-promo__video")).not.toBeNull();
 	});
 });

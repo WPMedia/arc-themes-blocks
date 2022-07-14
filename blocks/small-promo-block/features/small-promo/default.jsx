@@ -112,13 +112,9 @@ const SmallPromo = ({ customFields }) => {
 	const PromoHeading = () =>
 		showHeadline && headline ? (
 			<Heading>
-				{linkURL ? (
-					<Link href={formatURL(linkURL)} onClick={registerSuccessEvent}>
-						{headline}
-					</Link>
-				) : (
-					headline
-				)}
+				<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} onClick={registerSuccessEvent}>
+					{headline}
+				</Conditional>
 			</Heading>
 		) : null;
 

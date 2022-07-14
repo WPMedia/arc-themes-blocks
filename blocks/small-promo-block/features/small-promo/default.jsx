@@ -99,19 +99,14 @@ const SmallPromo = ({ customFields }) => {
 
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);
-		const ImageDisplay =
-			showImage && imageURL ? (
+		const availableImage = imageURL || fallbackImage;
+		return (showImage && availableImage) ? (
+			<Conditional component={Link} condition={linkURL} onClick={registerSuccessEvent} assistiveHidden>
 				<MediaItem>
-					<Image alt="" src={imageURL || fallbackImage} />
-				</MediaItem>
-			) : null;
-		return showImage && linkURL ? (
-			<Link href={formatURL(linkURL)} onClick={registerSuccessEvent} assistiveHidden>
-				{ImageDisplay}
-			</Link>
-		) : (
-			ImageDisplay
-		);
+					<Image alt="" src={availableImage} />
+				</MediaItem>			
+			</Conditional>
+		) : null;
 	};
 
 	const PromoHeading = () =>

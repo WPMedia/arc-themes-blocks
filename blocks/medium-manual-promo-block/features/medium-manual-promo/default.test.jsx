@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
 import { isServerSide } from "@wpmedia/arc-themes-components";
 
 import MediumManualPromo from "./default";
@@ -45,15 +45,15 @@ describe("the medium promo feature", () => {
 		const config = {
 			lazyLoad: true,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={config} />);
-		expect(wrapper.html()).toBe(null);
+		const { container } = render(<MediumManualPromo customFields={config} />);
+		expect(container.firstChild).toBe(null);
 	});
 
 	it("should render all fields", () => {
-		const wrapper = mount(<MediumManualPromo customFields={customFieldData} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
-		);
+		render(<MediumManualPromo customFields={customFieldData} />);
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("does not show image", () => {
@@ -61,10 +61,11 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			showImage: false,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={noImage} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo\\"><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
-		);
+
+		render(<MediumManualPromo customFields={noImage} />);
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).toBeNull();
 	});
 
 	it("uses fallback image", () => {
@@ -72,10 +73,11 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			imageURL: null,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={fallbackImage} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"http://fallback.img\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2><p class=\\"c-paragraph\\">Description</p></article>"`
-		);
+
+		render(<MediumManualPromo customFields={fallbackImage} />);
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("does not show description", () => {
@@ -83,10 +85,11 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			showDescription: false,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={noDescription} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><h2 class=\\"c-heading\\"><a class=\\"c-link\\" href=\\"arcxp.com\\">Headline</a></h2></article>"`
-		);
+
+		render(<MediumManualPromo customFields={noDescription} />);
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("does not show headline", () => {
@@ -94,10 +97,12 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			showHeadline: false,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={noHeadline} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><a class=\\"c-link\\" href=\\"arcxp.com\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></a></figure><p class=\\"c-paragraph\\">Description</p></article>"`
-		);
+
+		render(<MediumManualPromo customFields={noHeadline} />);
+		expect(screen.getByRole("link")).not.toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("renders headline with no link", () => {
@@ -105,9 +110,11 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			linkURL: undefined,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={noHeadline} />);
-		expect(wrapper.html()).toMatchInlineSnapshot(
-			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></figure><h2 class=\\"c-heading\\">Headline</h2><p class=\\"c-paragraph\\">Description</p></article>"`
-		);
+
+		render(<MediumManualPromo customFields={noHeadline} />);
+		expect(screen.queryByRole("link")).toBeNull();
+		expect(screen.queryByText(customFieldData.headline)).not.toBeNull();
+		expect(screen.queryByText(customFieldData.description)).not.toBeNull();
+		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 });

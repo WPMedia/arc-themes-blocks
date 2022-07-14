@@ -334,7 +334,11 @@
 					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
-					width: var(--global-spacing-8),
+					width: auto,
+					padding: 0 var(--global-spacing-2),
+					display: flex,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
@@ -1443,6 +1447,8 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
+				),
+				large-manual-promo-text: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-12),
@@ -1475,12 +1481,11 @@
 				medium-manual-promo-show-image: (
 					components: (
 						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							margin-left: 39%,
-							width: 60%,
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
 						),
 						paragraph: (
-							margin-left: 39%,
+							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

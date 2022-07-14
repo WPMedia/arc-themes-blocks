@@ -209,17 +209,13 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							assisstiveHidden
 						>
 							{playVideoInPlace ? (
-								<Video
-									aspectRatio={aspectRatio}
-									className={`${BLOCK_CLASS_NAME}__video`}
-									embedMarkup={customFields?.content?.embed_html}
-								/>
+								<Video aspectRatio={aspectRatio} embedMarkup={customFields?.content?.embed_html} />
 							) : (
 								<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
 							)}
 							{showImageOrVideoLabel ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Instagram"} fill="#FFFFF" />
+									<Icon name={showVideoLabel ? "Play" : "Camera"} />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
 								</div>
 							) : null}

@@ -704,6 +704,9 @@
 					margin: 0 calc(-1 * var(--global-spacing-5)) 0 0,
 				),
 				right-rail-rail-container: (
+					max-width: initial,
+					width: 100%,
+					margin: auto,
 					grid-template-columns: initial,
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
@@ -716,9 +719,6 @@
 					grid-column: initial,
 					padding: initial,
 					margin: 0 calc(-1 * var(--global-spacing-5)) 0 calc(-1 * var(--global-spacing-5)),
-				),
-				right-rail-footer: (
-					//margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
 				),
 				single-column-regular-main: (
 					components: (
@@ -932,8 +932,7 @@
 					padding: 0 0 var(--global-spacing-8) 0,
 				),
 				right-rail-main: (
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
+					width: 100%,
 					gap: var(--global-spacing-10),
 					margin: auto,
 				),
@@ -941,6 +940,9 @@
 					margin: 0,
 				),
 				right-rail-rail-container: (
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
 					grid-template-columns: repeat(12, 1fr),
 					gap: var(--global-spacing-6),
 					grid-template-rows: initial,

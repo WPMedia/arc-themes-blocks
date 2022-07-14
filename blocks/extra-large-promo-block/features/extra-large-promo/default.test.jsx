@@ -91,8 +91,12 @@ describe("the extra large promo feature", () => {
 		const config = {
 			showByline: true,
 		};
-		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByText("Example Author")).not.toBeNull();
+		const { getByText } = render(<ExtraLargePromo customFields={config} />);
+		expect(
+			getByText(
+				"global.byline-by-text Example Author1, Example Author2, global.byline-and-text Example Author3"
+			)
+		).not.toBeNull();
 	});
 
 	it("should return a byline if showDate is true", () => {

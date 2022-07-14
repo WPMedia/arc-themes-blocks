@@ -42,6 +42,7 @@ const ExtraLargePromo = ({ customFields }) => {
 		fallbackImage,
 		locale,
 	} = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale || "en");
 	const {
 		imageOverrideURL,
 		imageRatio,
@@ -173,19 +174,19 @@ const ExtraLargePromo = ({ customFields }) => {
 	let [overlineText, overlineUrl] = [sectionText, sectionUrl];
 
 	if (content?.owner?.sponsored) {
-		const phrases = getTranslatedPhrases(locale || "en");
-		overlineText = content?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		overlineText = content?.label?.basic?.text || phrases.t("global.overline-sponsored-content");
 		overlineUrl = null;
 	} else if (shouldUseLabel) {
 		[overlineText, overlineUrl] = [labelText, labelUrl];
 	}
 
-	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentDescription = showDescription ? content?.description?.basic : null;
-	const promoImageURL = imageOverrideURL || extractImageFromStory(content);
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const embedMarkup = playVideoInPlace && extractVideoEmbedFromStory(content);
+	const hasAuthors = showByline && content?.credits?.by.length > 0;
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const promoImageURL = imageOverrideURL || extractImageFromStory(content);
 
 	const MediaImage = () =>
 		showImage ? (
@@ -203,12 +204,12 @@ const ExtraLargePromo = ({ customFields }) => {
 		contentHeading ||
 		showImage ||
 		contentDescription ||
-		showByline ||
+		hasAuthors ||
 		showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
 				{showOverline ? <Overline href={overlineUrl}>{overlineText}</Overline> : null}
-				{contentHeading || showImage || contentDescription || showByline || showDate ? (
+				{contentHeading || showImage || contentDescription || hasAuthors || showDate ? (
 					<Stack>
 						{contentHeading ? (
 							<HeadingSection>
@@ -225,10 +226,15 @@ const ExtraLargePromo = ({ customFields }) => {
 							</MediaItem>
 						) : null}
 						{contentDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
-						{showByline || showDate ? (
+						{hasAuthors || showDate ? (
 							<Attribution>
 								<Join separator={Separator}>
-									{showByline ? formatAuthors(content?.credits?.by) : null}
+									{hasAuthors ? (
+										<Join separator={() => " "}>
+											{phrases.t("global.byline-by-text")}
+											{formatAuthors(content?.credits?.by, phrases.t("global.byline-and-text"))}
+										</Join>
+									) : null}
 									{showDate ? (
 										<DateComponent dateTime={displayDate} dateString={formattedDate} />
 									) : null}

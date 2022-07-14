@@ -221,7 +221,15 @@ export default {
 		by: [
 			{
 				type: "author",
-				name: "Example Author",
+				name: "Example Author1",
+			},
+			{
+				type: "author",
+				name: "Example Author2",
+			},
+			{
+				type: "author",
+				name: "Example Author3",
 			},
 		],
 	},

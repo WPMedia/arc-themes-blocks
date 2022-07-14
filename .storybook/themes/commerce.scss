@@ -680,6 +680,46 @@
 						),
 					),
 				),
+				right-rail: (
+					display: grid,
+					gap: var(--global-spacing-6),
+				),
+				right-rail-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+				),
+				right-rail-full-width-1: (
+					display: none,
+				),
+				right-rail-main: (
+					display: grid,
+					gap: var(--global-spacing-6),
+					max-width: initial,
+					width: calc(100vw - var(--global-spacing-8)),
+					margin: auto,
+				),
+				right-rail-full-width-2: (
+					margin: 0 calc(-1 * var(--global-spacing-5)) 0 0,
+				),
+				right-rail-rail-container: (
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
+					gap: var(--global-spacing-5),
+				),
+				right-rail-main-right-rail: (
+					grid-column: initial,
+					padding: initial,
+				),
+				right-rail-main-interior-item: (
+					grid-column: initial,
+					padding: initial,
+					margin: 0 calc(-1 * var(--global-spacing-5)) 0 calc(-1 * var(--global-spacing-5)),
+				),
+				right-rail-footer: (
+					//margin: var(--global-spacing-10) 0 var(--global-spacing-8) 0,
+				),
 				single-column-regular-main: (
 					components: (
 						stack: (
@@ -883,6 +923,34 @@
 					grid-template-areas: "top top" "bottom bottom",
 					max-width: var(--content-scale-width),
 					width: 100%,
+				),
+				right-rail: (
+					display: grid,
+					gap: var(--global-spacing-10),
+				),
+				right-rail-navigation: (
+					padding: 0 0 var(--global-spacing-8) 0,
+				),
+				right-rail-main: (
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					gap: var(--global-spacing-10),
+					margin: auto,
+				),
+				right-rail-full-width-2: (
+					margin: 0,
+				),
+				right-rail-rail-container: (
+					grid-template-columns: repeat(12, 1fr),
+					gap: var(--global-spacing-6),
+					grid-template-rows: initial,
+				),
+				right-rail-main-right-rail: (
+					grid-column: span 5,
+				),
+				right-rail-main-interior-item: (
+					grid-column: span 7,
+					margin: 0,
 				),
 				single-column-regular-main: (
 					components: (

@@ -13,6 +13,7 @@ import {
 	MediaItem,
 	Grid,
 	getImageFromANS,
+	Conditional,
 } from "@wpmedia/arc-themes-components";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
@@ -100,11 +101,17 @@ const SmallPromo = ({ customFields }) => {
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);
 		const availableImage = imageURL || fallbackImage;
-		return (showImage && availableImage) ? (
-			<Conditional component={Link} condition={linkURL} onClick={registerSuccessEvent} assistiveHidden>
+		return showImage && availableImage ? (
+			<Conditional
+				component={Link}
+				condition={linkURL}
+				href={formatURL(linkURL)}
+				onClick={registerSuccessEvent}
+				assistiveHidden
+			>
 				<MediaItem>
 					<Image alt="" src={availableImage} />
-				</MediaItem>			
+				</MediaItem>
 			</Conditional>
 		) : null;
 	};
@@ -112,7 +119,12 @@ const SmallPromo = ({ customFields }) => {
 	const PromoHeading = () =>
 		showHeadline && headline ? (
 			<Heading>
-				<Conditional component={Link} condition={linkURL} href={formatURL(linkURL)} onClick={registerSuccessEvent}>
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					onClick={registerSuccessEvent}
+				>
 					{headline}
 				</Conditional>
 			</Heading>

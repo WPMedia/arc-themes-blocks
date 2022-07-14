@@ -680,6 +680,36 @@
 						),
 					),
 				),
+				right-rail-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+					margin-bottom: var(--global-spacing-6),
+				),
+				right-rail-full-width-1: (
+					margin-bottom: var(--global-spacing-6),
+				),
+				right-rail-full-width-2: (
+					margin-bottom: var(--global-spacing-6),
+				),
+				right-rail-rail-container: (
+					margin: 0 auto var(--global-spacing-6) auto,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					components: (
+						grid: (
+							template-columns: 1fr,
+							gap: var(--global-spacing-6),
+						),
+					),
+				),
+				right-rail-main-interior-item: (
+					grid-column: 1,
+				),
+				right-rail-main-right-rail: (
+					grid-column: 1,
+				),
 				single-column-regular-main: (
 					components: (
 						stack: (
@@ -897,6 +927,29 @@
 							margin-top: -7rem,
 						),
 					),
+				),
+				right-rail-navigation: (
+					margin-bottom: var(--global-spacing-10),
+				),
+				right-rail-full-width-1: (
+					margin-bottom: var(--global-spacing-10),
+				),
+				right-rail-full-width-2: (
+					margin-bottom: var(--global-spacing-10),
+				),
+				right-rail-rail-container: (
+					margin: 0 auto var(--global-spacing-10) auto,
+					components: (
+						grid: (
+							template-columns: repeat(12, 1fr),
+						),
+					),
+				),
+				right-rail-main-interior-item: (
+					grid-column: span 7,
+				),
+				right-rail-main-right-rail: (
+					grid-column: span 5,
 				),
 				story-carousel-title: (
 					font-size: var(--global-font-size-11),

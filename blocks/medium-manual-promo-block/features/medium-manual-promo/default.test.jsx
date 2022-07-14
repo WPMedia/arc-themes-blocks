@@ -105,7 +105,7 @@ describe("the medium promo feature", () => {
 			...customFieldData,
 			linkURL: undefined,
 		};
-		const wrapper = mount(<MediumManualPromo customFields={noImage} />);
+		const wrapper = mount(<MediumManualPromo customFields={noHeadline} />);
 		expect(wrapper.html()).toMatchInlineSnapshot(
 			`"<article class=\\"b-medium-manual-promo b-medium-manual-promo--show-image\\"><figure class=\\"c-media-item\\"><img alt=\\"Headline\\" class=\\"c-image\\" loading=\\"lazy\\" src=\\"image-url.jpg\\"></figure><h2 class=\\"c-heading\\">Headline</h2><p class=\\"c-paragraph\\">Description</p></article>"`
 		);

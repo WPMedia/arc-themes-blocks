@@ -263,7 +263,9 @@
 					line-height: var(--body-line-height),
 				),
 				button: (
-					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-color: transparent,
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
 					border-radius: var(--border-radius),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
@@ -286,6 +288,7 @@
 				button-default: (
 					background-color: var(--global-white),
 					border-color: var(--global-neutral-7),
+					border-width: var(--global-border-width-1),
 					color: var(--global-neutral-7),
 				),
 				button-primary: (
@@ -334,7 +337,11 @@
 					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
-					width: var(--global-spacing-8),
+					width: auto,
+					padding: 0 var(--global-spacing-2),
+					display: flex,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
@@ -470,7 +477,7 @@
 					components: (
 						button-default: (
 							background: none,
-							border: none,
+							border-width: 0,
 							flex: 0 0 auto,
 						),
 						button-large: (
@@ -1138,9 +1145,13 @@
 					position: fixed,
 					top: 200px,
 					components: (
-						button-medium: (
-							background: transparent,
+						button: (
+							background-color: transparent,
+						),
+						button-default: (
 							border-width: 0,
+						),
+						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
 					),

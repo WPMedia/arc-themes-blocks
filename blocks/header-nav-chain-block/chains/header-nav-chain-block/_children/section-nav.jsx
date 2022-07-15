@@ -50,14 +50,14 @@ const isSamePath = (current, menuLink) => {
 // and doesn't need to be as the caret is a button which is focusable
 // and has default button behaviour and the onClick event on the parent
 // div receives the event via propagation.
-const SubSectionAnchor = ({ item, isOpen, isHidden, blockClass }) => {
+const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
 	const { arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	return (
 		<Stack
-			className={`${blockClass}__subsection-anchor subsection-anchor ${isOpen ? "open" : ""}`}
+			className={`${blockClassName}__subsection-anchor subsection-anchor ${isOpen ? "open" : ""}`}
 			direction="horizontal"
 			onClick={onClickSubsection}
 		>
@@ -79,7 +79,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden, blockClass }) => {
 };
 /* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */
 
-const SectionItem = ({ item, isHidden, blockClass }) => {
+const SectionItem = ({ item, isHidden, blockClassName }) => {
 	let currentLocation;
 	if (typeof window !== "undefined") {
 		currentLocation = window.location.pathname;
@@ -89,13 +89,18 @@ const SectionItem = ({ item, isHidden, blockClass }) => {
 	return (
 		<li className="section-item">
 			{hasChildren(item) ? (
-				<SubSectionAnchor item={item} isOpen={isOpen} isHidden={isHidden} blockClass={blockClass} />
+				<SubSectionAnchor
+					item={item}
+					isOpen={isOpen}
+					isHidden={isHidden}
+					blockClassName={blockClassName}
+				/>
 			) : (
-				<SectionAnchor item={item} isHidden={isHidden} blockClass={blockClass} />
+				<SectionAnchor item={item} isHidden={isHidden} blockClassName={blockClassName} />
 			)}
 			{hasChildren(item) && (
 				<SubSectionMenu
-					blockClass={blockClass}
+					blockClassName={blockClassName}
 					items={item.children}
 					isOpen={isOpen}
 					id={item._id.replace("/", "")}
@@ -106,7 +111,7 @@ const SectionItem = ({ item, isHidden, blockClass }) => {
 	);
 };
 
-const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClass }) => {
+const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClassName }) => {
 	const itemsList = items.map((item) => (
 		<li className="subsection-item" key={item._id}>
 			{item.node_type === "link" ? (
@@ -122,23 +127,28 @@ const SubSectionMenu = ({ items, isOpen, id, isHidden, blockClass }) => {
 	));
 
 	return (
-		<div className={`${blockClass}__subsection-container ${isOpen ? "open" : ""}`}>
-			<ul className={`${blockClass}__subsection-menu`} id={`header_sub_section_${id}`}>
+		<div className={`${blockClassName}__subsection-container ${isOpen ? "open" : ""}`}>
+			<ul className={`${blockClassName}__subsection-menu`} id={`header_sub_section_${id}`}>
 				{itemsList}
 			</ul>
 		</div>
 	);
 };
 
-export default ({ children = [], sections = [], isHidden = false, blockClass }) => {
+export default ({ children = [], sections = [], isHidden = false, blockClassName }) => {
 	const active = sections.filter((s) => !s.inactive);
 
 	return (
 		<>
 			{children}
-			<Stack className={`${blockClass}__flyout-nav`} as="ul">
+			<Stack className={`${blockClassName}__flyout-nav`} as="ul">
 				{active.map((item) => (
-					<SectionItem key={item._id} item={item} isHidden={isHidden} blockClass={blockClass} />
+					<SectionItem
+						key={item._id}
+						item={item}
+						isHidden={isHidden}
+						blockClassName={blockClassName}
+					/>
 				))}
 				<li className="section-menu--bottom-placeholder" />
 			</Stack>

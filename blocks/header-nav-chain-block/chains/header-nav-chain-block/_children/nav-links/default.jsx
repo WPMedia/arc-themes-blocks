@@ -9,7 +9,7 @@ const NavLinksBar = ({
 	hierarchy,
 	showHorizontalSeperatorDots: showHorizontalSeparatorDots,
 	ariaLabel,
-	blockClass,
+	blockClassName,
 }) => {
 	const { id, arcSite } = useFusionContext();
 	const { locale = "en" } = getProperties(arcSite);
@@ -50,13 +50,13 @@ const NavLinksBar = ({
 			key={id}
 			as="nav"
 			direction="horizontal"
-			className={`${blockClass}__links-list`}
+			className={`${blockClassName}__links-list`}
 			alignment="center"
 			wrap="wrap"
 			aria-label={ariaLabel || phrases.t("header-nav-chain-block.links-element-aria-label")}
 		>
 			{menuItems.map((item, index) => (
-				<span className={`${blockClass}__links-list-item`} key={item._id}>
+				<span className={`${blockClassName}__links-list-item`} key={item._id}>
 					{index > 0 && showSeparator ? <Separator /> : null}
 					{item.node_type === "link" ? (
 						<Link href={item.url}>{item.display_name}</Link>

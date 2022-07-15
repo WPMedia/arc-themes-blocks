@@ -67,7 +67,7 @@ export function PresentationalNav(props) {
 						hierarchy={horizontalLinksHierarchy}
 						showHorizontalSeperatorDots={showDotSeparators}
 						ariaLabel={ariaLabelLink}
-						blockClass={BLOCK_CLASS_NAME}
+						blockClassName={BLOCK_CLASS_NAME}
 					/>
 				) : null}
 				<NavSection
@@ -128,7 +128,7 @@ export function PresentationalNav(props) {
 							tabIndex={!sections.length ? "-1" : null}
 						>
 							<SectionNav
-								blockClass={BLOCK_CLASS_NAME}
+								blockClassName={BLOCK_CLASS_NAME}
 								sections={sections}
 								isHidden={!isSectionDrawerOpen}
 							>

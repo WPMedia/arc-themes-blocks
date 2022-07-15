@@ -102,7 +102,7 @@ jest.mock("@wpmedia/engine-theme-sdk", () => ({
 describe("the SectionNav component", () => {
 	it("should render children", () => {
 		const wrapper = shallow(
-			<SectionNav blockClass="b-header-nav-chain">
+			<SectionNav blockClassName="b-header-nav-chain">
 				<div className="child">Child Item</div>
 			</SectionNav>
 		);
@@ -145,7 +145,7 @@ describe("the SectionNav component", () => {
 		});
 
 		it("should render the correct number of active .subsection-item elements", () => {
-			const wrapper = mount(<SectionNav sections={items} blockClass="b-header-nav-chain" />);
+			const wrapper = mount(<SectionNav sections={items} blockClassName="b-header-nav-chain" />);
 			const numActiveSubItems = items[0].children.length;
 			expect(wrapper.find("SectionItem").at(0).find("li.subsection-item")).toHaveLength(
 				numActiveSubItems
@@ -153,7 +153,7 @@ describe("the SectionNav component", () => {
 		});
 
 		it("should render the text for a subsection link node correctly", () => {
-			const wrapper = mount(<SectionNav sections={items} blockClass="b-header-nav-chain" />);
+			const wrapper = mount(<SectionNav sections={items} blockClassName="b-header-nav-chain" />);
 
 			expect(
 				wrapper

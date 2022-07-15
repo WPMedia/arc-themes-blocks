@@ -51,7 +51,7 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const wrapper = shallow(
 			<LinksBar
-				blockClass="b-header-nav-chain"
+				blockClassName="b-header-nav-chain"
 				customFields={{ navigationConfig: "links" }}
 				showHorizontalSeperatorDots
 			/>
@@ -84,7 +84,7 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const wrapper = shallow(
 			<LinksBar
-				blockClass="b-header-nav-chain"
+				blockClassName="b-header-nav-chain"
 				customFields={{ navigationConfig: "links" }}
 				showHorizontalSeperatorDots
 			/>
@@ -113,7 +113,7 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const wrapper = shallow(
 			<LinksBar
-				blockClass="b-header-nav-chain"
+				blockClassName="b-header-nav-chain"
 				customFields={{ navigationConfig: "links" }}
 				showHorizontalSeperatorDots={false}
 			/>
@@ -153,7 +153,7 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const wrapper = mount(
-			<LinksBar blockClass="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
+			<LinksBar blockClassName="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
 		);
 
 		expect(wrapper.find("span.b-header-nav-chain__links-list-item")).toHaveLength(4);
@@ -173,7 +173,7 @@ describe("the links bar feature for the default output type", () => {
 		}));
 		const { default: LinksBar } = require("./default");
 		const wrapper = shallow(
-			<LinksBar blockClass="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
+			<LinksBar blockClassName="b-header-nav-chain" customFields={{ navigationConfig: "links" }} />
 		);
 
 		expect(wrapper.find("nav > span")).toHaveLength(0);
@@ -207,7 +207,7 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
-		const wrapper = shallow(<LinksBar blockClass="b-header-nav-chain" />);
+		const wrapper = shallow(<LinksBar blockClassName="b-header-nav-chain" />);
 		expect(wrapper.find(".b-header-nav-chain__links-list").props()).toHaveProperty(
 			"aria-label",
 			"header-nav-chain-block.links-element-aria-label"
@@ -242,7 +242,7 @@ describe("the links bar feature for the default output type", () => {
 			})),
 		}));
 		const { default: LinksBar } = require("./default");
-		const wrapper = shallow(<LinksBar blockClass="b-header-nav-chain" ariaLabel="Links" />);
+		const wrapper = shallow(<LinksBar blockClassName="b-header-nav-chain" ariaLabel="Links" />);
 
 		expect(wrapper.find(".b-header-nav-chain__links-list").props()).toHaveProperty(
 			"aria-label",

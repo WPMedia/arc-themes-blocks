@@ -65,20 +65,24 @@ const LargeManualPromo = ({ customFields }) => {
 		) : null;
 	};
 
-	const PromoHeading = () =>
-		showHeadline ? (
-			<Heading>
-				<Conditional
-					component={Link}
-					condition={linkURL}
-					href={formatURL(linkURL)}
-					openInNewTab={newTab}
-					onClick={registerSuccessEvent}
-				>
-					{headline}
-				</Conditional>
-			</Heading>
-		) : null;
+	const PromoHeading = () => {
+		if (showHeadline) {
+			return (
+				<Heading>
+					<Conditional
+						component={Link}
+						condition={linkURL}
+						href={formatURL(linkURL)}
+						openInNewTab={newTab}
+						onClick={registerSuccessEvent}
+					>
+						{headline}
+					</Conditional>
+				</Heading>
+			);
+		}
+		return null;
+	};
 
 	const PromoOverline = () => {
 		if (showOverline) {

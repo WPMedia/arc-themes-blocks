@@ -60,8 +60,7 @@ describe("the header navigation feature for the default output type", () => {
 				expect(navLeftDesktop).toHaveLength(1);
 				const searchWidget = navLeftDesktop.find(".nav-search");
 				expect(searchWidget).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".menu-btn button");
-				expect(menuWidget).toHaveLength(1);
+				expect(navLeftDesktop.text()).toContain("header-nav-chain-block.sections-button");
 			});
 
 			it("should render sections menu in the top-left navbar on mobile", () => {
@@ -70,7 +69,7 @@ describe("the header navigation feature for the default output type", () => {
 					".b-header-nav-chain__nav-left > .nav-components--mobile"
 				);
 				expect(navLeftDesktop).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".menu-btn button");
+				const menuWidget = navLeftDesktop.find("button");
 				expect(menuWidget).toHaveLength(1);
 			});
 
@@ -286,13 +285,15 @@ describe("the header navigation feature for the default output type", () => {
 			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop .menu-btn")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
 				.hostNodes()
 				.simulate("click");
 			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
 
 			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop .menu-btn")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
 				.hostNodes()
 				.simulate("click");
 			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
@@ -303,7 +304,8 @@ describe("the header navigation feature for the default output type", () => {
 			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop .menu-btn")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
 				.hostNodes()
 				.simulate("click");
 			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
@@ -317,7 +319,8 @@ describe("the header navigation feature for the default output type", () => {
 			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".b-header-nav-chain__nav-left > .nav-components--desktop .menu-btn")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
 				.hostNodes()
 				.simulate("click");
 			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);

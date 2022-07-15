@@ -25,7 +25,7 @@ const WidgetList = ({
 		const navWidgetType = getNavWidgetType(cFieldKey, customFields);
 		if (!!navWidgetType && navWidgetType !== "none") {
 			widgetList.push(
-				<div className="nav-widget" key={`${id}_${breakpoint}_${i}`}>
+				<React.Fragment key={`${id}_${breakpoint}_${i}`}>
 					<NavWidget
 						menuButtonClickAction={menuButtonClickAction}
 						placement={placement}
@@ -35,7 +35,7 @@ const WidgetList = ({
 					>
 						{children}
 					</NavWidget>
-				</div>
+				</React.Fragment>
 			);
 		}
 	}

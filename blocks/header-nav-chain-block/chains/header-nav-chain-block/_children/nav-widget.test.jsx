@@ -25,34 +25,26 @@ describe("<NavWidget/>", () => {
 	});
 
 	it('renders nav widget - arc search w/ "nav-bar" placement', () => {
-		const customSearchAction = jest.fn(() => {});
 		const placement = PLACEMENT_AREAS.NAV_BAR;
 		const cfg = WIDGET_CONFIG[placement];
-		const wrapper = shallow(
-			<NavWidget type="search" placement={placement} customSearchAction={customSearchAction} />
-		);
+		const wrapper = shallow(<NavWidget type="search" placement={placement} />);
 		expect(wrapper).toHaveLength(1);
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
 		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
-		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
 
 	it('renders nav widget - arc search w/ "section-menu" placement', () => {
-		const customSearchAction = jest.fn(() => {});
 		const placement = PLACEMENT_AREAS.SECTION_MENU;
 		const cfg = WIDGET_CONFIG[placement];
-		const wrapper = shallow(
-			<NavWidget type="search" placement={placement} customSearchAction={customSearchAction} />
-		);
+		const wrapper = shallow(<NavWidget type="search" placement={placement} />);
 		expect(wrapper).toHaveLength(1);
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
 		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
-		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
 
@@ -75,7 +67,7 @@ describe("<NavWidget/>", () => {
 		const wrapper = mount(<NavWidget type="menu" menuButtonClickAction={menuButtonClick} />);
 
 		expect(wrapper).toHaveLength(1);
-		const menuWidget = wrapper.find("button.menu-btn");
+		const menuWidget = wrapper.find("button");
 		expect(menuWidget).toHaveLength(1);
 		expect(menuWidget.prop("onClick")).toEqual(menuButtonClick);
 	});
@@ -86,7 +78,7 @@ describe("<NavWidget/>", () => {
 			<NavWidget type="menu" menuButtonClickAction={menuButtonClick} breakpoint="desktop" />
 		);
 
-		const menuWidget = wrapper.find("button.menu-btn");
+		const menuWidget = wrapper.find("button");
 		expect(menuWidget.text()).toBe("header-nav-chain-block.sections-button");
 		expect(menuWidget.find("Icon").length).toBe(1);
 		expect(menuWidget.find("svg")).toHaveLength(1);

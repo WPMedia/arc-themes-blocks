@@ -8,8 +8,8 @@ import QuerylySearch from "./queryly-search";
 import { WIDGET_CONFIG, PLACEMENT_AREAS } from "../nav-helper";
 
 const NavWidget = ({
+	breakpoint,
 	children = [],
-	customSearchAction,
 	menuButtonClickAction,
 	placement = PLACEMENT_AREAS.NAV_BAR,
 	position = 0,
@@ -25,7 +25,6 @@ const NavWidget = ({
 			<SearchBox
 				iconSize={WIDGET_CONFIG[placement]?.iconSize}
 				placeholderText={phrases.t("header-nav-chain-block.search-text")}
-				customSearchAction={customSearchAction}
 				alwaysOpen={WIDGET_CONFIG[placement]?.expandSearch}
 			/>
 		) : null) ||
@@ -42,9 +41,8 @@ const NavWidget = ({
 				iconRight={<Icon name="HamburgerMenu" />}
 				variant="secondary-reverse"
 				size="small"
-				className="menu-btn"
 			>
-				{phrases.t("header-nav-chain-block.sections-button")}
+				{breakpoint === "desktop" ? phrases.t("header-nav-chain-block.sections-button") : null}
 			</Button>
 		) : null);
 

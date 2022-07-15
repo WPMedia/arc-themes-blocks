@@ -185,31 +185,6 @@
 			@include scss.block-components("header-nav-chain-top-nav-components-desktop");
 			@include scss.block-properties("header-nav-chain-top-nav-components-desktop");
 		}
-
-		.nav-widget {
-			@include scss.block-components("header-nav-chain-top-nav-widget");
-			@include scss.block-properties("header-nav-chain-top-nav-widget");
-		}
-
-		.nav-widget:last-child {
-			@include scss.block-components("header-nav-chain-top-nav-widget-last-child");
-			@include scss.block-properties("header-nav-chain-top-nav-widget-last-child");
-		}
-
-		.menu-btn {
-			span {
-				@include scss.block-components("header-nav-chain-top-nav-menu-button-text");
-				@include scss.block-properties("header-nav-chain-top-nav-menu-button-text");
-			}
-
-			&:hover {
-				@include scss.block-components("header-nav-chain-top-nav-menu-button-hover");
-				@include scss.block-properties("header-nav-chain-top-nav-menu-button-hover");
-			}
-
-			@include scss.block-components("header-nav-chain-top-nav-menu-button");
-			@include scss.block-properties("header-nav-chain-top-nav-menu-button");
-		}
 	}
 
 	&__logo {

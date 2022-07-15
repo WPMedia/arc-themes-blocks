@@ -220,8 +220,8 @@
 		// --content-scale-width identifies the inner document width for header and content
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
-		"header-nav-chain-height": 64px,
-		"header-nav-chain-height-scrolled": 64px,
+		"header-nav-chain-height": 56px,
+		"header-nav-chain-height-scrolled": 56px,
 		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
 	),
 	$tokens: (
@@ -1099,7 +1099,7 @@
 					height: calc((100vh - var(--header-nav-chain-height-scrolled)) - var(--global-spacing-4)),
 				),
 				header-nav-chain-flyout-nav: (
-					height: calc((100vh - var(--header-nav-chain-height)) - var(--global-spacing-4)),
+					height: calc((100vh - var(--header-nav-chain-height-scrolled)) - var(--global-spacing-4)),
 					gap: 0,
 					font-weight: bold,
 					list-style: none,
@@ -1651,7 +1651,6 @@
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-2),
 				"header-nav-chain-height": 100px,
-				"header-nav-chain-height-scrolled": 64px,
 			),
 			components: (
 				carousel: (

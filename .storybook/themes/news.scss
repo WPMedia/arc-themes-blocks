@@ -903,11 +903,12 @@
 					z-index: 1,
 					components: (
 						icon: (
-							fill: var(--global-white),
+							fill: currentColor,
 							height: var(--global-spacing-5),
 							width: var(--global-spacing-5),
 						),
 						button: (
+							color: var(--global-white),
 							height: var(--global-spacing-7),
 							font-weight: var(--global-font-weight-7),
 							font-size: var(--global-font-size-4),
@@ -1062,9 +1063,6 @@
 					overflow-y: hidden,
 					width: 0,
 				),
-				header-nav-chain-flyout-overlay-closed-transition: (
-					transition: height 100ms ease-in-out 600ms,
-				),
 				header-nav-chain-flyout-nav-wrapper: (
 					z-index: 10,
 					background: var(--global-black),
@@ -1136,18 +1134,17 @@
 					background: transparent,
 					border: 0,
 					display: flex,
+					components: (
+						button-default: (
+							color: var(--icon-fill-color-subtle),
+						),
+						button-hover: (
+							color: var(--color-white),
+						),
+					),
 				),
-				header-nav-chain-flyout-nav-subsection-anchor-fill: (
-					fill: var(--icon-fill-color-subtle),
-				),
-				header-nav-chain-flyout-nav-subsection-anchor-open: (
-					background-color: var(--global-neutral-7),
-				),
-				header-nav-chain-flyout-nav-subsection-anchor-open-fill: (
-					fill: var(--global-white),
-				),
-				header-nav-chain-flyout-nav-subsection-anchor-hover-fill: (
-					fill: var(--global-white),
+				header-nav-chain-flyout-nav-subsection-caret-open: (
+					transform: rotate(180deg),
 				),
 				header-nav-chain-flyout-nav-subsection-container: (
 					display: none,
@@ -1744,22 +1741,7 @@
 					line-height: var(--global-line-height-4),
 				),
 				header-nav-chain: (
-					background-color: var(--global-black),
 					padding: var(--global-spacing-3) var(--global-spacing-5),
-					height: var(--header-nav-chain-height),
-					components: (
-						icon: (
-							fill: var(--global-white),
-							height: var(--global-spacing-5),
-							width: var(--global-spacing-5),
-						),
-						button: (
-							height: var(--global-spacing-7),
-						),
-					),
-				),
-				header-nav-chain-scrolled: (
-					height: var(--header-nav-chain-height-scrolled),
 				),
 				header-nav-chain-top-nav-components-mobile: (
 					display: none,

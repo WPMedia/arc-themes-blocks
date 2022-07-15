@@ -35,11 +35,6 @@
 		}
 
 		&.closed {
-			.section-menu {
-				@include scss.block-components("header-nav-chain-flyout-overlay-closed-transition");
-				@include scss.block-properties("header-nav-chain-flyout-overlay-closed-transition");
-			}
-
 			@include scss.block-components("header-nav-chain-flyout-overlay-closed");
 			@include scss.block-properties("header-nav-chain-flyout-overlay-closed");
 		}
@@ -107,29 +102,9 @@
 
 	&__subsection-anchor {
 		.submenu-caret {
-			svg {
-				&:hover {
-					@include scss.block-components(
-						"header-nav-chain-flyout-nav-subsection-anchor-hover-fill"
-					);
-					@include scss.block-properties(
-						"header-nav-chain-flyout-nav-subsection-anchor-hover-fill"
-					);
-				}
-
-				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-fill");
-				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-fill");
-			}
-
-			&.open {
-				svg {
-					transform: rotate(-180deg);
-					@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
-					@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open-fill");
-				}
-
-				@include scss.block-components("header-nav-chain-flyout-nav-subsection-anchor-open");
-				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-anchor-open");
+			&[aria-expanded="true"] {
+				@include scss.block-components("header-nav-chain-flyout-nav-subsection-caret-open");
+				@include scss.block-properties("header-nav-chain-flyout-nav-subsection-caret-open");
 			}
 			@include scss.block-components("header-nav-chain-flyout-nav-subsection-caret");
 			@include scss.block-properties("header-nav-chain-flyout-nav-subsection-caret");

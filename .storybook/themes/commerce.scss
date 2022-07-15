@@ -713,12 +713,9 @@
 				),
 				right-rail-main-right-rail: (
 					grid-column: initial,
-					padding: initial,
 				),
 				right-rail-main-interior-item: (
 					grid-column: initial,
-					padding: initial,
-					margin: 0 calc(-1 * var(--global-spacing-5)) 0 calc(-1 * var(--global-spacing-5)),
 				),
 				single-column-regular-main: (
 					components: (
@@ -952,7 +949,6 @@
 				),
 				right-rail-main-interior-item: (
 					grid-column: span 7,
-					margin: 0,
 				),
 				single-column-regular-main: (
 					components: (

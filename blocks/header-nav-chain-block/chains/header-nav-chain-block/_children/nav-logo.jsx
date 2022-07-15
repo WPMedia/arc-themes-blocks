@@ -2,12 +2,18 @@ import { Link } from "@wpmedia/arc-themes-components";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-const NavLogo = ({ mediumBreakpoint = 768, imageAltText, imageSource, blockClassName }) => {
+const showLogoAbove = 768;
+
+const NavLogo = ({ imageAltText, imageSource, blockClassName }) => {
 	const [isLogoVisible, setLogoVisibility] = useState(false);
 
 	// istanbul ignore next
 	const onScrollEvent = (evt) => {
 		if (!evt) {
+			return;
+		}
+		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+		if (vw < showLogoAbove) {
 			return;
 		}
 
@@ -31,22 +37,17 @@ const NavLogo = ({ mediumBreakpoint = 768, imageAltText, imageSource, blockClass
 		if (!mastHead) {
 			return undefined;
 		}
-		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		// on small viewports we do not need this
-		if (vw >= mediumBreakpoint) {
-			window.addEventListener("scroll", onScrollDebounced);
-			// istanbul ignore next
-			return () => {
-				window.removeEventListener("scroll", onScrollDebounced);
-			};
-		}
+		window.addEventListener("scroll", onScrollDebounced, { passive: true });
 		// istanbul ignore next
-		return undefined;
-	}, [onScrollDebounced, mediumBreakpoint]);
+		return () => {
+			window.removeEventListener("scroll", onScrollDebounced, { passive: true });
+		};
+	}, [onScrollDebounced]);
 
 	useEffect(() => {
 		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		if (vw < mediumBreakpoint) {
+
+		if (vw < showLogoAbove) {
 			setLogoVisibility(true);
 			return undefined;
 		}
@@ -62,7 +63,7 @@ const NavLogo = ({ mediumBreakpoint = 768, imageAltText, imageSource, blockClass
 		return () => {
 			clearTimeout(timerID);
 		};
-	}, [mediumBreakpoint]);
+	}, []);
 
 	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
 

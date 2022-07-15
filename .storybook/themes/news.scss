@@ -1095,11 +1095,8 @@
 				header-nav-chain-flyout-nav-components-desktop: (
 					display: none,
 				),
-				header-nav-chain-scrolled-flyout-nav: (
-					height: calc((100vh - var(--header-nav-chain-height-scrolled)) - var(--global-spacing-4)),
-				),
 				header-nav-chain-flyout-nav: (
-					height: calc((100vh - var(--header-nav-chain-height-scrolled)) - var(--global-spacing-4)),
+					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
 					gap: 0,
 					font-weight: bold,
 					list-style: none,

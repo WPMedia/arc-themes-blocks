@@ -266,7 +266,9 @@
 					line-height: var(--body-line-height),
 				),
 				button: (
-					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-color: transparent,
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
 					border-radius: var(--border-radius),
 					font-weight: var(--global-font-weight-7),
 					gap: var(--global-spacing-2),
@@ -289,6 +291,7 @@
 				button-default: (
 					background-color: var(--global-white),
 					border-color: var(--global-neutral-7),
+					border-width: var(--global-border-width-1),
 					color: var(--global-neutral-7),
 				),
 				button-primary: (
@@ -477,7 +480,7 @@
 					components: (
 						button-default: (
 							background: none,
-							border: none,
+							border-width: 0,
 							flex: 0 0 auto,
 						),
 						button-large: (
@@ -1436,9 +1439,13 @@
 					position: fixed,
 					top: 200px,
 					components: (
-						button-medium: (
-							background: transparent,
+						button: (
+							background-color: transparent,
+						),
+						button-default: (
 							border-width: 0,
+						),
+						button-medium: (
 							padding: 0 var(--global-spacing-3),
 						),
 					),
@@ -1800,12 +1807,11 @@
 				medium-manual-promo-show-image: (
 					components: (
 						heading: (
-							// hard-coded based on previous implementation and product requirements for such
-							margin-left: 39%,
-							width: 60%,
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
 						),
 						paragraph: (
-							margin-left: 39%,
+							margin-left: calc(33% + var(--global-spacing-6)),
 						),
 					),
 				),

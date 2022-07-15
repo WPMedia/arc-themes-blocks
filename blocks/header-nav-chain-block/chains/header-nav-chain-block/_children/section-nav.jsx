@@ -65,6 +65,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
 			<Button
 				type="button"
 				className="submenu-caret"
+				aria-expanded="false"
 				aria-label={phrases.t("header-nav-chain-block.sections-button-aria-label", {
 					item: item.display_name ?? item.name,
 				})}

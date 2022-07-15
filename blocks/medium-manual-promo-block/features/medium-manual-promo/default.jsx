@@ -39,13 +39,20 @@ const MediumManualPromo = ({ customFields }) => {
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
+
+	const availableImageURL = showImage ? imageURL || fallbackImage : null;
+	const headlineText = showHeadline ? headline : null;
+	const descriptionText = showDescription ? description : null;
+
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<article
-					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
+					className={`${BLOCK_CLASS_NAME}${
+						availableImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
+					}`}
 				>
-					{showImage ? (
+					{availableImageURL ? (
 						<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 							<Conditional
 								component={Link}
@@ -54,26 +61,25 @@ const MediumManualPromo = ({ customFields }) => {
 								openInNewTab={newTab}
 								onClick={registerSuccessEvent}
 							>
-								<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+								<Image alt={headline} src={availableImageURL} searchableField />
 							</Conditional>
 						</MediaItem>
 					) : null}
-					{showHeadline ? (
+
+					{headlineText ? (
 						<Heading>
-							{linkURL ? (
-								<Conditional
-									component={Link}
-									condition={linkURL}
-									href={formatURL(linkURL)}
-									openInNewTab={newTab}
-									onClick={registerSuccessEvent}
-								>
-									{headline}
-								</Conditional>
-							) : null}
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+							>
+								{headline}
+							</Conditional>
 						</Heading>
 					) : null}
-					{showDescription ? <Paragraph>{description}</Paragraph> : null}
+					{descriptionText ? <Paragraph>{description}</Paragraph> : null}
 				</article>
 			</HeadingSection>
 		</LazyLoad>

@@ -165,7 +165,7 @@
 		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
 		"checkout-block.empty-cart-message": "Select from one of our offers",
 		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.identity-social": "Connected as %{email}",
+		"checkout-block.identity-social": "Connected",
 		"checkout-block.identity-email": "Signed in as %{email}",
 		"checkout-block.identity-sign-out": "Sign out",
 		"checkout-block.email": "Email address",

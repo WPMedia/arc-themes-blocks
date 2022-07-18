@@ -363,15 +363,15 @@
 		"sv": "Connected Accounts"
 	},
 	"identity-block.connect-account": {
-		"de": "Connected as %{email}",
+		"de": "Connected",
 		"en": "Connected",
-		"es": "Connected as %{email}",
-		"fr": "Connected as %{email}",
-		"ja": "Connected as %{email}",
-		"ko": "Connected as %{email}",
-		"no": "Connected as %{email}",
-		"pt": "Connected as %{email}",
-		"sv": "Connected as %{email}"
+		"es": "Connected",
+		"fr": "Connected",
+		"ja": "Connected",
+		"ko": "Connected",
+		"no": "Connected",
+		"pt": "Connected",
+		"sv": "Connected"
 	},
 	"identity-block.disconnect-account": {
 		"de": "Disconnect",

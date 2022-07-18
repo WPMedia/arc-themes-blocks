@@ -1,13 +1,13 @@
 {
 	"overline-sponsored-content": {
-		"de": "Werblicher Inhalt",
+		"de": "Sponsored Content",
 		"en": "Sponsored Content",
-		"es": "Contenido patrocinado",
-		"fr": "Contenu sponsorisé",
-		"ja": "スポンサー付きコンテンツ",
+		"es": "Sponsored Content",
+		"fr": "Sponsored Content",
+		"ja": "Sponsored Content",
 		"ko": "Sponsored Content",
-		"no": "Sponset innhold",
-		"pt": "Conteúdo patrocinado",
-		"sv": "Sponsrat innehåll"
+		"no": "Sponsored Content",
+		"pt": "Sponsored Content",
+		"sv": "Sponsored Content"
 	}
 }

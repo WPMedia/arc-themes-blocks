@@ -65,24 +65,20 @@ const LargeManualPromo = ({ customFields }) => {
 		) : null;
 	};
 
-	const PromoHeading = () => {
-		if (showHeadline) {
-			return (
-				<Heading>
-					<Conditional
-						component={Link}
-						condition={linkURL}
-						href={formatURL(linkURL)}
-						openInNewTab={newTab}
-						onClick={registerSuccessEvent}
-					>
-						{headline}
-					</Conditional>
-				</Heading>
-			);
-		}
-		return null;
-	};
+	const PromoHeading = () =>
+		showHeadline && headline ? (
+			<Heading>
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					{headline}
+				</Conditional>
+			</Heading>
+		) : null;
 
 	const PromoOverline = () => {
 		if (showOverline && overline) {
@@ -94,7 +90,8 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	};
 
-	const PromoDescription = () => (showDescription ? <Paragraph>{description}</Paragraph> : null);
+	const PromoDescription = () =>
+		showDescription && description ? <Paragraph>{description}</Paragraph> : null;
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -117,7 +114,6 @@ const LargeManualPromo = ({ customFields }) => {
 LargeManualPromo.propTypes = {
 	customFields: PropTypes.shape({
 		headline: PropTypes.string.tag({
-			defaultValue: "",
 			label: "Headline",
 			group: "Configure Content",
 		}),
@@ -139,7 +135,6 @@ LargeManualPromo.propTypes = {
 			searchable: "image",
 		}),
 		linkURL: PropTypes.string.tag({
-			defaultValue: "",
 			label: "Link URL",
 			group: "Configure Content",
 		}),

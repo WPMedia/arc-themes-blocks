@@ -364,7 +364,7 @@
 	},
 	"identity-block.connect-account": {
 		"de": "Connected as %{email}",
-		"en": "Connected as %{email}",
+		"en": "Connected",
 		"es": "Connected as %{email}",
 		"fr": "Connected as %{email}",
 		"ja": "Connected as %{email}",

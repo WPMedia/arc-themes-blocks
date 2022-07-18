@@ -14,7 +14,9 @@ jest.mock("fusion:properties", () =>
 
 jest.mock("fusion:intl", () => ({
 	__esModule: true,
-	default: jest.fn(() => ({ t: jest.fn((phrase) => phrase) })),
+	default: jest.fn((locale) => ({
+		t: jest.fn((phrase) => require("../../../intl.json")[phrase][locale]),
+	})),
 }));
 
 describe("SocialEditableSection", () => {
@@ -58,6 +60,6 @@ describe("SocialEditableSection", () => {
 		}));
 
 		const wrapper = mount(<SocialEditableSection hasFacebook hasGoogle hasPasswordAccount />);
-		expect(wrapper.find("span").at(0).text()).toEqual("identity-block.connect-account ");
+		expect(wrapper.find("span").at(0).text()).toEqual("Connected ");
 	});
 });

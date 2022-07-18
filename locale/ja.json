@@ -2,7 +2,9 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "ギャラリー",
 		"promo-label.video-text": "ビデオ",
-		"overline.sponsored-content": "スポンサー付きコンテンツ"
+		"overline.sponsored-content": "スポンサー付きコンテンツ",
+		"byline.by-text": "担当者：",
+		"byline.and-text": "및"
 	},
 	"global-phrases-block": {
 		"global.by-text": "担当者：",

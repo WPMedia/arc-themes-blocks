@@ -2,7 +2,9 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "Bildspel",
 		"promo-label.video-text": "Video",
-		"overline.sponsored-content": "Sponsrat innehåll"
+		"overline.sponsored-content": "Sponsrat innehåll",
+		"byline.by-text": "Av",
+		"byline.and-text": "och"
 	},
 	"global-phrases-block": {
 		"global.by-text": "Av",

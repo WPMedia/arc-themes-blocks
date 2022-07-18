@@ -2,7 +2,9 @@
   "shared-styles": {
     "promo-label.gallery-text": "Gallery",
     "promo-label.video-text": "Video",
-    "overline.sponsored-content": "Sponsored Content"
+    "overline.sponsored-content": "Sponsored Content",
+    "byline.by-text": "By",
+    "byline.and-text": "and"
   },
   "global-phrases-block": {
     "global.by-text": "By",

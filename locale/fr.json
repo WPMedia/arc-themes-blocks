@@ -2,7 +2,9 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "Galerie",
 		"promo-label.video-text": "Vidéo",
-		"overline.sponsored-content": "Contenu sponsorisé"
+		"overline.sponsored-content": "Contenu sponsorisé",
+		"byline.by-text": "Par",
+		"byline.and-text": "et"
 	},
 	"global-phrases-block": {
 		"global.by-text": "Par",

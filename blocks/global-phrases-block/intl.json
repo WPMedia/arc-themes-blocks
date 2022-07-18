@@ -130,5 +130,15 @@
 		"no": "(Åpnes i et nytt vindu)",
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
+	},
+	"global.byline-block-and-text": {
+		"en": "and",
+		"sv": "och",
+		"no": "og",
+		"fr": "et",
+		"de": "und",
+		"es": "y",
+		"ja": "および",
+		"ko": "및"
 	}
 }

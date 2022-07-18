@@ -5,7 +5,7 @@ import getProperties from "fusion:properties";
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { LazyLoad, localizeDateTime, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import {
 	Conditional,
 	Grid,
@@ -45,7 +45,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		imageOrVideoLabelText,
 		aspectRatio,
 		// shrinkToFit,
-		// viewportPercentage,
+		viewportPercentage,
 	} = customFields;
 
 	const content =
@@ -150,7 +150,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		},
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-	const bylineNodes = formatAuthors(content?.credits?.by, phrases.t("byline-block.and-text"));
+	const bylineNodes = formatAuthors(
+		content?.credits?.by,
+		phrases.t("global.byline-block-and-text")
+	);
 
 	// show the override url over the content image if it's present
 	// get the image from content if no override
@@ -209,13 +212,18 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							assisstiveHidden
 						>
 							{playVideoInPlace ? (
-								<Video aspectRatio={aspectRatio} embedMarkup={customFields?.content?.embed_html} />
+								<Video
+									aspectRatio={aspectRatio}
+									className={`${BLOCK_CLASS_NAME}__video`}
+									embedMarkup={customFields?.content?.embed_html}
+									viewportPercentage={viewportPercentage}
+								/>
 							) : (
 								<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
 							)}
 							{showImageOrVideoLabel ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Camera"} />
+									<Icon name={showVideoLabel ? "Play" : "Instagram"} fill="#FFFFF" />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
 								</div>
 							) : null}
@@ -340,7 +348,24 @@ LargePromo.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
-		...videoPlayerCustomFields(),
+		shrinkToFit: PropTypes.bool.tag({
+			name: "Shrink video to fit screen",
+			description:
+				"Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.",
+			defaultValue: true,
+			hidden: true,
+			group: "Video Settings",
+		}),
+		viewportPercentage: PropTypes.number.tag({
+			name: "Percentage of viewport height",
+			description:
+				"With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.",
+			min: 0,
+			max: 150,
+			defaultValue: 65,
+			hidden: true,
+			group: "Video Settings",
+		}),
 	}),
 };
 

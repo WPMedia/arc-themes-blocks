@@ -58,6 +58,6 @@ describe("SocialEditableSection", () => {
 		}));
 
 		const wrapper = mount(<SocialEditableSection hasFacebook hasGoogle hasPasswordAccount />);
-		expect(wrapper.find("span").at(0).text()).toEqual("Connected ");
+		expect(wrapper.find("span").at(0).text()).toEqual("identity-block.connect-account ");
 	});
 });

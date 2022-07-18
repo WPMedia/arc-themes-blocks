@@ -236,7 +236,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
 						) : null}
 						<Stack>
-							{showHeadline ? (
+							{showHeadline && content?.headlines?.basic ? (
 								<Heading>
 									<Conditional
 										component={Link}

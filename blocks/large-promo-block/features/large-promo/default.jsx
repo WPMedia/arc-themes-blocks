@@ -264,7 +264,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 										</Attribution>
 									) : null}
 									{showByline && showDate ? <Separator /> : null}
-									{showDate ? (
+									{showDate && content?.display_date ? (
 										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
 									) : null}
 								</div>

@@ -14,9 +14,7 @@ jest.mock("fusion:properties", () =>
 
 jest.mock("fusion:intl", () => ({
 	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../../intl.json")[phrase][locale]),
-	})),
+	default: jest.fn(() => ({ t: jest.fn((phrase) => phrase) })),
 }));
 
 describe("SocialEditableSection", () => {

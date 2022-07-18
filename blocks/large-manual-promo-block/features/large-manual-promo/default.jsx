@@ -117,6 +117,7 @@ const LargeManualPromo = ({ customFields }) => {
 LargeManualPromo.propTypes = {
 	customFields: PropTypes.shape({
 		headline: PropTypes.string.tag({
+			defaultValue: "",
 			label: "Headline",
 			group: "Configure Content",
 		}),
@@ -138,6 +139,7 @@ LargeManualPromo.propTypes = {
 			searchable: "image",
 		}),
 		linkURL: PropTypes.string.tag({
+			defaultValue: "",
 			label: "Link URL",
 			group: "Configure Content",
 		}),

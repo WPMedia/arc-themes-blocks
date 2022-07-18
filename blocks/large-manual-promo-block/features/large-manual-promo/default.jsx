@@ -85,7 +85,7 @@ const LargeManualPromo = ({ customFields }) => {
 	};
 
 	const PromoOverline = () => {
-		if (showOverline) {
+		if (showOverline && overline) {
 			if (overlineURL) {
 				return <Overline href={overlineURL}>{overline}</Overline>;
 			}

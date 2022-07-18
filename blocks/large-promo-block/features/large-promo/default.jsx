@@ -209,7 +209,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							condition={content?.websites?.[arcSite]?.website_url}
 							href={formatURL(content?.websites?.[arcSite]?.website_url)}
 							onClick={registerSuccessEvent}
-							assisstiveHidden
+							assistiveHidden
 						>
 							{playVideoInPlace ? (
 								<Video

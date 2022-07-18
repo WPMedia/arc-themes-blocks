@@ -19,9 +19,35 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 const BLOCK_CLASS_NAME = "b-xl-manual-promo";
 
+const PromoHeadline = ({ children, href, openInNewTab }) => (
+	<HeadingSection>
+		<Heading>
+			<Conditional component={Link} condition={href} href={href} openInNewTab={openInNewTab}>
+				{children}
+			</Conditional>
+		</Heading>
+	</HeadingSection>
+);
+
+const PromoImage = ({ alt, href, imageRatio, openInNewTab, src }) => {
+	const { searchableField } = useEditableContent();
+
+	return (
+		<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+			<Conditional component={Link} condition={href} href={href} openInNewTab={openInNewTab}>
+				<Image
+					alt={alt}
+					src={src}
+					searchableField
+					data-aspect-ratio={imageRatio?.replace(":", "/")}
+				/>
+			</Conditional>
+		</MediaItem>
+	);
+};
+
 const ExtraLargeManualPromo = ({ customFields }) => {
 	const { arcSite, isAdmin } = useFusionContext();
-	const { searchableField } = useEditableContent();
 	const { fallbackImage } = getProperties(arcSite);
 	const {
 		description,
@@ -42,44 +68,33 @@ const ExtraLargeManualPromo = ({ customFields }) => {
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
-	return showOverline || showHeadline || showImage || showDescription ? (
+
+	const availableDescription = showDescription ? description : null;
+	const availableHeadline = showHeadline ? headline : null;
+	const availableImageURL = showImage ? imageURL || fallbackImage : null;
+	const availableOverline = showOverline ? overline : null;
+
+	return availableOverline || availableHeadline || availableImageURL || availableDescription ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<article className={BLOCK_CLASS_NAME}>
-				{showOverline ? <Overline href={overlineURL}>{overline}</Overline> : null}
-				{showHeadline || showImage || showDescription ? (
+				{availableOverline ? <Overline href={overlineURL}>{availableOverline}</Overline> : null}
+				{availableHeadline || availableImageURL || availableDescription ? (
 					<Stack>
-						{showHeadline ? (
-							<HeadingSection>
-								<Heading>
-									<Conditional
-										component={Link}
-										condition={linkURL}
-										href={linkURL}
-										openInNewTab={newTab}
-									>
-										{headline}
-									</Conditional>
-								</Heading>
-							</HeadingSection>
+						{availableHeadline ? (
+							<PromoHeadline href={linkURL} openInNewTab={newTab}>
+								{availableHeadline}
+							</PromoHeadline>
 						) : null}
-						{showImage ? (
-							<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
-								<Conditional
-									component={Link}
-									condition={linkURL}
-									href={linkURL}
-									openInNewTab={newTab}
-								>
-									<Image
-										alt={headline}
-										src={imageURL || fallbackImage}
-										searchableField
-										data-aspect-ratio={imageRatio?.replace(":", "/")}
-									/>
-								</Conditional>
-							</MediaItem>
+						{availableImageURL ? (
+							<PromoImage
+								alt={headline}
+								href={linkURL}
+								imageRatio={imageRatio}
+								openInNewTab={newTab}
+								src={availableImageURL}
+							/>
 						) : null}
-						{showDescription ? <Paragraph>{description}</Paragraph> : null}
+						{availableDescription ? <Paragraph>{availableDescription}</Paragraph> : null}
 					</Stack>
 				) : null}
 			</article>

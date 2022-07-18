@@ -696,7 +696,6 @@
 				right-rail-rail-container: (
 					margin: 0 auto var(--global-spacing-6) auto,
 					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
 					components: (
 						grid: (
 							template-columns: 1fr,

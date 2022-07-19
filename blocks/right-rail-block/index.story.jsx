@@ -10,13 +10,7 @@ export default {
 	},
 };
 
-const getStyles = (name, layoutItemStyles) => {
-	const defaults = layoutItemStyles.default;
-
-	return { ...defaults, ...layoutItemStyles[name] };
-};
-
-const layoutItemStylesBasic = {
+const layoutItemStyles = {
 	navigation: {
 		backgroundColor: "rgb(236 155 223)",
 		height: "100px",
@@ -36,13 +30,29 @@ const layoutItemStylesBasic = {
 		textAlign: "center",
 	},
 };
+const getStyles = (name) => {
+	const defaults = layoutItemStyles.default;
 
-const layoutItemBasic = (name) => <div style={getStyles(name, layoutItemStylesBasic)}>{name}</div>;
+	return { ...defaults, ...layoutItemStyles[name] };
+};
 
-const layoutAreasBasic = ["navigation", "fullWidth1", "main", "rightRail", "fullWidth2", "footer"];
+const layoutItem = (name) => <div style={getStyles(name)}>{name}</div>;
+
+const layoutAreas = ["navigation", "fullWidth1", "main", "rightRail", "fullWidth2", "footer"];
 
 export const basic = () => (
 	<div id="fusion-app" className="layout-section">
-		<RightRailBlock children={layoutAreasBasic.map((name) => layoutItemBasic(name))} />
+		<RightRailBlock children={layoutAreas.map((name) => layoutItem(name))} />
 	</div>
 );
+
+export const commerce = () => (
+	<div id="fusion-app" className="layout-section">
+		<RightRailBlock children={layoutAreas.map((name) => layoutItem(name))} />
+	</div>
+);
+commerce.parameters = {
+	cssVariables: {
+		theme: "commerce",
+	},
+};

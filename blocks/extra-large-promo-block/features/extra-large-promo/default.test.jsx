@@ -8,8 +8,7 @@ import mockData from "./mock-data";
 import mockDataSponsoredVideo from "./mock-data-sponsored";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	extractVideoEmbedFromStory: jest.fn(() => "video url"),
-	localizeDateTime: jest.fn(() => "2000-01-01T00:00:00Z"),
+	...jest.requireActual("@wpmedia/engine-theme-sdk"),
 	LazyLoad: ({ children }) => <>{children}</>,
 }));
 
@@ -102,7 +101,7 @@ describe("the extra large promo feature", () => {
 			showDate: true,
 		};
 		render(<ExtraLargePromo customFields={config} />);
-		expect(screen.queryByText("2000-01-01T00:00:00Z")).not.toBeNull();
+		expect(screen.queryByText("January 30, 2020", { exact: false })).not.toBeNull();
 	});
 
 	it("should returned a sponsored overline if it's sponsored content", () => {

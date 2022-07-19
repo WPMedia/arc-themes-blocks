@@ -11,6 +11,7 @@ import {
 	Conditional,
 	Date as DateComponent,
 	formatAuthors,
+	getVideoFromANS,
 	Heading,
 	HeadingSection,
 	Image,
@@ -25,7 +26,7 @@ import {
 	Video,
 } from "@wpmedia/arc-themes-components";
 
-import { extractVideoEmbedFromStory, LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
 import { extractImageFromStory } from "@wpmedia/resizer-image-block";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
@@ -174,7 +175,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	let [overlineText, overlineUrl] = [sectionText, sectionUrl];
 
 	if (content?.owner?.sponsored) {
-		overlineText = content?.label?.basic?.text || phrases.t("global.overline-sponsored-content");
+		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
 		overlineUrl = null;
 	} else if (shouldUseLabel) {
 		[overlineText, overlineUrl] = [labelText, labelUrl];
@@ -183,7 +184,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const embedMarkup = playVideoInPlace && extractVideoEmbedFromStory(content);
+	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL = imageOverrideURL || extractImageFromStory(content);

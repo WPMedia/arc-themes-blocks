@@ -1,6 +1,6 @@
 # @wpmedia/commerce-product-content-source-block
 
-A Fusion content source for fetching a single product from Arc Commerce
+A Fusion content source for fetching a single product from Arc Commerce.
 
 ## Configurable Params
 

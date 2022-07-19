@@ -1218,6 +1218,25 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
+				small-promo: (
+					display: grid,
+					gap: var(--global-spacing-5),
+					grid-template-columns: 1fr,
+					components: (
+						heading: (
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
+						),
+					),
+				),
+				small-promo-left: (
+					gap: var(--global-spacing-6),
+					grid-template-columns: 1fr 2fr,
+				),
+				small-promo-right: (
+					gap: var(--global-spacing-6),
+					grid-template-columns: 2fr 1fr,
+				),
 				tag-title: (
 					components: (
 						heading: (
@@ -1687,6 +1706,7 @@
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/small-manual-promo-block";
+@use "../../blocks/small-promo-block";
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/tag-title-block";
 @use "../../blocks/triple-chain-block";

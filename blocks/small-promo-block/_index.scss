@@ -1,0 +1,26 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-small-promo {
+	&--above {
+		@include scss.block-properties("small-promo-above");
+		@include scss.block-components("small-promo-above");
+	}
+
+	&--below {
+		@include scss.block-properties("small-promo-below");
+		@include scss.block-components("small-promo-below");
+	}
+
+	&--left {
+		@include scss.block-properties("small-promo-left");
+		@include scss.block-components("small-promo-left");
+	}
+
+	&--right {
+		@include scss.block-properties("small-promo-right");
+		@include scss.block-components("small-promo-right");
+	}
+
+	@include scss.block-properties("small-promo");
+	@include scss.block-components("small-promo");
+}

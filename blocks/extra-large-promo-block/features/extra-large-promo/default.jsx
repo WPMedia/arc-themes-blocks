@@ -231,8 +231,8 @@ const ExtraLargePromo = ({ customFields }) => {
 								<Join separator={Separator}>
 									{hasAuthors ? (
 										<Join separator={() => " "}>
-											{phrases.t("global.byline-by-text")}
-											{formatAuthors(content?.credits?.by, phrases.t("global.byline-and-text"))}
+											{phrases.t("global.by-text")}
+											{formatAuthors(content?.credits?.by, phrases.t("global.and-text"))}
 										</Join>
 									) : null}
 									{showDate ? (

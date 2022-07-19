@@ -131,28 +131,6 @@
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
 	},
-	"global.byline-by-text": {
-		"de": "Von",
-		"en": "By",
-		"es": "Por",
-		"fr": "Par",
-		"ja": "担当者：",
-		"ko": "저작자",
-		"no": "Av",
-		"pt": "Por",
-		"sv": "Av"
-	},
-	"global.byline-and-text": {
-		"de": "und",
-		"en": "and",
-		"es": "y",
-		"fr": "et",
-		"ja": "및",
-		"ko": "및",
-		"no": "og",
-		"pt": "e",
-		"sv": "och"
-	},
 	"global.overline-sponsored-content": {
 		"de": "Werblicher Inhalt",
 		"en": "Sponsored Content",

@@ -93,9 +93,7 @@ describe("the extra large promo feature", () => {
 		};
 		const { getByText } = render(<ExtraLargePromo customFields={config} />);
 		expect(
-			getByText(
-				"global.byline-by-text Example Author1, Example Author2, global.byline-and-text Example Author3"
-			)
+			getByText("global.by-text Example Author1, Example Author2, global.and-text Example Author3")
 		).not.toBeNull();
 	});
 

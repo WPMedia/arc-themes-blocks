@@ -79,6 +79,17 @@ export const imageLeft = () => {
 	return <SmallPromo customFields={customFields} />;
 };
 
+export const imageRight = () => {
+	const customFields = {
+		...sampleData,
+		imagePosition: "right",
+		showHeadline: true,
+		showImage: true,
+	};
+
+	return <SmallPromo customFields={customFields} />;
+};
+
 export const imageAbove = () => {
 	const customFields = {
 		...sampleData,

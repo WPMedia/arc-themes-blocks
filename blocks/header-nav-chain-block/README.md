@@ -2,15 +2,26 @@
 
 This block is intended to be used as the header navigation chain block.
 
-## Acceptance Criteria
-
 ## Props
 
-## ANS Schema
-
-Outline any schema information requirements necessary to know for ths block
-
-### ANS Fields
+| **Prop**                                | **Required** | **Type**                                                                          | **Description**                                                                                                                                            |
+| --------------------------------------- | ------------ | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Logo alignment**                      | yes          | String, One of: "center" or "left"                                                | Alignment of the nav logo                                                                                                                                  |
+| **showHorizontalSeperatorDots**         | yes          | Boolean                                                                           | Show dot separators between top nav links                                                                                                                  |
+| **ariaLabel**                           | yes          | String                                                                            | The label is provided to assistive technologies to provide it with a unique name for the header nav landmark - defaults to "Sections Menu" if left blank   |
+| **ariaLabelLink**                       | yes          | String                                                                            | The label is provided to assistive technologies to provide it with a unique name for the header links nav landmark - defaults to "Top Links" if left blank |
+| **Sections Menu hierarchy**             | yes          | contentConfig                                                                     | Menu section definitions                                                                                                                                   |
+| **Horizontal Links hierarchy**          | yes          | contentConfig                                                                     | Menu site links                                                                                                                                            |
+| **Left Component 1 - Desktop**          | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Left desktop widget main nav placement area                                                                                                                |
+| **Left Component 2 - Desktop**          | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Secondary left desktop widget main nav placement area                                                                                                      |
+| **Right Component 1 - Desktop**         | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Right desktop widget main nav placement area                                                                                                               |
+| **Right Component 2 - Desktop**         | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Secondary right desktop widget main nav placement area                                                                                                     |
+| **Sections Menu Component 1 - Desktop** | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Desktop widget flyout placement area                                                                                                                       |
+| **Sections Menu Component 2 - Desktop** | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Secondary desktop widget flyout placement area                                                                                                             |
+| **Left Component 1 - Mobile**           | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Left mobile widget main nav placement area                                                                                                                 |
+| **Right Component 1 - Mobile**          | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Right mobile widget main nav placement area                                                                                                                |
+| **Sections Menu Component 1 - Mobile**  | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Mobile widget flyout placement area                                                                                                                        |
+| **Sections Menu Component 2 - Mobile**  | No           | String, One of: "None", "Arc Search", "Queryly Search", "Sections Menu", "Custom" | Secondary mobile widget flyout placement area                                                                                                              |
 
 ## Internationalization fields
 
@@ -19,13 +30,9 @@ Outline any schema information requirements necessary to know for ths block
 | `header-nav-chain-block.sections-button` | `Sections`        |
 | `header-nav-chain-block.search-text`     | `Search`          |
 
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
 ### Event Listening
 
-## Additional Considerations
+This block does not emit any events.
 
 ### Custom Search Action
 

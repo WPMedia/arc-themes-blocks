@@ -255,7 +255,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 									{showByline && bylineNodes?.length > 0 ? (
 										<Attribution>
 											<span className={`${BLOCK_CLASS_NAME}__by`}>
-												{phrases.t("byline-block.by-text")}
+												{phrases.t("global.by-text")}
 											</span>{" "}
 											<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
 										</Attribution>

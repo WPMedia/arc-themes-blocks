@@ -150,10 +150,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		},
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-	const bylineNodes = formatAuthors(
-		content?.credits?.by,
-		phrases.t("global.byline-block-and-text")
-	);
+	const bylineNodes = formatAuthors(content?.credits?.by, phrases.t("global.and-text"));
 
 	// show the override url over the content image if it's present
 	// get the image from content if no override

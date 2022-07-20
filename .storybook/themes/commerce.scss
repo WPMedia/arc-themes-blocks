@@ -627,6 +627,23 @@
 						),
 					),
 				),
+				product-information: (
+					components: (
+						heading: (
+							color: var(--global-black),
+							font-size: var(--global-font-size-9),
+							font-weight: var(--global-font-weight-7),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+						price: (
+							color: var(--text-color),
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-4),
+						),
+					),
+				),
 				quilted-image: (
 					margin-left: auto,
 					margin-right: auto,
@@ -929,6 +946,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/single-column-layout-block";

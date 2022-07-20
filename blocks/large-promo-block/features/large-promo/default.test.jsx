@@ -133,7 +133,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
+			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
@@ -156,7 +156,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
+			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
@@ -179,7 +179,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
+			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M Doe"
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
@@ -225,7 +225,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
+			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
@@ -248,7 +248,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
 		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
+			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
 		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});

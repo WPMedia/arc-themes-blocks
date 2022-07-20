@@ -66,7 +66,7 @@ const LargeManualPromo = ({ customFields }) => {
 	};
 
 	const PromoHeading = () =>
-		showHeadline ? (
+		showHeadline && headline ? (
 			<Heading>
 				<Conditional
 					component={Link}
@@ -81,7 +81,7 @@ const LargeManualPromo = ({ customFields }) => {
 		) : null;
 
 	const PromoOverline = () => {
-		if (showOverline) {
+		if (showOverline && overline) {
 			if (overlineURL) {
 				return <Overline href={overlineURL}>{overline}</Overline>;
 			}
@@ -90,7 +90,8 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	};
 
-	const PromoDescription = () => (showDescription ? <Paragraph>{description}</Paragraph> : null);
+	const PromoDescription = () =>
+		showDescription && description ? <Paragraph>{description}</Paragraph> : null;
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>

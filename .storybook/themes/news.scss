@@ -1346,7 +1346,7 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--global-font-size-10),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
+							line-height: 1.3,
 						),
 						link: (
 							font-family: inherit,
@@ -1365,7 +1365,7 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--global-font-size-10),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
+							line-height: 1.3,
 						),
 						link: (
 							font-family: inherit,
@@ -1648,7 +1648,7 @@
 							align-self: center,
 							font-size: var(--global-font-size-15),
 							justify-content: center,
-							line-height: var(--global-line-height-3),
+							line-height: 1.2,
 						),
 						overline: (
 							display: flex,
@@ -1665,7 +1665,7 @@
 							align-self: center,
 							font-size: var(--global-font-size-15),
 							justify-content: center,
-							line-height: var(--global-line-height-3),
+							line-height: 1.2,
 						),
 						overline: (
 							display: flex,

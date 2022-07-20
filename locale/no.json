@@ -2,7 +2,6 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "Bildegalleri",
 		"promo-label.video-text": "Video",
-		"overline.sponsored-content": "Sponset innhold",
 		"byline.by-text": "Av",
 		"byline.and-text": "og"
 	},
@@ -20,7 +19,8 @@
 		"global.social-linkedin": "LinkedIn",
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-post",
-		"global.opens-in-new-window": "(Åpnes i et nytt vindu)"
+		"global.opens-in-new-window": "(Åpnes i et nytt vindu)",
+		"global.sponsored-content": "Sponset innhold"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korreksjon",
@@ -443,8 +443,5 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"overline-block": {
-		"overline-sponsored-content": "Sponset innhold"
 	}
 }

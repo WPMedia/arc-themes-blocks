@@ -2,7 +2,6 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "Galeria",
 		"promo-label.video-text": "Vídeo",
-		"overline.sponsored-content": "Conteúdo patrocinado",
 		"byline.by-text": "Por",
 		"byline.and-text": "e"
 	},
@@ -20,7 +19,8 @@
 		"global.social-linkedin": "LinkedIn",
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-mail",
-		"global.opens-in-new-window": "(Abre numa nova janela)"
+		"global.opens-in-new-window": "(Abre numa nova janela)",
+		"global.sponsored-content": "Conteúdo patrocinado"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Correção",
@@ -443,8 +443,5 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"overline-block": {
-		"overline-sponsored-content": "Conteúdo patrocinado"
 	}
 }

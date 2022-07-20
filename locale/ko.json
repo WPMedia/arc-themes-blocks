@@ -2,7 +2,6 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "갤러리",
 		"promo-label.video-text": "비디오",
-		"overline.sponsored-content": "Sponsored Content",
 		"byline.by-text": "저작자",
 		"byline.and-text": "및"
 	},
@@ -20,7 +19,8 @@
 		"global.social-linkedin": "LinkedIn",
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "이메일 전송",
-		"global.opens-in-new-window": "(새 창에서 열기)"
+		"global.opens-in-new-window": "(새 창에서 열기)",
+		"global.sponsored-content": "Sponsored Content"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "정정",
@@ -443,8 +443,5 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"overline-block": {
-		"overline-sponsored-content": "Sponsored Content"
 	}
 }

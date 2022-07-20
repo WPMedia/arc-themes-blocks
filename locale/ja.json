@@ -2,7 +2,6 @@
 	"shared-styles": {
 		"promo-label.gallery-text": "ギャラリー",
 		"promo-label.video-text": "ビデオ",
-		"overline.sponsored-content": "スポンサー付きコンテンツ",
 		"byline.by-text": "担当者：",
 		"byline.and-text": "및"
 	},
@@ -20,7 +19,8 @@
 		"global.social-linkedin": "LinkedIn",
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "メールアドレス",
-		"global.opens-in-new-window": "（新しいウィンドウで開きます）"
+		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
+		"global.sponsored-content": "スポンサー付きコンテンツ"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "修正",
@@ -443,8 +443,5 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"overline-block": {
-		"overline-sponsored-content": "スポンサー付きコンテンツ"
 	}
 }

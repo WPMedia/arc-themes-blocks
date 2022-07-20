@@ -77,15 +77,15 @@
 		"sv": "Contact Info"
 	},
 	"checkout-block.identity-social": {
-		"de": "Connected as %{email}",
-		"en": "Connected as %{email}",
-		"es": "Connected as %{email}",
-		"fr": "Connected as %{email}",
-		"ja": "Connected as %{email}",
-		"ko": "Connected as %{email}",
-		"no": "Connected as %{email}",
-		"pt": "Connected as %{email}",
-		"sv": "Connected as %{email}"
+		"de": "Connected",
+		"en": "Connected",
+		"es": "Connected",
+		"fr": "Connected",
+		"ja": "Connected",
+		"ko": "Connected",
+		"no": "Connected",
+		"pt": "Connected",
+		"sv": "Connected"
 	},
 	"checkout-block.identity-email": {
 		"de": "Signed in as %{email}",

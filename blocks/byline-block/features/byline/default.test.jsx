@@ -8,12 +8,6 @@ import Byline from "./default";
 
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:themes", () => jest.fn(() => ({})));
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-	})),
-}));
 
 describe("Given byline", () => {
 	it("should return a prefix and name element", () => {
@@ -33,7 +27,7 @@ describe("Given byline", () => {
 		});
 
 		const { container } = render(<Byline />);
-		expect(container.textContent).toEqual("By John Doe");
+		expect(container.textContent).toEqual("global.by-text John Doe");
 	});
 
 	it("should return nothing if the credits are not provided", () => {

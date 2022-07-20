@@ -1,4 +1,26 @@
 {
+	"global.by-text": {
+		"de": "Von",
+		"en": "By",
+		"es": "Por",
+		"fr": "Par",
+		"ja": "担当者：",
+		"ko": "저작자",
+		"no": "Av",
+		"pt": "Por",
+		"sv": "Av"
+	},
+	"global.and-text": {
+		"de": "und",
+		"en": "and",
+		"es": "y",
+		"fr": "et",
+		"ja": "및",
+		"ko": "및",
+		"no": "og",
+		"pt": "e",
+		"sv": "och"
+	},
 	"global.gallery-expand-button": {
 		"de": "Erweitern",
 		"en": "Expand",
@@ -131,14 +153,15 @@
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
 	},
-	"global.byline-block-and-text": {
-		"en": "and",
-		"sv": "och",
-		"no": "og",
-		"fr": "et",
-		"de": "und",
-		"es": "y",
-		"ja": "および",
-		"ko": "및"
+	"global.sponsored-content": {
+		"de": "Werblicher Inhalt",
+		"en": "Sponsored Content",
+		"es": "Contenido patrocinado",
+		"fr": "Contenu sponsorisé",
+		"ja": "スポンサー付きコンテンツ",
+		"ko": "Sponsored Content",
+		"no": "Sponset innhold",
+		"pt": "Conteúdo patrocinado",
+		"sv": "Sponsrat innehåll"
 	}
 }

@@ -42,16 +42,5 @@
 		"no": "og",
 		"pt": "e",
 		"sv": "och"
-	},
-	"overline.sponsored-content": {
-		"de": "Werblicher Inhalt",
-		"en": "Sponsored Content",
-		"es": "Contenido patrocinado",
-		"fr": "Contenu sponsorisé",
-		"ja": "スポンサー付きコンテンツ",
-		"ko": "Sponsored Content",
-		"no": "Sponset innhold",
-		"pt": "Conteúdo patrocinado",
-		"sv": "Sponsrat innehåll"
 	}
 }

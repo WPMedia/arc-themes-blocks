@@ -466,6 +466,10 @@
 				),
 			),
 			blocks: (
+				simple-list: (
+					background-color: pink,
+					components: (),
+				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -1663,6 +1667,7 @@
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/share-bar-block";
+@use "../../blocks/simple-list-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/small-manual-promo-block";

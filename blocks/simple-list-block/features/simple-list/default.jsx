@@ -3,12 +3,11 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Heading, HeadingSection } from "@wpmedia/shared-styles";
 import getProperties from "fusion:properties";
+import { Stack, isServerSide, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 import StoryItem from "./_children/story-item";
-import "./simple-list.scss";
 
 const unserializeStory = (arcSite) => (acc, storyObject) => {
 	if (storyObject.websites?.[arcSite]) {
@@ -142,7 +141,7 @@ const SimpleList = (props) => {
 
 	return (
 		<HeadingSection>
-			<div key={id} className="list-container layout-section">
+			<Stack key={id} className="b-simple-list list-container layout-section">
 				{title ? <Heading className="list-title">{title}</Heading> : null}
 				<Wrapper>
 					{contentElements
@@ -168,7 +167,7 @@ const SimpleList = (props) => {
 							</React.Fragment>
 						))}
 				</Wrapper>
-			</div>
+			</Stack>
 		</HeadingSection>
 	);
 };

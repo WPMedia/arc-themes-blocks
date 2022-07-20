@@ -1,0 +1,10 @@
+@use "@wpmedia/arc-themes-components/scss"; //import v2 styles
+
+.b-simple-list {
+	// @include scss.block-components(
+	// 	"simple-list"
+	// ); //executes this method from the above style "library". styles components within the simple list
+	@include scss.block-properties(
+		"simple-list"
+	); // two fns you can use to generate styles. creates styles with b-simple-list
+}

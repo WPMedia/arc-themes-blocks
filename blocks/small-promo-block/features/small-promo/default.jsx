@@ -20,7 +20,7 @@ import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 const BLOCK_CLASS_NAME = "b-small-promo";
 
 const SmallPromo = ({ customFields }) => {
-	const { imagePosition, lazyLoad, showHeadline, showImage } = customFields;
+	const { imagePosition, lazyLoad, showHeadline, showImage, imageOverrideURL } = customFields;
 	const { registerSuccessEvent } = useComponentContext();
 	const { arcSite, isAdmin } = useFusionContext();
 	const shouldLazyLoad = lazyLoad && !isAdmin;
@@ -100,7 +100,7 @@ const SmallPromo = ({ customFields }) => {
 
 	const PromoImage = () => {
 		const { fallbackImage } = getProperties(arcSite);
-		const availableImage = imageURL || fallbackImage;
+		const availableImage = imageOverrideURL || imageURL || fallbackImage;
 		return showImage && availableImage ? (
 			<Conditional
 				component={Link}

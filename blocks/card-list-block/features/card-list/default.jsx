@@ -158,7 +158,7 @@ const CardListItems = (props) => {
 	let [text, url] = [sectionText, sectionUrl];
 
 	if (sourceContent?.owner?.sponsored) {
-		text = sourceContent?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		text = sourceContent?.label?.basic?.text || phrases.t("global.sponsored-content");
 		url = null;
 	} else if (shouldUseLabel) {
 		[text, url] = [labelText, labelUrl];

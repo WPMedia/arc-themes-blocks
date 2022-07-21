@@ -631,15 +631,16 @@
 					components: (
 						heading: (
 							color: var(--global-black),
-							font-size: var(--global-font-size-9),
+							font-size: var(--global-font-size-7),
 							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-5),
 						),
 						stack: (
 							gap: var(--global-spacing-2),
 						),
 						price: (
 							color: var(--text-color),
-							font-size: var(--global-font-size-7),
+							font-size: var(--global-font-size-5),
 							font-weight: var(--global-font-weight-4),
 						),
 					),
@@ -872,6 +873,16 @@
 				),
 				product-assortment-carousel-title: (
 					font-size: var(--global-font-size-11),
+				),
+				product-information: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-9),
+						),
+						price: (
+							font-size: var(--global-font-size-7),
+						),
+					),
 				),
 				quilted-image: (
 					max-width: var(--content-scale-width),

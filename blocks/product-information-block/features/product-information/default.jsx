@@ -41,7 +41,8 @@ const ProductInformation = () => {
 	return <ProductInformationDisplay data={globalContent} />;
 };
 
-// find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
+ProductInformation.name = "Product Infomration - Arc Block";
+
 ProductInformation.icon = "cursor-information";
 
 export default ProductInformation;

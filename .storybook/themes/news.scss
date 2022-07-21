@@ -936,6 +936,12 @@
 				),
 				large-promo-media: (
 					position: relative,
+					components: (
+						image: (
+							height: 283px,
+							width: 377px,
+						),
+					),
 				),
 				large-promo-meta: (
 					display: inline,

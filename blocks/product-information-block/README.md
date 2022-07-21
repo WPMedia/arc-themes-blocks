@@ -1,4 +1,4 @@
-# @wpmedia/product-information-block
+# Product Information Block
 
 Used in conjuction with Arc Commerce to display Product Name and Pricing.
 

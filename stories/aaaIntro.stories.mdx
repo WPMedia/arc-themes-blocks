@@ -3,3 +3,32 @@
 # Theme Blocks
 
 Updated on: July 21, 2022
+
+The Theme Block Storybook is composed of four sections:
+
+1. Blocks
+2. Chains
+3. Layouts
+4. Shared Styles
+
+The first three sections (Blocks, Chains, Layouts) correspond to PageBuilder conventions around functionality within the PageBuilder editor.
+
+## V2 Architecture
+
+### Blocks
+
+Blocks are composed of [Theme Components](https://github.com/WPMedia/arc-themes-components) that display data from Content Sources. Theme Components, like the [Paragraph component](https://github.com/WPMedia/arc-themes-components/tree/arc-themes-release-version-2.0.1/src/components/paragraph), display text.
+
+That text would come from a Content Source that is configured in PageBuilder Editor. Within Storybook, mock data comes from the `.storybook/alias/content.js` for blocks that require data. This mapping allows you to mimic data without using Fusion. Mimicking data is useful for speeding up development and handling different usecases.
+
+### Chains
+
+Chains enclose Blocks. They can include links or titles. They also provide some ability to format the blocks within different styles. Chains are also composed of [Theme Components](https://github.com/WPMedia/arc-themes-components) that help group and style many blocks. An example usage of a Theme Component would be the Triple Chain's usage of the [Stack component](https://github.com/WPMedia/arc-themes-components/tree/arc-themes-release-version-2.0.1/src/components/stack) and [Grid component](https://github.com/WPMedia/arc-themes-components/tree/arc-themes-release-version-2.0.1/src/components/grid) to layout the blocks in a themeable and maintainable way. The Grid and Stack components use CSS Flex and Grid. That implementation is available at `blocks/triple-chain-block/chains/triple-chain/default.jsx`.
+
+### Layouts
+
+Layouts enclose Blocks and Chains. They also use Theme Components like Grid and Stack. They are the base layout of a page.
+
+## Deprecated
+
+The Shared Styles block will be deprecated in V2 architecture. If you are converting a block, chain, or layout into the v2 architecture, the Shared Styles block should not be used. Please see confluence for the checklist for converting to V2 blocks.

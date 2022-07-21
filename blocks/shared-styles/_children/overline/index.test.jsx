@@ -28,13 +28,6 @@ jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => mockContextObj),
 }));
 
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-	})),
-}));
-
 jest.mock("fusion:content", () => ({
 	useEditableContent: jest.fn(() => ({
 		editableContent: jest.fn(() => {}),
@@ -348,7 +341,7 @@ describe("overline feature for default output type", () => {
 		it("set text to be Sponsored Content", () => {
 			const wrapper = mount(<Overline story={storyObject} />);
 
-			expect(wrapper.text()).toMatch("Sponsored Content");
+			expect(wrapper.text()).toMatch("global.sponsored-content");
 		});
 
 		it("not be a link", () => {

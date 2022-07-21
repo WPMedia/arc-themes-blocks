@@ -3,16 +3,29 @@
 		"promo-label.gallery-text": "Bildspel",
 		"promo-label.video-text": "Video",
 		"byline.by-text": "Av",
-		"byline.and-text": "och",
-		"overline.sponsored-content": "Sponsrat innehåll"
+		"byline.and-text": "och"
+	},
+	"global-phrases-block": {
+		"global.by-text": "Av",
+		"global.and-text": "och",
+		"global.gallery-expand-button": "Förstora",
+		"global.gallery-page-count-text": "%{current} av %{total}",
+		"global.gallery-autoplay-button": "Spela upp",
+		"global.gallery-pause-autoplay-button": "Pausa",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.social-twitter": "Twitter",
+		"global.social-facebook": "Facebook",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-pinterest": "Pinterest",
+		"global.social-email": "E-post",
+		"global.opens-in-new-window": "(Öppnas i nytt fönster)",
+		"global.sponsored-content": "Sponsrat innehåll"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korrektion",
 		"article-body-block.clarification": "Klargörande",
 		"article-body-block.interstitial-link-aria-label": "Öppna relaterad artikel"
-	},
-	"extra-large-promo-block": {
-		"global.sponsored-content": "Sponsrat innehåll"
 	},
 	"full-author-bio-block": {
 		"full-author-bio-block.connect-text": "Följ",
@@ -30,20 +43,6 @@
 		"full-author-bio-block.social-snapchat": "Kontakta via Snapchat",
 		"full-author-bio-block.social-whatsapp": "Kontakta via WhatsApp",
 		"full-author-bio-block.social-soundcloud": "Lyssna på SoundCloud"
-	},
-	"global-phrases-block": {
-		"global.gallery-expand-button": "Förstora",
-		"global.gallery-page-count-text": "%{current} av %{total}",
-		"global.gallery-autoplay-button": "Spela upp",
-		"global.gallery-pause-autoplay-button": "Pausa",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
-		"global.social-twitter": "Twitter",
-		"global.social-facebook": "Facebook",
-		"global.social-linkedin": "LinkedIn",
-		"global.social-pinterest": "Pinterest",
-		"global.social-email": "E-post",
-		"global.opens-in-new-window": "(Öppnas i nytt fönster)"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "Meny",
@@ -128,22 +127,8 @@
 		"identity-block.sign-up-form-error": "There's been an error creating your account",
 		"identity-block.login-form-error": "There's been an error logging you in",
 		"identity-block.login-links-login": "Already have an account? Log in.",
-		"identity-block.login-links-forgot": "Forgot Password?",
 		"identity-block.login-links-signup": "Sign up for an account.",
 		"identity-block.account-information": "Account Information",
-		"identity-block.forgot-password-headline": "Forgot Password",
-		"identity-block.forgot-password-headline-submitted": "Check your email to reset your password",
-		"identity-block.forgot-password-instruction": "Enter the email you use for your account",
-		"identity-block.forgot-password-instruction-submitted": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
-		"identity-block.forgot-password-submit": "Send",
-		"identity-block.forgot-password-error": "There was an error processing your request.",
-		"identity-block.reset-password-headline": "Create your new password",
-		"identity-block.reset-password-headline-submitted": "New password saved",
-		"identity-block.reset-password-instruction": "Enter a new password for your account.",
-		"identity-block.reset-password-instruction-submitted": "Your new password has been saved.",
-		"identity-block.reset-password-submit": "Continue",
-		"identity-block.reset-password-submit-submitted": "Continue to log in",
-		"identity-block.reset-password-error": "There was an error processing your request.",
 		"identity-block.edit": "Edit",
 		"identity-block.save": "Save",
 		"identity-block.cancel": "Cancel",
@@ -156,7 +141,21 @@
 		"identity-block.connected-accounts": "Connected Accounts",
 		"identity-block.connect-account": "Connected",
 		"identity-block.disconnect-account": "Disconnect",
-		"identity-block.connect-platform": "Connect %{platform}"
+		"identity-block.connect-platform": "Connect %{platform}",
+		"identity-block.login-links-forgot": "Forgot Password?",
+		"identity-block.forgot-password-headline": "Forgot Password",
+		"identity-block.forgot-password-headline-submitted": "Check your email to reset your password",
+		"identity-block.forgot-password-instruction": "Enter the email you use for your account",
+		"identity-block.forgot-password-instruction-submitted": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"identity-block.forgot-password-submit": "Send",
+		"identity-block.forgot-password-error": "There was an error processing your request.",
+		"identity-block.reset-password-headline": "Create your new password",
+		"identity-block.reset-password-headline-submitted": "New password saved",
+		"identity-block.reset-password-instruction": "Enter a new password for your account.",
+		"identity-block.reset-password-instruction-submitted": "Your new password has been saved.",
+		"identity-block.reset-password-submit": "Continue",
+		"identity-block.reset-password-submit-submitted": "Continue to log in",
+		"identity-block.reset-password-error": "There was an error processing your request."
 	},
 	"subscriptions-block": {
 		"checkout-block.headline": "Review Subscription Order",
@@ -166,7 +165,7 @@
 		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
 		"checkout-block.empty-cart-message": "Select from one of our offers",
 		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.identity-social": "Connected as %{email}",
+		"checkout-block.identity-social": "Connected",
 		"checkout-block.identity-email": "Signed in as %{email}",
 		"checkout-block.identity-sign-out": "Sign out",
 		"checkout-block.email": "Email address",
@@ -444,8 +443,5 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"overline-block": {
-		"overline-sponsored-content": "Sponsrat innehåll"
 	}
 }

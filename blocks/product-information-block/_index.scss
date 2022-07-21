@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-product-information {
+	@include scss.block-components("product-information");
+	@include scss.block-properties("product-information");
+}

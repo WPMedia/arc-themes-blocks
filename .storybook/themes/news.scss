@@ -1347,13 +1347,35 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--global-font-size-10),
 							font-weight: var(--global-font-weight-7),
-							line-height: 1.3,
+							line-height: var(--global-spacing-7),
 						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
 							font-weight: inherit,
 							line-height: inherit,
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				xl-promo: (
+					components: (
+						heading: (
+							font-family: var(--font-family-primary),
+							font-size: var(--global-font-size-10),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-spacing-7),
+						),
+						link: (
+							font-family: inherit,
+							font-size: inherit,
+							font-weight: inherit,
+							line-height: inherit,
+						),
+						separator: (
+							padding: 0 var(--global-spacing-2),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -1627,7 +1649,24 @@
 							align-self: center,
 							font-size: var(--global-font-size-15),
 							justify-content: center,
-							line-height: 1.2,
+							line-height: var(--global-spacing-10),
+						),
+						overline: (
+							display: flex,
+							justify-content: center,
+						),
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				xl-promo: (
+					components: (
+						heading: (
+							align-self: center,
+							font-size: var(--global-font-size-15),
+							justify-content: center,
+							line-height: var(--global-spacing-10),
 						),
 						overline: (
 							display: flex,
@@ -1650,6 +1689,7 @@
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
 @use "../../blocks/extra-large-manual-promo-block";
+@use "../../blocks/extra-large-promo-block";
 @use "../../blocks/header-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";

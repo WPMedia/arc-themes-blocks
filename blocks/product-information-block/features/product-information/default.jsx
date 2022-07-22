@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 
-import { Heading, HeadingSection, Price, Stack } from "@wpmedia/arc-themes-components";
+import { Heading, Price, Stack } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-information";
 
@@ -13,20 +13,18 @@ export const ProductInformationDisplay = ({ data }) => {
 
 	return (
 		<Stack className={`${BLOCK_CLASS_NAME}`}>
-			<HeadingSection>
-				{data.name ? <Heading>{data.name}</Heading> : null}
-				{ListPrice ? (
-					<Price>
-						<Price.List>
-							{new Intl.NumberFormat(pricing?.currencyLocale, {
-								style: "currency",
-								currency: pricing?.currencyCode,
-								minimumFractionDigits: 2,
-							}).format(ListPrice.amount)}
-						</Price.List>
-					</Price>
-				) : null}
-			</HeadingSection>
+			{data.name ? <Heading>{data.name}</Heading> : null}
+			{ListPrice ? (
+				<Price>
+					<Price.List>
+						{new Intl.NumberFormat(pricing?.currencyLocale, {
+							style: "currency",
+							currency: pricing?.currencyCode,
+							minimumFractionDigits: 2,
+						}).format(ListPrice.amount)}
+					</Price.List>
+				</Price>
+			) : null}
 		</Stack>
 	);
 };

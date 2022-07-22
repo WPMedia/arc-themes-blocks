@@ -2,33 +2,18 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
-import getProperties from "fusion:properties";
-import getTranslatedPhrases from "fusion:intl";
-
-// Arc Themes Components - Base set of components used to compose blocks
-// https://github.com/WPMedia/arc-themes-components/
-import { Heading } from "@wpmedia/arc-themes-components";
+import { Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
-function ProductFeaturedImage({ customFields }) {
-	// for intro material on consuming react props
-	// https://reactjs.org/docs/components-and-props.html
-	const { showHeading } = customFields;
+function ProductFeaturedImage() {
+	const { globalContent = {} } = useFusionContext();
 
-	// get properties from context for using translations in intl.json
-	// See document for more info https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2538275032/Lokalise+and+Theme+Blocks
-	const { arcSite } = useFusionContext();
-	const { locale } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
+	if (!Object.keys(globalContent).length) {
+		return null;
+	}
 
-	return (
-		<div className={`${BLOCK_CLASS_NAME}`}>
-			{showHeading ? (
-				<Heading>{phrases.t("product-featured-image-block.hello-text")}</Heading>
-			) : null}
-		</div>
-	);
+	return <Image src="" className={BLOCK_CLASS_NAME} />;
 }
 
 ProductFeaturedImage.label = "Product Featured Image – Arc Block";

@@ -306,15 +306,6 @@ ExtraLargePromo.propTypes = {
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 			name: "Lazy Load block?",
 		}),
-		shrinkToFit: PropTypes.bool.tag({
-			defaultValue: true,
-			description:
-				"Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.",
-			group: "Video Settings",
-			hidden: true,
-			name: "Shrink video to fit screen",
-			type: PropTypes.bool,
-		}),
 		viewportPercentage: PropTypes.number.tag({
 			defaultValue: 65,
 			group: "Video Settings",

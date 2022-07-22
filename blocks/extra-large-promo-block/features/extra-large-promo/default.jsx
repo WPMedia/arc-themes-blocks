@@ -11,6 +11,7 @@ import {
 	Conditional,
 	Date as DateComponent,
 	formatAuthors,
+	getImageFromANS,
 	getVideoFromANS,
 	Heading,
 	HeadingSection,
@@ -27,7 +28,6 @@ import {
 } from "@wpmedia/arc-themes-components";
 
 import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
-import { extractImageFromStory } from "@wpmedia/resizer-image-block";
 
 const BLOCK_CLASS_NAME = "b-xl-promo";
 
@@ -187,7 +187,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-	const promoImageURL = imageOverrideURL || extractImageFromStory(content);
+	const promoImageURL = imageOverrideURL || getImageFromANS(content);
 
 	const MediaImage = () =>
 		showImage ? (

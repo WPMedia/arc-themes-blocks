@@ -912,6 +912,15 @@
 				),
 				large-promo: (
 					gap: var(--global-spacing-4),
+					components: (
+						image: (
+							height: 283px,
+							width: 377px,
+						),
+						media-item: (
+							position: relative,
+						),
+					),
 				),
 				large-promo-icon-label: (
 					align-items: center,

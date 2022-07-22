@@ -955,8 +955,7 @@
 					),
 				),
 				large-promo-text: (
-					--grid-template-columns: 1fr,
-					grid-template-rows: auto 1fr,
+					gap: var(--global-spacing-4),
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),
@@ -969,9 +968,6 @@
 						paragraph: (
 							font-size: var(--global-font-size-4),
 							line-height: var(--global-line-height-4),
-						),
-						stack: (
-							gap: var(--global-spacing-4),
 						),
 					),
 				),

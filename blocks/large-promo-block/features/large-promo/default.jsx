@@ -228,46 +228,42 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 					</MediaItem>
 				) : null}
 				{showOverline || showHeadline || showDescription || showByline || showDate ? (
-					<Grid className={`${BLOCK_CLASS_NAME}__text`}>
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						{showOverline && (url || text) ? (
 							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
 						) : null}
-						<Stack>
-							{showHeadline && content?.headlines?.basic ? (
-								<Heading>
-									<Conditional
-										component={Link}
-										condition={content?.websites?.[arcSite]?.website_url}
-										href={formatURL(content?.websites?.[arcSite]?.website_url)}
-										onClick={registerSuccessEvent}
-									>
-										{content?.headlines?.basic}
-									</Conditional>
-								</Heading>
-							) : null}
-							{showDescription ? (
-								<Paragraph suppressContentEditableWarning {...editableDescription}>
-									{content?.description?.basic}
-								</Paragraph>
-							) : null}
-							{showByline || showDate ? (
-								<div className={`${BLOCK_CLASS_NAME}__meta`}>
-									{showByline && bylineNodes?.length > 0 ? (
-										<Attribution>
-											<span className={`${BLOCK_CLASS_NAME}__by`}>
-												{phrases.t("global.by-text")}
-											</span>{" "}
-											<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
-										</Attribution>
-									) : null}
-									{showByline && showDate ? <Separator /> : null}
-									{showDate && content?.display_date ? (
-										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
-									) : null}
-								</div>
-							) : null}
-						</Stack>
-					</Grid>
+						{showHeadline && content?.headlines?.basic ? (
+							<Heading>
+								<Conditional
+									component={Link}
+									condition={content?.websites?.[arcSite]?.website_url}
+									href={formatURL(content?.websites?.[arcSite]?.website_url)}
+									onClick={registerSuccessEvent}
+								>
+									{content?.headlines?.basic}
+								</Conditional>
+							</Heading>
+						) : null}
+						{showDescription ? (
+							<Paragraph suppressContentEditableWarning {...editableDescription}>
+								{content?.description?.basic}
+							</Paragraph>
+						) : null}
+						{showByline || showDate ? (
+							<div className={`${BLOCK_CLASS_NAME}__meta`}>
+								{showByline && bylineNodes?.length > 0 ? (
+									<Attribution>
+										<span className={`${BLOCK_CLASS_NAME}__by`}>{phrases.t("global.by-text")}</span>{" "}
+										<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
+									</Attribution>
+								) : null}
+								{showByline && showDate ? <Separator /> : null}
+								{showDate && content?.display_date ? (
+									<DateDisplay dateTime={content.display_date} dateString={displayDate} />
+								) : null}
+							</div>
+						) : null}
+					</Stack>
 				) : null}
 			</Grid>
 		</HeadingSection>

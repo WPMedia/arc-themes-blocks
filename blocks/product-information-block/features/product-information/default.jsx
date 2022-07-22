@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 
-import { Heading, HeadingSection, Price, Stack } from "@wpmedia/arc-themes-components";
+import { Heading, Price, Stack } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-information";
 

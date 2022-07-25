@@ -713,6 +713,11 @@
 					display: grid,
 					gap: var(--global-spacing-6),
 					width: 100%,
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
 				),
 				right-rail-rail-container: (
 					max-width: initial,

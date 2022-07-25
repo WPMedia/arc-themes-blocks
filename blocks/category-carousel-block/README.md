@@ -4,13 +4,13 @@ A user configurable carousel block with a minumum of 4 and a maximum of 12 slide
 
 ## Props
 
-| **Prop**     | **Required** | **Type**        | **Descripton**            |
+| **Prop**     | **Required** | **Type**        | **Description**           |
 | ------------ | ------------ | --------------- | ------------------------- |
 | customFields | yes          | PropTypes.shape | Pagebuilder Custom Fields |
 
 ### customFields
 
-| **Prop**         | **Required** | **Type**         | **Descripton**        |
+| **Prop**         | **Required** | **Type**         | **Description**       |
 | ---------------- | ------------ | ---------------- | --------------------- |
 | headerText       | no           | PropTypes.string | Carsousel Header text |
 | imageUrl\_[0-11] | yes\*        | PropTypes.string | Slide image url.      |

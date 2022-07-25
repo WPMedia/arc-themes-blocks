@@ -19,7 +19,7 @@ function ProductFeaturedImage() {
 ProductFeaturedImage.label = "Product Featured Image – Arc Block";
 
 // find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
-ProductFeaturedImage.icon = "shopping-bag-smile";
+// ProductFeaturedImage.icon = "shopping-bag-smile";
 
 ProductFeaturedImage.propTypes = {
 	customFields: PropTypes.shape({

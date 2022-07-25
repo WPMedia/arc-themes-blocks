@@ -1,44 +1,14 @@
-# @wpmedia/product-featured-image-block
+# Product Featured Image Block
 
-_Please provide a 1-2 sentence description of what the @wpmedia/product-featured-image-block is and what it does._
+The block shows a product featured image based on the ANS. The block will only show the image if the global data has a featured image.
 
 ## Props
 
-| **Prop**          | **Required** | **Type** | **Descripton** |
-| ----------------- | ------------ | -------- | -------------- |
-| **required prop** | yes          |          |                |
-| **optional prop** | no           |          |                |
+| **Prop** | **Required** | **Type** | **Description** |
+| -------- | ------------ | -------- | --------------- |
 
-## ANS Schema
+No props at the moment.
 
-Outline any schema information requirements necessary to know for ths block
+## Data
 
-### ANS Fields
-
-- `Add all ANS fields used in the block`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific intructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+Relies on `globalContent` for data access

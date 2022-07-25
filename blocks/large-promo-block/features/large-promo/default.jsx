@@ -139,14 +139,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
     }`,
 		}) || null;
 
-	// const { id } = useFusionContext();
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");

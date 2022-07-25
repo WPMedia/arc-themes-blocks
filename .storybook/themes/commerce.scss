@@ -642,6 +642,7 @@
 							color: var(--text-color),
 							font-size: var(--global-font-size-5),
 							font-weight: var(--global-font-weight-4),
+							line-height: var(--global-line-height-4),
 						),
 					),
 				),
@@ -712,6 +713,11 @@
 					display: grid,
 					gap: var(--global-spacing-6),
 					width: 100%,
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
 				),
 				right-rail-rail-container: (
 					max-width: initial,

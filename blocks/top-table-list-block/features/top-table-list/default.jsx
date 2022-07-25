@@ -84,18 +84,16 @@ class TopTableListWrapper extends Component {
 
 // components end
 export const TopTableList = (props) => {
+	const { customFields = {}, id = "" } = props;
 	const {
-		customFields: {
-			listContentConfig: { contentService = "", contentConfigValues = {} } = {},
-			offsetOverride = 0,
-			extraLarge = 0,
-			large = 0,
-			medium = 0,
-			small = 0,
-			storiesPerRowSM = 2,
-		} = {},
-		id = "",
-	} = props;
+		listContentConfig: { contentService = "", contentConfigValues = {} } = {},
+		offsetOverride = 0,
+		extraLarge = 0,
+		large = 0,
+		medium = 0,
+		small = 0,
+		storiesPerRowSM = 2,
+	} = customFields;
 
 	const { arcSite } = useFusionContext();
 
@@ -252,7 +250,7 @@ export const TopTableList = (props) => {
 									element={element}
 									storySize={storyType}
 									key={itemId}
-									customFields={props.customFields}
+									customFields={customFields}
 								/>
 							);
 						})}

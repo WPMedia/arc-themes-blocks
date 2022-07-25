@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import LevelContext from "../context";
 
-const HeadingSection = (props) => (
+const HeadingSection = ({ children }) => (
 	<LevelContext.Consumer>
-		{(level) => <LevelContext.Provider value={level + 1}>{props.children}</LevelContext.Provider>}
+		{(level) => <LevelContext.Provider value={level + 1}>{children}</LevelContext.Provider>}
 	</LevelContext.Consumer>
 );
 

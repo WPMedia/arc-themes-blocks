@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-xl-promo {
+	@include scss.block-properties("xl-promo");
+	@include scss.block-components("xl-promo");
+}

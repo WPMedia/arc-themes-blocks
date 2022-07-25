@@ -12,6 +12,7 @@ import {
 	HeadingSection,
 	Icon,
 	Image,
+	Join,
 	Link,
 	MediaItem,
 	Stack,
@@ -44,7 +45,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showImageOrVideoLabel,
 		imageOrVideoLabelText,
 		aspectRatio,
-		// shrinkToFit,
 		viewportPercentage,
 	} = customFields;
 
@@ -139,14 +139,12 @@ const LargePromoItem = ({ customFields, arcSite }) => {
     }`,
 		}) || null;
 
-	// const { id } = useFusionContext();
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
-			dateFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
@@ -196,11 +194,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
 				{showImage ? (
-					<MediaItem
-						className={`${BLOCK_CLASS_NAME}__media`}
-						{...searchableField("imageURL")}
-						suppressContentEditableWarning
-					>
+					<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
 							condition={content?.websites?.[arcSite]?.website_url}
@@ -211,16 +205,21 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							{playVideoInPlace ? (
 								<Video
 									aspectRatio={aspectRatio}
-									className={`${BLOCK_CLASS_NAME}__video`}
 									embedMarkup={customFields?.content?.embed_html}
 									viewportPercentage={viewportPercentage}
 								/>
 							) : (
-								<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+								<Image
+									alt={content?.headlines?.basic || null}
+									src={targetImage}
+									width={377}
+									height={283}
+									searchableField
+								/>
 							)}
 							{showImageOrVideoLabel ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Instagram"} fill="#FFFFF" />
+									<Icon name={showVideoLabel ? "Play" : "Camera"} />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
 								</div>
 							) : null}
@@ -232,37 +231,40 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						{showOverline && (url || text) ? (
 							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
 						) : null}
-						{showHeadline && content?.headlines?.basic ? (
-							<Heading>
-								<Conditional
-									component={Link}
-									condition={content?.websites?.[arcSite]?.website_url}
-									href={formatURL(content?.websites?.[arcSite]?.website_url)}
-									onClick={registerSuccessEvent}
-								>
-									{content?.headlines?.basic}
-								</Conditional>
-							</Heading>
-						) : null}
-						{showDescription ? (
-							<Paragraph suppressContentEditableWarning {...editableDescription}>
-								{content?.description?.basic}
-							</Paragraph>
-						) : null}
-						{showByline || showDate ? (
-							<div className={`${BLOCK_CLASS_NAME}__meta`}>
-								{showByline && bylineNodes?.length > 0 ? (
-									<Attribution>
-										<span className={`${BLOCK_CLASS_NAME}__by`}>{phrases.t("global.by-text")}</span>{" "}
-										<span className={`${BLOCK_CLASS_NAME}__names`}>{bylineNodes}</span>
-									</Attribution>
-								) : null}
-								{showByline && showDate ? <Separator /> : null}
-								{showDate && content?.display_date ? (
-									<DateDisplay dateTime={content.display_date} dateString={displayDate} />
-								) : null}
-							</div>
-						) : null}
+						<Stack>
+							{showHeadline && content?.headlines?.basic ? (
+								<Heading>
+									<Conditional
+										component={Link}
+										condition={content?.websites?.[arcSite]?.website_url}
+										href={formatURL(content?.websites?.[arcSite]?.website_url)}
+										onClick={registerSuccessEvent}
+									>
+										{content?.headlines?.basic}
+									</Conditional>
+								</Heading>
+							) : null}
+							{showDescription ? (
+								<Paragraph suppressContentEditableWarning {...editableDescription}>
+									{content?.description?.basic}
+								</Paragraph>
+							) : null}
+							{showByline || showDate ? (
+								<Attribution>
+									<Join separator={Separator}>
+										{showByline ? (
+											<Join separator={() => " "}>
+												{phrases.t("global.by-text")}
+												{bylineNodes}
+											</Join>
+										) : null}
+										{showDate && content?.display_date ? (
+											<DateDisplay dateTime={content.display_date} dateString={displayDate} />
+										) : null}
+									</Join>
+								</Attribution>
+							) : null}
+						</Stack>
 					</Stack>
 				) : null}
 			</Grid>
@@ -340,14 +342,6 @@ LargePromo.propTypes = {
 			defaultValue: false,
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
-		}),
-		shrinkToFit: PropTypes.bool.tag({
-			name: "Shrink video to fit screen",
-			description:
-				"Will shrink the video width to keep the video in screen while keeping it horizontally centered to content.",
-			defaultValue: true,
-			hidden: true,
-			group: "Video Settings",
 		}),
 		viewportPercentage: PropTypes.number.tag({
 			name: "Percentage of viewport height",

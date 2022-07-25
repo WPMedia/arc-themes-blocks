@@ -912,6 +912,20 @@
 				),
 				large-promo: (
 					gap: var(--global-spacing-4),
+					components: (
+						attribution: (
+							display: inline,
+						),
+						image: (
+							max-height: 335px,
+						),
+						media-item: (
+							position: relative,
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
 				),
 				large-promo-icon-label: (
 					align-items: center,
@@ -933,26 +947,6 @@
 				large-promo-label: (
 					margin-left: var(--global-spacing-2),
 					color: var(--global-white),
-				),
-				large-promo-media: (
-					position: relative,
-					components: (
-						image: (
-							height: 283px,
-							width: 377px,
-						),
-					),
-				),
-				large-promo-meta: (
-					display: inline,
-					components: (
-						attribution: (
-							display: inline,
-						),
-						separator: (
-							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
-						),
-					),
 				),
 				large-promo-text: (
 					gap: var(--global-spacing-4),

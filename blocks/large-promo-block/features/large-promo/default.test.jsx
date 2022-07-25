@@ -115,7 +115,7 @@ describe("Large Promo", () => {
 	});
 
 	it("should render complete promo", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -132,14 +132,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should not render overline", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -155,14 +152,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should not render date", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -178,14 +172,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M Doe"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should not render byline", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: false,
@@ -201,14 +192,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).not.toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should not render headline", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -224,14 +212,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).not.toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should not render description", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -247,14 +232,11 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).not.toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).toContain(
-			"global.by-text Sara Lynn Carothers, Taylor Doe, global.and-text John M DoeDecember 02, 2019 at  6:58 pm UTC"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should only render Image", () => {
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showImage: true,
@@ -265,7 +247,6 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
-		expect(container.querySelector(".b-large-promo__meta")).toBeNull();
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
@@ -290,7 +271,7 @@ describe("Large Promo", () => {
 				basic: "Baby panda born at the zoo",
 			},
 		});
-		const { container } = render(
+		render(
 			<LargePromo
 				customFields={{
 					showByline: true,
@@ -307,9 +288,6 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
-		expect(container.querySelector(".b-large-promo__meta").textContent).not.toContain(
-			"byline-block.by-text Sara Lynn Carothers, Taylor Doe, global.byline-block-and-text John M Doe"
-		);
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
@@ -336,6 +314,6 @@ describe("Large Promo", () => {
 				}}
 			/>
 		);
-		expect(container.querySelector(".b-large-promo__video")).not.toBeNull();
+		expect(container.querySelector(".c-video__frame")).not.toBeNull();
 	});
 });

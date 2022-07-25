@@ -211,7 +211,13 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 									viewportPercentage={viewportPercentage}
 								/>
 							) : (
-								<Image alt={content?.headlines?.basic || null} src={targetImage} searchableField />
+								<Image
+									alt={content?.headlines?.basic || null}
+									src={targetImage}
+									width={377}
+									height={283}
+									searchableField
+								/>
 							)}
 							{showImageOrVideoLabel ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>

@@ -6,16 +6,6 @@
 		@include scss.block-properties("large-promo-text");
 	}
 
-	&__media {
-		@include scss.block-components("large-promo-media");
-		@include scss.block-properties("large-promo-media");
-	}
-
-	&__meta {
-		@include scss.block-components("large-promo-meta");
-		@include scss.block-properties("large-promo-meta");
-	}
-
 	&__icon_label {
 		@include scss.block-components("large-promo-icon-label");
 		@include scss.block-properties("large-promo-icon-label");

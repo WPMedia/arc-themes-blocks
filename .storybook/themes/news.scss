@@ -95,8 +95,8 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
-
 		// 120px
+		//Font Weight
 		"font-weight-1": 100,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -136,8 +136,8 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
+		// Line heights
 		"line-height-1": 0.875rem,
 		// 14px
 		"line-height-2": 1rem,
@@ -157,7 +157,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -467,8 +466,61 @@
 			),
 			blocks: (
 				simple-list: (
-					background-color: pink,
-					components: (),
+					gap: var(--global-spacing-4),
+					components: (
+						stack: (
+							min-height: 72px,
+						),
+						image: (
+							vertical-align: middle,
+						),
+						link: (
+							text-decoration: none,
+						),
+					),
+				),
+				simple-list-title: (
+					font-size: var(--global-font-size-7),
+				),
+				simple-list-item: (
+					gap: var(--global-spacing-6),
+				),
+				simple-list-item-anchor: (
+					flex: 0 0 33%,
+				),
+				simple-list-headline-text: (
+					-webkit-line-clamp: 3,
+					text-overflow: ellipsis,
+				),
+				numbered-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				numbered-list-items: (
+					gap: var(--global-spacing-4),
+				),
+				numbered-list-item: (
+					gap: var(--global-spacing-5),
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-4),
+						),
+						link: (
+							flex: 1,
+						),
+						paragraph: (
+							font-family: var(--font-family-secondary),
+							font-size: var(--global-font-size-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				numbered-list-item-image: (
+					max-width: 25%,
 				),
 				alert-bar: (
 					align-items: flex-start,
@@ -988,36 +1040,6 @@
 							width: 68%,
 						),
 					),
-				),
-				numbered-list: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-5),
-						),
-					),
-				),
-				numbered-list-items: (
-					gap: var(--global-spacing-4),
-				),
-				numbered-list-item: (
-					gap: var(--global-spacing-5),
-					components: (
-						heading: (
-							font-weight: var(--global-font-weight-4),
-						),
-						link: (
-							flex: 1,
-						),
-						paragraph: (
-							font-family: var(--font-family-secondary),
-							font-size: var(--global-font-size-5),
-							font-weight: var(--global-font-weight-7),
-						),
-					),
-				),
-				numbered-list-item-image: (
-					max-width: 25%,
 				),
 				overline: (),
 				quad-chain: (

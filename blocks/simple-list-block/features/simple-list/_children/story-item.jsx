@@ -1,41 +1,42 @@
 import React from "react";
-import { Heading } from "@wpmedia/shared-styles";
-import { Image } from "@wpmedia/engine-theme-sdk";
+import { Heading, Image, Link, Stack } from "@wpmedia/arc-themes-components";
 
 const StoryItem = (props) => {
 	const {
 		itemTitle = "",
 		imageURL = "",
 		id = "",
+		classPrefix = "",
 		websiteURL,
 		showHeadline,
 		showImage,
-		resizedImageOptions,
-		placeholderResizedImageOptions,
 		targetFallbackImage,
-		imageProps,
+		primaryLogoAlt,
 	} = props;
 
 	return (
-		<article key={id} className="list-item-simple simple-list-item-margins">
+		<Stack as="article" key={id} className={`${classPrefix}__item`} direction="horizontal">
 			{showImage ? (
-				<a href={websiteURL} className="simple-list-anchor" aria-hidden="true" tabIndex="-1">
+				<Link
+					href={websiteURL}
+					className={`${classPrefix}__item-anchor`}
+					aria-hidden="true"
+					tabIndex="-1"
+				>
 					<Image
-						{...imageProps}
-						url={imageURL !== "" ? imageURL : targetFallbackImage}
-						alt={imageURL !== "" ? itemTitle : imageProps?.primaryLogoAlt}
-						resizedImageOptions={
-							imageURL !== "" ? resizedImageOptions : placeholderResizedImageOptions
-						}
+						height={274}
+						width={183}
+						src={imageURL !== "" ? imageURL : targetFallbackImage}
+						alt={imageURL !== "" ? itemTitle : primaryLogoAlt}
 					/>
-				</a>
+				</Link>
 			) : null}
 			{showHeadline && itemTitle !== "" ? (
-				<a className="simple-list-headline-anchor" href={websiteURL}>
-					<Heading className="simple-list-headline-text">{itemTitle}</Heading>
-				</a>
+				<Link href={websiteURL}>
+					<Heading className={`${classPrefix}__headline-text`}>{itemTitle}</Heading>
+				</Link>
 			) : null}
-		</article>
+		</Stack>
 	);
 };
 

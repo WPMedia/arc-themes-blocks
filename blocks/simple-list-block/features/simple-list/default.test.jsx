@@ -125,13 +125,13 @@ describe("Simple list", () => {
 
 		const wrapper = mount(<SimpleList customFields={customFields} />);
 
-		expect(wrapper.find(".list-title").first().text()).toBe(testText);
+		expect(wrapper.find(".b-simple-list__title").first().text()).toBe(testText);
 	});
 
 	it("should show no title if there is no title provided", () => {
 		const wrapper = mount(<SimpleList customFields={{ lazyLoad: false }} />);
 
-		expect(wrapper.find(".list-title").length).toBe(0);
+		expect(wrapper.find(".b-simple-list__title").length).toBe(0);
 	});
 
 	it("should fetch an array of data when content service is provided", () => {

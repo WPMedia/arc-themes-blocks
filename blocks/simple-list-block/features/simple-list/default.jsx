@@ -3,11 +3,13 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import getProperties from "fusion:properties";
 import { Stack, isServerSide, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
 import StoryItem from "./_children/story-item";
+
+const BLOCK_CLASS_NAME = "b-simple-list";
 
 const unserializeStory = (arcSite) => (acc, storyObject) => {
 	if (storyObject.websites?.[arcSite]) {
@@ -34,25 +36,13 @@ const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 
 const SimpleListWrapper = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL } =
-		getProperties(arcSite);
+	const { websiteDomain, fallbackImage, primaryLogoAlt } = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
 		contextPath,
 		fallbackImage,
 	});
-	const imageProps = {
-		smallWidth: 274,
-		smallHeight: 183,
-		mediumWidth: 274,
-		mediumHeight: 183,
-		largeWidth: 274,
-		largeHeight: 183,
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
 
 	const placeholderResizedImageOptions = useContent({
 		source: "resize-image-api",
@@ -72,8 +62,8 @@ const SimpleListWrapper = ({ customFields }) => {
 				placeholderResizedImageOptions={placeholderResizedImageOptions}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}
-				imageProps={imageProps}
 				arcSite={arcSite}
+				primaryLogoAlt={primaryLogoAlt}
 			/>
 		</LazyLoad>
 	);
@@ -92,7 +82,7 @@ const SimpleList = (props) => {
 		id = "",
 		placeholderResizedImageOptions,
 		targetFallbackImage,
-		imageProps,
+		primaryLogoAlt,
 	} = props;
 
 	// need to inject the arc site here into use content
@@ -141,8 +131,8 @@ const SimpleList = (props) => {
 
 	return (
 		<HeadingSection>
-			<Stack key={id} className="b-simple-list list-container layout-section">
-				{title ? <Heading className="list-title">{title}</Heading> : null}
+			<Stack key={id} className={BLOCK_CLASS_NAME}>
+				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
 				<Wrapper>
 					{contentElements
 						.reduce(unserializeStory(arcSite), [])
@@ -151,6 +141,7 @@ const SimpleList = (props) => {
 								<StoryItem
 									key={listItemId}
 									id={listItemId}
+									classPrefix={BLOCK_CLASS_NAME}
 									itemTitle={itemTitle}
 									imageURL={imageURL}
 									websiteURL={websiteURL}
@@ -161,7 +152,7 @@ const SimpleList = (props) => {
 									placeholderResizedImageOptions={placeholderResizedImageOptions}
 									targetFallbackImage={targetFallbackImage}
 									arcSite={arcSite}
-									imageProps={imageProps}
+									primaryLogoAlt={primaryLogoAlt}
 								/>
 								<hr />
 							</React.Fragment>

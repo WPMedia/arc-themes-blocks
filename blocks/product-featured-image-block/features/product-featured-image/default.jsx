@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
 import { Image } from "@wpmedia/arc-themes-components";
@@ -26,14 +25,5 @@ ProductFeaturedImage.label = "Product Featured Image – Arc Block";
 
 // find matching icon in https://redirector.arcpublishing.com/pagebuilder/block-icon-library
 // ProductFeaturedImage.icon = "shopping-bag-smile";
-
-ProductFeaturedImage.propTypes = {
-	customFields: PropTypes.shape({
-		showHeading: PropTypes.boolean.tag({
-			name: "Show Heading?",
-			defaultValue: false,
-		}),
-	}),
-};
 
 export default ProductFeaturedImage;

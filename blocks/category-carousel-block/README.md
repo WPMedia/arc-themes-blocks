@@ -1,6 +1,6 @@
 # @wpmedia/category-carousel-block
 
-A user configurable carousel block with a minumum of 4 and a maximum of 12 slides.
+A user configurable carousel block with a minimum of 4 and a maximum of 12 slides.
 
 ## Props
 
@@ -10,12 +10,12 @@ A user configurable carousel block with a minumum of 4 and a maximum of 12 slide
 
 ### customFields
 
-| **Prop**         | **Required** | **Type**         | **Description**       |
-| ---------------- | ------------ | ---------------- | --------------------- |
-| headerText       | no           | PropTypes.string | Carsousel Header text |
-| imageUrl\_[0-11] | yes\*        | PropTypes.string | Slide image url.      |
-| label\_[0-11]    | yes\*        | PropTypes.string | Slide label.          |
-| linkUrl\_[0-11]  | yes\*        | PropTypes.string | Slide link url.       |
+| **Prop**         | **Required** | **Type**         | **Description**      |
+| ---------------- | ------------ | ---------------- | -------------------- |
+| headerText       | no           | PropTypes.string | Carousel Header text |
+| imageUrl\_[0-11] | yes\*        | PropTypes.string | Slide image url.     |
+| label\_[0-11]    | yes\*        | PropTypes.string | Slide label.         |
+| linkUrl\_[0-11]  | yes\*        | PropTypes.string | Slide link url.      |
 
 - First four are required. Each slide index must include all three to be considered valid.
 

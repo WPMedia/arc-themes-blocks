@@ -13,7 +13,13 @@ function ProductFeaturedImage() {
 		return null;
 	}
 
-	return <Image src="" className={BLOCK_CLASS_NAME} />;
+	const rawImage = globalContent.schema.featuredImage.value.assets.find(
+		(asset) => asset.type === "image"
+	);
+
+	const { url } = rawImage;
+
+	return <Image src={url} className={BLOCK_CLASS_NAME} />;
 }
 
 ProductFeaturedImage.label = "Product Featured Image – Arc Block";

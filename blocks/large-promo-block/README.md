@@ -123,7 +123,10 @@ export default {
 
 ## Internationalization
 
-n/a
+- global.and-text
+- global.by-text
+- global.sponsored-content
+- key
 
 ## Events
 

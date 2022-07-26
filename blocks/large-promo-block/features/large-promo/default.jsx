@@ -227,7 +227,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 					</MediaItem>
 				) : null}
 				{showOverline || showHeadline || showDescription || showByline || showDate ? (
-					<Grid className={`${BLOCK_CLASS_NAME}__text`}>
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						{showOverline && (url || text) ? (
 							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
 						) : null}
@@ -265,7 +265,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								</Attribution>
 							) : null}
 						</Stack>
-					</Grid>
+					</Stack>
 				) : null}
 			</Grid>
 		</HeadingSection>

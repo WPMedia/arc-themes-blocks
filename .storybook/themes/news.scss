@@ -890,8 +890,6 @@
 					gap: var(--global-spacing-4),
 				),
 				large-manual-promo-text: (
-					--grid-template-columns: 1fr,
-					grid-template-rows: auto 1fr,
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),

@@ -2,7 +2,7 @@
 
 This is the lerna-managed monorepo for the blocks that make up the Arc Themes. This monorepo is a collection of packages for blocks. Blocks are tagged together.
 
-Documentation is located in the Themes Internal confluence for internal themes developers.
+Documentation is located in the [Themes Internal confluence for internal themes developers](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2341405138/Development+Information+Guides).
 
 ## Storybook Setup
 

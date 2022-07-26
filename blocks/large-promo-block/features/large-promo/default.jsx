@@ -173,7 +173,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	let [text, url] = [sectionText, sectionUrl];
 
 	if (content?.owner?.sponsored) {
-		text = content?.label?.basic?.text || phrases.t("overline.sponsored-content");
+		text = content?.label?.basic?.text || phrases.t("global.sponsored-content");
 		url = null;
 	} else if (shouldUseLabel) {
 		[text, url] = [labelText, labelUrl];

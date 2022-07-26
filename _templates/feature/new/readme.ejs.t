@@ -6,7 +6,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-block/README.md
 _Please provide a 1-2 sentence description of what the @wpmedia/<%= h.inflection.dasherize(block_name) %>-block is and what it does._
 
 ## Props
-| **Prop** | **Required** | **Type** | **Descripton** |
+| **Prop** | **Required** | **Type** | **Description** |
 |---|---|---|---|
 | **required prop** | yes | | |
 | **optional prop** | no | | |

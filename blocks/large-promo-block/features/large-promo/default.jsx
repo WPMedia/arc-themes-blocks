@@ -145,6 +145,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		dateLocalization: { language, timeZone, dateTimeFormat } = {
 			language: "en",
 			timeZone: "GMT",
+			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");

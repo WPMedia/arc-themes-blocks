@@ -126,7 +126,6 @@ export default {
 - global.and-text
 - global.by-text
 - global.sponsored-content
-- key
 
 ## Events
 

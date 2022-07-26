@@ -627,6 +627,25 @@
 						),
 					),
 				),
+				product-information: (
+					components: (
+						heading: (
+							color: var(--global-black),
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-5),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+						price: (
+							color: var(--text-color),
+							font-size: var(--global-font-size-5),
+							font-weight: var(--global-font-weight-4),
+							line-height: var(--global-line-height-4),
+						),
+					),
+				),
 				quilted-image: (
 					margin-left: auto,
 					margin-right: auto,
@@ -679,6 +698,40 @@
 							align-items: start,
 						),
 					),
+				),
+				right-rail: (
+					display: grid,
+					gap: var(--global-spacing-6),
+				),
+				right-rail-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+				),
+				right-rail-main: (
+					display: grid,
+					gap: var(--global-spacing-6),
+					width: 100%,
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				right-rail-rail-container: (
+					max-width: initial,
+					width: 100%,
+					margin: auto,
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
+					gap: var(--global-spacing-5),
+				),
+				right-rail-main-right-rail: (
+					grid-column: 1,
+				),
+				right-rail-main-interior-item: (
+					grid-column: 1,
 				),
 				single-column-regular-main: (
 					components: (
@@ -856,6 +909,16 @@
 				product-assortment-carousel-title: (
 					font-size: var(--global-font-size-11),
 				),
+				product-information: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-9),
+						),
+						price: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				quilted-image: (
 					max-width: var(--content-scale-width),
 					width: 100%,
@@ -883,6 +946,26 @@
 					grid-template-areas: "top top" "bottom bottom",
 					max-width: var(--content-scale-width),
 					width: 100%,
+				),
+				right-rail: (
+					gap: var(--global-spacing-10),
+				),
+				right-rail-main: (
+					gap: var(--global-spacing-10),
+				),
+				right-rail-rail-container: (
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
+					grid-template-columns: repeat(12, 1fr),
+					gap: var(--global-spacing-6),
+					grid-template-rows: initial,
+				),
+				right-rail-main-right-rail: (
+					grid-column: span 5,
+				),
+				right-rail-main-interior-item: (
+					grid-column: span 7,
 				),
 				single-column-regular-main: (
 					components: (
@@ -929,6 +1012,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/story-carousel-block";
 @use "../../blocks/single-column-layout-block";

@@ -1,6 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
+import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import SimpleList from "./default";
 
 const mockOutput = {
@@ -103,7 +105,11 @@ jest.mock("fusion:themes", () => jest.fn(() => ({})));
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
+}));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(),
 }));
 
 jest.mock(
@@ -168,12 +174,23 @@ describe("Simple list", () => {
 
 		expect(wrapper.find("StoryItem").length).toBe(0);
 	});
-});
-
-describe("Simple list", () => {
 	it("should render content only for the arcSite", () => {
 		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
 
 		expect(wrapper.find("StoryItem")).toHaveLength(2);
+	});
+	it("should render null if isServerSide and lazyLoad enabled", () => {
+		const customFields = {
+			lazyLoad: true,
+		};
+		isServerSide.mockReturnValue(true);
+		useFusionContext.mockReturnValue({
+			arcSite: "the-sun",
+			deployment: jest.fn((x) => x),
+			isAdmin: false,
+		});
+
+		const wrapper = mount(<SimpleList customFields={customFields} />);
+		expect(wrapper).toBeEmptyRender();
 	});
 });

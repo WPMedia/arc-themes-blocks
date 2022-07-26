@@ -577,6 +577,7 @@
 					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
+							font-size: var(--global-font-size-5),
 							text-transform: uppercase,
 						),
 						paragraph: (
@@ -1408,13 +1409,6 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
-				),
-				article-body-correction: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-5),
-						),
-					),
 				),
 				article-body-blockquote: (
 					components: (

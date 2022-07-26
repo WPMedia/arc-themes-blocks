@@ -961,6 +961,9 @@
 							font-size: var(--global-font-size-4),
 							line-height: var(--global-line-height-4),
 						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
 					),
 				),
 				links-bar: (

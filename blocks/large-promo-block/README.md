@@ -1,6 +1,6 @@
 # `@wpmedia/large-promo-block`
 
-The large promo block displays an outline, headline, description, and image.
+The large promo block displays an overline, headline, description, and image.
 
 ## Props
 

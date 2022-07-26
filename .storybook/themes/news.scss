@@ -214,15 +214,15 @@
 		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-3),
+		"body-line-height": var(--global-line-height-6),
 		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-2),
-		"body-line-height-small": var(--global-line-height-2),
+		"body-line-height-small": var(--global-line-height-6),
 		// body : tiny
 		"body-font-weight-tiny": var(--global-font-weight-4),
 		"body-font-size-tiny": var(--global-font-size-2),
-		"body-line-height-tiny": var(--global-line-height-1),
+		"body-line-height-tiny": var(--global-line-height-6),
 		// Layout
 		"layout-max-width": 1600,
 		"content-max-width": 1440,
@@ -364,6 +364,7 @@
 				),
 				heading: (
 					font-family: var(--font-family-primary),
+					font-size: var(--heading-level-3-font-size),
 					font-weight: var(--heading-level-3-font-weight),
 					line-height: var(--heading-level-3-line-height),
 				),
@@ -439,20 +440,22 @@
 				),
 				overline: (
 					color: var(--text-color),
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-5-font-size),
+					font-weight: var(--heading-level-5-font-weight),
+					line-height: var(--heading-level-5-line-height),
 					text-decoration: none,
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
+					font-size: var(--body-font-size),
+					font-weight: var(--body-font-weight),
+					line-height: var(--body-line-height),
 				),
 				pill: (
 					background-color: var(--color-primary),
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--global-font-size-2),
-					line-height: var(--global-line-height-2),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 					text-decoration: none,
 				),
@@ -483,7 +486,6 @@
 					display: flex,
 					flex-wrap: nowrap,
 					justify-content: space-between,
-					line-height: var(--global-spacing-9),
 					word-break: break-word,
 					components: (
 						button-default: (
@@ -500,7 +502,6 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-3),
 							padding-bottom: var(--global-spacing-5),
 							padding-left: var(--global-spacing-4),
 							padding-right: var(--global-spacing-5),
@@ -576,7 +577,6 @@
 					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-3),
 							text-transform: uppercase,
 						),
 						paragraph: (
@@ -792,28 +792,24 @@
 					padding: var(--global-spacing-4) 0,
 					components: (
 						heading: (
-							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--heading-level-6-font-weight),
+							line-height: var(--heading-level-6-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
 						),
 						overline: (
-							font-weight: var(--global-font-weight-7),
 							font-size: var(--body-font-size),
-							line-height: var(--global-line-height-4),
 						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
 						attribution: (
 							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
 						),
 						date: (
 							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
 						),
 					),
 				),
@@ -840,7 +836,6 @@
 					components: (
 						heading: (
 							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
 							font-weight: var(--global-font-weight-4),
 						),
 					),
@@ -855,11 +850,6 @@
 					components: (
 						stack: (
 							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
 						),
 					),
 				),
@@ -904,17 +894,12 @@
 					--grid-template-columns: 1fr,
 					grid-template-rows: auto 1fr,
 					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
 						overline: (
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-5),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -985,7 +970,6 @@
 						paragraph: (
 							display: inline,
 							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
 						),
 					),
 				),
@@ -1013,6 +997,7 @@
 					components: (
 						heading: (
 							font-weight: var(--body-font-weight),
+							line-height: var(--body-line-height),
 						),
 						link: (
 							flex: 1,
@@ -1030,11 +1015,6 @@
 				overline: (),
 				quad-chain: (
 					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-							font-weight: var(--heading-level-3-font-weight),
-						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),
@@ -1192,11 +1172,6 @@
 				),
 				single-chain: (
 					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-							font-weight: var(--heading-level-3-font-weight),
-						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),
@@ -1249,6 +1224,11 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
+				subheadline: (
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
 				tag-title: (
 					components: (
 						heading: (
@@ -1257,7 +1237,6 @@
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
 						),
 						stack: (
 							gap: var(--global-spacing-2),
@@ -1266,11 +1245,6 @@
 				),
 				triple-chain: (
 					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-							font-weight: var(--heading-level-3-font-weight),
-						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),
@@ -1285,11 +1259,6 @@
 				),
 				triple-chain-child-item-empty: (
 					display: contents,
-				),
-				subheadline: (
-					font-size: var(--global-font-size-5),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
 				),
 				video-player: (
 					components: (
@@ -1314,13 +1283,8 @@
 					margin: auto,
 					width: var(--content-scale-width),
 					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
 						paragraph: (
 							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
 						),
 						stack: (
 							gap: var(--global-spacing-3),
@@ -1354,12 +1318,6 @@
 				),
 				xl-manual-promo: (
 					components: (
-						heading: (
-							font-family: var(--font-family-primary),
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
@@ -1373,12 +1331,6 @@
 				),
 				xl-promo: (
 					components: (
-						heading: (
-							font-family: var(--font-family-primary),
-							font-size: var(--heading-level-3-font-size),
-							font-weight: var(--heading-level-3-font-weight),
-							line-height: var(--heading-level-3-line-height),
-						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
@@ -1398,11 +1350,11 @@
 		desktop: (
 			alias: (
 				"body-font-size": var(--global-font-size-4),
-				"body-line-height": var(--global-line-height-4),
+				"body-line-height": var(--global-line-height-6),
 				"body-font-size-small": var(--global-font-size-3),
-				"body-line-height-small": var(--global-line-height-3),
+				"body-line-height-small": var(--global-line-height-6),
 				"body-font-size-tiny": var(--global-font-size-2),
-				"body-line-height-tiny": var(--global-line-height-2),
+				"body-line-height-tiny": var(--global-line-height-6),
 				"heading-level-1-font-size": var(--global-font-size-15),
 				"heading-level-2-font-size": var(--global-font-size-14),
 				"heading-level-2-line-height": var(--global-line-height-3),
@@ -1492,13 +1444,6 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
-				card-list: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
 				header-small: (
 					font-size: var(--body-font-size),
 					line-height: var(--body-line-height),
@@ -1511,9 +1456,6 @@
 						heading: (
 							font-size: var(--heading-level-4-font-size),
 							line-height: var(--heading-level-4-line-height),
-						),
-						overline: (
-							font-size: var(--global-font-size-7),
 						),
 					),
 				),
@@ -1623,16 +1565,10 @@
 				triple-chain-child-item-empty: (
 					display: initial,
 				),
-				subheadline: (
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-5),
-				),
 				video-player-feature-meta: (
 					components: (
 						paragraph: (
 							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
 						),
 					),
 				),

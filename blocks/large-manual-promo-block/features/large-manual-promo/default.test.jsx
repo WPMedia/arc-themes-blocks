@@ -76,7 +76,7 @@ describe("the large promo feature", () => {
 
 	it("should have 1 container Grid component", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Grid)).toHaveLength(2);
+		expect(wrapper.find(Grid)).toHaveLength(1);
 	});
 
 	it("should render MediaItem component when showImage is true", () => {

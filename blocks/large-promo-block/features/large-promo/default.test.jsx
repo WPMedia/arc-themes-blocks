@@ -284,7 +284,7 @@ describe("Large Promo", () => {
 			/>
 		);
 		expect(screen.queryByText(largePromoMock.label.basic.text)).toBeNull();
-		expect(screen.queryByText("overline.sponsored-content")).not.toBeNull();
+		expect(screen.queryByText("global.sponsored-content")).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();

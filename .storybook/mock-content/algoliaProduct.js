@@ -77,4 +77,23 @@ export const algoliaProductMock = [
 			},
 		],
 	},
+	{
+		name: "Item 6",
+		image: testImageURL,
+		sku: "sku-6",
+		prices: [
+			{
+				amount: 26,
+				type: "Sale",
+				currencyLocale: "en-US",
+				currencyCode: "USD",
+			},
+			{
+				amount: 26,
+				type: "List",
+				currencyLocale: "en-US",
+				currencyCode: "USD",
+			},
+		],
+	},
 ];

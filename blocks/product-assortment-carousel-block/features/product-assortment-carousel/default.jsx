@@ -127,6 +127,9 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 					{content.map((item, carouselIndex) => {
 						const SalePrice = getPrice("Sale", item.prices);
 						const ListPrice = getPrice("List", item.prices);
+						const salePriceAmount = SalePrice?.amount;
+						const listPriceAmount = ListPrice?.amount;
+						const isOnSale = salePriceAmount && salePriceAmount !== listPriceAmount;
 
 						return (
 							<Carousel.Item
@@ -150,16 +153,16 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 										) : null}
 										<Price
 											className={`${
-												!SalePrice?.amount ? `${BLOCK_CLASS_NAME}__product-single-price` : null
+												!isOnSale ? `${BLOCK_CLASS_NAME}__product-single-price` : null
 											}`}
 										>
-											{SalePrice?.amount ? (
+											{isOnSale ? (
 												<Price.Sale>
 													{new Intl.NumberFormat(SalePrice.currencyLocale, {
 														style: "currency",
 														currency: SalePrice.currencyCode,
 														minimumFractionDigits: 2,
-													}).format(SalePrice.amount)}
+													}).format(salePriceAmount)}
 												</Price.Sale>
 											) : null}
 											<Price.List>
@@ -167,7 +170,7 @@ function ProductAssortmentCarousel({ customFields = {} }) {
 													style: "currency",
 													currency: ListPrice.currencyCode,
 													minimumFractionDigits: 2,
-												}).format(ListPrice.amount)}
+												}).format(listPriceAmount)}
 											</Price.List>
 										</Price>
 									</Link>

@@ -70,6 +70,37 @@ const mockContent = [
 			},
 		],
 	},
+	{
+		image: "image-url",
+		sku: "sku-5",
+		prices: [
+			{
+				amount: 26,
+				type: "List",
+				currencyLocale: "en-US",
+				currencyCode: "USD",
+			},
+		],
+	},
+	{
+		name: "Item 6",
+		image: "image-url",
+		sku: "sku-6",
+		prices: [
+			{
+				amount: 26,
+				type: "Sale",
+				currencyLocale: "en-US",
+				currencyCode: "USD",
+			},
+			{
+				amount: 26,
+				type: "List",
+				currencyLocale: "en-US",
+				currencyCode: "USD",
+			},
+		],
+	},
 ];
 
 jest.mock("fusion:content", () => ({

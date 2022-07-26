@@ -488,10 +488,6 @@
 				simple-list-item-anchor: (
 					flex: 0 0 33%,
 				),
-				simple-list-headline-text: (
-					-webkit-line-clamp: 3,
-					text-overflow: ellipsis,
-				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
 					components: (

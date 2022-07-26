@@ -11,11 +11,6 @@
 		@include scss.block-properties("simple-list-item-anchor");
 	}
 
-	&__headline-text {
-		@include scss.block-components("simple-list-headline-text");
-		@include scss.block-properties("simple-list-headline-text");
-	}
-
 	&__title {
 		@include scss.block-components("simple-list-title");
 		@include scss.block-properties("simple-list-title");

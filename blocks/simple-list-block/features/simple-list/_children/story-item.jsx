@@ -33,7 +33,7 @@ const StoryItem = (props) => {
 			) : null}
 			{showHeadline && itemTitle !== "" ? (
 				<Link href={websiteURL}>
-					<Heading className={`${classPrefix}__headline-text`}>{itemTitle}</Heading>
+					<Heading truncationLines={3}>{itemTitle}</Heading>
 				</Link>
 			) : null}
 		</Stack>

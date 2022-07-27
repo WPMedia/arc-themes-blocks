@@ -926,7 +926,7 @@
 					),
 				),
 				header-nav-chain-scrolled: (
-					height: var(--header-nav-chain-height-scrolled),
+					min-height: var(--header-nav-chain-height-scrolled),
 				),
 				header-nav-chain-top-layout: (
 					align-items: center,

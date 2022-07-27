@@ -5,8 +5,13 @@ import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Stack, isServerSide, Heading, HeadingSection } from "@wpmedia/arc-themes-components";
+import {
+	getImageFromANS,
+	Stack,
+	isServerSide,
+	Heading,
+	HeadingSection,
+} from "@wpmedia/arc-themes-components";
 import StoryItem from "./_children/story-item";
 
 const BLOCK_CLASS_NAME = "b-simple-list";
@@ -16,9 +21,8 @@ const unserializeStory = (arcSite) => (acc, storyObject) => {
 		return acc.concat({
 			id: storyObject._id,
 			itemTitle: storyObject.headlines.basic,
-			imageURL: extractImageFromStory(storyObject) || "",
+			imageURL: getImageFromANS(storyObject) || "",
 			websiteURL: storyObject.websites[arcSite].website_url || "",
-			resizedImageOptions: extractResizedParams(storyObject),
 		});
 	}
 	return acc;
@@ -44,11 +48,6 @@ const SimpleListWrapper = ({ customFields }) => {
 		fallbackImage,
 	});
 
-	const placeholderResizedImageOptions = useContent({
-		source: "resize-image-api",
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
-	});
-
 	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
 		return null;
@@ -59,7 +58,6 @@ const SimpleListWrapper = ({ customFields }) => {
 			<SimpleList
 				id={id}
 				customFields={customFields}
-				placeholderResizedImageOptions={placeholderResizedImageOptions}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}
 				arcSite={arcSite}
@@ -80,7 +78,6 @@ const SimpleList = (props) => {
 			showImage = true,
 		} = {},
 		id = "",
-		placeholderResizedImageOptions,
 		targetFallbackImage,
 		primaryLogoAlt,
 	} = props;
@@ -150,12 +147,10 @@ const SimpleList = (props) => {
 										showHeadline={showHeadline}
 										showImage={showImage}
 										resizedImageOptions={resizedImageOptions}
-										placeholderResizedImageOptions={placeholderResizedImageOptions}
 										targetFallbackImage={targetFallbackImage}
 										arcSite={arcSite}
 										primaryLogoAlt={primaryLogoAlt}
 									/>
-									{/* <hr /> */}
 								</React.Fragment>
 							))}
 					</Stack>

@@ -1171,25 +1171,6 @@
 				share-bar-email: (
 					fill: #b61818,
 				),
-				single-column-regular-main: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-11),
-						),
-					),
-				),
-				single-chain: (
-					components: (
-						stack: (
-							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
-						),
-					),
-				),
 				simple-list: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -1215,6 +1196,25 @@
 				),
 				simple-list-item-anchor: (
 					flex: 0 0 33%,
+				),
+				single-column-regular-main: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-11),
+						),
+					),
+				),
+				single-chain: (
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
 				),
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),

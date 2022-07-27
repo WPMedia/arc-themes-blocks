@@ -6,6 +6,11 @@
 		@include scss.block-properties("simple-list-item");
 	}
 
+	&__items {
+		@include scss.block-components("simple-list-items");
+		@include scss.block-properties("simple-list-items");
+	}
+
 	&__item-anchor {
 		@include scss.block-components("simple-list-item-anchor");
 		@include scss.block-properties("simple-list-item-anchor");

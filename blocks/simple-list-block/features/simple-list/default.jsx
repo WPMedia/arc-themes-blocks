@@ -134,29 +134,31 @@ const SimpleList = (props) => {
 			<Stack key={id} className={BLOCK_CLASS_NAME}>
 				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
 				<Wrapper>
-					{contentElements
-						.reduce(unserializeStory(arcSite), [])
-						.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
-							<React.Fragment key={listItemId}>
-								<StoryItem
-									key={listItemId}
-									id={listItemId}
-									classPrefix={BLOCK_CLASS_NAME}
-									itemTitle={itemTitle}
-									imageURL={imageURL}
-									websiteURL={websiteURL}
-									websiteDomain={websiteDomain}
-									showHeadline={showHeadline}
-									showImage={showImage}
-									resizedImageOptions={resizedImageOptions}
-									placeholderResizedImageOptions={placeholderResizedImageOptions}
-									targetFallbackImage={targetFallbackImage}
-									arcSite={arcSite}
-									primaryLogoAlt={primaryLogoAlt}
-								/>
-								<hr />
-							</React.Fragment>
-						))}
+					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
+						{contentElements
+							.reduce(unserializeStory(arcSite), [])
+							.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
+								<React.Fragment key={listItemId}>
+									<StoryItem
+										key={listItemId}
+										id={listItemId}
+										classPrefix={BLOCK_CLASS_NAME}
+										itemTitle={itemTitle}
+										imageURL={imageURL}
+										websiteURL={websiteURL}
+										websiteDomain={websiteDomain}
+										showHeadline={showHeadline}
+										showImage={showImage}
+										resizedImageOptions={resizedImageOptions}
+										placeholderResizedImageOptions={placeholderResizedImageOptions}
+										targetFallbackImage={targetFallbackImage}
+										arcSite={arcSite}
+										primaryLogoAlt={primaryLogoAlt}
+									/>
+									{/* <hr /> */}
+								</React.Fragment>
+							))}
+					</Stack>
 				</Wrapper>
 			</Stack>
 		</HeadingSection>

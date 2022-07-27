@@ -202,11 +202,11 @@
 		// Typography
 		// body
 		"body-font-weight": var(--global-font-weight-4),
-		"body-font-size": var(--global-font-size-3),
+		"body-font-size": var(--global-font-size-4),
 		"body-line-height": var(--global-line-height-3),
 		// body : small
 		"body-font-weight-small": var(--global-font-weight-4),
-		"body-font-size-small": var(--global-font-size-2),
+		"body-font-size-small": var(--global-font-size-3),
 		"body-line-height-small": var(--global-line-height-2),
 		// body : tiny
 		"body-font-weight-tiny": var(--global-font-weight-4),
@@ -465,32 +465,6 @@
 				),
 			),
 			blocks: (
-				simple-list: (
-					gap: var(--global-spacing-4),
-					components: (
-						stack: (
-							min-height: 72px,
-						),
-						image: (
-							vertical-align: middle,
-						),
-						link: (
-							text-decoration: none,
-						),
-					),
-				),
-				simple-list-title: (
-					font-size: var(--global-font-size-7),
-				),
-				simple-list-items: (
-					gap: var(--global-spacing-4),
-				),
-				simple-list-item: (
-					gap: var(--global-spacing-6),
-				),
-				simple-list-item-anchor: (
-					flex: 0 0 33%,
-				),
 				numbered-list: (
 					gap: var(--global-spacing-4),
 					components: (
@@ -1215,6 +1189,32 @@
 							font-weight: var(--global-font-weight-7),
 						),
 					),
+				),
+				simple-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						stack: (
+							min-height: 72px,
+						),
+						image: (
+							vertical-align: middle,
+						),
+						link: (
+							text-decoration: none,
+						),
+					),
+				),
+				simple-list-title: (
+					font-size: var(--global-font-size-7),
+				),
+				simple-list-items: (
+					gap: var(--global-spacing-4),
+				),
+				simple-list-item: (
+					gap: var(--global-spacing-6),
+				),
+				simple-list-item-anchor: (
+					flex: 0 0 33%,
 				),
 				single-chain-children-stack: (
 					gap: var(--global-spacing-6),

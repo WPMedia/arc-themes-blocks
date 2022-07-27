@@ -43,6 +43,29 @@
 		@include scss.block-properties("header-nav-chain-flyout-overlay");
 	}
 
+	&__nav-left {
+		@include scss.block-components("header-nav-chain-top-nav-left");
+		@include scss.block-properties("header-nav-chain-top-nav-left");
+	}
+
+	&__nav-right {
+		@include scss.block-components("header-nav-chain-top-nav-right");
+		@include scss.block-properties("header-nav-chain-top-nav-right");
+	}
+
+	&__nav-left,
+	&__nav-right {
+		.nav-components--mobile {
+			@include scss.block-components("header-nav-chain-top-nav-components-mobile");
+			@include scss.block-properties("header-nav-chain-top-nav-components-mobile");
+		}
+
+		.nav-components--desktop {
+			@include scss.block-components("header-nav-chain-top-nav-components-desktop");
+			@include scss.block-properties("header-nav-chain-top-nav-components-desktop");
+		}
+	}
+
 	&__flyout-nav-wrapper {
 		&.open {
 			@include scss.block-components("header-nav-chain-flyout-nav-wrapper-open");
@@ -142,29 +165,6 @@
 
 		@include scss.block-components("header-nav-chain-top-layout");
 		@include scss.block-properties("header-nav-chain-top-layout");
-	}
-
-	&__nav-left {
-		@include scss.block-components("header-nav-chain-top-nav-left");
-		@include scss.block-properties("header-nav-chain-top-nav-left");
-	}
-
-	&__nav-right {
-		@include scss.block-components("header-nav-chain-top-nav-right");
-		@include scss.block-properties("header-nav-chain-top-nav-right");
-	}
-
-	&__nav-left,
-	&__nav-right {
-		.nav-components--mobile {
-			@include scss.block-components("header-nav-chain-top-nav-components-mobile");
-			@include scss.block-properties("header-nav-chain-top-nav-components-mobile");
-		}
-
-		.nav-components--desktop {
-			@include scss.block-components("header-nav-chain-top-nav-components-desktop");
-			@include scss.block-properties("header-nav-chain-top-nav-components-desktop");
-		}
 	}
 
 	&__logo {

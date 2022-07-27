@@ -951,11 +951,11 @@
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-4),
+							line-height: var(--global-line-height-6),
 						),
 						overline: (
 							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-5),
+							line-height: var(--global-line-height-4),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
@@ -1571,8 +1571,10 @@
 							font-size: var(--global-font-size-12),
 							line-height: var(--global-line-height-7),
 						),
-						overline: (
-							font-size: var(--global-font-size-7),
+						components: (
+							overline: (
+								font-size: var(--global-font-size-7),
+							),
 						),
 					),
 				),

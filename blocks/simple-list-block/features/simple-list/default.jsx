@@ -134,7 +134,7 @@ const SimpleList = (props) => {
 					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
 						{contentElements
 							.reduce(unserializeStory(arcSite), [])
-							.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
+							.map(({ id: listItemId, itemTitle, imageURL, websiteURL }) => (
 								<StoryItem
 									key={listItemId}
 									classPrefix={BLOCK_CLASS_NAME}
@@ -144,7 +144,6 @@ const SimpleList = (props) => {
 									websiteDomain={websiteDomain}
 									showHeadline={showHeadline}
 									showImage={showImage}
-									resizedImageOptions={resizedImageOptions}
 									targetFallbackImage={targetFallbackImage}
 									arcSite={arcSite}
 									primaryLogoAlt={primaryLogoAlt}

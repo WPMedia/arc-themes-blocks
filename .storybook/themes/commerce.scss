@@ -350,6 +350,28 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
+				details: (
+					display: flex,
+					font-size: var(--body-font-size),
+					gap: var(--global-spacing-4),
+				),
+				details-with-icon-summary: (
+					font-weight: var(--global-font-weight-7),
+					line-height: 1.4,
+					justify-content: space-between,
+				),
+				details-summary: (
+					font-size: var(--body-font-size),
+				),
+				details-summary-icon: (
+					align-items: center,
+					display: flex,
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				details-open-summary-icon: (
+					transform: rotate(180deg),
+				),
 				heading: (
 					font-weight: var(--global-font-weight-7),
 				),
@@ -863,6 +885,9 @@
 				),
 				carousel-track: (
 					gap: var(--global-spacing-6),
+				),
+				details-summary: (
+					font-size: var(--global-font-size-7),
 				),
 			),
 			blocks: (

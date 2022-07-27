@@ -156,6 +156,12 @@ describe("Simple list", () => {
 		expect(wrapper.find("StoryItem").length).toBe(2);
 	});
 
+	it("should render content only for the arcSite", () => {
+		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
+
+		expect(wrapper.find("StoryItem")).toHaveLength(2); // sup
+	});
+
 	it("should not render items when no data provided", () => {
 		const customFields = {
 			lazyLoad: false,
@@ -174,17 +180,13 @@ describe("Simple list", () => {
 
 		expect(wrapper.find("StoryItem").length).toBe(0);
 	});
-	it("should render content only for the arcSite", () => {
-		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
 
-		expect(wrapper.find("StoryItem")).toHaveLength(2);
-	});
 	it("should render null if isServerSide and lazyLoad enabled", () => {
 		const customFields = {
 			lazyLoad: true,
 		};
 		isServerSide.mockReturnValue(true);
-		useFusionContext.mockReturnValue({
+		useFusionContext.mockReturnValueOnce({
 			arcSite: "the-sun",
 			deployment: jest.fn((x) => x),
 			isAdmin: false,

@@ -159,7 +159,7 @@ describe("Simple list", () => {
 	it("should render content only for the arcSite", () => {
 		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
 
-		expect(wrapper.find("StoryItem")).toHaveLength(2); // sup
+		expect(wrapper.find("StoryItem")).toHaveLength(2);
 	});
 
 	it("should not render items when no data provided", () => {

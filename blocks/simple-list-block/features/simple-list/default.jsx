@@ -137,7 +137,6 @@ const SimpleList = (props) => {
 							.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
 								<StoryItem
 									key={listItemId}
-									id={listItemId}
 									classPrefix={BLOCK_CLASS_NAME}
 									itemTitle={itemTitle}
 									imageURL={imageURL}

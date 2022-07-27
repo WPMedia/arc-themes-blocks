@@ -5,8 +5,7 @@ const StoryItem = (props) => {
 	const {
 		itemTitle = "",
 		imageURL = "",
-		id = "",
-		classPrefix = "",
+		classPrefix,
 		websiteURL,
 		showHeadline,
 		showImage,
@@ -15,7 +14,7 @@ const StoryItem = (props) => {
 	} = props;
 
 	return (
-		<Stack as="article" key={id} className={`${classPrefix}__item`} direction="horizontal">
+		<Stack as="article" className={`${classPrefix}__item`} direction="horizontal">
 			{showImage ? (
 				<Link
 					href={websiteURL}

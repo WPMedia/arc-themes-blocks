@@ -227,47 +227,45 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						</Conditional>
 					</MediaItem>
 				) : null}
-				{showOverline || showHeadline || showDescription || showByline || showDate ? (
-					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						{showOverline && (url || text) ? (
-							<Overline href={url ? formatURL(url) : null}>{text}</Overline>
+				<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+					{showOverline && (url || text) ? (
+						<Overline href={url ? formatURL(url) : null}>{text}</Overline>
+					) : null}
+					<Stack>
+						{showHeadline && content?.headlines?.basic ? (
+							<Heading>
+								<Conditional
+									component={Link}
+									condition={content?.websites?.[arcSite]?.website_url}
+									href={formatURL(content?.websites?.[arcSite]?.website_url)}
+									onClick={registerSuccessEvent}
+								>
+									{content?.headlines?.basic}
+								</Conditional>
+							</Heading>
 						) : null}
-						<Stack>
-							{showHeadline && content?.headlines?.basic ? (
-								<Heading>
-									<Conditional
-										component={Link}
-										condition={content?.websites?.[arcSite]?.website_url}
-										href={formatURL(content?.websites?.[arcSite]?.website_url)}
-										onClick={registerSuccessEvent}
-									>
-										{content?.headlines?.basic}
-									</Conditional>
-								</Heading>
-							) : null}
-							{showDescription ? (
-								<Paragraph suppressContentEditableWarning {...editableDescription}>
-									{content?.description?.basic}
-								</Paragraph>
-							) : null}
-							{showByline || showDate ? (
-								<Attribution>
-									<Join separator={Separator}>
-										{showByline ? (
-											<Join separator={() => " "}>
-												{phrases.t("global.by-text")}
-												{bylineNodes}
-											</Join>
-										) : null}
-										{showDate && content?.display_date ? (
-											<DateDisplay dateTime={content.display_date} dateString={displayDate} />
-										) : null}
-									</Join>
-								</Attribution>
-							) : null}
-						</Stack>
+						{showDescription ? (
+							<Paragraph suppressContentEditableWarning {...editableDescription}>
+								{content?.description?.basic}
+							</Paragraph>
+						) : null}
+						{showByline || showDate ? (
+							<Attribution>
+								<Join separator={Separator}>
+									{showByline ? (
+										<Join separator={() => " "}>
+											{phrases.t("global.by-text")}
+											{bylineNodes}
+										</Join>
+									) : null}
+									{showDate && content?.display_date ? (
+										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
+									) : null}
+								</Join>
+							</Attribution>
+						) : null}
 					</Stack>
-				) : null}
+				</Stack>
 			</Grid>
 		</HeadingSection>
 	);

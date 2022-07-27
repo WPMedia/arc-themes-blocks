@@ -1177,22 +1177,18 @@
 						stack: (
 							min-height: 72px,
 						),
-						image: (
-							vertical-align: middle,
-						),
-						link: (
-							text-decoration: none,
+						heading: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
 						),
 					),
-				),
-				simple-list-title: (
-					font-size: var(--global-font-size-5),
-					line-height: var(--global-line-height-5),
 				),
 				simple-list-items: (
 					components: (
 						heading: (
-							line-height: var(--global-line-height-4),
+							line-height: var(--body-line-height),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 						),
 					),
 					gap: var(--global-spacing-4),
@@ -1618,8 +1614,12 @@
 				share-bar: (
 					display: flex,
 				),
-				simple-list-title: (
-					font-size: var(--global-font-size-7),
+				simple-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
 				),
 				single-column-regular-main: (
 					components: (

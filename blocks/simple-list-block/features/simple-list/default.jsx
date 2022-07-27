@@ -129,7 +129,7 @@ const SimpleList = (props) => {
 	return (
 		<HeadingSection>
 			<Stack key={id} className={BLOCK_CLASS_NAME}>
-				{title ? <Heading className={`${BLOCK_CLASS_NAME}__title`}>{title}</Heading> : null}
+				{title ? <Heading>{title}</Heading> : null}
 				<Wrapper>
 					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
 						{contentElements

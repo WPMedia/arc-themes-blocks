@@ -16,11 +16,6 @@
 		@include scss.block-properties("simple-list-item-anchor");
 	}
 
-	&__title {
-		@include scss.block-components("simple-list-title");
-		@include scss.block-properties("simple-list-title");
-	}
-
 	@include scss.block-components("simple-list");
 	@include scss.block-properties("simple-list");
 }

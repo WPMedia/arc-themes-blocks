@@ -465,36 +465,6 @@
 				),
 			),
 			blocks: (
-				numbered-list: (
-					gap: var(--global-spacing-4),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-5),
-						),
-					),
-				),
-				numbered-list-items: (
-					gap: var(--global-spacing-4),
-				),
-				numbered-list-item: (
-					gap: var(--global-spacing-5),
-					components: (
-						heading: (
-							font-weight: var(--global-font-weight-4),
-						),
-						link: (
-							flex: 1,
-						),
-						paragraph: (
-							font-family: var(--font-family-secondary),
-							font-size: var(--global-font-size-5),
-							font-weight: var(--global-font-weight-7),
-						),
-					),
-				),
-				numbered-list-item-image: (
-					max-width: 25%,
-				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -1014,6 +984,36 @@
 							width: 68%,
 						),
 					),
+				),
+				numbered-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						heading: (
+							font-size: var(--global-font-size-5),
+						),
+					),
+				),
+				numbered-list-items: (
+					gap: var(--global-spacing-4),
+				),
+				numbered-list-item: (
+					gap: var(--global-spacing-5),
+					components: (
+						heading: (
+							font-weight: var(--global-font-weight-4),
+						),
+						link: (
+							flex: 1,
+						),
+						paragraph: (
+							font-family: var(--font-family-secondary),
+							font-size: var(--global-font-size-5),
+							font-weight: var(--global-font-weight-7),
+						),
+					),
+				),
+				numbered-list-item-image: (
+					max-width: 25%,
 				),
 				overline: (),
 				quad-chain: (

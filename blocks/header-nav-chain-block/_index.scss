@@ -59,13 +59,18 @@
 			@include scss.block-properties("header-nav-chain-flyout-nav-widgets");
 		}
 
+		.nav-menu {
+			@include scss.block-components("header-nav-chain-flyout-nav-menu");
+			@include scss.block-properties("header-nav-chain-flyout-nav-menu");
+		}
+
 		.nav-components {
-			&--mobile {
+			&--mobile:not(:empty) {
 				@include scss.block-components("header-nav-chain-flyout-nav-components-mobile");
 				@include scss.block-properties("header-nav-chain-flyout-nav-components-mobile");
 			}
 
-			&--desktop {
+			&--desktop:not(:empty) {
 				@include scss.block-components("header-nav-chain-flyout-nav-components-desktop");
 				@include scss.block-properties("header-nav-chain-flyout-nav-components-desktop");
 			}

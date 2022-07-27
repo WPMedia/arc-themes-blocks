@@ -183,7 +183,7 @@
 		"text-color-subtle": var(--global-neutral-5),
 		"background-color": var(--global-white),
 		"icon-fill-color": var(--global-neutral-8),
-		"icon-fill-color-subtle": var(--global-neutral-5),
+		"icon-fill-color-subtle": var(--global-neutral-4),
 		"border-color": var(--global-neutral-4),
 		"form-background-color": var(--global-white),
 		"form-border-color": var(--global-neutral-5),
@@ -894,7 +894,7 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 					transform: translateZ(0),
-					height: var(--header-nav-chain-height),
+					min-height: var(--header-nav-chain-height),
 					// Hardware acceleration performance on height adjustments
 					justify-content: center,
 					display: flex,
@@ -921,6 +921,7 @@
 							font-weight: var(--global-font-weight-7),
 							font-size: var(--global-font-size-4),
 							line-height: var(--global-line-height-4),
+							padding: var(--global-spacing-2),
 						),
 					),
 				),
@@ -957,10 +958,7 @@
 				header-nav-chain-top-nav-components-desktop: (
 					align-items: center,
 					display: none,
-					gap: var(--global-spacing-4),
-				),
-				header-nav-chain-logo: (
-					max-height: var(--global-spacing-7),
+					gap: var(--global-spacing-2),
 				),
 				header-nav-chain-logo-hidden: (
 					opacity: 0,
@@ -979,7 +977,8 @@
 					visibility: visible,
 				),
 				header-nav-chain-logo-image: (
-					max-height: var(--global-spacing-7),
+					max-width: 240px,
+					max-height: var(--header-nav-chain-height),
 				),
 				header-nav-chain-nav-search: (
 					align-items: center,
@@ -1006,8 +1005,6 @@
 				header-nav-chain-nav-search-box-position: (
 					position: absolute,
 					right: 0,
-					height: 3rem,
-					padding: 0.5rem,
 				),
 				header-nav-chain-nav-search-box-svg: (
 					fill: #191919,
@@ -1083,11 +1080,25 @@
 					padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
 						var(--global-spacing-5),
 				),
+				header-nav-chain-flyout-nav-menu: (
+					components: (
+						stack: (
+							gap: 1rem,
+						),
+					),
+				),
 				header-nav-chain-flyout-nav-components-mobile: (
-					display: inherit,
+					display: flex,
+					padding: var(--global-spacing-5),
 				),
 				header-nav-chain-flyout-nav-components-desktop: (
 					display: none,
+					padding: var(--global-spacing-5),
+					components: (
+						button: (
+							align-self: flex-start,
+						),
+					),
 				),
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
@@ -1098,15 +1109,14 @@
 					components: (
 						link: (
 							width: 100%,
-							padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
-								var(--global-spacing-5),
+							padding: var(--global-spacing-2) var(--global-spacing-5),
 							align-items: center,
 							color: var(--global-white),
 							font-weight: var(--global-font-weight-7),
 							display: block,
 							font-size: var(--global-font-size-4),
 							justify-content: space-between,
-							line-height: var(--global-line-height-7),
+							line-height: 1.5,
 							text-decoration: none,
 						),
 						link-hover: (
@@ -1686,7 +1696,6 @@
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-2),
-				"header-nav-chain-height": 100px,
 			),
 			components: (
 				carousel: (
@@ -1811,7 +1820,7 @@
 					display: none,
 				),
 				header-nav-chain-flyout-nav-components-desktop: (
-					display: inherit,
+					display: flex,
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),

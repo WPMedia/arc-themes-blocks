@@ -59,6 +59,7 @@ const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
 		<Stack
 			className={`${blockClassName}__subsection-anchor subsection-anchor ${isOpen ? "open" : ""}`}
 			direction="horizontal"
+			alignment="center"
 			onClick={onClickSubsection}
 		>
 			<SectionAnchor item={item} isHidden={isHidden} />

@@ -131,7 +131,7 @@ describe("Simple list", () => {
 
 		const wrapper = mount(<SimpleList customFields={customFields} />);
 
-		expect(wrapper.find(".b-simple-list__title").first().text()).toBe(testText);
+		expect(wrapper.find("Heading").first().text()).toBe(testText);
 	});
 
 	it("should show no title if there is no title provided", () => {

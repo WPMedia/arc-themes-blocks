@@ -21,7 +21,7 @@ const BLOCK_CLASS_NAME = "b-product-assortment-carousel";
 const MIN_SLIDES = 4;
 const MAX_SLIDES = 12;
 
-const getProductURL = (item) => item.filter((x) => x.name === "product_url")[0]?.value || {};
+const getProductURL = (item) => item.filter((x) => x.name === "product_url")[0]?.value || "#";
 
 const getPrice = (type, prices) => prices.filter((x) => x.type === type)[0] || {};
 

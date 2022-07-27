@@ -70,18 +70,6 @@ const mockContent = [
 			},
 		],
 	},
-	{
-		image: "image-url",
-		sku: "sku-5",
-		prices: [
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
-	},
 ];
 
 jest.mock("fusion:content", () => ({
@@ -245,5 +233,83 @@ describe("Product Assortment Carousel", () => {
 
 		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
 		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
+	});
+
+	it("should generate product URL", () => {
+		const mockUrl = "a-url";
+		useContent.mockReturnValue([
+			{
+				name: "Has product_url attribute",
+				image: "image-url",
+				sku: "sku-1",
+				prices: [
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+				attributes: [
+					{
+						name: "product_url",
+						value: mockUrl,
+					},
+				],
+			},
+			{
+				name: "Has no product_url attribute",
+				image: "image-url",
+				sku: "sku-2",
+				prices: [
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+				attributes: [
+					{
+						name: "unrelated_field",
+						value: "unrelated value",
+					},
+				],
+			},
+			{
+				name: "Has empty attribute array",
+				image: "image-url",
+				sku: "sku-3",
+				prices: [
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+				attributes: [],
+			},
+			{
+				name: "Has no attribute key",
+				image: "image-url",
+				sku: "sku-4",
+				prices: [
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+			},
+		]);
+		const { container } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+		expect(container.querySelectorAll("a")[0]).toHaveAttribute("href", mockUrl);
+		expect(container.querySelectorAll("a")[1]).toHaveAttribute("href", "#");
+		expect(container.querySelectorAll("a")[2]).toHaveAttribute("href", "#");
+		expect(container.querySelectorAll("a")[3]).toHaveAttribute("href", "#");
 	});
 });

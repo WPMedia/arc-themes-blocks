@@ -97,15 +97,15 @@ const LargeManualPromo = ({ customFields }) => {
 			<HeadingSection>
 				<Grid as="article" className={BLOCK_CLASS_NAME}>
 					{showImage && imageURL ? <PromoImage /> : null}
-					{showDescription && description ? (
-						<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-							<PromoOverline />
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						<PromoOverline />
+						{showDescription || showHeadline ? (
 							<Stack>
 								<PromoHeading />
-								<PromoDescription />
+								{showDescription && description ? <PromoDescription /> : null}
 							</Stack>
-						</Stack>
-					) : null}
+						) : null}
+					</Stack>
 				</Grid>
 			</HeadingSection>
 		</LazyLoad>

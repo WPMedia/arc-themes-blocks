@@ -1186,9 +1186,15 @@
 					),
 				),
 				simple-list-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--global-font-size-5),
+					line-height: var(--global-line-height-5),
 				),
 				simple-list-items: (
+					components: (
+						heading: (
+							line-height: var(--global-line-height-4),
+						),
+					),
 					gap: var(--global-spacing-4),
 				),
 				simple-list-item: (
@@ -1611,6 +1617,9 @@
 				),
 				share-bar: (
 					display: flex,
+				),
+				simple-list-title: (
+					font-size: var(--global-font-size-7),
 				),
 				single-column-regular-main: (
 					components: (

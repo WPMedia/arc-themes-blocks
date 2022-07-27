@@ -172,8 +172,7 @@ describe("Simple list", () => {
 				},
 			},
 		};
-		// Once for Placeholder, once for SimpleList data
-		useContent.mockReturnValueOnce(null);
+
 		useContent.mockReturnValueOnce(null);
 
 		const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);

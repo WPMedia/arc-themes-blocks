@@ -82,25 +82,6 @@ const mockContent = [
 			},
 		],
 	},
-	{
-		name: "Item 6",
-		image: "image-url",
-		sku: "sku-6",
-		prices: [
-			{
-				amount: 26,
-				type: "Sale",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-			{
-				amount: 26,
-				type: "List",
-				currencyLocale: "en-US",
-				currencyCode: "USD",
-			},
-		],
-	},
 ];
 
 jest.mock("fusion:content", () => ({
@@ -159,5 +140,110 @@ describe("Product Assortment Carousel", () => {
 				"This feature requires a minimum of 4 products and a maximum of 12 to display."
 			)
 		).not.toBeNull();
+	});
+
+	it("should render list price only when no sale price", () => {
+		useContent.mockReturnValue([
+			{
+				name: "List Price Render",
+				image: "image-url",
+				sku: "sku-mock",
+				prices: [
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+				attributes: [
+					{
+						name: "product_url",
+						value: "a-url",
+					},
+				],
+			},
+			...mockContent,
+		]);
+		const { queryAllByTestId } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+
+		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
+		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
+	});
+
+	it("should render list price and sale price when both exist and differ", () => {
+		useContent.mockReturnValue([
+			{
+				name: "List + Sale Price Render",
+				image: "image-url",
+				sku: "sku-mock",
+				prices: [
+					{
+						amount: 16,
+						type: "Sale",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+			},
+			...mockContent,
+		]);
+
+		const { queryAllByTestId } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
+		expect(priceItemsContainer[0].querySelector(".c-price__sale")).toHaveTextContent("$16");
+	});
+
+	it("should render list price only when sale price is the same", () => {
+		useContent.mockReturnValue([
+			{
+				name: "List Price Render",
+				image: "image-url",
+				sku: "sku-mock",
+				prices: [
+					{
+						amount: 26,
+						type: "Sale",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+					{
+						amount: 26,
+						type: "List",
+						currencyLocale: "en-US",
+						currencyCode: "USD",
+					},
+				],
+				attributes: [
+					{
+						name: "product_url",
+						value: "a-url",
+					},
+				],
+			},
+			...mockContent,
+		]);
+		const { queryAllByTestId } = render(
+			<ProductAssortmentCarousel customFields={{ headerText: "Header" }} />
+		);
+
+		const priceItemsContainer = queryAllByTestId("price");
+
+		expect(priceItemsContainer[0].querySelector(".c-price__list")).toHaveTextContent("$26");
+		expect(priceItemsContainer[0].querySelector(".c-price__sale")).not.toBeInTheDocument();
 	});
 });

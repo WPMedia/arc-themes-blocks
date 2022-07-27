@@ -135,23 +135,21 @@ const SimpleList = (props) => {
 						{contentElements
 							.reduce(unserializeStory(arcSite), [])
 							.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
-								<React.Fragment key={listItemId}>
-									<StoryItem
-										key={listItemId}
-										id={listItemId}
-										classPrefix={BLOCK_CLASS_NAME}
-										itemTitle={itemTitle}
-										imageURL={imageURL}
-										websiteURL={websiteURL}
-										websiteDomain={websiteDomain}
-										showHeadline={showHeadline}
-										showImage={showImage}
-										resizedImageOptions={resizedImageOptions}
-										targetFallbackImage={targetFallbackImage}
-										arcSite={arcSite}
-										primaryLogoAlt={primaryLogoAlt}
-									/>
-								</React.Fragment>
+								<StoryItem
+									key={listItemId}
+									id={listItemId}
+									classPrefix={BLOCK_CLASS_NAME}
+									itemTitle={itemTitle}
+									imageURL={imageURL}
+									websiteURL={websiteURL}
+									websiteDomain={websiteDomain}
+									showHeadline={showHeadline}
+									showImage={showImage}
+									resizedImageOptions={resizedImageOptions}
+									targetFallbackImage={targetFallbackImage}
+									arcSite={arcSite}
+									primaryLogoAlt={primaryLogoAlt}
+								/>
 							))}
 					</Stack>
 				</Wrapper>

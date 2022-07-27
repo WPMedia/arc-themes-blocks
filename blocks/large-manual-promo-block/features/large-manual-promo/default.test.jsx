@@ -96,6 +96,14 @@ describe("the large promo feature", () => {
 		expect(overline.props().href).toBeUndefined();
 	});
 
+	it("should not render Overline component when either showOverline or overline prop is false provided", () => {
+		const wrapper = mount(
+			<LargeManualPromo customFields={{ ...config, showOverline: false, overline: "" }} />
+		);
+		const overline = wrapper.find(Overline);
+		expect(overline).toHaveLength(0);
+	});
+
 	it("should render Heading component when showHeadline is true", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
 		expect(wrapper.find(Heading)).toHaveLength(1);

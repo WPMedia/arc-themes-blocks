@@ -1129,6 +1129,11 @@
 				),
 				header-nav-chain-flyout-nav-item-hover-active: (
 					background-color: var(--global-neutral-7),
+					components: (
+						icon: (
+							fill: var(--global-white),
+						),
+					),
 				),
 				header-nav-chain-flyout-nav-subsection-anchor: (
 					height: var(--global-spacing-8),

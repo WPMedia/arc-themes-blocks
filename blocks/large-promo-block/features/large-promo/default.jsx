@@ -252,7 +252,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						{showByline || showDate ? (
 							<Attribution>
 								<Join separator={Separator}>
-									{showByline ? (
+									{showByline && content?.credits?.by ? (
 										<Join separator={() => " "}>
 											{phrases.t("global.by-text")}
 											{bylineNodes}

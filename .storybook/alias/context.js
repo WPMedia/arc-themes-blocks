@@ -184,6 +184,9 @@ export const useFusionContext = () => ({
 		},
 	},
 	deployment: (a) => a,
+	siteProperties: {
+		dfpId: "dfpId",
+	},
 });
 
 export const useComponentContext = () => ({

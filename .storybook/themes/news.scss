@@ -183,7 +183,7 @@
 		"text-color-subtle": var(--global-neutral-5),
 		"background-color": var(--global-white),
 		"icon-fill-color": var(--global-neutral-8),
-		"icon-fill-color-subtle": var(--global-neutral-5),
+		"icon-fill-color-subtle": var(--global-neutral-4),
 		"border-color": var(--global-neutral-4),
 		"form-background-color": var(--global-white),
 		"form-border-color": var(--global-neutral-5),
@@ -220,6 +220,9 @@
 		// --content-scale-width identifies the inner document width for header and content
 		//
 		"content-scale-width": calc(var(--content-max-width) / var(--layout-max-width) * 100%),
+		"header-nav-chain-height": 56px,
+		"header-nav-chain-height-scrolled": 56px,
+		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
 	),
 	$tokens: (
 		default: (
@@ -490,10 +493,8 @@
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
 							line-height: var(--global-line-height-3),
-							padding-bottom: var(--global-spacing-5),
-							padding-left: var(--global-spacing-4),
-							padding-right: var(--global-spacing-5),
-							padding-top: var(--global-spacing-5),
+							padding: var(--global-spacing-5) var(--global-spacing-5) var(--global-spacing-5)
+								var(--global-spacing-4),
 							text-decoration: none,
 						),
 						icon: (
@@ -885,6 +886,314 @@
 					line-height: var(--global-line-height-9),
 					font-size: var(--global-font-size-13),
 					font-weight: var(--global-font-weight-7),
+				),
+				header-nav-chain: (
+					background-color: var(--global-black),
+					padding: var(--global-spacing-2) var(--global-spacing-4),
+					font-weight: var(--global-font-weight-7),
+					font-size: var(--global-font-size-4),
+					line-height: var(--global-line-height-4),
+					transform: translateZ(0),
+					min-height: var(--header-nav-chain-height),
+					// Hardware acceleration performance on height adjustments
+					justify-content: center,
+					display: flex,
+					align-items: center,
+					width: 100%,
+					position: sticky,
+					top: 0px,
+					margin-bottom: 0px,
+					z-index: 1,
+					components: (
+						icon: (
+							fill: currentColor,
+							height: var(--global-spacing-5),
+							width: var(--global-spacing-5),
+						),
+						button: (
+							color: var(--global-white),
+							height: var(--global-spacing-7),
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						button-small: (
+							font-weight: var(--global-font-weight-7),
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+							padding: var(--global-spacing-2),
+						),
+					),
+				),
+				header-nav-chain-scrolled: (
+					min-height: var(--header-nav-chain-height-scrolled),
+				),
+				header-nav-chain-top-layout: (
+					align-items: center,
+					display: flex,
+					width: 100%,
+					gap: var(--global-spacing-5),
+				),
+				header-nav-chain-top-layout-center-logo: (
+					justify-content: space-between,
+				),
+				header-nav-chain-top-layout-last-child: (
+					margin-right: 0,
+					flex-shrink: 0,
+				),
+				header-nav-chain-top-nav-left: (
+					justify-content: flex-start,
+					flex-shrink: 0,
+				),
+				header-nav-chain-top-nav-right: (
+					display: flex,
+					justify-content: flex-end,
+					flex-shrink: 0,
+					margin-right: 0,
+				),
+				header-nav-chain-top-nav-components-mobile: (
+					align-items: center,
+					display: flex,
+				),
+				header-nav-chain-top-nav-components-desktop: (
+					align-items: center,
+					display: none,
+					gap: var(--global-spacing-2),
+				),
+				header-nav-chain-logo-hidden: (
+					opacity: 0,
+					transition: (
+						opacity 0.8s ease,
+						visibility 0s ease 0s,
+					),
+					visibility: hidden,
+				),
+				header-nav-chain-logo-show: (
+					opacity: 1,
+					transition: (
+						opacity 0.8s ease,
+						visibility 0s ease 0s,
+					),
+					visibility: visible,
+				),
+				header-nav-chain-logo-image: (
+					max-width: 240px,
+					max-height: var(--header-nav-chain-height),
+				),
+				header-nav-chain-nav-search: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					position: relative,
+				),
+				header-nav-chain-nav-search-input: (
+					padding: 0,
+					width: 0,
+				),
+				header-nav-chain-nav-search-input-open: (
+					font-size: var(--global-font-size-4),
+					height: var(--global-spacing-7),
+					line-height: var(--global-line-height-4),
+					padding: 4px 24px 4px 11px,
+					width: 100%,
+				),
+				header-nav-chain-nav-search-button: (
+					background: transparent,
+					border: transparent,
+					cursor: pointer,
+				),
+				header-nav-chain-nav-search-box-position: (
+					position: absolute,
+					right: 0,
+				),
+				header-nav-chain-nav-search-box-svg: (
+					fill: #191919,
+					height: 1rem,
+					width: 1rem,
+				),
+				header-nav-chain-links-list: (
+					display: none,
+					gap: var(--global-spacing-2),
+					height: var(--global-spacing-5),
+					flex: 0 3 auto,
+					overflow: hidden,
+					text-align: left,
+					width: auto,
+					flex-wrap: wrap,
+					components: (
+						link: (
+							color: var(--global-white),
+							display: flex,
+							align-items: center,
+							height: 100%,
+						),
+						separator: (
+							color: var(--global-white),
+						),
+					),
+				),
+				header-nav-chain-links-list-item: (
+					display: flex,
+					gap: var(--global-spacing-2),
+				),
+				header-nav-chain-scrolled-flyout-overlay: (
+					margin-top: var(--header-nav-chain-height-scrolled),
+				),
+				header-nav-chain-flyout-overlay: (
+					margin-top: var(--header-nav-chain-height),
+					z-index: 8,
+					background: var(--header-nav-chain-overlay-background-color),
+					-ms-overflow-style: none,
+					position: absolute,
+					scrollbar-width: none,
+					left: 0,
+					top: 0,
+				),
+				header-nav-chain-flyout-overlay-scrollbar: (
+					display: none,
+				),
+				header-nav-chain-flyout-overlay-open: (
+					background: var(--header-nav-chain-overlay-background-color),
+					overflow-y: scroll,
+					transform: translate(0, 0),
+					width: 100%,
+				),
+				header-nav-chain-flyout-overlay-closed: (
+					// hide vertical overflow when closed
+					overflow-y: hidden,
+					width: 0,
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					z-index: 10,
+					background: var(--global-black),
+					transition: transform 300ms ease-in-out,
+					width: 100vw,
+				),
+				header-nav-chain-flyout-nav-wrapper-open: (
+					gap: var(--global-spacing-4),
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-100vw, 0),
+				),
+				header-nav-chain-flyout-nav-widgets: (
+					margin-top: var(--global-spacing-3),
+					padding: var(--global-spacing-1) var(--global-spacing-4) var(--global-spacing-1)
+						var(--global-spacing-5),
+				),
+				header-nav-chain-flyout-nav-menu: (
+					components: (
+						stack: (
+							gap: 1rem,
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-components-mobile: (
+					display: flex,
+					padding: var(--global-spacing-5),
+				),
+				header-nav-chain-flyout-nav-components-desktop: (
+					display: none,
+					padding: var(--global-spacing-5),
+					components: (
+						button: (
+							align-self: flex-start,
+						),
+					),
+				),
+				header-nav-chain-flyout-nav: (
+					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
+					gap: 0,
+					font-weight: bold,
+					list-style: none,
+					position: relative,
+					components: (
+						link: (
+							width: 100%,
+							padding: var(--global-spacing-2) var(--global-spacing-5),
+							align-items: center,
+							color: var(--global-white),
+							font-weight: var(--global-font-weight-7),
+							display: block,
+							font-size: var(--global-font-size-4),
+							justify-content: space-between,
+							line-height: 1.5,
+							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--global-white),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-item: (
+					background-color: var(--global-black),
+				),
+				header-nav-chain-flyout-nav-item-hover-active: (
+					background-color: var(--global-neutral-7),
+					components: (
+						icon: (
+							fill: var(--global-white),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-subsection-anchor: (
+					height: var(--global-spacing-8),
+					components: (
+						stack: (
+							align-content: center,
+							cursor: pointer,
+							justify-content: space-between,
+							line-height: var(--global-line-height-7),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-subsection-caret: (
+					align-self: center,
+					appearance: none,
+					background: transparent,
+					border: 0,
+					display: flex,
+					components: (
+						button-default: (
+							color: var(--icon-fill-color-subtle),
+						),
+						button-hover: (
+							color: var(--color-white),
+						),
+					),
+				),
+				header-nav-chain-flyout-nav-subsection-caret-open: (
+					transform: rotate(180deg),
+				),
+				header-nav-chain-flyout-nav-subsection-container: (
+					display: none,
+					flex-direction: column,
+					position: relative,
+				),
+				header-nav-chain-flyout-nav-subsection-container-open: (
+					display: flex,
+				),
+				header-nav-chain-flyout-nav-subsection-menu: (
+					background: var(--global-white),
+					components: (
+						link: (
+							color: var(--global-black),
+							display: block,
+							font-size: var(--global-spacing-4),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							padding: var(--global-spacing-2) var(--global-spacing-4) var(--global-spacing-2)
+								var(--global-spacing-5),
+							text-decoration: none,
+						),
+						link-hover: (
+							color: var(--global-white),
+							background-color: var(--global-neutral-6),
+						),
+						link-active: (
+							color: var(--global-white),
+							background-color: var(--global-neutral-6),
+						),
+					),
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
@@ -1551,6 +1860,30 @@
 					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-4),
 				),
+				header-nav-chain: (
+					padding: var(--global-spacing-3) var(--global-spacing-5),
+				),
+				header-nav-chain-top-nav-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-top-nav-components-desktop: (
+					display: flex,
+				),
+				header-nav-chain-links-list: (
+					display: flex,
+				),
+				header-nav-chain-flyout-nav-wrapper: (
+					width: 315px,
+				),
+				header-nav-chain-flyout-nav-wrapper-closed: (
+					transform: translate(-315px, 0),
+				),
+				header-nav-chain-flyout-nav-components-mobile: (
+					display: none,
+				),
+				header-nav-chain-flyout-nav-components-desktop: (
+					display: flex,
+				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
 				),
@@ -1764,6 +2097,7 @@
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
 @use "../../blocks/header-block";
+@use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/large-manual-promo-block";

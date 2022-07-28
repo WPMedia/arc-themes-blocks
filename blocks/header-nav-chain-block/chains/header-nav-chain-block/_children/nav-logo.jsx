@@ -1,11 +1,19 @@
+import { Link } from "@wpmedia/arc-themes-components";
 import React, { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-const NavLogo = ({ alignment, mediumBreakpoint, imageAltText, imageSource }) => {
+const showLogoAbove = 768;
+
+const NavLogo = ({ imageAltText, imageSource, blockClassName }) => {
 	const [isLogoVisible, setLogoVisibility] = useState(false);
 
+	// istanbul ignore next
 	const onScrollEvent = (evt) => {
 		if (!evt) {
+			return;
+		}
+		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+		if (vw < showLogoAbove) {
 			return;
 		}
 
@@ -25,53 +33,51 @@ const NavLogo = ({ alignment, mediumBreakpoint, imageAltText, imageSource }) => 
 	const [onScrollDebounced] = useDebouncedCallback(onScrollEvent, 100);
 
 	useEffect(() => {
-		const mastHead = document.querySelector(".masthead-block-container .masthead-block-logo");
+		const mastHead = document.querySelector(".b-masthead .b-masthead__logo");
 		if (!mastHead) {
 			return undefined;
 		}
-		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		// on small viewports we do not need this
-		if (vw >= mediumBreakpoint) {
-			window.addEventListener("scroll", onScrollDebounced);
-			return () => {
-				window.removeEventListener("scroll", onScrollDebounced);
-			};
-		}
+		window.addEventListener("scroll", onScrollDebounced, { passive: true });
 		// istanbul ignore next
-		return undefined;
-	}, [onScrollDebounced, mediumBreakpoint]);
+		return () => {
+			window.removeEventListener("scroll", onScrollDebounced, { passive: true });
+		};
+	}, [onScrollDebounced]);
 
 	useEffect(() => {
 		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		if (vw < mediumBreakpoint) {
+
+		if (vw < showLogoAbove) {
 			setLogoVisibility(true);
 			return undefined;
 		}
 
 		const timerID = setTimeout(() => {
-			const mastHead = document.querySelector(".masthead-block-container .masthead-block-logo");
+			const mastHead = document.querySelector(".b-masthead .b-masthead__logo");
 			if (!mastHead) {
 				setLogoVisibility(true);
 			}
 		}, 1000);
 
+		// istanbul ignore next
 		return () => {
 			clearTimeout(timerID);
 		};
-	}, [mediumBreakpoint]);
+	}, []);
 
 	const isLogoSVG = !!imageSource && String(imageSource).endsWith(".svg");
 
 	return (
-		<div
-			className={`nav-logo nav-logo-${alignment} ${
-				isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"
-			} ${isLogoSVG ? "svg-logo" : ""}`}
+		<Link
+			href="/"
+			title={imageAltText}
+			className={`${blockClassName}__logo  ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${
+				isLogoSVG ? "svg-logo" : ""
+			}`}
+			assistiveHidden={!isLogoVisible}
 		>
-			<a href="/" title={imageAltText}>
-				{!!imageSource && <img src={imageSource} alt={imageAltText || ""} />}
-			</a>
-		</div>
+			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}
+		</Link>
 	);
 };
 

@@ -1,94 +1,24 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import styled from "styled-components";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import FocusTrap from "focus-trap-react";
+import { Stack } from "@wpmedia/arc-themes-components";
+import { useDebouncedCallback } from "use-debounce";
 import { generateNavComponentPropTypes } from "./nav-helper";
 import SectionNav from "./_children/section-nav";
 import NavLogo from "./_children/nav-logo";
-import HorizontalLinksBar from "./_children/horizontal-links/default";
+import NavLinksBar from "./_children/nav-links/default";
 import NavSection from "./_children/nav-section";
 import MenuWidgets from "./_children/menu-widgets";
-// shares styles with header nav block
-// can modify styles in shared styles block
-import "@wpmedia/shared-styles/scss/_header-nav.scss";
 
-/* Global Constants */
-// Since these values are used to coordinate multiple components, I thought I'd make them variables
-// so we could just change the vars instead of multiple CSS values
-const standardNavHeight = 56;
-const navZIdx = 9;
-const sectionZIdx = navZIdx - 1;
-
-// max-width 100% fills the available space on smaller viewports
-// max-width 240px is the biggest the icon will grow to on larger viewports
-/* Styled Components */
-const StyledNav = styled.nav`
-	align-items: center;
-	width: 100%;
-	position: sticky;
-	top: 0;
-	margin-bottom: 0;
-	z-index: 1;
-
-	.news-theme-navigation-bar {
-		@media screen and (max-width: ${(props) => props.breakpoint}px) {
-			height: ${standardNavHeight}px;
-		}
-		@media screen and (min-width: ${(props) => props.breakpoint}px) {
-			height: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-		}
-		background-color: ${(props) => props.navBarBackground};
-		transition: 0.5s;
-		z-index: ${navZIdx};
-	}
-
-	.nav-logo {
-		img {
-			height: auto;
-			max-width: 240px;
-			width: auto;
-			transition: 0.5s;
-
-			@media screen and (max-width: ${(props) => props.breakpoint}px) {
-				max-height: 40px;
-				max-width: 100%;
-			}
-			@media screen and (min-width: ${(props) => props.breakpoint}px) {
-				max-height: ${(props) =>
-					props.scrolled ? standardNavHeight - 16 : props.navHeight - 16}px;
-			}
-		}
-	}
-`;
-
-const StyledSectionDrawer = styled.div`
-	z-index: ${sectionZIdx};
-	@media screen and (max-width: ${(props) => props.breakpoint}px) {
-		margin-top: ${standardNavHeight}px;
-	}
-	@media screen and (min-width: ${(props) => props.breakpoint}px) {
-		margin-top: ${(props) => (props.scrolled ? standardNavHeight : props.navHeight)}px;
-	}
-`;
-
-const StyledWarning = styled.div`
-	background-color: #c30;
-	color: #fff;
-	display: flex;
-	align-self: flex-start;
-	padding: 6px;
-`;
+const BLOCK_CLASS_NAME = "b-header-nav-chain";
 
 export function PresentationalNav(props) {
 	const {
 		ariaLabelLink,
-		backgroundColor,
-		mediumBreakpoint,
 		children,
 		closeDrawer,
 		customFields,
@@ -96,13 +26,9 @@ export function PresentationalNav(props) {
 		horizontalLinksHierarchy,
 		isAdmin,
 		isSectionDrawerOpen,
+		isScrolled,
 		logoAlignment,
 		menuButtonClickAction,
-		navColor,
-		navColorClass,
-		navHeight,
-		scrollAdjustedNavHeight,
-		scrolled,
 		sectionAriaLabel,
 		sections,
 		showDotSeparators,
@@ -110,23 +36,20 @@ export function PresentationalNav(props) {
 		primaryLogoPath,
 		primaryLogoAlt,
 	} = props;
+
 	return (
-		<StyledNav
+		<nav
 			id="main-nav"
-			className={navColorClass}
-			navBarBackground={backgroundColor}
-			navHeight={navHeight}
-			scrolled={scrolled}
-			// hard-coded to medium-breakpoint
-			breakpoint={mediumBreakpoint}
+			className={`${BLOCK_CLASS_NAME} ${isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : ``}`}
 			aria-label={sectionAriaLabel}
 		>
 			<div
-				className={`news-theme-navigation-container news-theme-navigation-bar logo-${logoAlignment} ${
-					displayLinks ? "horizontal-links" : ""
+				className={`${BLOCK_CLASS_NAME}__top-layout ${
+					logoAlignment === "center" ? `${BLOCK_CLASS_NAME}__top-layout--center-logo` : ``
 				}`}
 			>
 				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
 					customFields={customFields}
 					menuButtonClickAction={menuButtonClickAction}
 					side="left"
@@ -135,20 +58,20 @@ export function PresentationalNav(props) {
 					{children}
 				</NavSection>
 				<NavLogo
-					alignment={logoAlignment}
+					blockClassName={BLOCK_CLASS_NAME}
 					imageSource={primaryLogoPath}
 					imageAltText={primaryLogoAlt}
-					mediumBreakpoint={mediumBreakpoint}
 				/>
-				{displayLinks && (
-					<HorizontalLinksBar
+				{displayLinks ? (
+					<NavLinksBar
 						hierarchy={horizontalLinksHierarchy}
-						navBarColor={navColor}
 						showHorizontalSeperatorDots={showDotSeparators}
 						ariaLabel={ariaLabelLink}
+						blockClassName={BLOCK_CLASS_NAME}
 					/>
-				)}
+				) : null}
 				<NavSection
+					blockClassName={BLOCK_CLASS_NAME}
 					customFields={customFields}
 					menuButtonClickAction={menuButtonClickAction}
 					side="right"
@@ -157,14 +80,11 @@ export function PresentationalNav(props) {
 					{children}
 				</NavSection>
 			</div>
-
-			<StyledSectionDrawer
-				id="nav-sections"
-				className={`nav-sections ${isSectionDrawerOpen ? "open" : "closed"}`}
-				navHeight={navHeight}
-				scrolled={scrolled}
-				// hard-coded to medium breakpoint
-				breakpoint={mediumBreakpoint}
+			<Stack
+				id="flyout-overlay"
+				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
+				direction="vertical"
+				justification="start"
 				onClick={closeDrawer}
 			>
 				<FocusTrap
@@ -174,7 +94,7 @@ export function PresentationalNav(props) {
 						returnFocusOnDeactivate: true,
 						onDeactivate: /* istanbul ignore next */ () => {
 							// Focus the next focusable element in the navbar
-							// Workaround for issue where 'nav-sections-btn' wont programatically focus
+							// Workaround for issue where 'nav-sections-btn' wont programmatically focus
 							const focusElement = document.querySelector(`
                 #main-nav a:not(.nav-sections-btn),
                 #main-nav button:not(.nav-sections-btn)
@@ -185,58 +105,57 @@ export function PresentationalNav(props) {
 								focusElement.blur();
 							}
 						},
-						fallbackFocus: /* istanbul ignore next */ () => document.getElementById("nav-sections"),
+						fallbackFocus: /* istanbul ignore next */ () =>
+							document.getElementById("flyout-overlay"),
 					}}
 				>
 					{/**
 					 * Need to disable tabindex lint as this is a fallback for when section menu
 					 * has no items and FocusTrap requires at least one tabable element
 					 * which would be the follow container that's used with `fallbackFocus`
+					 *
+					 * Div needed as Stack does not forward Ref - this causes Focus Trap
+					 * library to throw errors without the div
 					 */}
-					<div
-						className="inner-drawer-nav"
-						style={{ zIndex: 10 }}
-						// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-						tabIndex={!sections.length ? "-1" : null}
-					>
-						<SectionNav
-							sections={sections}
-							isHidden={!isSectionDrawerOpen}
-							navHeight={scrollAdjustedNavHeight}
+					<div>
+						<Stack
+							className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
+								isSectionDrawerOpen ? "open" : "closed"
+							}`}
+							direction="vertical"
+							justification="start"
+							// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+							tabIndex={!sections.length ? "-1" : null}
 						>
-							<MenuWidgets
-								customFields={customFields}
-								menuButtonClickAction={menuButtonClickAction}
+							<SectionNav
+								blockClassName={BLOCK_CLASS_NAME}
+								sections={sections}
+								isHidden={!isSectionDrawerOpen}
 							>
-								{children}
-							</MenuWidgets>
-						</SectionNav>
+								<MenuWidgets
+									customFields={customFields}
+									menuButtonClickAction={menuButtonClickAction}
+								>
+									{children}
+								</MenuWidgets>
+							</SectionNav>
+						</Stack>
 					</div>
 				</FocusTrap>
-			</StyledSectionDrawer>
+			</Stack>
 
-			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin && (
-				<StyledWarning>
-					In order to render horizontal links, the logo must be aligned to the left.
-				</StyledWarning>
-			)}
-		</StyledNav>
+			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
+				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
+			) : null}
+		</nav>
 	);
 }
 /* Main Component */
 const Nav = (props) => {
+	const [isScrolled, setIsScrolled] = useState(false);
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
-	const {
-		navColor,
-		breakpoints = { medium: 768 },
-		navBarBackground,
-		locale = "en",
-		primaryLogo,
-		primaryLogoAlt,
-	} = getProperties(arcSite);
-
-	const mediumBreakpoint = breakpoints.medium;
+	const { locale = "en", primaryLogo, primaryLogoAlt } = getProperties(arcSite);
 
 	// Check if URL is absolute/base64
 	const primaryLogoPath =
@@ -247,32 +166,18 @@ const Nav = (props) => {
 
 	const phrases = getTranslatedPhrases(locale);
 
-	const { "primary-color": primaryColor = "#000" } = getThemeStyle(arcSite);
-
-	let backgroundColor = "#000";
-
-	if (navBarBackground === "primary-color") {
-		backgroundColor = primaryColor;
-	} else if (navColor === "light") {
-		backgroundColor = "#fff";
-	}
-
 	const { children = [], customFields } = props;
 	const {
 		hierarchy,
 		signInOrder,
 		logoAlignment = "center",
 		horizontalLinksHierarchy,
-		desktopNavivationStartHeight,
-		shrinkDesktopNavivationHeight,
 		showHorizontalSeperatorDots,
 		ariaLabel,
 		ariaLabelLink,
 	} = customFields;
 
 	const displayLinks = horizontalLinksHierarchy && logoAlignment === "left";
-
-	const navHeight = desktopNavivationStartHeight || 56;
 
 	const showDotSeparators = showHorizontalSeperatorDots ?? true;
 
@@ -303,7 +208,6 @@ const Nav = (props) => {
 	const sections = mainContent && mainContent.children ? mainContent.children : [];
 
 	const [isSectionDrawerOpen, setSectionDrawerOpen] = useState(false);
-	const [scrolled, setScrolled] = useState(false);
 
 	const closeNavigation = () => {
 		setSectionDrawerOpen(false);
@@ -337,38 +241,27 @@ const Nav = (props) => {
 		};
 	}, []);
 
+	const handleScroll = () => {
+		setIsScrolled(window.pageYOffset > 0);
+	};
+	const [onScrollDebounced] = useDebouncedCallback(handleScroll, 100);
+
+	// on scroll, change the class of the nav to make it the scrolled height
+	// it can never go back
 	// istanbul ignore next
 	useEffect(() => {
-		const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-		if (!shrinkDesktopNavivationHeight || vw < mediumBreakpoint) {
-			return undefined;
-		}
-		const handleScroll = () => {
-			const pageOffset = window.pageYOffset;
-			if (pageOffset > shrinkDesktopNavivationHeight) {
-				setScrolled(true);
-			} else if (pageOffset < shrinkDesktopNavivationHeight - desktopNavivationStartHeight) {
-				setScrolled(false);
-			}
-		};
-
-		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("scroll", onScrollDebounced, { passive: true });
 		return () => {
-			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("scroll", onScrollDebounced);
 		};
-	}, [shrinkDesktopNavivationHeight, desktopNavivationStartHeight, mediumBreakpoint]);
+	}, [onScrollDebounced]);
 
-	// 56 pixels nav height on scroll
-	const scrollAdjustedNavHeight = scrolled ? 56 : navHeight;
-	const navColorClass = navColor === "light" ? "light" : "dark";
 	const sectionAriaLabel =
 		ariaLabel || phrases.t("header-nav-chain-block.sections-element-aria-label");
 
 	return (
 		<PresentationalNav
 			ariaLabelLink={ariaLabelLink}
-			backgroundColor={backgroundColor}
-			mediumBreakpoint={mediumBreakpoint}
 			closeDrawer={closeDrawer}
 			customFields={customFields}
 			displayLinks={displayLinks}
@@ -377,11 +270,7 @@ const Nav = (props) => {
 			isSectionDrawerOpen={isSectionDrawerOpen}
 			logoAlignment={logoAlignment}
 			menuButtonClickAction={menuButtonClickAction}
-			navColor={navColor}
-			navColorClass={navColorClass}
-			navHeight={navHeight}
-			scrollAdjustedNavHeight={scrollAdjustedNavHeight}
-			scrolled={scrolled}
+			isScrolled={isScrolled}
 			sectionAriaLabel={sectionAriaLabel}
 			sections={sections}
 			showDotSeparators={showDotSeparators}
@@ -414,22 +303,6 @@ Nav.propTypes = {
 		horizontalLinksHierarchy: PropTypes.string.tag({
 			label: "Horizontal Links hierarchy",
 			group: "Configure content",
-		}),
-		desktopNavivationStartHeight: PropTypes.number.tag({
-			label: "Starting desktop navigation bar height",
-			description:
-				"Select the height of the navigation bar (in px) when the user first opens a page on desktop. Must be between 56 and 200.",
-			group: "Logo",
-			max: 200,
-			min: 56,
-			defaultValue: 56,
-		}),
-		shrinkDesktopNavivationHeight: PropTypes.number.tag({
-			label: "Shrink navigation bar after scrolling",
-			description:
-				'How far should the user scroll (in px) until the navigation height shrinks back to standard size (56px) on desktop? Must be greater than the value configured for "Starting desktop navigation bar height".',
-			group: "Logo",
-			min: 56,
 		}),
 		showHorizontalSeperatorDots: PropTypes.bool.tag({
 			label: "Display dots between horizontal links",

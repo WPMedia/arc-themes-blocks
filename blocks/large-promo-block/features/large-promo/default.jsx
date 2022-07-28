@@ -164,10 +164,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const shouldUseLabel = !!labelDisplay;
 
 	const { _id: sectionUrl, name: sectionText } =
-		(content?.websites &&
-			content?.websites[arcSite] &&
-			content?.websites[arcSite].website_section) ||
-		{};
+		content?.websites?.[arcSite]?.website_section || {};
 
 	// Default to websites object data
 	let [text, url] = [sectionText, sectionUrl];

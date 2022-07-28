@@ -6,6 +6,18 @@ import { RESIZER_APP_VERSION } from "fusion:environment";
 
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
+export const ProductFeaturedImageDisplay = ({ data, resizerAppVersion }) => {
+	const featuredImageAsset = data.schema.featuredImage.value.assets.find(
+		(asset) => asset.type === "image"
+	);
+	const { url, auth } = featuredImageAsset;
+
+	// take in app version that's the public key for the auth object in resizer v2
+	const targetAuth = auth[resizerAppVersion];
+
+	return <Image src={url} className={BLOCK_CLASS_NAME} resizedOptions={{ auth: targetAuth }} />;
+};
+
 function ProductFeaturedImage() {
 	const { globalContent = {} } = useFusionContext();
 
@@ -13,16 +25,9 @@ function ProductFeaturedImage() {
 		return null;
 	}
 
-	const featuredImageAsset = globalContent.schema.featuredImage.value.assets.find(
-		(asset) => asset.type === "image"
+	return (
+		<ProductFeaturedImageDisplay resizerAppVersion={RESIZER_APP_VERSION} data={globalContent} />
 	);
-
-	const { url, auth } = featuredImageAsset;
-
-	// take in app version that's the public key for the auth object in resizer v2
-	const targetAuth = auth[RESIZER_APP_VERSION];
-
-	return <Image src={url} className={BLOCK_CLASS_NAME} resizedOptions={{ auth: targetAuth }} />;
 }
 
 ProductFeaturedImage.label = "Product Featured Image – Arc Block";

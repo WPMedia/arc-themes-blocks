@@ -1,8 +1,6 @@
 import React from "react";
-import ProductFeaturedImage from "./features/product-featured-image/default";
+import { ProductFeaturedImageDisplay } from "./features/product-featured-image/default";
 
-// for more info on storybook and using the component explorer
-// https://storybook.js.org/
 export default {
 	title: "Blocks/Product Featured Image",
 	parameters: {
@@ -10,6 +8,22 @@ export default {
 	},
 };
 
-export const showHeading = () => <ProductFeaturedImage customFields={{ showHeading: true }} />;
+const mockFeaturedImageData = {
+	schema: {
+		featuredImage: {
+			value: {
+				assets: [
+					{
+						type: "image",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
+						auth: {
+							1: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+						},
+					},
+				],
+			},
+		},
+	},
+};
 
-export const hideHeading = () => <ProductFeaturedImage customFields={{ showHeading: false }} />;
+export const showImage = () => <ProductFeaturedImageDisplay data={mockFeaturedImageData} />;

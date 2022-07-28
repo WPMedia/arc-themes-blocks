@@ -5,13 +5,15 @@ import { useFusionContext } from "fusion:context";
 
 import ProductFeaturedImage from "./default";
 
+const ALT_TEXT_STRING = "Man smiling posing in front of shelves. (This is alt text.)";
+
 const FEATURED_IMAGE_ASSET = {
 	type: "image",
 	url: "https://example.com/image.jpg",
 	auth: {
 		1: "secret",
 	},
-	alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
+	alt_text: ALT_TEXT_STRING,
 };
 
 describe("Product Featured Image", () => {
@@ -65,7 +67,8 @@ describe("Product Featured Image", () => {
 		}));
 
 		render(<ProductFeaturedImage />);
-
-		expect(screen.getByRole("img")).toBeInTheDocument();
+		const image = screen.getByRole("img");
+		expect(image).toBeInTheDocument();
+		expect(image).toHaveAttribute("alt", ALT_TEXT_STRING);
 	});
 });

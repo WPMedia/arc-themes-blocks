@@ -15,12 +15,19 @@ export const ProductFeaturedImageDisplay = ({ data, resizerAppVersion }) => {
 		return null;
 	}
 
-	const { url, auth } = featuredImageAsset;
+	const { url, auth, alt_text: altText } = featuredImageAsset;
 
 	// take in app version that's the public key for the auth object in resizer v2
 	const targetAuth = auth[resizerAppVersion];
 
-	return <Image src={url} className={BLOCK_CLASS_NAME} resizedOptions={{ auth: targetAuth }} />;
+	return (
+		<Image
+			src={url}
+			className={BLOCK_CLASS_NAME}
+			resizedOptions={{ auth: targetAuth }}
+			alt={altText}
+		/>
+	);
 };
 
 function ProductFeaturedImage() {

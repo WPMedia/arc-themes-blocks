@@ -26,4 +26,8 @@ const mockFeaturedImageData = {
 	},
 };
 
-export const displayImage = () => <ProductFeaturedImageDisplay data={mockFeaturedImageData} />;
+export const displayImage = () => (
+	<ProductFeaturedImageDisplay data={mockFeaturedImageData} resizerAppVersion={1} />
+);
+
+export const noImage = () => <ProductFeaturedImageDisplay data={{}} />;

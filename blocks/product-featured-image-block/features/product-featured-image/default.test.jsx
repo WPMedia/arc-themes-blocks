@@ -11,6 +11,7 @@ const FEATURED_IMAGE_ASSET = {
 	auth: {
 		1: "secret",
 	},
+	alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
 };
 
 describe("Product Featured Image", () => {

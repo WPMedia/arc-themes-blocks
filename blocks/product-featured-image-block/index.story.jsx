@@ -19,6 +19,7 @@ const mockFeaturedImageData = {
 						auth: {
 							1: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 						},
+						alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
 					},
 				],
 			},

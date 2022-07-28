@@ -10,6 +10,7 @@ export const ProductFeaturedImageDisplay = ({ data, resizerAppVersion }) => {
 	const featuredImageAsset = data.schema.featuredImage.value.assets.find(
 		(asset) => asset.type === "image"
 	);
+
 	const { url, auth } = featuredImageAsset;
 
 	// take in app version that's the public key for the auth object in resizer v2

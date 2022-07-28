@@ -1,3 +1,4 @@
+import { Stack } from "@wpmedia/arc-themes-components";
 import React from "react";
 import { NAV_BREAKPOINTS, PLACEMENT_AREAS } from "../nav-helper";
 import WidgetList from "./widget-list";
@@ -5,7 +6,7 @@ import WidgetList from "./widget-list";
 const MenuWidgets = ({ children, customFields, menuButtonClickAction }) => (
 	<div key="menu" className="nav-menu">
 		{NAV_BREAKPOINTS.map((breakpoint) => (
-			<div key={breakpoint} className={`nav-components--${breakpoint}`}>
+			<Stack key={breakpoint} className={`nav-components--${breakpoint}`}>
 				<WidgetList
 					breakpoint={breakpoint}
 					customFields={customFields}
@@ -15,7 +16,7 @@ const MenuWidgets = ({ children, customFields, menuButtonClickAction }) => (
 				>
 					{children}
 				</WidgetList>
-			</div>
+			</Stack>
 		))}
 	</div>
 );

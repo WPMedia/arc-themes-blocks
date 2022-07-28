@@ -2,7 +2,6 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { mount } from "enzyme";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import { useFusionContext } from "fusion:context";
 import Navigation from "./default";
 import { DEFAULT_SELECTIONS, PLACEMENT_AREAS } from "./nav-helper";
@@ -13,7 +12,6 @@ jest.mock(
 		({ children }) =>
 			children
 );
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
 jest.mock("fusion:properties", () => jest.fn(() => ({})));
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({
@@ -23,12 +21,6 @@ jest.mock("fusion:context", () => ({
 }));
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => ({})),
-}));
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn((locale) => ({
-		t: jest.fn((phrase) => require("../../intl.json")[phrase][locale]),
-	})),
 }));
 
 describe("the header navigation feature for the default output type", () => {
@@ -40,10 +32,8 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
-			expect(navBar.hasClass("horizontal-links")).toBe(true);
-			expect(navBar.hasClass("logo-left")).toBe(true);
-			const linksBar = navBar.find("HorizontalLinksBar");
+			const navBar = wrapper.find(".b-header-nav-chain");
+			const linksBar = navBar.find("NavLinksBar");
 			expect(linksBar).toHaveLength(1);
 			expect(linksBar.prop("hierarchy")).toEqual(cFields.horizontalLinksHierarchy);
 		});
@@ -55,9 +45,7 @@ describe("the header navigation feature for the default output type", () => {
 				horizontalLinksHierarchy: "default",
 			};
 			const wrapper = mount(<Navigation customFields={cFields} />);
-			const navBar = wrapper.find(".news-theme-navigation-bar");
-			expect(navBar.hasClass("horizontal-links")).toBe(false);
-			expect(navBar.hasClass("logo-center")).toBe(true);
+			const navBar = wrapper.find(".b-header-nav-chain");
 			expect(navBar.find("HorizontalLinksBar")).toHaveLength(0);
 		});
 	});
@@ -66,32 +54,39 @@ describe("the header navigation feature for the default output type", () => {
 		describe("nav-bar default configuration", () => {
 			it("should render search and sections menu in the top-left navbar on desktop", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const navLeftDesktop = wrapper.find(".nav-left > .nav-components--desktop");
+				const navLeftDesktop = wrapper.find(
+					".b-header-nav-chain__nav-left > .nav-components--desktop"
+				);
 				expect(navLeftDesktop).toHaveLength(1);
 				const searchWidget = navLeftDesktop.find(".nav-search");
 				expect(searchWidget).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".nav-sections-btn button");
-				expect(menuWidget).toHaveLength(1);
+				expect(navLeftDesktop.text()).toContain("header-nav-chain-block.sections-button");
 			});
 
 			it("should render sections menu in the top-left navbar on mobile", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const navLeftDesktop = wrapper.find(".nav-left > .nav-components--mobile");
+				const navLeftDesktop = wrapper.find(
+					".b-header-nav-chain__nav-left > .nav-components--mobile"
+				);
 				expect(navLeftDesktop).toHaveLength(1);
-				const menuWidget = navLeftDesktop.find(".nav-sections-btn button");
+				const menuWidget = navLeftDesktop.find("button");
 				expect(menuWidget).toHaveLength(1);
 			});
 
 			it("should render nothing inside the .nav-right on desktop", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const widgetList = wrapper.find(".nav-right > .nav-components--desktop > WidgetList");
+				const widgetList = wrapper.find(
+					".b-header-nav-chain__nav-right > .nav-components--desktop > WidgetList"
+				);
 				expect(widgetList).toHaveLength(1);
 				expect(widgetList.children()).toHaveLength(0);
 			});
 
 			it("should render nothing inside the .nav-right on mobile", () => {
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				const widgetList = wrapper.find(".nav-right > .nav-components--mobile > WidgetList");
+				const widgetList = wrapper.find(
+					".b-header-nav-chain__nav-right > .nav-components--mobile > WidgetList"
+				);
 				expect(widgetList).toHaveLength(1);
 				expect(widgetList.children()).toHaveLength(0);
 			});
@@ -107,7 +102,7 @@ describe("the header navigation feature for the default output type", () => {
 						<TestComponent />
 					</Navigation>
 				);
-				const container = wrapper.find("#nav-sections .nav-menu");
+				const container = wrapper.find("#flyout-overlay .nav-menu");
 				const widgetList = container.find(`.nav-components--${breakpoint} > WidgetList`);
 				expect(widgetList).toHaveLength(1);
 				return widgetList.find("NavWidget");
@@ -177,11 +172,13 @@ describe("the header navigation feature for the default output type", () => {
 				const wrapper = mount(
 					<>
 						<Navigation customFields={DEFAULT_SELECTIONS} />
-						<div className="masthead-block-container" />
+						<div className="b-masthead" />
 					</>
 				);
 
-				expect(wrapper.find(".nav-logo.nav-logo-hidden").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-hidden").hostNodes().length).toBe(
+					1
+				);
 			});
 
 			it("should show the logo after 1 second if there is not a masthead", () => {
@@ -193,7 +190,7 @@ describe("the header navigation feature for the default output type", () => {
 					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".nav-logo.nav-logo-show").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-show").hostNodes().length).toBe(1);
 			});
 
 			it("should show the logo after 1 second on mobile devices", () => {
@@ -208,7 +205,7 @@ describe("the header navigation feature for the default output type", () => {
 					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".nav-logo.nav-logo-show").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-show").hostNodes().length).toBe(1);
 			});
 
 			it("should show the logo after 1 second if there is a masthead but no logo", () => {
@@ -217,7 +214,7 @@ describe("the header navigation feature for the default output type", () => {
 				const spy = jest
 					.spyOn(document, "querySelector")
 					.mockImplementation((selector) =>
-						selector === ".masthead-block-container .masthead-block-logo" ? undefined : {}
+						selector === ".b-masthead .b-masthead__logo" ? undefined : {}
 					);
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
 				act(() => {
@@ -225,7 +222,7 @@ describe("the header navigation feature for the default output type", () => {
 					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".nav-logo.nav-logo-show").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-show").hostNodes().length).toBe(1);
 				spy.mockRestore();
 			});
 
@@ -235,7 +232,7 @@ describe("the header navigation feature for the default output type", () => {
 				const spy = jest
 					.spyOn(document, "querySelector")
 					.mockImplementation((selector) =>
-						selector === ".masthead-block-container .masthead-block-logo" ? {} : undefined
+						selector === ".b-masthead .b-masthead__logo" ? {} : undefined
 					);
 
 				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
@@ -244,39 +241,10 @@ describe("the header navigation feature for the default output type", () => {
 					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".nav-logo.nav-logo-hidden").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-hidden").hostNodes().length).toBe(
+					1
+				);
 				spy.mockRestore();
-			});
-
-			it("should not setup scroll handlers when logo is enabled and masthead logo is missing", () => {
-				getProperties.mockImplementation(() => ({}));
-				let handlerSetup = false;
-				const spy = jest.spyOn(window, "addEventListener").mockImplementation((...args) => {
-					if (args[0] === "scroll") {
-						handlerSetup = true;
-					}
-					return undefined;
-				});
-				const spy2 = jest
-					.spyOn(document, "querySelector")
-					.mockImplementation((selector) =>
-						selector === ".masthead-block-container .masthead-block-logo"
-							? undefined
-							: { data: true }
-					);
-
-				jest.useFakeTimers();
-				const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-				act(() => {
-					jest.runAllTimers();
-					wrapper.setProps({});
-				});
-
-				expect(wrapper.find(".nav-logo.nav-logo-show").length).toBe(1);
-				expect(handlerSetup).toBeFalsy();
-
-				spy.mockRestore();
-				spy2.mockRestore();
 			});
 
 			it("should setup scroll handlers, when enable logo", () => {
@@ -290,9 +258,7 @@ describe("the header navigation feature for the default output type", () => {
 				const spy2 = jest
 					.spyOn(document, "querySelector")
 					.mockImplementation((selector) =>
-						selector === ".masthead-block-container .masthead-block-logo"
-							? { data: true }
-							: undefined
+						selector === ".b-masthead .b-masthead__logo" ? { data: true } : undefined
 					);
 				getProperties.mockImplementation(() => ({}));
 				jest.useFakeTimers();
@@ -302,7 +268,9 @@ describe("the header navigation feature for the default output type", () => {
 					wrapper.setProps({});
 				});
 
-				expect(wrapper.find(".nav-logo.nav-logo-hidden").length).toBe(1);
+				expect(wrapper.find(".b-header-nav-chain__logo.nav-logo-hidden").hostNodes().length).toBe(
+					1
+				);
 				expect(handlerSetup).toBeTruthy();
 
 				spy.mockRestore();
@@ -314,81 +282,66 @@ describe("the header navigation feature for the default output type", () => {
 	describe("hamburger menu", () => {
 		it("opens and closes with the sections button", () => {
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(true);
-
-			expect(
-				wrapper.find(".nav-left > .nav-components--desktop .nav-sections-btn button")
-			).toHaveLength(1);
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".nav-left > .nav-components--desktop .nav-sections-btn button")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
+				.hostNodes()
 				.simulate("click");
-			expect(wrapper.find("div#nav-sections").hasClass("open")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
 
 			wrapper
-				.find(".nav-left > .nav-components--desktop .nav-sections-btn button")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
+				.hostNodes()
 				.simulate("click");
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 		});
 
 		it("open with section button, closes when click the container", () => {
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".nav-left > .nav-components--desktop .nav-sections-btn button")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
+				.hostNodes()
 				.simulate("click");
-			expect(wrapper.find("div#nav-sections").hasClass("open")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
 
-			wrapper.find("div#nav-sections").simulate("click", { target: { closest: () => false } });
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(true);
+			wrapper.find("div#flyout-overlay").simulate("click", { target: { closest: () => false } });
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 		});
 
 		it("open with section button, must not close when inside the drawer", () => {
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(true);
 
 			wrapper
-				.find(".nav-left > .nav-components--desktop .nav-sections-btn button")
+				.find(".b-header-nav-chain__nav-left > .nav-components--desktop button")
+				.at(1)
+				.hostNodes()
 				.simulate("click");
-			expect(wrapper.find("div#nav-sections").hasClass("open")).toBe(true);
+			expect(wrapper.find("div#flyout-overlay").hasClass("open")).toBe(true);
 
-			wrapper.find("div#nav-sections").simulate("click", { target: { closest: () => true } });
-			expect(wrapper.find("div#nav-sections").hasClass("closed")).toBe(false);
-		});
-	});
-
-	describe("primary color background color option", () => {
-		it("if has navBarBackground as primary color, use primary color as background color", () => {
-			getProperties.mockImplementation(() => ({
-				navColor: "light",
-				navBarBackground: "primary-color",
-			}));
-			getThemeStyle.mockImplementation(() => ({ "primary-color": "#1B6FA6" }));
-
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("StyledComponent").at(0).prop("navBarBackground")).toEqual("#1B6FA6");
-		});
-
-		it("if has navColor as light", () => {
-			getProperties.mockImplementation(() => ({ navColor: "light" }));
-
-			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
-			expect(wrapper.find("StyledComponent").at(0).prop("navBarBackground")).toEqual("#fff");
+			wrapper.find("div#flyout-overlay").simulate("click", { target: { closest: () => true } });
+			expect(wrapper.find("div#flyout-overlay").hasClass("closed")).toBe(false);
 		});
 	});
 
 	describe("dealing with accessibility and screen readers", () => {
 		it("should render the block with the default aria-label", () => {
 			const wrapper = mount(<Navigation customFields={{}} />);
-
-			expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "Sections Menu");
+			expect(wrapper.find("nav#main-nav").props()).toHaveProperty(
+				"aria-label",
+				"header-nav-chain-block.sections-element-aria-label"
+			);
 		});
 
 		it("should render the block with the custom aria-label", () => {
 			const wrapper = mount(<Navigation customFields={{ ariaLabel: "Links" }} />);
-
-			expect(wrapper.find("nav").props()).toHaveProperty("aria-label", "Links");
+			expect(wrapper.find("nav#main-nav").props()).toHaveProperty("aria-label", "Links");
 		});
 	});
 
@@ -404,7 +357,7 @@ describe("the header navigation feature for the default output type", () => {
 
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
 
-			const navLogoImg = wrapper.find(".nav-logo img");
+			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
 			expect(navLogoImg).toHaveLength(1);
 			expect(navLogoImg.prop("src")).toEqual("http://www.example.com/logo.png");
 		});
@@ -419,7 +372,7 @@ describe("the header navigation feature for the default output type", () => {
 			});
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
 
-			const navLogoImg = wrapper.find(".nav-logo img");
+			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
 			expect(navLogoImg).toHaveLength(1);
 			expect(navLogoImg.prop("src")).toEqual("rendered-from-deployment");
 		});
@@ -434,7 +387,7 @@ describe("the header navigation feature for the default output type", () => {
 			});
 			const wrapper = mount(<Navigation customFields={DEFAULT_SELECTIONS} />);
 
-			const navLogoImg = wrapper.find(".nav-logo img");
+			const navLogoImg = wrapper.find(".b-header-nav-chain__logo img");
 			expect(navLogoImg).toHaveLength(1);
 			expect(navLogoImg.prop("src")).toEqual("base64, iVBORw0KGgoAAAANSUhEUgAAAAUA");
 		});

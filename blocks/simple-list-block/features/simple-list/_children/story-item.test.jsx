@@ -17,7 +17,9 @@ jest.mock("fusion:context", () => ({
 describe("Story item", () => {
 	it("renders title if title provided", () => {
 		const testText = "Man Bites Dog";
-		const wrapper = mount(<StoryItem itemTitle={testText} showHeadline showImage />);
+		const wrapper = mount(
+			<StoryItem itemTitle={testText} showHeadline showImage websiteURL="test.com" />
+		);
 		expect(wrapper.text()).toBe(testText);
 	});
 	it("renders no title if no title provided", () => {
@@ -29,8 +31,9 @@ describe("Story item", () => {
 		const imageURL =
 			"https://en.wikipedia.org/wiki/The_Washington_Post#/media/File:Washington_Post_building.jpg";
 
-		const wrapper = mount(<StoryItem imageURL={imageURL} showHeadline showImage />);
-		expect(wrapper.find(".simple-list-placeholder").length).toBe(0);
+		const wrapper = mount(
+			<StoryItem imageURL={imageURL} showHeadline showImage websiteURL="test.com" />
+		);
 		expect(wrapper.find("img").length).toBe(1);
 	});
 });

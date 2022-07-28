@@ -95,8 +95,8 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
-
 		// 120px
+		//Font Weight
 		"font-weight-1": 100,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -136,8 +136,8 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
+		// Line heights
 		"line-height-1": 0.875rem,
 		// 14px
 		"line-height-2": 1rem,
@@ -157,7 +157,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -1481,6 +1480,34 @@
 				share-bar-email: (
 					fill: #b61818,
 				),
+				simple-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						stack: (
+							min-height: 72px,
+						),
+						heading: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
+						),
+					),
+				),
+				simple-list-items: (
+					components: (
+						heading: (
+							line-height: var(--body-line-height),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
+						),
+					),
+					gap: var(--global-spacing-4),
+				),
+				simple-list-item: (
+					gap: var(--global-spacing-6),
+				),
+				simple-list-item-anchor: (
+					flex: 0 0 33%,
+				),
 				single-column-regular-main: (
 					components: (
 						stack: (
@@ -1920,6 +1947,13 @@
 				share-bar: (
 					display: flex,
 				),
+				simple-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				single-column-regular-main: (
 					components: (
 						stack: (
@@ -2038,6 +2072,7 @@
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/share-bar-block";
+@use "../../blocks/simple-list-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/small-manual-promo-block";

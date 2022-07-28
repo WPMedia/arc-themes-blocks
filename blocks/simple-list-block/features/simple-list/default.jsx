@@ -3,21 +3,26 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { extractResizedParams, extractImageFromStory } from "@wpmedia/resizer-image-block";
-import { Heading, HeadingSection } from "@wpmedia/shared-styles";
 import getProperties from "fusion:properties";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	getImageFromANS,
+	Stack,
+	isServerSide,
+	Heading,
+	HeadingSection,
+} from "@wpmedia/arc-themes-components";
 import StoryItem from "./_children/story-item";
-import "./simple-list.scss";
+
+const BLOCK_CLASS_NAME = "b-simple-list";
 
 const unserializeStory = (arcSite) => (acc, storyObject) => {
 	if (storyObject.websites?.[arcSite]) {
 		return acc.concat({
 			id: storyObject._id,
 			itemTitle: storyObject.headlines.basic,
-			imageURL: extractImageFromStory(storyObject) || "",
+			imageURL: getImageFromANS(storyObject) || "",
 			websiteURL: storyObject.websites[arcSite].website_url || "",
-			resizedImageOptions: extractResizedParams(storyObject),
 		});
 	}
 	return acc;
@@ -35,29 +40,12 @@ const getFallbackImageURL = ({ deployment, contextPath, fallbackImage }) => {
 
 const SimpleListWrapper = ({ customFields }) => {
 	const { id, arcSite, contextPath, deployment, isAdmin } = useFusionContext();
-	const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL } =
-		getProperties(arcSite);
+	const { websiteDomain, fallbackImage, primaryLogoAlt } = getProperties(arcSite);
 
 	const targetFallbackImage = getFallbackImageURL({
 		deployment,
 		contextPath,
 		fallbackImage,
-	});
-	const imageProps = {
-		smallWidth: 274,
-		smallHeight: 183,
-		mediumWidth: 274,
-		mediumHeight: 183,
-		largeWidth: 274,
-		largeHeight: 183,
-		primaryLogoAlt,
-		breakpoints,
-		resizerURL,
-	};
-
-	const placeholderResizedImageOptions = useContent({
-		source: "resize-image-api",
-		query: { raw_image_url: targetFallbackImage, respect_aspect_ratio: true },
 	});
 
 	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
@@ -70,11 +58,10 @@ const SimpleListWrapper = ({ customFields }) => {
 			<SimpleList
 				id={id}
 				customFields={customFields}
-				placeholderResizedImageOptions={placeholderResizedImageOptions}
 				targetFallbackImage={targetFallbackImage}
 				websiteDomain={websiteDomain}
-				imageProps={imageProps}
 				arcSite={arcSite}
+				primaryLogoAlt={primaryLogoAlt}
 			/>
 		</LazyLoad>
 	);
@@ -91,9 +78,8 @@ const SimpleList = (props) => {
 			showImage = true,
 		} = {},
 		id = "",
-		placeholderResizedImageOptions,
 		targetFallbackImage,
-		imageProps,
+		primaryLogoAlt,
 	} = props;
 
 	// need to inject the arc site here into use content
@@ -142,33 +128,30 @@ const SimpleList = (props) => {
 
 	return (
 		<HeadingSection>
-			<div key={id} className="list-container layout-section">
-				{title ? <Heading className="list-title">{title}</Heading> : null}
+			<Stack key={id} className={BLOCK_CLASS_NAME}>
+				{title ? <Heading>{title}</Heading> : null}
 				<Wrapper>
-					{contentElements
-						.reduce(unserializeStory(arcSite), [])
-						.map(({ id: listItemId, itemTitle, imageURL, websiteURL, resizedImageOptions }) => (
-							<React.Fragment key={listItemId}>
+					<Stack className={`${BLOCK_CLASS_NAME}__items`} divider>
+						{contentElements
+							.reduce(unserializeStory(arcSite), [])
+							.map(({ id: listItemId, itemTitle, imageURL, websiteURL }) => (
 								<StoryItem
 									key={listItemId}
-									id={listItemId}
+									classPrefix={BLOCK_CLASS_NAME}
 									itemTitle={itemTitle}
 									imageURL={imageURL}
 									websiteURL={websiteURL}
 									websiteDomain={websiteDomain}
 									showHeadline={showHeadline}
 									showImage={showImage}
-									resizedImageOptions={resizedImageOptions}
-									placeholderResizedImageOptions={placeholderResizedImageOptions}
 									targetFallbackImage={targetFallbackImage}
 									arcSite={arcSite}
-									imageProps={imageProps}
+									primaryLogoAlt={primaryLogoAlt}
 								/>
-								<hr />
-							</React.Fragment>
-						))}
+							))}
+					</Stack>
 				</Wrapper>
-			</div>
+			</Stack>
 		</HeadingSection>
 	);
 };

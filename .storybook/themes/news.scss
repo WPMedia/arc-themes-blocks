@@ -890,6 +890,7 @@
 					gap: var(--global-spacing-4),
 				),
 				large-manual-promo-text: (
+					gap: 0,
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),
@@ -1552,6 +1553,8 @@
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-6),
+				),
+				large-manual-promo-text: (
 					components: (
 						heading: (
 							font-size: var(--global-font-size-12),

@@ -26,6 +26,30 @@ describe("Product Featured Image", () => {
 		const { container } = render(<ProductFeaturedImage />);
 		expect(container.firstChild).toBe(null);
 	});
+	it("should render null if empty schema provided", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {},
+			},
+		}));
+		const { container } = render(<ProductFeaturedImage />);
+		expect(container.firstChild).toBe(null);
+	});
+	it("should render null if no featured image provided", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					featuredImage: {
+						value: {
+							assets: [],
+						},
+					},
+				},
+			},
+		}));
+		const { container } = render(<ProductFeaturedImage />);
+		expect(container.firstChild).toBe(null);
+	});
 	it("should render a featured image", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {

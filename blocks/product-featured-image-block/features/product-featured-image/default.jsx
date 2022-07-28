@@ -7,9 +7,13 @@ import { RESIZER_APP_VERSION } from "fusion:environment";
 const BLOCK_CLASS_NAME = "b-product-featured-image";
 
 export const ProductFeaturedImageDisplay = ({ data, resizerAppVersion }) => {
-	const featuredImageAsset = data.schema.featuredImage.value.assets.find(
+	const featuredImageAsset = data.schema?.featuredImage?.value?.assets.find(
 		(asset) => asset.type === "image"
 	);
+
+	if (!featuredImageAsset) {
+		return null;
+	}
 
 	const { url, auth } = featuredImageAsset;
 

@@ -26,4 +26,4 @@ const mockFeaturedImageData = {
 	},
 };
 
-export const showImage = () => <ProductFeaturedImageDisplay data={mockFeaturedImageData} />;
+export const displayImage = () => <ProductFeaturedImageDisplay data={mockFeaturedImageData} />;

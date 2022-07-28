@@ -16,11 +16,6 @@ jest.mock("fusion:context", () => ({
 		arcSite: "dagen",
 	})),
 }));
-jest.mock("fusion:intl", () =>
-	jest.fn(() => ({
-		t: jest.fn(() => "test-translation"),
-	}))
-);
 
 describe("<NavWidget/>", () => {
 	it('renders null when type "none"', () => {
@@ -30,35 +25,26 @@ describe("<NavWidget/>", () => {
 	});
 
 	it('renders nav widget - arc search w/ "nav-bar" placement', () => {
-		const customSearchAction = jest.fn(() => {});
 		const placement = PLACEMENT_AREAS.NAV_BAR;
 		const cfg = WIDGET_CONFIG[placement];
-		const wrapper = shallow(
-			<NavWidget type="search" placement={placement} customSearchAction={customSearchAction} />
-		);
+		const wrapper = shallow(<NavWidget type="search" placement={placement} />);
 		expect(wrapper).toHaveLength(1);
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
-		expect(searchWidget.prop("placeholderText")).toEqual("test-translation");
-		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
+		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
 
 	it('renders nav widget - arc search w/ "section-menu" placement', () => {
-		const customSearchAction = jest.fn(() => {});
 		const placement = PLACEMENT_AREAS.SECTION_MENU;
 		const cfg = WIDGET_CONFIG[placement];
-		const wrapper = shallow(
-			<NavWidget type="search" placement={placement} customSearchAction={customSearchAction} />
-		);
+		const wrapper = shallow(<NavWidget type="search" placement={placement} />);
 		expect(wrapper).toHaveLength(1);
 		const searchWidget = wrapper.find(SearchBox);
 		expect(searchWidget).toHaveLength(1);
 		expect(searchWidget.prop("iconSize")).toEqual(cfg?.iconSize);
-		expect(searchWidget.prop("navBarColor")).toEqual("light");
-		expect(searchWidget.prop("placeholderText")).toEqual("test-translation");
-		expect(searchWidget.prop("customSearchAction")).toEqual(customSearchAction);
+		expect(searchWidget.prop("placeholderText")).toEqual("header-nav-chain-block.search-text");
 		expect(searchWidget.prop("alwaysOpen")).toEqual(cfg.expandSearch);
 	});
 
@@ -79,8 +65,9 @@ describe("<NavWidget/>", () => {
 	it("renders nav widget - section menu", () => {
 		const menuButtonClick = jest.fn(() => {});
 		const wrapper = mount(<NavWidget type="menu" menuButtonClickAction={menuButtonClick} />);
+
 		expect(wrapper).toHaveLength(1);
-		const menuWidget = wrapper.find("button.nav-sections-btn");
+		const menuWidget = wrapper.find("button");
 		expect(menuWidget).toHaveLength(1);
 		expect(menuWidget.prop("onClick")).toEqual(menuButtonClick);
 	});
@@ -91,21 +78,10 @@ describe("<NavWidget/>", () => {
 			<NavWidget type="menu" menuButtonClickAction={menuButtonClick} breakpoint="desktop" />
 		);
 
-		const menuWidget = wrapper.find("button.nav-sections-btn");
-		expect(menuWidget.text()).toBe("test-translation");
-		expect(menuWidget.find(".xpmedia-button--right-icon-container").length).toBe(1);
+		const menuWidget = wrapper.find("button");
+		expect(menuWidget.text()).toBe("header-nav-chain-block.sections-button");
+		expect(menuWidget.find("Icon").length).toBe(1);
 		expect(menuWidget.find("svg")).toHaveLength(1);
-	});
-
-	it("renders nav widget - section menu with svg icon and without text container, with mobile breakpoint", () => {
-		const menuButtonClick = jest.fn(() => {});
-		const wrapper = mount(
-			<NavWidget type="menu" menuButtonClickAction={menuButtonClick} breakpoint="mobile" />
-		);
-		const menuWidget = wrapper.find("button.nav-sections-btn");
-		expect(menuWidget.find(".xpmedia-button--right-icon-container").length).toBe(0);
-		expect(menuWidget.find("svg")).toHaveLength(1);
-		expect(menuWidget.text()).toBe("");
 	});
 
 	it("renders nav widget - custom with child component", () => {
@@ -115,7 +91,7 @@ describe("<NavWidget/>", () => {
 				type="custom"
 				position={1}
 				// eslint-disable-next-line react/no-children-prop
-				children={[<ChildComponent />]}
+				children={[<ChildComponent key="child-test" />]}
 			/>
 		);
 		expect(wrapper).toBeDefined();

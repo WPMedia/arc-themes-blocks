@@ -30,7 +30,7 @@ const ProductContent = ({ customFields }) => {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
-	if (!Object.keys(globalContent).length || contentType === undefined) {
+	if (!Object.keys(globalContent).length || !contentType) {
 		return null;
 	}
 
@@ -60,6 +60,7 @@ ProductContent.icon = "content-browser-edit";
 ProductContent.propTypes = {
 	customFields: PropTypes.shape({
 		contentType: PropTypes.oneOf(["description", "details"]).tag({
+			defaultValue: "description",
 			label: "Product Content",
 			labels: {
 				description: "Product Description",

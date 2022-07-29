@@ -10,6 +10,7 @@ describe("Product Content", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {},
 		}));
+
 		const { container } = render(<ProductContent customFields={{}} />);
 		expect(container.firstChild).toBe(null);
 	});
@@ -20,12 +21,12 @@ describe("Product Content", () => {
 		expect(container.firstChild).toBe(null);
 	});
 
-	it("should render product details", () => {
+	it("should render product description", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
+				description: "Product Description",
 				schema: {
 					productDetails: {
-						label: "Product Details",
 						value: "Crocker Sandals product",
 						dataType: "string",
 						visible: true,
@@ -34,8 +35,66 @@ describe("Product Content", () => {
 				},
 			},
 		}));
+		render(<ProductContent customFields={{ contentType: "description" }} />);
+		expect(screen.queryByText("product-content.description")).toBeInTheDocument();
+		expect(screen.queryByText("Product Description")).toBeInTheDocument();
+	});
+
+	it("should render product details", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					productDetails: {
+						value: "Crocker Sandals product",
+						dataType: "string",
+						visible: true,
+						configuration: null,
+					},
+				},
+			},
+		}));
+
 		render(<ProductContent customFields={{ contentType: "details" }} />);
-		expect(screen.queryByText("Product Details")).toBeInTheDocument();
+		expect(screen.queryByText("product-content.details")).toBeInTheDocument();
 		expect(screen.queryByText("Crocker Sandals product")).toBeInTheDocument();
+	});
+
+	it("should render product details", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					productDetails: {
+						value: "Crocker Sandals product",
+						dataType: "string",
+						configuration: null,
+					},
+				},
+			},
+		}));
+
+		render(<ProductContent customFields={{ contentType: "details" }} />);
+		expect(screen.queryByText("product-content.details")).toBeInTheDocument();
+		expect(screen.queryByText("Crocker Sandals product")).toBeInTheDocument();
+	});
+
+	it("should not render product details if visible flag is false", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					productDetails: {
+						value: "Crocker Sandals product",
+						dataType: "string",
+						visible: false,
+						configuration: null,
+					},
+				},
+			},
+		}));
+
+		const { container } = render(<ProductContent customFields={{ contentType: "details" }} />);
+
+		expect(container.firstChild).toBe(null);
+		expect(screen.queryByText("product-content.details")).not.toBeInTheDocument();
+		expect(screen.queryByText("Crocker Sandals product")).not.toBeInTheDocument();
 	});
 });

@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 
 import { useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import getTranslatedPhrases from "fusion:intl";
 
 import { Details, Icon } from "@wpmedia/arc-themes-components";
 
@@ -24,18 +26,28 @@ export const ProductContentDisplay = ({ children, summary, open }) => (
 
 const ProductContent = ({ customFields }) => {
 	const { contentType, headline, open } = customFields;
-	const { globalContent = {} } = useFusionContext();
+	const { arcSite, globalContent = {} } = useFusionContext();
+	const { locale } = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale);
 
 	if (!Object.keys(globalContent).length || contentType === undefined) {
 		return null;
 	}
 
 	const productData = getNestedObject(globalContent, contentMapping[contentType]);
+	const visible =
+		typeof productData === "object" && Object.prototype.hasOwnProperty.call(productData, "visible")
+			? productData?.visible
+			: true;
+
+	if (!visible) {
+		return null;
+	}
 
 	const data = {
-		summary: headline || productData.label,
+		summary: headline || phrases.t(`product-content.${contentType}`),
 		open,
-		children: productData.value,
+		children: contentType === "description" ? productData : productData.value,
 	};
 
 	return <ProductContentDisplay {...data} />;
@@ -43,7 +55,7 @@ const ProductContent = ({ customFields }) => {
 
 ProductContent.label = "Product Content – Arc Block";
 
-ProductContent.icon = "shopping-bag-smile";
+ProductContent.icon = "content-browser-edit";
 
 ProductContent.propTypes = {
 	customFields: PropTypes.shape({
@@ -52,7 +64,6 @@ ProductContent.propTypes = {
 				description: "Product Description",
 				details: "Product Details",
 			},
-			defaultValue: "description",
 		}),
 		headline: PropTypes.string.tag({
 			name: "Customize Headline",

@@ -71,4 +71,21 @@ describe("Product Featured Image", () => {
 		expect(image).toBeInTheDocument();
 		expect(image).toHaveAttribute("alt", ALT_TEXT_STRING);
 	});
+	it("should render an empty string for no alt text", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					featuredImage: {
+						value: {
+							assets: [{ ...FEATURED_IMAGE_ASSET, alt_text: undefined }],
+						},
+					},
+				},
+			},
+		}));
+		render(<ProductFeaturedImage />);
+		const image = screen.getByRole("img");
+		expect(image).toBeInTheDocument();
+		expect(image).toHaveAttribute("alt", "");
+	});
 });

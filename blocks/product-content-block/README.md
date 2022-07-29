@@ -1,44 +1,16 @@
-# @wpmedia/product-content-block
+# Product Information Block
 
-_Please provide a 1-2 sentence description of what the @wpmedia/product-content-block is and what it does._
+Used in conjuction with Arc Commerce to give an editor the ability to display Product
+Description and/or Product Details
 
-## Props
+## Custom Fields
 
-| **Prop**          | **Required** | **Type** | **Description** |
-| ----------------- | ------------ | -------- | --------------- |
-| **required prop** | yes          |          |                 |
-| **optional prop** | no           |          |                 |
+| **Custom Field** | **Required** | **Type** | **Description**                                                                        |
+| ---------------- | ------------ | -------- | -------------------------------------------------------------------------------------- |
+| **contentType**  | no           | string   | Choice of which product content item to show                                           |
+| **headline**     | no           | string   | A custom headline to be used in place of the default headline for a given content type |
+| open             | no           | boolean  | Flag to denote if the content panel should be open on intial render                    |
 
-## ANS Schema
+## Data
 
-Outline any schema information requirements necessary to know for ths block
-
-### ANS Fields
-
-- `Add all ANS fields used in the block`
-
-## Internationalization fields
-
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
-
-## Events
-
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
-
-### Event Listening
-
-Include block specific intructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+Relies on `globalContent` for data access from Arc Commerce

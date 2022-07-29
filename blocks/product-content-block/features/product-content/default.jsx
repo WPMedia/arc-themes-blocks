@@ -25,7 +25,7 @@ export const ProductContentDisplay = ({ children, summary, open }) => (
 );
 
 const ProductContent = ({ customFields }) => {
-	const { contentType, headline, open } = customFields;
+	const { contentType, headline, collapsed } = customFields;
 	const { arcSite, globalContent = {} } = useFusionContext();
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -46,7 +46,7 @@ const ProductContent = ({ customFields }) => {
 
 	const data = {
 		summary: headline || phrases.t(`product-content.${contentType}`),
-		open: !open,
+		open: !collapsed,
 		children: contentType === "description" ? productData : productData.value,
 	};
 
@@ -71,7 +71,7 @@ ProductContent.propTypes = {
 			name: "Customize Headline",
 			description: "By adding a custom headline, the default headline will be overridden.",
 		}),
-		open: PropTypes.boolean.tag({
+		collapsed: PropTypes.boolean.tag({
 			name: "Collapsed on page load",
 			defaultValue: true,
 		}),

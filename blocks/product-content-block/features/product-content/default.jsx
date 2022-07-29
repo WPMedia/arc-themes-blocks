@@ -72,7 +72,7 @@ ProductContent.propTypes = {
 		}),
 		open: PropTypes.boolean.tag({
 			name: "Collapsed on page load",
-			defaultValue: false,
+			defaultValue: true,
 		}),
 	}),
 };

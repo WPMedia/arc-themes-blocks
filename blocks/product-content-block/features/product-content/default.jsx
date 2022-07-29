@@ -46,7 +46,7 @@ const ProductContent = ({ customFields }) => {
 
 	const data = {
 		summary: headline || phrases.t(`product-content.${contentType}`),
-		open,
+		open: !open,
 		children: contentType === "description" ? productData : productData.value,
 	};
 

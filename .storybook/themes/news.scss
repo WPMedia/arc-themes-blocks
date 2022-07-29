@@ -95,8 +95,8 @@
 		"spacing-16": 7rem,
 		// 112px
 		"spacing-17": 7.5rem,
-
 		// 120px
+		//Font Weight
 		"font-weight-1": 100,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -136,8 +136,8 @@
 		"font-size-14": 3rem,
 		// 48px
 		"font-size-15": 3.25rem,
-
 		// 52px
+		// Line heights
 		"line-height-1": 0.875rem,
 		// 14px
 		"line-height-2": 1rem,
@@ -157,7 +157,6 @@
 		"line-height-9": 3.5rem,
 		// 56px
 		"line-height-10": 3.875rem,
-
 		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
@@ -1199,8 +1198,7 @@
 					gap: var(--global-spacing-4),
 				),
 				large-manual-promo-text: (
-					--grid-template-columns: 1fr,
-					grid-template-rows: auto 1fr,
+					gap: 0,
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),
@@ -1209,6 +1207,64 @@
 						overline: (
 							font-size: var(--global-font-size-5),
 							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				large-promo: (
+					gap: var(--global-spacing-4),
+					components: (
+						attribution: (
+							display: inline,
+						),
+						image: (
+							max-height: 290px,
+						),
+						media-item: (
+							position: relative,
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
+				large-promo-icon-label: (
+					align-items: center,
+					padding: var(--global-spacing-2),
+					background-color: var(--color-primary),
+					border: 0,
+					border-radius: var(--global-spacing-2),
+					bottom: var(--global-spacing-2),
+					margin-left: var(--global-spacing-2),
+					position: absolute,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				large-promo-label: (
+					margin-left: var(--global-spacing-2),
+					color: var(--global-white),
+				),
+				large-promo-text: (
+					gap: 0,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-6),
+						),
+						overline: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-4),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
@@ -1480,6 +1536,34 @@
 				),
 				share-bar-email: (
 					fill: #b61818,
+				),
+				simple-list: (
+					gap: var(--global-spacing-4),
+					components: (
+						stack: (
+							min-height: 72px,
+						),
+						heading: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-5),
+						),
+					),
+				),
+				simple-list-items: (
+					components: (
+						heading: (
+							line-height: var(--body-line-height),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
+						),
+					),
+					gap: var(--global-spacing-4),
+				),
+				simple-list-item: (
+					gap: var(--global-spacing-6),
+				),
+				simple-list-item-anchor: (
+					flex: 0 0 33%,
 				),
 				single-column-regular-main: (
 					components: (
@@ -1841,6 +1925,20 @@
 						),
 					),
 				),
+				large-promo: (
+					gap: var(--global-spacing-6),
+				),
+				large-promo-text: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
+						),
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				masthead: (
 					display: flex,
 				),
@@ -1919,6 +2017,13 @@
 				),
 				share-bar: (
 					display: flex,
+				),
+				simple-list: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-7),
+						),
+					),
 				),
 				single-column-regular-main: (
 					components: (
@@ -2028,6 +2133,7 @@
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/large-manual-promo-block";
+@use "../../blocks/large-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/medium-manual-promo-block";
@@ -2038,6 +2144,7 @@
 @use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/share-bar-block";
+@use "../../blocks/simple-list-block";
 @use "../../blocks/single-chain-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/small-manual-promo-block";

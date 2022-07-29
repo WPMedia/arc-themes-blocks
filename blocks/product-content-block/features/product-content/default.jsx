@@ -60,6 +60,7 @@ ProductContent.icon = "content-browser-edit";
 ProductContent.propTypes = {
 	customFields: PropTypes.shape({
 		contentType: PropTypes.oneOf(["description", "details"]).tag({
+			label: "Product Content",
 			labels: {
 				description: "Product Description",
 				details: "Product Details",

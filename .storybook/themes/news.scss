@@ -450,7 +450,7 @@
 					background-color: var(--color-primary),
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
-					font-size: var(--global-font-size-2),
+					font-size: var(--body-font-size-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 					text-decoration: none,
 				),
@@ -510,7 +510,7 @@
 				),
 				article-body: (
 					font-family: var(--font-family-secondary),
-					font-size: var(--global-font-size-4),
+					font-size: var(--body-font-size),
 					components: (
 						link: (
 							color: var(--color-primary),
@@ -532,19 +532,19 @@
 					color: var(--color-primary),
 				),
 				article-body-h2: (
-					font-size: var(--global-font-size-11),
+					font-size: var(--heading-level-2-font-size),
 				),
 				article-body-h3: (
-					font-size: var(--global-font-size-10),
+					font-size: var(--heading-level-3-font-size),
 				),
 				article-body-h4: (
-					font-size: var(--global-font-size-9),
+					font-size: var(--heading-level-4-font-size),
 				),
 				article-body-h5: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 				),
 				article-body-h6: (
-					font-size: var(--global-font-size-5),
+					font-size: var(--heading-level-6-font-size),
 				),
 				article-body-blockquote: (
 					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
@@ -554,7 +554,7 @@
 					text-align: left,
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-5),
+							font-size: var(--heading-level-6-font-size),
 						),
 					),
 				),
@@ -564,7 +564,7 @@
 				article-body-citation: (
 					font-family: var(--font-family-primary),
 					font-style: normal,
-					font-size: var(--global-font-size-4),
+					font-size: var(--body-font-size),
 				),
 				article-body-correction: (
 					box-shadow: inset 0 -1px 0 0 var(--border-color),
@@ -572,7 +572,7 @@
 					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-5),
+							font-size: var(--heading-level-6-font-size),
 							text-transform: uppercase,
 						),
 						paragraph: (
@@ -612,7 +612,7 @@
 							border: none,
 							box-shadow: none,
 							color: var(--text-color),
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 							height: auto,
 							width: auto,
 						),
@@ -620,12 +620,12 @@
 							background-color: transparent,
 							box-shadow: none,
 							color: var(--text-color),
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 							height: auto,
 							width: auto,
 						),
 						carousel-image-counter: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 						),
 						media-item: (
 							background-color: var(--global-neutral-9),
@@ -757,7 +757,7 @@
 					components: (
 						paragraph: (
 							font-style: italic,
-							font-size: var(--global-font-size-7),
+							font-size: var(--heading-level-5-font-size),
 							font-weight: bold,
 						),
 					),
@@ -802,16 +802,16 @@
 							padding: 0 var(--global-spacing-2),
 						),
 						attribution: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 						),
 						date: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 						),
 					),
 				),
 				card-list-title: (
 					padding: 0 var(--global-spacing-4),
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 				),
 				card-list-list: (
 					padding: 0 var(--global-spacing-4),
@@ -831,8 +831,8 @@
 				card-list-secondary-item: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-4),
-							font-weight: var(--global-font-weight-4),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
 						),
 					),
 				),
@@ -890,7 +890,7 @@
 							line-height: var(--heading-level-6-line-height),
 						),
 						paragraph: (
-							font-size: var(--global-font-size-4),
+							font-size: var(--body-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -960,7 +960,7 @@
 						),
 						paragraph: (
 							display: inline,
-							font-size: var(--global-font-size-4),
+							font-size: var(--body-font-size),
 						),
 					),
 				),
@@ -1227,9 +1227,6 @@
 							font-size: var(--heading-level-1-font-size),
 							line-height: var(--heading-level-1-line-height),
 						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-						),
 						stack: (
 							gap: var(--global-spacing-2),
 						),
@@ -1276,7 +1273,7 @@
 					width: var(--content-scale-width),
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 						),
 						stack: (
 							gap: var(--global-spacing-3),
@@ -1378,42 +1375,13 @@
 					),
 				),
 				article-body: (
-					font-size: var(--global-font-size-7),
-				),
-				article-body-h2: (
-					font-size: var(--global-font-size-14),
-				),
-				article-body-h3: (
-					font-size: var(--global-font-size-13),
-				),
-				article-body-h4: (
-					font-size: var(--global-font-size-12),
-				),
-				article-body-h5: (
-					font-size: var(--global-font-size-11),
-				),
-				article-body-h6: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-6-font-size),
 				),
 				article-body-gallery-additional-next: (
 					display: block,
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
-				),
-				article-body-blockquote: (
-					components: (
-						paragraph: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
-				article-body-pullquote: (
-					components: (
-						paragraph: (
-							font-size: var(--global-font-size-11),
-						),
-					),
 				),
 				double-chain: (
 					components: (
@@ -1553,7 +1521,7 @@
 				video-player-feature-meta: (
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-4),
+							font-size: var(--body-font-size),
 						),
 					),
 				),

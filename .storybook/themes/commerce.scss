@@ -62,41 +62,41 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		"spacing-1": 0.25rem,
 		// 4px
-		"spacing-2": 0.5rem,
+		"spacing-1": 0.25rem,
 		// 8px
-		"spacing-3": 0.75rem,
+		"spacing-2": 0.5rem,
 		// 12px
-		"spacing-4": 1rem,
+		"spacing-3": 0.75rem,
 		// 16px
-		"spacing-5": 1.5rem,
+		"spacing-4": 1rem,
 		// 24px
-		"spacing-6": 2rem,
+		"spacing-5": 1.5rem,
 		// 32px
-		"spacing-7": 2.5rem,
+		"spacing-6": 2rem,
 		// 40px
-		"spacing-8": 3rem,
+		"spacing-7": 2.5rem,
 		// 48px
-		"spacing-9": 3.5rem,
+		"spacing-8": 3rem,
 		// 56px
-		"spacing-10": 4rem,
+		"spacing-9": 3.5rem,
 		// 64px
-		"spacing-11": 4.5rem,
+		"spacing-10": 4rem,
 		// 72px
-		"spacing-12": 5rem,
+		"spacing-11": 4.5rem,
 		// 80px
-		"spacing-13": 5.5rem,
+		"spacing-12": 5rem,
 		// 88px
-		"spacing-14": 6rem,
+		"spacing-13": 5.5rem,
 		// 96px
-		"spacing-15": 6.5rem,
+		"spacing-14": 6rem,
 		// 104px
-		"spacing-16": 7rem,
+		"spacing-15": 6.5rem,
 		// 112px
+		"spacing-16": 7rem,
+		// 120px
 		"spacing-17": 7.5rem,
 
-		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -107,58 +107,65 @@
 		"font-weight-8": 800,
 		"font-weight-9": 900,
 
-		"font-size-1": 0.625rem,
 		// 10px
-		"font-size-2": 0.75rem,
+		"font-size-1": 0.625rem,
 		// 12px
-		"font-size-3": 0.875rem,
+		"font-size-2": 0.75rem,
 		// 14px
-		"font-size-4": 1rem,
+		"font-size-3": 0.875rem,
 		// 16px
-		"font-size-5": 1.125rem,
+		"font-size-4": 1rem,
 		// 18px
-		"font-size-6": 1.1875rem,
+		"font-size-5": 1.125rem,
 		// 19px
-		"font-size-7": 1.25rem,
+		"font-size-6": 1.1875rem,
 		// 20px
-		"font-size-8": 1.375rem,
+		"font-size-7": 1.25rem,
 		// 22px
-		"font-size-9": 1.5rem,
+		"font-size-8": 1.375rem,
 		// 24px
-		"font-size-10": 1.75rem,
+		"font-size-9": 1.5rem,
 		// 28px
-		"font-size-11": 2rem,
+		"font-size-10": 1.75rem,
 		// 32px
-		"font-size-12": 2.25rem,
+		"font-size-11": 2rem,
 		// 36px
-		"font-size-13": 2.56rem,
+		"font-size-12": 2.25rem,
 		// 41px
-		"font-size-14": 3rem,
+		"font-size-13": 2.56rem,
 		// 48px
+		"font-size-14": 3rem,
+		// 52px
 		"font-size-15": 3.25rem,
 
-		// 52px
-		"line-height-1": 0.875rem,
+		"line-height-1": 1,
+		"line-height-2": 1.1,
+		"line-height-3": 1.2,
+		"line-height-4": 1.3,
+		"line-height-5": 1.4,
+		"line-height-6": 1.5,
+
 		// 14px
-		"line-height-2": 1rem,
+		"line-height-1": 0.875rem,
 		// 16px
-		"line-height-3": 1.25rem,
+		"line-height-2": 1rem,
 		// 20px
-		"line-height-4": 1.5rem,
+		"line-height-3": 1.25rem,
 		// 24px
-		"line-height-5": 2rem,
+		"line-height-4": 1.5rem,
 		// 32px
-		"line-height-6": 2.125rem,
+		"line-height-5": 2rem,
 		// 34px
-		"line-height-7": 2.5rem,
+		"line-height-6": 2.125rem,
 		// 40px
-		"line-height-8": 3rem,
+		"line-height-7": 2.5rem,
 		// 48px
-		"line-height-9": 3.5rem,
+		"line-height-8": 3rem,
 		// 56px
+		"line-height-9": 3.5rem,
+		// 62px
 		"line-height-10": 3.875rem,
 
-		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
 		"z-index-2": 10,
@@ -202,6 +209,25 @@
 		"border-radius-pill": var(--global-border-radius-2),
 		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
+		// headings
+		"heading-level-1-font-size": var(--global-font-size-12),
+		"heading-level-1-line-height": var(--global-line-height-3),
+		"heading-level-1-font-weight": var(--global-font-weight-7),
+		"heading-level-2-font-size": var(--global-font-size-11),
+		"heading-level-2-line-height": var(--global-line-height-4),
+		"heading-level-2-font-weight": var(--global-font-weight-7),
+		"heading-level-3-font-size": var(--global-font-size-10),
+		"heading-level-3-line-height": var(--global-line-height-4),
+		"heading-level-3-font-weight": var(--global-font-weight-7),
+		"heading-level-4-font-size": var(--global-font-size-9),
+		"heading-level-4-line-height": var(--global-line-height-5),
+		"heading-level-4-font-weight": var(--global-font-weight-7),
+		"heading-level-5-font-size": var(--global-font-size-7),
+		"heading-level-5-line-height": var(--global-line-height-5),
+		"heading-level-5-font-weight": var(--global-font-weight-7),
+		"heading-level-6-font-size": var(--global-font-size-5),
+		"heading-level-6-line-height": var(--global-line-height-5),
+		"heading-level-6-font-weight": var(--global-font-weight-7),
 		// body
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-4),
@@ -235,12 +261,12 @@
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--body-font-size-tiny),
-					font-weight: var(--global-font-weight-7),
+					font-weight: var(--heading-level-5-font-weight),
 					line-height: var(--body-line-height-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				badge-danger: (
-					background-color: var(--form-border-color-danger),
+					background-color: var(--status-color-danger),
 				),
 				badge-default: (
 					background-color: var(--text-color),
@@ -252,10 +278,10 @@
 					background-color: var(--color-primary),
 				),
 				badge-success: (
-					background-color: var(--form-border-color-success),
+					background-color: var(--status-color-success),
 				),
 				badge-warning: (
-					background-color: var(--form-border-color-warning),
+					background-color: var(--status-color-warning),
 				),
 				body: (
 					color: var(--text-color),
@@ -264,9 +290,11 @@
 					line-height: var(--body-line-height),
 				),
 				button: (
-					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-color: transparent,
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
 					border-radius: var(--border-radius),
-					font-weight: var(--global-font-weight-7),
+					font-weight: var(--heading-level-5-font-weight),
 					gap: var(--global-spacing-2),
 				),
 				button-small: (
@@ -347,12 +375,18 @@
 					line-height: var(--body-line-height-small),
 				),
 				heading: (
-					font-weight: var(--global-font-weight-7),
+					font-family: var(--font-family-primary),
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
 				),
 				icon: (
 					fill: var(--icon-fill-color),
 					height: var(--global-spacing-5),
 					width: var(--global-spacing-5),
+				),
+				image: (
+					max-width: 100%,
 				),
 				input: (
 					align-items: flex-start,
@@ -376,22 +410,22 @@
 					font-weight: var(--global-font-weight-7),
 				),
 				input-error-input: (
-					border-color: var(--form-border-color-danger),
+					border-color: var(--status-color-danger),
 				),
 				input-error-input-focus: (
-					outline-color: var(--form-border-color-danger),
+					outline-color: var(--status-color-danger),
 				),
 				input-success-input: (
-					border-color: var(--form-border-color-success),
+					border-color: var(--status-color-success),
 				),
 				input-success-input-focus: (
-					outline-color: var(--form-border-color-success),
+					outline-color: var(--status-color-success),
 				),
 				input-warning-input: (
-					border-color: var(--form-border-color-warning),
+					border-color: var(--status-color-warning),
 				),
 				input-warning-input-focus: (
-					outline-color: var(--form-border-color-warning),
+					outline-color: var(--status-color-warning),
 				),
 				link: (
 					color: var(--color-primary),
@@ -418,20 +452,22 @@
 				),
 				overline: (
 					color: var(--text-color),
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-5-font-size),
+					font-weight: var(--heading-level-5-font-weight),
+					line-height: var(--heading-level-5-line-height),
 					text-decoration: none,
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
+					font-size: var(--body-font-size),
+					font-weight: var(--body-font-weight),
+					line-height: var(--body-line-height),
 				),
 				pill: (
 					background-color: var(--color-primary),
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
-					font-size: var(--global-font-size-2),
-					line-height: var(--global-line-height-2),
+					font-size: var(--body-font-size-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 					text-decoration: none,
 				),
@@ -462,12 +498,11 @@
 					display: flex,
 					flex-wrap: nowrap,
 					justify-content: space-between,
-					line-height: var(--global-line-height-9),
 					word-break: break-word,
 					components: (
 						button-default: (
 							background: none,
-							border: none,
+							border-width: 0,
 							flex: 0 0 auto,
 						),
 						button-large: (
@@ -479,7 +514,6 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-3),
 							padding-bottom: var(--global-spacing-5),
 							padding-left: var(--global-spacing-4),
 							padding-right: var(--global-spacing-5),
@@ -504,7 +538,7 @@
 					),
 				),
 				category-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -518,7 +552,7 @@
 					),
 				),
 				category-carousel-slide-title: (
-					font-size: var(--global-font-size-2),
+					font-size: var(--body-font-size-tiny),
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-5),
@@ -533,12 +567,8 @@
 							gap: var(--global-spacing-4),
 						),
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-7),
-						),
-						paragraph: (
-							font-size: var(--body-font-size),
-							line-height: var(--global-line-height-3),
+							font-size: var(--heading-level-2-font-size),
+							line-height: var(--heading-level-2-line-height),
 						),
 					),
 				),
@@ -577,9 +607,9 @@
 				hero-subheadline: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
@@ -596,7 +626,7 @@
 					gap: var(--global-spacing-2),
 				),
 				product-assortment-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -606,8 +636,8 @@
 					components: (
 						heading: (
 							-webkit-line-clamp: 2,
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--global-line-height-3),
+							font-weight: var(--body-font-weight),
+							line-height: var(--body-line-height),
 						),
 						price: (
 							gap: var(--global-spacing-1),
@@ -631,18 +661,17 @@
 					components: (
 						heading: (
 							color: var(--global-black),
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-5),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-2),
 						),
 						price: (
 							color: var(--text-color),
-							font-size: var(--global-font-size-5),
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--body-font-weight-4),
 						),
 					),
 				),
@@ -652,9 +681,9 @@
 					width: 100%,
 					components: (
 						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 							margin-left: auto,
 							margin-right: auto,
 							margin-bottom: var(--global-spacing-2),
@@ -689,9 +718,9 @@
 					width: 100%,
 					components: (
 						paragraph: (
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							font-size: var(--global-font-size-5),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							font-size: var(--heading-level-5-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -754,7 +783,7 @@
 					gap: var(--global-spacing-2),
 				),
 				story-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -764,16 +793,16 @@
 					components: (
 						heading: (
 							-webkit-line-clamp: 2,
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-black),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							color: var(--color-primary),
 						),
 						paragraph: (
 							-webkit-line-clamp: 3,
-							font-weight: var(--global-font-weight-4),
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-neutral-5),
+							font-weight: var(--body-font-weight-small),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							color: var(--text-color),
 						),
 					),
 					gap: var(--global-spacing-1),
@@ -801,14 +830,6 @@
 					margin: auto,
 					width: var(--content-scale-width),
 					components: (
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-						),
 						stack: (
 							gap: var(--global-spacing-3),
 						),
@@ -818,8 +839,8 @@
 					gap: var(--global-spacing-3),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
+							font-size: var(--heading-level-4-font-size),
+							line-height: var(--heading-level-4-line-height),
 						),
 						media-item: (
 							width: 100%,
@@ -849,6 +870,16 @@
 				"body-line-height-small": var(--global-line-height-3),
 				"body-font-size-tiny": var(--global-font-size-2),
 				"body-line-height-tiny": var(--global-line-height-2),
+				"heading-level-1-font-size": var(--global-font-size-15),
+				"heading-level-2-font-size": var(--global-font-size-14),
+				"heading-level-2-line-height": var(--global-line-height-3),
+				"heading-level-3-font-size": var(--global-font-size-13),
+				"heading-level-3-line-height": var(--global-line-height-3),
+				"heading-level-4-font-size": var(--global-font-size-12),
+				"heading-level-4-line-height": var(--global-line-height-3),
+				"heading-level-5-font-size": var(--global-font-size-11),
+				"heading-level-5-line-height": var(--global-line-height-4),
+				"heading-level-6-font-size": var(--global-font-size-7),
 			),
 			components: (
 				carousel: (
@@ -869,21 +900,14 @@
 						),
 					),
 				),
-				category-carousel-title: (
-					font-size: var(--global-font-size-11),
-				),
 				category-carousel-slide-title: (
-					font-size: var(--global-font-size-3),
+					font-size: var(--body-font-size-small),
 				),
 				hero: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-14),
-							line-height: var(--global-line-height-10),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-2-font-size),
+							line-height: var(--heading-level-2-line-height),
 						),
 					),
 				),
@@ -901,13 +925,13 @@
 				hero-subheadline: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-6),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
 				product-assortment-carousel-title: (
-					font-size: var(--global-font-size-11),
+					font-size: var(--heading-level-5-font-size),
 				),
 				product-information: (
 					components: (
@@ -924,8 +948,8 @@
 					width: 100%,
 					components: (
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-6),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
@@ -935,7 +959,7 @@
 					max-width: 100%,
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-7),
+							font-size: var(--heading-level-5-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -982,25 +1006,20 @@
 					),
 				),
 				story-carousel-title: (
-					font-size: var(--global-font-size-11),
+					font-size: var(--heading-level-5-font-size),
 				),
 				video-player-feature-meta: (
 					components: (
-						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
 						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
 						),
 					),
 				),
 				video-player-inline: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
+							font-size: var(--heading-level-3-font-size),
+							line-height: var(--heading-level-3-line-height),
 						),
 					),
 				),

@@ -1198,8 +1198,7 @@
 					gap: var(--global-spacing-4),
 				),
 				large-manual-promo-text: (
-					--grid-template-columns: 1fr,
-					grid-template-rows: auto 1fr,
+					gap: 0,
 					components: (
 						heading: (
 							font-size: var(--global-font-size-10),
@@ -1208,6 +1207,64 @@
 						overline: (
 							font-size: var(--global-font-size-5),
 							line-height: var(--global-line-height-5),
+						),
+						paragraph: (
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						stack: (
+							gap: var(--global-spacing-4),
+						),
+					),
+				),
+				large-promo: (
+					gap: var(--global-spacing-4),
+					components: (
+						attribution: (
+							display: inline,
+						),
+						image: (
+							max-height: 290px,
+						),
+						media-item: (
+							position: relative,
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
+				large-promo-icon-label: (
+					align-items: center,
+					padding: var(--global-spacing-2),
+					background-color: var(--color-primary),
+					border: 0,
+					border-radius: var(--global-spacing-2),
+					bottom: var(--global-spacing-2),
+					margin-left: var(--global-spacing-2),
+					position: absolute,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				large-promo-label: (
+					margin-left: var(--global-spacing-2),
+					color: var(--global-white),
+				),
+				large-promo-text: (
+					gap: 0,
+					components: (
+						heading: (
+							font-size: var(--global-font-size-10),
+							line-height: var(--global-line-height-6),
+						),
+						overline: (
+							font-size: var(--global-font-size-5),
+							line-height: var(--global-line-height-4),
 						),
 						paragraph: (
 							font-size: var(--global-font-size-4),
@@ -1868,6 +1925,20 @@
 						),
 					),
 				),
+				large-promo: (
+					gap: var(--global-spacing-6),
+				),
+				large-promo-text: (
+					components: (
+						heading: (
+							font-size: var(--global-font-size-12),
+							line-height: var(--global-line-height-7),
+						),
+						overline: (
+							font-size: var(--global-font-size-7),
+						),
+					),
+				),
 				masthead: (
 					display: flex,
 				),
@@ -2062,6 +2133,7 @@
 @use "../../blocks/headline-block";
 @use "../../blocks/hero-block";
 @use "../../blocks/large-manual-promo-block";
+@use "../../blocks/large-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
 @use "../../blocks/medium-manual-promo-block";

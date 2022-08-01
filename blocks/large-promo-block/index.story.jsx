@@ -105,6 +105,10 @@ export const withGalleryLabelAndImage = () => {
 		...allCustomFields,
 		showImage: true,
 		content: { type: "gallery" },
+		showDescription: true,
+		imageOrVideoLabelText: "promo-label.gallery-text",
+		showImageOrVideoLabel: true,
+		showVideoLabel: false,
 	};
 
 	return <Promo customFields={updatedCustomFields} />;
@@ -115,6 +119,10 @@ export const withVideoLabelAndImage = () => {
 		...allCustomFields,
 		showImage: true,
 		content: { type: "video" },
+		showDescription: true,
+		imageOrVideoLabelText: "promo-label.video-text",
+		showImageOrVideoLabel: true,
+		showVideoLabel: true,
 	};
 
 	return <Promo customFields={updatedCustomFields} />;
@@ -126,6 +134,7 @@ export const playVideoInPlaceOfImage = () => {
 		// playVideoInPlace will override showImage
 		showImage: true,
 		playVideoInPlace: true,
+		aspectRatio: 16 / 9,
 		content: {
 			embed_html: `<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>`,
 			type: "video",

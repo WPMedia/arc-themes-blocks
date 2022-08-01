@@ -1,18 +1,25 @@
 # `@wpmedia/large-promo-block`
 
-_Block containing a large promo component. Please provide a 1-2 sentence description of what the block is and what it does._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+The large promo block displays an overline, headline, description, and image.
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop** | **Required** | **Type** | **Description** |
+| -------- | ------------ | -------- | --------------- |
+|          |
+
+|
+
+| **customFields.showHeadline** | no | Boolean | Do or do not display the headline text. Default value is `true`. |
+| **customFields.showDescription** | no | Boolean | Do or do not display the description text. Default value is `true`. |
+| **customFields.showOverline** | no | Boolean | Do or do not display the overline text. Default value is `true` |
+| **customFields.showImage** | no | Boolean | Do or do not display the image. Default value is `true` | |
+| **customFields.lazyLoad** | no | Boolean | Prevent block display until when nearly in-view for the user. Default is false. |
+| **customFields.showByline** | no | Boolean | Do or do not display the byline, showing the author of the content. Defaults to `true`, showing the byline |
+| **customFields.showDate** | no | Boolean | Do or do not display the date, showing the time and day of the content. Defaults to `true`, showing the date info |
+| **customFields.imageOverrideURL** | no | String | An image url to show instead of the data fetched|
+| **customFields.playVideoInPlace** | no | Boolean | Play the video in place of the image. Default is false. |
+| **customFields.imageRatio** | no | String | The ratio of the image. Default is `4x3` |
 
 ## ANS Schema
 
@@ -114,28 +121,16 @@ export default {
 - `content.websites[arcSite].website_section`
 - `content.promo_items`
 
-## Internationalization fields
+## Internationalization
 
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
+- global.and-text
+- global.by-text
+- global.sponsored-content
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+n/a
 
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_Configuration (including content) is handled through proptypes in the PB editor._
+n/a

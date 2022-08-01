@@ -28,6 +28,10 @@ export const getAdName = ({ adType }) => adMap[adType]?.adName;
 
 export const getAdClass = ({ adType }) => adMap[adType]?.adClass;
 
+// returns an array of arrays
+// in some instances, possibly array of arrays of arrays
+// [width, height]
+// [[300, 250], [[300, 250], [150, 125]], [300, 250]]
 export const getDimensions = ({ adType }) => adMap[adType]?.dimensionsArray;
 
 export const getCategory = (sectionPath) => sectionPath && sectionPath.split("/")[1];

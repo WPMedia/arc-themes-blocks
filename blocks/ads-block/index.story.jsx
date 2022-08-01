@@ -14,11 +14,11 @@ export default {
 const DEFAULT_PROPS = {
 	config: {
 		adClass: "",
-		adType: "",
+		adType: "1x1",
 		slotName: "Slot Name",
-		dimensions: "",
+		dimensions: [[100, 100]],
 	},
-	displayAdLabel: "Display Advertisement Label",
+	displayAdLabel: true,
 	instanceId: "1",
 	isAdmin: false,
 	isAMP: () => false,
@@ -26,6 +26,7 @@ const DEFAULT_PROPS = {
 	propsWithContext: { siteProperties: { dfpId: "dfp id" } },
 	sizing: { maxWidth: "100px", minHeight: "100px" },
 	adLabel: "Ad Label",
+	reserveSpace: true,
 };
 
 export const adminView = () => <ArcAdDisplay {...DEFAULT_PROPS} isAdmin />;

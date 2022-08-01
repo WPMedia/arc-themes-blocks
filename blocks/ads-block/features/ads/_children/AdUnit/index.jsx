@@ -4,6 +4,8 @@ import ArcAdsInstance from "../ArcAdsInstance";
 import { setPageTargeting } from "../../ad-helper";
 
 const AdUnit = (props) => {
+	// featureConfig is called propsWithContext in the default.jsx
+	// propsWithContext must include dfp in the fusionContext object
 	const { adConfig, featureConfig } = props;
 	const { id, adClass } = adConfig;
 	const {
@@ -27,6 +29,7 @@ const AdUnit = (props) => {
 		if (!isAdmin) registerAd();
 	}, [registerAd, isAdmin]);
 
+	// hmm: setting a classname dynamically here
 	return !isAdmin ? <div id={id} className={`arcad ad-${adClass}`} /> : null;
 };
 

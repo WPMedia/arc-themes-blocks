@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
+// todo: remove styled components
 import styled from "styled-components";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
@@ -10,19 +11,24 @@ import adMap from "./ad-mapping";
 import AdUnit from "./_children/AdUnit";
 import ArcAdminAd from "./_children/ArcAdminAd";
 import { getAdObject } from "./ad-helper";
+
+// todo: remove and replace
 import "./ads.scss";
 
 function generateInstanceId(componentId) {
 	return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
+// this can likely be removed without the istanbul ignore label visibility
 // eslint-disable-next-line arrow-body-style
 const setAdLabelVisibility = (props) => {
 	// istanbul ignore next
 	return props.displayAdLabel ? "" : "display: none";
 };
 
-const StyledAdUnit = styled.div`
+// setting content in the div for admin?
+// can be a paragraph rather than dynamic content
+export const StyledAdUnit = styled.div`
 	.arcad > [id^="google_ads_iframe"]:not(:empty)::before {
 		content: "${(props) => props.adLabel}";
 		display: block;
@@ -35,44 +41,25 @@ const StyledAdUnit = styled.div`
 	}
 `;
 
-const ArcAd = (props) => {
-	const fusionContext = useFusionContext();
-	const { arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(locale);
-	const [instanceId] = useState(() => generateInstanceId(fusionContext.id || "0000"));
-	const propsWithContext = {
-		...fusionContext,
-		...props,
+export const ArcAdDisplay = (props) => {
+	// take in phrases content
+	const {
+		config,
+		displayAdLabel,
 		instanceId,
-	};
-	const { customFields, isAdmin, siteProperties } = propsWithContext;
-	const { displayAdLabel, lazyLoad = true, reserveSpace = true } = customFields;
-	const [config] = useState(
-		getAdObject({
-			...customFields,
-			...propsWithContext,
-		})
-	);
-
-	// istanbul ignore next
-	const isAMP = () => !!(propsWithContext.outputType && propsWithContext.outputType === "amp");
-
-	const [width, height] = config.adClass ? config.adClass.split("x") : [];
-	// Height is + 17px to account line-height of advertisment string of 17px;
-	const heightWithAdjustments = parseInt(height, 10) + (displayAdLabel ? 17 : 0);
-
-	const sizing = {
-		maxWidth: `${width}px`,
-		minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
-	};
-
+		isAdmin,
+		isAMP,
+		lazyLoad,
+		propsWithContext,
+		sizing,
+		adLabel,
+	} = props;
 	return (
 		<StyledAdUnit
 			id={`arcad-feature-${instanceId}`}
 			className="arcad-feature"
-			adLabel={siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label")}
-			displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
+			adLabel={adLabel}
+			displayAdLabel={!isAdmin && displayAdLabel && !isAMP()} // interesting logic here around amp
 		>
 			<div className="arcad-container" style={sizing}>
 				{!isAdmin && !isAMP() && (
@@ -91,9 +78,60 @@ const ArcAd = (props) => {
 						<AdUnit adConfig={config} featureConfig={propsWithContext} />
 					</LazyLoad>
 				)}
-				{isAdmin && <ArcAdminAd {...config} />}
+				{isAdmin && <ArcAdminAd {...config} isAdmin />}
 			</div>
 		</StyledAdUnit>
+	);
+};
+
+const ArcAd = (props) => {
+	const fusionContext = useFusionContext();
+	const { arcSite } = useFusionContext();
+	const { locale = "en" } = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale);
+	const [instanceId] = useState(() => generateInstanceId(fusionContext.id || "0000"));
+	const propsWithContext = {
+		...fusionContext, // siteProperties: { dfpId } included in fusionContext
+		...props,
+		instanceId,
+	};
+	const { customFields, isAdmin, siteProperties } = propsWithContext;
+	const { displayAdLabel, lazyLoad = true, reserveSpace = true } = customFields;
+	const [config] = useState(
+		getAdObject({
+			...customFields,
+			...propsWithContext,
+		})
+	);
+
+	// we don't need to support amp so this can be removed
+	// istanbul ignore next
+	const isAMP = () => !!(propsWithContext.outputType && propsWithContext.outputType === "amp");
+
+	const [width, height] = config.adClass ? config.adClass.split("x") : [];
+	// Height is + 17px to account line-height of advertisement string of 17px;
+	const heightWithAdjustments = parseInt(height, 10) + (displayAdLabel ? 17 : 0);
+
+	const sizing = {
+		maxWidth: `${width}px`,
+		minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
+	};
+
+	const adLabel = siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label");
+
+	return (
+		<ArcAdDisplay
+			config={config}
+			displayAdLabel={displayAdLabel}
+			instanceId={instanceId}
+			isAdmin={isAdmin}
+			isAMP={isAMP}
+			lazyLoad={lazyLoad}
+			phrases={phrases}
+			propsWithContext={propsWithContext}
+			sizing={sizing}
+			adLabel={adLabel}
+		/>
 	);
 };
 

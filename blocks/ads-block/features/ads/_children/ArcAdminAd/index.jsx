@@ -1,13 +1,11 @@
 import React from "react";
-import { useFusionContext } from "fusion:context";
 // todo: remove and replace
 import "./index.scss";
 
 // could I use this in sb?
 // this is only visible on the admin side
-const ArcAdminAd = ({ adClass, adType, slotName, dimensions }) => {
-	const { isAdmin } = useFusionContext();
-	return isAdmin ? (
+const ArcAdminAd = ({ adClass, adType, slotName, dimensions, isAdmin }) =>
+	isAdmin ? (
 		<div
 			className={["pb-ad-admin", "arcad", `ad-${adClass}`, "padding-sm-all"].join(
 				" "
@@ -21,6 +19,5 @@ const ArcAdminAd = ({ adClass, adType, slotName, dimensions }) => {
 			<div>{JSON.stringify(dimensions)}</div>
 		</div>
 	) : null;
-};
 
 export default ArcAdminAd;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 import { shallow, mount } from "enzyme";
-import ArcAd from "./default";
+import ArcAd, { StyledAdUnit } from "./default";
 
 const SITE_PROPS_MOCK = {
 	breakpoints: {
@@ -10,7 +10,7 @@ const SITE_PROPS_MOCK = {
 		large: 992,
 	},
 	websiteAdPath: "news",
-	dfpId: 701,
+	dfpId: 701, // dfp id is set in the siteProperties mock
 };
 
 const AD_PROPS_MOCK = {
@@ -39,7 +39,7 @@ describe("<ArcAd>", () => {
 		});
 
 		it("renders no ad unit in admin dashboard", () => {
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
 			expect(wrapper).toBeDefined();
 			const arcAdminAd = wrapper.find(".arcad-feature .arcad-container > ArcAdminAd");
 			expect(arcAdminAd.prop("adClass")).toEqual(AD_PROPS_MOCK.customFields.adType);
@@ -144,6 +144,7 @@ describe("<ArcAd>", () => {
 			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
 		});
 
+		// have tried styled component passed in and mount
 		it("renders advertisement label when enabled", () => {
 			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
 			const container = wrapper.find(".arcad-feature");
@@ -152,7 +153,7 @@ describe("<ArcAd>", () => {
 			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
 		});
 
-		it("renders custom advertisement label", () => {
+		it.only("renders custom advertisement label", () => {
 			const advertisementLabel =
 				"Advertisement / <a href='http://example.com' target='_blank'>Advertisement</a>";
 			useFusionContext.mockReturnValue({
@@ -161,8 +162,8 @@ describe("<ArcAd>", () => {
 					advertisementLabel,
 				},
 			});
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find(".arcad-feature");
+			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
+			const container = wrapper.find(StyledAdUnit);
 			expect(container).toHaveLength(1);
 			expect(container.prop("displayAdLabel")).toBe(true);
 			expect(container.prop("adLabel")).toEqual(advertisementLabel);

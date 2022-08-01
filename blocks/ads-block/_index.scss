@@ -1,0 +1,10 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-ads-block {
+	@include scss.block-components("ads-block");
+	@include scss.block-properties("ads-block");
+	&--admin {
+		@include scss.block-components("ads-block-admin");
+		@include scss.block-properties("ads-block-admin");
+	}
+}

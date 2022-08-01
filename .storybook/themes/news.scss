@@ -468,6 +468,23 @@
 				),
 			),
 			blocks: (
+				ads-block-admin: (
+					background-color: var(--global-neutral-7),
+					color: var(--global-white),
+					padding: var(--global-spacing-4),
+					border-radius: var(--border-radius),
+					components: (
+						stack: (
+							padding-bottom: var(--global-spacing-5),
+						),
+						paragraph: (
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							font-weight: var(--body-font-weight-small),
+						),
+					),
+				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -2120,6 +2137,7 @@
 	)
 );
 
+@use "../../blocks/ads-block";
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";

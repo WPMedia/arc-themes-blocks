@@ -1,0 +1,21 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-large-promo {
+	&__text {
+		@include scss.block-components("large-promo-text");
+		@include scss.block-properties("large-promo-text");
+	}
+
+	&__icon_label {
+		@include scss.block-components("large-promo-icon-label");
+		@include scss.block-properties("large-promo-icon-label");
+	}
+
+	&__label {
+		@include scss.block-components("large-promo-label");
+		@include scss.block-properties("large-promo-label");
+	}
+
+	@include scss.block-components("large-promo");
+	@include scss.block-properties("large-promo");
+}

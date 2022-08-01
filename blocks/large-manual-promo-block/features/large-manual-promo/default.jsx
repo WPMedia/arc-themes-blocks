@@ -50,7 +50,7 @@ const LargeManualPromo = ({ customFields }) => {
 	const PromoImage = () => {
 		const { searchableField } = useEditableContent();
 
-		return showImage ? (
+		return (
 			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
 				<Conditional
 					component={Link}
@@ -62,7 +62,7 @@ const LargeManualPromo = ({ customFields }) => {
 					<Image alt={headline} src={imageURL || fallbackImage} searchableField />
 				</Conditional>
 			</MediaItem>
-		) : null;
+		);
 	};
 
 	const PromoHeading = () =>
@@ -90,21 +90,22 @@ const LargeManualPromo = ({ customFields }) => {
 		return null;
 	};
 
-	const PromoDescription = () =>
-		showDescription && description ? <Paragraph>{description}</Paragraph> : null;
+	const PromoDescription = () => <Paragraph>{description}</Paragraph>;
 
 	return (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<Grid as="article" className={BLOCK_CLASS_NAME}>
-					<PromoImage />
-					<Grid className={`${BLOCK_CLASS_NAME}__text`}>
+					{showImage && imageURL ? <PromoImage /> : null}
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
 						<PromoOverline />
-						<Stack>
-							<PromoHeading />
-							<PromoDescription />
-						</Stack>
-					</Grid>
+						{showDescription || showHeadline ? (
+							<Stack>
+								<PromoHeading />
+								{showDescription && description ? <PromoDescription /> : null}
+							</Stack>
+						) : null}
+					</Stack>
 				</Grid>
 			</HeadingSection>
 		</LazyLoad>

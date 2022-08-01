@@ -76,7 +76,7 @@ describe("the large promo feature", () => {
 
 	it("should have 1 container Grid component", () => {
 		const wrapper = mount(<LargeManualPromo customFields={config} />);
-		expect(wrapper.find(Grid)).toHaveLength(2);
+		expect(wrapper.find(Grid)).toHaveLength(1);
 	});
 
 	it("should render MediaItem component when showImage is true", () => {
@@ -94,6 +94,14 @@ describe("the large promo feature", () => {
 		const overline = wrapper.find(Overline);
 		expect(overline).toHaveLength(1);
 		expect(overline.props().href).toBeUndefined();
+	});
+
+	it("should not render Overline component when either showOverline or overline prop is false provided", () => {
+		const wrapper = mount(
+			<LargeManualPromo customFields={{ ...config, showOverline: false, overline: "" }} />
+		);
+		const overline = wrapper.find(Overline);
+		expect(overline).toHaveLength(0);
 	});
 
 	it("should render Heading component when showHeadline is true", () => {

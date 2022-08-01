@@ -29,7 +29,6 @@ describe("<ArcAdminAd>", () => {
 	it("renders with default ad name", () => {
 		const adProps = {
 			...defaults.props,
-			isAdmin: true,
 			adType: undefined,
 		};
 		const wrapper = mount(<ArcAdminAd {...adProps} />);

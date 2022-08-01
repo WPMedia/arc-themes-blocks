@@ -78,7 +78,7 @@ export const ArcAdDisplay = (props) => {
 						<AdUnit adConfig={config} featureConfig={propsWithContext} />
 					</LazyLoad>
 				)}
-				{isAdmin && <ArcAdminAd {...config} isAdmin />}
+				{isAdmin && <ArcAdminAd {...config} />}
 			</div>
 		</StyledAdUnit>
 	);
@@ -117,6 +117,7 @@ const ArcAd = (props) => {
 		minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
 	};
 
+	// shows ADVERTISEMENT (en) string above the ad
 	const adLabel = siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label");
 
 	return (

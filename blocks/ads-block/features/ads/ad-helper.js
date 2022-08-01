@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 import adMap from "./ad-mapping";
 
 export const getBreakpoints = ({ siteProperties }) => siteProperties?.breakpoints;
@@ -8,6 +7,7 @@ export const getSizemapBreakpoints = (props) => {
 	return !breakpoints
 		? []
 		: [
+				// setup these multiple breakpoints in the theme styles breakpoints
 				[breakpoints.large, 0],
 				[breakpoints.medium, 0],
 				[breakpoints.small, 0],

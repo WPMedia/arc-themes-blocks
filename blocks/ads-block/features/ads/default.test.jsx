@@ -153,7 +153,7 @@ describe("<ArcAd>", () => {
 			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
 		});
 
-		it.only("renders custom advertisement label", () => {
+		it("renders custom advertisement label", () => {
 			const advertisementLabel =
 				"Advertisement / <a href='http://example.com' target='_blank'>Advertisement</a>";
 			useFusionContext.mockReturnValue({

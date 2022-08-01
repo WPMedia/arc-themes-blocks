@@ -16,8 +16,8 @@ const defaults = {
 };
 
 describe("<ArcAdminAd>", () => {
-	it("renders in admin with ad name", () => {
-		const wrapper = mount(<ArcAdminAd {...defaults.props} isAdmin />);
+	it("renders with ad name", () => {
+		const wrapper = mount(<ArcAdminAd {...defaults.props} />);
 		expect(wrapper).toBeDefined();
 		const container = wrapper.find("div.b-ads-block--admin");
 		expect(container).toHaveLength(1);
@@ -26,7 +26,7 @@ describe("<ArcAdminAd>", () => {
 		expect(adNameEl.text()).toEqual("test-ad-name");
 	});
 
-	it("renders in admin with no ad name", () => {
+	it("renders with default ad name", () => {
 		const adProps = {
 			...defaults.props,
 			isAdmin: true,
@@ -39,11 +39,5 @@ describe("<ArcAdminAd>", () => {
 		const adNameEl = container.find("p").at(0);
 
 		expect(adNameEl.text()).toEqual("Ad Name N/A");
-	});
-
-	it("renders nothing when outside admin", () => {
-		const wrapper = mount(<ArcAdminAd {...defaults.props} isAdmin={false} />);
-		expect(wrapper).toBeDefined();
-		expect(wrapper.find("div.b-ads-block--admin")).toHaveLength(0);
 	});
 });

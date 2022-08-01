@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-// todo: remove styled components
-import styled from "styled-components";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
@@ -15,34 +13,13 @@ import { getAdObject } from "./ad-helper";
 // todo: remove and replace
 import "./ads.scss";
 
+const BLOCK_CLASS_NAME = "b-ads-block";
+
 function generateInstanceId(componentId) {
 	return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
-// this can likely be removed without the istanbul ignore label visibility
-// eslint-disable-next-line arrow-body-style
-const setAdLabelVisibility = (props) => {
-	// istanbul ignore next
-	return props.displayAdLabel ? "" : "display: none";
-};
-
-// setting content in the div for admin?
-// can be a paragraph rather than dynamic content
-export const StyledAdUnit = styled.div`
-	.arcad > [id^="google_ads_iframe"]:not(:empty)::before {
-		content: "${(props) => props.adLabel}";
-		display: block;
-		${(props) => setAdLabelVisibility(props)}
-	}
-
-	.arcad > [id^="google_ads_iframe"]:empty[style] {
-		width: 0 !important;
-		height: 0 !important;
-	}
-`;
-
 export const ArcAdDisplay = (props) => {
-	// take in phrases content
 	const {
 		config,
 		displayAdLabel,
@@ -55,12 +32,7 @@ export const ArcAdDisplay = (props) => {
 		adLabel,
 	} = props;
 	return (
-		<StyledAdUnit
-			id={`arcad-feature-${instanceId}`}
-			className="arcad-feature"
-			adLabel={adLabel}
-			displayAdLabel={!isAdmin && displayAdLabel && !isAMP()} // interesting logic here around amp
-		>
+		<div id={`arcad-feature-${instanceId}`} className={`arcad-feature ${BLOCK_CLASS_NAME}`}>
 			<div className="arcad-container" style={sizing}>
 				{!isAdmin && !isAMP() && (
 					<LazyLoad
@@ -75,12 +47,16 @@ export const ArcAdDisplay = (props) => {
 							return <div ref={ref} />;
 						}}
 					>
-						<AdUnit adConfig={config} featureConfig={propsWithContext} />
+						<AdUnit
+							adConfig={config}
+							featureConfig={propsWithContext}
+							adLabel={displayAdLabel ? adLabel : ""}
+						/>
 					</LazyLoad>
 				)}
 				{isAdmin && <ArcAdminAd {...config} />}
 			</div>
-		</StyledAdUnit>
+		</div>
 	);
 };
 

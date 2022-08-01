@@ -23,10 +23,16 @@ const DEFAULT_PROPS = {
 	isAdmin: false,
 	isAMP: () => false,
 	lazyLoad: false,
-	propsWithContext: { siteProperties: { dfpId: "dfp id" } },
+	propsWithContext: { siteProperties: { dfpId: 701 }, customFields: { debug: false } },
 	sizing: { maxWidth: "100px", minHeight: "100px" },
 	adLabel: "Ad Label",
 	reserveSpace: true,
 };
 
 export const adminView = () => <ArcAdDisplay {...DEFAULT_PROPS} isAdmin />;
+
+export const adViewWithTopLabel = () => <ArcAdDisplay {...DEFAULT_PROPS} />;
+
+export const adViewHidingTopLabel = () => (
+	<ArcAdDisplay {...DEFAULT_PROPS} displayAdLabel={false} />
+);

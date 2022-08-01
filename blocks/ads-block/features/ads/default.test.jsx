@@ -1,7 +1,7 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
 import { shallow, mount } from "enzyme";
-import ArcAd, { StyledAdUnit } from "./default";
+import ArcAd from "./default";
 
 const SITE_PROPS_MOCK = {
 	breakpoints: {

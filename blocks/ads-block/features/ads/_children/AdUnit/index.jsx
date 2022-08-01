@@ -1,12 +1,11 @@
 import React, { useEffect, useCallback } from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { Paragraph } from "@wpmedia/arc-themes-components";
 import ArcAdsInstance from "../ArcAdsInstance";
 import { setPageTargeting } from "../../ad-helper";
 
 const AdUnit = (props) => {
-	// featureConfig is called propsWithContext in the default.jsx
-	// propsWithContext must include dfp in the fusionContext object
-	const { adConfig, featureConfig } = props;
+	const { adConfig, featureConfig, adLabel } = props;
 	const { id, adClass } = adConfig;
 	const {
 		customFields: { debug },
@@ -29,8 +28,12 @@ const AdUnit = (props) => {
 		if (!isAdmin) registerAd();
 	}, [registerAd, isAdmin]);
 
-	// hmm: setting a classname dynamically here
-	return !isAdmin ? <div id={id} className={`arcad ad-${adClass}`} /> : null;
+	return !isAdmin ? (
+		<>
+			{adLabel ? <Paragraph>{adLabel}</Paragraph> : null}
+			<div id={id} className={`arcad ad-${adClass}`} />
+		</>
+	) : null;
 };
 
 AdUnit.propTypes = {

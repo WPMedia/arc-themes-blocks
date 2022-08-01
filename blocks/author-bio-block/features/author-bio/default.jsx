@@ -5,31 +5,10 @@ import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import styled from "styled-components";
 import { LinkSVGHover } from "@wpmedia/news-theme-css/js/styled/linkHovers";
-import {
-	Image,
-	EnvelopeIcon,
-	InstagramIcon,
-	LinkedInIcon,
-	TwitterIcon,
-	FacebookIcon,
-	RedditIcon,
-	YoutubeIcon,
-	MediumIcon,
-	TumblrIcon,
-	PinterestIcon,
-	SnapchatIcon,
-	WhatsAppIcon,
-	SoundCloudIcon,
-	RssIcon,
-	LazyLoad,
-	isServerSide,
-	constructSocialURL,
-} from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, constructSocialURL } from "@wpmedia/engine-theme-sdk";
 import { PrimaryFont } from "@wpmedia/shared-styles";
+import { Icon, Image, isServerSide } from "@wpmedia/arc-themes-components";
 import getProperties from "fusion:properties";
-
-import "./author-bio.scss";
-import "@wpmedia/shared-styles/scss/_author-bio.scss";
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
@@ -115,98 +94,98 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 									case "linkedin":
 										socialButton = (
 											<MediaLink webService="linkedin">
-												<LinkedInIcon fill={PrimaryColor} />
+												<Icon name="LinkedIn" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "twitter":
 										socialButton = (
 											<MediaLink webService="twitter">
-												<TwitterIcon fill={PrimaryColor} />
+												<Icon name="Twitter" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "instagram":
 										socialButton = (
 											<MediaLink webService="instagram">
-												<InstagramIcon fill={PrimaryColor} />
+												<Icon name="Instagram" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "facebook":
 										socialButton = (
 											<MediaLink webService="facebook">
-												<FacebookIcon fill={PrimaryColor} />
+												<Icon name="Facebook" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "reddit":
 										socialButton = (
 											<MediaLink webService="reddit">
-												<RedditIcon fill={PrimaryColor} />
+												<Icon name="Reddit" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "youtube":
 										socialButton = (
 											<MediaLink webService="youtube" id="link-social-youtube">
-												<YoutubeIcon fill={PrimaryColor} />
+												<Icon name="Youtube" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "medium":
 										socialButton = (
 											<MediaLink webService="medium">
-												<MediumIcon fill={PrimaryColor} />
+												<Icon name="Medium" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "tumblr":
 										socialButton = (
 											<MediaLink webService="tumblr">
-												<TumblrIcon fill={PrimaryColor} />
+												<Icon name="Tumblr" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "pinterest":
 										socialButton = (
 											<MediaLink webService="pinterest">
-												<PinterestIcon fill={PrimaryColor} />
+												<Icon name="Pinterest" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "snapchat":
 										socialButton = (
 											<MediaLink webService="snapchat">
-												<SnapchatIcon fill={PrimaryColor} />
+												<Icon name="Snapchat" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "whatsapp":
 										socialButton = (
 											<MediaLink webService="whatsapp">
-												<WhatsAppIcon fill={PrimaryColor} />
+												<Icon name="WhatsApp" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "soundcloud":
 										socialButton = (
 											<MediaLink webService="soundcloud">
-												<SoundCloudIcon fill={PrimaryColor} />
+												<Icon name="SoundCloud" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									case "rss":
 										socialButton = (
 											<MediaLink webService="rss">
-												<RssIcon fill={PrimaryColor} />
+												<Icon name="Rss" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;
 									default:
 										socialButton = (
 											<MediaLink webService="email">
-												<EnvelopeIcon fill={PrimaryColor} />
+												<Icon name="Envelope" fill={PrimaryColor} />
 											</MediaLink>
 										);
 										break;

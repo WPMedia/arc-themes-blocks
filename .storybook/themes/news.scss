@@ -930,11 +930,9 @@
 				header-nav-chain-top-layout: (
 					align-items: center,
 					display: flex,
+					justify-content: space-between,
 					width: 100%,
 					gap: var(--global-spacing-5),
-				),
-				header-nav-chain-top-layout-center-logo: (
-					justify-content: space-between,
 				),
 				header-nav-chain-top-layout-last-child: (
 					margin-right: 0,
@@ -958,6 +956,12 @@
 					align-items: center,
 					display: none,
 					gap: var(--global-spacing-2),
+				),
+				header-nav-chain-logo: (
+					margin-right: auto,
+				),
+				header-nav-chain-logo-center: (
+					margin-right: 0,
 				),
 				header-nav-chain-logo-hidden: (
 					opacity: 0,
@@ -1014,7 +1018,7 @@
 					display: none,
 					gap: var(--global-spacing-2),
 					height: var(--global-spacing-5),
-					flex: 0 3 auto,
+					flex: 1 1 auto,
 					overflow: hidden,
 					text-align: left,
 					width: auto,

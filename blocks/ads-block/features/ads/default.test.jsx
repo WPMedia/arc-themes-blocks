@@ -1,6 +1,6 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import ArcAd from "./default";
 
 const SITE_PROPS_MOCK = {

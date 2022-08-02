@@ -63,7 +63,7 @@ export const ArcAdDisplay = (props) => {
 const ArcAd = (props) => {
 	const fusionContext = useFusionContext();
 	const { arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const [instanceId] = useState(() => generateInstanceId(fusionContext.id || "0000"));
 	const propsWithContext = {

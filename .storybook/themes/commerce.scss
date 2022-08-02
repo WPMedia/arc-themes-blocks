@@ -353,7 +353,9 @@
 				details: (
 					display: flex,
 					font-size: var(--body-font-size),
-					gap: var(--global-spacing-4),
+				),
+				details-open-summary: (
+					margin-bottom: var(--global-spacing-4),
 				),
 				details-with-icon-summary: (
 					font-weight: var(--global-font-weight-7),

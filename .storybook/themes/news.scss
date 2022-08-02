@@ -1,8 +1,7 @@
 @use "@wpmedia/arc-themes-components/scss" with (
 	$breakpoints: (
-		"viewport-1": "min-width: 0",
-		"viewport-2": "min-width: 48rem",
-		"viewport-3": "min-width: 64rem",
+		default: "min-width: 0",
+		desktop: "min-width: 48rem",
 	),
 	$global: (
 		"black": #000000,
@@ -225,7 +224,7 @@
 		"header-nav-chain-overlay-background-color": rgba(25, 25, 25, 0.5),
 	),
 	$tokens: (
-		"viewport-1": (
+		default: (
 			components: (
 				attribution: (
 					color: var(--text-color),
@@ -1795,7 +1794,7 @@
 				),
 			),
 		),
-		"viewport-2": (
+		desktop: (
 			alias: (
 				"body-font-size": var(--global-font-size-4),
 				"body-line-height": var(--global-line-height-4),
@@ -2135,7 +2134,6 @@
 				),
 			),
 		),
-		"viewport-3": (),
 	)
 );
 

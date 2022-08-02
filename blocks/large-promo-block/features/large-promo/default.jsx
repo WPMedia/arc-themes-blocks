@@ -18,6 +18,7 @@ import {
 	Stack,
 	formatURL,
 	getImageFromANS,
+	getVideoFromANS,
 	isServerSide,
 	Overline,
 	Heading,
@@ -139,6 +140,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
     }`,
 		}) || null;
 
+	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
@@ -210,10 +212,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							onClick={registerSuccessEvent}
 							assistiveHidden
 						>
-							{playVideoInPlace ? (
+							{embedMarkup ? (
 								<Video
 									aspectRatio={aspectRatio}
-									embedMarkup={customFields?.content?.embed_html}
+									embedMarkup={embedMarkup}
 									viewportPercentage={viewportPercentage}
 								/>
 							) : (

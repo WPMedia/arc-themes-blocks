@@ -1,0 +1,5 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-product-featured-image {
+	@include scss.block-properties("product-featured-image");
+}

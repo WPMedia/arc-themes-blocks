@@ -1174,9 +1174,6 @@
 				simple-list: (
 					gap: var(--global-spacing-4),
 					components: (
-						stack: (
-							min-height: 72px,
-						),
 						heading: (
 							font-size: var(--global-font-size-5),
 							line-height: var(--global-line-height-5),
@@ -1194,6 +1191,11 @@
 					gap: var(--global-spacing-4),
 				),
 				simple-list-item: (
+					components: (
+						stack: (
+							min-height: 72px,
+						),
+					),
 					gap: var(--global-spacing-6),
 				),
 				simple-list-item-anchor: (

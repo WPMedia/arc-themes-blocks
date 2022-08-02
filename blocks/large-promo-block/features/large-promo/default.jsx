@@ -33,6 +33,8 @@ const BLOCK_CLASS_NAME = "b-large-promo";
 
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
+		aspectRatio,
+		imageOrVideoLabelText,
 		imageOverrideURL,
 		playVideoInPlace,
 		showByline,
@@ -40,11 +42,9 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showDescription,
 		showHeadline,
 		showImage,
+		showImageOrVideoLabel,
 		showOverline,
 		showVideoLabel,
-		showImageOrVideoLabel,
-		imageOrVideoLabelText,
-		aspectRatio,
 		viewportPercentage,
 	} = customFields;
 
@@ -147,6 +147,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			timeZone: "GMT",
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
+		fallbackImage,
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
 	const bylineNodes = formatAuthors(content?.credits?.by, phrases.t("global.and-text"));
@@ -188,11 +189,20 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		? editableContent(content, "description.basic")
 		: {};
 
-	return (
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const hasAuthors = showByline && content?.credits?.by.length > 0;
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+
+	return showOverline ||
+		contentHeading ||
+		showImage ||
+		showDescription ||
+		hasAuthors ||
+		showDate ? (
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{showImage ? (
-					<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+				{showImage || editableDescription || contentHeading || hasAuthors || showDate ? (
+					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
 							condition={content?.websites?.[arcSite]?.website_url}
@@ -209,7 +219,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							) : (
 								<Image
 									alt={content?.headlines?.basic || null}
-									src={targetImage}
+									src={targetImage || fallbackImage}
 									width={377}
 									height={283}
 									searchableField
@@ -225,9 +235,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 					</MediaItem>
 				) : null}
 				<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-					{showOverline && (url || text) ? (
-						<Overline href={url ? formatURL(url) : null}>{text}</Overline>
-					) : null}
+					{showOverline ? <Overline href={url}>{text}</Overline> : null}
 					<Stack>
 						{showHeadline && content?.headlines?.basic ? (
 							<Heading>
@@ -246,10 +254,10 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								{content?.description?.basic}
 							</Paragraph>
 						) : null}
-						{showByline || showDate ? (
+						{hasAuthors || showDate ? (
 							<Attribution>
 								<Join separator={Separator}>
-									{showByline && content?.credits?.by ? (
+									{hasAuthors ? (
 										<Join separator={() => " "}>
 											{phrases.t("global.by-text")}
 											{bylineNodes}
@@ -265,7 +273,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 				</Stack>
 			</Grid>
 		</HeadingSection>
-	);
+	) : null;
 };
 
 const LargePromo = ({ customFields }) => {

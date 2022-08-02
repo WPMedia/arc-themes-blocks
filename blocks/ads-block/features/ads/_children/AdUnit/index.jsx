@@ -1,15 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { Paragraph } from "@wpmedia/arc-themes-components";
 import ArcAdsInstance from "../ArcAdsInstance";
 import { setPageTargeting } from "../../ad-helper";
 
 const AdUnit = (props) => {
-	const { adConfig, featureConfig, adLabel } = props;
-	const { id, adClass } = adConfig;
+	const { adConfig, featureConfig } = props;
+	const { id } = adConfig;
 	const {
 		customFields: { debug },
-		isAdmin,
 		siteProperties,
 	} = featureConfig;
 
@@ -25,15 +23,10 @@ const AdUnit = (props) => {
 	}, [adConfig, debug, featureConfig, siteProperties]);
 
 	useEffect(() => {
-		if (!isAdmin) registerAd();
-	}, [registerAd, isAdmin]);
+		registerAd();
+	}, [registerAd]);
 
-	return !isAdmin ? (
-		<>
-			{adLabel ? <Paragraph>{adLabel}</Paragraph> : null}
-			<div id={id} className={`arcad ad-${adClass}`} />
-		</>
-	) : null;
+	return <div id={id} />;
 };
 
 AdUnit.propTypes = {

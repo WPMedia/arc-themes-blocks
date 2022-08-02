@@ -468,9 +468,18 @@
 				),
 			),
 			blocks: (
+				ads-block: (
+					components: (
+						paragraph: (
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							font-weight: var(--body-font-weight-small),
+						),
+					),
+				),
 				ads-block-admin: (
 					background-color: var(--global-neutral-7),
-					color: var(--global-white),
 					padding: var(--global-spacing-4),
 					border-radius: var(--border-radius),
 					components: (
@@ -478,10 +487,7 @@
 							padding-bottom: var(--global-spacing-5),
 						),
 						paragraph: (
-							font-family: var(--font-family-primary),
-							font-size: var(--body-font-size-small),
-							line-height: var(--body-line-height-small),
-							font-weight: var(--body-font-weight-small),
+							color: var(--global-white),
 						),
 					),
 				),
@@ -1398,7 +1404,6 @@
 				numbered-list-item-image: (
 					max-width: 25%,
 				),
-				overline: (),
 				quad-chain: (
 					components: (
 						stack: (

@@ -158,16 +158,16 @@
 	}
 
 	&__top-layout {
-		&--center-logo {
-			@include scss.block-components("header-nav-chain-top-layout-center-logo");
-			@include scss.block-properties("header-nav-chain-top-layout-center-logo");
-		}
-
 		@include scss.block-components("header-nav-chain-top-layout");
 		@include scss.block-properties("header-nav-chain-top-layout");
 	}
 
 	&__logo {
+		&--center {
+			@include scss.block-components("header-nav-chain-logo-center");
+			@include scss.block-properties("header-nav-chain-logo-center");
+		}
+
 		&.nav-logo-show {
 			@include scss.block-components("header-nav-chain-logo-show");
 			@include scss.block-properties("header-nav-chain-logo-show");

@@ -1,18 +1,4 @@
-import adMap from "./ad-mapping";
-
-export const getBreakpoints = ({ siteProperties }) => siteProperties?.breakpoints;
-
-export const getSizemapBreakpoints = (props) => {
-	const breakpoints = getBreakpoints(props);
-	return !breakpoints
-		? []
-		: [
-				// setup these multiple breakpoints in the theme styles breakpoints
-				[breakpoints.large, 0],
-				[breakpoints.medium, 0],
-				[breakpoints.small, 0],
-		  ];
-};
+import adMap, { sizeMapBreakpoints as breakpoints } from "./ad-mapping";
 
 export const getType = (globalContent = {}) => globalContent?.type;
 
@@ -136,7 +122,7 @@ export const getAdObject = (props) => {
 		adClass: getAdClass(props),
 		dimensions: getDimensions(props),
 		sizemap: {
-			breakpoints: getSizemapBreakpoints(props),
+			breakpoints,
 			refresh: true,
 		},
 		display,

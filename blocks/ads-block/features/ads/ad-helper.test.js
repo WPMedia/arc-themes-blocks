@@ -1,8 +1,6 @@
 import {
 	isContentPage,
 	isSectionPage,
-	getBreakpoints,
-	getSizemapBreakpoints,
 	getAdName,
 	getAdClass,
 	getDimensions,
@@ -106,41 +104,6 @@ const checkObjectRecursively = (obj, schema) => {
 describe("ad-helper", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
-	});
-
-	describe("getBreakpoints()", () => {
-		it("returns breakpoint sizemap", () => {
-			const breakpoints = getBreakpoints(STORY_MOCK_PROPS);
-			expect(breakpoints).toBeDefined();
-			expect(typeof breakpoints).toEqual("object");
-			expect(breakpoints).toEqual(SITE_PROPS_MOCK.breakpoints);
-		});
-	});
-
-	describe("getSizemapBreakpoints()", () => {
-		it("returns breakpoint sizemap", () => {
-			const sizemap = getSizemapBreakpoints(STORY_MOCK_PROPS);
-			expect(sizemap).toBeDefined();
-			expect(Array.isArray(sizemap)).toBe(true);
-			expect(sizemap.length).toEqual(3);
-			sizemap.forEach((smapVal) => {
-				expect(smapVal).toBeDefined();
-				expect(Array.isArray(smapVal)).toBe(true);
-				expect(smapVal.length).toEqual(2);
-			});
-		});
-
-		it("returns blank array when no breakpoints available", () => {
-			const SITE_PROPS_MOCK_ALT = { ...SITE_PROPS_MOCK };
-			delete SITE_PROPS_MOCK_ALT.breakpoints;
-			const sizemap = getSizemapBreakpoints({
-				...STORY_MOCK_PROPS,
-				siteProperties: SITE_PROPS_MOCK_ALT,
-			});
-			expect(sizemap).toBeDefined();
-			expect(Array.isArray(sizemap)).toBe(true);
-			expect(sizemap.length).toEqual(0);
-		});
 	});
 
 	describe("getType()", () => {

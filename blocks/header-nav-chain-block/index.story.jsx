@@ -153,6 +153,27 @@ export const leftLogoWithLinks = () => (
 	/>
 );
 
+export const leftLogoWithRightItems = () => (
+	<PresentationalNav
+		closeDrawer={() => {}}
+		customFields={{
+			...CUSTOM_FIELDS_BASE,
+			rightComponentDesktop1: "search",
+		}}
+		displayLinks
+		isAdmin={false}
+		isSectionDrawerOpen={false}
+		logoAlignment="left"
+		menuButtonClickAction={() => {}}
+		sectionAriaLabel="Menu des sections"
+		sections={[]}
+		showDotSeparators
+		signInOrder={1}
+		primaryLogoPath="https://place-hold.it/86x36"
+		primaryLogoAlt="Shows dimensions of 86 by 36."
+	/>
+);
+
 export const leftLogoWithLinksAndSearch = () => (
 	<PresentationalNav
 		closeDrawer={() => {}}
@@ -163,7 +184,7 @@ export const leftLogoWithLinksAndSearch = () => (
 			leftComponentMobile1: "menu",
 		}}
 		displayLinks
-		horizontalLinksHierarchy="horizontal-links"
+		horizontalLinksHierarchy="tenLinks"
 		isAdmin={false}
 		logoAlignment="left"
 		menuButtonClickAction={() => {}}

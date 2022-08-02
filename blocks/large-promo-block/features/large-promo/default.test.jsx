@@ -67,6 +67,10 @@ const largePromoMock = {
 			type: "image",
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",
 		},
+		lead_art: {
+			type: "video",
+			embed_html: '<div id="pow"></div>',
+		},
 	},
 	type: "story",
 	website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",

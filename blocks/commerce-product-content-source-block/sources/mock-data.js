@@ -37,6 +37,7 @@ export const mockProductData = {
 				assets: [
 					{
 						_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+						alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
 						additional_properties: {
 							fullSizeResizeUrl:
 								"/resizer/vNkSDXlCXlGHlHfBlHN5zIlCKFQ=/arc-photo-themesinternal/arc2-sandbox/public/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
@@ -125,6 +126,7 @@ export const mockProductData = {
 				assets: [
 					{
 						_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
+						alt_text: "Man smiling posing in front of shelves. (This is alt text.)",
 						additional_properties: {
 							fullSizeResizeUrl:
 								"/resizer/vNkSDXlCXlGHlHfBlHN5zIlCKFQ=/arc-photo-themesinternal/arc2-sandbox/public/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",

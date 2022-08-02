@@ -4,7 +4,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 const showLogoAbove = 768;
 
-const NavLogo = ({ imageAltText, imageSource, blockClassName }) => {
+const NavLogo = ({ imageAltText, imageSource, blockClassName, logoAlignment }) => {
 	const [isLogoVisible, setLogoVisibility] = useState(false);
 
 	// istanbul ignore next
@@ -71,9 +71,9 @@ const NavLogo = ({ imageAltText, imageSource, blockClassName }) => {
 		<Link
 			href="/"
 			title={imageAltText}
-			className={`${blockClassName}__logo  ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${
-				isLogoSVG ? "svg-logo" : ""
-			}`}
+			className={`${blockClassName}__logo ${
+				logoAlignment === "center" ? `${blockClassName}__logo--center` : ``
+			} ${isLogoVisible ? "nav-logo-show" : "nav-logo-hidden"} ${isLogoSVG ? "svg-logo" : ""}`}
 			assistiveHidden={!isLogoVisible}
 		>
 			{imageSource ? <img src={imageSource} alt={imageAltText || ""} /> : null}

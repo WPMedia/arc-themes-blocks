@@ -1,10 +1,10 @@
 {
   "name": "@wpmedia/ads-block",
   "version": "5.20.0",
-  "description": "> TODO: description",
-  "author": "nealmalkani <nealm939@gmail.com>",
+  "description": "Ads block integrates with PageBuilder editor custom fields and ArcAds package",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
-  "license": "ISC",
+  "license": "CC-BY-NC-ND-4.0",
   "main": "index.js",
   "files": [
     "features",

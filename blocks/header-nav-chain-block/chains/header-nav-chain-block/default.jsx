@@ -43,11 +43,7 @@ export function PresentationalNav(props) {
 			className={`${BLOCK_CLASS_NAME} ${isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : ``}`}
 			aria-label={sectionAriaLabel}
 		>
-			<div
-				className={`${BLOCK_CLASS_NAME}__top-layout ${
-					logoAlignment === "center" ? `${BLOCK_CLASS_NAME}__top-layout--center-logo` : ``
-				}`}
-			>
+			<div className={`${BLOCK_CLASS_NAME}__top-layout`}>
 				<NavSection
 					blockClassName={BLOCK_CLASS_NAME}
 					customFields={customFields}
@@ -59,6 +55,7 @@ export function PresentationalNav(props) {
 				</NavSection>
 				<NavLogo
 					blockClassName={BLOCK_CLASS_NAME}
+					logoAlignment={logoAlignment}
 					imageSource={primaryLogoPath}
 					imageAltText={primaryLogoAlt}
 				/>

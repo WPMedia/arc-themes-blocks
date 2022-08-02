@@ -11,7 +11,17 @@
 		"plugin/no-unsupported-browser-features": [
 			true,
 			{
-				"ignore": ["css-sticky", "multicolumn"],
+				"ignore": [
+					"css-sticky",
+					"multicolumn",
+					"calc",
+					"css-appearance",
+					"intrinsic-width",
+					"viewport-units",
+					"css3-cursor",
+					"css-initial-value",
+					"pointer-events"
+				],
 				"severity": "warning"
 			}
 		],

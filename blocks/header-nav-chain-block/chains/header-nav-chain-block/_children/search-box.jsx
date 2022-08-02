@@ -2,19 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import {
-	Button,
-	BUTTON_SIZES,
-	BUTTON_STYLES,
-	BUTTON_TYPES,
-	getNavSpecificSecondaryButtonTheme,
-} from "@wpmedia/shared-styles";
-
-import "./search-box.scss";
+import { Button, Icon } from "@wpmedia/arc-themes-components";
 
 export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
 	const { arcSite } = useFusionContext();
-	const { locale = "en", navBarBackground, navColor = "dark" } = getProperties(arcSite);
+	const { locale = "en" } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const [shouldSearchOpen, setShouldSearchOpen] = useState(false);
@@ -69,10 +61,7 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 	};
 
 	const isSearchBarOpen = shouldSearchOpen || alwaysOpen;
-	const navClassNames = `nav-search${isSearchBarOpen ? " open" : ""}`;
-	const buttonStyle = isSearchBarOpen
-		? BUTTON_STYLES.DEFAULT
-		: getNavSpecificSecondaryButtonTheme(navColor, navBarBackground);
+	const navClassNames = `nav-search${isSearchBarOpen ? " open " : ""}`;
 
 	return (
 		<div className={navClassNames}>
@@ -86,18 +75,16 @@ export default ({ alwaysOpen = false, placeholderText, customSearchAction = null
 				placeholder={placeholderText}
 			/>
 			<Button
-				aria-label={phrases.t("header-nav-chain-block.search-text")}
-				additionalClassNames={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
-				buttonSize={BUTTON_SIZES.SMALL}
-				buttonStyle={buttonStyle}
-				buttonType={BUTTON_TYPES.ICON_ONLY}
-				disabled={isSearchBarPending}
-				iconType="search"
+				accessibilityLabel={phrases.t("header-nav-chain-block.search-text")}
+				className={isSearchBarOpen ? "search-box--right-absolute-positioned" : ""}
+				variant="secondary-reverse"
+				size="small"
 				onClick={handleClick}
 				onMouseDown={handleSearchBtnMousedown}
-				text={phrases.t("header-nav-chain-block.search-text")}
 				type="button"
-			/>
+			>
+				<Icon name="Search" width={24} height={24} />
+			</Button>
 		</div>
 	);
 };

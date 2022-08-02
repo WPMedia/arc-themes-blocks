@@ -1,14 +1,14 @@
 {
-  "name": "@wpmedia/large-promo-block",
-  "version": "5.16.0",
-  "description": "Large Promo block",
+  "name": "@wpmedia/product-featured-image-block",
+  "version": "0.1.0",
+  "description": "Product Featured Image Block",
   "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
   "main": "",
   "files": [
-    "features",
-    "_index.scss"
+    "_index.scss",
+    "features"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -17,12 +17,9 @@
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
-    "directory": "blocks/large-promo-block"
+    "directory": "blocks/product-featured-image-block"
   },
   "peerDependencies": {
-    "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/arc-themes-components": "*",
-    "@wpmedia/engine-theme-sdk": "*"
-  },
-  "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
+    "@wpmedia/arc-themes-components": "*"
+  }
 }

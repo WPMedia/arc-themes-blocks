@@ -82,8 +82,74 @@ describe("the SearchBox component", () => {
 	describe("when alwaysOpen prop is true", () => {
 		it("should add .open class to .nav-search", () => {
 			const wrapper = mount(<SearchBox alwaysOpen />);
-
 			expect(wrapper.find(".nav-search")).toHaveClassName("open");
+		});
+	});
+
+	describe("searchInput.current.value on input keydown change ", () => {
+		it("should trigger customSearchAction", async () => {
+			const searchAction = jest.fn((value) => value);
+			const wrapper = mount(<SearchBox alwaysOpen customSearchAction={searchAction} />);
+			wrapper.find(".nav-search button").simulate("mousedown", fakeEvent);
+			wrapper.find(".nav-search input").instance().value = "foo";
+
+			wrapper.find(".nav-search input").simulate("keydown", { ...fakeEvent, key: "Enter" });
+
+			await expect(searchAction).toHaveBeenCalledWith("foo");
+		});
+	});
+
+	describe("searchInput.current.value on input keydown change ", () => {
+		it("should trigger url location", async () => {
+			global.window = Object.create(window);
+			Object.defineProperty(window, "location", {
+				writable: true,
+				value: {
+					href: "/",
+				},
+			});
+
+			const wrapper = mount(<SearchBox alwaysOpen />);
+			wrapper.find(".nav-search button").simulate("mousedown", fakeEvent);
+			wrapper.find(".nav-search input").instance().value = "foo";
+
+			wrapper.find(".nav-search input").simulate("keydown", { ...fakeEvent, key: "Enter" });
+
+			await expect(window.location.href).toBe(`/search/foo`);
+
+			delete global.window.location;
+		});
+	});
+
+	describe("searchInput.current.value on button click change ", () => {
+		it("should trigger customSearchAction", async () => {
+			const searchAction = jest.fn((value) => value);
+			const wrapper = mount(<SearchBox alwaysOpen customSearchAction={searchAction} />);
+
+			wrapper.find(".nav-search input").instance().value = "foo";
+
+			wrapper.find(".nav-search button").simulate("click", fakeEvent);
+
+			await expect(searchAction).toHaveBeenCalledWith("foo");
+		});
+	});
+
+	describe("searchInput.current.value on button click change ", () => {
+		it("should trigger url location", async () => {
+			global.window = Object.create(window);
+			Object.defineProperty(window, "location", {
+				writable: true,
+				value: {
+					href: "/",
+				},
+			});
+
+			const wrapper = mount(<SearchBox alwaysOpen />);
+			wrapper.find(".nav-search input").instance().value = "foo";
+			wrapper.find(".nav-search button").simulate("click", fakeEvent);
+			await expect(window.location.href).toBe(`/search/foo`);
+
+			delete global.window.location;
 		});
 	});
 });

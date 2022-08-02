@@ -151,22 +151,5 @@ describe("<ArcAd>", () => {
 			expect(container.prop("displayAdLabel")).toBe(true);
 			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
 		});
-
-		// todo: dangerously set for advertisement label?
-		it.todo("renders custom advertisement label", () => {
-			const advertisementLabel =
-				"Advertisement / <a href='http://example.com' target='_blank'>Advertisement</a>";
-			useFusionContext.mockReturnValue({
-				siteProperties: {
-					...SITE_PROPS_MOCK,
-					advertisementLabel,
-				},
-			});
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find(".arcad-feature");
-			expect(container).toHaveLength(1);
-			expect(container.prop("displayAdLabel")).toBe(true);
-			expect(container.prop("adLabel")).toEqual(advertisementLabel);
-		});
 	});
 });

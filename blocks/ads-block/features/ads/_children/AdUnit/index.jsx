@@ -5,10 +5,9 @@ import { setPageTargeting } from "../../ad-helper";
 
 const AdUnit = (props) => {
 	const { adConfig, featureConfig } = props;
-	const { id, adClass } = adConfig;
+	const { id } = adConfig;
 	const {
 		customFields: { debug },
-		isAdmin,
 		siteProperties,
 	} = featureConfig;
 
@@ -24,10 +23,10 @@ const AdUnit = (props) => {
 	}, [adConfig, debug, featureConfig, siteProperties]);
 
 	useEffect(() => {
-		if (!isAdmin) registerAd();
-	}, [registerAd, isAdmin]);
+		registerAd();
+	}, [registerAd]);
 
-	return !isAdmin ? <div id={id} className={`arcad ad-${adClass}`} /> : null;
+	return <div id={id} />;
 };
 
 AdUnit.propTypes = {

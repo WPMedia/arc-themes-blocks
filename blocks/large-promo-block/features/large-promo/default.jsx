@@ -192,6 +192,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		: {};
 
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 
@@ -207,8 +208,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
-							condition={content?.websites?.[arcSite]?.website_url}
-							href={formatURL(content?.websites?.[arcSite]?.website_url)}
+							condition={contentUrl}
+							href={contentUrl}
 							onClick={registerSuccessEvent}
 							assistiveHidden
 						>
@@ -243,8 +244,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							<Heading>
 								<Conditional
 									component={Link}
-									condition={content?.websites?.[arcSite]?.website_url}
-									href={formatURL(content?.websites?.[arcSite]?.website_url)}
+									condition={contentUrl}
+									href={contentUrl}
 									onClick={registerSuccessEvent}
 								>
 									{content?.headlines?.basic}

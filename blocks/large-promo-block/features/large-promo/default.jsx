@@ -16,6 +16,7 @@ import {
 	Link,
 	MediaItem,
 	Stack,
+	formatURL,
 	getImageFromANS,
 	getVideoFromANS,
 	isServerSide,
@@ -208,7 +209,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						<Conditional
 							component={Link}
 							condition={contentUrl}
-							href={contentUrl}
+							href={formatURL(contentUrl)}
 							onClick={registerSuccessEvent}
 							assistiveHidden
 						>
@@ -244,7 +245,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 								<Conditional
 									component={Link}
 									condition={contentUrl}
-									href={contentUrl}
+									href={formatURL(contentUrl)}
 									onClick={registerSuccessEvent}
 								>
 									{content?.headlines?.basic}

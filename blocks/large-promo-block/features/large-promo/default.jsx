@@ -156,7 +156,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 
 	// show the override url over the content image if it's present
 	// get the image from content if no override
-	const targetImage = imageOverrideURL || getImageFromANS(content);
+	const promoImage = imageOverrideURL || getImageFromANS(content) || fallbackImage;
 
 	// Start Overline data
 	const {
@@ -221,7 +221,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 							) : (
 								<Image
 									alt={content?.headlines?.basic || null}
-									src={targetImage || fallbackImage}
+									src={promoImage}
 									width={377}
 									height={283}
 									searchableField

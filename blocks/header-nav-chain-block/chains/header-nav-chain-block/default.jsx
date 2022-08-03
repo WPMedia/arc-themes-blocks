@@ -241,6 +241,7 @@ const Nav = (props) => {
 		};
 	}, []);
 
+	// istanbul ignore next
 	const handleScroll = () => {
 		setIsScrolled(window.pageYOffset > 0);
 	};

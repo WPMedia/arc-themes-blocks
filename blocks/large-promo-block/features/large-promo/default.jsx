@@ -16,7 +16,6 @@ import {
 	Link,
 	MediaItem,
 	Stack,
-	formatURL,
 	getImageFromANS,
 	getVideoFromANS,
 	isServerSide,

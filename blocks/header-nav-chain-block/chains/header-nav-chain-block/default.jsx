@@ -38,113 +38,116 @@ export function PresentationalNav(props) {
 	} = props;
 
 	return (
-		<nav
-			id="main-nav"
-			className={`${BLOCK_CLASS_NAME} ${isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : ``}`}
-			aria-label={sectionAriaLabel}
-		>
-			<div className={`${BLOCK_CLASS_NAME}__top-layout`}>
-				<NavSection
-					blockClassName={BLOCK_CLASS_NAME}
-					customFields={customFields}
-					menuButtonClickAction={menuButtonClickAction}
-					side="left"
-					signInOrder={signInOrder}
-				>
-					{children}
-				</NavSection>
-				<NavLogo
-					blockClassName={BLOCK_CLASS_NAME}
-					logoAlignment={logoAlignment}
-					imageSource={primaryLogoPath}
-					imageAltText={primaryLogoAlt}
-				/>
-				{displayLinks ? (
-					<NavLinksBar
-						hierarchy={horizontalLinksHierarchy}
-						showHorizontalSeperatorDots={showDotSeparators}
-						ariaLabel={ariaLabelLink}
-						blockClassName={BLOCK_CLASS_NAME}
-					/>
-				) : null}
-				<NavSection
-					blockClassName={BLOCK_CLASS_NAME}
-					customFields={customFields}
-					menuButtonClickAction={menuButtonClickAction}
-					side="right"
-					signInOrder={signInOrder}
-				>
-					{children}
-				</NavSection>
-			</div>
-			<Stack
-				id="flyout-overlay"
-				className={`${BLOCK_CLASS_NAME}__flyout-overlay ${isSectionDrawerOpen ? "open" : "closed"}`}
-				direction="vertical"
-				justification="start"
-				onClick={closeDrawer}
+		<>
+			<nav
+				id="main-nav"
+				className={`${BLOCK_CLASS_NAME} ${isScrolled ? `${BLOCK_CLASS_NAME}--scrolled` : ``}`}
+				aria-label={sectionAriaLabel}
 			>
-				<FocusTrap
-					active={isSectionDrawerOpen}
-					focusTrapOptions={{
-						allowOutsideClick: true,
-						returnFocusOnDeactivate: true,
-						onDeactivate: /* istanbul ignore next */ () => {
-							// Focus the next focusable element in the navbar
-							// Workaround for issue where 'nav-sections-btn' wont programmatically focus
-							const focusElement = document.querySelector(`
+				<div className={`${BLOCK_CLASS_NAME}__top-layout`}>
+					<NavSection
+						blockClassName={BLOCK_CLASS_NAME}
+						customFields={customFields}
+						menuButtonClickAction={menuButtonClickAction}
+						side="left"
+						signInOrder={signInOrder}
+					>
+						{children}
+					</NavSection>
+					<NavLogo
+						blockClassName={BLOCK_CLASS_NAME}
+						logoAlignment={logoAlignment}
+						imageSource={primaryLogoPath}
+						imageAltText={primaryLogoAlt}
+					/>
+					{displayLinks ? (
+						<NavLinksBar
+							hierarchy={horizontalLinksHierarchy}
+							showHorizontalSeperatorDots={showDotSeparators}
+							ariaLabel={ariaLabelLink}
+							blockClassName={BLOCK_CLASS_NAME}
+						/>
+					) : null}
+					<NavSection
+						blockClassName={BLOCK_CLASS_NAME}
+						customFields={customFields}
+						menuButtonClickAction={menuButtonClickAction}
+						side="right"
+						signInOrder={signInOrder}
+					>
+						{children}
+					</NavSection>
+				</div>
+				<Stack
+					id="flyout-overlay"
+					className={`${BLOCK_CLASS_NAME}__flyout-overlay ${
+						isSectionDrawerOpen ? "open" : "closed"
+					}`}
+					direction="vertical"
+					justification="start"
+					onClick={closeDrawer}
+				>
+					<FocusTrap
+						active={isSectionDrawerOpen}
+						focusTrapOptions={{
+							allowOutsideClick: true,
+							returnFocusOnDeactivate: true,
+							onDeactivate: /* istanbul ignore next */ () => {
+								// Focus the next focusable element in the navbar
+								// Workaround for issue where 'nav-sections-btn' wont programmatically focus
+								const focusElement = document.querySelector(`
                 #main-nav a:not(.nav-sections-btn),
                 #main-nav button:not(.nav-sections-btn)
               `);
-							// istanbul ignore next
-							if (focusElement) {
-								focusElement.focus();
-								focusElement.blur();
-							}
-						},
-						fallbackFocus: /* istanbul ignore next */ () =>
-							document.getElementById("flyout-overlay"),
-					}}
-				>
-					{/**
-					 * Need to disable tabindex lint as this is a fallback for when section menu
-					 * has no items and FocusTrap requires at least one tabable element
-					 * which would be the follow container that's used with `fallbackFocus`
-					 *
-					 * Div needed as Stack does not forward Ref - this causes Focus Trap
-					 * library to throw errors without the div
-					 */}
-					<div>
-						<Stack
-							className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
-								isSectionDrawerOpen ? "open" : "closed"
-							}`}
-							direction="vertical"
-							justification="start"
-							// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-							tabIndex={!sections.length ? "-1" : null}
-						>
-							<SectionNav
-								blockClassName={BLOCK_CLASS_NAME}
-								sections={sections}
-								isHidden={!isSectionDrawerOpen}
+								// istanbul ignore next
+								if (focusElement) {
+									focusElement.focus();
+									focusElement.blur();
+								}
+							},
+							fallbackFocus: /* istanbul ignore next */ () =>
+								document.getElementById("flyout-overlay"),
+						}}
+					>
+						{/**
+						 * Need to disable tabindex lint as this is a fallback for when section menu
+						 * has no items and FocusTrap requires at least one tabable element
+						 * which would be the follow container that's used with `fallbackFocus`
+						 *
+						 * Div needed as Stack does not forward Ref - this causes Focus Trap
+						 * library to throw errors without the div
+						 */}
+						<div>
+							<Stack
+								className={`${BLOCK_CLASS_NAME}__flyout-nav-wrapper ${
+									isSectionDrawerOpen ? "open" : "closed"
+								}`}
+								direction="vertical"
+								justification="start"
+								// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+								tabIndex={!sections.length ? "-1" : null}
 							>
-								<MenuWidgets
-									customFields={customFields}
-									menuButtonClickAction={menuButtonClickAction}
+								<SectionNav
+									blockClassName={BLOCK_CLASS_NAME}
+									sections={sections}
+									isHidden={!isSectionDrawerOpen}
 								>
-									{children}
-								</MenuWidgets>
-							</SectionNav>
-						</Stack>
-					</div>
-				</FocusTrap>
-			</Stack>
-
+									<MenuWidgets
+										customFields={customFields}
+										menuButtonClickAction={menuButtonClickAction}
+									>
+										{children}
+									</MenuWidgets>
+								</SectionNav>
+							</Stack>
+						</div>
+					</FocusTrap>
+				</Stack>
+			</nav>
 			{horizontalLinksHierarchy && logoAlignment !== "left" && isAdmin ? (
 				<Stack>In order to render horizontal links, the logo must be aligned to the left.</Stack>
 			) : null}
-		</nav>
+		</>
 	);
 }
 /* Main Component */
@@ -167,7 +170,7 @@ const Nav = (props) => {
 	const {
 		hierarchy,
 		signInOrder,
-		logoAlignment = "center",
+		logoAlignment,
 		horizontalLinksHierarchy,
 		showHorizontalSeperatorDots,
 		ariaLabel,
@@ -265,7 +268,7 @@ const Nav = (props) => {
 			horizontalLinksHierarchy={horizontalLinksHierarchy}
 			isAdmin={isAdmin}
 			isSectionDrawerOpen={isSectionDrawerOpen}
-			logoAlignment={logoAlignment}
+			logoAlignment={logoAlignment || "center"}
 			menuButtonClickAction={menuButtonClickAction}
 			isScrolled={isScrolled}
 			sectionAriaLabel={sectionAriaLabel}

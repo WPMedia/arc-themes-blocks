@@ -1,14 +1,15 @@
 {
   "name": "@wpmedia/ads-block",
   "version": "5.20.0",
-  "description": "> TODO: description",
-  "author": "nealmalkani <nealm939@gmail.com>",
+  "description": "Ads block integrates with PageBuilder editor custom fields and ArcAds package",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
-  "license": "ISC",
-  "main": "index.js",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "",
   "files": [
     "features",
-    "intl.json"
+    "intl.json",
+    "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -19,13 +20,13 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/ads-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "dependencies": {
-    "arcads": "6.1.1",
-    "lazy-child": "^0.2.0"
+    "arcads": "6.1.1"
+  },
+  "peerDependencies": {
+    "@arc-fusion/prop-types": "^0.1.5",
+    "@wpmedia/arc-themes-components": "*",
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

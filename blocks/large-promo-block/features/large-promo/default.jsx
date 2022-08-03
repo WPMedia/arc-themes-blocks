@@ -197,6 +197,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentDate = showDate ? content?.display_date : null;
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const contentOverline = showOverline ? text : null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 
@@ -212,8 +213,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
-							condition={content?.websites?.[arcSite]?.website_url}
-							href={formatURL(content?.websites?.[arcSite]?.website_url)}
+							condition={contentUrl}
+							href={formatURL(contentUrl)}
 							onClick={registerSuccessEvent}
 							assistiveHidden
 						>

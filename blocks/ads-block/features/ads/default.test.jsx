@@ -1,6 +1,6 @@
 import React from "react";
 import { useFusionContext } from "fusion:context";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import ArcAd from "./default";
 
 const SITE_PROPS_MOCK = {
@@ -39,9 +39,9 @@ describe("<ArcAd>", () => {
 		});
 
 		it("renders no ad unit in admin dashboard", () => {
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
+			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
 			expect(wrapper).toBeDefined();
-			const arcAdminAd = wrapper.find(".arcad-feature .arcad-container > ArcAdminAd");
+			const arcAdminAd = wrapper.find("ArcAdminAd");
 			expect(arcAdminAd.prop("adClass")).toEqual(AD_PROPS_MOCK.customFields.adType);
 			expect(arcAdminAd.prop("adType")).toEqual("cube");
 			expect(arcAdminAd.prop("slotName")).toEqual("news");
@@ -63,7 +63,7 @@ describe("<ArcAd>", () => {
 			it("renders ad unit with disabled lazy-load container", () => {
 				const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
 				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("div.arcad-feature LazyLoad");
+				const lazyLoaderEl = wrapper.find("LazyLoad");
 				expect(lazyLoaderEl).toHaveLength(1);
 				expect(lazyLoaderEl.prop("enabled")).toBe(false);
 				const adUnitEl = lazyLoaderEl.find("AdUnit");
@@ -83,24 +83,9 @@ describe("<ArcAd>", () => {
 				};
 				const wrapper = mount(<ArcAd {...adProps} />);
 				expect(wrapper).toBeDefined();
-				const lazyLoaderEl = wrapper.find("div.arcad-feature LazyLoad");
+				const lazyLoaderEl = wrapper.find("LazyLoad");
 				expect(lazyLoaderEl).toHaveLength(1);
 				expect(lazyLoaderEl.prop("enabled")).toBe(true);
-			});
-
-			it("renders with ad unit inside lazy-load container", () => {
-				const adProps = {
-					...AD_PROPS_MOCK,
-					customFields: {
-						lazyLoad: true,
-					},
-				};
-				const wrapper = shallow(<ArcAd {...adProps} />);
-				expect(wrapper).toBeDefined();
-				const adUnitEl = wrapper.find(".arcad-feature LazyLoad AdUnit");
-				expect(adUnitEl).toHaveLength(1);
-				expect(typeof adUnitEl.prop("adConfig")).toEqual("object");
-				expect(typeof adUnitEl.prop("featureConfig")).toEqual("object");
 			});
 		});
 	});
@@ -113,19 +98,19 @@ describe("<ArcAd>", () => {
 					reserveSpace: false,
 				},
 			};
-			const wrapper = shallow(<ArcAd {...adProps} />);
-			const container = wrapper.find(".arcad-container");
-			expect(container).toHaveLength(1);
-			expect(container.prop("style").maxWidth).toBeDefined();
-			expect(container.prop("style").minHeight).toBe(null);
+			const wrapper = mount(<ArcAd {...adProps} />);
+			const adContainer = wrapper.find("div.b-ads-block > div");
+			expect(adContainer).toHaveLength(1);
+			expect(adContainer.prop("style").maxWidth).toBeDefined();
+			expect(adContainer.prop("style").minHeight).toBe(null);
 		});
 
 		it("renders with height and width", () => {
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find(".arcad-container");
-			expect(container).toHaveLength(1);
-			expect(container.prop("style").maxWidth).toBeDefined();
-			expect(container.prop("style").minHeight).not.toBe(null);
+			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
+			const adContainer = wrapper.find("div.b-ads-block > div");
+			expect(adContainer).toHaveLength(1);
+			expect(adContainer.prop("style").maxWidth).toBeDefined();
+			expect(adContainer.prop("style").minHeight).not.toBe(null);
 		});
 	});
 
@@ -137,35 +122,17 @@ describe("<ArcAd>", () => {
 					displayAdLabel: false,
 				},
 			};
-			const wrapper = shallow(<ArcAd {...adProps} />);
-			const container = wrapper.find(".arcad-feature");
+			const wrapper = mount(<ArcAd {...adProps} />);
+			const container = wrapper.find("div.b-ads-block");
 			expect(container).toHaveLength(1);
-			expect(container.prop("displayAdLabel")).toBe(false);
-			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
+			expect(container.text()).toEqual("");
 		});
 
 		it("renders advertisement label when enabled", () => {
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find(".arcad-feature");
+			const wrapper = mount(<ArcAd {...AD_PROPS_MOCK} />);
+			const container = wrapper.find("div.b-ads-block");
 			expect(container).toHaveLength(1);
-			expect(container.prop("displayAdLabel")).toBe(true);
-			expect(container.prop("adLabel")).toEqual("ads-block.ad-label");
-		});
-
-		it("renders custom advertisement label", () => {
-			const advertisementLabel =
-				"Advertisement / <a href='http://example.com' target='_blank'>Advertisement</a>";
-			useFusionContext.mockReturnValue({
-				siteProperties: {
-					...SITE_PROPS_MOCK,
-					advertisementLabel,
-				},
-			});
-			const wrapper = shallow(<ArcAd {...AD_PROPS_MOCK} />);
-			const container = wrapper.find(".arcad-feature");
-			expect(container).toHaveLength(1);
-			expect(container.prop("displayAdLabel")).toBe(true);
-			expect(container.prop("adLabel")).toEqual(advertisementLabel);
+			expect(container.text()).toEqual("ads-block.ad-label");
 		});
 	});
 });

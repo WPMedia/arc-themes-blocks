@@ -108,7 +108,8 @@ export const LargePromoPresentation = (props) => {
 	// play in place logic
 	// if play in place true,
 	// then extract embed markup
-	const embedMarkup = "";
+
+	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 
 	return showImage ||
 		contentOverline ||
@@ -307,7 +308,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			}`,
 		}) || null;
 
-	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
@@ -364,7 +364,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			content={content}
 			displayDate={displayDate}
 			editableDescription={editableDescription}
-			embedMarkup={embedMarkup}
 			imageOrVideoLabelText={imageOrVideoLabelText}
 			phrases={phrases}
 			promoImage={promoImage}

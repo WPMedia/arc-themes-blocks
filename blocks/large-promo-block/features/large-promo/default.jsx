@@ -60,84 +60,84 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 				  }
 				: null,
 			filter: `{
-      _id
-      credits {
-        by {
-          _id
-          name
-          url
-          type
-          additional_properties {
-            original {
-              byline
-            }
-          }
-        }
-      }
-      description {
-        basic
-      }
-      display_date
-      type
-      headlines {
-        basic
-      }
-      label {
-        basic {
-          display
-          url
-          text
-        }
-      }
-      owner {
-        sponsored
-      }
-      promo_items {
-        type
-        url
-        lead_art {
-          embed_html
-          type
-          promo_items {
-            basic {
-              type
-              url
-              resized_params {
-                377x283
-                377x251
-                377x212
-                274x206
-                274x183
-                274x154
-              }
-            }
-          }
-        }
-        basic {
-          type
-          url
-          resized_params {
-            377x283
-            377x251
-            377x212
-            274x206
-            274x183
-            274x154
-          }
-        }
-      }
-      embed_html
-      website_url
-      websites {
-        ${arcSite} {
-          website_url
-          website_section {
-            _id
-            name
-          }
-        }
-      }
-    }`,
+				_id
+				credits {
+					by {
+						_id
+						name
+						url
+						type
+						additional_properties {
+							original {
+								byline
+							}
+						}
+					}
+				}
+				description {
+					basic
+				}
+				display_date
+				type
+				headlines {
+					basic
+				}
+				label {
+					basic {
+						display
+						url
+						text
+					}
+				}
+				owner {
+					sponsored
+				}
+				promo_items {
+					type
+					url
+					lead_art {
+						embed_html
+						type
+						promo_items {
+							basic {
+								type
+								url
+								resized_params {
+									377x283
+									377x251
+									377x212
+									274x206
+									274x183
+									274x154
+								}
+							}
+						}
+					}
+					basic {
+						type
+						url
+						resized_params {
+							377x283
+							377x251
+							377x212
+							274x206
+							274x183
+							274x154
+						}
+					}
+				}
+				embed_html
+				website_url
+				websites {
+					${arcSite} {
+						website_url
+						website_section {
+							_id
+							name
+						}
+					}
+				}
+			}`,
 		}) || null;
 
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
@@ -152,7 +152,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		fallbackImage,
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-	const bylineNodes = formatAuthors(content?.credits?.by, phrases.t("global.and-text"));
 
 	// show the override url over the content image if it's present
 	// get the image from content if no override
@@ -191,20 +190,26 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		? editableContent(content, "description.basic")
 		: {};
 
+	const contentAuthors =
+		showByline && content?.credits?.by.length > 0
+			? formatAuthors(content?.credits?.by, phrases.t("global.and-text"))
+			: null;
+	const contentDate = showDate ? content?.display_date : null;
+	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const hasAuthors = showByline && content?.credits?.by.length > 0;
+	const contentOverline = showOverline ? text : null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 
-	return showOverline ||
+	return showImage ||
+		contentOverline ||
 		contentHeading ||
-		showImage ||
-		showDescription ||
-		hasAuthors ||
-		showDate ? (
+		contentDescription ||
+		contentAuthors ||
+		contentDate ? (
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{showImage || editableDescription || contentHeading || hasAuthors || showDate ? (
+				{showImage ? (
 					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
@@ -237,43 +242,51 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 						</Conditional>
 					</MediaItem>
 				) : null}
-				<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-					{showOverline ? <Overline href={url}>{text}</Overline> : null}
-					<Stack>
-						{showHeadline && content?.headlines?.basic ? (
-							<Heading>
-								<Conditional
-									component={Link}
-									condition={contentUrl}
-									href={formatURL(contentUrl)}
-									onClick={registerSuccessEvent}
-								>
-									{content?.headlines?.basic}
-								</Conditional>
-							</Heading>
-						) : null}
-						{showDescription ? (
-							<Paragraph suppressContentEditableWarning {...editableDescription}>
-								{content?.description?.basic}
-							</Paragraph>
-						) : null}
-						{hasAuthors || showDate ? (
-							<Attribution>
-								<Join separator={Separator}>
-									{hasAuthors ? (
-										<Join separator={() => " "}>
-											{phrases.t("global.by-text")}
-											{bylineNodes}
+				{contentOverline ||
+				contentHeading ||
+				contentDescription ||
+				contentAuthors ||
+				contentDate ? (
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						{contentOverline ? <Overline href={url}>{contentOverline}</Overline> : null}
+						{contentHeading || contentDescription || contentAuthors || contentDate ? (
+							<Stack>
+								{contentHeading ? (
+									<Heading>
+										<Conditional
+											component={Link}
+											condition={content?.websites?.[arcSite]?.website_url}
+											href={formatURL(content?.websites?.[arcSite]?.website_url)}
+											onClick={registerSuccessEvent}
+										>
+											{contentHeading}
+										</Conditional>
+									</Heading>
+								) : null}
+								{contentDescription ? (
+									<Paragraph suppressContentEditableWarning {...editableDescription}>
+										{contentDescription}
+									</Paragraph>
+								) : null}
+								{contentAuthors || contentDate ? (
+									<Attribution>
+										<Join separator={Separator}>
+											{contentAuthors ? (
+												<Join separator={() => " "}>
+													{phrases.t("global.by-text")}
+													{contentAuthors}
+												</Join>
+											) : null}
+											{contentDate ? (
+												<DateDisplay dateTime={contentDate} dateString={displayDate} />
+											) : null}
 										</Join>
-									) : null}
-									{showDate && content?.display_date ? (
-										<DateDisplay dateTime={content.display_date} dateString={displayDate} />
-									) : null}
-								</Join>
-							</Attribution>
+									</Attribution>
+								) : null}
+							</Stack>
 						) : null}
 					</Stack>
-				</Stack>
+				) : null}
 			</Grid>
 		</HeadingSection>
 	) : null;

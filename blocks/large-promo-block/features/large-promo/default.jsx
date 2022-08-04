@@ -37,25 +37,41 @@ export const LargePromoPresentation = (props) => {
 		arcSite,
 		aspectRatio,
 		content,
-		contentAuthors,
-		contentDate,
-		contentDescription,
-		contentHeading,
-		contentOverline,
-		contentUrl,
 		displayDate,
 		editableDescription,
-		embedMarkup,
-		imageSearchField,
+		imageOverrideURL,
+		playVideoInPlace,
 		promoImage,
 		registerSuccessEvent,
 		searchableField,
+		showByline,
+		showDate,
+		showDescription,
+		showHeadline,
 		showImage,
+		showOverline,
+		text,
 		url,
 		viewportPercentage,
 	} = props;
 
+	// using phrases here to emphasize that gallery and video label come from phrases
 	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+
+	// start content flag refactoring
+	// derivative data
+
+	const contentAuthors =
+		showByline && content?.credits?.by.length > 0
+			? formatAuthors(content?.credits?.by, phrases.t("global.and-text"))
+			: null;
+	const contentDate = showDate ? content?.display_date : null;
+	const contentDescription = showDescription ? content?.description?.basic : null;
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const contentOverline = showOverline ? text : null;
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	// end content flag refactoring
 
 	const byText = phrases.t("global.by-text");
 
@@ -86,7 +102,12 @@ export const LargePromoPresentation = (props) => {
 		imageOrVideoLabelText = phrases.t("promo-label.video-text");
 	}
 
-	// lead art edge
+	// todo: lead art edgecase
+
+	// play in place logic
+	// if play in place true,
+	// then extract embed markup
+	const embedMarkup = "";
 
 	return showImage ||
 		contentOverline ||
@@ -335,40 +356,28 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		? editableContent(content, "description.basic")
 		: {};
 
-	const contentAuthors =
-		showByline && content?.credits?.by.length > 0
-			? formatAuthors(content?.credits?.by, phrases.t("global.and-text"))
-			: null;
-	const contentDate = showDate ? content?.display_date : null;
-	const contentDescription = showDescription ? content?.description?.basic : null;
-	const contentHeading = showHeadline ? content?.headlines?.basic : null;
-	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const contentOverline = showOverline ? text : null;
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-
 	return (
 		<LargePromoPresentation
 			arcSite={arcSite}
 			aspectRatio={aspectRatio}
 			content={content}
-			contentAuthors={contentAuthors}
-			contentDate={contentDate}
-			contentDescription={contentDescription}
-			contentHeading={contentHeading}
-			contentOverline={contentOverline}
-			contentUrl={contentUrl}
 			displayDate={displayDate}
 			editableDescription={editableDescription}
 			embedMarkup={embedMarkup}
 			imageOrVideoLabelText={imageOrVideoLabelText}
-			imageSearchField={imageSearchField}
+			phrases={phrases}
 			promoImage={promoImage}
 			registerSuccessEvent={registerSuccessEvent}
 			searchableField={searchableField}
+			showByline={showByline}
+			showDate={showDate}
+			showDescription={showDescription}
+			showHeadline={showHeadline}
 			showImage={showImage}
+			showOverline={showOverline}
+			text={text}
 			url={url}
 			viewportPercentage={viewportPercentage}
-			phrases={phrases}
 		/>
 	);
 };

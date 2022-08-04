@@ -108,6 +108,7 @@ const allCustomFields = {
 	showByline: false,
 	showDate: false,
 	imageRatio: "4:3",
+	playVideoInPlace: false,
 };
 
 export const allFields = () => {
@@ -188,6 +189,10 @@ export const withGalleryLabelAndImage = () => (
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		showImage
+		showByline
+		showDescription
+		showDate
+		showHeadline
 		content={{
 			...MOCK_CONTENT,
 			type: "gallery",
@@ -206,19 +211,33 @@ export const withVideoLabelAndImage = () => (
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		showImage
-		showVideoLabel
+		showByline
+		showDescription
+		showDate
+		showHeadline
 		content={{ ...MOCK_CONTENT, type: "video" }}
 	/>
 );
 
-// export const playVideoInPlaceOfImage = () => {
-// 	const updatedCustomFields = {
-// 		...allCustomFields,
-// 		// playVideoInPlace will override showImage
-// 		showImage: true,
-// 		playVideoInPlace: true,
-// 		aspectRatio: 16 / 9,
-// 	};
+export const playVideoInPlaceOfImage = () => (
+	// const updatedCustomFields = {
+	// 	...allCustomFields,
+	// 	// playVideoInPlace will override showImage
+	// 	showImage: true,
+	// 	playVideoInPlace: true,
+	// 	aspectRatio: 16 / 9,
+	// };
 
-// 	return <Promo customFields={updatedCustomFields} />;
-// };
+	<LargePromoPresentation
+		arcSite="story-book"
+		displayDate="December 02, 2019 at  1:58 pm EST"
+		imageSearchField="imageURL"
+		promoImage="https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg"
+		registerSuccessEvent={() => {}}
+		searchableField={() => {}}
+		showImage
+		showVideoLabel
+		content={{ ...MOCK_CONTENT, type: "video" }}
+		playVideoInPlace
+	/>
+);

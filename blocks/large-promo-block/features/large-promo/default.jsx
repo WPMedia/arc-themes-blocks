@@ -103,6 +103,7 @@ export const LargePromoPresentation = (props) => {
 	}
 
 	// todo: lead art edgecase
+	// look in the promo label and shared styles file https://github.com/WPMedia/arc-themes-blocks/blob/arc-themes-release-version-1.22/blocks/shared-styles/_children/promo-image/discover.js#L17
 
 	// play in place logic
 	// if play in place true,

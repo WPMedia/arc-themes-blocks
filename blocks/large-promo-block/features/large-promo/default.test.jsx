@@ -295,6 +295,7 @@ describe("Large Promo", () => {
 		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
+	// image icon not working as expected
 	it("should render image icon label", () => {
 		const { container } = render(
 			<LargePromo

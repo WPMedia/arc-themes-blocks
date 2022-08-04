@@ -22,7 +22,7 @@ export const GalleryPresentation = ({
 	let AdBlock;
 
 	try {
-		const { default: AdFeature } = require("@wpmedia/ads-block");
+		const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
 		AdBlock = () => (
 			<AdFeature
 				customFields={{

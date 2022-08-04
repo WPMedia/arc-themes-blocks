@@ -1,48 +1,73 @@
 import React, { useState } from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import styled from "styled-components";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-
+import { Paragraph, Stack } from "@wpmedia/arc-themes-components";
 import adMap from "./ad-mapping";
 import AdUnit from "./_children/AdUnit";
 import ArcAdminAd from "./_children/ArcAdminAd";
 import { getAdObject } from "./ad-helper";
-import "./ads.scss";
+
+const BLOCK_CLASS_NAME = "b-ads-block";
 
 function generateInstanceId(componentId) {
 	return `${componentId}-${Math.floor(Math.random() * 9007199254740991).toString(16)}`;
 }
 
-// eslint-disable-next-line arrow-body-style
-const setAdLabelVisibility = (props) => {
-	// istanbul ignore next
-	return props.displayAdLabel ? "" : "display: none";
+export const ArcAdDisplay = (props) => {
+	const {
+		config,
+		displayAdLabel,
+		instanceId,
+		isAdmin,
+		isAMP,
+		lazyLoad,
+		propsWithContext,
+		sizing, // provides max width and min height to prevent excessive layout shift
+		adLabel,
+	} = props;
+
+	// ads will not show if output type is "amp" or on pagebuilder editor admin
+	const showAd = !isAdmin && !isAMP();
+
+	const showAdLabel = showAd && displayAdLabel;
+
+	return (
+		<Stack id={`arcad-feature-${instanceId}`} className={BLOCK_CLASS_NAME} alignment="center">
+			{showAdLabel ? <Paragraph>{adLabel}</Paragraph> : null}
+			{showAd ? (
+				<div style={sizing}>
+					<LazyLoad
+						enabled={lazyLoad}
+						offsetBottom={0}
+						offsetLeft={0}
+						offsetRight={0}
+						offsetTop={200}
+						renderPlaceholder={(ref) => (
+							// istanbul ignore next
+							<div ref={ref} />
+						)}
+					>
+						<AdUnit adConfig={config} featureConfig={propsWithContext} />
+					</LazyLoad>
+				</div>
+			) : null}
+			{/* admin view will show placeholder regardless of output type name amp */}
+			{isAdmin ? <ArcAdminAd {...config} /> : null}
+		</Stack>
+	);
 };
-
-const StyledAdUnit = styled.div`
-	.arcad > [id^="google_ads_iframe"]:not(:empty)::before {
-		content: "${(props) => props.adLabel}";
-		display: block;
-		${(props) => setAdLabelVisibility(props)}
-	}
-
-	.arcad > [id^="google_ads_iframe"]:empty[style] {
-		width: 0 !important;
-		height: 0 !important;
-	}
-`;
 
 const ArcAd = (props) => {
 	const fusionContext = useFusionContext();
 	const { arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const [instanceId] = useState(() => generateInstanceId(fusionContext.id || "0000"));
 	const propsWithContext = {
-		...fusionContext,
+		...fusionContext, // siteProperties: { dfpId } included in fusionContext
 		...props,
 		instanceId,
 	};
@@ -55,45 +80,33 @@ const ArcAd = (props) => {
 		})
 	);
 
+	// we don't need to support amp so this can be removed
 	// istanbul ignore next
 	const isAMP = () => !!(propsWithContext.outputType && propsWithContext.outputType === "amp");
 
 	const [width, height] = config.adClass ? config.adClass.split("x") : [];
-	// Height is + 17px to account line-height of advertisment string of 17px;
-	const heightWithAdjustments = parseInt(height, 10) + (displayAdLabel ? 17 : 0);
 
 	const sizing = {
 		maxWidth: `${width}px`,
-		minHeight: reserveSpace ? `${heightWithAdjustments}px` : null,
+		minHeight: reserveSpace ? `${height}px` : null,
 	};
 
+	// shows ADVERTISEMENT (en) string above the ad
+	const adLabel = siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label");
+
 	return (
-		<StyledAdUnit
-			id={`arcad-feature-${instanceId}`}
-			className="arcad-feature"
-			adLabel={siteProperties?.advertisementLabel || phrases.t("ads-block.ad-label")}
-			displayAdLabel={!isAdmin && displayAdLabel && !isAMP()}
-		>
-			<div className="arcad-container" style={sizing}>
-				{!isAdmin && !isAMP() && (
-					<LazyLoad
-						enabled={lazyLoad}
-						offsetBottom={0}
-						offsetLeft={0}
-						offsetRight={0}
-						offsetTop={200}
-						// eslint-disable-next-line arrow-body-style
-						renderPlaceholder={(ref) => {
-							// istanbul ignore next
-							return <div ref={ref} />;
-						}}
-					>
-						<AdUnit adConfig={config} featureConfig={propsWithContext} />
-					</LazyLoad>
-				)}
-				{isAdmin && <ArcAdminAd {...config} />}
-			</div>
-		</StyledAdUnit>
+		<ArcAdDisplay
+			config={config}
+			displayAdLabel={displayAdLabel}
+			instanceId={instanceId}
+			isAdmin={isAdmin}
+			isAMP={isAMP}
+			lazyLoad={lazyLoad}
+			phrases={phrases}
+			propsWithContext={propsWithContext}
+			sizing={sizing}
+			adLabel={adLabel}
+		/>
 	);
 };
 

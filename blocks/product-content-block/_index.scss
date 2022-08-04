@@ -1,0 +1,5 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-product-content {
+	@include scss.block-properties("product-content");
+}

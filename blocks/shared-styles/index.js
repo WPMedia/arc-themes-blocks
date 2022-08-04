@@ -11,7 +11,6 @@ import PromoImage from "./_children/promo-image";
 import PromoLabel from "./_children/promo-label";
 import SecondaryFont from "./_children/secondary-font";
 import MediumPromoPresentation from "./_children/promos/medium";
-import LargePromoPresentation from "./_children/promos/large";
 import {
 	getNavSpecificSecondaryButtonTheme,
 	getNavSpecificPrimaryButtonTheme,
@@ -26,7 +25,6 @@ export {
 	Byline,
 	Heading,
 	HeadingSection,
-	LargePromoPresentation,
 	Overline,
 	PrimaryFont,
 	PromoDate,

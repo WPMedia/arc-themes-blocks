@@ -3,7 +3,7 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-import { LazyLoad, isServerSide, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 
 import {
 	formatCredits,
@@ -386,7 +386,6 @@ ArticleBodyChain.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
-		...videoPlayerCustomFields(),
 		hideImageTitle: PropTypes.bool.tag({
 			description: "This display option applies to all Images in the Article Body.",
 			label: "Hide Title",

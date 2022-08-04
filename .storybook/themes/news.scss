@@ -437,9 +437,9 @@
 				),
 				overline: (
 					color: var(--text-color),
-					font-size: var(--heading-level-5-font-size),
-					font-weight: var(--heading-level-5-font-weight),
-					line-height: var(--heading-level-5-line-height),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
 					text-decoration: none,
 				),
 				paragraph: (
@@ -788,30 +788,22 @@
 					padding: var(--global-spacing-4) 0,
 					components: (
 						heading: (
-							font-size: var(--body-font-size),
-							font-weight: var(--body-font-weight),
-							line-height: var(--body-line-height),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
 						),
-						overline: (
-							font-size: var(--body-font-size),
-						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
-						),
-						attribution: (
-							font-size: var(--body-font-size-small),
-						),
-						date: (
-							font-size: var(--body-font-size-small),
 						),
 					),
 				),
 				card-list-title: (
 					padding: 0 var(--global-spacing-4),
 					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
 				),
 				card-list-list: (
 					padding: 0 var(--global-spacing-4),
@@ -1189,6 +1181,11 @@
 							background-color: var(--global-neutral-6),
 						),
 					),
+				),
+				headline: (
+					font-size: var(--heading-level-1-font-size),
+					font-weight: var(--heading-level-1-font-weight),
+					line-height: var(--heading-level-1-line-height),
 				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),

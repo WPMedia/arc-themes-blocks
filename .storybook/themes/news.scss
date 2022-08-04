@@ -834,15 +834,6 @@
 				),
 				card-list-main-item-image-link: (
 					components: (
-						heading: (
-							font-size: var(--heading-level-5-font-size),
-							font-weight: var(--heading-level-5-font-weight),
-							line-height: var(--heading-level-5-line-height),
-						),
-						overline: (
-							font-size: var(--body-font-size),
-							line-height: var(--body-line-height),
-						),
 						image: (
 							max-height: 40vh,
 							object-fit: cover,
@@ -852,6 +843,17 @@
 				),
 				card-list-main-item-text-container: (
 					gap: var(--global-spacing-2),
+					components: (
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+						),
+						overline: (
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
+						),
+					),
 				),
 				card-list-secondary-item: (
 					components: (

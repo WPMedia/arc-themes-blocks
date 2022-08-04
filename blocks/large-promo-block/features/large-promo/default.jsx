@@ -366,6 +366,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			editableDescription={editableDescription}
 			imageOrVideoLabelText={imageOrVideoLabelText}
 			phrases={phrases}
+			playVideoInPlace={playVideoInPlace}
 			promoImage={promoImage}
 			registerSuccessEvent={registerSuccessEvent}
 			searchableField={searchableField}

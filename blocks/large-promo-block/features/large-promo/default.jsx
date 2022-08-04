@@ -32,6 +32,153 @@ import {
 
 const BLOCK_CLASS_NAME = "b-large-promo";
 
+export const LargePromoPresentation = (props) => {
+	const {
+		arcSite,
+		aspectRatio,
+		content,
+		contentAuthors,
+		contentDate,
+		contentDescription,
+		contentHeading,
+		contentOverline,
+		contentUrl,
+		displayDate,
+		editableDescription,
+		embedMarkup,
+		imageSearchField,
+		promoImage,
+		registerSuccessEvent,
+		searchableField,
+		showImage,
+		url,
+		viewportPercentage,
+	} = props;
+
+	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
+
+	const byText = phrases.t("global.by-text");
+
+	const { type } = content;
+
+	// get the type
+	// if image, then show a label. Make that label text to be the translated text from
+	// https://github.com/WPMedia/arc-themes-blocks/blob/arc-themes-release-version-1.22/blocks/shared-styles/_children/promo-label/index.jsx#L36
+	// show the camera icon
+
+	// if video, then show the video label. Get from the internationalization service
+	// show the video icon
+
+	// if neither video nor image, don't show a label nor a icon
+	let showImageOrVideoLabel = false;
+	let showVideoLabel = false;
+	let imageOrVideoLabelText = "";
+
+	if (type === "gallery") {
+		showImageOrVideoLabel = true;
+		showVideoLabel = false; // redundant
+		imageOrVideoLabelText = phrases.t("promo-label.gallery-text");
+	}
+
+	if (type === "video") {
+		showImageOrVideoLabel = true;
+		showVideoLabel = true;
+		imageOrVideoLabelText = phrases.t("promo-label.video-text");
+	}
+
+	// lead art edge
+
+	return showImage ||
+		contentOverline ||
+		contentHeading ||
+		contentDescription ||
+		contentAuthors ||
+		contentDate ? (
+		<HeadingSection>
+			<Grid as="article" className={BLOCK_CLASS_NAME}>
+				{showImage ? (
+					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+						<Conditional
+							component={Link}
+							condition={contentUrl}
+							href={formatURL(contentUrl)}
+							onClick={registerSuccessEvent}
+							assistiveHidden
+						>
+							{embedMarkup ? (
+								<Video
+									aspectRatio={aspectRatio}
+									embedMarkup={embedMarkup}
+									viewportPercentage={viewportPercentage}
+								/>
+							) : (
+								<Image
+									alt={content?.headlines?.basic || null}
+									src={promoImage}
+									width={377}
+									height={283}
+									searchableField
+								/>
+							)}
+							{showImageOrVideoLabel ? (
+								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+									<Icon name={showVideoLabel ? "Play" : "Camera"} />
+									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
+								</div>
+							) : null}
+						</Conditional>
+					</MediaItem>
+				) : null}
+				{contentOverline ||
+				contentHeading ||
+				contentDescription ||
+				contentAuthors ||
+				contentDate ? (
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						{contentOverline ? <Overline href={url}>{contentOverline}</Overline> : null}
+						{contentHeading || contentDescription || contentAuthors || contentDate ? (
+							<Stack>
+								{contentHeading ? (
+									<Heading>
+										<Conditional
+											component={Link}
+											condition={content?.websites?.[arcSite]?.website_url}
+											href={formatURL(content?.websites?.[arcSite]?.website_url)}
+											onClick={registerSuccessEvent}
+										>
+											{contentHeading}
+										</Conditional>
+									</Heading>
+								) : null}
+								{contentDescription ? (
+									<Paragraph suppressContentEditableWarning {...editableDescription}>
+										{contentDescription}
+									</Paragraph>
+								) : null}
+								{contentAuthors || contentDate ? (
+									<Attribution>
+										<Join separator={Separator}>
+											{contentAuthors ? (
+												<Join separator={() => " "}>
+													{byText}
+													{contentAuthors}
+												</Join>
+											) : null}
+											{contentDate ? (
+												<DateDisplay dateTime={contentDate} dateString={displayDate} />
+											) : null}
+										</Join>
+									</Attribution>
+								) : null}
+							</Stack>
+						) : null}
+					</Stack>
+				) : null}
+			</Grid>
+		</HeadingSection>
+	) : null;
+};
+
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
 		aspectRatio,
@@ -43,9 +190,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showDescription,
 		showHeadline,
 		showImage,
-		showImageOrVideoLabel,
 		showOverline,
-		showVideoLabel,
 		viewportPercentage,
 	} = customFields;
 
@@ -201,95 +346,31 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentOverline = showOverline ? text : null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 
-	return showImage ||
-		contentOverline ||
-		contentHeading ||
-		contentDescription ||
-		contentAuthors ||
-		contentDate ? (
-		<HeadingSection>
-			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{showImage ? (
-					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
-						<Conditional
-							component={Link}
-							condition={contentUrl}
-							href={formatURL(contentUrl)}
-							onClick={registerSuccessEvent}
-							assistiveHidden
-						>
-							{embedMarkup ? (
-								<Video
-									aspectRatio={aspectRatio}
-									embedMarkup={embedMarkup}
-									viewportPercentage={viewportPercentage}
-								/>
-							) : (
-								<Image
-									alt={content?.headlines?.basic || null}
-									src={promoImage}
-									width={377}
-									height={283}
-									searchableField
-								/>
-							)}
-							{showImageOrVideoLabel ? (
-								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Camera"} />
-									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
-								</div>
-							) : null}
-						</Conditional>
-					</MediaItem>
-				) : null}
-				{contentOverline ||
-				contentHeading ||
-				contentDescription ||
-				contentAuthors ||
-				contentDate ? (
-					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						{contentOverline ? <Overline href={url}>{contentOverline}</Overline> : null}
-						{contentHeading || contentDescription || contentAuthors || contentDate ? (
-							<Stack>
-								{contentHeading ? (
-									<Heading>
-										<Conditional
-											component={Link}
-											condition={content?.websites?.[arcSite]?.website_url}
-											href={formatURL(content?.websites?.[arcSite]?.website_url)}
-											onClick={registerSuccessEvent}
-										>
-											{contentHeading}
-										</Conditional>
-									</Heading>
-								) : null}
-								{contentDescription ? (
-									<Paragraph suppressContentEditableWarning {...editableDescription}>
-										{contentDescription}
-									</Paragraph>
-								) : null}
-								{contentAuthors || contentDate ? (
-									<Attribution>
-										<Join separator={Separator}>
-											{contentAuthors ? (
-												<Join separator={() => " "}>
-													{phrases.t("global.by-text")}
-													{contentAuthors}
-												</Join>
-											) : null}
-											{contentDate ? (
-												<DateDisplay dateTime={contentDate} dateString={displayDate} />
-											) : null}
-										</Join>
-									</Attribution>
-								) : null}
-							</Stack>
-						) : null}
-					</Stack>
-				) : null}
-			</Grid>
-		</HeadingSection>
-	) : null;
+	return (
+		<LargePromoPresentation
+			arcSite={arcSite}
+			aspectRatio={aspectRatio}
+			content={content}
+			contentAuthors={contentAuthors}
+			contentDate={contentDate}
+			contentDescription={contentDescription}
+			contentHeading={contentHeading}
+			contentOverline={contentOverline}
+			contentUrl={contentUrl}
+			displayDate={displayDate}
+			editableDescription={editableDescription}
+			embedMarkup={embedMarkup}
+			imageOrVideoLabelText={imageOrVideoLabelText}
+			imageSearchField={imageSearchField}
+			promoImage={promoImage}
+			registerSuccessEvent={registerSuccessEvent}
+			searchableField={searchableField}
+			showImage={showImage}
+			url={url}
+			viewportPercentage={viewportPercentage}
+			phrases={phrases}
+		/>
+	);
 };
 
 const LargePromo = ({ customFields }) => {

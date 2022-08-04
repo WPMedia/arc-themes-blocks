@@ -12,8 +12,6 @@ jest.mock("fusion:properties", () =>
 );
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: () => <div />,
-	ImageMetadata: () => <div />,
 	LazyLoad: ({ children }) => <>{children}</>,
 	isServerSide: jest.fn(),
 }));

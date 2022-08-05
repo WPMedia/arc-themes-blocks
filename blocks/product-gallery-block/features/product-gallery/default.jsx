@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
+import { useFusionContext, useComponentContext } from "fusion:context";
+// import getProperties from "fusion:properties";
 import { Carousel } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled } = customFields;
+	const { id } = useComponentContext();
 
 	const { globalContent = {} } = useFusionContext();
 
@@ -19,6 +21,8 @@ function ProductGallery({ customFields }) {
 			className={`${BLOCK_CLASS_NAME}${
 				isFeaturedImageEnabled ? ` ${BLOCK_CLASS_NAME}--featured-image-enabled` : ""
 			}`}
+			id={id}
+			label={label}
 		/>
 	);
 }

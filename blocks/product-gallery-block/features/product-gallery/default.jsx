@@ -1,10 +1,17 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
+import { useFusionContext } from "fusion:context";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled } = customFields;
+
+	const { globalContent = {} } = useFusionContext();
+
+	if (!Object.keys(globalContent).length) {
+		return null;
+	}
 
 	return (
 		<div

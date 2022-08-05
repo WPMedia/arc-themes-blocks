@@ -99,30 +99,28 @@ const MOCK_DATA = {
 	},
 };
 
+const DEFAULT_CUSTOM_FIELDS = {
+	isFeaturedImageEnabled: false,
+};
+
 describe("Product Gallery", () => {
 	it("renders null if global content is not set", () => {
 		useFusionContext.mockImplementation(() => ({}));
-		const { container } = render(
-			<ProductGallery customFields={{ isFeaturedImageEnabled: false }} />
-		);
+		const { container } = render(<ProductGallery customFields={DEFAULT_CUSTOM_FIELDS} />);
 		expect(container.firstChild).toBeNull();
 	});
 	it("renders null if no global content provided", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {},
 		}));
-		const { container } = render(
-			<ProductGallery customFields={{ isFeaturedImageEnabled: false }} />
-		);
+		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.firstChild).toBeNull();
 	});
 	it("renders with default disabled classname modifier", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: MOCK_DATA,
 		}));
-		const { container } = render(
-			<ProductGallery customFields={{ isFeaturedImageEnabled: false }} />
-		);
+		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.querySelectorAll(".b-product-gallery--featured-image-disabled").length).toBe(
 			1
 		);
@@ -133,7 +131,7 @@ describe("Product Gallery", () => {
 			globalContent: MOCK_DATA,
 		}));
 		const { container } = render(
-			<ProductGallery customFields={{ isFeaturedImageEnabled: true }} />
+			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: true }} />
 		);
 
 		expect(container.querySelectorAll(".b-product-gallery--featured-image-enabled").length).toBe(1);

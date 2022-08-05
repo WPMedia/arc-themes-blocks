@@ -12,7 +12,7 @@ _Please provide a 1-2 sentence description of what the @wpmedia/<%= h.inflection
 | **optional prop** | no | | |
 
 ## ANS Schema
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for this block
 
 ### ANS Fields
 - `Add all ANS fields used in the block`
@@ -30,7 +30,7 @@ Blocks can emit events. The following is a list of events that are emitted by th
 | **eventName** | Describe the event |
 
 ### Event Listening
-Include block specific intructions for event listening.
+Include block specific instructions for event listening.
 
 OR
 

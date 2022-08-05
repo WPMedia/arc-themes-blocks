@@ -24,8 +24,7 @@ function ProductGallery({ customFields }) {
 
 ProductGallery.label = "Product Gallery – Arc Block";
 
-// todo: update icon based on Matt Nash discussion
-ProductGallery.icon = "shopping-bag-smile";
+ProductGallery.icon = "picture-polaroid-four";
 
 ProductGallery.propTypes = {
 	customFields: PropTypes.shape({

@@ -24,7 +24,7 @@ export function ProductGalleryDisplay(props) {
 			id={id}
 			label={label}
 		>
-			{carouselItems.map((item) => {
+			{carouselItems?.map((item) => {
 				const { url, auth, alt_text: altText, _id: itemId } = item;
 
 				// take in app version that's the public key for the auth object in resizer v2

@@ -2,12 +2,8 @@
 
 .b-product-gallery {
 	&--featured-image-enabled {
-		@include scss.block-components("product-gallery-feature-image-enabled");
-		@include scss.block-properties("product-gallery-feature-image-enabled");
-	}
-	&--featured-image-disabled {
-		@include scss.block-components("product-gallery-feature-image-disabled");
-		@include scss.block-properties("product-gallery-feature-image-disabled");
+		@include scss.block-components("product-gallery-featured-image-enabled");
+		@include scss.block-properties("product-gallery-featured-image-enabled");
 	}
 	@include scss.block-components("product-gallery");
 	@include scss.block-properties("product-gallery");

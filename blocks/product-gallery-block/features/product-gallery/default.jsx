@@ -16,8 +16,8 @@ function ProductGallery({ customFields }) {
 
 	return (
 		<Carousel
-			className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}--featured-image-${
-				isFeaturedImageEnabled ? `enabled` : `disabled`
+			className={`${BLOCK_CLASS_NAME}${
+				isFeaturedImageEnabled ? ` ${BLOCK_CLASS_NAME}--featured-image-enabled` : ""
 			}`}
 		/>
 	);

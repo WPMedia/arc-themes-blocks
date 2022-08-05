@@ -5,7 +5,7 @@ import { useFusionContext } from "fusion:context";
 
 import ProductGallery from "./default";
 
-const MOCK_DATA = {
+const MOCK_GLOBAL_CONTENT = {
 	schema: {
 		productGallery: {
 			label: "Gallery",
@@ -118,7 +118,7 @@ describe("Product Gallery", () => {
 	});
 	it("renders with default disabled classname modifier", () => {
 		useFusionContext.mockImplementation(() => ({
-			globalContent: MOCK_DATA,
+			globalContent: MOCK_GLOBAL_CONTENT,
 		}));
 		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.querySelectorAll(".b-product-gallery--featured-image-disabled").length).toBe(
@@ -128,7 +128,7 @@ describe("Product Gallery", () => {
 	});
 	it("featured image enabled will add featured image enabled classname modifier", () => {
 		useFusionContext.mockImplementation(() => ({
-			globalContent: MOCK_DATA,
+			globalContent: MOCK_GLOBAL_CONTENT,
 		}));
 		const { container } = render(
 			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: true }} />

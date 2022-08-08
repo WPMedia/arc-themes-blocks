@@ -1,0 +1,24 @@
+{
+	"product-content.description": {
+		"de": "Description",
+		"en": "Description",
+		"es": "Description",
+		"fr": "Description",
+		"ja": "Description",
+		"ko": "Description",
+		"no": "Description",
+		"pt": "Description",
+		"sv": "Description"
+	},
+	"product-content.details": {
+		"de": "Details",
+		"en": "Details",
+		"es": "Details",
+		"fr": "Details",
+		"ja": "Details",
+		"ko": "Details",
+		"no": "Details",
+		"pt": "Details",
+		"sv": "Details"
+	}
+}

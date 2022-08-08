@@ -762,6 +762,29 @@
 						),
 					),
 				),
+				author-bio-image: (
+					max-width: var(--global-spacing-13),
+					max-height: var(--global-spacing-13),
+					border-radius: var(--global-border-radius-2),
+				),
+				author-bio-authorName: (
+					font-family: var(--font-family-primary),
+					font-size: var(--global-font-size-6),
+					font-weight: var(--global-font-weight-7),
+				),
+				author-bio-author: (
+					display: flex,
+					flex-direction: row,
+				),
+				author-bio-descriptions: (
+					margin-left: var(--global-spacing-4),
+					gap: var(--global-spacing-4),
+					flex: 1,
+				),
+				author-bio-social-btn: (
+					display: flex,
+					justify-content: space-between,
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -2123,6 +2146,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/author-bio-block";
 @use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";

@@ -5,29 +5,76 @@ import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import styled from "styled-components";
 import { LinkSVGHover } from "@wpmedia/news-theme-css/js/styled/linkHovers";
-import { LazyLoad, constructSocialURL } from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import { Icon, Image, isServerSide } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import { Icon, Image, isServerSide, Stack, Paragraph } from "@wpmedia/arc-themes-components";
 import getProperties from "fusion:properties";
 
 const MediaLinksStyled = styled(LinkSVGHover)``;
 
-const renderAuthorInfo = (author, arcSite) => {
+const BLOCK_CLASS_NAME = "b-author-bio";
+
+const constructSocialURL = (type, field) => {
+	switch (type) {
+		case "email":
+			return `mailto:${field}`;
+
+		case "twitter":
+			// https://twitter.com/jack
+			return `https://twitter.com/${field}`;
+
+		case "instagram":
+			// https://www.instagram.com/zuck/
+			return `https://www.instagram.com/${field}/`;
+
+		case "snapchat":
+			// https://www.snapchat.com/add/slc56
+			return `https://www.snapchat.com/add/${field}`;
+
+		case "linkedin":
+			// https://www.linkedin.com/in/jackhowa/
+			return `https://www.linkedin.com/in/${field}/`;
+
+		case "reddit":
+			// https://www.reddit.com/user/NotAnishKapoor/
+			return `https://www.reddit.com/user/${field}/`;
+
+		case "youtube":
+			// https://www.youtube.com/user/chasereeves
+			return `https://www.youtube.com/user/${field}`;
+
+		case "medium":
+			// weird requires @ signs
+			// https://medium.com/@dan_abramov
+			return `https://medium.com/${field}`;
+
+		case "tumblr":
+			// john green https://fishingboatproceeds.tumblr.com
+			return `https://${field}.tumblr.com`;
+
+		case "pinterest":
+			return `https://www.pinterest.com/${field}/`;
+
+		case "soundcloud":
+			return `https://soundcloud.com/${field}`;
+
+		case "whatsapp":
+			return `https://wa.me/${field}`;
+
+		default:
+			return field;
+	}
+};
+
+const renderAuthorImage = (author, arcSite) => {
 	const { image = {}, name, resized_params: resizedImageOptions } = author;
 
 	const { url = "", alt_text: altText = "" } = image;
 
 	return url ? (
 		<Image
-			url={url}
+			className={`${BLOCK_CLASS_NAME}__image`}
+			src={url}
 			alt={altText || name}
-			smallWidth={84}
-			smallHeight={0}
-			mediumWidth={84}
-			mediumHeight={0}
-			largeWidth={84}
-			largeHeight={0}
-			breakpoints={getProperties(arcSite)?.breakpoints}
 			resizerURL={getProperties(arcSite)?.resizerURL}
 			resizedImageOptions={resizedImageOptions}
 		/>
@@ -198,25 +245,23 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 			// Make the name a hyperlink if a url to the bio page is provided
 			const authorName = original.byline ? (
-				<PrimaryFont as="h2" className="authorName" fontColor="primary-color">
-					{original.byline}
-				</PrimaryFont>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__authorName`}>{original.byline}</Paragraph>
 			) : undefined;
 			const authorNameWithHyperlink = author.url ? (
 				<a href={author.url}>{authorName}</a>
 			) : undefined;
 
 			authorList.push(
-				<section key={author.name ? author.name : ""} className="authors">
-					<section className="author">
-						{renderAuthorInfo(author, arcSite)}
-						<section className="descriptions">
+				<section key={author.name ? author.name : ""} className={`${BLOCK_CLASS_NAME}__authors`}>
+					<div className={`${BLOCK_CLASS_NAME}__author`}>
+						{renderAuthorImage(author, arcSite)}
+						<Stack className={`${BLOCK_CLASS_NAME}__descriptions`}>
 							{authorNameWithHyperlink || authorName}
 							{/* there will always be a description via conditional on 52 */}
-							<p>{author.description}</p>
-							<section className="socialButtons">{socialLinks}</section>
-						</section>
-					</section>
+							<Paragraph>{author.description}</Paragraph>
+							<div className={`${BLOCK_CLASS_NAME}__socialButtons`}>{socialLinks}</div>
+						</Stack>
+					</div>
 				</section>
 			);
 		}
@@ -228,11 +273,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 		return null;
 	}
 
-	return (
-		<PrimaryFont as="section" className="author-bio">
-			{authors}
-		</PrimaryFont>
-	);
+	return <>{authors}</>;
 };
 
 const AuthorBio = ({ customFields = {} }) => {

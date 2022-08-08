@@ -8,6 +8,9 @@ export default {
 	title: "Blocks/Hero",
 	parameters: {
 		chromatic: { viewports: [320, 1200] },
+		cssVariables: {
+			theme: "commerce",
+		},
 	},
 };
 

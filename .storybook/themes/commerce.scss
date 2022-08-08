@@ -577,12 +577,10 @@
 					color: var(--global-black),
 				),
 				hero-image: (
-					max-height: 65vh,
-					width: 100%,
+					max-height: 100vh,
 				),
 				hero-image-stacked: (
-					height: auto,
-					width: 100%,
+					max-height: 100vh,
 				),
 				hero-text-overlay: (
 					margin: 0 auto,
@@ -917,10 +915,6 @@
 							line-height: var(--global-line-height-4),
 						),
 					),
-				),
-				hero-image: (
-					max-height: auto,
-					width: 100%,
 				),
 				hero-text-left: (
 					components: (

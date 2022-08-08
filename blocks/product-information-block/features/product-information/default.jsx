@@ -39,7 +39,7 @@ const ProductInformation = () => {
 	return <ProductInformationDisplay data={globalContent} />;
 };
 
-ProductInformation.label = "Product Infomration - Arc Block";
+ProductInformation.label = "Product Information - Arc Block";
 
 ProductInformation.icon = "cursor-information";
 

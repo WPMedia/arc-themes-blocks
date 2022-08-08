@@ -468,6 +468,30 @@
 				),
 			),
 			blocks: (
+				ads-block: (
+					components: (
+						paragraph: (
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							font-weight: var(--body-font-weight-small),
+							color: var(--global-neutral-7),
+						),
+					),
+				),
+				ads-block-admin: (
+					background-color: var(--global-neutral-7),
+					padding: var(--global-spacing-4),
+					border-radius: var(--border-radius),
+					components: (
+						stack: (
+							padding-bottom: var(--global-spacing-5),
+						),
+						paragraph: (
+							color: var(--global-white),
+						),
+					),
+				),
 				alert-bar: (
 					align-items: flex-start,
 					background-color: var(--global-red-5),
@@ -953,11 +977,9 @@
 				header-nav-chain-top-layout: (
 					align-items: center,
 					display: flex,
+					justify-content: space-between,
 					width: 100%,
 					gap: var(--global-spacing-5),
-				),
-				header-nav-chain-top-layout-center-logo: (
-					justify-content: space-between,
 				),
 				header-nav-chain-top-layout-last-child: (
 					margin-right: 0,
@@ -981,6 +1003,12 @@
 					align-items: center,
 					display: none,
 					gap: var(--global-spacing-2),
+				),
+				header-nav-chain-logo: (
+					margin-right: auto,
+				),
+				header-nav-chain-logo-center: (
+					margin-right: 0,
 				),
 				header-nav-chain-logo-hidden: (
 					opacity: 0,
@@ -1037,7 +1065,7 @@
 					display: none,
 					gap: var(--global-spacing-2),
 					height: var(--global-spacing-5),
-					flex: 0 3 auto,
+					flex: 1 1 auto,
 					overflow: hidden,
 					text-align: left,
 					width: auto,
@@ -1404,7 +1432,6 @@
 				numbered-list-item-image: (
 					max-width: 25%,
 				),
-				overline: (),
 				quad-chain: (
 					components: (
 						stack: (
@@ -1563,9 +1590,6 @@
 				simple-list: (
 					gap: var(--global-spacing-4),
 					components: (
-						stack: (
-							min-height: 72px,
-						),
 						heading: (
 							font-size: var(--global-font-size-5),
 							line-height: var(--global-line-height-5),
@@ -2143,6 +2167,7 @@
 	)
 );
 
+@use "../../blocks/ads-block";
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";

@@ -443,5 +443,9 @@
 		"product-assortment-carousel.right-arrow-label": "Next",
 		"product-assortment-carousel.left-arrow-label": "Previous",
 		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+	},
+	"product-content-block": {
+		"product-content.description": "Description",
+		"product-content.details": "Details"
 	}
 }

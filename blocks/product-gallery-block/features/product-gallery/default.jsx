@@ -30,7 +30,12 @@ export function ProductGalleryDisplay(props) {
 				// take in app version that's the public key for the auth object in resizer v2
 				const targetAuth = auth[resizerAppVersion];
 				return (
-					<Carousel.Item key={itemId}>
+					<Carousel.Item
+						key={itemId}
+						// todo: add a label to the item
+						// need to update the item to take in classes
+						// className={`${index === 0 ? `${BLOCK_CLASS_NAME}__first-item` : ""}`}
+					>
 						<Image alt={altText} src={url} resizedOptions={{ auth: targetAuth }} />
 					</Carousel.Item>
 				);

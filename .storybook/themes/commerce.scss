@@ -674,6 +674,26 @@
 						),
 					),
 				),
+				product-gallery: (
+					components: (
+						carousel: (
+							--slides: 1,
+							--slide-width: 100%,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: var(--global-spacing-4),
+							max-width: 100%,
+							width: 100%,
+						),
+					),
+				),
+				product-gallery-featured-image-enabled-first-child: (
+					// for featured enabled, this will apply for the desktop growing to expand full width. On mobile, it doesn't hurt.
+					flex-basis: 100%,
+				),
 				quilted-image: (
 					margin-left: auto,
 					margin-right: auto,
@@ -947,6 +967,24 @@
 						),
 						price: (
 							font-size: var(--global-font-size-7),
+						),
+					),
+				),
+				product-gallery: (
+					components: (
+						carousel: (
+							// the slides that are not featured are half the width of the screen
+							// will be 50% accounting for the gap
+							--slides: 2,
+							--slide-width: 50%,
+						),
+						carousel-actions: (
+							// hide the actions on desktop
+							display: none,
+						),
+						carousel-track: (
+							// slides should flow down rather than be hidden off to the side
+							flex-wrap: wrap,
 						),
 					),
 				),

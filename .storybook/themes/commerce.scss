@@ -661,7 +661,8 @@
 						price: (
 							color: var(--text-color),
 							font-size: var(--heading-level-6-font-size),
-							font-weight: var(--body-font-weight-4),
+							font-weight: var(--body-font-weight),
+							line-height: var(--heading-level-6-line-height),
 						),
 					),
 				),
@@ -922,16 +923,6 @@
 				),
 				product-assortment-carousel-title: (
 					font-size: var(--heading-level-5-font-size),
-				),
-				product-information: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-9),
-						),
-						price: (
-							font-size: var(--global-font-size-7),
-						),
-					),
 				),
 				quilted-image: (
 					max-width: var(--content-scale-width),

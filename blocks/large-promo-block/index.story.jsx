@@ -181,13 +181,13 @@ export const imageAndDescription = () => {
 export const withGalleryLabelAndImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentHeading={MOCK_CONTENT.headlines.basic}
 		contentHeadline={MOCK_CONTENT.headlines.basic}
 		contentOverline="Health"
 		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		displayDate={MOCK_CONTENT.display_date}
 		editableDescription={MOCK_CONTENT.description.basic}
@@ -205,13 +205,13 @@ export const withGalleryLabelAndImage = () => (
 export const withVideoLabelAndImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentHeading={MOCK_CONTENT.headlines.basic}
 		contentHeadline={MOCK_CONTENT.headlines.basic}
 		contentOverline="Health"
 		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		displayDate={MOCK_CONTENT.display_date}
 		editableDescription={MOCK_CONTENT.description.basic}
@@ -230,13 +230,13 @@ export const withVideoLabelAndImage = () => (
 export const playVideoInPlaceOfImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentHeading={MOCK_CONTENT.headlines.basic}
 		contentHeadline={MOCK_CONTENT.headlines.basic}
 		contentOverline="Health"
 		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
 		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		displayDate={MOCK_CONTENT.display_date}
 		editableDescription={MOCK_CONTENT.description.basic}

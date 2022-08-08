@@ -36,13 +36,13 @@ const getType = (type, content) => (content?.type === type ? content : undefined
 
 export const LargePromoPresentation = ({
 	aspectRatio,
+	contentAuthors,
+	contentDate,
+	contentDescription,
+	contentHeading,
 	contentHeadline,
 	contentOverline,
 	contentOverlineURL,
-	contentHeading,
-	contentDescription,
-	contentAuthors,
-	contentDate,
 	contentUrl,
 	displayDate,
 	editableDescription,
@@ -329,20 +329,20 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	return (
 		<LargePromoPresentation
 			aspectRatio={aspectRatio}
-			contentOverline={contentOverline}
-			contentOverlineURL={overlineURL}
-			contentHeading={contentHeading}
-			contentHeadline={contentHeadline}
-			contentDescription={contentDescription}
 			contentAuthors={contentAuthors}
 			contentDate={contentDate}
+			contentDescription={contentDescription}
+			contentHeading={contentHeading}
+			contentHeadline={contentHeadline}
+			contentOverline={contentOverline}
+			contentOverlineURL={overlineURL}
 			contentUrl={contentUrl}
 			displayDate={displayDate}
 			editableDescription={editableDescription}
 			embedMarkup={embedMarkup}
+			imageSearchField={imageSearchField}
 			labelIconName={labelIconName}
 			labelIconText={labelIconText}
-			imageSearchField={imageSearchField}
 			promoImageURL={promoImageURL}
 			registerSuccessEvent={registerSuccessEvent}
 			searchableField={searchableField}

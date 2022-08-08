@@ -5,18 +5,22 @@
 		@include scss.block-components("author-bio-author");
 		@include scss.block-properties("author-bio-author");
 	}
+
 	&__authorName {
 		@include scss.block-components("author-bio-authorName");
 		@include scss.block-properties("author-bio-authorName");
 	}
+
 	&__image {
 		@include scss.block-components("author-bio-image");
 		@include scss.block-properties("author-bio-image");
 	}
+
 	&__descriptions {
 		@include scss.block-components("author-bio-descriptions");
 		@include scss.block-properties("author-bio-descriptions");
 	}
+
 	&__socialButtons {
 		@include scss.block-components("author-bio-social-btn");
 		@include scss.block-properties("author-bio-social-btn");

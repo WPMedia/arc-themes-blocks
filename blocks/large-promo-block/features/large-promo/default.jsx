@@ -34,37 +34,35 @@ const BLOCK_CLASS_NAME = "b-large-promo";
 
 const getType = (type, content) => (content?.type === type ? content : undefined);
 
-export const LargePromoPresentation = (props) => {
-	const {
-		aspectRatio,
-		contentHeadline,
-		contentOverline,
-		contentOverlineURL,
-		contentHeading,
-		contentDescription,
-		contentAuthors,
-		contentDate,
-		contentUrl,
-		displayDate,
-		editableDescription,
-		embedMarkup,
-		imageSearchField,
-		labelIconName,
-		labelIconText,
-		promoImageURL,
-		registerSuccessEvent,
-		searchableField,
-		translationByText,
-		viewportPercentage,
-	} = props;
-
-	return embedMarkup ||
-		contentOverline ||
-		contentHeading ||
-		contentDescription ||
-		contentAuthors ||
-		contentDate ||
-		promoImageURL ? (
+export const LargePromoPresentation = ({
+	aspectRatio,
+	contentHeadline,
+	contentOverline,
+	contentOverlineURL,
+	contentHeading,
+	contentDescription,
+	contentAuthors,
+	contentDate,
+	contentUrl,
+	displayDate,
+	editableDescription,
+	embedMarkup,
+	imageSearchField,
+	labelIconName,
+	labelIconText,
+	promoImageURL,
+	registerSuccessEvent,
+	searchableField,
+	translationByText,
+	viewportPercentage,
+}) =>
+	embedMarkup ||
+	contentOverline ||
+	contentHeading ||
+	contentDescription ||
+	contentAuthors ||
+	contentDate ||
+	promoImageURL ? (
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
 				{embedMarkup || promoImageURL ? (
@@ -150,7 +148,6 @@ export const LargePromoPresentation = (props) => {
 			</Grid>
 		</HeadingSection>
 	) : null;
-};
 
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {

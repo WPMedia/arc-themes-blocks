@@ -1818,6 +1818,15 @@
 				article-body-gallery-additional-previous: (
 					display: block,
 				),
+				card-list-main-item-text-container: (
+					components: (
+						heading: (
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--heading-level-6-font-weight),
+							line-height: var(--heading-level-6-line-height),
+						),
+					),
+				),
 				double-chain: (
 					components: (
 						stack: (

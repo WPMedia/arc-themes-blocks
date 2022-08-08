@@ -3,4 +3,9 @@
 .b-product-information {
 	@include scss.block-components("product-information");
 	@include scss.block-properties("product-information");
+
+	&__product-single-price {
+		@include scss.block-properties("product-information-single-price");
+		@include scss.block-components("product-information-single-price");
+	}
 }

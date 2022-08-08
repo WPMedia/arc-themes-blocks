@@ -447,5 +447,9 @@
 	"product-content-block": {
 		"product-content.description": "Description",
 		"product-content.details": "Details"
+	},
+	"product-information-block": {
+		"product-information.sale-price": "Sale Price %{price}",
+		"product-information.list-price": "List Price %{price}"
 	}
 }

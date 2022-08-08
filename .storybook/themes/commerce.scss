@@ -678,7 +678,20 @@
 							color: var(--text-color),
 							font-size: var(--global-font-size-5),
 							font-weight: var(--global-font-weight-4),
+							gap: var(--global-spacing-1),
 							line-height: var(--global-line-height-4),
+						),
+						price-list: (
+							color: var(--global-neutral-5),
+							text-decoration: line-through,
+						),
+					),
+				),
+				product-information-single-price: (
+					components: (
+						price-list: (
+							color: var(--global-neutral-7),
+							text-decoration: none,
 						),
 					),
 				),

@@ -32,10 +32,126 @@ import {
 
 const BLOCK_CLASS_NAME = "b-large-promo";
 
+const getType = (type, content) => (content?.type === type ? content : undefined);
+
+export const LargePromoPresentation = ({
+	aspectRatio,
+	contentAuthors,
+	contentDate,
+	contentDescription,
+	contentHeading,
+	contentHeadline,
+	contentOverline,
+	contentOverlineURL,
+	contentUrl,
+	displayDate,
+	editableDescription,
+	embedMarkup,
+	imageSearchField,
+	labelIconName,
+	labelIconText,
+	promoImageURL,
+	registerSuccessEvent,
+	searchableField,
+	translationByText,
+	viewportPercentage,
+}) =>
+	embedMarkup ||
+	contentOverline ||
+	contentHeading ||
+	contentDescription ||
+	contentAuthors ||
+	contentDate ||
+	promoImageURL ? (
+		<HeadingSection>
+			<Grid as="article" className={BLOCK_CLASS_NAME}>
+				{embedMarkup || promoImageURL ? (
+					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+						<Conditional
+							component={Link}
+							condition={contentUrl}
+							href={formatURL(contentUrl)}
+							onClick={registerSuccessEvent}
+							assistiveHidden
+						>
+							{embedMarkup ? (
+								<Video
+									aspectRatio={aspectRatio}
+									embedMarkup={embedMarkup}
+									viewportPercentage={viewportPercentage}
+								/>
+							) : (
+								<Image
+									alt={contentHeadline}
+									src={promoImageURL}
+									width={377}
+									height={283}
+									searchableField
+								/>
+							)}
+							{labelIconName ? (
+								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+									<Icon name={labelIconName} />
+									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+								</div>
+							) : null}
+						</Conditional>
+					</MediaItem>
+				) : null}
+				{contentOverline ||
+				contentHeading ||
+				contentDescription ||
+				contentAuthors ||
+				contentDate ? (
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						{contentOverline ? (
+							<Overline href={contentOverlineURL}>{contentOverline}</Overline>
+						) : null}
+						{contentHeading || contentDescription || contentAuthors || contentDate ? (
+							<Stack>
+								{contentHeading ? (
+									<Heading>
+										<Conditional
+											component={Link}
+											condition={contentUrl}
+											href={formatURL(contentUrl)}
+											onClick={registerSuccessEvent}
+										>
+											{contentHeading}
+										</Conditional>
+									</Heading>
+								) : null}
+								{contentDescription ? (
+									<Paragraph suppressContentEditableWarning {...editableDescription}>
+										{contentDescription}
+									</Paragraph>
+								) : null}
+								{contentAuthors || contentDate ? (
+									<Attribution>
+										<Join separator={Separator}>
+											{contentAuthors ? (
+												<Join separator={() => " "}>
+													{translationByText}
+													{contentAuthors}
+												</Join>
+											) : null}
+											{contentDate ? (
+												<DateDisplay dateTime={contentDate} dateString={displayDate} />
+											) : null}
+										</Join>
+									</Attribution>
+								) : null}
+							</Stack>
+						) : null}
+					</Stack>
+				) : null}
+			</Grid>
+		</HeadingSection>
+	) : null;
+
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
 		aspectRatio,
-		imageOrVideoLabelText,
 		imageOverrideURL,
 		playVideoInPlace,
 		showByline,
@@ -43,9 +159,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		showDescription,
 		showHeadline,
 		showImage,
-		showImageOrVideoLabel,
 		showOverline,
-		showVideoLabel,
 		viewportPercentage,
 	} = customFields;
 
@@ -140,7 +254,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			}`,
 		}) || null;
 
-	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const { editableContent, searchableField } = useEditableContent();
 	const { registerSuccessEvent } = useComponentContext();
 	const {
@@ -150,34 +263,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 		fallbackImage,
+		locale,
 	} = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-
-	// show the override url over the content image if it's present
-	// get the image from content if no override
-	const promoImage = imageOverrideURL || getImageFromANS(content) || fallbackImage;
-
-	// Start Overline data
-	const {
-		display: labelDisplay,
-		url: labelUrl,
-		text: labelText,
-	} = (content?.label && content?.label?.basic) || {};
-	const shouldUseLabel = !!labelDisplay;
-
-	const { _id: sectionUrl, name: sectionText } =
-		content?.websites?.[arcSite]?.website_section || {};
-
-	// Default to websites object data
-	let [text, url] = [sectionText, sectionUrl];
-
-	if (content?.owner?.sponsored) {
-		text = content?.label?.basic?.text || phrases.t("global.sponsored-content");
-		url = null;
-	} else if (shouldUseLabel) {
-		[text, url] = [labelText, labelUrl];
-	}
-	// End Overline data
 
 	const displayDate = localizeDateTime(
 		new Date(content?.display_date),
@@ -185,117 +272,90 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		language,
 		timeZone
 	);
+	const phrases = getTranslatedPhrases(locale || "en");
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")
 		: {};
 
+	const videoOrGalleryContent =
+		getType("video", content) ||
+		getType("gallery", content) ||
+		getType("video", content?.promo_items?.lead_art) ||
+		getType("gallery", content?.promo_items?.lead_art);
+
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[videoOrGalleryContent?.type];
+
+	const labelIconText = {
+		gallery: phrases.t("promo-label.gallery-text"),
+		video: phrases.t("promo-label.video-text"),
+	}[videoOrGalleryContent?.type];
+
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (content?.label && content?.label?.basic) || {};
+
+	const { _id: sectionUrl, name: sectionText } =
+		content?.websites?.[arcSite]?.website_section || {};
+
+	let [overlineText, overlineURL] = [sectionText, sectionUrl];
+	if (content?.owner?.sponsored) {
+		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
+		overlineURL = null;
+	} else if (labelDisplay) {
+		[overlineText, overlineURL] = [labelText, labelUrl];
+	}
+
 	const contentAuthors =
-		showByline && content?.credits?.by.length > 0
-			? formatAuthors(content?.credits?.by, phrases.t("global.and-text"))
+		showByline && content?.credits?.by?.length > 0
+			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
 			: null;
 	const contentDate = showDate ? content?.display_date : null;
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentHeadline = content?.headlines?.basic || null;
+	const contentOverline = showOverline ? overlineText : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const contentOverline = showOverline ? text : null;
+	const embedMarkup = showImage && playVideoInPlace && getVideoFromANS(content);
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const promoImageURL =
+		showImage && (imageOverrideURL || getImageFromANS(content) || fallbackImage);
 
-	return showImage ||
-		contentOverline ||
-		contentHeading ||
-		contentDescription ||
-		contentAuthors ||
-		contentDate ? (
-		<HeadingSection>
-			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{showImage ? (
-					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
-						<Conditional
-							component={Link}
-							condition={contentUrl}
-							href={formatURL(contentUrl)}
-							onClick={registerSuccessEvent}
-							assistiveHidden
-						>
-							{embedMarkup ? (
-								<Video
-									aspectRatio={aspectRatio}
-									embedMarkup={embedMarkup}
-									viewportPercentage={viewportPercentage}
-								/>
-							) : (
-								<Image
-									alt={content?.headlines?.basic || null}
-									src={promoImage}
-									width={377}
-									height={283}
-									searchableField
-								/>
-							)}
-							{showImageOrVideoLabel ? (
-								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Camera"} />
-									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
-								</div>
-							) : null}
-						</Conditional>
-					</MediaItem>
-				) : null}
-				{contentOverline ||
-				contentHeading ||
-				contentDescription ||
-				contentAuthors ||
-				contentDate ? (
-					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						{contentOverline ? <Overline href={url}>{contentOverline}</Overline> : null}
-						{contentHeading || contentDescription || contentAuthors || contentDate ? (
-							<Stack>
-								{contentHeading ? (
-									<Heading>
-										<Conditional
-											component={Link}
-											condition={content?.websites?.[arcSite]?.website_url}
-											href={formatURL(content?.websites?.[arcSite]?.website_url)}
-											onClick={registerSuccessEvent}
-										>
-											{contentHeading}
-										</Conditional>
-									</Heading>
-								) : null}
-								{contentDescription ? (
-									<Paragraph suppressContentEditableWarning {...editableDescription}>
-										{contentDescription}
-									</Paragraph>
-								) : null}
-								{contentAuthors || contentDate ? (
-									<Attribution>
-										<Join separator={Separator}>
-											{contentAuthors ? (
-												<Join separator={() => " "}>
-													{phrases.t("global.by-text")}
-													{contentAuthors}
-												</Join>
-											) : null}
-											{contentDate ? (
-												<DateDisplay dateTime={contentDate} dateString={displayDate} />
-											) : null}
-										</Join>
-									</Attribution>
-								) : null}
-							</Stack>
-						) : null}
-					</Stack>
-				) : null}
-			</Grid>
-		</HeadingSection>
-	) : null;
+	return (
+		<LargePromoPresentation
+			aspectRatio={aspectRatio}
+			contentAuthors={contentAuthors}
+			contentDate={contentDate}
+			contentDescription={contentDescription}
+			contentHeading={contentHeading}
+			contentHeadline={contentHeadline}
+			contentOverline={contentOverline}
+			contentOverlineURL={overlineURL}
+			contentUrl={contentUrl}
+			displayDate={displayDate}
+			editableDescription={editableDescription}
+			embedMarkup={embedMarkup}
+			imageSearchField={imageSearchField}
+			labelIconName={labelIconName}
+			labelIconText={labelIconText}
+			promoImageURL={promoImageURL}
+			registerSuccessEvent={registerSuccessEvent}
+			searchableField={searchableField}
+			translationByText={phrases.t("global.by-text")}
+			viewportPercentage={viewportPercentage}
+		/>
+	);
 };
 
 const LargePromo = ({ customFields }) => {
 	const { isAdmin, arcSite } = useFusionContext();
 	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-
+	//
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}

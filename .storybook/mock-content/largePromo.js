@@ -69,7 +69,7 @@ export const largePromoMock = {
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",
 		},
 	},
-	type: "video",
+	type: "story",
 	embed_html: `<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>`,
 	website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
 	websites: {

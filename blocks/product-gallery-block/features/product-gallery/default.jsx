@@ -11,9 +11,9 @@ const BLOCK_CLASS_NAME = "b-product-gallery";
 
 export function ProductGalleryDisplay(props) {
 	const { data, id, label, isFeaturedImageEnabled, resizerAppVersion } = props;
-	const carouselItems = data?.schema?.productGallery?.value?.assets.filter(
-		(asset) => asset.type === "image"
-	);
+	const carouselItems = data?.schema?.productGallery?.value?.assets
+		.filter((asset) => asset.type === "image")
+		.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
 	return (
 		<Carousel

@@ -32,94 +32,42 @@ import {
 
 const BLOCK_CLASS_NAME = "b-large-promo";
 
+const getType = (type, content) => (content?.type === type ? content : undefined);
+
 export const LargePromoPresentation = (props) => {
 	const {
-		arcSite,
 		aspectRatio,
-		content,
+		contentHeadline,
+		contentOverline,
+		contentOverlineURL,
+		contentHeading,
+		contentDescription,
+		contentAuthors,
+		contentDate,
+		contentUrl,
 		displayDate,
 		editableDescription,
-		imageOverrideURL,
-		playVideoInPlace,
-		promoImage,
+		embedMarkup,
+		imageSearchField,
+		labelIconName,
+		labelIconText,
+		promoImageURL,
 		registerSuccessEvent,
 		searchableField,
-		showByline,
-		showDate,
-		showDescription,
-		showHeadline,
-		showImage,
-		showOverline,
-		text,
-		url,
+		translationByText,
 		viewportPercentage,
 	} = props;
 
-	// using phrases here to emphasize that gallery and video label come from phrases
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-
-	// start content flag refactoring
-	// derivative data
-
-	const contentAuthors =
-		showByline && content?.credits?.by.length > 0
-			? formatAuthors(content?.credits?.by, phrases.t("global.and-text"))
-			: null;
-	const contentDate = showDate ? content?.display_date : null;
-	const contentDescription = showDescription ? content?.description?.basic : null;
-	const contentHeading = showHeadline ? content?.headlines?.basic : null;
-	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const contentOverline = showOverline ? text : null;
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-	// end content flag refactoring
-
-	const byText = phrases.t("global.by-text");
-
-	const { type } = content;
-
-	// get the type
-	// if image, then show a label. Make that label text to be the translated text from
-	// https://github.com/WPMedia/arc-themes-blocks/blob/arc-themes-release-version-1.22/blocks/shared-styles/_children/promo-label/index.jsx#L36
-	// show the camera icon
-
-	// if video, then show the video label. Get from the internationalization service
-	// show the video icon
-
-	// if neither video nor image, don't show a label nor a icon
-	let showImageOrVideoLabel = false;
-	let showVideoLabel = false;
-	let imageOrVideoLabelText = "";
-
-	if (type === "gallery") {
-		showImageOrVideoLabel = true;
-		showVideoLabel = false; // redundant
-		imageOrVideoLabelText = phrases.t("promo-label.gallery-text");
-	}
-
-	if (type === "video") {
-		showImageOrVideoLabel = true;
-		showVideoLabel = true;
-		imageOrVideoLabelText = phrases.t("promo-label.video-text");
-	}
-
-	// todo: lead art edgecase
-	// look in the promo label and shared styles file https://github.com/WPMedia/arc-themes-blocks/blob/arc-themes-release-version-1.22/blocks/shared-styles/_children/promo-image/discover.js#L17
-
-	// play in place logic
-	// if play in place true,
-	// then extract embed markup
-
-	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
-
-	return showImage ||
+	return embedMarkup ||
 		contentOverline ||
 		contentHeading ||
 		contentDescription ||
 		contentAuthors ||
-		contentDate ? (
+		contentDate ||
+		promoImageURL ? (
 		<HeadingSection>
 			<Grid as="article" className={BLOCK_CLASS_NAME}>
-				{showImage ? (
+				{embedMarkup || promoImageURL ? (
 					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 						<Conditional
 							component={Link}
@@ -136,17 +84,17 @@ export const LargePromoPresentation = (props) => {
 								/>
 							) : (
 								<Image
-									alt={content?.headlines?.basic || null}
-									src={promoImage}
+									alt={contentHeadline}
+									src={promoImageURL}
 									width={377}
 									height={283}
 									searchableField
 								/>
 							)}
-							{showImageOrVideoLabel ? (
+							{labelIconName ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={showVideoLabel ? "Play" : "Camera"} />
-									<span className={`${BLOCK_CLASS_NAME}__label`}>{imageOrVideoLabelText}</span>
+									<Icon name={labelIconName} />
+									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
 								</div>
 							) : null}
 						</Conditional>
@@ -158,15 +106,17 @@ export const LargePromoPresentation = (props) => {
 				contentAuthors ||
 				contentDate ? (
 					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
-						{contentOverline ? <Overline href={url}>{contentOverline}</Overline> : null}
+						{contentOverline ? (
+							<Overline href={contentOverlineURL}>{contentOverline}</Overline>
+						) : null}
 						{contentHeading || contentDescription || contentAuthors || contentDate ? (
 							<Stack>
 								{contentHeading ? (
 									<Heading>
 										<Conditional
 											component={Link}
-											condition={content?.websites?.[arcSite]?.website_url}
-											href={formatURL(content?.websites?.[arcSite]?.website_url)}
+											condition={contentUrl}
+											href={formatURL(contentUrl)}
 											onClick={registerSuccessEvent}
 										>
 											{contentHeading}
@@ -183,7 +133,7 @@ export const LargePromoPresentation = (props) => {
 										<Join separator={Separator}>
 											{contentAuthors ? (
 												<Join separator={() => " "}>
-													{byText}
+													{translationByText}
 													{contentAuthors}
 												</Join>
 											) : null}
@@ -205,7 +155,6 @@ export const LargePromoPresentation = (props) => {
 const LargePromoItem = ({ customFields, arcSite }) => {
 	const {
 		aspectRatio,
-		imageOrVideoLabelText,
 		imageOverrideURL,
 		playVideoInPlace,
 		showByline,
@@ -317,34 +266,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
 		},
 		fallbackImage,
+		locale,
 	} = getProperties(arcSite);
-	const phrases = getTranslatedPhrases(getProperties(arcSite).locale || "en");
-
-	// show the override url over the content image if it's present
-	// get the image from content if no override
-	const promoImage = imageOverrideURL || getImageFromANS(content) || fallbackImage;
-
-	// Start Overline data
-	const {
-		display: labelDisplay,
-		url: labelUrl,
-		text: labelText,
-	} = (content?.label && content?.label?.basic) || {};
-	const shouldUseLabel = !!labelDisplay;
-
-	const { _id: sectionUrl, name: sectionText } =
-		content?.websites?.[arcSite]?.website_section || {};
-
-	// Default to websites object data
-	let [text, url] = [sectionText, sectionUrl];
-
-	if (content?.owner?.sponsored) {
-		text = content?.label?.basic?.text || phrases.t("global.sponsored-content");
-		url = null;
-	} else if (shouldUseLabel) {
-		[text, url] = [labelText, labelUrl];
-	}
-	// End Overline data
 
 	const displayDate = localizeDateTime(
 		new Date(content?.display_date),
@@ -352,32 +275,81 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 		language,
 		timeZone
 	);
+	const phrases = getTranslatedPhrases(locale || "en");
 
 	const editableDescription = content?.description
 		? editableContent(content, "description.basic")
 		: {};
 
+	const videoOrGalleryContent =
+		getType("video", content) ||
+		getType("gallery", content) ||
+		getType("video", content?.promo_items?.lead_art) ||
+		getType("gallery", content?.promo_items?.lead_art);
+
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[videoOrGalleryContent?.type];
+
+	const labelIconText = {
+		gallery: phrases.t("promo-label.gallery-text"),
+		video: phrases.t("promo-label.video-text"),
+	}[videoOrGalleryContent?.type];
+
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (content?.label && content?.label?.basic) || {};
+
+	const { _id: sectionUrl, name: sectionText } =
+		content?.websites?.[arcSite]?.website_section || {};
+
+	let [overlineText, overlineURL] = [sectionText, sectionUrl];
+	if (content?.owner?.sponsored) {
+		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
+		overlineURL = null;
+	} else if (labelDisplay) {
+		[overlineText, overlineURL] = [labelText, labelUrl];
+	}
+
+	const contentAuthors =
+		showByline && content?.credits?.by?.length > 0
+			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
+			: null;
+	const contentDate = showDate ? content?.display_date : null;
+	const contentDescription = showDescription ? content?.description?.basic : null;
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentHeadline = content?.headlines?.basic || null;
+	const contentOverline = showOverline ? overlineText : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const embedMarkup = showImage && playVideoInPlace && getVideoFromANS(content);
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const promoImageURL =
+		showImage && (imageOverrideURL || getImageFromANS(content) || fallbackImage);
+
 	return (
 		<LargePromoPresentation
-			arcSite={arcSite}
 			aspectRatio={aspectRatio}
-			content={content}
+			contentOverline={contentOverline}
+			contentOverlineURL={overlineURL}
+			contentHeading={contentHeading}
+			contentHeadline={contentHeadline}
+			contentDescription={contentDescription}
+			contentAuthors={contentAuthors}
+			contentDate={contentDate}
+			contentUrl={contentUrl}
 			displayDate={displayDate}
 			editableDescription={editableDescription}
-			imageOrVideoLabelText={imageOrVideoLabelText}
-			phrases={phrases}
-			playVideoInPlace={playVideoInPlace}
-			promoImage={promoImage}
+			embedMarkup={embedMarkup}
+			labelIconName={labelIconName}
+			labelIconText={labelIconText}
+			imageSearchField={imageSearchField}
+			promoImageURL={promoImageURL}
 			registerSuccessEvent={registerSuccessEvent}
 			searchableField={searchableField}
-			showByline={showByline}
-			showDate={showDate}
-			showDescription={showDescription}
-			showHeadline={showHeadline}
-			showImage={showImage}
-			showOverline={showOverline}
-			text={text}
-			url={url}
+			translationByText={phrases.t("global.by-text")}
 			viewportPercentage={viewportPercentage}
 		/>
 	);
@@ -386,7 +358,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 const LargePromo = ({ customFields }) => {
 	const { isAdmin, arcSite } = useFusionContext();
 	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-
+	//
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}

@@ -180,64 +180,74 @@ export const imageAndDescription = () => {
 
 export const withGalleryLabelAndImage = () => (
 	<LargePromoPresentation
-		arcSite="story-book"
-		byText="By"
-		contentDescription="This is a test story that can be used for breaking news situations like if a new baby panda was born."
-		displayDate="December 02, 2019 at  1:58 pm EST"
+		aspectRatio={16 / 9}
+		contentHeadline={MOCK_CONTENT.headlines.basic}
+		contentOverline="Health"
+		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
+		contentHeading={MOCK_CONTENT.headlines.basic}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
+		displayDate={MOCK_CONTENT.display_date}
+		editableDescription={MOCK_CONTENT.description.basic}
 		imageSearchField="imageURL"
-		promoImage="https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg"
+		labelIconName="Camera"
+		labelIconText="Gallery Icon"
+		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		showImage
-		showByline
-		showDescription
-		showDate
-		showHeadline
-		content={{
-			...MOCK_CONTENT,
-			type: "gallery",
-		}}
+		translationByText="By"
+		viewportPercentage={60}
 	/>
 );
 
 export const withVideoLabelAndImage = () => (
 	<LargePromoPresentation
-		arcSite="story-book"
-		byText="global.by-text"
-		contentDescription="This is a test story that can be used for breaking news situations like if a new baby panda was born."
-		displayDate="December 02, 2019 at  1:58 pm EST"
+		aspectRatio={16 / 9}
+		contentHeadline={MOCK_CONTENT.headlines.basic}
+		contentOverline="Health"
+		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
+		contentHeading={MOCK_CONTENT.headlines.basic}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
+		displayDate={MOCK_CONTENT.display_date}
+		editableDescription={MOCK_CONTENT.description.basic}
+		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"
-		promoImage="https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg"
+		labelIconName="Play"
+		labelIconText="Video Icon"
+		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		showImage
-		showByline
-		showDescription
-		showDate
-		showHeadline
-		content={{ ...MOCK_CONTENT, type: "video" }}
+		translationByText="By"
+		viewportPercentage={60}
 	/>
 );
 
 export const playVideoInPlaceOfImage = () => (
-	// const updatedCustomFields = {
-	// 	...allCustomFields,
-	// 	// playVideoInPlace will override showImage
-	// 	showImage: true,
-	// 	playVideoInPlace: true,
-	// 	aspectRatio: 16 / 9,
-	// };
-
 	<LargePromoPresentation
-		arcSite="story-book"
-		displayDate="December 02, 2019 at  1:58 pm EST"
+		aspectRatio={16 / 9}
+		contentHeadline={MOCK_CONTENT.headlines.basic}
+		contentOverline="Health"
+		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
+		contentHeading={MOCK_CONTENT.headlines.basic}
+		contentDescription={MOCK_CONTENT.description.basic}
+		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
+		contentDate={MOCK_CONTENT.display_date}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
+		displayDate={MOCK_CONTENT.display_date}
+		editableDescription={MOCK_CONTENT.description.basic}
+		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"
-		promoImage="https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg"
+		labelIconName="Play"
+		labelIconText="Video Icon"
+		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		showImage
-		showVideoLabel
-		content={{ ...MOCK_CONTENT, type: "video" }}
-		playVideoInPlace
+		translationByText="By"
+		viewportPercentage={60}
 	/>
 );

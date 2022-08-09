@@ -12,8 +12,8 @@ const BLOCK_CLASS_NAME = "b-product-content";
 const contentMapping = {
 	description: "description",
 	details: "schema.productDetails",
-	sizeAndFit: "schema.sizeAndFit",
-	shippingAndReturns: "schema.shippingAndReturns",
+	"size-and-fit": "schema.sizeAndFit",
+	"shipping-and-returns": "schema.shippingAndReturns",
 };
 
 const getNestedObject = (obj, path) => path.split(".").reduce((value, el) => value[el], obj);
@@ -64,16 +64,16 @@ ProductContent.propTypes = {
 		contentType: PropTypes.oneOf([
 			"description",
 			"details",
-			"sizeAndFit",
-			"shippingAndReturns",
+			"size-and-fit",
+			"shipping-and-returns",
 		]).tag({
 			defaultValue: "description",
 			label: "Product Content",
 			labels: {
 				description: "Product Description",
 				details: "Product Details",
-				sizeAndFit: "Size & Fit",
-				shippingAndReturns: "Shipping & Returns",
+				"size-and-fit": "Size & Fit",
+				"shipping-and-returns": "Shipping & Returns",
 			},
 		}),
 		headline: PropTypes.string.tag({

@@ -21,7 +21,7 @@
 		"pt": "Details",
 		"sv": "Details"
 	},
-	"product-content.sizeAndFit": {
+	"product-content.size-and-fit": {
 		"de": "Size & Fit",
 		"en": "Size & Fit",
 		"es": "Size & Fit",
@@ -32,7 +32,7 @@
 		"pt": "Size & Fit",
 		"sv": "Size & Fit"
 	},
-	"product-content.shippingAndReturns": {
+	"product-content.shipping-and-returns": {
 		"de": "Shipping & Returns",
 		"en": "Shipping & Returns",
 		"es": "Shipping & Returns",

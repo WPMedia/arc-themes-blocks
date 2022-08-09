@@ -747,6 +747,8 @@
 					color: var(--color-primary),
 				),
 				article-body-ol: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 					list-style-position: inside,
 					list-style-type: decimal,
 				),
@@ -805,6 +807,8 @@
 					),
 				),
 				article-body-ul: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 					list-style-position: inside,
 					list-style-type: disc,
 				),

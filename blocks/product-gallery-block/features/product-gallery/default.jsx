@@ -2,15 +2,18 @@ import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
 import { RESIZER_APP_VERSION } from "fusion:environment";
-// import getProperties from "fusion:properties";
-// import getTranslatedPhrases from "fusion:intl";
+import getProperties from "fusion:properties";
+import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Image } from "@wpmedia/arc-themes-components";
+import { Carousel, Icon, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 export function ProductGalleryDisplay(props) {
-	const { data, id, label, isFeaturedImageEnabled, resizerAppVersion } = props;
+	const { arcSite, data, id, isFeaturedImageEnabled, resizerAppVersion } = props;
+
+	const { locale } = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale);
 	const carouselItems = data?.schema?.productGallery?.value?.assets
 		.filter((asset) => asset.type === "image")
 		.slice(0, isFeaturedImageEnabled ? 9 : 8);
@@ -22,9 +25,19 @@ export function ProductGalleryDisplay(props) {
 			}`}
 			key={id}
 			id={id}
-			label={label}
+			label={phrases.t("product-gallery.aria-label")}
+			nextButton={
+				<Carousel.Button id={id} label={phrases.t("product-gallery.right-arrow-label")}>
+					<Icon name="ChevronRight" />
+				</Carousel.Button>
+			}
+			previousButton={
+				<Carousel.Button id={id} label={phrases.t("product-gallery.left-arrow-label")}>
+					<Icon name="ChevronLeft" />
+				</Carousel.Button>
+			}
 		>
-			{carouselItems?.map((item) => {
+			{carouselItems?.map((item, carouselIndex) => {
 				const { url, auth, alt_text: altText, _id: itemId } = item;
 
 				// take in app version that's the public key for the auth object in resizer v2
@@ -32,9 +45,10 @@ export function ProductGalleryDisplay(props) {
 				return (
 					<Carousel.Item
 						key={itemId}
-						// todo: add a label to the item
-						// need to update the item to take in classes
-						// className={`${index === 0 ? `${BLOCK_CLASS_NAME}__first-item` : ""}`}
+						label={`${phrases.t("product-gallery.slide-indicator", {
+							current: carouselIndex + 1,
+							maximum: carouselItems.length,
+						})}`}
 					>
 						<Image alt={altText} src={url} resizedOptions={{ auth: targetAuth }} />
 					</Carousel.Item>
@@ -47,23 +61,18 @@ function ProductGallery({ customFields }) {
 	const { isFeaturedImageEnabled } = customFields;
 	const { id } = useComponentContext();
 
-	const { /* arcSite , */ globalContent = {} } = useFusionContext();
+	const { arcSite, globalContent = {} } = useFusionContext();
 
 	if (!Object.keys(globalContent).length) {
 		return null;
 	}
 
-	// will get label from phrases
-	// const { locale } = getProperties(arcSite);
-	// const phrases = getTranslatedPhrases(locale);
-	const label = "label";
-
 	return (
 		<ProductGalleryDisplay
+			arcSite={arcSite}
 			data={globalContent}
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
-			label={label}
 			resizerAppVersion={RESIZER_APP_VERSION}
 		/>
 	);

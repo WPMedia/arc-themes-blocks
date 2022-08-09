@@ -1,0 +1,46 @@
+{
+	"product-gallery.aria-label": {
+		"de": "Products",
+		"en": "Products",
+		"es": "Products",
+		"fr": "Products",
+		"ja": "Products",
+		"ko": "Products",
+		"no": "Products",
+		"pt": "Products",
+		"sv": "Products"
+	},
+	"product-gallery.right-arrow-label": {
+		"de": "Next",
+		"en": "Next",
+		"es": "Next",
+		"fr": "Next",
+		"ja": "Next",
+		"ko": "Next",
+		"no": "Next",
+		"pt": "Next",
+		"sv": "Next"
+	},
+	"product-gallery.left-arrow-label": {
+		"de": "Previous",
+		"en": "Previous",
+		"es": "Previous",
+		"fr": "Previous",
+		"ja": "Previous",
+		"ko": "Previous",
+		"no": "Previous",
+		"pt": "Previous",
+		"sv": "Previous"
+	},
+	"product-gallery.slide-indicator": {
+		"de": "Slide %{current} of %{maximum}",
+		"en": "Slide %{current} of %{maximum}",
+		"es": "Slide %{current} of %{maximum}",
+		"fr": "Slide %{current} of %{maximum}",
+		"ja": "Slide %{current} of %{maximum}",
+		"ko": "Slide %{current} of %{maximum}",
+		"no": "Slide %{current} of %{maximum}",
+		"pt": "Slide %{current} of %{maximum}",
+		"sv": "Slide %{current} of %{maximum}"
+	}
+}

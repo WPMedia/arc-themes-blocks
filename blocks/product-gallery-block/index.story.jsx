@@ -271,7 +271,7 @@ export const defaultFeaturedImageDisabled = () => (
 		data={MOCK_GLOBAL_CONTENT}
 		isFeaturedImageEnabled={false}
 		resizerAppVersion={2}
-		label="label"
+		arcSite="story-book"
 		id="id"
 	/>
 );
@@ -281,7 +281,7 @@ export const featuredImageEnabled = () => (
 		data={MOCK_GLOBAL_CONTENT}
 		isFeaturedImageEnabled
 		resizerAppVersion={2}
-		label="label"
 		id="id"
+		arcSite="story-book"
 	/>
 );

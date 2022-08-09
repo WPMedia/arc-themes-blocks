@@ -676,6 +676,9 @@
 				),
 				product-gallery: (
 					components: (
+						image: (
+							width: auto,
+						),
 						carousel: (
 							--slides: 1,
 							--slide-width: 100%,

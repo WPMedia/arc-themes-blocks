@@ -10,7 +10,7 @@ import { Carousel, Icon, Image } from "@wpmedia/arc-themes-components";
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 export function ProductGalleryDisplay(props) {
-	const { arcSite, data, id, isFeaturedImageEnabled, resizerAppVersion } = props;
+	const { arcSite, data, id, isFeaturedImageEnabled, resizerAppVersion, resizerURL } = props;
 
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
@@ -40,6 +40,9 @@ export function ProductGalleryDisplay(props) {
 			{carouselItems?.map((item, carouselIndex) => {
 				const { url, auth, alt_text: altText, _id: itemId } = item;
 
+				// is this a featured image?
+				const isFeaturedImage = isFeaturedImageEnabled && carouselIndex === 0;
+
 				// take in app version that's the public key for the auth object in resizer v2
 				const targetAuth = auth[resizerAppVersion];
 				return (
@@ -50,7 +53,25 @@ export function ProductGalleryDisplay(props) {
 							maximum: carouselItems.length,
 						})}`}
 					>
-						<Image alt={altText} src={url} resizedOptions={{ auth: targetAuth }} />
+						<Image
+							alt={altText}
+							src={url}
+							resizedOptions={{ auth: targetAuth }}
+							width={372}
+							height={279}
+							responsiveImages={[150, 372, 500, 1500, 2000]}
+							resizerURL={resizerURL}
+							sizes={[
+								{
+									isDefault: true,
+									sourceSizeValue: "100vw",
+								},
+								{
+									sourceSizeValue: isFeaturedImage ? "50vw" : "25vw",
+									mediaCondition: "(min-width: 48rem)",
+								},
+							]}
+						/>
 					</Carousel.Item>
 				);
 			})}

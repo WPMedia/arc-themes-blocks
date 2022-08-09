@@ -47,7 +47,7 @@ const MOCK_GLOBAL_CONTENT = {
 							locality: "Barcelona",
 						},
 						auth: {
-							2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+							2: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
 						},
 						caption:
 							"Portrait of confident businessman with arms crossed against rolled fabric. Executive is smiling while standing against shelves. He is wearing smart casuals in textile factory.",
@@ -129,7 +129,7 @@ const MOCK_GLOBAL_CONTENT = {
 							locality: "Barcelona",
 						},
 						auth: {
-							2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+							2: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
 						},
 						caption:
 							"Portrait of confident businessman with arms crossed against rolled fabric. Executive is smiling while standing against shelves. He is wearing smart casuals in textile factory.",
@@ -211,7 +211,7 @@ const MOCK_GLOBAL_CONTENT = {
 							locality: "Barcelona",
 						},
 						auth: {
-							2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+							2: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
 						},
 						caption:
 							"Portrait of confident businessman with arms crossed against rolled fabric. Executive is smiling while standing against shelves. He is wearing smart casuals in textile factory.",
@@ -273,6 +273,7 @@ export const defaultFeaturedImageDisabled = () => (
 		resizerAppVersion={2}
 		arcSite="story-book"
 		id="id"
+		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 	/>
 );
 
@@ -283,5 +284,6 @@ export const featuredImageEnabled = () => (
 		resizerAppVersion={2}
 		id="id"
 		arcSite="story-book"
+		resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 	/>
 );

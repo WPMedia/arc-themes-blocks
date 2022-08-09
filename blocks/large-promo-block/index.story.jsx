@@ -181,23 +181,12 @@ export const imageAndDescription = () => {
 export const withGalleryLabelAndImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentHeadline={MOCK_CONTENT.headlines.basic}
-		contentOverline="Health"
-		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
-		displayDate={MOCK_CONTENT.display_date}
-		editableDescription={MOCK_CONTENT.description.basic}
 		imageSearchField="imageURL"
 		labelIconName="Camera"
 		labelIconText="Gallery Icon"
 		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		translationByText="By"
 		viewportPercentage={60}
 	/>
 );
@@ -205,24 +194,12 @@ export const withGalleryLabelAndImage = () => (
 export const withVideoLabelAndImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentHeadline={MOCK_CONTENT.headlines.basic}
-		contentOverline="Health"
-		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
-		displayDate={MOCK_CONTENT.display_date}
-		editableDescription={MOCK_CONTENT.description.basic}
 		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"
 		labelIconName="Play"
 		labelIconText="Video Icon"
-		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		translationByText="By"
 		viewportPercentage={60}
 	/>
 );
@@ -230,24 +207,10 @@ export const withVideoLabelAndImage = () => (
 export const playVideoInPlaceOfImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
-		contentAuthors="Sara Carothers, Taylor Doe, and John Doe"
-		contentDate={MOCK_CONTENT.display_date}
-		contentDescription={MOCK_CONTENT.description.basic}
-		contentHeading={MOCK_CONTENT.headlines.basic}
-		contentHeadline={MOCK_CONTENT.headlines.basic}
-		contentOverline="Health"
-		contentOverlineURL={MOCK_CONTENT.promo_items.basic.url}
-		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
-		displayDate={MOCK_CONTENT.display_date}
-		editableDescription={MOCK_CONTENT.description.basic}
 		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"
-		labelIconName="Play"
-		labelIconText="Video Icon"
-		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
-		translationByText="By"
 		viewportPercentage={60}
 	/>
 );

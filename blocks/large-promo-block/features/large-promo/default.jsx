@@ -355,7 +355,6 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 const LargePromo = ({ customFields }) => {
 	const { isAdmin, arcSite } = useFusionContext();
 	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-	//
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}

@@ -799,7 +799,12 @@
 					gap: var(--global-spacing-1),
 				),
 				video-player: (
+					gap: var(--global-spacing-4),
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							line-height: var(--heading-level-3-line-height),
+						),
 						media-item: (
 							width: 100%,
 							margin: auto,
@@ -807,13 +812,13 @@
 					),
 				),
 				video-player-feature: (
-					gap: 0,
+					gap: var(--global-spacing-6),
 					components: (
 						media-item-fig-caption: (
-							margin-bottom: var(--global-spacing-2),
+							margin-bottom: 0,
 							margin-left: var(--global-spacing-4),
 							margin-right: var(--global-spacing-4),
-							margin-top: var(--global-spacing-2),
+							margin-top: 0,
 						),
 					),
 				),
@@ -822,34 +827,9 @@
 					width: var(--content-scale-width),
 					components: (
 						stack: (
-							gap: var(--global-spacing-3),
+							gap: var(--global-spacing-4),
 						),
 					),
-				),
-				video-player-inline: (
-					gap: var(--global-spacing-3),
-					components: (
-						heading: (
-							font-size: var(--heading-level-4-font-size),
-							line-height: var(--heading-level-4-line-height),
-						),
-						media-item: (
-							width: 100%,
-							margin: auto,
-						),
-						media-item-fig-caption: (
-							margin-bottom: 0,
-							margin-left: 0,
-							margin-right: 0,
-							margin-top: var(--global-spacing-2),
-						),
-						stack: (
-							gap: 0,
-						),
-					),
-				),
-				video-player-inline-video: (
-					gap: 0,
 				),
 			),
 		),
@@ -985,21 +965,6 @@
 				),
 				story-carousel-title: (
 					font-size: var(--heading-level-5-font-size),
-				),
-				video-player-feature-meta: (
-					components: (
-						paragraph: (
-							font-size: var(--body-font-size),
-						),
-					),
-				),
-				video-player-inline: (
-					components: (
-						heading: (
-							font-size: var(--heading-level-3-font-size),
-							line-height: var(--heading-level-3-line-height),
-						),
-					),
 				),
 			),
 		),

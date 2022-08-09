@@ -73,7 +73,7 @@ ProductContent.propTypes = {
 				description: "Product Description",
 				details: "Product Details",
 				sizeAndFit: "Size & Fit",
-				shippingAndReturns: "shipping & Returns",
+				shippingAndReturns: "Shipping & Returns",
 			},
 		}),
 		headline: PropTypes.string.tag({

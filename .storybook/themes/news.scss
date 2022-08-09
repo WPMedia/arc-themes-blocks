@@ -886,6 +886,11 @@
 				),
 				double-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),
@@ -1430,6 +1435,11 @@
 				),
 				quad-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),
@@ -1608,6 +1618,11 @@
 				),
 				single-column-regular-main: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-11),
 						),
@@ -1685,6 +1700,11 @@
 				),
 				triple-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
 						),

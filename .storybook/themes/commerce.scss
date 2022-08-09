@@ -550,6 +550,19 @@
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-5),
+					grid-template-rows: 1fr auto,
+					max-height: 100vh,
+					components: (
+						image: (
+							max-height: 100vh,
+							object-fit: cover,
+							width: 100%,
+						),
+						picture: (
+							display: flex,
+							overflow: hidden,
+						),
+					),
 				),
 				hero: (
 					color: var(--global-black),
@@ -564,6 +577,9 @@
 							font-size: var(--global-font-size-11),
 							line-height: var(--global-line-height-7),
 						),
+						image: (
+							max-height: 100vh,
+						),
 						paragraph: (
 							font-size: var(--body-font-size),
 							line-height: var(--global-line-height-3),
@@ -575,12 +591,6 @@
 				),
 				hero-dark: (
 					color: var(--global-black),
-				),
-				hero-image: (
-					max-height: 100vh,
-				),
-				hero-image-stacked: (
-					max-height: 100vh,
 				),
 				hero-text-overlay: (
 					margin: 0 auto,

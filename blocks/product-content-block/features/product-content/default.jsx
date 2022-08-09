@@ -12,6 +12,8 @@ const BLOCK_CLASS_NAME = "b-product-content";
 const contentMapping = {
 	description: "description",
 	details: "schema.productDetails",
+	sizeAndFit: "schema.sizeAndFit",
+	shippingAndReturns: "schema.shippingAndReturns",
 };
 
 const getNestedObject = (obj, path) => path.split(".").reduce((value, el) => value[el], obj);
@@ -59,12 +61,19 @@ ProductContent.icon = "content-browser-edit";
 
 ProductContent.propTypes = {
 	customFields: PropTypes.shape({
-		contentType: PropTypes.oneOf(["description", "details"]).tag({
+		contentType: PropTypes.oneOf([
+			"description",
+			"details",
+			"sizeAndFit",
+			"shippingAndReturns",
+		]).tag({
 			defaultValue: "description",
 			label: "Product Content",
 			labels: {
 				description: "Product Description",
 				details: "Product Details",
+				sizeAndFit: "Size & Fit",
+				shippingAndReturns: "shipping & Returns",
 			},
 		}),
 		headline: PropTypes.string.tag({

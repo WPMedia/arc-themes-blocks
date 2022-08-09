@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext, useComponentContext } from "fusion:context";
-import { RESIZER_APP_VERSION } from "fusion:environment";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
@@ -95,6 +95,7 @@ function ProductGallery({ customFields }) {
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
 			resizerAppVersion={RESIZER_APP_VERSION}
+			resizerURL={RESIZER_URL}
 		/>
 	);
 }

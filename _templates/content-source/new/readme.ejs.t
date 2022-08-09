@@ -6,7 +6,7 @@ to: blocks/<%= h.inflection.dasherize(block_name) %>-content-source-block/README
 _Please provide a 1-2 sentence description of what the @wpmedia/<%= h.inflection.dasherize(block_name) %>-content-source-block is and what it does._
 
 ## ANS Schema
-Outline any schema information requirements necessary to know for ths block
+Outline any schema information requirements necessary to know for this block
 
 ## Configurable Params
 None

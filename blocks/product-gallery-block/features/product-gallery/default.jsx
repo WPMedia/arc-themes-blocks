@@ -61,7 +61,7 @@ export function ProductGalleryDisplay({
 							resizedOptions={{ auth: targetAuth }}
 							width={375}
 							height={375}
-							responsiveImages={[150, 372, 500, 1500, 2000]}
+							responsiveImages={[150, 375, 500, 1500, 2000]}
 							resizerURL={resizerURL}
 							sizes={[
 								{

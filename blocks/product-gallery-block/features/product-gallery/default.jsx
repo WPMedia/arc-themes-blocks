@@ -59,8 +59,8 @@ export function ProductGalleryDisplay({
 							alt={altText}
 							src={url}
 							resizedOptions={{ auth: targetAuth }}
-							width={372}
-							height={279}
+							width={375}
+							height={375}
 							responsiveImages={[150, 372, 500, 1500, 2000]}
 							resizerURL={resizerURL}
 							sizes={[
@@ -69,10 +69,14 @@ export function ProductGalleryDisplay({
 									isDefault: true,
 									sourceSizeValue: "100vw",
 								},
-								isFeaturedImage || {
-									sourceSizeValue: "50vw",
-									mediaCondition: "(min-width: 48rem)",
-								},
+								...(isFeaturedImage
+									? []
+									: [
+											{
+												sourceSizeValue: "50vw",
+												mediaCondition: "(min-width: 48rem)",
+											},
+									  ]),
 							]}
 						/>
 					</Carousel.Item>

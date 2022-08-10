@@ -561,7 +561,7 @@
 				article-body-blockquote: (
 					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
 					font-style: italic,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-2),
 					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
 					text-align: left,
 					components: (
@@ -757,14 +757,14 @@
 						inset 0 -5px 0 0 var(--border-color),
 						inset 0 5px 0 0 var(--border-color),
 					),
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-4),
 					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
 					text-align: center,
 					components: (
 						paragraph: (
 							font-style: italic,
 							font-size: var(--heading-level-5-font-size),
-							font-weight: bold,
+							font-weight: var(--global-font-weight-7),
 							line-height: var(--heading-level-5-line-height),
 						),
 					),
@@ -792,7 +792,7 @@
 				),
 				article-body-table-th: (
 					border: 1px solid var(--border-color),
-					font-weight: bold,
+					font-weight: var(--global-font-weight-7),
 					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				article-body-table-thead: (
@@ -1150,7 +1150,7 @@
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
 					gap: 0,
-					font-weight: bold,
+					font-weight: var(--global-font-weight-7),
 					list-style: none,
 					position: relative,
 					components: (

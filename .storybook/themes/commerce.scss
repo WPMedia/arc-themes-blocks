@@ -650,6 +650,7 @@
 					components: (
 						heading: (
 							-webkit-line-clamp: 2,
+							font-size: var(--body-font-size),
 							font-weight: var(--body-font-weight),
 							line-height: var(--body-line-height),
 						),
@@ -928,9 +929,6 @@
 						),
 					),
 				),
-				product-assortment-carousel-title: (
-					font-size: var(--heading-level-5-font-size),
-				),
 				quilted-image: (
 					max-width: var(--content-scale-width),
 					width: 100%,
@@ -1001,6 +999,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/product-assortment-carousel-block";
 @use "../../blocks/product-featured-image-block";
 @use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";

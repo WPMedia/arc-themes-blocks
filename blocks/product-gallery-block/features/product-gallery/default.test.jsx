@@ -153,23 +153,12 @@ describe("Product Gallery", () => {
 		expect(container.firstChild).toBeNull();
 	});
 
-	it("renders with default classname without featured image enabled modifier", () => {
+	it("renders with default classname for gallery", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: MOCK_GLOBAL_CONTENT,
 		}));
 		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.querySelectorAll(".b-product-gallery").length).toBe(1);
-		expect(container.querySelectorAll(".b-product-gallery--featured-image-enabled").length).toBe(0);
-	});
-	it("featured image enabled will add featured image enabled classname modifier", () => {
-		useFusionContext.mockImplementation(() => ({
-			globalContent: MOCK_GLOBAL_CONTENT,
-		}));
-		const { container } = render(
-			<ProductGallery customFields={{ ...DEFAULT_CUSTOM_FIELDS, isFeaturedImageEnabled: true }} />
-		);
-		expect(container.querySelectorAll(".b-product-gallery").length).toBe(1);
-		expect(container.querySelectorAll(".b-product-gallery--featured-image-enabled").length).toBe(1);
 	});
 	it("renders carousel and items", () => {
 		useFusionContext.mockImplementation(() => ({

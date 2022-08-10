@@ -599,6 +599,9 @@
 						image: (
 							max-height: 100vh,
 						),
+						paragraph: (
+							font-family: var(--font-family-primary),
+						),
 					),
 				),
 				hero-light: (
@@ -621,6 +624,7 @@
 					margin: 0 auto,
 					components: (
 						paragraph: (
+							align-self: center,
 							max-width: 24rem,
 						),
 					),

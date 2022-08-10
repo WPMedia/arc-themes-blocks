@@ -22,9 +22,7 @@ export function ProductGalleryDisplay({
 
 	return (
 		<Carousel
-			className={`${BLOCK_CLASS_NAME}${
-				isFeaturedImageEnabled ? ` ${BLOCK_CLASS_NAME}--featured-image-enabled` : ""
-			}`}
+			className={BLOCK_CLASS_NAME}
 			key={id}
 			id={id}
 			label={phrases.t("product-gallery.aria-label")}
@@ -50,6 +48,7 @@ export function ProductGalleryDisplay({
 				return (
 					<Carousel.Item
 						key={itemId}
+						className={isFeaturedImage ? `${BLOCK_CLASS_NAME}__featured-slide` : ""}
 						label={`${phrases.t("product-gallery.slide-indicator", {
 							current: carouselIndex + 1,
 							maximum: carouselItems.length,

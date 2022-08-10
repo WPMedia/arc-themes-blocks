@@ -1,14 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-product-gallery {
-	&--featured-image-enabled {
-		.c-carousel__slide:first-child {
-			@include scss.block-components("product-gallery-featured-image-enabled-first-child");
-			@include scss.block-properties("product-gallery-featured-image-enabled-first-child");
-		}
-		@include scss.block-components("product-gallery-featured-image-enabled");
-		@include scss.block-properties("product-gallery-featured-image-enabled");
+	&__featured-slide {
+		@include scss.block-components("product-gallery-featured-slide");
+		@include scss.block-properties("product-gallery-featured-slide");
 	}
+
 	@include scss.block-components("product-gallery");
 	@include scss.block-properties("product-gallery");
 }

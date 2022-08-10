@@ -9,10 +9,14 @@ import { Carousel, Icon, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
-export function ProductGalleryDisplay(props) {
-	const { arcSite, carouselItems, id, isFeaturedImageEnabled, resizerAppVersion, resizerURL } =
-		props;
-
+export function ProductGalleryDisplay({
+	arcSite,
+	carouselItems,
+	id,
+	isFeaturedImageEnabled,
+	resizerAppVersion,
+	resizerURL,
+}) {
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 

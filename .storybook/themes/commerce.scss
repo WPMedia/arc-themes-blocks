@@ -569,6 +569,19 @@
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-5),
+					grid-template-rows: 1fr auto,
+					max-height: 100vh,
+					components: (
+						image: (
+							max-height: 100vh,
+							object-fit: cover,
+							width: 100%,
+						),
+						picture: (
+							display: flex,
+							overflow: hidden,
+						),
+					),
 				),
 				hero: (
 					color: var(--global-black),
@@ -583,6 +596,9 @@
 							font-size: var(--heading-level-2-font-size),
 							line-height: var(--heading-level-2-line-height),
 						),
+						image: (
+							max-height: 100vh,
+						),
 					),
 				),
 				hero-light: (
@@ -590,14 +606,6 @@
 				),
 				hero-dark: (
 					color: var(--global-black),
-				),
-				hero-image: (
-					max-height: 65vh,
-					width: 100%,
-				),
-				hero-image-stacked: (
-					height: auto,
-					width: 100%,
 				),
 				hero-text-overlay: (
 					margin: 0 auto,
@@ -688,6 +696,19 @@
 							font-size: var(--heading-level-6-font-size),
 							font-weight: var(--body-font-weight),
 							line-height: var(--heading-level-6-line-height),
+							gap: var(--global-spacing-2),
+						),
+						price-list: (
+							color: var(--global-neutral-5),
+							text-decoration: line-through,
+						),
+					),
+				),
+				product-information-single-price: (
+					components: (
+						price-list: (
+							color: var(--global-neutral-7),
+							text-decoration: none,
 						),
 					),
 				),
@@ -909,10 +930,6 @@
 							line-height: var(--heading-level-2-line-height),
 						),
 					),
-				),
-				hero-image: (
-					max-height: auto,
-					width: 100%,
 				),
 				hero-text-left: (
 					components: (

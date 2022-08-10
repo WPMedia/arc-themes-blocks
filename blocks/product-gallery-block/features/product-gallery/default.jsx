@@ -63,11 +63,12 @@ export function ProductGalleryDisplay(props) {
 							resizerURL={resizerURL}
 							sizes={[
 								{
+									// featured image should take up full width of the screen on mobile and desktop
 									isDefault: true,
 									sourceSizeValue: "100vw",
 								},
-								{
-									sourceSizeValue: isFeaturedImage ? "50vw" : "25vw",
+								isFeaturedImage || {
+									sourceSizeValue: "50vw",
 									mediaCondition: "(min-width: 48rem)",
 								},
 							]}

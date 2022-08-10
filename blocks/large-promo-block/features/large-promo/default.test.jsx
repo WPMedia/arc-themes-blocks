@@ -294,7 +294,6 @@ describe("Large Promo", () => {
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
 	});
 
-	// image icon not working as expected
 	it("should render image icon label", () => {
 		const { container } = render(
 			<LargePromo

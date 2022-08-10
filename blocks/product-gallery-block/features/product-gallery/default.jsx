@@ -20,6 +20,8 @@ export function ProductGalleryDisplay({
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
+	const shortenedCarouselItems = carouselItems.slice(0, isFeaturedImageEnabled ? 9 : 8);
+
 	return (
 		<Carousel
 			className={BLOCK_CLASS_NAME}
@@ -37,7 +39,7 @@ export function ProductGalleryDisplay({
 				</Carousel.Button>
 			}
 		>
-			{carouselItems?.map((item, carouselIndex) => {
+			{shortenedCarouselItems?.map((item, carouselIndex) => {
 				const { url, auth, alt_text: altText, _id: itemId } = item;
 
 				// is this a featured image?
@@ -95,9 +97,9 @@ function ProductGallery({ customFields }) {
 	}
 
 	const carouselItems =
-		globalContent?.schema?.productGallery?.value?.assets
-			.filter((asset) => asset.type === "image")
-			.slice(0, isFeaturedImageEnabled ? 9 : 8) || [];
+		globalContent?.schema?.productGallery?.value?.assets.filter(
+			(asset) => asset.type === "image"
+		) || [];
 
 	if (carouselItems.length === 0) {
 		return null;

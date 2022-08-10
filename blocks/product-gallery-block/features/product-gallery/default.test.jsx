@@ -7,6 +7,7 @@ import ProductGallery from "./default";
 
 jest.mock("fusion:environment", () => ({
 	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "https://resizer.com",
 }));
 
 const MOCK_ASSET = {
@@ -125,6 +126,33 @@ describe("Product Gallery", () => {
 		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.firstChild).toBeNull();
 	});
+	it("returns null without a carousel if no items", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {
+					productGallery: {
+						value: {
+							assets: [],
+						},
+					},
+				},
+			},
+		}));
+		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
+		expect(container.querySelectorAll(".b-product-gallery").length).toBe(0);
+		expect(container.firstChild).toBeNull();
+	});
+	it("returns null without a product gallery", () => {
+		useFusionContext.mockImplementation(() => ({
+			globalContent: {
+				schema: {},
+			},
+		}));
+		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
+		expect(container.querySelectorAll(".b-product-gallery").length).toBe(0);
+		expect(container.firstChild).toBeNull();
+	});
+
 	it("renders with default classname without featured image enabled modifier", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: MOCK_GLOBAL_CONTENT,

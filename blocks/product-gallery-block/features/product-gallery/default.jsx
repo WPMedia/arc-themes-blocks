@@ -10,13 +10,11 @@ import { Carousel, Icon, Image } from "@wpmedia/arc-themes-components";
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
 export function ProductGalleryDisplay(props) {
-	const { arcSite, data, id, isFeaturedImageEnabled, resizerAppVersion, resizerURL } = props;
+	const { arcSite, carouselItems, id, isFeaturedImageEnabled, resizerAppVersion, resizerURL } =
+		props;
 
 	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
-	const carouselItems = data?.schema?.productGallery?.value?.assets
-		.filter((asset) => asset.type === "image")
-		.slice(0, isFeaturedImageEnabled ? 9 : 8);
 
 	return (
 		<Carousel
@@ -89,10 +87,19 @@ function ProductGallery({ customFields }) {
 		return null;
 	}
 
+	const carouselItems =
+		globalContent?.schema?.productGallery?.value?.assets
+			.filter((asset) => asset.type === "image")
+			.slice(0, isFeaturedImageEnabled ? 9 : 8) || [];
+
+	if (carouselItems.length === 0) {
+		return null;
+	}
+
 	return (
 		<ProductGalleryDisplay
 			arcSite={arcSite}
-			data={globalContent}
+			carouselItems={carouselItems}
 			id={id}
 			isFeaturedImageEnabled={isFeaturedImageEnabled}
 			resizerAppVersion={RESIZER_APP_VERSION}

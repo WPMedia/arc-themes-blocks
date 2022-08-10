@@ -8,6 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "Av",
 		"global.and-text": "og",
+		"global.gallery-text": "Bildegalleri",
+		"global.video-text": "Video",
 		"global.gallery-expand-button": "Utvid",
 		"global.gallery-page-count-text": "<span class='sr-only'>Bilde<\/span> %{current} av %{total}",
 		"global.gallery-autoplay-button": "Automatisk avspilling",

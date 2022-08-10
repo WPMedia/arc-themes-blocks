@@ -8,6 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "By",
 		"global.and-text": "and",
+		"global.gallery-text": "Gallery",
+		"global.video-text": "Video",
 		"global.gallery-expand-button": "Expand",
 		"global.gallery-page-count-text": "<span class='sr-only'>Image<\/span> %{current} of %{total}",
 		"global.gallery-autoplay-button": "Autoplay",

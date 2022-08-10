@@ -290,8 +290,8 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	}[videoOrGalleryContent?.type];
 
 	const labelIconText = {
-		gallery: phrases.t("promo-label.gallery-text"),
-		video: phrases.t("promo-label.video-text"),
+		gallery: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
 	}[videoOrGalleryContent?.type];
 
 	const {

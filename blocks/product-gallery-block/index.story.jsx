@@ -5,9 +5,9 @@ export default {
 	title: "Blocks/Product Gallery",
 	parameters: {
 		chromatic: { viewports: [320, 1200] },
-	},
-	cssVariables: {
-		theme: "commerce",
+		cssVariables: {
+			theme: "commerce",
+		},
 	},
 };
 

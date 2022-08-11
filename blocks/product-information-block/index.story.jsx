@@ -29,6 +29,36 @@ const mockPrice = {
 		},
 	],
 };
+
+const mockSamePrice = {
+	currencyCode: "USD",
+	currencyDisplayFormat: "symbol",
+	currencyLocale: "en-US",
+	schema: {},
+	prices: [
+		{
+			type: "List",
+			amount: "49.00",
+		},
+		{
+			type: "Sale",
+			amount: "49.00",
+		},
+	],
+};
+
+const mockListPrice = {
+	currencyCode: "USD",
+	currencyDisplayFormat: "symbol",
+	currencyLocale: "en-US",
+	schema: {},
+	prices: [
+		{
+			type: "List",
+			amount: "59.00",
+		},
+	],
+};
 const mockData = {
 	name: "Crocker Sandals",
 	pricing: [mockPrice],
@@ -38,4 +68,10 @@ export const TitleAndPricing = () => <ProductInformationDisplay data={mockData} 
 
 export const TitleOnly = () => <ProductInformationDisplay data={{ name: "Crocker Sandals" }} />;
 
-export const ListsPriceOnly = () => <ProductInformationDisplay data={{ pricing: [mockPrice] }} />;
+export const ListsPriceOnly = () => (
+	<ProductInformationDisplay data={{ pricing: [mockListPrice] }} />
+);
+
+export const saleAndListPriceSame = () => (
+	<ProductInformationDisplay data={{ pricing: [mockSamePrice] }} />
+);

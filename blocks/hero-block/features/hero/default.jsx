@@ -3,7 +3,14 @@ import PropTypes from "@arc-fusion/prop-types";
 
 // Arc Themes Components - Base set of components used to compose blocks
 // https://github.com/WPMedia/arc-themes-components/
-import { Button, Heading, HeadingSection, Paragraph, Stack } from "@wpmedia/arc-themes-components";
+import {
+	Button,
+	Heading,
+	HeadingSection,
+	Paragraph,
+	Picture,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-hero";
 
@@ -38,18 +45,10 @@ function Hero({ customFields }) {
 
 	return (
 		<div className={classes}>
-			<picture>
-				<source srcSet={imageURLDesktop} media={DESKTOP_PHOTO_BREAKPOINT} />
-				<img
-					className={
-						layout === "stacked"
-							? `${BLOCK_CLASS_NAME}__image--stacked`
-							: `${BLOCK_CLASS_NAME}__image`
-					}
-					src={imageURLMobile}
-					alt={imageAltText}
-				/>
-			</picture>
+			<Picture>
+				<Picture.Source src={imageURLDesktop} media={DESKTOP_PHOTO_BREAKPOINT} />
+				<Picture.Image src={imageURLMobile} alt={imageAltText} />
+			</Picture>
 
 			<Stack
 				className={`${BLOCK_CLASS_NAME}__text--${layout} ${

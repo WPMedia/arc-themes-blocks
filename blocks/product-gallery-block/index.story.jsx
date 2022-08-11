@@ -6,6 +6,9 @@ export default {
 	parameters: {
 		chromatic: { viewports: [320, 1200] },
 	},
+	cssVariables: {
+		theme: "commerce",
+	},
 };
 
 const MOCK_ITEM = {

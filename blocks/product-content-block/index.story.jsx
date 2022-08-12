@@ -24,7 +24,7 @@ const mockData = {
 };
 
 export const TitleAndContent = () => (
-	<ProductContentDisplay summary="Product Details">
+	<ProductContentDisplay summary={mockData.schema.productDetails.label}>
 		{mockData.schema.productDetails.value}
 	</ProductContentDisplay>
 );

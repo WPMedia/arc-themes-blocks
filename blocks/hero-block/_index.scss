@@ -28,16 +28,6 @@
 		@include scss.block-components("hero-dark");
 	}
 
-	&__image {
-		@include scss.block-properties("hero-image");
-		@include scss.block-components("hero-image");
-	}
-
-	&__image--stacked {
-		@include scss.block-properties("hero-image-stacked");
-		@include scss.block-components("hero-image-stacked");
-	}
-
 	&__text--overlay {
 		place-self: center;
 

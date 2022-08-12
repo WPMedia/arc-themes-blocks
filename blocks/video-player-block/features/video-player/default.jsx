@@ -33,16 +33,14 @@ const videoLayouts = {
 	}) => (
 		<Stack className={`${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}__inline`}>
 			{alertBadge ? <Badge variant="danger">{alertBadge}</Badge> : null}
-			<Stack className={`${BLOCK_CLASS_NAME}__inline-video`}>
-				{title ? (
-					<HeadingSection>
-						<Heading>{title}</Heading>
-					</HeadingSection>
-				) : null}
-				<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
-					<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
-				</MediaItem>
-			</Stack>
+			{title ? (
+				<HeadingSection>
+					<Heading>{title}</Heading>
+				</HeadingSection>
+			) : null}
+			<MediaItem caption={caption} credit={credit} title={!hideVideoTitle && captionTitle}>
+				<Video aspectRatio={aspectRatio} className="video-container" embedMarkup={embedMarkup} />
+			</MediaItem>
 			{description ? <Paragraph>{description}</Paragraph> : null}
 		</Stack>
 	),

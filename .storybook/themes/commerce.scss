@@ -723,7 +723,7 @@
 						),
 						carousel: (
 							--slides: 1,
-							--slide-width: 100%,
+							--carousel-slide-width: 100%,
 						),
 						carousel-actions: (
 							// hide the actions on desktop and mobile
@@ -980,7 +980,7 @@
 							// the slides that are not featured are half the width of the screen
 							// will be 50% accounting for the gap
 							--slides: 2,
-							--slide-width: 50%,
+							--carousel-slide-width: 50%,
 						),
 						carousel-track: (
 							// slides should flow down rather than be hidden off to the side

@@ -62,42 +62,41 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		"spacing-1": 0.25rem,
 		// 4px
-		"spacing-2": 0.5rem,
+		"spacing-1": 0.25rem,
 		// 8px
-		"spacing-3": 0.75rem,
+		"spacing-2": 0.5rem,
 		// 12px
-		"spacing-4": 1rem,
+		"spacing-3": 0.75rem,
 		// 16px
-		"spacing-5": 1.5rem,
+		"spacing-4": 1rem,
 		// 24px
-		"spacing-6": 2rem,
+		"spacing-5": 1.5rem,
 		// 32px
-		"spacing-7": 2.5rem,
+		"spacing-6": 2rem,
 		// 40px
-		"spacing-8": 3rem,
+		"spacing-7": 2.5rem,
 		// 48px
-		"spacing-9": 3.5rem,
+		"spacing-8": 3rem,
 		// 56px
-		"spacing-10": 4rem,
+		"spacing-9": 3.5rem,
 		// 64px
-		"spacing-11": 4.5rem,
+		"spacing-10": 4rem,
 		// 72px
-		"spacing-12": 5rem,
+		"spacing-11": 4.5rem,
 		// 80px
-		"spacing-13": 5.5rem,
+		"spacing-12": 5rem,
 		// 88px
-		"spacing-14": 6rem,
+		"spacing-13": 5.5rem,
 		// 96px
-		"spacing-15": 6.5rem,
+		"spacing-14": 6rem,
 		// 104px
-		"spacing-16": 7rem,
+		"spacing-15": 6.5rem,
 		// 112px
-		"spacing-17": 7.5rem,
+		"spacing-16": 7rem,
 		// 120px
-		//Font Weight
-		"font-weight-1": 100,
+		"spacing-17": 7.5rem,
+
 		"font-weight-2": 200,
 		"font-weight-3": 300,
 		"font-weight-4": 400,
@@ -107,57 +106,44 @@
 		"font-weight-8": 800,
 		"font-weight-9": 900,
 
-		"font-size-1": 0.625rem,
 		// 10px
-		"font-size-2": 0.75rem,
+		"font-size-1": 0.625rem,
 		// 12px
+		"font-size-2": 0.75rem,
+		// 14px
 		"font-size-3": 0.875rem,
-		// 14px
+		// 16px
 		"font-size-4": 1rem,
-		// 16px
-		"font-size-5": 1.125rem,
 		// 18px
-		"font-size-6": 1.1875rem,
+		"font-size-5": 1.125rem,
 		// 19px
+		"font-size-6": 1.1875rem,
+		// 20px
 		"font-size-7": 1.25rem,
-		// 20px
-		"font-size-8": 1.375rem,
 		// 22px
+		"font-size-8": 1.375rem,
+		// 24px
 		"font-size-9": 1.5rem,
-		// 24px
-		"font-size-10": 1.75rem,
 		// 28px
+		"font-size-10": 1.75rem,
+		// 32px
 		"font-size-11": 2rem,
-		// 32px
-		"font-size-12": 2.25rem,
 		// 36px
-		"font-size-13": 2.56rem,
+		"font-size-12": 2.25rem,
 		// 41px
+		"font-size-13": 2.56rem,
+		// 48px
 		"font-size-14": 3rem,
-		// 48px
-		"font-size-15": 3.25rem,
 		// 52px
-		// Line heights
-		"line-height-1": 0.875rem,
-		// 14px
-		"line-height-2": 1rem,
-		// 16px
-		"line-height-3": 1.25rem,
-		// 20px
-		"line-height-4": 1.5rem,
-		// 24px
-		"line-height-5": 2rem,
-		// 32px
-		"line-height-6": 2.125rem,
-		// 34px
-		"line-height-7": 2.5rem,
-		// 40px
-		"line-height-8": 3rem,
-		// 48px
-		"line-height-9": 3.5rem,
-		// 56px
-		"line-height-10": 3.875rem,
-		// 62px
+		"font-size-15": 3.25rem,
+
+		"line-height-1": 1,
+		"line-height-2": 1.1,
+		"line-height-3": 1.2,
+		"line-height-4": 1.3,
+		"line-height-5": 1.4,
+		"line-height-6": 1.5,
+
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
 		"z-index-2": 10,
@@ -200,18 +186,43 @@
 		"border-radius-pill": var(--global-border-radius-2),
 		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
-		// body
+		// headings
+		// heading-level-1 : 36px fs -> 43.2px lh
+		"heading-level-1-font-size": var(--global-font-size-12),
+		"heading-level-1-line-height": var(--global-line-height-3),
+		"heading-level-1-font-weight": var(--global-font-weight-7),
+		// heading-level-2 : 32px fs -> 41.6px lh
+		"heading-level-2-font-size": var(--global-font-size-11),
+		"heading-level-2-line-height": var(--global-line-height-4),
+		"heading-level-2-font-weight": var(--global-font-weight-7),
+		// heading-level-3 : 28px fs -> 36.4px lh
+		"heading-level-3-font-size": var(--global-font-size-10),
+		"heading-level-3-line-height": var(--global-line-height-4),
+		"heading-level-3-font-weight": var(--global-font-weight-7),
+		// heading-level-4 : 24px fs -> 33.6px lh
+		"heading-level-4-font-size": var(--global-font-size-9),
+		"heading-level-4-line-height": var(--global-line-height-5),
+		"heading-level-4-font-weight": var(--global-font-weight-7),
+		// heading-level-5 : 20px fs -> 28px lh
+		"heading-level-5-font-size": var(--global-font-size-7),
+		"heading-level-5-line-height": var(--global-line-height-5),
+		"heading-level-5-font-weight": var(--global-font-weight-7),
+		// heading-level-6 : 18px fs -> 25.2px lh
+		"heading-level-6-font-size": var(--global-font-size-5),
+		"heading-level-6-line-height": var(--global-line-height-5),
+		"heading-level-6-font-weight": var(--global-font-weight-7),
+		// body : 16px fs -> 24px lh
 		"body-font-weight": var(--global-font-weight-4),
 		"body-font-size": var(--global-font-size-4),
-		"body-line-height": var(--global-line-height-3),
-		// body : small
+		"body-line-height": var(--global-line-height-6),
+		// body-small : 14px fs -> 21px lh
 		"body-font-weight-small": var(--global-font-weight-4),
 		"body-font-size-small": var(--global-font-size-3),
-		"body-line-height-small": var(--global-line-height-2),
-		// body : tiny
+		"body-line-height-small": var(--global-line-height-6),
+		// body-tiny : 12px fs -> 18px lh
 		"body-font-weight-tiny": var(--global-font-weight-4),
 		"body-font-size-tiny": var(--global-font-size-2),
-		"body-line-height-tiny": var(--global-line-height-1),
+		"body-line-height-tiny": var(--global-line-height-6),
 		// Layout
 		"layout-max-width": 1600,
 		"content-max-width": 1440,
@@ -356,7 +367,9 @@
 				),
 				heading: (
 					font-family: var(--font-family-primary),
-					font-weight: var(--global-font-weight-7),
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
 				),
 				icon: (
 					fill: var(--icon-fill-color),
@@ -430,20 +443,22 @@
 				),
 				overline: (
 					color: var(--text-color),
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
 					text-decoration: none,
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
+					font-size: var(--body-font-size),
+					font-weight: var(--body-font-weight),
+					line-height: var(--body-line-height),
 				),
 				pill: (
 					background-color: var(--color-primary),
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
-					font-size: var(--global-font-size-2),
-					line-height: var(--global-line-height-2),
+					font-size: var(--body-font-size-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 					text-decoration: none,
 				),
@@ -498,7 +513,6 @@
 					display: flex,
 					flex-wrap: nowrap,
 					justify-content: space-between,
-					line-height: var(--global-line-height-9),
 					word-break: break-word,
 					components: (
 						button-default: (
@@ -515,7 +529,6 @@
 							font-family: var(--font-family-primary),
 							font-size: var(--body-font-size-small),
 							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-3),
 							padding: var(--global-spacing-5) var(--global-spacing-5) var(--global-spacing-5)
 								var(--global-spacing-4),
 							text-decoration: none,
@@ -527,7 +540,7 @@
 				),
 				article-body: (
 					font-family: var(--font-family-secondary),
-					font-size: var(--global-font-size-4),
+					font-size: var(--body-font-size),
 					components: (
 						link: (
 							color: var(--color-primary),
@@ -545,33 +558,16 @@
 						),
 					),
 				),
-				article-body-link: (
-					color: var(--color-primary),
-				),
-				article-body-h2: (
-					font-size: var(--global-font-size-11),
-				),
-				article-body-h3: (
-					font-size: var(--global-font-size-10),
-				),
-				article-body-h4: (
-					font-size: var(--global-font-size-9),
-				),
-				article-body-h5: (
-					font-size: var(--global-font-size-7),
-				),
-				article-body-h6: (
-					font-size: var(--global-font-size-5),
-				),
 				article-body-blockquote: (
 					box-shadow: inset 5px 0 0 0 var(--global-neutral-4),
 					font-style: italic,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-2),
 					padding: var(--global-spacing-4) 0 var(--global-spacing-4) var(--global-spacing-5),
 					text-align: left,
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-5),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 					),
 				),
@@ -581,7 +577,7 @@
 				article-body-citation: (
 					font-family: var(--font-family-primary),
 					font-style: normal,
-					font-size: var(--global-font-size-4),
+					font-size: var(--body-font-size),
 				),
 				article-body-correction: (
 					box-shadow: inset 0 -1px 0 0 var(--border-color),
@@ -589,13 +585,17 @@
 					padding-bottom: var(--global-spacing-6),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--heading-level-6-font-size),
 							text-transform: uppercase,
 						),
 						paragraph: (
 							color: var(--global-neutral-6),
 						),
 					),
+				),
+				article-body-divider: (
+					background-color: var(--border-color),
+					height: 1px,
 				),
 				article-body-embed-responsive: (
 					aspect-ratio: 16 / 9,
@@ -606,9 +606,10 @@
 					height: auto,
 					width: 100%,
 				),
-				article-body-divider: (
-					background-color: var(--border-color),
-					height: 1px,
+				article-body-full-screen-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
 				),
 				article-body-gallery: (
 					components: (
@@ -629,7 +630,7 @@
 							border: none,
 							box-shadow: none,
 							color: var(--text-color),
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 							height: auto,
 							width: auto,
 						),
@@ -637,12 +638,12 @@
 							background-color: transparent,
 							box-shadow: none,
 							color: var(--text-color),
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 							height: auto,
 							width: auto,
 						),
 						carousel-image-counter: (
-							font-size: var(--global-font-size-3),
+							font-size: var(--body-font-size-small),
 						),
 						media-item: (
 							background-color: var(--global-neutral-9),
@@ -682,41 +683,25 @@
 						),
 					),
 				),
-				article-body-image-wrapper: (
-					align-items: center,
-					display: flex,
-					justify-content: center,
-					max-height: 75vh,
-					components: (
-						image: (
-							height: auto,
-							max-height: 100%,
-							max-width: 100%,
-						),
-					),
+				article-body-h2: (
+					font-size: var(--heading-level-2-font-size),
+					line-height: var(--heading-level-2-line-height),
 				),
-				article-body-full-screen-icon: (
-					fill: var(--text-color),
-					height: var(--global-spacing-4),
-					width: var(--global-spacing-4),
+				article-body-h3: (
+					font-size: var(--heading-level-3-font-size),
+					line-height: var(--heading-level-3-line-height),
 				),
-				article-body-ul: (
-					list-style-position: inside,
-					list-style-type: disc,
+				article-body-h4: (
+					font-size: var(--heading-level-4-font-size),
+					line-height: var(--heading-level-4-line-height),
 				),
-				article-body-ol: (
-					list-style-position: inside,
-					list-style-type: decimal,
+				article-body-h5: (
+					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
 				),
-				article-body-stop-icon: (
-					fill: var(--text-color),
-					height: var(--global-spacing-4),
-					width: var(--global-spacing-4),
-				),
-				article-body-start-icon: (
-					fill: var(--text-color),
-					height: var(--global-spacing-4),
-					width: var(--global-spacing-4),
+				article-body-h6: (
+					font-size: var(--heading-level-6-font-size),
+					line-height: var(--heading-level-6-line-height),
 				),
 				article-body-image: (
 					components: (
@@ -735,6 +720,19 @@
 					float: right,
 					margin-left: var(--global-spacing-5),
 				),
+				article-body-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					components: (
+						image: (
+							height: auto,
+							max-height: 100%,
+							max-width: 100%,
+						),
+					),
+				),
 				article-body-interstitial-link: (
 					font-family: var(--font-family-secondary),
 					font-style: italic,
@@ -745,39 +743,61 @@
 						),
 					),
 				),
-				article-body-table: (
-					font-family: var(--font-family-primary),
-					text-align: center,
-					width: 100%,
+				article-body-link: (
+					color: var(--color-primary),
 				),
-				article-body-table-thead: (
-					background-color: var(--global-neutral-4),
-					border: 2px solid var(--border-color),
-				),
-				article-body-table-th: (
-					border: 1px solid var(--border-color),
-					font-weight: bold,
-					padding: var(--global-spacing-1) var(--global-spacing-2),
-				),
-				article-body-table-td: (
-					border: 1px solid var(--border-color),
-					padding: var(--global-spacing-1) var(--global-spacing-2),
+				article-body-ol: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+					list-style-position: inside,
+					list-style-type: decimal,
 				),
 				article-body-pullquote: (
 					box-shadow: (
 						inset 0 -5px 0 0 var(--border-color),
 						inset 0 5px 0 0 var(--border-color),
 					),
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-4),
 					padding: var(--global-spacing-6) 0 var(--global-spacing-5),
 					text-align: center,
 					components: (
 						paragraph: (
 							font-style: italic,
-							font-size: var(--global-font-size-7),
-							font-weight: bold,
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
+				),
+				article-body-start-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-stop-icon: (
+					fill: var(--text-color),
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				article-body-table: (
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					text-align: center,
+					width: 100%,
+				),
+				article-body-table-td: (
+					border: 1px solid var(--border-color),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-th: (
+					border: 1px solid var(--border-color),
+					font-weight: var(--global-font-weight-7),
+					padding: var(--global-spacing-1) var(--global-spacing-2),
+				),
+				article-body-table-thead: (
+					background-color: var(--global-neutral-4),
+					border: 2px solid var(--border-color),
 				),
 				article-tag: (
 					components: (
@@ -785,6 +805,12 @@
 							gap: var(--global-spacing-4),
 						),
 					),
+				),
+				article-body-ul: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+					list-style-position: inside,
+					list-style-type: disc,
 				),
 				byline: (
 					font-size: var(--body-font-weight),
@@ -805,34 +831,22 @@
 					padding: var(--global-spacing-4) 0,
 					components: (
 						heading: (
-							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
 						),
-						overline: (
-							font-weight: var(--global-font-weight-7),
-							font-size: var(--body-font-size),
-							line-height: var(--global-line-height-4),
-						),
 						separator: (
 							padding: 0 var(--global-spacing-2),
-						),
-						attribution: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-						),
-						date: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
 						),
 					),
 				),
 				card-list-title: (
 					padding: 0 var(--global-spacing-4),
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
 				),
 				card-list-list: (
 					padding: 0 var(--global-spacing-4),
@@ -848,13 +862,24 @@
 				),
 				card-list-main-item-text-container: (
 					gap: var(--global-spacing-2),
+					components: (
+						heading: (
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--heading-level-6-font-weight),
+							line-height: var(--heading-level-6-line-height),
+						),
+						overline: (
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
+						),
+					),
 				),
 				card-list-secondary-item: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
-							font-weight: var(--global-font-weight-4),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
+							line-height: var(--body-line-height),
 						),
 					),
 				),
@@ -866,13 +891,13 @@
 				),
 				double-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
 						),
 					),
 				),
@@ -890,32 +915,27 @@
 					font-weight: var(--global-font-weight-7),
 				),
 				header-extra-large: (
-					font-size: var(--global-font-size-9),
-					line-height: var(--global-line-height-5),
+					font-size: var(--heading-level-4-font-size),
+					line-height: var(--heading-level-4-line-height),
 				),
 				header-large: (
-					font-size: var(--global-font-size-7),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
 				),
 				header-medium: (
-					font-size: var(--global-font-size-5),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-6-font-size),
+					line-height: var(--heading-level-6-line-height),
 				),
 				header-small: (
-					font-size: var(--global-font-size-3),
-					line-height: var(--global-line-height-3),
-				),
-				headline: (
-					line-height: var(--global-line-height-9),
-					font-size: var(--global-font-size-13),
-					font-weight: var(--global-font-weight-7),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
 				),
 				header-nav-chain: (
 					background-color: var(--global-black),
 					padding: var(--global-spacing-2) var(--global-spacing-4),
 					font-weight: var(--global-font-weight-7),
-					font-size: var(--global-font-size-4),
-					line-height: var(--global-line-height-4),
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 					transform: translateZ(0),
 					min-height: var(--header-nav-chain-height),
 					// Hardware acceleration performance on height adjustments
@@ -937,13 +957,13 @@
 							color: var(--global-white),
 							height: var(--global-spacing-7),
 							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
 						),
 						button-small: (
 							font-weight: var(--global-font-weight-7),
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
 							padding: var(--global-spacing-2),
 						),
 					),
@@ -1018,7 +1038,7 @@
 					width: 0,
 				),
 				header-nav-chain-nav-search-input-open: (
-					font-size: var(--global-font-size-4),
+					font-size: var(--body-font-size),
 					height: var(--global-spacing-7),
 					line-height: var(--global-line-height-4),
 					padding: 4px 24px 4px 11px,
@@ -1130,7 +1150,7 @@
 				header-nav-chain-flyout-nav: (
 					height: calc((100vh - var(--header-nav-chain-height-scrolled))),
 					gap: 0,
-					font-weight: bold,
+					font-weight: var(--global-font-weight-7),
 					list-style: none,
 					position: relative,
 					components: (
@@ -1141,7 +1161,7 @@
 							color: var(--global-white),
 							font-weight: var(--global-font-weight-7),
 							display: block,
-							font-size: var(--global-font-size-4),
+							font-size: var(--body-font-size),
 							justify-content: space-between,
 							line-height: 1.5,
 							text-decoration: none,
@@ -1222,23 +1242,23 @@
 						),
 					),
 				),
+				headline: (
+					font-size: var(--heading-level-1-font-size),
+					font-weight: var(--heading-level-1-font-weight),
+					line-height: var(--heading-level-1-line-height),
+				),
 				large-manual-promo: (
 					gap: var(--global-spacing-4),
 				),
 				large-manual-promo-text: (
 					gap: 0,
 					components: (
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-4),
-						),
 						overline: (
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-5),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -1287,16 +1307,16 @@
 					gap: 0,
 					components: (
 						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-6),
+							font-size: var(--heading-level-3-font-size),
+							line-height: var(--heading-level-3-line-height),
 						),
 						overline: (
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -1354,20 +1374,25 @@
 				),
 				medium-manual-promo: (
 					components: (
+						attribution: (
+							color: var(--text-color),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+						),
+						heading: (
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							margin-bottom: var(--global-spacing-4),
+						),
 						media-item: (
 							float: right,
 							max-width: 100px,
 						),
-						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							margin-bottom: var(--global-spacing-4),
-						),
 						paragraph: (
 							display: inline,
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--body-font-size),
+							line-height: var(--body-line-height),
 						),
 					),
 				),
@@ -1383,7 +1408,8 @@
 					gap: var(--global-spacing-4),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-5),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 					),
 				),
@@ -1394,15 +1420,18 @@
 					gap: var(--global-spacing-5),
 					components: (
 						heading: (
-							font-weight: var(--global-font-weight-4),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
+							line-height: var(--body-line-height),
 						),
 						link: (
 							flex: 1,
 						),
 						paragraph: (
 							font-family: var(--font-family-secondary),
-							font-size: var(--global-font-size-5),
-							font-weight: var(--global-font-weight-7),
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--heading-level-6-font-weight),
+							line-height: var(--heading-level-6-line-height),
 						),
 					),
 				),
@@ -1411,13 +1440,13 @@
 				),
 				quad-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
 						),
 					),
 				),
@@ -1568,8 +1597,8 @@
 					gap: var(--global-spacing-4),
 					components: (
 						heading: (
-							font-size: var(--global-font-size-5),
-							line-height: var(--global-line-height-5),
+							font-size: var(--heading-level-6-font-size),
+							line-height: var(--heading-level-6-line-height),
 						),
 					),
 				),
@@ -1591,6 +1620,11 @@
 				),
 				single-column-regular-main: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-11),
 						),
@@ -1600,11 +1634,6 @@
 					components: (
 						stack: (
 							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
 						),
 					),
 				),
@@ -1655,15 +1684,16 @@
 					gap: var(--global-spacing-6),
 					grid-template-columns: 2fr 1fr,
 				),
+				subheadline: (
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
+				),
 				tag-title: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-1-font-size),
+							line-height: var(--heading-level-1-line-height),
 						),
 						stack: (
 							gap: var(--global-spacing-2),
@@ -1672,13 +1702,13 @@
 				),
 				triple-chain: (
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							font-weight: var(--heading-level-3-font-weight),
+							line-height: var(--heading-level-3-line-height),
+						),
 						stack: (
 							gap: var(--global-spacing-5),
-						),
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-							font-weight: var(--global-font-weight-7),
 						),
 					),
 				),
@@ -1692,13 +1722,13 @@
 				triple-chain-child-item-empty: (
 					display: contents,
 				),
-				subheadline: (
-					font-size: var(--global-font-size-5),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
-				),
 				video-player: (
+					gap: var(--global-spacing-4),
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							line-height: var(--heading-level-3-line-height),
+						),
 						media-item: (
 							width: 100%,
 							margin: auto,
@@ -1706,13 +1736,13 @@
 					),
 				),
 				video-player-feature: (
-					gap: 0,
+					gap: var(--global-spacing-6),
 					components: (
 						media-item-fig-caption: (
-							margin-bottom: var(--global-spacing-2),
+							margin-bottom: 0,
 							margin-left: var(--global-spacing-4),
 							margin-right: var(--global-spacing-4),
-							margin-top: var(--global-spacing-2),
+							margin-top: 0,
 						),
 					),
 				),
@@ -1720,52 +1750,13 @@
 					margin: auto,
 					width: var(--content-scale-width),
 					components: (
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-						),
 						stack: (
-							gap: var(--global-spacing-3),
+							gap: var(--global-spacing-4),
 						),
 					),
-				),
-				video-player-inline: (
-					gap: var(--global-spacing-3),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-9),
-							line-height: var(--global-line-height-5),
-						),
-						media-item: (
-							width: 100%,
-							margin: auto,
-						),
-						media-item-fig-caption: (
-							margin-bottom: 0,
-							margin-left: 0,
-							margin-right: 0,
-							margin-top: var(--global-spacing-2),
-						),
-						stack: (
-							gap: 0,
-						),
-					),
-				),
-				video-player-inline-video: (
-					gap: 0,
 				),
 				xl-manual-promo: (
 					components: (
-						heading: (
-							font-family: var(--font-family-primary),
-							font-size: var(--global-font-size-10),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-spacing-7),
-						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
@@ -1779,12 +1770,6 @@
 				),
 				xl-promo: (
 					components: (
-						heading: (
-							font-family: var(--font-family-primary),
-							font-size: var(--global-font-size-10),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-spacing-7),
-						),
 						link: (
 							font-family: inherit,
 							font-size: inherit,
@@ -1803,12 +1788,22 @@
 		),
 		desktop: (
 			alias: (
-				"body-font-size": var(--global-font-size-4),
-				"body-line-height": var(--global-line-height-4),
-				"body-font-size-small": var(--global-font-size-3),
-				"body-line-height-small": var(--global-line-height-3),
-				"body-font-size-tiny": var(--global-font-size-2),
-				"body-line-height-tiny": var(--global-line-height-2),
+				// heading-level-1 : 52px fs -> 62.4px lh
+				"heading-level-1-font-size": var(--global-font-size-15),
+				// heading-level-2 : 48px fs -> 57.6px lh
+				"heading-level-2-font-size": var(--global-font-size-14),
+				"heading-level-2-line-height": var(--global-line-height-3),
+				// heading-level-3 : 40.96px fs -> 49.152px lh
+				"heading-level-3-font-size": var(--global-font-size-13),
+				"heading-level-3-line-height": var(--global-line-height-3),
+				// heading-level-4 : 36px fs -> 43.2px lh
+				"heading-level-4-font-size": var(--global-font-size-12),
+				"heading-level-4-line-height": var(--global-line-height-3),
+				// heading-level-5 : 32px fs -> 41.6px lh
+				"heading-level-5-font-size": var(--global-font-size-11),
+				"heading-level-5-line-height": var(--global-line-height-4),
+				// heading-level-6 : 20px fs -> 28px lh
+				"heading-level-6-font-size": var(--global-font-size-7),
 			),
 			components: (
 				carousel: (
@@ -1830,49 +1825,13 @@
 					),
 				),
 				article-body: (
-					font-size: var(--global-font-size-7),
-				),
-				article-body-h2: (
-					font-size: var(--global-font-size-14),
-				),
-				article-body-h3: (
-					font-size: var(--global-font-size-13),
-				),
-				article-body-h4: (
-					font-size: var(--global-font-size-12),
-				),
-				article-body-h5: (
-					font-size: var(--global-font-size-11),
-				),
-				article-body-h6: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-6-font-size),
 				),
 				article-body-gallery-additional-next: (
 					display: block,
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
-				),
-				article-body-correction: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-5),
-						),
-					),
-				),
-				article-body-blockquote: (
-					components: (
-						paragraph: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
-				article-body-pullquote: (
-					components: (
-						paragraph: (
-							font-size: var(--global-font-size-11),
-						),
-					),
 				),
 				double-chain: (
 					components: (
@@ -1888,28 +1847,9 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
-				card-list: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
-				header-extra-large: (
-					font-size: var(--global-font-size-12),
-					line-height: var(--global-line-height-7),
-				),
-				header-large: (
-					font-size: var(--global-font-size-11),
-					line-height: var(--global-line-height-6),
-				),
-				header-medium: (
-					font-size: var(--global-font-size-7),
-					line-height: var(--global-line-height-5),
-				),
 				header-small: (
-					font-size: var(--global-font-size-4),
-					line-height: var(--global-line-height-4),
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 				),
 				header-nav-chain: (
 					padding: var(--global-spacing-3) var(--global-spacing-5),
@@ -1941,11 +1881,8 @@
 				large-manual-promo-text: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-12),
-							line-height: var(--global-line-height-7),
-						),
-						overline: (
-							font-size: var(--global-font-size-7),
+							font-size: var(--heading-level-4-font-size),
+							line-height: var(--heading-level-4-line-height),
 						),
 					),
 				),
@@ -1955,11 +1892,8 @@
 				large-promo-text: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-12),
-							line-height: var(--global-line-height-7),
-						),
-						overline: (
-							font-size: var(--global-font-size-7),
+							font-size: var(--heading-level-4-font-size),
+							line-height: var(--heading-level-4-line-height),
 						),
 					),
 				),
@@ -1972,10 +1906,6 @@
 							float: left,
 							margin: 0,
 							max-width: 33%,
-						),
-						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-7),
 						),
 						paragraph: (
 							display: block,
@@ -2042,13 +1972,6 @@
 				share-bar: (
 					display: flex,
 				),
-				simple-list: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-7),
-						),
-					),
-				),
 				single-column-regular-main: (
 					components: (
 						stack: (
@@ -2080,38 +2003,13 @@
 				triple-chain-child-item-empty: (
 					display: initial,
 				),
-				subheadline: (
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-5),
-				),
-				video-player-feature-meta: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
-						),
-					),
-				),
-				video-player-inline: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
-					),
-				),
 				xl-manual-promo: (
 					components: (
 						heading: (
 							align-self: center,
-							font-size: var(--global-font-size-15),
+							font-size: var(--heading-level-1-font-size),
 							justify-content: center,
-							line-height: var(--global-spacing-10),
+							line-height: var(--heading-level-1-line-height),
 						),
 						overline: (
 							display: flex,
@@ -2126,9 +2024,9 @@
 					components: (
 						heading: (
 							align-self: center,
-							font-size: var(--global-font-size-15),
+							font-size: var(--heading-level-1-font-size),
 							justify-content: center,
-							line-height: var(--global-spacing-10),
+							line-height: var(--heading-level-1-line-height),
 						),
 						overline: (
 							display: flex,

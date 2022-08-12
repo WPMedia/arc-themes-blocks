@@ -183,7 +183,7 @@ export const withGalleryLabelAndImage = () => (
 		aspectRatio={16 / 9}
 		imageSearchField="imageURL"
 		labelIconName="Camera"
-		labelIconText="Gallery Icon"
+		labelIconText="Gallery"
 		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
@@ -197,7 +197,7 @@ export const withVideoLabelAndImage = () => (
 		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"
 		labelIconName="Play"
-		labelIconText="Video Icon"
+		labelIconText="Video"
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		viewportPercentage={60}

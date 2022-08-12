@@ -705,7 +705,8 @@
 							--slide-width: 100%,
 						),
 						carousel-actions: (
-							display: flex,
+							// hide the actions on desktop and mobile
+							display: none,
 						),
 						carousel-track: (
 							gap: var(--global-spacing-4),
@@ -997,10 +998,6 @@
 							// will be 50% accounting for the gap
 							--slides: 2,
 							--slide-width: 50%,
-						),
-						carousel-actions: (
-							// hide the actions on desktop
-							display: none,
 						),
 						carousel-track: (
 							// slides should flow down rather than be hidden off to the side

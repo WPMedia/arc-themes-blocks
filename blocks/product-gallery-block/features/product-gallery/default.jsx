@@ -5,7 +5,7 @@ import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Icon, Image } from "@wpmedia/arc-themes-components";
+import { Carousel, Image } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
@@ -28,16 +28,6 @@ export function ProductGalleryDisplay({
 			key={id}
 			id={id}
 			label={phrases.t("product-gallery.aria-label")}
-			nextButton={
-				<Carousel.Button id={id} label={phrases.t("product-gallery.right-arrow-label")}>
-					<Icon name="ChevronRight" />
-				</Carousel.Button>
-			}
-			previousButton={
-				<Carousel.Button id={id} label={phrases.t("product-gallery.left-arrow-label")}>
-					<Icon name="ChevronLeft" />
-				</Carousel.Button>
-			}
 		>
 			{shortenedCarouselItems?.map((item, carouselIndex) => {
 				const { url, auth, alt_text: altText, _id: itemId } = item;

@@ -806,34 +806,43 @@
 						),
 					),
 				),
-				author-bio-image: (
-					max-width: var(--global-spacing-13),
-					max-height: var(--global-spacing-13),
-					border-radius: var(--global-border-radius-2),
-				),
-				author-bio-authorName: (
-					font-family: var(--font-family-primary),
-					font-size: var(--global-font-size-6),
-					font-weight: var(--global-font-weight-7),
-				),
-				author-bio-author: (
-					display: flex,
-					flex-direction: row,
-				),
-				author-bio-descriptions: (
-					margin-left: var(--global-spacing-4),
-					gap: var(--global-spacing-4),
-					flex: 1,
-				),
-				author-bio-social-btn: (
-					display: flex,
-					justify-content: space-between,
-				),
 				article-body-ul: (
 					font-size: var(--body-font-size),
 					line-height: var(--body-line-height),
 					list-style-position: inside,
 					list-style-type: disc,
+				),
+				author-bio-author: (
+					display: flex,
+					flex-direction: row,
+					components: (
+						image: (
+							max-width: var(--global-spacing-13),
+							max-height: var(--global-spacing-13),
+							border-radius: var(--global-border-radius-2),
+						),
+						stack: (
+							margin-left: var(--global-spacing-4),
+							gap: var(--global-spacing-2),
+							flex: 1,
+						),
+					),
+				),
+				author-bio-social-btn: (
+					display: flex,
+					flex-wrap: wrap,
+					components: (
+						link: (
+							margin: var(--global-spacing-2) var(--global-spacing-2) 0 0,
+						),
+					),
+				),
+				author-bio-authorName: (
+					color: var(--color-primary),
+					font-family: var(--font-family-primary),
+					font-size: var(--global-font-size-4),
+					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-5),
 				),
 				byline: (
 					font-size: var(--body-font-weight),
@@ -1855,6 +1864,10 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
+				),
+				author-bio-authorName: (
+					font-size: var(--global-font-size-6),
+					line-height: var(--global-line-height-6),
 				),
 				double-chain: (
 					components: (

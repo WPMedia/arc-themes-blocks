@@ -3,13 +3,9 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
-import styled from "styled-components";
-import { LinkSVGHover } from "@wpmedia/news-theme-css/js/styled/linkHovers";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
-import { Icon, Image, isServerSide, Stack, Paragraph } from "@wpmedia/arc-themes-components";
+import { Icon, Image, isServerSide, Stack, Paragraph, Link } from "@wpmedia/arc-themes-components";
 import getProperties from "fusion:properties";
-
-const MediaLinksStyled = styled(LinkSVGHover)``;
 
 const BLOCK_CLASS_NAME = "b-author-bio";
 
@@ -72,7 +68,6 @@ const renderAuthorImage = (author, arcSite) => {
 
 	return url ? (
 		<Image
-			className={`${BLOCK_CLASS_NAME}__image`}
 			src={url}
 			alt={altText || name}
 			resizerURL={getProperties(arcSite)?.resizerURL}
@@ -119,13 +114,13 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 								const constructedURL = constructSocialURL(socialLink.site, socialLink.url);
 
 								const MediaLink = ({ children, webService, ...otherProps }) => (
-									<MediaLinksStyled
+									<Link
 										href={constructedURL}
 										target="_blank"
 										rel="noreferrer noopener"
 										aria-label={
 											webService
-												? phrases.t(`author-bio-block.social-${webService.toLowerCase()}`, {
+												? phrases.t(`global.social-${webService.toLowerCase()}`, {
 														authorName: name,
 												  })
 												: null
@@ -134,7 +129,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 										{...otherProps}
 									>
 										{children}
-									</MediaLinksStyled>
+									</Link>
 								);
 
 								switch (socialLink.site) {
@@ -252,10 +247,10 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 			) : undefined;
 
 			authorList.push(
-				<section key={author.name ? author.name : ""} className={`${BLOCK_CLASS_NAME}__authors`}>
+				<section key={author.name ? author.name : ""}>
 					<div className={`${BLOCK_CLASS_NAME}__author`}>
 						{renderAuthorImage(author, arcSite)}
-						<Stack className={`${BLOCK_CLASS_NAME}__descriptions`}>
+						<Stack>
 							{authorNameWithHyperlink || authorName}
 							{/* there will always be a description via conditional on 52 */}
 							<Paragraph>{author.description}</Paragraph>
@@ -278,6 +273,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 const AuthorBio = ({ customFields = {} }) => {
 	const { isAdmin } = useFusionContext();
+
 	if (customFields.lazyLoad && isServerSide() && !isAdmin) {
 		// On Server
 		return null;

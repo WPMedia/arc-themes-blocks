@@ -1,18 +1,12 @@
 # `@wpmedia/author-bio-block`
 
-_Author Short Biography block for Fusion News Theme_
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+This Author Short Biography block displays author image, author name, description and social links
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**                  | **Required** | **Type** | **Description**                                                                   |
+| ------------------------- | ------------ | -------- | --------------------------------------------------------------------------------- |
+| **customFields.lazyLoad** | no           | Boolean  | Prevent block display until when nearly in-view for the user. Default is `false`. |
 
 ## ANS Schema
 
@@ -21,9 +15,24 @@ The Author Bio Block expects the `credits` section from Composer's ANS schema, w
 ```
 credits: {
     by: [{
-        name: ...
-        url: ...
-        ...
+		type: "author"
+        name: "author_name"
+        description: "description",
+	image: {
+		url: "img_url",
+	},
+	social_links: [
+		{
+			{ site: "twitter", url: "https://twitter.com/sLcarothers" },
+
+		}
+	],
+	resized_params: {
+		"84x0": "",
+	},
+	additional_properties: {
+		original: {}
+	}
     }]
 }
 ```
@@ -66,20 +75,10 @@ If there is no description provided by the schema, then no author bio will be di
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
+## Events
 
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+n/a
 
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
-This block does not emit any events.
-
-## Additional Considerations
-
-_This is optional. Please add an additional context that would be important to know in order to use this block._
+n/a

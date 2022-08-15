@@ -8,6 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "担当者：",
 		"global.and-text": "및",
+		"global.gallery-text": "ギャラリー",
+		"global.video-text": "ビデオ",
 		"global.gallery-expand-button": "展開",
 		"global.gallery-page-count-text": "%{current} \/ %{total}",
 		"global.gallery-autoplay-button": "自動再生",

@@ -21,6 +21,28 @@
 		"pt": "e",
 		"sv": "och"
 	},
+	"global.gallery-text": {
+		"de": "Galerie",
+		"en": "Gallery",
+		"es": "Galería",
+		"fr": "Galerie",
+		"ja": "ギャラリー",
+		"ko": "갤러리",
+		"no": "Bildegalleri",
+		"pt": "Galeria",
+		"sv": "Bildspel"
+	},
+	"global.video-text": {
+		"de": "Video",
+		"en": "Video",
+		"es": "Video",
+		"fr": "Vidéo",
+		"ja": "ビデオ",
+		"ko": "비디오",
+		"no": "Video",
+		"pt": "Vídeo",
+		"sv": "Video"
+	},
 	"global.gallery-expand-button": {
 		"de": "Erweitern",
 		"en": "Expand",

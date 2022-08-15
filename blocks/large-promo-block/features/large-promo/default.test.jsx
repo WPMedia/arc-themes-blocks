@@ -67,6 +67,10 @@ const largePromoMock = {
 			type: "image",
 			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",
 		},
+		lead_art: {
+			type: "video",
+			embed_html: '<div id="pow"></div>',
+		},
 	},
 	type: "story",
 	website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
@@ -278,7 +282,7 @@ describe("Large Promo", () => {
 					showDate: true,
 					showDescription: false,
 					showHeadline: true,
-					showImage: true,
+					showImage: false,
 					showOverline: true,
 				}}
 			/>
@@ -288,7 +292,6 @@ describe("Large Promo", () => {
 		expect(screen.queryByText(largePromoMock.headlines.basic)).not.toBeNull();
 		expect(screen.queryByText(largePromoMock.description.basic)).toBeNull();
 		expect(screen.queryByText("December 02, 2019 at 6:58 pm UTC")).toBeNull();
-		expect(screen.queryByRole("img")).not.toBeNull();
 	});
 
 	it("should render image icon label", () => {

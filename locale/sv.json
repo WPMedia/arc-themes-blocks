@@ -8,6 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "Av",
 		"global.and-text": "och",
+		"global.gallery-text": "Bildspel",
+		"global.video-text": "Video",
 		"global.gallery-expand-button": "Förstora",
 		"global.gallery-page-count-text": "%{current} av %{total}",
 		"global.gallery-autoplay-button": "Spela upp",

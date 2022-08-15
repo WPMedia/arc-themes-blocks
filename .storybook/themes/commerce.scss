@@ -716,6 +716,30 @@
 						),
 					),
 				),
+				product-gallery: (
+					components: (
+						image: (
+							width: auto,
+						),
+						carousel: (
+							--slides: 1,
+							--carousel-slide-width: 100%,
+						),
+						carousel-actions: (
+							// hide the actions on desktop and mobile
+							display: none,
+						),
+						carousel-track: (
+							gap: var(--global-spacing-4),
+							max-width: 100%,
+							width: 100%,
+						),
+					),
+				),
+				product-gallery-featured-slide: (
+					// for featured enabled, this will apply for the desktop growing to expand full width. On mobile, it doesn't hurt.
+					flex-basis: 100%,
+				),
 				quilted-image: (
 					margin-left: auto,
 					margin-right: auto,
@@ -950,6 +974,20 @@
 						),
 					),
 				),
+				product-gallery: (
+					components: (
+						carousel: (
+							// the slides that are not featured are half the width of the screen
+							// will be 50% accounting for the gap
+							--slides: 2,
+							--carousel-slide-width: 50%,
+						),
+						carousel-track: (
+							// slides should flow down rather than be hidden off to the side
+							flex-wrap: wrap,
+						),
+					),
+				),
 				quilted-image: (
 					max-width: var(--content-scale-width),
 					width: 100%,
@@ -1024,6 +1062,7 @@
 @use "../../blocks/product-assortment-carousel-block";
 @use "../../blocks/product-content-block";
 @use "../../blocks/product-featured-image-block";
+@use "../../blocks/product-gallery-block";
 @use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
 @use "../../blocks/right-rail-advanced-block";

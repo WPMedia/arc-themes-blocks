@@ -685,6 +685,8 @@
 					),
 				),
 				product-information: (
+					// padding is overridden on desktop
+					padding: 0 var(--global-spacing-5),
 					components: (
 						heading: (
 							color: var(--global-black),
@@ -705,7 +707,7 @@
 						price-list: (
 							color: var(--global-neutral-5),
 							text-decoration: line-through,
-						),
+						)
 					),
 				),
 				product-information-single-price: (
@@ -987,6 +989,10 @@
 							flex-wrap: wrap,
 						),
 					),
+				),
+				product-information: (
+					// we don't want padding on desktop
+					padding: initial,
 				),
 				quilted-image: (
 					max-width: var(--content-scale-width),

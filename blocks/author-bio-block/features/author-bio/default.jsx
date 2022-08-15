@@ -240,17 +240,21 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 			// Make the name a hyperlink if a url to the bio page is provided
 			const authorName = original.byline ? (
-				<Paragraph className={`${BLOCK_CLASS_NAME}__authorName`}>{original.byline}</Paragraph>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__authorName`} data-testid="author-name">
+					{original.byline}
+				</Paragraph>
 			) : undefined;
 			const authorNameWithHyperlink = author.url ? (
-				<a href={author.url}>{authorName}</a>
+				<a data-testid="author-name" href={author.url}>
+					{authorName}
+				</a>
 			) : undefined;
 
 			authorList.push(
 				<section key={author.name ? author.name : ""}>
 					<div className={`${BLOCK_CLASS_NAME}__author`}>
 						{renderAuthorImage(author, arcSite)}
-						<Stack>
+						<Stack data-testid="descriptions">
 							{authorNameWithHyperlink || authorName}
 							{/* there will always be a description via conditional on 52 */}
 							<Paragraph>{author.description}</Paragraph>
@@ -267,8 +271,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 	if (authors.length === 0) {
 		return null;
 	}
-
-	return <>{authors}</>;
+	return <div data-testid="authors">{authors}</div>;
 };
 
 const AuthorBio = ({ customFields = {} }) => {

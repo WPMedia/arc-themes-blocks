@@ -12,7 +12,7 @@
 	}
 
 	&__socialButtons {
-		@include scss.block-components("author-bio-social-btn");
-		@include scss.block-properties("author-bio-social-btn");
+		@include scss.block-components("author-bio-socialButtons");
+		@include scss.block-properties("author-bio-socialButtons");
 	}
 }

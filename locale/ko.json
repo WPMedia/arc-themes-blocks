@@ -20,7 +20,21 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "이메일 전송",
 		"global.opens-in-new-window": "(새 창에서 열기)",
-		"global.sponsored-content": "Sponsored Content"
+		"global.sponsored-content": "Sponsored Content",
+		"global.social-email-content": "%{authorName}(으)로 이메일 보내기",
+		"global.social-rss-content": "%{authorName} RSS 피드 구독",
+		"global.social-soundcloud-content": "SoundCloud에서 %{authorName} 듣기",
+		"global.social-twitter-content": "Twitter에서 연결",
+		"global.social-facebook-content": "Facebook에서 연결",
+		"global.social-instagram-content": "Instagram에서 팔로우",
+		"global.social-linkedin-content": "LinkedIn에서 연결",
+		"global.social-reddit-content": "Reddit에서 연결",
+		"global.social-youtube-content": "YouTube에서 연결",
+		"global.social-medium-content": "Medium에서 연결",
+		"global.social-tumblr-content": "Tumblr에서 연결",
+		"global.social-pinterest-content": "Pinterest에서 연결",
+		"global.social-snapchat-content": "Snapchat에서 연결",
+		"global.social-whatsapp-content": "WhatsApp에서 연결"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "정정",

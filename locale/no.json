@@ -20,7 +20,21 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-post",
 		"global.opens-in-new-window": "(Åpnes i et nytt vindu)",
-		"global.sponsored-content": "Sponset innhold"
+		"global.sponsored-content": "Sponset innhold",
+		"global.social-email-content": "Send en e-post til %{authorName}",
+		"global.social-rss-content": "Abonner på %{authorName}s RSS-feed",
+		"global.social-soundcloud-content": "Lytt til %{authorName} på SoundCloud",
+		"global.social-twitter-content": "Oppnå kontakt på Twitter",
+		"global.social-facebook-content": "Oppnå kontakt på Facebook",
+		"global.social-instagram-content": "Følg på Instagram",
+		"global.social-linkedin-content": "Oppnå kontakt på LinkedIn",
+		"global.social-reddit-content": "Oppnå kontakt på Reddit",
+		"global.social-youtube-content": "Oppnå kontakt på YouTube",
+		"global.social-medium-content": "Oppnå kontakt på Medium",
+		"global.social-tumblr-content": "Oppnå kontakt på Tumblr",
+		"global.social-pinterest-content": "Oppnå kontakt på Pinterest",
+		"global.social-snapchat-content": "Oppnå kontakt på Snapchat",
+		"global.social-whatsapp-content": "Oppnå kontakt på WhatsApp"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korreksjon",

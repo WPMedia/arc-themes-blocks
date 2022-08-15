@@ -120,7 +120,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 										rel="noreferrer noopener"
 										aria-label={
 											webService
-												? phrases.t(`global.social-${webService.toLowerCase()}`, {
+												? phrases.t(`global.social-${webService.toLowerCase()}-content`, {
 														authorName: name,
 												  })
 												: null

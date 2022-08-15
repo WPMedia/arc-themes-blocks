@@ -20,7 +20,21 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "メールアドレス",
 		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
-		"global.sponsored-content": "スポンサー付きコンテンツ"
+		"global.sponsored-content": "スポンサー付きコンテンツ",
+		"global.social-email-content": "%{authorName}にメールを送信",
+		"global.social-rss-content": "%{authorName}のRSSフィードを登録",
+		"global.social-soundcloud-content": "SoundCloudで%{authorName}を聞く",
+		"global.social-twitter-content": "Twitterで接続",
+		"global.social-facebook-content": "Facebookで接続",
+		"global.social-instagram-content": "Instagramでフォロー",
+		"global.social-linkedin-content": "LinkedInで接続",
+		"global.social-reddit-content": "Redditで接続",
+		"global.social-youtube-content": "YouTubeで接続",
+		"global.social-medium-content": "Mediumで接続",
+		"global.social-tumblr-content": "Tumblrで接続",
+		"aglobal.social-pinterest-content": "Pinterestで接続",
+		"global.social-snapchat-content": "Snapchatで接続",
+		"global.social-whatsapp-content": "WhatsAppで接続"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "修正",

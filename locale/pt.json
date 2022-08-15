@@ -20,7 +20,21 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-mail",
 		"global.opens-in-new-window": "(Abre numa nova janela)",
-		"global.sponsored-content": "Conteúdo patrocinado"
+		"global.sponsored-content": "Conteúdo patrocinado",
+		"global.social-email-content": "Enviar e-mail para %{authorName}",
+		"global.social-rss-content": "Subscrever o feed RSS de %{authorName}",
+		"global.social-soundcloud-content": "Ouvir %{authorName} no SoundCloud",
+		"global.social-twitter-content": "Ligar ao Twitter",
+		"global.social-facebook-content": "Ligar ao Facebook",
+		"global.social-instagram-content": "Seguir no Instagram",
+		"global.social-linkedin-content": "Ligar ao LinkedIn",
+		"global.social-reddit-content": "Ligar ao Reddit",
+		"global.social-youtube-content": "Ligar ao YouTube",
+		"global.social-medium-content": "Ligar ao Medium",
+		"global.social-tumblr-content": "Ligar ao Tumblr",
+		"global.social-pinterest-content": "Ligar ao Pinterest",
+		"global.social-snapchat-content": "Ligar ao Snapchat",
+		"global.social-whatsapp-content": "Ligar ao WhatsApp"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Correção",

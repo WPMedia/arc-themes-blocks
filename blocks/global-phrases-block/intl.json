@@ -163,5 +163,159 @@
 		"no": "Sponset innhold",
 		"pt": "Conteúdo patrocinado",
 		"sv": "Sponsrat innehåll"
+	},
+	"global.social-email-content": {
+		"de": "E-Mail an %{authorName} senden",
+		"en": "Send an email to %{authorName}",
+		"es": "Enviar un correo electrónico a %{authorName}",
+		"fr": "Envoyer un e-mail à %{authorName}",
+		"ja": "%{authorName}にメールを送信",
+		"ko": "%{authorName}(으)로 이메일 보내기",
+		"no": "Send en e-post til %{authorName}",
+		"pt": "Enviar e-mail para %{authorName}",
+		"sv": "Skicka e-post till %{authorName}"
+	},
+	"global.social-rss-content": {
+		"de": "RSS Feed von %{authorName} abonnieren",
+		"en": "Subscribe to %{authorName} RSS feed",
+		"es": "Suscribirse a la fuente RSS de %{authorName}",
+		"fr": "S'abonner au flux RSS de %{authorName}",
+		"ja": "%{authorName}のRSSフィードを登録",
+		"ko": "%{authorName} RSS 피드 구독",
+		"no": "Abonner på %{authorName}s RSS-feed",
+		"pt": "Subscrever o feed RSS de %{authorName}",
+		"sv": "Prenumerera på %{authorName}s RSS-kanal"
+	},
+	"global.social-soundcloud-content": {
+		"de": "%{authorName} auf SoundCloud anhören",
+		"en": "Listen to %{authorName} on SoundCloud",
+		"es": "Escuchar a %{authorName} en SoundCloud",
+		"fr": "Écouter %{authorName} sur SoundCloud",
+		"ja": "SoundCloudで%{authorName}を聞く",
+		"ko": "SoundCloud에서 %{authorName} 듣기",
+		"no": "Lytt til %{authorName} på SoundCloud",
+		"pt": "Ouvir %{authorName} no SoundCloud",
+		"sv": "Lyssna på %{authorName} på SoundCloud"
+	},
+	"global.social-twitter-content": {
+		"de": "Auf Twitter verbinden",
+		"en": "Sponsored Content",
+		"es": "Conectar en Twitter",
+		"fr": "Se connecter sur Twitter",
+		"ja": "Twitterで接続",
+		"ko": "Twitter에서 연결",
+		"no": "Oppnå kontakt på Twitter",
+		"pt": "Ligar ao Twitter",
+		"sv": "Kontakta via Twitter"
+	},
+	"global.social-facebook-content": {
+		"de": "Auf Facebook verbinden",
+		"en": "Connect on Facebook",
+		"es": "Conectar en Facebook",
+		"fr": "Se connecter sur Facebook",
+		"ja": "Facebookで接続",
+		"ko": "Facebook에서 연결",
+		"no": "Oppnå kontakt på Facebook",
+		"pt": "Ligar ao Facebook",
+		"sv": "Kontakta via Facebook"
+	},
+	"global.social-instagram-content": {
+		"de": "Auf Instagram folgen",
+		"en": "Follow on Instagram",
+		"es": "Seguir en Instagram",
+		"fr": "Suivre sur Instagram",
+		"ja": "Instagramでフォロー",
+		"ko": "Instagram에서 팔로우",
+		"no": "Følg på Instagram",
+		"pt": "Seguir no Instagram",
+		"sv": "Följ på Instagram"
+	},
+	"global.social-linkedin-content": {
+		"de": "Auf LinkedIn verbinden",
+		"en": "Connect on LinkedIn",
+		"es": "Conectar en LinkedIn",
+		"fr": "Se connecter sur LinkedIn",
+		"ja": "LinkedInで接続",
+		"ko": "LinkedIn에서 연결",
+		"no": "Oppnå kontakt på LinkedIn",
+		"pt": "Ligar ao LinkedIn",
+		"sv": "Kontakta via LinkedIn"
+	},
+	"global.social-reddit-content": {
+		"de": "Auf Reddit verbinden",
+		"en": "Connect on Reddit",
+		"es": "Conectar en Reddit",
+		"fr": "Se connecter sur Reddit",
+		"ja": "Redditで接続",
+		"ko": "Reddit에서 연결",
+		"no": "Oppnå kontakt på Reddit",
+		"pt": "Ligar ao Reddit",
+		"sv": "Kontakta via Reddit"
+	},
+	"global.social-youtube-content": {
+		"de": "Auf YouTube verbinden",
+		"en": "Connect on YouTube",
+		"es": "Conectar en YouTube",
+		"fr": "Se connecter sur YouTube",
+		"ja": "YouTubeで接続",
+		"ko": "YouTube에서 연결",
+		"no": "Oppnå kontakt på YouTube",
+		"pt": "Ligar ao YouTube",
+		"sv": "Kontakta via YouTube"
+	},
+	"global.social-medium-content": {
+		"de": "Auf Medium verbinden",
+		"en": "Connect on Medium",
+		"es": "Conectar en Medium",
+		"fr": "Se connecter sur Medium",
+		"ja": "Mediumで接続",
+		"ko": "Medium에서 연결",
+		"no": "Oppnå kontakt på Medium",
+		"pt": "Ligar ao Medium",
+		"sv": "Kontakta via Medium"
+	},
+	"global.social-tumblr-content": {
+		"de": "Auf Tumblr verbinden",
+		"en": "Connect on Tumblr",
+		"es": "Conectar en Tumblr",
+		"fr": "Se connecter sur Tumblr",
+		"ja": "Tumblrで接続",
+		"ko": "Tumblr에서 연결",
+		"no": "Oppnå kontakt på Tumblr",
+		"pt": "Ligar ao Tumblr",
+		"sv": "Kontakta via Tumblr"
+	},
+	"global.social-pinterest-content": {
+		"de": "Auf Pinterest verbinden",
+		"en": "Connect on Pinterest",
+		"es": "Conectar en Pinterest",
+		"fr": "Se connecter sur Pinterest",
+		"ja": "Pinterestで接続",
+		"ko": "Pinterest에서 연결",
+		"no": "Oppnå kontakt på Pinterest",
+		"pt": "Ligar ao Pinterest",
+		"sv": "Kontakta via Pinterest"
+	},
+	"global.social-snapchat-content": {
+		"de": "Auf Snapchat verbinden",
+		"en": "Connect on Snapchat",
+		"es": "Conectar en Snapchat",
+		"fr": "Se connecter sur Snapchat",
+		"ja": "Snapchatで接続",
+		"ko": "Snapchat에서 연결",
+		"no": "Oppnå kontakt på Snapchat",
+		"pt": "Ligar ao Snapchat",
+		"sv": "Kontakta via Snapchat"
+	},
+	"global.social-whatsapp-content": {
+		"de": "Auf WhatsApp verbinden",
+		"en": "Connect on WhatsApp",
+		"es": "Conectar en WhatsApp",
+		"fr": "Se connecter sur WhatsApp",
+		"ja": "WhatsAppで接続",
+		"ko": "WhatsApp에서 연결",
+		"no": "Oppnå kontakt på WhatsApp",
+		"pt": "Ligar ao WhatsApp",
+		"sv": "Kontakta via WhatsApp"
 	}
 }

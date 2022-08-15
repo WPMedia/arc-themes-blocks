@@ -144,7 +144,7 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		expect(wrapper.find(".b-author-bio__authors")).toHaveLength(2);
+		expect(wrapper.find({ "data-testid": "authors" }).children().length).toBe(2);
 	});
 
 	it("should show no author if there's no description", () => {
@@ -611,9 +611,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const targetAuthorLink = wrapper.find(".b-author-bio__descriptions > a");
+		const targetAuthorLink = wrapper.find({ "data-testid": "author-name" });
 		expect(targetAuthorLink.length).toBe(1);
-		expect(targetAuthorLink.html()).toBe('<a href="https://google.com"></a>');
+		expect(targetAuthorLink.props().href).toBe("https://google.com");
 	});
 
 	it("handles no author name or description", () => {
@@ -656,7 +656,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		expect(wrapper.find(".b-author-bio__authors").length).toBe(1);
+		expect(wrapper.find({ "data-testid": "authors" }).children().length).toBe(1);
 	});
 
 	it("it should show email link with malito email", () => {

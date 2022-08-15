@@ -11,6 +11,11 @@
 		@include scss.block-properties("author-bio-authorName");
 	}
 
+	&__authorDescription {
+		@include scss.block-components("author-bio-authorDescription");
+		@include scss.block-properties("author-bio-authorDescription");
+	}
+
 	&__socialButtons {
 		@include scss.block-components("author-bio-socialButtons");
 		@include scss.block-properties("author-bio-socialButtons");

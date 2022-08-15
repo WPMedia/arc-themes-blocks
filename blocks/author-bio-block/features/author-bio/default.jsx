@@ -257,7 +257,9 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 						<Stack data-testid="descriptions">
 							{authorNameWithHyperlink || authorName}
 							{/* there will always be a description via conditional on 52 */}
-							<Paragraph>{author.description}</Paragraph>
+							<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
+								{author.description}
+							</Paragraph>
 							<div className={`${BLOCK_CLASS_NAME}__socialButtons`}>{socialLinks}</div>
 						</Stack>
 					</div>

@@ -840,8 +840,13 @@
 				author-bio-authorName: (
 					color: var(--color-primary),
 					font-family: var(--font-family-primary),
-					font-size: var(--global-font-size-4),
+					font-size: var(--global-font-size-5),
 					font-weight: var(--global-font-weight-7),
+					line-height: var(--global-line-height-6),
+				),
+				author-bio-authorDescription: (
+					font-size: var(--global-font-size-3),
+					font-weight: var(--global-font-weight-4),
 					line-height: var(--global-line-height-5),
 				),
 				byline: (
@@ -1866,7 +1871,10 @@
 					display: block,
 				),
 				author-bio-authorName: (
-					font-size: var(--global-font-size-6),
+					font-size: var(--global-font-size-7),
+				),
+				author-bio-authorDescription: (
+					font-size: var(--global-font-size-4),
 					line-height: var(--global-line-height-6),
 				),
 				double-chain: (

@@ -806,7 +806,9 @@
 				right-rail-main: (
 					display: grid,
 					gap: var(--global-spacing-6),
-					width: 100%,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+					margin: auto,
 					components: (
 						stack: (
 							gap: var(--global-spacing-5),
@@ -1020,8 +1022,6 @@
 					gap: var(--global-spacing-10),
 				),
 				right-rail-rail-container: (
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
 					margin: auto,
 					grid-template-columns: repeat(12, 1fr),
 					gap: var(--global-spacing-6),

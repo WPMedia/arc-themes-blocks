@@ -1,11 +1,95 @@
 import React from "react";
-import Promo from "./features/large-promo/default";
+import Promo, { LargePromoPresentation } from "./features/large-promo/default";
 
 export default {
 	title: "Blocks/Large Promo",
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: { viewports: [320, 1200] },
+	},
+};
+
+const MOCK_CONTENT = {
+	_id: "GHRBLTO6MNGV5G65F5D5XFX4SU",
+	credits: {
+		by: [
+			{
+				_id: "saracarothers",
+				additional_properties: {
+					original: {
+						byline: "Sara Lynn Carothers",
+					},
+				},
+				name: "Sara Carothers",
+				type: "author",
+				url: "/author/sara-carothers/",
+			},
+			{
+				_id: "5IWXTLUXWNAZTN45YUTJBZM3JM",
+				additional_properties: {
+					original: {
+						byline: "Taylor Doe",
+					},
+				},
+				name: "Taylor Doe",
+				type: "author",
+				url: "/author/taylor-doe/",
+			},
+			{
+				_id: "john-doe",
+				additional_properties: {
+					original: {
+						byline: "John M Doe",
+					},
+				},
+				name: "John Doe",
+				type: "author",
+				url: "/author/john-m-doe/",
+			},
+		],
+	},
+	description: {
+		basic:
+			"This is a test story that can be used for breaking news situations like if a new baby panda was born.",
+	},
+	display_date: "2019-12-02T18:58:11.638Z",
+	headlines: {
+		basic: "Baby panda born at the zoo",
+	},
+	label: {
+		basic: {
+			display: true,
+			text: "Exclusive",
+		},
+	},
+	owner: {
+		sponsored: false,
+	},
+	promo_items: {
+		basic: {
+			resized_params: {
+				"274x154": "EfMJE6Iiv4GxwSe15iCDxBnN2ag=filters:format(jpg):quality(70)/",
+				"274x183": "a0vSW5PVOKTguW9d5fVcZO-61L4=filters:format(jpg):quality(70)/",
+				"274x206": "Uq6qFBw-w6VLN6hhAt0sjSt5UXs=filters:format(jpg):quality(70)/",
+				"377x212": "6hCESxDFY823IfORYxfAE__fhPw=filters:format(jpg):quality(70)/",
+				"377x251": "oKOQKByIKv7SDRQ3XezELPSAs_o=filters:format(jpg):quality(70)/",
+				"377x283": "kJ48hfQYVtqL6H_kUy06_Od9GIU=filters:format(jpg):quality(70)/",
+			},
+			type: "image",
+			url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/CLPUNWMKOZHWPLFYKRZXW6XTNU.jpg",
+		},
+	},
+	type: "story",
+	embed_html: `<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>`,
+	website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
+	websites: {
+		"the-sun": {
+			website_section: {
+				_id: "/health",
+				name: "Health",
+			},
+			website_url: "/2019/12/02/baby-panda-born-at-the-zoo/",
+		},
 	},
 };
 
@@ -24,6 +108,7 @@ const allCustomFields = {
 	showByline: false,
 	showDate: false,
 	imageRatio: "4:3",
+	playVideoInPlace: false,
 };
 
 export const allFields = () => {
@@ -93,53 +178,39 @@ export const imageAndDescription = () => {
 	return <Promo customFields={updatedCustomFields} />;
 };
 
-/*
- 	note: 
-	`content` from `customFields` prop is overriding content from useContent because "return <LargePromoPresentation content={content} {...customFields} />;" in the stories below.
-	
-	In order for storybook to test the following, this logic would need to be maintained or the mock data would need to be updated.
-*/
+export const withGalleryLabelAndImage = () => (
+	<LargePromoPresentation
+		aspectRatio={16 / 9}
+		imageSearchField="imageURL"
+		labelIconName="Camera"
+		labelIconText="Gallery"
+		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
+		registerSuccessEvent={() => {}}
+		searchableField={() => {}}
+		viewportPercentage={60}
+	/>
+);
 
-export const withGalleryLabelAndImage = () => {
-	const updatedCustomFields = {
-		...allCustomFields,
-		showImage: true,
-		content: { type: "gallery" },
-		showDescription: true,
-		imageOrVideoLabelText: "promo-label.gallery-text",
-		showImageOrVideoLabel: true,
-		showVideoLabel: false,
-	};
+export const withVideoLabelAndImage = () => (
+	<LargePromoPresentation
+		aspectRatio={16 / 9}
+		embedMarkup={MOCK_CONTENT.embed_html}
+		imageSearchField="imageURL"
+		labelIconName="Play"
+		labelIconText="Video"
+		registerSuccessEvent={() => {}}
+		searchableField={() => {}}
+		viewportPercentage={60}
+	/>
+);
 
-	return <Promo customFields={updatedCustomFields} />;
-};
-
-export const withVideoLabelAndImage = () => {
-	const updatedCustomFields = {
-		...allCustomFields,
-		showImage: true,
-		content: { type: "video" },
-		showDescription: true,
-		imageOrVideoLabelText: "promo-label.video-text",
-		showImageOrVideoLabel: true,
-		showVideoLabel: true,
-	};
-
-	return <Promo customFields={updatedCustomFields} />;
-};
-
-export const playVideoInPlaceOfImage = () => {
-	const updatedCustomFields = {
-		...allCustomFields,
-		// playVideoInPlace will override showImage
-		showImage: true,
-		playVideoInPlace: true,
-		aspectRatio: 16 / 9,
-		content: {
-			embed_html: `<div class="powa" id="powa-e924e51b-db94-492e-8346-02283a126943" data-org="corecomponents" data-env="prod" data-uuid="e924e51b-db94-492e-8346-02283a126943" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>`,
-			type: "video",
-		},
-	};
-
-	return <Promo customFields={updatedCustomFields} />;
-};
+export const playVideoInPlaceOfImage = () => (
+	<LargePromoPresentation
+		aspectRatio={16 / 9}
+		embedMarkup={MOCK_CONTENT.embed_html}
+		imageSearchField="imageURL"
+		registerSuccessEvent={() => {}}
+		searchableField={() => {}}
+		viewportPercentage={60}
+	/>
+);

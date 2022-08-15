@@ -8,6 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "저작자",
 		"global.and-text": "및",
+		"global.gallery-text": "갤러리",
+		"global.video-text": "비디오",
 		"global.gallery-expand-button": "더보기",
 		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
 		"global.gallery-autoplay-button": "자동 재생",

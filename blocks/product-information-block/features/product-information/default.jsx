@@ -32,7 +32,7 @@ export const ProductInformationDisplay = ({ data }) => {
 		<Stack className={`${BLOCK_CLASS_NAME}`}>
 			{data.name ? <Heading>{data.name}</Heading> : null}
 			{ListPrice ? (
-				<Price className={`${!isOnSale ? `${BLOCK_CLASS_NAME}__product-single-price` : null}`}>
+				<Price className={`${!isOnSale ? `${BLOCK_CLASS_NAME}__product-single-price` : ""}`}>
 					{isOnSale ? (
 						<Price.Sale
 							aria-label={phrases.t("product-information.sale-price", {

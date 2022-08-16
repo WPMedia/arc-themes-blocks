@@ -1,0 +1,35 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-full-author-bio {
+	&__identification {
+		@include scss.block-properties("full-author-bio-identification");
+		@include scss.block-components("full-author-bio-identification");
+	}
+
+	&__name {
+		@include scss.block-properties("full-author-bio-name");
+		@include scss.block-components("full-author-bio-name");
+	}
+
+	&__role {
+		@include scss.block-properties("full-author-bio-role");
+		@include scss.block-components("full-author-bio-role");
+	}
+
+	&__social {
+		@include scss.block-properties("full-author-bio-social");
+		@include scss.block-components("full-author-bio-social");
+	}
+
+	&__social-link {
+		&:hover {
+			@include scss.block-properties("full-author-bio-social-link-hover");
+			@include scss.block-components("full-author-bio-social-link-hover");
+		}
+		@include scss.block-properties("full-author-bio-social-link");
+		@include scss.block-components("full-author-bio-social-link");
+	}
+
+	@include scss.block-properties("full-author-bio");
+	@include scss.block-components("full-author-bio");
+}

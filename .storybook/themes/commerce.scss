@@ -795,7 +795,7 @@
 				),
 				right-rail: (
 					display: grid,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 				),
 				right-rail-navigation: (
 					position: sticky,
@@ -805,10 +805,9 @@
 				),
 				right-rail-main: (
 					display: grid,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
-					margin: auto,
+					width: 100%,
 					components: (
 						stack: (
 							gap: var(--global-spacing-5),
@@ -816,12 +815,12 @@
 					),
 				),
 				right-rail-rail-container: (
-					max-width: initial,
-					width: 100%,
-					margin: auto,
 					grid-template-columns: initial,
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
+					margin: auto,
+					max-width: initial,
+					width: var(--content-scale-width),
 				),
 				right-rail-main-right-rail: (
 					grid-column: 1,
@@ -1017,6 +1016,9 @@
 					grid-template-areas: "top top" "bottom bottom",
 					max-width: var(--content-scale-width),
 					width: 100%,
+				),
+				right-rail: (
+					gap: var(--global-spacing-6),
 				),
 				right-rail-main: (
 					gap: var(--global-spacing-10),

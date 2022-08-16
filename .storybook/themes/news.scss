@@ -813,6 +813,7 @@
 					list-style-type: disc,
 				),
 				author-bio-author: (
+					gap: var(--global-spacing-4),
 					display: flex,
 					flex-direction: row,
 					components: (
@@ -822,7 +823,6 @@
 							border-radius: var(--global-border-radius-2),
 						),
 						stack: (
-							margin-left: var(--global-spacing-4),
 							gap: var(--global-spacing-2),
 							flex: 1,
 						),

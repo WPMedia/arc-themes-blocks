@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { useContent } from "fusion:content";
 
 import MediumPromo from "./default";
 

@@ -455,5 +455,11 @@
 	"product-information-block": {
 		"product-information.sale-price": "Sale Price %{price}",
 		"product-information.list-price": "List Price %{price}"
+	},
+	"product-gallery-block": {
+		"product-gallery.aria-label": "Products",
+		"product-gallery.right-arrow-label": "Next",
+		"product-gallery.left-arrow-label": "Previous",
+		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
 	}
 }

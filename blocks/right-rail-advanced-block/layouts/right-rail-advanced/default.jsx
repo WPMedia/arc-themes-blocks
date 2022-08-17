@@ -42,7 +42,6 @@ const RightRailAdvancedLayout = ({ children }) => {
 				{fullwidth1 ? (
 					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-1`}>{fullwidth1}</Stack>
 				) : null}
-
 				<Grid className={`${LAYOUT_CLASS_NAME}__rail-container`}>
 					<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item`}>
 						<Stack className={`${LAYOUT_CLASS_NAME}__main-interior-item-1`}>{main}</Stack>
@@ -59,7 +58,7 @@ const RightRailAdvancedLayout = ({ children }) => {
 					</Stack>
 				</Grid>
 				{featureList["7"] > 0 ? (
-					<div className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</div>
+					<Stack className={`${LAYOUT_CLASS_NAME}__full-width-2`}>{fullWidth2}</Stack>
 				) : null}
 			</section>
 			{footer ? (

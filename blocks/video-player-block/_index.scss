@@ -2,11 +2,6 @@
 
 .b-video-player {
 	&__inline {
-		&-video {
-			@include scss.block-components("video-player-inline-video");
-			@include scss.block-properties("video-player-inline-video");
-		}
-
 		@include scss.block-components("video-player-inline");
 		@include scss.block-properties("video-player-inline");
 	}

@@ -188,6 +188,7 @@ export const useFusionContext = () => ({
 
 export const useComponentContext = () => ({
 	registerSuccessEvent: () => ({}),
+	id: "unique-id-via-use-component-context",
 });
 
 export default () => {};

@@ -1347,6 +1347,40 @@
 					margin: 0,
 					padding: 0,
 				),
+				medium-promo: (
+					components: (
+						attribution: (
+							display: block,
+							margin-top: var(--global-spacing-4),
+						),
+						media-item: (
+							float: right,
+							max-width: 100px,
+						),
+						heading: (
+							font-size: var(--global-font-size-7),
+							font-weight: var(--global-font-weight-7),
+							line-height: var(--global-line-height-4),
+							margin-bottom: var(--global-spacing-4),
+						),
+						paragraph: (
+							display: inline,
+							font-size: var(--global-font-size-4),
+							line-height: var(--global-line-height-4),
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
+						),
+					),
+				),
+				medium-promo-show-image: (
+					components: (
+						heading: (
+							// hard-coded based on previous implementation and product requirements for such
+							width: 68%,
+						),
+					),
+				),
 				medium-manual-promo: (
 					components: (
 						media-item: (
@@ -1961,6 +1995,39 @@
 				masthead: (
 					display: flex,
 				),
+				medium-promo: (
+					components: (
+						attribution: (
+							display: block,
+						),
+						media-item: (
+							float: left,
+							margin: 0,
+							max-width: 33%,
+						),
+						heading: (
+							font-size: var(--global-font-size-11),
+							line-height: var(--global-line-height-7),
+						),
+						paragraph: (
+							display: block,
+						),
+					),
+				),
+				medium-promo-show-image: (
+					components: (
+						attribution: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+						heading: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+							width: auto,
+						),
+						paragraph: (
+							margin-left: calc(33% + var(--global-spacing-6)),
+						),
+					),
+				),
 				medium-manual-promo: (
 					components: (
 						media-item: (
@@ -2156,6 +2223,7 @@
 @use "../../blocks/large-promo-block";
 @use "../../blocks/links-bar-block";
 @use "../../blocks/masthead-block";
+@use "../../blocks/medium-promo-block";
 @use "../../blocks/medium-manual-promo-block";
 @use "../../blocks/numbered-list-block";
 @use "../../blocks/overline-block";

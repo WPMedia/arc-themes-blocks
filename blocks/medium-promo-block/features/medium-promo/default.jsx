@@ -1,13 +1,59 @@
 import React from "react";
+
+import { useContent, useEditableContent } from "fusion:content";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import getTranslatedPhrases from "fusion:intl";
+import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
-import { useContent } from "fusion:content";
-import { useFusionContext } from "fusion:context";
+import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import {
+	Attribution,
+	Conditional,
+	Date as DateComponent,
+	formatAuthors,
+	formatURL,
+	getImageFromANS,
+	imageRatio,
+	Heading,
+	HeadingSection,
+	Image,
+	isServerSide,
+	Join,
+	Link,
+	MediaItem,
+	Paragraph,
+	Separator,
+} from "@wpmedia/arc-themes-components";
 
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { MediumPromoPresentation } from "@wpmedia/shared-styles";
+const BLOCK_CLASS_NAME = "b-medium-promo";
 
-const MediumPromoItem = ({ customFields, arcSite }) => {
+const MediumPromo = ({ customFields }) => {
+	const { registerSuccessEvent } = useComponentContext();
+	const { arcSite, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const {
+		dateLocalization: { language, timeZone, dateTimeFormat } = {
+			language: "en",
+			timeZone: "GMT",
+			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+		},
+		fallbackImage,
+		locale,
+	} = getProperties(arcSite);
+	const phrases = getTranslatedPhrases(locale || "en");
+
+	const {
+		showHeadline,
+		showImage,
+		showDescription,
+		showByline,
+		showDate,
+		imageOverrideURL,
+		lazyLoad,
+	} = customFields;
+
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+
 	const content =
 		useContent({
 			source: customFields?.itemContentConfig?.contentService ?? null,
@@ -83,20 +129,89 @@ const MediumPromoItem = ({ customFields, arcSite }) => {
     }`,
 		}) || null;
 
-	return <MediumPromoPresentation content={content} {...customFields} />;
-};
-
-const MediumPromo = ({ customFields }) => {
-	const { isAdmin, arcSite } = useFusionContext();
-	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
-	return (
+
+	const hasAuthors = showByline ? content?.credits?.by : null;
+	const contentDescription = showDescription ? content?.description?.basic : null;
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const promoImageURL = imageOverrideURL || getImageFromANS(content);
+	const contentDate = content?.display_date;
+	const formattedDate = Date.parse(contentDate)
+		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)
+		: "";
+
+	const MediaImage = () =>
+		showImage ? (
+			<Conditional component={Link} condition={contentUrl} href={contentUrl}>
+				<Image
+					alt={content?.headlines?.basic}
+					src={promoImageURL || fallbackImage}
+					searchableField
+					data-aspect-ratio={imageRatio?.replace(":", "/")}
+				/>
+			</Conditional>
+		) : null;
+
+	return showHeadline || showImage || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
-			<MediumPromoItem customFields={customFields} arcSite={arcSite} />
+			<HeadingSection>
+				<article
+					className={`${BLOCK_CLASS_NAME}${
+						promoImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
+					}`}
+				>
+					{promoImageURL ? (
+						<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+							<Conditional
+								component={Link}
+								condition={contentUrl}
+								href={formatURL(contentUrl)}
+								onClick={registerSuccessEvent}
+							>
+								<MediaImage />
+							</Conditional>
+						</MediaItem>
+					) : null}
+
+					{contentHeading ? (
+						<Heading>
+							<Conditional
+								component={Link}
+								condition={contentUrl}
+								href={formatURL(contentUrl)}
+								onClick={registerSuccessEvent}
+							>
+								{contentHeading}
+							</Conditional>
+						</Heading>
+					) : null}
+
+					{contentDescription && showDescription ? (
+						<Paragraph>{contentDescription}</Paragraph>
+					) : null}
+					{hasAuthors || showDate ? (
+						<Attribution>
+							<Join separator={Separator}>
+								{hasAuthors ? (
+									<Join separator={() => " "}>
+										{phrases.t("global.by-text")}
+										{formatAuthors(content?.credits?.by, phrases.t("global.and-text"))}
+									</Join>
+								) : null}
+								{showDate ? (
+									<DateComponent dateTime={contentDate} dateString={formattedDate} />
+								) : null}
+							</Join>
+						</Attribution>
+					) : null}
+				</article>
+			</HeadingSection>
 		</LazyLoad>
-	);
+	) : null;
 };
 
 MediumPromo.propTypes = {
@@ -106,13 +221,13 @@ MediumPromo.propTypes = {
 			label: "Display Content Info",
 		}),
 		showHeadline: PropTypes.bool.tag({
-			label: "Show headline",
 			defaultValue: true,
+			label: "Show headline",
 			group: "Show promo elements",
 		}),
 		showImage: PropTypes.bool.tag({
-			label: "Show image",
 			defaultValue: true,
+			label: "Show image",
 			group: "Show promo elements",
 		}),
 		showDescription: PropTypes.bool.tag({
@@ -121,13 +236,13 @@ MediumPromo.propTypes = {
 			group: "Show promo elements",
 		}),
 		showByline: PropTypes.bool.tag({
-			label: "Show byline",
 			defaultValue: true,
+			label: "Show byline",
 			group: "Show promo elements",
 		}),
 		showDate: PropTypes.bool.tag({
-			label: "Show date",
 			defaultValue: true,
+			label: "Show date",
 			group: "Show promo elements",
 		}),
 		imageOverrideURL: PropTypes.string.tag({
@@ -135,10 +250,14 @@ MediumPromo.propTypes = {
 			group: "Image",
 			searchable: "image",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "16:9"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
-			name: "Lazy Load block?",
 			defaultValue: false,
+			name: "Lazy Load block?",
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
@@ -146,7 +265,6 @@ MediumPromo.propTypes = {
 };
 
 MediumPromo.label = "Medium Promo – Arc Block";
-
 MediumPromo.icon = "paragraph-bullets";
 
 export default MediumPromo;

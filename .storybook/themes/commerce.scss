@@ -822,6 +822,7 @@
 					width: var(--content-scale-width),
 				),
 				right-rail-main-right-rail: (
+					align-items: stretch,
 					grid-column: 1,
 				),
 				right-rail-main-interior-item: (
@@ -1066,7 +1067,6 @@
 @use "../../blocks/product-gallery-block";
 @use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
-@use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

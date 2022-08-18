@@ -1,6 +1,6 @@
 # `@wpmedia/medium-promo-block`
 
-_Block containing a medium promo component. Please provide a 1-2 sentence description of what the block is and what it does._
+Medium Manual Promo Block provides a way for a PageBuilder user to create a data-driven promo item using content data.
 
 ## Acceptance Criteria
 
@@ -8,45 +8,44 @@ _Block containing a medium promo component. Please provide a 1-2 sentence descri
 
 ## Props
 
-| **Prop**                  | **Required** | **Type** | **Description**                                     |
-| ------------------------- | ------------ | -------- | --------------------------------------------------- |
-| **required prop**         | yes          |          |                                                     |
-| **optional prop**         | no           |          |                                                     |
-| **contentConfig example** |              |          | Please specify which content sources are compatible |
+| **Prop**     | **Required** | **Type** | **Description**                  |
+| ------------ | ------------ | -------- | -------------------------------- |
+| customFields | yes          | Shape    | PageBuilder custom fields values |
+
+### Custom Fields
+
+| Prop              | Hidden | Required | Type    | Description                                                                             |
+| ----------------- | ------ | -------- | ------- | --------------------------------------------------------------------------------------- |
+| imageOverrideURL  | no     | no       | string  | The url used for the image to be displayed (overrides a promo image of queried story).  |
+| imageRatio        | no     | no       | Url     | The suggested image dimension ratio (width:height)                                      |
+| itemContentConfig | no     | no       | Shape   | The configuration information for the content api                                       |
+| lazyLoad          | no     | no       | Boolean | Prevent the block from being loaded on the page until it is nearly in-view for the user |
+| showByline        | no     | no       | Boolean | Flag to determine if the Byline portion is displayed                                    |
+| showDate          | no     | no       | Boolean | Flag to determine if the Date portion of the Byline is displayed                        |
+| showDescription   | no     | no       | Boolean | Flag to determine if the Description portion is displayed                               |
+| showImage         | no     | no       | Boolean | Flag to determine if the Image portion is displayed                                     |
 
 ## ANS Schema
 
-Outline any schema information requirements necessary to know for ths block
-
 ### ANS Fields
 
-- `content.headlines.basic`
+- `content.credits.by`
 - `content.description.basic`
-- `content.websites[arcSite].website_section`
-- `content.promo_items`
+- `content.display_date`
+- `content.headlines.basic`
+- `content.websites[arcSite].website_url`
 
 ## Internationalization fields
 
-| Phrase key | Default (English)     |
-| ---------- | --------------------- |
-| `key`      | `english translation` |
+| Phrase key        | Default (English) |
+| ----------------- | ----------------- |
+| `global.and-text` | and               |
+| `global.by-text`  | by                |
 
 ## Events
 
-Blocks can emit events. The following is a list of events that are emitted by this block.
-
-| **Event Name** | **Description**    |
-| -------------- | ------------------ |
-| **eventName**  | Describe the event |
+This block does not emit any events.
 
 ### Event Listening
 
-Include block specific instructions for event listening.
-
-OR
-
 This block does not emit any events.
-
-## Additional Considerations
-
-_Configuration (including content) is handled through proptypes in the PB editor._

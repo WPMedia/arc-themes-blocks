@@ -65,7 +65,7 @@ const Presentation = ({ author = {}, locale }) => {
 			) : null}
 			{bio ? <Paragraph>{bio}</Paragraph> : null}
 			{socials.length ? (
-				<Stack className={`${BLOCK_CLASS_NAME}__social`} direction="horizontal">
+				<Stack className={`${BLOCK_CLASS_NAME}__social`} direction="horizontal" wrap="wrap">
 					{socials.map((item) => (
 						<Link
 							className={`${BLOCK_CLASS_NAME}__social-link`}

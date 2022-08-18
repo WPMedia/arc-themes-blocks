@@ -795,7 +795,7 @@
 				),
 				right-rail: (
 					display: grid,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 				),
 				right-rail-navigation: (
 					position: sticky,
@@ -805,7 +805,7 @@
 				),
 				right-rail-main: (
 					display: grid,
-					gap: var(--global-spacing-6),
+					gap: var(--global-spacing-5),
 					width: 100%,
 					components: (
 						stack: (
@@ -814,14 +814,15 @@
 					),
 				),
 				right-rail-rail-container: (
-					max-width: initial,
-					width: 100%,
-					margin: auto,
 					grid-template-columns: initial,
 					grid-template-rows: 1fr,
 					gap: var(--global-spacing-5),
+					margin: auto,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
 				),
 				right-rail-main-right-rail: (
+					align-items: stretch,
 					grid-column: 1,
 				),
 				right-rail-main-interior-item: (
@@ -1016,12 +1017,13 @@
 					max-width: var(--content-scale-width),
 					width: 100%,
 				),
+				right-rail: (
+					gap: var(--global-spacing-6),
+				),
 				right-rail-main: (
 					gap: var(--global-spacing-10),
 				),
 				right-rail-rail-container: (
-					max-width: calc(var(--content-max-width) * 1px),
-					width: var(--content-scale-width),
 					margin: auto,
 					grid-template-columns: repeat(12, 1fr),
 					gap: var(--global-spacing-6),
@@ -1065,7 +1067,6 @@
 @use "../../blocks/product-gallery-block";
 @use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
-@use "../../blocks/right-rail-advanced-block";
 @use "../../blocks/right-rail-block";
 @use "../../blocks/single-column-layout-block";
 @use "../../blocks/story-carousel-block";

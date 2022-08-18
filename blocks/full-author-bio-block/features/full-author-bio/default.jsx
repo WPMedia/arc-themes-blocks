@@ -4,7 +4,8 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 
 import PropTypes from "@arc-fusion/prop-types";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { isServerSide } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
 import Presentation from "./_children/Presentation";
 
@@ -17,7 +18,8 @@ const FullAuthorBio = ({ customFields = {} }) => {
 	}
 
 	const { locale = "en" } = getProperties(arcSite);
-	const currentAuthor = globalContent?.authors?.[0];
+	const currentAuthor =
+		globalContent?.authors?.[0] || globalContent?.credits?.by?.[0]?.additional_properties?.original;
 
 	return currentAuthor ? (
 		<LazyLoad enabled={isLazyLoad}>
@@ -26,7 +28,7 @@ const FullAuthorBio = ({ customFields = {} }) => {
 	) : null;
 };
 
-FullAuthorBio.label = "FullAuthorBio – Arc Block";
+FullAuthorBio.label = "Full Author Bio – Arc Block";
 
 FullAuthorBio.icon = "paragraph-image-right";
 

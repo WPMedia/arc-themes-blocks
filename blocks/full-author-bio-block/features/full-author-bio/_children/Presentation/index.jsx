@@ -56,7 +56,9 @@ const Presentation = ({ author = {}, locale }) => {
 							<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
 						) : null}
 						{author.role ? (
-							<Heading className={`${BLOCK_CLASS_NAME}__role`}>{author.role}</Heading>
+							<HeadingSection>
+								<Heading className={`${BLOCK_CLASS_NAME}__role`}>{author.role}</Heading>
+							</HeadingSection>
 						) : null}
 					</Stack>
 				</HeadingSection>

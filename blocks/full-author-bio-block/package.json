@@ -2,10 +2,10 @@
 	"name": "@wpmedia/full-author-bio-block",
 	"version": "5.19.0",
 	"description": "Fusion News Theme full author bio block",
-	"author": "Beltran Caliz <beltran.caliz@washpost.com>",
+	"author": "Arc XP - Themes",
 	"homepage": "https://github.com/WPMedia/arc-themes-blocks#readme",
 	"license": "CC-BY-NC-ND-4.0",
-	"main": "index.js",
+	"main": "",
 	"files": [
 		"__index.scss",
 		"features"

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
@@ -43,7 +42,6 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 	const phrases = getTranslatedPhrases(locale);
 	const { credits = {} } = content;
 	const { by = [] } = credits;
-	const PrimaryColor = getThemeStyle(arcSite)["primary-color"];
 
 	// Generate a list of author components
 	const authors = by.reduce((authorList, author) => {
@@ -65,6 +63,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 								const MediaLink = ({ children, webService, ...otherProps }) => (
 									<Link
 										href={constructedURL}
+										className={`${BLOCK_CLASS_NAME}__social-link`}
 										target="_blank"
 										rel="noreferrer noopener"
 										aria-label={
@@ -74,7 +73,6 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 												  })
 												: null
 										}
-										primaryColor={PrimaryColor}
 										{...otherProps}
 									>
 										{children}
@@ -200,19 +198,17 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 			) : undefined;
 
 			authorList.push(
-				<section key={author?.name ? author.name : ""}>
-					<div className={`${BLOCK_CLASS_NAME}__author`}>
-						{renderAuthorImage(author, arcSite)}
-						<Stack data-testid="descriptions">
-							{authorNameWithHyperlink || authorName}
-							{/* there will always be a description via conditional on 52 */}
-							<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
-								{author?.description}
-							</Paragraph>
-							<div className={`${BLOCK_CLASS_NAME}__socialButtons`}>{socialLinks}</div>
-						</Stack>
-					</div>
-				</section>
+				<div className={`${BLOCK_CLASS_NAME}__author`} key={author?.name ? author.name : ""}>
+					{renderAuthorImage(author, arcSite)}
+					<Stack data-testid="descriptions">
+						{authorNameWithHyperlink || authorName}
+						{/* there will always be a description via conditional on 52 */}
+						<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
+							{author?.description}
+						</Paragraph>
+						<div data-testid="social-links">{socialLinks}</div>
+					</Stack>
+				</div>
 			);
 		}
 
@@ -221,7 +217,11 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 	if (authors.length === 0) {
 		return null;
 	}
-	return <div data-testid="authors">{authors}</div>;
+	return (
+		<Stack className={BLOCK_CLASS_NAME} data-testid="authors">
+			{authors}
+		</Stack>
+	);
 };
 
 const AuthorBio = ({ customFields = {} }) => {

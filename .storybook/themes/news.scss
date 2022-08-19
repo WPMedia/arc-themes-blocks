@@ -812,6 +812,9 @@
 					list-style-position: inside,
 					list-style-type: disc,
 				),
+				author-bio: (
+					gap: var(--global-spacing-4),
+				),
 				author-bio-author: (
 					gap: var(--global-spacing-4),
 					display: flex,
@@ -828,12 +831,19 @@
 						),
 					),
 				),
-				author-bio-socialButtons: (
+				author-bio-social-link: (
 					display: flex,
 					flex-wrap: wrap,
 					components: (
 						link: (
 							margin: var(--global-spacing-2) var(--global-spacing-2) 0 0,
+						),
+					),
+				),
+				author-bio-social-link-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
 						),
 					),
 				),

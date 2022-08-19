@@ -131,7 +131,7 @@ export const FullAuthorBioPresentational = (props) => {
 					</p>
 					<div className="social-items">
 						{socials.map((item) => (
-							<a
+							<Link
 								className={`social-column ${item}`}
 								href={constructSocialURL(item, content.authors[0][item])}
 								key={item}
@@ -140,7 +140,7 @@ export const FullAuthorBioPresentational = (props) => {
 								title={phrases.t(`full-author-bio-block.social-${item.toLowerCase()}`)}
 							>
 								{logos[item]}
-							</a>
+							</Link>
 						))}
 					</div>
 				</div>

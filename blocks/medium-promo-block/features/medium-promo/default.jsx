@@ -144,18 +144,6 @@ const MediumPromo = ({ customFields }) => {
 		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)
 		: "";
 
-	const MediaImage = () =>
-		showImage ? (
-			<Conditional component={Link} condition={contentUrl} href={contentUrl}>
-				<Image
-					alt={content?.headlines?.basic}
-					src={promoImageURL || fallbackImage}
-					searchableField
-					data-aspect-ratio={imageRatio?.replace(":", "/")}
-				/>
-			</Conditional>
-		) : null;
-
 	return showHeadline || showImage || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
@@ -164,15 +152,21 @@ const MediumPromo = ({ customFields }) => {
 						promoImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
 					}`}
 				>
-					{promoImageURL ? (
+					{showImage ? (
 						<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
 							<Conditional
 								component={Link}
 								condition={contentUrl}
 								href={formatURL(contentUrl)}
 								onClick={registerSuccessEvent}
+								assistiveHidden
 							>
-								<MediaImage />
+								<Image
+									alt={content?.headlines?.basic}
+									src={promoImageURL || fallbackImage}
+									searchableField
+									data-aspect-ratio={imageRatio?.replace(":", "/")}
+								/>
 							</Conditional>
 						</MediaItem>
 					) : null}

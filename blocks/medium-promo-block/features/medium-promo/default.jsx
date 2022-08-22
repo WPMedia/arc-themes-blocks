@@ -184,9 +184,7 @@ const MediumPromo = ({ customFields }) => {
 						</Heading>
 					) : null}
 
-					{contentDescription && showDescription ? (
-						<Paragraph>{contentDescription}</Paragraph>
-					) : null}
+					{showDescription ? <Paragraph>{contentDescription}</Paragraph> : null}
 					{hasAuthors || showDate ? (
 						<Attribution>
 							<Join separator={Separator}>

@@ -15,20 +15,20 @@ import {
 } from "@wpmedia/arc-themes-components";
 
 const socialIcons = {
-	email: <Icon name="Envelope" />,
-	facebook: <Icon name="Facebook" />,
-	instagram: <Icon name="Instagram" />,
-	linkedin: <Icon name="LinkedIn" />,
-	medium: <Icon name="Medium" />,
-	pinterest: <Icon name="Pinterest" />,
-	reddit: <Icon name="Reddit" />,
-	rss: <Icon name="Rss" />,
-	snapchat: <Icon name="Snapchat" />,
-	soundcloud: <Icon name="SoundCloud" />,
-	tumblr: <Icon name="Tumblr" />,
-	twitter: <Icon name="Twitter" />,
-	whatsapp: <Icon name="WhatsApp" />,
-	youtube: <Icon name="Youtube" />,
+	email: "Envelope",
+	facebook: "Facebook",
+	instagram: "Instagram",
+	linkedin: "LinkedIn",
+	medium: "Medium",
+	pinterest: "Pinterest",
+	reddit: "Reddit",
+	rss: "Rss",
+	snapchat: "Snapchat",
+	soundcloud: "SoundCloud",
+	tumblr: "Tumblr",
+	twitter: "Twitter",
+	whatsapp: "WhatsApp",
+	youtube: "Youtube",
 };
 
 const BLOCK_CLASS_NAME = "b-full-author-bio";
@@ -76,7 +76,7 @@ const Presentation = ({ author = {}, locale }) => {
 								authorName: author.name,
 							})}
 						>
-							{socialIcons[item]}
+							<Icon name={socialIcons[item]} />
 						</Link>
 					))}
 				</Stack>

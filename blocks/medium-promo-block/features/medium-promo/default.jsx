@@ -13,7 +13,6 @@ import {
 	formatAuthors,
 	formatURL,
 	getImageFromANS,
-	imageRatio,
 	Heading,
 	HeadingSection,
 	Image,
@@ -43,13 +42,14 @@ const MediumPromo = ({ customFields }) => {
 	const phrases = getTranslatedPhrases(locale || "en");
 
 	const {
-		showHeadline,
-		showImage,
-		showDescription,
-		showByline,
-		showDate,
+		imageRatio,
 		imageOverrideURL,
 		lazyLoad,
+		showByline,
+		showDate,
+		showDescription,
+		showHeadline,
+		showImage,
 	} = customFields;
 
 	const shouldLazyLoad = lazyLoad && !isAdmin;

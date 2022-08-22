@@ -1,5 +1,3 @@
-import { mockProductData } from "./mock-data";
-
 import contentSource from "./commerce-product";
 
 jest.mock("fusion:environment", () => ({
@@ -12,33 +10,22 @@ jest.mock("axios", () => ({
 }));
 
 describe("Test Commerce Product content source", () => {
-	/* We can delete this once we replace mock data with API call */
-	it("will return mock data", () => {
+	it("should build the correct url", async () => {
 		const key = {
 			"arc-site": "arc-site",
-			slug: "test-slug",
-		};
-		const contentSourceRequest = contentSource.fetch(key);
-
-		expect(contentSourceRequest).toMatchObject(mockProductData);
-	});
-
-	xit("should build the correct url", async () => {
-		const key = {
-			"arc-site": "arc-site",
-			slug: "test-slug",
+			sku: "test-sku",
 		};
 		const contentSourceRequest = await contentSource.fetch(key);
 
 		expect(contentSourceRequest.url).toEqual(
-			`/-- API - ENDPOINT URI HERE --?website=${key["arc-site"]}`
+			`/product/api/v1/product/sku/test-sku?website=${key["arc-site"]}`
 		);
 	});
 
 	it("should tansform data", () => {
 		const key = {
 			"arc-site": "arc-site",
-			slug: "test-slug",
+			sku: "test-sku",
 		};
 		const dataTransform = contentSource.transform(key);
 

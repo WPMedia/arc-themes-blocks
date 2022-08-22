@@ -71,8 +71,7 @@ const Presentation = ({ author = {}, locale }) => {
 							className={`${BLOCK_CLASS_NAME}__social-link`}
 							href={formatSocialURL(item, author[item])}
 							key={item}
-							rel="noopener noreferrer"
-							target="_blank"
+							openInNewTab
 							title={phrases.t(`global.social-${item.toLowerCase()}-content`, {
 								authorName: author.name,
 							})}

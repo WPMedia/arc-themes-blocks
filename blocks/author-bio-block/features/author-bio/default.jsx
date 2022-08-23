@@ -206,7 +206,9 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 						<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
 							{author?.description}
 						</Paragraph>
-						<div data-testid="social-links">{socialLinks}</div>
+						<div data-testid="social-links" className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}>
+							{socialLinks}
+						</div>
 					</Stack>
 				</div>
 			);

@@ -21,8 +21,11 @@
 			@include scss.block-properties("author-bio-social-link-hover");
 			@include scss.block-components("author-bio-social-link-hover");
 		}
-		@include scss.block-properties("full-author-bio-social-link");
-		@include scss.block-components("full-author-bio-social-link");
+
+		&__wrapper {
+			@include scss.block-properties("author-bio-social-link-wrapper");
+			@include scss.block-components("author-bio-social-link-wrapper");
+		}
 	}
 	@include scss.block-components("author-bio");
 	@include scss.block-properties("author-bio");

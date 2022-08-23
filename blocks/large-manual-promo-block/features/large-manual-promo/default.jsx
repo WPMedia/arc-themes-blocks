@@ -1,19 +1,113 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { LargePromoPresentation } from "@wpmedia/shared-styles";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import { useEditableContent } from "fusion:content";
+import getProperties from "fusion:properties";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	Conditional,
+	Image,
+	isServerSide,
+	formatURL,
+	Grid,
+	Heading,
+	HeadingSection,
+	Link,
+	MediaItem,
+	Overline,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-large-manual-promo";
 
 const LargeManualPromo = ({ customFields }) => {
 	const { isAdmin } = useFusionContext();
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
+	const {
+		description,
+		headline,
+		imageURL,
+		lazyLoad,
+		linkURL,
+		newTab,
+		overline,
+		overlineURL,
+		showDescription,
+		showHeadline,
+		showImage,
+		showOverline,
+	} = customFields;
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+	const { arcSite } = useFusionContext();
+	const { fallbackImage } = getProperties(arcSite);
+	const { registerSuccessEvent } = useComponentContext();
+
+	if (shouldLazyLoad && isServerSide()) {
 		// On Server
 		return null;
 	}
+
+	const PromoImage = () => {
+		const { searchableField } = useEditableContent();
+
+		return (
+			<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					<Image alt={headline} src={imageURL || fallbackImage} searchableField />
+				</Conditional>
+			</MediaItem>
+		);
+	};
+
+	const PromoHeading = () =>
+		showHeadline && headline ? (
+			<Heading>
+				<Conditional
+					component={Link}
+					condition={linkURL}
+					href={formatURL(linkURL)}
+					openInNewTab={newTab}
+					onClick={registerSuccessEvent}
+				>
+					{headline}
+				</Conditional>
+			</Heading>
+		) : null;
+
+	const PromoOverline = () => {
+		if (showOverline && overline) {
+			if (overlineURL) {
+				return <Overline href={overlineURL}>{overline}</Overline>;
+			}
+			return <Overline>{overline}</Overline>;
+		}
+		return null;
+	};
+
+	const PromoDescription = () => <Paragraph>{description}</Paragraph>;
+
 	return (
-		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-			<LargePromoPresentation {...customFields} />
+		<LazyLoad enabled={shouldLazyLoad}>
+			<HeadingSection>
+				<Grid as="article" className={BLOCK_CLASS_NAME}>
+					{showImage && imageURL ? <PromoImage /> : null}
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						<PromoOverline />
+						{showDescription || showHeadline ? (
+							<Stack>
+								<PromoHeading />
+								{showDescription && description ? <PromoDescription /> : null}
+							</Stack>
+						) : null}
+					</Stack>
+				</Grid>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -70,7 +164,11 @@ LargeManualPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "4:3",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

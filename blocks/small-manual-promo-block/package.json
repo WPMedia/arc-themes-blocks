@@ -2,14 +2,13 @@
   "name": "@wpmedia/small-manual-promo-block",
   "version": "5.17.0",
   "description": "Fusion News Theme Small Manual Promo block",
-  "author": "Brent Miller <brent.miller@washpost.com>",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
     "features",
-    "chains",
-    "layouts"
+    "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -20,16 +19,9 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/small-manual-promo-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/resizer-image-block": "*",
-    "@wpmedia/shared-styles": "*"
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "gitHead": "83fb8d6685958d85ddbfcfbf01d9a5c864cd6c95"
 }

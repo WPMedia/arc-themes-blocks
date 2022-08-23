@@ -1,38 +1,31 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
+import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
-import getThemeStyle from "fusion:themes";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
+import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+
 import {
-	Gallery,
-	ImageMetadata,
+	formatCredits,
+	Carousel,
+	Heading,
+	HeadingSection,
+	Icon,
 	Image,
-	// presentational component does not do data fetching
-	VideoPlayer as VideoPlayerPresentational,
-	LazyLoad,
-	isServerSide,
-	videoPlayerCustomFields,
-} from "@wpmedia/engine-theme-sdk";
+	Link,
+	MediaItem,
+	Paragraph,
+	Video,
+} from "@wpmedia/arc-themes-components";
+
 import Header from "./_children/heading";
 import HTML from "./_children/html";
 import List from "./_children/list";
 import Oembed from "./_children/oembed";
 import Quote from "./_children/quote";
 import Table from "./_children/table";
-import "./_articlebody.scss";
 
-const StyledText = styled.p`
-	a {
-		color: ${(props) => props.primaryColor};
-	}
-`;
-
-const StyledLink = styled.a`
-	border-bottom: 1px solid ${(props) => props.primaryColor};
-	color: ${(props) => props.primaryColor};
-`;
+const BLOCK_CLASS_NAME = "b-article-body";
 
 function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 	const { _id: key = index, type, content } = item;
@@ -49,37 +42,26 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 		hideVideoCredits = false,
 	} = customFields;
 
-	// TODO: Split each type into a separate reusable component
 	switch (type) {
 		case "text": {
 			return content && content.length > 0 ? (
-				<StyledText
-					primaryColor={getThemeStyle(arcSite)["primary-color"]}
-					className="body-paragraph"
-					key={key}
-					dangerouslySetInnerHTML={{ __html: content }}
-				/>
+				<Paragraph key={key} dangerouslySetInnerHTML={{ __html: content }} />
 			) : null;
 		}
 		case "copyright": {
 			return content && content.length > 0 ? (
-				<StyledText
-					primaryColor={getThemeStyle(arcSite)["primary-color"]}
-					className="body-paragraph body-copyright"
+				<Paragraph
 					key={key}
+					className={`${BLOCK_CLASS_NAME}__copyright`}
 					dangerouslySetInnerHTML={{ __html: content }}
 				/>
 			) : null;
 		}
+
 		case "divider": {
-			return (
-				<Fragment key={key}>
-					<div className="divider">
-						<hr />
-					</div>
-				</Fragment>
-			);
+			return <hr className={`${BLOCK_CLASS_NAME}__divider`} key={key} />;
 		}
+
 		case "image": {
 			const {
 				url,
@@ -87,7 +69,6 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 				caption,
 				credits,
 				alt_text: altText,
-				resized_params: resizedImageOptions = {},
 				vanity_credits: vanityCredits,
 				// alignment not always present
 				alignment = "",
@@ -97,72 +78,42 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			// link url set in composer
 			const { link = "" } = additionalProperties;
 
-			let widthsObject = {
-				small: 768,
-				medium: 1024,
-				large: 1440,
-			};
-
 			// only left and right float supported
 			const allowedFloatValue = alignment === "left" || alignment === "right" ? alignment : "";
 
-			let figureImageClassName = "article-body-image-container";
+			let figureImageClassName = `${BLOCK_CLASS_NAME}__image`;
 
 			if (allowedFloatValue) {
-				// cut the image width in about half if left or right aligned
-				// matched based on allowed widths
-				// the goal was to show 50% of width
-				widthsObject = {
-					small: 274,
-					medium: 400,
-					large: 768,
-				};
-
 				// add space after initial string ' '
 				figureImageClassName +=
 					allowedFloatValue === "left"
-						? " article-body-image-container--mobile-left-float"
-						: " article-body-image-container--mobile-right-float";
+						? ` ${BLOCK_CLASS_NAME}__image-float-left`
+						: ` ${BLOCK_CLASS_NAME}__image-float-right`;
 			}
 
 			if (url) {
-				const ArticleBodyImage = () => (
-					<Image
-						resizedImageOptions={resizedImageOptions}
-						url={url}
-						alt={altText}
-						smallWidth={widthsObject.small}
-						smallHeight={0}
-						mediumWidth={widthsObject.medium}
-						mediumHeight={0}
-						largeWidth={widthsObject.large}
-						largeHeight={0}
-						breakpoints={getProperties(arcSite)?.breakpoints}
-						resizerURL={getProperties(arcSite)?.resizerURL}
-					/>
-				);
+				const ArticleBodyImage = () => <Image src={url} alt={altText} />;
+				const formattedCredits = formatCredits(vanityCredits || credits);
 
 				const ArticleBodyImageContainer = ({ children }) => (
-					<figure className={figureImageClassName}>
+					<MediaItem
+						key={key}
+						className={figureImageClassName}
+						caption={!hideImageCaption ? caption : null}
+						credit={!hideImageCredits ? formattedCredits : null}
+						title={!hideImageTitle ? subtitle : null}
+					>
 						{children}
-						<figcaption>
-							<ImageMetadata
-								subtitle={!hideImageTitle ? subtitle : null}
-								caption={!hideImageCaption ? caption : null}
-								credits={!hideImageCredits ? credits : null}
-								vanityCredits={!hideImageCredits ? vanityCredits : null}
-							/>
-						</figcaption>
-					</figure>
+					</MediaItem>
 				);
 
 				// if link url then make entire image clickable
 				if (link) {
 					return (
 						<ArticleBodyImageContainer key={key}>
-							<a href={link}>
+							<Link href={link}>
 								<ArticleBodyImage />
-							</a>
+							</Link>
 						</ArticleBodyImageContainer>
 					);
 				}
@@ -184,29 +135,22 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const afterContent = "&nbsp;]";
 
 			return (
-				<Fragment key={key}>
-					<p className="interstitial-link block-margin-bottom">
-						<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
-						<StyledLink
-							href={url}
-							aria-label={phrases.t("article-body-block.interstitial-link-aria-label")}
-							dangerouslySetInnerHTML={{ __html: content }}
-							primaryColor={getThemeStyle(arcSite)["primary-color"]}
-						/>
-						<span dangerouslySetInnerHTML={{ __html: afterContent }} />
-					</p>
-				</Fragment>
+				<Paragraph key={key} className={`${BLOCK_CLASS_NAME}__interstitial-link`}>
+					<span dangerouslySetInnerHTML={{ __html: beforeContent }} />
+					<Link
+						href={url}
+						aria-label={phrases.t("article-body-block.interstitial-link-aria-label")}
+					>
+						{content}
+					</Link>
+					<span dangerouslySetInnerHTML={{ __html: afterContent }} />
+				</Paragraph>
 			);
 		}
 
 		case "raw_html": {
 			return content && content.length > 0 ? (
-				<HTML
-					key={key}
-					id={key}
-					content={content}
-					primaryColor={getThemeStyle(arcSite)["primary-color"]}
-				/>
+				<HTML key={key} id={key} className={`${BLOCK_CLASS_NAME}__html`} content={content} />
 			) : null;
 		}
 
@@ -214,13 +158,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 			const { list_type: listType, items: listItems } = item;
 			// eslint-disable-next-line arrow-body-style
 			return listItems && listItems.length > 0 ? (
-				<Fragment key={key}>
-					<List
-						listType={listType}
-						listItems={listItems}
-						primaryColor={getThemeStyle(arcSite)["primary-color"]}
-					/>
-				</Fragment>
+				<List key={key} listType={listType} listItems={listItems} />
 			) : null;
 		}
 
@@ -233,108 +171,123 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 					: phrases.t("article-body-block.correction");
 
 			return item.text && item.text.length > 0 ? (
-				<Fragment key={key}>
-					<section className="correction">
-						<h2 className="h6-primary">{labelText}</h2>
-						<p>{item.text}</p>
-					</section>
-				</Fragment>
+				<section className={`${BLOCK_CLASS_NAME}__correction`} key={key}>
+					<HeadingSection>
+						<Heading>{labelText}</Heading>
+						<Paragraph>{item.text}</Paragraph>
+					</HeadingSection>
+				</section>
 			) : null;
 		}
 
 		case "header":
 			return item.content && item.content.length > 0 ? (
-				<Header key={key} element={item} primaryColor={getThemeStyle(arcSite)["primary-color"]} />
+				<Header key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
 			) : null;
 
 		case "oembed_response": {
-			return item.raw_oembed ? <Oembed key={key} element={item} /> : null;
+			return item.raw_oembed ? (
+				<Oembed key={key} classPrefix={BLOCK_CLASS_NAME} element={item} />
+			) : null;
 		}
 
 		case "table": {
-			return item.rows ? <Table key={key} element={item} /> : null;
+			return item.rows ? <Table key={key} element={item} classPrefix={BLOCK_CLASS_NAME} /> : null;
 		}
 
 		case "quote":
 			switch (item.subtype) {
 				case "pullquote":
-					return <Quote key={key} element={item} className="pullquote" />;
+					return <Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} type="pullquote" />;
 
 				case "blockquote":
 				default:
-					return <Quote key={key} element={item} />;
+					return <Quote key={key} element={item} classPrefix={BLOCK_CLASS_NAME} />;
 			}
+
 		case "video":
 			return (
-				<section key={key} className="block-margin-bottom">
-					<VideoPlayerPresentational
-						id={id}
-						embedMarkup={item.embed_html}
-						shrinkToFit={customFields?.shrinkToFit}
-						viewportPercentage={customFields?.viewportPercentage}
-						displayTitle={!hideVideoTitle}
-						displayCaption={!hideVideoCaption}
-						displayCredits={!hideVideoCredits}
-						subtitle={item?.headlines?.basic}
-						caption={item?.description?.basic}
-						credits={item.credits}
-					/>
-				</section>
+				<MediaItem
+					key={key}
+					caption={!hideVideoCaption ? item?.description?.basic : null}
+					credit={!hideVideoCredits ? formatCredits(item.credits) : null}
+					title={!hideVideoTitle ? item?.headlines?.basic : null}
+				>
+					<Video className="video-container" embedMarkup={item.embed_html} />
+				</MediaItem>
 			);
-		case "gallery":
+		case "gallery": {
+			const total = item.content_elements.length;
 			return (
-				<section key={key} className="block-margin-bottom gallery">
-					<Gallery
-						galleryElements={item.content_elements}
-						resizerURL={getProperties(arcSite)?.resizerURL}
-						ansId={item._id}
-						ansHeadline={item.headlines.basic ? item.headlines.basic : ""}
+				<section key={key}>
+					<Carousel
+						id={key}
+						className={`${BLOCK_CLASS_NAME}__gallery`}
+						label={item?.description?.basic || "Gallery"}
+						slidesToShow={1}
+						additionalNextButton={
+							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-next`}>
+								<Icon name="ChevronRight" />
+							</button>
+						}
+						additionalPreviousButton={
+							<button type="button" className={`${BLOCK_CLASS_NAME}__gallery-additional-previous`}>
+								<Icon name="ChevronLeft" />
+							</button>
+						}
 						autoplayPhraseLabels={{
 							start: phrases.t("global.gallery-autoplay-label-start"),
 							stop: phrases.t("global.gallery-autoplay-label-stop"),
 						}}
-						controlsFont={getThemeStyle(arcSite)["primary-font-family"]}
-						expandPhrase={phrases.t("global.gallery-expand-button")}
-						autoplayPhrase={phrases.t("global.gallery-autoplay-button")}
-						pausePhrase={phrases.t("global.gallery-pause-autoplay-button")}
-						pageCountPhrase={
-							/* istanbul ignore next */ (current, total) =>
-								phrases.t("global.gallery-page-count-text", { current, total })
+						enableAutoplay
+						enableFullScreen
+						fullScreenShowButton={
+							<button type="button">
+								<Icon name="Fullscreen" className={`${BLOCK_CLASS_NAME}__full-screen-icon`} />
+								{phrases.t("global.gallery-expand-button")}
+							</button>
 						}
-						displayTitle={!hideGalleryTitle}
-						displayCaption={!hideGalleryCaption}
-						displayCredits={!hideGalleryCredits}
-					/>
+						showAdditionalSlideControls
+						showLabel
+						startAutoplayIcon={<Icon name="Play" className={`${BLOCK_CLASS_NAME}__start-icon`} />}
+						startAutoplayText={phrases.t("global.gallery-autoplay-button")}
+						stopAutoplayIcon={<Icon name="Pause" className={`${BLOCK_CLASS_NAME}__stop-icon`} />}
+						stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
+						nextButton={
+							<Carousel.Button id={key} label="Next Slide">
+								<Icon name="ChevronRight" />
+							</Carousel.Button>
+						}
+						previousButton={
+							<Carousel.Button id={key} label="Previous Slide">
+								<Icon name="ChevronLeft" />
+							</Carousel.Button>
+						}
+					>
+						{item.content_elements.map((i, itemIndex) => (
+							<Carousel.Item
+								label={phrases.t("global.gallery-page-count-text", { itemIndex, total })}
+								key={`gallery-item-${i.url}`}
+							>
+								<MediaItem
+									caption={!hideGalleryCaption ? i.caption : null}
+									credit={!hideGalleryCredits ? formatCredits(i.credits) : null}
+									title={!hideGalleryTitle ? i.subtitle : null}
+								>
+									<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
+										<Image src={i.url} alt={i.alt_text} width={800} />
+									</div>
+								</MediaItem>
+							</Carousel.Item>
+						))}
+					</Carousel>
 				</section>
 			);
+		}
 		default:
 			return null;
 	}
 }
-
-const ArticleBody = styled.article`
-	font-family: ${(props) => props.secondaryFont};
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	figcaption,
-	table {
-		font-family: ${(props) => props.primaryFont};
-	}
-
-	.body-paragraph,
-	.interstitial-link,
-	ol,
-	ul,
-	blockquote p,
-	blockquote {
-		font-family: ${(props) => props.secondaryFont};
-	}
-`;
 
 export const ArticleBodyChainPresentation = ({ children, customFields = {}, context }) => {
 	const { globalContent: items = {}, arcSite, id } = context;
@@ -400,15 +353,7 @@ export const ArticleBodyChainPresentation = ({ children, customFields = {}, cont
 			: []),
 	];
 
-	return (
-		<ArticleBody
-			className="article-body-wrapper"
-			primaryFont={getThemeStyle(arcSite)["primary-font-family"]}
-			secondaryFont={getThemeStyle(arcSite)["secondary-font-family"]}
-		>
-			{articleBody}
-		</ArticleBody>
-	);
+	return <article className={BLOCK_CLASS_NAME}>{articleBody}</article>;
 };
 
 const ArticleBodyChain = ({ children, customFields = {} }) => {
@@ -441,7 +386,6 @@ ArticleBodyChain.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
-		...videoPlayerCustomFields(),
 		hideImageTitle: PropTypes.bool.tag({
 			description: "This display option applies to all Images in the Article Body.",
 			label: "Hide Title",

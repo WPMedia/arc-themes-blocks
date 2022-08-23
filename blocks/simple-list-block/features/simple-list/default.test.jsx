@@ -1,6 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
+import { useFusionContext } from "fusion:context";
 import { useContent } from "fusion:content";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import SimpleList from "./default";
 
 const mockOutput = {
@@ -103,7 +105,11 @@ jest.mock("fusion:themes", () => jest.fn(() => ({})));
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
 	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
+}));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(),
 }));
 
 jest.mock(
@@ -125,13 +131,13 @@ describe("Simple list", () => {
 
 		const wrapper = mount(<SimpleList customFields={customFields} />);
 
-		expect(wrapper.find(".list-title").first().text()).toBe(testText);
+		expect(wrapper.find("Heading").first().text()).toBe(testText);
 	});
 
 	it("should show no title if there is no title provided", () => {
 		const wrapper = mount(<SimpleList customFields={{ lazyLoad: false }} />);
 
-		expect(wrapper.find(".list-title").length).toBe(0);
+		expect(wrapper.find(".b-simple-list__title").length).toBe(0);
 	});
 
 	it("should fetch an array of data when content service is provided", () => {
@@ -150,6 +156,12 @@ describe("Simple list", () => {
 		expect(wrapper.find("StoryItem").length).toBe(2);
 	});
 
+	it("should render content only for the arcSite", () => {
+		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
+
+		expect(wrapper.find("StoryItem")).toHaveLength(2);
+	});
+
 	it("should not render items when no data provided", () => {
 		const customFields = {
 			lazyLoad: false,
@@ -160,20 +172,26 @@ describe("Simple list", () => {
 				},
 			},
 		};
-		// Once for Placeholder, once for SimpleList data
-		useContent.mockReturnValueOnce(null);
+
 		useContent.mockReturnValueOnce(null);
 
 		const wrapper = mount(<SimpleList customFields={customFields} arcSite="the-sun" />);
 
 		expect(wrapper.find("StoryItem").length).toBe(0);
 	});
-});
 
-describe("Simple list", () => {
-	it("should render content only for the arcSite", () => {
-		const wrapper = mount(<SimpleList arcSite="the-sun" customFields={{ lazyLoad: false }} />);
+	it("should render null if isServerSide and lazyLoad enabled", () => {
+		const customFields = {
+			lazyLoad: true,
+		};
+		isServerSide.mockReturnValue(true);
+		useFusionContext.mockReturnValueOnce({
+			arcSite: "the-sun",
+			deployment: jest.fn((x) => x),
+			isAdmin: false,
+		});
 
-		expect(wrapper.find("StoryItem")).toHaveLength(2);
+		const wrapper = mount(<SimpleList customFields={customFields} />);
+		expect(wrapper).toBeEmptyRender();
 	});
 });

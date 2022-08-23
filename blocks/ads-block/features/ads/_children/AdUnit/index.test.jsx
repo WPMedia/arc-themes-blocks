@@ -17,8 +17,10 @@ ArcAdsInstance.getInstance = jest.fn((properties, callback) => {
 	return ArcAdsInstance.instance;
 });
 
+const AD_CONFIG_MOCK_ID = "arc-ad-id-mock";
+
 const AD_CONFIG_MOCK = {
-	id: "arcad_f0f67h9JgRhzvj-169abcbe2da0a5",
+	id: AD_CONFIG_MOCK_ID,
 	slotName: "news/homepage",
 	adType: "leaderboard_large",
 	adClass: "728x90",
@@ -79,9 +81,9 @@ describe("<AdUnit/>", () => {
 	it("renders and registers ad unit on published page", () => {
 		const wrapper = mount(<AdUnit adConfig={AD_CONFIG_MOCK} featureConfig={FEATURE_CONFIG_MOCK} />);
 		expect(wrapper).toBeDefined();
-		const adUnitEl = wrapper.find(".arcad");
+		// id with the ad config
+		const adUnitEl = wrapper.find(`#${AD_CONFIG_MOCK_ID}`);
 		expect(adUnitEl).toHaveLength(1);
-		expect(adUnitEl.hasClass(`ad-${AD_CONFIG_MOCK.adClass}`)).toBe(true);
 
 		expect(ArcAdsInstance.getInstance).toHaveBeenCalledTimes(1);
 		expect(setPageTargeting).toBeCalledWith(expect.objectContaining(FEATURE_CONFIG_MOCK));
@@ -95,22 +97,5 @@ describe("<AdUnit/>", () => {
 				},
 			})
 		);
-	});
-
-	it("does not register ad unit in PageBuilder Admin", () => {
-		const wrapper = mount(
-			<AdUnit
-				adConfig={AD_CONFIG_MOCK}
-				featureConfig={{
-					...FEATURE_CONFIG_MOCK,
-					isAdmin: true,
-				}}
-			/>
-		);
-		expect(wrapper).toBeDefined();
-		const adUnitEl = wrapper.find(".arcad");
-		expect(adUnitEl).toHaveLength(0);
-		expect(ArcAdsInstance.getInstance).toHaveBeenCalledTimes(0);
-		expect(mockRegisterAd).toHaveBeenCalledTimes(0);
 	});
 });

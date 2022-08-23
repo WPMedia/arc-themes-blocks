@@ -7,9 +7,9 @@
 		"black": #000000,
 		"white": #ffffff,
 
-		"blue-1": #ebefff,
-		"blue-2": #b0c3f2,
-		"blue-3": #7aa2e5,
+		"blue-1": #f2f5ff,
+		"blue-2": #c5d4fa,
+		"blue-3": #8fb3f0,
 		"blue-4": #4a89d8,
 		"blue-5": #1e78cb,
 		"blue-6": #1458a9,
@@ -18,9 +18,9 @@
 		"blue-9": #021443,
 		"blue-10": #000721,
 
-		"red-1": #ff8a8a,
-		"red-2": #e65555,
-		"red-3": #ce2929,
+		"red-1": #ffe4e4,
+		"red-2": #faa7a7,
+		"red-3": #d84e4e,
 		"red-4": #b50505,
 		"red-5": #9c0000,
 		"red-6": #840000,
@@ -29,9 +29,9 @@
 		"red-9": #3a0000,
 		"red-10": #210000,
 
-		"orange-1": #fa714b,
-		"orange-2": #e24f23,
-		"orange-3": #c93302,
+		"orange-1": #fff4ea,
+		"orange-2": #ffd7b2,
+		"orange-3": #dc6e4a,
 		"orange-4": #b12e00,
 		"orange-5": #982a00,
 		"orange-6": #802500,
@@ -40,9 +40,9 @@
 		"orange-9": #371200,
 		"orange-10": #1f0b00,
 
-		"green-1": #80d971,
-		"green-2": #57c244,
-		"green-3": #34ab1f,
+		"green-1": #ebfce9,
+		"green-2": #a4e299,
+		"green-3": #5dbe4b,
 		"green-4": #189402,
 		"green-5": #137d00,
 		"green-6": #0f6600,
@@ -51,9 +51,9 @@
 		"green-9": #052100,
 		"green-10": #020a00,
 
-		"neutral-1": #e6efff,
-		"neutral-2": #c3cfe3,
-		"neutral-3": #a3b0c6,
+		"neutral-1": #eef4ff,
+		"neutral-2": #d3dceb,
+		"neutral-3": #b3bfd2,
 		"neutral-4": #8593aa,
 		"neutral-5": #69778e,
 		"neutral-6": #4f5c71,
@@ -62,41 +62,41 @@
 		"neutral-9": #10151c,
 		"neutral-10": #000000,
 
-		"spacing-1": 0.25rem,
 		// 4px
-		"spacing-2": 0.5rem,
+		"spacing-1": 0.25rem,
 		// 8px
-		"spacing-3": 0.75rem,
+		"spacing-2": 0.5rem,
 		// 12px
-		"spacing-4": 1rem,
+		"spacing-3": 0.75rem,
 		// 16px
-		"spacing-5": 1.5rem,
+		"spacing-4": 1rem,
 		// 24px
-		"spacing-6": 2rem,
+		"spacing-5": 1.5rem,
 		// 32px
-		"spacing-7": 2.5rem,
+		"spacing-6": 2rem,
 		// 40px
-		"spacing-8": 3rem,
+		"spacing-7": 2.5rem,
 		// 48px
-		"spacing-9": 3.5rem,
+		"spacing-8": 3rem,
 		// 56px
-		"spacing-10": 4rem,
+		"spacing-9": 3.5rem,
 		// 64px
-		"spacing-11": 4.5rem,
+		"spacing-10": 4rem,
 		// 72px
-		"spacing-12": 5rem,
+		"spacing-11": 4.5rem,
 		// 80px
-		"spacing-13": 5.5rem,
+		"spacing-12": 5rem,
 		// 88px
-		"spacing-14": 6rem,
+		"spacing-13": 5.5rem,
 		// 96px
-		"spacing-15": 6.5rem,
+		"spacing-14": 6rem,
 		// 104px
-		"spacing-16": 7rem,
+		"spacing-15": 6.5rem,
 		// 112px
+		"spacing-16": 7rem,
+		// 120px
 		"spacing-17": 7.5rem,
 
-		// 120px
 		"font-weight-1": 100,
 		"font-weight-2": 200,
 		"font-weight-3": 300,
@@ -107,58 +107,44 @@
 		"font-weight-8": 800,
 		"font-weight-9": 900,
 
-		"font-size-1": 0.625rem,
 		// 10px
-		"font-size-2": 0.75rem,
+		"font-size-1": 0.625rem,
 		// 12px
-		"font-size-3": 0.875rem,
+		"font-size-2": 0.75rem,
 		// 14px
-		"font-size-4": 1rem,
+		"font-size-3": 0.875rem,
 		// 16px
-		"font-size-5": 1.125rem,
+		"font-size-4": 1rem,
 		// 18px
-		"font-size-6": 1.1875rem,
+		"font-size-5": 1.125rem,
 		// 19px
-		"font-size-7": 1.25rem,
+		"font-size-6": 1.1875rem,
 		// 20px
-		"font-size-8": 1.375rem,
+		"font-size-7": 1.25rem,
 		// 22px
-		"font-size-9": 1.5rem,
+		"font-size-8": 1.375rem,
 		// 24px
-		"font-size-10": 1.75rem,
+		"font-size-9": 1.5rem,
 		// 28px
-		"font-size-11": 2rem,
+		"font-size-10": 1.75rem,
 		// 32px
-		"font-size-12": 2.25rem,
+		"font-size-11": 2rem,
 		// 36px
-		"font-size-13": 2.56rem,
+		"font-size-12": 2.25rem,
 		// 41px
-		"font-size-14": 3rem,
+		"font-size-13": 2.56rem,
 		// 48px
+		"font-size-14": 3rem,
+		// 52px
 		"font-size-15": 3.25rem,
 
-		// 52px
-		"line-height-1": 0.875rem,
-		// 14px
-		"line-height-2": 1rem,
-		// 16px
-		"line-height-3": 1.25rem,
-		// 20px
-		"line-height-4": 1.5rem,
-		// 24px
-		"line-height-5": 2rem,
-		// 32px
-		"line-height-6": 2.125rem,
-		// 34px
-		"line-height-7": 2.5rem,
-		// 40px
-		"line-height-8": 3rem,
-		// 48px
-		"line-height-9": 3.5rem,
-		// 56px
-		"line-height-10": 3.875rem,
+		"line-height-1": 1,
+		"line-height-2": 1.1,
+		"line-height-3": 1.2,
+		"line-height-4": 1.3,
+		"line-height-5": 1.4,
+		"line-height-6": 1.5,
 
-		// 62px
 		"box-shadow-1": 0px 0px 16px rgba(25, 25, 25, 0.4),
 		"z-index-1": 1,
 		"z-index-2": 10,
@@ -177,43 +163,68 @@
 		// Font families
 		"font-family-primary": "Inter",
 		"font-family-secondary": "Lora",
+
 		// Colors
 		"color-primary": var(--global-black),
 		"text-color": var(--global-neutral-8),
 		"text-color-subtle": var(--global-neutral-5),
-		"text-color-warning": var(--global-orange-9),
-		"text-color-danger": var(--global-red-9),
-		"text-color-success": var(--global-green-9),
 		"background-color": var(--global-white),
-		"background-color-warning": var(--global-orange-1),
-		"background-color-danger": var(--global-red-1),
-		"background-color-success": var(--global-green-1),
 		"icon-fill-color": var(--global-neutral-8),
 		"icon-fill-color-subtle": var(--global-neutral-5),
 		"border-color": var(--global-neutral-4),
 		"form-background-color": var(--global-white),
 		"form-border-color": var(--global-neutral-5),
 		"form-border-color-primary": var(--global-blue-5),
-		"form-border-color-warning": var(--global-orange-2),
-		"form-border-color-danger": var(--global-red-4),
-		"form-border-color-success": var(--global-green-5),
+		"status-color-success": var(--global-green-5),
+		"status-color-success-subtle": var(--global-green-1),
+		"status-color-warning": var(--global-orange-5),
+		"status-color-warning-subtle": var(--global-orange-1),
+		"status-color-danger": var(--global-red-5),
+		"status-color-danger-subtle": var(--global-red-1),
+		"status-color-info": var(--global-blue-5),
+		"status-color-info-subtle": var(--global-blue-1),
 		// Border Radius
 		"border-radius": var(--global-border-radius-1),
 		"border-radius-pill": var(--global-border-radius-2),
 		"border-radius-circle": var(--global-border-radius-3),
 		// Typography
-		// body
+		// headings
+		// heading-level-1 : 36px fs -> 43.2px lh
+		"heading-level-1-font-size": var(--global-font-size-12),
+		"heading-level-1-line-height": var(--global-line-height-3),
+		"heading-level-1-font-weight": var(--global-font-weight-7),
+		// heading-level-2 : 32px fs -> 41.6px lh
+		"heading-level-2-font-size": var(--global-font-size-11),
+		"heading-level-2-line-height": var(--global-line-height-4),
+		"heading-level-2-font-weight": var(--global-font-weight-7),
+		// heading-level-3 : 28px fs -> 36.4px lh
+		"heading-level-3-font-size": var(--global-font-size-10),
+		"heading-level-3-line-height": var(--global-line-height-4),
+		"heading-level-3-font-weight": var(--global-font-weight-7),
+		// heading-level-4 : 24px fs -> 33.6px lh
+		"heading-level-4-font-size": var(--global-font-size-9),
+		"heading-level-4-line-height": var(--global-line-height-5),
+		"heading-level-4-font-weight": var(--global-font-weight-7),
+		// heading-level-5 : 20px fs -> 28px lh
+		"heading-level-5-font-size": var(--global-font-size-7),
+		"heading-level-5-line-height": var(--global-line-height-5),
+		"heading-level-5-font-weight": var(--global-font-weight-7),
+		// heading-level-6 : 18px fs -> 25.2px lh
+		"heading-level-6-font-size": var(--global-font-size-5),
+		"heading-level-6-line-height": var(--global-line-height-5),
+		"heading-level-6-font-weight": var(--global-font-weight-7),
+		// body : 16px fs -> 24px lh
 		"body-font-weight": var(--global-font-weight-4),
-		"body-font-size": var(--global-font-size-3),
-		"body-line-height": var(--global-line-height-3),
-		// body : small
+		"body-font-size": var(--global-font-size-4),
+		"body-line-height": var(--global-line-height-6),
+		// body-small : 14px fs -> 21px lh
 		"body-font-weight-small": var(--global-font-weight-4),
-		"body-font-size-small": var(--global-font-size-2),
-		"body-line-height-small": var(--global-line-height-2),
-		// body : tiny
+		"body-font-size-small": var(--global-font-size-3),
+		"body-line-height-small": var(--global-line-height-6),
+		// body-tiny : 12px fs -> 18px lh
 		"body-font-weight-tiny": var(--global-font-weight-4),
-		"body-font-size-tiny": var(--global-font-size-1),
-		"body-line-height-tiny": var(--global-line-height-1),
+		"body-font-size-tiny": var(--global-font-size-2),
+		"body-line-height-tiny": var(--global-line-height-6),
 		// Layout
 		"layout-max-width": 1440,
 		"content-max-width": 1216,
@@ -235,12 +246,12 @@
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
 					font-size: var(--body-font-size-tiny),
-					font-weight: var(--global-font-weight-7),
+					font-weight: var(--heading-level-5-font-weight),
 					line-height: var(--body-line-height-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-2),
 				),
 				badge-danger: (
-					background-color: var(--form-border-color-danger),
+					background-color: var(--status-color-danger),
 				),
 				badge-default: (
 					background-color: var(--text-color),
@@ -252,10 +263,10 @@
 					background-color: var(--color-primary),
 				),
 				badge-success: (
-					background-color: var(--form-border-color-success),
+					background-color: var(--status-color-success),
 				),
 				badge-warning: (
-					background-color: var(--form-border-color-warning),
+					background-color: var(--status-color-warning),
 				),
 				body: (
 					color: var(--text-color),
@@ -264,9 +275,11 @@
 					line-height: var(--body-line-height),
 				),
 				button: (
-					border: var(--global-border-width-1) var(--global-border-style-1) transparent,
+					border-color: transparent,
+					border-style: var(--global-border-style-1),
+					border-width: var(--global-border-width-1),
 					border-radius: var(--border-radius),
-					font-weight: var(--global-font-weight-7),
+					font-weight: var(--heading-level-5-font-weight),
 					gap: var(--global-spacing-2),
 				),
 				button-small: (
@@ -335,7 +348,11 @@
 					border-radius: var(--border-radius),
 					background-color: var(--global-white),
 					height: var(--global-spacing-8),
-					width: var(--global-spacing-8),
+					width: auto,
+					padding: 0 var(--global-spacing-2),
+					display: flex,
+					align-items: center,
+					gap: var(--global-spacing-2),
 				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
@@ -346,13 +363,43 @@
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
 				),
-				heading: (
+				details: (
+					display: flex,
+					font-size: var(--body-font-size),
+				),
+				details-open-summary: (
+					margin-bottom: var(--global-spacing-4),
+				),
+				details-with-icon-summary: (
 					font-weight: var(--global-font-weight-7),
+					line-height: 1.4,
+					justify-content: space-between,
+				),
+				details-summary: (
+					font-size: var(--global-font-size-5),
+				),
+				details-summary-icon: (
+					align-items: center,
+					display: flex,
+					height: var(--global-spacing-4),
+					width: var(--global-spacing-4),
+				),
+				details-open-summary-icon: (
+					transform: rotate(180deg),
+				),
+				heading: (
+					font-family: var(--font-family-primary),
+					font-size: var(--heading-level-3-font-size),
+					font-weight: var(--heading-level-3-font-weight),
+					line-height: var(--heading-level-3-line-height),
 				),
 				icon: (
 					fill: var(--icon-fill-color),
 					height: var(--global-spacing-5),
 					width: var(--global-spacing-5),
+				),
+				image: (
+					max-width: 100%,
 				),
 				input: (
 					align-items: flex-start,
@@ -363,7 +410,7 @@
 				input-input: (
 					border: var(--global-border-width-1) var(--global-border-style-1) var(--form-border-color),
 					border-radius: var(--border-radius),
-					padding: var(--global-spacing-2) var(--global-spacing-4),
+					padding: var(--global-spacing-4) var(--global-spacing-2),
 				),
 				input-small-input: (
 					padding: var(--global-spacing-1) var(--global-spacing-2),
@@ -376,22 +423,22 @@
 					font-weight: var(--global-font-weight-7),
 				),
 				input-error-input: (
-					border-color: var(--form-border-color-danger),
+					border-color: var(--status-color-danger),
 				),
 				input-error-input-focus: (
-					outline-color: var(--form-border-color-danger),
+					outline-color: var(--status-color-danger),
 				),
 				input-success-input: (
-					border-color: var(--form-border-color-success),
+					border-color: var(--status-color-success),
 				),
 				input-success-input-focus: (
-					outline-color: var(--form-border-color-success),
+					outline-color: var(--status-color-success),
 				),
 				input-warning-input: (
-					border-color: var(--form-border-color-warning),
+					border-color: var(--status-color-warning),
 				),
 				input-warning-input-focus: (
-					outline-color: var(--form-border-color-warning),
+					outline-color: var(--status-color-warning),
 				),
 				link: (
 					color: var(--color-primary),
@@ -418,20 +465,22 @@
 				),
 				overline: (
 					color: var(--text-color),
-					font-size: var(--global-font-size-7),
-					font-weight: var(--global-font-weight-7),
-					line-height: var(--global-line-height-4),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
 					text-decoration: none,
 				),
 				paragraph: (
 					font-family: var(--font-family-secondary),
+					font-size: var(--body-font-size),
+					font-weight: var(--body-font-weight),
+					line-height: var(--body-line-height),
 				),
 				pill: (
 					background-color: var(--color-primary),
 					border-radius: var(--border-radius-pill),
 					color: var(--global-white),
-					font-size: var(--global-font-size-2),
-					line-height: var(--global-line-height-2),
+					font-size: var(--body-font-size-tiny),
 					padding: var(--global-spacing-1) var(--global-spacing-4),
 					text-decoration: none,
 				),
@@ -456,6 +505,39 @@
 				),
 			),
 			blocks: (
+				alert-bar: (
+					align-items: flex-start,
+					background-color: var(--global-red-5),
+					display: flex,
+					flex-wrap: nowrap,
+					justify-content: space-between,
+					word-break: break-word,
+					components: (
+						button-default: (
+							background: none,
+							border: none,
+							flex: 0 0 auto,
+						),
+						button-large: (
+							margin-bottom: var(--global-spacing-1),
+							margin-top: var(--global-spacing-1),
+						),
+						link: (
+							color: var(--global-white),
+							font-family: var(--font-family-primary),
+							font-size: var(--body-font-size-small),
+							font-weight: var(--global-font-weight-7),
+							padding-bottom: var(--global-spacing-5),
+							padding-left: var(--global-spacing-4),
+							padding-right: var(--global-spacing-5),
+							padding-top: var(--global-spacing-5),
+							text-decoration: none,
+						),
+						icon: (
+							fill: var(--global-white),
+						),
+					),
+				),
 				category-carousel: (
 					gap: var(--global-spacing-2),
 					components: (
@@ -469,7 +551,7 @@
 					),
 				),
 				category-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -483,10 +565,23 @@
 					),
 				),
 				category-carousel-slide-title: (
-					font-size: var(--global-font-size-2),
+					font-size: var(--body-font-size-tiny),
 				),
 				hero-stacked: (
 					gap: var(--global-spacing-5),
+					grid-template-rows: 1fr auto,
+					max-height: 100vh,
+					components: (
+						image: (
+							max-height: 100vh,
+							object-fit: cover,
+							width: 100%,
+						),
+						picture: (
+							display: flex,
+							overflow: hidden,
+						),
+					),
 				),
 				hero: (
 					color: var(--global-black),
@@ -498,12 +593,14 @@
 							gap: var(--global-spacing-4),
 						),
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-7),
+							font-size: var(--heading-level-2-font-size),
+							line-height: var(--heading-level-2-line-height),
+						),
+						image: (
+							max-height: 100vh,
 						),
 						paragraph: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
+							font-family: var(--font-family-primary),
 						),
 					),
 				),
@@ -512,14 +609,6 @@
 				),
 				hero-dark: (
 					color: var(--global-black),
-				),
-				hero-image: (
-					max-height: 65vh,
-					width: 100%,
-				),
-				hero-image-stacked: (
-					height: auto,
-					width: 100%,
 				),
 				hero-text-overlay: (
 					margin: 0 auto,
@@ -535,6 +624,7 @@
 					margin: 0 auto,
 					components: (
 						paragraph: (
+							align-self: center,
 							max-width: 24rem,
 						),
 					),
@@ -542,9 +632,9 @@
 				hero-subheadline: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
@@ -561,7 +651,8 @@
 					gap: var(--global-spacing-2),
 				),
 				product-assortment-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
+					line-height: var(--heading-level-5-line-height),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -571,8 +662,9 @@
 					components: (
 						heading: (
 							-webkit-line-clamp: 2,
-							font-weight: var(--global-font-weight-4),
-							line-height: var(--global-line-height-3),
+							font-size: var(--body-font-size),
+							font-weight: var(--body-font-weight),
+							line-height: var(--body-line-height),
 						),
 						price: (
 							gap: var(--global-spacing-1),
@@ -592,15 +684,71 @@
 						),
 					),
 				),
+				product-information: (
+					components: (
+						heading: (
+							color: var(--global-black),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+						),
+						price: (
+							color: var(--text-color),
+							font-size: var(--heading-level-6-font-size),
+							font-weight: var(--body-font-weight),
+							line-height: var(--heading-level-6-line-height),
+							gap: var(--global-spacing-2),
+						),
+						price-list: (
+							color: var(--global-neutral-5),
+							text-decoration: line-through,
+						),
+					),
+				),
+				product-information-single-price: (
+					components: (
+						price-list: (
+							color: var(--global-neutral-7),
+							text-decoration: none,
+						),
+					),
+				),
+				product-gallery: (
+					components: (
+						image: (
+							width: auto,
+						),
+						carousel: (
+							--slides: 1,
+							--carousel-slide-width: 100%,
+						),
+						carousel-actions: (
+							// hide the actions on desktop and mobile
+							display: none,
+						),
+						carousel-track: (
+							gap: var(--global-spacing-4),
+							max-width: 100%,
+							width: 100%,
+						),
+					),
+				),
+				product-gallery-featured-slide: (
+					// for featured enabled, this will apply for the desktop growing to expand full width. On mobile, it doesn't hurt.
+					flex-basis: 100%,
+				),
 				quilted-image: (
 					margin-left: auto,
 					margin-right: auto,
 					width: 100%,
 					components: (
 						heading: (
-							font-size: var(--global-font-size-7),
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-5-font-size),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
 							margin-left: auto,
 							margin-right: auto,
 							margin-bottom: var(--global-spacing-2),
@@ -635,15 +783,50 @@
 					width: 100%,
 					components: (
 						paragraph: (
-							font-weight: var(--global-font-weight-7),
-							line-height: var(--global-line-height-4),
-							font-size: var(--global-font-size-5),
+							font-weight: var(--heading-level-5-font-weight),
+							line-height: var(--heading-level-5-line-height),
+							font-size: var(--heading-level-5-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
 							align-items: start,
 						),
 					),
+				),
+				right-rail: (
+					display: grid,
+					gap: var(--global-spacing-5),
+				),
+				right-rail-navigation: (
+					position: sticky,
+					top: 0,
+					width: 100%,
+					z-index: 9,
+				),
+				right-rail-main: (
+					display: grid,
+					gap: var(--global-spacing-5),
+					width: 100%,
+					components: (
+						stack: (
+							gap: var(--global-spacing-5),
+						),
+					),
+				),
+				right-rail-rail-container: (
+					grid-template-columns: initial,
+					grid-template-rows: 1fr,
+					gap: var(--global-spacing-5),
+					margin: auto,
+					max-width: calc(var(--content-max-width) * 1px),
+					width: var(--content-scale-width),
+				),
+				right-rail-main-right-rail: (
+					align-items: stretch,
+					grid-column: 1,
+				),
+				right-rail-main-interior-item: (
+					grid-column: 1,
 				),
 				single-column-regular-main: (
 					components: (
@@ -666,7 +849,7 @@
 					gap: var(--global-spacing-2),
 				),
 				story-carousel-title: (
-					font-size: var(--global-font-size-7),
+					font-size: var(--heading-level-5-font-size),
 					margin-left: auto,
 					margin-right: auto,
 					max-width: var(--content-scale-width),
@@ -676,22 +859,27 @@
 					components: (
 						heading: (
 							-webkit-line-clamp: 2,
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-black),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							color: var(--color-primary),
 						),
 						paragraph: (
 							-webkit-line-clamp: 3,
-							font-weight: var(--global-font-weight-4),
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-							color: var(--global-neutral-5),
+							font-weight: var(--body-font-weight-small),
+							font-size: var(--body-font-size-small),
+							line-height: var(--body-line-height-small),
+							color: var(--text-color),
 						),
 					),
 					gap: var(--global-spacing-1),
 				),
 				video-player: (
+					gap: var(--global-spacing-4),
 					components: (
+						heading: (
+							font-size: var(--heading-level-3-font-size),
+							line-height: var(--heading-level-3-line-height),
+						),
 						media-item: (
 							width: 100%,
 							margin: auto,
@@ -699,13 +887,13 @@
 					),
 				),
 				video-player-feature: (
-					gap: 0,
+					gap: var(--global-spacing-6),
 					components: (
 						media-item-fig-caption: (
-							margin-bottom: var(--global-spacing-2),
+							margin-bottom: 0,
 							margin-left: var(--global-spacing-4),
 							margin-right: var(--global-spacing-4),
-							margin-top: var(--global-spacing-2),
+							margin-top: 0,
 						),
 					),
 				),
@@ -713,54 +901,31 @@
 					margin: auto,
 					width: var(--content-scale-width),
 					components: (
-						heading: (
-							font-size: var(--global-font-size-10),
-							line-height: var(--global-line-height-5),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-3),
-							line-height: var(--global-line-height-3),
-						),
 						stack: (
-							gap: var(--global-spacing-3),
+							gap: var(--global-spacing-4),
 						),
 					),
-				),
-				video-player-inline: (
-					gap: var(--global-spacing-3),
-					components: (
-						heading: (
-							font-size: var(--global-font-size-9),
-							line-height: var(--global-line-height-5),
-						),
-						media-item: (
-							width: 100%,
-							margin: auto,
-						),
-						media-item-fig-caption: (
-							margin-bottom: 0,
-							margin-left: 0,
-							margin-right: 0,
-							margin-top: var(--global-spacing-2),
-						),
-						stack: (
-							gap: 0,
-						),
-					),
-				),
-				video-player-inline-video: (
-					gap: 0,
 				),
 			),
 		),
 		desktop: (
 			alias: (
-				"body-font-size": var(--global-font-size-4),
-				"body-line-height": var(--global-line-height-4),
-				"body-font-size-small": var(--global-font-size-3),
-				"body-line-height-small": var(--global-line-height-3),
-				"body-font-size-tiny": var(--global-font-size-2),
-				"body-line-height-tiny": var(--global-line-height-2),
+				// heading-level-1 : 52px fs -> 62.4px lh
+				"heading-level-1-font-size": var(--global-font-size-15),
+				// heading-level-2 : 48px fs -> 57.6px lh
+				"heading-level-2-font-size": var(--global-font-size-14),
+				"heading-level-2-line-height": var(--global-line-height-3),
+				// heading-level-3 : 40.96px fs -> 49.152px lh
+				"heading-level-3-font-size": var(--global-font-size-13),
+				"heading-level-3-line-height": var(--global-line-height-3),
+				// heading-level-4 : 36px fs -> 43.2px lh
+				"heading-level-4-font-size": var(--global-font-size-12),
+				"heading-level-4-line-height": var(--global-line-height-3),
+				// heading-level-5 : 32px fs -> 41.6px lh
+				"heading-level-5-font-size": var(--global-font-size-11),
+				"heading-level-5-line-height": var(--global-line-height-4),
+				// heading-level-6 : 20px fs -> 28px lh
+				"heading-level-6-font-size": var(--global-font-size-7),
 			),
 			components: (
 				carousel: (
@@ -772,29 +937,28 @@
 				carousel-track: (
 					gap: var(--global-spacing-6),
 				),
+				details-summary: (
+					font-size: var(--global-font-size-7),
+				),
 			),
 			blocks: (
-				category-carousel-title: (
-					font-size: var(--global-font-size-11),
+				alert-bar: (
+					components: (
+						link: (
+							font-size: var(--body-font-size),
+						),
+					),
 				),
 				category-carousel-slide-title: (
-					font-size: var(--global-font-size-3),
+					font-size: var(--body-font-size-small),
 				),
 				hero: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-14),
-							line-height: var(--global-line-height-10),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
+							font-size: var(--heading-level-2-font-size),
+							line-height: var(--heading-level-2-line-height),
 						),
 					),
-				),
-				hero-image: (
-					max-height: auto,
-					width: 100%,
 				),
 				hero-text-left: (
 					components: (
@@ -806,21 +970,32 @@
 				hero-subheadline: (
 					components: (
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-6),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
-				product-assortment-carousel-title: (
-					font-size: var(--global-font-size-11),
+				product-gallery: (
+					components: (
+						carousel: (
+							// the slides that are not featured are half the width of the screen
+							// will be 50% accounting for the gap
+							--slides: 2,
+							--carousel-slide-width: 50%,
+						),
+						carousel-track: (
+							// slides should flow down rather than be hidden off to the side
+							flex-wrap: wrap,
+						),
+					),
 				),
 				quilted-image: (
 					max-width: var(--content-scale-width),
 					width: 100%,
 					components: (
 						heading: (
-							font-size: var(--global-font-size-11),
-							line-height: var(--global-line-height-6),
+							font-size: var(--heading-level-5-font-size),
+							line-height: var(--heading-level-5-line-height),
 						),
 					),
 				),
@@ -830,7 +1005,7 @@
 					max-width: 100%,
 					components: (
 						paragraph: (
-							font-size: var(--global-font-size-7),
+							font-size: var(--heading-level-5-font-size),
 						),
 						stack: (
 							gap: var(--global-spacing-4),
@@ -841,6 +1016,24 @@
 					grid-template-areas: "top top" "bottom bottom",
 					max-width: var(--content-scale-width),
 					width: 100%,
+				),
+				right-rail: (
+					gap: var(--global-spacing-6),
+				),
+				right-rail-main: (
+					gap: var(--global-spacing-10),
+				),
+				right-rail-rail-container: (
+					margin: auto,
+					grid-template-columns: repeat(12, 1fr),
+					gap: var(--global-spacing-6),
+					grid-template-rows: initial,
+				),
+				right-rail-main-right-rail: (
+					grid-column: span 5,
+				),
+				right-rail-main-interior-item: (
+					grid-column: span 7,
 				),
 				single-column-regular-main: (
 					components: (
@@ -857,37 +1050,24 @@
 					),
 				),
 				story-carousel-title: (
-					font-size: var(--global-font-size-11),
-				),
-				video-player-feature-meta: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
-						paragraph: (
-							font-size: var(--global-font-size-4),
-							line-height: var(--global-line-height-4),
-						),
-					),
-				),
-				video-player-inline: (
-					components: (
-						heading: (
-							font-size: var(--global-font-size-13),
-							line-height: var(--global-line-height-8),
-						),
-					),
+					font-size: var(--heading-level-5-font-size),
 				),
 			),
 		),
 	)
 );
 
+@use "../../blocks/alert-bar-block";
 @use "../../blocks/category-carousel-block";
+@use "../../blocks/default-output-block";
 @use "../../blocks/hero-block";
+@use "../../blocks/product-assortment-carousel-block";
+@use "../../blocks/product-content-block";
+@use "../../blocks/product-featured-image-block";
+@use "../../blocks/product-gallery-block";
+@use "../../blocks/product-information-block";
 @use "../../blocks/quilted-image-block";
-@use "../../blocks/story-carousel-block";
-@use "../../blocks/single-column-layout-block";
 @use "../../blocks/right-rail-block";
-@use "../../blocks/right-rail-advanced-block";
+@use "../../blocks/single-column-layout-block";
+@use "../../blocks/story-carousel-block";
+@use "../../blocks/video-player-block";

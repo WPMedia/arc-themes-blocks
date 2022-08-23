@@ -1,13 +1,168 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useContent } from "fusion:content";
-import { useFusionContext } from "fusion:context";
+import getTranslatedPhrases from "fusion:intl";
+import getProperties from "fusion:properties";
+import { useContent, useEditableContent } from "fusion:content";
+import { useComponentContext, useFusionContext } from "fusion:context";
 
-import { LazyLoad, isServerSide, videoPlayerCustomFields } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { LargePromoPresentation } from "@wpmedia/shared-styles";
+import { LazyLoad, localizeDateTime } from "@wpmedia/engine-theme-sdk";
+import {
+	Conditional,
+	Grid,
+	HeadingSection,
+	Icon,
+	Image,
+	Join,
+	Link,
+	MediaItem,
+	Stack,
+	formatURL,
+	getImageFromANS,
+	getVideoFromANS,
+	isServerSide,
+	Overline,
+	Heading,
+	Paragraph,
+	Date as DateDisplay,
+	formatAuthors,
+	Attribution,
+	Separator,
+	Video,
+} from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-large-promo";
+
+const getType = (type, content) => (content?.type === type ? content : undefined);
+
+export const LargePromoPresentation = ({
+	aspectRatio,
+	contentAuthors,
+	contentDate,
+	contentDescription,
+	contentHeading,
+	contentHeadline,
+	contentOverline,
+	contentOverlineURL,
+	contentUrl,
+	displayDate,
+	editableDescription,
+	embedMarkup,
+	imageSearchField,
+	labelIconName,
+	labelIconText,
+	promoImageURL,
+	registerSuccessEvent,
+	searchableField,
+	translationByText,
+	viewportPercentage,
+}) =>
+	embedMarkup ||
+	contentOverline ||
+	contentHeading ||
+	contentDescription ||
+	contentAuthors ||
+	contentDate ||
+	promoImageURL ? (
+		<HeadingSection>
+			<Grid as="article" className={BLOCK_CLASS_NAME}>
+				{embedMarkup || promoImageURL ? (
+					<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+						<Conditional
+							component={Link}
+							condition={contentUrl}
+							href={formatURL(contentUrl)}
+							onClick={registerSuccessEvent}
+							assistiveHidden
+						>
+							{embedMarkup ? (
+								<Video
+									aspectRatio={aspectRatio}
+									embedMarkup={embedMarkup}
+									viewportPercentage={viewportPercentage}
+								/>
+							) : (
+								<Image
+									alt={contentHeadline}
+									src={promoImageURL}
+									width={377}
+									height={283}
+									searchableField
+								/>
+							)}
+							{labelIconName ? (
+								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+									<Icon name={labelIconName} />
+									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+								</div>
+							) : null}
+						</Conditional>
+					</MediaItem>
+				) : null}
+				{contentOverline ||
+				contentHeading ||
+				contentDescription ||
+				contentAuthors ||
+				contentDate ? (
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						{contentOverline ? (
+							<Overline href={contentOverlineURL}>{contentOverline}</Overline>
+						) : null}
+						{contentHeading || contentDescription || contentAuthors || contentDate ? (
+							<Stack>
+								{contentHeading ? (
+									<Heading>
+										<Conditional
+											component={Link}
+											condition={contentUrl}
+											href={formatURL(contentUrl)}
+											onClick={registerSuccessEvent}
+										>
+											{contentHeading}
+										</Conditional>
+									</Heading>
+								) : null}
+								{contentDescription ? (
+									<Paragraph suppressContentEditableWarning {...editableDescription}>
+										{contentDescription}
+									</Paragraph>
+								) : null}
+								{contentAuthors || contentDate ? (
+									<Attribution>
+										<Join separator={Separator}>
+											{contentAuthors ? (
+												<Join separator={() => " "}>
+													{translationByText}
+													{contentAuthors}
+												</Join>
+											) : null}
+											{contentDate ? (
+												<DateDisplay dateTime={contentDate} dateString={displayDate} />
+											) : null}
+										</Join>
+									</Attribution>
+								) : null}
+							</Stack>
+						) : null}
+					</Stack>
+				) : null}
+			</Grid>
+		</HeadingSection>
+	) : null;
 
 const LargePromoItem = ({ customFields, arcSite }) => {
+	const {
+		aspectRatio,
+		imageOverrideURL,
+		playVideoInPlace,
+		showByline,
+		showDate,
+		showDescription,
+		showHeadline,
+		showImage,
+		showOverline,
+		viewportPercentage,
+	} = customFields;
+
 	const content =
 		useContent({
 			source: customFields?.itemContentConfig?.contentService ?? null,
@@ -19,87 +174,182 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 				  }
 				: null,
 			filter: `{
-      _id
-      credits {
-        by {
-          _id
-          name
-          url
-          type
-          additional_properties {
-            original {
-              byline
-            }
-          }
-        }
-      }
-      description {
-        basic
-      }
-      display_date
-      type
-      headlines {
-        basic
-      }
-      label {
-        basic {
-          display
-          url
-          text
-        }
-      }
-      owner {
-        sponsored
-      }
-      promo_items {
-        type
-        url
-        lead_art {
-          embed_html
-          type
-          promo_items {
-            basic {
-              type
-              url
-              resized_params {
-                377x283
-                377x251
-                377x212
-                274x206
-                274x183
-                274x154
-              }
-            }
-          }
-        }
-        basic {
-          type
-          url
-          resized_params {
-            377x283
-            377x251
-            377x212
-            274x206
-            274x183
-            274x154
-          }
-        }
-      }
-      embed_html
-      website_url
-      websites {
-        ${arcSite} {
-          website_url
-          website_section {
-            _id
-            name
-          }
-        }
-      }
-    }`,
+				_id
+				credits {
+					by {
+						_id
+						name
+						url
+						type
+						additional_properties {
+							original {
+								byline
+							}
+						}
+					}
+				}
+				description {
+					basic
+				}
+				display_date
+				type
+				headlines {
+					basic
+				}
+				label {
+					basic {
+						display
+						url
+						text
+					}
+				}
+				owner {
+					sponsored
+				}
+				promo_items {
+					type
+					url
+					lead_art {
+						embed_html
+						type
+						promo_items {
+							basic {
+								type
+								url
+								resized_params {
+									377x283
+									377x251
+									377x212
+									274x206
+									274x183
+									274x154
+								}
+							}
+						}
+					}
+					basic {
+						type
+						url
+						resized_params {
+							377x283
+							377x251
+							377x212
+							274x206
+							274x183
+							274x154
+						}
+					}
+				}
+				embed_html
+				website_url
+				websites {
+					${arcSite} {
+						website_url
+						website_section {
+							_id
+							name
+						}
+					}
+				}
+			}`,
 		}) || null;
 
-	return <LargePromoPresentation content={content} {...customFields} />;
+	const { editableContent, searchableField } = useEditableContent();
+	const { registerSuccessEvent } = useComponentContext();
+	const {
+		dateLocalization: { language, timeZone, dateTimeFormat } = {
+			language: "en",
+			timeZone: "GMT",
+			dateTimeFormat: "LLLL d, yyyy 'at' K:m bbbb z",
+		},
+		fallbackImage,
+		locale,
+	} = getProperties(arcSite);
+
+	const displayDate = localizeDateTime(
+		new Date(content?.display_date),
+		dateTimeFormat,
+		language,
+		timeZone
+	);
+	const phrases = getTranslatedPhrases(locale || "en");
+
+	const editableDescription = content?.description
+		? editableContent(content, "description.basic")
+		: {};
+
+	const videoOrGalleryContent =
+		getType("video", content) ||
+		getType("gallery", content) ||
+		getType("video", content?.promo_items?.lead_art) ||
+		getType("gallery", content?.promo_items?.lead_art);
+
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[videoOrGalleryContent?.type];
+
+	const labelIconText = {
+		gallery: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
+	}[videoOrGalleryContent?.type];
+
+	const {
+		display: labelDisplay,
+		url: labelUrl,
+		text: labelText,
+	} = (content?.label && content?.label?.basic) || {};
+
+	const { _id: sectionUrl, name: sectionText } =
+		content?.websites?.[arcSite]?.website_section || {};
+
+	let [overlineText, overlineURL] = [sectionText, sectionUrl];
+	if (content?.owner?.sponsored) {
+		overlineText = content?.label?.basic?.text || phrases.t("global.sponsored-content");
+		overlineURL = null;
+	} else if (labelDisplay) {
+		[overlineText, overlineURL] = [labelText, labelUrl];
+	}
+
+	const contentAuthors =
+		showByline && content?.credits?.by?.length > 0
+			? formatAuthors(content.credits.by, phrases.t("global.and-text"))
+			: null;
+	const contentDate = showDate ? content?.display_date : null;
+	const contentDescription = showDescription ? content?.description?.basic : null;
+	const contentHeading = showHeadline ? content?.headlines?.basic : null;
+	const contentHeadline = content?.headlines?.basic || null;
+	const contentOverline = showOverline ? overlineText : null;
+	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const embedMarkup = showImage && playVideoInPlace && getVideoFromANS(content);
+	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
+	const promoImageURL =
+		showImage && (imageOverrideURL || getImageFromANS(content) || fallbackImage);
+
+	return (
+		<LargePromoPresentation
+			aspectRatio={aspectRatio}
+			contentAuthors={contentAuthors}
+			contentDate={contentDate}
+			contentDescription={contentDescription}
+			contentHeading={contentHeading}
+			contentHeadline={contentHeadline}
+			contentOverline={contentOverline}
+			contentOverlineURL={overlineURL}
+			contentUrl={contentUrl}
+			displayDate={displayDate}
+			editableDescription={editableDescription}
+			embedMarkup={embedMarkup}
+			imageSearchField={imageSearchField}
+			labelIconName={labelIconName}
+			labelIconText={labelIconText}
+			promoImageURL={promoImageURL}
+			registerSuccessEvent={registerSuccessEvent}
+			searchableField={searchableField}
+			translationByText={phrases.t("global.by-text")}
+			viewportPercentage={viewportPercentage}
+		/>
+	);
 };
 
 const LargePromo = ({ customFields }) => {
@@ -156,7 +406,11 @@ LargePromo.propTypes = {
 			group: "Image",
 			searchable: "image",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "4:3",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		playVideoInPlace: PropTypes.bool.tag({
 			label: "Play video in place",
 			group: "Art",
@@ -168,7 +422,16 @@ LargePromo.propTypes = {
 			description:
 				"Turning on lazy-loading will prevent this block from being loaded on the page until it is nearly in-view for the user.",
 		}),
-		...videoPlayerCustomFields(),
+		viewportPercentage: PropTypes.number.tag({
+			name: "Percentage of viewport height",
+			description:
+				"With Shrink Video enabled, this determines how much vertical viewport real estate the video will occupy.",
+			min: 0,
+			max: 150,
+			defaultValue: 65,
+			hidden: true,
+			group: "Video Settings",
+		}),
 	}),
 };
 

@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-alert-bar {
+	@include scss.block-components("alert-bar");
+	@include scss.block-properties("alert-bar");
+}

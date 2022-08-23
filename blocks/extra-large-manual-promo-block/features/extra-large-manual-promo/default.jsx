@@ -1,22 +1,105 @@
 import React from "react";
-import PropTypes from "@arc-fusion/prop-types";
+import { useEditableContent } from "fusion:content";
 import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { ExtraLargePromoPresentation } from "@wpmedia/shared-styles";
+import getProperties from "fusion:properties";
+import PropTypes from "@arc-fusion/prop-types";
+import {
+	Conditional,
+	Heading,
+	HeadingSection,
+	Image,
+	isServerSide,
+	Link,
+	MediaItem,
+	Overline,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+
+const BLOCK_CLASS_NAME = "b-xl-manual-promo";
+
+const PromoHeadline = ({ children, href, openInNewTab }) => (
+	<HeadingSection>
+		<Heading>
+			<Conditional component={Link} condition={href} href={href} openInNewTab={openInNewTab}>
+				{children}
+			</Conditional>
+		</Heading>
+	</HeadingSection>
+);
+
+const PromoImage = ({ alt, href, imageRatio, openInNewTab, src }) => {
+	const { searchableField } = useEditableContent();
+
+	return (
+		<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+			<Conditional component={Link} condition={href} href={href} openInNewTab={openInNewTab}>
+				<Image
+					alt={alt}
+					src={src}
+					searchableField
+					data-aspect-ratio={imageRatio?.replace(":", "/")}
+				/>
+			</Conditional>
+		</MediaItem>
+	);
+};
 
 const ExtraLargeManualPromo = ({ customFields }) => {
-	const { isAdmin } = useFusionContext();
-	const shouldLazyLoad = customFields?.lazyLoad && !isAdmin;
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
-		// On Server
+	const { arcSite, isAdmin } = useFusionContext();
+	const { fallbackImage } = getProperties(arcSite);
+	const {
+		description,
+		headline,
+		imageRatio,
+		imageURL,
+		lazyLoad,
+		linkURL,
+		newTab,
+		overline,
+		overlineURL,
+		showDescription,
+		showHeadline,
+		showImage,
+		showOverline,
+	} = customFields;
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
-	return (
+
+	const availableDescription = showDescription ? description : null;
+	const availableHeadline = showHeadline ? headline : null;
+	const availableImageURL = showImage ? imageURL || fallbackImage : null;
+	const availableOverline = showOverline ? overline : null;
+
+	return availableOverline || availableHeadline || availableImageURL || availableDescription ? (
 		<LazyLoad enabled={shouldLazyLoad}>
-			<ExtraLargePromoPresentation {...customFields} />
+			<article className={BLOCK_CLASS_NAME}>
+				{availableOverline ? <Overline href={overlineURL}>{availableOverline}</Overline> : null}
+				{availableHeadline || availableImageURL || availableDescription ? (
+					<Stack>
+						{availableHeadline ? (
+							<PromoHeadline href={linkURL} openInNewTab={newTab}>
+								{availableHeadline}
+							</PromoHeadline>
+						) : null}
+						{availableImageURL ? (
+							<PromoImage
+								alt={headline}
+								href={linkURL}
+								imageRatio={imageRatio}
+								openInNewTab={newTab}
+								src={availableImageURL}
+							/>
+						) : null}
+						{availableDescription ? <Paragraph>{availableDescription}</Paragraph> : null}
+					</Stack>
+				) : null}
+			</article>
 		</LazyLoad>
-	);
+	) : null;
 };
 
 ExtraLargeManualPromo.propTypes = {
@@ -71,7 +154,11 @@ ExtraLargeManualPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "4:3"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

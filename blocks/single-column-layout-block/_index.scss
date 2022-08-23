@@ -7,17 +7,30 @@
 	}
 
 	&__main {
+		@include scss.block-properties("single-column-regular-main");
+		@include scss.block-components("single-column-regular-main");
+	}
+
+	&__full-width {
+		width: 100%;
+		margin: auto;
+		@include scss.block-properties("single-column-regular-full-width");
+		@include scss.block-components("single-column-regular-full-width");
+	}
+
+	&__body {
 		max-width: 90rem; // 1440px
 		width: 100%;
 		margin: auto;
-		@include scss.block-properties("single-column-regular-main");
-		@include scss.block-components("single-column-regular-main");
+		@include scss.block-properties("single-column-regular-body");
+		@include scss.block-components("single-column-regular-body");
 	}
 
 	&__footer {
 		@include scss.block-properties("single-column-regular-footer");
 		@include scss.block-components("single-column-regular-footer");
 	}
+
 	@include scss.block-properties("single-column-regular");
 	@include scss.block-components("single-column-regular");
 }

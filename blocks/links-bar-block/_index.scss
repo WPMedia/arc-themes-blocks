@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-links-bar {
+	@include scss.block-components("links-bar");
+	@include scss.block-properties("links-bar");
+}

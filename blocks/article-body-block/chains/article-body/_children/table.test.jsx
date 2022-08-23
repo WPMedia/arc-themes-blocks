@@ -1,5 +1,7 @@
-const React = require("react");
-const { mount } = require("enzyme");
+import React from "react";
+import { mount } from "enzyme";
+
+import Table from "./table";
 
 describe("the article body Table component", () => {
 	const tableData = {
@@ -124,7 +126,6 @@ describe("the article body Table component", () => {
 	};
 
 	it("should render table correctly", () => {
-		const { default: Table } = require("./table");
 		const wrapper = mount(<Table element={tableData} />);
 		expect(wrapper.find(Table)).toHaveLength(1);
 		expect(wrapper.find("thead")).toHaveLength(1);

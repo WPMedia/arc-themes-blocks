@@ -1,20 +1,87 @@
 import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
-import { useFusionContext } from "fusion:context";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { imageRatioCustomField } from "@wpmedia/resizer-image-block";
-import { MediumPromoPresentation } from "@wpmedia/shared-styles";
+import { useEditableContent } from "fusion:content";
+import { useComponentContext, useFusionContext } from "fusion:context";
+import getProperties from "fusion:properties";
+import {
+	Conditional,
+	formatURL,
+	Heading,
+	HeadingSection,
+	Image,
+	isServerSide,
+	Link,
+	MediaItem,
+	Paragraph,
+} from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+
+const BLOCK_CLASS_NAME = "b-medium-manual-promo";
 
 const MediumManualPromo = ({ customFields }) => {
-	const { isAdmin } = useFusionContext();
-	if (customFields?.lazyLoad && isServerSide() && !isAdmin) {
-		// On Server
+	const {
+		description,
+		headline,
+		imageURL,
+		lazyLoad,
+		linkURL,
+		newTab,
+		showDescription,
+		showHeadline,
+		showImage,
+	} = customFields;
+	const { registerSuccessEvent } = useComponentContext();
+	const { arcSite, isAdmin } = useFusionContext();
+	const { searchableField } = useEditableContent();
+	const { fallbackImage } = getProperties(arcSite);
+	const shouldLazyLoad = lazyLoad && !isAdmin;
+
+	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
 
+	const availableImageURL = showImage ? imageURL || fallbackImage : null;
+	const headlineText = showHeadline ? headline : null;
+	const descriptionText = showDescription ? description : null;
+
 	return (
-		<LazyLoad enabled={customFields?.lazyLoad && !isAdmin}>
-			<MediumPromoPresentation {...customFields} />
+		<LazyLoad enabled={shouldLazyLoad}>
+			<HeadingSection>
+				<article
+					className={`${BLOCK_CLASS_NAME}${
+						availableImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
+					}`}
+				>
+					{availableImageURL ? (
+						<MediaItem {...searchableField("imageURL")} suppressContentEditableWarning>
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+							>
+								<Image alt={headline} src={availableImageURL} searchableField />
+							</Conditional>
+						</MediaItem>
+					) : null}
+
+					{headlineText ? (
+						<Heading>
+							<Conditional
+								component={Link}
+								condition={linkURL}
+								href={formatURL(linkURL)}
+								openInNewTab={newTab}
+								onClick={registerSuccessEvent}
+							>
+								{headline}
+							</Conditional>
+						</Heading>
+					) : null}
+					{descriptionText ? <Paragraph>{description}</Paragraph> : null}
+				</article>
+			</HeadingSection>
 		</LazyLoad>
 	);
 };
@@ -58,7 +125,11 @@ MediumManualPromo.propTypes = {
 			defaultValue: true,
 			group: "Show promo elements",
 		}),
-		...imageRatioCustomField("imageRatio", "Art", "16:9"),
+		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
+			defaultValue: "3:2",
+			label: "Image ratio",
+			group: "Art",
+		}),
 		lazyLoad: PropTypes.bool.tag({
 			name: "Lazy Load block?",
 			defaultValue: false,

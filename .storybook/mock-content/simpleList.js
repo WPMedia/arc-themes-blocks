@@ -3,6 +3,29 @@ export const simpleListMock = {
 	content_elements: [
 		{
 			_id: "1",
+			credits: {
+				by: [
+					{
+						type: "author",
+						additional_properties: {
+							original: {
+								byline: "Additional Properties - Original - Byline",
+							},
+						},
+					},
+					{
+						type: "author",
+						name: "Jane Doe",
+						url: "#",
+					},
+					{
+						type: "author",
+						name: "John Doe",
+						url: "#",
+					},
+				],
+			},
+			display_date: "2020-01-30T04:40:47.198Z",
 			headlines: {
 				basic: "Castle church tower",
 			},
@@ -20,6 +43,7 @@ export const simpleListMock = {
 			websites: {
 				"story-book": {
 					website_url: "/video/2019/12/12/castle-church-tower/",
+					website_section: { name: "local" },
 				},
 			},
 		},

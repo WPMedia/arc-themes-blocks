@@ -1,4 +1,24 @@
 /*
+	Size Mapping ads to various breakpoints is done through the following
+	`sizeMapBreakpoints` array in combination with the `dimensionsArray` in
+	the `adMapping` object.
+
+	https://github.com/washingtonpost/arcads#size-mapping
+
+	sizeMapBreakpoints : The `arcAds.registerAd()` initializtion object
+	                     values in `sizemap.breakpoints`
+
+	adMapping[].dimensionsArray : The `arcAds.registerAd()` initialization
+	                              object value of `dimensions`
+*/
+
+export const sizeMapBreakpoints = [
+	[992, 0], // "desktop" size for dimensions ad availability
+	[768, 0], // "tablet" size for dimensions ad availability
+	[0, 0], // "mobile" size for dimensions ad availability
+];
+
+/*
   Dimensions array format is a multidimensional array
   [
     [ [adWidth, adHeight], [adWidth, adHeight] ], // desktop ad sizes
@@ -6,7 +26,6 @@
     [ [adWidth, adHeight], [adWidth, adHeight] ], // mobile ad sizes
   ]
 */
-
 const sz0x0 = [0, 0];
 const sz1x1 = [1, 1];
 const sz300x250 = [300, 250];
@@ -62,7 +81,7 @@ const adMapping = {
 		adName: "leaderboard_large", // TODO: Rename 'leaderboard_flex'?
 		adLabel: "Leaderboard - Large",
 		adClass: "728x90",
-		dimensionsArray: [[sz970x250, sz970x90, sz728x90], sz728x90, sz320x50],
+		dimensionsArray: [[sz970x250, sz970x90, sz728x90], sz728x90, [sz320x50, sz300x250]],
 		ampDimensionsArray: sz320x50,
 	},
 };

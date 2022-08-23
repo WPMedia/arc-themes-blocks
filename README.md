@@ -1,12 +1,23 @@
 # Arc Themes Blocks
 
-This is the lerna-managed monorepo for the blocks that make up the Arc Themes.
+This is the lerna-managed monorepo for the blocks that make up the Arc Themes. This monorepo is a collection of packages for blocks. Blocks are tagged together.
 
-This monorepo is a collection of packages for blocks. Blocks are versioned together.
+Documentation is located in the [Themes Internal confluence for internal themes developers](https://arcpublishing.atlassian.net/wiki/spaces/TI/pages/2341405138/Development+Information+Guides).
 
-**if you're looking for local theme block development, go to [theme development markdown doc](/Theme%20Development.md)**
+## Storybook Setup
 
-**if you're looking for local blocks setup instructions with the Arc Themes Feature Page, go to [the prerequisites and 9-step quick guide](https://github.com/WPMedia/arc-themes-feature-pack#prerequisites)**
+1. Make sure you have an npmrc file with read-access to @wpmedia packages. This is available in your [dev settings](https://github.com/settings/tokens).
+2. Create an `.npmrc` file in the root of your project.
+
+```.npmrc
+@wpmedia:registry=https://npm.pkg.github.com/
+registry=https://registry.npmjs.org
+
+//npm.pkg.github.com/:_authToken=ghp_secrettoken
+```
+
+3. `npm i` to install packages
+4. `npm run storybook` to show the blocks in Storybook. For more info on Storybook, see [their documentation](https://storybook.js.org/docs/react/get-started/introduction). In confluence, we have Storybook best practices as well for themes.
 
 ## `dist-tags`
 
@@ -15,8 +26,6 @@ Please see the release notes in Confluence if you are a Themes developer.
 This package has been published with a number of dist-tags meant for different purposes:
 
 - `arc-themes-release-version-X.XX` - These are versioned versions of all blocks for a given release cycle
-- `hotfix`: As you may have guessed, these builds are meant for hotfixes. [More information about how these builds are made can be found here.](/Theme%20Development.md#publish-hotfix)
-- `latest`: This dist tag is deprecated. As with all other NPM packages, this is the default dist-tag. Whenever a non-prerelease block gets published, it is published with this tag.
 
 ## License
 

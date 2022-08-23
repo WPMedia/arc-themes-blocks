@@ -1,14 +1,15 @@
 {
   "name": "@wpmedia/header-nav-chain-block",
   "version": "5.22.0",
-  "description": "Fusion News Theme header nav chain block",
-  "author": "Jack Howard <jack.howard@washpost.com>",
+  "description": "Header Nav Chain",
+  "author": "Arc XP - Themes",
   "homepage": "https://github.com/WPMedia/arc-themes-blocks",
   "license": "CC-BY-NC-ND-4.0",
-  "main": "index.js",
+  "main": "",
   "files": [
     "chains",
-    "intl.json"
+    "intl.json",
+    "_index.scss"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/",
@@ -19,16 +20,10 @@
     "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
     "directory": "blocks/header-nav-chain-block"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
-    "lint": "eslint --ext js --ext jsx features"
-  },
   "peerDependencies": {
     "@arc-fusion/prop-types": "^0.1.5",
-    "@wpmedia/engine-theme-sdk": "*",
-    "@wpmedia/news-theme-css": "*",
-    "@wpmedia/shared-styles": "*",
-    "styled-components": "^4.4.0"
+    "@wpmedia/arc-themes-components": "*",
+    "@wpmedia/engine-theme-sdk": "*"
   },
   "dependencies": {
     "focus-trap-react": "^8.4.2",

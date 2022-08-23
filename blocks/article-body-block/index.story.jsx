@@ -23,6 +23,7 @@ const mockBlockQuote = {
 	},
 	content_elements: [
 		{
+			_id: "1",
 			content: "Two bees or not two bees",
 			type: "text",
 		},
@@ -66,6 +67,20 @@ const mockGallery = {
 					},
 				],
 			},
+			vanity_credits: {
+				by: [
+					{
+						type: "author",
+						name: "Here's my vanity photographer",
+					},
+				],
+				affiliation: [
+					{
+						type: "author",
+						name: "Here's my vanity credit",
+					},
+				],
+			},
 			height: 3744,
 			resized_params: {
 				"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
@@ -105,7 +120,7 @@ const mockGallery = {
 			},
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
 			width: 5616,
 		},
 	],
@@ -189,6 +204,29 @@ const mockList = {
 	type: "list",
 };
 
+const mockListUnordered = {
+	_id: "list_id_1",
+	items: [
+		{
+			_id: "text_id11",
+			content: "List Item 1",
+			type: "text",
+		},
+		{
+			_id: "text_id21",
+			content: "List Item 2",
+			type: "text",
+		},
+		{
+			_id: "text_id31",
+			content: "List Item 3",
+			type: "text",
+		},
+	],
+	list_type: "unordered",
+	type: "list",
+};
+
 const mockOEmbed = {
 	_id: "oembed_response_id",
 	raw_oembed: {
@@ -213,6 +251,24 @@ const mockOEmbed = {
 	type: "oembed_response",
 };
 
+const mockYouTube = {
+	type: "oembed_response",
+	subtype: "youtube",
+	_id: "3OYDYWUAK5D4XP5WJ6PLS4KHYQ",
+	raw_oembed: {
+		html: '<iframe width="200" height="113" src="https://www.youtube.com/embed/817CYL6KuGo?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+	},
+	referent: {
+		id: "https://www.youtube.com/watch?v=817CYL6KuGo",
+		provider: "https://www.youtube.com/oembed?url=",
+		referent_properties: {
+			additional_properties: {},
+		},
+		service: "oembed",
+		type: "youtube",
+	},
+};
+
 const mockPullQuote = {
 	_id: "pull_quote_id",
 	citation: {
@@ -221,6 +277,7 @@ const mockPullQuote = {
 	},
 	content_elements: [
 		{
+			_id: "quote_id1",
 			content: "Two bees or not two bees",
 			type: "text",
 		},
@@ -290,6 +347,22 @@ const mockVideo = {
 		'<div class="powa" id="powa-e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" data-org="corecomponents" data-env="prod" data-uuid="e3fd9d65-abef-44c0-95b6-7bdfe2acc82d" data-aspect-ratio="0.562" data-api="prod"><script src="//d2w3jw6424abwq.cloudfront.net/prod/powaBoot.js?org=corecomponents"></script></div>',
 	type: "video",
 	video_type: "clip",
+	headlines: {
+		basic: "Video Headline",
+	},
+	description: {
+		basic: "Video Description",
+	},
+	credits: {
+		affiliation: [{ name: "Affiliation 1", type: "author" }],
+		by: [
+			{
+				byline: "Custom Credit 1",
+				name: "Smith Smitherson",
+				type: "author",
+			},
+		],
+	},
 };
 
 const mockContextBase = {
@@ -391,12 +464,14 @@ export const allRenderTypes = () => {
 				mockImage,
 				mockInterstitial,
 				mockList,
-				mockOEmbed,
+				mockListUnordered,
 				mockPullQuote,
 				mockRawHtml,
 				mockTable,
 				mockText(),
 				mockVideo,
+				mockOEmbed,
+				mockYouTube,
 			],
 		},
 	};
@@ -415,7 +490,6 @@ export const allRenderTypesReversed = () => {
 				mockTable,
 				mockRawHtml,
 				mockPullQuote,
-				mockOEmbed,
 				mockList,
 				mockInterstitial,
 				mockImage,
@@ -427,6 +501,7 @@ export const allRenderTypesReversed = () => {
 				mockCorrection,
 				mockCopyright,
 				mockBlockQuote,
+				mockOEmbed,
 			],
 		},
 	};

@@ -1,37 +1,47 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen } from "@testing-library/react";
+import { isServerSide } from "@wpmedia/arc-themes-components";
 import SmallManualPromo from "./default";
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Image: ({ url }) => <img src={url} alt="fake test image" />,
-	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
+	LazyLoad: ({ children }) => children,
 }));
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
-jest.mock("fusion:properties", () => jest.fn(() => ({})));
+
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => true),
+}));
+
+jest.mock("fusion:content", () => ({
+	useEditableContent: jest.fn(() => ({
+		editableContent: () => ({ contentEditable: "true" }),
+		searchableField: () => {},
+		useFusionContext: jest.fn(() => ({
+			isAdmin: false,
+		})),
+	})),
+}));
+
 jest.mock("fusion:context", () => ({
 	useFusionContext: jest.fn(() => ({})),
 	useComponentContext: jest.fn(() => ({
 		registerSuccessEvent: () => ({}),
 	})),
 }));
-jest.mock("fusion:content", () => ({
-	useContent: jest.fn(() => ({})),
-	useEditableContent: jest.fn(() => ({
-		searchableField: () => {},
-	})),
-}));
 
-const config = {
+const customFields = {
+	headline: "This is the headline",
+	imagePosition: "right",
+	imageRatio: "3:2",
+	imageURL: "www.google.com/fake.png",
+	lazyLoad: false,
+	linkURL: "www.google.com",
+	newTab: true,
 	showHeadline: true,
 	showImage: true,
-	headline: "This is the headline",
-	imageURL: "www.google.com/fake.png",
-	linkURL: "www.google.com",
 };
 
-describe("the small promo feature", () => {
+describe("the small manual promo feature", () => {
 	afterEach(() => {
 		jest.resetModules();
 	});
@@ -39,80 +49,74 @@ describe("the small promo feature", () => {
 	beforeEach(() => {
 		jest.mock("fusion:context", () => ({
 			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
-				id: "testId",
+				isAdmin: false,
 			})),
 		}));
 	});
 
-	it("should have 1 container fluid class", () => {
-		const wrapper = mount(<SmallManualPromo customFields={config} />);
-		expect(wrapper.find(".container-fluid")).toHaveLength(1);
+	it("should have one image when showImage is true", () => {
+		render(<SmallManualPromo customFields={customFields} />);
+		expect(
+			screen.queryByRole("img", { name: "This is the headline", hidden: true })
+		).not.toBeNull();
 	});
 
-	it("should have one img when show image is true", () => {
-		const wrapper = mount(<SmallManualPromo customFields={config} />);
-		expect(wrapper.find("Image")).toHaveLength(1);
+	it("should have no image when showImage is false", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, showImage: false }} />);
+		expect(screen.queryByRole("img", { name: "This is the headline" })).toBeNull();
 	});
 
-	it("Headline div should have class .col-sm-xl-8 when show image is true", () => {
-		const wrapper = mount(<SmallManualPromo customFields={config} />);
-		expect(wrapper.find(".col-sm-xl-8")).toHaveLength(1);
+	it("should have no headline when showHeadline is false", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, showHeadline: false }} />);
+		expect(screen.queryByText("This is the headline")).toBeNull();
 	});
 
-	it("should have no Image when show image is false", () => {
-		const noImgConfig = {
-			showHeadline: true,
-			showImage: false,
-			headline: "This is the headline",
-			imageURL: "www.google.com/fake.png",
-			linkURL: "www.google.com",
-		};
-		const wrapper = mount(<SmallManualPromo customFields={noImgConfig} />);
-		expect(wrapper.find("Image")).toHaveLength(0);
+	it("should return null on server-side render from PageBuilder Editor when lazyload is true", () => {
+		isServerSide.mockImplementationOnce(() => true);
+		const { container } = render(
+			<SmallManualPromo customFields={{ ...customFields, lazyLoad: true }} />
+		);
+		expect(container.firstChild).toBeNull();
 	});
 
-	it("headline div should have class .col-sm-xl-12 when show image is false", () => {
-		const noImgConfig = {
-			showHeadline: true,
-			showImage: false,
-			headline: "This is the headline",
-			imageURL: "www.google.com/fake.png",
-			linkURL: "www.google.com",
-		};
-		const wrapper = mount(<SmallManualPromo customFields={noImgConfig} />);
-		expect(wrapper.find(".col-sm-xl-12")).toHaveLength(1);
+	it("should render image first when imagePosition is set to above", () => {
+		render(
+			<SmallManualPromo
+				customFields={{ ...customFields, imagePosition: "above", linkURL: undefined }}
+			/>
+		);
+		const stack = screen.queryByRole("article");
+		const figure = screen.queryByRole("figure");
+		expect(stack.firstChild).toBe(figure);
 	});
 
-	it("should only be one link when showHeadline is false and show image is true", () => {
-		const noHeadlineConfig = {
-			showHeadline: false,
-			showImage: true,
-			headline: "This is the headline",
-			imageURL: "www.google.com/fake.png",
-			linkURL: "www.google.com",
-		};
-		const wrapper = mount(<SmallManualPromo customFields={noHeadlineConfig} />);
-		expect(wrapper.find("a")).toHaveLength(1);
+	it("should render heading first when imagePosition is set to below", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "below" }} />);
+		const stack = screen.queryByRole("article");
+		const heading = screen.queryByRole("heading");
+		expect(stack.firstChild).toBe(heading);
 	});
 
-	it("should have one line separator", () => {
-		const wrapper = mount(<SmallManualPromo customFields={config} />);
-		expect(wrapper.find("hr")).toHaveLength(1);
+	it("should render image first when imagePosition is set to left", () => {
+		render(
+			<SmallManualPromo
+				customFields={{ ...customFields, imagePosition: "left", linkURL: undefined }}
+			/>
+		);
+		const stack = screen.queryByRole("article");
+		const figure = screen.queryByRole("figure");
+		expect(stack.firstChild).toBe(figure);
 	});
 
-	it("should render even without a link url", () => {
-		const imageURL = "www.google.com/fake.png";
-		const noLinkURLConfig = {
-			showImage: true,
-			imageURL,
-		};
+	it("should render heading first when imagePosition is set to right", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, imagePosition: "right" }} />);
+		const stack = screen.queryByRole("article");
+		const heading = screen.queryByRole("heading");
+		expect(stack.firstChild).toBe(heading);
+	});
 
-		const wrapper = mount(<SmallManualPromo customFields={noLinkURLConfig} />);
-		// testing for whether that import is shallow component
-		expect(wrapper.find("Image")).toHaveLength(1);
-
-		// testing whether the image url was indeed passed down
-		expect(wrapper.find("img").prop("src")).toEqual(imageURL);
+	it("should render a headline without a linkURL", () => {
+		render(<SmallManualPromo customFields={{ ...customFields, linkURL: undefined }} />);
+		expect(screen.queryByText("This is the headline")).not.toBeNull();
 	});
 });

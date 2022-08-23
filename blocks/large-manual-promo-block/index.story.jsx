@@ -12,6 +12,9 @@ export default {
 };
 
 const sampleData = {
+	caption: "Caption goes here,",
+	subtitle: "Image Title",
+	credits: "Photographer/Videographer Credit. Publication credit",
 	showOverline: false,
 	showHeadline: false,
 	showImage: false,
@@ -23,6 +26,10 @@ const sampleData = {
 	imageURL:
 		"https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
 	linkURL: "www.google.com",
+	imagePosition: "bottom",
+	author: "Jane and John Dee",
+	dateTime: "2021-01-12 13:23",
+	dateString: "January 12, 2021 at 1:23PM EST",
 };
 
 export const allFields = () => {
@@ -71,6 +78,18 @@ export const imageAndDescription = () => {
 		...sampleData,
 		showImage: true,
 		showDescription: true,
+	};
+
+	return <LargeManualPromo customFields={customFields} />;
+};
+
+export const imageHeadlineOverlineAndDescription = () => {
+	const customFields = {
+		...sampleData,
+		showImage: true,
+		showHeadline: true,
+		showDescription: true,
+		showOverline: true,
 	};
 
 	return <LargeManualPromo customFields={customFields} />;

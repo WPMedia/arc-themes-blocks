@@ -1,0 +1,21 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-numbered-list {
+	&__items {
+		@include scss.block-components("numbered-list-items");
+		@include scss.block-properties("numbered-list-items");
+	}
+
+	&__item {
+		@include scss.block-components("numbered-list-item");
+		@include scss.block-properties("numbered-list-item");
+	}
+
+	&__item-image {
+		@include scss.block-components("numbered-list-item-image");
+		@include scss.block-properties("numbered-list-item-image");
+	}
+
+	@include scss.block-components("numbered-list");
+	@include scss.block-properties("numbered-list");
+}

@@ -144,7 +144,7 @@ const MediumPromo = ({ customFields }) => {
 		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)
 		: "";
 
-	return showHeadline || showImage || showImage || showDescription || showByline || showDate ? (
+	return showHeadline || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<article

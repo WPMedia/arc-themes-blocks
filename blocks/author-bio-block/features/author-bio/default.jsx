@@ -206,9 +206,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 						<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
 							{author?.description}
 						</Paragraph>
-						<div data-testid="social-links" className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}>
-							{socialLinks}
-						</div>
+						<div className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}>{socialLinks}</div>
 					</Stack>
 				</div>
 			);
@@ -219,11 +217,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 	if (authors.length === 0) {
 		return null;
 	}
-	return (
-		<Stack className={BLOCK_CLASS_NAME} data-testid="authors">
-			{authors}
-		</Stack>
-	);
+	return <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack>;
 };
 
 const AuthorBio = ({ customFields = {} }) => {

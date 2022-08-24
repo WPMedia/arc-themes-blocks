@@ -143,7 +143,7 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		expect(wrapper.find({ "data-testid": "authors" }).children().length).toBe(3);
+		expect(wrapper.find(".b-author-bio").children().length).toBe(3);
 	});
 
 	it("should show no author if there's no description", () => {
@@ -400,9 +400,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 
 		const wrapper = mount(<AuthorBio />);
-		const socialButtonsContainer = wrapper.find({
-			"data-testid": "social-links",
-		});
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
 		expect(socialButtonsContainer.children()).toHaveLength(13);
 		const socialLinks = socialButtonsContainer.find("a");
 		expect(socialLinks).toHaveLength(13);
@@ -447,7 +445,7 @@ describe("Given the list of author(s) from the article", () => {
 
 		const wrapper = mount(<AuthorBio />);
 
-		const socialLinks = wrapper.find({ "data-testid": "social-links" });
+		const socialLinks = wrapper.find(".b-author-bio__social-link-wrapper");
 		expect(socialLinks.children()).toHaveLength(0);
 	});
 
@@ -483,9 +481,7 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		const socialButtonsContainer = wrapper.find({
-			"data-testid": "social-links",
-		});
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
 
 		expect(socialButtonsContainer.children()).toHaveLength(1);
 		expect(socialButtonsContainer.props().children[0].key).toBe("snapchat");
@@ -529,7 +525,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const socialLinks = wrapper.find({ "data-testid": "social-links" });
+		const socialLinks = wrapper.find(".b-author-bio__social-link-wrapper");
 		expect(socialLinks.children()).toHaveLength(1);
 		expect(socialLinks.props().children[0].key).toBe("Something Gamechanging");
 	});
@@ -659,7 +655,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		expect(wrapper.find({ "data-testid": "authors" }).children().length).toBe(2);
+		expect(wrapper.find(".b-author-bio").children().length).toBe(2);
 	});
 
 	it("it should show email link with malito email", () => {

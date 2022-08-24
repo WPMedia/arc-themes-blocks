@@ -821,8 +821,8 @@
 					flex-direction: row,
 					components: (
 						image: (
-							max-width: var(--global-spacing-13),
-							max-height: var(--global-spacing-13),
+							max-width: var(--global-spacing-12),
+							max-height: var(--global-spacing-12),
 							border-radius: var(--global-border-radius-2),
 						),
 						stack: (
@@ -835,7 +835,7 @@
 					flex-wrap: wrap,
 					components: (
 						link: (
-							margin: var(--global-spacing-2) var(--global-spacing-2) 0 0,
+							margin: var(--global-spacing-2) var(--global-spacing-4) 0 0,
 						),
 					),
 				),

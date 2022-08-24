@@ -911,6 +911,23 @@
 				double-chain-child-item-empty: (
 					display: contents,
 				),
+				gallery: (
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+						carousel: (
+							font-size: var(--body-font-size-small),
+						),
+						carousel-button: (
+							border: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+					),
+				),
 				header: (
 					font-weight: var(--global-font-weight-7),
 				),
@@ -2046,6 +2063,7 @@
 @use "../../blocks/double-chain-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
+@use "../../blocks/gallery-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";

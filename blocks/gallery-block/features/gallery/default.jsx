@@ -3,10 +3,10 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
 
-import { Gallery, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+import { Carousel, Icon } from "@wpmedia/arc-themes-components";
 
 export const GalleryPresentation = ({
 	arcSite,
@@ -59,28 +59,37 @@ export const GalleryPresentation = ({
 	const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
 	return (
-		<Gallery
-			galleryElements={contentElements}
-			resizerURL={resizerURL}
-			ansId={id}
-			ansHeadline={headlines?.basic ? headlines.basic : ""}
-			expandPhrase={phrases.t("global.gallery-expand-button")}
-			autoplayPhraseLabels={{
-				start: phrases.t("global.gallery-autoplay-label-start"),
-				stop: phrases.t("global.gallery-autoplay-label-stop"),
-			}}
-			autoplayPhrase={phrases.t("global.gallery-autoplay-button")}
-			pausePhrase={phrases.t("global.gallery-pause-autoplay-button")}
-			controlsFont={getThemeStyle(arcSite)["primary-font-family"]}
+		<Carousel
+			className="b-gallery"
+			showLabel
+			showAdditionalSlideControls
 			pageCountPhrase={
 				/* istanbul ignore next */ (current, total) =>
 					phrases.t("global.gallery-page-count-text", { current, total })
 			}
+			enableAutoplay
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={phrases.t("global.gallery-autoplay-button")}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
+			autoplayPhraseLabels={{
+				start: phrases.t("global.gallery-autoplay-label-start"),
+				stop: phrases.t("global.gallery-autoplay-label-stop"),
+			}}
+			enableFullScreen
+			fullScreenShowButton={
+				<button type="button">
+					<Icon name="Fullscreen" />
+					{phrases.t("global.gallery-expand-button")}
+				</button>
+			}
+			fullScreenMinimizeButton={
+				<button type="button">
+					<Icon name="Close" />
+				</button>
+			}
 			adElement={/* istanbul ignore next */ () => <AdBlock />}
-			interstitialClicks={interstitialClicks}
-			displayTitle={!hideTitle}
-			displayCaption={!hideCaption}
-			displayCredits={!hideCredits}
+			adInterstitialClicks={interstitialClicks}
 		/>
 	);
 };

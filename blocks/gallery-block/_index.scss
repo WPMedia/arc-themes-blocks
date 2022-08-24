@@ -1,0 +1,6 @@
+@use "@wpmedia/arc-themes-components/scss";
+
+.b-gallery {
+	@include scss.block-components("gallery");
+	@include scss.block-properties("gallery");
+}

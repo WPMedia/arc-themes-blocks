@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
+import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
 	formatSocialURL,
@@ -12,23 +13,15 @@ import {
 	Paragraph,
 	Link,
 } from "@wpmedia/arc-themes-components";
-import getProperties from "fusion:properties";
 
 const BLOCK_CLASS_NAME = "b-author-bio";
 
-const renderAuthorImage = (author, arcSite) => {
-	const { image = {}, name, resized_params: resizedImageOptions } = author;
+const renderAuthorImage = (author) => {
+	const { image = {}, name } = author;
 
 	const { url = "", alt_text: altText = "" } = image;
 
-	return url ? (
-		<Image
-			src={url}
-			alt={altText || name}
-			resizerURL={getProperties(arcSite)?.resizerURL}
-			resizedImageOptions={resizedImageOptions}
-		/>
-	) : null;
+	return url ? <Image src={url} alt={altText || name} /> : null;
 };
 
 const AuthorBioItemsContainer = () => {

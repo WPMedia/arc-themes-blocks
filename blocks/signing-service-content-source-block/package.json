@@ -1,0 +1,24 @@
+{
+  "name": "@wpmedia/signing-service-content-source-block",
+  "version": "0.1.0",
+  "description": "Signing Service Content Source Block",
+  "author": "Arc XP - Themes",
+  "homepage": "https://github.com/WPMedia/arc-themes-blocks",
+  "license": "CC-BY-NC-ND-4.0",
+  "main": "index.js",
+  "files": [
+    "sources"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/WPMedia/arc-themes-blocks.git",
+    "directory": "blocks/signing-service-content-source-block"
+  },
+  "dependencies": {
+    "axios": "^0.26.0"
+  }
+}

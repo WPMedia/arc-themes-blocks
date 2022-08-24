@@ -216,7 +216,7 @@ const CardListItems = (props) => {
 						</Stack>
 						{contentItems.slice(1).map((element) => {
 							const { headlines: { basic: headlineText } = {} } = element;
-							const imageURL = getImageFromANS(element).url;
+							const imageURL = getImageFromANS(element)?.url;
 							const itemUrl = element.websites[arcSite]?.website_url;
 							if (!itemUrl) {
 								return null;

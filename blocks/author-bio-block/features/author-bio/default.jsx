@@ -192,7 +192,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 			authorList.push(
 				<div className={`${BLOCK_CLASS_NAME}__author`} key={author?.name ? author.name : ""}>
-					{renderAuthorImage(author, arcSite)}
+					{renderAuthorImage(author)}
 					<Stack data-testid="descriptions">
 						{authorNameWithHyperlink || authorName}
 						{/* there will always be a description via conditional on 52 */}

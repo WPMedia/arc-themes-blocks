@@ -109,7 +109,7 @@ const StoryCarousel = ({
 							description: { basic: descriptionText = null } = {},
 							websites,
 						} = item;
-						const imageURL = getImageFromANS(item);
+						const imageURL = getImageFromANS(item)?.url;
 
 						if (!websites[arcSite]) {
 							return null;

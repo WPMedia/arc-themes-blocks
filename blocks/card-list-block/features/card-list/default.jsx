@@ -165,6 +165,8 @@ const CardListItems = (props) => {
 	}
 	// End Overline data
 
+	const imageUrl = getImageFromANS(sourceContent)?.url;
+
 	return contentItems.length > 0 ? (
 		<HeadingSection>
 			<Stack className={BLOCK_CLASS_NAME}>
@@ -175,13 +177,8 @@ const CardListItems = (props) => {
 						className={`${BLOCK_CLASS_NAME}__main-item-image-link`}
 						href={sourceContent.websites[arcSite].website_url}
 					>
-						{getImageFromANS(sourceContent) ? (
-							<Image
-								width={377}
-								height={283}
-								src={getImageFromANS(sourceContent)}
-								alt={sourceContent.headlines.basic}
-							/>
+						{imageUrl ? (
+							<Image width={377} height={283} src={imageUrl} alt={sourceContent.headlines.basic} />
 						) : (
 							<Image
 								width={377}
@@ -219,7 +216,7 @@ const CardListItems = (props) => {
 						</Stack>
 						{contentItems.slice(1).map((element) => {
 							const { headlines: { basic: headlineText } = {} } = element;
-							const imageURL = getImageFromANS(element);
+							const imageURL = getImageFromANS(element).url;
 							const itemUrl = element.websites[arcSite]?.website_url;
 							if (!itemUrl) {
 								return null;

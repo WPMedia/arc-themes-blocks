@@ -187,7 +187,7 @@ const ExtraLargePromo = ({ customFields }) => {
 	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const hasAuthors = showByline && content?.credits?.by.length > 0;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-	const promoImageURL = imageOverrideURL || getImageFromANS(content);
+	const promoImageURL = imageOverrideURL || getImageFromANS(content)?.url;
 
 	const MediaImage = () =>
 		showImage ? (

@@ -1,10 +1,10 @@
 # Signing Service Content Source
 
-A Fusion content source for interacting with the Arc Signing Service for generting hashed strings based on an input
+A Fusion content source for interacting with the Arc Signing Service for generating hashed strings based on an input
 
 ## Environment Variables
 
-The sigining content source relies on the following environent variables
+The signing content source relies on the following environment variables
 
 | Variable                        | Description                                                                                |
 | ------------------------------- | ------------------------------------------------------------------------------------------ |

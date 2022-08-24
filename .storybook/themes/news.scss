@@ -926,6 +926,12 @@
 							box-shadow: none,
 							height: var(--global-spacing-4),
 						),
+						carousel-button-enter-full-screen: (
+							padding: 0 var(--global-spacing-2) 0 0,
+						),
+						carousel-additional-controls: (
+							display: none,
+						),
 					),
 				),
 				header: (
@@ -1858,6 +1864,13 @@
 				),
 				double-chain-child-item-empty: (
 					display: initial,
+				),
+				gallery: (
+					components: (
+						carousel-additional-controls: (
+							display: block,
+						),
+					),
 				),
 				header-small: (
 					font-size: var(--body-font-size),

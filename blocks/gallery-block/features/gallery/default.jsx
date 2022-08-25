@@ -6,7 +6,7 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { Carousel, Icon, Image, MediaItem } from "@wpmedia/arc-themes-components";
+import { Carousel, formatCredits, Icon, Image, MediaItem } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-gallery";
 
@@ -113,7 +113,13 @@ export const GalleryPresentation = ({
 					label={phrases.t("global.gallery-page-count-text", { itemIndex, galleryLength })}
 					key={`gallery-item-${galleryItem.url}`}
 				>
-					<MediaItem>
+					<MediaItem
+						caption={!hideCaption ? galleryItem.caption : null}
+						credit={
+							!hideCredits ? formatCredits(galleryItem.vanityCredits || galleryItem.credits) : null
+						}
+						title={!hideTitle ? galleryItem.subtitle : null}
+					>
 						<Image src={galleryItem.url} />
 					</MediaItem>
 				</Carousel.Item>

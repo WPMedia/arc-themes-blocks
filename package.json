@@ -165,6 +165,7 @@
     "@wpmedia/section-title-block": "file:blocks/section-title-block",
     "@wpmedia/share-bar-block": "file:blocks/share-bar-block",
     "@wpmedia/shared-styles": "file:blocks/shared-styles",
+    "@wpmedia/signing-service-content-source-block": "file:blocks/signing-service-content-source-block",
     "@wpmedia/simple-list-block": "file:blocks/simple-list-block",
     "@wpmedia/single-chain-block": "file:blocks/single-chain-block",
     "@wpmedia/single-column-layout-block": "file:blocks/single-column-layout-block",

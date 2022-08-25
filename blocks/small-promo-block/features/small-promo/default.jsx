@@ -95,7 +95,7 @@ const SmallPromo = ({ customFields }) => {
 	}
 
 	const linkURL = content?.websites?.[arcSite]?.website_url;
-	const imageURL = getImageFromANS(content);
+	const imageURL = getImageFromANS(content)?.url;
 	const headline = content?.headlines?.basic;
 
 	const PromoImage = () => {

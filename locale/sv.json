@@ -30,21 +30,7 @@
 		"article-body-block.interstitial-link-aria-label": "Öppna relaterad artikel"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "Följ",
-		"full-author-bio-block.social-email": "E-post",
-		"full-author-bio-block.social-twitter": "Kontakta via Twitter",
-		"full-author-bio-block.social-facebook": "Kontakta via Facebook",
-		"full-author-bio-block.social-instagram": "Följ på Instagram",
-		"full-author-bio-block.social-rss": "RSS-kanal",
-		"full-author-bio-block.social-linkedin": "Kontakta via LinkedIn",
-		"full-author-bio-block.social-reddit": "Kontakta via Reddit",
-		"full-author-bio-block.social-youtube": "Kontakta via YouTube",
-		"full-author-bio-block.social-medium": "Kontakta via Medium",
-		"full-author-bio-block.social-tumblr": "Kontakta via Tumblr",
-		"full-author-bio-block.social-pinterest": "Kontakta via Pinterest",
-		"full-author-bio-block.social-snapchat": "Kontakta via Snapchat",
-		"full-author-bio-block.social-whatsapp": "Kontakta via WhatsApp",
-		"full-author-bio-block.social-soundcloud": "Lyssna på SoundCloud"
+		"full-author-bio-block.connect-text": "Följ"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "Meny",

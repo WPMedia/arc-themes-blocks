@@ -1,6 +1,11 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-full-author-bio {
+	&__text {
+		@include scss.block-properties("full-author-bio-text");
+		@include scss.block-components("full-author-bio-text");
+	}
+
 	&__identification {
 		@include scss.block-properties("full-author-bio-identification");
 		@include scss.block-components("full-author-bio-identification");
@@ -19,6 +24,16 @@
 	&__social {
 		@include scss.block-properties("full-author-bio-social");
 		@include scss.block-components("full-author-bio-social");
+	}
+
+	&__social-header {
+		@include scss.block-properties("full-author-bio-social-header");
+		@include scss.block-components("full-author-bio-social-header");
+	}
+
+	&__social-icons {
+		@include scss.block-properties("full-author-bio-social-icons");
+		@include scss.block-components("full-author-bio-social-icons");
 	}
 
 	&__social-link {

@@ -11,7 +11,7 @@
 		"global.gallery-text": "Galeria",
 		"global.video-text": "Vídeo",
 		"global.gallery-expand-button": "Expandir",
-		"global.gallery-page-count-text": "<span class='sr-only'>Imagem<\/span> %{current} de %{total}",
+		"global.gallery-page-count-text": "<span class='sr-only'>Imagem</span> %{current} de %{total}",
 		"global.gallery-autoplay-button": "Reprodução automática",
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
 		"global.gallery-autoplay-label-start": "Iniciar apresentação automática de diapositivos",
@@ -30,21 +30,7 @@
 		"article-body-block.interstitial-link-aria-label": "Abrir história relacionada"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "Ligar",
-		"full-author-bio-block.social-email": "E-mail",
-		"full-author-bio-block.social-twitter": "Ligar ao Twitter",
-		"full-author-bio-block.social-facebook": "Ligar ao Facebook",
-		"full-author-bio-block.social-instagram": "Seguir no Instagram",
-		"full-author-bio-block.social-rss": "Feed RSS",
-		"full-author-bio-block.social-linkedin": "Ligar ao LinkedIn",
-		"full-author-bio-block.social-reddit": "Ligar ao Reddit",
-		"full-author-bio-block.social-youtube": "Ligar ao YouTube",
-		"full-author-bio-block.social-medium": "Ligar ao Medium",
-		"full-author-bio-block.social-tumblr": "Ligar ao Tumblr",
-		"full-author-bio-block.social-pinterest": "Ligar ao Pinterest",
-		"full-author-bio-block.social-snapchat": "Ligar ao Snapchat",
-		"full-author-bio-block.social-whatsapp": "Ligar ao WhatsApp",
-		"full-author-bio-block.social-soundcloud": "Ouvir no SoundCloud"
+		"full-author-bio-block.connect-text": "Ligar"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "Secções",

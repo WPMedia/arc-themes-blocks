@@ -11,7 +11,7 @@
 		"global.gallery-text": "갤러리",
 		"global.video-text": "비디오",
 		"global.gallery-expand-button": "더보기",
-		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
+		"global.gallery-page-count-text": "%{current}/%개 보는 %{total}",
 		"global.gallery-autoplay-button": "자동 재생",
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
@@ -30,21 +30,7 @@
 		"article-body-block.interstitial-link-aria-label": "관련 스토리 열기"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "연결",
-		"full-author-bio-block.social-email": "이메일 전송",
-		"full-author-bio-block.social-twitter": "Twitter에서 연결",
-		"full-author-bio-block.social-facebook": "Facebook에서 연결",
-		"full-author-bio-block.social-instagram": "Instagram에서 팔로우",
-		"full-author-bio-block.social-rss": "RSS 피드",
-		"full-author-bio-block.social-linkedin": "LinkedIn에서 연결",
-		"full-author-bio-block.social-reddit": "Reddit에서 연결",
-		"full-author-bio-block.social-youtube": "YouTube에서 연결",
-		"full-author-bio-block.social-medium": "Medium에서 연결",
-		"full-author-bio-block.social-tumblr": "Tumblr에서 연결",
-		"full-author-bio-block.social-pinterest": "Pinterest에서 연결",
-		"full-author-bio-block.social-snapchat": "Snapchat에서 연결",
-		"full-author-bio-block.social-whatsapp": "WhatsApp에서 연결",
-		"full-author-bio-block.social-soundcloud": "SoundCloud에서 듣기"
+		"full-author-bio-block.connect-text": "연결"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "섹션",

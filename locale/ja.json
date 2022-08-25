@@ -11,7 +11,7 @@
 		"global.gallery-text": "ギャラリー",
 		"global.video-text": "ビデオ",
 		"global.gallery-expand-button": "展開",
-		"global.gallery-page-count-text": "%{current} \/ %{total}",
+		"global.gallery-page-count-text": "%{current} / %{total}",
 		"global.gallery-autoplay-button": "自動再生",
 		"global.gallery-pause-autoplay-button": "自動再生の一時停止",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
@@ -30,21 +30,7 @@
 		"article-body-block.interstitial-link-aria-label": "関連記事を開く"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "接続",
-		"full-author-bio-block.social-email": "メールアドレス",
-		"full-author-bio-block.social-twitter": "Twitterで接続",
-		"full-author-bio-block.social-facebook": "Facebookで接続",
-		"full-author-bio-block.social-instagram": "Instagramでフォロー",
-		"full-author-bio-block.social-rss": "RSSフィード",
-		"full-author-bio-block.social-linkedin": "LinkedInで接続",
-		"full-author-bio-block.social-reddit": "Redditで接続",
-		"full-author-bio-block.social-youtube": "YouTubeで接続",
-		"full-author-bio-block.social-medium": "Mediumで接続",
-		"full-author-bio-block.social-tumblr": "Tumblrで接続",
-		"full-author-bio-block.social-pinterest": "Pinterestで接続",
-		"full-author-bio-block.social-snapchat": "Snapchatで接続",
-		"full-author-bio-block.social-whatsapp": "WhatsAppで接続",
-		"full-author-bio-block.social-soundcloud": "SoundCloudで聞く"
+		"full-author-bio-block.connect-text": "接続"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "セクション",

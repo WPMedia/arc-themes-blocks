@@ -25,7 +25,8 @@ const authorObject = {
 	email: "jane@doe.com",
 	facebook: "https://facebook.com/janedoe",
 	twitter: "janedoe",
-	longBio: "Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. ",
+	longBio:
+		"Jane Doe is a senior product manager for Arc Publishing. This is a Long bio. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 	instagram: "janedoe",
 	rss: "someusername",
 	linkedin: "someusername",

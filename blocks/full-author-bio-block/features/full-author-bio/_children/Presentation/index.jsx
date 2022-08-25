@@ -43,46 +43,57 @@ const Presentation = ({ author = {}, locale }) => {
 	const bio = author?.bio || author?.longBio;
 
 	return author?.byline || author?.image || author?.role || bio || socials.length ? (
-		<Stack className={BLOCK_CLASS_NAME}>
+		<div className={BLOCK_CLASS_NAME}>
 			{author?.image ? (
 				<MediaItem>
 					<Image src={author.image} alt={author.byline || ""} />
 				</MediaItem>
 			) : null}
-			{author?.byline || author?.role ? (
+			{author?.byline || author?.role || bio || socials.length ? (
 				<HeadingSection>
-					<Stack className={`${BLOCK_CLASS_NAME}__identification`}>
-						{author.byline ? (
-							<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
+					<Stack className={`${BLOCK_CLASS_NAME}__text`}>
+						{author?.byline || author?.role ? (
+							<Stack className={`${BLOCK_CLASS_NAME}__identification`}>
+								{author.byline ? (
+									<Heading className={`${BLOCK_CLASS_NAME}__name`}>{author.byline}</Heading>
+								) : null}
+								{author.role ? (
+									<HeadingSection>
+										<Heading className={`${BLOCK_CLASS_NAME}__role`}>{author.role}</Heading>
+									</HeadingSection>
+								) : null}
+							</Stack>
 						) : null}
-						{author.role ? (
-							<HeadingSection>
-								<Heading className={`${BLOCK_CLASS_NAME}__role`}>{author.role}</Heading>
-							</HeadingSection>
+						{bio ? <Paragraph>{bio}</Paragraph> : null}
+						{socials.length ? (
+							<Stack className={`${BLOCK_CLASS_NAME}__social`}>
+								<HeadingSection>
+									<Heading className={`${BLOCK_CLASS_NAME}__social-header`}>
+										{phrases.t("full-author-bio-block.connect-text")}
+									</Heading>
+								</HeadingSection>
+								<div className={`${BLOCK_CLASS_NAME}__social-icons`}>
+									{socials.map((item) => (
+										<Link
+											className={`${BLOCK_CLASS_NAME}__social-link`}
+											href={formatSocialURL(item, author[item])}
+											key={item}
+											openInNewTab
+											title={phrases.t(`global.social-${item.toLowerCase()}-content`, {
+												authorName: author.name,
+											})}
+										>
+											<Icon name={socialIcons[item]} />
+										</Link>
+									))}
+								</div>
+							</Stack>
 						) : null}
+						<div />
 					</Stack>
 				</HeadingSection>
 			) : null}
-			{bio ? <Paragraph>{bio}</Paragraph> : null}
-			{socials.length ? (
-				<Stack className={`${BLOCK_CLASS_NAME}__social`} direction="horizontal" wrap="wrap">
-					{socials.map((item) => (
-						<Link
-							className={`${BLOCK_CLASS_NAME}__social-link`}
-							href={formatSocialURL(item, author[item])}
-							key={item}
-							openInNewTab
-							title={phrases.t(`global.social-${item.toLowerCase()}-content`, {
-								authorName: author.name,
-							})}
-						>
-							<Icon name={socialIcons[item]} />
-						</Link>
-					))}
-				</Stack>
-			) : null}
-			<div />
-		</Stack>
+		</div>
 	) : null;
 };
 

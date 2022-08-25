@@ -30,21 +30,7 @@
 		"article-body-block.interstitial-link-aria-label": "Ouvrir un article associé"
 	},
 	"full-author-bio-block": {
-		"full-author-bio-block.connect-text": "Connecter",
-		"full-author-bio-block.social-email": "E-mail",
-		"full-author-bio-block.social-twitter": "Se connecter sur Twitter",
-		"full-author-bio-block.social-facebook": "Se connecter sur Facebook",
-		"full-author-bio-block.social-instagram": "Suivre sur Instagram",
-		"full-author-bio-block.social-rss": "Flux RSS",
-		"full-author-bio-block.social-linkedin": "Se connecter sur LinkedIn",
-		"full-author-bio-block.social-reddit": "Se connecter sur Reddit",
-		"full-author-bio-block.social-youtube": "Se connecter sur YouTube",
-		"full-author-bio-block.social-medium": "Se connecter sur Medium",
-		"full-author-bio-block.social-tumblr": "Se connecter sur Tumblr",
-		"full-author-bio-block.social-pinterest": "Se connecter sur Pinterest",
-		"full-author-bio-block.social-snapchat": "Se connecter sur Snapchat",
-		"full-author-bio-block.social-whatsapp": "Se connecter sur WhatsApp",
-		"full-author-bio-block.social-soundcloud": "Écouter sur SoundCloud"
+		"full-author-bio-block.connect-text": "Connecter"
 	},
 	"header-nav-block": {
 		"header-nav-block.sections-button": "Sections",

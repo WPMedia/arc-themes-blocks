@@ -913,7 +913,11 @@
 					display: contents,
 				),
 				full-author-bio: (
+					display: flex,
+					flex-direction: column,
 					gap: var(--global-spacing-4),
+					margin: auto,
+					max-width: 30rem,
 					components: (
 						heading: (
 							color: var(--color-primary),
@@ -946,6 +950,18 @@
 					line-height: var(--heading-level-6-line-height),
 				),
 				full-author-bio-social: (
+					gap: var(--global-spacing-2),
+				),
+				full-author-bio-social-header: (
+					text-align: center,
+					font-size: var(--heading-level-6-font-size),
+					font-eight: var(--heading-level-6-font-eight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				full-author-bio-social-icons: (
+					display: flex,
+					flex-wrap: wrap,
+					justify-content: center,
 					gap: var(--global-spacing-4) var(--global-spacing-3),
 				),
 				full-author-bio-social-link: (
@@ -961,6 +977,9 @@
 							fill: var(--color-primary-hover),
 						),
 					),
+				),
+				full-author-bio-text: (
+					gap: var(--global-spacing-4),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),
@@ -1894,7 +1913,9 @@
 					display: initial,
 				),
 				full-author-bio: (
+					flex-direction: row,
 					gap: var(--global-spacing-5),
+					max-width: auto,
 					components: (
 						image: (
 							margin: 0,
@@ -1902,6 +1923,12 @@
 							max-width: 11.25rem,
 						),
 					),
+				),
+				full-author-bio-social-header: (
+					text-align: left,
+				),
+				full-author-bio-social-icons: (
+					justify-content: flex-start,
 				),
 				header-small: (
 					font-size: var(--body-font-size),

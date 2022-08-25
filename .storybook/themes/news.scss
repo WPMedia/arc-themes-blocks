@@ -923,6 +923,9 @@
 							font-weight: var(--body-font-weight-tiny),
 							line-height: var(--body-line-height-tiny),
 						),
+						carousel-controls: (
+							padding: 0 0 var(--global-spacing-2) 0,
+						),
 						carousel-track: (
 							background-color: var(--global-black),
 							gap: initial,

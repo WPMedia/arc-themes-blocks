@@ -919,7 +919,7 @@
 							width: var(--global-spacing-4),
 						),
 						carousel: (
-							font-size: var(--body-font-size-small),
+							font-size: var(--body-font-size-tiny),
 						),
 						carousel-button: (
 							border: none,
@@ -927,10 +927,13 @@
 							height: var(--global-spacing-4),
 						),
 						carousel-button-enter-full-screen: (
-							padding: 0 var(--global-spacing-2) 0 0,
+							padding: 0,
 						),
 						carousel-additional-controls: (
 							display: none,
+						),
+						carousel-button-toggle-auto-play: (
+							padding: 0 var(--global-spacing-4),
 						),
 					),
 				),

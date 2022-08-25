@@ -6,7 +6,9 @@ import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { Carousel, Icon } from "@wpmedia/arc-themes-components";
+import { Carousel, Icon, Image, MediaItem } from "@wpmedia/arc-themes-components";
+
+const BLOCK_CLASS_NAME = "b-gallery";
 
 export const GalleryPresentation = ({
 	arcSite,
@@ -58,10 +60,15 @@ export const GalleryPresentation = ({
 
 	const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
+	const galleryLength = contentElements.length;
+
 	return (
 		<Carousel
-			className="b-gallery"
+			className={BLOCK_CLASS_NAME}
 			showLabel
+			slidesToShow={1}
+			// todo: add headline
+			// ansHeadline={headlines?.basic ? headlines.basic : ""}
 			showAdditionalSlideControls
 			pageCountPhrase={
 				/* istanbul ignore next */ (current, total) =>
@@ -90,7 +97,28 @@ export const GalleryPresentation = ({
 			}
 			adElement={/* istanbul ignore next */ () => <AdBlock />}
 			adInterstitialClicks={interstitialClicks}
-		/>
+			nextButton={
+				<Carousel.Button id={id} label="Next Slide">
+					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} fill="white" name="ChevronRight" />
+				</Carousel.Button>
+			}
+			previousButton={
+				<Carousel.Button id={id} label="Previous Slide">
+					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+				</Carousel.Button>
+			}
+		>
+			{contentElements.map((galleryItem, itemIndex) => (
+				<Carousel.Item
+					label={phrases.t("global.gallery-page-count-text", { itemIndex, galleryLength })}
+					key={`gallery-item-${galleryItem.url}`}
+				>
+					<MediaItem>
+						<Image src={galleryItem.url} />
+					</MediaItem>
+				</Carousel.Item>
+			))}
+		</Carousel>
 	);
 };
 

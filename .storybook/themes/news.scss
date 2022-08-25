@@ -923,6 +923,11 @@
 							font-weight: var(--body-font-weight-tiny),
 							line-height: var(--body-line-height-tiny),
 						),
+						carousel-track: (
+							background-color: var(--global-black),
+							gap: initial,
+							max-width: initial,
+						),
 						carousel-button: (
 							border: none,
 							box-shadow: none,
@@ -937,7 +942,18 @@
 						carousel-button-toggle-auto-play: (
 							padding: 0 var(--global-spacing-4),
 						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+						),
 					),
+				),
+				gallery-track-icon: (
+					fill: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),

@@ -1,6 +1,10 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-gallery {
+	&__track-icon {
+		@include scss.block-components("gallery-track-icon");
+		@include scss.block-properties("gallery-track-icon");
+	}
 	@include scss.block-components("gallery");
 	@include scss.block-properties("gallery");
 }

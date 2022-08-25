@@ -95,7 +95,7 @@ const NumberedList = (props) => {
 						{contentElements.length
 							? contentElements.map((element, i) => {
 									const { headlines: { basic: headlineText = "" } = {}, websites } = element;
-									const imageURL = getImageFromANS(element);
+									const imageURL = getImageFromANS(element)?.url;
 
 									if (!websites[arcSite]) {
 										return null;

@@ -6,14 +6,14 @@
 		@include scss.block-properties("author-bio-author");
 	}
 
-	&__authorName {
-		@include scss.block-components("author-bio-authorName");
-		@include scss.block-properties("author-bio-authorName");
+	&__author-name {
+		@include scss.block-components("author-bio-author-name");
+		@include scss.block-properties("author-bio-author-name");
 	}
 
-	&__authorDescription {
-		@include scss.block-components("author-bio-authorDescription");
-		@include scss.block-properties("author-bio-authorDescription");
+	&__author-description {
+		@include scss.block-components("author-bio-author-description");
+		@include scss.block-properties("author-bio-author-description");
 	}
 
 	&__social-link {

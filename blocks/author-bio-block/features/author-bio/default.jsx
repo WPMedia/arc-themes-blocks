@@ -180,7 +180,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 			// Make the name a hyperlink if a url to the bio page is provided
 			const authorName = original?.byline ? (
-				<Paragraph className={`${BLOCK_CLASS_NAME}__authorName`} data-testid="author-name">
+				<Paragraph className={`${BLOCK_CLASS_NAME}__author-name`} data-testid="author-name">
 					{original.byline}
 				</Paragraph>
 			) : undefined;
@@ -196,7 +196,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 					<Stack data-testid="descriptions">
 						{authorNameWithHyperlink || authorName}
 						{/* there will always be a description via conditional on 52 */}
-						<Paragraph className={`${BLOCK_CLASS_NAME}__authorDescription`}>
+						<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
 							{author?.description}
 						</Paragraph>
 						<div className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}>{socialLinks}</div>

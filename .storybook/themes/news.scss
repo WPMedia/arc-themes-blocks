@@ -846,18 +846,18 @@
 						),
 					),
 				),
-				author-bio-authorName: (
+				author-bio-author-name: (
 					font-family: var(--font-family-primary),
 					font-size: var(--global-font-size-6),
-					font-weight: var(--global-font-weight-7),
+					font-weight: var(--heading-level-3-font-weight),
 					margin-bottom: var(--global-spacing-2),
-					line-height: var(--global-line-height-5),
+					line-height: var(--heading-level-6-line-height),
 				),
-				author-bio-authorDescription: (
+				author-bio-author-description: (
 					font-size: var(--global-font-size-3),
-					font-weight: var(--global-font-weight-4),
+					font-weight: var(--body-font-weight),
 					margin-bottom: var(--global-spacing-2),
-					line-height: var(--global-line-height-6),
+					line-height: var(--body-line-height-small),
 				),
 				byline: (
 					font-size: var(--body-font-weight),
@@ -1875,11 +1875,11 @@
 				article-body-gallery-additional-previous: (
 					display: block,
 				),
-				author-bio-authorName: (
-					font-size: var(--global-font-size-7),
+				author-bio-author-name: (
+					font-size: var(--heading-level-5-font-size),
 				),
-				author-bio-authorDescription: (
-					font-size: var(--global-font-size-4),
+				author-bio-author-description: (
+					font-size: var(--body-font-size),
 					margin-bottom: var(--global-spacing-5),
 				),
 				double-chain: (

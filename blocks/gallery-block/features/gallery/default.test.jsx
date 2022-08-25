@@ -1,16 +1,8 @@
-// eslint-disable-next-line max-classes-per-file
 import React from "react";
 import { mount } from "enzyme";
+import GalleryFeature from "./default";
 
-const mockPhrases = {
-	"global.gallery-expand-button": "Expand",
-	"global.gallery-page-count-text": "%{current} of %{total}",
-	"global.gallery-autoplay-button": "Autoplay",
-	"global.gallery-pause-autoplay-button": "Pause autoplay",
-};
-
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
+window.matchMedia = jest.fn();
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
@@ -29,21 +21,12 @@ jest.mock("fusion:content", () => ({
 }));
 
 jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Gallery: function Gallery() {
-		return <div />;
-	},
 	LazyLoad: ({ children }) => <>{children}</>,
 	isServerSide: () => true,
 }));
 
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
-}));
-
 describe("gallery feature block - lazy load", () => {
 	it("should not return on server side with lazy load true", () => {
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(<GalleryFeature customFields={{ lazyLoad: true }} />);
 
 		expect(wrapper.html()).toBe(null);
@@ -65,7 +48,6 @@ describe("gallery feature block - no custom fields", () => {
 	});
 
 	it("should render the global content gallery", () => {
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(<GalleryFeature />);
 		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("");
 		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([]);
@@ -108,7 +90,6 @@ describe("gallery feature block - globalContent", () => {
 	});
 
 	it("should render the global content gallery", () => {
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
 
 		expect(wrapper.find("Gallery").props().ansHeadline).toEqual(
@@ -149,7 +130,6 @@ describe("gallery feature block - contentConfig", () => {
 				},
 			})),
 		}));
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(
 			<GalleryFeature
 				customFields={{
@@ -182,7 +162,6 @@ describe("gallery feature block - contentConfig", () => {
 				_id: "shdsjdhs73e34",
 			})),
 		}));
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(
 			<GalleryFeature
 				customFields={{
@@ -213,7 +192,6 @@ describe("gallery feature block - contentConfig", () => {
 				],
 			})),
 		}));
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(
 			<GalleryFeature
 				customFields={{
@@ -238,7 +216,6 @@ describe("gallery feature block - contentConfig", () => {
 		jest.mock("fusion:content", () => ({
 			useContent: jest.fn(() => []),
 		}));
-		const { default: GalleryFeature } = require("./default");
 		const wrapper = mount(
 			<GalleryFeature
 				customFields={{

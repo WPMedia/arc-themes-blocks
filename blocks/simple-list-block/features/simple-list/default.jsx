@@ -21,7 +21,7 @@ const unserializeStory = (arcSite) => (acc, storyObject) => {
 		return acc.concat({
 			id: storyObject._id,
 			itemTitle: storyObject.headlines.basic,
-			imageURL: getImageFromANS(storyObject) || "",
+			imageURL: getImageFromANS(storyObject)?.url || "",
 			websiteURL: storyObject.websites[arcSite].website_url || "",
 		});
 	}

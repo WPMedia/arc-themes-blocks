@@ -324,7 +324,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const embedMarkup = showImage && playVideoInPlace && getVideoFromANS(content);
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL =
-		showImage && (imageOverrideURL || getImageFromANS(content) || fallbackImage);
+		showImage && (imageOverrideURL || getImageFromANS(content)?.url || fallbackImage);
 
 	return (
 		<LargePromoPresentation

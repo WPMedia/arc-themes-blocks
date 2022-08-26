@@ -848,8 +848,8 @@
 					line-height: var(--heading-level-6-line-height),
 				),
 				author-bio-author-description: (
+					font-family: var(--font-family-primary),
 					font-size: var(--body-font-size-small),
-					font-weight: var(--body-font-weight),
 					line-height: var(--body-line-height-small),
 				),
 				byline: (
@@ -1867,9 +1867,6 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
-				),
-				author-bio-author-name: (
-					font-size: var(--heading-level-5-font-size),
 				),
 				author-bio-author-description: (
 					font-size: var(--body-font-size),

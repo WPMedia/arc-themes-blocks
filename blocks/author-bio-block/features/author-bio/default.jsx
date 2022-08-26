@@ -12,9 +12,9 @@ import {
 	Icon,
 	Image,
 	isServerSide,
-	Stack,
-	Paragraph,
 	Link,
+	Paragraph,
+	Stack,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-author-bio";

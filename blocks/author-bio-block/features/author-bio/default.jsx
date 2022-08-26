@@ -21,7 +21,7 @@ const renderAuthorImage = (author) => {
 
 	const { url = "", alt_text: altText = "" } = image;
 
-	return url ? <Image src={url} alt={altText || name} /> : null;
+	return url ? <Image src={url} alt={altText || name} width={100} /> : null;
 };
 
 const AuthorBioItemsContainer = () => {
@@ -180,26 +180,31 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 
 			// Make the name a hyperlink if a url to the bio page is provided
 			const authorName = original?.byline ? (
-				<Paragraph className={`${BLOCK_CLASS_NAME}__author-name`} data-testid="author-name">
-					{original.byline}
-				</Paragraph>
+				<Paragraph className={`${BLOCK_CLASS_NAME}__author-name`}>{original.byline}</Paragraph>
 			) : undefined;
 			const authorNameWithHyperlink = author?.url ? (
-				<a data-testid="author-name" href={author?.url}>
+				<a className={`${BLOCK_CLASS_NAME}__author-name`} href={author?.url}>
 					{authorName}
 				</a>
 			) : undefined;
 
 			authorList.push(
 				<div className={`${BLOCK_CLASS_NAME}__author`} key={author?.name ? author.name : ""}>
-					{renderAuthorImage(author)}
-					<Stack data-testid="descriptions">
+					{renderAuthorImage(author, arcSite)}
+					<Stack>
 						{authorNameWithHyperlink || authorName}
 						{/* there will always be a description via conditional on 52 */}
 						<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
-							{author?.description}
+							{author.description}
 						</Paragraph>
-						<div className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}>{socialLinks}</div>
+						<Stack
+							direction="horizontal"
+							wrap="wrap"
+							gap="16px"
+							className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
+						>
+							{socialLinks}
+						</Stack>
 					</Stack>
 				</div>
 			);

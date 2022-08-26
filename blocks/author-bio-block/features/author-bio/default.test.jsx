@@ -401,15 +401,11 @@ describe("Given the list of author(s) from the article", () => {
 
 		const wrapper = mount(<AuthorBio />);
 		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
-		expect(socialButtonsContainer.children()).toHaveLength(13);
 		const socialLinks = socialButtonsContainer.find("a");
 		expect(socialLinks).toHaveLength(13);
 		socialLinks.forEach((link) => {
 			expect(typeof link.prop("aria-label")).toEqual("string");
 		});
-
-		// envelope icon is the default we want to avoid
-		expect(socialButtonsContainer.text().includes("EnvelopeIcon")).toBe(false);
 	});
 	it("should show null if no social link objects, with url and title, are provided", () => {
 		const { default: AuthorBio } = require("./default");
@@ -445,7 +441,8 @@ describe("Given the list of author(s) from the article", () => {
 
 		const wrapper = mount(<AuthorBio />);
 
-		const socialLinks = wrapper.find(".b-author-bio__social-link-wrapper");
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
+		const socialLinks = socialButtonsContainer.find("a");
 		expect(socialLinks.children()).toHaveLength(0);
 	});
 
@@ -481,10 +478,9 @@ describe("Given the list of author(s) from the article", () => {
 			})),
 		}));
 		const wrapper = mount(<AuthorBio />);
-		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
-
-		expect(socialButtonsContainer.children()).toHaveLength(1);
-		expect(socialButtonsContainer.props().children[0].key).toBe("snapchat");
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().href.includes("snapchat")).toBe(true);
 	});
 
 	it("an unrecognized social media title renders an envelope icon with site as key", () => {
@@ -525,9 +521,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const socialLinks = wrapper.find(".b-author-bio__social-link-wrapper");
-		expect(socialLinks.children()).toHaveLength(1);
-		expect(socialLinks.props().children[0].key).toBe("Something Gamechanging");
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link-wrapper");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().children[0].props.name).toBe("Envelope");
 	});
 
 	it("should fallback gracefully if author name does not exist and not render authorName link", () => {
@@ -610,7 +606,7 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const targetAuthorLink = wrapper.find({ "data-testid": "author-name" });
+		const targetAuthorLink = wrapper.find(".b-author-bio__author-name");
 		expect(targetAuthorLink.length).toBe(1);
 		expect(targetAuthorLink.props().href).toBe("https://google.com");
 	});
@@ -691,8 +687,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const socialLinks = wrapper.find(".b-author-bio__social-link");
-		expect(socialLinks.length).toBe(2);
+		const socialButtonsContainer = wrapper.find(".b-author-bio__social-link");
+		const socialLinks = socialButtonsContainer.find("a");
+		expect(socialLinks.props().href).toBe("mailto:bernstein@washpost.com");
 	});
 	it("should not throw by undefined error if empty global content object", () => {
 		jest.mock("fusion:context", () => ({

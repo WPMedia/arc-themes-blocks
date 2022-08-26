@@ -826,16 +826,15 @@
 							border-radius: var(--global-border-radius-2),
 						),
 						stack: (
+							// gap: var(--global-spacing-2),
 							flex: 1,
 						),
 					),
 				),
 				author-bio-social-link-wrapper: (
-					display: flex,
-					flex-wrap: wrap,
 					components: (
 						link: (
-							margin: var(--global-spacing-2) var(--global-spacing-4) 0 0,
+							gap: var(--global-spacing-2) var(--global-spacing-4) 0 0,
 						),
 					),
 				),

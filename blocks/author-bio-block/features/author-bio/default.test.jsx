@@ -607,7 +607,7 @@ describe("Given the list of author(s) from the article", () => {
 		const wrapper = mount(<AuthorBio />);
 
 		const targetAuthorLink = wrapper.find(".b-author-bio__author-name");
-		expect(targetAuthorLink.length).toBe(1);
+		expect(targetAuthorLink.length).toBe(2);
 		expect(targetAuthorLink.props().href).toBe("https://google.com");
 	});
 

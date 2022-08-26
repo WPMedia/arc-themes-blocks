@@ -181,6 +181,7 @@ export default {
 	promo_items: {
 		basic: {
 			_id: "DBUX66M3LRFMHKXZOM46RO4EXM",
+			auth: "123",
 			additional_properties: [Object],
 			address: {},
 			caption: "The sun beats down on Four Mile Run in Arlington, Va., on Aug. 17.",
@@ -200,6 +201,11 @@ export default {
 			version: "0.10.3",
 			width: 1179,
 			syndication: [Object],
+			lead_art: {
+				_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
+				auth: "456",
+				url: "https://arc-anglerfish-arc2-prod-corecomponents.s3.amazonaws.com/public/DBUX66M3LRFMHKXZOM46RO4EXM.png",
+			},
 		},
 	},
 	distributor: {

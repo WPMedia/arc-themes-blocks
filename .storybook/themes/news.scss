@@ -851,6 +851,7 @@
 					font-family: var(--font-family-primary),
 					font-size: var(--body-font-size-small),
 					line-height: var(--body-line-height-small),
+					margin-bottom: 0,
 				),
 				byline: (
 					font-size: var(--body-font-weight),
@@ -1870,7 +1871,7 @@
 				),
 				author-bio-author-description: (
 					font-size: var(--body-font-size),
-					margin-bottom: var(--global-spacing-5),
+					margin-bottom: var(--global-spacing-4),
 				),
 				double-chain: (
 					components: (

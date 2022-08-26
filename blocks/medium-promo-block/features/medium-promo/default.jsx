@@ -2,6 +2,7 @@ import React from "react";
 
 import { useContent, useEditableContent } from "fusion:content";
 import { useComponentContext, useFusionContext } from "fusion:context";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 import PropTypes from "@arc-fusion/prop-types";
@@ -92,6 +93,10 @@ const MediumPromo = ({ customFields }) => {
         type
         url
         lead_art {
+					_id
+					auth {
+						${RESIZER_APP_VERSION}
+					}
           type
           promo_items {
             basic {
@@ -109,6 +114,10 @@ const MediumPromo = ({ customFields }) => {
           }
         }
         basic {
+					_id
+					auth {
+						${RESIZER_APP_VERSION}
+					}
           type
           url
           resized_params {
@@ -137,8 +146,12 @@ const MediumPromo = ({ customFields }) => {
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
+	const imageAuthToken = getImageFromANS(content)?.auth[RESIZER_APP_VERSION] || null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-	const promoImageURL = imageOverrideURL || getImageFromANS(content);
+	const promoImageURL = content ? getImageFromANS(content)?.url : null;
+	const promoImageFilename = promoImageURL
+		? promoImageURL.split("/")[promoImageURL.split("/").length - 1]
+		: null;
 	const contentDate = content?.display_date;
 	const formattedDate = Date.parse(contentDate)
 		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)
@@ -163,9 +176,22 @@ const MediumPromo = ({ customFields }) => {
 							>
 								<Image
 									alt={content?.headlines?.basic}
-									src={promoImageURL || fallbackImage}
+									src={imageOverrideURL || promoImageFilename || fallbackImage}
 									searchableField
 									data-aspect-ratio={imageRatio?.replace(":", "/")}
+									resizedOptions={{ auth: imageAuthToken }}
+									responsiveImages={[100, 500]}
+									resizerURL={RESIZER_URL}
+									sizes={[
+										{
+											isDefault: true,
+											sourceSizeValue: "100px",
+										},
+										{
+											sourceSizeValue: "500px",
+											mediaCondition: "(min-width: 48rem)",
+										},
+									]}
 								/>
 							</Conditional>
 						</MediaItem>

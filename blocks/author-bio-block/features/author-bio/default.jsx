@@ -183,9 +183,9 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 				<Paragraph className={`${BLOCK_CLASS_NAME}__author-name`}>{original.byline}</Paragraph>
 			) : undefined;
 			const authorNameWithHyperlink = author?.url ? (
-				<a className={`${BLOCK_CLASS_NAME}__author-name`} href={author?.url}>
+				<Link className={`${BLOCK_CLASS_NAME}__author-name`} href={author?.url}>
 					{authorName}
-				</a>
+				</Link>
 			) : undefined;
 
 			authorList.push(

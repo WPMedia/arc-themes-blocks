@@ -847,14 +847,15 @@
 				),
 				author-bio-author-name: (
 					font-family: var(--font-family-primary),
-					font-size: var(--global-font-size-6),
-					font-weight: var(--heading-level-3-font-weight),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
 					margin-bottom: var(--global-spacing-2),
 					line-height: var(--heading-level-6-line-height),
 				),
 				author-bio-author-description: (
-					font-size: var(--global-font-size-3),
-					font-weight: var(--body-font-weight),
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					font-weight: var(--body-font-weight-small),
 					margin-bottom: var(--global-spacing-2),
 					line-height: var(--body-line-height-small),
 				),
@@ -1873,9 +1874,6 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
-				),
-				author-bio-author-name: (
-					font-size: var(--heading-level-5-font-size),
 				),
 				author-bio-author-description: (
 					font-size: var(--body-font-size),

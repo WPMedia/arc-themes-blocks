@@ -9,6 +9,7 @@ const params = {
 const fetch = (key) => {
 	const { sku, "arc-site": arcSite } = key;
 
+	// istanbul ignore next
 	if (sku === "bounce-running-shoe") {
 		return mockProductData;
 	}

@@ -5,8 +5,15 @@ import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { Carousel, formatCredits, Icon, Image, MediaItem } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	Carousel,
+	formatCredits,
+	Icon,
+	Image,
+	isServerSide,
+	MediaItem,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-gallery";
 
@@ -25,6 +32,7 @@ export const GalleryPresentation = ({
 }) => {
 	let AdBlock;
 
+	/* istanbul ignore next */
 	try {
 		const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
 		AdBlock = () => (
@@ -54,6 +62,7 @@ export const GalleryPresentation = ({
 		typeof inheritGlobalContent === "undefined"
 			? typeof galleryContentConfig === "undefined"
 			: inheritGlobalContent;
+
 	const {
 		content_elements: contentElements = [],
 		headlines = {},
@@ -70,8 +79,6 @@ export const GalleryPresentation = ({
 			showLabel
 			label={headlines?.basic ? headlines.basic : ""}
 			slidesToShow={1}
-			// todo: add headline
-			// ansHeadline={headlines?.basic ? headlines.basic : ""}
 			showAdditionalSlideControls
 			pageCountPhrase={
 				/* istanbul ignore next */ (current, total) =>
@@ -127,11 +134,18 @@ export const GalleryPresentation = ({
 							src={galleryItem.url}
 							resizerURL={resizerURL}
 							resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
+							// 16:9 aspect ratio
 							width={375}
 							height={212.06}
 							alt={galleryItem.alt_text}
 							resizerAppVersion={resizerAppVersion}
 							responsiveImages={[150, 375, 500, 1500, 2000]}
+							sizes={[
+								{
+									isDefault: true,
+									sourceSizeValue: "100vw",
+								},
+							]}
 						/>
 					</MediaItem>
 				</Carousel.Item>

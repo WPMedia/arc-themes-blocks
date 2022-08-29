@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CONTENT_BASE, ARC_ACCESS_TOKEN } from "fusion:environment";
+import { mockProductData } from "./mock-data";
 
 const params = {
 	sku: "text",
@@ -7,6 +8,10 @@ const params = {
 
 const fetch = (key) => {
 	const { sku, "arc-site": arcSite } = key;
+
+	if (sku === "bounce-running-shoe") {
+		return mockProductData;
+	}
 
 	return axios({
 		url: `${CONTENT_BASE}/product/api/v1/product/sku/${sku}?website=${arcSite}`,

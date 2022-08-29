@@ -15,6 +15,7 @@ import {
 	formatURL,
 	getImageFromANS,
 	Heading,
+	imageANSToImageSrc,
 	HeadingSection,
 	Image,
 	isServerSide,
@@ -52,8 +53,6 @@ const MediumPromo = ({ customFields }) => {
 		showHeadline,
 		showImage,
 	} = customFields;
-
-	const shouldLazyLoad = lazyLoad && !isAdmin;
 
 	const content =
 		useContent({
@@ -138,6 +137,7 @@ const MediumPromo = ({ customFields }) => {
     }`,
 		}) || null;
 
+	const shouldLazyLoad = lazyLoad && !isAdmin;
 	if (shouldLazyLoad && isServerSide()) {
 		return null;
 	}
@@ -149,9 +149,8 @@ const MediumPromo = ({ customFields }) => {
 	const imageAuthToken = getImageFromANS(content)?.auth[RESIZER_APP_VERSION] || null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL = content ? getImageFromANS(content)?.url : null;
-	const promoImageFilename = promoImageURL
-		? promoImageURL.split("/")[promoImageURL.split("/").length - 1]
-		: null;
+	const promoImageData = getImageFromANS(content);
+	const promoImageFilename = promoImageData ? imageANSToImageSrc(promoImageData) : null;
 	const contentDate = content?.display_date;
 	const formattedDate = Date.parse(contentDate)
 		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)

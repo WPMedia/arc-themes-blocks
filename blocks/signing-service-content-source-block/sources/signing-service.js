@@ -29,6 +29,7 @@ const fetch = ({
 export default {
 	fetch,
 	params,
+	http: false,
 	// 365 day ttl
 	ttl: 31536000,
 };

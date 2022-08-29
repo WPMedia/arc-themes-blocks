@@ -25,7 +25,7 @@ export const GalleryPresentation = ({
 		hideTitle = false,
 		hideCaption = false,
 		hideCredits = false,
-	} = {},
+	},
 	globalContent = {},
 	resizerAppVersion,
 	resizerURL,

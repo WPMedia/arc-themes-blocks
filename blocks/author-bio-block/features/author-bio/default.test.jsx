@@ -606,8 +606,9 @@ describe("Given the list of author(s) from the article", () => {
 		}));
 		const wrapper = mount(<AuthorBio />);
 
-		const targetAuthorLink = wrapper.find(".b-author-bio__author-name");
-		expect(targetAuthorLink.length).toBe(2);
+		const targetAuthorLink = wrapper.find("a.b-author-bio__author-name-link");
+		expect(targetAuthorLink.length).toBe(1);
+		expect(targetAuthorLink.props().href).toBe("https://google.com");
 	});
 
 	it("handles no author name or description", () => {

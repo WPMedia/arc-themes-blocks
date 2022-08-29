@@ -1,27 +1,39 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "@arc-fusion/prop-types";
 import { useFusionContext } from "fusion:context";
 import getTranslatedPhrases from "fusion:intl";
 import getProperties from "fusion:properties";
 import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 import {
+	Conditional,
 	formatSocialURL,
+	Heading,
+	HeadingSection,
 	Icon,
 	Image,
 	isServerSide,
-	Stack,
-	Paragraph,
 	Link,
+	Paragraph,
+	Stack,
 } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-author-bio";
 
-const renderAuthorImage = (author) => {
-	const { image = {}, name } = author;
-
-	const { url = "", alt_text: altText = "" } = image;
-
-	return url ? <Image src={url} alt={altText || name} width={100} /> : null;
+const siteMap = {
+	email: "Envelope",
+	facebook: "Facebook",
+	instagram: "Instagram",
+	linkedin: "LinkedIn",
+	medium: "Medium",
+	pinterest: "Pinterest",
+	reddit: "Reddit",
+	rss: "Rss",
+	snapchat: "Snapchat",
+	soundcloud: "SoundCloud",
+	tumblr: "Tumblr",
+	twitter: "Twitter",
+	whatsapp: "WhatsApp",
+	youtube: "Youtube",
 };
 
 const AuthorBioItemsContainer = () => {
@@ -37,185 +49,72 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 	const { by = [] } = credits;
 
 	// Generate a list of author components
-	const authors = by.reduce((authorList, author) => {
-		const { additional_properties: additionalProperties, name } = author;
-		const { original } = additionalProperties;
-
+	const authors = by
 		// If the author doesn't have a description, then do not add them to the list
 		// Also check for their bio, which means that they are a staff
-		if (author?.description?.length > 0 && original?.bio?.length > 0) {
-			// A loop to generate the list of social media links.
-			// If no url is provided, then the social link will be skipped.
-			const socialLinks =
-				author?.social_links?.length > 0
-					? author.social_links.reduce((result, socialLink) => {
-							if (socialLink?.site && socialLink?.url?.length > 0) {
-								let socialButton;
-								const constructedURL = formatSocialURL(socialLink.site, socialLink.url);
-
-								const MediaLink = ({ children, webService, ...otherProps }) => (
-									<Link
-										href={constructedURL}
-										className={`${BLOCK_CLASS_NAME}__social-link`}
-										target="_blank"
-										rel="noreferrer noopener"
-										aria-label={
-											webService
-												? phrases.t(`global.social-${webService.toLowerCase()}-content`, {
-														authorName: name,
-												  })
-												: null
-										}
-										{...otherProps}
-									>
-										{children}
-									</Link>
-								);
-
-								switch (socialLink.site) {
-									case "linkedin":
-										socialButton = (
-											<MediaLink webService="linkedin">
-												<Icon name="LinkedIn" />
-											</MediaLink>
-										);
-										break;
-									case "twitter":
-										socialButton = (
-											<MediaLink webService="twitter">
-												<Icon name="Twitter" />
-											</MediaLink>
-										);
-										break;
-									case "instagram":
-										socialButton = (
-											<MediaLink webService="instagram">
-												<Icon name="Instagram" />
-											</MediaLink>
-										);
-										break;
-									case "facebook":
-										socialButton = (
-											<MediaLink webService="facebook">
-												<Icon name="Facebook" />
-											</MediaLink>
-										);
-										break;
-									case "reddit":
-										socialButton = (
-											<MediaLink webService="reddit">
-												<Icon name="Reddit" />
-											</MediaLink>
-										);
-										break;
-									case "youtube":
-										socialButton = (
-											<MediaLink webService="youtube" id="link-social-youtube">
-												<Icon name="Youtube" />
-											</MediaLink>
-										);
-										break;
-									case "medium":
-										socialButton = (
-											<MediaLink webService="medium">
-												<Icon name="Medium" />
-											</MediaLink>
-										);
-										break;
-									case "tumblr":
-										socialButton = (
-											<MediaLink webService="tumblr">
-												<Icon name="Tumblr" />
-											</MediaLink>
-										);
-										break;
-									case "pinterest":
-										socialButton = (
-											<MediaLink webService="pinterest">
-												<Icon name="Pinterest" />
-											</MediaLink>
-										);
-										break;
-									case "snapchat":
-										socialButton = (
-											<MediaLink webService="snapchat">
-												<Icon name="Snapchat" />
-											</MediaLink>
-										);
-										break;
-									case "whatsapp":
-										socialButton = (
-											<MediaLink webService="whatsapp">
-												<Icon name="WhatsApp" />
-											</MediaLink>
-										);
-										break;
-									case "soundcloud":
-										socialButton = (
-											<MediaLink webService="soundcloud">
-												<Icon name="SoundCloud" />
-											</MediaLink>
-										);
-										break;
-									case "rss":
-										socialButton = (
-											<MediaLink webService="rss">
-												<Icon name="Rss" />
-											</MediaLink>
-										);
-										break;
-									default:
-										socialButton = (
-											<MediaLink webService="email">
-												<Icon name="Envelope" />
-											</MediaLink>
-										);
-										break;
-								}
-								result.push(<Fragment key={socialLink.site}>{socialButton}</Fragment>);
-							}
-							return result;
-					  }, [])
-					: null;
-
-			// Make the name a hyperlink if a url to the bio page is provided
-			const authorName = original?.byline ? (
-				<Paragraph className={`${BLOCK_CLASS_NAME}__author-name`}>{original.byline}</Paragraph>
-			) : undefined;
-			const authorNameWithHyperlink = author?.url ? (
-				<Link className={`${BLOCK_CLASS_NAME}__author-name`} href={author?.url}>
-					{authorName}
-				</Link>
-			) : undefined;
-
-			authorList.push(
-				<div className={`${BLOCK_CLASS_NAME}__author`} key={author?.name ? author.name : ""}>
-					{renderAuthorImage(author)}
+		.filter(
+			({ additional_properties: additionalProperties = {}, description = "" }) =>
+				description?.length && additionalProperties?.original?.bio?.length
+		)
+		// A loop to generate the list of social media links.
+		// If no url is provided, then the social link will be skipped.
+		.map(
+			({
+				additional_properties: { original: { byline } } = {},
+				description,
+				name,
+				image: { url: imageUrl = "", alt_text: altText = "" } = {},
+				social_links: socialLinks = [],
+				url: authorUrl,
+			}) => (
+				<div className={`${BLOCK_CLASS_NAME}__author`} key={name}>
+					{imageUrl ? <Image src={imageUrl} alt={altText || name} width={100} /> : null}
 					<Stack>
-						{authorNameWithHyperlink || authorName}
-						{/* there will always be a description via conditional on 52 */}
+						{byline || name ? (
+							<Conditional
+								className={`${BLOCK_CLASS_NAME}__author-name-link`}
+								condition={authorUrl}
+								component={Link}
+								href={authorUrl}
+							>
+								<HeadingSection>
+									<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline || name}</Heading>
+								</HeadingSection>
+							</Conditional>
+						) : null}
 						<Paragraph className={`${BLOCK_CLASS_NAME}__author-description`}>
-							{author.description}
+							{description}
 						</Paragraph>
-						<Stack
-							direction="horizontal"
-							wrap="wrap"
-							gap="16px"
-							className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
-						>
-							{socialLinks}
-						</Stack>
+						{socialLinks?.length ? (
+							<Stack
+								direction="horizontal"
+								wrap="wrap"
+								className={`${BLOCK_CLASS_NAME}__social-link-wrapper`}
+							>
+								{socialLinks
+									.filter(({ site, url }) => site && url?.length)
+									.map(({ site, url }) => (
+										<Link
+											aria-label={phrases.t(`global.social-${site.toLowerCase()}-content`, {
+												authorName: name,
+											})}
+											className={`${BLOCK_CLASS_NAME}__social-link`}
+											href={formatSocialURL(site, url)}
+											id={site === "youtube" ? "link-social-youtube" : undefined}
+											key={site}
+											openInNewTab
+										>
+											<Icon name={siteMap[site] || "Envelope"} />
+										</Link>
+									))}
+							</Stack>
+						) : null}
 					</Stack>
 				</div>
-			);
-		}
+			)
+		);
 
-		return authorList;
-	}, []);
-	if (authors.length === 0) {
-		return null;
-	}
-	return <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack>;
+	return authors.length ? <Stack className={BLOCK_CLASS_NAME}>{authors}</Stack> : null;
 };
 
 const AuthorBio = ({ customFields = {} }) => {

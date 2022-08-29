@@ -826,17 +826,13 @@
 							border-radius: var(--global-border-radius-2),
 						),
 						stack: (
-							// gap: var(--global-spacing-2),
+							gap: var(--global-spacing-2),
 							flex: 1,
 						),
 					),
 				),
 				author-bio-social-link-wrapper: (
-					components: (
-						link: (
-							gap: var(--global-spacing-2) var(--global-spacing-4) 0 0,
-						),
-					),
+					gap: var(--global-spacing-4),
 				),
 				author-bio-social-link-hover: (
 					components: (
@@ -849,14 +845,13 @@
 					font-family: var(--font-family-primary),
 					font-size: var(--heading-level-6-font-size),
 					font-weight: var(--heading-level-6-font-weight),
-					margin-bottom: var(--global-spacing-2),
 					line-height: var(--heading-level-6-line-height),
 				),
 				author-bio-author-description: (
 					font-family: var(--font-family-primary),
 					font-size: var(--body-font-size-small),
-					margin-bottom: var(--global-spacing-2),
 					line-height: var(--body-line-height-small),
+					margin-bottom: 0,
 				),
 				byline: (
 					font-size: var(--body-font-weight),
@@ -1876,7 +1871,7 @@
 				),
 				author-bio-author-description: (
 					font-size: var(--body-font-size),
-					margin-bottom: var(--global-spacing-5),
+					margin-bottom: var(--global-spacing-4),
 				),
 				double-chain: (
 					components: (

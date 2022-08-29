@@ -67,7 +67,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 				social_links: socialLinks = [],
 				url: authorUrl,
 			}) => (
-				<div className={`${BLOCK_CLASS_NAME}__author`} key={name}>
+				<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`} key={name}>
 					{imageUrl ? <Image src={imageUrl} alt={altText || name} width={100} /> : null}
 					<Stack>
 						{byline || name ? (
@@ -110,7 +110,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 							</Stack>
 						) : null}
 					</Stack>
-				</div>
+				</Stack>
 			)
 		);
 

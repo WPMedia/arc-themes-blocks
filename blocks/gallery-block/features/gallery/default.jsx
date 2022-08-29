@@ -4,7 +4,7 @@ import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
-
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
 import { Carousel, formatCredits, Icon, Image, MediaItem } from "@wpmedia/arc-themes-components";
 
@@ -20,6 +20,8 @@ export const GalleryPresentation = ({
 		hideCredits = false,
 	} = {},
 	globalContent = {},
+	resizerAppVersion,
+	resizerURL,
 }) => {
 	let AdBlock;
 
@@ -37,7 +39,7 @@ export const GalleryPresentation = ({
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const { resizerURL, galleryCubeClicks, locale = "en" } = getProperties(arcSite);
+	const { galleryCubeClicks, locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const content = useContent(
 		galleryContentConfig
@@ -66,6 +68,7 @@ export const GalleryPresentation = ({
 		<Carousel
 			className={BLOCK_CLASS_NAME}
 			showLabel
+			label={headlines?.basic ? headlines.basic : ""}
 			slidesToShow={1}
 			// todo: add headline
 			// ansHeadline={headlines?.basic ? headlines.basic : ""}
@@ -120,7 +123,16 @@ export const GalleryPresentation = ({
 						}
 						title={!hideTitle ? galleryItem.subtitle : null}
 					>
-						<Image src={galleryItem.url} />
+						<Image
+							src={galleryItem.url}
+							resizerURL={resizerURL}
+							resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
+							width={375}
+							height={212.06}
+							alt={galleryItem.alt_text}
+							resizerAppVersion={resizerAppVersion}
+							responsiveImages={[150, 375, 500, 1500, 2000]}
+						/>
 					</MediaItem>
 				</Carousel.Item>
 			))}
@@ -142,6 +154,8 @@ const GalleryFeature = ({ customFields = {} }) => {
 				arcSite={arcSite}
 				customFields={customFields}
 				globalContent={globalContent}
+				resizerAppVersion={RESIZER_APP_VERSION}
+				resizerURL={RESIZER_URL}
 			/>
 		</LazyLoad>
 	);

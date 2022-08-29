@@ -5,7 +5,7 @@ import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
-import { Carousel, Image } from "@wpmedia/arc-themes-components";
+import { Carousel, Image, imageANSToImageSrc } from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-product-gallery";
 
@@ -30,7 +30,7 @@ export function ProductGalleryDisplay({
 			label={phrases.t("product-gallery.aria-label")}
 		>
 			{shortenedCarouselItems?.map((item, carouselIndex) => {
-				const { url, auth, alt_text: altText, _id: itemId } = item;
+				const { _id: itemId, auth, alt_text: altText } = item;
 
 				// is this a featured image?
 				const isFeaturedImage = isFeaturedImageEnabled && carouselIndex === 0;
@@ -39,7 +39,7 @@ export function ProductGalleryDisplay({
 				const targetAuth = auth[resizerAppVersion];
 				return (
 					<Carousel.Item
-						key={itemId}
+						key={item.testId || itemId}
 						className={isFeaturedImage ? `${BLOCK_CLASS_NAME}__featured-slide` : ""}
 						label={`${phrases.t("product-gallery.slide-indicator", {
 							current: carouselIndex + 1,
@@ -48,7 +48,7 @@ export function ProductGalleryDisplay({
 					>
 						<Image
 							alt={altText}
-							src={url}
+							src={imageANSToImageSrc(item)}
 							resizedOptions={{ auth: targetAuth }}
 							width={375}
 							height={375}
@@ -90,6 +90,10 @@ function ProductGallery({ customFields }) {
 		globalContent?.schema?.productGallery?.value?.assets.filter(
 			(asset) => asset.type === "image"
 		) || [];
+
+	if (isFeaturedImageEnabled && globalContent?.schema?.featuredImage?.value?.assets) {
+		carouselItems.unshift(...globalContent?.schema?.featuredImage?.value?.assets);
+	}
 
 	if (carouselItems.length === 0) {
 		return null;

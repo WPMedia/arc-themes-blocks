@@ -25,7 +25,6 @@ const MOCK_ASSET = {
 		originalName: "iStock-669887798.jpg",
 		originalUrl:
 			"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
-		owner: "matthew.roach@washpost.com",
 		proxyUrl:
 			"/resizer/vNkSDXlCXlGHlHfBlHN5zIlCKFQ=/arc-photo-themesinternal/arc2-sandbox/public/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 		published: true,
@@ -119,6 +118,7 @@ describe("Product Gallery", () => {
 		const { container } = render(<ProductGallery customFields={DEFAULT_CUSTOM_FIELDS} />);
 		expect(container.firstChild).toBeNull();
 	});
+
 	it("renders null if no global content provided", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {},
@@ -126,6 +126,7 @@ describe("Product Gallery", () => {
 		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.firstChild).toBeNull();
 	});
+
 	it("returns null without a carousel if no items", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
@@ -142,6 +143,7 @@ describe("Product Gallery", () => {
 		expect(container.querySelectorAll(".b-product-gallery").length).toBe(0);
 		expect(container.firstChild).toBeNull();
 	});
+
 	it("returns null without a product gallery", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
@@ -160,6 +162,7 @@ describe("Product Gallery", () => {
 		const { container } = render(<ProductGallery customFields={{ DEFAULT_CUSTOM_FIELDS }} />);
 		expect(container.querySelectorAll(".b-product-gallery").length).toBe(1);
 	});
+
 	it("renders carousel and items", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: MOCK_GLOBAL_CONTENT,
@@ -170,12 +173,18 @@ describe("Product Gallery", () => {
 		// rendering two images from mock data
 		expect(container.querySelectorAll(".c-carousel__slide").length).toBe(2);
 	});
+
 	it("only renders 9 items for featured image enabled with more than 9 passed in", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {
 				...MOCK_GLOBAL_CONTENT,
 				schema: {
 					...MOCK_GLOBAL_CONTENT.schema,
+					featuredImage: {
+						value: {
+							assets: [MOCK_ASSET],
+						},
+					},
 					productGallery: {
 						...MOCK_GLOBAL_CONTENT.schema.productGallery,
 						value: {
@@ -191,6 +200,7 @@ describe("Product Gallery", () => {
 		);
 		expect(container.querySelectorAll(".c-carousel__slide").length).toBe(9);
 	});
+
 	it("only renders 8 items for featured image disabled with more than 8 passed in", () => {
 		useFusionContext.mockImplementation(() => ({
 			globalContent: {

@@ -148,7 +148,6 @@ const MediumPromo = ({ customFields }) => {
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const imageAuthToken = getImageFromANS(content)?.auth[RESIZER_APP_VERSION] || null;
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
-	const promoImageURL = content ? getImageFromANS(content)?.url : null;
 	const promoImageData = getImageFromANS(content);
 	const promoImageFilename = promoImageData ? imageANSToImageSrc(promoImageData) : null;
 	const contentDate = content?.display_date;
@@ -160,9 +159,7 @@ const MediumPromo = ({ customFields }) => {
 		<LazyLoad enabled={shouldLazyLoad}>
 			<HeadingSection>
 				<article
-					className={`${BLOCK_CLASS_NAME}${
-						promoImageURL ? ` ${BLOCK_CLASS_NAME}--show-image` : ""
-					}`}
+					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
 						<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>

@@ -265,7 +265,7 @@ MediumPromo.propTypes = {
 			searchable: "image",
 		}),
 		imageRatio: PropTypes.oneOf(["16:9", "3:2", "4:3"]).tag({
-			defaultValue: "3:2",
+			defaultValue: "16:9",
 			label: "Image ratio",
 			group: "Art",
 		}),

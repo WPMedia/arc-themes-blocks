@@ -37,6 +37,10 @@ export const mediumPromoMock = {
 	},
 	promo_items: {
 		basic: {
+			_id: "EM5DTGYGABDJZODV7YVFOC2DOM",
+			auth: {
+				2: "75f6b4c64c7889dc8eadf6a328999d522be2e2397c7b9a5a0704f6d9afa60fcf",
+			},
 			resized_params: {
 				"274x154":
 					"LBTiSxaxr1Eo-tEz9BKFCnZNArw=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
@@ -52,7 +56,7 @@ export const mediumPromoMock = {
 					"4oA14YOFAWISqfWe7GayPCW-l9k=filters:format(jpg):quality(70):focal(4335x1885:4345x1895)/",
 			},
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/4PUA6PJWEBEELOHMHMUUUB2WSM.JPG",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/EM5DTGYGABDJZODV7YVFOC2DOM.jpeg",
 		},
 	},
 	type: "story",

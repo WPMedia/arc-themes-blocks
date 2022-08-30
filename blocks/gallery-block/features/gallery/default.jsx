@@ -132,23 +132,25 @@ export const GalleryPresentation = ({
 						}
 						title={!hideTitle ? galleryItem.subtitle : null}
 					>
-						<Image
-							src={imageANSToImageSrc(galleryItem)}
-							resizerURL={resizerURL}
-							resizedOptions={{ auth: galleryItem?.auth?.[resizerAppVersion] || "" }}
-							// 16:9 aspect ratio
-							width={375}
-							height={212.06}
-							alt={galleryItem.alt_text}
-							resizerAppVersion={resizerAppVersion}
-							responsiveImages={[150, 375, 500, 1500, 2000]}
-							sizes={[
-								{
-									isDefault: true,
-									sourceSizeValue: "100vw",
-								},
-							]}
-						/>
+						<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
+							<Image
+								src={imageANSToImageSrc(galleryItem)}
+								resizerURL={resizerURL}
+								resizedOptions={{ auth: galleryItem?.auth?.[resizerAppVersion] || "" }}
+								// 16:9 aspect ratio
+								width={375}
+								height={212.06}
+								alt={galleryItem.alt_text}
+								resizerAppVersion={resizerAppVersion}
+								responsiveImages={[150, 375, 500, 1500, 2000]}
+								sizes={[
+									{
+										isDefault: true,
+										sourceSizeValue: "100vw",
+									},
+								]}
+							/>
+						</div>
 					</MediaItem>
 				</Carousel.Item>
 			))}

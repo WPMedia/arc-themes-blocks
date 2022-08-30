@@ -918,10 +918,8 @@
 							height: var(--global-spacing-4),
 							width: var(--global-spacing-4),
 						),
-						carousel: (
-							font-size: var(--body-font-size-tiny),
-							font-weight: var(--body-font-weight-tiny),
-							line-height: var(--body-line-height-tiny),
+						image: (
+							max-height: 75vh,
 						),
 						carousel-controls: (
 							padding: 0 0 var(--global-spacing-2) 0,
@@ -957,6 +955,13 @@
 							padding: 0,
 						),
 					),
+				),
+				gallery-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					background-color: var(--global-black),
 				),
 				gallery-track-icon: (
 					fill: var(--global-white),

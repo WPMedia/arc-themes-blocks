@@ -5,6 +5,10 @@
 		@include scss.block-components("gallery-track-icon");
 		@include scss.block-properties("gallery-track-icon");
 	}
+	&__image-wrapper {
+		@include scss.block-components("gallery-image-wrapper");
+		@include scss.block-properties("gallery-image-wrapper");
+	}
 	@include scss.block-components("gallery");
 	@include scss.block-properties("gallery");
 }

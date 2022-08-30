@@ -76,6 +76,7 @@ export const GalleryPresentation = ({
 
 	return (
 		<Carousel
+			id={id}
 			className={BLOCK_CLASS_NAME}
 			showLabel
 			label={headlines?.basic ? headlines.basic : ""}

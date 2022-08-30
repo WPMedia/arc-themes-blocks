@@ -5,9 +5,19 @@ import { useFusionContext } from "fusion:context";
 import getProperties from "fusion:properties";
 import getTranslatedPhrases from "fusion:intl";
 
-import { LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
-import { PrimaryFont } from "@wpmedia/shared-styles";
-import { Grid, Icon, Paragraph, Stack, Link } from "@wpmedia/arc-themes-components";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	Grid,
+	Heading,
+	HeadingSection,
+	isServerSide,
+	Icon,
+	Image,
+	Link,
+	MediaItem,
+	Paragraph,
+	Stack,
+} from "@wpmedia/arc-themes-components";
 
 const BLOCK_CLASS_NAME = "b-footer";
 
@@ -24,7 +34,6 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 		primaryLogoAlt,
 		locale = "en",
 	} = getProperties(arcSite);
-
 	const phrases = getTranslatedPhrases(locale);
 
 	// Check if URL is absolute/base64
@@ -40,110 +49,98 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 			feature: "footer",
 		},
 		filter: `{
-      children {
-        _id
-        node_type
-        display_name
-        name
-        url
-        children {
-          _id
-          node_type
-          display_name
-          name
-          url
-        }
-      }
-    }`,
+			children {
+				_id
+				node_type
+				display_name
+				name
+				url
+				children {
+					_id
+					node_type
+					display_name
+					name
+					url
+				}
+			}
+		}`,
 	});
 
-	const footerColumns = content && content.children ? content.children : [];
-
-	const socialButtons = (
-		<>
-			{facebookPage ? (
-				<Link
-					supplementalText={phrases.t("footer-block.facebook-link")}
-					openInNewTab
-					href={facebookPage}
-				>
-					<Icon name="Facebook" />
-				</Link>
-			) : (
-				""
-			)}
-			{twitterUsername ? (
-				<Link
-					supplementalText={phrases.t("footer-block.twitter-link")}
-					openInNewTab
-					href={`https://twitter.com/${twitterUsername}`}
-				>
-					<Icon name="Twitter" />
-				</Link>
-			) : (
-				""
-			)}
-			{rssUrl ? (
-				<Link supplementalText={phrases.t("footer-block.rss-link")} openInNewTab href={rssUrl}>
-					<Icon name="Rss" />
-				</Link>
-			) : (
-				""
-			)}
-		</>
-	);
-
 	return (
-		<Grid className={BLOCK_CLASS_NAME}>
+		<Stack className={BLOCK_CLASS_NAME}>
 			<section className={`${BLOCK_CLASS_NAME}__top-container`}>
 				{facebookPage || twitterUsername || rssUrl ? (
-					<Stack className={`${BLOCK_CLASS_NAME}__social-links`} direction="horizontal">
-						{socialButtons}
-					</Stack>
+					<div className={`${BLOCK_CLASS_NAME}__social-links-container`}>
+						<Stack className={`${BLOCK_CLASS_NAME}__social-links`} direction="horizontal">
+							{facebookPage ? (
+								<Link
+									href={facebookPage}
+									openInNewTab
+									supplementalText={phrases.t("footer-block.facebook-link")}
+								>
+									<Icon name="Facebook" />
+								</Link>
+							) : null}
+							{twitterUsername ? (
+								<Link
+									href={`https://twitter.com/${twitterUsername}`}
+									openInNewTab
+									supplementalText={phrases.t("footer-block.twitter-link")}
+								>
+									<Icon name="Twitter" />
+								</Link>
+							) : null}
+							{rssUrl ? (
+								<Link
+									href={rssUrl}
+									openInNewTab
+									supplementalText={phrases.t("footer-block.rss-link")}
+								>
+									<Icon name="Rss" />
+								</Link>
+							) : null}
+						</Stack>
+					</div>
 				) : null}
 				<Paragraph>{copyrightText}</Paragraph>
 			</section>
-			<div className="row legacy-footer-row">
+			<Grid className={`${BLOCK_CLASS_NAME}__links`}>
 				{/* The columns are 2D arrays of columns x column items. Iterate through both */}
-				{footerColumns.map((column) => {
-					const columnItems = column.children
-						? column.children.map((item) => (
-								<li className="footer-item" key={item._id}>
-									{item.node_type === "link" ? (
-										<Link href={item.url}>{item.display_name}</Link>
-									) : (
-										<Link href={item._id}>{item.name}</Link>
-									)}
-								</li>
-						  ))
-						: [];
-
-					if (columnItems.length === 0) {
-						return null;
-					}
-
-					return (
-						<div className="footer-section col-sm-12 col-md-6 col-lg-xl-3" key={column._id}>
+				{content?.children?.map((column) =>
+					column?.children?.length ? (
+						<div className={`${BLOCK_CLASS_NAME}__links-group`} key={column._id}>
 							{column.name ? (
-								<PrimaryFont as="h4" className="footer-header">
-									{column.name}
-								</PrimaryFont>
+								<HeadingSection>
+									<Heading>{column.name}</Heading>
+								</HeadingSection>
 							) : null}
-							<PrimaryFont as="ul">{columnItems}</PrimaryFont>
+							<ul>
+								{column.children.map((item) => (
+									<li key={item._id}>
+										{item.node_type === "link" ? (
+											<Link href={item.url}>{item.display_name}</Link>
+										) : (
+											<Link href={item._id}>{item.name}</Link>
+										)}
+									</li>
+								))}
+							</ul>
 						</div>
-					);
-				})}
-			</div>
+					) : null
+				)}
+			</Grid>
 			{logoUrl ? (
-				<div className="primaryLogo">
-					<img
-						src={logoUrl}
+				<MediaItem>
+					<Image
 						alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || ""}
-						className="footer-logo"
+						className={`${BLOCK_CLASS_NAME}__logo`}
+						src={logoUrl}
+						height="64"
 					/>
-				</div>
+				</MediaItem>
 			) : null}
-		</Grid>
+			<div />
+		</Stack>
 	);
 };
 

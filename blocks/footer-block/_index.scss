@@ -1,17 +1,22 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-footer {
-	&__top-container {
-		@include scss.block-components("footer-top-container");
-		@include scss.block-properties("footer-top-container");
-	}
+	&__links {
+		&-group {
+			@include scss.block-components("footer-links-group");
+			@include scss.block-properties("footer-links-group");
+		}
 
-	&__top-copyright-text {
-		@include scss.block-components("footer-top-copyright-text");
-		@include scss.block-properties("footer-top-copyright-text");
+		@include scss.block-components("footer-links");
+		@include scss.block-properties("footer-links");
 	}
 
 	&__social-links {
+		&-container {
+			@include scss.block-components("footer-social-links-container");
+			@include scss.block-properties("footer-social-links-container");
+		}
+
 		a:not(:last-child) {
 			@include scss.block-components("footer-social-link-not-last");
 			@include scss.block-properties("footer-social-link-not-last");
@@ -19,6 +24,16 @@
 
 		@include scss.block-components("footer-social-links");
 		@include scss.block-properties("footer-social-links");
+	}
+
+	&__top-container {
+		&-text {
+			@include scss.block-components("footer-top-copyright-text");
+			@include scss.block-properties("footer-top-copyright-text");
+		}
+
+		@include scss.block-components("footer-top-container");
+		@include scss.block-properties("footer-top-container");
 	}
 
 	@include scss.block-components("footer");

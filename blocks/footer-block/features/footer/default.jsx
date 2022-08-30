@@ -104,38 +104,40 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 				) : null}
 				<Paragraph>{copyrightText}</Paragraph>
 			</section>
-			<Grid className={`${BLOCK_CLASS_NAME}__links`}>
-				{/* The columns are 2D arrays of columns x column items. Iterate through both */}
-				{content?.children?.map((column) =>
-					column?.children?.length ? (
-						<div className={`${BLOCK_CLASS_NAME}__links-group`} key={column._id}>
-							{column.name ? (
-								<HeadingSection>
-									<Heading>{column.name}</Heading>
-								</HeadingSection>
-							) : null}
-							<ul>
-								{column.children.map((item) => (
-									<li key={item._id}>
-										{item.node_type === "link" ? (
-											<Link href={item.url}>{item.display_name}</Link>
-										) : (
-											<Link href={item._id}>{item.name}</Link>
-										)}
-									</li>
-								))}
-							</ul>
-						</div>
-					) : null
-				)}
-			</Grid>
+			{content?.children?.length ? (
+				<Grid className={`${BLOCK_CLASS_NAME}__links`}>
+					{/* The columns are 2D arrays of columns x column items. Iterate through both */}
+					{content.children.map((column) =>
+						column?.children?.length ? (
+							<div className={`${BLOCK_CLASS_NAME}__links-group`} key={column._id}>
+								{column.name ? (
+									<HeadingSection>
+										<Heading>{column.name}</Heading>
+									</HeadingSection>
+								) : null}
+								<ul>
+									{column.children.map((item) => (
+										<li key={item._id}>
+											{item.node_type === "link" ? (
+												<Link href={item.url}>{item.display_name}</Link>
+											) : (
+												<Link href={item._id}>{item.name}</Link>
+											)}
+										</li>
+									))}
+								</ul>
+							</div>
+						) : null
+					)}
+				</Grid>
+			) : null}
 			{logoUrl ? (
 				<MediaItem>
 					<Image
 						alt={(lightBackgroundLogo ? lightBackgroundLogoAlt : primaryLogoAlt) || ""}
 						className={`${BLOCK_CLASS_NAME}__logo`}
 						src={logoUrl}
-						height="64"
+						height={64}
 					/>
 				</MediaItem>
 			) : null}

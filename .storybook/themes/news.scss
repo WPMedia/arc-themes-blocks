@@ -924,6 +924,9 @@
 						carousel-controls: (
 							padding: 0 0 var(--global-spacing-2) 0,
 						),
+						carousel-actions: (
+							display: flex,
+						),
 						carousel-track: (
 							gap: initial,
 							max-width: initial,

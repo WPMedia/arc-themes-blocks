@@ -37,43 +37,17 @@ export const mockProductData = {
 			value: {
 				assets: [
 					{
-						_id: "7XLYJXDCJ5HGNCAVBHVT2PV4LM",
-						additional_properties: {
-							fullSizeResizeUrl:
-								"/resizer/1IvmQcamvKKUYugo84_v3qt49O0=/arc-photo-arccommerce/arc2-sandbox/public/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
-							keywords: ["themes brands"],
-							mime_type: "image/jpeg",
-							originalName: "BoundRunningShoe1.1_Blue_Heather_1.jpg",
-							originalUrl:
-								"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
-							proxyUrl:
-								"/resizer/1IvmQcamvKKUYugo84_v3qt49O0=/arc-photo-arccommerce/arc2-sandbox/public/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
-							published: true,
-							resizeUrl:
-								"/resizer/1IvmQcamvKKUYugo84_v3qt49O0=/arc-photo-arccommerce/arc2-sandbox/public/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
-							restricted: false,
-							thumbnailResizeUrl:
-								"/resizer/fT0JorSAIOaKCQtCmLWFSQzi0Ng=/300x0/arc-photo-arccommerce/arc2-sandbox/public/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
-							version: 0,
-							template_id: 1626,
-						},
-						address: {},
-						auth: { 1: "57573fc7f06ef37129de7dbc3e4bf72320e0aec23755955ada31f7de312605e3" },
-						created_date: "2022-08-29T10:08:55Z",
-						credits: { affiliation: [] },
+						_id: "VKZHWND37FEQZEVPKVF5UB5ZLA",
+						auth: { 1: "9b58a8aa066ce58413f2578968082f00bc44fdfa9b20ed674de2d94f193da93c" },
+						created_date: "2022-08-29T21:07:37Z",
 						height: 2500,
 						image_type: "photograph",
-						last_updated_date: "2022-08-29T10:08:55Z",
+						last_updated_date: "2022-08-29T21:07:37Z",
 						licensable: false,
-						source: {
-							additional_properties: { editor: "photo center" },
-							edit_url:
-								"https://sandbox.arccommerce.arcpublishing.com/photo/7XLYJXDCJ5HGNCAVBHVT2PV4LM",
-							system: "photo center",
-						},
+						owner: { id: "sandbox.arccommerce", sponsored: false },
 						subtitle: "Bounce Running Shoe - Blue Heather",
 						type: "image",
-						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/7XLYJXDCJ5HGNCAVBHVT2PV4LM.jpg",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/VKZHWND37FEQZEVPKVF5UB5ZLA.jpg",
 						version: "0.10.3",
 						width: 2500,
 					},
@@ -85,168 +59,68 @@ export const mockProductData = {
 			value: {
 				assets: [
 					{
-						_id: "TCALKOTZ5RGXXNQEM3TTNJR7OQ",
-						additional_properties: {
-							fullSizeResizeUrl:
-								"/resizer/wKf2G-bWHJtDsNt0hvcFyjohaPY=/arc-photo-arccommerce/arc2-sandbox/public/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
-							keywords: ["themes brands"],
-							mime_type: "image/jpeg",
-							originalName: "BoundRunningShoe1.1_Blue_Heather_3.jpg",
-							originalUrl:
-								"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
-							proxyUrl:
-								"/resizer/wKf2G-bWHJtDsNt0hvcFyjohaPY=/arc-photo-arccommerce/arc2-sandbox/public/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
-							published: true,
-							resizeUrl:
-								"/resizer/wKf2G-bWHJtDsNt0hvcFyjohaPY=/arc-photo-arccommerce/arc2-sandbox/public/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
-							restricted: false,
-							thumbnailResizeUrl:
-								"/resizer/nibBXkEY_WgDCs2zOlX7cOPvyBA=/300x0/arc-photo-arccommerce/arc2-sandbox/public/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
-							version: 0,
-							template_id: 1626,
-						},
-						address: {},
-						auth: { 1: "786eedbdbc5842de2d05a743aea060e1a4ab7fa9fc03e33e28c290a5e9ec44a4" },
-						created_date: "2022-08-29T10:08:55Z",
+						_id: "QG5BUKLJGVGERAQPYL56MLSQ3Q",
+						auth: { 1: "22d0edb9ff3661f1697ddccca84c7fe03e14ae19f6535f83b738b003de448594" },
+						created_date: "2022-08-29T21:07:37Z",
 						credits: { affiliation: [] },
 						height: 2500,
 						image_type: "photograph",
-						last_updated_date: "2022-08-29T10:08:55Z",
+						last_updated_date: "2022-08-29T21:07:37Z",
 						licensable: false,
-						source: {
-							additional_properties: { editor: "photo center" },
-							edit_url:
-								"https://sandbox.arccommerce.arcpublishing.com/photo/TCALKOTZ5RGXXNQEM3TTNJR7OQ",
-							system: "photo center",
-						},
+						owner: { id: "sandbox.arccommerce", sponsored: false },
 						subtitle: "Bounce Running Shoe - Blue Heather",
 						type: "image",
-						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/TCALKOTZ5RGXXNQEM3TTNJR7OQ.jpg",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/QG5BUKLJGVGERAQPYL56MLSQ3Q.jpg",
 						version: "0.10.3",
 						width: 2500,
 					},
 					{
-						_id: "DO56IE5YQZAXROAA7WKRRAZUYQ",
-						additional_properties: {
-							fullSizeResizeUrl:
-								"/resizer/gmTbHIYBHvtNFP-JtKfEAuf-nZw=/arc-photo-arccommerce/arc2-sandbox/public/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-							keywords: ["themes brands"],
-							mime_type: "image/jpeg",
-							originalName: "BoundRunningShoe1.1_Blue_Heather_2.jpg",
-							originalUrl:
-								"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-							proxyUrl:
-								"/resizer/gmTbHIYBHvtNFP-JtKfEAuf-nZw=/arc-photo-arccommerce/arc2-sandbox/public/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-							published: true,
-							resizeUrl:
-								"/resizer/gmTbHIYBHvtNFP-JtKfEAuf-nZw=/arc-photo-arccommerce/arc2-sandbox/public/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-							restricted: false,
-							thumbnailResizeUrl:
-								"/resizer/Tz1zJNlUtm-BNk4viOrlyEGC3HY=/300x0/arc-photo-arccommerce/arc2-sandbox/public/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-							version: 0,
-							template_id: 1626,
-						},
-						address: {},
-						auth: { 1: "5b0680a499e33af96c3f9c9c35b5b965388369e0efc5f026a2777507c77fee16" },
-						created_date: "2022-08-29T10:08:55Z",
+						_id: "YRSQBVMJ5JBONNYLF7TVZB4A34",
+						auth: { 1: "240c4421292379e0026708f5fe63726294442220ec4c8b0186e09e07ab044a1f" },
+						created_date: "2022-08-29T21:07:37Z",
 						credits: { affiliation: [] },
 						height: 2500,
 						image_type: "photograph",
-						last_updated_date: "2022-08-29T10:08:55Z",
+						last_updated_date: "2022-08-29T21:07:37Z",
 						licensable: false,
-						source: {
-							additional_properties: { editor: "photo center" },
-							edit_url:
-								"https://sandbox.arccommerce.arcpublishing.com/photo/DO56IE5YQZAXROAA7WKRRAZUYQ",
-							system: "photo center",
-						},
-						subtitle: "Bounce Running Shoe - Blue Heather",
-						type: "image",
-						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/DO56IE5YQZAXROAA7WKRRAZUYQ.jpg",
-						version: "0.10.3",
-						width: 2500,
-					},
-					{
-						_id: "OVNQHCMQLRGY7GP6DAFU5DBXYM",
-						additional_properties: {
-							fullSizeResizeUrl:
-								"/resizer/o16hdXRocS91LEz0f16UESLm96E=/arc-photo-arccommerce/arc2-sandbox/public/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
-							keywords: ["themes brands"],
-							mime_type: "image/jpeg",
-							originalName: "BoundRunningShoe1.1_Blue_Heather_5.jpg",
-							originalUrl:
-								"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
-							proxyUrl:
-								"/resizer/o16hdXRocS91LEz0f16UESLm96E=/arc-photo-arccommerce/arc2-sandbox/public/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
-							published: true,
-							resizeUrl:
-								"/resizer/o16hdXRocS91LEz0f16UESLm96E=/arc-photo-arccommerce/arc2-sandbox/public/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
-							restricted: false,
-							thumbnailResizeUrl:
-								"/resizer/9kem1RCyfhtXlKpfvTSnINhZ_Bs=/300x0/arc-photo-arccommerce/arc2-sandbox/public/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
-							version: 0,
-							template_id: 1626,
-						},
-						address: {},
-						auth: { 1: "629d915d007dbecb3f72059bc72b9567290a56d846f14773bf08ee36777effb2" },
-						created_date: "2022-08-29T10:08:55Z",
-						credits: { affiliation: [] },
-						height: 2500,
-						image_type: "photograph",
-						last_updated_date: "2022-08-29T10:08:55Z",
-						licensable: false,
-						source: {
-							additional_properties: { editor: "photo center" },
-							edit_url:
-								"https://sandbox.arccommerce.arcpublishing.com/photo/OVNQHCMQLRGY7GP6DAFU5DBXYM",
-							system: "photo center",
-						},
+						owner: { id: "sandbox.arccommerce", sponsored: false },
 						subtitle: "Bounce Running Shoe - Blue Heather",
 						taxonomy: { associated_tasks: [] },
 						type: "image",
-						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/OVNQHCMQLRGY7GP6DAFU5DBXYM.jpg",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/YRSQBVMJ5JBONNYLF7TVZB4A34.jpg",
 						version: "0.10.3",
 						width: 2500,
-						syndication: {},
 					},
 					{
-						_id: "IIEJQ4D2VRDDTIWUTS2PYTQAMY",
-						additional_properties: {
-							fullSizeResizeUrl:
-								"/resizer/RIA12xZTE0PojtAHZq7mD2UCvZ0=/arc-photo-arccommerce/arc2-sandbox/public/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
-							keywords: ["themes brands"],
-							mime_type: "image/jpeg",
-							originalName: "BoundRunningShoe1.1_Blue_Heather_4.jpg",
-							originalUrl:
-								"https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
-							proxyUrl:
-								"/resizer/RIA12xZTE0PojtAHZq7mD2UCvZ0=/arc-photo-arccommerce/arc2-sandbox/public/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
-							published: true,
-							resizeUrl:
-								"/resizer/RIA12xZTE0PojtAHZq7mD2UCvZ0=/arc-photo-arccommerce/arc2-sandbox/public/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
-							restricted: false,
-							thumbnailResizeUrl:
-								"/resizer/mszN7wXxM9sIHdGCtm0tl-Eg95g=/300x0/arc-photo-arccommerce/arc2-sandbox/public/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
-							version: 0,
-							template_id: 1626,
-						},
-						address: {},
-						auth: { 1: "638c62379b241f026a94ef89cf6fbe1e1dd364df0152fdab1e3966662d412c94" },
-						created_date: "2022-08-29T10:08:55Z",
+						_id: "RAQ7K6CYZZD6DCCDMKR37R6WJU",
+						auth: { 1: "020853b4adff8f46201f5b64066b2aac59f71ef892a68409703a309cd7f43823" },
+						created_date: "2022-08-29T21:07:37Z",
 						credits: { affiliation: [] },
 						height: 2500,
 						image_type: "photograph",
-						last_updated_date: "2022-08-29T10:08:55Z",
+						last_updated_date: "2022-08-29T21:07:37Z",
 						licensable: false,
-						source: {
-							additional_properties: { editor: "photo center" },
-							edit_url:
-								"https://sandbox.arccommerce.arcpublishing.com/photo/IIEJQ4D2VRDDTIWUTS2PYTQAMY",
-							system: "photo center",
-						},
+						owner: { id: "sandbox.arccommerce", sponsored: false },
 						subtitle: "Bounce Running Shoe - Blue Heather",
 						type: "image",
-						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/IIEJQ4D2VRDDTIWUTS2PYTQAMY.jpg",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/RAQ7K6CYZZD6DCCDMKR37R6WJU.jpg",
+						version: "0.10.3",
+						width: 2500,
+					},
+					{
+						_id: "3C7XFYBTT5D6THV4LIM2WFFFHM",
+						auth: { 1: "71854a0dba31ce5f271418d553dd8248f967c3cdf4c09c97eff1b7131d6058d3" },
+						created_date: "2022-08-29T21:07:37Z",
+						credits: { affiliation: [] },
+						height: 2500,
+						image_type: "photograph",
+						last_updated_date: "2022-08-29T21:07:37Z",
+						licensable: false,
+						owner: { id: "sandbox.arccommerce", sponsored: false },
+						subtitle: "Bounce Running Shoe - Blue Heather",
+						taxonomy: { associated_tasks: [] },
+						type: "image",
+						url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.arccommerce/3C7XFYBTT5D6THV4LIM2WFFFHM.jpg",
 						version: "0.10.3",
 						width: 2500,
 					},
@@ -272,7 +146,7 @@ export const mockProductData = {
 		shippingAndReturns: {
 			label: "Shipping & Returns",
 			value:
-				"Free standard shipping and free 30-day returns on all items purchased from Indigo. <a href=''>Learn More</a>",
+				"<p>Free standard shipping and free 30-day returns on all items purchased from Indigo. <a href=''>Learn More</a></p>",
 			dataType: "string",
 			visible: true,
 			configuration: null,

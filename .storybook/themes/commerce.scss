@@ -387,6 +387,11 @@
 				details-open-summary-icon: (
 					transform: rotate(180deg),
 				),
+				details-content: (
+					display: flex,
+					flex-direction: column,
+					gap: var(--global-spacing-4),
+				),
 				heading: (
 					font-family: var(--font-family-primary),
 					font-size: var(--heading-level-3-font-size),
@@ -683,6 +688,14 @@
 							text-decoration: none,
 						),
 					),
+				),
+				product-content-ul: (
+					list-style: disc,
+					margin-left: var(--global-spacing-4),
+				),
+				product-content-ol: (
+					list-style: decimal,
+					margin-left: var(--global-spacing-4),
 				),
 				product-information: (
 					components: (

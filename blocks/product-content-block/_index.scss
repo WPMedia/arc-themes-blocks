@@ -1,9 +1,6 @@
 @use "@wpmedia/arc-themes-components/scss";
 
 .b-product-content {
-	@include scss.block-components("product-content");
-	@include scss.block-properties("product-content");
-
 	ul {
 		@include scss.block-properties("product-content-ul");
 	}
@@ -11,4 +8,7 @@
 	ol {
 		@include scss.block-properties("product-content-ol");
 	}
+
+	@include scss.block-components("product-content");
+	@include scss.block-properties("product-content");
 }

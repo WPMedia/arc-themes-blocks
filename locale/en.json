@@ -11,7 +11,7 @@
 		"global.gallery-text": "Gallery",
 		"global.video-text": "Video",
 		"global.gallery-expand-button": "Expand",
-		"global.gallery-page-count-text": "<span class='sr-only'>Image<\/span> %{current} of %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Image<\/span> %{current} of %{total}",
 		"global.gallery-autoplay-button": "Autoplay",
 		"global.gallery-pause-autoplay-button": "Pause autoplay",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",

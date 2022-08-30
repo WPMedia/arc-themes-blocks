@@ -1,6 +1,6 @@
 # `@wpmedia/medium-promo-block`
 
-Medium Manual Promo Block provides a way for a PageBuilder user to create a data-driven promo item using content data.
+Medium Promo Block provides a way for a PageBuilder user to create a data-driven promo item using content data.
 
 ## Acceptance Criteria
 

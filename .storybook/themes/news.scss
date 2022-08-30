@@ -817,12 +817,12 @@
 				),
 				author-bio-author: (
 					gap: var(--global-spacing-4),
-					width: 100%,
 					components: (
 						image: (
-							max-width: var(--global-spacing-12),
-							max-height: var(--global-spacing-12),
-							border-radius: var(--global-border-radius-2),
+							aspect-ratio: 1,
+							border-radius: var(--border-radius-circle),
+							max-height: 5.188rem,
+							max-width: 5.188rem,
 							width: 20%,
 						),
 						stack: (

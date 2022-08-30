@@ -55,6 +55,7 @@ export const LargePromoPresentation = ({
 	searchableField,
 	translationByText,
 	viewportPercentage,
+	playVideoInPlace,
 }) =>
 	embedMarkup ||
 	contentOverline ||
@@ -89,7 +90,7 @@ export const LargePromoPresentation = ({
 									searchableField
 								/>
 							)}
-							{labelIconName ? (
+							{labelIconName && !playVideoInPlace ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 									<Icon name={labelIconName} />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
@@ -348,6 +349,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			searchableField={searchableField}
 			translationByText={phrases.t("global.by-text")}
 			viewportPercentage={viewportPercentage}
+			playVideoInPlace={playVideoInPlace}
 		/>
 	);
 };

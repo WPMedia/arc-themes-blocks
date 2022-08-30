@@ -586,7 +586,7 @@ describe("Given the list of author(s) from the article", () => {
 								additional_properties: {
 									original: {
 										_id: "saracarothers",
-										byline: "",
+										byline: "Sara Carothers",
 										bio_page: "/author/sara-carothers/",
 										bio: "Sara Carothers is a senior product manager for Arc Publishing. This is a short bio. ",
 									},

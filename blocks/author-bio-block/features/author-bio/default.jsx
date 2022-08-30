@@ -70,7 +70,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 				<Stack direction="horizontal" className={`${BLOCK_CLASS_NAME}__author`} key={name}>
 					{imageUrl ? <Image src={imageUrl} alt={altText || name} width={100} /> : null}
 					<Stack>
-						{byline || name ? (
+						{byline ? (
 							<Conditional
 								className={`${BLOCK_CLASS_NAME}__author-name-link`}
 								condition={authorUrl}
@@ -78,7 +78,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 								href={authorUrl}
 							>
 								<HeadingSection>
-									<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline || name}</Heading>
+									<Heading className={`${BLOCK_CLASS_NAME}__author-name`}>{byline}</Heading>
 								</HeadingSection>
 							</Conditional>
 						) : null}

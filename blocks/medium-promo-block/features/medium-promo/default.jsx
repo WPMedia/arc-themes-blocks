@@ -66,75 +66,75 @@ const MediumPromo = ({ customFields }) => {
 			// does not need embed_html because no video section
 			// does not need website section nor label because no overline
 			filter: `{
-      _id
-      credits {
-        by {
-          _id
-          name
-          url
-          type
-          additional_properties {
-            original {
-              byline
-            }
-          }
-        }
-      }
-      description {
-        basic
-      }
-      display_date
-      type
-      headlines {
-        basic
-      }
-      promo_items {
-        type
-        url
-        lead_art {
+			_id
+			credits {
+				by {
+					_id
+					name
+					url
+					type
+					additional_properties {
+						original {
+							byline
+						}
+					}
+				}
+			}
+			description {
+				basic
+			}
+			display_date
+			type
+			headlines {
+				basic
+			}
+			promo_items {
+				type
+				url
+				lead_art {
 					_id
 					auth {
 						${RESIZER_APP_VERSION}
 					}
-          type
-          promo_items {
-            basic {
-              type
-              url
-              resized_params {
-                400x300
-                400x267
-                400x225
-                274x206
-                274x183
-                274x154
-              }
-            }
-          }
-        }
-        basic {
+					type
+					promo_items {
+						basic {
+							type
+							url
+							resized_params {
+								400x300
+								400x267
+								400x225
+								274x206
+								274x183
+								274x154
+							}
+						}
+					}
+				}
+				basic {
 					_id
 					auth {
 						${RESIZER_APP_VERSION}
 					}
-          type
-          url
-          resized_params {
-            400x300
-            400x267
-            400x225
-            274x206
-            274x183
-            274x154
-          }
-        }
-      }
-      websites {
-        ${arcSite} {
-          website_url
-        }
-      }
-    }`,
+					type
+					url
+					resized_params {
+						400x300
+						400x267
+						400x225
+						274x206
+						274x183
+						274x154
+					}
+				}
+			}
+			websites {
+				${arcSite} {
+					website_url
+				}
+			}
+		}`,
 		}) || null;
 
 	const shouldLazyLoad = lazyLoad && !isAdmin;

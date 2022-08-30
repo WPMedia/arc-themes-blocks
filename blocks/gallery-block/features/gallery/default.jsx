@@ -11,6 +11,7 @@ import {
 	formatCredits,
 	Icon,
 	Image,
+	imageANSToImageSrc,
 	isServerSide,
 	MediaItem,
 } from "@wpmedia/arc-themes-components";
@@ -105,7 +106,7 @@ export const GalleryPresentation = ({
 					<Icon name="Close" />
 				</button>
 			}
-			adElement={/* istanbul ignore next */ () => <AdBlock />}
+			adElement={/* istanbul ignore next */ <AdBlock />}
 			adInterstitialClicks={interstitialClicks}
 			nextButton={
 				<Carousel.Button id={id} label="Next Slide">
@@ -131,7 +132,7 @@ export const GalleryPresentation = ({
 						title={!hideTitle ? galleryItem.subtitle : null}
 					>
 						<Image
-							src={galleryItem.url}
+							src={imageANSToImageSrc(galleryItem)}
 							resizerURL={resizerURL}
 							resizedOptions={{ auth: galleryItem?.auth?.[resizerAppVersion] || "" }}
 							// 16:9 aspect ratio

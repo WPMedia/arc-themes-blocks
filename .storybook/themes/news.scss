@@ -824,6 +824,7 @@
 							border-radius: var(--border-radius-circle),
 							width: 20%,
 							height: 100%,
+							aspect-ratio: 1,
 						),
 						stack: (
 							gap: var(--global-spacing-2),

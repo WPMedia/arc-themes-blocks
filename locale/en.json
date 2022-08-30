@@ -24,7 +24,7 @@
 		"global.opens-in-new-window": "(Opens in new window)",
 		"global.sponsored-content": "Sponsored Content",
 		"global.social-email-content": "Send an email to %{authorName}",
-		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss-content": "Subscribe to %{authorName} RSS feed",
 		"global.social-soundcloud-content": "Listen to %{authorName} on SoundCloud",
 		"glocal.social-twitter-content": "Connect on Twitter",
 		"global.social-facebook-content": "Connect on Facebook",

@@ -950,6 +950,12 @@
 						carousel-button-previous: (
 							background-color: transparent,
 						),
+						carousel-button-additional-previous: (
+							padding: 0,
+						),
+						carousel-button-additional-next: (
+							padding: 0,
+						),
 					),
 				),
 				gallery-track-icon: (
@@ -1892,6 +1898,8 @@
 					components: (
 						carousel-additional-controls: (
 							display: flex,
+							gap: var(--global-spacing-2),
+							padding: 0 0 0 var(--global-spacing-2),
 						),
 					),
 				),

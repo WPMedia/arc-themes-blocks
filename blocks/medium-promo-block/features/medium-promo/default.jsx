@@ -101,14 +101,6 @@ const MediumPromo = ({ customFields }) => {
 						basic {
 							type
 							url
-							resized_params {
-								400x300
-								400x267
-								400x225
-								274x206
-								274x183
-								274x154
-							}
 						}
 					}
 				}
@@ -119,14 +111,6 @@ const MediumPromo = ({ customFields }) => {
 					}
 					type
 					url
-					resized_params {
-						400x300
-						400x267
-						400x225
-						274x206
-						274x183
-						274x154
-					}
 				}
 			}
 			websites {

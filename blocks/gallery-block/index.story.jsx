@@ -57,6 +57,29 @@ const mockGallery = {
 				2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
 			},
 		},
+		{
+			_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
+			alt_text: "Image Alt Text 2",
+			caption: "Image Caption 2",
+			credits: {
+				affiliation: [{ name: "Affiliation 2", type: "author" }],
+				by: [
+					{
+						byline: "Custom Credit 2",
+						name: "Smith Smitherson",
+						type: "author",
+					},
+				],
+			},
+			height: 3744,
+			subtitle: "Image Subtitle 2",
+			type: "image",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
+			width: 5616,
+			auth: {
+				2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
+			},
+		},
 	],
 	headlines: {
 		basic: "Gallery Headline",

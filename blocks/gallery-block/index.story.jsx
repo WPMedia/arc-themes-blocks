@@ -12,7 +12,7 @@ const mockGallery = {
 	_id: "gallery_id",
 	content_elements: [
 		{
-			_id: "image_id1",
+			_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
 			alt_text: "Image Alt Text 1",
 			caption: "Image Caption 1",
 			credits: {
@@ -30,12 +30,12 @@ const mockGallery = {
 			type: "image",
 			width: 5616,
 			auth: {
-				2: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
+				2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
 			},
 			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 		},
 		{
-			_id: "image_id2",
+			_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
 			alt_text: "Image Alt Text 2",
 			caption: "Image Caption 2",
 			credits: {
@@ -51,10 +51,10 @@ const mockGallery = {
 			height: 3744,
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
 			width: 5616,
 			auth: {
-				2: "f314a3f3b86665d1ef144a4a429324658d253fe5af94719822deee11be985738",
+				2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
 			},
 		},
 	],

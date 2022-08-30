@@ -1271,9 +1271,6 @@
 						link: (
 							position: relative,
 						),
-						separator: (
-							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
-						),
 					),
 				),
 				large-promo-icon-label: (
@@ -1315,6 +1312,9 @@
 						),
 						stack: (
 							gap: var(--global-spacing-4),
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
 						),
 					),
 				),

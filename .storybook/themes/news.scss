@@ -819,11 +819,11 @@
 					gap: var(--global-spacing-4),
 					components: (
 						image: (
-							aspect-ratio: 1,
-							border-radius: var(--border-radius-circle),
-							max-height: 5.188rem,
 							max-width: 5.188rem,
+							max-height: 5.125rem,
+							border-radius: var(--border-radius-circle),
 							width: 20%,
+							height: 100%,
 						),
 						stack: (
 							gap: var(--global-spacing-2),
@@ -833,6 +833,7 @@
 				),
 				author-bio-social-link-wrapper: (
 					gap: var(--global-spacing-4),
+					margin-top: 0,
 				),
 				author-bio-social-link-hover: (
 					components: (
@@ -1869,10 +1870,12 @@
 				article-body-gallery-additional-previous: (
 					display: block,
 				),
+				author-bio-social-link-wrapper: (
+					margin-top: var(--global-spacing-4),
+				),
 				author-bio-author-description: (
 					font-size: var(--body-font-size),
 					line-height: var(--body-line-height),
-					margin-bottom: var(--global-spacing-4),
 				),
 				double-chain: (
 					components: (

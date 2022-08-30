@@ -27,9 +27,6 @@ credits: {
 
 		}
 	],
-	resized_params: {
-		"84x0": "",
-	},
 	additional_properties: {
 		original: {}
 	}
@@ -72,8 +69,6 @@ If there is no description provided by the schema, then no author bio will be di
 ## Internationalization fields
 
 - Add all internationalization fields used in the block
-
-## Events
 
 ## Events
 

@@ -356,6 +356,12 @@
 					align-items: center,
 					gap: var(--global-spacing-2),
 				),
+				carousel-button-previous: (
+					background-color: var(--global-white),
+				),
+				carousel-button-next: (
+					background-color: var(--global-white),
+				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
 					max-width: var(--content-scale-width),

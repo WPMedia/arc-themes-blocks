@@ -32,7 +32,7 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 		lightBackgroundLogoAlt,
 		primaryLogo,
 		primaryLogoAlt,
-		locale = "en",
+		locale,
 	} = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 

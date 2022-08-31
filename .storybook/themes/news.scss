@@ -1312,11 +1312,8 @@
 				large-promo: (
 					gap: var(--global-spacing-4),
 					components: (
-						media-item: (
+						link: (
 							position: relative,
-						),
-						separator: (
-							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
 						),
 					),
 				),
@@ -1359,6 +1356,9 @@
 						),
 						stack: (
 							gap: var(--global-spacing-4),
+						),
+						separator: (
+							margin: 0 var(--global-spacing-2) 0 var(--global-spacing-2),
 						),
 					),
 				),

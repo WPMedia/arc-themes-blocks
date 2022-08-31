@@ -242,7 +242,7 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						enableAutoplay
 						enableFullScreen
 						fullScreenShowButton={
-							<button type="button">
+							<button type="button" id={`${id}-full-screen-show`}>
 								<Icon name="Fullscreen" className={`${BLOCK_CLASS_NAME}__full-screen-icon`} />
 								{phrases.t("global.gallery-expand-button")}
 							</button>
@@ -254,12 +254,12 @@ function parseArticleItem(item, index, arcSite, phrases, id, customFields) {
 						stopAutoplayIcon={<Icon name="Pause" className={`${BLOCK_CLASS_NAME}__stop-icon`} />}
 						stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
 						nextButton={
-							<Carousel.Button id={key} label="Next Slide">
+							<Carousel.Button id={`${id}-next-button`} label="Next Slide">
 								<Icon name="ChevronRight" />
 							</Carousel.Button>
 						}
 						previousButton={
-							<Carousel.Button id={key} label="Previous Slide">
+							<Carousel.Button id={`${id}-previous-button`} label="Previous Slide">
 								<Icon name="ChevronLeft" />
 							</Carousel.Button>
 						}

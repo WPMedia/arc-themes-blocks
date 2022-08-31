@@ -67,7 +67,7 @@ const mockGallery = {
 const mockContextGlobalContent = {
 	copyright: "&copy;2021 - Big Media",
 	location: "Thatoneplace, ST",
-	id: "globalContent_id",
+	_id: "globalContent_id",
 };
 
 export const noContent = () => {

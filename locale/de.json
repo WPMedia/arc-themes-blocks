@@ -25,9 +25,7 @@
 		"global.video-text": "Video",
 		"global.social-rss": "Subscribe to %{authorName} RSS feed",
 		"global.social-email-connect": "E-Mail an %{authorName} senden",
-		"global.social-rss-connect": "RSS Feed von %{authorName} abonnieren",
 		"global.social-soundcloud-connect": "%{authorName} auf SoundCloud anhören",
-		"global.social-twitter-connect": "Auf Twitter verbinden",
 		"global.social-facebook-connect": "Auf Facebook verbinden",
 		"global.social-instagram-connect": "Auf Instagram folgen",
 		"global.social-linkedin-connect": "Auf LinkedIn verbinden",
@@ -37,7 +35,9 @@
 		"global.social-tumblr-connect": "Auf Tumblr verbinden",
 		"global.social-pinterest-connect": "Auf Pinterest verbinden",
 		"global.social-snapchat-connect": "Auf Snapchat verbinden",
-		"global.social-whatsapp-connect": "Auf WhatsApp verbinden"
+		"global.social-whatsapp-connect": "Auf WhatsApp verbinden",
+		"global.social-rss-connect": "RSS Feed von %{authorName} abonnieren",
+		"global.social-twitter-connect": "Auf Twitter verbinden"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korrektur",

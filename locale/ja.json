@@ -25,9 +25,7 @@
 		"global.video-text": "ビデオ",
 		"global.social-rss": "Subscribe to %{authorName} RSS feed",
 		"global.social-email-connect": "%{authorName}にメールを送信",
-		"global.social-rss-connect": "%{authorName}のRSSフィードを登録",
 		"global.social-soundcloud-connect": "SoundCloudで%{authorName}を聞く",
-		"global.social-twitter-connect": "Twitterで接続",
 		"global.social-facebook-connect": "Facebookで接続",
 		"global.social-instagram-connect": "Instagramでフォロー",
 		"global.social-linkedin-connect": "LinkedInで接続",
@@ -37,7 +35,9 @@
 		"global.social-tumblr-connect": "Tumblrで接続",
 		"global.social-pinterest-connect": "Pinterestで接続",
 		"global.social-snapchat-connect": "Snapchatで接続",
-		"global.social-whatsapp-connect": "WhatsAppで接続"
+		"global.social-whatsapp-connect": "WhatsAppで接続",
+		"global.social-rss-connect": "%{authorName}のRSSフィードを登録",
+		"global.social-twitter-connect": "Twitterで接続"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "修正",

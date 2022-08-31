@@ -25,9 +25,7 @@
 		"global.video-text": "비디오",
 		"global.social-rss": "Subscribe to %{authorName} RSS feed",
 		"global.social-email-connect": "%{authorName}(으)로 이메일 보내기",
-		"global.social-rss-connect": "%{authorName} RSS 피드 구독",
 		"global.social-soundcloud-connect": "SoundCloud에서 %{authorName} 듣기",
-		"global.social-twitter-connect": "Twitter에서 연결",
 		"global.social-facebook-connect": "Facebook에서 연결",
 		"global.social-instagram-connect": "Instagram에서 팔로우",
 		"global.social-linkedin-connect": "LinkedIn에서 연결",
@@ -37,7 +35,9 @@
 		"global.social-tumblr-connect": "Tumblr에서 연결",
 		"global.social-pinterest-connect": "Pinterest에서 연결",
 		"global.social-snapchat-connect": "Snapchat에서 연결",
-		"global.social-whatsapp-connect": "WhatsApp에서 연결"
+		"global.social-whatsapp-connect": "WhatsApp에서 연결",
+		"global.social-rss-connect": "%{authorName} RSS 피드 구독",
+		"global.social-twitter-connect": "Twitter에서 연결"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "정정",

@@ -25,9 +25,7 @@
 		"global.video-text": "Video",
 		"global.social-rss": "Subscribe to %{authorName} RSS feed",
 		"global.social-email-connect": "Skicka e-post till %{authorName}",
-		"global.social-rss-connect": "Prenumerera på %{authorName}s RSS-kanal",
 		"global.social-soundcloud-connect": "Lyssna på %{authorName} på SoundCloud",
-		"global.social-twitter-connect": "Kontakta via Twitter",
 		"global.social-facebook-connect": "Kontakta via Facebook",
 		"global.social-instagram-connect": "Följ på Instagram",
 		"global.social-linkedin-connect": "Kontakta via LinkedIn",
@@ -37,7 +35,9 @@
 		"global.social-tumblr-connect": "Kontakta via Tumblr",
 		"global.social-pinterest-connect": "Kontakta via Pinterest",
 		"global.social-snapchat-connect": "Kontakta via Snapchat",
-		"global.social-whatsapp-connect": "Kontakta via WhatsApp"
+		"global.social-whatsapp-connect": "Kontakta via WhatsApp",
+		"global.social-rss-connect": "Prenumerera på %{authorName}s RSS-kanal",
+		"global.social-twitter-connect": "Kontakta via Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korrektion",

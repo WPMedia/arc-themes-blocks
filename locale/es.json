@@ -25,9 +25,7 @@
 		"global.video-text": "Video",
 		"global.social-rss": "Subscribe to %{authorName} RSS feed",
 		"global.social-email-connect": "Enviar un correo electrónico a %{authorName}",
-		"global.social-rss-connect": "Suscribirse a la fuente RSS de %{authorName}",
 		"global.social-soundcloud-connect": "Escuchar a %{authorName} en SoundCloud",
-		"global.social-twitter-connect": "Conectar en Twitter",
 		"global.social-facebook-connect": "Conectar en Facebook",
 		"global.social-instagram-connect": "Seguir en Instagram",
 		"global.social-linkedin-connect": "Conectar en LinkedIn",
@@ -37,7 +35,9 @@
 		"global.social-tumblr-connect": "Conectar en Tumblr",
 		"global.social-pinterest-connect": "Conectar en Pinterest",
 		"global.social-snapchat-connect": "Conectar en Snapchat",
-		"global.social-whatsapp-connect": "Conectar en WhatsApp"
+		"global.social-whatsapp-connect": "Conectar en WhatsApp",
+		"global.social-rss-connect": "Suscribirse a la fuente RSS de %{authorName}",
+		"global.social-twitter-connect": "Conectar en Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Corrección",

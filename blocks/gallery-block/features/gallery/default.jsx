@@ -67,7 +67,7 @@ export const GalleryPresentation = ({
 	const {
 		content_elements: contentElements = [],
 		headlines = {},
-		id = "",
+		_id = "",
 	} = showGlobalContent ? globalContent : content;
 
 	const interstitialClicks = parseInt(galleryCubeClicks, 10);
@@ -76,7 +76,7 @@ export const GalleryPresentation = ({
 
 	return (
 		<Carousel
-			id={id}
+			id={_id}
 			className={BLOCK_CLASS_NAME}
 			showLabel
 			label={headlines?.basic ? headlines.basic : ""}
@@ -110,12 +110,12 @@ export const GalleryPresentation = ({
 			adElement={/* istanbul ignore next */ <AdBlock />}
 			adInterstitialClicks={interstitialClicks}
 			nextButton={
-				<Carousel.Button id={id} label="Next Slide">
+				<Carousel.Button id={_id} label="Next Slide">
 					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} fill="white" name="ChevronRight" />
 				</Carousel.Button>
 			}
 			previousButton={
-				<Carousel.Button id={id} label="Previous Slide">
+				<Carousel.Button id={_id} label="Previous Slide">
 					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
 				</Carousel.Button>
 			}

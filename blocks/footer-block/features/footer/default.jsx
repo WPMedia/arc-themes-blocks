@@ -115,9 +115,9 @@ const FooterItem = ({ customFields: { navigationConfig } }) => {
 										<Heading>{column.name}</Heading>
 									</HeadingSection>
 								) : null}
-								<ul>
+								<ul className={`${BLOCK_CLASS_NAME}__links-group-list`}>
 									{column.children.map((item) => (
-										<li key={item._id}>
+										<li className={`${BLOCK_CLASS_NAME}__links-group-list-item`} key={item._id}>
 											{item.node_type === "link" ? (
 												<Link href={item.url}>{item.display_name}</Link>
 											) : (

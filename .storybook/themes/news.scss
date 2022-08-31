@@ -919,6 +919,7 @@
 					max-width: calc(var(--content-max-width) * 1px),
 					components: (
 						image: (
+							margin: auto,
 							max-height: var(--global-spacing-10),
 						),
 					),
@@ -945,6 +946,9 @@
 							line-height: var(--body-line-height-small),
 						),
 					),
+				),
+				footer-links-group-list-item: (
+					list-style: none,
 				),
 				footer-top-container: (
 					border-top: 1px solid var(--global-neutral-4),
@@ -987,9 +991,6 @@
 							fill: var(--color-primary),
 						),
 					),
-				),
-				footer-social-link-not-last: (
-					border-right: 1px solid var(--color-primary),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),

@@ -3,6 +3,16 @@
 .b-footer {
 	&__links {
 		&-group {
+			&-list {
+				&-item {
+					@include scss.block-components("footer-links-group-list-item");
+					@include scss.block-properties("footer-links-group-list-item");
+				}
+
+				@include scss.block-components("footer-links-group-list");
+				@include scss.block-properties("footer-links-group-list");
+			}
+
 			@include scss.block-components("footer-links-group");
 			@include scss.block-properties("footer-links-group");
 		}
@@ -27,11 +37,6 @@
 	}
 
 	&__top-container {
-		&-text {
-			@include scss.block-components("footer-top-copyright-text");
-			@include scss.block-properties("footer-top-copyright-text");
-		}
-
 		@include scss.block-components("footer-top-container");
 		@include scss.block-properties("footer-top-container");
 	}

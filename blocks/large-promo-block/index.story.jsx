@@ -185,6 +185,7 @@ export const withGalleryLabelAndImage = () => (
 		labelIconName="Camera"
 		labelIconText="Gallery"
 		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		viewportPercentage={60}

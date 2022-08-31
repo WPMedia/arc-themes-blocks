@@ -17,7 +17,7 @@ const FullAuthorBio = ({ customFields = {} }) => {
 		return null;
 	}
 
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const currentAuthor =
 		globalContent?.authors?.[0] || globalContent?.credits?.by?.[0]?.additional_properties?.original;
 

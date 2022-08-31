@@ -110,12 +110,12 @@ export const GalleryPresentation = ({
 			adElement={/* istanbul ignore next */ <AdBlock />}
 			adInterstitialClicks={interstitialClicks}
 			nextButton={
-				<Carousel.Button id={id} label="Next Slide">
+				<Carousel.Button id={`${id}-next-button`} label="Next Slide">
 					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} fill="white" name="ChevronRight" />
 				</Carousel.Button>
 			}
 			previousButton={
-				<Carousel.Button id={id} label="Previous Slide">
+				<Carousel.Button id={`${id}-previous-button`} label="Previous Slide">
 					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
 				</Carousel.Button>
 			}

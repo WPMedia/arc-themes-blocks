@@ -120,7 +120,7 @@
 		"pt": "E-mail",
 		"sv": "E-post"
 	},
-	"global.social-email-content": {
+	"global.social-email-connect": {
 		"de": "Send an email to %{authorName}",
 		"en": "Send an email to %{authorName}",
 		"es": "Enviar un correo electrónico a %{authorName}",
@@ -142,7 +142,7 @@
 		"pt": "Facebook",
 		"sv": "Facebook"
 	},
-	"global.social-facebook-content": {
+	"global.social-facebook-connect": {
 		"de": "Connect on Facebook",
 		"en": "Connect on Facebook",
 		"es": "Conectar en Facebook",
@@ -153,7 +153,7 @@
 		"pt": "Connect on Facebook",
 		"sv": "Connect on Facebook"
 	},
-	"global.social-instagram-content": {
+	"global.social-instagram-connect": {
 		"de": "Follow on Instagram",
 		"en": "Follow on Instagram",
 		"es": "Seguir en Instagram",
@@ -175,7 +175,7 @@
 		"pt": "LinkedIn",
 		"sv": "LinkedIn"
 	},
-	"global.social-linkedin-content": {
+	"global.social-linkedin-connect": {
 		"de": "Connect on LinkedIn",
 		"en": "Connect on LinkedIn",
 		"es": "Conectar en LinkedIn",
@@ -186,7 +186,7 @@
 		"pt": "Connect on LinkedIn",
 		"sv": "Connect on LinkedIn"
 	},
-	"global.social-medium-content": {
+	"global.social-medium-connect": {
 		"de": "Connect on Medium",
 		"en": "Connect on Medium",
 		"es": "Conectar en Medium",
@@ -208,7 +208,7 @@
 		"pt": "Pinterest",
 		"sv": "Pinterest"
 	},
-	"global.social-pinterest-content": {
+	"global.social-pinterest-connect": {
 		"de": "Connect on Pinterest",
 		"en": "Connect on Pinterest",
 		"es": "Conectar en Pinterest",
@@ -219,7 +219,7 @@
 		"pt": "Connect on Pinterest",
 		"sv": "Connect on Pinterest"
 	},
-	"global.social-reddit-content": {
+	"global.social-reddit-connect": {
 		"de": "Connect on Reddit",
 		"en": "Connect on Reddit",
 		"es": "Conectar en Reddit",
@@ -241,7 +241,7 @@
 		"pt": "Subscribe to %{authorName} RSS feed",
 		"sv": "Subscribe to %{authorName} RSS feed"
 	},
-	"global.social-rss-content": {
+	"global.social-rss-connect": {
 		"de": "Subscribe to %{authorName} RSS feed",
 		"en": "Subscribe to %{authorName} RSS feed",
 		"es": "Suscribirse a la fuente RSS de %{authorName}",
@@ -252,7 +252,7 @@
 		"pt": "Subscribe to %{authorName} RSS feed",
 		"sv": "Subscribe to %{authorName} RSS feed"
 	},
-	"global.social-snapchat-content": {
+	"global.social-snapchat-connect": {
 		"de": "Connect on Snapchat",
 		"en": "Connect on Snapchat",
 		"es": "Conectar en Snapchat",
@@ -263,7 +263,7 @@
 		"pt": "Connect on Snapchat",
 		"sv": "Connect on Snapchat"
 	},
-	"global.social-soundcloud-content": {
+	"global.social-soundcloud-connect": {
 		"de": "Listen to %{authorName} on SoundCloud",
 		"en": "Listen to %{authorName} on SoundCloud",
 		"es": "Escuchar a %{authorName} en SoundCloud",
@@ -274,7 +274,7 @@
 		"pt": "Listen to %{authorName} on SoundCloud",
 		"sv": "Listen to %{authorName} on SoundCloud"
 	},
-	"global.social-tumblr-content": {
+	"global.social-tumblr-connect": {
 		"de": "Connect on Tumblr",
 		"en": "Connect on Tumblr",
 		"es": "Conectar en Tumblr",
@@ -296,7 +296,7 @@
 		"pt": "Twitter",
 		"sv": "Twitter"
 	},
-	"global.social-twitter-content": {
+	"global.social-twitter-connect": {
 		"de": "Connect on Twitter",
 		"en": "Connect on Twitter",
 		"es": "Conectar en Twitter",
@@ -307,7 +307,7 @@
 		"pt": "Connect on Twitter",
 		"sv": "Connect on Twitter"
 	},
-	"global.social-whatsapp-content": {
+	"global.social-whatsapp-connect": {
 		"de": "Connect on WhatsApp",
 		"en": "Connect on WhatsApp",
 		"es": "Conectar en WhatsApp",
@@ -318,7 +318,7 @@
 		"pt": "Connect on WhatsApp",
 		"sv": "Connect on WhatsApp"
 	},
-	"global.social-youtube-content": {
+	"global.social-youtube-connect": {
 		"de": "Connect on YouTube",
 		"en": "Connect on YouTube",
 		"es": "Conectar en YouTube",
@@ -329,7 +329,7 @@
 		"pt": "Connect on YouTube",
 		"sv": "Connect on YouTube"
 	},
-	"global.sponsored-content": {
+	"global.sponsored-connect": {
 		"de": "Werblicher Inhalt",
 		"en": "Sponsored Content",
 		"es": "Contenido patrocinado",

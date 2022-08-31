@@ -95,7 +95,7 @@ export const AuthorBioItems = ({ arcSite, content }) => {
 									.filter(({ site, url }) => site && url?.length)
 									.map(({ site, url }) => (
 										<Link
-											aria-label={phrases.t(`global.social-${site.toLowerCase()}-content`, {
+											aria-label={phrases.t(`global.social-${site.toLowerCase()}-connect`, {
 												authorName: name,
 											})}
 											className={`${BLOCK_CLASS_NAME}__social-link`}

@@ -79,7 +79,7 @@ const Presentation = ({ author = {}, locale }) => {
 											href={formatSocialURL(item, author[item])}
 											key={item}
 											openInNewTab
-											title={phrases.t(`global.social-${item.toLowerCase()}-content`, {
+											title={phrases.t(`global.social-${item.toLowerCase()}-contact`, {
 												authorName: author.name,
 											})}
 										>

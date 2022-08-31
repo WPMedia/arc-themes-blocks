@@ -138,15 +138,17 @@ export const GalleryPresentation = ({
 								resizerURL={resizerURL}
 								resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
 								// 16:9 aspect ratio
-								width={375}
-								height={212.06}
+								width={500}
+								height={281.25}
 								alt={galleryItem.alt_text}
 								resizerAppVersion={resizerAppVersion}
 								responsiveImages={[150, 375, 500, 1500, 2000]}
 								sizes={[
 									{
 										isDefault: true,
-										sourceSizeValue: "100vw",
+										// 75vh max height
+										// if 16/9 aspect ratio, then roughly 40vw expected
+										sourceSizeValue: "40vw",
 									},
 								]}
 							/>

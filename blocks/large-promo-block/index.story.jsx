@@ -194,22 +194,22 @@ export const withGalleryLabelAndImage = () => (
 export const withVideoLabelAndImage = () => (
 	<LargePromoPresentation
 		aspectRatio={16 / 9}
-		embedMarkup={MOCK_CONTENT.embed_html}
+		promoImageURL={MOCK_CONTENT.promo_items.basic.url}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		imageSearchField="imageURL"
 		labelIconName="Play"
 		labelIconText="Video"
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		viewportPercentage={60}
-		playVideoInPlace={false}
 	/>
 );
 
 export const playVideoInPlaceOfImage = () => (
 	<LargePromoPresentation
-		playVideoInPlace
 		aspectRatio={16 / 9}
 		embedMarkup={MOCK_CONTENT.embed_html}
+		contentUrl="/2019/12/02/baby-panda-born-at-the-zoo/"
 		imageSearchField="imageURL"
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}

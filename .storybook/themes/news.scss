@@ -929,6 +929,10 @@
 						),
 						carousel-controls: (
 							padding: 0 0 var(--global-spacing-2) 0,
+							max-height: 30px,
+						),
+						carousel-expand-autoplay-container: (
+							align-items: normal,
 						),
 						carousel-actions: (
 							display: flex,
@@ -944,12 +948,42 @@
 						),
 						carousel-button-enter-full-screen: (
 							padding: 0,
+							-webkit-line-clamp: 1,
+							hyphens: auto,
+							overflow: hidden,
+							word-break: none,
+							-webkit-box-orient: vertical,
+							-moz-box-oriented: vertical,
+							display: -webkit-box,
+							word-wrap: break-word,
+							white-space: break-space,
+						),
+						carousel-image-counter: (
+							-webkit-line-clamp: 1,
+							hyphens: auto,
+							overflow: hidden,
+							word-break: none,
+							-webkit-box-orient: vertical,
+							-moz-box-oriented: vertical,
+							display: -webkit-box,
+							word-wrap: break-word,
+							white-space: break-space,
 						),
 						carousel-additional-controls: (
 							display: none,
 						),
 						carousel-button-toggle-auto-play: (
 							padding: 0 var(--global-spacing-4),
+							-webkit-line-clamp: 1,
+							hyphens: auto,
+							overflow: hidden,
+							word-break: none,
+							-webkit-box-orient: vertical,
+							-moz-box-oriented: vertical,
+							display: -webkit-box,
+
+							word-wrap: break-word,
+							white-space: break-space,
 						),
 						carousel-button-next: (
 							background-color: transparent,
@@ -964,6 +998,12 @@
 							padding: 0,
 						),
 					),
+				),
+				gallery-autoplay-icon: (
+					margin: 0 var(--global-spacing-2) 0 0,
+				),
+				gallery-full-screen-icon: (
+					margin: 0 var(--global-spacing-2) 0 0,
 				),
 				gallery-image-wrapper: (
 					align-items: center,

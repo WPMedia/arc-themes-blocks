@@ -10,6 +10,16 @@
 		@include scss.block-components("gallery-image-wrapper");
 		@include scss.block-properties("gallery-image-wrapper");
 	}
+
+	&__autoplay-icon {
+		@include scss.block-components("gallery-autoplay-icon");
+		@include scss.block-properties("gallery-autoplay-icon");
+	}
+
+	&__full-screen-icon {
+		@include scss.block-components("gallery-full-screen-icon");
+		@include scss.block-properties("gallery-full-screen-icon");
+	}
 	@include scss.block-components("gallery");
 	@include scss.block-properties("gallery");
 }

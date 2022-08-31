@@ -87,9 +87,9 @@ export const GalleryPresentation = ({
 					phrases.t("global.gallery-page-count-text", { current, total })
 			}
 			enableAutoplay
-			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayIcon={<Icon name="Play" className={`${BLOCK_CLASS_NAME}__autoplay-icon`} />}
 			startAutoplayText={phrases.t("global.gallery-autoplay-button")}
-			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayIcon={<Icon name="Pause" className={`${BLOCK_CLASS_NAME}__autoplay-icon`} />}
 			stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
 			autoplayPhraseLabels={{
 				start: phrases.t("global.gallery-autoplay-label-start"),
@@ -98,13 +98,13 @@ export const GalleryPresentation = ({
 			enableFullScreen
 			fullScreenShowButton={
 				<button type="button">
-					<Icon name="Fullscreen" />
+					<Icon name="Fullscreen" className={`${BLOCK_CLASS_NAME}__full-screen-icon`} />
 					{phrases.t("global.gallery-expand-button")}
 				</button>
 			}
 			fullScreenMinimizeButton={
 				<button type="button">
-					<Icon name="Close" />
+					<Icon name="Close" className={`${BLOCK_CLASS_NAME}__full-screen-icon`} />
 				</button>
 			}
 			adElement={/* istanbul ignore next */ <AdBlock />}

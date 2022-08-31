@@ -97,12 +97,6 @@ const MediumPromo = ({ customFields }) => {
 						${RESIZER_APP_VERSION}
 					}
 					type
-					promo_items {
-						basic {
-							type
-							url
-						}
-					}
 				}
 				basic {
 					_id
@@ -131,7 +125,6 @@ const MediumPromo = ({ customFields }) => {
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
 	const imageAuthToken = getImageFromANS(content)?.auth[RESIZER_APP_VERSION] || null;
-	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageData = getImageFromANS(content);
 	const promoImageFilename = promoImageData ? imageANSToImageSrc(promoImageData) : null;
 	const contentDate = content?.display_date;
@@ -146,7 +139,7 @@ const MediumPromo = ({ customFields }) => {
 					className={`${BLOCK_CLASS_NAME}${showImage ? ` ${BLOCK_CLASS_NAME}--show-image` : ""}`}
 				>
 					{showImage ? (
-						<MediaItem {...searchableField(imageSearchField)} suppressContentEditableWarning>
+						<MediaItem {...searchableField("imageOverrideURL")} suppressContentEditableWarning>
 							<Conditional
 								component={Link}
 								condition={contentUrl}
@@ -161,7 +154,7 @@ const MediumPromo = ({ customFields }) => {
 									data-aspect-ratio={imageRatio?.replace(":", "/")}
 									resizedOptions={{ auth: imageAuthToken }}
 									responsiveImages={[100, 500]}
-									resizerURL={RESIZER_URL}
+									resizerURL={!imageOverrideURL && promoImageFilename ? RESIZER_URL : null}
 									sizes={[
 										{
 											isDefault: true,

@@ -143,12 +143,6 @@ export const GalleryPresentation = ({
 								alt={galleryItem.alt_text}
 								resizerAppVersion={resizerAppVersion}
 								responsiveImages={[150, 375, 500, 1500, 2000]}
-								sizes={[
-									{
-										isDefault: true,
-										sourceSizeValue: "90vw",
-									},
-								]}
 							/>
 						</div>
 					</MediaItem>

@@ -290,9 +290,7 @@ describe("the footer feature for the default output type", () => {
 	describe("the footer image/logo", () => {
 		describe("when the theme manifest provides a logo url", () => {
 			it("should make the relative src of the logo the provided image", () => {
-				getProperties.mockImplementation(() => ({
-					primaryLogo: "my-nav-logo.svg",
-				}));
+				getProperties.mockImplementation(() => ({ locale: "en", primaryLogo: "my-nav-logo.svg" }));
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -309,6 +307,7 @@ describe("the footer feature for the default output type", () => {
 
 			it("should make the absolute src of the logo the provided image", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					primaryLogo: "http://test/my-nav-logo.svg",
 				}));
 				const wrapper = mount(
@@ -327,6 +326,7 @@ describe("the footer feature for the default output type", () => {
 
 			it("should make the base64 src of the logo the provided image", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					primaryLogo: "base64:my-nav-logo.svg",
 				}));
 				const wrapper = mount(
@@ -346,6 +346,7 @@ describe("the footer feature for the default output type", () => {
 			describe("when the theme manifest provides alt text", () => {
 				it("should make the alt text of the logo the provided text", () => {
 					getProperties.mockImplementation(() => ({
+						locale: "en",
 						primaryLogo: "my-nav-logo.svg",
 						primaryLogoAlt: "my alt text",
 					}));
@@ -367,6 +368,7 @@ describe("the footer feature for the default output type", () => {
 			describe("when the theme manifest does not provide alt text", () => {
 				it("should make the alt text of the logo blank when not supplied", () => {
 					getProperties.mockImplementation(() => ({
+						locale: "en",
 						primaryLogo: "my-nav-logo.svg",
 					}));
 					const wrapper = mount(
@@ -388,6 +390,7 @@ describe("the footer feature for the default output type", () => {
 		describe("when the theme manifest provides a light logo url", () => {
 			it("should use the light logo over the primary logo", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					lightBackgroundLogo: "light.svg",
 					primaryLogo: "primary.svg",
 				}));
@@ -407,6 +410,7 @@ describe("the footer feature for the default output type", () => {
 
 			it("should make the relative src of the logo the provided image", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					lightBackgroundLogo: "my-nav-logo.svg",
 				}));
 				const wrapper = mount(
@@ -425,6 +429,7 @@ describe("the footer feature for the default output type", () => {
 
 			it("should make the absolute src of the logo the provided image", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					lightBackgroundLogo: "http://test/my-nav-logo.svg",
 				}));
 				const wrapper = mount(
@@ -443,6 +448,7 @@ describe("the footer feature for the default output type", () => {
 
 			it("should make the base64 src of the logo the provided image", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					lightBackgroundLogo: "base64:my-nav-logo.svg",
 				}));
 				const wrapper = mount(
@@ -462,6 +468,7 @@ describe("the footer feature for the default output type", () => {
 			describe("when the theme manifest provides alt text", () => {
 				it("should make the alt text of the logo the provided text", () => {
 					getProperties.mockImplementation(() => ({
+						locale: "en",
 						lightBackgroundLogo: "my-nav-logo.svg",
 						lightBackgroundLogoAlt: "my alt text",
 					}));
@@ -481,6 +488,7 @@ describe("the footer feature for the default output type", () => {
 
 				it("should use the light alt text over the primary alt text", () => {
 					getProperties.mockImplementation(() => ({
+						locale: "en",
 						lightBackgroundLogo: "my-nav-logo.svg",
 						lightBackgroundLogoAlt: "light",
 						primaryLogoAlt: "primary",
@@ -503,6 +511,7 @@ describe("the footer feature for the default output type", () => {
 			describe("when the theme manifest does not provide alt text", () => {
 				it("should make the alt text of the logo blank", () => {
 					getProperties.mockImplementation(() => ({
+						locale: "en",
 						lightBackgroundLogo: "my-nav-logo.svg",
 					}));
 					const wrapper = mount(
@@ -523,7 +532,7 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when the theme does not provide a logo url", () => {
 			it("should not render the primary logo div", () => {
-				getProperties.mockImplementation(() => ({}));
+				getProperties.mockImplementation(() => ({ locale: "en" }));
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -544,6 +553,7 @@ describe("the footer feature for the default output type", () => {
 		describe("when copyright text is provided", () => {
 			it("should show copyright text", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					copyrightText: "my copyright text",
 				}));
 				const wrapper = mount(
@@ -562,7 +572,7 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when copyright text is not provided", () => {
 			it("should not show copyright text", () => {
-				getProperties.mockImplementation(() => ({}));
+				getProperties.mockImplementation(() => ({ locale: "en" }));
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -582,7 +592,7 @@ describe("the footer feature for the default output type", () => {
 	describe("the social media buttons", () => {
 		describe("when a facebook page is provided", () => {
 			it("should show a facebook button", () => {
-				getProperties.mockImplementation(() => ({ facebookPage: "thesun" }));
+				getProperties.mockImplementation(() => ({ locale: "en", facebookPage: "thesun" }));
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -616,7 +626,8 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when a facebook page is not provided", () => {
 			it("should not show a facebook button", () => {
-				getProperties.mockImplementation(() => ({ facebookPage: "" }));
+				getProperties.mockImplementation(() => ({ locale: "en", facebookPage: "" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -634,7 +645,7 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when a twitter username is provided", () => {
 			it("should show a twitter button", () => {
-				getProperties.mockImplementation(() => ({ twitterUsername: "thesun" }));
+				getProperties.mockImplementation(() => ({ locale: "en", twitterUsername: "thesun" }));
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -670,7 +681,8 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when a twitter username is not provided", () => {
 			it("should not show a twitter button", () => {
-				getProperties.mockImplementation(() => ({ twitterUsername: "" }));
+				getProperties.mockImplementation(() => ({ locale: "en", twitterUsername: "" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -688,7 +700,8 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when a rss link is provided", () => {
 			it("should show a rss button", () => {
-				getProperties.mockImplementation(() => ({ rssUrl: "thesun" }));
+				getProperties.mockImplementation(() => ({ locale: "en", rssUrl: "thesun" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -722,7 +735,8 @@ describe("the footer feature for the default output type", () => {
 
 		describe("when a rss link is not provided", () => {
 			it("should not show a rss button", () => {
-				getProperties.mockImplementation(() => ({ rssUrl: "" }));
+				getProperties.mockImplementation(() => ({ locale: "en", rssUrl: "" }));
+
 				const wrapper = mount(
 					<Footer
 						customFields={{
@@ -741,6 +755,7 @@ describe("the footer feature for the default output type", () => {
 		describe("when no social site properties are provided", () => {
 			it("should render no social buttons and no border on container", () => {
 				getProperties.mockImplementation(() => ({
+					locale: "en",
 					facebookPage: "",
 					twitterUsername: "",
 					rssUrl: "",

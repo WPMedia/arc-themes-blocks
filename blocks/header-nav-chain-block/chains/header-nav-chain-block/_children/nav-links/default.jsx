@@ -12,7 +12,7 @@ const NavLinksBar = ({
 	blockClassName,
 }) => {
 	const { id, arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const content = useContent({

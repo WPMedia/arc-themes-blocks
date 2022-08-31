@@ -8,8 +8,6 @@
 	"global-phrases-block": {
 		"global.by-text": "Por",
 		"global.and-text": "y",
-		"global.gallery-text": "Galería",
-		"global.video-text": "Video",
 		"global.gallery-expand-button": "Expandir",
 		"global.gallery-page-count-text": "%{current} de %{total}",
 		"global.gallery-autoplay-button": "Reproducción automática",
@@ -22,7 +20,24 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "Email",
 		"global.opens-in-new-window": "(Se abre en una nueva ventana)",
-		"global.sponsored-content": "Contenido patrocinado"
+		"global.sponsored-content": "Contenido patrocinado",
+		"global.gallery-text": "Galería",
+		"global.video-text": "Video",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-email-connect": "Enviar un correo electrónico a %{authorName}",
+		"global.social-soundcloud-connect": "Escuchar a %{authorName} en SoundCloud",
+		"global.social-facebook-connect": "Conectar en Facebook",
+		"global.social-instagram-connect": "Seguir en Instagram",
+		"global.social-linkedin-connect": "Conectar en LinkedIn",
+		"global.social-reddit-connect": "Conectar en Reddit",
+		"global.social-youtube-connect": "Conectar en YouTube",
+		"global.social-medium-connect": "Conectar en Medium",
+		"global.social-tumblr-connect": "Conectar en Tumblr",
+		"global.social-pinterest-connect": "Conectar en Pinterest",
+		"global.social-snapchat-connect": "Conectar en Snapchat",
+		"global.social-whatsapp-connect": "Conectar en WhatsApp",
+		"global.social-rss-connect": "Suscribirse a la fuente RSS de %{authorName}",
+		"global.social-twitter-connect": "Conectar en Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Corrección",
@@ -73,22 +88,6 @@
 	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Compartir el artículo actual mediante %{socialType}"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Enviar un correo electrónico a %{authorName}",
-		"author-bio-block.social-rss": "Suscribirse a la fuente RSS de %{authorName}",
-		"author-bio-block.social-soundcloud": "Escuchar a %{authorName} en SoundCloud",
-		"author-bio-block.social-twitter": "Conectar en Twitter",
-		"author-bio-block.social-facebook": "Conectar en Facebook",
-		"author-bio-block.social-instagram": "Seguir en Instagram",
-		"author-bio-block.social-linkedin": "Conectar en LinkedIn",
-		"author-bio-block.social-reddit": "Conectar en Reddit",
-		"author-bio-block.social-youtube": "Conectar en YouTube",
-		"author-bio-block.social-medium": "Conectar en Medium",
-		"author-bio-block.social-tumblr": "Conectar en Tumblr",
-		"author-bio-block.social-pinterest": "Conectar en Pinterest",
-		"author-bio-block.social-snapchat": "Conectar en Snapchat",
-		"author-bio-block.social-whatsapp": "Conectar en WhatsApp"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Omitir para ir al contenido principal"

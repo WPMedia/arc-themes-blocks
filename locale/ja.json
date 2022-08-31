@@ -8,8 +8,6 @@
 	"global-phrases-block": {
 		"global.by-text": "担当者：",
 		"global.and-text": "및",
-		"global.gallery-text": "ギャラリー",
-		"global.video-text": "ビデオ",
 		"global.gallery-expand-button": "展開",
 		"global.gallery-page-count-text": "%{current} / %{total}",
 		"global.gallery-autoplay-button": "自動再生",
@@ -22,7 +20,24 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "メールアドレス",
 		"global.opens-in-new-window": "（新しいウィンドウで開きます）",
-		"global.sponsored-content": "スポンサー付きコンテンツ"
+		"global.sponsored-content": "スポンサー付きコンテンツ",
+		"global.gallery-text": "ギャラリー",
+		"global.video-text": "ビデオ",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-email-connect": "%{authorName}にメールを送信",
+		"global.social-soundcloud-connect": "SoundCloudで%{authorName}を聞く",
+		"global.social-facebook-connect": "Facebookで接続",
+		"global.social-instagram-connect": "Instagramでフォロー",
+		"global.social-linkedin-connect": "LinkedInで接続",
+		"global.social-reddit-connect": "Redditで接続",
+		"global.social-youtube-connect": "YouTubeで接続",
+		"global.social-medium-connect": "Mediumで接続",
+		"global.social-tumblr-connect": "Tumblrで接続",
+		"global.social-pinterest-connect": "Pinterestで接続",
+		"global.social-snapchat-connect": "Snapchatで接続",
+		"global.social-whatsapp-connect": "WhatsAppで接続",
+		"global.social-rss-connect": "%{authorName}のRSSフィードを登録",
+		"global.social-twitter-connect": "Twitterで接続"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "修正",
@@ -73,22 +88,6 @@
 	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "現在の記事を%{socialType}で共有"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "%{authorName}にメールを送信",
-		"author-bio-block.social-rss": "%{authorName}のRSSフィードを登録",
-		"author-bio-block.social-soundcloud": "SoundCloudで%{authorName}を聞く",
-		"author-bio-block.social-twitter": "Twitterで接続",
-		"author-bio-block.social-facebook": "Facebookで接続",
-		"author-bio-block.social-instagram": "Instagramでフォロー",
-		"author-bio-block.social-linkedin": "LinkedInで接続",
-		"author-bio-block.social-reddit": "Redditで接続",
-		"author-bio-block.social-youtube": "YouTubeで接続",
-		"author-bio-block.social-medium": "Mediumで接続",
-		"author-bio-block.social-tumblr": "Tumblrで接続",
-		"author-bio-block.social-pinterest": "Pinterestで接続",
-		"author-bio-block.social-snapchat": "Snapchatで接続",
-		"author-bio-block.social-whatsapp": "WhatsAppで接続"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "メインコンテンツにスキップ"

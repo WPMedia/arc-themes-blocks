@@ -8,10 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "By",
 		"global.and-text": "and",
-		"global.gallery-text": "Gallery",
-		"global.video-text": "Video",
 		"global.gallery-expand-button": "Expand",
-		"global.gallery-page-count-text": "<span class='sr-only'>Image</span> %{current} of %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Image<\/span> %{current} of %{total}",
 		"global.gallery-autoplay-button": "Autoplay",
 		"global.gallery-pause-autoplay-button": "Pause autoplay",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",
@@ -22,7 +20,24 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "Email",
 		"global.opens-in-new-window": "(Opens in new window)",
-		"global.sponsored-content": "Sponsored Content"
+		"global.sponsored-content": "Sponsored Content",
+		"global.gallery-text": "Gallery",
+		"global.video-text": "Video",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-email-connect": "Send an email to %{authorName}",
+		"global.social-soundcloud-connect": "Listen to %{authorName} on SoundCloud",
+		"global.social-facebook-connect": "Connect on Facebook",
+		"global.social-instagram-connect": "Follow on Instagram",
+		"global.social-linkedin-connect": "Connect on LinkedIn",
+		"global.social-reddit-connect": "Connect on Reddit",
+		"global.social-youtube-connect": "Connect on YouTube",
+		"global.social-medium-connect": "Connect on Medium",
+		"global.social-tumblr-connect": "Connect on Tumblr",
+		"global.social-pinterest-connect": "Connect on Pinterest",
+		"global.social-snapchat-connect": "Connect on Snapchat",
+		"global.social-whatsapp-connect": "Connect on WhatsApp",
+		"global.social-rss-connect": "Subscribe to %{authorName} RSS feed",
+		"global.social-twitter-connect": "Connect on Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Correction",
@@ -73,22 +88,6 @@
 	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Share current article via %{socialType}"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Send an email to %{authorName}",
-		"author-bio-block.social-rss": "Subscribe to %{authorName} RSS feed",
-		"author-bio-block.social-soundcloud": "Listen to %{authorName} on SoundCloud",
-		"author-bio-block.social-twitter": "Connect on Twitter",
-		"author-bio-block.social-facebook": "Connect on Facebook",
-		"author-bio-block.social-instagram": "Follow on Instagram",
-		"author-bio-block.social-linkedin": "Connect on LinkedIn",
-		"author-bio-block.social-reddit": "Connect on Reddit",
-		"author-bio-block.social-youtube": "Connect on YouTube",
-		"author-bio-block.social-medium": "Connect on Medium",
-		"author-bio-block.social-tumblr": "Connect on Tumblr",
-		"author-bio-block.social-pinterest": "Connect on Pinterest",
-		"author-bio-block.social-snapchat": "Connect on Snapchat",
-		"author-bio-block.social-whatsapp": "Connect on WhatsApp"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Skip to main content"

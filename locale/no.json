@@ -8,10 +8,8 @@
 	"global-phrases-block": {
 		"global.by-text": "Av",
 		"global.and-text": "og",
-		"global.gallery-text": "Bildegalleri",
-		"global.video-text": "Video",
 		"global.gallery-expand-button": "Utvid",
-		"global.gallery-page-count-text": "<span class='sr-only'>Bilde</span> %{current} av %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Bilde<\/span> %{current} av %{total}",
 		"global.gallery-autoplay-button": "Automatisk avspilling",
 		"global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
 		"global.gallery-autoplay-label-start": "Start automatisk lysbildevisning",
@@ -22,7 +20,24 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-post",
 		"global.opens-in-new-window": "(Åpnes i et nytt vindu)",
-		"global.sponsored-content": "Sponset innhold"
+		"global.sponsored-content": "Sponset innhold",
+		"global.gallery-text": "Bildegalleri",
+		"global.video-text": "Video",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-email-connect": "Send en e-post til %{authorName}",
+		"global.social-soundcloud-connect": "Lytt til %{authorName} på SoundCloud",
+		"global.social-facebook-connect": "Oppnå kontakt på Facebook",
+		"global.social-instagram-connect": "Følg på Instagram",
+		"global.social-linkedin-connect": "Oppnå kontakt på LinkedIn",
+		"global.social-reddit-connect": "Oppnå kontakt på Reddit",
+		"global.social-youtube-connect": "Oppnå kontakt på YouTube",
+		"global.social-medium-connect": "Oppnå kontakt på Medium",
+		"global.social-tumblr-connect": "Oppnå kontakt på Tumblr",
+		"global.social-pinterest-connect": "Oppnå kontakt på Pinterest",
+		"global.social-snapchat-connect": "Oppnå kontakt på Snapchat",
+		"global.social-whatsapp-connect": "Oppnå kontakt på WhatsApp",
+		"global.social-rss-connect": "Abonner på %{authorName}s RSS-feed",
+		"global.social-twitter-connect": "Oppnå kontakt på Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korreksjon",
@@ -73,22 +88,6 @@
 	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Del gjeldende artikkel via %{socialType}"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Send en e-post til %{authorName}",
-		"author-bio-block.social-rss": "Abonner på %{authorName}s RSS-feed",
-		"author-bio-block.social-soundcloud": "Lytt til %{authorName} på SoundCloud",
-		"author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
-		"author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
-		"author-bio-block.social-instagram": "Følg på Instagram",
-		"author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
-		"author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
-		"author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
-		"author-bio-block.social-medium": "Oppnå kontakt på Medium",
-		"author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
-		"author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
-		"author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
-		"author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Hopp til hovedinnhold"

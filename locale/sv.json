@@ -8,8 +8,6 @@
 	"global-phrases-block": {
 		"global.by-text": "Av",
 		"global.and-text": "och",
-		"global.gallery-text": "Bildspel",
-		"global.video-text": "Video",
 		"global.gallery-expand-button": "Förstora",
 		"global.gallery-page-count-text": "%{current} av %{total}",
 		"global.gallery-autoplay-button": "Spela upp",
@@ -22,7 +20,24 @@
 		"global.social-pinterest": "Pinterest",
 		"global.social-email": "E-post",
 		"global.opens-in-new-window": "(Öppnas i nytt fönster)",
-		"global.sponsored-content": "Sponsrat innehåll"
+		"global.sponsored-content": "Sponsrat innehåll",
+		"global.gallery-text": "Bildspel",
+		"global.video-text": "Video",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-email-connect": "Skicka e-post till %{authorName}",
+		"global.social-soundcloud-connect": "Lyssna på %{authorName} på SoundCloud",
+		"global.social-facebook-connect": "Kontakta via Facebook",
+		"global.social-instagram-connect": "Följ på Instagram",
+		"global.social-linkedin-connect": "Kontakta via LinkedIn",
+		"global.social-reddit-connect": "Kontakta via Reddit",
+		"global.social-youtube-connect": "Kontakta via YouTube",
+		"global.social-medium-connect": "Kontakta via Medium",
+		"global.social-tumblr-connect": "Kontakta via Tumblr",
+		"global.social-pinterest-connect": "Kontakta via Pinterest",
+		"global.social-snapchat-connect": "Kontakta via Snapchat",
+		"global.social-whatsapp-connect": "Kontakta via WhatsApp",
+		"global.social-rss-connect": "Prenumerera på %{authorName}s RSS-kanal",
+		"global.social-twitter-connect": "Kontakta via Twitter"
 	},
 	"article-body-block": {
 		"article-body-block.correction": "Korrektion",
@@ -73,22 +88,6 @@
 	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Dela aktuell artikel via %{socialType}"
-	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Skicka e-post till %{authorName}",
-		"author-bio-block.social-rss": "Prenumerera på %{authorName}s RSS-kanal",
-		"author-bio-block.social-soundcloud": "Lyssna på %{authorName} på SoundCloud",
-		"author-bio-block.social-twitter": "Kontakta via Twitter",
-		"author-bio-block.social-facebook": "Kontakta via Facebook",
-		"author-bio-block.social-instagram": "Följ på Instagram",
-		"author-bio-block.social-linkedin": "Kontakta via LinkedIn",
-		"author-bio-block.social-reddit": "Kontakta via Reddit",
-		"author-bio-block.social-youtube": "Kontakta via YouTube",
-		"author-bio-block.social-medium": "Kontakta via Medium",
-		"author-bio-block.social-tumblr": "Kontakta via Tumblr",
-		"author-bio-block.social-pinterest": "Kontakta via Pinterest",
-		"author-bio-block.social-snapchat": "Kontakta via Snapchat",
-		"author-bio-block.social-whatsapp": "Kontakta via WhatsApp"
 	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Gå vidare till huvudinnehåll"

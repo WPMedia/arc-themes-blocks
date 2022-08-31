@@ -81,20 +81,22 @@ export const LargePromoPresentation = ({
 									viewportPercentage={viewportPercentage}
 								/>
 							) : (
-								<Image
-									alt={contentHeadline}
-									src={promoImageURL}
-									width={377}
-									height={283}
-									searchableField
-								/>
+								<>
+									<Image
+										alt={contentHeadline}
+										src={promoImageURL}
+										width={377}
+										height={283}
+										searchableField
+									/>
+									{labelIconName ? (
+										<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+											<Icon name={labelIconName} />
+											<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+										</div>
+									) : null}
+								</>
 							)}
-							{labelIconName ? (
-								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
-									<Icon name={labelIconName} />
-									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
-								</div>
-							) : null}
 						</Conditional>
 					</MediaItem>
 				) : null}
@@ -321,7 +323,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 	const contentHeadline = content?.headlines?.basic || null;
 	const contentOverline = showOverline ? overlineText : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const embedMarkup = showImage && playVideoInPlace && getVideoFromANS(content);
+	const embedMarkup = playVideoInPlace && getVideoFromANS(content);
 	const imageSearchField = imageOverrideURL ? "imageOverrideURL" : "imageURL";
 	const promoImageURL =
 		showImage && (imageOverrideURL || getImageFromANS(content)?.url || fallbackImage);
@@ -348,6 +350,7 @@ const LargePromoItem = ({ customFields, arcSite }) => {
 			searchableField={searchableField}
 			translationByText={phrases.t("global.by-text")}
 			viewportPercentage={viewportPercentage}
+			playVideoInPlace={playVideoInPlace}
 		/>
 	);
 };

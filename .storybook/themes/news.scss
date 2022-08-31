@@ -920,7 +920,7 @@
 					components: (
 						image: (
 							margin: auto,
-							max-height: var(--global-spacing-10),
+							max-height: var(--global-spacing-7),
 						),
 					),
 				),
@@ -1922,6 +1922,13 @@
 				),
 				double-chain-child-item-empty: (
 					display: initial,
+				),
+				footer: (
+					components: (
+						image: (
+							max-height: var(--global-spacing-10),
+						),
+					),
 				),
 				footer-links: (
 					grid-auto-flow: column,

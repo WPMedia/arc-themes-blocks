@@ -89,22 +89,6 @@
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Aktuellen Artikel über %{socialType} teilen"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "E-Mail an %{authorName} senden",
-		"author-bio-block.social-rss": "RSS Feed von %{authorName} abonnieren",
-		"author-bio-block.social-soundcloud": "%{authorName} auf SoundCloud anhören",
-		"author-bio-block.social-twitter": "Auf Twitter verbinden",
-		"author-bio-block.social-facebook": "Auf Facebook verbinden",
-		"author-bio-block.social-instagram": "Auf Instagram folgen",
-		"author-bio-block.social-linkedin": "Auf LinkedIn verbinden",
-		"author-bio-block.social-reddit": "Auf Reddit verbinden",
-		"author-bio-block.social-youtube": "Auf YouTube verbinden",
-		"author-bio-block.social-medium": "Auf Medium verbinden",
-		"author-bio-block.social-tumblr": "Auf Tumblr verbinden",
-		"author-bio-block.social-pinterest": "Auf Pinterest verbinden",
-		"author-bio-block.social-snapchat": "Auf Snapchat verbinden",
-		"author-bio-block.social-whatsapp": "Auf WhatsApp verbinden"
-	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Zum Hauptinhalt springen"
 	},

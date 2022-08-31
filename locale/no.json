@@ -89,22 +89,6 @@
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Del gjeldende artikkel via %{socialType}"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Send en e-post til %{authorName}",
-		"author-bio-block.social-rss": "Abonner på %{authorName}s RSS-feed",
-		"author-bio-block.social-soundcloud": "Lytt til %{authorName} på SoundCloud",
-		"author-bio-block.social-twitter": "Oppnå kontakt på Twitter",
-		"author-bio-block.social-facebook": "Oppnå kontakt på Facebook",
-		"author-bio-block.social-instagram": "Følg på Instagram",
-		"author-bio-block.social-linkedin": "Oppnå kontakt på LinkedIn",
-		"author-bio-block.social-reddit": "Oppnå kontakt på Reddit",
-		"author-bio-block.social-youtube": "Oppnå kontakt på YouTube",
-		"author-bio-block.social-medium": "Oppnå kontakt på Medium",
-		"author-bio-block.social-tumblr": "Oppnå kontakt på Tumblr",
-		"author-bio-block.social-pinterest": "Oppnå kontakt på Pinterest",
-		"author-bio-block.social-snapchat": "Oppnå kontakt på Snapchat",
-		"author-bio-block.social-whatsapp": "Oppnå kontakt på WhatsApp"
-	},
 	"default-output-block": {
 		"default-output-block.skip-main": "Hopp til hovedinnhold"
 	},

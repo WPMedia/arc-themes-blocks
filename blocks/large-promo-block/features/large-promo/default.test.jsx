@@ -300,7 +300,7 @@ describe("Large Promo", () => {
 				customFields={{
 					showImage: true,
 					showImageOrVideoLabel: true,
-					showVideoLabel: true,
+					playVideoInPlace: false,
 				}}
 			/>
 		);
@@ -312,7 +312,6 @@ describe("Large Promo", () => {
 			<LargePromo
 				customFields={{
 					showImage: true,
-					showVideoLabel: true,
 					playVideoInPlace: true,
 				}}
 			/>

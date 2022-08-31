@@ -9,7 +9,7 @@
 		"global.by-text": "저작자",
 		"global.and-text": "및",
 		"global.gallery-expand-button": "더보기",
-		"global.gallery-page-count-text": "%{current}\/%개 보는 %{total}",
+		"global.gallery-page-count-text": "%{current}/%개 보는 %{total}",
 		"global.gallery-autoplay-button": "자동 재생",
 		"global.gallery-pause-autoplay-button": "자동 재생 일시 중지",
 		"global.gallery-autoplay-label-start": "Start automatic slide show",

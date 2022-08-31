@@ -15,7 +15,8 @@ const mockData = {
 	schema: {
 		productDetails: {
 			label: "Product Details",
-			value: "Crocker Sandals<br />product",
+			value:
+				"<p>Crocker Sandals<br />product</p><ul><li>Bespoke knit upper</li><li>Bouncetech foam midsole</li><li>Organic rubber outsole</li><li>Made in the U.S.A.</li></ul>",
 			dataType: "string",
 			visible: true,
 			configuration: null,

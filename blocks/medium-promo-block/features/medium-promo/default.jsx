@@ -14,9 +14,11 @@ import {
 	formatAuthors,
 	formatURL,
 	getImageFromANS,
+	getPromoType,
 	Heading,
 	imageANSToImageSrc,
 	HeadingSection,
+	Icon,
 	Image,
 	isServerSide,
 	Join,
@@ -97,6 +99,16 @@ const MediumPromo = ({ customFields }) => {
 						${RESIZER_APP_VERSION}
 					}
 					type
+					promo_items {
+						basic {
+							_id
+							auth {
+								${RESIZER_APP_VERSION}
+							}
+							type
+							url
+						}
+					}
 				}
 				basic {
 					_id
@@ -124,13 +136,34 @@ const MediumPromo = ({ customFields }) => {
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;
-	const imageAuthToken = getImageFromANS(content)?.auth[RESIZER_APP_VERSION] || null;
-	const promoImageData = getImageFromANS(content);
-	const promoImageFilename = promoImageData ? imageANSToImageSrc(promoImageData) : null;
+
 	const contentDate = content?.display_date;
 	const formattedDate = Date.parse(contentDate)
 		? localizeDateTime(new Date(contentDate), dateTimeFormat, language, timeZone)
 		: "";
+
+	const promoType = getPromoType(content);
+	const labelIconName = {
+		gallery: "Camera",
+		video: "Play",
+	}[promoType];
+
+	const labelIconText = {
+		gallery: phrases.t("global.gallery-text"),
+		video: phrases.t("global.video-text"),
+	}[promoType];
+
+	// Image logic
+	const promoImageData = getImageFromANS(content);
+	const imageAuthToken = promoImageData?.auth?.[RESIZER_APP_VERSION] || null;
+	let resizeImage = false;
+	let imageSrc = imageOverrideURL || fallbackImage;
+	if (promoType === "video") {
+		imageSrc = promoImageData.url;
+	} else if (promoImageData) {
+		imageSrc = imageANSToImageSrc(promoImageData);
+		resizeImage = true;
+	}
 
 	return showHeadline || showImage || showDescription || showByline || showDate ? (
 		<LazyLoad enabled={shouldLazyLoad}>
@@ -149,12 +182,12 @@ const MediumPromo = ({ customFields }) => {
 							>
 								<Image
 									alt={content?.headlines?.basic}
-									src={imageOverrideURL || promoImageFilename || fallbackImage}
+									src={imageSrc}
 									searchableField
 									data-aspect-ratio={imageRatio?.replace(":", "/")}
 									resizedOptions={{ auth: imageAuthToken }}
 									responsiveImages={[100, 500]}
-									resizerURL={!imageOverrideURL && promoImageFilename ? RESIZER_URL : null}
+									resizerURL={resizeImage ? RESIZER_URL : null}
 									sizes={[
 										{
 											isDefault: true,
@@ -166,6 +199,12 @@ const MediumPromo = ({ customFields }) => {
 										},
 									]}
 								/>
+								{labelIconName ? (
+									<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
+										<Icon name={labelIconName} />
+										<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>
+									</div>
+								) : null}
 							</Conditional>
 						</MediaItem>
 					) : null}

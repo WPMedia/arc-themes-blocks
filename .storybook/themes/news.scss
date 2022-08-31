@@ -1389,6 +1389,9 @@
 						separator: (
 							padding: 0 var(--global-spacing-2),
 						),
+						link: (
+							position: relative,
+						),
 					),
 				),
 				medium-promo-show-image: (
@@ -1398,6 +1401,28 @@
 							width: 68%,
 						),
 					),
+				),
+				medium-promo-icon-label: (
+					align-items: center,
+					padding: var(--global-spacing-2),
+					background-color: var(--color-primary),
+					border: 0,
+					border-radius: var(--global-spacing-2),
+					bottom: var(--global-spacing-2),
+					margin-left: var(--global-spacing-2),
+					position: absolute,
+					z-index: 1,
+					components: (
+						icon: (
+							fill: var(--global-white),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+					),
+				),
+				medium-promo-label: (
+					margin-left: var(--global-spacing-2),
+					color: var(--global-white),
 				),
 				medium-manual-promo: (
 					components: (

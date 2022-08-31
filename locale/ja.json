@@ -11,22 +11,6 @@
 		"article-body-block.correction": "修正",
 		"article-body-block.interstitial-link-aria-label": "関連記事を開く"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "%{authorName}にメールを送信",
-		"author-bio-block.social-facebook": "Facebookで接続",
-		"author-bio-block.social-instagram": "Instagramでフォロー",
-		"author-bio-block.social-linkedin": "LinkedInで接続",
-		"author-bio-block.social-medium": "Mediumで接続",
-		"author-bio-block.social-pinterest": "Pinterestで接続",
-		"author-bio-block.social-reddit": "Redditで接続",
-		"author-bio-block.social-rss": "%{authorName}のRSSフィードを登録",
-		"author-bio-block.social-snapchat": "Snapchatで接続",
-		"author-bio-block.social-soundcloud": "SoundCloudで%{authorName}を聞く",
-		"author-bio-block.social-tumblr": "Tumblrで接続",
-		"author-bio-block.social-twitter": "Twitterで接続",
-		"author-bio-block.social-whatsapp": "WhatsAppで接続",
-		"author-bio-block.social-youtube": "YouTubeで接続"
-	},
 	"category-carousel-block": {
 		"category-carousel.aria-label": "Categories",
 		"category-carousel.left-arrow-label": "Previous",

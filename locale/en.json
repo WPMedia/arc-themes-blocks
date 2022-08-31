@@ -11,22 +11,6 @@
 		"article-body-block.correction": "Correction",
 		"article-body-block.interstitial-link-aria-label": "Open related story"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Send an email to %{authorName}",
-		"author-bio-block.social-facebook": "Connect on Facebook",
-		"author-bio-block.social-instagram": "Follow on Instagram",
-		"author-bio-block.social-linkedin": "Connect on LinkedIn",
-		"author-bio-block.social-medium": "Connect on Medium",
-		"author-bio-block.social-pinterest": "Connect on Pinterest",
-		"author-bio-block.social-reddit": "Connect on Reddit",
-		"author-bio-block.social-rss": "Subscribe to %{authorName} RSS feed",
-		"author-bio-block.social-snapchat": "Connect on Snapchat",
-		"author-bio-block.social-soundcloud": "Listen to %{authorName} on SoundCloud",
-		"author-bio-block.social-tumblr": "Connect on Tumblr",
-		"author-bio-block.social-twitter": "Connect on Twitter",
-		"author-bio-block.social-whatsapp": "Connect on WhatsApp",
-		"author-bio-block.social-youtube": "Connect on YouTube"
-	},
 	"category-carousel-block": {
 		"category-carousel.aria-label": "Categories",
 		"category-carousel.left-arrow-label": "Previous",

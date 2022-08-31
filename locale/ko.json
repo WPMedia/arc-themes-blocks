@@ -11,22 +11,6 @@
 		"article-body-block.correction": "정정",
 		"article-body-block.interstitial-link-aria-label": "관련 스토리 열기"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "%{authorName}(으)로 이메일 보내기",
-		"author-bio-block.social-facebook": "Facebook에서 연결",
-		"author-bio-block.social-instagram": "Instagram에서 팔로우",
-		"author-bio-block.social-linkedin": "LinkedIn에서 연결",
-		"author-bio-block.social-medium": "Medium에서 연결",
-		"author-bio-block.social-pinterest": "Pinterest에서 연결",
-		"author-bio-block.social-reddit": "Reddit에서 연결",
-		"author-bio-block.social-rss": "%{authorName} RSS 피드 구독",
-		"author-bio-block.social-snapchat": "Snapchat에서 연결",
-		"author-bio-block.social-soundcloud": "SoundCloud에서 %{authorName} 듣기",
-		"author-bio-block.social-tumblr": "Tumblr에서 연결",
-		"author-bio-block.social-twitter": "Twitter에서 연결",
-		"author-bio-block.social-whatsapp": "WhatsApp에서 연결",
-		"author-bio-block.social-youtube": "YouTube에서 연결"
-	},
 	"category-carousel-block": {
 		"category-carousel.aria-label": "Categories",
 		"category-carousel.left-arrow-label": "Previous",

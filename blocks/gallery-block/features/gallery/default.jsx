@@ -97,13 +97,13 @@ export const GalleryPresentation = ({
 			}}
 			enableFullScreen
 			fullScreenShowButton={
-				<button type="button" id={`${id}-full-screen-show`}>
+				<button type="button">
 					<Icon name="Fullscreen" />
 					{phrases.t("global.gallery-expand-button")}
 				</button>
 			}
 			fullScreenMinimizeButton={
-				<button type="button" id={`${id}-full-screen-hide`}>
+				<button type="button">
 					<Icon name="Close" />
 				</button>
 			}

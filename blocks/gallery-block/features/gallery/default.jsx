@@ -146,9 +146,7 @@ export const GalleryPresentation = ({
 								sizes={[
 									{
 										isDefault: true,
-										// 75vh max height
-										// if 16/9 aspect ratio, then roughly 40vw expected
-										sourceSizeValue: "40vw",
+										sourceSizeValue: "90vw",
 									},
 								]}
 							/>

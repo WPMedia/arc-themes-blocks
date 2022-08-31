@@ -201,11 +201,13 @@ export const withVideoLabelAndImage = () => (
 		registerSuccessEvent={() => {}}
 		searchableField={() => {}}
 		viewportPercentage={60}
+		playVideoInPlace={false}
 	/>
 );
 
 export const playVideoInPlaceOfImage = () => (
 	<LargePromoPresentation
+		playVideoInPlace
 		aspectRatio={16 / 9}
 		embedMarkup={MOCK_CONTENT.embed_html}
 		imageSearchField="imageURL"

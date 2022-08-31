@@ -90,7 +90,7 @@ export const LargePromoPresentation = ({
 									searchableField
 								/>
 							)}
-							{labelIconName && !playVideoInPlace ? (
+							{labelIconName && !!playVideoInPlace ? (
 								<div className={`${BLOCK_CLASS_NAME}__icon_label`}>
 									<Icon name={labelIconName} />
 									<span className={`${BLOCK_CLASS_NAME}__label`}>{labelIconText}</span>

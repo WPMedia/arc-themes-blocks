@@ -120,7 +120,7 @@ const MediumPromo = ({ customFields }) => {
 		return null;
 	}
 
-	const hasAuthors = showByline ? content?.credits?.by : null;
+	const hasAuthors = showByline ? content?.credits?.by && content?.credits?.by.length : null;
 	const contentDescription = showDescription ? content?.description?.basic : null;
 	const contentHeading = showHeadline ? content?.headlines?.basic : null;
 	const contentUrl = content?.websites?.[arcSite]?.website_url;

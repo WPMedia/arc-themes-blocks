@@ -12,7 +12,7 @@ const mockGallery = {
 	_id: "gallery_id",
 	content_elements: [
 		{
-			_id: "image_id1",
+			_id: "HY6LDPEW4BBFDLBYD4S3S7LZ3E",
 			alt_text: "Image Alt Text 1",
 			caption: "Image Caption 1",
 			credits: {
@@ -26,21 +26,16 @@ const mockGallery = {
 				],
 			},
 			height: 3744,
-			resized_params: {
-				"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-				"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-				"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-				"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-				"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-				"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-			},
 			subtitle: "Image Subtitle 1",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
 			width: 5616,
+			auth: {
+				2: "ab9e85e4ddf84da579c217bc66331a71941bd99dcfbc17ef0f25b166a094bec4",
+			},
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/HY6LDPEW4BBFDLBYD4S3S7LZ3E.jpg",
 		},
 		{
-			_id: "image_id2",
+			_id: "QQUBBHAFJRDH7IVNHAI4IBEQVY",
 			alt_text: "Image Alt Text 2",
 			caption: "Image Caption 2",
 			credits: {
@@ -54,18 +49,13 @@ const mockGallery = {
 				],
 			},
 			height: 3744,
-			resized_params: {
-				"274x0": "--al0lnFNBcEFSRnjIDaqW3hEXs=filters:format(jpg):quality(70)/",
-				"400x0": "D1TuuuNZJiX29k5IcHROrI-y1zI=filters:format(jpg):quality(70)/",
-				"768x0": "C6NNPZQgZICy5VMk-jLjNpbg_vw=filters:format(jpg):quality(70)/",
-				"800x0": "SFAi-Aks2Fy99PkwQ9LLvd2Jxl4=filters:format(jpg):quality(70)/",
-				"1024x0": "LSihqkSkpwAFfD0qsLDFuLw08P8=filters:format(jpg):quality(70)/",
-				"1440x0": "mnOhSZmQiFynETHFN7BAYI5-Pzg=filters:format(jpg):quality(70)/",
-			},
 			subtitle: "Image Subtitle 2",
 			type: "image",
-			url: "https://cloudfront-us-east-1.images.arcpublishing.com/corecomponents/CITIAYX2ERDOPP2TPJGEUV7SNQ.jpg",
+			url: "https://cloudfront-us-east-1.images.arcpublishing.com/sandbox.themesinternal/QQUBBHAFJRDH7IVNHAI4IBEQVY.jpg",
 			width: 5616,
+			auth: {
+				2: "ea391c022766c61dfadf9c6778efa43a8c31b87db157dc7d5db888562ff3150e",
+			},
 		},
 	],
 	headlines: {
@@ -77,7 +67,7 @@ const mockGallery = {
 const mockContextGlobalContent = {
 	copyright: "&copy;2021 - Big Media",
 	location: "Thatoneplace, ST",
-	id: "globalContent_id",
+	_id: "globalContent_id",
 };
 
 export const noContent = () => {
@@ -88,6 +78,8 @@ export const noContent = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockContextGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -108,6 +100,8 @@ export const withPassedInContent = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -129,6 +123,8 @@ export const hideCaption = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -150,6 +146,8 @@ export const hideCredits = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -171,6 +169,8 @@ export const hideTitle = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -193,6 +193,8 @@ export const hideTitleAndCaption = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -215,6 +217,8 @@ export const hideCaptionAndCredits = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };
@@ -238,6 +242,8 @@ export const hideCaptionAndCreditsAndTitle = () => {
 			arcSite="StoryBook Site"
 			globalContent={mockGlobalContent}
 			customFields={mockCustomFields}
+			resizerAppVersion={2}
+			resizerURL="https://themesinternal-themesinternal-sandbox.web.arc-cdn.net/resizer/v2/"
 		/>
 	);
 };

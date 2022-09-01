@@ -1,256 +1,205 @@
-// eslint-disable-next-line max-classes-per-file
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
+import { isServerSide, Carousel, MediaItem } from "@wpmedia/arc-themes-components";
+import { useContent } from "fusion:content";
+import { useAppContext, useFusionContext } from "fusion:context";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
 
-const mockPhrases = {
-	"global.gallery-expand-button": "Expand",
-	"global.gallery-page-count-text": "%{current} of %{total}",
-	"global.gallery-autoplay-button": "Autoplay",
-	"global.gallery-pause-autoplay-button": "Pause autoplay",
-};
+import Gallery from "./default";
 
-jest.mock("fusion:themes", () => jest.fn(() => ({})));
-
-jest.mock("fusion:properties", () =>
-	jest.fn(() => ({
-		fallbackImage: "placeholder.jpg",
-		resizerURL: "https://fake.cdn.com/resizer",
-		galleryCubeClicks: 5,
-	}))
-);
-
-jest.mock("fusion:context", () => ({
-	useAppContext: jest.fn(() => ({})),
-	useFusionContext: jest.fn(() => ({})),
+const { Item: CarouselItem } = Carousel;
+window.matchMedia = jest.fn();
+jest.mock("fusion:environment", () => ({
+	RESIZER_APP_VERSION: 2,
+	RESIZER_URL: "https://resizer.com",
 }));
-
 jest.mock("fusion:content", () => ({
 	useContent: jest.fn(() => []),
 }));
-
-jest.mock("@wpmedia/engine-theme-sdk", () => ({
-	Gallery: function Gallery() {
-		return <div />;
-	},
-	LazyLoad: ({ children }) => <>{children}</>,
-	isServerSide: () => true,
+jest.mock("fusion:context", () => ({
+	useFusionContext: jest.fn(() => ({
+		arcSite: "test",
+		isAdmin: false,
+	})),
+	useAppContext: jest.fn(() => ({})),
 }));
 
-jest.mock("fusion:intl", () => ({
-	__esModule: true,
-	default: jest.fn(() => ({ t: jest.fn((phrase) => mockPhrases[phrase]) })),
+jest.mock("@wpmedia/arc-themes-components", () => ({
+	...jest.requireActual("@wpmedia/arc-themes-components"),
+	isServerSide: jest.fn(() => false),
+	// mocking format credits to return whatever passed in
+	formatCredits: jest.fn((input) => input),
 }));
 
-describe("gallery feature block - lazy load", () => {
-	it("should not return on server side with lazy load true", () => {
-		const { default: GalleryFeature } = require("./default");
-		const wrapper = mount(<GalleryFeature customFields={{ lazyLoad: true }} />);
-
-		expect(wrapper.html()).toBe(null);
+describe("Gallery feature parent block", () => {
+	it("renders null if on server and lazy load enabled", () => {
+		isServerSide.mockReturnValue(true);
+		const wrapper = mount(<Gallery customFields={{ lazyLoad: true }} />);
+		expect(wrapper.html()).toBeNull();
 	});
-});
-
-describe("gallery feature block - no custom fields", () => {
-	beforeEach(() => {
-		jest.mock("fusion:context", () => ({
-			useAppContext: jest.fn(() => ({})),
-			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
-			})),
-		}));
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => []),
-		}));
+	it("does not render null if not on server and without lazy load", () => {
+		const wrapper = mount(<Gallery />);
+		expect(wrapper.html()).not.toBeNull();
 	});
-
-	it("should render the global content gallery", () => {
-		const { default: GalleryFeature } = require("./default");
-		const wrapper = mount(<GalleryFeature />);
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("");
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([]);
-		expect(wrapper.find("Gallery").props().interstitialClicks).toStrictEqual(5);
+	it("renders a lazy load disabled container if lazy load and is admin", () => {
+		useFusionContext.mockReturnValue({
+			isAdmin: true,
+		});
+		const wrapper = mount(<Gallery customFields={{ lazyLoad: true }} />);
+		expect(wrapper.html()).not.toBeNull();
+		expect(wrapper.find(LazyLoad).props().enabled).toBe(false);
 	});
-});
-
-describe("gallery feature block - globalContent", () => {
-	beforeEach(() => {
-		jest.mock("fusion:properties", () =>
-			jest.fn(() => ({
-				fallbackImage: "placeholder.jpg",
-				resizerURL: "https://fake.cdn.com/resizer",
-			}))
-		);
-
-		jest.mock("fusion:context", () => ({
-			useAppContext: jest.fn(() => ({
-				globalContent: {
-					content_elements: [
-						{
-							caption: "my cool global content caption",
-							subtitle: "my cool global content subtitle",
+	it("renders a lazy load enabled container if lazy load and is not admin", () => {
+		const wrapper = mount(<Gallery customFields={{ lazyLoad: true }} />);
+		expect(wrapper.html()).not.toBeNull();
+		expect(wrapper.find(LazyLoad).props().enabled).toBe(false);
+	});
+	it("renders no carousel items if no gallery items", () => {
+		const wrapper = mount(<Gallery />);
+		expect(wrapper.find(Carousel)).toHaveLength(1);
+		expect(wrapper.find(CarouselItem)).toHaveLength(0);
+	});
+	it("renders carousel items if gallery items from block content", () => {
+		useContent.mockReturnValue({
+			content_elements: [
+				{
+					caption: "my cool content caption",
+					subtitle: "my cool content subtitle",
+					auth: {
+						2: "auth string",
+					},
+				},
+			],
+			_id: "id",
+			headlines: {
+				basic: "This is a global content headline",
+			},
+		});
+		const wrapper = mount(<Gallery customFields={{ inheritGlobalContent: false }} />);
+		expect(wrapper.find(Carousel)).toHaveLength(1);
+		expect(wrapper.find(CarouselItem)).toHaveLength(1);
+	});
+	it("renders carousel items if gallery items from global content", () => {
+		useAppContext.mockReturnValue({
+			globalContent: {
+				content_elements: [
+					{
+						caption: "my cool global content caption",
+						subtitle: "my cool global content subtitle",
+						auth: {
+							2: "auth string",
 						},
-					],
-					_id: "shdsjdhs73e34",
-					headlines: {
-						basic: "This is a global content headline",
-					},
-				},
-			})),
-			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
-			})),
-		}));
-
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => []),
-		}));
-	});
-
-	it("should render the global content gallery", () => {
-		const { default: GalleryFeature } = require("./default");
-		const wrapper = mount(<GalleryFeature customFields={{ inheritGlobalContent: true }} />);
-
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual(
-			"This is a global content headline"
-		);
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([
-			{
-				caption: "my cool global content caption",
-				subtitle: "my cool global content subtitle",
-			},
-		]);
-		expect(wrapper.find("Gallery").props().interstitialClicks).toStrictEqual(NaN);
-	});
-});
-
-describe("gallery feature block - contentConfig", () => {
-	beforeEach(() => {
-		jest.mock("fusion:context", () => ({
-			useAppContext: jest.fn(() => ({})),
-			useFusionContext: jest.fn(() => ({
-				arcSite: "the-sun",
-			})),
-		}));
-	});
-
-	it("should render the content source gallery", () => {
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						caption: "my cool caption",
-						subtitle: "my cool subtitle",
 					},
 				],
-				_id: "shdsjdhs73e34",
+				_id: "id",
 				headlines: {
-					basic: "This is a headline",
+					basic: "This is a global content headline",
 				},
-			})),
-		}));
-		const { default: GalleryFeature } = require("./default");
-		const wrapper = mount(
-			<GalleryFeature
-				customFields={{
-					galleryContentConfig: {
-						contentService: "cool-api",
-						contentConfigValues: "cool-config",
-					},
-				}}
-			/>
-		);
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("This is a headline");
-		expect(wrapper.find("Gallery").props().pageCountPhrase).toBeInstanceOf(Function);
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([
-			{
-				caption: "my cool caption",
-				subtitle: "my cool subtitle",
 			},
-		]);
-	});
-
-	it("should have blank headline if ansHeadline missing", () => {
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						caption: "my cool caption",
-						subtitle: "my cool subtitle",
-					},
-				],
-				_id: "shdsjdhs73e34",
-			})),
-		}));
-		const { default: GalleryFeature } = require("./default");
+		});
 		const wrapper = mount(
-			<GalleryFeature
+			<Gallery
 				customFields={{
-					galleryContentConfig: {
-						contentService: "cool-api",
-						contentConfigValues: "cool-config",
-					},
+					galleryContentConfig: {},
+					inheritGlobalContent: true,
 				}}
 			/>
 		);
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("");
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([
-			{
-				caption: "my cool caption",
-				subtitle: "my cool subtitle",
+		expect(wrapper.find(Carousel)).toHaveLength(1);
+		expect(wrapper.find(CarouselItem)).toHaveLength(1);
+	});
+	it("renders subtitle, caption, and title on the media item", () => {
+		useContent.mockReturnValue({
+			content_elements: [
+				{
+					caption: "my cool content caption",
+					subtitle: "my cool content subtitle",
+					auth: {
+						2: "auth string",
+					},
+					credits: "my cool content credits",
+				},
+			],
+			_id: "id",
+			headlines: {
+				basic: "This is a global content headline",
 			},
-		]);
+		});
+		const wrapper = mount(<Gallery customFields={{ inheritGlobalContent: false }} />);
+		expect(wrapper.find(MediaItem).props().caption).toBe("my cool content caption");
+		expect(wrapper.find(MediaItem).props().credit).toBe("my cool content credits");
+		expect(wrapper.find(MediaItem).props().title).toBe("my cool content subtitle");
 	});
-
-	it("should have blank ansId if missing", () => {
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => ({
-				content_elements: [
-					{
-						caption: "my cool caption",
-						subtitle: "my cool subtitle",
+	it("hides title if elected in custom field", () => {
+		useContent.mockReturnValue({
+			content_elements: [
+				{
+					caption: "my cool content caption",
+					subtitle: "my cool content subtitle",
+					auth: {
+						2: "auth string",
 					},
-				],
-			})),
-		}));
-		const { default: GalleryFeature } = require("./default");
-		const wrapper = mount(
-			<GalleryFeature
-				customFields={{
-					galleryContentConfig: {
-						contentService: "cool-api",
-						contentConfigValues: "cool-config",
-					},
-				}}
-			/>
-		);
-		expect(wrapper.find("Gallery").props().ansId).toEqual("");
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("");
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([
-			{
-				caption: "my cool caption",
-				subtitle: "my cool subtitle",
+					credits: "my cool content credits",
+				},
+			],
+			_id: "id",
+			headlines: {
+				basic: "This is a global content headline",
 			},
-		]);
-	});
-
-	it("should have no gallery elements if no content_elements", () => {
-		jest.mock("fusion:content", () => ({
-			useContent: jest.fn(() => []),
-		}));
-		const { default: GalleryFeature } = require("./default");
+		});
 		const wrapper = mount(
-			<GalleryFeature
-				customFields={{
-					galleryContentConfig: {
-						contentService: "cool-api",
-						contentConfigValues: "cool-config",
-					},
-				}}
-			/>
+			<Gallery customFields={{ inheritGlobalContent: false, hideTitle: true }} />
 		);
-		expect(wrapper.find("Gallery").props().ansId).toEqual("");
-		expect(wrapper.find("Gallery").props().ansHeadline).toEqual("");
-		expect(wrapper.find("Gallery").props().galleryElements).toStrictEqual([]);
+		expect(wrapper.find(MediaItem).props().caption).toBe("my cool content caption");
+		expect(wrapper.find(MediaItem).props().credit).toBe("my cool content credits");
+		expect(wrapper.find(MediaItem).props().title).toBe(null);
+	});
+	it("hides caption if elected in custom field", () => {
+		useContent.mockReturnValue({
+			content_elements: [
+				{
+					caption: "my cool content caption",
+					subtitle: "my cool content subtitle",
+					auth: {
+						2: "auth string",
+					},
+					credits: "my cool content credits",
+				},
+			],
+			_id: "id",
+			headlines: {
+				basic: "This is a global content headline",
+			},
+		});
+		const wrapper = mount(
+			<Gallery customFields={{ inheritGlobalContent: false, hideCaption: true }} />
+		);
+		expect(wrapper.find(MediaItem).props().caption).toBe(null);
+		expect(wrapper.find(MediaItem).props().credit).toBe("my cool content credits");
+		expect(wrapper.find(MediaItem).props().title).toBe("my cool content subtitle");
+	});
+	it("hides credit if elected in custom field", () => {
+		useContent.mockReturnValue({
+			content_elements: [
+				{
+					caption: "my cool content caption",
+					subtitle: "my cool content subtitle",
+					auth: {
+						2: "auth string",
+					},
+					credits: "my cool content credits",
+				},
+			],
+			_id: "id",
+			headlines: {
+				basic: "This is a global content headline",
+			},
+		});
+		const wrapper = mount(
+			<Gallery customFields={{ inheritGlobalContent: false, hideCredits: true }} />
+		);
+		expect(wrapper.find(MediaItem).props().caption).toBe("my cool content caption");
+		expect(wrapper.find(MediaItem).props().credit).toBe(null);
+		expect(wrapper.find(MediaItem).props().title).toBe("my cool content subtitle");
 	});
 });

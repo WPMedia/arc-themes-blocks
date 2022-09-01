@@ -56,13 +56,13 @@
 	},
 	"global.gallery-page-count-text": {
 		"de": "%{current} von %{total}",
-		"en": "<span class='sr-only'>Image</span> %{current} of %{total}",
+		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
 		"es": "%{current} de %{total}",
 		"fr": "%{current} de %{total}",
 		"ja": "%{current} / %{total}",
 		"ko": "%{current}/%개 보는 %{total}",
-		"no": "<span class='sr-only'>Bilde</span> %{current} av %{total}",
-		"pt": "<span class='sr-only'>Imagem</span> %{current} de %{total}",
+		"no": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
+		"pt": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
 		"sv": "%{current} av %{total}"
 	},
 	"global.gallery-autoplay-button": {

@@ -71,7 +71,7 @@ const ShareBarContainer = () => {
 		arcSite,
 	} = useFusionContext();
 
-	const { websiteDomain, websiteName, locale = "en" } = getProperties(arcSite);
+	const { websiteDomain, websiteName, locale } = getProperties(arcSite);
 
 	const phrases = getTranslatedPhrases(locale);
 

@@ -2,10 +2,6 @@
 	"ads-block": {
 		"ads-block.ad-label": "ANNONSE"
 	},
-	"alert-bar-block": {
-		"alert-bar-block.close-button": "Avvis nyhetsvarsel",
-		"alert-bar-block.element-aria-label": "Nyhetsvarsel"
-	},
 	"article-body-block": {
 		"article-body-block.clarification": "Avklaring",
 		"article-body-block.correction": "Korreksjon",

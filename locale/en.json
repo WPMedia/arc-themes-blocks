@@ -2,10 +2,6 @@
 	"ads-block": {
 		"ads-block.ad-label": "ADVERTISEMENT"
 	},
-	"alert-bar-block": {
-		"alert-bar-block.close-button": "Dismiss breaking news alert",
-		"alert-bar-block.element-aria-label": "Breaking News Alert"
-	},
 	"article-body-block": {
 		"article-body-block.clarification": "Clarification",
 		"article-body-block.correction": "Correction",

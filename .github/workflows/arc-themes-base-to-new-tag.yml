@@ -19,14 +19,14 @@ jobs:
       - name: Check target release tag name
         id: check-target-tag
         run: |
-          if [[ ${{ github.event.inputs.target_release_tag }} =~ ^([0-9]+)\.([0-9]+)\.?$ ]]; then
+          if [[ ${{ github.event.inputs.target_release_tag }} =~ ^([0-9]+)\.([0-9]+)(\.[0-9]+)?$ ]]; then
               echo ::set-output name=match::true
           fi
 
       - name: Check new release tag name
         id: check-new-tag
         run: |
-          if [[ ${{ github.event.inputs.new_release_tag }} =~ ^([0-9]+)\.([0-9]+)\.?$ ]]; then
+          if [[ ${{ github.event.inputs.new_release_tag }} =~ ^([0-9]+)\.([0-9]+)(\.[0-9]+)?$ ]]; then
               echo ::set-output name=match::true
           fi
 

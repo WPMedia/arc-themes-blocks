@@ -62,7 +62,7 @@ const AuthorBioItemsContainer = () => {
 };
 
 export const AuthorBioItems = ({ arcSite, content }) => {
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 
 	const phrases = getTranslatedPhrases(locale);
 	const { credits = {} } = content;

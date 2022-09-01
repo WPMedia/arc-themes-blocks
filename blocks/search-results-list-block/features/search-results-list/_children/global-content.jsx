@@ -26,14 +26,8 @@ class GlobalSearchResultsList extends React.Component {
 			focusItem: 0,
 		};
 
-		const {
-			websiteDomain,
-			fallbackImage,
-			primaryLogoAlt,
-			breakpoints,
-			resizerURL,
-			locale = "en",
-		} = getProperties(props.arcSite) || {};
+		const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale } =
+			getProperties(props.arcSite) || {};
 
 		this.phrases = getTranslatedPhrases(locale);
 		this.websiteDomain = websiteDomain;

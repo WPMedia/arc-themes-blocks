@@ -36,6 +36,7 @@ describe("the default output type", () => {
 				websiteDomain: "",
 				fallbackImage: "/resources/placeholder.jpg",
 				resizerURL: "resizer",
+				locale: "en",
 			}))
 		);
 	});
@@ -74,6 +75,7 @@ describe("renders a page", () => {
 				fallbackImage: "/resources/placeholder.jpg",
 				resizerURL: "resizer",
 				fontUrl: ["https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto"],
+				locale: "en",
 			}))
 		);
 	});
@@ -229,21 +231,6 @@ describe("root html layout", () => {
 		);
 
 		expect(wrapper.find("html").prop("lang")).toBe("fr");
-	});
-
-	it("must fallback to en without a locale", () => {
-		jest.mock("fusion:properties", () => jest.fn(() => ({})));
-		const { default: DefaultOutputType } = require("../default");
-
-		const wrapper = shallow(
-			<DefaultOutputType
-				deployment={jest.fn()}
-				metaValue={jest.fn().mockReturnValue("article")}
-				{...mockFuntions}
-			/>
-		);
-
-		expect(wrapper.find("html").prop("lang")).toBe("en");
 	});
 });
 

@@ -52,7 +52,7 @@ const isSamePath = (current, menuLink) => {
 // div receives the event via propagation.
 const SubSectionAnchor = ({ item, isOpen, isHidden, blockClassName }) => {
 	const { arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	return (

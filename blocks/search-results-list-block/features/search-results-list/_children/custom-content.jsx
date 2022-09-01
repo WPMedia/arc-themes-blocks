@@ -30,14 +30,8 @@ class CustomSearchResultsList extends React.Component {
 			placeholderResizedImageOptions: {},
 		};
 
-		const {
-			websiteDomain,
-			fallbackImage,
-			primaryLogoAlt,
-			breakpoints,
-			resizerURL,
-			locale = "en",
-		} = getProperties(props.arcSite) || {};
+		const { websiteDomain, fallbackImage, primaryLogoAlt, breakpoints, resizerURL, locale } =
+			getProperties(props.arcSite) || {};
 
 		this.phrases = getTranslatedPhrases(locale);
 		this.websiteDomain = websiteDomain;

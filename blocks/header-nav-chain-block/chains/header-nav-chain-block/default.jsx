@@ -155,7 +155,7 @@ const Nav = (props) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const { arcSite, isAdmin, deployment, contextPath } = useFusionContext();
 
-	const { locale = "en", primaryLogo, primaryLogoAlt } = getProperties(arcSite);
+	const { locale, primaryLogo, primaryLogoAlt } = getProperties(arcSite);
 
 	// Check if URL is absolute/base64
 	const primaryLogoPath =

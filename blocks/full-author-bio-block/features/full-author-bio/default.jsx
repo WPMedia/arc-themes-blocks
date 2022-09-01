@@ -66,7 +66,7 @@ const logos = {
 
 export const FullAuthorBioPresentational = (props) => {
 	const { arcSite, content } = props;
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const socials = [];

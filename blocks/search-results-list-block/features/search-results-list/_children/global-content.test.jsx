@@ -12,6 +12,7 @@ jest.mock("fusion:themes", () => ({
 jest.mock("fusion:properties", () =>
 	jest.fn(() => ({
 		fallbackImage: "placeholder.jpg",
+		locale: "en",
 	}))
 );
 jest.mock("fusion:intl", () => ({

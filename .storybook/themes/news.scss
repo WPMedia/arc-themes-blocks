@@ -944,12 +944,20 @@
 						),
 						carousel-button-enter-full-screen: (
 							padding: 0,
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
 						),
 						carousel-additional-controls: (
 							display: none,
 						),
 						carousel-button-toggle-auto-play: (
 							padding: 0 var(--global-spacing-4),
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-image-counter: (
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
 						),
 						carousel-button-next: (
 							background-color: transparent,

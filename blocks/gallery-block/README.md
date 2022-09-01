@@ -1,27 +1,25 @@
-# `@wpmedia/gallery-block`
+# Gallery block
 
-_Block containing a gallery that reads in a gallery from a content source or globalContent._
-
-## Acceptance Criteria
-
-- Add AC relevant to the block
+The Gallery block shows a carousel with images and captions. It is used to display a collection of images. It imports the Themes Ads Block if that is available for Arc ads handling.
 
 ## Props
 
 | **Prop**                              | **Required** | **Type**              | **Description**                                                                                                                                     |
-| ------------------------------------- | ------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------------- | ------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --- | -------------------------- | --- | ------- | ---------------- | --- | ---------------------------- | --- | ------- | ------------------ |
 | **customFields.inheritGlobalContent** | no           | Boolean               | Determines whether or not the feature will use global content instead of the provided content config at the feature level. This is used by default. |
 | **customFields.galleryContentConfig** | no           | Fusion Content Config | Content config that will be used if `inheritGlobalContent` is false.                                                                                |
+| **customFields.lazyLoad**             | no           | Boolean               | Prevent the block from being rendered on the page until it is nearly in-view for the user                                                           |
+| **customFields.hideCredits**          | no           | Boolean               | Hide image credits                                                                                                                                  |     | **customFields.hideTitle** | no  | Boolean | Hide image title |     | **customFields.hideCaption** | no  | Boolean | Hide image caption |
 
 ## Themes Setting
+
+This is set in the `blocks.json`.
 
 | **Prop**              | **Required** | **Type** | **Description**                                                                                                                     |
 | --------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | **galleryCubeClicks** | no           | integer  | If present sets the interval at which ads will be shown between gallery images. The click count do not take into account direction. |
 
 ## ANS Schema
-
-Outline any schema information requirements necessary to know for ths block
 
 ### ANS Fields
 
@@ -59,7 +57,7 @@ Outline any schema information requirements necessary to know for ths block
 
 ## Events
 
-_Blocks can emit events. The following is a list of events that are emitted by this block._
+The following is a list of events that are emitted by this block.
 
 | **Event Name**           | **Description**                         |
 | ------------------------ | --------------------------------------- |

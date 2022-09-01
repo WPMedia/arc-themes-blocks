@@ -1991,41 +1991,38 @@
 				double-chain-child-item-empty: (
 					display: initial,
 				),
-				<<<<<<< HEAD full-author-bio:
-					(
-						flex-direction: row,
-						gap: var(--global-spacing-5),
-						margin: 0,
-						max-width: auto,
-						components: (
-							image: (
-								margin: 0,
-								max-height: 11.25rem,
-								max-width: 11.25rem,
-							),
+				full-author-bio: (
+					flex-direction: row,
+					gap: var(--global-spacing-5),
+					margin: 0,
+					max-width: auto,
+					components: (
+						image: (
+							margin: 0,
+							max-height: 11.25rem,
+							max-width: 11.25rem,
 						),
 					),
+				),
 				full-author-bio-social-header: (
 					text-align: left,
 				),
 				full-author-bio-social-icons: (
 					justify-content: flex-start,
 				),
-				======= gallery:
-					(
-						components: (
-							carousel-additional-controls: (
-								display: flex,
-								gap: var(--global-spacing-2),
-								padding: 0 0 0 var(--global-spacing-2),
-							),
+				gallery: (
+					components: (
+						carousel-additional-controls: (
+							display: flex,
+							gap: var(--global-spacing-2),
+							padding: 0 0 0 var(--global-spacing-2),
 						),
 					),
-				>>>>>>> origin/arc-themes-release-version-2.0.2 header-small:
-					(
-						font-size: var(--body-font-size),
-						line-height: var(--body-line-height),
-					),
+				),
+				header-small: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
+				),
 				header-nav-chain: (
 					padding: var(--global-spacing-3) var(--global-spacing-5),
 				),

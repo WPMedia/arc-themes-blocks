@@ -50,7 +50,6 @@ export const noSocialAccounts = () => {
 		email: "",
 		facebook: "",
 		twitter: "",
-		longBio: "",
 		instagram: "",
 		rss: "",
 		linkedin: "",

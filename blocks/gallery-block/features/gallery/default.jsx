@@ -3,10 +3,20 @@ import PropTypes from "@arc-fusion/prop-types";
 import { useContent } from "fusion:content";
 import { useFusionContext, useAppContext } from "fusion:context";
 import getProperties from "fusion:properties";
-import getThemeStyle from "fusion:themes";
 import getTranslatedPhrases from "fusion:intl";
+import { RESIZER_APP_VERSION, RESIZER_URL } from "fusion:environment";
+import { LazyLoad } from "@wpmedia/engine-theme-sdk";
+import {
+	Carousel,
+	formatCredits,
+	Icon,
+	Image,
+	imageANSToImageSrc,
+	isServerSide,
+	MediaItem,
+} from "@wpmedia/arc-themes-components";
 
-import { Gallery, LazyLoad, isServerSide } from "@wpmedia/engine-theme-sdk";
+const BLOCK_CLASS_NAME = "b-gallery";
 
 export const GalleryPresentation = ({
 	arcSite,
@@ -16,11 +26,14 @@ export const GalleryPresentation = ({
 		hideTitle = false,
 		hideCaption = false,
 		hideCredits = false,
-	} = {},
+	},
 	globalContent = {},
+	resizerAppVersion,
+	resizerURL,
 }) => {
 	let AdBlock;
 
+	/* istanbul ignore next */
 	try {
 		const { default: AdFeature } = require("@wpmedia/ads-block/features/ads/default");
 		AdBlock = () => (
@@ -35,7 +48,7 @@ export const GalleryPresentation = ({
 		AdBlock = () => <p>Ad block not found</p>;
 	}
 
-	const { resizerURL, galleryCubeClicks, locale = "en" } = getProperties(arcSite);
+	const { galleryCubeClicks, locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 	const content = useContent(
 		galleryContentConfig
@@ -50,38 +63,92 @@ export const GalleryPresentation = ({
 		typeof inheritGlobalContent === "undefined"
 			? typeof galleryContentConfig === "undefined"
 			: inheritGlobalContent;
+
 	const {
 		content_elements: contentElements = [],
 		headlines = {},
-		id = "",
+		_id = "",
 	} = showGlobalContent ? globalContent : content;
 
 	const interstitialClicks = parseInt(galleryCubeClicks, 10);
 
+	const galleryLength = contentElements.length;
+
 	return (
-		<Gallery
-			galleryElements={contentElements}
-			resizerURL={resizerURL}
-			ansId={id}
-			ansHeadline={headlines?.basic ? headlines.basic : ""}
-			expandPhrase={phrases.t("global.gallery-expand-button")}
-			autoplayPhraseLabels={{
-				start: phrases.t("global.gallery-autoplay-label-start"),
-				stop: phrases.t("global.gallery-autoplay-label-stop"),
-			}}
-			autoplayPhrase={phrases.t("global.gallery-autoplay-button")}
-			pausePhrase={phrases.t("global.gallery-pause-autoplay-button")}
-			controlsFont={getThemeStyle(arcSite)["primary-font-family"]}
+		<Carousel
+			id={_id}
+			className={BLOCK_CLASS_NAME}
+			showLabel
+			label={headlines?.basic ? headlines.basic : ""}
+			slidesToShow={1}
+			showAdditionalSlideControls
 			pageCountPhrase={
 				/* istanbul ignore next */ (current, total) =>
 					phrases.t("global.gallery-page-count-text", { current, total })
 			}
-			adElement={/* istanbul ignore next */ () => <AdBlock />}
-			interstitialClicks={interstitialClicks}
-			displayTitle={!hideTitle}
-			displayCaption={!hideCaption}
-			displayCredits={!hideCredits}
-		/>
+			enableAutoplay
+			startAutoplayIcon={<Icon name="Play" />}
+			startAutoplayText={phrases.t("global.gallery-autoplay-button")}
+			stopAutoplayIcon={<Icon name="Pause" />}
+			stopAutoplayText={phrases.t("global.gallery-pause-autoplay-button")}
+			autoplayPhraseLabels={{
+				start: phrases.t("global.gallery-autoplay-label-start"),
+				stop: phrases.t("global.gallery-autoplay-label-stop"),
+			}}
+			enableFullScreen
+			fullScreenShowButton={
+				<button type="button">
+					<Icon name="Fullscreen" />
+					{phrases.t("global.gallery-expand-button")}
+				</button>
+			}
+			fullScreenMinimizeButton={
+				<button type="button">
+					<Icon name="Close" />
+				</button>
+			}
+			adElement={/* istanbul ignore next */ <AdBlock />}
+			adInterstitialClicks={interstitialClicks}
+			nextButton={
+				<Carousel.Button id={_id} label="Next Slide">
+					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} fill="white" name="ChevronRight" />
+				</Carousel.Button>
+			}
+			previousButton={
+				<Carousel.Button id={_id} label="Previous Slide">
+					<Icon className={`${BLOCK_CLASS_NAME}__track-icon`} name="ChevronLeft" />
+				</Carousel.Button>
+			}
+		>
+			{contentElements.map((galleryItem, itemIndex) => (
+				<Carousel.Item
+					label={phrases.t("global.gallery-page-count-text", { itemIndex, galleryLength })}
+					key={`gallery-item-${galleryItem.url}`}
+				>
+					<MediaItem
+						caption={!hideCaption ? galleryItem.caption : null}
+						credit={
+							!hideCredits ? formatCredits(galleryItem.vanityCredits || galleryItem.credits) : null
+						}
+						title={!hideTitle ? galleryItem.subtitle : null}
+					>
+						<div className={`${BLOCK_CLASS_NAME}__image-wrapper`}>
+							<Image
+								src={imageANSToImageSrc(galleryItem)}
+								resizerURL={resizerURL}
+								resizedOptions={{ auth: galleryItem.auth[resizerAppVersion] }}
+								// 16:9 aspect ratio
+								width={500}
+								height={281.25}
+								alt={galleryItem.alt_text}
+								resizerAppVersion={resizerAppVersion}
+								responsiveImages={[150, 375, 500, 1500, 2000]}
+							/>
+						</div>
+					</MediaItem>
+				</Carousel.Item>
+			))}
+		</Carousel>
 	);
 };
 
@@ -99,6 +166,8 @@ const GalleryFeature = ({ customFields = {} }) => {
 				arcSite={arcSite}
 				customFields={customFields}
 				globalContent={globalContent}
+				resizerAppVersion={RESIZER_APP_VERSION}
+				resizerURL={RESIZER_URL}
 			/>
 		</LazyLoad>
 	);

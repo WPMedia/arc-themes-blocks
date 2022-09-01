@@ -294,7 +294,7 @@ export const ArticleBodyChainPresentation = ({ children, customFields = {}, cont
 
 	const { content_elements: contentElements = [], copyright, location } = items;
 	const { elementPlacement: adPlacementConfigObj = {} } = customFields;
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const adPlacements = Object.keys(adPlacementConfigObj).map((key) => ({

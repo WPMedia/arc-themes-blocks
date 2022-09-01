@@ -6,7 +6,7 @@ import { Button, Icon } from "@wpmedia/arc-themes-components";
 
 export default ({ alwaysOpen = false, placeholderText, customSearchAction = null }) => {
 	const { arcSite } = useFusionContext();
-	const { locale = "en" } = getProperties(arcSite);
+	const { locale } = getProperties(arcSite);
 	const phrases = getTranslatedPhrases(locale);
 
 	const [shouldSearchOpen, setShouldSearchOpen] = useState(false);

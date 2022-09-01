@@ -11,7 +11,7 @@
 		"global.gallery-text": "Galeria",
 		"global.video-text": "Vídeo",
 		"global.gallery-expand-button": "Expandir",
-		"global.gallery-page-count-text": "<span class='sr-only'>Imagem<\/span> %{current} de %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Imagem<\/span> %{current} de %{total}",
 		"global.gallery-autoplay-button": "Reprodução automática",
 		"global.gallery-pause-autoplay-button": "Colocar a reprodução automática em pausa",
 		"global.gallery-autoplay-label-start": "Iniciar apresentação automática de diapositivos",

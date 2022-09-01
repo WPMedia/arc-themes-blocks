@@ -356,6 +356,12 @@
 					align-items: center,
 					gap: var(--global-spacing-2),
 				),
+				carousel-button-previous: (
+					background-color: var(--global-white),
+				),
+				carousel-button-next: (
+					background-color: var(--global-white),
+				),
 				carousel-track: (
 					gap: var(--global-spacing-2),
 					max-width: var(--content-scale-width),
@@ -556,6 +562,12 @@
 						carousel-track: (
 							gap: initial,
 							max-width: initial,
+						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
 						),
 					),
 				),
@@ -991,6 +1003,74 @@
 							fill: var(--color-primary),
 						),
 					),
+				),
+				gallery: (
+					components: (
+						icon: (
+							fill: var(--text-color),
+							height: var(--global-spacing-4),
+							width: var(--global-spacing-4),
+						),
+						image: (
+							max-height: 75vh,
+						),
+						carousel-controls: (
+							padding: 0 0 var(--global-spacing-2) 0,
+						),
+						carousel-actions: (
+							display: flex,
+						),
+						carousel-track: (
+							gap: initial,
+							max-width: initial,
+						),
+						carousel-button: (
+							border: none,
+							box-shadow: none,
+							height: var(--global-spacing-4),
+						),
+						carousel-button-enter-full-screen: (
+							padding: 0,
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-additional-controls: (
+							display: none,
+						),
+						carousel-button-toggle-auto-play: (
+							padding: 0 var(--global-spacing-4),
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-image-counter: (
+							font-size: var(--body-font-size-tiny),
+							line-height: var(--body-line-height-tiny),
+						),
+						carousel-button-next: (
+							background-color: transparent,
+						),
+						carousel-button-previous: (
+							background-color: transparent,
+						),
+						carousel-button-additional-previous: (
+							padding: 0,
+						),
+						carousel-button-additional-next: (
+							padding: 0,
+						),
+					),
+				),
+				gallery-image-wrapper: (
+					align-items: center,
+					display: flex,
+					justify-content: center,
+					max-height: 75vh,
+					background-color: var(--global-black),
+				),
+				gallery-track-icon: (
+					fill: var(--global-white),
+					height: var(--global-spacing-8),
+					width: var(--global-spacing-8),
 				),
 				header: (
 					font-weight: var(--global-font-weight-7),
@@ -1951,6 +2031,15 @@
 						),
 					),
 				),
+				gallery: (
+					components: (
+						carousel-additional-controls: (
+							display: flex,
+							gap: var(--global-spacing-2),
+							padding: 0 0 0 var(--global-spacing-2),
+						),
+					),
+				),
 				header-small: (
 					font-size: var(--body-font-size),
 					line-height: var(--body-line-height),
@@ -2156,6 +2245,7 @@
 @use "../../blocks/footer-block";
 @use "../../blocks/extra-large-manual-promo-block";
 @use "../../blocks/extra-large-promo-block";
+@use "../../blocks/gallery-block";
 @use "../../blocks/header-block";
 @use "../../blocks/header-nav-chain-block";
 @use "../../blocks/headline-block";

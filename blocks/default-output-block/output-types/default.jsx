@@ -107,7 +107,7 @@ const SampleOutputType = ({
 		comscoreID,
 		querylyId,
 		querylyOrg,
-		locale = "en",
+		locale,
 	} = getProperties(arcSite);
 
 	const chartBeatInline = `

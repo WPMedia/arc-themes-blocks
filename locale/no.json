@@ -11,7 +11,7 @@
 		"global.gallery-text": "Bildegalleri",
 		"global.video-text": "Video",
 		"global.gallery-expand-button": "Utvid",
-		"global.gallery-page-count-text": "<span class='sr-only'>Bilde<\/span> %{current} av %{total}",
+		"global.gallery-page-count-text": "<span class='visually-hidden'>Bilde<\/span> %{current} av %{total}",
 		"global.gallery-autoplay-button": "Automatisk avspilling",
 		"global.gallery-pause-autoplay-button": "Sett automatisk avspilling på pause",
 		"global.gallery-autoplay-label-start": "Start automatisk lysbildevisning",

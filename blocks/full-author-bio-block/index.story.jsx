@@ -45,25 +45,25 @@ export const allFieldsFull = () => (
 );
 
 export const noSocialAccounts = () => {
-	const authorNoSocials = {
-		...authorObject,
-		email: "",
-		facebook: "",
-		twitter: "",
-		instagram: "",
-		rss: "",
-		linkedin: "",
-		reddit: "",
-		youtube: "",
-		medium: "",
-		tumblr: "",
-		pinterest: "",
-		snapchat: "",
-		whatsapp: "",
-		soundcloud: "",
-	};
+	const {
+		email,
+		facebook,
+		twitter,
+		instagram,
+		rss,
+		linkedin,
+		reddit,
+		youtube,
+		medium,
+		tumblr,
+		pinterest,
+		snapchat,
+		whatsapp,
+		soundcloud,
+		...authorNoSocialKeys
+	} = authorObject;
 
-	return <FullAuthorBioPresentational author={authorNoSocials} locale="en" />;
+	return <FullAuthorBioPresentational author={authorNoSocialKeys} locale="en" />;
 };
 
 export const noRole = () => {
@@ -102,27 +102,4 @@ export const noImage = () => {
 	};
 
 	return <FullAuthorBioPresentational author={authorNoImage} locale="en" />;
-};
-
-export const noSocialKeys = () => {
-	const {
-		email,
-		facebook,
-		twitter,
-		longBio,
-		instagram,
-		rss,
-		linkedin,
-		reddit,
-		youtube,
-		medium,
-		tumblr,
-		pinterest,
-		snapchat,
-		whatsapp,
-		soundcloud,
-		...authorNoSocialKeys
-	} = authorObject;
-
-	return <FullAuthorBioPresentational author={authorNoSocialKeys} locale="en" />;
 };

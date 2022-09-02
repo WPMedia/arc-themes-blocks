@@ -26,6 +26,7 @@
 			@include scss.block-components("footer-social-links-container");
 			@include scss.block-properties("footer-social-links-container");
 		}
+
 		> *:first-child {
 			@include scss.block-components("footer-social-links-first");
 			@include scss.block-properties("footer-social-links-first");

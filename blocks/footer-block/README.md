@@ -30,14 +30,12 @@ Available through `useContent`
 
 ## Internationalization fields
 
-- rss-link
-- facebook-link
-- twitter-link
+| Phrase key                   | Default (English) |
+| ---------------------------- | ----------------- |
+| `footer-block.facebook-link` | `Facebook page`   |
+| `footer-block.rss-link`      | `Twitter feed`    |
+| `footer-block.twitter-link`  | `RSS feed`        |
 
 ## Events
 
-n/a
-
-### Event Listening
-
-This block does not emit any events.
+This block does not emit events nor does it listen for events.

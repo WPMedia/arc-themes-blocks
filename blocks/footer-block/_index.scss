@@ -27,11 +27,6 @@
 			@include scss.block-properties("footer-social-links-container");
 		}
 
-		a:not(:last-child) {
-			@include scss.block-components("footer-social-link-not-last");
-			@include scss.block-properties("footer-social-link-not-last");
-		}
-
 		@include scss.block-components("footer-social-links");
 		@include scss.block-properties("footer-social-links");
 	}

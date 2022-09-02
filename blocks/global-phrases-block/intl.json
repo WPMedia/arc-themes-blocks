@@ -1,15 +1,4 @@
 {
-	"global.by-text": {
-		"de": "Von",
-		"en": "By",
-		"es": "Por",
-		"fr": "Par",
-		"ja": "担当者：",
-		"ko": "저작자",
-		"no": "Av",
-		"pt": "Por",
-		"sv": "Av"
-	},
 	"global.and-text": {
 		"de": "und",
 		"en": "and",
@@ -21,49 +10,16 @@
 		"pt": "e",
 		"sv": "och"
 	},
-	"global.gallery-text": {
-		"de": "Galerie",
-		"en": "Gallery",
-		"es": "Galería",
-		"fr": "Galerie",
-		"ja": "ギャラリー",
-		"ko": "갤러리",
-		"no": "Bildegalleri",
-		"pt": "Galeria",
-		"sv": "Bildspel"
-	},
-	"global.video-text": {
-		"de": "Video",
-		"en": "Video",
-		"es": "Video",
-		"fr": "Vidéo",
-		"ja": "ビデオ",
-		"ko": "비디오",
-		"no": "Video",
-		"pt": "Vídeo",
-		"sv": "Video"
-	},
-	"global.gallery-expand-button": {
-		"de": "Erweitern",
-		"en": "Expand",
-		"es": "Expandir",
-		"fr": "Développer",
-		"ja": "展開",
-		"ko": "더보기",
-		"no": "Utvid",
-		"pt": "Expandir",
-		"sv": "Förstora"
-	},
-	"global.gallery-page-count-text": {
-		"de": "%{current} von %{total}",
-		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
-		"es": "%{current} de %{total}",
-		"fr": "%{current} de %{total}",
-		"ja": "%{current} / %{total}",
-		"ko": "%{current}/%개 보는 %{total}",
-		"no": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
-		"pt": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
-		"sv": "%{current} av %{total}"
+	"global.by-text": {
+		"de": "Von",
+		"en": "By",
+		"es": "Por",
+		"fr": "Par",
+		"ja": "担当者：",
+		"ko": "저작자",
+		"no": "Av",
+		"pt": "Por",
+		"sv": "Av"
 	},
 	"global.gallery-autoplay-button": {
 		"de": "Automatische Wiedergabe",
@@ -75,17 +31,6 @@
 		"no": "Automatisk avspilling",
 		"pt": "Reprodução automática",
 		"sv": "Spela upp"
-	},
-	"global.gallery-pause-autoplay-button": {
-		"de": "Automatische Wiedergabe anhalten",
-		"en": "Pause autoplay",
-		"es": "Pausar reproducción automática",
-		"fr": "Mettre en pause la lecture automatique",
-		"ja": "自動再生の一時停止",
-		"ko": "자동 재생 일시 중지",
-		"no": "Sett automatisk avspilling på pause",
-		"pt": "Colocar a reprodução automática em pausa",
-		"sv": "Pausa"
 	},
 	"global.gallery-autoplay-label-start": {
 		"de": "Start automatic slide show",
@@ -109,60 +54,49 @@
 		"pt": "Parar apresentação automática de diapositivos",
 		"sv": "Stop automatic slide show"
 	},
-	"global.social-twitter": {
-		"de": "Twitter",
-		"en": "Twitter",
-		"es": "Twitter",
-		"fr": "Twitter",
-		"ja": "Twitter",
-		"ko": "Twitter",
-		"no": "Twitter",
-		"pt": "Twitter",
-		"sv": "Twitter"
+	"global.gallery-expand-button": {
+		"de": "Erweitern",
+		"en": "Expand",
+		"es": "Expandir",
+		"fr": "Développer",
+		"ja": "展開",
+		"ko": "더보기",
+		"no": "Utvid",
+		"pt": "Expandir",
+		"sv": "Förstora"
 	},
-	"global.social-facebook": {
-		"de": "Facebook",
-		"en": "Facebook",
-		"es": "Facebook",
-		"fr": "Facebook",
-		"ja": "Facebook",
-		"ko": "Facebook",
-		"no": "Facebook",
-		"pt": "Facebook",
-		"sv": "Facebook"
+	"global.gallery-page-count-text": {
+		"de": "%{current} von %{total}",
+		"en": "<span class='visually-hidden'>Image</span> %{current} of %{total}",
+		"es": "%{current} de %{total}",
+		"fr": "%{current} de %{total}",
+		"ja": "%{current} / %{total}",
+		"ko": "%{current}/%개 보는 %{total}",
+		"no": "<span class='visually-hidden'>Bilde</span> %{current} av %{total}",
+		"pt": "<span class='visually-hidden'>Imagem</span> %{current} de %{total}",
+		"sv": "%{current} av %{total}"
 	},
-	"global.social-linkedin": {
-		"de": "LinkedIn",
-		"en": "LinkedIn",
-		"es": "LinkedIn",
-		"fr": "LinkedIn",
-		"ja": "LinkedIn",
-		"ko": "LinkedIn",
-		"no": "LinkedIn",
-		"pt": "LinkedIn",
-		"sv": "LinkedIn"
+	"global.gallery-pause-autoplay-button": {
+		"de": "Automatische Wiedergabe anhalten",
+		"en": "Pause autoplay",
+		"es": "Pausar reproducción automática",
+		"fr": "Mettre en pause la lecture automatique",
+		"ja": "自動再生の一時停止",
+		"ko": "자동 재생 일시 중지",
+		"no": "Sett automatisk avspilling på pause",
+		"pt": "Colocar a reprodução automática em pausa",
+		"sv": "Pausa"
 	},
-	"global.social-pinterest": {
-		"de": "Pinterest",
-		"en": "Pinterest",
-		"es": "Pinterest",
-		"fr": "Pinterest",
-		"ja": "Pinterest",
-		"ko": "Pinterest",
-		"no": "Pinterest",
-		"pt": "Pinterest",
-		"sv": "Pinterest"
-	},
-	"global.social-email": {
-		"de": "E-Mail",
-		"en": "Email",
-		"es": "Email",
-		"fr": "E-mail",
-		"ja": "メールアドレス",
-		"ko": "이메일 전송",
-		"no": "E-post",
-		"pt": "E-mail",
-		"sv": "E-post"
+	"global.gallery-text": {
+		"de": "Gallery",
+		"en": "Gallery",
+		"es": "Galería",
+		"fr": "Gallery",
+		"ja": "Gallery",
+		"ko": "Gallery",
+		"no": "Gallery",
+		"pt": "Gallery",
+		"sv": "Gallery"
 	},
 	"global.opens-in-new-window": {
 		"de": "(Wird in einem neuen Fenster geöffnet)",
@@ -175,7 +109,227 @@
 		"pt": "(Abre numa nova janela)",
 		"sv": "(Öppnas i nytt fönster)"
 	},
-	"global.sponsored-content": {
+	"global.social-email": {
+		"de": "E-Mail",
+		"en": "Email",
+		"es": "Email",
+		"fr": "E-mail",
+		"ja": "メールアドレス",
+		"ko": "이메일 전송",
+		"no": "E-post",
+		"pt": "E-mail",
+		"sv": "E-post"
+	},
+	"global.social-email-connect": {
+		"de": "Send an email to %{authorName}",
+		"en": "Send an email to %{authorName}",
+		"es": "Enviar un correo electrónico a %{authorName}",
+		"fr": "Send an email to %{authorName}",
+		"ja": "Send an email to %{authorName}",
+		"ko": "Send an email to %{authorName}",
+		"no": "Send an email to %{authorName}",
+		"pt": "Send an email to %{authorName}",
+		"sv": "Send an email to %{authorName}"
+	},
+	"global.social-facebook": {
+		"de": "Facebook",
+		"en": "Facebook",
+		"es": "Facebook",
+		"fr": "Facebook",
+		"ja": "Facebook",
+		"ko": "Facebook",
+		"no": "Facebook",
+		"pt": "Facebook",
+		"sv": "Facebook"
+	},
+	"global.social-facebook-connect": {
+		"de": "Connect on Facebook",
+		"en": "Connect on Facebook",
+		"es": "Conectar en Facebook",
+		"fr": "Connect on Facebook",
+		"ja": "Connect on Facebook",
+		"ko": "Connect on Facebook",
+		"no": "Connect on Facebook",
+		"pt": "Connect on Facebook",
+		"sv": "Connect on Facebook"
+	},
+	"global.social-instagram-connect": {
+		"de": "Follow on Instagram",
+		"en": "Follow on Instagram",
+		"es": "Seguir en Instagram",
+		"fr": "Follow on Instagram",
+		"ja": "Follow on Instagram",
+		"ko": "Follow on Instagram",
+		"no": "Follow on Instagram",
+		"pt": "Follow on Instagram",
+		"sv": "Follow on Instagram"
+	},
+	"global.social-linkedin": {
+		"de": "LinkedIn",
+		"en": "LinkedIn",
+		"es": "LinkedIn",
+		"fr": "LinkedIn",
+		"ja": "LinkedIn",
+		"ko": "LinkedIn",
+		"no": "LinkedIn",
+		"pt": "LinkedIn",
+		"sv": "LinkedIn"
+	},
+	"global.social-linkedin-connect": {
+		"de": "Connect on LinkedIn",
+		"en": "Connect on LinkedIn",
+		"es": "Conectar en LinkedIn",
+		"fr": "Connect on LinkedIn",
+		"ja": "Connect on LinkedIn",
+		"ko": "Connect on LinkedIn",
+		"no": "Connect on LinkedIn",
+		"pt": "Connect on LinkedIn",
+		"sv": "Connect on LinkedIn"
+	},
+	"global.social-medium-connect": {
+		"de": "Connect on Medium",
+		"en": "Connect on Medium",
+		"es": "Conectar en Medium",
+		"fr": "Connect on Medium",
+		"ja": "Connect on Medium",
+		"ko": "Connect on Medium",
+		"no": "Connect on Medium",
+		"pt": "Connect on Medium",
+		"sv": "Connect on Medium"
+	},
+	"global.social-pinterest": {
+		"de": "Pinterest",
+		"en": "Pinterest",
+		"es": "Pinterest",
+		"fr": "Pinterest",
+		"ja": "Pinterest",
+		"ko": "Pinterest",
+		"no": "Pinterest",
+		"pt": "Pinterest",
+		"sv": "Pinterest"
+	},
+	"global.social-pinterest-connect": {
+		"de": "Connect on Pinterest",
+		"en": "Connect on Pinterest",
+		"es": "Conectar en Pinterest",
+		"fr": "Connect on Pinterest",
+		"ja": "Connect on Pinterest",
+		"ko": "Connect on Pinterest",
+		"no": "Connect on Pinterest",
+		"pt": "Connect on Pinterest",
+		"sv": "Connect on Pinterest"
+	},
+	"global.social-reddit-connect": {
+		"de": "Connect on Reddit",
+		"en": "Connect on Reddit",
+		"es": "Conectar en Reddit",
+		"fr": "Connect on Reddit",
+		"ja": "Connect on Reddit",
+		"ko": "Connect on Reddit",
+		"no": "Connect on Reddit",
+		"pt": "Connect on Reddit",
+		"sv": "Connect on Reddit"
+	},
+	"global.social-rss": {
+		"de": "Subscribe to %{authorName} RSS feed",
+		"en": "Subscribe to %{authorName} RSS feed",
+		"es": "Subscribe to %{authorName} RSS feed",
+		"fr": "Subscribe to %{authorName} RSS feed",
+		"ja": "Subscribe to %{authorName} RSS feed",
+		"ko": "Subscribe to %{authorName} RSS feed",
+		"no": "Subscribe to %{authorName} RSS feed",
+		"pt": "Subscribe to %{authorName} RSS feed",
+		"sv": "Subscribe to %{authorName} RSS feed"
+	},
+	"global.social-rss-connect": {
+		"de": "Subscribe to %{authorName} RSS feed",
+		"en": "Subscribe to %{authorName} RSS feed",
+		"es": "Suscribirse a la fuente RSS de %{authorName}",
+		"fr": "Subscribe to %{authorName} RSS feed",
+		"ja": "Subscribe to %{authorName} RSS feed",
+		"ko": "Subscribe to %{authorName} RSS feed",
+		"no": "Subscribe to %{authorName} RSS feed",
+		"pt": "Subscribe to %{authorName} RSS feed",
+		"sv": "Subscribe to %{authorName} RSS feed"
+	},
+	"global.social-snapchat-connect": {
+		"de": "Connect on Snapchat",
+		"en": "Connect on Snapchat",
+		"es": "Conectar en Snapchat",
+		"fr": "Connect on Snapchat",
+		"ja": "Connect on Snapchat",
+		"ko": "Connect on Snapchat",
+		"no": "Connect on Snapchat",
+		"pt": "Connect on Snapchat",
+		"sv": "Connect on Snapchat"
+	},
+	"global.social-soundcloud-connect": {
+		"de": "Listen to %{authorName} on SoundCloud",
+		"en": "Listen to %{authorName} on SoundCloud",
+		"es": "Escuchar a %{authorName} en SoundCloud",
+		"fr": "Listen to %{authorName} on SoundCloud",
+		"ja": "Listen to %{authorName} on SoundCloud",
+		"ko": "Listen to %{authorName} on SoundCloud",
+		"no": "Listen to %{authorName} on SoundCloud",
+		"pt": "Listen to %{authorName} on SoundCloud",
+		"sv": "Listen to %{authorName} on SoundCloud"
+	},
+	"global.social-tumblr-connect": {
+		"de": "Connect on Tumblr",
+		"en": "Connect on Tumblr",
+		"es": "Conectar en Tumblr",
+		"fr": "Connect on Tumblr",
+		"ja": "Connect on Tumblr",
+		"ko": "Connect on Tumblr",
+		"no": "Connect on Tumblr",
+		"pt": "Connect on Tumblr",
+		"sv": "Connect on Tumblr"
+	},
+	"global.social-twitter": {
+		"de": "Twitter",
+		"en": "Twitter",
+		"es": "Twitter",
+		"fr": "Twitter",
+		"ja": "Twitter",
+		"ko": "Twitter",
+		"no": "Twitter",
+		"pt": "Twitter",
+		"sv": "Twitter"
+	},
+	"global.social-twitter-connect": {
+		"de": "Connect on Twitter",
+		"en": "Connect on Twitter",
+		"es": "Conectar en Twitter",
+		"fr": "Connect on Twitter",
+		"ja": "Connect on Twitter",
+		"ko": "Connect on Twitter",
+		"no": "Connect on Twitter",
+		"pt": "Connect on Twitter",
+		"sv": "Connect on Twitter"
+	},
+	"global.social-whatsapp-connect": {
+		"de": "Connect on WhatsApp",
+		"en": "Connect on WhatsApp",
+		"es": "Conectar en WhatsApp",
+		"fr": "Connect on WhatsApp",
+		"ja": "Connect on WhatsApp",
+		"ko": "Connect on WhatsApp",
+		"no": "Connect on WhatsApp",
+		"pt": "Connect on WhatsApp",
+		"sv": "Connect on WhatsApp"
+	},
+	"global.social-youtube-connect": {
+		"de": "Connect on YouTube",
+		"en": "Connect on YouTube",
+		"es": "Conectar en YouTube",
+		"fr": "Connect on YouTube",
+		"ja": "Connect on YouTube",
+		"ko": "Connect on YouTube",
+		"no": "Connect on YouTube",
+		"pt": "Connect on YouTube",
+		"sv": "Connect on YouTube"
+	},
+	"global.sponsored-connect": {
 		"de": "Werblicher Inhalt",
 		"en": "Sponsored Content",
 		"es": "Contenido patrocinado",
@@ -185,5 +339,16 @@
 		"no": "Sponset innhold",
 		"pt": "Conteúdo patrocinado",
 		"sv": "Sponsrat innehåll"
+	},
+	"global.video-text": {
+		"de": "Video",
+		"en": "Video",
+		"es": "Video",
+		"fr": "Video",
+		"ja": "Video",
+		"ko": "Video",
+		"no": "Video",
+		"pt": "Video",
+		"sv": "Video"
 	}
 }

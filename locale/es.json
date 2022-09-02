@@ -1,63 +1,170 @@
 {
-	"shared-styles": {
-		"promo-label.gallery-text": "Galería",
-		"promo-label.video-text": "Video",
-		"byline.by-text": "Por",
-		"byline.and-text": "y"
+	"ads-block": {
+		"ads-block.ad-label": "ANUNCIO"
 	},
-	"global-phrases-block": {
-		"global.by-text": "Por",
-		"global.and-text": "y",
-		"global.gallery-text": "Galería",
-		"global.video-text": "Video",
-		"global.gallery-expand-button": "Expandir",
-		"global.gallery-page-count-text": "%{current} de %{total}",
-		"global.gallery-autoplay-button": "Reproducción automática",
-		"global.gallery-pause-autoplay-button": "Pausar reproducción automática",
-		"global.gallery-autoplay-label-start": "Start automatic slide show",
-		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
-		"global.social-twitter": "Twitter",
-		"global.social-facebook": "Facebook",
-		"global.social-linkedin": "LinkedIn",
-		"global.social-pinterest": "Pinterest",
-		"global.social-email": "Email",
-		"global.opens-in-new-window": "(Se abre en una nueva ventana)",
-		"global.sponsored-content": "Contenido patrocinado"
+	"alert-bar-block": {
+		"alert-bar-block.close-button": "Rechazar alerta noticias de última hora",
+		"alert-bar-block.element-aria-label": "Alerta noticias de última hora"
 	},
 	"article-body-block": {
-		"article-body-block.correction": "Corrección",
 		"article-body-block.clarification": "Aclaración",
+		"article-body-block.correction": "Corrección",
 		"article-body-block.interstitial-link-aria-label": "Abrir historia relacionada"
+	},
+	"category-carousel-block": {
+		"category-carousel.aria-label": "Categories",
+		"category-carousel.left-arrow-label": "Previous",
+		"category-carousel.right-arrow-label": "Next",
+		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+	},
+	"default-output-block": {
+		"default-output-block.skip-main": "Omitir para ir al contenido principal"
+	},
+	"footer-block": {
+		"footer-block.facebook-link": "Página de Facebook",
+		"footer-block.rss-link": "Fuente RSS",
+		"footer-block.twitter-link": "Fuente Twitter"
 	},
 	"full-author-bio-block": {
 		"full-author-bio-block.connect-text": "Conectar",
 		"full-author-bio-block.social-email": "Email",
-		"full-author-bio-block.social-twitter": "Conectar en Twitter",
 		"full-author-bio-block.social-facebook": "Conectar en Facebook",
 		"full-author-bio-block.social-instagram": "Seguir en Instagram",
-		"full-author-bio-block.social-rss": "Fuente RSS",
 		"full-author-bio-block.social-linkedin": "Conectar en LinkedIn",
-		"full-author-bio-block.social-reddit": "Conectar en Reddit",
-		"full-author-bio-block.social-youtube": "Conectar en YouTube",
 		"full-author-bio-block.social-medium": "Conectar en Medium",
-		"full-author-bio-block.social-tumblr": "Conectar en Tumblr",
 		"full-author-bio-block.social-pinterest": "Conectar en Pinterest",
+		"full-author-bio-block.social-reddit": "Conectar en Reddit",
+		"full-author-bio-block.social-rss": "Fuente RSS",
 		"full-author-bio-block.social-snapchat": "Conectar en Snapchat",
+		"full-author-bio-block.social-soundcloud": "Escuchar en SoundCloud",
+		"full-author-bio-block.social-tumblr": "Conectar en Tumblr",
+		"full-author-bio-block.social-twitter": "Conectar en Twitter",
 		"full-author-bio-block.social-whatsapp": "Conectar en WhatsApp",
-		"full-author-bio-block.social-soundcloud": "Escuchar en SoundCloud"
+		"full-author-bio-block.social-youtube": "Conectar en YouTube"
+	},
+	"global-phrases-block": {
+		"global.and-text": "y",
+		"global.by-text": "Por",
+		"global.gallery-autoplay-button": "Reproducción automática",
+		"global.gallery-autoplay-label-start": "Start automatic slide show",
+		"global.gallery-autoplay-label-stop": "Stop automatic slide show",
+		"global.gallery-expand-button": "Expandir",
+		"global.gallery-page-count-text": "%{current} de %{total}",
+		"global.gallery-pause-autoplay-button": "Pausar reproducción automática",
+		"global.gallery-text": "Galería",
+		"global.opens-in-new-window": "(Se abre en una nueva ventana)",
+		"global.social-email": "Email",
+		"global.social-email-connect": "Enviar un correo electrónico a %{authorName}",
+		"global.social-facebook": "Facebook",
+		"global.social-facebook-connect": "Conectar en Facebook",
+		"global.social-instagram-connect": "Seguir en Instagram",
+		"global.social-linkedin": "LinkedIn",
+		"global.social-linkedin-connect": "Conectar en LinkedIn",
+		"global.social-medium-connect": "Conectar en Medium",
+		"global.social-pinterest": "Pinterest",
+		"global.social-pinterest-connect": "Conectar en Pinterest",
+		"global.social-reddit-connect": "Conectar en Reddit",
+		"global.social-rss": "Subscribe to %{authorName} RSS feed",
+		"global.social-rss-connect": "Suscribirse a la fuente RSS de %{authorName}",
+		"global.social-snapchat-connect": "Conectar en Snapchat",
+		"global.social-soundcloud-connect": "Escuchar a %{authorName} en SoundCloud",
+		"global.social-tumblr-connect": "Conectar en Tumblr",
+		"global.social-twitter": "Twitter",
+		"global.social-twitter-connect": "Conectar en Twitter",
+		"global.social-whatsapp-connect": "Conectar en WhatsApp",
+		"global.social-youtube-connect": "Conectar en YouTube",
+		"global.sponsored-connect": "Contenido patrocinado",
+		"global.video-text": "Video"
 	},
 	"header-nav-block": {
+		"header-nav-block.search-text": "Buscar",
 		"header-nav-block.sections-button": "Secciones",
-		"header-nav-block.sign-in-button": "Sign In",
-		"header-nav-block.search-text": "Buscar"
+		"header-nav-block.sign-in-button": "Sign In"
 	},
 	"header-nav-chain-block": {
-		"header-nav-chain-block.sections-button": "Secciones",
-		"header-nav-chain-block.search-text": "Buscar",
-		"header-nav-chain-block.sections-button-aria-label": "Mostrar %{item} subsecciones",
-		"header-nav-chain-block.sections-element-aria-label": "Menú de secciones",
 		"header-nav-chain-block.links-element-aria-label": "Mejores enlaces",
-		"header-nav-chain-block.querly-search-aria-label": "Buscar"
+		"header-nav-chain-block.querly-search-aria-label": "Buscar",
+		"header-nav-chain-block.search-text": "Buscar",
+		"header-nav-chain-block.sections-button": "Secciones",
+		"header-nav-chain-block.sections-button-aria-label": "Mostrar %{item} subsecciones",
+		"header-nav-chain-block.sections-element-aria-label": "Menú de secciones"
+	},
+	"identity-block": {
+		"identity-block.account": "Account",
+		"identity-block.account-information": "Account Information",
+		"identity-block.add-password": "Add Password",
+		"identity-block.cancel": "Cancel",
+		"identity-block.confirm-password": "Confirm password",
+		"identity-block.confirm-password-error": "Passwords must match",
+		"identity-block.connect-account": "Connected",
+		"identity-block.connect-platform": "Connect %{platform}",
+		"identity-block.connected-accounts": "Connected Accounts",
+		"identity-block.current-password": "Current Password",
+		"identity-block.disconnect-account": "Disconnect",
+		"identity-block.edit": "Edit",
+		"identity-block.email": "Dirección de correo electrónico",
+		"identity-block.email-requirements": "Please enter a valid email address",
+		"identity-block.forgot-password-error": "There was an error processing your request.",
+		"identity-block.forgot-password-headline": "Forgot Password",
+		"identity-block.forgot-password-headline-submitted": "Check your email to reset your password",
+		"identity-block.forgot-password-instruction": "Enter the email you use for your account",
+		"identity-block.forgot-password-instruction-submitted": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
+		"identity-block.forgot-password-submit": "Send",
+		"identity-block.log-in": "Log In",
+		"identity-block.log-out": "Cerrar sesión",
+		"identity-block.login-form-error": "There's been an error logging you in",
+		"identity-block.login-links-forgot": "Forgot Password?",
+		"identity-block.login-links-login": "Already have an account? Log in.",
+		"identity-block.login-links-signup": "Sign up for an account.",
+		"identity-block.login-options": "Log in options",
+		"identity-block.manage-account": "Manage Your Account",
+		"identity-block.new-password": "New Password",
+		"identity-block.password": "Contraseña",
+		"identity-block.password-placeholder": "**********",
+		"identity-block.password-requirements": "Please enter a valid password.",
+		"identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
+		"identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
+		"identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
+		"identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
+		"identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
+		"identity-block.reset-password-error": "There was an error processing your request.",
+		"identity-block.reset-password-headline": "Create your new password",
+		"identity-block.reset-password-headline-submitted": "New password saved",
+		"identity-block.reset-password-instruction": "Enter a new password for your account.",
+		"identity-block.reset-password-instruction-submitted": "Your new password has been saved.",
+		"identity-block.reset-password-submit": "Continue",
+		"identity-block.reset-password-submit-submitted": "Continue to log in",
+		"identity-block.save": "Save",
+		"identity-block.sign-up": "Sign Up",
+		"identity-block.sign-up-form-error": "There's been an error creating your account",
+		"identity-block.update-email-error": "There's been an error updating your email address",
+		"identity-block.update-password-error": "There's been an error updating your password",
+		"identity-block.username": "Nombre de usuario"
+	},
+	"links-bar-block": {
+		"links-bar-block.element-aria-label": "Más enlaces"
+	},
+	"product-assortment-carousel-block": {
+		"product-assortment-carousel.aria-label": "Products",
+		"product-assortment-carousel.left-arrow-label": "Previous",
+		"product-assortment-carousel.right-arrow-label": "Next",
+		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
+	},
+	"product-content-block": {
+		"product-content.description": "Description",
+		"product-content.details": "Details",
+		"product-content.shipping-and-returns": "Shipping & Returns",
+		"product-content.size-and-fit": "Size & Fit"
+	},
+	"product-gallery-block": {
+		"product-gallery.aria-label": "Products",
+		"product-gallery.left-arrow-label": "Previous",
+		"product-gallery.right-arrow-label": "Next",
+		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+	},
+	"product-information-block": {
+		"product-information.list-price": "List Price %{price}",
+		"product-information.sale-price": "Sale Price %{price}"
 	},
 	"results-list-block": {
 		"results-list-block.see-more-button": "Ver más",
@@ -70,118 +177,23 @@
 		"search-results-block.see-more-button-aria-label": "Ver más historias sobre este tema",
 		"search-results-blocks.search-input-placeholder": "Introduzca sus términos de búsqueda"
 	},
-	"ads-block": {
-		"ads-block.ad-label": "ANUNCIO"
-	},
-	"alert-bar-block": {
-		"alert-bar-block.element-aria-label": "Alerta noticias de última hora",
-		"alert-bar-block.close-button": "Rechazar alerta noticias de última hora"
-	},
-	"footer-block": {
-		"footer-block.facebook-link": "Página de Facebook",
-		"footer-block.twitter-link": "Fuente Twitter",
-		"footer-block.rss-link": "Fuente RSS"
-	},
-	"links-bar-block": {
-		"links-bar-block.element-aria-label": "Más enlaces"
-	},
 	"share-bar-block": {
 		"share-bar-block.share-button-aria-label": "Compartir el artículo actual mediante %{socialType}"
 	},
-	"author-bio-block": {
-		"author-bio-block.social-email": "Enviar un correo electrónico a %{authorName}",
-		"author-bio-block.social-rss": "Suscribirse a la fuente RSS de %{authorName}",
-		"author-bio-block.social-soundcloud": "Escuchar a %{authorName} en SoundCloud",
-		"author-bio-block.social-twitter": "Conectar en Twitter",
-		"author-bio-block.social-facebook": "Conectar en Facebook",
-		"author-bio-block.social-instagram": "Seguir en Instagram",
-		"author-bio-block.social-linkedin": "Conectar en LinkedIn",
-		"author-bio-block.social-reddit": "Conectar en Reddit",
-		"author-bio-block.social-youtube": "Conectar en YouTube",
-		"author-bio-block.social-medium": "Conectar en Medium",
-		"author-bio-block.social-tumblr": "Conectar en Tumblr",
-		"author-bio-block.social-pinterest": "Conectar en Pinterest",
-		"author-bio-block.social-snapchat": "Conectar en Snapchat",
-		"author-bio-block.social-whatsapp": "Conectar en WhatsApp"
+	"shared-styles": {
+		"byline.and-text": "y",
+		"byline.by-text": "Por",
+		"promo-label.gallery-text": "Galería",
+		"promo-label.video-text": "Video"
 	},
-	"default-output-block": {
-		"default-output-block.skip-main": "Omitir para ir al contenido principal"
-	},
-	"identity-block": {
-		"identity-block.email": "Dirección de correo electrónico",
-		"identity-block.password": "Contraseña",
-		"identity-block.sign-up": "Sign Up",
-		"identity-block.confirm-password": "Confirm password",
-		"identity-block.username": "Nombre de usuario",
-		"identity-block.account": "Account",
-		"identity-block.manage-account": "Manage Your Account",
-		"identity-block.log-out": "Cerrar sesión",
-		"identity-block.log-in": "Log In",
-		"identity-block.login-options": "Log in options",
-		"identity-block.confirm-password-error": "Passwords must match",
-		"identity-block.password-requirements": "Please enter a valid password.",
-		"identity-block.password-requirements-lowercase": "Must have at least %{requirementCount} letter(s).",
-		"identity-block.password-requirements-characters": "Must be at least %{requirementCount} total characters.",
-		"identity-block.password-requirements-numbers": "Must have at least %{requirementCount} number(s).",
-		"identity-block.password-requirements-special": "Must have at least %{requirementCount} special character(s).",
-		"identity-block.password-requirements-uppercase": "Must have at least %{requirementCount} uppercase character(s).",
-		"identity-block.email-requirements": "Please enter a valid email address",
-		"identity-block.sign-up-form-error": "There's been an error creating your account",
-		"identity-block.login-form-error": "There's been an error logging you in",
-		"identity-block.login-links-login": "Already have an account? Log in.",
-		"identity-block.login-links-signup": "Sign up for an account.",
-		"identity-block.account-information": "Account Information",
-		"identity-block.edit": "Edit",
-		"identity-block.save": "Save",
-		"identity-block.cancel": "Cancel",
-		"identity-block.update-email-error": "There's been an error updating your email address",
-		"identity-block.password-placeholder": "**********",
-		"identity-block.add-password": "Add Password",
-		"identity-block.new-password": "New Password",
-		"identity-block.current-password": "Current Password",
-		"identity-block.update-password-error": "There's been an error updating your password",
-		"identity-block.connected-accounts": "Connected Accounts",
-		"identity-block.connect-account": "Connected",
-		"identity-block.disconnect-account": "Disconnect",
-		"identity-block.connect-platform": "Connect %{platform}",
-		"identity-block.login-links-forgot": "Forgot Password?",
-		"identity-block.forgot-password-headline": "Forgot Password",
-		"identity-block.forgot-password-headline-submitted": "Check your email to reset your password",
-		"identity-block.forgot-password-instruction": "Enter the email you use for your account",
-		"identity-block.forgot-password-instruction-submitted": "If there is an account associated with your email address, you’ll receive a link in your inbox to reset your password.",
-		"identity-block.forgot-password-submit": "Send",
-		"identity-block.forgot-password-error": "There was an error processing your request.",
-		"identity-block.reset-password-headline": "Create your new password",
-		"identity-block.reset-password-headline-submitted": "New password saved",
-		"identity-block.reset-password-instruction": "Enter a new password for your account.",
-		"identity-block.reset-password-instruction-submitted": "Your new password has been saved.",
-		"identity-block.reset-password-submit": "Continue",
-		"identity-block.reset-password-submit-submitted": "Continue to log in",
-		"identity-block.reset-password-error": "There was an error processing your request."
+	"story-carousel-block": {
+		"story-carousel.aria-label": "Stories",
+		"story-carousel.left-arrow-label": "Previous",
+		"story-carousel.right-arrow-label": "Next",
+		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
 	},
 	"subscriptions-block": {
-		"checkout-block.headline": "Review Subscription Order",
-		"checkout-block.back-to-offer-page": "Back to subscription selection",
-		"checkout-block.order-summary": "Order Summary",
-		"checkout-block.due-today": "Due today",
-		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
-		"checkout-block.empty-cart-message": "Select from one of our offers",
-		"checkout-block.contact-info": "Contact Info",
-		"checkout-block.identity-social": "Connected",
-		"checkout-block.identity-email": "Signed in as %{email}",
-		"checkout-block.identity-sign-out": "Sign out",
-		"checkout-block.email": "Email address",
-		"checkout-block.email-requirements": "Please enter a valid email address",
-		"checkout-block.first-name": "First name",
-		"checkout-block.first-name-requirements": "Please enter first name",
-		"checkout-block.last-name": "Last name",
-		"checkout-block.last-name-requirements": "Please enter last name",
-		"checkout-block.continue-to-checkout": "Continue to Checkout",
-		"checkout-block.country": "Country or region",
-		"checkout-block.country-requirements": "Please select country or region",
-		"checkout-block.Select-Country": "Select Country",
 		"checkout-block.Afghanistan": "Afghanistan",
-		"checkout-block.Åland-Islands": "Åland Islands",
 		"checkout-block.Albania": "Albania",
 		"checkout-block.Algeria": "Algeria",
 		"checkout-block.American-Samoa": "American Samoa",
@@ -358,10 +370,10 @@
 		"checkout-block.Portugal": "Portugal",
 		"checkout-block.Puerto-Rico": "Puerto Rico",
 		"checkout-block.Qatar": "Qatar",
+		"checkout-block.RWANDA": "RWANDA",
 		"checkout-block.Reunion": "Reunion",
 		"checkout-block.Romania": "Romania",
 		"checkout-block.Russian-Federation": "Russian Federation",
-		"checkout-block.RWANDA": "RWANDA",
 		"checkout-block.Saint-Helena": "Saint Helena",
 		"checkout-block.Saint-Kitts-and-Nevis": "Saint Kitts and Nevis",
 		"checkout-block.Saint-Lucia": "Saint Lucia",
@@ -371,6 +383,7 @@
 		"checkout-block.San-Marino": "San Marino",
 		"checkout-block.Sao-Tome-and-Principe": "Sao Tome and Principe",
 		"checkout-block.Saudi-Arabia": "Saudi Arabia",
+		"checkout-block.Select-Country": "Select Country",
 		"checkout-block.Senegal": "Senegal",
 		"checkout-block.Serbia-and-Montenegro": "Serbia and Montenegro",
 		"checkout-block.Seychelles": "Seychelles",
@@ -423,43 +436,29 @@
 		"checkout-block.Yemen": "Yemen",
 		"checkout-block.Zambia": "Zambia",
 		"checkout-block.Zimbabwe": "Zimbabwe",
+		"checkout-block.back-to-offer-page": "Back to subscription selection",
+		"checkout-block.contact-info": "Contact Info",
+		"checkout-block.continue-to-checkout": "Continue to Checkout",
+		"checkout-block.country": "Country or region",
+		"checkout-block.country-requirements": "Please select country or region",
+		"checkout-block.due-today": "Due today",
+		"checkout-block.email": "Email address",
+		"checkout-block.email-requirements": "Please enter a valid email address",
+		"checkout-block.empty-cart-message": "Select from one of our offers",
+		"checkout-block.first-name": "First name",
+		"checkout-block.first-name-requirements": "Please enter first name",
+		"checkout-block.headline": "Review Subscription Order",
+		"checkout-block.identity-email": "Signed in as %{email}",
+		"checkout-block.identity-sign-out": "Sign out",
+		"checkout-block.identity-social": "Connected",
+		"checkout-block.last-name": "Last name",
+		"checkout-block.last-name-requirements": "Please enter last name",
+		"checkout-block.order-summary": "Order Summary",
+		"checkout-block.plus-sales-tax": "Plus applicable sales tax",
+		"checkout-block.Åland-Islands": "Åland Islands",
 		"subscriptions-block.credit-card-information": "Payment Method and Information",
+		"subscriptions-block.payment-error": "There was an error processing your payment.",
 		"subscriptions-block.payment-information": "Credit card information",
-		"subscriptions-block.submit-payment": "Purchase Subscription",
-		"subscriptions-block.payment-error": "There was an error processing your payment."
-	},
-	"story-carousel-block": {
-		"story-carousel.aria-label": "Stories",
-		"story-carousel.right-arrow-label": "Next",
-		"story-carousel.left-arrow-label": "Previous",
-		"story-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"category-carousel-block": {
-		"category-carousel.aria-label": "Categories",
-		"category-carousel.right-arrow-label": "Next",
-		"category-carousel.left-arrow-label": "Previous",
-		"category-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"product-assortment-carousel-block": {
-		"product-assortment-carousel.aria-label": "Products",
-		"product-assortment-carousel.right-arrow-label": "Next",
-		"product-assortment-carousel.left-arrow-label": "Previous",
-		"product-assortment-carousel.slide-indicator": "Slide %{current} of %{maximum}"
-	},
-	"product-content-block": {
-		"product-content.description": "Description",
-		"product-content.details": "Details",
-		"product-content.size-and-fit": "Size & Fit",
-		"product-content.shipping-and-returns": "Shipping & Returns"
-	},
-	"product-information-block": {
-		"product-information.sale-price": "Sale Price %{price}",
-		"product-information.list-price": "List Price %{price}"
-	},
-	"product-gallery-block": {
-		"product-gallery.aria-label": "Products",
-		"product-gallery.right-arrow-label": "Next",
-		"product-gallery.left-arrow-label": "Previous",
-		"product-gallery.slide-indicator": "Slide %{current} of %{maximum}"
+		"subscriptions-block.submit-payment": "Purchase Subscription"
 	}
 }

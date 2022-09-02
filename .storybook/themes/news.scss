@@ -988,6 +988,7 @@
 							fill: var(--color-primary),
 						),
 						link: (
+							border-right: 1px solid var(--color-primary),
 							padding: var(--global-spacing-2),
 						),
 					),
@@ -995,6 +996,13 @@
 				footer-social-links-container: (
 					border-bottom: 1px solid var(--global-neutral-4),
 					width: 100%,
+				),
+				footer-social-links-last: (
+					components: (
+						link: (
+							border-right: none,
+						),
+					),
 				),
 				gallery: (
 					components: (

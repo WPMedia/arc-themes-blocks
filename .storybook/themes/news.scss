@@ -984,25 +984,17 @@
 					margin: var(--global-spacing-2) auto,
 					width: fit-content,
 					components: (
-						link: (
-							padding: var(--global-spacing-2),
-						),
 						icon: (
 							fill: var(--color-primary),
+						),
+						link: (
+							padding: var(--global-spacing-2),
 						),
 					),
 				),
 				footer-social-links-container: (
 					border-bottom: 1px solid var(--global-neutral-4),
 					width: 100%,
-					components: (
-						link: (
-							padding: var(--global-spacing-2),
-						),
-						icon: (
-							fill: var(--color-primary),
-						),
-					),
 				),
 				gallery: (
 					components: (

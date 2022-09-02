@@ -41,5 +41,3 @@ n/a
 ### Event Listening
 
 This block does not emit any events.
-
-## Additional Considerations

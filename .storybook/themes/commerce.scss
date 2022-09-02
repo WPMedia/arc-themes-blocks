@@ -621,9 +621,13 @@
 					width: 100%,
 				),
 				hero-text-left: (
-					justify-self: flex-start,
 					max-width: var(--content-scale-width),
 					width: 100%,
+					components: (
+						paragraph: (
+							align-self: flex-start,
+						),
+					),
 				),
 				hero-text-stacked: (
 					margin: 0 auto,

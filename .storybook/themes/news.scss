@@ -824,6 +824,50 @@
 					list-style-position: inside,
 					list-style-type: disc,
 				),
+				author-bio: (
+					gap: var(--global-spacing-4),
+				),
+				author-bio-author: (
+					gap: var(--global-spacing-4),
+					components: (
+						image: (
+							max-width: 5.188rem,
+							max-height: 5.125rem,
+							border-radius: var(--border-radius-circle),
+							height: 100%,
+							width: 100%,
+							aspect-ratio: 1,
+							object-fit: cover,
+						),
+						stack: (
+							gap: var(--global-spacing-2),
+							width: 100%,
+						),
+					),
+				),
+				author-bio-social-link-wrapper: (
+					gap: var(--global-spacing-4),
+					margin-top: 0,
+				),
+				author-bio-social-link-hover: (
+					components: (
+						icon: (
+							fill: var(--color-primary-hover),
+						),
+					),
+				),
+				author-bio-author-name: (
+					font-family: var(--font-family-primary),
+					font-size: var(--heading-level-6-font-size),
+					font-weight: var(--heading-level-6-font-weight),
+					line-height: var(--heading-level-6-line-height),
+				),
+				author-bio-author-description: (
+					font-family: var(--font-family-primary),
+					font-size: var(--body-font-size-small),
+					line-height: var(--body-line-height-small),
+					margin-bottom: 0,
+				),
 				byline: (
 					font-size: var(--body-font-weight),
 					line-height: var(--body-line-height),
@@ -1762,6 +1806,9 @@
 						),
 					),
 				),
+				single-column-regular-footer: (
+					width: 100%,
+				),
 				single-chain: (
 					components: (
 						stack: (
@@ -1964,6 +2011,13 @@
 				),
 				article-body-gallery-additional-previous: (
 					display: block,
+				),
+				author-bio-social-link-wrapper: (
+					margin-top: var(--global-spacing-4),
+				),
+				author-bio-author-description: (
+					font-size: var(--body-font-size),
+					line-height: var(--body-line-height),
 				),
 				double-chain: (
 					components: (
@@ -2216,6 +2270,7 @@
 @use "../../blocks/alert-bar-block";
 @use "../../blocks/article-body-block";
 @use "../../blocks/article-tag-block";
+@use "../../blocks/author-bio-block";
 @use "../../blocks/card-list-block";
 @use "../../blocks/category-carousel-block";
 @use "../../blocks/double-chain-block";
